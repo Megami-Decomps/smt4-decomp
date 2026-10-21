@@ -1,22 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004283cc` (_code @ 0x4283cc, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses cmp/movge instead of retail sign-bit shift. */
+#include "common.h"
 extern "C" {
-
-extern int queryResultFailureOnly(void);
-
-
-int FUN_004283cc(void)
-
-{
-  int temp_v0;
-  
-  temp_v0 = queryResultFailureOnly();
-  if (-1 < temp_v0) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+s32 queryResultFailureOnly();
+/* Returns only negative failure results. */
+s32 FUN_004283cc() { s32 result=queryResultFailureOnly(); return result < 0 ? result : 0; }
 }
-
-} /* extern "C" */

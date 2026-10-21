@@ -8,7 +8,7 @@ int objectPartRunUnlessLocked(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002ccc28(...);
 
 typedef int romwright_code(...);
@@ -39,7 +39,7 @@ extern unsigned int FUN_0029e958(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int gameFlagIsSet(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ccc28. */
@@ -129,11 +129,11 @@ void FUN_001978b4(void)
           FUN_002ccc28(temp_v3,&temp_v17,&temp_v18,0);
           temp_v11 = idListAnyValid(temp_v6);
           if (temp_v11 != 0) {
-            FUN_002bf538();
+            efctSetSpeed();
           }
           FUN_002bf288(2,0x1d,temp_v17,temp_v1,temp_v2,0xd3);
           FUN_002bf288(2,0x1d,temp_v18,temp_v1,temp_v2,0xd3);
-          FUN_002bf538();
+          efctSetSpeed();
         }
         temp_v10 = temp_v10 + 1;
       } while ((int)temp_v10 < (int)temp_v4);
@@ -177,7 +177,7 @@ void FUN_001978b4(void)
         FUN_002bf288(2,0x1d,0x23,*(short *)(temp_v7 + 8) + temp_v1,*(short *)(temp_v7 + 10) + temp_v12,0xd8)
         ;
         if (*(int *)(temp_v0 + 0x18) == 6) {
-          FUN_002bf538();
+          efctSetSpeed();
           temp_v0 = g_titleScene;
           temp_v9 = packNibblesAndByte(6,1,0);
           piVar12 = (int *)(temp_v0 + 0x12ac);
@@ -198,7 +198,7 @@ void FUN_001978b4(void)
             (**(romwright_code **)(temp_v0 + 0x12c8))();
             *(unsigned char *)(temp_v0 + 0x12c4) = 0;
           }
-          FUN_002bf538();
+          efctSetSpeed();
         }
         FUN_002ccc28(temp_v3,&temp_v15,&temp_v16,1);
         FUN_002bf288(2,0x1d,temp_v15,*(short *)(temp_v7 + 8) + temp_v1,*(short *)(temp_v7 + 10) + temp_v12,

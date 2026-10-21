@@ -10,10 +10,10 @@ int FUN_002b6758(...);
 int FUN_002ba12c(int);
 int drawSetColorFromRGBA8(void);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(...);
@@ -42,10 +42,10 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -82,7 +82,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   unsigned long long temp_v19;
   
   temp_v12 = romwright_piece_4_4(in_s1,in_s0);
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v13 = 0.29f;
   temp_v10 = temp_v13;
   FUN_002ba12c(g_titleScene);
@@ -151,7 +151,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
     do {
       if (*(int *)(param_3 + 0x2c) + 1 <= temp_v15) break;
       __aeabi_idivmod(*(int *)(param_3 + 0x30) + temp_v15,*(int *)(param_3 + 0x2c));
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v1 = param_1 + temp_v15 * 8;
       temp_v13 = (float)VectorSignedToFloat((int)temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
       messageKindForward((int)(short)*(unsigned int *)(param_3 + temp_v3 * 4),
@@ -162,7 +162,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
     } while (temp_v15 < 4);
   }
   temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20);
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v15 = 0;
   temp_v11 = VectorFloatToUnsigned(temp_v13 * 255.0f,3);
   temp_v8 = (temp_v11 & 0xff) | 0xffffff00;
@@ -182,11 +182,11 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
         }
         if (temp_v15 == 3) {
           if (*(char *)(param_3 + 0x51) == '\0') {
-            FUN_002be624(temp_v18,&LAB_0033cc78);
+            textFormatBuffer(temp_v18,&LAB_0033cc78);
             goto LAB_0033cbe4;
           }
           temp_v5 = 0x33cc70;
-          FUN_002be624(temp_v18,temp_v5);
+          textFormatBuffer(temp_v18,temp_v5);
         }
       }
       else {
@@ -202,11 +202,11 @@ joined_r0x0033cb70:
           else {
             puVar4 = (unsigned char *)0x4004a0;
           }
-          FUN_002be624(temp_v18,puVar4,temp_v2);
+          textFormatBuffer(temp_v18,puVar4,temp_v2);
         }
         else {
           temp_v5 = 0x400490;
-          FUN_002be624(temp_v18,temp_v5);
+          textFormatBuffer(temp_v18,temp_v5);
         }
       }
     }
@@ -214,7 +214,7 @@ joined_r0x0033cb70:
       temp_v2 = (int)*(char *)(param_3 + 0x4e);
       if (temp_v2 != 0) goto joined_r0x0033cb70;
       temp_v5 = 0x400490;
-      FUN_002be624(temp_v18,temp_v5);
+      textFormatBuffer(temp_v18,temp_v5);
     }
 LAB_0033cbe4:
     VectorSignedToFloat(0xfb - param_2,(unsigned char)(in_fpscr >> 0x16) & 3);

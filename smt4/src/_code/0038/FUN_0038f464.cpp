@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002340e4(int *);
+int timeInitializeActiveState(int *);
 int FUN_002353b4(void);
 int msgWindowReset(void);
 int FUN_00297060(void *, unsigned int);
@@ -45,7 +45,7 @@ extern int g_aocMain; /* 0x432fc8 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_002353b4. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_00297060. */
@@ -103,7 +103,7 @@ void FUN_0038f464(fn_0038f464_arg0 *param_1)
     temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
     *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
     if ((temp_v0 & 0x10) == 0) {
-      FUN_002340e4(&temp_v1);
+      timeInitializeActiveState(&temp_v1);
       puVar3 = temp_v8;
       (*(unsigned char *)((unsigned char *)&temp_v1 + 0)) = 1;
       temp_v4 = 0;

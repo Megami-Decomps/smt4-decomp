@@ -11,7 +11,7 @@ int FUN_0028c668(unsigned int);
 int FUN_0029bb14(unsigned int);
 int FUN_002a5710(unsigned int);
 
-extern int DAT_00447a60; /* 0x447a60 */
+extern int g_mapRangeWork; /* 0x447a60 */
 extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00287098. */
@@ -34,7 +34,7 @@ void FUN_002755a8(void)
   
   temp_v1 = 0;
   do {
-    temp_v2 = DAT_00447a60 + temp_v1 * 0x3c;
+    temp_v2 = g_mapRangeWork + temp_v1 * 0x3c;
     temp_v3 = *(char *)(temp_v2 + 0x24) != '\0';
     temp_v0 = 0;
     if (temp_v3) {
@@ -45,7 +45,7 @@ void FUN_002755a8(void)
         puVar4 = *(unsigned int **)(temp_v2 + 0x50);
       }
       else {
-        puVar4 = *(unsigned int **)(DAT_00447a60 + *(int *)(temp_v2 + 0x58) * 8 + 0x18);
+        puVar4 = *(unsigned int **)(g_mapRangeWork + *(int *)(temp_v2 + 0x58) * 8 + 0x18);
       }
       if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
         FUN_0029bb14(puVar4[2]);

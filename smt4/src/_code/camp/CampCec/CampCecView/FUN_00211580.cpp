@@ -25,7 +25,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001eb874. */
 extern unsigned int FUN_0025981c(void);
-extern int FUN_0026efec(int);
+extern int saveGetIndexedMapValue(int);
 extern int FUN_002bf4f8(unsigned int, int);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -69,7 +69,7 @@ unsigned int FUN_00211580(void)
   FUN_002ec210(temp_v1 + 200,0,0,temp_v3,0);
   temp_v8 = 0;
   do {
-    temp_v2 = FUN_0026efec(*(int *)(temp_v1 + 0x140) + temp_v8);
+    temp_v2 = saveGetIndexedMapValue(*(int *)(temp_v1 + 0x140) + temp_v8);
     temp_v0 = *(short *)(temp_v2 + 0x48);
     temp_v7 = *(int *)(temp_v1 + 0x13c);
     temp_v5 = *(int *)(temp_v1 + 0x140);

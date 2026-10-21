@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0019b738(...);
 int FUN_0019c0e0(...);
 int FUN_0019f30c(...);
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0019b738. */
 /* Supplied declaration required: FUN_0019c0e0. */
 extern int lookupNameEntry(unsigned int, unsigned char *, unsigned int *);
@@ -73,7 +73,7 @@ void FUN_001881e8(int param_1,int *param_2)
       temp_v1 = *(int *)(param_2[1] + temp_v0 * 4);
       temp_v2 = *(unsigned int *)(temp_v1 + 0xc);
       FUN_0019b738(temp_v19,0x20);
-      FUN_00100388(temp_v19,"h_eff%02d",*(unsigned int *)(temp_v1 + 8));
+      textFormatBuffer(temp_v19,"h_eff%02d",*(unsigned int *)(temp_v1 + 8));
       temp_v1 = lookupNameEntry(temp_v3,temp_v19,(unsigned int *)&temp_v4);
       if (temp_v1 != 0) {
         temp_v11 = temp_v4;

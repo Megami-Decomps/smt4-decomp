@@ -1,19 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00144544` (_code @ 0x144544, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct StoredValues {
+    u32 first;  // 0x00
+    u32 second; // 0x04
+};
 
 extern "C" {
+extern StoredValues DAT_005b4020;
+extern u32 DAT_005b4024;
 
-extern unsigned int DAT_005b4020; /* 0x5b4020 */
-extern unsigned int DAT_005b4024; /* 0x5b4024 */
-
-
-void FUN_00144544(unsigned int param_1,unsigned int param_2)
-
+void FUN_00144544(u32 firstValue, u32 secondValue)
 {
-  DAT_005b4020 = param_1;
-  DAT_005b4024 = param_2;
-  return;
+    DAT_005b4020.first = firstValue;
+    DAT_005b4020.second = secondValue;
 }
-
-} /* extern "C" */
+}

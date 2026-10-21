@@ -14,7 +14,7 @@ int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287aec(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int DAT_0049f9a8; /* 0x49f9a8 */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Supplied declaration required: FUN_0024f034. */
-extern int FUN_002762e0(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fc14. */
@@ -42,7 +42,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287aec. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
 
@@ -102,7 +102,7 @@ void FUN_002ea140(void)
           }
           else {
             temp_v1 = padIsButtonPressed(5);
-            if ((temp_v1 != 0) || (temp_v1 = FUN_002762e0(), temp_v1 != 0)) {
+            if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
               temp_v1 = DAT_004474f4;
               *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
               *(unsigned int *)(temp_v1 + 0xac) = 0;
@@ -156,12 +156,12 @@ void FUN_002ea140(void)
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v7;
           temp_v4 = *(unsigned int *)(temp_v1 + 0x28);
-          FUN_00287be4();
+          mathPositionHeadingDegrees();
           *(unsigned int *)(g_lmapScene + 0x50) = temp_v4;
         }
         else {
           temp_v3 = *(float *)(g_lmapScene + 0x28);
-          FUN_00287be4();
+          mathPositionHeadingDegrees();
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x50) = temp_v3;
           temp_v0 = DAT_0049f9a8;

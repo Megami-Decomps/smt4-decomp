@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdGxPresetRequest(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
@@ -29,7 +29,7 @@ extern unsigned int *DAT_0058803c; /* 0x58803c */
 extern char s__V_V_V_V_V_V_V_V_V_V_00588040[129]; /* 0x588040 */
 extern unsigned int DAT_0058804c; /* 0x58804c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -93,14 +93,14 @@ unsigned int FUN_00370b8c(int param_1,unsigned char param_2)
     }
     if (param_1 != 3) {
       *(unsigned char *)(puVar1 + 0x1d) = 0;
-      FUN_00100388(&temp_v1,"%s/%s.moflex","rom:/moflex",
+      textFormatBuffer(&temp_v1,"%s/%s.moflex","rom:/moflex",
                    *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_00588040 + param_1 * 4));
     }
     else {
       *(unsigned char *)(puVar1 + 0x1d) = 1;
       *(unsigned char *)((int)puVar1 + 0x75) = 0;
       *(unsigned char *)((int)puVar1 + 0x76) = 0;
-      FUN_00100388(&temp_v1,"moflex/%s.moflex",DAT_0058804c);
+      textFormatBuffer(&temp_v1,"moflex/%s.moflex",DAT_0058804c);
     }
     puVar1[4] = 2;
     libc_strcpy((int)puVar1 + 0x1b,&temp_v1);

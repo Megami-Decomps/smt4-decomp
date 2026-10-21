@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162758(...);
 int efctSetSpeed(void);
 int FUN_0018349c(...);
@@ -36,7 +36,7 @@ extern unsigned char LAB_004954d0; /* 0x4954d0 */
 extern unsigned char LAB_004954e0; /* 0x4954e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162758. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018349c. */
@@ -50,7 +50,7 @@ extern int FUN_00480960(unsigned int);
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int FUN_00498408(int, unsigned int);
-extern int FUN_0049c760(unsigned int, unsigned int);
+extern int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0049cad0. */
 extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int FUN_0049cc10(unsigned short *);
@@ -172,7 +172,7 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
   else {
     temp_v5 = 3;
   }
-  temp_v14 = FUN_0049c760(temp_v12,0);
+  temp_v14 = itemGetNameOrFallback(temp_v12,0);
   if (param_3 != 0) {
     temp_v15 = 0xad;
     if (*(char *)(param_1 + 0xb19) == '\0') {
@@ -285,12 +285,12 @@ LAB_00495274:
     }
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v14 = *(short *)(temp_v4 + 10) + temp_v3;
-    FUN_00100388(temp_v13,&LAB_004954cc,temp_v5);
+    textFormatBuffer(temp_v13,&LAB_004954cc,temp_v5);
     if ((*(int *)(param_1 + 0xb40) == 8) &&
        (((temp_v4 = FUN_00498408(param_1,temp_v12), temp_v4 != 0 &&
          (temp_v4 = FUN_001ba3d0(temp_v12), temp_v4 < 2)) || (temp_v4 = FUN_0047fe44(temp_v12), temp_v4 != 0))))
     {
-      FUN_00100388(temp_v13,&LAB_004954d0);
+      textFormatBuffer(temp_v13,&LAB_004954d0);
     }
     FUN_00493408(param_1 + 0x3a4,0,temp_v1 + temp_v11,temp_v14,0,7,temp_v6,temp_v9,temp_v13);
   }
@@ -305,7 +305,7 @@ LAB_00495274:
   }
   temp_v1 = *(short *)(temp_v4 + 8);
   temp_v2 = *(short *)(temp_v4 + 10);
-  FUN_00100388(temp_v13,&LAB_004954e0,temp_v5);
+  textFormatBuffer(temp_v13,&LAB_004954e0,temp_v5);
   FUN_00493408(param_1 + 0x3a4,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v6,temp_v9,temp_v13);
   return;
 }

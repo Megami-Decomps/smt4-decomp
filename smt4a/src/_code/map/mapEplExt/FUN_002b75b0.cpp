@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [32], unsigned char *);
+int textFormatBuffer(unsigned char [32], unsigned char *);
 int FUN_0014aa88(void);
 int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
@@ -20,7 +20,7 @@ extern unsigned char LAB_002b77a0; /* 0x2b77a0 */
 extern int g_eplSlots; /* 0x580c8c */
 extern int g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0014aa88. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001642e4. */
@@ -77,7 +77,7 @@ void FUN_002b75b0(void)
     } while (temp_v2 < 0x10);
   }
   if (g_gameState == 0x26) {
-    FUN_00100388(temp_v4,&LAB_002b7784);
+    textFormatBuffer(temp_v4,&LAB_002b7784);
     temp_v1 = g_eplSlots;
     puVar3 = temp_v4;
     if (*(int *)(g_eplSlots + 0x68) == 0) {
@@ -88,7 +88,7 @@ void FUN_002b75b0(void)
     }
   }
   if ((g_gameState == 0x2b || g_gameState == 0x2c) || g_gameState == 0x2f) {
-    FUN_00100388(temp_v4,&LAB_002b7784);
+    textFormatBuffer(temp_v4,&LAB_002b7784);
     temp_v1 = g_eplSlots;
     puVar3 = temp_v4;
     if (*(int *)(g_eplSlots + 0x68) == 0) {

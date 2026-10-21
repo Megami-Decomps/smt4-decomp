@@ -1,22 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00147370` (_code @ 0x147370, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail nop; compiler ldr r1, [r0, #104]. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+
+struct ScalarUpdateWork {
+    /* 0x00 */ u8 unk00[0x64];
+    /* 0x64 */ f32 cached;
+    /* 0x68 */ ScalarDirtyWork *nested;
+};
 
 extern "C" {
 
-
-void FUN_00147370(int param_1)
-
+/* Changes the nested scalar and marks its work area dirty. */
+void FUN_00147370(ScalarUpdateWork *work, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_s0;
-  
-  *(unsigned int *)(param_1 + 100) = in_s0;
-  temp_v0 = *(int *)(param_1 + 0x68);
-  *(unsigned int *)(temp_v0 + 0x68) = in_s0;
-  *(unsigned short *)(temp_v0 + 0x6c) = *(unsigned short *)(temp_v0 + 0x6c) | 1;
-  return;
+    work->cached = value;
+    work->nested->value = value;
+    work->nested->flags |= 1;
 }
 
 } /* extern "C" */

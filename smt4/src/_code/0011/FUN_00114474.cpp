@@ -17,7 +17,7 @@ int FUN_002b898c(void);
 int FUN_002b89e4(...);
 int msgBoxFlagsClearBit7(...);
 int FUN_002bc02c(void);
-int FUN_002c53f4(...);
+int mathInterpolateTimed(...);
 
 int gameDataCounterSpend(int);
 int FUN_002b8b4c(...);
@@ -90,7 +90,7 @@ extern int jobGetWork(void);
 extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: objFlagsSetBits. */
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 
@@ -895,28 +895,28 @@ LAB_00115134:
     temp_v13 = *(float *)(temp_v3 + 0xa2c) + 1.0f;
     *(float *)(temp_v3 + 0xa2c) = temp_v13;
     if ((int)temp_v13 < 0x41200000) {
-      FUN_002c53f4(10,(int)temp_v13);
+      mathInterpolateTimed(10,(int)temp_v13);
       *(unsigned int *)(temp_v3 + 0xa28) = temp_v14;
     }
     else if ((int)temp_v13 >= 0x41a00001) {
       *(unsigned int *)(temp_v3 + 0xa2c) = 0;
     }
     else {
-      FUN_002c53f4(10,(int)(temp_v13 - 10.0f));
+      mathInterpolateTimed(10,(int)(temp_v13 - 10.0f));
       *(unsigned int *)(temp_v3 + 0xa28) = temp_v15;
     }
     temp_v15 = 0xc0000000;
     temp_v6 = (int)*(float *)(temp_v3 + 0xa2c) % 10;
     temp_v14 = (unsigned int)temp_v16;
     if (temp_v6 < 5) {
-      FUN_002c53f4(5);
+      mathInterpolateTimed(5);
       *(unsigned int *)(temp_v3 + 0xa30) = temp_v14;
     }
     else if (temp_v6 >= 10) {
       *(unsigned int *)(temp_v3 + 0xa30) = temp_v14;
     }
     else {
-      FUN_002c53f4(5,temp_v6 - 5);
+      mathInterpolateTimed(5,temp_v6 - 5);
       *(unsigned int *)(temp_v3 + 0xa30) = temp_v15;
     }
     if ((DAT_0043e190 != 0) && (*(char *)(DAT_0043e190 + 8) == '\x03')) {
@@ -1060,7 +1060,7 @@ LAB_00115ad8:
   }
   if (DAT_00493820 < 0x29) {
     temp_v14 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
-    FUN_002c53f4(0x28);
+    mathInterpolateTimed(0x28);
     DAT_00493824 = temp_v14;
   }
   else {
@@ -1068,7 +1068,7 @@ LAB_00115ad8:
       DAT_00493820 = 0;
       return 0;
     }
-    FUN_002c53f4(0x14,DAT_00493820 - 0x29);
+    mathInterpolateTimed(0x14,DAT_00493820 - 0x29);
     DAT_00493824 = temp_v14;
   }
   if (DAT_00493820 >= 0x3c) {

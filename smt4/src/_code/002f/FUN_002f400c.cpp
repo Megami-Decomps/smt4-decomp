@@ -10,7 +10,7 @@ int FUN_0029bb14(...);
 int FUN_002a0428(...);
 int FUN_002a5710(...);
 int FUN_002ad8b4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int dataTable2cSub1GetCount(void);
 int VectorSignedToFloat(...);
 
@@ -27,7 +27,7 @@ extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a5710. */
 /* Supplied declaration required: FUN_002ad8b4. */
 extern int FUN_002adee0(int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern char *dataTable2cSub1GetRecord(int);
 /* Supplied declaration required: dataTable2cSub1GetCount. */
 
@@ -91,7 +91,7 @@ unsigned int FUN_002f400c(void)
           }
           DAT_00447e10[1] = 0;
           piVar3[0x4ae] = 2;
-          FUN_002be624(temp_v5,&LAB_002f4340,2);
+          textFormatBuffer(temp_v5,&LAB_002f4340,2);
           temp_v1 = asdMdlManagerCreateSecondList(temp_v5,7);
           piVar3[0x4b0] = temp_v1;
           *(unsigned char *)(piVar3 + 0x4af) = 0;
@@ -103,7 +103,7 @@ unsigned int FUN_002f400c(void)
           piVar3 = DAT_00447e10;
           piVar7 = DAT_00447e10 + temp_v1 * 0xb + 0x445;
           DAT_00447e10[temp_v1 * 0xb + 1099] = 1;
-          FUN_002be624(temp_v5,&LAB_002f4340,1);
+          textFormatBuffer(temp_v5,&LAB_002f4340,1);
           temp_v3 = asdMdlManagerClone(DAT_00447e10[0x44d],0);
           piVar3[temp_v1 * 0xb + 0x44d] = temp_v3;
           *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x44c) = 1;
@@ -142,7 +142,7 @@ unsigned int FUN_002f400c(void)
       else {
         DAT_00447e10[1] = 0;
         piVar3[1099] = 1;
-        FUN_002be624(temp_v5,&LAB_002f4340,1);
+        textFormatBuffer(temp_v5,&LAB_002f4340,1);
         temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x38);
         piVar3[0x44d] = temp_v1;
         *(unsigned char *)(piVar3 + 0x44c) = 0;
@@ -157,7 +157,7 @@ unsigned int FUN_002f400c(void)
         piVar3 = DAT_00447e10;
         piVar7 = DAT_00447e10 + temp_v1 * 0xb + 0x4a8;
         DAT_00447e10[temp_v1 * 0xb + 0x4ae] = 2;
-        FUN_002be624(temp_v5,&LAB_002f4340,2);
+        textFormatBuffer(temp_v5,&LAB_002f4340,2);
         temp_v3 = asdMdlManagerClone(DAT_00447e10[0x4b0],0);
         piVar3[temp_v1 * 0xb + 0x4b0] = temp_v3;
         *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x4af) = 1;

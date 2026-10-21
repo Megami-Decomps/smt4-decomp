@@ -17,7 +17,7 @@ int FUN_00262770(...);
 int FUN_00269bc4(...);
 int FUN_00288154(int, unsigned short [14]);
 int FUN_002b066c(...);
-int FUN_002bb150(...);
+int threadSleepDuration(...);
 int memClear(int *, int);
 int asdMemoryAlloc(...);
 int FUN_003c8bb8(int, int);
@@ -95,7 +95,7 @@ extern int gameCountUnits(void);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -323,7 +323,7 @@ LAB_001dea48:
           }
           temp_v2 = param_1[0x16f];
           while (temp_v2 < 0x1e) {
-            FUN_002bb150(10000000,0);
+            threadSleepDuration(10000000,0);
             temp_v2 = param_1[0x16f];
           }
         }
@@ -447,7 +447,7 @@ LAB_001dedf4:
           asdMemFree(temp_v17);
           temp_v2 = param_1[0x16f];
           while (temp_v2 < 0x1e) {
-            FUN_002bb150(10000000,0);
+            threadSleepDuration(10000000,0);
             temp_v2 = param_1[0x16f];
           }
         }
@@ -759,7 +759,7 @@ LAB_001df3cc:
         *(unsigned char *)temp_v35 = 0;
       }
     }
-    FUN_002bb150(10000000,0);
+    threadSleepDuration(10000000,0);
   } while( 1 );
 }
 

@@ -1,40 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd1e8` (_code @ 0x2fd1e8, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different register allocation, frame setup or instruction scheduling than retail. */
+#include "common.h"
 extern "C" {
-
-typedef struct fn_002fd1e8_arg0 fn_002fd1e8_arg0;
-struct fn_002fd1e8_arg0 {
-    undefined4 field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0x10];
-    undefined2 field_0x14; /* +0x14 */
-    unsigned char pad_0x16[0x2];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-};
-
-extern unsigned char DAT_00559234; /* 0x559234 */
-
-extern int onlineStringCopyConstruct(unsigned int *, unsigned int);
-extern unsigned int *sharedRefInit(fn_002fd1e8_arg0 *, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_002fd1e8(fn_002fd1e8_arg0 *param_1,unsigned int param_2)
-
-{
-/* irregular: irregular input(s): in_r2; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int in_r2;
-  
-  puVar1 = (unsigned int *)sharedRefInit(param_1,param_2,in_r2,param_2);
-  *puVar1 = (unsigned int)&DAT_00559234;
-  temp_v0 = onlineStringCopyConstruct(puVar1 + 3,param_2);
-  *(unsigned short *)(temp_v0 + 8) = 1;
-  *(unsigned int *)(temp_v0 + 0xc) = 0;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  return;
+extern const u8 DAT_00559234;
+struct Object { const void *vtable; u8 unk04[8]; u8 string[8]; u16 kind; u8 unk16[2]; u32 second; u32 third; };
+Object *sharedRefInit(Object *);
+void *onlineStringCopyConstruct(void *, u32);
+/* Constructs the shared string object and clears its auxiliary fields. */
+Object *FUN_002fd1e8(Object *object, u32 text, u32 option, u32 flags) {
+    object = sharedRefInit(object);
+    object->vtable = &DAT_00559234;
+    onlineStringCopyConstruct(object->string, text);
+    object->kind = 1; object->second = 0; object->third = 0;
+    return object;
 }
-
-} /* extern "C" */
+}

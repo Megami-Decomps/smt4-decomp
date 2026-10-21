@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemFree(void);
 int FUN_002804b0(unsigned char [140], int, int);
 int libc_strcpy(...);
 int sysMemClear(...);
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -42,7 +42,7 @@ unsigned int FUN_004f85c8(int param_1,int param_2)
       *(unsigned char *)(temp_v1 + 0x3168) = 0;
       sysMemClear(temp_v4,0x80);
       sysMemClear(temp_v3,0x80);
-      FUN_00100388(temp_v3,"battle/effect/%s.eft","ef_Assist_01" + temp_v2 * 0x20);
+      textFormatBuffer(temp_v3,"battle/effect/%s.eft","ef_Assist_01" + temp_v2 * 0x20);
       libc_strcpy(temp_v4,temp_v3);
       temp_v0 = FUN_00100d60(temp_v4,0x2f);
       libc_strcpy(temp_v1 + 0x30e8,temp_v0 + 1);
@@ -64,7 +64,7 @@ unsigned int FUN_004f85c8(int param_1,int param_2)
     *(unsigned char *)(param_1 + 0x3280) = 0;
     sysMemClear(temp_v4,0x80);
     sysMemClear(temp_v3,0x80);
-    FUN_00100388(temp_v3,"battle/effect/%s.eft","ef_Assist_03");
+    textFormatBuffer(temp_v3,"battle/effect/%s.eft","ef_Assist_03");
     libc_strcpy(temp_v4,temp_v3);
     temp_v2 = FUN_00100d60(temp_v4,0x2f);
     libc_strcpy(param_1 + 0x3200,temp_v2 + 1);

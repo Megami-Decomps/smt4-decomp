@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00275b10(int);
-int FUN_003bf518(void);
+int lmapSetSecondTransform(void);
 
 /* Supplied declaration required: FUN_00275b10. */
-/* Supplied declaration required: FUN_003bf518. */
+/* Supplied declaration required: lmapSetSecondTransform. */
 
 
 unsigned int FUN_003cd974(void)
@@ -21,7 +21,7 @@ unsigned int FUN_003cd974(void)
   FUN_00275b10(3);
   FUN_00275b10(4);
   FUN_00275b10(5);
-  FUN_003bf518();
+  lmapSetSecondTransform();
   return 1;
 }
 

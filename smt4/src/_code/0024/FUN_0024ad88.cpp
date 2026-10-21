@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_00253ce4(void);
-int FUN_00253d24(void);
+int bufferDestroyOwnedPair(void);
+int bufferReleaseOwnedPair(void);
 int asdMemFreeNonNull(void);
 int asdTextureRelease(void);
 int asdMemFree(void *ptr);
@@ -18,9 +18,9 @@ typedef struct Obj {
 void FUN_0024ad88(Obj *obj)
 {
     if (obj->unk00 != 0) {
-        FUN_00253d24();
+        bufferReleaseOwnedPair();
         if (obj->unk00 != 0) {
-            FUN_00253ce4();
+            bufferDestroyOwnedPair();
             asdMemFreeNonNull();
         }
     }

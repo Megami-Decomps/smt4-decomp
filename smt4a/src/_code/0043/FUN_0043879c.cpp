@@ -1,23 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043879c` (_code @ 0x43879c, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: buffer pointer and end pointer register allocation differs. */
+#include "common.h"
+struct BufferState { u8 *begin; u8 *end; u32 size; };
 extern "C" {
-
-int rt_memclr(int, int);
-
-/* Supplied declaration required: rt_memclr. */
-
-
-void FUN_0043879c(int *param_1,int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  *param_1 = param_2;
-  param_1[1] = param_2 + 0xc00;
-  param_1[2] = 0;
-  rt_memclr(param_2,0xc00);
-  return;
+void rt_memclr(void *buffer,u32 size);
+/* Binds and clears a 3072-byte buffer. */
+void FUN_0043879c(BufferState *state,u8 *buffer) { state->begin=buffer; state->end=buffer+3072; state->size=0; rt_memclr(buffer,3072); }
 }
-
-} /* extern "C" */

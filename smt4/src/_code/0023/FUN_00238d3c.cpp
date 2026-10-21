@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int FUN_002c40f8(unsigned char *, int *, int, int);
 int FUN_002c526c(void);
 int FUN_00358e78(int *);
@@ -25,7 +25,7 @@ extern unsigned int DAT_004e629c; /* 0x4e629c */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int resourceDispatch(unsigned int);
 extern int FUN_00239a54(void);
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_00358e78. */
@@ -63,7 +63,7 @@ int FUN_00238d3c(int param_1,int param_2)
         nn_os_CriticalSection_Leave((unsigned int)&DAT_004e629c);
         return temp_v0;
       }
-      FUN_002bb150(16000000,0);
+      threadSleepDuration(16000000,0);
       DAT_004656cc = '\x01';
     }
     if (param_2 != 0) {

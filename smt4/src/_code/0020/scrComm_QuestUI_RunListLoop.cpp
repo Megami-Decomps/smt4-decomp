@@ -10,7 +10,7 @@ int bannerShow(...);
 
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
-int FUN_00254e2c(...);
+int messageForwardDefaultMode(...);
 int FUN_0028784c(...);
 int messageSlotSet(int);
 int FUN_0028dc98(...);
@@ -36,7 +36,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001a1648. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_00254e2c. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 extern int FUN_002865f8(void);
 /* Supplied declaration required: FUN_0028784c. */
 extern int scrGetCommandFrame(void);
@@ -213,13 +213,13 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 0;
         temp_v3 = temp_v13;
-        FUN_00254e2c(temp_v13,0x6a,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x6a,temp_v8,5);
       }
       else {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 0;
         temp_v3 = temp_v13;
-        FUN_00254e2c(temp_v13,0x69,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x69,temp_v8,5);
       }
       temp_v9 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v9 + 1);
@@ -239,7 +239,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
     temp_v8 = scrWorkGetValue(1);
     temp_v12[0] = 0;
     temp_v3 = temp_v13;
-    FUN_00254e2c(temp_v13,0x65,temp_v8,5);
+    messageForwardDefaultMode(temp_v13,0x65,temp_v8,5);
     temp_v9 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v9 + 1);
     if (temp_v3 != 1) {
@@ -259,7 +259,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       temp_v8 = scrWorkGetValue(1);
       temp_v12[0] = 0;
       temp_v3 = temp_v13;
-      FUN_00254e2c(temp_v13,100,temp_v8,0xb);
+      messageForwardDefaultMode(temp_v13,100,temp_v8,0xb);
       temp_v9 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v9 + 1);
       if (temp_v3 != 1) {
@@ -288,7 +288,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       FUN_002bff50();
       temp_v8 = scrWorkGetValue(1);
       temp_v12[0] = 1;
-      FUN_00254e2c(temp_v13,0x68,temp_v8,5);
+      messageForwardDefaultMode(temp_v13,0x68,temp_v8,5);
 LAB_00201e54:
       if (temp_v11 == '\0') {
 LAB_00201ed0:
@@ -311,24 +311,24 @@ LAB_00201ed0:
       if (!temp_v1) {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 1;
-        FUN_00254e2c(temp_v13,0x66,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x66,temp_v8,5);
         goto LAB_00201e54;
       }
       if (temp_v11 == '\0') {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 1;
-        FUN_00254e2c(temp_v13,0x67,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x67,temp_v8,5);
         goto LAB_00201ed0;
       }
       if (temp_v11 != '\x01') {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 0;
-        FUN_00254e2c(temp_v13,0x6e,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x6e,temp_v8,5);
       }
       else {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 0;
-        FUN_00254e2c(temp_v13,0x6d,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x6d,temp_v8,5);
       }
     }
     scrWorkSetValue(0,5);

@@ -1,20 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004282f0` (_code @ 0x4282f0, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses cmp/movge instead of retail sign-bit shift. */
+#include "common.h"
+struct ResultOwner { u8 unk00[20]; u8 operation; };
 extern "C" {
-
-int FUN_00439c50(void);
-
-/* Supplied declaration required: FUN_00439c50. */
-
-
-void FUN_004282f0(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  FUN_00439c50();
-  return;
+s32 FUN_00439c50(void *operation);
+/* Returns only the operation's negative failure result. */
+s32 FUN_004282f0(ResultOwner *owner) { s32 result=FUN_00439c50(&owner->operation); return (u32)result >> 31 ? result : 0; }
 }
-
-} /* extern "C" */

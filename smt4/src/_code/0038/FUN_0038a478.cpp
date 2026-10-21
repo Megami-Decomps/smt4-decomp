@@ -11,7 +11,7 @@ int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int VectorSignedToFloat(...);
@@ -41,7 +41,7 @@ extern int vec2GetYInt(unsigned int *);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -87,9 +87,9 @@ unsigned int FUN_0038a478(void)
       (**(romwright_code **)(temp_v4 + 0x1268))(temp_v1);
       *(unsigned char *)(temp_v4 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0xe,0x106,0,0,6);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v4 = g_titleScene;
     temp_v1 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v4 + 0x12ac);
@@ -227,7 +227,7 @@ unsigned int FUN_0038a478(void)
         *(unsigned char *)(temp_v4 + 0x1264) = 0;
       }
       FUN_002bed3c();
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002c198c(g_titleScene);
       FUN_002c18e4(g_titleScene);
     }

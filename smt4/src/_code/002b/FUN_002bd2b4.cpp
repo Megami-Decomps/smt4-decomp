@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026e5ec(...);
+int saveGetMapFlag(...);
 int devilGetRecord(void);
 int memCopy(int, int, int);
 int HintPreloadData(unsigned int *);
@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: HintPreloadData (CALLOTHER). */
 extern unsigned char FUN_002228d4(void);
 extern int FUN_0025981c(void);
-/* Supplied declaration required: FUN_0026e5ec. */
+/* Supplied declaration required: saveGetMapFlag. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: devilGetRecord. */
@@ -73,15 +73,15 @@ unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsign
       temp_v3 = 4;
     }
     else {
-      FUN_0026e5ec(4,0);
+      saveGetMapFlag(4,0);
       temp_v3 = 8;
     }
-    FUN_0026e5ec(temp_v3,temp_v2 == 2);
+    saveGetMapFlag(temp_v3,temp_v2 == 2);
   }
   else {
-    FUN_0026e5ec(8,1);
+    saveGetMapFlag(8,1);
   }
-  FUN_0026e5ec(0x10,1);
+  saveGetMapFlag(0x10,1);
   *(unsigned char *)(param_1 + 0x37) = param_3;
   temp_v2 = FUN_0025981c();
   *(int *)(param_1 + 0x30) = temp_v2;

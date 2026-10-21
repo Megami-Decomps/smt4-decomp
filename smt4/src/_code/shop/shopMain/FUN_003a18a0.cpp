@@ -36,8 +36,8 @@ extern unsigned int DAT_0044e01c; /* 0x44e01c */
 /* Supplied declaration required: FUN_0022f834. */
 /* Supplied declaration required: FUN_0022fa2c. */
 /* Supplied declaration required: FUN_0022faf8. */
-extern int FUN_0022fb04(void);
-extern int FUN_0022fb34(void);
+extern int inputIsQuestRepeatLeft(void);
+extern int inputIsQuestRepeatRight(void);
 /* Supplied declaration required: FUN_0022fb64. */
 /* Supplied declaration required: FUN_0022fbc0. */
 /* Supplied declaration required: FUN_002302d8. */
@@ -45,8 +45,8 @@ extern int FUN_0022fb34(void);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_00256510(void);
-extern int FUN_002762e0(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_002992e0. */
 /* Supplied declaration required: FUN_002996d8. */
 /* Supplied declaration required: FUN_00299d84. */
@@ -100,9 +100,9 @@ void FUN_003a18a0(int param_1)
   }
   FUN_0022fbc0(param_1);
   FUN_0022fb64(param_1);
-  temp_v0 = FUN_0022fb34();
+  temp_v0 = inputIsQuestRepeatRight();
   if ((temp_v0 == 0) && (temp_v0 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4c)), temp_v0 != 6)) {
-    temp_v0 = FUN_0022fb04();
+    temp_v0 = inputIsQuestRepeatLeft();
     if (((temp_v0 != 0) || (temp_v0 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4e)), temp_v0 == 6)) &&
        (*(int *)(param_1 + 0x860) != 7)) {
       if (*(int *)(param_1 + 0x860) == 3) {
@@ -186,7 +186,7 @@ void FUN_003a18a0(int param_1)
     }
     FUN_00299d84(temp_v1);
   }
-  temp_v0 = FUN_002762e0();
+  temp_v0 = inputIsQuestMenuPressed();
   if (temp_v0 != 0) {
     if (*(int *)(param_1 + 0x860) == 3) {
       FUN_002992e0(0);
@@ -223,7 +223,7 @@ void FUN_003a18a0(int param_1)
     }
   }
   else {
-    temp_v0 = FUN_00256510();
+    temp_v0 = inputIsQuestCancelPressed();
     if (temp_v0 != 0) {
       FUN_002328b4();
       FUN_0022fa2c(param_1);

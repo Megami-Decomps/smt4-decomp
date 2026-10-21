@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002480c8(...);
+int mapDestroySecondaryModel(...);
 int mapIfReleaseSlot2(void);
 int FUN_00248114(void);
 int FUN_0024f034(int, unsigned int);
-int FUN_00273828(void);
+int mapInterfaceSetStateTwo(void);
 int FUN_0027fa98(unsigned int);
 int FUN_0027fc14(int);
 int FUN_0027fca0(unsigned int);
@@ -38,13 +38,13 @@ extern unsigned int DAT_0049f9a8; /* 0x49f9a8 */
 extern unsigned int DAT_0049f9ac; /* 0x49f9ac */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
-/* Supplied declaration required: FUN_002480c8. */
+/* Supplied declaration required: mapDestroySecondaryModel. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
 /* Supplied declaration required: FUN_00248114. */
 /* Supplied declaration required: FUN_0024f034. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00273828. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: mapInterfaceSetStateTwo. */
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fc14. */
@@ -174,7 +174,7 @@ void FUN_002e9b60(void)
             }
             else {
               temp_v0 = padIsButtonPressed(5);
-              if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
+              if ((temp_v0 != 0) || (temp_v0 = inputIsQuestMenuPressed(), temp_v0 != 0)) {
                 temp_v0 = DAT_004474f4;
                 *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
@@ -239,7 +239,7 @@ void FUN_002e9b60(void)
           return;
         }
         if (temp_v1 == 0x5b) {
-          FUN_002480c8(0x1000212);
+          mapDestroySecondaryModel(0x1000212);
           temp_v0 = g_lmapScene;
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v0 + 8) = 0;
@@ -274,10 +274,10 @@ void FUN_002e9b60(void)
       FUN_0027fca0(0xffffffff);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
-      FUN_00273828();
+      mapInterfaceSetStateTwo();
     }
     if ((*(int *)(g_lmapScene + 8) >= 0x1f) && (temp_v0 = mapIfHasSelection(), temp_v0 == 0)) {
-      FUN_002480c8();
+      mapDestroySecondaryModel();
       temp_v0 = DAT_004474f4;
       *(float *)(DAT_004474f4 + 0x18) = *(float *)(g_lmapScene + 0x50) + temp_v5;
       *(unsigned int *)(temp_v0 + 0xac) = 0;

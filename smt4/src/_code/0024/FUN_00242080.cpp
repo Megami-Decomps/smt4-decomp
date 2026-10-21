@@ -9,7 +9,7 @@ int nodeListOwnerFree(unsigned int *);
 int FUN_00247240(unsigned int *);
 int FUN_0025c650(unsigned int, int, int);
 int effBlockSetBlobB(unsigned int, int *, int);
-int FUN_002be624(unsigned char [104], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [104], unsigned char *, unsigned int);
 int FUN_002de30c(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_002f82ac(unsigned int *);
 int FUN_0030ed8c(unsigned int *, unsigned int);
@@ -31,12 +31,12 @@ extern unsigned int *DAT_0044eabc; /* 0x44eabc */
 extern unsigned int *DAT_0044eac0; /* 0x44eac0 */
 
 /* Supplied declaration required: FUN_002427f8. */
-extern int FUN_002468e0(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: nodeListOwnerFree. */
 /* Supplied declaration required: FUN_00247240. */
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: effBlockSetBlobB. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002de30c. */
 /* Supplied declaration required: FUN_002f82ac. */
 /* Supplied declaration required: FUN_0030ed8c. */
@@ -78,7 +78,7 @@ unsigned char * FUN_00242080(unsigned int param_1)
     if ((param_1 & 8) != 0) {
       temp_v2 = 0;
       do {
-        FUN_002be624(temp_v7,&LAB_00242224,temp_v2);
+        textFormatBuffer(temp_v7,&LAB_00242224,temp_v2);
         FUN_002de30c(DAT_0044eabc,temp_v7,8,temp_v2,0);
         temp_v2 = temp_v2 + 1;
         param_1 = temp_v1;
@@ -95,7 +95,7 @@ unsigned char * FUN_00242080(unsigned int param_1)
   }
   else if (temp_v5 == 1) {
     if (temp_v4 != 8) {
-      temp_v0 = FUN_002468e0(DAT_0044ea94,-temp_v6);
+      temp_v0 = linkedFindItemByIndex(DAT_0044ea94,-temp_v6);
       if (DAT_0044eaa4 != temp_v0) {
         FUN_002427f8(DAT_0044ea94);
         FUN_0025c650(DAT_0044ea94,DAT_0044eaa4,temp_v0);

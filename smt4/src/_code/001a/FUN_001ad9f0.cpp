@@ -11,7 +11,7 @@ int FUN_0029acc4(...);
 int FUN_002b93c8(...);
 int FUN_002ba12c(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
@@ -39,7 +39,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
@@ -138,7 +138,7 @@ unsigned int FUN_001ad9f0(void)
     FUN_0029acc4(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
     temp_v2 = FUN_002bf4f8(0x29,0x55);
     temp_v3 = FUN_002bcddc(temp_v0,0);
-    FUN_002be624(temp_v8,&LAB_001add58,temp_v3);
+    textFormatBuffer(temp_v8,&LAB_001add58,temp_v3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(3,0xffffffff,temp_v8);

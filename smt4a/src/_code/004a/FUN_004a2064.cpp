@@ -32,7 +32,7 @@ extern int FUN_002a4b28(short);
 /* Supplied declaration required: words4At20Clear. */
 /* Supplied declaration required: FUN_004cf880. */
 extern int FUN_004cfe4c(int);
-extern int FUN_004d0040(int);
+extern int rangeGetMinimumLimit(int);
 
 
 void FUN_004a2064(int param_1)
@@ -97,7 +97,7 @@ void FUN_004a2064(int param_1)
   }
   FUN_004a3b48(param_1);
   words4At20Clear(param_1 + 0x96);
-  temp_v3 = FUN_004d0040(param_1 + 0x20);
+  temp_v3 = rangeGetMinimumLimit(param_1 + 0x20);
   temp_v6 = 0;
   if (temp_v6 < temp_v3) {
     do {

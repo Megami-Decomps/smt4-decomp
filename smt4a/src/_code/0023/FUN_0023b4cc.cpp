@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_001634b4(...);
@@ -32,7 +32,7 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
@@ -142,7 +142,7 @@ unsigned int FUN_0023b4cc(void)
     FUN_0037ce80(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
     temp_v2 = FUN_001834a4(0x1e,0x55);
     temp_v3 = FUN_00156850(temp_v0,0);
-    FUN_00100388(temp_v8,&LAB_0023b870,temp_v3);
+    textFormatBuffer(temp_v8,&LAB_0023b870,temp_v3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xffffffff,temp_v8);

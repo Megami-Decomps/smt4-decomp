@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023266c(unsigned char *, int, int, int);
+int rectangleInitializeSelection(unsigned char *, int, int, int);
 int FUN_0023346c(unsigned char *);
 int memFill8(unsigned char *, int);
 int timerStart(...);
@@ -32,7 +32,7 @@ extern unsigned char DAT_00404a24; /* 0x404a24 */
 extern unsigned char DAT_00404a78; /* 0x404a78 */
 extern unsigned char DAT_00404a9c; /* 0x404a9c */
 
-/* Supplied declaration required: FUN_0023266c. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: memFill8. */
 /* Supplied declaration required: timerStart. */
@@ -65,7 +65,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   *(unsigned int *)(param_1 + 0x10) = 0;
   rt_memclr(param_1 + 0x62,0x100);
   param_1[0x60] = 0;
-  FUN_0023266c(param_1 + 0x164,0,0,0x1c);
+  rectangleInitializeSelection(param_1 + 0x164,0,0,0x1c);
   *(unsigned int *)(param_1 + 4) = 0;
   *(unsigned int *)(param_1 + 8) = 0;
   FUN_003eb068(param_1 + 0x56);

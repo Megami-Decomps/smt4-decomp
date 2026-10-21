@@ -21,7 +21,7 @@ extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_004a5d5c. */
 /* Supplied declaration required: FUN_004a6c50. */
 /* Supplied declaration required: words4At20Clear. */
-extern int FUN_004d0040(int);
+extern int rangeGetMinimumLimit(int);
 
 
 void FUN_004a677c(int param_1)
@@ -44,7 +44,7 @@ void FUN_004a677c(int param_1)
   }
   FUN_004a5d5c(param_1);
   words4At20Clear(param_1 + 0x96);
-  temp_v1 = FUN_004d0040(param_1 + 0x20);
+  temp_v1 = rangeGetMinimumLimit(param_1 + 0x20);
   if (0 < temp_v1) {
     unaff_r7 = param_1 + 0x800;
   }

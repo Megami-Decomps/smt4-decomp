@@ -1,20 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034e978` (_code @ 0x34e978, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-extern int DAT_0044d100; /* 0x44d100 */
-extern unsigned int DAT_0044d10c; /* 0x44d10c */
-
-
-unsigned long long FUN_0034e978(unsigned int param_1)
-
+/* NON_MATCHING: retail query scheduling or inlined accessor instruction grouping differs. */
+#include "common.h"
+struct ValueEntry { u8 unk00[0x58]; u64 value; u8 unk60[0x10]; };
+struct ValueTable { u8 unk00[8]; ValueEntry *entries; u8 unk0c[8]; u32 count; };
+extern "C" ValueTable DAT_0044d0f8;
+/* Returns the indexed 64-bit value or zero for an invalid index. */
+extern "C" u64 FUN_0034e978(s32 index)
 {
-  if ((-1 < (int)param_1) && (param_1 < DAT_0044d10c)) {
-    return *(unsigned long long *)(DAT_0044d100 + param_1 * 0x70 + 0x58);
-  }
-  return 0;
+    if (index < 0 || (u32)index >= DAT_0044d0f8.count)
+        return 0;
+    return DAT_0044d0f8.entries[index].value;
 }
-
-} /* extern "C" */

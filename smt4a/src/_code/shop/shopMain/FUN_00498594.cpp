@@ -27,10 +27,10 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 /* Supplied declaration required: sendEvent1000210. */
-extern int FUN_004d0464(void);
+extern int inputIsQuestRepeatRight(void);
 extern int FUN_004d0494(void);
-extern int FUN_004d04f4(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 
 
 void FUN_00498594(int param_1)
@@ -41,7 +41,7 @@ void FUN_00498594(int param_1)
   
   FUN_004954e8();
   FUN_00498994(param_1);
-  temp_v0 = FUN_004d0464();
+  temp_v0 = inputIsQuestRepeatRight();
   if ((temp_v0 != 0) || (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v0 == 6)) {
     *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
     FUN_00496a0c(param_1,1);
@@ -50,7 +50,7 @@ void FUN_00498594(int param_1)
   }
   temp_v0 = FUN_004d0494();
   if ((temp_v0 == 0) && (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v0 != 6)) {
-    temp_v0 = FUN_004d0554();
+    temp_v0 = inputIsQuestMenuPressed();
     if (temp_v0 != 0) {
       FUN_00184528(param_1 + 0x3cc,1);
       sendEvent100020F();
@@ -59,7 +59,7 @@ void FUN_00498594(int param_1)
       *(unsigned int *)(param_1 + 8) = 0;
     }
     else {
-      temp_v0 = FUN_004d04f4();
+      temp_v0 = inputIsQuestCancelPressed();
       if (temp_v0 != 0) {
         sendEvent100020E();
         FUN_0049706c(param_1);

@@ -28,7 +28,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002c76d8. */
-extern int FUN_0035d734(void);
+extern int saveLoadThreadHasResult(void);
 extern int byteTripleGetV0(void);
 /* Supplied declaration required: FUN_003a76a8. */
 extern int byteArr5Get3(void);
@@ -45,7 +45,7 @@ void FUN_0041dcc0(int param_1)
   unsigned char temp_v2;
   
   if (*(char *)(param_1 + 0xf) != '\0') {
-    temp_v0 = FUN_0035d734();
+    temp_v0 = saveLoadThreadHasResult();
     if ((temp_v0 == 0) && (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40)), temp_v0 == 2)) {
       temp_v0 = byteArr5Get3();
       if (temp_v0 != 0) {
@@ -58,7 +58,7 @@ void FUN_0041dcc0(int param_1)
   }
   else if (*(char *)(param_1 + 0x10) != '\0') {
     *(int *)(param_1 + 0x450) = *(int *)(param_1 + 0x450) + 1;
-    temp_v0 = FUN_0035d734();
+    temp_v0 = saveLoadThreadHasResult();
     if (temp_v0 != 0) {
       if (*(char *)(param_1 + 0xe) != '\0') {
         *(unsigned char *)(param_1 + 0xf) = 1;

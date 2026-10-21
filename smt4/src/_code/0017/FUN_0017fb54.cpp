@@ -1,27 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017fb54` (_code @ 0x17fb54, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail beq 20; compiler ldrne r0, [r0, #24]. */
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-extern int g_camp; /* 0x43da90 */
+extern CampWorker *g_camp;
 
-
-unsigned int FUN_0017fb54(void)
-
+/* Reports whether the camp worker is absent or in state forty-eight. */
+bool FUN_0017fb54(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_camp != 0) {
-    if (*(int *)(g_camp + 0x18) == 0x30) {
-      temp_v0 = 1;
+    CampWorker *work = g_camp;
+    if (work == NULL) {
+        return true;
     }
-    else {
-      temp_v0 = 0;
-    }
-  }
-  return temp_v0;
+    return work->state == 48;
 }
 
 } /* extern "C" */

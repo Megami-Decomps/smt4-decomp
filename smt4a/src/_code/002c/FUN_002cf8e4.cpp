@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019af70(...);
 int FUN_002b5cb4(void);
-int FUN_002d8ac4(void);
+int mapRenderApplySecondary(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019af70. */
 /* Supplied declaration required: FUN_002b5cb4. */
-/* Supplied declaration required: FUN_002d8ac4. */
+/* Supplied declaration required: mapRenderApplySecondary. */
 
 
 void FUN_002cf8e4(void)
@@ -41,7 +41,7 @@ void FUN_002cf8e4(void)
       temp_v0 = DAT_005f0d34;
     }
     if ((DAT_005f161d == '\0' && temp_v0 == '\0') && (DAT_005f0ca8 == 8 || DAT_005f0ca8 == 9)) {
-      FUN_002d8ac4();
+      mapRenderApplySecondary();
       temp_v1 = *(int *)(g_lmapScene + 0x1c);
       FUN_002b5cb4();
       if (temp_v1 < 0x43c80000) {

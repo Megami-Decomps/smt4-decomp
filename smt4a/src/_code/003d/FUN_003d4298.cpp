@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b4a00(float *, unsigned char [8]);
-int FUN_001b4a20(float *, float *, float *);
+int mathMatrixTranslateLocal(float *, float *, float *);
 int FUN_001d3e14(float *, unsigned char [8]);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -41,7 +41,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001b4a00. */
-/* Supplied declaration required: FUN_001b4a20. */
+/* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_001d3e14. */
 
 
@@ -127,7 +127,7 @@ void FUN_003d4298(float *param_1)
   param_1[9] = temp_v11 * temp_v10;
   param_1[10] = temp_v12 * temp_v10;
   FUN_001d3e14(param_1,temp_v16);
-  FUN_001b4a20(param_1,param_1,&temp_v18);
+  mathMatrixTranslateLocal(param_1,param_1,&temp_v18);
   FUN_001b4a00(param_1,temp_v21);
   return;
 }

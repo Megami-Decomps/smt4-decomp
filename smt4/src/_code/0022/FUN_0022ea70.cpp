@@ -13,9 +13,9 @@ int FUN_00231258(...);
 int FUN_00231bcc(...);
 int gameGetPlayerData(...);
 int FUN_002be56c(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf4f0(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -41,7 +41,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00230aec. */
 extern int btlRollClamped(unsigned short, unsigned int);
-extern unsigned int FUN_00230c80(unsigned int, unsigned int);
+extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
@@ -52,11 +52,11 @@ extern unsigned int FUN_00230e04(unsigned short *);
 extern unsigned int FUN_0028fb3c(unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
@@ -108,11 +108,11 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v13 = (int)*(short *)(temp_v4 + 8);
   temp_v4 = (int)*(short *)(temp_v4 + 10);
   if (param_3 != 0) {
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_00230d84(param_1 + 0x380,0x47,temp_v13,temp_v4,temp_v12);
     FUN_00230d84(param_1 + 0x380,0x48,temp_v13,temp_v4,temp_v12);
     FUN_00230d84(param_1 + 0x380,0x49,temp_v13,temp_v4,temp_v12);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_00231bcc(param_1 + 0x380,0x4a,temp_v13,temp_v4,temp_v12,1);
     if (*(char *)(param_1 + 0x839) != '\0') {
       FUN_00231bcc(param_1 + 0x380,0x4c,temp_v13,temp_v4,temp_v12,1);
@@ -176,7 +176,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   else {
     temp_v8 = 3;
   }
-  temp_v9 = FUN_00230c80(temp_v22,0);
+  temp_v9 = itemGetNameOrFallback(temp_v22,0);
   if (param_3 != 0) {
     temp_v5 = 0xad;
     temp_v19 = 0xad;
@@ -289,7 +289,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v0 = *(short *)(temp_v11 + 8);
   temp_v21 = *(short *)(temp_v11 + 10) + temp_v4;
-  FUN_002be624(temp_v20,&LAB_0022f1a0,temp_v5);
+  textFormatBuffer(temp_v20,&LAB_0022f1a0,temp_v5);
   FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v21,0,7,temp_v6,temp_v12,temp_v20);
   if (param_2 != 0) {
     temp_v8 = FUN_00230e04(param_4);
@@ -303,7 +303,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     temp_v0 = *(short *)(temp_v5 + 8);
     temp_v1 = *(short *)(temp_v5 + 10);
-    FUN_002be624(temp_v20,&LAB_0022f1a4,temp_v8);
+    textFormatBuffer(temp_v20,&LAB_0022f1a4,temp_v8);
     FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   }
   temp_v8 = FUN_0028fb3c(temp_v22);
@@ -317,7 +317,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   temp_v0 = *(short *)(temp_v5 + 8);
   temp_v1 = *(short *)(temp_v5 + 10);
-  FUN_002be624(temp_v20,&LAB_0022f1ac,temp_v8);
+  textFormatBuffer(temp_v20,&LAB_0022f1ac,temp_v8);
   FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   return;
 }

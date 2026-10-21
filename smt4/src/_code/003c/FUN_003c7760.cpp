@@ -36,7 +36,7 @@ extern void FUN_002568c4(s32 a, s32 b);
 extern void FUN_00256898(s32 a, s32 b);
 extern void FUN_00292dd0(s32 a);
 extern void FUN_00242914(void *block, s32 arg);
-extern void FUN_0022a304(u32 arg);
+extern void battleResetCounterAndFlag(u32 arg);
 
 /* Per-frame update of a battle task: announces itself once, and when its job reports state 2 shuts
  * the battle flags down. Counts its frames up to 0xFFFF. Always returns 0. */
@@ -59,7 +59,7 @@ s32 FUN_003c7760(BtlTask *task, BtlState *state)
         }
         task->state = 0;
         state->flags &= ~BTL_FLAG_ACTIVE;
-        FUN_0022a304(DAT_00435d18);
+        battleResetCounterAndFlag(DAT_00435d18);
     }
     if (task->frames < 0xFFFF) {
         task->frames++;

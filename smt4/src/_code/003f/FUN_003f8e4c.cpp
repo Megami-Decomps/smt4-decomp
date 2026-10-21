@@ -1,25 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f8e4c` (_code @ 0x3f8e4c, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vmov s0, r0 where the compiled block uses vldr s0, [r4, #12]. */
+#include "shard/W5_W5Match5_TwinRecords.h"
 
-extern "C" {
-
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_003f887c(void);
+using namespace SampleRange;
 
 
-unsigned int FUN_003f8e4c(void)
 
+extern "C" Sample* FUN_003f887c(SampleTransform* transform);
+
+extern "C" f32 FUN_003f8e4c(SampleTransform* transform)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  
-  temp_v0 = FUN_003f887c();
-  VectorUnsignedToFloat((unsigned int)*(unsigned short *)(temp_v0 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-  return (unsigned int)*(unsigned short *)(temp_v0 + 2);
+    Sample* sample = FUN_003f887c(transform);
+    return static_cast<f32>(static_cast<u32>(sample->value)) * transform->scale + transform->bias;
 }
-
-} /* extern "C" */

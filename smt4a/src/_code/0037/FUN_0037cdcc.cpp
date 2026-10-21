@@ -6,7 +6,7 @@ extern "C" {
 
 int nodeListFree(int);
 int FUN_00381874(unsigned int *);
-int FUN_003a1998(int, unsigned int);
+int effMenuCreate(int, unsigned int);
 int handleHolderFree(unsigned int *);
 int FUN_003c4984(unsigned int *, int);
 
@@ -15,7 +15,7 @@ extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
 
 /* Supplied declaration required: nodeListFree. */
 /* Supplied declaration required: FUN_00381874. */
-/* Supplied declaration required: FUN_003a1998. */
+/* Supplied declaration required: effMenuCreate. */
 /* Supplied declaration required: handleHolderFree. */
 extern unsigned int linkedObjGetValue(unsigned int *);
 extern unsigned int FUN_003c2d90(unsigned int *, int);
@@ -47,7 +47,7 @@ void FUN_0037cdcc(unsigned int param_1,unsigned int param_2,int param_3)
   }
   puVar2 = (unsigned int *)0x0;
   DAT_0059dc1c = 0;
-  FUN_003a1998(0,param_2);
+  effMenuCreate(0,param_2);
   DAT_0059dc20 = puVar2;
   *puVar2 = 0xba;
   puVar2[1] = 0x1c;

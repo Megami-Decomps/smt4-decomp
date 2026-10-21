@@ -1,19 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002854a8` (_code @ 0x2854a8, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct GameValueBlock {
+    u8 unk00[0x15D8]; // 0x0000
+    u8 values[10];   // 0x15D8
+};
+
+struct GameData {
+    u8 unk00[0x3E74];          // 0x0000
+    GameValueBlock valueBlock; // 0x3E74
+};
+
+struct GameDataBlocks {
+    u32 unk00;      // 0x00
+    GameData* data; // 0x04
+};
 
 extern "C" {
+extern GameDataBlocks g_gameDataBlocks;
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-void FUN_002854a8(int param_1,unsigned char param_2)
-
+void FUN_002854a8(s32 index, u8 value)
 {
-  if (param_1 < 10) {
-    *(unsigned char *)(param_1 + (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x544c) = param_2;
-  }
-  return;
+    GameValueBlock* block = &g_gameDataBlocks.data->valueBlock;
+    if (index < 10) {
+        block->values[index] = value;
+    }
 }
-
-} /* extern "C" */
+}

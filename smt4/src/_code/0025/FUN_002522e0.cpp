@@ -1,25 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002522e0` (_code @ 0x2522e0, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Thumb byte narrowing and comparison use UXTB/MOV rather than retail shifts/MOVS. */
+#include "common.h"
 extern "C" {
-
-
-char * FUN_002522e0(char *param_1,char param_2)
-
+/* Find the last occurrence of a byte, including a terminating zero. */
+const u8 *FUN_002522e0(const u8 *text,u32 value)
 {
-  char temp_v0;
-  char *pcVar2;
-  
-  pcVar2 = (char *)0x0;
-  do {
-    temp_v0 = *param_1;
-    if (temp_v0 == param_2) {
-      pcVar2 = param_1;
-    }
-    param_1 = param_1 + 1;
-  } while (temp_v0 != '\0');
-  return pcVar2;
+    const u8 *last=NULL;
+    u8 byte;
+    do { byte=*text++; if (byte==(u8)value) last=text-1; } while (byte!=0);
+    return last;
 }
-
-} /* extern "C" */
+}

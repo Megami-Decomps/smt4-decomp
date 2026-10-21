@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_001db388(...);
-int FUN_00211c40(...);
-int FUN_00211c68(...);
-int FUN_00221b58(void);
+int effectSetPrimaryPosition(...);
+int effectSetSecondaryPosition(...);
+int effectSetProcessScalar(void);
 int FUN_002ad314(...);
 int FUN_002c159c(...);
 int FUN_003d5af0(...);
@@ -109,9 +109,9 @@ static float romwright_sqrt_4(float value)
 #endif
 extern float *FUN_0018f654(void);
 /* Supplied declaration required: FUN_001db388. */
-/* Supplied declaration required: FUN_00211c40. */
-/* Supplied declaration required: FUN_00211c68. */
-/* Supplied declaration required: FUN_00221b58. */
+/* Supplied declaration required: effectSetPrimaryPosition. */
+/* Supplied declaration required: effectSetSecondaryPosition. */
+/* Supplied declaration required: effectSetProcessScalar. */
 extern int rangeIsValid(float *);
 /* Supplied declaration required: FUN_00227280. */
 /* Supplied declaration required: FUN_0023aa28. */
@@ -606,9 +606,9 @@ LAB_003d7d90:
   temp_v40 = temp_v8;
   FUN_003d5af0(param_1,param_1 + 0x16,&temp_v12,&temp_v9,&temp_v36,&temp_v39);
   FUN_001db388(param_1 + 0x16,0);
-  FUN_00211c40(&temp_v12);
-  FUN_00211c68(&temp_v9);
-  FUN_00221b58();
+  effectSetPrimaryPosition(&temp_v12);
+  effectSetSecondaryPosition(&temp_v9);
+  effectSetProcessScalar();
   param_1[0x15d] = temp_v12;
   param_1[0x15e] = temp_v13;
   param_1[0x15f] = temp_v14;

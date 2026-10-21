@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_00221d78(unsigned int);
-int FUN_00514500(...);
+int randomAdvanceShiftRegister(...);
 int FUN_00514540(...);
 int SUB41(double, int);
 int VectorFloatToUnsigned(double, int);
@@ -83,7 +83,7 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: FUN_00221d78. */
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -387,7 +387,7 @@ void FUN_00390670(fn_00390670_arg0 *param_1)
                        temp_v12 * *(float *)((int)pvVar17 + 0x68));
               temp_v39[6] = temp_v17;
               if (temp_v4) {
-                FUN_00514500(0);
+                randomAdvanceShiftRegister(0);
                 __aeabi_uidivmod();
                 *temp_v39 = temp_v13;
               }

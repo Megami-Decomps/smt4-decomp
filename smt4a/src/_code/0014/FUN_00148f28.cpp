@@ -1,23 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00148f28` (_code @ 0x148f28, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail beq 1c; compiler beq 20. */
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-extern int nw_snd_SoundArchive_IsAvailable(void);
+extern s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 
-
-unsigned int FUN_00148f28(int param_1)
-
+/* Reports whether the owned sound archive is available. */
+bool FUN_00148f28(const ArchiveOwner *owner)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if ((*(int *)(param_1 + 4) != 0) && (temp_v0 = nw_snd_SoundArchive_IsAvailable(), temp_v1 = 0, temp_v0 != 0)) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    return owner->archive != NULL && nw_snd_SoundArchive_IsAvailable(owner->archive) != 0;
 }
 
 } /* extern "C" */

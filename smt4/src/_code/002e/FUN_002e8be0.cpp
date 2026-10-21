@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001b4478(void);
-int FUN_0020d7c4(void);
+int mapDestroyInterfaceModel(void);
 int mapIfReleaseSlot1(void);
 int FUN_0024f034(int, unsigned int);
-int FUN_00273828(void);
+int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
 int FUN_0027fa98(unsigned int);
 int FUN_0027fc14(int);
@@ -36,12 +36,12 @@ extern float DAT_0049f9bc; /* 0x49f9bc */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Supplied declaration required: FUN_001b4478. */
-/* Supplied declaration required: FUN_0020d7c4. */
+/* Supplied declaration required: mapDestroyInterfaceModel. */
 /* Supplied declaration required: mapIfReleaseSlot1. */
 /* Supplied declaration required: FUN_0024f034. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00273828. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: mapInterfaceSetStateTwo. */
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
@@ -94,7 +94,7 @@ void FUN_002e8be0(void)
         }
         else {
           temp_v1 = padIsButtonPressed(5);
-          if ((temp_v1 != 0) || (temp_v1 = FUN_002762e0(), temp_v1 != 0)) {
+          if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
             temp_v1 = DAT_004474f4;
             *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v1 + 0xac) = 0;
@@ -166,7 +166,7 @@ void FUN_002e8be0(void)
           FUN_00280364();
           return;
         }
-        FUN_00273828();
+        mapInterfaceSetStateTwo();
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;
       }
@@ -188,7 +188,7 @@ void FUN_002e8be0(void)
           FUN_00280364();
           return;
         }
-        FUN_0020d7c4();
+        mapDestroyInterfaceModel();
         mapIfSetMode1();
         temp_v4 = 10;
         FUN_0027fa98(temp_v4);
@@ -210,7 +210,7 @@ void FUN_002e8be0(void)
           FUN_00280364();
           return;
         }
-        FUN_0020d7c4();
+        mapDestroyInterfaceModel();
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;
       }

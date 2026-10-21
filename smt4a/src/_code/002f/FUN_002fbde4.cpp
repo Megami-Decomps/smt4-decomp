@@ -1,45 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fbde4` (_code @ 0x2fbde4, 0x36 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: callback literal 0x00100d79 has no function symbol; Thumb callback boundary recovery is required. */
+#include "common.h"
+#include <stdarg.h>
 extern "C" {
-
-int FUN_002e31ba(unsigned int, int *, int *, unsigned char *);
-int FUN_002e31e0(int, int *);
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned char LAB_00100d79; /* 0x100d79 */
-
-/* Supplied declaration required: FUN_002e31ba. */
-/* Supplied declaration required: FUN_002e31e0. */
-
-
-unsigned int FUN_002fbde4(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int uStack_4;
-  
-  temp_v1 = param_1;
-  if (param_2 != 0) {
-    temp_v1 = (param_1 + param_2) - 1;
-  }
-  temp_v0 = param_1;
-  uStack_4 = param_4;
-  FUN_002e31ba(param_3,&temp_v0,&uStack_4,&LAB_00100d79);
-  if (param_2 != 0) {
-    FUN_002e31e0(0,&temp_v0);
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return param_3;
+extern const u8 LAB_00100d79;
+struct Bounds { char *current; char *end; };
+s32 FUN_002e31ba(const char *format, Bounds *bounds, va_list arguments, const void *callback);
+void FUN_002e31e0(s32 value, Bounds *bounds);
+s32 FUN_002fbde4(char *output, u32 capacity, const char *format, ...) {
+    Bounds bounds;
+    bounds.current = output;
+    bounds.end = output + (capacity ? capacity - 1 : 0);
+    va_list arguments;
+    va_start(arguments, format);
+    s32 result = FUN_002e31ba(format, &bounds, arguments, &LAB_00100d79);
+    if (capacity) FUN_002e31e0(0, &bounds);
+    va_end(arguments);
+    return result;
 }
-
-} /* extern "C" */
+}

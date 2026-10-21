@@ -6,7 +6,7 @@ extern "C" {
 
 int sceneTraverserVisit(unsigned int, unsigned int);
 int FUN_0018e9d8(unsigned int, int);
-int FUN_0034103c(unsigned int);
+int asdLightActivate(unsigned int);
 
 typedef struct fn_00280d40_arg0 fn_00280d40_arg0;
 struct fn_00280d40_arg0 {
@@ -35,7 +35,7 @@ extern int DAT_00636e18; /* 0x636e18 */
 
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_0018e9d8. */
-/* Supplied declaration required: FUN_0034103c. */
+/* Supplied declaration required: asdLightActivate. */
 
 
 void FUN_00280d40(fn_00280d40_arg0 *param_1)
@@ -64,7 +64,7 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
       if (temp_v3 == 2) {
         temp_v0 = 0;
         temp_v5 = DAT_005b3c98;
-        FUN_0034103c(temp_v0);
+        asdLightActivate(temp_v0);
       }
       else {
         temp_v5 = DAT_005b3c94;
@@ -74,7 +74,7 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
           }
           temp_v0 = 1;
           temp_v5 = DAT_005b3c9c;
-          FUN_0034103c(temp_v0);
+          asdLightActivate(temp_v0);
         }
       }
     }

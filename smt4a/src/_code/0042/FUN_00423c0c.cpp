@@ -1,39 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00423c0c` (_code @ 0x423c0c, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler emits separate zero stores instead of retail stm triple. */
+#include "common.h"
+struct Vector3 {u32 x,y,z;};
+struct ResourceState {u8 unk00[12];s32 handle;u8 unk10[8];Vector3 position;u8 first,second;};
 extern "C" {
-
-int FUN_00423144(void);
-
-typedef struct fn_00423c0c_arg0 fn_00423c0c_arg0;
-struct fn_00423c0c_arg0 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x8];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined1 field_0x24; /* +0x24 */
-    undefined1 field_0x25; /* +0x25 */
-};
-
-/* Supplied declaration required: FUN_00423144. */
-
-
-void FUN_00423c0c(fn_00423c0c_arg0 *param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0xc != -1) {
-    FUN_00423144();
-    param_1->field_0x24 = 0;
-    param_1->field_0x25 = 0;
-    param_1->field_0x18 = 0;
-    param_1->field_0x1c = 0;
-    param_1->field_0x20 = 0;
-  }
-  return;
+void FUN_00423144(s32 handle);
+/* Releases a valid resource and clears its transform state. */
+void FUN_00423c0c(ResourceState *state){if(state->handle!=-1){FUN_00423144(state->handle);state->first=0;state->second=0;state->position.x=0;state->position.y=0;state->position.z=0;}}
 }
-
-} /* extern "C" */

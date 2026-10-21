@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023aa3c(int, unsigned char [16]);
 int FUN_0023ac2c(int, float *);
-int FUN_0023adf4(unsigned int, int, unsigned char [16]);
+int modelSetPosition(unsigned int, int, unsigned char [16]);
 int nodeSetTranslation(unsigned int, int, float *);
 int FUN_003108b0(unsigned char [520], int);
 int FUN_0032360c(int, int, unsigned char [520]);
@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023aa3c. */
 /* Supplied declaration required: FUN_0023ac2c. */
-/* Supplied declaration required: FUN_0023adf4. */
+/* Supplied declaration required: modelSetPosition. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_003108b0. */
 /* Supplied declaration required: FUN_0032360c. */
@@ -59,7 +59,7 @@ unsigned int FUN_003daf6c(int param_1)
         temp_v2 = param_1 + temp_v1 * 0x30;
         if (*(int *)(temp_v2 + 0x1398) == *(int *)(temp_v0 + 0x194)) {
           FUN_0023aa3c(temp_v2 + 0x13a0,temp_v8);
-          FUN_0023adf4(*(unsigned int *)(*piVar5 + 8),0,temp_v8);
+          modelSetPosition(*(unsigned int *)(*piVar5 + 8),0,temp_v8);
           FUN_0023ac2c(temp_v2 + 0x13a0,&temp_v5);
           temp_v5 = temp_v5 + *(float *)(temp_v0 + 0x1a0);
           temp_v6 = temp_v6 + *(float *)(temp_v0 + 0x1a4);

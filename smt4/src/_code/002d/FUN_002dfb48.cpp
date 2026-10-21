@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -32,7 +32,7 @@ extern unsigned char DAT_0049fb1c; /* 0x49fb1c */
 extern int FUN_0025b4b0(unsigned int *, float *, unsigned int);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern unsigned int randNextInRange(unsigned int);
 
 
@@ -143,7 +143,7 @@ unsigned int FUN_002dfb48(int param_1)
       *(float *)(param_1 + 0x20) = temp_v7;
       *(int *)(param_1 + 0x24) = (int)((unsigned long long)temp_v11 >> 0x20);
       *(float *)(param_1 + 0x28) = temp_v9;
-      FUN_00287be4();
+      mathPositionHeadingDegrees();
       *(float *)(param_1 + 0x2c) = temp_v16;
       return 1;
     }

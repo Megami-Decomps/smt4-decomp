@@ -67,7 +67,7 @@ extern int FUN_002a4894(int);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_003a76a8. */
 extern int FUN_003d21dc(void);
@@ -141,7 +141,7 @@ void FUN_00202ea4(void)
       fillThreeWordsWithByte(temp_v7 + 0x6c,0xffffffff);
       temp_v3 = *(int *)(temp_v7 + 0x8c);
       *(unsigned short *)(temp_v7 + 0x78) = 0;
-      temp_v6 = FUN_00348ed0(temp_v7);
+      temp_v6 = uiSearchPrimary(temp_v7);
       temp_v11 = 0;
       if (temp_v11 < temp_v6) {
         do {
@@ -162,7 +162,7 @@ void FUN_00202ea4(void)
     break;
   case 1:
     FUN_00163aa4(temp_v7 + 0xe8);
-    temp_v6 = FUN_00348ed0(temp_v7);
+    temp_v6 = uiSearchPrimary(temp_v7);
     temp_v11 = 0;
     if (0 < temp_v6) {
       do {
@@ -471,7 +471,7 @@ LAB_00203688:
     break;
   case 4:
     FUN_00163aa4(temp_v7 + 0xe8);
-    temp_v6 = FUN_00348ed0(temp_v7);
+    temp_v6 = uiSearchPrimary(temp_v7);
     temp_v11 = 0;
     if (0 < temp_v6) {
       do {

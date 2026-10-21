@@ -1,28 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b5d8` (_code @ 0x33b5d8, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: native handle close uses prohibited SVC 0x23; the typed close helper remains out of line. */
+#include "common.h"
+struct ThreadOwner {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 handle;
+};
 extern "C" {
-
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
-
-
-int FUN_0033b5d8(int param_1)
-
+void nn_os_Thread_FinalizeImpl(u32 *handle);
+s32 nn_svc_CloseHandle(u32 handle);
+/* Finalizes the thread and releases any remaining native handle. */
+ThreadOwner *FUN_0033b5d8(ThreadOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  
-  piVar1 = (int *)(param_1 + 0x38);
-  nn_os_Thread_FinalizeImpl((unsigned int)piVar1);
-  if (*piVar1 != 0) {
-    software_interrupt(0x23);
-    *piVar1 = 0;
-  }
-  return param_1;
+    nn_os_Thread_FinalizeImpl(&owner->handle);
+    if (owner->handle)
+        nn_svc_CloseHandle(owner->handle);
+    owner->handle = 0;
+    return owner;
 }
-
-} /* extern "C" */
+}

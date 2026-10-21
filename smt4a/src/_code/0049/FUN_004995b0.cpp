@@ -16,7 +16,7 @@ int FUN_00224880(...);
 int messageWindowIsState1(...);
 int obj04Finish(void);
 int FUN_00388758(...);
-int FUN_004935b0(unsigned int *, unsigned int, unsigned int);
+int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
 int FUN_004964e0(...);
 int FUN_00496a0c(...);
 int FUN_00497690(...);
@@ -52,7 +52,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00388758. */
 extern int FUN_0040a4cc(unsigned int);
 /* Supplied declaration required: FUN_0040a55c. */
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_00496a0c. */
 /* Supplied declaration required: FUN_00497690. */
@@ -83,7 +83,7 @@ void FUN_004995b0(unsigned int *param_1)
         FUN_00163aa4(puVar6);
         temp_v1 = vec2GetYInt(puVar6);
         temp_v2 = vec2GetXInt(puVar6);
-        FUN_004935b0(param_1 + 0xe9,temp_v2,temp_v1);
+        pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);
         temp_v3 = messageWindowIsState1((int)*(char *)((int)param_1 + 0x502));
         if (temp_v3 != 0) {
           temp_v3 = FUN_002a4b60();
@@ -124,7 +124,7 @@ void FUN_004995b0(unsigned int *param_1)
       FUN_00163aa4(puVar6);
       temp_v1 = vec2GetYInt(puVar6);
       temp_v2 = vec2GetXInt(puVar6);
-      FUN_004935b0(param_1 + 0xe9,temp_v2,temp_v1);
+      pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x502) != '\0') {
         *param_1 = *param_1 & 0xfffff0ff;
         temp_v3 = messageWindowIsState1();

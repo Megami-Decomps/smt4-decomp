@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0023cb70(...);
-int FUN_0023cbc4(int, int, int);
+int transitionConfigureAndReset(int, int, int);
 int FUN_003d86a0(int, int, int);
 
 extern int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_0023cb70. */
-/* Supplied declaration required: FUN_0023cbc4. */
+/* Supplied declaration required: transitionConfigureAndReset. */
 /* Supplied declaration required: FUN_003d86a0. */
 
 
@@ -27,7 +27,7 @@ unsigned int FUN_003d0220(unsigned int param_1,int param_2,int param_3)
   if (param_3 != 0) {
     if (temp_v1 == 0xf) {
       *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x100000;
-      FUN_0023cbc4(temp_v0,0x32,1);
+      transitionConfigureAndReset(temp_v0,0x32,1);
       FUN_0023cb70(g_btlMain,0x32,1,0);
     }
     if (*(unsigned int *)(param_2 + 0x56c) < 0x42) {
@@ -42,12 +42,12 @@ unsigned int FUN_003d0220(unsigned int param_1,int param_2,int param_3)
         }
       }
       else {
-        FUN_0023cbc4(g_btlMain,6,1);
+        transitionConfigureAndReset(g_btlMain,6,1);
         FUN_0023cb70(g_btlMain,6,1);
       }
     }
     else {
-      FUN_0023cbc4(g_btlMain,0x32,1);
+      transitionConfigureAndReset(g_btlMain,0x32,1);
       FUN_0023cb70(g_btlMain,0x32,1,0);
     }
     if (*(unsigned int *)(param_2 + 0x56c) < 0x2c) {

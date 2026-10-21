@@ -1,37 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001600b8` (_code @ 0x1600b8, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r4, [pc, #52] where the compiled block uses ldr r4, [pc, #56]. */
+#include "common.h"
+
+struct AllocationNode {
+    u8 unk00[0x20];        // 0x00
+    u32 unk20;            // 0x20
+    u32 unk24;            // 0x24
+};
+
+struct AllocationState {
+    AllocationNode* first; // 0x00
+    u32 firstCount;        // 0x04
+    AllocationNode* last;  // 0x08
+    u32 lastCount;         // 0x0C
+};
 
 extern "C" {
+extern AllocationState* DAT_005b40e8;
+AllocationNode* FUN_0017cd48(AllocationState* state);
 
-extern int *DAT_005b40e8; /* 0x5b40e8 */
-
-extern int FUN_0017cd48(void);
-
-
-unsigned int FUN_001600b8(int *param_1)
-
+u32 FUN_001600b8(AllocationState* state)
 {
-  int *piVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  DAT_005b40e8 = param_1;
-  temp_v0 = FUN_0017cd48();
-  if (temp_v0 == 0) {
-    temp_v1 = 0xffffffff;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0x20) = 0;
-    *(unsigned int *)(temp_v0 + 0x24) = 0;
-    piVar1 = DAT_005b40e8;
-    temp_v1 = 0;
-    *DAT_005b40e8 = temp_v0;
-    piVar1[1] = 0;
-    piVar1[2] = temp_v0;
-    piVar1[3] = 0;
-  }
-  return temp_v1;
-}
+    DAT_005b40e8 = state;
+    AllocationNode* node = FUN_0017cd48(state);
+    u32 result;
+    if (node == NULL) {
+        result = 0xFFFFFFFFu;
+    } else {
+        node->unk20 = 0;
+        node->unk24 = 0;
 
-} /* extern "C" */
+        AllocationState* activeState = DAT_005b40e8;
+        activeState->first = node;
+        activeState->firstCount = 0;
+        activeState->last = node;
+        activeState->lastCount = 0;
+        result = 0;
+    }
+    return result;
+}
+}

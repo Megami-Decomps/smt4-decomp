@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_00275bc8(...);
@@ -40,7 +40,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_00224880(void);
@@ -120,11 +120,11 @@ void FUN_004119fc(fn_004119fc_arg0 *param_1)
       temp_v8 = 0;
       if (temp_v0 != 0) {
         if (temp_v0 == 1) {
-          FUN_00100388(&temp_v1,"battle/scr_prtatk_hojo.bf");
+          textFormatBuffer(&temp_v1,"battle/scr_prtatk_hojo.bf");
         }
       }
       else {
-        FUN_00100388(&temp_v1,"battle/scr_prtatk_cure.bf");
+        textFormatBuffer(&temp_v1,"battle/scr_prtatk_cure.bf");
       }
       FUN_002804b0(&temp_v1,&param_1->field_0x24,0);
       param_1->field_0x10 = param_1->field_0x10 + 1;

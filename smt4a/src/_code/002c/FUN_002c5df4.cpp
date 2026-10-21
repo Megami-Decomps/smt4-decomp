@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0035d1e0(void);
-int FUN_00376f48(void);
-int FUN_003fd76c(...);
+int cameraGetHeadingDegrees(void);
+int controllerSetDestination(...);
 int FUN_003fdb18(...);
 int VectorSignedToFloat(int, int);
 
@@ -40,9 +40,9 @@ extern int gameFlagsGetBlock(void);
 extern int FUN_00297008(int);
 extern int FUN_00355418(int);
 /* Supplied declaration required: FUN_0035d1e0. */
-/* Supplied declaration required: FUN_00376f48. */
+/* Supplied declaration required: cameraGetHeadingDegrees. */
 extern int FUN_00376f94(void);
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 
 
@@ -136,7 +136,7 @@ void FUN_002c5df4(void)
            *(unsigned int *)(*(int *)(DAT_006105e0 + 4) + 4) & 0xfffffffc;
     }
     if (DAT_0060ff9c != '\0') {
-      FUN_00376f48();
+      cameraGetHeadingDegrees();
       FUN_0035d1e0();
       temp_v5 = temp_v22;
       temp_v23[0] = 0;
@@ -183,7 +183,7 @@ void FUN_002c5df4(void)
                             temp_v23[1] = temp_v23[1] + 1;
                             if (temp_v7 != 0) {
                               temp_v11 = *(int *)(temp_v7 + 4);
-                              FUN_003fd76c(temp_v11,&temp_v19);
+                              controllerSetDestination(temp_v11,&temp_v19);
                               FUN_003fdb18(temp_v11);
                               *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                             }
@@ -195,7 +195,7 @@ void FUN_002c5df4(void)
                           temp_v23[0] = temp_v23[0] + 1;
                           if (temp_v7 != 0) {
                             temp_v11 = *(int *)(temp_v7 + 4);
-                            FUN_003fd76c(temp_v11,&temp_v19);
+                            controllerSetDestination(temp_v11,&temp_v19);
                             FUN_003fdb18(temp_v11);
                             *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                           }
@@ -223,7 +223,7 @@ LAB_002c61b0:
                         }
                         if (temp_v7 != 0) {
                           temp_v11 = *(int *)(temp_v7 + 4);
-                          FUN_003fd76c(temp_v11,&temp_v19);
+                          controllerSetDestination(temp_v11,&temp_v19);
                           FUN_003fdb18(temp_v11);
                           *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                         }
@@ -235,7 +235,7 @@ LAB_002c61b0:
                       temp_v23[1] = temp_v23[1] + 1;
                       if (temp_v7 != 0) {
                         temp_v11 = *(int *)(temp_v7 + 4);
-                        FUN_003fd76c(temp_v11,&temp_v19);
+                        controllerSetDestination(temp_v11,&temp_v19);
                         FUN_003fdb18(temp_v11);
                         *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                       }
@@ -287,7 +287,7 @@ LAB_002c61b0:
                     }
                     if (temp_v7 != 0) {
                       temp_v11 = *(int *)(temp_v7 + 4);
-                      FUN_003fd76c(temp_v11,&temp_v19);
+                      controllerSetDestination(temp_v11,&temp_v19);
                       FUN_003fdb18(temp_v11);
                       *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                     }
@@ -299,7 +299,7 @@ LAB_002c61b0:
                   temp_v23[3] = temp_v23[3] + 1;
                   if (temp_v7 != 0) {
                     temp_v11 = *(int *)(temp_v7 + 4);
-                    FUN_003fd76c(temp_v11,&temp_v19);
+                    controllerSetDestination(temp_v11,&temp_v19);
                     FUN_003fdb18(temp_v11);
                     *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                   }
@@ -343,7 +343,7 @@ LAB_002c63b8:
                       temp_v14 = (unsigned long long)temp_v15 << 0x20;
                     }
                     temp_v8 = *(unsigned int *)(temp_v11 + 4);
-                    FUN_003fd76c(temp_v8,&temp_v19);
+                    controllerSetDestination(temp_v8,&temp_v19);
                     FUN_003fdb18(temp_v8);
                   }
                 }
@@ -382,7 +382,7 @@ LAB_002c63b8:
                       temp_v14 = (unsigned long long)temp_v15 << 0x20;
                     }
                     temp_v8 = *(unsigned int *)(temp_v7 + 4);
-                    FUN_003fd76c(temp_v8,&temp_v19);
+                    controllerSetDestination(temp_v8,&temp_v19);
                     FUN_003fdb18(temp_v8);
                   }
                 }
@@ -405,7 +405,7 @@ LAB_002c63b8:
                         temp_v14 = temp_v14 & 0xffffffff00000000;
                       }
                       temp_v8 = *(unsigned int *)(temp_v7 + 4);
-                      FUN_003fd76c(temp_v8,&temp_v19);
+                      controllerSetDestination(temp_v8,&temp_v19);
                       FUN_003fdb18(temp_v8);
                     }
                     temp_v9 = temp_v9 + 1;
@@ -416,7 +416,7 @@ LAB_002c63b8:
                   if (temp_v6 != 0) {
                     temp_v8 = *(unsigned int *)(temp_v6 + 4);
                     temp_v14 = (unsigned long long)temp_v15 << 0x20;
-                    FUN_003fd76c(temp_v8,&temp_v19);
+                    controllerSetDestination(temp_v8,&temp_v19);
                     FUN_003fdb18(temp_v8);
                   }
                   temp_v9 = temp_v9 + 1;

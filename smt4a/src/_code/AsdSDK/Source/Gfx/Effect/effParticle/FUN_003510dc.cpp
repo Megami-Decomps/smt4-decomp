@@ -57,14 +57,14 @@ typedef struct {
 /* Supplied declaration required: effTlpCreate. */
 /* Supplied declaration required: handleBlockUnref. */
 /* Supplied declaration required: FUN_00243c24. */
-extern unsigned int *FUN_002721e4(fn_003510dc_arg0 *);
+extern unsigned int *resourceResolveDataPointer(fn_003510dc_arg0 *);
 /* Supplied declaration required: FUN_00291038. */
 /* Supplied declaration required: FUN_002b2d74. */
 /* Supplied declaration required: objectBufferFree. */
-extern unsigned int FUN_002b41c4(void);
+extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0035105c. */
-extern int FUN_0037a7f4(unsigned int *);
+extern int textureCreateFromImage(unsigned int *);
 extern int FUN_0037a834(unsigned int);
 /* Supplied declaration required: asdEffectTextureCreate. */
 
@@ -83,7 +83,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_002b41c4();
+  temp_v0 = resourceResolveHeaderPointer();
   temp_v1 = *(int *)(temp_v0 + 0x20);
   if (temp_v1 == 0) {
     temp_v1 = *(int *)(temp_v0 + 0xb8);
@@ -105,11 +105,11 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
   FUN_002b2d74(temp_v3,*puVar3,temp_v0);
   puVar3[0x13] = temp_v3;
   *(unsigned char *)((int)puVar3 + 0xe) = *(unsigned char *)((int)puVar3 + 0xe) | 1;
-  if ((*puVar3 != 0) && (puVar4 = (unsigned int *)FUN_002721e4(param_1), puVar4 != (unsigned int *)0x0)) {
+  if ((*puVar3 != 0) && (puVar4 = (unsigned int *)resourceResolveDataPointer(param_1), puVar4 != (unsigned int *)0x0)) {
     switch(param_1->field_0x1c) {
     case 1:
       FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),1);
-      temp_v1 = FUN_0037a7f4(puVar4);
+      temp_v1 = textureCreateFromImage(puVar4);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
       temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3)

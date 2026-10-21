@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001d22a0. */
-extern unsigned int FUN_0028c814(void);
+extern unsigned int textureCreateFromImage(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 extern int stexHeaderIsValid(int);
 /* Supplied declaration required: memAlloc. */
@@ -59,7 +59,7 @@ unsigned int * FUN_002491b4(int *param_1)
           *(int *)(piVar5[5] + temp_v2 * 4) = temp_v4;
         }
         else {
-          temp_v1 = FUN_0028c814();
+          temp_v1 = textureCreateFromImage();
           *(unsigned int *)(piVar5[5] + temp_v2 * 4) = temp_v1;
         }
         temp_v2 = temp_v2 + 1;

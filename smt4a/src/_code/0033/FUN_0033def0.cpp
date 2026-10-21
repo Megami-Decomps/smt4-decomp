@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd76c(int, char *);
+int controllerSetDestination(int, char *);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int slots4FGetActiveValue(int);
@@ -59,7 +59,7 @@ void FUN_0033def0(char *param_1)
   if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
     *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
   }
-  FUN_003fd76c(temp_v2,param_1 + 0xc);
+  controllerSetDestination(temp_v2,param_1 + 0xc);
   FUN_003fdb18(temp_v2);
   temp_v1 = slots4FGetActiveValue(temp_v2);
   if (temp_v1 == *(int *)(param_1 + 0x1c)) {

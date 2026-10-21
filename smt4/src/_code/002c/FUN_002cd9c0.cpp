@@ -1,24 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cd9c0` (_code @ 0x2cd9c0, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler keeps the boolean in r0 instead of retail's preserved r4 accumulator. */
+#include "common.h"
+
 
 extern "C" {
-
-int scrGetArg(int);
-
-/* Supplied declaration required: scrGetArg. */
-extern int FUN_002f4f24(void);
-
-
-unsigned char FUN_002cd9c0(void)
-
+/* Reads or updates the requested state. */
+u32 scrGetArg(u32 index);
+s32 FUN_002f4f24(u32 argument);
+bool FUN_002cd9c0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  scrGetArg(0);
-  temp_v0 = FUN_002f4f24();
-  return temp_v0 != 0;
+    u32 argument = scrGetArg(0);
+    return FUN_002f4f24(argument) != 0;
 }
-
-} /* extern "C" */
+}

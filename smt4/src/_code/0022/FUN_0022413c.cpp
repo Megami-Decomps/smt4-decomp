@@ -10,7 +10,7 @@ int renderCtxCallB(...);
 int FUN_002ae9ec(...);
 int FUN_002ba12c(int);
 int FUN_002bed3c(void);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int VectorSignedToFloat(...);
@@ -36,7 +36,7 @@ extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -75,7 +75,7 @@ unsigned int FUN_0022413c(void)
     FUN_002ba12c(g_titleScene);
     temp_v9 = (unsigned int)temp_v8;
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v3 = g_titleScene;
     temp_v8 = 0.0f;
     temp_v2 = FUN_002865c0(6);
@@ -129,7 +129,7 @@ unsigned int FUN_0022413c(void)
       if (*(int *)(temp_v1 + 0x1c) < 0x14) {
         VectorSignedToFloat(*(int *)(temp_v1 + 0x1c),(unsigned char)(temp_v9 >> 0x16) & 3);
       }
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002ae9ec(2,0x37,*(unsigned int *)(temp_v1 + 0x28),(int)(*(float *)(temp_v1 + 0x2c) + temp_v13),
                    (int)*(float *)(temp_v1 + 0x30),0x81);
     }
@@ -153,7 +153,7 @@ unsigned int FUN_0022413c(void)
       if (*(int *)(temp_v1 + 0x3c) < 0x14) {
         VectorSignedToFloat(*(int *)(temp_v1 + 0x3c),(unsigned char)(temp_v9 >> 0x16) & 3);
       }
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002ae9ec(2,0x37,*(unsigned int *)(temp_v1 + 0x48),(int)(*(float *)(temp_v1 + 0x4c) + temp_v13),
                    (int)*(float *)(temp_v1 + 0x50),0x82);
     }
@@ -188,7 +188,7 @@ unsigned int FUN_0022413c(void)
         temp_v12 = CONCAT44(temp_v13,temp_v8 + (float)temp_v14);
         FUN_0024d5bc(temp_v16);
         renderCtxCallB(temp_v16);
-        FUN_002bf538();
+        efctSetSpeed();
         FUN_002ae9ec(2,0x37,*(unsigned int *)(temp_v1 + temp_v6 * 0x20 + 0x70),(int)(float)temp_v12,0x80,
                      0x83);
       }
@@ -234,7 +234,7 @@ unsigned int FUN_0022413c(void)
       if (!temp_v7) {
         FUN_0024d5bc(temp_v17);
         renderCtxCallB(temp_v17);
-        FUN_002bf538();
+        efctSetSpeed();
         FUN_002ae9ec(2,0x37,*(unsigned short *)(*(int *)(temp_v3 + 0xd4) + *(int *)(temp_v3 + 0xdc) * 2),
                      (int)(*(float *)(temp_v3 + 0xb4) + (float)temp_v12),(int)*(float *)(temp_v3 + 0xb8),
                      0x84);
@@ -269,7 +269,7 @@ unsigned int FUN_0022413c(void)
       *(unsigned char *)(temp_v1 + 0x1284) = 0;
     }
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002c198c(g_titleScene);
     FUN_002c18e4(g_titleScene);
   }

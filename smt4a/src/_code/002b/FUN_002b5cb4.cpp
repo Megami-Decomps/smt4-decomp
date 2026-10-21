@@ -1,14 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b5cb4` (_code @ 0x2b5cb4, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
 
 extern "C" {
-
-
-void FUN_002b5cb4(void)
-
+/* Computes or forwards the requested value. */
+f32 FUN_002b5cb4(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ)
 {
-  return;
+    f32 dx = otherX - x;
+    f32 dy = otherY - y;
+    f32 dz = otherZ - z;
+    return __sqrtf(dx * dx + dy * dy + dz * dz);
 }
-
-} /* extern "C" */
+}

@@ -1,23 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd624` (_code @ 0x2fd624, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler expands the byte swap into shifts and ors instead of rev16. */
+#include "common.h"
 extern "C" {
-
-int onlineUrlEnsureParsed(void);
-
-/* Supplied declaration required: onlineUrlEnsureParsed. */
-
-
-unsigned short FUN_002fd624(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  
-  onlineUrlEnsureParsed();
-  temp_v0 = *(unsigned short *)(*(int *)(param_1 + 4) + 6);
-  return (temp_v0 << 8) | (temp_v0 >> 8);
+struct Url { u32 unk00; struct { u8 unk00[6]; u16 port; } *parsed; };
+void onlineUrlEnsureParsed(Url *url);
+/* Returns the parsed port with network byte order reversed. */
+u16 FUN_002fd624(Url *url) {
+    onlineUrlEnsureParsed(url);
+    u16 port = url->parsed->port;
+    return (port << 8) | (port >> 8);
 }
-
-} /* extern "C" */
+}

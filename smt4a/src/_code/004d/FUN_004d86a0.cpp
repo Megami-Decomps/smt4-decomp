@@ -1,23 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d86a0` (_code @ 0x4d86a0, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+struct ValueHolder { u8 unk00[4]; void *value; };
 extern "C" {
-
-int FUN_004ffb0c(unsigned int);
-
-/* Supplied declaration required: FUN_004ffb0c. */
-
-
-void FUN_004d86a0(int *param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    FUN_004ffb0c(*(unsigned int *)(*param_1 + 4));
-    return;
-  }
-  return;
+f32 FUN_004ffb0c(void *value);
+/* Returns the held object's selected value, or zero without an object. */
+f32 FUN_004d86a0(ValueHolder **holder) { return *holder != NULL ? FUN_004ffb0c((*holder)->value) : 0.0f; }
 }
-
-} /* extern "C" */

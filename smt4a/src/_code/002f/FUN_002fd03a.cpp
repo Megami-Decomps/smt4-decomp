@@ -1,39 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd03a` (_code @ 0x2fd03a, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldrb r4, [r0, #8]'; compiler emits 'ldrb r4, [r5, #8]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int byteArrayEnsureAt(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: byteArrayEnsureAt. */
-
-
-void FUN_002fd03a(int *param_1,int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char *pbVar4;
-  unsigned int temp_v2;
-  
-  temp_v0 = *(unsigned char *)(param_1 + 2);
-  temp_v1 = (**(romwright_code **)(*param_1 + 0x1c))(param_1);
-  for (temp_v2 = (unsigned int)temp_v0; temp_v2 < temp_v1; temp_v2 = temp_v2 + 1) {
-    pbVar3 = (unsigned char *)byteArrayEnsureAt(param_2,*(unsigned char *)(param_1 + 2) - 1);
-    pbVar4 = (unsigned char *)byteArrayEnsureAt(param_2,temp_v2);
-    *pbVar3 = *pbVar4 ^ *pbVar3;
-  }
-  *(unsigned int *)(param_2 + 0x10) = (unsigned int)*(unsigned char *)(param_1 + 2);
-  return;
+struct Object {
+    void **vtable;
+    u32 reserved;
+    u8 count;
+};
+struct Buffer {
+    u8 pad[16];
+    u32 count;
+};
+u8 *byteArrayEnsureAt(Buffer *,u32);
+void FUN_002fd03a(Object *object,Buffer *buffer) {
+    u32 count=((u32 (*)(Object *))object->vtable[7])(object);
+    for(u32 index=object->count;index<count;++index) *byteArrayEnsureAt(buffer,object->count-1-index)^=*byteArrayEnsureAt(buffer,index);
+    buffer->count=object->count;
 }
-
-} /* extern "C" */
+}

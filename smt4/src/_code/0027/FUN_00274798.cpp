@@ -8,7 +8,7 @@ int FUN_0021e224(int);
 int FUN_002878e4(void);
 int FUN_00287aec(void);
 int FUN_00287b0c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int);
 int FUN_00291e40(unsigned int);
@@ -37,7 +37,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: FUN_002878e4. */
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_00287b0c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00291e40. */
@@ -230,7 +230,7 @@ LAB_002748b4:
             }
             else {
               temp_v12 = (float)DAT_004474f4[0x13];
-              FUN_00287be4();
+              mathPositionHeadingDegrees();
               temp_v8 = 0;
               temp_v15 = 50.0f;
               temp_v17 = 0x428c0000;
@@ -238,7 +238,7 @@ LAB_002748b4:
                 temp_v9 = DAT_00447e58 + temp_v8 * 0x38;
                 if (*(char *)(temp_v9 + 0xc) != '\0') {
                   temp_v16 = temp_v15;
-                  FUN_00287be4();
+                  mathPositionHeadingDegrees();
                   if (DAT_004474f4[0x2b] == -1) {
                     temp_v16 = (float)temp_v17;
                   }

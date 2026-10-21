@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001695a0(void);
 int FUN_001ad9b4(void);
-int FUN_00237898(int, int, unsigned int, int, int);
+int messageForwardDefaultMode(int, int, unsigned int, int, int);
 int scrWorkGetValue(int);
 int scrWorkSetValue(...);
 int FUN_003dea6c(int, int, int);
@@ -22,7 +22,7 @@ typedef struct {
 extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 extern int scrGetCommandFrame(void);
@@ -56,7 +56,7 @@ unsigned int FUN_0031e38c(void)
     FUN_003dea6c(temp_v1,0,1);
     FUN_001695a0();
     temp_v4 = scrWorkGetValue(1);
-    FUN_00237898(temp_v3,0,temp_v4,6,0);
+    messageForwardDefaultMode(temp_v3,0,temp_v4,6,0);
     temp_v2 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v2 + 1);
     if (temp_v3 == 1) {

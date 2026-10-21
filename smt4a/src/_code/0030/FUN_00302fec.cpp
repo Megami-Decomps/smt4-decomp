@@ -1,42 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00302fec` (_code @ 0x302fec, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r3, r4, r5, lr}'; compiler emits 'push {r4, r5, r6, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_0030fb34(unsigned int, int, int);
-int streamWriterWriteArray(unsigned int, int *, int, int);
-
-typedef struct fn_00302fec_arg1 fn_00302fec_arg1;
-struct fn_00302fec_arg1 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    int field_0x18; /* +0x18 */
+struct Data {
+    u8 pad[12];
+    const u32 *values;
+    u32 count;
+    u32 reserved;
+    u32 mode;
 };
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0030fb34. */
-/* Supplied declaration required: streamWriterWriteArray. */
-
-
-unsigned int FUN_00302fec(unsigned int param_1,fn_00302fec_arg1 *param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_2->field_0x10;
-  streamWriterWriteArray(param_1,&temp_v0,4,1);
-  if (param_2->field_0x10 != 0) {
-    FUN_0030fb34(param_1,param_2->field_0xc + param_2->field_0x18,param_2->field_0x10 << 3);
-  }
-  return param_1;
+void streamWriterWriteArray(void *,const void *,u32,u32);
+void FUN_0030fb34(void *,u32,u32);
+void *FUN_00302fec(void *writer,const Data *data) {
+    streamWriterWriteArray(writer,&data->count,4,1);
+    if(data->count) FUN_0030fb34(writer,(u32)data->values+data->mode,data->count<<3);
+    return writer;
 }
-
-} /* extern "C" */
+}

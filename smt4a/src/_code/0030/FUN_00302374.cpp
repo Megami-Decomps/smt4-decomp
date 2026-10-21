@@ -1,30 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00302374` (_code @ 0x302374, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler changes the register allocation and store/frame scheduling shown by retail. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char DAT_0055b0fc; /* 0x55b0fc */
-
-extern unsigned int onlineInstantiationContextGetCurrent(void);
-
-
-unsigned int * FUN_00302374(unsigned int *param_1)
-
-{
-  unsigned int temp_v0;
-  
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[1] = 0;
-  *param_1 = (unsigned int)&DAT_0055b0fc;
-  temp_v0 = onlineInstantiationContextGetCurrent();
-  param_1[8] = temp_v0;
-  return param_1;
+extern const u8 DAT_0055b0fc;
+struct Object { const void *vtable; u32 state; u32 values[6]; void *context; };
+void *onlineInstantiationContextGetCurrent(void);
+/* Initializes an empty object using the current instantiation context. */
+Object *FUN_00302374(Object *object) {
+    for (u32 index = 0; index < 6; ++index) object->values[index] = 0;
+    object->state = 0;
+    object->vtable = &DAT_0055b0fc;
+    object->context = onlineInstantiationContextGetCurrent();
+    return object;
 }
-
-} /* extern "C" */
+}

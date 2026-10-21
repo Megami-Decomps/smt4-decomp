@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0022e480(...);
-int FUN_0023266c(int, int, int, int);
+int rectangleResetSelection(...);
+int rectangleInitializeSelection(int, int, int, int);
 int FUN_0023346c(int);
 int FUN_002637c8(void);
 int FUN_00282bfc(int, int);
@@ -29,8 +29,8 @@ extern unsigned char LAB_003a0104; /* 0x3a0104 */
 extern unsigned char DAT_004223b0; /* 0x4223b0 */
 extern unsigned char DAT_00422590; /* 0x422590 */
 
-/* Supplied declaration required: FUN_0022e480. */
-/* Supplied declaration required: FUN_0023266c. */
+/* Supplied declaration required: rectangleResetSelection. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 extern unsigned int *FUN_00233228(void);
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: FUN_002637c8. */
@@ -68,8 +68,8 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   unsigned int *puVar7;
   
   *param_1 = 0;
-  temp_v1 = FUN_0022e480(param_1 + 0xe0);
-  temp_v1 = FUN_0022e480(temp_v1 + 0x14);
+  temp_v1 = rectangleResetSelection(param_1 + 0xe0);
+  temp_v1 = rectangleResetSelection(temp_v1 + 0x14);
   *(unsigned char **)(temp_v1 + 0x494) = &DAT_00422590;
   temp_v1 = temp_v1 + 0x4ec;
   __aeabi_vec_ctor_nocookie_nodtor(temp_v1,FUN_00287314,0x74,9);
@@ -98,8 +98,8 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   *(unsigned char *)(temp_v1 - 0x9c8c) = 0;
   *(unsigned char *)(temp_v1 - 0x9c8b) = 0;
   FUN_0023346c(temp_v1 - 0x9900);
-  FUN_0023266c(temp_v1 - 0x9928,0x140,0,0x2b);
-  FUN_0023266c(temp_v1 - 0x9914,0x140,0,0x2b);
+  rectangleInitializeSelection(temp_v1 - 0x9928,0x140,0,0x2b);
+  rectangleInitializeSelection(temp_v1 - 0x9914,0x140,0,0x2b);
   temp_v2 = 0x68;
   asdOperatorNew();
   puVar4 = (unsigned int *)0x0;

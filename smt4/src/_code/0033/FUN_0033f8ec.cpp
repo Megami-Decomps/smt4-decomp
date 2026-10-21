@@ -6,7 +6,7 @@ extern "C" {
 
 extern short FUN_0023dcfc(unsigned int);
 extern short FUN_00245cc0(unsigned int);
-extern short FUN_00255158(int, unsigned int);
+extern short battleGetEntryHalfword(int, unsigned int);
 
 
 unsigned char FUN_0033f8ec(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -21,7 +21,7 @@ unsigned char FUN_0033f8ec(int param_1,int param_2,int param_3,int param_4,int p
   temp_v3 = param_5 != 0;
   temp_v2 = 0;
   if (temp_v3 || param_2 != 0) {
-    temp_v0 = FUN_00255158((int)*(short *)(param_1 + 8),7);
+    temp_v0 = battleGetEntryHalfword((int)*(short *)(param_1 + 8),7);
     if (param_2 != -7) {
       if (param_2 != -6) {
         if (param_2 != -5) {
@@ -43,7 +43,7 @@ LAB_0033f9c0:
     else if (temp_v0 != 0) goto LAB_0033f9c0;
   }
   if (temp_v3 || param_3 != 0) {
-    temp_v0 = FUN_00255158((int)*(short *)(param_1 + 8),10);
+    temp_v0 = battleGetEntryHalfword((int)*(short *)(param_1 + 8),10);
     if (param_3 != -7) {
       if (param_3 != -6) {
         if (param_3 != -5) {
@@ -65,7 +65,7 @@ LAB_0033fa64:
     else if (temp_v0 != 0) goto LAB_0033fa64;
   }
   if (temp_v3 || param_4 != 0) {
-    temp_v0 = FUN_00255158((int)*(short *)(param_1 + 8),0xb);
+    temp_v0 = battleGetEntryHalfword((int)*(short *)(param_1 + 8),0xb);
     if (param_4 != -7) {
       if (param_4 != -6) {
         if (param_4 != -5) {

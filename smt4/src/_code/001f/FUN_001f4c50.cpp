@@ -21,7 +21,7 @@ extern unsigned char LAB_001f4d68; /* 0x1f4d68 */
 extern unsigned char LAB_001f4d88; /* 0x1f4d88 */
 extern unsigned char LAB_001f4da0; /* 0x1f4da0 */
 extern unsigned char LAB_001f4dc0; /* 0x1f4dc0 */
-extern unsigned int DAT_004341f8; /* 0x4341f8 */
+extern unsigned int g_mapAccessoryTable; /* 0x4341f8 */
 extern unsigned int DAT_00435d9c; /* 0x435d9c */
 extern unsigned int DAT_00435da0; /* 0x435da0 */
 extern unsigned int DAT_00435da4; /* 0x435da4 */
@@ -50,7 +50,7 @@ void FUN_001f4c50(void)
   DAT_00435db8 = FUN_002c5c04(&LAB_001f4da0);
   DAT_00435dbc = FUN_002c5c04(&LAB_001f4dc0);
   btlStageFogTableLoad();
-  DAT_004341f8 = FUN_002c5c04(0x206248);
+  g_mapAccessoryTable = FUN_002c5c04(0x206248);
   return;
 }
 

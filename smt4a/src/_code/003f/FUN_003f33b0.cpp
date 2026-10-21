@@ -24,7 +24,7 @@ extern int FUN_002c2bf4(...); /* 0x2c2bf4 */
 extern int gameGetSlotRecord(unsigned char);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002a6894. */
-extern int FUN_004bca68(int);
+extern int recordContainsPairedId(int);
 /* Supplied declaration required: FUN_004bcd90. */
 extern unsigned int getUnlockedSlotCount(int);
 /* Supplied declaration required: dispatchIfFound. */
@@ -89,7 +89,7 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
   temp_v6 = 0;
   do {
     if (asStack_11c[temp_v6] != 0) {
-      temp_v4 = FUN_004bca68(temp_v3);
+      temp_v4 = recordContainsPairedId(temp_v3);
       if (temp_v4 != 0) {
         if (asStack_11c[temp_v6] != 0) {
           temp_v5 = temp_v5 + 1;

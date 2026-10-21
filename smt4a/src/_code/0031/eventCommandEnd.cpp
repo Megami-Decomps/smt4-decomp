@@ -6,7 +6,7 @@ s32 eventCommandGetPendingCleanup(void);
 s32 jobIsValid(u32 job);
 void FUN_0035bbc4(void);
 void eventCommandSetPendingCleanup(s32 arg);
-void FUN_003d8f20(void);
+void uiFreeCallback(void);
 void FUN_0035bb70(void);
 void jobStop(u32 job, s32 arg);
 
@@ -17,7 +17,7 @@ extern EventCommandGlobals g_eventCommand;
 s32 eventCommandEnd(void)
 {
     if (eventCommandGetPendingCleanup() != 0) {
-        FUN_003d8f20();
+        uiFreeCallback();
         eventCommandSetPendingCleanup(0);
     }
     if (jobIsValid(g_eventCommand.job) != 0) {

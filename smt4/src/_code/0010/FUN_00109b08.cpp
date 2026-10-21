@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bf288(int, int, unsigned int, int, int, int);
 int FUN_002bf380(int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 unsigned short FUN_00109b08(int param_1,unsigned int param_2,int param_3)
@@ -31,14 +31,14 @@ unsigned short FUN_00109b08(int param_1,unsigned int param_2,int param_3)
   float in_s0;
   float in_s1;
   
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v1 = 0;
   temp_v2 = -1;
   temp_v3 = 0;
   if (param_1 != 0) {
     if (param_1 != 1) {
       if (param_1 != 2) {
-        FUN_002bf538();
+        efctSetSpeed();
         return temp_v3;
       }
       switch(param_2) {
@@ -121,13 +121,13 @@ unsigned short FUN_00109b08(int param_1,unsigned int param_2,int param_3)
       temp_v2 = FUN_002bf4f8(0x13,temp_v1);
     }
     if ((temp_v2 == 0) || (param_3 != 0)) {
-      FUN_002bf538();
+      efctSetSpeed();
       return temp_v3;
     }
     FUN_002bf288(2,0x13,temp_v1,(int)in_s0,(int)(in_s1 + 2.0f),0xb);
     temp_v3 = *(unsigned short *)(temp_v2 + 4);
     temp_v3 = temp_v3 & 0x7fff;
-    FUN_002bf538();
+    efctSetSpeed();
     return temp_v3;
   }
   switch(param_2) {
@@ -221,7 +221,7 @@ unsigned short FUN_00109b08(int param_1,unsigned int param_2,int param_3)
     temp_v3 = *(unsigned short *)(temp_v0 + 4);
     temp_v3 = temp_v3 & 0x7fff;
   }
-  FUN_002bf538();
+  efctSetSpeed();
   return temp_v3;
 }
 

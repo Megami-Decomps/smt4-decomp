@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp14; /* 0x14: local_14 */
 } void_stack;
 
-extern signed char DAT_004729b8; /* 0x4729b8 */
+extern signed char g_textRendererSettings; /* 0x4729b8 */
 extern signed char DAT_004729b9; /* 0x4729b9 */
 extern int DAT_004729bc; /* 0x4729bc */
 extern int DAT_004729c0; /* 0x4729c0 */
@@ -31,10 +31,10 @@ void FUN_00145148(void)
   
   temp_v1 = DAT_004729bc;
   temp_v0 = '\0';
-  if (DAT_004729b8 != '\0') {
+  if (g_textRendererSettings != '\0') {
     temp_v0 = DAT_004729b9;
   }
-  if (DAT_004729b8 != '\0' && temp_v0 != '\0') {
+  if (g_textRendererSettings != '\0' && temp_v0 != '\0') {
     psVar3 = (short *)(DAT_004729bc + 0x4e00);
     *(char *)(DAT_004729bc + *psVar3 * 0x138 + 1) = (char)*(unsigned short *)(DAT_004729bc + 0x4e02);
     *(char *)(temp_v1 + *psVar3 * 0x138 + 2) = (char)*(unsigned int *)(temp_v1 + 0x4e2c);

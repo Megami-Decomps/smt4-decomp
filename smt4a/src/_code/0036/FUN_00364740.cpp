@@ -94,7 +94,7 @@ extern unsigned int *dataTable2FType1GetEntry(unsigned char *);
 extern unsigned int *dataTable2FType2GetEntry(unsigned char *);
 extern unsigned int FUN_003b5620(void);
 extern int dataTable23Type0CountWithAoc(void);
-extern int FUN_003b9a0c(void);
+extern int dataTableGetRecordFortyEight(void);
 extern int dataTable23Type4CountWithAoc(void);
 /* Supplied declaration required: dataTable2FType0Count. */
 /* Supplied declaration required: dataTable2FType1Count. */
@@ -395,7 +395,7 @@ LAB_00364d28:
                           if (temp_v16 == 0) {
                             temp_v8 = *puVar4;
                             puVar14 = (unsigned char *)0x0;
-                            temp_v3 = FUN_003b9a0c();
+                            temp_v3 = dataTableGetRecordFortyEight();
                             if (0 < temp_v3) {
                               do {
                                 puVar10 = puVar14;
@@ -418,7 +418,7 @@ LAB_00364d94:
                                   goto LAB_00364da4;
                                 }
                                 puVar14 = puVar14 + 1;
-                                temp_v3 = FUN_003b9a0c();
+                                temp_v3 = dataTableGetRecordFortyEight();
                               } while ((int)puVar14 < temp_v3);
                               temp_v30 = (unsigned char *)0xffffffff;
                             }

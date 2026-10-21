@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int libc_strcat(...);
 int dataTable00FindById(void);
-int FUN_004bd274(int, int);
-int FUN_004bd294(int, int);
+int randomGetLowerTenBits(int, int);
+int randomGetUpperSixBits(int, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -26,14 +26,14 @@ extern unsigned char LAB_002ad950; /* 0x2ad950 */
 extern unsigned char LAB_002ad974; /* 0x2ad974 */
 extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int wstrlen(char *);
 extern int playerPackedEntryLow10(void);
 extern int playerPackedEntryHigh(unsigned char);
-/* Supplied declaration required: FUN_004bd274. */
-/* Supplied declaration required: FUN_004bd294. */
+/* Supplied declaration required: randomGetLowerTenBits. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 
 
 void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
@@ -105,11 +105,11 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
     temp_v4 = 0;
     do {
       temp_v3 = temp_v13;
-      FUN_004bd294(temp_v13,temp_v8[temp_v4]);
+      randomGetUpperSixBits(temp_v13,temp_v8[temp_v4]);
       if (temp_v3 != 1) {
         if (temp_v3 != 2) {
           temp_v3 = temp_v13;
-          FUN_004bd274(temp_v13,temp_v8[temp_v4]);
+          randomGetLowerTenBits(temp_v13,temp_v8[temp_v4]);
           if (temp_v3 < 100) {
             temp_v12[temp_v7] = temp_v8[temp_v4];
             temp_v7 = temp_v7 + 1;
@@ -162,28 +162,28 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
         while( 1 ) {
           switch(temp_v10[temp_v3]) {
           case 0xb:
-            FUN_00100388(temp_v9,"澂辂覂鎂辂躂");
+            textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
             break;
           case 0xc:
-            FUN_00100388(temp_v9,"澂膂躂覂莂");
+            textFormatBuffer(temp_v9,"澂膂躂覂莂");
             break;
           case 0xd:
-            FUN_00100388(temp_v9,"犂貂薂薂邂");
+            textFormatBuffer(temp_v9,"犂貂薂薂邂");
             break;
           case 0xe:
-            FUN_00100388(temp_v9,"憂覂躂蒂");
+            textFormatBuffer(temp_v9,"憂覂躂蒂");
             break;
           case 0xf:
-            FUN_00100388(temp_v9,"犂覂莂讂");
+            textFormatBuffer(temp_v9,"犂覂莂讂");
             break;
           case 0x11:
-            FUN_00100388(temp_v9,"抂袂膂銂趂");
+            textFormatBuffer(temp_v9,"抂袂膂銂趂");
             break;
           case 0x12:
-            FUN_00100388(temp_v9,"掂膂骂薂");
+            textFormatBuffer(temp_v9,"掂膂骂薂");
             break;
           case 0x13:
-            FUN_00100388(temp_v9,(char *)0x52b8a0);
+            textFormatBuffer(temp_v9,(char *)0x52b8a0);
           }
           libc_strcat(param_4,temp_v9);
           temp_v3 = temp_v3 + 1;
@@ -234,7 +234,7 @@ LAB_002ad77c:
         case 0x13:
           pcVar6 = (char *)0x52b8a0;
         }
-        FUN_00100388(temp_v9,pcVar6);
+        textFormatBuffer(temp_v9,pcVar6);
 LAB_002ad7c8:
         libc_strcat(param_4,temp_v9);
         temp_v3 = temp_v3 + 1;
@@ -286,7 +286,7 @@ LAB_002ad880:
         case 0x13:
           pcVar6 = (char *)0x52b8a0;
         }
-        FUN_00100388(temp_v9,pcVar6);
+        textFormatBuffer(temp_v9,pcVar6);
 LAB_002ad990:
         libc_strcat(param_4,temp_v9);
         temp_v3 = temp_v3 + 1;

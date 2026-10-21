@@ -29,7 +29,7 @@ extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_00202400. */
 /* Supplied declaration required: FUN_00203b40. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0039b984. */
 /* Supplied declaration required: FUN_004029f4. */
 /* Supplied declaration required: FUN_00403b84. */
@@ -55,7 +55,7 @@ void FUN_004036fc(int param_1)
     temp_v1 = *(int *)(param_1 + 0xc);
   }
   if (((!temp_v5 || temp_v1 == 0) || (temp_v1 = FUN_00471960(g_aocSystem), temp_v1 == 0)) ||
-     (temp_v1 = FUN_00341940(0x32), temp_v1 == 0)) {
+     (temp_v1 = textureGetIndexedResource(0x32), temp_v1 == 0)) {
     return;
   }
   temp_v1 = 0;
@@ -78,7 +78,7 @@ void FUN_004036fc(int param_1)
       else {
         temp_v3 = 0xffffffff;
       }
-      temp_v1 = FUN_00341940(temp_v3);
+      temp_v1 = textureGetIndexedResource(temp_v3);
       if (temp_v1 == 0) {
         return;
       }

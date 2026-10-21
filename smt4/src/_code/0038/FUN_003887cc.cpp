@@ -45,7 +45,7 @@ extern unsigned char LAB_003f7000; /* 0x3f7000 */
 extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0015dd58. */
-extern int FUN_00234888(int);
+extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: FUN_002348a8. */
 /* Supplied declaration required: FUN_0027eafc. */
 /* Supplied declaration required: FUN_002a12d8. */
@@ -241,7 +241,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
         do {
           temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
           if ((temp_v3 != 0) &&
-             (temp_v3 = FUN_00234888(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 == 0)) {
+             (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 == 0)) {
             return;
           }
           temp_v3 = *(int *)(param_2 + 0x310);
@@ -253,7 +253,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
         do {
           temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
           if ((temp_v3 != 0) &&
-             (temp_v3 = FUN_00234888(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 != 0)) {
+             (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 != 0)) {
             FUN_0038b760(*(int *)(param_2 + 0x318) + temp_v6 * 0x50);
           }
           temp_v6 = temp_v6 + 1;
@@ -277,7 +277,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
           do {
             temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50 + 8);
             if ((temp_v3 != 0) &&
-               (temp_v3 = FUN_00234888(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
+               (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
                temp_v3 != 0)) {
               FUN_0038b87c(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50);
               *(unsigned int *)(param_2 + 0x358) = 1;

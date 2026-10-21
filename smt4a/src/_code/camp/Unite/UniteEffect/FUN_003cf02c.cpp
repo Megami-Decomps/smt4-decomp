@@ -42,7 +42,7 @@ int FUN_003d2150(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(...);
 int FUN_003f9ac4(...);
-int FUN_003f9c3c(...);
+int controllerRefreshAtUnitScale(...);
 int FUN_003f9e80(void);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
@@ -115,7 +115,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003f9ac4. */
-/* Supplied declaration required: FUN_003f9c3c. */
+/* Supplied declaration required: controllerRefreshAtUnitScale. */
 /* Supplied declaration required: FUN_003f9e80. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: workOwnerRelease. */
@@ -223,7 +223,7 @@ unsigned int FUN_003cf02c(void)
       temp_v12 = *(short *)(*(int *)(temp_v6 + 0x34) + 0x94) != 0;
       *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
       if (temp_v12) {
-        FUN_003f9c3c(temp_v6,temp_v2 + 0xa0,0);
+        controllerRefreshAtUnitScale(temp_v6,temp_v2 + 0xa0,0);
       }
       else {
         temp_v6 = **(int **)(*(int *)(temp_v6 + 0x34) + 0x48);
@@ -389,7 +389,7 @@ unsigned int FUN_003cf02c(void)
       temp_v12 = *(short *)(*(int *)(temp_v6 + 0x34) + 0x94) != 0;
       *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
       if (temp_v12) {
-        FUN_003f9c3c(temp_v6,temp_v2 + 0xe4,0);
+        controllerRefreshAtUnitScale(temp_v6,temp_v2 + 0xe4,0);
       }
       else {
         temp_v6 = **(int **)(*(int *)(temp_v6 + 0x34) + 0x48);
@@ -481,7 +481,7 @@ LAB_003cf9bc:
         temp_v12 = *(short *)(*(int *)(temp_v3 + 0x34) + 0x94) != 0;
         *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
         if (temp_v12) {
-          FUN_003f9c3c(temp_v3,temp_v2 + 0xa0,0);
+          controllerRefreshAtUnitScale(temp_v3,temp_v2 + 0xa0,0);
           VectorSignedToFloat(temp_v10,(unsigned char)(temp_v4 >> 0x16) & 3);
           FUN_003f9ac4(*(unsigned int *)(temp_v2 + 0x98),temp_v2 + 0xa0,0);
         }

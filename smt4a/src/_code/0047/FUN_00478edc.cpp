@@ -14,7 +14,7 @@ int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(...);
 int jobFlagsWorkStop(unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
-int FUN_0047daf4(unsigned int *);
+int timeInitializeActiveState(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -44,7 +44,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 extern int FUN_004cfe4c(unsigned int *);
 
 
@@ -68,7 +68,7 @@ void FUN_00478edc(unsigned int *param_1)
   unsigned int uStack_18;
   unsigned int uStack_14;
   
-  FUN_0047daf4(&temp_v4);
+  timeInitializeActiveState(&temp_v4);
   temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 != 3) {

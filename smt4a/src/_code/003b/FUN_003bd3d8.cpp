@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_00221d78(unsigned int);
-int FUN_00514500(void);
+int randomAdvanceShiftRegister(void);
 int FUN_00514540(int);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(double, int);
@@ -101,7 +101,7 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: FUN_00221d78. */
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -375,7 +375,7 @@ void FUN_003bd3d8(fn_003bd3d8_arg0 *param_1)
               pfVar24[1] = ((temp_v40 - pfVar26->field_0x78) + temp_v24 * pfVar26->field_0x78) *
                            pfVar26->field_0x74;
               temp_v24 = temp_v40;
-              FUN_00514500();
+              randomAdvanceShiftRegister();
               if ((temp_v17 & 1) != 0) {
                 pfVar24[1] = -pfVar24[1];
               }
@@ -394,7 +394,7 @@ void FUN_003bd3d8(fn_003bd3d8_arg0 *param_1)
                 *pfVar24 = 0.0f;
               }
               else {
-                FUN_00514500();
+                randomAdvanceShiftRegister();
                 __aeabi_uidivmod();
                 *pfVar24 = temp_v18;
                 __aeabi_idivmod(temp_v18,temp_v25);

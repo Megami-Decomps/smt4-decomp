@@ -8,7 +8,7 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 
 /* stack frame of param_6: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern unsigned char LAB_0039ccd8; /* 0x39ccd8 */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 extern int FUN_0026264c(unsigned short);
 
 
@@ -43,7 +43,7 @@ void FUN_0039c9f0(int param_1,int param_2,int param_3,int param_4,int param_5,in
   int temp_v1;
   int temp_v2;
   
-  FUN_0019d880();
+  jobGetScalarValue();
   temp_v0 = FUN_001834a4(0x12,param_2 + 0x7b);
   temp_v1 = FUN_001834a4(0x12,0x7a);
   if ((*(char *)(param_1 + 0x2017) != '\x0e') &&

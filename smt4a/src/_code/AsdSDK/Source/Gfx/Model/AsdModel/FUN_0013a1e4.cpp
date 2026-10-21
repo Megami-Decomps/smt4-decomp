@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00143ae8(void);
+int asdGxCommandListAllocNode(void);
 int FUN_00148880(unsigned int, unsigned short [2]);
 int asdGxCommandListCreate(void);
 
@@ -48,7 +48,7 @@ extern unsigned int DAT_00636e8c; /* 0x636e8c */
 extern unsigned int DAT_00636e9c; /* 0x636e9c */
 extern unsigned int DAT_00636eac; /* 0x636eac */
 
-/* Supplied declaration required: FUN_00143ae8. */
+/* Supplied declaration required: asdGxCommandListAllocNode. */
 /* Supplied declaration required: FUN_00148880. */
 /* Supplied declaration required: asdGxCommandListCreate. */
 extern unsigned int asdMemoryGetDefaultAllocator(void);
@@ -115,7 +115,7 @@ void FUN_0013a1e4(fn_0013a1e4_arg0 *param_1)
     (&DAT_00636e08)[temp_v2 * 6] = temp_v1;
     asdGxCommandListCreate();
     *(int *)(temp_v2 * 0x18 + 0x636e0c) = temp_v1;
-    FUN_00143ae8();
+    asdGxCommandListAllocNode();
     temp_v3 = temp_v2 + 1;
     (&DAT_00636e10)[temp_v2 * 6] = temp_v1;
     temp_v2 = temp_v3;

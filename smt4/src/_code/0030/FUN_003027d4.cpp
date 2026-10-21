@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00246c8c(unsigned int);
-int FUN_0024b77c(...);
+int randomAdvanceShiftRegister(...);
 int FUN_0024b830(int);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
@@ -79,7 +79,7 @@ extern float DAT_004ea948; /* 0x4ea948 */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: FUN_00246c8c. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -383,7 +383,7 @@ void FUN_003027d4(fn_003027d4_arg0 *param_1)
                        temp_v12 * *(float *)((int)pvVar18 + 0x68));
               temp_v39[6] = temp_v19;
               if (temp_v4) {
-                FUN_0024b77c(0);
+                randomAdvanceShiftRegister(0);
                 __aeabi_uidivmod();
                 *temp_v39 = temp_v14;
               }

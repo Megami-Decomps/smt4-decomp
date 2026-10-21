@@ -1,14 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f50b8` (_code @ 0x2f50b8, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_002f50b8(void)
-
-{
-  return;
+namespace {
+struct Value { u8 padding[0x48]; f32 value; };
+struct Owner { u8 padding[0x34]; s32 count; u8 gap[0x14]; Value *value; };
 }
 
-} /* extern "C" */
+extern "C" {
+/* Reads or updates the requested object state. */
+f32 FUN_002f50b8(const Owner *owner)
+{
+    f32 value = 0.0f;
+    if (owner->count > 0 && owner->value != NULL) {
+        value = owner->value->value;
+    }
+    return value;
+}
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [24], unsigned char *, int, unsigned int);
+int textFormatBuffer(unsigned char [24], unsigned char *, int, unsigned int);
 int asdSequenceRequest(...);
 int asdOperatorNew(void);
 int FUN_0019ea5c(unsigned int);
@@ -29,7 +29,7 @@ extern unsigned char *DAT_00588eec; /* 0x588eec */
 extern int g_shop; /* 0x588f98 */
 extern int DAT_005f1b74; /* 0x5f1b74 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0019ea5c. */
@@ -114,7 +114,7 @@ unsigned int FUN_0027dda4(void)
           *DAT_00588eec = 1;
           temp_v8[1] = 0xffffffff;
           temp_v8[0] = 999;
-          FUN_00100388(temp_v9,&LAB_0027e0c8,999,temp_v6);
+          textFormatBuffer(temp_v9,&LAB_0027e0c8,999,temp_v6);
           asdSequenceRequest(4,temp_v8,0x20);
         }
         else {

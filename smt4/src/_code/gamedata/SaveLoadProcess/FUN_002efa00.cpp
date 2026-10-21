@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern unsigned char DAT_0043e2f0; /* 0x43e2f0 */
+extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
 
 /* Supplied declaration required: FUN_001a1d08. */
@@ -47,12 +47,12 @@ unsigned int FUN_002efa00(void)
     if (temp_v2 != 5) {
       if (temp_v2 == 6) {
         DAT_0043e2f3 = 1;
-        DAT_0043e2f0 = 1;
+        g_byteSettings = 1;
         return 0xffffffff;
       }
       if (temp_v2 == 7) {
         DAT_0043e2f3 = 0;
-        DAT_0043e2f0 = 1;
+        g_byteSettings = 1;
         return 0xffffffff;
       }
     }

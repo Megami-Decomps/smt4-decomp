@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022a478(char *, unsigned int);
+int recordTrackDirtyValue(char *, unsigned int);
 int FUN_00298d64(char *, unsigned int);
 int flaggedEntrySetValueB(char *, int);
 int flaggedEntrySetValueA(char *, int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0022a478. */
+/* Supplied declaration required: recordTrackDirtyValue. */
 extern int flaggedEntryGetValueB(char *);
 /* Supplied declaration required: FUN_00298d64. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
@@ -98,7 +98,7 @@ void FUN_00230954(int param_1,char *param_2)
         flaggedEntrySetValueA(param_2 + 0x10,temp_v0);
       }
       if (*param_2 == '\x01') {
-        FUN_0022a478(param_2 + 0x10,temp_v2);
+        recordTrackDirtyValue(param_2 + 0x10,temp_v2);
         flaggedEntrySetValueB(param_2 + 0x10,temp_v0);
         return;
       }

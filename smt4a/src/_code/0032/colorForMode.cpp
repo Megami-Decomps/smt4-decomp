@@ -2,9 +2,9 @@
 
 extern "C" {
 
-extern u32 FUN_002a1be8(u32 color);
+extern u32 processRunQuery(u32 color);
 
-/* Colour for `mode`: 0 = FUN_002a1be8 of the default, 1 = transparent, else the default 0xE7E3FFFF. */
+/* Colour for `mode`: 0 = processRunQuery of the default, 1 = transparent, else the default 0xE7E3FFFF. */
 u32 colorForMode(s32 mode)
 {
     u32 color = 0xE7E3FFFF;
@@ -15,7 +15,7 @@ u32 colorForMode(s32 mode)
         }
         return color;
     }
-    return FUN_002a1be8(0xE7E3FFFF);
+    return processRunQuery(0xE7E3FFFF);
 }
 
 } /* extern "C" */

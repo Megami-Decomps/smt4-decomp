@@ -1,17 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002342b8` (_code @ 0x2342b8, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r1, #2 where the compiled block uses ldr r1, [r0]. */
+#include "common.h"
+
+struct MapInterface {
+    u8 unk00[0x3C]; // 0x00
+    u32 state;      // 0x3C
+};
 
 extern "C" {
-
-extern int g_mapIf; /* 0x58103c */
-
+extern MapInterface* g_mapIf;
 
 void FUN_002342b8(void)
-
 {
-  *(unsigned int *)(g_mapIf + 0x3c) = 2;
-  return;
+    g_mapIf->state = 2;
 }
-
-} /* extern "C" */
+}

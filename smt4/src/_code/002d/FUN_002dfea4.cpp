@@ -1,37 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dfea4` (_code @ 0x2dfea4, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler schedules address formation, prologue and conditional return differently from retail. */
+#include "common.h"
+namespace { struct Map { u8 padding[0xcbd0]; u8 active; u8 reserved[0x1b]; u32 manager; }; }
 extern "C" {
-
-int asdMdlManagerDestroy(unsigned int);
-int asdTMTexTableReleaseNode(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int g_mapIf; /* 0x447a78 */
-
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-
-
+extern Map *g_mapIf;
+void asdMdlManagerDestroy(u32 manager);
+void asdTMTexTableReleaseNode(u32 table, u32 index);
 void FUN_002dfea4(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = g_mapIf;
-  puVar2 = (unsigned char *)(g_mapIf + 0xcbd0);
-  asdMdlManagerDestroy(*(unsigned int *)(g_mapIf + 0xcbec));
-  *(unsigned int *)(temp_v0 + 0xcbec) = 0;
-  *puVar2 = 0;
-  asdTMTexTableReleaseNode(10,0x25);
-  return;
+    Map *map = g_mapIf;
+    asdMdlManagerDestroy(map->manager);
+    map->manager = 0;
+    map->active = 0;
+    asdTMTexTableReleaseNode(10, 37);
 }
-
-} /* extern "C" */
+}

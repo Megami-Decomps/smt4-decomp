@@ -9,7 +9,7 @@ int asdOperatorDelete(void);
 int aocMainShutdown(void);
 int FUN_0047c950(void);
 
-extern unsigned int *DAT_00570278; /* 0x570278 */
+extern unsigned int *g_sceneResourceWork; /* 0x570278 */
 
 extern int jobFind(unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -26,15 +26,15 @@ unsigned int FUN_00270a70(void)
   unsigned int *puVar2;
   int temp_v0;
   
-  puVar1 = DAT_00570278;
-  if (DAT_00570278 != (unsigned int *)0x0) {
-    temp_v0 = jobFind(*DAT_00570278);
-    puVar2 = DAT_00570278;
+  puVar1 = g_sceneResourceWork;
+  if (g_sceneResourceWork != (unsigned int *)0x0) {
+    temp_v0 = jobFind(*g_sceneResourceWork);
+    puVar2 = g_sceneResourceWork;
     if ((temp_v0 != 0) || (*(char *)(puVar1 + 6) == '\0')) {
       return 1;
     }
-    if (DAT_00570278 != (unsigned int *)0x0) {
-      *(unsigned char *)(DAT_00570278 + 6) = 1;
+    if (g_sceneResourceWork != (unsigned int *)0x0) {
+      *(unsigned char *)(g_sceneResourceWork + 6) = 1;
       if (puVar2[7] != 0) {
         aocMainShutdown();
         if (puVar2[7] != 0) {
@@ -43,8 +43,8 @@ unsigned int FUN_00270a70(void)
           puVar2[7] = 0;
         }
       }
-      asdMemFree(DAT_00570278);
-      DAT_00570278 = (unsigned int *)0x0;
+      asdMemFree(g_sceneResourceWork);
+      g_sceneResourceWork = (unsigned int *)0x0;
     }
   }
   return 0;

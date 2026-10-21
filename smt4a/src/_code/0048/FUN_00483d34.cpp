@@ -36,8 +36,8 @@ extern int FUN_0048408c(int, int, unsigned int, unsigned int);
 extern int FUN_00485b14(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
-extern int FUN_004d0524(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestConfirmPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -61,7 +61,7 @@ void FUN_00483d34(int param_1)
   FUN_00163aa4(param_1 + 0x294);
   temp_v5 = FUN_00485b14(param_1);
   *(int *)(param_1 + 0x568) = temp_v5;
-  if ((temp_v5 == 1 || temp_v5 == 2) || (temp_v6 = FUN_004d0524(), temp_v6 != 0)) {
+  if ((temp_v5 == 1 || temp_v5 == 2) || (temp_v6 = inputIsQuestConfirmPressed(), temp_v6 != 0)) {
     return;
   }
   if ((temp_v5 == 6) || (temp_v6 = FUN_004d0584(), temp_v6 != 0)) {
@@ -106,7 +106,7 @@ void FUN_00483d34(int param_1)
     *(unsigned short *)(param_1 + 0x560) = 3;
     return;
   }
-  temp_v5 = FUN_004d0554();
+  temp_v5 = inputIsQuestMenuPressed();
   if (temp_v5 != 0) {
     temp_v5 = 0;
     while ((-1 < (char)temp_v5 &&

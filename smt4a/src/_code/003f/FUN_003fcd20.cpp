@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0020214c(...);
 int FUN_0046e150(...);
 
@@ -27,7 +27,7 @@ struct fn_003fcd20_arg0 {
 
 extern int *g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0046e150. */
 extern int FUN_004705ec(int *, int, unsigned int);
@@ -44,7 +44,7 @@ void FUN_003fcd20(fn_003fcd20_arg0 *param_1,int param_2)
   int aiStack_50 [16];
   
   piVar3 = aiStack_50;
-  FUN_00100388(aiStack_50,"event/npcgtix/npc%03d.bin",param_2);
+  textFormatBuffer(aiStack_50,"event/npcgtix/npc%03d.bin",param_2);
   param_1->field_0x8 = 2;
   param_1->field_0xc = param_2;
   temp_v1 = FUN_004705ec(g_aocSystem,param_2,1);

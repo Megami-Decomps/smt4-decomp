@@ -32,7 +32,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 
 
 void FUN_0047c00c(int param_1)
@@ -77,7 +77,7 @@ void FUN_0047c00c(int param_1)
     temp_v4 = 0.36f;
     FUN_001879d0(g_renderCtx);
     temp_v0 = (int)temp_v4;
-    temp_v1 = FUN_00341940(0x2f);
+    temp_v1 = textureGetIndexedResource(0x2f);
     if (temp_v1 != 0) {
       FUN_001835b4(2,0x2f,0x7a,temp_v0,0,0xb);
       FUN_001835b4(2,0x2f,0x7b,temp_v0,0,0xb);

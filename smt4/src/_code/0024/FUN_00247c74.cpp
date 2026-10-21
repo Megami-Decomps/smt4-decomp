@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026e70c(...);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
 typedef struct fn_00247c74_arg0 fn_00247c74_arg0;
@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -75,9 +75,9 @@ void FUN_00247c74(fn_00247c74_arg0 *param_1,int param_2)
       (**(romwright_code **)(temp_v0 + 0x12c8))();
       *(unsigned char *)(temp_v0 + 0x12c4) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x2d,0x12,0,temp_v4,param_2 + 3);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v0 = g_titleScene;
     temp_v1 = packNibblesAndByte(6,7,0);
     piVar5 = (int *)(temp_v0 + 0x12ac);

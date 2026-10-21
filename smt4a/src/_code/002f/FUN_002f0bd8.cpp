@@ -1,25 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f0bd8` (_code @ 0x2f0bd8, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldr r1, [pc, #52]'; compiler emits 'ldr r1, [pc, #36]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-void FUN_002f0bd8(unsigned int param_1)
-
-{
-  int temp_v0;
-  
-  if (*(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x2db8) < param_1) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x2db8) - param_1;
-  }
-  *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x2db8) = temp_v0;
-  return;
+extern struct {
+    u32 reserved;
+    struct {
+        u8 pad[0x2DB8];
+        u32 count;
+    } *table;
 }
-
-} /* extern "C" */
+g_gameDataBlocks;
+u32 FUN_002f0bd8(u32 value) {
+    u32 count=g_gameDataBlocks.table->count;
+    if(count<value)count=value;
+    g_gameDataBlocks.table->count=count-value;
+    return count-value;
+}
+}

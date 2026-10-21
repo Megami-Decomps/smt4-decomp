@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
 int FUN_001628c0(unsigned char *, unsigned int, int, int);
 int gameFlagIsSet(...);
@@ -37,7 +37,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern int btlGetMainState(void);
 extern unsigned int FUN_0014af98(void);
@@ -307,7 +307,7 @@ unsigned char * FUN_003ece9c(int param_1)
           asdOperatorNewD();
           sysMemClear();
           temp_v12 = 0;
-          FUN_00100388(temp_v22,&LAB_0047ec84);
+          textFormatBuffer(temp_v22,&LAB_0047ec84);
           temp_v3 = 0;
           if (temp_v3 < temp_v6) {
             do {
@@ -345,9 +345,9 @@ unsigned char * FUN_003ece9c(int param_1)
             puVar2 = (unsigned char *)0x0;
           }
           else {
-            FUN_00100388(temp_v23,"I%03u%03u");
+            textFormatBuffer(temp_v23,"I%03u%03u");
             if ((temp_v1 & 0xff) != 0) {
-              FUN_00100388(temp_v23,"%s%s");
+              textFormatBuffer(temp_v23,"%s%s");
             }
             temp_v2 = FUN_0014af98();
             temp_v19 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);

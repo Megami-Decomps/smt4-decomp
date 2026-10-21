@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableReleaseNode(...);
 int FUN_0019d96c(...);
 int FUN_001a6568(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 int FUN_001b2d54(...);
 
 typedef struct fn_0019c720_arg0 fn_0019c720_arg0;
@@ -45,7 +45,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_0019d96c. */
 extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_001b2d54. */
 
 
@@ -98,7 +98,7 @@ void FUN_0019c720(fn_0019c720_arg0 *param_1,int param_2,int param_3)
         }
         else {
           temp_v1 = *(unsigned int *)&param_1->field_0x10;
-          FUN_001acf98(temp_v1,param_1->field_0x14);
+          asdTMTexLoadMainHeap(temp_v1,param_1->field_0x14);
         }
         *(unsigned int *)&param_1->field_0xc = temp_v1;
         if (param_1->field_0x80 != 0) {

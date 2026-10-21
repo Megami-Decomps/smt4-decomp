@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
@@ -12,7 +12,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_001654f8(...);
 int FUN_00180118(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 int FUN_0023723c(...);
 int FUN_002804b0(...);
 int sysMemClear(...);
@@ -49,7 +49,7 @@ extern unsigned char DAT_0052c254; /* 0x52c254 */
 extern unsigned char DAT_0052c284; /* 0x52c284 */
 extern unsigned int *g_campCecRanking; /* 0x57f11c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
@@ -60,7 +60,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_0019e52c(unsigned short);
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
@@ -113,7 +113,7 @@ void FUN_0037b7e4(void)
   temp_v7 = 0;
   taskCreateDraw(&LAB_0037bc38,0xea,0,0,FUN_00343e5c,0);
   puVar2[1] = 0;
-  FUN_001acf98(0x2e,1);
+  asdTMTexLoadMainHeap(0x2e,1);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 0x26);
   temp_v10 = &DAT_0052c284;
   temp_v7 = 0x30;
@@ -176,7 +176,7 @@ void FUN_0037b7e4(void)
       temp_v2 = (unsigned int)*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x31);
       if (temp_v2 != 0) {
         FUN_00180118();
-        FUN_00100388(&temp_v7,&LAB_0037bc84,temp_v2);
+        textFormatBuffer(&temp_v7,&LAB_0037bc84,temp_v2);
       }
       else {
         rt_aeabi_memclr(&temp_v7,0x80);
@@ -200,7 +200,7 @@ void FUN_0037b7e4(void)
         temp_v4 = FUN_0019e52c(temp_v0);
         if (temp_v4 != 0) {
           FUN_00180118();
-          FUN_00100388(&temp_v7,&LAB_0037bc84,temp_v4);
+          textFormatBuffer(&temp_v7,&LAB_0037bc84,temp_v4);
         }
         else {
           rt_aeabi_memclr(&temp_v7,0x80);

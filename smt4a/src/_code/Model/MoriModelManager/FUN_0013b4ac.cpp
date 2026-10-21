@@ -1,44 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013b4ac` (_code @ 0x13b4ac, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses add r1, pc, #32 where the compiled block uses ldr r1, [pc, #36]. */
+#include "common.h"
+
+struct HandleRegistry;
 
 extern "C" {
+extern HandleRegistry* g_handleRegistry;
+extern const char LAB_0013b4ec[];
 
-int FUN_001463b4(void);
-int FUN_00178b04(int, unsigned char *, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char LAB_0013b4ec; /* 0x13b4ec */
-extern int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: FUN_001463b4. */
-extern unsigned int FUN_001464b4(void);
-/* Supplied declaration required: FUN_00178b04. */
-
+void* FUN_00178b04(u32 size, const char* sourceFile, u32 sourceLine);
+HandleRegistry* FUN_001464b4(void* storage);
+void FUN_001463b4(HandleRegistry* registry);
 
 void FUN_0013b4ac(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (g_handleRegistry == 0) {
-    temp_v0 = 0x4c;
-    FUN_00178b04(0x4c,&LAB_0013b4ec,0x28);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = FUN_001464b4();
+    if (g_handleRegistry == NULL) {
+        HandleRegistry* registry = static_cast<HandleRegistry*>(
+            FUN_00178b04(0x4C, LAB_0013b4ec, 0x28));
+        if (registry != NULL) {
+            registry = FUN_001464b4(registry);
+        }
+        g_handleRegistry = registry;
+        FUN_001463b4(registry);
     }
-    g_handleRegistry = temp_v1;
-    FUN_001463b4();
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

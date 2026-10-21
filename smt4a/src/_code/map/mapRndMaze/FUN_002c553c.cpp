@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00178b04(...);
 int FUN_0035d1e0(void);
-int FUN_003fd784(...);
+int controllerSetPosition(...);
 int FUN_003fe86c(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
@@ -56,13 +56,13 @@ extern int DAT_006105d8; /* 0x6105d8 */
 extern int DAT_006105e0; /* 0x6105e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0035d1e0. */
 extern int FUN_00376f94(void);
 extern unsigned int FUN_003857c8(int);
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
@@ -208,7 +208,7 @@ void FUN_002c553c(void)
   temp_v7 = FUN_00376f94();
   if (temp_v7 >= 100) {
     temp_v6 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
-    FUN_00100388(temp_v12,&LAB_002c59b4,temp_v6);
+    textFormatBuffer(temp_v12,&LAB_002c59b4,temp_v6);
     temp_v9 = 0x20;
     FUN_00178b04(0x20,&LAB_002c59d0,0x862);
     temp_v7 = 0;
@@ -233,7 +233,7 @@ void FUN_002c553c(void)
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
     FUN_003fe86c(temp_v6,0,2);
     FUN_0040ace8(g_handleRegistry,temp_v6);
-    FUN_00100388(temp_v12,&LAB_002c5a04);
+    textFormatBuffer(temp_v12,&LAB_002c5a04);
     temp_v9 = 0x20;
     FUN_00178b04(0x20,&LAB_002c59d0,0x878);
     temp_v7 = 0;
@@ -259,14 +259,14 @@ void FUN_002c553c(void)
     if (0 < (&DAT_0060ffa4)[temp_v7]) {
       temp_v9 = FUN_00376f94();
       if (temp_v9 != 0) {
-        FUN_00100388(temp_v12,&LAB_002c5db0,temp_v7 + 1);
+        textFormatBuffer(temp_v12,&LAB_002c5db0,temp_v7 + 1);
         if (temp_v9 >= 100) {
           temp_v6 = FUN_003857c8((int)*(float *)(temp_v15 + 0x1c4));
-          FUN_00100388(temp_v12,&LAB_002c5dc8,temp_v6,temp_v7 + 1);
+          textFormatBuffer(temp_v12,&LAB_002c5dc8,temp_v6,temp_v7 + 1);
         }
       }
       else {
-        FUN_00100388(temp_v12,&LAB_002c5db0,temp_v7 + 1);
+        textFormatBuffer(temp_v12,&LAB_002c5db0,temp_v7 + 1);
       }
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 3)) {
         if (temp_v7 != 4) {
@@ -284,7 +284,7 @@ void FUN_002c553c(void)
           FUN_003fe86c(temp_v6,0,2);
           FUN_0040ace8(g_handleRegistry,temp_v6);
           if (temp_v7 != 5) {
-            FUN_003fd784(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
+            controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
           }
         }
         else {
@@ -303,7 +303,7 @@ void FUN_002c553c(void)
           temp_v6 = *(unsigned int *)(*(int *)(temp_v14 + 0x3b4) + 4);
           FUN_003fe86c(temp_v6,0,2);
           FUN_0040ace8(g_handleRegistry,temp_v6);
-          FUN_003fd784(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
+          controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
       }
       else {
@@ -323,7 +323,7 @@ void FUN_002c553c(void)
         FUN_003fe86c(temp_v6,0,2);
         FUN_0040ace8(g_handleRegistry,temp_v6);
         if (temp_v7 != 5) {
-          FUN_003fd784(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
+          controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
       }
       temp_v9 = 0;
@@ -349,7 +349,7 @@ void FUN_002c553c(void)
             FUN_003fe86c(temp_v6,0,2);
             FUN_0040ace8(g_handleRegistry,temp_v6);
             if (temp_v7 != 5) {
-              FUN_003fd784(temp_v6);
+              controllerSetPosition(temp_v6);
             }
           }
         } while( 1 );

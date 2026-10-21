@@ -61,7 +61,7 @@ extern unsigned char DAT_00447a34; /* 0x447a34 */
 extern unsigned char DAT_004a1264; /* 0x4a1264 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_002481b0(void);
+extern int dataTableGetRecordFortyEight(void);
 /* Supplied declaration required: aocDataTable23GetEntry. */
 extern unsigned int *dataTable23Sub0GetEntry(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
@@ -360,7 +360,7 @@ LAB_0027bbcc:
             if (temp_v30 == 0) {
               temp_v4 = *puVar2;
               temp_v10 = 0;
-              temp_v1 = FUN_002481b0();
+              temp_v1 = dataTableGetRecordFortyEight();
               if (0 < temp_v1) {
                 do {
                   temp_v1 = temp_v10;
@@ -383,7 +383,7 @@ LAB_0027bc38:
                     goto LAB_0027bc48;
                   }
                   temp_v10 = temp_v10 + 1;
-                  temp_v1 = FUN_002481b0();
+                  temp_v1 = dataTableGetRecordFortyEight();
                 } while (temp_v10 < temp_v1);
                 temp_v33 = -1;
               }

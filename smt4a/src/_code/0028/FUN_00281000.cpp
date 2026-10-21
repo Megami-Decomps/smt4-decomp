@@ -1,26 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00281000` (_code @ 0x281000, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vstr s0, [r0] where the compiled block uses vstr s0, [r0]. */
+#include "common.h"
 
-extern "C" {
+struct ValueSettings {
+    f32 value;       // 0x00
+    s16 firstMode;   // 0x04
+    s16 secondMode;  // 0x06
+    u16 firstExtra;  // 0x08
+    u16 secondExtra; // 0x0A
+};
 
-
-void FUN_00281000(unsigned int *param_1,int param_2,int param_3,unsigned short param_4,unsigned short param_5)
-
+extern "C" void FUN_00281000(ValueSettings* settings, f32 value,
+                              s32 firstMode, s32 secondMode,
+                              u16 firstExtra, u16 secondExtra)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  *param_1 = in_s0;
-  *(short *)(param_1 + 1) = (short)param_2;
-  *(short *)((int)param_1 + 6) = (short)param_3;
-  if (param_2 == 3) {
-    *(unsigned short *)(param_1 + 2) = param_4;
-  }
-  if (param_3 == 3) {
-    *(unsigned short *)((int)param_1 + 10) = param_5;
-  }
-  return;
+    settings->value = value;
+    settings->firstMode = firstMode;
+    if (firstMode == 3) {
+        settings->firstExtra = firstExtra;
+    }
+    settings->secondMode = secondMode;
+    if (secondMode == 3) {
+        settings->secondExtra = secondExtra;
+    }
 }
-
-} /* extern "C" */

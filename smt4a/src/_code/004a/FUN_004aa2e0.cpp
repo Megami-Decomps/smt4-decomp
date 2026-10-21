@@ -12,7 +12,7 @@ int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(unsigned int *, int, int, int, int, int);
 int FUN_00270104(void);
 int FUN_002cb438(unsigned int *, unsigned int, unsigned int);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int menu32Advance(void);
 int FUN_003756c8(int);
 int fillTwoWordsWithByte(unsigned int *, unsigned int);
@@ -51,7 +51,7 @@ extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001a9104. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -61,11 +61,11 @@ extern int FUN_002a21c8(void);
 extern int FUN_002a4878(unsigned int *);
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: menu32Advance. */
 /* Supplied declaration required: FUN_003756c8. */
-extern int FUN_003e8430(void);
-extern unsigned short FUN_003ea1cc(unsigned int, unsigned int);
+extern int btlScriptUnitHasFlags(void);
+extern unsigned short uiFindValidIdOrdinal(unsigned int, unsigned int);
 /* Supplied declaration required: fillTwoWordsWithByte. */
 
 
@@ -161,13 +161,13 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10));
   puVar5 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10)) + 0x1d3f;
   fillTwoWordsWithByte(puVar5,0xffffffff);
-  temp_v0 = FUN_003ea1cc(*puVar1,0);
+  temp_v0 = uiFindValidIdOrdinal(*puVar1,0);
   *(unsigned short *)(puVar1 + 0x1d3f) = temp_v0;
-  temp_v0 = FUN_003ea1cc(*puVar1,1);
+  temp_v0 = uiFindValidIdOrdinal(*puVar1,1);
   *(unsigned short *)((int)puVar1 + 0x74fe) = temp_v0;
-  temp_v0 = FUN_003ea1cc(*puVar1,2);
+  temp_v0 = uiFindValidIdOrdinal(*puVar1,2);
   *(unsigned short *)(puVar1 + 0x1d40) = temp_v0;
-  temp_v0 = FUN_003ea1cc(*puVar1,3);
+  temp_v0 = uiFindValidIdOrdinal(*puVar1,3);
   *(unsigned short *)((int)puVar1 + 0x7502) = temp_v0;
   FUN_001a9104(puVar1 + 0xa31,puVar5);
   puVar5 = puVar1 + 0xa31;
@@ -199,20 +199,20 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
     FUN_00203b40(puVar1 + 0x1928,4,1,4,1,1);
   }
   if (*piVar6 == 0x13 || *piVar6 == 0x16) {
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
   }
   temp_v2 = *piVar6;
   if ((temp_v2 == 0x22 || temp_v2 == 0x23) || temp_v2 == 0x24) {
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
   }
-  temp_v2 = FUN_00167f08();
+  temp_v2 = ifTouchGetButtonHelpValue();
   if (temp_v2 == 0x3f) {
     btlGetMainState();
-    temp_v2 = FUN_003e8430();
+    temp_v2 = btlScriptUnitHasFlags();
     if (temp_v2 == 0) {
-      FUN_00341f88();
+      buttonHelpGetValue();
       sysPlaySe();
     }
   }

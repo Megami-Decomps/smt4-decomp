@@ -4,13 +4,13 @@
 extern "C" {
 
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_004d0524(void);
+s32 inputIsQuestConfirmPressed(void);
 
-/* Returns whether flags 0x49A and 0x404 are set, flag 0x10 is set whenever flag 0xC is, and FUN_004d0524 succeeds. */
+/* Returns whether flags 0x49A and 0x404 are set, flag 0x10 is set whenever flag 0xC is, and inputIsQuestConfirmPressed succeeds. */
 u32 FUN_00328200(void)
 {
     return gameFlagIsSet(0x49A) != 0 && gameFlagIsSet(0x404) != 0 && (gameFlagIsSet(0xC) == 0 || gameFlagIsSet(0x10) != 0) &&
-           FUN_004d0524() != 0;
+           inputIsQuestConfirmPressed() != 0;
 }
 
 } /* extern "C" */

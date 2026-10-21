@@ -1,36 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003002c8` (_code @ 0x3002c8, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldr r1, [r0, #4]'; compiler emits 'mov r4, r0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int asdOperatorDeleteArray(int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: asdOperatorDeleteArray. */
-
-
-void FUN_003002c8(int *param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  *(unsigned char *)(param_1 + 3) = 0;
-  temp_v1 = param_1[1];
-  for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
-    *(unsigned int *)(*param_1 + temp_v0 * 0x34 + 0x10) = 0;
-  }
-  if (*param_1 != 0) {
-    asdOperatorDeleteArray(*param_1 - 8);
-  }
-  *param_1 = 0;
-  if ((int *)param_1[4] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[4] + 4))();
-    param_1[4] = 0;
-  }
-  return;
+struct Element { u8 unk00[0x10]; u32 value; u8 unk14[0x20]; };
+struct Backend;
+struct BackendVtable { void *reserved; void (*destroy)(Backend *); };
+struct Backend { BackendVtable *vtable; };
+struct Object { Element *elements; u32 count, reserved; u8 active; u8 unk0D[3]; Backend *backend; };
+void asdOperatorDeleteArray(void *array);
+void FUN_003002c8(Object *object) {
+    object->active = 0;
+    for (u32 index = 0; index < object->count; ++index) object->elements[index].value = 0;
+    if (object->elements) asdOperatorDeleteArray((u8 *)object->elements - 8);
+    object->elements = NULL;
+    if (object->backend) {
+        object->backend->vtable->destroy(object->backend);
+        object->backend = NULL;
+    }
 }
-
-} /* extern "C" */
+}

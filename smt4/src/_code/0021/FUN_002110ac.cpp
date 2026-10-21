@@ -21,7 +21,7 @@ typedef struct {
 
 extern int FUN_0019e0c0(unsigned int);
 extern int gameDataBlocksGetFlagByteA(void);
-extern int FUN_00262f38(void);
+extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
 extern int FUN_002955fc(void);
@@ -158,7 +158,7 @@ LAB_002112f8:
   default:
     return temp_v4;
   case 10:
-    temp_v2 = FUN_00262f38();
+    temp_v2 = battleTalkIsBustReady();
     if (temp_v2 == 0) {
       return 0;
     }

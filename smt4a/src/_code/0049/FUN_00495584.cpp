@@ -9,7 +9,7 @@ int FUN_00184528(unsigned int *, int);
 int FUN_0019de98(int, int);
 int lmapSceneGetScript(void);
 int FUN_003e5858(void);
-int FUN_004935b0(unsigned int *, unsigned int, unsigned int);
+int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: lmapSceneGetScript. */
 /* Supplied declaration required: FUN_003e5858. */
 extern int fourPtrsAllNull(void);
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 
 
 void FUN_00495584(unsigned int *param_1)
@@ -59,7 +59,7 @@ void FUN_00495584(unsigned int *param_1)
     FUN_00163aa4(puVar5);
     temp_v2 = vec2GetYInt(puVar5);
     temp_v3 = vec2GetXInt(puVar5);
-    FUN_004935b0(param_1 + 0xe9,temp_v3,temp_v2);
+    pointConvertToFloat(param_1 + 0xe9,temp_v3,temp_v2);
     if (*(char *)((int)param_1 + 0x502) == '\0') {
       return;
     }

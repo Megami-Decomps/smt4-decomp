@@ -8,8 +8,8 @@ int asdListBoxSetItemMode3(...);
 int asdListBoxSetItemMode2(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
-int FUN_0025c58c(unsigned int, int, int);
-int FUN_00262914(unsigned int, unsigned char *);
+int asdListBoxCreateDefault(unsigned int, int, int);
+int jobSetText(unsigned int, unsigned char *);
 
 typedef struct fn_003c39fc_arg0 fn_003c39fc_arg0;
 typedef struct fn_003c39fc_arg0_p5c fn_003c39fc_arg0_p5c;
@@ -59,8 +59,8 @@ extern unsigned int DAT_00439ad4; /* 0x439ad4 */
 /* Supplied declaration required: asdListBoxSetItemMode2. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0025c58c. */
-/* Supplied declaration required: FUN_00262914. */
+/* Supplied declaration required: asdListBoxCreateDefault. */
+/* Supplied declaration required: jobSetText. */
 extern unsigned int *gameGetSlotTable(void);
 
 
@@ -73,11 +73,11 @@ void FUN_003c39fc(fn_003c39fc_arg0 *param_1,int param_2)
   unsigned int *puVar3;
   
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
-  FUN_0025c58c(temp_v0,0x73,0);
+  asdListBoxCreateDefault(temp_v0,0x73,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v0;
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
-  FUN_00262914(*(unsigned int *)&param_1->field_0x10,&LAB_003c3d78);
+  jobSetText(*(unsigned int *)&param_1->field_0x10,&LAB_003c3d78);
   puVar3 = (unsigned int *)(param_2 + 0x44a8);
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0,(*puVar3 & 4) >> 2);
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,1,(*puVar3 & 8) >> 3);

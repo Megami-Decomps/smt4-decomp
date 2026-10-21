@@ -1,22 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ddc00` (_code @ 0x1ddc00, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail ldr r1, [r0, #4]; compiler ldr r0, [r0, #4]. */
+#include "common.h"
+
+struct GameWork {
+    /* 0x000 */ u8 unk000[0x1E64];
+    /* 0x1E64 */ s8 status;
+};
+struct GameGlobals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ GameWork *data;
+};
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
+extern GameGlobals g_gameGlobals;
 
-
-int FUN_001ddc00(void)
-
+/* Returns the optional game-work status byte. */
+s32 FUN_001ddc00(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
-    temp_v0 = (int)*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e64);
-  }
-  return temp_v0;
+    if (g_gameGlobals.data == NULL) {
+        return 0;
+    }
+    return g_gameGlobals.data->status;
 }
 
 } /* extern "C" */

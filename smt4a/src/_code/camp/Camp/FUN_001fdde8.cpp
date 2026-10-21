@@ -28,7 +28,7 @@ int FUN_0031f208(...);
 int FUN_0031f27c(...);
 int stateAtF4Apply(void);
 int FUN_003450d4(...);
-int FUN_0035a074(...);
+int engineForwardVariadicCommand(...);
 int FUN_0036cf98(...);
 int FUN_0038b57c(...);
 int FUN_0038b5fc(...);
@@ -46,7 +46,7 @@ int objBStateAllowsAction(void);
 int FUN_003343d8(...);
 int FUN_0033449c(...);
 int objBSetWordByIndex(...);
-int FUN_003720a0(...);
+int gameGlobalsQueueValues(...);
 int FUN_00372100(...);
 int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
@@ -76,7 +76,7 @@ extern int g_camp; /* 0x57f108 */
 #endif
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned short FUN_00167f08(void);
+extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: gameGetPlayerData. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
@@ -114,10 +114,10 @@ extern int FUN_002c2c4c(int);
 /* Supplied declaration required: stateAtF4Apply. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: objBSetWordByIndex. */
-/* Supplied declaration required: FUN_0035a074. */
+/* Supplied declaration required: engineForwardVariadicCommand. */
 extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0036cf98. */
-/* Supplied declaration required: FUN_003720a0. */
+/* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037e0b8. */
@@ -226,7 +226,7 @@ void FUN_001fdde8(int param_1)
       }
       FUN_002c85b0(3);
       FUN_0033449c(1);
-      FUN_003720a0(psVar4,0);
+      gameGlobalsQueueValues(psVar4,0);
       FUN_00372100(psVar4,0);
       FUN_002a7324(1);
       temp_v4 = FUN_002a4860(temp_v13);
@@ -445,11 +445,11 @@ void FUN_001fdde8(int param_1)
       if (temp_v10 != 0) {
         puVar8 = (unsigned int *)gameGetPlayerData();
         temp_v3 = FUN_002bf520();
-        FUN_0035a074(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
+        engineForwardVariadicCommand(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
         stateAtF4Apply();
       }
       else {
-        FUN_003720a0(psVar4,0);
+        gameGlobalsQueueValues(psVar4,0);
         FUN_00372100(psVar4,0);
       }
       eventQueueAddUniqueIfValid(0x100020e);
@@ -529,7 +529,7 @@ void FUN_001fdde8(int param_1)
         }
         *(unsigned char *)(temp_v5 + 0x3d) = 1;
         FUN_0019de98(0,0xf4f4f4ff);
-        temp_v2 = FUN_00167f08();
+        temp_v2 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v2;
         FUN_0020b660(0x2b);
         temp_v3 = 0x100020e;

@@ -9,11 +9,11 @@ int FUN_00211868(int, int);
 int FUN_00244ee0(int);
 int FUN_0025cc34(void);
 int FUN_0025cc8c(void);
-int FUN_0026c77c(int);
-int FUN_0026c7a0(void);
+int communicationBeginTransition(int);
+int communicationSetResultPointer(void);
 int FUN_0026c7b8(unsigned char [68]);
 int devilGetRecord(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002be650(unsigned int, int);
 int FUN_002cd750(int);
 int FUN_0031bb8c(void);
@@ -36,8 +36,8 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 /* Supplied declaration required: FUN_00244ee0. */
 /* Supplied declaration required: FUN_0025cc34. */
 /* Supplied declaration required: FUN_0025cc8c. */
-/* Supplied declaration required: FUN_0026c77c. */
-/* Supplied declaration required: FUN_0026c7a0. */
+/* Supplied declaration required: communicationBeginTransition. */
+/* Supplied declaration required: communicationSetResultPointer. */
 /* Supplied declaration required: FUN_0026c7b8. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
@@ -45,7 +45,7 @@ extern int FUN_002b6a54(int, unsigned short);
 extern int gameGetOptions(void);
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce00(unsigned short);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002cd750. */
 /* Supplied declaration required: FUN_0031bb8c. */
@@ -82,13 +82,13 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       if (temp_v2 + temp_v1 != 0) {
         if (temp_v2 + temp_v1 == 1) {
           temp_v5 = (short)(int)temp_v6;
-          FUN_002be624(temp_v6,&LAB_00227610);
+          textFormatBuffer(temp_v6,&LAB_00227610);
           FUN_0025cc34();
         }
       }
       else {
         temp_v5 = (short)(int)temp_v6;
-        FUN_002be624(temp_v6,&LAB_00227608);
+        textFormatBuffer(temp_v6,&LAB_00227608);
         FUN_0025cc8c();
       }
     }
@@ -99,11 +99,11 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
       if ((*(unsigned int *)(temp_v2 + 8) & 0x3fffff) >> 0x11 != 1) {
         temp_v5 = (short)(int)temp_v6;
-        FUN_002be624(temp_v6,&LAB_00227608);
+        textFormatBuffer(temp_v6,&LAB_00227608);
       }
       else {
         temp_v5 = (short)(int)temp_v6;
-        FUN_002be624(temp_v6,&LAB_00227610);
+        textFormatBuffer(temp_v6,&LAB_00227610);
       }
       FUN_0031bb8c();
     }
@@ -111,10 +111,10 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       temp_v2 = param_5;
       devilGetRecord();
       if (*(char *)(temp_v2 + 10) != '\x01') {
-        FUN_002be624(temp_v6,&LAB_00227608);
+        textFormatBuffer(temp_v6,&LAB_00227608);
       }
       else {
-        FUN_002be624(temp_v6,&LAB_00227610);
+        textFormatBuffer(temp_v6,&LAB_00227610);
       }
       FUN_00244ee0(param_5);
       temp_v5 = (short)param_5;
@@ -124,32 +124,32 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
   case 2:
   case 3:
     temp_v3 = FUN_002bce00(*(unsigned short *)(temp_v2 + 0xc9e8));
-    FUN_002be624(temp_v6,&LAB_00227618,temp_v3);
+    textFormatBuffer(temp_v6,&LAB_00227618,temp_v3);
     FUN_00211868((int)*(short *)(temp_v2 + 0xc9e8),param_4 != 0);
     break;
   case 8:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc9e8);
     FUN_002be650(temp_v4,0);
-    FUN_002be624(temp_v6,&LAB_00227618,temp_v4);
+    textFormatBuffer(temp_v6,&LAB_00227618,temp_v4);
     FUN_002009c4((int)*(short *)(temp_v2 + 0xc9e8));
     break;
   case 9:
   case 10:
   case 0xc:
     if (param_3 != 0) {
-      FUN_002be624(temp_v6,&LAB_0022761c);
+      textFormatBuffer(temp_v6,&LAB_0022761c);
     }
     else {
-      FUN_002be624(temp_v6,&LAB_00227624);
+      textFormatBuffer(temp_v6,&LAB_00227624);
     }
-    FUN_0026c7a0();
+    communicationSetResultPointer();
     break;
   case 0xb:
-    FUN_002be624(temp_v6,&LAB_0022762c);
-    FUN_0026c7a0();
+    textFormatBuffer(temp_v6,&LAB_0022762c);
+    communicationSetResultPointer();
   }
   FUN_0026c7b8(temp_v6);
-  FUN_0026c77c(0);
+  communicationBeginTransition(0);
   return;
 }
 

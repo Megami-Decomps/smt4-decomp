@@ -1,14 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00239218` (_code @ 0x239218, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
+extern KeyedRecord g_keyedRecords[];
 
-int FUN_00239218(int param_1)
-
+/* Returns the indexed keyed record payload. */
+void *FUN_00239218(u32 index)
 {
-  return param_1 * 0x148 + 0x5c60bc;
+    return g_keyedRecords[index].payload;
 }
 
 } /* extern "C" */

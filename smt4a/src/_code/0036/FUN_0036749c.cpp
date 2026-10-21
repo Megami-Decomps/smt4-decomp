@@ -15,7 +15,7 @@ int FUN_00303460(int);
 int FUN_00313648(unsigned int);
 int FUN_00324e38(int);
 int FUN_00327ee8(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -42,8 +42,8 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_00352bc4. */
-extern int FUN_004d0554(void);
+/* Supplied declaration required: mathPositionHeadingDegrees. */
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -102,7 +102,7 @@ void FUN_0036749c(void)
           }
           else {
             temp_v1 = padButtonIsPressed(5);
-            if ((temp_v1 != 0) || (temp_v1 = FUN_004d0554(), temp_v1 != 0)) {
+            if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
               temp_v1 = DAT_005806a4;
               *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
               *(unsigned int *)(temp_v1 + 0xb0) = 0;
@@ -156,12 +156,12 @@ void FUN_0036749c(void)
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v7;
           temp_v4 = *(unsigned int *)(temp_v1 + 0x28);
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           *(unsigned int *)(g_lmapScene + 0x50) = temp_v4;
         }
         else {
           temp_v3 = *(float *)(g_lmapScene + 0x28);
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x50) = temp_v3;
           temp_v0 = DAT_005f16b8;

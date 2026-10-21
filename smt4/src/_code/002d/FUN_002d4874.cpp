@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0019db68(void);
-int FUN_0024ac90(...);
+int mapDestroyOverlayModel(...);
 int mapIfReleaseSlot3(void);
 int FUN_0024f034(int, unsigned int);
-int FUN_00273828(void);
+int mapInterfaceSetStateTwo(void);
 int FUN_0027fa98(unsigned int);
 int FUN_0027fc14(int);
 int FUN_0027fca0(unsigned int);
@@ -40,12 +40,12 @@ extern float DAT_0049f9bc; /* 0x49f9bc */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Supplied declaration required: FUN_0019db68. */
-/* Supplied declaration required: FUN_0024ac90. */
+/* Supplied declaration required: mapDestroyOverlayModel. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: FUN_0024f034. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00273828. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: mapInterfaceSetStateTwo. */
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fc14. */
@@ -169,7 +169,7 @@ void FUN_002d4874(void)
             }
             else {
               temp_v0 = padIsButtonPressed(6);
-              if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
+              if ((temp_v0 != 0) || (temp_v0 = inputIsQuestMenuPressed(), temp_v0 != 0)) {
                 temp_v0 = DAT_004474f4;
                 *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
@@ -239,7 +239,7 @@ void FUN_002d4874(void)
           return;
         }
         if (temp_v1 == 0x5b) {
-          FUN_0024ac90(0x1000212);
+          mapDestroyOverlayModel(0x1000212);
           temp_v0 = g_lmapScene;
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v0 + 8) = 0;
@@ -274,10 +274,10 @@ void FUN_002d4874(void)
       FUN_0027fca0(0xffffffff);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
-      FUN_00273828();
+      mapInterfaceSetStateTwo();
     }
     if ((*(int *)(g_lmapScene + 8) >= 0x1f) && (temp_v0 = mapIfHasSelection(), temp_v0 == 0)) {
-      FUN_0024ac90();
+      mapDestroyOverlayModel();
       temp_v0 = DAT_004474f4;
       *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v0 + 0xac) = 0;

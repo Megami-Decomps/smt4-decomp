@@ -10,7 +10,7 @@ int dataTableFileGetTable(...);
 int FUN_002e5924(int);
 int FUN_003e0cd4(unsigned int *, int);
 int FUN_003ed6e8(int);
-int FUN_003f1994(...);
+int btlLoadBossAppearData(...);
 int FUN_003f26d4(int);
 int FUN_004aa2e0(unsigned int, int);
 int FUN_004f3ee0(...);
@@ -53,7 +53,7 @@ extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: FUN_003e0cd4. */
 /* Supplied declaration required: FUN_003ed6e8. */
 extern int FUN_003f1230(int);
-/* Supplied declaration required: FUN_003f1994. */
+/* Supplied declaration required: btlLoadBossAppearData. */
 /* Supplied declaration required: FUN_003f26d4. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004aa2e0. */
@@ -213,7 +213,7 @@ LAB_003e1f28:
       }
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
       param_1[3] = param_1[3] | 2;
-      FUN_003f1994(param_2);
+      btlLoadBossAppearData(param_2);
       param_1[3] = param_1[3] | 0x10;
     }
   }

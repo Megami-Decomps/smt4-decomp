@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00231240(...);
+int pointConvertToFloat(...);
 int FUN_0029da34(...);
 int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
 int FUN_002b8ee0(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,13 +20,13 @@ extern unsigned int DAT_0043d998; /* 0x43d998 */
 
 extern int FUN_0022caa4(unsigned char *, unsigned int);
 extern int FUN_00231184(void);
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 
@@ -45,12 +45,12 @@ void FUN_003a8ecc(int param_1)
   FUN_002b8ee0(temp_v2,0);
   temp_v0 = vec2GetYInt(temp_v2);
   temp_v1 = vec2GetXInt(temp_v2);
-  FUN_00231240(param_1 + 200,temp_v1,temp_v0);
+  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
   if ((*(char *)(param_1 + 0x186) != '\0') && (temp_v2 = FUN_00231184(), temp_v2 != 0)) {
     FUN_002a0cc8(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_00231240(param_1 + 200,0,0);
+    pointConvertToFloat(param_1 + 200,0,0);
     if (*(char *)(param_1 + 0x5a4) == '\0') {
       temp_v2 = FUN_0023360c(param_1 + 0x20);
       FUN_0029da34(0,1,*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
@@ -60,7 +60,7 @@ void FUN_003a8ecc(int param_1)
     if (temp_v2 == 0) {
       temp_v2 = 0x40226c;
     }
-    FUN_002be624(temp_v3,"%s%s",temp_v2,DAT_0043d998);
+    textFormatBuffer(temp_v3,"%s%s",temp_v2,DAT_0043d998);
     FUN_0029ee6c(temp_v3,0x323232ff);
   }
   return;

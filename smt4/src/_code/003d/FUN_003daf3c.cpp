@@ -1,21 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003daf3c` (_code @ 0x3daf3c, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct OwnerState {
+    /* 0x0000 */ u8 unk00[0x1cfc];
+    /* 0x1cfc */ u32 value;
+};
 extern "C" {
-
-int FUN_002f6afc(unsigned int, int, int);
-
-/* Supplied declaration required: FUN_002f6afc. */
-
-
-void FUN_003daf3c(int param_1,unsigned short param_2,unsigned int param_3,int param_4)
-
+u32 FUN_002f6afc(u32 first, u32 second, s32 enabled, s32 mode);
+/* Applies the requested mode and records its value. */
+void FUN_003daf3c(OwnerState *owner, s32 value, u32 first, s32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002f6afc(param_3,param_2,param_4 != 0);
-  *(unsigned int *)(param_1 + 0x1cfc) = param_3;
-  return;
+    owner->value = FUN_002f6afc(first, (u16)value, second != 0, second);
 }
-
-} /* extern "C" */
+}

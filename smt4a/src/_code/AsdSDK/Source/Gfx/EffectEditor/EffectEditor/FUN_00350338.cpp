@@ -11,7 +11,7 @@ int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
 int FUN_00321e98(...);
 int FUN_00375c74(int, float *, char [4], int *);
-int FUN_00514500(...);
+int randomAdvanceShiftRegister(...);
 int FUN_00514540(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -66,7 +66,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00321e98. */
 /* Supplied declaration required: FUN_00375c74. */
 extern int FUN_0037a844(void);
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -310,7 +310,7 @@ void FUN_00350338(int param_1)
                 FUN_00514540(0);
                 temp_v3 = 0;
                 pfVar7[5] = temp_v10 * (float)temp_v23;
-                FUN_00514500();
+                randomAdvanceShiftRegister();
                 if ((temp_v3 & 1) != 0) {
                   pfVar7[6] = -pfVar7[6];
                 }
@@ -322,7 +322,7 @@ void FUN_00350338(int param_1)
             fStack_74 = pfVar6[3];
             pfVar6[4] = 0.0f;
             if (temp_v25[0] != '\0') {
-              FUN_00514500(0);
+              randomAdvanceShiftRegister(0);
               __aeabi_uidivmod();
               DAT_006472ec = *pfVar6;
               DAT_006472f0 = pfVar6[1];

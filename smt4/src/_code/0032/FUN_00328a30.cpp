@@ -9,7 +9,7 @@ int rt_memcpy_w(...);
 
 extern unsigned char DAT_004d8b40; /* 0x4d8b40 */
 
-extern unsigned int FUN_002468e0(unsigned int, int);
+extern unsigned int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003224c0. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -21,7 +21,7 @@ unsigned char * FUN_00328a30(int param_1,int param_2)
   unsigned int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = FUN_002468e0(*(unsigned int *)(param_1 + 0x14),
+  temp_v0 = linkedFindItemByIndex(*(unsigned int *)(param_1 + 0x14),
                        *(int *)(param_2 + 0xc) + *(int *)(param_1 + 0xc));
   rt_memcpy_w(&DAT_004d8b40,temp_v0,0x90);
   puVar2 = &DAT_004d8b40;

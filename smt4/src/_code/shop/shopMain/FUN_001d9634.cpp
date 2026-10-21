@@ -7,7 +7,7 @@ extern "C" {
 int soundChannelStopAll(int);
 int FUN_002a03d8(...);
 int asdMemFreeNonNull(int);
-int FUN_002be624(unsigned char [24], unsigned char *, int, unsigned int);
+int textFormatBuffer(unsigned char [24], unsigned char *, int, unsigned int);
 int asdOperatorNew(void);
 int asdSequenceRequest(...);
 int FUN_00343b48(void);
@@ -35,7 +35,7 @@ extern int FUN_00287304(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_00343af0(void);
@@ -111,7 +111,7 @@ unsigned int FUN_001d9634(void)
             *DAT_0044df80 = 1;
             temp_v7[1] = 0xffffffff;
             temp_v7[0] = 0x4b;
-            FUN_002be624(temp_v8,&LAB_001d99b0,0x4b,temp_v5);
+            textFormatBuffer(temp_v8,&LAB_001d99b0,0x4b,temp_v5);
             asdSequenceRequest(4,temp_v7,0x20);
           }
           else {

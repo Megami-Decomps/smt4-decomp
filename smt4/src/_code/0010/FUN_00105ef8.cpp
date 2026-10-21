@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned char DAT_0044e0b0; /* 0x44e0b0 */
+extern unsigned char g_soundVolumeSetting; /* 0x44e0b0 */
 extern unsigned char DAT_004c5404; /* 0x4c5404 */
 
 /* Supplied declaration required: FUN_0010e5a4. */
@@ -48,7 +48,7 @@ void FUN_00105ef8(void)
     FUN_0010e5a4();
     FUN_0010e8e8();
     FUN_0010edbc();
-    FUN_0011a324((*(unsigned char *)((unsigned char *)&DAT_0044e0b0 + 0x1)));
+    FUN_0011a324((*(unsigned char *)((unsigned char *)&g_soundVolumeSetting + 0x1)));
     memClear(&DAT_004c5404,0x80);
     jyoucyuGetTableEntry(1);
     return;

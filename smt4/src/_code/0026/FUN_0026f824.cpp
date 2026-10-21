@@ -8,7 +8,7 @@ int FUN_001a1110(...);
 int FUN_001dd930(...);
 int FUN_00295a18(...);
 int FUN_00299370(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int memClear(...);
 int FUN_003c1ef4(...);
 int strncpy(...);
@@ -32,7 +32,7 @@ extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00299370. */
 extern unsigned int *gameGetSlotTable(void);
 extern short *gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003c1ef4. */
 
@@ -86,7 +86,7 @@ void FUN_0026f824(int param_1)
     psVar2[0x16] = psVar2[0xf];
     FUN_001dd930();
     temp_v0 = gameDataGetPlayerName();
-    FUN_002be624(temp_v0,"沂覂讂膂蒂辂㴀");
+    textFormatBuffer(temp_v0,"沂覂讂膂蒂辂㴀");
     FUN_00295a18(0x370,1);
   }
   return;

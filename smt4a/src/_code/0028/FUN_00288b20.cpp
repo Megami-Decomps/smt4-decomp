@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -40,7 +40,7 @@ extern unsigned char LAB_0028929c; /* 0x28929c */
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -59,7 +59,7 @@ extern int FUN_002c7e3c(void);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_00389d9c. */
 extern unsigned int FUN_003df57c(int, unsigned int);
-extern int FUN_004bca68(unsigned char *, int);
+extern int recordContainsPairedId(unsigned char *, int);
 extern unsigned int FUN_004bcbb4(unsigned char *, int);
 /* Supplied declaration required: FUN_004bd6b0. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -169,15 +169,15 @@ LAB_00288c34:
   temp_v3 = FUN_001834a4(0x12,0x42b);
   if ((param_7 == 0) || (param_3 != 0)) {
     if (param_6 != 0) {
-      FUN_00100388(temp_v13,&LAB_00288ef0);
+      textFormatBuffer(temp_v13,&LAB_00288ef0);
     }
     else {
       temp_v6 = FUN_0014bd84(param_3);
-      FUN_00100388(temp_v13,&LAB_00288f34,temp_v6);
+      textFormatBuffer(temp_v13,&LAB_00288f34,temp_v6);
     }
   }
   else {
-    FUN_00100388(temp_v13,&LAB_00288efc);
+    textFormatBuffer(temp_v13,&LAB_00288efc);
     temp_v5 = 0x9b9b9bff;
   }
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,
@@ -199,7 +199,7 @@ LAB_00288c34:
     else {
       FUN_0035ad50(*(unsigned short *)(temp_v0 + 0x598),temp_v11);
     }
-    temp_v3 = FUN_004bca68(temp_v11,param_3);
+    temp_v3 = recordContainsPairedId(temp_v11,param_3);
     if (temp_v3 == 0) {
       FUN_004bd6b0(temp_v11,param_3,temp_v16 - 0x42c);
     }
@@ -214,7 +214,7 @@ LAB_00288c34:
     ;
     if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v4 = FUN_002c7e3c(), temp_v4 != 4)) {
       if ((*(int *)(temp_v0 + 0x518) == 0xe) &&
-         (temp_v4 = FUN_004bca68(temp_v11,param_3), temp_v4 == 0)) {
+         (temp_v4 = recordContainsPairedId(temp_v11,param_3), temp_v4 == 0)) {
         FUN_004bd6b0(temp_v11,param_3,0);
       }
       FUN_00389d9c(temp_v11,temp_v2,
@@ -234,7 +234,7 @@ LAB_00288c34:
                      &LAB_00289298,temp_v5);
       }
       else {
-        FUN_00100388(temp_v13,&LAB_0028929c);
+        textFormatBuffer(temp_v13,&LAB_0028929c);
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      temp_v13);

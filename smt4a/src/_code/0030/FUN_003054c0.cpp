@@ -1,24 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003054c0` (_code @ 0x3054c0, 0xe bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler saves r4 for stack alignment; retail saves only lr. */
+#include "common.h"
 extern "C" {
-
-extern int ownerChildValue(void);
-
-
-unsigned int FUN_003054c0(void)
-
-{
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = ownerChildValue();
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x10);
-  }
-  return temp_v1;
+struct Child { u8 unk00[0x10]; u32 value; };
+Child *ownerChildValue(void *owner);
+/* Returns the owner's child value, or zero if no child exists. */
+u32 FUN_003054c0(void *owner) {
+    Child *child = ownerChildValue(owner);
+    return child != NULL ? child->value : 0;
 }
-
-} /* extern "C" */
+}

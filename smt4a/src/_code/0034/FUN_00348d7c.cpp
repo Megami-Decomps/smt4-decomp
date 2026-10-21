@@ -27,8 +27,8 @@ extern unsigned int *DAT_0057f240; /* 0x57f240 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_00162858(void);
-extern unsigned int FUN_00167f08(void);
+extern int campIsState85(void);
+extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_0049d140. */
 /* Supplied declaration required: FUN_0049d3f0. */
 
@@ -53,10 +53,10 @@ void FUN_00348d7c(int param_1)
   taskCreateDraw("HOW_TO UR",0xdd,0,0,&LAB_002c2bac,0,0,*puVar2);
   taskCreateDraw("HOW_TO DD",0xeb,0,0,&LAB_002c2b88,0,0,*puVar2);
   FUN_0049d3f0(puVar2);
-  temp_v1 = FUN_00167f08();
+  temp_v1 = ifTouchGetButtonHelpValue();
   puVar2[0x11b] = temp_v1;
   puVar2[0x11c] = param_1;
-  temp_v2 = FUN_00162858();
+  temp_v2 = campIsState85();
   if ((temp_v2 == 0) && (param_1 != 3)) {
     temp_v0 = 0;
   }

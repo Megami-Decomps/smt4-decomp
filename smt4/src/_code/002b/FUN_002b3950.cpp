@@ -1,22 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b3950` (_code @ 0x2b3950, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-
-
-void FUN_002b3950(unsigned int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int in_fpscr;
-  
-  VectorUnsignedToFloat(param_1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return;
+namespace {
+struct InterpolationEntry { f32 base; f32 unused; f32 step; f32 tail; };
 }
+extern "C" {
+extern InterpolationEntry DAT_00407ed0[];
 
-} /* extern "C" */
+/* Interpolates within the selected table entry using the packed low-byte fraction. */
+f32 FUN_002b3950(u32 packed)
+{
+    f32 fraction = (f32)(packed & 0xff) / 256.0f;
+    InterpolationEntry *entry = &DAT_00407ed0[packed >> 8];
+    return entry->base + entry->step * fraction;
+}
+}

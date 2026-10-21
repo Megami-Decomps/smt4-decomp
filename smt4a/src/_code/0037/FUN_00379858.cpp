@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00379858` (_code @ 0x379858, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler schedules the prologue, loads and argument setup differently from retail. */
+#include "common.h"
+
 
 extern "C" {
-
-int dataTableGet(int, int);
-int FUN_0046c35c(int, int, int);
-
-extern int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetCount(void);
-/* Supplied declaration required: FUN_0046c35c. */
-
-
-int FUN_00379858(void)
-
+extern void *g_aocSystem;
+void dataTableGet(u32 file, u32 table);
+u32 dataTableGetCount(void);
+u32 FUN_0046c35c(void *system, u32 category, u32 slot);
+u32 FUN_00379858(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  dataTableGet(0x2d,4);
-  temp_v0 = dataTableGetCount();
-  temp_v1 = g_aocSystem;
-  FUN_0046c35c(g_aocSystem,0x25,4);
-  return temp_v1 + temp_v0;
+    dataTableGet(45, 4);
+    u32 count = dataTableGetCount();
+    return FUN_0046c35c(g_aocSystem, 37, 4) + count;
 }
-
-} /* extern "C" */
+}

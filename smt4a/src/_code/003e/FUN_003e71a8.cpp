@@ -8,7 +8,7 @@ int asdTMTexTableLoadTmx(int, int);
 int ifTouchRegionRemove(void);
 int asdTMTexTableNodeIsLoaded(int, int);
 int asdTMTexTableReleaseNode(int, int);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_001f4908(int, int, int);
 int ifTouchRegionAdd(int, int, int, int);
 int asdTMTexTableFreeEntry(...);
@@ -27,12 +27,12 @@ extern int FUN_001643a0(void);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_001f4908. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: ref208SetPair1C. */
 /* Supplied declaration required: FUN_003cbb0c. */
@@ -68,7 +68,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     param_1[10] = 0x42700000;
     clearWordHalfByte(param_1 + 0x11);
     *(unsigned char *)((int)param_1 + 0x4b) = 0;
-    temp_v0 = FUN_00341940(0x22);
+    temp_v0 = textureGetIndexedResource(0x22);
     if (temp_v0 == 0) {
       asdTMTexTableLoadTmx(0x22,0);
       *(unsigned char *)((int)param_1 + 0x4b) = 1;
@@ -77,7 +77,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     do {
       temp_v1 = asdTMTexTableNodeIsLoaded(0x22,temp_v0);
       if (temp_v1 == 0) {
-        FUN_001acf98(0x22,temp_v0);
+        asdTMTexLoadMainHeap(0x22,temp_v0);
         *(unsigned char *)((int)param_1 + temp_v0 + 0x44) = 1;
       }
       temp_v7 = (unsigned int)temp_v8;

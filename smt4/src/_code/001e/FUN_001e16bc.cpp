@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00311cbc's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Compares word record keys. */
+s32 FUN_001e16bc(const s32 *left, const s32 *right)
+{
+    return *left - *right;
+}
+
+} /* extern "C" */

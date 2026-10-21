@@ -1,19 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `jobGetStatus` (_code @ 0x165058, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler combines the two status-word loads into ldrd. */
+#include "common.h"
+
+namespace { struct JobWork { u32 job; s32 first; s32 second; }; }
 
 extern "C" {
-
-extern int jobGetWork(void);
-
-
-int jobGetStatus(void)
-
+/* Reads or updates the current object state. */
+JobWork *jobGetWork(u32 job);
+s32 jobGetStatus(u32 job)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  return *(int *)(temp_v0 + 8) + *(int *)(temp_v0 + 4);
+    JobWork *work = jobGetWork(job);
+    return work->second + work->first;
 }
-
-} /* extern "C" */
+}

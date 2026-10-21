@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_00218460(BtlUiObjC *obj);
+void saveIsSelectionOutsideRange(BtlUiObjC *obj);
 
 extern BtlUiGlobals g_btlUi;
 
 void FUN_003ae838(void)
 {
-    FUN_00218460(&g_btlUi.ui->objC);
+    saveIsSelectionOutsideRange(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

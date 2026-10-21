@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(int, float *);
 int FUN_0024b660(float *, float *, double, float *);
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int FUN_002a2c7c(void);
@@ -72,7 +72,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
 /* Supplied declaration required: FUN_0024b660. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
@@ -389,7 +389,7 @@ void FUN_00300bb0(int param_1)
                 FUN_0024b830(0);
                 temp_v3 = 0;
                 pfVar6[0xe] = temp_v8 * (float)temp_v18;
-                FUN_0024b77c();
+                randomAdvanceShiftRegister();
                 if ((temp_v3 & 1) != 0) {
                   pfVar6[0xf] = -pfVar6[0xf];
                 }

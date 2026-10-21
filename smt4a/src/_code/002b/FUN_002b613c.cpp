@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00377acc. */
@@ -34,7 +34,7 @@ void FUN_002b613c(int param_1)
   unsigned int in_fpscr;
   unsigned int temp_v7;
   
-  temp_v0 = DAT_005806d4;
+  temp_v0 = g_mapEnemy;
   temp_v1 = param_1;
   FUN_003a30e8();
   temp_v3 = 0;

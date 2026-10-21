@@ -1613,3 +1613,397 @@
 00446db0 g_titleFlags inferred two signed flag bytes read by FUN_00103650
 003d0364 btlSlotsGetMaxValue inferred largest value among the used battle slots whose entry is in battle and passes FUN_00229914
 00220280 fileObjSeekRead inferred seeks and reads through the file object's vtable (slots 0x18, 0x34), closing the handle on failure
+0010ec80 asdTextSetDefaultStyle inferred Stores the text-default word at 0x2c.
+001c06f4 tmnlHasSelection inferred Twin already named tmnlHasSelection; checks selection >= 0.
+0010d6b4 appletSignalSleepQuery inferred Signals g_appletSleepQueryEvent.
+001385cc workSetStateByte inferred Writes the byte state in the caller work area.
+00108b5c soundSetVolumeSetting inferred Stores the volume byte and applies it to sounds.
+0010df18 asdTextSetDefaultRenderSetting inferred Updates g_asdTextDefaults and forwards the renderer setting.
+0011a0c4 asdTextSetRenderSetting inferred Stores the renderer text setting.
+0019fa94 mapIfStoreRequestResult inferred Writes the asynchronous completion result and detail words.
+00125e54 aocCompareRecord83Keys inferred Comparator used by aocRecordLookup83.
+0012654c aocCompareRecord84Keys inferred Comparator used by aocRecordLookup84.
+001385bc dataTable08Sub1CompareKeys inferred Comparator used by dataTable08Sub1GetRecord.
+00138800 dataTable08Sub2CompareKeys inferred Comparator used by dataTable08Sub2GetRecord.
+001388cc devilCompareRecordIds inferred Compares halfword identifiers for devilGetRecord.
+00138944 dataTable08Sub0CompareKeys inferred Comparator used by dataTable08Sub0GetRecord.
+00138c04 dataTable1bOr1cCompareIds inferred Compares identifiers for dataTable1bOr1cGetRecord.
+00144ff8 dataTable00CompareRecordIds inferred Comparator used by dataTable00FindById.
+001ab9f0 infoWinSetValue inferred Writes the information window word at 0xc.
+001b1804 dataTable14Sub1CompareIds inferred Comparator used by dataTable14Sub1GetRecord.
+001b1814 dataTable11Sub2CompareIds inferred Comparator used by dataTable11Sub2GetRecord.
+0010a6fc asdGxAdvancePreset inferred Increments the graphics preset index at 0x1bc.
+001a8c54 mapEnemyStopJob inferred Stops the job in the map-enemy work area.
+001b0bec aocBootHasWork inferred Tests the AOC boot work pointer.
+00141adc vectorSetAllOne inferred Initializes four float components to 1.0f.
+0019dc74 mapIfResetTimer inferred Clears both words of g_mapIfTimer.
+0010e9f0 asdCameraFreeWork inferred Frees and clears g_asdCamera.work.
+001175e4 asdMdlWorkerFreeWork inferred Frees job work and clears g_asdMdlWorker.
+00193c34 textMeasureFixedWidth inferred Multiplies string length by the fixed character width.
+001b42e4 mapEnemyResetUpdateState inferred Sets update state to three and clears its timer.
+00192a78 configIsClosed inferred Returns true when config work is absent or state is three.
+001a168c playLogIsClosed inferred Returns true when play-log work is absent or state is three.
+001b3d44 mapDepartClearData inferred Clears the departure state and loaded-data descriptors.
+001b72b8 btlTalkJobUpdate inferred Updates active battle-talk work from its job callback.
+001d2f20 mapDepartRequest inferred Stores destination identifiers and arms the departure request.
+001d960c qcMainJobUpdateEntry inferred Updates the active quest entry, if present.
+001a6d6c uiFadeJobDraw inferred Draws the visible fade overlay with flags 0x81.
+001e3968 mapObjRequestTransition inferred Stores map/object identifiers and requests mode ten.
+0044e0b0 g_soundVolumeSetting inferred Volume setting byte at offset one.
+004729b8 g_textRendererSettings inferred Contains the renderer text-setting word at offset 0x14.
+0011da9c resourceCreateOwnedObject inferred Allocates a 12-byte polymorphic object with four-byte alignment and records its allocator.
+001314fc _ZN9Obj422094C1Ev inferred Constructor stores the address point of the one-slot vtable at 0x422094.
+00422094 _ZTV9Obj422094 inferred size:0xc two zero header words followed by virtual target 0x381254; address point 0x42209c.
+00381254 _ZN9Obj4220945resetEv inferred Provisional inferred name for the empty virtual slot used in the private Obj422094 declaration.
+004210d0 _ZTV9Obj4210d0 inferred size:0xc two zero header words followed by virtual target 0x3630b0; address point 0x4210d8.
+00102798 titleBeginCommandList inferred Begins the title command list when both title predicates allow it.
+001026a8 titleEndCommandList inferred Finishes the title command list with submission flag one.
+001454f0 gfxSetSelectedChannelActive inferred Writes the selected channel byte and remembers the selected index.
+001c3ea4 npcRoomSelectEntry inferred Uses an optional halfword entry; a null entry enables the default room state.
+001d3dd4 btlEventUpdateCurrentWork inferred Passes the current job work to the active battle event and returns its result.
+001034c0 asdSoundRefreshPlayerState inferred Queries and refreshes the player, then mirrors the sound-status byte.
+0014d390 asdWaveArchiveHasExpectedBlock inferred Resolves the archive block offset and checks its CWAT signature.
+0010f930 runtimeInitializeSharedHandle inferred Obtains a shared handle only when it is absent and retains it on nonnegative status.
+001e16ec dataTable1bOr1cCompareRecordKeys inferred Resolves two halfword IDs and compares their records unsigned halfword keys.
+00201538 frameTexSetValue inferred Stores byte at frame texture work +0x25; port of smt4a FUN_002c2344
+002419f8 uniteGetRequest inferred Returns work request at +0x434 or minus one when absent
+001eea68 screenIsStateEight inferred Tests active work state at +4 against eight
+0043dd90 g_screenStateWork inferred Pointer whose state at +4 is tested against eight
+0021f50c tmnlResetSelection inferred Matched port of smt4a tmnlResetSelection
+00222b30 partyPanelIsNotStateF inferred Returns true unless party panel state at +0x1c is fifteen
+001ed61c ifTouchResetSelection inferred Invalidates selection and clears touch mode and counter
+00212490 digitsDrawAtAreaCorner inferred Adds area position and extent to integer offsets then draws digits
+002124d4 digitsDrawString inferred Called with x y color and digit string from area-corner wrapper
+001e4bec btlEditorNotifyNoop inferred Empty callback referenced by FUN_001a84d8
+001ecd64 campNotifyNoop inferred Empty callback referenced by FUN_002898e4
+002109c8 buttonHelpNotifyNoop inferred Empty callback referenced by buttonHelpCreate
+00212534 digitsNotifyNoop inferred Empty callback referenced by FUN_0028b7f8
+00214a5c saveDataNotifyNoop inferred Empty callback referenced by saveDataUIOpen
+00225cbc sceneNotifyNoop inferred Empty callback targeted by FUN_003eb41c
+001e4ab8 btlEditorQueryFalse inferred Callback referenced by FUN_001b0bd4 always returns zero
+00208bc8 cameraUnregisterFixed inferred Unregisters camera at DAT_0049f3f0
+0049f3f0 g_fixedCamera inferred Camera passed to cameraRegistryRemove by callback
+0020ed68 bibleQueryFalse inferred Callback referenced by bibleStart always returns zero
+0020f3a0 sceneQueryFalse inferred Callback referenced by FUN_001bdbf4 always returns zero
+0020f6c0 campQueryFalse inferred Callback referenced by FUN_001ce1e0 always returns zero
+00220fa8 questQueryFalse inferred Callback referenced by FUN_001ffc5c always returns zero
+002499ac recordGetSignedFlags inferred Reads signed byte at record +0x8a
+00262208 recordSetSecondaryValue inferred Stores halfword at record +0x3a
+0026b5ec settingsGetFourthByte inferred Reads signed byte at settings +3
+0026b5fc settingsGetFirstByte inferred Reads first signed settings byte
+0043e2f0 g_byteSettings inferred Settings bytes read by two signed byte accessors
+001f62dc recordCompareSignedValue inferred Compares first signed halfword ascending
+001f65ac recordCompareUnsignedValue inferred Compares first unsigned halfword ascending
+001f90ac effectSpawnKindTen inferred Forwards position with kind ten height five and duration twenty
+00206d2c recordCompareSortKey inferred Compares unsigned halfword at +0x20 ascending
+00206d3c mapRecordCompareValue inferred Compares first unsigned halfword ascending
+00208ca8 textureReleaseActiveSlot inferred Releases texture through active slot pointer
+004475d0 g_activeTextureSlot inferred Double dereference supplies texture to asdTextureRelease
+001fc560 onesRoomSetEnabled inferred Sets room byte +0x11 to one
+0020e720 mapModelRequest inferred Sets model work byte +0xc to one
+0020fe90 mapMainRequest inferred Sets main map work byte +0xc to one
+0020fea8 jyoucyuRequest inferred Sets resident work byte +4 to one
+0021e764 mapObjClearEntry inferred Clears map object table entry pointer at +0x6d4
+0021eed0 lmapMainRequest inferred Sets local map work byte +8 to one
+002000ac campCecSettingQueryZero inferred Settings callback returns zero with redundant retail load
+00206230 mapAccessoryLoadTable inferred Loads battle/battle_map/MapAccessory.tbb
+004341f8 g_mapAccessoryTable inferred Receives loaded MapAccessory.tbb pointer
+0020d694 mapIfMarkModelDestroy inferred Marks model handle at interface work +0xcbec for destruction
+0021778c recordCompareFloatKey inferred Subtracts float keys at +4 then converts difference to signed integer
+001e3994 mapObjSelectFirstEntry inferred Stores data table entry zero in map object +0x6d4
+001e4540 mapModelMarkDestroy inferred Marks nonzero model handle in active model work for destruction
+0044cda0 g_mapModelWork inferred Work pointer with request byte +0xc and model handle +0x2c
+0021ecdc lmapJobQueryZero inferred Fetches current job and returns zero with redundant global load
+001ec9ac campCecViewUpdateValue inferred Calls view updater with handle at +0xc and float address at +0xb4
+0020cfe8 mapEnemyStartRequest inferred Sets state one resets counter and stores two request words
+0020d064 mapRangeStartRequest inferred Stores two halfword range values and clears two counters
+00447a60 g_mapRangeWork inferred Holds range halfwords at +4 and +6 and counters at +8 and +0xa
+00220d38 recordQueryModeZero inferred Calls FUN_0024eaac with mode zero and normalizes result
+001e470c sceneUpdateOptionalResource inferred Calls resource updater only when owner and +0x1c resource are nonnull
+00433048 g_sceneResourceWork inferred Optional owner of resource pointer at +0x1c
+001e5e50 mapIfFreeWork inferred Frees interface work and nulls global pointer
+001eb84c buttonHelpIsHandleStateTwo inferred Queries button-help handle at +0x560 and compares result to two
+001ebde8 campCecIsStateFifteen inferred Tests optional camp communication state at +0xd28 against fifteen
+001fb2c8 lmapSceneCleanupObject inferred Applies two cleanup functions to scene object pointer at +0x194
+001fe130 nameDrawIfVisible inferred Draws embedded name work at +0x10 when byte +0xd equals one
+001fe1d8 qcMainEndBackgroundPass inferred Ends optional quest-center background render pass
+00200084 campCecIsStateSix inferred Tests optional camp communication state at +0xd28 against six
+002196fc recordCompareRankAndIndex inferred Descending halfword rank at +2 then ascending halfword index
+0021eee8 mapEnemyFreeWork inferred Frees enemy work and nulls owner pointer
+0020d00c mapEnemyStopRequest inferred Changes active request to state nine and clears counter
+0020d038 mapGimicStartRequest inferred Initializes range halfwords counters and active flag
+00213bf4 partyPanelIsNotStateTwentyOne inferred True unless optional party panel state equals twenty-one
+0020d630 mapIfClearActivity inferred Clears active byte and counter then notifies controller with one
+0021697c uniteIsAvailable inferred State two with blocking byte at +0x9450 clear
+00208b8c mapModeInitialize inferred Sets work mode from game-state word +0x370 and resets other fields
+002084c0 mapDepartureInitialize inferred Sets departure state from game-state word +0x280 and clears progress
+001ffbcc soundHeapRestoreClampedState inferred Restores heap state clamped to last saved state
+0020ff44 resourceQueryByIndex inferred Bounds-checks 0x2c-byte entry then dispatches virtual slot two
+002106ac soundSlotApplyTransition inferred Applies transition to indexed handle in eight-handle sound slot
+001ff8e0 inputTestEnabledRule inferred Tests selected input source bits against enabled rule mask
+00210974 inputClearActiveValues inferred Clears twelve words and halfword count while input reset state active
+0021241c npcRoomDebugDrawStartId inferred Formats and draws starting location ID at 8 8 while debug state zero
+002be624 textFormatBuffer inferred Sprintf-like format helper called with buffer format and room ID
+002916c0 debugDrawText inferred Receives color text and float x y scale for debug overlay
+0021193c scrCommMessageDispatchWithTransition inferred Sets message state byte +0xa11 to twenty and forwards argument frame and mode
+001fc248 placementUpdateSceneState inferred Retail instructions indicate this behavior; proposal only.
+0024b904 messageAuxDispatch inferred Retail instructions indicate this behavior; proposal only.
+001eb458 processQueryChain inferred Retail instructions indicate this behavior; proposal only.
+001e4560 regionFindRecord inferred Retail table accessor arguments indicate this behavior; proposal only.
+0023ab50 animationResetTracks inferred Retail instructions indicate this behavior; proposal only.
+0023b020 animationCountFilteredRanges inferred Retail instructions indicate this behavior; proposal only.
+00233218 jobGetScalarValue inferred Retail instructions indicate this behavior; proposal only.
+002573c8 effectSpawnPositionDefault inferred Retail instructions indicate this behavior; proposal only.
+001eb7f8 jobGetScalarFrame inferred Retail instructions indicate this behavior; proposal only.
+00234320 recordGetOptionalValue inferred Retail instructions indicate this behavior; proposal only.
+002535d4 effectSpawnTypeTen inferred Retail instructions indicate this behavior; proposal only.
+00215cbc questGetPrimaryState inferred Retail instructions indicate this behavior; proposal only.
+00220cf4 buttonHelpGetState inferred Retail instructions indicate this behavior; proposal only.
+00220d0c buttonHelpGetSecondaryState inferred Retail instructions indicate this behavior; proposal only.
+00221b58 effectSetProcessScalar inferred Retail instructions indicate this behavior; proposal only.
+00223cd8 questGetSecondaryState inferred Retail instructions indicate this behavior; proposal only.
+00228980 mathScaleThreeHalves inferred Retail instructions indicate this behavior; proposal only.
+0022e630 useCounterGetValue inferred Retail instructions indicate this behavior; proposal only.
+00231420 effectForwardModeOne inferred Retail instructions indicate this behavior; proposal only.
+0023296c recordSetPosition inferred Retail instructions indicate this behavior; proposal only.
+00232980 recordSetDirection inferred Retail instructions indicate this behavior; proposal only.
+00232994 recordSetOrigin inferred Retail instructions indicate this behavior; proposal only.
+0023e3ec resourceApplyNodeFlag inferred Retail instructions indicate this behavior; proposal only.
+0024692c effectSetByteSpeed inferred Retail instructions indicate this behavior; proposal only.
+0024efe4 frameTextureGetState inferred Retail instructions indicate this behavior; proposal only.
+0025c58c asdListBoxCreateDefault inferred Retail instructions indicate this behavior; proposal only.
+0026c63c gameGetNavigationState inferred Retail instructions indicate this behavior; proposal only.
+0026c7a0 communicationSetResultPointer inferred Retail instructions indicate this behavior; proposal only.
+0026dae4 gameGetPendingNavigationState inferred Retail instructions indicate this behavior; proposal only.
+00273828 mapInterfaceSetStateTwo inferred Retail instructions indicate this behavior; proposal only.
+00276950 navigationSetFieldValue inferred Retail instructions indicate this behavior; proposal only.
+001eb4fc processQueryAndFinish inferred Retail instructions indicate this behavior; proposal only.
+002254cc battleTalkGetBustState inferred Retail instructions indicate this behavior; proposal only.
+0022ddd0 utilityReturnSuccess inferred Retail instructions indicate this behavior; proposal only.
+0023116c recordCompareKind inferred Retail instructions indicate this behavior; proposal only.
+00231240 pointConvertToFloat inferred Retail instructions indicate this behavior; proposal only.
+00259e7c ifTouchGetActiveCounter inferred Retail instructions indicate this behavior; proposal only.
+00276218 gameCopyPersistentSave inferred Retail instructions indicate this behavior; proposal only.
+0027d474 navigationSetArguments inferred Retail instructions indicate this behavior; proposal only.
+001eb4e0 processRunQuery inferred Retail instructions indicate this behavior; proposal only.
+001ff8c4 resourceGetPosition inferred Retail instructions indicate this behavior; proposal only.
+00215a34 keyedCopyPayload inferred Retail instructions indicate this behavior; proposal only.
+0023a154 stringFormatBounded inferred Retail instructions indicate this behavior; proposal only.
+0023e388 matrixTranslateColumn inferred Retail instructions indicate this behavior; proposal only.
+002592b8 effectSpawnDefaultArguments inferred Retail instructions indicate this behavior; proposal only.
+00259b34 matrixCopyFull inferred Retail instructions indicate this behavior; proposal only.
+001f5f00 sequenceRequestZeroArgument inferred Retail instructions indicate this behavior; proposal only.
+00218460 saveIsSelectionOutsideRange inferred Retail instructions indicate this behavior; proposal only.
+0022e480 rectangleResetSelection inferred Retail instructions indicate this behavior; proposal only.
+00234888 recordIsEnabledAndPresent inferred Retail instructions indicate this behavior; proposal only.
+0023a198 stringFormatUnbounded inferred Retail instructions indicate this behavior; proposal only.
+0023d1ec resourceGetIndexedEntry inferred Retail instructions indicate this behavior; proposal only.
+0024c3d8 resourceResolveDataPointer inferred Retail instructions indicate this behavior; proposal only.
+0024c3f8 resourceResolveHeaderPointer inferred Retail instructions indicate this behavior; proposal only.
+00254568 keyedGetEntryValue inferred Retail instructions indicate this behavior; proposal only.
+00254e2c messageForwardDefaultMode inferred Retail instructions indicate this behavior; proposal only.
+00257dec randomGetLowerTenBits inferred Retail instructions indicate this behavior; proposal only.
+0025bb10 asdModelSlotGetResource inferred Retail instructions indicate this behavior; proposal only.
+00262914 jobSetText inferred Retail instructions indicate this behavior; proposal only.
+00269bd0 randomGetUpperSixBits inferred Retail instructions indicate this behavior; proposal only.
+0026c77c communicationBeginTransition inferred Retail instructions indicate this behavior; proposal only.
+0027396c saveSetNavigationPosition inferred Retail instructions indicate this behavior; proposal only.
+001eb808 jobSavePositionSnapshot inferred Retail instructions indicate this behavior; proposal only.
+00211c40 effectSetPrimaryPosition inferred Retail instructions indicate this behavior; proposal only.
+00211c68 effectSetSecondaryPosition inferred Retail instructions indicate this behavior; proposal only.
+0022e158 recordAppendFloatEntry inferred Retail instructions indicate this behavior; proposal only.
+00239dec recordRequireValue inferred Retail instructions indicate this behavior; proposal only.
+0023ea6c resourceFindActiveIndex inferred Retail instructions indicate this behavior; proposal only.
+0024bb10 textureGetIndexedResource inferred Retail instructions indicate this behavior; proposal only.
+002595bc cecQueryOptionalProcess inferred Retail instructions indicate this behavior; proposal only.
+0027645c navigationApplyOptionalValue inferred Retail instructions indicate this behavior; proposal only.
+00276480 navigationApplyArguments inferred Retail instructions indicate this behavior; proposal only.
+001f8d7c mapEnableAndClearState inferred Retail instructions indicate this behavior; proposal only.
+0020d8ec mapInterfaceForwardResource inferred Retail instructions indicate this behavior; proposal only.
+0021987c effectQuerySelectedBehavior inferred Retail instructions indicate this behavior; proposal only.
+0023266c rectangleInitializeSelection inferred Retail instructions indicate this behavior; proposal only.
+00234974 recordClearWideHandle inferred Retail instructions indicate this behavior; proposal only.
+0023adf4 modelSetPosition inferred Retail instructions indicate this behavior; proposal only.
+002468e0 linkedFindItemByIndex inferred Retail instructions indicate this behavior; proposal only.
+0024db9c runtimeShiftLeftWide inferred Retail instructions indicate this behavior; proposal only.
+00255158 battleGetEntryHalfword inferred Retail instructions indicate this behavior; proposal only.
+0026e5ec saveGetMapFlag inferred Retail instructions indicate this behavior; proposal only.
+00276238 navigationResetTimer inferred Retail instructions indicate this behavior; proposal only.
+001fa730 mapDestroyPrimaryModel inferred Retail instructions indicate this behavior; proposal only.
+0020d7c4 mapDestroyInterfaceModel inferred Retail instructions indicate this behavior; proposal only.
+00230c80 itemGetNameOrFallback inferred Retail instructions indicate this behavior; proposal only.
+002472c0 rectangleForwardExpanded inferred Retail instructions indicate this behavior; proposal only.
+002480c8 mapDestroySecondaryModel inferred Retail instructions indicate this behavior; proposal only.
+0024ac90 mapDestroyOverlayModel inferred Retail instructions indicate this behavior; proposal only.
+002545d0 rectangleForwardExpandedAlt inferred Retail instructions indicate this behavior; proposal only.
+00262f38 battleTalkIsBustReady inferred Retail instructions indicate this behavior; proposal only.
+00270500 navigationRequestFieldMode inferred Retail instructions indicate this behavior; proposal only.
+00275e18 battlePrepareEncounter inferred Retail instructions indicate this behavior; proposal only.
+00227750 actionCreateKindFive inferred Retail instructions indicate this behavior; proposal only.
+0022fb04 inputIsQuestRepeatLeft inferred Retail instructions indicate this behavior; proposal only.
+0022fb34 inputIsQuestRepeatRight inferred Retail instructions indicate this behavior; proposal only.
+0023eab0 recordClampCurrentCount inferred Retail instructions indicate this behavior; proposal only.
+00245278 tableIsSupportedKind inferred Retail instructions indicate this behavior; proposal only.
+00245768 saveIsRecordValueBounded inferred Retail instructions indicate this behavior; proposal only.
+0024c278 inputIsQuestConfirmPressed inferred Retail instructions indicate this behavior; proposal only.
+00256510 inputIsQuestCancelPressed inferred Retail instructions indicate this behavior; proposal only.
+00263558 questTestPackedFlag inferred Retail instructions indicate this behavior; proposal only.
+002693b4 recordPrepareActive inferred Retail instructions indicate this behavior; proposal only.
+002762e0 inputIsQuestMenuPressed inferred Retail instructions indicate this behavior; proposal only.
+001e4a50 jobDispatchOptionalOwner inferred Retail instructions indicate this behavior; proposal only.
+001fc6b4 battleQueryEncounter inferred Retail instructions indicate this behavior; proposal only.
+00229ad4 battleSetActionKind inferred Retail instructions indicate this behavior; proposal only.
+0022a478 recordTrackDirtyValue inferred Retail instructions indicate this behavior; proposal only.
+0022c004 containerGrowCapacity inferred Retail instructions indicate this behavior; proposal only.
+0023342c curveEvaluateStandard inferred Retail instructions indicate this behavior; proposal only.
+0023a118 systemApplyConfigurationByte inferred Retail instructions indicate this behavior; proposal only.
+0023a380 resourceQueryLoadStatus inferred Retail instructions indicate this behavior; proposal only.
+0023d20c matrixScaleColumns inferred Retail instructions indicate this behavior; proposal only.
+0023e400 matrixScaleColumnsAlt inferred Retail instructions indicate this behavior; proposal only.
+002481b0 dataTableGetRecordFortyEight inferred Retail table accessor arguments indicate this behavior; proposal only.
+00248674 recordPrepareLinkedOwner inferred Retail instructions indicate this behavior; proposal only.
+00248dfc dataTableGetRecordFortyNine inferred Retail table accessor arguments indicate this behavior; proposal only.
+0024effc dataTableGetRecordFortyFive inferred Retail table accessor arguments indicate this behavior; proposal only.
+0024f4e8 dataTableGetRecordFortyOne inferred Retail table accessor arguments indicate this behavior; proposal only.
+002591e8 shopFormatCommandResult inferred Retail instructions indicate this behavior; proposal only.
+002671bc dataTableGetRecordFifty inferred Retail table accessor arguments indicate this behavior; proposal only.
+0026a38c partyPanelSetEnabled inferred Retail instructions indicate this behavior; proposal only.
+0026efec saveGetIndexedMapValue inferred Retail instructions indicate this behavior; proposal only.
+0027d9a8 randomGetNormalizedFloat inferred Retail instructions indicate this behavior; proposal only.
+002118e4 messageSetTargetState inferred Retail instructions indicate this behavior; proposal only.
+00222230 recordQueryOptionalState inferred Retail instructions indicate this behavior; proposal only.
+002236a4 mapApplyDeparturePoint inferred Retail instructions indicate this behavior; proposal only.
+0023a0d8 tokenResolveAddress inferred Retail instructions indicate this behavior; proposal only.
+0023a1c0 recordValidatePair inferred Retail instructions indicate this behavior; proposal only.
+0023c118 actionCreateKindSeventeen inferred Retail instructions indicate this behavior; proposal only.
+0023cbc4 transitionConfigureAndReset inferred Retail instructions indicate this behavior; proposal only.
+0023d450 flagsPackFourBooleans inferred Retail instructions indicate this behavior; proposal only.
+0023f3bc modelSetAnglesDegrees inferred Retail instructions indicate this behavior; proposal only.
+002404e8 recordAreAllCountsNonpositive inferred Retail instructions indicate this behavior; proposal only.
+0024857c matrixCopySelectedToGlobal inferred Retail instructions indicate this behavior; proposal only.
+00249974 recordQueryStateThree inferred Retail instructions indicate this behavior; proposal only.
+0024c2ec saveTestFlagRow inferred Retail instructions indicate this behavior; proposal only.
+0025c298 residentApplyFallbackValues inferred Retail instructions indicate this behavior; proposal only.
+00276310 navigationFinishReadyField inferred Retail instructions indicate this behavior; proposal only.
+0027e314 battleUiIsFadeAndFieldReady inferred Retail instructions indicate this behavior; proposal only.
+001ed5c0 scriptApplyParsedArgument inferred Retail instructions indicate this behavior; proposal only.
+002106fc asdSoundCompleteSlot inferred Retail instructions indicate this behavior; proposal only.
+00215c5c saveSubtractCounterSaturating inferred Retail instructions indicate this behavior; proposal only.
+0022a304 battleResetCounterAndFlag inferred Retail instructions indicate this behavior; proposal only.
+0022b684 gameSynchronizeMapState inferred Retail instructions indicate this behavior; proposal only.
+0023a5ec resourceGetWideHandle inferred Retail instructions indicate this behavior; proposal only.
+0024b77c randomAdvanceShiftRegister inferred Retail instructions indicate this behavior; proposal only.
+00253d24 bufferReleaseOwnedPair inferred Retail instructions indicate this behavior; proposal only.
+002542ec saveResolvePartySlot inferred Retail instructions indicate this behavior; proposal only.
+0025ca80 asdModelSlotSetTranslation inferred Retail instructions indicate this behavior; proposal only.
+00263510 questSetPackedFlag inferred Retail instructions indicate this behavior; proposal only.
+00263670 asdModelSlotSetTint inferred Retail instructions indicate this behavior; proposal only.
+002636e4 effectAreAllCompletionChecksReady inferred Retail instructions indicate this behavior; proposal only.
+00206ef0 dataCompareSecondaryRank inferred Retail instructions indicate this behavior; proposal only.
+00207014 dataComparePrimaryRank inferred Retail instructions indicate this behavior; proposal only.
+0022c930 slotFindNonnegativeRank inferred Retail instructions indicate this behavior; proposal only.
+002340e4 timeInitializeActiveState inferred Retail instructions indicate this behavior; proposal only.
+0023470c touchRegisterSecondRegion inferred Retail instructions indicate this behavior; proposal only.
+0023474c touchRegisterFirstRegion inferred Retail instructions indicate this behavior; proposal only.
+00235744 thresholdDispatchOutsideRange inferred Retail instructions indicate this behavior; proposal only.
+002419b0 mapAdvanceSceneTwentyEight inferred Retail instructions indicate this behavior; proposal only.
+00241c58 taskUpdateOrderedPasses inferred Retail instructions indicate this behavior; proposal only.
+00253ce4 bufferDestroyOwnedPair inferred Retail instructions indicate this behavior; proposal only.
+0025458c mathAdvanceClamped inferred Retail instructions indicate this behavior; proposal only.
+00256c98 matrixScaleRows inferred Retail instructions indicate this behavior; proposal only.
+0026b780 recordContainsPairedId inferred Retail instructions indicate this behavior; proposal only.
+0027d908 mapClearPendingEntries inferred Retail instructions indicate this behavior; proposal only.
+002c57b8 asdSequenceRequestInitial inferred Requests sequence state 1 with no argument
+002cf800 pairLogSetValue inferred Stores a halfword at PairLog::unk0C
+0029c298 pairLogAppend inferred Twin of smt4a pairLogAppend
+002f6124 campGauntletAppMenuHasFlags inferred Tests four menu flag bytes at 0x2b4 through 0x2b7
+002e0db0 asdCecResetMessageBox inferred Opens message box then resets and closes it on success
+002e11f0 asdListBoxFreeItem inferred List-box item callback forwarding to asdMemFree
+002c4154 asdMemoryFreeCallback inferred Forwards fourth callback argument to asdMemFree
+002c5644 jyoucyuGetSecondTableEntry inferred Returns jyoucyuGetTableEntry(1)
+002dca98 idMapCompareKeys inferred Subtracts unsigned halfword keys; callback referenced by idMapLookup
+002dcb50 dataTableCompareByteKeys inferred Subtracts unsigned byte keys; callback referenced by dataTable14Sub0GetRecord
+002e4b20 tableCompareHalfwordKeys inferred Subtracts unsigned halfword keys
+002e3328 pairLogSetFlag inferred Stores PairLog::unk20
+002ca064 aocJobEnable inferred Sets byte 4 of g_aocJob to 1
+002ca084 mapDepartEnable inferred Sets byte 8 of g_mapDepart to 1
+002d96bc uiQuestIsCreated inferred Tests g_uiQuest against NULL
+002c67b0 scrSignExtendOperand inferred Sign extends operand to signed byte or halfword according to instruction bits 10 and 8
+002e4b08 tableCompareWordByteKeys inferred Compares low byte of two word-sized keys
+002d65b4 jobFreeWork inferred Frees non-null jobGetWork result
+002dfb28 mapEnemyIsModeTwo inferred Tests g_mapEnemy word at offset 4 against 2
+002e36d8 eventTextureRelease inferred Frees g_eventTex and clears the global pointer
+002c8824 mapCountActiveEntries inferred Counts the sixteen active map entries
+002eea50 scrBustupStartAnimation inferred Creates animation handle, applies job parameters and publishes script result
+002d0470 dataTableCompareRecordValues inferred Compares record halfword values after resolving two IDs
+002c53f4 mathInterpolateTimed inferred Interpolates start/end according to elapsed and duration, with endpoint cases
+002dc010 scrIsValueInRange inferred Tests inclusive signed minimum/maximum bounds
+002e22e4 scrEventTextureCreate inferred Creates event texture handle using script integer and floating argument
+0028c814 textureCreateFromImage inferred Creates texture, sets dimensions to one and attaches input image
+00287be4 mathPositionHeadingDegrees inferred Computes XZ direction and wraps degree heading
+002a3504 mathMatrixTranslateLocal inferred Accumulates translation products into matrix row W values
+002f128c scrBattleSetFlag inferred Sets a variable bit in the battle flag pair
+002f7928 scrBattleClearFlag inferred Clears a variable bit in the battle flag pair
+002bf538 efctSetSpeed inferred Twin of Apocalypse efctSetSpeed
+002bb150 threadSleepDuration inferred Selects long wait or converted-cycle short wait according to duration threshold
+003bc8d8 gameDataSetEntryEnabled inferred Sets bit six in byte three of the entry returned by the data-table lookup.
+002ba764 gameDataGetTableEntry inferred Counterpart of the named Apocalypse lookup called by the matched twin.
+0034d4f8 effectStoreStatePair inferred Stores the first and third arguments as a pair in the effect state.
+003d6294 workSetScalarParameter inferred Stores the incoming float in the work state.
+0032c6c8 sortCompareByteAscending inferred Subtracts the right unsigned byte key from the left.
+00381b7c sortCompareEntryKey inferred Subtracts signed word keys stored after each entry header.
+0032c6e8 sortCompareWeightAscending inferred Returns the integer conversion of the floating-point key difference.
+0032c700 sortCompareWeightDescending inferred Returns the integer conversion of right weight minus left weight.
+003ba724 mikadoEnableCameraUpdate inferred Sets the camera flag bit used by the mikado camera wrapper.
+003b8a54 mikadoCameraStateIsNotSeven inferred Predicate called by mikadoIsCameraNotState7.
+00399620 naviStateIsMapOpen inferred True in navigation states four and six; called by NaviMain_IsMapOpen.
+0039bcc4 naviSetDisplayFlag inferred Sets or clears bit five of the navigation flags.
+0039cb20 naviRequestStateChange inferred Sets the request byte reached through the navigation wrapper.
+003dcf20 listBoxClearSelectionAndReset inferred Clears the list selection before running the list-box reset helper.
+003af03c btlUiIsWidgetOutsideClosingState inferred Forwards the third UI widget to the state-thirty-one predicate.
+003ae330 btlUiEnableWidget inferred Sets the third battle widget enable byte.
+0030bc6c sceneIsOutsideClosingState inferred Returns true for an absent scene or any state except thirty-one.
+0030a0b4 titleSceneUpdateCallback inferred Runs the title-scene update helpers and returns zero.
+0030f8d4 naviUpdateIfAllocated inferred Runs the navigation update helper only when its global exists.
+00317d6c eventCommandFreeWorkCallback inferred Frees the current job work and clears g_eventCommand.
+003acb08 countdownIsOutsideFinishedState inferred Returns false for countdown state four.
+0030f504 mapEnemyIsInactive inferred True when the map-enemy global is absent or inactive.
+0031121c partyPanelClearSelection inferred Clears the party panel selection when the panel exists.
+0032b34c sortCompareRankThenOrder inferred Descending rank followed by ascending byte order.
+003af138 btlUiResetWidgetForStateSixteen inferred Changes battle UI state to sixteen and resets its third widget.
+003d63e4 transformClearVectors inferred Zeros two consecutive three-component vectors.
+0031b82c staffRollTickExitTimer inferred Decrements the staff-roll timer and advances to state three below zero.
+00333db8 animationInitializeUnitScale inferred Enables the animation, resets progress and sets unit scale.
+003a05c4 sortCompareKeyPair inferred Ascending unsigned-halfword primary and secondary keys.
+003aeb3c btlUiIsIdle inferred Tests the central battle UI state for zero.
+003aef3c btlUiIsIdleForCommand inferred Second identical zero-state predicate called by the command dispatcher.
+00360264 listDetachAllNodes inferred Unlinks both links from every node without freeing memory.
+0038bc4c _ZN9Obj4221d4C1Ev inferred Constructor of the class whose vtable matches Apocalypse Obj4221d4.
+004221d4 _ZTV9Obj4221d4 inferred size:0x1c vtable; address point at DAT_004221dc, required for constructor relocation match.
+003c29f8 requestBeginProcessing inferred Starts request state two and stores request parameters.
+003d620c btlStartSecondaryTransition inferred Sets secondary transition parameters and flag bit ten.
+003d8494 btlStartPackedTransition inferred Saves current packed parameter and starts transition flag bit eleven.
+003d61c0 btlStartGlobalTransition inferred Sets the global duration and starts transition flag bit nine.
+003d624c btlStartScalarTransition inferred Saves the current scalar and starts the alternate flag-bit-eleven transition.
+0030b820 btlScriptQueryEntryState inferred Queries a battle entry and emits its value only when available.
+003419cc modelLoadBamAndEnable inferred Formats a .bam path, creates the model with mode seven, and enables its handle.
+00337b64 partyHasEligibleMember inferred Checks whether any of three signed party-member state bytes is nonnegative.
+00338318 entryAddUniqueIdentifier inferred Adds an identifier in the first empty signed-halfword slot unless already present.
+00338370 entryInvalidateStateTable inferred Writes minus one to all three state fields in each of 109 records.
+003391d0 entryContainsIdentifier inferred Checks 42 nullable record pointers for a matching record identifier.
+003ac904 devilCompareRankDescending inferred Compares record rank descending, then identifier ascending.
+003acce4 devilCompareRankAscending inferred Compares record rank ascending, then identifier descending.
+003c8374 gameOptionsHasEnabledParameters inferred Checks enable bit and three nonzero option parameters.
+0031eb34 event3dOpeningRequestExit inferred Requests state four and clears the opening state step when its job remains valid.
+00323efc gameScriptSetBooleanFlags inferred Converts two script arguments to adjacent boolean bytes.
+003d9868 workAdoptGlobalHandle inferred Installs and retains a positive global handle when the owner is uninitialized.
+003aeff4 btlUiCopyStatePairs inferred Copies a battle UI flag and two value pairs to caller outputs.
+00360570 conversionReplaceEventHandle inferred Queries a replacement handle, reports failure, and closes the existing handle.
+003deaa4 resourceGetId inferred Returns the 16-bit identifier in the resource referenced by an object.
+003f57c4 videoResetFilterState inferred Clears the two stored filter state words.
+003f5b9c videoResetSecondaryFilterState inferred Clears the secondary pair of filter state words.
+003f5fac videoResetDeblockerState inferred Clears the two g_mwmofilterDeblocker state words.
+003f6900 videoResetAuxFilterState inferred Clears the auxiliary filter state pair.
+003dea78 btlActionReflectRun inferred Runs the action reflection helper with the supplied action and data.
+003deeac resourceGetSampleFloat inferred Looks up an indexed 32-bit resource sample and converts it to float.
+003f8e18 resourceGetPackedSampleFloat inferred Decodes the packed 12-bit sample and applies its scale and bias.

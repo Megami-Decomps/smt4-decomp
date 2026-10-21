@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
@@ -58,7 +58,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -329,7 +329,7 @@ void FUN_00315bc8(int param_1)
                   *piVar15 = 0;
                 }
                 else {
-                  FUN_0024b77c();
+                  randomAdvanceShiftRegister();
                   __aeabi_uidivmod();
                   temp_v18 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
                   *piVar15 = temp_v9;

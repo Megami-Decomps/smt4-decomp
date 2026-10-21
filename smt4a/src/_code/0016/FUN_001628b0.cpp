@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0016432c's literal pool; not written yet. */
-#include "common.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+
+extern "C" {
+
+/* Orders records by their signed key. */
+s32 FUN_001628b0(const SignedRecordKey32 *left, const SignedRecordKey32 *right)
+{
+    return left->key - right->key;
+}
+
+} /* extern "C" */

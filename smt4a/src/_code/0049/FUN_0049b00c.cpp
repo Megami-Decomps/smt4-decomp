@@ -10,7 +10,7 @@ int FUN_002f0384(...);
 int FUN_003180c4(...);
 int panelSetMode3(...);
 int FUN_00359974(...);
-int FUN_003720a0(...);
+int gameGlobalsQueueValues(...);
 int FUN_003720e4(...);
 int FUN_00372100(...);
 int FUN_003c5fc4(...);
@@ -28,8 +28,8 @@ int screenShowMessage(...);
 int obj04Finish(void);
 int panelSetTarget(...);
 int FUN_003a76a8(...);
-int FUN_004935b0(...);
-int FUN_00493660(unsigned int *, int, int, int);
+int pointConvertToFloat(...);
+int rectangleInitializeSelection(unsigned int *, int, int, int);
 int FUN_00493a7c(...);
 int FUN_00493b74(void);
 int FUN_00498de0(...);
@@ -73,7 +73,7 @@ extern int objBStateAllowsAction(void);
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_003720a0. */
+/* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_003720e4. */
 /* Supplied declaration required: FUN_00372100. */
 extern int panelStateIs0(void);
@@ -83,15 +83,15 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003df7c4. */
 extern int FUN_00481100(unsigned short);
-/* Supplied declaration required: FUN_004935b0. */
-/* Supplied declaration required: FUN_00493660. */
+/* Supplied declaration required: pointConvertToFloat. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_00493a7c. */
 /* Supplied declaration required: FUN_00493b74. */
 /* Supplied declaration required: FUN_00496a0c. */
 extern int FUN_00498408(unsigned int *, unsigned short);
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_00498ff0. */
-extern unsigned int FUN_0049c760(unsigned short, unsigned int);
+extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0049cad0. */
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
 extern int FUN_0049cc10(int);
@@ -101,7 +101,7 @@ extern int FUN_0049cc10(int);
 /* Supplied declaration required: setListWindow. */
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: FUN_004d0738. */
 
@@ -130,7 +130,7 @@ void FUN_0049b00c(unsigned int *param_1)
     *param_1 = *param_1 | 0x1000;
     FUN_00184528(param_1 + 0xf3,6);
     FUN_00184528(param_1 + 0xf3,7);
-    FUN_00493660(param_1 + 0xee,0x140,0,0x20);
+    rectangleInitializeSelection(param_1 + 0xee,0x140,0,0x20);
     param_1[2] = 1;
     sysPlaySe(0x87);
     param_1[0x5812] = 0xffffffff;
@@ -141,7 +141,7 @@ void FUN_0049b00c(unsigned int *param_1)
     FUN_004cf8dc(param_1 + 0xf3,6);
     temp_v4 = vec2GetYInt(param_1 + 0x1cd);
     temp_v2 = vec2GetXInt(param_1 + 0x1cd);
-    FUN_004935b0(param_1 + 0xee,temp_v2,temp_v4);
+    pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
     if (*(char *)((int)param_1 + 0x7be) != '\0') {
       FUN_00493a7c(param_1 + 0x2d2);
       param_1[2] = 2;
@@ -217,7 +217,7 @@ void FUN_0049b00c(unsigned int *param_1)
         param_1[2] = 3;
       }
     }
-    temp_v5 = FUN_004d0554();
+    temp_v5 = inputIsQuestMenuPressed();
     if (temp_v5 != 0) {
       ifTouchRegionRemove();
       ifTouchRegionRemove();
@@ -273,7 +273,7 @@ void FUN_0049b00c(unsigned int *param_1)
       FUN_004cf8dc(param_1 + 0xf3,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1f0);
       temp_v2 = vec2GetXInt(param_1 + 0x1f0);
-      FUN_004935b0(param_1 + 0xee,temp_v2,temp_v4);
+      pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x84a) == '\0') break;
     }
     param_1[0x5812] = 0xffffffff;
@@ -319,7 +319,7 @@ void FUN_0049b00c(unsigned int *param_1)
       temp_v5 = FUN_0049cc10((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
-    temp_v4 = FUN_0049c760(temp_v0,1);
+    temp_v4 = itemGetNameOrFallback(temp_v0,1);
     FUN_003180c4(0,temp_v4);
     FUN_00359974(0x18,param_1[0x2d2],0xffffffff,0);
     FUN_00359974(0x19,temp_v5,0xffffffff,0);
@@ -398,7 +398,7 @@ joined_r0x0049bb38:
       FUN_004cf8dc(param_1 + 0xf3,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1f0);
       temp_v2 = vec2GetXInt(param_1 + 0x1f0);
-      FUN_004935b0(param_1 + 0xee,temp_v2,temp_v4);
+      pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x84a) != '\0') {
         *param_1 = *param_1 & 0xffffefff;
       }
@@ -487,7 +487,7 @@ joined_r0x0049bb38:
         puVar5[2] = temp_v0;
       }
       FUN_003df7c4(0);
-      FUN_003720a0(puVar5,0);
+      gameGlobalsQueueValues(puVar5,0);
       FUN_00372100(puVar5,0);
       FUN_003d2150(0x10000cc);
     }

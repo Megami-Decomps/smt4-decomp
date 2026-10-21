@@ -35,9 +35,9 @@ extern int g_mapHakai; /* 0x581038 */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0027461c. */
-extern int FUN_00352ca0(int);
+extern int gameFlagsTestFirstBank(int);
 /* Supplied declaration required: FUN_00356470. */
-extern int FUN_003a3270(void);
+extern int dataTableCountWithAoc(void);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -169,7 +169,7 @@ unsigned int FUN_0033d6c0(void)
     temp_v5[4] = 0;
     temp_v5[5] = 0;
     temp_v5[6] = 0;
-    temp_v1 = FUN_003a3270();
+    temp_v1 = dataTableCountWithAoc();
     if (0 < temp_v1) {
       do {
         psVar2 = psVar5;
@@ -177,7 +177,7 @@ unsigned int FUN_0033d6c0(void)
         if ((((*psVar2 != -1) && ((psVar2[0x18] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
             ((psVar2[0x19] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) &&
            (((*psVar2 == *(short *)(g_mapHakai + 4) && (psVar2[1] == *(short *)(g_mapHakai + 6))
-             ) && (temp_v2 = FUN_00352ca0((int)(short)(int)psVar5), temp_v1 = g_mapHakai, temp_v2 == 0)))) {
+             ) && (temp_v2 = gameFlagsTestFirstBank((int)(short)(int)psVar5), temp_v1 = g_mapHakai, temp_v2 == 0)))) {
           temp_v2 = 0;
           do {
             if (*(char *)(g_mapHakai + temp_v2 * 0x54 + 0x5c) == '\0') goto LAB_0033dd20;
@@ -242,7 +242,7 @@ LAB_0033dd20:
           temp_v5[*(short *)(temp_v2 + 0xac)] = temp_v5[*(short *)(temp_v2 + 0xac)] + 1;
         }
         psVar5 = (short *)((int)psVar5 + 1);
-        temp_v1 = FUN_003a3270();
+        temp_v1 = dataTableCountWithAoc();
       } while ((int)psVar5 < temp_v1);
     }
     FUN_0027461c();
@@ -261,7 +261,7 @@ LAB_0033dd20:
   temp_v2 = 0;
   psVar5 = (short *)0x0;
   *(unsigned int *)(temp_v1 + 0x5b4) = 0;
-  temp_v1 = FUN_003a3270();
+  temp_v1 = dataTableCountWithAoc();
   if (0 < temp_v1) {
     do {
       psVar2 = psVar5;
@@ -269,14 +269,14 @@ LAB_0033dd20:
       if (((*psVar2 != -1) && ((psVar2[0x18] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
          (((psVar2[0x19] == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
           (((*psVar2 == *(short *)(g_mapHakai + 4) && (psVar2[1] == *(short *)(g_mapHakai + 6)))
-           && (temp_v1 = FUN_00352ca0((int)(short)(int)psVar5), temp_v1 == 0)))))) {
+           && (temp_v1 = gameFlagsTestFirstBank((int)(short)(int)psVar5), temp_v1 == 0)))))) {
         temp_v2 = temp_v2 + 1;
         temp_v3 = temp_v3 + 1;
         temp_v1 = g_mapHakai + psVar2[6] * 4;
         *(int *)(temp_v1 + 0x59c) = *(int *)(temp_v1 + 0x59c) + 1;
       }
       psVar5 = (short *)((int)psVar5 + 1);
-      temp_v1 = FUN_003a3270();
+      temp_v1 = dataTableCountWithAoc();
     } while ((int)psVar5 < temp_v1);
     if (temp_v2 != 0) {
       if (temp_v2 == 1) {

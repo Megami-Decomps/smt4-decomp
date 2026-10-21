@@ -1,32 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a6c18` (_code @ 0x4a6c18, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-
-void FUN_004a6c18(int param_1)
-
+struct PartySlots { s16 ids[16]; u8 active[16]; };
+/* Invalidates slots outside the requested active range. */
+extern "C" void FUN_004a6c18(PartySlots *party)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = 0;
-  temp_v1 = 0x10;
-  do {
-    temp_v2 = param_1 + temp_v0;
-    *(unsigned short *)(param_1 + temp_v0 * 2) = 0xffff;
-    temp_v1 = temp_v1 - 1;
-    temp_v0 = temp_v0 + 1;
-    *(unsigned char *)(temp_v2 + 0x20) = 0;
-  } while (temp_v1 != 0);
-  return;
+    for (u32 index = 0; index < 16; ++index) {
+        party->ids[index] = -1;
+        party->active[index] = 0;
+    }
 }
-
-} /* extern "C" */

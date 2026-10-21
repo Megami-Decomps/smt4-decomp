@@ -6,7 +6,7 @@ extern "C" {
 
 int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_0014fde4(unsigned int);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int FUN_002bb180(void);
 int FUN_002bb194(int);
 int FUN_002bb2c8(...);
@@ -28,7 +28,7 @@ extern unsigned char DAT_0044e360; /* 0x44e360 */
 extern int FUN_0014ffa8(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002bb0d0(void);
 extern int FUN_002bb0e0(void);
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bb180. */
 /* Supplied declaration required: FUN_002bb194. */
 /* Supplied declaration required: FUN_002bb2c8. */
@@ -67,7 +67,7 @@ int FUN_002a7f28(unsigned int param_1,unsigned int param_2,unsigned int param_3,
       temp_v1 = FUN_0014ffa8(param_1,param_2,param_3,param_4);
       nn_applet_CTR_detail_CloseSession();
       if ((temp_v1 != -0x375f3010 && temp_v1 != -0x1f5f33f8) && temp_v1 != -0x375f33fe) break;
-      FUN_002bb150(10000000,0);
+      threadSleepDuration(10000000,0);
     }
     if (temp_v0 != 0) {
       temp_v0 = FUN_002bb0d0();

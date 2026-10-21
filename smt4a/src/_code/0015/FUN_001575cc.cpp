@@ -14,7 +14,7 @@ int FUN_0016c744(unsigned int);
 int FUN_00187a84(int, int, int, unsigned int *);
 int FUN_00187d90(unsigned int, int);
 int FUN_0018a9bc(...);
-int FUN_001960f0(unsigned char *, unsigned char *);
+int asdModelCommitCommandRange(unsigned char *, unsigned char *);
 int FUN_0019eafc(void);
 int FUN_0019f828(unsigned int, int);
 
@@ -39,7 +39,7 @@ extern int FUN_001869c4(unsigned int);
 /* Supplied declaration required: FUN_00187a84. */
 /* Supplied declaration required: FUN_00187d90. */
 /* Supplied declaration required: FUN_0018a9bc. */
-/* Supplied declaration required: FUN_001960f0. */
+/* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: FUN_0019eafc. */
 /* Supplied declaration required: FUN_0019f828. */
 
@@ -219,7 +219,7 @@ LAB_0015783c:
   FUN_00158b2c(puVar2);
   FUN_0019eafc();
   FUN_0015fcec(temp_v12,puVar2);
-  FUN_001960f0(puVar2,puVar3);
+  asdModelCommitCommandRange(puVar2,puVar3);
   temp_v4 = 0;
   do {
     temp_v6 = param_1 + (temp_v4 & 0xff) * 0x20;

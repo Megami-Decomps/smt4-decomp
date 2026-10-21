@@ -21,7 +21,7 @@ extern s32 FUN_002bf818(s32 *position);
 extern s32 FUN_0026b564(void);
 extern s32 vec2GetXInt(s32 *position);
 extern s32 vec2GetYInt(s32 *position);
-extern void FUN_00231240(void *sprite, s32 x, s32 y);
+extern void pointConvertToFloat(void *sprite, s32 x, s32 y);
 extern void FUN_00233240(void *shadow, s32 value);
 
 /* Per-frame update of the widget: shows it, then moves its sprite with the position once that settles. */
@@ -39,7 +39,7 @@ void FUN_0039c9d4(Widget *widget)
             widget->state = 2;
             widget->flags |= WIDGET_FLAG_READY;
         }
-        FUN_00231240(widget->sprite, vec2GetXInt(position), vec2GetYInt(position));
+        pointConvertToFloat(widget->sprite, vec2GetXInt(position), vec2GetYInt(position));
     }
 }
 

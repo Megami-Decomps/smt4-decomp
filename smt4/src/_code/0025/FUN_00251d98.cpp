@@ -11,9 +11,9 @@ int FUN_002b6dd8(int [2], int);
 int FUN_002bdf94(int, int, int, int);
 int drawSetColorFromRGBA8(unsigned int);
 int FUN_002be5a4(int, unsigned int, int [2]);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
 typedef struct fn_00251d98_arg0 fn_00251d98_arg0;
@@ -56,10 +56,10 @@ extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
@@ -96,13 +96,13 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
             if ((int)param_1->field_0x34 < 0) {
               gameGetPlayerData();
               temp_v5 = FUN_002bd1fc();
-              FUN_002be624(temp_v10,&LAB_0025216c,temp_v5);
+              textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
             }
             else {
               temp_v3 = gameGetUnitRecord();
               if (temp_v3 != 0) {
                 temp_v5 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
-                FUN_002be624(temp_v10,&LAB_0025216c,temp_v5);
+                textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
               }
             }
             temp_v3 = FUN_002bf4f8(0x19,0x11);
@@ -144,7 +144,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
               temp_v8 = *(unsigned char *)(temp_v3 + 0x48);
             }
           }
-          FUN_002be624(temp_v11,&LAB_0025217c,temp_v8);
+          textFormatBuffer(temp_v11,&LAB_0025217c,temp_v8);
           temp_v3 = FUN_002bf4f8(0x19,0x15);
           puStack_48 = temp_v11;
           temp_v10[0] = 2;
@@ -191,7 +191,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         drawSetColorFromRGBA8(temp_v5);
         if (param_1->field_0x23 != '\0') {
-          FUN_002bf538();
+          efctSetSpeed();
         }
         temp_v6 = FUN_002bf4f8(0x19,0x13);
         temp_v10[0] = 0;
@@ -199,7 +199,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
         if (param_1->field_0x23 == '\0') {
           return;
         }
-        FUN_002bf538();
+        efctSetSpeed();
         return;
       }
       if (param_1->field_0x20 != 0) {

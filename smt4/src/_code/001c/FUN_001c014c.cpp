@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_001c01fc; not written yet. */
+/* NON_MATCHING: fragment of a larger function (reads r6 without receiving it, then conditionally enters another fragment). */
 #include "common.h"

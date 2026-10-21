@@ -41,9 +41,9 @@ extern int FUN_002333a4(int, unsigned int);
 extern unsigned int FUN_002333f0(int);
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0023553c. */
-extern int FUN_00256510(void);
+extern int inputIsQuestCancelPressed(void);
 extern int FUN_00262cb0(unsigned short);
-extern int FUN_002762e0(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_00295660. */
@@ -89,9 +89,9 @@ void FUN_003abed8(int param_1)
   FUN_0029e620(-temp_v6,0);
   temp_v7 = 0;
   temp_v8 = 0;
-  temp_v1 = FUN_002762e0();
+  temp_v1 = inputIsQuestMenuPressed();
   if (0 < *(short *)(param_1 + 0x5a8)) {
-    temp_v8 = FUN_00256510();
+    temp_v8 = inputIsQuestCancelPressed();
     temp_v7 = FUN_0027ee9c();
   }
   if (*(char *)(param_1 + 0x56e) != '\0') {

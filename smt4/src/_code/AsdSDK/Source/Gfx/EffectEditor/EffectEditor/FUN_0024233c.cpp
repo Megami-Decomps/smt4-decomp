@@ -17,7 +17,7 @@ int effBlockSetBlobB(unsigned int, unsigned int [2], int);
 int FUN_002629a8(...);
 int FUN_002629f0(...);
 int FUN_002a3d58(...);
-int FUN_002be624(int, unsigned char *, unsigned int);
+int textFormatBuffer(int, unsigned char *, unsigned int);
 int libc_strcpy(int, unsigned int);
 int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
@@ -74,7 +74,7 @@ extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
-extern unsigned int FUN_0024c3f8(void);
+extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
@@ -84,7 +84,7 @@ extern unsigned int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_002629a8. */
 /* Supplied declaration required: FUN_002629f0. */
 /* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
@@ -127,7 +127,7 @@ unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param
       puVar2 = *(unsigned int **)(param_2 + temp_v3 * 0x1c);
       temp_v5 = temp_v6;
       if (puVar2 != (unsigned int *)0x0) {
-        FUN_002be624(temp_v6,&LAB_002426ac,*puVar2);
+        textFormatBuffer(temp_v6,&LAB_002426ac,*puVar2);
         piVar3 = (int *)(temp_v0 + temp_v4 * 0x18);
         temp_v5 = temp_v6 + 0x14;
         *piVar3 = temp_v6;
@@ -186,7 +186,7 @@ LAB_002424b8:
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
-      temp_v2 = FUN_0024c3f8();
+      temp_v2 = resourceResolveHeaderPointer();
       rt_memcpy(*(unsigned int *)(temp_v6 + 0xc),temp_v2,*(unsigned int *)(temp_v6 + 0x10));
     }
     else {

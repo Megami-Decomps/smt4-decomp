@@ -7,11 +7,11 @@ extern "C" {
 int FUN_0026e324(...);
 
 int FUN_0026e420(...);
-int FUN_0026e5ec(...);
+int saveGetMapFlag(...);
 int FUN_0026e61c(...);
 int FUN_0026e630(...);
 int FUN_0026f824(int);
-int FUN_00276218(void);
+int gameCopyPersistentSave(void);
 int FUN_00287c34(int);
 int gameFlagSetValue(...);
 int FUN_00299370(...);
@@ -64,11 +64,11 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int FUN_001ed60c(void);
 /* Supplied declaration required: FUN_0026e324. */
 /* Supplied declaration required: FUN_0026e420. */
-/* Supplied declaration required: FUN_0026e5ec. */
+/* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: FUN_0026e61c. */
 /* Supplied declaration required: FUN_0026e630. */
 /* Supplied declaration required: FUN_0026f824. */
-/* Supplied declaration required: FUN_00276218. */
+/* Supplied declaration required: gameCopyPersistentSave. */
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: gameFlagSetValue. */
 extern int flagBitIsSet(unsigned int);
@@ -246,7 +246,7 @@ void FUN_001c36d8(int param_1)
               temp_v27 = gameFlagIsSet(0x67b);
               temp_v28 = gameFlagIsSet(0x464);
               temp_v1 = gameFlagIsSet(0x551);
-              FUN_00276218();
+              gameCopyPersistentSave();
               FUN_0026f824(0);
               FUN_00287c34(0);
               temp_v2 = gameDataBlocksGetSaveData();
@@ -405,7 +405,7 @@ void FUN_001c36d8(int param_1)
                         *(unsigned short *)(temp_v6 + 0x44) = 0;
                         FUN_0026e61c(temp_v6,2);
                         FUN_0029c6b0(temp_v6);
-                        FUN_0026e5ec(0x20,1);
+                        saveGetMapFlag(0x20,1);
                         if (temp_v1 != 0) {
                           gameFlagSetValue(0x551,1);
                         }

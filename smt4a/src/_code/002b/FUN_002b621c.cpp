@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern short DAT_005f1880; /* 0x5f1880 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -35,7 +35,7 @@ void FUN_002b621c(void)
   unsigned int temp_v6;
   float temp_v7;
   
-  temp_v0 = DAT_005806d4;
+  temp_v0 = g_mapEnemy;
   temp_v1 = (int)DAT_005f1880;
   FUN_003a315c();
   temp_v3 = 0;

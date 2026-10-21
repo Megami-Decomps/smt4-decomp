@@ -7,7 +7,7 @@ extern "C" {
 int nodeSetTranslation(unsigned int, int, unsigned char [16]);
 int FUN_00298d50(unsigned int);
 int FUN_002adde8(unsigned int, unsigned char [32], unsigned char [16]);
-int FUN_002be624(unsigned char [32], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [32], unsigned char *, unsigned int);
 int FUN_002c159c(void);
 
 extern unsigned char LAB_003847f4; /* 0x3847f4 */
@@ -15,7 +15,7 @@ extern unsigned char LAB_003847f4; /* 0x3847f4 */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002adde8. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002c159c. */
 extern unsigned int FUN_002c501c(void);
 
@@ -40,7 +40,7 @@ void FUN_003846e8(int param_1)
     temp_v1 = 0;
     *(unsigned char *)(param_1 + 0xd40) = 1;
     do {
-      FUN_002be624(temp_v3,&LAB_003847f4,temp_v1 + 1);
+      textFormatBuffer(temp_v3,&LAB_003847f4,temp_v1 + 1);
       if (*(char *)(param_1 + 0x21) != '\x02') {
         FUN_002adde8(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xfac) + 0x1c) + 8),temp_v3,
                      temp_v4);

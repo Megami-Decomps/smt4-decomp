@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_00185dd4(int, int, unsigned int, int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int SBORROW4(int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -30,7 +30,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00185dd4. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -103,7 +103,7 @@ void FUN_003c5de0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     } while (temp_v6 < temp_v8);
   }
   temp_v2 = *(unsigned int *)(temp_v1 + 0x52c90c + temp_v9 * 8 + 0x10);
-  FUN_0019d880();
+  jobGetScalarValue();
   if ((int)temp_v15 < 0x3f800000) {
     efctSetSpeed();
   }

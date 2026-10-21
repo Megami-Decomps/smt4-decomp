@@ -54,7 +54,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_004a96d4(unsigned int);
 extern int FUN_004f2708(int, fn_003e0cd4_arg1 *, unsigned int);
-extern int FUN_004f6384(unsigned int);
+extern int recordAreAllCountsNonpositive(unsigned int);
 
 
 unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
@@ -78,7 +78,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
   unsigned int *puVar15;
   
   if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1), temp_v8 < 1))
-      && (temp_v8 = FUN_004f6384(DAT_00573808), temp_v8 != 0)) &&
+      && (temp_v8 = recordAreAllCountsNonpositive(DAT_00573808), temp_v8 != 0)) &&
      (((param_2->field_0x45a0 & DAT_00573860) == 0 && (*(unsigned int *)(param_2 + 1) & DAT_00573864) == 0
       || (temp_v8 = FUN_004a96d4(g_btlUiBlock), temp_v8 != 0)))) {
     temp_v7 = DAT_00573854;
@@ -136,7 +136,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
     *param_1 = 0x1a;
     param_1[3] = 0;
     temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1);
-    if (((temp_v8 < 1) && (temp_v8 = FUN_004f6384(DAT_00573808), temp_v8 != 0)) &&
+    if (((temp_v8 < 1) && (temp_v8 = recordAreAllCountsNonpositive(DAT_00573808), temp_v8 != 0)) &&
        ((temp_v8 = g_btlCamera, FUN_00229ffc(), temp_v8 != 0 &&
         ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x80000) == 0)))) {
       FUN_003e9cd0(param_2);

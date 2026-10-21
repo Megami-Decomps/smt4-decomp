@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: uiSpriteSelectAnim. */
-extern int FUN_003e8430(unsigned int);
+extern int btlScriptUnitHasFlags(unsigned int);
 
 
 void FUN_002b1264(int param_1,int param_2)
@@ -35,7 +35,7 @@ void FUN_002b1264(int param_1,int param_2)
   *(unsigned short *)(temp_v1 + 0x4b78) = 0;
   *(unsigned short *)(temp_v1 + 0x4b82) = 0;
   *(unsigned short *)(temp_v1 + 0x4b8c) = 0;
-  temp_v0 = FUN_003e8430(*(unsigned int *)(param_1 + 0x3874));
+  temp_v0 = btlScriptUnitHasFlags(*(unsigned int *)(param_1 + 0x3874));
   if (temp_v0 != 0) {
     *puVar3 = 1;
     *(unsigned short *)(temp_v1 + 0x4b2c) = 5;

@@ -7,8 +7,8 @@ extern "C" {
 int asdListBoxSetItemMode2(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(void);
-int FUN_0025c58c(...);
-int FUN_00262914(...);
+int asdListBoxCreateDefault(...);
+int jobSetText(...);
 int FUN_003c33c8(...);
 int FUN_003c39fc(...);
 int FUN_003c3da4(...);
@@ -93,8 +93,8 @@ extern char *asdListBoxGetItemText(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025628c. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0025c58c. */
-/* Supplied declaration required: FUN_00262914. */
+/* Supplied declaration required: asdListBoxCreateDefault. */
+/* Supplied declaration required: jobSetText. */
 extern int jobIsValid(unsigned int);
 extern int padIsButtonPressed(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -444,11 +444,11 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
   case 3:
     if (param_1[2] == 1) {
       temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-      FUN_0025c58c(temp_v5,0x73,0);
+      asdListBoxCreateDefault(temp_v5,0x73,0);
       param_1[4] = temp_v5;
       asdListBoxAddItems();
       asdListBoxSetByteValue(param_1[4],1);
-      FUN_00262914(param_1[4],"btl Camera Menu");
+      jobSetText(param_1[4],"btl Camera Menu");
     }
     temp_v5 = 4;
     break;
@@ -669,11 +669,11 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     goto joined_r0x003c7184;
   case 0xb:
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    FUN_0025c58c(temp_v5,0x73,0);
+    asdListBoxCreateDefault(temp_v5,0x73,0);
     param_1[4] = temp_v5;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_00262914(param_1[4],"btl Param Menu");
+    jobSetText(param_1[4],"btl Param Menu");
     asdListBoxSetItemMode3(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
     param_1[7] = 0xffffffff;
     temp_v5 = 0xc;
@@ -684,11 +684,11 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     goto joined_r0x003c7184;
   case 0xd:
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    FUN_0025c58c(temp_v5,0x73,0);
+    asdListBoxCreateDefault(temp_v5,0x73,0);
     param_1[4] = temp_v5;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_00262914(param_1[4],"btl Bad Menu");
+    jobSetText(param_1[4],"btl Bad Menu");
     asdListBoxSetItemMode3(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
     *(unsigned char *)(param_1 + 5) = 0;
     *(unsigned char *)((int)param_1 + 0x15) = 0;
@@ -711,11 +711,11 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     goto joined_r0x003c7184;
   case 0x11:
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    FUN_0025c58c(temp_v5,0x73,0);
+    asdListBoxCreateDefault(temp_v5,0x73,0);
     param_1[4] = temp_v5;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_00262914(param_1[4],"btl Talk Menu");
+    jobSetText(param_1[4],"btl Talk Menu");
     puVar11 = (unsigned int *)(param_2 + 0x44a8);
     asdListBoxSetItemMode2(param_1[4],0,(*puVar11 & 0x1000) >> 0xc);
     asdListBoxSetItemMode2(param_1[4],1,(*puVar11 & 0x2000) >> 0xd);
@@ -746,11 +746,11 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     goto joined_r0x003c7184;
   case 0x17:
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    FUN_0025c58c(temp_v5,0x73,0);
+    asdListBoxCreateDefault(temp_v5,0x73,0);
     param_1[4] = temp_v5;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_00262914(param_1[4],"btl Result Menu");
+    jobSetText(param_1[4],"btl Result Menu");
     asdListBoxSetItemMode2(param_1[4],0);
     asdListBoxSetItemMode2(param_1[4],1);
     temp_v5 = 0x18;
@@ -792,11 +792,11 @@ joined_r0x003c7184:
     break;
   case 0x19:
     temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    FUN_0025c58c(temp_v5,0x73,0);
+    asdListBoxCreateDefault(temp_v5,0x73,0);
     param_1[4] = temp_v5;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_00262914(param_1[4],"btl Debug Menu");
+    jobSetText(param_1[4],"btl Debug Menu");
     temp_v5 = 0;
     break;
   case 0x1a:

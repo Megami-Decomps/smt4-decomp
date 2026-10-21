@@ -27,7 +27,7 @@ extern int g_mapObj; /* 0x447e70 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-extern int FUN_0024effc(void);
+extern int dataTableGetRecordFortyFive(void);
 /* Supplied declaration required: FUN_0025be44. */
 /* Supplied declaration required: FUN_00287aec. */
 
@@ -55,7 +55,7 @@ void FUN_002c8b80(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
   psVar4 = (short *)0x0;
   temp_v2 = 99999;
   temp_v8 = romwright_piece_4_4(in_s0,in_s1);
-  temp_v1 = FUN_0024effc();
+  temp_v1 = dataTableGetRecordFortyFive();
   if (0 < temp_v1) {
     temp_v7 = (unsigned long long)(unsigned int)((float)temp_v8 + 20.0f) << 0x20;
     do {
@@ -96,7 +96,7 @@ void FUN_002c8b80(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
       }
 LAB_002c8cb8:
       psVar4 = (short *)((int)psVar4 + 1);
-      temp_v1 = FUN_0024effc();
+      temp_v1 = dataTableGetRecordFortyFive();
     } while ((int)psVar4 < temp_v1);
   }
   return;

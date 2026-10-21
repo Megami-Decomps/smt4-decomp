@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -14,7 +14,7 @@ int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(...);
 int FUN_001879d0(unsigned int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned char LAB_00372450; /* 0x372450 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00180114(void);
@@ -41,7 +41,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 extern short FUN_0019e52c(unsigned short);
 
 
@@ -64,12 +64,12 @@ void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int p
   
   temp_v7 = 0.26f;
   FUN_001879d0(g_renderCtx);
-  FUN_0019d880();
+  jobGetScalarValue();
   efctSetSpeed();
   temp_v2 = FUN_0019e52c(*(unsigned short *)(param_2 + 300));
   temp_v0 = *(unsigned short *)(param_2 + 100);
   temp_v3 = FUN_00180114();
-  FUN_00100388(temp_v8,&LAB_0037243c,temp_v3);
+  textFormatBuffer(temp_v8,&LAB_0037243c,temp_v3);
   temp_v6 = temp_v7;
   FUN_001879d0(g_renderCtx);
   temp_v3 = 0xbba;
@@ -93,7 +93,7 @@ void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int p
     temp_v3 = 3;
     temp_v4 = param_3 * 3 + 0xbee;
   }
-  FUN_00100388(temp_v9,&LAB_00372450,temp_v0);
+  textFormatBuffer(temp_v9,&LAB_00372450,temp_v0);
   temp_v4 = FUN_001834a4(0x14,temp_v4);
   temp_v2 = *(short *)(temp_v4 + 8);
   temp_v1 = *(short *)(temp_v4 + 10);

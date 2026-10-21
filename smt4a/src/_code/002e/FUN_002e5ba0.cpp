@@ -8,7 +8,7 @@ int asdTMTexTableLoadTmx(int, int);
 int asdMemFree(void);
 int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_00275bc8(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_002804b0(...);
@@ -27,7 +27,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -80,7 +80,7 @@ int FUN_002e5ba0(int *param_1)
     asdTMTexTableLoadTmx(0x22,0);
     temp_v0 = 1;
     do {
-      FUN_001acf98(0x22,temp_v0);
+      asdTMTexLoadMainHeap(0x22,temp_v0);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
     *(unsigned int *)(temp_v3 + 0x10) = 1;

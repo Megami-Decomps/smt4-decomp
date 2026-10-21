@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int FUN_00178b04(...);
 int FUN_0020214c(void);
-int FUN_0020f0e8(void);
+int mapFilterLoad(void);
 int FUN_00244220(void);
 int FUN_002d7f08(void);
 int FUN_00363c58(int);
@@ -52,12 +52,12 @@ extern unsigned int DAT_005f1b60; /* 0x5f1b60 */
 extern unsigned int DAT_005f1b64; /* 0x5f1b64 */
 extern unsigned int DAT_005f1b6c; /* 0x5f1b6c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_0020f0e8. */
+/* Supplied declaration required: mapFilterLoad. */
 /* Supplied declaration required: FUN_00244220. */
 /* Supplied declaration required: FUN_002d7f08. */
 /* Supplied declaration required: FUN_00363c58. */
@@ -78,7 +78,7 @@ void FUN_002326b4(void)
   unsigned char temp_v2 [128];
   
   FUN_00363c58(0);
-  FUN_0020f0e8();
+  mapFilterLoad();
   FUN_002d7f08();
   FUN_0037b150();
   asdTMTexTableLoadSprites(0x13);
@@ -97,7 +97,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b10 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232ad8);
+  textFormatBuffer(temp_v2,&LAB_00232ad8);
   FUN_0040aa6c(DAT_005f1b10,temp_v2);
   FUN_0040aad4(DAT_005f1b10,0);
   temp_v0 = 0x20;
@@ -107,7 +107,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b14 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232af0);
+  textFormatBuffer(temp_v2,&LAB_00232af0);
   FUN_0040aa6c(DAT_005f1b14,temp_v2);
   FUN_0040aad4(DAT_005f1b14,0);
   temp_v0 = 0x20;
@@ -117,7 +117,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b18 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232b08);
+  textFormatBuffer(temp_v2,&LAB_00232b08);
   FUN_0040aa6c(DAT_005f1b18,temp_v2);
   FUN_0040aad4(DAT_005f1b18,0);
   temp_v0 = 0x20;
@@ -127,7 +127,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b1c = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232b24);
+  textFormatBuffer(temp_v2,&LAB_00232b24);
   FUN_0040aa6c(DAT_005f1b1c,temp_v2);
   FUN_0040aad4(DAT_005f1b1c,0);
   temp_v0 = 0x20;
@@ -137,7 +137,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b20 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232b40);
+  textFormatBuffer(temp_v2,&LAB_00232b40);
   FUN_0040aa6c(DAT_005f1b20,temp_v2);
   FUN_0040aad4(DAT_005f1b20,0);
   temp_v0 = 0x20;
@@ -147,7 +147,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b2c = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232af0);
+  textFormatBuffer(temp_v2,&LAB_00232af0);
   FUN_0040aa6c(DAT_005f1b2c,temp_v2);
   FUN_0040aad4(DAT_005f1b2c,0);
   temp_v0 = 0x20;
@@ -157,7 +157,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b24 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232b60);
+  textFormatBuffer(temp_v2,&LAB_00232b60);
   FUN_0040aa6c(DAT_005f1b24,temp_v2);
   FUN_0040aad4(DAT_005f1b24,0);
   temp_v0 = 0x20;
@@ -167,7 +167,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b28 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232b7c);
+  textFormatBuffer(temp_v2,&LAB_00232b7c);
   FUN_0040aa6c(DAT_005f1b28,temp_v2);
   FUN_0040aad4(DAT_005f1b28,0);
   temp_v0 = 0x20;
@@ -177,7 +177,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b30 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232b94);
+  textFormatBuffer(temp_v2,&LAB_00232b94);
   FUN_0040aa6c(DAT_005f1b30,temp_v2);
   FUN_0040aad4(DAT_005f1b30,0);
   temp_v0 = 0x20;
@@ -187,7 +187,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b34 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232bb0);
+  textFormatBuffer(temp_v2,&LAB_00232bb0);
   FUN_0040aa6c(DAT_005f1b34,temp_v2);
   FUN_0040aad4(DAT_005f1b34,0);
   temp_v0 = 0x20;
@@ -197,7 +197,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b38 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232bc8);
+  textFormatBuffer(temp_v2,&LAB_00232bc8);
   FUN_0040aa6c(DAT_005f1b38,temp_v2);
   FUN_0040aad4(DAT_005f1b38,0);
   temp_v0 = 0x20;
@@ -207,7 +207,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b4c = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232cf8);
+  textFormatBuffer(temp_v2,&LAB_00232cf8);
   FUN_0040aa6c(DAT_005f1b4c,temp_v2);
   FUN_0040aad4(DAT_005f1b4c,0);
   temp_v0 = 0x20;
@@ -217,7 +217,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b60 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232d10);
+  textFormatBuffer(temp_v2,&LAB_00232d10);
   FUN_0040aa6c(DAT_005f1b60,temp_v2);
   FUN_0040aad4(DAT_005f1b60,0);
   temp_v0 = 0x20;
@@ -227,7 +227,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b64 = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232d28);
+  textFormatBuffer(temp_v2,&LAB_00232d28);
   FUN_0040aa6c(DAT_005f1b64,temp_v2);
   FUN_0040aad4(DAT_005f1b64,0);
   temp_v0 = 0x20;
@@ -237,7 +237,7 @@ void FUN_002326b4(void)
     temp_v1 = FUN_0040ac08();
   }
   DAT_005f1b6c = temp_v1;
-  FUN_00100388(temp_v2,&LAB_00232d40);
+  textFormatBuffer(temp_v2,&LAB_00232d40);
   FUN_0040aa6c(DAT_005f1b6c,temp_v2);
   FUN_0040aad4(DAT_005f1b6c,0);
   FUN_00244220();

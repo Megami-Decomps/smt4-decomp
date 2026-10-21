@@ -8,7 +8,7 @@ int FUN_00126fb8(int);
 int FUN_0023392c(unsigned int *, unsigned int, int);
 int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
-int FUN_002340e4(int *);
+int timeInitializeActiveState(int *);
 int aocClearDisplayFlag(unsigned int);
 int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_002a126c(int *, unsigned int);
@@ -31,7 +31,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: aocClearDisplayFlag. */
 extern int strIsEmpty(unsigned int *);
@@ -64,7 +64,7 @@ void FUN_0038f148(unsigned int *param_1)
   unsigned int uStack_20;
   unsigned int uStack_1c;
   
-  FUN_002340e4(&temp_v3);
+  timeInitializeActiveState(&temp_v3);
   temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
   *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
   if ((temp_v0 & 0x10) != 0) {

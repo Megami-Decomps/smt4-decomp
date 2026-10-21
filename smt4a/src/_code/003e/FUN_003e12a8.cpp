@@ -7,16 +7,16 @@ extern "C" {
 int __aeabi_memset4(unsigned int [43], int, unsigned int);
 int FUN_0039ba24(unsigned int [43], int, unsigned int);
 int aocLoaderUpdateRecords(unsigned int *, int);
-int FUN_003e8b78(int);
-int FUN_003ed1f8(int, int);
+int uiEntriesReset(int);
+int uiInsertIdInFirstFreeSlot(int, int);
 int FUN_003efb68(int, unsigned int);
 
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0039ba24. */
 /* Supplied declaration required: aocLoaderUpdateRecords. */
-/* Supplied declaration required: FUN_003e8b78. */
-/* Supplied declaration required: FUN_003ed1f8. */
-extern int FUN_003efad8(int, unsigned int);
+/* Supplied declaration required: uiEntriesReset. */
+/* Supplied declaration required: uiInsertIdInFirstFreeSlot. */
+extern int uiHasEntryId(int, unsigned int);
 /* Supplied declaration required: FUN_003efb68. */
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 
@@ -33,7 +33,7 @@ void FUN_003e12a8(unsigned int *param_1,int param_2)
   unsigned int temp_v4 [43];
   
   puVar1 = temp_v4;
-  FUN_003e8b78(param_2);
+  uiEntriesReset(param_2);
   temp_v1 = *(unsigned int *)(param_2 + 0x1ec4);
   __aeabi_memset4(temp_v4,0xa8,0xffffffff);
   FUN_0039ba24(temp_v4,0x2a,temp_v1);
@@ -41,12 +41,12 @@ void FUN_003e12a8(unsigned int *param_1,int param_2)
   temp_v2 = 0;
   if (temp_v2 < (int)puVar1) {
     do {
-      temp_v0 = FUN_003efad8(param_2,temp_v4[temp_v2]);
+      temp_v0 = uiHasEntryId(param_2,temp_v4[temp_v2]);
       if (temp_v0 == 0) {
         temp_v1 = FUN_00409fe8(temp_v4[temp_v2],1);
         FUN_003efb68(param_2,temp_v1);
         *(unsigned int *)(param_2 + temp_v3 * 8 + 0x2020) = temp_v4[temp_v2];
-        FUN_003ed1f8(param_2,(int)(short)temp_v4[temp_v2]);
+        uiInsertIdInFirstFreeSlot(param_2,(int)(short)temp_v4[temp_v2]);
         temp_v3 = temp_v3 + 1;
       }
       temp_v2 = temp_v2 + 1;

@@ -32,7 +32,7 @@ extern int FUN_00162880(void);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: msgBoxFlagsClear. */
 /* Supplied declaration required: FUN_00165088. */
-extern unsigned short FUN_00167f08(void);
+extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_00169548. */
@@ -193,7 +193,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
       if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
          (temp_v2 = FUN_003aeaf0(0), temp_v2 == 5)) {
         *(unsigned char *)(temp_v5 + 0x19da) = 1;
-        temp_v1 = FUN_00167f08();
+        temp_v1 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x19c6) = temp_v1;
         sysPlaySe(0xde);
       }

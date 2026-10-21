@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231240(uint *, unsigned int, unsigned int);
+int pointConvertToFloat(uint *, unsigned int, unsigned int);
 int FUN_00233240(uint *, int);
 int FUN_002b827c(int);
 
@@ -24,7 +24,7 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: FUN_002b827c. */
@@ -52,7 +52,7 @@ void FUN_0039c348(fn_0039c348_arg0 *param_1)
       }
       temp_v1 = vec2GetYInt(piVar4);
       temp_v2 = vec2GetXInt(piVar4);
-      FUN_00231240(&param_1[0x11].field_0x10,temp_v2,temp_v1);
+      pointConvertToFloat(&param_1[0x11].field_0x10,temp_v2,temp_v1);
       return;
     }
   }

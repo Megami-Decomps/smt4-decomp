@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0022af9c(...);
 int FUN_0022b064(...);
-int FUN_0022b684(...);
-int FUN_0027396c(...);
-int FUN_00276218(...);
+int gameSynchronizeMapState(...);
+int saveSetNavigationPosition(...);
+int gameCopyPersistentSave(...);
 int gameJumpRequestClear(...);
 int FUN_0028d664(...);
 int FUN_00291764(...);
@@ -49,10 +49,10 @@ extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 
 /* Supplied declaration required: FUN_0022af9c. */
 /* Supplied declaration required: FUN_0022b064. */
-/* Supplied declaration required: FUN_0022b684. */
-/* Supplied declaration required: FUN_0027396c. */
+/* Supplied declaration required: gameSynchronizeMapState. */
+/* Supplied declaration required: saveSetNavigationPosition. */
 extern int FUN_0027398c(int);
-/* Supplied declaration required: FUN_00276218. */
+/* Supplied declaration required: gameCopyPersistentSave. */
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_0028d664. */
 /* Supplied declaration required: FUN_00291764. */
@@ -91,8 +91,8 @@ void FUN_003b9fd8(fn_003b9fd8_arg0 *param_1)
         temp_v2 = 3;
         temp_v3 = (unsigned char)param_1->field_0x3c;
         temp_v4 = (unsigned char)param_1->field_0x40;
-        FUN_0027396c(&temp_v2);
-        FUN_00276218();
+        saveSetNavigationPosition(&temp_v2);
+        gameCopyPersistentSave();
         temp_v9 = (unsigned short)DAT_0049fd14;
         temp_v10 = (unsigned short)DAT_0049fd18;
         temp_v11 = (unsigned short)DAT_0049fd1c;
@@ -113,9 +113,9 @@ void FUN_003b9fd8(fn_003b9fd8_arg0 *param_1)
         temp_v2 = 3;
         temp_v3 = (unsigned char)param_1->field_0x3c;
         temp_v4 = (unsigned char)param_1->field_0x40;
-        FUN_0027396c(&temp_v2);
-        FUN_00276218();
-        FUN_0022b684(param_1);
+        saveSetNavigationPosition(&temp_v2);
+        gameCopyPersistentSave();
+        gameSynchronizeMapState(param_1);
         param_1->field_0x20 = param_1->field_0x20 | 0x40100;
         param_1->field_0x2c = 0;
         param_1->field_0x28 = 5;

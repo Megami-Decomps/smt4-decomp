@@ -10,7 +10,7 @@ void gameFlagSetValue(s32 a, s32 b, s32 c);
 s32 gameFlagIsSet(u32 id);
 
 extern GameStateA g_gameState;
-extern s32 DAT_005f1c98;
+extern s32 g_mapSelection;
 
 s32 FUN_00331060(void)
 {
@@ -23,7 +23,7 @@ s32 FUN_00331060(void)
         FUN_00312d6c();
         gameFlagSetValue(0x11F9, 0, 1);
     }
-    if (g_gameState.unk574 != 0 || DAT_005f1c98 != -1) {
+    if (g_gameState.unk574 != 0 || g_mapSelection != -1) {
         asdSequenceRequest(6, 0, 0);
     }
     return 1;

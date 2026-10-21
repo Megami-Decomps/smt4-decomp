@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0010ffdc's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Copies a stored word when an output pointer is supplied. */
+void FUN_00123c78(const u32 *value, u32 *output)
+{
+    if (output != NULL) {
+        *output = *value;
+    }
+}
+
+} /* extern "C" */

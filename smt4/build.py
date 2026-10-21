@@ -241,8 +241,9 @@ def carve(obj, unit):
     marks = sorted((s["value"], s["name"]) for s in symbols if s["shndx"] == index and s["name"] in ("$a", "$t", "$d"))
     pools = [(value, next((v for v, _n in marks if v > value), len(code))) for value, name in marks if name == "$d"]
     attributes = next((bytes(data[s["offset"]:s["offset"] + s["size"]]) for s in sections if s["type"] == 0x70000003), b"")
+    # armcc's own symbol size is the truth, except for an alias (D1 of D2), which has none.
     Path(obj).write_bytes(split.build_object(unit["function"], bytes(code), bool(unit.get("thumb")), relocs, pools,
-                                             attributes, local_symbols, own["size"], weak))
+                                             attributes, local_symbols, own["size"], weak, symbol_size=own["size"] or None))
     return True
 
 

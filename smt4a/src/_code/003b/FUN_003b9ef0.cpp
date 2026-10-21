@@ -10,18 +10,18 @@ int FUN_003d2150(...);
 int FUN_0013cab8(...);
 int FUN_00272f54(void);
 int FUN_002bcafc(void);
-int FUN_002de99c(...);
+int navigationSetArguments(...);
 int FUN_00303460(...);
 int blockResetAxis(unsigned int);
 int FUN_00313648(...);
 int FUN_00314c38(...);
 int mapPlaceSet(...);
-int FUN_0033f938(...);
+int naviMainApplyRequestValue(...);
 int FUN_0035846c(void);
-int FUN_00368b28(...);
+int naviMainSetRequestValue(...);
 int FUN_0036b004(void);
 int FUN_003a2278(...);
-int FUN_003a366c(...);
+int naviMainSetRequestTriple(...);
 int FUN_003b5714(...);
 int FUN_003b5d20(void);
 int VectorSignedToFloat(...);
@@ -70,7 +70,7 @@ extern unsigned int DAT_005f1ae0; /* 0x5f1ae0 */
 extern unsigned int DAT_005f1ae4; /* 0x5f1ae4 */
 extern unsigned int DAT_005f1ae8; /* 0x5f1ae8 */
 extern unsigned int DAT_005f1aec; /* 0x5f1aec */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 extern int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 
@@ -81,21 +81,21 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_002750d8. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bcafc. */
-/* Supplied declaration required: FUN_002de99c. */
+/* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: FUN_0033f938. */
+/* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_0035846c. */
-/* Supplied declaration required: FUN_00368b28. */
+/* Supplied declaration required: naviMainSetRequestValue. */
 /* Supplied declaration required: FUN_0036b004. */
 extern int FUN_00376f84(void);
 extern int FUN_00376f94(void);
 extern int FUN_003798f0(void);
 /* Supplied declaration required: FUN_003a2278. */
-/* Supplied declaration required: FUN_003a366c. */
+/* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003b5d20. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -126,10 +126,10 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x28) = 0x88;
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
-      FUN_00368b28(1);
+      naviMainSetRequestValue(1);
       return;
     }
-    DAT_005f1c98 = -1;
+    g_mapSelection = -1;
     DAT_005f1658 = 0;
     blockResetAxis(0xffffffff);
   }
@@ -142,7 +142,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       return;
     }
-    DAT_005f1c98 = -1;
+    g_mapSelection = -1;
     DAT_005f1658 = 0;
     blockResetAxis(0xffffffff);
   }
@@ -156,7 +156,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x28) = 0x65;
       return;
     }
-    DAT_005f1c98 = -1;
+    g_mapSelection = -1;
     DAT_005f1658 = 0;
     blockResetAxis(0xffffffff);
   }
@@ -195,7 +195,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       return;
     }
-    if (DAT_005f1c98 != -1) {
+    if (g_mapSelection != -1) {
       temp_v5 = *(int *)(temp_v2 + 0x34);
       DAT_005f1858 = DAT_005f1648 != 0;
       temp_v1 = FUN_00376f94();
@@ -204,7 +204,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       }
       temp_v1 = g_lmapScene;
       temp_v3 = *(int *)(temp_v2 + 0x30);
-      temp_v7 = temp_v3 == DAT_005f1c98;
+      temp_v7 = temp_v3 == g_mapSelection;
       if (temp_v7) {
         param_3 = DAT_005f1c9c;
       }
@@ -253,10 +253,10 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
           *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v4;
         }
       }
-      FUN_002de99c(DAT_005f1608,DAT_005f160c,DAT_005f1604);
-      FUN_003a366c(DAT_005f1608,DAT_005f160c,DAT_005f1604);
-      FUN_0033f938(DAT_005f1608);
-      FUN_00368b28(0);
+      navigationSetArguments(DAT_005f1608,DAT_005f160c,DAT_005f1604);
+      naviMainSetRequestTriple(DAT_005f1608,DAT_005f160c,DAT_005f1604);
+      naviMainApplyRequestValue(DAT_005f1608);
+      naviMainSetRequestValue(0);
       mapPlaceSet(0xffffffff,0xffffffff);
       FUN_00272f54();
       FUN_00303460(0);

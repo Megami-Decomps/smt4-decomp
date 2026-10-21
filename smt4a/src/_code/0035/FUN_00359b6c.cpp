@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *);
+int textFormatBuffer(int *, unsigned char *);
 int dataTable04FindById(void);
 int FUN_0020d164(int *, unsigned int);
 int FUN_00230c1c(int *, unsigned int);
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_00359c6c; /* 0x359c6c */
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0016a0e8(void);
 extern int idIsAbove400(int);
 /* Supplied declaration required: dataTable04FindById. */
@@ -57,7 +57,7 @@ void FUN_00359b6c(int param_1)
       FUN_0034a290();
       FUN_0020d164(&temp_v3,(*(unsigned int *)(temp_v2 + 0x44) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&temp_v3);
-      FUN_00100388(&temp_v3,&LAB_00359c6c);
+      textFormatBuffer(&temp_v3,&LAB_00359c6c);
       FUN_003180c4(0x25,&temp_v3);
     }
     else {

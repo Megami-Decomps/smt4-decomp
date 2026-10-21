@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0027d9a8(void);
+int randomGetNormalizedFloat(void);
 int FUN_002929d8(float *, int);
 int asdOperatorNew(void);
 
@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0027d9a8. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_002929d8. */
 /* Supplied declaration required: asdOperatorNew. */
 extern int FUN_0034afd4(void);
@@ -60,12 +60,12 @@ int FUN_00349fc0(int param_1)
   temp_v3 = 1.0f;
   temp_v2 = 0.0f;
   *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(param_1 + 4);
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
   FUN_002929d8(&temp_v8,1);
   temp_v4 = temp_v8 * temp_v3 + temp_v9 * temp_v2 + temp_v10 * temp_v2;
   temp_v5 = temp_v11 * temp_v3 + temp_v12 * temp_v2 + temp_v13 * temp_v2;
   temp_v1 = temp_v13;
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
   temp_v6 = 0.5f;
   temp_v7 = 2.0f;
   temp_v1 = (temp_v1 - 0.5f) * 2.0f * *(float *)(param_1 + 8);
@@ -73,25 +73,25 @@ int FUN_00349fc0(int param_1)
   *(float *)(temp_v0 + 0x10) =
        temp_v5 * temp_v1 * *(float *)(temp_v0 + 0x34) * 0.5f + *(float *)(temp_v0 + 0x34) * 0.5f;
   *(float *)(temp_v0 + 0x14) = temp_v2;
-  FUN_0027d9a8();
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
+  randomGetNormalizedFloat();
   FUN_002929d8(&temp_v8,1);
   temp_v1 = temp_v8 * temp_v2 + temp_v9 * temp_v3 + temp_v10 * temp_v2;
   temp_v4 = temp_v11 * temp_v2 + temp_v12 * temp_v3 + temp_v13 * temp_v2;
   temp_v3 = temp_v14 * temp_v2 + temp_v15 * temp_v3 + temp_v16 * temp_v2;
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
   temp_v2 = *(float *)(param_1 + 0xc) + *(float *)(param_1 + 0x10) * (temp_v16 - temp_v6) * temp_v7;
   temp_v1 = temp_v1 * temp_v2;
   *(float *)(temp_v0 + 0x3c) = temp_v1;
   *(float *)(temp_v0 + 0x40) = temp_v4 * temp_v2;
   *(float *)(temp_v0 + 0x44) = temp_v3 * temp_v2;
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
   temp_v1 = (temp_v1 - temp_v6) * temp_v7;
   temp_v2 = *(float *)(param_1 + 0x1c) + *(float *)(param_1 + 0x28) * temp_v1;
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
   temp_v1 = (temp_v1 - temp_v6) * temp_v7;
   temp_v3 = *(float *)(param_1 + 0x20) + *(float *)(param_1 + 0x2c) * temp_v1;
-  FUN_0027d9a8();
+  randomGetNormalizedFloat();
   *(float *)(temp_v0 + 0x5c) =
        *(float *)(param_1 + 0x24) + *(float *)(param_1 + 0x30) * (temp_v1 - temp_v6) * temp_v7;
   *(float *)(temp_v0 + 0x54) = temp_v2;

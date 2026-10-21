@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162758(...);
 int efctSetSpeed(void);
 int FUN_00180118(void);
@@ -33,7 +33,7 @@ extern unsigned char LAB_004a6584; /* 0x4a6584 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00162758. */
 extern int vec2GetXInt(void);
@@ -46,7 +46,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
-extern int FUN_004cfb24(unsigned int, unsigned int);
+extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004cfb64. */
 
 
@@ -129,7 +129,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
       temp_v13 = 3;
     }
     temp_v6 = FUN_0014bf3c(param_4 & 0xffff,0);
-    temp_v3 = FUN_004cfb24(temp_v6,2);
+    temp_v3 = curveEvaluateStandard(temp_v6,2);
     if (param_3 == 0) {
       temp_v8 = 0x105b;
       temp_v11 = 0xff;
@@ -172,7 +172,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v13 = 0xffffffff;
     temp_v15 = *(short *)(temp_v3 + 10) + temp_v2;
-    FUN_00100388(temp_v14,&LAB_004a657c,temp_v12);
+    textFormatBuffer(temp_v14,&LAB_004a657c,temp_v12);
     FUN_00493408(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
     param_4 = param_4 & 0xffff;
     temp_v6 = 0;
@@ -189,7 +189,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     }
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v1 = *(short *)(temp_v3 + 10);
-    FUN_00100388(temp_v14,&LAB_004a6584,temp_v6);
+    textFormatBuffer(temp_v14,&LAB_004a6584,temp_v6);
     FUN_00493408(param_1 + 200,0,temp_v10 + temp_v0,temp_v1 + temp_v2,0,7,temp_v13,temp_v9,temp_v14);
   }
   return;

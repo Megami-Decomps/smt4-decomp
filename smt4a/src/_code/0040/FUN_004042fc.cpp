@@ -11,7 +11,7 @@ int FUN_001835b4(...);
 int FUN_001879d0(int);
 int FUN_002a4860(int);
 int FUN_002c2c68(int);
-int FUN_00348ed0(int);
+int uiSearchPrimary(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -33,7 +33,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002c2c68. */
-/* Supplied declaration required: FUN_00348ed0. */
+/* Supplied declaration required: uiSearchPrimary. */
 
 
 void FUN_004042fc(int param_1,int param_2,int param_3)
@@ -63,7 +63,7 @@ void FUN_004042fc(int param_1,int param_2,int param_3)
   temp_v7 = 0;
   temp_v1 = FUN_001834a4(0x32,0xd);
   temp_v2 = FUN_002c2c68(param_1);
-  temp_v3 = FUN_00348ed0(param_1);
+  temp_v3 = uiSearchPrimary(param_1);
   if (temp_v3 >= temp_v2) {
     temp_v2 = (int)*(short *)(*(int *)(temp_v1 + 0xc) + 2);
   }
@@ -73,7 +73,7 @@ void FUN_004042fc(int param_1,int param_2,int param_3)
     temp_v8 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v1 + 0xc) + 2),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = temp_v8 / temp_v9;
-    temp_v4 = FUN_00348ed0(param_1);
+    temp_v4 = uiSearchPrimary(param_1);
     temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v2 = (int)(temp_v9 * temp_v8);
     if (temp_v2 < 1) {
@@ -83,7 +83,7 @@ void FUN_004042fc(int param_1,int param_2,int param_3)
     temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (int)(temp_v9 * temp_v8);
     temp_v3 = FUN_002a4860(param_1);
-    temp_v5 = FUN_00348ed0(param_1);
+    temp_v5 = uiSearchPrimary(param_1);
     temp_v6 = FUN_002c2c68(param_1);
     if ((temp_v3 + temp_v5 == temp_v6) &&
        (temp_v3 = (int)*(short *)(*(int *)(temp_v1 + 0xc) + 2), temp_v7 + temp_v2 < temp_v3)) {

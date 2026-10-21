@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023eab0(...);
+int recordClampCurrentCount(...);
 int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00262f68(...);
 int rt_memclr(...);
@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_0023eab0. */
+/* Supplied declaration required: recordClampCurrentCount. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00262f68. */
 extern int btlGetMainState(void);
@@ -158,7 +158,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
           if (temp_v2 != 0) {
             *(unsigned short *)(temp_v2 + 0x44) = *(unsigned short *)(temp_v2 + 0x44) & 0xffef;
             if (0 < (short)puVar6[0x6d]) {
-              FUN_0023eab0(puVar6[0x9f]);
+              recordClampCurrentCount(puVar6[0x9f]);
             }
             puVar6[0x9f] = 0;
           }
@@ -176,7 +176,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
             if ((temp_v2 != 0) &&
                (*(unsigned short *)(temp_v2 + 0x44) = *(unsigned short *)(temp_v2 + 0x44) & 0xffef,
                0 < (short)puVar6[0x6d])) {
-              FUN_0023eab0(puVar6[0x9f]);
+              recordClampCurrentCount(puVar6[0x9f]);
             }
           }
         }
@@ -211,7 +211,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
         }
         if ((0 < (short)puVar6[0x6d]) &&
            (*(short *)(puVar6[0x9f] + 0x46) == *(short *)((int)puVar6 + 0xce))) {
-          FUN_0023eab0();
+          recordClampCurrentCount();
         }
       }
       *(short *)(temp_v1 + 0x1fc4) = *(short *)(temp_v1 + 0x1fc4) - 1;

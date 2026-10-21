@@ -25,7 +25,7 @@ extern int FUN_001692ac(unsigned int, unsigned char);
 extern unsigned int FUN_00184df8(unsigned int);
 extern int FUN_00387580(unsigned int);
 extern int FUN_003a48dc(unsigned int, unsigned int, unsigned int);
-extern int FUN_003b5e48(unsigned char);
+extern int flagsPackFourBooleans(unsigned char);
 extern int packThreeFields(unsigned int);
 
 
@@ -77,7 +77,7 @@ void FUN_004097b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     (**(romwright_code **)(param_1 + 0x1294))();
     *(unsigned char *)(param_1 + 0x1290) = 0;
   }
-  temp_v2 = FUN_003b5e48((param_4 & 1) != 0);
+  temp_v2 = flagsPackFourBooleans((param_4 & 1) != 0);
   piVar8 = (int *)(param_1 + 0x1298);
   temp_v3 = *piVar8;
   temp_v4 = piVar8[temp_v3 + 2];

@@ -1,29 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2f1c` (_code @ 0x3f2f1c, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses `push {r4, r5, r6, lr}` where armcc emits `push {r4, lr}`. */
+#include "common.h"
 
 extern "C" {
 
-int resetFlag5891A4And65f8(void);
-int software_interrupt(int);
+struct Owner { u32 unk00; u32 handle; };
+void resetFlag5891A4And65f8(void);
+s32 svcCloseHandle(u32 handle);
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: resetFlag5891A4And65f8. */
-
-
-int * FUN_003f2f1c(int *param_1)
-
+s32 FUN_003f2f1c(Owner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  if ((char)param_1[1] != '\0') {
-    resetFlag5891A4And65f8();
-    *(unsigned char *)(param_1 + 1) = 0;
-  }
-  if (*param_1 != 0) {
-    software_interrupt(0x23);
-    *param_1 = 0;
-  }
-  return param_1;
+    if (owner->handle != 0) {
+        resetFlag5891A4And65f8();
+        svcCloseHandle(owner->handle);
+        owner->handle = 0;
+    }
+    return 0;
 }
 
 } /* extern "C" */

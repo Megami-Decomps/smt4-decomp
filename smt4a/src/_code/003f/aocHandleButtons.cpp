@@ -2,10 +2,10 @@
 
 extern "C" {
 
-void FUN_003a4958(u32 a, u32 b);
-void FUN_001acf98(u32 a, u32 b);
+void resourceApplyNodeFlag(u32 a, u32 b);
+void asdTMTexLoadMainHeap(u32 a, u32 b);
 void FUN_001a6568(u32 system, u32 a, u32 b, s32 flags);
-void FUN_003a496c(u32 a, u32 b);
+void asdTMTexNodeSetMode(u32 a, u32 b);
 s32 FUN_001a6508(u32 system, u32 a, u32 b, u32 c);
 
 extern u32 g_aocSystem;
@@ -18,7 +18,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
                 FUN_001a6568(g_aocSystem, request->idA, request->idB, 0x20000);
                 return;
             }
-            FUN_003a4958(request->idA, request->idB);
+            resourceApplyNodeFlag(request->idA, request->idB);
             return;
         }
         if ((buttons & 0x40) != 0) {
@@ -26,7 +26,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
                 FUN_001a6568(g_aocSystem, request->idA, request->idB, 0x30000);
                 return;
             }
-            FUN_003a496c(request->idA, request->idB);
+            asdTMTexNodeSetMode(request->idA, request->idB);
             return;
         }
         if ((buttons & 1) != 0) {
@@ -34,7 +34,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
                 FUN_001a6568(g_aocSystem, request->idA, request->idB, 0x10000);
                 return;
             }
-            FUN_001acf98(request->idA, request->idB);
+            asdTMTexLoadMainHeap(request->idA, request->idB);
             return;
         }
     }

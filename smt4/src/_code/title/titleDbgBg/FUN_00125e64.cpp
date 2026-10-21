@@ -8,7 +8,7 @@ int FUN_002aed34(int, int);
 int FUN_002be5a4(int, unsigned int, unsigned char *);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -27,7 +27,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int jyoucyuGetTableEntry(unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -56,7 +56,7 @@ unsigned int FUN_00125e64(void)
       (**(romwright_code **)(temp_v2 + 0x1268))();
       *(unsigned char *)(temp_v2 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     FUN_002bf288(2,0,0,0,0,0xb);
     temp_v2 = g_titleScene;

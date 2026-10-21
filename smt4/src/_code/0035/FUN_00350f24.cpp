@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern void FUN_002bb150(s64 nanoseconds);
+extern void threadSleepDuration(s64 nanoseconds);
 
 /* Waits until the first active stream has room for its current entry, then sets nextTime to
  * the base time plus that entry's timestamp. Returns early when the sync is stopped. */
@@ -29,7 +29,7 @@ void FUN_00350f24(MovieSync *sync)
             sync->nextTime = sync->baseTime + sync->ring[stream][sync->readPos[stream] % MOVIE_SYNC_RING_SIZE];
             return;
         }
-        FUN_002bb150(500000);
+        threadSleepDuration(500000);
     }
 }
 

@@ -10,7 +10,7 @@ int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, i
 int asdMemoryAllocTracked(int, int, int, int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(...);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_00203b40(...);
 int FUN_0022feb0(...);
 int sysMemClear(void);
@@ -39,7 +39,7 @@ extern int g_playLog; /* 0x57f278 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0022feb0. */
 extern int gameDataBlocksGetTable(void);
@@ -67,7 +67,7 @@ void FUN_00215254(void)
   *(unsigned int *)(temp_v0 + 0x344) = 0;
   *(unsigned int *)(temp_v0 + 0x6ec) = 0;
   asdTMTexTableLoadSprites(0x25);
-  FUN_001acf98(0x25,0);
+  asdTMTexLoadMainHeap(0x25,0);
   loadSlotEnsureLoaded(0x37);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
   paramsInit(temp_v0,&DAT_0052dd98,0x48,&DAT_0052dde0,0x18,0,0,0,0,&DAT_0052ddf8,0xe0);

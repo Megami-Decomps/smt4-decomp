@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231240(...);
+int pointConvertToFloat(...);
 int FUN_0023150c(int, int);
 int FUN_002316e8(int, int);
 int FUN_00233240(int, int);
@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_0023150c. */
 /* Supplied declaration required: FUN_002316e8. */
 /* Supplied declaration required: FUN_00233240. */
@@ -77,7 +77,7 @@ void FUN_0039c09c(int param_1)
       }
       temp_v2 = vec2GetYInt(temp_v4);
       temp_v3 = vec2GetXInt(temp_v4);
-      FUN_00231240(param_1 + 0x164,temp_v3,temp_v2);
+      pointConvertToFloat(param_1 + 0x164,temp_v3,temp_v2);
       if (*(char *)(param_1 + 0x8d2) == '\0') {
         temp_v0 = 0;
         do {
@@ -92,7 +92,7 @@ void FUN_0039c09c(int param_1)
     }
   }
   else {
-    FUN_00231240(param_1 + 0x164,0xfffffec0);
+    pointConvertToFloat(param_1 + 0x164,0xfffffec0);
     if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
       (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
       temp_v0 = gameFlagIsSet(0x16);

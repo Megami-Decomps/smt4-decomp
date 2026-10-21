@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned int FUN_002e4c2c(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_004f7cd0. */
 /* Supplied declaration required: FUN_004f8790. */
 /* Supplied declaration required: FUN_004f9278. */
@@ -41,7 +41,7 @@ void FUN_004f64f4(int param_1)
   unsigned char temp_v5;
   
   btlGetMainState();
-  temp_v1 = FUN_003e8430();
+  temp_v1 = btlScriptUnitHasFlags();
   if (temp_v1 != 0) {
     return;
   }

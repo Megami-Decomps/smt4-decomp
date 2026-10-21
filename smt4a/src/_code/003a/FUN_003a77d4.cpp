@@ -11,7 +11,7 @@ int FUN_00417b70(unsigned int);
 extern int gameGetPlayerData(void);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_003de734(unsigned int);
+extern int itemDataGetValue(unsigned int);
 extern int FUN_003df390(unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417b70. */
@@ -37,7 +37,7 @@ unsigned int FUN_003a77d4(void)
       if ((temp_v2 != 0) &&
          ((*(short *)(temp_v2 + 0x120) != 0 && ((int)*(short *)(temp_v2 + 0x120) <= (int)(unsigned int)temp_v0))))
       {
-        temp_v1 = FUN_003de734(temp_v3 & 0xffff);
+        temp_v1 = itemDataGetValue(temp_v3 & 0xffff);
         if (temp_v1 != 0) {
           gameFlagSetValue(temp_v1,1);
         }

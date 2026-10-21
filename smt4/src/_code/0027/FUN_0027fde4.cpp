@@ -9,7 +9,7 @@ int FUN_002c86ec(void);
 int FUN_001fa760(void);
 int FUN_0024f034(int, unsigned int);
 int FUN_0025247c(...);
-int FUN_00273828(void);
+int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
 int FUN_0027f48c(int, int);
 int FUN_0027fa98(unsigned int);
@@ -19,7 +19,7 @@ int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287aec(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
 int FUN_002d3e58(void);
 int mapIfReleaseSlot0(void);
@@ -44,8 +44,8 @@ extern int DAT_004c2420; /* 0x4c2420 */
 /* Supplied declaration required: FUN_0024f034. */
 /* Supplied declaration required: FUN_0025247c. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00273828. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: mapInterfaceSetStateTwo. */
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027f48c. */
@@ -56,7 +56,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287aec. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002c86ec. */
@@ -154,7 +154,7 @@ void FUN_0027fde4(void)
               *(unsigned int *)(g_lmapScene + 0x130) = temp_v16;
               *(unsigned char *)(temp_v2 + 0x115) = 1;
               temp_v11 = *(unsigned int *)(temp_v2 + 0x28);
-              FUN_00287be4();
+              mathPositionHeadingDegrees();
               *(unsigned int *)(g_lmapScene + 0x50) = temp_v11;
             }
             else {
@@ -171,7 +171,7 @@ void FUN_0027fde4(void)
               *(unsigned int *)(g_lmapScene + 0x130) = temp_v16;
               *(unsigned char *)(temp_v2 + 0x115) = 1;
               temp_v11 = *(unsigned int *)(temp_v2 + 0x28);
-              FUN_00287be4();
+              mathPositionHeadingDegrees();
               *(unsigned int *)(g_lmapScene + 0x50) = temp_v11;
             }
             FUN_0027fc14(10);
@@ -188,7 +188,7 @@ void FUN_0027fde4(void)
         else if (temp_v3 != 10) {
           if ((temp_v3 == 0xb) &&
              (temp_v3 = *(int *)(temp_v2 + 8) + 1, *(int *)(temp_v2 + 8) = temp_v3, temp_v3 == 0x14)) {
-            FUN_00273828();
+            mapInterfaceSetStateTwo();
             temp_v3 = *(int *)(g_lmapScene + 4);
             temp_v2 = g_lmapScene;
             *(int *)(temp_v2 + 4) = temp_v3 + 1;
@@ -215,7 +215,7 @@ void FUN_0027fde4(void)
         }
         else {
           temp_v2 = padIsButtonPressed(5);
-          if ((temp_v2 != 0) || (temp_v2 = FUN_002762e0(), temp_v2 != 0)) {
+          if ((temp_v2 != 0) || (temp_v2 = inputIsQuestMenuPressed(), temp_v2 != 0)) {
             temp_v2 = DAT_004474f4;
             *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v2 + 0xac) = 0;

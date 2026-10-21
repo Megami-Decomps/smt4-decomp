@@ -1,17 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7b8c` (_code @ 0x2c7b8c, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different stack-frame allocation and instruction scheduling. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-void FUN_002c7b8c(int param_1,unsigned char param_2)
-
-{
-  *(unsigned char *)(param_1 + (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x28040) = param_2;
-  return;
+struct DataTable { u8 unk00[0x88]; struct { u8 unk00[0x27FB8]; u8 flags[1]; } status; };
+extern struct { u32 unk00; DataTable *table; } g_gameDataBlocks;
+/* Writes an indexed game-data flag. */
+void FUN_002c7b8c(u32 index, s8 value) { g_gameDataBlocks.table->status.flags[index] = value; }
 }
-
-} /* extern "C" */

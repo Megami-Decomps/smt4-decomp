@@ -1,58 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047dc50` (_code @ 0x47dc50, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the sequence before clearing pending and uses STRD for the argument header; armcc reorders and uses separate stores. */
+#include "common.h"
+
+__packed struct SequenceRequestState {
+    /* 0x00 */ u8 unk00[26];
+    /* 0x1a */ u8 pending;
+    /* 0x1b */ u8 unk1b;
+    /* 0x1c */ s16 sequence;
+    /* 0x1e */ u32 arguments[6];
+    /* 0x36 */ u8 mode;
+};
+
+struct SequenceArguments {
+    s32 sequence;
+    u32 flags;
+    u32 values[6];
+};
 
 extern "C" {
 
-int asdSequenceRequest(int, int [3], int);
-int FUN_00239b10(int);
-int FUN_003b5050(void);
+void FUN_003b5050();
+void FUN_00239b10(s32 mode);
+void asdSequenceRequest(s32 kind, const SequenceArguments *arguments, u32 size);
 
-/* stack frame of param_1: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_00239b10. */
-/* Supplied declaration required: FUN_003b5050. */
-
-
-unsigned int FUN_0047dc50(int param_1)
-
+/* Consumes a pending sequence request and forwards its packed arguments. */
+s32 FUN_0047dc50(SequenceRequestState *request)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0 [3];
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  if (*(char *)(param_1 + 0x1a) != '\0') {
-    temp_v0[0] = (int)*(short *)(param_1 + 0x1c);
-    *(unsigned char *)(param_1 + 0x1a) = 0;
-    temp_v0[1] = 0xffffffff;
-    temp_v0[2] = *(unsigned int *)(param_1 + 0x1e);
-    temp_v1 = *(unsigned int *)(param_1 + 0x22);
-    temp_v2 = *(unsigned int *)(param_1 + 0x26);
-    temp_v3 = *(unsigned int *)(param_1 + 0x2a);
-    temp_v4 = *(unsigned int *)(param_1 + 0x2e);
-    temp_v5 = *(unsigned int *)(param_1 + 0x32);
+    if (!request->pending)
+        return 0;
+    SequenceArguments arguments;
+    request->pending = 0;
+    arguments.sequence = request->sequence;
+    arguments.flags = ~0u;
+    for (u32 index = 0; index < 6; ++index)
+        arguments.values[index] = request->arguments[index];
     FUN_003b5050();
     FUN_00239b10(2);
-    asdSequenceRequest(4,temp_v0,0x20);
-                    /* WARNING: Treating indirect jump as return */
+    asdSequenceRequest(4, &arguments, 32);
     return 1;
-  }
-  return 0;
 }
 
-} /* extern "C" */
+}

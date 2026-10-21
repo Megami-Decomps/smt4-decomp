@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00276310(void);
+int navigationFinishReadyField(void);
 int FUN_002c8b60(void);
 int mapGimicReset(void);
 
 extern unsigned char DAT_00447518; /* 0x447518 */
 
-/* Supplied declaration required: FUN_00276310. */
+/* Supplied declaration required: navigationFinishReadyField. */
 /* Supplied declaration required: FUN_002c8b60. */
 extern int FUN_002d3ec0(void);
 /* Supplied declaration required: mapGimicReset. */
@@ -44,7 +44,7 @@ unsigned int FUN_00311048(void)
     }
   }
   else {
-    FUN_00276310();
+    navigationFinishReadyField();
     mapGimicReset();
     (*(int *)((unsigned char *)&DAT_00447518 + 0x8)) = 1;
   }

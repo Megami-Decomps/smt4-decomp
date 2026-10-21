@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(...);
 int FUN_0032cfe0(int);
 int FUN_003343f0(int);
-int FUN_004935b0(...);
+int pointConvertToFloat(...);
 int FUN_004d05c4(int, int, int, int);
 
 typedef int romwright_code(...);
@@ -16,7 +16,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0032cfe0. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_004cf8dc(int, int);
 /* Supplied declaration required: FUN_004d05c4. */
 
@@ -35,7 +35,7 @@ void FUN_004a15a0(int param_1)
   temp_v3 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
   temp_v1 = vec2GetYInt(temp_v3);
   temp_v2 = vec2GetXInt(temp_v3);
-  FUN_004935b0(param_1 + 200,temp_v2,temp_v1);
+  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0x860) != '\0') {
       if (*(char *)(param_1 + 0x861) == '\x01') {
@@ -53,7 +53,7 @@ void FUN_004a15a0(int param_1)
     FUN_003343f0(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_004935b0(param_1 + 200,0,0);
+    pointConvertToFloat(param_1 + 200,0,0);
     (**(romwright_code **)(**(int **)(param_1 + 0x84c) + 8))(*(int **)(param_1 + 0x84c),param_1 + 0x20);
     puVar4 = (unsigned short *)(*(int *)(param_1 + 0x84c) + 4);
     *puVar4 = *puVar4 | 0x1000;

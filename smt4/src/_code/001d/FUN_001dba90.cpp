@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of param_4: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned char sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 int FUN_001dba90(char *param_1,unsigned int param_2,int param_3,int param_4)
@@ -57,7 +57,7 @@ int FUN_001dba90(char *param_1,unsigned int param_2,int param_3,int param_4)
   acStack_20[3] = '\0';
   temp_v1 = 0;
   if ((param_3 < 0) && (param_4 == 0)) {
-    FUN_002be624(&temp_v2,(char *)0x409710,param_2);
+    textFormatBuffer(&temp_v2,(char *)0x409710,param_2);
     temp_v1 = 0;
     if (temp_v2 == '\0') {
       return 0;
@@ -75,10 +75,10 @@ int FUN_001dba90(char *param_1,unsigned int param_2,int param_3,int param_4)
     param_3 = 10;
   }
   if (param_4 != 0) {
-    FUN_002be624(&temp_v2,"%010u",param_2);
+    textFormatBuffer(&temp_v2,"%010u",param_2);
   }
   else {
-    FUN_002be624(&temp_v2,"%10u",param_2);
+    textFormatBuffer(&temp_v2,"%10u",param_2);
   }
   if (0 < param_3) {
     pcVar1 = acStack_36 + -param_3;

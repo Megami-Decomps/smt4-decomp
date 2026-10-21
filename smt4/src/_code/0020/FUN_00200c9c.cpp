@@ -12,7 +12,7 @@ int FUN_001ed268(...);
 int FUN_00211c90(...);
 int rangeInit(...);
 int FUN_002544d8(...);
-int FUN_00254568(...);
+int keyedGetEntryValue(...);
 int FUN_00291310(...);
 int nodeTreeReleaseItemClearOwner(...);
 int nodeTreeReleaseItem(...);
@@ -35,7 +35,7 @@ extern int FUN_001ab9cc(void);
 /* Supplied declaration required: FUN_00211c90. */
 /* Supplied declaration required: rangeInit. */
 /* Supplied declaration required: FUN_002544d8. */
-/* Supplied declaration required: FUN_00254568. */
+/* Supplied declaration required: keyedGetEntryValue. */
 extern unsigned int eventCommandGetPendingCleanup(void);
 /* Supplied declaration required: FUN_00291310. */
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
@@ -80,9 +80,9 @@ void FUN_00200c9c(unsigned int *param_1)
         do {
           temp_v1 = FUN_00324b24(*(unsigned char *)(param_1 + 0xc),temp_v2);
           if (temp_v1 == param_1[1]) {
-            temp_v1 = FUN_00254568(*(unsigned char *)(param_1 + 0xc),temp_v2);
+            temp_v1 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
             rt_memcpy_w(temp_v8,temp_v0 + temp_v1 * 0x348,0x348);
-            temp_v1 = FUN_00254568(*(unsigned char *)(param_1 + 0xc),temp_v2);
+            temp_v1 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
             temp_v3 = temp_v0 + temp_v1 * 0x348 + 0x204;
             puVar3 = (unsigned long long *)FUN_00322aa8(*(unsigned char *)(param_1 + 0xc),temp_v2);
             temp_v5 = *puVar3;
@@ -101,7 +101,7 @@ void FUN_00200c9c(unsigned int *param_1)
                     uStack_234 = temp_v6;
                     uStack_230 = temp_v7;
                     FUN_002544d8(temp_v8);
-                    temp_v7 = FUN_00254568(*(unsigned char *)(param_1 + 0xc),temp_v2);
+                    temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
                     FUN_001ab7dc(temp_v7,temp_v9,temp_v11,param_1 + 0xd,
                                  param_1 + param_1[6] + 0x44,*(unsigned char *)(param_1 + 0x54),temp_v1,
                                  temp_v3);
@@ -114,7 +114,7 @@ void FUN_00200c9c(unsigned int *param_1)
                   uStack_234 = temp_v6;
                   uStack_230 = temp_v7;
                   FUN_002544d8(temp_v8);
-                  temp_v7 = FUN_00254568(*(unsigned char *)(param_1 + 0xc),temp_v2);
+                  temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
                   FUN_001ab6f4(temp_v7,temp_v9,temp_v11,param_1 + 0xd,
                                param_1 + param_1[5] + 0x34,*(unsigned char *)(param_1 + 0x54),temp_v1,
                                temp_v3);
@@ -127,7 +127,7 @@ void FUN_00200c9c(unsigned int *param_1)
                 uStack_234 = temp_v6;
                 uStack_230 = temp_v7;
                 FUN_002544d8(temp_v8);
-                temp_v7 = FUN_00254568(*(unsigned char *)(param_1 + 0xc),temp_v2);
+                temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
                 FUN_001ed268(temp_v7,temp_v9,temp_v11,param_1 + 0xd,param_1 + param_1[4] + 0x24
                              ,*(unsigned char *)(param_1 + 0x54),temp_v1,temp_v3);
                 param_1[param_1[4] + 0x24] = temp_v7;
@@ -139,7 +139,7 @@ void FUN_00200c9c(unsigned int *param_1)
               uStack_234 = temp_v6;
               uStack_230 = temp_v7;
               FUN_002544d8(temp_v8);
-              temp_v7 = FUN_00254568(*(unsigned char *)(param_1 + 0xc),temp_v2);
+              temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
               FUN_00291310(temp_v7,temp_v9,temp_v11,0,param_1 + 0xd,param_1 + param_1[3] + 0x14
                            ,param_1[3] & 0xff,*(unsigned char *)(param_1 + 0x54),temp_v1,temp_v3);
               param_1[param_1[3] + 0x14] = temp_v7;

@@ -1,37 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b0410` (_code @ 0x3b0410, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses `mov r1, #0` where armcc emits `mov r2, #0`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00313648(unsigned int);
+struct Scene { u8 unk00[0x54]; u32 state; f32 time; };
+extern Scene *g_lmapScene;
+s32 scrGetArg(u32 index);
+void FUN_00313648(s32 event);
 
-extern int g_lmapScene; /* 0x581288 */
-
-extern int scrGetArg(void);
-/* Supplied declaration required: FUN_00313648. */
-
-
-unsigned int FUN_003b0410(void)
-
+s32 FUN_003b0410(u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = scrGetArg();
-  temp_v0 = g_lmapScene;
-  if (temp_v1 == 0) {
-    temp_v2 = 0x1d;
-  }
-  else {
-    *(unsigned int *)(g_lmapScene + 0x54) = 0;
-    *(unsigned int *)(temp_v0 + 0x58) = 0;
-    temp_v2 = 0x2c;
-  }
-  FUN_00313648(temp_v2);
-  return 1;
+    s32 event;
+    if (scrGetArg(index) == 0) {
+        event = 29;
+    } else {
+        g_lmapScene->state = 0;
+        g_lmapScene->time = 0.0f;
+        event = 44;
+    }
+    FUN_00313648(event);
+    return 1;
 }
 
 } /* extern "C" */

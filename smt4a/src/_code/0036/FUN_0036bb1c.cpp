@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036bb1c` (_code @ 0x36bb1c, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler tail-calls the rotation setter instead of preserving lr around the call. */
+#include "common.h"
+
+namespace { struct Part { u8 padding[0x4c]; u8 rotation[1]; }; struct Owner { u8 padding[0x2c]; Part *part; }; }
 
 extern "C" {
-
-int FUN_0044b3c8(int);
-
-/* Supplied declaration required: FUN_0044b3c8. */
-
-
-void FUN_0036bb1c(int param_1)
-
+/* Reads or updates the requested state. */
+void FUN_0044b3c8(void *destination, f32 x, f32 y, f32 z);
+void FUN_0036bb1c(Owner *owner, f32 x, f32 y, f32 z)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0044b3c8(*(int *)(param_1 + 0x2c) + 0x4c);
-  return;
+    FUN_0044b3c8(owner->part->rotation, x * 0.017453292f, y * 0.017453292f, z * 0.017453292f);
 }
-
-} /* extern "C" */
+}

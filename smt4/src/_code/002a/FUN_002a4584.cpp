@@ -8,7 +8,7 @@ int FUN_002a2e08(int);
 int FUN_002a2f08(...);
 int FUN_002a301c(...);
 int FUN_002ba81c(...);
-int FUN_002bb150(unsigned char *, int);
+int threadSleepDuration(unsigned char *, int);
 int libc_strlen(...);
 
 /* stack frame of param_7: 7 slot(s), 28 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 /* Supplied declaration required: FUN_002a2f08. */
 /* Supplied declaration required: FUN_002a301c. */
 /* Supplied declaration required: FUN_002ba81c. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: libc_strlen. */
 
 
@@ -66,7 +66,7 @@ FUN_002a4584(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     FUN_002a2f08(param_1,temp_v6);
     FUN_002a2e08(param_1);
     while (*(char *)(temp_v0 + 8) != '\x03') {
-      FUN_002bb150(&LAB_002dc6c0,0);
+      threadSleepDuration(&LAB_002dc6c0,0);
     }
   }
   else {
@@ -79,7 +79,7 @@ FUN_002a4584(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     FUN_002a2f08(param_1,temp_v1);
     FUN_002a2e08(param_1);
     while (*(char *)(temp_v0 + 8) != '\x03') {
-      FUN_002bb150(&LAB_002dc6c0,0);
+      threadSleepDuration(&LAB_002dc6c0,0);
     }
   }
   *param_4 = *(unsigned int *)(temp_v0 + 0x24);

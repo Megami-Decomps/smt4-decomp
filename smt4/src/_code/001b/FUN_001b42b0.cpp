@@ -1,2 +1,20 @@
-/* NON_MATCHING: found outside every function: called by FUN_001b7f78; not written yet. */
-#include "common.h"
+/* NON_MATCHING: armcc coalesces the state/timer stores into STM; retail uses two STRs. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+
+extern "C" {
+
+extern MapEnemyState *g_mapEnemy;
+
+/* Selects the enemy update phase while its state is active. */
+void FUN_001b42b0(u32 kind)
+{
+    MapEnemyState *enemy = g_mapEnemy;
+    if (enemy->state == 0) {
+        return;
+    }
+    kind = kind == 0 ? 7 : 8;
+    enemy->state = kind;
+    enemy->timer = 0;
+}
+
+} /* extern "C" */

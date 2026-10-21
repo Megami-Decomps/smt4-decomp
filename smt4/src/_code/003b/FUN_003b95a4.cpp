@@ -12,7 +12,7 @@ int FUN_00234f04(...);
 int FUN_00234f5c(...);
 int FUN_0026374c(...);
 int FUN_002a0400(unsigned int, unsigned int, unsigned int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_003ba754(int);
 int dataTable33GetEntries(void);
 
@@ -34,7 +34,7 @@ extern int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_0026374c. */
 /* Supplied declaration required: FUN_002a0400. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 extern unsigned int FUN_002c3124(unsigned char *, int, unsigned int);
 /* Supplied declaration required: FUN_003ba754. */
@@ -68,13 +68,13 @@ void FUN_003b95a4(int param_1)
     *(unsigned int *)(param_1 + 0x2c) = 0;
     if (*(char *)(*(int *)(param_1 + 0xd5c) + 0x40) != '0') {
       *(unsigned char *)(param_1 + 0xe58) = 1;
-      FUN_002be624(temp_v5,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x40);
+      textFormatBuffer(temp_v5,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x40);
       puVar8 = (unsigned int *)(param_1 + 0xe5c);
       if (((*(short *)(*(int *)(param_1 + 0xd5c) + 100) != 0) &&
           (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) ||
          ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)
           ))) {
-        FUN_002be624(temp_v6,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x68);
+        textFormatBuffer(temp_v6,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x68);
         FUN_00234f5c(*(unsigned int *)(param_1 + 0xe5c),temp_v5,temp_v6);
       }
       else {
@@ -92,7 +92,7 @@ void FUN_003b95a4(int param_1)
           FUN_0022afb0(puVar3,*(unsigned int *)(*(int *)(param_1 + 0xd5c) + 0x60));
           if (0 < (int)puVar3) {
             do {
-              FUN_002be624(temp_v5,&LAB_003b97fc,puVar6);
+              textFormatBuffer(temp_v5,&LAB_003b97fc,puVar6);
               temp_v4 = param_1 + temp_v0 * 4;
               temp_v2 = FUN_002c3124(temp_v5,temp_v4 + 0xe88,1);
               *(unsigned int *)(temp_v4 + 0xe60) = temp_v2;

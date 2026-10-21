@@ -55,7 +55,7 @@ extern unsigned char LAB_003b156c; /* 0x3b156c */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-extern unsigned int FUN_0022c004(unsigned int, unsigned int);
+extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: poolNodeUnlinkAndDestroy. */
 /* Supplied declaration required: FUN_0022c564. */
 /* Supplied declaration required: FUN_00396f3c. */
@@ -596,7 +596,7 @@ unsigned int FUN_003b0f88(unsigned int *param_1,int param_2,unsigned int *param_
           FUN_0022c564(param_1 + 0x50d,ppppppcVar15);
         }
         else {
-          temp_v5 = FUN_0022c004(param_1[0x50f],temp_v2);
+          temp_v5 = containerGrowCapacity(param_1[0x50f],temp_v2);
           temp_v14 = (romwright_code *******)param_1[0x50d];
           temp_v15 = (romwright_code *******)0x0;
           temp_v16 = (romwright_code *******)0x0;

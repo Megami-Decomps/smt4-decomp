@@ -25,7 +25,7 @@ int asdTMTexTableReleaseNode(int, int);
 int FUN_002b71d0(unsigned int, int);
 int FUN_002b827c(...);
 int buttonHelpSetPreset(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int asdMemFree(...);
 int jobStop(unsigned int, int);
 int asdSequenceRequest(...);
@@ -81,7 +81,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_002b71d0. */
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
 extern short *dataTableGetEntries(void);
@@ -278,11 +278,11 @@ LAB_001945e8:
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 8);
-    FUN_002be624(&temp_v9,&LAB_00194a44,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
+    textFormatBuffer(&temp_v9,&LAB_00194a44,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
     temp_v3 = FUN_002c5c04(&temp_v9);
     puVar3[0x16] = temp_v3;
-    FUN_002be624(&temp_v9,&LAB_00194a60,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
+    textFormatBuffer(&temp_v9,&LAB_00194a60,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
     temp_v3 = FUN_002c5c04(&temp_v9);
     puVar3[0x17] = temp_v3;

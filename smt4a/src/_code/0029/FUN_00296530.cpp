@@ -16,13 +16,13 @@ int FUN_00324cd0(void);
 int FUN_00324e38(...);
 int FUN_00385578(void);
 int linkHolderCallFirst(...);
-int FUN_003e542c(...);
+int controllerGetSourceValue(...);
 int linkHolderApplyFirst(...);
 int linkHolderRunAll(int, int *);
 int FUN_003e5558(int);
 int FUN_003e566c(int);
 int FUN_003e5858(int);
-int FUN_003fd76c(...);
+int controllerSetDestination(...);
 int FUN_003fd7c0(unsigned int, int, int);
 int FUN_003fd924(...);
 int FUN_003fda08(...);
@@ -85,14 +85,14 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003541c0. */
 /* Supplied declaration required: FUN_00385578. */
 /* Supplied declaration required: linkHolderCallFirst. */
-/* Supplied declaration required: FUN_003e542c. */
+/* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: linkHolderCopyWords. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: linkHolderRunAll. */
 /* Supplied declaration required: FUN_003e5558. */
 /* Supplied declaration required: FUN_003e566c. */
 /* Supplied declaration required: FUN_003e5858. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: FUN_003fda08. */
@@ -264,7 +264,7 @@ void FUN_00296530(void)
     piVar6 = (int *)g_lmapScene[0x15];
     if (piVar2 != piVar6) goto LAB_00296958;
     g_lmapScene[0x18] = g_lmapScene[0x18] + 1;
-    FUN_003e542c(piVar5[0x6a]);
+    controllerGetSourceValue(piVar5[0x6a]);
     if (g_lmapScene[0x15] != 2) {
       if ((g_lmapScene[0x15] == 0x12) &&
          ((((temp_v3 = g_lmapScene[0x19], temp_v3 < 0x41f00000 &&
@@ -327,7 +327,7 @@ LAB_00296958:
     temp_v9 = (int *)piVar13[8];
     temp_v8 = piVar13[7];
     temp_v10 = piVar13[9];
-    FUN_003fd76c(temp_v6,&temp_v8);
+    controllerSetDestination(temp_v6,&temp_v8);
     if (*(char *)((int)g_lmapScene + 0x197) != '\0') {
       FUN_003fe86c(temp_v6,1,2);
       piVar13 = g_lmapScene;
@@ -346,7 +346,7 @@ LAB_00296958:
       temp_v9 = (int *)piVar13[8];
       temp_v8 = piVar13[7];
       temp_v10 = piVar13[9];
-      FUN_003fd76c(temp_v7,&temp_v8);
+      controllerSetDestination(temp_v7,&temp_v8);
       FUN_003fdb18(temp_v7);
       if (*(char *)((int)g_lmapScene + 0x195) != '\0') {
         *(unsigned char *)((int)g_lmapScene + 0x195) = 0;
@@ -381,7 +381,7 @@ LAB_00296958:
         temp_v9 = (int *)g_lmapScene[8];
         temp_v10 = g_lmapScene[9];
       }
-      FUN_003fd76c(temp_v3,&temp_v8);
+      controllerSetDestination(temp_v3,&temp_v8);
       piVar13 = (int *)(temp_v0 + 0x15b4);
       temp_v0 = *piVar13;
       if (temp_v0 != 0) {
@@ -428,7 +428,7 @@ LAB_00296c74:
         *(unsigned int *)(temp_v0 + 4) = temp_v4 & 0xfffffffc;
       }
 LAB_00296e98:
-      FUN_003fd76c(temp_v0,piVar13 + 7);
+      controllerSetDestination(temp_v0,piVar13 + 7);
       FUN_003fdb18(temp_v0);
       temp_v2 = g_lmapScene[0x59];
       piVar13 = g_lmapScene;
@@ -465,7 +465,7 @@ LAB_00296e98:
       temp_v5 = *(unsigned int *)(temp_v0 + 4);
       FUN_0040ace8(g_handleRegistry,temp_v5);
       FUN_003fe86c(temp_v5,0,2);
-      FUN_003fd76c(temp_v5,&DAT_005f17d8);
+      controllerSetDestination(temp_v5,&DAT_005f17d8);
       FUN_003fdb18(temp_v5);
     }
     DAT_005f17d4 = DAT_005f17d4 + 1;

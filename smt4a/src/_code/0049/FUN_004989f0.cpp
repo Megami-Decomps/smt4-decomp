@@ -16,7 +16,7 @@ typedef struct Shop004989f0 {
 void sysMemClear(void *buffer, s32 size);
 u32 dataTable17Type0GetEntry(u32 *out, s32 item);
 u32 FUN_001654f8(u32 entry, s32 a, s32 b);
-void FUN_00100388(char *dst, const char *format, char *src, u32 entry);
+void textFormatBuffer(char *dst, const char *format, char *src, u32 entry);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
 void scrScriptProcessStartEntry(u32 process, u32 index);
 void FUN_00224880(u32 process);
@@ -34,7 +34,7 @@ void FUN_004989f0(Shop004989f0 *shop, s32 second)
         s32 item = second == 0 ? shop->items[i] : shop->items[i] + 4;
         u32 entry = dataTable17Type0GetEntry(&entryOut, item);
 
-        FUN_00100388(shop->text, "%s%s<br>", shop->text, FUN_001654f8(entry, 0, 0));
+        textFormatBuffer(shop->text, "%s%s<br>", shop->text, FUN_001654f8(entry, 0, 0));
     }
     scrScriptProcessStartEntry(shop->process, tableGroupFindEntryIndex(shop->table, entryName));
     FUN_00224880(shop->process);

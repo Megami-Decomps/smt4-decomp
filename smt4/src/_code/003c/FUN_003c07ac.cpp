@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00297468(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int asdMemFree(...);
 
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -34,7 +34,7 @@ unsigned int FUN_003c07ac(int param_1,int param_2)
       *(unsigned int *)(param_1 + 0x14) = 0;
     }
     *(int *)(param_1 + 200) = param_2;
-    FUN_002be624(temp_v0,"battle/talk/TalkTone%s.mbm",*(unsigned int *)(param_2 * 4 + 0x439b70));
+    textFormatBuffer(temp_v0,"battle/talk/TalkTone%s.mbm",*(unsigned int *)(param_2 * 4 + 0x439b70));
     FUN_00297468(temp_v0,param_1 + 0x14,0);
     *(unsigned char *)(param_1 + 0xc5) = 1;
     *(unsigned int *)(param_1 + 0x18) = 3;

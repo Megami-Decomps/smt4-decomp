@@ -19,7 +19,7 @@ int stateHolderEnterState7(void);
 int statusDownEnterState11(...);
 int FUN_003b0744(void);
 int FUN_003c16e0(...);
-int FUN_003e40b8(...);
+int engineGetFloatTableValue(...);
 int FUN_003f36a4(...);
 int FUN_003f391c(void);
 int VectorFloatToUnsigned(double, int);
@@ -38,14 +38,14 @@ int FUN_00359974(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371e54(...);
 int FUN_00371ef4(void);
-int FUN_0039c448(void);
+int statusDownEnterStateSeven(void);
 int FUN_003a62e8(...);
 int roundObjFinish(...);
 int FUN_004bcd90(...);
 int getUnlockedSlotCount(...);
 int FUN_004bd6b0(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00180118(...);
 int FUN_00184310(void);
 int FUN_0020214c(void);
@@ -64,7 +64,7 @@ int FUN_00334214(...);
 int FUN_003343f0(...);
 int objBInitBlock19D0(...);
 int FUN_0033449c(...);
-int FUN_003720a0(...);
+int gameGlobalsQueueValues(...);
 int FUN_00372100(...);
 int FUN_0037e0d0(...);
 int FUN_0037e12c(...);
@@ -158,7 +158,7 @@ typedef struct {
 
 extern unsigned char LAB_0020658c; /* 0x20658c */
 extern int FUN_002f8ba4(...); /* 0x2f8ba4 */
-extern signed char DAT_00588c40; /* 0x588c40 */
+extern signed char g_engineCleanupOwner; /* 0x588c40 */
 extern signed char DAT_00588c41; /* 0x588c41 */
 extern int DAT_00588c44; /* 0x588c44 */
 
@@ -172,7 +172,7 @@ extern int DAT_00588c44; /* 0x588c44 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
@@ -259,17 +259,17 @@ extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_0034a968. */
 /* Supplied declaration required: FUN_0034aae4. */
 /* Supplied declaration required: FUN_00358e94. */
-extern int FUN_0035988c(unsigned int);
+extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0035ac58. */
-extern int FUN_0035fd00(unsigned short);
+extern int btlTalkBustupMatchesEntry(unsigned short);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern int stateHolderCountMinus1(void);
 extern int stateHolderStateIsNot4(void);
-extern int FUN_00371e38(void);
+extern int statusDownGetState(void);
 /* Supplied declaration required: FUN_00371e54. */
 /* Supplied declaration required: FUN_00371ef4. */
-/* Supplied declaration required: FUN_003720a0. */
+/* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037c6ac. */
 /* Supplied declaration required: panelSetTarget. */
@@ -291,7 +291,7 @@ extern int FUN_0038b568(void);
 extern int stateHolderStateIs0x12(void);
 extern int stateHolderStateIs0xD(void);
 /* Supplied declaration required: statusDownEnterState11. */
-/* Supplied declaration required: FUN_0039c448. */
+/* Supplied declaration required: statusDownEnterStateSeven. */
 /* Supplied declaration required: lmapMainCallIfActive2. */
 /* Supplied declaration required: FUN_003a62e8. */
 extern int FUN_003a7b74(void);
@@ -304,7 +304,7 @@ extern int statusDownGetCursorPosition(void);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int playerHasFlagBit(unsigned int);
-/* Supplied declaration required: FUN_003e40b8. */
+/* Supplied declaration required: engineGetFloatTableValue. */
 /* Supplied declaration required: FUN_003e4940. */
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
@@ -319,7 +319,7 @@ extern unsigned int FUN_003f3654(int);
 /* Supplied declaration required: FUN_004a0ef8. */
 extern int FUN_004b6b1c(int);
 /* Supplied declaration required: itemResetOverLimitStates. */
-extern int FUN_004bca68(unsigned int, unsigned int);
+extern int recordContainsPairedId(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: getUnlockedSlotCount. */
 /* Supplied declaration required: bitsAt60Test. */
@@ -1362,7 +1362,7 @@ LAB_00205528:
       else {
         FUN_002c85b0(5);
         FUN_0033449c(1);
-        FUN_003720a0(temp_v6 + *piVar25 * 0x150 + 0x4430,0);
+        gameGlobalsQueueValues(temp_v6 + *piVar25 * 0x150 + 0x4430,0);
         temp_v11 = gameGetPlayerData();
         FUN_00372100(temp_v11,0);
         FUN_002a7324(1);
@@ -1406,7 +1406,7 @@ LAB_00205528:
       }
       pcVar26 = (char *)0x0;
 LAB_00206230:
-      FUN_00100388(&temp_v49,&LAB_0020658c,pcVar26 + 1);
+      textFormatBuffer(&temp_v49,&LAB_0020658c,pcVar26 + 1);
       ppcVar15 = &temp_v49;
       FUN_0020214c();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;
@@ -1417,7 +1417,7 @@ LAB_00206230:
       *(int *)(temp_v6 + 0x7538) = temp_v7;
       FUN_00359974(0x18,temp_v7,0xffffffff,0);
       *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
-      DAT_00588c40 = '\0';
+      g_engineCleanupOwner = '\0';
       temp_v24 = *(short *)(temp_v16 + 0x4566);
       temp_v13 = (unsigned int)(*(short *)(temp_v16 + 0x4564) != 0);
       temp_v7 = 0;
@@ -1439,12 +1439,12 @@ LAB_00206230:
         temp_v7 = temp_v7 + 1;
       }
       if (0 < temp_v7) {
-        DAT_00588c40 = '\x01';
+        g_engineCleanupOwner = '\x01';
       }
     case 1:
       temp_v7 = FUN_0022e750();
       if ((temp_v7 != 0) && (temp_v7 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43a0),2), temp_v7 != 0)) {
-        if (DAT_00588c40 == '\0') {
+        if (g_engineCleanupOwner == '\0') {
           temp_v11 = 2;
         }
         else {
@@ -1627,7 +1627,7 @@ joined_r0x002075ac:
     switch(*(unsigned int *)(temp_v6 + 0x436c)) {
     case 0:
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),5);
-      temp_v16 = FUN_0035fd00(*(unsigned short *)(temp_v7 + 0x62));
+      temp_v16 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v7 + 0x62));
       if (temp_v16 == 0) {
         FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
       }
@@ -1789,13 +1789,13 @@ joined_r0x002075ac:
     case 0:
     case 1:
     case 2:
-      temp_v7 = FUN_0035fd00(*(unsigned short *)(temp_v13 + 0x62));
+      temp_v7 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v13 + 0x62));
       if (temp_v7 == 0) {
         FUN_00336de4(*(unsigned short *)(temp_v13 + 0x62),1);
       }
       btlTalkBustUpSetUnk2F4(*(int *)(temp_v6 + 0x4368) == 0xd);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),6);
-      FUN_0039c448();
+      statusDownEnterStateSeven();
       FUN_00333dc8(0);
       sysPlaySe(0x69);
       temp_v7 = 6;
@@ -1854,7 +1854,7 @@ joined_r0x002075ac:
         }
         if (temp_v8 >= 1) {
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),6);
-          FUN_0039c448();
+          statusDownEnterStateSeven();
           temp_v7 = 6;
         }
         else {
@@ -1969,7 +1969,7 @@ joined_r0x002075ac:
     temp_v7 = gameGetSlotRecord((int)*(char *)(temp_v27 + 0x442c));
     temp_v16 = *(int *)(temp_v6 + 0x436c);
     if (temp_v16 == 10) {
-      temp_v7 = FUN_0035988c(*(unsigned int *)(temp_v6 + 0x75d8));
+      temp_v7 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v6 + 0x75d8));
       goto joined_r0x002073c8;
     }
     if (9 >= temp_v16) {
@@ -2010,7 +2010,7 @@ joined_r0x002075ac:
         if (*(int *)(temp_v6 + 0x437c) >= 0x21) {
           temp_v7 = 0;
           FUN_001517b4(0,1);
-          if ((temp_v7 != 0) || (temp_v7 = FUN_00371e38(), temp_v7 != 0)) {
+          if ((temp_v7 != 0) || (temp_v7 = statusDownGetState(), temp_v7 != 0)) {
             temp_v7 = statusDownGetCursorPosition();
             if ((temp_v7 != *(int *)(temp_v6 + 0x75c8)) && (temp_v7 = FUN_0037df64(), temp_v7 == 0)) {
               temp_v11 = 0x100020f;
@@ -2042,7 +2042,7 @@ joined_r0x002075ac:
         }
         break;
       case 3:
-        temp_v7 = FUN_0035988c(*(unsigned int *)(temp_v6 + 0x75d8));
+        temp_v7 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v6 + 0x75d8));
 joined_r0x002073c8:
         if (temp_v7 == 0) {
           temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
@@ -2215,7 +2215,7 @@ joined_r0x002073c8:
       *(int *)(temp_v6 + 0x436c) = temp_v7;
     case 1:
       if (*(char *)(temp_v6 + 0x7f50) != '\0') {
-        FUN_003e40b8(temp_v6 + 0x7f40,0);
+        engineGetFloatTableValue(temp_v6 + 0x7f40,0);
       }
       FUN_00163aa4(temp_v6 + 0x6b0);
       if (*(char *)(temp_v6 + 0x73a) != '\0') {
@@ -2233,7 +2233,7 @@ joined_r0x002073c8:
         temp_v34 = 1.0f;
       }
       else {
-        FUN_003e40b8(temp_v6 + 0x7f40,0);
+        engineGetFloatTableValue(temp_v6 + 0x7f40,0);
       }
       puVar29 = (unsigned int *)(temp_v6 + 0x7e3c);
       temp_v33 = (float)VectorUnsignedToFloat(*puVar29,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -2274,7 +2274,7 @@ joined_r0x002073c8:
       break;
     case 3:
       if (*(char *)(temp_v6 + 0x7f50) != '\0') {
-        FUN_003e40b8(temp_v6 + 0x7f40,0);
+        engineGetFloatTableValue(temp_v6 + 0x7f40,0);
       }
       temp_v7 = FUN_00163aa4(temp_v6 + 0x6b0);
       if (temp_v7 != 0) {
@@ -2374,7 +2374,7 @@ joined_r0x002073c8:
       }
       pcVar26 = (char *)0x0;
 LAB_00207d0c:
-      FUN_00100388(&temp_v49,&LAB_0020658c,pcVar26 + 1);
+      textFormatBuffer(&temp_v49,&LAB_0020658c,pcVar26 + 1);
       ppcVar15 = &temp_v49;
       FUN_0020214c();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;
@@ -2663,7 +2663,7 @@ LAB_00207d0c:
         *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
         *(unsigned int *)(temp_v6 + 0x7f54) = 2;
         temp_v26 = dataTable0aSub0GetValueById(*(unsigned short *)(temp_v13 + 300));
-        if ((temp_v26 != 0) && (temp_v16 = FUN_004bca68(temp_v13,temp_v26), temp_v16 != 0)) {
+        if ((temp_v26 != 0) && (temp_v16 = recordContainsPairedId(temp_v13,temp_v26), temp_v16 != 0)) {
           temp_v44 = *(int *)(temp_v13 + 0x40);
           temp_v30 = *(unsigned int *)(temp_v13 + 0x34);
           temp_v16 = temp_v44;

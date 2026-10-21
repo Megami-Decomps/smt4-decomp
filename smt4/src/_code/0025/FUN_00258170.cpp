@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int DAT_0043dd90; /* 0x43dd90 */
+extern int g_screenStateWork; /* 0x43dd90 */
 
 /* Supplied declaration required: FUN_002c2424. */
 /* Supplied declaration required: FUN_003409f8. */
@@ -51,7 +51,7 @@ void FUN_00258170(int param_1)
   unsigned char temp_v14 [16];
   int temp_v15;
   
-  temp_v0 = DAT_0043dd90;
+  temp_v0 = g_screenStateWork;
   temp_v15 = param_1;
   FUN_003409f8(param_1,temp_v14,&temp_v12);
   temp_v10 = 0;

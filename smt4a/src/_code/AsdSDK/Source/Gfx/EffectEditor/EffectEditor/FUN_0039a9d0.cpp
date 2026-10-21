@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char *, unsigned int);
+int textFormatBuffer(int, unsigned char *, unsigned int);
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
@@ -68,7 +68,7 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
@@ -81,7 +81,7 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_00272204. */
 /* Supplied declaration required: taskRunWithObject. */
-extern unsigned int FUN_002b41c4(void);
+extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: FUN_002b41e4. */
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_00323c54(unsigned int, unsigned int);
@@ -125,7 +125,7 @@ unsigned int FUN_0039a9d0(unsigned int param_1,int param_2,unsigned int param_3)
       puVar2 = *(unsigned int **)(param_2 + temp_v3 * 0x1c);
       temp_v5 = temp_v6;
       if (puVar2 != (unsigned int *)0x0) {
-        FUN_00100388(temp_v6,&LAB_0039ad7c,*puVar2);
+        textFormatBuffer(temp_v6,&LAB_0039ad7c,*puVar2);
         piVar3 = (int *)(temp_v0 + temp_v4 * 0x18);
         temp_v5 = temp_v6 + 0x14;
         *piVar3 = temp_v6;
@@ -184,7 +184,7 @@ LAB_0039ab4c:
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
-      temp_v2 = FUN_002b41c4();
+      temp_v2 = resourceResolveHeaderPointer();
       rt_memcpy(*(unsigned int *)(temp_v6 + 0xc),temp_v2,*(unsigned int *)(temp_v6 + 0x10));
     }
     else {

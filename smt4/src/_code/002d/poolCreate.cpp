@@ -6,7 +6,7 @@ typedef struct Pool Pool;
 
 void *asdOperatorNew(u32 size);
 Pool *FUN_002693e4(void *memory);
-s32 FUN_002693b4(Pool *pool, u32 buffer, s32 sizeA, s32 sizeB);
+s32 recordPrepareActive(Pool *pool, u32 buffer, s32 sizeA, s32 sizeB);
 
 /* Allocates and constructs a pool, then sizes it for `count` items (6 and 4 slots each). */
 Pool *poolCreate(s32 count, u32 buffer)
@@ -19,7 +19,7 @@ Pool *poolCreate(s32 count, u32 buffer)
     } else {
         pool = FUN_002693e4(memory);
     }
-    FUN_002693b4(pool, buffer, count * 6, count << 2);
+    recordPrepareActive(pool, buffer, count * 6, count << 2);
     return pool;
 }
 

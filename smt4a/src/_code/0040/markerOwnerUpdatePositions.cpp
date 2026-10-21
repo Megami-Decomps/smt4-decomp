@@ -20,7 +20,7 @@ typedef struct MarkerOwner {
     /* 0x4C */ Vec3 position;
 } MarkerOwner;
 
-extern void FUN_003fd784(u32 handle, Vec3 position);
+extern void controllerSetPosition(u32 handle, Vec3 position);
 
 /* Moves each of the owner's three markers to its position. */
 void markerOwnerUpdatePositions(MarkerOwner *owner)
@@ -29,7 +29,7 @@ void markerOwnerUpdatePositions(MarkerOwner *owner)
 
     for (i = 0; i < 3; i++) {
         if (owner->markers[i] != NULL) {
-            FUN_003fd784(owner->markers[i]->handle, owner->position);
+            controllerSetPosition(owner->markers[i]->handle, owner->position);
         }
     }
 }

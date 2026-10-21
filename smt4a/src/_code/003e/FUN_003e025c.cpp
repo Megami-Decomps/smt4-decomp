@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_003e1068(...);
 int FUN_003f0e20(...);
 int btlCameraObjectCreate(...);
@@ -48,7 +48,7 @@ typedef struct {
 extern unsigned int g_btlCamera; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_003e1068. */
 extern int FUN_003eca48(fn_003e025c_arg1 *, unsigned short);
 extern int FUN_003eccd0(fn_003e025c_arg1 *);
@@ -104,7 +104,7 @@ void FUN_003e025c(unsigned int *param_1,fn_003e025c_arg1 *param_2)
       temp_v14 = 0;
       temp_v15 = 0;
       temp_v16 = 0;
-      FUN_00100388(&temp_v1,"battle/model/en%03d_camera.bch",
+      textFormatBuffer(&temp_v1,"battle/model/en%03d_camera.bch",
                    (int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
       FUN_004f2abc(g_btlCamera,&temp_v1);
       *param_1 = 0xe;

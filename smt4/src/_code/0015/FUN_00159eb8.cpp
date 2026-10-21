@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015d38c(void);
-int FUN_002bb150(unsigned char *, int);
+int threadSleepDuration(unsigned char *, int);
 int nn_os_LightEvent_Wait(unsigned char *);
 int nn_snd_CTR_Dspsnd_WaitPipe_15D540(unsigned char *, unsigned int, int, int);
 int nn_snd_CTR_Dspsnd_WaitPipe_15D5E0(void);
@@ -26,7 +26,7 @@ extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0015d38c. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 extern void nn_os_LightEvent_ClearSignal(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_WaitPipe_15D540. */
@@ -75,7 +75,7 @@ void FUN_00159eb8(int *param_1,unsigned int param_2)
     param_1[1] = temp_v3 - (temp_v2 + (unsigned int)(puVar2 < puVar1));
     return;
   }
-  FUN_002bb150(&DAT_004a95c0,0);
+  threadSleepDuration(&DAT_004a95c0,0);
   return;
 }
 

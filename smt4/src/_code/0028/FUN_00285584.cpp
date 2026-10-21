@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026e70c(void);
 int renderCtxCallB(float *);
 int FUN_002a34e8(float *, float *);
-int FUN_002a3504(float *, float *, float *);
+int mathMatrixTranslateLocal(float *, float *, float *);
 int FUN_002ae038(...);
 int FUN_002ae9ec(...);
 int FUN_002b64b8(void);
@@ -17,7 +17,7 @@ int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c198c(...);
 int FUN_0033d3f8(...);
 int VectorFloatToUnsigned(double, int);
@@ -79,7 +79,7 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a34e8. */
-/* Supplied declaration required: FUN_002a3504. */
+/* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_002ae038. */
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: FUN_002b64b8. */
@@ -90,7 +90,7 @@ extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c1d5c(void);
@@ -187,13 +187,13 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
             temp_v18 = temp_v13;
             temp_v32 = temp_v12;
             temp_v34 = temp_v12;
-            FUN_002a3504(&temp_v13,&temp_v13,&temp_v31);
+            mathMatrixTranslateLocal(&temp_v13,&temp_v13,&temp_v31);
             FUN_002a34e8(&temp_v13,&temp_v33);
             renderCtxCallB(&temp_v13);
           }
           FUN_002bf4f8(0x32,0xc);
           if (-1 < piVar2[0x11]) {
-            FUN_002bf538();
+            efctSetSpeed();
             temp_v13 = (float)(piVar2[5] + param_3);
             temp_v14 = piVar2[1] + piVar2[2];
             FUN_002bf288(2,piVar2[0xf],piVar2[0x11] * 1000,
@@ -204,12 +204,12 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           temp_v29 = temp_v28;
           uStack_58 = temp_v28;
           FUN_002ae038(&temp_v28);
-          FUN_002bf538();
+          efctSetSpeed();
           temp_v13 = (float)(piVar2[5] + param_3);
           temp_v14 = piVar2[1] + piVar2[2];
           FUN_002bf288(2,piVar2[0xf],piVar2[0x10] * 1000,
                        piVar2[4] + param_2 + (int)(float)piVar2[7] + temp_v1);
-          FUN_002bf538();
+          efctSetSpeed();
           temp_v7 = g_titleScene;
           temp_v8 = packNibblesAndByte(6,1,0);
           piVar6 = (int *)(temp_v7 + 0x12ac);
@@ -243,7 +243,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           temp_v13 = 1.4013e-45f;
           temp_v2 = FUN_0026e6a0(0x32,100,0x1e,piVar2[0x1a]);
           VectorSignedToFloat(temp_v2,(unsigned char)(temp_v5 >> 0x16) & 3);
-          FUN_002bf538();
+          efctSetSpeed();
           if (*piVar2 != 2) {
             temp_v14 = piVar2[1] + piVar2[2] + 1;
             temp_v6 = (float)VectorSignedToFloat(piVar2[5] + param_3,(unsigned char)(temp_v5 >> 0x16) & 3);
@@ -271,13 +271,13 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           temp_v17 = temp_v6;
           temp_v18 = temp_v10;
           FUN_002ae038(&temp_v15);
-          FUN_002bf538();
+          efctSetSpeed();
           temp_v13 = (float)(piVar2[5] + param_3);
           temp_v14 = piVar2[1] + piVar2[2];
           FUN_002bf288(2,piVar2[0xf],piVar2[0x10] * 1000,
                        piVar2[4] + temp_v1 + (int)(float)piVar2[7] + param_2);
           if (-1 < piVar2[0x11]) {
-            FUN_002bf538();
+            efctSetSpeed();
             temp_v13 = (float)(piVar2[5] + param_3);
             temp_v14 = piVar2[1] + piVar2[2];
             FUN_002bf288(2,piVar2[0xf],piVar2[0x11] * 1000,
@@ -285,7 +285,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
           }
         }
         FUN_002bed3c();
-        FUN_002bf538();
+        efctSetSpeed();
         return;
       }
       temp_v16 = (float)VectorSignedToFloat(0x100 - (piVar2[1] + piVar2[2]),

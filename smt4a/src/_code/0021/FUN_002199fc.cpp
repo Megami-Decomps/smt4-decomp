@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int vec2GetXInt(...);
@@ -38,7 +38,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -148,7 +148,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     FUN_001835b4(2,0x1a,0xd8,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v8,0x6a);
     temp_v3 = FUN_001834a4(0x1a,0xdc);
     temp_v4 = FUN_00180114(*psVar5);
-    FUN_00100388(temp_v12,&LAB_00219e04,temp_v4);
+    textFormatBuffer(temp_v12,&LAB_00219e04,temp_v4);
     puVar7 = temp_v12;
     FUN_0018408c(puVar7,1);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,
@@ -159,7 +159,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     FUN_00162790(1,temp_v11,temp_v12);
     temp_v3 = FUN_001834a4(0x1a,0xdd);
     temp_v11 = FUN_0014bf3c(*psVar5,0);
-    FUN_00100388(temp_v12,&LAB_00219e04,temp_v11);
+    textFormatBuffer(temp_v12,&LAB_00219e04,temp_v11);
     puVar7 = temp_v12;
     FUN_0018408c(puVar7,2);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,

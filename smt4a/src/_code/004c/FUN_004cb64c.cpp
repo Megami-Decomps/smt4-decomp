@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001568f8(...);
-int FUN_003ed1f8(...);
+int uiInsertIdInFirstFreeSlot(...);
 int FUN_003efb68(...);
 int aocHandleButtons(...);
 int FUN_003fce8c(...);
@@ -30,9 +30,9 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern unsigned int FUN_003ec620(int, unsigned int);
-/* Supplied declaration required: FUN_003ed1f8. */
+/* Supplied declaration required: uiInsertIdInFirstFreeSlot. */
 extern int FUN_003ef9e0(int, fn_004cb64c_arg1 *);
-extern int FUN_003efad8(int, unsigned int);
+extern int uiHasEntryId(int, unsigned int);
 /* Supplied declaration required: FUN_003efb68. */
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
@@ -74,7 +74,7 @@ void FUN_004cb64c(int param_1,fn_004cb64c_arg1 *param_2)
       temp_v3 = param_1;
       FUN_001568f8(param_1,(int)param_2->field_0x6a);
       temp_v3 = temp_v3 + temp_v0 * 4;
-      temp_v0 = FUN_003efad8(param_1,*(unsigned int *)(temp_v3 + 0xc));
+      temp_v0 = uiHasEntryId(param_1,*(unsigned int *)(temp_v3 + 0xc));
       if (temp_v0 != 0) {
         param_2->field_0x5c = param_2->field_0x5c;
         param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x300);
@@ -84,7 +84,7 @@ void FUN_004cb64c(int param_1,fn_004cb64c_arg1 *param_2)
         param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 & 0xfffffcff);
         temp_v1 = FUN_00409fe8(*(unsigned int *)(temp_v3 + 0xc),1);
         FUN_003efb68(param_1,temp_v1);
-        FUN_003ed1f8(param_1,(int)(short)*(unsigned int *)(temp_v3 + 0xc));
+        uiInsertIdInFirstFreeSlot(param_1,(int)(short)*(unsigned int *)(temp_v3 + 0xc));
       }
       param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 & 0xffffffef);
     }

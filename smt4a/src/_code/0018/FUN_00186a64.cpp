@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: nngxBindCmdlist. */
-extern int FUN_001960f0(int *, int *);
+extern int asdModelCommitCommandRange(int *, int *);
 /* Supplied declaration required: FUN_0019eafc. */
 
 
@@ -35,7 +35,7 @@ void FUN_00186a64(int *param_1)
   }
   *piVar2 = 1;
   piVar2[1] = 0xf023d;
-  temp_v0 = FUN_001960f0(piVar1,piVar2 + 2);
+  temp_v0 = asdModelCommitCommandRange(piVar1,piVar2 + 2);
   FUN_0019eafc();
   param_1[1] = temp_v0 - *param_1;
   param_1[3] = 2;

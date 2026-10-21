@@ -24,7 +24,7 @@ extern int DAT_0057f58c; /* 0x57f58c */
 
 /* Supplied declaration required: FUN_00165088. */
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
-extern int FUN_003216d0(void);
+extern int battleTalkGetBustState(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
@@ -71,7 +71,7 @@ void FUN_004d3360(int param_1,int param_2)
     if ((temp_v2 & DAT_00571698) != 0 || (temp_v3 & DAT_0057169c) != 0) {
       return;
     }
-    temp_v1 = FUN_003216d0();
+    temp_v1 = battleTalkGetBustState();
     if (temp_v1 == 0) {
       return;
     }

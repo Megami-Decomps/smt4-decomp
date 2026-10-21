@@ -4,7 +4,7 @@ extern "C" {
 
 #include "shard/Shard0031.h"
 extern OverlayRef g_campCec;
-extern void FUN_0019ea64(u8 value);
+extern void messageSetMode(u8 value);
 extern void asdMemFree(void *ptr);
 extern void scrScriptProcessDestroy(u32 process);
 extern void jobStop(u32 job, u16 arg);
@@ -32,7 +32,7 @@ void FUN_0032d388(s32 leaving)
     s32 i;
     MarkEntry *entry;
 
-    FUN_0019ea64(1);
+    messageSetMode(1);
     if (overlay->unk168 != 0) {
         if (overlay->buffer0 != NULL) {
             asdMemFree(overlay->buffer0);

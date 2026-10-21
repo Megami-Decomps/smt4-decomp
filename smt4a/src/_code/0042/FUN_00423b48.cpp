@@ -23,9 +23,9 @@ struct fn_00423b48_arg0 {
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-extern int FUN_002e5ac0(unsigned int, unsigned int, unsigned int);
+extern int runtimeShiftLeftWide(unsigned int, unsigned int, unsigned int);
 extern int FUN_00422af0(unsigned int, int, unsigned int);
-extern unsigned long long FUN_00422e78(unsigned int);
+extern unsigned long long resourceGetWideHandle(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -40,8 +40,8 @@ unsigned char FUN_00423b48(fn_00423b48_arg0 *param_1,unsigned int param_2,unsign
   unsigned long long temp_v4;
   
   temp_v3 = param_1->field_0x18;
-  temp_v4 = FUN_00422e78(*(unsigned int *)&param_1->field_0xc);
-  temp_v0 = FUN_002e5ac0((int)temp_v4,(int)((unsigned long long)temp_v4 >> 0x20),
+  temp_v4 = resourceGetWideHandle(*(unsigned int *)&param_1->field_0xc);
+  temp_v0 = runtimeShiftLeftWide((int)temp_v4,(int)((unsigned long long)temp_v4 >> 0x20),
                        *(unsigned int *)((int)param_1->field_0x8 + 0xc));
   temp_v1 = param_1->field_0x14 - (temp_v3 - temp_v0);
   temp_v0 = param_1->field_0x20;

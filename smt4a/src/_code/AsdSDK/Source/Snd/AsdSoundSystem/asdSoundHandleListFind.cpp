@@ -1,31 +1,34 @@
+/* NON_MATCHING: retail uses ldr r2, [pc, #84] where the compiled block uses push {r4, r5}. */
+#include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
-extern AsdSndHandleNode *DAT_0063e944; /* head of the registered sounds */
-extern s32 DAT_0063e948;               /* how many */
+extern AsdSndHandleNode *DAT_0063e944;
+extern s32 DAT_0063e948;
 
-/* Looks up the registered sound `id`; returns its value, or 0 when it is absent or has no handle. */
 u8 asdSoundHandleListFind(s32 id)
 {
-    s32 i = 0;
+    u8 result = 0;
     AsdSndHandleNode *node = DAT_0063e944;
+    const s32 count = DAT_0063e948;
+    s32 index = 0;
 
-    if (0 < DAT_0063e948) {
-        while (node != NULL) {
+    if (count > 0) {
+        do {
+            if (node == NULL) {
+                break;
+            }
             if (node->id == id) {
-                if (node->handle == 0) {
-                    return 0;
+                if (node->handle != NULL) {
+                    result = node->value;
                 }
-                return (s8)node->value;
+                break;
             }
             node = node->next;
-            i++;
-            if (DAT_0063e948 <= i) {
-                return 0;
-            }
-        }
+            ++index;
+        } while (index < count);
     }
-    return 0;
-}
 
-} /* extern "C" */
+    return result;
+}
+}

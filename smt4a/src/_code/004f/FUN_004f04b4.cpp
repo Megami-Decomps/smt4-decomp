@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_004f0080; not written yet. */
+/* NON_MATCHING: fragment of a larger function (uses r5 and sp+1272 without establishing a frame and ends mid-flow). */
 #include "common.h"

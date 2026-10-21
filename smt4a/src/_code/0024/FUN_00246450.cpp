@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0015f858(unsigned int, int);
 int FUN_00180118(unsigned int);
 int dataTableGetCount(unsigned int);
@@ -14,7 +14,7 @@ int rt_memcpy(unsigned char [72], int, int);
 
 extern unsigned int *g_popupState; /* 0x58104c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00180118. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -70,27 +70,27 @@ void FUN_00246450(int param_1,unsigned int param_2,unsigned int param_3)
     if (param_1 != 4) {
       if (param_1 == 1 || param_1 == 5) {
         FUN_002d2350(param_3,temp_v7);
-        FUN_00100388((int)g_popupState + 0x25,temp_v6,temp_v7);
+        textFormatBuffer((int)g_popupState + 0x25,temp_v6,temp_v7);
         g_popupState[5] = (int)g_popupState + 0x25;
         return;
       }
       if (param_1 == 2) {
         FUN_0015f858(param_2,0);
-        FUN_00100388((int)g_popupState + 0x25,temp_v6,param_2);
+        textFormatBuffer((int)g_popupState + 0x25,temp_v6,param_2);
         g_popupState[5] = (int)g_popupState + 0x25;
         return;
       }
       if (param_1 == 3) {
         FUN_0015f858(param_2,0);
         FUN_002d2350(param_3,temp_v7);
-        FUN_00100388((int)g_popupState + 0x25,temp_v6,param_2,temp_v7);
+        textFormatBuffer((int)g_popupState + 0x25,temp_v6,param_2,temp_v7);
         g_popupState[5] = (int)g_popupState + 0x25;
         return;
       }
       if (param_1 == 6) {
         FUN_002d2350(param_3,temp_v7);
         FUN_00180118(param_2);
-        FUN_00100388((int)g_popupState + 0x25,temp_v6,param_2,temp_v7);
+        textFormatBuffer((int)g_popupState + 0x25,temp_v6,param_2,temp_v7);
         g_popupState[5] = (int)g_popupState + 0x25;
       }
     }

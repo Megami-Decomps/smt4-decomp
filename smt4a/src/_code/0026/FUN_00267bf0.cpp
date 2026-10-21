@@ -20,7 +20,7 @@ typedef struct UiHolder {
     /* 0x04 */ UiObject *object;
 } UiHolder;
 
-extern UiHolder DAT_00588c40;
+extern UiHolder g_engineCleanupOwner;
 
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(void *p);
@@ -31,7 +31,7 @@ extern void asdTMTexTableReleaseNode(s32 table, s32 node);
 /* Tears down the UI object: its script process and buffers, data tables 0x14/0x25 and texture nodes 0..2, then frees it. */
 void FUN_00267bf0(void)
 {
-    UiObject *object = DAT_00588c40.object;
+    UiObject *object = g_engineCleanupOwner.object;
     UiSub *sub;
     s32 i;
 
@@ -47,8 +47,8 @@ void FUN_00267bf0(void)
         for (i = 0; i < 3; i++) {
             asdTMTexTableReleaseNode(0x1D, i);
         }
-        asdMemFree(DAT_00588c40.object);
-        DAT_00588c40.object = NULL;
+        asdMemFree(g_engineCleanupOwner.object);
+        g_engineCleanupOwner.object = NULL;
     }
 }
 

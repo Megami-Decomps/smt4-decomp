@@ -8,7 +8,7 @@ int jobIsValid(...);
 int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
 int FUN_00281428(unsigned int);
-int FUN_002a2194(...);
+int jobGetScalarFrame(...);
 
 typedef int romwright_code(...);
 extern int g_renderCtx; /* 0x59dbb4 */
@@ -18,7 +18,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00281428. */
-/* Supplied declaration required: FUN_002a2194. */
+/* Supplied declaration required: jobGetScalarFrame. */
 extern int FUN_00387580(unsigned int);
 
 
@@ -53,9 +53,9 @@ unsigned int FUN_00334848(void)
       temp_v6 = temp_v1 + temp_v5 * 4;
       if (*(int *)(temp_v6 + 0x60c) != 0) {
         if (*(int *)(temp_v6 + 0x610) != 0) {
-          FUN_002a2194();
+          jobGetScalarFrame();
           temp_v7 = in_s0;
-          FUN_002a2194(*(unsigned int *)(temp_v6 + 0x610));
+          jobGetScalarFrame(*(unsigned int *)(temp_v6 + 0x610));
           if (in_s0 < temp_v7) {
             temp_v0 = 1;
             temp_v3 = *(unsigned int *)(temp_v6 + 0x60c);

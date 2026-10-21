@@ -12,7 +12,7 @@ extern unsigned char LAB_004f8260; /* 0x4f8260 */
 /* Supplied declaration required: btlGetMainState. */
 extern int wstrlen(int);
 /* Supplied declaration required: libc_strcmp. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 int FUN_004f80e4(int param_1)
@@ -26,7 +26,7 @@ int FUN_004f80e4(int param_1)
   
   if ((*(int *)(param_1 + 0x1f54) != 0) && (piVar3 = (int *)(param_1 + 0x1f58), *piVar3 != 0)) {
     btlGetMainState();
-    temp_v0 = FUN_003e8430();
+    temp_v0 = btlScriptUnitHasFlags();
     if (temp_v0 == 0) {
       temp_v0 = 0;
       temp_v1 = wstrlen(*piVar3);

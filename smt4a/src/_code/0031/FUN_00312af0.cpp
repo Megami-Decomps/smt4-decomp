@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00295108(int);
 int FUN_002d8c90(...);
-int FUN_0039933c(void);
+int lmapApplyMapAndArea(void);
 int FUN_003b5d1c(void);
 
 extern int *g_popupState; /* 0x58104c */
@@ -16,7 +16,7 @@ extern int lmapMainIsRunning(void);
 extern int FUN_002c2758(unsigned int);
 extern int FUN_002d8b58(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002d8c90. */
-/* Supplied declaration required: FUN_0039933c. */
+/* Supplied declaration required: lmapApplyMapAndArea. */
 /* Supplied declaration required: FUN_003b5d1c. */
 
 
@@ -45,7 +45,7 @@ void FUN_00312af0(void)
       else {
         temp_v1 = lmapMainIsRunning();
         if (temp_v1 != 0) {
-          FUN_0039933c();
+          lmapApplyMapAndArea();
         }
         else {
           FUN_003b5d1c();

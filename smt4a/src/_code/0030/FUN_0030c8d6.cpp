@@ -1,35 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c8d6` (_code @ 0x30c8d6, 0x3a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler changes virtual-call and fallback-pointer register allocation. */
+#include "common.h"
 extern "C" {
-
-typedef int romwright_code(...);
-extern int FUN_002f4d9c(int, unsigned int);
-
-
-unsigned int FUN_0030c8d6(int *param_1,int param_2)
-
-{
-  int temp_v0;
-  
-  temp_v0 = (**(romwright_code **)(*param_1 + 0xfc))(param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = *(int *)(param_2 + 0x74);
-    if (temp_v0 == 0) {
-      temp_v0 = param_1[2];
-    }
-    if (temp_v0 == 0) {
-      return 0;
-    }
-    temp_v0 = FUN_002f4d9c(temp_v0,0x73);
-    if (temp_v0 == 0) {
-      return 0;
-    }
-    *(unsigned int *)(param_2 + 0x4c) = *(unsigned int *)(temp_v0 + 0x78);
-    *(int *)(param_2 + 0x48) = temp_v0;
-  }
-  return 1;
+struct Resource { u8 unk00[0x78]; u32 value; };
+struct Object { u8 unk00[0x48]; Resource *resource; u32 value; u8 unk50[0x24]; void *fallback; };
+struct Owner;
+struct OwnerVtable { u8 unk00[0xFC]; u32 (*resolve)(Owner *); };
+struct Owner { OwnerVtable *vtable; u32 unk04; void *fallback; };
+Resource *FUN_002f4d9c(void *resource, u32 kind);
+s32 FUN_0030c8d6(Owner *owner, Object *object) {
+    if (!owner->vtable->resolve(owner)) return 1;
+    void *fallback = object->fallback;
+    if (!fallback) fallback = owner->fallback;
+    if (!fallback) return 0;
+    Resource *resource = FUN_002f4d9c(fallback, 0x73);
+    if (!resource) return 0;
+    object->value = resource->value;
+    object->resource = resource;
+    return 1;
 }
-
-} /* extern "C" */
+}

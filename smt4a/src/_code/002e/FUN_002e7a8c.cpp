@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0014e314(...);
 int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
@@ -49,7 +49,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0014e314. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -597,11 +597,11 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       FUN_001835b4(2,0x11,0x28,temp_v7,temp_v8,0x9c);
       drawSetColorFromRGBA8(0x9fddddff);
       temp_v11 = gameGetSlotTable();
-      FUN_00100388(temp_v22,&LAB_002e87dc,*(unsigned char *)(temp_v11 + 0x1ca3));
+      textFormatBuffer(temp_v22,&LAB_002e87dc,*(unsigned char *)(temp_v11 + 0x1ca3));
       temp_v11 = FUN_001834a4(0x11,0x2a);
       FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,0,2,0x9c,
                    temp_v22);
-      FUN_00100388(temp_v22,&LAB_002e87dc,*(unsigned int *)(temp_v2 + 0x28));
+      textFormatBuffer(temp_v22,&LAB_002e87dc,*(unsigned int *)(temp_v2 + 0x28));
       temp_v11 = FUN_001834a4(0x11,0x2c);
       FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,1,2,0x9c,
                    temp_v22);

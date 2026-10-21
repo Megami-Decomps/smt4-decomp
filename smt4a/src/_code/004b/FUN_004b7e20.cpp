@@ -7,10 +7,10 @@ extern "C" {
 int FUN_002a49e4(...);
 int FUN_004b726c(...);
 
-int FUN_00100388(unsigned char [32], unsigned char *, int);
+int textFormatBuffer(unsigned char [32], unsigned char *, int);
 int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
-int FUN_0019ea64(...);
+int messageSetMode(...);
 int dialogOpen(...);
 int dialogClose(int);
 int scrScriptProcessStartEntry(...);
@@ -32,10 +32,10 @@ extern unsigned char LAB_004b820c; /* 0x4b820c */
 extern int DAT_0058800c; /* 0x58800c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
 extern int FUN_00224880(unsigned int);
@@ -91,7 +91,7 @@ void FUN_004b7e20(int param_1)
         if (temp_v2 != 0xb) {
           if (temp_v2 == 0x14) {
             if (DAT_0058800c != 0) {
-              FUN_0019ea64(1);
+              messageSetMode(1);
               FUN_004b7d88(param_1);
               menu4CStartBlock74(param_1 + 0x9c);
               menu4CReset(param_1 + 0x9c);
@@ -100,7 +100,7 @@ void FUN_004b7e20(int param_1)
               DAT_0058800c = 0;
             }
             else {
-              FUN_0019ea64(1);
+              messageSetMode(1);
               if ((*(char *)(*(int *)(param_1 + 0x111c) + 0x7c) != '\0') &&
                  (temp_v2 = FUN_004186e0(), temp_v2 != 0)) {
                 scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1158),0x3b);
@@ -173,9 +173,9 @@ void FUN_004b7e20(int param_1)
         *(unsigned int *)(param_1 + 0x2c) = 0x14;
         return;
       }
-      FUN_00100388(temp_v4,&LAB_004b8200,*(int *)(param_1 + 0x111c) + 0x6c);
+      textFormatBuffer(temp_v4,&LAB_004b8200,*(int *)(param_1 + 0x111c) + 0x6c);
       temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x1128),temp_v4);
-      FUN_0019ea64(0);
+      messageSetMode(0);
       sysPlaySe(0x92);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1130),temp_v1);
       *(unsigned char *)(param_1 + 0xa88) = 1;
@@ -186,7 +186,7 @@ void FUN_004b7e20(int param_1)
   }
   else {
     if (temp_v2 == 0x1e) {
-      FUN_0019ea64(0);
+      messageSetMode(0);
       temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x1158));
       if (temp_v2 != 2) {
         return;
@@ -208,7 +208,7 @@ void FUN_004b7e20(int param_1)
       if (temp_v2 == 0) {
         return;
       }
-      FUN_0019ea64(1);
+      messageSetMode(1);
       *(unsigned int *)(param_1 + 0x2c) = 0;
       *(unsigned int *)(param_1 + 0x28) = 5;
       DAT_0058800c = 0;

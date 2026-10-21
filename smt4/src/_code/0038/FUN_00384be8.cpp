@@ -16,7 +16,7 @@ int scrScriptProcessDestroy(void);
 int libc_strcat(...);
 int buttonHelpSetPreset(int);
 int FUN_002bcfc0(unsigned char [64], unsigned char [140]);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(unsigned char [64], unsigned int);
 int FUN_002bff50(void);
 int asdMemFree(void);
@@ -52,7 +52,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bcfc0. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: asdMemFree. */
@@ -193,8 +193,8 @@ void FUN_00384be8(unsigned int *param_1)
   case 2:
     temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
     temp_v0 = *(unsigned short *)(temp_v4 + *(int *)param_1[0x36a] * 0x88 + 0x6a);
-    FUN_002be624(temp_v6,&LAB_00385234,temp_v0,temp_v0);
-    FUN_002be624(temp_v7,&LAB_00385254,temp_v0);
+    textFormatBuffer(temp_v6,&LAB_00385234,temp_v0,temp_v0);
+    textFormatBuffer(temp_v7,&LAB_00385254,temp_v0);
     FUN_00297468(temp_v6,puVar8,0);
     FUN_00297468(temp_v7,param_1 + 0x16f,0);
     param_1[2] = param_1[2] + 1;

@@ -1,20 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df35c` (_code @ 0x3df35c, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct EntryData {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+    u32 value; // 0x08
+};
 
+struct Entry {
+    u32 unk00;       // 0x00
+    EntryData* data; // 0x04
+};
 
-unsigned int FUN_003df35c(int param_1)
-
+extern "C" u32 FUN_003df35c(const Entry* entry)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 4) != 0) {
-    temp_v0 = *(unsigned int *)(*(int *)(param_1 + 4) + 8);
-  }
-  return temp_v0;
+    const EntryData* data = entry->data;
+    if (data != 0) {
+        return data->value;
+    }
+    return 0;
 }
-
-} /* extern "C" */

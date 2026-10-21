@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f4908(...);
-int FUN_00294a44(void);
+int mapIfReleaseResource(void);
 int FUN_00313648(...);
 
 int FUN_0013c1ec(...);
@@ -54,7 +54,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00294a44. */
+/* Supplied declaration required: mapIfReleaseResource. */
 /* Supplied declaration required: mapIfReleaseSlot4. */
 /* Supplied declaration required: FUN_002dae68. */
 extern int FUN_002e07f4(void);
@@ -66,7 +66,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -117,7 +117,7 @@ void FUN_0033e590(void)
                 }
                 else {
                   temp_v1 = padButtonIsPressed(6);
-                  if ((temp_v1 != 0) || (temp_v1 = FUN_004d0554(), temp_v1 != 0)) {
+                  if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
                     temp_v1 = DAT_005806a4;
                     *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                     *(unsigned int *)(temp_v1 + 0xb0) = 0;
@@ -264,7 +264,7 @@ LAB_0033e908:
             FUN_00327ee8();
             return;
           }
-          FUN_00294a44();
+          mapIfReleaseResource();
           temp_v2 = *(int *)(g_lmapScene + 4);
           temp_v1 = g_lmapScene;
         }
@@ -275,7 +275,7 @@ LAB_0033e908:
           FUN_00327ee8();
           return;
         }
-        FUN_00294a44();
+        mapIfReleaseResource();
         FUN_00313648(0x14);
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;
@@ -307,7 +307,7 @@ LAB_0033e908:
     }
   }
   else {
-    FUN_00294a44();
+    mapIfReleaseResource();
     FUN_00313648(0x14);
     temp_v2 = *(int *)(g_lmapScene + 4);
     temp_v1 = g_lmapScene;

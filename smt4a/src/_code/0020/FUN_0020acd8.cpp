@@ -12,7 +12,7 @@ int FUN_00203b40(int, int, int, int, int, int);
 int FUN_0020ad6c(int, int, int);
 int FUN_00270104(void);
 int FUN_002cb438(int, unsigned int, unsigned int);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int FUN_003756c8(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ typedef struct {
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -30,9 +30,9 @@ extern int FUN_00167f08(void);
 /* Supplied declaration required: FUN_00270104. */
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: FUN_003756c8. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 /* WARNING: Removing unreachable block (ram,0x0020b3ec) */
@@ -137,20 +137,20 @@ void FUN_0020acd8(int param_1,unsigned int param_2,int param_3)
       FUN_00203b40(param_1 + 0x3bdc,4,1,4,1,1);
     }
     if (*piVar3 == 0x13 || *piVar3 == 0x16) {
-      FUN_00341f88();
+      buttonHelpGetValue();
       sysPlaySe();
     }
     temp_v0 = *piVar3;
     if ((temp_v0 == 0x22 || temp_v0 == 0x23) || temp_v0 == 0x24) {
-      FUN_00341f88();
+      buttonHelpGetValue();
       sysPlaySe();
     }
-    temp_v0 = FUN_00167f08();
+    temp_v0 = ifTouchGetButtonHelpValue();
     if (temp_v0 == 0x3f) {
       btlGetMainState();
-      temp_v0 = FUN_003e8430();
+      temp_v0 = btlScriptUnitHasFlags();
       if (temp_v0 == 0) {
-        FUN_00341f88();
+        buttonHelpGetValue();
         sysPlaySe();
       }
     }

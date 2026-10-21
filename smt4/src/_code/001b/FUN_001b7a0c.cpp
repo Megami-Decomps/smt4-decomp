@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0027d9a8(void);
+int randomGetNormalizedFloat(void);
 int FUN_0027da30(...);
 int FUN_00281e34(void);
 int btlMainFindEntryByListedId(unsigned char *, int);
@@ -34,7 +34,7 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0027d9a8. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 extern unsigned int FUN_0027d9e8(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned char *, int);
@@ -293,7 +293,7 @@ unsigned int FUN_001b7a0c(void)
         }
       }
       FUN_003c14e8(pbVar1,temp_v10);
-      FUN_0027d9a8();
+      randomGetNormalizedFloat();
       temp_v2 = *(unsigned int *)(temp_v10 + 0x4c);
       in_s0 = *(float *)(temp_v10 + 0xa4) * *(float *)(temp_v10 + 0xb8) * in_s0;
       if ((temp_v2 & 1) != 0) {

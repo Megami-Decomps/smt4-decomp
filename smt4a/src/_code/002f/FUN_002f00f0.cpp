@@ -1,38 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f00f0` (_code @ 0x2f00f0, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldr r0, [r0, #16]'; compiler emits 'ldr r3, [r0, #24]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int asdOperatorDeleteArray(unsigned int);
-int rt_memcpy(int, unsigned int, unsigned int);
-
-/* Supplied declaration required: asdOperatorDeleteArray. */
-extern int bufAllocateStorage(int, unsigned int);
-extern unsigned int FUN_00310160(unsigned int, int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_002f00f0(int param_1,int param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00310160(*(unsigned int *)(param_1 + 0x14),
-                       *(int *)(param_1 + 0x10) + *(int *)(param_1 + 0x18) + param_2);
-  if (*(unsigned int *)(param_1 + 0x14) < temp_v0) {
-    temp_v1 = bufAllocateStorage(param_1,temp_v0);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    rt_memcpy(temp_v1,*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x14));
-    asdOperatorDeleteArray(*(unsigned int *)(param_1 + 0xc));
-    *(int *)(param_1 + 0xc) = temp_v1;
-    *(unsigned int *)(param_1 + 0x14) = temp_v0;
-  }
-  return 1;
+struct Buffer { u8 unk00[0xC]; void *data; u32 count, capacity, offset; };
+u32 FUN_00310160(u32 capacity, u32 requested);
+void *bufAllocateStorage(Buffer *buffer, u32 size);
+void *rt_memcpy(void *output, const void *input, u32 size);
+void asdOperatorDeleteArray(void *array);
+s32 FUN_002f00f0(Buffer *buffer, u32 requested) {
+    u32 capacity = FUN_00310160(buffer->capacity, buffer->count + buffer->offset + requested);
+    if (buffer->capacity >= capacity) return 1;
+    void *data = bufAllocateStorage(buffer, capacity);
+    if (!data) return 0;
+    rt_memcpy(data, buffer->data, buffer->capacity);
+    asdOperatorDeleteArray(buffer->data);
+    buffer->data = data;
+    buffer->capacity = capacity;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,19 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5810` (_code @ 0x3f5810, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail weak call receives r0=0 and r1=0x04000047, but its target symbol is missing. */
+#include "common.h"
 
 extern "C" {
+extern u32 DAT_0044e918;
+extern u32 DAT_0044e91c;
 
-extern unsigned int DAT_0044e918; /* 0x44e918 */
-extern unsigned int DAT_0044e91c; /* 0x44e91c */
-
-
-void FUN_003f5810(unsigned int param_1,unsigned int param_2)
-
+void FUN_003f5810(u32 firstValue, u32 secondValue)
 {
-  DAT_0044e918 = param_1;
-  DAT_0044e91c = param_2;
-  return;
+    DAT_0044e918 = firstValue;
+    DAT_0044e91c = secondValue;
 }
-
-} /* extern "C" */
+}

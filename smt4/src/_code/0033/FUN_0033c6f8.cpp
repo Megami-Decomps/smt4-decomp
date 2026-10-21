@@ -1,19 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033c6f8` (_code @ 0x33c6f8, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail address formation or grouped state stores differ. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_0033c6f8(int param_1)
-
+struct TargetState {
+    /* 0x000 */ u8 unk00[0x390];
+    /* 0x390 */ u32 mode;
+    /* 0x394 */ f32 scale;
+    /* 0x398 */ f32 value;
+    /* 0x39c */ f32 x;
+    /* 0x3a0 */ f32 y;
+    /* 0x3a4 */ f32 z;
+};
+/* Sets the target's default mode and three parameters. */
+extern "C" void FUN_0033c6f8(TargetState *target)
 {
-  *(unsigned int *)(param_1 + 0x390) = 3;
-  *(unsigned int *)(param_1 + 0x398) = 0x40800000;
-  *(unsigned int *)(param_1 + 0x394) = 0;
-  *(unsigned int *)(param_1 + 0x39c) = 0x40800000;
-  *(unsigned int *)(param_1 + 0x3a0) = 0x41000000;
-  return;
+    target->value = 4.0f;
+    target->scale = 8.0f;
+    target->mode = 3;
+    target->x = 4.0f;
+    target->y = 0.0f;
 }
-
-} /* extern "C" */

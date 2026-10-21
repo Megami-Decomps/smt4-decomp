@@ -22,13 +22,13 @@ int FUN_002b5cd4(void);
 int FUN_002b63d0(void);
 int FUN_00313648(int);
 int FUN_0032714c(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00352e54(...);
 int FUN_00367fac(void);
 int FUN_00368374(int);
 int FUN_00377418(...);
 int FUN_00384830(void);
-int FUN_003ae6cc(void);
+int naviMainFinishRequest(void);
 int FUN_003d4ed8(...);
 int gameFlagSetValue(int, int);
 int countersAddSaturating(...);
@@ -88,8 +88,8 @@ extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 /* Supplied declaration required: FUN_00319f64. */
 extern int FUN_00325340(void);
 /* Supplied declaration required: FUN_0032714c. */
-/* Supplied declaration required: FUN_00352bc4. */
-extern int FUN_00352ca0(int);
+/* Supplied declaration required: mathPositionHeadingDegrees. */
+extern int gameFlagsTestFirstBank(int);
 /* Supplied declaration required: FUN_00352e54. */
 extern int FUN_00367f98(void);
 /* Supplied declaration required: FUN_00367fac. */
@@ -98,7 +98,7 @@ extern int FUN_00376fcc(int);
 /* Supplied declaration required: FUN_00377418. */
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_00398078. */
-/* Supplied declaration required: FUN_003ae6cc. */
+/* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
@@ -154,10 +154,10 @@ unsigned int FUN_002332f4(void)
         temp_v4 = *(int *)(temp_v5 + 0x68);
         FUN_002b5cb4();
         if (((temp_v4 < 0x43fa0001) &&
-            (temp_v4 = FUN_00352ca0((int)(short)*(unsigned int *)(temp_v5 + 0x80)), temp_v4 == 0)) &&
+            (temp_v4 = gameFlagsTestFirstBank((int)(short)*(unsigned int *)(temp_v5 + 0x80)), temp_v4 == 0)) &&
            (temp_v4 = FUN_00376fcc((int)(short)*(unsigned int *)(temp_v5 + 0x80)), temp_v4 == 0)) {
           FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
-          FUN_003ae6cc();
+          naviMainFinishRequest();
         }
         temp_v16 = 0;
         gameFlagsGetBlock();
@@ -168,7 +168,7 @@ unsigned int FUN_002332f4(void)
         if (((DAT_005f17ac != '\0' && temp_v1 != 0) &&
             (temp_v1 = *(short *)(temp_v5 + 0xac), temp_v1 != 1 && temp_v1 != 2)) &&
            (temp_v1 != 3 && temp_v1 != 6)) {
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           temp_v3 = *(unsigned int *)(temp_v5 + 0x74);
           FUN_002b5cd4();
           if ((temp_v3 < 0xc2b40000) && ((int)temp_v3 < 0x42b40000)) {
@@ -186,7 +186,7 @@ unsigned int FUN_002332f4(void)
             }
             FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
             FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
-            FUN_003ae6cc();
+            naviMainFinishRequest();
             countersAddSaturating(0x17,1);
             *(unsigned char *)(temp_v5 + 0x7c) = 1;
             *(unsigned int *)(temp_v5 + 0x60) = 2;
@@ -204,7 +204,7 @@ unsigned int FUN_002332f4(void)
         }
         if (((DAT_005f161c == '\0') && (DAT_005f19d4 != '\0')) &&
            ((DAT_005f19e8 != 0 && ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)))) {
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           temp_v3 = *(unsigned int *)(temp_v5 + 0x74);
           FUN_002b5cd4();
           temp_v1 = *(short *)(temp_v5 + 0xac);
@@ -294,7 +294,7 @@ unsigned int FUN_002332f4(void)
         gameFlagsGetBlock();
         if (*(short *)(temp_v5 + 0xac) == 3) {
           if (*(char *)((int)temp_v25 + 0x53) != '\0') {
-            FUN_00352bc4();
+            mathPositionHeadingDegrees();
             temp_v4 = DAT_005f17b0;
             FUN_002b5cb4();
             if ((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, FUN_00384830(), temp_v4 < 0x428c0000))
@@ -303,7 +303,7 @@ unsigned int FUN_002332f4(void)
               FUN_003d4ed8(0x10002a6);
               FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
               FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
-              FUN_003ae6cc();
+              naviMainFinishRequest();
               countersAddSaturating(0x17,1);
               *(unsigned char *)(temp_v5 + 0x7c) = 1;
               *(unsigned int *)(temp_v5 + 0x60) = 2;
@@ -401,7 +401,7 @@ LAB_00233a04:
           FUN_003d4ed8(0x10002a8);
           FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
           FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
-          FUN_003ae6cc();
+          naviMainFinishRequest();
           countersAddSaturating(0x17,1);
           countersAddSaturating(0x18,1);
           *(unsigned char *)(temp_v5 + 0x7c) = 1;

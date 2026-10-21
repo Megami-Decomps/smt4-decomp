@@ -37,7 +37,7 @@ extern int g_lmapScene; /* 0x447e88 */
 /* Supplied declaration required: FUN_00256550. */
 /* Supplied declaration required: contentEntryGetE. */
 /* Supplied declaration required: FUN_00267144. */
-extern int FUN_002671bc(void);
+extern int dataTableGetRecordFifty(void);
 /* Supplied declaration required: FUN_00273f5c. */
 extern int FUN_0027d968(void);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
@@ -86,7 +86,7 @@ unsigned int FUN_001f9334(int param_1)
   temp_v6 = gameGetMapBlock();
   temp_v10 = 0;
   pcVar13 = (char *)0x0;
-  temp_v7 = FUN_002671bc();
+  temp_v7 = dataTableGetRecordFifty();
   if (0 < temp_v7) {
     do {
       pcVar9 = pcVar13;
@@ -112,11 +112,11 @@ unsigned int FUN_001f9334(int param_1)
         temp_v10 = temp_v10 + 1;
       }
       pcVar13 = pcVar13 + 1;
-      temp_v7 = FUN_002671bc();
+      temp_v7 = dataTableGetRecordFifty();
     } while ((int)pcVar13 < temp_v7);
   }
   pcVar13 = (char *)0x0;
-  temp_v6 = FUN_002671bc();
+  temp_v6 = dataTableGetRecordFifty();
   if (0 < temp_v6) {
     temp_v14 = 0;
     do {
@@ -451,7 +451,7 @@ LAB_001f9924:
         }
       }
       pcVar13 = pcVar13 + 1;
-      temp_v6 = FUN_002671bc();
+      temp_v6 = dataTableGetRecordFifty();
     } while ((int)pcVar13 < temp_v6);
   }
   if (param_1 != 0) {

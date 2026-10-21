@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00306d24` (_code @ 0x306d24, 0xe bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler reorders the vtable and field stores; constructor naming pending. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char DAT_0055a790; /* 0x55a790 */
-
-
-void FUN_00306d24(unsigned int *param_1,unsigned int param_2,unsigned short param_3)
-
-{
-  *(unsigned char *)(param_1 + 1) = 0;
-  *param_1 = (unsigned int)&DAT_0055a790;
-  param_1[2] = param_2;
-  *(unsigned short *)(param_1 + 3) = param_3;
-  return;
+extern const u8 DAT_0055a790;
+struct Object { const void *vtable; u8 active; u8 unk05[3]; u32 value; u16 kind; };
+/* Initializes virtual dispatch and the object's scalar fields. */
+void FUN_00306d24(Object *object, u32 value, u16 kind) {
+    object->active = 0;
+    object->vtable = &DAT_0055a790;
+    object->value = value;
+    object->kind = kind;
 }
-
-} /* extern "C" */
+}

@@ -1,32 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c064` (_code @ 0x39c064, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int FUN_0039c57c(void);
-
-typedef struct fn_0039c064_arg0 fn_0039c064_arg0;
-struct fn_0039c064_arg0 {
-    unsigned char pad_0x0[0x10];
-    uint field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x5a78];
-    undefined1 field_0x5a8c; /* +0x5a8c */
-    undefined1 field_0x5a8d; /* +0x5a8d */
+/* NON_MATCHING: retail packed state stores or parameter lifetime differs. */
+#include "common.h"
+struct NavigationState {
+    /* 0x0000 */ u8 unk00[16];
+    /* 0x0010 */ u32 flags;
+    /* 0x0014 */ u8 unk14[0x5a78];
+    /* 0x5a8c */ u8 requested;
+    /* 0x5a8d */ u8 unk5a8d[0x200];
+    /* 0x5c8d */ u8 active;
 };
-
-/* Supplied declaration required: FUN_0039c57c. */
-
-
-void FUN_0039c064(fn_0039c064_arg0 *param_1)
-
+extern "C" void FUN_0039c57c(NavigationState *state);
+/* Resets navigation control and requests both update paths. */
+extern "C" void FUN_0039c064(NavigationState *state)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0039c57c();
-  param_1->field_0x10 = param_1->field_0x10 & 0xffffffef;
-  param_1->field_0x5a8c = 1;
-  param_1->field_0x5a8d = 1;
-  return;
+    FUN_0039c57c(state);
+    state->flags &= ~16;
+    state->requested = 1;
+    state->active = 1;
 }
-
-} /* extern "C" */

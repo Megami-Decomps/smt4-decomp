@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0013c884(...);
 int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(...);
@@ -22,7 +22,7 @@ typedef struct {
 extern int FUN_0031bd24(...); /* 0x31bd24 */
 extern int modelWorkDestroy(...); /* 0x38a184 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
@@ -58,10 +58,10 @@ void FUN_003a6dec(unsigned int param_1,unsigned int param_2)
     puVar1[2] = 0;
   }
   else {
-    FUN_00100388(&temp_v2,"battle/battle_map/e%03d_%02d.bcenv",puVar1[4],puVar1[5]);
+    textFormatBuffer(&temp_v2,"battle/battle_map/e%03d_%02d.bcenv",puVar1[4],puVar1[5]);
     FUN_001f474c(&temp_v2,0);
     *(unsigned char *)(puVar1 + 7) = 1;
-    FUN_00100388(&temp_v2,"battle/battle_map/b%03d_%02d.bam",puVar1[4],puVar1[5]);
+    textFormatBuffer(&temp_v2,"battle/battle_map/b%03d_%02d.bam",puVar1[4],puVar1[5]);
     temp_v1 = asdMdlManagerCreateSecondList(&temp_v2,0x38);
     puVar1[6] = temp_v1;
     puVar1[3] = 0;

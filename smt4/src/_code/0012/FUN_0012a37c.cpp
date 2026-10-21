@@ -12,7 +12,7 @@ int FUN_0013b87c(unsigned int);
 int FUN_002ad1d0(unsigned int);
 int FUN_002bb120(int);
 int FUN_002bb130(int);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int FUN_002c131c(...);
@@ -55,7 +55,7 @@ extern int FUN_002ad234(void);
 extern unsigned int FUN_002bb100(void);
 /* Supplied declaration required: FUN_002bb120. */
 /* Supplied declaration required: FUN_002bb130. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
@@ -201,7 +201,7 @@ joined_r0x0012a634:
       nn_os_LightEvent_Signal(&DAT_00465644);
       continue;
     }
-    FUN_002bb150(10000000,0);
+    threadSleepDuration(10000000,0);
     software_interrupt(0x18);
     if ((int)(&DAT_004e5290)[temp_v5] < 0) {
       FUN_002c526c();

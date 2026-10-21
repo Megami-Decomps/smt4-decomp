@@ -11,7 +11,7 @@ int FUN_0027134c(int, float *);
 int FUN_002fe2e8(int, float *);
 int FUN_00321d7c(...);
 int FUN_00375c74(int, float *, unsigned char [68], int *);
-int FUN_00514500(void);
+int randomAdvanceShiftRegister(void);
 int FUN_00514540(...);
 int VectorSignedToFloat(...);
 
@@ -80,7 +80,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00321d7c. */
 /* Supplied declaration required: FUN_00375c74. */
 extern int FUN_0037a844(void);
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 
 
@@ -346,7 +346,7 @@ void FUN_0038f038(int param_1)
                 FUN_00514540(0);
                 temp_v4 = 0;
                 pfVar7[6] = temp_v9 * 6.2831855f;
-                FUN_00514500();
+                randomAdvanceShiftRegister();
                 if ((temp_v4 & 1) != 0) {
                   pfVar7[7] = -pfVar7[7];
                 }

@@ -56,7 +56,7 @@ extern int FUN_0019e0c0(unsigned int);
 extern unsigned int gameDataBlocksGetFlagByteA(void);
 extern unsigned int FUN_00259800(void);
 extern unsigned int FUN_0025981c(void);
-extern int FUN_00262f38(void);
+extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0026e61c. */
@@ -171,7 +171,7 @@ unsigned int FUN_001ebedc(int param_1)
     FUN_002bf810(temp_v5);
     break;
   case 3:
-    temp_v7 = FUN_00262f38();
+    temp_v7 = battleTalkIsBustReady();
     if (temp_v7 == 0) {
       return temp_v18;
     }
@@ -436,7 +436,7 @@ LAB_001ec4d0:
   default:
     return temp_v18;
   case 10:
-    temp_v7 = FUN_00262f38();
+    temp_v7 = battleTalkIsBustReady();
     if (temp_v7 != 0) {
       *(unsigned int *)(param_1 + 0xd38) = 0;
       FUN_0028bf2c();

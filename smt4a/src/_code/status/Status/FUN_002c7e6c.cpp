@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
@@ -49,7 +49,7 @@ extern signed char g_gameGlobals; /* 0x588fd0 */
 extern unsigned char DAT_00588fd2; /* 0x588fd2 */
 extern unsigned int *DAT_00588fd4; /* 0x588fd4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -102,7 +102,7 @@ void FUN_002c7e6c(void)
     *(unsigned char *)(puVar1 + 0x82c) = 1;
     DAT_00588fd2 = 0;
     *(unsigned char *)((int)puVar1 + 0x20b1) = 1;
-    FUN_00100388(puVar1 + 0x81a,&LAB_002c82e4);
+    textFormatBuffer(puVar1 + 0x81a,&LAB_002c82e4);
     puVar1[0x82a] = 0xffffffff;
     *(unsigned char *)(puVar1 + 0x82b) = 0;
     *(unsigned char *)((int)puVar1 + 0x2012) = 1;

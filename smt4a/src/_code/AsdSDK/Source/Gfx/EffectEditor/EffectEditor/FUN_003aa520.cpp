@@ -6,7 +6,7 @@ extern "C" {
 
 int libc_strcpy(unsigned char *);
 int effMenuNodeCreate(void);
-int FUN_00390364(void);
+int engineFreeCallback(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned char DAT_00634c50; /* 0x634c50 */
 extern unsigned int wstrlen(unsigned char *);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: effMenuNodeCreate. */
-/* Supplied declaration required: FUN_00390364. */
+/* Supplied declaration required: engineFreeCallback. */
 
 
 void FUN_003aa520(void)
@@ -31,7 +31,7 @@ void FUN_003aa520(void)
   unsigned int *puVar2;
   
   if ((*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48)) != (unsigned int *)0x0) {
-    FUN_00390364();
+    engineFreeCallback();
     (*(unsigned int * *)((unsigned char *)&g_effectEditor + 0x48)) = (unsigned int *)0x0;
   }
   puVar2 = (unsigned int *)&LAB_003aa574;

@@ -1,14 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c86ec` (_code @ 0x2c86ec, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_002c86ec(void)
-
+/* Computes the dot product of two three-component vectors. */
+extern "C" f32 FUN_002c86ec(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ)
 {
-  return;
+    return x * otherX + y * otherY + z * otherZ;
 }
-
-} /* extern "C" */

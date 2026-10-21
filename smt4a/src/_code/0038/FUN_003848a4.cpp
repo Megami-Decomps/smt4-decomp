@@ -24,7 +24,7 @@ extern unsigned int DAT_005f1b9c; /* 0x5f1b9c */
 extern unsigned int DAT_005f1ba0; /* 0x5f1ba0 */
 extern unsigned int DAT_005f1ba4; /* 0x5f1ba4 */
 extern unsigned int DAT_005f1ba8; /* 0x5f1ba8 */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Supplied declaration required: asdSequenceRequest. */
 
@@ -58,17 +58,17 @@ void FUN_003848a4(void)
     }
   }
   else {
-    if (DAT_005f1c98 == -1) {
+    if (g_mapSelection == -1) {
       temp_v0[0] = 3;
       asdSequenceRequest(0xe,temp_v0,4);
       return;
     }
-    if (DAT_005f1c98 >= 200) {
-      temp_v0[0] = DAT_005f1c98 - 200;
+    if (g_mapSelection >= 200) {
+      temp_v0[0] = g_mapSelection - 200;
       asdSequenceRequest(0xe,temp_v0,4);
       return;
     }
-    if (DAT_005f1c98 < 100) {
+    if (g_mapSelection < 100) {
       asdSequenceRequest(6,0,0,in_r3);
       return;
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, unsigned int, unsigned int, int);
@@ -37,7 +37,7 @@ extern int g_config; /* 0x57f230 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -58,7 +58,7 @@ extern int dataTableGetEntries(void);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002a4894. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 
 
 void FUN_002027fc(void)
@@ -117,7 +117,7 @@ void FUN_002027fc(void)
   temp_v1 = dataTableGetCount(temp_v3);
   if ((temp_v1 != 0) && (temp_v5 != 0)) {
     temp_v5 = *(int *)(temp_v0 + 0x8c);
-    temp_v1 = FUN_00348ed0(temp_v0);
+    temp_v1 = uiSearchPrimary(temp_v0);
     temp_v3 = dataTableGet(0x36,0);
     temp_v2 = dataTableGetEntries();
     temp_v10 = dataTableGetCount(temp_v3);
@@ -190,7 +190,7 @@ void FUN_002027fc(void)
           }
           FUN_001fc4f0(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,0,0,temp_v3);
         }
-        FUN_00100388(temp_v18,&LAB_00202d28,
+        textFormatBuffer(temp_v18,&LAB_00202d28,
                      temp_v2 + *(int *)(temp_v0 + temp_v10 * 8 + 0x98) * 0xc + 0x1e);
         temp_v11 = FUN_001834a4(0x24,0x74);
         puVar11 = temp_v18;

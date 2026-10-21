@@ -1,33 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002756a8` (_code @ 0x2756a8, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [pc, #20] where the compiled block uses ldr r0, [pc, #16]. */
+#include "common.h"
+
+struct TransitionState {
+    u8 unk00[0x64];
+    u32 phase; // 0x64
+};
+
+struct LinkHolder;
+
+struct LocalMapScene {
+    u8 unk00[0x1A8];
+    LinkHolder* holder; // 0x1A8
+};
 
 extern "C" {
+extern LocalMapScene* g_lmapScene;
 
-int linkHolderClearFlag(unsigned int);
+void linkHolderClearFlag(LinkHolder* holder);
+void mapRequestGameState(void);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int g_mapMain; /* 0x581274 */
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f1ac8; /* 0x5f1ac8 */
-
-/* Supplied declaration required: linkHolderClearFlag. */
-
-
-void FUN_002756a8(int *param_1)
-
+void FUN_002756a8(TransitionState** state)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(*param_1 + 100) = 3;
-  linkHolderClearFlag(*(unsigned int *)(g_lmapScene + 0x1a8));
-  if (g_mapMain != 0) {
-    DAT_005f1ac8 = 1;
-  }
-  return;
+    (*state)->phase = 3;
+    linkHolderClearFlag(g_lmapScene->holder);
+    mapRequestGameState();
 }
-
-} /* extern "C" */
+}

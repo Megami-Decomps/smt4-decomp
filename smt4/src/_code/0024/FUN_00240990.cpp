@@ -6,10 +6,10 @@ int __aeabi_memset4(u32 *dst, int size, u32 value);
 int FUN_0030a728(u32 *dst, int max, u32 seed);
 int aocLoaderUpdateRecords(void *result, void *obj);
 int FUN_00336da8(void *obj);
-int FUN_00338318(void *obj, int id);
+int entryAddUniqueIdentifier(void *obj, int id);
 int FUN_00339210(void *obj, u32 value);
 extern u32 FUN_00294090(u32 id, u32 flag);
-extern int FUN_003391d0(void *obj, u32 id);
+extern int entryContainsIdentifier(void *obj, u32 id);
 
 typedef struct Slot {
     /* 0x0 */ u32 id;
@@ -47,11 +47,11 @@ void FUN_00240990(Result *result, Obj *obj)
     i = 0;
     if (i < count) {
         do {
-            if (FUN_003391d0(obj, ids[i]) == 0) {
+            if (entryContainsIdentifier(obj, ids[i]) == 0) {
                 value = FUN_00294090(ids[i], 1);
                 FUN_00339210(obj, value);
                 obj->slots[added].id = ids[i];
-                FUN_00338318(obj, (s16)ids[i]);
+                entryAddUniqueIdentifier(obj, (s16)ids[i]);
                 added++;
             }
             i++;

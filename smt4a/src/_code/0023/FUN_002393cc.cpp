@@ -1,21 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002393cc` (_code @ 0x2393cc, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #44] where the compiled block uses bge 24. */
+#include "common.h"
+
+struct GameEntryState {
+    u8 unk00[0x15E4];
+    u8 entryFlags[10]; // 0x15E4
+};
+
+struct GameDataBlock {
+    u8 unk00[0x3E74];
+    GameEntryState entryState; // 0x3E74
+};
+
+struct GameDataBlocks {
+    u32 unk00;           // 0x00
+    GameDataBlock* data; // 0x04
+};
 
 extern "C" {
+extern GameDataBlocks g_gameDataBlocks;
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-unsigned char FUN_002393cc(int param_1)
-
+u8 FUN_002393cc(s32 entryIndex)
 {
-  unsigned char temp_v0;
-  
-  if ((param_1 >= 10) || (temp_v0 = 1, *(char *)(param_1 + (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x5458) != '\x01')) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (entryIndex < 10 && g_gameDataBlocks.data->entryState.entryFlags[entryIndex] == 1) {
+        return 1;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

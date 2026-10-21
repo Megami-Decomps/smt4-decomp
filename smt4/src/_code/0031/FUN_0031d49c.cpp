@@ -11,7 +11,7 @@ extern int DAT_0049fae0; /* 0x49fae0 */
 extern short DAT_0049fb96; /* 0x49fb96 */
 extern short DAT_0049fb98; /* 0x49fb98 */
 
-extern int FUN_002c8824(void);
+extern int mapCountActiveEntries(void);
 
 
 void FUN_0031d49c(void)
@@ -21,7 +21,7 @@ void FUN_0031d49c(void)
   int temp_v1;
   
   temp_v1 = (int)DAT_0049fb96;
-  temp_v0 = FUN_002c8824();
+  temp_v0 = mapCountActiveEntries();
   DAT_0049fae0 = temp_v1 - (*(int *)(DAT_00447e58 + 8) +
                          (temp_v0 + *(int *)(DAT_0044cd88 + 0x10) + *(int *)(g_mapObj + 0x10)) / 3
                          );

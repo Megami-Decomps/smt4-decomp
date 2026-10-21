@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001db90c(unsigned char [128], int, int, int, unsigned int, int, int);
 int asdSaveWriteBlock(int, unsigned char [128], unsigned char [128], unsigned int, unsigned int);
-int FUN_002be624(unsigned char [128], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int);
 int FUN_002cbe70(int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ extern unsigned int DAT_0043e31c; /* 0x43e31c */
 /* Supplied declaration required: FUN_001db90c. */
 /* Supplied declaration required: asdSaveWriteBlock. */
 extern int FUN_00214950(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002cbe70. */
 
 
@@ -38,7 +38,7 @@ void FUN_002d8f3c(unsigned int param_1)
   
   temp_v1 = *(int *)(DAT_0043e314 + 4);
   DAT_0043e311 = 1;
-  FUN_002be624(temp_v3,&LAB_002d8ffc,*(unsigned int *)(DAT_0043e314 + 8));
+  textFormatBuffer(temp_v3,&LAB_002d8ffc,*(unsigned int *)(DAT_0043e314 + 8));
   FUN_001db90c(temp_v2,0x34534444,0x454d4147,0,*(unsigned int *)(DAT_0043e314 + 0x18),0,0);
   temp_v0 = temp_v1;
   asdSaveWriteBlock(temp_v1,temp_v3,temp_v2,*(unsigned int *)(DAT_0043e314 + 0x14),

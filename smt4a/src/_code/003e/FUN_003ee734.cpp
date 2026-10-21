@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0034a290(void);
 int playerGetWords(unsigned short [30], int);
 int FUN_003e0064(int);
-int FUN_003e0090(int);
+int playerSetClampedValue(int);
 int playerClearFlagMask(int);
 int FUN_003e4e64(void);
 int halves34Copy(int, unsigned short [30]);
@@ -40,7 +40,7 @@ extern short FUN_003e0024(void);
 extern short FUN_003e0034(void);
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e0064. */
-/* Supplied declaration required: FUN_003e0090. */
+/* Supplied declaration required: playerSetClampedValue. */
 /* Supplied declaration required: playerClearFlagMask. */
 extern unsigned int FUN_003e0154(void);
 extern unsigned int FUN_003e0164(void);
@@ -136,7 +136,7 @@ void FUN_003ee734(int param_1)
       temp_v3 = FUN_003e0164();
       temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v2 >> 0x16) & 3);
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v10 * (float)temp_v18) + temp_v1);
-      FUN_003e0090(temp_v6);
+      playerSetClampedValue(temp_v6);
       if (temp_v6 == 0) {
         temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2c) = 0;

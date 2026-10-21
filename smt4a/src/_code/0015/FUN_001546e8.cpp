@@ -1,28 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001546e8` (_code @ 0x1546e8, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct StateValues {
+    s8 primary;   // 0x00
+    s8 secondary; // 0x01
+};
 
 extern "C" {
+extern StateValues DAT_0063ff88;
 
-extern signed char DAT_0063ff88; /* 0x63ff88 */
-extern signed char DAT_0063ff89; /* 0x63ff89 */
-
-
-int FUN_001546e8(unsigned int param_1)
-
+s32 FUN_001546e8(u32 selector)
 {
-  int temp_v0;
-  
-  if (param_1 < 2) {
-    temp_v0 = (int)DAT_0063ff88;
-  }
-  else if (param_1 == 2) {
-    temp_v0 = (int)DAT_0063ff89;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (selector == 0 || selector == 1) {
+        return DAT_0063ff88.primary;
+    }
+    if (selector == 2) {
+        return DAT_0063ff88.secondary;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -9,7 +9,7 @@ int flagObjAdvance(int);
 int FUN_0047306c(int, int, int);
 int jobOwnerFreeSlotAndStop(int);
 int FUN_00477d10(...);
-int FUN_0047daf4(unsigned char [20]);
+int timeInitializeActiveState(unsigned char [20]);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
@@ -18,7 +18,7 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_0047306c. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 
 
 void FUN_00478dc4(int param_1)
@@ -30,7 +30,7 @@ void FUN_00478dc4(int param_1)
   int temp_v2;
   unsigned char temp_v3 [20];
   
-  FUN_0047daf4(temp_v3);
+  timeInitializeActiveState(temp_v3);
   temp_v1 = *(int *)(param_1 + 8);
   temp_v2 = param_1 + 0x11b0;
   if (temp_v1 == 0) {

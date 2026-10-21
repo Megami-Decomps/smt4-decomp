@@ -28,7 +28,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0022a5d8. */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_002550d8. */
-extern int FUN_00255158(int, unsigned int);
+extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
 /* Supplied declaration required: FUN_003c0484. */
@@ -82,7 +82,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
     if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
       FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
     }
-    temp_v2 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x15);
+    temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x15);
     puVar5 = (unsigned int *)param_2[8];
     if ((*puVar5 & 0x20000) != 0) {
       FUN_0022a5d8(0xd,puVar5,1);
@@ -126,7 +126,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
   }
   if ((*(unsigned int *)param_2[8] & 0x60000) != 0) {
     FUN_002550d8((int)*(short *)(param_2[9] + 0x62),0x15,0xffffffff,0);
-    temp_v2 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x15);
+    temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x15);
     if (temp_v2 == 0) {
       puVar7 = (unsigned int *)param_2[8];
       temp_v4 = *puVar7;

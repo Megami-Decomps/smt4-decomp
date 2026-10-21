@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001f3f34(void);
-int FUN_003fd76c(int, int);
-int FUN_003fd784(int);
+int controllerSetDestination(int, int);
+int controllerSetPosition(int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, unsigned int, int);
 int VectorSignedToFloat(...);
@@ -16,8 +16,8 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f3f34. */
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetDestination. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 
@@ -88,7 +88,7 @@ void FUN_0024aeb0(void)
           *(unsigned int *)(temp_v1 + 0x5c) = temp_v5;
           *(float *)(temp_v0 + 0x14) = *(float *)(temp_v0 + 0x14) + temp_v6;
           *(float *)(temp_v0 + 0x1c) = *(float *)(temp_v0 + 0x1c) + *(float *)(temp_v1 + 0x5c);
-          FUN_003fd76c(temp_v2,temp_v0 + 0x14);
+          controllerSetDestination(temp_v2,temp_v0 + 0x14);
           temp_v1 = g_mapTrap;
           if (*(int *)(g_mapTrap + 0x44) <= *(int *)(g_mapTrap + 0x48)) {
             *(unsigned int *)(g_mapTrap + 0x44) = 0;
@@ -98,9 +98,9 @@ void FUN_0024aeb0(void)
           }
         }
         if (*(char *)(temp_v0 + 0x28) != '\0') {
-          FUN_003fd76c(temp_v2,temp_v0 + 0x14);
+          controllerSetDestination(temp_v2,temp_v0 + 0x14);
           FUN_003fdb18(temp_v2);
-          FUN_003fd784(temp_v2);
+          controllerSetPosition(temp_v2);
           FUN_003fe86c(temp_v2,*(unsigned int *)(temp_v0 + 0x24),2);
           *(unsigned char *)(temp_v0 + 0x28) = 0;
           return;

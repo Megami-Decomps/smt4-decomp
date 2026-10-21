@@ -17,14 +17,14 @@ typedef struct EffMisc {
     /* 0x1C */ s32 frame;
 } EffMisc;
 
-extern EffMiscKind DAT_005c1078[];
+extern EffMiscKind g_effMiscKinds[];
 
 extern s32 effGetFrameStep(void);
 
 /* Runs the effect's kind-specific update, then advances its frame counter by the frame step. */
 void effMiscUpdate(EffMisc *eff)
 {
-    DAT_005c1078[eff->kind].update(eff);
+    g_effMiscKinds[eff->kind].update(eff);
     eff->frame += effGetFrameStep();
 }
 

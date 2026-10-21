@@ -5,8 +5,8 @@
 extern "C" {
 
 int jobStop(unsigned int, int);
-int FUN_00280328(unsigned int, int, int);
-int FUN_002ea508(unsigned int, unsigned char *);
+int asdListBoxCreateDefaultFlags(unsigned int, int, int);
+int jobSetText(unsigned int, unsigned char *);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
@@ -25,8 +25,8 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00280328. */
-/* Supplied declaration required: FUN_002ea508. */
+/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
+/* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
@@ -48,11 +48,11 @@ void FUN_004d3950(int param_1,int param_2)
     jobStop(*(unsigned int *)(param_1 + 0x10),0);
   }
   temp_v1 = *(unsigned int *)(param_2 + 0x80);
-  FUN_00280328(temp_v1,0x75,0);
+  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d3c70);
+  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d3c70);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);

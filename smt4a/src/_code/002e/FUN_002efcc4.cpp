@@ -1,39 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efcc4` (_code @ 0x2efcc4, 0x2e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r2, r3, r4, r5, r6, lr}'; compiler emits 'push {r4, r5, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_00107608(int, unsigned int);
-int FUN_0012092a(int, int);
-int FUN_002efcf2(int *, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00107608. */
-/* Supplied declaration required: FUN_0012092a. */
-extern unsigned int FUN_001242e2(int);
-/* Supplied declaration required: FUN_002efcf2. */
-
-
-void FUN_002efcc4(int param_1,int *param_2,int param_3,unsigned int param_4)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int uStack_14;
-  
-  temp_v1 = param_3;
-  uStack_14 = param_4;
-  FUN_002efcf2(&temp_v1,param_3);
-  FUN_0012092a(param_1 + 0xc4,*param_2 - temp_v1);
-  temp_v0 = FUN_001242e2(param_1 + 0xc4);
-  FUN_00107608(param_1,temp_v0);
-  return;
+struct Pair { u32 first, second; };
+struct Object { u8 unk00[0xC4]; u8 child; };
+void FUN_002efcf2(Pair *output, const Pair *source);
+void FUN_0012092a(void *object, u32 difference);
+u32 FUN_001242e2(void *object);
+void FUN_00107608(Object *object, u32 result);
+void FUN_002efcc4(Object *object, const u32 *value, const Pair *source) {
+    Pair copy;
+    FUN_002efcf2(&copy, source);
+    FUN_0012092a(&object->child, *value - copy.first);
+    FUN_00107608(object, FUN_001242e2(&object->child));
 }
-
-} /* extern "C" */
+}

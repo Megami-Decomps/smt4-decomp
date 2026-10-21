@@ -11,9 +11,9 @@ int FUN_002b7638(...);
 int FUN_002b93c8(int);
 int FUN_002ba12c(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c1b64(...);
@@ -59,10 +59,10 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -174,9 +174,9 @@ unsigned int FUN_001b72e0(void)
       FUN_00218c50(temp_v1 + 8);
       FUN_0033cc84(*(unsigned int *)(temp_v1 + 0x7e20));
       if (*(char *)(temp_v1 + 0x7e4b) != '\0') {
-        FUN_002bf538();
+        efctSetSpeed();
         FUN_002bf288(2,0xe,0x106,0,0,0x65);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       temp_v7 = 0;
       if (g_btlUi != '\0') {
@@ -206,12 +206,12 @@ unsigned int FUN_001b72e0(void)
         VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(3,0xff,&LAB_001b7808);
-        FUN_002be624(temp_v9,&LAB_001b79c8,DAT_00439c90);
+        textFormatBuffer(temp_v9,&LAB_001b79c8,DAT_00439c90);
         FUN_002be5a4(2,0xffffffff,temp_v9);
-        FUN_002be624(temp_v9,&LAB_001b79dc,SUB84((double)DAT_00439c94,0),
+        textFormatBuffer(temp_v9,&LAB_001b79dc,SUB84((double)DAT_00439c94,0),
                      (int)((unsigned long long)(double)DAT_00439c94 >> 0x20));
         FUN_002be5a4(2,0xffffffff,temp_v9);
-        FUN_002be624(temp_v9,&LAB_001b79f4,SUB84((double)DAT_00439c98,0),
+        textFormatBuffer(temp_v9,&LAB_001b79f4,SUB84((double)DAT_00439c98,0),
                      (int)((unsigned long long)(double)DAT_00439c98 >> 0x20));
         FUN_002be5a4(2,0xffffffff,temp_v9);
         VectorSignedToFloat(DAT_00439c8c * 0xc + 8,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -6,7 +6,7 @@ extern "C" {
 
 int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int memClear(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
@@ -32,7 +32,7 @@ extern int asdLoadFileIsPatched(unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
@@ -59,10 +59,10 @@ int FUN_002402c4(unsigned int param_1,unsigned int param_2)
   memClear(temp_v2,0x100);
   temp_v0 = asdLoadFileIsPatched(param_2);
   if (temp_v0 != 0) {
-    FUN_002be624(temp_v2,&LAB_00240430,param_2);
+    textFormatBuffer(temp_v2,&LAB_00240430,param_2);
   }
   else {
-    FUN_002be624(temp_v2,&LAB_0024043c,param_2);
+    textFormatBuffer(temp_v2,&LAB_0024043c,param_2);
   }
   temp_v4[0] = 0;
   temp_v4[1] = 0;

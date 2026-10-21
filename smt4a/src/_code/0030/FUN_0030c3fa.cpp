@@ -1,26 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c3fa` (_code @ 0x30c3fa, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different register allocation, frame setup or instruction scheduling than retail. */
+#include "common.h"
 extern "C" {
-
-/* Supplied declaration required: FUN_0030c3fa. */
-
-
-void FUN_0030c3fa(int param_1,int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  while (param_2 != 0) {
-    FUN_0030c3fa(param_1,*(unsigned int *)(param_2 + 0xc));
-    temp_v0 = *(int *)(param_2 + 8);
-    *(unsigned int *)(param_2 + 0xc) = *(unsigned int *)(param_1 + 4);
-    *(int *)(param_1 + 4) = param_2;
-    param_2 = temp_v0;
-  }
-  return;
+struct Node { u32 unk00; Node *next; Node *child; Node *sibling; };
+/* Recursively visits children and moves sibling nodes onto the owner's chain. */
+void FUN_0030c3fa(Node *owner, Node *node) {
+    while (node != NULL) {
+        FUN_0030c3fa(owner, node->sibling);
+        node->sibling = owner->next;
+        owner->next = node;
+        node = node->child;
+    }
 }
-
-} /* extern "C" */
+}

@@ -39,7 +39,7 @@ extern unsigned char LAB_004af89c; /* 0x4af89c */
 #endif
 /* Supplied declaration required: FUN_004ac83c. */
 /* Supplied declaration required: FUN_004acc1c. */
-extern int FUN_004d8f18(unsigned int, unsigned int);
+extern int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_005211a4. */
 extern int FUN_0052170c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -250,7 +250,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
           else {
             temp_v2 = *(int *)(temp_v5 + 0x18) - 1;
             temp_v12 = (temp_v6 + temp_v2) & ~temp_v2;
-            temp_v4 = FUN_004d8f18(temp_v0,temp_v6);
+            temp_v4 = containerGrowCapacity(temp_v0,temp_v6);
             temp_v4 = FUN_0052170c(temp_v5 + 4,temp_v12,(temp_v4 + temp_v2) & ~temp_v2,0);
             if (temp_v4 != 0) {
               if (param_2 != temp_v7) {
@@ -316,7 +316,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
               else {
                 temp_v2 = *(int *)(temp_v5 + 0x18) - 1;
                 temp_v13 = (temp_v6 + temp_v2) & ~temp_v2;
-                temp_v7 = FUN_004d8f18(temp_v0,temp_v6);
+                temp_v7 = containerGrowCapacity(temp_v0,temp_v6);
                 temp_v7 = FUN_0052170c(temp_v5 + 4,temp_v13,(temp_v7 + temp_v2) & ~temp_v2,0);
                 if (temp_v7 == 0) {
                   return 0x44;

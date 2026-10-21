@@ -10,7 +10,7 @@ int FUN_00324cc0(...);
 int FUN_00330108(...);
 int FUN_00352568(...);
 int FUN_00376c64(...);
-int FUN_003fd76c(...);
+int controllerSetDestination(...);
 int FUN_003fdb18(...);
 int VectorFloatToUnsigned(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -47,12 +47,12 @@ int FUN_00314c38(...);
 int FUN_003180c4(...);
 int FUN_0031ebf8(...);
 int FUN_003278ac(...);
-int FUN_0033f938(...);
+int naviMainApplyRequestValue(...);
 int FUN_00365c94(...);
-int FUN_003a366c(...);
+int naviMainSetRequestTriple(...);
 int FUN_003adc58(...);
 int FUN_003d54f8(...);
-int FUN_003e0090(...);
+int playerSetClampedValue(...);
 int linkedTargetSetFloat(...);
 int flagValueSub(...);
 int FUN_0049fe58(...);
@@ -62,7 +62,7 @@ int FUN_001628c0(...);
 int FUN_001f4908(...);
 int FUN_0022368c(...);
 int FUN_00246688(...);
-int FUN_00294a44(...);
+int mapIfReleaseResource(...);
 int FUN_00297f00(...);
 int mapIfReleaseSlot4(...);
 int mapTrapArm(...);
@@ -84,7 +84,7 @@ int mapIfOverlayRelease(...);
 int mapIfReleaseSlot2(...);
 int mapIfReleaseSlot3(...);
 int FUN_00325ba4(...);
-int FUN_0033e094(...);
+int mapIfReleaseRequestObject(...);
 int FUN_00352308(...);
 int mapIfReleaseSlot1(...);
 int FUN_003b5714(...);
@@ -98,7 +98,7 @@ int FUN_002d1f40(...);
 int FUN_00303460(...);
 int FUN_003250ac(...);
 int FUN_0033abd4(...);
-int FUN_00352bc4(...);
+int mathPositionHeadingDegrees(...);
 int FUN_003e54b8(...);
 
 int FUN_00145868(...);
@@ -111,8 +111,8 @@ int FUN_0033ad04(...);
 int FUN_003d2150(...);
 int FUN_003d4ed8(...);
 int gameDataFlagTestBit(...);
-int FUN_003e542c(...);
-int FUN_003e5708(...);
+int controllerGetSourceValue(...);
+int controllerGetSourceTiming(...);
 int FUN_003fd7c0(...);
 int FUN_004a0524(...);
 int FUN_004a08f0(...);
@@ -328,7 +328,7 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00293f1c. */
 /* Supplied declaration required: FUN_00293f94. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00294a44. */
+/* Supplied declaration required: mapIfReleaseResource. */
 /* Supplied declaration required: FUN_00294c28. */
 /* Supplied declaration required: FUN_002950a8. */
 /* Supplied declaration required: FUN_00295108. */
@@ -384,18 +384,18 @@ extern int FUN_00312d88(void);
 /* Supplied declaration required: FUN_0033a374. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: FUN_0033ad04. */
-/* Supplied declaration required: FUN_0033e094. */
+/* Supplied declaration required: mapIfReleaseRequestObject. */
 /* Supplied declaration required: FUN_0033f224. */
-/* Supplied declaration required: FUN_0033f938. */
+/* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00352308. */
 /* Supplied declaration required: FUN_00352568. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: mapIfReleaseSlot1. */
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: FUN_00365c94. */
 /* Supplied declaration required: FUN_00376c64. */
 extern int FUN_003798f0(void);
-/* Supplied declaration required: FUN_003a366c. */
+/* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003adc58. */
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: FUN_003b5714. */
@@ -404,19 +404,19 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern unsigned int FUN_003e0034(void);
-/* Supplied declaration required: FUN_003e0090. */
+/* Supplied declaration required: playerSetClampedValue. */
 /* Supplied declaration required: gameDataFlagTestBit. */
 extern int linkHolderCallFirst(int);
-/* Supplied declaration required: FUN_003e542c. */
+/* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(int);
-/* Supplied declaration required: FUN_003e5708. */
+/* Supplied declaration required: controllerGetSourceTiming. */
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: FUN_003fdb18. */
@@ -431,8 +431,8 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: FUN_004a0524. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int FUN_004a0e38(unsigned int, unsigned int);
-extern int FUN_004d04f4(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: FUN_0050d8e4. */
@@ -651,7 +651,7 @@ LAB_002b82a8:
         *(short *)((int)g_lmapScene + 0x19a) = *(short *)((int)g_lmapScene + 0x19a) - 1;
       }
       else {
-        temp_v32 = FUN_004d04f4();
+        temp_v32 = inputIsQuestCancelPressed();
         puVar6 = (unsigned int *)0x0;
         if (temp_v32 != 0) {
           puVar6 = g_gameState;
@@ -1106,7 +1106,7 @@ LAB_002b82a8:
                     }
                     else {
                       piVar18[0x9f] = piVar18[0x9f] + 1;
-                      FUN_003e5708(piVar18[0x6a]);
+                      controllerGetSourceTiming(piVar18[0x6a]);
                       piVar18 = g_lmapScene;
                       temp_v19 = (float)VectorSignedToFloat(g_lmapScene[0x9f],
                                                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1141,10 +1141,10 @@ LAB_002b82a8:
                 }
               }
               else {
-                FUN_003e542c(piVar18[0x6a]);
+                controllerGetSourceValue(piVar18[0x6a]);
                 temp_v25 = (float)temp_v39;
                 temp_v19 = temp_v18;
-                FUN_003e5708(g_lmapScene[0x6a]);
+                controllerGetSourceTiming(g_lmapScene[0x6a]);
                 if (temp_v19 >= temp_v18 - temp_v25) {
                   piVar18 = g_lmapScene;
                   g_lmapScene[0x15] = 0x25;
@@ -1173,7 +1173,7 @@ LAB_002b82a8:
                 }
                 else {
                   piVar18[0x9f] = piVar18[0x9f] + 1;
-                  FUN_003e5708(piVar18[0x6a]);
+                  controllerGetSourceTiming(piVar18[0x6a]);
                   piVar18 = g_lmapScene;
                   temp_v19 = (float)VectorSignedToFloat(g_lmapScene[0x9f],
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -1197,10 +1197,10 @@ LAB_002b82a8:
               }
             }
             else {
-              FUN_003e542c(piVar18[0x6a]);
+              controllerGetSourceValue(piVar18[0x6a]);
               temp_v25 = (float)temp_v39;
               temp_v19 = temp_v18;
-              FUN_003e5708(g_lmapScene[0x6a]);
+              controllerGetSourceTiming(g_lmapScene[0x6a]);
               piVar18 = g_lmapScene;
               if (temp_v18 - temp_v25 <= temp_v19) {
                 g_lmapScene[0x15] = 0x26;
@@ -1224,10 +1224,10 @@ LAB_002b82a8:
           }
         }
         else {
-          FUN_003e542c(piVar18[0x6a]);
+          controllerGetSourceValue(piVar18[0x6a]);
           temp_v25 = (float)temp_v39;
           temp_v19 = temp_v18;
-          FUN_003e5708(g_lmapScene[0x6a]);
+          controllerGetSourceTiming(g_lmapScene[0x6a]);
           if (temp_v19 >= temp_v18 - temp_v25) {
             piVar18 = g_lmapScene;
             g_lmapScene[0x15] = 0x25;
@@ -1363,21 +1363,21 @@ joined_r0x00326e38:
 LAB_00326f3c:
             if (DAT_005f1848 != 0) {
               if (DAT_005f1848 == 1) {
-                temp_v32 = FUN_004d04f4();
+                temp_v32 = inputIsQuestCancelPressed();
                 goto joined_r0x00326f98;
               }
               if (DAT_005f1848 == 2) {
-                temp_v32 = FUN_004d04f4();
+                temp_v32 = inputIsQuestCancelPressed();
                 if (temp_v32 == 0) goto LAB_00326fcc;
                 goto LAB_00326f78;
               }
               if (DAT_005f1848 == 3) {
-                temp_v32 = FUN_004d04f4();
+                temp_v32 = inputIsQuestCancelPressed();
                 goto joined_r0x00326f98;
               }
             }
             else {
-              temp_v32 = FUN_004d04f4();
+              temp_v32 = inputIsQuestCancelPressed();
 joined_r0x00326f98:
               if (temp_v32 != 0) {
 LAB_00326f78:
@@ -1804,7 +1804,7 @@ LAB_00326a10:
         if (DAT_005f1848 != 1) {
           if (DAT_005f1848 != 2) {
             if (((DAT_005f1848 == 3) && (g_lmapScene[2] >= 9)) &&
-               (temp_v32 = FUN_004d04f4(), piVar18 = g_lmapScene, temp_v32 != 0)) {
+               (temp_v32 = inputIsQuestCancelPressed(), piVar18 = g_lmapScene, temp_v32 != 0)) {
               DAT_005f17ac = '\0';
               g_lmapScene[0x59] = 0;
               piVar18[1] = 0;
@@ -1815,7 +1815,7 @@ LAB_00326cc4:
             }
           }
           else if ((g_lmapScene[2] >= 9) &&
-                  (temp_v32 = FUN_004d04f4(), piVar18 = g_lmapScene, temp_v32 != 0)) {
+                  (temp_v32 = inputIsQuestCancelPressed(), piVar18 = g_lmapScene, temp_v32 != 0)) {
             DAT_005f17ac = '\0';
             g_lmapScene[0x59] = 0;
             piVar18[1] = 0;
@@ -1825,7 +1825,7 @@ LAB_00326cc4:
           }
         }
         else if ((g_lmapScene[2] >= 8) &&
-                (temp_v32 = FUN_004d04f4(), piVar18 = g_lmapScene, temp_v32 != 0)) {
+                (temp_v32 = inputIsQuestCancelPressed(), piVar18 = g_lmapScene, temp_v32 != 0)) {
           DAT_005f17ac = '\0';
           g_lmapScene[0x59] = 0;
           piVar18[1] = 0;
@@ -1835,7 +1835,7 @@ LAB_00326cc4:
         }
         goto LAB_003270a0;
       }
-      if ((g_lmapScene[2] < 8) || (temp_v32 = FUN_004d04f4(), piVar18 = g_lmapScene, temp_v32 == 0))
+      if ((g_lmapScene[2] < 8) || (temp_v32 = inputIsQuestCancelPressed(), piVar18 = g_lmapScene, temp_v32 == 0))
       goto LAB_003270a0;
       DAT_005f17ac = '\0';
       g_lmapScene[0x59] = 0;
@@ -2006,14 +2006,14 @@ LAB_003270bc:
         g_lmapScene[0x15] = 8;
         piVar18[0x16] = 0;
         temp_v32 = piVar18[10];
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         g_lmapScene[0x14] = temp_v32;
       }
       else {
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = 0x40a00000;
         temp_v32 = piVar18[7];
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         g_lmapScene[0x14] = temp_v32;
       }
       FUN_00303460(0xe);
@@ -2238,7 +2238,7 @@ LAB_003270bc:
                 g_lmapScene[0x4c] = temp_v32;
                 *(unsigned char *)((int)piVar18 + 0x115) = 1;
                 temp_v32 = piVar18[10];
-                FUN_00352bc4();
+                mathPositionHeadingDegrees();
                 g_lmapScene[0x14] = temp_v32;
               }
               else {
@@ -2255,7 +2255,7 @@ LAB_003270bc:
                 g_lmapScene[0x4c] = temp_v32;
                 *(unsigned char *)((int)piVar18 + 0x115) = 1;
                 temp_v32 = piVar18[10];
-                FUN_00352bc4();
+                mathPositionHeadingDegrees();
                 g_lmapScene[0x14] = temp_v32;
               }
               FUN_00303460(10);
@@ -2299,7 +2299,7 @@ LAB_003270bc:
           }
           else {
             temp_v32 = padButtonIsPressed(5);
-            if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+            if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
               piVar18 = DAT_005806a4;
               DAT_005806a4[6] = g_lmapScene[0x14];
               piVar18[0x2c] = 0;
@@ -2326,7 +2326,7 @@ LAB_003270bc:
             }
           }
           else {
-            FUN_0033e094();
+            mapIfReleaseRequestObject();
             temp_v32 = g_lmapScene[1];
             piVar18 = g_lmapScene;
             piVar18[1] = temp_v32 + 1;
@@ -2342,7 +2342,7 @@ LAB_003270bc:
         temp_v32 = piVar18[2];
         piVar18[2] = temp_v32 + 1;
         if (temp_v32 + 1 == 0x14) {
-          FUN_0033e094();
+          mapIfReleaseRequestObject();
           mapIfSetMode1();
           temp_v17 = 8;
           FUN_00313648(temp_v17);
@@ -2494,7 +2494,7 @@ LAB_003270bc:
           }
           else {
             temp_v32 = padButtonIsPressed(5);
-            if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+            if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
               piVar18 = DAT_005806a4;
               DAT_005806a4[6] = g_lmapScene[0x14];
               piVar18[0x2c] = 0;
@@ -2817,7 +2817,7 @@ LAB_003270bc:
         }
         else {
           temp_v32 = padButtonIsPressed(5);
-          if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+          if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
             piVar18 = DAT_005806a4;
             DAT_005806a4[6] = g_lmapScene[0x14];
             piVar18[0x2c] = 0;
@@ -3158,7 +3158,7 @@ LAB_00366704:
               }
               else {
                 temp_v32 = padButtonIsPressed(5);
-                if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+                if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
                   piVar18 = DAT_005806a4;
                   DAT_005806a4[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
@@ -3319,7 +3319,7 @@ LAB_00366704:
               }
               else {
                 temp_v32 = padButtonIsPressed(5);
-                if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+                if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
                   piVar18 = DAT_005806a4;
                   DAT_005806a4[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
@@ -3372,12 +3372,12 @@ LAB_00366704:
             piVar18 = g_lmapScene;
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v35 * temp_v27);
             temp_v32 = piVar18[10];
-            FUN_00352bc4();
+            mathPositionHeadingDegrees();
             g_lmapScene[0x14] = temp_v32;
           }
           else {
             temp_v25 = (float)g_lmapScene[10];
-            FUN_00352bc4();
+            mathPositionHeadingDegrees();
             piVar18 = g_lmapScene;
             g_lmapScene[0x14] = (int)temp_v25;
             temp_v19 = DAT_005f16b8;
@@ -3469,7 +3469,7 @@ LAB_00366704:
                   }
                   else {
                     temp_v32 = padButtonIsPressed(5);
-                    if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+                    if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
                       piVar18 = DAT_005806a4;
                       DAT_005806a4[6] = g_lmapScene[0x14];
                       piVar18[0x2c] = 0;
@@ -3504,7 +3504,7 @@ LAB_00366704:
               piVar18[0x16] = 0x40400000;
               *(unsigned char *)(piVar18 + 0x1b) = 0;
               temp_v35 = (float)piVar18[10];
-              FUN_00352bc4();
+              mathPositionHeadingDegrees();
               piVar18 = g_lmapScene;
               temp_v37 = 180.0f;
               g_lmapScene[0x14] = (int)temp_v35;
@@ -3727,7 +3727,7 @@ LAB_00367f20:
                   }
                   else {
                     temp_v32 = padButtonIsPressed(6);
-                    if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+                    if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
                       piVar18 = DAT_005806a4;
                       DAT_005806a4[6] = g_lmapScene[0x14];
                       piVar18[0x2c] = 0;
@@ -3866,7 +3866,7 @@ LAB_00367f20:
               }
             }
             else {
-              FUN_00294a44();
+              mapIfReleaseResource();
               temp_v32 = g_lmapScene[1];
               piVar18 = g_lmapScene;
               piVar18[1] = temp_v32 + 1;
@@ -3880,7 +3880,7 @@ LAB_00367f20:
         }
         else if (temp_v32 != 0x65) {
           if (temp_v32 == 0x66) {
-            FUN_00294a44();
+            mapIfReleaseResource();
             FUN_00313648(0x14);
             temp_v32 = g_lmapScene[1];
             piVar18 = g_lmapScene;
@@ -3916,7 +3916,7 @@ LAB_00367f20:
       }
     }
     else {
-      FUN_00294a44();
+      mapIfReleaseResource();
       FUN_00313648(0x14);
       temp_v32 = g_lmapScene[1];
       piVar18 = g_lmapScene;
@@ -4034,7 +4034,7 @@ LAB_0033eae8:
               }
               else {
                 temp_v32 = padButtonIsPressed(6);
-                if ((temp_v32 != 0) || (temp_v32 = FUN_004d0554(), temp_v32 != 0)) {
+                if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
                   piVar18 = DAT_005806a4;
                   DAT_005806a4[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
@@ -4104,7 +4104,7 @@ LAB_0033eae8:
             return;
           }
           if (temp_v32 == 0x5b) {
-            FUN_00294a44();
+            mapIfReleaseResource();
             piVar18 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar18[2] = 0;
@@ -4144,7 +4144,7 @@ LAB_0033eae8:
         FUN_002342b8();
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = mapIfHasSelection(), temp_v32 == 0)) {
-        FUN_00294a44();
+        mapIfReleaseResource();
         piVar18 = DAT_005806a4;
         DAT_005806a4[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
@@ -4457,7 +4457,7 @@ LAB_0033eae8:
         if ((((0xbf000000 < uStack_190) || ((int)uStack_190 >= 0x3f000001)) ||
             (0xbf000000 < temp_v44[0])) ||
            (((int)temp_v44[0] >= 0x3f000001 ||
-            (FUN_003e542c(g_lmapScene[0x6a]), in_s0 >= 0x42d20001)))) {
+            (controllerGetSourceValue(g_lmapScene[0x6a]), in_s0 >= 0x42d20001)))) {
           piVar18 = g_lmapScene;
           g_lmapScene[1] = 100;
           piVar18[2] = 0;
@@ -4623,7 +4623,7 @@ joined_r0x00248750:
           if (piVar18[0x15] != 10) {
             piVar18[0x9c] = piVar18[0x9c] + 1;
           }
-          temp_v12 = FUN_004d04f4();
+          temp_v12 = inputIsQuestCancelPressed();
           piVar18 = g_lmapScene;
           if ((temp_v12 != 0) && ((g_lmapScene[0x9c] >= 0x13 || (g_lmapScene[0x15] == 10)))) {
             *(unsigned char *)((int)g_lmapScene + 0x291) = 1;
@@ -4894,7 +4894,7 @@ LAB_002da3cc:
             temp_v18 = (float)VectorUnsignedToFloat
                                       ((unsigned int)*(unsigned short *)(temp_v6 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3)
             ;
-            FUN_003e0090((int)(short)(int)(temp_v19 - temp_v25 * temp_v18 * 0.01f));
+            playerSetClampedValue((int)(short)(int)(temp_v19 - temp_v25 * temp_v18 * 0.01f));
             if (temp_v5 == 0) {
               temp_v17 = 0x2dab34;
             }
@@ -4967,9 +4967,9 @@ LAB_002da3cc:
                 uStack_5c = uStack_5c & 0xffffffff00000000;
                 FUN_00314c38(*(unsigned short *)(temp_v32 + 0x18) & 0xff,*(unsigned short *)(temp_v32 + 0x1a) & 0xff,0);
                 DAT_005f1604 = (unsigned int)*(unsigned short *)(temp_v32 + 0x18);
-                FUN_003a366c(*(unsigned short *)(temp_v32 + 0x12),*(unsigned short *)(temp_v32 + 0x14),
+                naviMainSetRequestTriple(*(unsigned short *)(temp_v32 + 0x12),*(unsigned short *)(temp_v32 + 0x14),
                              *(unsigned short *)(temp_v32 + 0x18));
-                FUN_0033f938(DAT_005f1608);
+                naviMainApplyRequestValue(DAT_005f1608);
                 temp_v32 = mapTrapGetUnk38();
                 temp_v5 = (unsigned int)*(unsigned short *)(temp_v32 + 8);
                 FUN_00303bd4();
@@ -5433,7 +5433,7 @@ code_r0x00313648:
       temp_v32 = piVar18[7];
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       piVar18 = g_lmapScene;
       g_lmapScene[0x14] = temp_v32;
       *(unsigned char *)(piVar18 + 0x1b) = 0;
@@ -5691,7 +5691,7 @@ code_r0x00313648:
     if (g_lmapScene[1] != 0) {
       if (g_lmapScene[1] == 1) {
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_003e542c(piVar18[0x6a]);
+        controllerGetSourceValue(piVar18[0x6a]);
         piVar18 = g_lmapScene;
         if (in_s0 >= 0x41800000) {
           g_lmapScene[0x15] = 0x14;
@@ -5770,7 +5770,7 @@ code_r0x00313648:
         piVar18[0x16] = 0;
         if (DAT_005f1774 != '\0') {
           temp_v32 = piVar18[10];
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           g_lmapScene[0x14] = temp_v32;
         }
       }
@@ -5778,7 +5778,7 @@ code_r0x00313648:
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = 0x40a00000;
         temp_v32 = piVar18[7];
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         g_lmapScene[0x14] = temp_v32;
       }
       FUN_00303460(0xe);
@@ -5888,14 +5888,14 @@ code_r0x00313648:
         }
         if (g_lmapScene[2] >= 2) {
           temp_v18 = (float)g_lmapScene[7];
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           temp_v18 = temp_v18 * temp_v19;
           FUN_001bc124();
           piVar18 = g_lmapScene;
           temp_v25 = 20.0f;
           g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * 20.0f);
           temp_v18 = (float)piVar18[7];
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           temp_v18 = temp_v18 * temp_v19;
           FUN_001bbf0c();
           piVar18 = g_lmapScene;
@@ -6092,7 +6092,7 @@ code_r0x00313648:
         DAT_005f17bc = g_lmapScene[0x13];
         DAT_005f1a4f = 1;
       }
-      FUN_003e542c(g_lmapScene[0x6a]);
+      controllerGetSourceValue(g_lmapScene[0x6a]);
       if (in_s0 >= 0x41500000) {
         FUN_003fe86c(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
         FUN_003e54b8(g_lmapScene[0x6a]);
@@ -8066,7 +8066,7 @@ joined_r0x00397538:
       temp_v32 = piVar18[7];
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       piVar18 = g_lmapScene;
       g_lmapScene[0x14] = temp_v32;
       *(unsigned char *)(piVar18 + 0x1b) = 0;
@@ -8192,7 +8192,7 @@ LAB_00246d70:
         DAT_005f17bc = g_lmapScene[0x13];
         DAT_005f1a4f = 1;
       }
-      FUN_003e542c(g_lmapScene[0x6a]);
+      controllerGetSourceValue(g_lmapScene[0x6a]);
       if (in_s0 < 0x41500000) {
         return;
       }
@@ -8208,7 +8208,7 @@ joined_r0x002495a4:
       piVar18[0x16] = temp_v32;
       temp_v32 = *(int *)(piVar18[0x61] + 4);
       *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
-      FUN_003fd76c(temp_v32,piVar18 + 7);
+      controllerSetDestination(temp_v32,piVar18 + 7);
       FUN_003fdb18(temp_v32);
       *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
       FUN_003fd7c0(temp_v32,0,2);

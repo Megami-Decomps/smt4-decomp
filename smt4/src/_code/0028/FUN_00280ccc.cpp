@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_001f7c78(void);
 int FUN_0024f034(int, unsigned int);
 int FUN_00281e34(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int libc_strcpy(unsigned int *, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -85,7 +85,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024f034. */
 extern int FUN_0027d968(void);
 /* Supplied declaration required: FUN_00281e34. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
 
@@ -228,7 +228,7 @@ void FUN_00280ccc(void)
                   }
                   else {
                     temp_v10 = in_s0;
-                    FUN_00287be4();
+                    mathPositionHeadingDegrees();
                   }
                   DAT_0049f9ac = temp_v10;
                   if ((int)temp_v10 >= 0x43b40001) {

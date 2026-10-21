@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests FUN_003de734's result before copying it to r4, and hoists the constant 1 into r6; built differs in those three places and addresses the bitmap byte with `ldrb r0, [r5, r4, lsr #3]`. */
+/* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result before copying it to r4, and hoists the constant 1 into r6; built differs in those three places and addresses the bitmap byte with `ldrb r0, [r5, r4, lsr #3]`. */
 #include "common.h"
 
 extern "C" {
@@ -23,8 +23,8 @@ typedef struct FlagBlock {
 
 FlagBlock *gameFlagBlockGet(void);
 s32 FUN_001bd118(s32 id);
-s32 FUN_003de444(s32 id);
-u32 FUN_003de734(s32 id);
+s32 itemDataIsFlagClear(s32 id);
+u32 itemDataGetValue(s32 id);
 s32 FUN_00417e08(s32 id);
 s32 FUN_004bb6d8(u32 id, s32 arg);
 
@@ -42,10 +42,10 @@ void FUN_00417b70(s32 id)
     entry->unk2Low = 0;
     entry->unk2Top = 0;
     kind = FUN_001bd118(id);
-    if (kind != 6 && kind != 9 && kind != 0xB && kind != 0xC && FUN_003de444(id) != 0) {
+    if (kind != 6 && kind != 9 && kind != 0xB && kind != 0xC && itemDataIsFlagClear(id) != 0) {
         FUN_00417e08(id);
     }
-    linked = FUN_003de734(id);
+    linked = itemDataGetValue(id);
     if (linked != 0) {
         FlagBlock *block = gameFlagBlockGet();
 

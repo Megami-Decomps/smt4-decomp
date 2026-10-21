@@ -16,21 +16,21 @@ s32 jobIsValid(u32 handle);
 void sceneObjDestroy(SceneObj003c3ec4 *scene);
 void asdOperatorDelete(void);
 
-extern SceneHolder003c3ec4 DAT_00588c40; /* 0x588c40 */
+extern SceneHolder003c3ec4 g_engineCleanupOwner; /* 0x588c40 */
 
 /* Destroys the held scene once its job has ended; returns 0 while the job is still running. */
 s32 sceneHolderUpdate(void)
 {
-    SceneObj003c3ec4 *scene = DAT_00588c40.scene;
+    SceneObj003c3ec4 *scene = g_engineCleanupOwner.scene;
 
     if (scene != NULL) {
         if (jobIsValid(scene->job) != 0) {
             return 0;
         }
         sceneObjDestroy(scene);
-        if (DAT_00588c40.scene != NULL) {
+        if (g_engineCleanupOwner.scene != NULL) {
             asdOperatorDelete();
-            DAT_00588c40.scene = NULL;
+            g_engineCleanupOwner.scene = NULL;
         }
     }
     return 1;

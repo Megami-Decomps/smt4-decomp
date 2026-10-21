@@ -10,6 +10,9 @@ void handleArray10Free(HandleArray10 *array)
 {
     s32 i;
 
+    if (array == NULL) {
+        return;
+    }
     for (i = 0; i < 10; i++) {
         asdMemFreeSlot(array->handles[i]);
     }

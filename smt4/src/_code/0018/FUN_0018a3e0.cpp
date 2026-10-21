@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001f8d7c(void);
+int mapEnableAndClearState(void);
 int FUN_00210ce0(...);
 int FUN_002990a0(void);
 int guestWinRequestOpen(void);
@@ -49,7 +49,7 @@ typedef struct {
 
 extern int g_camp; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_001f8d7c. */
+/* Supplied declaration required: mapEnableAndClearState. */
 /* Supplied declaration required: FUN_00210ce0. */
 extern int FUN_002987d8(unsigned int, unsigned int);
 extern int FUN_00298848(unsigned int, int);
@@ -285,7 +285,7 @@ void FUN_0018a3e0(void)
         if ((*(unsigned short *)(temp_v3 + 0x72) & 2) == 0) {
 LAB_0018a948:
           if (*(int *)(temp_v4 + 0xe3c) == 0x8c) {
-            FUN_001f8d7c();
+            mapEnableAndClearState();
             if (*(int *)(temp_v4 + 0xe40) < 0) {
               temp_v6 = gameGetPlayerData();
               temp_v2 = FUN_0029a9d4(*(unsigned int *)(temp_v4 + 0xe3c),1);

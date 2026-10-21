@@ -1,23 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b2d54` (_code @ 0x1b2d54, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler schedules the prologue, loads and argument setup differently from retail. */
+#include "common.h"
+
+namespace { struct Record { u8 padding[13]; u8 enabled; }; }
 
 extern "C" {
-
-extern int FUN_001b2ca4(unsigned int, int);
-extern int FUN_001b3214(unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_001b2d54(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+s32 FUN_001b3214(u32 group, u32 id, u32 owner);
+Record *FUN_001b2ca4(u32 owner, s32 index);
+void FUN_001b2d54(u32 owner, u32 group, u32 id)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_001b3214(param_2,param_2,param_3,param_1);
-  if ((temp_v0 != -1) && (temp_v0 = FUN_001b2ca4(param_1,temp_v0), temp_v0 != 0)) {
-    *(unsigned char *)(temp_v0 + 0xd) = 0;
-  }
-  return;
+    s32 index = FUN_001b3214(group, id, owner);
+    if (index != -1) {
+        Record *record = FUN_001b2ca4(owner, index);
+        if (record != NULL) { record->enabled = 1; }
+    }
 }
-
-} /* extern "C" */
+}

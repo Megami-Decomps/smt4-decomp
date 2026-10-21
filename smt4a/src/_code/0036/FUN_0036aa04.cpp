@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_003fd76c(...);
-int FUN_003fd784(int);
+int controllerSetDestination(...);
+int controllerSetPosition(int);
 int FUN_003fd7c0(int, int, int);
 int FUN_003fe86c(...);
 
@@ -35,8 +35,8 @@ extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetDestination. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int slots4FGetActiveValue(int);
@@ -93,8 +93,8 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
       }
       *(unsigned int *)(temp_v2 + 4) = temp_v1;
     }
-    FUN_003fd76c(temp_v3,g_lmapScene + 0x1c);
-    FUN_003fd784(temp_v3);
+    controllerSetDestination(temp_v3,g_lmapScene + 0x1c);
+    controllerSetPosition(temp_v3);
     temp_v0 = slots4FGetActiveValue(temp_v3);
     if (temp_v0 != 0) {
       FUN_003fe86c(temp_v3,0,2);
@@ -119,8 +119,8 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
       temp_v4 = *(unsigned int *)(g_lmapScene + 0x1c);
       uStack_30 = *(unsigned int *)(g_lmapScene + 0x24);
       temp_v5 = *(float *)(g_lmapScene + 0x20) + 20.0f;
-      FUN_003fd76c(temp_v2,&temp_v4);
-      FUN_003fd784(temp_v2);
+      controllerSetDestination(temp_v2,&temp_v4);
+      controllerSetPosition(temp_v2);
       piVar5 = (int *)(temp_v0 + 0x15b4);
       temp_v0 = *piVar5;
       if (temp_v0 == 0) {

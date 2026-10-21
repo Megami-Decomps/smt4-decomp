@@ -1,2 +1,15 @@
-/* NON_MATCHING: found outside every function: called by FUN_002c6202; not written yet. */
-#include "common.h"
+/* NON_MATCHING: retail divides by ten using a shift/add routine; armcc emits reciprocal multiplication. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+
+extern "C" {
+
+/* Divides an unsigned word by ten, returning quotient and remainder in registers. */
+__value_in_regs UnsignedDivisionResult FUN_0014e6f8(u32 value)
+{
+    UnsignedDivisionResult result;
+    result.quotient = value / 10;
+    result.remainder = value % 10;
+    return result;
+}
+
+} /* extern "C" */

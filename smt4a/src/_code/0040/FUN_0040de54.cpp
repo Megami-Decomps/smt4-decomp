@@ -24,7 +24,7 @@ int FUN_004fbd5c(...);
 
 int sysPlaySe(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00341f88(...);
+int buttonHelpGetValue(...);
 int FUN_003e77cc(...);
 int FUN_003e7ef0(...);
 int FUN_003e7fa4(...);
@@ -51,7 +51,7 @@ int FUN_004fd508(...);
 int FUN_004fe7e4(...);
 int FUN_004fe900(...);
 
-int FUN_003e8430(...);
+int btlScriptUnitHasFlags(...);
 int FUN_003e9cd0(...);
 int FUN_0040ca18(...);
 int FUN_0040d274(...);
@@ -177,7 +177,7 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: panelSetMode3. */
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 extern int FUN_0034919c(void);
 extern int panelIsActiveState2(void);
 extern int panelStateIs0(void);
@@ -189,11 +189,11 @@ extern int FUN_003e48bc(void);
 extern unsigned int FUN_003e53ec(void);
 /* Supplied declaration required: FUN_003e77cc. */
 /* Supplied declaration required: FUN_003e7840. */
-extern int FUN_003e7b2c(unsigned int, unsigned int);
+extern int btlIsExtendedState(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e7ef0. */
 /* Supplied declaration required: FUN_003e7fa4. */
 extern unsigned int FUN_003e82d4(int);
-/* Supplied declaration required: FUN_003e8430. */
+/* Supplied declaration required: btlScriptUnitHasFlags. */
 extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e9cd0. */
 extern int FUN_003ec77c(int);
@@ -203,7 +203,7 @@ extern int FUN_003ec7b0(int);
 /* Supplied declaration required: btlResetSlot. */
 /* Supplied declaration required: FUN_003f2280. */
 /* Supplied declaration required: FUN_003f2498. */
-extern int FUN_003face4(void);
+extern int controllerGetRecordValue(void);
 /* Supplied declaration required: FUN_0040c64c. */
 /* Supplied declaration required: FUN_0040c888. */
 /* Supplied declaration required: FUN_0040ca18. */
@@ -614,7 +614,7 @@ LAB_0040deb4:
       break;
     }
     if (temp_v4 == 2) {
-      temp_v3 = FUN_003e7b2c(temp_v8,0);
+      temp_v3 = btlIsExtendedState(temp_v8,0);
 joined_r0x0040e860:
       if (temp_v3 == 0) {
         temp_v4 = 1;
@@ -640,7 +640,7 @@ LAB_0040e864:
             psVar2[1] = temp_v4;
             break;
           }
-          temp_v3 = FUN_003e7b2c(temp_v8,1);
+          temp_v3 = btlIsExtendedState(temp_v8,1);
           goto joined_r0x0040e860;
         }
       }
@@ -852,7 +852,7 @@ joined_r0x0040ec14:
         }
       }
       else if (!((puVar6[1] & DAT_0057131c) == 0 && (*puVar6 & DAT_00571318) == 0)) {
-        temp_v3 = FUN_003e8430(puVar5);
+        temp_v3 = btlScriptUnitHasFlags(puVar5);
         if (temp_v3 != 0) {
           FUN_004cad84();
         }
@@ -1031,14 +1031,14 @@ LAB_0040f258:
         temp_v7 = puVar6[1];
         if ((!((temp_v7 & DAT_00571304) == 0 && (temp_v5 & DAT_00571300) == 0)) ||
            (!((DAT_00571310 & temp_v5) == 0 && (DAT_00571314 & temp_v7) == 0))) {
-          temp_v3 = FUN_003e8430(temp_v8);
+          temp_v3 = btlScriptUnitHasFlags(temp_v8);
           if (temp_v3 == 0) {
             FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
           FUN_004aa008(g_btlUiBlock,(int)*(short *)((int)puVar6 + 0x6e));
         }
         else if ((temp_v5 & DAT_00571318) != 0 || (temp_v7 & DAT_0057131c) != 0) {
-          temp_v3 = FUN_003e8430(temp_v8);
+          temp_v3 = btlScriptUnitHasFlags(temp_v8);
           if (temp_v3 == 0) {
             FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000275,0,1,0,0);
           }
@@ -1203,7 +1203,7 @@ LAB_0040f684:
     }
     if (!((!temp_v11 && !temp_v1) || temp_v3 == 0)) {
       temp_v3 = btlGetMainState();
-      temp_v6 = FUN_003e8430();
+      temp_v6 = btlScriptUnitHasFlags();
       if (temp_v6 != 0) {
         FUN_004fd508(0,*(unsigned int *)(psVar2 + 4),0,0,1);
       }
@@ -1232,7 +1232,7 @@ LAB_0040f684:
           break;
         }
         FUN_004fd508(0,*(unsigned int *)(psVar2 + 4),0,0,1);
-        FUN_00341f88();
+        buttonHelpGetValue();
         sysPlaySe();
       }
     }
@@ -1429,7 +1429,7 @@ LAB_0040fb78:
     temp_v3 = btlGetMainState();
     temp_v3 = temp_v3 + *(int *)(psVar2 + 0x14) * 0x10;
     if (*(int *)(temp_v3 + 0x4d78) != 0) {
-      temp_v6 = FUN_003face4();
+      temp_v6 = controllerGetRecordValue();
       if (*(int *)(psVar2 + 0x26) < temp_v6) {
         *(int *)(temp_v3 + 0x4d7c) = *(int *)(psVar2 + 0x26);
         *(unsigned int *)(temp_v3 + 0x4d80) = 0;

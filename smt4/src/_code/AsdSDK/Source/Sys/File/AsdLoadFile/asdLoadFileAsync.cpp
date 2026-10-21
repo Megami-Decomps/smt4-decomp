@@ -11,7 +11,7 @@ extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 void memClear(void *buf, u32 size);
 s32 asdLoadFileHasDevice(const char *path);
 s32 asdLoadFileIsPatched(const char *path);
-s32 FUN_002be624(char *dst, const char *format, ...);
+s32 textFormatBuffer(char *dst, const char *format, ...);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 FUN_00155cb0(const char *path, u32 unk, void (*callback)(void *), AsdLoadJob *job);
 void FUN_00155c24(void *job);
@@ -28,11 +28,11 @@ void asdLoadFileAsync(const char *path, u32 *result, u32 flags, u32 arg, u32 arg
     memClear(fullPath, ASD_FILE_PATH_LEN);
     dst = fullPath;
     if (g_asdLoadFileUseRawPaths != 0 || asdLoadFileHasDevice(path) != 0) {
-        FUN_002be624(dst, path);
+        textFormatBuffer(dst, path);
     } else if (asdLoadFileIsPatched(path) != 0) {
-        FUN_002be624(dst, DAT_00409800, path);
+        textFormatBuffer(dst, DAT_00409800, path);
     } else {
-        FUN_002be624(dst, DAT_0040980c, path);
+        textFormatBuffer(dst, DAT_0040980c, path);
     }
 
     asdDebugTrace(DAT_00409814, 353);

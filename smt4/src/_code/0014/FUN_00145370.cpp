@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern signed char DAT_004729b8; /* 0x4729b8 */
+extern signed char g_textRendererSettings; /* 0x4729b8 */
 extern signed char DAT_004729b9; /* 0x4729b9 */
 extern int DAT_004729bc; /* 0x4729bc */
 extern int DAT_004729c0; /* 0x4729c0 */
@@ -21,10 +21,10 @@ void FUN_00145370(unsigned int param_1)
   
   temp_v1 = DAT_004729c0;
   temp_v0 = '\0';
-  if (DAT_004729b8 != '\0') {
+  if (g_textRendererSettings != '\0') {
     temp_v0 = DAT_004729b9;
   }
-  if (DAT_004729b8 == '\0' || temp_v0 == '\0') {
+  if (g_textRendererSettings == '\0' || temp_v0 == '\0') {
     return;
   }
   if (*(short *)(DAT_004729bc + 0x4e06) == 2) {

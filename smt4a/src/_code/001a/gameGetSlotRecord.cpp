@@ -1,16 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gameGetSlotRecord` (_code @ 0x1ab854, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #24] where the compiled block uses rsb r1, r0, r0, lsl #4. */
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-int gameGetSlotRecord(int param_1)
-
+SlotRecord *gameGetSlotRecord(s32 slotIndex)
 {
-  return (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 300 + 0xf4;
+    GameSlotTable *table = static_cast<GameSlotTable *>(g_gameDataBlocks.saveBlock);
+    return &table->slots[slotIndex].record;
 }
 
 } /* extern "C" */

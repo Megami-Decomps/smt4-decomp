@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_00422484; /* 0x422484 */
 extern unsigned char DAT_00422590; /* 0x422590 */
 
-extern int FUN_0022e480(int);
+extern int rectangleResetSelection(int);
 extern int FUN_00287314(unsigned int *);
 
 
@@ -18,7 +18,7 @@ void FUN_0022cb58(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00422484;
   temp_v0 = FUN_00287314(param_1 + 8);
-  temp_v0 = FUN_0022e480(temp_v0 + 0xa8);
+  temp_v0 = rectangleResetSelection(temp_v0 + 0xa8);
   *(unsigned char **)(temp_v0 + 0x494) = &DAT_00422590;
   *(unsigned char *)(temp_v0 - 0xac) = 0;
   *(unsigned char *)(temp_v0 - 0xab) = 0;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned int [64], unsigned char *, unsigned int, int, unsigned char *, unsigned char *);
+int textFormatBuffer(unsigned int [64], unsigned char *, unsigned int, int, unsigned char *, unsigned char *);
 int FUN_0013c174(unsigned int *, unsigned char [8], int);
 int asdTMTexTableLoadTmx(int, int);
 int asdMemoryAllocTracked(...);
@@ -27,7 +27,7 @@ extern int g_texTable; /* 0x59dbb8 */
 extern unsigned int DAT_0059dbbc; /* 0x59dbbc */
 
 extern unsigned char *FUN_00100238(char *, unsigned int);
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -84,7 +84,7 @@ int asdTMTexTableLoadSprites(int param_1)
       temp_v15 = *pcVar9;
     }
     libc_strcpy(temp_v1,&temp_v15);
-    FUN_00100388(temp_v14,&LAB_00143aa4,temp_v1,temp_v5 + 8,&LAB_00143a98,&LAB_00143a94);
+    textFormatBuffer(temp_v14,&LAB_00143aa4,temp_v1,temp_v5 + 8,&LAB_00143a98,&LAB_00143a94);
     puVar3 = temp_v14;
     FUN_0013c174(puVar3,temp_v17,0);
     if (puVar3 != (unsigned int *)0x0) {

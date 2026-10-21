@@ -7,17 +7,17 @@ int fileSlotFree(int id);
 int asdMemFree(u32 *ptr);
 int jobStop(u32 job, int mode);
 
-extern u32 *DAT_0043dd90;
+extern u32 *g_screenStateWork;
 
 void FUN_002fecfc(void)
 {
-    u32 *block = DAT_0043dd90;
+    u32 *block = g_screenStateWork;
 
     fileSlotFree(0x25);
     btlTalkBustUpDestroy();
     jobStop(*block, 0);
     asdMemFree(block);
-    DAT_0043dd90 = NULL;
+    g_screenStateWork = NULL;
 }
 
 } /* extern "C" */

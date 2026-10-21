@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015c81c(int *, int *);
-int FUN_002bb150(unsigned char *, int);
+int threadSleepDuration(unsigned char *, int);
 int FUN_002c40f8(unsigned char *, int *, int, int);
 int FUN_002c5254(int *, int, int);
 int FUN_002c526c(void);
@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_002dc6c0; /* 0x2dc6c0 */
 
 /* Supplied declaration required: FUN_0015c81c. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c5254. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -78,7 +78,7 @@ void FUN_00158bb4(int *param_1)
         FUN_002c526c();
       }
     }
-    FUN_002bb150(&LAB_002dc6c0,0);
+    threadSleepDuration(&LAB_002dc6c0,0);
   }
   return;
 }

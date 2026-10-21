@@ -1,3 +1,4 @@
+/* NON_MATCHING: restoring the outer list computes equivalent entry addresses in a different instruction order. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {

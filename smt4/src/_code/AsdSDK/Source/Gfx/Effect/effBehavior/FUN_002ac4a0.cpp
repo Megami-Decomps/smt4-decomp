@@ -20,7 +20,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: slotTableReplace. */
-extern int FUN_0014d390(unsigned char *);
+extern int asdWaveArchiveHasExpectedBlock(unsigned char *);
 /* Supplied declaration required: FUN_00150f34. */
 extern int FUN_00152394(int, unsigned int, unsigned int *);
 extern unsigned int FUN_002a7a3c(unsigned char *, unsigned int);
@@ -54,7 +54,7 @@ void FUN_002ac4a0(int *param_1,unsigned int param_2,int *param_3)
   if (temp_v1 != 0 && temp_v0 != '\0') {
     temp_v2 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v5);
     FUN_002a7ac4(temp_v8,temp_v2,0);
-    temp_v1 = FUN_0014d390(temp_v8);
+    temp_v1 = asdWaveArchiveHasExpectedBlock(temp_v8);
     if (temp_v1 == 0) {
       temp_v1 = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(temp_v2);
       temp_v3 = (**(romwright_code **)(*param_3 + 8))(param_3,temp_v1 + temp_v6 * 4 + 4);

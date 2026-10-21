@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [128], unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int FUN_001695a0(void);
 int asdMemFree(...);
 int FUN_0020214c(void);
@@ -21,7 +21,7 @@ extern int g_mapMain; /* 0x581274 */
 extern short DAT_005f172e; /* 0x5f172e */
 extern signed char DAT_005f1c72; /* 0x5f1c72 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -49,9 +49,9 @@ unsigned int FUN_002e0398(void)
   temp_v0 = g_mapMain;
   puVar3 = temp_v4;
   FUN_001695a0();
-  FUN_00100388(temp_v4,&LAB_002e0510,*(unsigned int *)(temp_v0 + 0x68),*(unsigned int *)(temp_v0 + 0x68)
+  textFormatBuffer(temp_v4,&LAB_002e0510,*(unsigned int *)(temp_v0 + 0x68),*(unsigned int *)(temp_v0 + 0x68)
               );
-  FUN_00100388(temp_v5,&LAB_002e0528,*(unsigned int *)(temp_v0 + 0x68),*(unsigned int *)(temp_v0 + 0x68))
+  textFormatBuffer(temp_v5,&LAB_002e0528,*(unsigned int *)(temp_v0 + 0x68),*(unsigned int *)(temp_v0 + 0x68))
   ;
   temp_v1 = FUN_0046e08c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
   if (temp_v1 != 0) {

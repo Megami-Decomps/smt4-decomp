@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00287b0c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
@@ -14,7 +14,7 @@ extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_00287b0c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 
 
 void FUN_001f8350(void)
@@ -133,7 +133,7 @@ void FUN_001f8350(void)
       *(float *)(temp_v0 + 0x38) = *(float *)(temp_v0 + 0x38) + temp_v8;
     }
   }
-  FUN_00287be4();
+  mathPositionHeadingDegrees();
   temp_v7 = *(float *)(DAT_004474f4 + 0x18);
   FUN_00287b0c();
   temp_v8 = *(float *)(g_lmapScene + 0x20);

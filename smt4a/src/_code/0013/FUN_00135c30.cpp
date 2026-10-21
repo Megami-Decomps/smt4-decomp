@@ -11,7 +11,7 @@ int FUN_00138a08(...);
 int FUN_00138cc4(...);
 int FUN_00138d1c(...);
 int FUN_00139518(...);
-int FUN_0013a668(...);
+int titleSelectMovieResource(...);
 int FUN_0013b7e0(...);
 int FUN_0013b8f8(...);
 int FUN_0015a410(...);
@@ -36,11 +36,11 @@ int FUN_0013a144(...);
 int FUN_0013a3d4(...);
 int asdProcessSetGroupEnabled(...);
 int FUN_0013a5e0(...);
-int FUN_0013a67c(...);
+int titleCloseMoviePlayer(...);
 int FUN_0013a6a0(...);
 int FUN_0013a7a0(...);
 int FUN_0013ab18(...);
-int FUN_0013b524(...);
+int titleConfigApplyTarget(...);
 int dataTable02Sub3GetRecord(...);
 int FUN_0013bb34(...);
 int FUN_0013be20(...);
@@ -57,7 +57,7 @@ int FUN_0013778c(...);
 int asdSequenceRequest(...);
 int FUN_00138114(...);
 int FUN_001386e8(...);
-int FUN_00138718(...);
+int titleConfigApply(...);
 int FUN_001389ec(...);
 int FUN_00138b18(...);
 int FUN_00138e14(...);
@@ -65,7 +65,7 @@ int FUN_001394ec(...);
 int FUN_00139508(...);
 int FUN_0013963c(...);
 int FUN_0013a11c(...);
-int FUN_0013a444(...);
+int titleConfigSetDefaults(...);
 int FUN_0013a48c(...);
 int FUN_0013a630(...);
 int FUN_0013a700(...);
@@ -167,10 +167,10 @@ extern unsigned char LAB_001365e8; /* 0x1365e8 */
 extern unsigned char LAB_001365fc; /* 0x1365fc */
 extern unsigned char LAB_0013660c; /* 0x13660c */
 extern unsigned char LAB_00136620; /* 0x136620 */
-extern int FUN_00136f30(...); /* 0x136f30 */
+extern int titleEndCommandList(...); /* 0x136f30 */
 extern int FUN_00136f74(...); /* 0x136f74 */
 extern int FUN_00136fc0(...); /* 0x136fc0 */
-extern int FUN_00137020(...); /* 0x137020 */
+extern int titleBeginCommandList(...); /* 0x137020 */
 extern int titleSceneStep(...); /* 0x13705c */
 extern int FUN_001370bc(...); /* 0x1370bc */
 extern int FUN_0013710c(...); /* 0x13710c */
@@ -298,7 +298,7 @@ extern int FUN_001381cc(void);
 /* Supplied declaration required: appletCloseApplication. */
 /* Supplied declaration required: FUN_001386b4. */
 /* Supplied declaration required: FUN_001386e8. */
-/* Supplied declaration required: FUN_00138718. */
+/* Supplied declaration required: titleConfigApply. */
 /* Supplied declaration required: appletReplySleepQueryAllow. */
 /* Supplied declaration required: FUN_00138764. */
 extern unsigned long long randSetSeed(unsigned int);
@@ -341,7 +341,7 @@ extern unsigned long long FUN_00139c4c(void);
 /* Supplied declaration required: FUN_0013a1e4. */
 /* Supplied declaration required: FUN_0013a324. */
 /* Supplied declaration required: FUN_0013a3d4. */
-/* Supplied declaration required: FUN_0013a444. */
+/* Supplied declaration required: titleConfigSetDefaults. */
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
 /* Supplied declaration required: FUN_0013a48c. */
 /* Supplied declaration required: FUN_0013a5e0. */
@@ -349,8 +349,8 @@ extern unsigned long long FUN_00139c4c(void);
 extern unsigned int FUN_0013a608(unsigned int);
 /* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: FUN_0013a630. */
-/* Supplied declaration required: FUN_0013a668. */
-/* Supplied declaration required: FUN_0013a67c. */
+/* Supplied declaration required: titleSelectMovieResource. */
+/* Supplied declaration required: titleCloseMoviePlayer. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: FUN_0013a6a0. */
 /* Supplied declaration required: FUN_0013a700. */
@@ -362,7 +362,7 @@ extern unsigned int FUN_0013af10(void);
 /* Supplied declaration required: FUN_0013b244. */
 /* Supplied declaration required: FUN_0013b3d0. */
 /* Supplied declaration required: FUN_0013b4ac. */
-/* Supplied declaration required: FUN_0013b524. */
+/* Supplied declaration required: titleConfigApplyTarget. */
 /* Supplied declaration required: FUN_0013b548. */
 /* Supplied declaration required: FUN_0013b5c8. */
 /* Supplied declaration required: FUN_0013b6e0. */
@@ -553,8 +553,8 @@ void FUN_00135c30(void)
   FUN_0013a700();
   FUN_0013ae58();
   FUN_00138114();
-  FUN_0013a444();
-  FUN_00138718();
+  titleConfigSetDefaults();
+  titleConfigApply();
   FUN_0013963c();
   asdSequenceRequest(0x1b,0);
   temp_v22 = (romwright_code *)&LAB_001385ec;
@@ -581,11 +581,11 @@ void FUN_00135c30(void)
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_001364ec,0x74,0);
-  temp_v22 = FUN_00136f30;
+  temp_v22 = titleEndCommandList;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136500,0x76,0);
-  temp_v22 = FUN_00137020;
+  temp_v22 = titleBeginCommandList;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_001364cc,0x88,0);
@@ -779,13 +779,13 @@ LAB_00136430:
             FUN_0013a3d4();
           }
         }
-        FUN_0013b524(g_handleRegistry);
+        titleConfigApplyTarget(g_handleRegistry);
         if (DAT_0057ffd3 != 0) {
           temp_v2 = FUN_001388c8();
           if (temp_v2 != 0) {
             FUN_00161a10();
             if (g_mobiclipProcess != 0) {
-              FUN_0013a67c(3);
+              titleCloseMoviePlayer(3);
             }
             FUN_0013be20();
             temp_v2 = FUN_00138ca4();
@@ -809,14 +809,14 @@ LAB_00136430:
         temp_v3 = (unsigned int)((unsigned long long)temp_v20 >> 0x20);
         if ((int)temp_v20 == 2) {
           if (g_mobiclipProcess != 0) {
-            FUN_0013a67c(2);
+            titleCloseMoviePlayer(2);
           }
           appletReplySleepQueryAllow();
           FUN_00137848();
           FUN_00138d1c();
           temp_v3 = temp_v7;
           if (g_mobiclipProcess != 0) {
-            FUN_0013a668(2);
+            titleSelectMovieResource(2);
             temp_v3 = temp_v8;
           }
         }
@@ -833,7 +833,7 @@ LAB_00136430:
           }
           else {
             if (g_mobiclipProcess != 0) {
-              FUN_0013a67c(0);
+              titleCloseMoviePlayer(0);
             }
             FUN_00161a10();
             FUN_0013b7e0();
@@ -844,7 +844,7 @@ LAB_00136430:
               temp_v3 = (unsigned int)((unsigned long long)temp_v20 >> 0x20);
               if ((int)temp_v20 != 0) {
                 if (g_mobiclipProcess != 0) {
-                  FUN_0013a67c(3);
+                  titleCloseMoviePlayer(3);
                   FUN_0015a5c0(0,0,DAT_005891bc);
                   temp_v3 = temp_v10;
                 }
@@ -853,7 +853,7 @@ LAB_00136430:
             }
             else {
               if (g_mobiclipProcess != 0) {
-                FUN_0013a67c(3);
+                titleCloseMoviePlayer(3);
                 FUN_0015a5c0(0,0,DAT_005891bc);
                 temp_v3 = temp_v10;
               }
@@ -862,7 +862,7 @@ LAB_00136430:
             temp_v19 = romwright_piece_4_4(temp_v3,(unsigned int)DAT_0057ffd3);
             if (DAT_0057ffd3 != 0) goto LAB_00136430;
             if (g_mobiclipProcess != 0) {
-              FUN_0013a668(0);
+              titleSelectMovieResource(0);
             }
             FUN_00137848();
             temp_v3 = temp_v11;
@@ -882,7 +882,7 @@ LAB_00136430:
   } while ((int)temp_v21 == 0);
   FUN_001703b0(1);
   if (g_mobiclipProcess != 0) {
-    FUN_0013a67c(1);
+    titleCloseMoviePlayer(1);
   }
   FUN_00161a10();
   FUN_0013b8f8();
@@ -892,7 +892,7 @@ LAB_00136430:
     temp_v2 = FUN_0015a410();
     if (temp_v2 != 0) {
       if (g_mobiclipProcess != 0) {
-        FUN_0013a67c(3);
+        titleCloseMoviePlayer(3);
         FUN_0015a5c0(0,0,DAT_005891bc);
       }
       DAT_0057ffd3 = 1;
@@ -900,13 +900,13 @@ LAB_00136430:
   }
   else {
     if (g_mobiclipProcess != 0) {
-      FUN_0013a67c(3);
+      titleCloseMoviePlayer(3);
       FUN_0015a5c0(0,0,DAT_005891bc);
     }
     DAT_0057ffd3 = 1;
   }
   if ((DAT_0057ffd3 == 0) && (g_mobiclipProcess != 0)) {
-    FUN_0013a668(1);
+    titleSelectMovieResource(1);
   }
   temp_v19 = FUN_00170390(1);
   goto LAB_00136430;

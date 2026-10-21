@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001960f0(unsigned int *, unsigned int *);
+int asdModelCommitCommandRange(unsigned int *, unsigned int *);
 int FUN_0019eafc(void);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -21,7 +21,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_001960f0. */
+/* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: FUN_0019eafc. */
 
 
@@ -99,7 +99,7 @@ void FUN_00154180(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   puVar3[7] = 0xf0044;
   puVar3[8] = param_1 | (param_2 << 0x10);
   puVar3[9] = 0xf0068;
-  FUN_001960f0(puVar3,puVar3 + 10);
+  asdModelCommitCommandRange(puVar3,puVar3 + 10);
   return;
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 int FUN_004f8f44(int param_1)
@@ -19,7 +19,7 @@ int FUN_004f8f44(int param_1)
   temp_v0 = *(int *)(param_1 + 0x1f54);
   if ((temp_v0 != 0) && (-1 < *(short *)(temp_v0 + 0x192))) {
     btlGetMainState();
-    temp_v0 = FUN_003e8430();
+    temp_v0 = btlScriptUnitHasFlags();
     if (temp_v0 == 0) {
       temp_v0 = (int)*(short *)(*(int *)(param_1 + 0x1f54) + 0x192);
     }

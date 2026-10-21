@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [68], unsigned char *);
+int textFormatBuffer(unsigned char [68], unsigned char *);
 int FUN_0017ffa8(...);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
@@ -22,7 +22,7 @@ extern unsigned char LAB_003a6dd0; /* 0x3a6dd0 */
 extern unsigned char LAB_003a6dd8; /* 0x3a6dd8 */
 extern unsigned char LAB_003a6de4; /* 0x3a6de4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -43,11 +43,11 @@ void FUN_003a6c64(int param_1,int param_2,int param_3,int param_4,int param_5)
   
   temp_v0 = requestKindToId();
   if (param_2 < 0) {
-    FUN_00100388(temp_v3,&LAB_003a6dd0);
+    textFormatBuffer(temp_v3,&LAB_003a6dd0);
     temp_v2 = 0xdc0f14ff;
   }
   else {
-    FUN_00100388(temp_v3,&LAB_003a6dd8);
+    textFormatBuffer(temp_v3,&LAB_003a6dd8);
     temp_v2 = 0x72e027ff;
   }
   if (param_1 != 0xe) {

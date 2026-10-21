@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_0016432c(...);
@@ -33,7 +33,7 @@ extern int g_guestWin; /* 0x57f570 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 extern int FUN_001632fc(void);
@@ -142,13 +142,13 @@ unsigned int FUN_00155840(void)
       temp_v1 = gameGetOptions();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 300);
       FUN_0016432c(temp_v6);
-      FUN_00100388(temp_v10,temp_v6);
+      textFormatBuffer(temp_v10,temp_v6);
     }
     else {
       FUN_0018152c((int)*(short *)(temp_v1 + 0x62),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24,0);
       temp_v5 = FUN_00180114(*(unsigned short *)(temp_v1 + 0x62));
-      FUN_00100388(temp_v10,temp_v5);
+      textFormatBuffer(temp_v10,temp_v5);
     }
     temp_v1 = FUN_001834a4(8,0xd8);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

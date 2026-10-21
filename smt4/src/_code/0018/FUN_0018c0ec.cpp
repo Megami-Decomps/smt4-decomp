@@ -61,7 +61,7 @@ int FUN_002a0cc8(...);
 int devilGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002bd06c(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(...);
 
 int FUN_00295a18(...);
@@ -231,7 +231,7 @@ extern int sys43e188GetState(void);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: libc_strcpy. */
@@ -1078,7 +1078,7 @@ LAB_0018d058:
       }
       pcVar18 = (char *)0x0;
 LAB_0018da7c:
-      FUN_002be624(&temp_v35,&LAB_0018dd60,pcVar18 + 1);
+      textFormatBuffer(&temp_v35,&LAB_0018dd60,pcVar18 + 1);
       temp_v9 = FUN_002c5c04(&temp_v35);
       *(unsigned int *)(temp_v2 + 0x3578) = temp_v9;
       temp_v15 = *(unsigned int *)(temp_v2 + 0x3570);

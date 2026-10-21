@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 FUN_001eb4e0(u32 value);
+extern u32 processRunQuery(u32 value);
 
 u32 FUN_002cbe70(int mode)
 {
@@ -14,7 +14,7 @@ u32 FUN_002cbe70(int mode)
         }
         return value;
     }
-    value = FUN_001eb4e0(0xe7e3ffff);
+    value = processRunQuery(0xe7e3ffff);
     return value;
 }
 

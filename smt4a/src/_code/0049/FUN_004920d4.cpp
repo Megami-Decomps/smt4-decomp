@@ -47,7 +47,7 @@ extern signed char DAT_005f1a5e; /* 0x5f1a5e */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00157558. */
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -126,7 +126,7 @@ void FUN_004920d4(int param_1)
     return;
   }
   temp_v33 = param_1;
-  temp_v3 = FUN_00162858();
+  temp_v3 = campIsState85();
   if ((((temp_v3 == 0) &&
        (!((*(unsigned int *)(temp_v33 + 0x10) & 0x20) != 0 || (*(unsigned int *)(temp_v33 + 0x10) & 8) != 0))) &&
       (*(char *)(temp_v33 + 0xc) != '\0')) && (DAT_005f1604 != -1)) {

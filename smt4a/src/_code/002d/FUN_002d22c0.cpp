@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00303460(int);
 int FUN_00313648(int);
-int FUN_00363c3c(void);
+int engineResetStateTime(void);
 int bannerShow(void);
 int scrCommArmPanel3(void);
 
@@ -22,7 +22,7 @@ extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 /* Supplied declaration required: FUN_00303460. */
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_00313648. */
-/* Supplied declaration required: FUN_00363c3c. */
+/* Supplied declaration required: engineResetStateTime. */
 /* Supplied declaration required: bannerShow. */
 /* Supplied declaration required: scrCommArmPanel3. */
 
@@ -39,7 +39,7 @@ void FUN_002d22c0(char param_1)
     if (DAT_005f161d != '\0') {
       DAT_005f161d = param_1;
       scrCommArmPanel3();
-      FUN_00363c3c();
+      engineResetStateTime();
       FUN_00313648(1);
       FUN_00303460(0);
       return;

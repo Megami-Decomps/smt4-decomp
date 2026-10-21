@@ -1,3 +1,4 @@
+/* NON_MATCHING: instructions match, but the final string-literal pool padding differs from the retail object. */
 #include "shard/S1AsdTexTable.h"
 
 extern "C" {

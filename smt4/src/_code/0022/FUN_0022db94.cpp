@@ -14,7 +14,7 @@ typedef struct {
 } param_5_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0023342c(unsigned int, unsigned int);
+extern int curveEvaluateStandard(unsigned int, unsigned int);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: FUN_002bf4f0. */
@@ -50,7 +50,7 @@ void FUN_0022db94(int param_1,unsigned short param_2,int param_3,int param_4,int
   temp_v0 = *(short *)(temp_v2 + 8);
   temp_v1 = *(short *)(temp_v2 + 10);
   temp_v3 = FUN_002bce30(param_2,0);
-  temp_v2 = FUN_0023342c(temp_v3,2);
+  temp_v2 = curveEvaluateStandard(temp_v3,2);
   temp_v4 = FUN_002bf4f0(param_1 + 200,temp_v5);
   VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(((int)temp_v0 + (int)**(short **)(temp_v4 + 0xc) / 2 + (int)*(short *)(temp_v4 + 8))

@@ -9,7 +9,7 @@ int FUN_002950a8(...);
 int FUN_002e364c(...);
 int FUN_0031ebf8(...);
 int FUN_00327ee8(...);
-int FUN_0033f938(...);
+int naviMainApplyRequestValue(...);
 int FUN_003d54f8(...);
 int linkedTargetSetFloat(...);
 
@@ -25,11 +25,11 @@ int FUN_00314c38(...);
 int FUN_003180c4(...);
 int FUN_003278ac(...);
 int FUN_00365c94(...);
-int FUN_003a366c(...);
+int naviMainSetRequestTriple(...);
 int FUN_003adc58(...);
 int FUN_003b5714(...);
 int FUN_003d2158(...);
-int FUN_003e0090(...);
+int playerSetClampedValue(...);
 int flagValueSub(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -125,10 +125,10 @@ extern int FUN_00312d88(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_003278ac. */
 /* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_0033f938. */
+/* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00365c94. */
 extern int FUN_003798f0(void);
-/* Supplied declaration required: FUN_003a366c. */
+/* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -136,14 +136,14 @@ extern int FUN_003798f0(void);
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern unsigned int FUN_003e0034(void);
-/* Supplied declaration required: FUN_003e0090. */
+/* Supplied declaration required: playerSetClampedValue. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: flagValueSub. */
-extern int FUN_004d04f4(void);
+extern int inputIsQuestCancelPressed(void);
 
 
 /* WARNING: Removing unreachable block (ram,0x002da738) */
@@ -250,7 +250,7 @@ void FUN_002d9b50(void)
         if (*(int *)(temp_v6 + 0x54) != 10) {
           *(int *)(temp_v6 + 0x270) = *(int *)(temp_v6 + 0x270) + 1;
         }
-        temp_v4 = FUN_004d04f4();
+        temp_v4 = inputIsQuestCancelPressed();
         temp_v6 = g_lmapScene;
         if ((temp_v4 != 0) &&
            ((*(int *)(g_lmapScene + 0x270) >= 0x13 || (*(int *)(g_lmapScene + 0x54) == 10)))) {
@@ -526,7 +526,7 @@ LAB_002da3cc:
           temp_v9 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v10 = (float)VectorUnsignedToFloat
                                     ((unsigned int)*(unsigned short *)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_003e0090((int)(short)(int)(temp_v8 - temp_v9 * temp_v10 * 0.01f));
+          playerSetClampedValue((int)(short)(int)(temp_v8 - temp_v9 * temp_v10 * 0.01f));
           if (temp_v3 == 0) {
             temp_v11 = 0x2dab34;
           }
@@ -593,9 +593,9 @@ LAB_002da3cc:
               FUN_00314c38(*(unsigned short *)(temp_v6 + 0x18) & 0xff,*(unsigned short *)(temp_v6 + 0x1a) & 0xff,0,0,0,0
                           );
               DAT_005f1604 = (unsigned int)*(unsigned short *)(temp_v6 + 0x18);
-              FUN_003a366c(*(unsigned short *)(temp_v6 + 0x12),*(unsigned short *)(temp_v6 + 0x14),
+              naviMainSetRequestTriple(*(unsigned short *)(temp_v6 + 0x12),*(unsigned short *)(temp_v6 + 0x14),
                            *(unsigned short *)(temp_v6 + 0x18));
-              FUN_0033f938(DAT_005f1608);
+              naviMainApplyRequestValue(DAT_005f1608);
               temp_v6 = mapTrapGetUnk38();
               temp_v3 = (unsigned int)*(unsigned short *)(temp_v6 + 8);
               FUN_00303bd4();

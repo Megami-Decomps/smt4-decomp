@@ -27,7 +27,7 @@ extern unsigned int DAT_00471b58; /* 0x471b58 */
 /* Supplied declaration required: asdMemoryFreeRegion. */
 extern int *FUN_001246cc(int *);
 /* Supplied declaration required: refCountIncrement. */
-extern int *FUN_0028c814(void);
+extern int *textureCreateFromImage(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 extern int stexHeaderIsValid(int *);
 /* Supplied declaration required: FUN_002a8554. */
@@ -51,7 +51,7 @@ void FUN_002c084c(int param_1,int *param_2)
     asdEffectTextureCreate();
   }
   else {
-    param_2 = (int *)FUN_0028c814();
+    param_2 = (int *)textureCreateFromImage();
   }
   *(int **)(param_1 + 0x14) = param_2;
   refCountIncrement();

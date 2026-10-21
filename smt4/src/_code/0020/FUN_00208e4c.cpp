@@ -11,14 +11,14 @@ int FUN_002dfb48(void);
 int CONCAT44(...);
 int asdMdlManagerMarkDestroy(...);
 int FUN_002533f4(...);
-int FUN_002535d4(void);
+int effectSpawnTypeTen(void);
 int vec4Forward(...);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287a78(void);
 int FUN_00287b0c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int asdMdlManagerDestroy(void);
 int dataTable00FindById(void);
 int SBORROW4(...);
@@ -89,7 +89,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_002533f4. */
-/* Supplied declaration required: FUN_002535d4. */
+/* Supplied declaration required: effectSpawnTypeTen. */
 /* Supplied declaration required: FUN_002535ec. */
 /* Supplied declaration required: FUN_0025363c. */
 /* Supplied declaration required: FUN_00253860. */
@@ -109,7 +109,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287a78. */
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_00287b0c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -1075,7 +1075,7 @@ LAB_0020a6f0:
         temp_v1 = *(short *)(temp_v44 + 0x38) - 1;
         *(short *)(temp_v44 + 0x38) = temp_v1;
         if (temp_v1 < 1) {
-          FUN_002535d4();
+          effectSpawnTypeTen();
           temp_v1 = randNextInRange(2);
           *(short *)(temp_v44 + 0x38) = temp_v1 + 9;
         }
@@ -1230,7 +1230,7 @@ LAB_0020abfc:
                 temp_v1 = *(short *)(temp_v44 + 0x38) - 1;
                 *(short *)(temp_v44 + 0x38) = temp_v1;
                 if (temp_v1 < 1) {
-                  FUN_002535d4();
+                  effectSpawnTypeTen();
                   temp_v1 = randNextInRange(2);
                   *(short *)(temp_v44 + 0x38) = temp_v1 + 9;
                 }
@@ -1669,7 +1669,7 @@ LAB_0020b4ec:
             *(int *)(temp_v3 + 0xd4) = *(int *)(temp_v3 + 0xd4) + 1;
             *(unsigned int *)(temp_v3 + 0x130) = 0;
             temp_v22 = temp_v30;
-            FUN_00287be4();
+            mathPositionHeadingDegrees();
             temp_v22 = temp_v22 * 0.017453292f;
             temp_v39 = temp_v30;
             temp_v40 = temp_v31;
@@ -1823,7 +1823,7 @@ LAB_0020ba2c:
         temp_v1 = *(short *)(temp_v44 + 0x38) - 1;
         *(short *)(temp_v44 + 0x38) = temp_v1;
         if (temp_v1 < 1) {
-          FUN_002535d4();
+          effectSpawnTypeTen();
           temp_v1 = randNextInRange(2);
           *(short *)(temp_v44 + 0x38) = temp_v1 + 9;
         }
@@ -2023,7 +2023,7 @@ LAB_0020c014:
               temp_v1 = *(short *)(temp_v45 + 0x38) - 1;
               *(short *)(temp_v45 + 0x38) = temp_v1;
               if (temp_v1 < 1) {
-                FUN_002535d4();
+                effectSpawnTypeTen();
                 temp_v1 = randNextInRange(2);
                 *(short *)(temp_v45 + 0x38) = temp_v1 + 9;
               }
@@ -2077,7 +2077,7 @@ LAB_0020c014:
             *(unsigned int *)(temp_v3 + 0xf4) = *(unsigned int *)(g_lmapScene + 0x1c);
             *(unsigned int *)(temp_v3 + 0xf8) = temp_v19;
             *(unsigned int *)(temp_v3 + 0xfc) = temp_v9;
-            FUN_00287be4();
+            mathPositionHeadingDegrees();
             *(float *)(temp_v3 + 0x104) = temp_v11;
             *(int *)(temp_v3 + 0xf0) = *(int *)(temp_v3 + 0xf0) + 1;
           }
@@ -2118,7 +2118,7 @@ LAB_0020c014:
               temp_v1 = *(short *)(temp_v3 + 0x16c) - 1;
               *(short *)(temp_v3 + 0x16c) = temp_v1;
               if (temp_v1 < 1) {
-                FUN_002535d4();
+                effectSpawnTypeTen();
                 temp_v1 = randNextInRange(2);
                 *(short *)(temp_v3 + 0x16c) = temp_v1 + 5;
               }

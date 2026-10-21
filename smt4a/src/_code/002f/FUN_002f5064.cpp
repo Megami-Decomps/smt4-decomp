@@ -11,7 +11,7 @@ int uiSpriteSelectAnim(...);
 int FUN_0020b490(...);
 int roundObjFinish(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int qsort(int, int, int, unsigned char *);
 int FUN_00163aa4(int);
 int FUN_00180118(unsigned int);
@@ -59,7 +59,7 @@ typedef struct {
 extern unsigned char LAB_002f5758; /* 0x2f5758 */
 extern unsigned char LAB_00321c94; /* 0x321c94 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00163aa4. */
@@ -281,7 +281,7 @@ void FUN_002f5064(int param_1)
       }
       pcVar14 = (char *)0x0;
 LAB_002f56d4:
-      FUN_00100388(temp_v19,&LAB_002f5758,pcVar14 + 1);
+      textFormatBuffer(temp_v19,&LAB_002f5758,pcVar14 + 1);
       puVar8 = temp_v19;
       FUN_0020214c();
       *(unsigned char **)(param_1 + 0x43b0) = puVar8;

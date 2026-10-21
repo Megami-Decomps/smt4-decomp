@@ -17,7 +17,7 @@ s32 FUN_002c85b0(u32 arg);
 s32 FUN_002c7ce8(s32 arg);
 u32 gameGetPlayerData(void);
 s32 FUN_0033449c(s32 arg);
-s32 FUN_003720a0(u32 data, s32 arg);
+s32 gameGlobalsQueueValues(u32 data, s32 arg);
 s32 FUN_00372100(u32 data, s32 arg);
 s32 FUN_00345718(void);
 s32 FUN_00284f90(s32 arg);
@@ -42,7 +42,7 @@ void FUN_00499d14(Scene *scene)
     FUN_002c7ce8(0);
     player = gameGetPlayerData();
     FUN_0033449c(1);
-    FUN_003720a0(player, 0);
+    gameGlobalsQueueValues(player, 0);
     FUN_00372100(player, 0);
     scene->active = 1;
     FUN_00345718();

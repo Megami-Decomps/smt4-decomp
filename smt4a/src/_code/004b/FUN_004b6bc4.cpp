@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [32], unsigned char *, int);
+int textFormatBuffer(unsigned char [32], unsigned char *, int);
 int FUN_001b4a74(int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int sysMemClear(char [256], int);
@@ -31,7 +31,7 @@ extern int DAT_0058800c; /* 0x58800c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_001b4a74. */
 extern int FUN_00224880(unsigned int);
@@ -107,7 +107,7 @@ void FUN_004b6bc4(int param_1,int param_2,int param_3)
         temp_v8 = *(unsigned int *)(param_1 + 0x1144);
         if (*(char *)(temp_v3 + 0x2c) != '0') {
           DAT_0058800c = 0;
-          FUN_00100388(temp_v9,&DAT_005328fc,temp_v3 + 0x2c);
+          textFormatBuffer(temp_v9,&DAT_005328fc,temp_v3 + 0x2c);
           temp_v5 = tableGroupFindEntryIndex(temp_v8,temp_v9);
           scrScriptProcessStartEntry(temp_v4,temp_v5);
           do {
@@ -137,7 +137,7 @@ LAB_004b6d80:
         temp_v5 = *(unsigned int *)(param_1 + 0x114c);
         if (*(char *)(temp_v3 + 0x2c) != '0') {
           DAT_0058800c = 0;
-          FUN_00100388(temp_v9,&DAT_005328fc,temp_v3 + 0x2c);
+          textFormatBuffer(temp_v9,&DAT_005328fc,temp_v3 + 0x2c);
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v9);
           scrScriptProcessStartEntry(temp_v5,temp_v4);
           do {

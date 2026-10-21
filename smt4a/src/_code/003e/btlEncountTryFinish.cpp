@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_003d9164(void);
 void state339CFinish(void);
-s32 FUN_004f6384(void *object);
+s32 recordAreAllCountsNonpositive(void *object);
 s32 chainCountIdUnflagged(s32 value, s32 arg);
 
 extern s32 g_btlActionReflect;
@@ -20,7 +20,7 @@ u32 btlEncountTryFinish(void)
     if (result > 0) {
         done = 0;
     } else {
-        result = FUN_004f6384(DAT_00573808);
+        result = recordAreAllCountsNonpositive(DAT_00573808);
         done = result;
         if (result != 0) {
             if (DAT_00573808 != NULL) {

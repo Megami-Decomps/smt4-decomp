@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00210854(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
-int FUN_00233218(void);
+int jobGetScalarValue(void);
 int FUN_002b0750(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int FUN_002b1fc4(int *, int *, int *, int *, int, int);
 int FUN_002bed3c(void);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 
 /* stack frame of param_8: 11 slot(s), 44 byte(s) */
@@ -30,12 +30,12 @@ typedef struct {
 extern unsigned char LAB_00141adc; /* 0x141adc */
 
 /* Supplied declaration required: FUN_00210854. */
-/* Supplied declaration required: FUN_00233218. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b1fc4. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -79,7 +79,7 @@ void FUN_00230fe4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned int uStack_40;
   unsigned int uStack_3c;
   
-  FUN_00233218();
+  jobGetScalarValue();
   temp_v0 = FUN_002bf4f8(param_2,param_3);
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 4) == 1)) {
@@ -127,12 +127,12 @@ void FUN_00230fe4(unsigned int param_1,unsigned int param_2,unsigned int param_3
     uStack_40 = uStack_b0;
     uStack_3c = uStack_ac;
     FUN_002b1fc4(&temp_v9,&temp_v8,&temp_v7,&temp_v6,0,0);
-    FUN_002bf538();
+    efctSetSpeed();
   }
   temp_v2 = (unsigned int)((unsigned long long)param_6 >> 0x20);
   uStack_b4 = param_7;
   FUN_00210854(param_1,param_2,param_3,param_4,param_5,(int)param_6);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bed3c();
   return;
 }

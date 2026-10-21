@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00195fc4(void);
 int FUN_001d3f18(...);
-int FUN_002e5ac0(...);
+int runtimeShiftLeftWide(...);
 
 /* Supplied declaration required: FUN_00195fc4. */
 /* Supplied declaration required: FUN_001d3f18. */
-/* Supplied declaration required: FUN_002e5ac0. */
+/* Supplied declaration required: runtimeShiftLeftWide. */
 
 
 unsigned int FUN_004acc1c(unsigned int *param_1,unsigned int param_2)
@@ -38,7 +38,7 @@ unsigned int FUN_004acc1c(unsigned int *param_1,unsigned int param_2)
       temp_v1 = param_1[2];
       temp_v4 = *param_1;
       temp_v2 = param_1[1];
-      temp_v6 = FUN_002e5ac0(*puVar3,0,0x38 - temp_v1);
+      temp_v6 = runtimeShiftLeftWide(*puVar3,0,0x38 - temp_v1);
       temp_v1 = temp_v1 + 8;
       param_1[2] = temp_v1;
       param_1[1] = (unsigned int)((unsigned long long)temp_v6 >> 0x20) | temp_v2;
@@ -47,7 +47,7 @@ unsigned int FUN_004acc1c(unsigned int *param_1,unsigned int param_2)
     temp_v4 = param_1[1];
     temp_v2 = *param_1;
     temp_v1 = FUN_001d3f18(temp_v2,temp_v4,0x40 - param_2);
-    temp_v6 = FUN_002e5ac0(temp_v2,temp_v4,param_2);
+    temp_v6 = runtimeShiftLeftWide(temp_v2,temp_v4,param_2);
     *(unsigned long long *)param_1 = temp_v6;
     param_1[2] = param_1[2] - param_2;
     return temp_v1;
@@ -59,19 +59,19 @@ unsigned int FUN_004acc1c(unsigned int *param_1,unsigned int param_2)
     temp_v1 = param_1[2];
     temp_v2 = *param_1;
     temp_v3 = param_1[1];
-    temp_v6 = FUN_002e5ac0(*puVar3,0,0x38 - temp_v1);
+    temp_v6 = runtimeShiftLeftWide(*puVar3,0,0x38 - temp_v1);
     temp_v1 = temp_v1 + 8;
     param_1[2] = temp_v1;
     param_1[1] = (unsigned int)((unsigned long long)temp_v6 >> 0x20) | temp_v3;
     *param_1 = (unsigned int)temp_v6 | temp_v2;
   }
   temp_v6 = FUN_001d3f18(*param_1,param_1[1],0x40 - temp_v4);
-  temp_v1 = FUN_002e5ac0((int)temp_v6,(int)((unsigned long long)temp_v6 >> 0x20),temp_v5);
+  temp_v1 = runtimeShiftLeftWide((int)temp_v6,(int)((unsigned long long)temp_v6 >> 0x20),temp_v5);
   puVar3 = (unsigned char *)param_1[3];
   param_1[3] = (unsigned int)(puVar3 + 1);
   temp_v0 = *puVar3;
   temp_v4 = FUN_001d3f18(temp_v0,0);
-  temp_v6 = FUN_002e5ac0(temp_v0,0,temp_v5 + 0x38);
+  temp_v6 = runtimeShiftLeftWide(temp_v0,0,temp_v5 + 0x38);
   *(unsigned long long *)param_1 = temp_v6;
   param_1[2] = 8 - temp_v5;
   return temp_v4 | temp_v1;

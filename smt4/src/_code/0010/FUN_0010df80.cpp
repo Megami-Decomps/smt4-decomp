@@ -1,22 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010df80` (_code @ 0x10df80, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail cmp r0, #0; compiler cmp r0, #2. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+
+struct SoundOutputState {
+    /* 0x0000 */ u8 unk0000[0x1210];
+    /* 0x1210 */ AsdSndSlotC *outputs[2];
+};
 
 extern "C" {
 
-extern unsigned int DAT_004e3178; /* 0x4e3178 */
+extern SoundOutputState g_asdSound;
 
-
-unsigned char FUN_0010df80(unsigned int param_1)
-
+/* Returns the selected one-sound slot flag. */
+u8 FUN_0010df80(u32 index)
 {
-  unsigned char temp_v0;
-  
-  temp_v0 = 0;
-  if ((param_1 < 2) && ((&DAT_004e3178)[param_1] != 0)) {
-    temp_v0 = *(unsigned char *)((&DAT_004e3178)[param_1] + 0xc);
-  }
-  return temp_v0;
+    if (index < 2 && g_asdSound.outputs[index] != NULL) {
+        return g_asdSound.outputs[index]->flag;
+    }
+    return 0;
 }
 
 } /* extern "C" */

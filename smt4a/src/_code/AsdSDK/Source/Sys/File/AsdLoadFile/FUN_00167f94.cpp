@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int refIsNullOrZero(int *);
 int FUN_001883b0(unsigned int *, unsigned short [264], int);
 int vcallSlot12IfValid(unsigned int);
@@ -26,7 +26,7 @@ typedef struct {
 
 extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 extern int asdFileHashPackIsOpen(void);
@@ -59,10 +59,10 @@ unsigned int FUN_00167f94(unsigned int param_1)
   puVar5 = temp_v2;
   rt_aeabi_memclr(temp_v3,0x100);
   if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v1 = FUN_0019dbb8(param_1), temp_v1 != 0)) {
-    FUN_00100388(temp_v3,param_1);
+    textFormatBuffer(temp_v3,param_1);
   }
   else {
-    FUN_00100388(temp_v3,"rom:/%s",param_1);
+    textFormatBuffer(temp_v3,"rom:/%s",param_1);
   }
   temp_v0 = 0;
   temp_v1 = asdFileHashPackIsOpen();

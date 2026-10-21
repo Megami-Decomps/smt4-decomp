@@ -51,7 +51,7 @@ extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int DAT_004474f4; /* 0x4474f4 */
-extern unsigned int *DAT_004475d0; /* 0x4475d0 */
+extern unsigned int *g_activeTextureSlot; /* 0x4475d0 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -129,7 +129,7 @@ void MapMain_DrawMinimapIcons(void)
   float temp_v43;
   float temp_v44;
   
-  FUN_002c1b64(g_titleScene,*DAT_004475d0);
+  FUN_002c1b64(g_titleScene,*g_activeTextureSlot);
   temp_v1 = 0;
   temp_v17 = 57.32484f;
   temp_v18 = 0x3f360b61;
@@ -137,9 +137,9 @@ void MapMain_DrawMinimapIcons(void)
   temp_v16 = 0.0f;
   do {
     temp_v5 = (float)temp_v18;
-    if (0 < (int)DAT_004475d0[temp_v1 + 1]) {
-      temp_v13 = (float)DAT_004475d0[temp_v1 + 0x101];
-      temp_v3 = *(float *)(DAT_004474f4 + 0x4c) - (float)DAT_004475d0[temp_v1 * 3 + 0x41];
+    if (0 < (int)g_activeTextureSlot[temp_v1 + 1]) {
+      temp_v13 = (float)g_activeTextureSlot[temp_v1 + 0x101];
+      temp_v3 = *(float *)(DAT_004474f4 + 0x4c) - (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
       FUN_00281e34();
       temp_v3 = temp_v3 * temp_v17 * temp_v5;
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 <= temp_v3) << 0x1d);
@@ -190,34 +190,34 @@ void MapMain_DrawMinimapIcons(void)
       temp_v20 = temp_v13;
       temp_v21 = temp_v16;
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v33,&temp_v22,&temp_v19);
-      temp_v33 = temp_v33 + (float)DAT_004475d0[temp_v1 * 3 + 0x41];
-      temp_v34 = temp_v34 + (float)DAT_004475d0[temp_v1 * 3 + 0x42];
-      temp_v35 = temp_v35 + (float)DAT_004475d0[temp_v1 * 3 + 0x43];
+      temp_v33 = temp_v33 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
+      temp_v34 = temp_v34 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x42];
+      temp_v35 = temp_v35 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x43];
       temp_v19 = temp_v14;
       temp_v20 = temp_v14;
       temp_v21 = temp_v5;
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v36,&temp_v22,&temp_v19);
-      temp_v36 = temp_v36 + (float)DAT_004475d0[temp_v1 * 3 + 0x41];
-      temp_v37 = temp_v37 + (float)DAT_004475d0[temp_v1 * 3 + 0x42];
-      temp_v38 = temp_v38 + (float)DAT_004475d0[temp_v1 * 3 + 0x43];
+      temp_v36 = temp_v36 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
+      temp_v37 = temp_v37 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x42];
+      temp_v38 = temp_v38 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x43];
       temp_v19 = temp_v13;
       temp_v20 = temp_v13;
       temp_v21 = temp_v5;
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v39,&temp_v22,&temp_v19);
-      temp_v39 = temp_v39 + (float)DAT_004475d0[temp_v1 * 3 + 0x41];
-      temp_v40 = temp_v40 + (float)DAT_004475d0[temp_v1 * 3 + 0x42];
-      temp_v41 = temp_v41 + (float)DAT_004475d0[temp_v1 * 3 + 0x43];
+      temp_v39 = temp_v39 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
+      temp_v40 = temp_v40 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x42];
+      temp_v41 = temp_v41 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x43];
       temp_v19 = temp_v13;
       temp_v20 = temp_v14;
       temp_v21 = temp_v5;
       nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v42,&temp_v22,&temp_v19);
-      temp_v42 = temp_v42 + (float)DAT_004475d0[temp_v1 * 3 + 0x41];
-      temp_v43 = temp_v43 + (float)DAT_004475d0[temp_v1 * 3 + 0x42];
-      temp_v44 = temp_v44 + (float)DAT_004475d0[temp_v1 * 3 + 0x43];
-      temp_v0 = DAT_004475d0[temp_v1 + 0x141];
-      FUN_002ba1e0(temp_v0,temp_v0,temp_v0,temp_v0,DAT_004475d0[temp_v1 * 8 + 0x185],
-                   DAT_004475d0[temp_v1 * 8 + 0x186],DAT_004475d0[temp_v1 * 8 + 0x187],
-                   DAT_004475d0[temp_v1 * 8 + 0x188]);
+      temp_v42 = temp_v42 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
+      temp_v43 = temp_v43 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x42];
+      temp_v44 = temp_v44 + (float)g_activeTextureSlot[temp_v1 * 3 + 0x43];
+      temp_v0 = g_activeTextureSlot[temp_v1 + 0x141];
+      FUN_002ba1e0(temp_v0,temp_v0,temp_v0,temp_v0,g_activeTextureSlot[temp_v1 * 8 + 0x185],
+                   g_activeTextureSlot[temp_v1 * 8 + 0x186],g_activeTextureSlot[temp_v1 * 8 + 0x187],
+                   g_activeTextureSlot[temp_v1 * 8 + 0x188]);
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x40);

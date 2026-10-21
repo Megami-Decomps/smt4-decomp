@@ -9,7 +9,7 @@ int FUN_0022b778(...);
 int FUN_0022b83c(...);
 int listScrollToId(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_002be624(unsigned char [36], unsigned char *, int);
+int textFormatBuffer(unsigned char [36], unsigned char *, int);
 int memClear(char [256], int);
 int FUN_00387f88(int, int);
 int contentEntryGetFromFilesByKind(int, int, int);
@@ -35,7 +35,7 @@ extern int FUN_0022b8c0(int);
 extern int gameStateIsFlagSetAndLarge(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00387f88. */
@@ -101,7 +101,7 @@ void FUN_0022b29c(int param_1,int param_2,int param_3)
         temp_v5 = *(unsigned int *)(param_1 + 0xd90);
         if (*(char *)(temp_v3 + 0x2c) != '0') {
           DAT_0044cfb8 = 0;
-          FUN_002be624(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
+          textFormatBuffer(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v9);
           scrScriptProcessStartEntry(temp_v5,temp_v4);
           do {
@@ -131,7 +131,7 @@ LAB_0022b450:
         temp_v5 = *(unsigned int *)(param_1 + 0xd88);
         if (*(char *)(temp_v3 + 0x2c) != '0') {
           DAT_0044cfb8 = 0;
-          FUN_002be624(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
+          textFormatBuffer(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
           temp_v5 = tableGroupFindEntryIndex(temp_v5,temp_v9);
           scrScriptProcessStartEntry(temp_v4,temp_v5);
           do {

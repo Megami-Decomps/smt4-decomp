@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char [72], unsigned char *);
+int textFormatBuffer(int, unsigned char [72], unsigned char *);
 int FUN_00152f44(void);
 int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
@@ -16,7 +16,7 @@ extern unsigned char LAB_0020ef5c; /* 0x20ef5c */
 extern int *g_popupState; /* 0x58104c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
@@ -87,12 +87,12 @@ unsigned int FUN_0020ecd4(void)
             rt_memcpy(temp_v6,temp_v0,0x40);
             temp_v0 = playerHasFlagBit(5);
             if (temp_v0 != 0) {
-              FUN_00100388((int)g_popupState + 0x25,temp_v6,&LAB_0020ef4c);
+              textFormatBuffer((int)g_popupState + 0x25,temp_v6,&LAB_0020ef4c);
             }
             else {
               temp_v0 = playerHasFlagBit(9);
               if (temp_v0 != 0) {
-                FUN_00100388((int)g_popupState + 0x25,temp_v6,&LAB_0020ef5c);
+                textFormatBuffer((int)g_popupState + 0x25,temp_v6,&LAB_0020ef5c);
               }
             }
             g_popupState[5] = (int)g_popupState + 0x25;

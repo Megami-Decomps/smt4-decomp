@@ -1,25 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f8f54` (_code @ 0x3f8f54, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vmov s0, r0 where the compiled block uses vldr s0, [r4, #12]. */
+#include "common.h"
 
-extern "C" {
+struct FloatRange {
+    u32 unk00;       // 0x00
+    u32 unk04;       // 0x04
+    f32 scale;       // 0x08
+    f32 bias;        // 0x0C
+};
 
-int VectorUnsignedToFloat(unsigned int, int);
+extern "C" const u32* FUN_003f89f8(const FloatRange* range);
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int *FUN_003f89f8(void);
-
-
-unsigned int FUN_003f8f54(void)
-
+extern "C" f32 FUN_003f8f54(const FloatRange* range)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int in_fpscr;
-  
-  puVar1 = (unsigned int *)FUN_003f89f8();
-  VectorUnsignedToFloat(*puVar1 >> 0xc,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return *puVar1 >> 0xc;
+    const u32* sample = FUN_003f89f8(range);
+    const u32 value = *sample >> 12;
+    return static_cast<f32>(value) * range->scale + range->bias;
 }
-
-} /* extern "C" */

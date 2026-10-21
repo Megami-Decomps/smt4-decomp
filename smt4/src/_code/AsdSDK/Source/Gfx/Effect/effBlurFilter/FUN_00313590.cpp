@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024b77c(int);
+int randomAdvanceShiftRegister(int);
 int FUN_0024b830(int);
 int memAlloc(int, int, int, int, int, int);
 int VectorSignedToFloat(int, int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -54,7 +54,7 @@ int FUN_00313590(int *param_1)
     temp_v13 = 0x408487ee;
     do {
       puVar4 = (unsigned int *)(temp_v0 + temp_v3 * 0x34);
-      FUN_0024b77c(0);
+      randomAdvanceShiftRegister(0);
       __aeabi_uidivmod();
       *puVar4 = temp_v1;
       puVar4[1] = temp_v12;

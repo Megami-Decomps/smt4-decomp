@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002118e4(int value);
+int messageSetTargetState(int value);
 int FUN_00250d84(u32 a, int b);
 int FUN_00295a18(u32 a, int b);
 int scrGetArg(int index);
@@ -21,7 +21,7 @@ u32 FUN_002dba38(void)
     }
     if (FUN_002cdc00() != 0) {
         eventQueueAddUnique(0x1000174);
-        FUN_002118e4(b);
+        messageSetTargetState(b);
     }
     return 1;
 }

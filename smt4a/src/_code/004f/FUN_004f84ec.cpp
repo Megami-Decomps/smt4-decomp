@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemFree(...);
 int FUN_002804b0(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -36,7 +36,7 @@ unsigned int FUN_004f84ec(int param_1)
   *(unsigned char *)(param_1 + 0x30dc) = 0;
   sysMemClear(temp_v1,0x80);
   sysMemClear(temp_v2,0x80);
-  FUN_00100388(temp_v2,"battle/effect/%s.eft","ef_d_niyari");
+  textFormatBuffer(temp_v2,"battle/effect/%s.eft","ef_d_niyari");
   libc_strcpy(temp_v1,temp_v2);
   temp_v0 = FUN_00100d60(temp_v1,0x2f);
   libc_strcpy(param_1 + 0x305c,temp_v0 + 1);

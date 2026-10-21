@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022dde8(...);
 int FUN_0022e2fc(void);
-int FUN_0023266c(...);
+int rectangleInitializeSelection(...);
 int FUN_00233228(void);
 int FUN_0023346c(...);
 int FUN_00233670(...);
@@ -42,7 +42,7 @@ extern int *DAT_0043d990; /* 0x43d990 */
 
 /* Supplied declaration required: FUN_0022dde8. */
 /* Supplied declaration required: FUN_0022e2fc. */
-/* Supplied declaration required: FUN_0023266c. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_00233228. */
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: FUN_00233670. */
@@ -156,10 +156,10 @@ void FUN_003a8fe0(int *param_1)
   FUN_0023346c(param_1 + 0x37);
   fileSlotLoad(0x22);
   if ((char)param_1[0x169] != '\0') {
-    FUN_0023266c(param_1 + 0x32,0x140,0,0x1c);
+    rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1c);
   }
   else {
-    FUN_0023266c(param_1 + 0x32,0x140,0,0x1d);
+    rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1d);
   }
   param_1[5] = 0;
   param_1[6] = 0;

@@ -42,7 +42,7 @@ extern unsigned int DAT_0063fd8c; /* 0x63fd8c */
 extern unsigned char DAT_0063fd90; /* 0x63fd90 */
 extern unsigned int DAT_0063fda0; /* 0x63fda0 */
 extern unsigned int DAT_0063fda4; /* 0x63fda4 */
-extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int g_asdGxSecondaryPreset; /* 0x63fdb4 */
 extern unsigned int DAT_0063fdb8; /* 0x63fdb8 */
 extern unsigned char DAT_0063fdbc; /* 0x63fdbc */
 extern unsigned int DAT_0063fdcc; /* 0x63fdcc */
@@ -197,7 +197,7 @@ void FUN_00139c90(unsigned int *param_1)
   DAT_0063fdb8 = temp_v7;
   DAT_0063fdcc = 0xf0;
   DAT_0063fdd0 = 400;
-  DAT_0063fdb4 = temp_v6;
+  g_asdGxSecondaryPreset = temp_v6;
   asdGfxSetMode(temp_v6);
   FUN_00149950(DAT_0063fdb8,&DAT_0063fdbc);
   temp_v2 = 0;

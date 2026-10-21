@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00261424(void);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00327350; /* 0x327350 */
 extern unsigned char LAB_00327380; /* 0x327380 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00261424. */
 extern short *dataTable4CGetEntry(unsigned int);
 
@@ -85,17 +85,17 @@ void FUN_0032725c(unsigned int param_1,unsigned int param_2,int param_3)
     temp_v0 = FUN_00261424();
     if (temp_v0 != 0) {
       temp_v1 = FUN_00261424();
-      FUN_00100388(param_2,&LAB_00327350,temp_v1,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
+      textFormatBuffer(param_2,&LAB_00327350,temp_v1,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
       return;
     }
-    FUN_00100388(param_2,&LAB_00327380,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
+    textFormatBuffer(param_2,&LAB_00327380,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
     return;
   }
   if (param_3 != 0) {
-    FUN_00100388(param_2,&LAB_00327350,param_3,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
+    textFormatBuffer(param_2,&LAB_00327350,param_3,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
     return;
   }
-  FUN_00100388(param_2,&LAB_00327380,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
+  textFormatBuffer(param_2,&LAB_00327380,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
   return;
 }
 

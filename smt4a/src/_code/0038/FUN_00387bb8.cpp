@@ -6,7 +6,7 @@ extern "C" {
 
 int linkHolderApplyFlag(unsigned int, int);
 int cecProcessForward(int);
-int FUN_002e264c(int);
+int campCecDispatchMode(int);
 int FUN_002e2680(int);
 int rt_aeabi_memclr(int, int);
 int FUN_002f4014(int);
@@ -42,10 +42,10 @@ struct fn_00387bb8_arg0 {
 
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_00284e94(void);
-extern int FUN_002a2cf0(void);
+extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: cecProcessForward. */
 extern int FUN_002c334c(void);
-/* Supplied declaration required: FUN_002e264c. */
+/* Supplied declaration required: campCecDispatchMode. */
 /* Supplied declaration required: FUN_002e2680. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f4014. */
@@ -71,7 +71,7 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
     if (param_1->field_0x108 == 0) {
       FUN_0032e25c(param_1->field_0x8,0);
     }
-    temp_v0 = FUN_002a2cf0();
+    temp_v0 = cecQueryOptionalProcess();
     if ((temp_v0 != 0) && (temp_v0 = gameDataTestFlags(0x20), temp_v0 != 0)) {
       cecProcessCall2();
       cecProcessForward(param_1->field_0x8);
@@ -81,7 +81,7 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
     }
     FUN_003a4980(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8,
                  *(unsigned int *)&param_1->field_0x58);
-    FUN_002e264c(param_1->field_0x8);
+    campCecDispatchMode(param_1->field_0x8);
     FUN_002f4014(param_1->field_0x8);
     linkHolderApplyFlag(*(unsigned int *)&param_1->field_0x4,1);
     param_1->field_0xe8 = 0xffffffff;

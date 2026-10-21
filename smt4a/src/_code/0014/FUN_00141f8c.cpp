@@ -9,10 +9,10 @@ int FUN_00154bbc(...);
 int FUN_00167f24(...);
 int rt_memcpy_w(...);
 
-int FUN_00100388(unsigned char [128], unsigned char *);
+int textFormatBuffer(unsigned char [128], unsigned char *);
 int wstrBufferPutChar(...);
 int FUN_0014f2a8(...);
-int FUN_00151e34(...);
+int uiGetTableEntry(...);
 int FUN_0015f858(unsigned int, int);
 int FUN_0016432c(int);
 int FUN_001654f0(...);
@@ -36,12 +36,12 @@ extern unsigned char LAB_00142870; /* 0x142870 */
 #define ROMWRIGHT_PIECE_1_1_DEFINED
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(unsigned short);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_0014f2a8. */
-/* Supplied declaration required: FUN_00151e34. */
+/* Supplied declaration required: uiGetTableEntry. */
 extern int FUN_001527e4(short);
 extern int FUN_00153588(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
@@ -122,10 +122,10 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
                 *param_4 = *param_4 + 1;
                 return 1;
               }
-              FUN_00100388(temp_v9,&LAB_001423b4);
+              textFormatBuffer(temp_v9,&LAB_001423b4);
             }
             else {
-              FUN_00100388(temp_v9,&LAB_001423a0);
+              textFormatBuffer(temp_v9,&LAB_001423a0);
             }
           }
           else {
@@ -141,7 +141,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         return 1;
       }
       if (param_1 == 0xf871) {
-        temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 7);
+        temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 7);
         libc_strcpy(temp_v9,temp_v5);
         *param_4 = *param_4 + 1;
         wstrBufferPutChar(param_3,param_5,0x12f8,param_6);
@@ -165,12 +165,12 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
         }
         else {
-          temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 7);
+          temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 7);
           FUN_0014f2a8(param_3,param_5,temp_v5,param_6);
         }
       }
       else {
-        temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) - 1);
+        temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) - 1);
         libc_strcpy(temp_v9,temp_v5);
         FUN_001654f0(temp_v9,temp_v10);
         FUN_0014f2a8(param_3,param_5,temp_v10,param_6);
@@ -186,15 +186,15 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         FUN_0014f2a8(param_3,param_5,temp_v9,param_6);
         break;
       case 0xf877:
-        temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0x13);
+        temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0x13);
         FUN_0014f2a8(param_3,param_5,temp_v5,param_6);
         break;
       case 0xf878:
-        temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0x17);
+        temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0x17);
         FUN_0014f2a8(param_3,param_5,temp_v5,param_6);
         break;
       case 0xf879:
-        temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0x1f);
+        temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0x1f);
         FUN_0014f2a8(param_3,param_5,temp_v5,param_6);
         break;
       case 0xf87a:
@@ -265,38 +265,38 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         case 2:
         case 7:
         case 0xe:
-          temp_v5 = FUN_00151e34(0x24);
+          temp_v5 = uiGetTableEntry(0x24);
           libc_strcpy(temp_v9,temp_v5);
           break;
         case 1:
         case 3:
         case 8:
         case 0xf:
-          temp_v5 = FUN_00151e34(0x25);
+          temp_v5 = uiGetTableEntry(0x25);
           libc_strcpy(temp_v9,temp_v5);
           break;
         case 4:
         case 9:
-          temp_v5 = FUN_00151e34(0x26);
+          temp_v5 = uiGetTableEntry(0x26);
           libc_strcpy(temp_v9,temp_v5);
           break;
         case 5:
         case 10:
-          temp_v5 = FUN_00151e34(0x27);
+          temp_v5 = uiGetTableEntry(0x27);
           libc_strcpy(temp_v9,temp_v5);
           break;
         case 6:
         case 0xb:
-          temp_v5 = FUN_00151e34(0x28);
+          temp_v5 = uiGetTableEntry(0x28);
           libc_strcpy(temp_v9,temp_v5);
           break;
         case 0xc:
         case 0x10:
-          temp_v5 = FUN_00151e34(0x29);
+          temp_v5 = uiGetTableEntry(0x29);
           libc_strcpy(temp_v9,temp_v5);
           break;
         case 0xd:
-          temp_v5 = FUN_00151e34(0x2a);
+          temp_v5 = uiGetTableEntry(0x2a);
           libc_strcpy(temp_v9,temp_v5);
           break;
         default:
@@ -319,7 +319,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
     }
   }
   else {
-    temp_v5 = FUN_00151e34(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0xf);
+    temp_v5 = uiGetTableEntry(*(unsigned short *)(param_2 + *param_4 * 2 + 2) + 0xf);
     libc_strcpy(temp_v9,temp_v5);
     FUN_001654f0(temp_v9,temp_v10);
     FUN_0014f2a8(param_3,param_5,temp_v10,param_6);

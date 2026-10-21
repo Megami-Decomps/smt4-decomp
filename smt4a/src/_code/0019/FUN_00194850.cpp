@@ -1,20 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00194850` (_code @ 0x194850, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-
-unsigned int FUN_00194850(int param_1)
-
+/* Reads an optional nested value. */
+u32 FUN_00194850(const OptionalValueOwner *owner)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (*(unsigned int **)(param_1 + 8) != (unsigned int *)0x0) {
-    temp_v0 = **(unsigned int **)(param_1 + 8);
-  }
-  return temp_v0;
+    return owner->value != NULL ? *owner->value : 0;
 }
 
 } /* extern "C" */

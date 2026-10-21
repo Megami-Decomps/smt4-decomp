@@ -12,7 +12,7 @@ int FUN_00295660(...);
 int FUN_00296ae8(...);
 int FUN_0029ede8(...);
 int devilGetRecord(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 typedef struct fn_0029da34_arg2 fn_0029da34_arg2;
 struct fn_0029da34_arg2 {
@@ -47,7 +47,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_00296ae8. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_0029da34(int param_1,unsigned int param_2,fn_0029da34_arg2 *param_3,unsigned int param_4)
@@ -78,7 +78,7 @@ void FUN_0029da34(int param_1,unsigned int param_2,fn_0029da34_arg2 *param_3,uns
     else {
       FUN_002907c4(&temp_v2);
       FUN_002907c4(temp_v3,(pfVar3->field_0x8 & 0x7ff) >> 8);
-      FUN_002be624(temp_v4,&LAB_0029dc18,&temp_v2,temp_v3);
+      textFormatBuffer(temp_v4,&LAB_0029dc18,&temp_v2,temp_v3);
       FUN_00295660(0x25,temp_v4);
     }
     FUN_0024bda8(temp_v4,pfVar3->field_0xa);
@@ -86,25 +86,25 @@ void FUN_0029da34(int param_1,unsigned int param_2,fn_0029da34_arg2 *param_3,uns
     FUN_0024bc98(temp_v4,(pfVar3->field_0x8 & 0x1f) >> 1);
     FUN_00295660(0x27,temp_v4);
     if (pfVar3->field_0xc == 0) {
-      FUN_002be624(temp_v4,&LAB_0029dc20);
+      textFormatBuffer(temp_v4,&LAB_0029dc20);
     }
     if (pfVar3->field_0xc == 1) {
-      FUN_002be624(temp_v4,&LAB_0029dc2c);
+      textFormatBuffer(temp_v4,&LAB_0029dc2c);
     }
     if (pfVar3->field_0xc == 5) {
-      FUN_002be624(temp_v4,&LAB_0029dc34);
+      textFormatBuffer(temp_v4,&LAB_0029dc34);
     }
     if (pfVar3->field_0xc == 6) {
-      FUN_002be624(temp_v4,&LAB_0029dc44);
+      textFormatBuffer(temp_v4,&LAB_0029dc44);
     }
     if (pfVar3->field_0xc == 7) {
-      FUN_002be624(temp_v4,&LAB_0029dc50);
+      textFormatBuffer(temp_v4,&LAB_0029dc50);
     }
     if (pfVar3->field_0xc == 8) {
-      FUN_002be624(temp_v4,&LAB_0029dc5c);
+      textFormatBuffer(temp_v4,&LAB_0029dc5c);
     }
     if (pfVar3->field_0xc == 9) {
-      FUN_002be624(temp_v4,&LAB_0029dc68);
+      textFormatBuffer(temp_v4,&LAB_0029dc68);
     }
     FUN_00295660(0x28,temp_v4);
     FUN_001f4568(0,param_4,param_3,temp_v4);

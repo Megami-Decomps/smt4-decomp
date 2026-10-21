@@ -1,31 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e3cb8` (_code @ 0x2e3cb8, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'movs r5, r0'; compiler emits 'mov r5, r0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-typedef int romwright_code(...);
-extern int *FUN_002e2a98(void);
-
-
-unsigned int FUN_002e3cb8(unsigned short *param_1,int param_2,unsigned int param_3)
-
-{
-  int *piVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  piVar1 = (int *)FUN_002e2a98();
-  temp_v1 = *piVar1;
-  if (*(char *)(temp_v1 + 0x101) == '\x01') {
-    temp_v0 = (*(romwright_code *)(temp_v1 + *(int *)(temp_v1 + 0x103) + 0x103))(param_1,param_2,param_3);
-    return temp_v0;
-  }
-  if (*(char *)(temp_v1 + param_2) != '\0') {
-    *param_1 = (short)param_2;
-    return 1;
-  }
-  return 0xffffffff;
+struct Context {
+    u8 pad[0x101];
+    u8 mode;
+    u8 gap;
+    s8 callbackOffset;
+};
+Context **FUN_002e2a98();
+s16 FUN_002e3cb8(u16 *output,const u16 *input,u32 value) {
+    Context *context=*FUN_002e2a98();
+    if(context->mode==1) return (*(s16 (**)(u16 *,const u16 *,u32))((u8 *)context+context->callbackOffset+0x103))(output,input,value);
+    if(input && *input) {
+        *output=*input;
+        return 1;
+    }
+    return -1;
 }
-
-} /* extern "C" */
+}

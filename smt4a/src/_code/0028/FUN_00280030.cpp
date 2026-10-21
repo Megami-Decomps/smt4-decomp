@@ -1,22 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00280030` (_code @ 0x280030, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses push {r4, lr} where the compiled block uses add r1, r0, #768. */
+#include "common.h"
 
-extern "C" {
+struct StatusData {
+    u8 unk00[0x50];
+    s16 mode;             // 0x50
+    u8 unk52[2];
+    u8 flag;              // 0x54
+    u8 unk55[0x35];
+    s8 value;             // 0x8A
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+struct StatusObject {
+    u8 unk00[0x2DC];
+    StatusData status;    // 0x2DC
+};
 
-
-int FUN_00280030(int param_1)
-
+extern "C" s32 FUN_00280030(StatusObject* object)
 {
-  if ((*(short *)(param_1 + 0x32c) == 3) && (*(char *)(param_1 + 0x330) == '\0')) {
-    return (int)*(char *)(param_1 + 0x366);
-  }
-  return 1;
+    if (object->status.mode == 3 && object->status.flag == 0) {
+        return object->status.value;
+    }
+    return 1;
 }
-
-} /* extern "C" */

@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_001c0298; not written yet. */
+/* NON_MATCHING: fragment of a larger function (restores a 420-byte frame and registers without creating that frame). */
 #include "common.h"

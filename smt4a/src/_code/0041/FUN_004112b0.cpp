@@ -1,14 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004112b0` (_code @ 0x4112b0, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_004112b0(void)
-
-{
-  return;
-}
-
-} /* extern "C" */
+#include "common.h"
+struct Vector3 { f32 x,y,z; };
+struct VectorEntry { Vector3 value; u8 unk0C[0x10]; };
+struct VectorOwner { u8 unk00[0x34]; VectorEntry entries[1]; };
+/* Returns an indexed vector. */
+extern "C" Vector3 FUN_004112b0(VectorOwner *owner, u32 index) { return owner->entries[index].value; }

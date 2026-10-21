@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026b780(...);
+int recordContainsPairedId(...);
 int devilGetRecord(void);
 
 typedef struct fn_003c202c_arg0 fn_003c202c_arg0;
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0026b780. */
+/* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: devilGetRecord. */
 
 
@@ -85,7 +85,7 @@ unsigned int FUN_003c202c(fn_003c202c_arg0 *param_1,int param_2,int param_3)
       temp_v3 = temp_v7;
       if ((*(short *)(temp_v2 + 0x4e) != 0) &&
          (*(unsigned short *)(temp_v2 + 0x4c) > (unsigned short)param_1->field_0x48)) {
-        temp_v3 = FUN_0026b780(param_1);
+        temp_v3 = recordContainsPairedId(param_1);
         if (temp_v3 == 0) {
           temp_v8[temp_v7 * 2] = *(unsigned short *)(temp_v1 + temp_v6 * 4 + 0x4c);
           temp_v3 = temp_v7 + 1;
@@ -108,13 +108,13 @@ unsigned int FUN_003c202c(fn_003c202c_arg0 *param_1,int param_2,int param_3)
         temp_v1 = (unsigned int)temp_v8[temp_v7 * 2];
         if (((param_1->field_0x48 < temp_v1) &&
             ((int)temp_v1 <= (int)((unsigned int)param_1->field_0x48 + param_2))) &&
-           (temp_v5 = FUN_0026b780(param_1), temp_v5 == 0)) {
+           (temp_v5 = recordContainsPairedId(param_1), temp_v5 == 0)) {
           temp_v5 = temp_v4 * 2;
           temp_v4 = temp_v4 + 1;
           *(unsigned short *)(temp_v9 + temp_v5) = temp_v8[temp_v7 * 2 + 1];
         }
         if (((int)((unsigned int)param_1->field_0x48 + param_2) < (int)(unsigned int)temp_v8[temp_v7 * 2]) &&
-           (temp_v5 = FUN_0026b780(param_1,temp_v8[temp_v7 * 2 + 1]), temp_v5 == 0)) {
+           (temp_v5 = recordContainsPairedId(param_1,temp_v8[temp_v7 * 2 + 1]), temp_v5 == 0)) {
           temp_v0 = 0;
         }
       }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00280bd0(unsigned char [132], int, int, int, unsigned int, int, int);
 int FUN_002c7388(...);
 int asdSaveWriteBlock(int, unsigned char [128], unsigned char [132], unsigned int, unsigned int);
@@ -25,7 +25,7 @@ extern int DAT_0057f6d0; /* 0x57f6d0 */
 extern unsigned int DAT_0057f6d8; /* 0x57f6d8 */
 extern unsigned char DAT_005e2114; /* 0x5e2114 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00280bd0. */
 /* Supplied declaration required: FUN_002c7388. */
 /* Supplied declaration required: asdSaveWriteBlock. */
@@ -53,7 +53,7 @@ void FUN_00349ca4(unsigned int param_1)
   if (temp_v1 != 1) {
     temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 8);
     rt_aeabi_memclr(&DAT_005e2114,0x80);
-    FUN_00100388(&DAT_005e2114,"sdds4game%d.sav",temp_v3);
+    textFormatBuffer(&DAT_005e2114,"sdds4game%d.sav",temp_v3);
   }
   else {
     FUN_00399c90(1,&LAB_00349e54);
@@ -64,7 +64,7 @@ void FUN_00349ca4(unsigned int param_1)
     }
     temp_v3 = *(unsigned int *)(DAT_0057f6d0 + 8);
     rt_aeabi_memclr(&DAT_005e2114,0x80);
-    FUN_00100388(&DAT_005e2114,"%ssdds4game%d.sav","sdds4/",temp_v3);
+    textFormatBuffer(&DAT_005e2114,"%ssdds4game%d.sav","sdds4/",temp_v3);
   }
   libc_strcpy(temp_v4,&DAT_005e2114);
   FUN_00280bd0(temp_v5,0x34534444,0x454d4147,0,*(unsigned int *)(DAT_0057f6d0 + 0x18),0,0);

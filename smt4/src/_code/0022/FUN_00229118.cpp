@@ -43,7 +43,7 @@ extern unsigned int g_btlAction; /* 0x434278 */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00246134. */
 /* Supplied declaration required: FUN_00247478. */
-extern int FUN_00255158(unsigned int, unsigned int);
+extern int battleGetEntryHalfword(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
@@ -155,11 +155,11 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
       temp_v11 = 0;
       FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),temp_v13 + 5,&temp_v11);
       if (temp_v11 != 0) {
-        temp_v3 = FUN_00255158(param_3,0x13);
+        temp_v3 = battleGetEntryHalfword(param_3,0x13);
         temp_v5 = (unsigned int)(0 < temp_v3);
       }
       else {
-        temp_v3 = FUN_00255158(param_3,0x12);
+        temp_v3 = battleGetEntryHalfword(param_3,0x12);
         temp_v6 = 0 < temp_v3;
       }
     }
@@ -268,11 +268,11 @@ LAB_002292ac:
         temp_v12 = 0;
         FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v16,&temp_v12);
         if (temp_v12 != 0) {
-          temp_v2 = FUN_00255158(temp_v9,0x13);
+          temp_v2 = battleGetEntryHalfword(temp_v9,0x13);
           temp_v8 = (unsigned int)(0 < temp_v2);
         }
         else {
-          temp_v2 = FUN_00255158(temp_v9,0x12);
+          temp_v2 = battleGetEntryHalfword(temp_v9,0x12);
           temp_v5 = (unsigned int)(0 < temp_v2);
         }
       }

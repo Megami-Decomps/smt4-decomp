@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd76c(void);
+int controllerSetDestination(void);
 int FUN_00401b50(int, float *);
 int FUN_0040619c(int, int);
 
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_00401b50. */
 /* Supplied declaration required: FUN_0040619c. */
 
@@ -47,7 +47,7 @@ void FUN_00420e4c(int param_1,unsigned int *param_2)
           temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
           FUN_0040619c(temp_v0,temp_v1);
           if (temp_v0 != 0) {
-            FUN_003fd76c();
+            controllerSetDestination();
           }
           temp_v1 = temp_v1 + 1;
         } while (temp_v1 < temp_v2);

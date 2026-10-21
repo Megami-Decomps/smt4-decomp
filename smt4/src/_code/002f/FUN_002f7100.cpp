@@ -1,29 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f7100` (_code @ 0x2f7100, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler materializes the stats member offset in a literal instead of retail split immediate additions. */
+#include "common.h"
+
+namespace { struct Stats { u8 padding[0x126]; u16 values[1]; }; struct Unit { u8 padding[0x28]; Stats *stats; }; }
 
 extern "C" {
-
-int scrSetResult(int);
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern int scrGetArg(void);
-
-
-unsigned int FUN_002f7100(void)
-
+extern u32 g_btlScriptUnit;
+u32 scrGetArg(u32 index);
+Unit *btlUnitGet(u32 id);
+void scrSetResult(u32 value);
+u32 FUN_002f7100(u32 argument)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  scrSetResult(*(unsigned short *)(*(int *)(temp_v1 + 0x28) + temp_v0 * 2 + 0x126) >> 10 == 1);
-  return 1;
+    u32 index = scrGetArg(argument);
+    Unit *unit = btlUnitGet(g_btlScriptUnit);
+    scrSetResult((unit->stats->values[index] >> 10) == 1);
+    return 1;
 }
-
-} /* extern "C" */
+}

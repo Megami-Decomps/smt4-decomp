@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0024ee4c(unsigned char *, unsigned char *);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strlen(...);
 int SUB84(double, int);
 int VectorSignedToFloat(int, int);
@@ -24,7 +24,7 @@ extern unsigned char LAB_00259dc4; /* 0x259dc4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_0024ee4c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int *jobGetWork(void);
 /* Supplied declaration required: libc_strlen. */
 
@@ -62,7 +62,7 @@ void asdListBoxMarkDirty(void)
       temp_v1 = (*(romwright_code *)piVar1[0x20])(temp_v0 + 6);
       switch(*(unsigned char *)(temp_v0 + 4)) {
       case 1:
-        FUN_002be624(temp_v8,&LAB_00259da8,temp_v0 + 0x106);
+        textFormatBuffer(temp_v8,&LAB_00259da8,temp_v0 + 0x106);
         temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
         temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
         break;
@@ -73,18 +73,18 @@ void asdListBoxMarkDirty(void)
         break;
       case 3:
         if (*(char *)(temp_v0 + 5) != '\0') {
-          FUN_002be624(temp_v8,&LAB_00259db4,*(unsigned int *)(temp_v0 + 0x208));
+          textFormatBuffer(temp_v8,&LAB_00259db4,*(unsigned int *)(temp_v0 + 0x208));
           temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
           temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
         }
         else {
-          FUN_002be624(temp_v8,&LAB_00259dbc,*(unsigned int *)(temp_v0 + 0x208));
+          textFormatBuffer(temp_v8,&LAB_00259dbc,*(unsigned int *)(temp_v0 + 0x208));
           temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
           temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];
         }
         break;
       case 4:
-        FUN_002be624(temp_v8,&LAB_00259dc4,SUB84((double)*(float *)(temp_v0 + 0x20c),0),
+        textFormatBuffer(temp_v8,&LAB_00259dc4,SUB84((double)*(float *)(temp_v0 + 0x20c),0),
                      (int)((unsigned long long)(double)*(float *)(temp_v0 + 0x20c) >> 0x20));
         temp_v0 = (*(romwright_code *)piVar1[0x20])(temp_v8);
         temp_v1 = temp_v0 + temp_v1 + piVar1[0x16];

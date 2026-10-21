@@ -1,31 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d0014` (_code @ 0x2d0018, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail emits 'ldr r0, [pc, #16]'; compiler emits 'ldr r0, [pc, #20]' at the first differing instruction. */
+#include "common.h"
 
 extern "C" {
-
-extern unsigned char DAT_005f0c7c; /* 0x5f0c7c */
-
-extern int gameFlagIsSet(void);
-
-
-unsigned int FUN_002d0014(void)
-
-{
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = gameFlagIsSet();
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    if ((*(int *)((unsigned char *)&DAT_005f0c7c + 0x2c)) == 9) {
-      temp_v1 = 1;
-    }
-    else {
-      temp_v1 = 0;
-    }
-  }
-  return temp_v1;
+s32 gameFlagIsSet(u32); extern struct { u8 pad[0x2C]; s32 mode; } g_battleViewState;
+s32 FUN_002d0014() { return gameFlagIsSet(0x4D0) != 0 && g_battleViewState.mode == 9; }
 }
-
-} /* extern "C" */

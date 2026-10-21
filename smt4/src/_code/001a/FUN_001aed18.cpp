@@ -14,7 +14,7 @@ int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
@@ -57,7 +57,7 @@ extern int FUN_002bce00(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -149,11 +149,11 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     temp_v2 = FUN_002bf4f8(0x1d,0x444);
     if ((int)temp_v8 < 0) {
       temp_v4 = FUN_0029a9d4(temp_v9,1);
-      FUN_002be624(temp_v10,&LAB_001af104,temp_v4);
+      textFormatBuffer(temp_v10,&LAB_001af104,temp_v4);
     }
     else {
       temp_v4 = FUN_0029a924(temp_v9);
-      FUN_002be624(temp_v10,&LAB_001af104,temp_v4);
+      textFormatBuffer(temp_v10,&LAB_001af104,temp_v4);
     }
     FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,4,0x6f,
@@ -236,11 +236,11 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     temp_v1 = FUN_002bf4f8(0x1d,0x44d);
     if ((int)temp_v8 < 0) {
       temp_v4 = FUN_0029a9d4(temp_v9,1);
-      FUN_002be624(temp_v10,&LAB_001af104,temp_v4);
+      textFormatBuffer(temp_v10,&LAB_001af104,temp_v4);
     }
     else {
       temp_v4 = FUN_0029a924(temp_v9);
-      FUN_002be624(temp_v10,&LAB_001af104,temp_v4);
+      textFormatBuffer(temp_v10,&LAB_001af104,temp_v4);
     }
     FUN_002bdf94(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,1,4,0x83,
@@ -276,7 +276,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
   if (temp_v5 < 1) {
     FUN_002bf380(2,0x1a,0x1b,param_1,param_2,0xdd);
     temp_v5 = FUN_002bf4f8(0x1a,0x544);
-    FUN_002be624(temp_v10,&LAB_001af638);
+    textFormatBuffer(temp_v10,&LAB_001af638);
     puVar7 = temp_v10;
     FUN_002b6dd8(puVar7,2);
     VectorSignedToFloat(param_1 + (int)*(short *)(temp_v5 + 8) +

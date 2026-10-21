@@ -22,7 +22,7 @@ typedef struct ContextHolder {
 extern ContextHolder g_btlUi;
 
 extern void memFill8(Settings *settings, s32 arg);
-extern u16 FUN_0022c930(u32 owner, s32 index);
+extern u16 slotFindNonnegativeRank(u32 owner, s32 index);
 extern void FUN_002ad8a8(void *dest, Settings *settings);
 
 void FUN_00254e4c(void)
@@ -30,10 +30,10 @@ void FUN_00254e4c(void)
     Context *context = g_btlUi.context;
 
     memFill8(&context->settings, -1);
-    context->settings.value[0] = FUN_0022c930(context->owner, 0);
-    context->settings.value[1] = FUN_0022c930(context->owner, 1);
-    context->settings.value[2] = FUN_0022c930(context->owner, 2);
-    context->settings.value[3] = FUN_0022c930(context->owner, 3);
+    context->settings.value[0] = slotFindNonnegativeRank(context->owner, 0);
+    context->settings.value[1] = slotFindNonnegativeRank(context->owner, 1);
+    context->settings.value[2] = slotFindNonnegativeRank(context->owner, 2);
+    context->settings.value[3] = slotFindNonnegativeRank(context->owner, 3);
     FUN_002ad8a8(context->unk2460, &context->settings);
 }
 

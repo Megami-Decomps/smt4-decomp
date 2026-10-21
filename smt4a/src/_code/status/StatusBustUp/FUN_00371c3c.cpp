@@ -9,7 +9,7 @@ int FUN_00184310(void);
 int dataTable00FindById(void);
 int FUN_001a6508(...);
 int FUN_001a6568(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern int DAT_00588fdc; /* 0x588fdc */
@@ -21,7 +21,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_001a6508. */
 /* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 
 
 void FUN_00371c3c(unsigned int param_1,int param_2)
@@ -58,7 +58,7 @@ void FUN_00371c3c(unsigned int param_1,int param_2)
                 FUN_001a6568(g_aocSystem,0x19,temp_v0,0x10000);
               }
               else {
-                FUN_001acf98(0x19,temp_v0);
+                asdTMTexLoadMainHeap(0x19,temp_v0);
               }
             }
             *(char *)(DAT_00588fe0 + temp_v0) = *(char *)(DAT_00588fe0 + temp_v0) + '\x01';
@@ -84,7 +84,7 @@ void FUN_00371c3c(unsigned int param_1,int param_2)
       FUN_001a6568(g_aocSystem,0xf,param_1,0x10000);
     }
     else {
-      FUN_001acf98(0xf,param_1);
+      asdTMTexLoadMainHeap(0xf,param_1);
     }
   }
   *(char *)(DAT_00588fdc + param_1) = *(char *)(DAT_00588fdc + param_1) + '\x01';

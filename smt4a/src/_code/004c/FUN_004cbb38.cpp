@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int sysPlaySe(...);
 int FUN_00184310(...);
 int FUN_0019de98(...);
@@ -49,7 +49,7 @@ struct fn_004cbb38_arg0_p2c {
     ushort field_0x6; /* +0x6 */
 };
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -65,7 +65,7 @@ extern int FUN_003316b4(int);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 extern int loadSlotIsLoaded(unsigned int);
-extern unsigned int FUN_004bca68(int, short);
+extern unsigned int recordContainsPairedId(int, short);
 
 
 void FUN_004cbb38(fn_004cbb38_arg0 *param_1)
@@ -91,7 +91,7 @@ void FUN_004cbb38(fn_004cbb38_arg0 *param_1)
       temp_v1 = gameGetSlotRecord(temp_v5);
       if ((temp_v1 != 0) && (*(short *)(temp_v1 + 0x62) == *psVar2)) {
         if (-1 < temp_v5) {
-          temp_v2 = FUN_004bca68(temp_v1,psVar2[1]);
+          temp_v2 = recordContainsPairedId(temp_v1,psVar2[1]);
           temp_v6 = temp_v2 != 0;
           if (!temp_v6) {
             temp_v2 = (unsigned int)(unsigned short)psVar2[3];
@@ -140,7 +140,7 @@ LAB_004cbbbc:
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
       FUN_00184310();
       temp_v3 = FUN_003316b4((int)*(char *)(temp_v2 + 0x38));
-      FUN_00100388(temp_v7,"battle/DevilMsg/%s.mbm",temp_v3 + 1);
+      textFormatBuffer(temp_v7,"battle/DevilMsg/%s.mbm",temp_v3 + 1);
       FUN_0020214c();
       *(unsigned char **)&param_1->field_0x24 = puVar6;
       temp_v4 = *(unsigned int *)&param_1->field_0x1c;

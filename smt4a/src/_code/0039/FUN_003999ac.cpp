@@ -6,7 +6,7 @@ extern "C" {
 
 int asdModelCommandBlockRelease(void);
 int FUN_00167ba0(void);
-int FUN_0036bbe0(void);
+int asdGxGetPresetIndex(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern int DAT_005b3fe8; /* 0x5b3fe8 */
 /* Supplied declaration required: FUN_00167ba0. */
 extern unsigned int FUN_00169d8c(void);
 extern unsigned int FUN_00169db4(void);
-/* Supplied declaration required: FUN_0036bbe0. */
+/* Supplied declaration required: asdGxGetPresetIndex. */
 
 
 void FUN_003999ac(unsigned int param_1)
@@ -34,9 +34,9 @@ void FUN_003999ac(unsigned int param_1)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  FUN_0036bbe0();
+  asdGxGetPresetIndex();
   temp_v1 = FUN_00169d8c();
-  FUN_0036bbe0();
+  asdGxGetPresetIndex();
   temp_v2 = FUN_00169db4();
   FUN_00167ba0();
   temp_v0 = DAT_005b3fe4;

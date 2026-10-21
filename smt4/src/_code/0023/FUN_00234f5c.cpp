@@ -9,7 +9,7 @@ int asdMdlManagerCreateLoaded(unsigned char [128], int);
 int FUN_002a0428(void);
 int FUN_002a04f0(int);
 int FUN_002a09b4(unsigned char [128], int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int memClear(unsigned int *, int);
 int FUN_00341340(unsigned int *, unsigned char [128]);
 
@@ -27,7 +27,7 @@ extern int FUN_00100c4c(int, unsigned char *);
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 extern unsigned int *FUN_002a86a4(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00341340. */
 
@@ -65,17 +65,17 @@ void FUN_00234f5c(unsigned int *param_1,unsigned int param_2,int param_3)
   *(unsigned char *)((int)param_1 + 0x15) = 0;
   memClear(param_1 + 0x15b,0x80);
   if (param_3 != 0) {
-    FUN_002be624(temp_v9,&LAB_00235200,param_3);
+    textFormatBuffer(temp_v9,&LAB_00235200,param_3);
   }
   else {
-    FUN_002be624(temp_v9,&LAB_00235200,param_2);
+    textFormatBuffer(temp_v9,&LAB_00235200,param_2);
   }
   asdMdlManagerCreateLoaded(temp_v9,7);
   param_1[7] = (unsigned int)puVar1;
   FUN_002a0428();
-  FUN_002be624(temp_v9,&LAB_00235208,param_2);
+  textFormatBuffer(temp_v9,&LAB_00235208,param_2);
   FUN_00341340(param_1,temp_v9);
-  FUN_002be624(temp_v9,&LAB_00235214,param_2);
+  textFormatBuffer(temp_v9,&LAB_00235214,param_2);
   FUN_002a09b4(temp_v9,0);
   FUN_002a04f0(0);
   temp_v3 = param_1[0x15b];
@@ -151,11 +151,11 @@ void FUN_00234f5c(unsigned int *param_1,unsigned int param_2,int param_3)
   }
   if (0 < (int)param_1[3]) {
     *(unsigned char *)((int)param_1 + 0x15) = 1;
-    FUN_002be624(temp_v9,&LAB_0023522c);
+    textFormatBuffer(temp_v9,&LAB_0023522c);
     asdMdlManagerCreateLoaded(temp_v9,7);
     param_1[9] = (unsigned int)puVar5;
     FUN_002a0428();
-    FUN_002be624(temp_v9,&LAB_0023523c);
+    textFormatBuffer(temp_v9,&LAB_0023523c);
     asdMdlManagerCreateLoaded(temp_v9,7);
     param_1[8] = (unsigned int)puVar6;
     FUN_002a0428();

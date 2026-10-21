@@ -15,7 +15,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_001879d0(int);
 int FUN_001b4a00(float *, float *);
-int FUN_001b4a20(float *, float *, float *);
+int mathMatrixTranslateLocal(float *, float *, float *);
 int FUN_001f3eec(void);
 int renderCtxCallB(float *);
 int FUN_003fabfc(...);
@@ -94,7 +94,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_001b4a00. */
-/* Supplied declaration required: FUN_001b4a20. */
+/* Supplied declaration required: mathMatrixTranslateLocal. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: renderCtxCallB. */
@@ -197,7 +197,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
             temp_v26 = temp_v12;
             temp_v35 = temp_v15;
             temp_v37 = temp_v15;
-            FUN_001b4a20(&temp_v16,&temp_v16,&temp_v34);
+            mathMatrixTranslateLocal(&temp_v16,&temp_v16,&temp_v34);
             FUN_001b4a00(&temp_v16,&temp_v36);
             renderCtxCallB(&temp_v16);
           }

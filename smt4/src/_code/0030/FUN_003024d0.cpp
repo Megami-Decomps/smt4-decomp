@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 int FUN_0024b830(int);
 
 typedef struct fn_003024d0_arg0 fn_003024d0_arg0;
@@ -38,7 +38,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 
 
@@ -106,7 +106,7 @@ void FUN_003024d0(fn_003024d0_arg0 *param_1,int param_2)
   *(float *)(param_2 + 0x10) = temp_v3 * 6.2831855f;
   if (param_1->field_0x34 == 1) {
     temp_v1 = 0;
-    FUN_0024b77c();
+    randomAdvanceShiftRegister();
     *(char *)(param_2 + 0x18) = (char)temp_v1 + (char)(temp_v1 / 6) * -6;
     return;
   }

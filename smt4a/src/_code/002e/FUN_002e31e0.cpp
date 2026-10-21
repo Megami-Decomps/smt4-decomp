@@ -1,19 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e31e0` (_code @ 0x2e31e0, 0xa bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler computes the next cursor in r3 before the byte store instead of incrementing r2 afterwards. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_002e31e0(unsigned char param_1,unsigned int *param_2)
-
+/* Appends a byte and advances the output cursor. */
+extern "C" void FUN_002e31e0(u8 value, u8 **cursor)
 {
-  unsigned char *puVar1;
-  
-  puVar1 = (unsigned char *)*param_2;
-  *puVar1 = param_1;
-  *param_2 = (unsigned int)(puVar1 + 1);
-  return;
+    u8 *output = *cursor;
+    *output = value;
+    *cursor = output + 1;
 }
-
-} /* extern "C" */

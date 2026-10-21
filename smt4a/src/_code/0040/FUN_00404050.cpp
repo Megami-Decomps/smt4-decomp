@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(...);
 int gameGetPlayerData(...);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned char LAB_004042ec; /* 0x4042ec */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -93,7 +93,7 @@ void FUN_00404050(unsigned int param_1,unsigned int param_2,int param_3,int para
       gameGetPlayerData();
       temp_v3 = FUN_0015687c();
     }
-    FUN_00100388(temp_v4,&LAB_004042ec,temp_v3);
+    textFormatBuffer(temp_v4,&LAB_004042ec,temp_v3);
     VectorSignedToFloat(temp_v1 + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v0 + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xffffffff,temp_v4);

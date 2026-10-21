@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
 /* Formats a 4-byte IPv4 address as "a.b.c.d" into `buffer`; returns the buffer, or NULL if the arguments are invalid. */
 #include "common.h"
 

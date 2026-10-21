@@ -1,19 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016917c` (_code @ 0x16917c, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
+extern u8 DAT_0052f760[];
+extern JobRecordBase *jobGetWork(u32 job);
 
-
-unsigned char FUN_0016917c(unsigned int param_1,int param_2)
-
+/* Looks up the indexed byte within the job-selected record table. */
+u32 FUN_0016917c(u32 job, u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  return *(unsigned char *)(*(int *)(temp_v0 + 8) + param_2 * 3 + 0x52f75c);
+    JobRecordBase *work = jobGetWork(job);
+    return DAT_0052f760[work->base + index * 3 - 4];
 }
 
 } /* extern "C" */

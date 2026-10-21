@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0019d390's literal pool; not written yet. */
-#include "common.h"
+#include "shard/W5_W5Match5_RecordKeys.h"
+
+extern "C" {
+
+/* Compares record keys for sorting. */
+s32 FUN_001ac8dc(const RecordSortEntry *left, const RecordSortEntry *right)
+{
+    return left->key - right->key;
+}
+
+} /* extern "C" */

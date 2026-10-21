@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
@@ -26,7 +26,7 @@ extern int g_mapDepart; /* 0x5806c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -92,7 +92,7 @@ unsigned int FUN_00329a90(void)
         temp_v5 = (float)VectorSignedToFloat((int)*(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_001835b4(2,0x13,0x1242,(int)(temp_v6 + temp_v7 + temp_v5),
                      (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10),0xb);
-        FUN_00100388(temp_v8,&LAB_00329d54,*(unsigned int *)(temp_v1 + 0x44));
+        textFormatBuffer(temp_v8,&LAB_00329d54,*(unsigned int *)(temp_v1 + 0x44));
         VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);

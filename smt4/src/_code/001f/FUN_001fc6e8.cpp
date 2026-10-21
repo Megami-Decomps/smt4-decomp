@@ -10,7 +10,7 @@ int FUN_001f7fac(...);
 int FUN_001f8290(...);
 int FUN_0021af44(...);
 int gameDataEntrySetLevel(...);
-int FUN_00254e2c(...);
+int messageForwardDefaultMode(...);
 int FUN_002903f0(void);
 int FUN_00295660(...);
 int FUN_00295ba4(...);
@@ -41,7 +41,7 @@ int FUN_00254e4c(...);
 int pickerAdvance(...);
 int FUN_00254f58(...);
 int FUN_002550d8(...);
-int FUN_00255158(...);
+int battleGetEntryHalfword(...);
 int FUN_00255180(...);
 int FUN_002551ac(...);
 int bgmStopNoForce(...);
@@ -133,12 +133,12 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_0021af44. */
 extern int gameDataEntryGetLevel(short);
 /* Supplied declaration required: gameDataEntrySetLevel. */
-/* Supplied declaration required: FUN_00254e2c. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: FUN_00254e4c. */
 /* Supplied declaration required: pickerAdvance. */
 /* Supplied declaration required: FUN_00254f58. */
 /* Supplied declaration required: FUN_002550d8. */
-/* Supplied declaration required: FUN_00255158. */
+/* Supplied declaration required: battleGetEntryHalfword. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_002551ac. */
 extern int FUN_00255de0(unsigned int, unsigned int);
@@ -516,11 +516,11 @@ void FUN_001fc6e8(unsigned int param_1)
       do {
         FUN_00255180(temp_v10,0x12,0);
         FUN_00255180(temp_v10,0x13,0);
-        temp_v3 = FUN_00255158(temp_v10,0x1b);
+        temp_v3 = battleGetEntryHalfword(temp_v10,0x1b);
         if (0 < temp_v3) {
           FUN_002550d8(temp_v10,0x1b,0xffffffff,0);
         }
-        temp_v3 = FUN_00255158(temp_v10,0x1c);
+        temp_v3 = battleGetEntryHalfword(temp_v10,0x1c);
         if (0 < temp_v3) {
           FUN_002550d8(temp_v10,0x1c,0xffffffff,0);
         }
@@ -531,7 +531,7 @@ void FUN_001fc6e8(unsigned int param_1)
       do {
         puVar16 = (unsigned int *)(*(int *)(temp_v4 + 0x1fc0) + temp_v6 * 0x288);
         if (((((*puVar16 & 1) != 0) && ((*puVar16 & 0x40) == 0)) && (-1 < (short)puVar16[2])) &&
-           (temp_v3 = FUN_00255158((int)(short)puVar16[2],0xd), 0 < temp_v3)) {
+           (temp_v3 = battleGetEntryHalfword((int)(short)puVar16[2],0xd), 0 < temp_v3)) {
           FUN_002550d8((int)(short)puVar16[2],0xd,0xffffffff,0);
         }
         temp_v6 = temp_v6 + 1;
@@ -732,7 +732,7 @@ LAB_001fd348:
         libc_strcpy(&temp_v16,temp_v6);
         FUN_00295660(0xd,&temp_v16);
         FUN_002bff50();
-        FUN_00254e2c(*(unsigned int *)(temp_v4 + 0x2230),0,0,6,0);
+        messageForwardDefaultMode(*(unsigned int *)(temp_v4 + 0x2230),0,0,6,0);
         *(unsigned int *)(temp_v4 + 0x44a0) = *(unsigned int *)(temp_v4 + 0x44a0) | 0x100000;
         buttonHelpSetPreset(0x90);
         return;

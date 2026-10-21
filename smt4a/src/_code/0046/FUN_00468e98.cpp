@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00183318(int);
 int FUN_0019de98(int, unsigned int);
-int FUN_00334518(void);
+int uiQuestGetActive(void);
 int FUN_0034aae4(...);
 int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
@@ -42,14 +42,14 @@ extern int gameFlagsGetBlock(void);
 extern int FUN_002a746c(void);
 extern int FUN_002f153c(void);
 extern unsigned char FUN_0031f90c(void);
-/* Supplied declaration required: FUN_00334518. */
-extern unsigned char FUN_00334530(void);
+/* Supplied declaration required: uiQuestGetActive. */
+extern unsigned char uiQuestGetState(void);
 /* Supplied declaration required: FUN_0034aae4. */
 extern unsigned int clearFlags310To31F(void);
 extern unsigned short FUN_00372140(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
-extern unsigned short FUN_0039c628(void);
+extern unsigned short uiQuestRunEnabledAction(void);
 /* Supplied declaration required: FUN_003a7630. */
 /* Supplied declaration required: FUN_003c5fc4. */
 extern int FUN_00467df8(void);
@@ -68,16 +68,16 @@ void FUN_00468e98(fn_00468e98_arg0 *param_1)
   
   temp_v3 = FUN_002a746c();
   if (temp_v3 != 0) {
-    temp_v0 = FUN_00334530();
+    temp_v0 = uiQuestGetState();
     param_1->field_0xa64 = temp_v0;
-    temp_v1 = FUN_0039c628();
+    temp_v1 = uiQuestRunEnabledAction();
     param_1->field_0xa66 = temp_v1;
     temp_v2 = FUN_00372140();
     param_1->field_0xa68 = temp_v2;
     temp_v3 = FUN_002f153c();
     temp_v0 = FUN_0031f90c();
     param_1->field_0xa62 = temp_v0;
-    FUN_00334518();
+    uiQuestGetActive();
     temp_v5 = 0;
     if (param_1->field_0xa64 != 0) {
       temp_v4 = gameFlagsGetBlock();

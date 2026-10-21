@@ -8,7 +8,7 @@ int FUN_00128584(...);
 int FUN_001383a8(...);
 int FUN_00144f90(...);
 int FUN_002bb100(...);
-int FUN_002bb150(...);
+int threadSleepDuration(...);
 int FUN_002bb378(...);
 int FUN_002c131c(...);
 int nn_os_LightEvent_Wait(...);
@@ -40,7 +40,7 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 extern int FUN_0013b8fc(void);
 /* Supplied declaration required: FUN_00144f90. */
 /* Supplied declaration required: FUN_002bb100. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: FUN_002c131c. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
@@ -141,7 +141,7 @@ LAB_002ad598:
       puVar2 = (unsigned int *)(unsigned int)DAT_004d4200;
     }
     if (!temp_v2 || puVar2 != (unsigned int *)0x2) goto LAB_002ad598;
-    FUN_002bb150(&DAT_004c4b40,0);
+    threadSleepDuration(&DAT_004c4b40,0);
     nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
   } while( 1 );
 }

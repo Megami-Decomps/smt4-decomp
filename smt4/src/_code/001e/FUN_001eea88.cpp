@@ -19,7 +19,7 @@ int FUN_002a9fdc(...);
 int devilGetRecord(void);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bee58(...);
 int FUN_002beed0(...);
 int paramsInit(...);
@@ -53,7 +53,7 @@ extern unsigned char DAT_004033e0; /* 0x4033e0 */
 extern unsigned char DAT_00403404; /* 0x403404 */
 extern unsigned char DAT_00403434; /* 0x403434 */
 extern unsigned char DAT_00403440; /* 0x403440 */
-extern int DAT_0043dd90; /* 0x43dd90 */
+extern int g_screenStateWork; /* 0x43dd90 */
 
 /* Supplied declaration required: FUN_00258170. */
 /* Supplied declaration required: FUN_00258408. */
@@ -71,7 +71,7 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
 /* Supplied declaration required: paramsInit. */
@@ -96,7 +96,7 @@ void FUN_001eea88(void)
   int temp_v5;
   unsigned char temp_v6 [76];
   
-  temp_v0 = DAT_0043dd90;
+  temp_v0 = g_screenStateWork;
   statusCameraDestroy();
   FUN_00294e18(2);
   temp_v4 = 0;
@@ -172,7 +172,7 @@ void FUN_001eea88(void)
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
   devilGetRecord();
   temp_v4 = FUN_002cdecc((int)*(char *)(temp_v1 + 0x30));
-  FUN_002be624(temp_v6,&LAB_001eef6c,temp_v4 + 1);
+  textFormatBuffer(temp_v6,&LAB_001eef6c,temp_v4 + 1);
   temp_v2 = FUN_002c5c04(temp_v6);
   *(unsigned int *)(temp_v0 + 0x2a4) = temp_v2;
   temp_v3 = *(unsigned int *)(temp_v0 + 0x29c);
@@ -203,8 +203,8 @@ void FUN_001eea88(void)
   FUN_002bd954(temp_v0 + 0x8cc,0x24,0,temp_v0 + 0x2a8,1);
   FUN_002bee58(temp_v0 + 0x8cc,2);
   buttonHelpSetPreset(0x61);
-  temp_v0 = DAT_0043dd90;
-  *(unsigned int *)(DAT_0043dd90 + 4) = 1;
+  temp_v0 = g_screenStateWork;
+  *(unsigned int *)(g_screenStateWork + 4) = 1;
   *(unsigned int *)(temp_v0 + 8) = 0;
   return;
 }

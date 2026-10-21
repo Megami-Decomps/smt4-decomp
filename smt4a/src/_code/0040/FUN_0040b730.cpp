@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [68], unsigned char *, int, int, unsigned int);
+int textFormatBuffer(unsigned char [68], unsigned char *, int, int, unsigned int);
 int FUN_00192608(void);
 int FUN_003e573c(unsigned int, int, unsigned char [68], unsigned int);
 
@@ -17,7 +17,7 @@ extern unsigned char LAB_0040b93c; /* 0x40b93c */
 extern unsigned char LAB_0040b958; /* 0x40b958 */
 extern unsigned char LAB_0040b990; /* 0x40b990 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_003e573c. */
@@ -45,7 +45,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
         FUN_00192608();
         temp_v2 = FUN_0040b11c(param_1,2,*(unsigned short *)(temp_v1 + 0x40),*(unsigned short *)(temp_v1 + 0x42),0
                             );
-        FUN_00100388(temp_v3,&LAB_0040b990,*(unsigned short *)(temp_v1 + 0x40),
+        textFormatBuffer(temp_v3,&LAB_0040b990,*(unsigned short *)(temp_v1 + 0x40),
                      *(unsigned short *)(temp_v1 + 0x42),temp_v2);
       }
     }
@@ -53,7 +53,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 8);
       FUN_00192608();
       temp_v2 = FUN_0040b11c(param_1,1,*(unsigned short *)(temp_v1 + 0x40),*(unsigned short *)(temp_v1 + 0x42),0);
-      FUN_00100388(temp_v3,&LAB_0040b958,*(unsigned short *)(temp_v1 + 0x40),
+      textFormatBuffer(temp_v3,&LAB_0040b958,*(unsigned short *)(temp_v1 + 0x40),
                    *(unsigned short *)(temp_v1 + 0x42),temp_v2);
     }
   }
@@ -61,7 +61,7 @@ void FUN_0040b730(unsigned int param_1,int param_2,unsigned int param_3)
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 6);
     FUN_00192608();
     temp_v2 = FUN_0040b11c(param_1,0,*(unsigned short *)(temp_v1 + 0x40),*(unsigned short *)(temp_v1 + 0x42),0);
-    FUN_00100388(temp_v3,&LAB_0040b93c,*(unsigned short *)(temp_v1 + 0x40),
+    textFormatBuffer(temp_v3,&LAB_0040b93c,*(unsigned short *)(temp_v1 + 0x40),
                  *(unsigned short *)(temp_v1 + 0x42),temp_v2);
   }
   FUN_003e573c(param_1,param_2,temp_v3,param_3);

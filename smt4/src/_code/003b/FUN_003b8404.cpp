@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022b29c(int, int, int);
-int FUN_0022b684(int);
+int gameSynchronizeMapState(int);
 int FUN_002bd808(int, unsigned short *);
 
 /* stack frame of param_2: 3 slot(s), 6 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0022b29c. */
-/* Supplied declaration required: FUN_0022b684. */
+/* Supplied declaration required: gameSynchronizeMapState. */
 /* Supplied declaration required: FUN_002bd808. */
 
 
@@ -52,22 +52,22 @@ void FUN_003b8404(int param_1,int param_2)
     *(unsigned int *)(param_1 + 0x2c) = 0;
     return;
   case 3:
-    FUN_0022b684(param_1);
+    gameSynchronizeMapState(param_1);
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x1000000;
     break;
   case 4:
-    FUN_0022b684(param_1);
+    gameSynchronizeMapState(param_1);
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x2000000;
     break;
   case 5:
-    FUN_0022b684(param_1);
+    gameSynchronizeMapState(param_1);
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x4000000;
     break;
   case 6:
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x800000;
     break;
   case 7:
-    FUN_0022b684(param_1);
+    gameSynchronizeMapState(param_1);
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x200000;
     break;
   case 8:
@@ -76,11 +76,11 @@ void FUN_003b8404(int param_1,int param_2)
     *(unsigned int *)(param_1 + 0x2c) = 0;
     return;
   case 9:
-    FUN_0022b684(param_1);
+    gameSynchronizeMapState(param_1);
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x8000000;
     break;
   case 10:
-    FUN_0022b684(param_1);
+    gameSynchronizeMapState(param_1);
     temp_v0 = *(unsigned int *)(param_1 + 0x20) | 0x20000000;
   }
   *(unsigned int *)(param_1 + 0x20) = temp_v0;

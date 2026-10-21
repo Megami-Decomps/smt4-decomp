@@ -20,7 +20,7 @@ typedef struct {
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0024571c. */
-extern unsigned int FUN_00245768(unsigned short);
+extern unsigned int saveIsRecordValueBounded(unsigned short);
 extern unsigned int *FUN_002561d8(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_0025628c(unsigned int);
 extern unsigned int btlGetMainState(void);
@@ -63,7 +63,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
       asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),10,(*puVar2 & 0x1000) >> 0xc);
       asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0xb,(*puVar2 & 0x4000000) >> 0x1a);
       if ((*puVar2 & 0x10) != 0) {
-        temp_v0 = FUN_00245768(*(unsigned short *)((int)puVar2 + 0xce));
+        temp_v0 = saveIsRecordValueBounded(*(unsigned short *)((int)puVar2 + 0xce));
         temp_v3 = *(unsigned int *)(param_1 + 0x10);
       }
       else {

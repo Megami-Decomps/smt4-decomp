@@ -38,8 +38,8 @@ extern unsigned int FUN_00230e04(unsigned short *);
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
-extern int FUN_00256510(void);
-extern int FUN_002762e0(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: FUN_0029e620. */
@@ -97,7 +97,7 @@ void FUN_003a3a9c(int param_1)
     FUN_0022e648(param_1,10);
     return;
   }
-  temp_v0 = FUN_002762e0();
+  temp_v0 = inputIsQuestMenuPressed();
   if (temp_v0 != 0) {
     *(unsigned int *)(param_1 + 0x15d60) = 0;
     FUN_00230df0(0);
@@ -116,7 +116,7 @@ void FUN_003a3a9c(int param_1)
     *(unsigned int *)(param_1 + 8) = 1;
     return;
   }
-  temp_v0 = FUN_00256510();
+  temp_v0 = inputIsQuestCancelPressed();
   if (temp_v0 == 0) {
     return;
   }

@@ -10,7 +10,7 @@ typedef struct TextureSlot {
 extern void asdTextureRelease(void *texture);
 extern s32 FUN_0025cc50(u32 id);
 extern void *asdEffectTextureCreate(u32 id);
-extern void *FUN_0037a7f4(u32 id);
+extern void *textureCreateFromImage(u32 id);
 
 /* Replaces the slot's texture with one created for `id` (an effect texture or the default one). */
 void textureSlotReplace(TextureSlot *slot, u32 id)
@@ -21,7 +21,7 @@ void textureSlotReplace(TextureSlot *slot, u32 id)
     if (FUN_0025cc50(id) != 0) {
         slot->texture = asdEffectTextureCreate(id);
     } else {
-        slot->texture = FUN_0037a7f4(id);
+        slot->texture = textureCreateFromImage(id);
     }
 }
 

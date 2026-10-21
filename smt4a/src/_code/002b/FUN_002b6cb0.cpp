@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_0019af70(...);
-int FUN_002d8a94(void);
+int mapRenderApplyPrimary(void);
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
 
 /* Supplied declaration required: FUN_0019af70. */
-/* Supplied declaration required: FUN_002d8a94. */
+/* Supplied declaration required: mapRenderApplyPrimary. */
 
 
 void FUN_002b6cb0(void)
@@ -40,8 +40,8 @@ void FUN_002b6cb0(void)
   unsigned long long temp_v16;
   float temp_v17;
   
-  temp_v1 = DAT_005806d4;
-  if ((DAT_005806d4 != 0) && (*(int *)(DAT_005806d4 + 4) == 8)) {
+  temp_v1 = g_mapEnemy;
+  if ((g_mapEnemy != 0) && (*(int *)(g_mapEnemy + 4) == 8)) {
     puVar3 = &g_gameState;
     if (DAT_005f161c == '\0') {
       puVar3 = (unsigned int *)(unsigned int)DAT_005f161d;
@@ -67,7 +67,7 @@ void FUN_002b6cb0(void)
             temp_v2 = (unsigned int)*(unsigned char *)(temp_v7 + 0x17c);
           }
           if ((temp_v8 && temp_v0 != '\0') && temp_v2 != 0) {
-            FUN_002d8a94();
+            mapRenderApplyPrimary();
             temp_v3 = *(int *)(temp_v7 + 0x180);
             if (*(char *)(temp_v7 + 0xb2) == '\0') {
               temp_v9 = *(float *)(temp_v7 + 0xb4);

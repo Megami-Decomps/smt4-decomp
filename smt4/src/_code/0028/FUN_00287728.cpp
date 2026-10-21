@@ -1,24 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287728` (_code @ 0x287728, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot base register and floating-point zero load scheduling differ from retail. */
+#include "common.h"
+
+namespace { struct Slot { f32 scale; u32 active; u32 value; u32 extra; u8 state; u8 padding[3]; }; }
 
 extern "C" {
-
-extern unsigned int DAT_004d975c; /* 0x4d975c */
-extern unsigned char DAT_004d9768; /* 0x4d9768 */
-
-
-void FUN_00287728(int param_1)
-
+/* Reads or updates the requested object state. */
+extern Slot DAT_004d9758[];
+void FUN_00287728(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = param_1 * 0x14;
-  (&DAT_004d975c)[param_1 * 5] = 0;
-  *(unsigned int *)(temp_v0 + 0x4d9760) = 0;
-  (&DAT_004d9768)[temp_v0] = 0;
-  *(unsigned int *)(temp_v0 + 0x4d9758) = 0;
-  return;
+    Slot *slot = &DAT_004d9758[index];
+    slot->active = 0;
+    slot->value = 0;
+    slot->state = 0;
+    slot->scale = 0.0f;
 }
-
-} /* extern "C" */
+}

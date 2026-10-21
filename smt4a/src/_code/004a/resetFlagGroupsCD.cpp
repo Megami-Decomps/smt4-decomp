@@ -3,7 +3,7 @@
 extern "C" {
 
 extern void asdTMTexTableLoadSprites(s32 id);
-extern void FUN_001acf98(s32 id, s32 index);
+extern void asdTMTexLoadMainHeap(s32 id, s32 index);
 
 void resetFlagGroupsCD(void)
 {
@@ -12,10 +12,10 @@ void resetFlagGroupsCD(void)
     asdTMTexTableLoadSprites(0xC);
     asdTMTexTableLoadSprites(0xD);
     for (i = 0; i < 6; i++) {
-        FUN_001acf98(0xC, i);
+        asdTMTexLoadMainHeap(0xC, i);
     }
     for (i = 0; i < 5; i++) {
-        FUN_001acf98(0xD, i);
+        asdTMTexLoadMainHeap(0xD, i);
     }
 }
 

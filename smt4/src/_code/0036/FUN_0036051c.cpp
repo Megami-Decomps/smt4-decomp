@@ -1,34 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036051c` (_code @ 0x36051c, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail uses a different error-test or return scheduling. */
+#include "common.h"
 extern "C" {
-
-int asdFatalError(void);
-
-/* stack frame of void: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: asdFatalError. */
-extern int FUN_00360908(unsigned int *);
-
-
-int FUN_0036051c(void)
-
+s32 FUN_00360908(s8 *output, s32 second, s32 third, s32 fourth);
+void asdFatalError(s32 result);
+/* Returns the queried byte, reporting a fatal error on a negative result. */
+s32 FUN_0036051c(s32 first, s32 second, s32 third, s32 fourth)
 {
-/* irregular: irregular input(s): in_r3; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_r3;
-  unsigned int temp_v1 [2];
-  
-  temp_v1[0] = in_r3;
-  temp_v0 = FUN_00360908(temp_v1);
-  if (temp_v0 < 0) {
-    asdFatalError();
-  }
-  return (int)(char)temp_v1[0];
+    s8 output;
+    s32 result = FUN_00360908(&output, second, third, fourth);
+    if ((u32)result >> 31)
+        asdFatalError(result);
+    return output;
 }
-
-} /* extern "C" */
+}

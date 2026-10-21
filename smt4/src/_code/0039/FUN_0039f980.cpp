@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00230fe4(int, double, int, int, int, int, int, int, int);
-int FUN_0023116c(...);
+int recordCompareKind(...);
 int FUN_00231bcc(...);
 int FUN_003c2e5c(...);
 int VectorSignedToFloat(...);
@@ -22,7 +22,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00230fe4. */
-/* Supplied declaration required: FUN_0023116c. */
+/* Supplied declaration required: recordCompareKind. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: FUN_003c2e5c. */
 
@@ -41,25 +41,25 @@ void FUN_0039f980(int param_1,unsigned int param_2)
   int temp_v4;
   int uStack_18;
   
-  temp_v0 = FUN_0023116c();
+  temp_v0 = recordCompareKind();
   FUN_00231bcc(*(unsigned int *)(param_1 + 100),*(unsigned int *)(temp_v0 * 4 + 0x44cf78),0,0,param_2,1);
   if ((*(unsigned short *)(param_1 + 4) & 1) != 0) {
-    temp_v0 = FUN_0023116c(param_1);
+    temp_v0 = recordCompareKind(param_1);
     FUN_00231bcc(*(unsigned int *)(param_1 + 100),*(int *)(temp_v0 * 4 + 0x44cf78) + 2,0,0,param_2,1);
   }
-  temp_v0 = FUN_0023116c(param_1);
+  temp_v0 = recordCompareKind(param_1);
   FUN_00231bcc(*(unsigned int *)(param_1 + 100),*(unsigned int *)(temp_v0 * 4 + 0x44cf84),0,0,param_2,1);
   if ((*(unsigned short *)(param_1 + 4) & 2) != 0) {
-    temp_v0 = FUN_0023116c(param_1);
+    temp_v0 = recordCompareKind(param_1);
     FUN_00231bcc(*(unsigned int *)(param_1 + 100),*(int *)(temp_v0 * 4 + 0x44cf84) + 2,0,0,param_2,1);
   }
-  temp_v0 = FUN_0023116c(param_1);
+  temp_v0 = recordCompareKind(param_1);
   FUN_00231bcc(*(unsigned int *)(param_1 + 100),*(unsigned int *)(temp_v0 * 4 + 0x44cf90),0,0,param_2,1);
   FUN_003c2e5c(param_1,&temp_v3,&uStack_20,&temp_v4,&uStack_18);
-  temp_v0 = FUN_0023116c(param_1);
+  temp_v0 = recordCompareKind(param_1);
   temp_v0 = *(int *)(temp_v0 * 4 + 0x44cf90) + 1;
   if ((*(unsigned short *)(param_1 + 4) & 0x150) != 0) {
-    temp_v0 = FUN_0023116c(param_1,*(unsigned short *)(param_1 + 4),temp_v0);
+    temp_v0 = recordCompareKind(param_1,*(unsigned short *)(param_1 + 4),temp_v0);
     temp_v0 = *(int *)(temp_v0 * 4 + 0x44cf90) + 2;
   }
   temp_v1 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);

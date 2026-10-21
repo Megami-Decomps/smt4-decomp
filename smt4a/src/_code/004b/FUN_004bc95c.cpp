@@ -15,10 +15,10 @@ Table2EEntry *dataTable2EGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
 void gameFlagSetValue(s32 flag, s32 value);
 void gameFlagsGetBlock(void);
-void FUN_004bca00(s32 id, u32 arg1, bool enabled);
+void gameDataSetEntryEnabled(s32 id, u32 arg1, bool enabled);
 
 /* Sets the game flag data table 2E ties to `id` (if it is not set yet), then forwards to
- * FUN_004bca00 with the enabled flag set (the function that follows). */
+ * gameDataSetEntryEnabled with the enabled flag set (the function that follows). */
 void FUN_004bc95c(s32 id, u32 arg1)
 {
     s32 index = 0;
@@ -43,7 +43,7 @@ void FUN_004bc95c(s32 id, u32 arg1)
         }
     }
     gameFlagsGetBlock();
-    FUN_004bca00(id, arg1, true);
+    gameDataSetEntryEnabled(id, arg1, true);
 }
 
 } /* extern "C" */

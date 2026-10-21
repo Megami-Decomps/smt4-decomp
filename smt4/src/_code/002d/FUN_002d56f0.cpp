@@ -1,42 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d56f0` (_code @ 0x2d56f0, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Label { u16 value; u16 text; }; struct Labels { Label entries[4]; u8 flag; }; }
 
 extern "C" {
-
-#ifndef ROMWRIGHT_STORAGE_s____Z____0046527a_10_2_DEFINED
-#define ROMWRIGHT_STORAGE_s____Z____0046527a_10_2_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s____Z____0046527a_10_2 {
-    char whole[10];
-    unsigned char u1[10];
-    signed char s1[10];
-    unsigned short u2[5];
-    short s2[5];
-};
-typedef char romwright_storage_s____Z____0046527a_10_2_size_check[(sizeof(union romwright_storage_s____Z____0046527a_10_2) == 10) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_u1_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_s1_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->s1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_u2_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->u2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_s2_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->s2[0]) == 2) ? 1 : -1];
-#endif
-extern union romwright_storage_s____Z____0046527a_10_2 s____Z____0046527a; /* 0x46527a */
-extern unsigned short DAT_00465286; /* 0x465286 */
-extern unsigned char DAT_00465288; /* 0x465288 */
-
-
+/* Reads or updates the requested state. */
+extern Labels DAT_00465278;
 void FUN_002d56f0(void)
-
 {
-  DAT_00465288 = 0;
-  s____Z____0046527a.whole[0] = '-';
-  s____Z____0046527a.whole[1] = '\0';
-  s____Z____0046527a.whole[4] = '-';
-  s____Z____0046527a.whole[5] = '\0';
-  s____Z____0046527a.whole[8] = '-';
-  s____Z____0046527a.whole[9] = '\0';
-  DAT_00465286 = 0x2d;
-  return;
+    DAT_00465278.flag = 0;
+    DAT_00465278.entries[0].text = 45;
+    DAT_00465278.entries[1].text = 45;
+    DAT_00465278.entries[2].text = 45;
+    DAT_00465278.entries[3].text = 45;
 }
-
-} /* extern "C" */
+}

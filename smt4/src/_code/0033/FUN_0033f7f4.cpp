@@ -1,24 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f7f4` (_code @ 0x33f7f4, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail address formation or grouped state stores differ. */
+#include "common.h"
+__packed struct SaveCounters {
+    u32 first;
+    u32 second;
+    u32 third;
+    u32 fourth;
+    u16 fifth;
+};
+__packed struct SaveState {
+    /* 0x00000 */ u8 unk00[0x1f872];
+    /* 0x1f872 */ SaveCounters counters;
+};
 extern "C" {
-
-extern int gameDataBlocksGetSaveData(void);
-
-
-void FUN_0033f7f4(void)
-
+SaveState *gameDataBlocksGetSaveData();
+/* Clears the packed save counters. */
+void FUN_0033f7f4()
 {
-  int temp_v0;
-  
-  temp_v0 = gameDataBlocksGetSaveData();
-  *(unsigned int *)(temp_v0 + 0x1f872) = 0;
-  *(unsigned int *)(temp_v0 + 0x1f876) = 0;
-  *(unsigned int *)(temp_v0 + 0x1f87a) = 0;
-  *(unsigned int *)(temp_v0 + 0x1f87e) = 0;
-  *(unsigned short *)(temp_v0 + 0x1f882) = 0;
-  return;
+    SaveCounters *counters = &gameDataBlocksGetSaveData()->counters;
+    counters->first = 0;
+    counters->second = 0;
+    counters->third = 0;
+    counters->fourth = 0;
+    counters->fifth = 0;
 }
-
-} /* extern "C" */
+}

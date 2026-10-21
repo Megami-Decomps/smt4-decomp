@@ -1,30 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff31c` (_code @ 0x2ff31c, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler allocates the saved maximum and result registers differently and combines the two comparisons. */
+#include "common.h"
+
 
 extern "C" {
-
-int scrSetResult(int);
-int btlGetMainState(void);
-
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-extern int scrGetArg(unsigned int);
-
-
-unsigned int FUN_002ff31c(void)
-
+u32 scrGetArg(u32 index);
+void btlGetMainState(void);
+s32 btlMainFindActiveEntry(void);
+void scrSetResult(u32 value);
+u32 FUN_002ff31c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg(0);
-  btlGetMainState();
-  temp_v1 = btlMainFindActiveEntry();
-  scrSetResult((int)(unsigned int)(temp_v1 != 0) <= temp_v0);
-  return 1;
+    u32 maximum = scrGetArg(0);
+    btlGetMainState();
+    u32 result = 0;
+    if (btlMainFindActiveEntry() != 0) { result = 1; }
+    if (result > maximum) { result = maximum; }
+    scrSetResult(result);
+    return 1;
 }
-
-} /* extern "C" */
+}

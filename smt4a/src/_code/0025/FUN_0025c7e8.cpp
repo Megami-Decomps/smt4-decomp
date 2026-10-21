@@ -1,29 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025c7e8` (_code @ 0x25c7e8, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [r0, #4] where the compiled block uses ldr r1, [r0, #4]. */
+#include "common.h"
 
-extern "C" {
+struct ProgressState {
+    u8 unk00[8];  // 0x00
+    u32 phase;    // 0x08
+};
 
-int FUN_0022258c(int);
+struct ProgressContext {
+    u8 unk00[4];           // 0x00
+    ProgressState* state;  // 0x04
+};
 
-/* Supplied declaration required: FUN_0022258c. */
+extern "C" void FUN_0022258c(s32 value);
 
-
-unsigned int FUN_0025c7e8(int param_1)
-
+extern "C" s32 FUN_0025c7e8(ProgressContext* context)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)(*(int *)(param_1 + 4) + 8);
-  if (temp_v0 < 2) {
-    *(unsigned int *)(*(int *)(param_1 + 4) + 8) = temp_v0 + 1;
-  }
-  else if (temp_v0 == 2) {
-    FUN_0022258c(0);
-    return 0xffffffff;
-  }
-  return 0;
-}
+    ProgressState* state = context->state;
+    u32 phase = state->phase;
 
-} /* extern "C" */
+    if (phase == 0 || phase == 1) {
+        state->phase = phase + 1;
+    } else if (phase == 2) {
+        FUN_0022258c(0);
+        return -1;
+    }
+
+    return 0;
+}

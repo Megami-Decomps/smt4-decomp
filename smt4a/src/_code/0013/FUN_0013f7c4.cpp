@@ -9,7 +9,7 @@ int FUN_00151aa4(...);
 int FUN_00169e38(...);
 int SBORROW4(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00151e4c(int);
 int FUN_0015f858(...);
 int FUN_00162790(...);
@@ -43,7 +43,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001519c4. */
 /* Supplied declaration required: FUN_00151aa4. */
 /* Supplied declaration required: FUN_00151e4c. */
@@ -127,7 +127,7 @@ unsigned int FUN_0013f7c4(void)
     FUN_00164b5c(2,8,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x78);
     FUN_0015f858(temp_v3,0);
-    FUN_00100388(temp_v9,&LAB_0013fbb4,temp_v3);
+    textFormatBuffer(temp_v9,&LAB_0013fbb4,temp_v3);
     temp_v5 = FUN_001834a4(8,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

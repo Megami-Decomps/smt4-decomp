@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0022ddd0(int);
+extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_0023360c(int *);
 extern int FUN_00287758(void);
@@ -39,7 +39,7 @@ void FUN_003a8dac(int *param_1)
   if (temp_v0 == 0) {
     return;
   }
-  temp_v0 = FUN_0022ddd0((int)param_1 + 0x96);
+  temp_v0 = utilityReturnSuccess((int)param_1 + 0x96);
   if (temp_v0 != 0) {
     return;
   }

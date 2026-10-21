@@ -16,7 +16,7 @@ int gameFlagIsSetByBlock(...);
 int FUN_002d23f0(...);
 int FUN_00329dd4(...);
 int FUN_0032a904(...);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_003a3e60(...);
 int FUN_003d4ed8(...);
 int VectorSignedToFloat(...);
@@ -79,7 +79,7 @@ extern int FUN_0029d6f0(void);
 /* Supplied declaration required: FUN_002d23f0. */
 /* Supplied declaration required: FUN_00329dd4. */
 /* Supplied declaration required: FUN_0032a904. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_0036d984(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_003a3e60. */
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -234,7 +234,7 @@ void FUN_0029aa60(int param_1)
     temp_v19 = temp_v19 * temp_v21;
     temp_v23 = CONCAT44(temp_v17 * temp_v21,temp_v16 * temp_v21);
     temp_v10 = *(unsigned int *)(DAT_005806a4 + 0x50);
-    FUN_00352bc4();
+    mathPositionHeadingDegrees();
     temp_v25 = (unsigned long long)temp_v10;
     temp_v16 = 10000.0f;
     temp_v9 = 0;
@@ -280,7 +280,7 @@ LAB_0029ad50:
               *(unsigned char *)(temp_v14 + 0x21e) = 1;
             }
             else {
-              FUN_00352bc4();
+              mathPositionHeadingDegrees();
               temp_v17 = *(float *)(temp_v14 + 0x238) - *(float *)(DAT_005806a4 + 0x50);
               temp_v20 = *(float *)(temp_v14 + 0x240) - *(float *)(DAT_005806a4 + 0x58);
               temp_v21 = *(float *)(temp_v14 + 0x23c) - *(float *)(DAT_005806a4 + 0x54);

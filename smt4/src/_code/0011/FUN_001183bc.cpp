@@ -1,22 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001183bc` (_code @ 0x1183bc, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail bic r1, r2, #255; compiler bic r2, r2, #255. */
+#include "common.h"
+
+struct TextFlagDefaults {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 flags;
+};
+struct TextScalarWork {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 value;
+    /* 0x54 */ u32 unk54;
+    /* 0x58 */ f32 scalar;
+};
 
 extern "C" {
 
-extern unsigned char g_asdTextDefaults; /* 0x464d48 */
+extern TextFlagDefaults g_asdTextDefaults;
 
-
-void FUN_001183bc(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Updates the text work value, masked default flags and scalar. */
+void FUN_001183bc(TextScalarWork *work, u32 value, u32 flags, f32 scalar)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  *(unsigned int *)(param_1 + 0x50) = param_2;
-  (*(unsigned int *)((unsigned char *)&g_asdTextDefaults + 0xc)) = param_3 & 0xffffff00;
-  *(unsigned int *)(param_1 + 0x58) = in_s0;
-  return;
+    work->value = value;
+    g_asdTextDefaults.flags = flags & ~0xFFu;
+    work->scalar = scalar;
 }
 
 } /* extern "C" */

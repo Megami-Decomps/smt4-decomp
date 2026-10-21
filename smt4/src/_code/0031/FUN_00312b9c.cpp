@@ -1,20 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00312b9c` (_code @ 0x312b9c, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail conditional instruction or constructor initialization ordering differs. */
+#include "common.h"
 
+struct BattleGameState {
+    /* 0x0000 */ u8 unk00[0x44a4];
+    /* 0x44a4 */ u32 flags;
+};
 extern "C" {
-
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_00312b9c(void)
-
+BattleGameState *btlGetMainState();
+/* Marks the battle command as active and returns script success. */
+s32 FUN_00312b9c()
 {
-  int temp_v0;
-  
-  temp_v0 = btlGetMainState();
-  *(unsigned int *)(temp_v0 + 0x44a4) = *(unsigned int *)(temp_v0 + 0x44a4) | 1;
-  return 1;
+    btlGetMainState()->flags |= 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -45,7 +45,7 @@ int FUN_002c85b0(...);
 int panelSetMode3(...);
 int FUN_003343c0(...);
 int FUN_0033449c(...);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int FUN_0035deb0(void);
 int FUN_0047fa90(...);
 int FUN_004fd508(...);
@@ -111,7 +111,7 @@ int FUN_00285800(void);
 int FUN_002a4878(...);
 int FUN_002c2c88(int);
 int FUN_002c7e24(void);
-int FUN_00333dac(int);
+int statusDownGetActive(int);
 int mapBlockSetRequest(void);
 int FUN_003343f0(...);
 int obj04Finish(void);
@@ -139,7 +139,7 @@ extern int gameDataBlocksGetSaveData(void);
 extern int btlMainIsRunning(void);
 extern int FUN_001643a0(void);
 extern int FUN_00167458(int, unsigned int);
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern unsigned short FUN_0017760c(int);
@@ -238,8 +238,8 @@ extern int holderKindIsActive(void);
 /* Supplied declaration required: FUN_0031f718. */
 extern int FUN_0032fb18(void);
 /* Supplied declaration required: FUN_00333694. */
-/* Supplied declaration required: FUN_00333dac. */
-extern int FUN_0033413c(void);
+/* Supplied declaration required: statusDownGetActive. */
+extern int gameGlobalsGetState(void);
 /* Supplied declaration required: mapBlockSetRequest. */
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
@@ -247,7 +247,7 @@ extern int FUN_0033413c(void);
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_003344b4. */
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0034cda0. */
 /* Supplied declaration required: FUN_0035ab40. */
@@ -352,7 +352,7 @@ unsigned int FUN_00262874(void)
     }
     if ((!(temp_v20 || temp_v5 == 0xb)) && (temp_v14 = FUN_002c7ca0(), temp_v14 != 6)) {
       if (*(int *)(temp_v1 + 0x1c) == 0x19) {
-        FUN_00333dac(0x19);
+        statusDownGetActive(0x19);
       }
       FUN_003343f0();
     }
@@ -526,7 +526,7 @@ unsigned int FUN_00262874(void)
     }
     temp_v22 = g_partyPanel;
     if (*(char *)(temp_v1 + 0x43) != '\0') {
-      temp_v14 = FUN_0033413c();
+      temp_v14 = gameGlobalsGetState();
       if (temp_v14 != 0) {
         temp_v22 = FUN_002a4878(temp_v4);
         temp_v6 = 0;
@@ -723,7 +723,7 @@ LAB_00263038:
     }
     temp_v9 = g_partyPanel;
     if (*(char *)(temp_v1 + 0x43) != '\0') {
-      temp_v4 = FUN_0033413c();
+      temp_v4 = gameGlobalsGetState();
       if (temp_v4 != 0) {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           temp_v14 = FUN_002a4878();
@@ -1119,7 +1119,7 @@ LAB_00263984:
     }
     if (*(char *)(temp_v1 + 0x43) != '\0') {
       temp_v4 = FUN_002a4878(temp_v6);
-      temp_v14 = FUN_0033413c();
+      temp_v14 = gameGlobalsGetState();
       if (temp_v14 != 0) {
         temp_v22 = FUN_002a4894(temp_v6);
         if (temp_v22 < 1) {
@@ -1977,7 +1977,7 @@ LAB_002657e4:
     }
     FUN_00224880(*(unsigned int *)(temp_v1 + 0x14));
     if (*(int *)(temp_v1 + 0x20) != 0xb) {
-      temp_v4 = FUN_00167f08();
+      temp_v4 = ifTouchGetButtonHelpValue();
       if (temp_v4 != 199) {
         if (*(char *)(temp_v1 + 0x42) != '\0') {
           sysPlaySe(199);
@@ -2141,7 +2141,7 @@ LAB_00265c00:
   case 0xb:
     temp_v14 = FUN_0035db94();
     if (((temp_v14 != 0) && (temp_v14 = FUN_002a7410(), temp_v14 == 0)) &&
-       (temp_v14 = FUN_00167f08(), temp_v14 != 0x5f)) {
+       (temp_v14 = ifTouchGetButtonHelpValue(), temp_v14 != 0x5f)) {
       sysPlaySe(0x5f);
     }
     temp_v14 = FUN_0022e714();
@@ -2174,7 +2174,7 @@ LAB_00265c00:
     temp_v14 = FUN_0022e750();
     if (((temp_v14 != 0) && (temp_v14 = FUN_002c7cb4(), temp_v14 != 0)) &&
        ((temp_v14 = FUN_002effbc(), temp_v14 != 0 && (temp_v14 = useCounterIsFinished(), temp_v14 != 0)))) {
-      temp_v14 = FUN_0033413c();
+      temp_v14 = gameGlobalsGetState();
       if (temp_v14 != 0) {
         FUN_0023b45c(0);
         temp_v0 = *(char *)(temp_v1 + 0xe8a) + (char)temp_v14;
@@ -2372,7 +2372,7 @@ LAB_00266760:
           FUN_002a7324(1);
         }
       }
-      FUN_00341f88();
+      buttonHelpGetValue();
       sysPlaySe();
       temp_v14 = *(int *)(temp_v1 + 0x24);
       temp_v10 = 1;

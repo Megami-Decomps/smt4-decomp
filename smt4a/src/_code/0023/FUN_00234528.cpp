@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char [84], unsigned char *);
+int textFormatBuffer(int, unsigned char [84], unsigned char *);
 int FUN_00152f44(void);
 int rt_memcpy(unsigned char [84], int, int);
 
@@ -28,7 +28,7 @@ extern unsigned char DAT_00561373; /* 0x561373 */
 extern unsigned char DAT_00561384; /* 0x561384 */
 extern int *g_popupState; /* 0x58104c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
@@ -88,7 +88,7 @@ unsigned int FUN_00234528(int param_1,int param_2)
     g_popupState[5] = temp_v1;
     piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
     rt_memcpy(temp_v6,temp_v1,0x48);
-    FUN_00100388((int)piVar1 + 0x25,temp_v6,temp_v3[param_1]);
+    textFormatBuffer((int)piVar1 + 0x25,temp_v6,temp_v3[param_1]);
     g_popupState[5] = (int)g_popupState + 0x25;
     return 1;
   }

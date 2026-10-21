@@ -1,21 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014a82c` (_code @ 0x14a82c, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail str r2, [r3, #368]!; compiler str r2, [r3, #368]. */
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-extern unsigned int DAT_0061a5e0; /* 0x61a5e0 */
-extern unsigned int DAT_0061a5e8; /* 0x61a5e8 */
-extern unsigned int DAT_0061a5ec; /* 0x61a5ec */
+extern GfxCallbackState g_asdGfxContext;
 
-
-void FUN_0014a82c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Sets the graphics callback and its enable state. */
+void FUN_0014a82c(CallbackBinding binding, u32 enabled)
 {
-  DAT_0061a5e0 = param_3;
-  DAT_0061a5e8 = param_1;
-  DAT_0061a5ec = param_2;
-  return;
+    g_asdGfxContext.enabled = enabled;
+    g_asdGfxContext.binding = binding;
 }
 
 } /* extern "C" */

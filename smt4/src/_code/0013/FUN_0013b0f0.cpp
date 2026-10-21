@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002bc7f4; not written yet. */
+/* NON_MATCHING: merged entry stub and function body (linker NOP before PUSH); split at offset four before matching. */
 #include "common.h"

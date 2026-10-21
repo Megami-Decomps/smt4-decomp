@@ -1,27 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003014de` (_code @ 0x3014de, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-int onlineBufferGetData(unsigned int);
-
-/* Supplied declaration required: onlineBufferGetData. */
-
-
-unsigned int FUN_003014de(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  char *pcVar1;
-  int temp_v0;
-  
-  pcVar1 = (char *)onlineBufferGetData(*(unsigned int *)(param_1 + 8));
-  if ((*pcVar1 == -0xb) &&
-     (temp_v0 = onlineBufferGetData(*(unsigned int *)(param_1 + 8)), *(unsigned char *)(temp_v0 + 1) == 0xd0)) {
-    return 1;
-  }
-  return 0;
+struct Object { u8 unk00[8]; void *buffer; };
+const u8 *onlineBufferGetData(void *buffer);
+/* Tests the online buffer's two-byte signature. */
+s32 FUN_003014de(Object *object) {
+    if (onlineBufferGetData(object->buffer)[0] == 0xF5 &&
+        onlineBufferGetData(object->buffer)[1] == 0xD0) return 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

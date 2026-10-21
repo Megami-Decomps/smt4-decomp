@@ -1,17 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff424` (_code @ 0x2ff424, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-unsigned int FUN_002ff424(int *param_1,int *param_2)
-
-{
-  if (*param_1 == *param_2 && param_1[1] == param_2[1]) {
-    return 1;
-  }
-  return 0;
+/* NON_MATCHING: compiler reverses the final equality branch and return-block ordering. */
+#include "common.h"
+struct Pair { u32 first, second; };
+/* Tests whether both words of the pair are equal. */
+extern "C" s32 FUN_002ff424(const Pair *left, const Pair *right) {
+    if (((left->first ^ right->first) | (left->second ^ right->second)) == 0) return 1;
+    return 0;
 }
-
-} /* extern "C" */

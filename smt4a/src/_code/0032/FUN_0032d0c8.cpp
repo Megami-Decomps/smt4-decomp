@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00184310(...);
 int FUN_0020d164(...);
 int FUN_00230c1c(...);
@@ -42,7 +42,7 @@ extern unsigned char LAB_0032d37c; /* 0x32d37c */
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern int DAT_0057f0cc; /* 0x57f0cc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0020d164. */
 /* Supplied declaration required: FUN_00230c1c. */
@@ -81,7 +81,7 @@ void FUN_0032d0c8(int param_1,unsigned int param_2,fn_0032d0c8_arg2 *param_3,uns
     else {
       FUN_002c0940(&temp_v2);
       FUN_002c0940(temp_v3,(pfVar3->field_0xa & 0x7ff) >> 8);
-      FUN_00100388(temp_v4,&LAB_0032d2f4,&temp_v2,temp_v3);
+      textFormatBuffer(temp_v4,&LAB_0032d2f4,&temp_v2,temp_v3);
       FUN_003180c4(0x25,temp_v4);
     }
     FUN_0020d164(temp_v4,pfVar3->field_0xc);
@@ -89,34 +89,34 @@ void FUN_0032d0c8(int param_1,unsigned int param_2,fn_0032d0c8_arg2 *param_3,uns
     FUN_00230c1c(temp_v4,(pfVar3->field_0xa & 0x1f) >> 1);
     FUN_003180c4(0x27,temp_v4);
     if (pfVar3->field_0xe == 0) {
-      FUN_00100388(temp_v4,&LAB_0032d2fc);
+      textFormatBuffer(temp_v4,&LAB_0032d2fc);
     }
     if (pfVar3->field_0xe == 1) {
-      FUN_00100388(temp_v4,&LAB_0032d308);
+      textFormatBuffer(temp_v4,&LAB_0032d308);
     }
     if (pfVar3->field_0xe == 5) {
-      FUN_00100388(temp_v4,&LAB_0032d324);
+      textFormatBuffer(temp_v4,&LAB_0032d324);
     }
     if (pfVar3->field_0xe == 6) {
-      FUN_00100388(temp_v4,&LAB_0032d334);
+      textFormatBuffer(temp_v4,&LAB_0032d334);
     }
     if (pfVar3->field_0xe == 7) {
-      FUN_00100388(temp_v4,&LAB_0032d340);
+      textFormatBuffer(temp_v4,&LAB_0032d340);
     }
     if (pfVar3->field_0xe == 8) {
-      FUN_00100388(temp_v4,&LAB_0032d34c);
+      textFormatBuffer(temp_v4,&LAB_0032d34c);
     }
     if (pfVar3->field_0xe == 9) {
-      FUN_00100388(temp_v4,&LAB_0032d358);
+      textFormatBuffer(temp_v4,&LAB_0032d358);
     }
     if (pfVar3->field_0xe == 0xb) {
-      FUN_00100388(temp_v4,&LAB_0032d364);
+      textFormatBuffer(temp_v4,&LAB_0032d364);
     }
     if (pfVar3->field_0xe == 0xc) {
-      FUN_00100388(temp_v4,&LAB_0032d370);
+      textFormatBuffer(temp_v4,&LAB_0032d370);
     }
     if (pfVar3->field_0xe == 0xd) {
-      FUN_00100388(temp_v4,&LAB_0032d37c);
+      textFormatBuffer(temp_v4,&LAB_0032d37c);
     }
     FUN_003180c4(0x28,temp_v4);
     FUN_002ad414(0,param_4,param_3,temp_v4);

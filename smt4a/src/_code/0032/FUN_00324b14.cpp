@@ -1,24 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00324b14` (_code @ 0x324b14, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct MapState { u8 padding[0xcc]; u32 value; u32 active; u32 timer; }; }
 
 extern "C" {
-
-extern int g_lmapMainState; /* 0x580238 */
-
-
-void FUN_00324b14(int param_1)
-
+/* Reads or updates the requested state. */
+extern MapState *g_lmapMainState;
+void FUN_00324b14(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = g_lmapMainState;
-  if (*(int *)(g_lmapMainState + 0xcc) != param_1) {
-    *(int *)(g_lmapMainState + 0xcc) = param_1;
-    *(unsigned int *)(temp_v0 + 0xd0) = 0;
-    *(unsigned int *)(temp_v0 + 0xd4) = 0;
-  }
-  return;
+    MapState *state = g_lmapMainState;
+    if (state->value != value) {
+        state->value = value;
+        state->active = 0;
+        state->timer = 0;
+    }
 }
-
-} /* extern "C" */
+}

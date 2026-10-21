@@ -1,30 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f5020` (_code @ 0x2f5020, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different register allocation, frame setup or instruction scheduling than retail. */
+#include "common.h"
 extern "C" {
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-} param_4_stack;
-
-
-int FUN_002f5020(int param_1,romwright_code *param_2,int param_3,int param_4)
-
-{
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = param_1;
-  if (param_2 != (romwright_code *)0x0) {
-    while (temp_v1 = param_4 != 0, param_4 = param_4 - 1, temp_v1) {
-      (*param_2)(temp_v0);
-      temp_v0 = temp_v0 + param_3;
-    }
-  }
-  return param_1;
+/* Invokes the callback for each element and returns the original iterator. */
+void *FUN_002f5020(u8 *begin, void (*visit)(void *), u32 stride, u32 count) {
+    u8 *current = begin;
+    if (visit != NULL)
+        while (count-- != 0) {
+            visit(current);
+            current += stride;
+        }
+    return begin;
 }
-
-} /* extern "C" */
+}

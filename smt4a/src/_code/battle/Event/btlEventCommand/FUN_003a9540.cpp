@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *, unsigned int);
+int textFormatBuffer(int *, unsigned char *, unsigned int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_004d854c(unsigned int);
 int callOnHandleField4D(unsigned int);
@@ -33,7 +33,7 @@ typedef struct {
 extern unsigned char LAB_003a9644; /* 0x3a9644 */
 extern unsigned char LAB_003a965c; /* 0x3a965c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int scrGetArgString(unsigned int);
@@ -98,7 +98,7 @@ unsigned int FUN_003a9540(void)
     temp_v16 = 0;
     temp_v17 = 0;
     temp_v18 = 0;
-    FUN_00100388(&temp_v3,&LAB_003a9644,temp_v2);
+    textFormatBuffer(&temp_v3,&LAB_003a9644,temp_v2);
     if (*(int *)(temp_v0 + 0x2298) == 0) {
       temp_v1 = 0x24;
       FUN_00178b04(0x24,&LAB_003a965c,0x54b);

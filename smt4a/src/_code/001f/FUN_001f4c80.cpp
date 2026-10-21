@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014f0dc(int, int, int, int *);
 int FUN_001523b8(int, int);
 int FUN_0036f0a0(void);
-int FUN_003d4b7c(int);
+int taskUpdateOrderedPasses(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001523b8. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0036f0a0. */
-/* Supplied declaration required: FUN_003d4b7c. */
+/* Supplied declaration required: taskUpdateOrderedPasses. */
 
 
 unsigned int FUN_001f4c80(void)
@@ -38,7 +38,7 @@ unsigned int FUN_001f4c80(void)
   temp_v2 = 0;
   FUN_0014f0dc(temp_v0,temp_v0 + 0x50c,temp_v0 + 0x518,&temp_v1);
   FUN_001523b8(temp_v0,1);
-  FUN_003d4b7c(0);
+  taskUpdateOrderedPasses(0);
   return 0;
 }
 

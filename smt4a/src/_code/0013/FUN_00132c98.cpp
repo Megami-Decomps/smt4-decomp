@@ -1,40 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132c98` (_code @ 0x132c98, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r4, r0 where the compiled block uses mov r4, r1. */
+#include "common.h"
+
+struct ListNode {
+    ListNode* next; // 0x00
+    ListNode* prev; // 0x04
+};
+
+struct NodeList {
+    u32 unk00;          // 0x00
+    ListNode* freeHead; // 0x04
+    u32 unk08;          // 0x08
+    u32 unk0C;          // 0x0C
+    ListNode* end;      // 0x10
+    u32 count;         // 0x14
+};
 
 extern "C" {
+s32 wordRefsEqual_00132182(ListNode** left, ListNode** right);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int wordRefsEqual_00132182(int *, unsigned int *);
-
-
-void FUN_00132c98(unsigned int *param_1,int param_2,int *param_3)
-
+void FUN_00132c98(ListNode** result, NodeList* list, ListNode** position)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *(unsigned int *)(param_2 + 0x10);
-  temp_v0 = wordRefsEqual_00132182(param_3,(unsigned int *)&temp_v2);
-  if (temp_v0 != 0) {
-    *param_1 = *(unsigned int *)(param_2 + 0x10);
-    return;
-  }
-  temp_v1 = *(unsigned int *)*param_3;
-  *(unsigned int *)((unsigned int *)*param_3)[1] = temp_v1;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  puVar2 = (unsigned int *)*param_3;
-  *puVar2 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar2;
-  *param_1 = temp_v1;
-  return;
-}
+    ListNode* end = list->end;
+    if (wordRefsEqual_00132182(position, &end) != 0) {
+        *result = list->end;
+    } else {
+        ListNode* successor = (*position)->next;
+        (*position)->prev->next = successor;
+        (*position)->next->prev = (*position)->prev;
+        --list->count;
 
-} /* extern "C" */
+        ListNode* removed = *position;
+        removed->next = list->freeHead;
+        list->freeHead = removed;
+        *result = successor;
+    }
+}
+}

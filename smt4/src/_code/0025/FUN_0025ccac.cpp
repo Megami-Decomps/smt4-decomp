@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -22,7 +22,7 @@ extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -65,8 +65,8 @@ void FUN_0025ccac(int param_1,int param_2)
       (**(romwright_code **)(temp_v6 + 0x12c8))();
       *(unsigned char *)(temp_v6 + 0x12c4) = 0;
     }
-    FUN_002bf538();
-    FUN_002bf538();
+    efctSetSpeed();
+    efctSetSpeed();
     if (param_2 != 0) {
       temp_v6 = 0;
       do {
@@ -81,10 +81,10 @@ void FUN_0025ccac(int param_1,int param_2)
             (**(romwright_code **)(temp_v2 + 0x12c8))();
             *(unsigned char *)(temp_v2 + 0x12c4) = 0;
           }
-          FUN_002bf538();
+          efctSetSpeed();
           FUN_002bf288(2,0x15,0x1cb,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,
                        0x2e);
-          FUN_002bf538();
+          efctSetSpeed();
           FUN_002bf288(2,0x15,0x4b,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e
                       );
           FUN_002bf288(2,0x15,0x4a,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e
@@ -118,9 +118,9 @@ void FUN_0025ccac(int param_1,int param_2)
         (**(romwright_code **)(temp_v6 + 0x12c8))();
         *(unsigned char *)(temp_v6 + 0x12c4) = 0;
       }
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x15,0x1cb,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x15,0x4b,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
       FUN_002bf288(2,0x15,0x4a,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
       FUN_002bf288(2,0x15,0x4c,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
@@ -135,7 +135,7 @@ void FUN_0025ccac(int param_1,int param_2)
         *(unsigned char *)(temp_v6 + 0x12c4) = 0;
       }
     }
-    FUN_002bf538();
+    efctSetSpeed();
     return;
   }
   return;

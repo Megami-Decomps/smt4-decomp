@@ -1,30 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gameCountUnits` (_code @ 0x2a8778, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler converts the indexed unit loop into a pointer/countdown loop. */
+#include "common.h"
+
+namespace { struct Unit { s16 id; u8 padding[0x2fe]; }; struct Slots { u8 padding[0x90f0]; Unit units[24]; }; }
 
 extern "C" {
-
-extern int gameGetSlotTable(void);
-
-
-int gameCountUnits(void)
-
+Slots *gameGetSlotTable(void);
+u32 gameCountUnits(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = 0;
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v0 + temp_v2 + 0x90f0) < '\0') {
-      return temp_v1;
-    }
-    temp_v2 = temp_v2 + 1;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v2 < 0x18);
-  return temp_v1;
+    Slots *slots = gameGetSlotTable();
+    u32 count = 0;
+    for (u32 i = 0; i < 24; i++) { if (slots->units[i].id != 0) { count++; } }
+    return count;
 }
-
-} /* extern "C" */
+}

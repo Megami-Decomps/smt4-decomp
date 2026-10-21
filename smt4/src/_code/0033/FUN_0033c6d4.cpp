@@ -1,19 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033c6d4` (_code @ 0x33c6d4, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_0033c6d4(int param_1)
-
+struct TargetState {
+    /* 0x000 */ u8 unk00[0x390];
+    /* 0x390 */ u32 active;
+    /* 0x394 */ f32 scale;
+    /* 0x398 */ f32 x;
+    /* 0x39c */ f32 y;
+    /* 0x3a0 */ f32 z;
+};
+/* Resets the target's position and scale. */
+extern "C" void FUN_0033c6d4(TargetState *target)
 {
-  *(unsigned int *)(param_1 + 0x390) = 0;
-  *(unsigned int *)(param_1 + 0x398) = 0;
-  *(unsigned int *)(param_1 + 0x39c) = 0;
-  *(unsigned int *)(param_1 + 0x3a0) = 0;
-  *(unsigned int *)(param_1 + 0x394) = 0;
-  return;
+    target->active = 0;
+    target->x = 0.0f;
+    target->y = 0.0f;
+    target->z = 0.0f;
+    target->scale = 0.0f;
 }
-
-} /* extern "C" */

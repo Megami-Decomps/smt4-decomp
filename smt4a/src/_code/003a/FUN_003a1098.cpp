@@ -14,7 +14,7 @@ int FUN_0025cab8(void);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
 int FUN_002a1850(...);
-int FUN_00317c50(...);
+int effectSpawnPositionDefault(...);
 int FUN_003222fc(...);
 int FUN_0032c5ec(...);
 int FUN_0032c808(void);
@@ -60,7 +60,7 @@ extern unsigned int FUN_001c5b4c(unsigned int);
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_002a1850. */
-/* Supplied declaration required: FUN_00317c50. */
+/* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: FUN_003222fc. */
 /* Supplied declaration required: FUN_0032c5ec. */
 /* Supplied declaration required: FUN_0032c808. */
@@ -259,10 +259,10 @@ joined_r0x003a122c:
       temp_v17 = 0;
       FUN_0016c4b8(g_renderCtx,0);
       FUN_0032c808();
-      FUN_00317c50(0xffffffff);
-      FUN_00317c50(0xffffffff);
-      FUN_00317c50(0xffffffff);
-      FUN_00317c50(0xffffffff);
+      effectSpawnPositionDefault(0xffffffff);
+      effectSpawnPositionDefault(0xffffffff);
+      effectSpawnPositionDefault(0xffffffff);
+      effectSpawnPositionDefault(0xffffffff);
       FUN_002371b0();
       break;
     case 10:

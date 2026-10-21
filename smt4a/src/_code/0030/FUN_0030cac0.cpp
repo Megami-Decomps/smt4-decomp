@@ -1,19 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cac0` (_code @ 0x30cac0, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler hoists the vtable write before the flag write; constructor naming pending. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char DAT_0055a7a0; /* 0x55a7a0 */
-
-
-void FUN_0030cac0(unsigned int *param_1)
-
-{
-  *(unsigned char *)(param_1 + 1) = 0;
-  *param_1 = (unsigned int)&DAT_0055a7a0;
-  param_1[2] = 0;
-  return;
+extern const u8 DAT_0055a7a0;
+struct Object { const void *vtable; u8 active; u8 unk05[3]; u32 value; };
+/* Initializes the object's virtual dispatch and state. */
+void FUN_0030cac0(Object *object) {
+    object->active = 0;
+    object->vtable = &DAT_0055a7a0;
+    object->value = 0;
 }
-
-} /* extern "C" */
+}

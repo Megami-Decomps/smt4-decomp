@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_0023ea6c(u32);
+void resourceFindActiveIndex(u32);
 
 void FUN_0023ea64(void)
 {
-    FUN_0023ea6c(39);
+    resourceFindActiveIndex(39);
 }
 
 }

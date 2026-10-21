@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001eb808(unsigned int);
+int jobSavePositionSnapshot(unsigned int);
 int FUN_0024ecc0(...);
 int FUN_0024edd4(int, int);
 int FUN_0028703c(unsigned int);
@@ -26,7 +26,7 @@ extern int FUN_0026e70c(...); /* 0x26e70c */
 extern int g_bustupCutAnim; /* 0x43dfc0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001eb808. */
+/* Supplied declaration required: jobSavePositionSnapshot. */
 /* Supplied declaration required: FUN_0024ecc0. */
 /* Supplied declaration required: FUN_0024edd4. */
 /* Supplied declaration required: FUN_0028703c. */
@@ -153,7 +153,7 @@ void FUN_002205a4(int param_1,int param_2,unsigned int param_3)
     temp_v4 = temp_v0 + temp_v1 * 4;
     temp_v2 = jobIsValid(*(unsigned int *)(temp_v4 + 0x630));
     if (temp_v2 != 0) {
-      FUN_001eb808(*(unsigned int *)(temp_v4 + 0x630));
+      jobSavePositionSnapshot(*(unsigned int *)(temp_v4 + 0x630));
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);

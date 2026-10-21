@@ -14,7 +14,7 @@ typedef struct Owner {
 } Owner;
 
 extern void btlGetMainState(void);
-extern s32 FUN_003e8430(void);
+extern s32 btlScriptUnitHasFlags(void);
 
 s32 FUN_004f5a40(Owner *owner)
 {
@@ -22,7 +22,7 @@ s32 FUN_004f5a40(Owner *owner)
 
     if (result != 0) {
         btlGetMainState();
-        result = FUN_003e8430();
+        result = btlScriptUnitHasFlags();
         if (result == 0) {
             result = owner->record->value;
         } else {

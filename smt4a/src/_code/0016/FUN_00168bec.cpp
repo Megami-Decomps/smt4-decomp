@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162808(unsigned int, int);
+int mathInterpolateTimed(unsigned int, int);
 int SBORROW4(int, int);
 int __aeabi_idivmod(int, int);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern int g_npcRoom; /* 0x588124 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00162808. */
+/* Supplied declaration required: mathInterpolateTimed. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -99,7 +99,7 @@ void FUN_00168bec(unsigned int param_1)
           temp_v4 = temp_v3 - temp_v11[1];
           temp_v0 = temp_v10;
         }
-        FUN_00162808(temp_v0,temp_v4);
+        mathInterpolateTimed(temp_v0,temp_v4);
         return;
       }
       temp_v4 = temp_v2 + 2;

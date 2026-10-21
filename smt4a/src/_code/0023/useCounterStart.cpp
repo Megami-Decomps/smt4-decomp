@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(int, unsigned char *, unsigned int, unsigned int);
 int sysPlaySe(int);
 int uiSpriteSetImageKeyframe(int, int);
 int FUN_002a4964(int);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char LAB_0023b3b0; /* 0x23b3b0 */
 extern unsigned char g_useCounter; /* 0x57f27c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned int FUN_0026140c(void);
@@ -79,7 +79,7 @@ void useCounterStart(void)
     if (temp_v5 == 0) {
       temp_v2 = screenGetEntry(0);
       temp_v3 = screenGetEntry(1);
-      FUN_00100388(temp_v0 + 0x7f6,&LAB_0023b3b0,temp_v2,temp_v3);
+      textFormatBuffer(temp_v0 + 0x7f6,&LAB_0023b3b0,temp_v2,temp_v3);
     }
     FUN_00387ac4(0);
   }

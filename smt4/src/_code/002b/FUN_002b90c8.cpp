@@ -1,24 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b90c8` (_code @ 0x2b90c8, 0x1e bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses Thumb movs while compiler emits mov and schedules argument moves differently. */
+#include "common.h"
 
 extern "C" {
+void *libcLocaleGetCategory(void *locale, s32 category);
+u32 FUN_002c618c(u32 unused, const char *text, u32 count, void *locale);
 
-int FUN_002c618c(int, unsigned int, unsigned int, int);
-
-/* Supplied declaration required: FUN_002c618c. */
-extern int libcLocaleGetCategory(unsigned int, unsigned int);
-
-
-void FUN_002b90c8(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Uses the default locale category when the caller supplies none. */
+u32 FUN_002b90c8(const char *text, u32 count, void *locale)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_3 == 0) {
-    param_3 = libcLocaleGetCategory(0,4);
-  }
-  FUN_002c618c(0,param_1,param_2,param_3);
-  return;
+    if (locale == NULL) {
+        locale = libcLocaleGetCategory(locale, 4);
+    }
+    return FUN_002c618c(0, text, count, locale);
 }
-
-} /* extern "C" */
+}

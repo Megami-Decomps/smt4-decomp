@@ -9,7 +9,7 @@ int FUN_00289d74(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bff50(void);
 int asdMemFree(...);
 int FUN_002c5c04(...);
@@ -24,7 +24,7 @@ extern int FUN_00289e54(int, unsigned int, unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c5c04. */
@@ -43,9 +43,9 @@ unsigned int FUN_00270e34(void)
   
   temp_v0 = g_mapMain;
   FUN_002bff50();
-  FUN_002be624(temp_v4,"event/e%03d/e%03d.bf",*(unsigned int *)(temp_v0 + 100),
+  textFormatBuffer(temp_v4,"event/e%03d/e%03d.bf",*(unsigned int *)(temp_v0 + 100),
                *(unsigned int *)(temp_v0 + 100));
-  FUN_002be624(temp_v5,"event/e%03d/e%03d.mbm",*(unsigned int *)(temp_v0 + 100),
+  textFormatBuffer(temp_v5,"event/e%03d/e%03d.mbm",*(unsigned int *)(temp_v0 + 100),
                *(unsigned int *)(temp_v0 + 100));
   temp_v1 = FUN_00289e54(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);
   if (temp_v1 != 0) {

@@ -22,7 +22,7 @@ int FUN_003c91e8(void);
 int FUN_0046bd44(...);
 int FUN_0046e238(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int jobStop(...);
 int ifTouchRegionRemove(void);
 int sysPlaySe(...);
@@ -44,7 +44,7 @@ int soundChannelRequestIfEnabled(...);
 int asdTMTexTableLoadTmx(int, int);
 int FUN_001517b4(...);
 int FUN_0019de98(...);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_001f4908(...);
 int FUN_0022258c(...);
 int FUN_0022677c(...);
@@ -71,11 +71,11 @@ extern unsigned int *DAT_00589170; /* 0x589170 */
 extern unsigned char DAT_005f1634; /* 0x5f1634 */
 extern unsigned int DAT_005f1bd4; /* 0x5f1bd4 */
 extern unsigned int DAT_005f1be8; /* 0x5f1be8 */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: ARM_common_memcpy4_9. */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
@@ -96,7 +96,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern unsigned int gameFlagIsSet(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_001f4908. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: configOpen. */
@@ -126,7 +126,7 @@ extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_00324c94. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
 extern int FUN_003309e0(void);
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: campCommonBgRelease. */
 extern int FUN_0035e6d4(unsigned int *);
@@ -187,13 +187,13 @@ unsigned int FUN_0029f2fc(void)
   case 1:
     loadSlotEnsureLoaded(0x3a);
     asdTMTexTableLoadTmx(0x2a,0);
-    FUN_001acf98(0x2a,0);
-    FUN_001acf98(0x2a,1);
-    FUN_001acf98(0x2a,2);
-    FUN_001acf98(0x2a,5);
-    FUN_001acf98(0x2a,6);
-    FUN_001acf98(0x2a,7);
-    FUN_001acf98(0x2a,8);
+    asdTMTexLoadMainHeap(0x2a,0);
+    asdTMTexLoadMainHeap(0x2a,1);
+    asdTMTexLoadMainHeap(0x2a,2);
+    asdTMTexLoadMainHeap(0x2a,5);
+    asdTMTexLoadMainHeap(0x2a,6);
+    asdTMTexLoadMainHeap(0x2a,7);
+    asdTMTexLoadMainHeap(0x2a,8);
     FUN_0037a2c8();
     temp_v5 = FUN_0013def0(0);
     if (temp_v5 != 3) {
@@ -583,7 +583,7 @@ LAB_0029fb00:
       temp_v7 = puVar5[2];
       dataTableGet(0x3a,0);
       temp_v5 = dataTableGetEntries();
-      FUN_00100388(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
+      textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
       FUN_0019de98(&temp_v13,0xf4f4f4ff);
       if (*(char *)(puVar5 + 0xf) != '\0') {
         commonBgReset();
@@ -614,7 +614,7 @@ LAB_0029fb00:
     }
     break;
   case 9:
-    temp_v5 = FUN_00341940(0x2a);
+    temp_v5 = textureGetIndexedResource(0x2a);
     if ((temp_v5 != 0) && (temp_v5 = asdTMTexTableNodeIsLoaded(0x2a,0), temp_v5 != 0)) {
       *(unsigned char *)(puVar4 + 0x18) = 1;
       puVar4[0x1f] = 0;
@@ -704,7 +704,7 @@ LAB_0029fb00:
     temp_v7 = puVar4[2];
     dataTableGet(0x3a,0);
     temp_v5 = dataTableGetEntries();
-    FUN_00100388(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
+    textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
     FUN_0019de98(&temp_v13,0xf4f4f4ff);
     if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = FUN_002e1a18(1), temp_v5 != 0)) ||
        (temp_v5 = padButtonIsPressed(0), temp_v5 != 0)) {
@@ -921,12 +921,12 @@ LAB_0029fb00:
           FUN_003b5064();
           DAT_005f1bd4 = 0;
           DAT_005f1be8 = 1;
-          if (DAT_005f1c98 >= 200) {
-            temp_v13 = DAT_005f1c98 - 200;
+          if (g_mapSelection >= 200) {
+            temp_v13 = g_mapSelection - 200;
             temp_v8 = 4;
             temp_v6 = 0xe;
           }
-          else if (DAT_005f1c98 >= 100) {
+          else if (g_mapSelection >= 100) {
             temp_v8 = 0;
             piVar10 = (int *)0x0;
             temp_v6 = 8;

@@ -11,7 +11,7 @@ extern unsigned int DAT_00573800; /* 0x573800 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: libc_strcmp. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 extern int FUN_004f59b0(int);
 
 
@@ -25,7 +25,7 @@ int FUN_004f9a20(int param_1)
   int *piVar4;
   
   btlGetMainState();
-  temp_v0 = FUN_003e8430();
+  temp_v0 = btlScriptUnitHasFlags();
   if (temp_v0 != 0) {
     temp_v0 = -1;
   }

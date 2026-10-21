@@ -8,7 +8,7 @@ int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int asdMdlManagerCreateLoaded(unsigned char [128], int);
 int FUN_002a0428(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 extern unsigned char LAB_001a90cc; /* 0x1a90cc */
 extern unsigned char LAB_001a90ec; /* 0x1a90ec */
@@ -19,7 +19,7 @@ extern int g_gameState; /* 0x49f91c */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_001a9008(void)
@@ -44,10 +44,10 @@ void FUN_001a9008(void)
   *(unsigned int *)(temp_v0 + 0xcbe4) = in_s2;
   *(unsigned int *)(temp_v0 + 0xcbe8) = in_s3;
   if (g_gameState != 0x18) {
-    FUN_002be624(temp_v1,&LAB_001a90cc,g_gameState,g_gameState);
+    textFormatBuffer(temp_v1,&LAB_001a90cc,g_gameState,g_gameState);
   }
   else {
-    FUN_002be624(temp_v1,&LAB_001a90ec);
+    textFormatBuffer(temp_v1,&LAB_001a90ec);
   }
   asdMdlManagerCreateLoaded(temp_v1,7);
   *(unsigned char **)(temp_v0 + 0xcbec) = puVar2;

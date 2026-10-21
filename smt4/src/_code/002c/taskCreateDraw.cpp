@@ -1,28 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `taskCreateDraw` (_code @ 0x2c4a08, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
 
 extern "C" {
-
-int asdProcessCreate(void);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: asdProcessCreate. */
-
-
-void taskCreateDraw(void)
-
+/* Reads or updates the requested task state. */
+u32 asdProcessCreate(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcFunc onStart, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  asdProcessCreate();
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    return asdProcessCreate(name, group, startDelay, endDelay, NULL, onUpdate, onEnd, work, owner);
 }
-
-} /* extern "C" */
+}

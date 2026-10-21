@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [64], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
 int FUN_00227af0(unsigned char [64]);
 int FUN_002a3274(int);
 int menuStateStartSelect(int);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_004a9a34; /* 0x4a9a34 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00186f54(unsigned short);
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_002a3274. */
@@ -40,7 +40,7 @@ void FUN_004a99bc(unsigned int param_1,short param_2,unsigned int param_3)
   *(unsigned int *)(temp_v0 + 0xc044) = param_3;
   temp_v2[0] = 0;
   temp_v1 = FUN_00186f54(*(unsigned short *)(temp_v0 + 0xc050));
-  FUN_00100388(temp_v2,&LAB_004a9a34,temp_v1);
+  textFormatBuffer(temp_v2,&LAB_004a9a34,temp_v1);
   FUN_002a3274((int)param_2);
   FUN_00227af0(temp_v2);
   menuStateStartSelect(0);

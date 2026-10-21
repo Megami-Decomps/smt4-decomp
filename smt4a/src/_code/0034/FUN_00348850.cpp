@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001695a0(void);
 int FUN_00180118(unsigned int);
 int gameGetSlotRecord(int);
-int FUN_00237898(...);
+int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int FUN_003180c4(int, unsigned int);
@@ -25,7 +25,7 @@ extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 extern int scrGetCommandFrame(void);
@@ -91,7 +91,7 @@ int FUN_00348850(int param_1)
       FUN_00180118(temp_v4);
       FUN_003180c4(0x28,temp_v4);
       temp_v5 = scrWorkGetValue(1);
-      FUN_00237898(temp_v0,0xd,temp_v5,6,0);
+      messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
       if (temp_v0 == 1) {
@@ -106,7 +106,7 @@ int FUN_00348850(int param_1)
       temp_v5 = FUN_0015687c();
       FUN_003180c4(0x28,temp_v5);
       temp_v5 = scrWorkGetValue(1);
-      FUN_00237898(temp_v0,0xd,temp_v5,6,0);
+      messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
     }
@@ -119,7 +119,7 @@ int FUN_00348850(int param_1)
     }
     FUN_001695a0();
     temp_v1 = scrWorkGetValue(1);
-    FUN_00237898(temp_v0,temp_v5,temp_v1,6,0);
+    messageForwardDefaultMode(temp_v0,temp_v5,temp_v1,6,0);
     temp_v6 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v6 + 1);
   }

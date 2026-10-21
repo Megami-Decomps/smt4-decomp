@@ -1,3 +1,4 @@
+/* NON_MATCHING: armcc preserves additional registers and computes slot pointers differently. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {

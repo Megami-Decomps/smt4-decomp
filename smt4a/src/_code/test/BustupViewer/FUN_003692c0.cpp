@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001527d8(unsigned int, unsigned int);
 int FUN_0025cc78(unsigned int, int, int, int);
 int libc_strcpy(unsigned char [268], unsigned char *);
@@ -33,7 +33,7 @@ extern int g_bustupViewer; /* 0x588ff0 */
 extern char s__V_V_V_V_V_V_V_V_V_V_005890d4[113]; /* 0x5890d4 */
 extern unsigned char DAT_006199d8; /* 0x6199d8 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_0025cc78. */
 /* Supplied declaration required: libc_strcpy. */
@@ -140,31 +140,31 @@ LAB_0036945c:
       switch(temp_v3) {
       case 0:
         if (temp_v1 == 0) {
-          FUN_00100388(temp_v7,&LAB_003695e4);
+          textFormatBuffer(temp_v7,&LAB_003695e4);
         }
         else if (temp_v1 == 1) {
-          FUN_00100388(temp_v7,&LAB_003695ec);
+          textFormatBuffer(temp_v7,&LAB_003695ec);
         }
         else if (temp_v1 == 2) {
-          FUN_00100388(temp_v7,&LAB_003695f4);
+          textFormatBuffer(temp_v7,&LAB_003695f4);
         }
         else if (temp_v1 == 3) {
-          FUN_00100388(temp_v7,&LAB_003695fc);
+          textFormatBuffer(temp_v7,&LAB_003695fc);
         }
         else {
-          FUN_00100388(temp_v7,&LAB_003695dc);
+          textFormatBuffer(temp_v7,&LAB_003695dc);
         }
         break;
       case 1:
         if (*(int *)(temp_v0 + 0x14) == 0) {
 LAB_00369690:
-          FUN_00100388(temp_v7,&LAB_003698c0);
+          textFormatBuffer(temp_v7,&LAB_003698c0);
         }
         else if ((temp_v1 == 0 || temp_v1 == 3) || temp_v1 == 4) {
-          FUN_00100388(temp_v7,&LAB_00369614);
+          textFormatBuffer(temp_v7,&LAB_00369614);
         }
         else {
-          FUN_00100388(temp_v7,&LAB_00369604);
+          textFormatBuffer(temp_v7,&LAB_00369604);
         }
         break;
       case 2:
@@ -172,10 +172,10 @@ LAB_00369690:
         goto LAB_0036973c;
       case 3:
         if (*(char *)(*(int *)(temp_v0 + 0x50) + temp_v0 + 100) == '\0') {
-          FUN_00100388(temp_v7,&LAB_003698a8);
+          textFormatBuffer(temp_v7,&LAB_003698a8);
         }
         else {
-          FUN_00100388(temp_v7,&LAB_00369624);
+          textFormatBuffer(temp_v7,&LAB_00369624);
         }
         break;
       case 4:
@@ -190,18 +190,18 @@ LAB_00369690:
         if (temp_v2 == 0) goto LAB_00369690;
         if (temp_v2 < 0x12d) {
           if (temp_v2 < 200) {
-            FUN_00100388(temp_v7,&LAB_003698dc);
+            textFormatBuffer(temp_v7,&LAB_003698dc);
           }
           else {
-            FUN_00100388(temp_v7,&LAB_003698c8,temp_v2 - 199);
+            textFormatBuffer(temp_v7,&LAB_003698c8,temp_v2 - 199);
           }
         }
         else {
-          FUN_00100388(temp_v7,&LAB_003698b0,temp_v2 - 300);
+          textFormatBuffer(temp_v7,&LAB_003698b0,temp_v2 - 300);
         }
         break;
       case 5:
-        FUN_00100388(temp_v7,&LAB_003698ec,
+        textFormatBuffer(temp_v7,&LAB_003698ec,
                      *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x50) * 4 + 0x54));
         FUN_001527d8(*(unsigned int *)(temp_v0 + 0xa0),temp_v4);
         FUN_0025cc78(*(unsigned int *)(temp_v0 + 0xa0),0x76,(int)temp_v5,0x65);
@@ -244,7 +244,7 @@ LAB_00369690:
           temp_v4 = *(unsigned int *)(temp_v0 + 0x38);
         }
 LAB_0036973c:
-        FUN_00100388(temp_v7,&LAB_003698f8,temp_v4);
+        textFormatBuffer(temp_v7,&LAB_003698f8,temp_v4);
         break;
       case 0xe:
         temp_v5 = temp_v5 + temp_v6;
@@ -262,18 +262,18 @@ LAB_0036981c:
         }
         rt_aeabi_memclr(&DAT_006199d8,0x80);
         if (temp_v1 < 100) {
-          FUN_00100388(&DAT_006199d8,&LAB_00369918,
+          textFormatBuffer(&DAT_006199d8,&LAB_00369918,
                        *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_005890d4 + temp_v1 * 4));
         }
         else {
-          FUN_00100388(&DAT_006199d8,&LAB_00369910,
+          textFormatBuffer(&DAT_006199d8,&LAB_00369910,
                        *(unsigned int *)(s__V_V_V_V_V_V_V_V_V_V_005890d4 + (temp_v1 - 100) * 4));
         }
         libc_strcpy(temp_v8,&DAT_006199d8);
-        FUN_00100388(temp_v7,&LAB_00369924,temp_v8);
+        textFormatBuffer(temp_v7,&LAB_00369924,temp_v8);
         break;
       case 0xf:
-        FUN_00100388(temp_v7,&LAB_00369930,
+        textFormatBuffer(temp_v7,&LAB_00369930,
                      (int)(*(float *)(temp_v0 + *(int *)(temp_v0 + 0x50) * 4 + 0x88) * 100.0f));
       }
       temp_v5 = temp_v5 + temp_v6;

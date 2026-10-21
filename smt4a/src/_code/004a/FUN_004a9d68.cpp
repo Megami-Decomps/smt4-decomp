@@ -19,7 +19,7 @@ extern unsigned int DAT_0057a9f4; /* 0x57a9f4 */
 extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_002a1850. */
-extern int FUN_003e8430(unsigned int);
+extern int btlScriptUnitHasFlags(unsigned int);
 
 
 unsigned int FUN_004a9d68(unsigned int param_1,unsigned int *param_2)
@@ -70,7 +70,7 @@ unsigned int FUN_004a9d68(unsigned int param_1,unsigned int *param_2)
       temp_v3 = ~DAT_0057a9f0;
       param_2[1] = param_2[1] & ~DAT_0057a9f4;
       *param_2 = *param_2 & temp_v3;
-      temp_v1 = FUN_003e8430(*puVar1);
+      temp_v1 = btlScriptUnitHasFlags(*puVar1);
       if (temp_v1 != 0) {
         *(unsigned char *)(puVar1 + temp_v2 * 0x53 + 0x468d) = 0;
         *(unsigned short *)(puVar1 + temp_v2 * 0x53 + 0x468b) = 5;

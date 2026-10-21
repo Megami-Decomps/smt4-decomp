@@ -12,11 +12,11 @@ typedef struct Obj14Ref {
     /* 0x04 */ Obj14 *instance;
 } Obj14Ref;
 
-extern Obj14Ref DAT_0057f254;
+extern Obj14Ref g_engineResourceHandles;
 
 u8 obj14IsZero(void)
 {
-    return DAT_0057f254.instance->unk14 == 0;
+    return g_engineResourceHandles.instance->unk14 == 0;
 }
 
 } /* extern "C" */

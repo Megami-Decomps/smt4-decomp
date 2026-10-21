@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-extern int FUN_0023a0d8(unsigned int, int **, unsigned int);
+extern int tokenResolveAddress(unsigned int, int **, unsigned int);
 extern unsigned int FUN_002b5c44(void);
 
 
@@ -29,7 +29,7 @@ int FUN_003df3b4(unsigned int *param_1,int param_2,int param_3,int *param_4)
   
   temp_v3 = param_4;
   temp_v0 = FUN_002b5c44();
-  temp_v1 = FUN_0023a0d8(temp_v0,&temp_v3,*param_1);
+  temp_v1 = tokenResolveAddress(temp_v0,&temp_v3,*param_1);
   if (-1 < temp_v1) {
     if (param_4 != (int *)0x0) {
       unaff_r10 = temp_v3;

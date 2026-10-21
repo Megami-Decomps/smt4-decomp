@@ -11,7 +11,7 @@ int FUN_00231bcc(int, int, int, int, int, int);
 int FUN_00288e68(...);
 int FUN_002b6c34(...);
 int FUN_002be56c(int, unsigned int, unsigned int, unsigned int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int VectorSignedToFloat(...);
 
@@ -35,7 +35,7 @@ extern int FUN_00262cb0(unsigned short);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf4f0. */
 
 
@@ -104,7 +104,7 @@ void FUN_003abae8(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v2 = (int)(temp_v7 + temp_v11);
   FUN_00288e68(temp_v0);
   FUN_002b6c34((int)(short)temp_v0,temp_v2,(int)(temp_v8 + fStack_54),param_5,0,0);
-  FUN_002be624(temp_v12,&LAB_003abd7c,*(unsigned int *)(temp_v5 + 0x5b4));
+  textFormatBuffer(temp_v12,&LAB_003abd7c,*(unsigned int *)(temp_v5 + 0x5b4));
   if (param_4 != 0) {
     temp_v5 = FUN_002bf4f0(param_1 + 200,0x4f0);
   }

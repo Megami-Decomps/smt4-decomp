@@ -27,7 +27,7 @@ extern unsigned char DAT_004d8b40; /* 0x4d8b40 */
 extern unsigned int DAT_004d8ba8; /* 0x4d8ba8 */
 extern unsigned char DAT_004d8ca0; /* 0x4d8ca0 */
 
-extern unsigned int FUN_002468e0(unsigned int, int);
+extern unsigned int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -37,7 +37,7 @@ fn_00326e94_arg0 * FUN_00326e94(fn_00326e94_arg0 *param_1)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_002468e0(DAT_0044ea94,DAT_0044f864 + DAT_0044ea8c);
+  temp_v0 = linkedFindItemByIndex(DAT_0044ea94,DAT_0044f864 + DAT_0044ea8c);
   rt_memcpy_w(&DAT_004d8b40,temp_v0,0x90);
   rt_memcpy_w(&DAT_004d8b40,&DAT_004d8ca0,0x80);
   if ((DAT_004d8ba8 & 2) != 0) {

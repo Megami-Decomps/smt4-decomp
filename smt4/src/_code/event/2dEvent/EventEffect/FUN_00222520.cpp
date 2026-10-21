@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0024dbc4(...);
 int FUN_00287728(int);
-int FUN_002c53f4(...);
+int mathInterpolateTimed(...);
 
 extern int g_eventEffect; /* 0x43dee8 */
 extern unsigned int DAT_0043df00; /* 0x43df00 */
@@ -16,7 +16,7 @@ extern unsigned int DAT_0043df04; /* 0x43df04 */
 /* Supplied declaration required: FUN_00287728. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 
 
 unsigned int FUN_00222520(void)
@@ -86,16 +86,16 @@ unsigned int FUN_00222520(void)
     temp_v1 = 0x3f19999a;
     if (*(int *)(temp_v0 + 0x10) - 0xfU < 0xbc) {
       temp_v6 = 0x3f800000;
-      FUN_002c53f4(0xca);
+      mathInterpolateTimed(0xca);
       *(unsigned int *)(temp_v0 + 0x14) = temp_v6;
     }
     temp_v6 = 0x3f333333;
     if (*(int *)(temp_v0 + 0x10) - 0xcbU < 8) {
-      FUN_002c53f4(8);
+      mathInterpolateTimed(8);
       *(unsigned int *)(temp_v0 + 0x14) = temp_v1;
     }
     if (*(int *)(temp_v0 + 0x10) >= 0xf0) {
-      FUN_002c53f4(0x3c,*(int *)(temp_v0 + 0x10) - 0xf0);
+      mathInterpolateTimed(0x3c,*(int *)(temp_v0 + 0x10) - 0xf0);
       *(unsigned int *)(temp_v0 + 0x14) = temp_v6;
     }
     temp_v2 = *(int *)(temp_v0 + 0x10) + 1;

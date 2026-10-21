@@ -21,7 +21,7 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(
 void *asdMemAlloc(s32 size, s32 alignment, s32 a, s32 b, s32 c);
 s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strlen(const char *s);
-void FUN_001d3dd4(void);
+void btlEventUpdateCurrentWork(void);
 void btlEventDestroy(void);
 
 extern EventState001e2240 *g_btlEvent; /* 0x435d48 */
@@ -33,7 +33,7 @@ void btlEventTaskStart(BtlEventTask001e2240 *task)
     EventState001e2240 *state;
 
     if (jobIsValid(task->drawTask) == 0) {
-        task->drawTask = taskCreateDraw("btlEvent Calc", 2, 0, 0, FUN_001d3dd4, btlEventDestroy, task, task->id);
+        task->drawTask = taskCreateDraw("btlEvent Calc", 2, 0, 0, btlEventUpdateCurrentWork, btlEventDestroy, task, task->id);
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEvent.cpp", 653);
         state = g_btlEvent = (EventState001e2240 *)asdMemAlloc(0x100, 0x100, 0, 0x30, 1);
         state->active = 0;

@@ -1,47 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `uiSpriteSetImageKeyframe` (_code @ 0x184c00, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr ip, [r0, #88] where the compiled block uses ldr r3, [r0, #88]. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_00184c00_arg0 fn_00184c00_arg0;
-struct fn_00184c00_arg0 {
-    unsigned char pad_0x0[0x20];
-    undefined4 field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x34];
-    int field_0x58; /* +0x58 */
-    short field_0x5c; /* +0x5c */
-    undefined2 field_0x5e; /* +0x5e */
-    char field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x26];
-    undefined1 field_0x87; /* +0x87 */
-    unsigned char pad_0x88[0x2];
-    undefined1 field_0x8a; /* +0x8a */
+struct SpriteImageKeyframe {
+    u32 image;          // +0x00
+    u32 alternateImage; // +0x04
+    u32 unk08;          // +0x08
 };
 
+struct UiSprite {
+    u8 unk00[0x20];
+    u32 image;                           // +0x20
+    u8 unk24[0x34];
+    const SpriteImageKeyframe* keyframes; // +0x58
+    s16 keyframeIndex;                    // +0x5C
+    u16 keyframeTime;                     // +0x5E
+    u8 alternateImage;                    // +0x60
+    u8 unk61[0x26];
+    u8 unk87;                            // +0x87
+    u8 unk88[2];
+    u8 unk8A;                            // +0x8A
+};
 
-void uiSpriteSetImageKeyframe(fn_00184c00_arg0 *param_1,int param_2,int param_3)
-
+extern "C" void uiSpriteSetImageKeyframe(UiSprite* sprite, s32 keyframeIndex,
+                                         s32 alternateImage)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if (param_1->field_0x58 != 0) {
-    param_1->field_0x5c = (short)param_2;
-    param_1->field_0x5e = 0;
-    param_1->field_0x87 = 0;
-    puVar1 = (unsigned int *)(param_1->field_0x58 + param_2 * 0xc);
-    param_1->field_0x8a = 0;
-    param_1->field_0x60 = (char)param_3;
-    if (param_3 != 0) {
-      temp_v0 = puVar1[1];
+    if (sprite->keyframes != NULL) {
+        sprite->keyframeIndex = (s16)keyframeIndex;
+        sprite->keyframeTime = 0;
+        sprite->unk87 = 0;
+        sprite->unk8A = 0;
+        sprite->alternateImage = (u8)alternateImage;
+        sprite->image = alternateImage != 0
+            ? sprite->keyframes[keyframeIndex].alternateImage
+            : sprite->keyframes[keyframeIndex].image;
     }
-    else {
-      temp_v0 = *puVar1;
-    }
-    param_1->field_0x20 = temp_v0;
-  }
-  return;
 }
-
-} /* extern "C" */

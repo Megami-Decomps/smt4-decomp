@@ -20,8 +20,8 @@ int FUN_0040a42c(...);
 int FUN_0040a508(...);
 int FUN_0040a640(void);
 int FUN_0040a710(...);
-int FUN_00493660(int, int, int, int);
-int FUN_00493764(...);
+int rectangleInitializeSelection(int, int, int, int);
+int rectangleResetSelection(...);
 int FUN_0049669c(unsigned int *);
 int FUN_0049a8b8(unsigned int *);
 int FUN_0049a9a8(void);
@@ -49,8 +49,8 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0040a508. */
 /* Supplied declaration required: FUN_0040a640. */
 /* Supplied declaration required: FUN_0040a710. */
-/* Supplied declaration required: FUN_00493660. */
-/* Supplied declaration required: FUN_00493764. */
+/* Supplied declaration required: rectangleInitializeSelection. */
+/* Supplied declaration required: rectangleResetSelection. */
 /* Supplied declaration required: FUN_0049669c. */
 /* Supplied declaration required: FUN_0049a8b8. */
 /* Supplied declaration required: FUN_0049a9a8. */
@@ -72,8 +72,8 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
   unsigned int *puVar7;
   
   *param_1 = 0;
-  temp_v1 = FUN_00493764(param_1 + 0xe9);
-  temp_v1 = FUN_00493764(temp_v1 + 0x14);
+  temp_v1 = rectangleResetSelection(param_1 + 0xe9);
+  temp_v1 = rectangleResetSelection(temp_v1 + 0x14);
   *(unsigned char **)(temp_v1 + 0x750) = &DAT_0055ca10;
   temp_v1 = temp_v1 + 0x7a8;
   FUN_002f5020(temp_v1,flagsDESet,0x74,9);
@@ -102,8 +102,8 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
   *(unsigned char *)(temp_v1 - 0x9f68) = 0;
   *(unsigned char *)(temp_v1 - 0x9f67) = 0;
   FUN_004cf7cc(temp_v1 - 0x9bbc);
-  FUN_00493660(temp_v1 - 0x9be4,0x140,0,0x20);
-  FUN_00493660(temp_v1 - 0x9bd0,0x140,0,0x20);
+  rectangleInitializeSelection(temp_v1 - 0x9be4,0x140,0,0x20);
+  rectangleInitializeSelection(temp_v1 - 0x9bd0,0x140,0,0x20);
   temp_v2 = 0x68;
   asdOperatorNew();
   puVar4 = (unsigned int *)0x0;

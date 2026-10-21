@@ -8,8 +8,8 @@ int CONCAT44(double, double);
 int FUN_0019dad8(float *);
 int FUN_00245ed0(void);
 int FUN_00245f48(void);
-int FUN_0024857c(float *);
-int FUN_0024b77c(...);
+int matrixCopySelectedToGlobal(float *);
+int randomAdvanceShiftRegister(...);
 int FUN_0024b830(int);
 int FUN_002a2c7c(void);
 int FUN_002b7064(void);
@@ -93,8 +93,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0019dad8. */
 /* Supplied declaration required: FUN_00245ed0. */
 /* Supplied declaration required: FUN_00245f48. */
-/* Supplied declaration required: FUN_0024857c. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: matrixCopySelectedToGlobal. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
@@ -218,7 +218,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
             temp_v2 = 0;
             temp_v8 = (temp_v7 + temp_v8 * temp_v33) * temp_v31;
             temp_v24 = temp_v8 / temp_v5;
-            FUN_0024b77c();
+            randomAdvanceShiftRegister();
             if ((temp_v2 & 1) != 0) {
               temp_v24 = -temp_v24;
             }
@@ -228,7 +228,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
               temp_v29 = (int)*(short *)(*temp_v28 + 2) / 5;
               temp_v2 = 0;
               temp_v25 = temp_v24;
-              FUN_0024b77c();
+              randomAdvanceShiftRegister();
               if ((temp_v2 & 1) != 0) {
                 temp_v8 = -temp_v10;
                 temp_v10 = temp_v8;
@@ -339,7 +339,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                   FUN_0024b830(0);
                   temp_v2 = 0;
                   temp_v19 = CONCAT44(temp_v14,(temp_v8 * 0.75f + 0.25f) * temp_v20);
-                  FUN_0024b77c();
+                  randomAdvanceShiftRegister();
                   if ((temp_v2 & 1) != 0) {
                     temp_v20 = -temp_v20;
                   }
@@ -363,7 +363,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                   FUN_00245f48();
                   temp_v41 = (float)((unsigned long long)temp_v19 >> 0x20);
                   temp_v14 = (float)temp_v19 + temp_v24 + temp_v12 + temp_v26;
-                  FUN_0024857c(&temp_v40);
+                  matrixCopySelectedToGlobal(&temp_v40);
                   *(float *)&puVar10[0x40] = temp_v35;
                   *(float *)&puVar10[0x41] = temp_v6;
                   *(float *)&puVar10[0x42] = temp_v34;
@@ -440,7 +440,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
             else {
               temp_v28[1] = -1;
               if (0 < temp_v39) {
-                FUN_0024b77c(0);
+                randomAdvanceShiftRegister(0);
                 __aeabi_uidivmod();
                 temp_v28[1] = temp_v28[1] - temp_v3;
               }

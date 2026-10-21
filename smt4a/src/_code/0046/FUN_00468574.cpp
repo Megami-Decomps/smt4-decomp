@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int FUN_00275bc8(...);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
@@ -22,7 +22,7 @@ extern unsigned char LAB_0046867c; /* 0x46867c */
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
@@ -61,7 +61,7 @@ void FUN_00468574(int param_1,int param_2)
       temp_v1 = gameFlagIsSet(0x467);
       if (temp_v1 != 0) {
         FUN_003c1060();
-        FUN_0019ea64(1);
+        messageSetMode(1);
         FUN_003c3e14();
         sysPlaySe(0x92);
         pickObjStart(param_1,&LAB_0046867c);

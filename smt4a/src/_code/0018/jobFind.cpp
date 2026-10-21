@@ -1,26 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `jobFind` (_code @ 0x184e20, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
 
 extern "C" {
-
-extern int g_asdProcess; /* 0x640118 */
-
-
-int jobFind(unsigned int param_1)
-
+extern AsdProcGroup *g_asdProcess;
+AsdProcess *jobFind(u32 handle)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8);
-  while( 1 ) {
-    if (temp_v0 == 0) {
-      return 0;
+    AsdProcess *process = g_asdProcess[handle >> ASD_PROC_GROUP_SHIFT].head;
+    u32 id = handle & ASD_PROC_ID_MASK;
+    while (process != NULL) {
+        if (process->id == id) { return process; }
+        process = process->next;
     }
-    if (*(unsigned int *)(temp_v0 + 0x24) == (param_1 & 0xfffff)) break;
-    temp_v0 = *(int *)(temp_v0 + 0x4c);
-  }
-  return temp_v0;
+    return NULL;
 }
-
-} /* extern "C" */
+}

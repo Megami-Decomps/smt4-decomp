@@ -10,7 +10,7 @@ int nw_gfx_RenderContext_ResetState_364D68(...);
 
 int FUN_0023d078(...);
 int FUN_0023d158(...);
-int FUN_0023d20c(...);
+int matrixScaleColumns(...);
 int FUN_0023d274(...);
 int FUN_002bc7f4(int, int [3]);
 int FUN_00349cdc(int, int, int, unsigned char [52]);
@@ -78,8 +78,8 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0023d078. */
 extern int FUN_0023d0d4(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
-extern unsigned int FUN_0023d1ec(int, unsigned int);
-/* Supplied declaration required: FUN_0023d20c. */
+extern unsigned int resourceGetIndexedEntry(int, unsigned int);
+/* Supplied declaration required: matrixScaleColumns. */
 /* Supplied declaration required: FUN_0023d274. */
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: FUN_002bc7f4. */
@@ -245,10 +245,10 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
           temp_v24 = temp_v0;
           temp_v37 = in_s0;
           nn_math_ARMv6_MTX34MultTranslateAsm(temp_v43,temp_v44,temp_v29);
-          FUN_0023d20c(temp_v43,temp_v43,&temp_v46);
+          matrixScaleColumns(temp_v43,temp_v43,&temp_v46);
           nn_math_ARMv6_MTX34MultAsm(temp_v43,temp_v43,&temp_v31);
           if (temp_v5 != temp_v27) {
-            temp_v2 = FUN_0023d1ec(temp_v27,0);
+            temp_v2 = resourceGetIndexedEntry(temp_v27,0);
             FUN_0023d158(temp_v23[0],temp_v2);
             temp_v5 = temp_v27;
           }
@@ -334,10 +334,10 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
           temp_v25 = temp_v0;
           temp_v37 = in_s0;
           nn_math_ARMv6_MTX34MultTranslateAsm(temp_v43,temp_v44,temp_v29);
-          FUN_0023d20c(temp_v43,temp_v43,&temp_v47);
+          matrixScaleColumns(temp_v43,temp_v43,&temp_v47);
           nn_math_ARMv6_MTX34MultAsm(temp_v43,temp_v43,&temp_v31);
           if (temp_v5 != temp_v3) {
-            temp_v2 = FUN_0023d1ec(temp_v3,0);
+            temp_v2 = resourceGetIndexedEntry(temp_v3,0);
             FUN_0023d158(temp_v23[0],temp_v2);
             temp_v5 = temp_v3;
           }
@@ -427,10 +427,10 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
           temp_v26 = temp_v0;
           temp_v37 = in_s0;
           nn_math_ARMv6_MTX34MultTranslateAsm(temp_v43,temp_v44,temp_v30);
-          FUN_0023d20c(temp_v43,temp_v43,&temp_v47);
+          matrixScaleColumns(temp_v43,temp_v43,&temp_v47);
           nn_math_ARMv6_MTX34MultAsm(temp_v43,temp_v43,&temp_v31);
           if (temp_v5 != temp_v25) {
-            temp_v2 = FUN_0023d1ec(temp_v25,0);
+            temp_v2 = resourceGetIndexedEntry(temp_v25,0);
             FUN_0023d158(temp_v23[0],temp_v2);
             temp_v5 = temp_v25;
           }

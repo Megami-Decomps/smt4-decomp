@@ -1,23 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00492c18` (_code @ 0x492c18, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses ldrd/strd instead of retail ldm and separate stores. */
+#include "common.h"
+struct ValuePair { u32 first,second; };
+struct Navigation { u8 unk00[96]; ValuePair value; };
 extern "C" {
-
-extern int g_naviMain; /* 0x587f28 */
-
-
-void FUN_00492c18(unsigned int param_1,unsigned int *param_2)
-
-{
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_naviMain;
-  temp_v1 = param_2[1];
-  *(unsigned int *)(g_naviMain + 0x60) = *param_2;
-  *(unsigned int *)(temp_v0 + 100) = temp_v1;
-  return;
+extern Navigation *g_naviMain;
+/* Updates the navigation value pair. */
+void FUN_00492c18(u32 unused, const ValuePair *value) { g_naviMain->value=*value; }
 }
-
-} /* extern "C" */

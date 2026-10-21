@@ -37,11 +37,11 @@ extern unsigned char DAT_00634d20; /* 0x634d20 */
 
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_002b30e4. */
-extern unsigned int FUN_002b41c4(unsigned int);
+extern unsigned int resourceResolveHeaderPointer(unsigned int);
 /* Supplied declaration required: FUN_002b41e4. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_memcpy_w144. */
-extern int FUN_00300778(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: FUN_00350a8c. */
 /* Supplied declaration required: FUN_00351590. */
@@ -65,7 +65,7 @@ unsigned int FUN_003c597c(void)
   unsigned int in_r12;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
+  temp_v0 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
   puVar2 = (unsigned int *)FUN_00376628(DAT_0059dbf4,*(unsigned int *)(temp_v0 + 0x90));
   DAT_0059dc04 = puVar2;
   rt_memcpy_w144(puVar2,temp_v0);
@@ -80,7 +80,7 @@ unsigned int FUN_003c597c(void)
   FUN_002b30e4();
   libc_strcpy(puVar2 + 0x27,*puVar3);
   if (*(short *)(puVar3 + 1) != 0x1b) {
-    temp_v1 = FUN_002b41c4(DAT_0059dbfc);
+    temp_v1 = resourceResolveHeaderPointer(DAT_0059dbfc);
     rt_memcpy(puVar3[3],temp_v1,puVar3[4]);
   }
   if (puVar3[3] != 0) {

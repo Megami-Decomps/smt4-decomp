@@ -12,7 +12,7 @@ SpriteInfo *FUN_001834a4(s32 group, s32 id);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void FUN_00168770(void);
 s32 FUN_002c2c68(void *scrollBar);   /* total entries */
-s32 FUN_00348ed0(void *scrollBar);   /* visible entries */
+s32 uiSearchPrimary(void *scrollBar);   /* visible entries */
 s32 FUN_002a4860(void *scrollBar);   /* first visible entry */
 
 /* Draw the panel's scroll bar: its track, and a thumb scaled to the visible share of the entries
@@ -30,17 +30,17 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     SpriteInfo *track = FUN_001834a4(0x33, 0x13);
     s32 thumbHeight;
 
-    if (FUN_00348ed0(scrollBar) >= FUN_002c2c68(scrollBar)) {
+    if (uiSearchPrimary(scrollBar) >= FUN_002c2c68(scrollBar)) {
         thumbHeight = track->size[1];
     } else {
         f32 pixelsPerEntry = (f32)track->size[1] / (f32)FUN_002c2c68(scrollBar);
 
-        thumbHeight = (s32)((f32)FUN_00348ed0(scrollBar) * pixelsPerEntry);
+        thumbHeight = (s32)((f32)uiSearchPrimary(scrollBar) * pixelsPerEntry);
         if (thumbHeight < 1) {
             thumbHeight = 1;
         }
         thumbOffset = (s32)((f32)FUN_002a4860(scrollBar) * pixelsPerEntry);
-        if (FUN_002a4860(scrollBar) + FUN_00348ed0(scrollBar) == FUN_002c2c68(scrollBar)
+        if (FUN_002a4860(scrollBar) + uiSearchPrimary(scrollBar) == FUN_002c2c68(scrollBar)
             && thumbOffset + thumbHeight < track->size[1]) {
             thumbOffset = track->size[1] - thumbHeight;
         }

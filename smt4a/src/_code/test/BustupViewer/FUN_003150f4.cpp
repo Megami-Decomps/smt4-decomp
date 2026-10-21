@@ -7,7 +7,7 @@ extern "C" {
 int dataTable00FindById(void);
 int FUN_003d209c(void);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int jobStop(unsigned int, int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
@@ -34,7 +34,7 @@ extern unsigned char LAB_003157a4; /* 0x3157a4 */
 extern unsigned int *g_bustupViewer; /* 0x588ff0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: jobStop. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -558,22 +558,22 @@ LAB_003153fc:
                     if (temp_v1 != 1) {
                       if (temp_v1 != 2) {
                         if (temp_v1 != 3) {
-                          FUN_00100388(temp_v11,&LAB_00315760);
+                          textFormatBuffer(temp_v11,&LAB_00315760);
                         }
                         else {
-                          FUN_00100388(temp_v11,&LAB_003157a4);
+                          textFormatBuffer(temp_v11,&LAB_003157a4);
                         }
                       }
                       else {
-                        FUN_00100388(temp_v11,&LAB_00315794);
+                        textFormatBuffer(temp_v11,&LAB_00315794);
                       }
                     }
                     else {
-                      FUN_00100388(temp_v11,&LAB_00315784);
+                      textFormatBuffer(temp_v11,&LAB_00315784);
                     }
                   }
                   else {
-                    FUN_00100388(temp_v11,&LAB_00315774);
+                    textFormatBuffer(temp_v11,&LAB_00315774);
                   }
                   temp_v1 = puVar3[0x27];
                   if (temp_v1 == 0) {

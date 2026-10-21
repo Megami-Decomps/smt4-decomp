@@ -62,7 +62,7 @@ extern int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_0046fb60. */
 /* Supplied declaration required: FUN_00473e44. */
 /* Supplied declaration required: FUN_004740b4. */
-extern int FUN_00474144(int);
+extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: FUN_00474164. */
 /* Supplied declaration required: FUN_004741f0. */
 extern int FUN_004743e4(int);
@@ -239,7 +239,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         do {
           temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
           if ((temp_v3 != 0) &&
-             (temp_v3 = FUN_00474144(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 == 0)) {
+             (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 == 0)) {
             return;
           }
           temp_v3 = *(int *)(param_2 + 0x310);
@@ -251,7 +251,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         do {
           temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v6 * 0x50 + 8);
           if ((temp_v3 != 0) &&
-             (temp_v3 = FUN_00474144(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 != 0)) {
+             (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + temp_v6 * 0x50), temp_v3 != 0)) {
             FUN_004740b4(*(int *)(param_2 + 0x318) + temp_v6 * 0x50);
           }
           temp_v6 = temp_v6 + 1;
@@ -275,7 +275,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
           do {
             temp_v3 = objGetFlagBit0(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50 + 8);
             if ((temp_v3 != 0) &&
-               (temp_v3 = FUN_00474144(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
+               (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
                temp_v3 != 0)) {
               FUN_004741f0(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50);
               *(unsigned int *)(param_2 + 0x358) = 1;

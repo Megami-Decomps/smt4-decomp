@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0020214c(...);
 int FUN_00470164(...);
 
@@ -28,7 +28,7 @@ struct fn_003fc1b0_arg0 {
 
 extern int *g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00470164. */
 extern int FUN_00470b18(int *, int, unsigned int);
@@ -45,7 +45,7 @@ void FUN_003fc1b0(fn_003fc1b0_arg0 *param_1,int param_2)
   int aiStack_50 [16];
   
   piVar3 = aiStack_50;
-  FUN_00100388(aiStack_50,"battle/devil/en%03d.bin",param_2);
+  textFormatBuffer(aiStack_50,"battle/devil/en%03d.bin",param_2);
   param_1->field_0x8 = 6;
   *(int *)&param_1->field_0xc = param_2 - 1;
   temp_v1 = FUN_00470b18(g_aocSystem,param_2,1);

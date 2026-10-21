@@ -10,7 +10,7 @@ int FUN_00297060(void);
 int FUN_00297468(...);
 int FUN_0029cc44(void);
 int buttonHelpSetPreset(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 int FUN_001db56c(void);
 int FUN_00220ffc(void);
@@ -84,7 +84,7 @@ extern int gameGetSlotTable(void);
 extern int recordPackedValue(unsigned short);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memCopy. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
@@ -404,7 +404,7 @@ unsigned int FUN_002ec588(int param_1)
         }
         devilGetRecord();
         temp_v8 = FUN_002cdecc((int)*(char *)(temp_v7 + 0x30));
-        FUN_002be624(temp_v12,&LAB_002ece48,temp_v8 + 1);
+        textFormatBuffer(temp_v12,&LAB_002ece48,temp_v8 + 1);
         FUN_00297468(temp_v12,param_1 + 0xd00,0);
         *(unsigned char *)(param_1 + 0xd63) = 1;
         FUN_0029cc44();

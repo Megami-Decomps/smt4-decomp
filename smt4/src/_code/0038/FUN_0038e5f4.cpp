@@ -9,7 +9,7 @@ int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
 int FUN_00233fcc(unsigned int *, int);
-int FUN_002340e4(unsigned int *);
+int timeInitializeActiveState(unsigned int *);
 int FUN_00234124(unsigned int *, unsigned int *);
 int memClear(int, int);
 
@@ -28,7 +28,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
 extern int FUN_0026b564(void);
 extern int strIsEmpty(unsigned int *);
@@ -61,7 +61,7 @@ void FUN_0038e5f4(unsigned int *param_1)
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  FUN_002340e4(&temp_v2);
+  timeInitializeActiveState(&temp_v2);
   temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 != 4) {

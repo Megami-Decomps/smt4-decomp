@@ -49,7 +49,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_00246cf0. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027e314(unsigned int);
+extern int battleUiIsFadeAndFieldReady(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028d1f4(int);
 /* Supplied declaration required: FUN_0029be5c. */
@@ -347,7 +347,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
     else {
       temp_v1 = padIsButtonPressed(1);
       if (((temp_v1 != 0) || (temp_v1 = FUN_003ae608(g_btlUiBlock,1), temp_v1 != 0)) &&
-         ((temp_v1 = FUN_0029e02c(), temp_v1 == 0 && (temp_v1 = FUN_0027e314(g_btlUiBlock), temp_v1 != 0))))
+         ((temp_v1 = FUN_0029e02c(), temp_v1 == 0 && (temp_v1 = battleUiIsFadeAndFieldReady(g_btlUiBlock), temp_v1 != 0))))
       {
         FUN_002bf80c(0x100016e);
         temp_v10 = 1;

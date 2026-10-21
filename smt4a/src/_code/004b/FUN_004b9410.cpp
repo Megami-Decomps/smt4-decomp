@@ -12,7 +12,7 @@ int FUN_004a0bac(int, int);
 int FUN_004b7128(int);
 int FUN_004b7a54(int);
 
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_001d1438. */
@@ -41,7 +41,7 @@ void FUN_004b9410(int param_1)
           ((temp_v2 & 0x1000000) == 0 && (temp_v2 & 0x2000000) == 0)) &&
          (((temp_v2 & 0x8000000) == 0 && (temp_v2 & 0x20000000) == 0 && ((temp_v2 & 0x10) != 0)))) {
         if ((temp_v2 & 0x80000) != 0) {
-          if (DAT_005f1c98 < 100) {
+          if (g_mapSelection < 100) {
             temp_v3 = 6;
           }
           else {

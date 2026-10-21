@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00201714(int *, int *, int *, int *, int *, int *, int *);
-int FUN_0025458c(int *);
+int mathAdvanceClamped(int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00201714. */
-/* Supplied declaration required: FUN_0025458c. */
+/* Supplied declaration required: mathAdvanceClamped. */
 
 
 void FUN_00200b24(int *param_1)
@@ -69,9 +69,9 @@ LAB_00200bc4:
   case 3:
     return;
   case 4:
-    FUN_0025458c(param_1 + 0xb);
-    FUN_0025458c(param_1 + 0xc);
-    FUN_0025458c(param_1 + 0xd);
+    mathAdvanceClamped(param_1 + 0xb);
+    mathAdvanceClamped(param_1 + 0xc);
+    mathAdvanceClamped(param_1 + 0xd);
     if (param_1[1] + 10 > param_1[2]) {
       param_1[2] = param_1[2] + 1;
       return;

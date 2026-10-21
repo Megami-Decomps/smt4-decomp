@@ -4,7 +4,7 @@ extern "C" {
 
 u32 scrGetArg(u32 index);
 int scrSetResult(u32 value);
-int FUN_002be624(char *buffer, const char *format, ...);
+int textFormatBuffer(char *buffer, const char *format, ...);
 s32 FUN_002c1d5c(void);
 u32 FUN_002d848c(const char *path);
 
@@ -16,7 +16,7 @@ u32 FUN_002f5f0c(void)
     u32 result = 0;
 
     if (FUN_002c1d5c() == 0) {
-        FUN_002be624(path, "battle/effect/EV_%03d.eft", id);
+        textFormatBuffer(path, "battle/effect/EV_%03d.eft", id);
         result = FUN_002d848c(path);
     }
     scrSetResult(result);

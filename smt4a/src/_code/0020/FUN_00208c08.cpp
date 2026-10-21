@@ -25,7 +25,7 @@ int aocHandleButtons(...);
 int FUN_0040ae70(...);
 int VectorSignedToFloat(...);
 
-int FUN_00100388(int, unsigned int);
+int textFormatBuffer(int, unsigned int);
 int asdOperatorNew(void);
 int FUN_00163aa4(...);
 int dataTable00FindById(void);
@@ -68,7 +68,7 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00163aa4. */
@@ -105,7 +105,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00340a94. */
 /* Supplied declaration required: FUN_00371c3c. */
 extern int lmapSceneGetScript(void);
-extern int FUN_0037df48(void);
+extern int statusDownGetMode(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_0038b3f8. */
 extern int FUN_0039c1f4(void);
@@ -173,7 +173,7 @@ unsigned int FUN_00208c08(void)
   }
   if ((*(char *)(temp_v2 + 0x20ac) == '\0') && (*(int *)(temp_v2 + 0x20cc) != 0)) {
     temp_v4 = FUN_002f72dc(temp_v2);
-    FUN_00100388(temp_v2 + 0x2068,temp_v4);
+    textFormatBuffer(temp_v2 + 0x2068,temp_v4);
     *(unsigned char *)(temp_v2 + 0x20ac) = 1;
   }
   switch(*(unsigned int *)(temp_v2 + 0x1368)) {
@@ -568,7 +568,7 @@ LAB_002097e0:
       linkHolderRunAll(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
     }
     if ((*(char *)(temp_v2 + 0x2015) == '\0') && (temp_v3 = useCounterIsFinished(), temp_v3 != 0)) {
-      temp_v7 = FUN_0037df48();
+      temp_v7 = statusDownGetMode();
       *(char *)(temp_v2 + 0x137c) = (char)temp_v7;
       temp_v3 = temp_v7;
       if (temp_v7 < 0) {

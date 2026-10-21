@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_003ebec8; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+
+void FUN_003997b0(void)
+{
+
+}
+
+} /* extern "C" */

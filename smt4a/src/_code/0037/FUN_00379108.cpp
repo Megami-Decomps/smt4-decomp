@@ -7,7 +7,7 @@ extern "C" {
 int ptrListRemoveClearOwner(unsigned int);
 int FUN_001bc124(void);
 int FUN_001f3eec(void);
-int FUN_003fd76c(int, int *);
+int controllerSetDestination(int, int *);
 int VectorSignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -26,7 +26,7 @@ extern float DAT_0058128c; /* 0x58128c */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_001f3eec. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 
 
 void FUN_00379108(void)
@@ -57,7 +57,7 @@ void FUN_00379108(void)
     temp_v0 = 0x3f800000;
     FUN_001f3eec();
     temp_v2 = *(int *)(*(int *)(g_lmapScene + 400) + 4);
-    FUN_003fd76c(temp_v2,&temp_v4);
+    controllerSetDestination(temp_v2,&temp_v4);
     *(unsigned int *)(temp_v2 + 0x1fc) = temp_v0;
     return;
   }

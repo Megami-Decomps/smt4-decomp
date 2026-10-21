@@ -29,7 +29,7 @@ extern unsigned int *DAT_0043df28; /* 0x43df28 */
 extern unsigned int DAT_0043df40; /* 0x43df40 */
 extern unsigned int DAT_0043df44; /* 0x43df44 */
 
-extern int FUN_0024bb10(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
@@ -78,7 +78,7 @@ void FUN_002cf150(unsigned int param_1,unsigned int param_2)
   puVar1[5] = param_2;
   temp_v1 = 0;
   do {
-    temp_v0 = FUN_0024bb10((&DAT_0043df40)[temp_v1 * 3]);
+    temp_v0 = textureGetIndexedResource((&DAT_0043df40)[temp_v1 * 3]);
     if (temp_v0 == 0) {
       asdTMTexTableLoadTmx((&DAT_0043df40)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df49) = 1;

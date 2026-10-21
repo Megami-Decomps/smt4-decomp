@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_0018a924(...);
 int FUN_00280070(...);
@@ -117,7 +117,7 @@ static float romwright_sqrt_4(float value)
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 extern unsigned int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018a924. */
@@ -616,10 +616,10 @@ LAB_004f33d8:
     temp_v28 = temp_v0;
     temp_v32 = temp_v0;
     if (((unsigned int)param_1[0x193] & 0xc000000) != 0) {
-      FUN_001418fc(param_1 + 0x1b);
+      uiSetFloatPair(param_1 + 0x1b);
     }
     else {
-      FUN_001418fc(param_1 + 0x1b);
+      uiSetFloatPair(param_1 + 0x1b);
     }
     temp_v47 = param_1[0x16f] + param_1[0x20c];
     pfStack_11c = &temp_v45;

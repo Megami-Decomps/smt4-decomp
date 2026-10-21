@@ -9,7 +9,7 @@ int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
 int asdTextureSetImage(...);
 int asdTextureCreate(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int asdMemFree(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
@@ -55,7 +55,7 @@ extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdFatalError. */
@@ -152,7 +152,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     builtin_strncpy(temp_v6,"h\fB",4);
     if (*(short *)((int)param_1->field_0x10 + 4) != 0) {
       do {
-        FUN_002be624(temp_v9,&LAB_0033e08c,(void *)((int)param_1->field_0x14 + temp_v4 * 0x20));
+        textFormatBuffer(temp_v9,&LAB_0033e08c,(void *)((int)param_1->field_0x14 + temp_v4 * 0x20));
         puVar10 = temp_v9;
         puVar4 = temp_v7;
         temp_v10 = 0;

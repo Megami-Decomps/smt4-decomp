@@ -1,20 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00426124` (_code @ 0x426124, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-int FUN_0043a794(void);
-
-/* Supplied declaration required: FUN_0043a794. */
-
-
-unsigned int FUN_00426124(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  FUN_0043a794();
-  return param_1 ^ 1;
+u32 FUN_0043a794(u32 value);
+/* Toggles the implementation's boolean result. */
+u32 FUN_00426124(u32 value) { return FUN_0043a794(value) ^ 1; }
 }
-
-} /* extern "C" */

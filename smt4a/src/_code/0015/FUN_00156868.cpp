@@ -1,20 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156868` (_code @ 0x156868, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct Object {
+    u8 unk00[0x40]; // 0x00
+    u8 unk40;       // 0x40
+};
 
-int FUN_001ad9b4(void);
+extern "C" Object* FUN_001ad9b4(void);
 
-/* Supplied declaration required: FUN_001ad9b4. */
-
-
-void FUN_00156868(void)
-
+extern "C" u8* FUN_00156868(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001ad9b4();
-  return;
+    Object* object = FUN_001ad9b4();
+    return object ? &object->unk40 : 0;
 }
-
-} /* extern "C" */

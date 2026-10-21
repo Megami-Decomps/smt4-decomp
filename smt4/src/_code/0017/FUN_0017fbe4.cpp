@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00241c58(int);
+int taskUpdateOrderedPasses(int);
 int FUN_002c1e30(int, int);
 int FUN_002c1edc(int, int, int, int *);
 int FUN_002ee56c(void);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00241c58. */
+/* Supplied declaration required: taskUpdateOrderedPasses. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
@@ -38,7 +38,7 @@ unsigned int FUN_0017fbe4(void)
   temp_v2 = 0;
   FUN_002c1edc(temp_v0,temp_v0 + 0x508,temp_v0 + 0x514,&temp_v1);
   FUN_002c1e30(temp_v0,1);
-  FUN_00241c58(0);
+  taskUpdateOrderedPasses(0);
   return 0;
 }
 

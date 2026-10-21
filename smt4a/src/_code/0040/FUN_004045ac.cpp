@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(void);
@@ -26,7 +26,7 @@ extern unsigned char LAB_00404968; /* 0x404968 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -120,7 +120,7 @@ void FUN_004045ac(int param_1,int param_2,int param_3)
       gameGetPlayerData();
       temp_v5 = FUN_0015687c();
     }
-    FUN_00100388(temp_v8,&LAB_00404968,temp_v5);
+    textFormatBuffer(temp_v8,&LAB_00404968,temp_v5);
     temp_v3 = FUN_001834a4(0x32,5);
     temp_v6 = 0.26f;
     FUN_001879d0(g_renderCtx);

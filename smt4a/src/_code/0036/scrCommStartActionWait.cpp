@@ -6,7 +6,7 @@ extern u32 scrGetArg(s32 index);
 extern u32 scrGetCommandFrame(void);
 extern u16 dataTable0aSub0GetValueById(u32 id);
 extern void saveSlotFindById(u32 id);
-extern void FUN_003c6034(s32 id, u16 value);
+extern void campArousalSkillStart(s32 id, u16 value);
 extern u32 FUN_003c5fdc(void);
 
 /* Script command: starts the action for the id in argument 0 on the first call, then waits on FUN_003c5fdc. */
@@ -22,7 +22,7 @@ u32 scrCommStartActionWait(void)
             return 1;
         }
         saveSlotFindById(id & 0xFFFF);
-        FUN_003c6034(id, value);
+        campArousalSkillStart(id, value);
     }
     if (FUN_003c5fdc() != 0) {
         return 1;

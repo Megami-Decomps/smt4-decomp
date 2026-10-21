@@ -49,7 +49,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0037aa68. */
 extern int FUN_00387580(unsigned int);
-extern int FUN_003b5e48(unsigned int, unsigned int, unsigned int);
+extern int flagsPackFourBooleans(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: block530OwnerReset. */
 /* Supplied declaration required: FUN_004097b4. */
 /* Supplied declaration required: FUN_004ff058. */
@@ -167,7 +167,7 @@ void FUN_0040c190(int param_1)
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
   temp_v0 = g_renderCtx;
-  temp_v2 = FUN_003b5e48(1,1,1);
+  temp_v2 = flagsPackFourBooleans(1,1,1);
   piVar6 = (int *)(temp_v0 + 0x1298);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];

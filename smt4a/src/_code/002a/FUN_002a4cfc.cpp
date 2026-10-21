@@ -58,7 +58,7 @@ int FUN_00334560(void);
 int FUN_0035c810(void);
 int FUN_0035dbd4(int);
 int FUN_00388758(...);
-int FUN_003c3e48(...);
+int partyPanelSetHidden(...);
 int FUN_003d386c(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -114,11 +114,11 @@ extern int FUN_002c90b0(void);
 /* Supplied declaration required: FUN_0031f924. */
 extern int stateAtF4IsActive(void);
 /* Supplied declaration required: FUN_0032fbd0. */
-extern int FUN_00330b58(void);
+extern int gameDataBlocksGetSelectedValue(void);
 /* Supplied declaration required: FUN_003344b4. */
 /* Supplied declaration required: FUN_00334560. */
 /* Supplied declaration required: FUN_00359974. */
-extern int FUN_0035a044(void);
+extern int campCecEditIsStateSixteen(void);
 /* Supplied declaration required: FUN_0035c810. */
 /* Supplied declaration required: FUN_0035dbd4. */
 /* Supplied declaration required: FUN_0035de50. */
@@ -130,7 +130,7 @@ extern int FUN_0035a044(void);
 /* Supplied declaration required: FUN_0038a694. */
 /* Supplied declaration required: FUN_0038b548. */
 /* Supplied declaration required: FUN_0039a638. */
-/* Supplied declaration required: FUN_003c3e48. */
+/* Supplied declaration required: partyPanelSetHidden. */
 /* Supplied declaration required: FUN_003d386c. */
 extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: obj48Arm. */
@@ -308,7 +308,7 @@ void FUN_002a4cfc(void)
   case 0x1a:
     FUN_0026fc00(2,3,0xffffffff,0);
     FUN_00388758(1);
-    FUN_003c3e48(0);
+    partyPanelSetHidden(0);
     FUN_0020b660(0x15);
     return;
   case 0x1b:
@@ -453,7 +453,7 @@ void FUN_002a4cfc(void)
       FUN_0026f0c4();
       FUN_0035de50();
       FUN_00388758(1);
-      FUN_003c3e48(1);
+      partyPanelSetHidden(1);
       FUN_002c39dc(0xd,0,0xffffffff);
       FUN_00284ee4(1);
       FUN_00215bbc();
@@ -472,7 +472,7 @@ void FUN_002a4cfc(void)
     FUN_0039a638();
     return;
   case 0x35:
-    temp_v2 = FUN_00330b58();
+    temp_v2 = gameDataBlocksGetSelectedValue();
     if (temp_v2 == 0) {
       *(unsigned int *)(temp_v3 + 0x2c) = 0;
       *(unsigned int *)(temp_v3 + 0x1c) = 0x35;
@@ -672,7 +672,7 @@ void FUN_002a4cfc(void)
   case 0x4c:
   case 0x4d:
   case 0x4e:
-    temp_v4 = FUN_0035a044();
+    temp_v4 = campCecEditIsStateSixteen();
     if (temp_v4 != 0) {
       if (temp_v2 == 0x48) {
         temp_v6 = temp_v3 + 0x2b4;

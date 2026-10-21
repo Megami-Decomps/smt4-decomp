@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelSlotSetColor(int);
-int FUN_00263670(int);
+int asdModelSlotSetTint(int);
 int FUN_0029c2cc(unsigned int, int);
 int modelSlotAttachChild(unsigned int, int);
 int FUN_002a55a8(unsigned int, int);
@@ -22,7 +22,7 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 extern unsigned char LAB_00155650; /* 0x155650 */
 
 /* Supplied declaration required: asdModelSlotSetColor. */
-/* Supplied declaration required: FUN_00263670. */
+/* Supplied declaration required: asdModelSlotSetTint. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a55a8. */
@@ -70,7 +70,7 @@ void FUN_00263988(int param_1,int param_2)
       temp_v0 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x550) * 4 + 0x3c) + 4);
       *(unsigned char **)(temp_v0 + 0x4c) = &LAB_00155650;
       *(unsigned char *)(temp_v0 + 0x58) = 1;
-      FUN_00263670(0);
+      asdModelSlotSetTint(0);
       asdModelSlotSetColor(0);
       return;
     }
@@ -79,7 +79,7 @@ void FUN_00263988(int param_1,int param_2)
       temp_v0 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x550) * 4 + 0x3c) + 4);
       *(unsigned char **)(temp_v0 + 0x4c) = &LAB_00155650;
       *(unsigned char *)(temp_v0 + 0x58) = 1;
-      FUN_00263670(0);
+      asdModelSlotSetTint(0);
       asdModelSlotSetColor(0);
       return;
     }
@@ -88,7 +88,7 @@ void FUN_00263988(int param_1,int param_2)
       temp_v0 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x550) * 4 + 0x3c) + 4);
       *(romwright_code **)(temp_v0 + 0x4c) = nw_anim_PlayPolicy_Loop;
       *(unsigned char *)(temp_v0 + 0x58) = 1;
-      FUN_00263670(0);
+      asdModelSlotSetTint(0);
       asdModelSlotSetColor(0);
       return;
     }

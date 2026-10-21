@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00249e54(...);
 int libc_strcmp(...);
 int libc_strncmp(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(...);
 int libc_strlen(...);
 int memClear(...);
@@ -36,7 +36,7 @@ extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435
 extern unsigned int FUN_0024a6b0(int);
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: libc_strncmp. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: memClear. */
@@ -82,7 +82,7 @@ void FUN_003dbc1c(int param_1)
                (temp_v1 = temp_v3, libc_strcmp(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v1 != 0)) {
               memClear(temp_v7,0x80);
               memClear(temp_v8,0x80);
-              FUN_002be624(temp_v8,"battle/effect/%s.eft",temp_v3);
+              textFormatBuffer(temp_v8,"battle/effect/%s.eft",temp_v3);
               libc_strcpy(temp_v7,temp_v8);
               temp_v1 = libc_strlen(temp_v7);
               if (temp_v1 != 0) {

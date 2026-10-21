@@ -14,7 +14,7 @@ int FUN_001a90e0(unsigned char *);
 int sysMemClear(...);
 int rt_memclr(unsigned char *, int);
 int FUN_0048738c(unsigned char *);
-int FUN_00493660(unsigned char *, int, int, int);
+int rectangleInitializeSelection(unsigned char *, int, int, int);
 int FUN_004cf7cc(...);
 int fillTwoWordsWithByte(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned char *);
@@ -46,7 +46,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0048738c. */
-/* Supplied declaration required: FUN_00493660. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004cf7cc. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -71,7 +71,7 @@ void FUN_00485e74(unsigned char *param_1)
   rt_memclr(param_1 + 0x66,0x100);
   param_1[100] = 0;
   param_1[0x65] = 0;
-  FUN_00493660(param_1 + 0x4d0,0,0,0x13);
+  rectangleInitializeSelection(param_1 + 0x4d0,0,0,0x13);
   *(unsigned int *)(param_1 + 4) = 0;
   *(unsigned int *)(param_1 + 8) = 0;
   FUN_001a90e0(param_1 + 0x56);

@@ -11,7 +11,7 @@ void *fileSlotGetBuffer(u32 slot);
 void *FUN_002903f0(void);
 int FUN_0028ed3c(void *object, s32 arg0, s32 arg1);
 int FUN_002bff50(void);
-s32 FUN_00254e2c(void *buffer, s32 arg1, s32 step, s32 arg3, s32 arg4);
+s32 messageForwardDefaultMode(void *buffer, s32 arg1, s32 step, s32 arg3, s32 arg4);
 int FUN_0029016c(void *object, s32 arg);
 int FUN_00290248(void *object);
 int FUN_002900d0(void);
@@ -35,7 +35,7 @@ u32 scrComm_Message_ConfirmAndApplySimple(void)
         object = FUN_002903f0();
         FUN_0028ed3c(object, 0, 1);
         FUN_002bff50();
-        result = FUN_00254e2c(buffer, 2, scrWorkGetValue(1), 6, 0);
+        result = messageForwardDefaultMode(buffer, 2, scrWorkGetValue(1), 6, 0);
         scrWorkSetValue(1, scrWorkGetValue(1) + 1);
         if (result == 1) {
             scrWorkSetValue(1, 0);

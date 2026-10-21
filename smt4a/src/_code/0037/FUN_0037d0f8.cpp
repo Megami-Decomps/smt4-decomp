@@ -15,7 +15,7 @@ extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: eventTexSetJobParam. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_00389f60. */
-extern int FUN_003afde8(void);
+extern int eventTexHasMissingValue(void);
 /* Supplied declaration required: FUN_003affe8. */
 
 
@@ -29,7 +29,7 @@ unsigned int FUN_0037d0f8(void)
   
   temp_v0 = scrGetArg(0);
   FUN_00275b10(1);
-  temp_v1 = FUN_003afde8();
+  temp_v1 = eventTexHasMissingValue();
   temp_v2 = 0;
   if (temp_v1 != 0) {
     FUN_003affe8(temp_v0);

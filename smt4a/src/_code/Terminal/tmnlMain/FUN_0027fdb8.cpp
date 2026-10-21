@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_0019ea64(...);
+int messageSetMode(...);
 int FUN_0022677c(...);
 int gameFlagSetValue(...);
 int FUN_00408184(...);
@@ -35,7 +35,7 @@ extern unsigned int *g_tmnl; /* 0x56fd30 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
@@ -80,7 +80,7 @@ void FUN_0027fdb8(unsigned int *param_1)
   puVar1[0x164] = 0;
   puVar1[0x168] = 0;
   puVar1[0x167] = 0;
-  FUN_0019ea64(0);
+  messageSetMode(0);
   puVar1[0x15] = 0;
   *(unsigned char *)(puVar1 + 1) = 0;
   if (param_1 != (unsigned int *)0x0) {

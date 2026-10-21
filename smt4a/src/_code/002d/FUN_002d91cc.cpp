@@ -12,7 +12,7 @@ int FUN_002e364c(int);
 int FUN_00303460(...);
 int FUN_00313648(int);
 int FUN_00314c38(int, int, int, int, int, int);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int linkHolderSetFlag(unsigned int);
 int linkHolderClearFlag(unsigned int);
 
@@ -39,7 +39,7 @@ extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00314c38. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
@@ -121,14 +121,14 @@ void FUN_002d91cc(void)
       }
       if (*(int *)(g_lmapScene + 8) >= 2) {
         temp_v10 = *(float *)(g_lmapScene + 0x1c);
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         temp_v10 = temp_v10 * temp_v3;
         FUN_001bc124();
         temp_v0 = g_lmapScene;
         temp_v4 = 20.0f;
         *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v10 * 20.0f;
         temp_v10 = *(float *)(temp_v0 + 0x1c);
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         temp_v10 = temp_v10 * temp_v3;
         FUN_001bbf0c();
         temp_v0 = g_lmapScene;

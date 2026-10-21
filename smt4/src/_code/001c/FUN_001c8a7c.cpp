@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 
 extern int FUN_0026b738(unsigned short);
-extern int FUN_0026b780(unsigned int, unsigned short);
+extern int recordContainsPairedId(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_002b7bca. */
 
 
@@ -108,7 +108,7 @@ void FUN_001c8a7c(int param_1,unsigned int param_2,int param_3,int param_4)
         *(unsigned short *)(param_1 + (temp_v7 + temp_v3) * 2 + 0xd134) = 0;
       }
     }
-    temp_v7 = FUN_0026b780(param_2,*(unsigned short *)(temp_v9 + 0x34));
+    temp_v7 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34));
     if (temp_v7 != 0) {
       if (*(short *)(param_1 + 0xd136) == *(short *)(temp_v9 + 0x34)) {
         *(unsigned short *)(param_1 + 0xd134) = 0;
@@ -134,10 +134,10 @@ void FUN_001c8a7c(int param_1,unsigned int param_2,int param_3,int param_4)
     }
     temp_v2 = FUN_0026b738(temp_v0);
     param_4 = temp_v1;
-    if ((temp_v2 == 0) || (temp_v2 = FUN_0026b780(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v2 != 0))
+    if ((temp_v2 == 0) || (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v2 != 0))
     {
       temp_v2 = FUN_0026b738(temp_v0);
-      if ((temp_v2 == 0) && (temp_v2 = FUN_0026b780(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v2 != 0)
+      if ((temp_v2 == 0) && (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v2 != 0)
          ) {
         *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) + 1;
         *(unsigned short *)(temp_v5 + 0xd124) = 1;
@@ -145,7 +145,7 @@ void FUN_001c8a7c(int param_1,unsigned int param_2,int param_3,int param_4)
       else {
         temp_v5 = FUN_0026b738(temp_v0);
         if (((temp_v5 == 0) &&
-            (temp_v5 = FUN_0026b780(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v5 == 0)) ||
+            (temp_v5 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v5 == 0)) ||
            (*(short *)(param_3 + temp_v1 * 2 + 0x34) == 0)) {
           *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) - 1;
         }

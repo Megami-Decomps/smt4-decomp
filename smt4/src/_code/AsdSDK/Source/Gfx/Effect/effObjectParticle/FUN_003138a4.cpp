@@ -36,8 +36,8 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern char *FUN_0024c3d8(fn_003138a4_arg0 *);
-extern int FUN_0024c3f8(void);
+extern char *resourceResolveDataPointer(fn_003138a4_arg0 *);
+extern int resourceResolveHeaderPointer(void);
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: memCopy. */
 /* Supplied declaration required: memAlloc. */
@@ -61,7 +61,7 @@ unsigned int * FUN_003138a4(fn_003138a4_arg0 *param_1)
   unsigned char temp_v5;
   unsigned char temp_v6;
   
-  temp_v1 = FUN_0024c3f8();
+  temp_v1 = resourceResolveHeaderPointer();
   temp_v2 = *(int *)(temp_v1 + 100);
   if (temp_v2 == 0) {
     temp_v2 = *(int *)(temp_v1 + 0xfc);
@@ -79,7 +79,7 @@ unsigned int * FUN_003138a4(fn_003138a4_arg0 *param_1)
   rt_memcpy_w(puVar4 + 4,temp_v1,0x44);
   FUN_00313760(puVar4,param_1->field_0xc,temp_v1 + 0x44);
   if ((*(int *)(puVar4[0x27] + 8) != 0) &&
-     (pcVar5 = (char *)FUN_0024c3d8(param_1), pcVar5 != (char *)0x0)) {
+     (pcVar5 = (char *)resourceResolveDataPointer(param_1), pcVar5 != (char *)0x0)) {
     if ((param_1->field_0x1c == 3) && (param_1 != (fn_003138a4_arg0 *)0x0)) {
       temp_v4 = param_1->field_0x24;
       if (*pcVar5 == 'C') {

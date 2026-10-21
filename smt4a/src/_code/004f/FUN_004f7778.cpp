@@ -7,7 +7,7 @@ extern "C" {
 int sysMemClear(int, int);
 int FUN_003bfd84(unsigned char [524], unsigned int);
 int FUN_003cbb60(unsigned int, int);
-int FUN_003fd76c(unsigned int, float *);
+int controllerSetDestination(unsigned int, float *);
 int FUN_003fe9b4(unsigned int, unsigned char [12]);
 int FUN_004019c0(int, unsigned char [12]);
 int FUN_00401b50(int, float *);
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003bfd84. */
 /* Supplied declaration required: FUN_003cbb60. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fe9b4. */
 /* Supplied declaration required: FUN_004019c0. */
 /* Supplied declaration required: FUN_00401b50. */
@@ -71,7 +71,7 @@ unsigned int FUN_004f7778(int param_1)
           temp_v6 = temp_v6 + *(float *)(temp_v0 + 0x1a0);
           temp_v7 = temp_v7 + *(float *)(temp_v0 + 0x1a4);
           temp_v8 = temp_v8 + *(float *)(temp_v0 + 0x1a8);
-          FUN_003fd76c(temp_v4,&temp_v6);
+          controllerSetDestination(temp_v4,&temp_v6);
           FUN_003bfd84(temp_v5,*(unsigned int *)(*piVar4 + 4));
           temp_v0 = param_1 + temp_v1 * 0x20c;
           rt_memcpy_w(temp_v0 + 0x3618,temp_v5,0x20c);

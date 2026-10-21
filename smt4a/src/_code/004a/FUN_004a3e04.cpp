@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char *, unsigned int);
+int textFormatBuffer(int, unsigned char *, unsigned int);
 int FUN_0018349c(int, int);
 int FUN_00184310(void);
 int FUN_004a8750(unsigned int, int, int);
@@ -21,12 +21,12 @@ extern unsigned char LAB_004a4088; /* 0x4a4088 */
 extern int DAT_0057f0b8; /* 0x57f0b8 */
 extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_004a8750. */
-extern int FUN_004d0040(int);
+extern int rangeGetMinimumLimit(int);
 
 
 void FUN_004a3e04(int param_1)
@@ -52,7 +52,7 @@ void FUN_004a3e04(int param_1)
   
   if (*(int *)(param_1 + 0x28) != 0) {
     temp_v5 = FUN_002a482c(param_1 + 0x20);
-    temp_v6 = FUN_004d0040(param_1 + 0x20);
+    temp_v6 = rangeGetMinimumLimit(param_1 + 0x20);
     if ((temp_v5 != DAT_0057f0b8) && (temp_v9 = 0, DAT_0057f0b8 = temp_v5, 0 < temp_v6)) {
       do {
         temp_v13 = 0xffffffff;
@@ -138,7 +138,7 @@ void FUN_004a3e04(int param_1)
         temp_v4 = *(short *)(temp_v7 + 10);
         *(int *)(temp_v9 * 4 + 0x5e1cf8) = (int)*(short *)(temp_v7 + 8) + (int)temp_v2;
         *(int *)(temp_v9 * 4 + 0x5e1d20) = (int)temp_v4 + (int)temp_v3;
-        FUN_00100388(temp_v9 * 0x20 + 0x5e1d48,&LAB_004a4088,temp_v12);
+        textFormatBuffer(temp_v9 * 0x20 + 0x5e1d48,&LAB_004a4088,temp_v12);
         (&DAT_005e1e88)[temp_v9] = temp_v11;
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < temp_v6);

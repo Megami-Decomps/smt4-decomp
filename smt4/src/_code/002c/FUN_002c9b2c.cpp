@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 
 extern int g_lmapScene; /* 0x447e88 */
 
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 
 
 void FUN_002c9b2c(void)
@@ -38,7 +38,7 @@ void FUN_002c9b2c(void)
   *(float *)(temp_v0 + 0x150) = (in_s3 - in_s0) * 0.055555556f;
   *(float *)(temp_v0 + 0x154) = (in_s4 - in_s1) * 0.055555556f;
   *(float *)(temp_v0 + 0x158) = (in_s5 - in_s2) * 0.055555556f;
-  FUN_00287be4();
+  mathPositionHeadingDegrees();
   *(float *)(g_lmapScene + 0x50) = in_s0;
   return;
 }

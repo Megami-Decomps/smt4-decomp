@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [36], unsigned char *, int);
+int textFormatBuffer(unsigned char [36], unsigned char *, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 
 extern unsigned char LAB_004b940c; /* 0x4b940c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_004ba698(int);
@@ -25,7 +25,7 @@ void FUN_004b93a8(int param_1)
   
   temp_v0 = FUN_004ba698(param_1 + 0x9c);
   if (temp_v0 != 0) {
-    FUN_00100388(temp_v2,&LAB_004b940c,*(int *)(param_1 + 0x1118) + 0x20);
+    textFormatBuffer(temp_v2,&LAB_004b940c,*(int *)(param_1 + 0x1118) + 0x20);
     temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x1128),temp_v2);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1130),temp_v1);
     *(unsigned int *)(param_1 + 0x28) = 4;

@@ -17,7 +17,7 @@ extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: scrGetArg. */
 extern int scrGetCommandFrame(void);
-extern int FUN_003309c8(void);
+extern int frameTextureGetState(void);
 
 
 unsigned int FUN_00314d1c(void)
@@ -42,7 +42,7 @@ unsigned int FUN_00314d1c(void)
     }
     temp_v1 = scrGetArg(0);
     if (temp_v1 == 0) {
-      temp_v1 = FUN_003309c8();
+      temp_v1 = frameTextureGetState();
       if (temp_v1 == 0) {
         FUN_001f4908(0,temp_v0,0xff);
       }
@@ -52,14 +52,14 @@ unsigned int FUN_00314d1c(void)
     if (temp_v1 != 1) {
       return 1;
     }
-    temp_v1 = FUN_003309c8();
+    temp_v1 = frameTextureGetState();
     if (temp_v1 == 0) {
       FUN_001f4908(0,temp_v0,0xffffffff);
     }
     FUN_001f4908(1,temp_v0,0xffffffff);
     return 0;
   }
-  temp_v0 = FUN_003309c8();
+  temp_v0 = frameTextureGetState();
   if (temp_v0 != 0) {
     temp_v0 = FUN_00163e84(1);
     if (temp_v0 != 0) {
@@ -80,7 +80,7 @@ unsigned int FUN_00314d1c(void)
     temp_v0 = scrGetArg(0);
     if (temp_v0 != 0) {
       if (temp_v0 == 1) {
-        temp_v0 = FUN_003309c8();
+        temp_v0 = frameTextureGetState();
         if (temp_v0 == 0) {
           FUN_0022677c(0,0xffffffff);
         }
@@ -88,7 +88,7 @@ unsigned int FUN_00314d1c(void)
       }
     }
     else {
-      temp_v0 = FUN_003309c8();
+      temp_v0 = frameTextureGetState();
       if (temp_v0 == 0) {
         FUN_0022677c(0,0xff);
       }

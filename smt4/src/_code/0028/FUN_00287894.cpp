@@ -1,20 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287894` (_code @ 0x287894, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-int dataTable1bOr1cGetRecord(void);
-
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_00287894(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  dataTable1bOr1cGetRecord();
-  return;
+namespace {
+struct TableRecord {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u8 value;
+};
 }
+extern "C" {
+TableRecord *dataTable1bOr1cGetRecord(u32 id);
 
-} /* extern "C" */
+/* Reads the record's byte, returning zero when absent. */
+s32 FUN_00287894(u32 id)
+{
+    TableRecord *record = dataTable1bOr1cGetRecord(id);
+    return record != NULL ? record->value : 0;
+}
+}

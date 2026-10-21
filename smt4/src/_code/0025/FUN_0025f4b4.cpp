@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_0025f4b4(int param_1,int param_2)
@@ -48,7 +48,7 @@ void FUN_0025f4b4(int param_1,int param_2)
     temp_v8 = param_1 + temp_v7;
     if (*(char *)(temp_v8 + 0x5925) == '\0') {
       if ((param_2 == 0) && (*(int *)(param_1 + 0x305c) != temp_v7)) {
-        FUN_002bf538();
+        efctSetSpeed();
       }
       temp_v3 = FUN_002bf4f8(0x15,temp_v7 + 0x36);
       temp_v9 = param_1 + temp_v7 * 0x8c + 0x73c;
@@ -62,7 +62,7 @@ void FUN_0025f4b4(int param_1,int param_2)
       temp_v3 = temp_v5 + temp_v9 + temp_v1 + temp_v2;
       if (*(char *)(temp_v8 + 0x38d1) == '\0') {
         if (*(char *)(temp_v8 + 0x38cc) != '\0') {
-          FUN_002bf538();
+          efctSetSpeed();
         }
         temp_v8 = param_1 + temp_v7 * 2;
         if (*(short *)(temp_v8 + 0x3074) <
@@ -75,7 +75,7 @@ void FUN_0025f4b4(int param_1,int param_2)
           FUN_002bf288(2,0x15,*(short *)(temp_v8 + 0x3074) + 0x13,temp_v4,temp_v3,0x24);
         }
       }
-      FUN_002bf538();
+      efctSetSpeed();
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 4);

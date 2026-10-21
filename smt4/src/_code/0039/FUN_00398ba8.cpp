@@ -9,7 +9,7 @@ int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c1b64(int, int);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -62,7 +62,7 @@ void FUN_00398ba8(int param_1)
   unsigned char temp_v10;
   unsigned char temp_v11;
   
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v7 = 0.27f;
   FUN_002ba12c(g_titleScene);
   temp_v8 = (int)temp_v7;
@@ -142,7 +142,7 @@ void FUN_00398ba8(int param_1)
     FUN_002be5a4(4,temp_v5,&temp_v9,(int)*(short *)(temp_v0 + 10));
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 8);
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v4 = g_titleScene;
   piVar5 = (int *)(g_titleScene + 0x124c);
   temp_v0 = *piVar5;

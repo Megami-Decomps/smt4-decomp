@@ -13,7 +13,7 @@ int FUN_004e8454(...);
 int FUN_004e9f74(...);
 int FUN_004eb838(...);
 
-int FUN_003e8430(...);
+int btlScriptUnitHasFlags(...);
 int FUN_003eaf20(void);
 int FUN_003ee0c0(int);
 int FUN_003f1244(void);
@@ -98,7 +98,7 @@ extern unsigned int DAT_00573808; /* 0x573808 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e8430. */
+/* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ee0c0. */
@@ -263,7 +263,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
     temp_v20 = *param_2 | 0x1000;
     *param_2 = temp_v20;
   }
-  temp_v19 = FUN_003e8430(*param_1);
+  temp_v19 = btlScriptUnitHasFlags(*param_1);
   if ((temp_v19 != 0) && (temp_v19 = FUN_004abfec(g_btlUiBlock), temp_v19 == 0)) {
     return 0;
   }
@@ -455,7 +455,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         temp_v19 = *param_1;
         FUN_003eaf20();
         *(unsigned int *)(*param_1 + 0x4d68) = *(unsigned int *)(temp_v19 + 0x400);
-        temp_v20 = FUN_003e8430(*param_1);
+        temp_v20 = btlScriptUnitHasFlags(*param_1);
         FUN_004abfd0(g_btlUiBlock,temp_v20 ^ 1);
         temp_v19 = *param_1;
         temp_v20 = *(unsigned int *)(temp_v19 + 0x45a0) | DAT_00571298;
@@ -468,7 +468,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         temp_v19 = *param_1;
         FUN_003eaf20();
         *(unsigned int *)(*param_1 + 0x4d68) = *(unsigned int *)(temp_v19 + 0x400);
-        temp_v20 = FUN_003e8430(*param_1);
+        temp_v20 = btlScriptUnitHasFlags(*param_1);
         FUN_004abfd0(g_btlUiBlock,temp_v20 ^ 1);
       }
       temp_v19 = *param_1;

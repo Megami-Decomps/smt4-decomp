@@ -8,7 +8,7 @@ int FUN_002512c4(...);
 int fadeObjectResetIfActive(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(...);
 int FUN_002c0944(...);
 int FUN_002c18e4(...);
@@ -26,7 +26,7 @@ int FUN_002bed3c(void);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c39a4(int);
 
 typedef int romwright_code(...);
@@ -65,14 +65,14 @@ extern int FUN_0029efa8(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -314,7 +314,7 @@ unsigned int FUN_00212538(void)
     } while (temp_v2 < 4);
     temp_v4 = (unsigned int)((unsigned long long)temp_v14 >> 0x20);
     temp_v14 = romwright_piece_4_4(temp_v4,temp_v4);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v2 = g_titleScene;
     temp_v3 = packNibblesAndByte(6,1,0);
     piVar10 = (int *)(temp_v2 + 0x12ac);
@@ -334,7 +334,7 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v13) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v12,temp_v13);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),0,aiStack_13c[temp_v2],temp_v18[temp_v2]
                   );
@@ -352,7 +352,7 @@ unsigned int FUN_00212538(void)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
     temp_v15 = temp_v12;
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v2 = 0;
     do {
       temp_v11 = temp_v15;
@@ -362,14 +362,14 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 == temp_v11) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v12 = temp_v11;
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),1,aiStack_13c[temp_v2],temp_v18[temp_v2]
                   );
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 4);
     temp_v14 = CONCAT44(temp_v13,temp_v15);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v2 = 0;
     do {
       temp_v12 = (float)((unsigned long long)temp_v14 >> 0x20);
@@ -380,7 +380,7 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v13) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v12,temp_v13);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),2,aiStack_13c[temp_v2],temp_v18[temp_v2]
                   );
@@ -388,7 +388,7 @@ unsigned int FUN_00212538(void)
     } while (temp_v2 < 4);
     FUN_002bed3c();
     temp_v14 = CONCAT44((int)((unsigned long long)temp_v14 >> 0x20),temp_v15);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v2 = 0;
     do {
       temp_v12 = (float)((unsigned long long)temp_v14 >> 0x20);
@@ -399,14 +399,14 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v13) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v12,temp_v13);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),3,aiStack_13c[temp_v2],temp_v18[temp_v2]
                   );
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 4);
     temp_v14 = CONCAT44((int)((unsigned long long)temp_v14 >> 0x20),temp_v15);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v17 = (unsigned long long)(unsigned int)temp_v15;
     temp_v2 = 0;
     do {
@@ -418,7 +418,7 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v13) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v12,temp_v13);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v2 * 4 + 0x6c8),4,aiStack_13c[temp_v2],temp_v18[temp_v2]
                   );
@@ -462,7 +462,7 @@ unsigned int FUN_00212538(void)
       temp_v4 = (unsigned int)((unsigned long long)temp_v14 >> 0x20);
     }
     temp_v14 = romwright_piece_4_4(temp_v4,(int)temp_v17);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v7 = g_titleScene;
     temp_v10 = packNibblesAndByte(6,1,0);
     piVar10 = (int *)(temp_v7 + 0x12ac);
@@ -482,7 +482,7 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v12) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v13,temp_v12);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),0,aiStack_13c[temp_v6],temp_v18[temp_v6]
                   );
@@ -496,7 +496,7 @@ unsigned int FUN_00212538(void)
       *(unsigned char *)(temp_v7 + 0x12c4) = 0;
     }
     temp_v14 = CONCAT44(temp_v13,(int)temp_v17);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v6 = temp_v2;
     while( 1 ) {
       temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20);
@@ -508,14 +508,14 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v12) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v13,temp_v12);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),1,aiStack_13c[temp_v6],temp_v18[temp_v6]
                   );
       temp_v6 = temp_v6 + 1;
     }
     temp_v14 = CONCAT44(temp_v13,(float)temp_v17);
-    FUN_002bf538();
+    efctSetSpeed();
     for (temp_v6 = temp_v2; temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20), temp_v6 < (int)temp_v9;
         temp_v6 = temp_v6 + 1) {
       temp_v12 = (float)temp_v17;
@@ -525,14 +525,14 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v12) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v13,temp_v12);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),2,aiStack_13c[temp_v6],temp_v18[temp_v6]
                   );
     }
     FUN_002bed3c();
     temp_v14 = CONCAT44(temp_v13,(int)temp_v17);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v6 = temp_v2;
     while( 1 ) {
       temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20);
@@ -544,14 +544,14 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v12) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v13,temp_v12);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),3,aiStack_13c[temp_v6],temp_v18[temp_v6]
                   );
       temp_v6 = temp_v6 + 1;
     }
     temp_v14 = CONCAT44(temp_v13,(float)temp_v17);
-    FUN_002bf538();
+    efctSetSpeed();
     for (temp_v6 = temp_v2; temp_v7 = temp_v2, temp_v6 < (int)temp_v9; temp_v6 = temp_v6 + 1) {
       temp_v12 = (float)((unsigned long long)temp_v14 >> 0x20);
       temp_v13 = (float)temp_v17;
@@ -561,7 +561,7 @@ unsigned int FUN_00212538(void)
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)temp_v14 == temp_v13) << 0x1e);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
         temp_v14 = CONCAT44(temp_v12,temp_v13);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00251d98(*(unsigned int *)(temp_v1 + temp_v6 * 4 + 0x6d8),4,aiStack_13c[temp_v6],temp_v18[temp_v6]
                   );
@@ -570,7 +570,7 @@ unsigned int FUN_00212538(void)
       FUN_0025141c(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 0x6d8),aiStack_13c[temp_v7],temp_v18[temp_v7]);
     }
     if (*(unsigned char *)(temp_v1 + 0x66c) < 2) {
-      FUN_002bf538();
+      efctSetSpeed();
     }
     temp_v6 = vec2GetXInt();
     temp_v7 = vec2GetYInt(temp_v1 + 0x4c8);
@@ -583,11 +583,11 @@ unsigned int FUN_00212538(void)
     FUN_002bf288(2,0x19,0x28,temp_v6,temp_v7,0x9c);
     drawSetColorFromRGBA8(0xf49800ff);
     temp_v10 = gameGetSlotTable();
-    FUN_002be624(temp_v19,&LAB_00213184,*(unsigned char *)(temp_v10 + 0x910b));
+    textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned char *)(temp_v10 + 0x910b));
     temp_v10 = FUN_002bf4f8(0x19,0x2a);
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,0,2,0x9c,
                  temp_v19);
-    FUN_002be624(temp_v19,&LAB_00213184,*(unsigned int *)(temp_v1 + 0x28));
+    textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned int *)(temp_v1 + 0x28));
     temp_v10 = FUN_002bf4f8(0x19,0x2c);
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,1,2,0x9c,
                  temp_v19);
@@ -610,7 +610,7 @@ unsigned int FUN_00212538(void)
       temp_v8 = vec2GetYInt(temp_v1 + 0xf4);
       FUN_002bf288(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v7 + temp_v8,0xa6);
     }
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v6 = FUN_00252180(*(unsigned int *)(temp_v1 + 0x6c8));
     if (temp_v6 == 0) {
       switch(*(unsigned int *)(temp_v1 + 0x1c)) {

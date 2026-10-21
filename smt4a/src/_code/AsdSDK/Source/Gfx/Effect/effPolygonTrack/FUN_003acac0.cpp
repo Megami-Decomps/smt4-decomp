@@ -8,8 +8,8 @@ int CONCAT44(double, double);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int sysMemClear(float *, int);
-int FUN_003cce3c(void);
-int FUN_00514500(void);
+int mathEvaluateWeightedCurve(void);
+int randomAdvanceShiftRegister(void);
 int FUN_00514540(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -71,8 +71,8 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0037a844(void);
-/* Supplied declaration required: FUN_003cce3c. */
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: mathEvaluateWeightedCurve. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -211,7 +211,7 @@ void FUN_003acac0(int param_1)
                 temp_v11 = FUN_0037a844();
                 if (temp_v11 != 0) {
                   temp_v28 = temp_v21;
-                  FUN_003cce3c();
+                  mathEvaluateWeightedCurve();
                   temp_v29 = (float)temp_v33 + temp_v21;
                   temp_v21 = temp_v28;
                 }
@@ -362,7 +362,7 @@ void FUN_003acac0(int param_1)
                   *pfVar18 = 0.0f;
                 }
                 else {
-                  FUN_00514500();
+                  randomAdvanceShiftRegister();
                   __aeabi_uidivmod();
                   temp_v21 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
                   *pfVar18 = temp_v12;

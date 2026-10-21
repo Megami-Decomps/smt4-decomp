@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gameSlotTableFindFree` (_code @ 0x1b347c, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r2, r0 where the compiled block uses mov r1, #0. */
+#include "common.h"
 
-extern "C" {
+struct SlotTable {
+    u8 unk00[0x1C88];       // 0x0000
+    s8 slotStatus[24];     // 0x1C88
+};
 
-extern int gameGetSlotTable(void);
+extern "C" SlotTable* gameGetSlotTable(void);
 
-
-int gameSlotTableFindFree(void)
-
+extern "C" s32 gameSlotTableFindFree(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = 0;
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v0 + temp_v2 + 0x1c88) < '\0') {
-      return temp_v1;
-    }
-    temp_v2 = temp_v2 + 1;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v2 < 0x18);
-  return temp_v1;
-}
+    SlotTable* table = gameGetSlotTable();
+    s32 result = 0;
+    s32 slotIndex = 0;
 
-} /* extern "C" */
+    while (slotIndex < 24) {
+        if (table->slotStatus[slotIndex] < 0) {
+            break;
+        }
+        ++slotIndex;
+        ++result;
+    }
+
+    return result;
+}

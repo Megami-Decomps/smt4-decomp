@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [64], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
 int FUN_00162790(int, unsigned int, unsigned char [64]);
 int FUN_001634b4(...);
 int vec2GetXInt(...);
@@ -13,7 +13,7 @@ int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0018408c(unsigned char *, int);
 int FUN_001879d0(int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_002f6f44(...);
 int FUN_0037ce80(unsigned int, int, int, int);
 int VectorSignedToFloat(...);
@@ -33,7 +33,7 @@ extern unsigned char LAB_002f64c4; /* 0x2f64c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
@@ -45,7 +45,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002f6f44. */
 /* Supplied declaration required: FUN_0037ce80. */
 
@@ -74,7 +74,7 @@ void FUN_002f6048(int param_1)
   int temp_v14;
   int temp_v15;
   
-  FUN_0019d880();
+  jobGetScalarValue();
   temp_v13 = (unsigned int)*(unsigned short *)(param_1 + 0xcca);
   efctSetSpeed();
   temp_v3 = g_renderCtx;
@@ -106,7 +106,7 @@ void FUN_002f6048(int param_1)
   temp_v3 = FUN_001834a4(0x1e,0x56);
   temp_v0 = **(short **)(temp_v3 + 0xc);
   temp_v4 = FUN_00156850(temp_v13,0);
-  FUN_00100388(temp_v12,&LAB_002f64c4,temp_v4);
+  textFormatBuffer(temp_v12,&LAB_002f64c4,temp_v4);
   puVar6 = temp_v12;
   FUN_0018408c(puVar6,3);
   temp_v2 = FUN_001834a4(0x1e,0x55);

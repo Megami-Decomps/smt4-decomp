@@ -52,7 +52,7 @@ extern unsigned char DAT_005f161f; /* 0x5f161f */
 extern signed char DAT_005f1620; /* 0x5f1620 */
 extern unsigned char DAT_005f185c; /* 0x5f185c */
 
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 /* Supplied declaration required: FUN_002235f4. */
 /* Supplied declaration required: FUN_00234b30. */
 /* Supplied declaration required: FUN_0023534c. */
@@ -165,7 +165,7 @@ unsigned int FUN_0036fe68(void)
     }
   }
   else {
-    temp_v0 = FUN_00162858();
+    temp_v0 = campIsState85();
     if (temp_v0 == 0) {
       DAT_005f185c = 0;
       FUN_002c23cc(1);

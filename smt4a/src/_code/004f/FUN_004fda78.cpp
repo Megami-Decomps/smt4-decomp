@@ -10,7 +10,7 @@ int FUN_004102d8(int, int, int, unsigned int);
 extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_004102d8. */
 extern short FUN_004c3a98(int, unsigned int);
 
@@ -35,7 +35,7 @@ int FUN_004fda78(short param_1,short param_2,unsigned int param_3,int param_4,in
   if (param_5 != 4) {
     if (param_5 == 3) {
       btlGetMainState();
-      temp_v2 = FUN_003e8430();
+      temp_v2 = btlScriptUnitHasFlags();
       if (temp_v2 == 0) {
         return temp_v1;
       }

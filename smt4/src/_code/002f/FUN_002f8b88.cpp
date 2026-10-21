@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00246c8c(unsigned int);
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
@@ -68,7 +68,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: FUN_00246c8c. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -403,7 +403,7 @@ void FUN_002f8b88(int param_1)
                 *pfVar20 = 0.0f;
               }
               else {
-                FUN_0024b77c();
+                randomAdvanceShiftRegister();
                 __aeabi_uidivmod();
                 temp_v17 = (float)VectorUnsignedToFloat(temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v23 = (float)(int)temp_v17;

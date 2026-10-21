@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
@@ -38,7 +38,7 @@ extern unsigned char LAB_002ab778; /* 0x2ab778 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -110,14 +110,14 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   FUN_001835b4(2,0x1a,0x61,param_1,param_2,0xc9);
   FUN_001835b4(2,0x1a,0x62,param_1,param_2,0xc9);
   temp_v2 = FUN_001834a4(0x1a,0x49);
-  FUN_00100388(temp_v9,&LAB_002aaa30);
+  textFormatBuffer(temp_v9,&LAB_002aaa30);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,0xffffffff,temp_v9);
   temp_v3 = computeCountLimit();
   if (temp_v3 >= 999) {
     temp_v2 = FUN_001834a4(0x1a,0x279);
-    FUN_00100388(temp_v9,&LAB_002aaa54);
+    textFormatBuffer(temp_v9,&LAB_002aaa54);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xffff57ff,temp_v9);
@@ -189,7 +189,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                      0xc9);
         temp_v4 = FUN_001834a4(0x1a,0x6e);
         temp_v6 = FUN_00180114(*puVar6);
-        FUN_00100388(temp_v9,&LAB_002aaf78,temp_v6);
+        textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
@@ -197,7 +197,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
         FUN_00162790(2,0xffffffff,temp_v9);
         temp_v4 = FUN_001834a4(0x1a,0x6f);
         temp_v6 = FUN_0014bf3c(*puVar6,0);
-        FUN_00100388(temp_v9,&LAB_002aaf78,temp_v6);
+        textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
         puVar9 = temp_v9;
         FUN_0018408c(puVar9,2);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
@@ -228,7 +228,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
         }
       }
       else {
-        FUN_00100388(temp_v9,&LAB_002aaf84);
+        textFormatBuffer(temp_v9,&LAB_002aaf84);
         temp_v4 = FUN_001834a4(0x1a,0x72);
         puVar9 = temp_v9;
         FUN_0018408c(puVar9,2);
@@ -320,7 +320,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xe2);
   temp_v1 = FUN_001834a4(0x1a,0x83);
   temp_v6 = FUN_00180114(*puVar6);
-  FUN_00100388(temp_v9,&LAB_002aaf78,temp_v6);
+  textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
   temp_v2 = (int)*(short *)(temp_v1 + 8);
   VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -333,7 +333,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   }
   temp_v1 = FUN_001834a4(0x1a,0x84);
   temp_v6 = FUN_0014bf3c(*puVar6,0);
-  FUN_00100388(temp_v9,&LAB_002aaf78,temp_v6);
+  textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
   puVar9 = temp_v9;
   FUN_0018408c(puVar9,3);
   VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,

@@ -12,7 +12,7 @@ int FUN_001f8da8(int, unsigned int *, unsigned char *, int *);
 int FUN_0021dea8(unsigned int, int, int);
 int FUN_0025b670(void);
 int FUN_00273358(...);
-int FUN_00276238(void);
+int navigationResetTimer(void);
 int gameFlagSetValue(int, int);
 int FUN_002897f0(int, unsigned char *);
 int messageSlotSet(int);
@@ -68,8 +68,8 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0025b670. */
 extern int FUN_0025b6e8(unsigned int);
 /* Supplied declaration required: FUN_00273358. */
-/* Supplied declaration required: FUN_00276238. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: navigationResetTimer. */
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapDepartSetTarget. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: gameFlagSetValue. */
@@ -204,7 +204,7 @@ unsigned int FUN_001e553c(void)
       *(unsigned int *)(temp_v2 + 100) = temp_v3;
       temp_v3 = tableGroupFindEntryIndex(*(unsigned int *)(temp_v2 + 0x58),&LAB_001e59b8);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),temp_v3);
-      FUN_00276238();
+      navigationResetTimer();
     }
     temp_v4 = *(int *)(temp_v2 + 0x1c);
     *(int *)(temp_v2 + 0x1c) = temp_v4 + 1;
@@ -324,7 +324,7 @@ unsigned int FUN_001e553c(void)
 LAB_001e5a1c:
       if (*(int *)(temp_v2 + 0x1c) == 0xd) {
         *(unsigned char *)(temp_v2 + 0x20) = 1;
-        FUN_00276238();
+        navigationResetTimer();
       }
       if (*(int *)(temp_v2 + 0x1c) == 0x12) {
         *(unsigned char *)(temp_v2 + 0x2d) = 1;
@@ -362,7 +362,7 @@ LAB_001e5a1c:
       return 0;
     }
     temp_v4 = FUN_0027ee9c();
-    if ((temp_v4 != 0) || (temp_v4 = FUN_002762e0(), temp_v4 != 0)) {
+    if ((temp_v4 != 0) || (temp_v4 = inputIsQuestMenuPressed(), temp_v4 != 0)) {
       FUN_00273358(0xffffffff);
       *(unsigned char *)(temp_v2 + 0x20) = 0;
       *(unsigned char *)(temp_v2 + 0x2d) = 0;
@@ -395,7 +395,7 @@ LAB_001e5a1c:
     *(int *)(temp_v2 + 0x60) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x108) = 3;
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),1);
-    FUN_00276238();
+    navigationResetTimer();
     temp_v4 = *(int *)(temp_v2 + 0x18) + 1;
     *(int *)(temp_v2 + 0x18) = temp_v4;
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
@@ -435,7 +435,7 @@ LAB_001e5a1c:
       temp_v3 = 3;
     }
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x60),temp_v3);
-    FUN_00276238();
+    navigationResetTimer();
     *(int *)(temp_v2 + 0x18) = *(int *)(temp_v2 + 0x18) + 1;
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;

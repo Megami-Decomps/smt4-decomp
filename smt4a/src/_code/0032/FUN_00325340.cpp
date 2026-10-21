@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00384830(void);
 
 extern int g_mapHakai; /* 0x581038 */
@@ -15,7 +15,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00384830. */
 
 
@@ -36,7 +36,7 @@ unsigned int FUN_00325340(void)
     temp_v1 = g_mapHakai + temp_v3 * 0x54;
     if ((*(char *)(temp_v1 + 0x5c) != '\0') &&
        (temp_v2 = *(int *)(temp_v1 + 0x60), (temp_v2 != 2 && temp_v2 != 3) && temp_v2 != 0)) {
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v4 = *(unsigned int *)(temp_v1 + 0x74);
       FUN_002b5cd4();
       if (*(short *)(temp_v1 + 0xac) == 1 || *(short *)(temp_v1 + 0xac) == 6) {

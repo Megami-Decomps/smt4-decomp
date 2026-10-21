@@ -29,7 +29,7 @@ extern int DAT_00588c44; /* 0x588c44 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern unsigned short FUN_00167f08(void);
+extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_0020b490. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_004b6390. */
@@ -62,7 +62,7 @@ void resultCreate(int param_1)
     *(char *)(temp_v1 + 0x4398) = (char)param_1;
     *(unsigned short *)(temp_v1 + 0x439a) = 0;
     if (param_1 == 3) {
-      temp_v0 = FUN_00167f08();
+      temp_v0 = ifTouchGetButtonHelpValue();
       *(unsigned short *)(temp_v1 + 0x439a) = temp_v0;
     }
     FUN_0020b490(temp_v1,1);

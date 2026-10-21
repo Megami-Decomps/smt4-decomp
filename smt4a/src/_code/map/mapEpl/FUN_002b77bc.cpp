@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [44], unsigned char *, char *);
+int textFormatBuffer(unsigned char [44], unsigned char *, char *);
 int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
 int gameFlagIsSet(...);
@@ -22,7 +22,7 @@ extern unsigned char LAB_002b79c0; /* 0x2b79c0 */
 extern unsigned int *g_mapEpl; /* 0x580c88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -89,7 +89,7 @@ void FUN_002b77bc(int param_1,int param_2)
           temp_v1 = (int)pcVar4[1];
         }
         if (temp_v3 && temp_v1 == param_2) {
-          FUN_00100388(temp_v9,&LAB_002b79c0,pcVar4 + 8);
+          textFormatBuffer(temp_v9,&LAB_002b79c0,pcVar4 + 8);
           puVar2 = g_mapEpl;
           puVar5 = temp_v9;
           temp_v1 = 0;

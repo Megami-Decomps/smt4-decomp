@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_003ab550's literal pool; not written yet. */
-#include "common.h"
+#include "shard/W5_W5Match4_UiCallback.h"
+
+extern "C" {
+
+extern UiCallbackContext *DAT_0043d9f8;
+
+/* Runs the UI object's update callback. */
+s32 FUN_003ace14()
+{
+    DAT_0043d9f8->object->update();
+    return 0;
+}
+
+}

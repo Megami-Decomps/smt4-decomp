@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00233134; /* 0x233134 */
 extern unsigned char LAB_0027d754; /* 0x27d754 */
 extern unsigned char LAB_00315d0c; /* 0x315d0c */
-extern unsigned int *DAT_005806d4; /* 0x5806d4 */
+extern unsigned int *g_mapEnemy; /* 0x5806d4 */
 
 extern int randRange(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
@@ -38,7 +38,7 @@ void FUN_00232d58(unsigned int param_1)
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x4d84,1);
   puVar2 = &LAB_00233134;
-  DAT_005806d4 = puVar1;
+  g_mapEnemy = puVar1;
   taskCreateDraw(&LAB_00233134,4,0,0,&LAB_0027d754,&LAB_00315d0c,0,param_1);
   *puVar1 = (unsigned int)puVar2;
   puVar1[1] = 0;

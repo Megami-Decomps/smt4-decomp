@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_001fc6b4(...); /* 0x1fc6b4 */
+extern int battleQueryEncounter(...); /* 0x1fc6b4 */
 extern unsigned char LAB_00208098; /* 0x208098 */
 extern int btlEncountDestroy(...); /* 0x2d5034 */
 extern unsigned int *g_btlEncount; /* 0x435d30 */
@@ -40,7 +40,7 @@ void FUN_00207f68(unsigned int *param_1)
   unsigned int *puVar5;
   
   puVar1 = &LAB_00208098;
-  taskCreateDraw(&LAB_00208098,2,0,0,FUN_001fc6b4,btlEncountDestroy,param_1,*param_1);
+  taskCreateDraw(&LAB_00208098,2,0,0,battleQueryEncounter,btlEncountDestroy,param_1,*param_1);
   param_1[2] = (unsigned int)puVar1;
   puVar2 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x14,1);

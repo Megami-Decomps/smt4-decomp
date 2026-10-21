@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a7f28(int, unsigned int, int, unsigned int *);
-int FUN_002bb150(...);
+int threadSleepDuration(...);
 int FUN_002c0d50(unsigned int *, unsigned int, int, int *, int);
 int FUN_003600f4(void);
 int FUN_00360104(void);
@@ -36,7 +36,7 @@ extern unsigned char DAT_004c4b40; /* 0x4c4b40 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002a7f28. */
 extern unsigned int FUN_002a808c(unsigned int);
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002c0d50. */
 /* Supplied declaration required: FUN_003600f4. */
 /* Supplied declaration required: FUN_00360104. */
@@ -95,7 +95,7 @@ unsigned int FUN_00360efc(unsigned char *param_1,unsigned int param_2,int param_
             in_s0 = temp_v3;
           }
           FUN_00360104();
-          FUN_002bb150(&DAT_004c4b40,0);
+          threadSleepDuration(&DAT_004c4b40,0);
         } while ((int)in_s0 >= 0x3e4cccce);
       }
       temp_v5 = DAT_004719d8;
@@ -111,7 +111,7 @@ unsigned int FUN_00360efc(unsigned char *param_1,unsigned int param_2,int param_
             in_s0 = temp_v1;
           }
           FUN_00360104();
-          puVar2 = (unsigned int *)FUN_002bb150(&DAT_004c4b40,0);
+          puVar2 = (unsigned int *)threadSleepDuration(&DAT_004c4b40,0);
         } while (in_s0 < temp_v1);
       }
       if (param_3 != 0) {
@@ -128,7 +128,7 @@ unsigned int FUN_00360efc(unsigned char *param_1,unsigned int param_2,int param_
       return temp_v0;
     }
     if (temp_v0 == 0xe0a0cc08) {
-      FUN_002bb150(10000000,0);
+      threadSleepDuration(10000000,0);
     }
   }
   nn_os_TransferMemoryBlock_Finalize(&temp_v6);

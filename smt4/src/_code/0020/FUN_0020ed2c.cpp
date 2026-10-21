@@ -11,11 +11,11 @@ typedef struct Target {
     /* 0x1C */ void *unk1C;
 } Target;
 
-extern Target *DAT_00433048;
+extern Target *g_sceneResourceWork;
 
 u32 FUN_0020ed2c(void)
 {
-    Target *target = DAT_00433048;
+    Target *target = g_sceneResourceWork;
     void *sub;
 
     if (target->kind == 1 || target->kind == 2 || target->kind == 3) {

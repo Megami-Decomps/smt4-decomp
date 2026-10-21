@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00100388(...);
-int FUN_001acf98(int, unsigned int);
+int textFormatBuffer(...);
+int asdTMTexLoadMainHeap(int, unsigned int);
 int FUN_0020214c(void);
 int FUN_00275bc8(unsigned int, char *);
 int FUN_002804b0(...);
 
-/* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: textFormatBuffer. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -48,10 +48,10 @@ void FUN_004b7128(int param_1)
     *(unsigned int *)(param_1 + 0x90) = temp_v2;
     *(unsigned int *)(param_1 + 0x94) = temp_v1;
   }
-  FUN_001acf98(0x18,*(unsigned int *)(param_1 + 0x90));
-  FUN_00100388(temp_v3,"mikado/m%03d/m%03d.bf",(int)*(short *)(param_1 + 0x3c),
+  asdTMTexLoadMainHeap(0x18,*(unsigned int *)(param_1 + 0x90));
+  textFormatBuffer(temp_v3,"mikado/m%03d/m%03d.bf",(int)*(short *)(param_1 + 0x3c),
                (int)*(short *)(param_1 + 0x3c));
-  FUN_00100388(temp_v4,"mikado/m%03d/m%03d.mbm",(int)*(short *)(param_1 + 0x3c),
+  textFormatBuffer(temp_v4,"mikado/m%03d/m%03d.mbm",(int)*(short *)(param_1 + 0x3c),
                (int)*(short *)(param_1 + 0x3c));
   FUN_002804b0(temp_v3,param_1 + 0x1128,0);
   FUN_002804b0(temp_v4,param_1 + 0x112c,0);

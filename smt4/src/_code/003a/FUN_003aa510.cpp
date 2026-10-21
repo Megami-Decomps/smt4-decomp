@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022dde8(int, int);
-int FUN_00231240(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
 int FUN_00233344(int, int);
 int FUN_00233404(void);
@@ -23,14 +23,14 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0022dde8. */
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_00233344. */
 /* Supplied declaration required: FUN_00233404. */
 extern int FUN_0023360c(int);
 extern int FUN_00233718(int);
 extern int FUN_00240d5c(int);
-extern int FUN_0026c63c(void);
+extern int gameGetNavigationState(void);
 extern int FUN_00293aac(void);
 extern int FUN_00293b8c(void);
 /* Supplied declaration required: FUN_0029d684. */
@@ -70,10 +70,10 @@ void FUN_003aa510(int param_1)
     temp_v7 = param_1 + *(short *)(param_1 + 0xa5b2) * 0x8c + 0xfc;
     temp_v3 = vec2GetYInt(temp_v7);
     temp_v4 = vec2GetXInt(temp_v7);
-    FUN_00231240(param_1 + 200,temp_v4,temp_v3);
-    temp_v7 = FUN_0026c63c();
+    pointConvertToFloat(param_1 + 200,temp_v4,temp_v3);
+    temp_v7 = gameGetNavigationState();
     if ((temp_v7 == 0) || (temp_v7 = FUN_00293aac(), temp_v7 != 0)) {
-      temp_v7 = FUN_0026c63c();
+      temp_v7 = gameGetNavigationState();
       if ((temp_v7 == 0) && (0 < *(int *)(param_1 + 0x28))) {
         temp_v7 = FUN_0029e924(param_1 + 0x20);
         temp_v1 = FUN_00240d5c(param_1 + 0x20);

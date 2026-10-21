@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0047c65c(unsigned int *);
-int FUN_0047daf4(...);
+int timeInitializeActiveState(...);
 
 extern unsigned char DAT_0055c6a4; /* 0x55c6a4 */
 extern unsigned char DAT_0055c6b0; /* 0x55c6b0 */
 
 /* Supplied declaration required: FUN_0047c65c. */
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 extern int flagsDESet(int);
 extern unsigned int *FUN_004d0b3c(int);
 
@@ -24,8 +24,8 @@ unsigned int * FUN_0047c8b8(unsigned int *param_1)
   unsigned int *puVar2;
   
   *param_1 = 0;
-  temp_v0 = FUN_0047daf4(param_1 + 0x84);
-  temp_v0 = FUN_0047daf4(temp_v0 + 0x14);
+  temp_v0 = timeInitializeActiveState(param_1 + 0x84);
+  temp_v0 = timeInitializeActiveState(temp_v0 + 0x14);
   temp_v0 = flagsDESet(temp_v0 + 0x1c);
   *(unsigned char **)(temp_v0 + 0x74) = &DAT_0055c6a4;
   puVar2 = (unsigned int *)FUN_004d0b3c(temp_v0 + 0xa8);

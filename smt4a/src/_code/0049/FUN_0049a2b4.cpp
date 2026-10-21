@@ -29,7 +29,7 @@ extern int FUN_00494530(...); /* 0x494530 */
 extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
 
 extern int useCounterIsFinished(void);
-extern int FUN_002a6c24(void);
+extern int useCounterGetValue(void);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: arraySortQsort. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -91,7 +91,7 @@ void FUN_0049a2b4(int param_1)
     FUN_004cfe4c(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb60);
     temp_v0 = FUN_002c7c54();
     if (temp_v0 == 0xf) {
-      temp_v0 = FUN_002a6c24();
+      temp_v0 = useCounterGetValue();
       if (temp_v0 == 0) {
         arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004943bc);
         return;
@@ -101,7 +101,7 @@ void FUN_0049a2b4(int param_1)
     }
     if (temp_v0 < 0xf) {
       if (temp_v0 == 3) {
-        temp_v0 = FUN_002a6c24();
+        temp_v0 = useCounterGetValue();
         if (temp_v0 == 0) {
           arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493ee0);
           return;
@@ -111,7 +111,7 @@ void FUN_0049a2b4(int param_1)
       }
       if (temp_v0 == 7) {
         if (*(int *)(param_1 + 0xb40) == 8) {
-          temp_v0 = FUN_002a6c24();
+          temp_v0 = useCounterGetValue();
           if (temp_v0 == 0) {
             arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494530);
             return;
@@ -119,7 +119,7 @@ void FUN_0049a2b4(int param_1)
           arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049448c);
           return;
         }
-        temp_v0 = FUN_002a6c24();
+        temp_v0 = useCounterGetValue();
         if (temp_v0 == 0) {
           arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004944d0);
           return;
@@ -128,7 +128,7 @@ void FUN_0049a2b4(int param_1)
         return;
       }
       if (temp_v0 == 0xc) {
-        temp_v0 = FUN_002a6c24();
+        temp_v0 = useCounterGetValue();
         if (temp_v0 == 0) {
           arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,halfDifference);
           return;
@@ -139,7 +139,7 @@ void FUN_0049a2b4(int param_1)
     }
     else {
       if (temp_v0 == 0x10) {
-        temp_v0 = FUN_002a6c24();
+        temp_v0 = useCounterGetValue();
         if (temp_v0 == 0) {
           arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493e94);
           return;
@@ -148,7 +148,7 @@ void FUN_0049a2b4(int param_1)
         return;
       }
       if (temp_v0 == 0x1c) {
-        temp_v0 = FUN_002a6c24();
+        temp_v0 = useCounterGetValue();
         if (temp_v0 == 0) {
           arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x493d38);
           return;

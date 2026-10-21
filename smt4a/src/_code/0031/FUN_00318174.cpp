@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00186e2c(int, unsigned int);
-int FUN_002a21a4(unsigned int);
+int jobSavePositionSnapshot(unsigned int);
 int FUN_002e08c8(unsigned int);
 int faderSetValue(unsigned int);
 int FUN_00359370(unsigned int, int);
@@ -28,7 +28,7 @@ extern int g_bustupCutAnim; /* 0x57f4c4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00186e2c. */
-/* Supplied declaration required: FUN_002a21a4. */
+/* Supplied declaration required: jobSavePositionSnapshot. */
 /* Supplied declaration required: FUN_002e08c8. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
@@ -153,7 +153,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
     temp_v4 = temp_v0 + temp_v1 * 4;
     temp_v2 = jobIsValid(*(unsigned int *)(temp_v4 + 0x634));
     if (temp_v2 != 0) {
-      FUN_002a21a4(*(unsigned int *)(temp_v4 + 0x634));
+      jobSavePositionSnapshot(*(unsigned int *)(temp_v4 + 0x634));
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);

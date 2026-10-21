@@ -1,0 +1,21 @@
+#include "common.h"
+
+struct BattleState {
+    /* 0x0000 */ u8 unk00[0x4454];
+    /* 0x4454 */ u32 value;
+};
+extern "C" {
+u32 scrGetArg();
+BattleState *btlGetMainState();
+s32 FUN_00337360(BattleState *battle, u32 id);
+void scrSetResult(u32 value);
+/* Queries a battle entry and reports its state when available. */
+s32 btlScriptQueryEntryState()
+{
+    u32 id = scrGetArg();
+    if (!FUN_00337360(btlGetMainState(), id))
+        return 0;
+    scrSetResult(btlGetMainState()->value);
+    return 1;
+}
+}

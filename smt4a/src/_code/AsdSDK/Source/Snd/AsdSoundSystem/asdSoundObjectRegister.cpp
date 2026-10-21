@@ -1,44 +1,45 @@
+/* NON_MATCHING: retail uses push {r4, r5} where the compiled block uses push {r4, r5}. */
+#include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 extern AsdSndStatusApoc g_asdSoundStatus;
+void FUN_00152d64(AsdSndObject *sound, u32 arg, f32 volume, f32 scale);
 
-void FUN_00152d64(AsdSndObject *sound, u32 arg, f32 volume);
-
-/* Registers a sound in the live list (at the end, once) and starts it; `volume` is overridden
- * by `volumeSteps` when that is nonzero. */
-void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg, f32 volume)
+void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg)
 {
-    AsdSndObject *node;
-    AsdSndObject *last;
-
     if (sound == NULL) {
         return;
     }
-    node = g_asdSoundStatus.objects;
-    if (node != NULL) {
-        do {
-            last = node;
-            if (last == sound) {
-                if (volumeSteps != 0) {
-                    volume = (f32)volumeSteps;
-                }
-                FUN_00152d64(sound, arg, volume);
-                return;
-            }
-            node = last->next;
-        } while (last->next != NULL);
-        sound->prev = last;
-        last->next = sound;
-        g_asdSoundStatus.objectCount++;
-    } else {
-        g_asdSoundStatus.objectCount++;
-        g_asdSoundStatus.objects = sound;
-    }
-    if (volumeSteps != 0) {
-        volume = (f32)volumeSteps;
-    }
-    FUN_00152d64(sound, arg, volume);
-}
 
-} /* extern "C" */
+    AsdSndObject *node = g_asdSoundStatus.objects;
+    if (node != NULL) {
+        while (node != sound) {
+            AsdSndObject *next = node->next;
+            if (next == NULL) {
+                sound->prev = node;
+                node->next = sound;
+                ++g_asdSoundStatus.objectCount;
+                break;
+            }
+            node = next;
+        }
+    } else {
+        g_asdSoundStatus.objects = sound;
+        ++g_asdSoundStatus.objectCount;
+    }
+
+    f32 volume = 1.0f;
+    if (volumeSteps == 0) {
+        volume = 0.0f;
+    } else {
+        volume += (static_cast<f32>(volumeSteps) - 64.0f)
+                  * 0.015748031437397003f;
+        if (volume > 2.0f) {
+            volume = 2.0f;
+        }
+    }
+
+    FUN_00152d64(sound, arg, volume, 1.0f);
+}
+}

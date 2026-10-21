@@ -14,7 +14,7 @@ int FUN_002ea974(...);
 int onlineUrlDestroy(...);
 int FUN_002ec8f8(...);
 int FUN_002ee5b8(...);
-int FUN_002f42be(...);
+int onlineFormatWideString(...);
 int onlineJobSetStateWaiting(...);
 int FUN_002f7cba(...);
 int FUN_003054f0(...);
@@ -47,7 +47,7 @@ extern unsigned int FUN_002e7908(int *, unsigned int *);
 /* Supplied declaration required: FUN_002ec8f8. */
 extern unsigned int FUN_002ee568(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ee5b8. */
-/* Supplied declaration required: FUN_002f42be. */
+/* Supplied declaration required: onlineFormatWideString. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 extern int FUN_002fe22a(int, unsigned int);
@@ -88,7 +88,7 @@ void FUN_0011973c(int param_1)
       temp_v4[2] = 2;
       temp_v4[0] = 1;
       temp_v3 = 10;
-      FUN_002f42be(temp_v8,"prudps:/address=%ls;port=%d;stream=%d;sid=%d;PID=%d;CID=1;type=%d",
+      onlineFormatWideString(temp_v8,"prudps:/address=%ls;port=%d;stream=%d;sid=%d;PID=%d;CID=1;type=%d",
                    *(unsigned int *)(param_1 + 0x7c),*(unsigned short *)(param_1 + 0x80) + 1);
       FUN_003056e4(temp_v6,temp_v8);
     }

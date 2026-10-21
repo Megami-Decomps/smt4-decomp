@@ -1,2 +1,6 @@
-/* NON_MATCHING: found outside every function: its address is in MapDepart_Init's literal pool; not written yet. */
 #include "common.h"
+
+/* Map-depart callback with no work to perform. */
+extern "C" void FUN_002f4b30(void)
+{
+}

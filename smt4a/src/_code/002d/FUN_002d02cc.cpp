@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 
 extern float DAT_005f0c94; /* 0x5f0c94 */
 extern unsigned int DAT_005f0c98; /* 0x5f0c98 */
@@ -21,7 +21,7 @@ extern unsigned int DAT_005f0d28; /* 0x5f0d28 */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 
 
 void FUN_002d02cc(void)
@@ -51,7 +51,7 @@ void FUN_002d02cc(void)
     DAT_005f0cac = 1;
     DAT_005f0c9c = DAT_005f0c9c + temp_v1 * temp_v3;
     temp_v1 = DAT_005f0c94;
-    FUN_00352bc4();
+    mathPositionHeadingDegrees();
     DAT_005f0ca8 = 2;
     DAT_005f0cec = 0x40a00000;
     DAT_005f0ca4 = 0;

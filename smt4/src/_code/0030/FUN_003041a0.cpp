@@ -11,8 +11,8 @@ int FUN_00245f48(void);
 int FUN_002482d4(void);
 int FUN_00248480(void);
 int FUN_002484e0(void);
-int FUN_0024857c(float *);
-int FUN_0024b77c(...);
+int matrixCopySelectedToGlobal(float *);
+int randomAdvanceShiftRegister(...);
 int FUN_0024b830(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
@@ -107,8 +107,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002482d4. */
 /* Supplied declaration required: FUN_00248480. */
 /* Supplied declaration required: FUN_002484e0. */
-/* Supplied declaration required: FUN_0024857c. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: matrixCopySelectedToGlobal. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002b7064. */
@@ -225,7 +225,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
               pfVar7 = *(float **)(*(int *)(*temp_v22 + 8) + 0x30);
               temp_v30 = (int)*(short *)(*temp_v22 + 2) / 5;
               temp_v1 = 0;
-              FUN_0024b77c();
+              randomAdvanceShiftRegister();
               if ((temp_v1 & 1) != 0) {
                 temp_v7 = -temp_v28;
                 temp_v28 = temp_v7;
@@ -392,7 +392,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
                   FUN_0024b830(0);
                   temp_v1 = 0;
                   temp_v7 = (temp_v7 * 0.75f + 0.25f) * temp_v35;
-                  FUN_0024b77c();
+                  randomAdvanceShiftRegister();
                   if ((temp_v1 & 1) != 0) {
                     temp_v35 = -temp_v35;
                   }
@@ -418,7 +418,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
                   temp_v12 = temp_v5;
                   temp_v6 = temp_v14;
                   temp_v5 = temp_v18 + temp_v7;
-                  FUN_0024857c(&temp_v36);
+                  matrixCopySelectedToGlobal(&temp_v36);
                   temp_v7 = (float)temp_v16;
                   temp_v14 = (float)((unsigned long long)temp_v16 >> 0x20);
                   temp_v10 = temp_v8 * DAT_004ea95c + temp_v7 * DAT_004ea96c + temp_v14 * DAT_004ea97c;
@@ -429,7 +429,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
                   DAT_004ea91c = temp_v10;
                   DAT_004ea920 = temp_v18;
                   DAT_004ea924 = temp_v19;
-                  FUN_0024857c(&temp_v26);
+                  matrixCopySelectedToGlobal(&temp_v26);
                   temp_v11 = (float)temp_v16;
                   temp_v17 = (float)((unsigned long long)temp_v16 >> 0x20);
                   temp_v7 = temp_v8 * DAT_004ea960;
@@ -502,7 +502,7 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
             else {
               temp_v22[5] = -1;
               if (0 < temp_v29) {
-                FUN_0024b77c(0);
+                randomAdvanceShiftRegister(0);
                 __aeabi_uidivmod();
                 temp_v22[5] = temp_v22[5] - temp_v2;
               }

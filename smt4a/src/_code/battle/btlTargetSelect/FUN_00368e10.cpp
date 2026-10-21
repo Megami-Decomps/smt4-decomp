@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00180118(...);
 int FUN_0018408c(...);
 int dataTable00FindById(...);
@@ -45,7 +45,7 @@ extern int *g_btlTargetSelect; /* 0x57a9a8 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int btlGetMainState(void);
 extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
@@ -92,9 +92,9 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   dataTable00FindById();
   pfVar4 = param_2;
   FUN_00180118(param_2);
-  FUN_00100388(*piVar1 + 4,&LAB_00369218,pfVar4);
+  textFormatBuffer(*piVar1 + 4,&LAB_00369218,pfVar4);
   temp_v1 = FUN_0014bf3c(param_2,0);
-  FUN_00100388(*piVar1 + 0x2c,&LAB_00369218,temp_v1);
+  textFormatBuffer(*piVar1 + 0x2c,&LAB_00369218,temp_v1);
   temp_v0 = FUN_0026264c(param_2);
   *(unsigned char *)(*piVar1 + 0x24) = temp_v0;
   *(unsigned int *)(*piVar1 + 0x28) = pfVar3->field_0x2 & 0xffff7fff;

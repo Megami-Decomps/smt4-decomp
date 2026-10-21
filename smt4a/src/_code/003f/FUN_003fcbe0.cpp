@@ -10,7 +10,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: asdTMTexTableGetNode. */
 extern int resourceIsReady(void);
-extern unsigned int FUN_0046c4f4(unsigned int, unsigned int, unsigned int);
+extern unsigned int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
 extern int FUN_004705ec(void);
 extern unsigned int FUN_004706e8(unsigned int, unsigned int);
 extern int FUN_00470b18(unsigned int, unsigned int, unsigned int);
@@ -36,7 +36,7 @@ unsigned int FUN_003fcbe0(int param_1)
         return 0;
       }
       temp_v1 = FUN_004706e8(g_aocSystem,*(unsigned int *)(param_1 + 4));
-      temp_v2 = FUN_0046c4f4(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
+      temp_v2 = recordPrepareLinkedOwner(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
       ;
     }
     else {
@@ -45,7 +45,7 @@ unsigned int FUN_003fcbe0(int param_1)
         return 0;
       }
       temp_v1 = FUN_00470e48(g_aocSystem,*(unsigned int *)(param_1 + 4));
-      temp_v2 = FUN_0046c4f4(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
+      temp_v2 = recordPrepareLinkedOwner(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
       ;
     }
     temp_v3 = 0;

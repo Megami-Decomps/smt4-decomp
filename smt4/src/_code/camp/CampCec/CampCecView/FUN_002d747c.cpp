@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026eda8(...);
 int FUN_0026ee14(...);
 int FUN_0026ef04(unsigned int);
-int FUN_0026efec(...);
+int saveGetIndexedMapValue(...);
 int FUN_0026f204(unsigned int, unsigned int, unsigned int);
 int FUN_0026f784(void);
 int linkHolderApplyFlag(...);
@@ -49,7 +49,7 @@ extern unsigned int FUN_0024aaa0(void);
 /* Supplied declaration required: FUN_0026eda8. */
 /* Supplied declaration required: FUN_0026ee14. */
 /* Supplied declaration required: FUN_0026ef04. */
-/* Supplied declaration required: FUN_0026efec. */
+/* Supplied declaration required: saveGetIndexedMapValue. */
 /* Supplied declaration required: FUN_0026f204. */
 /* Supplied declaration required: FUN_0026f784. */
 /* Supplied declaration required: linkHolderApplyFlag. */
@@ -131,7 +131,7 @@ void FUN_002d747c(void)
   *(unsigned char *)((int)puVar2 + 0x165) = 0;
   puVar2[0x5a] = 0;
   do {
-    temp_v0 = FUN_0026efec(temp_v4);
+    temp_v0 = saveGetIndexedMapValue(temp_v4);
     if (*(short *)(temp_v0 + 0x48) != 0) {
       puVar2[0x52] = puVar2[0x52] + 1;
     }
@@ -140,7 +140,7 @@ void FUN_002d747c(void)
   FUN_00297468(&LAB_002d784c,puVar2 + 0x58,0);
   temp_v1 = FUN_0024aaa0();
   puVar2[2] = temp_v1;
-  temp_v1 = FUN_0026efec(puVar2[0x4f]);
+  temp_v1 = saveGetIndexedMapValue(puVar2[0x4f]);
   puVar2[3] = temp_v1;
   temp_v4 = 0;
   do {
@@ -155,14 +155,14 @@ void FUN_002d747c(void)
   temp_v0 = 0;
   temp_v4 = temp_v2;
   do {
-    temp_v4 = FUN_0026efec(puVar1[0x50] + temp_v0,temp_v4);
+    temp_v4 = saveGetIndexedMapValue(puVar1[0x50] + temp_v0,temp_v4);
     if (*(short *)(temp_v4 + 0x48) != 0) {
       FUN_0026ef04(puVar1[temp_v0 + 0x4b]);
       temp_v4 = temp_v3;
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
-  temp_v1 = FUN_0026efec(puVar1[0x4f],temp_v4);
+  temp_v1 = saveGetIndexedMapValue(puVar1[0x4f],temp_v4);
   puVar1[3] = temp_v1;
   puVar1 = g_campCecView;
   FUN_0026f204(g_campCecView[0x4e],g_campCecView[3],g_campCecView[0x58]);

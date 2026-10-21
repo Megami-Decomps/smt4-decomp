@@ -8,7 +8,7 @@ int efctSetSpeed(void);
 int FUN_0018291c(int *, int *, int *, int *, int, int);
 int FUN_00183bb0(void);
 int FUN_00185dd4(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_002e129c(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002f5020(int *, unsigned char *, int, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -40,7 +40,7 @@ extern unsigned char LAB_00192824; /* 0x192824 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00185dd4. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002e129c. */
 /* Supplied declaration required: FUN_002f5020. */
 
@@ -99,7 +99,7 @@ void FUN_004927dc(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v2 = *(unsigned short *)(temp_v0 + 4) & 0xffff7fff;
     temp_v3 = *(unsigned short *)(temp_v0 + 6) & 0xffff7fff;
   }
-  FUN_0019d880();
+  jobGetScalarValue();
   temp_v0 = FUN_001834a4(0x13,param_1);
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 4) == 1)) {

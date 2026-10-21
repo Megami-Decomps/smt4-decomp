@@ -4,7 +4,7 @@
 extern "C" {
 
 extern u32 FUN_002a7e4c(u32 request);
-extern void FUN_002bb150(s64 nanoseconds);
+extern void threadSleepDuration(s64 nanoseconds);
 
 /* Whether an nn result code is an error (bit 31). */
 static __inline u32 resultIsFailure(u32 result)
@@ -23,7 +23,7 @@ void FUN_00361160(void)
             return;
         }
         if (result == 0xe0a0cc08) {
-            FUN_002bb150(10000000);
+            threadSleepDuration(10000000);
         }
     }
 }

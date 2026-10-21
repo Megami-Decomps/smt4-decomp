@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0040d274; not written yet. */
-#include "common.h"
+#include "shard/W5_W5Match8_CameraTransition.h"
+/* Starts the angle transition. */
+extern "C" void FUN_004f183c(W5Match8CameraTransition *camera, f32 value, u32 duration, u32 mode) {
+    camera->angle = value;
+    camera->angleProgress = 0.0f;
+    camera->angleDuration = duration;
+    camera->angleFrame = 0;
+    camera->angleMode = mode;
+    camera->flags |= 1024;
+}

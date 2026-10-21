@@ -10,7 +10,7 @@ int scrSetResult(int);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
 extern int FUN_003e4fdc(unsigned short);
-extern int FUN_004bca68(int, int);
+extern int recordContainsPairedId(int, int);
 
 
 unsigned int FUN_003b8150(void)
@@ -25,7 +25,7 @@ unsigned int FUN_003b8150(void)
   temp_v1 = scrGetArg(1);
   temp_v2 = FUN_003e4fdc(temp_v0);
   if (temp_v2 != 0 && temp_v1 != 0) {
-    temp_v1 = FUN_004bca68(temp_v2,temp_v1);
+    temp_v1 = recordContainsPairedId(temp_v2,temp_v1);
     scrSetResult(temp_v1 != 0);
     return 1;
   }

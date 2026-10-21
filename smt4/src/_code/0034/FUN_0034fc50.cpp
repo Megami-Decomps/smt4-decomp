@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 
 
 void FUN_0034fc50(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -141,7 +141,7 @@ void FUN_0034fc50(int param_1,unsigned int param_2,unsigned int param_3,int para
            temp_v5 + *(int *)(param_1 + 0x13c) + (unsigned int)romwright_carry_4(*(unsigned int *)(param_1 + 0x138),temp_v4);
       return;
     }
-    FUN_002bb150(500000,0);
+    threadSleepDuration(500000,0);
   } while( 1 );
 }
 

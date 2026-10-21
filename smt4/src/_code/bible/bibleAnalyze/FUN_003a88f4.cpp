@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00231240(...);
+int pointConvertToFloat(...);
 int FUN_00233670(...);
 int FUN_0029da34(...);
 int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
 int buttonHelpSetPreset(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned int DAT_0043d998; /* 0x43d998 */
 
 extern int FUN_0022caa4(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_00233344(int, int);
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233670. */
@@ -29,7 +29,7 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 
@@ -50,7 +50,7 @@ void FUN_003a88f4(int param_1)
   temp_v3 = param_1 + *(short *)(param_1 + 0xa5b2) * 0x8c + 0xfc;
   temp_v1 = vec2GetYInt(temp_v3);
   temp_v2 = vec2GetXInt(temp_v3);
-  FUN_00231240(param_1 + 200,temp_v2,temp_v1);
+  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
   if (temp_v0 == 0) {
     return;
   }
@@ -66,7 +66,7 @@ void FUN_003a88f4(int param_1)
     if (temp_v0 == 0) {
       temp_v0 = 0x40226c;
     }
-    FUN_002be624(temp_v4,"%s%s",temp_v0,DAT_0043d998);
+    textFormatBuffer(temp_v4,"%s%s",temp_v0,DAT_0043d998);
     FUN_0029ee6c(temp_v4,0x323232ff);
   }
   else {
@@ -76,7 +76,7 @@ void FUN_003a88f4(int param_1)
   FUN_002a0cc8(0);
   *(unsigned int *)(param_1 + 0x14) = 2;
   *(unsigned int *)(param_1 + 0x18) = 0;
-  FUN_00231240(param_1 + 200,0,0);
+  pointConvertToFloat(param_1 + 200,0,0);
   (**(romwright_code **)(**(int **)(param_1 + 0x590) + 8))(*(int **)(param_1 + 0x590),param_1 + 0x20);
   puVar4 = (unsigned short *)(*(int *)(param_1 + 0x590) + 4);
   *puVar4 = *puVar4 | 0x1000;

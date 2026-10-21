@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0014287c's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void FUN_0010031c(const u32 *source, u32 *destination)
+{
+    if (destination != NULL) {
+        *destination = *source;
+    }
+}
+
+} /* extern "C" */

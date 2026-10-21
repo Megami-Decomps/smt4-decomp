@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0024ad14(void);
 int FUN_002a0428(unsigned int, int);
-int FUN_002be624(unsigned char [128], unsigned char *);
+int textFormatBuffer(unsigned char [128], unsigned char *);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_0027d0b0; /* 0x27d0b0 */
@@ -18,7 +18,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(int);
 extern int FUN_0030f6f8(void);
 
@@ -83,7 +83,7 @@ LAB_0027cf90:
       FUN_0024ad14();
       temp_v2 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x28;
       *(unsigned short *)(temp_v2 + 0x32) = *(unsigned short *)(temp_v1 + 2);
-      FUN_002be624(temp_v5,&LAB_0027d0b0);
+      textFormatBuffer(temp_v5,&LAB_0027d0b0);
       if (*(short *)(temp_v2 + 0x32) != 0xe) {
         temp_v4 = asdMdlManagerCreateSecondList(temp_v5,7);
         *(unsigned int *)(temp_v2 + 0x34) = temp_v4;

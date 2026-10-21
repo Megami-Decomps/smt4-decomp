@@ -10,7 +10,7 @@ int FUN_00247478(unsigned char [4], int, unsigned int);
 int FUN_002ae164(void);
 int dataTable08Sub1GetRecord(void);
 int FUN_0033a2c4(int, unsigned int);
-int FUN_003aeff4(unsigned int, char [4], unsigned int *, int *);
+int btlUiCopyStatePairs(unsigned int, char [4], unsigned int *, int *);
 int FUN_003d0d1c(int *, unsigned int *);
 
 /* stack frame of param_2: 6 slot(s), 16 byte(s) */
@@ -33,7 +33,7 @@ extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033a2c4. */
-/* Supplied declaration required: FUN_003aeff4. */
+/* Supplied declaration required: btlUiCopyStatePairs. */
 extern int FUN_003af084(unsigned int);
 /* Supplied declaration required: FUN_003d0d1c. */
 
@@ -78,7 +78,7 @@ unsigned int FUN_003cae6c(int *param_1,unsigned int *param_2)
   temp_v7 = 0;
   temp_v8 = 0;
   uStack_5c = 0;
-  FUN_003aeff4(g_btlUiBlock,temp_v9,&temp_v6,&temp_v8);
+  btlUiCopyStatePairs(g_btlUiBlock,temp_v9,&temp_v6,&temp_v8);
   temp_v5 = param_2[10];
   if (temp_v9[0] == '\0') {
     if (*(short *)(temp_v5 + 0x14c) != 10) {

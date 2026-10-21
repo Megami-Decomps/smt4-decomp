@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00207470(void);
-int FUN_00253ce4(void);
-int FUN_00253d24(unsigned int);
+int bufferDestroyOwnedPair(void);
+int bufferReleaseOwnedPair(unsigned int);
 int asdMemFreeNonNull(void);
 int asdTextureRelease(void);
 int asdMemFree(unsigned short *);
@@ -17,8 +17,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00207470. */
-/* Supplied declaration required: FUN_00253ce4. */
-/* Supplied declaration required: FUN_00253d24. */
+/* Supplied declaration required: bufferDestroyOwnedPair. */
+/* Supplied declaration required: bufferReleaseOwnedPair. */
 /* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
@@ -40,9 +40,9 @@ void geometryDestroy(unsigned short *param_1)
     FUN_00207470();
   }
   else {
-    FUN_00253d24(*(unsigned int *)(param_1 + 4));
+    bufferReleaseOwnedPair(*(unsigned int *)(param_1 + 4));
     if (*(int *)(param_1 + 4) != 0) {
-      FUN_00253ce4();
+      bufferDestroyOwnedPair();
       asdMemFreeNonNull();
     }
   }

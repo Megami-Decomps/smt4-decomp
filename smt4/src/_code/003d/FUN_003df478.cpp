@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_5_stack;
 
-extern int FUN_0023a0d8(unsigned int, int **, unsigned int);
+extern int tokenResolveAddress(unsigned int, int **, unsigned int);
 extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -26,7 +26,7 @@ int FUN_003df478(unsigned int *param_1,unsigned int *param_2,unsigned int param_
   
   temp_v2 = param_4;
   temp_v0 = FUN_002b5c44();
-  temp_v1 = FUN_0023a0d8(temp_v0,&temp_v2,*param_1);
+  temp_v1 = tokenResolveAddress(temp_v0,&temp_v2,*param_1);
   if (-1 < temp_v1) {
     if ((int *)(temp_v2[2] - param_5) <= param_4) {
       param_4 = (int *)(temp_v2[2] - param_5);

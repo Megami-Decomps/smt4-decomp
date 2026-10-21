@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_003fd76c(int, int *);
-int FUN_003fd784(int);
+int controllerSetDestination(int, int *);
+int controllerSetPosition(int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
 int moriModelContentCopyBody(void);
@@ -23,8 +23,8 @@ extern unsigned char LAB_004825d0; /* 0x4825d0 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetDestination. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: moriModelContentCopyBody. */
@@ -57,9 +57,9 @@ void FUN_004824fc(int param_1)
   temp_v2 = 0;
   temp_v3 = 0;
   temp_v4 = 0;
-  FUN_003fd76c(temp_v0,&temp_v2);
+  controllerSetDestination(temp_v0,&temp_v2);
   FUN_003fdb18(temp_v0);
-  FUN_003fd784(temp_v0);
+  controllerSetPosition(temp_v0);
   FUN_003fe86c(temp_v0,0,2);
   return;
 }

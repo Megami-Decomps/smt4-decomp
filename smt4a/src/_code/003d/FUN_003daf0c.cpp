@@ -41,7 +41,7 @@ extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned short FUN_00167f08(void);
+extern unsigned short ifTouchGetButtonHelpValue(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -153,7 +153,7 @@ void FUN_003daf0c(int param_1)
           FUN_0031f208(3);
         }
         FUN_0019de98(0,0xf4f4f4ff);
-        temp_v1 = FUN_00167f08();
+        temp_v1 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v1;
         FUN_0020b660(0x2b);
         temp_v2 = 0x100020e;

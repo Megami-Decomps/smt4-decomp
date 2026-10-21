@@ -11,7 +11,7 @@ int FUN_0048a378(int);
 int FUN_00492aa0(int, unsigned int);
 int FUN_00492ac8(int, int);
 int FUN_00492bc0(int);
-int FUN_004935b0(...);
+int pointConvertToFloat(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00492aa0. */
 /* Supplied declaration required: FUN_00492ac8. */
 /* Supplied declaration required: FUN_00492bc0. */
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 extern int NaviMain_GetCurrentMap(void);
 
 
@@ -61,7 +61,7 @@ void FUN_0048b8a4(int param_1)
       }
       temp_v2 = vec2GetYInt(temp_v4);
       temp_v3 = vec2GetXInt(temp_v4);
-      FUN_004935b0(param_1 + 0x4d0,temp_v3,temp_v2);
+      pointConvertToFloat(param_1 + 0x4d0,temp_v3,temp_v2);
       if (*(char *)(param_1 + 0x112a) == '\0') {
         FUN_00163aa4(param_1 + 0x10a0);
         return;
@@ -69,7 +69,7 @@ void FUN_0048b8a4(int param_1)
     }
   }
   else {
-    FUN_004935b0(param_1 + 0x4d0,0xfffffec0);
+    pointConvertToFloat(param_1 + 0x4d0,0xfffffec0);
     FUN_0048a378(param_1);
     FUN_00184528(param_1 + 0x4e4,0);
     *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;

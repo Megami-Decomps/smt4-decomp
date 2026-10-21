@@ -9,7 +9,7 @@ int FUN_00227d18(int);
 int FUN_00227fac(void);
 int FUN_002296f4(...);
 int FUN_0023c0d0(int *, int, int, int);
-int FUN_0023c118(int, int, int);
+int actionCreateKindSeventeen(int, int, int);
 int FUN_002505c0(...);
 int FUN_002551ac(...);
 int FUN_0027df30(...);
@@ -41,7 +41,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002296f4. */
 extern int FUN_00229914(int *, int, int);
 /* Supplied declaration required: FUN_0023c0d0. */
-/* Supplied declaration required: FUN_0023c118. */
+/* Supplied declaration required: actionCreateKindSeventeen. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_0027df30. */
@@ -82,7 +82,7 @@ unsigned char FUN_003cfe14(int *param_1,int param_2,int param_3)
     else {
       temp_v2 = 1;
     }
-    FUN_0023c118(0x1e,param_2,(int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e));
+    actionCreateKindSeventeen(0x1e,param_2,(int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e));
     FUN_00227d18((int)*(short *)(*(int *)(param_2 + 0x24) + 0x62));
   }
   FUN_0023c0d0(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),-param_3);

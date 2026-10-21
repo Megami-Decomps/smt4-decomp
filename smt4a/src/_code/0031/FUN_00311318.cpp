@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00130e3c(int [2], int, int *);
 int onlineStringDestroy(unsigned char [8]);
 int _ZN9Obj55aff4C1Ev(unsigned char [8]);
-int FUN_002f42be(unsigned char [8], unsigned char *, unsigned int, int);
+int onlineFormatWideString(unsigned char [8], unsigned char *, unsigned int, int);
 int lessU32(...);
 
 /* stack frame of param_2: 10 slot(s), 40 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int FUN_00113fa0(int, unsigned char *);
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
-/* Supplied declaration required: FUN_002f42be. */
+/* Supplied declaration required: onlineFormatWideString. */
 /* Supplied declaration required: lessU32. */
 extern int wordRefsDiffer_002fee88(int *, unsigned int *);
 extern int wordRefsEqual_002ff078(int *, unsigned int *);
@@ -85,7 +85,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
   }
   else {
     _ZN9Obj55aff4C1Ev(temp_v7);
-    FUN_002f42be(temp_v7,&LAB_003113d8,*(unsigned int *)(param_1 + 8),temp_v12);
+    onlineFormatWideString(temp_v7,&LAB_003113d8,*(unsigned int *)(param_1 + 8),temp_v12);
     temp_v0 = operatorNew(0x4c);
     temp_v1 = 0;
     if (temp_v0 != 0) {

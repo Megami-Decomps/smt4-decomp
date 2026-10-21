@@ -1,27 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00344f2c` (_code @ 0x344f2c, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-int FUN_00344f2c(int param_1,int param_2)
-
+struct ListEntry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s8 id;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0c */ ListEntry *next;
+};
+struct EntryList { u8 unk00[8]; ListEntry *head; };
+/* Counts entries with the requested identifier. */
+extern "C" u32 FUN_00344f2c(const EntryList *list, s32 id)
 {
-  char *pcVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  temp_v1 = *(int *)(param_1 + 8);
-  while (temp_v1 != 0) {
-    pcVar1 = (char *)(temp_v1 + 4);
-    temp_v1 = *(int *)(temp_v1 + 0xc);
-    if (*pcVar1 == param_2) {
-      temp_v0 = temp_v0 + 1;
+    u32 count = 0;
+    for (ListEntry *entry = list->head; entry; entry = entry->next) {
+        if (entry->id == id)
+            ++count;
     }
-  }
-  return temp_v0;
+    return count;
 }
-
-} /* extern "C" */

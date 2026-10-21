@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00212510(...);
+int matrixCopyFull(...);
 int matrix43Multiply(...);
 
 /* stack frame of param_3: 16 slot(s), 64 byte(s) */
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00212510. */
+/* Supplied declaration required: matrixCopyFull. */
 /* Supplied declaration required: matrix43Multiply. */
 
 
@@ -86,7 +86,7 @@ unsigned int FUN_003bfb50(unsigned int param_1,float *param_2,int param_3)
     if (param_3 != 1) {
       if (param_3 == 2) {
         matrix43Multiply(temp_v18,param_1,&temp_v3);
-        FUN_00212510(param_1,temp_v18);
+        matrixCopyFull(param_1,temp_v18);
         return param_1;
       }
       return 0;
@@ -94,7 +94,7 @@ unsigned int FUN_003bfb50(unsigned int param_1,float *param_2,int param_3)
     matrix43Multiply(temp_v18,&temp_v3,param_1);
     pfVar1 = (float *)temp_v18;
   }
-  FUN_00212510(param_1,pfVar1);
+  matrixCopyFull(param_1,pfVar1);
                     /* WARNING: Treating indirect jump as return */
   return param_1;
 }

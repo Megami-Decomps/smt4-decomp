@@ -11,7 +11,7 @@ typedef void (*VoidFunc)(void);
 int FUN_00184964(int low, int high);                    /* random integer in [low, high] */
 int soundChannelStopAll(int id);
 int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
-int FUN_001acf98(int type, int index);
+int asdTMTexLoadMainHeap(int type, int index);
 int FUN_00184310(void);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
@@ -49,7 +49,7 @@ void whisperEffectStart(u32 devilId)
     sysMemClear(fx, 0x1b8);
     asdTMTexTableLoadTmx(0x2c, 0);
     for (i = 0; i < 5; i++) {
-        FUN_001acf98(0x2c, i);
+        asdTMTexLoadMainHeap(0x2c, i);
     }
 
     fx->unk10 = 1.0f;

@@ -1,26 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a637c` (_code @ 0x3a637c, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct AocRecord {
+    /* 0x00 */ u8 unk00[42];
+    /* 0x2a */ u16 flags;
+};
 extern "C" {
-
-int aocRecordLookup84(void);
-
-/* Supplied declaration required: aocRecordLookup84. */
-extern int FUN_002ae3c4(void);
-
-
-void FUN_003a637c(void)
-
+s32 FUN_002ae3c4(u32 id);
+AocRecord *aocRecordLookup84(u32 id);
+/* Returns the content flags when the prerequisite query succeeds. */
+s32 FUN_003a637c(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002ae3c4();
-  if (temp_v0 == 10) {
-    aocRecordLookup84();
-  }
-  return;
+    if (FUN_002ae3c4(id) != 10)
+        return 0;
+    AocRecord *record = aocRecordLookup84(id);
+    return record ? record->flags : 0;
 }
-
-} /* extern "C" */
+}

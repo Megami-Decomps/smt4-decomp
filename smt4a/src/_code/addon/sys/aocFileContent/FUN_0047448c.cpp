@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemoryAlloc(...);
 int jyoucyuGetTableEntry(...);
 int asdMemFree(...);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: asdMemFree. */
@@ -81,7 +81,7 @@ void FUN_0047448c(unsigned char *param_1,int param_2,unsigned int param_3)
   asdMemoryAlloc(0x100,0x100,0,*(unsigned int *)(param_2 + 0x34));
   *(unsigned int *)(param_2 + 0x20) = temp_v1;
   rt_memclr();
-  FUN_00100388(param_2 + 0x24,"aoc%d:",param_3);
+  textFormatBuffer(param_2 + 0x24,"aoc%d:",param_3);
   return;
 }
 

@@ -10,7 +10,7 @@ int nodeSetTranslation3f(unsigned int, int);
 int FUN_002a0428(int, int);
 int FUN_002a04f0(int);
 int FUN_002a09b4(unsigned char [64], int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* Supplied declaration required: FUN_0018a104. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
@@ -20,7 +20,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
 extern int FUN_002adee0(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 
@@ -60,11 +60,11 @@ unsigned int FUN_00221e1c(void)
   else {
     temp_v1 = FUN_002c1d5c();
     if (temp_v1 == 0) {
-      FUN_002be624(temp_v3,"battle/battle_map/e%03d_%02d.bcenv",*(unsigned int *)(temp_v0 + 0x10),
+      textFormatBuffer(temp_v3,"battle/battle_map/e%03d_%02d.bcenv",*(unsigned int *)(temp_v0 + 0x10),
                    *(unsigned int *)(temp_v0 + 0x14));
       FUN_002a09b4(temp_v3,0);
       *(unsigned char *)(temp_v0 + 0x1c) = 1;
-      FUN_002be624(temp_v3,"battle/battle_map/b%03d_%02d.bam",*(unsigned int *)(temp_v0 + 0x10),
+      textFormatBuffer(temp_v3,"battle/battle_map/b%03d_%02d.bam",*(unsigned int *)(temp_v0 + 0x10),
                    *(unsigned int *)(temp_v0 + 0x14));
       temp_v2 = asdMdlManagerCreateSecondList(temp_v3,0x38);
       *(unsigned int *)(temp_v0 + 8) = 1;

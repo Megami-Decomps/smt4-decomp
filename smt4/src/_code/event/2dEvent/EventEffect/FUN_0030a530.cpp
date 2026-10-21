@@ -27,7 +27,7 @@ extern unsigned int *g_eventEffect; /* 0x43dee8 */
 extern unsigned int DAT_0043df00; /* 0x43df00 */
 extern unsigned int DAT_0043df04; /* 0x43df04 */
 
-extern int FUN_0024bb10(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
@@ -70,7 +70,7 @@ void FUN_0030a530(void)
   puVar1[5] = 0x3f800000;
   puVar1[3] = 0x28;
   do {
-    temp_v0 = FUN_0024bb10((&DAT_0043df00)[temp_v1 * 3]);
+    temp_v0 = textureGetIndexedResource((&DAT_0043df00)[temp_v1 * 3]);
     if (temp_v0 == 0) {
       asdTMTexTableLoadTmx((&DAT_0043df00)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x43df09) = 1;

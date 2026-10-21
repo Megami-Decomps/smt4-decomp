@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0024edd4(...);
 int FUN_00298d50(...);
 int FUN_002adf00(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002c159c(...);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
@@ -40,7 +40,7 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_00298d50. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002adf00. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
@@ -101,11 +101,11 @@ unsigned int FUN_002fc29c(void)
     puVar1[0x17b] = 0;
     temp_v2 = 0;
     do {
-      FUN_002be624(temp_v5,&LAB_002fc5c0,
+      textFormatBuffer(temp_v5,&LAB_002fc5c0,
                    *(unsigned int *)(s__B_B_B_B_B_B_B_B_B_B_0043dfd8 + temp_v2 * 4));
       temp_v0 = FUN_00263c1c(temp_v5);
       puVar1[temp_v2 + 0x1b2] = temp_v0;
-      FUN_002be624(temp_v5,&LAB_002fc5dc,
+      textFormatBuffer(temp_v5,&LAB_002fc5dc,
                    *(unsigned int *)(s__B_B_B_B_B_B_B_B_B_B_0043dfd8 + temp_v2 * 4));
       temp_v0 = asdMdlManagerCreateSecondList(temp_v5,7);
       temp_v3 = temp_v2 + 1;

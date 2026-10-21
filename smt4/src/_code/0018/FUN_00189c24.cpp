@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int FUN_001e16ec(...); /* 0x1e16ec */
+extern int dataTable1bOr1cCompareRecordKeys(...); /* 0x1e16ec */
 extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00298d64. */
@@ -153,7 +153,7 @@ LAB_00189e54:
 LAB_00189e6c:
       temp_v7 = (temp_v7 + 1) & 0xffff;
       if (temp_v7 >= 400) {
-        FUN_002b7bca(temp_v12,temp_v9,2,FUN_001e16ec);
+        FUN_002b7bca(temp_v12,temp_v9,2,dataTable1bOr1cCompareRecordKeys);
         temp_v3 = temp_v2 + 0x5fc;
         temp_v11[0] = 1;
         temp_v11[1] = 1;

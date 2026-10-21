@@ -49,7 +49,7 @@ extern unsigned short DAT_00588108; /* 0x588108 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: paramsInit. */
 extern unsigned int *FUN_0015687c(void);
-extern unsigned short FUN_00167f08(void);
+extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -170,7 +170,7 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   FUN_0014e188(param_1 + 0x3ac,0x23,0,param_1 + 0x274,1);
   uiSpriteSetImageKeyframe(param_1 + 0x3ac,0);
   campButtonHelpAcquire();
-  DAT_00588108 = FUN_00167f08();
+  DAT_00588108 = ifTouchGetButtonHelpValue();
   *(unsigned short *)(param_1 + 0x55e) = 0x97;
   return;
 }

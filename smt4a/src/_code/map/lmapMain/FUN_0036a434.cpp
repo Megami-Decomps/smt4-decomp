@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001418fc(unsigned char *);
+int uiSetFloatPair(unsigned char *);
 int FUN_0014f0dc(unsigned char *, int, int, int);
 int FUN_001523b8(unsigned char *, int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_00275ffc(void);
+int residentApplyFallbackValues(void);
 int FUN_003250ac(unsigned char [4]);
 int FUN_0036b824(unsigned char *);
 int FUN_003881f8(int, float *, float *);
@@ -28,7 +28,7 @@ typedef struct {
 
 extern int DAT_005806a4; /* 0x5806a4 */
 extern unsigned long long *g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f10cc; /* 0x5f10cc */
+extern unsigned char g_localCamera; /* 0x5f10cc */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -39,13 +39,13 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00275ffc. */
+/* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_003881f8. */
@@ -236,11 +236,11 @@ void FUN_0036a434(int param_1)
            *(float *)(param_1 + 0x80) + (temp_v15 - *(float *)(param_1 + 0x80)) * 0.33333334f;
     }
   }
-  FUN_0036b824(&DAT_005f10cc);
-  FUN_001418fc(&DAT_005f10cc);
-  FUN_001523b8(&DAT_005f10cc,1);
-  FUN_0014f0dc(&DAT_005f10cc,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
-  *(unsigned char **)(*(int *)(param_1 + 0x936c) + 0xc) = &DAT_005f10cc;
+  FUN_0036b824(&g_localCamera);
+  uiSetFloatPair(&g_localCamera);
+  FUN_001523b8(&g_localCamera,1);
+  FUN_0014f0dc(&g_localCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
+  *(unsigned char **)(*(int *)(param_1 + 0x936c) + 0xc) = &g_localCamera;
   temp_v1 = DAT_005806a4;
   temp_v3 = *(unsigned int *)(param_1 + 0x88);
   temp_v4 = *(unsigned int *)(param_1 + 0x8c);
@@ -256,7 +256,7 @@ void FUN_0036a434(int param_1)
   FUN_003250ac(temp_v16);
   *(unsigned int *)(DAT_005806a4 + 0x308) = temp_v17;
   FUN_0050d8e4();
-  FUN_00275ffc();
+  residentApplyFallbackValues();
   return;
 }
 

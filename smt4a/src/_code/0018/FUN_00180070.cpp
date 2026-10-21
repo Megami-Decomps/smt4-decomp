@@ -54,7 +54,7 @@ extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: refCountIncrement. */
 extern int FUN_0025cc50(int *);
-extern int *FUN_0037a7f4(void);
+extern int *textureCreateFromImage(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -80,7 +80,7 @@ int * FUN_00180070(int param_1,int *param_2)
     asdEffectTextureCreate();
   }
   else {
-    param_2 = (int *)FUN_0037a7f4();
+    param_2 = (int *)textureCreateFromImage();
   }
   *(int **)(param_1 + 0x14) = param_2;
   refCountIncrement();

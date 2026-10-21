@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b57a8(...);
-int FUN_004283f0(int, int, unsigned int);
+int recordValidatePair(int, int, unsigned int);
 int FUN_004395fc(unsigned char *, char [16], int, int, unsigned int, unsigned int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char libc_toupper(void);
 /* Supplied declaration required: FUN_001b57a8. */
 extern int FUN_001d25ec(unsigned int *);
 extern int FUN_004283cc(int);
-/* Supplied declaration required: FUN_004283f0. */
+/* Supplied declaration required: recordValidatePair. */
 extern int FUN_00429a1c(int);
 /* Supplied declaration required: FUN_004395fc. */
 
@@ -51,7 +51,7 @@ void FUN_00429c08(unsigned int *param_1,int param_2,int param_3)
     FUN_004395fc(puVar3,s_sys_ECardStatus_005892a4,3,param_2 + 4,*(unsigned int *)(param_2 + 8),
                  *(unsigned int *)(param_2 + 0xc));
     FUN_001b57a8(&temp_v3,puVar3);
-    FUN_004283f0(param_2,temp_v3,uStack_44);
+    recordValidatePair(param_2,temp_v3,uStack_44);
     temp_v1 = FUN_001d25ec((unsigned int *)&temp_v3);
     if (temp_v1 < 0) {
       *param_1 = temp_v3;

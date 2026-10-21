@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00135c30's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+struct Panel;
+extern Panel *g_renderCtx;
+void FUN_00157558(Panel *panel);
+s32 FUN_00138890(void)
+{
+    FUN_00157558(g_renderCtx);
+    return 0;
+}
+
+} /* extern "C" */

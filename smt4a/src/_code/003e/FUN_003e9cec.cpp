@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00184310(...);
 int sysMemClear(...);
 int rt_memclr(...);
-int FUN_004bd274(...);
-int FUN_004bd294(...);
+int randomGetLowerTenBits(...);
+int randomGetUpperSixBits(...);
 int clearTwoWords(...);
 
 typedef struct fn_003e9cec_arg2 fn_003e9cec_arg2;
@@ -39,8 +39,8 @@ extern unsigned int FUN_0017760c(fn_003e9cec_arg2 *);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
 extern unsigned short FUN_004bca20(fn_003e9cec_arg2 *);
-/* Supplied declaration required: FUN_004bd274. */
-/* Supplied declaration required: FUN_004bd294. */
+/* Supplied declaration required: randomGetLowerTenBits. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: clearTwoWords. */
 
 
@@ -113,19 +113,19 @@ void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *
   temp_v8 = 0;
   do {
     pfVar7 = param_3;
-    FUN_004bd274(param_3,temp_v8 & 0xff);
+    randomGetLowerTenBits(param_3,temp_v8 & 0xff);
     *(unsigned short *)(param_2 + temp_v8 * 2 + 0x128) =
          ((unsigned short)(int)pfVar7 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v8 * 2 + 0x128) & 0xfc00);
     pfVar7 = param_3;
-    FUN_004bd294(param_3,temp_v8 & 0xff);
+    randomGetUpperSixBits(param_3,temp_v8 & 0xff);
     *(unsigned short *)(param_2 + temp_v8 * 2 + 0x128) =
          (unsigned short)((int)pfVar7 << 10) | (*(unsigned short *)(param_2 + temp_v8 * 2 + 0x128) & 0x3ff);
     pfVar7 = param_3;
-    FUN_004bd274(param_3,temp_v8 & 0xff);
+    randomGetLowerTenBits(param_3,temp_v8 & 0xff);
     *(unsigned short *)(param_2 + temp_v8 * 2 + 0x152) =
          ((unsigned short)(int)pfVar7 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v8 * 2 + 0x152) & 0xfc00);
     pfVar7 = param_3;
-    FUN_004bd294(param_3,temp_v8 & 0xff);
+    randomGetUpperSixBits(param_3,temp_v8 & 0xff);
     *(unsigned short *)(param_2 + temp_v8 * 2 + 0x152) =
          (unsigned short)(((unsigned int)pfVar7 & 0x3f) << 10) | (*(unsigned short *)(param_2 + temp_v8 * 2 + 0x152) & 0x3ff)
     ;

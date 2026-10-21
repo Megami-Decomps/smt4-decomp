@@ -5,7 +5,7 @@
 extern "C" {
 
 int paramsInit(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int FUN_001ad9b4(void);
 int qcMainSetMode(int);
 int FUN_002804b0(unsigned char *, unsigned int *, int);
@@ -34,7 +34,7 @@ extern unsigned char DAT_00533458; /* 0x533458 */
 extern unsigned char DAT_00533470; /* 0x533470 */
 
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: qcMainSetMode. */
@@ -86,7 +86,7 @@ void FUN_00467e64(unsigned int *param_1)
   param_1[0x2ae] = 0;
   *(unsigned char *)((int)param_1 + 0x1b) = 0;
   FUN_0031e198();
-  FUN_0019ea64(0);
+  messageSetMode(0);
   qcMainSetMode(0);
   temp_v2 = 0x15e;
   do {

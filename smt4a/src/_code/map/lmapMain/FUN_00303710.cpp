@@ -10,7 +10,7 @@ int FUN_001523b8(unsigned char *, int);
 int FUN_0036b824(unsigned char *);
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern unsigned char DAT_005f10cc; /* 0x5f10cc */
+extern unsigned char g_localCamera; /* 0x5f10cc */
 
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_0014f0dc. */
@@ -49,12 +49,12 @@ void FUN_00303710(void)
   *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x38);
   *(unsigned int *)(temp_v0 + 0x54) = *(unsigned int *)(temp_v0 + 0x3c);
   *(unsigned int *)(temp_v0 + 0x58) = *(unsigned int *)(temp_v0 + 0x40);
-  FUN_0013c884(&DAT_005f10cc,1);
-  FUN_0014f0dc(&DAT_005f10cc,DAT_005806a4 + 0x38,DAT_005806a4 + 0x44,DAT_005806a4 + 0x20);
-  FUN_001523b8(&DAT_005f10cc,1);
-  FUN_0036b824(&DAT_005f10cc);
+  FUN_0013c884(&g_localCamera,1);
+  FUN_0014f0dc(&g_localCamera,DAT_005806a4 + 0x38,DAT_005806a4 + 0x44,DAT_005806a4 + 0x20);
+  FUN_001523b8(&g_localCamera,1);
+  FUN_0036b824(&g_localCamera);
   temp_v0 = DAT_005806a4;
-  *(unsigned char **)(*(int *)(DAT_005806a4 + 0x314) + 0xc) = &DAT_005f10cc;
+  *(unsigned char **)(*(int *)(DAT_005806a4 + 0x314) + 0xc) = &g_localCamera;
   *(unsigned int *)(temp_v0 + 0xa0) = 0x43fa0000;
   *(unsigned int *)(temp_v0 + 0xa4) = temp_v2;
   *(unsigned char *)(temp_v0 + 0xa8) = 1;

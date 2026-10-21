@@ -25,7 +25,7 @@ extern unsigned char LAB_00319c7c; /* 0x319c7c */
 extern unsigned char LAB_00319c8c; /* 0x319c8c */
 extern unsigned char LAB_0032fab0; /* 0x32fab0 */
 extern unsigned char LAB_0032fab8; /* 0x32fab8 */
-extern unsigned int *DAT_0057f134; /* 0x57f134 */
+extern unsigned int *g_callbackWork; /* 0x57f134 */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -44,7 +44,7 @@ void FUN_00319b10(void)
   puVar1 = (unsigned int *)0x34;
   asdOperatorNew();
   puVar2 = &LAB_00319c5c;
-  DAT_0057f134 = puVar1;
+  g_callbackWork = puVar1;
   asdProcessCreateSimple(&LAB_00319c5c,4,0,0,&LAB_002e2794,0,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00319c70,0x81,0,0,&LAB_0032fab8,0,0,puVar2);

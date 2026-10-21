@@ -41,7 +41,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002c2c68. */
 /* Supplied declaration required: FUN_00318df4. */
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_00387ac4. */
 
 
@@ -119,7 +119,7 @@ unsigned int FUN_0022a0a0(void)
           temp_v7 = FUN_00285518(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
           FUN_0019de98(temp_v7,0xf4f4f4ff);
           temp_v6 = FUN_002c2c68(temp_v5);
-          temp_v4 = FUN_00348ed0(temp_v5);
+          temp_v4 = uiSearchPrimary(temp_v5);
           if (temp_v4 < temp_v6) {
             temp_v3 = FUN_001643b4(0x15,0x46);
             *(unsigned short *)(temp_v0 + 0x76c) = temp_v3;
@@ -139,7 +139,7 @@ unsigned int FUN_0022a0a0(void)
     FUN_00163aa4(temp_v0 + 0x62c);
     temp_v8 = temp_v0 + 0x788;
     temp_v9 = FUN_002c2c68();
-    temp_v5 = FUN_00348ed0(temp_v8);
+    temp_v5 = uiSearchPrimary(temp_v8);
     if (temp_v5 < temp_v9) {
       FUN_00163aa4(temp_v0 + 0x6b8);
     }
@@ -223,7 +223,7 @@ unsigned int FUN_0022a0a0(void)
     FUN_00163aa4(DAT_0057f280 + 0x5a0);
     FUN_00163aa4(temp_v0 + 0x62c);
     temp_v8 = FUN_002c2c68();
-    temp_v9 = FUN_00348ed0(temp_v0 + 0x788);
+    temp_v9 = uiSearchPrimary(temp_v0 + 0x788);
     if (temp_v9 < temp_v8) {
       FUN_00163aa4(temp_v0 + 0x6b8);
     }

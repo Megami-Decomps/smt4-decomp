@@ -4,7 +4,7 @@
 extern "C" {
 
 /* Sets the translation column of the owner's node transform and flags it as changed. */
-void FUN_0029a014(NodeOwner *owner, f32 x, f32 y, f32 z)
+void nodeSetTranslation3f(NodeOwner *owner, f32 x, f32 y, f32 z)
 {
     NodeObject *object = owner->object;
 

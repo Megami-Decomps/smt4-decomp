@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00514500(void);
+int randomAdvanceShiftRegister(void);
 int FUN_00514540(int);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 
 
@@ -56,7 +56,7 @@ void FUN_003931fc(int param_1)
   if (temp_v2 < temp_v3) {
     do {
       temp_v1 = 0;
-      FUN_00514500();
+      randomAdvanceShiftRegister();
       temp_v2 = temp_v2 + 1;
       *(int *)(temp_v0 + 0x14) = ~(temp_v1 % 8);
       temp_v0 = temp_v0 + 0x30;

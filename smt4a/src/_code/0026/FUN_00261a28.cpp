@@ -9,7 +9,7 @@ int asdOperatorDeleteC(...);
 int gameFlagIsSet(...);
 int FUN_001f50fc(...);
 int FUN_002159dc(...);
-int FUN_00237418(void);
+int gameDataCopySaveToWork(void);
 int FUN_00283d74(int);
 int FUN_002854a8(...);
 int FUN_002c7ad8(void);
@@ -81,7 +81,7 @@ extern unsigned int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_001f50fc. */
 extern int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_002159dc. */
-/* Supplied declaration required: FUN_00237418. */
+/* Supplied declaration required: gameDataCopySaveToWork. */
 /* Supplied declaration required: FUN_00283d74. */
 /* Supplied declaration required: FUN_002854a8. */
 extern int FUN_002a4654(void);
@@ -290,7 +290,7 @@ void FUN_00261a28(int param_1)
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x17);
-  FUN_00237418();
+  gameDataCopySaveToWork();
   FUN_00283d74(0);
   FUN_00363c58(0);
   temp_v0 = gameDataBlocksGetSaveData();

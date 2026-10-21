@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int dataTableFileGetTable(...);
 int FUN_001b2ebc(...);
 int FUN_001b31ac(...);
@@ -45,7 +45,7 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 extern unsigned int g_aocDisplay; /* 0x57027c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: dataTableFileGetTable. */
@@ -137,7 +137,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
                 if ((temp_v0 <= temp_v7) || (temp_v12 == 0)) goto LAB_00471070;
                 temp_v9 = (unsigned int *)(temp_v12 + temp_v7 * 0x10);
                 rt_memcpy_w(temp_v9,*(int *)(temp_v14 + 0x4c) + temp_v5 * 0x10,0xe);
-                FUN_00100388(temp_v8,"%s/%s",temp_v10,pcVar9 + 1);
+                textFormatBuffer(temp_v8,"%s/%s",temp_v10,pcVar9 + 1);
                 temp_v4 = g_aocDisplay;
                 FUN_001b2ebc(g_aocDisplay,temp_v8,0,temp_v9 + 2,1,0x80,0);
                 temp_v7 = temp_v7 + 1;

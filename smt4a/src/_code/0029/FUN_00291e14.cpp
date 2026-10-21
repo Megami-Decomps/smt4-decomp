@@ -1,27 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291e14` (_code @ 0x291e14, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #48] where the compiled block uses ldr r0, [pc, #68]. */
+#include "common.h"
+
+struct BattleMain {
+    u8 unk00[0x45a0];
+    u32 flagsLow;  // 0x45a0
+    u32 flagsHigh; // 0x45a4
+};
 
 extern "C" {
+extern BattleMain* g_btlMain;
+extern u32 DAT_00573ae8;
+extern u32 DAT_00573aec;
 
-extern int g_btlMain; /* 0x573920 */
-extern unsigned int DAT_00573ae8; /* 0x573ae8 */
-extern unsigned int DAT_00573aec; /* 0x573aec */
-
-
-unsigned int FUN_00291e14(void)
-
+u32 FUN_00291e14(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((g_btlMain != 0) &&
-     (temp_v0 = 0,
-     (*(unsigned int *)(g_btlMain + 0x45a0) & DAT_00573ae8) != 0 ||
-     (DAT_00573aec & *(unsigned int *)(g_btlMain + 0x45a4)) != 0)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
-}
+    BattleMain* battle = g_btlMain;
+    if (battle == NULL) {
+        return 0;
+    }
 
-} /* extern "C" */
+    u32 selectedFlags = (battle->flagsLow & DAT_00573ae8)
+                      | (battle->flagsHigh & DAT_00573aec);
+    return selectedFlags != 0;
+}
+}

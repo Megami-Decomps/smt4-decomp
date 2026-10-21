@@ -10,7 +10,7 @@ int FUN_0029efc0(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_001f1bc4(int param_1,int param_2)
@@ -133,13 +133,13 @@ void FUN_001f1bc4(int param_1,int param_2)
       temp_v1 = (int)*(short *)(temp_v1 + 10) +
               (((int)(temp_v11 + ((unsigned int)(temp_v11 >> 0x1f) >> 0x1e)) >> 2) * temp_v5 >> 0xc);
     }
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v1 = temp_v1 + param_2;
     param_1 = param_1 + temp_v8;
     FUN_002bf288(2,0x24,0xbe,param_1,temp_v1,0xab);
     FUN_002bf288(2,0x24,0xbf,param_1,temp_v1,0xab);
     FUN_002bf288(2,0x24,0xc0,param_1,temp_v1,0xab);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x24,0xc1,param_1,temp_v1,0xb5);
     temp_v11 = FUN_0029efa8(temp_v13);
     temp_v11 = FUN_0029d65c((int)*(short *)(temp_v0 + temp_v11 * 2 + 0x44c));

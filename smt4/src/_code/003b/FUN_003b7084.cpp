@@ -10,7 +10,7 @@ int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
@@ -38,7 +38,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -199,9 +199,9 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
     temp_v8 = (int)*(short *)(temp_v8 + 0x28);
     temp_v9 = (int)*(short *)(param_1 + *piVar11 * 0x620 + 0x3680);
   }
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bf380(2,0x28,7,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x65);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bf288(2,0x28,0xa9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a);
   FUN_002bf288(2,0x28,temp_v2 + 0xaa,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                0x6a);
@@ -224,7 +224,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x28,0xaf,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6f);
   FUN_002bf288(2,0x28,0xb2,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6f);
   FUN_002bf288(2,0x28,0xb3,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6f);
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v2 = g_titleScene;
   temp_v8 = packNibblesAndByte(6,1,0);
   piVar11 = (int *)(temp_v2 + 0x12ac);
@@ -245,7 +245,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
     (**(romwright_code **)(temp_v2 + 0x12c8))();
     *(unsigned char *)(temp_v2 + 0x12c4) = 0;
   }
-  FUN_002bf538();
+  efctSetSpeed();
   return;
 }
 

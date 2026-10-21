@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0027249c's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void *jobGetWork(void *job);
+extern void *g_btlHelp;
+void FUN_0023173c(void *object);
+void FUN_0024bcac(void *job)
+{
+    jobGetWork(job);
+    if (g_btlHelp != NULL) {
+        FUN_0023173c(g_btlHelp);
+    }
+}
+
+} /* extern "C" */

@@ -17,7 +17,7 @@ int FUN_003699e4(void);
 int FUN_0036a434(int);
 int FUN_0036aa04(int);
 int FUN_00378000(void);
-int FUN_0039933c(void);
+int lmapApplyMapAndArea(void);
 int FUN_003b5714(unsigned int, unsigned int, unsigned int);
 int FUN_003c323c(void);
 int FUN_003ca5a4(void);
@@ -54,7 +54,7 @@ extern unsigned char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: FUN_0036aa04. */
 /* Supplied declaration required: FUN_00378000. */
 extern char *FUN_003798f0(void);
-/* Supplied declaration required: FUN_0039933c. */
+/* Supplied declaration required: lmapApplyMapAndArea. */
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003c323c. */
 /* Supplied declaration required: FUN_003ca5a4. */
@@ -107,7 +107,7 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
   FUN_00227a70();
   FUN_002a2e98(*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x48));
   FUN_002df914();
-  FUN_0039933c();
+  lmapApplyMapAndArea();
   FUN_00378000();
   FUN_00483acc(temp_v1 + 0xf4);
   stateSetterSetFromBase(temp_v1 + 0xf4,*(int *)(temp_v1 + 0x40) - 100,*(unsigned int *)(temp_v1 + 0x48));

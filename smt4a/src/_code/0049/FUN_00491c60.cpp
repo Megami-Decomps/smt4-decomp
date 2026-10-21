@@ -17,7 +17,7 @@ extern int gameFlagIsSet(void);
 extern int dataTableHasMatchingEntry35(unsigned int);
 extern int FUN_002e707c(void);
 extern unsigned long long FUN_00376fcc(int);
-extern int FUN_0037700c(void);
+extern int gameFlagsGetWorkState(void);
 extern int FUN_00384d34(int);
 extern int gameOwnedBitTest2(int);
 extern int FUN_003bf5a8(int);
@@ -140,7 +140,7 @@ joined_r0x00491d8c:
       else {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x1794);
         if ((temp_v3 == unaff_r11) || (*(unsigned short *)(temp_v1 + 0x1796) == 0x1bd4)) {
-          temp_v2 = FUN_0037700c();
+          temp_v2 = gameFlagsGetWorkState();
           if (temp_v2 != 0x17) {
             *(unsigned short *)(temp_v1 + 0x17c0) = 0;
           }

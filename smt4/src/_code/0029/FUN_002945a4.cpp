@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023cef0(...);
 int FUN_0023f2e4(...);
 int dataTable08Sub2GetRecord(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 typedef struct fn_002945a4_arg2 fn_002945a4_arg2;
 struct fn_002945a4_arg2 {
@@ -31,7 +31,7 @@ extern unsigned char LAB_002947a4; /* 0x2947a4 */
 /* Supplied declaration required: FUN_0023f2e4. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_002945a4(unsigned int param_1,int param_2,fn_002945a4_arg2 *param_3,unsigned int param_4)
@@ -53,14 +53,14 @@ void FUN_002945a4(unsigned int param_1,int param_2,fn_002945a4_arg2 *param_3,uns
           return;
         }
         temp_v0 = FUN_0023cef0(param_1,2,pfVar1->field_0x70,pfVar1->field_0x72,0);
-        FUN_002be624(temp_v3,&LAB_002947a4,pfVar1->field_0x70,pfVar1->field_0x72,temp_v0);
+        textFormatBuffer(temp_v3,&LAB_002947a4,pfVar1->field_0x70,pfVar1->field_0x72,temp_v0);
       }
     }
     else {
       if (pfVar1->field_0x52 != 5) {
         return;
       }
-      FUN_002be624(temp_v3,&LAB_00294788,pfVar1->field_0x70,pfVar1->field_0x72);
+      textFormatBuffer(temp_v3,&LAB_00294788,pfVar1->field_0x70,pfVar1->field_0x72);
     }
   }
   else {
@@ -68,7 +68,7 @@ void FUN_002945a4(unsigned int param_1,int param_2,fn_002945a4_arg2 *param_3,uns
       return;
     }
     temp_v0 = FUN_0023cef0(param_1,0,pfVar1->field_0x70,pfVar1->field_0x72,0);
-    FUN_002be624(temp_v3,&LAB_0029476c,pfVar1->field_0x70,pfVar1->field_0x72,temp_v0);
+    textFormatBuffer(temp_v3,&LAB_0029476c,pfVar1->field_0x70,pfVar1->field_0x72,temp_v0);
   }
   FUN_0023f2e4(param_1,param_2,temp_v3,param_4);
   if (param_2 == 1) {
@@ -77,14 +77,14 @@ void FUN_002945a4(unsigned int param_1,int param_2,fn_002945a4_arg2 *param_3,uns
     dataTable08Sub2GetRecord();
     temp_v0 = FUN_0023cef0(param_1,0,*(unsigned short *)(temp_v2 + 0x70),*(unsigned short *)(temp_v2 + 0x72),
                          param_3);
-    FUN_002be624(temp_v3,&LAB_0029476c,*(unsigned short *)(temp_v2 + 0x70),
+    textFormatBuffer(temp_v3,&LAB_0029476c,*(unsigned short *)(temp_v2 + 0x70),
                  *(unsigned short *)(temp_v2 + 0x72),temp_v0);
     FUN_0023f2e4(param_1,0,temp_v3,param_4);
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 10);
     dataTable08Sub2GetRecord();
     temp_v0 = FUN_0023cef0(param_1,2,*(unsigned short *)(temp_v2 + 0x70),*(unsigned short *)(temp_v2 + 0x72),
                          param_3);
-    FUN_002be624(temp_v3,&LAB_002947a4,*(unsigned short *)(temp_v2 + 0x70),
+    textFormatBuffer(temp_v3,&LAB_002947a4,*(unsigned short *)(temp_v2 + 0x70),
                  *(unsigned short *)(temp_v2 + 0x72),temp_v0);
     FUN_0023f2e4(param_1,2,temp_v3,param_4);
   }

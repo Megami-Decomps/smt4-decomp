@@ -52,7 +52,7 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern unsigned long long FUN_00162858(void);
+extern unsigned long long campIsState85(void);
 /* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001849bc. */
@@ -186,7 +186,7 @@ void FUN_00487470(int param_1)
   temp_v29 = 120.0f;
   temp_v2 = temp_v6;
   if (DAT_005f1622 == '\0') {
-    temp_v30 = FUN_00162858();
+    temp_v30 = campIsState85();
     temp_v2 = (int)((unsigned long long)temp_v30 >> 0x20);
     temp_v14 = (int)temp_v30;
     temp_v5 = temp_v14;

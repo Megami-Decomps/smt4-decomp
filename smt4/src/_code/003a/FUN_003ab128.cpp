@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231240(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
 int FUN_0023360c(int);
 int FUN_0023553c(int);
@@ -16,7 +16,7 @@ int FUN_002bf818(int);
 int FUN_00311430(int, int);
 
 extern int FUN_00231184(void);
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_0023360c. */
 /* Supplied declaration required: FUN_0023553c. */
@@ -57,7 +57,7 @@ void FUN_003ab128(int param_1)
     FUN_002bf818(temp_v1);
     temp_v3 = vec2GetYInt(temp_v1);
     temp_v4 = vec2GetXInt(temp_v1);
-    FUN_00231240(param_1 + 200,temp_v4,temp_v3);
+    pointConvertToFloat(param_1 + 200,temp_v4,temp_v3);
     if (*(char *)(param_1 + 0x212) == '\0') {
       return;
     }
@@ -82,7 +82,7 @@ void FUN_003ab128(int param_1)
     FUN_002b8ee0(temp_v1,0);
     temp_v3 = vec2GetYInt(temp_v1);
     temp_v4 = vec2GetXInt(temp_v1);
-    FUN_00231240(param_1 + 200,temp_v4,temp_v3);
+    pointConvertToFloat(param_1 + 200,temp_v4,temp_v3);
     if (*(char *)(param_1 + 0x186) == '\0') {
       return;
     }

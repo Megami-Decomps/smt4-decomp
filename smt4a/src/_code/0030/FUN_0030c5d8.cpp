@@ -1,31 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c5d8` (_code @ 0x30c5d8, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'movs r0, r1'; compiler emits 'cmp r1, #0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int onlineStringCopyConstruct(...);
-
-extern unsigned char DAT_00559504; /* 0x559504 */
-extern unsigned char DAT_00559ed4; /* 0x559ed4 */
-
-/* Supplied declaration required: onlineStringCopyConstruct. */
-
-
-void FUN_0030c5d8(unsigned int param_1,unsigned int *param_2,int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = (unsigned int)&DAT_00559ed4;
-    *(unsigned char *)(param_2 + 1) = *(unsigned char *)(param_3 + 4);
-    temp_v0 = onlineStringCopyConstruct(param_2 + 2,param_3 + 8);
-    temp_v0 = onlineStringCopyConstruct(temp_v0 + 8,param_3 + 0x10);
-    *(unsigned char **)(temp_v0 - 0x10) = &DAT_00559504;
-  }
-  return;
+extern const u8 _ZTV9Obj559ecc[],DAT_00559504;
+struct Object {
+    const void *vtable;
+    u8 active;
+    u8 pad[3];
+    u8 first[8];
+    u8 second[8];
+};
+void *onlineStringCopyConstruct(void *,const void *);
+void FUN_0030c5d8(void *,Object *object,const Object *source) {
+    if(object) {
+        object->vtable=_ZTV9Obj559ecc+8;
+        object->active=source->active;
+        onlineStringCopyConstruct(object->first,source->first);
+        onlineStringCopyConstruct(object->second,source->second);
+        object->vtable=&DAT_00559504;
+    }
 }
-
-} /* extern "C" */
+}

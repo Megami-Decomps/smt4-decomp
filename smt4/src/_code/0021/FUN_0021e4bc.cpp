@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025be44(void);
 int FUN_002a0428(unsigned int, int);
-int FUN_002be624(unsigned char [128], unsigned char *, int);
+int textFormatBuffer(unsigned char [128], unsigned char *, int);
 int libc_strcpy(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -14,12 +14,12 @@ extern unsigned char LAB_0021e74c; /* 0x21e74c */
 extern int g_mapObj; /* 0x447e70 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0024effc(void);
+extern int dataTableGetRecordFortyFive(void);
 /* Supplied declaration required: FUN_0025be44. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 
 
@@ -92,7 +92,7 @@ unsigned int FUN_0021e4bc(void)
       temp_v2 = g_mapObj + *(short *)(g_mapObj + 0xc) * 0x48;
       *(int *)(temp_v2 + 0x38) = (int)*(short *)(temp_v1 + 4);
       *(unsigned char *)(temp_v2 + 0x40) = 0;
-      FUN_002be624(temp_v5,&LAB_0021e74c,(int)*(short *)(temp_v1 + 4));
+      textFormatBuffer(temp_v5,&LAB_0021e74c,(int)*(short *)(temp_v1 + 4));
       temp_v4 = asdMdlManagerCreateSecondList(temp_v5,7);
       *(unsigned int *)(temp_v2 + 0x3c) = temp_v4;
       *(unsigned short *)(g_mapObj + 8) = 0xc;
@@ -100,7 +100,7 @@ unsigned int FUN_0021e4bc(void)
     return 0;
   }
   psVar6 = (short *)(int)*(short *)(g_mapObj + 10);
-  temp_v1 = FUN_0024effc();
+  temp_v1 = dataTableGetRecordFortyFive();
   if ((int)psVar6 < temp_v1) {
     do {
       psVar2 = psVar6;
@@ -125,7 +125,7 @@ LAB_0021e550:
         return 1;
       }
       psVar6 = (short *)((int)psVar6 + 1);
-      temp_v1 = FUN_0024effc();
+      temp_v1 = dataTableGetRecordFortyFive();
     } while ((int)psVar6 < temp_v1);
   }
   *(unsigned short *)(g_mapObj + 8) = 99;

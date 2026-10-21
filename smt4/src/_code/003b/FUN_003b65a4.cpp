@@ -10,7 +10,7 @@ int FUN_002b6758(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_003b6da4(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -41,7 +41,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bf288. */
 extern unsigned long long FUN_002bf4f8(unsigned int, int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_003b6da4. */
 
 
@@ -166,7 +166,7 @@ void FUN_003b65a4(int param_1,unsigned int param_2,int param_3,int param_4,int p
     if (param_8 != 0) {
       if (param_9 < 8) {
         VectorSignedToFloat(param_9,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_002bf288(2,0x28,0x61,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x88
                   );

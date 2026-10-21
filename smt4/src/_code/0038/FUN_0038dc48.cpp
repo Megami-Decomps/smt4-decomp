@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002341d4(...);
 int FUN_00234330(...);
-int FUN_00234974(...);
+int recordClearWideHandle(...);
 int FUN_0023499c(int *, int, int);
-int FUN_0023a198(...);
+int stringFormatUnbounded(...);
 int FUN_002a12d8(...);
 int FUN_003526c4(...);
 int FUN_00352f14(int [3], unsigned char [1024], int);
@@ -47,9 +47,9 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_00234330. */
 extern unsigned int FUN_0023445c(int);
 extern unsigned int FUN_00234468(int);
-/* Supplied declaration required: FUN_00234974. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_0023499c. */
-/* Supplied declaration required: FUN_0023a198. */
+/* Supplied declaration required: stringFormatUnbounded. */
 /* Supplied declaration required: FUN_002a12d8. */
 /* Supplied declaration required: FUN_003526c4. */
 /* Supplied declaration required: FUN_00352f14. */
@@ -135,7 +135,7 @@ void FUN_0038dc48(int param_1)
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
   temp_v1 = FUN_002a12d8(param_1 + 0xc);
   if (temp_v1 < 0) {
-    FUN_00234974(temp_v0 + 0x28);
+    recordClearWideHandle(temp_v0 + 0x28);
     FUN_00354b3c(temp_v17);
     return;
   }
@@ -234,11 +234,11 @@ void FUN_0038dc48(int param_1)
   *(unsigned int *)(temp_v0 + 0x45c) = uStack_bc;
   *(unsigned int *)(temp_v0 + 0x460) = uStack_b8;
   *(unsigned int *)(temp_v0 + 0x464) = uStack_b4;
-  FUN_0023a198(temp_v0 + 0x468,&LAB_0038e088,&LAB_0038e078);
-  FUN_0023a198(temp_v0 + 0x4a8,&LAB_0038e088,&LAB_0038e08c);
-  FUN_0023a198(temp_v0 + 0x4e8,&LAB_0038e088,&LAB_0038e09c);
-  FUN_0023a198(temp_v0 + 0x528,&LAB_0038e088,&LAB_0038e0ac);
-  FUN_0023a198(temp_v0 + 0x568,&LAB_0038e088,&LAB_0038e0bc);
+  stringFormatUnbounded(temp_v0 + 0x468,&LAB_0038e088,&LAB_0038e078);
+  stringFormatUnbounded(temp_v0 + 0x4a8,&LAB_0038e088,&LAB_0038e08c);
+  stringFormatUnbounded(temp_v0 + 0x4e8,&LAB_0038e088,&LAB_0038e09c);
+  stringFormatUnbounded(temp_v0 + 0x528,&LAB_0038e088,&LAB_0038e0ac);
+  stringFormatUnbounded(temp_v0 + 0x568,&LAB_0038e088,&LAB_0038e0bc);
   temp_v12[0] = temp_v0 + 0x368;
   temp_v12[1] = 9;
   if (*(int *)(temp_v0 + 0x364) != 0) {
@@ -270,7 +270,7 @@ void FUN_0038dc48(int param_1)
       *(int *)(param_1 + 0x18) = temp_v1;
       temp_v1 = param_1;
       FUN_0038d598();
-      FUN_00234974(temp_v0 + 0x28);
+      recordClearWideHandle(temp_v0 + 0x28);
       if (-1 < temp_v1) {
         FUN_002341d4(&temp_v8,temp_v0);
         *(unsigned int *)(param_1 + 0xc) = temp_v8;
@@ -281,7 +281,7 @@ void FUN_0038dc48(int param_1)
       return;
     }
   }
-  FUN_00234974(temp_v0 + 0x28);
+  recordClearWideHandle(temp_v0 + 0x28);
   FUN_00354b3c(temp_v17);
   return;
 }

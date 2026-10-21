@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001ecb54(int);
 int FUN_00241f98(unsigned int);
-int FUN_0026c77c(int);
+int communicationBeginTransition(int);
 int FUN_0026c7b8(unsigned char [64]);
-int FUN_002be624(unsigned char [64], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 1 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_001ecb54. */
 /* Supplied declaration required: FUN_00241f98. */
-/* Supplied declaration required: FUN_0026c77c. */
+/* Supplied declaration required: communicationBeginTransition. */
 /* Supplied declaration required: FUN_0026c7b8. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_003ae06c(unsigned int param_1,short param_2,unsigned int param_3)
@@ -44,10 +44,10 @@ void FUN_003ae06c(unsigned int param_1,short param_2,unsigned int param_3)
   temp_v2[0] = 0;
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc9e8);
   FUN_00241f98(temp_v1);
-  FUN_002be624(temp_v2,&LAB_003ae104,temp_v1);
+  textFormatBuffer(temp_v2,&LAB_003ae104,temp_v1);
   FUN_001ecb54((int)param_2);
   FUN_0026c7b8(temp_v2);
-  FUN_0026c77c(0);
+  communicationBeginTransition(0);
   return;
 }
 

@@ -1,17 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdFileRequestSetHeapKind` (_code @ 0x2b0184, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler places the success boolean in r0 rather than retail's r2 accumulator. */
+#include "common.h"
+
+namespace { struct FileRequest { u32 state; u8 padding[0x20]; u32 heapKind; }; }
 
 extern "C" {
-
-
-unsigned char asdFileRequestSetHeapKind(int *param_1,int param_2)
-
+/* Updates or returns the requested state. */
+bool asdFileRequestSetHeapKind(FileRequest *request, u32 kind)
 {
-  if (*param_1 == 0) {
-    param_1[9] = param_2;
-  }
-  return *param_1 == 0;
+    if (request->state == 0) {
+        request->heapKind = kind;
+        return true;
+    }
+    return false;
 }
-
-} /* extern "C" */
+}

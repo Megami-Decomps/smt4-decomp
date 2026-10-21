@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001628c0(...);
 
 /* stack frame of param_1: 17 slot(s), 68 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
 
@@ -73,11 +73,11 @@ void FUN_0047f1c4(int param_1)
   temp_v16 = 0;
   if (param_1 != 0x124) {
     if (param_1 == 0x125) {
-      FUN_00100388(&temp_v1,"I009018");
+      textFormatBuffer(&temp_v1,"I009018");
     }
   }
   else {
-    FUN_00100388(&temp_v1,"I009017");
+    textFormatBuffer(&temp_v1,"I009017");
   }
   temp_v0 = FUN_0014af98();
   FUN_001628c0(&temp_v1,temp_v0,2,0);

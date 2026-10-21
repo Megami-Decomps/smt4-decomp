@@ -3,14 +3,14 @@
 
 extern "C" {
 
-extern ArousalSkillGlobals DAT_00588c40;
+extern ArousalSkillGlobals g_engineCleanupOwner;
 extern const char DAT_00533d3c[]; /* "ArousalSkill PROC" */
 
 void *asdOperatorNew(u32 size);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 a, s32 b, void (*onEnd)(void), void (*onRun)(void), s32 c);
 void FUN_00387308(void);
 void loadSlotRequestAsync(s32 slot, s32 flags);
-u16 FUN_00167f08(void);
+u16 ifTouchGetButtonHelpValue(void);
 void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 a);
 void FUN_002c7ce8(s32 a);
@@ -39,7 +39,7 @@ void FUN_0036b6d8(s32 mode, u32 id)
     } else {
         scene = NULL;
     }
-    DAT_00588c40.scene = scene;
+    g_engineCleanupOwner.scene = scene;
     scene->process = asdProcessCreateSimple(DAT_00533d3c, 4, 0, 0, FUN_00387308, (void (*)(void))0x00358f28, 0);
     scene->mode = mode;
     scene->id = id;
@@ -50,7 +50,7 @@ void FUN_0036b6d8(s32 mode, u32 id)
         scene->modeUnset = 0;
     }
     loadSlotRequestAsync(37, 0);
-    scene->slot = FUN_00167f08();
+    scene->slot = ifTouchGetButtonHelpValue();
     FUN_002c7e6c();
     FUN_002c85b0(0);
     FUN_002c7ce8(0);

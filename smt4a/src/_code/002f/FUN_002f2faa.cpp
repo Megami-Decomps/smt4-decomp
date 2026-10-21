@@ -1,40 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2faa` (_code @ 0x2f2faa, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r7, r0'; compiler emits 'mov r5, r0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_00128e56(int, unsigned int *, unsigned char [12]);
-int sharedRefAddRef(unsigned int);
-int onlineSockAddrCopy(int, unsigned int);
-int onlineTimeGetNow(unsigned char [12]);
-int FUN_002f8264(unsigned char [4]);
-
-/* Supplied declaration required: FUN_00128e56. */
-/* Supplied declaration required: sharedRefAddRef. */
-/* Supplied declaration required: onlineSockAddrCopy. */
-extern int onlineSockAddrConstruct(unsigned char *);
-/* Supplied declaration required: onlineTimeGetNow. */
-/* Supplied declaration required: FUN_002f8264. */
-
-
-void FUN_002f2faa(int param_1,unsigned int param_2,unsigned int param_3)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [4];
-  unsigned char temp_v2 [36];
-  unsigned char temp_v3 [12];
-  
-  onlineTimeGetNow(temp_v3);
-  temp_v0 = onlineSockAddrConstruct(temp_v2);
-  *(unsigned int *)(temp_v0 - 4) = param_2;
-  sharedRefAddRef(param_2);
-  onlineSockAddrCopy(temp_v0,param_3);
-  FUN_00128e56(param_1 + 8,(unsigned int *)(temp_v0 - 4),temp_v3);
-  FUN_002f8264(temp_v1);
-  return;
+struct Time { u64 value; };
+struct Address { u8 data[36]; };
+struct ReferenceAddress { void *reference; Address address; };
+void onlineTimeGetNow(Time *time);
+Address *onlineSockAddrConstruct(Address *address);
+void sharedRefAddRef(void *reference);
+void onlineSockAddrCopy(Address *output, const Address *source);
+void FUN_00128e56(void *object, const ReferenceAddress *address, const Time *time);
+void FUN_002f8264(ReferenceAddress *address);
+void FUN_002f2faa(void *object, void *reference, const Address *address) {
+    Time now;
+    ReferenceAddress copy;
+    onlineTimeGetNow(&now);
+    Address *constructed = onlineSockAddrConstruct(&copy.address);
+    ReferenceAddress *temporary = (ReferenceAddress *)((u8 *)constructed - 4);
+    temporary->reference = reference;
+    sharedRefAddRef(reference);
+    onlineSockAddrCopy(&temporary->address, address);
+    FUN_00128e56((u8 *)object + 8, &copy, &now);
+    FUN_002f8264(temporary);
 }
-
-} /* extern "C" */
+}

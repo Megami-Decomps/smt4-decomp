@@ -16,7 +16,7 @@ int FUN_002bcfc0(...);
 int FUN_002bd06c(...);
 int FUN_002bd0f8(...);
 int FUN_002bd158(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002be650(...);
 int libc_strcpy(...);
 int FUN_002bff50(void);
@@ -51,7 +51,7 @@ extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd0f8. */
 /* Supplied declaration required: FUN_002bd158. */
 extern unsigned int FUN_002bd1fc(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff38. */
@@ -156,10 +156,10 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
               *param_4 = *param_4 + 1;
               return 1;
             }
-            FUN_002be624(temp_v11,&LAB_0010cc64);
+            textFormatBuffer(temp_v11,&LAB_0010cc64);
           }
           else {
-            FUN_002be624(temp_v11,&LAB_0010cc50);
+            textFormatBuffer(temp_v11,&LAB_0010cc50);
           }
         }
         else {

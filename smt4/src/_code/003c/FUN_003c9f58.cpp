@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00229ad4(int *);
+int battleSetActionKind(int *);
 int FUN_00229b10(int *, unsigned int *);
 int FUN_00229c5c(unsigned int, int, int);
 int FUN_002ae164(...);
@@ -17,11 +17,11 @@ extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00229ad4. */
+/* Supplied declaration required: battleSetActionKind. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: FUN_00229c5c. */
 extern int FUN_0023dcb8(void);
-extern int FUN_0027e314(unsigned int);
+extern int battleUiIsFadeAndFieldReady(unsigned int);
 extern int nodeListCountActiveById(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -48,7 +48,7 @@ unsigned int FUN_003c9f58(int *param_1,unsigned int *param_2)
     *(unsigned int *)(*param_1 + 0x44a0) = *(unsigned int *)(*param_1 + 0x44a0) & 0xffff7fff;
     FUN_003adc20(g_btlUiBlock);
   }
-  temp_v1 = FUN_0027e314(g_btlUiBlock);
+  temp_v1 = battleUiIsFadeAndFieldReady(g_btlUiBlock);
   if (temp_v1 != 0) {
     if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
       if ((*param_2 & 0x80) == 0) {
@@ -117,7 +117,7 @@ joined_r0x003ca0e4:
     break;
   case 4:
   case 0xb:
-    FUN_00229ad4(param_1);
+    battleSetActionKind(param_1);
     return 1;
   case 6:
   case 0xf:

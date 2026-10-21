@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int libc_strncmp(...);
 int FUN_002804b0(unsigned char [128], int, int);
 int wstrlen(...);
@@ -24,7 +24,7 @@ extern unsigned int DAT_005737fc; /* 0x5737fc */
 extern unsigned int DAT_00573800; /* 0x573800 */
 extern unsigned int DAT_00573804; /* 0x573804 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: libc_strncmp. */
 extern unsigned int FUN_002282c8(unsigned int, unsigned int, unsigned int);
@@ -73,7 +73,7 @@ unsigned int FUN_004f716c(int param_1)
             if (temp_v0 == 0) {
               temp_v2 = 0;
               do {
-                FUN_00100388(temp_v6,"%s%02d",g_btlEffect,temp_v2);
+                textFormatBuffer(temp_v6,"%s%02d",g_btlEffect,temp_v2);
                 piVar4 = temp_v6;
                 libc_strcmp(piVar4,temp_v3);
                 if (piVar4 == (int *)0x0) {
@@ -90,7 +90,7 @@ unsigned int FUN_004f716c(int param_1)
           if ((temp_v3 == 0) || (temp_v0 = temp_v3, libc_strcmp(temp_v3,DAT_00573804), temp_v0 != 0)) {
             sysMemClear(temp_v5,0x80);
             sysMemClear(temp_v6,0x80);
-            FUN_00100388(temp_v6,"battle/effect/%s.eft",temp_v3);
+            textFormatBuffer(temp_v6,"battle/effect/%s.eft",temp_v3);
             libc_strcpy(temp_v5,temp_v6);
             temp_v0 = wstrlen(temp_v5);
             if (temp_v0 != 0) {

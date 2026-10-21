@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdFileWait(void);
 int FUN_0016a10c(int *, unsigned int);
 int asdFileRequestRelease(unsigned int *);
@@ -37,7 +37,7 @@ typedef struct {
 
 extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdFileWait. */
 /* Supplied declaration required: FUN_0016a10c. */
 extern int FUN_0019dbb8(unsigned int);
@@ -84,10 +84,10 @@ asdLoadFileSync(unsigned int *param_1,unsigned int param_2,unsigned int param_3,
   puVar2 = (unsigned int *)&temp_v3;
   rt_aeabi_memclr(temp_v22,0x100);
   if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = FUN_0019dbb8(param_3), temp_v0 != 0)) {
-    FUN_00100388(temp_v22,param_3);
+    textFormatBuffer(temp_v22,param_3);
   }
   else {
-    FUN_00100388(temp_v22,"rom:/%s",param_3);
+    textFormatBuffer(temp_v22,"rom:/%s",param_3);
   }
   temp_v19 = 0xe7e3ffff;
   temp_v3 = 0;

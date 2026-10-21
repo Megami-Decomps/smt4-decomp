@@ -9,11 +9,11 @@ int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_0029acc4(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -48,13 +48,13 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_001a6d98(void)
@@ -118,7 +118,7 @@ void FUN_001a6d98(void)
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0);
           temp_v5 = FUN_002bf4f8(0x29,0x9b);
           temp_v7 = FUN_002bcddc(temp_v11,0);
-          FUN_002be624(temp_v13,&LAB_001a7270,temp_v7);
+          textFormatBuffer(temp_v13,&LAB_001a7270,temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -155,9 +155,9 @@ void FUN_001a6d98(void)
     temp_v10 = FUN_002bf4f8(0x29,temp_v4 + 0xb5);
     temp_v5 = FUN_0029efc0(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf380(2,0x29,0x11,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0x97);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x29,0xab,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0x9c);
     temp_v12 = FUN_0029d65c((int)*(short *)(temp_v0 + temp_v4 * 2 + 0x9dc));
     temp_v4 = *(short *)(temp_v10 + 10) + temp_v2;
@@ -198,7 +198,7 @@ void FUN_001a6d98(void)
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xab,1);
     temp_v12 = FUN_002bf4f8(0x29,0xb2);
     temp_v7 = FUN_002bcddc(temp_v6,0);
-    FUN_002be624(temp_v13,&LAB_001a7270,temp_v7);
+    textFormatBuffer(temp_v13,&LAB_001a7270,temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,

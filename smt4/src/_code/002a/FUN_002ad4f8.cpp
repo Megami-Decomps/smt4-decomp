@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001383a8(...);
 int FUN_00144f90(...);
-int FUN_002bb150(...);
+int threadSleepDuration(...);
 int nn_os_LightEvent_Wait(...);
 int software_interrupt(...);
 
@@ -23,7 +23,7 @@ extern unsigned int DAT_004d4280; /* 0x4d4280 */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001383a8. */
 /* Supplied declaration required: FUN_00144f90. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 extern unsigned int nn_err_CTR_FatalErr_Throw(unsigned int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -82,7 +82,7 @@ void FUN_002ad4f8(unsigned char *param_1)
       }
       return;
     }
-    FUN_002bb150(&DAT_004c4b40,0);
+    threadSleepDuration(&DAT_004c4b40,0);
     nn_os_CriticalSection_Leave((unsigned int)&DAT_004d4280);
   } while( 1 );
 }

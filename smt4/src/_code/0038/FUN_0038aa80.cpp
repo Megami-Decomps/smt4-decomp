@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 
@@ -21,7 +21,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -52,9 +52,9 @@ unsigned int FUN_0038aa80(void)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0xe,0x14f,0,0,6);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v0 = g_titleScene;
     piVar6 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar6;

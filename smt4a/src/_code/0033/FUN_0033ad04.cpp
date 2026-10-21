@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned char DAT_005f17fc; /* 0x5f17fc */
 
 /* Supplied declaration required: dataTable00FindById. */
@@ -38,10 +38,10 @@ void FUN_0033ad04(void)
   int temp_v5;
   unsigned int *puVar9;
   
-  temp_v0 = DAT_005806d4;
+  temp_v0 = g_mapEnemy;
   temp_v5 = 0;
-  puVar9 = (unsigned int *)(DAT_005806d4 + 0x4a74);
-  *(unsigned int *)(DAT_005806d4 + 0x3d84) = 0;
+  puVar9 = (unsigned int *)(g_mapEnemy + 0x4a74);
+  *(unsigned int *)(g_mapEnemy + 0x3d84) = 0;
   do {
     temp_v1 = temp_v0 + temp_v5 * 0x188;
     pcVar3 = (char *)(temp_v1 + 0x34);
@@ -59,11 +59,11 @@ void FUN_0033ad04(void)
         else {
           *(unsigned int *)(temp_v1 + 0xb8) = 0x16;
           *(unsigned int *)(temp_v1 + 0xbc) = 0;
-          temp_v3 = DAT_005806d4;
+          temp_v3 = g_mapEnemy;
           temp_v4 = 0;
           temp_v2 = *puVar9;
           do {
-            piVar7 = (int *)(DAT_005806d4 + temp_v4 * 0xc4 + 0x3e34);
+            piVar7 = (int *)(g_mapEnemy + temp_v4 * 0xc4 + 0x3e34);
             if (*piVar7 == (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x86))) {
               if ((*(int *)(temp_v1 + 0x1b4) != 0) && (*(char *)(temp_v1 + 0x1b8) != '\0')) {
                 temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
@@ -79,7 +79,7 @@ void FUN_0033ad04(void)
                   *(unsigned char *)(temp_v3 + *(int *)(temp_v1 + 0x1b0) * 8 + 0x3d91) = 0;
                 }
               }
-              temp_v3 = DAT_005806d4;
+              temp_v3 = g_mapEnemy;
               if (*(int **)(temp_v1 + 0x1b4) != (int *)0x0) {
                 if (*(char *)(temp_v1 + 0x1b9) != '\0') {
                   (**(romwright_code **)(**(int **)(temp_v1 + 0x1b4) + 4))();
@@ -120,11 +120,11 @@ LAB_0033b0d0:
 LAB_0033ad90:
         *(unsigned int *)(temp_v1 + 0xb8) = 0x14;
         *(unsigned int *)(temp_v1 + 0xbc) = 0;
-        temp_v3 = DAT_005806d4;
+        temp_v3 = g_mapEnemy;
         temp_v4 = 0;
         temp_v2 = *puVar9;
 LAB_0033adb8:
-        piVar7 = (int *)(DAT_005806d4 + temp_v4 * 0xc4 + 0x3e34);
+        piVar7 = (int *)(g_mapEnemy + temp_v4 * 0xc4 + 0x3e34);
         if (*piVar7 != (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x86))) break;
         if ((*(int *)(temp_v1 + 0x1b4) != 0) && (*(char *)(temp_v1 + 0x1b8) != '\0')) {
           temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
@@ -140,7 +140,7 @@ LAB_0033adb8:
             *(unsigned char *)(temp_v3 + *(int *)(temp_v1 + 0x1b0) * 8 + 0x3d91) = 0;
           }
         }
-        temp_v3 = DAT_005806d4;
+        temp_v3 = g_mapEnemy;
         if (*(int **)(temp_v1 + 0x1b4) != (int *)0x0) {
           if (*(char *)(temp_v1 + 0x1b9) != '\0') {
             (**(romwright_code **)(**(int **)(temp_v1 + 0x1b4) + 4))();

@@ -1,44 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035196c` (_code @ 0x35196c, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail waits with SVC 0x19, which is prohibited by the no-intrinsics rule. */
+#include "common.h"
 extern "C" {
-
-int FUN_002c526c(void);
-int FUN_003603f8(unsigned int *, unsigned char *);
-int FUN_00360570(int *);
-int FUN_003605cc(int);
-int software_interrupt(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char DAT_004091b0; /* 0x4091b0 */
-extern int DAT_0044e9e8; /* 0x44e9e8 */
-extern unsigned int DAT_00471bac; /* 0x471bac */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_003603f8. */
-/* Supplied declaration required: FUN_00360570. */
-/* Supplied declaration required: FUN_003605cc. */
-
-
-void FUN_0035196c(void)
-
+extern u32 DAT_00471bac;
+extern u32 DAT_0044e9e8;
+void FUN_003603f8(u32 *handle, const char *service);
+void FUN_003605cc(s32 mode);
+void conversionReplaceEventHandle(u32 *event);
+s32 nn_svc_WaitSynchronization(u32 event);
+void FUN_002c526c(s32 result);
+/* Opens the conversion service, requests its event and waits for completion. */
+void FUN_0035196c()
 {
-/* irregular: 5 native warning(s); review required */
-  FUN_003603f8(&DAT_00471bac,&DAT_004091b0);
-  FUN_003605cc(1);
-  FUN_00360570(&DAT_0044e9e8);
-  software_interrupt(0x19);
-  if (DAT_0044e9e8 < 0) {
-    FUN_002c526c();
-    return;
-  }
-  return;
+    FUN_003603f8(&DAT_00471bac, "y2r:u");
+    FUN_003605cc(1);
+    conversionReplaceEventHandle(&DAT_0044e9e8);
+    s32 result = nn_svc_WaitSynchronization(DAT_0044e9e8);
+    if (result < 0)
+        FUN_002c526c(result);
 }
-
-} /* extern "C" */
+}

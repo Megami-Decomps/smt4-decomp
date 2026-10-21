@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_0018408c(unsigned char *, int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_003f7be0; /* 0x3f7be0 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -65,14 +65,14 @@ void FUN_003f78f8(int param_1,int param_2,int param_3)
   iStack_28 = param_3;
   FUN_003f707c(param_1,param_2,param_3,0xd3,0xe9,0xf2,0xf7,0xf5);
   if (*(char *)(temp_v7 + 0xc) != '\0') {
-    FUN_00100388(temp_v6,&LAB_003f7b60,&LAB_003f7b34);
-    FUN_00100388(temp_v4,&LAB_003f7b60,&LAB_003f7b64);
-    FUN_00100388(temp_v5,&LAB_003f7b60,&LAB_003f7ba0);
+    textFormatBuffer(temp_v6,&LAB_003f7b60,&LAB_003f7b34);
+    textFormatBuffer(temp_v4,&LAB_003f7b60,&LAB_003f7b64);
+    textFormatBuffer(temp_v5,&LAB_003f7b60,&LAB_003f7ba0);
   }
   else {
-    FUN_00100388(temp_v6,&LAB_003f7b60,&LAB_003f7bac);
-    FUN_00100388(temp_v4,&LAB_003f7b60,&LAB_003f7be0);
-    FUN_00100388(temp_v5,&LAB_003f7b60,&LAB_003f7ba0);
+    textFormatBuffer(temp_v6,&LAB_003f7b60,&LAB_003f7bac);
+    textFormatBuffer(temp_v4,&LAB_003f7b60,&LAB_003f7be0);
+    textFormatBuffer(temp_v5,&LAB_003f7b60,&LAB_003f7ba0);
   }
   temp_v3 = 0.26f;
   puVar5 = temp_v6;

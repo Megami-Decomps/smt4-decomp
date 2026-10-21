@@ -9,7 +9,7 @@ int FUN_001695a0(void);
 int FUN_00180118(...);
 int FUN_001ba514(...);
 int FUN_002292ac(void);
-int FUN_00237898(...);
+int messageForwardDefaultMode(...);
 int libc_strcpy(...);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(...);
@@ -74,7 +74,7 @@ extern int FUN_001ada74(unsigned int);
 /* Supplied declaration required: FUN_001ba514. */
 /* Supplied declaration required: FUN_002292ac. */
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageSlotSet. */
@@ -300,7 +300,7 @@ unsigned int FUN_002ebdcc(void)
     }
     FUN_001695a0();
     temp_v11 = 1;
-    FUN_00237898(temp_v2,temp_v3,0,6);
+    messageForwardDefaultMode(temp_v2,temp_v3,0,6);
     scrWorkSetValue(1,0);
     scrWorkSetValue(0,3);
     break;
@@ -309,7 +309,7 @@ unsigned int FUN_002ebdcc(void)
     FUN_002292ac();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
-    FUN_00237898(temp_v2,0xb,temp_v3);
+    messageForwardDefaultMode(temp_v2,0xb,temp_v3);
     temp_v10 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v10 + 1);
     if (temp_v2 != 1) {
@@ -356,7 +356,7 @@ unsigned int FUN_002ebdcc(void)
     FUN_001695a0();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
-    FUN_00237898(temp_v2,0xc,temp_v3,6);
+    messageForwardDefaultMode(temp_v2,0xc,temp_v3,6);
     temp_v10 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v10 + 1);
     if (temp_v2 == 1) {
@@ -376,7 +376,7 @@ unsigned int FUN_002ebdcc(void)
     FUN_001695a0();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
-    FUN_00237898(temp_v2,temp_v9,temp_v3,6);
+    messageForwardDefaultMode(temp_v2,temp_v9,temp_v3,6);
     temp_v10 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v10 + 1);
     if (temp_v2 != 1) {
@@ -400,7 +400,7 @@ unsigned int FUN_002ebdcc(void)
     FUN_001695a0();
     temp_v3 = scrWorkGetValue(1);
     temp_v11 = 0;
-    FUN_00237898(temp_v2,0x10,temp_v3,6);
+    messageForwardDefaultMode(temp_v2,0x10,temp_v3,6);
     temp_v8 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v8 + 1);
     if (temp_v2 == 1) {

@@ -1,19 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d02e0` (_code @ 0x4d02e0, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail address formation, clamping returns or grouped stores differ. */
+#include "common.h"
 
-extern "C" {
-
-
-unsigned int FUN_004d02e0(int param_1)
-
+struct StateBlock {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ s8 first;
+    /* 0x71 */ s8 second;
+};
+/* Reports whether either activity flag is set. */
+extern "C" s32 FUN_004d02e0(const StateBlock *state)
 {
-  unsigned int temp_v0;
-  
-  if ((*(char *)(param_1 + 0x71) != '\0') || (temp_v0 = 0, *(char *)(param_1 + 0x70) != '\0')) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    return state->second != 0 || state->first != 0;
 }
-
-} /* extern "C" */

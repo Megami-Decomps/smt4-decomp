@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00497d20. */
 /* Supplied declaration required: FUN_004986b0. */
 extern unsigned int FUN_004cfe4c(unsigned int *);
-extern unsigned int *FUN_004d0040(unsigned int *);
+extern unsigned int *rangeGetMinimumLimit(unsigned int *);
 /* Supplied declaration required: size40Set. */
 
 
@@ -54,7 +54,7 @@ void FUN_00495980(unsigned int *param_1)
     temp_v4 = param_1[2] != 4;
     puVar8 = param_1 + 0x27e2;
     temp_v1 = FUN_002a482c(puVar8);
-    puVar3 = (unsigned int *)FUN_004d0040(puVar8);
+    puVar3 = (unsigned int *)rangeGetMinimumLimit(puVar8);
     puVar7 = (unsigned int *)0x0;
     puVar4 = puVar3;
     if (0 < (int)puVar3) {

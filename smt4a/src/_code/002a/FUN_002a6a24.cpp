@@ -1,20 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a6a24` (_code @ 0x2a6a24, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler materializes zero after the call instead of preserving it in r4. */
+#include "common.h"
 extern "C" {
-
-int dataTable04FindById(void);
-
-/* Supplied declaration required: dataTable04FindById. */
-
-
-unsigned int FUN_002a6a24(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  dataTable04FindById();
-  return 0;
+void *dataTable04FindById(u32 id);
+/* Resolves the requested record and returns the callback's zero result. */
+s32 FUN_002a6a24(u32 id) {
+    dataTable04FindById(id);
+    return 0;
 }
-
-} /* extern "C" */
+}

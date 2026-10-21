@@ -18,7 +18,7 @@ int FUN_00477d10(...);
 int jobFlagsWorkStop(...);
 int FUN_0047bc90(...);
 int FUN_0047bcdc(...);
-int FUN_0047daf4(...);
+int timeInitializeActiveState(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -58,7 +58,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 
 
 void FUN_0047b78c(unsigned int *param_1)
@@ -89,7 +89,7 @@ void FUN_0047b78c(unsigned int *param_1)
   unsigned int uStack_2c;
   unsigned int uStack_28;
   
-  FUN_0047daf4(&temp_v3);
+  timeInitializeActiveState(&temp_v3);
   temp_v0 = param_1[2];
   puVar7 = param_1 + 0x5e9;
   puVar8 = param_1 + 0x5e8;

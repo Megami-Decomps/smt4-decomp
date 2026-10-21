@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b6dd8(unsigned char *, int);
 int FUN_002be5a4(int, unsigned int, unsigned char [64], int);
-int FUN_002be624(unsigned char [64], unsigned char *, int);
+int textFormatBuffer(unsigned char [64], unsigned char *, int);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(int, int);
 int VectorSignedToFloat(int, int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_004028ec; /* 0x4028ec */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 
@@ -66,7 +66,7 @@ void FUN_00196fe8(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v5 = 0xffffffff;
         FUN_002bf380(2,0x2f,8,*(short *)(temp_v0 + 8) + param_2,temp_v1,0x1f);
       }
-      FUN_002be624(temp_v4,&DAT_004028ec,param_5 + temp_v2 * 10 + 0x1e);
+      textFormatBuffer(temp_v4,&DAT_004028ec,param_5 + temp_v2 * 10 + 0x1e);
       temp_v1 = FUN_002bf4f8(0x2f,0x41);
       puVar3 = temp_v4;
       FUN_002b6dd8(puVar3,2);

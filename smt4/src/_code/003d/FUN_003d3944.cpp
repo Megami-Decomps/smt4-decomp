@@ -12,7 +12,7 @@ int FUN_0027dd9c(unsigned int);
 int FUN_0027e6f4(int, int);
 int FUN_002ae164(void);
 int dataTable08Sub1GetRecord(void);
-int FUN_00338370(int);
+int entryInvalidateStateTable(int);
 int FUN_003cc944(int *, int, int);
 int FUN_003cee94(int *, int);
 int FUN_003d9d74(unsigned int);
@@ -37,7 +37,7 @@ extern int FUN_00227ecc(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_00338370. */
+/* Supplied declaration required: entryInvalidateStateTable. */
 /* Supplied declaration required: FUN_003cc944. */
 /* Supplied declaration required: FUN_003cee94. */
 /* Supplied declaration required: FUN_003d9d74. */
@@ -121,7 +121,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
       }
     }
   }
-  FUN_00338370(*param_1);
+  entryInvalidateStateTable(*param_1);
   FUN_003db5bc(DAT_00435d18);
   FUN_003da890(DAT_00435d18);
   if (*(int *)(param_2 + 0x594) == 9) {

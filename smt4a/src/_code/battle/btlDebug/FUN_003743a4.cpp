@@ -10,11 +10,11 @@ int FUN_00167860(...);
 int FUN_001689e8(...);
 int FUN_00184310(void);
 int FUN_00389d9c(...);
-int FUN_003b67d4(...);
-int FUN_003b67e8(void);
-int FUN_003c0d90(void);
+int dataRecordGetKindValue(...);
+int playerSecondaryGetKindValue(void);
+int playerPrimaryGetKindValue(void);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int btlGetMainState(void);
 int FUN_0014bd84(...);
 int FUN_00162790(...);
@@ -56,7 +56,7 @@ extern unsigned int DAT_00573bfc; /* 0x573bfc */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0014bd84. */
 /* Supplied declaration required: FUN_0015f858. */
@@ -89,9 +89,9 @@ extern unsigned int FUN_002f8e98(unsigned int);
 extern int FUN_002fa75c(void);
 extern int FUN_00372794(int, int, unsigned char *);
 /* Supplied declaration required: FUN_00389d9c. */
-/* Supplied declaration required: FUN_003b67d4. */
-/* Supplied declaration required: FUN_003b67e8. */
-/* Supplied declaration required: FUN_003c0d90. */
+/* Supplied declaration required: dataRecordGetKindValue. */
+/* Supplied declaration required: playerSecondaryGetKindValue. */
+/* Supplied declaration required: playerPrimaryGetKindValue. */
 extern int FUN_003df57c(int, unsigned int);
 extern int gameDataFlagTestBit(int);
 extern short halfTableGet(unsigned int, unsigned int);
@@ -361,7 +361,7 @@ void FUN_003743a4(int param_1)
               FUN_001835b4(2,0xd,0x11f,temp_v4);
               temp_v8 = (int)(short)*(unsigned int *)(param_1 + 0x3e18);
               temp_v9 = FUN_0014bd84(temp_v8);
-              FUN_00100388(temp_v19,&LAB_00375670,temp_v9);
+              textFormatBuffer(temp_v19,&LAB_00375670,temp_v9);
               temp_v3 = FUN_003df57c(temp_v8,1);
               temp_v6 = FUN_001834a4(0xd,0x12e);
               VectorSignedToFloat(*(short *)(temp_v6 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -380,7 +380,7 @@ void FUN_003743a4(int param_1)
             }
           }
           else {
-            FUN_00100388(temp_v19,&LAB_00375678);
+            textFormatBuffer(temp_v19,&LAB_00375678);
             temp_v3 = FUN_001834a4(0xd,0x11c);
             puVar10 = temp_v19;
             FUN_0018408c(puVar10,3);
@@ -401,7 +401,7 @@ void FUN_003743a4(int param_1)
           if (!((DAT_00573bfc & *(unsigned int *)(temp_v3 + 0x45ac)) == 0 &&
                (DAT_00573bf8 & *(unsigned int *)(temp_v3 + 0x45a8)) == 0)) {
             temp_v9 = FUN_002f8e98(temp_v5 & 0xff);
-            FUN_00100388(temp_v19,&LAB_00375670,temp_v9);
+            textFormatBuffer(temp_v19,&LAB_00375670,temp_v9);
           }
           else {
             temp_v13 = 0;
@@ -414,7 +414,7 @@ void FUN_003743a4(int param_1)
               if (temp_v3 != 0) {
                 if (temp_v13 == temp_v5) {
                   temp_v9 = FUN_002f8e98(temp_v12 & 0xff);
-                  FUN_00100388(temp_v19,&LAB_00375670,temp_v9);
+                  textFormatBuffer(temp_v19,&LAB_00375670,temp_v9);
                   break;
                 }
                 temp_v13 = temp_v13 + 1;
@@ -440,7 +440,7 @@ void FUN_003743a4(int param_1)
         temp_v8 = (int)*(short *)(param_1 + temp_v5 * 2 + 0x3ca8);
         temp_v3 = temp_v8;
         FUN_0015f858(temp_v8,0);
-        FUN_00100388(temp_v19,&LAB_00374e3c,temp_v3);
+        textFormatBuffer(temp_v19,&LAB_00374e3c,temp_v3);
         temp_v3 = FUN_001ba3d4(temp_v8);
         temp_v6 = FUN_001834a4(0xd,0x12e);
         VectorSignedToFloat(*(short *)(temp_v6 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -480,7 +480,7 @@ void FUN_003743a4(int param_1)
         temp_v1 = 0;
       }
       temp_v9 = FUN_0014bd84();
-      FUN_00100388(temp_v19,&LAB_00374e3c,temp_v9);
+      textFormatBuffer(temp_v19,&LAB_00374e3c,temp_v9);
       temp_v3 = FUN_001834a4(0xd,0x12e);
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -521,13 +521,13 @@ void FUN_003743a4(int param_1)
              (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
           temp_v8 = (int)(short)temp_v5;
           temp_v9 = FUN_0014bd84(temp_v8);
-          FUN_00100388(temp_v19,&LAB_00374e3c,temp_v9);
+          textFormatBuffer(temp_v19,&LAB_00374e3c,temp_v9);
           temp_v3 = FUN_004bcbb4(temp_v17,temp_v8);
         }
         else {
           temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + temp_v5 * 2 + 0x3c42);
           temp_v9 = FUN_0014bd84(temp_v8);
-          FUN_00100388(temp_v19,&LAB_00374e3c,temp_v9);
+          textFormatBuffer(temp_v19,&LAB_00374e3c,temp_v9);
           temp_v3 = FUN_004bcbb4(temp_v17,temp_v8);
         }
         temp_v14 = 1;
@@ -536,15 +536,15 @@ void FUN_003743a4(int param_1)
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v17 + 0x62);
         FUN_00184310();
         if (*(char *)(temp_v5 + 0xc) != '\x01') {
-          FUN_00100388(temp_v19,&LAB_00374e3c,&LAB_00374e40);
+          textFormatBuffer(temp_v19,&LAB_00374e3c,&LAB_00374e40);
         }
         else {
-          FUN_00100388(temp_v19,&LAB_00374e3c,&LAB_00374e50);
+          textFormatBuffer(temp_v19,&LAB_00374e3c,&LAB_00374e50);
         }
         temp_v3 = 0;
         if (temp_v17 != (unsigned char *)0x0) {
           temp_v1 = *(short *)(temp_v17 + 0x62);
-          FUN_003b67d4(temp_v1);
+          dataRecordGetKindValue(temp_v1);
           temp_v8 = (int)temp_v1;
           temp_v14 = 0;
         }
@@ -555,10 +555,10 @@ void FUN_003743a4(int param_1)
       if (temp_v5 != 0) {
         if ((temp_v5 == 1) && (temp_v3 = FUN_002fa75c(), temp_v3 != 0)) {
           puVar10 = temp_v19;
-          FUN_00100388(puVar10,&LAB_00374e3c,&LAB_00374e50);
+          textFormatBuffer(puVar10,&LAB_00374e3c,&LAB_00374e50);
           temp_v1 = (short)(int)puVar10;
           temp_v3 = 0;
-          FUN_003b67e8();
+          playerSecondaryGetKindValue();
           temp_v8 = (int)temp_v1;
           temp_v14 = 0;
         }
@@ -573,13 +573,13 @@ void FUN_003743a4(int param_1)
                (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
             temp_v8 = (int)(short)(((short)temp_v5 - (short)temp_v6) + 1);
             temp_v9 = FUN_0014bd84(temp_v8);
-            FUN_00100388(temp_v19,&LAB_00374e3c,temp_v9);
+            textFormatBuffer(temp_v19,&LAB_00374e3c,temp_v9);
             temp_v3 = FUN_003df57c(temp_v8,1);
           }
           else {
             temp_v8 = (int)*(short *)(param_1 + *piVar15 * 0x10 + (temp_v5 - temp_v6) * 2 + 0x3c44);
             temp_v9 = FUN_0014bd84(temp_v8);
-            FUN_00100388(temp_v19,&LAB_00374e3c,temp_v9);
+            textFormatBuffer(temp_v19,&LAB_00374e3c,temp_v9);
             temp_v3 = FUN_003df57c(temp_v8,1);
           }
           temp_v14 = 1;
@@ -587,10 +587,10 @@ void FUN_003743a4(int param_1)
       }
       else {
         puVar10 = temp_v19;
-        FUN_00100388(puVar10,&LAB_00374e3c,&LAB_00374e40);
+        textFormatBuffer(puVar10,&LAB_00374e3c,&LAB_00374e40);
         temp_v1 = (short)(int)puVar10;
         temp_v3 = 0;
-        FUN_003c0d90();
+        playerPrimaryGetKindValue();
         temp_v8 = (int)temp_v1;
         temp_v14 = 0;
       }

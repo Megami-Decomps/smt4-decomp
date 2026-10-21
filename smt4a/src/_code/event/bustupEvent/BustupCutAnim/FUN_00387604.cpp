@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0013c884(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int asdProcessCreateSimple(...);
 int FUN_0014f0dc(...);
 int taskCreateDraw(...);
@@ -34,9 +34,9 @@ extern unsigned char LAB_003878e4; /* 0x3878e4 */
 extern unsigned char LAB_00387900; /* 0x387900 */
 extern unsigned int *g_bustupCutAnim; /* 0x57f4c4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -85,7 +85,7 @@ unsigned int FUN_00387604(void)
     puVar1[0x14b] = 0x3f800000;
     puVar1[0x14c] = 0;
     puVar1[0x150] = 0x3fd55555;
-    FUN_001418fc(puVar7);
+    uiSetFloatPair(puVar7);
     FUN_0014f0dc(puVar7,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);
     FUN_001523b8(puVar7,1);
     FUN_0036b824(puVar7);
@@ -98,10 +98,10 @@ unsigned int FUN_00387604(void)
     puVar1[0x17c] = 0;
     temp_v2 = 0;
     do {
-      FUN_00100388(temp_v5,&LAB_003878e4,*(unsigned int *)(temp_v2 * 4 + 0x57f4c8));
+      textFormatBuffer(temp_v5,&LAB_003878e4,*(unsigned int *)(temp_v2 * 4 + 0x57f4c8));
       temp_v0 = FUN_00387350(temp_v5);
       puVar1[temp_v2 + 0x1b3] = temp_v0;
-      FUN_00100388(temp_v5,&LAB_00387900,*(unsigned int *)(temp_v2 * 4 + 0x57f4c8));
+      textFormatBuffer(temp_v5,&LAB_00387900,*(unsigned int *)(temp_v2 * 4 + 0x57f4c8));
       temp_v0 = asdMdlManagerCreateSecondList(temp_v5,7);
       temp_v3 = temp_v2 + 1;
       puVar1[temp_v2 + 0x197] = temp_v0;
@@ -118,7 +118,7 @@ unsigned int FUN_00387604(void)
     }
     FUN_00186e2c(puVar1 + 0x144,puVar1[0x17b]);
     puVar7 = puVar1 + 1;
-    FUN_001418fc(puVar7);
+    uiSetFloatPair(puVar7);
     FUN_0014f0dc(puVar7,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);
     FUN_001523b8(puVar7,1);
     FUN_0036b824(puVar7);

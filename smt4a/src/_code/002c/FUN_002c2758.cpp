@@ -1,16 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2758` (_code @ 0x2c2758, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different stack-frame allocation and instruction scheduling. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-unsigned char FUN_002c2758(int param_1)
-
-{
-  return *(unsigned char *)(param_1 + (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x28040);
+struct DataTable { u8 unk00[0x88]; struct { u8 unk00[0x27FB8]; u8 flags[1]; } status; };
+extern struct { u32 unk00; DataTable *table; } g_gameDataBlocks;
+/* Reads an indexed game-data flag. */
+s32 FUN_002c2758(u32 index) { return g_gameDataBlocks.table->status.flags[index]; }
 }
-
-} /* extern "C" */

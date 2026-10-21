@@ -10,7 +10,7 @@ int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c39a4(int);
 int VectorSignedToFloat(int, int);
 
@@ -35,7 +35,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -85,7 +85,7 @@ char FUN_001acdd8(void)
     FUN_002ba12c(g_titleScene);
     temp_v2 = temp_v2 + (int)temp_v12;
     temp_v4 = vec2GetYInt(temp_v10 + 0x38);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf380(2,0xe,0x14,temp_v2,temp_v4,0x65);
     temp_v3 = g_titleScene;
     temp_v5 = packNibblesAndByte(6,1,0);
@@ -143,7 +143,7 @@ char FUN_001acdd8(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 3);
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v10 = g_titleScene;
     piVar10 = (int *)(g_titleScene + 0x124c);
     temp_v3 = *piVar10;

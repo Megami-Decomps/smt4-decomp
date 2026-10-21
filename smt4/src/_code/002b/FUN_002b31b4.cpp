@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00145148(void);
 int FUN_00145370(int);
-int FUN_001454f0(int);
+int gfxSetSelectedChannelActive(int);
 int FUN_0014553c(void);
 int FUN_00145628(unsigned int, unsigned int);
 int FUN_00145aa8(int *);
@@ -23,7 +23,7 @@ extern unsigned char DAT_004def28; /* 0x4def28 */
 #endif
 /* Supplied declaration required: FUN_00145148. */
 /* Supplied declaration required: FUN_00145370. */
-/* Supplied declaration required: FUN_001454f0. */
+/* Supplied declaration required: gfxSetSelectedChannelActive. */
 /* Supplied declaration required: FUN_0014553c. */
 /* Supplied declaration required: FUN_00145628. */
 /* Supplied declaration required: FUN_00145aa8. */
@@ -237,7 +237,7 @@ joined_r0x002b3444:
     temp_v5 = param_1[0xd];
   }
   if ((temp_v5 & 0x200) != 0) {
-    FUN_001454f0(1);
+    gfxSetSelectedChannelActive(1);
   }
   FUN_00145148();
   return 1;
@@ -324,7 +324,7 @@ LAB_002b3880:
       } while (temp_v8 < param_1[3] + param_1[4]);
     }
     if ((param_1[0xd] & 0x200U) != 0) {
-      FUN_001454f0(1);
+      gfxSetSelectedChannelActive(1);
     }
     FUN_00145148();
     return temp_v4;

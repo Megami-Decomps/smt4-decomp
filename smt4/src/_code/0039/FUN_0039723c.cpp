@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002bed3c(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
-int FUN_002bf538(...);
+int efctSetSpeed(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c1b64(...);
@@ -45,7 +45,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -80,7 +80,7 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
   FUN_002c1b64(g_titleScene,0);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bf380(2,0x2e,0,*(unsigned int *)&param_1->field_0xac,0,0xb);
   temp_v0 = g_titleScene;
   temp_v2 = packNibblesAndByte(6,1,0);
@@ -112,7 +112,7 @@ void FUN_0039723c(fn_0039723c_arg0 *param_1)
     temp_v1 = temp_v1 + '\x04';
   }
   FUN_00397db0(param_1,temp_v1);
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v0 = g_titleScene;
   piVar6 = (int *)(g_titleScene + 0x124c);
   temp_v2 = *piVar6;

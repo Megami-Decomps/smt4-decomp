@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0022b684(int);
+int gameSynchronizeMapState(int);
 int FUN_0026f960(int);
 int bgmReleaseStopped(void);
-int FUN_00276218(void);
+int gameCopyPersistentSave(void);
 int FUN_00296e90(void);
 int soundChannelStopAll(int);
 int FUN_002a03d8(int, int);
@@ -32,11 +32,11 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_0022b684. */
+/* Supplied declaration required: gameSynchronizeMapState. */
 extern unsigned int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_0026f960. */
 /* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_00276218. */
+/* Supplied declaration required: gameCopyPersistentSave. */
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00296e90. */
@@ -95,7 +95,7 @@ void FUN_003b92b4(int param_1)
   }
   else {
     if ((temp_v1 & 0x200000) != 0) {
-      FUN_00276218();
+      gameCopyPersistentSave();
       temp_v5[0] = *(unsigned int *)(*(int *)(param_1 + 0xd60) + 0x40);
       temp_v5[1] = 0xffffffff;
       libc_strcpy(temp_v5 + 2,*(int *)(param_1 + 0xd60) + 0x44);
@@ -104,7 +104,7 @@ void FUN_003b92b4(int param_1)
       puVar5 = temp_v5;
     }
     else if ((temp_v1 & 0x40000) != 0) {
-      FUN_00276218();
+      gameCopyPersistentSave();
       temp_v5[0] = DAT_0049f970;
       temp_v5[1] = 0xffffffff;
       libc_strcpy(temp_v5 + 2,&DAT_0049f978);
@@ -147,7 +147,7 @@ void FUN_003b92b4(int param_1)
         if (temp_v3 == 6) {
           temp_v2 = FUN_0022b8c0(param_1 + 0x9c);
           *(unsigned int *)(param_1 + 0xd60) = temp_v2;
-          FUN_0022b684(param_1);
+          gameSynchronizeMapState(param_1);
           dataTable1bOr1cGetRecord();
           FUN_0026f960(*(unsigned short *)(temp_v0 + 0x148));
         }

@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00202400. */
 extern int sceneTexturesAreLoaded(void);
 /* Supplied declaration required: FUN_004a5d5c. */
-extern int FUN_004a6d44(int);
+extern int utilityReturnSuccess(int);
 extern int FUN_004cfe4c(int *);
 
 
@@ -35,7 +35,7 @@ void FUN_004a4c74(int *param_1)
   unsigned int temp_v2;
   
   temp_v0 = (**(romwright_code **)(*param_1 + 0x24))(param_1);
-  if (((temp_v0 == 0) || (temp_v0 = FUN_004a6d44((int)param_1 + 0x96), temp_v0 != 0)) ||
+  if (((temp_v0 == 0) || (temp_v0 = utilityReturnSuccess((int)param_1 + 0x96), temp_v0 != 0)) ||
      (((char)param_1[0x218] == '\x01' && (temp_v0 = sceneTexturesAreLoaded(), temp_v0 == 0)))) {
     return;
   }

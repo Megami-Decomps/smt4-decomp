@@ -1,26 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bd3bc` (_code @ 0x4bd3bc, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-int FUN_004bd3bc(int param_1,int param_2)
-
+struct SelectionState {
+    /* 0x00 */ u8 unk00[16];
+    /* 0x10 */ s16 maximum;
+    /* 0x12 */ u8 unk12[26];
+    /* 0x2c */ s16 selection;
+};
+/* Clamps a live selection to its allowed range. */
+extern "C" s32 FUN_004bd3bc(SelectionState *state, s32 value)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  if (param_1 != 0) {
-    temp_v1 = (int)*(short *)(param_1 + 0x10);
-    if ((param_2 <= temp_v1) && (temp_v1 = param_2, param_2 < 1)) {
-      temp_v1 = 1;
-    }
-    temp_v0 = (int)(short)temp_v1;
-    *(short *)(param_1 + 0x2c) = (short)temp_v1;
-  }
-  return temp_v0;
+    if (state == NULL)
+        return 0;
+    if (value > state->maximum)
+        value = state->maximum;
+    else if (value < 1)
+        value = 1;
+    state->selection = value;
+    return (s16)value;
 }
-
-} /* extern "C" */

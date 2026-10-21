@@ -1,22 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050096c` (_code @ 0x50096c, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail error reporter receives the exact current PC; source supplies the function's entry address instead. */
+#include "common.h"
+struct ResourceHolder {u32 unk00;void *resource;};
 extern "C" {
-
-int FUN_0016e800(unsigned int, int);
-
-/* Supplied declaration required: FUN_0016e800. */
-
-
-unsigned int FUN_0050096c(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 4) == 0) {
-    FUN_0016e800(0xe0a046da,0x500988);
-  }
-  return *(unsigned int *)(param_1 + 4);
+void FUN_0016e800(s32 result,const void *location);
+/* Reports a missing resource before returning the held pointer. */
+void *FUN_0050096c(ResourceHolder *holder){
+    if(holder->resource==NULL)FUN_0016e800((s32)0xE0A046DA,(const void *)&FUN_0050096c);
+    return holder->resource;
 }
-
-} /* extern "C" */
+}

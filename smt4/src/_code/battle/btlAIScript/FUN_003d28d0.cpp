@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00229754(...);
-int FUN_00229ad4(int *);
+int battleSetActionKind(int *);
 int FUN_00229b10(int *, unsigned int *);
 int btlUnitSetParam(int *, int, int);
 int FUN_002ae164(void);
@@ -37,7 +37,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00229754. */
 extern int btlNodeListAnyReady(void);
-/* Supplied declaration required: FUN_00229ad4. */
+/* Supplied declaration required: battleSetActionKind. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: btlUnitSetParam. */
 extern int FUN_0027e350(unsigned int);
@@ -140,7 +140,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     }
     FUN_003ae7bc(g_btlUiBlock);
     *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 10;
-    FUN_00229ad4(param_1);
+    battleSetActionKind(param_1);
     return (int *)0x1;
   case 10:
     if ((*(unsigned int *)(temp_v3 + 0x7c) & 1) != 0) {
@@ -218,7 +218,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
         return (int *)0x1;
       }
     }
-    FUN_00229ad4(param_1);
+    battleSetActionKind(param_1);
     return (int *)0x1;
   case 0x1b:
     piVar2 = (int *)FUN_003cb244(param_1,puVar6);

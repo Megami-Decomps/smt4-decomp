@@ -1,28 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042cbd8` (_code @ 0x42cbd8, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-extern unsigned char LAB_00200080; /* 0x200080 */
-
-
-unsigned int * FUN_0042cbd8(unsigned int *param_1,int param_2)
-
-{
-  unsigned int *puVar1;
-  
-  if (param_2 != 0) {
-    *param_1 = 0;
-    param_1[1] = (unsigned int)&LAB_00200080;
-    puVar1 = param_1 + 3;
-    param_1[2] = 0;
-    param_1 = param_1 + 4;
-    *puVar1 = 0;
-  }
-  *param_1 = 0x13000;
-  param_1[1] = 0xf0080;
-  return param_1 + 2;
-}
-
-} /* extern "C" */
+#include "common.h"
+/* Writes an optional command prefix followed by the fixed pair of command words. */
+extern "C" u32 *FUN_0042cbd8(u32 *output,u32 includePrefix) { if(includePrefix!=0) {*output++=0;*output++=0x200080;*output++=0;*output++=0;}*output++=0x13000;*output++=0xF0080;return output; }

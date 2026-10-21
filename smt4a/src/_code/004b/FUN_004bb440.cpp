@@ -12,7 +12,7 @@ int FUN_0028022c(void);
 extern unsigned char LAB_004bb4a4; /* 0x4bb4a4 */
 extern unsigned char LAB_004bb4bc; /* 0x4bb4bc */
 extern unsigned char DAT_00557ec8; /* 0x557ec8 */
-extern unsigned int DAT_0057f2c8; /* 0x57f2c8 */
+extern unsigned int g_resourceDispatchContext; /* 0x57f2c8 */
 
 /* Supplied declaration required: asdCecSetBoxArgs. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -43,7 +43,7 @@ int FUN_004bb440(unsigned int *param_1)
   FUN_0020214c();
   *(unsigned char **)(temp_v0 - 4) = puVar2;
   temp_v1 = FUN_0042d694(0x19a2);
-  asdCecSetBoxArgs(temp_v1,DAT_0057f2c8);
+  asdCecSetBoxArgs(temp_v1,g_resourceDispatchContext);
   return temp_v0 - 0xc;
 }
 

@@ -1,22 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efe78` (_code @ 0x2efe78, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct State { u8 padding[0x2388]; s8 value; }; }
 
 extern "C" {
+extern State *g_statusDown;
 
-extern int g_statusDown; /* 0x44e190 */
-
-
-int FUN_002efe78(void)
-
+/* Reads the current status value when the owner exists. */
+s32 FUN_002efe78(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_statusDown != 0) {
-    temp_v0 = (int)*(char *)(g_statusDown + 0x2388);
-  }
-  return temp_v0;
+    return g_statusDown != NULL ? g_statusDown->value : 0;
 }
-
-} /* extern "C" */
+}

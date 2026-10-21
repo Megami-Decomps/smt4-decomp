@@ -79,7 +79,7 @@ extern int FUN_003798f0(void);
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -350,7 +350,7 @@ void FUN_003661c8(void)
       }
       else {
         temp_v1 = padButtonIsPressed(5);
-        if ((temp_v1 != 0) || (temp_v1 = FUN_004d0554(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
           temp_v1 = DAT_005806a4;
           *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v1 + 0xb0) = 0;

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_003fd76c(unsigned int, int);
+int controllerSetDestination(unsigned int, int);
 int FUN_003fdb18(unsigned int);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040aa6c(void);
@@ -20,9 +20,9 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapIf; /* 0x58103c */
 extern int g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -53,14 +53,14 @@ void FUN_00234118(void)
   *(unsigned int *)(temp_v0 + 0xcbf0) = in_s2;
   *(unsigned int *)(temp_v0 + 0xcbf4) = in_s3;
   if (g_gameState != 0x18) {
-    FUN_00100388(temp_v3,&LAB_00234250);
+    textFormatBuffer(temp_v3,&LAB_00234250);
   }
   else {
-    FUN_00100388(temp_v3,&LAB_00234268);
+    textFormatBuffer(temp_v3,&LAB_00234268);
   }
   if ((g_gameState == 0x2c || g_gameState == 0x2d) ||
      (g_gameState == 0x2e || g_gameState == 0x2f)) {
-    FUN_00100388(temp_v3,&LAB_00234250,0x2b);
+    textFormatBuffer(temp_v3,&LAB_00234250,0x2b);
   }
   temp_v1 = 0x20;
   FUN_00178b04(0x20,&LAB_00234284,0x16ee);
@@ -73,7 +73,7 @@ void FUN_00234118(void)
   FUN_0040aad4(*(unsigned int *)(temp_v0 + 0xcbf8),0);
   temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0xcbf8) + 4);
   FUN_0040ace8(g_handleRegistry,temp_v2);
-  FUN_003fd76c(temp_v2,temp_v0 + 0xcbe8);
+  controllerSetDestination(temp_v2,temp_v0 + 0xcbe8);
   FUN_003fdb18(temp_v2);
   FUN_003fe86c(temp_v2,0,2);
   return;

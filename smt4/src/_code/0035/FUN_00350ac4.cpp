@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int SBORROW4(int, int);
 int SCARRY4(int, int);
 
 typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 
 
 unsigned int FUN_00350ac4(int param_1,int param_2)
@@ -43,7 +43,7 @@ unsigned int FUN_00350ac4(int param_1,int param_2)
     }
     temp_v0 = *(char *)(param_1 + 0x54c);
     while (temp_v0 == '\x01') {
-      FUN_002bb150(500000,0);
+      threadSleepDuration(500000,0);
       temp_v0 = *(char *)(param_1 + 0x54c);
     }
     temp_v2 = *(int *)(param_1 + 0x548);

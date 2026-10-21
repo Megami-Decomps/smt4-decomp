@@ -1,21 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `padButtonIsPressed` (_code @ 0x1656a0, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses bcs 1c where the compiled block uses bcs 28. */
+#include "common.h"
+
+struct PadInputState {
+    u32 unk00;  // 0x00
+    u32 unk04;  // 0x04
+    u32 flags;  // 0x08
+};
 
 extern "C" {
+extern PadInputState DAT_005b4000;
+extern s32 DAT_00640000[31];
 
-extern unsigned char DAT_005b4000; /* 0x5b4000 */
-extern unsigned char DAT_00640000; /* 0x640000 */
-
-
-unsigned int padButtonIsPressed(unsigned int param_1)
-
+u32 padButtonIsPressed(u32 button)
 {
-  if (((param_1 < 0x1f) && (((*(unsigned int *)((unsigned char *)&DAT_005b4000 + 0x8)) & 1) == 0 && ((*(unsigned int *)((unsigned char *)&DAT_005b4000 + 0x8)) & 2) == 0)) &&
-     (*(int *)(&DAT_00640000 + param_1 * 4) == 1)) {
-    return 1;
-  }
-  return 0;
-}
+    if (button < 31) {
+        const u32 flags = DAT_005b4000.flags;
+        if ((flags & 1) == 0 && (flags & 2) == 0) {
+            if (DAT_00640000[button] == 1) {
+                return 1;
+            }
+        }
+    }
 
-} /* extern "C" */
+    return 0;
+}
+}

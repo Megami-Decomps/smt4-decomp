@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_00348eb4; not written yet. */
 #include "common.h"
+
+namespace {
+struct ObjectState {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 unk10;
+};
+}
+
+/* Reads the object's stored value. */
+extern "C" u32 FUN_00387554(const ObjectState *object)
+{
+    return object->unk10;
+}

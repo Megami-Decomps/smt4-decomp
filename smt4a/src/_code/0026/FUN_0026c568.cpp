@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableReleaseNode(unsigned int);
 int FUN_0019c720(int, int, unsigned int);
 int FUN_001a6568(int, unsigned int, unsigned int, int);
-int FUN_001acf98(void);
+int asdTMTexLoadMainHeap(void);
 int FUN_001ad1ac(int, unsigned int);
 int FUN_001b2d54(int, unsigned int, unsigned int);
 int FUN_001f3eec(void);
@@ -22,7 +22,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019c720. */
 extern int FUN_001a6508(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_001ad1ac. */
 /* Supplied declaration required: FUN_001b2d54. */
 /* Supplied declaration required: FUN_001f3eec. */
@@ -57,7 +57,7 @@ unsigned int FUN_0026c568(void)
       temp_v1 = 0;
       if (*(int *)(temp_v0 + 0x14) != -1) {
         temp_v1 = *(int *)(temp_v0 + 0x10);
-        FUN_001acf98();
+        asdTMTexLoadMainHeap();
         *(int *)(temp_v0 + 0xc) = temp_v1;
       }
     }

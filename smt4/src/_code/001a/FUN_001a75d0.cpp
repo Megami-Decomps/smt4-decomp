@@ -8,7 +8,7 @@ int FUN_0028850c(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
@@ -27,7 +27,7 @@ extern int FUN_0029ebc0(void);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_001a75d0(unsigned int param_1,unsigned int param_2,int param_3,int param_4,int param_5)
@@ -49,15 +49,15 @@ void FUN_001a75d0(unsigned int param_1,unsigned int param_2,int param_3,int para
     FUN_002bf380(2,0x24,0x12,param_3,param_4,0x65);
     FUN_002bf288(2,0x24,0x95,param_3,param_4,0x6a);
     if (temp_v0 >= 0) {
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x24,0x97,param_3,param_4,0x6d);
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x24,0x91,param_3,param_4,0x6f);
     }
     else {
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x24,0x96,param_3,param_4,0x6f);
-      FUN_002bf538();
+      efctSetSpeed();
     }
     temp_v3 = 0xffffffff;
     temp_v4 = 0xff;

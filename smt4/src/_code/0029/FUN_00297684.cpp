@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMdlManagerMarkDestroy(void);
 int FUN_0023f2e4(...);
-int FUN_0023f3bc(unsigned int, int, unsigned char [20]);
+int modelSetAnglesDegrees(unsigned int, int, unsigned char [20]);
 int animPlayerSetLoopPolicy(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, unsigned char [12]);
 int nodeSetTranslation3f(unsigned int, int);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_0023f2e4. */
-/* Supplied declaration required: FUN_0023f3bc. */
+/* Supplied declaration required: modelSetAnglesDegrees. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: nodeSetTranslation3f. */
@@ -125,7 +125,7 @@ void FUN_00297684(int param_1)
           FUN_002a0428(*(int *)(temp_v3 + 0x18),*(unsigned int *)(param_1 + 0xc));
         }
         nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v9);
-        FUN_0023f3bc(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v10);
+        modelSetAnglesDegrees(*(unsigned int *)(*(int *)(temp_v3 + 0x18) + 8),0,temp_v10);
         if ((**(unsigned int **)(param_1 + 8) & 2) != 0) {
           puVar6 = *(unsigned int **)(temp_v3 + 0x18);
           *puVar6 = *puVar6 | 2;

@@ -13,7 +13,7 @@ int FUN_002277d8(void);
 int FUN_00228b04(...);
 int FUN_0022e774(void);
 int FUN_0023f604(...);
-int FUN_003720a0(...);
+int gameGlobalsQueueValues(...);
 int FUN_003d2150(...);
 int FUN_004803e4(...);
 int flagValueSub(...);
@@ -103,7 +103,7 @@ extern int FUN_00320af8(int, int);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_003450d4. */
-/* Supplied declaration required: FUN_003720a0. */
+/* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037245c. */
 /* Supplied declaration required: objBSetRecord2000. */
@@ -317,7 +317,7 @@ LAB_0020de28:
         gameGetPlayerData();
         FUN_003df7c4();
         temp_v2 = gameGetPlayerData();
-        FUN_003720a0(temp_v2,0);
+        gameGlobalsQueueValues(temp_v2,0);
         temp_v6 = *(int *)(temp_v6 + 0x3338);
         temp_v2 = gameGetPlayerData();
         temp_v7 = 0;

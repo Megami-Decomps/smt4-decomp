@@ -26,7 +26,7 @@ extern unsigned char LAB_00322cf0; /* 0x322cf0 */
 extern unsigned char LAB_00322cfc; /* 0x322cfc */
 extern unsigned char LAB_00322d08; /* 0x322d08 */
 extern int FUN_00324b74(...); /* 0x324b74 */
-extern unsigned char DAT_0043e2f0; /* 0x43e2f0 */
+extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern unsigned char DAT_0043e2f1; /* 0x43e2f1 */
 extern unsigned char DAT_0043e2f2; /* 0x43e2f2 */
 extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
@@ -69,7 +69,7 @@ unsigned int FUN_00322b80(void)
   DAT_0043e2f4 = 0;
   DAT_0043e2f8 = 0;
   DAT_0043e2f6 = 0;
-  DAT_0043e2f0 = 0;
+  g_byteSettings = 0;
   DAT_0043e2f1 = 0;
   DAT_0043e2f2 = 0;
   puVar4 = &LAB_00322cf0;

@@ -1,22 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b5c88` (_code @ 0x2b5c88, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-extern int gameFlagsGetBlock(void);
-
-
-void FUN_002b5c88(void)
-
-{
-  int temp_v0;
-  
-  temp_v0 = gameFlagsGetBlock();
-  *(unsigned int *)(temp_v0 + 0xdf4) = 1;
-  *(unsigned int *)(temp_v0 + 0xdf8) = 0;
-  *(unsigned char *)(temp_v0 + 0xdfc) = 0;
-  return;
+struct FlagWork { u8 unk00[0xC00]; struct { u8 unk00[0x1F4]; u32 state; f32 value; u8 active; } work; };
+FlagWork *gameFlagsGetBlock(void);
+/* Resets the game-flag work's ramp and pending state. */
+void FUN_002b5c88(void) {
+    FlagWork *work = gameFlagsGetBlock();
+    work->work.state = 1;
+    work->work.value = 0.0f;
+    work->work.active = 0;
 }
-
-} /* extern "C" */
+}

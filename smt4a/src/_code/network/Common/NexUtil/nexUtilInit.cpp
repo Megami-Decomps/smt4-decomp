@@ -1,4 +1,3 @@
-/* NON_MATCHING: code is identical; fdiff reports the relocated pool words that follow the inline __FILE__ string as part of the string data. */
 /* Initialises the NEX (network) utility: allocates its buffer from the heap chosen by two size
  * checks and installs its callbacks. */
 #include "common.h"

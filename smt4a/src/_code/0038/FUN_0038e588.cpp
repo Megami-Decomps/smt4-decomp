@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned long long FUN_002e5ac0(unsigned int, unsigned int, int);
+extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int, int);
 
 
 void FUN_0038e588(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -41,7 +41,7 @@ void FUN_0038e588(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v5 = 0;
   if (0 < (int)*puVar8) {
     do {
-      temp_v7 = FUN_002e5ac0(1,0,temp_v5);
+      temp_v7 = runtimeShiftLeftWide(1,0,temp_v5);
       if (((unsigned int)((unsigned long long)temp_v7 >> 0x20) & param_4) != 0 || ((unsigned int)temp_v7 & param_3) != 0) {
         temp_v3 = *puVar8;
         temp_v1 = 0;

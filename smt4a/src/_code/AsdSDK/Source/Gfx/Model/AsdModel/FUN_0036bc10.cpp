@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0034103c(unsigned int);
+int asdLightActivate(unsigned int);
 
 extern unsigned int DAT_005b3c90; /* 0x5b3c90 */
 extern unsigned int DAT_005b3c94; /* 0x5b3c94 */
 extern unsigned int DAT_005b3c98; /* 0x5b3c98 */
 extern unsigned int DAT_005b3c9c; /* 0x5b3c9c */
 
-/* Supplied declaration required: FUN_0034103c. */
+/* Supplied declaration required: asdLightActivate. */
 
 
 unsigned int FUN_0036bc10(int param_1)
@@ -38,7 +38,7 @@ unsigned int FUN_0036bc10(int param_1)
     temp_v0 = 1;
     temp_v1 = DAT_005b3c9c;
   }
-  FUN_0034103c(temp_v0);
+  asdLightActivate(temp_v0);
   return temp_v1;
 }
 

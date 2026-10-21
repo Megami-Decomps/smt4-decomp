@@ -160,10 +160,10 @@ extern unsigned char LAB_00101d30; /* 0x101d30 */
 extern unsigned char LAB_00101d48; /* 0x101d48 */
 extern unsigned char LAB_00101d58; /* 0x101d58 */
 extern unsigned char LAB_00101d6c; /* 0x101d6c */
-extern int FUN_001026a8(...); /* 0x1026a8 */
+extern int titleEndCommandList(...); /* 0x1026a8 */
 extern int FUN_001026ec(...); /* 0x1026ec */
 extern int FUN_00102738(...); /* 0x102738 */
-extern int FUN_00102798(...); /* 0x102798 */
+extern int titleBeginCommandList(...); /* 0x102798 */
 extern int titleSceneStep(...); /* 0x1027d4 */
 extern int FUN_00102834(...); /* 0x102834 */
 extern int FUN_00102884(...); /* 0x102884 */
@@ -278,7 +278,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00102e34. */
 /* Supplied declaration required: asdProcessInit. */
 /* Supplied declaration required: asdProcessUpdate. */
-extern unsigned long long FUN_001034c0(void);
+extern unsigned long long asdSoundRefreshPlayerState(void);
 /* Supplied declaration required: FUN_00103504. */
 extern unsigned int asdModelGetStatic40(void);
 /* Supplied declaration required: FUN_001036fc. */
@@ -622,11 +622,11 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c34,0x72,0);
-  temp_v26 = FUN_001026a8;
+  temp_v26 = titleEndCommandList;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c48,0x74,0);
-  temp_v26 = FUN_00102798;
+  temp_v26 = titleBeginCommandList;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c14,0x83,0);
@@ -775,7 +775,7 @@ LAB_00101b80:
           temp_v24 = romwright_piece_4_4((int)((unsigned long long)temp_v24 >> 0x20),temp_v4);
           temp_v23 = uRam00446dd0.whole;
           if (temp_v15 && temp_v4 == 0) {
-            temp_v24 = FUN_001034c0();
+            temp_v24 = asdSoundRefreshPlayerState();
             temp_v23 = uRam00446dd0.whole;
           }
         }

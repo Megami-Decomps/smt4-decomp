@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0016c69c(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
@@ -19,7 +19,7 @@ int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int rt_aeabi_memclr(...);
 int VectorSignedToFloat(...);
 
@@ -36,7 +36,7 @@ extern unsigned char g_messageMain; /* 0x57f588 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -57,7 +57,7 @@ extern int saveSlotFindById(unsigned int);
 extern int FUN_00187068(int);
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
 
@@ -151,7 +151,7 @@ void FUN_00165b08(void)
       temp_v8 = FUN_001834a4(0x14,temp_v10 + 0xc3b);
       FUN_001835b4(2,0x14,0xbc2,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v5,0xbf)
       ;
-      FUN_00100388(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
+      textFormatBuffer(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
       temp_v8 = FUN_001834a4(0x14,temp_v10 * 3 + 0xc52);
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
@@ -160,7 +160,7 @@ void FUN_00165b08(void)
       FUN_00183bb0();
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
-      FUN_00100388(temp_v17,&DAT_00530b54,temp_v2);
+      textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = FUN_001834a4(0x14,temp_v10 + 0xc49);
       puVar8 = temp_v17;
       FUN_0018408c(puVar8,2);
@@ -213,7 +213,7 @@ LAB_00165eec:
       temp_v8 = FUN_001834a4(0x14,temp_v10 + 0xc3b);
       FUN_001835b4(2,0x14,0xbc2,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v5,0xbf)
       ;
-      FUN_00100388(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
+      textFormatBuffer(temp_v18,&DAT_00530b58,*(unsigned short *)(temp_v3 + 100));
       temp_v8 = FUN_001834a4(0x14,temp_v10 * 3 + 0xc52);
       temp_v0 = *(short *)(temp_v8 + 8);
       temp_v1 = *(short *)(temp_v8 + 10);
@@ -222,7 +222,7 @@ LAB_00165eec:
       FUN_00183bb0();
       rt_aeabi_memclr(temp_v17,0x40);
       temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
-      FUN_00100388(temp_v17,&DAT_00530b54,temp_v2);
+      textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = FUN_001834a4(0x14,temp_v10 + 0xc49);
       puVar8 = temp_v17;
       FUN_0018408c(puVar8,2);
@@ -238,7 +238,7 @@ LAB_00165eec:
   } while (temp_v9 < 0xc);
   if (*(char *)(temp_v7 + 0xe8) != '\0') {
     FUN_001879d0(g_renderCtx);
-    FUN_0019d880();
+    jobGetScalarValue();
     efctSetSpeed();
     temp_v7 = FUN_00184ed0();
     if (-1 < temp_v7) {

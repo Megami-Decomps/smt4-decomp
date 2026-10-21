@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00233e70(int, int, int);
 int FUN_00233fcc(int, int);
-int FUN_002340e4(unsigned int *);
+int timeInitializeActiveState(unsigned int *);
 int FUN_00234124(int, unsigned int *);
 int FUN_002341d4(int *, int);
 
@@ -25,7 +25,7 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
 /* Supplied declaration required: FUN_002341d4. */
 extern int strIsEmpty(unsigned int *);
@@ -58,7 +58,7 @@ void FUN_003920d8(int param_1)
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  FUN_002340e4(&temp_v4);
+  timeInitializeActiveState(&temp_v4);
   temp_v2 = g_aocMain;
   temp_v0 = *(int *)(param_1 + 8);
   if (temp_v0 != 3) {

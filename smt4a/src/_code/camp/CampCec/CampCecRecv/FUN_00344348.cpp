@@ -68,7 +68,7 @@ extern unsigned int *g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: resultReportIfFailed. */
 extern unsigned int gameDataBlocksAddFlags(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
-extern unsigned int FUN_002a2cf0(void);
+extern unsigned int cecQueryOptionalProcess(void);
 /* Supplied declaration required: runWinOpen. */
 /* Supplied declaration required: FUN_002c76d8. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -143,7 +143,7 @@ void FUN_00344348(unsigned char param_1)
       puVar1[0xf8] = temp_v0;
     }
     else {
-      temp_v1 = FUN_002a2cf0();
+      temp_v1 = cecQueryOptionalProcess();
       temp_v3 = temp_v1 == 0;
       if (temp_v3) {
         temp_v1 = (unsigned int)*(unsigned char *)((int)puVar1 + 0x7d5);

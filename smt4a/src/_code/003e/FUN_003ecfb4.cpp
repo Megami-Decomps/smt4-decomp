@@ -8,8 +8,8 @@ int FUN_0017760c(...);
 int FUN_00184310(...);
 int sysMemClear(...);
 int rt_memclr(...);
-int FUN_004bd274(...);
-int FUN_004bd294(...);
+int randomGetLowerTenBits(...);
+int randomGetUpperSixBits(...);
 int clearTwoWords(...);
 
 typedef struct fn_003ecfb4_arg2 fn_003ecfb4_arg2;
@@ -40,8 +40,8 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_004bd274. */
-/* Supplied declaration required: FUN_004bd294. */
+/* Supplied declaration required: randomGetLowerTenBits. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: clearTwoWords. */
 
 
@@ -109,19 +109,19 @@ void FUN_003ecfb4(unsigned int param_1,unsigned char *param_2,fn_003ecfb4_arg2 *
   temp_v5 = 0;
   do {
     pfVar6 = param_3;
-    FUN_004bd274(param_3,temp_v5 & 0xff);
+    randomGetLowerTenBits(param_3,temp_v5 & 0xff);
     *(unsigned short *)(param_2 + temp_v5 * 2 + 0x128) =
          ((unsigned short)(int)pfVar6 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v5 * 2 + 0x128) & 0xfc00);
     pfVar6 = param_3;
-    FUN_004bd294(param_3,temp_v5 & 0xff);
+    randomGetUpperSixBits(param_3,temp_v5 & 0xff);
     *(unsigned short *)(param_2 + temp_v5 * 2 + 0x128) =
          (unsigned short)((int)pfVar6 << 10) | (*(unsigned short *)(param_2 + temp_v5 * 2 + 0x128) & 0x3ff);
     pfVar6 = param_3;
-    FUN_004bd274(param_3,temp_v5 & 0xff);
+    randomGetLowerTenBits(param_3,temp_v5 & 0xff);
     *(unsigned short *)(param_2 + temp_v5 * 2 + 0x152) =
          ((unsigned short)(int)pfVar6 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v5 * 2 + 0x152) & 0xfc00);
     pfVar6 = param_3;
-    FUN_004bd294(param_3,temp_v5 & 0xff);
+    randomGetUpperSixBits(param_3,temp_v5 & 0xff);
     *(unsigned short *)(param_2 + temp_v5 * 2 + 0x152) =
          (unsigned short)(((unsigned int)pfVar6 & 0x3f) << 10) | (*(unsigned short *)(param_2 + temp_v5 * 2 + 0x152) & 0x3ff);
     temp_v8 = temp_v5 + 1;

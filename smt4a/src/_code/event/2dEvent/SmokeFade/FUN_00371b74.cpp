@@ -18,7 +18,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 
 
 void FUN_00371b74(void)
@@ -45,7 +45,7 @@ void FUN_00371b74(void)
   temp_v1 = 0;
   do {
     if (*(char *)(temp_v1 * 0xc + 0x57f489) != '\0') {
-      temp_v0 = FUN_00341940((&DAT_0057f480)[temp_v1 * 3]);
+      temp_v0 = textureGetIndexedResource((&DAT_0057f480)[temp_v1 * 3]);
       if (temp_v0 != 0) {
         asdTMTexTableFreeEntry((&DAT_0057f480)[temp_v1 * 3]);
       }

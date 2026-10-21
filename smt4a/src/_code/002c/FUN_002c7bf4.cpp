@@ -1,36 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7bf4` (_code @ 0x2c7bf4, 0x8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned short [8], unsigned int, unsigned int, int, unsigned char *);
+typedef struct Request {
+    /* 0x00 */ u16 value;
+    /* 0x02 */ u8 unk02[0x0E];
+} Request;
 
-extern unsigned char LAB_00241798; /* 0x241798 */
+s32 FUN_00241798(const void *left, const void *right);
 
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
+int libc_bsearch(Request *request, u32 arg1, u32 arg2, int size, s32 (*callback)(const void *, const void *));
+u32 dataTableGet(u32 arg0, u32 arg1);
+u32 dataTableGetCount(u32 arg);
+u32 dataTableGetEntries(void);
 
-
-void FUN_002c7bf4(int param_1)
-
+/* Builds a request carrying `value` and submits it with its completion callback. */
+void FUN_002c7bf4(u16 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short temp_v2 [8];
-  
-  if (param_1 == 0) {
-    return;
-  }
-  temp_v0 = dataTableGet(0x11,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  temp_v2[0] = (unsigned short)param_1;
-  libc_bsearch(temp_v2,temp_v1,temp_v0,0x10,&LAB_00241798);
-  return;
+    if (value == 0) {
+        return;
+    }
+    Request request;
+    u32 selected = dataTableGet(0x11, 0);
+    u32 other = dataTableGetEntries();
+
+    selected = dataTableGetCount(selected);
+    request.value = value;
+    libc_bsearch(&request, other, selected, 0x10, FUN_00241798);
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameGetSlotRecord(...);
-int FUN_002e5ac0(...);
+int runtimeShiftLeftWide(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int g_partyPanel; /* 0x57f268 */
 #endif
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002e5ac0. */
+/* Supplied declaration required: runtimeShiftLeftWide. */
 
 
 int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
@@ -98,7 +98,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
             }
           }
           temp_v15 = *(long long *)param_1;
-          temp_v14 = FUN_002e5ac0(1,0,temp_v4 + 1);
+          temp_v14 = runtimeShiftLeftWide(1,0,temp_v4 + 1);
           temp_v9 = temp_v9 + 1;
           *(long long *)param_1 = temp_v14 + temp_v15;
         } while (temp_v9 < 2);
@@ -173,7 +173,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
             temp_v7 = param_1[1];
             temp_v8 = *param_1;
             temp_v15 = *(long long *)param_1;
-            temp_v14 = FUN_002e5ac0(1,0);
+            temp_v14 = runtimeShiftLeftWide(1,0);
             if ((temp_v8 & (unsigned int)temp_v14) == 0 && (temp_v7 & (unsigned int)((unsigned long long)temp_v14 >> 0x20)) == 0) {
               *(long long *)param_1 = temp_v14 + temp_v15;
             }
@@ -182,7 +182,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
             temp_v7 = *param_1;
             temp_v8 = param_1[1];
             temp_v15 = *(long long *)param_1;
-            temp_v14 = FUN_002e5ac0(1,0);
+            temp_v14 = runtimeShiftLeftWide(1,0);
             if ((temp_v7 & (unsigned int)temp_v14) == 0 && (temp_v8 & (unsigned int)((unsigned long long)temp_v14 >> 0x20)) == 0) {
               *(long long *)param_1 = temp_v14 + temp_v15;
             }
@@ -191,7 +191,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
             temp_v7 = param_1[1];
             temp_v8 = *param_1;
             temp_v15 = *(long long *)param_1;
-            temp_v14 = FUN_002e5ac0(1,0);
+            temp_v14 = runtimeShiftLeftWide(1,0);
             if ((temp_v8 & (unsigned int)temp_v14) == 0 && (temp_v7 & (unsigned int)((unsigned long long)temp_v14 >> 0x20)) == 0) {
               *(long long *)param_1 = temp_v14 + temp_v15;
             }
@@ -204,7 +204,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
               temp_v7 = *param_1;
               temp_v8 = param_1[1];
               temp_v15 = *(long long *)param_1;
-              temp_v14 = FUN_002e5ac0(1,0);
+              temp_v14 = runtimeShiftLeftWide(1,0);
               if ((temp_v8 & (unsigned int)((unsigned long long)temp_v14 >> 0x20)) == 0 && (temp_v7 & (unsigned int)temp_v14) == 0)
               {
                 *(long long *)param_1 = temp_v14 + temp_v15;
@@ -229,7 +229,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
             temp_v15 = romwright_piece_4_4(temp_v5,temp_v9);
             if (!temp_v11) {
               if (!temp_v12) {
-                temp_v15 = FUN_002e5ac0(1,0,*(char *)(temp_v9 + temp_v2 + 0x1c9f) + 1,0,puVar19);
+                temp_v15 = runtimeShiftLeftWide(1,0,*(char *)(temp_v9 + temp_v2 + 0x1c9f) + 1,0,puVar19);
                 *(long long *)param_1 = temp_v15;
               }
               else {
@@ -237,7 +237,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
               }
             }
             else if (-1 < param_3) {
-              temp_v15 = FUN_002e5ac0(1,0,*(int *)(temp_v1 + param_3 * 8 + 0xa80) + 1);
+              temp_v15 = runtimeShiftLeftWide(1,0,*(int *)(temp_v1 + param_3 * 8 + 0xa80) + 1);
               *(long long *)param_1 = temp_v15;
             }
           }
@@ -260,7 +260,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
             temp_v9 = gameGetSlotTable();
             temp_v9 = gameGetSlotRecord((int)*(char *)(temp_v9 + temp_v2 + 0x1c88));
             if (*(short *)(temp_v9 + 0x62) == *(short *)(temp_v1 + 0xefa)) {
-              temp_v15 = FUN_002e5ac0(1,0,temp_v2 + 1);
+              temp_v15 = runtimeShiftLeftWide(1,0,temp_v2 + 1);
               *(long long *)param_2 = temp_v15;
               break;
             }
@@ -278,7 +278,7 @@ int FUN_0031db84(unsigned int *param_1,unsigned int *param_2,int param_3)
         temp_v9 = gameGetSlotTable();
         if ((int)*(char *)(temp_v9 + temp_v2 + 0x1c88) ==
             *(int *)(temp_v1 + *(int *)(temp_v1 + 0x9bc) * 8 + 0xa80)) {
-          temp_v13 = FUN_002e5ac0(1,0,temp_v2 + 1);
+          temp_v13 = runtimeShiftLeftWide(1,0,temp_v2 + 1);
           *(unsigned long long *)param_2 = temp_v13;
           break;
         }

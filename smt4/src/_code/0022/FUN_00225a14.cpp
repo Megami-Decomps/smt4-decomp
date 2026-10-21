@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023d20c(float *, int, int);
+int matrixScaleColumns(float *, int, int);
 int FUN_003e2044(unsigned int, int, int, int, int *, int, int, int);
 int nn_math_ARMv6_MTX33MultAsm_nn_math_MTX34(int, int, float *);
 int nn_math_ARMv6_MTX34MultAsm(int, int, int);
@@ -46,7 +46,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0023d20c. */
+/* Supplied declaration required: matrixScaleColumns. */
 /* Supplied declaration required: FUN_003e2044. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33MultAsm_nn_math_MTX34. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -141,7 +141,7 @@ void FUN_00225a14(unsigned int param_1,int *param_2,unsigned int param_3,int par
         temp_v7 = *(int *)(temp_v13 + 4) + temp_v5 * 0x40;
         FUN_003e2044(temp_v28,temp_v6,param_4 + 0x148,param_4 + 0x178,&temp_v27,temp_v7,temp_v2,temp_v3);
         if ((*(unsigned int *)(temp_v7 + 0x3c) & 0x200) == 0) {
-          FUN_0023d20c(&temp_v8,temp_v7,temp_v2 + 0x30);
+          matrixScaleColumns(&temp_v8,temp_v7,temp_v2 + 0x30);
           temp_v14 = romwright_sqrt_4(temp_v8 * temp_v8 + temp_v9 * temp_v9 + temp_v12 * temp_v12);
           temp_v15 = 0;
           temp_v16 = 0;

@@ -10,11 +10,11 @@ int FUN_0029a17c(...);
 int FUN_0029ab54(int, int);
 int FUN_002b6758(...);
 int FUN_002be5a4(...);
-int FUN_002be624(unsigned char [64], unsigned char *);
+int textFormatBuffer(unsigned char [64], unsigned char *);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002e1ed4(...);
 int VectorSignedToFloat(...);
 
@@ -48,13 +48,13 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(void);
 /* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002e1ed4. */
 
 
@@ -111,7 +111,7 @@ void FUN_0032bc00(int param_1,int param_2)
       temp_v7 = FUN_002bf4f8(0x1a,temp_v5 + 0x44c);
       temp_v8 = FUN_002bf4f8(0x1a,1099);
       if (temp_v1) {
-        FUN_002be624(temp_v14,&LAB_0032bffc);
+        textFormatBuffer(temp_v14,&LAB_0032bffc);
         VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,
@@ -152,9 +152,9 @@ void FUN_0032bc00(int param_1,int param_2)
   if ((*(int *)(temp_v2 + 0x400) == 0x11) &&
      (temp_v4 = temp_v2 + (temp_v3 + temp_v4) * 4, temp_v5 = temp_v4 + 0x500, *(short *)(temp_v4 + 0x5ca) != 0)) {
     temp_v4 = FUN_002bf4f8(0x1a,temp_v3 + 0x42c);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf380(2,0x1a,8,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xbf);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x1a,0x41f,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc4)
     ;
     temp_v3 = *(int *)(temp_v2 + 0x418);

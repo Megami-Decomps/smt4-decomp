@@ -1,17 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efb9e` (_code @ 0x2efb9e, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-unsigned int FUN_002efb9e(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-  if ((~*(unsigned int *)(param_1 + 0x10) & param_3) == 0 && (~*(unsigned int *)(param_1 + 0x14) & param_4) == 0) {
-    return 1;
-  }
-  return 0;
+/* NON_MATCHING: compiler uses bics and omits the frame instead of retail's complement/and sequence. */
+#include "common.h"
+struct Flags { u8 unk00[0x10]; u32 low, high; };
+/* Tests that the requested mask is contained in the stored flags. */
+extern "C" s32 FUN_002efb9e(const Flags *flags, u32 unused, u32 low, u32 high) {
+    if (((~flags->low & low) | (~flags->high & high)) == 0) return 1;
+    return 0;
 }
-
-} /* extern "C" */

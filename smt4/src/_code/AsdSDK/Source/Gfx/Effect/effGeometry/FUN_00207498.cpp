@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002569fc(unsigned int *);
-int FUN_002693b4(unsigned int, int, int, int);
+int recordPrepareActive(unsigned int, int, int, int);
 int asdOperatorNew(int, int);
 int memAlloc(int, int, int, int, int, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002569fc. */
-/* Supplied declaration required: FUN_002693b4. */
+/* Supplied declaration required: recordPrepareActive. */
 extern unsigned int FUN_002693e4(void);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
@@ -43,7 +43,7 @@ unsigned int * FUN_00207498(int param_1,int param_2,int param_3,unsigned short p
   else {
     temp_v2 = FUN_002693e4();
   }
-  FUN_002693b4(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
+  recordPrepareActive(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
   *puVar1 = temp_v2;
   temp_v2 = 0x10000;
   memAlloc(0x10000,0x100,0,param_1 << 4,0x10,1);

@@ -14,9 +14,9 @@ int FUN_002826dc(...);
 int FUN_002b5cb4(void);
 int FUN_002d1f40(...);
 int FUN_003250ac(int *);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_003d4ed8(...);
-int FUN_003fd76c(...);
+int controllerSetDestination(...);
 int FUN_003fd7c0(...);
 int FUN_003fd924(...);
 int FUN_003fdb18(...);
@@ -68,9 +68,9 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_003250ac. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003d4ed8. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: FUN_003fdb18. */
@@ -176,14 +176,14 @@ void FUN_003541c0(void)
       piVar4[0x7d] = (int)(temp_v6 + temp_v9 * 8.0f);
       piVar4[0x7e] = (int)temp_v7;
       if (*(char *)((int)piVar4 + 0x23d) == '\x01') {
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
       }
       FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
       break;
     case 2:
       g_lmapScene[0x91] = (int)temp_v10;
       if (DAT_005f161c != '\0') {
-        FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+        controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
       DAT_0058128c = DAT_0058128c + 0.2f;
@@ -236,7 +236,7 @@ void FUN_003541c0(void)
         g_lmapScene[0x81] = (int)((float)g_lmapScene[0x81] + temp_v9 * *(float *)(temp_v0 + 0x1528));
         piVar4[0x80] = (int)((float)piVar4[0x80] + 120.0f);
         FUN_003250ac(piVar5);
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         piVar4 = g_lmapScene;
         g_lmapScene[0x86] = (int)temp_v7;
         piVar4[0x87] = piVar4[0x13];
@@ -249,7 +249,7 @@ void FUN_003541c0(void)
       goto LAB_00354dac;
     case 3:
       if (DAT_005f161c != '\0') {
-        FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+        controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
       DAT_0058128c = DAT_0058128c + 1.0f;
@@ -369,7 +369,7 @@ LAB_00354acc:
       goto joined_r0x00354f08;
     case 4:
       if (DAT_005f161c != '\0') {
-        FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+        controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
       DAT_0058128c = DAT_0058128c + 0.7f;
@@ -448,7 +448,7 @@ LAB_00354dac:
         piVar4[0x74] = 6;
         piVar4[0x75] = 0;
       }
-      FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+      controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
       return;
     case 6:
       if (DAT_005f161c == '\0') {
@@ -572,7 +572,7 @@ LAB_00354dac:
         piVar4[0x75] = 0;
         piVar4[0x90] = 0x41200000;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
-        FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+        controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
       break;
@@ -629,7 +629,7 @@ LAB_00354dac:
         *piVar5 = 8;
         piVar4[0x75] = 0;
         *(unsigned char *)(piVar4 + 0x8f) = 1;
-        FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+        controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
         return;
       }
     }
@@ -642,7 +642,7 @@ LAB_00354dac:
     temp_v0 = g_lmapScene[0x75];
     g_lmapScene[0x75] = temp_v0 + 1;
     if (temp_v0 + 1 < 0x15) {
-      FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+      controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
       return;
     }
     piVar4[0x74] = 0x12;
@@ -705,7 +705,7 @@ LAB_0035521c:
       piVar4[0x75] = 0;
     }
   }
-  FUN_003fd76c(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
+  controllerSetDestination(*(unsigned int *)(g_lmapScene[99] + 4),g_lmapScene + 0x7c);
   return;
 }
 

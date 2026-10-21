@@ -8,7 +8,7 @@ extern const char DAT_005449b4[];
 
 void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, s32 size);
-void *FUN_002b41c4(EffAsdLightDesc *desc);
+void *resourceResolveHeaderPointer(EffAsdLightDesc *desc);
 void rt_memcpy(void *dst, const void *src, s32 size);
 void sceneTraverserVisit(s32 handle, u32 arg);
 
@@ -37,7 +37,7 @@ EffAsdLight *effAsdLightCreateFromDesc(EffAsdLightDesc *desc)
     light->scale = 1.0f;
     if (desc != NULL) {
         light->kind = desc->kind;
-        rt_memcpy(light->params, FUN_002b41c4(desc), 0xb4);
+        rt_memcpy(light->params, resourceResolveHeaderPointer(desc), 0xb4);
         if (g_effAsdLightHandle != 0) {
             sceneTraverserVisit(g_effAsdLightHandle, g_asdModelTransformBuilder);
         }

@@ -1,35 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005116b0` (_code @ 0x5116b0, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: global critical-section pointer is reloaded rather than preserved in r4. */
+#include "common.h"
 extern "C" {
-
-int nn_os_CriticalSection_Initialize(unsigned int *);
-int emptyStub_002f4370(unsigned int *, unsigned char *, int);
-int FUN_002f5020(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
-extern unsigned int DAT_0061a62c; /* 0x61a62c */
-
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: emptyStub_002f4370. */
-/* Supplied declaration required: FUN_002f5020. */
-
-
-void FUN_005116b0(void)
-
-{
-/* irregular: 3 native warning(s); review required */
-  FUN_002f5020();
-  DAT_0061a62c = 0;
-  nn_os_CriticalSection_Initialize(&DAT_0061a62c);
-  emptyStub_002f4370(&DAT_0061a62c,&LAB_0042ce3c,0x100000);
-  return;
+extern u32 DAT_0061a62c;extern u8 entry;
+void FUN_002f5020();void FUN_0042ce3c(void *object);
+void nn_os_CriticalSection_Initialize(void *section);
+void emptyStub_002f4370(void *object,void (*destroy)(void *),void *module);
+/* Initializes the module and its global critical section. */
+void FUN_005116b0(){FUN_002f5020();DAT_0061a62c=0;nn_os_CriticalSection_Initialize(&DAT_0061a62c);emptyStub_002f4370(&DAT_0061a62c,FUN_0042ce3c,&entry);}
 }
-
-} /* extern "C" */

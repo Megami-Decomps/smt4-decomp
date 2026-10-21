@@ -13,7 +13,7 @@ typedef struct BtlUnitRecord {
 } BtlUnitRecord;
 
 extern void *btlGetMainState(void);
-extern int FUN_003e8430(void *mainState);
+extern int btlScriptUnitHasFlags(void *mainState);
 
 /* The unit's current skill value, or 0 when it has no skill or the battle check fails. */
 int btlUnitGetSkillValue(BtlUnitRecord *unit)
@@ -21,7 +21,7 @@ int btlUnitGetSkillValue(BtlUnitRecord *unit)
     if (unit->skill == NULL) {
         return 0;
     }
-    if (FUN_003e8430(btlGetMainState()) != 0) {
+    if (btlScriptUnitHasFlags(btlGetMainState()) != 0) {
         return 0;
     }
     return unit->skill->value;

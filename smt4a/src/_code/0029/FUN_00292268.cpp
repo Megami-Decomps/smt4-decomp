@@ -11,9 +11,9 @@ int FUN_0025ef68(float *, float *, int);
 int FUN_002826dc(float *, float *, int, int);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_0036d984(...);
-int FUN_003fd76c(...);
+int controllerSetDestination(...);
 int FUN_003fdb18(...);
 int FUN_003fe86c(...);
 
@@ -76,9 +76,9 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
 extern int FUN_003303fc(void);
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0036d984. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int slots4FGetActiveValue(int);
@@ -282,8 +282,8 @@ void FUN_00292268(void)
       temp_v8 = temp_v8 * temp_v11;
       temp_v6 = temp_v6 * temp_v11;
       temp_v7 = *(float *)(DAT_005806a4 + 0x50);
-      FUN_00352bc4();
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
+      mathPositionHeadingDegrees();
       temp_v12 = DAT_005f0c94 - *(float *)(DAT_005806a4 + 0x50);
       temp_v10 = DAT_005f0c98 - *(float *)(DAT_005806a4 + 0x54);
       temp_v11 = DAT_005f0c9c - *(float *)(DAT_005806a4 + 0x58);
@@ -346,8 +346,8 @@ LAB_002928a4:
     temp_v8 = temp_v8 * temp_v11;
     temp_v6 = temp_v6 * temp_v11;
     temp_v7 = *(float *)(DAT_005806a4 + 0x50);
-    FUN_00352bc4();
-    FUN_00352bc4();
+    mathPositionHeadingDegrees();
+    mathPositionHeadingDegrees();
     temp_v12 = DAT_005f0c94 - *(float *)(DAT_005806a4 + 0x50);
     temp_v10 = DAT_005f0c98 - *(float *)(DAT_005806a4 + 0x54);
     temp_v11 = DAT_005f0c9c - *(float *)(DAT_005806a4 + 0x58);
@@ -367,7 +367,7 @@ LAB_002928a4:
   }
 LAB_002929b0:
   temp_v4 = *(int *)(DAT_005f0c88 + 4);
-  FUN_003fd76c(temp_v4,&DAT_005f0c94);
+  controllerSetDestination(temp_v4,&DAT_005f0c94);
   FUN_003fdb18(temp_v4);
   temp_v2 = slots4FGetActiveValue(temp_v4);
   temp_v1 = temp_v2;
@@ -385,7 +385,7 @@ LAB_002929b0:
   }
   if (DAT_005f0cf0 != '\0' && temp_v0 != '\0') {
     temp_v5 = *(unsigned int *)(DAT_005f0c8c + 4);
-    FUN_003fd76c(temp_v5,&DAT_005f0c94);
+    controllerSetDestination(temp_v5,&DAT_005f0c94);
     FUN_003fdb18(temp_v5);
     FUN_003fe86c(temp_v5,0,2);
     DAT_005f0cf1 = 0;
@@ -400,7 +400,7 @@ LAB_002929b0:
     temp_v14 = DAT_005f0ca0 * temp_v14;
     FUN_001bbf0c();
     temp_v20 = temp_v20 + temp_v14 * temp_v15;
-    FUN_003fd76c(temp_v5,&temp_v19);
+    controllerSetDestination(temp_v5,&temp_v19);
     FUN_003fdb18(temp_v5);
     FUN_003fe86c(temp_v5,0,2);
     DAT_005f0cf1 = '\0';
@@ -408,7 +408,7 @@ LAB_002929b0:
   temp_v1 = 0;
   do {
     temp_v5 = *(unsigned int *)((&DAT_005f0d44)[temp_v1] + 4);
-    FUN_003fd76c(temp_v5,&DAT_005f0c94);
+    controllerSetDestination(temp_v5,&DAT_005f0c94);
     FUN_003fdb18(temp_v5);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);

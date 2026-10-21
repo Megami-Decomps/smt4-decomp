@@ -13,7 +13,7 @@ int FUN_00246454(...);
 int FUN_00246d38(int, unsigned int *, int, int);
 int FUN_00246e24(int, unsigned int *, int, int, int);
 int FUN_00250720(int);
-int FUN_00255158(...);
+int battleGetEntryHalfword(...);
 int FUN_00255180(...);
 int FUN_0027e5e4(void);
 int btlMainFindEntryByListedId(...);
@@ -48,7 +48,7 @@ extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00246e24. */
 extern unsigned int btlMainFindActiveEntry(int);
 /* Supplied declaration required: FUN_00250720. */
-/* Supplied declaration required: FUN_00255158. */
+/* Supplied declaration required: battleGetEntryHalfword. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_0027e5e4. */
 extern int nodeListCountActiveById(unsigned int);
@@ -281,7 +281,7 @@ LAB_003cb60c:
   if (temp_v7 != 0) {
     temp_v0 = *(short *)(temp_v7 + 8);
     temp_v3 = *(int *)(*param_1 + 0x1e98);
-    temp_v4 = FUN_00255158(0,2);
+    temp_v4 = battleGetEntryHalfword(0,2);
     temp_v5 = questGetCurrentRecordValue6();
     temp_v2 = 0;
     if (temp_v5 != 0) {
@@ -298,7 +298,7 @@ LAB_003cb60c:
     else {
       temp_v2 = questCurrentGetValue();
       temp_v8 = questRecordValueIfState2();
-      temp_v6 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x1d);
+      temp_v6 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1d);
       if ((temp_v2 == 0) || (temp_v6 < temp_v8)) goto LAB_003cbb20;
       temp_v11 = FUN_00245cc0(0x1d);
       FUN_00255180((int)*(short *)(param_2[9] + 0x62),0x1d,temp_v11);

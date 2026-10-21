@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_002804b0(unsigned char [128], unsigned int *, int);
 int sysMemClear(unsigned char [128], int);
 int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
@@ -13,7 +13,7 @@ int FUN_004d7e20(unsigned int *, int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: aocQueueType20. */
@@ -31,7 +31,7 @@ void FUN_004d83b4(unsigned int *param_1,int param_2)
   unsigned char temp_v2 [128];
   
   sysMemClear(temp_v1,0x80);
-  FUN_00100388(temp_v1,"battle/event/%s/%s.mbm",param_2 + 0x130);
+  textFormatBuffer(temp_v1,"battle/event/%s/%s.mbm",param_2 + 0x130);
   temp_v0 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(param_2 + 0xf0));
   if (temp_v0 != 0) {
     aocQueueType20(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 3,temp_v1);
@@ -43,7 +43,7 @@ void FUN_004d83b4(unsigned int *param_1,int param_2)
   if (param_1[3] != 0) {
     *param_1 = 5;
     sysMemClear(temp_v2,0x80);
-    FUN_00100388(temp_v2,"battle/event/%s/%s.bf",param_2 + 0x130);
+    textFormatBuffer(temp_v2,"battle/event/%s/%s.bf",param_2 + 0x130);
     temp_v0 = FUN_0046c4b4(g_aocSystem,*(unsigned int *)(param_2 + 0xf0));
     if (temp_v0 != 0) {
       aocQueueType1f(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 4,temp_v2);

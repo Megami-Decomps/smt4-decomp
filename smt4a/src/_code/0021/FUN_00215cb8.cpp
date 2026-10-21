@@ -41,7 +41,7 @@ int FUN_0023eaf8(void);
 int FUN_0023ff10(void);
 int FUN_002ae320(void);
 int FUN_00320834(void);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int FUN_003d474c(void);
 
 extern int g_aocMain; /* 0x570260 */
@@ -79,7 +79,7 @@ extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_002f15f8. */
 /* Supplied declaration required: FUN_00320834. */
 extern int FUN_00335384(int);
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: FUN_0035d8a4. */
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -233,7 +233,7 @@ unsigned int FUN_00215cb8(void)
       *(unsigned int *)(temp_v9 + 8) = temp_v7;
       *(unsigned int *)(temp_v9 + 0x10) = 0;
       if (*(char *)(temp_v1 + 0x93e) != '\0') {
-        FUN_00341f88();
+        buttonHelpGetValue();
         sysPlaySe();
       }
     }
@@ -666,7 +666,7 @@ joined_r0x002167bc:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
     temp_v7 = 0;
     break;
@@ -899,7 +899,7 @@ joined_r0x002167bc:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
     temp_v7 = 0;
     break;

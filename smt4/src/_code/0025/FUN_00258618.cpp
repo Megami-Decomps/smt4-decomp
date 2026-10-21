@@ -38,7 +38,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0023d450(unsigned int, unsigned int, unsigned int);
+extern int flagsPackFourBooleans(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0023e024. */
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
@@ -137,7 +137,7 @@ void FUN_00258618(int param_1)
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_0023d450(1,1,1);
+  temp_v1 = flagsPackFourBooleans(1,1,1);
   piVar6 = (int *)(temp_v0 + 0x128c);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];

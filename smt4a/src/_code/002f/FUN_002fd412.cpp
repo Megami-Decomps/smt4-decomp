@@ -1,23 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd412` (_code @ 0x2fd412, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different stack-frame allocation and instruction scheduling. */
+#include "common.h"
 extern "C" {
-
-int FUN_002e93c2(int);
-
-/* Supplied declaration required: FUN_002e93c2. */
-
-
-void FUN_002fd412(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  if (*(short *)(param_1 + 0x1aa) != 0) {
-    FUN_002e93c2(*(int *)(param_1 + 0x1ac) + 8);
-    *(unsigned short *)(param_1 + 0x1aa) = 0;
-  }
-  return;
+struct Object { u8 unk00[0x1AA]; u16 state; struct { u8 unk00[8]; u8 value; } *child; };
+void FUN_002e93c2(void *value);
+/* Releases the active child field and clears its state. */
+void FUN_002fd412(Object *object) {
+    if (object->state != 0) FUN_002e93c2(&object->child->value);
+    object->state = 0;
 }
-
-} /* extern "C" */
+}

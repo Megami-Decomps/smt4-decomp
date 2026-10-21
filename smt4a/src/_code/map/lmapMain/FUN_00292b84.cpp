@@ -9,14 +9,14 @@ int FUN_001bc124(void);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
 int FUN_00330108(...);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 
-int FUN_001418fc(unsigned char *);
+int uiSetFloatPair(unsigned char *);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int gameFlagsGetBlock(void);
 int FUN_0025cb1c(void);
-int FUN_00275ffc(void);
+int residentApplyFallbackValues(void);
 int FUN_003033d4(void);
 int FUN_00303564(void);
 int FUN_00324b68(void);
@@ -38,7 +38,7 @@ typedef struct {
 
 extern int *DAT_005806a4; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f10cc; /* 0x5f10cc */
+extern unsigned char g_localCamera; /* 0x5f10cc */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 extern signed char DAT_005f199e; /* 0x5f199e */
@@ -68,7 +68,7 @@ static float romwright_sqrt_4(float value)
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: gameFlagsGetBlock. */
@@ -76,14 +76,14 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0025cb1c. */
-/* Supplied declaration required: FUN_00275ffc. */
+/* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_003033d4. */
 /* Supplied declaration required: FUN_00303564. */
 /* Supplied declaration required: FUN_00324b68. */
 /* Supplied declaration required: FUN_00330108. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_0050d8e4. */
@@ -164,10 +164,10 @@ void FUN_00292b84(void)
       piVar5[0x15] = piVar5[0xb1];
       piVar5[0x16] = piVar5[0xb2];
       FUN_0050d8e4();
-      FUN_00275ffc();
-      FUN_0014f0dc(&DAT_005f10cc,DAT_005806a4 + 0x14,DAT_005806a4 + 0x17,DAT_005806a4 + 8);
-      FUN_001523b8(&DAT_005f10cc,1);
-      *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &DAT_005f10cc;
+      residentApplyFallbackValues();
+      FUN_0014f0dc(&g_localCamera,DAT_005806a4 + 0x14,DAT_005806a4 + 0x17,DAT_005806a4 + 8);
+      FUN_001523b8(&g_localCamera,1);
+      *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &g_localCamera;
       return;
     }
     *(unsigned char *)(DAT_005806a4 + 0xc1) = 0;
@@ -271,37 +271,37 @@ void FUN_00292b84(void)
   piVar5 = DAT_005806a4;
   temp_v2 = *DAT_005806a4;
   if (temp_v2 == 3) {
-    FUN_001418fc(&DAT_005f10cc);
-    FUN_001523b8(&DAT_005f10cc,1);
+    uiSetFloatPair(&g_localCamera);
+    FUN_001523b8(&g_localCamera,1);
     FUN_00324b68();
-    FUN_0036b824(&DAT_005f10cc);
-    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &DAT_005f10cc;
+    FUN_0036b824(&g_localCamera);
+    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &g_localCamera;
     FUN_0050d8e4();
-    FUN_00275ffc();
+    residentApplyFallbackValues();
     return;
   }
   temp_v20 = 0x42340000;
   if (temp_v2 == 4) {
-    FUN_001418fc(&DAT_005f10cc);
-    FUN_001523b8(&DAT_005f10cc,1);
-    FUN_0014f0dc(&DAT_005f10cc,DAT_005806a4 + 0x21,DAT_005806a4 + 0x24,DAT_005806a4 + 8);
+    uiSetFloatPair(&g_localCamera);
+    FUN_001523b8(&g_localCamera,1);
+    FUN_0014f0dc(&g_localCamera,DAT_005806a4 + 0x21,DAT_005806a4 + 0x24,DAT_005806a4 + 8);
     FUN_00324b68();
-    FUN_0036b824(&DAT_005f10cc);
-    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &DAT_005f10cc;
+    FUN_0036b824(&g_localCamera);
+    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &g_localCamera;
     FUN_0050d8e4();
-    FUN_00275ffc();
+    residentApplyFallbackValues();
     return;
   }
   temp_v12 = 10.0f;
   if ((char)DAT_005806a4[0x88] != '\0') {
     FUN_003033d4();
-    FUN_001523b8(&DAT_005f10cc,1);
+    FUN_001523b8(&g_localCamera,1);
     FUN_00303564();
     FUN_00324b68();
-    FUN_0036b824(&DAT_005f10cc);
-    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &DAT_005f10cc;
+    FUN_0036b824(&g_localCamera);
+    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &g_localCamera;
     FUN_0050d8e4();
-    FUN_00275ffc();
+    residentApplyFallbackValues();
     piVar1 = DAT_005806a4;
     temp_v2 = piVar5[0x99];
     temp_v10 = piVar5[0x9a];
@@ -317,12 +317,12 @@ void FUN_00292b84(void)
     return;
   }
   if (temp_v2 == 6 || temp_v2 == 0xf) {
-    FUN_0014f0dc(&DAT_005f10cc,DAT_005806a4 + 0x14,DAT_005806a4 + 0x17,DAT_005806a4 + 8);
+    FUN_0014f0dc(&g_localCamera,DAT_005806a4 + 0x14,DAT_005806a4 + 0x17,DAT_005806a4 + 8);
     FUN_00324b68();
-    FUN_0036b824(&DAT_005f10cc);
-    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &DAT_005f10cc;
+    FUN_0036b824(&g_localCamera);
+    *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &g_localCamera;
     FUN_0050d8e4();
-    FUN_00275ffc();
+    residentApplyFallbackValues();
     return;
   }
   temp_v10 = FUN_003033d4();
@@ -459,7 +459,7 @@ void FUN_00292b84(void)
     piVar5[0xf] = -0x3d380000;
     temp_v14 = -600.0f;
     temp_v8 = 70.0f;
-    FUN_00352bc4();
+    mathPositionHeadingDegrees();
     temp_v15 = (float)DAT_005806a4[6];
     FUN_002b5cd4();
     temp_v19 = *(float *)(g_lmapScene + 0x20);
@@ -711,19 +711,19 @@ LAB_002936f8:
       piVar5[0x16] = (int)temp_v17;
     }
   }
-  FUN_0036b824(&DAT_005f10cc);
-  *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &DAT_005f10cc;
+  FUN_0036b824(&g_localCamera);
+  *(unsigned char **)(DAT_005806a4[0xc5] + 0xc) = &g_localCamera;
   FUN_00303564();
-  FUN_001523b8(&DAT_005f10cc,1);
+  FUN_001523b8(&g_localCamera,1);
   temp_v2 = *DAT_005806a4;
   if (!((temp_v2 == 7 || temp_v2 == 8) || temp_v2 == 9)) {
     FUN_00324b68();
   }
   else {
-    FUN_0014f0dc(&DAT_005f10cc,DAT_005806a4 + 0x14,DAT_005806a4 + 0x17,DAT_005806a4 + 0xb);
+    FUN_0014f0dc(&g_localCamera,DAT_005806a4 + 0x14,DAT_005806a4 + 0x17,DAT_005806a4 + 0xb);
   }
   FUN_0050d8e4();
-  FUN_00275ffc();
+  residentApplyFallbackValues();
   return;
 }
 

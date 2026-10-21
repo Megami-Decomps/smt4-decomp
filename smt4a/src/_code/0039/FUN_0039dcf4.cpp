@@ -1,30 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039dcf4` (_code @ 0x39dcf4, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct BattleSelection {
+    /* 0x00 */ u8 unk00[0xd4];
+    /* 0xd4 */ s8 value;
+};
 extern "C" {
-
-int FUN_001568f8(int, unsigned int);
-int scrSetResult(int);
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001568f8. */
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0039dcf4(void)
-
+s32 scrGetArg();
+void *btlGetMainState();
+BattleSelection *FUN_001568f8(void *battle, s32 id);
+void scrSetResult(s32 result);
+/* Returns the selected battle entry's value to the script. */
+s32 FUN_0039dcf4()
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  FUN_001568f8(temp_v1,temp_v0);
-  scrSetResult((int)*(char *)(temp_v1 + 0xd4));
-  return 1;
+    s32 id = scrGetArg();
+    BattleSelection *entry = FUN_001568f8(btlGetMainState(), id);
+    scrSetResult(entry->value);
+    return 1;
 }
-
-} /* extern "C" */
+}

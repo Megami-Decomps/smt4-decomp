@@ -13,12 +13,16 @@ found the same way, what those new functions reach. A new function ends at its f
 jump that no branch inside it passes. Code that branches back into the function just before the gap
 is that function's own tail, cut short where a switch case followed a return: the row extends it.
 Code that runs straight into the next function, which nothing else reaches, is that function's real
-start (armcc put a load or move before its push): the row moves it.
+start (armcc put a load or move before its push): the row moves it. A function that runs on into the
+next one (no return, jump or linker NOP at the seam), which nothing calls or takes the address of and
+only the run itself branches to, is a piece of one function the analysis cut up: the row joins them.
 
-`units.py add ROWS.tsv`: each row `<game> <hex address> <hex size> arm|thumb|extend|move [<note>]`. A
-new function `FUN_<address>` gets a source file saying it is not written yet; `extend` gives the
-function at the address the new size; `move` starts the function inside the bytes at the address
-(one named `FUN_<old address>` is renamed in every file).
+`units.py add ROWS.tsv`: each row `<game> <hex address> <hex size> arm|thumb|extend|move|drop|join
+[<note>]`. A new function `FUN_<address>` gets a source file saying it is not written yet; `extend`
+gives the function at the address the new size; `move` starts the function inside the bytes at the
+address (one named `FUN_<old address>` is renamed in every file); `drop` removes the function at the
+address and its source (data taken for code; the size is ignored); `join` makes the pieces in the
+bytes one function, keeping the first real name, else the first written source, else the first piece.
 
 `split` and `add` update `config/symbols.txt`, `config/project.json` and `objdiff.json`, then run
 `build.py split` to rebuild the retail target objects.
@@ -171,7 +175,7 @@ def function_end(split, entry, code, thumb):
 
 
 def missing(game):
-    """[(address, size, 'arm' | 'thumb' | 'extend' | 'move', note)] of the functions the analysis missed."""
+    """[(address, size, 'arm' | 'thumb' | 'extend' | 'move' | 'join', note)] of what the analysis missed."""
     root = ROOT / game
     split, n3ds = module(game, "split"), module(game, "n3ds")
     project = json.loads((root / "config" / "project.json").read_text(encoding="utf-8"))
@@ -197,7 +201,7 @@ def missing(game):
         return known[at] if at >= 0 and address < known[at] + sizes[known[at]] else None
 
     # What the known functions reach: branch targets and pool words. A pool word is data, never a target.
-    reached, pool_words = [], set()
+    reached, pool_words, called, branch_origins = [], set(), set(), {}
     for address, (name, size, thumb) in functions.items():
         data = body(address, size, thumb)
         pools, words, end = split.literal_pools(address, data, thumb)
@@ -210,15 +214,22 @@ def missing(game):
             else:
                 to_thumb = struct.unpack_from("<I", data, origin - address)[0] >> 25 == 0x7D
             reached.append((to, to_thumb, f"{'called' if links else 'branched to'} by {name}"))
+            if links:
+                called.add(to)
+            else:
+                branch_origins.setdefault(to, []).append(origin)
         for at in words:
             pool_words.add(address + at)
             if at + 4 <= len(data):
                 value = struct.unpack_from("<I", data, at)[0]
                 reached.append((value & ~1, bool(value & 1), f"its address is in {name}'s literal pool"))
+                called.add(value & ~1)
     referenced = {to for to, _thumb, _note in reached}
 
     def candidate(address, thumb):
-        return (address not in functions and owner(address) is None and address not in pool_words
+        head = code[address - base:address - base + 8]
+        is_text = all(32 <= b < 127 or b == 0 for b in head) and any(b >= 0x41 for b in head)  # a string in .text
+        return (address not in functions and owner(address) is None and address not in pool_words and not is_text
                 and not address % (2 if thumb else 4) and any(start <= address < end for start, end in text))
 
     def clean_start(address):
@@ -307,6 +318,26 @@ def missing(game):
                 rows.append((address, whole, "move", f"{names[after]} starts here: {note}"))
                 continue
         rows.append((address, size, "thumb" if thumb else "arm", note))
+    # Fragments: a function that runs on into the next one (no return, jump or linker NOP at the seam),
+    # which nothing calls or takes the address of and only the run itself branches to, is one function.
+    # Each joined piece grows the run before the next seam is tested, so one pass finds whole runs.
+    runs, order, at = {}, list(known), 0   # runs: {first piece: [piece starts]}
+    while at + 1 < len(order):
+        before, after = order[at], order[at + 1]
+        thumb = functions[before][2]
+        step = 2 if thumb else 4
+        seam = struct.unpack_from("<H" if thumb else "<I", code, after - base - step)[0]
+        if (before + sizes[before] == after and functions[after][2] == thumb and after not in called
+                and all(before <= origin < after + sizes[after] for origin in branch_origins.get(after, ()))
+                and seam not in (0xE1A00000, 0xE320F000, 0x46C0, 0xBF00)
+                and function_end(split, before, body(before, sizes[before] + sizes[after], thumb), thumb) > sizes[before]):
+            runs.setdefault(before, [before]).append(after)
+            sizes[before] += sizes[after]
+            del order[at + 1]
+            continue
+        at += 1
+    for first, run in runs.items():
+        rows.append((first, sizes[first], "join", " + ".join(names[a] for a in run) + " run into each other"))
     return sorted(rows)
 
 
@@ -317,6 +348,32 @@ def add(game, address, size, kind, note, state, renames):
     symbols, project, objdiff = state
     units, entries = project["units"], objdiff["units"]
     lines = [(int(m[3], 16), m) for m in re.finditer(FUNCTION_LINE, symbols, re.M)]
+    if kind == "drop":
+        # Not code after all (data the analysis or `missing` took for a function): retail bytes again.
+        found = next((m for a, m in lines if a == address), None)
+        if not found:
+            raise SystemExit(f"{game}: no function at {address:#x} in config/symbols.txt")
+        symbols = symbols[:found.start()] + symbols[found.end() + 1:]
+        unit = next(u for u in units if u["function"] == found[1])
+        units.remove(unit)
+        entries[:] = [e for e in entries if e["metadata"]["source_path"] != unit["source"]]
+        (ROOT / game / unit["source"]).unlink()
+        return symbols, project, objdiff
+    if kind == "join":
+        # One function the analysis cut into pieces: one piece keeps its name and source and spans them
+        # all (the first with a real name, else the first whose source is written, else the first); the
+        # other pieces and their sources go.
+        pieces = [(a, m[1]) for a, m in lines if address <= a < address + size]
+        source = {u["function"]: ROOT / game / u["source"] for u in units}
+        written = lambda name: not source[name].read_text(encoding="utf-8").startswith("/* NON_MATCHING")
+        keep = next((a for a, name in pieces if not re.fullmatch(r"FUN_[0-9a-f]{8}", name)),
+                    next((a for a, name in pieces if written(name)), pieces[0][0]))
+        for a, name in pieces:
+            if a != keep:
+                if not re.fullmatch(r"FUN_[0-9a-f]{8}", name):
+                    print(f"{game}: {name} is part of {dict(pieces)[keep]} now; its name and source are dropped")
+                state = add(game, a, 0, "drop", note, state, renames)
+        return add(game, address, size, "extend" if keep == address else "move", note, state, renames)
     if kind in ("extend", "move"):
         # extend: the function at the address; move: the one that starts inside the new bytes.
         found = next((m for a, m in lines if (a == address if kind == "extend" else address < a < address + size)), None)

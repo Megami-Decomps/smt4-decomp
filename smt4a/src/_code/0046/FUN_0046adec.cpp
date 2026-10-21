@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int lookupNameEntry(unsigned int, unsigned char [32], unsigned char [16]);
-int FUN_003fd76c(unsigned int, unsigned char [16]);
+int controllerSetDestination(unsigned int, unsigned char [16]);
 int FUN_00407450(unsigned int);
 int FUN_00407eb0(unsigned int, int, int);
 
@@ -15,9 +15,9 @@ extern unsigned char LAB_0046af3c; /* 0x46af3c */
 extern unsigned char LAB_0046af48; /* 0x46af48 */
 extern unsigned char LAB_0046af54; /* 0x46af54 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: lookupNameEntry. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_00407450. */
 /* Supplied declaration required: FUN_00407eb0. */
 
@@ -62,20 +62,20 @@ void FUN_0046adec(int param_1)
     temp_v1 = 0;
     if (temp_v1 < *(int *)(param_1 + 0xabc)) {
       do {
-        FUN_00100388(temp_v5,&LAB_0046af3c,temp_v1 + 1);
+        textFormatBuffer(temp_v5,&LAB_0046af3c,temp_v1 + 1);
         if (temp_v1 != 7) {
           if (temp_v1 == 8) {
-            FUN_00100388(temp_v5,&LAB_0046af54);
+            textFormatBuffer(temp_v5,&LAB_0046af54);
           }
         }
         else {
-          FUN_00100388(temp_v5,&LAB_0046af48);
+          textFormatBuffer(temp_v5,&LAB_0046af48);
         }
         lookupNameEntry(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0xcdc) + 0x18) + 4),temp_v5,
                      temp_v6);
         temp_v3 = param_1 + temp_v1 * 4;
-        FUN_003fd76c(*(unsigned int *)(*(int *)(temp_v3 + 0xa10) + 4),temp_v6);
-        FUN_003fd76c(*(unsigned int *)(*(int *)(temp_v3 + 0xa34) + 4),temp_v6);
+        controllerSetDestination(*(unsigned int *)(*(int *)(temp_v3 + 0xa10) + 4),temp_v6);
+        controllerSetDestination(*(unsigned int *)(*(int *)(temp_v3 + 0xa34) + 4),temp_v6);
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < *(int *)(param_1 + 0xabc));
     }

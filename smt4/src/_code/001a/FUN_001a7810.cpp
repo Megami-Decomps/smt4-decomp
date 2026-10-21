@@ -8,7 +8,7 @@ int FUN_002b6dd8(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
@@ -25,7 +25,7 @@ extern int dataTable24Sub0GetRecordS90(unsigned int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_001a7810(unsigned int param_1,unsigned int param_2,int param_3,int param_4,int param_5,
@@ -42,7 +42,7 @@ void FUN_001a7810(unsigned int param_1,unsigned int param_2,int param_3,int para
   if (param_5 != 0) {
     FUN_002bf380(2,0x24,0xb,param_3,param_4,0x65);
     temp_v3 = 0xffffffff;
-    FUN_002bf538();
+    efctSetSpeed();
     if (param_6 != 0) {
       FUN_002bf288(2,0x24,0xa0,param_3,param_4,0x6f);
     }
@@ -60,7 +60,7 @@ void FUN_001a7810(unsigned int param_1,unsigned int param_2,int param_3,int para
     temp_v3 = 0xff;
     FUN_002bf288(2,0x24,0x9c,param_3,param_4,0x6f);
   }
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v0 = dataTable24Sub0GetRecordS90(param_2);
   temp_v1 = FUN_002bf4f8(0x24,0xa4);
   temp_v2 = temp_v0;

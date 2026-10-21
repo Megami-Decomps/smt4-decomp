@@ -39,7 +39,7 @@ typedef struct Owner {
     } u;
 } Owner;
 
-extern Owner *DAT_00587f08;
+extern Owner *g_engineRecordList;
 extern u32 g_handleRegistry;
 
 extern void ptrListRemoveClearOwner(u32 registry, u32 key);
@@ -50,7 +50,7 @@ void FUN_002dddb4(void)
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        Slot *slot = &DAT_00587f08->u.table.slots[32 + i];
+        Slot *slot = &g_engineRecordList->u.table.slots[32 + i];
 
         if (slot->active != 0 && slot->registeredA != 0) {
             if (slot->handle != NULL && slot->handle->key != 0) {
@@ -59,7 +59,7 @@ void FUN_002dddb4(void)
         }
     }
     for (i = 0; i < 32; i++) {
-        Slot *slot = &DAT_00587f08->u.table.slots[i];
+        Slot *slot = &g_engineRecordList->u.table.slots[i];
 
         if (slot->active != 0 && slot->registeredB != 0 && slot->registeredA != 0) {
             if (slot->handle != NULL && slot->handle->key != 0) {
@@ -68,7 +68,7 @@ void FUN_002dddb4(void)
         }
     }
     for (i = 0; i < 17; i++) {
-        Extra *extra = &DAT_00587f08->u.extras[i];
+        Extra *extra = &g_engineRecordList->u.extras[i];
 
         if (extra->handle != NULL && extra->handle->key != 0) {
             ptrListRemoveClearOwner(g_handleRegistry, extra->handle->key);

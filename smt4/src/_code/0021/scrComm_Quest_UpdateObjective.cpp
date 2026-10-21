@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a1648(void);
 int asdMemFreeIfNotNull(...);
 int FUN_00250d84(...);
-int FUN_00254e2c(...);
+int messageForwardDefaultMode(...);
 int FUN_0028ed3c(...);
 int FUN_00295660(...);
 int FUN_0029bbc8(void);
@@ -67,7 +67,7 @@ extern int btlTalkBustUpExists(void);
 extern int FUN_00250ec0(unsigned int);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_00254e2c. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: FUN_0028784c. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: messageSlotSet. */
@@ -295,7 +295,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     }
     FUN_002bff50();
     temp_v10 = 1;
-    FUN_00254e2c(temp_v1,temp_v2,0,6);
+    messageForwardDefaultMode(temp_v1,temp_v2,0,6);
     scrWorkSetValue(1,0);
     scrWorkSetValue(0,3);
     break;
@@ -304,7 +304,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     FUN_001a1648();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
-    FUN_00254e2c(temp_v1,0xb,temp_v2);
+    messageForwardDefaultMode(temp_v1,0xb,temp_v2);
     temp_v6 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v6 + 1);
     if (temp_v1 != 1) {
@@ -353,7 +353,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     FUN_002bff50();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
-    FUN_00254e2c(temp_v1,0xc,temp_v2,6);
+    messageForwardDefaultMode(temp_v1,0xc,temp_v2,6);
     temp_v6 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v6 + 1);
     if (temp_v1 == 1) {
@@ -373,7 +373,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     FUN_002bff50();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
-    FUN_00254e2c(temp_v1,temp_v5,temp_v2,6);
+    messageForwardDefaultMode(temp_v1,temp_v5,temp_v2,6);
     temp_v6 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v6 + 1);
     if (temp_v1 != 1) {
@@ -397,7 +397,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     FUN_002bff50();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;
-    FUN_00254e2c(temp_v1,0x10,temp_v2,6);
+    messageForwardDefaultMode(temp_v1,0x10,temp_v2,6);
     temp_v9 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v9 + 1);
     if (temp_v1 == 1) {

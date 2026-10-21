@@ -25,7 +25,7 @@ typedef struct {
 
 extern unsigned short uRam00464d4a; /* 0x464d4a */
 extern unsigned int DAT_00464d68; /* 0x464d68 */
-extern signed char DAT_004729b8; /* 0x4729b8 */
+extern signed char g_textRendererSettings; /* 0x4729b8 */
 extern int DAT_004729c0; /* 0x4729c0 */
 extern unsigned char DAT_004daf08; /* 0x4daf08 */
 extern unsigned char DAT_004dcf08; /* 0x4dcf08 */
@@ -283,7 +283,7 @@ LAB_00286fe0:
     } while (temp_v2 == 0);
   }
   temp_v2 = DAT_004729c0;
-  if (DAT_004729b8 != '\0') {
+  if (g_textRendererSettings != '\0') {
     *(unsigned int *)(DAT_004729c0 + 4) = 0;
     *(unsigned int *)(temp_v2 + 8) = 0;
     *(unsigned int *)(temp_v2 + 0xc) = 0;

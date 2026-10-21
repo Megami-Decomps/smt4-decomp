@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019ea64(...);
+int messageSetMode(...);
 int dialogClose(...);
 int FUN_0020b490(...);
 int FUN_00333dc8(...);
@@ -29,7 +29,7 @@ int FUN_003450d4(...);
 int FUN_00359974(int, int, unsigned int, int);
 int FUN_00372100(...);
 int FUN_003df7c4(...);
-int FUN_003e40b8(...);
+int engineGetFloatTableValue(...);
 int SBORROW4(...);
 
 /* stack frame of param_1: 9 slot(s), 33 byte(s) */
@@ -60,7 +60,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0020b490. */
@@ -82,7 +82,7 @@ extern int FUN_0031f6ac(int);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_003e40b8. */
+/* Supplied declaration required: engineGetFloatTableValue. */
 extern int NaviMain_GetPosY(void);
 
 
@@ -158,7 +158,7 @@ void FUN_002c9a8c(int param_1)
     *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
   case 1:
     if (*(char *)(param_1 + 0x7f50) != '\0') {
-      FUN_003e40b8(param_1 + 0x7f40,0);
+      engineGetFloatTableValue(param_1 + 0x7f40,0);
     }
     FUN_00163aa4(temp_v19);
     temp_v20 = gameFlagIsSet(0x45f);
@@ -400,7 +400,7 @@ LAB_002ca354:
       temp_v19 = FUN_0031f6ac(temp_v19 + 0xe);
       if (temp_v19 == 0) break;
     }
-    FUN_0019ea64(0);
+    messageSetMode(0);
     sysPlaySe(0x9c);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),0xb);
     temp_v19 = FUN_001632fc();
@@ -413,7 +413,7 @@ LAB_002ca354:
   case 4:
     temp_v14 = FUN_00224880(*(unsigned int *)(param_1 + 0x43a0));
     if (temp_v14 != 2) break;
-    FUN_0019ea64(1);
+    messageSetMode(1);
     FUN_00333dc8(0);
     temp_v14 = FUN_002a4b74();
     if (temp_v14 != 0) {
@@ -471,7 +471,7 @@ LAB_002ca524:
     break;
   case 5:
     if (*(char *)(param_1 + 0x7f50) != '\0') {
-      FUN_003e40b8(param_1 + 0x7f40,0);
+      engineGetFloatTableValue(param_1 + 0x7f40,0);
     }
     temp_v19 = FUN_00163aa4(temp_v19);
     if (temp_v19 != 0) {

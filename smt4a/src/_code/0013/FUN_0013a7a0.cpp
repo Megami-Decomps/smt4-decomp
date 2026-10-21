@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_00588fb4; /* 0x588fb4 */
+extern unsigned char g_soundVolumeSetting; /* 0x588fb4 */
 extern unsigned char DAT_0061955c; /* 0x61955c */
 extern int DAT_0063f500; /* 0x63f500 */
 
@@ -42,10 +42,10 @@ void FUN_0013a7a0(void)
       temp_v0 = jyoucyuGetTableEntry(1);
       if ((temp_v0 == 0) && (temp_v0 = FUN_00162ea4(), temp_v0 == 0)) {
         if (temp_v3 + 0xfeffff84U < 0x191) {
-          FUN_001448a8(temp_v3,DAT_00588fb4,0);
+          FUN_001448a8(temp_v3,g_soundVolumeSetting,0);
         }
         else if (temp_v3 + 0xfefffdf3U < 0x106) {
-          FUN_00143b58(temp_v3,DAT_00588fb4,0);
+          FUN_00143b58(temp_v3,g_soundVolumeSetting,0);
         }
       }
       *(unsigned int *)(&DAT_0061955c + temp_v1 * 4) = 0;

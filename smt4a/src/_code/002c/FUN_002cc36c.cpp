@@ -38,7 +38,7 @@ extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_004a9740. */
 
 
@@ -155,7 +155,7 @@ LAB_002cc580:
       }
       else {
         btlGetMainState();
-        temp_v2 = FUN_003e8430();
+        temp_v2 = btlScriptUnitHasFlags();
         if (temp_v2 != 0) {
           if (*(int *)(temp_v5 + 0xb650) >= 0xc) {
 LAB_002cc6b0:

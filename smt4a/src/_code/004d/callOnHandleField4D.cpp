@@ -7,12 +7,12 @@ typedef struct HandleRef {
     /* 0x04 */ u32 value;
 } HandleRef;
 
-extern void FUN_003fd784(u32 value);
+extern void controllerSetPosition(u32 value);
 
 void callOnHandleField4D(HandleRef **ref)
 {
     if (*ref != NULL) {
-        FUN_003fd784((*ref)->value);
+        controllerSetPosition((*ref)->value);
     }
 }
 

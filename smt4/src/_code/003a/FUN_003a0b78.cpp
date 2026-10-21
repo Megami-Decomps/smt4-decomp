@@ -20,7 +20,7 @@ typedef struct PopupTask {
     /* 0x860 */ u32 choice;
 } PopupTask;
 
-extern int FUN_00231240(void *panel, u32 x, u32 y);
+extern int pointConvertToFloat(void *panel, u32 x, u32 y);
 extern int FUN_00233240(void *intro, int arg);
 extern int FUN_002b8ee0(PopupCursor *cursor, int arg);
 extern int FUN_0029e0f8(void);
@@ -44,7 +44,7 @@ void FUN_003a0b78(PopupTask *task)
         FUN_002b8ee0(cursor, 0);
         y = vec2GetYInt(cursor);
         x = vec2GetXInt(cursor);
-        FUN_00231240(task->panel, x, y);
+        pointConvertToFloat(task->panel, x, y);
         if (cursor->confirmed != 0) {
             switch (task->choice) {
             case 0:

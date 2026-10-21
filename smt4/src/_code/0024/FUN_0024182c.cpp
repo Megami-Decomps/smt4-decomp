@@ -14,7 +14,7 @@ int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(u32 ptr);
 int jobStop(u32 job, int mode);
 int runWinDestroy(void);
-extern int FUN_0026efec(int index);
+extern int saveGetIndexedMapValue(int index);
 
 typedef struct Scene {
     /* 0x000 */ u32 job;
@@ -57,7 +57,7 @@ void FUN_0024182c(void)
     }
     i = 0;
     do {
-        entry = FUN_0026efec(i);
+        entry = saveGetIndexedMapValue(i);
         i++;
         if ((*(u8 *)(entry + 0x20) & 0x10) != 0) {
             *(u8 *)(entry + 0x20) = *(u8 *)(entry + 0x20) & ~0x10U;

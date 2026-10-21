@@ -1,32 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c65e8` (_code @ 0x4c65e8, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: masked-pair loads and boolean result use different registers. */
+#include "common.h"
+struct FlagPair {u32 low,high;};
+struct MaskOwner {u8 unk00[16];FlagPair mask;};
 extern "C" {
-
-int FUN_003f0e20(unsigned int *, unsigned int);
-
-extern unsigned int DAT_00571400; /* 0x571400 */
-extern unsigned int DAT_00571404; /* 0x571404 */
-
-extern unsigned int *btlGetMainState(void);
-/* Supplied declaration required: FUN_003f0e20. */
-
-
-unsigned int FUN_004c65e8(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)btlGetMainState();
-  FUN_003f0e20(puVar1,param_1);
-  temp_v0 = 0;
-  if ((DAT_00571400 & *puVar1) != 0 || (puVar1[1] & DAT_00571404) != 0) {
-    temp_v0 = 0x105;
-  }
-  return temp_v0;
+extern MaskOwner DAT_005713f0;void *btlGetMainState();FlagPair *FUN_003f0e20(void*,u32 id);
+/* Returns status 0x105 when either masked battle-state word is present. */
+u32 FUN_004c65e8(u32 id){FlagPair *flags=FUN_003f0e20(btlGetMainState(),id);return ((flags->low&DAT_005713f0.mask.low)|(flags->high&DAT_005713f0.mask.high))!=0 ? 0x105 : 0;}
 }
-
-} /* extern "C" */

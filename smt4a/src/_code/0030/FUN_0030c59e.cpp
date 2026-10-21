@@ -1,20 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c59e` (_code @ 0x30c59e, 0x16 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_0030c59e(unsigned int *param_1,int param_2,unsigned int *param_3)
-
-{
-  for (; param_2 != 0; param_2 = param_2 - 1) {
-    if (param_1 != (unsigned int *)0x0) {
-      *param_1 = *param_3;
+/* NON_MATCHING: compiler omits retail's frame and uses a prechecked loop with r3 for the copied word. */
+#include "common.h"
+/* Fills words only when a destination exists. */
+extern "C" void FUN_0030c59e(u32 *output, u32 count, const u32 *value) {
+    for (; count != 0; --count) {
+        if (output != NULL) *output = *value;
+        ++output;
     }
-    param_1 = param_1 + 1;
-  }
-  return;
 }
-
-} /* extern "C" */

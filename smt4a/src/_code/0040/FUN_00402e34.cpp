@@ -6,7 +6,7 @@ extern "C" {
 
 int asdTMTexTableLoadTmx(...);
 int FUN_001527d8(unsigned int, unsigned int);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_002804b0(...);
 int FUN_004029f4(int, int, int);
 int FUN_00405c94(int);
@@ -22,9 +22,9 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_002804b0. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_004029f4. */
 /* Supplied declaration required: FUN_00405c94. */
 /* Supplied declaration required: FUN_00471d94. */
@@ -53,7 +53,7 @@ void FUN_00402e34(int param_1)
   *(unsigned short *)(param_1 + 0x18) = 0;
   asdTMTexTableLoadTmx(0x32,0);
   do {
-    FUN_001acf98(0x32,temp_v0);
+    asdTMTexLoadMainHeap(0x32,temp_v0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 2);
   temp_v1 = 0;
@@ -67,7 +67,7 @@ void FUN_00402e34(int param_1)
     else {
       temp_v2 = 0xffffffff;
     }
-    temp_v0 = FUN_00341940(temp_v2);
+    temp_v0 = textureGetIndexedResource(temp_v2);
     if (temp_v0 == 0) {
       asdTMTexTableLoadTmx(temp_v2,0);
       *(unsigned char *)(param_1 + temp_v1 + 0x18) = 1;

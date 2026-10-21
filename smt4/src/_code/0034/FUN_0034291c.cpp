@@ -11,7 +11,7 @@ int FUN_002bc0e0(void);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_0032b4f8(int, int, int);
 int FUN_00342e5c(int, float *, float *, unsigned int, int);
 int VectorSignedToFloat(...);
@@ -40,7 +40,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0032b4f8. */
 /* Supplied declaration required: FUN_00342e5c. */
 
@@ -132,7 +132,7 @@ void FUN_0034291c(int param_1)
   ;
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bf288(2,0x14,0x36,(int)(temp_v9 + temp_v10),(int)temp_v6,0x41);
-  FUN_002bf538();
+  efctSetSpeed();
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bdf94(0,(int)(*(float *)(param_1 + 0x80) + temp_v9 + temp_v10),
                (int)(*(float *)(param_1 + 0x84) + temp_v6),1,2,0x42,&LAB_00342c50,

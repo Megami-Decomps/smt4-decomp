@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00103f54(...);
 int holderSetFlagBits(...);
 int FUN_0011b272(unsigned char [52], unsigned int);
@@ -68,7 +68,7 @@ extern unsigned char DAT_0055a9d8; /* 0x55a9d8 */
 extern unsigned char DAT_0055ac40; /* 0x55ac40 */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0011b272. */
@@ -221,10 +221,10 @@ void FUN_00413e50(int param_1)
   temp_v0 = gameFlagIsSet(0x580);
   if (temp_v0 != 0) {
     temp_v1 = randRange(0xffff);
-    FUN_00100388(&temp_v17,&LAB_004141f4,temp_v1,0);
+    textFormatBuffer(&temp_v17,&LAB_004141f4,temp_v1,0);
   }
   else {
-    FUN_00100388(&temp_v17,&LAB_004141f4,temp_v1,temp_v3);
+    textFormatBuffer(&temp_v17,&LAB_004141f4,temp_v1,temp_v3);
   }
   temp_v1 = FUN_002ea100(temp_v33,&temp_v17);
   FUN_00522a48(&temp_v24,temp_v1);

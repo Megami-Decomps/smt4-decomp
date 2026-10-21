@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [132], unsigned char *, int, unsigned int);
+int textFormatBuffer(unsigned char [132], unsigned char *, int, unsigned int);
 int dataTableFileGetTable(int, int);
 int sysMemClear(unsigned char [132], int);
 int FUN_00471fec(unsigned int, unsigned char [132], int, int, int, int);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_004743d8; /* 0x4743d8 */
 extern unsigned int g_aocDisplay; /* 0x57027c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableFileGetTable. */
@@ -92,7 +92,7 @@ void FUN_004741f0(int param_1,int param_2)
           case 0x2f:
           case 0x3b:
             sysMemClear(temp_v5,0x80);
-            FUN_00100388(temp_v5,&LAB_004743d8,param_1 + 0x24,temp_v3 + temp_v2 * 0x40 + 1);
+            textFormatBuffer(temp_v5,&LAB_004743d8,param_1 + 0x24,temp_v3 + temp_v2 * 0x40 + 1);
             temp_v0 = *(int *)(param_1 + 0x4c) + temp_v2 * 0x10;
             FUN_00471fec(g_aocDisplay,temp_v5,temp_v0,1,0x80,temp_v0);
             *(unsigned char *)(*(int *)(param_1 + 0x4c) + temp_v2 * 0x10 + 0xc) = 1;

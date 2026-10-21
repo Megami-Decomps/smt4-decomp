@@ -13,7 +13,7 @@ int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
-int FUN_0021229c(...);
+int debugDrawText(...);
 int FUN_00285b58(...);
 int FUN_002a7bb8(...);
 int FUN_002a968c(...);
@@ -58,7 +58,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0021229c. */
+/* Supplied declaration required: debugDrawText. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_00285b58. */
 /* Supplied declaration required: FUN_002a7bb8. */
@@ -155,7 +155,7 @@ unsigned int FUN_0023b8b0(void)
     efctSetSpeed();
     break;
   case 7:
-    FUN_0021229c(0xff,&LAB_0023bdb0);
+    debugDrawText(0xff,&LAB_0023bdb0);
     break;
   case 0xb:
     temp_v4 = 0;
@@ -204,7 +204,7 @@ unsigned int FUN_0023b8b0(void)
                  temp_v4,(int)*(char *)(temp_v0 + 0x9071),*(int *)(temp_v0 + 0x404) == 0x1e);
     break;
   case 0x1a:
-    FUN_0021229c(0xff,&LAB_0023bdcc);
+    debugDrawText(0xff,&LAB_0023bdcc);
     break;
   case 0x1b:
     temp_v4 = 0;

@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0037b138(...);
+int effectSetByteSpeed(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_5: 6 slot(s), 24 byte(s) */
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern int FUN_002e5d88(unsigned short);
-/* Supplied declaration required: FUN_0037b138. */
+/* Supplied declaration required: effectSetByteSpeed. */
 
 
 void FUN_004ba354(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -119,7 +119,7 @@ void FUN_004ba354(int param_1,int param_2,int param_3,int param_4,int param_5)
       }
       temp_v3 = FUN_002e5d88(temp_v0);
       if (temp_v3 == 0) {
-        FUN_0037b138(0x66);
+        effectSetByteSpeed(0x66);
       }
     }
     FUN_001835b4(2,0xb,*(unsigned int *)(temp_v7 + 0x8ec),temp_v8 + temp_v11,temp_v2 + temp_v1,param_5,temp_v5);

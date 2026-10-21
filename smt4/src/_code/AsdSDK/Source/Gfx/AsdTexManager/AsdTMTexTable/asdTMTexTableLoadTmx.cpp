@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b73a8(int, unsigned int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(...);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
@@ -22,7 +22,7 @@ extern int DAT_0044ea2c; /* 0x44ea2c */
 
 extern unsigned char *FUN_0010024c(char *, unsigned int);
 /* Supplied declaration required: FUN_002b73a8. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_002c3124(unsigned char *, unsigned char *, unsigned char);
 
@@ -66,7 +66,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
       temp_v0 = *pcVar8;
     }
     libc_strcpy(temp_v1,&temp_v10);
-    FUN_002be624(temp_v9,&LAB_002c5b84,temp_v1,puVar10 + 2,&LAB_002c5b80);
+    textFormatBuffer(temp_v9,&LAB_002c5b84,temp_v1,puVar10 + 2,&LAB_002c5b80);
     temp_v7 = (param_2 & 1) != 0;
     if ((param_2 & 2) != 0) {
       temp_v7 = temp_v7 | 2;
@@ -141,7 +141,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
         temp_v10 = *pcVar8;
       }
       libc_strcpy(temp_v3,&temp_v10);
-      FUN_002be624(piVar2 + 3,&LAB_002c5b98,temp_v2 + 0x80,temp_v1 + 4);
+      textFormatBuffer(piVar2 + 3,&LAB_002c5b98,temp_v2 + 0x80,temp_v1 + 4);
       *puVar10 = (unsigned int)piVar2;
     }
   }

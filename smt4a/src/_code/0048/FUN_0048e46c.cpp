@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, unsigned int);
 int FUN_002e1208(...);
 int FUN_00356470(void);
-int FUN_003c3048(...);
+int mapEntryGetOrigin(...);
 int dataTable2BType3Count(void);
 int dataTable2BType1Count(void);
 int MapNaviTable_GetAreaCount(void);
@@ -71,13 +71,13 @@ extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_00356470. */
 extern int conditionalTableFindIndex(unsigned int);
 extern unsigned int *dataTable23Sub0GetEntry(int);
-extern int FUN_003a3270(void);
+extern int dataTableCountWithAoc(void);
 extern unsigned short FUN_003ae4d0(unsigned int);
 extern int dataTable23Type0CountWithAoc(void);
 extern unsigned short FUN_003bf894(unsigned int);
-extern int FUN_003c3010(unsigned int);
-extern unsigned short FUN_003c302c(unsigned int);
-/* Supplied declaration required: FUN_003c3048. */
+extern int mapEntryGetKind(unsigned int);
+extern unsigned short mapEntryGetStatus(unsigned int);
+/* Supplied declaration required: mapEntryGetOrigin. */
 extern unsigned int FUN_003cd5f4(unsigned int);
 extern short FUN_0048b1bc(int, int);
 extern short *dataTable2BType3GetEntry(unsigned char *, int);
@@ -186,7 +186,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
   FUN_002e1208(0xb,0x1bde,&temp_v53,&temp_v54);
   FUN_002e1208(0xb,0x1be6,temp_v59,&temp_v44);
   psVar22 = (short *)0x0;
-  temp_v7 = FUN_003a3270();
+  temp_v7 = dataTableCountWithAoc();
   temp_v34 = 0x3f000000;
   if (0 < temp_v7) {
     do {
@@ -345,7 +345,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
         }
       }
       psVar22 = (short *)((int)psVar22 + 1);
-      temp_v7 = FUN_003a3270();
+      temp_v7 = dataTableCountWithAoc();
     } while ((int)psVar22 < temp_v7);
   }
   FUN_002e1208(0xb,0x1b66,&temp_v53,&temp_v54);
@@ -390,9 +390,9 @@ LAB_0048eaec:
     if (temp_v46 == 0) goto LAB_0048ed6c;
   }
   do {
-    FUN_003c3048(temp_v52[temp_v7]);
+    mapEntryGetOrigin(temp_v52[temp_v7]);
     in_d9 = CONCAT44(in_s2,in_s0);
-    temp_v9 = FUN_003c3010(temp_v52[temp_v7]);
+    temp_v9 = mapEntryGetKind(temp_v52[temp_v7]);
     temp_v9 = param_1 + temp_v9 * 8;
     temp_v17 = *(unsigned int *)(temp_v9 + 0x148c);
     temp_v19 = *(unsigned int *)(temp_v9 + 0x1490);
@@ -429,7 +429,7 @@ LAB_0048eaec:
     temp_v43 = (int)(short)(int)(temp_v24 - temp_v26);
     temp_v56 = (int)SUB42(in_s2,0);
     temp_v57 = (int)(short)(int)(temp_v20 - temp_v22);
-    temp_v5 = FUN_003c302c(temp_v17);
+    temp_v5 = mapEntryGetStatus(temp_v17);
     *(unsigned short *)(temp_v9 + 0x17bc) = temp_v5;
     *(unsigned short *)(temp_v9 + 0x17be) = 0;
     *(unsigned short *)(temp_v9 + 0x1794) = 0x1b66;

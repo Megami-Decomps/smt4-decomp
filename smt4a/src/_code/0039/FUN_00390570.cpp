@@ -25,7 +25,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: refCountIncrement. */
-extern int FUN_0037a7f4(unsigned int);
+extern int textureCreateFromImage(unsigned int);
 
 
 void FUN_00390570(fn_00390570_arg0 *param_1,unsigned int param_2)
@@ -37,7 +37,7 @@ void FUN_00390570(fn_00390570_arg0 *param_1,unsigned int param_2)
   float temp_v1;
   float temp_v2;
   
-  temp_v0 = FUN_0037a7f4(param_2);
+  temp_v0 = textureCreateFromImage(param_2);
   temp_v1 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   param_1->field_0x54 = temp_v1 * 0.5f * 0.0625f;

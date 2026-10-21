@@ -9,7 +9,7 @@ int FUN_001ad9b4(...);
 int FUN_00203b40(...);
 int FUN_002a48e0(...);
 int FUN_002a4964(...);
-int FUN_002c2728(...);
+int gameDataGetIndexedPair(...);
 int sysMemClear(...);
 int rt_memclr(...);
 int flaggedEntrySetValueA(...);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int FUN_0029093c(...); /* 0x29093c */
+extern int dataTable1bOr1cCompareRecordKeys(...); /* 0x29093c */
 extern int g_uiQuest; /* 0x57f28c */
 
 /* Supplied declaration required: qsort. */
@@ -33,12 +33,12 @@ extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002c2728. */
+/* Supplied declaration required: gameDataGetIndexedPair. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
 extern int FUN_003df004(unsigned int, int, int *);
 extern int partyEntryFlagsBit3(unsigned int);
@@ -136,7 +136,7 @@ void FUN_001ff724(void)
 LAB_001ff908:
       temp_v7 = (temp_v7 + 1) & 0xffff;
       if (temp_v7 >= 400) {
-        qsort(temp_v5 + 0xa10,temp_v9,2,FUN_0029093c);
+        qsort(temp_v5 + 0xa10,temp_v9,2,dataTable1bOr1cCompareRecordKeys);
         temp_v1 = temp_v5 + 0x948;
         temp_v10[0] = 1;
         temp_v10[1] = 1;
@@ -184,54 +184,54 @@ LAB_001ff9d0:
   if (*(char *)(temp_v5 + 0x93d) != '\0') {
     return;
   }
-  temp_v8 = FUN_002c2728(0);
+  temp_v8 = gameDataGetIndexedPair(0);
   temp_v8 = *(int *)(temp_v8 + 4);
-  piVar6 = (int *)FUN_002c2728(0);
+  piVar6 = (int *)gameDataGetIndexedPair(0);
   if (*(short *)(temp_v5 + (*piVar6 + temp_v8) * 2 + 0xa10) != 0) {
-    temp_v8 = FUN_002c2728(0);
+    temp_v8 = gameDataGetIndexedPair(0);
     temp_v6 = *(int *)(temp_v8 + 4);
-    temp_v8 = FUN_00348ed0(temp_v1);
+    temp_v8 = uiSearchPrimary(temp_v1);
     temp_v9 = FUN_002c2c68(temp_v1);
     if (temp_v9 < temp_v6 + temp_v8) {
-      temp_v8 = FUN_002c2728(0);
+      temp_v8 = gameDataGetIndexedPair(0);
       *(unsigned int *)(temp_v8 + 4) = 0;
-      puVar7 = (unsigned int *)FUN_002c2728(0);
+      puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
       *puVar7 = 0;
     }
   }
   else {
-    temp_v8 = FUN_002c2728(0);
+    temp_v8 = gameDataGetIndexedPair(0);
     *(unsigned int *)(temp_v8 + 4) = 0;
-    puVar7 = (unsigned int *)FUN_002c2728(0);
+    puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
     *puVar7 = 0;
   }
-  temp_v8 = FUN_002c2728(0);
+  temp_v8 = gameDataGetIndexedPair(0);
   FUN_002a48e0(temp_v1,*(unsigned int *)(temp_v8 + 4));
-  puVar7 = (unsigned int *)FUN_002c2728(0);
+  puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
   flaggedEntrySetValueA(temp_v1,*puVar7);
-  temp_v8 = FUN_002c2728(1);
+  temp_v8 = gameDataGetIndexedPair(1);
   temp_v8 = *(int *)(temp_v8 + 4);
-  piVar6 = (int *)FUN_002c2728(1);
+  piVar6 = (int *)gameDataGetIndexedPair(1);
   if (*(short *)(temp_v5 + (*piVar6 + temp_v8) * 2 + 0xad6) != 0) {
-    temp_v5 = FUN_002c2728(1);
+    temp_v5 = gameDataGetIndexedPair(1);
     temp_v9 = *(int *)(temp_v5 + 4);
-    temp_v5 = FUN_00348ed0(temp_v3);
+    temp_v5 = uiSearchPrimary(temp_v3);
     temp_v8 = FUN_002c2c68(temp_v3);
     if (temp_v9 + temp_v5 <= temp_v8) {
-      temp_v5 = FUN_002c2728(1);
+      temp_v5 = gameDataGetIndexedPair(1);
       FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));
-      puVar7 = (unsigned int *)FUN_002c2728(1);
+      puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
       flaggedEntrySetValueA(temp_v3,*puVar7);
       return;
     }
   }
-  temp_v5 = FUN_002c2728(1);
+  temp_v5 = gameDataGetIndexedPair(1);
   *(unsigned int *)(temp_v5 + 4) = 0;
-  puVar7 = (unsigned int *)FUN_002c2728(1);
+  puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
   *puVar7 = 0;
-  temp_v5 = FUN_002c2728(1);
+  temp_v5 = gameDataGetIndexedPair(1);
   FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));
-  puVar7 = (unsigned int *)FUN_002c2728(1);
+  puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
   flaggedEntrySetValueA(temp_v3,*puVar7);
   return;
 }

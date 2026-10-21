@@ -1,38 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00439ba8` (_code @ 0x439ba8, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail inlines thread-pointer MRC and SendSyncRequest SVC, forbidden by matching rules. */
+#include "shard/S1Ipc.h"
 extern "C" {
-
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern unsigned char LAB_00250000; /* 0x250000 */
-extern int DAT_005c0a80; /* 0x5c0a80 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_00439ba8(unsigned int *param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(temp_v2 + 0x80) = &LAB_00250000;
-  software_interrupt(0x32);
-  temp_v0 = DAT_005c0a80;
-  if (-1 < DAT_005c0a80) {
-    temp_v1 = *(unsigned int *)(temp_v2 + 0x8c);
-    *param_1 = *(unsigned int *)(temp_v2 + 0x88);
-    param_1[1] = temp_v1;
-    temp_v0 = *(int *)(temp_v2 + 0x84);
-  }
-  return temp_v0;
+extern u32 DAT_005c0a80;
+/* Queries the service's 64-bit value. */
+s32 FUN_00439ba8(u64 *output){IpcCommandBuffer *command=nn_getIpcCommandBuffer();command->header=0x250000;s32 result=nn_svc_SendSyncRequest(DAT_005c0a80);if(result>=0){*output=(u64)command->words[1]|((u64)command->words[2]<<32);result=command->words[0];}return result;}
 }
-
-} /* extern "C" */

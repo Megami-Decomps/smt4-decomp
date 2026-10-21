@@ -80,7 +80,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00336de4. */
 extern int partyPanelIsActive(void);
-extern int FUN_0034efb0(void);
+extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: btlTalkBustUpReleaseContent. */
@@ -292,7 +292,7 @@ unsigned int FUN_003193a8(int param_1)
     *(int *)(param_1 + 0x3bc) = temp_v6;
     break;
   case 6:
-    temp_v3 = FUN_0034efb0();
+    temp_v3 = battleTalkIsBustReady();
     if (temp_v3 == 0) {
       return 0;
     }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00164168(...);
 int FUN_00289418(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
@@ -49,7 +49,7 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164168. */
@@ -453,7 +453,7 @@ LAB_0026b644:
     if (*(short *)(temp_v24 + 0x4a) < 1) {
       FUN_00164b5c(2,0x12,0x1b,temp_v0,temp_v1,0xdd);
       temp_v11 = FUN_001834a4(0x12,0x544);
-      FUN_00100388(&temp_v17,&DAT_00536b70);
+      textFormatBuffer(&temp_v17,&DAT_00536b70);
       ppuVar10 = &temp_v17;
       FUN_0018408c(ppuVar10,2);
       VectorSignedToFloat(temp_v0 + (int)*(short *)(temp_v11 + 8) +

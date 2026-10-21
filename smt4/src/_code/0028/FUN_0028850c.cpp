@@ -5,7 +5,7 @@
 extern "C" {
 
 int libc_sprintf(...);
-int FUN_002be624(unsigned int, unsigned char *, unsigned char *);
+int textFormatBuffer(unsigned int, unsigned char *, unsigned char *);
 int rt_memcpy_w(unsigned char *[4], unsigned char *, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned int FUN_0028e934(unsigned int, unsigned int);
 extern unsigned int FUN_002bce00(unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: libc_sprintf. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -78,7 +78,7 @@ void FUN_0028850c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
       rt_memcpy_w(temp_v1,&DAT_0040333c,0x54);
       puVar2 = temp_v1[param_3];
     }
-    FUN_002be624(param_4,&LAB_0028862c,puVar2);
+    textFormatBuffer(param_4,&LAB_0028862c,puVar2);
     return;
   }
   temp_v0 = FUN_002bce00(param_3);

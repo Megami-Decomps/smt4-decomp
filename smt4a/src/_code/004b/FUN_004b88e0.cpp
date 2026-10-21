@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [132], unsigned char *, int, int);
+int textFormatBuffer(unsigned char [132], unsigned char *, int, int);
 int FUN_001695a0(void);
 int asdMemFree(...);
 int scrScriptProcessDestroy(int);
@@ -30,7 +30,7 @@ extern unsigned short DAT_005f1794; /* 0x5f1794 */
 extern short DAT_005f1796; /* 0x5f1796 */
 extern unsigned char DAT_005f1798; /* 0x5f1798 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -70,10 +70,10 @@ void FUN_004b88e0(fn_004b88e0_arg0 *param_1)
   }
   DAT_005f1794 = 0;
   FUN_001695a0();
-  FUN_00100388(temp_v2,&LAB_004b89f8,(int)DAT_005f1796,(int)DAT_005f1796);
+  textFormatBuffer(temp_v2,&LAB_004b89f8,(int)DAT_005f1796,(int)DAT_005f1796);
   FUN_0020214c();
   param_1->field_0x1170 = (undefined4)puVar2;
-  FUN_00100388(temp_v2,&LAB_004b8a10,(int)DAT_005f1796,(int)DAT_005f1796);
+  textFormatBuffer(temp_v2,&LAB_004b8a10,(int)DAT_005f1796,(int)DAT_005f1796);
   FUN_0020214c();
   param_1->field_0x1174 = puVar3;
   temp_v0 = param_1->field_0x1170;

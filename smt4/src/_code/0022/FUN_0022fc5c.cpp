@@ -20,7 +20,7 @@ int FUN_00296ae8(...);
 int FUN_0029ede8(...);
 int FUN_002ae164(void);
 int dataTable08Sub1GetRecord(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -70,7 +70,7 @@ extern unsigned int FUN_002ae3c4(unsigned int);
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int recordPackedValue(unsigned int);
 extern unsigned int FUN_002bce00(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 extern unsigned int dataTableValue0f(void);
 
@@ -331,10 +331,10 @@ void FUN_0022fc5c(int param_1)
         FUN_0024bc98(&uStack_128,(*(unsigned int *)(temp_v13 + 0x28) & 0x1ff) >> 5);
       }
       else if ((*(unsigned char *)(temp_v11 + 0x6a) & 0x80) != 0) {
-        FUN_002be624(&uStack_128,&LAB_00292624);
+        textFormatBuffer(&uStack_128,&LAB_00292624);
       }
       else {
-        FUN_002be624(&uStack_128,&LAB_0029263c);
+        textFormatBuffer(&uStack_128,&LAB_0029263c);
       }
       FUN_00295660(0x24,&uStack_128);
       temp_v7 = recordPackedValue(temp_v12);
@@ -357,7 +357,7 @@ void FUN_0022fc5c(int param_1)
     else {
       FUN_002907c4(temp_v14,temp_v0 & 0xf);
       FUN_002907c4(temp_v15,*(unsigned char *)(temp_v12 + 0x58) >> 4);
-      FUN_002be624(&uStack_128,&LAB_0029264c,temp_v14,temp_v15);
+      textFormatBuffer(&uStack_128,&LAB_0029264c,temp_v14,temp_v15);
       FUN_00295660(0x25,&uStack_128);
     }
     FUN_0024bda8(&uStack_128,*(unsigned int *)(temp_v12 + 0x54) >> 0x14);
@@ -365,25 +365,25 @@ void FUN_0022fc5c(int param_1)
     FUN_0024bc98(&uStack_128,*(unsigned char *)(temp_v12 + 0x59));
     FUN_00295660(0x27,&uStack_128);
     if (*(char *)(temp_v12 + 0x5b) == '\0') {
-      FUN_002be624(&uStack_128,&LAB_00292654);
+      textFormatBuffer(&uStack_128,&LAB_00292654);
     }
     if (*(char *)(temp_v12 + 0x5b) == '\x01') {
-      FUN_002be624(&uStack_128,&LAB_00292660);
+      textFormatBuffer(&uStack_128,&LAB_00292660);
     }
     if (*(char *)(temp_v12 + 0x5b) == '\x05') {
-      FUN_002be624(&uStack_128,&LAB_00292668);
+      textFormatBuffer(&uStack_128,&LAB_00292668);
     }
     if (*(char *)(temp_v12 + 0x5b) == '\x06') {
-      FUN_002be624(&uStack_128,&LAB_00292678);
+      textFormatBuffer(&uStack_128,&LAB_00292678);
     }
     if (*(char *)(temp_v12 + 0x5b) == '\a') {
-      FUN_002be624(&uStack_128,&LAB_00292684);
+      textFormatBuffer(&uStack_128,&LAB_00292684);
     }
     if (*(char *)(temp_v12 + 0x5b) == '\b') {
-      FUN_002be624(&uStack_128,&LAB_00292690);
+      textFormatBuffer(&uStack_128,&LAB_00292690);
     }
     if (*(char *)(temp_v12 + 0x5b) == '\t') {
-      FUN_002be624(&uStack_128,&LAB_0029269c);
+      textFormatBuffer(&uStack_128,&LAB_0029269c);
     }
     temp_v7 = 0x28;
     break;
@@ -402,14 +402,14 @@ void FUN_0022fc5c(int param_1)
       FUN_002907c4(&uStack_38,temp_v5);
       if (temp_v6 != 0) {
         if (temp_v6 >= 1) {
-          FUN_002be624(&uStack_128,&LAB_002926a8);
+          textFormatBuffer(&uStack_128,&LAB_002926a8);
         }
         else {
-          FUN_002be624(&uStack_128,&LAB_002926b8);
+          textFormatBuffer(&uStack_128,&LAB_002926b8);
         }
       }
       else {
-        FUN_002be624(&uStack_128,&LAB_002926b0);
+        textFormatBuffer(&uStack_128,&LAB_002926b0);
       }
       FUN_00295660(temp_v4 + 0x24,&uStack_128);
       temp_v4 = temp_v4 + 1;
@@ -461,7 +461,7 @@ void FUN_0022fc5c(int param_1)
       if ('\0' < acStack_64[temp_v5]) {
         if (0 < temp_v6) {
           temp_v10 = (int)&uStack_128 + temp_v4;
-          FUN_002be624(temp_v10,&LAB_002926c0);
+          textFormatBuffer(temp_v10,&LAB_002926c0);
           temp_v4 = temp_v4 + temp_v10;
         }
         temp_v10 = 0;
@@ -472,7 +472,7 @@ void FUN_0022fc5c(int param_1)
             temp_v4 = temp_v4 + temp_v8;
             if ((temp_v10 < 0x11) && ('\0' < acStack_c8[temp_v10 + temp_v3 + 0xc9])) {
               temp_v8 = (int)&uStack_128 + temp_v4;
-              FUN_002be624(temp_v8,&LAB_002926c4);
+              textFormatBuffer(temp_v8,&LAB_002926c4);
               temp_v4 = temp_v4 + temp_v8;
             }
             temp_v10 = temp_v10 + 1;
@@ -484,31 +484,31 @@ void FUN_0022fc5c(int param_1)
               if (temp_v5 != 3) {
                 if (temp_v5 == 4) {
                   temp_v10 = (int)&uStack_128 + temp_v4;
-                  FUN_002be624(temp_v10,&LAB_00292838);
+                  textFormatBuffer(temp_v10,&LAB_00292838);
                   temp_v4 = temp_v4 + temp_v10;
                 }
               }
               else {
                 temp_v10 = (int)&uStack_128 + temp_v4;
-                FUN_002be624(temp_v10,&LAB_00292828);
+                textFormatBuffer(temp_v10,&LAB_00292828);
                 temp_v4 = temp_v4 + temp_v10;
               }
             }
             else {
               temp_v10 = (int)&uStack_128 + temp_v4;
-              FUN_002be624(temp_v10,&LAB_0029281c);
+              textFormatBuffer(temp_v10,&LAB_0029281c);
               temp_v4 = temp_v4 + temp_v10;
             }
           }
           else {
             temp_v10 = (int)&uStack_128 + temp_v4;
-            FUN_002be624(temp_v10,&LAB_0029280c);
+            textFormatBuffer(temp_v10,&LAB_0029280c);
             temp_v4 = temp_v4 + temp_v10;
           }
         }
         else {
           temp_v10 = (int)&uStack_128 + temp_v4;
-          FUN_002be624(temp_v10,&LAB_002927fc);
+          textFormatBuffer(temp_v10,&LAB_002927fc);
           temp_v4 = temp_v4 + temp_v10;
         }
         temp_v6 = temp_v6 + 1;
@@ -518,10 +518,10 @@ void FUN_0022fc5c(int param_1)
     FUN_00295660(0x29,&uStack_128);
     if (*(short *)(temp_v12 + 0x6a) != 0) {
       temp_v7 = FUN_002bce00();
-      FUN_002be624(&uStack_128,&LAB_00292650,temp_v7);
+      textFormatBuffer(&uStack_128,&LAB_00292650,temp_v7);
     }
     else {
-      FUN_002be624(&uStack_128,&LAB_00292654);
+      textFormatBuffer(&uStack_128,&LAB_00292654);
     }
     temp_v7 = 0x2a;
   }

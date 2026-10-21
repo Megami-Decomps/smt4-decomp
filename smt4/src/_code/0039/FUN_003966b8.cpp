@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0023296c(...);
-int FUN_00232980(...);
-int FUN_00232994(...);
+int recordSetPosition(...);
+int recordSetDirection(...);
+int recordSetOrigin(...);
 int FUN_002329a8(...);
 int FUN_00267144(void);
 int FUN_00273f5c(void);
@@ -43,13 +43,13 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0023296c. */
-/* Supplied declaration required: FUN_00232980. */
-/* Supplied declaration required: FUN_00232994. */
+/* Supplied declaration required: recordSetPosition. */
+/* Supplied declaration required: recordSetDirection. */
+/* Supplied declaration required: recordSetOrigin. */
 /* Supplied declaration required: FUN_002329a8. */
 extern int FUN_00232a6c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00267144. */
-extern int FUN_002671bc(void);
+extern int dataTableGetRecordFifty(void);
 /* Supplied declaration required: FUN_00273f5c. */
 extern int FUN_0027d968(void);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -84,7 +84,7 @@ void FUN_003966b8(int param_1)
   unsigned int temp_v15;
   unsigned int temp_v16;
   
-  temp_v0 = FUN_002671bc();
+  temp_v0 = dataTableGetRecordFifty();
   temp_v2 = 0;
   temp_v10 = gameGetMapBlock();
   pcVar4 = (char *)0x0;
@@ -129,9 +129,9 @@ void FUN_003966b8(int param_1)
               }
               FUN_00396034(temp_v1);
               FUN_002329a8(temp_v1,*(unsigned int *)(param_1 + 0x9c));
-              FUN_00232994(temp_v1,&temp_v7);
-              FUN_00232980(temp_v1,&temp_v11);
-              FUN_0023296c(temp_v1,&temp_v14);
+              recordSetOrigin(temp_v1,&temp_v7);
+              recordSetDirection(temp_v1,&temp_v11);
+              recordSetPosition(temp_v1,&temp_v14);
               *(int *)(temp_v1 + 0x1c) = (int)*(short *)(pcVar2 + 0x10);
               *(unsigned int *)(temp_v1 + 0x60) = 0;
               FUN_0039607c(temp_v1,temp_v2 + 0x310,(int)*(short *)(pcVar2 + 0x18),
@@ -165,9 +165,9 @@ void FUN_003966b8(int param_1)
           }
           FUN_00396034(temp_v1);
           FUN_002329a8(temp_v1,*(unsigned int *)(param_1 + 0x9c));
-          FUN_00232994(temp_v1,&temp_v7);
-          FUN_00232980(temp_v1,&temp_v11);
-          FUN_0023296c(temp_v1,&temp_v14);
+          recordSetOrigin(temp_v1,&temp_v7);
+          recordSetDirection(temp_v1,&temp_v11);
+          recordSetPosition(temp_v1,&temp_v14);
           *(int *)(temp_v1 + 0x1c) = (int)*(short *)(pcVar2 + 0x10);
           *(unsigned int *)(temp_v1 + 0x60) = 0;
           FUN_0039607c(temp_v1,0,(int)*(short *)(pcVar2 + 0x18),(int)*(short *)(pcVar2 + 0x1a),

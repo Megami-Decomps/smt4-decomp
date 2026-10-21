@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0020d8ec(void);
+int mapInterfaceForwardResource(void);
 int FUN_002aa18c(...);
 
 extern int g_mapEnemy; /* 0x447600 */
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_0020d8ec. */
+/* Supplied declaration required: mapInterfaceForwardResource. */
 /* Supplied declaration required: FUN_002aa18c. */
 
 
@@ -59,7 +59,7 @@ void FUN_001f9ce0(void)
           temp_v2 = (unsigned int)*(unsigned char *)(temp_v7 + 0x178);
         }
         if ((temp_v8 && temp_v0 != '\0') && temp_v2 != 0) {
-          FUN_0020d8ec();
+          mapInterfaceForwardResource();
           temp_v3 = *(int *)(temp_v7 + 0x17c);
           if (*(char *)(temp_v7 + 0xb2) == '\0') {
             temp_v9 = *(float *)(temp_v7 + 0xb4);

@@ -1,26 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003550f4` (_code @ 0x3550f4, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail array destruction or constructor lifetime code generation differs. */
+#include "common.h"
 
 extern "C" {
-
-int FUN_00354f50(unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_00354f50. */
-
-
-void FUN_003550f4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+void FUN_00354f50(u32 id, u32 mode, u32 reserved, u32 first, u32 second, u32 third, u32 fourth);
+/* Forwards parameters with the reserved argument cleared. */
+void FUN_003550f4(u32 id, u32 mode, u32 first, u32 second, u32 third, u32 fourth)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00354f50(param_1,param_2,0,param_3,param_4,param_5,param_6);
-  return;
+    FUN_00354f50(id, mode, 0, first, second, third, fourth);
 }
-
-} /* extern "C" */
+}

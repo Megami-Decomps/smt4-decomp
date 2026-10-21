@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
@@ -39,7 +39,7 @@ extern unsigned char LAB_003dba2c; /* 0x3dba2c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(int);
@@ -59,9 +59,9 @@ extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern unsigned int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_00344cd0. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 extern int FUN_003e4230(unsigned int);
-extern unsigned int FUN_003e45a8(unsigned int);
+extern unsigned int dataRecordGetValue(unsigned int);
 extern int gameDataFlagTestBit(unsigned int);
 extern int FUN_003e4718(unsigned int);
 
@@ -98,10 +98,10 @@ void FUN_003db56c(int param_1)
   FUN_001835b4(2,0x14,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = FUN_001834a4(0x14,0x583);
   temp_v3 = FUN_002e5c2c();
-  FUN_00100388(temp_v12,&LAB_003db9f8,temp_v3);
+  textFormatBuffer(temp_v12,&LAB_003db9f8,temp_v3);
   FUN_00180310(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v12);
   temp_v5 = 0;
-  temp_v2 = FUN_00348ed0(param_1 + 0x10);
+  temp_v2 = uiSearchPrimary(param_1 + 0x10);
   if (0 < temp_v2) {
     do {
       if ((*(int *)(param_1 + 8) != 2 && *(int *)(param_1 + 8) != 3) ||
@@ -132,21 +132,21 @@ void FUN_003db56c(int param_1)
               if (temp_v4 == 2) {
                 temp_v6 = 0x9b9b9bff;
                 temp_v11 = 0x787878ff;
-                FUN_00100388(temp_v12,&LAB_003dba2c);
+                textFormatBuffer(temp_v12,&LAB_003dba2c);
               }
             }
             else {
               temp_v6 = 0x9b9b9bff;
               temp_v11 = 0xdc0f14ff;
-              temp_v3 = FUN_003e45a8(temp_v7);
-              FUN_00100388(temp_v12,&LAB_003dba1c,temp_v3);
+              temp_v3 = dataRecordGetValue(temp_v7);
+              textFormatBuffer(temp_v12,&LAB_003dba1c,temp_v3);
             }
           }
           else {
             temp_v6 = 0xffffffff;
             temp_v11 = 0xffffffff;
-            temp_v3 = FUN_003e45a8(temp_v7);
-            FUN_00100388(temp_v12,&LAB_003dba1c,temp_v3);
+            temp_v3 = dataRecordGetValue(temp_v7);
+            textFormatBuffer(temp_v12,&LAB_003dba1c,temp_v3);
           }
           temp_v4 = FUN_001834a4(0x14,0x594);
           drawSetColorFromRGBA8(temp_v11);
@@ -170,7 +170,7 @@ void FUN_003db56c(int param_1)
         }
       }
       temp_v5 = temp_v5 + 1;
-      temp_v2 = FUN_00348ed0(param_1 + 0x10);
+      temp_v2 = uiSearchPrimary(param_1 + 0x10);
     } while (temp_v5 < temp_v2);
   }
   if (*(int *)(param_1 + 8) == 2 || *(int *)(param_1 + 8) == 3) {
@@ -223,14 +223,14 @@ void FUN_003db56c(int param_1)
           if (temp_v5 == 2) {
             temp_v6 = 0x787878ff;
             temp_v11 = 0x787878ff;
-            FUN_00100388(temp_v12,&LAB_003dba2c);
+            textFormatBuffer(temp_v12,&LAB_003dba2c);
           }
         }
         else {
           temp_v6 = 0x787878ff;
           temp_v11 = 0xdc0f14ff;
-          temp_v3 = FUN_003e45a8(temp_v7);
-          FUN_00100388(temp_v12,&LAB_003dba1c,temp_v3);
+          temp_v3 = dataRecordGetValue(temp_v7);
+          textFormatBuffer(temp_v12,&LAB_003dba1c,temp_v3);
         }
       }
       else {
@@ -241,8 +241,8 @@ void FUN_003db56c(int param_1)
         if ((!temp_v8 && !temp_v9) && !temp_v10) {
           temp_v6 = 0x9fe7ffff;
         }
-        temp_v3 = FUN_003e45a8(temp_v7);
-        FUN_00100388(temp_v12,&LAB_003dba1c,temp_v3);
+        temp_v3 = dataRecordGetValue(temp_v7);
+        textFormatBuffer(temp_v12,&LAB_003dba1c,temp_v3);
       }
       temp_v5 = FUN_001834a4(0x14,0x59d);
       drawSetColorFromRGBA8(temp_v11);

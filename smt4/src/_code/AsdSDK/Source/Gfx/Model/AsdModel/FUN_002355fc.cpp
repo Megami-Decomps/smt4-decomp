@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00235744(void);
+int thresholdDispatchOutsideRange(void);
 
 typedef struct fn_002355fc_arg0 fn_002355fc_arg0;
 struct fn_002355fc_arg0 {
@@ -26,7 +26,7 @@ typedef struct {
 
 extern char s______________________00471bc0[89]; /* 0x471bc0 */
 
-/* Supplied declaration required: FUN_00235744. */
+/* Supplied declaration required: thresholdDispatchOutsideRange. */
 
 
 void FUN_002355fc(fn_002355fc_arg0 *param_1)
@@ -42,7 +42,7 @@ void FUN_002355fc(fn_002355fc_arg0 *param_1)
   fn_002355fc_arg0 *pfVar7;
   float in_s0;
   
-  FUN_00235744();
+  thresholdDispatchOutsideRange();
   temp_v0 = param_1->field_0xc;
   pfVar7 = (fn_002355fc_arg0 *)0x0;
   if ((temp_v0 & 1) != 0) {

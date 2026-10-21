@@ -15,7 +15,7 @@ typedef struct {
 extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: gameFlagSetValue. */
-extern int FUN_002ba764(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern int gameDataGetTableEntry(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 extern int gameFlagIsSet(void);
 extern int gameGetMapBlock(void);
 
@@ -96,7 +96,7 @@ LAB_0021bd50:
     temp_v2 = 0;
   }
   gameFlagSetValue(temp_v3,temp_v2);
-  temp_v0 = FUN_002ba764(param_1,param_2,1,param_4,unaff_r4,in_lr);
+  temp_v0 = gameDataGetTableEntry(param_1,param_2,1,param_4,unaff_r4,in_lr);
   *(unsigned char *)(temp_v0 + 3) = (*(unsigned char *)(temp_v0 + 3) & 0xbf) | 0x40;
   return;
 }

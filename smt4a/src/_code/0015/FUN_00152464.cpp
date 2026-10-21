@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char DAT_0063e4a0; /* 0x63e4a0 */
-extern unsigned char DAT_0063f1e8; /* 0x63f1e8 */
+extern unsigned char g_asdSoundHandleState; /* 0x63f1e8 */
 extern int DAT_0063f50c; /* 0x63f50c */
 
 /* Supplied declaration required: FUN_001753d4. */
@@ -28,7 +28,7 @@ void FUN_00152464(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char *puVar2;
   
   temp_v0 = DAT_0063f50c;
-  puVar2 = &DAT_0063f1e8;
+  puVar2 = &g_asdSoundHandleState;
   if (DAT_0063f50c != 0) {
     puVar2 = (unsigned char *)(unsigned int)*(unsigned char *)(DAT_0063f50c + 0x3b);
   }

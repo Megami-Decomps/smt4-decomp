@@ -21,7 +21,7 @@ extern unsigned char DAT_00421740; /* 0x421740 */
 extern unsigned int DAT_004dae2c; /* 0x4dae2c */
 
 /* Supplied declaration required: FUN_0011cfb4. */
-extern int FUN_0011da9c(int *);
+extern int resourceCreateOwnedObject(int *);
 /* Supplied declaration required: FUN_0011f9d0. */
 extern unsigned int FUN_002c2218(void);
 
@@ -164,7 +164,7 @@ unsigned int * FUN_00111724(int *param_1)
     puVar2[8] = temp_v4;
     puVar2[9] = temp_v4;
   }
-  temp_v4 = FUN_0011da9c(param_1);
+  temp_v4 = resourceCreateOwnedObject(param_1);
   puVar1[6] = temp_v4;
   *(unsigned int *)(temp_v4 + 8) = puVar1[1];
   temp_v4 = (**(romwright_code **)(*param_1 + 8))(param_1,0x60,4);

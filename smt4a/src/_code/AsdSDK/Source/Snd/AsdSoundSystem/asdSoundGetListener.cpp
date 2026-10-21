@@ -5,6 +5,7 @@ extern u32 DAT_005c4c20;          /* guard for the listener's one-time construct
 extern AsdSndListener g_asdSoundListener;
 
 s32 __cxa_guard_acquire(u32 *guard);
+__weak void __cxa_guard_release(u32 *guard);
 
 /* The listener position, zeroed the first time it is asked for. */
 AsdSndListener *asdSoundGetListener(void)
@@ -13,6 +14,7 @@ AsdSndListener *asdSoundGetListener(void)
         g_asdSoundListener.x = 0.0f;
         g_asdSoundListener.y = 0.0f;
         g_asdSoundListener.z = 0.0f;
+        __cxa_guard_release(&DAT_005c4c20);
     }
     return &g_asdSoundListener;
 }

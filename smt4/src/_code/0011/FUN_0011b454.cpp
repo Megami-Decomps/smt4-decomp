@@ -1,20 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011b454` (_code @ 0x11b454, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct NamedDataRecord {
+    /* 0x00 */ u8 unk00[0xB8];
+    /* 0xB8 */ u8 payload[1];
+};
 
 extern "C" {
 
-int dataTable1bOr1cGetRecord(void);
+extern NamedDataRecord *dataTable1bOr1cGetRecord(u32 index);
 
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_0011b454(void)
-
+/* Finds the named-data payload of a table record. */
+void *FUN_0011b454(u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  dataTable1bOr1cGetRecord();
-  return;
+    NamedDataRecord *record = dataTable1bOr1cGetRecord(index);
+    return record != NULL ? record->payload : NULL;
 }
 
 } /* extern "C" */

@@ -11,7 +11,7 @@ int FUN_0018291c(...);
 int FUN_001879d0(...);
 int FUN_0019ac70(int *, unsigned int);
 int FUN_0019b770(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int renderCtxCallB(void);
@@ -78,7 +78,7 @@ extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019b770. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: renderCtxCallB. */
@@ -159,7 +159,7 @@ int FUN_0047ce24(unsigned int param_1,int param_2,unsigned int *param_3)
   temp_v28 = param_1;
   iStack_2c = param_2;
   puStack_28 = param_3;
-  FUN_0019d880();
+  jobGetScalarValue();
   FUN_002f5020(temp_v19 + 0x10,&LAB_00192824,0x10,4);
   FUN_002f5020(temp_v19,&LAB_00192824,0x10,4);
   temp_v18 = 0;

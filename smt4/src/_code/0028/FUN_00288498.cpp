@@ -1,35 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00288498` (_code @ 0x288498, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: status-byte access splits its 0x2392 offset differently from retail (0x2000 + 0x392 versus 0x2300 + 0x92). */
+#include "common.h"
 
 extern "C" {
 
-extern int g_statusDown; /* 0x44e190 */
+struct StatusDown { u8 unk00[0x2392]; u8 enabled; };
+extern StatusDown *g_statusDown;
 
 extern int FUN_002881a0(void);
 extern int FUN_0029ac94(void);
 
-
-unsigned int FUN_00288498(void)
-
+u32 FUN_00288498(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (*(char *)(g_statusDown + 0x2392) != '\0') {
-    temp_v0 = FUN_002881a0();
-    if ((((temp_v0 == 5) || (temp_v0 = FUN_002881a0(), temp_v0 == 6)) ||
-        (temp_v0 = FUN_002881a0(), temp_v0 == 10)) ||
-       (((temp_v0 = FUN_0029ac94(), temp_v0 == 7 || (temp_v0 = FUN_0029ac94(), temp_v0 == 8)) ||
-        (temp_v0 = FUN_0029ac94(), temp_v0 == 3)))) {
-      temp_v1 = 0;
+    if (g_statusDown->enabled == 0) return 0;
+
+    int value = FUN_002881a0();
+    u32 result;
+
+    if ((((value == 5) || (value = FUN_002881a0(), value == 6)) ||
+         (value = FUN_002881a0(), value == 10)) ||
+        (((value = FUN_0029ac94(), value == 7 || (value = FUN_0029ac94(), value == 8)) ||
+          (value = FUN_0029ac94(), value == 3)))) {
+        result = 0;
+    } else {
+        result = 1;
     }
-    else {
-      temp_v1 = 1;
-    }
-    return temp_v1;
-  }
-  return 0;
+    return result;
 }
 
 } /* extern "C" */

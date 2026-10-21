@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023fb84(...);
 int FUN_0027da30(...);
 int aocHandleButtons(...);
-int FUN_00338318(...);
+int entryAddUniqueIdentifier(...);
 int FUN_00339210(...);
 int FUN_003af1dc(...);
 int FUN_003c0ae0(...);
@@ -35,8 +35,8 @@ extern int FUN_0027dab0(int, fn_003c174c_arg1 *);
 extern unsigned int FUN_00294090(unsigned int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
 extern int FUN_0029505c(unsigned int);
-/* Supplied declaration required: FUN_00338318. */
-extern int FUN_003391d0(int, unsigned int);
+/* Supplied declaration required: entryAddUniqueIdentifier. */
+extern int entryContainsIdentifier(int, unsigned int);
 /* Supplied declaration required: FUN_00339210. */
 /* Supplied declaration required: FUN_003af1dc. */
 /* Supplied declaration required: FUN_003c0ae0. */
@@ -76,7 +76,7 @@ void FUN_003c174c(int param_1,fn_003c174c_arg1 *param_2)
       temp_v3 = param_1;
       FUN_0027da30(param_1,(int)param_2->field_0x62);
       temp_v3 = temp_v3 + temp_v0 * 4;
-      temp_v0 = FUN_003391d0(param_1,*(unsigned int *)(temp_v3 + 0xc));
+      temp_v0 = entryContainsIdentifier(param_1,*(unsigned int *)(temp_v3 + 0xc));
       if (temp_v0 != 0) {
         param_2->field_0x54 = param_2->field_0x54 | 0x300;
       }
@@ -84,7 +84,7 @@ void FUN_003c174c(int param_1,fn_003c174c_arg1 *param_2)
         param_2->field_0x54 = param_2->field_0x54 & 0xfffffcff;
         temp_v1 = FUN_00294090(*(unsigned int *)(temp_v3 + 0xc),1);
         FUN_00339210(param_1,temp_v1);
-        FUN_00338318(param_1,(int)(short)*(unsigned int *)(temp_v3 + 0xc));
+        entryAddUniqueIdentifier(param_1,(int)(short)*(unsigned int *)(temp_v3 + 0xc));
       }
       param_2->field_0x54 = param_2->field_0x54 & 0xffffffef;
     }

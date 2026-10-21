@@ -1,31 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303928` (_code @ 0x303928, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldr r1, [pc, #36]'; compiler emits 'mov r6, r2' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_002ff858(unsigned int *, int);
-int FUN_002ff8a8(void);
-
-extern unsigned char DAT_005596b4; /* 0x5596b4 */
-extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
-
-/* Supplied declaration required: FUN_002ff858. */
-/* Supplied declaration required: FUN_002ff8a8. */
-
-
-unsigned int * FUN_00303928(unsigned int *param_1,unsigned char param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0055a4c0;
-  *(unsigned char *)(param_1 + 1) = 0;
-  param_1 = param_1 + 2;
-  FUN_002ff858(param_1,0);
-  param_1[-2] = (unsigned int)&DAT_005596b4;
-  *(unsigned char *)((int)param_1 - 3) = param_2;
-  FUN_002ff8a8();
-  return param_1 + -2;
+extern const u8 DAT_0055a4c0, DAT_005596b4;
+struct Object { const void *vtable; u8 active, kind; u8 unk06[2]; u8 child[0x10]; };
+void *FUN_002ff858(void *object, u32 option);
+void FUN_002ff8a8(void *object, u32 option);
+Object *FUN_00303928(Object *object, u8 kind, u32 option) {
+    object->vtable = &DAT_0055a4c0;
+    object->active = 0;
+    void *child = FUN_002ff858(object->child, 0);
+    object = (Object *)((u8 *)child - 8);
+    object->vtable = &DAT_005596b4;
+    object->kind = kind;
+    FUN_002ff8a8(child, option);
+    return object;
 }
-
-} /* extern "C" */
+}

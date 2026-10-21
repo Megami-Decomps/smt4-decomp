@@ -1,27 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de978` (_code @ 0x3de978, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct ReflectEntry { u32 unk00; u8 slot; u8 unk05[0x23]; u32 active; };
 extern "C" {
-
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-unsigned int FUN_003de978(short param_1,unsigned int param_2,unsigned int param_3)
-
+extern ReflectEntry *g_btlActionReflect;
+ReflectEntry *FUN_0022699c(ReflectEntry *state, s16 slot, u32 mode, u32 extra);
+/* Sets the reflection entry's active value and mode. */
+s32 FUN_003de978(s32 slot, u32 extra, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x1a;
-  *(unsigned int *)(temp_v0 + 0x28) = param_3;
-  return 1;
+    ReflectEntry *entry = FUN_0022699c(g_btlActionReflect, (s16)slot, 0, extra);
+    entry->slot = 26;
+    entry->active = value;
+    return 1;
 }
-
-} /* extern "C" */
+}

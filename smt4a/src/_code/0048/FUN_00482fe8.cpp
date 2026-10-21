@@ -58,7 +58,7 @@ static float romwright_sqrt_4(float value)
 extern int gameFlagIsSet(void);
 extern int gameFlagIsSetByBlockAt156c(int);
 /* Supplied declaration required: FUN_00379958. */
-extern int FUN_003b99d4(void);
+extern int dataTableGetRecordFifty(void);
 extern int FUN_003ded68(unsigned short);
 /* Supplied declaration required: FUN_00482414. */
 /* Supplied declaration required: FUN_00482428. */
@@ -95,7 +95,7 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
   unsigned int temp_v14;
   unsigned int temp_v15;
   
-  temp_v0 = FUN_003b99d4();
+  temp_v0 = dataTableGetRecordFifty();
   gameFlagsGetBlock();
   pcVar5 = (char *)0x0;
   if (0 < temp_v0) {

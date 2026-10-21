@@ -9,10 +9,10 @@ int FUN_002941b0(void);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
 int FUN_00312ea0(int);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00384830(void);
 int FUN_003d4ed8(unsigned int);
-int FUN_003fd76c(int, int);
+int controllerSetDestination(int, int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
 int FUN_004ff920(int);
@@ -48,10 +48,10 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_00312ea0. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_003d4ed8. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_004ff920. */
@@ -249,14 +249,14 @@ void FUN_00234b30(void)
           }
           else {
             temp_v14 = (float)DAT_005806a4[0x14];
-            FUN_00352bc4();
+            mathPositionHeadingDegrees();
             temp_v10 = 0;
             do {
               temp_v11 = DAT_00581280 + temp_v10 * 0x3c;
               temp_v21 = temp_v14;
               if (*(char *)(temp_v11 + 0xc) != '\0') {
                 temp_v17 = (float)temp_v18;
-                FUN_00352bc4();
+                mathPositionHeadingDegrees();
                 if (DAT_005806a4[0x2c] == -1) {
                   temp_v17 = (float)((unsigned long long)temp_v18 >> 0x20);
                 }
@@ -279,7 +279,7 @@ void FUN_00234b30(void)
               temp_v14 = temp_v21;
             } while (temp_v10 < 0x40);
           }
-          FUN_003fd76c(temp_v5,temp_v4 + 0x1c);
+          controllerSetDestination(temp_v5,temp_v4 + 0x1c);
           temp_v10 = (int)temp_v16;
           FUN_003fdb18(temp_v5);
           if (((*(char *)(DAT_00581280 + 0xf40) != '\0') && (*(char *)(temp_v4 + 0xe) != '\0')) &&

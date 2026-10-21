@@ -1,25 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `loadSlotIsLoaded` (_code @ 0x3f86c8, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+struct LoadSlot { u32 unk00; void *data; u32 unk08[2]; };
+extern LoadSlot g_dataTableSlots[80];
 
-unsigned int loadSlotIsLoaded(unsigned int param_1)
-
+s32 loadSlotIsLoaded(u32 index)
 {
-  unsigned int temp_v0;
-  
-  if (param_1 >= 0x50) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 0;
-    if (*(int *)(param_1 * 0x10 + 0x5e2218) != 0) {
-      temp_v0 = 1;
+    if (index >= 80) {
+        return 0;
     }
-  }
-  return temp_v0;
+    return g_dataTableSlots[index].data != NULL;
 }
 
 } /* extern "C" */

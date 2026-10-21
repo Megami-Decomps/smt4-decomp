@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int FUN_00183764(...);
@@ -31,7 +31,7 @@ typedef int romwright_code(...);
 extern int nw_anim_PlayPolicy_Loop(...); /* 0x1c37f8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 extern int FUN_00162ea4(void);
@@ -108,7 +108,7 @@ unsigned int FUN_002caea0(void)
       *(unsigned char *)(temp_v1 + 0x58) = 1;
       *(unsigned char *)(temp_v0 + 0x570) = 1;
       FUN_00186e2c(temp_v0 + 0x510,*(unsigned int *)(temp_v0 + 0x55c));
-      FUN_001418fc(temp_v0 + 4);
+      uiSetFloatPair(temp_v0 + 4);
       FUN_0014f0dc(temp_v0 + 4,temp_v0 + 0x510,temp_v0 + 0x51c,temp_v0 + 0x528);
       FUN_001523b8(temp_v0 + 4,1);
       FUN_00212204(0);
@@ -144,7 +144,7 @@ unsigned int FUN_002caea0(void)
     }
   case 3:
     FUN_00186e2c(temp_v0 + 0x510,*(unsigned int *)(temp_v0 + 0x55c));
-    FUN_001418fc(temp_v0 + 4);
+    uiSetFloatPair(temp_v0 + 4);
     FUN_0014f0dc(temp_v0 + 4,temp_v0 + 0x510,temp_v0 + 0x51c,temp_v0 + 0x528);
     FUN_001523b8(temp_v0 + 4,1);
     break;

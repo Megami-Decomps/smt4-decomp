@@ -1,22 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145f5c` (_code @ 0x145f5c, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail ldrb r1, [r0, r4, lsr #3]; compiler ldrb r3, [r0, r4, lsr #3]. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameDataBlocksGetStats(void);
+extern const u8 *gameDataBlocksGetStats(void);
 
-
-unsigned char FUN_00145f5c(unsigned int param_1)
-
+/* Tests an indexed flag from the game-data block. */
+bool FUN_00145f5c(u32 index)
 {
-  int temp_v0;
-  
-  if (param_1 < 0x20) {
-    temp_v0 = gameDataBlocksGetStats();
-    return ((1 << (param_1 & 7)) & 0xffU & (unsigned int)*(unsigned char *)(temp_v0 + (param_1 >> 3))) != 0;
-  }
-  return 0;
+    if (index >= 32) {
+        return false;
+    }
+    const u8 *flags = gameDataBlocksGetStats();
+    u8 mask = (u8)(1u << (index & 7));
+    return (flags[index >> 3] & mask) != 0;
 }
 
 } /* extern "C" */

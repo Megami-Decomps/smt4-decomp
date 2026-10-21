@@ -8,8 +8,8 @@ int CONCAT44(double, double);
 int FUN_0019dad8(float *);
 int FUN_00217634(void);
 int FUN_00245ed0(void);
-int FUN_0024857c(float *);
-int FUN_0024b77c(int);
+int matrixCopySelectedToGlobal(float *);
+int randomAdvanceShiftRegister(int);
 int FUN_0024b830(int);
 int FUN_002a2c7c(void);
 int FUN_002b70cc(void);
@@ -86,8 +86,8 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0019dad8. */
 /* Supplied declaration required: FUN_00217634. */
 /* Supplied declaration required: FUN_00245ed0. */
-/* Supplied declaration required: FUN_0024857c. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: matrixCopySelectedToGlobal. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
@@ -483,7 +483,7 @@ void FUN_00325280(int param_1)
                 DAT_004ea924 = temp_v36;
                 DAT_004ea928 = temp_v14;
                 FUN_0024b830(0);
-                FUN_0024857c(&temp_v32);
+                matrixCopySelectedToGlobal(&temp_v32);
                 DAT_004ea91c = temp_v54;
                 DAT_004ea920 = temp_v52;
                 DAT_004ea924 = temp_v36;
@@ -574,7 +574,7 @@ void FUN_00325280(int param_1)
           else {
             temp_v49[1] = -1;
             if (0 < temp_v51) {
-              FUN_0024b77c(0);
+              randomAdvanceShiftRegister(0);
               __aeabi_uidivmod();
               temp_v49[1] = temp_v49[1] - temp_v4;
             }

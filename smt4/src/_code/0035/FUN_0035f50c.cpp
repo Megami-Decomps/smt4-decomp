@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0023a118(void);
+int systemApplyConfigurationByte(void);
 int FUN_0035a0b4(void);
 
-/* Supplied declaration required: FUN_0023a118. */
+/* Supplied declaration required: systemApplyConfigurationByte. */
 /* Supplied declaration required: FUN_0035a0b4. */
 
 
@@ -21,14 +21,14 @@ void FUN_0035f50c(int param_1,unsigned char *param_2,int *param_3)
   FUN_0035a0b4();
   switch(param_1) {
   case 0:
-    FUN_0023a118();
+    systemApplyConfigurationByte();
     if (param_1 == 0) {
       *param_2 = 0;
       return;
     }
     break;
   case 1:
-    FUN_0023a118();
+    systemApplyConfigurationByte();
     if (param_1 == 1) {
       *param_2 = 1;
     }
@@ -54,7 +54,7 @@ void FUN_0035f50c(int param_1,unsigned char *param_2,int *param_3)
     }
     return;
   case 2:
-    FUN_0023a118();
+    systemApplyConfigurationByte();
     switch(param_1) {
     case 1:
       *param_2 = 4;
@@ -97,7 +97,7 @@ void FUN_0035f50c(int param_1,unsigned char *param_2,int *param_3)
     }
     break;
   case 4:
-    FUN_0023a118();
+    systemApplyConfigurationByte();
     if (param_1 == 6) {
       temp_v0 = 0xb;
       *param_2 = temp_v0;
@@ -105,7 +105,7 @@ void FUN_0035f50c(int param_1,unsigned char *param_2,int *param_3)
     }
     break;
   case 5:
-    FUN_0023a118();
+    systemApplyConfigurationByte();
     if (param_1 == 7) {
       temp_v0 = 10;
       *param_2 = temp_v0;
@@ -113,7 +113,7 @@ void FUN_0035f50c(int param_1,unsigned char *param_2,int *param_3)
     }
     break;
   case 6:
-    FUN_0023a118();
+    systemApplyConfigurationByte();
     if (param_1 == 1) {
       temp_v0 = 0x10;
     }

@@ -1,22 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f6fc` (_code @ 0x31f6fc, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-
-int FUN_0031f6fc(void)
-
-{
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
-    temp_v0 = (int)*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010);
-  }
-  return temp_v0;
+extern struct { u32 unk00; struct { u8 unk00[0x2010]; s8 state; } *work; } g_gameGlobals;
+/* Reads the global work state, or zero when no work exists. */
+s32 FUN_0031f6fc(void) {
+    return g_gameGlobals.work != NULL ? g_gameGlobals.work->state : 0;
 }
-
-} /* extern "C" */
+}

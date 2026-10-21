@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00297468(unsigned char [68], unsigned int *, int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int asdOperatorNew(int, unsigned int);
 int FUN_0033e7c4(unsigned int *, int);
 int FUN_0033f2b8(unsigned int *);
@@ -18,7 +18,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int FUN_0023e330(unsigned int, int, unsigned int);
 extern int FUN_0023e3a4(unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0033e7c4. */
 /* Supplied declaration required: FUN_0033f2b8. */
@@ -77,7 +77,7 @@ unsigned int * FUN_00294090(int param_1,int param_2,unsigned int param_3,unsigne
   if (param_2 != 0) {
     if (param_1 < 0) {
       puVar2[1] = param_1;
-      FUN_002be624(temp_v2,"event/npcgtix/npc%03d.bin",temp_v0);
+      textFormatBuffer(temp_v2,"event/npcgtix/npc%03d.bin",temp_v0);
       puVar2[10] = 0;
       puVar2[2] = 4;
       puVar2[3] = temp_v0;
@@ -89,7 +89,7 @@ unsigned int * FUN_00294090(int param_1,int param_2,unsigned int param_3,unsigne
     }
     else {
       puVar2[1] = param_1;
-      FUN_002be624(temp_v2,"battle/devil/en%03d.bin",param_1);
+      textFormatBuffer(temp_v2,"battle/devil/en%03d.bin",param_1);
       puVar2[10] = 0;
       puVar2[2] = 0xc;
       puVar2[3] = param_1 - 1;

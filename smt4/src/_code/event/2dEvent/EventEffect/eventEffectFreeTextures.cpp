@@ -13,7 +13,7 @@ extern unsigned int *g_eventEffect; /* 0x43dee8 */
 extern unsigned int DAT_0043df00; /* 0x43df00 */
 extern unsigned int DAT_0043df04; /* 0x43df04 */
 
-extern int FUN_0024bb10(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
@@ -44,7 +44,7 @@ void eventEffectFreeTextures(void)
   temp_v1 = 0;
   do {
     if (*(char *)(temp_v1 * 0xc + 0x43df09) != '\0') {
-      temp_v0 = FUN_0024bb10((&DAT_0043df00)[temp_v1 * 3]);
+      temp_v0 = textureGetIndexedResource((&DAT_0043df00)[temp_v1 * 3]);
       if (temp_v0 != 0) {
         asdTMTexTableFreeEntry((&DAT_0043df00)[temp_v1 * 3]);
       }

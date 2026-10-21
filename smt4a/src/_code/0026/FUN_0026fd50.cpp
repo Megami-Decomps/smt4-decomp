@@ -10,7 +10,7 @@ int FUN_00184310(void);
 int wordPairCopy(unsigned short *, unsigned short *);
 int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int, int, unsigned int *, unsigned int *);
-int FUN_004bd294(int, unsigned int);
+int randomGetUpperSixBits(int, unsigned int);
 int rt_memcpy_w(unsigned short *, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned int FUN_002b4dcc(int);
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_003a6f84(int);
 extern int getUnlockedSlotCount(int);
-/* Supplied declaration required: FUN_004bd294. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 extern int FUN_004ccbf0(unsigned short);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -120,7 +120,7 @@ void FUN_0026fd50(unsigned short *param_1,int param_2,int param_3,unsigned int *
   }
   do {
     temp_v2 = param_2;
-    FUN_004bd294(param_2,temp_v4 & 0xff);
+    randomGetUpperSixBits(param_2,temp_v4 & 0xff);
     temp_v7 = temp_v4 + 1;
     *(char *)((int)param_1 + temp_v4 + 0x3a) = (char)temp_v2;
     temp_v4 = temp_v7;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00253fe8(unsigned int, int, int);
 int FUN_0029ee6c(...);
-int FUN_002be624(unsigned char [128], unsigned int, unsigned int);
+int textFormatBuffer(unsigned char [128], unsigned int, unsigned int);
 int FUN_002e38c0(unsigned int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00253fe8. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002e38c0. */
 
 
@@ -55,7 +55,7 @@ void FUN_00297b94(int param_1,int param_2,int param_3)
   }
   FUN_002e38c0(temp_v0,param_3 == 0);
   if (param_2 == 9) {
-    FUN_002be624(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x306c));
+    textFormatBuffer(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x306c));
     FUN_0029ee6c(temp_v1,0x323232ff);
     FUN_00253fe8(0xa11923ff,1,0x12);
     return;

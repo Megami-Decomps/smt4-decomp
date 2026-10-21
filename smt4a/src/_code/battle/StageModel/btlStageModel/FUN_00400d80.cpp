@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int btlGetMainState(void);
 int FUN_00178b04(...);
 int FUN_001cd3ec(void);
@@ -39,10 +39,10 @@ extern unsigned char LAB_004010f0; /* 0x4010f0 */
 extern unsigned char LAB_00401104; /* 0x401104 */
 extern unsigned char LAB_0040111c; /* 0x40111c */
 extern int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned int DAT_005710d8; /* 0x5710d8 */
+extern unsigned int g_engineOptionalWork; /* 0x5710d8 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -92,7 +92,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   *(unsigned int *)(param_1 + 8) = param_2;
   *(unsigned int *)(param_1 + 0xc) = param_3;
-  temp_v0 = dataTableFileGetTable(DAT_005710d8,0);
+  temp_v0 = dataTableFileGetTable(g_engineOptionalWork,0);
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
   if (temp_v2 != 0) {
@@ -137,10 +137,10 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v25 = 0;
   btlGetMainState();
   temp_v1 = g_handleRegistry;
-  FUN_00100388(&temp_v10,&LAB_004010f0,&LAB_004010dc,param_2,param_3);
+  textFormatBuffer(&temp_v10,&LAB_004010f0,&LAB_004010dc,param_2,param_3);
   temp_v4 = FUN_00240c34((unsigned int *)&temp_v10);
   if (temp_v4 == 0) {
-    FUN_00100388(&temp_v10,&LAB_004010f0,&LAB_004010dc,1,1);
+    textFormatBuffer(&temp_v10,&LAB_004010f0,&LAB_004010dc,1,1);
   }
   FUN_0040b0f8(temp_v1,&temp_v10);
   temp_v4 = FUN_0040af60(temp_v1);
@@ -154,10 +154,10 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     *(unsigned char *)(*(int *)(temp_v1 + 0x14) + 0xc4) = 0;
     *(unsigned int *)(*(int *)(temp_v1 + 4) + 4) = *(unsigned int *)(*(int *)(temp_v1 + 4) + 4) | 2;
   }
-  FUN_00100388(&temp_v10,&LAB_00401104,&LAB_004010dc,param_2,param_3);
+  textFormatBuffer(&temp_v10,&LAB_00401104,&LAB_004010dc,param_2,param_3);
   temp_v1 = FUN_00240c34((unsigned int *)&temp_v10);
   if (temp_v1 == 0) {
-    FUN_00100388(&temp_v10,&LAB_00401104,&LAB_004010dc,1,1);
+    textFormatBuffer(&temp_v10,&LAB_00401104,&LAB_004010dc,1,1);
     *(unsigned int *)(param_1 + 8) = 1;
     *(unsigned int *)(param_1 + 0xc) = 1;
   }
@@ -170,7 +170,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   }
   *(unsigned int *)(param_1 + 0x1c) = temp_v0;
   FUN_001cd3ec();
-  temp_v0 = dataTableFileGetTable(DAT_005710d8,0);
+  temp_v0 = dataTableFileGetTable(g_engineOptionalWork,0);
   temp_v1 = dataTableGetEntries();
   temp_v3 = dataTableGetCount(temp_v0);
   if (temp_v3 != 0) {
@@ -191,7 +191,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       do {
         temp_v7 = temp_v1 + temp_v4 * 0x24;
         if (*(char *)(temp_v7 + 4) != '0') {
-          FUN_00100388(&temp_v10,&LAB_0040111c,&LAB_004010dc,temp_v7 + 4);
+          textFormatBuffer(&temp_v10,&LAB_0040111c,&LAB_004010dc,temp_v7 + 4);
           temp_v6 = 0x20;
           FUN_00178b04(0x20,
                        "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\StageModel\\btlStageModel.cpp",

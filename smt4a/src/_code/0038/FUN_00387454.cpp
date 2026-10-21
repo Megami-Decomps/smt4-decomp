@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [260], unsigned char *, int);
+int textFormatBuffer(unsigned char [260], unsigned char *, int);
 int FUN_001642e4(unsigned char [260], int, int, int);
 int asdMemFree(unsigned char *);
 int asdEffectTextureCreate(void);
@@ -12,7 +12,7 @@ int asdEffectTextureCreate(void);
 extern unsigned char LAB_003874d4; /* 0x3874d4 */
 extern signed char DAT_005b3270; /* 0x5b3270 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdEffectTextureCreate. */
@@ -30,7 +30,7 @@ void FUN_00387454(void)
   if (DAT_005b3270 == '\0') {
     temp_v0 = 0;
     do {
-      FUN_00100388(temp_v1,&LAB_003874d4,temp_v0 + 1);
+      textFormatBuffer(temp_v1,&LAB_003874d4,temp_v0 + 1);
       puVar1 = temp_v1;
       FUN_001642e4(temp_v1,0,1,0x80);
       puVar2 = puVar1;

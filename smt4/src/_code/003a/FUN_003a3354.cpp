@@ -13,7 +13,7 @@ int dataTable17Sub0GetRecord(...);
 int FUN_0022fcb8(...);
 int FUN_00230234(...);
 int FUN_002302d8(...);
-int FUN_00231240(...);
+int pointConvertToFloat(...);
 int FUN_00233240(unsigned int *, int);
 int FUN_00296e90(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
@@ -36,7 +36,7 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 /* Supplied declaration required: FUN_0022fcb8. */
 /* Supplied declaration required: FUN_00230234. */
 /* Supplied declaration required: FUN_002302d8. */
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
@@ -94,7 +94,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       FUN_002bf818(puVar5);
       temp_v1 = vec2GetYInt(puVar5);
       temp_v2 = vec2GetXInt(puVar5);
-      FUN_00231240(param_1 + 0xe0,temp_v2,temp_v1);
+      pointConvertToFloat(param_1 + 0xe0,temp_v2,temp_v1);
       if (*(char *)((int)param_1 + 0x4de) != '\0') {
         temp_v3 = messageWindowIsState1();
         if (temp_v3 != 0) {
@@ -136,7 +136,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_002bf818(puVar5);
     temp_v1 = vec2GetYInt(puVar5);
     temp_v2 = vec2GetXInt(puVar5);
-    FUN_00231240(param_1 + 0xe0,temp_v2,temp_v1);
+    pointConvertToFloat(param_1 + 0xe0,temp_v2,temp_v1);
     if (*(char *)((int)param_1 + 0x4de) != '\0') {
       *param_1 = *param_1 & 0xfffff0ff;
       temp_v3 = messageWindowIsState1();

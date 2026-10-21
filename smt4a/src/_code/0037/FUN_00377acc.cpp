@@ -35,7 +35,7 @@ struct fn_00377acc_arg0 {
 
 typedef int romwright_code(...);
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
@@ -52,24 +52,24 @@ void FUN_00377acc(fn_00377acc_arg0 *param_1,int param_2,unsigned int param_3)
   int temp_v2;
   int *unaff_r4;
   
-  temp_v1 = DAT_005806d4;
+  temp_v1 = g_mapEnemy;
   temp_v2 = 0;
   do {
     if (param_3 != 1) {
       if (param_3 == 2) {
-        unaff_r4 = (int *)(DAT_005806d4 + temp_v2 * 0x10 + 0x4b7c);
+        unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4b7c);
       }
       else if (param_3 != 3) {
         if (param_3 == 4) {
-          unaff_r4 = (int *)(DAT_005806d4 + temp_v2 * 0x10 + 0x4c80);
+          unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4c80);
         }
       }
       else {
-        unaff_r4 = (int *)(DAT_005806d4 + temp_v2 * 0x10 + 0x4a78);
+        unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4a78);
       }
     }
     else {
-      unaff_r4 = (int *)(DAT_005806d4 + temp_v2 * 0x10 + 0x4a78);
+      unaff_r4 = (int *)(g_mapEnemy + temp_v2 * 0x10 + 0x4a78);
     }
     if (*unaff_r4 == param_2) {
       puVar3 = param_1->field_0x180;
@@ -89,7 +89,7 @@ void FUN_00377acc(fn_00377acc_arg0 *param_1,int param_2,unsigned int param_3)
           *(unsigned char *)(temp_v1 + param_1->field_0x17c * 8 + 0x3d91) = 0;
         }
       }
-      temp_v1 = DAT_005806d4;
+      temp_v1 = g_mapEnemy;
       if (param_1->field_0x180 != (undefined4 *)0x0) {
         if (param_1->field_0x185 != 0) {
           (**(romwright_code **)(*param_1->field_0x180 + 4))();

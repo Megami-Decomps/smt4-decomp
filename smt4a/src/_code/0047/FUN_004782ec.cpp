@@ -15,7 +15,7 @@ int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_00477d10(unsigned int *, unsigned int, int);
 int jobFlagsWorkStop(unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
-int FUN_0047daf4(int *);
+int timeInitializeActiveState(int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -42,7 +42,7 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 
 
 void FUN_004782ec(unsigned int *param_1)
@@ -64,7 +64,7 @@ void FUN_004782ec(unsigned int *param_1)
   unsigned int uStack_20;
   unsigned int uStack_1c;
   
-  FUN_0047daf4(&temp_v3);
+  timeInitializeActiveState(&temp_v3);
   temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
   *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
   if ((temp_v0 & 0x10) != 0) {

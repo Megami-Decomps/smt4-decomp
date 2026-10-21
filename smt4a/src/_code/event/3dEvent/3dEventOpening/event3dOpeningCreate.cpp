@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013c884(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int asdProcessCreateSimple(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
@@ -27,7 +27,7 @@ extern unsigned char LAB_0037d970; /* 0x37d970 */
 extern unsigned int *g_event3dOpening; /* 0x57f4c0 */
 
 /* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
@@ -68,7 +68,7 @@ unsigned int event3dOpeningCreate(void)
     puVar1[0x14c] = 0;
     puVar1[0x150] = 0x3fd55555;
     puVar1[0x155] = 0x40a00000;
-    FUN_001418fc(puVar1 + 1);
+    uiSetFloatPair(puVar1 + 1);
     FUN_0014f0dc(puVar1 + 1,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);
     FUN_001523b8(puVar1 + 1,1);
     FUN_0036b824(puVar1 + 1);

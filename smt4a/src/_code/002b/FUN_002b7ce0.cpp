@@ -33,7 +33,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00244c70. */
-extern int FUN_00352ca0(int);
+extern int gameFlagsTestFirstBank(int);
 /* Supplied declaration required: FUN_003534b0. */
 
 
@@ -51,7 +51,7 @@ void FUN_002b7ce0(void)
   do {
     temp_v4 = g_mapHakai + temp_v3 * 0x54;
     if (((*(char *)(temp_v4 + 0x5c) != '\0') && (*(short *)(temp_v4 + 0xac) == 3)) &&
-       (temp_v0 = FUN_00352ca0((int)(short)*(unsigned int *)(temp_v4 + 0x80)), temp_v0 == 0)) {
+       (temp_v0 = gameFlagsTestFirstBank((int)(short)*(unsigned int *)(temp_v4 + 0x80)), temp_v0 == 0)) {
       temp_v0 = gameFlagIsSet(0x492);
       if (temp_v0 != 0) {
         FUN_001bc124();

@@ -41,7 +41,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001990d4. */
 /* Supplied declaration required: FUN_001ce29c. */
 /* Supplied declaration required: FUN_00258a24. */
-extern int FUN_00259e7c(void);
+extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: FUN_0026a858. */
 /* Supplied declaration required: FUN_0026a958. */
 /* Supplied declaration required: FUN_0029acb0. */
@@ -291,7 +291,7 @@ joined_r0x00217be4:
         FUN_002a0cc8();
       }
       temp_v1 = FUN_002b8d54();
-      if (((temp_v1 == 1) && (temp_v1 = FUN_00259e7c(), temp_v1 < 1)) && (temp_v6 != 0x11)) {
+      if (((temp_v1 == 1) && (temp_v1 = ifTouchGetActiveCounter(), temp_v1 < 1)) && (temp_v6 != 0x11)) {
         eventQueueAddUniqueIfValid(0x100016c);
       }
     }

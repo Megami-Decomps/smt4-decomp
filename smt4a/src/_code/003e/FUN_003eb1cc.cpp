@@ -1,18 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eb1cc` (_code @ 0x3eb1cc, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses `ldm r2, {r0, r2}` where armcc emits `add r0, r0, #17408`. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00573ab0; /* 0x573ab0 */
-extern unsigned int DAT_00573ab4; /* 0x573ab4 */
+struct BattleMain { u8 unk000[0x190]; u32 mask[2]; };
+struct Unit { u8 unk0000[0x45a0]; u32 mask[2]; };
+extern BattleMain g_btlMain;
 
-
-unsigned char FUN_003eb1cc(int param_1)
-
+s32 FUN_003eb1cc(const Unit *unit)
 {
-  return (*(unsigned int *)(param_1 + 0x45a0) & DAT_00573ab0) != 0 ||
-         (DAT_00573ab4 & *(unsigned int *)(param_1 + 0x45a4)) != 0;
+    return ((unit->mask[0] & g_btlMain.mask[0]) | (unit->mask[1] & g_btlMain.mask[1])) != 0;
 }
 
 } /* extern "C" */

@@ -1,36 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027fa98` (_code @ 0x27fa98, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+namespace { struct Scene { u32 id, state, counter; u8 padding[0x4c]; float duration; }; struct Game { u8 padding[0x17c]; u8 flag; }; }
 extern "C" {
-
-extern int *g_lmapScene; /* 0x447e88 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-
-void FUN_0027fa98(int param_1)
-
+extern Scene *g_lmapScene;
+extern Game g_gameState;
+void FUN_0027fa98(u32 sceneId)
 {
-/* irregular: irregular input(s): in_s0 */
-  int *piVar1;
-  int in_s0;
-  
-  piVar1 = g_lmapScene;
-  if (*g_lmapScene != param_1) {
-    *g_lmapScene = param_1;
-    piVar1[1] = 0;
-    if (param_1 == 1) {
-      in_s0 = 0x40a00000;
+    Scene *scene = g_lmapScene;
+    if (scene->id != sceneId) {
+        scene->id = sceneId;
+        scene->state = 0;
+        scene->counter = 0;
+        if (sceneId == 1) { scene->duration = 5.0f; }
+        else if (sceneId != 3) { g_gameState.flag = 0; }
     }
-    piVar1[2] = 0;
-    if (param_1 == 1) {
-      piVar1[0x16] = in_s0;
-    }
-    else if (param_1 != 3) {
-      (*(unsigned char *)((unsigned char *)&g_gameState + 0x17c)) = 0;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

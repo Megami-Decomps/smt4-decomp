@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0047306c. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -63,7 +63,7 @@ void FUN_00477744(int param_1)
       *(unsigned int *)(param_1 + 8) = temp_v0;
       return;
     }
-    temp_v1 = FUN_004d0554();
+    temp_v1 = inputIsQuestMenuPressed();
     if (temp_v1 != 0) {
       eventQueueAddUniqueIfValid(0x100020e);
       *(unsigned int *)(param_1 + 4) = 0xf;

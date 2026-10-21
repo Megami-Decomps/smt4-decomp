@@ -1,2 +1,7 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0046c528's literal pool; not written yet. */
 #include "common.h"
+
+/* Orders entries by their leading unsigned 16-bit key. */
+extern "C" int FUN_0046e448(const u16 *left, const u16 *right)
+{
+    return *left - *right;
+}

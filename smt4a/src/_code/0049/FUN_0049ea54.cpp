@@ -36,10 +36,10 @@ extern void uiSpriteSelectAnim(void *widget, s32 arg);
 extern void *dataTableGet(s32 group, s32 id);
 extern u32 dataTableGetCount(void *table);
 extern TableEntry *dataTableGetEntries(void);
-extern void FUN_001acf98(s32 group, s32 id);
+extern void asdTMTexLoadMainHeap(s32 group, s32 id);
 extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
 extern void FUN_002e08b0(void *panel, s32 arg);
-extern s32 FUN_00341940(s32 id);
+extern s32 textureGetIndexedResource(s32 id);
 extern void FUN_003d2150(u32 id);
 extern s32 loadSlotIsLoaded(s32 id);
 extern void FUN_0049d140(Screen *screen, s32 a, s32 b);
@@ -53,7 +53,7 @@ void FUN_0049ea54(Screen *screen)
     if (screen->active == 0 || screen->ready == 0) {
         return;
     }
-    if (FUN_00341940(0x33) == 0 || asdTMTexTableNodeIsLoaded(0x33, 0) == 0 || loadSlotIsLoaded(0x46) == 0) {
+    if (textureGetIndexedResource(0x33) == 0 || asdTMTexTableNodeIsLoaded(0x33, 0) == 0 || loadSlotIsLoaded(0x46) == 0) {
         return;
     }
     table = dataTableGet(0x46, 0);
@@ -66,11 +66,11 @@ void FUN_0049ea54(Screen *screen)
     screen->current = &screen->entries[screen->index];
     resource = screen->current->resourceA;
     if (resource > 0 && asdTMTexTableNodeIsLoaded(0x33, resource) == 0) {
-        FUN_001acf98(0x33, resource);
+        asdTMTexLoadMainHeap(0x33, resource);
     }
     resource = screen->current->resourceB;
     if (resource > 0 && asdTMTexTableNodeIsLoaded(0x33, resource) == 0) {
-        FUN_001acf98(0x33, resource);
+        asdTMTexLoadMainHeap(0x33, resource);
     }
     FUN_0049de10(screen);
     FUN_00203b40(screen->panel, screen->unk094, 9, 1, 1, 1);

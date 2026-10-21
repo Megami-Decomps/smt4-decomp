@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(int *, unsigned char *, unsigned int, unsigned int);
 int FUN_00117bc8(int, int);
 int onlineStringDestroy(...);
 int FUN_002e9590(...);
@@ -30,7 +30,7 @@ typedef struct {
 extern unsigned char LAB_00414804; /* 0x414804 */
 extern unsigned char LAB_0041480c; /* 0x41480c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00117bc8. */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002e9590. */
@@ -83,7 +83,7 @@ void FUN_0041460c(int param_1,int param_2)
     temp_v12 = 0;
     temp_v13 = 0;
     temp_v14 = 0;
-    FUN_00100388(&temp_v9,&LAB_00414804,temp_v1,temp_v4);
+    textFormatBuffer(&temp_v9,&LAB_00414804,temp_v1,temp_v4);
     temp_v0 = *(int *)(param_1 + 0xe8);
     if (*(int *)(param_1 + 0xec) != temp_v0) {
       while (*(int *)(temp_v0 + 0xc) == 0 && *(int *)(temp_v0 + 8) == 0) {

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern int FUN_0023a0d8(unsigned int, int *, unsigned int);
+extern int tokenResolveAddress(unsigned int, int *, unsigned int);
 extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_00353550. */
 /* Supplied declaration required: FUN_003535d8. */
@@ -28,7 +28,7 @@ void FUN_00353948(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   temp_v2 = param_4;
   temp_v0 = FUN_002b5c44();
-  temp_v1 = FUN_0023a0d8(temp_v0,&temp_v2,*param_1);
+  temp_v1 = tokenResolveAddress(temp_v0,&temp_v2,*param_1);
   if ((-1 < temp_v1) && (temp_v1 = temp_v2, FUN_00353550(), -1 < temp_v1)) {
     FUN_003535d8(temp_v2);
   }

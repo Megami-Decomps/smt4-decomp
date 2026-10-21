@@ -1,28 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8824` (_code @ 0x3a8824, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has trailing vtable pool bytes or different owner-register allocation. */
+#include "common.h"
 
+struct WindowState {
+    /* 0x000 */ const void *vtable;
+    /* 0x004 */ u8 unk04[0x5a0];
+    /* 0x5a4 */ u8 mode;
+};
 extern "C" {
-
-int FUN_003a6c4c(void);
-
-extern unsigned char DAT_004223cc; /* 0x4223cc */
-
-extern unsigned int *FUN_0022cb58(void);
-/* Supplied declaration required: FUN_003a6c4c. */
-
-
-unsigned int * FUN_003a8824(unsigned int param_1,unsigned char param_2)
-
+extern const u8 _ZTV9Obj4223ac[];
+WindowState *FUN_0022cb58(u32 id);
+void FUN_003a6c4c(WindowState *window);
+/* Allocates and initializes the requested window. */
+WindowState *FUN_003a8824(u32 id, u8 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_0022cb58();
-  *puVar1 = (unsigned int)&DAT_004223cc;
-  *(unsigned char *)(puVar1 + 0x169) = param_2;
-  FUN_003a6c4c();
-  return puVar1;
+    WindowState *window = FUN_0022cb58(id);
+    window->vtable = _ZTV9Obj4223ac + 0x24;
+    window->mode = mode;
+    FUN_003a6c4c(window);
+    return window;
 }
-
-} /* extern "C" */
+}

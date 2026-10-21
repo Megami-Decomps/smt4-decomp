@@ -1,39 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e56a8` (_code @ 0x2e56a8, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'movs r4, r0'; compiler emits 'mov r4, r0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_002e40f8(void);
-int FUN_002e5780(int *);
-int FUN_002e57c8(int *, int, unsigned int, int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002e40f8. */
-/* Supplied declaration required: FUN_002e5780. */
-/* Supplied declaration required: FUN_002e57c8. */
-
-
-int * FUN_002e56a8(int *param_1,int *param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_2;
-  if (*(int *)(temp_v0 - 0xc) != -1) {
-    FUN_002e40f8();
-    FUN_002e5780(param_1);
-    *param_1 = *param_2;
-  }
-  else if (param_1 != param_2) {
-    FUN_002e57c8(param_1,0,*(unsigned int *)(*param_1 - 4),temp_v0,*(unsigned int *)(temp_v0 - 4));
-  }
-  return param_1;
+struct Header { s32 references; u32 reserved, size; };
+struct String { u8 *data; };
+void FUN_002e40f8(Header *header);
+void FUN_002e5780(String *string);
+s32 FUN_002e57c8(String *string, u32 offset, u32 oldSize, const u8 *source, u32 size);
+s32 FUN_002e56a8(String *output, const String *source) {
+    Header *header = (Header *)source->data - 1;
+    if (header->references != -1) {
+        FUN_002e40f8(header);
+        FUN_002e5780(output);
+        output->data = source->data;
+    } else if (output != source) {
+        Header *old = (Header *)output->data - 1;
+        FUN_002e57c8(output, 0, old->size, source->data, header->size);
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

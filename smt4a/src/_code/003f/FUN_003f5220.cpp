@@ -1,34 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5220` (_code @ 0x3f5220, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler emits two scalar coordinate stores instead of retail LDRD/STRD. */
+#include "common.h"
+
+namespace { struct State { u8 padding[0x2c]; u32 x, y; u8 unused[8]; u32 slot; }; }
 
 extern "C" {
-
-int FUN_003f3e64(int, int *, int *);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_003f3e64. */
-
-
-void FUN_003f5220(int param_1,unsigned int param_2)
-
+void FUN_003f3e64(State *state, u32 *x, u32 *y);
+void FUN_003f5220(State *state, u32 slot)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  *(unsigned int *)(param_1 + 0x3c) = param_2;
-  temp_v0 = 0;
-  temp_v1 = 0;
-  FUN_003f3e64(param_1,&temp_v0,&temp_v1);
-  *(unsigned int *)(param_1 + 0x2c) = temp_v0;
-  *(unsigned int *)(param_1 + 0x30) = temp_v1;
-  return;
+    state->slot = slot;
+    u32 x = 0, y = 0;
+    FUN_003f3e64(state, &x, &y);
+    state->x = x;
+    state->y = y;
 }
-
-} /* extern "C" */
+}

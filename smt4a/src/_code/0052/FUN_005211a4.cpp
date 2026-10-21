@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_3_stack;
 
-extern int FUN_004d8f18(unsigned int, unsigned int);
+extern int containerGrowCapacity(unsigned int, unsigned int);
 
 
 unsigned int FUN_005211a4(unsigned int *param_1,int *param_2,int *param_3)
@@ -102,7 +102,7 @@ unsigned int FUN_005211a4(unsigned int *param_1,int *param_2,int *param_3)
   else {
     temp_v0 = param_1[5] - 1;
     temp_v8 = (temp_v5 + temp_v0) & ~temp_v0;
-    temp_v10 = FUN_004d8f18(temp_v4,temp_v5);
+    temp_v10 = containerGrowCapacity(temp_v4,temp_v5);
     temp_v0 = (temp_v10 + temp_v0) & ~temp_v0;
     temp_v10 = 0;
     piVar12 = (int *)*param_1;

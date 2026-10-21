@@ -8,7 +8,7 @@ int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287a78(void);
 int FUN_00287aec(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00291e40(unsigned int);
 
 typedef struct fn_00253968_arg0 fn_00253968_arg0;
@@ -47,7 +47,7 @@ extern float DAT_0049fad0; /* 0x49fad0 */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287a78. */
 /* Supplied declaration required: FUN_00287aec. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
 extern int gameGetPlayerData(void);
 extern int gameGetMapBlock(void);
@@ -81,14 +81,14 @@ LAB_00253a80:
         DAT_0049fab0 = 8;
         DAT_0049fab2 = (unsigned short)param_1->field_0x4;
         temp_v6 = param_1->field_0x20;
-        FUN_00287be4();
+        mathPositionHeadingDegrees();
         DAT_0049fac4 = param_1->field_0x20;
         DAT_0049fac8 = param_1->field_0x24 + 110.0f;
         DAT_0049facc = param_1->field_0x28;
         DAT_0049fab5 = '\0';
         temp_v7 = param_1->field_0x20;
         DAT_0049fad0 = temp_v6;
-        FUN_00287be4();
+        mathPositionHeadingDegrees();
         param_1->field_0x2c = temp_v7;
         if ((param_1->field_0x50 == 0) && (*(int *)(temp_v1 + 0xdc0) != 0)) {
           if ((param_1->field_0x174 == 0) ||

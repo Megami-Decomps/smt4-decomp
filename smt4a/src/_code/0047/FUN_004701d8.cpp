@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001b2ebc(...);
 int FUN_001b31ac(...);
 int FUN_001b31e0(...);
@@ -35,7 +35,7 @@ typedef struct {
 
 extern unsigned int g_aocDisplay; /* 0x57027c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001b2ebc. */
 extern int FUN_001b315c(void);
 /* Supplied declaration required: FUN_001b31ac. */
@@ -95,7 +95,7 @@ void FUN_004701d8(fn_004701d8_arg0 *param_1,int param_2,int param_3,int param_4)
               }
               puVar9 = (unsigned int *)(temp_v11 + temp_v6 * 0x10);
               rt_memcpy_w(puVar9,*(int *)(temp_v0 + 0x4c) + temp_v5 * 0x10,0xe);
-              FUN_00100388(temp_v7,"%s/%s",temp_v9,pcVar7 + 1);
+              textFormatBuffer(temp_v7,"%s/%s",temp_v9,pcVar7 + 1);
               temp_v4 = g_aocDisplay;
               FUN_001b2ebc(g_aocDisplay,temp_v7,0,puVar9 + 2,1,0x80,0);
               *puVar9 = temp_v4;

@@ -25,7 +25,7 @@ int VectorSignedToFloat(...);
 
 int FUN_00228220(...);
 int FUN_00228930(...);
-int FUN_00228980(...);
+int mathScaleThreeHalves(...);
 int FUN_0022899c(unsigned int, unsigned int, unsigned int, int, int, int);
 int FUN_002296f4(...);
 int FUN_00229a3c(...);
@@ -137,7 +137,7 @@ extern int FUN_002281a4(int);
 /* Supplied declaration required: FUN_00228220. */
 extern int FUN_00228808(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00228930. */
-/* Supplied declaration required: FUN_00228980. */
+/* Supplied declaration required: mathScaleThreeHalves. */
 /* Supplied declaration required: FUN_0022899c. */
 /* Supplied declaration required: FUN_002296f4. */
 extern int FUN_00229914(int *, unsigned int *, int);
@@ -156,7 +156,7 @@ extern int FUN_00245cc0(void);
 extern int btlMainFindActiveEntry(int, int);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002550d8. */
-extern int FUN_00255158(int, unsigned int);
+extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_0027df30. */
 /* Supplied declaration required: FUN_0027e3e8. */
@@ -309,7 +309,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     }
   }
   else {
-    FUN_00228980(param_7,1);
+    mathScaleThreeHalves(param_7,1);
   }
   if (param_2[0xc] == 4) {
     temp_v4 = param_2[0x160];
@@ -401,7 +401,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     FUN_003bd2e0(temp_v71,param_5,param_6,param_7,param_7,0);
     temp_v59 = temp_v4;
     if (temp_v33 == 1) {
-      FUN_00228980(param_7,0);
+      mathScaleThreeHalves(param_7,0);
     }
     temp_v33 = 0;
     param_8 = param_7;
@@ -558,7 +558,7 @@ LAB_003cd124:
       }
     }
     if (temp_v58 != 0x10000) {
-      if ((0 < (int)temp_v4) && (temp_v7 = FUN_00255158(param_8,0x1c), 0 < temp_v7)) {
+      if ((0 < (int)temp_v4) && (temp_v7 = battleGetEntryHalfword(param_8,0x1c), 0 < temp_v7)) {
         temp_v4 = 0;
       }
     }
@@ -967,7 +967,7 @@ LAB_003cd944:
         }
         if (temp_v33 == 1 && temp_v4 == 1) {
           temp_v33 = 0;
-          FUN_00228980(param_7,0);
+          mathScaleThreeHalves(param_7,0);
         }
       }
       goto LAB_003cd124;
@@ -1080,7 +1080,7 @@ LAB_003ce46c:
           if (*(char *)(temp_v53 + 0x32) != '\0') {
             if (*(char *)(temp_v53 + 0x32) >= '\0') {
               temp_v5 = FUN_0023dcfc();
-              temp_v7 = FUN_00255158(param_8,7);
+              temp_v7 = battleGetEntryHalfword(param_8,7);
               if (temp_v5 == temp_v7) {
 LAB_003ce7e4:
                 temp_v17 = 0;
@@ -1089,7 +1089,7 @@ LAB_003ce7e4:
             }
             else {
               temp_v5 = FUN_00245cc0();
-              temp_v7 = FUN_00255158(param_8,7);
+              temp_v7 = battleGetEntryHalfword(param_8,7);
               if (temp_v5 == temp_v7) goto LAB_003ce7e4;
             }
           }
@@ -1099,7 +1099,7 @@ LAB_003ce7e8:
             if (temp_v0 != '\0') {
               if (temp_v0 >= '\x01') {
                 temp_v5 = FUN_0023dcfc();
-                temp_v7 = FUN_00255158(param_8,10);
+                temp_v7 = battleGetEntryHalfword(param_8,10);
                 if (temp_v5 == temp_v7) {
 LAB_003ce844:
                   temp_v17 = 0;
@@ -1108,7 +1108,7 @@ LAB_003ce844:
               }
               else {
                 temp_v5 = FUN_00245cc0();
-                temp_v7 = FUN_00255158(param_8,10);
+                temp_v7 = battleGetEntryHalfword(param_8,10);
                 if (temp_v5 == temp_v7) goto LAB_003ce844;
               }
             }
@@ -1118,7 +1118,7 @@ LAB_003ce848:
               if (temp_v0 != '\0') {
                 if (temp_v0 >= '\x01') {
                   temp_v5 = FUN_0023dcfc();
-                  temp_v7 = FUN_00255158(param_8,0xb);
+                  temp_v7 = battleGetEntryHalfword(param_8,0xb);
                   if (temp_v5 == temp_v7) {
 LAB_003ce8b0:
                     FUN_0023c638(param_1,param_8,3);
@@ -1130,7 +1130,7 @@ LAB_003ce8b0:
                 }
                 else {
                   temp_v5 = FUN_00245cc0();
-                  temp_v7 = FUN_00255158(param_8,0xb);
+                  temp_v7 = battleGetEntryHalfword(param_8,0xb);
                   if (temp_v5 == temp_v7) goto LAB_003ce8b0;
                 }
               }

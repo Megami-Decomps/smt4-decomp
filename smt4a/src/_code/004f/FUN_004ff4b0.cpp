@@ -1,39 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ff4b0` (_code @ 0x4ff4b0, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ble 2c where the compiled block uses ble 30. */
+#include "shard/W5_W5Match5_TwinRecords.h"
 
-extern "C" {
-
-int SBORROW4(unsigned int, unsigned int);
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
+using namespace ResourceTableLookup;
 
 
-int FUN_004ff4b0(int param_1,unsigned int param_2)
 
+
+
+extern "C" void* FUN_004ff4b0(ResourceTable* table, s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v3 = *(int *)(param_1 + 0x10) == 0;
-  temp_v0 = 0;
-  temp_v1 = 0;
-  if (!temp_v3) {
-    temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x10) + 0xe);
-    temp_v0 = temp_v1 - param_2;
-  }
-  temp_v2 = !temp_v3 && SBORROW4(temp_v1,param_2);
-  if ((temp_v3 || temp_v1 == param_2) || temp_v0 < 0 != temp_v2) {
-    param_1 = 0;
-  }
-  if ((!temp_v3 && temp_v1 != param_2) && temp_v0 < 0 == temp_v2) {
-    param_1 = *(int *)(*(int *)(param_1 + 0x20) +
-                      (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x24) + param_2 * 4) * 0x18);
-  }
-  return param_1;
-}
+    if (table->header == NULL || (s32)table->header->count <= index) {
+        return NULL;
+    }
 
-} /* extern "C" */
+    return table->records[table->indices[index].recordIndex].value;
+}

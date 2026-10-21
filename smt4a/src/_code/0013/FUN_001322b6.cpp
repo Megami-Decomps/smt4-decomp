@@ -1,30 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001322b6` (_code @ 0x1322b6, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses push {r2, r3, r4, lr} where the compiled block uses push {r0, r1, r2, r3, lr}. */
+#include "common.h"
 
-extern "C" {
+extern "C" s32 FUN_0030a318(u32* context, u32 value, u32* entry);
 
-int FUN_0030a318(int *, unsigned int, int *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0030a318. */
-
-
-void FUN_001322b6(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+extern "C" void FUN_001322b6(u32 value, const u32* entry, u32 unused, u32 context)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int uStack_c;
-  
-  temp_v0 = *param_2;
-  uStack_c = param_4;
-  FUN_0030a318(&uStack_c,param_1,&temp_v0);
-  return;
+    u32 entryCopy = *entry;
+    FUN_0030a318(&context, value, &entryCopy);
 }
-
-} /* extern "C" */

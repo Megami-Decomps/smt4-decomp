@@ -1,26 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00144564` (_code @ 0x144564, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #48] where the compiled block uses ldr r0, [pc, #24]. */
+#include "common.h"
+
+struct SoundParameter {
+    u8 unk00[0xB8];
+};
+
+struct SoundSystem {
+    u8 unk00[0x1210];
+    SoundParameter parameter; // 0x1210
+    f32 value;                // 0x12C8
+    u8 unk12CC[0x10];
+    u8 enabled;               // 0x12DC
+};
 
 extern "C" {
+extern SoundSystem g_asdSoundSystem;
+void FUN_0015e30c(SoundParameter* parameter, f32 value);
 
-extern unsigned int DAT_0063f444; /* 0x63f444 */
-extern unsigned int DAT_0063f4b0; /* 0x63f4b0 */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-
-
-void FUN_00144564(void)
-
+void FUN_00144564(f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  if (DAT_0063f4c4 != '\0') {
-    DAT_0063f4b0 = in_s0;
-    DAT_0063f444 = in_s0;
-    return;
-  }
-  return;
+    if (g_asdSoundSystem.enabled != 0) {
+        g_asdSoundSystem.value = value;
+        FUN_0015e30c(&g_asdSoundSystem.parameter, value);
+    }
 }
-
-} /* extern "C" */
+}

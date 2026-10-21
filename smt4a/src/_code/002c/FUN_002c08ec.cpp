@@ -7,16 +7,16 @@ typedef struct Object {
     /* 0x2C */ s32 value;
 } Object;
 
-extern Object *DAT_0057f134;
+extern Object *g_callbackWork;
 
 /* Returns 1 if the object exists and its value is negative, else 0. */
 /* Returns 1 if the object exists and its value is negative, else 0. */
 u32 FUN_002c08ec(void)
 {
-    if (DAT_0057f134 == NULL) {
+    if (g_callbackWork == NULL) {
         return 0;
     }
-    if (DAT_0057f134->value < 0) {
+    if (g_callbackWork->value < 0) {
         return 1;
     }
     return 0;

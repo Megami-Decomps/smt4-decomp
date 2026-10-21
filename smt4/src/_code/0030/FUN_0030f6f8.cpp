@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030f6f8` (_code @ 0x30f6f8, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail table lookup call argument lifetime differs. */
+#include "common.h"
 
 extern "C" {
-
-int FUN_0025bed8(int, int, int);
-int dataTableGet(int, int);
-
-extern int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_0025bed8. */
-extern int dataTableGetCount(void);
-/* Supplied declaration required: dataTableGet. */
-
-
-int FUN_0030f6f8(void)
-
+void dataTableGet(u32 table, u32 kind);
+u32 dataTableGetCount();
+extern void *g_aocSystem;
+u32 FUN_0025bed8(void *system, u32 version, u32 kind);
+/* Adds installed and downloadable table counts. */
+u32 FUN_0030f6f8()
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  dataTableGet(0x2d,2);
-  temp_v0 = dataTableGetCount();
-  temp_v1 = g_aocSystem;
-  FUN_0025bed8(g_aocSystem,0x25,2);
-  return temp_v1 + temp_v0;
+    dataTableGet(45, 2);
+    u32 count = dataTableGetCount();
+    return FUN_0025bed8(g_aocSystem, 37, 2) + count;
 }
-
-} /* extern "C" */
+}

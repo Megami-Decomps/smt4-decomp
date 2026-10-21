@@ -9,7 +9,7 @@ int effEmitterCreateSmall(void);
 int FUN_002691d8(unsigned int, unsigned int, int);
 int objectBufferFree(void);
 
-extern int FUN_0024c3f8(void);
+extern int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: FUN_0024f8a4. */
 /* Supplied declaration required: effEmitterCreateSmall. */
 /* Supplied declaration required: FUN_002691d8. */
@@ -24,7 +24,7 @@ unsigned int * FUN_00305ab0(int param_1)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0024c3f8();
+  temp_v0 = resourceResolveHeaderPointer();
   puVar2 = (unsigned int *)(temp_v0 + 0x1c);
   effEmitterCreateSmall();
   FUN_0024f8a4();

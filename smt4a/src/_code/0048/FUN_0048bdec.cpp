@@ -14,7 +14,7 @@ int FUN_0048a378(int);
 int FUN_0048d248(int, unsigned int);
 int FUN_00492aa0(int, unsigned int);
 int FUN_00492ac8(int, int);
-int FUN_004935b0(...);
+int pointConvertToFloat(...);
 
 extern unsigned char DAT_005f1a5c; /* 0x5f1a5c */
 extern signed char DAT_005f1a5e; /* 0x5f1a5e */
@@ -32,7 +32,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00492aa0. */
 /* Supplied declaration required: FUN_00492ac8. */
 extern unsigned int FUN_00492c84(int);
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 
 
 void FUN_0048bdec(int param_1)
@@ -93,13 +93,13 @@ void FUN_0048bdec(int param_1)
           if (*(int *)(param_1 + 0x60) >= 101) {
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffdffff;
           }
-          FUN_004935b0(param_1 + 0x4d0,0);
+          pointConvertToFloat(param_1 + 0x4d0,0);
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xffffeff7;
         }
         else {
           temp_v2 = vec2GetYInt(temp_v4);
           temp_v3 = vec2GetXInt(temp_v4);
-          FUN_004935b0(param_1 + 0x4d0,temp_v3,temp_v2);
+          pointConvertToFloat(param_1 + 0x4d0,temp_v3,temp_v2);
         }
         *puVar5 = 1;
         *puVar6 = 1;
@@ -124,7 +124,7 @@ void FUN_0048bdec(int param_1)
       }
       temp_v2 = vec2GetYInt(temp_v1);
       temp_v3 = vec2GetXInt(temp_v1);
-      FUN_004935b0(param_1 + 0x4d0,temp_v3,temp_v2);
+      pointConvertToFloat(param_1 + 0x4d0,temp_v3,temp_v2);
       *puVar5 = 1;
       *puVar6 = 1;
     }

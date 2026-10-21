@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002de99c(void);
+int navigationSetArguments(void);
 int FUN_0033e014(int, int);
-int FUN_0033f938(unsigned int);
+int naviMainApplyRequestValue(unsigned int);
 int FUN_00357ab0(int);
-int FUN_00368b28(int);
-int FUN_003a366c(unsigned int, unsigned int, unsigned int);
+int naviMainSetRequestValue(int);
+int naviMainSetRequestTriple(unsigned int, unsigned int, unsigned int);
 int FUN_003b5714(void);
 int VectorSignedToFloat(int, int);
 
@@ -23,13 +23,13 @@ extern unsigned int DAT_005f1608; /* 0x5f1608 */
 extern unsigned int DAT_005f160c; /* 0x5f160c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002de99c. */
+/* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: FUN_0033e014. */
-/* Supplied declaration required: FUN_0033f938. */
+/* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00357ab0. */
-/* Supplied declaration required: FUN_00368b28. */
+/* Supplied declaration required: naviMainSetRequestValue. */
 extern char *FUN_003798f0(void);
-/* Supplied declaration required: FUN_003a366c. */
+/* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003b5714. */
 
 
@@ -75,15 +75,15 @@ void FUN_00365c94(void)
   DAT_005f1604 = (unsigned int)(unsigned char)pcVar3[3];
   DAT_005f1608 = *(unsigned int *)(temp_v0 + 0x30);
   DAT_005f160c = *(unsigned int *)(temp_v0 + 0x34);
-  FUN_002de99c();
-  FUN_003a366c(DAT_005f1608,DAT_005f160c,DAT_005f1604);
+  navigationSetArguments();
+  naviMainSetRequestTriple(DAT_005f1608,DAT_005f160c,DAT_005f1604);
   DAT_005f1604 = (unsigned int)(unsigned char)pcVar3[3];
   if (DAT_005f1604 == 0xff) {
     DAT_005f1604 = 0xffffffff;
   }
-  FUN_0033f938(DAT_005f1608);
+  naviMainApplyRequestValue(DAT_005f1608);
   FUN_00357ab0(g_lmapScene + 0x1c);
-  FUN_00368b28(1);
+  naviMainSetRequestValue(1);
   FUN_0033e014(g_gameState,DAT_005f1600);
   *(unsigned int *)(temp_v0 + 0x28) = 0x8a;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;

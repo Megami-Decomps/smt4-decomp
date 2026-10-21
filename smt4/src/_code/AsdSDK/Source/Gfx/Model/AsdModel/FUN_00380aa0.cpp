@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00235744(void);
+int thresholdDispatchOutsideRange(void);
 int VectorFloatToUnsigned(double, int);
 int mathlib_ceilf(void);
 
 typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00235744. */
+/* Supplied declaration required: thresholdDispatchOutsideRange. */
 /* Supplied declaration required: mathlib_ceilf. */
 
 
@@ -23,7 +23,7 @@ unsigned int FUN_00380aa0(float *param_1)
   float in_s0;
   unsigned int temp_v2;
   
-  FUN_00235744();
+  thresholdDispatchOutsideRange();
   temp_v0 = param_1[3];
   if (((unsigned int)temp_v0 & 1) != 0) {
     temp_v2 = ((unsigned int)temp_v0 & 2) >> 1;

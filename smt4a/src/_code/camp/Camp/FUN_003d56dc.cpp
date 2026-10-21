@@ -55,7 +55,7 @@ int FUN_0022e774(void);
 int FUN_0026f0c4(void);
 int msgWindowReset(void);
 int FUN_00287598(void);
-int FUN_002a1a78(void);
+int processQueryChain(void);
 int FUN_002a7b74(void);
 int FUN_002ab804(void);
 int FUN_002c2344(...);
@@ -168,7 +168,7 @@ extern int FUN_00163e84(unsigned int);
 extern unsigned char FUN_001643a0(void);
 /* Supplied declaration required: FUN_001643b4. */
 extern int lmapMainIsRunning(void);
-extern unsigned int FUN_00167f08(void);
+extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -220,7 +220,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_00287598. */
 /* Supplied declaration required: FUN_0028b088. */
-/* Supplied declaration required: FUN_002a1a78. */
+/* Supplied declaration required: processQueryChain. */
 extern int FUN_002a21e8(void);
 extern int FUN_002a2814(void);
 extern int FUN_002a4860(unsigned int *);
@@ -257,7 +257,7 @@ extern int FUN_002e2054(void);
 /* Supplied declaration required: FUN_002e26a4. */
 /* Supplied declaration required: FUN_002e26c4. */
 extern int FUN_002e27b8(void);
-extern unsigned long long FUN_002e5ac0(unsigned int, unsigned int, int);
+extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int, int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_002e738c. */
 extern int FUN_002ebce4(void);
@@ -284,15 +284,15 @@ extern int FUN_0031f90c(void);
 extern int FUN_003309e0(void);
 /* Supplied declaration required: FUN_00330b74. */
 /* Supplied declaration required: FUN_00331380. */
-extern int FUN_0033413c(void);
+extern int gameGlobalsGetState(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
-extern int FUN_00334518(void);
-extern char FUN_00334530(void);
-extern int FUN_00334548(void);
+extern int uiQuestGetActive(void);
+extern char uiQuestGetState(void);
+extern int uiQuestGetMode(void);
 /* Supplied declaration required: FUN_003423e8. */
 extern int overlayIsNotBusy(void);
 extern int FUN_0034919c(void);
@@ -303,7 +303,7 @@ extern unsigned int FUN_0034a9ac(void);
 /* Supplied declaration required: sub68OwnerCall4. */
 /* Supplied declaration required: screenSetColor670. */
 extern int FUN_0035a028(void);
-extern int FUN_0035a044(void);
+extern int campCecEditIsStateSixteen(void);
 /* Supplied declaration required: FUN_0035a094. */
 /* Supplied declaration required: FUN_0035ab90. */
 /* Supplied declaration required: campCommonBgRelease. */
@@ -317,7 +317,7 @@ extern unsigned char FUN_0036d134(void);
 extern unsigned int dataTable15Sub0FindEntry(int);
 /* Supplied declaration required: obj25CRefreshFlags. */
 extern unsigned short FUN_00372140(void);
-extern int FUN_00372158(void);
+extern int uiQuestGetStep(void);
 /* Supplied declaration required: FUN_0037a2e4. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_0037c8e4. */
@@ -339,7 +339,7 @@ extern int flagAt4IsClear(void);
 /* Supplied declaration required: FUN_0039c244. */
 /* Supplied declaration required: FUN_0039c2a4. */
 extern int FUN_0039c608(void);
-extern unsigned short FUN_0039c628(void);
+extern unsigned short uiQuestRunEnabledAction(void);
 /* Supplied declaration required: freeTexTable24. */
 /* Supplied declaration required: FUN_003a76b8. */
 /* Supplied declaration required: FUN_003a7788. */
@@ -483,7 +483,7 @@ unsigned int FUN_003d56dc(void)
   puVar12 = g_camp;
   switch(puVar2[7]) {
   case 0:
-    temp_v6 = FUN_00167f08();
+    temp_v6 = ifTouchGetButtonHelpValue();
     puVar2[0xc5d] = temp_v6;
     FUN_002add8c();
     puVar2[9] = 6;
@@ -855,7 +855,7 @@ unsigned int FUN_003d56dc(void)
     }
     break;
   case 8:
-    temp_v4 = FUN_0033413c();
+    temp_v4 = gameGlobalsGetState();
     if (temp_v4 != 0) {
       temp_v0 = (char)temp_v4 + *(char *)(puVar2 + 0x2e);
       *(char *)(puVar2 + 0x2e) = temp_v0;
@@ -1201,7 +1201,7 @@ LAB_003d6870:
       }
       temp_v11 = 0;
       do {
-        temp_v14 = FUN_002e5ac0(1,0,temp_v11);
+        temp_v14 = runtimeShiftLeftWide(1,0,temp_v11);
         if (((unsigned int)temp_v14 & temp_v7) != 0 || ((unsigned int)((unsigned long long)temp_v14 >> 0x20) & temp_v1) != 0) {
           temp_v12 = temp_v11 - 1;
           break;
@@ -1458,7 +1458,7 @@ LAB_003d6870:
     break;
   case 0x25:
     temp_v4 = puVar2[3];
-    FUN_002a1a78();
+    processQueryChain();
     if (temp_v4 == 4) {
       temp_v4 = FUN_0037d438();
       if (temp_v4 != 0) {
@@ -1519,15 +1519,15 @@ LAB_003d6870:
     temp_v4 = FUN_002a746c();
     if (temp_v4 != 0) {
       if (DAT_005e1eb4 == '\0') {
-        DAT_005e1eb4 = FUN_00334530();
+        DAT_005e1eb4 = uiQuestGetState();
       }
-      DAT_005e1eb6 = FUN_0039c628();
+      DAT_005e1eb6 = uiQuestRunEnabledAction();
       DAT_005e1eb8 = FUN_00372140();
       temp_v4 = FUN_002f153c();
-      temp_v10 = FUN_00334518();
+      temp_v10 = uiQuestGetActive();
       temp_v12 = FUN_0031f90c();
-      temp_v11 = FUN_00372158();
-      temp_v8 = FUN_00334548();
+      temp_v11 = uiQuestGetStep();
+      temp_v8 = uiQuestGetMode();
       FUN_0034aae4();
       if (DAT_005e1eb4 != '\0') {
         temp_v9 = gameFlagsGetBlock();
@@ -1927,7 +1927,7 @@ LAB_003d801c:
       FUN_002309dc();
       break;
     }
-    temp_v4 = FUN_0035a044();
+    temp_v4 = campCecEditIsStateSixteen();
     if (temp_v4 != 0) {
       temp_v4 = FUN_002e26c4(0x3d);
       temp_v2 = *(unsigned char *)(temp_v4 + 2);

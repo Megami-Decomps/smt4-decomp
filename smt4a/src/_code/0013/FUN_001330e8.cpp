@@ -1,45 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001330e8` (_code @ 0x1330e8, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses b.n 2c where the compiled block uses mov r1, r7. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_001330e8_arg1 fn_001330e8_arg1;
-struct fn_001330e8_arg1 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x8];
-    int field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
+struct ListNode {
+    ListNode* next;      // 0x00
+    ListNode* previous;  // 0x04
 };
 
-extern int wordRefsDiffer_001321c2(int *, unsigned int);
+struct NodeList {
+    u32 unk00;           // 0x00
+    ListNode* freeHead;  // 0x04
+    u8 unk08[8];         // 0x08
+    ListNode* sentinel;  // 0x10
+    u32 count;          // 0x14
+};
 
+extern "C" s32 wordRefsDiffer_001321c2(ListNode* const* current,
+                                      ListNode* const* end);
 
-void FUN_001330e8(int *param_1,fn_001330e8_arg1 *param_2,int *param_3,unsigned int param_4)
-
+extern "C" void FUN_001330e8(ListNode** result, NodeList* list,
+                              ListNode** current, ListNode* const* end)
 {
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  
-  while( 1 ) {
-    temp_v0 = wordRefsDiffer_001321c2(param_3,param_4);
-    piVar2 = (int *)*param_3;
-    if (temp_v0 == 0) break;
-    piVar3 = (int *)param_2->field_0x10;
-    if (piVar2 != piVar3) {
-      piVar3 = (int *)*piVar2;
-      *(int **)piVar2[1] = piVar3;
-      *(int *)(*piVar2 + 4) = piVar2[1];
-      param_2->field_0x14 = param_2->field_0x14 - 1;
-      *piVar2 = (int)param_2->field_0x4;
-      param_2->field_0x4 = piVar2;
+    while (wordRefsDiffer_001321c2(current, end) != 0) {
+        ListNode* node = *current;
+        ListNode* next = list->sentinel;
+        if (node != next) {
+            next = node->next;
+            node->previous->next = next;
+            node->next->previous = node->previous;
+            --list->count;
+            node->next = list->freeHead;
+            list->freeHead = node;
+        }
+        *current = next;
     }
-    *param_3 = (int)piVar3;
-  }
-  *param_1 = (int)piVar2;
-  return;
+    *result = *current;
 }
-
-} /* extern "C" */

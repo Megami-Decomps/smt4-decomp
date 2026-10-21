@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00282f80's literal pool; not written yet. */
+/* NON_MATCHING: linker-erased calls at +0x54, +0x7c and +0xb4 have no recovered targets. */
 #include "common.h"

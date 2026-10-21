@@ -49,7 +49,7 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 /* Supplied declaration required: FUN_0022699c. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002550d8. */
-extern short FUN_00255158(int, unsigned int);
+extern short battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
 extern int btlUnitGet(unsigned int);
@@ -475,7 +475,7 @@ LAB_00255c1c:
         *(unsigned char *)(temp_v3 + 4) = 7;
         *(int *)(temp_v3 + 0x14) = param_3;
         *(unsigned int *)(temp_v3 + 0x28) = 1;
-        temp_v2 = FUN_00255158((int)*(short *)(param_3 + 0x62),1);
+        temp_v2 = battleGetEntryHalfword((int)*(short *)(param_3 + 0x62),1);
         *(short *)(temp_v3 + 0x24) = temp_v2 - 1;
         *(unsigned char *)(temp_v3 + 5) = *(unsigned char *)(temp_v3 + 5) | 4;
       }
@@ -488,7 +488,7 @@ LAB_00255c1c:
       *(unsigned char *)(temp_v3 + 4) = 7;
       *(int *)(temp_v3 + 0x14) = param_3;
       *(unsigned int *)(temp_v3 + 0x28) = 2;
-      temp_v2 = FUN_00255158((int)*(short *)(param_3 + 0x62),1);
+      temp_v2 = battleGetEntryHalfword((int)*(short *)(param_3 + 0x62),1);
       *(short *)(temp_v3 + 0x24) = temp_v2 - 1;
       *(unsigned char *)(temp_v3 + 5) = *(unsigned char *)(temp_v3 + 5) | 4;
     }

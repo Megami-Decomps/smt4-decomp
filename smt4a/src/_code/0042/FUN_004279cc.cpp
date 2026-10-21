@@ -1,14 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004279cc` (_code @ 0x4279cc, 0x4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-
-void FUN_004279cc(void)
-
-{
-  return;
+s32 FUN_004285d0(int value);
+/* Forwards to the shared implementation. */
+s32 FUN_004279cc(int value) { return FUN_004285d0(value); }
 }
-
-} /* extern "C" */

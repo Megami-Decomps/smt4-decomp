@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00297468(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(...);
 int asdMemFree(...);
 int memClear(...);
@@ -13,7 +13,7 @@ int memClear(...);
 extern int FUN_0024a808(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -36,7 +36,7 @@ unsigned int FUN_003dbb40(int param_1)
   *(unsigned char *)(param_1 + 0x3024) = 0;
   memClear(temp_v1,0x80);
   memClear(temp_v2,0x80);
-  FUN_002be624(temp_v2,"battle/effect/%s.eft","ef_d_niyari");
+  textFormatBuffer(temp_v2,"battle/effect/%s.eft","ef_d_niyari");
   libc_strcpy(temp_v1,temp_v2);
   temp_v0 = FUN_002522e0(temp_v1,0x2f);
   libc_strcpy(param_1 + 0x2fa4,temp_v0 + 1);

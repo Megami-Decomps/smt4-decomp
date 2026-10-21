@@ -1,27 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c1f4` (_code @ 0x39c1f4, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler adds a shared explicit-zero return rather than retail's predicated result. */
+#include "common.h"
+
+namespace { struct State { u8 padding[0x1c]; s32 state; }; }
 
 extern "C" {
-
-extern int g_partyPanel; /* 0x57f268 */
-
-
-unsigned int FUN_0039c1f4(void)
-
+/* Reads or updates the requested state. */
+extern State * g_partyPanel;
+s32 FUN_0039c1f4(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_partyPanel != 0) {
-    if (*(int *)(g_partyPanel + 0x1c) == 3) {
-      temp_v0 = 1;
-    }
-    else {
-      temp_v0 = 0;
-    }
-  }
-  return temp_v0;
+    return g_partyPanel != NULL && g_partyPanel->state == 3;
 }
-
-} /* extern "C" */
+}

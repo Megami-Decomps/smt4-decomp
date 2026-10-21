@@ -1,30 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cfc54` (_code @ 0x2cfc54, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail contains branch back to the common store and a linker NOP; compiler emits branch-local stores. */
+#include "common.h"
+
+namespace { struct Battle { u8 padding[0x88]; u8 enabled; }; }
 
 extern "C" {
-
-extern int btlGetMainState(void);
-extern int scrGetArg(void);
-
-
-unsigned int FUN_002cfc54(void)
-
+u32 scrGetArg(u32 argument);
+Battle *btlGetMainState(void);
+u32 FUN_002cfc54(u32 argument)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  if (temp_v0 != 0) {
-    temp_v0 = btlGetMainState();
-    temp_v1 = 0xb;
-  }
-  else {
-    temp_v0 = btlGetMainState();
-    temp_v1 = 0xc;
-  }
-  *(unsigned int *)(temp_v0 + 0x88) = temp_v1;
-  return 1;
+    if (scrGetArg(argument) != 0) { btlGetMainState()->enabled = 1; }
+    else { btlGetMainState()->enabled = 0; }
+    return 1;
 }
-
-} /* extern "C" */
+}

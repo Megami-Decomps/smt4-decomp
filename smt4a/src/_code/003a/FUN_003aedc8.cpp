@@ -5,11 +5,11 @@
 extern "C" {
 
 int asdTMTexTableReleaseNode(int, unsigned int);
-int FUN_001acf98(int, unsigned int);
+int asdTMTexLoadMainHeap(int, unsigned int);
 
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 extern unsigned int requestIdToCode(int);
 
 
@@ -80,7 +80,7 @@ void FUN_003aedc8(int param_1,int param_2)
          (param_1 = param_1 + temp_v4 * 4, temp_v5 = *(int *)(param_1 + 0x94), temp_v5 != 3 && temp_v5 != 2)
          ) {
         temp_v1 = requestIdToCode(temp_v4);
-        FUN_001acf98(0x2e,temp_v1);
+        asdTMTexLoadMainHeap(0x2e,temp_v1);
         *(unsigned int *)(param_1 + 0x94) = 2;
         return;
       }

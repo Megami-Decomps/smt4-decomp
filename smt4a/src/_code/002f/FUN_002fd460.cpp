@@ -1,32 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd460` (_code @ 0x2fd460, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'bne.n 2c'; compiler emits 'beq.n 30' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_00123e86(unsigned int);
-int onlineInstanceTableFind(int, unsigned int);
-
-/* Supplied declaration required: FUN_00123e86. */
-extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: onlineInstanceTableFind. */
-extern int onlineInstantiationContextGetCurrent(void);
-
-
-unsigned int FUN_002fd460(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = onlineInstanceTableGetCurrent();
-  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x178));
-  if (((temp_v0 != 0) && (temp_v0 = onlineInstantiationContextGetCurrent(), *(char *)(temp_v0 + 0x30) == '\0')) &&
-     (*(char *)(param_1 + 0x1b1) == '\0')) {
-    FUN_00123e86(*(unsigned int *)(param_1 + 0x88));
-    return 0;
-  }
-  return 1;
+struct Object {
+    u8 pad[0x88];
+    void *member;
+    u8 gap[0xEC];
+    u32 id;
+    u8 gap2[0x35];
+    u8 active;
+};
+void *onlineInstanceTableGetCurrent();
+s32 onlineInstanceTableFind(void *,u32);
+struct Context {
+    u8 pad[0x30];
+    u8 active;
+};
+Context *onlineInstantiationContextGetCurrent();
+void FUN_00123e86(void *);
+s32 FUN_002fd460(Object *object) {
+    if(!onlineInstanceTableFind(onlineInstanceTableGetCurrent(),object->id))return 1;
+    if(!onlineInstantiationContextGetCurrent()->active || !object->active) {
+        FUN_00123e86(object->member);
+        return 0;
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

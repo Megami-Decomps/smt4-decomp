@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0024c2ec(...);
+int saveTestFlagRow(...);
 
-/* Supplied declaration required: FUN_0024c2ec. */
+/* Supplied declaration required: saveTestFlagRow. */
 extern int FUN_00342044(unsigned int);
 
 
@@ -28,7 +28,7 @@ void FUN_0039e9cc(int param_1)
       puVar3 = (unsigned char *)(temp_v1 + 0x61b4);
       if ((int)*(short *)(temp_v1 + 0x61ba) == (int)*(char *)(param_1 + 0x60)) {
         if (*(int *)(temp_v1 + 0x61bc) != -1) {
-          temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0x61b6),*(unsigned char *)(temp_v1 + 0x61b7));
+          temp_v0 = saveTestFlagRow(*(unsigned char *)(temp_v1 + 0x61b6),*(unsigned char *)(temp_v1 + 0x61b7));
           if (temp_v0 != 0) {
             temp_v3 = *(unsigned char *)(temp_v1 + 0x61b6);
             *puVar3 = 1;
@@ -42,12 +42,12 @@ void FUN_0039e9cc(int param_1)
           }
         }
         else {
-          temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0x61b6),*(unsigned char *)(temp_v1 + 0x61b7));
+          temp_v0 = saveTestFlagRow(*(unsigned char *)(temp_v1 + 0x61b6),*(unsigned char *)(temp_v1 + 0x61b7));
           if (((temp_v0 != 0) ||
               ((*(char *)(temp_v1 + 0x61b8) != '\0' &&
-               (temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0x61b6)), temp_v0 != 0)))) ||
+               (temp_v0 = saveTestFlagRow(*(unsigned char *)(temp_v1 + 0x61b6)), temp_v0 != 0)))) ||
              ((*(char *)(temp_v1 + 0x61b9) != '\0' &&
-              (temp_v1 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0x61b6)), temp_v1 != 0)))) {
+              (temp_v1 = saveTestFlagRow(*(unsigned char *)(temp_v1 + 0x61b6)), temp_v1 != 0)))) {
             *puVar3 = 0;
           }
           else {

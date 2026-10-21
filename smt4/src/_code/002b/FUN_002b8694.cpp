@@ -1,27 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b8694` (_code @ 0x2b8694, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses subs and movne instead of retail's cmp and two predicated moves. */
+#include "common.h"
+
+namespace { struct CampState { u8 padding[0x18]; s32 state; }; }
 
 extern "C" {
-
-extern int g_camp; /* 0x43da90 */
-
-
-unsigned int FUN_002b8694(void)
-
+/* Reads or updates the requested state. */
+extern CampState *g_camp;
+s32 FUN_002b8694(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_camp != 0) {
-    if (*(int *)(g_camp + 0x18) == 0x36) {
-      temp_v0 = 0;
+    if (g_camp == NULL) {
+        return 0;
     }
-    else {
-      temp_v0 = 1;
-    }
-  }
-  return temp_v0;
+    return g_camp->state != 54;
 }
-
-} /* extern "C" */
+}

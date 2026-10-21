@@ -142,7 +142,7 @@ int FUN_0028a2e8(...);
 int FUN_002c39dc(...);
 int FUN_0031d890(void);
 int contentEntryFindById(void);
-int FUN_003c3e48(...);
+int partyPanelSetHidden(...);
 int FUN_004db450(...);
 
 int FUN_001517b4(...);
@@ -155,11 +155,11 @@ int FUN_002a7b74(void);
 int FUN_002c2344(...);
 int FUN_002c8894(void);
 int FUN_003343f0(...);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
 int FUN_003f9ac4(int, int *, int);
-int FUN_003f9c3c(...);
+int controllerRefreshAtUnitScale(...);
 int FUN_003fe86c(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
@@ -212,7 +212,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short FUN_0017760c(int);
 /* Supplied declaration required: FUN_00178b04. */
@@ -314,7 +314,7 @@ extern int flaggedEntryGetValueA(int *);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003315c4. */
 /* Supplied declaration required: FUN_00333dc8. */
-extern int FUN_0033413c(void);
+extern int gameGlobalsGetState(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -323,10 +323,10 @@ extern int FUN_0033413c(void);
 /* Supplied declaration required: FUN_00334694. */
 /* Supplied declaration required: FUN_003347e8. */
 extern unsigned int asdVramBGetFreeBytes(void);
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: bitsHolderSetBit. */
-extern int FUN_00348ed0(int *);
+extern int uiSearchPrimary(int *);
 /* Supplied declaration required: FUN_0034a9c4. */
 extern int FUN_0034abc8(void);
 /* Supplied declaration required: FUN_0034c340. */
@@ -349,11 +349,11 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_00388758. */
 /* Supplied declaration required: pairLogDestroy. */
 /* Supplied declaration required: FUN_0039c744. */
-extern int FUN_003a77ac(void);
+extern int partyPanelIsStateTwentyFive(void);
 /* Supplied declaration required: FUN_003b0940. */
 /* Supplied declaration required: FUN_003b739c. */
 /* Supplied declaration required: FUN_003bb710. */
-/* Supplied declaration required: FUN_003c3e48. */
+/* Supplied declaration required: partyPanelSetHidden. */
 /* Supplied declaration required: FUN_003c3f1c. */
 /* Supplied declaration required: FUN_003c3f8c. */
 /* Supplied declaration required: FUN_003c9354. */
@@ -364,7 +364,7 @@ extern int FUN_003a77ac(void);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003f9ac4. */
-/* Supplied declaration required: FUN_003f9c3c. */
+/* Supplied declaration required: controllerRefreshAtUnitScale. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00408184. */
@@ -494,7 +494,7 @@ unsigned int FUN_001f5294(void)
     if ((temp_v5 == 8 || temp_v5 == 9) ||
        ((temp_v5 == 10 || temp_v5 == 0xb || (temp_v5 == 0xc || temp_v5 == 0xe)))) {
       FUN_003343f0(0);
-      FUN_00341f88();
+      buttonHelpGetValue();
       sysPlaySe();
     }
     if (piVar19[0x10d] == 0xd) {
@@ -524,7 +524,7 @@ unsigned int FUN_001f5294(void)
           if (piVar3[0x2483] != 0) {
             FUN_003fe86c(*(unsigned int *)(piVar3[0x2483] + 4),0,2);
           }
-          FUN_003f9c3c(piVar3[0x2484],piVar3 + 0x2485,0);
+          controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
           FUN_003f9ac4(piVar3[0x2484],piVar3 + 0x2485,0);
           piVar3[0x2498] = 0x3c;
         }
@@ -550,7 +550,7 @@ unsigned int FUN_001f5294(void)
           FUN_0040ae70(temp_v5,1);
           *(unsigned char *)(*(int *)(temp_v5 + 0x14) + 0xc4) = 0;
         }
-        FUN_003f9c3c(piVar3[0x2484],piVar3 + 0x2485,0);
+        controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
         FUN_002859d8(piVar3 + 0x2485);
         temp_v26 = 0x20000;
         temp_v7 = asdVramBGetFreeBytes();
@@ -624,7 +624,7 @@ unsigned int FUN_001f5294(void)
     if ((char)piVar3[0x108] == '\x01') {
       FUN_00184b90(piVar3,1);
       FUN_0020b908(0x1e,1);
-      FUN_003c3e48(1);
+      partyPanelSetHidden(1);
       temp_v4 = gameFlagIsSet(0x456);
       if ((temp_v4 != 0) || ((g_unite != (int *)0x0 && (g_unite[0x10d] == 0x17)))) {
         FUN_00215bbc();
@@ -781,7 +781,7 @@ unsigned int FUN_001f5294(void)
         ifTouchRegionRemove();
       }
       if ((char)piVar3[0x10c] == '\0') {
-        temp_v4 = FUN_00167f08();
+        temp_v4 = ifTouchGetButtonHelpValue();
         if (temp_v4 == 0xa0) {
           sysPlaySe(0x5e);
         }
@@ -2148,7 +2148,7 @@ LAB_001f77ec:
       FUN_0023b45c(0);
     }
     temp_v6 = 0;
-    temp_v5 = FUN_00348ed0(temp_v40[0]);
+    temp_v5 = uiSearchPrimary(temp_v40[0]);
     if (0 < temp_v5) {
       temp_v31 = piVar3 + 0x1a0c;
       do {
@@ -2242,7 +2242,7 @@ LAB_001f77ec:
           }
         }
         temp_v6 = temp_v6 + 1;
-        temp_v5 = FUN_00348ed0(temp_v40[0]);
+        temp_v5 = uiSearchPrimary(temp_v40[0]);
       } while (temp_v6 < temp_v5);
     }
     if (temp_v28 == (int *)0x0) {
@@ -2722,7 +2722,7 @@ LAB_001f8d58:
   case 0x13:
     temp_v4 = FUN_0035db94();
     if (((temp_v4 != 0) && (temp_v4 = FUN_002a7410(), temp_v4 == 0)) &&
-       ((temp_v4 = FUN_00167f08(), temp_v4 != 0x5f &&
+       ((temp_v4 = ifTouchGetButtonHelpValue(), temp_v4 != 0x5f &&
         (sysPlaySe(0x5f), *(char *)((int)piVar3 + 0x9071) != '\0')))) {
       FUN_00183f58(2,9,0x44,1);
       FUN_00183f58(3,0,0,1);
@@ -3225,7 +3225,7 @@ LAB_001f9868:
       FUN_003fe86c(temp_v4,0,2);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
       temp_v4 = *(int *)(piVar3[0x2482] + 4);
-      FUN_003f9c3c(piVar3[0x2484],piVar3 + 0x2485,0);
+      controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
       FUN_002859d8(piVar3 + 0x2485);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
     }
@@ -3942,7 +3942,7 @@ joined_r0x001fbbe8:
         }
       }
     }
-    temp_v4 = FUN_003a77ac();
+    temp_v4 = partyPanelIsStateTwentyFive();
     if (temp_v4 != 0) {
       temp_v29 = (int *)0x0;
       temp_v30 = (int *)0x0;
@@ -4004,7 +4004,7 @@ joined_r0x001fbbe8:
     temp_v4 = 0x23;
     break;
   case 0x23:
-    temp_v4 = FUN_0033413c();
+    temp_v4 = gameGlobalsGetState();
     if (temp_v4 != 0) {
       if (piVar3[0x102] == 0xd) {
         piVar19 = piVar3 + 0x1a0c;

@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0024f4ac; not written yet. */
+/* NON_MATCHING: fragment of a larger function (reads incoming r5 and writes inherited stack slots). */
 #include "common.h"

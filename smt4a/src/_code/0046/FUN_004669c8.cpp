@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001b8e18(int);
+int gameEnableFloatSettings(int);
 int FUN_0045f9b4(int);
 
 extern signed char DAT_00646b3a; /* 0x646b3a */
 
-/* Supplied declaration required: FUN_001b8e18. */
+/* Supplied declaration required: gameEnableFloatSettings. */
 /* Supplied declaration required: FUN_0045f9b4. */
 
 
@@ -63,7 +63,7 @@ void FUN_004669c8(int param_1,unsigned int param_2,unsigned int param_3)
   FUN_0045f9b4(param_1 + 0x98);
   temp_v2 = 0;
   do {
-    FUN_001b8e18(param_1 + temp_v2 * 0x20 + 0xb4);
+    gameEnableFloatSettings(param_1 + temp_v2 * 0x20 + 0xb4);
     temp_v1 = param_1 + temp_v2;
     temp_v2 = temp_v2 + 1;
     *(unsigned char *)(temp_v1 + 0x134) = 0;

@@ -1,28 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c1fc` (_code @ 0x31c1fc, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail argument packing or conditional store scheduling differs. */
+#include "common.h"
 
+struct MapBlock {
+    /* 0x000 */ u8 unk00[0xd5c];
+    /* 0xd5c */ s16 values[46];
+};
 extern "C" {
-
-int scrGetArg(int);
-
-/* Supplied declaration required: scrGetArg. */
-extern int gameGetMapBlock(void);
-
-
-unsigned int FUN_0031c1fc(void)
-
+MapBlock *gameGetMapBlock();
+s32 scrGetArg(s32 index);
+/* Stores a script value in the map block's indexed field. */
+s32 FUN_0031c1fc()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v0 = scrGetArg(1);
-  temp_v2 = scrGetArg(0);
-  *(unsigned short *)(temp_v1 + temp_v2 * 2 + 0xd5c) = temp_v0;
-  return 1;
+    MapBlock *map = gameGetMapBlock();
+    s32 value = scrGetArg(1);
+    s32 index = scrGetArg(0);
+    map->values[index] = value;
+    return 1;
 }
-
-} /* extern "C" */
+}

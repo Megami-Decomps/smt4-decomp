@@ -1,25 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00272f54` (_code @ 0x272f54, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [pc, #40] where the compiled block uses ldr r0, [pc, #36]. */
+#include "common.h"
+
+struct ResetState {
+    u32 unk00;       // 0x00
+    u32 state;       // 0x04
+    u32 counter;     // 0x08
+};
+
+struct ResetGlobals {
+    u8 unk00[0xC8];  // 0x00
+    u16 counter;     // 0xC8
+    u8 unkCA[3];     // 0xCA
+    u8 flag;         // 0xCD
+};
 
 extern "C" {
-
-extern int DAT_005806d4; /* 0x5806d4 */
-extern unsigned short DAT_005f17c4; /* 0x5f17c4 */
-extern unsigned char DAT_005f17c9; /* 0x5f17c9 */
-
+extern ResetState* g_mapEnemy;
+extern ResetGlobals DAT_005f16fc;
 
 void FUN_00272f54(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = DAT_005806d4;
-  *(unsigned int *)(DAT_005806d4 + 4) = 4;
-  *(unsigned int *)(temp_v0 + 8) = 0;
-  DAT_005f17c4 = 0;
-  DAT_005f17c9 = 0;
-  return;
+    ResetState* state = g_mapEnemy;
+    state->state = 4;
+    state->counter = 0;
+    DAT_005f16fc.counter = 0;
+    DAT_005f16fc.flag = 0;
 }
-
-} /* extern "C" */
+}

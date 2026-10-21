@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001642e4(unsigned char *, int, int, int);
 int memAlloc(...);
 int asdTextureRelease(void);
@@ -13,7 +13,7 @@ int FUN_00221f20(void);
 int handleBlockRefDrop(void);
 int FUN_002b3fd8(...);
 int FUN_002cf28c(...);
-int FUN_0037a7f4(...);
+int textureCreateFromImage(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned int *DAT_006471b4; /* 0x6471b4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001642e4. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -40,7 +40,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
-/* Supplied declaration required: FUN_0037a7f4. */
+/* Supplied declaration required: textureCreateFromImage. */
 extern unsigned int FUN_0037a834(unsigned int);
 
 
@@ -187,11 +187,11 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                         else {
                           if (piVar2 != (int *)0x0) {
                             if (*(int *)(param_1[0x12] + 4) != 0) {
-                              FUN_00100388(temp_v6,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3)
+                              textFormatBuffer(temp_v6,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3)
                               ;
                             }
                             else {
-                              FUN_00100388(temp_v6,&DAT_00544ac0,piVar2 + 3);
+                              textFormatBuffer(temp_v6,&DAT_00544ac0,piVar2 + 3);
                             }
                           }
                           puVar4 = temp_v6;
@@ -220,16 +220,16 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                           asdTextureRelease();
                           param_1[0xe] = 0;
                         }
-                        temp_v0 = FUN_0037a7f4(temp_v4);
+                        temp_v0 = textureCreateFromImage(temp_v4);
                         param_1[0xe] = temp_v0;
                       }
                       else {
                         if (piVar2 != (int *)0x0) {
                           if (*(int *)(param_1[0x12] + 4) != 0) {
-                            FUN_00100388(temp_v6,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3);
+                            textFormatBuffer(temp_v6,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3);
                           }
                           else {
-                            FUN_00100388(temp_v6,&DAT_00544ac0,piVar2 + 3);
+                            textFormatBuffer(temp_v6,&DAT_00544ac0,piVar2 + 3);
                           }
                         }
                         puVar4 = temp_v6;
@@ -242,7 +242,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                           asdTextureRelease();
                           param_1[0xe] = 0;
                         }
-                        temp_v0 = FUN_0037a7f4(puVar4);
+                        temp_v0 = textureCreateFromImage(puVar4);
                         param_1[0xe] = temp_v0;
                         asdMemFree(puVar4);
                       }

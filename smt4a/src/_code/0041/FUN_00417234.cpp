@@ -11,7 +11,7 @@ int FUN_00333dc8(int);
 int obj04Finish(void);
 int FUN_0037e078(void);
 int stateHolderEnterState7(void);
-int FUN_0039c448(void);
+int statusDownEnterStateSeven(void);
 int FUN_003a7b74(void);
 int FUN_003b0744(void);
 
@@ -28,9 +28,9 @@ extern int stateHolderStateIs8Or10(void);
 /* Supplied declaration required: stateHolderEnterState7. */
 extern unsigned short stateHolderGetCurrentEntry(void);
 extern int stateHolderStateIs0xD(void);
-/* Supplied declaration required: FUN_0039c448. */
+/* Supplied declaration required: statusDownEnterStateSeven. */
 /* Supplied declaration required: FUN_003a7b74. */
-extern int FUN_003b071c(void);
+extern int statusDownIsStateEleven(void);
 /* Supplied declaration required: FUN_003b0744. */
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_00417234(int param_1)
   
   switch(*(unsigned int *)(param_1 + 0xc)) {
   case 0:
-    FUN_0039c448();
+    statusDownEnterStateSeven();
     *(unsigned int *)(param_1 + 0xc) = 1;
   case 1:
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0xf);
@@ -59,7 +59,7 @@ unsigned int FUN_00417234(int param_1)
       *(unsigned int *)(param_1 + 0xc) = 3;
     }
     else {
-      temp_v3 = FUN_003b071c();
+      temp_v3 = statusDownIsStateEleven();
       if (temp_v3 == 0) {
         return 0;
       }

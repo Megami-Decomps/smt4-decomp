@@ -9,7 +9,7 @@ int FUN_0022699c(int, int, int, unsigned int);
 extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
-extern short FUN_00255158(int, unsigned int);
+extern short battleGetEntryHalfword(int, unsigned int);
 
 
 int FUN_002268d0(short param_1,short param_2,unsigned int param_3,int param_4,unsigned int param_5,
@@ -50,7 +50,7 @@ int FUN_002268d0(short param_1,short param_2,unsigned int param_3,int param_4,un
     temp_v2 = 0;
   }
   else {
-    temp_v2 = FUN_00255158((int)*(short *)(param_4 + 0x62),1);
+    temp_v2 = battleGetEntryHalfword((int)*(short *)(param_4 + 0x62),1);
     temp_v2 = temp_v2 - 1;
   }
   *(short *)(temp_v4 + 0x24) = temp_v2;

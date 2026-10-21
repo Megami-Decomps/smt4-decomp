@@ -11,7 +11,7 @@ extern int DAT_00447604; /* 0x447604 */
 extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned char DAT_004a0be4; /* 0x4a0be4 */
 
-extern int FUN_0024f4e8(void);
+extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: memClear. */
 
@@ -30,7 +30,7 @@ void FUN_0021be00(void)
   dataTable29Sub0GetEntryWithAoc();
   if (temp_v0 != 0) {
     memClear(&DAT_004a0be4,0x400);
-    temp_v0 = FUN_0024f4e8();
+    temp_v0 = dataTableGetRecordFortyOne();
     if (0 < temp_v0) {
       unaff_r6 = (int *)&g_gameState;
       unaff_r8 = &DAT_004a0be4;

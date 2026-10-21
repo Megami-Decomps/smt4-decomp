@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002480c8(void);
+int mapDestroySecondaryModel(void);
 int FUN_0027fa98(...);
 int FUN_0029c3c0(...);
 int FUN_002bf810(...);
@@ -21,7 +21,7 @@ int FUN_002804ec(...);
 int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00291e40(...);
 int buttonHelpSetPreset(int);
 
@@ -42,11 +42,11 @@ extern float DAT_0049f9a4; /* 0x49f9a4 */
 extern unsigned int DAT_0049f9a8; /* 0x49f9a8 */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
-/* Supplied declaration required: FUN_002480c8. */
+/* Supplied declaration required: mapDestroySecondaryModel. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
 /* Supplied declaration required: FUN_00248114. */
 /* Supplied declaration required: FUN_0024f034. */
-extern int FUN_002762e0(void);
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
@@ -58,7 +58,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
 extern int randBetween(unsigned int, unsigned int);
@@ -123,7 +123,7 @@ void FUN_002ea500(void)
                 }
                 else {
                   temp_v0 = padIsButtonPressed(5);
-                  if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
+                  if ((temp_v0 != 0) || (temp_v0 = inputIsQuestMenuPressed(), temp_v0 != 0)) {
                     temp_v0 = DAT_004474f4;
                     *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                     *(unsigned int *)(temp_v0 + 0xac) = 0;
@@ -160,7 +160,7 @@ void FUN_002ea500(void)
           *(unsigned int *)(temp_v0 + 0x58) = 0x40400000;
           *(unsigned char *)(temp_v0 + 0x6c) = 0;
           temp_v3 = *(float *)(temp_v0 + 0x28);
-          FUN_00287be4();
+          mathPositionHeadingDegrees();
           temp_v0 = g_lmapScene;
           temp_v8 = 180.0f;
           *(float *)(g_lmapScene + 0x50) = temp_v3;
@@ -291,7 +291,7 @@ LAB_002ea9b4:
             return;
           }
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_002480c8();
+          mapDestroySecondaryModel();
           temp_v6 = 0x12;
           FUN_0027fa98(temp_v6);
           FUN_002804ec(g_lmapScene + 0x28);
@@ -322,7 +322,7 @@ LAB_002ea9b4:
           FUN_00280364();
           return;
         }
-        FUN_002480c8();
+        mapDestroySecondaryModel();
         temp_v0 = g_lmapScene;
       }
     }

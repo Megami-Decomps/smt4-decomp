@@ -1,20 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00151408` (_code @ 0x151408, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_00151408(int param_1,unsigned int param_2,unsigned int param_3)
-
-{
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  *(unsigned int *)(param_1 + 0x9c) = param_2;
-  *(unsigned int *)(param_1 + 0xa0) = param_3;
-  *(unsigned int *)(param_1 + 0xa8) = in_s0;
-  return;
+namespace {
+struct PositionState {
+    /* 0x00 */ u8 unk00[0x9c];
+    /* 0x9c */ u32 first;
+    /* 0xa0 */ u32 second;
+    /* 0xa4 */ u8 unkA4[4];
+    /* 0xa8 */ f32 scale;
+};
 }
 
-} /* extern "C" */
+/* Updates the position parameters and scale. */
+extern "C" void FUN_00151408(PositionState *object, u32 first, u32 second, f32 scale)
+{
+    object->first = first;
+    object->second = second;
+    object->scale = scale;
+}

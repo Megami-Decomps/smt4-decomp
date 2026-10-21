@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char *);
+int textFormatBuffer(int, unsigned char *);
 int FUN_00333318(void);
 int FUN_003d2150(int);
 
@@ -13,7 +13,7 @@ extern unsigned char DAT_0052fe0c; /* 0x52fe0c */
 extern unsigned char DAT_0052fe2c; /* 0x52fe2c */
 extern int DAT_0057f584; /* 0x57f584 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00162ea4(void);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00333318. */
@@ -36,14 +36,14 @@ unsigned int FUN_0025ff44(void)
         if (temp_v1 != 2) {
           return 1;
         }
-        FUN_00100388(DAT_0057f584 + 0xc4,&DAT_0052fe2c);
+        textFormatBuffer(DAT_0057f584 + 0xc4,&DAT_0052fe2c);
       }
       else {
-        FUN_00100388(DAT_0057f584 + 0xc4,&DAT_0052fe0c);
+        textFormatBuffer(DAT_0057f584 + 0xc4,&DAT_0052fe0c);
       }
     }
     else {
-      FUN_00100388(DAT_0057f584 + 0xc4,&DAT_0052fde8);
+      textFormatBuffer(DAT_0057f584 + 0xc4,&DAT_0052fde8);
     }
     *(unsigned char *)(temp_v0 + 0x14) = 1;
     *(unsigned int *)(temp_v0 + 8) = 1;

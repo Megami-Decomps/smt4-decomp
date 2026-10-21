@@ -29,7 +29,7 @@ extern int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00202400. */
 /* Supplied declaration required: FUN_00203b40. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: flagsAtSetBits01. */
 extern int flagsAtGetBit0(void);
 /* Supplied declaration required: FUN_0049d140. */
@@ -54,7 +54,7 @@ void FUN_0049d770(int param_1)
   if (!temp_v7) {
     temp_v1 = *(int *)(param_1 + 0xc);
   }
-  if (((temp_v7 || temp_v1 == 0) || (temp_v1 = FUN_00341940(0x33), temp_v1 == 0)) ||
+  if (((temp_v7 || temp_v1 == 0) || (temp_v1 = textureGetIndexedResource(0x33), temp_v1 == 0)) ||
      (temp_v1 = asdTMTexTableNodeIsLoaded(0x33,0), temp_v1 == 0)) {
     return;
   }

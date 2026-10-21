@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned int *, unsigned char *);
+int textFormatBuffer(unsigned int *, unsigned char *);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
 
@@ -13,7 +13,7 @@ extern unsigned char DAT_00557be0; /* 0x557be0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00153f64(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 
@@ -32,8 +32,8 @@ unsigned int * FUN_004093f4(unsigned int *param_1)
   float temp_v6;
   
   *param_1 = (unsigned int)&DAT_00557be0;
-  FUN_00100388(param_1 + 1,&LAB_00409670);
-  FUN_00100388(param_1 + 0xb,&LAB_00409670);
+  textFormatBuffer(param_1 + 1,&LAB_00409670);
+  textFormatBuffer(param_1 + 0xb,&LAB_00409670);
   param_1[10] = 1;
   *(unsigned char *)(param_1 + 9) = 0;
   *(unsigned char *)(param_1 + 0x3b) = 0;

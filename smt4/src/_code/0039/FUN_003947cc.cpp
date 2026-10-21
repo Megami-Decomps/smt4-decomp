@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002505c0(int, unsigned int, int, int);
 int libc_strcmp(int *, unsigned int);
-int FUN_002be624(int *, unsigned char *, char *);
+int textFormatBuffer(int *, unsigned char *, char *);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern char s_ef_e_atk01_00436028[11]; /* 0x436028 */
 /* Supplied declaration required: FUN_002505c0. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int jyoucyuGetTableEntry(unsigned int);
 
 
@@ -68,7 +68,7 @@ unsigned int FUN_003947cc(unsigned int param_1,unsigned int param_2,unsigned int
     temp_v10 = 0;
     temp_v11 = 0;
     temp_v12 = 0;
-    FUN_002be624(&temp_v5,&LAB_00394a24,pcVar5);
+    textFormatBuffer(&temp_v5,&LAB_00394a24,pcVar5);
     puVar2 = (unsigned int *)&temp_v5;
     libc_strcmp(&temp_v5,param_1);
     temp_v3 = (float)temp_v4;

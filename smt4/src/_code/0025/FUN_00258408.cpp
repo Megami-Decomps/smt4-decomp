@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int DAT_0043dd90; /* 0x43dd90 */
+extern int g_screenStateWork; /* 0x43dd90 */
 
 extern int FUN_00100c4c(int, unsigned int);
 
@@ -32,9 +32,9 @@ void FUN_00258408(unsigned int param_1)
   int temp_v9;
   unsigned char temp_v10;
   
-  temp_v0 = DAT_0043dd90;
+  temp_v0 = g_screenStateWork;
   temp_v7 = 0;
-  *(unsigned int *)(DAT_0043dd90 + 0x194) = 0;
+  *(unsigned int *)(g_screenStateWork + 0x194) = 0;
   *(unsigned int *)(temp_v0 + 0x298) = 0;
   temp_v1 = *(int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v0 + 0x84) + 8) + 0x2c) + 8) + 0xb4);
   if (0 < temp_v1) {

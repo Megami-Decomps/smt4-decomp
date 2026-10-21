@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001b8e18(unsigned int *);
+int gameEnableFloatSettings(unsigned int *);
 
 extern unsigned char DAT_0055c1ec; /* 0x55c1ec */
 extern unsigned char DAT_0055c21c; /* 0x55c21c */
 extern unsigned char DAT_0055c230; /* 0x55c230 */
 
-/* Supplied declaration required: FUN_001b8e18. */
+/* Supplied declaration required: gameEnableFloatSettings. */
 extern unsigned int *FUN_001b9b28(void);
 
 
@@ -28,7 +28,7 @@ unsigned int * FUN_001b2280(void)
   puVar1[0x14] = (unsigned int)&DAT_0055c230;
   *puVar1 = (unsigned int)&DAT_0055c1ec;
   puVar1[0x16] = 0;
-  FUN_001b8e18(puVar1 + 0x1e);
+  gameEnableFloatSettings(puVar1 + 0x1e);
   *(unsigned char *)(puVar1 + 0x23) = 0;
   *(unsigned char *)((int)puVar1 + 0x8d) = 0;
   *(unsigned char *)((int)puVar1 + 0x8e) = 0;

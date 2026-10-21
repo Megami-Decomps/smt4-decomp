@@ -8,7 +8,7 @@ int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_001879d0(unsigned int);
 int FUN_002a1850(float *, int, unsigned int, float *);
-int FUN_0039bec8(int);
+int messageGetActiveValue(int);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 9 slot(s), 36 byte(s) */
@@ -37,7 +37,7 @@ extern int FUN_001834a4(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_002a1850. */
-/* Supplied declaration required: FUN_0039bec8. */
+/* Supplied declaration required: messageGetActiveValue. */
 
 
 void FUN_0046868c(int param_1,unsigned int param_2,int param_3)
@@ -106,7 +106,7 @@ void FUN_0046868c(int param_1,unsigned int param_2,int param_3)
         FUN_001835b4(2,temp_v15,temp_v14,temp_v3,(int)(fStack_70 - temp_v9),2);
         temp_v1 = 0;
         do {
-          FUN_0039bec8(temp_v1);
+          messageGetActiveValue(temp_v1);
           efctSetSpeed();
           param_3 = temp_v1 + 0x18e;
           FUN_001835b4(2,8,param_3,temp_v3,(int)temp_v12,6);

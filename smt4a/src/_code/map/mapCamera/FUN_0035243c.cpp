@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [68], unsigned char *, unsigned int, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char [68], unsigned char *, unsigned int, unsigned int, unsigned int);
 int FUN_0013c174(unsigned char [68], int *, int);
 int FUN_00178b04(int, unsigned char *, int);
 int settings5BSetValue(int);
-int FUN_003f9c0c(void);
+int controllerApplyAtUnitScale(void);
 int FUN_003f9e80(void);
 
 typedef int romwright_code(...);
@@ -21,12 +21,12 @@ extern unsigned char LAB_00352518; /* 0x352518 */
 extern unsigned char LAB_00352538; /* 0x352538 */
 extern int DAT_005806a4; /* 0x5806a4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int settings5BGetValue(void);
 /* Supplied declaration required: settings5BSetValue. */
-/* Supplied declaration required: FUN_003f9c0c. */
+/* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: FUN_003f9e80. */
 
 
@@ -62,7 +62,7 @@ void FUN_0035243c(unsigned int param_1,unsigned int param_2)
     *(unsigned int *)(temp_v0 + 100) = *(unsigned int *)(temp_v0 + 0x2d4);
   }
   uStack_5c = 0;
-  FUN_00100388(temp_v2,&LAB_00352518,param_1,param_1,param_2);
+  textFormatBuffer(temp_v2,&LAB_00352518,param_1,param_1,param_2);
   FUN_0013c174(temp_v2,&uStack_5c,1);
   temp_v0 = 0x48;
   FUN_00178b04(0x48,&LAB_00352538,0x15ad);
@@ -70,7 +70,7 @@ void FUN_0035243c(unsigned int param_1,unsigned int param_2)
     FUN_003f9e80();
   }
   *(int *)(DAT_005806a4 + 700) = temp_v0;
-  FUN_003f9c0c();
+  controllerApplyAtUnitScale();
   temp_v0 = settings5BGetValue();
   if (temp_v0 != 0) {
     settings5BSetValue(0);

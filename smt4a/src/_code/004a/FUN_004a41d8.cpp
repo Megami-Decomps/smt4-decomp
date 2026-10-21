@@ -17,7 +17,7 @@ int FUN_003343f0(...);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int FUN_0035deb0(void);
 int panelSetTarget(unsigned int, int);
-int FUN_003baa3c(int);
+int messageSetActiveMode(int);
 int FUN_003c5fc4(...);
 int screen4AEnter(...);
 int FUN_004a34a0(int, int);
@@ -50,7 +50,7 @@ extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0035deb0. */
 /* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_003baa3c. */
+/* Supplied declaration required: messageSetActiveMode. */
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: screen4AEnter. */
 /* Supplied declaration required: FUN_004a34a0. */
@@ -58,9 +58,9 @@ extern int FUN_002f036c(void);
 extern int FUN_004cfe4c(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
-extern int FUN_004d04f4(void);
-extern int FUN_004d0524(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestConfirmPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: FUN_004d0680. */
 
@@ -92,13 +92,13 @@ void FUN_004a41d8(int param_1)
     panelSetTarget(-temp_v2,0);
   }
   else {
-    FUN_003baa3c(1);
+    messageSetActiveMode(1);
   }
-  temp_v1 = FUN_004d0554();
-  temp_v3 = FUN_004d0524();
+  temp_v1 = inputIsQuestMenuPressed();
+  temp_v3 = inputIsQuestConfirmPressed();
   if (0 < *(short *)(param_1 + 0x864)) {
     temp_v6 = FUN_004d0584();
-    temp_v7 = FUN_004d04f4();
+    temp_v7 = inputIsQuestCancelPressed();
     if (temp_v6 == 0) {
       temp_v6 = (int)*(char *)(param_1 + 0x82a);
     }

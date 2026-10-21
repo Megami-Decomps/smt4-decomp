@@ -12,7 +12,7 @@ int FUN_0038b010(int);
 int FUN_003fd7b4(unsigned int);
 int FUN_0040aad4(int, int);
 int FUN_0040ace8(unsigned int, unsigned int);
-int FUN_004935b0(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -36,7 +36,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(void);
 /* Supplied declaration required: FUN_0040ace8. */
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 
 
 void FUN_00494740(int param_1)
@@ -53,7 +53,7 @@ void FUN_00494740(int param_1)
       FUN_00167458(temp_v2,0);
       temp_v0 = vec2GetYInt(temp_v2);
       temp_v1 = vec2GetXInt(temp_v2);
-      FUN_004935b0(param_1 + 0x3a4,temp_v1,temp_v0);
+      pointConvertToFloat(param_1 + 0x3a4,temp_v1,temp_v0);
       if (*(char *)(param_1 + 0x476) != '\0') {
         switch(*(unsigned int *)(param_1 + 0xb40)) {
         case 0:

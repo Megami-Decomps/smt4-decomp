@@ -12,12 +12,12 @@ typedef struct HolderGlobal {
     /* 0x4 */ Holder *holder;
 } HolderGlobal;
 
-extern HolderGlobal DAT_00588c40;
+extern HolderGlobal g_engineCleanupOwner;
 
 /* Returns the holder's value, or 0 when there is no holder. */
 u32 FUN_0031e6d4(void)
 {
-    return DAT_00588c40.holder != NULL ? DAT_00588c40.holder->value : 0;
+    return g_engineCleanupOwner.holder != NULL ? g_engineCleanupOwner.holder->value : 0;
 }
 
 } /* extern "C" */

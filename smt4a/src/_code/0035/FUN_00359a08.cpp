@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *);
+int textFormatBuffer(int *, unsigned char *);
 int dataTable04FindById(void);
 int FUN_0020d164(int *, unsigned int);
 int FUN_00230c1c(int *, unsigned int);
@@ -26,7 +26,7 @@ extern unsigned char LAB_00359c6c; /* 0x359c6c */
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0016a0e8(void);
 extern int idIsAbove400(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
@@ -38,7 +38,7 @@ extern int idIsAbove400(unsigned int);
 /* Supplied declaration required: FUN_002c2c68. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_00348ed0(void);
+extern int uiSearchPrimary(void);
 /* Supplied declaration required: FUN_0034a290. */
 
 
@@ -92,7 +92,7 @@ void FUN_00359a08(int param_1)
     temp_v3 = 0;
   } while (temp_v5 < 0x60);
   param_1 = param_1 + 0x8e14;
-  temp_v0 = FUN_00348ed0();
+  temp_v0 = uiSearchPrimary();
   temp_v0 = temp_v0 - 2;
   temp_v1 = FUN_002c2c68(param_1);
   temp_v8 = SBORROW4(temp_v3,temp_v0);
@@ -128,7 +128,7 @@ void FUN_00359a08(int param_1)
       FUN_0034a290();
       FUN_0020d164(&uStack_80,(*(unsigned int *)(temp_v4 + 0x44) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&uStack_80);
-      FUN_00100388(&uStack_80,&LAB_00359c6c);
+      textFormatBuffer(&uStack_80,&LAB_00359c6c);
       FUN_003180c4(0x25,&uStack_80);
     }
     else {

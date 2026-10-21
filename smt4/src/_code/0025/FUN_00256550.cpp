@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMdlManagerCreateLoaded(unsigned char [36], int);
 int FUN_002a0428(void);
-int FUN_002be624(unsigned char [36], unsigned char *, int);
+int textFormatBuffer(unsigned char [36], unsigned char *, int);
 
 extern unsigned char LAB_00256628; /* 0x256628 */
 extern int g_mapEnemy; /* 0x447600 */
@@ -14,7 +14,7 @@ extern short DAT_0049fb9a; /* 0x49fb9a */
 
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_00256550(int param_1)
@@ -45,7 +45,7 @@ void FUN_00256550(int param_1)
       temp_v4 = temp_v4 - 1;
     } while (temp_v4 != 0);
     if (temp_v3 < DAT_0049fb9a) {
-      FUN_002be624(temp_v5,&LAB_00256628,(int)*(short *)(param_1 * 0x10 + 0x448ca8));
+      textFormatBuffer(temp_v5,&LAB_00256628,(int)*(short *)(param_1 * 0x10 + 0x448ca8));
       asdMdlManagerCreateLoaded(temp_v5,0x1c0);
       *(unsigned char **)(temp_v1 + 0x304c) = puVar2;
       FUN_002a0428();

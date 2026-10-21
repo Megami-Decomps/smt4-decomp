@@ -6,31 +6,31 @@ extern "C" {
 extern const char DAT_005449ec[]; /* __FILE__ */
 
 EffMiscObject *FUN_00271be0(u32 kind, void *params);
-void *FUN_002b41c4(EffMiscDesc *desc);
-u32 *FUN_002721e4(EffMiscDesc *desc);
+void *resourceResolveHeaderPointer(EffMiscDesc *desc);
+u32 *resourceResolveDataPointer(EffMiscDesc *desc);
 void *FUN_0037a834(u32 id);
-void *FUN_0037a7f4(u32 *resource);
+void *textureCreateFromImage(u32 *resource);
 void *asdEffectTextureCreate(u32 *resource);
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
 
-extern EffMiscKind DAT_005c1078[];
+extern EffMiscKind g_effMiscKinds[];
 
 /* Creates an effect object from an effect description: the kind and parameters come from the
  * description and, for kinds that take one, its resource is attached as a shared resource. */
 EffMiscObject *FUN_00321fc8(EffMiscDesc *desc)
 {
-    void *params = FUN_002b41c4(desc);
+    void *params = resourceResolveHeaderPointer(desc);
     u32 kind = desc->kind;
     EffMiscObject *obj = FUN_00271be0(kind, params);
-    u32 *resource = FUN_002721e4(desc);
+    u32 *resource = resourceResolveDataPointer(desc);
     EffMiscShared *shared;
     u32 type;
 
     if (resource == NULL) {
         return obj;
     }
-    if (DAT_005c1078[obj->kind].sharesData == 0) {
+    if (g_effMiscKinds[obj->kind].sharesData == 0) {
         return obj;
     }
     type = desc->resourceType;
@@ -41,7 +41,7 @@ EffMiscObject *FUN_00321fc8(EffMiscDesc *desc)
     shared->refCount = 1;
     switch (type) {
     case 1:
-        shared->resource = FUN_0037a7f4(resource);
+        shared->resource = textureCreateFromImage(resource);
         break;
     case 4:
         shared->resource = FUN_0037a834(*resource & 0xffff);

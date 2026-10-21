@@ -14,21 +14,21 @@ typedef struct {
 } Owner;
 
 int btlGetMainState(void);
-int FUN_003e8430(void);
+int btlScriptUnitHasFlags(void);
 
-/* Returns the owner's entry index, 0 when FUN_003e8430 reports in the first check, or -1 when there is no usable entry. */
+/* Returns the owner's entry index, 0 when btlScriptUnitHasFlags reports in the first check, or -1 when there is no usable entry. */
 int FUN_004f9ae4(Owner *owner, int strict)
 {
     if (owner->entry == NULL || owner->entry->index < 0) {
         return -1;
     }
     btlGetMainState();
-    if (FUN_003e8430() != 0) {
+    if (btlScriptUnitHasFlags() != 0) {
         return 0;
     }
     if (strict != 0) {
         btlGetMainState();
-        if (FUN_003e8430() != 0) {
+        if (btlScriptUnitHasFlags() != 0) {
             return -1;
         }
     }

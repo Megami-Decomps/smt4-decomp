@@ -1,32 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033d3f8` (_code @ 0x33d3f8, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int FUN_0033f3a0(void);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0033f3a0. */
-
-
-void FUN_0033d3f8(int param_1)
-
+/* NON_MATCHING: retail argument packing or conditional store scheduling differs. */
+#include "common.h"
+struct EventCallbackState { u8 unk00[16]; u32 id; };
+extern "C" void FUN_0033f3a0(EventCallbackState *event, u32 first, u32 second, u32 third, f32 x, f32 y, f32 z, u32 reserved, u32 flags);
+/* Dispatches an active event, clearing the optional arguments. */
+extern "C" void FUN_0033d3f8(EventCallbackState *event, u32 first, u32 second, u32 third, f32 x, f32 y, f32 z)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x10) == 0) {
-    return;
-  }
-  FUN_0033f3a0();
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    if (event->id)
+        FUN_0033f3a0(event, first, second, third, x, y, z, 0, 0);
 }
-
-} /* extern "C" */

@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00314bf8(int);
-int FUN_003ae6cc(void);
+int naviMainFinishRequest(void);
 int sub68OwnerCall11(int);
 
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00314bf8. */
-/* Supplied declaration required: FUN_003ae6cc. */
+/* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: sub68OwnerCall11. */
 
 
@@ -46,7 +46,7 @@ unsigned int FUN_003705a0(void)
   else {
     sub68OwnerCall11(0x65);
   }
-  FUN_003ae6cc();
+  naviMainFinishRequest();
   return 1;
 }
 

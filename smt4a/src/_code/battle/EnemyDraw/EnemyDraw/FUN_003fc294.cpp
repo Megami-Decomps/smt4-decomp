@@ -71,7 +71,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 extern int FUN_00162880(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int lmapMainIsRunning(void);
@@ -168,7 +168,7 @@ void FUN_003fc294(int param_1,int param_2)
   temp_v3 = FUN_00167e54();
   if (((((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) ||
        (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
-     ((temp_v3 = FUN_00162858(), temp_v3 == 0 && (temp_v3 = FUN_00162880(), temp_v3 != 0)))) {
+     ((temp_v3 = campIsState85(), temp_v3 == 0 && (temp_v3 = FUN_00162880(), temp_v3 != 0)))) {
     temp_v21 = romwright_piece_4_4((int)(temp_v21 >> 0x20),0x3fc00000);
   }
   temp_v8 = 0;

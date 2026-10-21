@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_003fd76c(int, float *);
-int FUN_003fd784(int);
+int controllerSetDestination(int, float *);
+int controllerSetPosition(int);
 int FUN_003fdb18(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -27,8 +27,8 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetDestination. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fdb18. */
 
 
@@ -66,9 +66,9 @@ void FUN_004828c4(int param_1)
     temp_v6 = *(float *)(param_1 + 0x30) + *(float *)(param_1 + 0xb4);
     temp_v7 = *(float *)(param_1 + 0x34) + *(float *)(param_1 + 0xb8);
     temp_v1 = *(int *)(*(int *)(param_1 + 0x78) + 4);
-    FUN_003fd76c(temp_v1,&temp_v5);
+    controllerSetDestination(temp_v1,&temp_v5);
     FUN_003fdb18(temp_v1);
-    FUN_003fd784(temp_v1);
+    controllerSetPosition(temp_v1);
     if (DAT_005f161d != '\0') {
       temp_v0 = *(unsigned int *)(temp_v1 + 4) | 3;
     }

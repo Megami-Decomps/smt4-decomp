@@ -15,10 +15,10 @@ int FUN_00180118(...);
 int FUN_00184310(void);
 int asdMemFree(void);
 int dialogClose(...);
-int FUN_00237898(...);
+int messageForwardDefaultMode(...);
 int FUN_002854d8(...);
 int FUN_002b53e0(...);
-int FUN_002d173c(void);
+int mapDepartPrepare(void);
 int libc_strcpy(...);
 int FUN_003180c4(...);
 int FUN_0031cd00(...);
@@ -188,7 +188,7 @@ extern int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_0021c118. */
 extern unsigned int FUN_00228ab0(unsigned int);
 /* Supplied declaration required: FUN_0023244c. */
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00270c18. */
 /* Supplied declaration required: FUN_0027243c. */
@@ -206,13 +206,13 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002b53e0. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: FUN_002cf698. */
-/* Supplied declaration required: FUN_002d173c. */
+/* Supplied declaration required: mapDepartPrepare. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00301ad0. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0031cd00. */
-extern int FUN_0031d000(short);
+extern int gameDataGetEntryFlags(short);
 /* Supplied declaration required: FUN_0031f138. */
 /* Supplied declaration required: FUN_00363990. */
 /* Supplied declaration required: FUN_0037693c. */
@@ -1032,7 +1032,7 @@ LAB_002bbdec:
         libc_strcpy(temp_v22,temp_v9);
         FUN_003180c4(0xd,temp_v22);
         FUN_001695a0();
-        FUN_00237898(*(unsigned int *)(temp_v7 + 0x2268),0,0,6,0);
+        messageForwardDefaultMode(*(unsigned int *)(temp_v7 + 0x2268),0,0,6,0);
         temp_v9 = DAT_00573a5c | *(unsigned int *)(temp_v7 + 0x45a4);
         *(unsigned int *)(temp_v7 + 0x45a0) = *(unsigned int *)(temp_v7 + 0x45a0) | DAT_00573a58;
         *(unsigned int *)(temp_v7 + 0x45a4) = temp_v9;
@@ -1099,7 +1099,7 @@ LAB_002bbdec:
       temp_v15 = temp_v7 + temp_v6 * 4;
       psVar22 = (short *)(temp_v15 + 0x455c);
       if ((0 < *psVar22) && (*(short *)(temp_v15 + 0x455e) != 0)) {
-        temp_v8 = FUN_0031d000(*psVar22);
+        temp_v8 = gameDataGetEntryFlags(*psVar22);
         FUN_0031f138(*psVar22,(unsigned int)*(unsigned short *)(temp_v15 + 0x455e) + temp_v8);
         FUN_0041817c(*psVar22,*(unsigned short *)(temp_v15 + 0x455e));
         FUN_002854d8(*psVar22,1);
@@ -1167,7 +1167,7 @@ LAB_002bbdec:
         if ((*(unsigned int *)(temp_v7 + 0x10c) & 0x800000) == 0) {
           FUN_004c8b10();
           FUN_002b53e0(temp_v7);
-          FUN_002d173c();
+          mapDepartPrepare();
         }
       }
     }

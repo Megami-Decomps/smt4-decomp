@@ -9,7 +9,7 @@ AsdHashPackHeader *asdLoadFileSync(s32 *result, u32 zero, const char *path, u32 
 void *FUN_00178b04(u32 size, const char *file, int line);
 s32 FUN_0019dbb8(const char *path);
 void rt_aeabi_memclr(char *buf, u32 size);
-s32 FUN_00100388(char *dst, const char *format, ...);
+s32 textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00158900(void *stream, const char *path, s32 mode);
 
 /* Loads the pack file `path` into `pack` (replacing what it held) and opens a stream on
@@ -62,7 +62,7 @@ s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *str
         return result;
     }
     rt_aeabi_memclr(fullPath, ASD_FILE_PATH_LEN);
-    FUN_00100388(fullPath, "rom:/%s", streamPath);
+    textFormatBuffer(fullPath, "rom:/%s", streamPath);
     result = FUN_00158900((u8 *)pack->stream + 4, fullPath, 1);
     return result;
 }

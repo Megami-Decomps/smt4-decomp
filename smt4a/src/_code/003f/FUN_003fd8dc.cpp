@@ -1,3 +1,4 @@
+/* NON_MATCHING: compiler preserves an extra r8 in the element loop. */
 #include "common.h"
 
 extern "C" {

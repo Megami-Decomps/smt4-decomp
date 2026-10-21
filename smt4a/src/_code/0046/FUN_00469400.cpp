@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *, int, unsigned int);
+int textFormatBuffer(int *, unsigned char *, int, unsigned int);
 int qsort(int, unsigned int, int, unsigned char *);
 int gameFlagIsSet(...);
 int FUN_003fe388(...);
@@ -42,7 +42,7 @@ extern unsigned char LAB_00469ccc; /* 0x469ccc */
 extern unsigned char LAB_00469ce4; /* 0x469ce4 */
 extern unsigned char LAB_00469d00; /* 0x469d00 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -206,10 +206,10 @@ LAB_00469530:
           temp_v9 = FUN_00184964(1,2);
         }
 LAB_00469668:
-        FUN_00100388(&temp_v14,&LAB_00469948,temp_v5 + 1,temp_v9);
+        textFormatBuffer(&temp_v14,&LAB_00469948,temp_v5 + 1,temp_v9);
         temp_v6 = param_1 + temp_v5 * 4;
         FUN_003fe388(*(unsigned int *)(*(int *)(temp_v6 + 0xa10) + 4),&temp_v14,0);
-        FUN_00100388(&temp_v14,&LAB_00469960,temp_v5 + 1,temp_v9);
+        textFormatBuffer(&temp_v14,&LAB_00469960,temp_v5 + 1,temp_v9);
         FUN_003fe388(*(unsigned int *)(*(int *)(temp_v6 + 0xa34) + 4),&temp_v14,0);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < *(int *)(param_1 + 0xabc));

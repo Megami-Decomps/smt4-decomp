@@ -5,10 +5,10 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0023e400(...);
+int matrixScaleColumnsAlt(...);
 int FUN_00241d44(...);
 int FUN_0025b750(void);
-int FUN_002a3504(float *, float *, int *);
+int mathMatrixTranslateLocal(float *, float *, int *);
 int FUN_002b011c(void);
 int mtx44Copy(float *, unsigned int *);
 int FUN_002c1b64(...);
@@ -108,10 +108,10 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0023e400. */
+/* Supplied declaration required: matrixScaleColumnsAlt. */
 /* Supplied declaration required: FUN_00241d44. */
 /* Supplied declaration required: FUN_0025b750. */
-/* Supplied declaration required: FUN_002a3504. */
+/* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -303,8 +303,8 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
       DAT_004efdd8 = DAT_004efd9c;
     }
     mtx44Copy(&temp_v20,&DAT_004efd9c);
-    FUN_002a3504(&temp_v20,&temp_v20,&temp_v50);
-    FUN_0023e400(&temp_v20,&temp_v20,temp_v53);
+    mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v50);
+    matrixScaleColumnsAlt(&temp_v20,&temp_v20,temp_v53);
     nn_math_ARMv6_MTX44MultAsm(&temp_v20,&temp_v20,&temp_v32);
     FUN_002c1b64(g_titleScene,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
     temp_v5 = g_titleScene;

@@ -10,14 +10,14 @@ int FUN_00270474(void);
 int FUN_00273358(unsigned int);
 int FUN_00273840(...);
 int FUN_00273b78(void);
-int FUN_00275e18(void);
+int battlePrepareEncounter(void);
 int FUN_00275e4c(void);
-int FUN_0027645c(...);
-int FUN_00276480(...);
-int FUN_00276950(...);
+int navigationApplyOptionalValue(...);
+int navigationApplyArguments(...);
+int navigationSetFieldValue(...);
 int mapDepartSetTarget(...);
 int FUN_0027d0ec(void);
-int FUN_0027d474(...);
+int navigationSetArguments(...);
 int FUN_0027d7b0(...);
 int FUN_0027fa98(...);
 int FUN_0027fc14(...);
@@ -73,14 +73,14 @@ extern int FUN_0026f950(void);
 /* Supplied declaration required: FUN_00273358. */
 /* Supplied declaration required: FUN_00273840. */
 /* Supplied declaration required: FUN_00273b78. */
-/* Supplied declaration required: FUN_00275e18. */
+/* Supplied declaration required: battlePrepareEncounter. */
 /* Supplied declaration required: FUN_00275e4c. */
-/* Supplied declaration required: FUN_0027645c. */
-/* Supplied declaration required: FUN_00276480. */
-/* Supplied declaration required: FUN_00276950. */
+/* Supplied declaration required: navigationApplyOptionalValue. */
+/* Supplied declaration required: navigationApplyArguments. */
+/* Supplied declaration required: navigationSetFieldValue. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027d0ec. */
-/* Supplied declaration required: FUN_0027d474. */
+/* Supplied declaration required: navigationSetArguments. */
 extern int FUN_0027d748(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 /* Supplied declaration required: FUN_0027fa98. */
@@ -115,7 +115,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x24) = 0x52;
       *(unsigned int *)(temp_v2 + 0x28) = 0;
       FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17,DAT_0049fa18,DAT_0049fa19);
-      FUN_0027645c(1);
+      navigationApplyOptionalValue(1);
       return;
     }
     DAT_0049fd14 = -1;
@@ -234,12 +234,12 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
       temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v6;
     }
-    FUN_0027d474(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
-    FUN_00276480(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
-    FUN_00276950(DAT_0049f928);
-    FUN_0027645c(0);
+    navigationSetArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
+    navigationApplyArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
+    navigationSetFieldValue(DAT_0049f928);
+    navigationApplyOptionalValue(0);
     mapDepartSetTarget(0xffffffff,0xffffffff);
-    FUN_00275e18();
+    battlePrepareEncounter();
     FUN_0027fc14(0);
     FUN_00273840(0);
     FUN_0027fa98(1);

@@ -2,8 +2,8 @@
 
 extern "C" {
 
-extern void FUN_00412f9c(void *p);
-extern s32 FUN_0041302c(void *p);
+extern void bufferReleaseOwnedPair(void *p);
+extern s32 bufferDestroyOwnedPair(void *p);
 extern void asdOperatorDelete(s32 p);
 extern void asdTextureRelease(void *p);
 extern void asdMemFree(void *ptr);
@@ -12,9 +12,9 @@ extern void asdMemFree(void *ptr);
 void block6Free(Block6 *block)
 {
     if (block->unk00 != NULL) {
-        FUN_00412f9c(block->unk00);
+        bufferReleaseOwnedPair(block->unk00);
         if (block->unk00 != NULL) {
-            asdOperatorDelete(FUN_0041302c(block->unk00));
+            asdOperatorDelete(bufferDestroyOwnedPair(block->unk00));
         }
     }
     if (block->unk14 != NULL) {

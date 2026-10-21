@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00178b04(...);
 int FUN_003f0e20(...);
 int FUN_004d881c(...);
@@ -46,7 +46,7 @@ typedef struct {
 extern unsigned char LAB_003e9c80; /* 0x3e9c80 */
 extern unsigned char LAB_003e9cb4; /* 0x3e9cb4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004d881c. */
@@ -110,7 +110,7 @@ void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
       temp_v0 = *(int *)&param_1->field_0x1ed4 + *(short *)(temp_v2 + 8) * 0x1d0;
       pfVar2 = param_1;
       FUN_003f0e20(param_1,(int)*(short *)(temp_v0 + 0x6a));
-      FUN_00100388(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
+      textFormatBuffer(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
       FUN_004d881c(param_1->field_0x22bc,&temp_v3);
       param_1->field_0x22cc = 1;
       return;
@@ -120,7 +120,7 @@ void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
   temp_v0 = 0;
   pfVar2 = param_1;
   FUN_003f0e20(param_1,(int)*(short *)(temp_v0 + 0x6a));
-  FUN_00100388(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
+  textFormatBuffer(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
   FUN_004d881c(param_1->field_0x22bc,&temp_v3);
   param_1->field_0x22cc = 1;
   return;

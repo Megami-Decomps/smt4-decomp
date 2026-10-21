@@ -28,7 +28,7 @@ extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern unsigned int FUN_003e8430(void);
+extern unsigned int btlScriptUnitHasFlags(void);
 extern int FUN_003eb1cc(void);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004102d8. */
@@ -89,7 +89,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
       *(int *)(temp_v4 + 0x4c) = param_7;
       if (param_15 != 0) {
         btlGetMainState();
-        temp_v3 = FUN_003e8430();
+        temp_v3 = btlScriptUnitHasFlags();
         if (temp_v3 != 0) {
           FUN_004fb43c(0,0,0x1000263,0,1,0,0);
         }
@@ -108,7 +108,7 @@ LAB_004fba00:
       *(int *)(temp_v4 + 0x4c) = param_6;
       if (param_15 == 0) goto LAB_004fbabc;
       btlGetMainState();
-      temp_v3 = FUN_003e8430();
+      temp_v3 = btlScriptUnitHasFlags();
       temp_v3 = temp_v3 & ~param_14;
       if (temp_v3 != 0) {
         FUN_004fb43c(0,0,0x1000263,0,1,0,0);
@@ -127,7 +127,7 @@ LAB_004fba00:
     *(int *)(temp_v4 + 0x4c) = param_7;
     if (param_15 != 0) {
       btlGetMainState();
-      temp_v3 = FUN_003e8430();
+      temp_v3 = btlScriptUnitHasFlags();
       if (temp_v3 != 0) {
         FUN_004fb43c(0,0,0x1000263,0,1,0,0);
       }

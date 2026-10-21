@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
 /* Picks the next state: mode 13 when both checks pass (after buttonHelpSetPreset(0x3c)), otherwise mode 6 after rebuilding the display. */
 #include "common.h"
 

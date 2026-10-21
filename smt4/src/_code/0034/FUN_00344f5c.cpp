@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023c0d0(...);
-int FUN_0023c118(...);
+int actionCreateKindSeventeen(...);
 int FUN_00246cf0(...);
 int FUN_0027df30(...);
 int gameMoneyAdd(...);
@@ -15,7 +15,7 @@ int FUN_0029e648(...);
 int FUN_00338704(...);
 int FUN_003bf5a8(...);
 int FUN_003c017c(...);
-int FUN_003d9868(...);
+int workAdoptGlobalHandle(...);
 
 int FUN_0020ffd8(...);
 int FUN_0023c154(...);
@@ -26,7 +26,7 @@ int FUN_0023c428(...);
 int FUN_0023ce90(...);
 int FUN_0023ea20(...);
 int FUN_0024057c(...);
-int FUN_002636e4(...);
+int effectAreAllCompletionChecksReady(...);
 int FUN_0026beb4(...);
 int scrScriptProcessStartEntry(...);
 int buttonHelpGetMode(...);
@@ -110,7 +110,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0020ffd8. */
 /* Supplied declaration required: FUN_0023c0d0. */
-/* Supplied declaration required: FUN_0023c118. */
+/* Supplied declaration required: actionCreateKindSeventeen. */
 /* Supplied declaration required: FUN_0023c154. */
 /* Supplied declaration required: FUN_0023c1bc. */
 /* Supplied declaration required: FUN_0023c24c. */
@@ -131,13 +131,13 @@ extern int FUN_0023c684(unsigned int);
 /* Supplied declaration required: FUN_00244fb0. */
 extern int FUN_0024502c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00245228. */
-extern int FUN_00245278(unsigned int, unsigned int);
+extern int tableIsSupportedKind(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00246cf0. */
 extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002568c4. */
 extern int FUN_00256940(int, int, unsigned int);
-/* Supplied declaration required: FUN_002636e4. */
+/* Supplied declaration required: effectAreAllCompletionChecksReady. */
 /* Supplied declaration required: FUN_0026beb4. */
 /* Supplied declaration required: FUN_0027dbc8. */
 /* Supplied declaration required: FUN_0027df30. */
@@ -193,7 +193,7 @@ extern int btlSlotsGetMaxValue(int);
 /* Supplied declaration required: FUN_003d6f98. */
 extern int FUN_003d700c(int);
 /* Supplied declaration required: FUN_003d86a0. */
-/* Supplied declaration required: FUN_003d9868. */
+/* Supplied declaration required: workAdoptGlobalHandle. */
 extern int FUN_003d9af8(int, int);
 /* Supplied declaration required: FUN_003d9ba0. */
 /* Supplied declaration required: FUN_003d9f74. */
@@ -401,7 +401,7 @@ LAB_00344fc0:
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
         if (temp_v1 == 2) {
-          temp_v5 = FUN_00245278(temp_v4,0);
+          temp_v5 = tableIsSupportedKind(temp_v4,0);
 joined_r0x003463c0:
           if (temp_v5 != 0) {
             temp_v1 = 0;
@@ -435,7 +435,7 @@ joined_r0x003463c0:
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 == '\x03') {
-            temp_v5 = FUN_00245278(temp_v4,1);
+            temp_v5 = tableIsSupportedKind(temp_v4,1);
             goto joined_r0x003463c0;
           }
         }
@@ -877,7 +877,7 @@ joined_r0x0034611c:
       if (temp_v5 != 1) {
         if ((temp_v5 != 2) ||
            (((temp_v5 = DAT_00435d18, FUN_003dd14c(DAT_00435d18,(int)psVar2[0x12]), temp_v5 != 0 &&
-             (temp_v5 = FUN_002636e4(), temp_v5 == 0)) &&
+             (temp_v5 = effectAreAllCompletionChecksReady(), temp_v5 == 0)) &&
             ((*(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) & 1) != 0)))) {
           temp_v1 = 1;
           psVar2[1] = temp_v1;
@@ -944,7 +944,7 @@ joined_r0x0034611c:
         if (temp_v9 != 1) {
           if (temp_v9 != 2) {
             if (temp_v9 == 3) {
-              temp_v5 = FUN_002636e4(temp_v5);
+              temp_v5 = effectAreAllCompletionChecksReady(temp_v5);
               goto joined_r0x003463c0;
             }
           }
@@ -960,14 +960,14 @@ joined_r0x0034611c:
               psVar2[1] = temp_v1;
               break;
             }
-            temp_v9 = FUN_002636e4(temp_v5);
+            temp_v9 = effectAreAllCompletionChecksReady(temp_v5);
             if (temp_v9 != 0) {
               FUN_0023ea20(temp_v5,1);
             }
           }
         }
         else {
-          temp_v9 = FUN_002636e4(temp_v5);
+          temp_v9 = effectAreAllCompletionChecksReady(temp_v5);
           if (temp_v9 != 0) {
             temp_v9 = FUN_0020ffd8(temp_v5);
             if (temp_v9 == 0) {
@@ -1079,7 +1079,7 @@ LAB_00346258:
           FUN_0027df30(0,*(unsigned int *)(psVar2 + 4),*puVar9 + (short)unaff_r5[2] * 0x114,0,temp_v9,
                        0xffffffff,0xffffffff,0,0,0,9,0,1);
           FUN_002505c0(0,*(unsigned int *)(psVar2 + 4),0x10001c5,0,1,0,0);
-          FUN_0023c118(0,*(unsigned int *)(psVar2 + 4),(int)*(short *)((int)unaff_r5 + 0x6e),
+          actionCreateKindSeventeen(0,*(unsigned int *)(psVar2 + 4),(int)*(short *)((int)unaff_r5 + 0x6e),
                        unaff_r5[0x32]);
           FUN_0023c0d0(g_btlScriptUnit,temp_v4,(int)(short)unaff_r5[2],temp_v9);
           psVar2[0x14] = 1;
@@ -1172,7 +1172,7 @@ LAB_003453f8:
     }
     break;
   case '4':
-    FUN_003d9868(DAT_00435d18);
+    workAdoptGlobalHandle(DAT_00435d18);
   }
   if ((*(unsigned char *)((int)psVar2 + 5) & 1) == 0) {
     psVar2[1] = psVar2[1] - 1;

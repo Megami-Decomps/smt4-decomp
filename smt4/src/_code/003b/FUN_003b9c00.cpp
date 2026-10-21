@@ -10,7 +10,7 @@ int listScrollToId(int, int);
 int FUN_00296e90(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bd808(int, unsigned short *);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int gameFlagIsSet(...);
 
 /* stack frame of param_1: 6 slot(s), 18 byte(s) */
@@ -35,7 +35,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002bd808. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: gameFlagIsSet. */
 
 
@@ -69,7 +69,7 @@ void FUN_003b9c00(int param_1)
           temp_v3 = *(unsigned int *)(param_1 + 0xd90);
           temp_v4 = *(unsigned int *)(param_1 + 0xd88);
           DAT_0044cfb8 = 0;
-          FUN_002be624(temp_v13,&DAT_00404e04,temp_v2 + 0x2c);
+          textFormatBuffer(temp_v13,&DAT_00404e04,temp_v2 + 0x2c);
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v13);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
@@ -88,7 +88,7 @@ LAB_003b9cf0:
           temp_v3 = *(unsigned int *)(param_1 + 0xd90);
           temp_v11 = *(unsigned int *)(param_1 + 0xd88);
           DAT_0044cfb8 = 0;
-          FUN_002be624(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
+          textFormatBuffer(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
           temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
@@ -113,7 +113,7 @@ LAB_003b9cf0:
         temp_v3 = *(unsigned int *)(param_1 + 0xd90);
         temp_v11 = *(unsigned int *)(param_1 + 0xd88);
         DAT_0044cfb8 = 0;
-        FUN_002be624(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
+        textFormatBuffer(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
         temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
         scrScriptProcessStartEntry(temp_v3,temp_v4);
         do {

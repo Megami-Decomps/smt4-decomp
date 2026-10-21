@@ -12,7 +12,7 @@ int FUN_0036f8bc(void);
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_002e5864. */
 extern int FUN_002e589c(void);
-extern int FUN_00348c00(void);
+extern int eventEffectIsStateThree(void);
 /* Supplied declaration required: FUN_0036f8bc. */
 
 
@@ -26,7 +26,7 @@ unsigned char FUN_0031a33c(void)
   if (temp_v0 != 0) {
     temp_v0 = FUN_002e589c();
     if (temp_v0 == 0) {
-      temp_v0 = FUN_00348c00();
+      temp_v0 = eventEffectIsStateThree();
       return temp_v0 != 0;
     }
     scrGetArg(1);

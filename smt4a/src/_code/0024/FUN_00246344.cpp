@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, unsigned char [72], unsigned int);
+int textFormatBuffer(int, unsigned char [72], unsigned int);
 int FUN_00152f44(void);
 int FUN_00180118(unsigned int);
 int dataTable00FindById(void);
@@ -13,7 +13,7 @@ int rt_memcpy(unsigned char [72], int, int);
 extern int *g_popupState; /* 0x58104c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
@@ -60,7 +60,7 @@ void FUN_00246344(void)
         rt_memcpy(temp_v5,temp_v1,0x48);
         temp_v3 = temp_v3 & 0xffff;
         FUN_00180118(temp_v3);
-        FUN_00100388((int)g_popupState + 0x25,temp_v5,temp_v3);
+        textFormatBuffer((int)g_popupState + 0x25,temp_v5,temp_v3);
         g_popupState[5] = (int)g_popupState + 0x25;
       }
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00218480(int);
-int FUN_00249974(void);
+int recordQueryStateThree(void);
 int playSceneTimerSubStartReverse(int);
 int playSceneFadeOutStart(int);
 int FUN_0028bfe4(int);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char g_btlUi; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_00218480. */
-/* Supplied declaration required: FUN_00249974. */
+/* Supplied declaration required: recordQueryStateThree. */
 /* Supplied declaration required: playSceneTimerSubStartReverse. */
 /* Supplied declaration required: playSceneFadeOutStart. */
 /* Supplied declaration required: FUN_0028bfe4. */
@@ -92,7 +92,7 @@ void FUN_003ae8ec(void)
     temp_v1 = playSceneIsFadeInDone((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x2200;
-      FUN_00249974();
+      recordQueryStateThree();
       if (temp_v1 != 0) {
         playSceneFadeOutStart(temp_v0 + 8);
         playSceneTimerSubStartReverse(temp_v0 + 0x2200);

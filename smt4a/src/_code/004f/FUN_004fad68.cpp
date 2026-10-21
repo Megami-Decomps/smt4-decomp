@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int FUN_001aff14(float *, int);
 int FUN_003e7fa4(...);
-int FUN_003e8430(void);
+int btlScriptUnitHasFlags(void);
 int FUN_003ecab8(...);
 int FUN_003f0e20(unsigned int *, unsigned int);
 int FUN_0043ba3c(...);
@@ -57,7 +57,7 @@ extern unsigned int DAT_00573824; /* 0x573824 */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: FUN_003e7fa4. */
-/* Supplied declaration required: FUN_003e8430. */
+/* Supplied declaration required: btlScriptUnitHasFlags. */
 /* Supplied declaration required: FUN_003ecab8. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_0043ba3c. */
@@ -153,7 +153,7 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
         return;
       }
       btlGetMainState();
-      FUN_003e8430();
+      btlScriptUnitHasFlags();
       return;
     }
     temp_v0 = *(short *)((int)puVar2 + 0x6e);

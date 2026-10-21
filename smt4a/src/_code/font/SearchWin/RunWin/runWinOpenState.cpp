@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00100388(void *text, void (*fn)(void));
+int textFormatBuffer(void *text, void (*fn)(void));
 int FUN_003d2150(int id);
 void LAB_003d8f04(void);
 
@@ -15,7 +15,7 @@ u32 runWinOpenState(void)
 {
     RunWinWork *run = g_runWin;
 
-    FUN_00100388(run->text, LAB_003d8f04);
+    textFormatBuffer(run->text, LAB_003d8f04);
     run->active = 1;
     run->state = 1;
     FUN_003d2150(0x10002a9);

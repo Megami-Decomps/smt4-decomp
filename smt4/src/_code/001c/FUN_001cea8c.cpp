@@ -29,7 +29,7 @@ int FUN_0019e0c0(...);
 int FUN_001c8a7c(int, int, int, int);
 int buttonHelpResetSlots(void);
 int FUN_0026b738(...);
-int FUN_0026b780(...);
+int recordContainsPairedId(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int scrScriptProcessStartEntry(...);
@@ -70,7 +70,7 @@ extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: buttonHelpResetSlots. */
 /* Supplied declaration required: contentEntryFlagTest. */
 /* Supplied declaration required: FUN_0026b738. */
-/* Supplied declaration required: FUN_0026b780. */
+/* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: FUN_0029541c. */
@@ -190,7 +190,7 @@ void FUN_001cea8c(int param_1)
             temp_v13 = (unsigned int)*(unsigned short *)(temp_v10 + 0xd114);
             *(unsigned short *)(temp_v10 + 0xd114) = temp_v2;
             *(unsigned char *)(param_1 + temp_v15 + 0xd2d0) = 1;
-            temp_v4 = FUN_0026b780(temp_v5,temp_v2);
+            temp_v4 = recordContainsPairedId(temp_v5,temp_v2);
             if (temp_v4 != 0) {
               if (*(int *)(param_1 + 0xd2c8) < 0) {
                 *(unsigned short *)(param_1 + *(int *)(param_1 + 0xd2c4) * 2 + 0xd132) = temp_v2;
@@ -249,7 +249,7 @@ void FUN_001cea8c(int param_1)
               temp_v4 = temp_v15;
             }
             else {
-              temp_v9 = FUN_0026b780(temp_v5,temp_v13);
+              temp_v9 = recordContainsPairedId(temp_v5,temp_v13);
               temp_v4 = temp_v15;
               if ((temp_v9 != 0) && (temp_v9 = FUN_0026b738(temp_v13), temp_v4 = temp_v15, temp_v9 != 0)) {
                 *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) - 1;
@@ -286,14 +286,14 @@ void FUN_001cea8c(int param_1)
         if (*(short *)(temp_v6 + 0xd114) != 0) {
           temp_v7 = FUN_0026b738();
           if ((temp_v7 != 0) &&
-             (temp_v7 = FUN_0026b780(temp_v5,*(unsigned short *)(temp_v6 + 0xd114)), temp_v7 != 0)) {
+             (temp_v7 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v6 + 0xd114)), temp_v7 != 0)) {
             *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) + 1;
             *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) + 1;
           }
           else {
             temp_v7 = FUN_0026b738(*(unsigned short *)(temp_v6 + 0xd114));
             if ((temp_v7 == 0) &&
-               (temp_v6 = FUN_0026b780(temp_v5,*(unsigned short *)(temp_v6 + 0xd114)), temp_v6 != 0)) {
+               (temp_v6 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v6 + 0xd114)), temp_v6 != 0)) {
               *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) + 1;
             }
           }

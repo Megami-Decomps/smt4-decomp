@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern unsigned int FUN_0022c004(unsigned int, unsigned int);
+extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022c7d4. */
 
 
@@ -91,7 +91,7 @@ unsigned int FUN_0022c100(unsigned int *param_1,unsigned int param_2,unsigned in
         }
       }
       else {
-        temp_v2 = FUN_0022c004(param_1[2],temp_v5);
+        temp_v2 = containerGrowCapacity(param_1[2],temp_v5);
         piVar9 = (int *)*param_1;
         puVar3 = (unsigned int *)0x0;
         temp_v0 = 0;

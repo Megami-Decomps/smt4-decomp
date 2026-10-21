@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int sysMemClear(float *, int);
-int FUN_00514500(void);
+int randomAdvanceShiftRegister(void);
 int FUN_00514540(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -67,7 +67,7 @@ static float romwright_sqrt_4(float value)
 extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -333,7 +333,7 @@ void FUN_00394a34(int param_1)
                   *pfVar17 = 0.0f;
                 }
                 else {
-                  FUN_00514500();
+                  randomAdvanceShiftRegister();
                   __aeabi_uidivmod();
                   *pfVar17 = temp_v10;
                   temp_v9 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);

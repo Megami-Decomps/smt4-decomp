@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023cb70(int, unsigned int, int, int);
-int FUN_0023cbc4(int, unsigned int, int);
+int transitionConfigureAndReset(int, unsigned int, int);
 int FUN_0023cd08(...);
 int FUN_00256898(int, unsigned int);
 int FUN_002568c4(int, unsigned int);
@@ -41,7 +41,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_0023cb70. */
-/* Supplied declaration required: FUN_0023cbc4. */
+/* Supplied declaration required: transitionConfigureAndReset. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00256898. */
 /* Supplied declaration required: FUN_002568c4. */
@@ -98,7 +98,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {
       VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0023cbc4(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+      transitionConfigureAndReset(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
       return;
     }
     break;

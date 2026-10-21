@@ -21,7 +21,7 @@ int FUN_002ba170(void);
 int libc_strcpy(unsigned char *, int);
 int FUN_003146ac(int, int, int);
 int FUN_0033abb4(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int gameFlagsBitSet(int, int);
 int FUN_003689d0(void);
 int FUN_00384830(void);
@@ -124,14 +124,14 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_003146ac. */
 extern int FUN_0033aa6c(int);
 /* Supplied declaration required: FUN_0033abb4. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00357b70. */
-extern int FUN_00364484(int);
+extern int gameFlagsTestSecondBank(int);
 /* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003659f4. */
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: sub68OwnerStart2. */
-extern int FUN_0036d54c(void);
+extern int mathCirclesOverlap(void);
 /* Supplied declaration required: FUN_00378964. */
 /* Supplied declaration required: FUN_00378a1c. */
 /* Supplied declaration required: FUN_00384830. */
@@ -215,21 +215,21 @@ unsigned int FUN_00249dec(void)
             temp_v1 = *(short *)(temp_v8 + 200);
             if ((((temp_v1 != 3 && temp_v1 != 4) && (temp_v1 != 5 && temp_v1 != 8)) &&
                 (temp_v1 != 9 && temp_v1 != 10)) && ((temp_v1 != 0x10 && temp_v1 != 0xd) && temp_v1 != 0xf)) {
-              temp_v4 = FUN_0036d54c();
+              temp_v4 = mathCirclesOverlap();
               goto joined_r0x00249fd4;
             }
-            temp_v4 = FUN_0036d54c();
+            temp_v4 = mathCirclesOverlap();
             if (temp_v4 == 0) break;
             temp_v4 = *(int *)(temp_v8 + 0xb0);
             FUN_00384830();
             if (temp_v4 >= 0x42f00000) break;
             temp_v4 = *(int *)(temp_v8 + 0xb0);
-            FUN_00352bc4();
+            mathPositionHeadingDegrees();
             FUN_0033abb4();
             if (temp_v4 < 0x428c0001) break;
           }
           else {
-            temp_v4 = FUN_0036d54c();
+            temp_v4 = mathCirclesOverlap();
 joined_r0x00249fd4:
             if (temp_v4 == 0) break;
           }
@@ -603,7 +603,7 @@ LAB_0024a684:
       case 3:
         temp_v4 = mapDepartIsRunning();
         if (temp_v4 == 0) {
-          temp_v4 = FUN_00364484((int)(short)*(unsigned int *)(temp_v8 + 0xcc));
+          temp_v4 = gameFlagsTestSecondBank((int)(short)*(unsigned int *)(temp_v8 + 0xcc));
           if (temp_v4 != 0) {
             *(unsigned int *)(temp_v8 + 0xc0) = 1;
             *(unsigned char *)(temp_v8 + 0xc4) = 1;

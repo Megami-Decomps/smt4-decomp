@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013c174(...);
 int FUN_0013c884(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int FUN_00178b04(...);
@@ -18,7 +18,7 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -63,7 +63,7 @@ void FUN_00407110(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[0x162] = 0x3f800000;
   param_1[0x163] = 0;
   param_1[0x164] = 0x40a00000;
-  FUN_001418fc(param_1 + 0x14);
+  uiSetFloatPair(param_1 + 0x14);
   FUN_0014f0dc(param_1 + 0x14,param_1 + 0x157,param_1 + 0x15a,param_1 + 0x161);
   FUN_001523b8(param_1 + 0x14,1);
   FUN_0036b824(param_1 + 0x14);

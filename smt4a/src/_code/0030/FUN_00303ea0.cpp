@@ -13,7 +13,7 @@ extern unsigned char DAT_005f2c20; /* 0x5f2c20 */
 
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00356308. */
-extern int FUN_003a3038(void);
+extern int dataTableGetRecordFortyOne(void);
 
 
 void FUN_00303ea0(void)
@@ -30,7 +30,7 @@ void FUN_00303ea0(void)
   FUN_00356308();
   if (temp_v0 != 0) {
     sysMemClear(&DAT_005f2c20,0x400);
-    temp_v0 = FUN_003a3038();
+    temp_v0 = dataTableGetRecordFortyOne();
     if (0 < temp_v0) {
       unaff_r6 = (int *)&g_gameState;
       unaff_r8 = &DAT_005f2c20;

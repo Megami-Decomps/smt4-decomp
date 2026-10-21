@@ -1,4 +1,4 @@
-/* The pool's alignment pad (armcc placed it behind a preceding library function) is the only difference in the disassembly. */
+/* NON_MATCHING: retail literal relocation is at a halfword-aligned pool address; compiler uses a word-aligned pool. */
 #include "common.h"
 
 extern "C" {

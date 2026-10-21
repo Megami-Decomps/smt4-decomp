@@ -1,3 +1,4 @@
+/* NON_MATCHING: armcc allocates a zero register and schedules transition callbacks and state stores differently. */
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
 
 extern "C" {

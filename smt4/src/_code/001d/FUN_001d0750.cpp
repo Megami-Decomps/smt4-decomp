@@ -24,7 +24,7 @@ int bibleOpenMode2(int);
 int FUN_00223cf0(void);
 int FUN_00269dc8(void);
 int FUN_0026a348(void);
-int FUN_0026a38c(...);
+int partyPanelSetEnabled(...);
 int FUN_0026a3c4(...);
 int guestWinRequestClose(void);
 int FUN_0026a598(void);
@@ -66,7 +66,7 @@ extern int FUN_00269d4c(void);
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: FUN_0026a348. */
-/* Supplied declaration required: FUN_0026a38c. */
+/* Supplied declaration required: partyPanelSetEnabled. */
 /* Supplied declaration required: FUN_0026a3c4. */
 /* Supplied declaration required: guestWinRequestClose. */
 /* Supplied declaration required: FUN_0026a598. */
@@ -291,7 +291,7 @@ void FUN_001d0750(int *param_1)
     FUN_0026a598();
     guestWinRequestClose();
     FUN_0029cc44(1);
-    FUN_0026a38c(0);
+    partyPanelSetEnabled(0);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
     *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
@@ -519,7 +519,7 @@ void FUN_001d0750(int *param_1)
       FUN_002e333c();
       guestWinRequestClose();
       FUN_0029cc44(1);
-      FUN_0026a38c(1);
+      partyPanelSetEnabled(1);
       FUN_0028a924(0xd,0,0xffffffff);
       FUN_0028a368(1);
       FUN_0029e774();

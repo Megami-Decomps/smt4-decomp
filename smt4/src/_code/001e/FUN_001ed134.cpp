@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -33,7 +33,7 @@ unsigned int FUN_001ed134(int param_1)
   
   temp_v0 = *(int *)(param_1 + 4);
   if (((temp_v0 != 0) && (*(int *)(temp_v0 + 8) != 0)) && (0.0f < *(float *)(temp_v0 + 0x10))) {
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar5 = (int *)(temp_v0 + 0x124c);
@@ -55,7 +55,7 @@ unsigned int FUN_001ed134(int param_1)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
   }
   return 0;
 }

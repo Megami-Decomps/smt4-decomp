@@ -1,3 +1,4 @@
+/* NON_MATCHING: payload-size arithmetic, allocation setup and geometry/texture register allocation differ from retail. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 

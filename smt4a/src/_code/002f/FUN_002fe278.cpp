@@ -1,37 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe278` (_code @ 0x2fe278, 0x32 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r2, r3, r4, r5, r6, lr}'; compiler emits 'push {r3, r4, r5, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int FUN_002ee978(unsigned int *);
-extern int wordRefsDiffer_002ee988(unsigned int **, unsigned int *);
-
-
-unsigned int * FUN_002fe278(int param_1,int param_2)
-
-{
-  int temp_v0;
-  unsigned int *temp_v1;
-  int temp_v2;
-  
-  temp_v1 = *(unsigned int **)(param_1 + 0x14);
-  do {
-    temp_v1 = (unsigned int *)*temp_v1;
-    temp_v2 = *(unsigned int *)(param_1 + 0x14);
-    temp_v0 = wordRefsDiffer_002ee988(&temp_v1,(unsigned int *)&temp_v2);
-    if (temp_v0 == 0) {
-      return (unsigned int *)0x0;
+struct Node { Node *next; Node *previous; u32 result; u8 address; };
+struct Object { u8 unk00[0x14]; Node *sentinel; };
+s32 FUN_002ee978(const void *address);
+s32 wordRefsDiffer_002ee988(Node **first, Node **second);
+u32 *FUN_002fe278(Object *object, s32 value) {
+    Node *node = object->sentinel->next;
+    while (wordRefsDiffer_002ee988(&node, &object->sentinel)) {
+        if (FUN_002ee978(&node->address) == value) return &node->result;
+        node = node->next;
     }
-    temp_v0 = FUN_002ee978(temp_v1 + 3);
-  } while (temp_v0 != param_2);
-  return temp_v1 + 2;
+    return NULL;
 }
-
-} /* extern "C" */
+}

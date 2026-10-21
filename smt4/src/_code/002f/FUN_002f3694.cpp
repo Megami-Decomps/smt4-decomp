@@ -16,8 +16,8 @@ typedef struct {
 extern int g_gameState; /* 0x49f91c */
 
 extern int FUN_001fc314(int);
-extern int FUN_002481b0(void);
-extern int FUN_00248dfc(void);
+extern int dataTableGetRecordFortyEight(void);
+extern int dataTableGetRecordFortyNine(void);
 extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: FUN_0025b670. */
@@ -56,7 +56,7 @@ void FUN_002f3694(void)
          (temp_v2 = temp_v0 + *(short *)(temp_v1 + 0x28) * 4, *(int *)(temp_v2 + 0xe60) == 0)) {
         temp_v3 = 0;
         *(int *)(temp_v2 + 0xe60) = *(short *)(temp_v1 + 0x26) * 0x708;
-        temp_v1 = FUN_002481b0();
+        temp_v1 = dataTableGetRecordFortyEight();
         if (0 < temp_v1) {
           do {
             temp_v1 = temp_v3;
@@ -68,7 +68,7 @@ void FUN_002f3694(void)
               *(unsigned int *)(temp_v1 + 0xc98) = *(unsigned int *)(temp_v1 + 0xc98) | (1 << ((temp_v2 % 0x20) & 0xffU));
             }
             temp_v3 = temp_v3 + 1;
-            temp_v1 = FUN_002481b0();
+            temp_v1 = dataTableGetRecordFortyEight();
           } while (temp_v3 < temp_v1);
         }
         temp_v1 = 0;
@@ -76,7 +76,7 @@ void FUN_002f3694(void)
           temp_v2 = gameGetMapBlock();
           temp_v5 = 0;
           pcVar6 = (char *)0x0;
-          temp_v3 = FUN_00248dfc();
+          temp_v3 = dataTableGetRecordFortyNine();
           if (0 < temp_v3) {
             do {
               pcVar3 = pcVar6;
@@ -90,7 +90,7 @@ void FUN_002f3694(void)
                 }
               }
               pcVar6 = pcVar6 + 1;
-              temp_v3 = FUN_00248dfc();
+              temp_v3 = dataTableGetRecordFortyNine();
             } while ((int)pcVar6 < temp_v3);
             if (temp_v5 != 0) {
               if (temp_v5 == 1) {
@@ -101,7 +101,7 @@ void FUN_002f3694(void)
               }
               temp_v6 = 0;
               pcVar6 = (char *)0x0;
-              temp_v5 = FUN_00248dfc();
+              temp_v5 = dataTableGetRecordFortyNine();
               if (0 < temp_v5) {
                 do {
                   pcVar3 = pcVar6;
@@ -117,7 +117,7 @@ void FUN_002f3694(void)
                     temp_v6 = temp_v6 + 1;
                   }
                   pcVar6 = pcVar6 + 1;
-                  temp_v5 = FUN_00248dfc();
+                  temp_v5 = dataTableGetRecordFortyNine();
                 } while ((int)pcVar6 < temp_v5);
               }
             }

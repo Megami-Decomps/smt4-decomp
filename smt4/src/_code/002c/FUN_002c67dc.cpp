@@ -1,32 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c67dc` (_code @ 0x2c67dc, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler rotates the padding loop differently and emits Thumb mov instead of movs. */
+#include "common.h"
+
+namespace { typedef void (*Writer)(u32 character, void *context); struct Cursor { u32 flags; Writer writer; void *context; u8 padding[0xc]; s32 remaining; u32 unknown; u32 count; }; }
 
 extern "C" {
-
-typedef int romwright_code(...);
-
-void FUN_002c67dc(unsigned int *param_1)
-
+/* Reads or updates the requested task state. */
+void FUN_002c67dc(Cursor *cursor)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = param_1[6];
-  if ((int)(*param_1 << 0x1b) < 0) {
-    temp_v1 = 0x30;
-  }
-  else {
-    temp_v1 = 0x20;
-  }
-  if ((*param_1 & 1) != 0) {
-    return;
-  }
-  while (temp_v0 = temp_v0 - 1, -1 < (int)temp_v0) {
-    (*(romwright_code *)param_1[1])(temp_v1,param_1[2]);
-    param_1[8] = param_1[8] + 1;
-  }
-  return;
+    s32 remaining = cursor->remaining;
+    u32 character = cursor->flags & 0x10 ? 48 : 32;
+    if (cursor->flags & 1) {
+        return;
+    }
+    while (--remaining >= 0) {
+        cursor->writer(character, cursor->context);
+        cursor->count++;
+    }
 }
-
-} /* extern "C" */
+}

@@ -5,11 +5,11 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0024857c(...);
+int matrixCopySelectedToGlobal(...);
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(...);
 int FUN_0024b660(...);
-int FUN_0024b77c(...);
+int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int FUN_002a2c7c(void);
@@ -88,11 +88,11 @@ static float romwright_sqrt_4(float value)
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0024857c. */
+/* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
 /* Supplied declaration required: FUN_0024b660. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
@@ -309,7 +309,7 @@ void FUN_002e4b84(int param_1)
               fStack_c4 = DAT_004ea920;
               fStack_c0 = DAT_004ea924;
               DAT_004ea928 = temp_v28;
-              FUN_0024857c(&temp_v27);
+              matrixCopySelectedToGlobal(&temp_v27);
               temp_v13 = pfVar5[0xe] * temp_v13;
               DAT_004ea92c = temp_v27 * temp_v13;
               DAT_004ea930 = fStack_c4 * temp_v13;
@@ -422,7 +422,7 @@ void FUN_002e4b84(int param_1)
             temp_v11 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 0xe0),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (temp_v10 - 0.5f) * 2.0f * temp_v11 * 0.5f * 0.017453292f;
-            FUN_0024857c(&temp_v27);
+            matrixCopySelectedToGlobal(&temp_v27);
             FUN_0024b830(0);
             DAT_004ea944 = temp_v13;
             DAT_004ea940 = temp_v12;
@@ -499,7 +499,7 @@ void FUN_002e4b84(int param_1)
                 FUN_0024b830(0);
                 temp_v3 = 0;
                 pfVar5[0x11] = temp_v1 * 6.2831855f;
-                FUN_0024b77c();
+                randomAdvanceShiftRegister();
                 if ((temp_v3 & 1) != 0) {
                   pfVar5[0x12] = -pfVar5[0x12];
                 }
@@ -512,7 +512,7 @@ void FUN_002e4b84(int param_1)
             fStack_84 = pfVar6[3];
             pfVar6[4] = 0.0f;
             if (temp_v30 != 0) {
-              FUN_0024b77c(0);
+              randomAdvanceShiftRegister(0);
               __aeabi_uidivmod();
               temp_v14 = (float)VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v1 = pfVar5[0xd] * temp_v14 +
@@ -553,7 +553,7 @@ void FUN_002e4b84(int param_1)
               DAT_004ea924 = *(float *)(temp_v5 + 0x104) * temp_v20 + pfVar5[2] * temp_v18 +
                              pfVar5[5] * temp_v1 + temp_v37 * temp_v13;
               if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
-                FUN_0024857c(&temp_v27);
+                matrixCopySelectedToGlobal(&temp_v27);
                 DAT_004ea938 = pfVar5[0xe] * (float)in_d10;
                 DAT_004ea92c = temp_v27 * DAT_004ea938;
                 DAT_004ea930 = fStack_c4 * DAT_004ea938;

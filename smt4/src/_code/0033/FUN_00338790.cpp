@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023eab0(int, int);
+int recordClampCurrentCount(int, int);
 int FUN_002485d4(int, unsigned short [30]);
 int FUN_00262410(int);
 int FUN_00283e48(void);
@@ -39,7 +39,7 @@ typedef struct {
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0023eab0. */
+/* Supplied declaration required: recordClampCurrentCount. */
 /* Supplied declaration required: FUN_002485d4. */
 /* Supplied declaration required: FUN_00262410. */
 /* Supplied declaration required: FUN_00283e48. */
@@ -209,7 +209,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
                                                 (unsigned char)(temp_v2 >> 0x16) & 3);
             temp_v7 = (int)(short)((short)(int)(temp_v10 * temp_v11 * (float)temp_v18) +
                                 *(short *)(temp_v4 + 0x2a));
-            FUN_0023eab0(temp_v4,temp_v7);
+            recordClampCurrentCount(temp_v4,temp_v7);
             if (temp_v7 == 0) {
               *(unsigned short *)(temp_v4 + 0x2a) = 0;
             }

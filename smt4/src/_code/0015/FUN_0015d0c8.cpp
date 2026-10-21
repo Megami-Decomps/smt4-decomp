@@ -1,22 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015d0c8` (_code @ 0x15d0c8, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail vcvt.u32.f32 s2, s0; compiler vcvt.u32.f32 s0, s0. */
+#include "common.h"
 
 extern "C" {
 
-int VectorFloatToUnsigned(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-
-
-unsigned int FUN_0015d0c8(unsigned int param_1)
-
+/* Converts a float passed through the base PCS into an unsigned word. */
+u32 FUN_0015d0c8(u32 valueBits)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = VectorFloatToUnsigned(param_1,3);
-  return temp_v0;
+    union { u32 bits; f32 value; } value;
+    value.bits = valueBits;
+    return (u32)value.value;
 }
 
 } /* extern "C" */

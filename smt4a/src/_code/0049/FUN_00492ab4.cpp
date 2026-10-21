@@ -1,14 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00492ab4` (_code @ 0x492ab4, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+struct Navigation { u8 unk00[0x5C]; f32 value; };
 extern "C" {
-
-
-void FUN_00492ab4(void)
-
-{
-  return;
+extern Navigation *g_naviMain;
+/* Returns the navigation object's current value. */
+f32 FUN_00492ab4() { return g_naviMain->value; }
 }
-
-} /* extern "C" */

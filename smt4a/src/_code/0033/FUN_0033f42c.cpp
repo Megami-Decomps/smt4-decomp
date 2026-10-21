@@ -33,7 +33,7 @@ extern int DAT_005f1c44; /* 0x5f1c44 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00283c54. */
 /* Supplied declaration required: FUN_00283cf4. */
-extern int FUN_003309c8(void);
+extern int frameTextureGetState(void);
 /* Supplied declaration required: FUN_00348c28. */
 /* Supplied declaration required: FUN_00348c3c. */
 
@@ -51,7 +51,7 @@ void FUN_0033f42c(void)
   if (DAT_005f185c != '\0') {
     return;
   }
-  temp_v0 = FUN_003309c8();
+  temp_v0 = frameTextureGetState();
   temp_v1 = DAT_005f1c34;
   if ((temp_v0 != 0) || (DAT_005f1c24 == 0)) {
     FUN_00348c28(0);

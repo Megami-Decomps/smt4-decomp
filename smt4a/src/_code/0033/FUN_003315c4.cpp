@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned char DAT_00588c40; /* 0x588c40 */
+extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
@@ -37,11 +37,11 @@ void FUN_003315c4(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_00588c40 + 0x4));
-  if (((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) != 0) &&
-     (temp_v0 = jobIsValid(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x7f30)), temp_v0 != 0)) {
-    if (*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x4398) != '\x01') {
-      if (*(char *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x4398) == '\x03') {
+  temp_v1 = (*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4));
+  if (((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) != 0) &&
+     (temp_v0 = jobIsValid(*(unsigned int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x7f30)), temp_v0 != 0)) {
+    if (*(char *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x4398) != '\x01') {
+      if (*(char *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x4398) == '\x03') {
         sysPlaySe(*(unsigned short *)(temp_v1 + 0x439a));
       }
     }
@@ -57,7 +57,7 @@ void FUN_003315c4(void)
         }
       }
     }
-    jobStop(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x7f30),0);
+    jobStop(*(unsigned int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x7f30),0);
     campCommonBgRelease();
     campButtonHelpRelease();
     return;

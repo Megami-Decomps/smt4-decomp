@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_003d06e4's literal pool; not written yet. */
 #include "common.h"
+
+struct SortRecord {
+    /* 0x000 */ u8 padding[0x1B4];
+    /* 0x1B4 */ s16 key;
+};
+
+extern "C" {
+
+/* Compares record pointers by their signed halfword key. */
+s32 FUN_001b1a04(const SortRecord *const *left, const SortRecord *const *right)
+{
+    return (*left)->key - (*right)->key;
+}
+
+} /* extern "C" */

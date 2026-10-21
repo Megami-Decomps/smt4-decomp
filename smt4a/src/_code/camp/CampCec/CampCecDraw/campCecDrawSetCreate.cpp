@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail evaluates a (file, line) pair for the allocation (debug-allocation macro arguments) before the call and discards it; nothing uses the pair */
 /* Creates the set of sprite handles of the cec screens. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"

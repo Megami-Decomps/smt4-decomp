@@ -1,29 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003490b8` (_code @ 0x3490b8, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail packed state stores or parameter lifetime differs. */
+#include "common.h"
 
-extern "C" {
-
-extern int gameGetFlagBlock(void);
-
-
-void FUN_003490b8(int param_1)
-
+struct FlagEntry { u8 flags; u8 value; u8 unk02[2]; };
+struct FlagBlock {
+    /* 0x000 */ u8 unk00[0x200];
+    /* 0x200 */ FlagEntry entries[1];
+};
+extern "C" FlagBlock *gameGetFlagBlock();
+/* Toggles the optional value and enables its entry flag. */
+extern "C" void FUN_003490b8(u32 index)
 {
-  int temp_v0;
-  char temp_v1;
-  
-  temp_v0 = gameGetFlagBlock();
-  temp_v0 = temp_v0 + param_1 * 4;
-  if (*(char *)(temp_v0 + 0x201) == '\0') {
-    temp_v1 = '\x02';
-  }
-  else {
-    temp_v1 = *(char *)(temp_v0 + 0x201) + '\x01';
-  }
-  *(char *)(temp_v0 + 0x201) = temp_v1;
-  *(unsigned char *)(temp_v0 + 0x200) = *(unsigned char *)(temp_v0 + 0x200) | 0x40;
-  return;
+    FlagEntry *entry = &gameGetFlagBlock()->entries[index];
+    entry->value = entry->value ? entry->value + 1 : 2;
+    entry->flags |= 0x40;
 }
-
-} /* extern "C" */

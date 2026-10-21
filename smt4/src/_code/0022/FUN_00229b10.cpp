@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00229ad4(int *);
+int battleSetActionKind(int *);
 int FUN_0027e3f8(int, int, int, int);
 int FUN_002ae164(void);
 
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char g_btlAction; /* 0x434278 */
 extern int g_btlEvent; /* 0x435d48 */
 
-/* Supplied declaration required: FUN_00229ad4. */
+/* Supplied declaration required: battleSetActionKind. */
 extern int FUN_0027e3b8(int);
 /* Supplied declaration required: FUN_0027e3f8. */
 /* Supplied declaration required: FUN_002ae164. */
@@ -65,7 +65,7 @@ void FUN_00229b10(int *param_1,int param_2)
       return;
     }
   }
-  FUN_00229ad4(param_1);
+  battleSetActionKind(param_1);
   return;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029c3c0(int, int, unsigned int);
 int FUN_002a03d8(...);
-int FUN_002c53f4(...);
+int mathInterpolateTimed(...);
 
 extern int DAT_0043df28; /* 0x43df28 */
 extern unsigned int DAT_0043df40; /* 0x43df40 */
@@ -16,7 +16,7 @@ extern unsigned int DAT_0043df44; /* 0x43df44 */
 /* Supplied declaration required: FUN_002a03d8. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_002c1d5c(void);
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 
 
 unsigned int FUN_001ad6fc(void)
@@ -91,11 +91,11 @@ unsigned int FUN_001ad6fc(void)
       piVar4 = (int *)(*(int *)(DAT_0043df28 + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
     }
     temp_v4 = temp_v7;
-    FUN_002c53f4(*piVar4,*(unsigned int *)(temp_v0 + 0x18));
+    mathInterpolateTimed(*piVar4,*(unsigned int *)(temp_v0 + 0x18));
     *(unsigned int *)(temp_v0 + 0x1c) = temp_v7;
     temp_v2 = piVar4[1];
     if (temp_v2 <= *(int *)(temp_v0 + 0x18)) {
-      FUN_002c53f4(*piVar4 - temp_v2,*(int *)(temp_v0 + 0x18) - temp_v2);
+      mathInterpolateTimed(*piVar4 - temp_v2,*(int *)(temp_v0 + 0x18) - temp_v2);
       *(unsigned int *)(temp_v0 + 0x20) = temp_v4;
     }
     *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
@@ -109,10 +109,10 @@ unsigned int FUN_001ad6fc(void)
       temp_v2 = *(int *)(DAT_0043df28 + 8) + *(int *)(temp_v0 + 0x10) * 0x10;
     }
     temp_v5 = temp_v6;
-    FUN_002c53f4(*(unsigned int *)(temp_v2 + 8),*(unsigned int *)(temp_v0 + 0x18));
+    mathInterpolateTimed(*(unsigned int *)(temp_v2 + 8),*(unsigned int *)(temp_v0 + 0x18));
     *(float *)(temp_v0 + 0x1c) = temp_v6;
     if (*(int *)(temp_v2 + 0xc) <= *(int *)(temp_v0 + 0x18)) {
-      FUN_002c53f4(*(int *)(temp_v2 + 8) - *(int *)(temp_v2 + 0xc),*(int *)(temp_v0 + 0x18) - 0x32);
+      mathInterpolateTimed(*(int *)(temp_v2 + 8) - *(int *)(temp_v2 + 0xc),*(int *)(temp_v0 + 0x18) - 0x32);
       *(float *)(temp_v0 + 0x20) = temp_v5;
     }
     *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;

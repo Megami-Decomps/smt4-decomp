@@ -10,7 +10,7 @@ int jobStopAndClearFlags(...);
 int FUN_00233db8(...);
 int FUN_00233e70(...);
 int FUN_00233fcc(...);
-int FUN_002340e4(...);
+int timeInitializeActiveState(...);
 int FUN_00234124(...);
 int FUN_0027eafc(...);
 int scrScriptProcessStartEntry(...);
@@ -43,7 +43,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
 extern int FUN_0026ee68(unsigned int);
 extern int strIsEmpty(unsigned int *);
@@ -89,7 +89,7 @@ void FUN_003923b0(unsigned int *param_1)
   unsigned int uStack_2c;
   unsigned int uStack_28;
   
-  FUN_002340e4(&temp_v3);
+  timeInitializeActiveState(&temp_v3);
   temp_v0 = param_1[2];
   puVar7 = param_1 + 0x5e9;
   puVar8 = param_1 + 0x5e8;

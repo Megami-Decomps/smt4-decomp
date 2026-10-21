@@ -7,12 +7,12 @@ extern "C" {
 int scrSetResult(...);
 int FUN_003e503c(void);
 
-extern unsigned char DAT_00588c40; /* 0x588c40 */
+extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
 
 extern unsigned int gameGetSlotRecord(void);
 extern int scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_0032fac0(void);
+extern unsigned int uiSelectedRecordGetFirst(void);
 extern int flagAt4IsClearOrMissing(void);
 /* Supplied declaration required: FUN_003e503c. */
 
@@ -26,8 +26,8 @@ unsigned int FUN_003c4dac(void)
   unsigned int temp_v2;
   
   temp_v0 = scrGetArg();
-  if ((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) != 0) {
-    temp_v1 = (*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x74c0) * 0x150;
+  if ((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) != 0) {
+    temp_v1 = (*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + *(int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x74c0) * 0x150;
     if (temp_v0 != 0) {
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x4492);
     }
@@ -53,7 +53,7 @@ unsigned int FUN_003c4dac(void)
       scrSetResult(0);
       return 1;
     }
-    temp_v2 = FUN_0032fac0();
+    temp_v2 = uiSelectedRecordGetFirst();
   }
   scrSetResult(temp_v2);
   return 1;

@@ -1,25 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333ea8` (_code @ 0x333ea8, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail argument packing or conditional store scheduling differs. */
+#include "common.h"
 
+struct EntryData {
+    /* 0x00 */ u8 unk00[34];
+    /* 0x22 */ u8 maximum;
+};
 extern "C" {
-
-int FUN_00283ebc(void);
-int FUN_002ae164(void);
-
-/* Supplied declaration required: FUN_00283ebc. */
-/* Supplied declaration required: FUN_002ae164. */
-
-
-void FUN_00333ea8(int param_1)
-
+EntryData *FUN_002ae164(u32 id);
+s32 FUN_00283ebc(EntryData *entry, u32 index, s32 kind);
+/* Returns the nonnegative amount remaining below the entry maximum. */
+s32 FUN_00333ea8(u32 id, u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_002ae164();
-  if (param_1 != 0) {
-    FUN_00283ebc();
-  }
-  return;
+    EntryData *entry = FUN_002ae164(id);
+    if (!entry)
+        return 0;
+    s32 remaining = entry->maximum - FUN_00283ebc(entry, index, 4);
+    return remaining > 0 ? remaining : 1;
 }
-
-} /* extern "C" */
+}

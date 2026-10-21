@@ -1,26 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145048` (_code @ 0x145048, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #48] where the compiled block uses ldr r0, [pc, #24]. */
+#include "common.h"
+
+struct SoundVolumeState {
+    u8 unk00[0xC0];
+    f32 volume;                  // 0xC0
+    u8 unkC4[0x08];
+};
+
+struct SoundSystem {
+    u8 unk00[0x1210];
+    SoundVolumeState volumeState; // 0x1210
+    u8 volumeEnabled;             // 0x12DC
+};
 
 extern "C" {
+extern SoundSystem g_asdSoundSystem;
+void FUN_0015e2fc(SoundVolumeState* state, f32 volume);
 
-extern unsigned int DAT_0063f440; /* 0x63f440 */
-extern unsigned int DAT_0063f4b8; /* 0x63f4b8 */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-
-
-void FUN_00145048(void)
-
+void FUN_00145048(f32 volume)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  if (DAT_0063f4c4 != '\0') {
-    DAT_0063f4b8 = in_s0;
-    DAT_0063f440 = in_s0;
-    return;
-  }
-  return;
+    if (g_asdSoundSystem.volumeEnabled != 0) {
+        g_asdSoundSystem.volumeState.volume = volume;
+        FUN_0015e2fc(&g_asdSoundSystem.volumeState, volume);
+    }
 }
-
-} /* extern "C" */
+}

@@ -8,8 +8,8 @@ int asdTextureRelease(void);
 int asdMemFree(unsigned short *);
 int FUN_002ce8b0(void);
 int asdOperatorDelete(void);
-int FUN_00412f9c(unsigned int);
-int FUN_0041302c(void);
+int bufferReleaseOwnedPair(unsigned int);
+int bufferDestroyOwnedPair(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ typedef struct {
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002ce8b0. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00412f9c. */
-/* Supplied declaration required: FUN_0041302c. */
+/* Supplied declaration required: bufferReleaseOwnedPair. */
+/* Supplied declaration required: bufferDestroyOwnedPair. */
 
 
 void geometryDestroy(unsigned short *param_1)
@@ -40,9 +40,9 @@ void geometryDestroy(unsigned short *param_1)
     FUN_002ce8b0();
   }
   else {
-    FUN_00412f9c(*(unsigned int *)(param_1 + 4));
+    bufferReleaseOwnedPair(*(unsigned int *)(param_1 + 4));
     if (*(int *)(param_1 + 4) != 0) {
-      FUN_0041302c();
+      bufferDestroyOwnedPair();
       asdOperatorDelete();
     }
   }

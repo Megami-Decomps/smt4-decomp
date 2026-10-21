@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002630e0(...);
 int dataTable00FindById(...);
 int FUN_002bd06c(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 typedef struct fn_002eb3dc_arg1 fn_002eb3dc_arg1;
 struct fn_002eb3dc_arg1 {
@@ -40,7 +40,7 @@ extern unsigned char FUN_0029e9cc(fn_002eb3dc_arg1 *);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_002bce30(fn_002eb3dc_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_002eb3dc(unsigned int *param_1,fn_002eb3dc_arg1 *param_2,unsigned int param_3,
@@ -69,9 +69,9 @@ void FUN_002eb3dc(unsigned int *param_1,fn_002eb3dc_arg1 *param_2,unsigned int p
   dataTable00FindById();
   pfVar3 = temp_v4;
   FUN_002bd06c(temp_v4);
-  FUN_002be624(*piVar1 + 4,&LAB_002eb5ac,pfVar3);
+  textFormatBuffer(*piVar1 + 4,&LAB_002eb5ac,pfVar3);
   temp_v1 = FUN_002bce30(temp_v4,0);
-  FUN_002be624(*piVar1 + 0x2c,&LAB_002eb5ac,temp_v1);
+  textFormatBuffer(*piVar1 + 0x2c,&LAB_002eb5ac,temp_v1);
   temp_v0 = FUN_0029e9cc(temp_v4);
   *(unsigned char *)(*piVar1 + 0x24) = temp_v0;
   *(unsigned int *)(*piVar1 + 0x28) = (unsigned int)param_2->field_0x2;

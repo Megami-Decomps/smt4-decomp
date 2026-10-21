@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [104], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [104], unsigned char *, unsigned int);
 int FUN_00272204(unsigned int, int *, int);
 int nodeListFree(unsigned int *);
 int FUN_00350ee0(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_00381874(unsigned int *);
-int FUN_003a1998(unsigned int *, unsigned int);
+int effMenuCreate(unsigned int *, unsigned int);
 int handleHolderFree(unsigned int *);
 int FUN_003c2df0(unsigned int, int, int);
 int FUN_003ca0ec(...);
@@ -30,13 +30,13 @@ extern int DAT_0059dc04; /* 0x59dc04 */
 extern unsigned int *DAT_0059dc1c; /* 0x59dc1c */
 extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00272204. */
-extern int FUN_00300778(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: nodeListFree. */
 /* Supplied declaration required: FUN_00350ee0. */
 /* Supplied declaration required: FUN_00381874. */
-/* Supplied declaration required: FUN_003a1998. */
+/* Supplied declaration required: effMenuCreate. */
 /* Supplied declaration required: handleHolderFree. */
 extern int linkedObjGetValue(unsigned int *);
 extern int FUN_003c2d90(unsigned int *, unsigned char *);
@@ -78,14 +78,14 @@ unsigned char * FUN_003c8878(unsigned int param_1)
     if ((param_1 & 8) != 0) {
       temp_v2 = 0;
       do {
-        FUN_00100388(temp_v7,&LAB_003c8a1c,temp_v2);
+        textFormatBuffer(temp_v7,&LAB_003c8a1c,temp_v2);
         FUN_00350ee0(DAT_0059dc1c,temp_v7,8,temp_v2,0);
         temp_v2 = temp_v2 + 1;
         param_1 = temp_v1;
       } while (temp_v2 < 0x16);
     }
     puVar1 = DAT_0059dc1c;
-    FUN_003a1998(DAT_0059dc1c,param_1);
+    effMenuCreate(DAT_0059dc1c,param_1);
     DAT_0059dc20 = puVar1;
     *puVar1 = 0xba;
     puVar1[1] = 0x1c;
@@ -95,7 +95,7 @@ unsigned char * FUN_003c8878(unsigned int param_1)
   }
   else if (temp_v5 == 1) {
     if (temp_v4 != 8) {
-      temp_v0 = FUN_00300778(DAT_0059dbf4,-temp_v6);
+      temp_v0 = linkedFindItemByIndex(DAT_0059dbf4,-temp_v6);
       if (DAT_0059dc04 != temp_v0) {
         FUN_003ca0ec(DAT_0059dbf4);
         FUN_003c2df0(DAT_0059dbf4,DAT_0059dc04,temp_v0);

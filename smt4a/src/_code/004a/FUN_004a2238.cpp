@@ -11,7 +11,7 @@ int FUN_0032d0c8(...);
 int FUN_0035ad50(int, unsigned char [300]);
 int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
-int FUN_003baa3c(int);
+int messageSetActiveMode(int);
 int FUN_004a3b48(...);
 int FUN_004a8750(unsigned int, int, int);
 
@@ -33,9 +33,9 @@ extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_003baa3c. */
+/* Supplied declaration required: messageSetActiveMode. */
 /* Supplied declaration required: FUN_004a3b48. */
-extern int FUN_004a6d44(int);
+extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_004a8750. */
 extern int FUN_004cfe4c(int *);
 
@@ -51,7 +51,7 @@ void FUN_004a2238(int *param_1)
   unsigned char temp_v4 [300];
   
   temp_v1 = (**(romwright_code **)(*param_1 + 0x24))(param_1);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_004a6d44((int)param_1 + 0x96), temp_v1 == 0)) {
+  if ((temp_v1 != 0) && (temp_v1 = utilityReturnSuccess((int)param_1 + 0x96), temp_v1 == 0)) {
     temp_v1 = param_1[0x215];
     FUN_00275bc8(temp_v1,param_1[0x216]);
     param_1[0x217] = temp_v1;
@@ -77,7 +77,7 @@ void FUN_004a2238(int *param_1)
         panelSetTarget(-temp_v3,0);
       }
       else {
-        FUN_003baa3c(1);
+        messageSetActiveMode(1);
       }
       sysPlaySe(0x2f);
       FUN_0035ad50(temp_v0,temp_v4);

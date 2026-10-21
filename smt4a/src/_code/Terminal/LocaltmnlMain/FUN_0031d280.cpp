@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_0019ea64(...);
+int messageSetMode(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern unsigned int *g_localTmnl; /* 0x56fccc */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 
 
 void FUN_0031d280(unsigned int *param_1)
@@ -68,7 +68,7 @@ void FUN_0031d280(unsigned int *param_1)
   puVar1[0x15f] = 0;
   puVar1[0x163] = 0;
   puVar1[0x162] = 0;
-  FUN_0019ea64(0);
+  messageSetMode(0);
   puVar1[0xf] = 0;
   *(unsigned char *)(puVar1 + 1) = 0;
   if (param_1 != (unsigned int *)0x0) {

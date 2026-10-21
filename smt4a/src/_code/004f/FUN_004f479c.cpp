@@ -7,7 +7,7 @@ extern "C" {
 int asdListBoxCreate(...);
 int asdListBoxAddItem(...);
 int FUN_002e0898(...);
-int FUN_002ea508(...);
+int jobSetText(...);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(...);
 int FUN_00340edc(...);
@@ -25,7 +25,7 @@ extern unsigned int *g_btlCamera; /* 0x571508 */
 /* Supplied declaration required: asdListBoxCreate. */
 /* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002e0898. */
-/* Supplied declaration required: FUN_002ea508. */
+/* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: FUN_00340edc. */
@@ -47,7 +47,7 @@ void FUN_004f479c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if (param_4 >= 2) {
     if (param_4 == 2) {
       g_btlCamera[0xd] = 0;
-      FUN_002ea508(param_3,"CAMERA EDIT");
+      jobSetText(param_3,"CAMERA EDIT");
       asdListBoxAddItem(param_3,&DAT_00528144);
       asdListBoxSetIntItem(param_3,0,g_btlCamera[0xd],0,1000,0);
     }
@@ -56,7 +56,7 @@ void FUN_004f479c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     g_btlCamera[2] = 0;
     puVar1[1] = 0;
     *puVar1 = 0;
-    FUN_002ea508(param_3,"CAMERA EDIT");
+    jobSetText(param_3,"CAMERA EDIT");
     asdListBoxAddItem(param_3,"瞂삍垕쾕墍");
     asdListBoxAddItem(param_3,"碂삍垕쾕墍");
     asdListBoxAddItem(param_3,"禂삍垕쾕墍");

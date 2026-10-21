@@ -1,31 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b128` (_code @ 0x38b128, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has trailing vtable pool bytes or different owner-register allocation. */
+#include "common.h"
 
+struct AocState {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ u8 resources[1];
+};
+struct WindowState { const void *vtable; };
 extern "C" {
-
-int asdMemFreeNonNull(unsigned int *);
-int FUN_002ba8f4(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-extern int g_aocMain; /* 0x432fc8 */
-
-/* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: FUN_002ba8f4. */
-
-
-void FUN_0038b128(unsigned int *param_1,unsigned int param_2)
-
+extern AocState *g_aocMain;
+void FUN_002ba8f4(void *resources);
+void asdMemFreeNonNull(void *memory);
+/* Releases the window's resources and heap storage. */
+void FUN_0038b128(WindowState *window, const void *vtable)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = param_2;
-  FUN_002ba8f4(g_aocMain + 0x88);
-  asdMemFreeNonNull(param_1);
-  return;
+    window->vtable = vtable;
+    FUN_002ba8f4(g_aocMain->resources);
+    asdMemFreeNonNull(window);
 }
-
-} /* extern "C" */
+}

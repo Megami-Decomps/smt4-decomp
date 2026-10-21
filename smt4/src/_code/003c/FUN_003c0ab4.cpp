@@ -1,22 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0ab4` (_code @ 0x3c0ab4, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-unsigned int FUN_003c0ab4(int param_1)
-
+/* NON_MATCHING: retail parameter lifetime, address formation or grouped-store selection differs. */
+#include "common.h"
+struct StatusWords {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 state;
+    /* 0x54 */ u32 flags;
+};
+/* Tests completion unless the state bits already force completion. */
+extern "C" s32 FUN_003c0ab4(const StatusWords *status)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = *(unsigned int *)(param_1 + 0x50);
-  if ((((temp_v1 & 1) == 0 || (temp_v1 & 0x80) == 0) || ((temp_v1 & 2) != 0)) ||
-     (temp_v0 = 0, (*(unsigned int *)(param_1 + 0x54) & 4) != 0)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    if ((status->state & 1) && (status->state & 128) && !(status->state & 2))
+        return (status->flags & 4) != 0;
+    return 1;
 }
-
-} /* extern "C" */

@@ -1,25 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1b3c` (_code @ 0x2e1b3c, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds the array stride and member offsets differently from retail. */
+#include "common.h"
+
+namespace { struct GameData { u8 padding[0x24414]; u8 records[12][76]; }; }
 
 extern "C" {
-
-int rt_aeabi_memclr(unsigned int, int);
-
-extern int DAT_0043e2ac; /* 0x43e2ac */
-
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-void FUN_002e1b3c(unsigned int param_1)
-
+extern GameData *g_GameDataBlocks;
+void rt_aeabi_memclr(void *buffer, u32 size);
+void FUN_002e1b3c(u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 < 0xc) {
-    rt_aeabi_memclr(DAT_0043e2ac + param_1 * 0x4c + 0x24814,0x4c);
-    return;
-  }
-  return;
+    if (index < 12) { rt_aeabi_memclr(g_GameDataBlocks->records[index], 76); }
 }
-
-} /* extern "C" */
+}

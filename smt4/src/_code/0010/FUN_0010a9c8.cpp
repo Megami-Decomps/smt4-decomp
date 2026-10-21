@@ -14,7 +14,7 @@ int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002be650(...);
 int FUN_002bed3c(void);
 int vec2GetXInt(...);
@@ -23,7 +23,7 @@ int FUN_002bee04(...);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -50,7 +50,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
@@ -60,7 +60,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -87,12 +87,12 @@ unsigned int FUN_0010a9c8(void)
   if (*(char *)(DAT_0043e190 + 9) != '\v') {
     if (*(char *)(DAT_0043e190 + 9) == '\x13') {
       if (*(char *)(DAT_0043e190 + 8) != '\0') {
-        FUN_002bf538();
+        efctSetSpeed();
         temp_v3 = FUN_002c5d80(1,0);
         FUN_002bee04(g_titleScene,3,temp_v3);
         FUN_002bf288(2,0x3a,0x8d,0,0,6);
         FUN_002bedb0(g_titleScene,3);
-        FUN_002bf538();
+        efctSetSpeed();
       }
       FUN_00126194(temp_v1);
       FUN_001189a4(DAT_0043e190);
@@ -100,12 +100,12 @@ unsigned int FUN_0010a9c8(void)
   }
   else {
     if (*(char *)(DAT_0043e190 + 8) != '\0') {
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v3 = FUN_002c5d80(1,0);
       FUN_002bee04(g_titleScene,3,temp_v3);
       FUN_002bf288(2,0xe,0x101,0,0,6);
       FUN_002bedb0(g_titleScene,3);
-      FUN_002bf538();
+      efctSetSpeed();
     }
     FUN_00126194(temp_v1);
     FUN_001189a4(DAT_0043e190);
@@ -118,13 +118,13 @@ unsigned int FUN_0010a9c8(void)
     temp_v2 = vec2GetYInt(DAT_0043e190 + 0x754);
     temp_v3 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v3);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     temp_v4 = FUN_002bf4f8(0xe,200);
     FUN_002bf380(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
     FUN_002be650(temp_v3,0);
-    FUN_002be624(temp_v9,&LAB_0010adb0,temp_v3);
+    textFormatBuffer(temp_v9,&LAB_0010adb0,temp_v3);
     temp_v5 = FUN_002bf4f8(0xe,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -154,7 +154,7 @@ unsigned int FUN_0010a9c8(void)
     temp_v2 = vec2GetYInt(temp_v2);
     temp_v3 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v3);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     temp_v5 = FUN_002bf4f8(0xe,0xc0);
     FUN_002bf380(2,0xe,0x11,*(short *)(temp_v5 + 8) + temp_v4,*(short *)(temp_v5 + 10) + temp_v2,0xb);

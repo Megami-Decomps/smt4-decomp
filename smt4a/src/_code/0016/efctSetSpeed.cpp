@@ -1,36 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `efctSetSpeed` (_code @ 0x1677c0, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses VMOVLE rather than retail VMOVCC for the lower speed clamp. */
+#include "common.h"
+
+namespace { struct Effects { u8 padding[0x38]; float first; u8 gap1[12]; float second; u8 gap2[12]; float third; u8 gap3[12]; float fourth; u8 gap4[0x11]; u8 changed; u8 gap5[6]; float speed; }; union Speed { float value; s32 bits; }; }
 
 extern "C" {
-
-extern float DAT_00630730; /* 0x630730 */
-extern float DAT_00630740; /* 0x630740 */
-extern float DAT_00630750; /* 0x630750 */
-extern float DAT_00630760; /* 0x630760 */
-extern unsigned char DAT_00630775; /* 0x630775 */
-extern float DAT_0063077c; /* 0x63077c */
-
-
-void efctSetSpeed(void)
-
+extern Effects DAT_006306f8;
+void efctSetSpeed(float speed)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if ((int)in_s0 >= 0x3f800001) {
-    in_s0 = 1.0f;
-  }
-  if (in_s0 < 0.0f) {
-    in_s0 = 0.0f;
-  }
-  DAT_0063077c = in_s0;
-  DAT_00630730 = in_s0;
-  DAT_00630740 = in_s0;
-  DAT_00630750 = in_s0;
-  DAT_00630760 = in_s0;
-  DAT_00630775 = 1;
-  return;
+    Speed clamped;
+    clamped.value = speed;
+    if (clamped.bits > 0x3f800000) { clamped.value = 1.0f; }
+    if (clamped.value < 0.0f) { clamped.value = 0.0f; }
+    DAT_006306f8.speed = clamped.value;
+    DAT_006306f8.first = clamped.value;
+    DAT_006306f8.second = clamped.value;
+    DAT_006306f8.third = clamped.value;
+    DAT_006306f8.fourth = clamped.value;
+    DAT_006306f8.changed = 1;
 }
-
-} /* extern "C" */
+}

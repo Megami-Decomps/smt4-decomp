@@ -28,7 +28,7 @@ int FUN_0037dab0(void);
 int FUN_0038b3f8(...);
 int FUN_003a7a88(...);
 int pairQueueAppend(...);
-int FUN_003f89e8(...);
+int controllerStartInterpolation(...);
 int FUN_0047f66c(...);
 int FUN_004a9588(...);
 int FUN_004aa0b0(...);
@@ -47,7 +47,7 @@ int FUN_0035d0e4(void);
 int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_0039ebcc(void);
-int FUN_003b2178(...);
+int uiMenuRequestStateNine(...);
 
 int FUN_00163aa4(...);
 int uiSpriteSelectAnim(int, int);
@@ -66,7 +66,7 @@ int FUN_0034efe0(void);
 int owner2DCInitSub(int);
 int menu32State387CIs7(...);
 int menu32EnterState27(int);
-int FUN_003f89c0(unsigned int);
+int controllerResetInterpolation(unsigned int);
 int FUN_003f97a4(unsigned int);
 int FUN_003f9970(unsigned int, unsigned int *, int);
 int FUN_004ab10c(int, unsigned int *);
@@ -172,12 +172,12 @@ extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
 /* Supplied declaration required: FUN_003a7a88. */
 extern int btlTalkBustUpIsUnk2F8(unsigned int);
-/* Supplied declaration required: FUN_003b2178. */
+/* Supplied declaration required: uiMenuRequestStateNine. */
 extern int menu32IsMissingOrState6(int);
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: pairQueueAppend. */
-/* Supplied declaration required: FUN_003f89c0. */
-/* Supplied declaration required: FUN_003f89e8. */
+/* Supplied declaration required: controllerResetInterpolation. */
+/* Supplied declaration required: controllerStartInterpolation. */
 /* Supplied declaration required: FUN_003f97a4. */
 /* Supplied declaration required: FUN_003f9970. */
 /* Supplied declaration required: FUN_0047f66c. */
@@ -396,7 +396,7 @@ unsigned int FUN_002248f8(void)
       temp_v10 = temp_v0;
       FUN_004ab10c(temp_v0,&temp_v16);
       FUN_003f9970(*(unsigned int *)(temp_v0 + 0x7488),&temp_v16,temp_v10);
-      FUN_003f89c0(*(unsigned int *)(temp_v0 + 0x7488));
+      controllerResetInterpolation(*(unsigned int *)(temp_v0 + 0x7488));
       *(unsigned int *)(temp_v0 + 0x74a0) = 0xd;
       temp_v10 = g_btlUiBlock;
       temp_v9 = menu32ModeIsNot5(g_btlUiBlock + 8);
@@ -468,7 +468,7 @@ unsigned int FUN_002248f8(void)
     }
     break;
   case 0xc:
-    temp_v4 = FUN_003b2178();
+    temp_v4 = uiMenuRequestStateNine();
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x74a0) = 0x10;
       temp_v17 = temp_v17 & 0xffff0000;
@@ -551,10 +551,10 @@ unsigned int FUN_002248f8(void)
     else {
 LAB_00225054:
       btlGetMainState();
-      temp_v4 = FUN_003e8430();
+      temp_v4 = btlScriptUnitHasFlags();
       if (temp_v4 == 0) break;
     }
-    FUN_003f89e8(*(unsigned int *)(temp_v0 + 0x7488));
+    controllerStartInterpolation(*(unsigned int *)(temp_v0 + 0x7488));
     menu32PlayCursorSeAndSelect(temp_v0 + 0x28c4);
     *(unsigned int *)(temp_v0 + 0x74a0) = 0xb;
     temp_v4 = g_btlUiBlock;
@@ -918,7 +918,7 @@ LAB_002255d4:
     }
     break;
   case 0x14:
-    temp_v10 = FUN_003b2178(temp_v0 + 0x28c4);
+    temp_v10 = uiMenuRequestStateNine(temp_v0 + 0x28c4);
     if (temp_v10 != 0) {
       *(unsigned int *)(temp_v0 + 0x74a0) = 0x15;
       campCommonBgRelease();

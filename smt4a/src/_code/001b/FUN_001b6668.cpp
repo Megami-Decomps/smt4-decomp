@@ -1,24 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b6668` (_code @ 0x1b6668, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r2, r0 where the compiled block uses ldrd r2, [r1]. */
+#include "common.h"
 
-extern "C" {
+struct ListNode {
+    ListNode* next; // 0x00
+    ListNode* prev; // 0x04
+};
 
+struct ListState {
+    u32 count; // 0x00
+};
 
-void FUN_001b6668(int *param_1,int *param_2)
-
+extern "C" void FUN_001b6668(ListState* list, ListNode* node)
 {
-  int temp_v0;
-  int *piVar2;
-  
-  temp_v0 = *param_2;
-  piVar2 = (int *)param_2[1];
-  *(int **)(temp_v0 + 4) = piVar2;
-  *piVar2 = temp_v0;
-  *param_1 = *param_1 - 1;
-  *param_2 = 0;
-  param_2[1] = 0;
-  return;
-}
+    ListNode* next = node->next;
+    ListNode* prev = node->prev;
 
-} /* extern "C" */
+    next->prev = prev;
+    prev->next = next;
+    list->count -= 1;
+    node->next = NULL;
+    node->prev = NULL;
+}

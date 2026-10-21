@@ -4,12 +4,12 @@
 extern "C" {
 
 BtlMainState *btlGetMainState(void);
-void FUN_002e4828(u32 owner);
+void scrCommMessageShowPlainBody(u32 owner);
 
-/* Script command for the battle's script owner: forwards to FUN_002e4828, the function that follows it. */
+/* Script command for the battle's script owner: forwards to scrCommMessageShowPlainBody, the function that follows it. */
 void FUN_002e4810(void)
 {
-    FUN_002e4828(btlGetMainState()->scriptOwner);
+    scrCommMessageShowPlainBody(btlGetMainState()->scriptOwner);
 }
 
 } /* extern "C" */

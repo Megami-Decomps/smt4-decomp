@@ -13,7 +13,7 @@ int FUN_002c85b0(int);
 int FUN_0031f718(unsigned int, int);
 int FUN_00333dc8(int);
 int FUN_0035da20(unsigned int [5], int);
-int FUN_00371e98(void);
+int statusDownEnterStateOne(void);
 int FUN_0037e0d0(unsigned int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -37,7 +37,7 @@ extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_0035da20. */
-/* Supplied declaration required: FUN_00371e98. */
+/* Supplied declaration required: statusDownEnterStateOne. */
 /* Supplied declaration required: FUN_0037e0d0. */
 
 
@@ -84,7 +84,7 @@ LAB_004170bc:
       temp_v2[0] = (unsigned int)*(unsigned short *)(param_1 + 0x38);
       FUN_0035da20(temp_v2,8);
     }
-    FUN_00371e98();
+    statusDownEnterStateOne();
     *(unsigned int *)(param_1 + 0xc) = 3;
   case 3:
     temp_v0 = FUN_002c7cb4();

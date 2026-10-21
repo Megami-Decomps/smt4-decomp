@@ -1,29 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003289a0` (_code @ 0x3289a0, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail argument and pointer lifetime scheduling differs. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_002a9834(unsigned int [2], int, unsigned int, unsigned int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_002a9834. */
-
-
-void FUN_003289a0(int param_1,unsigned int param_2,unsigned int param_3)
-
+struct ParameterState { u8 unk00[8]; u32 value; u8 unk0c[12]; u32 previous; };
+struct ParameterOwner { u32 unk00; ParameterState *state; };
+extern "C" void FUN_002a9834(u32 *output, ParameterOwner *owner, u32 value, s32 mode);
+/* Saves the supplied parameter and dispatches it with the current value. */
+extern "C" void FUN_003289a0(ParameterOwner *owner, u32 value, s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0 [2];
-  
-  *(unsigned int *)(*(int *)(param_1 + 4) + 0x18) = *(unsigned int *)(*(int *)(param_1 + 4) + 8);
-  temp_v0[0] = *(unsigned int *)(*(int *)(param_1 + 4) + 8);
-  FUN_002a9834(temp_v0,param_1,param_2,param_3);
-  return;
+    owner->state->previous = owner->state->value;
+    u32 current = owner->state->value;
+    FUN_002a9834(&current, owner, value, mode);
 }
-
-} /* extern "C" */

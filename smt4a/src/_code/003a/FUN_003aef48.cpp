@@ -42,7 +42,7 @@ extern int padButtonIsPressed(unsigned int);
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e2680. */
 extern unsigned int overlayGetStatusScene(void);
-extern unsigned int FUN_0032ec7c(void);
+extern unsigned int dataTableGetEntryValue(void);
 extern int FUN_0032ecac(void);
 /* Supplied declaration required: FUN_0032ef0c. */
 /* Supplied declaration required: FUN_00344bc8. */
@@ -437,7 +437,7 @@ unsigned int FUN_003aef48(int param_1)
         else {
           temp_v0 = FUN_00344bc8(temp_v1 + *(int *)(param_1 + 0x120));
           *(unsigned char *)(*(int *)(param_1 + 8) + 0x23) = temp_v0;
-          temp_v4 = FUN_0032ec7c();
+          temp_v4 = dataTableGetEntryValue();
           screenStartOrClear(*(unsigned int *)(param_1 + 0x58),temp_v4);
         }
       }

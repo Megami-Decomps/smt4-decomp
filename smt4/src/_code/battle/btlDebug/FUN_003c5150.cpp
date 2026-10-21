@@ -8,8 +8,8 @@ int asdListBoxSetItemMode3(...);
 int asdListBoxSetItemMode2(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
-int FUN_0025c58c(unsigned int, int, int);
-int FUN_00262914(unsigned int, unsigned char *);
+int asdListBoxCreateDefault(unsigned int, int, int);
+int jobSetText(unsigned int, unsigned char *);
 int dataTableGetEntries(void);
 int dataTable22GetCount(void);
 int dataTable03Sub0GetCount(void);
@@ -29,8 +29,8 @@ extern unsigned int DAT_00435dd8; /* 0x435dd8 */
 /* Supplied declaration required: asdListBoxSetItemMode2. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0025c58c. */
-/* Supplied declaration required: FUN_00262914. */
+/* Supplied declaration required: asdListBoxCreateDefault. */
+/* Supplied declaration required: jobSetText. */
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -47,11 +47,11 @@ void FUN_003c5150(int param_1,int param_2)
   unsigned int *puVar3;
   
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
-  FUN_0025c58c(temp_v0,0x73,0);
+  asdListBoxCreateDefault(temp_v0,0x73,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v0;
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c5364);
+  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_003c5364);
   temp_v1 = (unsigned int)DAT_00434388;
   if (temp_v1 != 0) {
     dataTable03Sub0GetCount();

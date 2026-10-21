@@ -1,27 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f7fbc` (_code @ 0x4f7fbc, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_004f7fbc(int param_1)
-
+#include "common.h"
+struct EntryState { s32 first; s32 second; };
+struct EntryTable {
+    /* 0x0000 */ u8 unk00[0x1030];
+    /* 0x1030 */ EntryState entries[109];
+};
+/* Invalidates both state values in every entry. */
+extern "C" void FUN_004f7fbc(EntryTable *table)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = 0;
-  temp_v1 = 0x6d;
-  do {
-    temp_v2 = param_1 + temp_v0 * 8;
-    temp_v1 = temp_v1 - 1;
-    *(unsigned int *)(temp_v2 + 0x1030) = 0xffffffff;
-    temp_v0 = temp_v0 + 1;
-    *(unsigned int *)(temp_v2 + 0x1034) = 0xffffffff;
-  } while (temp_v1 != 0);
-  return;
+    for (u32 index = 0; index < 109; ++index) {
+        table->entries[index].first = -1;
+        table->entries[index].second = -1;
+    }
 }
-
-} /* extern "C" */

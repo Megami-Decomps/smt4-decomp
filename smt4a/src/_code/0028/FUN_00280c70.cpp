@@ -9,7 +9,7 @@ extern u32 g_effAsdLightHandle[2];
 extern u32 g_asdModelTransformBuilder[2];
 extern LightCount g_asdLightCount[2];
 
-void FUN_0034103c(s32 scene);
+void asdLightActivate(s32 scene);
 void FUN_002246d0(LightNode *node, s32 state);
 void sceneTraverserVisit(u32 lightHandle, u32 transformBuilder);
 
@@ -23,12 +23,12 @@ void FUN_00280c70(LightNode *node, s32 kind)
         state = DAT_005b3c90[0];
     } else if (kind == 2) {
         state = DAT_005b3c98[0];
-        FUN_0034103c(0);
+        asdLightActivate(0);
     } else if (kind == 4) {
         state = DAT_005b3c90[1];
     } else if (kind == 5) {
         state = DAT_005b3c98[1];
-        FUN_0034103c(1);
+        asdLightActivate(1);
     } else {
         return;
     }

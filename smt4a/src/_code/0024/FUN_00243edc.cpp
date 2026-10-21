@@ -13,7 +13,7 @@ extern int *DAT_005f0c90; /* 0x5f0c90 */
 extern int *DAT_005f0d44; /* 0x5f0d44 */
 extern int *DAT_005f0d48; /* 0x5f0d48 */
 extern int *DAT_005f0d4c; /* 0x5f0d4c */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 extern unsigned int *DAT_005f1c9c; /* 0x5f1c9c */
 
 extern int gameFlagsGetBlock(void);
@@ -30,11 +30,11 @@ void FUN_00243edc(void)
   int temp_v1;
   
   temp_v0 = gameFlagsGetBlock();
-  puVar1 = (unsigned int *)&DAT_005f1c98;
-  if (DAT_005f1c98 == 0x20) {
+  puVar1 = (unsigned int *)&g_mapSelection;
+  if (g_mapSelection == 0x20) {
     puVar1 = DAT_005f1c9c;
   }
-  if (!(DAT_005f1c98 == 0x20 && puVar1 == (unsigned int *)0x2)) {
+  if (!(g_mapSelection == 0x20 && puVar1 == (unsigned int *)0x2)) {
     temp_v1 = gameFlagIsSet(0x4d0);
     if (temp_v1 == 0) {
       return;

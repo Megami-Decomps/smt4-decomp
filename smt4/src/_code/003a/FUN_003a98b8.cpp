@@ -35,9 +35,9 @@ typedef struct {
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
-extern int FUN_00256510(void);
-extern int FUN_0026c63c(void);
-extern int FUN_002762e0(void);
+extern int inputIsQuestCancelPressed(void);
+extern int gameGetNavigationState(void);
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029da34. */
 extern int gameGetFlagByte12e8(void);
@@ -75,10 +75,10 @@ void FUN_003a98b8(int param_1)
   if (temp_v0 != temp_v1) {
     FUN_0029da34(0,1,temp_v0);
   }
-  temp_v2 = FUN_002762e0();
+  temp_v2 = inputIsQuestMenuPressed();
   temp_v9 = 0;
   if (0 < *(short *)(param_1 + 0x5a8)) {
-    temp_v9 = FUN_00256510();
+    temp_v9 = inputIsQuestCancelPressed();
   }
   if ((0 < *(short *)(param_1 + 0xa6ba)) && (*(char *)(param_1 + 0x5a4) == '\x01')) {
     temp_v5 = 0;
@@ -122,7 +122,7 @@ void FUN_003a98b8(int param_1)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 2);
   }
-  temp_v5 = FUN_0026c63c();
+  temp_v5 = gameGetNavigationState();
   if (temp_v5 != 0) {
     *(unsigned int *)(param_1 + 0x14) = 4;
     *(unsigned int *)(param_1 + 0x18) = 0;

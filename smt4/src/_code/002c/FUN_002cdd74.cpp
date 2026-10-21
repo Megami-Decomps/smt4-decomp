@@ -1,22 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cdd74` (_code @ 0x2cdd74, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct State { u8 padding[0x1158]; u32 value; }; }
 
 extern "C" {
+extern State *g_partyPanel;
 
-extern int g_partyPanel; /* 0x43dcf0 */
-
-
-unsigned int FUN_002cdd74(void)
-
+/* Reads the current status value when the owner exists. */
+s32 FUN_002cdd74(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_partyPanel != 0) {
-    temp_v0 = *(unsigned int *)(g_partyPanel + 0x1158);
-  }
-  return temp_v0;
+    return g_partyPanel != NULL ? g_partyPanel->value : 0;
 }
-
-} /* extern "C" */
+}

@@ -40,7 +40,7 @@ typedef struct {
 
 extern unsigned char g_btlUi; /* 0x439c88 */
 
-extern unsigned short FUN_0022c930(unsigned int, unsigned int);
+extern unsigned short slotFindNonnegativeRank(unsigned int, unsigned int);
 /* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_002ad8a8. */
 /* Supplied declaration required: FUN_002dc464. */
@@ -58,13 +58,13 @@ void FUN_003ae720(fn_003ae720_arg0 *param_1,int param_2)
   puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
   puVar3 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20)) + 0x1fa5;
   memFill8(puVar3,0xffffffff);
-  temp_v0 = FUN_0022c930(*puVar1,0);
+  temp_v0 = slotFindNonnegativeRank(*puVar1,0);
   *(unsigned short *)(puVar1 + 0x1fa5) = temp_v0;
-  temp_v0 = FUN_0022c930(*puVar1,1);
+  temp_v0 = slotFindNonnegativeRank(*puVar1,1);
   *(unsigned short *)((int)puVar1 + 0x7e96) = temp_v0;
-  temp_v0 = FUN_0022c930(*puVar1,2);
+  temp_v0 = slotFindNonnegativeRank(*puVar1,2);
   *(unsigned short *)(puVar1 + 0x1fa6) = temp_v0;
-  temp_v0 = FUN_0022c930(*puVar1,3);
+  temp_v0 = slotFindNonnegativeRank(*puVar1,3);
   *(unsigned short *)((int)puVar1 + 0x7e9a) = temp_v0;
   FUN_002ad8a8(puVar1 + 0x918,puVar3);
   if (param_2 != 0) {

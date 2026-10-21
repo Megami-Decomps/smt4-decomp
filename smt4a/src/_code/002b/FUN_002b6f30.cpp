@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019e3d0(...);
-int FUN_002d8a94(void);
+int mapRenderApplyPrimary(void);
 int FUN_0050d8e4(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -51,7 +51,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161c; /* 0x5f161c */
 extern unsigned char DAT_005f161d; /* 0x5f161d */
@@ -70,7 +70,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019e3d0. */
-/* Supplied declaration required: FUN_002d8a94. */
+/* Supplied declaration required: mapRenderApplyPrimary. */
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -142,8 +142,8 @@ void FUN_002b6f30(void)
   float temp_v53;
   unsigned int temp_v54;
   
-  temp_v0 = DAT_005806d4;
-  if (*(int *)(DAT_005806d4 + 4) == 8) {
+  temp_v0 = g_mapEnemy;
+  if (*(int *)(g_mapEnemy + 4) == 8) {
     puVar2 = &g_gameState;
     if (DAT_005f161c == '\0') {
       puVar2 = (unsigned int *)(unsigned int)DAT_005f161d;
@@ -282,7 +282,7 @@ LAB_002b6ffc:
                   temp_v7 = 0x2db5ffff;
                   temp_v5 = 0xffffffff;
                 }
-                FUN_002d8a94();
+                mapRenderApplyPrimary();
                 FUN_0019e3d0(temp_v5,temp_v7,temp_v5,temp_v7,temp_v20,temp_v10,temp_v20,temp_v23);
                 FUN_0019e3d0(0xff,0xff,0xff,0xff,temp_v24,temp_v10,temp_v24,temp_v23);
               }

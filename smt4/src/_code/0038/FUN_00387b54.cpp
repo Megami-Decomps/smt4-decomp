@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00234974(int);
+int recordClearWideHandle(int);
 int FUN_0023499c(int *, int, int);
 int jyoucyuGetTableEntry(int);
 int FUN_00354608(int *, int, int);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_00234974. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_0023499c. */
 extern unsigned char *FUN_002a1130(unsigned int, unsigned int);
 extern int FUN_002a12d8(unsigned char *);
@@ -56,7 +56,7 @@ void FUN_00387b54(unsigned int param_1,int param_2)
     *(unsigned int *)(puVar1 + 8) = uStack_14;
     temp_v0 = FUN_002a12d8(puVar1 + 4);
     if (-1 < temp_v0) {
-      FUN_00234974(g_aocMain + 0x28);
+      recordClearWideHandle(g_aocMain + 0x28);
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x10000;
       return;
     }

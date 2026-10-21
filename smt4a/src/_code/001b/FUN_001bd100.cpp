@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bd100` (_code @ 0x1bd100, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Record { u8 padding[7]; u8 flags; }; }
 
 extern "C" {
-
-int FUN_001ad9b4(void);
-
-/* Supplied declaration required: FUN_001ad9b4. */
-
-
-void FUN_001bd100(void)
-
+/* Reads or forwards the current state. */
+Record *FUN_001ad9b4(u32 id);
+u32 FUN_001bd100(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001ad9b4();
-  return;
+    Record *record = FUN_001ad9b4(id);
+    return record != NULL ? record->flags & 1 : 0;
 }
-
-} /* extern "C" */
+}

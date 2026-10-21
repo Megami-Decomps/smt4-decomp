@@ -139,7 +139,7 @@ extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_00250680. */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_00250d84. */
-extern int FUN_00255158(int, unsigned int);
+extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_00256898. */
@@ -883,11 +883,11 @@ LAB_003d444c:
         if ((*(unsigned int *)param_2[8] & 0x10) == 0) {
           if ((*(unsigned int *)param_2[8] & 2) != 0) {
             temp_v3 = FUN_0029a9d4(temp_v27,1);
-            temp_v2 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x1b);
+            temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1b);
           }
           else {
             temp_v3 = FUN_0029a924(temp_v27);
-            temp_v2 = FUN_00255158((int)*(short *)(param_2[9] + 0x62),0x1b);
+            temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1b);
           }
           if (0 < temp_v2) {
             temp_v3 = 0;

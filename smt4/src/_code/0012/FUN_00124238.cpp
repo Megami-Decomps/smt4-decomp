@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0044e0b0; /* 0x44e0b0 */
+extern unsigned char g_soundVolumeSetting; /* 0x44e0b0 */
 
 extern int FUN_0012655c(int, unsigned char, unsigned int);
 extern int FUN_00126850(int, unsigned char, unsigned int);
@@ -22,7 +22,7 @@ int FUN_00124238(int param_1,unsigned int param_2)
   temp_v0 = jyoucyuGetTableEntry(1);
   if ((temp_v0 == 0) && (temp_v0 = FUN_002c1d5c(), temp_v0 == 0)) {
     if (param_1 + 0xfeffff94U < 0x100) {
-      temp_v1 = FUN_00126850(param_1,DAT_0044e0b0,0);
+      temp_v1 = FUN_00126850(param_1,g_soundVolumeSetting,0);
       temp_v1 = temp_v1 + 100000;
     }
     else if (param_1 + 0xfefffe94U < 0xfc) {
@@ -35,7 +35,7 @@ int FUN_00124238(int param_1,unsigned int param_2)
         break;
       case 5:
       }
-      temp_v1 = FUN_0012655c(param_1,DAT_0044e0b0,0);
+      temp_v1 = FUN_0012655c(param_1,g_soundVolumeSetting,0);
     }
   }
   return temp_v1;

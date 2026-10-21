@@ -8,7 +8,7 @@ int CONCAT44(double, int);
 int FUN_002b93c8(int);
 int FUN_002ba12c(int);
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -28,7 +28,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -67,7 +67,7 @@ void FUN_002c6a64(int param_1)
     in_fpscr = temp_v0 | ((unsigned int)(temp_v6 != temp_v6) << 0x1c);
     temp_v1 = (unsigned char)(temp_v0 >> 0x18);
     if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x14,1000,temp_v3,0,0x1f);
       temp_v6 = *(float *)(param_1 + 0x158);
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < temp_v7) << 0x1f) |
@@ -75,7 +75,7 @@ void FUN_002c6a64(int param_1)
       in_fpscr = temp_v0 | ((unsigned int)((temp_v6 != temp_v6) || (temp_v7 != temp_v7)) << 0x1c);
       temp_v1 = (unsigned char)(temp_v0 >> 0x18);
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-        FUN_002bf538();
+        efctSetSpeed();
         temp_v2 = g_titleScene;
         temp_v4 = packNibblesAndByte(6,1,0);
         piVar7 = (int *)(temp_v2 + 0x12ac);
@@ -96,7 +96,7 @@ void FUN_002c6a64(int param_1)
           *(unsigned char *)(temp_v2 + 0x12c4) = 0;
         }
       }
-      FUN_002bf538();
+      efctSetSpeed();
     }
   }
   if (*(char *)(param_1 + 0x25d) != '\0') {

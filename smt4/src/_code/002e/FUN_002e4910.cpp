@@ -1,31 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e4910` (_code @ 0x2e4910, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+namespace { struct Record { u8 padding[0x50]; u16 value; u8 reserved[0x11]; s8 secondary, priority; }; }
 extern "C" {
-
-int dataTable08Sub2GetRecord(void);
-
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-
-
-int FUN_002e4910(unsigned short *param_1,unsigned short *param_2)
-
+Record *dataTable08Sub2GetRecord(u32 id);
+s32 FUN_002e4910(const u16 *firstId, const u16 *secondId)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable08Sub2GetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable08Sub2GetRecord();
-  temp_v2 = (int)*(char *)(temp_v0 + 99) - (int)*(char *)(temp_v1 + 99);
-  if (temp_v2 == 0) {
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x50) - (unsigned int)*(unsigned short *)(temp_v0 + 0x50);
-  }
-  return temp_v2;
+    Record *first = dataTable08Sub2GetRecord(*firstId);
+    Record *second = dataTable08Sub2GetRecord(*secondId);
+    s32 difference = first->secondary - second->secondary;
+    if (difference == 0) { difference = second->value - first->value; }
+    return difference;
 }
-
-} /* extern "C" */
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char *, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_00376fa4(unsigned int);
 int sequenceRequestDefer(int, unsigned int);
 int FUN_003d4ed8(int);
@@ -40,7 +40,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00376fa4. */
@@ -114,7 +114,7 @@ unsigned int FUN_00482c04(int param_1)
                   if (*(int *)(temp_v8 + 0xa4) != 0) {
                     DAT_005f1776 = 1;
                     DAT_005f1778 = *(unsigned int *)(temp_v8 + 0xa8);
-                    FUN_00100388(&DAT_005f177c,&LAB_00482f14,*(unsigned int *)(temp_v8 + 0xa8),
+                    textFormatBuffer(&DAT_005f177c,&LAB_00482f14,*(unsigned int *)(temp_v8 + 0xa8),
                                  *(unsigned int *)(temp_v8 + 0xac));
                   }
                   else {

@@ -15,9 +15,9 @@ int FUN_002879dc(...);
 int buttonHelpSetPreset(int);
 int VectorSignedToFloat(...);
 
-int FUN_002480c8(void);
+int mapDestroySecondaryModel(void);
 int mapIfReleaseSlot2(void);
-int FUN_00273828(void);
+int mapInterfaceSetStateTwo(void);
 int FUN_0027fa98(...);
 int FUN_0027fae4(void);
 int FUN_0027fc14(...);
@@ -47,13 +47,13 @@ extern unsigned int DAT_0049f9ac; /* 0x49f9ac */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002480c8. */
+/* Supplied declaration required: mapDestroySecondaryModel. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
 /* Supplied declaration required: FUN_00248114. */
 /* Supplied declaration required: FUN_0024f034. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00273828. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: mapInterfaceSetStateTwo. */
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027d748(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 extern int FUN_0027ee9c(void);
@@ -199,14 +199,14 @@ void FUN_002e8fdc(void)
           temp_v1 = *(int *)(temp_v0 + 8) + 1;
           *(int *)(temp_v0 + 8) = temp_v1;
           if (temp_v1 == 0x1e) {
-            FUN_00273828();
+            mapInterfaceSetStateTwo();
           }
           if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v0 = mapIfHasSelection(), temp_v0 != 0)) {
             FUN_002804ec(g_lmapScene + 0x28);
             FUN_00280364();
             return;
           }
-          FUN_00273828();
+          mapInterfaceSetStateTwo();
           temp_v1 = *(int *)(g_lmapScene + 4);
           temp_v0 = g_lmapScene;
         }
@@ -232,7 +232,7 @@ void FUN_002e8fdc(void)
       else {
         if (temp_v1 == 0x37) {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_002480c8();
+          mapDestroySecondaryModel();
           FUN_0027fa98(0xc);
           FUN_002804ec(g_lmapScene + 0x28);
           FUN_00280364();
@@ -253,7 +253,7 @@ void FUN_002e8fdc(void)
             FUN_00280364();
             return;
           }
-          FUN_002480c8();
+          mapDestroySecondaryModel();
           temp_v0 = g_lmapScene;
           temp_v1 = *(int *)(temp_v0 + 4);
         }
@@ -337,7 +337,7 @@ void FUN_002e8fdc(void)
       }
       else {
         temp_v0 = padIsButtonPressed(5);
-        if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
+        if ((temp_v0 != 0) || (temp_v0 = inputIsQuestMenuPressed(), temp_v0 != 0)) {
           temp_v0 = DAT_004474f4;
           *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v0 + 0xac) = 0;
@@ -519,7 +519,7 @@ LAB_002e9794:
       *(unsigned int *)(temp_v0 + 8) = 0;
       break;
     case 0xf:
-      FUN_002480c8();
+      mapDestroySecondaryModel();
       temp_v0 = g_lmapScene;
       temp_v1 = *(int *)(temp_v0 + 4);
       *(int *)(temp_v0 + 4) = temp_v1 + 1;

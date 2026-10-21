@@ -5,8 +5,8 @@
 extern "C" {
 
 int jobStop(...);
-int FUN_00280328(...);
-int FUN_002ea508(...);
+int asdListBoxCreateDefaultFlags(...);
+int jobSetText(...);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(...);
@@ -46,8 +46,8 @@ extern unsigned int DAT_00573bdc; /* 0x573bdc */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00280328. */
-/* Supplied declaration required: FUN_002ea508. */
+/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
+/* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
@@ -68,11 +68,11 @@ void FUN_004d37d4(fn_004d37d4_arg0 *param_1,int param_2)
     jobStop(*(unsigned int *)&param_1->field_0x10,0);
   }
   temp_v1 = *(unsigned int *)(param_2 + 0x80);
-  FUN_00280328(temp_v1,0x75,0);
+  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v1;
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
-  FUN_002ea508(*(unsigned int *)&param_1->field_0x10,"btl Panel Menu");
+  jobSetText(*(unsigned int *)&param_1->field_0x10,"btl Panel Menu");
   asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,0,DAT_00573bd8,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,1,DAT_00573bd9,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,2,DAT_00573bda,0,0xff,0);

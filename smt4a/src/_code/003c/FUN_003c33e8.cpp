@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
@@ -26,7 +26,7 @@ extern unsigned char LAB_003c3644; /* 0x3c3644 */
 extern unsigned char LAB_003c3650; /* 0x3c3650 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00180310. */
@@ -34,7 +34,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: FUN_00389d9c. */
-extern int FUN_004bca68(unsigned int, unsigned short);
+extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004bd6b0. */
 
@@ -69,7 +69,7 @@ void FUN_003c33e8(int param_1,int param_2,unsigned int param_3,int param_4,int p
       temp_v4 = 0x9fe7ffff;
     }
     temp_v1 = FUN_0014bd84(*(unsigned short *)(temp_v0 + 0x8b60));
-    FUN_00100388(temp_v5,&LAB_003c363c,temp_v1);
+    textFormatBuffer(temp_v5,&LAB_003c363c,temp_v1);
     temp_v2 = FUN_001834a4(0x1a,0x178);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_6,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -77,7 +77,7 @@ void FUN_003c33e8(int param_1,int param_2,unsigned int param_3,int param_4,int p
     temp_v2 = FUN_001834a4(0x1a,0x177);
     FUN_00185e84((int)*(short *)(temp_v0 + 0x8b60),*(short *)(temp_v2 + 8) + param_5,
                  *(short *)(temp_v2 + 10) + param_6,0x74,0,0);
-    temp_v3 = FUN_004bca68(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60));
+    temp_v3 = recordContainsPairedId(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60));
     if (temp_v3 == 0) {
       FUN_004bd6b0(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60),param_2);
     }
@@ -89,7 +89,7 @@ void FUN_003c33e8(int param_1,int param_2,unsigned int param_3,int param_4,int p
                  &LAB_003c3650,temp_v4);
   }
   else {
-    FUN_00100388(temp_v5,&LAB_003c3644);
+    textFormatBuffer(temp_v5,&LAB_003c3644);
     temp_v0 = FUN_001834a4(0x1a,0x178);
     VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_6,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v0 + 8) + param_5,(unsigned char)(in_fpscr >> 0x16) & 3);

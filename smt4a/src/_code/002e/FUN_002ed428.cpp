@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern unsigned char DAT_00588c40; /* 0x588c40 */
+extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -64,7 +64,7 @@ void FUN_002ed428(int param_1)
   unsigned long long temp_v16;
   unsigned long long temp_v17;
   
-  temp_v1 = (*(int *)((unsigned char *)&DAT_00588c40 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4));
   temp_v2 = gameGetSlotTable();
   gameGetPlayerData();
   *(unsigned char *)(temp_v1 + 0x7f2d) = *(unsigned char *)(param_1 + 0x3c);

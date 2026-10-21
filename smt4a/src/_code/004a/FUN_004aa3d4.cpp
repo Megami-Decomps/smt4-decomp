@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0015f858(unsigned int, int);
 int FUN_00168518(int, int);
 int FUN_00184310(void);
@@ -16,9 +16,9 @@ int FUN_002c13d4(int, int);
 int FUN_002e4308(int, unsigned int, int);
 int menuStateSetMode4(int);
 int FUN_00388424(int, int);
-int FUN_003b67d4(unsigned int);
-int FUN_003b67e8(void);
-int FUN_003c0d90(void);
+int dataRecordGetKindValue(unsigned int);
+int playerSecondaryGetKindValue(void);
+int playerPrimaryGetKindValue(void);
 int menuStateStartSelect(int);
 
 /* stack frame of param_6: 1 slot(s), 1 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned char LAB_004aa744; /* 0x4aa744 */
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int *g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00168518. */
@@ -51,12 +51,12 @@ extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_002e4308. */
 /* Supplied declaration required: menuStateSetMode4. */
 /* Supplied declaration required: FUN_00388424. */
-/* Supplied declaration required: FUN_003b67d4. */
-/* Supplied declaration required: FUN_003b67e8. */
-/* Supplied declaration required: FUN_003c0d90. */
+/* Supplied declaration required: dataRecordGetKindValue. */
+/* Supplied declaration required: playerSecondaryGetKindValue. */
+/* Supplied declaration required: playerPrimaryGetKindValue. */
 /* Supplied declaration required: menuStateStartSelect. */
 extern int playerHasFlagBit(unsigned int);
-extern int FUN_003e8430(unsigned int);
+extern int btlScriptUnitHasFlags(unsigned int);
 extern int FUN_003f2448(unsigned int);
 extern int btlUnitGet(unsigned int);
 
@@ -93,14 +93,14 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
       if (temp_v1 + temp_v4 != 0) {
         if (temp_v1 + temp_v4 == 1) {
           temp_v5 = (short)(int)temp_v7;
-          FUN_00100388(temp_v7,&LAB_004aa70c);
-          FUN_003b67e8();
+          textFormatBuffer(temp_v7,&LAB_004aa70c);
+          playerSecondaryGetKindValue();
         }
       }
       else {
         temp_v5 = (short)(int)temp_v7;
-        FUN_00100388(temp_v7,&LAB_004aa70c);
-        FUN_003c0d90();
+        textFormatBuffer(temp_v7,&LAB_004aa70c);
+        playerPrimaryGetKindValue();
       }
     }
     else if (param_6 != 0) {
@@ -109,13 +109,13 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
       temp_v4 = gameGetOptions();
       FUN_00168518((int)*(short *)(temp_v4 + 300),temp_v0);
       temp_v5 = (short)(int)temp_v7;
-      FUN_00100388(temp_v7,&LAB_004aa70c);
+      textFormatBuffer(temp_v7,&LAB_004aa70c);
       FUN_0022fcb8();
     }
     else {
       FUN_00184310();
-      FUN_00100388(temp_v7,&LAB_004aa70c);
-      FUN_003b67d4(param_5);
+      textFormatBuffer(temp_v7,&LAB_004aa70c);
+      dataRecordGetKindValue(param_5);
       temp_v5 = (short)param_5;
     }
     menuStateSetMode4((int)temp_v5);
@@ -123,7 +123,7 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
   case 2:
   case 3:
     temp_v2 = FUN_0014bd84(*(unsigned short *)(puVar2 + 0x3014));
-    FUN_00100388(temp_v7,&LAB_004aa71c,temp_v2);
+    textFormatBuffer(temp_v7,&LAB_004aa71c,temp_v2);
     if (param_4 != 0) {
       temp_v4 = playerHasFlagBit(4);
       temp_v6 = temp_v4 != 0;
@@ -143,10 +143,10 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
   case 8:
     temp_v3 = (unsigned int)*(unsigned short *)(puVar2 + 0x3014);
     FUN_0015f858(temp_v3,0);
-    FUN_00100388(temp_v7,&LAB_004aa71c,temp_v3);
+    textFormatBuffer(temp_v7,&LAB_004aa71c,temp_v3);
     FUN_002c13b0((int)*(short *)(puVar2 + 0x3014));
     temp_v4 = FUN_003f2448(*puVar2);
-    if ((temp_v4 != 0) && (temp_v4 = FUN_003e8430(*puVar2), temp_v4 == 0)) {
+    if ((temp_v4 != 0) && (temp_v4 = btlScriptUnitHasFlags(*puVar2), temp_v4 == 0)) {
       temp_v4 = FUN_001ba3d4(*(unsigned short *)(puVar2 + 0x3014));
       FUN_002c13d4((int)*(short *)(puVar2 + 0x3014),temp_v4 + 1);
     }
@@ -155,15 +155,15 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
   case 10:
   case 0xc:
     if (param_3 != 0) {
-      FUN_00100388(temp_v7,&LAB_004aa724);
+      textFormatBuffer(temp_v7,&LAB_004aa724);
     }
     else {
-      FUN_00100388(temp_v7,&LAB_004aa734);
+      textFormatBuffer(temp_v7,&LAB_004aa734);
     }
     FUN_002a3258();
     break;
   case 0xb:
-    FUN_00100388(temp_v7,&LAB_004aa744);
+    textFormatBuffer(temp_v7,&LAB_004aa744);
     FUN_002a3258();
   }
   FUN_00227af0(temp_v7);

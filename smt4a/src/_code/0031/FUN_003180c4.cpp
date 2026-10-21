@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003180c4` (_code @ 0x3180c4, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'add r1, r0, r0, lsl #2'; compiler emits 'ldr r1, [pc, #48]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_001654f8(unsigned int, int, int);
-int FUN_0019b738(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_0019b738. */
-
-
-void FUN_003180c4(int param_1,unsigned int param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_1 * 0x68 + 0x63afc8;
-  FUN_0019b738(temp_v0,0x68);
-  FUN_001654f8(param_2,temp_v0,0x68);
-  return;
+struct Entry {
+    u8 pad[0x68];
+    u8 work;
+};
+extern Entry DAT_0063afc8[];
+void FUN_0019b738(void *,u32);
+void FUN_001654f8(u32,void *,u32);
+void FUN_003180c4(u32 index,u32 value) {
+    void *work=&DAT_0063afc8[index].work;
+    FUN_0019b738(work,104);
+    FUN_001654f8(value,work,104);
 }
-
-} /* extern "C" */
+}

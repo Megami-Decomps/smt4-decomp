@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0023adf4(unsigned int, int, int);
-int FUN_0023e388(...);
+int modelSetPosition(unsigned int, int, int);
+int matrixTranslateColumn(...);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int FUN_002929d8(unsigned char [48], int);
@@ -34,8 +34,8 @@ extern unsigned int DAT_004efd90; /* 0x4efd90 */
 extern unsigned int DAT_004efd94; /* 0x4efd94 */
 extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
-/* Supplied declaration required: FUN_0023adf4. */
-/* Supplied declaration required: FUN_0023e388. */
+/* Supplied declaration required: modelSetPosition. */
+/* Supplied declaration required: matrixTranslateColumn. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_002929d8. */
@@ -64,7 +64,7 @@ void FUN_0034ad94(int param_1)
     *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
     nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0,param_1 + 0x90);
     FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0);
-    FUN_0023adf4(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0,param_1 + 0xa8);
+    modelSetPosition(*(unsigned int *)(*(int *)(param_1 + 4) + 8),0,param_1 + 0xa8);
     return;
   }
   *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) + *(float *)(param_1 + 0x48);
@@ -94,11 +94,11 @@ void FUN_0034ad94(int param_1)
     DAT_004efd98 = 0;
   }
   nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x60,&DAT_004efd6c);
-  FUN_0023e388(param_1 + 0x60,&temp_v2);
+  matrixTranslateColumn(param_1 + 0x60,&temp_v2);
   FUN_002929d8(temp_v1,1);
   nn_math_ARMv6_MTX34MultAsm(param_1 + 0x60,temp_v1);
-  FUN_0023e388(param_1 + 0x60,param_1 + 0xc);
-  FUN_0023e388(param_1 + 0x60,param_1 + 0x18);
+  matrixTranslateColumn(param_1 + 0x60,param_1 + 0xc);
+  matrixTranslateColumn(param_1 + 0x60,param_1 + 0x18);
   nodeCopyMatrixMarkDirty(*(unsigned int *)(*(int *)(param_1 + 4) + 8),param_1 + 0x60);
   return;
 }

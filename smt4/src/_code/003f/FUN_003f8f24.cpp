@@ -1,26 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f8f24` (_code @ 0x3f8f24, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vmov s0, r0 where the compiled block uses vldr s0, [r4, #12]. */
+#include "shard/W5_W5Match5_TwinRecords.h"
 
-extern "C" {
-
-int VectorUnsignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_003f8940(void);
+using namespace SampleValueDecoding;
 
 
-int FUN_003f8f24(void)
 
+extern "C" EncodedValue* FUN_003f8940(ValueDecoder* decoder);
+
+extern "C" f32 FUN_003f8f24(ValueDecoder* decoder)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  
-  temp_v0 = FUN_003f8940();
-  temp_v0 = (unsigned int)*(unsigned char *)(temp_v0 + 1) + (unsigned int)*(unsigned char *)(temp_v0 + 2) * 0x100;
-  VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return temp_v0;
+    const EncodedValue* encoded = FUN_003f8940(decoder);
+    u32 value = (u32)encoded->low + ((u32)encoded->high << 8);
+    return (f32)value * decoder->scale + decoder->bias;
 }
-
-} /* extern "C" */

@@ -55,7 +55,7 @@ int FUN_001f53d0(unsigned int);
 int FUN_001f5e9c(unsigned int);
 int FUN_00205cc8(unsigned int);
 int FUN_00206b80(unsigned int);
-int FUN_00249974(void);
+int recordQueryStateThree(void);
 int playSceneTimerSubStartReverse(unsigned int);
 int playSceneFadeOutStart(unsigned int);
 int FUN_0028bfe4(int);
@@ -105,8 +105,8 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_002251d4. */
 /* Supplied declaration required: FUN_00225200. */
 extern int FUN_00225220(int);
-extern int FUN_002254cc(void);
-/* Supplied declaration required: FUN_00249974. */
+extern int battleTalkGetBustState(void);
+/* Supplied declaration required: recordQueryStateThree. */
 /* Supplied declaration required: FUN_00287188. */
 /* Supplied declaration required: FUN_00289f18. */
 /* Supplied declaration required: FUN_00289fa8. */
@@ -345,7 +345,7 @@ unsigned int FUN_0019e138(void)
       temp_v12 = playSceneIsFadeInDone(g_btlUiBlock + 8);
       if (temp_v12 != 0) {
         temp_v12 = temp_v8 + 0x2200;
-        FUN_00249974();
+        recordQueryStateThree();
         if (temp_v12 != 0) {
           playSceneFadeOutStart(temp_v8 + 8);
           playSceneTimerSubStartReverse(temp_v8 + 0x2200);
@@ -362,7 +362,7 @@ unsigned int FUN_0019e138(void)
         temp_v12 = playSceneIsFadeInDone(g_btlUiBlock + 8);
         if (temp_v12 != 0) {
           temp_v12 = temp_v8 + 0x2200;
-          FUN_00249974();
+          recordQueryStateThree();
           if (temp_v12 != 0) {
             playSceneFadeOutStart(temp_v8 + 8);
             playSceneTimerSubStartReverse(temp_v8 + 0x2200);
@@ -378,7 +378,7 @@ unsigned int FUN_0019e138(void)
           temp_v12 = playSceneIsFadeInDone(g_btlUiBlock + 8);
           if (temp_v12 != 0) {
             temp_v12 = temp_v8 + 0x2200;
-            FUN_00249974();
+            recordQueryStateThree();
             if (temp_v12 != 0) {
               playSceneFadeOutStart(temp_v8 + 8);
               playSceneTimerSubStartReverse(temp_v8 + 0x2200);
@@ -415,7 +415,7 @@ unsigned int FUN_0019e138(void)
       }
     }
     else {
-      temp_v4 = FUN_002254cc();
+      temp_v4 = battleTalkGetBustState();
       if (temp_v4 != 0) {
         btlTalkBustUpReleaseAllSlots();
         messageMainApplyClose();

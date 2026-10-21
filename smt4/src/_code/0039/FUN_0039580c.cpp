@@ -1,20 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039580c` (_code @ 0x39580c, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail helper argument lifetime or state-store scheduling differs. */
+#include "common.h"
 
+struct CallbackOwner {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u8 active;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 first;
+    /* 0x0c */ u32 second;
+};
 extern "C" {
-
-extern unsigned char DAT_004222ec; /* 0x4222ec */
-
-
-void FUN_0039580c(unsigned int *param_1)
-
+extern const u8 DAT_004222ec[];
+/* Clears the callback owner's state and installs its dispatch table. */
+void FUN_0039580c(CallbackOwner *owner)
 {
-  *(unsigned char *)(param_1 + 1) = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  *param_1 = (unsigned int)&DAT_004222ec;
-  return;
+    owner->active = 0;
+    owner->first = 0;
+    owner->second = 0;
+    owner->vtable = DAT_004222ec;
 }
-
-} /* extern "C" */
+}

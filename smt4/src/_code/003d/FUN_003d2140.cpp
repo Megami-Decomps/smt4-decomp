@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00227218(void);
 int FUN_002276f8(...);
-int FUN_0022a304(void);
+int battleResetCounterAndFlag(void);
 int FUN_0027dd9c(...);
 int FUN_0027de24(...);
 int FUN_002c1dd8(...);
@@ -64,11 +64,11 @@ extern int DAT_004e316c; /* 0x4e316c */
 /* Supplied declaration required: FUN_00229098. */
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_00229c5c. */
-/* Supplied declaration required: FUN_0022a304. */
+/* Supplied declaration required: battleResetCounterAndFlag. */
 extern int *FUN_0023eb7c(void);
 /* Supplied declaration required: FUN_00244fb0. */
 /* Supplied declaration required: FUN_00246454. */
-extern unsigned int FUN_002542ec(int);
+extern unsigned int saveResolvePartySlot(int);
 /* Supplied declaration required: FUN_00256898. */
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
@@ -189,7 +189,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
         temp_v5 = 0;
         do {
           if ((-1 < *(char *)(temp_v2 + temp_v5 + 0x9108)) &&
-             (temp_v3 = FUN_002542ec(temp_v5),
+             (temp_v3 = saveResolvePartySlot(temp_v5),
              *(short *)(temp_v3 + 0x46) == *(short *)((int)puVar9 + 0xce))) {
             puVar9[0x9f] = temp_v3;
             piVar2 = (int *)FUN_0023eb7c();
@@ -361,7 +361,7 @@ code_r0x0027e38c:
     FUN_003da0bc(DAT_00435d18);
     FUN_002276f8(DAT_00435d18);
     *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) & 0xffff7fff;
-    FUN_0022a304();
+    battleResetCounterAndFlag();
     FUN_0027de24(DAT_00435d18);
     FUN_0027dd9c(DAT_00435d18);
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00288ef0(int *, unsigned int [4], int);
 int FUN_002bf288(int, int, int, int, unsigned int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c39a4(int);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00288ef0. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -56,15 +56,15 @@ unsigned char FUN_001cdef8(void)
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
     FUN_00288ef0(&temp_v4,temp_v5,9);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x1a,0,temp_v4,temp_v5[0],1);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_00288ef0(&temp_v4,temp_v5,7);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x1a,1,temp_v4,temp_v5[0],1);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_00288ef0(&temp_v4,temp_v5,8);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x1a,2,temp_v4,temp_v5[0],1);
     temp_v0 = g_titleScene;
     piVar5 = (int *)(g_titleScene + 0x124c);

@@ -24,7 +24,7 @@ int gameFlagSetValue(int, int);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a2cf0(void);
+extern int cecQueryOptionalProcess(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: cecProcessForward. */
@@ -35,7 +35,7 @@ extern int FUN_002e2014(void);
 /* Supplied declaration required: playerSummaryFill. */
 /* Supplied declaration required: FUN_0034280c. */
 extern int gameDataTestFlags(unsigned int);
-extern int FUN_0035b044(void);
+extern int cecProcessGetValue(void);
 /* Supplied declaration required: cecProcessCall4. */
 /* Supplied declaration required: stateAtF4Destroy. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -116,7 +116,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
             temp_v1 = FUN_002a4b74();
             if (temp_v1 == 0) {
               sysPlaySe(0x3e);
-              temp_v1 = FUN_0035b044();
+              temp_v1 = cecProcessGetValue();
               temp_v4 = temp_v1 == 3;
               if (temp_v4) {
                 temp_v1 = 3;
@@ -178,13 +178,13 @@ LAB_002c0648:
               return 0;
             }
             sysPlaySe(0x3e);
-            temp_v1 = FUN_002a2cf0();
+            temp_v1 = cecQueryOptionalProcess();
             if ((temp_v1 != 0) && (temp_v1 = gameDataTestFlags(0x20), temp_v1 != 0)) {
               *(unsigned int *)(temp_v3 + 0x38) = 9;
               temp_v0 = (*(unsigned char *)(temp_v3 + 0x3c) & 0xfe) | 2;
               goto LAB_002c0810;
             }
-            temp_v1 = FUN_002a2cf0();
+            temp_v1 = cecQueryOptionalProcess();
             if (temp_v1 == 0) {
               temp_v2 = 8;
             }

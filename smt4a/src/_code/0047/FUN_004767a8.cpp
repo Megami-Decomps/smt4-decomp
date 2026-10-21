@@ -9,7 +9,7 @@ int FUN_001d25ec(...);
 int FUN_00426e18(...);
 int FUN_00426eb8(...);
 int FUN_00426fe4(int *, int, int);
-int FUN_004275c8(...);
+int recordClearWideHandle(...);
 int _ZN9Obj4279d4C1Ejj(int [3], unsigned char [1024], int);
 int FUN_00427ff4(...);
 int FUN_00429934(int *, unsigned char [16]);
@@ -51,7 +51,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00426fe4. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
-/* Supplied declaration required: FUN_004275c8. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: _ZN9Obj4279d4C1Ejj. */
 /* Supplied declaration required: FUN_00427ff4. */
 /* Supplied declaration required: FUN_00429934. */
@@ -136,7 +136,7 @@ void FUN_004767a8(int param_1)
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
   temp_v1 = FUN_001d25ec(param_1 + 0xc);
   if (temp_v1 < 0) {
-    FUN_004275c8(temp_v0 + 0x28);
+    recordClearWideHandle(temp_v0 + 0x28);
     FUN_00429d24(temp_v17);
     return;
   }
@@ -271,7 +271,7 @@ void FUN_004767a8(int param_1)
       *(int *)(param_1 + 0x18) = temp_v5;
       temp_v1 = param_1;
       FUN_004760bc();
-      FUN_004275c8(temp_v0 + 0x28);
+      recordClearWideHandle(temp_v0 + 0x28);
       if (-1 < temp_v1) {
         FUN_00473980(&temp_v8,temp_v0);
         *(unsigned int *)(param_1 + 0xc) = temp_v8;
@@ -282,7 +282,7 @@ void FUN_004767a8(int param_1)
       return;
     }
   }
-  FUN_004275c8(temp_v0 + 0x28);
+  recordClearWideHandle(temp_v0 + 0x28);
   FUN_00429d24(temp_v17);
   return;
 }

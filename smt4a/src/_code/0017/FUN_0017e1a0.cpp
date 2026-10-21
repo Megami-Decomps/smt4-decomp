@@ -1,25 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017e1a0` (_code @ 0x17e1a0, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses push {r4, r5, lr} where the compiled block uses push {lr}. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0018b108(void);
+u32 FUN_0018b108(u32 argument0, u32 argument1, u32 argument2,
+                 u32 argument3, u32 argument4, u32 argument5,
+                 u32 argument6);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0018b108. */
-
-
-void FUN_0017e1a0(void)
-
+u32 FUN_0017e1a0(u32 argument0, u32 argument1, u32 argument2,
+                 u32 argument3, u32 argument4, u32 argument5,
+                 u32 argument6)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0018b108();
-  return;
+    return FUN_0018b108(argument0, argument1, argument2, argument3,
+                        argument4, argument5, argument6);
 }
 
-} /* extern "C" */
+}

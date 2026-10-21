@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_005806a0; /* 0x5806a0 */
-extern unsigned char DAT_005f10cc; /* 0x5f10cc */
+extern unsigned char g_localCamera; /* 0x5f10cc */
 
 /* Supplied declaration required: FUN_0014f0dc. */
 
@@ -36,7 +36,7 @@ void FUN_00324b68(void)
   temp_v0 = in_s3 + *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x29c);
   temp_v1 = in_s4 + *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x2a0);
   temp_v2 = in_s5 + *(float *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x2a4);
-  FUN_0014f0dc(&DAT_005f10cc,temp_v3,&temp_v0,(*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x20);
+  FUN_0014f0dc(&g_localCamera,temp_v3,&temp_v0,(*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x20);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd76c(unsigned int, int);
+int controllerSetDestination(unsigned int, int);
 int FUN_003fd7c0(unsigned int, int, int);
 int FUN_003fdb18(unsigned int);
 int FUN_0040aad4(unsigned int, int);
@@ -13,7 +13,7 @@ int FUN_0040ace8(unsigned int, unsigned int);
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_0040aad4. */
@@ -39,7 +39,7 @@ unsigned char FUN_003ae314(void)
     FUN_0040ace8(g_handleRegistry,temp_v2);
     temp_v1 = g_lmapScene + 0x254;
     *(unsigned int *)(g_lmapScene + 0x250) = 0;
-    FUN_003fd76c(temp_v2,temp_v1);
+    controllerSetDestination(temp_v2,temp_v1);
     FUN_003fdb18(temp_v2);
   }
   return temp_v0 != 0;

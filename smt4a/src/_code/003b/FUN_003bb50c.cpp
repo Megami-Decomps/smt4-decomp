@@ -31,7 +31,7 @@ extern unsigned short *FUN_001834a4(unsigned int, int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_003a7a88. */
-extern int FUN_0046c4f4(unsigned int, unsigned int, unsigned int);
+extern int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00471a04. */
 
 
@@ -96,7 +96,7 @@ void FUN_003bb50c(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v1 = param_1;
   FUN_003a7a88(param_1,param_5);
   if (temp_v1 != 0) {
-    temp_v0 = FUN_0046c4f4(g_aocSystem,temp_v3,temp_v2);
+    temp_v0 = recordPrepareLinkedOwner(g_aocSystem,temp_v3,temp_v2);
     if (temp_v0 == 0) {
       temp_v0 = temp_v2 * 1000 + 1;
       puVar3 = (unsigned short *)FUN_001834a4(temp_v3,temp_v0);

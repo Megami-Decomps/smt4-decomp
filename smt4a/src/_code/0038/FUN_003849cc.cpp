@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00244bb4(int, int);
 int dataTableEntryNameById(int, int);
 int libc_strcpy(...);
@@ -44,7 +44,7 @@ extern unsigned char DAT_00560fc4; /* 0x560fc4 */
 extern unsigned char DAT_00560fe3; /* 0x560fe3 */
 extern unsigned char DAT_00561547; /* 0x561547 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00244bb4. */
 /* Supplied declaration required: dataTableEntryNameById. */
@@ -140,17 +140,17 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
         return;
       }
       if (temp_v3 != 0) {
-        FUN_00100388(temp_v13,temp_v10[temp_v3]);
+        textFormatBuffer(temp_v13,temp_v10[temp_v3]);
         return;
       }
     }
     if (temp_v5 == 2) {
       if (*(char *)(temp_v0 + 0x7c6) == 0) {
-        FUN_00100388(temp_v13,&LAB_00384c98);
+        textFormatBuffer(temp_v13,&LAB_00384c98);
         return;
       }
       if (param_2 < 100) {
-        FUN_00100388(temp_v13,temp_v8[*(char *)(temp_v0 + 0x7c6)]);
+        textFormatBuffer(temp_v13,temp_v8[*(char *)(temp_v0 + 0x7c6)]);
         return;
       }
       FUN_0032725c(param_2 - 100,temp_v13,0xffffffff);
@@ -159,12 +159,12 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   }
   else {
     if (param_1 == 1000) {
-      FUN_00100388(temp_v13,&LAB_00384c80);
+      textFormatBuffer(temp_v13,&LAB_00384c80);
       return;
     }
     if (param_1 >= 1001) {
       if (param_2 < 100) {
-        FUN_00100388(temp_v13,temp_v6[param_1]);
+        textFormatBuffer(temp_v13,temp_v6[param_1]);
         return;
       }
       FUN_0032725c(param_2 - 100,temp_v13,param_5);
@@ -172,7 +172,7 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     }
     if (param_1 == 0x18) {
       if (param_2 < 100) {
-        FUN_00100388(temp_v13,temp_v10[param_2]);
+        textFormatBuffer(temp_v13,temp_v10[param_2]);
         return;
       }
       FUN_0032725c(param_2 - 100,temp_v13,param_5);
@@ -181,10 +181,10 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     if (param_1 == 0x65) {
       temp_v4 = dataTableEntryNameById(0x65,param_2);
       libc_strcpy(temp_v7,temp_v4);
-      FUN_00100388(temp_v13,&LAB_00384c88,temp_v7);
+      textFormatBuffer(temp_v13,&LAB_00384c88,temp_v7);
       FUN_00244bb4(0x65,param_2);
       libc_strcpy(temp_v12,param_1);
-      FUN_00100388(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
+      textFormatBuffer(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
       return;
     }
   }
@@ -193,12 +193,12 @@ void FUN_003849cc(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     libc_strcpy(temp_v7,temp_v4);
     FUN_00244bb4(param_1,param_2);
     libc_strcpy(temp_v12,param_1);
-    FUN_00100388(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
+    textFormatBuffer(temp_v13,&LAB_00384c8c,temp_v7,temp_v12);
     return;
   }
   temp_v4 = dataTableEntryNameById(param_1,param_2);
   libc_strcpy(temp_v7,temp_v4);
-  FUN_00100388(temp_v13,&LAB_00384c88,temp_v7);
+  textFormatBuffer(temp_v13,&LAB_00384c88,temp_v7);
   return;
 }
 

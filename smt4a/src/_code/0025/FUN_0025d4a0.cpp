@@ -5,13 +5,13 @@
 extern "C" {
 
 int linkHolderApplyFlag(unsigned int, int);
-int FUN_0037b7d8(void);
+int uiGetFloatValue(void);
 int FUN_003aedc8(unsigned int, int);
 int FUN_003e54b8(unsigned int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: linkHolderApplyFlag. */
-/* Supplied declaration required: FUN_0037b7d8. */
+/* Supplied declaration required: uiGetFloatValue. */
 /* Supplied declaration required: FUN_003aedc8. */
 /* Supplied declaration required: FUN_003e54b8. */
 
@@ -54,7 +54,7 @@ unsigned int FUN_0025d4a0(int *param_1)
   }
   FUN_003aedc8(*(unsigned int *)(temp_v2 + 0xc),*(unsigned char *)(*(int *)(temp_v2 + 8) + 0x22));
   if (*(int *)(temp_v2 + 4) != 0) {
-    FUN_0037b7d8();
+    uiGetFloatValue();
     FUN_003e54b8(*(unsigned int *)(*(int *)(temp_v2 + 4) + 0x1c));
   }
   *(int *)(temp_v2 + 0x150) = *(int *)(temp_v2 + 0x150) + 1;

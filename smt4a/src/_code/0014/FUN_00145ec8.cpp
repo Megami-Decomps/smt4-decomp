@@ -1,22 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145ec8` (_code @ 0x145ec8, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-byte addressing differs: retail adds the four-byte header first; compiler folds it into the byte load. */
+#include "common.h"
+
+struct BitFlagState {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u8 flags[4];
+};
 
 extern "C" {
 
-extern int gameDataBlocksGetStats(void);
+extern const BitFlagState *gameDataBlocksGetStats(void);
 
-
-unsigned char FUN_00145ec8(unsigned int param_1)
-
+/* Tests a bit in the second flag word of the game-data block. */
+bool FUN_00145ec8(u32 index)
 {
-  int temp_v0;
-  
-  if (param_1 < 0x20) {
-    temp_v0 = gameDataBlocksGetStats();
-    return ((1 << (param_1 & 7)) & 0xffU & (unsigned int)*(unsigned char *)(temp_v0 + 4 + (param_1 >> 3))) != 0;
-  }
-  return 0;
+    if (index >= 32) {
+        return false;
+    }
+    const BitFlagState *block = gameDataBlocksGetStats();
+    u8 mask = (u8)(1u << (index & 7));
+    return (block->flags[index >> 3] & mask) != 0;
 }
 
 } /* extern "C" */

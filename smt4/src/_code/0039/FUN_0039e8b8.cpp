@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00231bb8(int, float *);
-int FUN_0024692c(unsigned int);
+int effectSetByteSpeed(unsigned int);
 int FUN_002b0750(int, unsigned int, int, int, int, unsigned int, unsigned int, int);
 int drawSetColorFromRGBA8(unsigned int);
 int FUN_002bed3c(void);
@@ -26,7 +26,7 @@ extern unsigned int DAT_0049fcfc; /* 0x49fcfc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00231bb8. */
-/* Supplied declaration required: FUN_0024692c. */
+/* Supplied declaration required: effectSetByteSpeed. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -64,7 +64,7 @@ void FUN_0039e8b8(int param_1)
       }
       if (temp_v3 != 0 || temp_v0 != 0) {
         drawSetColorFromRGBA8(*(unsigned int *)(temp_v2 + 0xed0));
-        FUN_0024692c(*(unsigned int *)(temp_v2 + 0xed0) & 0xff);
+        effectSetByteSpeed(*(unsigned int *)(temp_v2 + 0xed0) & 0xff);
         temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0xec4),
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0xec0),

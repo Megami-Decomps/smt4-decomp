@@ -8,7 +8,7 @@ int FUN_00196fe8(...);
 int FUN_0029efa8(int);
 int FUN_0029efc0(...);
 int FUN_002be5a4(...);
-int FUN_002be624(unsigned char [64], unsigned char *, int);
+int textFormatBuffer(unsigned char [64], unsigned char *, int);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002bf380(int, int, int, int, int, int);
 int VectorSignedToFloat(int, int);
@@ -31,7 +31,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -114,7 +114,7 @@ void FUN_0018b49c(int param_1,int param_2)
   temp_v7 = dataTableGetCount(temp_v6);
   if ((temp_v10 < temp_v7) && (temp_v5 = temp_v5 + temp_v10 * 0x80, temp_v5 != 0)) {
     temp_v4 = FUN_002bf4f8(0x2f,0x1a);
-    FUN_002be624(temp_v12,&LAB_0018b754,temp_v5);
+    textFormatBuffer(temp_v12,&LAB_0018b754,temp_v5);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,

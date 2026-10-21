@@ -11,7 +11,7 @@ typedef struct Target {
     /* 0x1C */ s32 handle;
 } Target;
 
-extern Target *DAT_00570278;
+extern Target *g_sceneResourceWork;
 
 /* Runs stateHandlerCall for the global target in modes 1, 2 or 3 with a handle. */
 u32 FUN_002dec08(void)
@@ -20,7 +20,7 @@ u32 FUN_002dec08(void)
     Target *target;
     s32 handle;
 
-    target = DAT_00570278;
+    target = g_sceneResourceWork;
     mode = target->mode;
     if ((mode == 1 || mode == 2) || mode == 3) {
         handle = 0;

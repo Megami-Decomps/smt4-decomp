@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_00185dd4(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_6: 7 slot(s), 28 byte(s) */
@@ -26,7 +26,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -48,7 +48,7 @@ void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int p
   int temp_v9;
   
   temp_v6 = 0;
-  FUN_0019d880();
+  jobGetScalarValue();
   if (param_5 >= 200) {
     param_5 = 199;
   }

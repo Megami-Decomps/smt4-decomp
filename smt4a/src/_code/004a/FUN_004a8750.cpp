@@ -13,7 +13,7 @@ int unitRecordBuild(...);
 int FUN_0035ad50(unsigned int, unsigned char [104]);
 int FUN_003c3f1c(void);
 int FUN_004bcd90(unsigned char [104]);
-int FUN_004bd294(...);
+int randomGetUpperSixBits(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -71,7 +71,7 @@ extern int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_003c3f1c. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
-/* Supplied declaration required: FUN_004bd294. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -249,7 +249,7 @@ LAB_004a8864:
   temp_v41 = (unsigned int)*(unsigned short *)(puVar12 + 100);
   do {
     puVar3 = puVar12;
-    FUN_004bd294(puVar12,temp_v7 & 0xff);
+    randomGetUpperSixBits(puVar12,temp_v7 & 0xff);
     acStack_a4[temp_v7] = (char)(int)puVar3;
     temp_v7 = temp_v7 + 1;
   } while ((int)temp_v7 < 8);

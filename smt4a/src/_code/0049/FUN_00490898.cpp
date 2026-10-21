@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00163aa4(int);
 int dialogClose(int);
 int FUN_002d22c0(int);
-int FUN_00398450(void);
+int lmapEnableSceneState(void);
 int FUN_003adc58(void);
 int sub68OwnerGetBlock60(void);
 int FUN_00492c18(int, int *);
@@ -24,7 +24,7 @@ extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002d22c0. */
-/* Supplied declaration required: FUN_00398450. */
+/* Supplied declaration required: lmapEnableSceneState. */
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: FUN_00492c18. */
@@ -62,7 +62,7 @@ void FUN_00490898(int param_1)
         *(unsigned char *)(param_1 + 0x7b91) = 1;
         if (DAT_005f1a5c != '\0') {
           FUN_002d22c0(0);
-          FUN_00398450();
+          lmapEnableSceneState();
           return;
         }
         FUN_002d22c0(0);

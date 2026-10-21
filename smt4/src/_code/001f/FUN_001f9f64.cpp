@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0020d8ec(void);
+int mapInterfaceForwardResource(void);
 int FUN_00281e34(void);
 int FUN_002ba1e0(...);
 int VectorFloatToUnsigned(...);
@@ -67,7 +67,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0020d8ec. */
+/* Supplied declaration required: mapInterfaceForwardResource. */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -273,7 +273,7 @@ LAB_001fa01c:
                 temp_v7 = 0x2db5ffff;
                 temp_v5 = 0xffffffff;
               }
-              FUN_0020d8ec();
+              mapInterfaceForwardResource();
               FUN_002ba1e0(temp_v5,temp_v7,temp_v5,temp_v7,temp_v20,temp_v10,temp_v20,temp_v23);
               FUN_002ba1e0(0xff,0xff,0xff,0xff,temp_v24,temp_v10,temp_v24,temp_v23);
             }

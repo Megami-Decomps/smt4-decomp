@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231240(...);
+int pointConvertToFloat(...);
 int FUN_0023150c(void);
 int FUN_002316e8(void);
 int uiSpriteSetImageKeyframe(int, int, int);
@@ -13,7 +13,7 @@ int FUN_002bf818(int);
 int FUN_0039f838(int, unsigned int);
 int FUN_0039f860(int, int);
 
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_0023150c. */
 /* Supplied declaration required: FUN_002316e8. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -44,13 +44,13 @@ void FUN_0039c3fc(int param_1)
         temp_v3 = param_1 + 0x198;
         FUN_002b8ee0(temp_v3,0);
         if (*(char *)(param_1 + 0x222) != '\0') {
-          FUN_00231240(param_1 + 0x164,0);
+          pointConvertToFloat(param_1 + 0x164,0);
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xffffeff7;
         }
         else {
           temp_v1 = vec2GetYInt(temp_v3);
           temp_v2 = vec2GetXInt(temp_v3);
-          FUN_00231240(param_1 + 0x164,temp_v2,temp_v1);
+          pointConvertToFloat(param_1 + 0x164,temp_v2,temp_v1);
         }
         *(unsigned char *)(param_1 + 0x5a8c) = 1;
         *(unsigned char *)(param_1 + 0x5a8d) = 1;
@@ -78,7 +78,7 @@ void FUN_0039c3fc(int param_1)
       }
       temp_v1 = vec2GetYInt(temp_v4);
       temp_v2 = vec2GetXInt(temp_v4);
-      FUN_00231240(param_1 + 0x164,temp_v2,temp_v1);
+      pointConvertToFloat(param_1 + 0x164,temp_v2,temp_v1);
       *(unsigned char *)(param_1 + 0x5a8c) = 1;
       *(unsigned char *)(param_1 + 0x5a8d) = 1;
     }

@@ -17,7 +17,7 @@ int resourceListDestroy(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0019e2dc(void);
-int FUN_0019ea64(...);
+int messageSetMode(...);
 int FUN_001ad6d8(void);
 int FUN_001aeafc(...);
 int FUN_00214da4(void);
@@ -52,12 +52,12 @@ int FUN_0035d8a4(void);
 int FUN_003d2158(...);
 int soundChannelStopAll(...);
 int FUN_003d54f8(...);
-int FUN_003e542c(...);
+int controllerGetSourceValue(...);
 int linkHolderApplyFirst(...);
 int FUN_003e54b8(...);
 int linkHolderSetFlag(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0013c884(...);
 int FUN_0013cab8(...);
 int FUN_001517b4(...);
@@ -85,13 +85,13 @@ int FUN_0040ae70(...);
 int FUN_004d9c54(...);
 
 int FUN_0013c174(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_0019c0e0(unsigned int);
-int FUN_003f9c0c(void);
+int controllerApplyAtUnitScale(void);
 int FUN_003f9c6c(...);
 int FUN_003f9e80(void);
 int FUN_003fe86c(...);
@@ -158,13 +158,13 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001517b4. */
@@ -187,7 +187,7 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_0019e2dc. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001ad6d8. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
@@ -238,7 +238,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int linkHolderCallFirst(unsigned int);
-/* Supplied declaration required: FUN_003e542c. */
+/* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
@@ -250,7 +250,7 @@ extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c00. */
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
-/* Supplied declaration required: FUN_003f9c0c. */
+/* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_003f9e80. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -335,7 +335,7 @@ unsigned int FUN_0027e0d8(void)
       FUN_003f9c6c(temp_v7,temp_v11,0);
     }
     puVar3[0x15] = puVar3[0x15] + 1;
-    FUN_001418fc(puVar3 + 0x16);
+    uiSetFloatPair(puVar3 + 0x16);
     FUN_0014f0dc(puVar3 + 0x16,temp_v11,temp_v13,temp_v14);
     FUN_001523b8(puVar3 + 0x16,1);
     temp_v7 = 0;
@@ -408,7 +408,7 @@ unsigned int FUN_0027e0d8(void)
       FUN_003f9e80();
     }
     puVar8[0x12] = temp_v7;
-    FUN_003f9c0c();
+    controllerApplyAtUnitScale();
     FUN_0013c174(&LAB_0027e52c,temp_v25,1);
     temp_v7 = 0x48;
     FUN_00178b04(0x48,&LAB_0027e4bc,0x37c);
@@ -416,7 +416,7 @@ unsigned int FUN_0027e0d8(void)
       FUN_003f9e80();
     }
     puVar8[0x13] = temp_v7;
-    FUN_003f9c0c();
+    controllerApplyAtUnitScale();
     FUN_0013c174(&LAB_0027e548,temp_v25,1);
     temp_v7 = 0x48;
     FUN_00178b04(0x48,&LAB_0027e4bc,0x380);
@@ -424,7 +424,7 @@ unsigned int FUN_0027e0d8(void)
       FUN_003f9e80();
     }
     puVar8[0x14] = temp_v7;
-    FUN_003f9c0c();
+    controllerApplyAtUnitScale();
     puVar8[0x159] = 0xffffffff;
     temp_v7 = g_handleRegistry;
     FUN_0040b0f8(g_handleRegistry,&LAB_0027e564);
@@ -448,7 +448,7 @@ unsigned int FUN_0027e0d8(void)
       FUN_003f9c6c(temp_v7,temp_v11,0);
     }
     puVar8[0x15] = puVar8[0x15] + 1;
-    FUN_001418fc(puVar8 + 0x16);
+    uiSetFloatPair(puVar8 + 0x16);
     FUN_0014f0dc(puVar8 + 0x16,temp_v11,temp_v13,temp_v14);
     FUN_001523b8(puVar8 + 0x16,1);
     FUN_0036b824(puVar8 + 0x16);
@@ -585,7 +585,7 @@ unsigned int FUN_0027e0d8(void)
           break;
         }
         FUN_003870a8(puVar3);
-        FUN_00100388(temp_v12,&DAT_00526210,
+        textFormatBuffer(temp_v12,&DAT_00526210,
                      s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
         FUN_0020401c(temp_v12);
         puVar3[4] = 4;
@@ -683,7 +683,7 @@ LAB_0027edcc:
       }
     }
     temp_v7 = linkHolderCallFirst(puVar3[0xf]);
-    if ((temp_v7 != 0x13) || (FUN_003e542c(puVar3[0xf]), in_s0 < 0x41a00000)) break;
+    if ((temp_v7 != 0x13) || (controllerGetSourceValue(puVar3[0xf]), in_s0 < 0x41a00000)) break;
     FUN_003e54b8(puVar3[0xf]);
     temp_v4 = puVar3[0xf];
     linkedTargetSetFloat(temp_v4);
@@ -866,7 +866,7 @@ LAB_0027edcc:
     if (temp_v7 != 0) break;
     if (*(char *)(puVar3 + 0x15c) == '\0') {
       if (puVar3[0x15b] == 0x56) {
-        FUN_00100388(temp_v12,&DAT_00526210,
+        textFormatBuffer(temp_v12,&DAT_00526210,
                      s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
         FUN_0020401c(temp_v12);
         if (*(char *)(puVar3 + 0x15c) != '\0') {
@@ -1062,7 +1062,7 @@ LAB_0027edcc:
         temp_v5 = FUN_0014af98();
         FUN_001628c0(&LAB_0027fb98,temp_v5,temp_v4,1);
       }
-      FUN_0019ea64(1);
+      messageSetMode(1);
       if (*(char *)((int)puVar3 + 5) != '\0') {
         FUN_003d54f8(0,1);
         FUN_003d54f8(1);
@@ -1121,7 +1121,7 @@ LAB_0027edcc:
     temp_v7 = FUN_00224880(puVar3[10]);
     if (temp_v7 != 2) break;
     FUN_003870a8(puVar3);
-    FUN_00100388(temp_v12,&DAT_00526210,
+    textFormatBuffer(temp_v12,&DAT_00526210,
                  s_________0056fd3d + (unsigned int)*(unsigned char *)((int)g_tmnl + 9) * 0x3c + 2);
     FUN_0020401c(temp_v12);
     puVar3[4] = 4;

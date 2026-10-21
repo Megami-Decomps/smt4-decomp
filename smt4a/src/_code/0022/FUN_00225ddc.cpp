@@ -13,7 +13,7 @@ int FUN_004731d8(void);
 int FUN_0047db34(...);
 int scriptHolderFree2(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int sysPlaySe(int);
 int FUN_001695a0(void);
 int FUN_00183318(int);
@@ -35,7 +35,7 @@ int campButtonHelpRelease(void);
 int byteTableASetValue3(int);
 int FUN_003b61ec(void);
 int eventCommandStop(void);
-int FUN_003bb45c(void);
+int eventOpeningResetValidJob(void);
 int FUN_003d54f8(...);
 int gameFlagSetValue(...);
 int aocDrawText8(int, unsigned int, int);
@@ -66,7 +66,7 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_0013def0(unsigned int);
 extern int FUN_00162ea4(void);
@@ -102,7 +102,7 @@ extern int byteTableAGetValue3(void);
 extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: eventCommandStop. */
-/* Supplied declaration required: FUN_003bb45c. */
+/* Supplied declaration required: eventOpeningResetValidJob. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
@@ -160,8 +160,8 @@ unsigned int FUN_00225ddc(void)
       temp_v2 = DAT_005e1f70;
       puVar2[5] = DAT_005e1f70;
       puVar2[6] = DAT_005e1f74;
-      FUN_00100388(temp_v6,&LAB_00226234,temp_v2,temp_v2);
-      FUN_00100388(temp_v7,&LAB_0022624c,puVar2[5],puVar2[5]);
+      textFormatBuffer(temp_v6,&LAB_00226234,temp_v2,temp_v2);
+      textFormatBuffer(temp_v7,&LAB_0022624c,puVar2[5],puVar2[5]);
       temp_v3 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;
@@ -259,7 +259,7 @@ unsigned int FUN_00225ddc(void)
           bustupCutAnimStopJob();
           eventTexReleaseJobs();
           eventCommandStop();
-          FUN_003bb45c();
+          eventOpeningResetValidJob();
           if (puVar2[0xc] != 0) {
             scrScriptProcessDestroy();
             puVar2[0xc] = 0;

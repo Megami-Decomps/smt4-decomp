@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdOperatorNew(void);
 int eventQueueAddUnique(...);
 int dialogOpen(...);
@@ -67,13 +67,13 @@ extern unsigned short DAT_005f1796; /* 0x5f1796 */
 extern unsigned char DAT_005f1798; /* 0x5f1798 */
 extern unsigned short DAT_005f17a8; /* 0x5f17a8 */
 extern unsigned short DAT_005f17aa; /* 0x5f17aa */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameDataBlocksGetSaveData(void);
 extern int FUN_0015a21c(int);
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int gameFlagIsSet(void);
@@ -81,7 +81,7 @@ extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0019f548. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_001f4908. */
-extern int FUN_001f4bb0(void);
+extern int campIsState51(void);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0020401c. */
@@ -199,8 +199,8 @@ void FUN_004b990c(int param_1)
     *(unsigned char *)(param_1 + 0xa88) = 1;
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
   case 3:
-    temp_v6 = FUN_001f4bb0();
-    if ((temp_v6 != 0) || (temp_v6 = FUN_00162858(), temp_v6 == 0)) {
+    temp_v6 = campIsState51();
+    if ((temp_v6 != 0) || (temp_v6 = campIsState85(), temp_v6 == 0)) {
       if (DAT_005f1634 == '\0') {
         FUN_001f4908(1,10,0xff);
       }
@@ -209,7 +209,7 @@ void FUN_004b990c(int param_1)
     }
     break;
   case 4:
-    temp_v6 = FUN_00162858();
+    temp_v6 = campIsState85();
     if (temp_v6 != 0) {
       return;
     }
@@ -260,10 +260,10 @@ void FUN_004b990c(int param_1)
     }
     else {
       FUN_003b5064();
-      if (DAT_005f1c98 >= 200) {
+      if (g_mapSelection >= 200) {
         *(unsigned char *)(param_1 + 0x4a) = 1;
       }
-      else if (DAT_005f1c98 >= 100) {
+      else if (g_mapSelection >= 100) {
         *(unsigned char *)(param_1 + 0x48) = 1;
       }
       else {
@@ -309,12 +309,12 @@ void FUN_004b990c(int param_1)
       }
       *(int *)(param_1 + 0x1218) = temp_v6;
       FUN_00407978();
-      FUN_00100388(temp_v9,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
+      textFormatBuffer(temp_v9,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
       if (((*(short *)(*(int *)(param_1 + 0x1118) + 100) != 0) &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) ||
          ((*(short *)(*(int *)(param_1 + 0x1118) + 0x66) != 0 &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) {
-        FUN_00100388(temp_v10,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
+        textFormatBuffer(temp_v10,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
         FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v9,temp_v10);
       }
       else {
@@ -332,7 +332,7 @@ void FUN_004b990c(int param_1)
           dataTable33TypeCount(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
           if (0 < (int)puVar7) {
             do {
-              FUN_00100388(temp_v9,&LAB_004b9fe4,"mikado/",puVar12);
+              textFormatBuffer(temp_v9,&LAB_004b9fe4,"mikado/",puVar12);
               moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),temp_v9,temp_v4);
               puVar12 = puVar12 + 0x20;
               temp_v4 = temp_v4 + 1;

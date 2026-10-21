@@ -1,35 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00397200` (_code @ 0x397200, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char DAT_00422388; /* 0x422388 */
-
-
-void FUN_00397200(unsigned int *param_1)
-
+/* NON_MATCHING: retail packed state stores or parameter lifetime differs. */
+#include "common.h"
+struct ListNode { ListNode *previous; ListNode *next; ListNode *owner; };
+struct CallbackState {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ ListNode *head;
+    /* 0x08 */ ListNode root;
+    /* 0x14 */ u8 active;
+    /* 0x15 */ u8 unk15[3];
+    /* 0x18 */ ListNode *tail;
+    /* 0x1c */ u32 first;
+    /* 0x20 */ u32 second;
+};
+extern "C" const u8 DAT_00422388[];
+/* Initializes an empty self-linked callback list. */
+extern "C" void FUN_00397200(CallbackState *state)
 {
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  puVar2 = param_1 + 2;
-  *param_1 = (unsigned int)&DAT_00422388;
-  param_1[1] = (unsigned int)puVar2;
-  puVar1 = param_1 + 2;
-  param_1[2] = (unsigned int)puVar1;
-  param_1[3] = (unsigned int)puVar1;
-  param_1[4] = (unsigned int)puVar1;
-  *(unsigned char *)(param_1 + 5) = 0;
-  param_1[6] = (unsigned int)puVar2;
-  param_1[7] = (unsigned int)puVar2;
-  param_1[8] = 0;
-  return;
+    state->vtable = DAT_00422388;
+    state->head = &state->root;
+    state->root.previous = &state->root;
+    state->root.next = &state->root;
+    state->root.owner = &state->root;
+    state->active = 0;
+    state->tail = &state->root;
+    state->first = 0;
+    state->second = 0;
 }
-
-} /* extern "C" */

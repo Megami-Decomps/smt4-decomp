@@ -10,7 +10,7 @@ int FUN_00151408(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdOperatorNew(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 int FUN_002804b0(...);
 int FUN_003f5268(...);
 int FUN_003f84e8(...);
@@ -35,7 +35,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003f5268. */
 /* Supplied declaration required: FUN_003f84e8. */
@@ -76,7 +76,7 @@ void FUN_0039bf58(unsigned int param_1)
   asdTMTexTableLoadTmx(0x31,0);
   temp_v1 = 0;
   do {
-    FUN_001acf98(0x31,temp_v1);
+    asdTMTexLoadMainHeap(0x31,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   temp_v0 = spriteHandleCreate(0);

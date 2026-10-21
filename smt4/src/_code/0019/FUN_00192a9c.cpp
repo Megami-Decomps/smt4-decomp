@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_003d8b34's literal pool; not written yet. */
-#include "common.h"
+/* NON_MATCHING: armcc combines the position loads into VLDMIA; retail uses separate VLDRs and different argument scheduling. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+
+extern "C" {
+
+extern void debugDrawText(u32 handle, u32 value, f32 x, f32 y, f32 scale);
+
+/* Places the text element two units above the supplied position. */
+void FUN_00192a9c(const Point2 *position, const u32 *handle, u32 value)
+{
+    debugDrawText(*handle, value, position->x, position->y - 2.0f, 1.0f);
+}
+
+} /* extern "C" */

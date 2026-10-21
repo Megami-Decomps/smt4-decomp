@@ -26,7 +26,7 @@ typedef struct {
 
 extern unsigned short uRam005b3d56; /* 0x5b3d56 */
 extern unsigned int DAT_005b3d78; /* 0x5b3d78 */
-extern signed char DAT_005c1460; /* 0x5c1460 */
+extern signed char g_inputResetState; /* 0x5c1460 */
 extern int DAT_005c1468; /* 0x5c1468 */
 extern unsigned char DAT_00636f88; /* 0x636f88 */
 extern unsigned char DAT_00638f88; /* 0x638f88 */
@@ -304,7 +304,7 @@ LAB_0036c530:
     } while (piVar4 == (int *)0x0);
   }
   temp_v2 = DAT_005c1468;
-  if (DAT_005c1460 != '\0') {
+  if (g_inputResetState != '\0') {
     *(unsigned int *)(DAT_005c1468 + 4) = 0;
     *(unsigned int *)(temp_v2 + 8) = 0;
     *(unsigned int *)(temp_v2 + 0xc) = 0;

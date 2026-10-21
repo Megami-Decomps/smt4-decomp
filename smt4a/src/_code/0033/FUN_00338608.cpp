@@ -20,8 +20,8 @@ extern unsigned int DAT_005c110c; /* 0x5c110c */
 extern unsigned char g_polyFlashKinds; /* 0x5c11a8 */
 
 /* Supplied declaration required: memAlloc. */
-extern unsigned int FUN_002721e4(void);
-extern unsigned int FUN_002b41c4(int);
+extern unsigned int resourceResolveDataPointer(void);
+extern unsigned int resourceResolveHeaderPointer(int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -38,11 +38,11 @@ unsigned int * FUN_00338608(int param_1)
   unsigned int temp_v5;
   int temp_v6;
   
-  temp_v3 = FUN_002721e4();
+  temp_v3 = resourceResolveDataPointer();
   if ((*(short *)(param_1 + 0x1c) != 1) && (*(short *)(param_1 + 0x1c) == 4)) {
     temp_v3 = 0;
   }
-  temp_v4 = FUN_002b41c4(param_1);
+  temp_v4 = resourceResolveHeaderPointer(param_1);
   temp_v5 = (unsigned int)*(unsigned short *)(param_1 + 0xc);
   temp_v6 = *(int *)(temp_v5 * 0x1c + 0x5c11c0);
   puVar6 = (unsigned int *)0x10000;

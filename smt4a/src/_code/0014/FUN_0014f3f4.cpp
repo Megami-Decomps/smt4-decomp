@@ -14,7 +14,7 @@ int FUN_00183bb0(void);
 int SBORROW4(...);
 
 int CONCAT44(int, double);
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00157558(...);
 int FUN_00162790(...);
 int FUN_00164490(int);
@@ -51,7 +51,7 @@ extern signed char DAT_005e204c; /* 0x5e204c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
@@ -66,7 +66,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: FUN_00165b08. */
-extern int FUN_001671e0(void);
+extern int ifTouchIsActive(void);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
 /* Supplied declaration required: FUN_00168594. */
@@ -205,7 +205,7 @@ char FUN_0014f3f4(void)
       temp_v20 = -0xff01;
       temp_v21 = temp_v6 * 3;
       temp_v6 = temp_v6 * 0xc;
-      FUN_00100388(&temp_v22,
+      textFormatBuffer(&temp_v22,
                    "犂袂薂鎂袂膂䂁蒂薂钂薂莂钂薂蒂䦁䂁撂颂薂銂莂覂鎂薂䂁莂膂閂钂覂辂躂䦁"
                    ,*(unsigned int *)
                      ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 4));
@@ -219,7 +219,7 @@ char FUN_0014f3f4(void)
       temp_v11 = FUN_001834a4(4,0xabec);
       temp_v20 = *(int *)("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 8)
       ;
-      FUN_00100388(&temp_v22,&LAB_0014fb38,
+      textFormatBuffer(&temp_v22,&LAB_0014fb38,
                    *(unsigned int *)
                     ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v21 * 4),
                    *(unsigned int *)
@@ -454,7 +454,7 @@ LAB_0014fe60:
     temp_v7 = FUN_001692ac(1,0);
     FUN_0016c6f0(g_renderCtx,3,temp_v7);
     if (*(char *)(temp_v5 + 8) == '\x01' || *(char *)(temp_v5 + 8) == '\x04') {
-      temp_v12 = FUN_001671e0();
+      temp_v12 = ifTouchIsActive();
       if (temp_v12 != 0) {
         temp_v12 = FUN_001834a4(8,0x7d8);
         temp_v22 = (int)temp_v17;

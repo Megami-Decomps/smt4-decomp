@@ -11,7 +11,7 @@ int FUN_00272e64(void);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
 int FUN_00330108(float *, float *, unsigned char [52]);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00384830(void);
 int VectorSignedToFloat(int, int);
 
@@ -43,7 +43,7 @@ extern float DAT_005f1720; /* 0x5f1720 */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_00330108. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00384830. */
 
 
@@ -150,7 +150,7 @@ void FUN_002750d8(int param_1,int param_2)
       FUN_002b5cb4();
       temp_v8 = CONCAT44(temp_v9,temp_v6);
       temp_v9 = 90.0f;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v6 = (float)temp_v8;
       FUN_002b5cd4();
       temp_v1 = 0;

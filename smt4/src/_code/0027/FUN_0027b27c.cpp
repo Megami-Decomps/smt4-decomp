@@ -9,7 +9,7 @@ typedef struct Work {
     /* 0x24 */ u8 entries[0x10][0x3C];
 } Work;
 
-extern Work *DAT_00447a60;
+extern Work *g_mapRangeWork;
 
 void FUN_0027b27c(void)
 {
@@ -17,7 +17,7 @@ void FUN_0027b27c(void)
     u8 *entry;
 
     do {
-        Work *work = DAT_00447a60;
+        Work *work = g_mapRangeWork;
 
         entry = work->entries[i];
         if (*entry != 0) {

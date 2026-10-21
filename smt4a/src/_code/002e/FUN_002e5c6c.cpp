@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(int, int);
 int FUN_002a1f60(unsigned int, int, unsigned int, int, int, int, unsigned int);
-int FUN_002e13dc(unsigned int);
+int effectSpawnDefaultArguments(unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int fileSectionGetData(int, unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002a1f60. */
-/* Supplied declaration required: FUN_002e13dc. */
+/* Supplied declaration required: effectSpawnDefaultArguments. */
 extern int FUN_00333750(void);
 
 
@@ -43,7 +43,7 @@ void FUN_002e5c6c(unsigned int param_1)
     if (temp_v1 != 0) {
       *(unsigned char *)(temp_v0 + 0x31) = 1;
       FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x328),3,0xffffffff,0,3,temp_v1,param_1);
-      FUN_002e13dc(*(unsigned int *)(temp_v0 + 0x328));
+      effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x328));
       if ((int)in_s0 >= 0x43a68000) {
         *(unsigned char *)(temp_v0 + 0x32) = 1;
         *(int *)(temp_v0 + 0x14) = (int)in_s0;

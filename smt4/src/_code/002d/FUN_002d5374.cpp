@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025ca80(unsigned int, int);
+int asdModelSlotSetTranslation(unsigned int, int);
 int FUN_002f46a4(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern short DAT_0049fb40; /* 0x49fb40 */
 extern short DAT_0049fb42; /* 0x49fb42 */
 
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_0025ca80. */
+/* Supplied declaration required: asdModelSlotSetTranslation. */
 /* Supplied declaration required: FUN_002f46a4. */
 
 
@@ -33,9 +33,9 @@ void FUN_002d5374(void)
   }
   FUN_002f46a4();
   temp_v0 = FUN_0025bb34(1,&LAB_002d54ac,0);
-  FUN_0025ca80(temp_v0,0);
+  asdModelSlotSetTranslation(temp_v0,0);
   temp_v0 = FUN_0025bb34(1,&LAB_002d54cc,0);
-  FUN_0025ca80(temp_v0,0);
+  asdModelSlotSetTranslation(temp_v0,0);
   return;
 }
 

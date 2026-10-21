@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
 /* Hooks the object's handle to its callback, configures its two modes and starts it (state 1). */
 #include "common.h"
 

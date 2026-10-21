@@ -26,7 +26,7 @@ extern unsigned char LAB_00376bd8; /* 0x376bd8 */
 extern unsigned char LAB_00376bf8; /* 0x376bf8 */
 extern int scriptObjDestroy(...); /* 0x3a3ae0 */
 extern int renderObjAttach(...); /* 0x3ae770 */
-extern int FUN_003ae7cc(...); /* 0x3ae7cc */
+extern int btlPartnerAttackApplyState(...); /* 0x3ae7cc */
 extern unsigned int *g_btlPartnerAttack; /* 0x573c50 */
 
 /* Supplied declaration required: taskCreateDraw. */
@@ -53,7 +53,7 @@ void FUN_00376a2c(unsigned int *param_1)
   g_btlPartnerAttack = puVar1;
   taskCreateDraw(&LAB_00376bbc,4,0,0,&LAB_00369280,scriptObjDestroy,param_1,*param_1);
   param_1[0x14] = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_00376bd8,0x71,0,0,FUN_003ae7cc,0,0,puVar2);
+  taskCreateDraw(&LAB_00376bd8,0x71,0,0,btlPartnerAttackApplyState,0,0,puVar2);
   taskCreateDraw(&LAB_00376bf8,0x75,0,0,renderObjAttach,0,0,param_1[0x14]);
   puVar1 = g_btlPartnerAttack;
   *g_btlPartnerAttack = 0;

@@ -1,23 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc11c` (_code @ 0x2bc11c, 0x4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+u32 nnosConvertVirtToPhysImpl(u32 address);
 
-
-int FUN_002bc11c(int param_1)
-
+/* Converts a virtual address through the OS implementation. */
+u32 FUN_002bc11c(u32 address)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 + 0xec000000U < 0x8000000) {
-    temp_v0 = param_1 + 0xc000000;
-  }
-  else if ((param_1 + 0xe1000000U < 0x600000) || (param_1 == 0x1f600000)) {
-    temp_v0 = param_1 - 0x7000000;
-  }
-  return temp_v0;
+    return nnosConvertVirtToPhysImpl(address);
 }
-
-} /* extern "C" */
+}

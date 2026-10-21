@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a09b4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern signed char DAT_0049f942; /* 0x49f942 */
 extern signed char DAT_0049fb44; /* 0x49fb44 */
 
 /* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_001fdebc(int param_1)
@@ -27,30 +27,30 @@ void FUN_001fdebc(int param_1)
   unsigned char temp_v1 [128];
   
   if (DAT_0049fb44 != '\0') {
-    FUN_002be624(temp_v1,"map/m%03d/e%03d_%02d_dz.bcenv",*(unsigned int *)(param_1 + 0x2c),
+    textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d_dz.bcenv",*(unsigned int *)(param_1 + 0x2c),
                  *(unsigned int *)(param_1 + 0x2c),*(unsigned int *)(param_1 + 0x30));
   }
   if (DAT_0049f942 != '\0') {
-    FUN_002be624(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0x18,0x18,1);
+    textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0x18,0x18,1);
   }
   else {
     temp_v0 = *(int *)(param_1 + 0x2c);
     if (temp_v0 != 0x29) {
       if (temp_v0 != 0x2a) {
         if (temp_v0 != 0x2b) {
-          FUN_002be624(temp_v1,"map/m%03d/e%03d_%02d.bcenv",temp_v0,temp_v0,
+          textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",temp_v0,temp_v0,
                        *(unsigned int *)(param_1 + 0x30));
         }
         else {
-          FUN_002be624(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0x24,0x24,1);
+          textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0x24,0x24,1);
         }
       }
       else {
-        FUN_002be624(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0xe,0xe,1);
+        textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",0xe,0xe,1);
       }
     }
     else {
-      FUN_002be624(temp_v1,"map/m%03d/e%03d_%02d.bcenv",2,2,6);
+      textFormatBuffer(temp_v1,"map/m%03d/e%03d_%02d.bcenv",2,2,6);
     }
   }
   FUN_002a09b4(temp_v1,0);

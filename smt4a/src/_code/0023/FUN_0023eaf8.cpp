@@ -43,7 +43,7 @@ extern int g_uiQuest; /* 0x57f28c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
@@ -415,7 +415,7 @@ LAB_0023f21c:
               *(unsigned int *)(g_uiQuest + 4) = 3;
               *(unsigned int *)(temp_v8 + 8) = temp_v5;
               *(unsigned int *)(temp_v8 + 0x10) = 0;
-              temp_v8 = FUN_00162858();
+              temp_v8 = campIsState85();
               if (temp_v8 != 0) {
                 FUN_00212724();
               }

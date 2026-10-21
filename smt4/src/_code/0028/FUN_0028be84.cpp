@@ -1,22 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028be84` (_code @ 0x28be84, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler schedules address formation, prologue and conditional return differently from retail. */
+#include "common.h"
+namespace { struct Operation { u8 padding[0x50]; s16 mode; u8 reserved[2]; u8 active; }; struct State { u8 padding[0x1c4]; Operation operation; }; }
 extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-
-int FUN_0028be84(int param_1)
-
+u32 recordGetSignedFlags(Operation *operation);
+u32 FUN_0028be84(State *state)
 {
-  if ((*(short *)(param_1 + 0x214) == 3) && (*(char *)(param_1 + 0x218) != '\0')) {
-    return (int)*(char *)(param_1 + 0x24e);
-  }
-  return 1;
+    if (state->operation.mode == 3 && state->operation.active != 0) { return recordGetSignedFlags(&state->operation); }
+    return 1;
 }
-
-} /* extern "C" */
+}

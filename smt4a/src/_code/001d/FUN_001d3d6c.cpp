@@ -1,55 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3d6c` (_code @ 0x1d3d6c, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vldmia r2, {s0-s11} where the compiled block uses vldr s1, [r2]. */
+#include "common.h"
 
-extern "C" {
+struct ScaleVector {
+    f32 x; // 0x00
+    f32 y; // 0x04
+    f32 z; // 0x08
+};
 
+struct MatrixRows {
+    f32 row[3][4]; // 0x00, 0x10, 0x20
+};
 
-void FUN_001d3d6c(float *param_1,float *param_2,float *param_3)
-
+extern "C" void FUN_001d3d6c(MatrixRows* destination,
+                             const ScaleVector* scale,
+                             const MatrixRows* matrix)
 {
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  
-  temp_v0 = param_3[1];
-  temp_v1 = param_3[2];
-  temp_v2 = param_3[3];
-  temp_v3 = param_3[4];
-  temp_v4 = param_3[5];
-  temp_v5 = param_3[6];
-  temp_v6 = param_3[7];
-  temp_v7 = param_3[8];
-  temp_v8 = param_3[9];
-  temp_v9 = param_3[10];
-  temp_v10 = param_3[0xb];
-  temp_v11 = *param_2;
-  temp_v12 = param_2[1];
-  temp_v13 = param_2[2];
-  *param_1 = *param_3 * temp_v11;
-  param_1[1] = temp_v0 * temp_v11;
-  param_1[2] = temp_v1 * temp_v11;
-  param_1[3] = temp_v2 * temp_v11;
-  param_1[4] = temp_v3 * temp_v12;
-  param_1[5] = temp_v4 * temp_v12;
-  param_1[6] = temp_v5 * temp_v12;
-  param_1[7] = temp_v6 * temp_v12;
-  param_1[8] = temp_v7 * temp_v13;
-  param_1[9] = temp_v8 * temp_v13;
-  param_1[10] = temp_v9 * temp_v13;
-  param_1[0xb] = temp_v10 * temp_v13;
-  return;
-}
+    MatrixRows input = *matrix;
+    const ScaleVector factors = *scale;
 
-} /* extern "C" */
+    input.row[0][0] *= factors.x;
+    input.row[0][1] *= factors.x;
+    input.row[0][2] *= factors.x;
+    input.row[0][3] *= factors.x;
+    input.row[1][0] *= factors.y;
+    input.row[1][1] *= factors.y;
+    input.row[1][2] *= factors.y;
+    input.row[1][3] *= factors.y;
+    input.row[2][0] *= factors.z;
+    input.row[2][1] *= factors.z;
+    input.row[2][2] *= factors.z;
+    input.row[2][3] *= factors.z;
+
+    *destination = input;
+}

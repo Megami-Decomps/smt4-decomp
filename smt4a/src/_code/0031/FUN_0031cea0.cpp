@@ -1,36 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031cea0` (_code @ 0x31cea0, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r4, r0'; compiler emits 'and r4, r0, #255' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_00231464(void);
-
-extern int DAT_0057f678; /* 0x57f678 */
-
-/* Supplied declaration required: FUN_00231464. */
-
-
-void FUN_0031cea0(char param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  FUN_00231464();
-  temp_v0 = DAT_0057f678;
-  *(char *)(DAT_0057f678 + 8) = param_1;
-  if (param_1 == '\x02') {
-    temp_v1 = 2;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  *(unsigned char *)(temp_v0 + 0x25) = 0;
-  *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  return;
+void FUN_00231464();
+extern struct {
+    u8 pad[8];
+    u8 kind;
+    u8 gap[3];
+    u32 mode,count;
+    u8 gap2[0x11];
+    u8 pending;
+} *DAT_0057f678;
+void FUN_0031cea0(u32 input) {
+    u8 kind=(u8)input;
+    FUN_00231464();
+    DAT_0057f678->kind=kind;
+    DAT_0057f678->mode=kind==2?2:1;
+    DAT_0057f678->pending=0;
+    DAT_0057f678->count=0;
 }
-
-} /* extern "C" */
+}

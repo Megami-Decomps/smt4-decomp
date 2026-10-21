@@ -13,7 +13,7 @@ int btlTalkBustUpCreate(void);
 int fileSlotLoad(int);
 int FUN_00297468(unsigned char *, int *, int);
 int asdTMTexTableLoadEntryAsync(int, int);
-int FUN_002bb150(...);
+int threadSleepDuration(...);
 int FUN_002bd2b4(...);
 int rt_aeabi_memclr(...);
 int asdTMTexTableLoadSprites(int);
@@ -50,7 +50,7 @@ extern int g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_002005a0. */
 extern int gameDataBlockTestFlag(unsigned int);
-extern int FUN_002595bc(void);
+extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
 extern unsigned int gameDataBlocksGetFlagByteA(void);
@@ -60,7 +60,7 @@ extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bd2b4. */
 extern int rt_memcmp(unsigned char *, int, unsigned int);
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -112,7 +112,7 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       if (temp_v1 == 0) {
         rt_aeabi_memclr(g_campCec + 0x80,0x14);
       }
-      temp_v1 = FUN_002595bc();
+      temp_v1 = cecQueryOptionalProcess();
       param_1->field_0xd60 = (char)temp_v1;
       if ((temp_v1 != 0) && (temp_v1 = gameDataBlockTestFlag(0x20), temp_v1 != 0)) {
         FUN_002005a0(&temp_v3);
@@ -134,7 +134,7 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       }
       param_1->field_0xd68 = param_1->field_0xd68 + 1;
     }
-    FUN_002bb150(10000000,0);
+    threadSleepDuration(10000000,0);
   }
   return;
 }

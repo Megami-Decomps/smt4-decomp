@@ -1,2 +1,7 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_002bf534's literal pool; not written yet. */
 #include "common.h"
+
+/* Fixed callback result in the retail build. */
+extern "C" s32 FUN_003193a0(void)
+{
+    return 0;
+}

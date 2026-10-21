@@ -13,7 +13,7 @@ int resourceListDestroy(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0019e2dc(void);
-int FUN_0019ea64(...);
+int messageSetMode(...);
 int FUN_001ad6d8(void);
 int ptrListRemoveClearOwner(...);
 int FUN_001aeafc(...);
@@ -35,7 +35,7 @@ int linkHolderClearFlag(...);
 int FUN_003e5c00(void);
 int VectorFloatToUnsigned(double, int);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0013cab8(...);
 int FUN_001517b4(...);
 int FUN_001642e4(...);
@@ -54,7 +54,7 @@ int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
-int FUN_003e542c(...);
+int controllerGetSourceValue(...);
 int controllerTargetNodeStart(...);
 int linkHolderApplyFirst(...);
 int FUN_003e54b8(...);
@@ -63,17 +63,17 @@ int linkHolderSetFlag(...);
 
 int FUN_0013c174(...);
 int FUN_0013c884(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_0019c0e0(unsigned int);
 int FUN_003e4740(...);
-int FUN_003f9c0c(void);
+int controllerApplyAtUnitScale(void);
 int FUN_003f9c6c(...);
 int FUN_003f9e80(void);
-int FUN_003fd784(...);
+int controllerSetPosition(...);
 int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(void);
@@ -122,13 +122,13 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001523b8. */
@@ -143,7 +143,7 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_0019e2dc. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_001ad6d8. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
@@ -180,7 +180,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003e4740. */
 extern int linkHolderCallFirst(unsigned int);
-/* Supplied declaration required: FUN_003e542c. */
+/* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
@@ -192,10 +192,10 @@ extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c00. */
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
-/* Supplied declaration required: FUN_003f9c0c. */
+/* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_003f9e80. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fd8dc. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -273,7 +273,7 @@ unsigned int FUN_00328838(void)
       FUN_003f9c6c(temp_v4,&temp_v9,0);
     }
     *(int *)(temp_v0 + 0x3c) = *(int *)(temp_v0 + 0x3c) + 1;
-    FUN_001418fc(temp_v0 + 0x40);
+    uiSetFloatPair(temp_v0 + 0x40);
     FUN_0014f0dc(temp_v0 + 0x40,&temp_v9,temp_v10,temp_v11);
     FUN_001523b8(temp_v0 + 0x40,1);
     temp_v4 = 0;
@@ -321,7 +321,7 @@ unsigned int FUN_00328838(void)
     temp_v3 = *(unsigned int *)(*(int *)(temp_v4 + 0x2c) + 4);
     FUN_0040ace8(g_handleRegistry,temp_v3);
     FUN_003fe86c(temp_v3,0,1);
-    FUN_003fd784(temp_v3);
+    controllerSetPosition(temp_v3);
     FUN_003fd7b4(temp_v3);
     FUN_0013c174(&LAB_00328c6c,temp_v16,1);
     temp_v6 = 0x48;
@@ -330,7 +330,7 @@ unsigned int FUN_00328838(void)
       FUN_003f9e80();
     }
     *(int *)(temp_v4 + 0x30) = temp_v6;
-    FUN_003f9c0c();
+    controllerApplyAtUnitScale();
     FUN_0013c174(&LAB_00328c8c,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c5);
@@ -338,7 +338,7 @@ unsigned int FUN_00328838(void)
       FUN_003f9e80();
     }
     *(int *)(temp_v4 + 0x34) = temp_v6;
-    FUN_003f9c0c();
+    controllerApplyAtUnitScale();
     FUN_0013c174(&LAB_00328cac,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c9);
@@ -346,7 +346,7 @@ unsigned int FUN_00328838(void)
       FUN_003f9e80();
     }
     *(int *)(temp_v4 + 0x38) = temp_v6;
-    FUN_003f9c0c();
+    controllerApplyAtUnitScale();
     *(unsigned int *)(temp_v4 + 0x54c) = 0xffffffff;
     temp_v6 = g_handleRegistry;
     FUN_0040b0f8(g_handleRegistry,&LAB_00328ccc);
@@ -370,7 +370,7 @@ unsigned int FUN_00328838(void)
       FUN_003f9c6c(temp_v6,&temp_v9,0);
     }
     *(int *)(temp_v4 + 0x3c) = *(int *)(temp_v4 + 0x3c) + 1;
-    FUN_001418fc(temp_v4 + 0x40);
+    uiSetFloatPair(temp_v4 + 0x40);
     FUN_0014f0dc(temp_v4 + 0x40,&temp_v9,temp_v10,temp_v11);
     FUN_001523b8(temp_v4 + 0x40,1);
     FUN_0036b824(temp_v4 + 0x40);
@@ -449,16 +449,16 @@ unsigned int FUN_00328838(void)
     }
     temp_v4 = g_localTmnl;
     if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
-      FUN_00100388(&temp_v9,&DAT_00526180);
+      textFormatBuffer(&temp_v9,&DAT_00526180);
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 1) {
-      FUN_00100388(&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
+      textFormatBuffer(&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 2) {
-      FUN_00100388(&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
+      textFormatBuffer(&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
     }
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 3) {
-      FUN_00100388(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
+      textFormatBuffer(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
     }
     FUN_0020401c(&temp_v9);
     sysPlaySe(0x92);
@@ -483,7 +483,7 @@ unsigned int FUN_00328838(void)
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
     temp_v4 = linkHolderCallFirst(*(unsigned int *)(temp_v0 + 0x28));
-    if ((temp_v4 != 0x13) || (FUN_003e542c(*(unsigned int *)(temp_v0 + 0x28)), in_s0 < 0x41a00000)) break;
+    if ((temp_v4 != 0x13) || (controllerGetSourceValue(*(unsigned int *)(temp_v0 + 0x28)), in_s0 < 0x41a00000)) break;
     FUN_003e54b8(*(unsigned int *)(temp_v0 + 0x28));
     temp_v3 = *(unsigned int *)(temp_v0 + 0x28);
     linkedTargetSetFloat(temp_v3);
@@ -606,16 +606,16 @@ unsigned int FUN_00328838(void)
     if (*(char *)(temp_v0 + 0x558) == '\0') {
       if (*(int *)(temp_v0 + 0x554) == 0x56) {
         if (*(int *)(*(int *)(g_localTmnl + 0x560) * 0x10 + 0x56fcd8) == 0) {
-          FUN_00100388(&temp_v9,&DAT_00526180);
+          textFormatBuffer(&temp_v9,&DAT_00526180);
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 1) {
-          FUN_00100388(&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
+          textFormatBuffer(&temp_v9,"冂躂蒂䂁憂銂膂躂薂");
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 2) {
-          FUN_00100388(&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
+          textFormatBuffer(&temp_v9,"劂銂蒂䂁憂銂膂躂薂");
         }
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 3) {
-          FUN_00100388(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
+          textFormatBuffer(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
         }
         FUN_0020401c(&temp_v9);
         if (*(char *)(temp_v0 + 0x558) != '\0') {
@@ -724,7 +724,7 @@ unsigned int FUN_00328838(void)
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
-      FUN_0019ea64(1);
+      messageSetMode(1);
       gameStateClearFlag();
       temp_v0 = *(int *)(temp_v0 + 0x560) * 0x10;
       if ((DAT_005f1b74 == *(short *)(temp_v0 + 0x56fcd0)) &&

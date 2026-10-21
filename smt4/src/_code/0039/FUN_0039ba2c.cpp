@@ -12,7 +12,7 @@ int vec2GetXInt(...);
 int FUN_002bedb0(unsigned int, int);
 int FUN_002bee04(unsigned int, int, unsigned int);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002bf818(int);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(unsigned char [64], unsigned char *, int);
@@ -39,7 +39,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -61,7 +61,7 @@ void FUN_0039ba2c(int param_1)
   FUN_00231bb8(param_1 + 0x164,&temp_v5);
   temp_v0 = FUN_002c5d80(1,0);
   FUN_002bee04(g_titleScene,3,temp_v0);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bed3c();
   temp_v0 = vec2GetXInt();
   temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -77,7 +77,7 @@ void FUN_0039ba2c(int param_1)
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be5a4(2,(*(unsigned int *)((unsigned char *)&DAT_0044cdc8 + 0xc)),temp_v4);
   FUN_002bedb0(g_titleScene,3);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bf818(param_1 + 0xa88);
   if ((*(char *)(param_1 + 0xa86) != '\0') && (*(char *)(param_1 + 0xb12) != '\0')) {
     *(unsigned char *)(param_1 + 0xa84) = 1;

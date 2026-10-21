@@ -10,9 +10,9 @@ int FUN_00230d84(int, int, int, int, int);
 int FUN_00231258(...);
 int FUN_00231bcc(...);
 int FUN_002be56c(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf4f0(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -41,18 +41,18 @@ extern int g_titleScene; /* 0x44ea00 */
 #endif
 extern int FUN_0022f1b8(short);
 /* Supplied declaration required: FUN_00230aec. */
-extern unsigned int FUN_00230c80(short, unsigned int);
+extern unsigned int itemGetNameOrFallback(short, unsigned int);
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int FUN_00246570(unsigned int *);
 /* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
@@ -96,11 +96,11 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     temp_v9 = (int)*(short *)(temp_v3 + 8);
     temp_v3 = (int)*(short *)(temp_v3 + 10);
     if (param_3 != 0) {
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_00230d84(param_1 + 0x380,0x47,temp_v9,temp_v3,temp_v2);
       FUN_00230d84(param_1 + 0x380,0x48,temp_v9,temp_v3,temp_v2);
       FUN_00230d84(param_1 + 0x380,0x49,temp_v9,temp_v3,temp_v2);
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_00231bcc(param_1 + 0x380,0x4a,temp_v9,temp_v3,temp_v2,1);
       if (*(char *)(param_1 + 0x839) != '\0') {
         FUN_00231bcc(param_1 + 0x380,0x4c,temp_v9,temp_v3,temp_v2,1);
@@ -149,7 +149,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     else {
       temp_v12 = 3;
     }
-    temp_v7 = FUN_00230c80(temp_v10,0);
+    temp_v7 = itemGetNameOrFallback(temp_v10,0);
     if (param_3 == 0) {
       temp_v8 = 0xd3;
       temp_v11 = 0xff;
@@ -183,7 +183,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v10 = *(short *)(temp_v4 + 10);
-      FUN_002be624(temp_v13,&LAB_003a25c0,temp_v7);
+      textFormatBuffer(temp_v13,&LAB_003a25c0,temp_v7);
       FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v8,temp_v2,temp_v13);
     }
     else {
@@ -199,7 +199,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
         FUN_00231bcc(param_1 + 0x380,0xe5,temp_v9,temp_v3,temp_v2,1);
       }
       FUN_00230d2c(param_1 + 0x380,(int)temp_v1,temp_v4,temp_v0 + temp_v3,temp_v2,0);
-      temp_v7 = FUN_00230c80(temp_v1,0);
+      temp_v7 = itemGetNameOrFallback(temp_v1,0);
       if (param_3 == 0) {
         temp_v8 = 0xd5;
         temp_v11 = 0xff;
@@ -223,7 +223,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v0 = *(short *)(temp_v4 + 8);
     temp_v10 = *(short *)(temp_v4 + 10);
-    FUN_002be624(temp_v13,&LAB_003a2838,temp_v14);
+    textFormatBuffer(temp_v13,&LAB_003a2838,temp_v14);
     FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v7,temp_v2,temp_v13);
     if (param_3 == 0) {
       temp_v8 = 0x100;

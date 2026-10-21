@@ -10,7 +10,7 @@ int FUN_00290994(...);
 int FUN_0029e924(unsigned int *);
 int FUN_002bed3c(void);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c39a4(int);
@@ -39,7 +39,7 @@ extern int FUN_0023360c(unsigned int *);
 /* Supplied declaration required: FUN_0029e924. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -63,7 +63,7 @@ void FUN_003912a4(unsigned int *param_1)
   if ((*param_1 & 0x10000) == 0) {
     FUN_002c39a4(g_titleScene);
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5d80(1,0);
     piVar7 = (int *)(temp_v1 + 0x124c);
@@ -110,7 +110,7 @@ void FUN_003912a4(unsigned int *param_1)
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002c198c(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return;

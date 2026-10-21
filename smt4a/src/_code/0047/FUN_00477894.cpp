@@ -11,14 +11,14 @@ int FUN_00477d10(...);
 int jobFlagsWorkStop(...);
 int FUN_0047bc90(unsigned int *, unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
-int FUN_0047daf4(unsigned int *);
+int timeInitializeActiveState(unsigned int *);
 int FUN_004cfeb0(unsigned int *, int, int, int, int, int);
 int FUN_004d05c4(...);
 int releaseEntriesA(unsigned int *);
 int FUN_004d091c(...);
 int releaseEntriesB(unsigned int *);
-int FUN_004d09b8(...);
-int FUN_004d0a98(...);
+int touchRegisterFirstRegion(...);
+int touchRegisterSecondRegion(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -43,15 +43,15 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_004cfeb0. */
-extern unsigned int FUN_004d0040(unsigned int *);
+extern unsigned int rangeGetMinimumLimit(unsigned int *);
 /* Supplied declaration required: FUN_004d05c4. */
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: FUN_004d091c. */
 /* Supplied declaration required: releaseEntriesB. */
-/* Supplied declaration required: FUN_004d09b8. */
-/* Supplied declaration required: FUN_004d0a98. */
+/* Supplied declaration required: touchRegisterFirstRegion. */
+/* Supplied declaration required: touchRegisterSecondRegion. */
 
 
 void FUN_00477894(unsigned int *param_1)
@@ -80,7 +80,7 @@ void FUN_00477894(unsigned int *param_1)
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  FUN_0047daf4(&temp_v4);
+  timeInitializeActiveState(&temp_v4);
   temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 == 3) {
@@ -174,17 +174,17 @@ void FUN_00477894(unsigned int *param_1)
         *(unsigned char *)((int)param_1 + 0x24d) = 1;
         FUN_001b3f7c(puVar4,param_1 + 0x90);
         temp_v1 = FUN_001834a4(0x2f,0x4f);
-        FUN_004d09b8(puVar4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
+        touchRegisterFirstRegion(puVar4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
                      (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1]);
         temp_v1 = FUN_001834a4(0x2f,0x50);
-        FUN_004d0a98(puVar4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
+        touchRegisterSecondRegion(puVar4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
                      (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1]);
         temp_v1 = FUN_001834a4(0x2f,0x4e);
         FUN_004d091c(puVar4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
                      (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1]);
         *(unsigned char *)(param_1 + 0xd3) = 1;
         *(unsigned short *)(param_1 + 0xbb) = (unsigned short)param_1[0xbb] | 0x1000;
-        temp_v3 = FUN_004d0040(param_1 + 0x90);
+        temp_v3 = rangeGetMinimumLimit(param_1 + 0x90);
         FUN_004d05c4(param_1 + 0xad,0x2f,0x88,temp_v3);
         *(unsigned char *)(param_1 + 0xb1) = 1;
         *(unsigned char *)((int)param_1 + 0x2e6) = 0;

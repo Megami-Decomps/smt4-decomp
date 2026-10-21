@@ -8,7 +8,7 @@ int FUN_0022d7b0(...);
 int FUN_00230cc0(int, int, int, int, int);
 int FUN_00231bcc(...);
 int FUN_002be56c(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_003aa044(...);
 int VectorSignedToFloat(...);
 
@@ -37,11 +37,11 @@ extern unsigned int FUN_0022caa4(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0022d7b0. */
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_0023342c(unsigned char *, unsigned int);
+extern int curveEvaluateStandard(unsigned char *, unsigned int);
 extern int FUN_00240d5c(int);
 extern int FUN_0029e924(int);
 /* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_002bf4f0(int, unsigned int);
 /* Supplied declaration required: FUN_003aa044. */
 
@@ -81,9 +81,9 @@ void FUN_003a9648(int param_1)
   FUN_00231bcc(param_1 + 200,temp_v6 - 4,0,0,temp_v4,1);
   FUN_00231bcc(param_1 + 200,temp_v6,0,0,temp_v4,1);
   temp_v1 = FUN_0022caa4(temp_v8,*(unsigned int *)(param_1 + 0xa5b4));
-  FUN_002be624(temp_v7,&LAB_003a98a0,temp_v1,(*(unsigned int *)&s__B_B_0043d994.u1[0]));
+  textFormatBuffer(temp_v7,&LAB_003a98a0,temp_v1,(*(unsigned int *)&s__B_B_0043d994.u1[0]));
   temp_v6 = FUN_002bf4f0(param_1 + 200,0x102b);
-  temp_v2 = FUN_0023342c(temp_v7,2);
+  temp_v2 = curveEvaluateStandard(temp_v7,2);
   VectorSignedToFloat((int)*(short *)(temp_v6 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(((int)*(short *)(temp_v6 + 8) + (int)**(short **)(temp_v6 + 0xc) / 2) - temp_v2 / 2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);

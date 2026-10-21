@@ -43,10 +43,10 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
 /* Supplied declaration required: FUN_0023553c. */
-extern int FUN_00256510(void);
+extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0026c57c. */
-extern int FUN_0026c63c(void);
-extern int FUN_002762e0(void);
+extern int gameGetNavigationState(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -88,16 +88,16 @@ void FUN_003a8450(int param_1)
   temp_v2 = (unsigned int)*(unsigned short *)(param_1 + 0x5a8 + temp_v1 * 0x20 + 4);
   FUN_0029ce60(temp_v2,*(unsigned char *)(param_1 + 0x5a5),0);
   FUN_0029e620(-temp_v2,0);
-  temp_v1 = FUN_002762e0();
+  temp_v1 = inputIsQuestMenuPressed();
   temp_v7[0] = param_1 + 0x55c;
   if (0 < *(short *)(param_1 + 0x5a8)) {
     temp_v5 = FUN_0027ee9c();
-    temp_v6 = FUN_00256510();
+    temp_v6 = inputIsQuestCancelPressed();
     if (temp_v5 == 0) {
       temp_v5 = (int)*(char *)(temp_v7[0] + 0x12);
     }
   }
-  temp_v3 = FUN_0026c63c();
+  temp_v3 = gameGetNavigationState();
   if (temp_v3 != 0) {
     *(unsigned int *)(param_1 + 0x14) = 9;
     *(unsigned int *)(param_1 + 0x18) = 0;

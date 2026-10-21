@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 
 
 unsigned int FUN_003646d4(unsigned int param_1)
@@ -22,7 +22,7 @@ unsigned int FUN_003646d4(unsigned int param_1)
     temp_v2 = 0x10;
   }
   temp_v0 = 0;
-  while ((temp_v1 = DAT_005806d4 + temp_v0 * 0x188, *(char *)(temp_v1 + 0x34) == '\0' ||
+  while ((temp_v1 = g_mapEnemy + temp_v0 * 0x188, *(char *)(temp_v1 + 0x34) == '\0' ||
          (*(int *)(temp_v1 + 0xb8) != temp_v2))) {
     temp_v0 = temp_v0 + 1;
     if (temp_v0 >= 0x28) {

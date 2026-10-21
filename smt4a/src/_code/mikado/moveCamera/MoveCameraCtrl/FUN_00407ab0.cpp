@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00178b04(...);
 int lookupNameEntry(int, int, int *);
-int FUN_003fd784(...);
+int controllerSetPosition(...);
 int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
 int FUN_00407110(unsigned int *, unsigned char [128]);
@@ -34,11 +34,11 @@ extern unsigned char LAB_00407e88; /* 0x407e88 */
 extern unsigned char LAB_00407e9c; /* 0x407e9c */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00102c30(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: lookupNameEntry. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00407110. */
@@ -83,7 +83,7 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
     param_3 = param_2;
   }
   *(unsigned char *)((int)param_1 + 0x15) = 0;
-  FUN_00100388(temp_v11,&LAB_00407e54,param_3);
+  textFormatBuffer(temp_v11,&LAB_00407e54,param_3);
   temp_v0 = 0x20;
   FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",0xf5)
   ;
@@ -98,11 +98,11 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
   temp_v9 = *(int *)(param_1[6] + 4);
   FUN_0040ace8(g_handleRegistry,temp_v9);
   FUN_003fe86c(temp_v9,0,1);
-  FUN_003fd784(temp_v9);
+  controllerSetPosition(temp_v9);
   FUN_003fd7b4(temp_v9);
-  FUN_00100388(temp_v11,&LAB_00407e6c,param_2);
+  textFormatBuffer(temp_v11,&LAB_00407e6c,param_2);
   FUN_00407110(param_1,temp_v11);
-  FUN_00100388(temp_v11,&LAB_00407e78,param_2);
+  textFormatBuffer(temp_v11,&LAB_00407e78,param_2);
   temp_v1 = g_handleRegistry;
   FUN_0040b0f8(g_handleRegistry,temp_v11);
   temp_v0 = FUN_0040af60(temp_v1);
@@ -147,7 +147,7 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
   }
   if (0 < (int)param_1[3]) {
     *(unsigned char *)((int)param_1 + 0x15) = 1;
-    FUN_00100388(temp_v11,&LAB_00407e88);
+    textFormatBuffer(temp_v11,&LAB_00407e88);
     temp_v0 = 0x20;
     FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",
                  0x15e);
@@ -162,9 +162,9 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
     temp_v1 = *(unsigned int *)(param_1[8] + 4);
     FUN_0040ace8(g_handleRegistry,temp_v1);
     FUN_003fe86c(temp_v1,0,1);
-    FUN_003fd784(temp_v1);
+    controllerSetPosition(temp_v1);
     FUN_003fd7b4(temp_v1);
-    FUN_00100388(temp_v11,&LAB_00407e9c);
+    textFormatBuffer(temp_v11,&LAB_00407e9c);
     temp_v0 = 0x20;
     FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",
                  0x16c);
@@ -179,7 +179,7 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
     temp_v1 = *(unsigned int *)(param_1[7] + 4);
     FUN_0040ace8(g_handleRegistry,temp_v1);
     FUN_003fe86c(temp_v1,0,1);
-    FUN_003fd784(temp_v1);
+    controllerSetPosition(temp_v1);
     param_1[0x182] = param_1[0x188];
     param_1[0x183] = param_1[0x189];
     param_1[0x184] = param_1[0x18a];

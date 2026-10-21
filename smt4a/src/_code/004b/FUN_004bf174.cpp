@@ -21,7 +21,7 @@ typedef struct PickMenu {
     /* 0x344 */ s32 closing;
 } PickMenu;
 
-extern s32 FUN_0037df48(void);
+extern s32 statusDownGetMode(void);
 extern s32 FUN_0022e714(void);
 extern s32 FUN_00187168(void);
 extern s32 FUN_0023b3b8(void);
@@ -39,7 +39,7 @@ extern void sysPlaySe(u32 se);
 /* Handles the pick menu's input: moves the cursor, confirms or cancels. */
 void FUN_004bf174(PickMenu *menu)
 {
-    s32 step = FUN_0037df48();
+    s32 step = statusDownGetMode();
 
     if (step != 0) {
         s32 index = menu->cursor + step;

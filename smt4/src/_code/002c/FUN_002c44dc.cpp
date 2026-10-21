@@ -1,30 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c44dc` (_code @ 0x2c44dc, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds record address formation and does not preserve retail's final pointer check. */
+#include "common.h"
+
+namespace { struct Record { u8 padding[0x28]; f32 value; }; struct Pool { Record *records; u32 count; }; }
 
 extern "C" {
-
-extern int DAT_00464a70; /* 0x464a70 */
-extern unsigned int *DAT_00464a74; /* 0x464a74 */
-
-
-void FUN_002c44dc(unsigned int *param_1)
-
+/* Reads or updates the requested object state. */
+extern Pool DAT_00464a70;
+void FUN_002c44dc(u32 index, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int in_s0;
-  
-  puVar1 = (unsigned int *)&DAT_00464a70;
-  if (DAT_00464a70 != 0) {
-    puVar1 = DAT_00464a74;
-  }
-  if ((DAT_00464a70 != 0 && param_1 < puVar1) &&
-     (temp_v0 = DAT_00464a70 + (int)param_1 * 0x2c, temp_v0 != 0)) {
-    *(unsigned int *)(temp_v0 + 0x28) = in_s0;
-  }
-  return;
+    if (DAT_00464a70.records != NULL && index < DAT_00464a70.count) {
+        DAT_00464a70.records[index].value = value;
+    }
 }
-
-} /* extern "C" */
+}

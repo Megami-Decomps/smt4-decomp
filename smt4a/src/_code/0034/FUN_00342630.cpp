@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [132], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [132], unsigned char *, unsigned int);
 int FUN_0015f858(unsigned int, int);
 int FUN_001654f8(void);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char [132]);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char LAB_003426bc; /* 0x3426bc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: FUN_0023723c. */
@@ -34,7 +34,7 @@ void FUN_00342630(int param_1,int param_2,unsigned int param_3,unsigned int para
   temp_v0 = param_3;
   FUN_0015f858(param_3,0);
   FUN_001654f8();
-  FUN_00100388(temp_v2,&LAB_003426bc,temp_v0);
+  textFormatBuffer(temp_v2,&LAB_003426bc,temp_v0);
   FUN_0023723c(*(unsigned int *)(param_1 + param_2 * 4),2,0xffffffff,0,0,temp_v2);
   temp_v1 = param_1 + param_2 * 4;
   *(short *)(param_1 + param_2 * 2 + 0x28) = (short)param_3;

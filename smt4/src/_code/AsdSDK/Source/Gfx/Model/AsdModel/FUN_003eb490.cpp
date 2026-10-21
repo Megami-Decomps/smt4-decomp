@@ -1,34 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eb490` (_code @ 0x3eb490, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [pc, #52] where the compiled block uses ldr r3, [pc, #52]. */
+#include "common.h"
+
+struct InitializationState {
+    u8 unk00[0x20]; // 0x00
+    u32 valueLow;   // 0x20
+    u32 valueHigh;  // 0x24
+};
+
+struct ModelElementStorage {
+    u8 unk00[0x40]; // 0x00
+};
+
+struct InitializationGlobals {
+    u32 valueLow;  // 0x00
+    u32 valueHigh; // 0x04, DAT_00464ac4
+};
 
 extern "C" {
+extern InitializationGlobals DAT_00464ac0;
+extern u32 DAT_00464ac4;
+extern ModelElementStorage DAT_004dace0[2];
+extern u8 entry;
 
-int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
+void* FUN_003f7308(void* element);
+void FUN_0017f6cc(void* object);
+void* __aeabi_vec_ctor_nocookie_nodtor(
+    void* array, void* (*constructor)(void*), u32 elementSize, u32 elementCount);
+s32 sceneNotifyNoop(void* object, void (*destructor)(void*), void* module);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned char LAB_003f7308; /* 0x3f7308 */
-extern unsigned int DAT_00464ac0; /* 0x464ac0 */
-extern unsigned int DAT_00464ac4; /* 0x464ac4 */
-extern unsigned char DAT_004dace0; /* 0x4dace0 */
-
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-
-
-unsigned long long FUN_003eb490(unsigned int param_1,unsigned int param_2,int param_3)
-
+s32 FUN_003eb490(u32 valueLow, u32 valueHigh, InitializationState* state)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_3 + 0x20) = param_1;
-  *(unsigned int *)(param_3 + 0x24) = param_2;
-  DAT_00464ac0 = 0;
-  DAT_00464ac4 = 0;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004dace0,&LAB_003f7308,0x40,2);
-  return 0x17f6cc00000000;
-}
+    state->valueLow = valueLow;
+    state->valueHigh = valueHigh;
 
-} /* extern "C" */
+    DAT_00464ac0.valueLow = 0;
+    DAT_00464ac0.valueHigh = 0;
+
+    __aeabi_vec_ctor_nocookie_nodtor(
+        DAT_004dace0, FUN_003f7308, sizeof(ModelElementStorage), 2);
+
+    return sceneNotifyNoop(NULL, FUN_0017f6cc, &entry);
+}
+}

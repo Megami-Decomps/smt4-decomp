@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int libc_strcmp(int *, unsigned int);
 int FUN_004fb43c(int, unsigned int, int, int);
 
@@ -24,7 +24,7 @@ extern unsigned char LAB_0047efcc; /* 0x47efcc */
 extern int g_btlCamera; /* 0x571508 */
 extern char s_ef_e_atk01_00573e68[11]; /* 0x573e68 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int btlGetMainState(void);
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: libc_strcmp. */
@@ -69,7 +69,7 @@ unsigned int FUN_0047ed10(unsigned int param_1,unsigned int param_2,unsigned int
     temp_v11 = 0;
     temp_v12 = 0;
     temp_v13 = 0;
-    FUN_00100388(&temp_v6,&LAB_0047efcc,pcVar6);
+    textFormatBuffer(&temp_v6,&LAB_0047efcc,pcVar6);
     puVar2 = (unsigned int *)&temp_v6;
     libc_strcmp(&temp_v6,param_1);
     temp_v4 = (float)temp_v5;
@@ -144,7 +144,7 @@ LAB_0047eee0:
     temp_v11 = 0;
     temp_v12 = 0;
     temp_v13 = 0;
-    FUN_00100388(&temp_v6,&LAB_0047efcc,*(unsigned int *)(temp_v2 * 4 + 0x57a460));
+    textFormatBuffer(&temp_v6,&LAB_0047efcc,*(unsigned int *)(temp_v2 * 4 + 0x57a460));
     puVar2 = (unsigned int *)&temp_v6;
     libc_strcmp(&temp_v6,param_1);
     if (puVar2 == (unsigned int *)0x0) {

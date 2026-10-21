@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c53f4(void);
+int mathInterpolateTimed(void);
 
 extern unsigned int DAT_004d975c; /* 0x4d975c */
 extern unsigned char DAT_004d9768; /* 0x4d9768 */
@@ -13,7 +13,7 @@ extern unsigned char DAT_004d9768; /* 0x4d9768 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 
 
 void FUN_00102438(void)
@@ -70,7 +70,7 @@ LAB_001024a8:
       }
       else {
         temp_v4 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
-        FUN_002c53f4();
+        mathInterpolateTimed();
         *puVar4 = temp_v4;
       }
     }

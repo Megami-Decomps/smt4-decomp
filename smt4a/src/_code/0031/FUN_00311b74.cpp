@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_00233e10(int, unsigned int);
 int FUN_002b4cf4(void);
 int libc_strcpy(unsigned int *, int);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_0050d8e4(void);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
@@ -82,7 +82,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002b4cf4. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0050d8e4. */
 
 
@@ -189,7 +189,7 @@ void FUN_00311b74(void)
                     else if (temp_v7 != 0x204) {
                       if (temp_v7 == 0x202) {
                         temp_v8 = in_s0;
-                        FUN_00352bc4();
+                        mathPositionHeadingDegrees();
                         FUN_002b4cf4();
                         in_s3 = temp_v10;
                         if ((0xc2b40000 < (unsigned int)temp_v8) || ((int)temp_v8 >= 0x42b40001)) {
@@ -227,7 +227,7 @@ void FUN_00311b74(void)
                         }
                         else {
                           temp_v8 = in_s0;
-                          FUN_00352bc4();
+                          mathPositionHeadingDegrees();
                           DAT_005f16bc = temp_v8;
                         }
                         if ((int)DAT_005f16bc >= 0x43b40001) {

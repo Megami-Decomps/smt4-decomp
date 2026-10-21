@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_004a2c00's literal pool; not written yet. */
 #include "common.h"
+class OperationObject {
+public:
+    virtual void operation0();
+    virtual void operation1();
+    virtual void operation2();
+    virtual void operation3();
+};
+extern "C" {
+extern OperationObject **DAT_0057f0b4;
+/* Invokes operation 3 and reports success. */
+int FUN_004a6e54() {
+    (*DAT_0057f0b4)->operation3();
+    return 0;
+}
+}

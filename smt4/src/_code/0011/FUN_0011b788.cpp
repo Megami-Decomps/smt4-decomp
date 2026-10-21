@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int nn_os_LightEvent_Signal(int);
 int software_interrupt(int);
 
@@ -17,7 +17,7 @@ int software_interrupt(int);
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -85,7 +85,7 @@ unsigned int FUN_0011b788(int param_1)
         temp_v3 = *(int *)(param_1 + 0xc);
       }
       if (temp_v12 || temp_v3 == 1) break;
-      FUN_002bb150(500000,0);
+      threadSleepDuration(500000,0);
       temp_v4 = temp_v7;
     }
   }

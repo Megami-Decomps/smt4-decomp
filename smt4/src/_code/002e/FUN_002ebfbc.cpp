@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c53f4(int, double);
+int mathInterpolateTimed(int, double);
 
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 
 
 void FUN_002ebfbc(float *param_1)
@@ -25,7 +25,7 @@ void FUN_002ebfbc(float *param_1)
   temp_v1 = param_1[3];
   if ((int)temp_v1 < 0x10) {
     temp_v5 = temp_v4;
-    FUN_002c53f4(0xf,temp_v1);
+    mathInterpolateTimed(0xf,temp_v1);
     *param_1 = temp_v3;
     if (temp_v5 < temp_v3) {
 joined_r0x002ec050:
@@ -40,7 +40,7 @@ joined_r0x002ec050:
   else {
     temp_v1 = (float)((int)temp_v1 - 0xf);
     temp_v5 = temp_v3;
-    FUN_002c53f4(0xf,temp_v1);
+    mathInterpolateTimed(0xf,temp_v1);
     *param_1 = temp_v4;
     if (temp_v4 < temp_v5) goto joined_r0x002ec050;
     *param_1 = temp_v5;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023a154(unsigned char [48], int, unsigned char *);
+int stringFormatBounded(unsigned char [48], int, unsigned char *);
 int FUN_002ac8b0(unsigned char [96], unsigned char [48], int);
 int FUN_002baa40(...);
 int FUN_00355d68(int *, int, int, int *);
@@ -26,7 +26,7 @@ extern unsigned char LAB_0035290c; /* 0x35290c */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0023a154. */
+/* Supplied declaration required: stringFormatBounded. */
 /* Supplied declaration required: FUN_002ac8b0. */
 extern int wstrlenU16(void);
 /* Supplied declaration required: FUN_002baa40. */
@@ -60,7 +60,7 @@ void FUN_00352764(unsigned int *param_1,int *param_2,unsigned int param_3)
     FUN_002baa40(param_1,0xe0a13882);
     return;
   }
-  FUN_0023a154(temp_v10,0x30,&LAB_0035290c);
+  stringFormatBounded(temp_v10,0x30,&LAB_0035290c);
   FUN_002ac8b0(temp_v5,temp_v10,0x30);
   temp_v9 = 0;
   temp_v3 = *param_2;

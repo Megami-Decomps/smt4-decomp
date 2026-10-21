@@ -29,9 +29,9 @@ typedef struct Entry {
     /* 0x684 */ u32 resource;
 } Entry;
 
-s32 FUN_00341940(u32 texId);
+s32 textureGetIndexedResource(u32 texId);
 s32 asdTMTexTableLoadTmx(u32 texId, s32 arg);
-s32 FUN_001acf98(u32 texId, u32 texSub);
+s32 asdTMTexLoadMainHeap(u32 texId, u32 texSub);
 s32 FUN_00403a34(Entry *entry, u32 id);
 s32 FUN_00203b40(void *sprite, u32 resource, s32 a, s32 b, s32 c, s32 d);
 s32 FUN_002e08b0(void *sprite, s32 arg);
@@ -58,11 +58,11 @@ void FUN_00404974(Entry *entry)
         entry->texSub = texSub;
         entry->hasTexture = 1;
         entry->texLoaded = 0;
-        if (FUN_00341940(texId) == 0) {
+        if (textureGetIndexedResource(texId) == 0) {
             asdTMTexTableLoadTmx(texId, 0);
             entry->texLoaded = 1;
         }
-        FUN_001acf98(texId, texSub);
+        asdTMTexLoadMainHeap(texId, texSub);
     }
     FUN_00403a34(entry, entry->info->id);
     FUN_00203b40(entry->sprite, entry->resource, 8, 1, 0, 1);

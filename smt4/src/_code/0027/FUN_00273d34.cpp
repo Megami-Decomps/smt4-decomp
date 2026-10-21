@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00267074. */
 /* Supplied declaration required: contentEntryGetE. */
 /* Supplied declaration required: FUN_00267144. */
-extern int FUN_002671bc(void);
+extern int dataTableGetRecordFifty(void);
 extern int FUN_0027d968(void);
 extern int gameGetMapBlock(void);
 extern int FUN_00326e44(void);
@@ -57,7 +57,7 @@ void FUN_00273d34(void)
     *(unsigned short *)(temp_v6 + 0xf28) = 0;
   } while (temp_v5 != 0);
   pcVar12 = (char *)0x0;
-  temp_v2 = FUN_002671bc();
+  temp_v2 = dataTableGetRecordFifty();
   if (0 < temp_v2) {
     do {
       pcVar5 = pcVar12;
@@ -119,7 +119,7 @@ void FUN_00273d34(void)
         temp_v7 = temp_v7 + 1;
       }
       pcVar12 = pcVar12 + 1;
-      temp_v2 = FUN_002671bc();
+      temp_v2 = dataTableGetRecordFifty();
     } while ((int)pcVar12 < temp_v2);
   }
   return;

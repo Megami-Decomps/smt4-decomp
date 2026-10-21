@@ -27,7 +27,7 @@ extern void asdMemFree(void *block);
 extern void FUN_0019e2dc(void);
 extern void FUN_00497144(Scene *scene);
 extern void FUN_001695a0(void);
-extern void FUN_0019ea64(s32 arg);
+extern void messageSetMode(s32 arg);
 
 /* Releases the scene's widget, script process and buffers, then shuts its subsystems down. */
 void FUN_00499c84(Scene *scene)
@@ -53,7 +53,7 @@ void FUN_00499c84(Scene *scene)
     FUN_0019e2dc();
     FUN_00497144(scene);
     FUN_001695a0();
-    FUN_0019ea64(1);
+    messageSetMode(1);
 }
 
 } /* extern "C" */

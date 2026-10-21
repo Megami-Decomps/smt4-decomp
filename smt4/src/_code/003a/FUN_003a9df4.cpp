@@ -11,7 +11,7 @@ int FUN_0022db94(int, unsigned int, int, int, int);
 int FUN_0022dcac(int, int, unsigned int, int, int, int);
 int FUN_00230aec(...);
 int dataTable00FindById(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned char LAB_003aa030; /* 0x3aa030 */
 /* Supplied declaration required: FUN_0022dcac. */
 /* Supplied declaration required: FUN_00230aec. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf4f0. */
 
 
@@ -93,7 +93,7 @@ void FUN_003a9df4(int param_1,int param_2,int param_3,unsigned int param_4)
   }
   temp_v2 = *(short *)(temp_v4 + 8);
   temp_v3 = *(short *)(temp_v4 + 10);
-  FUN_002be624(temp_v10,&LAB_003aa030,temp_v8);
+  textFormatBuffer(temp_v10,&LAB_003aa030,temp_v8);
   FUN_00230aec(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,temp_v9,temp_v6,
                temp_v10);
   param_4 = param_4 & 0xffff;
@@ -112,7 +112,7 @@ void FUN_003a9df4(int param_1,int param_2,int param_3,unsigned int param_4)
   }
   temp_v2 = *(short *)(temp_v4 + 8);
   temp_v3 = *(short *)(temp_v4 + 10);
-  FUN_002be624(temp_v10,&LAB_003aa030,temp_v8);
+  textFormatBuffer(temp_v10,&LAB_003aa030,temp_v8);
   FUN_00230aec(param_1 + 200,0,(int)temp_v0 + (int)temp_v2,(int)temp_v3 + (int)temp_v1,0,7,temp_v9,temp_v6,
                temp_v10);
   return;

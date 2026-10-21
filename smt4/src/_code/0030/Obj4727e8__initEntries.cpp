@@ -3,7 +3,7 @@
 
 extern "C" {
 f32 FUN_0024b830(s32 range);
-s32 FUN_0024b77c(s32 range);
+s32 randomAdvanceShiftRegister(s32 range);
 }
 
 /* Picks a random start value and a per-step increment toward a random end value, and gives every
@@ -30,7 +30,7 @@ void Obj4727e8::initEntries()
     }
     count = counter->count;
     for (i = 0; i < count; i++) {
-        entry->mask = ~(FUN_0024b77c(0) % 8);
+        entry->mask = ~(randomAdvanceShiftRegister(0) % 8);
         entry++;
     }
 }

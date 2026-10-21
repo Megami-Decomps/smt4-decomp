@@ -1,40 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00324c48` (_code @ 0x324c48, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses r0 rather than ip for the floating-point store base. */
+#include "common.h"
+
+namespace { struct EffectSettings { u32 first; u32 second; u32 flags; u32 third; f32 values[5]; }; }
 
 extern "C" {
-
-extern unsigned int DAT_005f1c98; /* 0x5f1c98 */
-extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
-extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
-extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
-extern unsigned int DAT_005f1ca8; /* 0x5f1ca8 */
-extern unsigned int DAT_005f1cac; /* 0x5f1cac */
-extern unsigned int DAT_005f1cb0; /* 0x5f1cb0 */
-extern unsigned int DAT_005f1cb4; /* 0x5f1cb4 */
-extern unsigned int DAT_005f1cb8; /* 0x5f1cb8 */
-
-
-void FUN_00324c48(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Updates or returns the requested state. */
+extern EffectSettings g_mapSelection;
+void FUN_00324c48(u32 first, u32 second, u32 third, f32 a, f32 b, f32 c, f32 d, f32 e)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4; 5 native warning(s); review required */
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned int in_s4;
-  
-  DAT_005f1c98 = param_1;
-  DAT_005f1c9c = param_2;
-  DAT_005f1ca0 = 0xffffffff;
-  DAT_005f1ca8 = in_s0;
-  DAT_005f1cac = in_s1;
-  DAT_005f1cb0 = in_s2;
-  DAT_005f1cb4 = in_s3;
-  DAT_005f1cb8 = in_s4;
-  DAT_005f1ca4 = param_3;
-  return;
+    g_mapSelection.first = first;
+    g_mapSelection.second = second;
+    g_mapSelection.flags = 0xffffffff;
+    g_mapSelection.values[0] = a;
+    g_mapSelection.values[1] = b;
+    g_mapSelection.values[2] = c;
+    g_mapSelection.values[3] = d;
+    g_mapSelection.values[4] = e;
+    g_mapSelection.third = third;
 }
-
-} /* extern "C" */
+}

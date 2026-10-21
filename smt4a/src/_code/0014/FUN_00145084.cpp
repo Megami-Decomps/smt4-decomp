@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int g_asdGxPresets; /* 0x63fd88 */
-extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int g_asdGxSecondaryPreset; /* 0x63fdb4 */
 extern unsigned int DAT_0063fde0; /* 0x63fde0 */
 extern unsigned char DAT_0063fe10; /* 0x63fe10 */
 extern unsigned char DAT_0063fe4c; /* 0x63fe4c */
@@ -49,7 +49,7 @@ void FUN_00145084(int param_1)
     }
     else if (param_1 != 0x401) {
       if (param_1 == 0x410) {
-        puVar3 = &DAT_0063fdb4;
+        puVar3 = &g_asdGxSecondaryPreset;
         puVar2 = (unsigned int *)&DAT_0063fe4c;
       }
     }

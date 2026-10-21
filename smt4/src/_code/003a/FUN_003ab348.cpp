@@ -18,7 +18,7 @@ typedef struct Panel {
 } Panel;
 
 extern int FUN_002b8ee0(Widget *widget, int arg);
-extern int FUN_00231240(u8 *cursor, u32 x, u32 y);
+extern int pointConvertToFloat(u8 *cursor, u32 x, u32 y);
 extern int FUN_00231184(void);
 extern int FUN_00241a44(void);
 extern int FUN_0029e0f8(void);
@@ -35,11 +35,11 @@ void FUN_003ab348(Panel *panel)
     FUN_002b8ee0(widget, 0);
     y = vec2GetYInt(widget);
     x = vec2GetXInt(widget);
-    FUN_00231240(panel->cursor, x, y);
+    pointConvertToFloat(panel->cursor, x, y);
     if (widget->enabled != 0 && FUN_00231184() != 0 && FUN_00241a44() != 0 && FUN_0029e0f8() != 0) {
         panel->state = 3;
         panel->stateArg = 0;
-        FUN_00231240(panel->cursor, 0, 0);
+        pointConvertToFloat(panel->cursor, 0, 0);
     }
 }
 

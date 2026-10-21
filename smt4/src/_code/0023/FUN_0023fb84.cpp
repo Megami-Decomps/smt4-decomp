@@ -22,8 +22,8 @@ extern unsigned char DAT_0047e554; /* 0x47e554 */
 /* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0035708c. */
-extern int FUN_0023b020(int, int, unsigned int);
-extern int FUN_003deaa4(int);
+extern int animationCountFilteredRanges(int, int, unsigned int);
+extern int resourceGetId(int);
 /* Supplied declaration required: nn_gr_CTR_Shader_SearchBindSymbol. */
 
 
@@ -104,7 +104,7 @@ void FUN_0023fb84(int param_1)
   apuStack_68[0] = &uStack_90;
   apuStack_68[1] = &uStack_38;
   uStack_74 = 0xb0f07;
-  temp_v2 = FUN_003deaa4(param_1);
+  temp_v2 = resourceGetId(param_1);
   puVar1[4] = temp_v2;
   temp_v2 = temp_v2 << 2;
   asdOperatorNewB();
@@ -128,7 +128,7 @@ void FUN_0023fb84(int param_1)
   if (0 < (int)puVar1[4]) {
     temp_v3 = 0x7ac;
     do {
-      temp_v1 = FUN_0023b020(param_1,temp_v2,5);
+      temp_v1 = animationCountFilteredRanges(param_1,temp_v2,5);
       if (temp_v1 != 0) {
         temp_v1 = temp_v3;
         asdOperatorNew();
@@ -138,7 +138,7 @@ void FUN_0023fb84(int param_1)
         *(int *)(puVar1[2] + temp_v2 * 4) = temp_v1;
         FUN_0035708c();
       }
-      temp_v1 = FUN_0023b020(param_1,temp_v2,4);
+      temp_v1 = animationCountFilteredRanges(param_1,temp_v2,4);
       if (temp_v1 != 0) {
         temp_v1 = temp_v3;
         asdOperatorNew();
@@ -148,7 +148,7 @@ void FUN_0023fb84(int param_1)
         *(int *)(puVar1[1] + temp_v2 * 4) = temp_v1;
         FUN_0035708c();
       }
-      temp_v1 = FUN_0023b020(param_1,temp_v2,6);
+      temp_v1 = animationCountFilteredRanges(param_1,temp_v2,6);
       if (temp_v1 != 0) {
         temp_v1 = temp_v3;
         asdOperatorNew();

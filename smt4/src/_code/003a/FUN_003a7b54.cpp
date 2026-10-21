@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00231240(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_0029c4c8(int);
 int FUN_0029e874(int);
 int FUN_002bf818(int);
 
-extern int FUN_0022ddd0(int);
-/* Supplied declaration required: FUN_00231240. */
+extern int utilityReturnSuccess(int);
+/* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_0026b564(void);
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_0029c4c8. */
@@ -32,10 +32,10 @@ void FUN_003a7b54(int param_1)
   FUN_002bf818(temp_v2);
   temp_v0 = vec2GetYInt(temp_v2);
   temp_v1 = vec2GetXInt(temp_v2);
-  FUN_00231240(param_1 + 200,temp_v1,temp_v0);
+  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
   temp_v2 = FUN_00295618();
   if ((((temp_v2 != 0) && (*(char *)(param_1 + 0x212) != '\0')) &&
-      (temp_v2 = FUN_0026b564(), temp_v2 != 0)) && (temp_v2 = FUN_0022ddd0(param_1 + 0x96), temp_v2 == 0)) {
+      (temp_v2 = FUN_0026b564(), temp_v2 != 0)) && (temp_v2 = utilityReturnSuccess(param_1 + 0x96), temp_v2 == 0)) {
     FUN_0029e874(0);
     FUN_0029c4c8(0);
     *(unsigned int *)(param_1 + 0x14) = 0xc;

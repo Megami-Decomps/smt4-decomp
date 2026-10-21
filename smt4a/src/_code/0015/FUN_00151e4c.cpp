@@ -49,7 +49,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_00167204(unsigned int);
+extern int npcRoomGetEntryValue(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168bec. */
 extern int FUN_00168d38(unsigned int);
@@ -156,7 +156,7 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
                      6,temp_v4);
         temp_v6 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;
-        temp_v2 = FUN_00167204(temp_v4);
+        temp_v2 = npcRoomGetEntryValue(temp_v4);
         if (-1 < temp_v2) {
           if (param_1->field_0x1a10 != 0) {
             if ((temp_v4 < 4) && (*(char *)((int)param_1 + temp_v4 + 0x1a11) != '\0')) {

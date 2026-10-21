@@ -21,7 +21,7 @@ extern unsigned char LAB_002a0b38; /* 0x2a0b38 */
 extern unsigned char LAB_0032afe4; /* 0x32afe4 */
 extern unsigned char LAB_0032affc; /* 0x32affc */
 extern unsigned char LAB_0037a114; /* 0x37a114 */
-extern unsigned int *DAT_00588fc8; /* 0x588fc8 */
+extern unsigned int *g_requestWork; /* 0x588fc8 */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -37,7 +37,7 @@ void FUN_002a0a38(void)
   
   puVar1 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x14,1);
-  DAT_00588fc8 = puVar1;
+  g_requestWork = puVar1;
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar1[4] = 0;

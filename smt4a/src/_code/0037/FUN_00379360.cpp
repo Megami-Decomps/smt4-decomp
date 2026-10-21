@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -47,7 +47,7 @@ void FUN_00379360(void)
     temp_v5 = temp_v5 * 700.0f + 350.0f;
     temp_v1 = 0;
     while( 1 ) {
-      temp_v0 = DAT_005806d4 + temp_v1 * 0x188;
+      temp_v0 = g_mapEnemy + temp_v1 * 0x188;
       temp_v3 = *(char *)(temp_v0 + 0x34) != '\0';
       temp_v2 = 0;
       if (temp_v3) {

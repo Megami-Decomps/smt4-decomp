@@ -1,22 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016e538` (_code @ 0x16e538, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: fragment of a larger function (custom-register decoder ABI clobbers callee-saved registers and delegates to adjacent decoder blocks). */
+#include "common.h"
 
 extern "C" {
 
-int LZCOUNT(unsigned int);
 
-/* Unsupported intrinsic, declaration required: LZCOUNT (LZCOUNT). */
-
-
-void FUN_0016e538(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  if (0 < param_3 + LZCOUNT(param_4) * -2) {
-    return;
-  }
-  return;
-}
 
 } /* extern "C" */

@@ -54,7 +54,7 @@ extern int FUN_0026264c(unsigned short);
 extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_002c7e24. */
 /* Supplied declaration required: FUN_002c982c. */
-extern int FUN_002e5c50(void);
+extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: FUN_002f0420. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_00334214. */
@@ -299,7 +299,7 @@ LAB_002f9458:
         FUN_003343f0();
       }
       temp_v2 = FUN_001643a0();
-      if (((temp_v2 == 1) && (temp_v2 = FUN_002e5c50(), temp_v2 < 1)) && (temp_v8 != 0x11)) {
+      if (((temp_v2 == 1) && (temp_v2 = ifTouchGetActiveCounter(), temp_v2 < 1)) && (temp_v8 != 0x11)) {
         eventQueueAddUniqueIfValid(0x100020d);
       }
     }

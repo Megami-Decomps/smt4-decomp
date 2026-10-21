@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [68], unsigned char *);
+int textFormatBuffer(unsigned char [68], unsigned char *);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001cd3ec(void);
 int FUN_00295d40(void);
@@ -13,7 +13,7 @@ int dataTable2aGetEntryWithAoc(void);
 int FUN_00353cd4(void);
 int FUN_0037976c(void);
 int FUN_00385964(void);
-int FUN_003fd784(...);
+int controllerSetPosition(...);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040a908(int, int);
 int FUN_0040a918(...);
@@ -30,7 +30,7 @@ extern int g_aocSystem; /* 0x570280 */
 extern int *DAT_00581280; /* 0x581280 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_00295d40. */
@@ -42,7 +42,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_00385964. */
 extern int flagPairCondition(int, int);
 extern int FUN_003b564c(void);
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
@@ -178,7 +178,7 @@ LAB_002960c8:
     *(unsigned char *)((int)piVar12 + temp_v3 * 0x3c + 0xf) = 0;
     *(short *)(piVar12 + temp_v3 * 0xf + 5) = (short)DAT_00581280[1];
     *(short *)((int)piVar12 + temp_v3 * 0x3c + 0x12) = (short)*(char *)(temp_v5 + 0x37);
-    FUN_00100388(temp_v12,&LAB_00296450);
+    textFormatBuffer(temp_v12,&LAB_00296450);
     if (param_1 >= 0x65) {
       temp_v1 = *(short *)((int)piVar12 + temp_v3 * 0x3c + 0x12);
       temp_v8 = 0;
@@ -283,7 +283,7 @@ LAB_002961f8:
   FUN_00385964();
   temp_v0 = *(char *)(temp_v3 + 0x37);
   if ((temp_v0 == '\x13' || temp_v0 == '\x17') || temp_v0 == '\x18') {
-    FUN_003fd784(*(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4));
+    controllerSetPosition(*(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4));
   }
   *(unsigned char *)piVar13 = 1;
   temp_v1 = *(short *)(temp_v3 + 0x2c);

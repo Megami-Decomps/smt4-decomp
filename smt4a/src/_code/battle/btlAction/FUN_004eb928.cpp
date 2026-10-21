@@ -155,7 +155,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern int lcgRandomRange(unsigned int);
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(unsigned int);
@@ -178,7 +178,7 @@ extern int FUN_0034919c(void);
 extern unsigned int FUN_003df57c(unsigned int, unsigned int);
 extern short FUN_003e4a00(void);
 extern unsigned int words3Clear(void);
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_003e8bb0. */
 extern int FUN_003ec668(int, int, int);
 extern int FUN_003eca48(int, unsigned short);
@@ -358,7 +358,7 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
     }
     else {
       FUN_004a92d0(g_btlUiBlock,*(unsigned short *)(temp_v20 + 0x30),1);
-      temp_v3 = FUN_003e8430(*param_1);
+      temp_v3 = btlScriptUnitHasFlags(*param_1);
       if ((temp_v3 == 0) && (temp_v3 = FUN_004c87e0(), temp_v3 != 0)) {
         *(unsigned char *)(g_btlUiBlock + 0x617e) = 1;
         return;
@@ -369,8 +369,8 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
     FUN_00222488(puVar25);
     sysMemClear(temp_v20 + 0x3c,0x85);
     FUN_004e8454(param_1);
-    temp_v3 = FUN_00167f08();
-    temp_v20 = FUN_003e8430(*param_1);
+    temp_v3 = ifTouchGetButtonHelpValue();
+    temp_v20 = btlScriptUnitHasFlags(*param_1);
     if (temp_v20 != 0) {
       if (temp_v3 != 0x3f) {
         sysPlaySe(0x3f);
@@ -460,7 +460,7 @@ LAB_004ebd00:
     iStack_50 = 0;
     temp_v27 = temp_v20 + 0x1204;
     puVar29 = puVar25;
-    if (((((puVar25 != (unsigned int *)0x0) && (temp_v6 = FUN_003e8430(*piStack_30), temp_v6 == 0)) &&
+    if (((((puVar25 != (unsigned int *)0x0) && (temp_v6 = btlScriptUnitHasFlags(*piStack_30), temp_v6 == 0)) &&
          (temp_v6 = *(int *)(temp_v20 + 0x24), temp_v6 != 0)) &&
         ((*(char *)(temp_v6 + 0x23a) != '\0' &&
          (temp_v6 = FUN_003eca48(*piStack_30,*(unsigned short *)(temp_v6 + 0x166)), temp_v6 != 0)))) &&
@@ -539,7 +539,7 @@ LAB_004ebd00:
         temp_v14 = temp_v14 + temp_v10;
         temp_v25 = temp_v11;
         FUN_004fda78(temp_v14,0,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0,3,0);
-        temp_v12 = FUN_003e8430(*piVar16);
+        temp_v12 = btlScriptUnitHasFlags(*piVar16);
         if (temp_v12 == 0) {
           FUN_004fb5a8(temp_v14 + 1,puVar25,*(int *)(*piVar16 + 0x1ed4) + temp_v11 * 0x1d0);
         }

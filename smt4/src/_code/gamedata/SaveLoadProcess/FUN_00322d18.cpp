@@ -20,7 +20,7 @@ typedef struct {
 extern int FUN_002efba0(...); /* 0x2efba0 */
 extern unsigned char LAB_00322e3c; /* 0x322e3c */
 extern int FUN_00324b74(...); /* 0x324b74 */
-extern unsigned char DAT_0043e2f0; /* 0x43e2f0 */
+extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern unsigned char DAT_0043e2f1; /* 0x43e2f1 */
 extern unsigned char DAT_0043e2f2; /* 0x43e2f2 */
 extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
@@ -62,7 +62,7 @@ unsigned int FUN_00322d18(unsigned int param_1,unsigned char param_2)
   DAT_0043e2f4 = 0;
   DAT_0043e2f8 = 0;
   DAT_0043e2f6 = 0;
-  DAT_0043e2f0 = 0;
+  g_byteSettings = 0;
   DAT_0043e2f1 = 0;
   DAT_0043e2f2 = 0;
   puVar2[4] = param_1;

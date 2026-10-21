@@ -5,7 +5,7 @@
 extern "C" {
 
 int questEntryCheck(void);
-int FUN_002be624(unsigned char *, unsigned char *);
+int textFormatBuffer(unsigned char *, unsigned char *);
 int FUN_002bfc24(int, int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char DAT_004b7608; /* 0x4b7608 */
 
 /* Supplied declaration required: questEntryCheck. */
 extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
 extern unsigned int FUN_002bfdd4(void);
@@ -71,7 +71,7 @@ void FUN_002dfefc(int param_1)
   if ((((param_1 == 0) && (temp_v0)) && (g_gameState != 0x24)) &&
      (temp_v5 = gameFlagIsSet(0x408), temp_v5 != 0)) {
     DAT_004b7608 = 0;
-    FUN_002be624(&DAT_004b7608,&DAT_00404464);
+    textFormatBuffer(&DAT_004b7608,&DAT_00404464);
     puVar3 = g_mapIfTimer;
     g_mapIfTimer[5] = (unsigned int)&DAT_004b7608;
     *puVar3 = 3;

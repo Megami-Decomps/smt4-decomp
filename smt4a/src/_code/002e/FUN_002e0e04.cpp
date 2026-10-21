@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int wstrlen(...);
 int rt_aeabi_memclr(...);
 int SBORROW4(...);
@@ -20,7 +20,7 @@ extern unsigned int DAT_005b40bc; /* 0x5b40bc */
 extern unsigned int DAT_005b40c0; /* 0x5b40c0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
@@ -75,19 +75,19 @@ unsigned int FUN_002e0e04(int param_1,short *param_2,int param_3)
     if (param_3 != 1) {
       if (param_3 != 2) {
         if (param_3 == 3) {
-          FUN_00100388(acStack_129 + 1,"%s/%s",DAT_005b40c0,param_1);
+          textFormatBuffer(acStack_129 + 1,"%s/%s",DAT_005b40c0,param_1);
         }
       }
       else {
-        FUN_00100388(acStack_129 + 1,"%s/%s",DAT_005b40bc,param_1);
+        textFormatBuffer(acStack_129 + 1,"%s/%s",DAT_005b40bc,param_1);
       }
     }
     else {
-      FUN_00100388(acStack_129 + 1,"%s/%s",DAT_005b40b8,param_1);
+      textFormatBuffer(acStack_129 + 1,"%s/%s",DAT_005b40b8,param_1);
     }
   }
   else {
-    FUN_00100388(acStack_129 + 1,"%s/%s",DAT_005b40b4,param_1);
+    textFormatBuffer(acStack_129 + 1,"%s/%s",DAT_005b40b4,param_1);
   }
   temp_v5 = wstrlen(acStack_129 + 1);
   if ((int)temp_v5 >= 0xf9) {

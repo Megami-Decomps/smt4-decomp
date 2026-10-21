@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 
 
 void FUN_00326984(int param_1)
@@ -24,7 +24,7 @@ void FUN_00326984(int param_1)
   if (temp_v3 != 0) {
     do {
       temp_v0 = 0;
-      FUN_0024b77c();
+      randomAdvanceShiftRegister();
       temp_v2 = temp_v2 + 1;
       *(int *)(temp_v1 + 4) = ~(temp_v0 % 4);
       temp_v1 = temp_v1 + 0xc;

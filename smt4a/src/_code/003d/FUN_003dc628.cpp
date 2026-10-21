@@ -40,7 +40,7 @@ int FUN_00319aec(...);
 int FUN_0034c940(...);
 int FUN_0038800c(...);
 int FUN_00388758(...);
-int FUN_003c3e48(...);
+int partyPanelSetHidden(...);
 
 int FUN_00163aa4(int);
 int eventQueueAddUniqueIfValid(...);
@@ -84,7 +84,7 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_001643a0(void);
 extern int FUN_00165070(void);
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -136,7 +136,7 @@ extern int region9100IsClear(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_0032d388. */
 extern int stateAtF4IsActive(void);
-extern int FUN_00330b58(void);
+extern int gameDataBlocksGetSelectedValue(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: objBInitBlock19D0. */
@@ -155,7 +155,7 @@ extern int uniteIsPhase26Active(void);
 /* Supplied declaration required: FUN_0038843c. */
 /* Supplied declaration required: FUN_00388758. */
 /* Supplied declaration required: FUN_003a5094. */
-/* Supplied declaration required: FUN_003c3e48. */
+/* Supplied declaration required: partyPanelSetHidden. */
 extern int FUN_003c8790(void);
 /* Supplied declaration required: FUN_003da8f4. */
 extern int gameDataFlagTestBit(void);
@@ -231,7 +231,7 @@ void FUN_003dc628(void)
           (temp_v5 = uniteIsPhase26Active(), temp_v5 != 0)))) ||
      ((((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 && (temp_v5 = gameFlagIsSet(0x459), temp_v5 == 0)) &&
        (temp_v5 = FUN_002ab790(), temp_v5 == 0x19)) && (temp_v5 = FUN_0023c068(), temp_v5 == 0)))) {
-    temp_v9 = FUN_00167f08();
+    temp_v9 = ifTouchGetButtonHelpValue();
     if (temp_v9 == 0xa0 || temp_v9 == 0x9d) {
       return;
     }
@@ -241,7 +241,7 @@ void FUN_003dc628(void)
     sysPlaySe(0xa0);
     return;
   }
-  temp_v5 = FUN_00167f08();
+  temp_v5 = ifTouchGetButtonHelpValue();
   if (temp_v5 == 0xa0) {
     FUN_002add8c();
   }
@@ -252,7 +252,7 @@ void FUN_003dc628(void)
   temp_v18 = temp_v9 + 0xa7;
   temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),
                        (int)*(char *)(*(char *)(temp_v9 + 0xa4) + temp_v18));
-  if ((temp_v5 == 0x35) && (temp_v5 = FUN_00330b58(), *(int *)(temp_v9 + 0x33bc) != temp_v5)) {
+  if ((temp_v5 == 0x35) && (temp_v5 = gameDataBlocksGetSelectedValue(), *(int *)(temp_v9 + 0x33bc) != temp_v5)) {
     temp_v6 = dataTable15Sub0FindEntry(0x35);
     FUN_0019de98(temp_v6,0xf4f4f4ff);
     *(int *)(temp_v9 + 0x33bc) = temp_v5;
@@ -262,8 +262,8 @@ void FUN_003dc628(void)
     FUN_0020b660(0x2d);
     return;
   }
-  temp_v5 = FUN_00167f08();
-  if (((temp_v5 == 4) || (temp_v5 = FUN_00167f08(), temp_v5 == 2)) && (temp_v5 = partyPanelIsActive(), temp_v5 == 0)
+  temp_v5 = ifTouchGetButtonHelpValue();
+  if (((temp_v5 == 4) || (temp_v5 = ifTouchGetButtonHelpValue(), temp_v5 == 2)) && (temp_v5 = partyPanelIsActive(), temp_v5 == 0)
      ) {
     temp_v2 = 1;
     if (*(char *)(temp_v9 + 0xa4) != '\x01') {
@@ -271,8 +271,8 @@ void FUN_003dc628(void)
     }
     sysPlaySe(temp_v2);
   }
-  temp_v5 = FUN_00167f08();
-  if (((temp_v5 == 3) || (temp_v5 = FUN_00167f08(), temp_v5 == 1)) && (temp_v5 = partyPanelIsActive(), temp_v5 != 0)
+  temp_v5 = ifTouchGetButtonHelpValue();
+  if (((temp_v5 == 3) || (temp_v5 = ifTouchGetButtonHelpValue(), temp_v5 == 1)) && (temp_v5 = partyPanelIsActive(), temp_v5 != 0)
      ) {
     if (*(char *)(temp_v9 + 0xa4) == '\x01') {
       temp_v6 = 2;
@@ -591,7 +591,7 @@ LAB_003dcd84:
             temp_v7 = *(int *)(temp_v9 + 0x24);
             if (temp_v7 != 0x41) {
               if (!(temp_v7 == 0x46 || temp_v7 == 0x3d)) {
-                FUN_003c3e48(0);
+                partyPanelSetHidden(0);
                 *(unsigned char *)(temp_v9 + 0xa6) = *(unsigned char *)(temp_v5 + 2);
                 temp_v2 = FUN_002a4878(temp_v9 + 0x40);
                 *(unsigned char *)(*(char *)(temp_v9 + 0xa4) + temp_v18) = temp_v2;

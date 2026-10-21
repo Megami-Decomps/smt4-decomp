@@ -11,7 +11,7 @@ int FUN_00477d10(unsigned int *, int, int);
 int jobFlagsWorkStop(unsigned int *);
 int FUN_0047bc90(unsigned int *, unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
-int FUN_0047daf4(unsigned int *);
+int timeInitializeActiveState(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -33,7 +33,7 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -61,7 +61,7 @@ void FUN_004772b0(unsigned int *param_1)
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  FUN_0047daf4(&temp_v2);
+  timeInitializeActiveState(&temp_v2);
   temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 != 4) {

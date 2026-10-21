@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0022838c(...);
 int FUN_00284fdc(...);
 int FUN_002a4aa4(...);
@@ -32,7 +32,7 @@ typedef struct {
 
 extern unsigned char DAT_005311fc; /* 0x5311fc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern short *gameGetPlayerData(void);
 extern unsigned int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0022838c. */
@@ -102,7 +102,7 @@ void FUN_00283d74(int param_1)
     FUN_00284fdc();
     gameDataBlocksClearSlots();
     temp_v0 = gameDataGetPlayerName();
-    FUN_00100388(temp_v0,"沂覂讂膂蒂辂㴀먀ഀꄃᤁ鄂锂＂ÿ");
+    textFormatBuffer(temp_v0,"沂覂讂膂蒂辂㴀먀ഀꄃᤁ鄂锂＂ÿ");
     flagValueAdd(0x33f,1);
     FUN_00417b70(1);
     FUN_00417e08(1);

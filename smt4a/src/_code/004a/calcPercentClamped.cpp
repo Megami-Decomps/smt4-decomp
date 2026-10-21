@@ -5,6 +5,9 @@ extern "C" {
 
 u32 calcPercentClamped(s32 value, s32 total)
 {
+    if (total <= 0) {
+        return 0;
+    }
     u8 percent = value * 100 / total;
 
     if (percent != 0) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00325b84(void);
 int FUN_003538d0(void);
-int FUN_003ae6cc(void);
+int naviMainFinishRequest(void);
 
 extern unsigned char DAT_005806b4; /* 0x5806b4 */
 
@@ -14,7 +14,7 @@ extern unsigned char DAT_005806b4; /* 0x5806b4 */
 extern int FUN_0033e1d4(void);
 /* Supplied declaration required: FUN_003538d0. */
 extern int FUN_00377fe0(void);
-/* Supplied declaration required: FUN_003ae6cc. */
+/* Supplied declaration required: naviMainFinishRequest. */
 
 
 unsigned int FUN_003a7480(void)
@@ -44,7 +44,7 @@ unsigned int FUN_003a7480(void)
     }
   }
   else {
-    FUN_003ae6cc();
+    naviMainFinishRequest();
     FUN_003538d0();
     (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 1;
   }

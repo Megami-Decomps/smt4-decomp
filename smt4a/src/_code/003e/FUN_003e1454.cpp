@@ -11,7 +11,7 @@ int sysMemClear(unsigned char [132], int);
 int FUN_003e0bb8(unsigned int *, int);
 int contentRequestStart(unsigned int *, int);
 int FUN_003ed6e8(int);
-int FUN_003edb9c(int);
+int controllerClearVectorState(int);
 int FUN_003edbd0(int);
 int FUN_003f0b28(int);
 int FUN_003f0d50(int);
@@ -44,7 +44,7 @@ extern int FUN_00240c34(unsigned char *);
 extern int FUN_003e0f94(unsigned int *, int);
 /* Supplied declaration required: contentRequestStart. */
 /* Supplied declaration required: FUN_003ed6e8. */
-/* Supplied declaration required: FUN_003edb9c. */
+/* Supplied declaration required: controllerClearVectorState. */
 /* Supplied declaration required: FUN_003edbd0. */
 extern unsigned int btlPosArrangeGetFileName(int);
 /* Supplied declaration required: FUN_003f0b28. */
@@ -79,7 +79,7 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
   if ((!temp_v0) && (temp_v1 = FUN_00240c34(temp_v6), temp_v1 == 0)) {
     FUN_003edbd0(param_2);
     FUN_003f0d50(param_2);
-    FUN_003edb9c(param_2);
+    controllerClearVectorState(param_2);
     FUN_003f0b28(param_2);
     words10CopyHighToLow(g_btlCamera);
     temp_v1 = FUN_003e0f94(param_1,param_2);

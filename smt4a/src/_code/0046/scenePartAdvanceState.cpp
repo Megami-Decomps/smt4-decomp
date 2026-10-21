@@ -16,7 +16,7 @@ typedef struct ScenePart00469e1c {
 s32 FUN_00224880(u32 handle);
 s32 FUN_0013def0(s32 index);
 void FUN_003d54f8(s32 index, s32 value);
-void FUN_0019ea64(s32 value);
+void messageSetMode(s32 value);
 void FUN_003c1060(void);
 
 /* Once the handle reports 2, picks the next state (0x10 for kinds 1 and 2, else 3 and resets finished slots), then refreshes. */
@@ -38,7 +38,7 @@ void scenePartAdvanceState(ScenePart00469e1c *part)
             FUN_003d54f8(1, 10);
         }
     }
-    FUN_0019ea64(0);
+    messageSetMode(0);
     FUN_003c1060();
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemFree(...);
 int FUN_002804b0(...);
 int libc_strcpy(...);
@@ -30,7 +30,7 @@ typedef struct {
     unsigned int spD8; /* 0xd8: local_d8 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -87,7 +87,7 @@ unsigned int FUN_004f7b84(int param_1,unsigned int param_2)
   temp_v15 = 0;
   temp_v16 = 0;
   sysMemClear(temp_v17,0x80);
-  FUN_00100388(temp_v17,"battle/effect/%s.eft",param_2);
+  textFormatBuffer(temp_v17,"battle/effect/%s.eft",param_2);
   libc_strcpy(&temp_v1,temp_v17);
   temp_v0 = FUN_00100d60((unsigned int *)&temp_v1,0x2f);
   libc_strcpy(param_1 + 0x3594,temp_v0 + 1);

@@ -1,24 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031cfd0` (_code @ 0x31cfd0, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail emits 'bhi 28'; compiler emits 'bhi 24' at the first differing instruction. */
+#include "common.h"
 
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-unsigned short FUN_0031cfd0(unsigned int param_1)
-
-{
-  unsigned short temp_v0;
-  
-  if (param_1 >= 0x501) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = *(unsigned short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50 + 0x5f40);
-  }
-  return temp_v0;
+struct Entry { u8 pad[0x34]; u16 value; u8 rest[0x1A]; }; extern struct { u32 reserved; struct { u8 pad[0x5F0C]; Entry entries[1]; } *table; } g_gameDataBlocks;
+u16 FUN_0031cfd0(u32 index) { return index<=1280?g_gameDataBlocks.table->entries[index].value:0; }
 }
-
-} /* extern "C" */

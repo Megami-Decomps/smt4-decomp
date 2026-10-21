@@ -22,7 +22,7 @@ int mapIfReleaseSlot3(void);
 int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_003b5714(unsigned int, unsigned int, unsigned int);
 int FUN_003d2150(...);
 int FUN_003d4ed8(unsigned int);
@@ -64,11 +64,11 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -230,7 +230,7 @@ LAB_00367d2c:
             }
             else {
               temp_v1 = padButtonIsPressed(5);
-              if ((temp_v1 != 0) || (temp_v1 = FUN_004d0554(), temp_v1 != 0)) {
+              if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
                 temp_v1 = DAT_005806a4;
                 *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v1 + 0xb0) = 0;
@@ -267,7 +267,7 @@ LAB_00367d2c:
       *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
       *(unsigned char *)(temp_v1 + 0x6c) = 0;
       temp_v4 = *(float *)(temp_v1 + 0x28);
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v1 = g_lmapScene;
       temp_v9 = 180.0f;
       *(float *)(g_lmapScene + 0x50) = temp_v4;

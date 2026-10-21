@@ -35,7 +35,7 @@ extern int jobIsValid(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 extern int stateAtCIs4(unsigned int);
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 extern int FUN_003e84fc(int);
 /* Supplied declaration required: FUN_003e8bb0. */
 extern int FUN_003eb1cc(int);
@@ -72,7 +72,7 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
   short temp_v8;
   char temp_v9;
   
-  temp_v2 = FUN_003e8430(*param_1);
+  temp_v2 = btlScriptUnitHasFlags(*param_1);
   if ((((temp_v2 != 0) || (temp_v2 = FUN_004c87e0(), temp_v2 == 0)) &&
       (temp_v2 = stateAtCIs4(g_btlAiScript), temp_v2 != 0)) &&
      (temp_v2 = jobIsValid(*(unsigned int *)(*param_1 + 0x80)), temp_v2 == 0)) {
@@ -160,7 +160,7 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
     temp_v4 = FUN_003f23fc(*param_1);
     if ((((temp_v4 != 0) || (temp_v4 = FUN_003e84fc(*param_1), temp_v4 != 0)) ||
         (temp_v4 = FUN_003f25e8(*param_1), temp_v4 != 0)) &&
-       (((temp_v4 = FUN_003e8430(*param_1), temp_v4 == 0 && (temp_v4 = FUN_003eb1cc(*param_1), temp_v4 == 0)
+       (((temp_v4 = btlScriptUnitHasFlags(*param_1), temp_v4 == 0 && (temp_v4 = FUN_003eb1cc(*param_1), temp_v4 == 0)
          ) && (temp_v2 != 0)))) {
       FUN_004abdfc(g_btlUiBlock,(int)(short)temp_v2,1);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 4;

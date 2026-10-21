@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013c884(int, int);
 int FUN_00140e38(int);
-int FUN_001418fc(int);
+int uiSetFloatPair(int);
 int FUN_0014f0dc(int, int, float *, int);
 int FUN_001523b8(int, int);
 int FUN_00154180(int, int, int, int);
@@ -29,7 +29,7 @@ extern int g_uniteCamera; /* 0x57f294 */
 
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_00140e38. */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: FUN_00154180. */
@@ -78,7 +78,7 @@ void FUN_002859d8(unsigned int param_1)
   FUN_001523b8(temp_v0,1);
   FUN_0036b824(temp_v0);
   FUN_00140e38(temp_v0);
-  FUN_001418fc(temp_v0);
+  uiSetFloatPair(temp_v0);
   *(int *)(g_handleRegistry + 0xc) = temp_v0;
   return;
 }

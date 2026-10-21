@@ -1,25 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00492c34` (_code @ 0x492c34, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+struct GameState { u8 unk000[1120]; u8 alternate; };
+struct Navigation { u8 unk00[16]; u32 first; u8 gap[44]; u32 second; };
 extern "C" {
-
-extern int g_naviMain; /* 0x587f28 */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
-
-
-unsigned int FUN_00492c34(void)
-
-{
-  unsigned int temp_v0;
-  
-  if (DAT_005f1a5c != '\0') {
-    temp_v0 = *(unsigned int *)(g_naviMain + 0x40);
-  }
-  else {
-    temp_v0 = *(unsigned int *)(g_naviMain + 0x10);
-  }
-  return temp_v0;
+extern GameState g_gameState;
+extern Navigation *g_naviMain;
+/* Reads the active navigation state's value. */
+u32 FUN_00492c34() { return g_gameState.alternate != 0 ? g_naviMain->second : g_naviMain->first; }
 }
-
-} /* extern "C" */

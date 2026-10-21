@@ -9,7 +9,7 @@ int FUN_002e6e34(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringDestroy(unsigned char [16]);
 int _ZN9Obj55aff4C1Ev(unsigned char [16]);
-int FUN_002f42be(unsigned char [16], unsigned char *, unsigned int);
+int onlineFormatWideString(unsigned char [16], unsigned char *, unsigned int);
 int onlineObjectThreadRootStart(unsigned int *, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int *FUN_001104e8(int, unsigned char *);
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
-/* Supplied declaration required: FUN_002f42be. */
+/* Supplied declaration required: onlineFormatWideString. */
 /* Supplied declaration required: onlineObjectThreadRootStart. */
 
 
@@ -52,7 +52,7 @@ unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
     *(unsigned char *)(param_1 + 0x34) = 0;
     for (temp_v2 = 0; temp_v2 < param_2; temp_v2 = temp_v2 + 1) {
       _ZN9Obj55aff4C1Ev(temp_v5);
-      FUN_002f42be(temp_v5,&LAB_0010b52c,temp_v2 + 1);
+      onlineFormatWideString(temp_v5,&LAB_0010b52c,temp_v2 + 1);
       temp_v1 = operatorNew(0x34);
       puVar3 = (unsigned int *)0x0;
       if (temp_v1 != 0) {

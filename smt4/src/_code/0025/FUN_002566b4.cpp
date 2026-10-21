@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_1_stack;
 
-extern int DAT_004475d0; /* 0x4475d0 */
+extern int g_activeTextureSlot; /* 0x4475d0 */
 extern unsigned int DAT_004475d4; /* 0x4475d4 */
 
 
@@ -28,16 +28,16 @@ void FUN_002566b4(unsigned int param_1)
   float in_s3;
   unsigned int in_s4;
   
-  temp_v1 = DAT_004475d0;
+  temp_v1 = g_activeTextureSlot;
   temp_v2 = 0;
-  while (*(int *)(DAT_004475d0 + temp_v2 * 4 + 4) != 0) {
+  while (*(int *)(g_activeTextureSlot + temp_v2 * 4 + 4) != 0) {
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0x40) {
       return;
     }
   }
-  temp_v4 = DAT_004475d0 + temp_v2 * 4;
-  temp_v3 = DAT_004475d0 + temp_v2 * 0xc;
+  temp_v4 = g_activeTextureSlot + temp_v2 * 4;
+  temp_v3 = g_activeTextureSlot + temp_v2 * 0xc;
   *(unsigned int *)(temp_v3 + 0x104) = in_s0;
   *(float *)(temp_v3 + 0x108) = in_s1;
   *(unsigned int *)(temp_v3 + 0x10c) = in_s2;

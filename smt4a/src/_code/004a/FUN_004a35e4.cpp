@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184528(int);
 int FUN_0032cfe0(int);
-int FUN_004935b0(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_004a1958(int);
 int FUN_004a3e04(int);
 int FUN_004cf8dc(int, int);
@@ -18,7 +18,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00184528. */
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_0032cfe0. */
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: FUN_004a3e04. */
 /* Supplied declaration required: FUN_004cf8dc. */
@@ -37,7 +37,7 @@ void FUN_004a35e4(int param_1)
   temp_v2 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
   temp_v0 = vec2GetYInt(temp_v2);
   temp_v1 = vec2GetXInt(temp_v2);
-  FUN_004935b0(param_1 + 200,temp_v1,temp_v0);
+  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
   if (*(int *)(param_1 + 0x18) == 0) {
     *(unsigned short *)(param_1 + 0xa874) = 9;
     FUN_00184528(param_1 + 0xdc);

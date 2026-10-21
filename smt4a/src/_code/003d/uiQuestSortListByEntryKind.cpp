@@ -28,8 +28,8 @@ extern u32 FUN_002c2c68(QuestCursor *cursor);
 extern void qsort(void *list, u32 count, u32 size, SortCompare compare);
 extern void arraySortQsort(void *list, u32 count, u32 size, SortCompare compare);
 
-extern int FUN_0029093c(const void *, const void *);
-extern int FUN_003370b0(const void *, const void *);
+extern int dataTable1bOr1cCompareRecordKeys(const void *, const void *);
+extern int dataTableCompareRecordValues(const void *, const void *);
 extern int FUN_002b2b34(const void *, const void *);
 extern int FUN_0034f46c(const void *, const void *);
 extern int FUN_002fdc2c(const void *, const void *);
@@ -52,9 +52,9 @@ void uiQuestSortListByEntryKind(s32 mode)
 
         if ((*info & 0x7F) == 0x22) {
             if (primary) {
-                qsort(list, FUN_002c2c68(cursor), 2, FUN_0029093c);
+                qsort(list, FUN_002c2c68(cursor), 2, dataTable1bOr1cCompareRecordKeys);
             } else {
-                qsort(list, FUN_002c2c68(cursor), 2, FUN_003370b0);
+                qsort(list, FUN_002c2c68(cursor), 2, dataTableCompareRecordValues);
             }
         }
         if ((*info & 0x7F) == 0x21) {

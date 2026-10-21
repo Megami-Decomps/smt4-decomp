@@ -13,7 +13,7 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown; /* 0x588fe8 */
 
-extern int FUN_00348ed0(StatusList *list);
+extern int uiSearchPrimary(StatusList *list);
 extern int FUN_002a4964(StatusList *list, int index);
 
 /* Selects `index` in the status list, clamped to the number of entries. */
@@ -23,7 +23,7 @@ void FUN_003c16e0(int index)
     int count;
 
     if (status != NULL) {
-        count = FUN_00348ed0(&status->list);
+        count = uiSearchPrimary(&status->list);
         if (count <= index) {
             index = count - 1;
         }

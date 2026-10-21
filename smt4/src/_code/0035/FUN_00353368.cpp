@@ -5,7 +5,7 @@
 extern "C" {
 
 int libc_strtok(...);
-int FUN_0023a154(...);
+int stringFormatBounded(...);
 int libc_strlen(...);
 int nn_boss_TaskOption_TaskOption(...);
 int strncpy(...);
@@ -21,8 +21,8 @@ typedef struct {
 extern unsigned char DAT_00407e94; /* 0x407e94 */
 
 /* Supplied declaration required: libc_strtok. */
-extern int FUN_0023a0d8(unsigned int, int *, unsigned int);
-/* Supplied declaration required: FUN_0023a154. */
+extern int tokenResolveAddress(unsigned int, int *, unsigned int);
+/* Supplied declaration required: stringFormatBounded. */
 extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: nn_boss_TaskOption_TaskOption. */
@@ -48,7 +48,7 @@ int FUN_00353368(unsigned int *param_1,int param_2,unsigned int param_3)
   int temp_v12;
   
   temp_v2 = FUN_002b5c44();
-  temp_v3 = FUN_0023a0d8(temp_v2,&temp_v12,*param_1);
+  temp_v3 = tokenResolveAddress(temp_v2,&temp_v12,*param_1);
   if (-1 < temp_v3) {
     strncpy(temp_v10,param_3,0x20);
     temp_v11 = 0;
@@ -102,7 +102,7 @@ int FUN_00353368(unsigned int *param_1,int param_2,unsigned int param_3)
         }
       }
       temp_v8 = temp_v4;
-      FUN_0023a154(param_2 + temp_v5 + 0x20,0x40 - temp_v5,"%c%s%s",(int)temp_v1);
+      stringFormatBounded(param_2 + temp_v5 + 0x20,0x40 - temp_v5,"%c%s%s",(int)temp_v1);
     }
     strncpy(param_2,temp_v12 + 0x54,0x20);
     strncpy(param_2 + 0x60,temp_v12 + 0x74,0x20);

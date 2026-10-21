@@ -13,7 +13,7 @@ extern unsigned int DAT_0059e6d4; /* 0x59e6d4 */
 extern unsigned char DAT_0059e9a8; /* 0x59e9a8 */
 extern int DAT_0059e9b4; /* 0x59e9b4 */
 
-extern unsigned int FUN_00300778(unsigned int, int);
+extern unsigned int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: FUN_00363590. */
 
 
@@ -23,7 +23,7 @@ void FUN_003c36e4(void)
 /* irregular: 1 native warning(s); review required */
   unsigned int temp_v0;
   
-  temp_v0 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
+  temp_v0 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
   FUN_00363590(DAT_0059dbf4,temp_v0);
   DAT_0059e6d4 = 0;
   DAT_0059dbec = 0;

@@ -11,9 +11,9 @@ int FUN_00231bcc(...);
 int dataTable00FindById(void);
 int FUN_002bd06c(void);
 int FUN_002be56c(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf4f0(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_0039fbc8(...);
 int VectorSignedToFloat(...);
 
@@ -37,16 +37,16 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_0023342c(unsigned int, unsigned int);
+extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int FUN_002bce30(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0039fbc8. */
 
 
@@ -88,11 +88,11 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v11 = (int)*(short *)(temp_v3 + 8);
   temp_v3 = (int)*(short *)(temp_v3 + 10);
   if (param_3 != 0) {
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_00230d84(param_1 + 200,0x103a,temp_v11,temp_v3,temp_v10);
     FUN_00230d84(param_1 + 200,0x103b,temp_v11,temp_v3,temp_v10);
     FUN_00230d84(param_1 + 200,0x103c,temp_v11,temp_v3,temp_v10);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_00231bcc(param_1 + 200,0x103d,temp_v11,temp_v3,temp_v10,1);
     FUN_00231bcc(param_1 + 200,0x103e,temp_v11,temp_v3,temp_v10,1);
     temp_v4 = FUN_002bf4f0(param_1 + 200,0x1041);
@@ -130,7 +130,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
       temp_v14 = 3;
     }
     temp_v7 = FUN_002bce30(param_4 & 0xffff,0);
-    temp_v4 = FUN_0023342c(temp_v7,2);
+    temp_v4 = curveEvaluateStandard(temp_v7,2);
     if (param_3 == 0) {
       temp_v9 = 0x105b;
       temp_v12 = 0xff;
@@ -173,7 +173,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v14 = 0xffffffff;
     temp_v16 = *(short *)(temp_v4 + 10) + temp_v3;
-    FUN_002be624(temp_v15,&LAB_003aa478,temp_v13);
+    textFormatBuffer(temp_v15,&LAB_003aa478,temp_v13);
     FUN_00230aec(param_1 + 200,0,temp_v1 + temp_v11,temp_v16,0,7,0xffffffff,temp_v10,temp_v15);
     param_4 = param_4 & 0xffff;
     temp_v7 = 0;
@@ -190,7 +190,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     }
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v2 = *(short *)(temp_v4 + 10);
-    FUN_002be624(temp_v15,&LAB_003aa480,temp_v7);
+    textFormatBuffer(temp_v15,&LAB_003aa480,temp_v7);
     FUN_00230aec(param_1 + 200,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v14,temp_v10,temp_v15);
   }
   return;

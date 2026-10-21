@@ -1,22 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001692ac` (_code @ 0x1692ac, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler combines flag expressions in a different register and instruction order. */
+#include "common.h"
+
 
 extern "C" {
-
-
-unsigned int FUN_001692ac(int param_1,int param_2)
-
+/* Reads or updates the requested state. */
+u32 FUN_001692ac(u32 value, bool enabled)
 {
-  unsigned int temp_v0;
-  
-  if (param_2 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 0x1000;
-  }
-  return temp_v0 | (unsigned int)(param_1 != 1) | (param_1 << 4) | 0xf00;
+    return ((value != 1) | (enabled ? 0x1000 : 0) | (value << 4)) | 0xf00;
 }
-
-} /* extern "C" */
+}

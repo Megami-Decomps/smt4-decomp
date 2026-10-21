@@ -35,8 +35,8 @@ extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002e2848. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_00348eb4(unsigned int);
-extern int FUN_00348ed0(unsigned int);
+extern int uiSearchSecondary(unsigned int);
+extern int uiSearchPrimary(unsigned int);
 
 
 unsigned int
@@ -61,11 +61,11 @@ FUN_003450d4(unsigned int param_1,fn_003450d4_arg1 *param_2,int param_3,unsigned
   FUN_00284140((int)(short)param_4);
   temp_v0 = 0;
   temp_v7 = -1;
-  temp_v2 = FUN_00348ed0(param_1);
+  temp_v2 = uiSearchPrimary(param_1);
   temp_v4 = temp_v7;
   if (param_3 != 0) {
     if (param_8 != 0) {
-      temp_v2 = FUN_00348eb4(param_1);
+      temp_v2 = uiSearchSecondary(param_1);
     }
     temp_v6 = 0;
     if (0 < temp_v2) {

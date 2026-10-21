@@ -417,7 +417,7 @@ extern unsigned char DAT_005f1c90; /* 0x5f1c90 */
 extern unsigned char DAT_005f1c91; /* 0x5f1c91 */
 extern unsigned char DAT_005f1c92; /* 0x5f1c92 */
 extern unsigned int DAT_005f1c94; /* 0x5f1c94 */
-extern unsigned int DAT_005f1c98; /* 0x5f1c98 */
+extern unsigned int g_mapSelection; /* 0x5f1c98 */
 extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
@@ -790,7 +790,7 @@ void FUN_00363c58(int param_1)
   DAT_005f1ac8 = 0;
   DAT_005f1ac9 = 0;
   DAT_005f1c74 = 0;
-  DAT_005f1c98 = 0xffffffff;
+  g_mapSelection = 0xffffffff;
   DAT_005f1c9c = 0xffffffff;
   DAT_005f1ca0 = 0xffffffff;
   DAT_005f1ca4 = 0xffffffff;

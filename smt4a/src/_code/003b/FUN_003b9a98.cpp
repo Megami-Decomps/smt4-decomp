@@ -7,7 +7,7 @@ extern "C" {
 int scrGetArg(int);
 int FUN_0039bf58(void);
 
-extern signed char DAT_0057f254; /* 0x57f254 */
+extern signed char g_engineResourceHandles; /* 0x57f254 */
 extern int DAT_0057f258; /* 0x57f258 */
 
 /* Supplied declaration required: scrGetArg. */
@@ -20,14 +20,14 @@ unsigned char FUN_003b9a98(void)
 /* irregular: 2 native warning(s); review required */
   unsigned char temp_v0;
   
-  if (DAT_0057f254 == '\0') {
-    DAT_0057f254 = '\x01';
+  if (g_engineResourceHandles == '\0') {
+    g_engineResourceHandles = '\x01';
     scrGetArg(0);
     FUN_0039bf58();
   }
   temp_v0 = *(char *)(DAT_0057f258 + 0x5d4) == '\0';
   if (temp_v0) {
-    DAT_0057f254 = '\0';
+    g_engineResourceHandles = '\0';
   }
   return temp_v0;
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0015f7c8(...);
-int FUN_0023e388(...);
+int matrixTranslateColumn(...);
 int FUN_002929d8(...);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int VectorSignedToFloat(...);
@@ -72,7 +72,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015f7c8. */
 extern unsigned int dataTableLookupValue0103(unsigned int);
-/* Supplied declaration required: FUN_0023e388. */
+/* Supplied declaration required: matrixTranslateColumn. */
 /* Supplied declaration required: FUN_002929d8. */
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
@@ -297,20 +297,20 @@ void FUN_0033e8a8(int param_1)
             temp_v30 = pfVar12[2] * (float)temp_v21 - *pfVar12;
             temp_v31 = pfVar12[3] * (float)temp_v21 - pfVar12[1];
             temp_v32 = (float)(temp_v20 >> 0x20);
-            FUN_0023e388(temp_v26,&temp_v30);
+            matrixTranslateColumn(temp_v26,&temp_v30);
             VectorUnsignedToFloat((unsigned int)*(unsigned short *)(pfVar12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_002929d8(temp_v40,1);
             nn_math_ARMv6_MTX34MultAsm(temp_v26,temp_v40);
             temp_v30 = -temp_v30;
             temp_v31 = -temp_v31;
             temp_v32 = -temp_v32;
-            FUN_0023e388(temp_v26);
+            matrixTranslateColumn(temp_v26);
           }
           if (*(char *)((int)pfVar12 + 0x25) != '\0') {
             temp_v32 = (float)(temp_v20 >> 0x20);
             temp_v30 = pfVar12[2] * (float)temp_v21 - *pfVar12;
             temp_v31 = -(pfVar12[1] + pfVar12[3]);
-            FUN_0023e388(temp_v26,&temp_v30);
+            matrixTranslateColumn(temp_v26,&temp_v30);
             FUN_002929d8(temp_v40,1);
             nn_math_ARMv6_MTX34MultAsm(temp_v26,temp_v40);
             temp_v33 = (unsigned int)temp_v22;
@@ -320,11 +320,11 @@ void FUN_0033e8a8(int param_1)
             temp_v36 = (unsigned int)(temp_v20 >> 0x20);
             temp_v38 = pfVar12[3] * (float)((unsigned long long)temp_v23 >> 0x20);
             temp_v37 = temp_v36;
-            FUN_0023e388(temp_v26,&temp_v36);
+            matrixTranslateColumn(temp_v26,&temp_v36);
             temp_v30 = -temp_v30;
             temp_v31 = -temp_v31;
             temp_v32 = -temp_v32;
-            FUN_0023e388(temp_v26);
+            matrixTranslateColumn(temp_v26);
           }
           temp_v24[0] = *pfVar12;
           temp_v24[1] = pfVar12[1];

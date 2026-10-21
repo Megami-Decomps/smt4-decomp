@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
@@ -18,7 +18,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -45,7 +45,7 @@ void FUN_00334ad0(int param_1,int param_2)
   FUN_001835b4(2,0x12,0x55c,*(short *)(temp_v3 + 8) + param_1,*(short *)(temp_v3 + 10) + param_2,0x97);
   FUN_001835b4(2,0x12,0x5bf,*(short *)(temp_v3 + 8) + param_1,*(short *)(temp_v3 + 10) + param_2,0x97);
   FUN_001835b4(2,0x12,0x5c0,*(short *)(temp_v3 + 8) + param_1,*(short *)(temp_v3 + 10) + param_2,0x97);
-  FUN_00100388(temp_v4,"撂躂蒂＀");
+  textFormatBuffer(temp_v4,"撂躂蒂＀");
   puVar5 = temp_v4;
   FUN_0018408c(puVar5,2);
   temp_v0 = *(short *)(temp_v3 + 8);

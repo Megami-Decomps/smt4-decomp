@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0022a478(void *panel, u32 a);
+int recordTrackDirtyValue(void *panel, u32 a);
 int FUN_00298d64(void *panel, u32 a);
 int flaggedEntrySetValueB(void *panel, u32 a);
 int flaggedEntrySetValueA(void *panel, u32 a);
@@ -21,7 +21,7 @@ void panelSetScrollPosition(Panel *panel, u32 first, u32 count)
         flaggedEntrySetValueA(panel->body, count);
     }
     if (panel->kind == 1) {
-        FUN_0022a478(panel->body, first);
+        recordTrackDirtyValue(panel->body, first);
         flaggedEntrySetValueB(panel->body, count);
         return;
     }

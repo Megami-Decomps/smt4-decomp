@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001568f8(int, int);
 int sysPlaySe(int);
 int FUN_00184310(void);
@@ -31,7 +31,7 @@ extern unsigned int DAT_0057a7d0; /* 0x57a7d0 */
 extern unsigned int DAT_0057a7d4; /* 0x57a7d4 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
@@ -69,12 +69,12 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     FUN_001568f8(temp_v2,param_1[8]);
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 2);
     FUN_00184310();
-    FUN_00100388(temp_v4,"battle/talk/Tone%s.tbb",
+    textFormatBuffer(temp_v4,"battle/talk/Tone%s.tbb",
                  *(unsigned int *)((unsigned int)*(unsigned char *)(temp_v1 + 0x38) * 4 + 0x57a7d8));
     FUN_002804b0(temp_v4,param_1 + 2,1);
     temp_v0 = *(unsigned char *)(temp_v1 + 0x38);
     param_1[0x52] = (unsigned int)temp_v0;
-    FUN_00100388(temp_v4,"battle/talk/TalkTone%s.mbm",*(unsigned int *)((unsigned int)temp_v0 * 4 + 0x57a7d8)
+    textFormatBuffer(temp_v4,"battle/talk/TalkTone%s.mbm",*(unsigned int *)((unsigned int)temp_v0 * 4 + 0x57a7d8)
                 );
     FUN_002804b0(temp_v4,param_1 + 5,1);
     FUN_002804b0("battle/talk/talk.bf",param_1 + 3,1);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [128], unsigned char *, int);
+int textFormatBuffer(unsigned char [128], unsigned char *, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001cd3ec(void);
 int libc_strcpy(int, int);
@@ -19,12 +19,12 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapObj; /* 0x581284 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003797e4. */
-extern int FUN_003b5684(void);
+extern int dataTableGetRecordFortyFive(void);
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
 extern unsigned int FUN_0040ac08(void);
@@ -101,7 +101,7 @@ unsigned int FUN_00313138(void)
       temp_v2 = g_mapObj + *(short *)(g_mapObj + 0xc) * 0x48;
       *(int *)(temp_v2 + 0x38) = (int)*(short *)(temp_v1 + 4);
       *(unsigned char *)(temp_v2 + 0x40) = 0;
-      FUN_00100388(temp_v5,&LAB_003133f4,(int)*(short *)(temp_v1 + 4));
+      textFormatBuffer(temp_v5,&LAB_003133f4,(int)*(short *)(temp_v1 + 4));
       temp_v1 = 0x20;
       FUN_00178b04(0x20,&LAB_00313410,0x16f);
       temp_v4 = 0;
@@ -115,7 +115,7 @@ unsigned int FUN_00313138(void)
     return 0;
   }
   psVar6 = (short *)(int)*(short *)(g_mapObj + 10);
-  temp_v1 = FUN_003b5684();
+  temp_v1 = dataTableGetRecordFortyFive();
   if ((int)psVar6 < temp_v1) {
     do {
       psVar2 = psVar6;
@@ -140,7 +140,7 @@ LAB_003131cc:
         return 1;
       }
       psVar6 = (short *)((int)psVar6 + 1);
-      temp_v1 = FUN_003b5684();
+      temp_v1 = dataTableGetRecordFortyFive();
     } while ((int)psVar6 < temp_v1);
   }
   *(unsigned short *)(g_mapObj + 8) = 99;

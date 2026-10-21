@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00235744(float *);
+int thresholdDispatchOutsideRange(float *);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(int, int);
 int nn_math_ARMv6_QUATToMTX34C_FAST(int *, float *);
@@ -28,7 +28,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00235744. */
+/* Supplied declaration required: thresholdDispatchOutsideRange. */
 /* Supplied declaration required: nn_math_ARMv6_QUATToMTX34C_FAST. */
 
 
@@ -56,7 +56,7 @@ void nw_anim_res_CalcRotateCurve(unsigned int *param_1,unsigned int *param_2,flo
   float temp_v15;
   float temp_v16;
   
-  FUN_00235744(param_3);
+  thresholdDispatchOutsideRange(param_3);
   if (((unsigned int)param_3[3] & 1) != 0) {
     in_s0 = *param_3;
   }
@@ -83,7 +83,7 @@ void nw_anim_res_CalcRotateCurve(unsigned int *param_1,unsigned int *param_2,flo
     }
     else {
       in_s0 = in_s0 + 1.0f;
-      FUN_00235744(param_3);
+      thresholdDispatchOutsideRange(param_3);
       temp_v1 = VectorFloatToUnsigned(in_s0,3);
       temp_v13 = param_3[temp_v2 * 5 + 4];
       temp_v13 = temp_v13 + temp_v3 * (param_3[temp_v1 * 5 + 4] - temp_v13);

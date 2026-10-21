@@ -21,7 +21,7 @@ extern unsigned int DAT_00571178; /* 0x571178 */
 extern unsigned int DAT_0057117c; /* 0x57117c */
 
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_003e88d8. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c3db4. */
@@ -49,7 +49,7 @@ void FUN_004e62b4(int *param_1,int param_2,int param_3,unsigned int param_4,int 
           FUN_003e88d8(*param_1,(int)*(short *)(temp_v0 + 2));
         }
       }
-      temp_v0 = FUN_003e8430(*param_1);
+      temp_v0 = btlScriptUnitHasFlags(*param_1);
       if (temp_v0 != 0) {
         temp_v1 = param_5 + 0xf;
       }

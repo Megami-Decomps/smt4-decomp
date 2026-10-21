@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b7bca(int, unsigned int, int, unsigned char *);
-int FUN_002be624(unsigned char [64], unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int, unsigned int);
 int FUN_0031e2bc(unsigned int, unsigned char [64], int);
 int dataTable27Sub0GetCount(void);
 
@@ -17,7 +17,7 @@ extern int dataTable27Sub0GetRecord(int, unsigned int);
 extern int FUN_0023ea64(int);
 extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0031e2bc. */
 extern int FUN_00385afc(int);
@@ -96,10 +96,10 @@ LAB_00383410:
         }
         temp_v6 = randBetween(1,2);
 LAB_003834c0:
-        FUN_002be624(temp_v7,&LAB_00383538,temp_v3 + 1,temp_v6);
+        textFormatBuffer(temp_v7,&LAB_00383538,temp_v3 + 1,temp_v6);
         temp_v0 = param_1 + temp_v3 * 4;
         FUN_0031e2bc(*(unsigned int *)(*(int *)(temp_v0 + 0xd10) + 8),temp_v7,0);
-        FUN_002be624(temp_v7,&LAB_00383550,temp_v3 + 1,temp_v6);
+        textFormatBuffer(temp_v7,&LAB_00383550,temp_v3 + 1,temp_v6);
         FUN_0031e2bc(*(unsigned int *)(*(int *)(temp_v0 + 0xd28) + 8),temp_v7,0);
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 6);

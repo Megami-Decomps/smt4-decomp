@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013c884(...);
 int FUN_00140e38(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int FUN_0015a1b4(...);
 int FUN_0015a20c(...);
 int VectorUnsignedToFloat(...);
@@ -49,7 +49,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_00140e38. */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0015a1b4. */
 /* Supplied declaration required: FUN_0015a20c. */
 extern unsigned int FUN_00168854(unsigned int);
@@ -114,7 +114,7 @@ void FUN_0013b244(fn_0013b244_arg0 *param_1)
   temp_v10 = -(temp_v2 * temp_v7 + temp_v2 * temp_v8 + in_s0 * temp_v9);
   temp_v12 = temp_v11;
   FUN_0015a1b4(param_1,&temp_v4);
-  FUN_001418fc(param_1);
+  uiSetFloatPair(param_1);
   FUN_00140e38(param_1);
   return;
 }

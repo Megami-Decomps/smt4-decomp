@@ -92,7 +92,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_003e41f8. */
 extern int FUN_003e4230(unsigned int);
 extern int FUN_003e4510(unsigned int);
-extern unsigned int FUN_003e45a8(unsigned int);
+extern unsigned int dataRecordGetValue(unsigned int);
 /* Supplied declaration required: FUN_003e45bc. */
 extern int gameDataFlagTestBit(unsigned int);
 extern int FUN_003e4718(unsigned int);
@@ -326,7 +326,7 @@ unsigned int FUN_003ce598(void)
           if (temp_v7 != 0) {
             temp_v8 = FUN_00186f54(temp_v5);
             FUN_003180c4(0,temp_v8);
-            temp_v8 = FUN_003e45a8(temp_v5);
+            temp_v8 = dataRecordGetValue(temp_v5);
             FUN_00359974(0x18,temp_v8,0xffffffff,0);
             scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x530),0);
             FUN_003dc0c0(temp_v6,4);

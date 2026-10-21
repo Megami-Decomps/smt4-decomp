@@ -49,8 +49,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002493a4. */
 /* Supplied declaration required: effTlpCreate. */
 extern int FUN_0024c3c8(unsigned int);
-extern unsigned int *FUN_0024c3d8(fn_002de490_arg0 *);
-extern unsigned int FUN_0024c3f8(void);
+extern unsigned int *resourceResolveDataPointer(fn_002de490_arg0 *);
+extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effBlockClone. */
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: handleBlockUnref. */
@@ -58,7 +58,7 @@ extern unsigned int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: objectBufferFree. */
 /* Supplied declaration required: refCountIncrement. */
-extern int FUN_0028c814(unsigned int *);
+extern int textureCreateFromImage(unsigned int *);
 /* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: asdTextureRelease. */
@@ -83,7 +83,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
   float temp_v4;
   float temp_v5;
   
-  temp_v0 = FUN_0024c3f8();
+  temp_v0 = resourceResolveHeaderPointer();
   temp_v1 = *(int *)(temp_v0 + 0x20);
   if (temp_v1 == 0) {
     temp_v1 = *(int *)(temp_v0 + 0xb8);
@@ -105,11 +105,11 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
   FUN_002691d8(temp_v3,*puVar3,temp_v0);
   puVar3[0x13] = temp_v3;
   *(unsigned char *)((int)puVar3 + 0xe) = *(unsigned char *)((int)puVar3 + 0xe) | 1;
-  if ((*puVar3 != 0) && (puVar4 = (unsigned int *)FUN_0024c3d8(param_1), puVar4 != (unsigned int *)0x0)) {
+  if ((*puVar3 != 0) && (puVar4 = (unsigned int *)resourceResolveDataPointer(param_1), puVar4 != (unsigned int *)0x0)) {
     switch(param_1->field_0x1c) {
     case 1:
       FUN_002493a4(puVar3,*(unsigned int *)(puVar3[0x13] + 8),1);
-      temp_v1 = FUN_0028c814(puVar4);
+      temp_v1 = textureCreateFromImage(puVar4);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
       temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3)

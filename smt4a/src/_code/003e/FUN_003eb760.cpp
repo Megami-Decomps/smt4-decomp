@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00184310(void);
 int rt_memclr(unsigned char *, int);
-int FUN_004bd274(unsigned int, unsigned int);
-int FUN_004bd294(unsigned int, unsigned int);
+int randomGetLowerTenBits(unsigned int, unsigned int);
+int randomGetUpperSixBits(unsigned int, unsigned int);
 int FUN_004da024(void);
 int FUN_004da0b4(void);
 int clearTwoWords(unsigned char *);
@@ -31,8 +31,8 @@ extern int FUN_00168518(int, unsigned short);
 extern int FUN_00177654(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_004bd274. */
-/* Supplied declaration required: FUN_004bd294. */
+/* Supplied declaration required: randomGetLowerTenBits. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: FUN_004da024. */
 /* Supplied declaration required: FUN_004da0b4. */
 /* Supplied declaration required: clearTwoWords. */
@@ -117,19 +117,19 @@ void FUN_003eb760(fn_003eb760_arg0 *param_1,unsigned char *param_2,unsigned int 
   else {
     do {
       temp_v8 = param_3;
-      FUN_004bd274(param_3,temp_v9 & 0xff);
+      randomGetLowerTenBits(param_3,temp_v9 & 0xff);
       *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
            ((unsigned short)temp_v8 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0xfc00);
       temp_v8 = param_3;
-      FUN_004bd294(param_3,temp_v9 & 0xff);
+      randomGetUpperSixBits(param_3,temp_v9 & 0xff);
       *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
            (unsigned short)(temp_v8 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0x3ff);
       temp_v8 = param_3;
-      FUN_004bd274(param_3,temp_v9 & 0xff);
+      randomGetLowerTenBits(param_3,temp_v9 & 0xff);
       *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
            ((unsigned short)temp_v8 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0xfc00);
       temp_v8 = param_3;
-      FUN_004bd294(param_3,temp_v9 & 0xff);
+      randomGetUpperSixBits(param_3,temp_v9 & 0xff);
       *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
            (unsigned short)((temp_v8 & 0x3f) << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0x3ff);
       temp_v10 = temp_v9 + 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(...);
@@ -37,7 +37,7 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -51,7 +51,7 @@ extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_00344cd0. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: FUN_0037ce80. */
 extern int partyEntryGetBit5(unsigned int);
@@ -112,7 +112,7 @@ void FUN_0022ecfc(void)
     FUN_001835b4(2,0x1e,0x83,temp_v1,temp_v2,0x6a);
   }
   temp_v10 = 0;
-  temp_v4 = FUN_00348ed0(temp_v3);
+  temp_v4 = uiSearchPrimary(temp_v3);
   if (0 < temp_v4) {
     do {
       if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = FUN_002a4894(temp_v3), temp_v4 != temp_v10)) {
@@ -126,7 +126,7 @@ void FUN_0022ecfc(void)
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0,0);
           temp_v5 = FUN_001834a4(0x1e,0x9b);
           temp_v7 = FUN_00156850(temp_v11,0);
-          FUN_00100388(temp_v16,&LAB_0022f064,temp_v7);
+          textFormatBuffer(temp_v16,&LAB_0022f064,temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -161,10 +161,10 @@ void FUN_0022ecfc(void)
         }
       }
       temp_v10 = temp_v10 + 1;
-      temp_v4 = FUN_00348ed0(temp_v3);
+      temp_v4 = uiSearchPrimary(temp_v3);
     } while (temp_v10 < temp_v4);
   }
-  temp_v4 = FUN_00348ed0(temp_v3);
+  temp_v4 = uiSearchPrimary(temp_v3);
   if ((0 < temp_v4) &&
      (((temp_v4 = *(int *)(temp_v0 + 4), temp_v4 == 2 || temp_v4 == 6 || (temp_v4 == 7 || temp_v4 == 8)) ||
       (temp_v4 == 9 || temp_v4 == 10)))) {
@@ -239,7 +239,7 @@ void FUN_0022ecfc(void)
                  (temp_v13 || temp_v14) || temp_v15);
     temp_v12 = FUN_001834a4(0x1e,0xb2);
     temp_v7 = FUN_00156850(temp_v6,0);
-    FUN_00100388(temp_v16,&LAB_0022f584,temp_v7);
+    textFormatBuffer(temp_v16,&LAB_0022f584,temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,

@@ -1,31 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001dd930` (_code @ 0x1dd930, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail add r1, r2, #4; compiler push {r4, r5, r6, r7}. */
+#include "common.h"
+
+__packed struct HistoryReset {
+    u32 first, second, third, fourth;
+    u16 count;
+};
+__packed struct HistoryData {
+    /* 0x0000 */ u8 unk0000[0x981E];
+    /* 0x981E */ HistoryReset reset;
+    /* 0x9830 */ u8 unk9830[0x3C];
+    /* 0x986C */ u32 current;
+    /* 0x9870 */ u32 previous;
+};
+struct HistoryGlobals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ HistoryData *data;
+};
 
 extern "C" {
 
-int FUN_00334e18(void);
+extern HistoryGlobals g_gameDataBlocks;
+extern void FUN_00334e18(void *state);
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-/* Supplied declaration required: FUN_00334e18. */
-
-
+/* Saves the current history value, clears the reset region and refreshes it. */
 void FUN_001dd930(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9870) = *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x986c);
-  *(unsigned int *)(temp_v0 + 0x981e) = 0;
-  *(unsigned int *)(temp_v0 + 0x9822) = 0;
-  *(unsigned int *)(temp_v0 + 0x9826) = 0;
-  *(unsigned int *)(temp_v0 + 0x982a) = 0;
-  *(unsigned short *)(temp_v0 + 0x982e) = 0;
-  FUN_00334e18();
-  return;
+    HistoryData *data = g_gameDataBlocks.data;
+    data->previous = data->current;
+    data->reset.first = 0;
+    data->reset.second = 0;
+    data->reset.third = 0;
+    data->reset.fourth = 0;
+    data->reset.count = 0;
+    FUN_00334e18(&data->reset);
 }
 
 } /* extern "C" */

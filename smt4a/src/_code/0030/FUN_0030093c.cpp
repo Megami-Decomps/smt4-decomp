@@ -1,43 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030093c` (_code @ 0x30093c, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r2, r3, r4, r5, r6, lr}'; compiler emits 'push {r4, r5, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int onlineStringDestroy(int *);
-int onlineUrlSetText(unsigned int, unsigned int);
-int _ZN9Obj55aff4C1Ev(int *);
-int FUN_002fbc1a(int, int *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_4_stack;
-
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineUrlSetText. */
-/* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
-/* Supplied declaration required: FUN_002fbc1a. */
-
-
-unsigned int FUN_0030093c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int uStack_18;
-  unsigned int temp_v0;
-  
-  uStack_18 = param_3;
-  temp_v0 = param_4;
-  _ZN9Obj55aff4C1Ev(&uStack_18);
-  FUN_002fbc1a(param_1,&uStack_18);
-  if (param_1 != 0) {
-    onlineUrlSetText(param_2,temp_v0);
-    onlineStringDestroy(&uStack_18);
-    return 1;
-  }
-  onlineStringDestroy(&uStack_18);
-  return 0;
+struct String { u32 reserved; const char *text; };
+void _ZN9Obj55aff4C1Ev(String *string);
+s32 FUN_002fbc1a(u32 value, String *output);
+void onlineUrlSetText(void *url, const char *text);
+void onlineStringDestroy(String *string);
+s32 FUN_0030093c(u32 value, void *url) {
+    String text;
+    _ZN9Obj55aff4C1Ev(&text);
+    s32 result = FUN_002fbc1a(value, &text);
+    if (result) onlineUrlSetText(url, text.text);
+    onlineStringDestroy(&text);
+    return result != 0;
 }
-
-} /* extern "C" */
+}

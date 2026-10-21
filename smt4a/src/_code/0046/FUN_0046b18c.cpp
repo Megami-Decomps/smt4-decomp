@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int libc_strcat(...);
 int FUN_001654f8(unsigned char [64], unsigned char [136], int);
 int sysPlaySe(...);
@@ -19,7 +19,7 @@ int FUN_002a4b74(void);
 int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
 int FUN_003423cc(int);
-int FUN_0035d058(unsigned int, unsigned int);
+int messageSetIndexedFlag(unsigned int, unsigned int);
 int FUN_003c1060(void);
 int FUN_003fe86c(...);
 int pickObjStart(unsigned int *, unsigned char *);
@@ -35,7 +35,7 @@ extern unsigned char LAB_0046b4e0; /* 0x46b4e0 */
 extern unsigned char LAB_0046b8f0; /* 0x46b8f0 */
 extern unsigned char LAB_0046b910; /* 0x46b910 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: sysPlaySe. */
@@ -55,7 +55,7 @@ extern unsigned int FUN_002a4b60(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_003423cc. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
-/* Supplied declaration required: FUN_0035d058. */
+/* Supplied declaration required: messageSetIndexedFlag. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: pickObjStart. */
@@ -128,7 +128,7 @@ void FUN_0046b18c(unsigned int *param_1)
             temp_v5 = FUN_001801b8((short)param_1[0x33d],
                                  *(unsigned char *)((int)param_1 + temp_v2 * 10 + 0xe4a));
             *(char *)((int)param_1 + temp_v2 * 10 + 0xe46) = (char)temp_v5;
-            FUN_0035d058(temp_v2,temp_v5);
+            messageSetIndexedFlag(temp_v2,temp_v5);
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 4);
           return;
@@ -206,8 +206,8 @@ void FUN_0046b18c(unsigned int *param_1)
   case 2:
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
-    FUN_00100388(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
-    FUN_00100388(temp_v8,&LAB_0046b910,temp_v0);
+    textFormatBuffer(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
+    textFormatBuffer(temp_v8,&LAB_0046b910,temp_v0);
     FUN_002804b0(temp_v7,param_1 + 0xa7,0);
     FUN_002804b0(temp_v8,param_1 + 0xa8,0);
     param_1[2] = param_1[2] + 1;
@@ -232,7 +232,7 @@ void FUN_0046b18c(unsigned int *param_1)
         temp_v6 = FUN_001801b8((short)param_1[0x33d],
                              *(unsigned char *)((int)param_1 + temp_v2 * 10 + 0xe4a));
         *(char *)((int)param_1 + temp_v2 * 10 + 0xe46) = (char)temp_v6;
-        FUN_0035d058(temp_v2,temp_v6);
+        messageSetIndexedFlag(temp_v2,temp_v6);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 4);
     }
@@ -279,8 +279,8 @@ void FUN_0046b18c(unsigned int *param_1)
     sysPlaySe(0xa4);
     temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
-    FUN_00100388(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
-    FUN_00100388(temp_v8,&LAB_0046b910,temp_v0);
+    textFormatBuffer(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
+    textFormatBuffer(temp_v8,&LAB_0046b910,temp_v0);
     FUN_002804b0(temp_v7,param_1 + 0xa7,0);
     FUN_002804b0(temp_v8,param_1 + 0xa8,0);
     *param_1 = *param_1 | 0x100;

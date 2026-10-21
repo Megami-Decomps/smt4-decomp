@@ -20,7 +20,7 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 
 /* Supplied declaration required: qsort. */
 extern int FUN_003df4a4(unsigned short);
-extern int FUN_004bca68(unsigned int, unsigned short);
+extern int recordContainsPairedId(unsigned int, unsigned short);
 
 
 /* WARNING: Removing unreachable block (ram,0x00268074) */
@@ -112,7 +112,7 @@ void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
         *(unsigned short *)(param_1 + (temp_v7 + temp_v9) * 2 + 0x76c4) = 0;
       }
     }
-    temp_v8 = FUN_004bca68(param_2,*(unsigned short *)(temp_v10 + 0x34));
+    temp_v8 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34));
     if (temp_v8 != 0) {
       if (*(short *)(param_1 + 0x76c6) == *(short *)(temp_v10 + 0x34)) {
         *(unsigned short *)(param_1 + 0x76c4) = 0;
@@ -139,10 +139,10 @@ void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
     temp_v2 = FUN_003df4a4(temp_v0);
     piVar12 = (int *)(param_1 + 0x7858);
     param_4 = temp_v1;
-    if ((temp_v2 == 0) || (temp_v2 = FUN_004bca68(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v2 != 0))
+    if ((temp_v2 == 0) || (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v2 != 0))
     {
       temp_v2 = FUN_003df4a4(temp_v0);
-      if ((temp_v2 == 0) && (temp_v2 = FUN_004bca68(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v2 != 0)
+      if ((temp_v2 == 0) && (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v2 != 0)
          ) {
         *piVar12 = *piVar12 + 1;
         *(unsigned short *)(temp_v6 + 0x76b4) = 1;
@@ -150,7 +150,7 @@ void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
       else {
         temp_v6 = FUN_003df4a4(temp_v0);
         if (((temp_v6 == 0) &&
-            (temp_v6 = FUN_004bca68(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v6 == 0)) ||
+            (temp_v6 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v6 == 0)) ||
            (*(short *)(param_3 + temp_v1 * 2 + 0x34) == 0)) {
           *puVar10 = *puVar10 - 1;
         }

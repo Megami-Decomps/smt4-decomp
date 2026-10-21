@@ -25,7 +25,7 @@ extern unsigned char LAB_002e3318; /* 0x2e3318 */
 extern int FUN_00329b70(...); /* 0x329b70 */
 extern int FUN_0032ae80(...); /* 0x32ae80 */
 extern int FUN_00330ac8(...); /* 0x330ac8 */
-extern unsigned int *DAT_0043dd90; /* 0x43dd90 */
+extern unsigned int *g_screenStateWork; /* 0x43dd90 */
 
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: fileSlotLoad. */
@@ -43,12 +43,12 @@ void FUN_002e31d0(void)
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  if (DAT_0043dd90 == (unsigned int *)0x0) {
+  if (g_screenStateWork == (unsigned int *)0x0) {
     puVar1 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0x958,1);
-    DAT_0043dd90 = puVar1;
+    g_screenStateWork = puVar1;
   }
-  puVar1 = DAT_0043dd90;
+  puVar1 = g_screenStateWork;
   memClear();
   puVar2 = &LAB_002e3308;
   asdProcessCreateSimple(&LAB_002e3308,2,0,0,FUN_00329b70,0,0);

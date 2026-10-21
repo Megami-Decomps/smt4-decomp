@@ -1,24 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00351590` (_code @ 0x351590, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Node { u8 padding[0x90]; u32 key; u8 gap[0x18]; Node *next; }; struct Owner { u8 padding[0x8c]; Node *first; }; }
 
 extern "C" {
-
-
-int FUN_00351590(int param_1,int param_2)
-
+/* Reads or updates the requested task state. */
+Node *FUN_00351590(const Owner *owner, u32 key)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x8c);
-  while( 1 ) {
-    if (temp_v0 == 0) {
-      return 0;
+    for (Node *node = owner->first; node != NULL; node = node->next) {
+        if (node->key == key) {
+            return node;
+        }
     }
-    if (*(int *)(temp_v0 + 0x90) == param_2) break;
-    temp_v0 = *(int *)(temp_v0 + 0xac);
-  }
-  return temp_v0;
+    return NULL;
 }
-
-} /* extern "C" */
+}

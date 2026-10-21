@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int mapDepartResetWork(...);
-int FUN_0020ec4c(...);
+int mapEplAlloc(...);
 int FUN_0020ef94(...);
 int FUN_0020f054(...);
 int FUN_00233170(...);
@@ -47,7 +47,7 @@ extern unsigned char DAT_005f185b; /* 0x5f185b */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: mapDepartResetWork. */
-/* Supplied declaration required: FUN_0020ec4c. */
+/* Supplied declaration required: mapEplAlloc. */
 /* Supplied declaration required: FUN_0020ef94. */
 /* Supplied declaration required: FUN_0020f054. */
 /* Supplied declaration required: FUN_00233170. */
@@ -106,7 +106,7 @@ void FUN_00246720(void)
   *(unsigned char *)((int)puVar1 + 0x4b) = 0;
   *(unsigned char *)(puVar1 + 0x13) = 0;
   *(unsigned char *)((int)puVar1 + 0x4d) = 0;
-  FUN_0020ec4c();
+  mapEplAlloc();
   mapEplSlotsInit();
   FUN_002496b8();
   FUN_002442ac();

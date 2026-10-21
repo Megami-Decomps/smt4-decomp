@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002573c8(unsigned int);
+int effectSpawnPositionDefault(unsigned int);
 int FUN_002573d8(void);
 int FUN_0025b750(void);
 int FUN_002b7064(void);
@@ -16,7 +16,7 @@ typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002573c8. */
+/* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: FUN_0025b750. */
 /* Supplied declaration required: FUN_002b7064. */
@@ -54,14 +54,14 @@ void FUN_001f67ec(int param_1)
     *(unsigned char *)(temp_v5 + 0x1264) = 0;
   }
   FUN_002573d8();
-  FUN_002573c8(temp_v1 | temp_v0);
+  effectSpawnPositionDefault(temp_v1 | temp_v0);
   temp_v5 = 0;
   do {
     VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b7064();
     VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b70cc();
-    FUN_002573c8(temp_v1);
+    effectSpawnPositionDefault(temp_v1);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x13);
   FUN_0025b750();

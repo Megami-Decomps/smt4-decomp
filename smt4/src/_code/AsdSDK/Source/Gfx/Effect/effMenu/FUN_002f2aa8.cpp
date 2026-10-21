@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00282780(int, int, int, int);
-int FUN_002be624(unsigned char [20], unsigned char *, int, int *);
+int textFormatBuffer(unsigned char [20], unsigned char *, int, int *);
 
 extern unsigned char LAB_002f2e74; /* 0x2f2e74 */
 extern unsigned char DAT_004724c9; /* 0x4724c9 */
 
 /* Supplied declaration required: FUN_00282780. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int padIsButtonPressed(unsigned int);
 
 
@@ -146,7 +146,7 @@ LAB_002f2d08:
     *(unsigned char *)((int)param_1 + param_1[4] + 0x21) = 0;
   }
   FUN_00282780(temp_v2,temp_v4,0x86,0x14);
-  FUN_002be624(temp_v7,&LAB_002f2e74,(int)param_1 + 0x21,param_1 + 7);
+  textFormatBuffer(temp_v7,&LAB_002f2e74,(int)param_1 + 0x21,param_1 + 7);
   FUN_00282780(temp_v2,temp_v4 + 0x18,0x86,0x44);
   if (param_1[6] != 0) {
     return param_1[6];

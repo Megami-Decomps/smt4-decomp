@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00423670(unsigned char *, unsigned int *, int, int);
+int _ZN9Obj420a2c12buildEntriesEv(unsigned char *, unsigned int *, int, int);
 int FUN_00423a8c(unsigned int *, unsigned int *, unsigned int, int);
 int FUN_004241e0(unsigned char *, int, unsigned int, unsigned int);
 int FUN_004250dc(unsigned char *, int);
@@ -24,7 +24,7 @@ extern unsigned int DAT_00617f18; /* 0x617f18 */
 extern unsigned char DAT_00617f40; /* 0x617f40 */
 extern int DAT_00618488; /* 0x618488 */
 
-/* Supplied declaration required: FUN_00423670. */
+/* Supplied declaration required: _ZN9Obj420a2c12buildEntriesEv. */
 /* Supplied declaration required: FUN_00423a8c. */
 /* Supplied declaration required: FUN_004241e0. */
 extern unsigned int stateObjectClassify(unsigned char *, int);
@@ -56,7 +56,7 @@ void FUN_00229104(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = table46COwnerGet(&DAT_00617f40,0);
   temp_v3 = FUN_00424c2c(&DAT_00617f40,temp_v2);
   puVar5 = &DAT_00617e70;
-  FUN_00423670(&DAT_00617e70,&DAT_00617e64,temp_v3,0);
+  _ZN9Obj420a2c12buildEntriesEv(&DAT_00617e70,&DAT_00617e64,temp_v3,0);
   if (puVar5 == (unsigned char *)0x0) {
     FUN_0043128c();
   }

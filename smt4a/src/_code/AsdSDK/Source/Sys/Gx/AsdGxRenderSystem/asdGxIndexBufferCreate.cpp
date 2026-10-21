@@ -1,48 +1,46 @@
-#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
-#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
 extern AsdGxPresets g_asdGxPresets;
-
-AsdGxTexture *asdTextureCreate(s32 unk);
-void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
+AsdGxTexture *asdTextureCreate(s32 mode);
+void *asdMemoryAlloc(s32 heap, s32 alignment, s32 options, u32 size, s32 fromFront);
 u32 FUN_001bc2ec(void);
 
-/* Creates a 512x512 index buffer of the given preset kind (0/1: small, 2: large) in heap
- * ASD_HEAP_EXTRA; the element type comes from the preset. */
 AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
 {
-    AsdGxPreset *preset = NULL;
-    AsdGxTexture *tex = asdTextureCreate(0);
+    AsdGxPreset *preset = 0;
+    AsdGxTexture *texture = asdTextureCreate(0);
 
     if (kind == 0 || kind == 1) {
-        tex->width = 0x200;
+        texture->width = 512;
         preset = &g_asdGxPresets.small;
-        tex->height = 0x200;
+        texture->height = 512;
     } else if (kind == 2) {
-        tex->width = 0x200;
+        texture->width = 512;
         preset = &g_asdGxPresets.large;
-        tex->height = 0x200;
+        texture->height = 512;
     }
-    tex->unk10 = 0;
-    tex->format = preset->format;
-    if (preset->typeSelector == 0) {
-        tex->type = ASD_GL_UNSIGNED_SHORT;
-    } else if (preset->typeSelector == 2) {
-        tex->type = ASD_GL_UNSIGNED_INT;
-    }
-    tex->unk34 = preset->unk04;
-    tex->byteSize = tex->width * tex->height;
-    if (tex->type == ASD_GL_UNSIGNED_INT) {
-        tex->byteSize = tex->byteSize * 4;
-    } else {
-        tex->byteSize = tex->byteSize * 2;
-    }
-    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\Gx\\AsdGxRenderSystem.cpp", 2959);
-    tex->pixels = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, tex->byteSize, 1);
-    tex->handle = FUN_001bc2ec();
-    return tex;
-}
 
-} /* extern "C" */
+    texture->unk10 = 0;
+    texture->format = preset->format;
+    if (preset->typeSelector == 0) {
+        texture->type = ASD_GL_UNSIGNED_SHORT;
+    } else if (preset->typeSelector == 2) {
+        texture->type = ASD_GL_UNSIGNED_INT;
+    }
+    texture->unk34 = preset->unk04;
+    texture->byteSize = (u32)texture->width * (u32)texture->height;
+    if (texture->type == ASD_GL_UNSIGNED_INT) {
+        texture->byteSize <<= 2;
+    } else {
+        texture->byteSize <<= 1;
+    }
+
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\Gx\\AsdGxRenderSystem.cpp", 2959);
+    texture->pixels = asdMemoryAlloc(0x10000, 0x100, 0, texture->byteSize, 1);
+    texture->handle = FUN_001bc2ec();
+    return texture;
+}
+}

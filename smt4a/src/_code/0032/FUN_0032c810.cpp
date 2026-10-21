@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002371b0(void);
-int FUN_00317c50(unsigned int);
+int effectSpawnPositionDefault(unsigned int);
 int FUN_0032c808(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_00317c50. */
+/* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: FUN_0032c808. */
 
 
@@ -37,10 +37,10 @@ void FUN_0032c810(unsigned int param_1,unsigned int param_2)
   
   if (romwright_sqrt_4((in_s3 - in_s1) * (in_s3 - in_s1) + -(in_s2 - in_s0) * -(in_s2 - in_s0)) != 0.0f) {
     FUN_0032c808();
-    FUN_00317c50(param_1);
-    FUN_00317c50(param_2);
-    FUN_00317c50(param_1);
-    FUN_00317c50(param_2);
+    effectSpawnPositionDefault(param_1);
+    effectSpawnPositionDefault(param_2);
+    effectSpawnPositionDefault(param_1);
+    effectSpawnPositionDefault(param_2);
     FUN_002371b0();
     return;
   }

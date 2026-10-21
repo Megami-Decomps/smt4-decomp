@@ -14,6 +14,9 @@ void resSetFree(ResSet *set)
 {
     s32 i;
 
+    if (set == NULL) {
+        return;
+    }
     for (i = 0; i < 7; i++) {
         asdMemFreeSlot(set->a[i]);
     }

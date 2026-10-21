@@ -1,37 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013266e` (_code @ 0x13266e, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r4, r0 where the compiled block uses mov r4, r1. */
+#include "common.h"
+
+struct ListNode {
+    ListNode* next;       // 0x00
+    ListNode* previous;   // 0x04
+    u8 payload[1];        // 0x08 (remaining payload size unknown)
+};
+
+struct ListState {
+    u32 unk00;           // 0x00
+    ListNode* freeHead;   // 0x04
+    u8 unk08[8];         // 0x08
+    ListNode* sentinel;   // 0x10
+    u32 count;           // 0x14
+};
+
+struct ListIterator {
+    ListNode* node;       // 0x00
+};
 
 extern "C" {
 
-int FUN_002fffbe(int);
+void FUN_002fffbe(void* payload);
 
-/* Supplied declaration required: FUN_002fffbe. */
-
-
-void FUN_0013266e(int *param_1,int param_2,int *param_3)
-
+void FUN_0013266e(ListIterator* result, ListState* list,
+                  ListIterator* position)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar2 = (int *)*param_3;
-  if (piVar2 == *(int **)(param_2 + 0x10)) {
-    *param_1 = (int)*(int **)(param_2 + 0x10);
-    return;
-  }
-  temp_v0 = *piVar2;
-  *(int *)piVar2[1] = *piVar2;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  FUN_002fffbe(*param_3 + 8);
-  puVar1 = (unsigned int *)*param_3;
-  *puVar1 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar1;
-  *param_1 = temp_v0;
-  return;
+    if (list->sentinel == position->node) {
+        result->node = list->sentinel;
+        return;
+    }
+
+    ListNode* next = position->node->next;
+    position->node->previous->next = position->node->next;
+    position->node->next->previous = position->node->previous;
+    --list->count;
+
+    FUN_002fffbe(position->node->payload);
+
+    ListNode* removed = position->node;
+    removed->next = list->freeHead;
+    list->freeHead = removed;
+    result->node = next;
 }
 
-} /* extern "C" */
+} // extern "C"

@@ -1,14 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039aee8` (_code @ 0x39aee8, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct KeyedRecord {
+    /* 0x00 */ u8 unk00[40];
+    /* 0x28 */ u32 value;
+    /* 0x2c */ u8 unk2c[0x11c];
+};
 extern "C" {
-
-
-unsigned int FUN_0039aee8(int param_1)
-
+extern KeyedRecord g_keyedRecords[];
+/* Returns the indexed record's value. */
+u32 FUN_0039aee8(s32 index)
 {
-  return *(unsigned int *)(param_1 * 0x148 + 0x5c6028);
+    return g_keyedRecords[index].value;
 }
-
-} /* extern "C" */
+}

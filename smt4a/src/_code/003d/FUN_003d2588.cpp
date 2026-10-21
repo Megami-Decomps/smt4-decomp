@@ -6,7 +6,7 @@ extern "C" {
 
 int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 int FUN_001a6568(unsigned int, int, int, int);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 
 /* stack frame of param_2: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -25,8 +25,8 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: FUN_001acf98. */
-extern int FUN_00341940(unsigned int);
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
+extern int textureGetIndexedResource(unsigned int);
 
 
 void FUN_003d2588(unsigned int param_1,unsigned int param_2)
@@ -41,7 +41,7 @@ void FUN_003d2588(unsigned int param_1,unsigned int param_2)
   unsigned short temp_v4 [4];
   
   temp_v3 = g_sWin;
-  temp_v0 = FUN_00341940(0x34);
+  temp_v0 = textureGetIndexedResource(0x34);
   if (temp_v0 != 0) {
     *(unsigned int *)(temp_v3 + 0xc) = 0;
     *(unsigned int *)(temp_v3 + 8) = 1;
@@ -60,7 +60,7 @@ void FUN_003d2588(unsigned int param_1,unsigned int param_2)
         FUN_001a6568(g_aocSystem,0x34,temp_v3,0x10000);
         return;
       }
-      FUN_001acf98(0x34,temp_v3);
+      asdTMTexLoadMainHeap(0x34,temp_v3);
       return;
     }
   }

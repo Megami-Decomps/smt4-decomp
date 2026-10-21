@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelSlotSetColor(...);
-int FUN_00263670(...);
+int asdModelSlotSetTint(...);
 int FUN_0026e70c(...);
 int FUN_00297684(void);
 int FUN_002b827c(...);
@@ -59,7 +59,7 @@ int FUN_002a03d8(...);
 int FUN_002a5704(...);
 int resOwnerRunNodeHandlers(...);
 int buttonHelpSetPreset(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002c1658(...);
 int FUN_002c29d8(...);
 int FUN_002cf570(...);
@@ -132,10 +132,10 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 extern int FUN_0025a030(unsigned int);
 /* Supplied declaration required: gfxObjectDestroy. */
 /* Supplied declaration required: asdModelSlotSetColor. */
-/* Supplied declaration required: FUN_00263670. */
+/* Supplied declaration required: asdModelSlotSetTint. */
 /* Supplied declaration required: FUN_002636b0. */
 /* Supplied declaration required: FUN_002636d0. */
-extern int FUN_002636e4(unsigned int);
+extern int effectAreAllCompletionChecksReady(unsigned int);
 extern int effTimelineIsDone(unsigned int);
 /* Supplied declaration required: FUN_0026374c. */
 /* Supplied declaration required: FUN_002637c8. */
@@ -200,7 +200,7 @@ extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -488,7 +488,7 @@ unsigned int FUN_001d99c0(void)
           else {
             pcVar10 = (char *)gameDataGetPlayerName();
           }
-          FUN_002be624(temp_v7,&DAT_003ff040,pcVar10);
+          textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
           FUN_0026374c(temp_v7);
           puVar2[5] = 0;
           scrScriptProcessStartEntry(puVar2[10],
@@ -672,7 +672,7 @@ LAB_001da638:
             FUN_002c1658();
             if (temp_v6 == 0) {
               temp_v6 = effTimelineIsDone(puVar2[puVar2[0x154] + 0xf]);
-              if ((temp_v6 == 0) || (temp_v6 = FUN_002636e4(puVar2[puVar2[0x158] + 0xd]), temp_v6 == 0)
+              if ((temp_v6 == 0) || (temp_v6 = effectAreAllCompletionChecksReady(puVar2[puVar2[0x158] + 0xd]), temp_v6 == 0)
                  ) {
                 temp_v6 = (int)*(float *)(*(int *)(puVar2[puVar2[0x154] + 0xf] + 4) + 0x38);
                 if ((temp_v6 >= 6) && (temp_v2 = FUN_002c2a04(0), temp_v2 == 3)) {
@@ -737,7 +737,7 @@ LAB_001da638:
                 else {
                   pcVar10 = (char *)gameDataGetPlayerName();
                 }
-                FUN_002be624(temp_v7,&DAT_003ff040,pcVar10);
+                textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
                 FUN_0026374c(temp_v7);
                 scrScriptProcessStartEntry(puVar2[10],0x18);
                 puVar2[4] = 5;
@@ -981,7 +981,7 @@ LAB_001dacc8:
       temp_v2 = temp_v2 - 0x3b;
       VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_0026e70c(temp_v2);
-      FUN_00263670(0);
+      asdModelSlotSetTint(0);
       VectorSignedToFloat(puVar2[0x156] - 0x3c,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_0026e70c(puVar2[0x156] - 0x3c);
       asdModelSlotSetColor(0);

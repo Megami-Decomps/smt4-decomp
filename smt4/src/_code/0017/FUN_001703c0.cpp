@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_001704a0; not written yet. */
+/* NON_MATCHING: fragment of a larger function (uses custom decoder registers and a stack frame not established by this unit). */
 #include "common.h"

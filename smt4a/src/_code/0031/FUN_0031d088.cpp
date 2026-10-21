@@ -12,7 +12,7 @@ int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(int);
 int asdOperatorDelete(void);
 
-extern unsigned char DAT_0057f23c; /* 0x57f23c */
+extern unsigned char g_callbackController; /* 0x57f23c */
 
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -32,9 +32,9 @@ void FUN_0031d088(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4));
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4));
   temp_v0 = 0;
-  if (*(short *)((*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4)) + 0x86) != 0) {
+  if (*(short *)((*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4)) + 0x86) != 0) {
     do {
       ifTouchRegionRemove();
       temp_v0 = temp_v0 + 1;
@@ -65,9 +65,9 @@ void FUN_0031d088(void)
   } while (temp_v0 < 0x13);
   asdTMTexTableFreeEntry(0x33);
   jobStop(*puVar1,0);
-  if ((*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4)) != (unsigned int *)0x0) {
+  if ((*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4)) != (unsigned int *)0x0) {
     asdOperatorDelete();
-    (*(unsigned int * *)((unsigned char *)&DAT_0057f23c + 0x4)) = (unsigned int *)0x0;
+    (*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4)) = (unsigned int *)0x0;
   }
   return;
 }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
-int FUN_00162808(...);
+int mathInterpolateTimed(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(int, unsigned int);
@@ -43,9 +43,9 @@ extern int g_aocMain; /* 0x570260 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00162808. */
+/* Supplied declaration required: mathInterpolateTimed. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -58,7 +58,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00473754. */
 /* Supplied declaration required: FUN_00473910. */
 extern int countOwnerIsValidIndex(int, int);
-extern int FUN_004cfb24(unsigned char *, unsigned int);
+extern int curveEvaluateStandard(unsigned char *, unsigned int);
 
 
 void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
@@ -119,10 +119,10 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = temp_v5;
       FUN_00473910(temp_v5,0xb);
       FUN_00473754(temp_v5,temp_v4,temp_v12);
-      FUN_00100388(temp_v11,&LAB_00479ee0,temp_v12);
+      textFormatBuffer(temp_v11,&LAB_00479ee0,temp_v12);
     }
     else {
-      FUN_00100388(temp_v11,&LAB_00479ee4,temp_v3);
+      textFormatBuffer(temp_v11,&LAB_00479ee4,temp_v3);
     }
     temp_v13 = 0xffffffff;
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
@@ -155,7 +155,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
           temp_v4 = temp_v5;
           FUN_00473910(temp_v5,0x69);
           FUN_00473754(temp_v5,temp_v4,temp_v12);
-          FUN_00100388(temp_v11,&LAB_00479ee0,temp_v12);
+          textFormatBuffer(temp_v11,&LAB_00479ee0,temp_v12);
         }
         else {
           temp_v12[0] = 0;
@@ -193,9 +193,9 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x10);
-          FUN_00100388(temp_v11,&LAB_0047a1cc,temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
+          textFormatBuffer(temp_v11,&LAB_0047a1cc,temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
         }
-        temp_v5 = FUN_004cfb24(temp_v11,2);
+        temp_v5 = curveEvaluateStandard(temp_v11,2);
         temp_v4 = FUN_001834a4(0x2f,0x68);
         temp_v5 = ((int)**(short **)(temp_v4 + 0xc) + (int)*(short *)(temp_v4 + 8) + temp_v9) - temp_v5;
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -221,7 +221,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
       if (temp_v4 >= 0xf) {
         temp_v4 = temp_v4 - 0xf;
       }
-      FUN_00162808(0xf,temp_v4);
+      mathInterpolateTimed(0xf,temp_v4);
       efctSetSpeed();
       FUN_00164b5c(2,0x2f,0xe,temp_v9,temp_v8,0x81);
       efctSetSpeed();

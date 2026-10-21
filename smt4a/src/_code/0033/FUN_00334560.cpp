@@ -14,7 +14,7 @@ int FUN_003defe0(void);
 
 extern int g_uiQuest; /* 0x57f28c */
 
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00202400. */
@@ -71,7 +71,7 @@ void FUN_00334560(void)
   }
   uiSpriteSetKeyframe(temp_v5 + 0x34,0);
   uiSpriteSetImageKeyframe(temp_v5 + 0x34,8,0);
-  temp_v5 = FUN_00162858();
+  temp_v5 = campIsState85();
   if (temp_v5 != 0) {
     FUN_00202400();
   }

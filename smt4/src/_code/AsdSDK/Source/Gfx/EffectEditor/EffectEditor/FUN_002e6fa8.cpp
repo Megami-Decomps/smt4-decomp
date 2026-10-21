@@ -5,7 +5,7 @@
 extern "C" {
 
 int effMenuNodeCreate(void);
-int FUN_002be624(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
+int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
 int libc_strcpy(unsigned char *, unsigned char [50]);
 int FUN_002e70e0(unsigned int *, unsigned char [50]);
 int FUN_002f2aa8(void);
@@ -26,7 +26,7 @@ extern unsigned int *DAT_0044eac8; /* 0x44eac8 */
 extern unsigned char DAT_004d8bd0; /* 0x4d8bd0 */
 
 /* Supplied declaration required: effMenuNodeCreate. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e70e0. */
 /* Supplied declaration required: FUN_002f2aa8. */
@@ -68,7 +68,7 @@ unsigned char * FUN_002e6fa8(void)
   }
   else if ((temp_v2 == 1) && (DAT_0044ea94 != 0)) {
     libc_strcpy(&DAT_004d8bd0,temp_v1);
-    FUN_002be624(temp_v3,&LAB_002e70d4,&LAB_002e70b8,temp_v0);
+    textFormatBuffer(temp_v3,&LAB_002e70d4,&LAB_002e70b8,temp_v0);
     puVar2 = &DAT_00400002;
   }
   return puVar2;

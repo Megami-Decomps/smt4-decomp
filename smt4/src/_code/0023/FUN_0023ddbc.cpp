@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: gameFlagSetValue. */
 extern int aocEntryFind(unsigned char, unsigned char);
-extern int FUN_002ba764(unsigned char, unsigned char);
+extern int gameDataGetTableEntry(unsigned char, unsigned char);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_002c0a9c. */
 extern int dataTableGetCount(unsigned int);
@@ -66,7 +66,7 @@ void FUN_0023ddbc(unsigned int param_1,unsigned int param_2)
       if (!temp_v10 || temp_v8 == param_1) {
         temp_v0 = *puVar6;
         temp_v1 = puVar6[1];
-        temp_v5 = FUN_002ba764(temp_v0,temp_v1);
+        temp_v5 = gameDataGetTableEntry(temp_v0,temp_v1);
         temp_v6 = aocEntryFind(temp_v0,temp_v1);
         gameFlagSetValue(param_1,param_2,0);
         temp_v7 = aocEntryFind(temp_v0,temp_v1);

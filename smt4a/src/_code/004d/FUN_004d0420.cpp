@@ -1,25 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0420` (_code @ 0x4d0420, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-int FUN_00152cf8(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00152cf8. */
-
-
-void FUN_004d0420(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  FUN_00152cf8();
-  return;
+u32 FUN_00152cf8(u32 first, u32 second, u32 third, u32 fourth, u32 mode);
+/* Forwards the operation with fixed mode 3. */
+u32 FUN_004d0420(u32 first,u32 second,u32 third,u32 fourth) { return FUN_00152cf8(first,second,third,fourth,3); }
 }
-
-} /* extern "C" */

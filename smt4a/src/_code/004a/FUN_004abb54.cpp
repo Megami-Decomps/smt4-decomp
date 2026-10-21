@@ -1,28 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004abb54` (_code @ 0x4abb54, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+struct BattleScreen {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u8 menu;
+    /* 0x9 */ u8 unk9[9395];
+    /* 0x24BC */ u8 section;
+};
+struct BattleUi {u8 unk00[16];BattleScreen *screen;};
 extern "C" {
-
-int FUN_0039ebcc(void);
-
-extern unsigned char g_btlUi; /* 0x57a9b8 */
-
-extern int menu32ModeIsNot6(int);
-/* Supplied declaration required: FUN_0039ebcc. */
-
-
-void FUN_004abb54(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = menu32ModeIsNot6((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 8);
-  if (temp_v0 != 0) {
-    FUN_0039ebcc();
-  }
-  return;
+extern BattleUi g_btlUi;int menu32ModeIsNot6(void*);int FUN_0039ebcc(void*);
+/* Tests the active menu mode and the section's readiness. */
+int FUN_004abb54(){BattleScreen *screen=g_btlUi.screen;return menu32ModeIsNot6(&screen->menu)!=0 && FUN_0039ebcc(&screen->section)!=0;}
 }
-
-} /* extern "C" */

@@ -8,7 +8,7 @@ int FUN_00295214(int);
 int FUN_0029eb5c(int);
 int uiSpriteSetImageKeyframe(int, int);
 int buttonHelpSetPreset(int);
-int FUN_002be624(int, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(int, unsigned char *, unsigned int, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,14 +18,14 @@ typedef struct {
 extern unsigned char LAB_0029e320; /* 0x29e320 */
 extern unsigned char g_useCounter; /* 0x43dd20 */
 
-extern int FUN_00220d0c(void);
+extern int buttonHelpGetSecondaryState(void);
 extern int FUN_0028d594(void);
 /* Supplied declaration required: FUN_00295214. */
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_002a0d0c(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_002cc2a4(unsigned int);
 
 
@@ -74,12 +74,12 @@ void useCounterStart(void)
   temp_v5 = FUN_0028d594();
   *(char *)(temp_v0 + 0x7f4) = (char)temp_v5;
   if (temp_v5 != 0) {
-    temp_v5 = FUN_00220d0c();
+    temp_v5 = buttonHelpGetSecondaryState();
     *(char *)(temp_v0 + 0x7f5) = (char)temp_v5;
     if (temp_v5 == 0) {
       temp_v2 = FUN_002cc2a4(0);
       temp_v3 = FUN_002cc2a4(1);
-      FUN_002be624(temp_v0 + 0x7f6,&LAB_0029e320,temp_v2,temp_v3);
+      textFormatBuffer(temp_v0 + 0x7f6,&LAB_0029e320,temp_v2,temp_v3);
     }
     FUN_00295214(0);
   }

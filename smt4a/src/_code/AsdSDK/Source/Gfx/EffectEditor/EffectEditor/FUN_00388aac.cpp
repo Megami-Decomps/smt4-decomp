@@ -19,7 +19,7 @@ int FUN_00350a8c(void);
 int FUN_003874ec(...);
 int FUN_00399768(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int padButtonRepeat(...);
 int padButtonIsPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
@@ -29,7 +29,7 @@ int effEditorNodeChainApply(...);
 int FUN_00243ce8(...);
 int effPartCreate(void);
 int rt_memclr(void);
-int FUN_00300778(...);
+int linkedFindItemByIndex(...);
 int nodeChainCount(...);
 int FUN_003ba614(...);
 int rt_memcpy_w(...);
@@ -44,7 +44,7 @@ typedef struct {
 } void_stack;
 
 extern int FUN_00362584(...); /* 0x362584 */
-extern int FUN_00388a70(...); /* 0x388a70 */
+extern int effEditorReleaseResources(...); /* 0x388a70 */
 extern unsigned char LAB_003891d8; /* 0x3891d8 */
 extern unsigned char LAB_003891e4; /* 0x3891e4 */
 extern unsigned char LAB_003891f0; /* 0x3891f0 */
@@ -101,7 +101,7 @@ extern unsigned int DAT_00634ca0; /* 0x634ca0 */
 extern unsigned int uRam00634d04; /* 0x634d04 */
 extern unsigned char DAT_00634d20; /* 0x634d20 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: padButtonRepeat. */
 /* Supplied declaration required: padButtonIsPressed. */
@@ -123,7 +123,7 @@ extern unsigned char *FUN_00200bcc(unsigned char *);
 /* Supplied declaration required: FUN_002b30e4. */
 /* Supplied declaration required: rt_memclr. */
 extern unsigned int FUN_0030061c(int);
-/* Supplied declaration required: FUN_00300778. */
+/* Supplied declaration required: linkedFindItemByIndex. */
 /* Supplied declaration required: FUN_00323bc4. */
 /* Supplied declaration required: nodeChainCount. */
 /* Supplied declaration required: swapSlotExchange. */
@@ -206,7 +206,7 @@ unsigned int FUN_00388aac(void)
 LAB_00388bf0:
     temp_v10 = DAT_0059e9b4 + DAT_0059dbec;
     if (temp_v10 < temp_v2) {
-      temp_v3 = FUN_00300778(DAT_0059dbf4,temp_v10);
+      temp_v3 = linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
       temp_v8 = *(unsigned int *)(temp_v3 + 0x80);
       temp_v4 = padButtonRepeat(4);
       if (temp_v4 == 0) {
@@ -270,13 +270,13 @@ LAB_00388d64:
       temp_v3 = padButtonIsPressed();
       if (temp_v3 != 0) {
         if (temp_v10 < temp_v2) {
-          temp_v3 = FUN_00300778(DAT_0059dbf4,temp_v10);
+          temp_v3 = linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
           *(unsigned int *)(temp_v3 + 0x84) = *(unsigned int *)(temp_v3 + 0x84) ^ 2;
         }
       }
     }
     else if (temp_v10 < temp_v2) {
-      temp_v3 = FUN_00300778(DAT_0059dbf4,temp_v10);
+      temp_v3 = linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
       *(unsigned int *)(temp_v3 + 0x84) = *(unsigned int *)(temp_v3 + 0x84) ^ 2;
     }
   }
@@ -300,7 +300,7 @@ LAB_00388d64:
   temp_v9 = 0;
   if (temp_v9 < temp_v10) {
     do {
-      temp_v15 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + temp_v9);
+      temp_v15 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059dbec + temp_v9);
       temp_v6 = 0;
       do {
         puVar6 = *(unsigned int **)(unaff_r11 + temp_v6 * 4);
@@ -324,10 +324,10 @@ LAB_00388edc:
       temp_v6 = *(unsigned int *)(temp_v15 + 0x84) & 2;
       if ((*(unsigned int *)(temp_v15 + 0x98) & 1) != 0) {
         if (*(short *)(puVar11 + 4) != 0x14) {
-          FUN_00100388(temp_v12,&LAB_003891d8,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          textFormatBuffer(temp_v12,&LAB_003891d8,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         else {
-          FUN_00100388(temp_v12,&LAB_00389208,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          textFormatBuffer(temp_v12,&LAB_00389208,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         temp_v15 = temp_v4 + temp_v9 * 0x18;
         *(unsigned char **)(temp_v15 + 8) = &DAT_0059e8c8;
@@ -341,10 +341,10 @@ LAB_00388edc:
       }
       else {
         if (*(short *)(puVar11 + 4) != 0x14) {
-          FUN_00100388(temp_v12,&LAB_003891e4,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          textFormatBuffer(temp_v12,&LAB_003891e4,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         else {
-          FUN_00100388(temp_v12,&LAB_003891f0,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
+          textFormatBuffer(temp_v12,&LAB_003891f0,temp_v15 + 0x9c,*(unsigned int *)(temp_v15 + 0x80));
         }
         if (*(short *)(puVar11 + 4) == 0) {
           temp_v7 = 0x59e900;
@@ -403,7 +403,7 @@ LAB_00388edc:
   *(unsigned char *)(puVar17 + 1) = 0x1e;
   puVar17[4] = 0;
   puVar17[2] = (unsigned int)FUN_003c3654;
-  puVar17[3] = (unsigned int)FUN_00388a70;
+  puVar17[3] = (unsigned int)effEditorReleaseResources;
   puVar17[5] = temp_v15;
   temp_v12 = temp_v9 + 3;
   *(unsigned char *)(temp_v4 + (temp_v9 + 2) * 0x18 + 4) = 0x18;
@@ -424,7 +424,7 @@ LAB_00388edc:
   puVar6[4] = 0;
   puVar6[5] = temp_v15;
   puVar6[2] = (unsigned int)FUN_003c58c4;
-  puVar6[3] = (unsigned int)FUN_00388a70;
+  puVar6[3] = (unsigned int)effEditorReleaseResources;
   if (temp_v13) {
     puVar6 = (unsigned int *)(temp_v4 + DAT_0059e9c0 * 0x18);
     *puVar6 = (unsigned int)&DAT_0059dc5c;
@@ -581,7 +581,7 @@ LAB_003894e4:
         FUN_003ba614(DAT_0059dbf0,3);
         DAT_0059dbf0 = 0;
       }
-      temp_v3 = FUN_00300778(DAT_0059dbf4,temp_v10);
+      temp_v3 = linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
       temp_v4 = *(int *)(temp_v3 + 0x90);
       FUN_00243c24();
       DAT_0059dc00 = temp_v4;
@@ -687,7 +687,7 @@ LAB_003897fc:
   temp_v10 = DAT_0059e9b4 + DAT_0059dbec;
   temp_v2 = nodeChainCount(DAT_0059dbf4);
   if (temp_v10 < temp_v2) {
-    temp_v4 = FUN_00300778(DAT_0059dbf4,temp_v10);
+    temp_v4 = linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
     temp_v3 = temp_v4;
     FUN_002b30e4();
     if (*(short *)(temp_v3 + 4) == 1) {
@@ -749,7 +749,7 @@ LAB_003898ec:
     temp_v10 = DAT_0059e9b4 + DAT_0059dbec;
     temp_v2 = nodeChainCount(DAT_0059dbf4);
     if (temp_v10 < temp_v2) {
-      puVar17 = (unsigned int *)FUN_00300778(DAT_0059dbf4,temp_v10);
+      puVar17 = (unsigned int *)linkedFindItemByIndex(DAT_0059dbf4,temp_v10);
       puVar6 = puVar17;
       FUN_002b30e4();
       switch(*(unsigned short *)(puVar17[0x24] + 0x1c)) {

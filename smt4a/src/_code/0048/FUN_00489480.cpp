@@ -11,7 +11,7 @@ int FUN_002392b8(...);
 int FUN_002c2d5c(...);
 int FUN_002d22c0(int);
 int FUN_00357a48(void);
-int FUN_00398450(void);
+int lmapEnableSceneState(void);
 int FUN_003d2150(int);
 int rectRecRead(int, int, int *, int *);
 int sub68OwnerGetBlock60(int);
@@ -45,10 +45,10 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c2d5c. */
 /* Supplied declaration required: FUN_002d22c0. */
 extern int lmapSceneGetUnk0(void);
-extern int FUN_0033ded8(void);
+extern int mapIfGetState(void);
 /* Supplied declaration required: FUN_00357a48. */
 extern int gameFlagsClassify(void);
-/* Supplied declaration required: FUN_00398450. */
+/* Supplied declaration required: lmapEnableSceneState. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
@@ -144,7 +144,7 @@ unsigned int FUN_00489480(int param_1)
       }
       if (DAT_005f1a5c != '\0') {
         FUN_002d22c0(0);
-        FUN_00398450();
+        lmapEnableSceneState();
       }
       else {
         FUN_002d22c0(0);
@@ -154,7 +154,7 @@ unsigned int FUN_00489480(int param_1)
       temp_v1 = lmapSceneGetUnk0();
       if ((temp_v1 != 1) && (g_gameState < 100)) {
         if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) &&
-            (temp_v1 = FUN_0033ded8(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
+            (temp_v1 = mapIfGetState(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
           FUN_002392b8(&DAT_00532760);
           dialogOpen(1);
           FUN_002c2d5c(0xffffffff);
@@ -180,7 +180,7 @@ unsigned int FUN_00489480(int param_1)
 LAB_00489788:
     temp_v3 = 1;
   }
-  if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) && (temp_v1 = FUN_0033ded8(), temp_v1 == 0))
+  if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) && (temp_v1 = mapIfGetState(), temp_v1 == 0))
      && (*(char *)(param_1 + 0x65) != '\0')) {
     FUN_002392b8(&DAT_00532760);
     dialogOpen(1);

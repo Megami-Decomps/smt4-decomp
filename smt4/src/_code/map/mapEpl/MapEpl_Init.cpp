@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a3ab0(void);
 int FUN_002a4e98(void);
-int FUN_002be624(unsigned char [44], unsigned char *, char *);
+int textFormatBuffer(unsigned char [44], unsigned char *, char *);
 int asdMemAlloc(int, int, int, int);
 int aocDataTable2dGetEntryKind3(void);
 int VectorSignedToFloat(int, int);
@@ -22,7 +22,7 @@ extern unsigned int *g_mapEpl; /* 0x447a10 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002a3ab0. */
 /* Supplied declaration required: FUN_002a4e98. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemAlloc. */
 extern unsigned int asdLoadFileSync(unsigned char *, unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: aocDataTable2dGetEntryKind3. */
@@ -75,7 +75,7 @@ void MapEpl_Init(int param_1,int param_2)
       pcVar3 = pcVar6;
       aocDataTable2dGetEntryKind3();
       if (((*pcVar3 != -1) && (*pcVar3 == param_1)) && (pcVar3[1] == param_2)) {
-        FUN_002be624(temp_v7,&LAB_001fa668,pcVar3 + 8);
+        textFormatBuffer(temp_v7,&LAB_001fa668,pcVar3 + 8);
         puVar1 = g_mapEpl;
         temp_v0 = 0;
         do {

@@ -1,25 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0051ddf4` (_code @ 0x51ddf4, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: bias load and unsigned-to-float conversion use different VFP registers. */
+#include "common.h"
+struct ValueOwner { u8 unk00[8]; f32 scale,bias; };
 extern "C" {
-
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int *FUN_0051d95c(void);
-
-
-unsigned int FUN_0051ddf4(void)
-
-{
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int in_fpscr;
-  
-  puVar1 = (unsigned int *)FUN_0051d95c();
-  VectorUnsignedToFloat(*puVar1 >> 0xc,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return *puVar1 >> 0xc;
+u32 *FUN_0051d95c(ValueOwner *owner);
+/* Scales and biases the high twenty bits of the current record. */
+f32 FUN_0051ddf4(ValueOwner *owner) { u32 *record=FUN_0051d95c(owner);return owner->bias+(f32)(*record>>12)*owner->scale; }
 }
-
-} /* extern "C" */

@@ -33,7 +33,7 @@ extern int FUN_002626e0(void);
 extern int FUN_003e8244(int, unsigned int);
 extern int valueAtF0IsReady(int);
 extern int FUN_003eaea0(int, int);
-extern unsigned int FUN_003eaf04(int);
+extern unsigned int dataTableCountEntrySet(int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -118,7 +118,7 @@ void FUN_004c3db4(unsigned int *param_1)
           }
         }
         if (temp_v3 < temp_v10) {
-          temp_v2 = FUN_003eaf04(temp_v1);
+          temp_v2 = dataTableCountEntrySet(temp_v1);
           puVar7 = (unsigned int *)(temp_v2 << 2);
           asdOperatorNewD();
           if (0 < (int)temp_v2) {

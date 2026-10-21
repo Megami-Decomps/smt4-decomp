@@ -34,7 +34,7 @@ extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_00427a10. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00427e68. */
-extern int FUN_004287ac(unsigned int, int *, int);
+extern int tokenResolveAddress(unsigned int, int *, int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -55,7 +55,7 @@ void FUN_004293b0(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
   FUN_00427e68(temp_v2,6);
   if (-1 < temp_v2) {
     temp_v3 = FUN_0016ccfc();
-    temp_v2 = FUN_004287ac(temp_v3,&temp_v6,*param_2);
+    temp_v2 = tokenResolveAddress(temp_v3,&temp_v6,*param_2);
     if (-1 < temp_v2) {
       rt_memcpy_w(&DAT_0061b030,temp_v6 + 0x54,0x44);
       switch((char)param_3[1]) {

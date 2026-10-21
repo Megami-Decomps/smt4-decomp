@@ -19,7 +19,7 @@ extern unsigned int DAT_0044ea94; /* 0x44ea94 */
 extern unsigned int *DAT_0044eac4; /* 0x44eac4 */
 extern int DAT_0044f864; /* 0x44f864 */
 
-extern int FUN_002468e0(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: asdMemoryFreeLocked. */
 /* Supplied declaration required: effMenuNodeCreate. */
 /* Supplied declaration required: libc_strcpy. */
@@ -43,7 +43,7 @@ void FUN_0031ea78(void)
   *puVar2 = 0xc2;
   puVar2[1] = 200;
   DAT_0044eac4[5] = 9;
-  temp_v1 = FUN_002468e0(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
+  temp_v1 = linkedFindItemByIndex(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
   puVar2 = DAT_0044eac4;
   libc_strcpy((unsigned char *)((int)DAT_0044eac4 + 0x21));
   temp_v0 = libc_strlen(temp_v1 + 0x9c);

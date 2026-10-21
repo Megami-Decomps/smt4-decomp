@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_0017ffa8(int, int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0017ffa8. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 
 
 void FUN_003482a4(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -25,7 +25,7 @@ void FUN_003482a4(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
   int in_s0;
   
-  FUN_0019d880();
+  jobGetScalarValue();
   if (in_s0 < 0x3f800000) {
     efctSetSpeed();
   }

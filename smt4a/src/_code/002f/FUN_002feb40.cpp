@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
+int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
 int FUN_00362768(unsigned int *, unsigned char [50]);
 int FUN_00375ec8(void);
 int FUN_003762a8(unsigned int *, unsigned char [50]);
@@ -23,7 +23,7 @@ extern unsigned char LAB_00400002; /* 0x400002 */
 extern int DAT_0059dbfc; /* 0x59dbfc */
 extern unsigned int *DAT_0059dc28; /* 0x59dc28 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00362768. */
 /* Supplied declaration required: FUN_00375ec8. */
 /* Supplied declaration required: FUN_003762a8. */
@@ -64,7 +64,7 @@ unsigned char * FUN_002feb40(void)
     puVar2 = (unsigned char *)0x400000;
   }
   else if ((temp_v2 == 1) && (DAT_0059dbfc != 0)) {
-    FUN_00100388(temp_v3,&LAB_002fec5c,&LAB_002fec44,temp_v0);
+    textFormatBuffer(temp_v3,&LAB_002fec5c,&LAB_002fec44,temp_v0);
     puVar2 = &LAB_00400002;
   }
   return puVar2;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001ff8c4(unsigned int, int, unsigned int *);
+int resourceGetPosition(unsigned int, int, unsigned int *);
 int FUN_002b2ae8(unsigned int, int, unsigned int *);
 
 extern unsigned char DAT_00420900; /* 0x420900 */
 
-/* Supplied declaration required: FUN_001ff8c4. */
+/* Supplied declaration required: resourceGetPosition. */
 /* Supplied declaration required: FUN_002b2ae8. */
 
 
@@ -36,7 +36,7 @@ unsigned int * FUN_0034afd4(unsigned int *param_1,unsigned int param_2)
   param_1[0x15] = 0;
   param_1[0x16] = 0;
   param_1[0x17] = 0;
-  FUN_001ff8c4(*(unsigned int *)(param_1[1] + 8),0,param_1 + 0xc);
+  resourceGetPosition(*(unsigned int *)(param_1[1] + 8),0,param_1 + 0xc);
   FUN_002b2ae8(*(unsigned int *)(param_1[1] + 8),0,param_1 + 6);
   param_1[9] = temp_v0;
   param_1[10] = temp_v0;

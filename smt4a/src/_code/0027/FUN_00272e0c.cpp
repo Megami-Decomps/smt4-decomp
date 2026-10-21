@@ -9,7 +9,7 @@ typedef struct SceneState {
     /* 0x68 */ u32 pending;
 } SceneState;
 
-extern SceneState DAT_005f0c7c;
+extern SceneState g_battleViewState;
 
 s32 gameFlagIsSet(u32 flag);
 
@@ -17,8 +17,8 @@ s32 gameFlagIsSet(u32 flag);
 void FUN_00272e0c(u32 value)
 {
     if (gameFlagIsSet(0x4D0)) {
-        DAT_005f0c7c.value = value;
-        DAT_005f0c7c.pending = 0;
+        g_battleViewState.value = value;
+        g_battleViewState.pending = 0;
     }
 }
 

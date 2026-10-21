@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00511428's literal pool; not written yet. */
 #include "common.h"
+
+struct EntryState {
+    /* 0x00 */ s32 value;
+    /* 0x04 */ u8 unk04[2];
+    /* 0x06 */ s8 enabled;
+};
+
+/* Marks both entry state values as unset. */
+extern "C" void FUN_00416378(EntryState *entry)
+{
+    entry->value = -1;
+    entry->enabled = -1;
+}

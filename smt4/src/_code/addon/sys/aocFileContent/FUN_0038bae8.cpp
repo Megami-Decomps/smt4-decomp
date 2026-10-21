@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002baa40(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int rt_memclr(...);
 int asdMemFree(...);
 int asdMemoryAlloc(...);
@@ -24,7 +24,7 @@ extern int FUN_002a12d8(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -81,7 +81,7 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   asdMemoryAlloc(0x100,0x100,0,*(unsigned int *)(param_2 + 0x34));
   *(unsigned int *)(param_2 + 0x20) = temp_v1;
   rt_memclr();
-  FUN_002be624(param_2 + 0x24,"aoc%d:",param_3);
+  textFormatBuffer(param_2 + 0x24,"aoc%d:",param_3);
   return;
 }
 

@@ -9,7 +9,7 @@ int FUN_00240990(...);
 int FUN_0027e6f4(...);
 int FUN_00297468(...);
 int dataTable00FindById(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int memClear(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 
 
@@ -41,7 +41,7 @@ void FUN_00334140(unsigned int *param_1,int param_2)
     temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x1fc0) + temp_v0 * 0x288 + 0xce);
     dataTable00FindById();
     memClear(temp_v2,0x80);
-    FUN_002be624(temp_v2,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v1 + 0x9e),
+    textFormatBuffer(temp_v2,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v1 + 0x9e),
                  *(unsigned char *)(temp_v1 + 0x9f));
     FUN_00297468(temp_v2,(int *)(param_2 + 0x1e88),0);
     *param_1 = 3;

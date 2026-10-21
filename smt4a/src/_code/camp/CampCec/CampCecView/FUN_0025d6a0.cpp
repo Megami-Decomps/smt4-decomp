@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00167c14(...);
 int FUN_0036c7a8(...);
-int FUN_0037b7d8(void);
+int uiGetFloatValue(void);
 int FUN_0039a3b4(...);
 int FUN_003aedc8(...);
 int FUN_003e54b8(...);
@@ -66,7 +66,7 @@ extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: FUN_0036c7a8. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_0037b5e0. */
-/* Supplied declaration required: FUN_0037b7d8. */
+/* Supplied declaration required: uiGetFloatValue. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0039a3b4. */
 /* Supplied declaration required: FUN_0039bb48. */
@@ -745,7 +745,7 @@ LAB_0025e63c:
     temp_v1 = *(int *)(temp_v0 + 8);
   }
   if (temp_v5 != 0 && temp_v1 != 0) {
-    FUN_0037b7d8();
+    uiGetFloatValue();
     FUN_003e54b8(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c));
   }
   return 0;

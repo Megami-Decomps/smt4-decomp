@@ -12,7 +12,7 @@ int FUN_0019de98(...);
 int FUN_002c8550(...);
 int FUN_0034a9c4(...);
 int FUN_0035de50(void);
-int FUN_00493660(...);
+int rectangleInitializeSelection(...);
 int FUN_004a1958(...);
 int FUN_004a3e04(...);
 int FUN_004a6c18(...);
@@ -50,7 +50,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0034a9c4. */
 /* Supplied declaration required: FUN_0035de50. */
-/* Supplied declaration required: FUN_00493660. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: FUN_004a3e04. */
 /* Supplied declaration required: FUN_004a6c18. */
@@ -58,7 +58,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: FUN_004a83f8. */
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int FUN_004cfe4c(int *);
-extern int FUN_004d0040(int *);
+extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: FUN_004d05c4. */
 extern unsigned int *FUN_004d0b3c(void);
 
@@ -96,7 +96,7 @@ void FUN_004a2c00(int *param_1)
   puVar2 = &LAB_004a2ec0;
   taskCreateDraw(&LAB_004a2ec0,0xea,1,0,&LAB_004a7260,0,DAT_0057f0b4,param_1[1]);
   param_1[3] = (int)puVar2;
-  FUN_00493660(param_1 + 0x32,0x140,0,0x14);
+  rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x14);
   temp_v0 = 0x68;
   asdOperatorNew();
   puVar5 = (unsigned int *)0x0;
@@ -109,7 +109,7 @@ void FUN_004a2c00(int *param_1)
   FUN_004a1958(param_1);
   FUN_004a6c18((int)param_1 + 0x96);
   FUN_004a6c50((int)param_1 + 0x96,0);
-  temp_v0 = FUN_004d0040(param_1 + 8);
+  temp_v0 = rangeGetMinimumLimit(param_1 + 8);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {

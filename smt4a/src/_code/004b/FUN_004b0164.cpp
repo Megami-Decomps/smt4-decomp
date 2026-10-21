@@ -13,7 +13,7 @@ int FUN_00184c40(...);
 int FUN_00185dd4(...);
 int FUN_004b457c(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int FUN_001676b0(...);
@@ -65,7 +65,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
@@ -352,11 +352,11 @@ LAB_004b07c8:
       if (temp_v4 != 0) {
         temp_v13 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c9f));
         temp_v8 = FUN_00180114(*(unsigned short *)(temp_v13 + 0x62));
-        FUN_00100388(temp_v31,&LAB_004b0b24,temp_v8);
+        textFormatBuffer(temp_v31,&LAB_004b0b24,temp_v8);
       }
       else {
         temp_v8 = FUN_0015687c();
-        FUN_00100388(temp_v31,&LAB_004b0b24,temp_v8);
+        textFormatBuffer(temp_v31,&LAB_004b0b24,temp_v8);
       }
       temp_v16 = temp_v27[temp_v4];
       temp_v13 = aiStack_110[temp_v4];
@@ -696,7 +696,7 @@ LAB_004b13b4:
                    0x6a);
       temp_v8 = *(unsigned int *)(temp_v5 + 0x43f0);
       FUN_0015f858(temp_v8,0);
-      FUN_00100388(temp_v31,&LAB_004b1788,temp_v8);
+      textFormatBuffer(temp_v31,&LAB_004b1788,temp_v8);
       temp_v11 = FUN_001834a4(temp_v25,0x43);
       VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,
                           (unsigned char)(in_fpscr >> 0x16) & 3);

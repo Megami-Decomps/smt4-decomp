@@ -24,7 +24,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00275bc8. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_003f5268. */
 /* Supplied declaration required: FUN_003f5bd8. */
 
@@ -46,7 +46,7 @@ void FUN_003f5904(int param_1)
     temp_v1 = *(int *)(param_1 + 0x2c);
   }
   if (((!temp_v5 || temp_v1 == 0) || (*(int *)(param_1 + 0x30) == 0)) ||
-     (temp_v1 = FUN_00341940(0x31), temp_v1 == 0)) {
+     (temp_v1 = textureGetIndexedResource(0x31), temp_v1 == 0)) {
     return;
   }
   temp_v1 = 0;

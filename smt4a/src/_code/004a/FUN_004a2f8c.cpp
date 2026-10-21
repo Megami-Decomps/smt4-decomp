@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(void);
 int FUN_0023ac54(int, unsigned short *);
 int FUN_003343f0(int);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int FUN_0035deb0(void);
 int FUN_004a1958(int);
 int screen4AEnter(int);
@@ -41,7 +41,7 @@ extern int gameDataCopySaveEntry(unsigned short, unsigned short *);
 /* Supplied declaration required: FUN_0023ac54. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: FUN_0035deb0. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: screen4AEnter. */
@@ -120,7 +120,7 @@ void FUN_004a2f8c(int param_1)
       }
       FUN_004a1958(param_1);
     }
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
     FUN_003343f0(0);
     if (*(short *)(param_1 + 0x864) < 1) {

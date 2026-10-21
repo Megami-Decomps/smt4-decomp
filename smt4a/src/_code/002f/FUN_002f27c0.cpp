@@ -1,25 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f27c0` (_code @ 0x2f27c0, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different stack-frame allocation and instruction scheduling. */
+#include "common.h"
 extern "C" {
-
-extern int FUN_002eabfc(void);
-
-
-int FUN_002f27c0(int param_1,unsigned char *param_2)
-
-{
-  int temp_v0;
-  
-  temp_v0 = FUN_002eabfc();
-  if (temp_v0 != 0) {
-    *(unsigned char *)(*(int *)(param_1 + 8) + temp_v0) = *param_2;
-  }
-  else {
-    *(unsigned char *)(param_1 + 0xc) = *param_2;
-  }
-  return param_1;
+struct Object { u8 unk00[8]; u8 *values; u8 fallback; };
+s32 FUN_002eabfc(void);
+/* Writes the selected indexed byte, or the fallback byte if none is selected. */
+Object *FUN_002f27c0(Object *object, const u8 *value) {
+    s32 index = FUN_002eabfc();
+    if (index != 0) object->values[index] = *value;
+    else object->fallback = *value;
+    return object;
 }
-
-} /* extern "C" */
+}

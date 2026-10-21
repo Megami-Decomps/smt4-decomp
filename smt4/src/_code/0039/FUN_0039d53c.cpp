@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231420(int, int, int, int);
+int effectForwardModeOne(int, int, int, int);
 int FUN_00231434(int, int, int *, int *, int *, int *);
 int FUN_002319c0(void);
 int FUN_003c2e0c(int *, unsigned int [2]);
@@ -21,7 +21,7 @@ typedef struct {
 extern signed char DAT_0049f934; /* 0x49f934 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00231420. */
+/* Supplied declaration required: effectForwardModeOne. */
 /* Supplied declaration required: FUN_00231434. */
 /* Supplied declaration required: FUN_002319c0. */
 /* Supplied declaration required: FUN_003c2e0c. */
@@ -47,7 +47,7 @@ unsigned int FUN_0039d53c(int param_1)
   
   if ((*(unsigned int *)(param_1 + 0x10) & 0x2000000) == 0) {
     FUN_00231434(0x1c,0xfa4,&temp_v4,&uStack_24,&uStack_20,&uStack_1c);
-    FUN_00231420(temp_v4,uStack_24,uStack_20,uStack_1c);
+    effectForwardModeOne(temp_v4,uStack_24,uStack_20,uStack_1c);
     if ((temp_v4 == 0) || (DAT_0049f934 != '\0')) {
       temp_v0 = *(unsigned int *)(param_1 + 0x10);
       if ((temp_v0 & 0x10000) != 0) {

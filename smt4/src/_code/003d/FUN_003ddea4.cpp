@@ -1,28 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ddea4` (_code @ 0x3ddea4, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail uses different paired comparisons, array stride arithmetic or initialization ordering. */
+#include "common.h"
+struct ReflectEntry {
+    u32 unk00;
+    u8 mode;
+    u8 padding5[0x13];
+    u32 second;
+    u8 padding1c[0xc];
+    u32 first;
+};
 extern "C" {
-
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-void FUN_003ddea4(short param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+extern ReflectEntry *g_btlActionReflect;
+ReflectEntry *FUN_0022699c(ReflectEntry *state, s16 slot, u32 mode, u32 extra);
+/* Stores both parameters in the selected reflection mode. */
+void FUN_003ddea4(s32 slot, u32 extra, u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x2a;
-  *(unsigned int *)(temp_v0 + 0x28) = param_4;
-  *(unsigned int *)(temp_v0 + 0x18) = param_3;
-  return;
+    ReflectEntry *entry = FUN_0022699c(g_btlActionReflect, (s16)slot, 0, extra);
+    entry->mode = 42;
+    entry->first = second;
+    entry->second = first;
 }
-
-} /* extern "C" */
+}

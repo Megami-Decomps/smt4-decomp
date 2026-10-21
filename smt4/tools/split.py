@@ -141,7 +141,8 @@ def literal_pools(entry, code, thumb):
     order, so a pool word is data when the scan reaches it and is not decoded. A PC-relative
     ADD/ADR addresses a string literal armcc placed among the pools (C code takes no address of a
     label): data up to its NUL, rounded up to the word. `end` is where the bytes end once every
-    pool they read is counted (past `code` when a load reads a pool behind it)."""
+    pool they read and every string they address is counted (past `code` when one lies behind it;
+    a string not ended inside `code` asks for one more word)."""
     length = len(code)
     skew = entry % 4
     data, ranges, words, addressed = set(), [], [], []
@@ -221,11 +222,18 @@ def literal_pools(entry, code, thumb):
             elif switch_table(code, at):  # LDR PC, [PC, Rm, LSL #2]: the case table follows the B default
                 table, count = switch_table(code, at)
                 read(table, count * 4, False)
+    word_end = lambda offset: offset + (4 - (offset + skew) % 4) % 4   # up to the next word of the image
     for to in addressed:
-        stop = code.find(b"\0", to) if 0 <= to < length else -1
-        if stop >= 0:
-            stop += 1
-            ranges.append((to, min(length, stop + (4 - (stop + skew) % 4) % 4)))
+        if to >= length:
+            if to < length + 4096:
+                reach = max(reach, word_end(to + 1))
+            continue
+        stop = code.find(b"\0", to) if to >= 0 else -1
+        if stop < 0:
+            reach = max(reach, word_end(length + 1))
+            continue
+        stop += 1
+        ranges.append((to, min(length, stop + (4 - (stop + skew) % 4) % 4)))
     merged = []
     for start, end in sorted(ranges):
         if merged and start <= merged[-1][1]:
@@ -340,6 +348,27 @@ class Strings:
         return at
 
 
+def reads_tail(code, pools, start):
+    """Whether an A32 VLDR or ADR (ADD Rd, PC, #imm) before `start` reads at or past it."""
+    for at in range(0, start - 3, 4):
+        if any(low <= at < high for low, high in pools):
+            continue
+        word = struct.unpack_from("<I", code, at)[0]
+        if word >> 28 == 0xF:
+            continue
+        if word & 0x0F3F0E00 == 0x0D1F0A00:
+            offset = (word & 0xFF) * 4
+            to = at + 8 + offset if word >> 23 & 1 else at + 8 - offset
+        elif word & 0x0FFF0000 == 0x028F0000:
+            rotate = (word >> 8 & 0xF) * 2
+            to = at + 8 + (((word & 0xFF) >> rotate | (word & 0xFF) << (32 - rotate)) & 0xFFFFFFFF if rotate else word & 0xFF)
+        else:
+            continue
+        if to >= start:
+            return True
+    return False
+
+
 def arm_attributes():
     """`.ARM.attributes`: Tag_CPU_name, Tag_CPU_arch, Tag_ARM_ISA_use, Tag_THUMB_ISA_use, Tag_FP_arch."""
     name, arch, fp = CPU
@@ -348,11 +377,14 @@ def arm_attributes():
     return b"A" + struct.pack("<I", 4 + len(vendor)) + vendor
 
 
-def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=None, analysed_size=None, weak=()):
+def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=None, analysed_size=None, weak=(),
+                 space=False, symbol_size=None):
     """ELF32 ARM relocatable object holding `code` as the function `name`: `.text`, `.rel.text`,
     `.ARM.attributes`, `.symtab` (section symbol, `$a`/`$t`/`$d` mapping symbols, local symbols, the
     function, undefined callees), `.strtab`, `.shstrtab`. `local_symbols`: {key a relocation names:
-    (symbol name, offset)}, e.g. armcc's `__switch$$` that a switch table's words are relative to."""
+    (symbol name, offset)}, e.g. armcc's `__switch$$` that a switch table's words are relative to.
+    `space`: the function is compiled at -Ospace (its symbol size rule differs); `symbol_size`: the
+    function symbol's size as armcc gave it, when rebuilding a compiled object."""
     local_symbols = local_symbols or {}
     strtab, shstr = Strings(), Strings()
     symbols = [(0, 0, 0, 0, 0), (0, 3, 1, 0, 0)]  # name, info, shndx, value, size
@@ -370,12 +402,18 @@ def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=Non
         symbols.append((strtab.add(local_name), 0x02, 1, value, 0))  # STB_LOCAL, STT_FUNC
     first_global = len(symbols)
     function = strtab.add(name)
-    # A pool that ends the section follows the function's last instruction outside its symbol.
+    # A pool that ends the section follows the function's last instruction outside its symbol, unless
+    # a VLDR reads it or an ADR addresses a string in it: armcc's symbol then spans the section (at
+    # -Otime; at -Ospace it stops before the pool all the same).
     size = pools[-1][0] if pools and pools[-1][1] == len(code) else len(code)
+    if not thumb and not space and size < len(code) and reads_tail(code, pools, size):
+        size = len(code)
     # A Thumb function's pool is word-aligned: the 0x0000 halfword padding before it is not code
     # (armcc's symbol stops before it, as the analysed size does).
     if thumb and analysed_size == size - 2 and code[size - 2:size] == b"\0\0":
         size = analysed_size
+    if symbol_size is not None:
+        size = symbol_size
     symbols.append((function, 0x12, 1, 1 if thumb else 0, size))
     index_of = {}
     for _, symbol, _ in relocs:
@@ -455,8 +493,9 @@ class Module:
             return self.objects.get(value, f"DAT_{value:08x}")
         return None
 
-    def target_object(self, address, attributes):
-        """The object bytes of the function at `address`, or None when it has none."""
+    def target_object(self, address, attributes, space=False):
+        """The object bytes of the function at `address`, or None when it has none. `space`: the
+        unit is compiled at -Ospace."""
         name, size, thumb = self.functions[address]
         if not 0 < size <= MAX_FUNCTION_BYTES:
             return None
@@ -470,15 +509,16 @@ class Module:
             return None
         low, high = address, address + size
         pools, words, end = literal_pools(address, code, thumb)
-        # The pool a function's loads read follows its last instruction and belongs to its object:
-        # take it in when it ends before the next function.
+        # The pools a function's loads read and the strings it addresses follow its last instruction
+        # and belong to its object: take them in while they end before the next function.
         following = bisect.bisect_right(self.starts, address)
         following = self.starts[following] if following < len(self.starts) else None
-        if end > len(code) and (following is None or address + end <= following):
+        while end > len(code) and (following is None or address + end <= following):
             longer = self.program.read(address, end)
-            if longer is not None:
-                code = longer
-                pools, words, end = literal_pools(address, code, thumb)
+            if longer is None:
+                break
+            code = longer
+            pools, words, end = literal_pools(address, code, thumb)
         # A jump inside the function is control flow; a call to its own entry is recursion (a call
         # past its last instruction, in the pool area taken in above, is not part of the function).
         branches = [(origin, to, self.names[to]) for origin, to, links in direct_branches(address, code, thumb, pools)
@@ -512,7 +552,7 @@ class Module:
                         struct.pack_into("<I", code, entry, (value - (address + at + 4)) & 0xFFFFFFFF)
                         relocs.append((entry, key, 2))  # R_ARM_ABS32
         relocs.sort(key=lambda r: r[0])
-        return build_object(name, bytes(code), thumb, relocs, pools, attributes, local_symbols, size)
+        return build_object(name, bytes(code), thumb, relocs, pools, attributes, local_symbols, size, space=space)
 
 
 def main():
@@ -564,7 +604,7 @@ def main():
                 print(f"{unit['target']}: no function at {address:#x} in {module['symbols']}; skipped", file=sys.stderr)
                 skipped += 1
                 continue
-            body = built.target_object(address, attributes)
+            body = built.target_object(address, attributes, "-Ospace" in unit.get("cflags", ()))
             if body is None:
                 skipped += 1
                 continue

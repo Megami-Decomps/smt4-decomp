@@ -1,30 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff380` (_code @ 0x2ff380, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldr r6, [r0, #4]'; compiler emits 'ldr r6, [r0, #0]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-extern int rangeIsEmpty2(void);
-extern int FUN_002eb414(int, int, int);
-
-
-void FUN_002ff380(int *param_1)
-
-{
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1[1];
-  temp_v1 = *param_1;
-  temp_v0 = rangeIsEmpty2();
-  if (temp_v0 == 0) {
-    temp_v0 = FUN_002eb414(temp_v2,param_1[1],temp_v1);
-    for (; temp_v0 != param_1[1]; temp_v0 = temp_v0 + 4) {
+struct Range {
+    u32 *begin,*end;
+};
+s32 rangeIsEmpty2(Range *);
+u32 *FUN_002eb414(Range *,u32 *,u32 *);
+void FUN_002ff380(Range *range) {
+    u32 *begin=range->begin,*end=range->end;
+    if(!rangeIsEmpty2(range)) {
+        begin=FUN_002eb414(range,begin,end);
+        range->end=begin;
     }
-    param_1[1] = param_1[1] - ((temp_v2 - temp_v1) & 0xfffffffcU);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

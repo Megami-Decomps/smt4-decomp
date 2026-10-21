@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001dbc5c(unsigned int);
-int FUN_001eb7f8(...);
+int jobGetScalarFrame(...);
 int jobIsValid(...);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
@@ -14,7 +14,7 @@ typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001dbc5c. */
-/* Supplied declaration required: FUN_001eb7f8. */
+/* Supplied declaration required: jobGetScalarFrame. */
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: jobIsValid. */
 extern int jobGetWork(void);
@@ -53,9 +53,9 @@ unsigned int FUN_002cf954(void)
       temp_v6 = temp_v1 + temp_v5 * 4;
       if (*(int *)(temp_v6 + 0x608) != 0) {
         if (*(int *)(temp_v6 + 0x60c) != 0) {
-          FUN_001eb7f8();
+          jobGetScalarFrame();
           temp_v7 = in_s0;
-          FUN_001eb7f8(*(unsigned int *)(temp_v6 + 0x60c));
+          jobGetScalarFrame(*(unsigned int *)(temp_v6 + 0x60c));
           if (in_s0 < temp_v7) {
             temp_v0 = 1;
             temp_v3 = *(unsigned int *)(temp_v6 + 0x608);

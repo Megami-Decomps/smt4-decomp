@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: memAlloc. */
 extern int FUN_0025cc50(int);
 /* Supplied declaration required: FUN_00271f24. */
-extern unsigned int FUN_0037a7f4(void);
+extern unsigned int textureCreateFromImage(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -59,7 +59,7 @@ unsigned int * FUN_00221f20(int *param_1)
           *(int *)(piVar5[5] + temp_v2 * 4) = temp_v4;
         }
         else {
-          temp_v1 = FUN_0037a7f4();
+          temp_v1 = textureCreateFromImage();
           *(unsigned int *)(piVar5[5] + temp_v2 * 4) = temp_v1;
         }
         temp_v2 = temp_v2 + 1;

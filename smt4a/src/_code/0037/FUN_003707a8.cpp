@@ -9,7 +9,7 @@ int FUN_00167f24(...);
 int jyoucyuGetTableEntry(int);
 int FUN_00180118(unsigned int);
 int FUN_00184310(...);
-int FUN_00237898(...);
+int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int eventTexSetJobParam(void);
@@ -39,7 +39,7 @@ extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: eventTexSetJobParam. */
@@ -146,7 +146,7 @@ unsigned int FUN_003707a8(void)
     temp_v1 = dataTableValueOrZero(0x1e);
     FUN_00167f24(0x15);
     temp_v7[0] = 0;
-    FUN_00237898(temp_v1,0x38,DAT_00588008,6);
+    messageForwardDefaultMode(temp_v1,0x38,DAT_00588008,6);
     DAT_00588008 = DAT_00588008 + 1;
     if (temp_v1 == 1) {
       scrWorkSetValue(0,10);

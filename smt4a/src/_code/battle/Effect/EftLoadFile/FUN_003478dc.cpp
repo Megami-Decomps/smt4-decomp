@@ -11,7 +11,7 @@ int FUN_0023aa8c(...);
 int FUN_0023aac8(...);
 int FUN_0023aca0(...);
 int sysMemClear(void);
-int FUN_002efbb8(...);
+int keyedCopyPayload(...);
 int libc_strcmp(int, unsigned char *);
 int FUN_00389cf0(...);
 int FUN_003b6728(...);
@@ -69,7 +69,7 @@ extern unsigned char LAB_003480c4; /* 0x3480c4 */
 /* Supplied declaration required: FUN_0023aca0. */
 extern int wstrlen(int);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002efbb8. */
+/* Supplied declaration required: keyedCopyPayload. */
 /* Supplied declaration required: libc_strcmp. */
 extern unsigned int FUN_0031b53c(int);
 /* Supplied declaration required: FUN_00389cf0. */
@@ -505,7 +505,7 @@ LAB_00347c88:
   }
   FUN_00389cf0(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
   FUN_003b6728(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
-  FUN_002efbb8(temp_v49,param_2 + 0x14);
+  keyedCopyPayload(temp_v49,param_2 + 0x14);
   FUN_0023aac8(temp_v49,temp_v47);
   FUN_0023aca0(temp_v49,&temp_v23);
   FUN_0023aa50(temp_v49,&temp_v31);

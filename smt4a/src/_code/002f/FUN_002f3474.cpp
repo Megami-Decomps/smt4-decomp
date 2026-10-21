@@ -1,20 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3474` (_code @ 0x2f3474, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler schedules the virtual callback load before the embedded-object argument adjustment. */
+#include "common.h"
 extern "C" {
-
-typedef int romwright_code(...);
-
-void FUN_002f3474(int param_1,int param_2,int param_3)
-
-{
-  *(unsigned int *)(param_2 + 0xc) = *(unsigned int *)(param_1 + 4);
-  if (param_3 != 0) {
-    (*(romwright_code *)**(unsigned int **)(param_2 + 0x10))(param_2 + 0x10);
-  }
-  *(int *)(param_1 + 4) = param_2;
-  return;
+struct Shared;
+struct Member { void (**vtable)(Member *); };
+struct Shared { u8 unk00[0x0C]; Shared *previous; Member member; };
+struct Holder { u32 unk00; Shared *object; };
+/* Installs the replacement and optionally invokes its embedded callback. */
+void FUN_002f3474(Holder *holder, Shared *replacement, u32 invoke) {
+    replacement->previous = holder->object;
+    if (invoke != 0) replacement->member.vtable[0](&replacement->member);
+    holder->object = replacement;
 }
-
-} /* extern "C" */
+}

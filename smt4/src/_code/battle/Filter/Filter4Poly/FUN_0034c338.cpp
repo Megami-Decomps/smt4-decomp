@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023e3ec(int, unsigned int);
+int resourceApplyNodeFlag(int, unsigned int);
 int asdTMTexTableLoadEntryAsync(int, unsigned int);
 int asdTMTexTableLoadEntryAsyncB(int, unsigned int);
 int mtx44Copy(int, unsigned int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0023e3ec. */
+/* Supplied declaration required: resourceApplyNodeFlag. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsyncB. */
 extern unsigned int FUN_002a7bc0(void);
@@ -45,7 +45,7 @@ void FUN_0034c338(int *param_1,int param_2,unsigned int param_3)
   do {
     if ((param_3 & 8) != 0) {
       temp_v1 = 0x16;
-      FUN_0023e3ec(0x16,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
+      resourceApplyNodeFlag(0x16,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
       *(unsigned int *)(param_1[6] + temp_v2 * 0x44 + 0x40) = temp_v1;
     }
     else if ((param_3 & 0x40) != 0) {

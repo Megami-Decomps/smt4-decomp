@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [76], unsigned char *, int);
+int textFormatBuffer(unsigned char [76], unsigned char *, int);
 int FUN_00162790(int, int, int, int);
 int efctSetSpeed(void);
 int FUN_0018408c(int, int);
@@ -30,7 +30,7 @@ extern unsigned char LAB_003f78ec; /* 0x3f78ec */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -108,7 +108,7 @@ void FUN_003f7674(int param_1,int param_2,int param_3)
   FUN_00162790(3,0xff,temp_v4,temp_v3);
   temp_v2 = param_1;
   FUN_003f74a8(param_1,*(int *)(param_1 + 0x5e0));
-  FUN_00100388(temp_v6,&LAB_003f78ec,temp_v2);
+  textFormatBuffer(temp_v6,&LAB_003f78ec,temp_v2);
   FUN_003f757c(param_1,param_2,param_3,0xd8,temp_v6,0x4b,0x4a,1,0);
   temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x5e0) + 2);
   if (temp_v0 >> 8 == 10) {

@@ -11,7 +11,7 @@ extern unsigned int g_btlEffect; /* 0x5737f0 */
 /* Supplied declaration required: btlGetMainState. */
 extern int libc_strncmp(int, unsigned int, unsigned int);
 extern unsigned int wstrlen(unsigned int);
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 extern int FUN_004f59b0(int);
 
 
@@ -26,7 +26,7 @@ int FUN_004f9d44(int param_1)
   int *piVar5;
   
   btlGetMainState();
-  temp_v0 = FUN_003e8430();
+  temp_v0 = btlScriptUnitHasFlags();
   if (temp_v0 != 0) {
     temp_v0 = -1;
   }

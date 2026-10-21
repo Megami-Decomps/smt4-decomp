@@ -15,7 +15,7 @@ int asdOperatorDelete(void);
 int FUN_00348d7c(unsigned int);
 int loadSlotRequestAsync(int, int);
 
-extern signed char DAT_0057f23c; /* 0x57f23c */
+extern signed char g_callbackController; /* 0x57f23c */
 extern unsigned int *DAT_0057f240; /* 0x57f240 */
 
 /* Supplied declaration required: jobStop. */
@@ -49,7 +49,7 @@ unsigned int FUN_0035cb1c(void)
     temp_v0 = loadSlotIsLoaded(0x46);
     if (temp_v0 == 0) {
       loadSlotRequestAsync(0x46,0);
-      DAT_0057f23c = '\x01';
+      g_callbackController = '\x01';
     }
     FUN_00348d7c(temp_v1);
   }
@@ -57,9 +57,9 @@ unsigned int FUN_0035cb1c(void)
     temp_v1 = 0;
   }
   else {
-    if (DAT_0057f23c != '\0') {
+    if (g_callbackController != '\0') {
       dataTableFree(0x46);
-      DAT_0057f23c = '\0';
+      g_callbackController = '\0';
     }
     puVar1 = DAT_0057f240;
     temp_v0 = 0;

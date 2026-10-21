@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162808(int, int);
+int mathInterpolateTimed(int, int);
 int efctSetSpeed(void);
 int FUN_0017ffa8(int, int, unsigned int, int);
 int FUN_001835b4(...);
@@ -44,7 +44,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00162808. */
+/* Supplied declaration required: mathInterpolateTimed. */
 extern int jobGetWork(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -263,11 +263,11 @@ unsigned int FUN_002394a8(void)
                             if ((temp_v8 >= temp_v23[5]) && (temp_v23[6] > temp_v8)) {
                               temp_v4 = temp_v8 - temp_v23[5];
                               temp_v1 = temp_v23[2];
-                              FUN_00162808(temp_v1,temp_v4);
+                              mathInterpolateTimed(temp_v1,temp_v4);
                             }
                           }
                           else {
-                            FUN_00162808(temp_v1,temp_v4);
+                            mathInterpolateTimed(temp_v1,temp_v4);
                           }
                           goto LAB_00239938;
                         }

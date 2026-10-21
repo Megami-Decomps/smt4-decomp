@@ -65,7 +65,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -193,7 +193,7 @@ void FUN_00366e24(void)
             }
             else {
               temp_v2 = padButtonIsPressed(5);
-              if ((temp_v2 != 0) || (temp_v2 = FUN_004d0554(), temp_v2 != 0)) {
+              if ((temp_v2 != 0) || (temp_v2 = inputIsQuestMenuPressed(), temp_v2 != 0)) {
                 temp_v2 = DAT_005806a4;
                 *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v2 + 0xb0) = 0;

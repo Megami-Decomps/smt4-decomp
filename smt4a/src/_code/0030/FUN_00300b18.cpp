@@ -1,36 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00300b18` (_code @ 0x300b18, 0x2e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r5, r1'; compiler emits 'mov r4, r1' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_002f3b58(unsigned int, int, unsigned int);
-
-extern unsigned char DAT_0055a954; /* 0x55a954 */
-
-extern unsigned int FUN_0012425a(void);
-extern int FUN_002ecf28(void);
-/* Supplied declaration required: FUN_002f3b58. */
-extern unsigned int *FUN_003054a4(unsigned int, unsigned int);
-
-
-unsigned int * FUN_00300b18(unsigned int param_1,int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  puVar1 = (unsigned int *)FUN_003054a4(param_1,1);
-  *puVar1 = (unsigned int)&DAT_0055a954;
-  if (param_2 != 0) {
-    *(short *)(puVar1 + 8) = (short)param_2;
-    temp_v0 = FUN_0012425a();
-    temp_v1 = FUN_002ecf28();
-    FUN_002f3b58(*(unsigned int *)(temp_v1 + 0xc),param_2,temp_v0);
-  }
-  return puVar1;
+extern const u8 DAT_0055a954;
+struct Object {
+    const void *vtable;
+    u8 pad[4];
+    u16 kind;
+};
+Object *FUN_003054a4(void *,u32);
+u32 FUN_0012425a();
+struct Context {
+    u8 pad[12];
+    void *work;
+};
+Context *FUN_002ecf28();
+void FUN_002f3b58(void *,s32,u32);
+Object *FUN_00300b18(void *storage,s32 kind) {
+    Object *object=FUN_003054a4(storage,1);
+    object->vtable=&DAT_0055a954;
+    if(kind) {
+        object->kind=kind;
+        u32 mode=FUN_0012425a();
+        FUN_002f3b58(FUN_002ecf28()->work,kind,mode);
+    }
+    return object;
 }
-
-} /* extern "C" */
+}

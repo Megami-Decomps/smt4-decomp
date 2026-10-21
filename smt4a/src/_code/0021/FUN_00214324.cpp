@@ -8,7 +8,7 @@ int npcRoomDestroy(void);
 int FUN_003423cc(...);
 int gameFlagSetValue(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdSequenceRequest(...);
 int jobStop(unsigned int, int);
 int FUN_001656e0(...);
@@ -55,7 +55,7 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_001656e0. */
@@ -314,11 +314,11 @@ LAB_002146c0:
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < (int)puVar2[0x39]);
     }
-    FUN_00100388(&temp_v8,&LAB_00214b8c,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
+    textFormatBuffer(&temp_v8,&LAB_00214b8c,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
     FUN_0020214c();
     puVar2[0x16] = (unsigned int)puVar4;
-    FUN_00100388(&temp_v8,&LAB_00214ba8,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
+    textFormatBuffer(&temp_v8,&LAB_00214ba8,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
     FUN_0020214c();
     puVar2[0x17] = (unsigned int)puVar5;

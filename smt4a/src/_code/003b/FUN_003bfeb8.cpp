@@ -1,31 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bfeb8` (_code @ 0x3bfeb8, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail parameter lifetime, address formation or grouped-store selection differs. */
+#include "common.h"
 
+struct EffectEditorState {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ void *current;
+};
 extern "C" {
-
-int FUN_00272204(unsigned int, unsigned int [2], int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char LAB_00400002; /* 0x400002 */
-extern unsigned char g_effectEditor; /* 0x59dbe0 */
-
-/* Supplied declaration required: FUN_00272204. */
-
-
-unsigned char * FUN_003bfeb8(void)
-
+extern EffectEditorState g_effectEditor;
+void FUN_00272204(void *entry, u32 *value, u32 size, u32 mode, u32 reserved);
+/* Clears the current effect entry's scalar value. */
+u32 FUN_003bfeb8()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0 [2];
-  
-  temp_v0[0] = 0;
-  FUN_00272204((*(unsigned int *)((unsigned char *)&g_effectEditor + 0x1c)),temp_v0,4);
-  return &LAB_00400002;
+    u32 value = 0;
+    FUN_00272204(g_effectEditor.current, &value, 4, 4, 0);
+    return 0x400002;
 }
-
-} /* extern "C" */
+}

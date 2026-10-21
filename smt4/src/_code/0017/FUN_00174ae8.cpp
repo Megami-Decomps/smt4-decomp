@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: called by FUN_00174834; not written yet. */
+/* NON_MATCHING: fragment of a larger function (custom-register decoder entry clobbers r4-r9 and dispatches into neighbouring fragments). */
 #include "common.h"

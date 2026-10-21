@@ -1,2 +1,6 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_002367c0's literal pool; not written yet. */
 #include "common.h"
+
+/* This optional callback has no work to perform. */
+extern "C" void FUN_00380a48()
+{
+}

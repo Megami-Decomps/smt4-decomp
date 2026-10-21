@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00269bd0(int, unsigned int);
+int randomGetUpperSixBits(int, unsigned int);
 int FUN_00269bf0(void);
 int FUN_002bd06c(unsigned int);
 int libc_strcpy(unsigned short *, unsigned int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00269bd0. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: FUN_00269bf0. */
 extern int FUN_00295c60(unsigned short, unsigned char);
 extern int FUN_0029c8f4(int);
@@ -92,7 +92,7 @@ void FUN_0024d7d0(unsigned short *param_1,int param_2)
   }
   do {
     temp_v3 = param_2;
-    FUN_00269bd0(param_2,temp_v4 & 0xff);
+    randomGetUpperSixBits(param_2,temp_v4 & 0xff);
     temp_v5 = temp_v4 + 1;
     *(char *)((int)param_1 + temp_v4 + 0x32) = (char)temp_v3;
     temp_v4 = temp_v5;

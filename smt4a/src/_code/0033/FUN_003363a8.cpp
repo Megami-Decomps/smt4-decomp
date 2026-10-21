@@ -22,7 +22,7 @@ extern unsigned int DAT_00573ba8; /* 0x573ba8 */
 extern unsigned int DAT_00573bac; /* 0x573bac */
 
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -30,7 +30,7 @@ extern int FUN_00167f08(void);
 /* Supplied declaration required: FUN_0020acd8. */
 /* Supplied declaration required: FUN_0020ad6c. */
 /* Supplied declaration required: FUN_0021a9e8. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
@@ -51,7 +51,7 @@ void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigne
     } while (temp_v0 < 6);
     if (*(char *)(param_1 + 0x38b4) == '\0') {
       btlGetMainState();
-      temp_v0 = FUN_003e8430();
+      temp_v0 = btlScriptUnitHasFlags();
       if ((temp_v0 == 0) &&
          (temp_v0 = btlGetMainState(),
          (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573ba8) == 0 &&
@@ -72,10 +72,10 @@ void FUN_003363a8(int param_1,unsigned int param_2,unsigned char param_3,unsigne
       }
       FUN_0019de98(0,0xf4f4f4ff);
       FUN_0020ad6c(param_1,0x28,1);
-      temp_v0 = FUN_00167f08();
+      temp_v0 = ifTouchGetButtonHelpValue();
       if (temp_v0 != 0x3f) {
         btlGetMainState();
-        temp_v0 = FUN_003e8430();
+        temp_v0 = btlScriptUnitHasFlags();
         if (temp_v0 != 0) {
           sysPlaySe(0x3f);
           return;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00128174(void);
 int FUN_002a84e8(void);
 int FUN_002ad888(void);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int FUN_002bb5a4(unsigned int, unsigned int, int);
 int FUN_002bb648(void);
 int SBORROW4(...);
@@ -18,7 +18,7 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_00128174. */
 /* Supplied declaration required: FUN_002a84e8. */
 /* Supplied declaration required: FUN_002ad888. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002bb648. */
 
@@ -51,7 +51,7 @@ unsigned int FUN_001398f8(int param_1)
         }
         temp_v0 = (temp_v2 & 0x3fc00) >> 10;
         if (((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 0xe6)) || ((temp_v2 & 0x3ff) >= 0x154)) break;
-        FUN_002bb150(10000000,0);
+        threadSleepDuration(10000000,0);
       }
       if (((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 100)) || ((temp_v2 & 0x3ff) >= 0xb4)) break;
       FUN_00128174();

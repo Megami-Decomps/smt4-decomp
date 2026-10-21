@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231240(unsigned int *, unsigned int, unsigned int);
+int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
 int FUN_00233240(unsigned int *, int);
 int FUN_00297684(void);
 int FUN_0029ee6c(int, int);
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_00293edc(void);
 /* Supplied declaration required: FUN_00297684. */
@@ -59,7 +59,7 @@ void FUN_003a0c5c(unsigned int *param_1)
     FUN_002bf818(puVar5);
     temp_v2 = vec2GetYInt(puVar5);
     temp_v3 = vec2GetXInt(puVar5);
-    FUN_00231240(param_1 + 0xe0,temp_v3,temp_v2);
+    pointConvertToFloat(param_1 + 0xe0,temp_v3,temp_v2);
     if (*(char *)((int)param_1 + 0x4de) == '\0') {
       return;
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlMainFindEntryByListedId(int, unsigned int);
-int FUN_002be624(int *, unsigned char *);
+int textFormatBuffer(int *, unsigned char *);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -31,7 +31,7 @@ extern unsigned char LAB_00245ec8; /* 0x245ec8 */
 extern unsigned int randRange(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 unsigned int FUN_00245d0c(unsigned int param_1,int param_2)
@@ -103,19 +103,19 @@ unsigned int FUN_00245d0c(unsigned int param_1,int param_2)
     if (param_2 != 6) {
       if (param_2 != 7) {
         if (param_2 == 8) {
-          FUN_002be624(&temp_v6,&LAB_00245ec0);
+          textFormatBuffer(&temp_v6,&LAB_00245ec0);
         }
       }
       else {
-        FUN_002be624(&temp_v6,&LAB_00245eb0);
+        textFormatBuffer(&temp_v6,&LAB_00245eb0);
       }
     }
     else {
-      FUN_002be624(&temp_v6,&LAB_00245eb8);
+      textFormatBuffer(&temp_v6,&LAB_00245eb8);
     }
   }
   else {
-    FUN_002be624(&temp_v6,&LAB_00245ec8);
+    textFormatBuffer(&temp_v6,&LAB_00245ec8);
   }
   temp_v1 = randRange(99);
   temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

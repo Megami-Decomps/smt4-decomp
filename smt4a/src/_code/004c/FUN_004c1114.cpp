@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *);
+int textFormatBuffer(int *, unsigned char *);
 int FUN_003f0e20(int, unsigned int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -32,7 +32,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int btlGetMainState(void);
 extern unsigned int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -135,22 +135,22 @@ unsigned int FUN_004c1114(unsigned int param_1,int param_2)
         temp_v15 = 0;
         switch(param_2 - 3) {
         case 0:
-          FUN_00100388(&temp_v8,&LAB_004c1468);
+          textFormatBuffer(&temp_v8,&LAB_004c1468);
           break;
         case 3:
-          FUN_00100388(&temp_v8,&LAB_004c1458);
+          textFormatBuffer(&temp_v8,&LAB_004c1458);
           break;
         case 4:
-          FUN_00100388(&temp_v8,&LAB_004c1450);
+          textFormatBuffer(&temp_v8,&LAB_004c1450);
           break;
         case 5:
-          FUN_00100388(&temp_v8,&LAB_004c1460);
+          textFormatBuffer(&temp_v8,&LAB_004c1460);
           break;
         case 8:
-          FUN_00100388(&temp_v8,&LAB_004c1470);
+          textFormatBuffer(&temp_v8,&LAB_004c1470);
           break;
         case 10:
-          FUN_00100388(&temp_v8,&LAB_004c1478);
+          textFormatBuffer(&temp_v8,&LAB_004c1478);
         }
         if ((int)temp_v7 == 0) {
           return 0;

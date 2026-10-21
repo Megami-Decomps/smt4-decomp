@@ -5,7 +5,7 @@
 extern "C" {
 
 int bitsetSetBit(unsigned char [72], int);
-int FUN_00269bd0(...);
+int randomGetUpperSixBits(...);
 int FUN_0029c6b0(unsigned char [72]);
 int FUN_0029d770(unsigned int, unsigned char [72]);
 int FUN_0029dc74(...);
@@ -62,7 +62,7 @@ extern signed char DAT_0043d9b0; /* 0x43d9b0 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: bitsetSetBit. */
-/* Supplied declaration required: FUN_00269bd0. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 extern int flagBitIsSet(unsigned int);
 extern int FUN_002973ec(void);
 /* Supplied declaration required: FUN_0029c6b0. */
@@ -258,7 +258,7 @@ LAB_0029cf80:
   temp_v42 = (unsigned int)(unsigned char)puVar12[0x48];
   do {
     puVar3 = puVar12;
-    FUN_00269bd0(puVar12,temp_v6 & 0xff);
+    randomGetUpperSixBits(puVar12,temp_v6 & 0xff);
     acStack_9c[temp_v6] = (char)(int)puVar3;
     temp_v6 = temp_v6 + 1;
   } while ((int)temp_v6 < 8);

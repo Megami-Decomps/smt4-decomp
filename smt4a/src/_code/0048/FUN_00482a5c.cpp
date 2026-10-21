@@ -1,37 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00482a5c` (_code @ 0x482a5c, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-extern unsigned char DAT_0055c848; /* 0x55c848 */
-
-extern unsigned int *FUN_00482758(unsigned int, unsigned int);
-
-
-void FUN_00482a5c(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_00482758(param_1,1);
-  *(unsigned char *)((int)puVar1 + 0x95) = 0;
-  puVar1[0x26] = 0;
-  *puVar1 = (unsigned int)&DAT_0055c848;
-  puVar1[0x27] = 0;
-  puVar1[0x28] = 0;
-  puVar1[0x29] = 0;
-  puVar1[0x2a] = 0;
-  puVar1[0x2b] = 0;
-  puVar1[0x17] = 0xffffffff;
-                    /* WARNING: Treating indirect jump as return */
-  return;
-}
-
-} /* extern "C" */
+/* NON_MATCHING: base-call setup and zero stores use different registers. */
+#include "common.h"
+struct WindowState {
+    /* 0x0 */ const void * vtable;
+    /* 0x4 */ u8 unk4[88];
+    /* 0x5C */ s32 selection;
+    /* 0x60 */ u8 unk60[53];
+    /* 0x95 */ u8 active;
+    /* 0x96 */ u8 unk96[2];
+    /* 0x98 */ u32 first;
+    /* 0x9C */ u32 second;
+    /* 0xA0 */ u32 third;
+    /* 0xA4 */ u32 fourth;
+    /* 0xA8 */ u32 fifth;
+    /* 0xAC */ u32 sixth;
+};
+extern "C" {extern u8 DAT_0055c848[];WindowState *FUN_00482758(WindowState*,u32);
+/* Initializes the extended window state after its base. */
+WindowState *FUN_00482a5c(WindowState *window){window=FUN_00482758(window,1);window->active=0;window->first=0;window->vtable=DAT_0055c848;window->second=0;window->third=0;window->fourth=0;window->fifth=0;window->sixth=0;window->selection=-1;return window;}}

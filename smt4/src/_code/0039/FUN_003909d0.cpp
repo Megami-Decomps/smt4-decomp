@@ -9,14 +9,14 @@ int FUN_002347b8(...);
 int FUN_002ae9ec(...);
 int FUN_002b7d30(int, int);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c1b64(int, unsigned int);
 int memClear(...);
-int FUN_002c53f4(...);
+int mathInterpolateTimed(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -42,21 +42,21 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0023342c(unsigned char *, unsigned int);
+extern int curveEvaluateStandard(unsigned char *, unsigned int);
 extern int FUN_002335f8(int, int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: FUN_002b7d30. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -119,10 +119,10 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = temp_v5;
       FUN_0023478c(temp_v5,0xb);
       FUN_002347b8(temp_v5,temp_v4,temp_v13);
-      FUN_002be624(temp_v12,&LAB_00390e10,temp_v13);
+      textFormatBuffer(temp_v12,&LAB_00390e10,temp_v13);
     }
     else {
-      FUN_002be624(temp_v12,&LAB_00390e14,temp_v3);
+      textFormatBuffer(temp_v12,&LAB_00390e14,temp_v3);
     }
     if (*(char *)(temp_v3 + 0x9b3) == '\0') {
       temp_v4 = FUN_002bf4f8(0x3a,0x61);
@@ -151,7 +151,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           temp_v4 = temp_v5;
           FUN_0023478c(temp_v5,0x69);
           FUN_002347b8(temp_v5,temp_v4,temp_v13);
-          FUN_002be624(temp_v12,&LAB_00390e10,temp_v13);
+          textFormatBuffer(temp_v12,&LAB_00390e10,temp_v13);
         }
         else {
           temp_v13[0] = 0;
@@ -188,9 +188,9 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           psVar7[-2] = 0x4481;
           *psVar7 = psVar7[-1];
           psVar7[-1] = temp_v1;
-          FUN_002be624(temp_v12,&LAB_00390e2c,temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
+          textFormatBuffer(temp_v12,&LAB_00390e2c,temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
         }
-        temp_v5 = FUN_0023342c(temp_v12,2);
+        temp_v5 = curveEvaluateStandard(temp_v12,2);
         temp_v4 = FUN_002bf4f8(0x3a,0x68);
         temp_v5 = ((int)**(short **)(temp_v4 + 0xc) + (int)*(short *)(temp_v4 + 8) + temp_v10) - temp_v5;
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -216,10 +216,10 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       if (temp_v4 >= 0xf) {
         temp_v4 = temp_v4 - 0xf;
       }
-      FUN_002c53f4(0xf,temp_v4);
-      FUN_002bf538();
+      mathInterpolateTimed(0xf,temp_v4);
+      efctSetSpeed();
       FUN_002bf380(2,0x3a,0xe,temp_v10,temp_v9,0x81);
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v4 = g_titleScene;
       piVar13 = (int *)(g_titleScene + 0x12ac);
       temp_v6 = *piVar13;

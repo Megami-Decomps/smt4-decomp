@@ -4,7 +4,7 @@
 extern "C" {
 
 void FUN_002d8c90(s32 state);
-void FUN_0039933c(void);
+void lmapApplyMapAndArea(void);
 void FUN_003b5d1c(void);
 s32 lmapMainIsRunning(void);
 s32 FUN_002d8b58(s32 a, s32 b);
@@ -22,7 +22,7 @@ void FUN_00295024(void)
         }
     } else {
         if (lmapMainIsRunning() != 0) {
-            FUN_0039933c();
+            lmapApplyMapAndArea();
         } else {
             FUN_003b5d1c();
         }

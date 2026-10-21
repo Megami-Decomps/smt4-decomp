@@ -1,39 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f4424` (_code @ 0x2f4424, 0x3a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: erased post-initialization guard-release call has no relocation target. */
+#include "common.h"
 extern "C" {
-
-int emptyStub_002f4370(unsigned char **, unsigned char *, int);
-
-extern unsigned char LAB_0012cec5; /* 0x12cec5 */
-extern unsigned char DAT_0055b02c; /* 0x55b02c */
-extern unsigned int DAT_00594b08; /* 0x594b08 */
-extern unsigned char *DAT_0062d848; /* 0x62d848 */
-extern unsigned int DAT_0062d84c; /* 0x62d84c */
-extern unsigned int DAT_0062d850; /* 0x62d850 */
-extern unsigned int DAT_0062d854; /* 0x62d854 */
-extern unsigned int DAT_0062d858; /* 0x62d858 */
-
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: emptyStub_002f4370. */
-
-
-unsigned int * FUN_002f4424(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (((DAT_00594b08 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00594b08), temp_v0 != 0)) {
-    DAT_0062d84c = 0;
-    DAT_0062d850 = 0;
-    DAT_0062d854 = 0;
-    DAT_0062d858 = 0;
-    DAT_0062d848 = &DAT_0055b02c;
-    emptyStub_002f4370(&DAT_0062d848,&LAB_0012cec5,0x100000);
-  }
-  return (unsigned int *)&DAT_0062d848;
+struct Listener { const void *vtable; u32 values[4]; };
+extern struct { u8 unk00[0x30]; u64 guard; } g_listenerTable;
+extern Listener DAT_0062d848;
+extern const u8 DAT_0055b02c, entry;
+void FUN_0012cec4(void *);
+s32 __cxa_guard_acquire(u64 *guard);
+void emptyStub_002f4370(void *, void (*)(void *), const void *);
+Listener *FUN_002f4424(void) {
+    if (!(g_listenerTable.guard & 1) && __cxa_guard_acquire(&g_listenerTable.guard)) {
+        for (u32 index = 0; index < 4; ++index) DAT_0062d848.values[index] = 0;
+        DAT_0062d848.vtable = &DAT_0055b02c;
+        emptyStub_002f4370(&DAT_0062d848, FUN_0012cec4, &entry);
+        /* Retail contains an erased call using &g_listenerTable.guard here. */
+    }
+    return &DAT_0062d848;
 }
-
-} /* extern "C" */
+}

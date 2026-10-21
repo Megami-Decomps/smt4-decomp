@@ -5,7 +5,7 @@
 extern "C" {
 
 int refIsNullOrZero(...);
-int FUN_002bb150(...);
+int threadSleepDuration(...);
 int FUN_002bb5a4(...);
 int asdMemoryAllocAligned(...);
 int asdOperatorNew(...);
@@ -38,7 +38,7 @@ extern unsigned int DAT_00465124; /* 0x465124 */
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -323,7 +323,7 @@ joined_r0x0011436c:
       return;
     }
     nn_os_LightEvent_ClearSignal((unsigned int)&g_asdFileEvent);
-    FUN_002bb150(&LAB_002dc6c0,0);
+    threadSleepDuration(&LAB_002dc6c0,0);
   } while( 1 );
 }
 

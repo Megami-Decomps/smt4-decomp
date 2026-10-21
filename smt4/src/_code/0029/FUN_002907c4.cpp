@@ -5,7 +5,7 @@
 extern "C" {
 
 int libc_sprintf(int, unsigned char *);
-int FUN_002be624(int, unsigned char *);
+int textFormatBuffer(int, unsigned char *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned char LAB_0029098c; /* 0x29098c */
 extern unsigned char LAB_00290990; /* 0x290990 */
 
 /* Supplied declaration required: libc_sprintf. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int __aeabi_idivmod(int, int);
 
 
@@ -60,61 +60,61 @@ void FUN_002907c4(int param_1,int param_2)
                         if (temp_v0 != 8) {
                           if (temp_v0 == 9) {
                             temp_v1 = param_1 + temp_v2;
-                            FUN_002be624(temp_v1,&LAB_00290990);
+                            textFormatBuffer(temp_v1,&LAB_00290990);
                             temp_v2 = temp_v2 + temp_v1;
                           }
                         }
                         else {
                           temp_v1 = param_1 + temp_v2;
-                          FUN_002be624(temp_v1,&LAB_0029098c);
+                          textFormatBuffer(temp_v1,&LAB_0029098c);
                           temp_v2 = temp_v2 + temp_v1;
                         }
                       }
                       else {
                         temp_v1 = param_1 + temp_v2;
-                        FUN_002be624(temp_v1,&LAB_00290988);
+                        textFormatBuffer(temp_v1,&LAB_00290988);
                         temp_v2 = temp_v2 + temp_v1;
                       }
                     }
                     else {
                       temp_v1 = param_1 + temp_v2;
-                      FUN_002be624(temp_v1,&LAB_00290984);
+                      textFormatBuffer(temp_v1,&LAB_00290984);
                       temp_v2 = temp_v2 + temp_v1;
                     }
                   }
                   else {
                     temp_v1 = param_1 + temp_v2;
-                    FUN_002be624(temp_v1,&LAB_00290980);
+                    textFormatBuffer(temp_v1,&LAB_00290980);
                     temp_v2 = temp_v2 + temp_v1;
                   }
                 }
                 else {
                   temp_v1 = param_1 + temp_v2;
-                  FUN_002be624(temp_v1,&LAB_0029097c);
+                  textFormatBuffer(temp_v1,&LAB_0029097c);
                   temp_v2 = temp_v2 + temp_v1;
                 }
               }
               else {
                 temp_v1 = param_1 + temp_v2;
-                FUN_002be624(temp_v1,&LAB_00290978);
+                textFormatBuffer(temp_v1,&LAB_00290978);
                 temp_v2 = temp_v2 + temp_v1;
               }
             }
             else {
               temp_v1 = param_1 + temp_v2;
-              FUN_002be624(temp_v1,&LAB_00290974);
+              textFormatBuffer(temp_v1,&LAB_00290974);
               temp_v2 = temp_v2 + temp_v1;
             }
           }
           else {
             temp_v1 = param_1 + temp_v2;
-            FUN_002be624(temp_v1,&LAB_00290970);
+            textFormatBuffer(temp_v1,&LAB_00290970);
             temp_v2 = temp_v2 + temp_v1;
           }
         }
         else {
           temp_v1 = param_1 + temp_v2;
-          FUN_002be624(temp_v1,&LAB_0029096c);
+          textFormatBuffer(temp_v1,&LAB_0029096c);
           temp_v2 = temp_v2 + temp_v1;
         }
         temp_v3 = temp_v3 - unaff_r4 * temp_v0;

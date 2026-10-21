@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00233e70(int, int, int);
 int FUN_00233fcc(int, int);
-int FUN_002340e4(unsigned int *);
+int timeInitializeActiveState(unsigned int *);
 int FUN_00234124(int, unsigned int *);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
 extern int strIsEmpty(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
@@ -54,7 +54,7 @@ void FUN_003928b4(int param_1)
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  FUN_002340e4(&temp_v3);
+  timeInitializeActiveState(&temp_v3);
   temp_v2 = g_aocMain;
   temp_v0 = *(int *)(param_1 + 8);
   if (temp_v0 != 3) {

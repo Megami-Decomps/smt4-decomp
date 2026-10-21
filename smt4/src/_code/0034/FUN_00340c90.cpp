@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001c08ec(void);
-int FUN_0023d450(...);
+int flagsPackFourBooleans(...);
 int FUN_0023e024(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
@@ -58,7 +58,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001c08ec. */
-/* Supplied declaration required: FUN_0023d450. */
+/* Supplied declaration required: flagsPackFourBooleans. */
 /* Supplied declaration required: FUN_0023e024. */
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
@@ -202,7 +202,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_0023d450(1,1,1);
+  temp_v1 = flagsPackFourBooleans(1,1,1);
   piVar5 = (int *)(temp_v0 + 0x128c);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];
@@ -244,7 +244,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     *(unsigned char *)(temp_v0 + 0x12a4) = 0;
   }
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_0023d450(0,0,0,1);
+  temp_v1 = flagsPackFourBooleans(0,0,0,1);
   piVar5 = (int *)(temp_v0 + 0x128c);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

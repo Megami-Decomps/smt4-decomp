@@ -1,36 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00370010` (_code @ 0x370010, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int FUN_002c3364(int [2]);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002c3364. */
-
-
-void FUN_00370010(int param_1)
-
+/* NON_MATCHING: retail parameter lifetime, address formation or grouped-store selection differs. */
+#include "common.h"
+struct RelativeResource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 offset;
+    /* 0x0c */ u8 unk0c[32];
+    /* 0x2c */ u32 active;
+};
+extern "C" void FUN_002c3364(void **resource);
+/* Clears active state and releases the resolved relative resource. */
+extern "C" void FUN_00370010(RelativeResource *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1 [2];
-  
-  temp_v1[0] = 0;
-  *(unsigned int *)(param_1 + 0x2c) = 0;
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 0) {
-    temp_v1[0] = temp_v0 + param_1 + 8;
-  }
-  if (temp_v1[0] != 0) {
-    FUN_002c3364(temp_v1);
-  }
-  return;
+    owner->active = 0;
+    void *resource = owner->offset ? (u8 *)&owner->offset + owner->offset : NULL;
+    if (resource)
+        FUN_002c3364(&resource);
 }
-
-} /* extern "C" */

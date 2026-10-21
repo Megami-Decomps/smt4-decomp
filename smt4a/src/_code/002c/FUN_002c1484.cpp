@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_002c2138(void);
 int scrGetCommandFrame(void);
-int FUN_0031cb24(int obj);
+int eventEffectStartSecondary(int obj);
 int FUN_0031cb5c(void);
 int FUN_0039b8ac(void);
 
@@ -21,7 +21,7 @@ bool FUN_002c1484(void)
     int obj = FUN_0031cb5c();
 
     if (obj != 0) {
-        FUN_0031cb24(obj);
+        eventEffectStartSecondary(obj);
         return false;
     }
     return true;

@@ -31,13 +31,13 @@ int FUN_00297060(int, unsigned int);
 int FUN_002a03d8(...);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bff50(void);
 int asdMemFree(void);
 int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int eventCommandStop(void);
-int FUN_0031eb34(void);
+int event3dOpeningRequestExit(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -98,7 +98,7 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c2a04(unsigned int);
@@ -109,7 +109,7 @@ extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: eventCommandStop. */
-/* Supplied declaration required: FUN_0031eb34. */
+/* Supplied declaration required: event3dOpeningRequestExit. */
 
 
 unsigned int FUN_0019f3dc(void)
@@ -154,8 +154,8 @@ unsigned int FUN_0019f3dc(void)
       temp_v1 = DAT_004937c4;
       puVar2[5] = DAT_004937c4;
       puVar2[6] = DAT_004937c8;
-      FUN_002be624(temp_v7,&LAB_0019f7d0,temp_v1,temp_v1);
-      FUN_002be624(temp_v8,&LAB_0019f7e8,puVar2[5],puVar2[5]);
+      textFormatBuffer(temp_v7,&LAB_0019f7d0,temp_v1,temp_v1);
+      textFormatBuffer(temp_v8,&LAB_0019f7e8,puVar2[5],puVar2[5]);
       temp_v3 = FUN_00289e54(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;
@@ -250,7 +250,7 @@ unsigned int FUN_0019f3dc(void)
         bustupCutAnimStopJob();
         eventTexReleaseJobs();
         eventCommandStop();
-        FUN_0031eb34();
+        event3dOpeningRequestExit();
         if (puVar2[0xc] != 0) {
           scrScriptProcessDestroy();
           puVar2[0xc] = 0;

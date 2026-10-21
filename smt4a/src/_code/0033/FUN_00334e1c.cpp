@@ -7,7 +7,7 @@ extern "C" {
 int efctSetSpeed(...);
 int FUN_00183bb0(...);
 int drawSetColorFromRGBA8(...);
-int FUN_0019d880(...);
+int jobGetScalarValue(...);
 int FUN_00230a50(...);
 int FUN_002f752c(...);
 int FUN_0039c9f0(...);
@@ -41,7 +41,7 @@ typedef struct {
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_00230a50. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_002f752c. */
@@ -75,7 +75,7 @@ void FUN_00334e1c(fn_00334e1c_arg0 *param_1,int param_2)
   temp_v10[0] = 0;
   drawSetColorFromRGBA8(0xffffffff);
   FUN_00230a50(&temp_v7,&temp_v8,param_2 + 0x12);
-  FUN_0019d880();
+  jobGetScalarValue();
   efctSetSpeed();
   FUN_002f752c(param_1,&temp_v9,temp_v10,param_2,(int)param_1->field_0x2013);
   if (param_1->field_0x2013 != '\0') {
@@ -107,7 +107,7 @@ void FUN_00334e1c(fn_00334e1c_arg0 *param_1,int param_2)
      (((temp_v5 = temp_v10[0], param_1->field_0x2017 != 7 ||
        (temp_v2 = FUN_0026264c(*(unsigned short *)&param_1->field_0x1390), temp_v2 != 0)) &&
       (param_1->field_0x2017 != 0x10)))) {
-    FUN_0019d880();
+    jobGetScalarValue();
     temp_v2 = FUN_001834a4(0x12,param_2 + 0x7b);
     if (temp_v1 < 200) {
       temp_v6 = temp_v4;

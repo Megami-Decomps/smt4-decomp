@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *, int);
+int textFormatBuffer(int *, unsigned char *, int);
 int FUN_001654f8(int, int);
 int FUN_001ad9b4(void);
 int FUN_0020214c(void);
@@ -27,7 +27,7 @@ extern unsigned char LAB_003d4b78; /* 0x3d4b78 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern int g_uiQuest; /* 0x57f28c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_0020214c. */
@@ -35,7 +35,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: FUN_002a1f60. */
 /* Supplied declaration required: FUN_003dc38c. */
 extern int FUN_003de464(int, unsigned int);
-extern int FUN_003de748(int);
+extern int itemDataGetCategory(int);
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_003defe0. */
 extern int partyEntryGetByte1(int);
@@ -65,7 +65,7 @@ void FUN_003d498c(int param_1,unsigned int param_2)
       puVar3 = (unsigned int *)puVar2;
     }
     else {
-      FUN_00100388(&temp_v2,&LAB_003d4b5c,param_1);
+      textFormatBuffer(&temp_v2,&LAB_003d4b5c,param_1);
       FUN_0020214c();
       *(unsigned int **)(temp_v0 + 0x92c) = puVar3;
       *(unsigned char *)(temp_v0 + 0x943) = 0;
@@ -102,7 +102,7 @@ void FUN_003d498c(int param_1,unsigned int param_2)
     temp_v1 = param_1;
     FUN_003defe0();
     if (temp_v1 != 0) {
-      temp_v4 = FUN_003de748(param_1);
+      temp_v4 = itemDataGetCategory(param_1);
       temp_v3 = *(unsigned char **)(temp_v0 + 0x92c);
       temp_v2 = 3;
       FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x928),3,0xffffffff,0);

@@ -24,7 +24,7 @@ extern unsigned char DAT_0057a6e4; /* 0x57a6e4 */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 
 
 void FUN_004e638c(int *param_1,int param_2,int param_3,int param_4,int param_5)
@@ -57,7 +57,7 @@ void FUN_004e638c(int *param_1,int param_2,int param_3,int param_4,int param_5)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);
-  temp_v2 = FUN_003e8430(*param_1);
+  temp_v2 = btlScriptUnitHasFlags(*param_1);
   if (((temp_v2 != 0) || (*(int *)(param_2 + 0x598) = param_3, param_3 == 0xffff)) || (param_3 == 0))
   {
     return;

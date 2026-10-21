@@ -11,11 +11,11 @@ int dataTable24Sub0GetRecord(...);
 int FUN_0029efc0(...);
 int FUN_002bdf94(...);
 int FUN_002be5a4(int, unsigned int, unsigned char [72]);
-int FUN_002be624(unsigned char [72], unsigned char *);
+int textFormatBuffer(unsigned char [72], unsigned char *);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_3: 10 slot(s), 40 byte(s) */
@@ -48,11 +48,11 @@ extern int FUN_0029efa8(int);
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_001dddd8(int param_1,int param_2,int param_3)
@@ -90,7 +90,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     FUN_002bf288(2,0x24,0x8a,param_1,param_2,0x65);
     FUN_002bf288(2,0x24,0x4a,param_1,param_2,0x65);
     temp_v2 = FUN_002bf4f8(0x24,0x49);
-    FUN_002be624(temp_v13,&LAB_001de0f0);
+    textFormatBuffer(temp_v13,&LAB_001de0f0);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,0xffffffff,temp_v13);
@@ -106,7 +106,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
       do {
         temp_v6 = FUN_0029efa8(temp_v2);
         if (temp_v6 != temp_v10) {
-          FUN_002bf538();
+          efctSetSpeed();
           temp_v6 = temp_v4 + temp_v10;
           temp_v7 = dataTable24Sub0GetRecord();
           temp_v8 = FUN_002bf4f8(0x24,temp_v10 + 0xa9);
@@ -181,7 +181,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
           else {
             FUN_001a75d0(temp_v0,temp_v6,param_1 + temp_v11,param_2 + temp_v12,0);
           }
-          FUN_002bf538();
+          efctSetSpeed();
         }
         temp_v10 = temp_v10 + 1;
       } while (temp_v10 < temp_v5);
@@ -218,7 +218,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     else {
       FUN_001a75d0(temp_v0,temp_v4,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1);
     }
-    FUN_002bf538();
+    efctSetSpeed();
   }
   return;
 }

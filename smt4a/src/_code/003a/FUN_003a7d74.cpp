@@ -9,7 +9,7 @@ int gameFlagSetValue(...);
 int FUN_00180118(...);
 int gameFlagIsSet(...);
 int __aeabi_memset4(...);
-int FUN_00237898(...);
+int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int libc_strcpy(...);
@@ -32,7 +32,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
@@ -136,7 +136,7 @@ unsigned int FUN_003a7d74(void)
       temp_v5 = scrWorkGetValue(1);
       temp_v10[0] = 0;
       temp_v3 = piVar3[0x109];
-      FUN_00237898(temp_v3,4,temp_v5,7);
+      messageForwardDefaultMode(temp_v3,4,temp_v5,7);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
       if (temp_v3 != 1) {
@@ -156,7 +156,7 @@ unsigned int FUN_003a7d74(void)
       temp_v5 = scrWorkGetValue(1);
       temp_v10[0] = 0;
       temp_v3 = piVar3[0x109];
-      FUN_00237898(temp_v3,3,temp_v5,5);
+      messageForwardDefaultMode(temp_v3,3,temp_v5,5);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
       if (temp_v3 != 1) {
@@ -178,7 +178,7 @@ unsigned int FUN_003a7d74(void)
         temp_v5 = scrWorkGetValue(1);
         temp_v10[0] = 0;
         temp_v3 = piVar3[0x109];
-        FUN_00237898(temp_v3,2,temp_v5,7);
+        messageForwardDefaultMode(temp_v3,2,temp_v5,7);
         temp_v6 = scrWorkGetValue(1);
         scrWorkSetValue(1,temp_v6 + 1);
         if (temp_v3 != 1) {
@@ -209,7 +209,7 @@ unsigned int FUN_003a7d74(void)
       temp_v5 = scrWorkGetValue(1);
       temp_v10[0] = 0;
       temp_v3 = piVar3[0x109];
-      FUN_00237898(temp_v3,1,temp_v5,5);
+      messageForwardDefaultMode(temp_v3,1,temp_v5,5);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
       if (temp_v3 != 1) {

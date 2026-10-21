@@ -13,10 +13,10 @@ typedef struct ValueOwner {
 } ValueOwner;
 
 extern s32 flagAt4IsClearOrMissing(void);
-extern u16 FUN_0037c678(s32 value);
+extern u16 uiSelectedRecordGetFourth(s32 value);
 extern void scrSetResult(u32 value);
 
-/* Script command: result is the owner's child value at +0x75D0, or FUN_0037c678 when flagAt4IsClearOrMissing is false. */
+/* Script command: result is the owner's child value at +0x75D0, or uiSelectedRecordGetFourth when flagAt4IsClearOrMissing is false. */
 u32 scrCommGetChildValue(ValueOwner *owner)
 {
     s32 flag;
@@ -25,7 +25,7 @@ u32 scrCommGetChildValue(ValueOwner *owner)
         scrSetResult(owner->child->unk75D0);
     } else {
         flag = flagAt4IsClearOrMissing();
-        scrSetResult(flag == 0 ? FUN_0037c678(flag) : 0);
+        scrSetResult(flag == 0 ? uiSelectedRecordGetFourth(flag) : 0);
     }
     return 1;
 }

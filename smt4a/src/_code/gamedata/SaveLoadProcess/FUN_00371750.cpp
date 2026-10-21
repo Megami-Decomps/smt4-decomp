@@ -11,7 +11,7 @@ int wordPairCopy(...);
 int FUN_00239294(void);
 int FUN_00268250(...);
 int FUN_002c9104(void);
-int FUN_00333594(...);
+int gameDataBlocksSetIndexedValue(...);
 int FUN_00358dbc(void);
 int rt_memcpy(...);
 int rt_memcpy_w(...);
@@ -38,9 +38,9 @@ extern int FUN_00229c9c(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
-extern unsigned int FUN_00330b58(void);
+extern unsigned int gameDataBlocksGetSelectedValue(void);
 extern int byte1IsZero(void);
-/* Supplied declaration required: FUN_00333594. */
+/* Supplied declaration required: gameDataBlocksSetIndexedValue. */
 /* Supplied declaration required: FUN_00358dbc. */
 extern int FUN_003881d0(void);
 /* Supplied declaration required: rt_memcpy. */
@@ -72,8 +72,8 @@ unsigned int FUN_00371750(void)
     if (*(int *)(temp_v1 + 0x14) == 1) {
       temp_v4 = *(int *)(temp_v1 + 0x10);
     }
-    temp_v3 = FUN_00330b58();
-    FUN_00333594(temp_v4,temp_v3);
+    temp_v3 = gameDataBlocksGetSelectedValue();
+    gameDataBlocksSetIndexedValue(temp_v4,temp_v3);
     if (*(char *)(DAT_00588e2c + 0xc) != '\0') {
       temp_v2 = FUN_003881d0();
       if (temp_v2 == 0) {
@@ -84,17 +84,17 @@ unsigned int FUN_00371750(void)
         do {
           temp_v2 = FUN_00239294();
           *(unsigned int *)(temp_v6 * 4 + 0x5e20f4) = *(unsigned int *)(temp_v2 + temp_v6 * 4);
-          FUN_00333594(temp_v6,temp_v4);
+          gameDataBlocksSetIndexedValue(temp_v6,temp_v4);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 5);
       }
       else {
         do {
           if (temp_v6 == temp_v4) {
-            FUN_00333594(temp_v6,0);
+            gameDataBlocksSetIndexedValue(temp_v6,0);
           }
           else {
-            FUN_00333594(temp_v6,*(unsigned int *)(temp_v6 * 4 + 0x5e20f4));
+            gameDataBlocksSetIndexedValue(temp_v6,*(unsigned int *)(temp_v6 * 4 + 0x5e20f4));
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 5);

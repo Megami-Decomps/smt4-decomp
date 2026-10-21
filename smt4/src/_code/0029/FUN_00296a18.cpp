@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00297060(int, int);
 
-extern int FUN_0023ea6c(unsigned int);
+extern int resourceFindActiveIndex(unsigned int);
 /* Supplied declaration required: FUN_00297060. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 
@@ -21,7 +21,7 @@ unsigned int FUN_00296a18(int param_1)
   
   if ((((*(int *)(param_1 + 0x3564) != 0) && (*(int *)(param_1 + 0x356c) != 0)) &&
       (*(int *)(param_1 + 0x3570) != 0)) &&
-     ((temp_v0 = FUN_0023ea6c(0x14), temp_v0 != 0 && (temp_v0 = FUN_0023ea6c(0x25), temp_v0 != 0)))) {
+     ((temp_v0 = resourceFindActiveIndex(0x14), temp_v0 != 0 && (temp_v0 = resourceFindActiveIndex(0x25), temp_v0 != 0)))) {
     temp_v2 = 0;
     temp_v0 = temp_v2;
     do {

@@ -11,10 +11,10 @@ int FUN_002b5cd4(void);
 int FUN_002d2834(void);
 int FUN_003281c4(int, unsigned int, unsigned int, int);
 int naviMainQueueRequest(int);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_003b959c(void);
-int FUN_003fd76c(int, int *);
-int FUN_003fd784(int);
+int controllerSetDestination(int, int *);
+int controllerSetPosition(int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, unsigned int, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -25,7 +25,7 @@ typedef struct {
 } void_stack;
 
 extern int *DAT_005806a4; /* 0x5806a4 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
@@ -61,10 +61,10 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002d2834. */
 /* Supplied declaration required: FUN_003281c4. */
 /* Supplied declaration required: naviMainQueueRequest. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003b959c. */
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetDestination. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int FUN_004bc5a4(unsigned int);
@@ -98,7 +98,7 @@ void FUN_00273060(void)
   unsigned int uStack_4c;
   unsigned int uStack_48;
   
-  temp_v1 = DAT_005806d4;
+  temp_v1 = g_mapEnemy;
   if (DAT_005f1be0 == 0) {
     if (DAT_005f161f == '\0') {
       if ((*DAT_005806a4 == 3) || (*(char *)(DAT_00581280 + 0xf40) != '\0')) {
@@ -171,7 +171,7 @@ void FUN_00273060(void)
         }
         FUN_002d2834();
       }
-      temp_v2 = DAT_005806d4;
+      temp_v2 = g_mapEnemy;
       temp_v17 = romwright_piece_4_4(0x3f800000,temp_v16);
       temp_v11 = (float)DAT_005806a4[0x17] - (float)DAT_005806a4[0x14];
       temp_v14 = (float)DAT_005806a4[0x18] - (float)DAT_005806a4[0x15];
@@ -180,13 +180,13 @@ void FUN_00273060(void)
       temp_v15 = CONCAT44(temp_v14 * temp_v12,temp_v11 * temp_v12);
       temp_v9 = temp_v9 * temp_v12;
       temp_v10 = DAT_005806a4[0x14];
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v18 = (unsigned long long)temp_v10;
       temp_v3 = 0;
       do {
         temp_v6 = temp_v2 + temp_v3 * 0x188;
         if (*(char *)(temp_v6 + 0x34) != '\0') {
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           temp_v12 = *(float *)(temp_v6 + 0x54) - (float)DAT_005806a4[0x14];
           temp_v14 = *(float *)(temp_v6 + 0x58) - (float)DAT_005806a4[0x15];
           temp_v11 = *(float *)(temp_v6 + 0x5c) - (float)DAT_005806a4[0x16];
@@ -220,7 +220,7 @@ void FUN_00273060(void)
             uStack_48 = *(unsigned int *)(temp_v3 + 0x5c);
             temp_v6 = *(int *)(*(int *)(temp_v3 + 0x1b4) + 4);
             *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
-            FUN_003fd76c(temp_v6,&temp_v19);
+            controllerSetDestination(temp_v6,&temp_v19);
             FUN_003fdb18(temp_v6);
             temp_v0 = *(char *)(temp_v3 + 0x1af);
             if (temp_v0 != '\x01') {
@@ -253,7 +253,7 @@ void FUN_00273060(void)
                 case 10:
                 case 0x14:
                 }
-                FUN_003fd784(temp_v6);
+                controllerSetPosition(temp_v6);
               }
               else if (temp_v0 == '\x03') {
                 switch(*(unsigned int *)(temp_v3 + 0x1b0)) {
@@ -284,11 +284,11 @@ void FUN_00273060(void)
                 case 10:
                 case 0x14:
                 }
-                FUN_003fd784(temp_v6);
+                controllerSetPosition(temp_v6);
               }
             }
             else {
-              FUN_003fd784(temp_v6);
+              controllerSetPosition(temp_v6);
             }
             if (*(int *)(temp_v3 + 100) != *(int *)(temp_v3 + 0x68)) {
               *(int *)(temp_v3 + 0x68) = *(int *)(temp_v3 + 100);

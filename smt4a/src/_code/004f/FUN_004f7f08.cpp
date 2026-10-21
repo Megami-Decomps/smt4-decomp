@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003d8f20(void);
+int uiFreeCallback(void);
 
 typedef struct fn_004f7f08_arg0 fn_004f7f08_arg0;
 struct fn_004f7f08_arg0 {
@@ -32,7 +32,7 @@ struct fn_004f7f08_arg0 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_003d8f20. */
+/* Supplied declaration required: uiFreeCallback. */
 
 
 void FUN_004f7f08(fn_004f7f08_arg0 *param_1)
@@ -59,11 +59,11 @@ void FUN_004f7f08(fn_004f7f08_arg0 *param_1)
     param_1->field_0x33c0 = (void *)0x0;
   }
   if (param_1->field_0x33cc != 0) {
-    FUN_003d8f20();
+    uiFreeCallback();
     param_1->field_0x33cc = 0;
   }
   if (param_1->field_0x33d0 != 0) {
-    FUN_003d8f20();
+    uiFreeCallback();
     param_1->field_0x33d0 = 0;
   }
   return;

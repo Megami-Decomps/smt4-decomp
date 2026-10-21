@@ -1,33 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00212724` (_code @ 0x212724, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int uiSpriteSetImageKeyframe(int, int, int);
+void uiSpriteSetImageKeyframe(u8 *member, s32 a, s32 b);
 
-extern int g_camp; /* 0x57f108 */
+typedef struct Holder {
+    /* 0x0000 */ u8 unk0000[0x1A08];
+    /* 0x1A08 */ u8 member1A08[0x118];
+    /* 0x1B20 */ u8 state;
+} Holder;
 
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
+extern Holder *g_camp;
 
-
+/* Unless the state is already 3 or 4, runs uiSpriteSetImageKeyframe(member, 0x18, 0) and sets the state to 3. */
 void FUN_00212724(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  char *pcVar2;
-  
-  if (g_camp == 0) {
-    return;
-  }
-  pcVar2 = (char *)(g_camp + 0x1b20);
-  temp_v0 = *pcVar2;
-  if (temp_v0 != '\x04' && temp_v0 != '\x03') {
-    uiSpriteSetImageKeyframe(g_camp + 0x1a08,0x18,0);
-    *pcVar2 = '\x03';
-  }
-  return;
+    Holder *object = g_camp;
+    if (object == NULL) {
+        return;
+    }
+    u8 state;
+
+    state = object->state;
+    if (state != 4 && state != 3) {
+        uiSpriteSetImageKeyframe(object->member1A08, 0x18, 0);
+        object->state = 3;
+    }
 }
 
 } /* extern "C" */

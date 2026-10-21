@@ -12,7 +12,7 @@ typedef struct {
 } param_5_stack;
 
 extern unsigned int FUN_0016ccfc(void);
-extern int FUN_004287ac(unsigned int, int **, unsigned int);
+extern int tokenResolveAddress(unsigned int, int **, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -26,7 +26,7 @@ int FUN_00500350(unsigned int *param_1,unsigned int *param_2,unsigned int param_
   
   temp_v2 = param_4;
   temp_v0 = FUN_0016ccfc();
-  temp_v1 = FUN_004287ac(temp_v0,&temp_v2,*param_1);
+  temp_v1 = tokenResolveAddress(temp_v0,&temp_v2,*param_1);
   if (-1 < temp_v1) {
     if ((int *)(temp_v2[2] - param_5) <= param_4) {
       param_4 = (int *)(temp_v2[2] - param_5);

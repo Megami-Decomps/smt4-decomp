@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b5cb4(void);
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_002b5cb4. */
@@ -25,7 +25,7 @@ unsigned int FUN_0033be00(int param_1)
   float temp_v6;
   float temp_v7;
   
-  temp_v1 = DAT_005806d4;
+  temp_v1 = g_mapEnemy;
   if (*(char *)(param_1 + 0x7d) == '\0') {
     return 0;
   }

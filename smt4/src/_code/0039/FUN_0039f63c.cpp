@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00210854(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_00233218(void);
+int jobGetScalarValue(void);
 int FUN_002b0750(int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002b1fc4(int *, int *, int *, int *, int, int);
 int FUN_002bed3c(void);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -36,12 +36,12 @@ extern unsigned char LAB_00141adc; /* 0x141adc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00210854. */
-/* Supplied declaration required: FUN_00233218. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b1fc4. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -99,7 +99,7 @@ void FUN_0039f63c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v2 = *(unsigned short *)(temp_v0 + 4) & 0xffff7fff;
     temp_v3 = *(unsigned short *)(temp_v0 + 6) & 0xffff7fff;
   }
-  FUN_00233218();
+  jobGetScalarValue();
   temp_v0 = FUN_002bf4f8(0x1c,param_1);
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 4) == 1)) {
@@ -147,9 +147,9 @@ void FUN_0039f63c(unsigned int param_1,unsigned int param_2,unsigned int param_3
     FUN_002b1fc4(&temp_v13,&temp_v12,&temp_v11,&temp_v10,0,0);
   }
   VectorSignedToFloat(param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_00210854(2,0x1c,param_1,param_2,param_3,temp_v2,temp_v3,param_4);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bed3c();
   return;
 }

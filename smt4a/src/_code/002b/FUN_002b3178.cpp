@@ -9,7 +9,7 @@ int FUN_00186940(void);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_002371b0(void);
-int FUN_00317c50(unsigned int);
+int effectSpawnPositionDefault(unsigned int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_00317c50. */
+/* Supplied declaration required: effectSpawnPositionDefault. */
 
 
 void FUN_002b3178(int param_1)
@@ -54,14 +54,14 @@ void FUN_002b3178(int param_1)
     *(unsigned char *)(temp_v5 + 0x1270) = 0;
   }
   FUN_00186940();
-  FUN_00317c50(temp_v1 | temp_v0);
+  effectSpawnPositionDefault(temp_v1 | temp_v0);
   temp_v5 = 0;
   do {
     VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001b63b0();
     VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001a1ee0();
-    FUN_00317c50(temp_v1);
+    effectSpawnPositionDefault(temp_v1);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x13);
   FUN_002371b0();

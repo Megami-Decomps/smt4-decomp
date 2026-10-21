@@ -8,7 +8,7 @@ void *FUN_002c3124(char *path, u8 *size, u32 flags);
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
-void FUN_002be624(char *dst, const char *format, ...);
+void textFormatBuffer(char *dst, const char *format, ...);
 void rt_memcpy_w(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
@@ -41,7 +41,7 @@ s32 asdTMTexTableLoadSprites(s32 idx)
             }
         }
         libc_strcpy(header->dirPrefix, dir);
-        FUN_002be624(path, LAB_002c4e84, header->dirPrefix, entry->name, LAB_002c4e78, LAB_002c4e74);
+        textFormatBuffer(path, LAB_002c4e84, header->dirPrefix, entry->name, LAB_002c4e78, LAB_002c4e74);
         file = (u32 *)FUN_002c3124(path, size, 0);
         if (file != NULL) {
             TexSprList *list = (TexSprList *)asdMemAlloc(0x100, 0x100, 0, 8, 1);

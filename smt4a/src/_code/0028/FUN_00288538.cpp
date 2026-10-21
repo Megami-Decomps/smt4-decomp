@@ -11,7 +11,7 @@ int efctSetSpeed(void);
 int FUN_001689e8(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_0037245c(...);
 int FUN_003c40b4(...);
 int FUN_0047fc38(void);
@@ -43,7 +43,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0037245c. */
@@ -75,7 +75,7 @@ void FUN_00288538(int param_1)
   temp_v0 = g_camp + 0x914;
   temp_v1 = vec2GetXInt(temp_v0);
   temp_v0 = vec2GetYInt(temp_v0);
-  FUN_0019d880();
+  jobGetScalarValue();
   efctSetSpeed();
   if (param_1 == 0) {
     FUN_001835b4(2,0x12,0x52d,temp_v1,temp_v0,0xbf);

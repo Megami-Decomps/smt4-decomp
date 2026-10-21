@@ -11,7 +11,7 @@ extern int g_gameState; /* 0x5f15fc */
 
 extern int randRange(unsigned int);
 extern int FUN_0015fa74(int, int);
-extern int FUN_00352c60(void);
+extern int gameFlagsTestThirdBank(void);
 /* Supplied declaration required: gameFlagsWriteBit. */
 /* Supplied declaration required: FUN_004a00f4. */
 extern int flagsBit7Get(int, int);
@@ -42,7 +42,7 @@ int FUN_00272d44(void)
     }
   }
   if (temp_v0 != 0) {
-    temp_v1 = FUN_00352c60();
+    temp_v1 = gameFlagsTestThirdBank();
     if (temp_v1 == 0) {
       temp_v2 = flagsBit7Get(g_gameState,(*(int *)((unsigned char *)&g_gameState + 0x4)));
       temp_v1 = 0;

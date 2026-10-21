@@ -1,3 +1,4 @@
+/* NON_MATCHING: count and total accumulators are assigned to r5/r6 in the opposite order from retail. */
 #include "common.h"
 
 extern "C" {

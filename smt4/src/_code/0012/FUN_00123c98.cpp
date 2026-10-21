@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0010ffdc's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Passes a stored word to its callback. */
+u32 FUN_00123c98(u32 (*callback)(u32), const u32 *value)
+{
+    return callback(*value);
+}
+
+} /* extern "C" */

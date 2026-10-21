@@ -65,7 +65,7 @@ extern unsigned char LAB_0032a12c; /* 0x32a12c */
 extern unsigned char LAB_0032a7ec; /* 0x32a7ec */
 extern unsigned char LAB_0032a7f8; /* 0x32a7f8 */
 extern unsigned char LAB_0032a804; /* 0x32a804 */
-extern int DAT_0043dd90; /* 0x43dd90 */
+extern int g_screenStateWork; /* 0x43dd90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
@@ -81,7 +81,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00258408. */
 /* Supplied declaration required: FUN_00258618. */
 /* Supplied declaration required: gfxObjectDestroy. */
-extern int FUN_002636e4(unsigned int);
+extern int effectAreAllCompletionChecksReady(unsigned int);
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: statusCameraDestroy. */
@@ -148,8 +148,8 @@ unsigned int FUN_00329b70(void)
   float temp_v13;
   int temp_v14 [35];
   
-  temp_v2 = DAT_0043dd90;
-  FUN_002bf818(DAT_0043dd90 + 0x8cc);
+  temp_v2 = g_screenStateWork;
+  FUN_002bf818(g_screenStateWork + 0x8cc);
   *(int *)(temp_v2 + 0x7c) = *(int *)(temp_v2 + 0x7c) + 2;
   FUN_00293a04(*(unsigned int *)(temp_v2 + 0x80),0);
   temp_v11 = (float)(int)in_s0;
@@ -170,8 +170,8 @@ unsigned int FUN_00329b70(void)
       }
       else {
         if (temp_v0 != 4) {
-          temp_v7 = DAT_0043dd90;
-          *(unsigned int *)(DAT_0043dd90 + 4) = 2;
+          temp_v7 = g_screenStateWork;
+          *(unsigned int *)(g_screenStateWork + 4) = 2;
           *(unsigned int *)(temp_v7 + 8) = 0;
           break;
         }
@@ -182,8 +182,8 @@ unsigned int FUN_00329b70(void)
     else {
       FUN_002bf810(0x10000aa);
     }
-    temp_v7 = DAT_0043dd90;
-    *(unsigned int *)(DAT_0043dd90 + 4) = 2;
+    temp_v7 = g_screenStateWork;
+    *(unsigned int *)(g_screenStateWork + 4) = 2;
     *(unsigned int *)(temp_v7 + 8) = 0;
     break;
   case 2:
@@ -200,14 +200,14 @@ unsigned int FUN_00329b70(void)
        (*(char *)(temp_v2 + 0x582) != '\0')) {
       FUN_002a0428(*(unsigned int *)(temp_v2 + 0x84),1);
       modelSlotAttachChild(*(unsigned int *)(temp_v2 + 0x8c),0);
-      temp_v7 = DAT_0043dd90;
-      *(unsigned int *)(DAT_0043dd90 + 4) = 3;
+      temp_v7 = g_screenStateWork;
+      *(unsigned int *)(g_screenStateWork + 4) = 3;
       *(unsigned int *)(temp_v7 + 8) = 0;
     }
     break;
   case 3:
     *(int *)(temp_v2 + 0x78) = *(int *)(temp_v2 + 0x78) + 1;
-    temp_v7 = DAT_0043dd90;
+    temp_v7 = g_screenStateWork;
     temp_v10 = FUN_002bf4f8(0x24,0x20b);
     temp_v14[0] = FUN_002bf4f8(0x24,0x20e);
     temp_v0 = *(short *)(temp_v7 + 0x1e);
@@ -261,7 +261,7 @@ unsigned int FUN_00329b70(void)
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < (int)(unsigned int)*(unsigned short *)(temp_v7 + 0x1e));
     }
-    temp_v7 = FUN_002636e4(*(unsigned int *)(temp_v2 + 0x84));
+    temp_v7 = effectAreAllCompletionChecksReady(*(unsigned int *)(temp_v2 + 0x84));
     puVar6 = *(unsigned int **)(temp_v2 + 0x84);
     if (temp_v7 != 0) {
       *puVar6 = *puVar6 | 2;
@@ -304,16 +304,16 @@ unsigned int FUN_00329b70(void)
       asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x84));
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0x84));
       *(unsigned int *)(temp_v2 + 0x84) = 0;
-      temp_v7 = DAT_0043dd90;
+      temp_v7 = g_screenStateWork;
       if (*(char *)(temp_v2 + 0x20) != '\0') {
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x2a0),0x11);
         buttonHelpSetPreset(0x58);
-        temp_v7 = DAT_0043dd90;
-        *(unsigned int *)(DAT_0043dd90 + 4) = 4;
+        temp_v7 = g_screenStateWork;
+        *(unsigned int *)(g_screenStateWork + 4) = 4;
         *(unsigned int *)(temp_v7 + 8) = 0;
       }
       else {
-        *(unsigned int *)(DAT_0043dd90 + 4) = 5;
+        *(unsigned int *)(g_screenStateWork + 4) = 5;
         *(unsigned int *)(temp_v7 + 8) = 0;
       }
       break;
@@ -417,7 +417,7 @@ LAB_0032a1a4:
       FUN_002a03d8(0,0x1e);
     }
     if (*(char *)(temp_v2 + 0x20) != '\0') {
-      temp_v0 = *(short *)(DAT_0043dd90 + 0x1e);
+      temp_v0 = *(short *)(g_screenStateWork + 0x1e);
       if (temp_v0 == 2) {
         temp_v7 = 0x28f;
       }
@@ -499,8 +499,8 @@ LAB_0032a1a4:
     buttonHelpSetPreset(0x58);
     FUN_002954f4(*(unsigned short *)(temp_v2 + 0xc),1);
     btlTalkBustUpSetUnk2F4(1);
-    temp_v7 = DAT_0043dd90;
-    *(unsigned int *)(DAT_0043dd90 + 4) = 6;
+    temp_v7 = g_screenStateWork;
+    *(unsigned int *)(g_screenStateWork + 4) = 6;
     *(unsigned int *)(temp_v7 + 8) = 0;
     break;
   case 6:
@@ -510,8 +510,8 @@ LAB_0032a1a4:
       FUN_0029c3c0(0,10,0xff);
       FUN_0029c3c0(1,10,0xff);
       soundChannelStopAll(10);
-      temp_v7 = DAT_0043dd90;
-      *(unsigned int *)(DAT_0043dd90 + 4) = 7;
+      temp_v7 = g_screenStateWork;
+      *(unsigned int *)(g_screenStateWork + 4) = 7;
       *(unsigned int *)(temp_v7 + 8) = 0;
     }
     break;
@@ -543,8 +543,8 @@ LAB_0032a1a4:
       *(unsigned int *)(temp_v2 + 0x90) = 0;
       statusCameraDestroy();
       FUN_00294e18(1);
-      temp_v7 = DAT_0043dd90;
-      *(unsigned int *)(DAT_0043dd90 + 4) = 8;
+      temp_v7 = g_screenStateWork;
+      *(unsigned int *)(g_screenStateWork + 4) = 8;
       *(unsigned int *)(temp_v7 + 8) = 0;
     }
   }

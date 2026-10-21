@@ -57,7 +57,7 @@ extern signed char DAT_0049fce8; /* 0x49fce8 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: FUN_00256370. */
-extern int FUN_00256510(void);
+extern int inputIsQuestCancelPressed(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: FUN_0025bdc4. */
@@ -206,7 +206,7 @@ LAB_002c9910:
               if (DAT_0049fb34 != 1) {
                 if (DAT_0049fb34 != 2) {
                   if ((DAT_0049fb34 == 3) && (*(int *)(g_lmapScene + 8) >= 9)) {
-                    temp_v4 = FUN_00256510();
+                    temp_v4 = inputIsQuestCancelPressed();
                     temp_v2 = g_lmapScene;
 joined_r0x002c99a8:
                     g_lmapScene = temp_v2;
@@ -218,19 +218,19 @@ joined_r0x002c99a8:
                   }
                 }
                 else if (*(int *)(g_lmapScene + 8) >= 9) {
-                  temp_v4 = FUN_00256510();
+                  temp_v4 = inputIsQuestCancelPressed();
                   temp_v2 = g_lmapScene;
                   goto joined_r0x002c99a8;
                 }
               }
               else if (*(int *)(g_lmapScene + 8) >= 4) {
-                temp_v4 = FUN_00256510();
+                temp_v4 = inputIsQuestCancelPressed();
                 temp_v2 = g_lmapScene;
                 goto joined_r0x002c99a8;
               }
             }
             else if (*(int *)(g_lmapScene + 8) >= 7) {
-              temp_v4 = FUN_00256510();
+              temp_v4 = inputIsQuestCancelPressed();
               temp_v2 = g_lmapScene;
               goto joined_r0x002c99a8;
             }

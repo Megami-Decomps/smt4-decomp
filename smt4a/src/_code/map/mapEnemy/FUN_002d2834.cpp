@@ -17,7 +17,7 @@ int ptrListRemoveClearOwner(...);
 int vec4Forward(...);
 int FUN_002b5cd4(void);
 int FUN_00303a5c(void);
-int FUN_00303e88(void);
+int effectSpawnTypeTen(void);
 int FUN_0033abb4(void);
 int FUN_00384830(void);
 int FUN_0040ace8(...);
@@ -33,7 +33,7 @@ int FUN_001bc124(void);
 int FUN_0020eb44(...);
 int FUN_002826dc(...);
 int FUN_002b5cb4(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00353c20(...);
 int FUN_0036d984(...);
 int moriModelContentCopyBody(void);
@@ -75,7 +75,7 @@ typedef struct {
 extern unsigned char LAB_002d38dc; /* 0x2d38dc */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned char DAT_00580b94; /* 0x580b94 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
@@ -133,14 +133,14 @@ extern unsigned int FUN_00261424(void);
 /* Supplied declaration required: FUN_002d1f40. */
 extern int FUN_002d7c88(unsigned int);
 /* Supplied declaration required: FUN_00303a5c. */
-/* Supplied declaration required: FUN_00303e88. */
+/* Supplied declaration required: effectSpawnTypeTen. */
 extern int FUN_003303fc(void);
 extern int byte76Get(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_0033b100(char *);
 extern int FUN_0033be00(char *);
 /* Supplied declaration required: byte76Set. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00352ff8. */
 /* Supplied declaration required: FUN_00353200. */
 /* Supplied declaration required: FUN_00353c20. */
@@ -232,7 +232,7 @@ void FUN_002d2834(void)
   int *temp_v51;
   int temp_v52;
   
-  temp_v4 = DAT_005806d4;
+  temp_v4 = g_mapEnemy;
   temp_v50 = gameFlagsGetBlock();
   temp_v52 = gameGetPlayerData();
   temp_v51 = (int *)(temp_v4 + 0x3d80);
@@ -306,7 +306,7 @@ void FUN_002d2834(void)
           if (((temp_v16 && temp_v7 == '\0') && (*temp_v51 == 0)) && (0 < *(int *)(temp_v4 + 0x3d7c))) {
             temp_v3 = 0;
             do {
-              temp_v12 = DAT_005806d4 + temp_v3 * 0x188;
+              temp_v12 = g_mapEnemy + temp_v3 * 0x188;
               if (*(char *)(temp_v12 + 0x34) != '\0') {
                 switch(*(unsigned int *)(temp_v12 + 0xb8)) {
                 case 7:
@@ -420,7 +420,7 @@ LAB_002d2ba8:
                 if (temp_v15) {
                   temp_v3 = 0;
                   do {
-                    temp_v12 = DAT_005806d4 + temp_v3 * 0x188;
+                    temp_v12 = g_mapEnemy + temp_v3 * 0x188;
                     if (*(char *)(temp_v12 + 0x34) != '\0') {
                       switch(*(unsigned int *)(temp_v12 + 0xb8)) {
                       case 7:
@@ -575,7 +575,7 @@ LAB_002d3354:
             }
             temp_v3 = 0;
             do {
-              temp_v12 = DAT_005806d4 + temp_v3 * 0x188;
+              temp_v12 = g_mapEnemy + temp_v3 * 0x188;
               pcVar8 = (char *)(temp_v12 + 0x34);
               temp_v15 = *pcVar8 != '\0';
               temp_v7 = '\0';
@@ -602,7 +602,7 @@ LAB_002d3484:
                 temp_v27 = *(float *)(g_lmapScene + 0x1c);
                 temp_v28 = *(float *)(g_lmapScene + 0x20);
                 temp_v29 = *(float *)(g_lmapScene + 0x24);
-                puVar12 = (unsigned int *)(DAT_005806d4 + 0x3d84);
+                puVar12 = (unsigned int *)(g_mapEnemy + 0x3d84);
                 temp_v2 = *puVar12;
                 temp_v8 = *(float *)(DAT_005806a4 + 0x18);
                 if ((0 < (int)temp_v2) && ((temp_v2 & 1) != 0)) {
@@ -636,7 +636,7 @@ LAB_002d3484:
                 temp_v3 = FUN_0036d984(&temp_v47,&temp_v45,0);
                 if (temp_v3 == -1) {
                   temp_v8 = temp_v45;
-                  FUN_00352bc4();
+                  mathPositionHeadingDegrees();
                   *(float *)(temp_v10 + 0x60) = temp_v8;
                   temp_v28 = temp_v28 - 5.0f;
                   pfVar4 = &temp_v27;
@@ -1321,7 +1321,7 @@ LAB_002d4824:
             temp_v1 = *(short *)(temp_v10 + 0x16c) - 1;
             *(short *)(temp_v10 + 0x16c) = temp_v1;
             if (temp_v1 < 1) {
-              FUN_00303e88();
+              effectSpawnTypeTen();
               temp_v1 = randRange(2);
               *(short *)(temp_v10 + 0x16c) = temp_v1 + 9;
             }
@@ -1505,7 +1505,7 @@ LAB_002d5218:
               temp_v1 = *(short *)(temp_v10 + 0x16c) - 1;
               *(short *)(temp_v10 + 0x16c) = temp_v1;
               if (temp_v1 < 1) {
-                FUN_00303e88();
+                effectSpawnTypeTen();
                 temp_v1 = randRange(2);
                 *(short *)(temp_v10 + 0x16c) = temp_v1 + 9;
               }
@@ -1594,7 +1594,7 @@ LAB_002d5218:
               }
               else {
 LAB_002d54c4:
-                temp_v12 = DAT_005806d4;
+                temp_v12 = g_mapEnemy;
                 *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) = *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) | 3;
                 *(unsigned char *)(temp_v10 + 0x1b8) = 0;
                 *(unsigned char *)(temp_v12 + *(int *)(temp_v10 + 0x1b0) * 8 + 0x3d91) = 0;
@@ -1628,7 +1628,7 @@ LAB_002d54c4:
               *(unsigned char *)(temp_v10 + 0x1b8) = 0;
             }
             else {
-              temp_v12 = DAT_005806d4;
+              temp_v12 = g_mapEnemy;
               *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) = *(unsigned int *)(*(int *)(temp_v3 + 4) + 4) | 3;
               *(unsigned char *)(temp_v10 + 0x1b8) = 0;
               *(unsigned char *)(temp_v12 + *(int *)(temp_v10 + 0x1b0) * 8 + 0x3d91) = 0;
@@ -1641,7 +1641,7 @@ LAB_002d54c4:
       case 0xc:
         temp_v12 = *(int *)(temp_v10 + 0xbc) + 1;
         *(int *)(temp_v10 + 0xbc) = temp_v12;
-        temp_v3 = DAT_005806d4;
+        temp_v3 = g_mapEnemy;
         if (temp_v12 >= 3) {
           if (*(int **)(temp_v10 + 0x1b4) != (int *)0x0) {
             if (*(char *)(temp_v10 + 0x1b9) != '\0') {
@@ -1733,7 +1733,7 @@ LAB_002d54c4:
           }
           else {
             *pcVar15 = '\x01';
-            temp_v3 = DAT_005806d4;
+            temp_v3 = g_mapEnemy;
             temp_v12 = gameFlagsGetBlock();
             if (DAT_005f1623 != '\0') {
               temp_v29 = (float)(int)*(char *)(temp_v12 + 0x3a);
@@ -1997,7 +1997,7 @@ LAB_002d5d90:
               *(int *)(temp_v10 + 0xd4) = *(int *)(temp_v10 + 0xd4) + 1;
               *(unsigned int *)(temp_v10 + 0x130) = 0;
               temp_v17 = temp_v30;
-              FUN_00352bc4();
+              mathPositionHeadingDegrees();
               temp_v17 = temp_v17 * 0.017453292f;
               temp_v42 = temp_v30;
               temp_v43 = temp_v31;
@@ -2148,7 +2148,7 @@ LAB_002d62e4:
           temp_v1 = *(short *)(temp_v10 + 0x16c) - 1;
           *(short *)(temp_v10 + 0x16c) = temp_v1;
           if (temp_v1 < 1) {
-            FUN_00303e88();
+            effectSpawnTypeTen();
             temp_v1 = randRange(2);
             *(short *)(temp_v10 + 0x16c) = temp_v1 + 9;
           }
@@ -2357,7 +2357,7 @@ LAB_002d68ec:
               temp_v1 = *(short *)(temp_v10 + 0x16c) - 1;
               *(short *)(temp_v10 + 0x16c) = temp_v1;
               if (temp_v1 < 1) {
-                FUN_00303e88();
+                effectSpawnTypeTen();
                 temp_v1 = randRange(2);
                 *(short *)(temp_v10 + 0x16c) = temp_v1 + 9;
               }
@@ -2414,7 +2414,7 @@ LAB_002d68ec:
               *(unsigned int *)(temp_v10 + 0xf4) = *(unsigned int *)(g_lmapScene + 0x1c);
               *(unsigned int *)(temp_v10 + 0xf8) = temp_v19;
               *(unsigned int *)(temp_v10 + 0xfc) = temp_v9;
-              FUN_00352bc4();
+              mathPositionHeadingDegrees();
               *(float *)(temp_v10 + 0x104) = temp_v21;
               *(int *)(temp_v10 + 0xf0) = *(int *)(temp_v10 + 0xf0) + 1;
             }
@@ -2455,7 +2455,7 @@ LAB_002d68ec:
                 temp_v1 = *(short *)(temp_v10 + 0x16c) - 1;
                 *(short *)(temp_v10 + 0x16c) = temp_v1;
                 if (temp_v1 < 1) {
-                  FUN_00303e88();
+                  effectSpawnTypeTen();
                   temp_v1 = randRange(2);
                   *(short *)(temp_v10 + 0x16c) = temp_v1 + 5;
                 }
@@ -3165,7 +3165,7 @@ LAB_002d4c0c:
         temp_v1 = *(short *)(temp_v10 + 0x16c) - 1;
         *(short *)(temp_v10 + 0x16c) = temp_v1;
         if (temp_v1 < 1) {
-          FUN_00303e88();
+          effectSpawnTypeTen();
           temp_v1 = randRange(2);
           *(short *)(temp_v10 + 0x16c) = temp_v1 + 9;
         }

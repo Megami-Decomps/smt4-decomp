@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_002b5540(void);
 int FUN_002c263c(void);
 int FUN_0031e6b0(void);
@@ -36,7 +36,7 @@ extern int DAT_005f1aac; /* 0x5f1aac */
 extern int DAT_005f1ab0; /* 0x5f1ab0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
 extern int FUN_0017760c(void);
 extern int gameFlagIsSet(unsigned int);
@@ -78,7 +78,7 @@ void FUN_00338dfc(void)
   }
   temp_v0 = FUN_00272d44();
   if (temp_v0 != 0) {
-    FUN_00100388(0x5f0cc1,&LAB_0033915c);
+    textFormatBuffer(0x5f0cc1,&LAB_0033915c);
   }
   else {
     temp_v0 = playerHasFlagBit(5);
@@ -97,7 +97,7 @@ void FUN_00338dfc(void)
           temp_v0 = temp_v0 + 3;
         }
         if (temp_v0 != 0) {
-          FUN_00100388(0x5f0cc1,&LAB_00339174);
+          textFormatBuffer(0x5f0cc1,&LAB_00339174);
           goto LAB_003391f8;
         }
       }
@@ -138,7 +138,7 @@ LAB_00338f14:
           temp_v0 = temp_v0 + 1;
 LAB_00339020:
           if (temp_v0 != 0) {
-            FUN_00100388(0x5f0cc1,&LAB_00339198);
+            textFormatBuffer(0x5f0cc1,&LAB_00339198);
             goto LAB_003391f8;
           }
         }
@@ -186,7 +186,7 @@ LAB_00339020:
     DAT_005f0cf4 = 0;
     temp_v0 = 0;
     FUN_002b5540();
-    FUN_00100388(0x5f0cc1,&LAB_00339258,temp_v0 + 1);
+    textFormatBuffer(0x5f0cc1,&LAB_00339258,temp_v0 + 1);
   }
 LAB_003391f8:
   if (0 < DAT_005f1aa8) {

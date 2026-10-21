@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029a17c(int, int, int, int, int);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -26,7 +26,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_0028f694(int param_1,int param_2,unsigned int param_3)
@@ -41,9 +41,9 @@ void FUN_0028f694(int param_1,int param_2,unsigned int param_3)
   int *piVar6;
   
   temp_v0 = g_camp;
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bf380(2,0x1d,6,param_1,param_2,0x79);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bf288(2,0x1d,0x429,param_1,param_2,0x7e);
   temp_v1 = FUN_0029d65c(param_3);
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {

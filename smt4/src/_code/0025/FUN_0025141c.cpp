@@ -12,13 +12,13 @@ int FUN_00288ddc(...);
 int FUN_002b6758(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002be90c(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_0033c1bc(...);
 
 typedef struct fn_0025141c_arg0 fn_0025141c_arg0;
@@ -84,13 +84,13 @@ extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033c1bc. */
 
@@ -130,7 +130,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
   if ((int)param_1->field_0x34 < 0) {
     temp_v7 = gameGetPlayerData();
     temp_v2 = FUN_002bd1fc();
-    FUN_002be624(temp_v17,&LAB_00251798,temp_v2);
+    textFormatBuffer(temp_v17,&LAB_00251798,temp_v2);
     temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x76);
     temp_v9 = -1;
     temp_v13 = (int)*(short *)(temp_v7 + 0x2c);
@@ -144,7 +144,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     temp_v3 = gameGetUnitRecord();
     if (temp_v3 != 0) {
       temp_v2 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
-      FUN_002be624(temp_v17,&LAB_00251798,temp_v2);
+      textFormatBuffer(temp_v17,&LAB_00251798,temp_v2);
       temp_v12 = (unsigned int)*(unsigned char *)(temp_v3 + 0x48);
       temp_v13 = (int)*(short *)(temp_v3 + 0x2c);
       temp_v8 = (int)*(short *)(temp_v3 + 0x2a);
@@ -155,7 +155,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       temp_v15 = FUN_00288ddc((int)(short)temp_v7,temp_v9);
     }
   }
-  FUN_002bf538();
+  efctSetSpeed();
   if (param_1->field_0x22 != 0) {
     temp_v0 = param_1->field_0x25;
     temp_v10 = temp_v0 == 0;
@@ -186,7 +186,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     }
     if (param_1->field_0x20 != 0) {
       if (param_1->field_0x21 == 0) {
-        FUN_002bf538();
+        efctSetSpeed();
         return;
       }
       temp_v11 = 0x6f;
@@ -219,12 +219,12 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       }
       drawSetColorFromRGBA8(temp_v2);
       if (param_1->field_0x23 != 0) {
-        FUN_002bf538();
+        efctSetSpeed();
       }
       temp_v3 = FUN_002bf4f8(0x19,0x51);
       FUN_002b6758(temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a,0);
       FUN_002bed3c();
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x19,0x40,param_2,param_3,0x6f);
       if (param_1->field_0x28 != 0) {
         FUN_002bf288(2,0x19,0x95,param_2,param_3,0x79);
@@ -241,7 +241,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       else {
         FUN_002bf288(2,0x19,0x3f,param_2,param_3,0x6f);
         drawSetColorFromRGBA8(0x292929ff);
-        FUN_002be624(temp_v16,&LAB_00251c04,temp_v12);
+        textFormatBuffer(temp_v16,&LAB_00251c04,temp_v12);
         temp_v9 = FUN_002bf4f8(0x19,0x53);
         FUN_002bdf94(1,*(short *)(temp_v9 + 8) + param_2,*(short *)(temp_v9 + 10) + param_3,1,2,0x79,
                      temp_v16);
@@ -281,7 +281,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
   }
   else {
     if (param_1->field_0x20 != 0) {
-      FUN_002bf538();
+      efctSetSpeed();
       return;
     }
     if (param_1->field_0x28 != 0) {
@@ -298,7 +298,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         temp_v2 = 0x96;
         temp_v11 = 0x79;
         FUN_002bf288(2,0x19,temp_v2,param_2,param_3,temp_v11);
-        FUN_002bf538();
+        efctSetSpeed();
         return;
       }
       FUN_002bf288(2,0x19,4,param_2,param_3,0x6f);
@@ -315,12 +315,12 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         temp_v2 = 0x6ef0ffff;
         drawSetColorFromRGBA8(temp_v2);
       }
-      FUN_002be624(temp_v16,&LAB_00251c04,temp_v8);
+      textFormatBuffer(temp_v16,&LAB_00251c04,temp_v8);
       temp_v7 = FUN_002bf4f8(0x19);
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);
       FUN_002bed3c();
-      FUN_002be624(temp_v16,&LAB_00251c04,temp_v13);
+      textFormatBuffer(temp_v16,&LAB_00251c04,temp_v13);
       temp_v7 = FUN_002bf4f8(0x19,0x1d);
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);
@@ -351,7 +351,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       }
     }
   }
-  FUN_002bf538();
+  efctSetSpeed();
   return;
 }
 

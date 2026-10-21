@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_001695a0(void);
 int FUN_0019de98(int, unsigned int);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int FUN_001ad9b4(void);
 int FUN_001ba514(int);
 int resultCreate(int);
@@ -53,7 +53,7 @@ extern int FUN_00162880(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 extern int idIsAtLeast350(unsigned int);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
@@ -151,7 +151,7 @@ LAB_004689f8:
             if (param_1[2] != 0xb) {
               sysPlaySe(0xa5);
               FUN_0019de98(0,0xf4f4f4ff);
-              FUN_0019ea64(1);
+              messageSetMode(1);
               pickObjStart(param_1,&LAB_00468d60);
               temp_v4 = param_1[2] + 1;
             }
@@ -217,7 +217,7 @@ LAB_004689f8:
     *param_1 = *param_1 & 0xffffffdf;
     param_1[1] = 5;
     param_1[2] = 0;
-    FUN_0019ea64(0);
+    messageSetMode(0);
     return;
   case 6:
     temp_v2 = FUN_00224880(*(unsigned int *)param_1[0xad]);
@@ -310,7 +310,7 @@ LAB_004689f8:
       return;
     }
     param_1[2] = 0xb;
-    FUN_0019ea64(0);
+    messageSetMode(0);
     return;
   case 9:
     temp_v2 = FUN_002802c8();

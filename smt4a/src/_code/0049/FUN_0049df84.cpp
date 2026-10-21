@@ -9,7 +9,7 @@ int FUN_00163aa4(int);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteSelectAnim(...);
 int asdTMTexTableReleaseNode(...);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_00212724(void);
 int FUN_00228b04(int, int);
@@ -35,7 +35,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, short);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -83,11 +83,11 @@ void FUN_0049df84(int param_1)
       eventQueueAddUniqueIfValid(0x100020e);
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x36);
       if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 == 0)) {
-        FUN_001acf98(0x33,temp_v0);
+        asdTMTexLoadMainHeap(0x33,temp_v0);
       }
       temp_v0 = *(short *)(*(int *)(param_1 + 0x84) + 0x40);
       if ((temp_v0 != 0) && (temp_v2 = asdTMTexTableNodeIsLoaded(0x33,temp_v0), temp_v2 == 0)) {
-        FUN_001acf98(0x33,temp_v0);
+        asdTMTexLoadMainHeap(0x33,temp_v0);
       }
       FUN_0049de10(param_1);
       FUN_00203b40(param_1 + 0x124,*(unsigned int *)(param_1 + 0x94),9,1,1,1);

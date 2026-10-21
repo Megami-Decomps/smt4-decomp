@@ -17,7 +17,7 @@ typedef struct {
 } param_4_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_0023d450(unsigned char);
+extern int flagsPackFourBooleans(unsigned char);
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002b7638. */
 extern unsigned int FUN_002c15ac(unsigned int);
@@ -77,7 +77,7 @@ void FUN_00343364(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     (**(romwright_code **)(param_1 + 0x1288))();
     *(unsigned char *)(param_1 + 0x1284) = 0;
   }
-  temp_v2 = FUN_0023d450((param_4 & 1) != 0);
+  temp_v2 = flagsPackFourBooleans((param_4 & 1) != 0);
   piVar8 = (int *)(param_1 + 0x128c);
   temp_v3 = *piVar8;
   temp_v4 = piVar8[temp_v3 + 2];

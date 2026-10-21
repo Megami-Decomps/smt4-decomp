@@ -1,27 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00293230` (_code @ 0x293230, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler combines the two flag tests into one mask; retail tests the flags separately. */
+#include "common.h"
+
+namespace { struct Unit { u32 flags; }; }
 
 extern "C" {
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-extern unsigned int *btlUnitGet(unsigned int);
-
-
-unsigned int FUN_00293230(void)
-
+/* Reads or updates the requested state. */
+extern u32 g_btlScriptUnit;
+Unit *btlUnitGet(u32 id);
+s32 FUN_00293230(void)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
-  temp_v0 = 0;
-  if ((puVar1 != (unsigned int *)0x0) && (((*puVar1 & 0x80) != 0 || (temp_v0 = 0, (*puVar1 & 0x1000) != 0))))
-  {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    Unit *unit = btlUnitGet(g_btlScriptUnit);
+    if (unit != NULL && ((unit->flags & 0x80) != 0 || (unit->flags & 0x1000) != 0)) {
+        return 1;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

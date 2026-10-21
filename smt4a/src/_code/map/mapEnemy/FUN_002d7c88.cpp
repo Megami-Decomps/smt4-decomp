@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [32], unsigned char *, int);
+int textFormatBuffer(unsigned char [32], unsigned char *, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_003fe86c(int, int, int);
 int FUN_0040a908(int, int);
@@ -16,10 +16,10 @@ int FUN_0040ace8(unsigned int, int);
 extern unsigned char LAB_002d7dd0; /* 0x2d7dd0 */
 extern unsigned char LAB_002d7de4; /* 0x2d7de4 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern signed char DAT_005f18be; /* 0x5f18be */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
@@ -44,7 +44,7 @@ unsigned int FUN_002d7c88(int param_1)
   unsigned char temp_v6 [32];
   
   temp_v3 = 0;
-  temp_v5 = DAT_005806d4 + param_1 * 8;
+  temp_v5 = g_mapEnemy + param_1 * 8;
   piVar6 = (int *)(temp_v5 + 0x3d8c);
   if (*piVar6 != 0) {
     temp_v1 = 1;
@@ -55,7 +55,7 @@ unsigned int FUN_002d7c88(int param_1)
     do {
       temp_v0 = temp_v2 * 8;
       temp_v2 = temp_v2 + 1;
-      if (*(int *)(DAT_005806d4 + temp_v0 + 0x3d8c) != 0) {
+      if (*(int *)(g_mapEnemy + temp_v0 + 0x3d8c) != 0) {
         temp_v3 = temp_v3 + 1;
       }
       temp_v4 = temp_v4 - 1;
@@ -64,7 +64,7 @@ unsigned int FUN_002d7c88(int param_1)
       temp_v1 = 0;
     }
     else {
-      FUN_00100388(temp_v6,&LAB_002d7dd0,(int)*(short *)(param_1 * 0x10 + 0x582204));
+      textFormatBuffer(temp_v6,&LAB_002d7dd0,(int)*(short *)(param_1 * 0x10 + 0x582204));
       temp_v2 = 0x20;
       FUN_00178b04(0x20,&LAB_002d7de4,0x3b4);
       temp_v3 = 0;

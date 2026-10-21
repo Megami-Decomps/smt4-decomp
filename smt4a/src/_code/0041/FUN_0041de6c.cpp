@@ -19,7 +19,7 @@ int FUN_002f0384(...);
 int FUN_0033440c(...);
 int FUN_0033449c(...);
 int FUN_0034aac8(...);
-int FUN_003720a0(...);
+int gameGlobalsQueueValues(...);
 int FUN_0038b5fc(...);
 int FUN_003a76a8(...);
 int FUN_003c1490(int, int);
@@ -59,8 +59,8 @@ extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0034aac8. */
-extern int FUN_0035d734(void);
-/* Supplied declaration required: FUN_003720a0. */
+extern int saveLoadThreadHasResult(void);
+/* Supplied declaration required: gameGlobalsQueueValues. */
 extern int byteTripleGetV1(void);
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: FUN_003a76a8. */
@@ -82,7 +82,7 @@ void FUN_0041de6c(int param_1)
   unsigned int *puVar5;
   
   if (*(char *)(param_1 + 0xe) == '\0') {
-    temp_v0 = FUN_0035d734();
+    temp_v0 = saveLoadThreadHasResult();
     if (temp_v0 != 0) {
       return;
     }
@@ -153,7 +153,7 @@ void FUN_0041de6c(int param_1)
       *(unsigned short *)((int)puVar5 + 0x62) = *(unsigned short *)(temp_v0 + 0xd0);
       temp_v2 = gameDataBlocksGetSaveData();
       libc_strcpy(temp_v2 + 0x54,temp_v0 + 0x6c);
-      FUN_003720a0(*(unsigned int *)(param_1 + 0x54),0);
+      gameGlobalsQueueValues(*(unsigned int *)(param_1 + 0x54),0);
       FUN_0033440c(*(unsigned char *)(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0xd6));
       temp_v0 = param_1 + *(int *)(param_1 + 0x2f8) * 0x80;
       if (temp_v0 != -0x6c) {
@@ -178,7 +178,7 @@ void FUN_0041de6c(int param_1)
     FUN_002f0384(1);
     *(unsigned char *)(param_1 + 0x68) = 1;
   }
-  temp_v0 = FUN_0035d734();
+  temp_v0 = saveLoadThreadHasResult();
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0xe) == '\0') {
       return;

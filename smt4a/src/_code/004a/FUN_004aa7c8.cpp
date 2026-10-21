@@ -8,7 +8,7 @@ int FUN_00184748(int);
 int menu32PlayCursorSeAndSelect(int);
 int FUN_00321500(int);
 int FUN_0039ebcc(void);
-int FUN_003f89e8(unsigned int);
+int controllerStartInterpolation(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned char g_btlUi; /* 0x57a9b8 */
 /* Supplied declaration required: FUN_00321500. */
 extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
-/* Supplied declaration required: FUN_003f89e8. */
+/* Supplied declaration required: controllerStartInterpolation. */
 
 
 void FUN_004aa7c8(void)
@@ -36,7 +36,7 @@ void FUN_004aa7c8(void)
   temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
   piVar3 = (int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x74a0);
   if (*piVar3 == 0xd) {
-    FUN_003f89e8(*(unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x7488));
+    controllerStartInterpolation(*(unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x7488));
     menu32PlayCursorSeAndSelect(temp_v0 + 0x28c4);
     *piVar3 = 0xb;
     temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));

@@ -23,6 +23,9 @@ u32 runItemsOfInner(Ref4 *obj)
     s32 count;
     s32 i;
 
+    if (obj == NULL) {
+        return 1;
+    }
     record = FUN_0050d2cc(obj->inner);
     if (record != NULL) {
         inner = record->inner;

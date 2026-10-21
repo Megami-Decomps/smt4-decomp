@@ -1,3 +1,4 @@
+/* NON_MATCHING: initial calls, global register allocation, and final tail-call scheduling differ from retail. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {

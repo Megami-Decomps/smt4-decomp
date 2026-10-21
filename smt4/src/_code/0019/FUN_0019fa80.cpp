@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in MapIf_Register's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+extern void FUN_001e5e78(u32 mode);
+
+/* Registers the default map-interface state and reports success. */
+s32 FUN_0019fa80(void)
+{
+    FUN_001e5e78(0);
+    return 0;
+}
+
+} /* extern "C" */

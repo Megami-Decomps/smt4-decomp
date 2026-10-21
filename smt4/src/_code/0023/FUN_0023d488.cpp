@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023dc38(unsigned int *, unsigned int);
-int FUN_00255158(int, int);
+int battleGetEntryHalfword(int, int);
 
 typedef struct fn_0023d488_arg1 fn_0023d488_arg1;
 struct fn_0023d488_arg1 {
@@ -33,7 +33,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023dc38. */
 extern short FUN_0023dcfc(unsigned int);
-/* Supplied declaration required: FUN_00255158. */
+/* Supplied declaration required: battleGetEntryHalfword. */
 extern int btlGetMainState(void);
 extern int FUN_0033f8ec(unsigned int *, int, int, int);
 extern int FUN_0033fb2c(unsigned int *);
@@ -169,34 +169,34 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
       temp_v8 = temp_v7 | 4;
     }
   }
-  if (((temp_v6 & 0x100) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0xd), temp_v5 < 1)) {
+  if (((temp_v6 & 0x100) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0xd), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x100;
   }
-  if (((temp_v6 & 0x200) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x12), temp_v5 < 1)) {
+  if (((temp_v6 & 0x200) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x12), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x200;
   }
-  if (((temp_v6 & 0x400) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x13), temp_v5 < 1)) {
+  if (((temp_v6 & 0x400) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x13), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x400;
   }
-  if (((temp_v6 & 0x800) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x12), 0 < temp_v5)) {
+  if (((temp_v6 & 0x800) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x12), 0 < temp_v5)) {
     temp_v8 = temp_v8 | 0x800;
   }
-  if (((temp_v6 & 0x1000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x13), 0 < temp_v5)) {
+  if (((temp_v6 & 0x1000) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x13), 0 < temp_v5)) {
     temp_v8 = temp_v8 | 0x1000;
   }
-  if (((temp_v6 & 0x2000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x14), temp_v5 < 1)) {
+  if (((temp_v6 & 0x2000) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x14), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x2000;
   }
-  if (((temp_v6 & 0x4000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0xe), temp_v5 < 1)) {
+  if (((temp_v6 & 0x4000) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0xe), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x4000;
   }
-  if (((temp_v6 & 0x8000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0xf), temp_v5 < 1)) {
+  if (((temp_v6 & 0x8000) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0xf), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x8000;
   }
-  if (((temp_v6 & 0x10000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x10), temp_v5 < 1)) {
+  if (((temp_v6 & 0x10000) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x10), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x10000;
   }
-  if (((temp_v6 & 0x20000) != 0) && (temp_v5 = FUN_00255158((int)(short)param_1[2],0x11), temp_v5 < 1)) {
+  if (((temp_v6 & 0x20000) != 0) && (temp_v5 = battleGetEntryHalfword((int)(short)param_1[2],0x11), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x20000;
   }
   if (((temp_v6 & 0x80000) != 0) && (temp_v5 = btlGetMainState(), (*(unsigned int *)(temp_v5 + 0x44a0) & 0x400) == 0)
@@ -254,13 +254,13 @@ unsigned int FUN_0023d488(unsigned int *param_1,fn_0023d488_arg1 *param_2,int pa
     }
   }
   if ((temp_v6 & 0x40) != 0) {
-    temp_v2 = FUN_00255158((int)(short)param_1[2],0xb);
+    temp_v2 = battleGetEntryHalfword((int)(short)param_1[2],0xb);
     temp_v3 = FUN_0023dcfc(0xb);
     if (temp_v2 != temp_v3) {
-      temp_v2 = FUN_00255158((int)(short)param_1[2],10);
+      temp_v2 = battleGetEntryHalfword((int)(short)param_1[2],10);
       temp_v3 = FUN_0023dcfc(10);
       if (temp_v2 != temp_v3) {
-        temp_v2 = FUN_00255158((int)(short)param_1[2],7);
+        temp_v2 = battleGetEntryHalfword((int)(short)param_1[2],7);
         temp_v3 = FUN_0023dcfc(7);
         if (temp_v2 != temp_v3) {
           temp_v7 = temp_v7 | 0x40;

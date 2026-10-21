@@ -67,7 +67,7 @@ extern unsigned int gameGetPlayerData(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002bf520(void);
-extern unsigned int FUN_002e264c(unsigned int);
+extern unsigned int campCecDispatchMode(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern unsigned int overlayGetStatusScene(void);
@@ -185,7 +185,7 @@ void FUN_0034280c(unsigned char param_1)
   *(unsigned int *)((int)puVar3 + 0x17e) = puVar7[1];
   *(unsigned int *)((int)puVar3 + 0x182) = puVar7[2];
   *(unsigned short *)((int)puVar3 + 0x186) = *(unsigned short *)(puVar7 + 3);
-  temp_v3 = FUN_002e264c(puVar3[2]);
+  temp_v3 = campCecDispatchMode(puVar3[2]);
   campCecDrawPageCreate();
   puVar3[3] = temp_v3;
   FUN_003a4980();

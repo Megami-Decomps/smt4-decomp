@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023a1c0(int, int, unsigned int);
+int recordValidatePair(int, int, unsigned int);
 int FUN_002baa40(...);
 int FUN_0035f774(unsigned char *, char [16], int, int, unsigned int, unsigned int);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern char s_sys_ECardStatus_0044e4c8[16]; /* 0x44e4c8 */
 
 extern unsigned char libc_toupper(void);
-/* Supplied declaration required: FUN_0023a1c0. */
+/* Supplied declaration required: recordValidatePair. */
 extern int FUN_0023a1f8(int);
 extern int FUN_002a12d8(unsigned int *);
 /* Supplied declaration required: FUN_002baa40. */
@@ -51,7 +51,7 @@ void FUN_00354a20(unsigned int *param_1,int param_2,int param_3)
     FUN_0035f774(puVar3,s_sys_ECardStatus_0044e4c8,3,param_2 + 4,*(unsigned int *)(param_2 + 8),
                  *(unsigned int *)(param_2 + 0xc));
     FUN_002baa40(&temp_v3,puVar3);
-    FUN_0023a1c0(param_2,temp_v3,uStack_44);
+    recordValidatePair(param_2,temp_v3,uStack_44);
     temp_v1 = FUN_002a12d8((unsigned int *)&temp_v3);
     if (temp_v1 < 0) {
       *param_1 = temp_v3;

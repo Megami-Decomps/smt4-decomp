@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int sysPlaySe(int);
 int FUN_001ad9b4(void);
 int FUN_00275bc8(int, unsigned int);
@@ -17,7 +17,7 @@ extern unsigned char LAB_0047e304; /* 0x47e304 */
 extern unsigned char LAB_0047e320; /* 0x47e320 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_00224880(unsigned int);
@@ -52,8 +52,8 @@ unsigned int FUN_0047e150(unsigned int *param_1)
       *param_1 = 3;
       return 0;
     }
-    FUN_00100388(temp_v3,&LAB_0047e2ec,unaff_r6,unaff_r6);
-    FUN_00100388(temp_v4,&LAB_0047e304,unaff_r6);
+    textFormatBuffer(temp_v3,&LAB_0047e2ec,unaff_r6,unaff_r6);
+    textFormatBuffer(temp_v4,&LAB_0047e304,unaff_r6);
     temp_v2 = FUN_0046e08c(g_aocSystem,*(unsigned short *)(temp_v2 + 0xd4),1);
     if (temp_v2 != 0) {
       aocQueueType07(g_aocSystem,unaff_r6,param_1 + 3,0);
@@ -81,7 +81,7 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     FUN_00275bc8(temp_v0,param_1[4]);
     param_1[5] = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
-    FUN_00100388(temp_v3,&LAB_0047e320,*(unsigned short *)(temp_v2 + 0xd4),
+    textFormatBuffer(temp_v3,&LAB_0047e320,*(unsigned short *)(temp_v2 + 0xd4),
                  *(unsigned short *)(temp_v2 + 0xd6));
     temp_v1 = tableGroupFindEntryIndex(param_1[3],temp_v3);
     scrScriptProcessStartEntry(param_1[5],temp_v1);

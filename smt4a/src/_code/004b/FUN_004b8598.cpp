@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0020401c(...);
 int moveCameraCtrlCreateEntry(...);
 int linkSlotSetFlag1C(...);
@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned char LAB_004b87d0; /* 0x4b87d0 */
 extern unsigned char LAB_004b87d8; /* 0x4b87d8 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_0020401c. */
@@ -70,12 +70,12 @@ void FUN_004b8598(int param_1)
       *(unsigned int *)(param_1 + 0x2c) = 0;
       if (*(char *)(*(int *)(param_1 + 0x1118) + 0x40) != '0') {
         *(unsigned char *)(param_1 + 0x1214) = 1;
-        FUN_00100388(temp_v5,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
+        textFormatBuffer(temp_v5,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
         if (((*(short *)(*(int *)(param_1 + 0x1118) + 100) != 0) &&
             (temp_v0 = gameFlagIsSet(), temp_v0 != 0)) ||
            ((*(short *)(*(int *)(param_1 + 0x1118) + 0x66) != 0 &&
             (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) {
-          FUN_00100388(temp_v6,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
+          textFormatBuffer(temp_v6,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
           FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v5,temp_v6);
         }
         else {
@@ -93,7 +93,7 @@ void FUN_004b8598(int param_1)
             dataTable33TypeCount(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
             if (0 < (int)puVar2) {
               do {
-                FUN_00100388(temp_v5,&LAB_004b87d8,"mikado/",puVar6);
+                textFormatBuffer(temp_v5,&LAB_004b87d8,"mikado/",puVar6);
                 moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),temp_v5,temp_v3);
                 puVar6 = puVar6 + 0x20;
                 temp_v3 = temp_v3 + 1;

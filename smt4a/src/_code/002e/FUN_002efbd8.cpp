@@ -1,42 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efbd8` (_code @ 0x2efbd8, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r1, r2, r3, r4, r5, lr}'; compiler emits 'push {r4, r5, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_002e6e34(int *, unsigned int);
-int _ZN9Obj55b28cD1Ev(int *);
-int sharedRefRelease(unsigned int);
-int FUN_002efe80(int);
-
-/* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: sharedRefRelease. */
-extern unsigned int onlineGetActiveLock(void);
-/* Supplied declaration required: FUN_002efe80. */
-
-
-void FUN_002efbd8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int uStack_18;
-  unsigned int uStack_14;
-  unsigned int uStack_10;
-  
-  uStack_18 = param_2;
-  uStack_14 = param_3;
-  uStack_10 = param_4;
-  temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(&uStack_18,temp_v0);
-  if (*(int *)(param_1 + 0xa8) != 0) {
-    FUN_002efe80(*(int *)(param_1 + 4) + 0x14);
-    sharedRefRelease(*(unsigned int *)(param_1 + 0xa8));
-    *(unsigned int *)(param_1 + 0xa8) = 0;
-  }
-  _ZN9Obj55b28cD1Ev(&uStack_18);
-  return;
+struct Guard { u8 storage[16]; };
+struct Child { u8 unk00[0x14]; u8 member; };
+struct Object { u32 reserved; Child *child; u8 unk08[0xA0]; void *reference; };
+void *onlineGetActiveLock(void);
+void FUN_002e6e34(Guard *guard, void *lock);
+void _ZN9Obj55b28cD1Ev(Guard *guard);
+void FUN_002efe80(void *member);
+void sharedRefRelease(void *reference);
+void FUN_002efbd8(Object *object) {
+    Guard guard;
+    FUN_002e6e34(&guard, onlineGetActiveLock());
+    if (object->reference) {
+        FUN_002efe80(&object->child->member);
+        sharedRefRelease(object->reference);
+        object->reference = NULL;
+    }
+    _ZN9Obj55b28cD1Ev(&guard);
 }
-
-} /* extern "C" */
+}

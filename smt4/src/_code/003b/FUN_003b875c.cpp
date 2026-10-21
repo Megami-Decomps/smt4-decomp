@@ -33,9 +33,9 @@ extern int FUN_0022b8c0(int);
 extern unsigned short FUN_0023360c(int);
 /* Supplied declaration required: FUN_00234cd8. */
 /* Supplied declaration required: FUN_00234f04. */
-extern int FUN_0024c278(void);
+extern int inputIsQuestConfirmPressed(void);
 /* Supplied declaration required: FUN_002758d8. */
-extern int FUN_002762e0(void);
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_002a0400. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00341a10. */
@@ -134,14 +134,14 @@ void FUN_003b875c(int param_1)
       return;
     }
     if (((temp_v6 & 0x80) != 0) ||
-       ((temp_v2 = gameFlagIsSet(0x404), temp_v2 != 0 && (temp_v2 = FUN_0024c278(), temp_v2 != 0)))) {
+       ((temp_v2 = gameFlagIsSet(0x404), temp_v2 != 0 && (temp_v2 = inputIsQuestConfirmPressed(), temp_v2 != 0)))) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffff7f;
       FUN_002758d8();
       *(unsigned int *)(param_1 + 0x28) = 7;
       *(unsigned int *)(param_1 + 0x2c) = 0;
       return;
     }
-    temp_v2 = FUN_002762e0();
+    temp_v2 = inputIsQuestMenuPressed();
     if (temp_v2 == 0) {
       return;
     }

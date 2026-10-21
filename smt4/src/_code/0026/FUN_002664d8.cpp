@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0024f4e8(void);
+extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_003966b8. */
 /* Supplied declaration required: FUN_00396b08. */
@@ -29,7 +29,7 @@ void FUN_002664d8(unsigned int *param_1)
   
   if ((*param_1 & 1) == 0) {
     *(unsigned short *)(param_1 + 0x28) = 0;
-    temp_v0 = FUN_0024f4e8();
+    temp_v0 = dataTableGetRecordFortyOne();
     pcVar3 = (char *)0x0;
     if (0 < temp_v0) {
       do {

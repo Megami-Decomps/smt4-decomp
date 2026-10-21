@@ -9,7 +9,7 @@ int FUN_002b93c8(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_003b65a4(int, int, int, int, int, int, int, int, int, int);
 int VectorSignedToFloat(int, int);
 
@@ -40,7 +40,7 @@ extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003b65a4. */
 
@@ -169,7 +169,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
             (**(romwright_code **)(temp_v2 + 0x12c8))();
             *(unsigned char *)(temp_v2 + 0x12c4) = 0;
           }
-          FUN_002bf538();
+          efctSetSpeed();
         }
       }
       else {
@@ -247,11 +247,11 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
             }
             if (temp_v2 < 8) {
               VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-              FUN_002bf538();
+              efctSetSpeed();
             }
             FUN_002bf288(2,0x28,99,*(short *)(temp_v3 + 8) + temp_v5,
                          temp_v1 + temp_v8 + (int)*(short *)(temp_v3 + 10),0xce);
-            FUN_002bf538();
+            efctSetSpeed();
           }
           else if ((0 < *(short *)(param_1 + temp_v8 * 2 + 0xd49a)) ||
                   ((int)*(char *)(param_1 + temp_v8 + 0xd530) < (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x48)))

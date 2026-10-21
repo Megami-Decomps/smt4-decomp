@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(...);
 int FUN_00191e00(...);
 int FUN_0019e378(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 int FUN_00283498(...);
 int sysMemClear(...);
 
@@ -28,7 +28,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
 /* Supplied declaration required: FUN_0019e378. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_00283498. */
 /* Supplied declaration required: sysMemClear. */
 
@@ -109,7 +109,7 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
       FUN_00191e00(g_aocSystem,puVar2[0x10],puVar2[0x11],0x10000);
     }
     else {
-      FUN_001acf98(puVar2[0x10],puVar2[0x11]);
+      asdTMTexLoadMainHeap(puVar2[0x10],puVar2[0x11]);
     }
   }
   puVar2[6] = 0x3e851eb8;

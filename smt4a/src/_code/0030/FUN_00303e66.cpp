@@ -1,37 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303e66` (_code @ 0x303e66, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler changes the register allocation and store/frame scheduling shown by retail. */
+#include "common.h"
 extern "C" {
-
-int FUN_00134d1c(int, unsigned int *, int *, unsigned int *, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00134d1c. */
-
-
-void FUN_00303e66(int param_1,unsigned int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = *(unsigned int **)(param_1 + 100);
-  if (puVar1 != *(unsigned int **)(param_1 + 0x68)) {
-    *(unsigned int **)(param_1 + 100) = puVar1 + 1;
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = param_2;
-    }
-    return;
-  }
-  temp_v0 = param_2;
-  FUN_00134d1c(param_1 + 0x60,puVar1,&temp_v0,*(unsigned int **)(param_1 + 0x68),param_1);
-  return;
+struct Vector { u32 unk00; u32 *current; u32 *end; };
+struct Object { u8 unk00[0x60]; Vector vector; };
+void FUN_00134d1c(Vector *, u32 *, const u32 *);
+/* Appends a scalar to the embedded vector, growing it when full. */
+void FUN_00303e66(Object *object, u32 value) {
+    u32 *slot = object->vector.current;
+    if (slot != object->vector.end) {
+        object->vector.current = slot + 1;
+        if (slot != NULL) *slot = value;
+    } else FUN_00134d1c(&object->vector, slot, &value);
 }
-
-} /* extern "C" */
+}

@@ -1,31 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe94c` (_code @ 0x2fe94c, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler initializes the list sentinel and member values in a different order. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char DAT_00558ab4; /* 0x558ab4 */
-
-extern unsigned int FUN_002ee998(unsigned int *, unsigned int);
-
-
-unsigned int * FUN_002fe94c(unsigned int *param_1)
-
-{
-  unsigned int temp_v0;
-  
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  temp_v0 = FUN_002ee998(param_1 + 1,1);
-  param_1[5] = temp_v0;
-  *(unsigned int *)temp_v0 = temp_v0;
-  *(unsigned int *)(param_1[5] + 4) = param_1[5];
-  *param_1 = (unsigned int)&DAT_00558ab4;
-  return param_1;
+extern const u8 _ZTV9Obj558aac[];
+struct Node { Node *next; Node *previous; };
+struct ListWork { u32 first, second, third, fourth; Node *sentinel; u32 count; };
+struct Object { const void *vtable; ListWork list; };
+Node *FUN_002ee998(ListWork *object, u32 option);
+/* Constructs an empty circular list and initializes its dispatch pointer. */
+Object *FUN_002fe94c(Object *object) {
+    object->list.first = object->list.second = object->list.third = object->list.fourth = 0;
+    object->list.sentinel = NULL;
+    object->list.count = 0;
+    Node *sentinel = FUN_002ee998(&object->list, 1);
+    object->list.sentinel = sentinel;
+    sentinel->next = sentinel;
+    sentinel->previous = sentinel;
+    object->vtable = _ZTV9Obj558aac + 8;
+    return object;
 }
-
-} /* extern "C" */
+}

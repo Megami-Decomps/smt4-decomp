@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, unsigned int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -29,7 +29,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 
 
 void FUN_0026e8b8(int param_1,int param_2,int param_3,unsigned int param_4,int param_5)
@@ -155,7 +155,7 @@ LAB_0026e9d8:
   temp_v2 = FUN_001834a4(0x14,0x5b1);
   FUN_001835b4(2,0x14,0x5b0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,param_4
               );
-  FUN_0019d880();
+  jobGetScalarValue();
   temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == 0.0f) << 0x1e);
   temp_v5 = (unsigned int)!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0);
   VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);

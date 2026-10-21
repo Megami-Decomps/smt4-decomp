@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00192608(void);
 int FUN_0020d164(unsigned char [132], unsigned int);
 int FUN_00230c1c(unsigned char [132], int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_0039a0c0; /* 0x39a0c0 */
 extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern int DAT_0057f0cc; /* 0x57f0cc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_0020d164. */
@@ -77,7 +77,7 @@ void FUN_00399e20(int param_1,unsigned int param_2)
     else {
       FUN_002c0940(&temp_v5,temp_v0 & 0xf);
       FUN_002c0940(temp_v6,*(unsigned char *)(temp_v3 + 0x28) >> 4);
-      FUN_00100388(temp_v7,&LAB_0039a038,&temp_v5,temp_v6);
+      textFormatBuffer(temp_v7,&LAB_0039a038,&temp_v5,temp_v6);
       FUN_003180c4(0x25,temp_v7);
     }
     FUN_0020d164(temp_v7,*(unsigned int *)(temp_v4 + 0x24) >> 0x14);
@@ -85,34 +85,34 @@ void FUN_00399e20(int param_1,unsigned int param_2)
     FUN_00230c1c(temp_v7,*(unsigned char *)(temp_v3 + 0x29));
     FUN_003180c4(0x27,temp_v7);
     if (*(char *)(temp_v4 + 0x2b) == '\0') {
-      FUN_00100388(temp_v7,&LAB_0039a040);
+      textFormatBuffer(temp_v7,&LAB_0039a040);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\x01') {
-      FUN_00100388(temp_v7,&LAB_0039a04c);
+      textFormatBuffer(temp_v7,&LAB_0039a04c);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\x05') {
-      FUN_00100388(temp_v7,&LAB_0039a068);
+      textFormatBuffer(temp_v7,&LAB_0039a068);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\x06') {
-      FUN_00100388(temp_v7,&LAB_0039a078);
+      textFormatBuffer(temp_v7,&LAB_0039a078);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\a') {
-      FUN_00100388(temp_v7,&LAB_0039a084);
+      textFormatBuffer(temp_v7,&LAB_0039a084);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\b') {
-      FUN_00100388(temp_v7,&LAB_0039a090);
+      textFormatBuffer(temp_v7,&LAB_0039a090);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\t') {
-      FUN_00100388(temp_v7,&LAB_0039a09c);
+      textFormatBuffer(temp_v7,&LAB_0039a09c);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\v') {
-      FUN_00100388(temp_v7,&LAB_0039a0a8);
+      textFormatBuffer(temp_v7,&LAB_0039a0a8);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\f') {
-      FUN_00100388(temp_v7,&LAB_0039a0b4);
+      textFormatBuffer(temp_v7,&LAB_0039a0b4);
     }
     if (*(char *)(temp_v4 + 0x2b) == '\r') {
-      FUN_00100388(temp_v7,&LAB_0039a0c0);
+      textFormatBuffer(temp_v7,&LAB_0039a0c0);
     }
     FUN_003180c4(0x28,temp_v7);
     if (param_1 == 0) {

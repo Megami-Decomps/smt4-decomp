@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int DAT_004475d0; /* 0x4475d0 */
+extern int g_activeTextureSlot; /* 0x4475d0 */
 
 
 void FUN_00208cbc(void)
@@ -25,7 +25,7 @@ void FUN_00208cbc(void)
   int temp_v4;
   unsigned int temp_v5 [11];
   
-  temp_v0 = DAT_004475d0;
+  temp_v0 = g_activeTextureSlot;
   temp_v2 = 0;
   temp_v3 = 0x40;
   temp_v5[0] = 0x10;

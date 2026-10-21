@@ -68,7 +68,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001f9334. */
 /* Supplied declaration required: dataTable2fSub0GetCount. */
-extern int FUN_0024f4e8(void);
+extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_002533f4. */
 extern int FUN_00256550(unsigned int);
@@ -190,7 +190,7 @@ void FUN_0021bea0(void)
     temp_v0 = (int)*(char *)(temp_v0 + 0x3b);
   }
   else {
-    temp_v17 = FUN_0024f4e8();
+    temp_v17 = dataTableGetRecordFortyOne();
     temp_v16 = (char *)0x0;
     dataTable29Sub0GetEntryWithAoc();
     temp_v15 = *(int *)(temp_v5 + 0xc);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001624b8(...);
-int FUN_00162808(...);
+int mathInterpolateTimed(...);
 int msgBoxFlagsSetBit7(...);
 int FUN_00167400(void);
 int FUN_00168980(...);
@@ -18,7 +18,7 @@ int ifTouchRegionRemove(void);
 int FUN_00164288(void);
 int FUN_00165088(...);
 int msgBoxFlagsClearBit7(...);
-int FUN_00167f08(void);
+int ifTouchGetButtonHelpValue(void);
 int sysPlaySe(...);
 int FUN_00183f58(...);
 int pairSetFirstResetSecond(...);
@@ -69,8 +69,8 @@ extern float DAT_005e2054; /* 0x5e2054 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001624b8. */
 /* Supplied declaration required: gameDataCounterSpend. */
-/* Supplied declaration required: FUN_00162808. */
-extern int FUN_00162858(void);
+/* Supplied declaration required: mathInterpolateTimed. */
+extern int campIsState85(void);
 extern int FUN_00162880(void);
 /* Supplied declaration required: FUN_00162ec0. */
 extern int FUN_0016345c(void);
@@ -94,7 +94,7 @@ extern int FUN_00165070(void);
 /* Supplied declaration required: FUN_00167400. */
 /* Supplied declaration required: FUN_00167458. */
 extern int FUN_00167e54(void);
-/* Supplied declaration required: FUN_00167f08. */
+/* Supplied declaration required: ifTouchGetButtonHelpValue. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 extern int msgBoxIsState2(unsigned int);
@@ -936,7 +936,7 @@ LAB_0014d584:
           if (*(char *)(temp_v2 + 0x6d) != '\0') {
             *(unsigned char *)(temp_v2 + 0x6d) = 0;
             *(unsigned char *)(DAT_0057f58c + 0x6d) = 0;
-            temp_v1 = FUN_00167f08();
+            temp_v1 = ifTouchGetButtonHelpValue();
             *(unsigned short *)(temp_v2 + 0x19c6) = temp_v1;
             if (*(char *)(temp_v2 + 9) == '\v') {
               eventQueueAddUniqueIfValid(0x1000221);
@@ -977,7 +977,7 @@ LAB_0014d5c4:
                       if (((((temp_v8 == 0) && (temp_v8 = lmapMainIsRunning(), temp_v8 == 0)) &&
                            (temp_v8 = mapMainIsBusy(), temp_v8 == 0)) &&
                           (temp_v8 = QuestCenterMode_IsBusy(), temp_v8 == 0)) ||
-                         ((temp_v8 = FUN_00162858(), temp_v8 != 0 ||
+                         ((temp_v8 = campIsState85(), temp_v8 != 0 ||
                           (temp_v8 = FUN_00162880(), temp_v8 == 0)))) {
                         temp_v3 = 0x9d;
                       }
@@ -1249,7 +1249,7 @@ LAB_0014d428:
     *(float *)(temp_v2 + 0x19e0) = temp_v14;
     if ((int)temp_v14 < 0x41200000) {
       temp_v18 = temp_v17;
-      FUN_00162808(10,(int)temp_v14);
+      mathInterpolateTimed(10,(int)temp_v14);
       *(float *)(temp_v2 + 0x19dc) = temp_v17;
       temp_v16 = temp_v15;
       temp_v17 = temp_v18;
@@ -1260,7 +1260,7 @@ LAB_0014d428:
         *(float *)(temp_v2 + 0x19e0) = temp_v17;
       }
       else {
-        FUN_00162808(10,(int)(temp_v14 - 10.0f));
+        mathInterpolateTimed(10,(int)(temp_v14 - 10.0f));
         *(float *)(temp_v2 + 0x19dc) = temp_v15;
       }
     }
@@ -1268,7 +1268,7 @@ LAB_0014d428:
     temp_v8 = (int)*(float *)(temp_v2 + 0x19e0) % 10;
     if (temp_v8 < 5) {
       temp_v14 = temp_v17;
-      FUN_00162808(5);
+      mathInterpolateTimed(5);
       *(float *)(temp_v2 + 0x19e4) = temp_v17;
       temp_v15 = temp_v16;
       temp_v17 = temp_v14;
@@ -1278,7 +1278,7 @@ LAB_0014d428:
       temp_v15 = temp_v16;
     }
     else {
-      FUN_00162808(5,temp_v8 - 5);
+      mathInterpolateTimed(5,temp_v8 - 5);
       *(unsigned int *)(temp_v2 + 0x19e4) = temp_v3;
       temp_v15 = temp_v16;
     }
@@ -1347,7 +1347,7 @@ LAB_0014dec8:
       }
     }
     else {
-      temp_v8 = FUN_00167f08();
+      temp_v8 = ifTouchGetButtonHelpValue();
       if ((temp_v8 != 0x53) && (g_messageMain != '\0')) {
         temp_v8 = 7;
         FUN_001517b4(7,2);
@@ -1427,12 +1427,12 @@ LAB_0014dfd4:
     DAT_005e2054 = 0.3f;
   }
   else {
-    FUN_00162808(0x1e);
+    mathInterpolateTimed(0x1e);
     DAT_005e2054 = temp_v15;
   }
   iRam005e2050 = iRam005e2050 + 1;
   if (iRam005e2044 < 0x29) {
-    FUN_00162808(0x28);
+    mathInterpolateTimed(0x28);
     DAT_005e2048 = temp_v14;
   }
   else {
@@ -1440,7 +1440,7 @@ LAB_0014dfd4:
       iRam005e2044 = 0;
       return 0;
     }
-    FUN_00162808(0x14,iRam005e2044 - 0x29);
+    mathInterpolateTimed(0x14,iRam005e2044 - 0x29);
     DAT_005e2048 = temp_v17;
   }
   if (iRam005e2044 >= 0x3c) {
@@ -1465,11 +1465,11 @@ LAB_0014c97c:
         temp_v10 = temp_v7 - temp_v23[1];
         temp_v9 = temp_v22;
         temp_v14 = temp_v15;
-        FUN_00162808(temp_v9,temp_v10);
+        mathInterpolateTimed(temp_v9,temp_v10);
       }
     }
     else {
-      FUN_00162808(temp_v9,temp_v10);
+      mathInterpolateTimed(temp_v9,temp_v10);
     }
     temp_v9 = temp_v8 * 4;
     temp_v8 = temp_v8 + 1;

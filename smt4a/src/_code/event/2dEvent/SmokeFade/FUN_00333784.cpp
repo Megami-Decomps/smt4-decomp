@@ -8,7 +8,7 @@ int asdTMTexTableLoadTmx(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 int FUN_002804b0(...);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -34,9 +34,9 @@ extern unsigned int DAT_0057f484; /* 0x57f484 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_002804b0. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 
 
 void FUN_00333784(unsigned int param_1,unsigned int param_2)
@@ -78,14 +78,14 @@ void FUN_00333784(unsigned int param_1,unsigned int param_2)
   puVar1[5] = param_2;
   temp_v1 = 0;
   do {
-    temp_v0 = FUN_00341940((&DAT_0057f480)[temp_v1 * 3]);
+    temp_v0 = textureGetIndexedResource((&DAT_0057f480)[temp_v1 * 3]);
     if (temp_v0 == 0) {
       asdTMTexTableLoadTmx((&DAT_0057f480)[temp_v1 * 3],0);
       *(unsigned char *)(temp_v1 * 0xc + 0x57f489) = 1;
     }
     temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0057f480)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
     if (temp_v0 == 0) {
-      FUN_001acf98((&DAT_0057f480)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
+      asdTMTexLoadMainHeap((&DAT_0057f480)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
       *(unsigned char *)(temp_v1 * 0xc + 0x57f488) = 1;
     }
     temp_v1 = temp_v1 + 1;

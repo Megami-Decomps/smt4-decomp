@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162808(...);
+int mathInterpolateTimed(...);
 int FUN_001f4908(int, int, unsigned int);
 int FUN_003d54f8(...);
 int VectorSignedToFloat(int, int);
@@ -14,7 +14,7 @@ extern unsigned int DAT_0057f480; /* 0x57f480 */
 extern unsigned int DAT_0057f484; /* 0x57f484 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162808. */
+/* Supplied declaration required: mathInterpolateTimed. */
 extern int FUN_00162ea4(void);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f4908. */
@@ -102,11 +102,11 @@ unsigned int FUN_0023af68(void)
       piVar5 = (int *)(*(int *)(DAT_0057f47c + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
     }
     temp_v4 = temp_v5;
-    FUN_00162808(*piVar5,*(unsigned int *)(temp_v0 + 0x18));
+    mathInterpolateTimed(*piVar5,*(unsigned int *)(temp_v0 + 0x18));
     *(float *)(temp_v0 + 0x1c) = temp_v5;
     temp_v2 = piVar5[1];
     if (temp_v2 <= *(int *)(temp_v0 + 0x18)) {
-      FUN_00162808(*piVar5 - temp_v2,*(int *)(temp_v0 + 0x18) - temp_v2);
+      mathInterpolateTimed(*piVar5 - temp_v2,*(int *)(temp_v0 + 0x18) - temp_v2);
       *(float *)(temp_v0 + 0x20) = temp_v4;
     }
     *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
@@ -120,10 +120,10 @@ unsigned int FUN_0023af68(void)
       piVar5 = (int *)(*(int *)(DAT_0057f47c + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
     }
     temp_v4 = temp_v6;
-    FUN_00162808(piVar5[2],*(unsigned int *)(temp_v0 + 0x18));
+    mathInterpolateTimed(piVar5[2],*(unsigned int *)(temp_v0 + 0x18));
     *(float *)(temp_v0 + 0x1c) = temp_v6;
     if (piVar5[3] <= *(int *)(temp_v0 + 0x18)) {
-      FUN_00162808(piVar5[2] - piVar5[3],*(int *)(temp_v0 + 0x18) - piVar5[1]);
+      mathInterpolateTimed(piVar5[2] - piVar5[3],*(int *)(temp_v0 + 0x18) - piVar5[1]);
       *(float *)(temp_v0 + 0x20) = temp_v4;
     }
     *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;

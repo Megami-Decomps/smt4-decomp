@@ -9,7 +9,7 @@ int libc_strcmp(...);
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: libc_strcmp. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 int FUN_004f6478(int param_1)
@@ -21,7 +21,7 @@ int FUN_004f6478(int param_1)
   int temp_v1;
   
   btlGetMainState();
-  temp_v0 = FUN_003e8430();
+  temp_v0 = btlScriptUnitHasFlags();
   if (temp_v0 != 0) {
     temp_v0 = -1;
   }

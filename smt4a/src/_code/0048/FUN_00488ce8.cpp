@@ -96,9 +96,9 @@ extern unsigned int FUN_00492c84(int);
 extern unsigned int FUN_004d03d0(unsigned int **, int *);
 /* Supplied declaration required: FUN_004d040c. */
 extern int FUN_004d04c4(void);
-extern int FUN_004d04f4(void);
-extern int FUN_004d0524(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestConfirmPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
@@ -257,7 +257,7 @@ unsigned int FUN_00488ce8(int param_1)
     FUN_00492c18(temp_v14,&temp_v12);
     puVar7 = (unsigned char *)(param_1 + 0x7b91);
     *puVar7 = 1;
-    temp_v1 = FUN_004d0524();
+    temp_v1 = inputIsQuestConfirmPressed();
     puVar10 = (unsigned int *)(param_1 + 0x20510);
     puVar8 = (unsigned char *)(param_1 + 0x7b90);
     if (temp_v1 != 0) {
@@ -291,7 +291,7 @@ unsigned int FUN_00488ce8(int param_1)
       *(unsigned char *)(param_1 + 0x5b) = 0;
     }
     else {
-      temp_v1 = FUN_004d04f4();
+      temp_v1 = inputIsQuestCancelPressed();
       if (temp_v1 != 0) {
         FUN_003d2150(0x1000229);
         if (DAT_005f1a5e != '\0') {
@@ -354,7 +354,7 @@ unsigned int FUN_00488ce8(int param_1)
             sysPlaySe(temp_v7);
           }
           else {
-            temp_v1 = FUN_004d0554();
+            temp_v1 = inputIsQuestMenuPressed();
             if (temp_v1 != 0) {
               FUN_003d2150(0x100020f);
               if (DAT_005f1a5e != '\0') {

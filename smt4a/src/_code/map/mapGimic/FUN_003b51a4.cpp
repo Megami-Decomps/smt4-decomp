@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00178b04(...);
-int FUN_003fd76c(...);
+int controllerSetDestination(...);
 int FUN_003fdb18(...);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
@@ -19,11 +19,11 @@ typedef struct {
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapGimic; /* 0x580ca0 */
-extern unsigned char DAT_00580ca8; /* 0x580ca8 */
+extern unsigned char g_mapEntries; /* 0x580ca8 */
 
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -44,7 +44,7 @@ void FUN_003b51a4(void)
   
   temp_v1 = g_mapGimic;
   temp_v4 = 0;
-  while ((temp_v0 = temp_v4 * 0x30, *(int *)(&DAT_00580ca8 + temp_v0) != (int)*(short *)(g_mapGimic + 6)
+  while ((temp_v0 = temp_v4 * 0x30, *(int *)(&g_mapEntries + temp_v0) != (int)*(short *)(g_mapGimic + 6)
          || (*(int *)(temp_v0 + 0x580cac) != (int)*(short *)(g_mapGimic + 8)))) {
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 0x13) {
@@ -74,7 +74,7 @@ void FUN_003b51a4(void)
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(temp_v1 + 0x9c8),0);
   temp_v3 = *(unsigned int *)(*(int *)(temp_v1 + 0x9c8) + 4);
-  FUN_003fd76c(temp_v3,temp_v1 + 0x9b8);
+  controllerSetDestination(temp_v3,temp_v1 + 0x9b8);
   FUN_003fdb18(temp_v3);
   FUN_003fe86c(temp_v3,(int)*(short *)(temp_v1 + 0x9b6),2);
   FUN_0040ace8(g_handleRegistry,temp_v3);

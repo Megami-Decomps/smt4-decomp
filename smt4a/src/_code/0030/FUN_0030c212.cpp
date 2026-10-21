@@ -1,36 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c212` (_code @ 0x30c212, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'beq.n 18'; compiler emits 'beq.n 1a' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-
-void FUN_0030c212(int *param_1)
-
-{
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *param_1;
-  temp_v1 = *(int *)(temp_v0 + 0xc);
-  if (temp_v1 != 0) {
-    *param_1 = temp_v1;
-    while (temp_v1 = *(int *)(temp_v1 + 8), temp_v1 != 0) {
-      *param_1 = temp_v1;
+struct Node {
+    u32 reserved;
+    Node *parent,*left,*right;
+};
+void FUN_0030c212(Node **current) {
+    Node *node=*current;
+    if(node->right) {
+        node=node->right;
+        while(node->left) node=node->left;
+        *current=node;
+    } else {
+        Node *parent=node->parent;
+        while(node==parent->right) {
+            node=parent;
+            parent=parent->parent;
+        }
+        if(node->right!=parent) node=parent;
+        *current=node;
     }
-  }
-  else {
-    while( 1 ) {
-      temp_v0 = *(int *)(temp_v0 + 4);
-      if (*param_1 != *(int *)(temp_v0 + 0xc)) break;
-      *param_1 = temp_v0;
-    }
-    if (*(int *)(*param_1 + 0xc) != temp_v0) {
-      *param_1 = temp_v0;
-      return;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,55 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017fc94` (_code @ 0x17fc94, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vldmia r2, {s0-s11} where the compiled block uses vldr s10, [r1, #8]. */
+#include "common.h"
 
-extern "C" {
+struct Vector3 {
+    f32 x; // 0x00
+    f32 y; // 0x04
+    f32 z; // 0x08
+};
 
+struct Matrix3x4 {
+    f32 m00; // 0x00
+    f32 m01; // 0x04
+    f32 m02; // 0x08
+    f32 m03; // 0x0C
+    f32 m10; // 0x10
+    f32 m11; // 0x14
+    f32 m12; // 0x18
+    f32 m13; // 0x1C
+    f32 m20; // 0x20
+    f32 m21; // 0x24
+    f32 m22; // 0x28
+    f32 m23; // 0x2C
+};
 
-void FUN_0017fc94(unsigned int *param_1,float *param_2,unsigned int *param_3)
-
+extern "C" void FUN_0017fc94(Matrix3x4* destination,
+                              const Vector3* translation,
+                              const Matrix3x4* source)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  float temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  
-  temp_v0 = param_3[1];
-  temp_v1 = param_3[2];
-  temp_v2 = (float)param_3[3];
-  temp_v3 = param_3[4];
-  temp_v4 = param_3[5];
-  temp_v5 = param_3[6];
-  temp_v6 = (float)param_3[7];
-  temp_v7 = param_3[8];
-  temp_v8 = param_3[9];
-  temp_v9 = param_3[10];
-  temp_v10 = (float)param_3[0xb];
-  temp_v11 = *param_2;
-  temp_v12 = param_2[1];
-  temp_v13 = param_2[2];
-  *param_1 = *param_3;
-  param_1[1] = temp_v0;
-  param_1[2] = temp_v1;
-  param_1[3] = temp_v2 + temp_v11;
-  param_1[4] = temp_v3;
-  param_1[5] = temp_v4;
-  param_1[6] = temp_v5;
-  param_1[7] = temp_v6 + temp_v12;
-  param_1[8] = temp_v7;
-  param_1[9] = temp_v8;
-  param_1[10] = temp_v9;
-  param_1[0xb] = temp_v10 + temp_v13;
-  return;
+    Matrix3x4 result = *source;
+    result.m03 += translation->x;
+    result.m13 += translation->y;
+    result.m23 += translation->z;
+    *destination = result;
 }
-
-} /* extern "C" */

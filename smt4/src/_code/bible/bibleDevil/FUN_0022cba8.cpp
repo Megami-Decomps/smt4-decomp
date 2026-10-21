@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00212490(...);
+int digitsDrawAtAreaCorner(...);
 int FUN_0022d7b0(...);
 int FUN_0022d800(...);
 int FUN_0022d9c8(...);
@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned int DAT_0049375c; /* 0x49375c */
 
-/* Supplied declaration required: FUN_00212490. */
+/* Supplied declaration required: digitsDrawAtAreaCorner. */
 /* Supplied declaration required: FUN_0022d7b0. */
 /* Supplied declaration required: FUN_0022d800. */
 /* Supplied declaration required: FUN_0022d9c8. */
@@ -155,7 +155,7 @@ LAB_0022cd30:
                   drawSetColorFromRGBA8(DAT_0049375c);
                 }
                 temp_v16 = (float)(temp_v11 * 0x20 + 0x49361c);
-                FUN_00212490(param_1 + 200,*(unsigned int *)(temp_v11 * 4 + 0x4935cc),
+                digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v11 * 4 + 0x4935cc),
                              *(unsigned int *)(temp_v11 * 4 + 0x4935f4),temp_v12);
                 temp_v2 = temp_v7;
               }
@@ -193,7 +193,7 @@ LAB_0022cd30:
                   drawSetColorFromRGBA8(DAT_0049375c);
                 }
                 temp_v16 = (float)(temp_v0 * 0x20 + 0x49361c);
-                FUN_00212490(param_1 + 200,*(unsigned int *)(temp_v0 * 4 + 0x4935cc),
+                digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v0 * 4 + 0x4935cc),
                              *(unsigned int *)(temp_v0 * 4 + 0x4935f4),temp_v13);
                 temp_v2 = temp_v10;
               }
@@ -221,7 +221,7 @@ LAB_0022cd30:
             FUN_0022d9c8(param_1,*(unsigned int *)(temp_v2 * 4 + 0x49357c),temp_v2,1);
             drawSetColorFromRGBA8((&DAT_0049375c)[temp_v2]);
             temp_v16 = (float)(temp_v2 * 0x20 + 0x49361c);
-            FUN_00212490(param_1 + 200,*(unsigned int *)(temp_v2 * 4 + 0x4935cc),
+            digitsDrawAtAreaCorner(param_1 + 200,*(unsigned int *)(temp_v2 * 4 + 0x4935cc),
                          *(unsigned int *)(temp_v2 * 4 + 0x4935f4),temp_v12);
             FUN_002bed3c();
           }

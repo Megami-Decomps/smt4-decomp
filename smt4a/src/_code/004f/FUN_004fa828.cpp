@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int btlGetMainState(...);
 int FUN_002804b0(...);
 int FUN_002c1c88(...);
@@ -35,7 +35,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_btlCamera; /* 0x571508 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -230,7 +230,7 @@ LAB_004fab24:
     do {
       sysMemClear(temp_v12,0x80);
       sysMemClear(temp_v10,0x80);
-      FUN_00100388(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
+      textFormatBuffer(temp_v10,"battle/effect/%s.eft","ef_e_ref" + temp_v4 * 0x20);
       libc_strcpy(temp_v12,temp_v10);
       temp_v2 = param_1 + temp_v4 * 0x8c;
       temp_v3 = FUN_00100d60(temp_v12,0x2f);

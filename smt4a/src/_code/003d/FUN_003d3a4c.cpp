@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [84], unsigned char *);
+int textFormatBuffer(unsigned char [84], unsigned char *);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
@@ -37,7 +37,7 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(int);
@@ -112,7 +112,7 @@ void FUN_003d3a4c(int param_1,int param_2)
       temp_v8 = FUN_001834a4(0x12,temp_v6 + 0x44c);
       temp_v9 = FUN_001834a4(0x12,1099);
       if (temp_v1) {
-        FUN_00100388(temp_v15,&LAB_003d3efc);
+        textFormatBuffer(temp_v15,&LAB_003d3efc);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v9 + 8) + param_1,

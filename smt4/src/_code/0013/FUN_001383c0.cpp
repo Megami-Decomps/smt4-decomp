@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002bb150; not written yet. */
+/* NON_MATCHING: supervisor-call wrapper requires an intrinsic forbidden by the assignment. */
 #include "common.h"

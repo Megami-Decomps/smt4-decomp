@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(char [260], int *);
+int textFormatBuffer(char [260], int *);
 int asdFileAllocBuffer(int, int *);
 int asdMemFreeAndClear(int *);
 int FUN_00192d3c(int *, int, int);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern char libc_toupper(int);
 /* Supplied declaration required: asdFileAllocBuffer. */
 /* Supplied declaration required: asdMemFreeAndClear. */
@@ -50,7 +50,7 @@ unsigned int asdFileHashPackReadRequest(int param_1,int *param_2)
     return 0;
   }
   rt_aeabi_memclr(temp_v9,0x100);
-  FUN_00100388(temp_v9,param_2 + 0xb);
+  textFormatBuffer(temp_v9,param_2 + 0xb);
   temp_v1 = wstrlen(temp_v9);
   FUN_001a72b0(param_1,temp_v9,temp_v1);
   temp_v2 = wstrlen(temp_v9);

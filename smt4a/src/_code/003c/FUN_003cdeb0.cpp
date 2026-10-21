@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -31,7 +31,7 @@ extern unsigned char LAB_003ce2d8; /* 0x3ce2d8 */
 extern unsigned char LAB_003ce2f0; /* 0x3ce2f0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -45,7 +45,7 @@ extern int FUN_002a4860(void);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_0035b540. */
 /* Supplied declaration required: FUN_00389d9c. */
-extern int FUN_004bca68(unsigned int, unsigned short);
+extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004bd6b0. */
 
@@ -139,7 +139,7 @@ void FUN_003cdeb0(int param_1,unsigned int param_2,int param_3,int param_4)
   }
   param_1 = param_1 + temp_v9 * 2;
   temp_v14 = FUN_0014bd84(*(unsigned short *)(param_1 + 0x8b70));
-  FUN_00100388(temp_v16,&LAB_003ce2d8,temp_v14);
+  textFormatBuffer(temp_v16,&LAB_003ce2d8,temp_v14);
   temp_v11 = FUN_001834a4(0x1a,0x1a2);
   VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v11 + 10) + param_4,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -150,7 +150,7 @@ void FUN_003cdeb0(int param_1,unsigned int param_2,int param_3,int param_4)
   FUN_00185e84((int)*(short *)(param_1 + 0x8b70),
                (int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v11 + 8) + param_3,
                (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v11 + 10) + param_4,0x8d,0,0);
-  temp_v13 = FUN_004bca68(temp_v17,*(unsigned short *)(param_1 + 0x8b70));
+  temp_v13 = recordContainsPairedId(temp_v17,*(unsigned short *)(param_1 + 0x8b70));
   if (temp_v13 == 0) {
     temp_v15 = FUN_002a4894(temp_v8);
     FUN_004bd6b0(temp_v17,*(unsigned short *)(param_1 + 0x8b70),temp_v15);

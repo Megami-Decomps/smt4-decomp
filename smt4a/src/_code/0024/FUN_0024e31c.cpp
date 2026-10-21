@@ -18,7 +18,7 @@ int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00184c40(int, int, int);
 int FUN_001879d0(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_002a6c3c(...);
 int FUN_002fb5c4(int);
 int FUN_003210bc(int, int);
@@ -65,7 +65,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00184c40. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002a6c3c. */
 /* Supplied declaration required: FUN_002fb5c4. */
 /* Supplied declaration required: FUN_003210bc. */
@@ -207,7 +207,7 @@ unsigned int FUN_0024e31c(void)
             }
             temp_v0 = 1;
           }
-          FUN_0019d880();
+          jobGetScalarValue();
           temp_v7 = 0.29f;
           FUN_001879d0(g_renderCtx);
           temp_v4 = (int)temp_v7;

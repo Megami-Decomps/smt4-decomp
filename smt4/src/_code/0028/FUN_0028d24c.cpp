@@ -18,7 +18,7 @@ typedef struct SlotOwner {
     /* 0x2F34 */ u32 rank;
 } SlotOwner;
 
-extern Slot *FUN_0026efec(int index);
+extern Slot *saveGetIndexedMapValue(int index);
 extern Slot *FUN_002ae164(u32 id);
 
 /* Finds the id in the owner's list whose slot has the owner's rank (or, with no valid rank, the number of active slots). */
@@ -30,7 +30,7 @@ u32 FUN_0028d24c(SlotOwner *owner)
     if ((u32)(rank - 1) > 3) {
         rank = 0;
         for (i = 0; i < 12; i++) {
-            if (FUN_0026efec(i)->active != 0) {
+            if (saveGetIndexedMapValue(i)->active != 0) {
                 rank++;
             }
         }

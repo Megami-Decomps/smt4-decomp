@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void *FUN_0026efec(int index);
+extern void *saveGetIndexedMapValue(int index);
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x48];
@@ -27,7 +27,7 @@ u32 FUN_00293988(Scene *scene)
         active = 0;
         i = active;
         do {
-            entry = (Entry *)FUN_0026efec(i);
+            entry = (Entry *)saveGetIndexedMapValue(i);
             i = i + 1;
             if (entry->unk48 != 0) {
                 active = active + 1;

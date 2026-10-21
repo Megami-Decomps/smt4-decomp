@@ -14,7 +14,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_0022368c(void);
 int FUN_00233e10(int, unsigned int);
-int FUN_00294a44(void);
+int mapIfReleaseResource(void);
 int mapIfReleaseSlot4(void);
 int FUN_002dae68(void);
 int FUN_002e364c(int);
@@ -55,7 +55,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00294a44. */
+/* Supplied declaration required: mapIfReleaseResource. */
 /* Supplied declaration required: mapIfReleaseSlot4. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
@@ -66,7 +66,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -188,7 +188,7 @@ void FUN_0033eb28(void)
             }
             else {
               temp_v2 = padButtonIsPressed(6);
-              if ((temp_v2 != 0) || (temp_v2 = FUN_004d0554(), temp_v2 != 0)) {
+              if ((temp_v2 != 0) || (temp_v2 = inputIsQuestMenuPressed(), temp_v2 != 0)) {
                 temp_v2 = DAT_005806a4;
                 *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v2 + 0xb0) = 0;
@@ -258,7 +258,7 @@ void FUN_0033eb28(void)
           return;
         }
         if (temp_v1 == 0x5b) {
-          FUN_00294a44();
+          mapIfReleaseResource();
           temp_v2 = g_lmapScene;
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v2 + 8) = 0;
@@ -299,7 +299,7 @@ void FUN_0033eb28(void)
       FUN_002342b8();
     }
     if ((*(int *)(g_lmapScene + 8) >= 0x1f) && (temp_v2 = mapIfHasSelection(), temp_v2 == 0)) {
-      FUN_00294a44();
+      mapIfReleaseResource();
       temp_v2 = DAT_005806a4;
       *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v2 + 0xb0) = 0;

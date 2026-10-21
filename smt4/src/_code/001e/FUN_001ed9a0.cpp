@@ -13,7 +13,7 @@ int FUN_002be5a4(int, unsigned int, int);
 int FUN_002bed3c(void);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int dataTableGet(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -42,7 +42,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 extern int libc_strlen(int);
@@ -93,7 +93,7 @@ unsigned char FUN_001ed9a0(void)
           (**(romwright_code **)(temp_v4 + 0x1268))();
           *(unsigned char *)(temp_v4 + 0x1264) = 0;
         }
-        FUN_002bf538();
+        efctSetSpeed();
         FUN_002bf4f8(0x36,0x56);
         temp_v4 = FUN_002bf4f8(0x36,0x59);
         temp_v10 = 0.305f;
@@ -121,7 +121,7 @@ unsigned char FUN_001ed9a0(void)
           (**(romwright_code **)(temp_v5 + 0x1268))();
           *(unsigned char *)(temp_v5 + 0x1264) = 0;
         }
-        FUN_002bf538();
+        efctSetSpeed();
       }
     }
     temp_v5 = g_titleScene;
@@ -142,7 +142,7 @@ unsigned char FUN_001ed9a0(void)
           (**(romwright_code **)(temp_v5 + 0x1268))();
           *(unsigned char *)(temp_v5 + 0x1264) = 0;
         }
-        FUN_002bf538();
+        efctSetSpeed();
         temp_v13 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
         temp_v16 = (unsigned int)temp_v12;
         temp_v14 = temp_v13;
@@ -158,7 +158,7 @@ unsigned char FUN_001ed9a0(void)
           (**(romwright_code **)(temp_v6 + 0x1268))();
           *(unsigned char *)(temp_v6 + 0x1264) = 0;
         }
-        FUN_002bf538();
+        efctSetSpeed();
         FUN_002bed3c();
       }
     }

@@ -9,8 +9,8 @@ int FUN_004d2628(...);
 int FUN_004d352c(...);
 int FUN_004d3c94(...);
 
-int FUN_00280328(...);
-int FUN_002ea508(...);
+int asdListBoxCreateDefaultFlags(...);
+int jobSetText(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(...);
@@ -113,8 +113,8 @@ extern unsigned int DAT_0057aa2c; /* 0x57aa2c */
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_00280328. */
-/* Supplied declaration required: FUN_002ea508. */
+/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
+/* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxGetIntValuePtr. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
@@ -535,11 +535,11 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
         jobStop(param_1[4],0);
       }
       temp_v6 = *(unsigned int *)(param_2 + 0x80);
-      FUN_00280328(temp_v6,0x75,0);
+      asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
       param_1[4] = temp_v6;
       asdListBoxAddItems();
       asdListBoxSetByteValue(param_1[4],1);
-      FUN_002ea508(param_1[4],"btl Camera Menu");
+      jobSetText(param_1[4],"btl Camera Menu");
     }
     temp_v6 = 4;
     break;
@@ -804,11 +804,11 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
-    FUN_00280328(temp_v6,0x75,0);
+    asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_002ea508(param_1[4],"btl Param Menu");
+    jobSetText(param_1[4],"btl Param Menu");
     asdListBoxSetIntItem(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
     param_1[7] = 0xffffffff;
     temp_v6 = 0xc;
@@ -828,11 +828,11 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
-    FUN_00280328(temp_v6,0x75,0);
+    asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_002ea508(param_1[4],"btl Bad Menu");
+    jobSetText(param_1[4],"btl Bad Menu");
     asdListBoxSetIntItem(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
     *(unsigned char *)(param_1 + 5) = 0;
     *(unsigned char *)((int)param_1 + 0x15) = 0;
@@ -946,11 +946,11 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
-    FUN_00280328(temp_v6,0x75,0);
+    asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_002ea508(param_1[4],"btl Result Menu");
+    jobSetText(param_1[4],"btl Result Menu");
     asdListBoxSetToggleItem(param_1[4],0,
                  (*(unsigned int *)(param_2 + 0x45a8) & DAT_00571740) != 0 ||
                  (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571744) != 0);
@@ -1004,11 +1004,11 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
       jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
-    FUN_00280328(temp_v6,0x75,0);
+    asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_002ea508(param_1[4],"btl Sake Menu");
+    jobSetText(param_1[4],"btl Sake Menu");
     FUN_00340edc(param_1[4],0,0,10);
     FUN_00340edc(param_1[4],1,0);
     FUN_00340edc(param_1[4],2,0,1);
@@ -1073,11 +1073,11 @@ LAB_004d729c:
       jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
-    FUN_00280328(temp_v6,0x75,0);
+    asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_002ea508(param_1[4],"btl Face Menu");
+    jobSetText(param_1[4],"btl Face Menu");
     asdListBoxSetIntItem(param_1[4],0,0,0,3,0);
     temp_v6 = 0x1e;
     param_1[7] = 0;
@@ -1097,11 +1097,11 @@ LAB_004d729c:
       jobStop(param_1[4],0);
     }
     temp_v6 = *(unsigned int *)(param_2 + 0x80);
-    FUN_00280328(temp_v6,0x75,0);
+    asdListBoxCreateDefaultFlags(temp_v6,0x75,0);
     param_1[4] = temp_v6;
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
-    FUN_002ea508(param_1[4],"btl Debug Menu");
+    jobSetText(param_1[4],"btl Debug Menu");
     *param_1 = 0;
     return 0;
   case 0x20:

@@ -15,7 +15,7 @@ int FUN_00270104(void);
 int FUN_002a4878(int);
 int FUN_002c2c4c(...);
 int FUN_002cb438(int, unsigned int, int);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int FUN_003756c8(void);
 int gameDataFlagTestBit(int);
 
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -39,11 +39,11 @@ extern int FUN_00167f08(void);
 extern int FUN_002c2c68(unsigned int);
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
-/* Supplied declaration required: FUN_00341f88. */
-extern int FUN_00348ed0(unsigned int);
+/* Supplied declaration required: buttonHelpGetValue. */
+extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: FUN_003756c8. */
 /* Supplied declaration required: gameDataFlagTestBit. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 void FUN_0020ad6c(int param_1,int param_2,int param_3)
@@ -66,20 +66,20 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
     FUN_00203b40(param_1 + 0x3bdc,4,1,4,1,1);
   }
   if (*piVar5 == 0x13 || *piVar5 == 0x16) {
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
   }
   temp_v1 = *piVar5;
   if ((temp_v1 == 0x22 || temp_v1 == 0x23) || temp_v1 == 0x24) {
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
   }
-  temp_v1 = FUN_00167f08();
+  temp_v1 = ifTouchGetButtonHelpValue();
   if (temp_v1 == 0x3f) {
     btlGetMainState();
-    temp_v1 = FUN_003e8430();
+    temp_v1 = btlScriptUnitHasFlags();
     if (temp_v1 == 0) {
-      FUN_00341f88();
+      buttonHelpGetValue();
       sysPlaySe();
     }
   }
@@ -146,7 +146,7 @@ LAB_0020b03c:
     }
     puVar7 = (unsigned int *)(param_1 + 0x3c40);
     temp_v4 = 0;
-    temp_v1 = FUN_00348ed0(*puVar7);
+    temp_v1 = uiSearchPrimary(*puVar7);
     if (0 < temp_v1) {
       do {
         if (*piVar5 == 1) {
@@ -163,11 +163,11 @@ LAB_0020b03c:
         temp_v4 = temp_v4 + 1;
         *(unsigned short *)(param_1 + temp_v1 + 0x4824) = temp_v0;
         *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-        temp_v1 = FUN_00348ed0(*puVar7);
+        temp_v1 = uiSearchPrimary(*puVar7);
       } while (temp_v4 < temp_v1);
     }
     temp_v1 = FUN_002c2c68(*puVar7);
-    temp_v4 = FUN_00348ed0(*puVar7);
+    temp_v4 = uiSearchPrimary(*puVar7);
     if (temp_v4 < temp_v1) {
       if (*piVar5 != 1) {
         if (*piVar5 != 2) {

@@ -1,20 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156850` (_code @ 0x156850, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler omits retail mov r4, r1. */
+#include "common.h"
 
-extern "C" {
+struct LookupEntry {
+    u32 unk00;      // 0x00
+    u32 unk04;      // 0x04
+    u8 payload[1]; // 0x08
+};
 
-int FUN_001ad9b4(void);
+extern "C" LookupEntry* FUN_001ad9b4(void* context, u32 key);
 
-/* Supplied declaration required: FUN_001ad9b4. */
-
-
-void FUN_00156850(void)
-
+extern "C" u8* FUN_00156850(void* context, u32 key)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001ad9b4();
-  return;
+    LookupEntry* entry = FUN_001ad9b4(context, key);
+    return entry != NULL ? entry->payload : NULL;
 }
-
-} /* extern "C" */

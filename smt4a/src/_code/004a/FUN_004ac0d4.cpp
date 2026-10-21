@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0039ea2c(int);
+int uiObjectClearRequestState(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_0039ea2c. */
+/* Supplied declaration required: uiObjectClearRequestState. */
 
 
 void FUN_004ac0d4(unsigned int param_1,unsigned int param_2)
@@ -45,7 +45,7 @@ void FUN_004ac0d4(unsigned int param_1,unsigned int param_2)
           *(short *)(g_btlUiBlock + temp_v3 * 2 + 0x74bc) = (short)param_2;
           *(char *)(temp_v1 + 0x7504) = *(char *)(temp_v1 + 0x7504) + '\x01';
         }
-        FUN_0039ea2c(temp_v1 + 0x28c4);
+        uiObjectClearRequestState(temp_v1 + 0x28c4);
         return;
       }
       temp_v2 = temp_v2 + 1;
@@ -63,7 +63,7 @@ void FUN_004ac0d4(unsigned int param_1,unsigned int param_2)
     *(short *)(g_btlUiBlock + temp_v3 * 2 + 0x74bc) = (short)param_2;
     *(char *)(temp_v1 + 0x7504) = *(char *)(temp_v1 + 0x7504) + '\x01';
   }
-  FUN_0039ea2c(temp_v1 + 0x28c4);
+  uiObjectClearRequestState(temp_v1 + 0x28c4);
   return;
 }
 

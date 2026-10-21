@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [68], unsigned char *, int);
+int textFormatBuffer(unsigned char [68], unsigned char *, int);
 int FUN_00180118(int);
 int FUN_0023723c(...);
 
@@ -17,7 +17,7 @@ extern unsigned char DAT_00536bd4; /* 0x536bd4 */
 extern unsigned char DAT_00536bd8; /* 0x536bd8 */
 extern int g_bustupViewer; /* 0x588ff0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0023723c. */
 
@@ -35,7 +35,7 @@ void FUN_0028c258(void)
   temp_v2 = *(unsigned int *)(g_bustupViewer + *(int *)(g_bustupViewer + 0x50) * 4 + 0x54);
   temp_v1 = temp_v2;
   FUN_00180118(temp_v1);
-  FUN_00100388(temp_v3,&DAT_00536bd4,temp_v1);
+  textFormatBuffer(temp_v3,&DAT_00536bd4,temp_v1);
   if (temp_v2 != 0) {
     FUN_0023723c(*(unsigned int *)(temp_v0 + 0xa0),2,0xffffffff,0,0,temp_v3);
     return;

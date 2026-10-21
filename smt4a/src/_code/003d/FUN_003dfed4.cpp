@@ -1,25 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dfed4` (_code @ 0x3dfed4, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail argument packing or conditional store scheduling differs. */
+#include "common.h"
 
+struct EntryData {
+    /* 0x00 */ u8 unk00[34];
+    /* 0x22 */ u8 maximum;
+};
 extern "C" {
-
-int dataTable04FindById(void);
-int FUN_002efc44(void);
-
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_002efc44. */
-
-
-void FUN_003dfed4(int param_1)
-
+EntryData *dataTable04FindById(u32 id);
+s32 FUN_002efc44(EntryData *entry, u32 index, s32 kind);
+/* Returns the nonnegative amount remaining below the entry maximum. */
+s32 FUN_003dfed4(u32 id, u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  dataTable04FindById();
-  if (param_1 != 0) {
-    FUN_002efc44();
-  }
-  return;
+    EntryData *entry = dataTable04FindById(id);
+    if (!entry)
+        return 0;
+    s32 remaining = entry->maximum - FUN_002efc44(entry, index, 4);
+    return remaining > 0 ? remaining : 1;
 }
-
-} /* extern "C" */
+}

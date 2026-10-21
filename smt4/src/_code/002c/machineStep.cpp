@@ -15,7 +15,7 @@ typedef struct {
     u8 failed;                /* 0x154 */
 } Machine;
 
-void FUN_001f5f00(void);
+void sequenceRequestZeroArgument(void);
 
 extern Machine *g_staffRoll;
 
@@ -26,7 +26,7 @@ s32 machineStep(void)
     machine->handlers[machine->currentState]();
     if (machine->failed != 0) {
         if (machine->reported == 0) {
-            FUN_001f5f00();
+            sequenceRequestZeroArgument();
         }
         return -1;
     }

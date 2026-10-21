@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_003f5208; /* 0x3f5208 */
 extern unsigned char LAB_003f5218; /* 0x3f5218 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -94,13 +94,13 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
               temp_v7 = *(unsigned short *)(temp_v5 + 100);
               goto LAB_003f510c;
             }
-            FUN_00100388(temp_v13,&LAB_003f5218,0);
+            textFormatBuffer(temp_v13,&LAB_003f5218,0);
           }
           else {
             temp_v5 = gameGetPlayerData();
             temp_v7 = *(unsigned short *)(temp_v5 + 0x62);
 LAB_003f510c:
-            FUN_00100388(temp_v13,&LAB_003f5218,temp_v7);
+            textFormatBuffer(temp_v13,&LAB_003f5218,temp_v7);
             if (temp_v7 >= 100) {
               temp_v11 = 0x6f;
               temp_v10 = param_4;
@@ -131,13 +131,13 @@ LAB_003f510c:
             }
             if (temp_v5 != 0) {
               temp_v3 = FUN_00180114(*(unsigned short *)(temp_v5 + 0x62));
-              FUN_00100388(&temp_v10,&LAB_003f5208,temp_v3);
+              textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
             }
           }
           else {
             gameGetPlayerData();
             temp_v3 = FUN_0015687c();
-            FUN_00100388(&temp_v10,&LAB_003f5208,temp_v3);
+            textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
           }
           temp_v5 = FUN_001834a4(0x11);
           FUN_0018408c(&temp_v10,1);

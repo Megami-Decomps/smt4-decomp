@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
@@ -22,10 +22,10 @@ extern unsigned char LAB_0015121c; /* 0x15121c */
 extern unsigned char LAB_00151228; /* 0x151228 */
 extern unsigned char LAB_0016547c; /* 0x16547c */
 extern int FUN_00167234(...); /* 0x167234 */
-extern int FUN_00167e80(...); /* 0x167e80 */
+extern int titleDbgBgFree(...); /* 0x167e80 */
 extern unsigned int *DAT_00589168; /* 0x589168 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -43,10 +43,10 @@ void FUN_00151118(void)
   DAT_00589168 = puVar1;
   puVar1[2] = 0;
   puVar1[3] = 0;
-  FUN_00100388(puVar1 + 4,&LAB_0015120c,"May 11 2016");
+  textFormatBuffer(puVar1 + 4,&LAB_0015120c,"May 11 2016");
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_0015121c;
-  asdProcessCreateSimple(&LAB_0015121c,4,0,0,&LAB_0016547c,FUN_00167e80,0);
+  asdProcessCreateSimple(&LAB_0015121c,4,0,0,&LAB_0016547c,titleDbgBgFree,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00151228,0x75,0,0,FUN_00167234,0,0,puVar2);
   return;

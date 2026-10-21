@@ -43,7 +43,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_002e5f10. */
-extern unsigned int FUN_004d8f18(unsigned int, unsigned int);
+extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -117,7 +117,7 @@ unsigned int FUN_0050cc3c(fn_0050cc3c_arg0 *param_1,int *param_2,unsigned int *p
                          temp_v4 - temp_v3);
           }
           else {
-            temp_v3 = FUN_004d8f18(param_1->field_0x5c,temp_v13);
+            temp_v3 = containerGrowCapacity(param_1->field_0x5c,temp_v13);
             piVar16 = (int *)param_1->field_0x54;
             temp_v14 = 0;
             temp_v4 = temp_v14;

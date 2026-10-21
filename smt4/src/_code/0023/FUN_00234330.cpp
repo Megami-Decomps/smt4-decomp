@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0023a198(unsigned char [68], unsigned int, unsigned int, unsigned int);
+int stringFormatUnbounded(unsigned char [68], unsigned int, unsigned int, unsigned int);
 int rt_memcpy(unsigned int, unsigned char [68], int);
 
-/* Supplied declaration required: FUN_0023a198. */
+/* Supplied declaration required: stringFormatUnbounded. */
 extern unsigned int FUN_0035a010(unsigned int);
 extern unsigned int FUN_0035a060(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -46,7 +46,7 @@ void FUN_00234330(unsigned int param_1,unsigned int param_2,unsigned int param_3
   default:
     temp_v2 = 0;
   }
-  FUN_0023a198(temp_v3,temp_v2,temp_v1,temp_v0);
+  stringFormatUnbounded(temp_v3,temp_v2,temp_v1,temp_v0);
   rt_memcpy(param_1,temp_v3,0x40);
   return;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int, int [19], unsigned int *);
+int textFormatBuffer(int, int [19], unsigned int *);
 int FUN_00152f44(void);
 int FUN_00180118(unsigned int *);
 int FUN_00184310(void);
@@ -31,7 +31,7 @@ extern unsigned int *DAT_005f1900; /* 0x5f1900 */
 extern unsigned char DAT_005f190c; /* 0x5f190c */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
@@ -158,7 +158,7 @@ LAB_00294e4c:
       rt_memcpy(temp_v9,temp_v1,0x48);
       puVar8 = puVar14;
       FUN_00180118(puVar14);
-      FUN_00100388((int)g_popupState + 0x25,temp_v9,puVar8);
+      textFormatBuffer((int)g_popupState + 0x25,temp_v9,puVar8);
       puVar3 = DAT_005f18fc;
       puVar2 = DAT_005f18f8;
       puVar11 = DAT_005f18f4;

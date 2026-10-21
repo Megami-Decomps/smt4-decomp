@@ -1,33 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f1840` (_code @ 0x2f1840, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler reserves the temporary pair with sub sp instead of saving r2/r3. */
+#include "common.h"
 extern "C" {
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
-
-extern unsigned int *FUN_00307e74(unsigned int *, unsigned int);
-
-
-void FUN_002f1840(unsigned int *param_1,unsigned int *param_2,unsigned int param_3)
-
-{
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = *param_2;
-  temp_v2 = param_2[1];
-  puVar1 = (unsigned int *)FUN_00307e74((unsigned int *)&temp_v1,param_3);
-  temp_v0 = puVar1[1];
-  *param_1 = *puVar1;
-  param_1[1] = temp_v0;
-  return;
+struct Pair { u32 first, second; };
+const Pair *FUN_00307e74(Pair *value, u32 count);
+/* Transforms a pair through temporary storage and copies it back. */
+void FUN_002f1840(Pair *value, const Pair *source, u32 count) {
+    Pair temporary = *source;
+    *value = *FUN_00307e74(&temporary, count);
 }
-
-} /* extern "C" */
+}

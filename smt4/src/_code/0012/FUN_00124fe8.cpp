@@ -1,2 +1,52 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002c1658; not written yet. */
+/* NON_MATCHING: armcc reverses the two switch comparisons and removes a branch retained by retail. */
 #include "common.h"
+
+struct HelpButton {
+    u8 id;
+    u8 unk01[3];
+};
+
+struct ButtonHelpWork {
+    /* 0x000 */ u8 unk000[0x494];
+    /* 0x494 */ HelpButton buttons[6];
+    /* 0x4AC */ u8 unk4AC[0x0C];
+    /* 0x4B8 */ u8 enabled[6];
+};
+
+struct ButtonHelpGlobals {
+    /* 0x00 */ u32 users;
+    /* 0x04 */ ButtonHelpWork *work;
+};
+
+extern "C" {
+
+extern ButtonHelpGlobals g_buttonHelp;
+
+/* Tests the six displayed help buttons, including their alternate aliases. */
+bool FUN_00124fe8(u32 button)
+{
+    ButtonHelpWork *work = g_buttonHelp.work;
+    if (work != NULL) {
+        for (s32 index = 0; index < 6; ++index) {
+            u8 shown = work->buttons[index].id;
+            if (shown == button && work->enabled[index] != 0) {
+                return true;
+            }
+            switch (shown) {
+            case 8:
+                if (button == 4 && work->enabled[index] != 0) {
+                    return true;
+                }
+                break;
+            case 9:
+                if (button == 3 && work->enabled[index] != 0) {
+                    return true;
+                }
+                break;
+            }
+        }
+    }
+    return false;
+}
+
+} /* extern "C" */

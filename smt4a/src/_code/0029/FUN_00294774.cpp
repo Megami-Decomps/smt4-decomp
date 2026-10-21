@@ -1,71 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00294774` (_code @ 0x294774, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #52] where the compiled block uses ldr r1, [pc, #48]. */
+#include "common.h"
+
+struct EplPosition {
+    f32 x; // +0x00
+    f32 y; // +0x04
+    f32 z; // +0x08
+    f32 w; // +0x0C
+};
+
+struct EplSlotStorage {
+    u8 data[0x64]; // Slot stride
+};
+
+struct EplSlotData {
+    u8 unk00[0x48];
+    EplPosition position; // +0x48
+};
+
+struct EplSlotView {
+    u8 unk00[0x0C];
+    EplSlotData data; // +0x0C
+    u32 unk64;        // +0x64
+    void* object;     // +0x68
+};
 
 extern "C" {
+extern EplSlotStorage* g_eplSlots;
+void FUN_001b4eb8(void* object, EplPosition* position);
 
-int FUN_001b4eb8(int, int);
-
-typedef struct fn_00294774_arg0 fn_00294774_arg0;
-typedef struct fn_00294774_arg0_p8c fn_00294774_arg0_p8c;
-struct fn_00294774_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x30];
-    undefined4 field_0x40; /* +0x40 */
-    undefined4 field_0x44; /* +0x44 */
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-    undefined4 field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined4 field_0x58; /* +0x58 */
-    undefined4 field_0x5c; /* +0x5c */
-    float field_0x60; /* +0x60 */
-    unsigned char pad_0x64[0x10];
-    float field_0x74; /* +0x74 */
-    unsigned char pad_0x78[0x14];
-    fn_00294774_arg0_p8c *field_0x8c; /* +0x8c */
-};
-struct fn_00294774_arg0_p8c {
-    unsigned char pad_0x0[0x40];
-    undefined4 field_0x40; /* +0x40 */
-    undefined4 field_0x44; /* +0x44 */
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-    unsigned char pad_0x50[0x18];
-    undefined4 field_0x68; /* +0x68 */
-    unsigned char pad_0x6c[0x24];
-    undefined4 field_0x90; /* +0x90 */
-    unsigned char pad_0x94[0x18];
-    undefined4 field_0xac; /* +0xac */
-};
-
-extern int g_eplSlots; /* 0x580c8c */
-
-/* Supplied declaration required: FUN_001b4eb8. */
-
-
-void FUN_00294774(fn_00294774_arg0 *param_1)
-
+void FUN_00294774(u32 slotIndex, f32 x, f32 y, f32 z)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  
-  temp_v0 = g_eplSlots + (int)param_1 * 100;
-  if (*(int *)(temp_v0 + 0x68) != 0) {
-    *(unsigned int *)(temp_v0 + 0x54) = in_s0;
-    *(unsigned int *)(temp_v0 + 0x58) = in_s1;
-    *(unsigned int *)(temp_v0 + 0x5c) = in_s2;
-    *(unsigned int *)(temp_v0 + 0x60) = 0;
-    FUN_001b4eb8(*(int *)(temp_v0 + 0x68),temp_v0 + 0x54);
-    return;
-  }
-  return;
+    EplSlotView* slot = reinterpret_cast<EplSlotView*>(&g_eplSlots[slotIndex]);
+    void* object = slot->object;
+    if (object != NULL) {
+        slot->data.position.x = x;
+        slot->data.position.y = y;
+        slot->data.position.z = z;
+        slot->data.position.w = 0.0f;
+        FUN_001b4eb8(object, &slot->data.position);
+    }
 }
-
-} /* extern "C" */
+}

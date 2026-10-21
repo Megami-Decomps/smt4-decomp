@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_001634b4(...);
@@ -50,7 +50,7 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
@@ -123,7 +123,7 @@ void FUN_00355428(void)
       } while (temp_v7 < 0x10b);
       temp_v4 = DAT_005f16d4;
       FUN_003799d0(DAT_005f16d4);
-      FUN_00100388(temp_v18,&LAB_0035580c,temp_v4);
+      textFormatBuffer(temp_v18,&LAB_0035580c,temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(3,0xffffffff,temp_v18);
@@ -300,7 +300,7 @@ void FUN_00355428(void)
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1d20);
         FUN_0015f858(temp_v9,0);
-        FUN_00100388(temp_v18,&LAB_00355ef4,temp_v9);
+        textFormatBuffer(temp_v18,&LAB_00355ef4,temp_v9);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v8 + 10),
@@ -382,7 +382,7 @@ LAB_00355f74:
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1dc8);
         FUN_0015f858(temp_v9,0);
-        FUN_00100388(temp_v18,&LAB_00355ef4,temp_v9);
+        textFormatBuffer(temp_v18,&LAB_00355ef4,temp_v9);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v8 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);

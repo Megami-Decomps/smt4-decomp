@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019e3d0(...);
 int FUN_002b5cb4(void);
-int FUN_002d8ac4(void);
+int mapRenderApplySecondary(void);
 int FUN_0050d8e4(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -76,7 +76,7 @@ static float romwright_fabs_4(float value)
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_002b5cb4. */
-/* Supplied declaration required: FUN_002d8ac4. */
+/* Supplied declaration required: mapRenderApplySecondary. */
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -238,7 +238,7 @@ void FUN_002cfb18(void)
       temp_v4 = 0x2db5ffff;
       temp_v3 = 0xffffffff;
     }
-    FUN_002d8ac4();
+    mapRenderApplySecondary();
     FUN_0019e3d0(temp_v3,temp_v4,temp_v3,temp_v4,temp_v18,temp_v7,temp_v18,temp_v19);
     FUN_0019e3d0(0xff,0xff,0xff,0xff,0x3f7c0000,temp_v7,0x3f7c0000,temp_v19);
   }

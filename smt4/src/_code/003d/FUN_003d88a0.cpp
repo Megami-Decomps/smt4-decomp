@@ -1,30 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d88a0` (_code @ 0x3d88a0, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail forms a shared vector base before grouped stores; the typed field accesses are separate. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_003d88a0_arg0 fn_003d88a0_arg0;
-struct fn_003d88a0_arg0 {
-    unsigned char pad_0x0[0x634];
-    uint field_0x634; /* +0x634 */
-    unsigned char pad_0x638[0x50];
-    undefined4 field_0x688; /* +0x688 */
-    undefined4 field_0x68c; /* +0x68c */
-    undefined4 field_0x690; /* +0x690 */
-    undefined4 field_0x694; /* +0x694 */
+struct Vector3 { f32 x, y, z; };
+struct TransitionState {
+    /* 0x000 */ u8 unk00[0x634];
+    /* 0x634 */ u32 flags;
+    /* 0x638 */ u8 unk638[0x50];
+    /* 0x688 */ Vector3 position;
+    /* 0x694 */ u32 frame;
 };
-
-
-void FUN_003d88a0(fn_003d88a0_arg0 *param_1)
-
+/* Resets the transition position and enables its update flag. */
+extern "C" void FUN_003d88a0(TransitionState *state)
 {
-  param_1->field_0x690 = 0;
-  param_1->field_0x68c = 0;
-  param_1->field_0x688 = 0;
-  param_1->field_0x694 = 0;
-  param_1->field_0x634 = param_1->field_0x634 | 0x20;
-  return;
+    state->position.z = 0.0f;
+    state->position.y = 0.0f;
+    state->position.x = 0.0f;
+    state->frame = 0;
+    state->flags |= 32;
 }
-
-} /* extern "C" */

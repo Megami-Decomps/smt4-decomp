@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00212510(unsigned char [64], unsigned char [64]);
+int matrixCopyFull(unsigned char [64], unsigned char [64]);
 int FUN_00226cb0(unsigned char [64], int *, int);
 int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
 int FUN_002a1fb4(int, unsigned char [64], int);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int spEC; /* 0xec: local_ec */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00212510. */
+/* Supplied declaration required: matrixCopyFull. */
 /* Supplied declaration required: FUN_00226cb0. */
 /* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a1fb4. */
@@ -53,7 +53,7 @@ void FUN_00338330(int param_1,unsigned int *param_2,int param_3,unsigned int *pa
     matrix43Multiply(temp_v4,temp_v3,temp_v5);
   }
   else {
-    FUN_00212510(temp_v4,temp_v3);
+    matrixCopyFull(temp_v4,temp_v3);
   }
   if (param_2 != (unsigned int *)0x0) {
     temp_v0 = *param_2;

@@ -1,30 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj55af5cD1Ev` (_code @ 0x301590, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: destructor class hierarchy and embedded base vtable are not fully recovered. */
+#include "common.h"
 extern "C" {
-
-int sharedRefRelease(void);
-int sharedRefInitEmpty(unsigned int *);
-
-extern unsigned char DAT_00558e90; /* 0x558e90 */
-extern unsigned char DAT_0055af64; /* 0x55af64 */
-
-/* Supplied declaration required: sharedRefRelease. */
-/* Supplied declaration required: sharedRefInitEmpty. */
-
-
-void _ZN9Obj55af5cD1Ev(unsigned int *param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0055af64;
-  if (param_1[0x36] != 0) {
-    sharedRefRelease();
-  }
-  param_1[0x24] = (unsigned int)&DAT_00558e90;
-  sharedRefInitEmpty(param_1);
-  return;
+extern const u8 _ZTV9Obj55af5c[], DAT_00558e90;
+void sharedRefRelease(void *reference);
+void sharedRefInitEmpty(void *object);
 }
-
-} /* extern "C" */
+class Obj55af5c {
+public:
+    const void *vtable;
+    u8 unk04[0x8C];
+    const void *baseVtable;
+    u8 unk94[0x44];
+    void *reference;
+    ~Obj55af5c();
+};
+Obj55af5c::~Obj55af5c() {
+    vtable = _ZTV9Obj55af5c + 8;
+    if (reference != NULL) sharedRefRelease(reference);
+    baseVtable = &DAT_00558e90;
+    sharedRefInitEmpty(this);
+}

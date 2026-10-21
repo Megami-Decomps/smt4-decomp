@@ -9,7 +9,7 @@ int dialogSetText(unsigned char [128]);
 int dialogOpen(int, int);
 int FUN_002bcfc0(void);
 int FUN_002bd06c(unsigned int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bfc24(int, int, unsigned int, unsigned int);
 
 extern unsigned char LAB_002e8724; /* 0x2e8724 */
@@ -21,7 +21,7 @@ extern int g_mapIf; /* 0x447a78 */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
 extern unsigned int FUN_002bfdd4(void);
@@ -50,7 +50,7 @@ void FUN_002e8598(unsigned int param_1,unsigned int param_2,int param_3)
     return;
   case 7:
     FUN_0025086c(param_3,temp_v5);
-    FUN_002be624(temp_v4,&LAB_002e8724,temp_v5);
+    textFormatBuffer(temp_v4,&LAB_002e8724,temp_v5);
     temp_v3 = 0x61abf;
     break;
   case 8:
@@ -59,7 +59,7 @@ void FUN_002e8598(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_0025086c(param_3,temp_v5);
     FUN_002bd06c(param_2);
     FUN_002bcfc0();
-    FUN_002be624(temp_v4,&LAB_002e8764,param_2,temp_v5);
+    textFormatBuffer(temp_v4,&LAB_002e8764,param_2,temp_v5);
   }
   dialogSetText(temp_v4);
   dialogOpen(0,1);

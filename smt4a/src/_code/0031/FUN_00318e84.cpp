@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00152cf8(int, int, int, int, int);
 int sysPlaySe(...);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int FUN_00215bbc(void);
 int linkHolderApplyFlag(...);
 int FUN_00284ee4(...);
@@ -27,7 +27,7 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_00215bbc. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_00284ee4. */
@@ -139,7 +139,7 @@ unsigned int FUN_00318e84(int param_1)
       FUN_00319aec(0);
       *(unsigned char *)(param_1 + 0x154) = 0;
       linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),0);
-      FUN_0019ea64(1);
+      messageSetMode(1);
       temp_v0 = gameFlagIsSet(0x49d);
       if (temp_v0 == 0) {
         temp_v2 = 0x92;

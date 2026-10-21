@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [132], unsigned char *, int, int);
+int textFormatBuffer(unsigned char [132], unsigned char *, int, int);
 int dataTable00FindById(void);
 int FUN_002804b0(unsigned char [132], int *, int);
 int sysMemClear(unsigned char [132], int);
@@ -23,7 +23,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int DAT_00573880; /* 0x573880 */
 extern unsigned int DAT_00573884; /* 0x573884 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
@@ -53,7 +53,7 @@ void FUN_003e03b0(unsigned int *param_1,int param_2)
     puVar1 = (unsigned short *)(unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x1ffc) + temp_v0 * 0x408 + 0x166);
     dataTable00FindById();
     sysMemClear(temp_v2,0x80);
-    FUN_00100388(temp_v2,&LAB_003e04ec,*(unsigned char *)(puVar1 + 0x51),
+    textFormatBuffer(temp_v2,&LAB_003e04ec,*(unsigned char *)(puVar1 + 0x51),
                  *(unsigned char *)((int)puVar1 + 0xa3));
     temp_v0 = aocReadyAndAccepts(g_aocSystem,*puVar1);
     piVar4 = (int *)(param_2 + 0x1ec4);

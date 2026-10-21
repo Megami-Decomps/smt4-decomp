@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern u8 DAT_00588fb4;
+extern u8 g_soundVolumeSetting;
 
 /* Returns the byte at 0x588FB4. */
 u8 FUN_00145868(void)
 {
-    return DAT_00588fb4;
+    return g_soundVolumeSetting;
 }
 
 } /* extern "C" */

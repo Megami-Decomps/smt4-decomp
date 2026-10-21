@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 extern int FUN_00162880(void);
 extern int FUN_00167e54(void);
 extern int gameFlagIsSet(unsigned int);
@@ -65,10 +65,10 @@ joined_r0x0039a964:
       else {
         temp_v1 = FUN_002ef9f0();
         if (temp_v1 == 0) {
-          temp_v1 = FUN_00162858();
+          temp_v1 = campIsState85();
           if (temp_v1 != 0) goto LAB_0039a970;
           temp_v1 = sub68OwnerCall2();
-          if (((((temp_v1 == 0) || (temp_v1 = FUN_00162858(), temp_v1 != 0)) ||
+          if (((((temp_v1 == 0) || (temp_v1 = campIsState85(), temp_v1 != 0)) ||
                (temp_v1 = namePollShutdown(), temp_v1 != 0)) &&
               ((temp_v1 = titleMainIsRunning(), temp_v1 == 0 && (temp_v1 = FUN_00284d94(), temp_v1 == 0)))) &&
              ((temp_v1 = QuestCenterMode_IsBusy(), temp_v1 == 0 &&

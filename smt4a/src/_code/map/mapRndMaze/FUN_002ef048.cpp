@@ -8,9 +8,9 @@ int FUN_00178b04(int, unsigned char *, int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00272e64(void);
-int FUN_00352bc4(int, int);
+int mathPositionHeadingDegrees(int, int);
 int FUN_003857c8(int);
-int FUN_003fd76c(unsigned int, float *);
+int controllerSetDestination(unsigned int, float *);
 int FUN_003fdb18(unsigned int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(int, int);
@@ -34,9 +34,9 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00272e64. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003857c8. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
@@ -71,7 +71,7 @@ void FUN_002ef048(void)
     VectorSignedToFloat((int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe00),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe01),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00352bc4((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
+    mathPositionHeadingDegrees((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
     FUN_00272e64();
     temp_v0 = *(char *)(temp_v2 + 0x166c);
     temp_v6 = temp_v5;
@@ -104,7 +104,7 @@ void FUN_002ef048(void)
     FUN_0040aad4((*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)),0);
     temp_v4 = *(unsigned int *)((*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)) + 4);
     FUN_0040ace8(g_handleRegistry,temp_v4);
-    FUN_003fd76c(temp_v4,&temp_v8);
+    controllerSetDestination(temp_v4,&temp_v8);
     FUN_003fdb18(temp_v4);
   }
   return;

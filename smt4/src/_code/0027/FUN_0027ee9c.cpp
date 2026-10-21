@@ -1,22 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027ee9c` (_code @ 0x27ee9c, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
 
 extern "C" {
-
-extern int FUN_0026ee68(unsigned int);
-extern int padIsButtonPressed(unsigned int);
-
-
-unsigned char FUN_0027ee9c(void)
-
+/* Reads or updates the requested state. */
+s32 FUN_0026ee68(u32 kind);
+s32 padIsButtonPressed(u32 button);
+s32 FUN_0027ee9c(void)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_0026ee68(1);
-  temp_v1 = padIsButtonPressed(0);
-  return temp_v1 != 0 || temp_v0 != 0;
+    s32 result = 0;
+    if (FUN_0026ee68(1) != 0) { result = 1; }
+    if (padIsButtonPressed(0) != 0) { result = 1; }
+    return result;
 }
-
-} /* extern "C" */
+}

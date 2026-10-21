@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [132], unsigned char *, int);
+int textFormatBuffer(unsigned char [132], unsigned char *, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001cd3ec(void);
 int FUN_0040a908(unsigned int, int);
@@ -14,7 +14,7 @@ extern unsigned char LAB_00353888; /* 0x353888 */
 extern unsigned char LAB_003538a0; /* 0x3538a0 */
 extern int g_mapGimic; /* 0x580ca0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0040a908. */
@@ -40,7 +40,7 @@ void FUN_003537c8(int param_1)
       return;
     }
   }
-  FUN_00100388(temp_v3,&LAB_00353888,param_1);
+  textFormatBuffer(temp_v3,&LAB_00353888,param_1);
   *(char *)(temp_v2 + 0x8c4) = '\x01';
   temp_v0 = 0x20;
   *(short *)(temp_v2 + 0x8c8) = (short)param_1;

@@ -20,7 +20,7 @@ typedef struct {
 
 extern int g_uiQuest; /* 0x57f28c */
 
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00202400. */
@@ -90,7 +90,7 @@ void FUN_0031f924(void)
   if (*(short *)(temp_v5 + 0xcd0) >= 3) {
     FUN_002ae320();
   }
-  temp_v5 = FUN_00162858();
+  temp_v5 = campIsState85();
   if (temp_v5 != 0) {
     FUN_00202400();
   }

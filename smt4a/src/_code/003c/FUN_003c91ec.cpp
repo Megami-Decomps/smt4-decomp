@@ -25,7 +25,7 @@ void *gameDataBlocksGetSaveData(void);
 void rt_memcpy_w(void *dest, const void *src, u32 size);
 void wordPairCopy(void *dest, void *src);
 void FUN_00358cbc(void);
-void FUN_00138718(void);
+void titleConfigApply(void);
 void FUN_0046bd44(u32 system);
 int gameFlagIsSet(int id);
 void gameFlagSetValue(int id, int a, int b);
@@ -38,7 +38,7 @@ void FUN_003c91ec(void)
         wordPairCopy(configGetSettings(), g_saveLoadUIBase.snapshotB);
         rt_memcpy_w(gameDataBlocksGetSaveData(), g_saveLoadUIBase.snapshotC, 0x2a71c);
         FUN_00358cbc();
-        FUN_00138718();
+        titleConfigApply();
         FUN_0046bd44(g_aocSystem);
         if (g_saveLoadUIBase.requestA && gameFlagIsSet(0x470) == 0) {
             gameFlagSetValue(0x470, 1, 1);

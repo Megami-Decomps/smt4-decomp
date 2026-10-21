@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022e0fc(int, int);
-int FUN_0022e158(int, unsigned char [8]);
+int recordAppendFloatEntry(int, unsigned char [8]);
 int FUN_0022e17c(unsigned char [8], int, int);
 int FUN_0022e2fc(void);
 int FUN_00233670(...);
@@ -31,7 +31,7 @@ typedef struct {
 
 extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_0022e0fc. */
-/* Supplied declaration required: FUN_0022e158. */
+/* Supplied declaration required: recordAppendFloatEntry. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: FUN_00233670. */
@@ -88,7 +88,7 @@ void FUN_0022d434(int param_1)
           temp_v4 = (unsigned int)*puVar4;
           FUN_0029ce60(temp_v4,*(unsigned char *)(param_1 + 0x5a5),0);
           temp_v13 = temp_v4;
-          FUN_0022e158(temp_v2,temp_v12);
+          recordAppendFloatEntry(temp_v2,temp_v12);
         }
       }
       temp_v9 = temp_v9 + 1;
@@ -143,7 +143,7 @@ void FUN_0022d434(int param_1)
             temp_v6 = (unsigned int)*puVar4;
             FUN_0029ce60(temp_v6,*(unsigned char *)(param_1 + 0x5a5),0);
             temp_v13 = temp_v6;
-            FUN_0022e158(temp_v2,temp_v12);
+            recordAppendFloatEntry(temp_v2,temp_v12);
           }
         }
         temp_v4 = (temp_v4 + 1) & 0xffff;

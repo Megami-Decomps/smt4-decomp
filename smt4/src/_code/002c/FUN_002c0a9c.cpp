@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int aocEntryFind(unsigned int, unsigned int);
-extern short *FUN_002ba764(unsigned int, unsigned int);
+extern short *gameDataGetTableEntry(unsigned int, unsigned int);
 extern unsigned int randNextInRange(unsigned int);
 extern int FUN_002c0a84(void);
 
@@ -29,7 +29,7 @@ unsigned int FUN_002c0a9c(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned int temp_v10;
   
   temp_v4 = FUN_002c0a84();
-  psVar6 = (short *)FUN_002ba764(param_1,param_2);
+  psVar6 = (short *)gameDataGetTableEntry(param_1,param_2);
   if (temp_v4 == 0) {
     *(unsigned char *)(psVar6 + 1) = 0;
   }

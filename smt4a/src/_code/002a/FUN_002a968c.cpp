@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -49,7 +49,7 @@ extern unsigned char LAB_002a9de8; /* 0x2a9de8 */
 extern unsigned char LAB_002a9e00; /* 0x2a9e00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -65,7 +65,7 @@ extern unsigned int FUN_00180114(short);
 extern int FUN_0022e9b8(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00344cd0. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0037c988. */
 /* Supplied declaration required: FUN_003afa60. */
 /* Supplied declaration required: FUN_004bcaa8. */
@@ -110,12 +110,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     FUN_001835b4(2,0x1a,0x16b,param_1,param_2,0x6f);
     FUN_001835b4(2,0x1a,0x16c,param_1,param_2,0x74);
     temp_v1 = FUN_001834a4(0x1a,0x168);
-    FUN_00100388(temp_v7,&LAB_002a99ac,&LAB_002a9994);
+    textFormatBuffer(temp_v7,&LAB_002a99ac,&LAB_002a9994);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xff,temp_v7);
     temp_v1 = FUN_001834a4(0x1a,0x169);
-    FUN_00100388(temp_v7,&LAB_002a99ac,&LAB_002a99b4);
+    textFormatBuffer(temp_v7,&LAB_002a99ac,&LAB_002a99b4);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xff,temp_v7);
@@ -149,13 +149,13 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     }
     temp_v1 = FUN_001834a4(0x1a,0x4d);
     temp_v2 = FUN_00180114(*psVar3);
-    FUN_00100388(temp_v7,&LAB_002a99ac,temp_v2);
+    textFormatBuffer(temp_v7,&LAB_002a99ac,temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xffffffff,temp_v7);
     temp_v1 = FUN_001834a4(0x1a,0x4e);
     temp_v2 = FUN_0014bf3c(*psVar3,0);
-    FUN_00100388(temp_v7,&LAB_002a99ac,temp_v2);
+    textFormatBuffer(temp_v7,&LAB_002a99ac,temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0x57d8ffff,temp_v7);
@@ -170,12 +170,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                    &LAB_002a9de8,psVar3[3]);
     }
     temp_v5 = 0;
-    temp_v1 = FUN_00348ed0(temp_v0 + 0x8db0);
+    temp_v1 = uiSearchPrimary(temp_v0 + 0x8db0);
     if (0 < temp_v1) {
       do {
         if (*(short *)(temp_v0 + temp_v5 * 2 + 0x8b60) == 0) break;
         temp_v5 = temp_v5 + 1;
-        temp_v1 = FUN_00348ed0(temp_v0 + 0x8db0);
+        temp_v1 = uiSearchPrimary(temp_v0 + 0x8db0);
       } while (temp_v5 < temp_v1);
     }
     temp_v1 = FUN_001834a4(0x1a,0x1ed);
@@ -239,7 +239,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       FUN_001835b4(2,0x1a,0x171,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0x65);
       temp_v5 = FUN_001834a4(0x1a,0x178);
-      FUN_00100388(temp_v7,&LAB_002a9e00);
+      textFormatBuffer(temp_v7,&LAB_002a9e00);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,

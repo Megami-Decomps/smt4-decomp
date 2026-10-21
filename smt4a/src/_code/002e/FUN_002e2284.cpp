@@ -36,7 +36,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_0032ed10. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0035a204. */
 extern int loadSlotIsLoaded(unsigned int);
 
@@ -50,7 +50,7 @@ unsigned int FUN_002e2284(fn_002e2284_arg0 *param_1)
   unsigned int temp_v1;
   
   temp_v1 = 0;
-  temp_v0 = FUN_00341940(0x2e);
+  temp_v0 = textureGetIndexedResource(0x2e);
   if ((((temp_v0 != 0) && (temp_v0 = asdTMTexTableNodeIsLoaded(0x2e,0), temp_v0 != 0)) &&
       (temp_v0 = loadSlotIsLoaded(0x4a), temp_v0 != 0)) && (temp_v0 = bgmGetStateById(0x1000049), temp_v0 == 1)) {
     temp_v0 = (*(int *)((unsigned char *)&g_campCec + 0x4)) + 0xb0;

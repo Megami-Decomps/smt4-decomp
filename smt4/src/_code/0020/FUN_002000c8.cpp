@@ -11,7 +11,7 @@ int FUN_002595e0(void);
 int cecProcessForward(void);
 int FUN_002597c0(void);
 int FUN_00262f68(unsigned int, int);
-int FUN_0026e5ec(int, int);
+int saveGetMapFlag(int, int);
 int gameFlagSetValue(int, int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(void);
@@ -28,12 +28,12 @@ extern int campCecEditGetFlag125(void);
 /* Supplied declaration required: FUN_0025461c. */
 /* Supplied declaration required: FUN_0025463c. */
 extern int gameDataBlockTestFlag(unsigned int);
-extern int FUN_002595bc(void);
+extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002595e0. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
 /* Supplied declaration required: FUN_00262f68. */
-/* Supplied declaration required: FUN_0026e5ec. */
+/* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -201,7 +201,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
               *(unsigned int *)(temp_v4 + 0x38) = 2;
             }
             else if (*(int *)(temp_v4 + 0x38) != 2 && *(int *)(temp_v4 + 0x38) != 1) {
-              FUN_0026e5ec(0x20,1);
+              saveGetMapFlag(0x20,1);
               temp_v3 = 6;
               *(int *)(temp_v4 + 0x38) = temp_v3;
               if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
@@ -238,7 +238,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
             temp_v3 = 5;
           }
           else {
-            FUN_0026e5ec(0x20,1);
+            saveGetMapFlag(0x20,1);
             temp_v3 = 8;
           }
         }
@@ -251,14 +251,14 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
       }
       if (temp_v3 == 1) {
         buttonHelpSetPreset(0x3c);
-        temp_v3 = FUN_002595bc();
+        temp_v3 = cecQueryOptionalProcess();
         if ((temp_v3 != 0) && (temp_v3 = gameDataBlockTestFlag(0x20), temp_v3 != 0)) {
           *(unsigned int *)(temp_v4 + 0x38) = 9;
           temp_v0 = (*(unsigned char *)(temp_v4 + 0x3c) & 0xfe) | 2;
           *(unsigned char *)(temp_v4 + 0x3c) = temp_v0;
         }
         else {
-          temp_v3 = FUN_002595bc();
+          temp_v3 = cecQueryOptionalProcess();
           if (temp_v3 == 0) {
             temp_v1 = 8;
           }

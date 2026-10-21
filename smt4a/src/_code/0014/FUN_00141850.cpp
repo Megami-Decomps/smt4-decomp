@@ -1,24 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00141850` (_code @ 0x141850, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail ldr r2, [r1, #4]; compiler ldr r1, [r2, #4]. */
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-extern unsigned int DAT_005b3bc4; /* 0x5b3bc4 */
-extern unsigned int DAT_005b3bc8; /* 0x5b3bc8 */
+extern WorkRange DAT_005b3bc0;
 
-
-unsigned char FUN_00141850(unsigned int param_1)
-
+/* Updates the bound when it lies within the configured range. */
+bool FUN_00141850(u32 value)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = param_1;
-  if (param_1 >= DAT_005b3bc4) {
-    temp_v0 = DAT_005b3bc8;
-  }
-  DAT_005b3bc8 = temp_v0;
-  return param_1 < DAT_005b3bc4;
+    bool valid = value < DAT_005b3bc0.limit;
+    if (valid) {
+        DAT_005b3bc0.lower = value;
+    }
+    return valid;
 }
 
 } /* extern "C" */

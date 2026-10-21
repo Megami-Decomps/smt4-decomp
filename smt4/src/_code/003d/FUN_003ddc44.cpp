@@ -1,26 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ddc44` (_code @ 0x3ddc44, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct ReflectState {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 slot;
+    /* 0x05 */ u8 unk05[0x23];
+    /* 0x28 */ u32 active;
+};
 extern "C" {
-
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-void FUN_003ddc44(short param_1,unsigned int param_2)
-
+extern ReflectState *g_btlActionReflect;
+ReflectState *FUN_0022699c(ReflectState *state, u32 slot, u32 kind, u32 extra);
+/* Updates a battle reflection slot. */
+void FUN_003ddc44(u32 slot, u32 extra)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x30;
-  return;
+    slot = (s16)slot;
+    ReflectState *entry = FUN_0022699c(g_btlActionReflect, slot, 0, extra);
+    entry->slot = 48;
+ }
 }
-
-} /* extern "C" */

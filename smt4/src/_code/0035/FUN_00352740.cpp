@@ -1,18 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352740` (_code @ 0x352740, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail conditional instruction or constructor initialization ordering differs. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_00352740(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+struct RequestParameters {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 reserved;
+    /* 0x08 */ u32 second;
+    /* 0x0c */ u32 third;
+};
+/* Stores a request's parameter tuple. */
+extern "C" void FUN_00352740(RequestParameters *request, u32 first, u32 second, u32 third)
 {
-  *param_1 = param_2;
-  param_1[3] = param_4;
-  param_1[1] = 0;
-  param_1[2] = param_3;
-  return;
+    request->first = first;
+    request->third = third;
+    request->reserved = 0;
+    request->second = second;
 }
-
-} /* extern "C" */

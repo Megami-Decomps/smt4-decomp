@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0023296c(int *, int *);
-int FUN_00232980(int *, int *);
-int FUN_00232994(int *, int *);
+int recordSetPosition(int *, int *);
+int recordSetDirection(int *, int *);
+int recordSetOrigin(int *, int *);
 int FUN_002329a8(int *, unsigned int);
 int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, unsigned int, int);
@@ -39,9 +39,9 @@ static float romwright_sqrt_4(float value)
 #endif
 extern int FUN_001e2954(int);
 extern int dataTable00RankOfPicked(int);
-/* Supplied declaration required: FUN_0023296c. */
-/* Supplied declaration required: FUN_00232980. */
-/* Supplied declaration required: FUN_00232994. */
+/* Supplied declaration required: recordSetPosition. */
+/* Supplied declaration required: recordSetDirection. */
+/* Supplied declaration required: recordSetOrigin. */
 /* Supplied declaration required: FUN_002329a8. */
 extern int *FUN_00232a6c(int, unsigned int);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
@@ -176,9 +176,9 @@ LAB_00396b7c:
   piVar5 = (int *)FUN_00232a6c(param_1,0);
   if (piVar5 != (int *)0x0) {
     FUN_002329a8(piVar5,*(unsigned int *)(param_1 + 0x98));
-    FUN_00232994(piVar5,&temp_v19);
-    FUN_00232980(piVar5,&temp_v13);
-    FUN_0023296c(piVar5,&temp_v16);
+    recordSetOrigin(piVar5,&temp_v19);
+    recordSetDirection(piVar5,&temp_v13);
+    recordSetPosition(piVar5,&temp_v16);
     piVar5[7] = temp_v1;
     piVar5[8] = temp_v5;
     temp_v4 = FUN_001e2954(temp_v1);

@@ -11,8 +11,8 @@ int asdTMTexTableLoadSprites(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int);
 int taskCreateDraw(unsigned char *, int, int);
 int asdMemoryAllocTracked(int, int, int, int);
-int FUN_0019ea64(int);
-int FUN_001acf98(...);
+int messageSetMode(int);
+int asdTMTexLoadMainHeap(...);
 int cecProcessStart(void);
 int bgmRestart(int);
 int FUN_002804b0(...);
@@ -29,7 +29,7 @@ int FUN_0032e25c(...);
 int FUN_00331380(int);
 int ownerSetName(...);
 int FUN_00343d04(unsigned int *);
-int FUN_0035a074(...);
+int engineForwardVariadicCommand(...);
 int FUN_00387edc(...);
 int campCecDrawSetCreate(void);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -80,16 +80,16 @@ extern unsigned int *DAT_0057f114; /* 0x57f114 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: bgmRestart. */
 extern unsigned char FUN_002391e0(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002840ac(void);
-extern unsigned char FUN_002a2cf0(void);
+extern unsigned char cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002a4664. */
 /* Supplied declaration required: FUN_002a469c. */
 extern unsigned char FUN_002a46b8(void);
@@ -111,7 +111,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: ownerSetName. */
 /* Supplied declaration required: FUN_00343d04. */
 extern int gameDataTestFlags(unsigned int);
-/* Supplied declaration required: FUN_0035a074. */
+/* Supplied declaration required: engineForwardVariadicCommand. */
 /* Supplied declaration required: FUN_0037b5e0. */
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: campCecDrawSetCreate. */
@@ -219,9 +219,9 @@ void FUN_002bf534(int param_1)
     return;
   }
   cecProcessStart();
-  temp_v1 = FUN_002a2cf0();
+  temp_v1 = cecQueryOptionalProcess();
   *(unsigned char *)(puVar4 + 0x5b) = temp_v1;
-  FUN_0019ea64(0);
+  messageSetMode(0);
   *(unsigned char *)((int)puVar4 + 0x16d) = 0;
   *(unsigned char *)((int)puVar4 + 0x16e) = 1;
   *(unsigned char *)((int)puVar4 + 0x16f) = 0;
@@ -234,7 +234,7 @@ void FUN_002bf534(int param_1)
   FUN_002804b0(&LAB_002bf9d0,puVar4 + 0x39,0);
   FUN_002804b0(&LAB_002bf9e4,puVar4 + 0x3a,0);
   asdTMTexTableLoadSprites(0x2e);
-  FUN_001acf98(0x2e,0);
+  asdTMTexLoadMainHeap(0x2e,0);
   loadSlotRequestAsync(0x4a,0);
   temp_v2 = gameFlagIsSet(0x581);
   if (temp_v2 != 0) {
@@ -251,7 +251,7 @@ void FUN_002bf534(int param_1)
   ownerSetName(DAT_0057f114 + 0x10,temp_v3);
   FUN_002a4664(&temp_v10);
   temp_v9 = (romwright_code *)romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v9 + 2)),temp_v13);
-  FUN_0035a074(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
+  engineForwardVariadicCommand(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
   temp_v1 = FUN_002a46b8();
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
   temp_v3 = FUN_002a469c();
@@ -300,7 +300,7 @@ void FUN_002bf534(int param_1)
   ownerSetName(DAT_0057f114 + 0x10,temp_v3);
   FUN_002a4664(&temp_v10);
   temp_v9 = (romwright_code *)romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v9 + 2)),temp_v13);
-  FUN_0035a074(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
+  engineForwardVariadicCommand(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
   temp_v1 = FUN_002a46b8();
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
   temp_v3 = FUN_002a469c();

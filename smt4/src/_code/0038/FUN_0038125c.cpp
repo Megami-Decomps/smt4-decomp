@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFreeNonNull(void);
 int FUN_00381114(void);
-int FUN_00381254(unsigned int *);
+int _ZN9Obj4220945resetEv(unsigned int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned char DAT_00422110; /* 0x422110 */
 
 /* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: FUN_00381114. */
-/* Supplied declaration required: FUN_00381254. */
+/* Supplied declaration required: _ZN9Obj4220945resetEv. */
 
 
 void FUN_0038125c(unsigned int *param_1)
@@ -28,7 +28,7 @@ void FUN_0038125c(unsigned int *param_1)
   if (param_1[1] != 0) {
     FUN_00381114();
   }
-  FUN_00381254(param_1);
+  _ZN9Obj4220945resetEv(param_1);
   asdMemFreeNonNull();
   return;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a1248(unsigned char [128], int, int, int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned char LAB_002d1e30; /* 0x2d1e30 */
 extern int g_mapDepartWork; /* 0x4474d8 */
 
 /* Supplied declaration required: FUN_002a1248. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 unsigned int FUN_002d1ce0(void)
@@ -40,7 +40,7 @@ unsigned int FUN_002d1ce0(void)
           *(unsigned short *)(g_mapDepartWork + 0x14) = 10;
         }
         else {
-          FUN_002be624(temp_v2,&LAB_002d1e18);
+          textFormatBuffer(temp_v2,&LAB_002d1e18);
           FUN_002a1248(temp_v2,g_mapDepartWork + 0x28,3,0x80);
           *(short *)(g_mapDepartWork + 0x14) = *(short *)(g_mapDepartWork + 0x14) + 1;
         }
@@ -58,7 +58,7 @@ unsigned int FUN_002d1ce0(void)
       }
     }
     else {
-      FUN_002be624(temp_v2,&LAB_002d1e30,(int)*(short *)(g_mapDepartWork + 0x1c),
+      textFormatBuffer(temp_v2,&LAB_002d1e30,(int)*(short *)(g_mapDepartWork + 0x1c),
                    (int)*(short *)(g_mapDepartWork + 0x1c),(int)*(short *)(g_mapDepartWork + 0x1e));
       FUN_002a1248(temp_v2,g_mapDepartWork + 0x20,3,0x80);
       *(short *)(g_mapDepartWork + 0x14) = *(short *)(g_mapDepartWork + 0x14) + 1;

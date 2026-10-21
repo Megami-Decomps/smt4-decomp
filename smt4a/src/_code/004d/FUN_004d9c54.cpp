@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_003f9c0c(unsigned int, unsigned char [76], int);
+int controllerApplyAtUnitScale(unsigned int, unsigned char [76], int);
 int FUN_003fd8dc(int, int, unsigned int);
 int FUN_003fe86c(int, int, int);
 int FUN_00406768(unsigned int, int, int);
 
 extern int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_003f9c0c. */
+/* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: FUN_003fd8dc. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00406768. */
@@ -31,7 +31,7 @@ void FUN_004d9c54(int param_1,int param_2)
        (*(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x574) * 4 + 0x40) + 4) + 0x1fc) = 0;
     }
     *(int *)(param_1 + 0x564) = param_2;
-    FUN_003f9c0c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x564) * 4 + 0x48),temp_v2,0);
+    controllerApplyAtUnitScale(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x564) * 4 + 0x48),temp_v2,0);
     *(unsigned int *)(param_1 + 0x54) = 0;
     temp_v1 = *(int *)(*(int *)(param_1 + *(int *)(param_1 + 0x574) * 4 + 0x40) + 4);
     *(unsigned int *)(temp_v1 + 0x1fc) = 0x3f800000;

@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002341d4(...);
-int FUN_00234320(...);
+int recordGetOptionalValue(...);
 int FUN_00234330(int *, int, unsigned int, unsigned int);
-int FUN_00234974(...);
+int recordClearWideHandle(...);
 int FUN_0023499c(int *, int, int);
-int FUN_0023a198(...);
+int stringFormatUnbounded(...);
 int FUN_002a12d8(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_00352e6c(...);
 int FUN_00352f9c(int *, unsigned char [1024], int);
 int FUN_003531dc(...);
@@ -43,15 +43,15 @@ extern unsigned char LAB_0038d04c; /* 0x38d04c */
 extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_002341d4. */
-/* Supplied declaration required: FUN_00234320. */
+/* Supplied declaration required: recordGetOptionalValue. */
 /* Supplied declaration required: FUN_00234330. */
 extern unsigned int FUN_0023445c(int);
 extern unsigned int FUN_00234468(int);
-/* Supplied declaration required: FUN_00234974. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_0023499c. */
-/* Supplied declaration required: FUN_0023a198. */
+/* Supplied declaration required: stringFormatUnbounded. */
 /* Supplied declaration required: FUN_002a12d8. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00352e6c. */
 /* Supplied declaration required: FUN_00352f9c. */
 /* Supplied declaration required: FUN_003531dc. */
@@ -191,11 +191,11 @@ int * FUN_0038cbdc(int param_1)
     *(unsigned int *)(temp_v0 + 0x45c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x460) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x464) = uStack_64;
-    FUN_0023a198(temp_v0 + 0x468,&LAB_0038cffc,&LAB_0038cfec);
-    FUN_0023a198(temp_v0 + 0x4a8,&LAB_0038cffc,&LAB_0038d000);
-    FUN_0023a198(temp_v0 + 0x4e8,&LAB_0038cffc,&LAB_0038d010);
-    FUN_0023a198(temp_v0 + 0x528,&LAB_0038cffc,&LAB_0038d020);
-    FUN_0023a198(temp_v0 + 0x568,&LAB_0038cffc,&LAB_0038d030);
+    stringFormatUnbounded(temp_v0 + 0x468,&LAB_0038cffc,&LAB_0038cfec);
+    stringFormatUnbounded(temp_v0 + 0x4a8,&LAB_0038cffc,&LAB_0038d000);
+    stringFormatUnbounded(temp_v0 + 0x4e8,&LAB_0038cffc,&LAB_0038d010);
+    stringFormatUnbounded(temp_v0 + 0x528,&LAB_0038cffc,&LAB_0038d020);
+    stringFormatUnbounded(temp_v0 + 0x568,&LAB_0038cffc,&LAB_0038d030);
     temp_v14[0] = temp_v0 + 0x368;
     temp_v14[1] = 9;
     if (*(int *)(temp_v0 + 0x364) != 0) {
@@ -203,9 +203,9 @@ int * FUN_0038cbdc(int param_1)
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
     FUN_0038b174(temp_v0);
-    FUN_002be624(temp_v8,&LAB_0038d040);
-    FUN_002be624(temp_v9,&LAB_0038cfec);
-    FUN_002be624(temp_v10,&LAB_0038d04c);
+    textFormatBuffer(temp_v8,&LAB_0038d040);
+    textFormatBuffer(temp_v9,&LAB_0038cfec);
+    textFormatBuffer(temp_v10,&LAB_0038d04c);
     temp_v16 = temp_v8;
     while( 1 ) {
       FUN_00352e6c(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,
@@ -214,14 +214,14 @@ int * FUN_0038cbdc(int param_1)
       *(unsigned int *)(param_1 + 0x10) = uStack_a4;
       temp_v1 = FUN_002a12d8(param_1 + 0xc);
       if (temp_v1 < 0) break;
-      temp_v4 = FUN_00234320(*(unsigned int *)(temp_v0 + 0x5a8));
+      temp_v4 = recordGetOptionalValue(*(unsigned int *)(temp_v0 + 0x5a8));
       if ((*(unsigned int *)(temp_v0 + 0x684) < temp_v4) ||
-         (temp_v1 = FUN_00234320(*(unsigned int *)(temp_v0 + 0x5a8)), temp_v1 == 0)) {
+         (temp_v1 = recordGetOptionalValue(*(unsigned int *)(temp_v0 + 0x5a8)), temp_v1 == 0)) {
         temp_v2 = FUN_003df36c(*(unsigned int *)(temp_v0 + 0x5a8));
         *(unsigned int *)(temp_v0 + 0x67c) = temp_v2;
-        temp_v2 = FUN_00234320(*(unsigned int *)(temp_v0 + 0x5a8));
+        temp_v2 = recordGetOptionalValue(*(unsigned int *)(temp_v0 + 0x5a8));
         *(unsigned int *)(temp_v0 + 0x680) = temp_v2;
-        temp_v2 = FUN_00234320(*(unsigned int *)(temp_v0 + 0x5a8));
+        temp_v2 = recordGetOptionalValue(*(unsigned int *)(temp_v0 + 0x5a8));
         *(unsigned int *)(temp_v0 + 0x680) = temp_v2;
         temp_v18 = 0;
         uStack_24 = 0;
@@ -237,7 +237,7 @@ int * FUN_0038cbdc(int param_1)
           *(int *)(param_1 + 0x18) = temp_v1;
           temp_v1 = param_1;
           FUN_0038c224();
-          FUN_00234974(temp_v0 + 0x28);
+          recordClearWideHandle(temp_v0 + 0x28);
           if (-1 < temp_v1) {
             FUN_002341d4(&temp_v11,temp_v0);
             *(unsigned int *)(param_1 + 0xc) = temp_v11;
@@ -248,10 +248,10 @@ int * FUN_0038cbdc(int param_1)
         }
         break;
       }
-      temp_v1 = FUN_00234320(*(unsigned int *)(temp_v0 + 0x5a8));
+      temp_v1 = recordGetOptionalValue(*(unsigned int *)(temp_v0 + 0x5a8));
       *(unsigned int *)(temp_v0 + 0x684) = (((temp_v1 + 0x3fU) >> 6) - 1) * 0x40;
     }
-    FUN_00234974(temp_v0 + 0x28);
+    recordClearWideHandle(temp_v0 + 0x28);
   }
   return piVar6;
 }

@@ -9,7 +9,7 @@ int FUN_0022677c(...);
 int scrScriptProcessGetEntry(...);
 int FUN_00275bc8(...);
 
-int FUN_00100388(unsigned char [128], unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int jobStop(unsigned int, int);
 int FUN_001656e0(unsigned int, int);
 int FUN_00167f94(void);
@@ -31,7 +31,7 @@ int bustupCutAnimStopJob(void);
 int campButtonHelpRelease(void);
 int FUN_003b61ec(void);
 int eventCommandStop(void);
-int FUN_003bb45c(void);
+int eventOpeningResetValidJob(void);
 int soundChannelStopAll(int);
 int gameFlagSetValue(...);
 int aocDrawText8(int, unsigned int, int);
@@ -43,7 +43,7 @@ extern int g_aocMain; /* 0x570260 */
 extern int g_aocSystem; /* 0x570280 */
 extern unsigned int *g_aocJob; /* 0x57f568 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: jobStop. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -78,7 +78,7 @@ extern int flagBrowserStep(void);
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: eventCommandStop. */
-/* Supplied declaration required: FUN_003bb45c. */
+/* Supplied declaration required: eventOpeningResetValidJob. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
@@ -167,7 +167,7 @@ unsigned int FUN_00298978(void)
     bustupCutAnimStopJob();
     eventTexReleaseJobs();
     eventCommandStop();
-    FUN_003bb45c();
+    eventOpeningResetValidJob();
     if (puVar2[0xc] != 0) {
       scrScriptProcessDestroy();
       puVar2[0xc] = 0;
@@ -220,8 +220,8 @@ unsigned int FUN_00298978(void)
       asdLoadFileSetUseRawPaths(1);
       *(unsigned char *)((int)puVar2 + 0x21) = 1;
     }
-    FUN_00100388(temp_v4,&LAB_00299154,puVar2[5],puVar2[5]);
-    FUN_00100388(temp_v5,&LAB_0029916c,puVar2[5],puVar2[5]);
+    textFormatBuffer(temp_v4,&LAB_00299154,puVar2[5],puVar2[5]);
+    textFormatBuffer(temp_v5,&LAB_0029916c,puVar2[5],puVar2[5]);
     temp_v1 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;

@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 
 extern unsigned char LAB_0036d2f4; /* 0x36d2f4 */
 extern unsigned char LAB_0036d304; /* 0x36d304 */
 extern unsigned char LAB_0036d310; /* 0x36d310 */
 extern unsigned char DAT_005e1ebc; /* 0x5e1ebc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern int FUN_00330b58(int);
+extern int gameDataBlocksGetSelectedValue(int);
 
 
 unsigned char * dataTable15Sub0FindEntry(unsigned int param_1)
@@ -66,14 +66,14 @@ LAB_0036d248:
           puVar5 = (unsigned char *)(temp_v1 + 4);
         }
         else {
-          temp_v4 = FUN_00330b58(temp_v4);
+          temp_v4 = gameDataBlocksGetSelectedValue(temp_v4);
           if ((temp_v4 + 0x3bU) / 0xe10 != 0) {
-            FUN_00100388(temp_v6,&LAB_0036d2f4);
+            textFormatBuffer(temp_v6,&LAB_0036d2f4);
           }
           else {
-            FUN_00100388(temp_v6,&LAB_0036d310,((temp_v4 + 0x3bU) % 0xe10) / 0x3c);
+            textFormatBuffer(temp_v6,&LAB_0036d310,((temp_v4 + 0x3bU) % 0xe10) / 0x3c);
           }
-          FUN_00100388(&DAT_005e1ebc,&LAB_0036d304,temp_v1 + 4,temp_v6);
+          textFormatBuffer(&DAT_005e1ebc,&LAB_0036d304,temp_v1 + 4,temp_v6);
           puVar5 = &DAT_005e1ebc;
         }
         return puVar5;

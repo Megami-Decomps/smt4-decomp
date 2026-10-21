@@ -1,50 +1,49 @@
-/* Polls the quest center with `param`: once its task has ended and it has finished, tears it
- * down (returns 0); while it runs, returns 1 if its active entry accepts `param` and is ready. */
-#include "common.h"
-#include "quest_center/qcMain.h"
+/* NON_MATCHING: retail uses push {r4, r5, r6, r7, r8, lr} where the compiled block uses push {r4, r5, r6, lr}. */
+#include "shard/W5_W5Match5_QuestCenter.h"
 
 extern "C" {
+u32 jobFind(u32 task);
+void FUN_001919a4(QuestEntry *entry);
+void asdOperatorDelete(void *memory);
+void asdMemFree(void *memory);
+u32 FUN_0019196c(QuestEntry *entry, u32 parameter);
+u32 FUN_00191848(QuestEntry *entry);
 
-int FUN_001919a4(void);
-int asdMemFree(void *ptr);               /* heap free */
-int jobFind(u32 task);                /* nonzero while the task exists */
-int asdOperatorDelete(u32 entry);
-extern int FUN_00191848(u32 entry);
-extern int FUN_0019196c(u32 entry, u32 param);
-
-extern QcGlobals g_qcMain;
-
-u32 FUN_00168d38(u32 param)
+u32 FUN_00168d38(u32 parameter)
 {
-    QcWork *work = g_qcMain.work;
-    QcWork *current;
-    u32 accepted;
-
-    if (work != NULL) {
-        int exists = jobFind(work->task);
-
-        current = g_qcMain.work;
-        if (exists == 0 && work->done != 0) {
-            if (g_qcMain.work != NULL) {
-                g_qcMain.work->done = 1;
-                if (current->entry != 0) {
-                    FUN_001919a4();
-                    asdOperatorDelete(current->entry);
-                    current->entry = 0;
-                }
-                asdMemFree(g_qcMain.work);
-                g_qcMain.work = NULL;
-            }
-        } else if (g_qcMain.work != NULL) {
-            accepted = 0;
-            if (g_qcMain.work->entry != 0 && FUN_0019196c(g_qcMain.work->entry, param) != 0 &&
-                FUN_00191848(current->entry) != 0) {
-                accepted = 1;
-            }
-            return accepted;
-        }
+    QuestWork *work = g_qcMain.work;
+    if (work == NULL) {
+        return 0;
     }
-    return 0;
-}
 
-} /* extern "C" */
+    if (jobFind(work->job) == 0 && work->closing != 0) {
+        work = g_qcMain.work;
+        if (work == NULL) {
+            return 0;
+        }
+
+        QuestEntry *entry = work->entry;
+        work->closing = 1;
+        if (entry != NULL) {
+            FUN_001919a4(entry);
+            asdOperatorDelete(work->entry);
+            work->entry = NULL;
+        }
+        asdMemFree(g_qcMain.work);
+        g_qcMain.work = NULL;
+        return 0;
+    }
+
+    work = g_qcMain.work;
+    if (work == NULL) {
+        return 0;
+    }
+    if (work->entry == NULL) {
+        return 0;
+    }
+    if (FUN_0019196c(work->entry, parameter) == 0) {
+        return 0;
+    }
+    return FUN_00191848(work->entry) != 0 ? 1u : 0u;
+}
+}

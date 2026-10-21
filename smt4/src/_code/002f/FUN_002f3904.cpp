@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002472c0(...);
+int rectangleForwardExpanded(...);
 
 extern int DAT_00447a28; /* 0x447a28 */
 
-/* Supplied declaration required: FUN_002472c0. */
+/* Supplied declaration required: rectangleForwardExpanded. */
 
 
 void FUN_002f3904(void)
@@ -27,21 +27,21 @@ void FUN_002f3904(void)
       if (temp_v1 != 0) {
         if (temp_v1 != 1) {
           if (temp_v1 == 2) {
-            FUN_002472c0(0xff00ff);
-            FUN_002472c0(0xff00ff);
-            FUN_002472c0(0xff00ff);
-            FUN_002472c0(0xff00ff);
-            FUN_002472c0(0xff0000ff);
+            rectangleForwardExpanded(0xff00ff);
+            rectangleForwardExpanded(0xff00ff);
+            rectangleForwardExpanded(0xff00ff);
+            rectangleForwardExpanded(0xff00ff);
+            rectangleForwardExpanded(0xff0000ff);
           }
         }
         else {
           if (*(int *)(temp_v0 + 4) == 0x27) {
-            FUN_002472c0(0xff00ff);
-            FUN_002472c0(0xff00ff);
-            FUN_002472c0(0xff00ff);
+            rectangleForwardExpanded(0xff00ff);
+            rectangleForwardExpanded(0xff00ff);
+            rectangleForwardExpanded(0xff00ff);
           }
-          FUN_002472c0(0xff00ff);
-          FUN_002472c0(0xff0000ff);
+          rectangleForwardExpanded(0xff00ff);
+          rectangleForwardExpanded(0xff0000ff);
         }
       }
       temp_v2 = temp_v2 + 1;

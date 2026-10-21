@@ -25,8 +25,8 @@ int FUN_0022f834(...);
 int FUN_002305fc(...);
 int FUN_00230954(unsigned int *, unsigned int *);
 int FUN_00230e04(...);
-int FUN_00231240(...);
-int FUN_0023266c(unsigned int *, int, int, int);
+int pointConvertToFloat(...);
+int rectangleInitializeSelection(unsigned int *, int, int, int);
 int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00233240(unsigned int *, int);
@@ -61,10 +61,10 @@ extern int FUN_0022e520(void);
 /* Supplied declaration required: FUN_00230954. */
 extern int FUN_00230b90(unsigned int *, unsigned short);
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
-extern unsigned int FUN_00230c80(unsigned short, unsigned int);
+extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00230e04. */
-/* Supplied declaration required: FUN_00231240. */
-/* Supplied declaration required: FUN_0023266c. */
+/* Supplied declaration required: pointConvertToFloat. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
@@ -73,7 +73,7 @@ extern unsigned int FUN_00230c80(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0023553c. */
 extern int FUN_00240d5c(unsigned int *);
 extern int FUN_00246570(int);
-extern int FUN_002762e0(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 extern int FUN_0028e9d0(unsigned short);
 extern unsigned int FUN_0028fb3c(unsigned short);
@@ -130,7 +130,7 @@ void FUN_003a4a60(unsigned int *param_1)
     *param_1 = *param_1 | 0x1000;
     FUN_00233240(param_1 + 0xea,6);
     FUN_00233240(param_1 + 0xea,7);
-    FUN_0023266c(param_1 + 0xe5,0x140,0,0x2b);
+    rectangleInitializeSelection(param_1 + 0xe5,0x140,0,0x2b);
     param_1[2] = 1;
     buttonHelpSetPreset(0x85);
     param_1[0x575a] = 0xffffffff;
@@ -141,7 +141,7 @@ void FUN_003a4a60(unsigned int *param_1)
     FUN_00233344(param_1 + 0xea,6);
     temp_v4 = vec2GetYInt(param_1 + 0x1c4);
     temp_v2 = vec2GetXInt(param_1 + 0x1c4);
-    FUN_00231240(param_1 + 0xe5,temp_v2,temp_v4);
+    pointConvertToFloat(param_1 + 0xe5,temp_v2,temp_v4);
     if (*(char *)((int)param_1 + 0x79a) != '\0') {
       FUN_0022e538(param_1 + 0x21a);
       param_1[2] = 2;
@@ -217,7 +217,7 @@ void FUN_003a4a60(unsigned int *param_1)
         param_1[2] = 3;
       }
     }
-    temp_v5 = FUN_002762e0();
+    temp_v5 = inputIsQuestMenuPressed();
     if (temp_v5 != 0) {
       ifTouchRegionRemove();
       ifTouchRegionRemove();
@@ -273,7 +273,7 @@ void FUN_003a4a60(unsigned int *param_1)
       FUN_00233344(param_1 + 0xea,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1e7);
       temp_v2 = vec2GetXInt(param_1 + 0x1e7);
-      FUN_00231240(param_1 + 0xe5,temp_v2,temp_v4);
+      pointConvertToFloat(param_1 + 0xe5,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x826) == '\0') break;
     }
     param_1[0x575a] = 0xffffffff;
@@ -317,7 +317,7 @@ void FUN_003a4a60(unsigned int *param_1)
       temp_v5 = FUN_00246570((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
       temp_v5 = temp_v5 * param_1[0x21a];
     }
-    temp_v4 = FUN_00230c80(temp_v0,1);
+    temp_v4 = itemGetNameOrFallback(temp_v0,1);
     FUN_00295660(0,temp_v4);
     FUN_0029ede8(0x18,param_1[0x21a],0xffffffff,0);
     FUN_0029ede8(0x19,temp_v5,0xffffffff,0);
@@ -396,7 +396,7 @@ joined_r0x003a5580:
       FUN_00233344(param_1 + 0xea,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1e7);
       temp_v2 = vec2GetXInt(param_1 + 0x1e7);
-      FUN_00231240(param_1 + 0xe5,temp_v2,temp_v4);
+      pointConvertToFloat(param_1 + 0xe5,temp_v2,temp_v4);
       if (*(char *)((int)param_1 + 0x826) != '\0') {
         *param_1 = *param_1 & 0xffffefff;
       }

@@ -6,7 +6,7 @@ extern "C" {
 
 int rt_memcpy_w(int, int, int);
 
-extern signed char DAT_005c1460; /* 0x5c1460 */
+extern signed char g_inputResetState; /* 0x5c1460 */
 extern signed char DAT_005c1461; /* 0x5c1461 */
 extern int DAT_005c1464; /* 0x5c1464 */
 
@@ -25,10 +25,10 @@ void FUN_0019c9b4(void)
   
   temp_v2 = DAT_005c1464;
   temp_v0 = '\0';
-  if (DAT_005c1460 != '\0') {
+  if (g_inputResetState != '\0') {
     temp_v0 = DAT_005c1461;
   }
-  if (DAT_005c1460 != '\0' && temp_v0 != '\0') {
+  if (g_inputResetState != '\0' && temp_v0 != '\0') {
     psVar3 = (short *)(DAT_005c1464 + 0x4e00);
     *(unsigned short *)(DAT_005c1464 + 0x4e02) = 0;
     *(unsigned int *)(temp_v2 + 0x4e2c) = 0;

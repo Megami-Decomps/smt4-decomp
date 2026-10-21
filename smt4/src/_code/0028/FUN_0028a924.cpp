@@ -12,7 +12,7 @@ int timerStart(...);
 
 int FUN_001d13b0(void);
 int FUN_00205a90(void);
-int FUN_002542ec(...);
+int saveResolvePartySlot(...);
 int FUN_0026b7c0(void);
 int FUN_0026c654(...);
 int FUN_0026c710(...);
@@ -41,7 +41,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_001a7d48. */
 /* Supplied declaration required: FUN_001d13b0. */
 /* Supplied declaration required: FUN_00205a90. */
-/* Supplied declaration required: FUN_002542ec. */
+/* Supplied declaration required: saveResolvePartySlot. */
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026c654. */
 /* Supplied declaration required: FUN_0026c710. */
@@ -415,7 +415,7 @@ LAB_0028ad80:
           } while (temp_v3 < 3);
           if (-1 < temp_v2) {
             *(unsigned char *)(temp_v0 + temp_v2 + 0x679) = 0;
-            FUN_002542ec(temp_v2);
+            saveResolvePartySlot(temp_v2);
           }
           gameGetUnitRecord((int)*(short *)(temp_v0 + 0x38));
           temp_v12 = temp_v10;

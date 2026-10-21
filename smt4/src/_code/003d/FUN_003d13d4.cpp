@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00246454. */
 /* Supplied declaration required: FUN_0024b888. */
 extern int gameGetSlotTable(void);
-extern int FUN_00337b64(int);
+extern int partyHasEligibleMember(int);
 
 
 unsigned int
@@ -119,7 +119,7 @@ FUN_003d13d4(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned in
     temp_v8 = (unsigned int)temp_v9;
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x6d);
-  if (((*param_2 & 0x4000) != 0) && (temp_v2 = FUN_00337b64(*param_1), 0 < temp_v2)) {
+  if (((*param_2 & 0x4000) != 0) && (temp_v2 = partyHasEligibleMember(*param_1), 0 < temp_v2)) {
     temp_v5 = 5;
   }
 LAB_003d15ac:

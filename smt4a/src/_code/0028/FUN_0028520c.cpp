@@ -20,7 +20,7 @@ extern unsigned int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 
 
 unsigned int FUN_0028520c(unsigned short param_1)
@@ -41,7 +41,7 @@ unsigned int FUN_0028520c(unsigned short param_1)
   temp_v4[0] = param_1;
   libc_bsearch(puVar4,temp_v2,temp_v1,4,&LAB_002321f8);
   if (((puVar4 != (unsigned short *)0x0) && (temp_v0 = puVar4[1], -1 < temp_v0)) &&
-     (temp_v3 = FUN_00341940(0x34), temp_v3 != 0)) {
+     (temp_v3 = textureGetIndexedResource(0x34), temp_v3 != 0)) {
     temp_v1 = asdTMTexTableNodeIsLoaded(0x34,(int)temp_v0);
     return temp_v1;
   }

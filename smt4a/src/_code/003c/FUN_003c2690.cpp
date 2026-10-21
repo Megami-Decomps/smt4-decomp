@@ -8,7 +8,7 @@ int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00184c40(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int fadeObjectResetIfActive(...);
 
 typedef int romwright_code(...);
@@ -30,7 +30,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00184c40. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 
 
@@ -184,7 +184,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
     }
   }
   else {
-    FUN_0019d880();
+    jobGetScalarValue();
     efctSetSpeed();
     temp_v6 = FUN_001834a4(0xd,0xfc0);
     FUN_001835b4(2,0xd,0xfbd,*(short *)(temp_v6 + 8) + param_2,

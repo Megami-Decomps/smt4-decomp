@@ -14,7 +14,7 @@ extern int g_campCec; /* 0x43daa8 */
 extern unsigned int FUN_002228d4(void);
 extern int gameDataBlockTestFlag(unsigned int);
 extern int partyPanelIsActive(void);
-extern int FUN_0026efec(int);
+extern int saveGetIndexedMapValue(int);
 /* Supplied declaration required: FUN_002990a0. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -41,7 +41,7 @@ unsigned int FUN_002e1898(int param_1)
         temp_v5 = 0;
         temp_v0 = temp_v5;
         do {
-          temp_v2 = FUN_0026efec(temp_v5);
+          temp_v2 = saveGetIndexedMapValue(temp_v5);
           temp_v5 = temp_v5 + 1;
           if (*(short *)(temp_v2 + 0x48) != 0) {
             temp_v0 = temp_v0 + 1;

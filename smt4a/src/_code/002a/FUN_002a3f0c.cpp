@@ -1,25 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a3f0c` (_code @ 0x2a3f0c, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r4, r5, r6, lr}'; compiler emits 'mov r0, #0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int scrGetArgString(unsigned int);
-extern int FUN_002a1738(unsigned int, unsigned int);
-
-
-unsigned char FUN_002a3f0c(void)
-
-{
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArgString(1);
-  temp_v2 = FUN_002a1738(temp_v0,temp_v1);
-  return temp_v2 != 0;
+u32 scrGetArg(u32);
+const char *scrGetArgString(u32);
+s32 FUN_002a1738(u32,const char *);
+s32 FUN_002a3f0c() {
+    u32 value=scrGetArg(0);
+    return FUN_002a1738(value,scrGetArgString(1))!=0;
 }
-
-} /* extern "C" */
+}

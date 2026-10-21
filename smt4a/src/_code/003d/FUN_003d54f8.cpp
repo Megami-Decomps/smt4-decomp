@@ -1,20 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d54f8` (_code @ 0x3d54f8, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot base calculation and value-store scheduling differ from retail. */
+#include "common.h"
+
+namespace { struct Slot { u32 first; u32 active; u32 value; u32 unknown; u8 state; u8 tail[3]; }; }
 
 extern "C" {
-
-extern unsigned int DAT_006357dc; /* 0x6357dc */
-extern unsigned char DAT_006357e8; /* 0x6357e8 */
-
-
-void FUN_003d54f8(int param_1,unsigned int param_2)
-
+/* Reads or updates the requested state. */
+extern Slot DAT_006357d8[];
+void FUN_003d54f8(u32 index, u32 value)
 {
-  *(unsigned int *)(param_1 * 0x14 + 0x6357e0) = param_2;
-  (&DAT_006357dc)[param_1 * 5] = 0;
-  (&DAT_006357e8)[param_1 * 0x14] = 2;
-  return;
+    DAT_006357d8[index].value = value;
+    DAT_006357d8[index].active = 0;
+    DAT_006357d8[index].state = 2;
 }
-
-} /* extern "C" */
+}

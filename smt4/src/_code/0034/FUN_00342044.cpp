@@ -1,19 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00342044` (_code @ 0x342044, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses different argument packing, inlined accessor frames or signed bit-index arithmetic. */
+#include "common.h"
 
+struct FlagState {
+    /* 0x0000 */ u8 unk00[0x12f0];
+    /* 0x12f0 */ u8 flags[1];
+};
 extern "C" {
-
-extern int FUN_0023d2ec(void);
-
-
-unsigned char FUN_00342044(unsigned int param_1)
-
+FlagState *FUN_0023d2ec();
+/* Tests an indexed packed flag. */
+s32 FUN_00342044(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0023d2ec();
-  return ((1 << (param_1 & 7)) & 0xffU & (unsigned int)*(unsigned char *)(temp_v0 + 0x12f0 + (param_1 >> 3))) != 0;
+    FlagState *state = FUN_0023d2ec();
+    return (state->flags[index >> 3] & (1u << (index & 7))) != 0;
 }
-
-} /* extern "C" */
+}

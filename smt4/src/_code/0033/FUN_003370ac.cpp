@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00255e38(int, unsigned char [2], int, int, int);
-int FUN_00257dec(int, unsigned int);
-int FUN_00269bd0(int, unsigned int);
+int randomGetLowerTenBits(int, unsigned int);
+int randomGetUpperSixBits(int, unsigned int);
 int devilGetRecord(void);
 int FUN_0033774c(int, unsigned char [2], unsigned int);
 int FUN_0033adf8(void);
@@ -59,10 +59,10 @@ typedef struct {
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern unsigned short FUN_0023eb7c(int);
-extern int FUN_002542ec(unsigned int);
+extern int saveResolvePartySlot(unsigned int);
 /* Supplied declaration required: FUN_00255e38. */
-/* Supplied declaration required: FUN_00257dec. */
-/* Supplied declaration required: FUN_00269bd0. */
+/* Supplied declaration required: randomGetLowerTenBits. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 extern int gameGetSlotTable(void);
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: devilGetRecord. */
@@ -135,7 +135,7 @@ void FUN_003370ac(int param_1)
   temp_v8 = 0;
   do {
     if (-1 < *(char *)(temp_v2 + temp_v8 + 0x9108)) {
-      temp_v4 = FUN_002542ec(temp_v8);
+      temp_v4 = saveResolvePartySlot(temp_v8);
       temp_v9[0] = 2;
       temp_v13 = FUN_0023eb7c(temp_v4);
       temp_v10 = *(unsigned short *)(temp_v4 + 0x46);
@@ -174,16 +174,16 @@ void FUN_003370ac(int param_1)
       temp_v24 = temp_v19;
       do {
         temp_v5 = temp_v4;
-        FUN_00257dec(temp_v4,temp_v6 & 0xff);
+        randomGetLowerTenBits(temp_v4,temp_v6 & 0xff);
         temp_v29[temp_v6] = ((unsigned short)temp_v5 & 0x3ff) | (temp_v29[temp_v6] & 0xfc00);
         temp_v5 = temp_v4;
-        FUN_00269bd0(temp_v4,temp_v6 & 0xff);
+        randomGetUpperSixBits(temp_v4,temp_v6 & 0xff);
         temp_v29[temp_v6] = (unsigned short)(temp_v5 << 10) | (temp_v29[temp_v6] & 0x3ff);
         temp_v5 = temp_v4;
-        FUN_00257dec(temp_v4,temp_v6 & 0xff);
+        randomGetLowerTenBits(temp_v4,temp_v6 & 0xff);
         temp_v30[temp_v6] = ((unsigned short)temp_v5 & 0x3ff) | (temp_v30[temp_v6] & 0xfc00);
         temp_v5 = temp_v4;
-        FUN_00269bd0(temp_v4,temp_v6 & 0xff);
+        randomGetUpperSixBits(temp_v4,temp_v6 & 0xff);
         temp_v7 = temp_v6 + 1;
         temp_v30[temp_v6] = (unsigned short)(temp_v5 << 10) | (temp_v30[temp_v6] & 0x3ff);
         temp_v6 = temp_v7;

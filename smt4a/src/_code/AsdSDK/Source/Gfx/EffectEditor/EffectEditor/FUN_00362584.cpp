@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
+int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
 int libc_strcpy(unsigned char *, unsigned char [50]);
 int FUN_00362768(unsigned int *, unsigned char [50]);
 int FUN_00375ec8(void);
@@ -25,7 +25,7 @@ extern int DAT_0059dbf4; /* 0x59dbf4 */
 extern unsigned int *DAT_0059dc28; /* 0x59dc28 */
 extern unsigned char DAT_00634c50; /* 0x634c50 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_00362768. */
 /* Supplied declaration required: FUN_00375ec8. */
@@ -68,7 +68,7 @@ unsigned char * FUN_00362584(void)
   }
   else if ((temp_v2 == 1) && (DAT_0059dbf4 != 0)) {
     libc_strcpy(&DAT_00634c50,temp_v1);
-    FUN_00100388(temp_v3,&LAB_003626b0,&LAB_00362694,temp_v0);
+    textFormatBuffer(temp_v3,&LAB_003626b0,&LAB_00362694,temp_v0);
     puVar2 = &LAB_00400002;
   }
   return puVar2;

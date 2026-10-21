@@ -8,8 +8,8 @@ int FUN_0022a358(...);
 int asdListBoxSetItemMode2(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(...);
-int FUN_0025c58c(...);
-int FUN_00262914(...);
+int asdListBoxCreateDefault(...);
+int jobSetText(...);
 
 typedef struct fn_003c5eb0_arg0 fn_003c5eb0_arg0;
 struct fn_003c5eb0_arg0 {
@@ -43,8 +43,8 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: asdListBoxSetItemMode2. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0025c58c. */
-/* Supplied declaration required: FUN_00262914. */
+/* Supplied declaration required: asdListBoxCreateDefault. */
+/* Supplied declaration required: jobSetText. */
 
 
 void FUN_003c5eb0(fn_003c5eb0_arg0 *param_1,int param_2)
@@ -54,11 +54,11 @@ void FUN_003c5eb0(fn_003c5eb0_arg0 *param_1,int param_2)
   unsigned int temp_v0;
   
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
-  FUN_0025c58c(temp_v0,0x73,0);
+  asdListBoxCreateDefault(temp_v0,0x73,0);
   *(unsigned int *)&param_1->field_0x10 = temp_v0;
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)&param_1->field_0x10,1);
-  FUN_00262914(*(unsigned int *)&param_1->field_0x10,"Camera UpDown Menu");
+  jobSetText(*(unsigned int *)&param_1->field_0x10,"Camera UpDown Menu");
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(g_btlMain + 0x634) & 0x20) >> 5);
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(g_btlMain + 0x634) & 0x40) >> 6);
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(g_btlMain + 0x634) & 0x80) >> 7);

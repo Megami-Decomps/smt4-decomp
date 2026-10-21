@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [64], unsigned char *);
+int textFormatBuffer(unsigned char [64], unsigned char *);
 int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -34,7 +34,7 @@ extern unsigned char LAB_00285f14; /* 0x285f14 */
 extern unsigned char LAB_00285f24; /* 0x285f24 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -50,8 +50,8 @@ extern int FUN_0026140c(void);
 extern int FUN_002a4894(int);
 extern unsigned int computeCountLimit(void);
 extern int dataTableGetEntry24Byte1(int);
-extern int FUN_00348ed0(int);
-extern int FUN_0034c8b8(void);
+extern int uiSearchPrimary(int);
+extern int uniteIsStateTwentyTwo(void);
 
 
 void FUN_00285b58(int param_1,int param_2,int param_3)
@@ -91,14 +91,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     FUN_00164b5c(2,0x1a,1,param_1,param_2,0x65);
     FUN_001835b4(2,0x1a,0x8a,param_1,param_2,0x65);
     temp_v1 = FUN_001834a4(0x1a,0x49);
-    FUN_00100388(temp_v11,&LAB_00285eec);
+    textFormatBuffer(temp_v11,&LAB_00285eec);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xffffffff,temp_v11);
     temp_v2 = computeCountLimit();
     if (temp_v2 >= 999) {
       temp_v1 = FUN_001834a4(0x1a,0x279);
-      FUN_00100388(temp_v11,&LAB_00285f14);
+      textFormatBuffer(temp_v11,&LAB_00285f14);
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(2,0xffff57ff,temp_v11);
@@ -122,11 +122,11 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     }
     temp_v1 = temp_v0 + 0x4fc;
     temp_v14 = FUN_002a4860();
-    temp_v4 = FUN_00348ed0(temp_v0 + 0x4fc);
+    temp_v4 = uiSearchPrimary(temp_v0 + 0x4fc);
     temp_v9 = 0;
     if (temp_v9 < temp_v4) {
       do {
-        temp_v5 = FUN_0034c8b8();
+        temp_v5 = uniteIsStateTwentyTwo();
         if ((temp_v5 != 0) || (temp_v5 = FUN_002a4894(temp_v1), temp_v5 != temp_v9)) {
           temp_v5 = temp_v14 + temp_v9;
           if (*(int *)(temp_v0 + temp_v5 * 4 + 0x927c) < 0) break;
@@ -212,7 +212,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     temp_v10 = FUN_002a4860(temp_v1);
     temp_v4 = FUN_002a4894(temp_v1);
     temp_v10 = temp_v10 + temp_v4;
-    temp_v4 = FUN_0034c8b8();
+    temp_v4 = uniteIsStateTwentyTwo();
     if (temp_v4 == 0) {
       temp_v4 = dataTableGetEntry24Byte1(temp_v10);
       temp_v1 = FUN_002a4894(temp_v1);

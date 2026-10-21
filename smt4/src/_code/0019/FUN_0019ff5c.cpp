@@ -1,20 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019ff5c` (_code @ 0x19ff5c, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail bhi 38; compiler bgt 38. */
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_0019ff5c(float *param_1)
-
+/* Clears values inside the symmetric dead zone and returns the filtered value. */
+f32 FUN_0019ff5c(f32 *value, f32 threshold)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if (((param_1 != (float *)0x0) && (*param_1 <= in_s0)) && (-in_s0 <= *param_1)) {
-    *param_1 = 0.0f;
-  }
-  return;
+    if (value == NULL) {
+        return 0.0f;
+    }
+    f32 current = *value;
+    if (current > threshold) {
+        return current;
+    }
+    if (current >= -threshold) {
+        *value = 0.0f;
+        return 0.0f;
+    }
+    return current;
 }
 
 } /* extern "C" */

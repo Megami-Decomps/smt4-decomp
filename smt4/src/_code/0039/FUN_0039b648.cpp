@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231420(int, unsigned int, int, int);
+int effectForwardModeOne(int, unsigned int, int, int);
 int FUN_00231434(int, int, int [4], unsigned int [2]);
 int FUN_002319c0(void);
 int FUN_0039ac64(...);
@@ -39,7 +39,7 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_00231420. */
+/* Supplied declaration required: effectForwardModeOne. */
 /* Supplied declaration required: FUN_00231434. */
 /* Supplied declaration required: FUN_002319c0. */
 extern int gameGetMapBlock(void);
@@ -85,7 +85,7 @@ unsigned int FUN_0039b648(int param_1)
     temp_v7 = (unsigned int *)&uStack_4c;
     FUN_00231434(0x1c,temp_v5 + 0xfb5,temp_v10,temp_v9);
     temp_v2 = temp_v10[0];
-    FUN_00231420(temp_v10[0],temp_v9[0],temp_v8,uStack_4c);
+    effectForwardModeOne(temp_v10[0],temp_v9[0],temp_v8,uStack_4c);
     if ((temp_v2 == 0) || ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0')) {
       temp_v5 = temp_v5 + 1;
       if (temp_v5 >= 5) {
@@ -139,7 +139,7 @@ unsigned int FUN_0039b648(int param_1)
       break;
     case 2:
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
-      FUN_00231420(temp_v10[0],temp_v9[0],temp_v8,uStack_4c);
+      effectForwardModeOne(temp_v10[0],temp_v9[0],temp_v8,uStack_4c);
       if (temp_v10[0] == 0) {
         return 1;
       }

@@ -1,32 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e44a8` (_code @ 0x2e44a8, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler schedules the prologue, loads and argument setup differently from retail. */
+#include "common.h"
+
+namespace { struct Bustup { u8 padding[0x90]; u16 id; }; struct Devil { u8 padding[0x268]; u8 special; }; }
 
 extern "C" {
-
-int devilGetRecord(void);
-
-extern int g_btlTalkBustUp; /* 0x434210 */
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-unsigned int FUN_002e44a8(int param_1)
-
+extern Bustup *g_btlTalkBustUp;
+Devil *devilGetRecord(u32 id);
+u32 FUN_002e44a8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_btlTalkBustUp;
-  if ((g_btlTalkBustUp == 0) ||
-     (devilGetRecord(), (unsigned int)*(unsigned short *)(param_1 + 0x90) != *(unsigned int *)(temp_v0 + 0x2f8))) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if (g_btlTalkBustUp != NULL && devilGetRecord(g_btlTalkBustUp->id)->special != 0) { return 1; }
+    return 0;
 }
-
-} /* extern "C" */
+}

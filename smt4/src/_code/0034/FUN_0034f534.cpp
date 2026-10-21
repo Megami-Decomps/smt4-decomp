@@ -10,8 +10,8 @@ int rt_memcpy(int, unsigned int, unsigned int);
 #define ROMWRIGHT_CARRY_4_DEFINED
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
-extern unsigned long long FUN_0023a5ec(unsigned int);
-extern int FUN_0024db9c(unsigned int, unsigned int, unsigned int);
+extern unsigned long long resourceGetWideHandle(unsigned int);
+extern int runtimeShiftLeftWide(unsigned int, unsigned int, unsigned int);
 extern int FUN_0034e618(unsigned int, int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -27,8 +27,8 @@ unsigned char FUN_0034f534(int param_1,unsigned int param_2,unsigned int param_3
   unsigned long long temp_v4;
   
   temp_v3 = *(int *)(param_1 + 0x18);
-  temp_v4 = FUN_0023a5ec(*(unsigned int *)(param_1 + 0xc));
-  temp_v0 = FUN_0024db9c((int)temp_v4,(int)((unsigned long long)temp_v4 >> 0x20),
+  temp_v4 = resourceGetWideHandle(*(unsigned int *)(param_1 + 0xc));
+  temp_v0 = runtimeShiftLeftWide((int)temp_v4,(int)((unsigned long long)temp_v4 >> 0x20),
                        *(unsigned int *)(*(int *)(param_1 + 8) + 0xc));
   temp_v1 = *(int *)(param_1 + 0x14) - (temp_v3 - temp_v0);
   temp_v0 = *(int *)(param_1 + 0x20);

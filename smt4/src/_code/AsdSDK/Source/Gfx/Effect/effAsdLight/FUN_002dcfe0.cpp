@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 
-extern unsigned int FUN_0024c3f8(int);
+extern unsigned int resourceResolveHeaderPointer(int);
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: memClear. */
@@ -53,7 +53,7 @@ unsigned int * FUN_002dcfe0(int param_1)
   puVar1[8] = 0x3f800000;
   if (param_1 != 0) {
     puVar1[10] = (unsigned int)*(unsigned short *)(param_1 + 0xc);
-    temp_v0 = FUN_0024c3f8(param_1);
+    temp_v0 = resourceResolveHeaderPointer(param_1);
     rt_memcpy(puVar1 + 0xc,temp_v0,0xb4);
     puVar3 = puVar1 + 0xc;
     if (puVar1[0x31] == 1) {

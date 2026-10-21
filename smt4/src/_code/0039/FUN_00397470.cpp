@@ -46,7 +46,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0019e0c0(unsigned int);
-extern int FUN_00220cf4(void);
+extern int buttonHelpGetState(void);
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -61,7 +61,7 @@ void FUN_00397470(fn_00397470_arg0 *param_1)
   int temp_v0;
   
   if (param_1->field_0x658 != '\0') {
-    temp_v0 = FUN_00220cf4();
+    temp_v0 = buttonHelpGetState();
     if (temp_v0 != 0) {
       FUN_002636d0(0);
     }

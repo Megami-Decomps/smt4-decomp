@@ -95,7 +95,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001d3d38. */
 extern int __cxa_guard_acquire(unsigned int *);
-extern unsigned int FUN_003facf4(int, unsigned int);
+extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: FUN_00419c34. */
 /* Supplied declaration required: FUN_00419ce0. */
 /* Supplied declaration required: FUN_00419d8c. */
@@ -288,7 +288,7 @@ void FUN_002fc0c8(unsigned int param_1)
             nn_math_ARMv6_MTX34MultAsm(temp_v23,temp_v23,&temp_v24);
             temp_v2 = param_1;
             if (temp_v0 != temp_v39) {
-              temp_v2 = FUN_003facf4(temp_v39,0);
+              temp_v2 = resourceGetIndexedEntry(temp_v39,0);
               FUN_00421e9c(param_1,temp_v2);
               *puVar8 = param_1;
               temp_v0 = temp_v39;
@@ -386,7 +386,7 @@ void FUN_002fc0c8(unsigned int param_1)
             nn_math_ARMv6_MTX34MultAsm(temp_v23,temp_v23,&temp_v24);
             temp_v2 = param_1;
             if (temp_v0 != temp_v39) {
-              temp_v2 = FUN_003facf4(temp_v39,0);
+              temp_v2 = resourceGetIndexedEntry(temp_v39,0);
               FUN_00421e9c(param_1,temp_v2);
               *puVar8 = param_1;
               temp_v0 = temp_v39;
@@ -488,7 +488,7 @@ void FUN_002fc0c8(unsigned int param_1)
             nn_math_ARMv6_MTX34MultAsm(temp_v23,temp_v23,&temp_v24);
             temp_v2 = param_1;
             if (temp_v0 != temp_v39) {
-              temp_v2 = FUN_003facf4(temp_v39,0);
+              temp_v2 = resourceGetIndexedEntry(temp_v39,0);
               FUN_00421e9c(param_1,temp_v2);
               *puVar8 = param_1;
               temp_v0 = temp_v39;
@@ -591,7 +591,7 @@ void FUN_002fc0c8(unsigned int param_1)
             nn_math_ARMv6_MTX34MultAsm(temp_v23,temp_v23,&temp_v24);
             temp_v2 = param_1;
             if (temp_v0 != temp_v39) {
-              temp_v2 = FUN_003facf4(temp_v39,0);
+              temp_v2 = resourceGetIndexedEntry(temp_v39,0);
               FUN_00421e9c(param_1,temp_v2);
               *puVar8 = param_1;
               temp_v0 = temp_v39;

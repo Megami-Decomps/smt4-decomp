@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002331c0(void);
-int FUN_00233218(void);
+int jobGetScalarValue(void);
 int renderCtxCallB(void);
 int FUN_002a8a58(int *, unsigned int);
 int FUN_002a8ac4(...);
@@ -14,7 +14,7 @@ int FUN_002b7064(void);
 int FUN_002b70cc(void);
 int FUN_002b76d0(...);
 int FUN_002ba12c(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c1b64(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int renderStatePush(double);
@@ -71,7 +71,7 @@ extern unsigned int DAT_004d46dc; /* 0x4d46dc */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002331c0. */
-/* Supplied declaration required: FUN_00233218. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a8a58. */
 /* Supplied declaration required: FUN_002a8ac4. */
@@ -80,7 +80,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: FUN_002ba12c. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -158,7 +158,7 @@ int FUN_003937e4(unsigned int param_1,int param_2,unsigned int *param_3)
   temp_v28 = param_1;
   iStack_2c = param_2;
   puStack_28 = param_3;
-  FUN_00233218();
+  jobGetScalarValue();
   __aeabi_vec_ctor_nocookie_nodtor(temp_v19 + 0x10,&LAB_00141adc,0x10,4);
   __aeabi_vec_ctor_nocookie_nodtor(temp_v19,&LAB_00141adc,0x10,4);
   temp_v18 = 0;
@@ -252,7 +252,7 @@ LAB_00393954:
       if (*(short *)(temp_v9 + 4) == 0) {
         if (((*(unsigned char *)(temp_v9 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) {
           temp_v2 = 1;
-          FUN_002bf538();
+          efctSetSpeed();
         }
         if (((*(unsigned char *)(temp_v9 + 0xc) & 4) != 0) && ((*param_3 & 4) == 0)) {
           temp_v19[0x13] = temp_v19[0x13] * temp_v12;
@@ -288,7 +288,7 @@ LAB_00393954:
         }
         if (((*(unsigned char *)(temp_v9 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) {
           temp_v2 = 1;
-          FUN_002bf538();
+          efctSetSpeed();
         }
         if (((*(unsigned char *)(temp_v9 + 0xc) & 4) != 0) && ((*param_3 & 4) == 0)) {
           temp_v19[0x13] = temp_v19[0x13] * temp_v12;
@@ -408,7 +408,7 @@ LAB_00393954:
           renderCtxCallB();
         }
         if (temp_v2) {
-          FUN_002bf538();
+          efctSetSpeed();
         }
         if (temp_v3) {
           temp_v17 = temp_v19[0xc];
@@ -444,7 +444,7 @@ LAB_00393954:
 LAB_00393b58:
     FUN_002a8ac4(param_2,param_3,temp_v28);
     if (temp_v2) {
-      FUN_002bf538();
+      efctSetSpeed();
     }
     if (temp_v3) {
       temp_v18 = temp_v19[0xc];

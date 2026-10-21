@@ -10,7 +10,7 @@ extern unsigned char g_saveLoadThread; /* 0x57f6c8 */
 
 /* Supplied declaration required: FUN_001387c0. */
 extern int FUN_00138ca4(void);
-extern int FUN_002a1c04(unsigned int, unsigned int);
+extern int processQueryAndFinish(unsigned int, unsigned int);
 extern int FUN_002e0b5c(unsigned int, unsigned int);
 
 
@@ -26,7 +26,7 @@ void FUN_00371100(int param_1)
     if (temp_v0 != 0) {
       FUN_001387c0();
     }
-    temp_v0 = FUN_002a1c04(6,0);
+    temp_v0 = processQueryAndFinish(6,0);
     if ((temp_v0 < 0) || (temp_v0 = FUN_002e0b5c(6,0), temp_v0 != 1 && temp_v0 != 2)) {
       (*(unsigned char *)((unsigned char *)&g_saveLoadThread + 0x1)) = 0;
     }

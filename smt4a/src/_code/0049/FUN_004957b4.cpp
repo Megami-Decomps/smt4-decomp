@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0018349c(...);
 int FUN_0049339c(int, int, int, int, int);
 int FUN_00493408(...);
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0018349c. */
 extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_0049339c. */
@@ -76,7 +76,7 @@ void FUN_004957b4(int param_1)
   if (*(int *)(param_1 + 0xb48) == *(int *)(param_1 + 0xb4c)) {
     temp_v6 = 0x57d8ffff;
   }
-  FUN_00100388(temp_v8,
+  textFormatBuffer(temp_v8,
                "㈥d㩣卜呍䘴卜呍䘴獜摤㑳灜潲牧浡獜潨屰桳灯慍湩挮灰",temp_v7);
   FUN_00493408(param_1 + 0x3b8,0,temp_v0 + temp_v5,temp_v1 + temp_v2,0,7,temp_v6,temp_v4,temp_v8);
   return;

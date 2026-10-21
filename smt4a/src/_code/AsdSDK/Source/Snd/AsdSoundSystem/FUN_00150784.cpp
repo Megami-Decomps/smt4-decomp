@@ -10,7 +10,7 @@ int FUN_00173a94(unsigned char *);
 int FUN_00173c1c(unsigned char *);
 int FUN_00173c7c(unsigned char *);
 int FUN_001742e4(...);
-int FUN_0018feac(unsigned char *);
+int uiTextStateReset(unsigned char *);
 int asdMemFree(...);
 int FUN_001b6668(unsigned char *, unsigned char *);
 int nw_snd_SoundHandle_DetachSound(...);
@@ -32,7 +32,7 @@ extern int *DAT_0063e944; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 extern unsigned char DAT_0063ea3c; /* 0x63ea3c */
 extern unsigned char DAT_0063ea48; /* 0x63ea48 */
-extern unsigned char DAT_0063f1e8; /* 0x63f1e8 */
+extern unsigned char g_asdSoundHandleState; /* 0x63f1e8 */
 extern unsigned char DAT_0063f45c; /* 0x63f45c */
 extern unsigned int DAT_0063f4c0; /* 0x63f4c0 */
 extern signed char DAT_0063f4c4; /* 0x63f4c4 */
@@ -47,7 +47,7 @@ extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: FUN_00173c1c. */
 /* Supplied declaration required: FUN_00173c7c. */
 /* Supplied declaration required: FUN_001742e4. */
-/* Supplied declaration required: FUN_0018feac. */
+/* Supplied declaration required: uiTextStateReset. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001b6668. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
@@ -82,7 +82,7 @@ void FUN_00150784(void)
     temp_v1 = 0;
     do {
       if (temp_v1 < 2) {
-        puVar2 = &DAT_0063f1e8 + temp_v1 * 4;
+        puVar2 = &g_asdSoundHandleState + temp_v1 * 4;
         temp_v3 = (&DAT_0063f504)[temp_v1];
         if (temp_v3 != 0) {
           puVar2 = *(unsigned char **)(temp_v3 + 0x20);
@@ -140,7 +140,7 @@ void FUN_00150784(void)
     DAT_0063e6cc = 0;
     FUN_00173c1c(&DAT_0063e494);
     FUN_00173c7c(&DAT_0063e37c);
-    FUN_0018feac(&g_asdSoundSystem);
+    uiTextStateReset(&g_asdSoundSystem);
     if (DAT_0063e6b8 != 0) {
       asdMemFree();
     }

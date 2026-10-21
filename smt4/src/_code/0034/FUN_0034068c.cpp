@@ -1,27 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034068c` (_code @ 0x34068c, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: original C++ array constructor helper requires the still-unrecovered base class hierarchy. */
+#include "common.h"
+struct WorkItem { u8 data[4]; };
+struct WorkOwner { u8 unk00[32]; WorkItem items[8]; };
 extern "C" {
-
-int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
-
-extern unsigned char LAB_00376968; /* 0x376968 */
-
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-extern int FUN_0038093c(void);
-
-
-int FUN_0034068c(void)
-
+WorkOwner *FUN_0038093c(WorkOwner *owner);
+void FUN_00376968(WorkItem *item);
+/* Initializes the owner, then constructs its eight embedded work items. */
+WorkOwner *FUN_0034068c(WorkOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0038093c();
-  temp_v0 = temp_v0 + 0x20;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_00376968,4,8);
-  return temp_v0 - 0x20;
+    owner = FUN_0038093c(owner);
+    for (u32 index = 0; index < 8; ++index)
+        FUN_00376968(&owner->items[index]);
+    return owner;
 }
-
-} /* extern "C" */
+}

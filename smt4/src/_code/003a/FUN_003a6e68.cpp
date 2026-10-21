@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00231240(...);
+int pointConvertToFloat(...);
 int FUN_00233670(int, int, int, int);
 int FUN_0029d960(int);
 int FUN_002a0cc8(int);
 int buttonHelpSetPreset(...);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_00233344(int, int);
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_0029d960. */
@@ -35,7 +35,7 @@ void FUN_003a6e68(int param_1)
   temp_v3 = param_1 + *(short *)(param_1 + 0xa5b4) * 0x8c + 0xfc;
   temp_v1 = vec2GetYInt(temp_v3);
   temp_v2 = vec2GetXInt(temp_v3);
-  FUN_00231240(param_1 + 200,temp_v2,temp_v1);
+  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0x5a4) != '\0') {
       if (*(char *)(param_1 + 0x5a5) == '\x01') {
@@ -53,7 +53,7 @@ void FUN_003a6e68(int param_1)
     FUN_002a0cc8(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_00231240(param_1 + 200,0,0);
+    pointConvertToFloat(param_1 + 200,0,0);
     (**(romwright_code **)(**(int **)(param_1 + 0x590) + 8))(*(int **)(param_1 + 0x590),param_1 + 0x20);
     puVar4 = (unsigned short *)(*(int *)(param_1 + 0x590) + 4);
     *puVar4 = *puVar4 | 0x1000;

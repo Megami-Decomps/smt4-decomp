@@ -1,23 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035fcbc` (_code @ 0x35fcbc, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler emits a leaf predicate instead of retail callee-saved register sequence and split-offset loads. */
+#include "common.h"
+namespace { struct Bustup { u8 padding[0x7c]; s16 state; u8 reserved[0x2c]; s8 active; }; }
 extern "C" {
-
-extern int g_btlTalkBustUp; /* 0x5710dc */
-
-
-unsigned int FUN_0035fcbc(void)
-
+extern Bustup *g_btlTalkBustUp;
+u32 FUN_0035fcbc(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (((g_btlTalkBustUp != 0) && (*(char *)(g_btlTalkBustUp + 0xaa) == '\0')) &&
-     (*(short *)(g_btlTalkBustUp + 0x7c) == 10)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 result = 0;
+    if (g_btlTalkBustUp != NULL && g_btlTalkBustUp->active == 0 && g_btlTalkBustUp->state == 10) { result = 1; }
+    return result;
 }
-
-} /* extern "C" */
+}

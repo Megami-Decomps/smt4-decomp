@@ -1,25 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nodeSetTranslation` (_code @ 0x28c640, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler groups translation loads and reorders independent component stores differently. */
+#include "common.h"
 
-extern "C" {
-
-
-void nodeSetTranslation(int param_1,unsigned int param_2,unsigned int *param_3)
-
-{
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = *(int *)(param_1 + 0x2c);
-  temp_v2 = *param_3;
-  temp_v1 = param_3[2];
-  *(unsigned int *)(temp_v0 + 0x68) = param_3[1];
-  *(unsigned int *)(temp_v0 + 0x78) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x58) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x88) = *(unsigned int *)(temp_v0 + 0x88) | 0x800;
-  return;
+namespace {
+struct Node { u8 padding[0x58]; u32 z; u8 gap[0xc]; u32 x; u8 gap2[0xc]; u32 y; u8 gap3[0xc]; u32 flags; };
+struct Owner { u8 padding[0x2c]; Node *node; };
+struct Translation { u32 z, x, y; };
 }
-
-} /* extern "C" */
+extern "C" {
+/* Applies the supplied translation to the node and marks its transform dirty. */
+void nodeSetTranslation(Owner *owner, u32 kind, const Translation *translation)
+{
+    Node *node = owner->node;
+    Translation value = *translation;
+    node->x = value.x;
+    node->y = value.y;
+    node->z = value.z;
+    node->flags |= 0x800;
+}
+}

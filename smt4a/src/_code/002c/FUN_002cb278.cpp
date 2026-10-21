@@ -10,7 +10,7 @@ extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001643b4. */
 extern int FUN_002c2c68(unsigned int);
-extern int FUN_00348ed0(unsigned int);
+extern int uiSearchPrimary(unsigned int);
 
 
 void FUN_002cb278(unsigned int param_1,int param_2)
@@ -24,7 +24,7 @@ void FUN_002cb278(unsigned int param_1,int param_2)
   
   temp_v0 = g_camp;
   temp_v2 = FUN_002c2c68(param_1);
-  temp_v3 = FUN_00348ed0(param_1);
+  temp_v3 = uiSearchPrimary(param_1);
   if (temp_v3 < temp_v2) {
     if (param_2 == 0) {
       temp_v1 = FUN_001643b4(0x14,0x572);
@@ -35,7 +35,7 @@ void FUN_002cb278(unsigned int param_1,int param_2)
       *(unsigned short *)(temp_v0 + 0x1b38) = temp_v1;
 LAB_002cb390:
       temp_v3 = 0;
-      temp_v2 = FUN_00348ed0(param_1);
+      temp_v2 = uiSearchPrimary(param_1);
       if (0 < temp_v2) {
         do {
           temp_v2 = FUN_002c2c68(param_1);
@@ -44,7 +44,7 @@ LAB_002cb390:
           temp_v2 = temp_v3 * 2;
           temp_v3 = temp_v3 + 1;
           *(unsigned short *)(temp_v0 + temp_v2 + 0x1b3e) = temp_v1;
-          temp_v2 = FUN_00348ed0(param_1);
+          temp_v2 = uiSearchPrimary(param_1);
         } while (temp_v3 < temp_v2);
       }
       temp_v1 = FUN_001643b4(0x14,0x576);
@@ -62,7 +62,7 @@ LAB_002cb390:
   }
   else if (param_2 == 0) goto LAB_002cb390;
   temp_v3 = 0;
-  temp_v2 = FUN_00348ed0(param_1);
+  temp_v2 = uiSearchPrimary(param_1);
   if (0 < temp_v2) {
     do {
       temp_v2 = FUN_002c2c68(param_1);
@@ -73,7 +73,7 @@ LAB_002cb390:
       temp_v2 = temp_v3 * 2;
       temp_v3 = temp_v3 + 1;
       *(unsigned short *)(temp_v0 + temp_v2 + 0x1b3e) = temp_v1;
-      temp_v2 = FUN_00348ed0(param_1);
+      temp_v2 = uiSearchPrimary(param_1);
     } while (temp_v3 < temp_v2);
   }
   return;

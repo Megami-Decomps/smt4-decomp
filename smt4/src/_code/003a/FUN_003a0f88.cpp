@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00230aec(...);
 int FUN_00230cc0(int, int, int, int, int);
 int FUN_00231bcc(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 
 typedef int romwright_code(...);
@@ -25,7 +25,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int FUN_00240d5c(int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf4f0. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -105,7 +105,7 @@ void FUN_003a0f88(int param_1)
   if (*(int *)(param_1 + 0x868) == *(int *)(param_1 + 0x86c)) {
     temp_v9 = 0xf49800ff;
   }
-  FUN_002be624(temp_v12,&LAB_003a11ec,temp_v11);
+  textFormatBuffer(temp_v12,&LAB_003a11ec,temp_v11);
   FUN_00230aec(param_1 + 0x394,0,temp_v8 + temp_v0,temp_v2 + temp_v1,0,7,temp_v9,temp_v10,temp_v12);
   return;
 }

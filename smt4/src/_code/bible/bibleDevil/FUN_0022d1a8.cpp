@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029ce60(unsigned int, int, int);
 int devilGetRecord(void);
-int FUN_002be624(int, unsigned char *, unsigned int);
+int textFormatBuffer(int, unsigned char *, unsigned int);
 int FUN_002bf4f0(int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -25,7 +25,7 @@ extern int FUN_00233718(int);
 /* Supplied declaration required: FUN_0029ce60. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf4f0. */
 
 
@@ -138,7 +138,7 @@ void FUN_0022d1a8(int param_1)
         temp_v4 = *(short *)(temp_v7 + 10);
         *(int *)(temp_v9 * 4 + 0x4935cc) = (int)*(short *)(temp_v7 + 8) + (int)temp_v2;
         *(int *)(temp_v9 * 4 + 0x4935f4) = (int)temp_v4 + (int)temp_v3;
-        FUN_002be624(temp_v9 * 0x20 + 0x49361c,&LAB_0022d42c,temp_v12);
+        textFormatBuffer(temp_v9 * 0x20 + 0x49361c,&LAB_0022d42c,temp_v12);
         (&DAT_0049375c)[temp_v9] = temp_v11;
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < temp_v6);

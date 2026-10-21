@@ -8,7 +8,7 @@ int asdTMTexTableLoadSprites(int);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int sysPlaySe(int);
 int FUN_0019de98(int, unsigned int);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_002804b0(unsigned char *, int, int);
 int sysMemClear(void);
 int FUN_003d05a4(int, unsigned int);
@@ -28,10 +28,10 @@ extern int g_config; /* 0x57f230 */
 /* Supplied declaration required: sysPlaySe. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_003d05a4. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 
@@ -53,7 +53,7 @@ void configOpen(unsigned int param_1,unsigned char param_2)
   *(unsigned char *)(temp_v0 + 0xc0) = param_2;
   *(unsigned char *)(temp_v0 + 0x4c0) = 0;
   *(unsigned char *)(temp_v0 + 0x4c1) = 0;
-  temp_v1 = FUN_00341940(0x24);
+  temp_v1 = textureGetIndexedResource(0x24);
   if (temp_v1 == 0) {
     *(unsigned char *)(temp_v0 + 0x4c0) = 1;
     asdTMTexTableLoadSprites(0x24);
@@ -61,7 +61,7 @@ void configOpen(unsigned int param_1,unsigned char param_2)
   temp_v1 = asdTMTexTableNodeIsLoaded(0x24,0);
   if (temp_v1 == 0) {
     *(unsigned char *)(temp_v0 + 0x4c1) = 1;
-    FUN_001acf98(0x24,0);
+    asdTMTexLoadMainHeap(0x24,0);
   }
   FUN_002804b0(&LAB_00202e80,temp_v0 + 0x7c,0);
   FUN_002804b0(&LAB_00202e90,temp_v0 + 0x80,0);

@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int FUN_00239dec(void);
+extern unsigned int recordRequireValue(void);
 /* Supplied declaration required: nn_fs_ipc_FileSystem_DeleteFile. */
 
 
@@ -34,7 +34,7 @@ void FUN_00356010(int param_1,unsigned int *param_2)
     temp_v4 = param_2[1];
     temp_v0 = *(unsigned int *)(param_1 + 8);
     temp_v1 = *(unsigned int *)(param_1 + 0xc);
-    temp_v5[0] = FUN_00239dec();
+    temp_v5[0] = recordRequireValue();
     nn_fs_ipc_FileSystem_DeleteFile(temp_v5,0,temp_v0,temp_v1,temp_v3,temp_v4,temp_v2);
   }
   return;

@@ -11,7 +11,7 @@ int FUN_00295660(int, unsigned char [100]);
 int FUN_00296ae8(unsigned int, int, unsigned int, int);
 int FUN_0029ede8(int, int, unsigned int, int);
 int dataTable08Sub2GetRecord(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_00309bc8(int param_1,unsigned int param_2)
@@ -74,7 +74,7 @@ void FUN_00309bc8(int param_1,unsigned int param_2)
     else {
       FUN_002907c4(&temp_v5,temp_v0 & 0xf);
       FUN_002907c4(temp_v6,*(unsigned char *)(temp_v3 + 0x58) >> 4);
-      FUN_002be624(temp_v7,&LAB_00309d98,&temp_v5,temp_v6);
+      textFormatBuffer(temp_v7,&LAB_00309d98,&temp_v5,temp_v6);
       FUN_00295660(0x25,temp_v7);
     }
     FUN_0024bda8(temp_v7,*(unsigned int *)(temp_v4 + 0x54) >> 0x14);
@@ -82,25 +82,25 @@ void FUN_00309bc8(int param_1,unsigned int param_2)
     FUN_0024bc98(temp_v7,*(unsigned char *)(temp_v3 + 0x59));
     FUN_00295660(0x27,temp_v7);
     if (*(char *)(temp_v4 + 0x5b) == '\0') {
-      FUN_002be624(temp_v7,&LAB_00309da0);
+      textFormatBuffer(temp_v7,&LAB_00309da0);
     }
     if (*(char *)(temp_v4 + 0x5b) == '\x01') {
-      FUN_002be624(temp_v7,&LAB_00309dac);
+      textFormatBuffer(temp_v7,&LAB_00309dac);
     }
     if (*(char *)(temp_v4 + 0x5b) == '\x05') {
-      FUN_002be624(temp_v7,&LAB_00309db4);
+      textFormatBuffer(temp_v7,&LAB_00309db4);
     }
     if (*(char *)(temp_v4 + 0x5b) == '\x06') {
-      FUN_002be624(temp_v7,&LAB_00309dc4);
+      textFormatBuffer(temp_v7,&LAB_00309dc4);
     }
     if (*(char *)(temp_v4 + 0x5b) == '\a') {
-      FUN_002be624(temp_v7,&LAB_00309dd0);
+      textFormatBuffer(temp_v7,&LAB_00309dd0);
     }
     if (*(char *)(temp_v4 + 0x5b) == '\b') {
-      FUN_002be624(temp_v7,&LAB_00309ddc);
+      textFormatBuffer(temp_v7,&LAB_00309ddc);
     }
     if (*(char *)(temp_v4 + 0x5b) == '\t') {
-      FUN_002be624(temp_v7,&LAB_00309de8);
+      textFormatBuffer(temp_v7,&LAB_00309de8);
     }
     FUN_00295660(0x28,temp_v7);
     if (param_1 == 0) {

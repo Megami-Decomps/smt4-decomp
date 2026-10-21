@@ -18,12 +18,12 @@ typedef struct Holder001d381c {
 
 void asdMdlManagerDestroy(void *manager);
 
-extern Holder001d381c DAT_0044cda0;
+extern Holder001d381c g_mapModelWork;
 
 /* Destroys the model manager the object's part holds, if any. */
 void objectDestroyModelManager(void)
 {
-    Part001d381c *part = &DAT_0044cda0.object->part;
+    Part001d381c *part = &g_mapModelWork.object->part;
 
     if (part->manager != NULL) {
         asdMdlManagerDestroy(part->manager);

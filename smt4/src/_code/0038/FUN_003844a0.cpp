@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bed3c(void);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c0944(unsigned int);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
@@ -26,7 +26,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
 extern unsigned int FUN_002c15ac(unsigned int);
 extern unsigned int FUN_002c15d4(unsigned int);
@@ -54,7 +54,7 @@ void FUN_003844a0(unsigned int *param_1)
   if ((int)param_1[1] >= 3) {
     FUN_002c39a4(g_titleScene);
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar6 = (int *)(temp_v0 + 0x124c);
@@ -106,7 +106,7 @@ void FUN_003844a0(unsigned int *param_1)
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
     FUN_002bed3c();
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002c198c(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return;

@@ -1,33 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00360364` (_code @ 0x360364, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail closes the native handle with SVC 0x23, which is prohibited by the no-intrinsics rule. */
+#include "common.h"
 extern "C" {
-
-int asdFatalError(void);
-int FUN_003607d0(void);
-int software_interrupt(int);
-
-extern signed char DAT_00471ba8; /* 0x471ba8 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: FUN_003607d0. */
-
-
-void FUN_00360364(int *param_1)
-
+extern u8 DAT_00471ba8;
+void FUN_003607d0();
+s32 nn_svc_CloseHandle(u32 handle);
+void asdFatalError(s32 result);
+/* Closes the initialized service handle and clears its initialization flag. */
+void FUN_00360364(const u32 *handle)
 {
-/* irregular: 3 native warning(s); review required */
-  if (DAT_00471ba8 != '\0') {
-    FUN_003607d0();
-    software_interrupt(0x23);
-    if (*param_1 < 0) {
-      asdFatalError();
+    if (DAT_00471ba8) {
+        FUN_003607d0();
+        s32 result = nn_svc_CloseHandle(*handle);
+        if (result < 0)
+            asdFatalError(result);
+        DAT_00471ba8 = 0;
     }
-    DAT_00471ba8 = '\0';
-  }
-  return;
 }
-
-} /* extern "C" */
+}

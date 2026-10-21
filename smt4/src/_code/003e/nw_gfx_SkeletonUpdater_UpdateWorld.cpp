@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023d20c(int, int, int);
+int matrixScaleColumns(int, int, int);
 int nw_gfx_WorldMatrixUpdater_CalculateWorldBasic(unsigned int, int, float *, int, int, int);
 int nw_gfx_WorldMatrixUpdater_CalculateWorldMayaSsc(void);
 int nw_gfx_WorldMatrixUpdater_CalculateWorldXsi(unsigned int, int, float *, int, int, int);
@@ -29,7 +29,7 @@ typedef struct {
 } param_3_stack;
 
 extern int FUN_002262ac(void);
-/* Supplied declaration required: FUN_0023d20c. */
+/* Supplied declaration required: matrixScaleColumns. */
 /* Supplied declaration required: nw_gfx_WorldMatrixUpdater_CalculateWorldBasic. */
 /* Supplied declaration required: nw_gfx_WorldMatrixUpdater_CalculateWorldMayaSsc. */
 /* Supplied declaration required: nw_gfx_WorldMatrixUpdater_CalculateWorldXsi. */
@@ -148,7 +148,7 @@ void nw_gfx_SkeletonUpdater_UpdateWorld(unsigned int param_1,int *param_2,unsign
           *(float *)(temp_v7 + 0x30) = temp_v25;
           *(float *)(temp_v7 + 0x34) = temp_v26;
           *(float *)(temp_v7 + 0x38) = temp_v27;
-          FUN_0023d20c(temp_v11,temp_v7,temp_v7 + 0x30);
+          matrixScaleColumns(temp_v11,temp_v7,temp_v7 + 0x30);
           temp_v6 = *(unsigned int *)(temp_v7 + 0x3c);
           *(unsigned int *)(temp_v7 + 0x3c) = temp_v6 & 0xfffff81f;
           if ((temp_v6 & 8) == 0) {
@@ -230,7 +230,7 @@ void nw_gfx_SkeletonUpdater_UpdateWorld(unsigned int param_1,int *param_2,unsign
           *(float *)(temp_v7 + 0x30) = temp_v18;
           *(float *)(temp_v7 + 0x34) = temp_v19;
           *(float *)(temp_v7 + 0x38) = temp_v20;
-          FUN_0023d20c(temp_v11,temp_v7,temp_v10 + 0x30);
+          matrixScaleColumns(temp_v11,temp_v7,temp_v10 + 0x30);
           temp_v6 = *(unsigned int *)(temp_v7 + 0x3c);
           *(unsigned int *)(temp_v7 + 0x3c) = temp_v6 & 0xfffff81f;
           if ((temp_v6 & 8) == 0) {
@@ -323,7 +323,7 @@ void nw_gfx_SkeletonUpdater_UpdateWorld(unsigned int param_1,int *param_2,unsign
         *(float *)(temp_v10 + 0x30) = temp_v21;
         *(float *)(temp_v10 + 0x34) = temp_v22;
         *(float *)(temp_v10 + 0x38) = temp_v23;
-        FUN_0023d20c(temp_v11,temp_v10,temp_v9 + 0x30);
+        matrixScaleColumns(temp_v11,temp_v10,temp_v9 + 0x30);
         temp_v6 = *(unsigned int *)(temp_v10 + 0x3c);
         *(unsigned int *)(temp_v10 + 0x3c) = temp_v6 & 0xfffff81f;
         if ((temp_v6 & 8) == 0) {

@@ -7,7 +7,7 @@ typedef struct TexLoader {
     /* 0x08 */ s32 handle;
 } TexLoader;
 
-extern s32 FUN_0023e3ec(s32 table, u32 entry);
+extern s32 resourceApplyNodeFlag(s32 table, u32 entry);
 extern s32 asdTMTexTableLoadEntryAsync(s32 table, u32 entry);
 extern s32 asdTMTexTableLoadEntryAsyncB(s32 table, u32 entry);
 
@@ -15,7 +15,7 @@ extern s32 asdTMTexTableLoadEntryAsyncB(s32 table, u32 entry);
 void FUN_0023b49c(TexLoader *loader, u32 flags, u32 entry)
 {
     if ((flags & 8) != 0) {
-        loader->handle = FUN_0023e3ec(0x16, entry);
+        loader->handle = resourceApplyNodeFlag(0x16, entry);
     } else if ((flags & 0x40) != 0) {
         loader->handle = asdTMTexTableLoadEntryAsyncB(0x16, entry);
     } else if ((flags & 1) != 0) {

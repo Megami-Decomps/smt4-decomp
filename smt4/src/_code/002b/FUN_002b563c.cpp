@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001480c8(void);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int nn_applet_CTR_detail_CloseSession(void);
 int FUN_002bb378(void);
 int asdFatalError(void);
@@ -36,7 +36,7 @@ extern unsigned int DAT_0044e37c; /* 0x44e37c */
 /* Supplied declaration required: FUN_001480c8. */
 extern int FUN_001482f8(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002bb100(void);
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_applet_CTR_detail_CloseSession. */
 /* Supplied declaration required: FUN_002bb378. */
 /* Supplied declaration required: asdFatalError. */
@@ -107,7 +107,7 @@ int FUN_002b563c(unsigned int param_1,unsigned int param_2,unsigned int param_3,
         return -0x375f33fe;
       }
     }
-    FUN_002bb150(10000000,0);
+    threadSleepDuration(10000000,0);
   }
   return temp_v3;
 }

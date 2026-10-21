@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022e2fc(int *);
-int FUN_0023266c(...);
+int rectangleInitializeSelection(...);
 int FUN_00233240(...);
 int FUN_0023346c(...);
 int FUN_00233670(...);
@@ -38,7 +38,7 @@ extern unsigned char DAT_00422434; /* 0x422434 */
 extern int *DAT_0043d9f8; /* 0x43d9f8 */
 
 /* Supplied declaration required: FUN_0022e2fc. */
-/* Supplied declaration required: FUN_0023266c. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 extern unsigned int *FUN_00233228(void);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_0023346c. */
@@ -83,7 +83,7 @@ void FUN_003ab550(int *param_1)
   puVar2 = &LAB_003ab77c;
   taskCreateDraw(&LAB_003ab77c,0xe6,1,0,&LAB_003ad368,0,DAT_0043d9f8,param_1[1]);
   param_1[3] = (int)puVar2;
-  FUN_0023266c(param_1 + 0x32,0x140,0,0x1d);
+  rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1d);
   FUN_0023346c(param_1 + 0x37);
   FUN_00233240(param_1 + 0x37,0);
   FUN_00233240(param_1 + 0x37,1);

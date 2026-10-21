@@ -12,7 +12,7 @@ typedef struct {
 extern GameBlock *g_camp;
 
 int ifTouchRegionRemove(void);
-int FUN_00348ed0(u32 group);
+int uiSearchPrimary(u32 group);
 
 /* Clears the id table and every used list slot for `group`; with `keep` clear it also runs two trailing ifTouchRegionRemove calls. */
 void FUN_002adce8(u32 group, int keep)
@@ -29,14 +29,14 @@ void FUN_002adce8(u32 group, int keep)
     block->head[3] = -1;
     block->head[4] = -1;
     i = 0;
-    if (FUN_00348ed0(group) > 0) {
+    if (uiSearchPrimary(group) > 0) {
         do {
             if (block->list[i] >= 0) {
                 ifTouchRegionRemove();
                 block->list[i] = -1;
             }
             i++;
-        } while (FUN_00348ed0(group) > i);
+        } while (uiSearchPrimary(group) > i);
     }
     if (keep == 0) {
         ifTouchRegionRemove();

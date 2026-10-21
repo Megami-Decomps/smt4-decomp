@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char *, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_0020eb44(char *, int);
 int FUN_002b5cb4(void);
 int FUN_0033abb4(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00376fa4(unsigned int);
 int sequenceRequestDefer(int, unsigned int);
 int FUN_003b5050(void);
@@ -27,7 +27,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0033bc8c; /* 0x33bc8c */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f1776; /* 0x5f1776 */
@@ -49,7 +49,7 @@ extern int DAT_005f1be0; /* 0x5f1be0 */
 extern int DAT_005f1be8; /* 0x5f1be8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
@@ -59,7 +59,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_00261424(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_0033abb4. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00376fa4. */
 /* Supplied declaration required: sequenceRequestDefer. */
 /* Supplied declaration required: FUN_003b5050. */
@@ -91,7 +91,7 @@ unsigned int FUN_0033b7c4(void)
   int temp_v13;
   int temp_v14;
   
-  temp_v4 = DAT_005806d4;
+  temp_v4 = g_mapEnemy;
   temp_v1 = gameFlagsGetBlock();
   temp_v2 = gameGetPlayerData();
   if (((DAT_005f1be0 == 0) && (*(int *)(temp_v4 + 4) != 0)) &&
@@ -123,7 +123,7 @@ unsigned int FUN_0033b7c4(void)
               }
               DAT_005f1776 = 1;
               DAT_005f1778 = *(unsigned int *)(temp_v4 + 0x9c);
-              FUN_00100388(&DAT_005f177c,&LAB_0033bc8c,*(unsigned int *)(temp_v4 + 0x9c),
+              textFormatBuffer(&DAT_005f177c,&LAB_0033bc8c,*(unsigned int *)(temp_v4 + 0x9c),
                            *(unsigned int *)(temp_v4 + 0xa0));
             }
             else {
@@ -176,7 +176,7 @@ LAB_0033baac:
             *(short *)(temp_v6 + 0x1aa) = temp_v0;
             if (*(int *)(DAT_005f18bf * 0x1c + 0x580bac) <= (int)temp_v0) {
               DAT_005f17c9 = 0;
-              FUN_00352bc4();
+              mathPositionHeadingDegrees();
               if (*(unsigned char *)(temp_v6 + 0x1af) < 2) {
                 FUN_001bc124();
                 FUN_001bbf0c();
@@ -189,7 +189,7 @@ LAB_0033baac:
                 FUN_001bc124();
                 FUN_001bbf0c();
               }
-              FUN_00352bc4();
+              mathPositionHeadingDegrees();
               temp_v8 = *(int *)(g_lmapScene + 0x4c);
               FUN_0033abb4();
               if (temp_v8 >= 0x42f00001) {
@@ -205,7 +205,7 @@ LAB_0033baac:
                   }
                   DAT_005f1776 = 1;
                   DAT_005f1778 = *(unsigned int *)(temp_v6 + 0x9c);
-                  FUN_00100388(&DAT_005f177c,&LAB_0033bc8c,*(unsigned int *)(temp_v6 + 0x9c),
+                  textFormatBuffer(&DAT_005f177c,&LAB_0033bc8c,*(unsigned int *)(temp_v6 + 0x9c),
                                *(unsigned int *)(temp_v6 + 0xa0));
                 }
                 else if (*(int *)(temp_v6 + 0x9c) != 0) {

@@ -15,7 +15,7 @@ int FUN_002b5cb4(void);
 int FUN_002d0394(void);
 int FUN_002d8614(...);
 int FUN_00317af8(float *, float *, int);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_0036d984(...);
 int FUN_003a26fc(void);
 int SBORROW4(int, int);
@@ -89,7 +89,7 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_002d8614. */
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_003646d4(unsigned int);
 /* Supplied declaration required: FUN_0036d984. */
 extern int FUN_003850b4(void);
@@ -189,7 +189,7 @@ LAB_00222954:
           DAT_005f0c98 = temp_v15;
           DAT_005f0c9c = temp_v16;
           DAT_005f0cac = 1;
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           DAT_005f0ca0 = temp_v14;
           DAT_005f0ca8 = 2;
           DAT_005f0d28 = 0;
@@ -236,7 +236,7 @@ LAB_00222b78:
           return;
         }
         temp_v5 = DAT_005f0c94;
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         DAT_005f0ca0 = temp_v5;
         return;
       }
@@ -332,7 +332,7 @@ LAB_00222b78:
       temp_v8 = temp_v8 + temp_v13 * DAT_005f0d18;
       FUN_001bbf0c();
       temp_v13 = DAT_005f0c94;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v7 = temp_v13 * temp_v6;
       DAT_005f0ca0 = temp_v13;
       FUN_001bc124();
@@ -398,7 +398,7 @@ LAB_00222b88:
     if (temp_v1 != 0) {
       FUN_003a26fc();
       temp_v5 = DAT_005f0c94;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v6 = 0.017453292f;
       temp_v13 = temp_v5 * 0.017453292f;
       DAT_005f0ca0 = temp_v5;
@@ -429,7 +429,7 @@ LAB_00222b88:
     }
     FUN_003a26fc();
     temp_v5 = DAT_005f0c94;
-    FUN_00352bc4();
+    mathPositionHeadingDegrees();
     DAT_005f0d24 = 1;
     DAT_005f0ca0 = temp_v5;
     temp_v1 = FUN_004ffa14(*(unsigned int *)(DAT_005f0c88 + 4));
@@ -507,7 +507,7 @@ LAB_00222b88:
     if (temp_v1 >= 0x43340000) {
       DAT_005f0ce4 = 0;
       temp_v5 = DAT_005f0c94;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       DAT_005f0ca0 = temp_v5;
       DAT_005f0ca8 = 0xe;
       return;

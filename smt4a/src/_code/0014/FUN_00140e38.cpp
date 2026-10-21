@@ -1,26 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00140e38` (_code @ 0x140e38, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct CameraSlots { u32 job; void **cameras; }; }
 
 extern "C" {
-
-extern unsigned char g_asdCamera; /* 0x59dbc0 */
-
-
-void FUN_00140e38(unsigned int param_1)
-
+/* Reads or updates the requested state. */
+extern CameraSlots g_asdCamera;
+void FUN_00140e38(void *camera)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    if (*(int *)((*(int *)((unsigned char *)&g_asdCamera + 0x4)) + temp_v0 * 4) == 0) {
-      *(unsigned int *)((*(int *)((unsigned char *)&g_asdCamera + 0x4)) + temp_v0 * 4) = param_1;
-      return;
+    for (s32 index = 0; index < 32; index++) {
+        if (g_asdCamera.cameras[index] == NULL) {
+            g_asdCamera.cameras[index] = camera;
+            return;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x20);
-  return;
 }
-
-} /* extern "C" */
+}

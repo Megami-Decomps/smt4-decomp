@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_0028fcc8(BtlUiObjCA *obj);
+void entrySetDefaultLimits(BtlUiObjCA *obj);
 
 extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004a9a38(void)
 {
-    FUN_0028fcc8(&g_btlUi.ui->objC);
+    entrySetDefaultLimits(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

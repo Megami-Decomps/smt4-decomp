@@ -9,7 +9,7 @@ int FUN_00208e4c(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287b0c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
 int FUN_0029bb14(unsigned int);
@@ -58,7 +58,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287b0c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029bb14. */
@@ -177,7 +177,7 @@ void FUN_001d3018(void)
   temp_v13 = temp_v13 * temp_v15;
   temp_v19 = CONCAT44(temp_v18 * temp_v15,temp_v12 * temp_v15);
   temp_v11 = DAT_004474f4[0x13];
-  FUN_00287be4();
+  mathPositionHeadingDegrees();
   temp_v22 = (unsigned long long)temp_v11;
   if (g_gameState != 0x19) {
     if ((((g_gameState == 0x1a) || (g_gameState == 0x1b)) || (g_gameState == 0x1c)) &&
@@ -193,7 +193,7 @@ void FUN_001d3018(void)
   do {
     temp_v7 = temp_v3 + temp_v4 * 0x180;
     if (*(char *)(temp_v7 + 0x34) != '\0') {
-      FUN_00287be4();
+      mathPositionHeadingDegrees();
       temp_v16 = *(float *)(temp_v7 + 0x54) - (float)DAT_004474f4[0x13];
       temp_v12 = *(float *)(temp_v7 + 0x58) - (float)DAT_004474f4[0x14];
       temp_v14 = *(float *)(temp_v7 + 0x5c) - (float)DAT_004474f4[0x15];

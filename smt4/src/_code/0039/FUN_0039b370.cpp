@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231420(int, int, int, unsigned int);
+int effectForwardModeOne(int, int, int, unsigned int);
 int FUN_00231434(int, int, int *, int *);
 int FUN_0039b648(void);
 int FUN_003c2e0c(unsigned int **, unsigned int **);
@@ -50,7 +50,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_00231420. */
+/* Supplied declaration required: effectForwardModeOne. */
 /* Supplied declaration required: FUN_00231434. */
 extern int FUN_002bffd8(unsigned int *, int *);
 /* Supplied declaration required: FUN_0039b648. */
@@ -149,7 +149,7 @@ unsigned int FUN_0039b370(int param_1)
     temp_v10 = temp_v13;
     temp_v9 = (unsigned int *)&uStack_28;
     FUN_00231434(0x1c,0xfa4,&temp_v11,&temp_v12);
-    FUN_00231420(temp_v11,temp_v12,uStack_28,temp_v13[0]);
+    effectForwardModeOne(temp_v11,temp_v12,uStack_28,temp_v13[0]);
     if ((temp_v11 != 0) && ((*(unsigned char *)((unsigned char *)&g_gameState + 0x18)) == 0)) {
       FUN_003c2e0c(&temp_v9,&temp_v10);
       temp_v5 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);

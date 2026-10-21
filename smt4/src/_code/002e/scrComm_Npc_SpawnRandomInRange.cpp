@@ -8,7 +8,7 @@ int FUN_00247bf4(...);
 int FUN_00252190(unsigned int, int);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
-int FUN_00254e2c(...);
+int messageForwardDefaultMode(...);
 int FUN_00289234(unsigned int);
 int eventTexSetJobParam(void);
 int FUN_00295660(...);
@@ -32,7 +32,7 @@ extern int DAT_0044cfa0; /* 0x44cfa0 */
 /* Supplied declaration required: FUN_00252190. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_00254e2c. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: FUN_00289234. */
 /* Supplied declaration required: eventTexSetJobParam. */
 extern int scrGetCommandFrame(void);
@@ -146,7 +146,7 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
     temp_v1 = fileSlotGetBuffer(0x1e);
     FUN_002bff38(0x14);
     temp_v7[0] = 0;
-    FUN_00254e2c(temp_v1,0x38,DAT_0044cfa0,6);
+    messageForwardDefaultMode(temp_v1,0x38,DAT_0044cfa0,6);
     DAT_0044cfa0 = DAT_0044cfa0 + 1;
     if (temp_v1 == 1) {
       scrWorkSetValue(0,10);

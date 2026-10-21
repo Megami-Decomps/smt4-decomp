@@ -1,34 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003609bc` (_code @ 0x3609bc, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern int DAT_00471bac; /* 0x471bac */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_003609bc(unsigned int *param_1)
-
+/* NON_MATCHING: native TLS access and SVC 0x32 cannot be emitted under the no-intrinsics rule. */
+#include "shard/S1Ipc.h"
+extern "C" u32 DAT_00471bac;
+/* Queries a handle from the service command response. */
+extern "C" s32 FUN_003609bc(u32 *output)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0xf0000;
-  software_interrupt(0x32);
-  temp_v0 = DAT_00471bac;
-  if (-1 < DAT_00471bac) {
-    *param_1 = *(unsigned int *)(temp_v1 + 0x8c);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    IpcCommandBuffer *command = nn_getIpcCommandBuffer();
+    command->header = 0xf0000;
+    s32 result = nn_svc_SendSyncRequest(DAT_00471bac);
+    if (result < 0)
+        return result;
+    *output = command->words[2];
+    return (s32)command->words[0];
 }
-
-} /* extern "C" */

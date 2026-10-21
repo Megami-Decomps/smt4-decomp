@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001b8e18(int);
+int gameEnableFloatSettings(int);
 
-/* Supplied declaration required: FUN_001b8e18. */
+/* Supplied declaration required: gameEnableFloatSettings. */
 
 
 void FUN_00462440(int param_1)
@@ -41,7 +41,7 @@ void FUN_00462440(int param_1)
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0x84) = 0;
   do {
-    FUN_001b8e18(param_1 + temp_v1 * 0x10 + 0xac);
+    gameEnableFloatSettings(param_1 + temp_v1 * 0x10 + 0xac);
     temp_v0 = param_1 + temp_v1;
     temp_v1 = temp_v1 + 1;
     *(unsigned char *)(temp_v0 + 0xec) = 0;

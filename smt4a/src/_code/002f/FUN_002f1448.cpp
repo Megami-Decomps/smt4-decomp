@@ -1,30 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f1448` (_code @ 0x2f1448, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r2, r1'; compiler emits 'ldr r2, [r0, #4]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_00134c68(void);
-
-/* Supplied declaration required: FUN_00134c68. */
-
-
-void FUN_002f1448(int param_1,unsigned int *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = *(unsigned int **)(param_1 + 4);
-  if (puVar1 != *(unsigned int **)(param_1 + 8)) {
-    *(unsigned int **)(param_1 + 4) = puVar1 + 1;
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = *param_2;
+struct Queue { u32 reserved; u32 *current; u32 *end; };
+void FUN_00134c68(Queue *queue, const u32 *value);
+void FUN_002f1448(Queue *queue, const u32 *value) {
+    if (queue->current != queue->end) {
+        u32 *entry = queue->current++;
+        if (entry) *entry = *value;
+    } else {
+        FUN_00134c68(queue, value);
     }
-    return;
-  }
-  FUN_00134c68();
-  return;
 }
-
-} /* extern "C" */
+}

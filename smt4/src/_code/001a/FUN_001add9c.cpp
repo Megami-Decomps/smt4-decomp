@@ -11,7 +11,7 @@ int FUN_001f1bc4(...);
 int FUN_002036b8(unsigned int, unsigned int);
 int FUN_00215d68(...);
 int FUN_00290994(...);
-int FUN_002916c0(...);
+int debugDrawText(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf288(...);
@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002036b8. */
 /* Supplied declaration required: FUN_00215d68. */
 /* Supplied declaration required: FUN_00290994. */
-/* Supplied declaration required: FUN_002916c0. */
+/* Supplied declaration required: debugDrawText. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -154,7 +154,7 @@ unsigned int FUN_001add9c(void)
                  (int)temp_v0,0x79,0);
     break;
   case 7:
-    FUN_002916c0(0xff,&LAB_001ae390);
+    debugDrawText(0xff,&LAB_001ae390);
     break;
   case 0xb:
     temp_v7 = 0;
@@ -203,7 +203,7 @@ unsigned int FUN_001add9c(void)
                  temp_v7,(int)*(char *)(temp_v3 + 0x9431));
     break;
   case 0x19:
-    FUN_002916c0(0xff,&LAB_001ae3a8);
+    debugDrawText(0xff,&LAB_001ae3a8);
     break;
   case 0x1a:
     temp_v7 = 0;

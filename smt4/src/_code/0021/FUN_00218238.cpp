@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00224ce0(unsigned int, int *, int *, int);
 int FUN_002bf288(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 4 slot(s), 16 byte(s) */
@@ -23,7 +23,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -54,7 +54,7 @@ void FUN_00218238(int param_1,unsigned int param_2,int param_3,int param_4,int p
     temp_v4 = param_3 + temp_v4;
     FUN_002bf288(2,0x15,0xde,temp_v4,temp_v1,0x35);
     if (*(int *)(param_1 + 0x3048) == 1) {
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v0 = g_titleScene;
       temp_v2 = packNibblesAndByte(6,1,0);
       piVar5 = (int *)(temp_v0 + 0x12ac);
@@ -74,7 +74,7 @@ void FUN_00218238(int param_1,unsigned int param_2,int param_3,int param_4,int p
         (**(romwright_code **)(temp_v0 + 0x12c8))();
         *(unsigned char *)(temp_v0 + 0x12c4) = 0;
       }
-      FUN_002bf538();
+      efctSetSpeed();
     }
     FUN_002bf288(2,0x15,temp_v6,param_3,param_4,0x37);
     FUN_002bf288(2,0x15,temp_v5,temp_v4,temp_v1,0x38);

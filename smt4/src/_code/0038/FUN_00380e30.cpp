@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00235744(int);
+int thresholdDispatchOutsideRange(int);
 int VectorFloatToUnsigned(double, int);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00235744. */
+/* Supplied declaration required: thresholdDispatchOutsideRange. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -25,7 +25,7 @@ void FUN_00380e30(unsigned int param_1,int param_2)
   float in_s0;
   int temp_v0;
   
-  FUN_00235744(param_2);
+  thresholdDispatchOutsideRange(param_2);
   temp_v0 = VectorFloatToUnsigned(in_s0,3);
   if (*(float *)(param_2 + 4) == in_s0) {
     temp_v0 = temp_v0 + 1;

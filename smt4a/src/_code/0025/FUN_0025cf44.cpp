@@ -17,7 +17,7 @@ extern unsigned char g_campCec; /* 0x57f110 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a2210. */
-extern int FUN_00341940(unsigned int);
+extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0034248c. */
 
 
@@ -29,7 +29,7 @@ unsigned int FUN_0025cf44(void)
   int temp_v1;
   
   temp_v0 = (*(int *)((unsigned char *)&g_campCec + 0x4));
-  if ((((*(int *)((unsigned char *)&g_campCec + 0x4)) != 0) && (temp_v1 = FUN_00341940(0x2e), temp_v1 != 0)) &&
+  if ((((*(int *)((unsigned char *)&g_campCec + 0x4)) != 0) && (temp_v1 = textureGetIndexedResource(0x2e), temp_v1 != 0)) &&
      (temp_v1 = asdTMTexTableNodeIsLoaded(0x2e,0), temp_v1 != 0)) {
     temp_v1 = FUN_001834a4(0x2e,0x97);
     FUN_0034248c(*(unsigned int *)(temp_v0 + 0x174),(*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x40,temp_v0 + 0x178,0,0);

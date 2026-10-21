@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(int, float *);
 int FUN_0024b660(...);
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int VectorSignedToFloat(...);
@@ -74,7 +74,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
 /* Supplied declaration required: FUN_0024b660. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
@@ -390,7 +390,7 @@ void FUN_002d0708(int param_1)
               pfVar7[4] = 0.0f;
             }
             else {
-              FUN_0024b77c();
+              randomAdvanceShiftRegister();
               __aeabi_uidivmod();
               pfVar7[4] = temp_v5;
               temp_v22 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v12 >> 0x16) & 3);
@@ -496,7 +496,7 @@ void FUN_002d0708(int param_1)
                 FUN_0024b830(0);
                 temp_v3 = 0;
                 pfVar8[7] = temp_v21 * 6.2831855f;
-                FUN_0024b77c();
+                randomAdvanceShiftRegister();
                 if ((temp_v3 & 1) != 0) {
                   pfVar8[8] = -pfVar8[8];
                 }

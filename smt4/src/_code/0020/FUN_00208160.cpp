@@ -8,7 +8,7 @@ int FUN_00287098(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
 int FUN_002a0428(unsigned int, int);
 int FUN_002a5710(unsigned int, int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a5710. */
 extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 unsigned int FUN_00208160(void)
@@ -71,7 +71,7 @@ unsigned int FUN_00208160(void)
       *(unsigned short *)(g_mapDepartWork + 0x1c) = 0x24;
       *(unsigned short *)(temp_v3 + 0x1e) = 1;
     }
-    FUN_002be624(temp_v5,&LAB_002084a4,(int)*(short *)(temp_v3 + 0x1c),
+    textFormatBuffer(temp_v5,&LAB_002084a4,(int)*(short *)(temp_v3 + 0x1c),
                  (int)*(short *)(temp_v3 + 0x1c),(int)*(short *)(temp_v3 + 0x1e));
     temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x38);
     temp_v3 = g_mapDepartWork;
@@ -132,7 +132,7 @@ unsigned int FUN_00208160(void)
       *(unsigned short *)(temp_v3 + 8) = 10;
       return 0;
     }
-    FUN_002be624(temp_v5,&LAB_0020848c,temp_v2);
+    textFormatBuffer(temp_v5,&LAB_0020848c,temp_v2);
     temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x1c0);
     temp_v3 = g_mapDepartWork;
     *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v1;

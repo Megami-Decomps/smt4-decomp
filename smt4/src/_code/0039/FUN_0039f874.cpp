@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00152530(void);
 int FUN_002346ac(unsigned int, int, int);
-int FUN_0023470c(unsigned int, int, int);
-int FUN_0023474c(unsigned int, int, int);
+int touchRegisterSecondRegion(unsigned int, int, int);
+int touchRegisterFirstRegion(unsigned int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,10 +15,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00152530. */
-extern int FUN_0023116c(unsigned int);
+extern int recordCompareKind(unsigned int);
 /* Supplied declaration required: FUN_002346ac. */
-/* Supplied declaration required: FUN_0023470c. */
-/* Supplied declaration required: FUN_0023474c. */
+/* Supplied declaration required: touchRegisterSecondRegion. */
+/* Supplied declaration required: touchRegisterFirstRegion. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 
 
@@ -29,13 +29,13 @@ void FUN_0039f874(unsigned int param_1)
   int temp_v0;
   
   FUN_00152530();
-  temp_v0 = FUN_0023116c(param_1);
+  temp_v0 = recordCompareKind(param_1);
   temp_v0 = FUN_002bf4f8(0x1c,*(unsigned int *)(temp_v0 * 4 + 0x44cf78));
-  FUN_0023474c(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
-  temp_v0 = FUN_0023116c(param_1);
+  touchRegisterFirstRegion(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
+  temp_v0 = recordCompareKind(param_1);
   temp_v0 = FUN_002bf4f8(0x1c,*(unsigned int *)(temp_v0 * 4 + 0x44cf84));
-  FUN_0023470c(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
-  temp_v0 = FUN_0023116c(param_1);
+  touchRegisterSecondRegion(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
+  temp_v0 = recordCompareKind(param_1);
   temp_v0 = FUN_002bf4f8(0x1c,*(unsigned int *)(temp_v0 * 4 + 0x44cf90));
   FUN_002346ac(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
   return;

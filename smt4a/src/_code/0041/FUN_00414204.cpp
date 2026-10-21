@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(int *, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(int *, unsigned char *, unsigned int, unsigned int);
 int FUN_00103f54(unsigned int, unsigned int *, int, int);
 int holderSetFlagBits(unsigned int, int);
 int FUN_0011b63e(int, unsigned int, unsigned char [5], int);
@@ -37,7 +37,7 @@ extern unsigned char LAB_0041441c; /* 0x41441c */
 extern int FUN_004148fc(...); /* 0x4148fc */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
 /* Supplied declaration required: FUN_0011b63e. */
@@ -109,7 +109,7 @@ void FUN_00414204(int param_1)
   temp_v13 = 0;
   temp_v14 = 0;
   temp_v15 = 0;
-  FUN_00100388(&temp_v10,&LAB_0041441c,temp_v0,temp_v2);
+  textFormatBuffer(&temp_v10,&LAB_0041441c,temp_v0,temp_v2);
   temp_v0 = FUN_002ea100(temp_v16,(unsigned int *)&temp_v10);
   FUN_00522a48(&temp_v7,temp_v0);
   onlineStringDestroy(temp_v16);

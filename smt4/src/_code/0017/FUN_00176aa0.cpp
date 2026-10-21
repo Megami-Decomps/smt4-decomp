@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: called by FUN_00174834; not written yet. */
+/* NON_MATCHING: fragment of a larger function (push and field load without a return or stack restoration). */
 #include "common.h"

@@ -12,7 +12,7 @@ void sysFatalBreak(void);
 int nn_fnd_detail_CreateHeap(void *heap, u32 start, u32 size, u16 option);
 
 /* Creates the owner's heap in the given region, aborting when it fails, and clears unk54. */
-void FUN_002c3918(HeapOwner *owner, u32 start, u32 size, u32 option)
+void heapOwnerCreate(HeapOwner *owner, u32 start, u32 size, u32 option)
 {
     if (nn_fnd_detail_CreateHeap(owner->heap, start, size, option) == 0) {
         sysFatalBreak();

@@ -21,8 +21,8 @@ struct fn_0030f370_arg0 {
     undefined4 field_0x4c; /* +0x4c */
 };
 
-extern int FUN_0024c3d8(fn_0030f370_arg0 *);
-extern int FUN_0024c3f8(void);
+extern int resourceResolveDataPointer(fn_0030f370_arg0 *);
+extern int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: FUN_0024f8a4. */
 /* Supplied declaration required: effEmitterCreateSmall. */
 /* Supplied declaration required: FUN_002691d8. */
@@ -38,7 +38,7 @@ unsigned int * FUN_0030f370(fn_0030f370_arg0 *param_1)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0024c3f8();
+  temp_v0 = resourceResolveHeaderPointer();
   puVar2 = (unsigned int *)(temp_v0 + 0x1c);
   effEmitterCreateSmall();
   FUN_0024f8a4();
@@ -48,7 +48,7 @@ unsigned int * FUN_0030f370(fn_0030f370_arg0 *param_1)
   }
   FUN_002691d8(temp_v1,*puVar2,temp_v0 + 0x1c);
   puVar2[0xc] = temp_v1;
-  temp_v0 = FUN_0024c3d8(param_1);
+  temp_v0 = resourceResolveDataPointer(param_1);
   if (temp_v0 != 0) {
     FUN_0030f214(puVar2,param_1->field_0x1c);
   }

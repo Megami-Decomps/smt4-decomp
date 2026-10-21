@@ -26,7 +26,7 @@ int soundChannelStopAll(...);
 int FUN_003df4ec(...);
 int countUnlockedSlots(void);
 int FUN_003e0174(...);
-int FUN_003e40b8(...);
+int engineGetFloatTableValue(...);
 int SBORROW4(...);
 
 int qsort(...);
@@ -36,7 +36,7 @@ int FUN_00183e58(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_0019de98(int, unsigned int);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int FUN_00224880(...);
 int FUN_0022e774(void);
 int FUN_00267d74(int, int, int, int);
@@ -47,7 +47,7 @@ int flaggedEntrySetValueA(...);
 int FUN_0032fea0(...);
 int whisperEffectFinish(void);
 int FUN_003df4a4(...);
-int FUN_004bca68(...);
+int recordContainsPairedId(...);
 
 /* stack frame of param_1: 17 slot(s), 63 byte(s) */
 typedef struct {
@@ -83,7 +83,7 @@ extern int FUN_001632fc(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00183e58. */
@@ -91,7 +91,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -119,10 +119,10 @@ extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_00348ed0(unsigned int);
+extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_00359b6c. */
-extern int FUN_0035fd00(unsigned short);
+extern int btlTalkBustupMatchesEntry(unsigned short);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: whisperEffectFinish. */
 /* Supplied declaration required: screenStartOrClear. */
@@ -134,8 +134,8 @@ extern int FUN_0035fd00(unsigned short);
 /* Supplied declaration required: FUN_003df4ec. */
 /* Supplied declaration required: countUnlockedSlots. */
 /* Supplied declaration required: FUN_003e0174. */
-/* Supplied declaration required: FUN_003e40b8. */
-/* Supplied declaration required: FUN_004bca68. */
+/* Supplied declaration required: engineGetFloatTableValue. */
+/* Supplied declaration required: recordContainsPairedId. */
 extern int getUnlockedSlotCount(int);
 
 
@@ -226,7 +226,7 @@ void FUN_0026cbb8(int param_1)
             temp_v23 = (unsigned int)temp_v1;
             *(unsigned short *)(temp_v11 + 0x76a4) = temp_v1;
             *(unsigned char *)(param_1 + temp_v14 + 0x7860) = 1;
-            temp_v9 = FUN_004bca68(temp_v5,temp_v23);
+            temp_v9 = recordContainsPairedId(temp_v5,temp_v23);
             if (temp_v9 != 0) {
               if (*piVar22 < 0) {
                 *(short *)(param_1 + *puVar27 * 2 + 0x76c2) = (short)temp_v23;
@@ -285,7 +285,7 @@ void FUN_0026cbb8(int param_1)
               temp_v9 = temp_v14;
             }
             else {
-              temp_v20 = FUN_004bca68(temp_v5,temp_v7);
+              temp_v20 = recordContainsPairedId(temp_v5,temp_v7);
               temp_v9 = temp_v14;
               if ((temp_v20 != 0) && (temp_v20 = FUN_003df4a4(temp_v7), temp_v9 = temp_v14, temp_v20 != 0)) {
                 *piVar22 = *piVar22 - 1;
@@ -327,14 +327,14 @@ void FUN_0026cbb8(int param_1)
         if (*(short *)(temp_v9 + 0x76a4) != 0) {
           temp_v14 = FUN_003df4a4();
           if ((temp_v14 != 0) &&
-             (temp_v14 = FUN_004bca68(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v14 != 0)) {
+             (temp_v14 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v14 != 0)) {
             *puVar27 = *puVar27 + 1;
             *piVar22 = *piVar22 + 1;
           }
           else {
             temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v9 + 0x76a4));
             if ((temp_v14 == 0) &&
-               (temp_v9 = FUN_004bca68(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v9 != 0)) {
+               (temp_v9 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v9 != 0)) {
               *puVar27 = *puVar27 + 1;
             }
           }
@@ -357,7 +357,7 @@ void FUN_0026cbb8(int param_1)
       if (temp_v5 == 0) {
         return;
       }
-      FUN_0019ea64(0);
+      messageSetMode(0);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0xf);
       *(unsigned int *)(param_1 + 0x436c) = 100;
       return;
@@ -424,7 +424,7 @@ LAB_0026e1e4:
               }
               temp_v20 = temp_v20 + 1;
             } while (temp_v20 < 8);
-            temp_v20 = FUN_004bca68(temp_v5,*(unsigned short *)(temp_v6 + 0x34));
+            temp_v20 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v6 + 0x34));
             temp_v18 = 0;
             if (temp_v20 != 0) {
               temp_v18 = *(short *)(temp_v6 + 0x34);
@@ -450,7 +450,7 @@ LAB_0026e1e4:
             }
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < 8);
-          temp_v6 = FUN_004bca68(temp_v5,temp_v4);
+          temp_v6 = recordContainsPairedId(temp_v5,temp_v4);
           if (temp_v6 != 0 && temp_v4 != 0) {
             temp_v6 = temp_v14 * 2;
             temp_v14 = temp_v14 + 1;
@@ -518,14 +518,14 @@ LAB_0026e1e4:
             if (*(short *)(temp_v9 + 0x76a4) != 0) {
               temp_v14 = FUN_003df4a4();
               if ((temp_v14 != 0) &&
-                 (temp_v14 = FUN_004bca68(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v14 != 0)) {
+                 (temp_v14 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v14 != 0)) {
                 *puVar27 = *puVar27 + 1;
                 *piVar22 = *piVar22 + 1;
               }
               else {
                 temp_v14 = FUN_003df4a4(*(unsigned short *)(temp_v9 + 0x76a4));
                 if ((temp_v14 == 0) &&
-                   (temp_v9 = FUN_004bca68(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v9 != 0)) {
+                   (temp_v9 = recordContainsPairedId(temp_v5,*(unsigned short *)(temp_v9 + 0x76a4)), temp_v9 != 0)) {
                   *puVar27 = *puVar27 + 1;
                 }
               }
@@ -601,7 +601,7 @@ LAB_0026e1e4:
         whisperEffectFinish();
         FUN_00183e58();
       }
-      FUN_0019ea64(1);
+      messageSetMode(1);
       return;
     }
     if (temp_v9 != 0x65) {
@@ -663,7 +663,7 @@ LAB_0026e1e4:
     break;
   case 2:
     if (*(char *)(param_1 + 0x7f50) != '\0') {
-      FUN_003e40b8(param_1 + 0x7f40,0);
+      engineGetFloatTableValue(param_1 + 0x7f40,0);
     }
     temp_v9 = FUN_00163aa4(param_1 + 0xac);
     if (temp_v9 == 0) {
@@ -675,7 +675,7 @@ LAB_0026e1e4:
     }
     temp_v9 = FUN_0032169c();
     if (temp_v9 == 0) {
-      temp_v9 = FUN_0035fd00(*(unsigned short *)(temp_v5 + 0x62));
+      temp_v9 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v5 + 0x62));
       if (temp_v9 == 0) {
         FUN_00336de4(*(unsigned short *)(temp_v5 + 0x62),1);
       }
@@ -891,14 +891,14 @@ LAB_0026e66c:
   case 3:
     FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
     if ((int)(*puVar27 - *piVar22) >= 1) {
-      temp_v9 = FUN_00167f08();
+      temp_v9 = ifTouchGetButtonHelpValue();
       if (temp_v9 == 0xe3) {
         temp_v8 = 0x6d;
         sysPlaySe(temp_v8);
       }
     }
     else {
-      temp_v9 = FUN_00167f08();
+      temp_v9 = ifTouchGetButtonHelpValue();
       if (temp_v9 == 0x6d) {
         temp_v8 = 0xe3;
         sysPlaySe(temp_v8);
@@ -915,7 +915,7 @@ LAB_0026e66c:
       }
       temp_v6 = FUN_00284140((int)*(short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6));
       if (temp_v6 != 0) {
-        temp_v6 = FUN_00348ed0(temp_v26);
+        temp_v6 = uiSearchPrimary(temp_v26);
         flaggedEntrySetValueA(temp_v26,temp_v6 - 1);
       }
       temp_v6 = FUN_002a4894(temp_v26);
@@ -1026,7 +1026,7 @@ LAB_0026d5fc:
             FUN_00359b6c(0);
             goto LAB_0026d4c4;
           }
-          if ((!temp_v22) && (temp_v11 = FUN_004bca68(temp_v5), temp_v11 == 0)) {
+          if ((!temp_v22) && (temp_v11 = recordContainsPairedId(temp_v5), temp_v11 == 0)) {
             temp_v22 = 1;
             temp_v6 = temp_v20;
           }
@@ -1070,14 +1070,14 @@ LAB_0026d4c4:
   case 4:
     FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
     if ((int)(*puVar27 - *piVar22) >= 1) {
-      temp_v6 = FUN_00167f08();
+      temp_v6 = ifTouchGetButtonHelpValue();
       if (temp_v6 == 0xe3) {
         temp_v8 = 0x6d;
         sysPlaySe(temp_v8);
       }
     }
     else {
-      temp_v6 = FUN_00167f08();
+      temp_v6 = ifTouchGetButtonHelpValue();
       if (temp_v6 == 0x6d) {
         temp_v8 = 0xe3;
         sysPlaySe(temp_v8);

@@ -4,11 +4,11 @@ extern "C" {
 
 int FUN_00184528(int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_001acf98(int);
+int asdTMTexLoadMainHeap(int);
 
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 extern int FUN_004cfe4c(int);
 
 
@@ -39,7 +39,7 @@ void menu4CReset(int param_1)
   temp_v2 = param_1 + temp_v1;
   *(int *)(param_1 + 0x1020) = temp_v1;
   if (*(char *)(temp_v2 + 0x1034) == '\0') {
-    FUN_001acf98(0x1f);
+    asdTMTexLoadMainHeap(0x1f);
     *(unsigned char *)(temp_v2 + 0x1034) = 1;
   }
   return;

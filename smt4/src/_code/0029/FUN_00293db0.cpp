@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0023f3bc(u32 a, int b, u32 c);
+int modelSetAnglesDegrees(u32 a, int b, u32 c);
 
 typedef struct Inner {
     /* 0x0 */ u8 unk0[8];
@@ -27,12 +27,12 @@ void FUN_00293db0(Obj *obj, u32 value)
     Inner *inner;
     int i;
 
-    FUN_0023f3bc(obj->main->unk8, 0, value);
+    modelSetAnglesDegrees(obj->main->unk8, 0, value);
     i = 0;
     do {
         inner = obj->slots[i].inner;
         if (inner != NULL) {
-            FUN_0023f3bc(inner->unk8, 0, value);
+            modelSetAnglesDegrees(inner->unk8, 0, value);
         }
         i = i + 1;
     } while (i < 3);

@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_00281000(...);
 int FUN_0032cdc8(...);
 int VectorSignedToFloat(unsigned int, int);
@@ -22,7 +22,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_00281000. */
 /* Supplied declaration required: FUN_0032cdc8. */
 
@@ -38,7 +38,7 @@ void FUN_00227294(int param_1,int param_2,unsigned int param_3)
   
   if ((g_camp != 0) &&
      (*(char *)(g_camp + 0x1b20) != '\0' && *(char *)(g_camp + 0x1b20) != '\x04')) {
-    FUN_0019d880();
+    jobGetScalarValue();
     VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     efctSetSpeed();
     FUN_001835b4(2,0x14,0x5ca,param_1,param_2,0xb);

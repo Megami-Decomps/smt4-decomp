@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001a1564(...);
 int FUN_001d25ec(...);
 int FUN_00426eb8(int *, int, unsigned int, unsigned int);
 int FUN_00426fe4(int *, int, int);
-int FUN_004275c8(...);
+int recordClearWideHandle(...);
 int FUN_0042792c(...);
 int FUN_00427c38(int *, unsigned char [1024], int);
 int FUN_00427ff4(...);
@@ -43,14 +43,14 @@ extern unsigned char LAB_00475b64; /* 0x475b64 */
 extern unsigned char LAB_00475b70; /* 0x475b70 */
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001a1564. */
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_00426eb8. */
 /* Supplied declaration required: FUN_00426fe4. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
-/* Supplied declaration required: FUN_004275c8. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_0042792c. */
 /* Supplied declaration required: FUN_00427c38. */
 /* Supplied declaration required: FUN_00427ff4. */
@@ -204,9 +204,9 @@ int * FUN_00475700(int param_1)
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
     FUN_00473824(temp_v0);
-    FUN_00100388(temp_v8,&LAB_00475b64);
-    FUN_00100388(temp_v9,&LAB_00475b10);
-    FUN_00100388(temp_v10,&LAB_00475b70);
+    textFormatBuffer(temp_v8,&LAB_00475b64);
+    textFormatBuffer(temp_v9,&LAB_00475b10);
+    textFormatBuffer(temp_v10,&LAB_00475b70);
     temp_v16 = temp_v8;
     while( 1 ) {
       FUN_0042792c(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,
@@ -238,7 +238,7 @@ int * FUN_00475700(int param_1)
           *(int *)(param_1 + 0x18) = temp_v6;
           temp_v1 = param_1;
           FUN_00474d0c();
-          FUN_004275c8(temp_v0 + 0x28);
+          recordClearWideHandle(temp_v0 + 0x28);
           if (-1 < temp_v1) {
             FUN_00473980(&temp_v11,temp_v0);
             *(unsigned int *)(param_1 + 0xc) = temp_v11;
@@ -252,7 +252,7 @@ int * FUN_00475700(int param_1)
       temp_v1 = FUN_00500244(*(unsigned int *)(temp_v0 + 0x5a8));
       *(unsigned int *)(temp_v0 + 0x684) = (((temp_v1 + 0x3fU) >> 6) - 1) * 0x40;
     }
-    FUN_004275c8(temp_v0 + 0x28);
+    recordClearWideHandle(temp_v0 + 0x28);
   }
   return piVar6;
 }

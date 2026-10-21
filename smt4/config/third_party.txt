@@ -100,7 +100,6 @@
 0x001106a0 nn_applet_CTR_detail_PrepareToJumpToHomeMenu name
 0x0011072c FUN_0011072c between
 0x00110838 FUN_00110838 between
-0x00110a04 FUN_00110a04 between
 0x00110d20 nw_snd_FxDelay_AssignWorkBuffer name
 0x00110d38 nw_snd_FxDelay_GetRequiredMemSize name
 0x00113150 nngxRunCmdlist name
@@ -737,9 +736,6 @@
 0x0014d318 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo name
 0x0014d354 FUN_0014d354 between
 0x0014d360 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundArchivePlayerInfo name
-0x0014d36c FUN_0014d36c between
-0x0014d378 FUN_0014d378 between
-0x0014d3cc FUN_0014d3cc between
 0x0014d3d4 nw_snd_internal_SoundArchiveFileReader_ReadBankInfo name
 0x0014d3fc FUN_0014d3fc between
 0x0014d404 nw_snd_internal_SoundArchiveFileReader_ReadSoundInfo name
@@ -953,7 +949,6 @@
 0x0015821c FUN_0015821c callers
 0x00158258 FUN_00158258 callers
 0x00158388 FUN_00158388 callers
-0x0015839c FUN_0015839c between
 0x00158444 FUN_00158444 callers
 0x0015845c FUN_0015845c callers
 0x001584e0 FUN_001584e0 callers
@@ -1026,9 +1021,7 @@
 0x0015bda0 FUN_0015bda0 callers
 0x0015bfa8 nw_snd_internal_TaskManager_AppendTask name
 0x0015c000 FUN_0015c000 callers
-0x0015c008 FUN_0015c008 between
 0x0015c054 FUN_0015c054 callers
-0x0015c05c FUN_0015c05c between
 0x0015c0f4 FUN_0015c0f4 callers
 0x0015c404 FUN_0015c404 between
 0x0015c4fc FUN_0015c4fc between
@@ -1081,9 +1074,7 @@
 0x0015e8ec FUN_0015e8ec between
 0x0015e8fc nn_snd_CTR_Dspsnd_GetDroppedFrameCount name
 0x0015e934 nn_snd_CTR_FxDelay_UpdateBuffer name
-0x0015e940 FUN_0015e940 between
 0x0015ea24 FUN_0015ea24 callers
-0x0015ea30 FUN_0015ea30 between
 0x0015ec54 FUN_0015ec54 callers
 0x0015ee48 nn_snd_CTR_Channel_FlushSyncCount name
 0x0015ee84 nn_snd_CTR_VoiceManager_UpdateStatus name
@@ -1226,8 +1217,7 @@
 0x002a239c nw_gfx_internal_FastWordCopyAsm_16 name
 0x002a278c nw_gfx_internal_FastWordCopyAsm_78 name
 0x002a285c nn_applet_CTR_detail_CaptureDisplayBuffer name
-0x002a2868 FUN_002a2868 between
-0x002a28f0 FUN_002a28f0 between
+0x002a28f0 FUN_002a28f0 callers
 0x002a2a94 FUN_002a2a94 between
 0x002a2ab0 FUN_002a2ab0 between
 0x002a2b14 nw_gfx_res_ResTextureSampler_GetOwnerCommand name
@@ -1284,8 +1274,7 @@
 0x002a856c nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize name
 0x002a8598 nn_fnd_UnitHeapBase_Initialize name
 0x002a86a4 FUN_002a86a4 between
-0x002a86d4 FUN_002a86d4 between
-0x002a86e4 aocSlotRelease between
+0x002a86d4 aocSlotRelease between
 0x002a8728 nn_math_ARMv6_MTX34ToMTX33Asm name
 0x002a87b4 nn_math_ARMv6_VEC3TransformAsm_2A87B4 name
 0x002aa568 libc_strcmp name
@@ -1537,7 +1526,6 @@
 0x002c5e80 FUN_002c5e80 between
 0x002c5ef0 FUN_002c5ef0 between
 0x002c5f60 __aeabi_idivmod name
-0x002c617c FUN_002c617c callers
 0x002c6202 FUN_002c6202 between
 0x002c639c FUN_002c639c between
 0x002c6614 FUN_002c6614 between
@@ -1548,9 +1536,7 @@
 0x0032bb74 mobiclipCtrlShutdown name
 0x0034e140 mobiclipS4FsReaderDestroy name
 0x0034eb8c FUN_0034eb8c callers
-0x0034eb94 FUN_0034eb94 between
 0x0034ec10 FUN_0034ec10 between
-0x0034ec18 FUN_0034ec18 between
 0x0034ed64 FUN_0034ed64 between
 0x0034edac FUN_0034edac between
 0x0034ee48 FUN_0034ee48 between
@@ -1583,7 +1569,6 @@
 0x00351b70 FUN_00351b70 between
 0x00351bc0 mobiclipDecoderWrapperDestroy name
 0x00351c08 FUN_00351c08 between
-0x00351c14 FUN_00351c14 between
 0x00351c58 FUN_00351c58 between
 0x00351c88 FUN_00351c88 between
 0x00351ca0 FUN_00351ca0 between
@@ -1760,7 +1745,6 @@
 0x003580a4 FUN_003580a4 between
 0x00358518 FUN_00358518 between
 0x0035856c nn_cec_CTR_MessageBox_GetMessageBoxNum name
-0x00358664 FUN_00358664 between
 0x003587b8 nn_cec_CTR_MessageBox_ReadMessageBoxList name
 0x003588fc FUN_003588fc between
 0x003589dc FUN_003589dc between
@@ -1812,7 +1796,6 @@
 0x00359a8c nn_cec_CTR_Message_SetExHeader name
 0x00359b7c FUN_00359b7c callers
 0x00359ce8 nn_cec_CTR_Message_SetMessageBody name
-0x00359cf4 FUN_00359cf4 between
 0x00359e0c nn_cec_CTR_Message_InitializeMessage name
 0x00359e8c nn_cec_CTR_Message_SetExHeaderWithoutCalc name
 0x00359f44 nn_cec_CTR_Message_Message_sub_object name
@@ -1931,7 +1914,6 @@
 0x00360ac8 nn_math_ARMv6_MTX34ToQUATC_FAST name
 0x00360c6c nn_math_ARMv6_QUATToMTX34C_FAST name
 0x00360d38 FUN_00360d38 between
-0x00360d54 FUN_00360d54 between
 0x00360e64 FUN_00360e64 between
 0x00360efc FUN_00360efc between
 0x00361140 FUN_00361140 between
@@ -2073,7 +2055,6 @@
 0x00370fa8 FUN_00370fa8 callers
 0x0037122c nw_gfx_Model_CreateAnimGroups name
 0x003713cc nw_gfx_Model_DestroyResMeshes name
-0x003713d4 FUN_003713d4 between
 0x00371414 nw_gfx_Model_BindVisibilityAnim name
 0x00371678 nw_gfx_Model_GetAnimTargetObject name
 0x003717a0 FUN_003717a0 callers
@@ -2228,7 +2209,6 @@
 0x0037b614 FUN_0037b614 callers
 0x0037b61c FUN_0037b61c between
 0x0037b73c nw_snd_internal_SoundArchiveLoader_detail_LoadWaveArchiveByWaveSoundFile name
-0x0037b748 FUN_0037b748 between
 0x0037b7c4 FUN_0037b7c4 between
 0x0037b7d8 FUN_0037b7d8 between
 0x0037b7dc FUN_0037b7dc between
@@ -2347,7 +2327,7 @@
 0x00381090 FUN_00381090 between
 0x003810e0 FUN_003810e0 between
 0x00381114 FUN_00381114 between
-0x00381254 FUN_00381254 between
+0x00381254 _ZN9Obj4220945resetEv between
 0x00381258 FUN_00381258 between
 0x0038125c FUN_0038125c between
 0x0038128c FUN_0038128c callers
@@ -2357,7 +2337,6 @@
 0x003e0344 FUN_003e0344 between
 0x003e050c nn_cec_CTR_MessageBox_GetMessageId name
 0x003e07e0 nn_cec_CTR_MessageBox_ReadMessageBoxInfo name
-0x003e07ec FUN_003e07ec between
 0x003e0874 FUN_003e0874 between
 0x003e0944 FUN_003e0944 between
 0x003e09c4 FUN_003e09c4 between
@@ -2537,7 +2516,6 @@
 0x003f65e0 mwmomobiclipDecoderRelease name
 0x003f6640 FUN_003f6640 between
 0x003f6918 FUN_003f6918 between
-0x003f6924 FUN_003f6924 between
 0x003f6a40 FUN_003f6a40 between
 0x003f6b28 FUN_003f6b28 between
 0x003f6c7c FUN_003f6c7c between

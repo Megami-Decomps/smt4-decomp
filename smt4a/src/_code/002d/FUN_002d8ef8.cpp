@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable2EType1Count(void);
 int dataTable2EType0Count(void);
-int FUN_003fd784(int);
+int controllerSetPosition(int);
 int FUN_0040ace8(unsigned int, int);
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
@@ -31,7 +31,7 @@ extern short *dataTable2EType1GetEntry(int);
 extern short *dataTable2EType0GetEntry(int);
 /* Supplied declaration required: dataTable2EType1Count. */
 /* Supplied declaration required: dataTable2EType0Count. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_0040ace8. */
 
 
@@ -116,13 +116,13 @@ void FUN_002d8ef8(void)
   temp_v0 = *(int *)(temp_v0 + 4);
   FUN_0040ace8(g_handleRegistry,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-  FUN_003fd784(temp_v0);
+  controllerSetPosition(temp_v0);
   temp_v0 = DAT_005f1b6c;
   *(int *)(g_lmapScene + 0x18c) = DAT_005f1b6c;
   temp_v0 = *(int *)(temp_v0 + 4);
   FUN_0040ace8(g_handleRegistry,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-  temp_v0 = FUN_003fd784(temp_v0);
+  temp_v0 = controllerSetPosition(temp_v0);
   temp_v1 = 0;
   dataTable2EType1Count();
   if (0 < temp_v0) {

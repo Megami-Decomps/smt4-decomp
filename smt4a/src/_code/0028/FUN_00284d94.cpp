@@ -1,22 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00284d94` (_code @ 0x284d94, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [pc, #28] where the compiled block uses ldr r0, [pc, #24]. */
+#include "common.h"
+
+struct NpcRoom {
+    u8 unk00[0xF0]; // 0x00
+    s32 roomType;   // 0xF0
+};
 
 extern "C" {
+extern NpcRoom* g_npcRoom;
 
-extern int g_npcRoom; /* 0x588124 */
-
-
-unsigned char FUN_00284d94(void)
-
+u8 FUN_00284d94(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_npcRoom != 0) {
-    temp_v0 = *(int *)(g_npcRoom + 0xf0);
-  }
-  return g_npcRoom != 0 && temp_v0 != 7;
+    return !(g_npcRoom == NULL || g_npcRoom->roomType == 7);
 }
-
-} /* extern "C" */
+}

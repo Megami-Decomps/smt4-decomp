@@ -31,8 +31,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233404. */
 /* Supplied declaration required: flaggedEntryGetValueB. */
-extern int FUN_0024c278(void);
-extern int FUN_002762e0(void);
+extern int inputIsQuestConfirmPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
@@ -70,7 +70,7 @@ void FUN_00397580(int param_1)
   if (temp_v7 == 1 || temp_v7 == 2) {
     return;
   }
-  temp_v6 = FUN_0024c278();
+  temp_v6 = inputIsQuestConfirmPressed();
   if (temp_v6 != 0) {
     temp_v7 = 0;
     while( 1 ) {
@@ -110,7 +110,7 @@ void FUN_00397580(int param_1)
   }
   temp_v6 = param_1 + 0x5e4;
   if ((temp_v7 != 6) && (temp_v8 = FUN_0027ee9c(), temp_v8 == 0)) {
-    temp_v7 = FUN_002762e0();
+    temp_v7 = inputIsQuestMenuPressed();
     if (temp_v7 != 0) {
       if (*(char *)(param_1 + 0x29) != '\0') {
         *(unsigned char *)(param_1 + 0x21) = 2;

@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned char DAT_005c1078; /* 0x5c1078 */
+extern unsigned char g_effMiscKinds; /* 0x5c1078 */
 
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: rt_memclr. */
@@ -44,8 +44,8 @@ unsigned int * FUN_00271be0(int param_1,unsigned int param_2)
   puVar1[3] = 0x3f800000;
   puVar1[9] = (unsigned int)(puVar1 + 0xc);
   rt_memcpy(puVar1 + 0xc,param_2,temp_v1);
-  if (*(romwright_code **)(&DAT_005c1078 + param_1 * 0x18) != (romwright_code *)0x0) {
-    temp_v0 = (**(romwright_code **)(&DAT_005c1078 + param_1 * 0x18))(param_2);
+  if (*(romwright_code **)(&g_effMiscKinds + param_1 * 0x18) != (romwright_code *)0x0) {
+    temp_v0 = (**(romwright_code **)(&g_effMiscKinds + param_1 * 0x18))(param_2);
     puVar1[8] = temp_v0;
   }
   return puVar1;

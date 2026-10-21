@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(int, float *);
 int FUN_0024b660(float *, float *, double, float *);
-int FUN_0024b77c(...);
+int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int VectorSignedToFloat(double, int);
@@ -62,7 +62,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
 /* Supplied declaration required: FUN_0024b660. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
@@ -322,7 +322,7 @@ void FUN_002dda88(int param_1)
                 FUN_0024b830(0);
                 temp_v5 = 0;
                 pfVar10[5] = temp_v3 * (float)((unsigned long long)temp_v20 >> 0x20);
-                FUN_0024b77c();
+                randomAdvanceShiftRegister();
                 if ((temp_v5 & 1) != 0) {
                   pfVar10[6] = -pfVar10[6];
                 }
@@ -334,7 +334,7 @@ void FUN_002dda88(int param_1)
             fStack_64 = pfVar9[3];
             pfVar9[4] = 0.0f;
             if (temp_v1) {
-              FUN_0024b77c(0);
+              randomAdvanceShiftRegister(0);
               __aeabi_uidivmod();
               DAT_004ea92c = *pfVar9;
               DAT_004ea930 = pfVar9[1];

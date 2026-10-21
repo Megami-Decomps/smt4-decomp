@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019e0c0(unsigned int);
 int FUN_00230df0(int);
-int FUN_00231240(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int nodeSetTranslation3f(unsigned int, int);
@@ -23,7 +23,7 @@ extern unsigned char LAB_003a0b60; /* 0x3a0b60 */
 
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_00230df0. */
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -51,7 +51,7 @@ void FUN_003a099c(int param_1)
       FUN_002b8ee0(temp_v2,0);
       temp_v0 = vec2GetYInt(temp_v2);
       temp_v1 = vec2GetXInt(temp_v2);
-      FUN_00231240(param_1 + 0x380,temp_v1,temp_v0);
+      pointConvertToFloat(param_1 + 0x380,temp_v1,temp_v0);
       if (*(char *)(param_1 + 0x452) != '\0') {
         switch(*(unsigned int *)(param_1 + 0x860)) {
         case 0:

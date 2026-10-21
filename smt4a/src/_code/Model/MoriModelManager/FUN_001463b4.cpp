@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00156ea8(...);
 int FUN_00157d5c(...);
 int FUN_00157fa0(...);
@@ -33,7 +33,7 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00156ea8. */
 extern unsigned int FUN_00156f34(void);
 /* Supplied declaration required: FUN_00157d5c. */
@@ -62,7 +62,7 @@ void FUN_001463b4(fn_001463b4_arg0 *param_1)
   unsigned char temp_v9 [68];
   
   rt_aeabi_memclr(temp_v9,0x40);
-  FUN_00100388(temp_v9,"ddefshader.bch");
+  textFormatBuffer(temp_v9,"ddefshader.bch");
   puVar1 = temp_v9;
   FUN_001642e4(puVar1,0,1,0x80);
   temp_v8 = 0;

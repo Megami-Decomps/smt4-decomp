@@ -114,7 +114,7 @@ extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b3538. */
 /* Supplied declaration required: FUN_002b3c9c. */
 /* Supplied declaration required: FUN_002e59f8. */
-extern int FUN_002fe3bc(void *);
+extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: FUN_002ff8e8. */
 /* Supplied declaration required: FUN_00323f50. */
 /* Supplied declaration required: quadSourceCopyOut. */
@@ -375,7 +375,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
       }
       if (temp_v7 != 0) {
         temp_v0 = param_1->field_0x4;
-        temp_v6 = FUN_002fe3bc(pvVar11);
+        temp_v6 = effectQuerySelectedBehavior(pvVar11);
         if (temp_v6 != 0) {
           *(unsigned int *)(temp_v8 + 0xa8) = *(unsigned int *)(temp_v8 + 0xa8) | 2;
           FUN_002e59f8(temp_v6,temp_v8 + 0xac,8);

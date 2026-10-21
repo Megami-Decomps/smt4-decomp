@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023a4f8(void);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int nn_os_LightEvent_Signal(int);
 int FUN_00350e30(int);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023a4f8. */
 extern int FUN_0023a5dc(int);
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_00350e30. */
 extern int __aeabi_idivmod(int, int);
@@ -77,7 +77,7 @@ unsigned int FUN_0034fa04(int param_1,unsigned int param_2,unsigned int param_3,
         temp_v0 = *(int *)(param_1 + 0xc);
       }
       if ((!temp_v5 || !temp_v6) || temp_v0 == 7) break;
-      FUN_002bb150(500000,0);
+      threadSleepDuration(500000,0);
     }
     temp_v0 = 0;
     do {

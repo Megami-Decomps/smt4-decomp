@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025247c(unsigned char [4]);
-int FUN_0025c298(void);
+int residentApplyFallbackValues(void);
 int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -28,7 +28,7 @@ typedef struct {
 
 extern int DAT_004474f4; /* 0x4474f4 */
 extern unsigned long long *g_lmapScene; /* 0x447e88 */
-extern unsigned char DAT_0049f3f0; /* 0x49f3f0 */
+extern unsigned char g_fixedCamera; /* 0x49f3f0 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -40,7 +40,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_0025247c. */
-/* Supplied declaration required: FUN_0025c298. */
+/* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
@@ -223,10 +223,10 @@ void FUN_00265f50(int param_1)
            *(float *)(param_1 + 0x80) + (temp_v13 - *(float *)(param_1 + 0x80)) * 0.33333334f;
     }
   }
-  FUN_00298d50(&DAT_0049f3f0);
-  FUN_002c159c(&DAT_0049f3f0);
-  FUN_002c1e30(&DAT_0049f3f0,1);
-  FUN_002c1edc(&DAT_0049f3f0,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
+  FUN_00298d50(&g_fixedCamera);
+  FUN_002c159c(&g_fixedCamera);
+  FUN_002c1e30(&g_fixedCamera,1);
+  FUN_002c1edc(&g_fixedCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);
   temp_v0 = DAT_004474f4;
   temp_v1 = *(unsigned int *)(param_1 + 0x88);
   temp_v2 = *(unsigned int *)(param_1 + 0x8c);
@@ -242,7 +242,7 @@ void FUN_00265f50(int param_1)
   FUN_0025247c(temp_v14);
   *(unsigned int *)(DAT_004474f4 + 700) = temp_v15;
   FUN_00281e34();
-  FUN_0025c298();
+  residentApplyFallbackValues();
   return;
 }
 

@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_00428220. */
 /* Supplied declaration required: FUN_004282f0. */
-extern int FUN_004287ac(unsigned int, int *, unsigned int);
+extern int tokenResolveAddress(unsigned int, int *, unsigned int);
 
 
 void FUN_00428878(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -28,7 +28,7 @@ void FUN_00428878(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   temp_v2 = param_4;
   temp_v0 = FUN_0016ccfc();
-  temp_v1 = FUN_004287ac(temp_v0,&temp_v2,*param_1);
+  temp_v1 = tokenResolveAddress(temp_v0,&temp_v2,*param_1);
   if ((-1 < temp_v1) && (temp_v1 = temp_v2, FUN_00428220(), -1 < temp_v1)) {
     FUN_004282f0(temp_v2);
   }

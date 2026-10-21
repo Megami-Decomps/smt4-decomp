@@ -1,23 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4878` (_code @ 0x2a4878, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
 extern "C" {
-
-int FUN_0032c494(int);
-
-/* Supplied declaration required: FUN_0032c494. */
-
-
-void FUN_002a4878(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x62) == '\0') {
-    FUN_0032c494(param_1 + 0x28);
-    return;
-  }
-  return;
+struct Object { u8 unk00[0x28]; u8 child; u8 unk29[0x39]; u8 blocked; };
+s32 FUN_0032c494(void *object);
+/* Applies the operation to the embedded object when not blocked. */
+s32 FUN_002a4878(Object *object) {
+    if (object->blocked != 0) return 0;
+    return FUN_0032c494(&object->child);
 }
-
-} /* extern "C" */
+}

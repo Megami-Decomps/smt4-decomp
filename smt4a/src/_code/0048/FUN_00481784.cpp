@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002946a0(unsigned int, int);
 int FUN_002b5cb4(void);
-int FUN_003fd76c(unsigned int, float *);
-int FUN_003fd784(unsigned int);
+int controllerSetDestination(unsigned int, float *);
+int controllerSetPosition(unsigned int);
 int FUN_003fdb18(unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -25,8 +25,8 @@ extern int DAT_005f189c; /* 0x5f189c */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002946a0. */
 /* Supplied declaration required: FUN_002b5cb4. */
-/* Supplied declaration required: FUN_003fd76c. */
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetDestination. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fdb18. */
 
 
@@ -122,14 +122,14 @@ LAB_004818dc:
       }
       temp_v9 = temp_v9 + temp_v6 * temp_v7;
       temp_v3 = *(unsigned int *)(*(int *)(param_1 + 0x78) + 4);
-      FUN_003fd76c(temp_v3,&temp_v8);
+      controllerSetDestination(temp_v3,&temp_v8);
     }
     else {
       temp_v3 = *(unsigned int *)(*(int *)(param_1 + 0x78) + 4);
-      FUN_003fd76c(temp_v3,&temp_v8);
+      controllerSetDestination(temp_v3,&temp_v8);
     }
     FUN_003fdb18(temp_v3);
-    FUN_003fd784(*(unsigned int *)(*(int *)(param_1 + 0x78) + 4));
+    controllerSetPosition(*(unsigned int *)(*(int *)(param_1 + 0x78) + 4));
     temp_v1 = *(int *)(*(int *)(param_1 + 0x78) + 4);
     if (DAT_005f161d != '\0') {
       temp_v2 = *(unsigned int *)(temp_v1 + 4) | 3;

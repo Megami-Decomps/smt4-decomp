@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int libc_strcat(unsigned char [64], unsigned int);
 int asdSoundGetObjectCount(void);
 int FUN_00167f94(void);
@@ -21,7 +21,7 @@ extern unsigned char LAB_00167f44; /* 0x167f44 */
 extern unsigned char DAT_0061978c; /* 0x61978c */
 extern signed char DAT_00619972; /* 0x619972 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdSoundGetObjectCount. */
@@ -54,9 +54,9 @@ unsigned int FUN_001628c0(unsigned int param_1,int param_2,unsigned char param_3
      (param_2 == 0)) {
     return 0xffffffff;
   }
-  FUN_00100388(temp_v3,"snd/voice/");
+  textFormatBuffer(temp_v3,"snd/voice/");
   libc_strcat(temp_v3,param_1);
-  FUN_00100388(temp_v2,"%s.bcwav",temp_v3);
+  textFormatBuffer(temp_v2,"%s.bcwav",temp_v3);
   asdSoundGetObjectCount();
   temp_v1 = 0;
   do {

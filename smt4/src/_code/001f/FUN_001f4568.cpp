@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00257dec(int, int);
-int FUN_00269bd0(int, int);
+int randomGetLowerTenBits(int, int);
+int randomGetUpperSixBits(int, int);
 int dataTable00FindById(void);
 int libc_strcat(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 typedef struct fn_001f4568_arg3 fn_001f4568_arg3;
 struct fn_001f4568_arg3 {
@@ -31,13 +31,13 @@ extern unsigned char LAB_001f497c; /* 0x1f497c */
 extern unsigned char LAB_001f4998; /* 0x1f4998 */
 extern unsigned char LAB_001f49b0; /* 0x1f49b0 */
 
-/* Supplied declaration required: FUN_00257dec. */
+/* Supplied declaration required: randomGetLowerTenBits. */
 extern int FUN_00257e0c(void);
 extern int FUN_00257e40(unsigned char);
-/* Supplied declaration required: FUN_00269bd0. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: libc_strcat. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int libc_strlen(fn_001f4568_arg3 *);
 
 
@@ -112,11 +112,11 @@ void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 
     unaff_r4 = (unsigned char *)0x0;
     do {
       temp_v3 = temp_v13;
-      FUN_00269bd0(temp_v13,pbVar10[(int)unaff_r4]);
+      randomGetUpperSixBits(temp_v13,pbVar10[(int)unaff_r4]);
       if (temp_v3 != 1) {
         if (temp_v3 != 2) {
           temp_v3 = temp_v13;
-          FUN_00257dec(temp_v13,pbVar10[(int)unaff_r4]);
+          randomGetLowerTenBits(temp_v13,pbVar10[(int)unaff_r4]);
           if (temp_v3 < 100) {
             temp_v12[temp_v7] = pbVar10[(int)unaff_r4];
             temp_v7 = temp_v7 + 1;
@@ -170,7 +170,7 @@ void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 
 LAB_001f4728:
       switch(pbVar10[(int)unaff_r4]) {
       case 0xb:
-        FUN_002be624(temp_v9,"澂辂覂鎂辂躂");
+        textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
         goto LAB_001f4778;
       case 0xc:
         pcVar6 = "澂膂躂覂莂";
@@ -187,7 +187,7 @@ LAB_001f4728:
       default:
         goto LAB_001f4778;
       }
-      FUN_002be624(temp_v9,pcVar6);
+      textFormatBuffer(temp_v9,pcVar6);
 LAB_001f4778:
       libc_strcat(param_4,temp_v9);
       unaff_r4 = unaff_r4 + 1;
@@ -206,7 +206,7 @@ LAB_001f4778:
 LAB_001f47d4:
       switch(temp_v12[temp_v3]) {
       case 0xb:
-        FUN_002be624(temp_v9,"澂辂覂鎂辂躂");
+        textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
         goto LAB_001f4824;
       case 0xc:
         pcVar6 = "澂膂躂覂莂";
@@ -223,7 +223,7 @@ LAB_001f47d4:
       default:
         goto LAB_001f4824;
       }
-      FUN_002be624(temp_v9,pcVar6);
+      textFormatBuffer(temp_v9,pcVar6);
 LAB_001f4824:
       libc_strcat(param_4,temp_v9);
       temp_v3 = temp_v3 + 1;
@@ -242,7 +242,7 @@ LAB_001f4824:
 LAB_001f4880:
       switch(temp_v11[temp_v3]) {
       case 0xb:
-        FUN_002be624(temp_v9,"澂辂覂鎂辂躂");
+        textFormatBuffer(temp_v9,"澂辂覂鎂辂躂");
         goto LAB_001f48d0;
       case 0xc:
         pcVar6 = "澂膂躂覂莂";
@@ -259,7 +259,7 @@ LAB_001f4880:
       default:
         goto LAB_001f48d0;
       }
-      FUN_002be624(temp_v9,pcVar6);
+      textFormatBuffer(temp_v9,pcVar6);
 LAB_001f48d0:
       libc_strcat(param_4,temp_v9);
       temp_v3 = temp_v3 + 1;

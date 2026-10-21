@@ -15,7 +15,7 @@ typedef struct {
 
 extern int g_partyPanel; /* 0x57f268 */
 
-extern int FUN_00167f08(void);
+extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_0023f900. */
 /* Supplied declaration required: FUN_0023fc38. */
 extern int FUN_002a7410(void);
@@ -41,7 +41,7 @@ void FUN_0034cda0(void)
   if (temp_v2 == 0) {
     temp_v6 = 0;
     FUN_002c7e24();
-    temp_v2 = FUN_00167f08();
+    temp_v2 = ifTouchGetButtonHelpValue();
     temp_v3 = FUN_002cad18();
     temp_v4 = FUN_002cab18();
     if (((temp_v2 == 0x1c) || (temp_v2 == 0x1e || temp_v2 == 0xba)) ||

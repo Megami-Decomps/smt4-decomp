@@ -19,8 +19,8 @@ extern int FUN_00187168(void);
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
 extern int btlMainGetUnk14(void);
-extern int FUN_003e8430(unsigned int);
-extern int FUN_003e9b54(unsigned int, int);
+extern int btlScriptUnitHasFlags(unsigned int);
+extern int uiEntryGetState(unsigned int, int);
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 
@@ -121,7 +121,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
       if ((*(unsigned short *)(temp_v3 + 0x60) & 0x400) != 0) {
         *(unsigned char *)(temp_v2 + param_2 + 0x1c9f) = 0xff;
         *(unsigned char *)(temp_v5 + 0x41ed) = 1;
-        temp_v4 = FUN_003e8430(*(unsigned int *)(param_1 + 0x3874));
+        temp_v4 = btlScriptUnitHasFlags(*(unsigned int *)(param_1 + 0x3874));
         if (temp_v4 == 0) {
           FUN_004fb43c(0,0,0x1000295,0,1,0,0);
         }
@@ -134,7 +134,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
         *(unsigned char *)(temp_v5 + 0x41ed) = 0;
         temp_v4 = bitsAt60Test(temp_v3,1);
         if ((temp_v4 != 0) &&
-           (temp_v4 = FUN_003e9b54(*(unsigned int *)(param_1 + 0x3874),param_2), temp_v4 == 0)) {
+           (temp_v4 = uiEntryGetState(*(unsigned int *)(param_1 + 0x3874),param_2), temp_v4 == 0)) {
           *(unsigned char *)(temp_v7 + 0x1ed) = 1;
           return;
         }

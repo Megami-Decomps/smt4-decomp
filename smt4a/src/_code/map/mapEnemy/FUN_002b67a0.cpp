@@ -26,7 +26,7 @@ typedef struct {
 
 extern unsigned char LAB_002b6c7c; /* 0x2b6c7c */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -44,7 +44,7 @@ extern int gameFlagIsSet(void);
 /* Supplied declaration required: gameFlagIsSetByBlockAt156c. */
 /* Supplied declaration required: sub68OwnerStart1. */
 /* Supplied declaration required: FUN_00379958. */
-extern int FUN_003b99d4(void);
+extern int dataTableGetRecordFifty(void);
 extern int FUN_003ded68(unsigned short);
 /* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int FUN_0040ac08(void);
@@ -70,11 +70,11 @@ unsigned int FUN_002b67a0(int param_1)
   unsigned int temp_v9;
   short temp_v10;
   
-  temp_v0 = DAT_005806d4;
+  temp_v0 = g_mapEnemy;
   gameFlagsGetBlock();
   pcVar7 = (char *)0x0;
   *(unsigned char *)(temp_v0 + 0x3d88) = 0;
-  temp_v2 = FUN_003b99d4();
+  temp_v2 = dataTableGetRecordFifty();
   if (0 < temp_v2) {
     temp_v8 = 0;
     do {
@@ -238,7 +238,7 @@ LAB_002b6ad4:
         }
       }
       pcVar7 = pcVar7 + 1;
-      temp_v2 = FUN_003b99d4();
+      temp_v2 = dataTableGetRecordFifty();
     } while ((int)pcVar7 < temp_v2);
   }
   if (param_1 != 0) {

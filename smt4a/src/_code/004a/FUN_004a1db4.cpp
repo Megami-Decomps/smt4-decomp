@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00167f08(void);
+int ifTouchGetButtonHelpValue(void);
 int sysPlaySe(void);
 int FUN_00183f58(int, int, int, int);
 int FUN_00184528(int, int);
 int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
-int FUN_003baa3c(int);
-int FUN_004935b0(int, unsigned int, unsigned int);
+int messageSetActiveMode(int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_004a3b48(int);
 int FUN_004a8750(unsigned int, int, int);
 int FUN_004cf8dc(int, int);
@@ -29,7 +29,7 @@ extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
 
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00167f08. */
+/* Supplied declaration required: ifTouchGetButtonHelpValue. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_00184528. */
@@ -42,9 +42,9 @@ extern int FUN_0031d174(int);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
-extern int FUN_0037df48(void);
-/* Supplied declaration required: FUN_003baa3c. */
-/* Supplied declaration required: FUN_004935b0. */
+extern int statusDownGetMode(void);
+/* Supplied declaration required: messageSetActiveMode. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004a3b48. */
 /* Supplied declaration required: FUN_004a8750. */
 /* Supplied declaration required: FUN_004cf8dc. */
@@ -53,7 +53,7 @@ extern int FUN_004cfe4c(int);
 /* Supplied declaration required: FUN_004d01f8. */
 /* Supplied declaration required: sendEvent100020D. */
 /* Supplied declaration required: sendEvent100020E. */
-extern int FUN_004d0524(void);
+extern int inputIsQuestConfirmPressed(void);
 
 
 void FUN_004a1db4(int param_1)
@@ -78,7 +78,7 @@ void FUN_004a1db4(int param_1)
   temp_v3 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
   temp_v4 = vec2GetYInt(temp_v3);
   temp_v5 = vec2GetXInt(temp_v3);
-  FUN_004935b0(param_1 + 200,temp_v5,temp_v4);
+  pointConvertToFloat(param_1 + 200,temp_v5,temp_v4);
   temp_v3 = FUN_002f036c();
   if ((temp_v3 != 0) && (temp_v3 = FUN_002c7ca0(), temp_v3 == 0)) {
     *(unsigned int *)(param_1 + 0x14) = 0xc;
@@ -105,7 +105,7 @@ void FUN_004a1db4(int param_1)
       panelSetTarget(-temp_v8,0);
       return;
     }
-    FUN_003baa3c(1);
+    messageSetActiveMode(1);
     return;
   }
   temp_v3 = FUN_002f036c();
@@ -117,9 +117,9 @@ void FUN_004a1db4(int param_1)
   }
   temp_v3 = FUN_002a482c(param_1 + 0x20);
   temp_v6 = FUN_0031d174(param_1 + 0x20);
-  temp_v7 = FUN_0037df48();
+  temp_v7 = statusDownGetMode();
   if (temp_v7 != 1) {
-    temp_v7 = FUN_0037df48();
+    temp_v7 = statusDownGetMode();
     if (temp_v7 != -1) {
       if (*(char *)(param_1 + 0x860) != '\x01') {
         temp_v7 = FUN_002a482c(param_1 + 0x20);
@@ -129,7 +129,7 @@ void FUN_004a1db4(int param_1)
         sendEvent100020D();
         return;
       }
-      temp_v7 = FUN_004d0524();
+      temp_v7 = inputIsQuestConfirmPressed();
       if (temp_v7 != 0) {
         temp_v1 = *(char *)(param_1 + 0x861) + '\x01';
         *(char *)(param_1 + 0x861) = temp_v1;
@@ -140,7 +140,7 @@ void FUN_004a1db4(int param_1)
         *(unsigned char *)(param_1 + 0x863) = 1;
         (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
         FUN_004a3b48(param_1);
-        FUN_00167f08();
+        ifTouchGetButtonHelpValue();
         sysPlaySe();
       }
     }

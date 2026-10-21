@@ -1,3 +1,4 @@
+/* NON_MATCHING: armcc emits a separate g_asdGxState pool reference instead of retail's command-list-relative base. */
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {

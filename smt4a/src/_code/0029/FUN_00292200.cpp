@@ -1,22 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00292200` (_code @ 0x292200, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses vldr s16, [pc, #44] where the compiled block uses vldr s16, [pc, #36]. */
+#include "common.h"
+
+struct Vector3 {
+    f32 x; // 0x00
+    f32 y; // 0x04
+    f32 z; // 0x08
+};
 
 extern "C" {
+extern s32 gameFlagIsSet(u32 flag);
+extern Vector3 DAT_005f0c94;
 
-extern int gameFlagIsSet(unsigned int);
-
-
-void FUN_00292200(void)
-
+Vector3 FUN_00292200(void)
 {
-  int temp_v0;
-  
-  temp_v0 = gameFlagIsSet(0x4d0);
-  if (temp_v0 != 0) {
-    return;
-  }
-  return;
+    Vector3 fallback;
+    fallback.x = 0.0f;
+    fallback.y = 100000.0f;
+    fallback.z = 0.0f;
+    if (gameFlagIsSet(0x4D0) != 0) {
+        return DAT_005f0c94;
+    }
+    return fallback;
 }
-
-} /* extern "C" */
+}

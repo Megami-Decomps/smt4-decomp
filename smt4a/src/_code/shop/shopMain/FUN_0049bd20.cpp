@@ -72,10 +72,10 @@ extern int FUN_004cfe4c(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 /* Supplied declaration required: sendEvent1000210. */
-extern int FUN_004d0464(void);
+extern int inputIsQuestRepeatRight(void);
 extern int FUN_004d0494(void);
-extern int FUN_004d04f4(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: releaseEntriesB. */
@@ -147,11 +147,11 @@ LAB_0049be70:
       return;
     }
   }
-  temp_v1 = FUN_004d0464();
+  temp_v1 = inputIsQuestRepeatRight();
   if ((temp_v1 == 0) && (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v1 != 6)) {
     temp_v1 = FUN_004d0494();
     if ((temp_v1 == 0) && (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v1 != 6)) {
-      temp_v1 = FUN_004d0554();
+      temp_v1 = inputIsQuestMenuPressed();
       temp_v0 = '\0';
       if (temp_v1 != 0) {
         temp_v0 = *(char *)(param_1 + 0x22);
@@ -228,7 +228,7 @@ LAB_0049be70:
         }
       }
       else {
-        temp_v1 = FUN_004d04f4();
+        temp_v1 = inputIsQuestCancelPressed();
         if (temp_v1 != 0) {
           sendEvent100020E();
           FUN_0049706c(param_1);

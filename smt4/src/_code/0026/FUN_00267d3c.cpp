@@ -5,7 +5,7 @@ extern "C" {
 extern BtlUiGlobals g_btlUi;
 
 extern s32 playSceneIsFadeInDone(BtlUiObjA *scene);
-extern s32 FUN_00249974(BtlUiObjB *timer);
+extern s32 recordQueryStateThree(BtlUiObjB *timer);
 extern void playSceneFadeOutStart(BtlUiObjA *scene);
 extern void playSceneTimerSubStartReverse(BtlUiObjB *timer);
 
@@ -15,7 +15,7 @@ void FUN_00267d3c(void)
 {
     BtlUi *ui = g_btlUi.ui;
 
-    if (playSceneIsFadeInDone(&ui->objA) != 0 && FUN_00249974(&ui->objB) != 0) {
+    if (playSceneIsFadeInDone(&ui->objA) != 0 && recordQueryStateThree(&ui->objB) != 0) {
         playSceneFadeOutStart(&ui->objA);
         playSceneTimerSubStartReverse(&ui->objB);
     }

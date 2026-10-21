@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned int g_aocSystem; /* 0x433158 */
 
-extern int FUN_00248674(unsigned int, unsigned int, unsigned int);
+extern int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
 extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -92,7 +92,7 @@ void FUN_0028f048(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   temp_v2 = asdTMTexTableNodeIsLoaded(temp_v4);
   if (temp_v2 != 0) {
-    temp_v2 = FUN_00248674(g_aocSystem,temp_v5,temp_v3);
+    temp_v2 = recordPrepareLinkedOwner(g_aocSystem,temp_v5,temp_v3);
     if (temp_v2 == 0) {
       FUN_002ae9ec(2,temp_v5,temp_v3 * 1000 + 1,param_2,param_3,param_4);
       return;

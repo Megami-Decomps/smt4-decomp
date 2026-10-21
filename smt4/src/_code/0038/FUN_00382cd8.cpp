@@ -9,7 +9,7 @@ int FUN_002355ac(int);
 int FUN_00273c54(void);
 int FUN_00273d34(void);
 int FUN_00273f5c(void);
-int FUN_0027d908(void);
+int mapClearPendingEntries(void);
 int gameFlagSetValue(...);
 int FUN_00289c98(int);
 int FUN_00296934(void);
@@ -42,15 +42,15 @@ typedef struct {
 
 extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
 
-extern int FUN_00215cbc(void);
-extern unsigned char FUN_00223cd8(void);
+extern int questGetPrimaryState(void);
+extern unsigned char questGetSecondaryState(void);
 /* Supplied declaration required: FUN_0023553c. */
 /* Supplied declaration required: FUN_002355ac. */
 extern int FUN_00241990(void);
 /* Supplied declaration required: FUN_00273c54. */
 /* Supplied declaration required: FUN_00273d34. */
 /* Supplied declaration required: FUN_00273f5c. */
-/* Supplied declaration required: FUN_0027d908. */
+/* Supplied declaration required: mapClearPendingEntries. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00289c98. */
 /* Supplied declaration required: FUN_00296934. */
@@ -84,8 +84,8 @@ void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
   param_1->field_0xd4e = temp_v1;
   temp_v1 = FUN_002eff34();
   param_1->field_0xd50 = temp_v1;
-  temp_v2 = FUN_00215cbc();
-  temp_v0 = FUN_00223cd8();
+  temp_v2 = questGetPrimaryState();
+  temp_v0 = questGetSecondaryState();
   param_1->field_0xd4a = temp_v0;
   temp_v3 = FUN_002cf738();
   if (temp_v3 != 0) {
@@ -115,7 +115,7 @@ void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
     temp_v3 = gameGetMapBlock();
     *(unsigned short *)(temp_v3 + 0x22) = 0;
     FUN_00273f5c();
-    FUN_0027d908();
+    mapClearPendingEntries();
     if (temp_v2 == 0) {
       *(unsigned short *)(temp_v3 + 0x1e) = param_1->field_0xd4e;
       FUN_00273d34();

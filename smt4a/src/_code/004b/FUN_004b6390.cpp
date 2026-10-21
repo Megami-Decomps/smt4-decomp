@@ -8,7 +8,7 @@ int FUN_0014e188(...);
 int paramsInit(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_002804b0(...);
 int FUN_002c7ce8(...);
 int FUN_002c7e6c(void);
@@ -42,7 +42,7 @@ extern unsigned char DAT_00533768; /* 0x533768 */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c7e6c. */
@@ -68,7 +68,7 @@ void FUN_004b6390(int param_1)
   
   temp_v1 = 0;
   do {
-    FUN_001acf98(0x1d,temp_v1);
+    asdTMTexLoadMainHeap(0x1d,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   temp_v1 = gameGetSlotTable();

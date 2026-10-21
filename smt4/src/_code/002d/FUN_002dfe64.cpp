@@ -1,26 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dfe64` (_code @ 0x2dfe68, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler forms the two model-slot addresses and clears their flags with different base registers. */
+#include "common.h"
+
+namespace { struct Slot { u8 active; u8 padding[0x1f]; u32 manager; }; struct Map { u8 padding[0xcc70]; Slot slots[2]; }; }
 
 extern "C" {
-
-int asdMdlManagerMarkDestroy(unsigned int);
-
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-
-
-void FUN_002dfe64(int *param_1)
-
+extern Map *g_mapIf;
+void asdMdlManagerMarkDestroy(u32 manager);
+void FUN_002dfe64(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v0 + 0xcc90));
-  *(unsigned char *)(temp_v0 + 0xcc70) = 0;
-  asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v0 + 0xccb4));
-  *(unsigned char *)(temp_v0 + 0xcc94) = 0;
-  return;
+    Map *map = g_mapIf;
+    asdMdlManagerMarkDestroy(map->slots[0].manager);
+    map->slots[0].active = 0;
+    asdMdlManagerMarkDestroy(map->slots[1].manager);
+    map->slots[1].active = 0;
 }
-
-} /* extern "C" */
+}

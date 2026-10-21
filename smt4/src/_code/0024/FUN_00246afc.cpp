@@ -10,7 +10,7 @@ int FUN_0024febc(unsigned char [64], int *, int);
 int FUN_0025009c(unsigned char [76], int);
 int FUN_002569fc(unsigned char [64]);
 int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
-int FUN_00259b34(unsigned char [64], unsigned char [64]);
+int matrixCopyFull(unsigned char [64], unsigned char [64]);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0025009c. */
 /* Supplied declaration required: FUN_002569fc. */
 /* Supplied declaration required: matrix43Multiply. */
-/* Supplied declaration required: FUN_00259b34. */
+/* Supplied declaration required: matrixCopyFull. */
 
 
 void FUN_00246afc(int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
@@ -53,7 +53,7 @@ void FUN_00246afc(int param_1,unsigned int *param_2,int param_3,unsigned int *pa
     matrix43Multiply(temp_v4,temp_v3,temp_v5);
   }
   else {
-    FUN_00259b34(temp_v4,temp_v3);
+    matrixCopyFull(temp_v4,temp_v3);
   }
   if (param_2 != (unsigned int *)0x0) {
     temp_v0 = *param_2;

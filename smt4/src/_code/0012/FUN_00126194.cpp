@@ -9,7 +9,7 @@ int FUN_002ba12c(int);
 int FUN_002bed3c(void);
 int FUN_002bedb0(int, int);
 int FUN_002bee04(int, int, unsigned int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -21,7 +21,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -43,7 +43,7 @@ void FUN_00126194(int param_1)
   if (*(char *)(param_1 + 8) != '\0') {
     temp_v2 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v2);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     temp_v5 = 0.27f;
     FUN_002ba12c(g_titleScene);

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_005710d8; /* 0x5710d8 */
+extern int g_engineOptionalWork; /* 0x5710d8 */
 extern int DAT_00573948; /* 0x573948 */
 extern int DAT_0057394c; /* 0x57394c */
 extern int DAT_00573950; /* 0x573950 */
@@ -73,9 +73,9 @@ void FUN_002ae468(void)
     DAT_0057396c = 0;
   }
   btlStageFreeContext();
-  if (DAT_005710d8 != 0) {
+  if (g_engineOptionalWork != 0) {
     asdMemFree();
-    DAT_005710d8 = 0;
+    g_engineOptionalWork = 0;
   }
   return;
 }

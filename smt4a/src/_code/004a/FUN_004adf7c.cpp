@@ -59,7 +59,7 @@ extern unsigned char LAB_004ae5dc; /* 0x4ae5dc */
 
 /* Supplied declaration required: FUN_004ac1fc. */
 /* Supplied declaration required: FUN_004ad228. */
-extern int *****FUN_004d8f18(int *****);
+extern int *****containerGrowCapacity(int *****);
 /* Supplied declaration required: FUN_004d8f4c. */
 /* Supplied declaration required: treeRebalanceAfterErase. */
 extern romwright_code ***FUN_004d91b0(romwright_code *****);
@@ -611,7 +611,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           FUN_00521c8c(puVar7,temp_v6);
         }
         else {
-          pppppiVar9 = (int *****)FUN_004d8f18((int *****)param_1[0x511]);
+          pppppiVar9 = (int *****)containerGrowCapacity((int *****)param_1[0x511]);
           temp_v18 = (romwright_code *****)*puVar7;
           temp_v19 = (romwright_code *****)0x0;
           temp_v20 = (int *****)0x0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(void);
 int FUN_003343f0(int);
-int FUN_00341f88(void);
+int buttonHelpGetValue(void);
 int FUN_0035deb0(void);
 int FUN_004a1958(int);
 int screen4AEnter(int);
@@ -26,7 +26,7 @@ extern int FUN_002a482c(int);
 extern int FUN_002a4b74(void);
 extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00341f88. */
+/* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: FUN_0035deb0. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: screen4AEnter. */
@@ -60,7 +60,7 @@ void FUN_004a38bc(int param_1)
       }
       setListWindow(param_1 + 0x20,temp_v0,temp_v1);
     }
-    FUN_00341f88();
+    buttonHelpGetValue();
     sysPlaySe();
     FUN_003343f0(0);
     if (*(short *)(param_1 + 0x864) < 1) {

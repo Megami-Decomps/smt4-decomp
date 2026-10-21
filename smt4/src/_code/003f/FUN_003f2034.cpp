@@ -1,34 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2034` (_code @ 0x3f2034, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [pc, #48] where the compiled block uses ldr ip, [pc, #48]. */
+#include "common.h"
+
+struct InitializationState {
+    u8 unk00[0x90];
+    u32 valueLow;  // 0x90
+    u32 valueHigh; // 0x94
+};
+
+struct SharedState {
+    u32 first;  // 0x00
+    u32 second; // 0x04
+};
+
+struct CriticalSection {
+    u32 state; // 0x00
+};
 
 extern "C" {
+extern SharedState DAT_0044e448;
+extern CriticalSection DAT_004c644c;
+extern u8 entry;
 
-int nn_os_CriticalSection_Initialize(unsigned int *);
+void nn_os_CriticalSection_Initialize(CriticalSection* section);
+void FUN_003574a8(CriticalSection* section);
+s32 sceneNotifyNoop(CriticalSection* object,
+                 void (*destructor)(CriticalSection*),
+                 void* moduleHandle);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned int DAT_0044e448; /* 0x44e448 */
-extern unsigned int DAT_0044e44c; /* 0x44e44c */
-extern unsigned int DAT_004c644c; /* 0x4c644c */
-
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-
-
-unsigned long long FUN_003f2034(unsigned int param_1,unsigned int param_2,int param_3)
-
+s32 FUN_003f2034(u32 valueLow, u32 valueHigh, InitializationState* state)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_3 + 0x90) = param_1;
-  *(unsigned int *)(param_3 + 0x94) = param_2;
-  DAT_0044e448 = 0;
-  DAT_0044e44c = 0;
-  DAT_004c644c = 0;
-  nn_os_CriticalSection_Initialize(&DAT_004c644c);
-  return 0x3574a8004c644c;
-}
+    state->valueLow = valueLow;
+    state->valueHigh = valueHigh;
 
-} /* extern "C" */
+    DAT_0044e448 = SharedState();
+    DAT_004c644c.state = 0;
+    nn_os_CriticalSection_Initialize(&DAT_004c644c);
+
+    return sceneNotifyNoop(&DAT_004c644c, FUN_003574a8, &entry);
+}
+}

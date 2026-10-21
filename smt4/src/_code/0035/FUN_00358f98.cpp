@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 
 extern int g_nnCecdHandle; /* 0x473848 */
 
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 
 
 unsigned int FUN_00358f98(void)
@@ -16,7 +16,7 @@ unsigned int FUN_00358f98(void)
 {
 /* irregular: 1 native warning(s); review required */
   while (g_nnCecdHandle == 0) {
-    FUN_002bb150(10000000,0);
+    threadSleepDuration(10000000,0);
   }
   return 0;
 }

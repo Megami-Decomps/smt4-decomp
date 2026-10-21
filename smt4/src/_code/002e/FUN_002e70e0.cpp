@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
 /* Formats the object's two name fields (prefix at +0x1C, name at +0x21) into `dest`. */
 #include "common.h"
 

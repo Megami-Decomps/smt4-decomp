@@ -1,34 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025cb5c` (_code @ 0x25cb5c, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r2, r4 where the compiled block uses mov r2, r5. */
+#include "common.h"
 
 extern "C" {
+void *FUN_00142b04(u32 request, u32 options);
+s32 FUN_00429fcc(void *context, u32 request, u32 options);
+void FUN_0013ebd8(s32 result);
 
-int FUN_0013ebd8(void);
-int FUN_00429fcc(int, int, unsigned int, unsigned int);
+extern u8 DAT_005b40c9;
 
-extern unsigned char DAT_005b40c9; /* 0x5b40c9 */
-
-/* Supplied declaration required: FUN_0013ebd8. */
-extern unsigned long long FUN_00142b04(void);
-/* Supplied declaration required: FUN_00429fcc. */
-
-
-int FUN_0025cb5c(unsigned int param_1,unsigned int param_2)
-
+s32 FUN_0025cb5c(u32 request, u32 options)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned long long temp_v1;
-  
-  temp_v1 = FUN_00142b04();
-  temp_v0 = (int)temp_v1;
-  FUN_00429fcc(temp_v0,(int)((unsigned long long)temp_v1 >> 0x20),param_1,param_2);
-  FUN_0013ebd8();
-  if (-1 < temp_v0) {
-    DAT_005b40c9 = 1;
-  }
-  return temp_v0;
-}
+    void *context = FUN_00142b04(request, options);
+    s32 result = FUN_00429fcc(context, request, options);
+    FUN_0013ebd8(result);
 
-} /* extern "C" */
+    if ((static_cast<u32>(result) & 0x80000000u) == 0) {
+        DAT_005b40c9 = 1;
+    }
+
+    return result;
+}
+}

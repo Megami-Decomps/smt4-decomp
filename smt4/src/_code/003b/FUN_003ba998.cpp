@@ -22,7 +22,7 @@ int FUN_0027e7b4(...);
 int FUN_002a03d8(int, int);
 int FUN_002a0400(...);
 int eventQueueAddUnique(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int asdOperatorNew(void);
 int dataTable33GetEntries(void);
 
@@ -42,7 +42,7 @@ int FUN_00273f5c(void);
 int campGetState(void);
 int FUN_00275be8(int);
 int FUN_00275dc4(void);
-int FUN_0027d908(void);
+int mapClearPendingEntries(void);
 int FUN_0027d948(void);
 int FUN_00287c34(int);
 int FUN_00289880(void);
@@ -105,7 +105,7 @@ extern unsigned short FUN_0023360c(int);
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_00275dec. */
-/* Supplied declaration required: FUN_0027d908. */
+/* Supplied declaration required: mapClearPendingEntries. */
 /* Supplied declaration required: FUN_0027d948. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
@@ -123,7 +123,7 @@ extern int FUN_00282b28(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b8694(void);
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameDataBlocksGetSaveData(void);
 extern int gameFlagIsSet(void);
@@ -241,7 +241,7 @@ void FUN_003ba998(int param_1)
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       FUN_00273f5c();
       FUN_0027d948();
-      FUN_0027d908();
+      mapClearPendingEntries();
       if (pcVar4[2] != '\0') {
         DAT_0049fa94 = 1;
       }
@@ -321,12 +321,12 @@ void FUN_003ba998(int param_1)
       }
       *(int *)(param_1 + 0xe5c) = temp_v6;
       FUN_00235250();
-      FUN_002be624(temp_v9,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x40);
+      textFormatBuffer(temp_v9,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x40);
       if (((*(short *)(*(int *)(param_1 + 0xd5c) + 100) != 0) &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) ||
          ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v6 = gameFlagIsSet(), temp_v6 != 0)
           ))) {
-        FUN_002be624(temp_v10,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x68);
+        textFormatBuffer(temp_v10,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x68);
         FUN_00234f5c(*(unsigned int *)(param_1 + 0xe5c),temp_v9,temp_v10);
       }
       else {
@@ -344,7 +344,7 @@ void FUN_003ba998(int param_1)
           FUN_0022afb0(puVar7,*(unsigned int *)(*(int *)(param_1 + 0xd5c) + 0x60));
           if (0 < (int)puVar7) {
             do {
-              FUN_002be624(temp_v9,&LAB_003bb098,puVar10);
+              textFormatBuffer(temp_v9,&LAB_003bb098,puVar10);
               temp_v7 = param_1 + temp_v4 * 4;
               temp_v5 = FUN_002c3124(temp_v9,temp_v7 + 0xe88,1);
               *(unsigned int *)(temp_v7 + 0xe60) = temp_v5;

@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_001695a0(void);
 int FUN_002292ac(void);
-int FUN_0036db68(...);
+int messageArmMenuAnimation(...);
 
 int FUN_0015f858(unsigned int, int);
 int FUN_00180118(unsigned int);
 int gameGetSlotRecord(...);
 int FUN_001ad9b4(void);
-int FUN_00237898(...);
+int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageSlotSet(int);
@@ -41,7 +41,7 @@ extern int gameFlagsGetBlock(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_002292ac. */
-/* Supplied declaration required: FUN_00237898. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 extern int FUN_0026272c(void);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
@@ -55,7 +55,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0036db68. */
+/* Supplied declaration required: messageArmMenuAnimation. */
 /* Supplied declaration required: FUN_0037c88c. */
 extern int obj04StateIs4(void);
 /* Supplied declaration required: FUN_004185c4. */
@@ -219,13 +219,13 @@ unsigned int FUN_002c4b48(void)
           temp_v8 = scrWorkGetValue(1);
           temp_v12[0] = 0;
           temp_v3 = temp_v13;
-          FUN_00237898(temp_v13,0x6a,temp_v8,5);
+          messageForwardDefaultMode(temp_v13,0x6a,temp_v8,5);
         }
         else {
           temp_v8 = scrWorkGetValue(1);
           temp_v12[0] = 0;
           temp_v3 = temp_v13;
-          FUN_00237898(temp_v13,0x69,temp_v8,5);
+          messageForwardDefaultMode(temp_v13,0x69,temp_v8,5);
         }
         temp_v9 = scrWorkGetValue(1);
         scrWorkSetValue(1,temp_v9 + 1);
@@ -251,7 +251,7 @@ unsigned int FUN_002c4b48(void)
     temp_v8 = scrWorkGetValue(1);
     temp_v12[0] = 0;
     temp_v3 = temp_v13;
-    FUN_00237898(temp_v13,0x65,temp_v8,5);
+    messageForwardDefaultMode(temp_v13,0x65,temp_v8,5);
     temp_v9 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v9 + 1);
     if (temp_v3 != 1) {
@@ -271,7 +271,7 @@ unsigned int FUN_002c4b48(void)
       temp_v8 = scrWorkGetValue(1);
       temp_v12[0] = 0;
       temp_v3 = temp_v13;
-      FUN_00237898(temp_v13,100,temp_v8,0xb);
+      messageForwardDefaultMode(temp_v13,100,temp_v8,0xb);
       temp_v9 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v9 + 1);
       if (temp_v3 != 1) {
@@ -300,7 +300,7 @@ unsigned int FUN_002c4b48(void)
       FUN_001695a0();
       temp_v8 = scrWorkGetValue(1);
       temp_v12[0] = 1;
-      FUN_00237898(temp_v13,0x68,temp_v8,5);
+      messageForwardDefaultMode(temp_v13,0x68,temp_v8,5);
 LAB_002c4ea8:
       if (temp_v11 == '\0') {
 LAB_002c4f24:
@@ -314,7 +314,7 @@ LAB_002c4f24:
         if (*(short *)(temp_v4 + temp_v3 * 8 + 0x100) != 1) {
           return 0;
         }
-        FUN_0036db68(temp_v14);
+        messageArmMenuAnimation(temp_v14);
         return 0;
       }
     }
@@ -323,24 +323,24 @@ LAB_002c4f24:
       if (!temp_v1) {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 1;
-        FUN_00237898(temp_v13,0x66,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x66,temp_v8,5);
         goto LAB_002c4ea8;
       }
       if (temp_v11 == '\0') {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 1;
-        FUN_00237898(temp_v13,0x67,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x67,temp_v8,5);
         goto LAB_002c4f24;
       }
       if (temp_v11 != '\x01') {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 0;
-        FUN_00237898(temp_v13,0x6e,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x6e,temp_v8,5);
       }
       else {
         temp_v8 = scrWorkGetValue(1);
         temp_v12[0] = 0;
-        FUN_00237898(temp_v13,0x6d,temp_v8,5);
+        messageForwardDefaultMode(temp_v13,0x6d,temp_v8,5);
       }
     }
     scrWorkSetValue(0,5);
@@ -354,7 +354,7 @@ LAB_002c4f24:
   if (*(short *)(temp_v4 + temp_v3 * 8 + 0x100) != 1) {
     return 0;
   }
-  FUN_0036db68(temp_v14);
+  messageArmMenuAnimation(temp_v14);
   return 0;
 }
 

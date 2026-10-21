@@ -55,9 +55,9 @@ extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: obj04Finish. */
-extern int FUN_0035988c(unsigned int);
+extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-extern int FUN_00371e38(void);
+extern int statusDownGetState(void);
 extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037dfb0. */
 extern int stateHolderStateIs0x12(void);
@@ -215,7 +215,7 @@ LAB_004cbdc8:
       }
       temp_v0 = 0;
       FUN_001517b4(0,1);
-      if ((temp_v0 == 0) && (temp_v0 = FUN_00371e38(), temp_v0 == 0)) {
+      if ((temp_v0 == 0) && (temp_v0 = statusDownGetState(), temp_v0 == 0)) {
         temp_v0 = 1;
         FUN_001517b4();
         if (temp_v0 != 0) {
@@ -244,7 +244,7 @@ LAB_004cbdc8:
       *(unsigned int *)(param_1 + 0x28) = temp_v2;
       return;
     case 3:
-      temp_v0 = FUN_0035988c(*(unsigned int *)(param_1 + 0x28));
+      temp_v0 = asdSoundIsBankHandleLoaded(*(unsigned int *)(param_1 + 0x28));
       if (temp_v0 != 0) {
         return;
       }
@@ -278,7 +278,7 @@ LAB_004cbdc8:
     default:
       return;
     case 10:
-      temp_v0 = FUN_0035988c(*(unsigned int *)(param_1 + 0x28));
+      temp_v0 = asdSoundIsBankHandleLoaded(*(unsigned int *)(param_1 + 0x28));
       if (temp_v0 != 0) {
         return;
       }

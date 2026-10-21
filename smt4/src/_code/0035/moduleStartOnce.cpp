@@ -12,7 +12,7 @@ typedef struct State0035782c {
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 s32 FUN_0035ae94(s32 value);
-void FUN_002bb150(s32 value, s32 flags);
+void threadSleepDuration(s32 value, s32 flags);
 
 extern State0035782c DAT_004656ca; /* 0x4656ca */
 extern u8 DAT_004e629c[];          /* 0x4e629c: critical section */
@@ -33,7 +33,7 @@ s32 moduleStartOnce(void)
             nn_os_CriticalSection_Leave(section);
             return result;
         }
-        FUN_002bb150(16000000, 0);
+        threadSleepDuration(16000000, 0);
         DAT_004656ca.started = 1;
         nn_os_CriticalSection_Leave(section);
     }

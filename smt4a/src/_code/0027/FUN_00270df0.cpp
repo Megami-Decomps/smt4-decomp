@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0034f8b4(float *, double, double);
 int FUN_0038136c(float *, float *, double, double);
-int FUN_003d21b0(void);
+int mathInterpolateClamped(void);
 int VectorSignedToFloat(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -47,7 +47,7 @@ extern int effGetFrameStep(void);
 extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0034f8b4. */
 /* Supplied declaration required: FUN_0038136c. */
-/* Supplied declaration required: FUN_003d21b0. */
+/* Supplied declaration required: mathInterpolateClamped. */
 
 
 void FUN_00270df0(float *param_1)
@@ -165,14 +165,14 @@ void FUN_00270df0(float *param_1)
     if (param_1[0x31] == 0.0f) {
       temp_v8 = temp_v15[temp_v0];
       temp_v1 = pfVar6[temp_v0 + 4] * temp_v8;
-      FUN_003d21b0();
+      mathInterpolateClamped();
       pfVar6[temp_v0 + 4] = temp_v8;
     }
     if (param_1[0x31] != 1.4013e-45f) {
       if (param_1[0x31] == 2.8026e-45f) {
         temp_v8 = temp_v15[temp_v0];
         temp_v1 = (pfVar6 + temp_v0)[4];
-        FUN_003d21b0();
+        mathInterpolateClamped();
         (pfVar6 + temp_v0)[4] = temp_v8;
       }
     }
@@ -183,7 +183,7 @@ void FUN_00270df0(float *param_1)
       if ((temp_v10 <= temp_v13) && (temp_v1 = temp_v13, (int)temp_v13 >= 0x3f800001)) {
         temp_v1 = temp_v11;
       }
-      FUN_003d21b0();
+      mathInterpolateClamped();
       (pfVar6 + temp_v0)[4] = temp_v8;
     }
     temp_v0 = temp_v0 + 1;

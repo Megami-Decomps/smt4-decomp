@@ -1,28 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fe5dc` (_code @ 0x4fe5dc, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: reflection argument stores are reordered around preserved registers. */
+#include "common.h"
+struct ReflectionEntry {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u8 state;
+    /* 0x5 */ u8 unk5[15];
+    /* 0x14 */ u32 first;
+    /* 0x18 */ u8 unk18[16];
+    /* 0x28 */ u32 second;
+};
 extern "C" {
-
-int FUN_004102d8(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: FUN_004102d8. */
-
-
-void FUN_004fe5dc(short param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x37;
-  *(unsigned int *)(temp_v0 + 0x14) = param_3;
-  *(unsigned int *)(temp_v0 + 0x28) = param_4;
-  return;
+extern void *g_btlActionReflect;
+ReflectionEntry *FUN_004102d8(void *reflection,s32 id,u32 category,u32 options);
+/* Creates reflection state 55 with two arguments. */
+void FUN_004fe5dc(s32 id,u32 options,u32 first,u32 second){ReflectionEntry *entry=FUN_004102d8(g_btlActionReflect,(s16)id,0,options);entry->state=55;entry->first=first;entry->second=second;}
 }
-
-} /* extern "C" */

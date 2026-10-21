@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_0016c4b8(...);
 int mtx44Copy(float *, unsigned int *);
 int FUN_0019a0fc(...);
-int FUN_001b4a20(float *, float *, int *);
+int mathMatrixTranslateLocal(float *, float *, int *);
 int FUN_001d3de0(...);
 int FUN_002371b0(void);
 int FUN_00317c3c(...);
@@ -110,7 +110,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
-/* Supplied declaration required: FUN_001b4a20. */
+/* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_001d3de0. */
 /* Supplied declaration required: FUN_002371b0. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -304,7 +304,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
       DAT_0064c0c0 = DAT_0064c084;
     }
     mtx44Copy(&temp_v20,&DAT_0064c084);
-    FUN_001b4a20(&temp_v20,&temp_v20,&temp_v49);
+    mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v49);
     FUN_001d3de0(&temp_v20,&temp_v20,temp_v52);
     FUN_0019a0fc(&temp_v20,&temp_v20,&temp_v32);
     FUN_0016c4b8(g_renderCtx,*(unsigned int *)((int)param_1->field_0x14 + 0x18));

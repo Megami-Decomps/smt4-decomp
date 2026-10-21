@@ -11,7 +11,7 @@ int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(unsigned int);
 int FUN_00185dd4(...);
 int FUN_002e1208(...);
-int FUN_0037b138(...);
+int effectSetByteSpeed(...);
 int words2Copy(int, float *);
 int VectorSignedToFloat(...);
 
@@ -39,7 +39,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_002e1208. */
-/* Supplied declaration required: FUN_0037b138. */
+/* Supplied declaration required: effectSetByteSpeed. */
 /* Supplied declaration required: words2Copy. */
 
 
@@ -99,15 +99,15 @@ void FUN_00490a10(int param_1)
 LAB_00490b04:
               if ((*(short *)(temp_v6 + 0x17c0) != 0) || ((*(int *)((unsigned char *)&g_gameState + 0x660)) != 0)) {
                 drawSetColorFromRGBA8(*(unsigned int *)(temp_v6 + 0x17d4));
-                FUN_0037b138(*(unsigned int *)(temp_v6 + 0x17d4) & 0xff);
+                effectSetByteSpeed(*(unsigned int *)(temp_v6 + 0x17d4) & 0xff);
                 if (*(short *)(temp_v6 + 0x17c2) == 0x1bd2) {
                   if (*(int *)(param_1 + 0x4c0) != 0) {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffff00;
-                    FUN_0037b138(0);
+                    effectSetByteSpeed(0);
                   }
                   else {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffffff;
-                    FUN_0037b138(0xff);
+                    effectSetByteSpeed(0xff);
                     temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c8),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
@@ -122,11 +122,11 @@ LAB_00490b04:
                 if (*(short *)(temp_v6 + 0x17c2) == 0x1bd4) {
                   if (*(int *)(param_1 + 0x4c0) != 0) {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffff00;
-                    FUN_0037b138(0);
+                    effectSetByteSpeed(0);
                   }
                   else {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffffff;
-                    FUN_0037b138(0xff);
+                    effectSetByteSpeed(0xff);
                     temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c8),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
@@ -141,11 +141,11 @@ LAB_00490b04:
                 if (*(short *)(temp_v6 + 0x17c2) == 0x1bd6) {
                   if (*(int *)(param_1 + 0x4c0) != 0) {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffff00;
-                    FUN_0037b138(0);
+                    effectSetByteSpeed(0);
                   }
                   else {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffffff;
-                    FUN_0037b138(0xff);
+                    effectSetByteSpeed(0xff);
                     temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c8),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),
@@ -160,11 +160,11 @@ LAB_00490b04:
                 if (*(short *)(temp_v6 + 0x17c2) == 0x1bd8) {
                   if (*(int *)(param_1 + 0x4c0) != 0) {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffff00;
-                    FUN_0037b138(0);
+                    effectSetByteSpeed(0);
                   }
                   else {
                     *(unsigned int *)(temp_v6 + 0x17d4) = 0xffffffff;
-                    FUN_0037b138(0xff);
+                    effectSetByteSpeed(0xff);
                     temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c8),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x17c4),

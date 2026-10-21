@@ -1,28 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019b738` (_code @ 0x19b738, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_0019b738(unsigned int *param_1,unsigned int param_2)
-
+/* Clears all complete words in the supplied byte count. */
+void FUN_0019b738(u32 *words, u32 byteCount)
 {
-  unsigned int *puVar1;
-  
-  if (param_2 >= 4) {
-    puVar1 = param_1 + -1;
-    if ((int)(param_2 * 0x20000000) < 0) {
-      *param_1 = 0;
-      puVar1 = param_1;
+    for (u32 index = 0; index < byteCount / sizeof(u32); ++index) {
+        words[index] = 0;
     }
-    for (param_2 = param_2 >> 3; param_2 != 0; param_2 = param_2 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

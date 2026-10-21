@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0019db68(void);
-int FUN_00273828(void);
+int mapInterfaceSetStateTwo(void);
 int FUN_0027fae4(void);
 int FUN_0027fca0(...);
 int FUN_00282390(void);
 int FUN_00291e40(...);
 int buttonHelpSetPreset(int);
 
-int FUN_0024ac90(void);
+int mapDestroyOverlayModel(void);
 int mapIfReleaseSlot3(void);
 int FUN_0024f034(int, unsigned int);
 int FUN_0027fa98(...);
@@ -41,12 +41,12 @@ extern float DAT_0049f9bc; /* 0x49f9bc */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Supplied declaration required: FUN_0019db68. */
-/* Supplied declaration required: FUN_0024ac90. */
+/* Supplied declaration required: mapDestroyOverlayModel. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
 /* Supplied declaration required: FUN_0024f034. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_00273828. */
-extern int FUN_002762e0(void);
+/* Supplied declaration required: mapInterfaceSetStateTwo. */
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fae4. */
@@ -115,7 +115,7 @@ void FUN_002d424c(void)
             FUN_00280364();
             return;
           }
-          FUN_0024ac90();
+          mapDestroyOverlayModel();
         }
         else if (temp_v2 != 0x65) {
           if (temp_v2 != 0x66) {
@@ -123,7 +123,7 @@ void FUN_002d424c(void)
             FUN_00280364();
             return;
           }
-          FUN_0024ac90();
+          mapDestroyOverlayModel();
           FUN_0027fa98(0x14);
         }
         else {
@@ -186,7 +186,7 @@ void FUN_002d424c(void)
             }
             else {
               temp_v0 = padIsButtonPressed(6);
-              if ((temp_v0 != 0) || (temp_v0 = FUN_002762e0(), temp_v0 != 0)) {
+              if ((temp_v0 != 0) || (temp_v0 = inputIsQuestMenuPressed(), temp_v0 != 0)) {
                 temp_v0 = DAT_004474f4;
                 *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v0 + 0xac) = 0;
@@ -313,12 +313,12 @@ void FUN_002d424c(void)
         FUN_0029c3c0(temp_v4,temp_v1,0xff);
       }
       else {
-        FUN_00273828();
+        mapInterfaceSetStateTwo();
       }
     }
   }
   else {
-    FUN_0024ac90();
+    mapDestroyOverlayModel();
     FUN_0027fa98(0x14);
   }
   temp_v0 = g_lmapScene;

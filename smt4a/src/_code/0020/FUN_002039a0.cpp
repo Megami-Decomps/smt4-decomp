@@ -1,20 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002039a0` (_code @ 0x2039a0, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses mov r3, r0 where the compiled block uses vmov.f32 s8, s2. */
+#include "common.h"
 
-extern "C" {
+extern "C" void FUN_00280a08(
+    u32 color0, u32 color1, u32 color2, u32 color3,
+    f32 x0, f32 y0, f32 z0,
+    f32 x1, f32 y1, f32 z1,
+    f32 x2, f32 y2, f32 z2,
+    f32 x3, f32 y3, f32 z3);
 
-int FUN_00280a08(unsigned int, unsigned int);
-
-/* Supplied declaration required: FUN_00280a08. */
-
-
-void FUN_002039a0(unsigned int param_1)
-
+extern "C" void FUN_002039a0(
+    u32 color,
+    f32 startX, f32 startY, f32 startZ,
+    f32 endX, f32 endY, f32 endZ)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00280a08(param_1,param_1);
-  return;
+    FUN_00280a08(
+        color, color, color, color,
+        startX, startY, startZ,
+        endX, endY, endZ,
+        startX + 10.0f, startY + 10.0f, startZ,
+        endX + 10.0f, endY + 10.0f, endZ);
 }
-
-} /* extern "C" */

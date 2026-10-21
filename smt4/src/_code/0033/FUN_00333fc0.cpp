@@ -1,3 +1,4 @@
+/* NON_MATCHING: clamp control flow keeps the maximum in a different register and emits one extra move. */
 #include "common.h"
 
 extern "C" {
@@ -16,14 +17,12 @@ void FUN_00333fc0(s32 value)
 {
     PlayerData *player = gameGetPlayerData();
 
-    if (value <= player->max) {
-        if (value < 1) {
-            value = 1;
-        }
-        player->value = value;
-    } else {
-        player->value = player->max;
+    s16 clamped = player->max;
+    if (value <= clamped) {
+        if (value < 1) value = 1;
+        clamped = value;
     }
+    player->value = clamped;
 }
 
 } /* extern "C" */

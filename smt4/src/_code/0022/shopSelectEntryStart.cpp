@@ -16,7 +16,7 @@ typedef struct ShopScene {
 s32 memClear(void *block, s32 size);
 u32 dataTable17Sub0GetRecord(u32 *scratch, s32 id);
 u32 FUN_002bcfc0(u32 record, s32 arg);
-s32 FUN_002be624(char *buffer, const char *format, ...);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 s32 scrScriptProcessStartEntry(u32 process, u32 entry);
 s32 FUN_0019e0c0(u32 process);
@@ -42,7 +42,7 @@ void shopSelectEntryStart(ShopScene *scene, s32 mode)
         }
         record = dataTable17Sub0GetRecord(&scratch, id);
         name = FUN_002bcfc0(record, 0);
-        FUN_002be624(scene->text, "%s%s<br>", scene->text, name);
+        textFormatBuffer(scene->text, "%s%s<br>", scene->text, name);
     }
     scrScriptProcessStartEntry(scene->process, tableGroupFindEntryIndex(scene->tableGroup, entryName));
     FUN_0019e0c0(scene->process);

@@ -8,8 +8,8 @@ int FUN_0022a358(...);
 int asdListBoxSetItemMode3(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
-int FUN_0025c58c(unsigned int, int, int);
-int FUN_00262914(unsigned int, unsigned char *);
+int asdListBoxCreateDefault(unsigned int, int, int);
+int jobSetText(unsigned int, unsigned char *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -24,8 +24,8 @@ extern int DAT_004398d4; /* 0x4398d4 */
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0025c58c. */
-/* Supplied declaration required: FUN_00262914. */
+/* Supplied declaration required: asdListBoxCreateDefault. */
+/* Supplied declaration required: jobSetText. */
 
 
 void FUN_003c4748(int param_1,int param_2)
@@ -35,11 +35,11 @@ void FUN_003c4748(int param_1,int param_2)
   unsigned int temp_v0;
   
   temp_v0 = *(unsigned int *)(param_2 + 0x5c);
-  FUN_0025c58c(temp_v0,0x73,0);
+  asdListBoxCreateDefault(temp_v0,0x73,0);
   *(unsigned int *)(param_1 + 0x10) = temp_v0;
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c49a0);
+  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_003c49a0);
   FUN_0022a358(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
   FUN_0022a358(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
   FUN_0022a358(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);

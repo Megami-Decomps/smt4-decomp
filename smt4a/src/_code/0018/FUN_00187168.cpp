@@ -1,20 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187168` (_code @ 0x187168, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses beq 14 where the compiled block uses ldrne r0, [r0, #304]. */
+#include "common.h"
 
-extern "C" {
+struct FlagState {
+    u8 unk00[0x130]; // 0x000
+    u32 flags;      // 0x130
+};
 
-
-unsigned int FUN_00187168(int param_1)
-
+extern "C" u32 FUN_00187168(const FlagState* state)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((param_1 != 0) && (temp_v0 = 0, (*(unsigned int *)(param_1 + 0x130) & 1) != 0)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
-}
+    if (state == NULL)
+        return 0;
 
-} /* extern "C" */
+    return (state->flags & 1) != 0;
+}

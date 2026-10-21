@@ -1,14 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c263c` (_code @ 0x2c263c, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler folds the nested member offsets into a different large address adjustment. */
+#include "common.h"
 extern "C" {
-
-
-void FUN_002c263c(void)
-
-{
-  return;
+extern struct { u32 unk00; struct { u8 unk00[0x5274]; struct { u8 unk00[0x1F0]; f32 value; } member; } *table; } g_gameDataBlocks;
+/* Reads the game-data floating-point setting. */
+f32 FUN_002c263c(void) { return g_gameDataBlocks.table->member.value; }
 }
-
-} /* extern "C" */

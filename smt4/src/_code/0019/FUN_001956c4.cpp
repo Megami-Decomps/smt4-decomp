@@ -22,7 +22,7 @@ int FUN_002bf810(...);
 int FUN_002c1658(...);
 int uiQuestSortListByEntryKind(...);
 int FUN_003944d4(...);
-int FUN_003c8374(void);
+int gameOptionsHasEnabledParameters(void);
 int SBORROW4(...);
 int VectorUnsignedToFloat(...);
 
@@ -90,7 +90,7 @@ extern int randNextInRange(unsigned int);
 extern unsigned int FUN_002c5c04(unsigned char *);
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: FUN_003944d4. */
-/* Supplied declaration required: FUN_003c8374. */
+/* Supplied declaration required: gameOptionsHasEnabledParameters. */
 
 
 unsigned int FUN_001956c4(void)
@@ -791,7 +791,7 @@ joined_r0x0019627c:
       }
       if (temp_v5 == 0x2b) {
         FUN_0029016c(*(unsigned short *)(temp_v1 + 0x97e),0);
-        FUN_003c8374();
+        gameOptionsHasEnabledParameters();
         FUN_002900d0();
         if (*(char *)(temp_v1 + 0x5c4) != '\0') {
           temp_v11 = temp_v1 + 0x5fc;

@@ -17,7 +17,7 @@ typedef struct OffsetInfo {
 
 extern u8 DAT_004d8b40[0x90];
 
-extern void *FUN_002468e0(u32 handle, s32 offset);
+extern void *linkedFindItemByIndex(u32 handle, s32 offset);
 extern u32 FUN_00323a08(u8 *buffer, s32 arg);
 extern void rt_memcpy_w(void *dst, void *src, u32 size);
 
@@ -25,7 +25,7 @@ extern void rt_memcpy_w(void *dst, void *src, u32 size);
  * result, with bit 23 added when its bit 0 is set. */
 u32 FUN_00328674(SourceInfo *source, OffsetInfo *other)
 {
-    void *record = FUN_002468e0(source->handle, source->offset + other->offset);
+    void *record = linkedFindItemByIndex(source->handle, source->offset + other->offset);
     u32 result;
 
     rt_memcpy_w(DAT_004d8b40, record, 0x90);

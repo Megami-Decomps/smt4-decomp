@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00178b04(...);
 int gameFlagIsSet(...);
 int FUN_001cd3ec(...);
@@ -25,7 +25,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int g_mapGimic; /* 0x580ca0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -238,7 +238,7 @@ unsigned int FUN_0033bfac(void)
   FUN_003563fc();
   temp_v2 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x3c;
   *(unsigned short *)(temp_v2 + 0xa6) = *(unsigned short *)(temp_v1 + 2);
-  FUN_00100388(temp_v9,&LAB_0033c4c0);
+  textFormatBuffer(temp_v9,&LAB_0033c4c0);
   temp_v1 = (int)*(short *)(temp_v2 + 0xa6);
   if (temp_v1 != 0x2e) {
     if (temp_v1 != 0x36) {

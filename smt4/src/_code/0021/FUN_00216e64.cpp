@@ -32,7 +32,7 @@ int gameGetPlayerData(void);
 int FUN_002b7bca(int, int, int, unsigned char *);
 int devilGetRecord(...);
 int FUN_002bd06c(unsigned int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002bf818(int);
 int asdMemFree(unsigned int);
@@ -91,7 +91,7 @@ extern int gameGetUnitRecord(int);
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -267,7 +267,7 @@ void FUN_00216e64(int param_1)
       }
       pcVar15 = (char *)0x0;
 LAB_002174ac:
-      FUN_002be624(temp_v17,&LAB_00217614,pcVar15 + 1);
+      textFormatBuffer(temp_v17,&LAB_00217614,pcVar15 + 1);
       temp_v4 = FUN_002c5c04(temp_v17);
       *(unsigned int *)(param_1 + 0x3578) = temp_v4;
       temp_v8 = *(unsigned int *)(param_1 + 0x3570);

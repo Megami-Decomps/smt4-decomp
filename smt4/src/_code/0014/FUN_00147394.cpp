@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int FUN_002c1148(void);
 
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002c1148. */
 
 
@@ -22,7 +22,7 @@ void FUN_00147394(void)
     FUN_002c1148();
     if (-1 < temp_v0 || temp_v0 == -0x375f3004) break;
     if (temp_v0 == -0x1f5f33f8) {
-      FUN_002bb150(10000000,0);
+      threadSleepDuration(10000000,0);
     }
   }
   return;

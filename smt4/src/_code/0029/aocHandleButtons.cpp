@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0023e3ec(u32 a, u32 b);
+void resourceApplyNodeFlag(u32 a, u32 b);
 void asdTMTexTableLoadEntryAsync(u32 a, u32 b);
 void FUN_002a5ee4(u32 system, u32 a, u32 b, s32 flags);
 void asdTMTexTableLoadEntryAsyncB(u32 a, u32 b);
@@ -18,7 +18,7 @@ void aocHandleButtons(AocRequest *request, u32 buttons)
                 FUN_002a5ee4(g_aocSystem, request->idA, request->idB, 0x20000);
                 return;
             }
-            FUN_0023e3ec(request->idA, request->idB);
+            resourceApplyNodeFlag(request->idA, request->idB);
             return;
         }
         if ((buttons & 0x40) != 0) {

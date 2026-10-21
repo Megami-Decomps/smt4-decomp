@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTableFileGetTable(int, int);
-int FUN_002be624(unsigned char [132], unsigned char *, int, unsigned int);
+int textFormatBuffer(unsigned char [132], unsigned char *, int, unsigned int);
 int memClear(unsigned char [132], int);
 int FUN_0038a154(unsigned int, unsigned char [132], int, int, int, int);
 
@@ -18,7 +18,7 @@ extern unsigned char LAB_0038ba34; /* 0x38ba34 */
 extern unsigned int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: memClear. */
@@ -91,7 +91,7 @@ void FUN_0038b87c(int param_1,int param_2)
           case 0x2e:
           case 0x2f:
             memClear(temp_v5,0x80);
-            FUN_002be624(temp_v5,&LAB_0038ba34,param_1 + 0x24,temp_v3 + temp_v2 * 0x40 + 1);
+            textFormatBuffer(temp_v5,&LAB_0038ba34,param_1 + 0x24,temp_v3 + temp_v2 * 0x40 + 1);
             temp_v0 = *(int *)(param_1 + 0x4c) + temp_v2 * 0x10;
             FUN_0038a154(g_aocDisplay,temp_v5,temp_v0,1,0x80,temp_v0);
             *(unsigned char *)(*(int *)(param_1 + 0x4c) + temp_v2 * 0x10 + 0xc) = 1;

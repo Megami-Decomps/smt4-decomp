@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f6998(unsigned int, unsigned int, int);
-int FUN_002693b4(unsigned int, int, int, unsigned int);
+int recordPrepareActive(unsigned int, int, int, unsigned int);
 int refCountIncrement(void);
 int asdOperatorNew(int, unsigned short *);
 int memAlloc(int, int, int, int, int, int);
@@ -22,7 +22,7 @@ extern unsigned int DAT_00473810; /* 0x473810 */
 extern unsigned int DAT_00473814; /* 0x473814 */
 
 /* Supplied declaration required: FUN_001f6998. */
-/* Supplied declaration required: FUN_002693b4. */
+/* Supplied declaration required: recordPrepareActive. */
 extern unsigned int FUN_002693e4(void);
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -82,7 +82,7 @@ unsigned short * FUN_00268fc4(unsigned short *param_1)
     else {
       temp_v7 = FUN_002693e4();
     }
-    FUN_002693b4(temp_v7,0x25,temp_v8 * 3,temp_v6);
+    recordPrepareActive(temp_v7,0x25,temp_v8 * 3,temp_v6);
     *puVar3 = temp_v0;
     *(unsigned int *)(puVar3 + 4) = temp_v7;
     puVar3[1] = (unsigned short)temp_v6;

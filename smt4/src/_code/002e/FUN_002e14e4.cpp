@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e14e4` (_code @ 0x2e14e4, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds the array stride and member offsets differently from retail. */
+#include "common.h"
+
+namespace { struct Record { u8 padding[0x41c]; u32 active; u8 reserved[0x224]; u32 value; u8 tail[0x1c8]; }; struct Audio { u8 padding[0x4bc]; Record records[4]; }; }
 
 extern "C" {
-
-
-unsigned int FUN_002e14e4(unsigned int param_1)
-
+extern Audio *g_asdSound;
+u32 FUN_002e14e4(u32 index)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0xffffffff;
-  if ((param_1 < 4) && (*(int *)(param_1 * 0x50 + 0x4e2434) != 0)) {
-    temp_v0 = *(unsigned int *)(param_1 * 0x50 + 0x4e2468);
-  }
-  return temp_v0;
+    if (index < 4 && g_asdSound->records[index].active != 0) { return g_asdSound->records[index].value; }
+    return 0xffffffff;
 }
-
-} /* extern "C" */
+}

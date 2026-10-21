@@ -16,7 +16,7 @@ typedef struct SceneResources {
     /* 0x24 */ void *resource24;
 } SceneResources;
 
-extern SceneResources *DAT_0057f134;
+extern SceneResources *g_callbackWork;
 
 int jobStop(void *context, int arg);
 int FUN_001695a0(void);
@@ -29,7 +29,7 @@ int btlTalkBustUpDestroy(void);
 /* Releases every resource held by the global scene resources and frees the structure. */
 void FUN_0035ab90(void)
 {
-    SceneResources *res = DAT_0057f134;
+    SceneResources *res = g_callbackWork;
 
     if (res->resource20 != NULL) {
         scrScriptProcessDestroy();
@@ -57,9 +57,9 @@ void FUN_0035ab90(void)
     dataTableFree(0x25);
     dataTableFree(0x14);
     jobStop(res->context, 0);
-    if (DAT_0057f134 != NULL) {
+    if (g_callbackWork != NULL) {
         asdOperatorDelete();
-        DAT_0057f134 = NULL;
+        g_callbackWork = NULL;
     }
 }
 

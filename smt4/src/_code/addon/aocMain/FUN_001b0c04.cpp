@@ -24,7 +24,7 @@ extern unsigned char LAB_001b4fe8; /* 0x1b4fe8 */
 extern unsigned char LAB_001e470c; /* 0x1e470c */
 extern unsigned char LAB_0020ece4; /* 0x20ece4 */
 extern unsigned char LAB_0020ed2c; /* 0x20ed2c */
-extern unsigned int *DAT_00433048; /* 0x433048 */
+extern unsigned int *g_sceneResourceWork; /* 0x433048 */
 
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -41,7 +41,7 @@ void FUN_001b0c04(int param_1)
   
   puVar1 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x20,1);
-  DAT_00433048 = puVar1;
+  g_sceneResourceWork = puVar1;
   *(unsigned char *)(puVar1 + 6) = 0;
   *(unsigned char *)((int)puVar1 + 0x19) = 0;
   puVar1[7] = 0;
@@ -52,12 +52,12 @@ void FUN_001b0c04(int param_1)
     FUN_00282bfc(1,0xff);
   }
   puVar2 = &LAB_001b0d64;
-  asdProcessCreateSimple(&LAB_001b0d64,2,0,0,&LAB_001b4fe8,&LAB_0020ece4,DAT_00433048);
+  asdProcessCreateSimple(&LAB_001b0d64,2,0,0,&LAB_001b4fe8,&LAB_0020ece4,g_sceneResourceWork);
   *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_001b0d74,0x7d,1,0,&LAB_001e470c,0,DAT_00433048,puVar2);
-  taskCreateDraw(&LAB_001b0d80,0xdb,1,0,&LAB_001e470c,0,DAT_00433048,*puVar1);
+  taskCreateDraw(&LAB_001b0d74,0x7d,1,0,&LAB_001e470c,0,g_sceneResourceWork,puVar2);
+  taskCreateDraw(&LAB_001b0d80,0xdb,1,0,&LAB_001e470c,0,g_sceneResourceWork,*puVar1);
   puVar2 = &LAB_001b0d90;
-  taskCreateDraw(&LAB_001b0d90,0xe7,1,0,&LAB_0020ed2c,0,DAT_00433048,*puVar1);
+  taskCreateDraw(&LAB_001b0d90,0xe7,1,0,&LAB_0020ed2c,0,g_sceneResourceWork,*puVar1);
   puVar1[3] = (unsigned int)puVar2;
   return;
 }

@@ -1,28 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030a84c` (_code @ 0x30a84c, 0xc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int memCopy(int, int, int);
-int rt_aeabi_memclr(int, int);
+int memCopy(void *src, void *dst, int size);
+int rt_aeabi_memclr(void *buffer, int size);
 
-/* Supplied declaration required: memCopy. */
-/* Supplied declaration required: rt_aeabi_memclr. */
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x36];
+    /* 0x36 */ u8 unk36;
+} Source;
 
+typedef struct Dest {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ u8 unk4C[0x12];
+    /* 0x5E */ u8 unk5E[0x18];
+    /* 0x76 */ u8 unk76;
+} Dest;
 
-void FUN_0030a84c(int param_1,int param_2)
-
+/* Builds a 0x8C-byte record from the source: 0xE bytes to +0, the next 0x12 bytes to +0x4C, and the byte at +0x36 to +0x76. */
+void FUN_0030a84c(Source *src, Dest *dst)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_1 == 0 || param_2 == 0) {
-    return;
-  }
-  rt_aeabi_memclr(param_2,0x8c);
-  memCopy(param_1,param_2,0xe);
-  memCopy(param_1 + 0xe,param_2 + 0x4c,0x12);
-  *(unsigned char *)(param_2 + 0x76) = *(unsigned char *)(param_1 + 0x36);
-  return;
+    if (src == NULL || dst == NULL) return;
+
+    rt_aeabi_memclr(dst, 0x8c);
+    memCopy(src, dst, 0xe);
+    memCopy((u8 *)src + 0xe, dst->unk4C, 0x12);
+    dst->unk76 = src->unk36;
 }
 
 } /* extern "C" */

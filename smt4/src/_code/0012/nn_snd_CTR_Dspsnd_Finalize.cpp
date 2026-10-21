@@ -8,7 +8,7 @@ int FUN_0013a1c0(int, char [8]);
 int FUN_0013a1f4(int, unsigned short [2], int);
 int FUN_0013a294(int, int);
 int FUN_0013a4c0(int, short [2]);
-int FUN_002bb150(unsigned char *, int);
+int threadSleepDuration(unsigned char *, int);
 int rt_memcpy(int *, int, int);
 int software_interrupt(int);
 
@@ -26,7 +26,7 @@ extern unsigned char DAT_004a95c0; /* 0x4a95c0 */
 /* Supplied declaration required: FUN_0013a1f4. */
 /* Supplied declaration required: FUN_0013a294. */
 /* Supplied declaration required: FUN_0013a4c0. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -54,7 +54,7 @@ void nn_snd_CTR_Dspsnd_Finalize(int *param_1,unsigned char param_2)
       FUN_0013a4c0(0,temp_v1);
     }
     if (temp_v1[0] == 1) break;
-    FUN_002bb150(&DAT_004a95c0,0);
+    threadSleepDuration(&DAT_004a95c0,0);
   }
   if (param_2) {
     rt_memcpy(param_1 + 6,param_1[0x42a],0x1080);

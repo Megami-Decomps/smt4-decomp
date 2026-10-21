@@ -57,7 +57,7 @@ extern unsigned char FUN_00246bd4(void);
 /* Supplied declaration required: FUN_002d26a4. */
 /* Supplied declaration required: FUN_002d8cec. */
 /* Supplied declaration required: FUN_003254a0. */
-extern unsigned int FUN_00340998(void);
+extern unsigned int uiSelectionRefresh(void);
 /* Supplied declaration required: FUN_00352c14. */
 /* Supplied declaration required: FUN_00395904. */
 
@@ -72,7 +72,7 @@ void FUN_0037a078(void)
   
   temp_v0 = g_mapMain;
   mapEplUpdateEntries();
-  temp_v2 = FUN_00340998();
+  temp_v2 = uiSelectionRefresh();
   FUN_002d26a4(temp_v2);
   FUN_00395904();
   temp_v1 = FUN_00246bd4();

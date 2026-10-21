@@ -30,7 +30,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 
 extern char *dataTable2bSub1GetRecord(unsigned char *, int);
 /* Supplied declaration required: dataTable2bSub1GetCount. */
-extern int FUN_0024c2ec(char, char);
+extern int saveTestFlagRow(char, char);
 extern int gameFlagIsSet(void);
 
 
@@ -94,7 +94,7 @@ void FUN_0039cbe8(int param_1,int param_2)
          ((temp_v1 = 0, (*(int *)((unsigned char *)&g_gameState + 0x3e0)) != 0 ||
           ((((*(short *)(pcVar4 + 4) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
             ((*(short *)(pcVar4 + 6) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) &&
-           (temp_v2 = FUN_0024c2ec(pcVar4[1],pcVar4[2]), temp_v2 != 0)))))) {
+           (temp_v2 = saveTestFlagRow(pcVar4[1],pcVar4[2]), temp_v2 != 0)))))) {
         if (0 < temp_v5) {
           psVar6 = temp_v6;
           temp_v2 = temp_v5;

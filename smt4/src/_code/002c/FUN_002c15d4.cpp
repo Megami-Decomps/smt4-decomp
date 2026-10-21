@@ -1,23 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c15d4` (_code @ 0x2c15d4, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Presets { u8 padding[0x18]; u32 first; u8 gap[0x54]; u32 second; }; }
 
 extern "C" {
-
-extern unsigned int DAT_004e39f8; /* 0x4e39f8 */
-extern unsigned int DAT_004e3a50; /* 0x4e3a50 */
-
-
-unsigned int FUN_002c15d4(unsigned int param_1)
-
+extern Presets g_asdGxPresets;
+/* Gets the preset for the requested render kind. */
+u32 FUN_002c15d4(u32 kind)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = DAT_004e39f8;
-  if ((param_1 >= 2) && (temp_v0 = DAT_004e3a50, param_1 != 2)) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (kind == 0 || kind == 1) {
+        return g_asdGxPresets.first;
+    }
+    if (kind == 2) {
+        return g_asdGxPresets.second;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

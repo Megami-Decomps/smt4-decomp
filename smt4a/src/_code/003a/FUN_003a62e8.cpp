@@ -8,7 +8,7 @@ int FUN_002613f0(int);
 
 /* Supplied declaration required: FUN_002613f0. */
 extern int FUN_003f3104(int);
-extern int FUN_004bca68(int, unsigned short);
+extern int recordContainsPairedId(int, unsigned short);
 
 
 void FUN_003a62e8(int param_1)
@@ -30,7 +30,7 @@ void FUN_003a62e8(int param_1)
     }
   }
   temp_v1 = FUN_002613f0(temp_v2);
-  temp_v1 = FUN_004bca68(param_1,*(unsigned short *)(temp_v1 + 2));
+  temp_v1 = recordContainsPairedId(param_1,*(unsigned short *)(temp_v1 + 2));
   if (temp_v1 == 0) {
     puVar4 = (unsigned short *)FUN_002613f0(temp_v2);
     *puVar4 = 0;

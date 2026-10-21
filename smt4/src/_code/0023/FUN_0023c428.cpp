@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023aa3c(int, unsigned char [16]);
 int FUN_0023ac2c(int, float *);
-int FUN_0023adf4(unsigned int, int, unsigned char [16]);
+int modelSetPosition(unsigned int, int, unsigned char [16]);
 int FUN_0027da30(int, int);
 int nodeSetTranslation(unsigned int, int, float *);
 int btlGetMainState(void);
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023aa3c. */
 /* Supplied declaration required: FUN_0023ac2c. */
-/* Supplied declaration required: FUN_0023adf4. */
+/* Supplied declaration required: modelSetPosition. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
 /* Supplied declaration required: nodeSetTranslation. */
@@ -70,7 +70,7 @@ void FUN_0023c428(int param_1,int param_2)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x32);
     FUN_0023aa3c(temp_v5 + 8,temp_v10);
-    FUN_0023adf4(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 8),0,temp_v10);
+    modelSetPosition(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 8),0,temp_v10);
     FUN_0023ac2c(temp_v5 + 8,&temp_v7);
     temp_v7 = temp_v7 + *(float *)(temp_v4 + 0xc);
     temp_v8 = temp_v8 + *(float *)(temp_v4 + 0x10);

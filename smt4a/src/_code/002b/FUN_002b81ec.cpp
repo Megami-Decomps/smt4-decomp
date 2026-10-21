@@ -8,8 +8,8 @@ int FUN_002b621c(void);
 int FUN_002dae68(void);
 int FUN_0033ad04(void);
 int FUN_003d2150(...);
-int FUN_003e542c(...);
-int FUN_003e5708(...);
+int controllerGetSourceValue(...);
+int controllerGetSourceTiming(...);
 int FUN_003fd7c0(...);
 
 int CONCAT44(...);
@@ -103,16 +103,16 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003d2150. */
 extern unsigned int FUN_003d4ed8(unsigned int);
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003e542c. */
+/* Supplied declaration required: controllerGetSourceValue. */
 extern int linkHolderCheckFirst(unsigned int);
-/* Supplied declaration required: FUN_003e5708. */
+/* Supplied declaration required: controllerGetSourceTiming. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004a01c8. */
 /* Supplied declaration required: FUN_004a0524. */
 /* Supplied declaration required: FUN_004a08f0. */
 extern int FUN_004a0e38(unsigned int, unsigned int);
-extern int FUN_004d04f4(void);
+extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0050d8e4. */
 
 
@@ -205,7 +205,7 @@ void FUN_002b81ec(void)
           *(short *)(g_lmapScene + 0x19a) = *(short *)(g_lmapScene + 0x19a) - 1;
         }
         else {
-          temp_v6 = FUN_004d04f4();
+          temp_v6 = inputIsQuestCancelPressed();
           temp_v5 = 0;
           if (temp_v6 != 0) {
             temp_v5 = g_gameState;
@@ -665,7 +665,7 @@ void FUN_002b81ec(void)
                       }
                       else {
                         *(int *)(temp_v5 + 0x27c) = *(int *)(temp_v5 + 0x27c) + 1;
-                        FUN_003e5708(*(unsigned int *)(temp_v5 + 0x1a8));
+                        controllerGetSourceTiming(*(unsigned int *)(temp_v5 + 0x1a8));
                         temp_v5 = g_lmapScene;
                         temp_v18 = (float)VectorSignedToFloat(*(unsigned int *)(g_lmapScene + 0x27c),
                                                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -700,10 +700,10 @@ void FUN_002b81ec(void)
                   }
                 }
                 else {
-                  FUN_003e542c(*(unsigned int *)(temp_v5 + 0x1a8));
+                  controllerGetSourceValue(*(unsigned int *)(temp_v5 + 0x1a8));
                   temp_v14 = (float)temp_v20;
                   temp_v18 = temp_v21;
-                  FUN_003e5708(*(unsigned int *)(g_lmapScene + 0x1a8));
+                  controllerGetSourceTiming(*(unsigned int *)(g_lmapScene + 0x1a8));
                   if (temp_v18 >= temp_v21 - temp_v14) {
                     temp_v5 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 0x54) = 0x25;
@@ -732,7 +732,7 @@ void FUN_002b81ec(void)
                   }
                   else {
                     *(int *)(temp_v5 + 0x27c) = *(int *)(temp_v5 + 0x27c) + 1;
-                    FUN_003e5708(*(unsigned int *)(temp_v5 + 0x1a8));
+                    controllerGetSourceTiming(*(unsigned int *)(temp_v5 + 0x1a8));
                     temp_v5 = g_lmapScene;
                     temp_v18 = (float)VectorSignedToFloat(*(unsigned int *)(g_lmapScene + 0x27c),
                                                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -756,10 +756,10 @@ void FUN_002b81ec(void)
                 }
               }
               else {
-                FUN_003e542c(*(unsigned int *)(temp_v5 + 0x1a8));
+                controllerGetSourceValue(*(unsigned int *)(temp_v5 + 0x1a8));
                 temp_v14 = (float)temp_v20;
                 temp_v18 = temp_v21;
-                FUN_003e5708(*(unsigned int *)(g_lmapScene + 0x1a8));
+                controllerGetSourceTiming(*(unsigned int *)(g_lmapScene + 0x1a8));
                 temp_v5 = g_lmapScene;
                 if (temp_v21 - temp_v14 <= temp_v18) {
                   *(unsigned int *)(g_lmapScene + 0x54) = 0x26;
@@ -783,10 +783,10 @@ void FUN_002b81ec(void)
             }
           }
           else {
-            FUN_003e542c(*(unsigned int *)(temp_v5 + 0x1a8));
+            controllerGetSourceValue(*(unsigned int *)(temp_v5 + 0x1a8));
             temp_v14 = (float)temp_v20;
             temp_v18 = temp_v21;
-            FUN_003e5708(*(unsigned int *)(g_lmapScene + 0x1a8));
+            controllerGetSourceTiming(*(unsigned int *)(g_lmapScene + 0x1a8));
             if (temp_v18 >= temp_v21 - temp_v14) {
               temp_v5 = g_lmapScene;
               *(unsigned int *)(g_lmapScene + 0x54) = 0x25;

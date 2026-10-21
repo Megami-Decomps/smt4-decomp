@@ -1,35 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f26cc` (_code @ 0x4f26cc, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-typedef struct fn_004f26cc_arg0 fn_004f26cc_arg0;
-struct fn_004f26cc_arg0 {
-    unsigned char pad_0x0[0x64c];
-    uint field_0x64c; /* +0x64c */
-    unsigned char pad_0x650[0x154];
-    undefined4 field_0x7a4; /* +0x7a4 */
-    undefined4 field_0x7a8; /* +0x7a8 */
-    undefined4 field_0x7ac; /* +0x7ac */
-    unsigned char pad_0x7b0[0x20];
-    undefined4 field_0x7d0; /* +0x7d0 */
-    undefined4 field_0x7d4; /* +0x7d4 */
-    undefined4 field_0x7d8; /* +0x7d8 */
+/* NON_MATCHING: compiler folds progress-vector pointers into VFP offsets. */
+#include "common.h"
+struct Vector3 {f32 x,y,z;};
+struct CameraState {
+    /* 0x0 */ u8 unk0[1612];
+    /* 0x64C */ u32 flags;
+    /* 0x650 */ u8 unk650[340];
+    /* 0x7A4 */ Vector3 first;
+    /* 0x7B0 */ u8 unk7B0[32];
+    /* 0x7D0 */ Vector3 second;
 };
-
-
-void FUN_004f26cc(fn_004f26cc_arg0 *param_1)
-
-{
-  param_1->field_0x7ac = 0;
-  param_1->field_0x7a8 = 0;
-  param_1->field_0x7a4 = 0;
-  param_1->field_0x64c = param_1->field_0x64c & 0xff7fffff;
-  param_1->field_0x7d8 = 0;
-  param_1->field_0x7d4 = 0;
-  param_1->field_0x7d0 = 0;
-  return;
-}
-
-} /* extern "C" */
+/* Clears the rotation state and both related vectors. */
+extern "C" void FUN_004f26cc(CameraState *camera){camera->first.z=0;camera->first.y=0;camera->first.x=0;camera->flags&=~0x800000u;camera->second.z=0;camera->second.y=0;camera->second.x=0;}

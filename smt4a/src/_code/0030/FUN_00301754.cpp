@@ -1,40 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00301754` (_code @ 0x301754, 0x3e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r4, r0'; compiler emits 'mov r5, r0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int wordRefsEqual_00301734(int *, unsigned int *);
-
-
-void FUN_00301754(unsigned int *param_1,int param_2,int *param_3)
-
-{
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *(unsigned int *)(param_2 + 0x10);
-  temp_v0 = wordRefsEqual_00301734(param_3,(unsigned int *)&temp_v2);
-  if (temp_v0 != 0) {
-    *param_1 = *(unsigned int *)(param_2 + 0x10);
-    return;
-  }
-  temp_v1 = *(unsigned int *)*param_3;
-  *(unsigned int *)((unsigned int *)*param_3)[1] = temp_v1;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  puVar2 = (unsigned int *)*param_3;
-  *puVar2 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar2;
-  *param_1 = temp_v1;
-  return;
+struct Node { Node *next; Node *previous; };
+struct List { u32 reserved; Node *head; u8 unk08[8]; Node *end; u32 count; };
+s32 wordRefsEqual_00301734(Node **first, Node **second);
+void FUN_00301754(Node **output, List *list, Node **position) {
+    Node *end = list->end;
+    if (wordRefsEqual_00301734(position, &end)) {
+        *output = list->end;
+        return;
+    }
+    Node *node = *position;
+    Node *next = node->next;
+    node->previous->next = next;
+    next->previous = node->previous;
+    --list->count;
+    node->next = list->head;
+    list->head = node;
+    *output = next;
 }
-
-} /* extern "C" */
+}

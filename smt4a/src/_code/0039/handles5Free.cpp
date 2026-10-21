@@ -16,6 +16,9 @@ extern void asdMemFree(void *ptr);
 /* Releases the four handles and the block itself. */
 void handles5Free(Handles5 *block)
 {
+    if (block == NULL) {
+        return;
+    }
     asdMemFreeSlot(block->h0);
     asdMemFreeSlot(block->h1);
     asdMemFreeSlot(block->h2);

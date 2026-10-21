@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_0043dd90; /* 0x43dd90 */
+extern int g_screenStateWork; /* 0x43dd90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -67,7 +67,7 @@ unsigned int FUN_0032ae80(void)
   float temp_v13;
   
   temp_v3 = g_titleScene;
-  temp_v1 = DAT_0043dd90;
+  temp_v1 = g_screenStateWork;
   temp_v2 = FUN_002c5d80(1,0);
   piVar7 = (int *)(temp_v3 + 0x124c);
   temp_v4 = *piVar7;

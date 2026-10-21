@@ -1,23 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f182e` (_code @ 0x2f182e, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: taking the storage argument's address makes compiler spill all argument registers. */
+#include "common.h"
 extern "C" {
-
-int allocArrayWords(unsigned int [2], unsigned int, unsigned int);
-
-/* Supplied declaration required: allocArrayWords. */
-
-
-void FUN_002f182e(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0 [2];
-  
-  temp_v0[0] = param_4;
-  allocArrayWords(temp_v0,(param_2 + 0x1fU) >> 5,*param_1);
-  return;
+void allocArrayWords(u32 *storage, u32 count, u32 value);
+/* Allocates enough words to hold the requested number of bits. */
+void FUN_002f182e(const u32 *value, u32 bits, u32 unused, u32 storage) {
+    allocArrayWords(&storage, (bits + 31) >> 5, *value);
 }
-
-} /* extern "C" */
+}

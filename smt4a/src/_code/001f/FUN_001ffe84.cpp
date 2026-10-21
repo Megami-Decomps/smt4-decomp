@@ -52,7 +52,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned short FUN_00167f08(void);
+extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameGetPlayerData(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
@@ -90,7 +90,7 @@ extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_003344b4. */
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035dbd4. */
 /* Supplied declaration required: FUN_003d386c. */
@@ -221,14 +221,14 @@ void FUN_001ffe84(void)
       FUN_002c7e24();
       FUN_002adce8(temp_v8 + 0x1ec,1);
       temp_v4 = 0;
-      temp_v3 = FUN_00348ed0(temp_v8 + 0x1ec);
+      temp_v3 = uiSearchPrimary(temp_v8 + 0x1ec);
       if (0 < temp_v3) {
         do {
           ifTouchRegionRemove();
           temp_v3 = temp_v4 * 2;
           temp_v4 = temp_v4 + 1;
           *(unsigned short *)(temp_v8 + temp_v3 + 0x1b3e) = 0xffff;
-          temp_v3 = FUN_00348ed0(temp_v8 + 0x1ec);
+          temp_v3 = uiSearchPrimary(temp_v8 + 0x1ec);
         } while (temp_v4 < temp_v3);
       }
       temp_v3 = FUN_0035db94();
@@ -393,7 +393,7 @@ void FUN_001ffe84(void)
           FUN_0031f208(0x11);
           FUN_0031f208(3);
           FUN_0019de98(0,0xf4f4f4ff);
-          temp_v2 = FUN_00167f08();
+          temp_v2 = ifTouchGetButtonHelpValue();
           *(unsigned short *)(temp_v8 + 0x3a) = temp_v2;
           FUN_0020b660(0x2b);
           eventQueueAddUniqueIfValid(temp_v7);

@@ -9,7 +9,7 @@ int fadeObjectResetIfActive(int);
 int vec2GetXInt(...);
 int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c39a4(int);
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int DAT_0043dd90; /* 0x43dd90 */
+extern int g_screenStateWork; /* 0x43dd90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -33,7 +33,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -58,8 +58,8 @@ unsigned int FUN_00330ac8(void)
   char *pcVar10;
   unsigned char temp_v8;
   
-  temp_v1 = DAT_0043dd90;
-  if (*(int *)(DAT_0043dd90 + 4) == 0) {
+  temp_v1 = g_screenStateWork;
+  if (*(int *)(g_screenStateWork + 4) == 0) {
     return 0;
   }
   FUN_002c39a4(g_titleScene);
@@ -75,7 +75,7 @@ unsigned int FUN_00330ac8(void)
     *(unsigned char *)(temp_v7 + 0x1264) = 0;
   }
   temp_v7 = g_titleScene;
-  temp_v0 = *(short *)(DAT_0043dd90 + 0x1e);
+  temp_v0 = *(short *)(g_screenStateWork + 0x1e);
   if (temp_v0 == 2) {
     temp_v2 = 0x28f;
   }
@@ -112,9 +112,9 @@ unsigned int FUN_00330ac8(void)
         (**(romwright_code **)(temp_v7 + 0x12c8))();
         *(unsigned char *)(temp_v7 + 0x12c4) = 0;
       }
-      FUN_002bf538();
+      efctSetSpeed();
       FUN_002bf288(2,0x24,0x205,0,0,0x60);
-      FUN_002bf538();
+      efctSetSpeed();
     }
   }
   temp_v3 = vec2GetXInt(temp_v1 + 0x2c8);

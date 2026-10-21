@@ -30,7 +30,7 @@ extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_004a5ea0. */
 /* Supplied declaration required: owner4ASetSizeAndCall. */
 extern int FUN_004cfe4c(int);
-extern int FUN_004d0040(int);
+extern int rangeGetMinimumLimit(int);
 
 
 void FUN_004a5344(int param_1)
@@ -69,7 +69,7 @@ void FUN_004a5344(int param_1)
     if (*(int *)(param_1 + 0x28) != 0) {
       efctSetSpeed();
       temp_v1 = FUN_002a482c(param_1 + 0x20);
-      temp_v2 = FUN_004d0040(param_1 + 0x20);
+      temp_v2 = rangeGetMinimumLimit(param_1 + 0x20);
       temp_v5 = 0;
       if (temp_v5 < temp_v2) {
         do {

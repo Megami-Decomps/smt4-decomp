@@ -6,7 +6,7 @@ extern "C" {
 
 int scrWorkGetValue(int);
 int scrWorkSetValue(...);
-int FUN_00254e2c(int, int, unsigned int, int, int);
+int messageForwardDefaultMode(int, int, unsigned int, int, int);
 int FUN_0028ed3c(int, int, int);
 int FUN_0028ee90(void);
 int FUN_0028eeb8(int);
@@ -20,7 +20,7 @@ typedef struct {
 
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_00254e2c. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0028ed3c. */
 /* Supplied declaration required: FUN_0028ee90. */
@@ -56,7 +56,7 @@ unsigned int scrComm_Party_ConfirmSwap(void)
     FUN_0028ed3c(temp_v1,0,1);
     FUN_002bff50();
     temp_v4 = scrWorkGetValue(1);
-    FUN_00254e2c(temp_v3,0,temp_v4,6,0);
+    messageForwardDefaultMode(temp_v3,0,temp_v4,6,0);
     temp_v2 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v2 + 1);
     if (temp_v3 == 1) {

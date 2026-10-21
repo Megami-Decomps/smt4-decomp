@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00231464's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+extern void *DAT_0057f678;
+void FUN_004cf58c(void *owner);
+
+s32 FUN_00330a60(void)
+{
+    if (DAT_0057f678 != NULL) {
+        FUN_004cf58c(DAT_0057f678);
+    }
+    return 0;
+}
+
+} /* extern "C" */

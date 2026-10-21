@@ -31,8 +31,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0022e648. */
 /* Supplied declaration required: FUN_0022fa2c. */
 /* Supplied declaration required: FUN_0022faf8. */
-extern int FUN_0022fb04(void);
-extern int FUN_0022fb34(void);
+extern int inputIsQuestRepeatLeft(void);
+extern int inputIsQuestRepeatRight(void);
 /* Supplied declaration required: FUN_0022fb64. */
 extern int FUN_0022fbc0(int);
 /* Supplied declaration required: FUN_0022fcb8. */
@@ -44,8 +44,8 @@ extern int FUN_00230b90(int, unsigned short);
 extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: FUN_00233854. */
-extern int FUN_00256510(void);
-extern int FUN_002762e0(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 extern int FUN_0028fb3c(unsigned short);
 /* Supplied declaration required: FUN_00296e90. */
@@ -94,21 +94,21 @@ void FUN_003a3c7c(int param_1)
       FUN_0022e648(param_1,0xb);
       return;
     }
-    temp_v1 = FUN_0022fb34();
+    temp_v1 = inputIsQuestRepeatRight();
     if ((temp_v1 != 0) || (temp_v1 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4c)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0x864) = *(unsigned int *)(*(int *)(param_1 + 0x864) * 8 + 0x44e020);
       FUN_0022fcb8(param_1,1);
       FUN_0022faf8();
       return;
     }
-    temp_v1 = FUN_0022fb04();
+    temp_v1 = inputIsQuestRepeatLeft();
     if ((temp_v1 != 0) || (temp_v1 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4e)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0x864) = *(unsigned int *)(*(int *)(param_1 + 0x864) * 8 + 0x44e024);
       FUN_0022fcb8(param_1,1);
       FUN_0022faf8();
       return;
     }
-    temp_v1 = FUN_002762e0();
+    temp_v1 = inputIsQuestMenuPressed();
     if (temp_v1 != 0) {
       FUN_00230df0(0);
       FUN_00232848();
@@ -132,7 +132,7 @@ void FUN_003a3c7c(int param_1)
       *(unsigned int *)(param_1 + 8) = 1;
     }
     else {
-      temp_v1 = FUN_00256510();
+      temp_v1 = inputIsQuestCancelPressed();
       if (temp_v1 != 0) {
         FUN_002328b4();
         FUN_0022fa2c(param_1);

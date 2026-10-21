@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd76c(unsigned int, int);
+int controllerSetDestination(unsigned int, int);
 int FUN_00407598(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_00407598. */
 
 
@@ -63,7 +63,7 @@ void FUN_00407eb0(int param_1,int param_2,int param_3)
       *(unsigned int *)(param_1 + 0x608) = temp_v1;
       *(unsigned int *)(param_1 + 0x60c) = temp_v2;
       *(unsigned int *)(param_1 + 0x610) = temp_v3;
-      FUN_003fd76c(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
+      controllerSetDestination(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
       return;
     }
   }

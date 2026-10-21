@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd784(unsigned int);
+int controllerSetPosition(unsigned int);
 int FUN_003fd7b4(unsigned int);
 int FUN_003fd7c0(unsigned int, int, int);
 int FUN_003fd924(unsigned int, int, int);
@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
@@ -43,7 +43,7 @@ void FUN_004d854c(int *param_1)
     FUN_003fd7c0(*(unsigned int *)(*param_1 + 4),0,2);
   }
   if (*param_1 != 0) {
-    FUN_003fd784(*(unsigned int *)(*param_1 + 4));
+    controllerSetPosition(*(unsigned int *)(*param_1 + 4));
   }
   if (*param_1 != 0) {
     FUN_003fd7b4(*(unsigned int *)(*param_1 + 4));

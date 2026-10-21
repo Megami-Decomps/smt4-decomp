@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001383a8(unsigned int *, unsigned int);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 
 extern int DAT_00471b90; /* 0x471b90 */
 extern unsigned int DAT_00471ba4; /* 0x471ba4 */
 
 extern unsigned int *FUN_001295ec(void);
 /* Supplied declaration required: FUN_001383a8. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 
 
 unsigned int * FUN_0011ce28(unsigned int param_1)
@@ -39,7 +39,7 @@ unsigned int * FUN_0011ce28(unsigned int param_1)
       temp_v0 = (unsigned int)puVar1 & 0x3ff;
     }
     if (!temp_v1 || temp_v0 != 0x3fa) break;
-    FUN_002bb150(500000,0);
+    threadSleepDuration(500000,0);
   }
   if (-1 < (int)puVar1) {
     puVar1 = (unsigned int *)FUN_001295ec();

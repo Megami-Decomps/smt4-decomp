@@ -32,7 +32,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_0019dc44(unsigned int, int);
 extern int FUN_002a4878(int);
-extern int FUN_00348eb4(int);
+extern int uiSearchSecondary(int);
 /* Supplied declaration required: FUN_00485108. */
 /* Supplied declaration required: FUN_0048560c. */
 
@@ -149,7 +149,7 @@ void FUN_004845ac(int param_1)
   }
   if (*(char *)(param_1 + 0x29) == '\0') {
     temp_v8 = 0;
-    temp_v10 = FUN_00348eb4(param_1 + 0x1fc);
+    temp_v10 = uiSearchSecondary(param_1 + 0x1fc);
     if (0 < temp_v10) {
       do {
         temp_v10 = FUN_001834a4(0x23,temp_v8 + 0xc6);
@@ -177,7 +177,7 @@ void FUN_004845ac(int param_1)
           FUN_001835b4(2,0x23,0x14f,temp_v10);
         }
         temp_v8 = temp_v8 + 1;
-        temp_v10 = FUN_00348eb4(param_1 + 0x1fc);
+        temp_v10 = uiSearchSecondary(param_1 + 0x1fc);
       } while (temp_v8 < temp_v10);
     }
     if (*(char *)(param_1 + 0x260) != '\0') {

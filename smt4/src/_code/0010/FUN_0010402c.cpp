@@ -1,25 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010402c` (_code @ 0x10402c, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail ldr r1, [r1, #4]; compiler ldr r2, [r1, #4]. */
+#include "common.h"
+
+struct CurrencyData {
+    /* 0x00000 */ u8 unk00000[0x1F4E0];
+    /* 0x1F4E0 */ u32 currency;
+};
+struct CurrencyGlobals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ CurrencyData *data;
+};
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
+extern CurrencyGlobals g_gameDataBlocks;
 
-
-void FUN_0010402c(int param_1)
-
+/* Adds to the game currency and caps it at the configured maximum. */
+void FUN_0010402c(u32 amount)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = param_1 + *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x1f4e0);
-  if (temp_v0 >= 36000000) {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x1f4e0) = 35999999;
-  }
-  else {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x1f4e0) = temp_v0;
-  }
-  return;
+    u32 total = g_gameDataBlocks.data->currency + amount;
+    g_gameDataBlocks.data->currency = total > 0x22550FF ? 0x22550FF : total;
 }
 
 } /* extern "C" */

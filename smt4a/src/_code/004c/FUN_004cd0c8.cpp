@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_004bca68(...);
+int recordContainsPairedId(...);
 
 typedef struct fn_004cd0c8_arg0 fn_004cd0c8_arg0;
 struct fn_004cd0c8_arg0 {
@@ -30,7 +30,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_004bca68. */
+/* Supplied declaration required: recordContainsPairedId. */
 
 
 unsigned int FUN_004cd0c8(fn_004cd0c8_arg0 *param_1,int param_2,int param_3)
@@ -84,7 +84,7 @@ unsigned int FUN_004cd0c8(fn_004cd0c8_arg0 *param_1,int param_2,int param_3)
       temp_v2 = temp_v1 + temp_v4 * 4;
       temp_v3 = temp_v7;
       if ((*(short *)(temp_v2 + 0x52) != 0) && (*(unsigned short *)(temp_v2 + 0x50) > param_1->field_0x64)) {
-        temp_v3 = FUN_004bca68(param_1);
+        temp_v3 = recordContainsPairedId(param_1);
         if (temp_v3 == 0) {
           temp_v8[temp_v7 * 2] = *(unsigned short *)(temp_v1 + temp_v6 * 4 + 0x50);
           temp_v3 = temp_v7 + 1;
@@ -107,13 +107,13 @@ unsigned int FUN_004cd0c8(fn_004cd0c8_arg0 *param_1,int param_2,int param_3)
         temp_v1 = (unsigned int)temp_v8[temp_v7 * 2];
         if (((param_1->field_0x64 < temp_v1) &&
             ((int)temp_v1 <= (int)((unsigned int)param_1->field_0x64 + param_2))) &&
-           (temp_v5 = FUN_004bca68(param_1), temp_v5 == 0)) {
+           (temp_v5 = recordContainsPairedId(param_1), temp_v5 == 0)) {
           temp_v5 = temp_v4 * 2;
           temp_v4 = temp_v4 + 1;
           *(unsigned short *)(temp_v9 + temp_v5) = temp_v8[temp_v7 * 2 + 1];
         }
         if (((int)((unsigned int)param_1->field_0x64 + param_2) < (int)(unsigned int)temp_v8[temp_v7 * 2]) &&
-           (temp_v5 = FUN_004bca68(param_1,temp_v8[temp_v7 * 2 + 1]), temp_v5 == 0)) {
+           (temp_v5 = recordContainsPairedId(param_1,temp_v8[temp_v7 * 2 + 1]), temp_v5 == 0)) {
           temp_v0 = 0;
         }
       }

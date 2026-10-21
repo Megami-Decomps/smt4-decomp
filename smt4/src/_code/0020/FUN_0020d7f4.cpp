@@ -9,7 +9,7 @@ int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int asdMdlManagerCreateLoaded(unsigned char [132], int);
 int FUN_002a0428(void);
-int FUN_002be624(unsigned char [132], unsigned char *);
+int textFormatBuffer(unsigned char [132], unsigned char *);
 int FUN_002c58c8(int, int);
 
 extern unsigned char LAB_0020d8cc; /* 0x20d8cc */
@@ -20,7 +20,7 @@ extern int g_mapIf; /* 0x447a78 */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002c58c8. */
 
 
@@ -45,7 +45,7 @@ void FUN_0020d7f4(void)
   *(unsigned int *)(temp_v0 + 0xcbe0) = in_s1;
   *(unsigned int *)(temp_v0 + 0xcbe4) = in_s2;
   *(unsigned int *)(temp_v0 + 0xcbe8) = in_s3;
-  FUN_002be624(temp_v1,&LAB_0020d8cc);
+  textFormatBuffer(temp_v1,&LAB_0020d8cc);
   asdMdlManagerCreateLoaded(temp_v1,7);
   *(unsigned char **)(temp_v0 + 0xcbec) = puVar2;
   FUN_002a0428();

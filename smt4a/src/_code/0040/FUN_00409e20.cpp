@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001acf98(int, unsigned int);
-int FUN_003a4958(int, unsigned int);
-int FUN_003a496c(int, unsigned int);
+int asdTMTexLoadMainHeap(int, unsigned int);
+int resourceApplyNodeFlag(int, unsigned int);
+int asdTMTexNodeSetMode(int, unsigned int);
 
-/* Supplied declaration required: FUN_001acf98. */
-/* Supplied declaration required: FUN_003a4958. */
-/* Supplied declaration required: FUN_003a496c. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
+/* Supplied declaration required: resourceApplyNodeFlag. */
+/* Supplied declaration required: asdTMTexNodeSetMode. */
 
 
 void FUN_00409e20(int param_1,unsigned int param_2,unsigned int param_3)
@@ -21,7 +21,7 @@ void FUN_00409e20(int param_1,unsigned int param_2,unsigned int param_3)
   
   if ((param_2 & 8) != 0) {
     temp_v0 = 0xe;
-    FUN_003a4958(0xe,param_3);
+    resourceApplyNodeFlag(0xe,param_3);
   }
   else {
     if ((param_2 & 0x40) == 0) {
@@ -29,12 +29,12 @@ void FUN_00409e20(int param_1,unsigned int param_2,unsigned int param_3)
         return;
       }
       temp_v0 = 0xe;
-      FUN_001acf98(0xe,param_3);
+      asdTMTexLoadMainHeap(0xe,param_3);
       *(unsigned int *)(param_1 + 8) = temp_v0;
       return;
     }
     temp_v0 = 0xe;
-    FUN_003a496c(0xe,param_3);
+    asdTMTexNodeSetMode(0xe,param_3);
   }
   *(unsigned int *)(param_1 + 8) = temp_v0;
   return;

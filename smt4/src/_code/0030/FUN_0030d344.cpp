@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_0024add8(int, float *);
 int FUN_0024b5f0(...);
 int FUN_0024b660(...);
-int FUN_0024b77c(...);
+int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int FUN_00269508(...);
@@ -78,7 +78,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024add8. */
 /* Supplied declaration required: FUN_0024b5f0. */
 /* Supplied declaration required: FUN_0024b660. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_00269508. */
@@ -384,7 +384,7 @@ void FUN_0030d344(int param_1)
                 FUN_0024b830(0);
                 temp_v4 = 0;
                 pfVar7[0xd] = temp_v16 * temp_v10;
-                FUN_0024b77c();
+                randomAdvanceShiftRegister();
                 if ((temp_v4 & 1) != 0) {
                   pfVar7[0xe] = -pfVar7[0xe];
                 }
@@ -397,7 +397,7 @@ void FUN_0030d344(int param_1)
             fStack_6c = pfVar6[3];
             pfVar6[4] = 0.0f;
             if (temp_v1) {
-              FUN_0024b77c(0);
+              randomAdvanceShiftRegister(0);
               __aeabi_uidivmod();
               temp_v9 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v17 = CONCAT44(temp_v2,temp_v9);

@@ -1,31 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321c64` (_code @ 0x321c64, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail parameter lifetime, address formation or grouped-store selection differs. */
+#include "common.h"
 
+struct EffectEditorState {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ void *current;
+};
 extern "C" {
-
-int effBlockSetBlobB(unsigned int, unsigned int [2], int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char DAT_00400002; /* 0x400002 */
-extern unsigned char g_effectEditor; /* 0x44ea80 */
-
-/* Supplied declaration required: effBlockSetBlobB. */
-
-
-unsigned char * FUN_00321c64(void)
-
+extern EffectEditorState g_effectEditor;
+void effBlockSetBlobB(void *entry, u32 *value, u32 size, u32 mode, u32 reserved);
+/* Clears the current effect entry's scalar value. */
+u32 FUN_00321c64()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0 [2];
-  
-  temp_v0[0] = 0;
-  effBlockSetBlobB((*(unsigned int *)((unsigned char *)&g_effectEditor + 0x1c)),temp_v0,4);
-  return &DAT_00400002;
+    u32 value = 0;
+    effBlockSetBlobB(g_effectEditor.current, &value, 4, 4, 0);
+    return 0x400002;
 }
-
-} /* extern "C" */
+}

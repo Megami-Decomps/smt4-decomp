@@ -8,7 +8,7 @@ int FUN_00267144(void);
 int gameFlagIsSet(...);
 
 /* Supplied declaration required: FUN_00267144. */
-extern int FUN_002671bc(void);
+extern int dataTableGetRecordFifty(void);
 extern int FUN_0027d968(void);
 /* Supplied declaration required: gameFlagIsSet. */
 extern int gameGetMapBlock(void);
@@ -31,7 +31,7 @@ void FUN_00273c54(void)
   temp_v1 = gameGetMapBlock();
   temp_v5 = 0;
   pcVar7 = (char *)0x0;
-  temp_v2 = FUN_002671bc();
+  temp_v2 = dataTableGetRecordFifty();
   if (0 < temp_v2) {
     do {
       pcVar4 = pcVar7;
@@ -58,7 +58,7 @@ void FUN_00273c54(void)
         temp_v5 = temp_v5 + 1;
       }
       pcVar7 = pcVar7 + 1;
-      temp_v2 = FUN_002671bc();
+      temp_v2 = dataTableGetRecordFifty();
     } while ((int)pcVar7 < temp_v2);
   }
   return;

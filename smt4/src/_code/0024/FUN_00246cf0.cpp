@@ -1,34 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246cf0` (_code @ 0x246cf0, 0x8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int bgmStopNoForce(int, int);
-int soundChannelRequestIfEnabled(int, int, int);
+int bgmStopNoForce(int id, int arg);
+int soundChannelRequestIfEnabled(int id, int a, int b);
 
-/* Supplied declaration required: bgmStopNoForce. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x49D8];
+    /* 0x49D8 */ int current;
+} Obj;
 
-
-void FUN_00246cf0(int param_1,int param_2)
-
+/* Switches the current id: stops the old one, starts the new one. */
+void FUN_00246cf0(Obj *obj, int id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if (-1 < param_2) {
-    temp_v0 = *(int *)(param_1 + 0x49d8);
-    if (temp_v0 != param_2) {
-      if (temp_v0 != -1) {
-        bgmStopNoForce(temp_v0,0);
-      }
-      soundChannelRequestIfEnabled(param_2,0,10);
-      *(int *)(param_1 + 0x49d8) = param_2;
+    if (id < 0) return;
+
+    int current = obj->current;
+
+    if (current != id) {
+        if (current != -1) {
+            bgmStopNoForce(current, 0);
+        }
+        soundChannelRequestIfEnabled(id, 0, 10);
+        obj->current = id;
     }
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

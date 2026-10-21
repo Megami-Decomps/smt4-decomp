@@ -1,29 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c13d4` (_code @ 0x2c13d4, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'add r4, r3, #704'; compiler emits 'add r0, r3, #704' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
-
-extern int g_menuState; /* 0x57f56c */
-
-
-void FUN_002c13d4(unsigned short param_1,unsigned int param_2,unsigned int param_3)
-
-{
-  int temp_v0;
-  
-  temp_v0 = g_menuState;
-  *(unsigned int *)(g_menuState + 0x14) = 6;
-  *(unsigned short *)(temp_v0 + 0x18) = param_1;
-  *(unsigned int *)(temp_v0 + 0x2c0) = param_2;
-  *(unsigned int *)(temp_v0 + 0x2c4) = param_3;
-  *(unsigned char *)(temp_v0 + 0x2b1) = 0;
-  return;
+extern struct Work {
+    u8 pad[20];
+    u32 state;
+    u16 selection;
+    u8 gap[0x297];
+    u8 pending;
+    u8 gap2[14];
+    u32 first,second;
+} *g_menuState;
+void FUN_002c13d4(u16 selection,u32 first,u32 second) {
+    g_menuState->state=6;
+    g_menuState->selection=selection;
+    g_menuState->first=first;
+    g_menuState->second=second;
+    g_menuState->pending=0;
 }
-
-} /* extern "C" */
+}

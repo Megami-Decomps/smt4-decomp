@@ -1,28 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fff64` (_code @ 0x2fff64, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different stack-frame allocation and instruction scheduling. */
+#include "common.h"
+#include <stddef.h>
 extern "C" {
-
-int FUN_002f8242(void);
-
-extern int onlineSockAddrConstruct2(unsigned int, unsigned int);
-extern unsigned int *clearWords4(int);
-/* Supplied declaration required: FUN_002f8242. */
-
-
-unsigned int * FUN_002fff64(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = onlineSockAddrConstruct2(param_1,param_3);
-  puVar2 = (unsigned int *)clearWords4(temp_v0 + 0x20);
-  *puVar2 = param_2;
-  FUN_002f8242();
-  return puVar2 + -8;
+struct Object { u8 unk00[0x20]; u32 fields[4]; };
+Object *onlineSockAddrConstruct2(Object *object, u32 value);
+u32 *clearWords4(u32 *fields);
+void FUN_002f8242(void);
+/* Constructs the object, initializes its first cleared field, and performs setup. */
+Object *FUN_002fff64(Object *object, u32 field, u32 value) {
+    object = onlineSockAddrConstruct2(object, value);
+    u32 *fields = clearWords4(object->fields);
+    fields[0] = field;
+    FUN_002f8242();
+    return (Object *)((u8 *)fields - offsetof(Object, fields));
 }
-
-} /* extern "C" */
+}

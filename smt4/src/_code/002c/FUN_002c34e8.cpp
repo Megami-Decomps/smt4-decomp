@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 DAT_0044e0b0;
+extern u8 g_soundVolumeSetting;
 
 void FUN_002c34e8(u8 value)
 {
-    DAT_0044e0b0 = value;
+    g_soundVolumeSetting = value;
 }
 
 } /* extern "C" */

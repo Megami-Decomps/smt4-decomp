@@ -1,2 +1,15 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0036ef60's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+extern void *g_renderCtx;
+void *FUN_001575cc(void *context);
+void FUN_0035b76c(void *context);
+
+s32 FUN_0039aec8(void)
+{
+    FUN_0035b76c(FUN_001575cc(g_renderCtx));
+    return 0;
+}
+
+} /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ba12c(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c39a4(int);
 
 typedef int romwright_code(...);
@@ -17,14 +17,14 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern unsigned char DAT_0043e2f0; /* 0x43e2f0 */
+extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern int g_titleScene; /* 0x44ea00 */
 
 extern int FUN_00193c60(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -54,11 +54,11 @@ unsigned int FUN_003112ec(void)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     temp_v4 = 0.27f;
     FUN_002ba12c(g_titleScene);
-    FUN_002bf288(2,0xe,(*(unsigned short *)((unsigned char *)&DAT_0043e2f0 + 0x6)) + 0x185,(int)temp_v4,0,6);
+    FUN_002bf288(2,0xe,(*(unsigned short *)((unsigned char *)&g_byteSettings + 0x6)) + 0x185,(int)temp_v4,0,6);
     temp_v0 = g_titleScene;
     piVar5 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar5;
@@ -68,7 +68,7 @@ unsigned int FUN_003112ec(void)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
   }
   return 0;

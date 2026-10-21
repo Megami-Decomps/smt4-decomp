@@ -14,7 +14,7 @@ typedef struct {
 extern int randRange(unsigned int);
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003689d0. */
-extern int FUN_003b57f4(void);
+extern int dataTableGetRecordFortyNine(void);
 
 
 void FUN_003b9720(int param_1,int param_2)
@@ -34,7 +34,7 @@ void FUN_003b9720(int param_1,int param_2)
   temp_v2 = gameFlagsGetBlock();
   temp_v4 = 0;
   pcVar6 = (char *)0x0;
-  temp_v3 = FUN_003b57f4();
+  temp_v3 = dataTableGetRecordFortyNine();
   if (0 < temp_v3) {
     do {
       pcVar5 = pcVar6;
@@ -49,7 +49,7 @@ void FUN_003b9720(int param_1,int param_2)
         }
       }
       pcVar6 = pcVar6 + 1;
-      temp_v3 = FUN_003b57f4();
+      temp_v3 = dataTableGetRecordFortyNine();
     } while ((int)pcVar6 < temp_v3);
     if (temp_v4 != 0) {
       if (temp_v4 == 1) {
@@ -60,7 +60,7 @@ void FUN_003b9720(int param_1,int param_2)
       }
       temp_v5 = 0;
       pcVar6 = (char *)0x0;
-      temp_v4 = FUN_003b57f4();
+      temp_v4 = dataTableGetRecordFortyNine();
       if (0 < temp_v4) {
         do {
           pcVar5 = pcVar6;
@@ -92,7 +92,7 @@ void FUN_003b9720(int param_1,int param_2)
             temp_v5 = temp_v5 + 1;
           }
           pcVar6 = pcVar6 + 1;
-          temp_v4 = FUN_003b57f4();
+          temp_v4 = dataTableGetRecordFortyNine();
         } while ((int)pcVar6 < temp_v4);
       }
     }

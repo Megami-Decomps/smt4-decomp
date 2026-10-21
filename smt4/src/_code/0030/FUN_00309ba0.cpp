@@ -1,27 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00309ba0` (_code @ 0x309ba0, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct BustUp { u8 padding[0x5ec]; s32 state; }; }
 
 extern "C" {
-
-extern int g_bustupCutAnim; /* 0x43dfc0 */
-
-
-unsigned int FUN_00309ba0(void)
-
+/* Reads or updates the requested state. */
+extern BustUp *g_bustupCutAnim;
+s32 FUN_00309ba0(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (g_bustupCutAnim != 0) {
-    if (*(int *)(g_bustupCutAnim + 0x5ec) == 5) {
-      temp_v0 = 1;
+    if (g_bustupCutAnim == NULL) {
+        return 0;
     }
-    else {
-      temp_v0 = 0;
-    }
-  }
-  return temp_v0;
+    return g_bustupCutAnim->state == 5;
 }
-
-} /* extern "C" */
+}

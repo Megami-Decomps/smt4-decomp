@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0013c174(...);
 int asdMemoryAlloc(int, int, int, int, int);
 int asdMemFree(...);
@@ -36,7 +36,7 @@ extern unsigned char *DAT_0058022c; /* 0x58022c */
 extern unsigned char *DAT_00580230; /* 0x580230 */
 extern int *DAT_00580234; /* 0x580234 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemFree. */
@@ -68,28 +68,28 @@ void FUN_002a2e98(int param_1,unsigned int param_2,int param_3,unsigned int para
   DAT_00580205 = 0;
   if (param_1 != 100) {
     if (param_1 - 0x65U < 99) {
-      FUN_00100388(temp_v4,&LAB_002a31d4,param_1 - 100,param_1 - 100,param_2);
+      textFormatBuffer(temp_v4,&LAB_002a31d4,param_1 - 100,param_1 - 100,param_2);
     }
     else {
-      FUN_00100388(temp_v4,&LAB_002a3204,param_1,param_1,param_2);
+      textFormatBuffer(temp_v4,&LAB_002a3204,param_1,param_1,param_2);
     }
     if (param_1 == 0x2c || param_1 == 0x2f) {
-      FUN_00100388(temp_v4,&LAB_002a3204,0x2b,0x2b,2);
+      textFormatBuffer(temp_v4,&LAB_002a3204,0x2b,0x2b,2);
     }
     if (param_1 == 0x2d || param_1 == 0x2e) {
-      FUN_00100388(temp_v4,&LAB_002a3204,0x2b,0x2b,1);
+      textFormatBuffer(temp_v4,&LAB_002a3204,0x2b,0x2b,1);
     }
   }
   else {
-    FUN_00100388(temp_v4,&LAB_002a31f0);
+    textFormatBuffer(temp_v4,&LAB_002a31f0);
   }
   if (param_3 != 0) {
     temp_v0 = 1;
     if (param_3 - 0x65U < 99) {
-      FUN_00100388(temp_v5,&LAB_002a31d4,param_3 - 100,param_3 - 100,param_4);
+      textFormatBuffer(temp_v5,&LAB_002a31d4,param_3 - 100,param_3 - 100,param_4);
     }
     else {
-      FUN_00100388(temp_v5,&LAB_002a3204,param_3,param_3,param_4);
+      textFormatBuffer(temp_v5,&LAB_002a3204,param_3,param_3,param_4);
     }
   }
   puVar2 = temp_v4;

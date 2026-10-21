@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003fd784(void);
+int controllerSetPosition(void);
 
-/* Supplied declaration required: FUN_003fd784. */
+/* Supplied declaration required: controllerSetPosition. */
 
 
 void FUN_003e5558(int param_1)
@@ -18,7 +18,7 @@ void FUN_003e5558(int param_1)
   int temp_v2;
   
   if (*(int *)(*(int *)(param_1 + 8) + 4) != 0) {
-    FUN_003fd784();
+    controllerSetPosition();
   }
   temp_v2 = 0;
   do {
@@ -28,7 +28,7 @@ void FUN_003e5558(int param_1)
       temp_v1 = *(int *)(temp_v0 + 4);
     }
     if (temp_v0 != 0 && temp_v1 != 0) {
-      FUN_003fd784();
+      controllerSetPosition();
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);

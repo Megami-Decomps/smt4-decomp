@@ -1,34 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029bb14` (_code @ 0x29bb14, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Part { u8 padding[0x40]; f32 value; }; struct Owner { u8 padding[0x34]; s32 count; u8 gap[0x14]; Part *part; u8 gap2[0x24]; f32 factor; f32 value; }; }
 
 extern "C" {
-
-typedef struct fn_0029bb14_arg0 fn_0029bb14_arg0;
-struct fn_0029bb14_arg0 {
-    unsigned char pad_0x0[0x34];
-    int field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x14];
-    void *field_0x4c; /* +0x4c */
-    unsigned char pad_0x50[0x24];
-    float field_0x74; /* +0x74 */
-    float field_0x78; /* +0x78 */
-};
-
-
-void FUN_0029bb14(fn_0029bb14_arg0 *param_1)
-
+/* Reads or updates the requested object state. */
+void FUN_0029bb14(Owner *owner, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  param_1->field_0x78 = in_s0;
-  if (0 < param_1->field_0x34) {
-    if (param_1->field_0x4c != (void *)0x0) {
-      *(float *)((int)param_1->field_0x4c + 0x40) = param_1->field_0x74 * in_s0;
+    owner->value = value;
+    if (owner->count > 0) {
+        f32 scaled = owner->factor * value;
+        if (owner->part != NULL) {
+            owner->part->value = scaled;
+        }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

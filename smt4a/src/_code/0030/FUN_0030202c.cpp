@@ -1,37 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030202c` (_code @ 0x30202c, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r1, r2, r3, r4, r5, r6, r7, lr}'; compiler emits 'push {r4, r5, r6, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int onlineInstanceTableFind(int, unsigned int);
-int onlineJobSetStateDone(void);
-int FUN_002fa722(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002fa722. */
-
-
-void FUN_0030202c(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  onlineJobSetStateDone();
-  temp_v0 = onlineInstanceTableGetCurrent();
-  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
-  if (temp_v0 != 0) {
-    FUN_002fa722();
-  }
-  return;
+struct Triple { u32 first, second, third; };
+struct Object { u8 unk00[0x68]; u32 id; };
+void *onlineInstanceTableGetCurrent(void);
+void *onlineInstanceTableFind(void *table, u32 id);
+void FUN_002fa722(void *instance, u32 argument, const Triple *value);
+void onlineJobSetStateDone(Object *object);
+void FUN_0030202c(Object *object, u32 argument, const Triple *source) {
+    onlineJobSetStateDone(object);
+    void *instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(), object->id);
+    if (instance) {
+        Triple value = *source;
+        FUN_002fa722(instance, argument, &value);
+    }
 }
-
-} /* extern "C" */
+}

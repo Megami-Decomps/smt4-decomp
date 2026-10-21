@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(void);
 int FUN_001568f8(int, int);
-int FUN_003fd76c(unsigned int, float *);
+int controllerSetDestination(unsigned int, float *);
 int FUN_003fd7b4(unsigned int);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_003fe9b4(unsigned int, unsigned char [24]);
@@ -26,7 +26,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_003ef9e0(unsigned int, int);
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_003fe9b4. */
@@ -81,7 +81,7 @@ void FUN_004f5fb8(int param_1,int param_2)
     temp_v7 = temp_v7 + *(float *)(temp_v3 + 0xc);
     temp_v8 = temp_v8 + *(float *)(temp_v3 + 0x10);
     temp_v9 = temp_v9 + *(float *)(temp_v3 + 0x14);
-    FUN_003fd76c(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 4),&temp_v7);
+    controllerSetDestination(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 4),&temp_v7);
   }
   return;
 }

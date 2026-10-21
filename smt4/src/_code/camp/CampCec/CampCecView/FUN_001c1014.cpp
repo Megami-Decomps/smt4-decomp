@@ -11,7 +11,7 @@ int FUN_0030a84c(...);
 int SBORROW4(...);
 
 int FUN_0026ef04(...);
-int FUN_0026efec(...);
+int saveGetIndexedMapValue(...);
 int FUN_0026f100(int, int, unsigned int);
 int FUN_0026f188(unsigned int, int);
 int FUN_0026f204(...);
@@ -39,7 +39,7 @@ extern int g_campCecView; /* 0x43db10 */
 /* Supplied declaration required: FUN_0026ee14. */
 extern int FUN_0026ee68(unsigned int);
 /* Supplied declaration required: FUN_0026ef04. */
-/* Supplied declaration required: FUN_0026efec. */
+/* Supplied declaration required: saveGetIndexedMapValue. */
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026f100. */
 /* Supplied declaration required: FUN_0026f188. */
@@ -328,7 +328,7 @@ LAB_001c1220:
   }
   else {
     if (*(int *)(temp_v0 + 0x158) >= 3) {
-      temp_v1 = FUN_0026efec(temp_v7);
+      temp_v1 = saveGetIndexedMapValue(temp_v7);
       if ((*(unsigned char *)(temp_v1 + 0x20) & 0x10) != 0) {
         *(unsigned char *)(temp_v1 + 0x20) = *(unsigned char *)(temp_v1 + 0x20) & 0xef;
       }
@@ -336,13 +336,13 @@ LAB_001c1220:
     temp_v1 = g_campCecView;
     temp_v7 = 0;
     do {
-      temp_v8 = FUN_0026efec(*(int *)(temp_v1 + 0x140) + temp_v7);
+      temp_v8 = saveGetIndexedMapValue(*(int *)(temp_v1 + 0x140) + temp_v7);
       if (*(short *)(temp_v8 + 0x48) != 0) {
         FUN_0026ef04(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 300),temp_v8);
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 3);
-    temp_v2 = FUN_0026efec(*(unsigned int *)(temp_v1 + 0x13c));
+    temp_v2 = saveGetIndexedMapValue(*(unsigned int *)(temp_v1 + 0x13c));
     *(unsigned int *)(temp_v1 + 0xc) = temp_v2;
     FUN_002bf810(0x100016c);
     temp_v8 = 1;
@@ -541,7 +541,7 @@ LAB_001c1220:
     }
     if (*(int *)(temp_v0 + 0x13c) != temp_v9) {
       if (*(int *)(temp_v0 + 0x158) >= 3) {
-        temp_v1 = FUN_0026efec(temp_v9);
+        temp_v1 = saveGetIndexedMapValue(temp_v9);
         if ((*(unsigned char *)(temp_v1 + 0x20) & 0x10) != 0) {
           *(unsigned char *)(temp_v1 + 0x20) = *(unsigned char *)(temp_v1 + 0x20) & 0xef;
         }
@@ -549,13 +549,13 @@ LAB_001c1220:
       temp_v1 = g_campCecView;
       temp_v7 = 0;
       do {
-        temp_v8 = FUN_0026efec(*(int *)(temp_v1 + 0x140) + temp_v7);
+        temp_v8 = saveGetIndexedMapValue(*(int *)(temp_v1 + 0x140) + temp_v7);
         if (*(short *)(temp_v8 + 0x48) != 0) {
           FUN_0026ef04(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 300),temp_v8);
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 3);
-      temp_v2 = FUN_0026efec(*(unsigned int *)(temp_v1 + 0x13c));
+      temp_v2 = saveGetIndexedMapValue(*(unsigned int *)(temp_v1 + 0x13c));
       *(unsigned int *)(temp_v1 + 0xc) = temp_v2;
       FUN_002bf810(0x100016c);
       temp_v8 = 1;

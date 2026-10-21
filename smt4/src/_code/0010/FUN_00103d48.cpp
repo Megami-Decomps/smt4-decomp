@@ -1,40 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00103d48` (_code @ 0x103d48, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail beq 3c; compiler beq 38. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c3414(int);
-int FUN_002c3510(void);
+extern u8 DAT_00465210;
+extern void FUN_002c3414(void);
+extern s32 FUN_002c3dfc(void);
+extern void FUN_002c3510(void);
 
-extern signed char DAT_00465210; /* 0x465210 */
-
-/* Supplied declaration required: FUN_002c3414. */
-/* Supplied declaration required: FUN_002c3510. */
-extern unsigned int FUN_002c3dfc(void);
-
-
-unsigned int FUN_00103d48(void)
-
+/* Completes pending initialization and clears its flag on success. */
+bool FUN_00103d48(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (DAT_00465210 == '\0') {
-    temp_v0 = 1;
-  }
-  else {
-    FUN_002c3414(DAT_00465210);
-    temp_v1 = FUN_002c3dfc();
-    FUN_002c3510();
-    temp_v0 = 0;
-    if ((temp_v1 & 0x80000000) == 0) {
-      DAT_00465210 = '\0';
-      temp_v0 = 1;
+    if (DAT_00465210 == 0) {
+        return true;
     }
-  }
-  return temp_v0;
+    FUN_002c3414();
+    s32 status = FUN_002c3dfc();
+    FUN_002c3510();
+    if (status >= 0) {
+        DAT_00465210 = 0;
+        return true;
+    }
+    return false;
 }
 
 } /* extern "C" */

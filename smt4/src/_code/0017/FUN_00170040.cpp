@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: its address is in nn_dsp_CTR_DSP_SetSemaphoreMask's literal pool; not written yet. */
+/* NON_MATCHING: fragment of a larger function (uses r4-r9/fp as live decoder registers and restores a frame it never created). */
 #include "common.h"

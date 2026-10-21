@@ -6,7 +6,7 @@ extern "C" {
 
 int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int rt_aeabi_memclr(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
@@ -32,7 +32,7 @@ extern int asdLoadFileHasDevice(unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: asdFatalError. */
 /* Supplied declaration required: FUN_002c618c. */
@@ -58,15 +58,15 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   puVar4 = temp_v1;
   rt_aeabi_memclr(temp_v4,0x100);
   if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_1), temp_v0 != 0)) {
-    FUN_002be624(temp_v4,param_1);
+    textFormatBuffer(temp_v4,param_1);
   }
   else {
     temp_v0 = asdLoadFileIsPatched(param_1);
     if (temp_v0 != 0) {
-      FUN_002be624(temp_v4,"patch:/%s",param_1);
+      textFormatBuffer(temp_v4,"patch:/%s",param_1);
     }
     else {
-      FUN_002be624(temp_v4,"rom:/%s",param_1);
+      textFormatBuffer(temp_v4,"rom:/%s",param_1);
     }
   }
   temp_v3[0] = 0;

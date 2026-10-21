@@ -1,28 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ec154` (_code @ 0x3ec154, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r4, [pc, #32] where the compiled block uses ldr r1, [pc, #36]. */
+#include "common.h"
 
 extern "C" {
 
-int nn_os_CriticalSection_Initialize(unsigned int *);
+extern u32 DAT_004c6458;
+extern u8 entry;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+void nn_os_CriticalSection_Initialize(u32* criticalSection);
+void FUN_003574a8(void* object);
+s32 sceneNotifyNoop(void* object, void (*destructor)(void*), void* moduleHandle);
 
-extern unsigned int DAT_004c6458; /* 0x4c6458 */
-
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-
-
-unsigned long long FUN_003ec154(void)
-
+void FUN_003ec154(void)
 {
-/* irregular: 1 native warning(s); review required */
-  DAT_004c6458 = 0;
-  nn_os_CriticalSection_Initialize(&DAT_004c6458);
-  return 0x3574a8004c6458;
+    DAT_004c6458 = 0;
+    nn_os_CriticalSection_Initialize(&DAT_004c6458);
+    sceneNotifyNoop(&DAT_004c6458, FUN_003574a8, &entry);
 }
 
-} /* extern "C" */
+}

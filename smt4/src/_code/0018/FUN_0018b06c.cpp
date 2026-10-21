@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b76d0(int *);
 int FUN_002ba12c(int);
 int FUN_002bed3c(void);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c1b64(int, int);
 int FUN_002c39a4(int);
 int VectorSignedToFloat(int, int);
@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -81,7 +81,7 @@ unsigned int FUN_0018b06c(void)
       FUN_002ba12c(g_titleScene);
       VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002b76d0(&temp_v5);
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v0 = g_titleScene;
       piVar5 = (int *)(g_titleScene + 0x124c);
       temp_v1 = *piVar5;

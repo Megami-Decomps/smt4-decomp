@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0014e188(...);
 int FUN_0014e220(...);
 int paramsInit(...);
@@ -56,7 +56,7 @@ extern unsigned char DAT_0052f3b4; /* 0x52f3b4 */
 extern unsigned char DAT_0052f3c0; /* 0x52f3c0 */
 extern int DAT_0057f2c4; /* 0x57f2c4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_0014e220. */
@@ -228,7 +228,7 @@ void FUN_002a74ac(void)
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
   FUN_00184310();
   temp_v3 = FUN_003316b4((int)*(char *)(temp_v1 + 0x38));
-  FUN_00100388(temp_v12,&LAB_002a7a7c,temp_v3 + 1);
+  textFormatBuffer(temp_v12,&LAB_002a7a7c,temp_v3 + 1);
   puVar4 = temp_v12;
   FUN_0020214c();
   *(unsigned char **)(temp_v0 + 0x33c) = puVar4;

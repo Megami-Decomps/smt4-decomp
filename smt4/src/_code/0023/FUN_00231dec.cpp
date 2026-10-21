@@ -10,12 +10,12 @@ int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
 int FUN_00288f78(...);
 int FUN_002be5a4(...);
-int FUN_002be624(unsigned char [128], unsigned char *);
+int textFormatBuffer(unsigned char [128], unsigned char *);
 int FUN_002bed3c(void);
 int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int libc_strcpy(...);
 int FUN_0039f63c(...);
 int FUN_0039fb38(...);
@@ -42,11 +42,11 @@ extern int DAT_0049f920; /* 0x49f920 */
 /* Supplied declaration required: FUN_00231bb8. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: lmapSceneGetObj. */
-extern unsigned int FUN_0023342c(int, unsigned int);
+extern unsigned int curveEvaluateStandard(int, unsigned int);
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_00288f78. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
@@ -54,7 +54,7 @@ extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
 extern int gameGetMapBlock(void);
@@ -106,7 +106,7 @@ void FUN_00231dec(int param_1)
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
     FUN_00231bb8(param_1 + 0x164,&temp_v16);
   }
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_002bed3c();
   FUN_002bf380(2,0x1c,8,(int)temp_v16,(int)temp_v17,DAT_0044cdd8);
   temp_v9 = param_1 + 0x12268;
@@ -124,13 +124,13 @@ void FUN_00231dec(int param_1)
         libc_strcpy(temp_v9,temp_v3);
       }
       else {
-        FUN_002be624(temp_v15,&LAB_00232470);
+        textFormatBuffer(temp_v15,&LAB_00232470);
         libc_strcpy(temp_v9,temp_v15);
       }
     }
   }
   if (*(char *)(param_1 + 0x12268) != '\0') {
-    temp_v3 = FUN_0023342c(temp_v9,2);
+    temp_v3 = curveEvaluateStandard(temp_v9,2);
     temp_v14 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = FUN_002bf4f8(0x1c,0xfb4);
     temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,21 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00436be8` (_code @ 0x436be8, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_00436be8(unsigned int *param_1)
-
-{
-  *param_1 = 0;
-  param_1[1] = (unsigned int)(param_1 + 1);
-  param_1[3] = 0;
-  param_1[2] = (unsigned int)(param_1 + 1);
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  return;
-}
-
-} /* extern "C" */
+/* NON_MATCHING: compiler merges count and sentinel stores and reorders zero stores. */
+#include "common.h"
+struct ListLink { ListLink *next,*previous; };
+struct ListOwner { u32 count; ListLink sentinel; u32 first,second,third; u32 fourth; };
+/* Initializes the empty list and clears its state words. */
+extern "C" void FUN_00436be8(ListOwner *owner) { owner->count=0; owner->sentinel.next=&owner->sentinel; owner->first=0; owner->sentinel.previous=&owner->sentinel; owner->second=0;owner->third=0;owner->fourth=0; }

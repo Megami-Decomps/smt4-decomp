@@ -64,7 +64,7 @@ extern unsigned int *FUN_002c2c68(int);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_00359b6c. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_0037e1b0. */
@@ -130,7 +130,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       temp_v1 = *(char *)(param_1 + 0x8eac);
       *puVar12 = 0;
       if (temp_v11 != 0) {
-        temp_v5 = FUN_00348ed0(temp_v14);
+        temp_v5 = uiSearchPrimary(temp_v14);
         flaggedEntrySetValueA(temp_v14,temp_v5 - 1);
         *puVar12 = 1;
       }

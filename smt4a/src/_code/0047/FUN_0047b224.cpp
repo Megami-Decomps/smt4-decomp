@@ -15,7 +15,7 @@ int FUN_0021c118(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int msgWindowReset(void);
 int FUN_0034913c(void);
-int FUN_0038afe8(void);
+int messageClearActiveFlags(void);
 int FUN_00477d10(...);
 int releaseEntriesA(unsigned int *);
 int releaseEntriesB(unsigned int *);
@@ -48,7 +48,7 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_0034913c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int obj04StateIs4(void);
-/* Supplied declaration required: FUN_0038afe8. */
+/* Supplied declaration required: messageClearActiveFlags. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: releaseEntriesB. */
@@ -152,7 +152,7 @@ void FUN_0047b224(unsigned int *param_1)
     eventQueueAddUniqueIfValid(0x100020e);
     msgWindowReset();
     FUN_0034913c();
-    FUN_0038afe8();
+    messageClearActiveFlags();
     ifTouchRegionRemove();
     ifTouchRegionRemove();
     piVar3 = (int *)param_1[0x82];

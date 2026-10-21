@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemoryAllocTracked(...);
 int FUN_001bce30(...);
 int asdFileRequestSetHeapKind(...);
@@ -19,7 +19,7 @@ typedef struct {
 extern int FUN_001bcd8c(...); /* 0x1bcd8c */
 extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: FUN_001bce30. */
@@ -40,10 +40,10 @@ void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int par
   
   sysMemClear(temp_v1,0x100);
   if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = FUN_0019dbb8(param_1), temp_v0 != 0)) {
-    FUN_00100388(temp_v1,param_1);
+    textFormatBuffer(temp_v1,param_1);
   }
   else {
-    FUN_00100388(temp_v1,"rom:/%s",param_1);
+    textFormatBuffer(temp_v1,"rom:/%s",param_1);
   }
   piVar2 = (int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x18,0);

@@ -8,7 +8,7 @@ int FUN_0011d58c(int);
 int FUN_0011d798(unsigned int, unsigned char [4], unsigned char [4], int *);
 int nn_gxlow_CTR_SaveVramSysArea(void);
 int FUN_0012a7c8(void);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int FUN_002bb180(void);
 int FUN_002bb194(int);
 int FUN_002bb20c(void);
@@ -30,7 +30,7 @@ extern int FUN_0011d6f0(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0011d798. */
 /* Supplied declaration required: nn_gxlow_CTR_SaveVramSysArea. */
 /* Supplied declaration required: FUN_0012a7c8. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bb180. */
 /* Supplied declaration required: FUN_002bb194. */
 /* Supplied declaration required: FUN_002bb20c. */
@@ -71,7 +71,7 @@ int FUN_00110180(unsigned int param_1,unsigned int param_2,unsigned int param_3)
       }
       nn_applet_CTR_detail_CloseSession();
       if (((unsigned int)temp_v1 & 0xff) != 0) break;
-      FUN_002bb150(10000000,0);
+      threadSleepDuration(10000000,0);
     }
     DAT_0044e361 = 1;
     nn_gxlow_CTR_SaveVramSysArea();

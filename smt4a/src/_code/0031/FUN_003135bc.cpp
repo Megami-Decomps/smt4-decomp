@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern int DAT_005806cc; /* 0x5806cc */
+extern int g_activeTextureSlot; /* 0x5806cc */
 extern unsigned int DAT_005806d0; /* 0x5806d0 */
 extern int g_lmapScene; /* 0x581288 */
 
@@ -53,16 +53,16 @@ void FUN_003135bc(void)
   FUN_001bc124();
   temp_v7 = temp_v7 + temp_v5 * in_s1;
   FUN_001bbf0c();
-  temp_v0 = DAT_005806cc;
+  temp_v0 = g_activeTextureSlot;
   temp_v2 = 0;
-  while (*(int *)(DAT_005806cc + temp_v2 * 4 + 4) != 0) {
+  while (*(int *)(g_activeTextureSlot + temp_v2 * 4 + 4) != 0) {
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0x40) {
       return;
     }
   }
-  temp_v4 = DAT_005806cc + temp_v2 * 4;
-  temp_v3 = DAT_005806cc + temp_v2 * 0xc;
+  temp_v4 = g_activeTextureSlot + temp_v2 * 4;
+  temp_v3 = g_activeTextureSlot + temp_v2 * 0xc;
   *(float *)(temp_v3 + 0x104) = temp_v7;
   *(float *)(temp_v3 + 0x108) = temp_v8;
   *(float *)(temp_v3 + 0x10c) = temp_v9 + temp_v6 * in_s1;

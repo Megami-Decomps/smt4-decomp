@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014f0dc(unsigned int, int, float *, float *);
 int FUN_001523b8(unsigned int, int);
-int FUN_003fd76c(unsigned int, int);
+int controllerSetDestination(unsigned int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX34CopyAsm(float *, unsigned int *);
@@ -52,7 +52,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_001523b8. */
 extern unsigned int FUN_00152f54(void);
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -110,7 +110,7 @@ void FUN_00407450(int param_1)
       *(float *)(param_1 + 0x608) = *(float *)(param_1 + 0x608) + *(float *)(param_1 + 0x5fc);
       *(float *)(param_1 + 0x60c) = *(float *)(param_1 + 0x60c) + *(float *)(param_1 + 0x600);
       *(float *)(param_1 + 0x610) = *(float *)(param_1 + 0x610) + *(float *)(param_1 + 0x604);
-      FUN_003fd76c(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
+      controllerSetDestination(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
     }
     temp_v0 = *(int *)(param_1 + 0x10) + 1;
     *(unsigned int *)(param_1 + 0x10) = temp_v0;
@@ -126,7 +126,7 @@ void FUN_00407450(int param_1)
         *(unsigned int *)(param_1 + 0x608) = *(unsigned int *)(param_1 + 0x614);
         *(unsigned int *)(param_1 + 0x60c) = *(unsigned int *)(param_1 + 0x618);
         *(unsigned int *)(param_1 + 0x610) = *(unsigned int *)(param_1 + 0x61c);
-        FUN_003fd76c(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
+        controllerSetDestination(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
       }
     }
   }

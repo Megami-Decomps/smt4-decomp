@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001bbf0c(void);
 int FUN_001bc124(int, int);
 int FUN_00272e64(void);
-int FUN_00352bc4(int, int);
+int mathPositionHeadingDegrees(int, int);
 int FUN_003534b0(...);
 int VectorSignedToFloat(int, int);
 
@@ -35,7 +35,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bc124. */
 extern int FUN_002393cc(unsigned int);
 /* Supplied declaration required: FUN_00272e64. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003534b0. */
 extern unsigned int FUN_003857c8(int);
 
@@ -63,7 +63,7 @@ void FUN_00332fd8(void)
     VectorSignedToFloat((int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe00),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe01),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00352bc4((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
+    mathPositionHeadingDegrees((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
     FUN_00272e64();
     temp_v4 = (short)*(char *)(temp_v2 + 0xe0a) * 700 + 0x15e;
     temp_v2 = (short)*(char *)(temp_v2 + 0xe0b) * 700 + 0x15e;

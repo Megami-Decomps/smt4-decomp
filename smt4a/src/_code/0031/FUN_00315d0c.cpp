@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00232d58's literal pool; not written yet. */
 #include "common.h"
+extern "C" {
+extern void *g_mapEnemy;
+void asdMemFree(void *memory);
+/* Releases the module's allocation and clears its pointer. */
+void FUN_00315d0c(void) {
+    if (g_mapEnemy != NULL) {
+        asdMemFree(g_mapEnemy);
+        g_mapEnemy = NULL;
+    }
+}
+}

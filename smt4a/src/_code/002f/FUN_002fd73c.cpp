@@ -1,30 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd73c` (_code @ 0x2fd73c, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses a larger address-taken-argument frame than retail. */
+#include "common.h"
 extern "C" {
-
-int FUN_00307d38(int *, int, int *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00307d38. */
-
-
-void FUN_002fd73c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int uStack_c;
-  
-  temp_v0 = **(unsigned int **)(param_1 + 0x10);
-  uStack_c = param_4;
-  FUN_00307d38(&uStack_c,param_1,&temp_v0);
-  return;
+struct Object { u8 unk00[0x10]; const u32 *value; };
+void FUN_00307d38(u32 *output, Object *object, const u32 *value);
+/* Converts the referenced scalar using the current object. */
+void FUN_002fd73c(Object *object, u32 unusedA, u32 unusedB, u32 output) {
+    u32 value = *object->value;
+    FUN_00307d38(&output, object, &value);
 }
-
-} /* extern "C" */
+}

@@ -8,7 +8,7 @@ typedef struct HalfAt10Rec {
 } HalfAt10Rec;
 
 extern void btlGetMainState(void);
-extern u32 FUN_003e8430(void);
+extern u32 btlScriptUnitHasFlags(void);
 extern s32 FUN_004f59b0(u32 a);
 extern HalfAt10Rec *FUN_004f7aa4(u32 a, u32 b);
 
@@ -18,7 +18,7 @@ s32 resolveBattleValue(u32 a, u32 b)
     HalfAt10Rec *rec;
 
     btlGetMainState();
-    if (FUN_003e8430() != 0) {
+    if (btlScriptUnitHasFlags() != 0) {
         result = 5;
     } else {
         rec = FUN_004f7aa4(a, b);

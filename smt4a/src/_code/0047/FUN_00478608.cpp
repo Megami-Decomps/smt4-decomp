@@ -11,7 +11,7 @@ int FUN_001ba1c0(int, int *);
 int FUN_00275bc8(void *, unsigned int);
 int msgWindowReset(void);
 int FUN_0034913c(void);
-int FUN_0047daf4(int *);
+int timeInitializeActiveState(int *);
 
 typedef struct fn_00478608_arg0 fn_00478608_arg0;
 struct fn_00478608_arg0 {
@@ -52,7 +52,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_0034913c. */
-/* Supplied declaration required: FUN_0047daf4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 
 
 void FUN_00478608(fn_00478608_arg0 *param_1)
@@ -103,7 +103,7 @@ void FUN_00478608(fn_00478608_arg0 *param_1)
     temp_v0 = *(unsigned int *)(g_aocMain + 0x754);
     *(unsigned int *)(g_aocMain + 0x754) = temp_v0 & 0xffffff8f;
     if ((temp_v0 & 0x10) == 0) {
-      FUN_0047daf4(&temp_v1);
+      timeInitializeActiveState(&temp_v1);
       puVar3 = temp_v8;
       (*(unsigned char *)((unsigned char *)&temp_v1 + 0)) = 1;
       temp_v4 = 0;

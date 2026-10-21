@@ -30,7 +30,7 @@ extern unsigned int DAT_00573bac; /* 0x573bac */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_003363a8. */
-extern int FUN_003e8430(void);
+extern int btlScriptUnitHasFlags(void);
 
 
 void FUN_00231cdc(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -55,7 +55,7 @@ void FUN_00231cdc(int param_1,unsigned int param_2,int param_3,unsigned int para
     return;
   }
   btlGetMainState();
-  temp_v1 = FUN_003e8430();
+  temp_v1 = btlScriptUnitHasFlags();
   if ((temp_v1 == 0) &&
      (temp_v1 = btlGetMainState(),
      (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573bac) == 0 &&
@@ -99,7 +99,7 @@ void FUN_00231cdc(int param_1,unsigned int param_2,int param_3,unsigned int para
     }
     if (temp_v1 != 0x11) {
       btlGetMainState();
-      temp_v1 = FUN_003e8430();
+      temp_v1 = btlScriptUnitHasFlags();
       if ((temp_v1 == 0) &&
          (temp_v1 = btlGetMainState(),
          (DAT_00573ba8 & *(unsigned int *)(temp_v1 + 0x45a0)) == 0 &&

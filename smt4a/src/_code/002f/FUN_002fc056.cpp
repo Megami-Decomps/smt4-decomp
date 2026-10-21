@@ -1,44 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fc056` (_code @ 0x2fc056, 0x32 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r5, r0'; compiler emits 'mov r5, r2' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int rt_memcpy(...);
-
-typedef struct fn_002fc056_arg0 fn_002fc056_arg0;
-struct fn_002fc056_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0xc];
-    int field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x4];
-    int field_0x1c; /* +0x1c */
+struct Buffer {
+    u32 reserved;
+    u8 *data;
+    u8 pad[12];
+    u32 start;
+    u8 gap[4];
+    u32 end;
 };
-
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_002fc056(fn_002fc056_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = param_1->field_0x1c - param_1->field_0x14;
-  temp_v0 = param_1->field_0x4 + param_1->field_0x14;
-  if (temp_v1 <= param_3) {
-    rt_memcpy(param_2,temp_v0,temp_v1,param_4,param_4);
-    param_3 = param_3 - temp_v1;
-    if (param_3 == 0) {
-      return;
+void *rt_memcpy(void *,const void *,u32);
+void FUN_002fc056(Buffer *buffer,u8 *output,u32 size,u32 stride) {
+    u32 available=buffer->end-buffer->start;
+    const u8 *input=buffer->data+buffer->start;
+    if(available<=size) {
+        rt_memcpy(output,input,available);
+        size-=available;
+        if(!size)return;
+        input=buffer->data;
+        output+=available;
     }
-    temp_v0 = param_1->field_0x4;
-    param_2 = param_2 + temp_v1;
-  }
-  rt_memcpy(param_2,temp_v0,param_3);
-  return;
+    rt_memcpy(output,input,size);
 }
-
-} /* extern "C" */
+}

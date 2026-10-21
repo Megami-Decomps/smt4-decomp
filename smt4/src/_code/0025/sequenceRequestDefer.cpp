@@ -1,21 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sequenceRequestDefer` (_code @ 0x25930c, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "shard/W5_W5Match2_SequencePending.h"
 extern "C" {
-
-extern unsigned char DAT_004937a0; /* 0x4937a0 */
-extern unsigned int DAT_004937a4; /* 0x4937a4 */
-extern unsigned int DAT_004937a8; /* 0x4937a8 */
-
-
-void sequenceRequestDefer(unsigned int param_1,unsigned int param_2)
-
-{
-  DAT_004937a0 = 1;
-  DAT_004937a4 = param_1;
-  DAT_004937a8 = param_2;
-  return;
+extern SequencePending DAT_004937a0;
+/* Defer the supplied sequence request until the next update. */
+void sequenceRequestDefer(u32 id,u32 argument) { DAT_004937a0.active=1; DAT_004937a0.id=id; DAT_004937a0.argument=argument; }
 }
-
-} /* extern "C" */

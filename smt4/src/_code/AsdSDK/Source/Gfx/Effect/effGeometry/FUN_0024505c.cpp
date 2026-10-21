@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002693b4(int, int, int, int);
+int recordPrepareActive(int, int, int, int);
 int asdOperatorNew(int, int);
 int memAlloc(int, int, int, int, int, int);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002693b4. */
+/* Supplied declaration required: recordPrepareActive. */
 extern int FUN_002693e4(void);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memAlloc. */
@@ -47,7 +47,7 @@ unsigned short * FUN_0024505c(int param_1,short *param_2,int param_3,unsigned sh
   else {
     temp_v4 = FUN_002693e4();
   }
-  FUN_002693b4(temp_v4,0x25,param_1 * temp_v3 * 3,temp_v5);
+  recordPrepareActive(temp_v4,0x25,param_1 * temp_v3 * 3,temp_v5);
   *puVar5 = param_4;
   *(int *)(puVar5 + 4) = temp_v4;
   puVar5[1] = (short)temp_v5;

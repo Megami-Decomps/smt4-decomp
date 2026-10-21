@@ -6,7 +6,7 @@ extern "C" {
 
 int libc_strcpy(unsigned char *);
 int effMenuNodeCreate(void);
-int FUN_00390364(void);
+int engineFreeCallback(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,9 +21,9 @@ extern int DAT_0059e9b4; /* 0x59e9b4 */
 
 extern unsigned int wstrlen(int);
 /* Supplied declaration required: libc_strcpy. */
-extern int FUN_00300778(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: effMenuNodeCreate. */
-/* Supplied declaration required: FUN_00390364. */
+/* Supplied declaration required: engineFreeCallback. */
 
 
 void FUN_003bb01c(void)
@@ -35,7 +35,7 @@ void FUN_003bb01c(void)
   int temp_v1;
   
   if (DAT_0059dc24 != (unsigned int *)0x0) {
-    FUN_00390364();
+    engineFreeCallback();
   }
   puVar2 = (unsigned int *)&LAB_003bb080;
   effMenuNodeCreate();
@@ -43,7 +43,7 @@ void FUN_003bb01c(void)
   *puVar2 = 0xc2;
   puVar2[1] = 200;
   DAT_0059dc24[5] = 9;
-  temp_v1 = FUN_00300778(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
+  temp_v1 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
   puVar2 = DAT_0059dc24;
   libc_strcpy((unsigned char *)((int)DAT_0059dc24 + 0x21));
   temp_v0 = wstrlen(temp_v1 + 0x9c);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
@@ -49,7 +49,7 @@ extern int FUN_0029d65c(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
@@ -201,7 +201,7 @@ unsigned int FUN_002cb054(void)
       if ((unsigned int)(temp_v6 + temp_v8) < 3) {
         dataTableGet(0x3a,1);
         temp_v7 = dataTableGetEntries();
-        FUN_002be624(&temp_v10,&LAB_002cb494,temp_v7 + (temp_v6 + temp_v8) * 0x96);
+        textFormatBuffer(&temp_v10,&LAB_002cb494,temp_v7 + (temp_v6 + temp_v8) * 0x96);
         VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v3,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,

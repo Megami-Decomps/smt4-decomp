@@ -19,8 +19,8 @@ int scrScriptProcessStartEntry(...);
 int FUN_0029ee6c(int, int);
 int FUN_002a71fc(...);
 int buttonHelpSetPreset(int);
-int FUN_002be624(unsigned char [36], unsigned char *, int);
-int FUN_003419cc(unsigned int, unsigned char *);
+int textFormatBuffer(unsigned char [36], unsigned char *, int);
+int modelLoadBamAndEnable(unsigned int, unsigned char *);
 int FUN_003b8404(...);
 
 extern unsigned char LAB_003b9218; /* 0x3b9218 */
@@ -47,8 +47,8 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a71fc. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002be624. */
-/* Supplied declaration required: FUN_003419cc. */
+/* Supplied declaration required: textFormatBuffer. */
+/* Supplied declaration required: modelLoadBamAndEnable. */
 /* Supplied declaration required: FUN_003b8404. */
 
 
@@ -116,7 +116,7 @@ void FUN_003b8e58(int param_1)
                       FUN_0023d344(*(unsigned int *)(param_1 + 0xe5c));
                       FUN_0022afc4(*puVar4,(int)*(short *)(temp_v1 + 0x28),
                                    (int)*(char *)(temp_v1 + 0x2a));
-                      FUN_003419cc(*puVar4,&LAB_003b9220);
+                      modelLoadBamAndEnable(*puVar4,&LAB_003b9220);
                       FUN_0022b244(*puVar4,1);
                       temp_v2 = *puVar4;
                     }
@@ -159,7 +159,7 @@ void FUN_003b8e58(int param_1)
         *(unsigned int *)(param_1 + 0x2c) = 0x14;
         return;
       }
-      FUN_002be624(temp_v3,&LAB_003b9218,*(int *)(param_1 + 0xd60) + 0x6c);
+      textFormatBuffer(temp_v3,&LAB_003b9218,*(int *)(param_1 + 0xd60) + 0x6c);
       temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0xd6c),temp_v3);
       FUN_002a71fc(0);
       buttonHelpSetPreset(0x90);

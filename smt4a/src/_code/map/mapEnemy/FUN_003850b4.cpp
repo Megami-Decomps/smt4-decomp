@@ -9,7 +9,7 @@ int FUN_00384830(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f18bf; /* 0x5f18bf */
 
@@ -34,7 +34,7 @@ unsigned int FUN_003850b4(void)
   int temp_v6;
   unsigned int temp_v7;
   
-  temp_v1 = DAT_005806d4;
+  temp_v1 = g_mapEnemy;
   temp_v3 = 0;
   do {
     temp_v4 = temp_v1 + temp_v3 * 0x188;

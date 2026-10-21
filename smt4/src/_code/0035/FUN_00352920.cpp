@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0023a118(void);
-int FUN_0023a154(unsigned char [52], int, unsigned char *);
+int systemApplyConfigurationByte(void);
+int stringFormatBounded(unsigned char [52], int, unsigned char *);
 int FUN_002ac8b0(unsigned char [96], unsigned char [52], int);
 int FUN_00355d68(int *, unsigned int, unsigned int, int *, int);
 int FUN_0035a0b4(void);
@@ -27,8 +27,8 @@ extern unsigned char LAB_00352b68; /* 0x352b68 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0023a118. */
-/* Supplied declaration required: FUN_0023a154. */
+/* Supplied declaration required: systemApplyConfigurationByte. */
+/* Supplied declaration required: stringFormatBounded. */
 /* Supplied declaration required: FUN_002ac8b0. */
 extern int wstrlenU16(void);
 /* Supplied declaration required: FUN_00355d68. */
@@ -62,7 +62,7 @@ int * FUN_00352920(unsigned int *param_1)
   unsigned char temp_v13 [96];
   unsigned char temp_v14 [52];
   
-  FUN_0023a154(temp_v14,0x30,&LAB_00352b68);
+  stringFormatBounded(temp_v14,0x30,&LAB_00352b68);
   FUN_002ac8b0(temp_v13,temp_v14,0x30);
   temp_v12 = 0;
   temp_v2 = *param_1;
@@ -81,7 +81,7 @@ int * FUN_00352920(unsigned int *param_1)
        piVar4 = piVar2, -1 < (int)piVar2)) {
       temp_v1 = 0x34;
       temp_v5 = 0;
-      FUN_0023a118();
+      systemApplyConfigurationByte();
       piVar3 = piVar2;
       FUN_0035a0b4();
       temp_v4 = 0;

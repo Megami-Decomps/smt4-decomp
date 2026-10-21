@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int btlGetMainState(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
@@ -15,7 +15,7 @@ int sysMemClear(unsigned char [132], int);
 extern int g_aocSystem; /* 0x570280 */
 extern int *g_btlAiScript; /* 0x571130 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -51,10 +51,10 @@ void FUN_00222488(int param_1)
     temp_v0 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x28) + 2);
     dataTable00FindById(temp_v0);
     sysMemClear(temp_v2,0x80);
-    FUN_00100388(temp_v2,"battle/AI/%s.bf",temp_v0 + 0x8e);
+    textFormatBuffer(temp_v2,"battle/AI/%s.bf",temp_v0 + 0x8e);
     temp_v1 = FUN_00240c34(temp_v2);
     if (temp_v1 == 0) {
-      FUN_00100388(temp_v2,"battle/AI/tmp.bf");
+      textFormatBuffer(temp_v2,"battle/AI/tmp.bf");
     }
     libc_strcpy(piVar1 + 4,temp_v2);
     temp_v1 = aocContentLookupSucceeds(g_aocSystem,*(unsigned short *)(*(int *)(param_1 + 0x28) + 2));

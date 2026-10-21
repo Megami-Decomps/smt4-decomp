@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013c884(...);
-int FUN_001418fc(...);
+int uiSetFloatPair(...);
 int asdProcessCreateSimple(...);
 int FUN_0014f0dc(...);
 int taskCreateDraw(...);
@@ -40,7 +40,7 @@ extern unsigned char LAB_0031b908; /* 0x31b908 */
 extern int g_effectProcessActive; /* 0x5702f4 */
 
 /* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: FUN_001418fc. */
+/* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -86,7 +86,7 @@ unsigned int FUN_0031b654(unsigned char param_1)
   *(unsigned int *)(temp_v0 + 0x520) = 0;
   *(unsigned int *)(temp_v0 + 0x524) = 0x42700000;
   FUN_0013c884(temp_v0,1);
-  FUN_001418fc(temp_v0);
+  uiSetFloatPair(temp_v0);
   FUN_0014f0dc(temp_v0,(unsigned int *)(temp_v0 + 0x50c),(unsigned int *)(temp_v0 + 0x518),&temp_v1);
   FUN_001523b8(temp_v0,1);
   puVar2 = &LAB_0031b8d0;

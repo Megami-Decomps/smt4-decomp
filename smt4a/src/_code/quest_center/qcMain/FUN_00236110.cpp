@@ -18,7 +18,7 @@ int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int FUN_003b61ec(void);
 int FUN_003d4c68(unsigned int);
-int FUN_003d4da8(void);
+int bgmStopWithoutEntry(void);
 int FUN_003d54f8(...);
 int FUN_00467e64(void);
 int FUN_0046a34c(unsigned int, int, unsigned int, int);
@@ -62,7 +62,7 @@ extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003d4c68. */
-/* Supplied declaration required: FUN_003d4da8. */
+/* Supplied declaration required: bgmStopWithoutEntry. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_00467e64. */
 /* Supplied declaration required: FUN_0046a34c. */
@@ -200,7 +200,7 @@ unsigned int FUN_00236110(void)
     if (DAT_00588c2d != '\0') {
       FUN_003d54f8(0,1);
       FUN_003d54f8(1);
-      FUN_003d4da8();
+      bgmStopWithoutEntry();
     }
     return 0xffffffff;
   }

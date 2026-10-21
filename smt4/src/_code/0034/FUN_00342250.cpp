@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023d078(int, int);
 int FUN_0023d158(int, unsigned int);
-int FUN_0023d20c(unsigned char [48], unsigned char [48], float *);
+int matrixScaleColumns(unsigned char [48], unsigned char [48], float *);
 int FUN_0023d274(int, int);
 int asdModelAdvanceCommandCursor(unsigned int);
 int FUN_002bc7f4(int, int *);
@@ -66,8 +66,8 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0023d078. */
 extern int FUN_0023d0d4(int, unsigned int);
 /* Supplied declaration required: FUN_0023d158. */
-extern unsigned int FUN_0023d1ec(int, unsigned int);
-/* Supplied declaration required: FUN_0023d20c. */
+extern unsigned int resourceGetIndexedEntry(int, unsigned int);
+/* Supplied declaration required: matrixScaleColumns. */
 /* Supplied declaration required: FUN_0023d274. */
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: FUN_002bc7f4. */
@@ -219,10 +219,10 @@ void FUN_00342250(int param_1,unsigned int param_2)
           temp_v36 = 0;
           temp_v24 = temp_v1;
           nn_math_ARMv6_MTX34MultTranslateAsm(temp_v37,temp_v25,temp_v38);
-          FUN_0023d20c(temp_v37,temp_v37,&temp_v39);
+          matrixScaleColumns(temp_v37,temp_v37,&temp_v39);
           nn_math_ARMv6_MTX34MultAsm(temp_v37,temp_v37,&temp_v26);
           if (temp_v8 != temp_v3) {
-            temp_v4 = FUN_0023d1ec(temp_v3,0);
+            temp_v4 = resourceGetIndexedEntry(temp_v3,0);
             FUN_0023d158(temp_v22,temp_v4);
             temp_v8 = temp_v3;
           }

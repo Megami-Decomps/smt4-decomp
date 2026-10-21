@@ -1,43 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00425f68` (_code @ 0x425f68, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail waits with SVC 0x19, which is prohibited by the no-intrinsics rule. */
+#include "common.h"
 extern "C" {
-
-int FUN_002e3140(...);
-int FUN_0043a670(...);
-int FUN_0043a7e8(...);
-int FUN_0043a844(...);
-int software_interrupt(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int DAT_00589538; /* 0x589538 */
-extern unsigned int DAT_005c0b4c; /* 0x5c0b4c */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_0043a670. */
-/* Supplied declaration required: FUN_0043a7e8. */
-/* Supplied declaration required: FUN_0043a844. */
-
-
-void FUN_00425f68(void)
-
+extern u32 DAT_005c0b4c;
+extern u32 DAT_00589538;
+void FUN_0043a670(u32 *handle, const char *service);
+void FUN_0043a844(s32 mode);
+void FUN_0043a7e8(u32 *event);
+s32 nn_svc_WaitSynchronization(u32 event);
+void FUN_002e3140(s32 result);
+/* Opens the conversion service, requests its event and waits for completion. */
+void FUN_00425f68()
 {
-/* irregular: 5 native warning(s); review required */
-  FUN_0043a670(&DAT_005c0b4c,"y2r:u");
-  FUN_0043a844(1);
-  FUN_0043a7e8(&DAT_00589538);
-  software_interrupt(0x19);
-  if (DAT_00589538 < 0) {
-    FUN_002e3140();
-    return;
-  }
-  return;
+    FUN_0043a670(&DAT_005c0b4c, "y2r:u");
+    FUN_0043a844(1);
+    FUN_0043a7e8(&DAT_00589538);
+    s32 result = nn_svc_WaitSynchronization(DAT_00589538);
+    if (result < 0)
+        FUN_002e3140(result);
 }
-
-} /* extern "C" */
+}

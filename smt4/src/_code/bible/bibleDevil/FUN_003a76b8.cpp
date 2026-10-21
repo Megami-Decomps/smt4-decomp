@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 
-extern int FUN_0022ddd0(int);
+extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_0022de74. */
 /* Supplied declaration required: FUN_00233240. */
 extern int FUN_0023360c(int *);
@@ -48,7 +48,7 @@ void FUN_003a76b8(int *param_1)
   unsigned char temp_v4 [1548];
   
   temp_v1 = (**(romwright_code **)(*param_1 + 0x24))(param_1);
-  if ((temp_v1 != 0) && (temp_v1 = FUN_0022ddd0((int)param_1 + 0x96), temp_v1 == 0)) {
+  if ((temp_v1 != 0) && (temp_v1 = utilityReturnSuccess((int)param_1 + 0x96), temp_v1 == 0)) {
     temp_v1 = param_1[0x166];
     FUN_00297060(temp_v1,param_1[0x167]);
     param_1[0x168] = temp_v1;

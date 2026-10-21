@@ -25,7 +25,7 @@ typedef struct Work {
     /* 0x18 */ HandleSlot slots[2];
 } Work;
 
-extern Work *DAT_00447a60;
+extern Work *g_mapRangeWork;
 
 void FUN_001fa6b8(void)
 {
@@ -33,7 +33,7 @@ void FUN_001fa6b8(void)
     Entry *entry;
 
     do {
-        entry = (Entry *)((u8 *)DAT_00447a60 + 0x24) + i;
+        entry = (Entry *)((u8 *)g_mapRangeWork + 0x24) + i;
         if (entry->active != 0 && entry->valid != 0) {
             if (entry->enabled != 0 && entry->handle != 0) {
                 asdMdlManagerMarkDestroy(entry->handle);
@@ -43,8 +43,8 @@ void FUN_001fa6b8(void)
     } while (i < 0x10);
     i = 0;
     do {
-        if (DAT_00447a60->slots[i].handle != 0) {
-            asdMdlManagerMarkDestroy(DAT_00447a60->slots[i].handle);
+        if (g_mapRangeWork->slots[i].handle != 0) {
+            asdMdlManagerMarkDestroy(g_mapRangeWork->slots[i].handle);
         }
         i++;
     } while (i < 2);

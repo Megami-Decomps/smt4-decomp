@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001568f8(...);
 int FUN_00178b04(...);
 int FUN_003f0e20(...);
@@ -64,7 +64,7 @@ typedef struct {
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -133,7 +133,7 @@ void FUN_004ca9c4(int param_1,fn_004ca9c4_arg1 *param_2)
         temp_v18 = 0;
         temp_v19 = 0;
         if (*(int *)(temp_v1 + 0x404) != 0) {
-          FUN_00100388(&temp_v4,"battle/model/en%03d.bam",
+          textFormatBuffer(&temp_v4,"battle/model/en%03d.bam",
                        (int)*(short *)(*(int *)(temp_v1 + 0x404) + 0x8c));
           FUN_004d881c(param_2->field_0x1bc,&temp_v4);
         }

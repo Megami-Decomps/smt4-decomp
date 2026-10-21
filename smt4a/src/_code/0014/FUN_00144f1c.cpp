@@ -15,7 +15,7 @@ extern unsigned int g_asdGxPresets; /* 0x63fd88 */
 extern int DAT_0063fd8c; /* 0x63fd8c */
 extern unsigned char DAT_0063fd90; /* 0x63fd90 */
 extern int DAT_0063fd9c; /* 0x63fd9c */
-extern unsigned int DAT_0063fdb4; /* 0x63fdb4 */
+extern unsigned int g_asdGxSecondaryPreset; /* 0x63fdb4 */
 extern int DAT_0063fdb8; /* 0x63fdb8 */
 extern int DAT_0063fdc8; /* 0x63fdc8 */
 extern unsigned int DAT_0063fde0; /* 0x63fde0 */
@@ -54,7 +54,7 @@ void FUN_00144f1c(int param_1,int param_2)
     temp_v0 = DAT_0063fdb8 - 1;
   }
   if (param_2 != 0) {
-    puVar1 = &DAT_0063fdb4;
+    puVar1 = &g_asdGxSecondaryPreset;
   }
   else {
     puVar1 = &g_asdGxPresets;
@@ -72,7 +72,7 @@ void FUN_00144f1c(int param_1,int param_2)
   if (param_1 != 0) {
     FUN_0017d294();
     FUN_00154ca4(&g_asdGxPresets,1);
-    FUN_00154ca4(&DAT_0063fdb4,param_2);
+    FUN_00154ca4(&g_asdGxSecondaryPreset,param_2);
     FUN_00154ca4(&DAT_0063fde0,1);
   }
   FUN_00161694(0x402);

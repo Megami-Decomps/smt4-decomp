@@ -8,7 +8,7 @@ int FUN_002ebda8(void);
 int FUN_002f7730(...);
 int SBORROW4(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_001634b4(...);
@@ -57,7 +57,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
 extern unsigned int FUN_00156868(unsigned int);
 /* Supplied declaration required: FUN_0015f858. */
@@ -209,7 +209,7 @@ void FUN_00218640(void)
     FUN_0037ce80(temp_v25,*(short *)(temp_v13 + 8) + temp_v12,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = FUN_001834a4(0x1e,0x12);
     temp_v8 = FUN_00156850(temp_v25,0);
-    FUN_00100388(temp_v27,&LAB_00218a40,temp_v8);
+    textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xffffffff,temp_v27);
@@ -236,7 +236,7 @@ void FUN_00218640(void)
     FUN_001879d0(g_renderCtx);
     temp_v13 = FUN_001834a4(0x1e,0x1a);
     temp_v8 = FUN_00156868(temp_v25);
-    FUN_00100388(temp_v27,&LAB_00218a40,temp_v8);
+    textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
     temp_v12 = temp_v4 + (int)temp_v16;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -246,18 +246,18 @@ void FUN_00218640(void)
     if (temp_v2 != 1) {
       if (temp_v2 != 3) {
         if (temp_v2 != 4) {
-          FUN_00100388(temp_v27,&LAB_00218e4c);
+          textFormatBuffer(temp_v27,&LAB_00218e4c);
           temp_v13 = FUN_001834a4(0x1e,0x1b);
         }
         else {
           temp_v8 = aocGetEntryData(*(unsigned short *)(temp_v19 + 0xf2));
-          FUN_00100388(temp_v27,&LAB_00218a40,temp_v8);
+          textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
           temp_v13 = FUN_001834a4(0x1e,0x1b);
         }
       }
       else {
         FUN_002c0940(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
-        FUN_00100388(temp_v27,&LAB_00218e68,temp_v28);
+        textFormatBuffer(temp_v27,&LAB_00218e68,temp_v28);
         temp_v13 = FUN_001834a4(0x1e,0x1b);
       }
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -271,7 +271,7 @@ void FUN_00218640(void)
       temp_v13 = FUN_001834a4(0x1e,0x1c);
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v19 + 0xf2);
       FUN_0015f858(temp_v7,0);
-      FUN_00100388(temp_v27,&LAB_00218a40,temp_v7);
+      textFormatBuffer(temp_v27,&LAB_00218a40,temp_v7);
       temp_v18 = (float)VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -287,7 +287,7 @@ void FUN_00218640(void)
       FUN_00162790(2,0xffffffff,temp_v28);
     }
     else {
-      FUN_00100388(temp_v27,&LAB_00218e58,*(unsigned int *)(temp_v19 + 0xf4));
+      textFormatBuffer(temp_v27,&LAB_00218e58,*(unsigned int *)(temp_v19 + 0xf4));
       FUN_001834a4(0x1e,0x1c);
     }
     temp_v18 = temp_v17;
@@ -485,7 +485,7 @@ LAB_00218d20:
               }
             } while ((temp_v10 != temp_v11 && temp_v19 != temp_v7) && temp_v9 < 0 == temp_v15);
             if (psVar13 != (short *)0x0) {
-              FUN_00100388(temp_v27,&LAB_002196dc,psVar13 + 1,temp_v33,temp_v31);
+              textFormatBuffer(temp_v27,&LAB_002196dc,psVar13 + 1,temp_v33,temp_v31);
             }
           }
         }
@@ -493,11 +493,11 @@ LAB_00218d20:
           temp_v19 = (unsigned int)temp_v21;
           if (temp_v22 != '\0') {
             FUN_0015f858(temp_v19,0);
-            FUN_00100388(temp_v27,&LAB_002196dc,temp_v19,temp_v33,temp_v31);
+            textFormatBuffer(temp_v27,&LAB_002196dc,temp_v19,temp_v33,temp_v31);
           }
           else {
             temp_v8 = FUN_00180114(temp_v19);
-            FUN_00100388(temp_v27,&LAB_002196dc,temp_v8,temp_v33,temp_v31);
+            textFormatBuffer(temp_v27,&LAB_002196dc,temp_v8,temp_v33,temp_v31);
           }
         }
         if (temp_v24 < *(unsigned int *)(temp_v35 + 0x104)) {
@@ -532,7 +532,7 @@ LAB_00218d20:
         temp_v9 = dataTableGetEntries();
         temp_v7 = dataTableGetCount(temp_v8);
         if ((temp_v19 < temp_v7) && (temp_v9 + temp_v19 * 0x60 != -1)) {
-          FUN_00100388(temp_v27,&LAB_002196e4);
+          textFormatBuffer(temp_v27,&LAB_002196e4);
           VectorSignedToFloat(temp_v32 * 0x10 + 0xb + *(short *)(temp_v12 + 10) + temp_v13,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);

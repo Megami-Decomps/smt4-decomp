@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00226a90(...);
 int FUN_00226bc0(...);
-int FUN_00227750(...);
+int actionCreateKindFive(...);
 int FUN_0023c564(...);
 int FUN_0023c700(...);
 int FUN_0023f27c(...);
@@ -33,7 +33,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00226a90. */
 /* Supplied declaration required: FUN_00226bc0. */
-/* Supplied declaration required: FUN_00227750. */
+/* Supplied declaration required: actionCreateKindFive. */
 /* Supplied declaration required: FUN_0023c564. */
 /* Supplied declaration required: FUN_0023c700. */
 /* Supplied declaration required: FUN_0023f27c. */
@@ -56,7 +56,7 @@ void FUN_00226c20(fn_00226c20_arg0 *param_1)
     FUN_00226bc0(param_1->field_0x304c);
     temp_v0 = (int)in_s0;
     if (param_1->field_0x3050[2] == temp_v0) {
-      FUN_00227750(0,0,(int)param_1->field_0x3050[3]);
+      actionCreateKindFive(0,0,(int)param_1->field_0x3050[3]);
     }
     psVar2 = param_1->field_0x3054;
     if ((*(unsigned char *)(psVar2 + 4) & 1) != 0) {

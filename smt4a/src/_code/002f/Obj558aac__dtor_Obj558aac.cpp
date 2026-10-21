@@ -1,40 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj558aacD1Ev` (_code @ 0x2fe996, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'adds r4, r0, #4'; compiler emits 'mov r4, r0' at the first differing instruction. */
+#include "common.h"
+struct Node { Node *next; u32 reserved; void *allocation; };
+struct List { Node *first; Node *free; u32 second, third; Node *sentinel; };
 extern "C" {
-
-int FUN_001329ba(int *);
-int asdOperatorDeleteArray(...);
-
-/* Supplied declaration required: FUN_001329ba. */
-/* Supplied declaration required: asdOperatorDeleteArray. */
-
-
-int _ZN9Obj558aacD1Ev(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  int *piVar3;
-  
-  piVar3 = (int *)(param_1 + 4);
-  if (*(int *)(param_1 + 0x14) != 0) {
-    FUN_001329ba(piVar3);
-    puVar1 = *(unsigned int **)(param_1 + 0x14);
-    *puVar1 = *(unsigned int *)(param_1 + 8);
-    *(unsigned int **)(param_1 + 8) = puVar1;
-    while (piVar2 = (int *)*piVar3, piVar2 != (int *)0x0) {
-      *piVar3 = *piVar2;
-      asdOperatorDeleteArray(piVar2[2]);
-      asdOperatorDeleteArray(piVar2);
-    }
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned int *)(param_1 + 0xc) = 0;
-    *(unsigned int *)(param_1 + 0x10) = 0;
-  }
-  return param_1;
+void FUN_001329ba(List *list);
+void asdOperatorDeleteArray(void *array);
 }
-
-} /* extern "C" */
+class Obj558aac {
+public:
+    ~Obj558aac();
+    u32 reserved;
+    List list;
+};
+Obj558aac::~Obj558aac() {
+    if (list.sentinel) {
+        FUN_001329ba(&list);
+        list.sentinel->next = list.free;
+        list.free = list.sentinel;
+        while (list.first) {
+            Node *node = list.first;
+            list.first = node->next;
+            asdOperatorDeleteArray(node->allocation);
+            asdOperatorDeleteArray(node);
+        }
+        list.free = NULL;
+        list.second = list.third = 0;
+    }
+}

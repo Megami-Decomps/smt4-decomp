@@ -14,7 +14,7 @@ int commonBgReset(...);
 int FUN_00485e74(...);
 int FUN_00490484(...);
 int FUN_004930e4(...);
-int FUN_004cfac8(...);
+int requestBeginProcessing(...);
 int NaviMain_ResetFlags(...);
 int VectorSignedToFloat(...);
 
@@ -48,7 +48,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00485e74. */
 /* Supplied declaration required: FUN_00490484. */
 /* Supplied declaration required: FUN_004930e4. */
-/* Supplied declaration required: FUN_004cfac8. */
+/* Supplied declaration required: requestBeginProcessing. */
 /* Supplied declaration required: NaviMain_ResetFlags. */
 
 
@@ -105,7 +105,7 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   puVar1[0x81ae] = (unsigned int)puVar4;
   NaviMain_ResetFlags(puVar1 + 0x81af,1);
   if (g_naviMain != (unsigned int *)0x0) {
-    FUN_004cfac8(g_naviMain + 0x81af,0,0);
+    requestBeginProcessing(g_naviMain + 0x81af,0,0);
   }
   if (*(int *)(temp_v0 + 0x1688) == 1) {
     VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x1698),(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,20 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bd118` (_code @ 0x1bd118, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-int FUN_001ad9b4(void);
-
-/* Supplied declaration required: FUN_001ad9b4. */
-
-
-void FUN_001bd118(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  FUN_001ad9b4();
-  return;
+namespace {
+struct TableRecord {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u8 value;
+};
 }
+extern "C" {
+TableRecord *FUN_001ad9b4(u32 id);
 
-} /* extern "C" */
+/* Reads the record's byte, returning zero when absent. */
+s32 FUN_001bd118(u32 id)
+{
+    TableRecord *record = FUN_001ad9b4(id);
+    return record != NULL ? record->value : 0;
+}
+}

@@ -24,7 +24,7 @@ int FUN_002c3364(void);
 int FUN_002e51c4(void);
 int FUN_0031f4fc(void);
 int FUN_00387454(void);
-int FUN_0038b36c(void);
+int engineClearStateTriple(void);
 int FUN_0039c304(void);
 int FUN_003c5c88(void);
 int FUN_003f8898(void);
@@ -56,7 +56,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: FUN_002e51c4. */
 /* Supplied declaration required: FUN_0031f4fc. */
 /* Supplied declaration required: FUN_00387454. */
-/* Supplied declaration required: FUN_0038b36c. */
+/* Supplied declaration required: engineClearStateTriple. */
 /* Supplied declaration required: FUN_0039c304. */
 /* Supplied declaration required: FUN_003c5c88. */
 /* Supplied declaration required: FUN_003f8898. */
@@ -113,7 +113,7 @@ void FUN_0022258c(unsigned int param_1)
     }
     else if (g_jyoucyu == '\0') {
       FUN_003f8940();
-      FUN_0038b36c();
+      engineClearStateTriple();
       FUN_0039c304();
       FUN_00282b60();
       FUN_002bf464();

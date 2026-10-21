@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0025921c(unsigned char [256], unsigned int);
 int FUN_00259258(void);
 int FUN_002bcfc0(unsigned char [128], unsigned char [132]);
-int FUN_002be624(unsigned char *, unsigned char *, unsigned char [132]);
+int textFormatBuffer(unsigned char *, unsigned char *, unsigned char [132]);
 int libc_strcpy(unsigned char [128], int);
 
 extern unsigned char LAB_002feb78; /* 0x2feb78 */
@@ -16,7 +16,7 @@ extern int g_npcRoom; /* 0x44d198 */
 /* Supplied declaration required: FUN_0025921c. */
 /* Supplied declaration required: FUN_00259258. */
 /* Supplied declaration required: FUN_002bcfc0. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 
 
@@ -45,7 +45,7 @@ void FUN_002feadc(void)
         libc_strcpy(temp_v4,temp_v1 + 0x54);
         FUN_002bcfc0(temp_v4,temp_v5);
         puVar3 = temp_v3 + (int)puVar5;
-        FUN_002be624(puVar3,&LAB_002feb78,temp_v5);
+        textFormatBuffer(puVar3,&LAB_002feb78,temp_v5);
         puVar5 = puVar5 + (int)puVar3;
       }
       temp_v2 = temp_v2 + 1;

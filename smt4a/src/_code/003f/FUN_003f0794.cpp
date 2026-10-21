@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0020214c(void);
-int FUN_00270bbc(void);
+int btlStageLoadTable(void);
 int FUN_00275bc8(void);
 int FUN_002cc92c(void);
 int FUN_003cdb28(void);
@@ -33,7 +33,7 @@ extern char *DAT_00573968; /* 0x573968 */
 extern char *DAT_0057396c; /* 0x57396c */
 
 /* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_00270bbc. */
+/* Supplied declaration required: btlStageLoadTable. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_002cc92c. */
 /* Supplied declaration required: FUN_003cdb28. */
@@ -99,7 +99,7 @@ void FUN_003f0794(int param_1)
       DAT_00573968 = pcVar3;
       FUN_0020214c();
       DAT_0057396c = pcVar4;
-      FUN_00270bbc();
+      btlStageLoadTable();
       FUN_002cc92c();
       temp_v1 = *(unsigned short *)(param_1 + 0x4d0a) + 1;
       *(short *)(param_1 + 0x4d0a) = (short)temp_v1;

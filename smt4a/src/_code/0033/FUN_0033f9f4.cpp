@@ -25,7 +25,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: FUN_0033abb4. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 
 
 void FUN_0033f9f4(void)
@@ -95,7 +95,7 @@ void FUN_0033f9f4(void)
       temp_v5 = padButtonIsPressed(3);
       temp_v9 = temp_v5 != 0;
       if ((*(short *)(DAT_005806a4 + 0xb6) == 0) &&
-         ((temp_v5 = FUN_004d0554(), temp_v5 != 0 ||
+         ((temp_v5 = inputIsQuestMenuPressed(), temp_v5 != 0 ||
           (((temp_v5 = FUN_00163fd4(8), temp_v5 != 0 && (temp_v5 = FUN_00163fd4(7), temp_v5 != 0)) &&
            ((temp_v5 = padButtonIsPressed(8), temp_v5 == 0 &&
             ((temp_v5 = padButtonIsPressed(7), temp_v5 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))))

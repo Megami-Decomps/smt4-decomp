@@ -10,7 +10,7 @@ int btlGetMainState(void);
 extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_0022699c. */
-extern short FUN_00255158(int, unsigned int);
+extern short battleGetEntryHalfword(int, unsigned int);
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
 
@@ -30,7 +30,7 @@ int FUN_00246080(short param_1,short param_2,unsigned int param_3,int param_4,in
   *(unsigned char *)(temp_v2 + 4) = 7;
   *(int *)(temp_v2 + 0x28) = param_5;
   *(int *)(temp_v2 + 0x14) = param_4;
-  temp_v0 = FUN_00255158((int)*(short *)(param_4 + 0x62),1);
+  temp_v0 = battleGetEntryHalfword((int)*(short *)(param_4 + 0x62),1);
   *(short *)(temp_v2 + 0x24) = temp_v0 - 1;
   if (param_5 != 4) {
     if (param_5 == 3) {

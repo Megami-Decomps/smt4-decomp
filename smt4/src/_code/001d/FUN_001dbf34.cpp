@@ -45,7 +45,7 @@ extern int FUN_0019e0c0(unsigned int);
 extern int FUN_001ddc00(void);
 extern int FUN_00223c78(void);
 extern int partyPanelIsActive(void);
-extern int FUN_00262f38(void);
+extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00262f68. */
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: FUN_00262f94. */
@@ -291,7 +291,7 @@ unsigned int FUN_001dbf34(int param_1)
     *piVar7 = temp_v3;
     break;
   case 6:
-    temp_v2 = FUN_00262f38();
+    temp_v2 = battleTalkIsBustReady();
     if (temp_v2 == 0) {
       return 0;
     }

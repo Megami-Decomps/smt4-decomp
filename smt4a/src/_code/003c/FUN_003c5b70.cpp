@@ -1,32 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5b70` (_code @ 0x3c5b70, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail loads the cache base before the owner and uses a different register schedule. */
+#include "common.h"
+#include <stddef.h>
+struct BufferSpan { void *buffer; u32 count; };
+struct ParameterCenter { u8 unk00[20]; BufferSpan span; };
+struct ParameterCache {
+    u8 initial[0xc0];
+    u8 firstBuffer[0x240];
+    ParameterCenter center;
+};
+struct ParameterData { u8 data[0x34]; u32 value; };
+struct ParameterOwner { u8 unk00[12]; ParameterData *parameters; };
 extern "C" {
-
-int FUN_003465ec(int, int, unsigned int);
-
-extern unsigned char DAT_0059eaf8; /* 0x59eaf8 */
-extern unsigned char DAT_0059ebb8; /* 0x59ebb8 */
-extern unsigned char *DAT_0059ee0c; /* 0x59ee0c */
-extern unsigned int DAT_0059ee10; /* 0x59ee10 */
-
-/* Supplied declaration required: FUN_003465ec. */
-
-
-void FUN_003c5b70(int param_1)
-
+extern ParameterCenter DAT_0059edf8;
+void FUN_003465ec(void *first, void *second, u32 value);
+/* Temporarily selects the cache buffer while applying the owner's parameters. */
+void FUN_003c5b70(ParameterOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  DAT_0059ee0c = &DAT_0059ebb8;
-  DAT_0059ee10 = 8;
-  FUN_003465ec(temp_v0,temp_v0 + 0x24,*(unsigned int *)(temp_v0 + 0x34));
-  DAT_0059ee0c = &DAT_0059eaf8;
-  DAT_0059ee10 = 8;
-  return;
+    ParameterCache *cache = reinterpret_cast<ParameterCache *>(reinterpret_cast<u8 *>(&DAT_0059edf8) - offsetof(ParameterCache, center));
+    DAT_0059edf8.span.buffer = cache->firstBuffer;
+    DAT_0059edf8.span.count = 8;
+    ParameterData *data = owner->parameters;
+    FUN_003465ec(data->data + 0, data->data + 36, data->value);
+    DAT_0059edf8.span.buffer = cache->initial;
+    DAT_0059edf8.span.count = 8;
 }
-
-} /* extern "C" */
+}

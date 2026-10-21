@@ -1,31 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00169548` (_code @ 0x169548, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses add r2, r1, #1280 where the compiled block uses ldr r2, [pc, #28]. */
+#include "common.h"
+
+struct ButtonHelpTail {
+    u8 unk00[0xD4];      // 0x00
+    u32 counter;         // 0xD4
+    u16 timer;           // 0xD8
+    u8 resetState[9];    // 0xDA
+    u8 enabled;          // 0xE3
+};
+
+struct ButtonHelpState {
+    u8 unk00[0x500];      // 0x000
+    ButtonHelpTail tail;  // 0x500
+};
+
+struct ButtonHelpGlobal {
+    u32 unk00;              // 0x00
+    ButtonHelpState* state;  // 0x04
+};
 
 extern "C" {
+extern ButtonHelpGlobal g_buttonHelp;
+void FUN_001a90e0(u8* state);
 
-int FUN_001a90e0(int);
-
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-
-/* Supplied declaration required: FUN_001a90e0. */
-
-
-void FUN_00169548(int param_1)
-
+void FUN_00169548(s32 enabled)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  *(char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5e3) = (char)param_1;
-  if (param_1 != 0) {
-    *(unsigned int *)(temp_v0 + 0x5d4) = 0;
-    *(unsigned short *)(temp_v0 + 0x5d8) = 0;
-    FUN_001a90e0(temp_v0 + 0x5da);
-    return;
-  }
-  return;
+    ButtonHelpState* state = g_buttonHelp.state;
+    state->tail.enabled = (u8)enabled;
+    if (enabled != 0) {
+        state->tail.counter = 0;
+        state->tail.timer = 0;
+        FUN_001a90e0(state->tail.resetState);
+    }
 }
-
-} /* extern "C" */
+}

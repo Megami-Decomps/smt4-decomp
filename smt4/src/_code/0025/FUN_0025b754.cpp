@@ -35,7 +35,7 @@ extern int DAT_0049fce4; /* 0x49fce4 */
 /* Supplied declaration required: FUN_001dd1e0. */
 /* Supplied declaration required: FUN_0024ac68. */
 /* Supplied declaration required: FUN_0024ac7c. */
-extern int FUN_0024efe4(void);
+extern int frameTextureGetState(void);
 
 
 void FUN_0025b754(void)
@@ -51,7 +51,7 @@ void FUN_0025b754(void)
   if (DAT_0049fb48 != '\0') {
     return;
   }
-  temp_v0 = FUN_0024efe4();
+  temp_v0 = frameTextureGetState();
   temp_v1 = DAT_0049fcd4;
   if ((temp_v0 != 0) || (DAT_0049fcc4 == 0)) {
     FUN_0024ac7c(0);

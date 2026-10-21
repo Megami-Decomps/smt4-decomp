@@ -45,8 +45,8 @@ int FUN_00394cd0(...);
 int FUN_001d1828(void);
 int FUN_0026c654(...);
 int FUN_0026c710(...);
-int FUN_0026c77c(...);
-int FUN_0026c7a0(void);
+int communicationBeginTransition(...);
+int communicationSetResultPointer(void);
 int FUN_0026c7b8(...);
 int FUN_0026c820(...);
 int FUN_0026c868(void);
@@ -130,11 +130,11 @@ extern int FUN_002015a4(void);
 /* Supplied declaration required: FUN_0026c214. */
 /* Supplied declaration required: FUN_0026c464. */
 /* Supplied declaration required: FUN_0026c57c. */
-extern int FUN_0026c63c(void);
+extern int gameGetNavigationState(void);
 /* Supplied declaration required: FUN_0026c654. */
 /* Supplied declaration required: FUN_0026c710. */
-/* Supplied declaration required: FUN_0026c77c. */
-/* Supplied declaration required: FUN_0026c7a0. */
+/* Supplied declaration required: communicationBeginTransition. */
+/* Supplied declaration required: communicationSetResultPointer. */
 /* Supplied declaration required: FUN_0026c7b8. */
 /* Supplied declaration required: FUN_0026c820. */
 /* Supplied declaration required: FUN_0026c868. */
@@ -148,7 +148,7 @@ extern int FUN_0026c63c(void);
 /* Supplied declaration required: FUN_0026d654. */
 /* Supplied declaration required: FUN_0026d670. */
 /* Supplied declaration required: FUN_0026d6a4. */
-extern int FUN_0026dae4(void);
+extern int gameGetPendingNavigationState(void);
 /* Supplied declaration required: FUN_0026dafc. */
 /* Supplied declaration required: FUN_0026db58. */
 extern int FUN_00282cb4(void);
@@ -370,7 +370,7 @@ unsigned int FUN_001c3fd4(void)
           temp_v0 = *(char *)(temp_v1 + 0x4c6);
 joined_r0x001c43a0:
           if ((temp_v0 != '\0') &&
-             ((temp_v6 = FUN_0026dae4(), temp_v6 == 0 || (temp_v6 = FUN_0029e0f8(), temp_v6 != 0)))) {
+             ((temp_v6 = gameGetPendingNavigationState(), temp_v6 == 0 || (temp_v6 = FUN_0029e0f8(), temp_v6 != 0)))) {
             temp_v22 = *(int *)(temp_v1 + 0x10) != 0;
             temp_v6 = 0;
             if (temp_v22) {
@@ -1217,7 +1217,7 @@ LAB_001c659c:
                                   FUN_0026d5a4();
                                 }
                                 else {
-                                  temp_v24 = FUN_0026c63c();
+                                  temp_v24 = gameGetNavigationState();
                                   if ((temp_v24 != 0) || (temp_v24 = FUN_0029e02c(), temp_v24 != 0))
                                   break;
                                   temp_v24 = FUN_0029dfa8();
@@ -1382,8 +1382,8 @@ LAB_001c6598:
                       else {
                         FUN_0026c820(g_btlUiBlock);
                         FUN_0026c7b8(&LAB_001c6014);
-                        FUN_0026c7a0();
-                        FUN_0026c77c(0);
+                        communicationSetResultPointer();
+                        communicationBeginTransition(0);
                         FUN_00296e90();
                         FUN_0029ca58();
                         temp_v7 = 0xe;
@@ -1558,8 +1558,8 @@ LAB_001c653c:
                       else {
                         FUN_0026c820(g_btlUiBlock);
                         FUN_0026c7b8(&LAB_001c6014);
-                        FUN_0026c7a0();
-                        FUN_0026c77c(0);
+                        communicationSetResultPointer();
+                        communicationBeginTransition(0);
                         FUN_00296e90();
                         FUN_0029ca58();
                         *(int *)(temp_v1 + 0x674) = temp_v4;

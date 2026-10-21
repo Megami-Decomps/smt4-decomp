@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_001676b0(...);
 int efctSetSpeed(void);
@@ -42,7 +42,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -184,10 +184,10 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        FUN_00100388(temp_v19,temp_v5,temp_v1);
+        textFormatBuffer(temp_v19,temp_v5,temp_v1);
       }
       else {
-        FUN_00100388(temp_v19,&DAT_00528004,temp_v1);
+        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5a);
       break;
@@ -203,10 +203,10 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        FUN_00100388(temp_v19,temp_v5,temp_v1);
+        textFormatBuffer(temp_v19,temp_v5,temp_v1);
       }
       else {
-        FUN_00100388(temp_v19,&DAT_00528004,temp_v1);
+        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5d);
       break;
@@ -222,10 +222,10 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        FUN_00100388(temp_v19,temp_v5,temp_v1);
+        textFormatBuffer(temp_v19,temp_v5,temp_v1);
       }
       else {
-        FUN_00100388(temp_v19,&DAT_00528004,temp_v1);
+        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5b);
       break;
@@ -241,19 +241,19 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v1 = -temp_v1;
       }
       if (!temp_v7) {
-        FUN_00100388(temp_v19,temp_v5,temp_v1);
+        textFormatBuffer(temp_v19,temp_v5,temp_v1);
       }
       else {
-        FUN_00100388(temp_v19,&DAT_00528004,temp_v1);
+        textFormatBuffer(temp_v19,&DAT_00528004,temp_v1);
       }
       unaff_r7 = (int)*(char *)(param_3 + 0x5c);
       break;
     case 4:
       if (*(char *)(param_3 + 0x5e) != '\0') {
-        FUN_00100388(temp_v19,&LAB_003f9308);
+        textFormatBuffer(temp_v19,&LAB_003f9308);
       }
       else {
-        FUN_00100388(temp_v19,&LAB_003f9310);
+        textFormatBuffer(temp_v19,&LAB_003f9310);
       }
       unaff_r7 = 0;
     }

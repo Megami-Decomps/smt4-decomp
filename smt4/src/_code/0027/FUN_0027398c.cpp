@@ -8,7 +8,7 @@ int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, unsigned int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int aocQueueType08(unsigned int, int, unsigned int *, int);
 int aocQueueType07(unsigned int, int, unsigned int *, int);
 
@@ -25,7 +25,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: aocQueueType08. */
 /* Supplied declaration required: aocQueueType07. */
 
@@ -49,8 +49,8 @@ unsigned int FUN_0027398c(unsigned int *param_1)
       *param_1 = 3;
       return 0;
     }
-    FUN_002be624(temp_v4,&LAB_00273b38,temp_v0,temp_v0);
-    FUN_002be624(temp_v5,&LAB_00273b50,temp_v0);
+    textFormatBuffer(temp_v4,&LAB_00273b38,temp_v0,temp_v0);
+    textFormatBuffer(temp_v5,&LAB_00273b50,temp_v0);
     temp_v3 = FUN_00289e54(g_aocSystem,*(unsigned short *)(temp_v3 + 0x148),1);
     if (temp_v3 != 0) {
       aocQueueType07(g_aocSystem,temp_v0,param_1 + 3,0);
@@ -78,7 +78,7 @@ unsigned int FUN_0027398c(unsigned int *param_1)
     FUN_00297060(temp_v1,param_1[4]);
     param_1[5] = temp_v1;
     *(unsigned int *)(temp_v1 + 0x108) = 2;
-    FUN_002be624(temp_v4,&LAB_00273b6c,*(unsigned short *)(temp_v3 + 0x148),
+    textFormatBuffer(temp_v4,&LAB_00273b6c,*(unsigned short *)(temp_v3 + 0x148),
                  *(unsigned short *)(temp_v3 + 0x14a));
     temp_v2 = tableGroupFindEntryIndex(param_1[3],temp_v4);
     scrScriptProcessStartEntry(param_1[5],temp_v2);

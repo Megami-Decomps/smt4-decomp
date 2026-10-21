@@ -10,7 +10,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_0016ccfc(void);
-extern int FUN_004287ac(unsigned int, int **, unsigned int);
+extern int tokenResolveAddress(unsigned int, int **, unsigned int);
 
 
 int FUN_0050028c(unsigned int *param_1,int param_2,int param_3,int *param_4)
@@ -29,7 +29,7 @@ int FUN_0050028c(unsigned int *param_1,int param_2,int param_3,int *param_4)
   
   temp_v3 = param_4;
   temp_v0 = FUN_0016ccfc();
-  temp_v1 = FUN_004287ac(temp_v0,&temp_v3,*param_1);
+  temp_v1 = tokenResolveAddress(temp_v0,&temp_v3,*param_1);
   if (-1 < temp_v1) {
     if (param_4 != (int *)0x0) {
       unaff_r10 = temp_v3;

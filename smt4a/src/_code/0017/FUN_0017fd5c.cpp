@@ -1,23 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017fd5c` (_code @ 0x17fd5c, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the C implementation guards the zero shift to avoid undefined behavior; retail uses native ARM register-shift semantics. */
+#include "common.h"
 
 extern "C" {
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-
-
-unsigned long long FUN_0017fd5c(unsigned int param_1,int param_2,unsigned int param_3)
-
+/* Arithmetic right shift of a signed doubleword, using its two machine words. */
+s64 FUN_0017fd5c(s64 value, u32 shift)
 {
-  if ((int)(param_3 - 0x20) < 0) {
-    return romwright_piece_4_4(param_2 >> (param_3 & 0xff),
-                    (param_1 >> (param_3 & 0xff)) | (param_2 << ((0x20 - param_3) & 0xff)));
-  }
-  return romwright_piece_4_4(param_2 >> 0x1f,param_2 >> ((param_3 - 0x20) & 0xff));
+    union { s64 value; struct { u32 low; s32 high; } words; } result;
+    result.value = value;
+    if (shift == 0) {
+        return value;
+    }
+    if (shift >= 64) {
+        return value < 0 ? -1 : 0;
+    }
+    if (shift < 32) {
+        result.words.low = (result.words.low >> shift) | ((u32)result.words.high << (32 - shift));
+        result.words.high >>= shift;
+    } else {
+        result.words.low = result.words.high >> (shift - 32);
+        result.words.high >>= 31;
+    }
+    return result.value;
 }
 
 } /* extern "C" */

@@ -10,7 +10,7 @@ int memClear(int, int);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0026efec(int);
+extern int saveGetIndexedMapValue(int);
 extern unsigned int FUN_00294090(int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -46,7 +46,7 @@ void FUN_003398e4(int param_1)
     temp_v5 = 0;
     temp_v3 = temp_v5;
     do {
-      temp_v0 = FUN_0026efec(temp_v3);
+      temp_v0 = saveGetIndexedMapValue(temp_v3);
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x48);
       if (temp_v1 != 0) {
         *(unsigned int *)(param_1 + temp_v5 * 4 + 0x43a8) = temp_v1;

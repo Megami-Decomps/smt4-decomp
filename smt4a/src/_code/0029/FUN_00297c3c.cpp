@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd76c(int, int);
+int controllerSetDestination(int, int);
 int FUN_003fdb18(int);
 int FUN_003fe86c(int, int, int);
 
@@ -23,7 +23,7 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int slots4FGetActiveValue(int);
@@ -57,7 +57,7 @@ void FUN_00297c3c(void)
             *(unsigned int *)(temp_v4 + 4) = temp_v0 & 0xfffffffc;
           }
           if (*(char *)(temp_v3 + 0xbc4) != '\0') {
-            FUN_003fd76c(temp_v4,temp_v3 + 0xbb0);
+            controllerSetDestination(temp_v4,temp_v3 + 0xbb0);
             FUN_003fdb18(temp_v4);
             temp_v1 = slots4FGetActiveValue(temp_v4);
             if (temp_v1 != *(int *)(temp_v3 + 0xbc0)) {
@@ -122,7 +122,7 @@ void FUN_00297c3c(void)
           }
         }
         if (*(char *)(temp_v4 + 0xc4) != '\0') {
-          FUN_003fd76c(temp_v3,temp_v4 + 0xb0);
+          controllerSetDestination(temp_v3,temp_v4 + 0xb0);
           FUN_003fdb18(temp_v3);
           temp_v1 = slots4FGetActiveValue(temp_v3);
           if (temp_v1 != *(int *)(temp_v4 + 0xc0)) {

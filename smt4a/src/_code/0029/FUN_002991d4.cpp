@@ -40,9 +40,9 @@ int FUN_001681c4(void);
 int jyoucyuGetTableEntry(int);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int FUN_0020214c(void);
-int FUN_0020ef68(void);
+int mapPopupReset(void);
 int FUN_00246128(void);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
@@ -125,10 +125,10 @@ extern int gameFlagIsSet(unsigned int, int, int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_0020ef68. */
+/* Supplied declaration required: mapPopupReset. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00234528. */
 /* Supplied declaration required: FUN_00246128. */
@@ -183,7 +183,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: FUN_00480a54. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: FUN_004a0ef8. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
 
@@ -276,7 +276,7 @@ unsigned int FUN_002991d4(void)
       }
     }
     else {
-      FUN_001acf98(0x1d,0);
+      asdTMTexLoadMainHeap(0x1d,0);
       FUN_0033ab1c((int)(short)*(unsigned int *)(temp_v4 + 0xb4),1);
       temp_v12 = 9;
     }
@@ -318,7 +318,7 @@ unsigned int FUN_002991d4(void)
       *(unsigned int *)(temp_v4 + 0x10c) = 0;
       temp_v12 = tableGroupFindEntryIndex(*(unsigned int *)(temp_v4 + 0x100),&LAB_00299d04);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v4 + 0x108),temp_v12);
-      FUN_0020ef68();
+      mapPopupReset();
     }
     temp_v11 = *(int *)(temp_v4 + 0x4c);
     *(int *)(temp_v4 + 0x4c) = temp_v11 + 1;
@@ -508,7 +508,7 @@ LAB_00299da8:
         *(unsigned char *)(temp_v4 + 0x50) = 1;
         temp_v11 = FUN_001632fc();
         if (temp_v11 != 0) {
-          FUN_0020ef68();
+          mapPopupReset();
         }
       }
       if (*(int *)(temp_v4 + 0x4c) == 0x12) {
@@ -688,7 +688,7 @@ LAB_0029a094:
           }
         }
         temp_v11 = FUN_004d0584();
-        if ((temp_v11 == 0) && (temp_v11 = FUN_004d0554(), temp_v11 == 0)) {
+        if ((temp_v11 == 0) && (temp_v11 = inputIsQuestMenuPressed(), temp_v11 == 0)) {
           return 0;
         }
         temp_v2 = *(char *)(temp_v4 + 0x8d);
@@ -777,7 +777,7 @@ LAB_0029a094:
     *(int *)(temp_v4 + 0x108) = temp_v11;
     *(unsigned int *)(temp_v11 + 0x108) = 3;
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v4 + 0x108),1);
-    FUN_0020ef68();
+    mapPopupReset();
     *(int *)(temp_v4 + 0x48) = *(int *)(temp_v4 + 0x48) + 1;
     *(unsigned int *)(temp_v4 + 0x4c) = 0;
     break;
@@ -966,7 +966,7 @@ LAB_002993c0:
         *(unsigned char *)(temp_v4 + 0x50) = 1;
         temp_v11 = FUN_001632fc();
         if (temp_v11 != 0) {
-          FUN_0020ef68();
+          mapPopupReset();
         }
       }
     }
@@ -985,7 +985,7 @@ LAB_002993c0:
       return 0;
     }
     temp_v11 = FUN_004d0584();
-    if ((temp_v11 == 0) && (temp_v11 = FUN_004d0554(), temp_v11 == 0)) {
+    if ((temp_v11 == 0) && (temp_v11 = inputIsQuestMenuPressed(), temp_v11 == 0)) {
       return 0;
     }
     panelSetMode3(*(unsigned int *)(temp_v4 + 0x44),0);
@@ -1035,7 +1035,7 @@ LAB_002993c0:
       temp_v12 = 3;
     }
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v4 + 0x108),temp_v12);
-    FUN_0020ef68();
+    mapPopupReset();
     *(int *)(temp_v4 + 0x48) = *(int *)(temp_v4 + 0x48) + 1;
     *(unsigned int *)(temp_v4 + 0x4c) = 0;
     break;

@@ -1,29 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdProcessCreateSimple` (_code @ 0x2c5788, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+u32 asdProcessCreate(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcFunc onStart, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 
-int asdProcessCreate(void);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: asdProcessCreate. */
-
-
-void asdProcessCreateSimple(void)
-
+/* Creates a process without start callback or owner. */
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work)
 {
-/* irregular: 2 native warning(s); review required */
-  asdProcessCreate();
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    return asdProcessCreate(name, group, startDelay, endDelay, NULL, onUpdate, onEnd, work, NULL);
 }
-
-} /* extern "C" */
+}

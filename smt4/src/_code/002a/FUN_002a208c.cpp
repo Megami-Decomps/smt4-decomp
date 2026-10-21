@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015d38c(unsigned char *);
-int FUN_002bb150(unsigned char *, int);
+int threadSleepDuration(unsigned char *, int);
 int nn_os_LightEvent_Wait(unsigned char *);
 int nn_snd_CTR_Dspsnd_WaitPipe_15D540(unsigned char *, unsigned int, int, int);
 int nn_snd_CTR_Dspsnd_WaitPipe_15D5E0(unsigned char *);
@@ -24,7 +24,7 @@ extern unsigned char DAT_004a95c0; /* 0x4a95c0 */
 extern unsigned char g_dspsndState; /* 0x4e6f64 */
 
 /* Supplied declaration required: FUN_0015d38c. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
 extern void nn_os_LightEvent_ClearSignal(unsigned int);
 /* Supplied declaration required: nn_snd_CTR_Dspsnd_WaitPipe_15D540. */
@@ -52,7 +52,7 @@ void FUN_002a208c(unsigned int param_1,unsigned int param_2)
     nn_os_LightEvent_ClearSignal((unsigned int)&DAT_0044e7c8);
   }
   if (DAT_0044e7c3 != '\0') {
-    FUN_002bb150(&DAT_004a95c0,0);
+    threadSleepDuration(&DAT_004a95c0,0);
     return;
   }
   nn_snd_CTR_Dspsnd_WaitPipe_15D5E0(&g_dspsndState);

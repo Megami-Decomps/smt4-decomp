@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00298f88` (_code @ 0x298f88, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Record { u8 padding[7]; u8 flags; }; }
 
 extern "C" {
-
-int dataTable1bOr1cGetRecord(void);
-
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_00298f88(void)
-
+/* Reads or forwards the current state. */
+Record *dataTable1bOr1cGetRecord(u32 id);
+u32 FUN_00298f88(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  dataTable1bOr1cGetRecord();
-  return;
+    Record *record = dataTable1bOr1cGetRecord(id);
+    return record != NULL ? record->flags & 1 : 0;
 }
-
-} /* extern "C" */
+}

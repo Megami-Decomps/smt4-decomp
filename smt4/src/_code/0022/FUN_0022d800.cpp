@@ -8,7 +8,7 @@ int FUN_00230d84(int, int, int, int, unsigned int);
 int FUN_00231258(...);
 int FUN_00231bcc(...);
 int FUN_002bf4f0(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf4f0. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 
 
 void FUN_0022d800(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -41,11 +41,11 @@ void FUN_0022d800(int param_1,int param_2,unsigned int param_3,int param_4)
   temp_v1 = FUN_002bf4f0(param_1 + 200,param_2 + 0x42f);
   temp_v4 = (int)*(short *)(temp_v1 + 8);
   temp_v1 = (int)*(short *)(temp_v1 + 10);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_00230d84(param_1 + 200,0x426,temp_v4,temp_v1,param_3);
   FUN_00230d84(param_1 + 200,0x427,temp_v4,temp_v1,param_3);
   FUN_00230d84(param_1 + 200,0x428,temp_v4,temp_v1,param_3);
-  FUN_002bf538();
+  efctSetSpeed();
   FUN_00231bcc(param_1 + 200,0x429,temp_v4,temp_v1,param_3,1);
   if (param_4 != 0) {
     FUN_00231bcc(param_1 + 200,0x42b,temp_v4,temp_v1,param_3,1);

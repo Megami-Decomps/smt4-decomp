@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b8e18(void);
+int gameEnableFloatSettings(void);
 
 typedef struct fn_00466c00_arg0 fn_00466c00_arg0;
 struct fn_00466c00_arg0 {
@@ -16,14 +16,14 @@ struct fn_00466c00_arg0 {
     undefined1 field_0x1d; /* +0x1d */
 };
 
-/* Supplied declaration required: FUN_001b8e18. */
+/* Supplied declaration required: gameEnableFloatSettings. */
 
 
 int FUN_00466c00(fn_00466c00_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_001b8e18();
+  gameEnableFloatSettings();
   param_1->field_0x10 = 0;
   param_1->field_0x14 = 0;
   param_1->field_0x18 = 0x3f800000;

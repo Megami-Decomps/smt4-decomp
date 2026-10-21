@@ -39,9 +39,9 @@ extern int FUN_002f036c(void);
 /* Supplied declaration required: screen4AEnter. */
 extern int FUN_004cfe4c(int);
 /* Supplied declaration required: sendEvent100020E. */
-extern int FUN_004d04f4(void);
-extern int FUN_004d0524(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestConfirmPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: FUN_004d0680. */
 
@@ -65,11 +65,11 @@ void FUN_004a16bc(int param_1)
   temp_v7 = 0;
   temp_v8 = 0;
   temp_v9 = 0;
-  temp_v2 = FUN_004d0554();
+  temp_v2 = inputIsQuestMenuPressed();
   if (0 < *(short *)(param_1 + 0x864)) {
     temp_v7 = FUN_004d0584();
-    temp_v8 = FUN_004d0524();
-    temp_v9 = FUN_004d04f4();
+    temp_v8 = inputIsQuestConfirmPressed();
+    temp_v9 = inputIsQuestCancelPressed();
     if (temp_v7 == 0) {
       temp_v7 = (int)*(char *)(param_1 + 0x82a);
     }

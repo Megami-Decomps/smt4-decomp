@@ -11,7 +11,7 @@ int vec2GetXInt(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(unsigned int, int, unsigned int);
 int FUN_002bf380(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -32,7 +32,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -61,7 +61,7 @@ void FUN_00124d24(int param_1)
     }
     temp_v3 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v3);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     temp_v5 = 0.27f;
     if (param_1 != 0) {
@@ -101,7 +101,7 @@ void FUN_00124d24(int param_1)
       FUN_002bdce0(-*(int *)(temp_v0 + 0x9c),(int)*(short *)(temp_v2 + 8) + (int)(temp_v5 + temp_v4),
                    *(short *)(temp_v2 + 10) + temp_v1,1);
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     FUN_002bedb0(g_titleScene,3);
   }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002c53f4(int, int);
+int mathInterpolateTimed(int, int);
 
-/* Supplied declaration required: FUN_002c53f4. */
+/* Supplied declaration required: mathInterpolateTimed. */
 
 
 unsigned int FUN_0026f100(float *param_1,int param_2,int param_3)
@@ -18,7 +18,7 @@ unsigned int FUN_0026f100(float *param_1,int param_2,int param_3)
   float temp_v0;
   
   temp_v0 = in_s0;
-  FUN_002c53f4(param_2,param_3);
+  mathInterpolateTimed(param_2,param_3);
   *param_1 = in_s0;
   if (in_s1 - temp_v0 > 0.0f) {
     if (in_s1 <= in_s0) {

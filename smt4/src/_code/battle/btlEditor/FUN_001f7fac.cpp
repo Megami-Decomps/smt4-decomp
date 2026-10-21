@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_001e4a50(...); /* 0x1e4a50 */
+extern int jobDispatchOptionalOwner(...); /* 0x1e4a50 */
 extern unsigned char LAB_001f80f0; /* 0x1f80f0 */
 extern unsigned char LAB_001f8104; /* 0x1f8104 */
 extern int FUN_0020edd8(...); /* 0x20edd8 */
@@ -45,7 +45,7 @@ void FUN_001f7fac(unsigned int *param_1)
   int temp_v0;
   
   puVar1 = &LAB_001f80f0;
-  taskCreateDraw(&LAB_001f80f0,2,0,0,FUN_001e4a50,FUN_002c9edc,param_1,*param_1);
+  taskCreateDraw(&LAB_001f80f0,2,0,0,jobDispatchOptionalOwner,FUN_002c9edc,param_1,*param_1);
   param_1[0x16] = (unsigned int)puVar1;
   taskCreateDraw(&LAB_001f8104,0x73,0,0,FUN_0020edd8,0,param_1,puVar1);
   puVar2 = (unsigned int *)0x100;

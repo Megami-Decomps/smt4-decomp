@@ -1,3 +1,4 @@
+/* NON_MATCHING: result-array clearing is unrolled differently, changing stack allocation and subsequent register allocation. */
 #include "AsdSDK/Source/Net/Ngc/AsdNgc.h"
 
 extern "C" {

@@ -8,8 +8,8 @@ int FUN_002491b4(void);
 int handleBlockRefDrop(void);
 int FUN_002826d4(...);
 int FUN_00282780(unsigned int, unsigned int, int, int);
-int FUN_0028c814(...);
-int FUN_002be624(...);
+int textureCreateFromImage(...);
+int textFormatBuffer(...);
 int asdTextureRelease(void);
 int memAlloc(int, int, int, int, int, int);
 int asdMemFree(unsigned int);
@@ -33,9 +33,9 @@ extern unsigned int FUN_0024c3c8(unsigned int);
 /* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_002826d4. */
 /* Supplied declaration required: FUN_00282780. */
-/* Supplied declaration required: FUN_0028c814. */
+/* Supplied declaration required: textureCreateFromImage. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: memAlloc. */
@@ -185,11 +185,11 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                         else {
                           if (piVar2 != (int *)0x0) {
                             if (*(int *)(param_1[0x12] + 4) != 0) {
-                              FUN_002be624(temp_v7,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3)
+                              textFormatBuffer(temp_v7,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3)
                               ;
                             }
                             else {
-                              FUN_002be624(temp_v7,&DAT_004102f0,piVar2 + 3);
+                              textFormatBuffer(temp_v7,&DAT_004102f0,piVar2 + 3);
                             }
                           }
                           if (param_1[0x10] != 0) {
@@ -217,16 +217,16 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                           asdTextureRelease();
                           param_1[0xe] = 0;
                         }
-                        temp_v1 = FUN_0028c814(temp_v5);
+                        temp_v1 = textureCreateFromImage(temp_v5);
                         param_1[0xe] = temp_v1;
                       }
                       else {
                         if (piVar2 != (int *)0x0) {
                           if (*(int *)(param_1[0x12] + 4) != 0) {
-                            FUN_002be624(temp_v7,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3);
+                            textFormatBuffer(temp_v7,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3);
                           }
                           else {
-                            FUN_002be624(temp_v7,&DAT_004102f0,piVar2 + 3);
+                            textFormatBuffer(temp_v7,&DAT_004102f0,piVar2 + 3);
                           }
                         }
                         if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
@@ -238,7 +238,7 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                           asdTextureRelease();
                           param_1[0xe] = 0;
                         }
-                        temp_v0 = FUN_0028c814(temp_v1);
+                        temp_v0 = textureCreateFromImage(temp_v1);
                         param_1[0xe] = temp_v0;
                         asdMemFree(temp_v1);
                       }

@@ -1,2 +1,7 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_002764a8's literal pool; not written yet. */
 #include "common.h"
+
+/* Orders unsigned halfword keys in ascending order. */
+extern "C" s32 FUN_0038e29c(const u16 *left, const u16 *right)
+{
+    return *left - *right;
+}

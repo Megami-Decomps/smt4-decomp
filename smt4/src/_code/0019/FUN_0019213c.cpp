@@ -1,29 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019213c` (_code @ 0x19213c, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdSequenceRequest(int, unsigned int [2], int);
+extern void asdSequenceRequest(u32 state, const void *argument, u32 size);
 
-/* stack frame of void: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: asdSequenceRequest. */
-
-
+/* Requests sequence state twenty-three with a clear one-byte argument. */
 void FUN_0019213c(void)
-
 {
-/* irregular: irregular input(s): in_r3; 2 native warning(s); review required */
-  unsigned int in_r3;
-  unsigned int temp_v0 [2];
-  
-  temp_v0[0] = in_r3 & 0xffffff00;
-  asdSequenceRequest(0x17,temp_v0,1);
-  return;
+    u8 argument = 0;
+    asdSequenceRequest(23, &argument, sizeof(argument));
 }
 
 } /* extern "C" */

@@ -1,22 +1,27 @@
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+/* NON_MATCHING: retail uses `push {r4}` where armcc emits `mov r2, #0`. */
+#include "common.h"
 
 extern "C" {
-extern u32 DAT_0063f2f8[16]; /* per-3D-actor sound handles */
-extern u32 DAT_0063f4bc;     /* bit i: 3D actor i is playing */
-extern s8 DAT_0063f4c4;      /* 3D sound is enabled */
 
-/* Whether 3D actor `index` is playing; actors whose handle has gone are cleared from the mask. */
+struct Asd3dSoundSystemApoc {
+    /* 0x0000 */ u8 unk0000[0x1110];
+    /* 0x1110 */ u32 actorHandles[16];
+    /* 0x1150 */ u8 unk1150[0x184];
+    /* 0x12d4 */ u32 playingMask;
+    /* 0x12d8 */ u32 unk12d8;
+    /* 0x12dc */ u8 enabled;
+};
+extern Asd3dSoundSystemApoc g_asdSoundSystem;
+
 u32 asd3dSoundActorIsPlaying(u32 index)
 {
     u32 playing = 0;
-    u32 bit;
-
-    if (DAT_0063f4c4 != 0 && index < 16) {
-        bit = 1 << (index & 0xff);
-        if (DAT_0063f2f8[index] == 0) {
-            DAT_0063f4bc &= ~bit;
+    if (g_asdSoundSystem.enabled != 0 && index < 16) {
+        u32 bit = 1u << index;
+        if (g_asdSoundSystem.actorHandles[index] == 0) {
+            g_asdSoundSystem.playingMask &= ~bit;
         }
-        if ((bit & DAT_0063f4bc) != 0) {
+        if ((bit & g_asdSoundSystem.playingMask) != 0) {
             playing = 1;
         }
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00178b04(...);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
@@ -18,9 +18,9 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -53,10 +53,10 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
     temp_v6 = param_2;
     if (param_3 != 1) {
       if (param_3 == 2) {
-        piVar6 = (int *)(DAT_005806d4 + temp_v0 * 0x10 + 0x4b7c);
+        piVar6 = (int *)(g_mapEnemy + temp_v0 * 0x10 + 0x4b7c);
       }
       else if (param_3 == 3) {
-        piVar6 = (int *)(DAT_005806d4 + temp_v0 * 0x10 + 0x4a78);
+        piVar6 = (int *)(g_mapEnemy + temp_v0 * 0x10 + 0x4a78);
       }
       else {
         if (param_3 != 4) {
@@ -66,7 +66,7 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
           }
           continue;
         }
-        piVar6 = (int *)(DAT_005806d4 + temp_v0 * 0x10 + 0x4c80);
+        piVar6 = (int *)(g_mapEnemy + temp_v0 * 0x10 + 0x4c80);
       }
       if (*piVar6 == -1) {
         *piVar6 = param_1;
@@ -77,7 +77,7 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
         piVar6[2] = temp_v0;
         temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 0x5806e0);
         piVar6[3] = temp_v4;
-        temp_v0 = DAT_005806d4 + temp_v4 * 8;
+        temp_v0 = g_mapEnemy + temp_v4 * 8;
         piVar6 = (int *)(temp_v0 + 0x3d8c);
         if (*piVar6 != 0) {
           return 1;
@@ -86,7 +86,7 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
         do {
           temp_v2 = temp_v2 - 1;
         } while (temp_v2 != 0);
-        FUN_00100388(temp_v5,"map/all/sym%03d.bam",(int)*(short *)(temp_v4 * 0x10 + 0x582204));
+        textFormatBuffer(temp_v5,"map/all/sym%03d.bam",(int)*(short *)(temp_v4 * 0x10 + 0x582204));
         temp_v3 = 0x20;
         FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp",0x375);
         temp_v2 = 0;
@@ -106,7 +106,7 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
       }
     }
     else {
-      piVar6 = (int *)(DAT_005806d4 + temp_v0 * 0xc4 + 0x3e34);
+      piVar6 = (int *)(g_mapEnemy + temp_v0 * 0xc4 + 0x3e34);
       if (*piVar6 == -1) {
         temp_v0 = 0;
         *piVar6 = param_1;
@@ -119,14 +119,14 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
           piVar6[temp_v0 + 0x11] = temp_v2;
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x5806e0);
           piVar6[temp_v0 + 0x21] = temp_v4;
-          temp_v2 = DAT_005806d4 + temp_v4 * 8;
+          temp_v2 = g_mapEnemy + temp_v4 * 8;
           piVar7 = (int *)(temp_v2 + 0x3d8c);
           if (*piVar7 == 0) {
             temp_v3 = 0x15;
             do {
               temp_v3 = temp_v3 - 1;
             } while (temp_v3 != 0);
-            FUN_00100388(temp_v5,"map/all/sym%03d.bam",(int)*(short *)(temp_v4 * 0x10 + 0x582204));
+            textFormatBuffer(temp_v5,"map/all/sym%03d.bam",(int)*(short *)(temp_v4 * 0x10 + 0x582204));
             temp_v1 = 0x20;
             FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp",0x375);
             temp_v3 = 0;

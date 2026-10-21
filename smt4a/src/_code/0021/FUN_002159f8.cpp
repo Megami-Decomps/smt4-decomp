@@ -1,20 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002159f8` (_code @ 0x2159f8, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r2, [pc, #32] where the compiled block uses ldr r2, [pc, #28]. */
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-void FUN_002159f8(int param_1,unsigned char param_2)
-
+void FUN_002159f8(s32 flagIndex, u8 mask)
 {
-  unsigned char *pbVar1;
-  
-  pbVar1 = (unsigned char *)(param_1 + (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x27f40);
-  *pbVar1 = *pbVar1 & ~param_2;
-  return;
+    GameSaveImage *save = static_cast<GameSaveImage *>(g_gameDataBlocks.saveBlock);
+    save->work.flags[flagIndex] &= ~mask;
 }
 
 } /* extern "C" */

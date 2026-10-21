@@ -32,7 +32,7 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 extern int FUN_0033aa6c(int);
 /* Supplied declaration required: sub68OwnerCall5. */
 /* Supplied declaration required: FUN_00357b70. */
-extern int FUN_00364484(int);
+extern int gameFlagsTestSecondBank(int);
 
 
 void FUN_002ddea0(void)
@@ -87,7 +87,7 @@ void FUN_002ddea0(void)
         }
       }
       else {
-        temp_v2 = FUN_00364484((int)(short)*(unsigned int *)(temp_v3 + 0xcc));
+        temp_v2 = gameFlagsTestSecondBank((int)(short)*(unsigned int *)(temp_v3 + 0xcc));
         if (temp_v2 == 0) {
           if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) < 100) {
             temp_v0 = *(short *)(temp_v3 + 200);

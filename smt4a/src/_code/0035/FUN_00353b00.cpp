@@ -20,7 +20,7 @@ extern PopupState *g_popupState; /* 0x58104c */
 extern int g_gameState; /* 0x5f15fc */
 extern u8 DAT_0060a198; /* 0x60a198 */
 
-extern int FUN_00100388(u8 *dst, u8 *src);
+extern int textFormatBuffer(u8 *dst, u8 *src);
 extern int FUN_00152f44(void);
 extern FlagBlock *gameFlagsGetBlock(void);
 extern int gameFlagIsSet(u32 flag);
@@ -49,7 +49,7 @@ void FUN_00353b00(int popupOpen)
         }
     }
     if (popupOpen == 0 && marked && g_gameState != 0x24 && gameFlagIsSet(0x408) != 0) {
-        FUN_00100388(&DAT_0060a198, &DAT_00531ac8);
+        textFormatBuffer(&DAT_0060a198, &DAT_00531ac8);
         g_popupState->type = 0x18;
         g_popupState->state = 0;
         g_popupState->text = &DAT_0060a198;

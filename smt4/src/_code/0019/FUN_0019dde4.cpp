@@ -8,7 +8,7 @@ int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(void);
 
 extern unsigned char LAB_0019de94; /* 0x19de94 */
-extern unsigned int *DAT_0044cda0; /* 0x44cda0 */
+extern unsigned int *g_mapModelWork; /* 0x44cda0 */
 extern int DAT_0049faf8; /* 0x49faf8 */
 
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
@@ -24,8 +24,8 @@ void FUN_0019dde4(void)
   unsigned char *puVar3;
   unsigned int *puVar4;
   
-  puVar1 = DAT_0044cda0;
-  *DAT_0044cda0 = 0;
+  puVar1 = g_mapModelWork;
+  *g_mapModelWork = 0;
   puVar1[1] = 0;
   puVar1[2] = 0;
   *(unsigned char *)(puVar1 + 3) = 0;
@@ -38,8 +38,8 @@ void FUN_0019dde4(void)
   *(unsigned char *)(puVar1 + 10) = 0;
   puVar1[0xb] = 0;
   temp_v0 = DAT_0049faf8;
-  puVar1 = DAT_0044cda0;
-  DAT_0044cda0[2] = DAT_0049faf8;
+  puVar1 = g_mapModelWork;
+  g_mapModelWork[2] = DAT_0049faf8;
   if (0 < temp_v0) {
     puVar3 = &LAB_0019de94;
     asdMdlManagerCreateLoaded(&LAB_0019de94,7);
@@ -48,7 +48,7 @@ void FUN_0019dde4(void)
     puVar4 = (unsigned int *)puVar1[0xb];
     *puVar4 = *puVar4 | 2;
     *(unsigned char *)(*(int *)(puVar4[2] + 0x2c) + 0x1f6) = 0;
-    *DAT_0044cda0 = 1;
+    *g_mapModelWork = 1;
   }
   return;
 }

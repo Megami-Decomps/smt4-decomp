@@ -1,21 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338424` (_code @ 0x338424, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_00338424(int param_1)
-
+/* NON_MATCHING: retail parameter lifetime, address formation or grouped-store selection differs. */
+#include "common.h"
+struct AnimationState {
+    /* 0x0000 */ u8 unk00[0x1ea4];
+    /* 0x1ea4 */ f32 values[6];
+    /* 0x1ebc */ u32 state;
+};
+/* Clears all six animation parameters and the state. */
+extern "C" void FUN_00338424(AnimationState *animation)
 {
-  *(unsigned int *)(param_1 + 0x1ea4) = 0;
-  *(unsigned int *)(param_1 + 0x1ea8) = 0;
-  *(unsigned int *)(param_1 + 0x1eac) = 0;
-  *(unsigned int *)(param_1 + 0x1eb0) = 0;
-  *(unsigned int *)(param_1 + 0x1eb4) = 0;
-  *(unsigned int *)(param_1 + 0x1eb8) = 0;
-  *(unsigned int *)(param_1 + 0x1ebc) = 0;
-  return;
+    animation->values[0] = 0.0f;
+    animation->values[1] = 0.0f;
+    animation->values[2] = 0.0f;
+    animation->values[3] = 0.0f;
+    animation->values[4] = 0.0f;
+    animation->values[5] = 0.0f;
+    animation->state = 0;
 }
-
-} /* extern "C" */

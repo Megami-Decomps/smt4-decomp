@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00257dec(...);
-int FUN_00269bd0(...);
+int randomGetLowerTenBits(...);
+int randomGetUpperSixBits(...);
 int devilGetRecord(...);
 
 typedef struct fn_00336ed0_arg2 fn_00336ed0_arg2;
@@ -28,8 +28,8 @@ struct fn_00336ed0_arg2 {
 };
 
 extern unsigned short FUN_0023eb7c(fn_00336ed0_arg2 *);
-/* Supplied declaration required: FUN_00257dec. */
-/* Supplied declaration required: FUN_00269bd0. */
+/* Supplied declaration required: randomGetLowerTenBits. */
+/* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: devilGetRecord. */
 
 
@@ -86,19 +86,19 @@ void FUN_00336ed0(unsigned int param_1,unsigned char *param_2,fn_00336ed0_arg2 *
   temp_v2 = 0;
   do {
     pfVar3 = param_3;
-    FUN_00257dec(param_3,temp_v2 & 0xff);
+    randomGetLowerTenBits(param_3,temp_v2 & 0xff);
     *(unsigned short *)(param_2 + temp_v2 * 2 + 0x102) =
          ((unsigned short)(int)pfVar3 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v2 * 2 + 0x102) & 0xfc00);
     pfVar3 = param_3;
-    FUN_00269bd0(param_3,temp_v2 & 0xff);
+    randomGetUpperSixBits(param_3,temp_v2 & 0xff);
     *(unsigned short *)(param_2 + temp_v2 * 2 + 0x102) =
          (unsigned short)((int)pfVar3 << 10) | (*(unsigned short *)(param_2 + temp_v2 * 2 + 0x102) & 0x3ff);
     pfVar3 = param_3;
-    FUN_00257dec(param_3,temp_v2 & 0xff);
+    randomGetLowerTenBits(param_3,temp_v2 & 0xff);
     *(unsigned short *)(param_2 + temp_v2 * 2 + 0x126) =
          ((unsigned short)(int)pfVar3 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v2 * 2 + 0x126) & 0xfc00);
     pfVar3 = param_3;
-    FUN_00269bd0(param_3,temp_v2 & 0xff);
+    randomGetUpperSixBits(param_3,temp_v2 & 0xff);
     temp_v3 = temp_v2 + 1;
     *(unsigned short *)(param_2 + temp_v2 * 2 + 0x126) =
          (unsigned short)((int)pfVar3 << 10) | (*(unsigned short *)(param_2 + temp_v2 * 2 + 0x126) & 0x3ff);

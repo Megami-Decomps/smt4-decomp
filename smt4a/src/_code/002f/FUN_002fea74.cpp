@@ -1,45 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fea74` (_code @ 0x2fea74, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'pop {r2, r3, r4, pc}'; compiler emits 'add sp, #8' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_002f2a22(int, int *, int, unsigned int, int);
-int ringPush(int, int **);
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_002f2a22. */
-/* Supplied declaration required: ringPush. */
-
-
-void FUN_002fea74(int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int *temp_v1;
-  
-  if (param_2 != (int *)0x0) {
-    piVar1 = (int *)*param_2;
-    temp_v1 = param_2;
-    if (piVar1 != (int *)0x0) {
-      temp_v0 = *(int *)(param_1 + 0x80);
-      if (temp_v0 != 0) {
-        FUN_002f2a22(temp_v0,piVar1,temp_v0,param_4,param_1);
-      }
-      else {
-        (**(romwright_code **)(*piVar1 + 4))();
-      }
+struct Target;
+struct TargetVtable { void *reserved; void (*destroy)(Target *target); };
+struct Target { TargetVtable *vtable; };
+struct Object { u8 unk00[0x24]; u8 ring[0x5C]; void *owner; };
+void FUN_002f2a22(void *owner, Target *target);
+void ringPush(void *ring, Target ***reference);
+void FUN_002fea74(Object *object, Target **target) {
+    if (target) {
+        if (*target) {
+            if (object->owner) FUN_002f2a22(object->owner, *target);
+            else (*target)->vtable->destroy(*target);
+        }
+        ringPush(object->ring, &target);
     }
-    ringPush(param_1 + 0x24,&temp_v1);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,14 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c3d78` (_code @ 0x4c3d78, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_004c3d78(void)
-
-{
-  return;
+/* NON_MATCHING: VFP multiply operands are reversed. */
+#include "common.h"
+/* Applies the category scale for the enabled or disabled variant. */
+extern "C" f32 FUN_004c3d78(s32 category,s32 enabled,f32 value) {
+    f32 factor;
+    if(enabled!=0) factor=category<4 ? 1.2999999523162842f : 1.100000023841858f;
+    else factor=category<4 ? 0.7692307829856873f : 0.9090908765792847f;
+    return factor*value;
 }
-
-} /* extern "C" */

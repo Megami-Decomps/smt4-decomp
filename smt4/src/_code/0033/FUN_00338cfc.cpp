@@ -14,7 +14,7 @@ int VectorUnsignedToFloat(int, int);
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int FUN_0023ea94(void);
 extern int randRange(unsigned int);
-extern int FUN_002542ec(int);
+extern int saveResolvePartySlot(int);
 extern int FUN_002973ec(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable00FindById. */
@@ -109,7 +109,7 @@ LAB_00338da0:
     do {
       temp_v6 = gameGetSlotTable();
       if (-1 < *(char *)(temp_v6 + temp_v7 + 0x9108)) {
-        temp_v6 = FUN_002542ec(temp_v7);
+        temp_v6 = saveResolvePartySlot(temp_v7);
         temp_v1 = *(unsigned short *)(temp_v6 + 0x44);
         if (((temp_v1 & 2) == 0 && (temp_v1 & 0x400) == 0) && (temp_v1 & 4) == 0) {
           temp_v6 = (int)*(short *)(temp_v6 + 0x1a) + (int)*(short *)(temp_v6 + 0x18);

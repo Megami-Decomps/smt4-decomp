@@ -10,7 +10,7 @@ int FUN_00283e48(void);
 int FUN_00295660(int, int *);
 int FUN_00296ae8(unsigned int, int, unsigned int, int);
 int FUN_002ae164(void);
-int FUN_002be624(int *, unsigned char *);
+int textFormatBuffer(int *, unsigned char *);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern int DAT_0043da2c; /* 0x43da2c */
 /* Supplied declaration required: FUN_002ae164. */
 extern int idIsAbove400(int);
 extern unsigned int FUN_002b47ec(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_0029c94c(int param_1)
@@ -57,7 +57,7 @@ void FUN_0029c94c(int param_1)
       FUN_00283e48();
       FUN_0024bda8(&temp_v3,(*(unsigned int *)(temp_v2 + 0x38) & 0xffff) >> 0xb);
       FUN_00295660(0x24,&temp_v3);
-      FUN_002be624(&temp_v3,&LAB_0029ca4c);
+      textFormatBuffer(&temp_v3,&LAB_0029ca4c);
       FUN_00295660(0x25,&temp_v3);
     }
     else {

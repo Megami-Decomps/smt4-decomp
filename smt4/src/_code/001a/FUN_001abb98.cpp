@@ -11,7 +11,7 @@ int FUN_0028529c(int, int, int, int, int, int);
 int FUN_002852f0(int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
-int FUN_002be624(unsigned char [64], unsigned char *, int);
+int textFormatBuffer(unsigned char [64], unsigned char *, int);
 int randNextInRange(...);
 int gameGetMapBlock(void);
 int FUN_002ce4e4(void);
@@ -73,7 +73,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: gameGetMapBlock. */
@@ -720,10 +720,10 @@ LAB_001ac248:;
     if (0 < (&DAT_004bd0e0)[temp_v6]) {
       temp_v15 = FUN_00285574();
       if (temp_v15 != 0) {
-        FUN_002be624(temp_v24,&LAB_001aca08,temp_v6 + 1);
+        textFormatBuffer(temp_v24,&LAB_001aca08,temp_v6 + 1);
       }
       else {
-        FUN_002be624(temp_v24,&LAB_001acdc0,temp_v6 + 1);
+        textFormatBuffer(temp_v24,&LAB_001acdc0,temp_v6 + 1);
       }
       if (!((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 3)) {
         puVar22 = temp_v24;

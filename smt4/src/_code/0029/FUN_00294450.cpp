@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023f2e4(unsigned int, int, unsigned char [64], unsigned int);
 int dataTable08Sub2GetRecord(void);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned int FUN_0023cef0(unsigned int, unsigned int, unsigned short, uns
 /* Supplied declaration required: FUN_0023f2e4. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 void FUN_00294450(unsigned int param_1,int param_2,unsigned int param_3)
@@ -41,14 +41,14 @@ void FUN_00294450(unsigned int param_1,int param_2,unsigned int param_3)
         dataTable08Sub2GetRecord();
         temp_v2 = FUN_0023cef0(param_1,2,*(unsigned short *)(temp_v1 + 0x70),*(unsigned short *)(temp_v1 + 0x72),0
                             );
-        FUN_002be624(temp_v3,&LAB_00294588,*(unsigned short *)(temp_v1 + 0x70),
+        textFormatBuffer(temp_v3,&LAB_00294588,*(unsigned short *)(temp_v1 + 0x70),
                      *(unsigned short *)(temp_v1 + 0x72),temp_v2);
       }
     }
     else {
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 8);
       dataTable08Sub2GetRecord();
-      FUN_002be624(temp_v3,&LAB_0029456c,*(unsigned short *)(temp_v1 + 0x70),
+      textFormatBuffer(temp_v3,&LAB_0029456c,*(unsigned short *)(temp_v1 + 0x70),
                    *(unsigned short *)(temp_v1 + 0x72));
     }
   }
@@ -56,7 +56,7 @@ void FUN_00294450(unsigned int param_1,int param_2,unsigned int param_3)
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 6);
     dataTable08Sub2GetRecord();
     temp_v2 = FUN_0023cef0(param_1,0,*(unsigned short *)(temp_v1 + 0x70),*(unsigned short *)(temp_v1 + 0x72),0);
-    FUN_002be624(temp_v3,&LAB_00294550,*(unsigned short *)(temp_v1 + 0x70),
+    textFormatBuffer(temp_v3,&LAB_00294550,*(unsigned short *)(temp_v1 + 0x70),
                  *(unsigned short *)(temp_v1 + 0x72),temp_v2);
   }
   FUN_0023f2e4(param_1,param_2,temp_v3,param_3);

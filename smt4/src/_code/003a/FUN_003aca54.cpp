@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_003a78bc's literal pool; not written yet. */
-#include "common.h"
+#include "shard/W5_W5Match4_UiCallback.h"
+
+extern "C" {
+
+extern UiCallbackContext *DAT_0043d9c8;
+
+/* Runs the UI object's finishDraw callback. */
+s32 FUN_003aca54()
+{
+    DAT_0043d9c8->object->finishDraw();
+    return 0;
+}
+
+}

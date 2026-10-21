@@ -7,7 +7,7 @@ extern "C" {
 int ARM_common_memcpy4_9(unsigned int *, unsigned char *);
 int asdSequenceRequest(...);
 int FUN_001ad9b4(void);
-int FUN_00237418(void);
+int gameDataCopySaveToWork(void);
 int bgmReleaseStopped(void);
 int FUN_00270c58(int);
 int libc_strcpy(...);
@@ -25,7 +25,7 @@ extern unsigned char LAB_004b858c; /* 0x4b858c */
 extern unsigned char DAT_005f1634; /* 0x5f1634 */
 extern unsigned int DAT_005f1658; /* 0x5f1658 */
 extern unsigned int DAT_005f1660; /* 0x5f1660 */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -35,7 +35,7 @@ extern int DAT_005f1c98; /* 0x5f1c98 */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd118(void);
-/* Supplied declaration required: FUN_00237418. */
+/* Supplied declaration required: gameDataCopySaveToWork. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_00270c58. */
 /* Supplied declaration required: libc_strcpy. */
@@ -94,7 +94,7 @@ void FUN_004b82a0(int param_1)
   }
   else {
     if ((temp_v1 & 0x200000) != 0) {
-      FUN_00237418();
+      gameDataCopySaveToWork();
       temp_v5[0] = *(unsigned int *)(*(int *)(param_1 + 0x111c) + 0x40);
       temp_v5[1] = 0xffffffff;
       libc_strcpy(temp_v5 + 2,*(int *)(param_1 + 0x111c) + 0x44);
@@ -103,7 +103,7 @@ void FUN_004b82a0(int param_1)
       puVar5 = temp_v5;
     }
     else if ((temp_v1 & 0x40000) != 0) {
-      FUN_00237418();
+      gameDataCopySaveToWork();
       temp_v5[0] = DAT_005f1658;
       temp_v5[1] = 0xffffffff;
       libc_strcpy(temp_v5 + 2,&DAT_005f1660);
@@ -135,7 +135,7 @@ void FUN_004b82a0(int param_1)
     }
     else if (*(char *)(param_1 + 0x4a) != '\0') {
       temp_v4 = 4;
-      temp_v5[0] = DAT_005f1c98 - 200;
+      temp_v5[0] = g_mapSelection - 200;
       temp_v2 = 0xe;
       puVar5 = temp_v5;
     }

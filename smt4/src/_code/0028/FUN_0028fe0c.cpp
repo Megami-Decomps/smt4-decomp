@@ -10,7 +10,7 @@ int FUN_00296ae8(unsigned int, int, unsigned int, int);
 int FUN_00296b3c(unsigned int, int, unsigned int, int);
 int dataTable1bOr1cGetRecord(void);
 int FUN_002bcfc0(int, int);
-int FUN_002be624(int *, unsigned char *, int);
+int textFormatBuffer(int *, unsigned char *, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ extern int FUN_00241c40(int);
 /* Supplied declaration required: FUN_00296b3c. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002bcfc0. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned char *FUN_002c5c04(unsigned int *);
 extern int FUN_003336dc(int, unsigned int);
 extern unsigned char *FUN_00385ccc(unsigned int, int);
@@ -57,7 +57,7 @@ void FUN_0028fe0c(int param_1,unsigned int param_2)
       *(unsigned char *)(temp_v0 + 0x5f7) = 1;
     }
     else {
-      FUN_002be624(&temp_v2,&LAB_0028ff98,param_1);
+      textFormatBuffer(&temp_v2,&LAB_0028ff98,param_1);
       temp_v3 = (unsigned char *)FUN_002c5c04((unsigned int *)&temp_v2);
       *(unsigned char **)(temp_v0 + 0x5e0) = temp_v3;
       *(unsigned char *)(temp_v0 + 0x5f7) = 0;

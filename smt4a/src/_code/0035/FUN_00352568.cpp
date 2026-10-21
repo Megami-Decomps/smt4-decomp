@@ -35,7 +35,7 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_0030250c. */
 extern int sub68OwnerCall1(void);
 /* Supplied declaration required: FUN_0033abb4. */
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 
 
 void FUN_00352568(void)
@@ -103,7 +103,7 @@ void FUN_00352568(void)
           temp_v0 = (unsigned int)*(unsigned short *)(DAT_005806a4 + 0xb6);
         }
         if ((temp_v6 && temp_v0 == 0) &&
-           ((temp_v1 = FUN_004d0554(), temp_v1 != 0 ||
+           ((temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0 ||
             (((temp_v1 = FUN_00163fd4(8), temp_v1 != 0 && (temp_v1 = FUN_00163fd4(7), temp_v1 != 0)) &&
              ((temp_v1 = padButtonIsPressed(8), temp_v1 == 0 &&
               ((temp_v1 = padButtonIsPressed(7), temp_v1 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))

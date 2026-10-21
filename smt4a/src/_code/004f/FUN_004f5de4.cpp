@@ -1,26 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f5de4` (_code @ 0x4f5de4, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-void FUN_004f5de4(int param_1)
-
-{
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = *(int *)(param_1 + temp_v0 * 0x28 + 400);
-    if (temp_v1 != 0) {
-      temp_v1 = *(int *)(temp_v1 + 4);
-      *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x32);
-  return;
-}
-
-} /* extern "C" */
+/* NON_MATCHING: compiler unrolls the model-slot activation loop. */
+#include "common.h"
+struct Model {u32 unk00;u32 flags;};
+struct ModelHolder {u32 unk00;Model *model;};
+struct ModelSlot {ModelHolder *holder;u8 unk04[36];};
+struct ModelOwner {u8 unk000[400];ModelSlot slots[50];};
+/* Activates every present model in the fifty slots. */
+extern "C" void FUN_004f5de4(ModelOwner *owner){for(int i=0;i<50;++i)if(owner->slots[i].holder!=NULL)owner->slots[i].holder->model->flags|=3;}

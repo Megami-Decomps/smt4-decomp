@@ -8,8 +8,8 @@ int FUN_001a9604(...);
 int FUN_0025ba8c(...);
 int FUN_0025bab8(...);
 int colorSetAndCachePica(...);
-int FUN_0025bb10(...);
-int FUN_0025ca80(...);
+int asdModelSlotGetResource(...);
+int asdModelSlotSetTranslation(...);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int VectorSignedToFloat(...);
@@ -42,9 +42,9 @@ extern unsigned char LAB_00294c1c; /* 0x294c1c */
 /* Supplied declaration required: FUN_0025ba8c. */
 /* Supplied declaration required: FUN_0025bab8. */
 /* Supplied declaration required: colorSetAndCachePica. */
-/* Supplied declaration required: FUN_0025bb10. */
+/* Supplied declaration required: asdModelSlotGetResource. */
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_0025ca80. */
+/* Supplied declaration required: asdModelSlotSetTranslation. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 
@@ -108,7 +108,7 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
   VectorSignedToFloat((int)((unsigned long long)param_9 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v8 = temp_v1;
   temp_v0 = FUN_0025bb34(1,&LAB_00294bc8,0);
-  temp_v3 = FUN_0025bb10(temp_v0,0);
+  temp_v3 = asdModelSlotGetResource(temp_v0,0);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
     colorSetAndCachePica(&temp_v3);
     FUN_0025bab8(&temp_v3);
@@ -126,7 +126,7 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     *(float *)(temp_v3 + 0x114) = temp_v8;
   }
   temp_v0 = FUN_0025bb34(1,&LAB_00294bf8,0);
-  temp_v6 = FUN_0025bb10(temp_v0,0);
+  temp_v6 = asdModelSlotGetResource(temp_v0,0);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
     colorSetAndCachePica(&temp_v6);
     FUN_0025bab8(&temp_v6);
@@ -138,7 +138,7 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     FUN_0025ba8c(&temp_v6);
   }
   temp_v0 = FUN_0025bb34(1,&LAB_00294c1c,0);
-  temp_v7[0] = FUN_0025bb10(temp_v0,0);
+  temp_v7[0] = asdModelSlotGetResource(temp_v0,0);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
     colorSetAndCachePica(temp_v7);
     FUN_0025bab8(temp_v7);
@@ -150,9 +150,9 @@ void FUN_00294834(int param_1,int param_2,int param_3,unsigned int param_4,unsig
     FUN_0025ba8c(temp_v7);
   }
   temp_v0 = FUN_0025bb34(1,&LAB_00294bf8,0);
-  FUN_0025ca80(temp_v0,0);
+  asdModelSlotSetTranslation(temp_v0,0);
   temp_v0 = FUN_0025bb34(1,&LAB_00294c1c,0);
-  FUN_0025ca80(temp_v0,0);
+  asdModelSlotSetTranslation(temp_v0,0);
   FUN_001a9604(0);
   return;
 }

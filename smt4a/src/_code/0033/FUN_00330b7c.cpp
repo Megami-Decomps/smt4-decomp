@@ -1,27 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00330b7c` (_code @ 0x330b7c, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses `mov r0, #0` where armcc emits `push {r4}`. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
+struct SaveRecord { u8 unk00[0x4e]; u16 value; };
+struct SaveWork { u8 unk0000[0x5f5c]; SaveRecord records[1280]; };
+struct GameBlocks { u32 unk00; SaveWork *work; };
+extern GameBlocks g_gameDataBlocks;
 
 void FUN_00330b7c(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v1 + 1;
-    *(unsigned short *)(temp_v0 + temp_v1 * 0x50 + 0x5faa) = 0;
-    temp_v1 = temp_v2;
-  } while (temp_v2 < 0x500);
-  return;
+    SaveWork *work = g_gameDataBlocks.work;
+    for (s32 i = 0; i < 1280; i++) {
+        work->records[i].value = 0;
+    }
 }
 
 } /* extern "C" */

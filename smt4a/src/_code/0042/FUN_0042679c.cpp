@@ -1,27 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042679c` (_code @ 0x42679c, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: stack argument forwarding uses VFP copies instead of retail integer ldm/stm. */
+#include "common.h"
 extern "C" {
-
-int FUN_00426820(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00426820. */
-
-
-void FUN_0042679c(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  FUN_00426820();
-                    /* WARNING: Treating indirect jump as return */
-  return;
+u32 FUN_00426820(u32 first, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth);
+/* Forwards the complete service request. */
+u32 FUN_0042679c(u32 first, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth) { return FUN_00426820(first, second, third, fourth, fifth, sixth); }
 }
-
-} /* extern "C" */

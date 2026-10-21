@@ -9,7 +9,7 @@ int vec2GetXInt(int);
 int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int FUN_0019de98(...);
 int FUN_0031d174(...);
 int FUN_004ba354(...);
@@ -28,13 +28,13 @@ typedef struct {
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_004ba354. */
 /* Supplied declaration required: FUN_004cfe4c. */
-extern int FUN_004d0040(int);
+extern int rangeGetMinimumLimit(int);
 
 
 void FUN_004bade4(int param_1)
@@ -52,7 +52,7 @@ void FUN_004bade4(int param_1)
   int temp_v8;
   
   if ((*(int *)(param_1 + 8) != 0) && (*(char *)(param_1 + 0x9ec) == '\0')) {
-    FUN_0019d880();
+    jobGetScalarValue();
     temp_v8 = param_1 + 200;
     temp_v2 = vec2GetXInt(temp_v8);
     temp_v3 = vec2GetYInt(temp_v8);
@@ -72,7 +72,7 @@ void FUN_004bade4(int param_1)
       FUN_00164b5c(2,0x1f,*(unsigned int *)(param_1 + 0x1024),temp_v4,temp_v8,0x20);
     }
     temp_v4 = FUN_002a482c(param_1);
-    temp_v8 = FUN_004d0040(param_1);
+    temp_v8 = rangeGetMinimumLimit(param_1);
     temp_v7 = 0;
     if (temp_v7 < temp_v8) {
       do {

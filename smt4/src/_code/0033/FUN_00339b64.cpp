@@ -25,7 +25,7 @@ extern unsigned int DAT_00435db4; /* 0x435db4 */
 extern unsigned int DAT_00435db8; /* 0x435db8 */
 extern unsigned int DAT_00435dbc; /* 0x435dbc */
 
-extern int FUN_0023ea6c(unsigned int);
+extern int resourceFindActiveIndex(unsigned int);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00328d2c. */
 /* Supplied declaration required: FUN_00328fa4. */
@@ -123,7 +123,7 @@ LAB_00339d18:
       break;
     case 9:
 LAB_00339d34:
-      temp_v2 = FUN_0023ea6c(0x3e);
+      temp_v2 = resourceFindActiveIndex(0x3e);
       if (temp_v2 != 0) {
         *(short *)(param_1 + 0x49fe) = *(short *)(param_1 + 0x49fe) + 1;
         goto LAB_00339d58;

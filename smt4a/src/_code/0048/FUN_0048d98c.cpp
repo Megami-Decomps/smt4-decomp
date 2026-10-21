@@ -14,7 +14,7 @@ int FUN_0016c6f0(...);
 int FUN_001835b4(...);
 int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
-int FUN_0037b138(...);
+int effectSetByteSpeed(...);
 int words2Copy(int, float *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -49,7 +49,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: FUN_00185dd4. */
 extern int gameFlagIsSet(unsigned int);
 extern int gameOwnedBitTest(unsigned int);
-/* Supplied declaration required: FUN_0037b138. */
+/* Supplied declaration required: effectSetByteSpeed. */
 /* Supplied declaration required: words2Copy. */
 
 
@@ -173,7 +173,7 @@ void FUN_0048d98c(int param_1)
           temp_v2 = param_1 + temp_v4 * 100;
           if (*(short *)(temp_v2 + 0x7bc8) != 0) {
             drawSetColorFromRGBA8(*(unsigned int *)(temp_v2 + 0x7bdc));
-            FUN_0037b138(*(unsigned int *)(temp_v2 + 0x7bdc) & 0xff);
+            effectSetByteSpeed(*(unsigned int *)(temp_v2 + 0x7bdc) & 0xff);
             temp_v1 = gameFlagIsSet(0x3b);
             if (((temp_v1 == 0) || (*(unsigned char *)(temp_v2 + 0x7b98) != 0xa6)) &&
                (temp_v15[temp_v6] == (unsigned int)*(unsigned char *)(temp_v2 + 0x7b98))) {
@@ -298,24 +298,24 @@ LAB_0048dfc4:
       puVar8 = (unsigned int *)(temp_v4 + 0x178c);
       if (*(short *)(temp_v4 + 0x17c0) != 0) {
         drawSetColorFromRGBA8(*(unsigned int *)(temp_v4 + 0x17d4));
-        FUN_0037b138(*(unsigned int *)(temp_v4 + 0x17d4) & 0xff);
+        effectSetByteSpeed(*(unsigned int *)(temp_v4 + 0x17d4) & 0xff);
         if (*(char *)(temp_v4 + 0x17dc) != '\0') {
           *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff66;
-          FUN_0037b138(0x66);
+          effectSetByteSpeed(0x66);
         }
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bc8 || *(short *)(temp_v4 + 0x17c2) == 0x1bc9) {
           *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
           drawSetColorFromRGBA8(0xffffffff);
-          FUN_0037b138(*(unsigned int *)(temp_v4 + 0x17d4) & 0xff);
+          effectSetByteSpeed(*(unsigned int *)(temp_v4 + 0x17d4) & 0xff);
         }
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bd2) {
           if (*(int *)(param_1 + 0x4c0) != 0) {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff00;
-            FUN_0037b138(0);
+            effectSetByteSpeed(0);
           }
           else {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
-            FUN_0037b138(0xff);
+            effectSetByteSpeed(0xff);
             temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c4),
@@ -327,11 +327,11 @@ LAB_0048dfc4:
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bd4) {
           if (*(int *)(param_1 + 0x4c0) != 0) {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff00;
-            FUN_0037b138(0);
+            effectSetByteSpeed(0);
           }
           else {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
-            FUN_0037b138(0xff);
+            effectSetByteSpeed(0xff);
             temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c4),
@@ -343,11 +343,11 @@ LAB_0048dfc4:
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bd6) {
           if (*(int *)(param_1 + 0x4c0) != 0) {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff00;
-            FUN_0037b138(0);
+            effectSetByteSpeed(0);
           }
           else {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
-            FUN_0037b138(0xff);
+            effectSetByteSpeed(0xff);
             temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c4),
@@ -359,11 +359,11 @@ LAB_0048dfc4:
         if (*(short *)(temp_v4 + 0x17c2) == 0x1bd8) {
           if (*(int *)(param_1 + 0x4c0) != 0) {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff00;
-            FUN_0037b138(0);
+            effectSetByteSpeed(0);
           }
           else {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
-            FUN_0037b138(0xff);
+            effectSetByteSpeed(0xff);
             temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c4),
@@ -382,7 +382,7 @@ LAB_0048dfc4:
             temp_v12 = 0xff;
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
           }
-          FUN_0037b138(temp_v12);
+          effectSetByteSpeed(temp_v12);
         }
         temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x17c8),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);

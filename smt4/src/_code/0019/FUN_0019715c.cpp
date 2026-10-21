@@ -16,7 +16,7 @@ int FUN_0028fc60(void);
 int FUN_002bdf94(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002be650(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
@@ -54,7 +54,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
@@ -164,7 +164,7 @@ void FUN_0019715c(int param_1,int param_2)
           }
           temp_v5 = FUN_002bf4f8(0x1d,0x473);
           temp_v11 = FUN_0028fb40(temp_v10);
-          FUN_002be624(temp_v13,&LAB_001976e8,temp_v11);
+          textFormatBuffer(temp_v13,&LAB_001976e8,temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
                        temp_v13);
@@ -205,7 +205,7 @@ void FUN_0019715c(int param_1,int param_2)
           }
           temp_v8 = FUN_002bf4f8(0x1d,0x47a);
           temp_v11 = FUN_0028fb40(temp_v10);
-          FUN_002be624(temp_v13,&LAB_001976e8,temp_v11);
+          textFormatBuffer(temp_v13,&LAB_001976e8,temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
                        temp_v13);

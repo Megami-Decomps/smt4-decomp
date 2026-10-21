@@ -9,11 +9,11 @@ int FUN_00208c64(unsigned int);
 int FUN_0025a1fc(...);
 int FUN_0025a8d8(...);
 int FUN_0025b478(...);
-int FUN_0027d9a8(void);
+int randomGetNormalizedFloat(void);
 int FUN_0028250c(void);
 int FUN_00287aec(void);
 int FUN_00287b0c(void);
-int FUN_00287be4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00291e40(int);
 int FUN_00295ba4(...);
 int FUN_002ad314(...);
@@ -71,11 +71,11 @@ static float romwright_fabs_4(float value)
 extern int FUN_0025b408(void);
 /* Supplied declaration required: FUN_0025b478. */
 extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_0027d9a8. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_00287b0c. */
-/* Supplied declaration required: FUN_00287be4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: FUN_00295ba4. */
 /* Supplied declaration required: FUN_002ad314. */
@@ -214,7 +214,7 @@ void FUN_001e5e78(int param_1)
     temp_v17 = temp_v17 * temp_v19;
     temp_v21 = CONCAT44(temp_v15 * temp_v19,temp_v14 * temp_v19);
     temp_v8 = *(unsigned int *)(DAT_004474f4 + 0x4c);
-    FUN_00287be4();
+    mathPositionHeadingDegrees();
     temp_v23 = (unsigned long long)temp_v8;
     temp_v14 = 10000.0f;
     temp_v6 = 0;
@@ -260,7 +260,7 @@ LAB_001e6120:
               *(unsigned char *)(temp_v12 + 0x212) = 1;
             }
             else {
-              FUN_00287be4();
+              mathPositionHeadingDegrees();
               temp_v15 = *(float *)(temp_v12 + 0x22c) - *(float *)(DAT_004474f4 + 0x4c);
               temp_v19 = *(float *)(temp_v12 + 0x230) - *(float *)(DAT_004474f4 + 0x50);
               temp_v18 = *(float *)(temp_v12 + 0x234) - *(float *)(DAT_004474f4 + 0x54);
@@ -1293,7 +1293,7 @@ joined_r0x001e7e00:
         pfVar14 = temp_v25 + temp_v6;
         temp_v16 = *pfVar14;
         if (temp_v16 != (float)((unsigned long long)temp_v22 >> 0x20)) {
-          FUN_0027d9a8();
+          randomGetNormalizedFloat();
           temp_v17 = *pfVar14;
           temp_v12 = temp_v4 + temp_v6 * 4;
           temp_v15 = *(float *)(temp_v12 + 0xcccc);
@@ -1308,7 +1308,7 @@ joined_r0x001e7e00:
             *(float *)(temp_v12 + 0xcccc) = temp_v15;
           }
           else {
-            FUN_0027d9a8();
+            randomGetNormalizedFloat();
             *(float *)(temp_v12 + 0xcccc) =
                  *(float *)(temp_v12 + 0xcccc) + (temp_v15 - temp_v14) * temp_v16 * (float)temp_v21;
           }

@@ -27,7 +27,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0023dc38. */
-extern int FUN_002542ec(void);
+extern int saveResolvePartySlot(void);
 /* Supplied declaration required: FUN_0026242c. */
 /* Supplied declaration required: FUN_00269bf0. */
 extern int gameGetUnitRecord(void);
@@ -103,7 +103,7 @@ unsigned int FUN_0023d9b8(int param_1,int param_2,fn_0023d9b8_arg2 *param_3)
   }
   else {
     if (param_2 != 0) {
-      temp_v2 = FUN_002542ec();
+      temp_v2 = saveResolvePartySlot();
     }
     else {
       temp_v2 = gameGetUnitRecord();

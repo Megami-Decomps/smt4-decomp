@@ -1,25 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f5004` (_code @ 0x2f5004, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds repeated game-data pointer loads and uses a different clamp/pool layout. */
+#include "common.h"
+
+namespace { struct Game { u8 padding[0x24ba8]; u32 money; }; struct Blocks { u32 header; Game *game; }; }
 
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-
-void FUN_002f5004(int param_1)
-
+extern Blocks g_gameDataBlocks;
+void FUN_002f5004(u32 amount)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = param_1 + *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24ba8);
-  if (temp_v0 >= 10000000) {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24ba8) = 9999999;
-  }
-  else {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24ba8) = temp_v0;
-  }
-  return;
+    u32 money = g_gameDataBlocks.game->money + amount;
+    if (money >= 10000000) { money = 9999999; }
+    g_gameDataBlocks.game->money = money;
 }
-
-} /* extern "C" */
+}

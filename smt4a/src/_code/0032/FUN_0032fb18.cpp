@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002613f0(int);
 
-extern int DAT_0057f134; /* 0x57f134 */
+extern int g_callbackWork; /* 0x57f134 */
 
 /* Supplied declaration required: FUN_002613f0. */
 
@@ -20,11 +20,11 @@ int FUN_0032fb18(int param_1)
   int temp_v1;
   int temp_v2;
   
-  temp_v0 = DAT_0057f134;
-  if (DAT_0057f134 == 0) {
+  temp_v0 = g_callbackWork;
+  if (g_callbackWork == 0) {
     param_1 = 0;
   }
-  if (DAT_0057f134 != 0 && param_1 != 0) {
+  if (g_callbackWork != 0 && param_1 != 0) {
     temp_v2 = 0;
     do {
       psVar2 = (short *)FUN_002613f0(temp_v2);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022a478(char *, int);
+int recordTrackDirtyValue(char *, int);
 int FUN_00298d64(char *, int);
 int flaggedEntrySetValueB(char *, int);
 int flaggedEntrySetValueA(char *, int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0022a478. */
+/* Supplied declaration required: recordTrackDirtyValue. */
 extern int flaggedEntryGetValueB(char *);
 /* Supplied declaration required: FUN_00298d64. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
@@ -83,7 +83,7 @@ void FUN_003c2b74(char *param_1)
         if (*param_1 != '\x01') {
           return;
         }
-        FUN_0022a478(param_1 + 0x10,temp_v1);
+        recordTrackDirtyValue(param_1 + 0x10,temp_v1);
         flaggedEntrySetValueB(param_1 + 0x10,temp_v2);
         return;
       }
@@ -97,7 +97,7 @@ void FUN_003c2b74(char *param_1)
   if (*param_1 != '\x01') {
     return;
   }
-  FUN_0022a478(param_1 + 0x10,temp_v1);
+  recordTrackDirtyValue(param_1 + 0x10,temp_v1);
   flaggedEntrySetValueB(param_1 + 0x10,temp_v2);
   return;
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00275bc8(int, unsigned int);
 
-extern int DAT_0057f134; /* 0x57f134 */
+extern int g_callbackWork; /* 0x57f134 */
 
 /* Supplied declaration required: FUN_00275bc8. */
 extern int loadSlotIsLoaded(unsigned int);
@@ -21,16 +21,16 @@ unsigned int FUN_002c0854(void)
   unsigned char temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = DAT_0057f134;
-  if (DAT_0057f134 != 0) {
-    temp_v2 = *(int *)(DAT_0057f134 + 0x10) == 0;
+  temp_v0 = g_callbackWork;
+  if (g_callbackWork != 0) {
+    temp_v2 = *(int *)(g_callbackWork + 0x10) == 0;
     temp_v1 = 0;
     if (!temp_v2) {
-      temp_v1 = *(int *)(DAT_0057f134 + 0x18);
+      temp_v1 = *(int *)(g_callbackWork + 0x18);
     }
     temp_v3 = temp_v1 == 0;
     if (!temp_v2 && !temp_v3) {
-      temp_v1 = *(int *)(DAT_0057f134 + 0x1c);
+      temp_v1 = *(int *)(g_callbackWork + 0x1c);
     }
     if (((((temp_v2 || temp_v3) || temp_v1 == 0) || (temp_v1 = loadSlotIsLoaded(0x14), temp_v1 == 0)) ||
         (temp_v1 = loadSlotIsLoaded(0x25), temp_v1 == 0)) || (temp_v1 = loadSlotIsLoaded(0x3e), temp_v1 == 0)) {

@@ -1,32 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00380a60` (_code @ 0x380a60, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int FUN_00235744(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00235744. */
-
-
-void FUN_00380a60(int param_1)
-
+/* NON_MATCHING: retail query scheduling or inlined accessor instruction grouping differs. */
+#include "common.h"
+struct TargetState { u8 unk00[12]; u32 flags; s32 value; };
+extern "C" { void thresholdDispatchOutsideRange(); extern s32 (*DAT_00471c20[])(void *); }
+/* Dispatches the flag-selected callback unless the target supplies its own result. */
+extern "C" s32 FUN_00380a60(TargetState *target)
 {
-/* irregular: 3 native warning(s); review required */
-  FUN_00235744();
-  if ((*(unsigned int *)(param_1 + 0xc) & 1) == 0) {
-                    /* WARNING: GHIDRA has no data in the loadimage at 0xfffffffe */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(((*(unsigned int *)(param_1 + 0xc) & 0x38) >> 3) * 4 + 0x471c20))(param_1 + 0x10);
-    return;
-  }
-  return;
+    thresholdDispatchOutsideRange();
+    if (target->flags & 1)
+        return target->value;
+    return DAT_00471c20[(target->flags & 56) >> 3]((u8 *)target + 16);
 }
-
-} /* extern "C" */

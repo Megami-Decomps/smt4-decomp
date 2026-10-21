@@ -16,11 +16,11 @@ typedef struct {
 extern int FUN_001f5f20(...); /* 0x1f5f20 */
 extern int FUN_001f646c(...); /* 0x1f646c */
 extern int FUN_00206e9c(...); /* 0x206e9c */
-extern int FUN_00206ef0(...); /* 0x206ef0 */
+extern int dataCompareSecondaryRank(...); /* 0x206ef0 */
 extern int devilRecordCompare(...); /* 0x206f30 */
 extern int devilIdCompareGradeDesc(...); /* 0x206f94 */
 extern int dataTable08Sub2CompareByRank(...); /* 0x206fd4 */
-extern int FUN_00207014(...); /* 0x207014 */
+extern int dataComparePrimaryRank(...); /* 0x207014 */
 extern int FUN_00207054(...); /* 0x207054 */
 extern int FUN_00207094(...); /* 0x207094 */
 extern int FUN_002070e0(...); /* 0x2070e0 */
@@ -442,7 +442,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00207014);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataComparePrimaryRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x27) {
@@ -452,7 +452,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00206ef0);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataCompareSecondaryRank);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x28) {

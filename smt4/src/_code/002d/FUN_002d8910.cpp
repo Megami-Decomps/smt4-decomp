@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00249b18(int, int);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
-int FUN_00254e2c(...);
+int messageForwardDefaultMode(...);
 int FUN_00295660(int, unsigned int);
 int gameGetUnitRecord(int);
 int FUN_002bd06c(unsigned int);
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00249b18. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: FUN_00254e2c. */
+/* Supplied declaration required: messageForwardDefaultMode. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: gameGetUnitRecord. */
@@ -91,7 +91,7 @@ int FUN_002d8910(int param_1)
       FUN_002bd06c(temp_v4);
       FUN_00295660(0x28,temp_v4);
       temp_v5 = scrWorkGetValue(1);
-      FUN_00254e2c(temp_v0,0xd,temp_v5,6,0);
+      messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
       if (temp_v0 == 1) {
@@ -106,7 +106,7 @@ int FUN_002d8910(int param_1)
       temp_v5 = FUN_002bd1fc();
       FUN_00295660(0x28,temp_v5);
       temp_v5 = scrWorkGetValue(1);
-      FUN_00254e2c(temp_v0,0xd,temp_v5,6,0);
+      messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
       temp_v6 = scrWorkGetValue(1);
       scrWorkSetValue(1,temp_v6 + 1);
     }
@@ -119,7 +119,7 @@ int FUN_002d8910(int param_1)
     }
     FUN_002bff50();
     temp_v1 = scrWorkGetValue(1);
-    FUN_00254e2c(temp_v0,temp_v5,temp_v1,6,0);
+    messageForwardDefaultMode(temp_v0,temp_v5,temp_v1,6,0);
     temp_v6 = scrWorkGetValue(1);
     scrWorkSetValue(1,temp_v6 + 1);
   }

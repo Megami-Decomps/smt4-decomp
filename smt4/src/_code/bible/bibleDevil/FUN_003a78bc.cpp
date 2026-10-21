@@ -8,7 +8,7 @@ int FUN_0022d1a8(...);
 int FUN_0022d434(...);
 int FUN_0022dde8(...);
 int FUN_0022e2fc(void);
-int FUN_0023266c(...);
+int rectangleInitializeSelection(...);
 int FUN_0023346c(...);
 int FUN_00233670(...);
 int FUN_0029dd7c(int);
@@ -45,7 +45,7 @@ extern unsigned int DAT_0043d9cc; /* 0x43d9cc */
 /* Supplied declaration required: FUN_0022d434. */
 /* Supplied declaration required: FUN_0022dde8. */
 /* Supplied declaration required: FUN_0022e2fc. */
-/* Supplied declaration required: FUN_0023266c. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 extern unsigned int *FUN_00233228(void);
 /* Supplied declaration required: FUN_0023346c. */
 /* Supplied declaration required: FUN_00233670. */
@@ -91,7 +91,7 @@ void FUN_003a78bc(int *param_1)
   puVar2 = &LAB_003a7b34;
   taskCreateDraw(&LAB_003a7b34,0xe6,1,0,&LAB_003aca54,0,DAT_0043d9c8,param_1[1]);
   param_1[3] = (int)puVar2;
-  FUN_0023266c(param_1 + 0x32,0x140,0,0x1d);
+  rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1d);
   temp_v0 = 0x68;
   asdOperatorNew();
   puVar5 = (unsigned int *)0x0;

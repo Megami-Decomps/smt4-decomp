@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bf810(...);
 int FUN_002cedd8(...);
 
 extern int DAT_0043e170; /* 0x43e170 */
 
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf810. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002cedd8. */
@@ -32,10 +32,10 @@ unsigned int scrComm_SearchWin_Start(void)
       if (temp_v1 != 1) {
         return 1;
       }
-      FUN_002be624(DAT_0043e170 + 0xc4,"Searching...\n");
+      textFormatBuffer(DAT_0043e170 + 0xc4,"Searching...\n");
     }
     else {
-      FUN_002be624(DAT_0043e170 + 0xc4,"Receiving data...\n");
+      textFormatBuffer(DAT_0043e170 + 0xc4,"Receiving data...\n");
     }
     *(unsigned char *)(temp_v0 + 0x14) = 1;
     *(unsigned int *)(temp_v0 + 8) = 1;

@@ -1,27 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00270c18` (_code @ 0x270c18, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #44] where the compiled block uses ldr r1, [pc, #44]. */
+#include "common.h"
 
 extern "C" {
+extern u32 g_lcgRandomRangeState;
 
-int VectorUnsignedToFloat(unsigned int, int);
-
-extern unsigned int g_lcgRandomRangeState; /* 0x573c78 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-
-
-unsigned int FUN_00270c18(void)
-
+f32 FUN_00270c18(void)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int in_fpscr;
-  
-  g_lcgRandomRangeState = g_lcgRandomRangeState * 0x41c64e6d + 0x3039;
-  temp_v0 = g_lcgRandomRangeState >> 0x10;
-  VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return temp_v0;
-}
+    g_lcgRandomRangeState = g_lcgRandomRangeState * 0x41C64E6Du + 0x3039u;
 
-} /* extern "C" */
+    const u32 sample = g_lcgRandomRangeState >> 16;
+    return static_cast<f32>(sample) * 0.00001525902189314365386962890625f;
+}
+}

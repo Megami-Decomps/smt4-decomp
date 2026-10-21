@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
 /* Builds the file path for the current entry and starts loading it, then switches to state 4 (only if the resource is ready). */
 #include "common.h"
 
@@ -18,7 +17,7 @@ typedef struct Loader {
 } Loader;
 
 extern s32 FUN_0022b14c(void *resource);
-extern void FUN_002be624(u8 *buffer, const char *format, s32 arg);
+extern void textFormatBuffer(u8 *buffer, const char *format, s32 arg);
 extern u32 tableGroupFindEntryIndex(u32 listener, u8 *buffer);
 extern void scrScriptProcessStartEntry(u32 target, u32 handle);
 
@@ -27,7 +26,7 @@ void FUN_003ba460(Loader *loader)
     u8 path[32];
 
     if (FUN_0022b14c(loader->resource) != 0) {
-        FUN_002be624(path, "%s", loader->pathBase + 0x20);
+        textFormatBuffer(path, "%s", loader->pathBase + 0x20);
         scrScriptProcessStartEntry(loader->target, tableGroupFindEntryIndex(loader->listener, path));
         loader->state = 4;
         loader->stateStep = 0;

@@ -1,2 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_003f034c; not written yet. */
 #include "common.h"
+
+/* Empty callback. */
+extern "C" void FUN_004c6294() {}

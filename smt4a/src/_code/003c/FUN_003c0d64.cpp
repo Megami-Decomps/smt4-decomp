@@ -1,14 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0d64` (_code @ 0x3c0d64, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+struct Subrecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s16 value;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u8 bytes[12];
+};
+struct RecordData {
+    /* 0x00 */ Subrecord entries[1];
+};
+struct KeyedRecord {
+    /* 0x000 */ u8 unk00[0x13c];
+    /* 0x13c */ RecordData *data;
+    /* 0x140 */ u8 unk140[8];
+};
 extern "C" {
-
-
-int FUN_003c0d64(int param_1,int param_2)
-
+extern KeyedRecord g_keyedRecords[];
+/* Returns the indexed subrecord field. */
+u8 * FUN_003c0d64(s32 record, s32 index)
 {
-  return *(int *)(param_1 * 0x148 + 0x5c613c) + param_2 * 0x14 + 8;
+    return g_keyedRecords[record].data->entries[index].bytes;
 }
-
-} /* extern "C" */
+}

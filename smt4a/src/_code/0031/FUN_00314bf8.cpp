@@ -1,27 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00314bf8` (_code @ 0x314bf8, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler uses different registers for the global work and zero argument. */
+#include "common.h"
 extern "C" {
-
-int FUN_0048821c(int, unsigned int);
-
-extern int g_naviMain; /* 0x587f28 */
-
-/* Supplied declaration required: FUN_0048821c. */
-
-
-void FUN_00314bf8(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_naviMain;
-  *(unsigned int *)(g_naviMain + 0x28) = param_1;
-  *(unsigned int *)(temp_v0 + 0x2c) = 0;
-  FUN_0048821c(temp_v0 + 0x68,param_1);
-  return;
+extern struct { u8 unk00[0x28]; u32 selection; u32 progress; u8 unk30[0x38]; u8 widget; } *g_naviMain;
+void FUN_0048821c(void *widget, u32 value);
+/* Changes navigation selection and resets its progress counter. */
+void FUN_00314bf8(u32 value) {
+    g_naviMain->selection = value;
+    g_naviMain->progress = 0;
+    FUN_0048821c(&g_naviMain->widget, value);
 }
-
-} /* extern "C" */
+}

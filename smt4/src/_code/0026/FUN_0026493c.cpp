@@ -12,7 +12,7 @@ int FUN_00274798(void);
 int mapIfClose(void);
 int mapDepartSetTarget(unsigned int, unsigned int);
 int FUN_00277b5c(unsigned int, unsigned int);
-int FUN_0027d9a8(void);
+int randomGetNormalizedFloat(void);
 int FUN_0027efb8(int, int, int);
 int FUN_0027f164(int, int);
 int FUN_00291e40(int);
@@ -62,7 +62,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00277b5c. */
-/* Supplied declaration required: FUN_0027d9a8. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_0027efb8. */
 /* Supplied declaration required: FUN_0027f164. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
@@ -252,7 +252,7 @@ LAB_00264b84:
         pfVar10 = temp_v14 + temp_v7;
         temp_v9 = *pfVar10;
         if (temp_v9 != temp_v11) {
-          FUN_0027d9a8();
+          randomGetNormalizedFloat();
           temp_v10 = *pfVar10;
           temp_v3 = param_1 + temp_v7 * 4;
           temp_v8 = *(float *)(temp_v3 + 0x4ef4);
@@ -267,7 +267,7 @@ LAB_00264b84:
             *(float *)(temp_v3 + 0x4ef4) = temp_v8;
           }
           else {
-            FUN_0027d9a8();
+            randomGetNormalizedFloat();
             *(float *)(temp_v3 + 0x4ef4) =
                  *(float *)(temp_v3 + 0x4ef4) + (temp_v8 - temp_v12) * temp_v9 * temp_v13;
           }

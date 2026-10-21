@@ -35,7 +35,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00473754. */
 /* Supplied declaration required: FUN_00473910. */
-extern int FUN_004cfb24(unsigned char *, unsigned int);
+extern int curveEvaluateStandard(unsigned char *, unsigned int);
 
 
 unsigned int FUN_00478ac4(void)
@@ -84,7 +84,7 @@ unsigned int FUN_00478ac4(void)
   temp_v5 = temp_v2;
   FUN_00473910(temp_v2,temp_v14[*(int *)(temp_v3 + 0x179c)]);
   FUN_00473754(temp_v2,temp_v5,temp_v13);
-  temp_v6 = FUN_004cfb24(temp_v13,3);
+  temp_v6 = curveEvaluateStandard(temp_v13,3);
   temp_v3 = FUN_001834a4(0x2f,0x2d);
   temp_v4 = (((int)*(short *)(temp_v3 + 8) + ((int)**(short **)(temp_v3 + 0xc) >> 1)) - (temp_v6 >> 1)) - 9;
   VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);

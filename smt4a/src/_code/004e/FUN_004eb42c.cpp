@@ -10,7 +10,7 @@ int sysMemClear(int, int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_0033413c(void);
+extern int gameGlobalsGetState(void);
 
 
 unsigned int FUN_004eb42c(int *param_1,int param_2)
@@ -38,7 +38,7 @@ unsigned int FUN_004eb42c(int *param_1,int param_2)
   temp_v1 = padButtonRepeat(3);
   temp_v6 = param_2 + 0x38;
   if (((temp_v1 != 0) || (temp_v1 = padButtonRepeat(0xc), temp_v1 != 0)) ||
-     (temp_v1 = FUN_0033413c(), temp_v1 >= 1)) {
+     (temp_v1 = gameGlobalsGetState(), temp_v1 >= 1)) {
     temp_v1 = padButtonRepeat(3);
     if ((temp_v1 != 0) || (temp_v1 = padButtonRepeat(0xc), temp_v1 != 0)) {
       eventQueueAddUnique(0x100020d);
@@ -80,7 +80,7 @@ unsigned int FUN_004eb42c(int *param_1,int param_2)
   else {
     temp_v1 = padButtonRepeat(4);
     if (((temp_v1 == 0) && (temp_v1 = padButtonRepeat(0xd), temp_v1 == 0)) &&
-       (temp_v1 = FUN_0033413c(), -1 < temp_v1)) {
+       (temp_v1 = gameGlobalsGetState(), -1 < temp_v1)) {
       *(unsigned char *)(*(int *)(param_2 + 0x5ac) + temp_v6) = 1;
     }
     else {

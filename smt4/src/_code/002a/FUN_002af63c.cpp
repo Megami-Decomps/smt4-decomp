@@ -12,7 +12,7 @@ int FUN_002b70cc(void);
 int FUN_002b76d0(...);
 int cameraSetViewMatrix(...);
 int FUN_002ba12c(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c1b64(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int VectorSignedToFloat(...);
@@ -82,7 +82,7 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba12c. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
@@ -264,7 +264,7 @@ LAB_002af7a0:
       if (*(short *)(temp_v13 + 4) == 0) {
         if (((*(unsigned char *)(temp_v13 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) {
           temp_v3 = 1;
-          FUN_002bf538();
+          efctSetSpeed();
         }
         if (((*(unsigned char *)(temp_v13 + 0xc) & 4) != 0) && ((*param_3 & 4) == 0)) {
           temp_v24[0x13] = temp_v24[0x13] * temp_v17;
@@ -300,7 +300,7 @@ LAB_002af7a0:
         }
         if (((*(unsigned char *)(temp_v13 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) {
           temp_v3 = 1;
-          FUN_002bf538();
+          efctSetSpeed();
         }
         if (((*(unsigned char *)(temp_v13 + 0xc) & 4) != 0) && ((*param_3 & 4) == 0)) {
           temp_v24[0x13] = temp_v24[0x13] * temp_v17;
@@ -414,7 +414,7 @@ LAB_002af7a0:
           cameraSetViewMatrix(g_titleScene,temp_v24 + 0x20);
         }
         if (temp_v3) {
-          FUN_002bf538();
+          efctSetSpeed();
         }
         if (temp_v4) {
           temp_v22 = temp_v24[0xe];
@@ -465,7 +465,7 @@ LAB_002af7a0:
 LAB_002af9f0:
     FUN_002a8ac4(param_2,param_3,temp_v34);
     if (temp_v3) {
-      FUN_002bf538();
+      efctSetSpeed();
     }
     if (temp_v4) {
       temp_v24[0x20] = temp_v24[0xc];

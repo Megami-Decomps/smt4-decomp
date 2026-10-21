@@ -5,7 +5,7 @@ extern "C" {
 typedef struct VObj2 VObj2;
 
 typedef struct VVtbl2 {
-    /* 0x00 */ void (*slot0)(VObj2 *self, u32 a, u32 c, u32 d);
+    /* 0x00 */ u32 (*slot0)(VObj2 *self, u32 a, u32 c, u32 d);
 } VVtbl2;
 
 struct VObj2 {
@@ -14,10 +14,13 @@ struct VObj2 {
 
 extern void FUN_001884c8(s32 value);
 
-void vcallSlot0With3(u32 a, VObj2 *obj, u32 c, u32 d)
+u32 vcallSlot0With3(u32 a, VObj2 *obj, u32 c, u32 d)
 {
+    if (a == 0 || obj == NULL) {
+        return 0xE0E046BC;
+    }
     FUN_001884c8(1);
-    obj->vtbl->slot0(obj, a, c, d);
+    return obj->vtbl->slot0(obj, a, c, d);
 }
 
 } /* extern "C" */

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void FUN_002a48ac(u8 *block, u32 a);
+extern void recordTrackDirtyValue(u8 *block, u32 a);
 extern void FUN_002a48e0(u8 *block, u32 a);
 extern void flaggedEntrySetValueB(u8 *block, u32 a);
 extern void flaggedEntrySetValueA(u8 *block, u32 a);
@@ -14,7 +14,7 @@ void setListWindow(u8 *obj, u32 a, u32 b)
         flaggedEntrySetValueA(obj + 0x10, b);
     }
     if (*obj == 1) {
-        FUN_002a48ac(obj + 0x10, a);
+        recordTrackDirtyValue(obj + 0x10, a);
         flaggedEntrySetValueB(obj + 0x10, b);
     }
 }

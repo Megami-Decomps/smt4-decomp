@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014ff04(unsigned int, int, int, char [12], char [4], int);
-int FUN_002bb150(int, int);
+int threadSleepDuration(int, int);
 int FUN_002c130c(int);
 int nn_applet_CTR_detail_ReplySleepQueryToManager(int);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern signed char DAT_0044e3b0; /* 0x44e3b0 */
 
 /* Supplied declaration required: FUN_0014ff04. */
-/* Supplied declaration required: FUN_002bb150. */
+/* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002c130c. */
 /* Supplied declaration required: nn_applet_CTR_detail_ReplySleepQueryToManager. */
 extern void nn_applet_CTR_detail_SleepIfShellClosed(void);
@@ -44,7 +44,7 @@ void FUN_002a7d9c(unsigned int param_1)
   }
   while (temp_v1 = param_1, FUN_0014ff04(param_1,0,0,temp_v3,temp_v2,0),
         (temp_v1 & (int)temp_v3[0] & (int)temp_v2[0]) == 0) {
-    FUN_002bb150(10000000,0);
+    threadSleepDuration(10000000,0);
   }
   if (temp_v0 == '\0') {
     return;

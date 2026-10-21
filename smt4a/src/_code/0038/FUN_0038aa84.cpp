@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_00184964(int, int);
 int FUN_004ff364(int, int);
-int FUN_004ff8ac(void);
+int resourceGetSampleFloat(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
 int __aeabi_idivmod(void);
@@ -26,7 +26,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00184964. */
 /* Supplied declaration required: FUN_004ff364. */
-/* Supplied declaration required: FUN_004ff8ac. */
+/* Supplied declaration required: resourceGetSampleFloat. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -66,7 +66,7 @@ int FUN_0038aa84(unsigned int *param_1,int param_2,int param_3,int param_4,int p
           return 0;
         }
         temp_v7 = 0;
-        FUN_004ff8ac();
+        resourceGetSampleFloat();
         temp_v16 = 0.0f;
         temp_v14 = (unsigned long long)(unsigned int)in_s0 << 0x20;
         temp_v9 = 0;

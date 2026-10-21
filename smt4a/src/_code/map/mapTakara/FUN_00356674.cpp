@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd784(...);
+int controllerSetPosition(...);
 int moriModelContentCopyBody(void);
 int FUN_0040ace8(...);
 int VectorSignedToFloat(...);
@@ -42,10 +42,10 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(void);
 extern int FUN_0033aaac(void);
-extern int FUN_00364484(int);
+extern int gameFlagsTestSecondBank(int);
 /* Supplied declaration required: FUN_003689d0. */
-extern int FUN_003b57f4(void);
-/* Supplied declaration required: FUN_003fd784. */
+extern int dataTableGetRecordFortyNine(void);
+/* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -100,7 +100,7 @@ unsigned int FUN_00356674(void)
     do {
       temp_v5 = 0;
       pcVar8 = (char *)0x0;
-      temp_v6 = FUN_003b57f4();
+      temp_v6 = dataTableGetRecordFortyNine();
       if (temp_v6 >= 1) {
         do {
           pcVar2 = pcVar8;
@@ -125,7 +125,7 @@ unsigned int FUN_00356674(void)
                 temp_v9 = 1;
               }
               if ((((((temp_v7 != 1 && temp_v7 != 0xb) && temp_v7 != 0xc) ||
-                    (temp_v6 = FUN_00364484((int)(short)(int)pcVar8), temp_v6 == 0)) &&
+                    (temp_v6 = gameFlagsTestSecondBank((int)(short)(int)pcVar8), temp_v6 == 0)) &&
                    ((!temp_v9 &&
                     ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))))) &&
                   ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) &&
@@ -136,7 +136,7 @@ unsigned int FUN_00356674(void)
             }
           }
           pcVar8 = pcVar8 + 1;
-          temp_v6 = FUN_003b57f4();
+          temp_v6 = dataTableGetRecordFortyNine();
         } while ((int)pcVar8 < temp_v6);
         if (temp_v5 != 0) {
           if (temp_v5 != 1) {
@@ -560,14 +560,14 @@ LAB_003572ac:
       moriModelContentCopyBody();
       temp_v1 = *(int *)(*(int *)(temp_v5 + 0xbd4) + 4);
       FUN_0040ace8(g_handleRegistry,temp_v1);
-      FUN_003fd784(temp_v1);
+      controllerSetPosition(temp_v1);
       temp_v6 = temp_v6 + 1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
     } while (temp_v6 < 3);
   }
   temp_v6 = 0;
   pcVar8 = (char *)0x0;
-  temp_v1 = FUN_003b57f4();
+  temp_v1 = dataTableGetRecordFortyNine();
   if (0 < temp_v1) {
     do {
       pcVar2 = pcVar8;
@@ -587,7 +587,7 @@ LAB_003572ac:
             temp_v9 = 1;
           }
           if ((((((temp_v1 != 1 && temp_v1 != 0xb) && temp_v1 != 0xc) ||
-                (temp_v1 = FUN_00364484((int)(short)(int)pcVar8), temp_v1 == 0)) && (!temp_v9)) &&
+                (temp_v1 = gameFlagsTestSecondBank((int)(short)(int)pcVar8), temp_v1 == 0)) && (!temp_v9)) &&
               ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
              (((*(short *)(pcVar2 + 0xe) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
               ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v1 = FUN_0033aaac(), temp_v1 == 0)))))) {
@@ -638,7 +638,7 @@ LAB_0035755c:
             if (((((temp_v3 == 3 || temp_v3 == 4) || (temp_v3 == 5 || temp_v3 == 7)) ||
                  (temp_v3 == 8 || temp_v3 == 9)) ||
                 ((temp_v3 == 10 || temp_v3 == 0x10 || (temp_v3 == 0xd || temp_v3 == 0xf)))) &&
-               (temp_v1 = FUN_00364484((int)(short)(int)pcVar8), temp_v1 != 0)) {
+               (temp_v1 = gameFlagsTestSecondBank((int)(short)(int)pcVar8), temp_v1 != 0)) {
               *(unsigned int *)(temp_v7 + 0xc0) = 2;
               *(unsigned int *)(temp_v7 + 0xa8) = 0xb;
             }
@@ -665,7 +665,7 @@ LAB_0035755c:
                 moriModelContentCopyBody();
                 FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
-                  FUN_003fd784(*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
+                  controllerSetPosition(*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 }
               }
               else {
@@ -676,7 +676,7 @@ LAB_0035755c:
                 *(int *)(temp_v7 + 0xdc) = temp_v1;
                 FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v1 * 8 + 0x20) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
-                  FUN_003fd784(*(unsigned int *)
+                  controllerSetPosition(*(unsigned int *)
                                 (*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(int *)(temp_v7 + 0xdc) * 8 + 0x20
                                          ) + 4));
                 }
@@ -691,7 +691,7 @@ LAB_0035755c:
         }
       }
       pcVar8 = pcVar8 + 1;
-      temp_v1 = FUN_003b57f4();
+      temp_v1 = dataTableGetRecordFortyNine();
     } while ((int)pcVar8 < temp_v1);
   }
   temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);

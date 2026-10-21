@@ -1,32 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002964f8` (_code @ 0x2964fc, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include <new>
+
+struct Obj557ae8 {
+    Obj557ae8();
+
+    u8* dispatchTable;       // 0x00
+    u8 unk04[0x12C];         // 0x04
+};
+
+struct LmapScene {
+    u8 unk00[0x1A8];         // 0x000
+    Obj557ae8* object;       // 0x1A8
+};
 
 extern "C" {
+void* asdOperatorNew(u32 size);
+extern u8 DAT_00557c60;
+extern LmapScene* g_lmapScene;
 
-int asdOperatorNew(void);
-
-extern unsigned char DAT_00557c60; /* 0x557c60 */
-extern int g_lmapScene; /* 0x581288 */
-
-/* Supplied declaration required: asdOperatorNew. */
-extern unsigned int *_ZN9Obj557ae8C1Ev(void);
-
-
-void FUN_002964f8(int param_1)
-
+void FUN_002964f8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  asdOperatorNew();
-  puVar1 = (unsigned int *)0x0;
-  if (param_1 != 0) {
-    puVar1 = (unsigned int *)_ZN9Obj557ae8C1Ev();
-    *puVar1 = (unsigned int)&DAT_00557c60;
-  }
-  *(unsigned int **)(g_lmapScene + 0x1a8) = puVar1;
-  return;
+    Obj557ae8* object = static_cast<Obj557ae8*>(asdOperatorNew(0x130));
+    if (object != NULL) {
+        object = new (object) Obj557ae8;
+        object->dispatchTable = &DAT_00557c60;
+    }
+    g_lmapScene->object = object;
 }
-
-} /* extern "C" */
+}

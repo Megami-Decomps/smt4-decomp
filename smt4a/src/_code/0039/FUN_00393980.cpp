@@ -11,7 +11,7 @@ int FUN_003a1ef4(void);
 
 /* Supplied declaration required: FUN_002b2d74. */
 /* Supplied declaration required: objectBufferFree. */
-extern int FUN_002b41c4(void);
+extern int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: FUN_0038439c. */
 /* Supplied declaration required: FUN_003a1ef4. */
 
@@ -24,7 +24,7 @@ unsigned int * FUN_00393980(int param_1)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002b41c4();
+  temp_v0 = resourceResolveHeaderPointer();
   puVar2 = (unsigned int *)(temp_v0 + 0x1c);
   FUN_003a1ef4();
   FUN_0038439c();

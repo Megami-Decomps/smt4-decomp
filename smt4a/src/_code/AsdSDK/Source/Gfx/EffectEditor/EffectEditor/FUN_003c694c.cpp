@@ -10,9 +10,9 @@ int FUN_001bc460(void);
 int FUN_00221ee0(float *);
 int FUN_002f8b30(void);
 int FUN_0037ee54(void);
-int FUN_00514500(int);
+int randomAdvanceShiftRegister(int);
 int FUN_00514540(int);
-int FUN_005147a0(float *);
+int matrixCopySelectedToGlobal(float *);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
@@ -89,9 +89,9 @@ extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_00221ee0. */
 /* Supplied declaration required: FUN_002f8b30. */
 /* Supplied declaration required: FUN_0037ee54. */
-/* Supplied declaration required: FUN_00514500. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
-/* Supplied declaration required: FUN_005147a0. */
+/* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -483,7 +483,7 @@ void FUN_003c694c(int param_1)
                 DAT_006472e4 = temp_v36;
                 DAT_006472e8 = temp_v14;
                 FUN_00514540(0);
-                FUN_005147a0(&temp_v32);
+                matrixCopySelectedToGlobal(&temp_v32);
                 DAT_006472dc = temp_v54;
                 DAT_006472e0 = temp_v52;
                 DAT_006472e4 = temp_v36;
@@ -574,7 +574,7 @@ void FUN_003c694c(int param_1)
           else {
             temp_v49[1] = -1;
             if (0 < temp_v51) {
-              FUN_00514500(0);
+              randomAdvanceShiftRegister(0);
               __aeabi_uidivmod();
               temp_v49[1] = temp_v49[1] - temp_v4;
             }

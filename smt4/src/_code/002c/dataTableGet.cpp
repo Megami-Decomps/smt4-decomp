@@ -1,28 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTableGet` (_code @ 0x2c0cec, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct TableEntry { u32 first; u32 file; u32 third; u32 fourth; }; }
 
 extern "C" {
-
-int dataTableFileGetTable(unsigned int);
-
-/* Supplied declaration required: dataTableFileGetTable. */
-
-
-void dataTableGet(unsigned int param_1)
-
+/* Reads or updates the current object state. */
+extern TableEntry DAT_0049382c[];
+void *dataTableFileGetTable(u32 file, u32 table);
+void *dataTableGet(u32 index, u32 table)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (param_1 < 0x43) {
-    temp_v0 = *(unsigned int *)(param_1 * 0x10 + 0x493830);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  dataTableFileGetTable(temp_v0);
-  return;
+    u32 file = index < 67 ? DAT_0049382c[index].file : 0;
+    return dataTableFileGetTable(file, table);
 }
-
-} /* extern "C" */
+}

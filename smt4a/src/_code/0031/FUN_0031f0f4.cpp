@@ -1,30 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031f0f4` (_code @ 0x31f0f4, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'bhi 3c'; compiler emits 'bhi 30' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-unsigned int FUN_0031f0f4(unsigned int param_1,unsigned short param_2)
-
-{
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (param_1 >= 0x501) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50;
-    *(unsigned short *)(temp_v1 + 0x5f40) = param_2;
-    if (param_2 >= 101) {
-      *(unsigned short *)(temp_v1 + 0x5f40) = 100;
-    }
-    temp_v0 = 1;
-  }
-  return temp_v0;
+struct Entry {
+    u8 pad[52];
+    u16 value;
+    u8 rest[26];
+};
+extern struct {
+    u32 reserved;
+    struct {
+        u8 pad[0x5F0C];
+        Entry entries[1];
+    } *table;
 }
-
-} /* extern "C" */
+g_gameDataBlocks;
+s32 FUN_0031f0f4(u32 index,u16 value) {
+    if(index>1280)return 0;
+    g_gameDataBlocks.table->entries[index].value=value>=101?100:value;
+    return 1;
+}
+}

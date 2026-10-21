@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_003fd76c(int, int);
+int controllerSetDestination(int, int);
 int FUN_003fe86c(int, int, int);
 
 extern int g_lmapScene; /* 0x581288 */
 extern int g_mapTrap; /* 0x587f0c */
 
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fe86c. */
 
 
@@ -21,7 +21,7 @@ void FUN_002ba474(void)
   int temp_v0;
   
   temp_v0 = *(int *)(*(int *)(g_mapTrap + 0x34) + 4);
-  FUN_003fd76c(temp_v0,g_lmapScene + 0x1c);
+  controllerSetDestination(temp_v0,g_lmapScene + 0x1c);
   FUN_003fe86c(temp_v0,0,2);
   *(unsigned int *)(temp_v0 + 0x1fc) = 0x40c00000;
   *(unsigned int *)(g_mapTrap + 100) = 1;

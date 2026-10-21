@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_001df78c's literal pool; not written yet. */
+/* NON_MATCHING: fragment of a larger function (starts with conditional data-like instruction bytes before a word store). */
 #include "common.h"

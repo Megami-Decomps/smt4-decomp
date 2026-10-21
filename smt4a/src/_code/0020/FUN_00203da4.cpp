@@ -50,7 +50,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_002a1f60. */
 /* Supplied declaration required: bustupCutAnimClearFlags. */
 /* Supplied declaration required: eventTexClearFlagB8. */
-extern int FUN_00399ddc(void);
+extern int bustupCutAnimIsStateFive(void);
 
 
 void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,
@@ -144,7 +144,7 @@ void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int
       temp_v1 = param_1->field_0x14;
     }
     if (temp_v4 && temp_v1 != 0) {
-      temp_v1 = FUN_00399ddc();
+      temp_v1 = bustupCutAnimIsStateFive();
       if (((temp_v1 != 0) || (temp_v1 = FUN_00163e84(0), temp_v1 == 0)) && (param_1->field_0x8 == 2)) {
         param_1->field_0x8 = 6;
       }
@@ -152,7 +152,7 @@ void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int
     }
   }
   param_1->field_0x14 = 0;
-  temp_v1 = FUN_00399ddc();
+  temp_v1 = bustupCutAnimIsStateFive();
   if (((temp_v1 != 0) || (temp_v1 = FUN_00163e84(0), temp_v1 == 0)) && (param_1->field_0x8 == 2)) {
     param_1->field_0x8 = 6;
   }

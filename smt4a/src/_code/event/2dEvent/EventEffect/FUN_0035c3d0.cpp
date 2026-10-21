@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdTMTexTableLoadTmx(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001acf98(...);
+int asdTMTexLoadMainHeap(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -26,14 +26,14 @@ extern unsigned char LAB_0035c640; /* 0x35c640 */
 extern unsigned char LAB_0035c660; /* 0x35c660 */
 extern int DAT_0057f3c4; /* 0x57f3c4 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001acf98. */
-extern int FUN_00341940(unsigned int);
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
+extern int textureGetIndexedResource(unsigned int);
 
 
 int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
@@ -69,13 +69,13 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
       piVar1[0xb] = 0;
       piVar1[0xc] = 0;
       piVar1[0xd] = 0;
-      FUN_00100388(temp_v2,&LAB_0035c628,temp_v1);
+      textFormatBuffer(temp_v2,&LAB_0035c628,temp_v1);
       puVar2 = temp_v2;
       asdProcessCreateSimple(puVar2,3,0,0,FUN_00283a48,0,piVar1);
       *piVar1 = (int)puVar2;
-      FUN_00100388(temp_v2,&LAB_0035c640,temp_v1);
+      textFormatBuffer(temp_v2,&LAB_0035c640,temp_v1);
       taskCreateDraw(temp_v2,0x85,0,0,FUN_002835f4,0,piVar1,*piVar1);
-      FUN_00100388(temp_v2,&LAB_0035c660,temp_v1);
+      textFormatBuffer(temp_v2,&LAB_0035c660,temp_v1);
       taskCreateDraw(temp_v2,0xe1,0,0,FUN_002835f4,0,piVar1,*piVar1);
       piVar1[4] = 0;
       piVar1[9] = param_1;
@@ -88,7 +88,7 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
       piVar1[0xc] = param_3;
       piVar1[0xd] = param_4;
       if (param_1 < 4) {
-        temp_v1 = FUN_00341940(0x35);
+        temp_v1 = textureGetIndexedResource(0x35);
         if (temp_v1 != 0) {
           DAT_0057f3c4 = DAT_0057f3c4 + 1;
         }
@@ -102,7 +102,7 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
           *(int *)(temp_v1 + 0x57f444) = *(int *)(temp_v1 + 0x57f444) + 1;
         }
         else {
-          FUN_001acf98(*(unsigned int *)(temp_v1 + 0x57f43c),*(unsigned int *)(temp_v1 + 0x57f440));
+          asdTMTexLoadMainHeap(*(unsigned int *)(temp_v1 + 0x57f43c),*(unsigned int *)(temp_v1 + 0x57f440));
           *(unsigned int *)(temp_v1 + 0x57f444) = 0;
         }
       }

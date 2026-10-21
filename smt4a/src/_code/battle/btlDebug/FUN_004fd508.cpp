@@ -24,7 +24,7 @@ extern unsigned int DAT_00573c4c; /* 0x573c4c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int btlGetMainState(void);
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_004102d8. */
 /* Supplied declaration required: FUN_004fb43c. */
 
@@ -105,7 +105,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       temp_v3 = -temp_v5 - 2;
       temp_v4 = temp_v3;
     }
-    temp_v7 = FUN_003e8430(temp_v1);
+    temp_v7 = btlScriptUnitHasFlags(temp_v1);
     if ((temp_v7 != 0) ||
        (temp_v5 = temp_v4,
        (DAT_00573c48 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
@@ -118,7 +118,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   case 0xe:
   case 0xf:
     temp_v3 = 0xfffffff6;
-    temp_v7 = FUN_003e8430(temp_v1);
+    temp_v7 = btlScriptUnitHasFlags(temp_v1);
     temp_v4 = 0xfffffff6;
     if ((temp_v7 != 0) ||
        (temp_v5 = temp_v3,
@@ -144,7 +144,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       temp_v4 = 0xffffffff;
     }
     temp_v3 = 0xffffffff;
-    temp_v7 = FUN_003e8430(temp_v1);
+    temp_v7 = btlScriptUnitHasFlags(temp_v1);
     if ((temp_v7 != 0) ||
        (temp_v5 = temp_v4,
        (DAT_00573c48 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
@@ -160,7 +160,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       temp_v4 = (temp_v7 - temp_v6) - 2;
     }
     temp_v3 = 0xfffffffe;
-    temp_v7 = FUN_003e8430(temp_v1);
+    temp_v7 = btlScriptUnitHasFlags(temp_v1);
     if ((temp_v7 != 0) ||
        (temp_v5 = temp_v4,
        (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573c48) != 0 ||
@@ -176,7 +176,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       temp_v4 = (temp_v7 - temp_v6) - 3;
     }
     temp_v3 = 0xfffffffd;
-    temp_v7 = FUN_003e8430(temp_v1);
+    temp_v7 = btlScriptUnitHasFlags(temp_v1);
     if ((temp_v7 != 0) ||
        (temp_v5 = temp_v4,
        (*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573c48) != 0 ||
@@ -192,7 +192,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       temp_v4 = (temp_v7 - temp_v6) - 4;
     }
     temp_v3 = 0xfffffffc;
-    temp_v7 = FUN_003e8430(temp_v1);
+    temp_v7 = btlScriptUnitHasFlags(temp_v1);
     if ((temp_v7 != 0) ||
        (temp_v5 = temp_v4,
        (*(unsigned int *)(temp_v1 + 0x45a4) & DAT_00573c4c) != 0 ||

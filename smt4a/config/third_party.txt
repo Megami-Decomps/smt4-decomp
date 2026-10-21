@@ -73,7 +73,7 @@
 0x00102610 FUN_00102610 between
 0x001026b4 FUN_001026b4 between
 0x0010284c FUN_0010284c between
-0x00102870 FUN_00102870 between
+0x00102870 FUN_00102870 callers
 0x001028b8 FUN_001028b8 between
 0x001028f4 libc_wprintfStr name
 0x00102984 libc_wprintfWstr name
@@ -2043,7 +2043,6 @@
 0x001764dc FUN_001764dc between
 0x001764f4 FUN_001764f4 between
 0x001775a8 FUN_001775a8 between
-0x00177614 FUN_00177614 between
 0x00177684 FUN_00177684 between
 0x00177e6c FUN_00177e6c between
 0x001780a4 FUN_001780a4 between
@@ -2253,7 +2252,6 @@
 0x0018ee0c FUN_0018ee0c between
 0x0018f0ac FUN_0018f0ac between
 0x0018f488 FUN_0018f488 between
-0x0018f494 FUN_0018f494 between
 0x0018fb38 FUN_0018fb38 between
 0x0018fe70 FUN_0018fe70 between
 0x0018fee4 FUN_0018fee4 between
@@ -2352,9 +2350,7 @@
 0x001988bc FUN_001988bc between
 0x00198930 FUN_00198930 between
 0x00198c38 FUN_00198c38 between
-0x00198c40 FUN_00198c40 between
 0x00198e10 FUN_00198e10 between
-0x00198e18 FUN_00198e18 between
 0x00198fe8 FUN_00198fe8 between
 0x00199110 FUN_00199110 between
 0x001994c4 FUN_001994c4 between
@@ -2851,8 +2847,7 @@
 0x001bddb4 nn_snd_CTR_VoiceImpl_SetState name
 0x001bde20 FUN_001bde20 between
 0x001bde60 nn_applet_CTR_detail_CaptureDisplayBuffer name
-0x001bde6c FUN_001bde6c between
-0x001bdef4 FUN_001bdef4 between
+0x001bdef4 FUN_001bdef4 callers
 0x001be098 FUN_001be098 callers
 0x001be190 FUN_001be190 callers
 0x001be3a8 nw_gfx_AmbientLight_GetMemorySizeInternal name
@@ -2916,7 +2911,6 @@
 0x001c2d2c FUN_001c2d2c callers
 0x001c2d70 FUN_001c2d70 callers
 0x001c2e9c FUN_001c2e9c callers
-0x001c2eb4 FUN_001c2eb4 between
 0x001c2f70 FUN_001c2f70 callers
 0x001c2fc4 FUN_001c2fc4 callers
 0x001c2fdc FUN_001c2fdc callers
@@ -2953,7 +2947,6 @@
 0x001c4184 FUN_001c4184 callers
 0x001c41c0 nw_snd_internal_BankFile_FileHeader_GetInfoBlock name
 0x001c422c FUN_001c422c between
-0x001c4240 FUN_001c4240 between
 0x001c42c8 FUN_001c42c8 between
 0x001c4334 ARM_fpclassifyf between
 0x001c4360 FUN_001c4360 between
@@ -3045,10 +3038,8 @@
 0x001cb4c8 FUN_001cb4c8 callers
 0x001cb6d0 nw_gfx_AnimGroup_GetMemorySizeForInitialize name
 0x001cb774 FUN_001cb774 between
-0x001cb77c FUN_001cb77c between
 0x001cb7c8 FUN_001cb7c8 callers
 0x001cb83c FUN_001cb83c between
-0x001cb844 FUN_001cb844 between
 0x001cb8e4 FUN_001cb8e4 between
 0x001cb954 FUN_001cb954 callers
 0x001cb9dc FUN_001cb9dc callers
@@ -3101,7 +3092,7 @@
 0x001d0068 nw_gfx_res_ResTextureSampler_SetTextureMipmapCommand name
 0x001d00fc FUN_001d00fc callers
 0x001d02f4 FUN_001d02f4 callers
-0x001d0754 FUN_001d0754 between
+0x001d0754 FUN_001d0754 callers
 0x001d0788 FUN_001d0788 between
 0x001d07e0 FUN_001d07e0 between
 0x001d07f4 FUN_001d07f4 callers
@@ -3161,9 +3152,7 @@
 0x001d2a54 FUN_001d2a54 between
 0x001d2a64 nn_snd_CTR_Dspsnd_GetDroppedFrameCount name
 0x001d2a9c nn_snd_CTR_FxDelay_UpdateBuffer name
-0x001d2aa8 FUN_001d2aa8 between
 0x001d2b8c FUN_001d2b8c callers
-0x001d2b98 FUN_001d2b98 between
 0x001d2dbc FUN_001d2dbc callers
 0x001d2fb0 nn_snd_CTR_Channel_FlushSyncCount name
 0x001d2fec nn_snd_CTR_VoiceManager_UpdateStatus name
@@ -3327,7 +3316,6 @@
 0x002e49c4 rt_lmul name
 0x002e4e92 rt_vec_delete name
 0x002e4ea4 __aeabi_idivmod name
-0x002e50c0 FUN_002e50c0 callers
 0x002e5700 rt_vec_dtor name
 0x002e5728 FUN_002e5728 between
 0x002e5780 FUN_002e5780 between
@@ -3782,6 +3770,21 @@
 0x002f3b14 dataTableGetEntry24Byte1 between
 0x002f3b58 FUN_002f3b58 between
 0x002f3b6e sharedRefHolderSet name
+0x002f3d88 FUN_002f3d88 between
+0x002f3dc4 FUN_002f3dc4 between
+0x002f3dde FUN_002f3dde between
+0x002f3df8 FUN_002f3df8 between
+0x002f3e5a wordRefsDiffer_002f3e5a between
+0x002f3e6a FUN_002f3e6a between
+0x002f3ecc wordRefsDiffer_002f3ecc between
+0x002f3edc FUN_002f3edc between
+0x002f3f42 FUN_002f3f42 between
+0x002f3f72 FUN_002f3f72 between
+0x002f3ff0 FUN_002f3ff0 between
+0x002f4002 wordRefsEqual_002f4002 between
+0x002f4014 FUN_002f4014 between
+0x002f4258 FUN_002f4258 between
+0x002f42be onlineFormatWideString name
 0x002f4ba8 onlineObjectThreadRootStart name
 0x002f4bfc FUN_002f4bfc between
 0x002f4c9c FUN_002f4c9c between
@@ -4628,9 +4631,7 @@
 0x003d37d0 mobiclipCtrlShutdown name
 0x003d385c mobiclipAllocatorFree name
 0x004230c0 FUN_004230c0 callers
-0x004230c8 FUN_004230c8 between
 0x00423144 FUN_00423144 between
-0x0042314c FUN_0042314c between
 0x00423298 FUN_00423298 between
 0x004232e0 FUN_004232e0 between
 0x0042337c FUN_0042337c between
@@ -4816,7 +4817,6 @@
 0x00430954 nn_cec_CTR_Message_SetExHeader name
 0x00430a44 FUN_00430a44 callers
 0x00430bb0 nn_cec_CTR_Message_SetMessageBody name
-0x00430bbc FUN_00430bbc between
 0x00430cd4 nn_cec_CTR_Message_InitializeMessage name
 0x00430d54 nn_cec_CTR_Message_SetExHeaderWithoutCalc name
 0x00430e0c nn_cec_CTR_Message_Message_sub_object name
@@ -4945,7 +4945,6 @@
 0x0043b84c nn_math_ARMv6_MTX34ToQUATC_FAST name
 0x0043ba3c FUN_0043ba3c between
 0x0043bb48 FUN_0043bb48 between
-0x0043bb64 FUN_0043bb64 between
 0x0043bc74 FUN_0043bc74 between
 0x0043bd0c FUN_0043bd0c between
 0x0043bfd0 FUN_0043bfd0 between
@@ -5234,7 +5233,6 @@
 0x00453e78 FUN_00453e78 callers
 0x004540fc nw_gfx_Model_CreateAnimGroups name
 0x0045429c nw_gfx_Model_DestroyResMeshes name
-0x004542a4 FUN_004542a4 between
 0x004542e4 nw_gfx_Model_BindVisibilityAnim name
 0x00454548 FUN_00454548 between
 0x004545e8 nw_gfx_Model_GetAnimTargetObject name
@@ -5388,7 +5386,6 @@
 0x00460ffc FUN_00460ffc callers
 0x00461004 FUN_00461004 between
 0x00461124 nw_snd_internal_SoundArchiveLoader_detail_LoadWaveArchiveByWaveSoundFile name
-0x00461130 FUN_00461130 between
 0x004611ac FUN_004611ac between
 0x004611d0 vtblHandleInit55C11C between
 0x004611e4 FUN_004611e4 between
@@ -5766,21 +5763,16 @@
 0x00513bdc FUN_00513bdc between
 0x00513c54 mwmomobiclipDecoderRelease name
 0x00513cb4 FUN_00513cb4 between
-0x00513f84 FUN_00513f84 between
-0x00513f90 runItemsOfInner between
+0x00513f84 runItemsOfInner between
 0x00513ff0 readInnerWord6 between
 0x00514018 FUN_00514018 between
 0x00514088 FUN_00514088 between
-0x00514094 FUN_00514094 between
 0x0051415c FUN_0051415c between
-0x00514168 FUN_00514168 between
 0x00514284 FUN_00514284 between
-0x00514290 FUN_00514290 between
 0x005142c4 FUN_005142c4 between
 0x005143ac FUN_005143ac between
 0x0051440c libc_snprintf name
 0x00514428 FUN_00514428 between
-0x00514430 FUN_00514430 between
 0x005144a0 FUN_005144a0 between
 0x005144a4 FUN_005144a4 between
 0x005144b8 FUN_005144b8 between

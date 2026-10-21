@@ -50,7 +50,7 @@ extern unsigned int FUN_0029202c(void);
 extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_0036d984(float *, unsigned int *, unsigned int);
-extern int FUN_004d0554(void);
+extern int inputIsQuestMenuPressed(void);
 
 
 void FUN_0033982c(void)
@@ -141,7 +141,7 @@ void FUN_0033982c(void)
           temp_v2 = (unsigned int)*(unsigned short *)(DAT_005806a4 + 0xb6);
         }
         if (((temp_v10 && temp_v2 == 0) && (temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1)) &&
-           ((temp_v4 = FUN_004d0554(), temp_v4 != 0 ||
+           ((temp_v4 = inputIsQuestMenuPressed(), temp_v4 != 0 ||
             (((temp_v4 = FUN_00163fd4(8), temp_v4 != 0 && (temp_v4 = FUN_00163fd4(7), temp_v4 != 0)) &&
              ((temp_v4 = padButtonIsPressed(8), temp_v4 == 0 &&
               ((temp_v4 = padButtonIsPressed(7), temp_v4 == 0 && (*(char *)(DAT_005806a4 + 0xb5) == '\0'))))))

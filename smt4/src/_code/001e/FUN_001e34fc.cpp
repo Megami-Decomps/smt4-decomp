@@ -10,7 +10,7 @@ int nodeSetScale(unsigned int, int);
 int FUN_0025bed8(...);
 int FUN_00266f30(void);
 int FUN_002a0428(int, int);
-int FUN_002be624(unsigned char [68], unsigned char *);
+int textFormatBuffer(unsigned char [68], unsigned char *);
 int FUN_002e004c(void);
 int FUN_002f479c(void);
 int FUN_002fb4a4(void);
@@ -32,7 +32,7 @@ extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(int);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002e004c. */
 /* Supplied declaration required: FUN_002f479c. */
 /* Supplied declaration required: FUN_002fb4a4. */
@@ -171,7 +171,7 @@ LAB_001e3758:
       *(unsigned char *)((int)piVar9 + temp_v4 * 0x38 + 0xf) = 0;
       *(short *)(piVar9 + temp_v4 * 0xe + 5) = (short)DAT_00447e58[1];
       *(short *)((int)piVar9 + temp_v4 * 0x38 + 0x12) = (short)*(char *)(temp_v3 + 0x33);
-      FUN_002be624(temp_v7,&LAB_001e3944);
+      textFormatBuffer(temp_v7,&LAB_001e3944);
       if ((param_1 >= 0x65) && (DAT_00447e58[2] >= 1)) {
         temp_v3 = asdMdlManagerClone(DAT_00447e58[0xf],0);
       }

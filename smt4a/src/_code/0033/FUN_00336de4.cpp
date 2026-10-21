@@ -9,7 +9,7 @@ int FUN_00184310(void);
 int FUN_00191e00(unsigned int, int, unsigned int, int);
 int dataTable00FindById(void);
 int FUN_001a6568(unsigned int, int, unsigned int, int);
-int FUN_001acf98(int, unsigned int);
+int asdTMTexLoadMainHeap(int, unsigned int);
 int FUN_0021ba5c(int);
 int FUN_003d44ac(int);
 
@@ -22,7 +22,7 @@ extern int g_btlTalkBustUp; /* 0x5710dc */
 /* Supplied declaration required: dataTable00FindById. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_0021ba5c. */
 /* Supplied declaration required: FUN_003d44ac. */
 
@@ -64,7 +64,7 @@ void FUN_00336de4(int param_1,int param_2)
       FUN_001a6568(g_aocSystem,0x10,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
     }
     else {
-      FUN_001acf98(0x10,*(unsigned int *)(temp_v0 + 0x2f8));
+      asdTMTexLoadMainHeap(0x10,*(unsigned int *)(temp_v0 + 0x2f8));
     }
     *(unsigned int *)(temp_v0 + 0x2e8) = 1;
     *(unsigned int *)(temp_v0 + 0x2ec) = 0;

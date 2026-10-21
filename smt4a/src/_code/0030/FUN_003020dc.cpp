@@ -1,25 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003020dc` (_code @ 0x3020dc, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r2, r3, r4, r5, r6, lr}'; compiler emits 'push {r4, r5, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned int DAT_00599360; /* 0x599360 */
-extern int *DAT_00599364; /* 0x599364 */
-
-
-void FUN_003020dc(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-  (**(romwright_code **)(*DAT_00599364 + 0x14))(DAT_00599364,param_1,param_2,param_3,param_4,DAT_00599360);
-  return;
+struct CallbackObject;
+struct CallbackTable { u8 unk00[0x14]; void (*invoke)(CallbackObject *, u32, u32, u32, u32, u32); };
+struct CallbackObject { CallbackTable *vtable; };
+extern struct { u32 reserved, value; CallbackObject *callback; } g_systemTable;
+void FUN_003020dc(u32 first, u32 second, u32 third, u32 fourth) {
+    CallbackObject *callback = g_systemTable.callback;
+    callback->vtable->invoke(callback, first, second, third, fourth, g_systemTable.value);
 }
-
-} /* extern "C" */
+}

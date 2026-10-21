@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002296f4(int *, int, int, int, int, int);
 int FUN_00229a3c(int, int, int, int, int);
-int FUN_0022a304(unsigned int);
+int battleResetCounterAndFlag(unsigned int);
 int FUN_00240530(int, int, unsigned int, int, int);
 int *FUN_003cfc84(int *, int, int);
 int FUN_003d0220(int *, int, int);
@@ -24,7 +24,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_00229a3c. */
-/* Supplied declaration required: FUN_0022a304. */
+/* Supplied declaration required: battleResetCounterAndFlag. */
 /* Supplied declaration required: FUN_00240530. */
 extern int FUN_0027e3b8(unsigned int);
 extern int nodeListCountActiveById(unsigned int, int);
@@ -48,7 +48,7 @@ unsigned int FUN_003cbce4(int *param_1,int param_2)
     if (temp_v0 == 0) {
       q = (int *)(*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0x3c7;
       *((char *)q + 9) = 1;
-      FUN_0022a304(DAT_00435d18);
+      battleResetCounterAndFlag(DAT_00435d18);
       return 1;
     }
     return 0;

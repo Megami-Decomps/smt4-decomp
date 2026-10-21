@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fd76c(int, int *);
+int controllerSetDestination(int, int *);
 int FUN_003fdb18(int);
 
 int ptrListRemoveClearOwner(unsigned int);
@@ -54,7 +54,7 @@ extern int FUN_00352cd8(int);
 /* Supplied declaration required: FUN_00352e9c. */
 /* Supplied declaration required: FUN_003b51a4. */
 /* Supplied declaration required: FUN_003d2150. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: FUN_003fdb18. */
@@ -502,7 +502,7 @@ LAB_0027412c:
           }
 LAB_00274348:
           if (*(char *)((int)piVar1 + temp_v4 * 0x3c + 0x91) != '\0') {
-            FUN_003fd76c(temp_v1,piVar1 + temp_v4 * 0xf + 0x25);
+            controllerSetDestination(temp_v1,piVar1 + temp_v4 * 0xf + 0x25);
             in_s0 = (int)temp_v9;
             FUN_003fdb18(temp_v1);
             temp_v2 = slots4FGetActiveValue(temp_v1);

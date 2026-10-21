@@ -18,7 +18,7 @@ typedef struct {
 
 extern int FUN_0020154c(...); /* 0x20154c */
 
-extern int FUN_0026b780(int);
+extern int recordContainsPairedId(int);
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029c1c8. */
@@ -91,7 +91,7 @@ unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
   temp_v6 = 0;
   do {
     if (asStack_5fc[temp_v6] != 0) {
-      temp_v3 = FUN_0026b780(temp_v2);
+      temp_v3 = recordContainsPairedId(temp_v2);
       if (temp_v3 != 0) {
         if (asStack_5fc[temp_v6] != 0) {
           temp_v4 = temp_v4 + 1;

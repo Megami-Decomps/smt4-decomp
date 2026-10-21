@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023a1c0(unsigned int, int, unsigned int);
+int recordValidatePair(unsigned int, int, unsigned int);
 int FUN_002baa40(...);
 int FUN_00352b88(unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_0023a1c0. */
+/* Supplied declaration required: recordValidatePair. */
 extern int FUN_0023a1f8(unsigned int);
 /* Supplied declaration required: FUN_002baa40. */
 /* Supplied declaration required: FUN_00352b88. */
@@ -37,7 +37,7 @@ void FUN_00352e6c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v1 = param_2;
   FUN_00352b88(param_2,param_3,param_4,param_5);
   FUN_002baa40(&temp_v2,temp_v1);
-  FUN_0023a1c0(param_2,temp_v2,uStack_1c);
+  recordValidatePair(param_2,temp_v2,uStack_1c);
   *param_1 = temp_v2;
   param_1[1] = uStack_1c;
   return;

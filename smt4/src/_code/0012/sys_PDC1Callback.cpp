@@ -1,25 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sys_PDC1Callback` (_code @ 0x123b34, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct DisplayCallbackState {
+    /* 0x000 */ u8 unk000[0x154];
+    /* 0x154 */ s32 counters[2];
+    /* 0x15C */ void (*callbacks[2])(u32 display);
+};
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern int DAT_004c63e8; /* 0x4c63e8 */
-extern romwright_code *DAT_004c63f0; /* 0x4c63f0 */
+extern DisplayCallbackState g_asdGfxContext;
 
-
+/* Dispatches the display callback and advances its bounded counter. */
 void sys_PDC1Callback(void)
-
 {
-  if (DAT_004c63f0 != (romwright_code *)0x0) {
-    (*DAT_004c63f0)(0x401);
-  }
-  DAT_004c63e8 = DAT_004c63e8 + 1;
-  DAT_004c63e8 = DAT_004c63e8 +
-                 ((int)((long long)DAT_004c63e8 * 0x40000001 >> 0x3d) - (DAT_004c63e8 >> 0x1f)) *
-                 -0x7fffffff;
-  return;
+    if (g_asdGfxContext.callbacks[1] != NULL) {
+        g_asdGfxContext.callbacks[1](0x401);
+    }
+    g_asdGfxContext.counters[1] = (g_asdGfxContext.counters[1] + 1) % 0x7FFFFFFF;
 }
 
 } /* extern "C" */

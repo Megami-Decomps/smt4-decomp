@@ -1,30 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f5f90` (_code @ 0x4f5f90, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "common.h"
+struct ObjectOwner { u8 unk0000[8016]; void *object; };
 extern "C" {
-
-int asdOperatorNew(void);
-
-/* Supplied declaration required: asdOperatorNew. */
-extern unsigned int FUN_0041aed4(void);
-
-
-void FUN_004f5f90(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0x44;
-  asdOperatorNew();
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_0041aed4();
-  }
-  *(unsigned int *)(param_1 + 0x1f50) = temp_v1;
-  return;
+void *asdOperatorNew(u32 size);
+void *FUN_0041aed4(void *memory);
+/* Allocates the owner's 68-byte auxiliary object. */
+void FUN_004f5f90(ObjectOwner *owner) { void *object=asdOperatorNew(68);if(object!=NULL)object=FUN_0041aed4(object);owner->object=object; }
 }
-
-} /* extern "C" */

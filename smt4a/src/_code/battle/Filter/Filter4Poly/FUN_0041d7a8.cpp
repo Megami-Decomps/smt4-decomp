@@ -6,9 +6,9 @@ extern "C" {
 
 int asdMemoryAlloc(int, int, int, int, int);
 int mtx44Copy(int, unsigned int);
-int FUN_001acf98(int, unsigned int);
-int FUN_003a4958(int, unsigned int);
-int FUN_003a496c(int, unsigned int);
+int asdTMTexLoadMainHeap(int, unsigned int);
+int resourceApplyNodeFlag(int, unsigned int);
+int asdTMTexNodeSetMode(int, unsigned int);
 int FUN_0041d910(int *);
 
 typedef int romwright_code(...);
@@ -20,9 +20,9 @@ typedef struct {
 /* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_001acf98. */
-/* Supplied declaration required: FUN_003a4958. */
-/* Supplied declaration required: FUN_003a496c. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
+/* Supplied declaration required: resourceApplyNodeFlag. */
+/* Supplied declaration required: asdTMTexNodeSetMode. */
 /* Supplied declaration required: FUN_0041d910. */
 
 
@@ -45,17 +45,17 @@ void FUN_0041d7a8(int *param_1,int param_2,unsigned int param_3)
   do {
     if ((param_3 & 8) != 0) {
       temp_v1 = 0xe;
-      FUN_003a4958(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
+      resourceApplyNodeFlag(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
       *(unsigned int *)(param_1[6] + temp_v2 * 0x44 + 0x40) = temp_v1;
     }
     else if ((param_3 & 0x40) != 0) {
       temp_v1 = 0xe;
-      FUN_003a496c(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
+      asdTMTexNodeSetMode(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
       *(unsigned int *)(param_1[6] + temp_v2 * 0x44 + 0x40) = temp_v1;
     }
     else if ((param_3 & 1) != 0) {
       temp_v1 = 0xe;
-      FUN_001acf98(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
+      asdTMTexLoadMainHeap(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
       *(unsigned int *)(param_1[6] + temp_v2 * 0x44 + 0x40) = temp_v1;
     }
     temp_v2 = temp_v2 + 1;

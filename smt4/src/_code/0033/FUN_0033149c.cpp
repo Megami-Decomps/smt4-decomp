@@ -14,12 +14,12 @@ int FUN_002b6b8c(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -56,14 +56,14 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -99,7 +99,7 @@ void FUN_0033149c(int param_1)
   FUN_002bf288(2,0x1d,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = FUN_002bf4f8(0x1d,0x583);
   temp_v3 = FUN_00295cec();
-  FUN_002be624(temp_v13,&LAB_00331944,temp_v3);
+  textFormatBuffer(temp_v13,&LAB_00331944,temp_v3);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v13);
   temp_v9 = 0;
   temp_v2 = FUN_0029d644(param_1 + 0x10);
@@ -134,7 +134,7 @@ void FUN_0033149c(int param_1)
               if (temp_v5 == 2) {
                 temp_v11 = 0x5a5a5aff;
                 temp_v12 = 0x787878ff;
-                FUN_002be624(temp_v13,&LAB_0033197c);
+                textFormatBuffer(temp_v13,&LAB_0033197c);
               }
             }
             else {
@@ -142,7 +142,7 @@ void FUN_0033149c(int param_1)
               temp_v12 = 0xdc0f14ff;
               temp_v5 = temp_v10;
               FUN_00241f2c(temp_v10);
-              FUN_002be624(temp_v13,&LAB_0033196c,temp_v5);
+              textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
             }
           }
           else {
@@ -150,7 +150,7 @@ void FUN_0033149c(int param_1)
             temp_v11 = 0xff;
             temp_v5 = temp_v10;
             FUN_00241f2c(temp_v10);
-            FUN_002be624(temp_v13,&LAB_0033196c,temp_v5);
+            textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
           }
           temp_v4 = FUN_002bf4f8(0x1d,0x594);
           drawSetColorFromRGBA8(temp_v12);
@@ -177,9 +177,9 @@ void FUN_0033149c(int param_1)
     temp_v10 = *(unsigned int *)(param_1 + (temp_v9 + temp_v2) * 4 + 0x74);
     temp_v2 = FUN_0029efa8(param_1 + 0x10);
     temp_v2 = FUN_002bf4f8(0x1d,temp_v2 + 0x42f);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf380(2,0x1d,6,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x79);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf288(2,0x1d,0x429,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x7e);
     temp_v9 = FUN_0029efa8(param_1 + 0x10);
     temp_v9 = FUN_0029d65c((int)*(short *)(param_1 + temp_v9 * 2 + 0x508));
@@ -234,7 +234,7 @@ void FUN_0033149c(int param_1)
           if (temp_v5 == 2) {
             temp_v11 = 0x787878ff;
             temp_v12 = 0x787878ff;
-            FUN_002be624(temp_v13,&LAB_0033197c);
+            textFormatBuffer(temp_v13,&LAB_0033197c);
           }
         }
         else {
@@ -242,7 +242,7 @@ void FUN_0033149c(int param_1)
           temp_v12 = 0xdc0f14ff;
           temp_v5 = temp_v10;
           FUN_00241f2c(temp_v10);
-          FUN_002be624(temp_v13,&LAB_0033196c,temp_v5);
+          textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
         }
       }
       else {
@@ -250,7 +250,7 @@ void FUN_0033149c(int param_1)
         temp_v12 = 0xffffffff;
         temp_v5 = temp_v10;
         FUN_00241f2c(temp_v10);
-        FUN_002be624(temp_v13,&LAB_0033196c,temp_v5);
+        textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
       }
       temp_v9 = FUN_002bf4f8(0x1d,0x59d);
       drawSetColorFromRGBA8(temp_v12);

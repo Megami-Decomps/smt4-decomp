@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00317e78's literal pool; not written yet. */
+/* NON_MATCHING: compiler predicates the second-byte comparison instead of branching. */
 #include "common.h"
+
+/* Compares two-byte keys lexicographically. */
+extern "C" s32 FUN_00300b8c(const u8 *left, const u8 *right)
+{
+    s32 difference = left[0] - right[0];
+    if (difference != 0) {
+        return difference;
+    }
+    return left[1] - right[1];
+}

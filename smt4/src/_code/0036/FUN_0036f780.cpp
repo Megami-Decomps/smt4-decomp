@@ -1,14 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036f780` (_code @ 0x36f780, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail performs an otherwise unused pointer load before returning zero; its original ownership semantics are unresolved. */
+#include "common.h"
 
-extern "C" {
-
-
-unsigned int FUN_0036f780(void)
-
+extern "C" s32 FUN_0036f780(const void *object)
 {
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */

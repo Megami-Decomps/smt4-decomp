@@ -1,35 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd706` (_code @ 0x2fd706, 0x36 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'push {r4, r5, r6, lr}'; compiler emits 'push {r3, r4, r5, r6, r7, lr}' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int FUN_002f2dfc(int, int, int);
-
-/* Supplied declaration required: FUN_002f2dfc. */
-extern unsigned int FUN_002f815c(void);
-
-
-unsigned int FUN_002fd706(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = FUN_002f815c();
-    *(unsigned short *)(param_1 + 0x13e) = (unsigned short)((temp_v0 & 0xff) << 8) | ((unsigned short)(temp_v0 >> 8) & 0xff);
-    temp_v1 = param_1 + 0x1ac;
-    FUN_002f2dfc(param_1 + 0x1ac,param_1 + 0x138,0);
-    if (temp_v1 != 0) {
-      return 1;
+struct Address { u8 unk00[6]; u16 port; };
+struct Object { u8 unk00[0x138]; Address address; u8 unk140[0x6C]; u8 resolver; };
+u16 FUN_002f815c(void);
+s32 FUN_002f2dfc(void *owner, Address *address, u32 option);
+s32 FUN_002fd706(Object *object) {
+    for (u32 attempt = 0; attempt < 5; ++attempt) {
+        u16 port = FUN_002f815c();
+        object->address.port = (u16)((port << 8) | (port >> 8));
+        if (FUN_002f2dfc(&object->resolver, &object->address, 0)) return 1;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 5);
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

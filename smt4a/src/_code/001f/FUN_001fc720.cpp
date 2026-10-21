@@ -9,7 +9,7 @@ int dataTable00FindById(void);
 int fadeObjectResetIfActive(...);
 int FUN_00288b20(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_0014bd84(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
@@ -25,7 +25,7 @@ int unitRecordBuild(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
 int FUN_00389d9c(...);
 int FUN_003b615c(int);
-int FUN_004bca68(...);
+int recordContainsPairedId(...);
 int FUN_004bcbb4(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
@@ -63,7 +63,7 @@ extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0014bd84. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -88,13 +88,13 @@ extern int FUN_002c2c68(int);
 extern int FUN_002c7e3c(void);
 extern int FUN_002c7e54(void);
 /* Supplied declaration required: unitRecordBuild. */
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_00389d9c. */
 /* Supplied declaration required: FUN_003b615c. */
 extern unsigned int FUN_003df57c(unsigned short, unsigned int);
 extern int countUnlockedSlots(void);
-/* Supplied declaration required: FUN_004bca68. */
+/* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: FUN_004bcbb4. */
 extern int getUnlockedSlotCount(unsigned char *);
 /* Supplied declaration required: FUN_004bd6b0. */
@@ -223,7 +223,7 @@ void FUN_001fc720(int param_1,int param_2)
       temp_v17 = 0;
       if (*(int *)(temp_v2 + 0x518) == 4) {
         if (*(int *)(temp_v2 + 0x524) >= 9) {
-          temp_v8 = FUN_00348ed0(temp_v23);
+          temp_v8 = uiSearchPrimary(temp_v23);
           if (temp_v8 == temp_v11 + 1) {
             temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
           }
@@ -263,11 +263,11 @@ LAB_001fca00:
       temp_v8 = FUN_001834a4(0x12,temp_v11 + 0x414);
       temp_v4 = FUN_001834a4(0x12,0x40f);
       if (temp_v12 != 0) {
-        FUN_00100388(temp_v20,&LAB_001fcdfc);
+        textFormatBuffer(temp_v20,&LAB_001fcdfc);
       }
       else {
         temp_v14 = FUN_0014bd84(*(unsigned short *)(temp_v7 + 0x59c));
-        FUN_00100388(temp_v20,&LAB_001fce04,temp_v14);
+        textFormatBuffer(temp_v20,&LAB_001fce04,temp_v14);
       }
       if ((*(char *)(temp_v28 + 0x98) == '\0') || (temp_v16 = temp_v3 <= temp_v11, temp_v11 < temp_v3)) {
         temp_v9 = *(int *)(temp_v2 + 0x518);
@@ -276,7 +276,7 @@ LAB_001fca00:
             temp_v14 = 0xffffffff;
           }
           else if ((((temp_v9 != 4) || (*(int *)(temp_v2 + 0x524) < 9)) ||
-                   (temp_v9 = FUN_00348ed0(temp_v23), temp_v9 != temp_v11 + 1)) &&
+                   (temp_v9 = uiSearchPrimary(temp_v23), temp_v9 != temp_v11 + 1)) &&
                   ((*(char *)(temp_v26 + 0x60) == '\0' || (*(int *)(temp_v2 + 0x664) != temp_v11)))) {
             temp_v14 = 0xffffffff;
             temp_v0 = *(char *)(temp_v2 + temp_v11 + 0x5dc);
@@ -316,7 +316,7 @@ LAB_001fca00:
                    (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0xb5,
                    temp_v24,0);
       if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
-        temp_v17 = FUN_004bca68(temp_v19,*(unsigned short *)(temp_v7 + 0x59c));
+        temp_v17 = recordContainsPairedId(temp_v19,*(unsigned short *)(temp_v7 + 0x59c));
         if (temp_v17 == 0) {
           FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v7 + 0x59c),temp_v11);
         }
@@ -397,7 +397,7 @@ LAB_001fcef4:
           FUN_001835b4(2,0x12,0x4e4,param_1,param_2,0xb3);
           FUN_001835b4(2,0x12,0x4e5,param_1,param_2,0xb3);
           temp_v12 = FUN_001834a4(0x12,0x4e6);
-          FUN_00100388(temp_v20,&LAB_001fd310);
+          textFormatBuffer(temp_v20,&LAB_001fd310);
           VectorSignedToFloat(*(short *)(temp_v12 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v12 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_00162790(2,0xf4f4f4ff,temp_v20);
@@ -486,7 +486,7 @@ LAB_001fd80c:
                              *(short *)(temp_v7 + 10) + param_2,0xc6);
                 temp_v12 = FUN_001834a4(0x12,0x50a);
                 temp_v14 = FUN_0014bd84(*(unsigned short *)(temp_v25 + 0xbc));
-                FUN_00100388(temp_v20,&LAB_001fdcbc,temp_v14);
+                textFormatBuffer(temp_v20,&LAB_001fdcbc,temp_v14);
                 VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) +
                                     param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v7 + 8) +
@@ -498,7 +498,7 @@ LAB_001fd80c:
                              (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) + param_2,
                              0xc9,temp_v24,0);
                 if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
-                  temp_v17 = FUN_004bca68(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
+                  temp_v17 = recordContainsPairedId(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                   if (temp_v17 == 0) {
                     FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
                   }
@@ -522,7 +522,7 @@ LAB_001fd80c:
                 FUN_00185e84((int)*(short *)(temp_v25 + 0xbc),*(short *)(temp_v12 + 8) + temp_v17,
                              *(short *)(temp_v12 + 10) + param_2,0xb5,0,0);
                 if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
-                  temp_v8 = FUN_004bca68(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
+                  temp_v8 = recordContainsPairedId(temp_v19,*(unsigned short *)(temp_v25 + 0xbc));
                   if (temp_v8 == 0) {
                     FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
                   }
@@ -532,7 +532,7 @@ LAB_001fd80c:
                 }
                 temp_v12 = FUN_001834a4(0x12,0x4f7);
                 temp_v14 = FUN_0014bd84(*(unsigned short *)(temp_v25 + 0xbc));
-                FUN_00100388(temp_v20,&LAB_001fdcbc,temp_v14);
+                textFormatBuffer(temp_v20,&LAB_001fdcbc,temp_v14);
                 VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat(*(short *)(temp_v12 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
                 FUN_00162790(2,0xffffffff,temp_v20);
@@ -618,7 +618,7 @@ LAB_001fcee8:
   else {
     temp_v11 = FUN_001834a4(0x12,0x40f);
     temp_v14 = FUN_0014bd84(*(unsigned int *)(temp_v2 + 0x658));
-    FUN_00100388(temp_v20,&LAB_001fce04,temp_v14);
+    textFormatBuffer(temp_v20,&LAB_001fce04,temp_v14);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v12,
@@ -630,7 +630,7 @@ LAB_001fcee8:
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v11 + 10) + param_2,0xb5,temp_v24,
                  0);
     if ((-1 < *(short *)(temp_v25 + 0x98)) && (temp_v22 != 4)) {
-      temp_v7 = FUN_004bca68(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
+      temp_v7 = recordContainsPairedId(temp_v19,*(unsigned int *)(temp_v2 + 0x658));
       if (temp_v7 == 0) {
         FUN_004bd6b0(temp_v19,*(unsigned int *)(temp_v2 + 0x658),0);
       }
@@ -654,10 +654,10 @@ LAB_001fd57c:
     temp_v5 = (unsigned int)*puVar8;
     dataTable00FindById();
     if (((temp_v5 == 0) || ((*(unsigned short *)(temp_v5 + 0x16) & 1) != 0)) && (temp_v22 != 0x10)) {
-      FUN_00100388(temp_v20,&LAB_001fd7cc);
+      textFormatBuffer(temp_v20,&LAB_001fd7cc);
     }
     else {
-      FUN_00100388(temp_v20,&LAB_001fddb4);
+      textFormatBuffer(temp_v20,&LAB_001fddb4);
     }
     puVar15 = temp_v20;
     FUN_0018408c(puVar15,2);

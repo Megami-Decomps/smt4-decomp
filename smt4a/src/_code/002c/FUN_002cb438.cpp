@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [128], unsigned int, unsigned int);
+int textFormatBuffer(unsigned char [128], unsigned int, unsigned int);
 int FUN_0019de98(...);
 int screenSetColor670(int, int, int);
 int requestSubmitScrLookup(unsigned int, int);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: screenSetColor670. */
 /* Supplied declaration required: requestSubmitScrLookup. */
@@ -58,7 +58,7 @@ void FUN_002cb438(int param_1,int param_2,int param_3)
   }
   requestSubmitScrLookup(temp_v0,param_3 == 0);
   if (param_2 == 9) {
-    FUN_00100388(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x38a0));
+    textFormatBuffer(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x38a0));
     FUN_0019de98(temp_v1,0xf4f4f4ff);
     screenSetColor670(0x48c722ff,1,0x12);
     return;

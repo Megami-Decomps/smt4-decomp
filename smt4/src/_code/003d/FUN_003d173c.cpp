@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00229ad4(...);
+int battleSetActionKind(...);
 int FUN_00244fb0(...);
 int FUN_0026c820(...);
 int buttonHelpGetMode(void);
 int buttonHelpSetPreset(void);
 int FUN_00339828(...);
 
-int FUN_00227750(...);
+int actionCreateKindFive(...);
 int FUN_0024082c(...);
 int FUN_00245228(...);
 int FUN_002505c0(...);
@@ -37,7 +37,7 @@ int FUN_003dc02c(...);
 int FUN_003ddb50(int, int, int);
 int FUN_003de8c4(unsigned int, int, int);
 int FUN_003de9e4(...);
-int FUN_003dea78(...);
+int btlActionReflectRun(...);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -51,13 +51,13 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern unsigned int DAT_004398d4; /* 0x4398d4 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00227750. */
-/* Supplied declaration required: FUN_00229ad4. */
+/* Supplied declaration required: actionCreateKindFive. */
+/* Supplied declaration required: battleSetActionKind. */
 /* Supplied declaration required: FUN_0024082c. */
 /* Supplied declaration required: FUN_00244fb0. */
 extern int FUN_0024502c(int, unsigned int);
 /* Supplied declaration required: FUN_00245228. */
-extern int FUN_00245278(int, unsigned int);
+extern int tableIsSupportedKind(int, unsigned int);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00267d3c. */
 /* Supplied declaration required: FUN_0026c820. */
@@ -86,7 +86,7 @@ extern int FUN_00293ed0(int);
 /* Supplied declaration required: FUN_003ddb50. */
 /* Supplied declaration required: FUN_003de8c4. */
 /* Supplied declaration required: FUN_003de9e4. */
-/* Supplied declaration required: FUN_003dea78. */
+/* Supplied declaration required: btlActionReflectRun. */
 
 
 unsigned int FUN_003d173c(int *param_1,int param_2)
@@ -119,7 +119,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
       temp_v2 = temp_v0;
     }
     if ((((temp_v1 != 0 && temp_v0 != 0) && -1 < temp_v2) &&
-        (temp_v2 = FUN_00245278(*param_1,0), temp_v2 != 0)) &&
+        (temp_v2 = tableIsSupportedKind(*param_1,0), temp_v2 != 0)) &&
        (temp_v2 = FUN_0024502c(*param_1,0), temp_v2 != 0)) {
       if (-1 < *(int *)(*param_1 + 0x49e8)) {
         FUN_00295d28();
@@ -179,12 +179,12 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         if (temp_v0 != 0xda) {
           if (temp_v0 != 0xe4) {
             if (temp_v0 == 0xe5) {
-              FUN_00227750(0,param_2,10);
+              actionCreateKindFive(0,param_2,10);
             }
           }
           else {
             FUN_003de9e4(0,param_2);
-            FUN_003dea78(1,param_2);
+            btlActionReflectRun(1,param_2);
           }
         }
         else {
@@ -196,7 +196,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           *(unsigned int *)(*param_1 + 0x49e8) = 0xffffffff;
           FUN_00339254(*param_1);
           groupStartItems(DAT_004398d4);
-          FUN_00227750(0,param_2,1);
+          actionCreateKindFive(0,param_2,1);
           FUN_003d660c(g_btlMain);
           FUN_0024082c(g_btlMain,0);
           FUN_003dc02c(DAT_00435d18);
@@ -207,7 +207,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           FUN_0026c820(g_btlUiBlock);
           buttonHelpGetMode();
           buttonHelpSetPreset();
-          FUN_00229ad4(param_1);
+          battleSetActionKind(param_1);
           temp_v4 = 1;
         }
       }

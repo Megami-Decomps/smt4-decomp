@@ -7,7 +7,7 @@ extern "C" {
 int asdOperatorDelete(void);
 int sceneObjDestroy(unsigned int *);
 
-extern unsigned char DAT_00588c40; /* 0x588c40 */
+extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
 
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdOperatorDelete. */
@@ -21,16 +21,16 @@ unsigned int FUN_003c5fdc(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8));
-  if ((*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) != (unsigned int *)0x0) {
-    temp_v0 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)));
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8));
+  if ((*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)) != (unsigned int *)0x0) {
+    temp_v0 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)));
     if (temp_v0 != 0) {
       return 0;
     }
     sceneObjDestroy(puVar1);
-    if ((*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) != (unsigned int *)0x0) {
+    if ((*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)) != (unsigned int *)0x0) {
       asdOperatorDelete();
-      (*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) = (unsigned int *)0x0;
+      (*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)) = (unsigned int *)0x0;
     }
   }
   return 1;

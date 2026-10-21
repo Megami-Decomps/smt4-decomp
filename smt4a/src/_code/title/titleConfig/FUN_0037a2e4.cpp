@@ -51,7 +51,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
-extern int FUN_00162858(void);
+extern int campIsState85(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -100,7 +100,7 @@ void FUN_0037a2e4(void)
   FUN_002804b0(&LAB_0037a5b0,puVar1 + 0x56,0);
   sysPlaySe(0x9b);
   FUN_0019de98(0,0xf4f4f4ff);
-  temp_v0 = FUN_00162858();
+  temp_v0 = campIsState85();
   if ((temp_v0 != 0) && (temp_v0 = gameDataBlocksGetSaveData(), *(char *)(temp_v0 + 0x27e94) != '\0')) {
     temp_v1 = FUN_0032b62c(*(unsigned char *)(temp_v0 + 0x27e90));
     puVar1[10] = temp_v1;

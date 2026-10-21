@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00231bb8(int, float *);
 int uiGetEntrySize(int, unsigned int, int *, int *);
 int FUN_002b0750(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int NaviMain_GetPosY(int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00231bb8. */
 /* Supplied declaration required: uiGetEntrySize. */
 /* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int gameGetMapBlock(void);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int NaviMain_GetCurrentMap(int);
@@ -169,7 +169,7 @@ void FUN_0039af94(int param_1)
         }
       }
       if (*(char *)(temp_v7 + 0x65) != '\0') {
-        FUN_002bf538();
+        efctSetSpeed();
         temp_v7 = g_titleScene;
         temp_v4 = FUN_002c5d80(1,0);
         piVar10 = (int *)(temp_v7 + 0x124c);

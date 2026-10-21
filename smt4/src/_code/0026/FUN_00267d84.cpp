@@ -104,7 +104,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 extern unsigned int tableOwnerGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: handlerTableCallWithValue. */
-extern int FUN_0021987c(void *);
+extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
@@ -375,7 +375,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       }
       if (temp_v7 != 0) {
         temp_v0 = param_1->field_0x4;
-        temp_v6 = FUN_0021987c(pvVar11);
+        temp_v6 = effectQuerySelectedBehavior(pvVar11);
         if (temp_v6 != 0) {
           *(unsigned int *)(temp_v8 + 0xa8) = *(unsigned int *)(temp_v8 + 0xa8) | 2;
           memCopy(temp_v6,temp_v8 + 0xac,8);

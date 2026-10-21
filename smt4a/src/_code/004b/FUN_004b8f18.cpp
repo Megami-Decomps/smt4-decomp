@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001d1438(...);
-int FUN_00237418(...);
+int gameDataCopySaveToWork(...);
 int FUN_00261a14(...);
 int FUN_00341fa4(...);
 int FUN_0037b3fc(...);
@@ -43,12 +43,12 @@ typedef struct {
 
 extern int g_aocMain; /* 0x570260 */
 extern unsigned char g_gameState; /* 0x5f15fc */
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 
 /* Supplied declaration required: FUN_001d1438. */
-/* Supplied declaration required: FUN_00237418. */
+/* Supplied declaration required: gameDataCopySaveToWork. */
 /* Supplied declaration required: FUN_00261a14. */
 /* Supplied declaration required: FUN_00341fa4. */
 /* Supplied declaration required: FUN_0037b3fc. */
@@ -83,7 +83,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
     temp_v0 = FUN_0047e150(g_aocMain + 0xa8);
     if (temp_v0 != 0) {
       FUN_0037b3fc(g_aocMain + 0xa8);
-      if (DAT_005f1c98 >= 0) {
+      if (g_mapSelection >= 0) {
         temp_v5 = 0;
         temp_v6 = 0;
         temp_v7 = 0;
@@ -92,14 +92,14 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
         temp_v3 = (unsigned char)param_1->field_0x3c;
         temp_v4 = (unsigned char)param_1->field_0x40;
         FUN_004731b8(&temp_v2);
-        FUN_00237418();
-        temp_v9 = (unsigned short)DAT_005f1c98;
+        gameDataCopySaveToWork();
+        temp_v9 = (unsigned short)g_mapSelection;
         temp_v10 = (unsigned short)DAT_005f1c9c;
         temp_v11 = (unsigned short)DAT_005f1ca0;
         FUN_001d1438((unsigned char *)((int)param_1 + 0x42),&temp_v9);
         temp_v1 = param_1->field_0x20;
         param_1->field_0x20 = temp_v1 | 0x10;
-        if (DAT_005f1c98 < 200) {
+        if (g_mapSelection < 200) {
           param_1->field_0x20 = temp_v1 | 0x100110;
         }
         param_1->field_0x2c = 0;
@@ -114,7 +114,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
         temp_v3 = (unsigned char)param_1->field_0x3c;
         temp_v4 = (unsigned char)param_1->field_0x40;
         FUN_004731b8(&temp_v2);
-        FUN_00237418();
+        gameDataCopySaveToWork();
         FUN_004b7a08(param_1);
         param_1->field_0x20 = param_1->field_0x20 | 0x40100;
         param_1->field_0x2c = 0;

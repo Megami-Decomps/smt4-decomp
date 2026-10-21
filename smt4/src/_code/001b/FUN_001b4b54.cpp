@@ -9,7 +9,7 @@ int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int FUN_002a5710(unsigned int, unsigned int);
 
-extern int DAT_0044cda0; /* 0x44cda0 */
+extern int g_mapModelWork; /* 0x44cda0 */
 extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00287098. */
@@ -27,10 +27,10 @@ void FUN_001b4b54(void)
   unsigned int *unaff_r4;
   char *pcVar3;
   
-  temp_v0 = DAT_0044cda0;
-  pcVar3 = (char *)(DAT_0044cda0 + 0x10);
+  temp_v0 = g_mapModelWork;
+  pcVar3 = (char *)(g_mapModelWork + 0x10);
   if (pcVar3 != (char *)0x0) {
-    unaff_r4 = *(unsigned int **)(DAT_0044cda0 + 0x2c);
+    unaff_r4 = *(unsigned int **)(g_mapModelWork + 0x2c);
   }
   if (pcVar3 != (char *)0x0 && unaff_r4 != (unsigned int *)0x0) {
     if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {

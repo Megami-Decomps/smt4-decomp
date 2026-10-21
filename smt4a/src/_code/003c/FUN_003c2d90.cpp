@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 
 extern unsigned char DAT_00544ac0; /* 0x544ac0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 
 
 unsigned int FUN_003c2d90(int param_1,unsigned int param_2)
@@ -24,10 +24,10 @@ unsigned int FUN_003c2d90(int param_1,unsigned int param_2)
   if (temp_v0 != 0) {
     temp_v2 = *(int *)(*(int *)(param_1 + 0x48) + 4);
     if (temp_v2 != 0) {
-      FUN_00100388(param_2,"%s%s",temp_v2,temp_v0 + 0xc);
+      textFormatBuffer(param_2,"%s%s",temp_v2,temp_v0 + 0xc);
     }
     else {
-      FUN_00100388(param_2,&DAT_00544ac0,temp_v0 + 0xc);
+      textFormatBuffer(param_2,&DAT_00544ac0,temp_v0 + 0xc);
     }
     temp_v1 = **(unsigned int **)(param_1 + 0x30);
   }

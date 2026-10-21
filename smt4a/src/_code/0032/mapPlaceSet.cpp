@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005f1c98; /* 0x5f1c98 */
+extern int g_mapSelection; /* 0x5f1c98 */
 extern int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
@@ -22,7 +22,7 @@ void mapPlaceSet(int param_1,int param_2,unsigned int param_3)
   unsigned char temp_v2;
   unsigned char temp_v3;
   
-  DAT_005f1c98 = param_1;
+  g_mapSelection = param_1;
   DAT_005f1c9c = param_2;
   DAT_005f1ca0 = param_3;
   if (param_3 != 0xffffffff) {

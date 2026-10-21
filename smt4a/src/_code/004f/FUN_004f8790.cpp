@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int libc_strncmp(...);
 int wstrlen(...);
 int libc_strcpy(...);
@@ -23,7 +23,7 @@ extern unsigned int DAT_005737fc; /* 0x5737fc */
 extern unsigned int DAT_00573800; /* 0x573800 */
 extern unsigned int DAT_00573804; /* 0x573804 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strncmp. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: libc_strcpy. */
@@ -71,7 +71,7 @@ void FUN_004f8790(int param_1)
             if ((temp_v3 == 0) || (temp_v1 = temp_v3, libc_strcmp(temp_v3,DAT_00573804), temp_v1 != 0)) {
               sysMemClear(temp_v7,0x80);
               sysMemClear(temp_v8,0x80);
-              FUN_00100388(temp_v8,"battle/effect/%s.eft",temp_v3);
+              textFormatBuffer(temp_v8,"battle/effect/%s.eft",temp_v3);
               libc_strcpy(temp_v7,temp_v8);
               temp_v1 = wstrlen(temp_v7);
               if (temp_v1 != 0) {

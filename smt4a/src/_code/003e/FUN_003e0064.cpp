@@ -1,28 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e0064` (_code @ 0x3e0064, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: clamp uses r0 for the maximum and r1 for the player pointer, adding a move relative to retail. */
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetPlayerData(void);
+typedef struct PlayerData {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s16 max;
+    /* 0x1E */ u8 unk1E[0xC];
+    /* 0x2A */ s16 value;
+} PlayerData;
 
+extern PlayerData *gameGetPlayerData(void);
 
-void FUN_003e0064(int param_1)
-
+/* Stores `value` clamped to [1, max] (just max when it exceeds max... ). */
+void FUN_003e0064(s32 value)
 {
-  int temp_v0;
-  short temp_v1;
-  
-  temp_v0 = gameGetPlayerData();
-  temp_v1 = *(short *)(temp_v0 + 0x1c);
-  if (param_1 <= temp_v1) {
-    if (param_1 < 1) {
-      param_1 = 1;
+    PlayerData *player = gameGetPlayerData();
+
+    s32 clamped = player->max;
+    if (value <= clamped) {
+        if (value < 1) {
+            value = 1;
+        }
+        clamped = value;
     }
-    temp_v1 = (short)param_1;
-  }
-  *(short *)(temp_v0 + 0x2a) = temp_v1;
-  return;
+    player->value = clamped;
 }
 
 } /* extern "C" */

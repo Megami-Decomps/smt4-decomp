@@ -59,7 +59,7 @@ extern unsigned char DAT_0057a574; /* 0x57a574 */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003e8430(unsigned int *);
+extern int btlScriptUnitHasFlags(unsigned int *);
 extern int FUN_003eb1cc(void);
 extern int FUN_003ef9e0(unsigned int, int);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -376,7 +376,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 0x36);
       }
-      temp_v3 = FUN_003e8430(temp_v18);
+      temp_v3 = btlScriptUnitHasFlags(temp_v18);
       if (temp_v3 != 0) {
         temp_v14[0] = 1;
         temp_v14[1] = 0;

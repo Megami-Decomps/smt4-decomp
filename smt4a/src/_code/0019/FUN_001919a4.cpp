@@ -9,7 +9,7 @@ int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0019de98(int, unsigned int);
 int FUN_0019e2dc(void);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int FUN_0019f548(void);
 int FUN_001a6500(int);
 int FUN_001add1c(int);
@@ -30,7 +30,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019e2dc. */
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_0019f548. */
 /* Supplied declaration required: FUN_001a6500. */
 /* Supplied declaration required: FUN_001add1c. */
@@ -131,7 +131,7 @@ void FUN_001919a4(int param_1)
     *(unsigned int *)(param_1 + 0x2ac) = 0;
   }
   FUN_001695a0();
-  FUN_0019ea64(1);
+  messageSetMode(1);
   return;
 }
 

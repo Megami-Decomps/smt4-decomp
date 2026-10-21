@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023392c(...);
-int FUN_002340e4(unsigned char [20]);
+int timeInitializeActiveState(unsigned char [20]);
 int FUN_0027e9c0(int);
 int FUN_0027ea28(int, int, int);
 int jobOwnerFreeSlotAndStop(int);
@@ -13,7 +13,7 @@ int eventQueueAddUniqueIfValid(int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_002340e4. */
+/* Supplied declaration required: timeInitializeActiveState. */
 extern int FUN_0026ee68(unsigned int);
 /* Supplied declaration required: FUN_0027e9c0. */
 /* Supplied declaration required: FUN_0027ea28. */
@@ -30,7 +30,7 @@ void FUN_0038fc28(int param_1)
   int temp_v2;
   unsigned char temp_v3 [20];
   
-  FUN_002340e4(temp_v3);
+  timeInitializeActiveState(temp_v3);
   temp_v1 = *(int *)(param_1 + 8);
   temp_v2 = param_1 + 0x11b0;
   if (temp_v1 == 0) {

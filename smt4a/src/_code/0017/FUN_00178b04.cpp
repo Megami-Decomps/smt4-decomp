@@ -1,25 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00178b04` (_code @ 0x178b04, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses push {r3, r4, r5, lr} where the compiled block uses push {r3, lr}. */
+#include "common.h"
 
-extern "C" {
+extern "C" void* asdMemoryAlloc(u32 size, u32 alignment, u32 flags,
+                                u32 memoryType, u32 allocationMode);
 
-int asdMemoryAlloc(int, int, int, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-void FUN_00178b04(unsigned int param_1)
-
+extern "C" void* FUN_00178b04(u32 memoryType, u32 unusedFirst, u32 unusedSecond)
 {
-/* irregular: 1 native warning(s); review required */
-  asdMemoryAlloc(0x100,0x100,0,param_1,1);
-  return;
+    return asdMemoryAlloc(0x100, 0x100, 0, memoryType, 1);
 }
-
-} /* extern "C" */

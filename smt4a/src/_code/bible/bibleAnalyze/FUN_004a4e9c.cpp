@@ -12,7 +12,7 @@ int FUN_002c8550(int);
 int FUN_0031f718(int, int);
 int loadSlotEnsureLoaded(...);
 int FUN_004930e4(int);
-int FUN_00493660(...);
+int rectangleInitializeSelection(...);
 int FUN_004a4848(...);
 int FUN_004a6c18(...);
 int FUN_004a6c50(...);
@@ -51,13 +51,13 @@ extern int *DAT_0057f0a0; /* 0x57f0a0 */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 extern int FUN_004082f8(int);
 /* Supplied declaration required: FUN_004930e4. */
-/* Supplied declaration required: FUN_00493660. */
+/* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a4848. */
 /* Supplied declaration required: FUN_004a6c18. */
 /* Supplied declaration required: FUN_004a6c50. */
 /* Supplied declaration required: FUN_004a83f8. */
 /* Supplied declaration required: FUN_004cf7cc. */
-extern int FUN_004d0040(int *);
+extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: FUN_004d05c4. */
 /* Supplied declaration required: FUN_004d0b3c. */
 
@@ -148,7 +148,7 @@ void FUN_004a4e9c(int *param_1)
   FUN_004a4848(param_1);
   FUN_004a6c18((int)param_1 + 0x96);
   FUN_004a6c50((int)param_1 + 0x96,0);
-  temp_v0 = FUN_004d0040(param_1 + 8);
+  temp_v0 = rangeGetMinimumLimit(param_1 + 8);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {
@@ -161,10 +161,10 @@ void FUN_004a4e9c(int *param_1)
   FUN_004cf7cc(param_1 + 0x37);
   loadSlotEnsureLoaded(0x22);
   if ((char)param_1[0x218] != '\0') {
-    FUN_00493660(param_1 + 0x32,0x140,0,0x13);
+    rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x13);
   }
   else {
-    FUN_00493660(param_1 + 0x32,0x140,0,0x14);
+    rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x14);
   }
   param_1[5] = 0;
   param_1[6] = 0;

@@ -16,7 +16,7 @@ int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_0029be5c(...);
 int FUN_002a0428(void);
 int FUN_002a09b4(unsigned char [144], int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int asdOperatorNew(void);
 int memClear(void);
 int FUN_002d582c(...);
@@ -49,7 +49,7 @@ extern int FUN_00235414(unsigned char);
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_002c2218(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: memClear. */
@@ -124,7 +124,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   temp_v4[10] = 'B';
   temp_v4[0xb] = '\0';
   do {
-    FUN_002be624(temp_v8,&LAB_00384418,
+    textFormatBuffer(temp_v8,&LAB_00384418,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v1 + 1);
     puVar2 = temp_v8;
     asdMdlManagerCreateLoaded(puVar2,7);
@@ -135,7 +135,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     FUN_0023ea20(*puVar5,0);
     FUN_002d582c(*puVar5);
     FUN_002e1230(*puVar5,0);
-    FUN_002be624(temp_v8,&LAB_00384428,
+    textFormatBuffer(temp_v8,&LAB_00384428,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v1 + 1);
     puVar2 = temp_v8;
     asdMdlManagerCreateLoaded(puVar2,7);
@@ -152,13 +152,13 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   } while (temp_v1 < 6);
   *(unsigned int *)(param_1 + 0xd44) = 0x41f00000;
   if (*(char *)(param_1 + 0x21) == '\x02') {
-    FUN_002be624(temp_v8,&LAB_00384440,
+    textFormatBuffer(temp_v8,&LAB_00384440,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     puVar2 = temp_v8;
     asdMdlManagerCreateLoaded(puVar2,7);
     *(unsigned char **)(param_1 + 0xfb8) = puVar2;
     FUN_002a0428();
-    FUN_002be624(temp_v8,&LAB_00384448,
+    textFormatBuffer(temp_v8,&LAB_00384448,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     FUN_002a09b4(temp_v8,0);
   }
@@ -175,8 +175,8 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   FUN_00234f5c(*(unsigned int *)(param_1 + 0xfac),
                *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),0);
   FUN_00234f04(*(unsigned int *)(param_1 + 0xfac),0);
-  FUN_002be624(temp_v6,&LAB_00384458,(int)*(char *)(param_1 + 0x10));
-  FUN_002be624(temp_v7,&LAB_0038447c,(int)*(char *)(param_1 + 0x10));
+  textFormatBuffer(temp_v6,&LAB_00384458,(int)*(char *)(param_1 + 0x10));
+  textFormatBuffer(temp_v7,&LAB_0038447c,(int)*(char *)(param_1 + 0x10));
   FUN_00297468(temp_v6,param_1 + 0x5ac,0);
   FUN_00297468(temp_v7,param_1 + 0x5b0,0);
   if (*(char *)(param_1 + 0x18) != '\x02' && *(char *)(param_1 + 0x18) != '\x03') {

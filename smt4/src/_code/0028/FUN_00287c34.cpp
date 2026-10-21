@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001954b0(void);
 int FUN_0026faa4(void);
-int FUN_0027d908(void);
+int mapClearPendingEntries(void);
 
 extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
@@ -253,7 +253,7 @@ extern unsigned int DAT_0049fd20; /* 0x49fd20 */
 /* Supplied declaration required: FUN_001954b0. */
 /* Supplied declaration required: FUN_0026faa4. */
 extern unsigned long long FUN_00270384(int);
-/* Supplied declaration required: FUN_0027d908. */
+/* Supplied declaration required: mapClearPendingEntries. */
 extern int gameGetMapBlock(void);
 
 
@@ -491,7 +491,7 @@ void FUN_00287c34(int param_1)
   DAT_0049fd20 = 0xffffffff;
   FUN_001954b0();
   if (param_1 == 0) {
-    FUN_0027d908();
+    mapClearPendingEntries();
     FUN_0026faa4();
   }
   temp_v0 = gameGetMapBlock();

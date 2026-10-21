@@ -7,7 +7,7 @@ extern "C" {
 int eventQueueAddUnique(int);
 int FUN_002a4844(char *);
 int FUN_002a4860(void);
-int FUN_002a48ac(char *, unsigned int);
+int recordTrackDirtyValue(char *, unsigned int);
 int FUN_002a48e0(char *, unsigned int);
 int flaggedEntrySetValueB(char *, int);
 int flaggedEntrySetValueA(char *, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4844. */
 /* Supplied declaration required: FUN_002a4860. */
-/* Supplied declaration required: FUN_002a48ac. */
+/* Supplied declaration required: recordTrackDirtyValue. */
 /* Supplied declaration required: FUN_002a48e0. */
 extern int flaggedEntryGetValueB(char *);
 extern int flaggedEntryGetValueA(void);
@@ -98,7 +98,7 @@ void FUN_004d0738(int param_1,char *param_2)
         flaggedEntrySetValueA(param_2 + 0x10,temp_v0);
       }
       if (*param_2 == '\x01') {
-        FUN_002a48ac(param_2 + 0x10,temp_v2);
+        recordTrackDirtyValue(param_2 + 0x10,temp_v2);
         flaggedEntrySetValueB(param_2 + 0x10,temp_v0);
         return;
       }

@@ -16,7 +16,7 @@ int FUN_001835b4(...);
 int FUN_00185dd4(...);
 int FUN_001f3eec(...);
 int FUN_001f3f34(void);
-int FUN_002e13dc(...);
+int effectSpawnDefaultArguments(...);
 int FUN_003dac74(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -49,7 +49,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: FUN_001f3f34. */
-/* Supplied declaration required: FUN_002e13dc. */
+/* Supplied declaration required: effectSpawnDefaultArguments. */
 /* Supplied declaration required: FUN_003dac74. */
 
 
@@ -122,7 +122,7 @@ unsigned int FUN_0036dff4(void)
   }
   if (!temp_v6 || temp_v3 != 0) {
     FUN_00164b5c(2,0x22,0,0,0,0xc);
-    FUN_002e13dc(*(unsigned int *)(temp_v0 + 0xc));
+    effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0xc));
     temp_v3 = FUN_001834a4(0x22,2);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     in_s0 = (float)VectorSignedToFloat((int)((temp_v9 - in_s0) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3
@@ -142,7 +142,7 @@ unsigned int FUN_0036dff4(void)
       efctSetSpeed();
       temp_v12 = (float)(int)temp_v12;
       FUN_00164b5c(2,0x22,0,0,temp_v12,0xc);
-      FUN_002e13dc(*(unsigned int *)(temp_v0 + 0xc));
+      effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0xc));
       temp_v3 = FUN_001834a4(0x22,2);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)((temp_v9 - temp_v12) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -241,7 +241,7 @@ unsigned int FUN_0036dff4(void)
       temp_v2 = VectorFloatToUnsigned(temp_v2,3);
       temp_v12 = (float)(int)((temp_v10 - temp_v12) * temp_v8);
       FUN_00185dd4(2,0x22,0x18,0,temp_v12,temp_v2,temp_v7,0xc);
-      FUN_002e13dc(*(unsigned int *)(temp_v0 + 0x10));
+      effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
       temp_v3 = FUN_001834a4(0x22,0x19);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)((temp_v9 - temp_v12) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -254,7 +254,7 @@ unsigned int FUN_0036dff4(void)
   case 1:
     FUN_003dac74(temp_v0,0xb);
     FUN_00164b5c(2,0x22,3,0,0,0xc);
-    FUN_002e13dc(*(unsigned int *)(temp_v0 + 0x10));
+    effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
     temp_v3 = FUN_001834a4(0x22,0x19);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)((temp_v9 - in_s0) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -263,7 +263,7 @@ unsigned int FUN_0036dff4(void)
   case 2:
     FUN_003dac74(temp_v0,0xb);
     FUN_00164b5c(2,0x22,3,0,0,0xc);
-    FUN_002e13dc(*(unsigned int *)(temp_v0 + 0x10));
+    effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x10));
     temp_v3 = FUN_001834a4(0x22,0x19);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)((temp_v9 - in_s0) * temp_v8),(unsigned char)(in_fpscr >> 0x16) & 3);

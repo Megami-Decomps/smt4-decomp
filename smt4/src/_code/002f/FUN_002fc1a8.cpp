@@ -5,14 +5,14 @@
 extern "C" {
 
 int asdEffectTextureCreate(void);
-int FUN_002be624(unsigned char [260], unsigned char *, int);
+int textFormatBuffer(unsigned char [260], unsigned char *, int);
 int asdMemFree(unsigned int);
 
 extern unsigned char LAB_002fc228; /* 0x2fc228 */
 extern signed char DAT_004640e8; /* 0x4640e8 */
 
 /* Supplied declaration required: asdEffectTextureCreate. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int asdLoadFileSync(unsigned char *, unsigned int, unsigned int, unsigned int);
 
@@ -29,7 +29,7 @@ void FUN_002fc1a8(void)
   if (DAT_004640e8 == '\0') {
     temp_v2 = 0;
     do {
-      FUN_002be624(temp_v3,&LAB_002fc228,temp_v2 + 1);
+      textFormatBuffer(temp_v3,&LAB_002fc228,temp_v2 + 1);
       temp_v0 = asdLoadFileSync(temp_v3,0,1,0x80);
       temp_v1 = temp_v0;
       asdEffectTextureCreate();

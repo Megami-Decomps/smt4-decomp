@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00180118(...);
 int FUN_00184310(...);
 int FUN_002804b0(...);
 int libc_strcpy(...);
 int FUN_003180c4(...);
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
@@ -59,7 +59,7 @@ void FUN_00416d30(int param_1)
     if (temp_v4 < temp_v2) {
       do {
         if (*pcVar5 == temp_v0) {
-          FUN_00100388(temp_v6,"battle/DevilMsg/%s.mbm",pcVar5 + 1);
+          textFormatBuffer(temp_v6,"battle/DevilMsg/%s.mbm",pcVar5 + 1);
           FUN_002804b0(temp_v6,param_1 + 0x2c,0);
           return;
         }
@@ -68,7 +68,7 @@ void FUN_00416d30(int param_1)
       } while (temp_v4 < temp_v2);
     }
     pcVar5 = (char *)0x0;
-    FUN_00100388(temp_v6,"battle/DevilMsg/%s.mbm",pcVar5 + 1);
+    textFormatBuffer(temp_v6,"battle/DevilMsg/%s.mbm",pcVar5 + 1);
     FUN_002804b0(temp_v6,param_1 + 0x2c,0);
   }
   return;

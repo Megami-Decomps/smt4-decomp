@@ -7,7 +7,7 @@ extern "C" {
 int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
 int FUN_001517b4(int, int);
 int FUN_001a6568(unsigned int, int, int, int);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 
 /* stack frame of param_2: 2 slot(s), 6 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 
 
 void FUN_00208a34(int param_1,unsigned int param_2)
@@ -63,7 +63,7 @@ void FUN_00208a34(int param_1,unsigned int param_2)
         FUN_001a6568(g_aocSystem,0x34,temp_v1,0x10000);
       }
       else {
-        FUN_001acf98(0x34,temp_v1);
+        asdTMTexLoadMainHeap(0x34,temp_v1);
       }
     }
     *(unsigned int *)(temp_v0 + 8) = 4;

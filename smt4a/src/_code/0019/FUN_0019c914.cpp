@@ -1,14 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019c914` (_code @ 0x19c914, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-
-void FUN_0019c914(void)
-
+/* Returns the work area scalar. */
+f32 FUN_0019c914(const WorkScalar *work)
 {
-  return;
+    return work->value;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001527d8(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
@@ -33,7 +33,7 @@ typedef struct {
 extern unsigned char LAB_00344320; /* 0x344320 */
 extern int g_campCecRanking; /* 0x57f11c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(int);
@@ -200,7 +200,7 @@ int FUN_00343e5c(void)
             temp_v0 = *(short *)(temp_v12 + 8);
             temp_v1 = *(short *)(temp_v12 + 10);
             drawSetColorFromRGBA8(0xffffffff);
-            FUN_00100388(temp_v15,&LAB_00344320,temp_v16);
+            textFormatBuffer(temp_v15,&LAB_00344320,temp_v16);
             FUN_00180310(6,temp_v5 + temp_v11 + temp_v0,temp_v4 + temp_v1 + temp_v9,1,3,0x65,temp_v15);
             FUN_00183bb0();
           }

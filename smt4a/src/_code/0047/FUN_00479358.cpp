@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
 
@@ -15,7 +15,7 @@ int FUN_002a1f60(...);
 int FUN_0036bea0(...);
 int FUN_003d4c68(int);
 int FUN_00426fe4(unsigned int *, unsigned int *, unsigned int *);
-int FUN_004275c8(unsigned int *);
+int recordClearWideHandle(unsigned int *);
 int FUN_00473910(...);
 int countOwnerIsValidIndex(...);
 int FUN_00477d10(...);
@@ -45,7 +45,7 @@ extern unsigned char LAB_00479af8; /* 0x479af8 */
 extern unsigned char LAB_00479b08; /* 0x479b08 */
 extern unsigned int *g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00169548. */
 extern int FUN_001802d4(int);
@@ -64,7 +64,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0036bea0. */
 /* Supplied declaration required: FUN_003d4c68. */
 /* Supplied declaration required: FUN_00426fe4. */
-/* Supplied declaration required: FUN_004275c8. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_00473910. */
 /* Supplied declaration required: countOwnerIsValidIndex. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -117,7 +117,7 @@ void FUN_00479358(unsigned int *param_1)
       param_1[0x86] = (unsigned int)temp_v8;
     }
     else {
-      FUN_004275c8(puVar1 + 10);
+      recordClearWideHandle(puVar1 + 10);
       param_1[2] = 1;
       param_1[0x44a] = 0;
       param_1[1099] = 0;
@@ -319,7 +319,7 @@ LAB_00479870:
     temp_v2 = FUN_004cfe4c(param_1 + 0x90);
     temp_v3 = puVar1[0x19e];
     sysMemClear(&temp_v7,0x80);
-    FUN_00100388(&temp_v7,&LAB_00479b08,temp_v3 + temp_v2 * 0x9c8);
+    textFormatBuffer(&temp_v7,&LAB_00479b08,temp_v3 + temp_v2 * 0x9c8);
     FUN_003180c4(0,&temp_v7);
     FUN_00169548(1);
     temp_v2 = FUN_00224880(param_1[0xd6]);

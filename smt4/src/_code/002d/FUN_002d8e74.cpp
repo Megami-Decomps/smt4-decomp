@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdSaveReadBlock(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
-int FUN_002be624(unsigned char [128], unsigned char *, unsigned int);
+int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int);
 int FUN_002d5e44(int, unsigned char [128]);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned int DAT_0043e31c; /* 0x43e31c */
 
 /* Supplied declaration required: asdSaveReadBlock. */
 extern int FUN_00214950(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002d5e44. */
 
 
@@ -37,7 +37,7 @@ void FUN_002d8e74(unsigned int param_1)
   
   DAT_0043e311 = 1;
   temp_v1 = *(int *)(DAT_0043e314 + 4);
-  FUN_002be624(temp_v4,&LAB_002d8f2c,*(unsigned int *)(DAT_0043e314 + 8));
+  textFormatBuffer(temp_v4,&LAB_002d8f2c,*(unsigned int *)(DAT_0043e314 + 8));
   temp_v2 = *(unsigned int *)(DAT_0043e314 + 0x14);
   temp_v3 = *(unsigned int *)(DAT_0043e314 + 0x18);
   temp_v0 = 0;

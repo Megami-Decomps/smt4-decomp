@@ -21,7 +21,7 @@ struct fn_002114fc_arg0 {
     undefined1 field_0xd60; /* +0xd60 */
 };
 
-extern unsigned char FUN_002595bc(void);
+extern unsigned char cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
@@ -52,7 +52,7 @@ unsigned int FUN_002114fc(fn_002114fc_arg0 *param_1)
       FUN_0026b9bc();
       FUN_0028a924(1,0,0xffffffff);
       FUN_0028a368(1);
-      temp_v0 = FUN_002595bc();
+      temp_v0 = cecQueryOptionalProcess();
       temp_v2 = 2;
       param_1->field_0xd60 = temp_v0;
     }

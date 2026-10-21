@@ -21,7 +21,7 @@ extern unsigned char DAT_005f1623; /* 0x5f1623 */
 extern unsigned int DAT_005f16a4; /* 0x5f16a4 */
 extern unsigned int DAT_005f1a50; /* 0x5f1a50 */
 extern unsigned char DAT_005f1a99; /* 0x5f1a99 */
-extern unsigned int DAT_005f1c98; /* 0x5f1c98 */
+extern unsigned int g_mapSelection; /* 0x5f1c98 */
 extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
@@ -91,7 +91,7 @@ void FUN_002d2000(void)
         temp_v3 = sequenceRequestIsPending();
         if (temp_v3 == 0) {
           temp_v5 = 0;
-          DAT_005f1c98 = 0x18;
+          g_mapSelection = 0x18;
           DAT_005f1c9c = 1;
           DAT_005f1ca0 = 0;
           temp_v3 = dataTable23Type1CountWithAoc();

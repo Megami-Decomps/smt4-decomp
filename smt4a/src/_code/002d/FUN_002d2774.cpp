@@ -16,7 +16,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002d2820; /* 0x2d2820 */
-extern int *DAT_005806cc; /* 0x5806cc */
+extern int *g_activeTextureSlot; /* 0x5806cc */
 
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdMemFree. */
@@ -39,14 +39,14 @@ void FUN_002d2774(void)
   temp_v0 = 0;
   temp_v2 = in_r3;
   asdTextureCreate();
-  *DAT_005806cc = temp_v0;
+  *g_activeTextureSlot = temp_v0;
   puVar3 = &LAB_002d2820;
   FUN_0013c174(&LAB_002d2820,&temp_v2,0);
   FUN_00226970(temp_v0,puVar3,temp_v2,0x10000);
   asdMemFree(puVar3);
   asdTextureSetImage(temp_v0);
-  piVar1 = DAT_005806cc;
-  *(unsigned int *)(*DAT_005806cc + 0x3c) = 1;
+  piVar1 = g_activeTextureSlot;
+  *(unsigned int *)(*g_activeTextureSlot + 0x3c) = 1;
   *(unsigned int *)(*piVar1 + 0x40) = 1;
   temp_v1 = 0x40;
   temp_v0 = 0;

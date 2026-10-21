@@ -12,7 +12,7 @@ static __inline u64 CONCAT44(u32 high, u32 low)
 
 int FUN_0021a1a4(unsigned short *, int, int);
 int FUN_00256a50(...);
-int FUN_00256c98(...);
+int matrixScaleRows(...);
 int FUN_00256cd8(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
@@ -121,7 +121,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
 /* Supplied declaration required: FUN_0021a1a4. */
 /* Supplied declaration required: FUN_00256a50. */
-/* Supplied declaration required: FUN_00256c98. */
+/* Supplied declaration required: matrixScaleRows. */
 /* Supplied declaration required: FUN_00256cd8. */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
@@ -401,7 +401,7 @@ void FUN_002dea98(EffectEmitterB *emitter)
   temp_v86 = temp_v10 * (float)temp_v23;
   temp_v88 = temp_v10 * (float)((unsigned long long)temp_v23 >> 0x20);
   temp_v87 = temp_v10;
-  FUN_00256c98(temp_v27,&temp_v86);
+  matrixScaleRows(temp_v27,&temp_v86);
   temp_v10 = (float)temp_v26;
   temp_v23 = CONCAT44(temp_v9,0xbf800000);
   FUN_002ad314(&temp_v72,temp_v73);

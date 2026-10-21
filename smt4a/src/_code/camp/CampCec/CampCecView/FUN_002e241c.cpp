@@ -9,7 +9,7 @@ int efctSetSpeed(void);
 int skinObjectUpdateMatrices(int);
 int FUN_002a2210(unsigned int, int, int, int, int, int);
 int FUN_00359c78(int, int, int);
-int FUN_0036c8a0(int, int);
+int effCreateRegisteredPair(int, int);
 int FUN_0036c91c(int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_0036ca3c(int, int, int, unsigned int, int);
 
@@ -32,7 +32,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_002a2210. */
 extern int gameDataGetMarkEntry(int);
 /* Supplied declaration required: FUN_00359c78. */
-/* Supplied declaration required: FUN_0036c8a0. */
+/* Supplied declaration required: effCreateRegisteredPair. */
 /* Supplied declaration required: FUN_0036c91c. */
 /* Supplied declaration required: FUN_0036ca3c. */
 extern unsigned int gameDataBlocksGetWord27E90(void);
@@ -84,7 +84,7 @@ unsigned int FUN_002e241c(void)
       FUN_00359c78(temp_v1 + 0xf0,temp_v6,temp_v9);
     }
     if (((*(unsigned char *)(temp_v2 + 0x20) & 0x10) != 0) && (*(int *)(temp_v1 + 0xe0) == 0)) {
-      FUN_0036c8a0(temp_v6,temp_v9);
+      effCreateRegisteredPair(temp_v6,temp_v9);
     }
     temp_v8 = temp_v8 + 1;
   } while (temp_v8 < 3);

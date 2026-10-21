@@ -17,7 +17,7 @@ typedef struct {
 extern int gameFlagIsSet(int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_00356308. */
-extern int FUN_003a3038(void);
+extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: FUN_00482fe8. */
 /* Supplied declaration required: FUN_004834b0. */
 
@@ -36,7 +36,7 @@ void FUN_004839b4(unsigned int *param_1)
     return;
   }
   *(unsigned short *)(param_1 + 0x28) = 0;
-  temp_v0 = FUN_003a3038();
+  temp_v0 = dataTableGetRecordFortyOne();
   if (0 < temp_v0) {
     unaff_r7 = 0x137;
   }

@@ -14,7 +14,7 @@ int panelSetMode3(unsigned int, int);
 int screenShowMessage(int);
 int obj04Finish(void);
 int panelSetTarget(unsigned int, int);
-int FUN_004935b0(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_004963f8(int);
 int FUN_004cf8dc(int, int);
 int sub10OwnerStart(int);
@@ -47,7 +47,7 @@ extern int FUN_0026272c(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_004935b0. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004963f8. */
 /* Supplied declaration required: FUN_004cf8dc. */
 extern int FUN_004cfe4c(int);
@@ -116,7 +116,7 @@ void FUN_00498ac0(int param_1)
     FUN_00167458(temp_v1,0);
     temp_v2 = vec2GetYInt(temp_v1);
     temp_v0 = vec2GetXInt(temp_v1);
-    FUN_004935b0(param_1 + 0x3a4,temp_v0,temp_v2);
+    pointConvertToFloat(param_1 + 0x3a4,temp_v0,temp_v2);
     FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
     if (*(char *)(param_1 + 0x476) != '\0') {
       panelSetTarget(*(unsigned int *)(param_1 + 0x16000),0);

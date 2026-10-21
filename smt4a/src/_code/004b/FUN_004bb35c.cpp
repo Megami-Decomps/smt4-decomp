@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned int DAT_0057f2c8; /* 0x57f2c8 */
+extern unsigned int g_resourceDispatchContext; /* 0x57f2c8 */
 extern char s__SHIN_MEGAMITENSEI_4_0057f2cc[33]; /* 0x57f2cc */
 extern char s_Shin_Megami_Tensei_I_0057f34a[34]; /* 0x57f34a */
 
@@ -33,13 +33,13 @@ unsigned int FUN_004bb35c(int param_1)
   int temp_v1;
   
   temp_v0 = FUN_0042d694(0x19a2);
-  FUN_003a476c(temp_v0,DAT_0057f2c8,s__SHIN_MEGAMITENSEI_4_0057f2cc,*(unsigned int *)(param_1 + 4),
+  FUN_003a476c(temp_v0,g_resourceDispatchContext,s__SHIN_MEGAMITENSEI_4_0057f2cc,*(unsigned int *)(param_1 + 4),
                0x1200,s_Shin_Megami_Tensei_I_0057f34a,0x20,99);
   switch(temp_v0) {
   default:
     cecSettingsSet(2,3,0xff,0);
     temp_v0 = FUN_0042d694(0x19a2);
-    temp_v1 = FUN_00359008(temp_v0,DAT_0057f2c8,s_Shin_Megami_Tensei_I_0057f34a,
+    temp_v1 = FUN_00359008(temp_v0,g_resourceDispatchContext,s_Shin_Megami_Tensei_I_0057f34a,
                          *(unsigned int *)(param_1 + 4),0x1200);
     if (temp_v1 != 5) {
       return 0;

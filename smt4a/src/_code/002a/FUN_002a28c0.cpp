@@ -17,7 +17,7 @@ int cecProcessCall2(void);
 int FUN_0032e25c(...);
 int FUN_00333bfc(void);
 int ownerSetName(unsigned int, unsigned int);
-int FUN_0035a074(unsigned int, int, unsigned int, unsigned int);
+int engineForwardVariadicCommand(unsigned int, int, unsigned int, unsigned int);
 int FUN_00387edc(void);
 int loadSlotEnsureLoaded(int);
 
@@ -56,7 +56,7 @@ extern unsigned char LAB_002a2c54; /* 0x2a2c54 */
 extern unsigned char FUN_002391e0(void);
 /* Supplied declaration required: FUN_002804b0. */
 extern unsigned int FUN_002840ac(void);
-extern int FUN_002a2cf0(void);
+extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002a4664. */
 /* Supplied declaration required: FUN_002a469c. */
 extern unsigned char FUN_002a46b8(void);
@@ -74,7 +74,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00333bfc. */
 /* Supplied declaration required: ownerSetName. */
 extern int gameDataTestFlags(unsigned int);
-/* Supplied declaration required: FUN_0035a074. */
+/* Supplied declaration required: engineForwardVariadicCommand. */
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 
@@ -133,7 +133,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       FUN_002a4664(&temp_v7);
       temp_v1 = FUN_002bf520();
       temp_v6[0] = temp_v8;
-      FUN_0035a074(temp_v1,temp_v7,uStack_78,uStack_74);
+      engineForwardVariadicCommand(temp_v1,temp_v7,uStack_78,uStack_74);
       temp_v0 = FUN_002a46b8();
       temp_v4 = FUN_002bf520();
       *(unsigned char *)(temp_v4 + 0x42) = temp_v0;
@@ -150,7 +150,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       }
       temp_v3 = (unsigned int)param_1->field_0x7d5;
       if (temp_v3 != 1) {
-        temp_v4 = FUN_002a2cf0();
+        temp_v4 = cecQueryOptionalProcess();
         param_1->field_0x3e4 = (char)temp_v4;
         if ((temp_v4 != 0) && (temp_v4 = gameDataTestFlags(0x20), temp_v4 != 0)) {
           FUN_002c0b10(temp_v6);

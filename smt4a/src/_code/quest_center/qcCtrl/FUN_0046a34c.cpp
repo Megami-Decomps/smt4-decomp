@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdOperatorNew(int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0022677c(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_0046a818; /* 0x46a818 */
 extern unsigned char LAB_0046a840; /* 0x46a840 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_0015a21c(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -126,7 +126,7 @@ LAB_0046a3b0:
   temp_v7[0xf] = '\0';
   if (0 < *(int *)(param_1 + 0xabc)) {
     do {
-      FUN_00100388(temp_v8,&LAB_0046a704,
+      textFormatBuffer(temp_v8,&LAB_0046a704,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v0 = 0x20;
       FUN_00178b04(0x20,&LAB_0046a714,0x245);
@@ -144,7 +144,7 @@ LAB_0046a3b0:
       FUN_003fe86c(temp_v1,0);
       *(int *)(temp_v1 + 0x1fc) = (int)temp_v5;
       FUN_0040ace8(g_handleRegistry,temp_v1);
-      FUN_00100388(temp_v8,&LAB_0046a74c,
+      textFormatBuffer(temp_v8,&LAB_0046a74c,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v1 = 0x20;
       FUN_00178b04(0x20,&LAB_0046a714,0x25a);
@@ -164,7 +164,7 @@ LAB_0046a3b0:
   }
   *(unsigned int *)(param_1 + 0xa5c) = 0x41f00000;
   if (*(char *)(param_1 + 0x1a) == '\x02') {
-    FUN_00100388(temp_v8,&LAB_0046a768,
+    textFormatBuffer(temp_v8,&LAB_0046a768,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v4 = 0x20;
     FUN_00178b04(0x20,&LAB_0046a714,0x27e);
@@ -180,7 +180,7 @@ LAB_0046a3b0:
     temp_v2 = *(unsigned int *)(*piVar6 + 4);
     FUN_0040ace8(g_handleRegistry,temp_v2);
     FUN_003fe86c(temp_v2,0,1);
-    FUN_00100388(temp_v8,&LAB_0046a774,
+    textFormatBuffer(temp_v8,&LAB_0046a774,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v2 = g_handleRegistry;
     FUN_0040b0f8(g_handleRegistry,temp_v8);
@@ -203,17 +203,17 @@ LAB_0046a3b0:
                *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),0);
   linkSlotSetFlag1C(*(unsigned int *)(param_1 + 0xcdc),0);
   if (*(char *)(param_1 + 0x10) != '\x0e') {
-    FUN_00100388(temp_v7 + 0x10,&LAB_0046a77c);
-    FUN_00100388(temp_v6,&LAB_0046a7a0,(int)*(char *)(param_1 + 0x10));
+    textFormatBuffer(temp_v7 + 0x10,&LAB_0046a77c);
+    textFormatBuffer(temp_v6,&LAB_0046a7a0,(int)*(char *)(param_1 + 0x10));
   }
   else {
-    FUN_00100388(temp_v7 + 0x10,&LAB_0046a77c);
+    textFormatBuffer(temp_v7 + 0x10,&LAB_0046a77c);
     temp_v4 = gameFlagIsSet(0x103);
     if (temp_v4 != 0) {
-      FUN_00100388(temp_v6,&LAB_0046a818,(int)*(char *)(param_1 + 0x10));
+      textFormatBuffer(temp_v6,&LAB_0046a818,(int)*(char *)(param_1 + 0x10));
     }
     else {
-      FUN_00100388(temp_v6,&LAB_0046a840,(int)*(char *)(param_1 + 0x10));
+      textFormatBuffer(temp_v6,&LAB_0046a840,(int)*(char *)(param_1 + 0x10));
     }
   }
   FUN_002804b0(temp_v7 + 0x10,param_1 + 0x290,0);

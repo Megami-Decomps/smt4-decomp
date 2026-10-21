@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_00135b64; not written yet. */
+/* NON_MATCHING: linker-generated absolute branch veneer (ldr pc, [pc, #-4]) to FUN_00100d3c; not a C function. */
 #include "common.h"

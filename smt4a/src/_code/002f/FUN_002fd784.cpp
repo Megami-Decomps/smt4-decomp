@@ -1,27 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd784` (_code @ 0x2fd784, 0x3a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'mov r4, r1'; compiler emits 'mov r6, r0' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-int onlineStringAssign(int, int);
-
-/* Supplied declaration required: onlineStringAssign. */
-
-
-void FUN_002fd784(int param_1,int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  onlineStringAssign(param_1 + 0xe0,param_2 + 4);
-  *(unsigned short *)(param_1 + 0xe8) = *(unsigned short *)(param_2 + 0xc);
-  onlineStringAssign(param_1 + 0xec,param_2 + 0x10);
-  *(unsigned short *)(param_1 + 0xf4) = *(unsigned short *)(param_2 + 0x18);
-  *(unsigned char *)(param_1 + 0xf6) = *(unsigned char *)(param_2 + 0x1a);
-  *(unsigned char *)(param_1 + 0xf7) = *(unsigned char *)(param_2 + 0x1b);
-  *(unsigned int *)(param_1 + 0xf8) = *(unsigned int *)(param_2 + 0x1c);
-  *(unsigned char *)(param_1 + 0xfc) = *(unsigned char *)(param_2 + 0x20);
-  return;
+struct String { u8 storage[8]; };
+struct Source { const void *vtable; String first; u16 firstKind; u8 unk0E[2]; String second; u16 secondKind; u8 firstFlag, secondFlag; u32 value; u8 active; };
+struct Object { u8 unk00[0xDC]; Source value; };
+void onlineStringAssign(String *output, const String *source);
+void FUN_002fd784(Object *object, const Source *source) {
+    onlineStringAssign(&object->value.first, &source->first);
+    object->value.firstKind = source->firstKind;
+    onlineStringAssign(&object->value.second, &source->second);
+    object->value.secondKind = source->secondKind;
+    object->value.firstFlag = source->firstFlag;
+    object->value.secondFlag = source->secondFlag;
+    object->value.value = source->value;
+    object->value.active = source->active;
 }
-
-} /* extern "C" */
+}

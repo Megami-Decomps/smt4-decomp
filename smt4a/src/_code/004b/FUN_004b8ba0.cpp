@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_004080bc(unsigned int, int, unsigned int);
 int FUN_004b6bc4(int, int, int);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char DAT_005328fc; /* 0x5328fc */
 extern int DAT_0058800c; /* 0x58800c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -58,7 +58,7 @@ void FUN_004b8ba0(int param_1)
           temp_v3 = *(unsigned int *)(param_1 + 0x114c);
           temp_v4 = *(unsigned int *)(param_1 + 0x1144);
           DAT_0058800c = 0;
-          FUN_00100388(temp_v8,&DAT_005328fc,temp_v2 + 0x2c);
+          textFormatBuffer(temp_v8,&DAT_005328fc,temp_v2 + 0x2c);
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v8);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
@@ -77,7 +77,7 @@ LAB_004b8c94:
           temp_v3 = *(unsigned int *)(param_1 + 0x114c);
           temp_v4 = *(unsigned int *)(param_1 + 0x1144);
           DAT_0058800c = 0;
-          FUN_00100388(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
+          textFormatBuffer(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
@@ -102,7 +102,7 @@ LAB_004b8c94:
         temp_v3 = *(unsigned int *)(param_1 + 0x114c);
         temp_v4 = *(unsigned int *)(param_1 + 0x1144);
         DAT_0058800c = 0;
-        FUN_00100388(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
+        textFormatBuffer(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
         temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
         scrScriptProcessStartEntry(temp_v3,temp_v4);
         do {

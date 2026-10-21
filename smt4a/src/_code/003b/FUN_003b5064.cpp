@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_005f1c98; /* 0x5f1c98 */
+extern unsigned int g_mapSelection; /* 0x5f1c98 */
 extern unsigned int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
@@ -33,7 +33,7 @@ void FUN_003b5064(void)
   temp_v0 = *pcVar2;
   if (temp_v0 == '\0') {
     temp_v2 = 0;
-    DAT_005f1c98 = 1;
+    g_mapSelection = 1;
     DAT_005f1c9c = 2;
     DAT_005f1ca0 = 0;
     temp_v1 = dataTable23Type1CountWithAoc();
@@ -61,7 +61,7 @@ void FUN_003b5064(void)
     return;
   }
   if (temp_v0 == '\x01') {
-    DAT_005f1c98 = (unsigned int)(unsigned char)pcVar2[1];
+    g_mapSelection = (unsigned int)(unsigned char)pcVar2[1];
     DAT_005f1c9c = (unsigned int)(unsigned char)pcVar2[2];
     DAT_005f1ca0 = 0xffffffff;
     DAT_005f1ca4 = *(unsigned int *)(pcVar2 + 0xe0c);
@@ -74,13 +74,13 @@ void FUN_003b5064(void)
   }
   if (temp_v0 != '\x02') {
     if (temp_v0 == '\x03') {
-      DAT_005f1c98 = (unsigned int)(unsigned char)pcVar2[1];
+      g_mapSelection = (unsigned int)(unsigned char)pcVar2[1];
       DAT_005f1c9c = (unsigned int)(unsigned char)pcVar2[2];
       DAT_005f1ca4 = 0xffffffff;
     }
     return;
   }
-  DAT_005f1c98 = (unsigned int)(unsigned char)pcVar2[1];
+  g_mapSelection = (unsigned int)(unsigned char)pcVar2[1];
   DAT_005f1c9c = (unsigned int)(unsigned char)pcVar2[2];
   DAT_005f1ca0 = 0xffffffff;
   DAT_005f1ca4 = *(unsigned int *)(pcVar2 + 0xe0c);

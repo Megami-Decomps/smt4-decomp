@@ -13,7 +13,7 @@ extern unsigned int DAT_0044f54c; /* 0x44f54c */
 extern unsigned char DAT_0044f858; /* 0x44f858 */
 extern int DAT_0044f864; /* 0x44f864 */
 
-extern unsigned int FUN_002468e0(unsigned int, int);
+extern unsigned int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: rt_memcpy_w144. */
 extern unsigned int FUN_002f316c(unsigned int, unsigned int);
 
@@ -25,7 +25,7 @@ unsigned int FUN_0031e844(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002468e0(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
+  temp_v0 = linkedFindItemByIndex(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
   temp_v1 = FUN_002f316c(DAT_0044ea94,temp_v0);
   DAT_0044f54c = 0;
   rt_memcpy_w144(temp_v1,temp_v0);

@@ -1,22 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00135b4a` (_code @ 0x135b4a, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses b.n 14 where the compiled block uses cmp r0, r1. */
+#include "common.h"
 
-extern "C" {
+struct OnlineString {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+};
 
-int onlineStringAssign(int, unsigned int);
+extern "C" void onlineStringAssign(OnlineString* destination, u32 value);
 
-/* Supplied declaration required: onlineStringAssign. */
-
-
-void FUN_00135b4a(int param_1,int param_2,unsigned int param_3)
-
+extern "C" void FUN_00135b4a(OnlineString* first, OnlineString* last, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  for (; param_1 != param_2; param_1 = param_1 + 8) {
-    onlineStringAssign(param_1,param_3);
-  }
-  return;
+    while (first != last) {
+        onlineStringAssign(first, value);
+        ++first;
+    }
 }
-
-} /* extern "C" */

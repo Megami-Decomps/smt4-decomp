@@ -11,7 +11,7 @@ int FUN_00272e64(void);
 int FUN_002b5cb4(void);
 int FUN_002b5cd4(void);
 int FUN_00330108(float *, float *, unsigned char [56]);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -39,7 +39,7 @@ extern float DAT_005f1720; /* 0x5f1720 */
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_00330108. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 
 
 void FUN_002d0480(int param_1)
@@ -103,7 +103,7 @@ void FUN_002d0480(int param_1)
       temp_v2 = temp_v13;
       FUN_002b5cb4();
       temp_v7 = 90.0f;
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
       temp_v3 = temp_v4;
       FUN_002b5cd4();
       temp_v1 = 0;

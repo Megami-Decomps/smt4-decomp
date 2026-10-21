@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, int);
 int FUN_0027376c(...);
 int FUN_00294774(...);
-int FUN_003fd76c(...);
+int controllerSetDestination(...);
 int FUN_003fda08(...);
 
 int FUN_00145868(void);
@@ -20,7 +20,7 @@ int FUN_002826dc(int *, int *, int, int);
 int FUN_002b5cb4(void);
 int FUN_002d1f40(int, int, int);
 int FUN_003250ac(int *);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_003d4ed8(...);
 int FUN_003fd7c0(...);
 int FUN_003fd924(...);
@@ -91,9 +91,9 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_003250ac. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003d4ed8. */
-/* Supplied declaration required: FUN_003fd76c. */
+/* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
 /* Supplied declaration required: FUN_003fda08. */
@@ -257,7 +257,7 @@ LAB_002db2e8:
       piVar2[0x7d] = (int)(temp_v17 + temp_v9 * (float)((unsigned long long)temp_v16 >> 0x20));
       piVar2[0x7e] = (int)temp_v13;
       if (*(char *)((int)piVar2 + 0x23d) == '\x01') {
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
       }
       FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
       FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
@@ -330,7 +330,7 @@ LAB_002db724:
                (int)((float)g_lmapScene[0x81] + temp_v11 * *(float *)(temp_v0 + 0x1528));
           piVar2[0x80] = (int)((float)piVar2[0x80] + 120.0f);
           FUN_003250ac(piVar5);
-          FUN_00352bc4();
+          mathPositionHeadingDegrees();
           piVar2 = g_lmapScene;
           g_lmapScene[0x86] = (int)temp_v17;
           piVar2[0x87] = piVar2[0x13];
@@ -1042,7 +1042,7 @@ LAB_002dccc8:
   }
 LAB_002dcd94:
   temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
-  FUN_003fd76c(temp_v5,g_lmapScene + 0x7c);
+  controllerSetDestination(temp_v5,g_lmapScene + 0x7c);
   temp_v0 = FUN_004ff98c(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8a]) || ((char)g_lmapScene[0x8b] != '\0')) {
     FUN_003fd924(temp_v5,g_lmapScene[0x8a],2);
@@ -1052,7 +1052,7 @@ LAB_002dcd94:
   iStack_68 = g_lmapScene[0x7e];
   temp_v30 = (float)g_lmapScene[0x7d] + (float)g_lmapScene[0x91];
   temp_v5 = *(unsigned int *)(g_lmapScene[99] + 4);
-  FUN_003fd76c(temp_v5,&temp_v29);
+  controllerSetDestination(temp_v5,&temp_v29);
   temp_v0 = FUN_004ff98c(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8e]) || ((char)g_lmapScene[0x8f] != '\0')) {
     FUN_003fd924(temp_v5,g_lmapScene[0x8e],2);
@@ -1080,7 +1080,7 @@ LAB_002dcd94:
     piVar2[0x7d] = (int)(temp_v17 + temp_v9 * (float)((unsigned long long)temp_v16 >> 0x20));
     piVar2[0x7e] = temp_v0;
     if (*(char *)((int)piVar2 + 0x23d) == '\x01') {
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
     }
     temp_v18 = (int)((unsigned long long)temp_v14 >> 0x20);
     FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
@@ -1164,7 +1164,7 @@ LAB_002dd03c:
     piVar2[0x7d] = (int)temp_v10;
     piVar2[0x7e] = temp_v0;
     if (*(char *)((int)piVar2 + 0x23d) == '\x01') {
-      FUN_00352bc4();
+      mathPositionHeadingDegrees();
     }
     temp_v5 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
     FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));

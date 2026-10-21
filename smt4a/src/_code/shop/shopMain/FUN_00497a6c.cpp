@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0049368c. */
 /* Supplied declaration required: FUN_00494d68. */
 extern int FUN_004cfe4c(int);
-extern int FUN_004d0040(int);
+extern int rangeGetMinimumLimit(int);
 /* Supplied declaration required: size40Set. */
 
 
@@ -97,7 +97,7 @@ void FUN_00497a6c(int param_1,unsigned int param_2)
   temp_v9 = temp_v5 + 0xb60;
   temp_v7 = param_1 + *(int *)(param_1 + 0xb40) * 0x1002 + 0xf74;
   temp_v1 = FUN_002a482c(temp_v9);
-  temp_v2 = FUN_004d0040(temp_v9);
+  temp_v2 = rangeGetMinimumLimit(temp_v9);
   temp_v6 = 0;
   temp_v0 = temp_v2;
   if (0 < temp_v2) {

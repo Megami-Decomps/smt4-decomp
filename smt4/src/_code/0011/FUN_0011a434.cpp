@@ -14,7 +14,7 @@ int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int mtx44Copy(...);
 int FUN_002c198c(...);
 int FUN_002c39a4(int);
@@ -75,7 +75,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c198c. */
@@ -135,7 +135,7 @@ unsigned int FUN_0011a434(void)
     }
     temp_v5 = 0.29f;
     FUN_002ba12c(g_titleScene);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v8 = *(unsigned int *)(temp_v0 + 0x60);
     temp_v7 = 0x3f800000;
     temp_v6 = 0;
@@ -243,7 +243,7 @@ unsigned int FUN_0011a434(void)
     nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
     cameraSetViewMatrix(g_titleScene,temp_v24);
     if (*(int *)(temp_v0 + 8) == 2) {
-      FUN_002bf538();
+      efctSetSpeed();
     }
     temp_v1 = g_titleScene;
     temp_v3 = packNibblesAndByte(6,1,0);
@@ -264,7 +264,7 @@ unsigned int FUN_0011a434(void)
       (**(romwright_code **)(temp_v1 + 0x12c8))();
       *(unsigned char *)(temp_v1 + 0x12c4) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bf380(2,0xe,2,0,0,0x6a);
     if (*(char *)(temp_v0 + 0x10) != '\0') {
       if (*(char *)(temp_v0 + 0x12) == '\0') {
@@ -297,7 +297,7 @@ unsigned int FUN_0011a434(void)
       }
     }
     FUN_002c198c(g_titleScene);
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v0 = g_titleScene;
     piVar6 = (int *)(g_titleScene + 0x124c);
     temp_v2 = *piVar6;

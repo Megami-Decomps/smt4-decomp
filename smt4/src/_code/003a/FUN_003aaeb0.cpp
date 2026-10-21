@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022e0fc(int, int);
-int FUN_0022e158(int, int *);
+int recordAppendFloatEntry(int, int *);
 int FUN_0022e2fc(void);
 int FUN_00233730(int, int, int, int);
 int FUN_002498ec(void);
@@ -28,7 +28,7 @@ typedef struct {
 #endif
 extern unsigned char gaugePercent(int);
 /* Supplied declaration required: FUN_0022e0fc. */
-/* Supplied declaration required: FUN_0022e158. */
+/* Supplied declaration required: recordAppendFloatEntry. */
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: FUN_00233730. */
 /* Supplied declaration required: FUN_002498ec. */
@@ -70,7 +70,7 @@ void FUN_003aaeb0(int param_1)
       temp_v12 = FUN_002bce00();
       temp_v10 = *(unsigned int *)(temp_v4 + 0x28);
       temp_v11 = *(unsigned short *)(temp_v4 + 0x24);
-      FUN_0022e158(temp_v2,&temp_v8);
+      recordAppendFloatEntry(temp_v2,&temp_v8);
     }
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x803);

@@ -1,32 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003badac` (_code @ 0x3badac, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses `sub r1, r4, #384` where armcc emits `add r4, r1, #384`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003465ec(int, int, unsigned int);
+struct Data { u8 unk00[0x24]; u8 values[0x68]; u32 count; };
+struct Owner { u8 unk00[0xc]; Data *data; };
+struct WorkspaceBuffer { u8 bytes[0x180]; };
+struct Workspace { u8 unk00[0x14]; WorkspaceBuffer *data; u32 count; };
+extern Workspace DAT_0059edf8;
+void FUN_003465ec(Data *data, void *values, u32 count);
 
-extern unsigned char DAT_0059eaf8; /* 0x59eaf8 */
-extern unsigned char DAT_0059ec78; /* 0x59ec78 */
-extern unsigned char *DAT_0059ee0c; /* 0x59ee0c */
-extern unsigned int DAT_0059ee10; /* 0x59ee10 */
-
-/* Supplied declaration required: FUN_003465ec. */
-
-
-void FUN_003badac(int param_1)
-
+void FUN_003badac(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  DAT_0059ee0c = &DAT_0059ec78;
-  DAT_0059ee10 = 8;
-  FUN_003465ec(temp_v0,temp_v0 + 0x24,*(unsigned int *)(temp_v0 + 0x8c));
-  DAT_0059ee0c = &DAT_0059eaf8;
-  DAT_0059ee10 = 8;
-  return;
+    Data *data = owner->data;
+    WorkspaceBuffer *buffers = (WorkspaceBuffer *)&DAT_0059edf8;
+    DAT_0059edf8.data = &buffers[-1];
+    DAT_0059edf8.count = 8;
+    FUN_003465ec(data, data->values, data->count);
+    DAT_0059edf8.data = &buffers[-2];
+    DAT_0059edf8.count = 8;
 }
 
 } /* extern "C" */

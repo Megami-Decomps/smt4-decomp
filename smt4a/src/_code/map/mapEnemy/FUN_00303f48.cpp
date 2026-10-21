@@ -40,7 +40,7 @@ typedef struct {
 
 extern unsigned char LAB_00304cd0; /* 0x304cd0 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
@@ -95,7 +95,7 @@ extern char *FUN_00332fcc(void);
 extern char *FUN_00371058(void);
 extern int FUN_00376f94(void);
 /* Supplied declaration required: contentEntryGetB. */
-extern char *FUN_003a3038(void);
+extern char *dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: contentEntryGetC. */
 /* Supplied declaration required: FUN_003a30e8. */
 /* Supplied declaration required: FUN_003a315c. */
@@ -151,7 +151,7 @@ void FUN_00303f48(void)
   char *temp_v17;
   char *temp_v18;
   
-  temp_v6 = DAT_005806d4;
+  temp_v6 = g_mapEnemy;
   temp_v0 = gameFlagsGetBlock();
   DAT_005f17f0 = 0x3c;
   temp_v1 = FUN_003cb88c(g_gameState,DAT_005f1600);
@@ -317,7 +317,7 @@ void FUN_00303f48(void)
     temp_v1 = (int)*(char *)(temp_v0 + 0x3b);
   }
   else {
-    temp_v17 = (char *)FUN_003a3038();
+    temp_v17 = (char *)dataTableGetRecordFortyOne();
     temp_v18 = (char *)0x0;
     FUN_00356308();
     temp_v16 = *(int *)(temp_v6 + 0xc);

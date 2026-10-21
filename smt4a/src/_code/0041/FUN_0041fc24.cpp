@@ -10,7 +10,7 @@ int libc_strcpy(...);
 int FUN_0033440c(int);
 int FUN_0033449c(int);
 int FUN_0034aac8(int);
-int FUN_003720a0(unsigned int, int);
+int gameGlobalsQueueValues(unsigned int, int);
 int rt_memcpy_w(unsigned int *, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0034aac8. */
-/* Supplied declaration required: FUN_003720a0. */
+/* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -63,7 +63,7 @@ void FUN_0041fc24(int param_1)
     *(unsigned short *)((int)puVar3 + 0x62) = *(unsigned short *)(temp_v0 + 0xd0);
     temp_v1 = gameDataBlocksGetSaveData();
     libc_strcpy(temp_v1 + 0x54,temp_v0 + 0x6c);
-    FUN_003720a0(*(unsigned int *)(param_1 + 0x54),0);
+    gameGlobalsQueueValues(*(unsigned int *)(param_1 + 0x54),0);
     FUN_0033440c(*(unsigned char *)(param_1 + *(int *)(param_1 + 100) * 0x80 + 0xd6));
     param_1 = param_1 + *(int *)(param_1 + 100) * 0x80;
     if (param_1 != -0x6c) {

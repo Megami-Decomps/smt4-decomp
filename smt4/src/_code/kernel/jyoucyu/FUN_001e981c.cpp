@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c0944(int, int, int);
 int FUN_002c1b64(int, int);
 int FUN_002c39a4(int);
@@ -23,7 +23,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -55,7 +55,7 @@ unsigned int FUN_001e981c(void)
       (**(romwright_code **)(temp_v2 + 0x1268))();
       *(unsigned char *)(temp_v2 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     FUN_002c1b64(g_titleScene,0);
     FUN_002c0944(0xff,0xff,0xff);
@@ -71,7 +71,7 @@ unsigned int FUN_001e981c(void)
       (**(romwright_code **)(temp_v0 + 0x1268))();
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
-    FUN_002bf538();
+    efctSetSpeed();
   }
   return 0;
 }

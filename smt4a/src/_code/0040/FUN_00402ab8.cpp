@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164168(...);
 int efctSetSpeed(...);
@@ -29,7 +29,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164168. */
@@ -75,7 +75,7 @@ void FUN_00402ab8(int param_1,int param_2,int param_3)
     gameGetPlayerData();
     temp_v6 = FUN_0015687c();
   }
-  FUN_00100388(temp_v13,&LAB_00402e14,temp_v6);
+  textFormatBuffer(temp_v13,&LAB_00402e14,temp_v6);
   puVar1 = temp_v13;
   FUN_0018408c(puVar1,2);
   temp_v0 = FUN_001834a4(0x32,9);
@@ -87,7 +87,7 @@ void FUN_00402ab8(int param_1,int param_2,int param_3)
   VectorSignedToFloat(((int)*(short *)(temp_v0 + 8) - (int)puVar1) + param_2 + temp_v10,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,temp_v12,temp_v13,temp_v6);
-  FUN_00100388(temp_v13,&LAB_00402e20);
+  textFormatBuffer(temp_v13,&LAB_00402e20);
   puVar3 = temp_v13;
   FUN_0018408c(puVar3,2);
   temp_v6 = FUN_001834a4(0x32,10);

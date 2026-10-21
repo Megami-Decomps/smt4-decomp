@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001960f0(unsigned int *, unsigned int *);
+int asdModelCommitCommandRange(unsigned int *, unsigned int *);
 int FUN_0019a2ac(unsigned int *, unsigned int, int);
 int FUN_0019eafc(void);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001960f0. */
+/* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: FUN_0019a2ac. */
 /* Supplied declaration required: FUN_0019eafc. */
 
@@ -29,7 +29,7 @@ void FUN_00187d90(unsigned int *param_1,unsigned int param_2)
   *puVar1 = *(unsigned char *)((int)param_1 + 0x12a3a) | 0x80000000;
   puVar1[1] = 0xf02c0;
   FUN_0019a2ac(puVar1 + 2,param_2,0xff02c1);
-  FUN_001960f0(puVar1,puVar1 + 0x14);
+  asdModelCommitCommandRange(puVar1,puVar1 + 0x14);
   return;
 }
 

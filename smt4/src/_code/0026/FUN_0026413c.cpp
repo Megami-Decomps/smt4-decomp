@@ -13,7 +13,7 @@ extern unsigned int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f934; /* 0x49f934 */
 extern unsigned int *DAT_0049f938; /* 0x49f938 */
 
-extern int FUN_002762e0(void);
+extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: FUN_00287b0c. */
 extern int padIsButtonPressed(unsigned int);
@@ -74,7 +74,7 @@ void FUN_0026413c(void)
       temp_v2 = FUN_002c15fc(7);
       temp_v4 = temp_v2 != 0;
       if ((*(short *)(DAT_004474f4 + 0xb2) == 0) &&
-         ((temp_v2 = FUN_002762e0(), temp_v2 != 0 ||
+         ((temp_v2 = inputIsQuestMenuPressed(), temp_v2 != 0 ||
           (((temp_v2 = FUN_002c15fc(8), temp_v2 != 0 && (temp_v2 = FUN_002c15fc(7), temp_v2 != 0)) &&
            ((temp_v2 = padIsButtonPressed(8), temp_v2 == 0 &&
             ((temp_v2 = padIsButtonPressed(7), temp_v2 == 0 && (*(char *)(DAT_004474f4 + 0xb1) == '\0'))))))))

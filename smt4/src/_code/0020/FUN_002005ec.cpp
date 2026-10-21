@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002545d0(...);
+int rectangleForwardExpandedAlt(...);
 int FUN_00296dc4(unsigned char *, unsigned char *);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -36,7 +36,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_002545d0. */
+/* Supplied declaration required: rectangleForwardExpandedAlt. */
 /* Supplied declaration required: FUN_00296dc4. */
 
 
@@ -124,16 +124,16 @@ LAB_00200760:
           temp_v0 = (&DAT_0049e7dc)[temp_v1];
         }
         if (temp_v0 == '\x01') {
-          FUN_002545d0(0xff00ff);
-          FUN_002545d0(0xff00ff);
-          FUN_002545d0(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
         }
       }
       else {
 LAB_00200824:
-        FUN_002545d0(0xff00ff);
-        FUN_002545d0(0xff00ff);
-        FUN_002545d0(0xff00ff);
+        rectangleForwardExpandedAlt(0xff00ff);
+        rectangleForwardExpandedAlt(0xff00ff);
+        rectangleForwardExpandedAlt(0xff00ff);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_00446ff4);
@@ -153,18 +153,18 @@ LAB_00200824:
           temp_v0 = (&DAT_0049e87c)[temp_v1];
         }
         if (temp_v0 == '\x01') {
-          FUN_002545d0(0xff00ff);
-          FUN_002545d0(0xff00ff);
-          FUN_002545d0(0xff00ff);
-          FUN_002545d0(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
+          rectangleForwardExpandedAlt(0xff00ff);
         }
       }
       else {
 LAB_002008dc:
-        FUN_002545d0(0xffff00ff);
-        FUN_002545d0(0xffff00ff);
-        FUN_002545d0(0xffff00ff);
-        FUN_002545d0(0xffff00ff);
+        rectangleForwardExpandedAlt(0xffff00ff);
+        rectangleForwardExpandedAlt(0xffff00ff);
+        rectangleForwardExpandedAlt(0xffff00ff);
+        rectangleForwardExpandedAlt(0xffff00ff);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < DAT_00446ff8);

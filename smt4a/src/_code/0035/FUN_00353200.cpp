@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_0025ef68(float *, float *, int);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -25,7 +25,7 @@ typedef struct {
 } param_1_stack;
 
 extern int DAT_005806a4; /* 0x5806a4 */
-extern int DAT_005806d4; /* 0x5806d4 */
+extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 extern short DAT_005f187e; /* 0x5f187e */
 
@@ -35,7 +35,7 @@ extern unsigned int randRange(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0025ef68. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_0036d984(unsigned int *, float *, unsigned int);
 
 
@@ -79,7 +79,7 @@ unsigned int FUN_00353200(int param_1)
   temp_v9 = 900.0f;
   temp_v7 = 0x3c8efa35420c0000;
   temp_v8 = 0x40a0000041c80000;
-  puVar5 = (unsigned int *)(DAT_005806d4 + 0x3d84);
+  puVar5 = (unsigned int *)(g_mapEnemy + 0x3d84);
   do {
     temp_v15 = *(float *)(g_lmapScene + 0x24);
     temp_v13 = *(float *)(g_lmapScene + 0x1c);
@@ -158,7 +158,7 @@ unsigned int FUN_00353200(int param_1)
         *(float *)(param_1 + 0x20) = temp_v21;
         *(float *)(param_1 + 0x24) = fStack_58;
         *(float *)(param_1 + 0x28) = fStack_54;
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         *(float *)(param_1 + 0x2c) = temp_v19;
         return 1;
       }

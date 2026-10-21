@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001acf98(int);
+int asdTMTexLoadMainHeap(int);
 int FUN_004cfe4c(...);
 int sub10OwnerStart(int);
 int FUN_004d0738(int, int);
 
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_004cfe4c. */
 extern int FUN_004d0058(int, unsigned int);
 /* Supplied declaration required: sub10OwnerStart. */
@@ -64,7 +64,7 @@ unsigned int FUN_004babd8(int param_1)
         *(unsigned int *)(param_1 + 0x102c) = temp_v2 + 2;
         *(int *)(param_1 + 0x1030) = temp_v0;
         if (*(char *)(temp_v1 + 0x1034) == '\0') {
-          FUN_001acf98(0x1f);
+          asdTMTexLoadMainHeap(0x1f);
           *(unsigned char *)(temp_v1 + 0x1034) = 1;
         }
       }

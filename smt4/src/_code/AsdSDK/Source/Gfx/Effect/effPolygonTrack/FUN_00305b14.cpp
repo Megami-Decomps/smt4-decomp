@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_002482d4(void);
 int FUN_00248480(void);
 int FUN_002484e0(void);
-int FUN_0024b77c(void);
+int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
 int FUN_002b7064(void);
 int FUN_002b70cc(void);
@@ -91,7 +91,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002482d4. */
 /* Supplied declaration required: FUN_00248480. */
 /* Supplied declaration required: FUN_002484e0. */
-/* Supplied declaration required: FUN_0024b77c. */
+/* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 /* Supplied declaration required: FUN_002b7064. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -373,7 +373,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                   *temp_v29 = 0;
                 }
                 else {
-                  FUN_0024b77c();
+                  randomAdvanceShiftRegister();
                   __aeabi_uidivmod();
                   temp_v13 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   *temp_v29 = temp_v8;

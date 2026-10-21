@@ -13,7 +13,7 @@ int soundChannelStopAll(int);
 int FUN_003d4c68(int);
 int FUN_003de02c(int);
 
-extern unsigned int *DAT_00588fc8; /* 0x588fc8 */
+extern unsigned int *g_requestWork; /* 0x588fc8 */
 
 /* Supplied declaration required: jobStop. */
 extern int padButtonRepeat(unsigned int);
@@ -34,8 +34,8 @@ unsigned int FUN_0029ef78(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  puVar1 = DAT_00588fc8;
-  if ((DAT_00588fc8[2] != 99) && (temp_v0 = padButtonIsPressed(2), temp_v0 != 0)) {
+  puVar1 = g_requestWork;
+  if ((g_requestWork[2] != 99) && (temp_v0 = padButtonIsPressed(2), temp_v0 != 0)) {
     puVar1[2] = 99;
   }
   temp_v0 = puVar1[2];
@@ -48,7 +48,7 @@ unsigned int FUN_0029ef78(void)
     if (temp_v0 != 99) {
       return 0;
     }
-    jobStop(*DAT_00588fc8,0);
+    jobStop(*g_requestWork,0);
     return 0xffffffff;
   }
   temp_v0 = padButtonRepeat(4);

@@ -1,24 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdTMTexTableGetNode` (_code @ 0x1861c4, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler omits retail ldrh r0, [r0]. */
+#include "common.h"
+
+struct TextureTable;
+struct TextureNode;
+
+struct TextureTableEntry {
+    TextureTable* table; // 0x00
+    u8 unk04[0x14];      // 0x04
+};
 
 extern "C" {
+extern TextureTableEntry* g_texTable;
+TextureNode* FUN_0019ea90(TextureTable* table, s32 nodeIndex);
 
-extern int g_texTable; /* 0x59dbb8 */
-
-
-int asdTMTexTableGetNode(int param_1,int param_2)
-
+TextureNode* asdTMTexTableGetNode(s32 tableIndex, s32 nodeIndex)
 {
-  int *piVar1;
-  int temp_v0;
-  
-  piVar1 = *(int **)(g_texTable + param_1 * 0x18);
-  temp_v0 = 0;
-  if (piVar1 != (int *)0x0) {
-    temp_v0 = *piVar1 + param_2 * 0x20;
-  }
-  return temp_v0;
+    return FUN_0019ea90(g_texTable[tableIndex].table, nodeIndex);
 }
-
-} /* extern "C" */
+}

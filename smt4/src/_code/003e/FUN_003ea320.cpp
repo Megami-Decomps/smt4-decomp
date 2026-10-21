@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern unsigned int FUN_0022c004(unsigned int, unsigned int);
+extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -125,7 +125,7 @@ unsigned int FUN_003ea320(fn_003ea320_arg0 *param_1,int *param_2,unsigned int *p
           }
         }
         else {
-          temp_v2 = FUN_0022c004(param_1->field_0x64,temp_v0);
+          temp_v2 = containerGrowCapacity(param_1->field_0x64,temp_v0);
           piVar11 = (int *)param_1->field_0x5c;
           pbVar5 = (unsigned char *)0x0;
           temp_v7 = 0;

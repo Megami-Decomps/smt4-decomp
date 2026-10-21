@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail addresses input/result state through separate global relocations; the aggregate accesses also change stack layout and loop codegen. */
 #include "AsdSDK/Source/Net/Ngc/AsdNgc.h"
 
 extern "C" {

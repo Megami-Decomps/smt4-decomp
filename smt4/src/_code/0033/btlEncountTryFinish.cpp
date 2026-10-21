@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_00227218(void);
 void FUN_003d9e88(void);
-s32 FUN_002404e8(void *object);
+s32 recordAreAllCountsNonpositive(void *object);
 s32 nodeListCountActiveById(s32 value, s32 arg);
 
 extern s32 g_btlActionReflect;
@@ -20,7 +20,7 @@ u32 btlEncountTryFinish(void)
     if (result > 0) {
         done = 0;
     } else {
-        result = FUN_002404e8(DAT_00435d18);
+        result = recordAreAllCountsNonpositive(DAT_00435d18);
         done = result;
         if (result != 0) {
             if (DAT_00435d18 != NULL) {

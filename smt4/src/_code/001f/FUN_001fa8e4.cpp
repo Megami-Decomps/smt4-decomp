@@ -60,7 +60,7 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 /* Supplied declaration required: FUN_001f9188. */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: FUN_00256370. */
-extern int FUN_00256510(void);
+extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f48c. */
@@ -166,7 +166,7 @@ void FUN_001fa8e4(void)
         *(int *)(temp_v8 + 0x188) = temp_v7 - 1;
       }
       else {
-        temp_v7 = FUN_00256510();
+        temp_v7 = inputIsQuestCancelPressed();
         temp_v8 = 0;
         if (temp_v7 != 0) {
           temp_v8 = g_gameState;

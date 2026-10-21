@@ -7,7 +7,7 @@ extern "C" {
 int sequenceRequestDefer(int, unsigned int);
 int FUN_0027d8b4(unsigned int);
 int FUN_00291e40(int);
-int FUN_002be624(unsigned char *, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int SBORROW4(int, int);
 
 typedef int romwright_code(...);
@@ -41,7 +41,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0027d8b4. */
 /* Supplied declaration required: FUN_00291e40. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int gameGetMapBlock(void);
 
 
@@ -98,7 +98,7 @@ unsigned int FUN_00396370(int param_1)
                 if (*(int *)(temp_v5 + 0x84) != 0) {
                   DAT_0049fa61 = 1;
                   DAT_0049fa64 = *(unsigned int *)(temp_v5 + 0x88);
-                  FUN_002be624(&DAT_0049fa68,&LAB_003965e4,*(unsigned int *)(temp_v5 + 0x88),
+                  textFormatBuffer(&DAT_0049fa68,&LAB_003965e4,*(unsigned int *)(temp_v5 + 0x88),
                                *(unsigned int *)(temp_v5 + 0x8c));
                 }
                 else {

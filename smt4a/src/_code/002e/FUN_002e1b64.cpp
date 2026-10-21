@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char *, unsigned char *);
+int textFormatBuffer(unsigned char *, unsigned char *);
 int FUN_00180310(int, unsigned int, unsigned int, int, int, unsigned int, unsigned char [20]);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char LAB_002e1c90; /* 0x2e1c90 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00180310. */
 
 
@@ -71,7 +71,7 @@ LAB_002e1ba4:
     else {
       if (temp_v2 != 1) goto LAB_002e1ba4;
 LAB_002e1c30:
-      FUN_00100388(temp_v5 + temp_v4,&LAB_002e1c90);
+      textFormatBuffer(temp_v5 + temp_v4,&LAB_002e1c90);
     }
     temp_v3 = temp_v3 - 1;
     temp_v4 = temp_v4 + 1;

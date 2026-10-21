@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
@@ -27,7 +27,7 @@ extern unsigned char LAB_0037e89c; /* 0x37e89c */
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(short);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -86,7 +86,7 @@ void FUN_0037e5c0(int param_1,int param_2,int param_3)
     }
     temp_v3 = FUN_001834a4(0x12,0x579);
     temp_v4 = FUN_0014bd84(temp_v0);
-    FUN_00100388(temp_v6,&LAB_0037e894,temp_v4);
+    textFormatBuffer(temp_v6,&LAB_0037e894,temp_v4);
     VectorSignedToFloat(*(short *)(temp_v3 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v3 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,temp_v5,temp_v6);
@@ -97,7 +97,7 @@ void FUN_0037e5c0(int param_1,int param_2,int param_3)
     return;
   }
   temp_v3 = FUN_001834a4(0x12,0x579);
-  FUN_00100388(temp_v6,&LAB_0037e888);
+  textFormatBuffer(temp_v6,&LAB_0037e888);
   VectorSignedToFloat(*(short *)(temp_v3 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v3 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(3,temp_v5,temp_v6);

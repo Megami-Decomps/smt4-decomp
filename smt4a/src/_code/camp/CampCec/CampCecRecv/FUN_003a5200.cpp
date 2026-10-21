@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00275bc8(void);
 int FUN_002804b0(...);
 int FUN_00388758(void);
@@ -29,7 +29,7 @@ int FUN_00333474(...);
 int FUN_00359974(...);
 int dataTable4ACount(void);
 int FUN_0036d41c(void);
-int FUN_0037a6bc(...);
+int gameDataAddMoneySaturating(...);
 int FUN_0037be64(void);
 int gameDataBlocksGetWord27E90(void);
 int dataTable4AType2Count(void);
@@ -40,7 +40,7 @@ int __aeabi_idivmod(...);
 int FUN_00137ea0(...);
 int FUN_001386e8(...);
 int sysPlaySe(...);
-int FUN_0019ea64(int);
+int messageSetMode(int);
 int runWinClose(void);
 int FUN_00224880(...);
 int gameDataBlocksAddFlags(int);
@@ -70,7 +70,7 @@ extern unsigned char DAT_0052c758; /* 0x52c758 */
 extern int g_campCecRecv; /* 0x57f128 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00137ea0. */
 /* Supplied declaration required: FUN_001386e8. */
 /* Supplied declaration required: sysPlaySe. */
@@ -78,7 +78,7 @@ extern int FUN_001774d8(short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00184964. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019ea64. */
+/* Supplied declaration required: messageSetMode. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
 extern int FUN_001ba3d4(short);
@@ -121,7 +121,7 @@ extern int playerSummaryIsIncomplete(int);
 /* Supplied declaration required: cecProcessCall3. */
 /* Supplied declaration required: dataStoreShutdown. */
 /* Supplied declaration required: FUN_0036d41c. */
-/* Supplied declaration required: FUN_0037a6bc. */
+/* Supplied declaration required: gameDataAddMoneySaturating. */
 /* Supplied declaration required: FUN_0037be64. */
 /* Supplied declaration required: gameDataBlocksGetWord27E90. */
 /* Supplied declaration required: maskToCode. */
@@ -246,7 +246,7 @@ joined_r0x003a52e4:
       FUN_00137ea0(2);
       runWinClose();
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x2c);
-      FUN_0019ea64(1);
+      messageSetMode(1);
       sysPlaySe(0x92);
       temp_v9 = 6;
       *(unsigned int *)(param_1 + 0xa0) = temp_v9;
@@ -262,7 +262,7 @@ joined_r0x003a52e4:
       }
       temp_v9 = maskToCode(*(unsigned int *)(param_1 + 0x3dc));
       *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
-      FUN_0019ea64(0);
+      messageSetMode(0);
       return temp_v18;
     }
     return temp_v18;
@@ -360,7 +360,7 @@ joined_r0x003a52e4:
           *(unsigned short *)(temp_v3 + 0x34) = *(unsigned short *)(temp_v3 + 0x60);
           FUN_00333474(temp_v3);
           FUN_002a17d4(temp_v3);
-          FUN_0037a6bc(1);
+          gameDataAddMoneySaturating(1);
           temp_v3 = gameDataBlocksGetWord27E90();
           if ((temp_v3 % 100 == 0) && (0 < temp_v3)) {
             FUN_0037be64();
@@ -680,7 +680,7 @@ LAB_003a5cfc:
       }
       FUN_00184310();
       temp_v8 = FUN_003316b4((int)*(char *)(temp_v4 + 0x38));
-      FUN_00100388(temp_v15,&LAB_003a6090,temp_v8 + 1);
+      textFormatBuffer(temp_v15,&LAB_003a6090,temp_v8 + 1);
       FUN_002804b0(temp_v15,param_1 + 0x35c,0);
       *(unsigned char *)(param_1 + 999) = 1;
       FUN_00388758();

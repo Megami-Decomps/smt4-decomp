@@ -1,35 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ddbbc` (_code @ 0x1ddbbc, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail mov r2, #0; compiler mov r3, #0. */
+#include "common.h"
+
+struct StatusDownWork {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ u8 timer[0x3D8];
+    /* 0x400 */ u32 current;
+    /* 0x404 */ u32 previous;
+    /* 0x408 */ u32 state;
+    /* 0x40C */ u32 counter;
+};
 
 extern "C" {
 
-int timerStart(int, int, int);
+extern StatusDownWork *g_statusDown;
+extern void timerStart(void *timer, s32 mode, s32 value);
 
-extern int g_statusDown; /* 0x44e190 */
-
-/* Supplied declaration required: timerStart. */
-
-
+/* Restarts the status-down timer and enters its third update state. */
 void FUN_001ddbbc(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_statusDown;
-  timerStart(g_statusDown + 0x28,1,0);
-  temp_v1 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x40c) = 0;
-  puVar3 = (unsigned int *)(temp_v1 + 0x400);
-  temp_v2 = *puVar3;
-  *puVar3 = 1;
-  *(unsigned int *)(temp_v1 + 0x404) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x408) = 3;
-  return;
+    StatusDownWork *work = g_statusDown;
+    timerStart(work->timer, 1, 0);
+    g_statusDown->counter = 0;
+    g_statusDown->previous = g_statusDown->current;
+    g_statusDown->current = 1;
+    work->state = 3;
 }
 
 } /* extern "C" */

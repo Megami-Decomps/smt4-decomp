@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022de74(int);
-int FUN_00231240(int, unsigned int, unsigned int);
+int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_002328b4(void);
 int FUN_00233240(int, int);
 int FUN_00233344(int, int);
@@ -27,15 +27,15 @@ typedef struct {
 extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 
 /* Supplied declaration required: FUN_0022de74. */
-/* Supplied declaration required: FUN_00231240. */
+/* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_00233344. */
 /* Supplied declaration required: FUN_00233404. */
 extern int FUN_0023360c(int);
 extern int FUN_00240d5c(int);
-extern int FUN_0024c278(void);
-extern int FUN_0026c63c(void);
+extern int inputIsQuestConfirmPressed(void);
+extern int gameGetNavigationState(void);
 extern int FUN_00293aac(void);
 extern int FUN_00293b8c(void);
 /* Supplied declaration required: FUN_0029ce60. */
@@ -73,8 +73,8 @@ void FUN_003a72a4(int param_1)
   temp_v1 = param_1 + *(short *)(param_1 + 0xa5b4) * 0x8c + 0xfc;
   temp_v2 = vec2GetYInt(temp_v1);
   temp_v3 = vec2GetXInt(temp_v1);
-  FUN_00231240(param_1 + 200,temp_v3,temp_v2);
-  temp_v1 = FUN_0026c63c();
+  pointConvertToFloat(param_1 + 200,temp_v3,temp_v2);
+  temp_v1 = gameGetNavigationState();
   if ((temp_v1 != 0) && (temp_v1 = FUN_00293aac(), temp_v1 == 0)) {
     *(unsigned int *)(param_1 + 0x14) = 10;
     *(unsigned int *)(param_1 + 0x18) = 0;
@@ -96,7 +96,7 @@ void FUN_003a72a4(int param_1)
     FUN_0029e620(-temp_v6,0);
     return;
   }
-  temp_v1 = FUN_0026c63c();
+  temp_v1 = gameGetNavigationState();
   if (temp_v1 != 0) {
     return;
   }
@@ -117,7 +117,7 @@ void FUN_003a72a4(int param_1)
         FUN_00233404();
         return;
       }
-      temp_v5 = FUN_0024c278();
+      temp_v5 = inputIsQuestConfirmPressed();
       if (temp_v5 != 0) {
         temp_v0 = *(char *)(param_1 + 0x5a5) + '\x01';
         *(char *)(param_1 + 0x5a5) = temp_v0;

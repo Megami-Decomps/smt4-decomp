@@ -1,62 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a79e8` (_code @ 0x1a79e8, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r0, [r0, #524] where the compiled block uses mov r4, #0. */
+#include "common.h"
 
+struct TextTable {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u8 records[1];
+};
+struct TextStorage {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ TextTable *table;
+};
+struct TextStorageBlock {
+    /* 0x00 */ u8 unk00[12];
+    /* 0x0C */ TextStorage data;
+};
+struct TextOwner {
+    /* 0x000 */ u8 unk000[0x20C];
+    /* 0x20C */ TextStorageBlock *storage;
+};
 extern "C" {
-
-int libc_strcmp(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int wstrlen(int);
-/* Supplied declaration required: libc_strcmp. */
-
-
-unsigned int FUN_001a79e8(int param_1,int param_2)
-
+s32 wstrlen(const char *text);
+s32 FUN_001a7a20(void *table, const char *text, u32 length);
+s32 FUN_001a79e8(TextOwner *owner, const char *text)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  unsigned int *puVar7;
-  
-  temp_v1 = *(int *)(param_1 + 0x20c);
-  if (temp_v1 != 0) {
-    temp_v1 = temp_v1 + 0xc;
-  }
-  temp_v1 = *(int *)(temp_v1 + 0x30);
-  temp_v2 = wstrlen(param_2);
-  puVar7 = *(unsigned int **)(temp_v1 + 0x74);
-  puVar6 = puVar7 + (unsigned int)(unsigned short)puVar7[1] * 3;
-  if (*(short *)(temp_v1 + 0x70) != 0) {
-    puVar5 = puVar6;
-    if (*puVar6 < *puVar7) {
-      do {
-        temp_v3 = *puVar5 >> 3;
-        if ((temp_v3 < temp_v2) && ((((int)*(char *)(param_2 + temp_v3) >> (*puVar5 & 7)) & 1U) != 0)) {
-          temp_v0 = *(unsigned short *)((int)puVar5 + 6);
-        }
-        else {
-          temp_v0 = (unsigned short)puVar5[1];
-        }
-        puVar6 = puVar7 + (unsigned int)temp_v0 * 3;
-        temp_v3 = *puVar5;
-        puVar5 = puVar6;
-      } while (*puVar6 < temp_v3);
+    TextStorage *storage = NULL;
+    if (owner->storage != NULL) {
+        storage = &owner->storage->data;
     }
-    temp_v2 = puVar6[2];
-    if ((temp_v2 != 0) && (libc_strcmp(), temp_v2 == 0)) {
-      return (((int)puVar6 - (int)(puVar7 + 3)) / 0xc) & 0xffff;
-    }
-  }
-  return 0xffff;
+    return FUN_001a7a20(storage->table->records, text, wstrlen(text));
 }
-
-} /* extern "C" */
+}

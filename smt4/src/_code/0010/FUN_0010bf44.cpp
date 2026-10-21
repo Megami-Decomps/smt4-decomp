@@ -1,52 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010bf44` (_code @ 0x10bf44, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail push {r4, r5, r6, lr}; compiler push {r4, lr}. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 
-int FUN_00141bdc(int, unsigned int);
+extern AsdSoundSystem g_asdSound;
+extern s32 FUN_002bf684(AsdSoundSystem *sound);
+extern void FUN_00133050(AsdSoundSystem *sound, u32 value);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char g_asdSound; /* 0x4e1f68 */
-extern int iRam004e1f6c; /* 0x4e1f6c */
-
-/* Supplied declaration required: FUN_00141bdc. */
-extern int FUN_002bf684(unsigned char *);
-
-
-int FUN_0010bf44(unsigned int param_1)
-
+/* Applies the archive parameter only while the sound system is available. */
+void FUN_0010bf44(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_002bf684(&g_asdSound);
-  temp_v1 = iRam004e1f6c;
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  if (*(int *)(iRam004e1f6c + 0x38) != 0) {
-    temp_v0 = *(int *)(iRam004e1f6c + 0x3c);
-    FUN_00141bdc(temp_v0,param_1);
-    if (temp_v0 != -1) {
-      if (temp_v0 == -1) {
-        temp_v1 = 0;
-      }
-      else {
-        temp_v1 = *(int *)(temp_v1 + 0x38) + *(int *)(*(int *)(temp_v1 + 0x38) + 4);
-        if (temp_v1 != 0) {
-          temp_v1 = temp_v1 + *(int *)(temp_v1 + temp_v0 * 0xc + 8);
-        }
-      }
-      return temp_v1;
+    if (FUN_002bf684(&g_asdSound) != 0) {
+        FUN_00133050(&g_asdSound, value);
     }
-  }
-  return 0;
 }
 
 } /* extern "C" */

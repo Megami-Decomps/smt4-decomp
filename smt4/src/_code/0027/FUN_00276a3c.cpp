@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001f8350(void);
 int FUN_0025c238(void);
-int FUN_0025c298(void);
+int residentApplyFallbackValues(void);
 int FUN_00266c5c(int *, int *, float *);
-int FUN_0027d9a8(void);
+int randomGetNormalizedFloat(void);
 int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -35,7 +35,7 @@ typedef struct {
 
 extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
-extern unsigned char DAT_0049f3f0; /* 0x49f3f0 */
+extern unsigned char g_fixedCamera; /* 0x49f3f0 */
 extern int DAT_0049fc8c; /* 0x49fc8c */
 extern signed char DAT_0049fce8; /* 0x49fce8 */
 
@@ -58,9 +58,9 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_001f8350. */
 /* Supplied declaration required: FUN_0025c238. */
-/* Supplied declaration required: FUN_0025c298. */
+/* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: FUN_00266c5c. */
-/* Supplied declaration required: FUN_0027d9a8. */
+/* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
@@ -133,7 +133,7 @@ void FUN_00276a3c(void)
     piVar4[0x14] = (int)temp_v24[1];
     piVar4[0x15] = (int)temp_v24[2];
     FUN_00281e34();
-    FUN_0025c298();
+    residentApplyFallbackValues();
     return;
   }
   temp_v11 = 0.01f;
@@ -167,7 +167,7 @@ void FUN_00276a3c(void)
         pfVar7 = temp_v24 + temp_v3;
         temp_v16 = *pfVar7;
         if (temp_v16 != (float)temp_v27) {
-          FUN_0027d9a8();
+          randomGetNormalizedFloat();
           temp_v10 = *pfVar7;
           piVar4 = DAT_004474f4 + temp_v3;
           temp_v17 = (float)piVar4[0xa5];
@@ -182,7 +182,7 @@ void FUN_00276a3c(void)
             }
           }
           else {
-            FUN_0027d9a8();
+            randomGetNormalizedFloat();
             piVar4 = DAT_004474f4 + temp_v3;
             temp_v17 = (float)piVar4[0xa5] + (temp_v17 - (float)temp_v28) * temp_v16 * (float)temp_v15;
             piVar4[0xa5] = (int)temp_v17;
@@ -229,23 +229,23 @@ void FUN_00276a3c(void)
   temp_v10 = 20.0f;
   temp_v19 = 1.0f;
   if (temp_v3 == 3) {
-    FUN_002c159c(&DAT_0049f3f0);
-    FUN_002c1e30(&DAT_0049f3f0,1);
+    FUN_002c159c(&g_fixedCamera);
+    FUN_002c1e30(&g_fixedCamera,1);
     FUN_0025c238();
-    FUN_00298d50(&DAT_0049f3f0);
+    FUN_00298d50(&g_fixedCamera);
     FUN_00281e34();
-    FUN_0025c298();
+    residentApplyFallbackValues();
     return;
   }
   temp_v20 = 45.0f;
   if (temp_v3 == 4) {
-    FUN_002c159c(&DAT_0049f3f0);
-    FUN_002c1e30(&DAT_0049f3f0,1);
-    FUN_002c1edc(&DAT_0049f3f0,DAT_004474f4 + 0x20,DAT_004474f4 + 0x23,DAT_004474f4 + 7);
+    FUN_002c159c(&g_fixedCamera);
+    FUN_002c1e30(&g_fixedCamera,1);
+    FUN_002c1edc(&g_fixedCamera,DAT_004474f4 + 0x20,DAT_004474f4 + 0x23,DAT_004474f4 + 7);
     FUN_0025c238();
-    FUN_00298d50(&DAT_0049f3f0);
+    FUN_00298d50(&g_fixedCamera);
     FUN_00281e34();
-    FUN_0025c298();
+    residentApplyFallbackValues();
     return;
   }
   temp_v18 = 40.0f;
@@ -253,15 +253,15 @@ void FUN_00276a3c(void)
     temp_v3 = *(int *)(g_lmapScene + 0x1c);
     FUN_00287aec();
     if (temp_v3 < 0x43340000) {
-      FUN_002c159c(&DAT_0049f3f0);
+      FUN_002c159c(&g_fixedCamera);
     }
     else {
-      FUN_002c159c(&DAT_0049f3f0);
+      FUN_002c159c(&g_fixedCamera);
     }
     FUN_0025c238();
-    FUN_00298d50(&DAT_0049f3f0);
+    FUN_00298d50(&g_fixedCamera);
     FUN_00281e34();
-    FUN_0025c298();
+    residentApplyFallbackValues();
     piVar1 = DAT_004474f4;
     temp_v3 = piVar4[0x98];
     temp_v4 = piVar4[0x99];
@@ -593,31 +593,31 @@ void FUN_00276a3c(void)
         }
       }
     }
-    FUN_00298d50(&DAT_0049f3f0);
+    FUN_00298d50(&g_fixedCamera);
     temp_v3 = *(int *)(g_lmapScene + 0x1c);
     FUN_00287aec();
     if (temp_v3 < 0x43340000) {
-      FUN_002c159c(&DAT_0049f3f0);
+      FUN_002c159c(&g_fixedCamera);
     }
     else {
-      FUN_002c159c(&DAT_0049f3f0);
+      FUN_002c159c(&g_fixedCamera);
     }
-    FUN_002c1e30(&DAT_0049f3f0,1);
+    FUN_002c1e30(&g_fixedCamera,1);
     temp_v3 = *DAT_004474f4;
     if (!((temp_v3 == 7 || temp_v3 == 8) || temp_v3 == 9)) {
       FUN_0025c238();
     }
     else {
-      FUN_002c1edc(&DAT_0049f3f0,DAT_004474f4 + 0x13,DAT_004474f4 + 0x16,DAT_004474f4 + 10);
+      FUN_002c1edc(&g_fixedCamera,DAT_004474f4 + 0x13,DAT_004474f4 + 0x16,DAT_004474f4 + 10);
     }
   }
   else {
-    FUN_002c1edc(&DAT_0049f3f0,DAT_004474f4 + 0x13,DAT_004474f4 + 0x16,DAT_004474f4 + 7);
+    FUN_002c1edc(&g_fixedCamera,DAT_004474f4 + 0x13,DAT_004474f4 + 0x16,DAT_004474f4 + 7);
     FUN_0025c238();
-    FUN_00298d50(&DAT_0049f3f0);
+    FUN_00298d50(&g_fixedCamera);
   }
   FUN_00281e34();
-  FUN_0025c298();
+  residentApplyFallbackValues();
   return;
 }
 

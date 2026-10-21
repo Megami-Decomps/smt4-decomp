@@ -10,7 +10,7 @@ typedef struct AocSystem {
 extern AocSystem *g_aocSystem;
 
 /* Entry count of data table 0x23's section 5, plus the add-on content's extra entries. */
-s32 FUN_0030f6cc(void)
+s32 dataTable23Section5CountWithExtras(void)
 {
     return dataTableGetCount(dataTableGetSection(0x23, 5)) + g_aocSystem->extraCount;
 }

@@ -1,36 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dcbf4` (_code @ 0x3dcbf4, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-int rt_memcpy_w(unsigned char [4], int, int);
-
-/* stack frame of param_1: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned char sp8; /* 0x8: local_8 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-} param_1_stack;
-
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_003dcbf4(int param_1)
-
+/* NON_MATCHING: retail grouped bit tests or aggregate-copy runtime selection differs. */
+#include "common.h"
+struct Snapshot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 state;
+    /* 0x08 */ u8 unk08[128];
+    /* 0x88 */ u8 flags;
+    /* 0x89 */ u8 unk89[3];
+};
+struct SnapshotOwner { u8 unk00[0x2f9c]; Snapshot snapshot; };
+/* Checks an isolated snapshot of the owner's completion state. */
+extern "C" s32 FUN_003dcbf4(const SnapshotOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1 [4];
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  rt_memcpy_w(temp_v1,param_1 + 0x2f9c,0x8c);
-  if (((temp_v3 & 1) == 0) || (temp_v0 = 0, temp_v2 != 0)) {
-    temp_v0 = 1;
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return temp_v0;
+    Snapshot snapshot = owner->snapshot;
+    return !(snapshot.flags & 1) || snapshot.state != 0;
 }
-
-} /* extern "C" */

@@ -28,7 +28,7 @@ extern int FUN_002a4b74(void);
 extern int FUN_003df4a4(unsigned short);
 extern int FUN_003e4cb4(void);
 /* Supplied declaration required: FUN_003e4e4c. */
-extern int FUN_004bca68(unsigned int, unsigned short);
+extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bd068(unsigned int);
 /* Supplied declaration required: FUN_004bd6b0. */
 
@@ -68,7 +68,7 @@ unsigned int FUN_0041774c(int param_1)
     }
     else {
       temp_v2 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
-      temp_v3 = FUN_004bca68(temp_v2,*(unsigned short *)(param_1 + 0x38));
+      temp_v3 = recordContainsPairedId(temp_v2,*(unsigned short *)(param_1 + 0x38));
       if (temp_v3 == 0) {
         temp_v0 = FUN_004bd068(temp_v2);
         FUN_004bd6b0(temp_v2,*(unsigned short *)(param_1 + 0x38),temp_v0);

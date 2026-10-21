@@ -6,7 +6,7 @@ extern "C" {
 void *memAlloc(int, int, int, u32 size, int align, int);
 s32 FUN_0025cc50(void *data);
 void *asdEffectTextureCreate(void *data);
-void *FUN_0037a7f4(void);
+void *textureCreateFromImage(void);
 
 /* Builds a TLP object from file data: copies the header and entries and creates an effect object
  * for each entry's data block (or a default one when the block is not valid). */
@@ -37,7 +37,7 @@ TlpObject *effTlpCreate(TlpFile *file)
         if (FUN_0025cc50(block) != 0) {
             tlp->objects[i] = asdEffectTextureCreate(block);
         } else {
-            tlp->objects[i] = FUN_0037a7f4();
+            tlp->objects[i] = textureCreateFromImage();
         }
         block += src->size;
         src++;

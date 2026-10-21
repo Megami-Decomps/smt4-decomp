@@ -36,10 +36,10 @@ extern unsigned char DAT_004d8b40; /* 0x4d8b40 */
 extern unsigned char DAT_004d8ca0; /* 0x4d8ca0 */
 
 /* Supplied declaration required: FUN_00246854. */
-extern int FUN_002468e0(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
-extern unsigned int FUN_0024c3f8(unsigned int);
+extern unsigned int resourceResolveHeaderPointer(unsigned int);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_00250200. */
 /* Supplied declaration required: FUN_0025c650. */
@@ -65,7 +65,7 @@ unsigned int FUN_00324714(void)
   unsigned int in_r12;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_002468e0(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
+  temp_v0 = linkedFindItemByIndex(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
   puVar2 = (unsigned int *)FUN_002f3208(DAT_0044ea94,*(unsigned int *)(temp_v0 + 0x90));
   DAT_0044eaa4 = puVar2;
   rt_memcpy_w144(puVar2,temp_v0);
@@ -80,7 +80,7 @@ unsigned int FUN_00324714(void)
   FUN_00246854();
   libc_strcpy(puVar2 + 0x27,*puVar3);
   if (*(short *)(puVar3 + 1) != 0x1b) {
-    temp_v1 = FUN_0024c3f8(DAT_0044ea9c);
+    temp_v1 = resourceResolveHeaderPointer(DAT_0044ea9c);
     rt_memcpy(puVar3[3],temp_v1,puVar3[4]);
   }
   if (puVar3[3] != 0) {

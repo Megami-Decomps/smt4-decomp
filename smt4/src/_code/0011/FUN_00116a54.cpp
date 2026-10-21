@@ -20,7 +20,7 @@ int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c1b64(...);
 int FUN_002c39a4(unsigned int);
 int VectorSignedToFloat(...);
@@ -60,7 +60,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -132,14 +132,14 @@ char FUN_00116a54(void)
     FUN_002ba12c(g_titleScene);
     temp_v5 = (int)temp_v12;
     if (*(char *)(temp_v4 + 9) == '\a' || *(char *)(temp_v4 + 9) == '\t') {
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v6 = FUN_002c5d80(1,0);
       FUN_002bee04(g_titleScene,3,temp_v6);
       temp_v16 = 0;
       temp_v17 = 6;
       FUN_002bf288(2,0xe,0x106,0);
       FUN_002bedb0(g_titleScene,3);
-      FUN_002bf538();
+      efctSetSpeed();
     }
     FUN_00126194(temp_v4);
     temp_v7 = *(unsigned int *)(temp_v4 + 0xc);
@@ -158,7 +158,7 @@ char FUN_00116a54(void)
           temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
           temp_v8 = temp_v8 + temp_v5;
           temp_v9 = vec2GetYInt(temp_v4 + 0x2f4);
-          FUN_002bf538();
+          efctSetSpeed();
           FUN_002bed3c();
           temp_v0 = *(char *)(temp_v4 + 9);
           if (!(temp_v0 == '\a' || temp_v0 == '\b')) {
@@ -177,11 +177,11 @@ char FUN_00116a54(void)
                 FUN_002bf288(2,0xe,0x116,temp_v5);
                 temp_v6 = packNibblesAndByte(6,1,0);
                 FUN_002bee04(g_titleScene,6,temp_v6);
-                FUN_002bf538();
+                efctSetSpeed();
                 temp_v17 = 0x15;
                 temp_v16 = 0;
                 FUN_002bf288(2,0xe,0x117,temp_v8);
-                FUN_002bf538();
+                efctSetSpeed();
                 FUN_002bedb0(g_titleScene,6);
               }
             }
@@ -216,25 +216,25 @@ char FUN_00116a54(void)
       vec2GetYInt(temp_v4 + 0x2f4);
       temp_v6 = FUN_002c5d80(1,0);
       FUN_002bee04(g_titleScene,3,temp_v6);
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x182,temp_v5);
       temp_v6 = packNibblesAndByte(6,1,0);
       FUN_002bee04(g_titleScene,6,temp_v6);
-      FUN_002bf538();
+      efctSetSpeed();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x183,temp_v8 + temp_v5);
       FUN_002bedb0(g_titleScene,6);
-      FUN_002bf538();
+      efctSetSpeed();
       goto LAB_00117044;
     }
     break;
   case 0xc:
     temp_v6 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v6);
-    FUN_002bf538();
+    efctSetSpeed();
     FUN_002bed3c();
     temp_v14 = 0x3e8a3d71;
     temp_v5 = 0;

@@ -1,33 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00302698` (_code @ 0x302698, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: compiler reserves a larger address-taken-argument frame and schedules scalar loads differently. */
+#include "common.h"
 extern "C" {
-
-int FUN_001330e8(unsigned int [2], int, int *, unsigned int **);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_001330e8. */
-
-
-void FUN_00302698(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int *temp_v0;
-  int temp_v1;
-  unsigned int temp_v2 [2];
-  
-  temp_v0 = *(unsigned int **)(param_1 + 0x10);
-  temp_v1 = *temp_v0;
-  temp_v2[0] = param_4;
-  FUN_001330e8(temp_v2,param_1,&temp_v1,&temp_v0);
-  return;
+struct Object { u8 unk00[0x10]; const u32 *value; };
+void FUN_001330e8(u32 *output, Object *object, const u32 *value, const u32 **source);
+/* Converts the object's referenced scalar through a pointer-based adapter. */
+void FUN_00302698(Object *object, u32 unusedA, u32 unusedB, u32 output) {
+    const u32 *source = object->value;
+    u32 value = *source;
+    FUN_001330e8(&output, object, &value, &source);
 }
-
-} /* extern "C" */
+}

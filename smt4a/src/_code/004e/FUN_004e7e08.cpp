@@ -38,7 +38,7 @@ extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int DAT_00573808; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 extern int chainCountIdUnflagged(unsigned int, fn_004e7e08_arg1 *);
 /* Supplied declaration required: FUN_004aa3d4. */
 extern int FUN_004c3a98(int, unsigned int);
@@ -64,7 +64,7 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
   int temp_v6;
   int temp_v7;
   
-  temp_v0 = FUN_003e8430(*param_1);
+  temp_v0 = btlScriptUnitHasFlags(*param_1);
   if (temp_v0 != 0) {
     temp_v0 = FUN_004c3a98((int)*(short *)((int)param_2->field_0x24 + 0x6a),7);
     temp_v1 = FUN_004c52ec(7);

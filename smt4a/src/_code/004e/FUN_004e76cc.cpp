@@ -44,7 +44,7 @@ extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_004c579c. */
 /* Supplied declaration required: FUN_004c63f0. */
 /* Supplied declaration required: FUN_004e0114. */
@@ -78,7 +78,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
     temp_v3 = 0;
     temp_v4 = 0xb;
   }
-  temp_v0 = FUN_003e8430(*param_1);
+  temp_v0 = btlScriptUnitHasFlags(*param_1);
   if (temp_v0 == 0) {
     temp_v5 = 0;
   }

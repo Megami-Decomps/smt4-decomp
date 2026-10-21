@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned char [64], unsigned char *, int);
+int textFormatBuffer(unsigned char [64], unsigned char *, int);
 int FUN_0020214c(void);
 
 extern unsigned char LAB_00249d8c; /* 0x249d8c */
@@ -14,7 +14,7 @@ extern unsigned char LAB_00249dd4; /* 0x249dd4 */
 extern unsigned char *g_mapTable; /* 0x5821c4 */
 extern unsigned int DAT_005821cc; /* 0x5821cc */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0020214c. */
 
 
@@ -37,12 +37,12 @@ void FUN_00249ce4(int param_1)
   }
   if (param_1 != 200) {
     if (param_1 >= 100) {
-      FUN_00100388(temp_v0,&LAB_00249d8c,param_1 - 100);
+      textFormatBuffer(temp_v0,&LAB_00249d8c,param_1 - 100);
       FUN_0020214c();
       g_mapTable = puVar1;
       return;
     }
-    FUN_00100388(temp_v0,&LAB_00249dd4,param_1);
+    textFormatBuffer(temp_v0,&LAB_00249dd4,param_1);
     FUN_0020214c();
     g_mapTable = puVar2;
     return;

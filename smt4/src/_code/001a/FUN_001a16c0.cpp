@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 int FUN_002c39a4(int);
@@ -25,7 +25,7 @@ extern int FUN_00296a18(int);
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -93,9 +93,9 @@ unsigned int FUN_001a16c0(void)
         }
       }
       if (*(int *)(temp_v0 + 0x3544) >= 9) {
-        FUN_002bf538();
+        efctSetSpeed();
         FUN_002bf288(2,0x28,0x115,0,0,0xf2);
-        FUN_002bf538();
+        efctSetSpeed();
       }
     }
     temp_v1 = g_titleScene;

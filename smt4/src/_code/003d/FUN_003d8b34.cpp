@@ -10,7 +10,7 @@ int FUN_00227200(...);
 int FUN_0022a358(...);
 int asdListBoxSetItemMode3(...);
 int asdListBoxSetByteValue(...);
-int FUN_00262914(...);
+int jobSetText(...);
 int asdListBoxCreate(...);
 int FUN_0027da30(...);
 
@@ -28,7 +28,7 @@ extern unsigned char DAT_00400600; /* 0x400600 */
 /* Supplied declaration required: FUN_0022a358. */
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: FUN_00262914. */
+/* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxCreate. */
 /* Supplied declaration required: FUN_0027da30. */
 
@@ -41,7 +41,7 @@ void FUN_003d8b34(int param_1,int param_2,unsigned int param_3)
   *(unsigned int *)(param_1 + 0xc) = param_3;
   FUN_00227200();
   FUN_002271e8(param_3,0xc,0x10);
-  FUN_00262914(param_3,"ENEMY EDIT");
+  jobSetText(param_3,"ENEMY EDIT");
   asdListBoxAddItem(param_3,"窔疒ꮈ芖");
   asdListBoxAddItem(param_3,"瞂窔疒쪈疒쾕墍");
   asdListBoxAddItem(param_3,"碂窔疒쪈疒쾕墍");

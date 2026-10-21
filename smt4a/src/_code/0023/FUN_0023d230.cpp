@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0018408c(...);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int FUN_00180310(...);
@@ -42,7 +42,7 @@ extern unsigned char LAB_0023dcbc; /* 0x23dcbc */
 extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_0014bd84(unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -174,11 +174,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v2 = FUN_001834a4(0x14,0x444);
     if ((int)temp_v8 < 0) {
       temp_v5 = FUN_003df57c(temp_v9,1);
-      FUN_00100388(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
     }
     else {
       temp_v5 = FUN_004bcbb4(temp_v12,temp_v9);
-      FUN_00100388(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
     }
     FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,4,0x6f,
@@ -276,11 +276,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v1 = FUN_001834a4(0x14,0x44d);
     if ((int)temp_v8 < 0) {
       temp_v5 = FUN_003df57c(temp_v9,1);
-      FUN_00100388(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
     }
     else {
       temp_v5 = FUN_004bcbb4(temp_v12,temp_v9);
-      FUN_00100388(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
     }
     FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                  (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,4,0x83,
@@ -321,7 +321,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   if (temp_v6 < 1) {
     FUN_00164b5c(2,0x12,0x1b,param_1,param_2,0xdd);
     temp_v6 = FUN_001834a4(0x12,0x544);
-    FUN_00100388(temp_v11,&LAB_0023dcbc);
+    textFormatBuffer(temp_v11,&LAB_0023dcbc);
     puVar8 = temp_v11;
     FUN_0018408c(puVar8,2);
     VectorSignedToFloat((int)*(short *)(temp_v6 + 8) +

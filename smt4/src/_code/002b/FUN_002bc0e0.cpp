@@ -1,42 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc0e0` (_code @ 0x2bc0e0, 0x34 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail stores the four floating-point constants individually; compiler copies the array initializer. */
+#include "common.h"
+namespace { struct Effects { u8 padding[0x84]; float scale; }; }
 extern "C" {
-
-int FUN_002ae038(int *);
-
-/* stack frame of void: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char DAT_004d4680; /* 0x4d4680 */
-
-/* Supplied declaration required: FUN_002ae038. */
-
-
+extern Effects DAT_004d4680;
+void FUN_002ae038(const float *values);
 void FUN_002bc0e0(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  (*(unsigned int *)((unsigned char *)&DAT_004d4680 + 0x84)) = 0x3f800000;
-  temp_v0 = 0x3f800000;
-  temp_v1 = 0x3f800000;
-  temp_v2 = 0x3f800000;
-  temp_v3 = 0x3f800000;
-  FUN_002ae038(&temp_v0);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    const float values[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    DAT_004d4680.scale = 1.0f;
+    FUN_002ae038(values);
 }
-
-} /* extern "C" */
+}

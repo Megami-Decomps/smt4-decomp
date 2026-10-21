@@ -197,8 +197,8 @@ extern int FUN_002c7c54(void);
 extern int FUN_0032cfc8(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_00348eb4(int);
-extern int FUN_00348ed0(int *);
+extern int uiSearchSecondary(int);
+extern int uiSearchPrimary(int *);
 /* Supplied declaration required: FUN_0035d8a4. */
 /* Supplied declaration required: FUN_00370ecc. */
 /* Supplied declaration required: FUN_00371c3c. */
@@ -216,8 +216,8 @@ extern int FUN_003e0024(void);
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: gameDataFlagTestBit. */
 extern unsigned int FUN_003e53ec(void);
-extern int FUN_003e8430(int);
-extern int FUN_003e9b54(int, int);
+extern int btlScriptUnitHasFlags(int);
+extern int uiEntryGetState(int, int);
 /* Supplied declaration required: FUN_003eb200. */
 /* Supplied declaration required: FUN_003ec6d8. */
 /* Supplied declaration required: FUN_003eeb4c. */
@@ -560,7 +560,7 @@ LAB_0021d8d0:
   temp_v37 = (int *)(param_1 + 0x3874);
   piVar21 = (int *)(param_1 + 0x3878);
   if (*(char *)(param_1 + 0x38ba) != '\0') {
-    if (((*temp_v38 != 0x10) || (temp_v7 = FUN_003e8430(*temp_v37), temp_v7 != 0)) ||
+    if (((*temp_v38 != 0x10) || (temp_v7 = btlScriptUnitHasFlags(*temp_v37), temp_v7 != 0)) ||
        (temp_v7 = FUN_004c87e0(), temp_v7 == 0)) {
       *(unsigned char *)(param_1 + 0x38ba) = 0;
       goto LAB_0021d964;
@@ -1498,8 +1498,8 @@ LAB_0021f338:
     break;
   case 0x10:
     if (*(char *)(param_1 + 0x38ba) != '\0') goto LAB_00220474;
-    temp_v4 = FUN_00348eb4(param_1 + *piVar16 * 100 + 0x38bc);
-    temp_v7 = FUN_00348ed0(temp_v34);
+    temp_v4 = uiSearchSecondary(param_1 + *piVar16 * 100 + 0x38bc);
+    temp_v7 = uiSearchPrimary(temp_v34);
     FUN_00163aa4(param_1 + 0x20);
     temp_v9 = 0;
     do {
@@ -2219,7 +2219,7 @@ LAB_00220a34:
               temp_v9 = gameGetSlotRecord();
               if ((temp_v9 == 0) || ((*(unsigned short *)(temp_v9 + 0x60) & 2) != 0)) {
                 *(unsigned char *)(temp_v7 + 0x41e8) = 1;
-                temp_v9 = FUN_003e9b54(*temp_v37,temp_v4);
+                temp_v9 = uiEntryGetState(*temp_v37,temp_v4);
                 if (temp_v9 != 0) {
                   FUN_003d2150(0x100022a);
                 }
@@ -2234,7 +2234,7 @@ LAB_00220a34:
             temp_v9 = btlMainGetUnk14();
             if ((temp_v9 == 0) || ((*(unsigned short *)(temp_v9 + 0x60) & 2) != 0)) {
               *(unsigned char *)(temp_v7 + 0x41e8) = 1;
-              temp_v9 = FUN_003e9b54(*temp_v37,temp_v4);
+              temp_v9 = uiEntryGetState(*temp_v37,temp_v4);
               if (temp_v9 != 0) {
                 FUN_003d2150(0x100022a);
               }
@@ -2250,7 +2250,7 @@ LAB_00220b48:
         *(unsigned char *)(temp_v7 + 0x41e8) = 1;
 LAB_00220b54:
         if ((*(unsigned short *)(temp_v29 + 0x10) < 0xfffe) &&
-           (temp_v9 = FUN_003e9b54(*temp_v37,temp_v4), temp_v9 != 0)) {
+           (temp_v9 = uiEntryGetState(*temp_v37,temp_v4), temp_v9 != 0)) {
           temp_v9 = param_1 + temp_v4 * 0x8c;
           uiSpriteSetImageKeyframe(temp_v9 + 0x9f8,10,0);
           uiSpriteSelectAnim(temp_v9 + 0xc28,6);
@@ -2351,7 +2351,7 @@ LAB_00220b54:
   }
   if ((char)temp_v36[0x3a] != '\0') {
     if (*(unsigned short *)(temp_v29 + 0x4210) < 0xfffe) {
-      temp_v9 = FUN_003e9b54(*temp_v37,temp_v4);
+      temp_v9 = uiEntryGetState(*temp_v37,temp_v4);
       if (temp_v9 != 0) {
         temp_v13 = param_1 + temp_v4 * 0x8c;
         temp_v9 = FUN_00163aa4(temp_v13 + 0x9f8);

@@ -8,7 +8,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int gameGetSlotTable(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
-extern unsigned long long FUN_002e5ac0(unsigned int, unsigned int, int);
+extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int, int);
 
 
 unsigned int FUN_004ab594(void)
@@ -57,7 +57,7 @@ unsigned int FUN_004ab594(void)
     temp_v7 = 0;
     temp_v8 = 0x18;
     do {
-      temp_v11 = FUN_002e5ac0(1,0,temp_v6);
+      temp_v11 = runtimeShiftLeftWide(1,0,temp_v6);
       if ((temp_v9 & (unsigned int)((unsigned long long)temp_v11 >> 0x20)) != 0 || (temp_v4 & (unsigned int)temp_v11) != 0) {
         temp_v1 = temp_v7;
       }

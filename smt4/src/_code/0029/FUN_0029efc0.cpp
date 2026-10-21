@@ -1,23 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029efc0` (_code @ 0x29efc0, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+namespace { struct Object { u8 padding[0x62]; u8 disabled; }; }
 
 extern "C" {
-
-int FUN_002d5720(int);
-
-/* Supplied declaration required: FUN_002d5720. */
-
-
-void FUN_0029efc0(int param_1)
-
+/* Reads or updates the current object state. */
+u32 FUN_002d5720(const Object *object);
+u32 FUN_0029efc0(const Object *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x62) == '\0') {
-    FUN_002d5720(param_1);
-    return;
-  }
-  return;
+    if (object->disabled != 0) {
+        return 0;
+    }
+    return FUN_002d5720(object);
 }
-
-} /* extern "C" */
+}

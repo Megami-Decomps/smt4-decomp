@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int dataTableGet(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -47,7 +47,7 @@ extern int g_titleConfig; /* 0x589164 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(int);
@@ -58,11 +58,11 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-extern int FUN_00348ed0(int);
+extern int uiSearchPrimary(int);
 
 
 unsigned int FUN_0032ba8c(void)
@@ -129,7 +129,7 @@ unsigned int FUN_0032ba8c(void)
   temp_v28 = FUN_002a4894(temp_v1 + 0xf0);
   temp_v28 = temp_v28 + temp_v4;
   temp_v8 = 0;
-  temp_v4 = FUN_00348ed0(temp_v1 + 0xf0);
+  temp_v4 = uiSearchPrimary(temp_v1 + 0xf0);
   if (0 < temp_v4) {
     do {
       temp_v10 = 0;
@@ -175,7 +175,7 @@ unsigned int FUN_0032ba8c(void)
           (**(romwright_code **)(temp_v6 + 0x12d4))();
           *(unsigned char *)(temp_v6 + 0x12d0) = 0;
         }
-        FUN_0019d880();
+        jobGetScalarValue();
         efctSetSpeed();
         FUN_00164b5c(2,0x24,2,temp_v27,temp_v9,0x15);
         efctSetSpeed();
@@ -194,7 +194,7 @@ unsigned int FUN_0032ba8c(void)
       if ((unsigned int)(temp_v6 + temp_v8) < 3) {
         dataTableGet(0x3a,1);
         temp_v5 = dataTableGetEntries();
-        FUN_00100388(&temp_v10,&LAB_0032be6c,temp_v5 + (temp_v6 + temp_v8) * 0x94);
+        textFormatBuffer(&temp_v10,&LAB_0032be6c,temp_v5 + (temp_v6 + temp_v8) * 0x94);
         VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v9 + 10) + temp_v3,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v2,
@@ -269,7 +269,7 @@ unsigned int FUN_0032ba8c(void)
                      0x29);
       }
       temp_v8 = temp_v8 + 1;
-      temp_v4 = FUN_00348ed0(temp_v1 + 0xf0);
+      temp_v4 = uiSearchPrimary(temp_v1 + 0xf0);
     } while (temp_v8 < temp_v4);
   }
   efctSetSpeed();

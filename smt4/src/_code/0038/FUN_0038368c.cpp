@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00235368(...);
-int FUN_002592b8(...);
+int effectSpawnDefaultArguments(...);
 int FUN_002ae038(...);
 int FUN_002ae9ec(...);
 int libc_strcat(...);
@@ -16,7 +16,7 @@ int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int vec2GetXInt(...);
 int FUN_002bf380(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int dataTable26GroupGetRecordS2(unsigned int *, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -44,7 +44,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00235368. */
 extern int dataTable26GroupGetRecord(unsigned int *, unsigned char, unsigned int);
-/* Supplied declaration required: FUN_002592b8. */
+/* Supplied declaration required: effectSpawnDefaultArguments. */
 extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: FUN_002ae038. */
 /* Supplied declaration required: FUN_002ae9ec. */
@@ -58,7 +58,7 @@ extern unsigned int FUN_002bd1fc(void);
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: dataTable26GroupGetRecordS2. */
 
 
@@ -108,7 +108,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v1 = (int)(((long long)(int)temp_v6 * -0x77777777 + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
     param_1[0x167] = temp_v6 + ((temp_v1 >> 4) - (temp_v1 >> 0x1f)) * -0x1e;
     temp_v9 = (float)param_1[0x82];
-    FUN_002bf538();
+    efctSetSpeed();
     temp_v10 = VectorFloatToUnsigned(temp_v9 * 255.0f,3);
     temp_v11 = 0.3f;
     temp_v10 = temp_v10 & 0xff;
@@ -131,7 +131,7 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v2 = vec2GetXInt(param_1 + 0x11);
     temp_v3 = vec2GetYInt(param_1 + 0x11);
     FUN_002bf380(2,0x31,0,temp_v2 + (int)temp_v11,temp_v3,0x1f);
-    FUN_002592b8(param_1[0xa3]);
+    effectSpawnDefaultArguments(param_1[0xa3]);
     temp_v22 = temp_v10 | 0x5d2a0000;
     temp_v23 = temp_v22;
     temp_v24 = temp_v22;
@@ -166,7 +166,7 @@ void FUN_0038368c(unsigned int *param_1)
     if ((*(int *)(temp_v0 + 0x10) == -1) && ((int)param_1[0x167] < 0xf)) {
       temp_v6 = 0x7a4c00ff;
     }
-    FUN_002592b8(param_1[0xa4]);
+    effectSpawnDefaultArguments(param_1[0xa4]);
     temp_v22 = temp_v6;
     temp_v23 = temp_v6;
     temp_v24 = temp_v6;
@@ -182,7 +182,7 @@ void FUN_0038368c(unsigned int *param_1)
     if ((*(int *)(temp_v0 + 0x14) == -1) && ((int)param_1[0x167] < 0xf)) {
       temp_v6 = 0x192d86ff;
     }
-    FUN_002592b8(param_1[0xa5]);
+    effectSpawnDefaultArguments(param_1[0xa5]);
     temp_v22 = temp_v6;
     temp_v23 = temp_v6;
     temp_v24 = temp_v6;
@@ -197,7 +197,7 @@ void FUN_0038368c(unsigned int *param_1)
     if ((*(int *)(temp_v0 + 0x18) == -1) && ((int)param_1[0x167] < 0xf)) {
       temp_v6 = 0xf8b651ff;
     }
-    FUN_002592b8(param_1[0xa6]);
+    effectSpawnDefaultArguments(param_1[0xa6]);
     temp_v22 = temp_v6;
     temp_v23 = temp_v6;
     temp_v24 = temp_v6;

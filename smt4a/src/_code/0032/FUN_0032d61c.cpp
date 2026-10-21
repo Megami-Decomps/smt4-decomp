@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00169a1c(...);
 int FUN_00184310(void);
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_001527d8(...);
 int FUN_00157558(int);
 int FUN_00164b5c(...);
@@ -22,7 +22,7 @@ int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
 int FUN_0025cc78(...);
-int FUN_002e13dc(...);
+int effectSpawnDefaultArguments(...);
 int FUN_0035d8f0(int, int, int, int, int);
 int FUN_003a7a88(int, int);
 int VectorSignedToFloat(...);
@@ -49,7 +49,7 @@ extern unsigned char LAB_0032e200; /* 0x32e200 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -71,7 +71,7 @@ extern unsigned int FUN_0019acdc(short, unsigned int);
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
 extern unsigned int requestIdToCode(unsigned char);
-/* Supplied declaration required: FUN_002e13dc. */
+/* Supplied declaration required: effectSpawnDefaultArguments. */
 /* Supplied declaration required: FUN_0035d8f0. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003a7a88. */
@@ -213,10 +213,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       FUN_001835b4(2,0x2e,0xe,param_4 + temp_v5,param_5,0x73);
       temp_v7 = FUN_001834a4(0x2e,0x10);
       if (*(unsigned short *)(param_2 + 0x36) >= 10) {
-        FUN_00100388(temp_v19,&LAB_0032de34);
+        textFormatBuffer(temp_v19,&LAB_0032de34);
       }
       else {
-        FUN_00100388(temp_v19,&LAB_0032de38);
+        textFormatBuffer(temp_v19,&LAB_0032de38);
       }
       drawSetColorFromRGBA8(0xffffff00);
       FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + param_4 + temp_v5,*(short *)(temp_v7 + 10) + param_5,0
@@ -233,7 +233,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         FUN_001835b4(2,0x2e,0x2d,(int)*(short *)(temp_v7 + 8) + (int)temp_v12 + param_4,
                      *(short *)(temp_v7 + 10) + param_5,0x71);
         temp_v8 = FUN_001834a4(0x2e);
-        FUN_002e13dc(param_1[temp_v5 + 0x14]);
+        effectSpawnDefaultArguments(param_1[temp_v5 + 0x14]);
         temp_v0 = *(short *)(temp_v8 + 10);
         temp_v15 = (float)VectorSignedToFloat((int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;
@@ -299,7 +299,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v13 = (float)(int)temp_v22;
       temp_v22 = temp_v13;
       temp_v5 = FUN_001834a4(0x2e,0x24);
-      FUN_002e13dc(param_1[0xe]);
+      effectSpawnDefaultArguments(param_1[0xe]);
       temp_v0 = *(short *)(temp_v5 + 10);
       temp_v14 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat((int)**(short **)(temp_v5 + 0xc),
@@ -317,10 +317,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
                    param_5 + temp_v2,0x74);
       temp_v5 = FUN_001834a4(0x2e,0x27);
       if ((*(short *)(param_2 + 0x62) != 0) && (*(short *)(param_2 + 0x34) != 0)) {
-        FUN_00100388(temp_v19,&LAB_0032de34);
+        textFormatBuffer(temp_v19,&LAB_0032de34);
       }
       else {
-        FUN_00100388(temp_v19,&LAB_0032e200);
+        textFormatBuffer(temp_v19,&LAB_0032e200);
       }
       drawSetColorFromRGBA8(0x32323200);
       param_4 = (int)temp_v13 + param_4;
@@ -346,7 +346,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
           FUN_00169a1c(*(unsigned short *)(temp_v10 + 0x9c),*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);
           temp_v5 = FUN_001834a4(0x2e,0x105);
-          FUN_00100388(temp_v19,&LAB_0032de34,*(unsigned short *)(param_2 + 0x3a));
+          textFormatBuffer(temp_v19,&LAB_0032de34,*(unsigned short *)(param_2 + 0x3a));
           FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                        temp_v19);
           temp_v5 = FUN_001834a4(0x2e,0x107);

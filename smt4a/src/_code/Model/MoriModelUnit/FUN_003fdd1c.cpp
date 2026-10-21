@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int asdMemoryAlloc(...);
 int FUN_0018eb44(void);
 int asdMemoryAllocAligned(...);
@@ -62,7 +62,7 @@ extern unsigned char LAB_003fe280; /* 0x3fe280 */
 extern unsigned char LAB_003fe288; /* 0x3fe288 */
 extern unsigned char LAB_003fe290; /* 0x3fe290 */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0018eb44. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
@@ -283,7 +283,7 @@ void FUN_003fdd1c(int param_1,unsigned int param_2)
     FUN_001c3bb8(temp_v0,temp_v2 + 0x48,&LAB_003fe288);
     FUN_001c3bb8(temp_v0,temp_v2 + 0x50,&LAB_003fe290);
   }
-  FUN_00100388(param_1 + 0x214,*(unsigned int *)(*(int *)(param_1 + 0x210) + 0x84));
+  textFormatBuffer(param_1 + 0x214,*(unsigned int *)(*(int *)(param_1 + 0x210) + 0x84));
   return;
 }
 

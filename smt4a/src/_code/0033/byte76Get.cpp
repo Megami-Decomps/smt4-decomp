@@ -7,11 +7,11 @@ typedef struct Byte76Holder {
     /* 0x76 */ s8 value;
 } Byte76Holder;
 
-extern Byte76Holder DAT_005f0c7c;
+extern Byte76Holder g_battleViewState;
 
 s32 byte76Get(void)
 {
-    return DAT_005f0c7c.value;
+    return g_battleViewState.value;
 }
 
 } /* extern "C" */

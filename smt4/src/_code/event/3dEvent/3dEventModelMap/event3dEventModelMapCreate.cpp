@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0018a104(...);
 int FUN_002a09b4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002c2044(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -25,7 +25,7 @@ extern int FUN_002fe144(...); /* 0x2fe144 */
 /* Supplied declaration required: FUN_0018a104. */
 extern unsigned int asdMdlManagerCreateSecondList(romwright_code **, unsigned int);
 /* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: FUN_002c2044. */
 /* Supplied declaration required: memClear. */
@@ -58,10 +58,10 @@ void event3dEventModelMapCreate(unsigned int param_1,unsigned int param_2)
     puVar1[2] = 0;
   }
   else {
-    FUN_002be624(&temp_v2,"battle/battle_map/e%03d_%02d.bcenv",puVar1[4],puVar1[5]);
+    textFormatBuffer(&temp_v2,"battle/battle_map/e%03d_%02d.bcenv",puVar1[4],puVar1[5]);
     FUN_002a09b4(&temp_v2,0);
     *(unsigned char *)(puVar1 + 7) = 1;
-    FUN_002be624(&temp_v2,"battle/battle_map/b%03d_%02d.bam",puVar1[4],puVar1[5]);
+    textFormatBuffer(&temp_v2,"battle/battle_map/b%03d_%02d.bam",puVar1[4],puVar1[5]);
     temp_v1 = asdMdlManagerCreateSecondList(&temp_v2,0x38);
     puVar1[6] = temp_v1;
     puVar1[3] = 0;

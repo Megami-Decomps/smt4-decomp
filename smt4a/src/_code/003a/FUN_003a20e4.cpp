@@ -19,10 +19,10 @@ struct fn_003a20e4_arg0 {
     ushort field_0x1c; /* +0x1c */
 };
 
-extern int FUN_002721e4(fn_003a20e4_arg0 *);
+extern int resourceResolveDataPointer(fn_003a20e4_arg0 *);
 /* Supplied declaration required: FUN_002b2d74. */
 /* Supplied declaration required: objectBufferFree. */
-extern int FUN_002b41c4(void);
+extern int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: FUN_0038439c. */
 /* Supplied declaration required: FUN_003a1ef4. */
 /* Supplied declaration required: effHolderSetParams. */
@@ -36,7 +36,7 @@ unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
   unsigned int *puVar2;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_002b41c4();
+  temp_v0 = resourceResolveHeaderPointer();
   puVar2 = (unsigned int *)(temp_v0 + 0x1c);
   FUN_003a1ef4();
   FUN_0038439c();
@@ -46,7 +46,7 @@ unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
   }
   FUN_002b2d74(temp_v1,*puVar2,temp_v0 + 0x1c);
   puVar2[0xc] = temp_v1;
-  temp_v0 = FUN_002721e4(param_1);
+  temp_v0 = resourceResolveDataPointer(param_1);
   if (temp_v0 != 0) {
     effHolderSetParams(puVar2,param_1->field_0x1c);
   }

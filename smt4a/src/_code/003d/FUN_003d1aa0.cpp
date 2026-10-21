@@ -8,7 +8,7 @@ int qsort(...);
 int FUN_00186f58(void);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_003e41f8(unsigned int, int);
-int FUN_003e4574(unsigned int, int);
+int gameDataSetAreaBit(unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -36,7 +36,7 @@ extern unsigned int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_003e41f8. */
 extern int FUN_003e4230(unsigned int);
 extern int FUN_003e44ec(unsigned int);
-/* Supplied declaration required: FUN_003e4574. */
+/* Supplied declaration required: gameDataSetAreaBit. */
 extern int gameDataFlagTestBit(unsigned int);
 
 
@@ -79,7 +79,7 @@ void FUN_003d1aa0(int param_1)
          ((temp_v1 = gameDataFlagTestBit(temp_v4), temp_v1 != 0 || (temp_v1 = FUN_003e4230(temp_v4), temp_v1 != 2)))) {
         temp_v1 = FUN_003e44ec(temp_v4);
         if (temp_v1 == 0) {
-          FUN_003e4574(temp_v4,1);
+          gameDataSetAreaBit(temp_v4,1);
           FUN_003e41f8(temp_v4,1);
         }
         *(unsigned int *)(param_1 + *(int *)(param_1 + 0x2a8) * 4 + 0x74) = temp_v4;

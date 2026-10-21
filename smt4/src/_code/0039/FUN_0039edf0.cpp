@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-extern int FUN_0024c2ec(unsigned char);
+extern int saveTestFlagRow(unsigned char);
 extern int gameFlagIsSet(void);
 extern int FUN_002fb094(int);
 extern int FUN_00316dac(int);
@@ -28,7 +28,7 @@ void FUN_0039edf0(int param_1)
       if ((*(int *)((unsigned char *)&g_gameState + 0x3e0)) == 0) {
         if (*(unsigned char *)(temp_v1 + 0xe8d) != 0xff) {
           if (*(unsigned char *)(temp_v1 + 0xe8d) != 0xfe) {
-            temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0xe8c));
+            temp_v0 = saveTestFlagRow(*(unsigned char *)(temp_v1 + 0xe8c));
             if (((temp_v0 != 0) &&
                 ((*(short *)(temp_v1 + 0xeb8) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
                ((*(short *)(temp_v1 + 0xeba) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 == 0))))
@@ -65,7 +65,7 @@ LAB_0039eee0:
       if ((int)*(short *)(temp_v1 + 0x5a96) != (int)*(char *)(param_1 + 0x60)) goto LAB_0039ef90;
       if ((*(int *)((unsigned char *)&g_gameState + 0x3e0)) == 0) {
         if (*(unsigned char *)(temp_v1 + 0x5a95) != 0xff) {
-          temp_v0 = FUN_0024c2ec(*(unsigned char *)(temp_v1 + 0x5a94));
+          temp_v0 = saveTestFlagRow(*(unsigned char *)(temp_v1 + 0x5a94));
           if (((temp_v0 != 0) &&
               ((*(short *)(temp_v1 + 0x5ac0) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
              ((*(short *)(temp_v1 + 0x5ac2) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 == 0))))

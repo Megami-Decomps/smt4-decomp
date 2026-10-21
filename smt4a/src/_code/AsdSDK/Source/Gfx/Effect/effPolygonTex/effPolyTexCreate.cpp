@@ -6,8 +6,8 @@ extern "C" {
 void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, int size);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
-void *FUN_002b41c4(PolyTexDesc *desc);
-u32 *FUN_002721e4(PolyTexDesc *desc);
+void *resourceResolveHeaderPointer(PolyTexDesc *desc);
+u32 *resourceResolveDataPointer(PolyTexDesc *desc);
 void rt_memcpy(void *dst, const void *src, int size);
 void textureSlotReplace(PolyGeom *geom, u32 *resource);
 void *FUN_00221f20(u32 *resource);
@@ -39,8 +39,8 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
     if (desc != NULL) {
         obj->geom = FUN_002b3b58(1, 2, 4, &DAT_005c1f82, 0x4c);
         obj->kind = desc->kind;
-        rt_memcpy(obj->params, FUN_002b41c4(desc), 152);
-        resource = FUN_002721e4(desc);
+        rt_memcpy(obj->params, resourceResolveHeaderPointer(desc), 152);
+        resource = resourceResolveDataPointer(desc);
         if (resource != NULL) {
             switch (desc->resourceType) {
             case 1:

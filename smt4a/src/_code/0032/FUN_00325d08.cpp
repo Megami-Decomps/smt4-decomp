@@ -115,7 +115,7 @@ extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004a01c8. */
 extern int FUN_004a0e38(unsigned int, unsigned int);
-extern int FUN_004d04f4(void);
+extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -242,21 +242,21 @@ joined_r0x00326e38:
 LAB_00326f3c:
           if (DAT_005f1848 != 0) {
             if (DAT_005f1848 == 1) {
-              temp_v3 = FUN_004d04f4();
+              temp_v3 = inputIsQuestCancelPressed();
               goto joined_r0x00326f98;
             }
             if (DAT_005f1848 == 2) {
-              temp_v3 = FUN_004d04f4();
+              temp_v3 = inputIsQuestCancelPressed();
               if (temp_v3 == 0) goto LAB_00326fcc;
               goto LAB_00326f78;
             }
             if (DAT_005f1848 == 3) {
-              temp_v3 = FUN_004d04f4();
+              temp_v3 = inputIsQuestCancelPressed();
               goto joined_r0x00326f98;
             }
           }
           else {
-            temp_v3 = FUN_004d04f4();
+            temp_v3 = inputIsQuestCancelPressed();
 joined_r0x00326f98:
             if (temp_v3 != 0) {
 LAB_00326f78:
@@ -684,7 +684,7 @@ LAB_00326a10:
       if (DAT_005f1848 != 1) {
         if (DAT_005f1848 != 2) {
           if (((DAT_005f1848 == 3) && (*(int *)(g_lmapScene + 8) >= 9)) &&
-             (temp_v0 = FUN_004d04f4(), temp_v3 = g_lmapScene, temp_v0 != 0)) {
+             (temp_v0 = inputIsQuestCancelPressed(), temp_v3 = g_lmapScene, temp_v0 != 0)) {
             DAT_005f17ac = '\0';
             *(unsigned int *)(g_lmapScene + 0x164) = 0;
             *(unsigned int *)(temp_v3 + 4) = 0;
@@ -695,7 +695,7 @@ LAB_00326cc4:
           }
         }
         else if ((*(int *)(g_lmapScene + 8) >= 9) &&
-                (temp_v0 = FUN_004d04f4(), temp_v3 = g_lmapScene, temp_v0 != 0)) {
+                (temp_v0 = inputIsQuestCancelPressed(), temp_v3 = g_lmapScene, temp_v0 != 0)) {
           DAT_005f17ac = '\0';
           *(unsigned int *)(g_lmapScene + 0x164) = 0;
           *(unsigned int *)(temp_v3 + 4) = 0;
@@ -705,7 +705,7 @@ LAB_00326cc4:
         }
       }
       else if ((*(int *)(g_lmapScene + 8) >= 8) &&
-              (temp_v0 = FUN_004d04f4(), temp_v3 = g_lmapScene, temp_v0 != 0)) {
+              (temp_v0 = inputIsQuestCancelPressed(), temp_v3 = g_lmapScene, temp_v0 != 0)) {
         DAT_005f17ac = '\0';
         *(unsigned int *)(g_lmapScene + 0x164) = 0;
         *(unsigned int *)(temp_v3 + 4) = 0;
@@ -716,7 +716,7 @@ LAB_00326cc4:
       goto LAB_003270a0;
     }
     if ((*(int *)(g_lmapScene + 8) < 8) ||
-       (temp_v0 = FUN_004d04f4(), temp_v3 = g_lmapScene, temp_v0 == 0)) goto LAB_003270a0;
+       (temp_v0 = inputIsQuestCancelPressed(), temp_v3 = g_lmapScene, temp_v0 == 0)) goto LAB_003270a0;
     DAT_005f17ac = '\0';
     *(unsigned int *)(g_lmapScene + 0x164) = 0;
     *(unsigned int *)(temp_v3 + 4) = 0;

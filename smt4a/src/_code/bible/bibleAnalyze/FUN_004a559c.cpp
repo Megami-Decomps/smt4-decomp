@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100388(...);
+int textFormatBuffer(...);
 int FUN_00162758(...);
 int FUN_0049339c(int, int, int, int, int);
 int FUN_0049368c(...);
@@ -33,7 +33,7 @@ typedef char romwright_storage_s__U_U_0057f0a4_9_1_s1_width_check[(sizeof(((unio
 extern union romwright_storage_s__U_U_0057f0a4_9_1 s__U_U_0057f0a4; /* 0x57f0a4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162758. */
 extern int FUN_0018349c(int, unsigned int);
 extern int FUN_002a482c(int);
@@ -43,7 +43,7 @@ extern unsigned int FUN_004929d8(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0049368c. */
 /* Supplied declaration required: FUN_004a6144. */
 /* Supplied declaration required: owner4ASetSizeAndCall. */
-extern int FUN_004cfb24(unsigned char *, unsigned int);
+extern int curveEvaluateStandard(unsigned char *, unsigned int);
 
 
 void FUN_004a559c(int param_1)
@@ -81,9 +81,9 @@ void FUN_004a559c(int param_1)
   FUN_0049368c(param_1 + 200,temp_v6 - 4,0,0,temp_v4,1);
   FUN_0049368c(param_1 + 200,temp_v6,0,0,temp_v4,1);
   temp_v1 = FUN_004929d8(temp_v7,*(unsigned int *)(param_1 + 0xa874));
-  FUN_00100388(temp_v8,&LAB_004a57f4,temp_v1,(*(unsigned int *)&s__U_U_0057f0a4.u1[0]));
+  textFormatBuffer(temp_v8,&LAB_004a57f4,temp_v1,(*(unsigned int *)&s__U_U_0057f0a4.u1[0]));
   temp_v6 = FUN_0018349c(param_1 + 200,0x102b);
-  temp_v2 = FUN_004cfb24(temp_v8,2);
+  temp_v2 = curveEvaluateStandard(temp_v8,2);
   VectorSignedToFloat((int)*(short *)(temp_v6 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(((int)*(short *)(temp_v6 + 8) + (int)**(short **)(temp_v6 + 0xc) / 2) - temp_v2 / 2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);

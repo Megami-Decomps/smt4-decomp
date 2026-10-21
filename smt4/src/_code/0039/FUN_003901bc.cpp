@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00295660(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int memClear(...);
 
 int FUN_00233404(void);
@@ -14,7 +14,7 @@ int FUN_002335f8(...);
 int FUN_0023360c(...);
 int FUN_0023392c(...);
 int FUN_0023478c(...);
-int FUN_00234974(unsigned int *);
+int recordClearWideHandle(unsigned int *);
 int FUN_0023499c(unsigned int *, unsigned int *, unsigned int *);
 int FUN_002869e8(...);
 int FUN_00287328(int);
@@ -54,7 +54,7 @@ extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_0023360c. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: FUN_0023478c. */
-/* Supplied declaration required: FUN_00234974. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_0023499c. */
 extern int FUN_00240d5c(unsigned int *);
 extern int FUN_0026ee68(unsigned int);
@@ -71,7 +71,7 @@ extern int FUN_002a12d8(unsigned int *);
 extern int FUN_002af600(int);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 extern int FUN_0039411c(int);
 /* Supplied declaration required: FUN_003c2d84. */
@@ -117,7 +117,7 @@ void FUN_003901bc(unsigned int *param_1)
       param_1[0x86] = (unsigned int)temp_v8;
     }
     else {
-      FUN_00234974(puVar1 + 10);
+      recordClearWideHandle(puVar1 + 10);
       param_1[2] = 1;
       param_1[0x44a] = 0;
       param_1[1099] = 0;
@@ -319,7 +319,7 @@ LAB_003906d4:
     temp_v2 = FUN_0023360c(param_1 + 0x90);
     temp_v3 = puVar1[0x19e];
     memClear(&temp_v7,0x80);
-    FUN_002be624(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
+    textFormatBuffer(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
     FUN_00295660(0,&temp_v7);
     FUN_002b8244(1);
     temp_v2 = FUN_0019e0c0(param_1[0xd6]);

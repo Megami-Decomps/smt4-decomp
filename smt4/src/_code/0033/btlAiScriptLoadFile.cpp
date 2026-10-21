@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002402c4(int, unsigned char [132]);
 int scrScriptProcessDestroy(void);
 int dataTable00FindById(unsigned int);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int libc_strcpy(int *, unsigned char [132]);
 int asdMemFree(void);
 int memClear(unsigned char [132], int);
@@ -20,7 +20,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable00FindById. */
 extern int FUN_002b6a54(int, int);
 extern int FUN_002b6ad0(void);
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -54,11 +54,11 @@ void btlAiScriptLoadFile(int *param_1,int param_2)
   if (temp_v0) {
     temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 4),(int)*(short *)(temp_v1 + 6));
     memClear(temp_v3,0x80);
-    FUN_002be624(temp_v3,"battle/AI/%s.bf",temp_v1 + 0x48);
+    textFormatBuffer(temp_v3,"battle/AI/%s.bf",temp_v1 + 0x48);
     temp_v1 = btlGetMainState();
     FUN_002402c4(temp_v1,temp_v3);
     if (temp_v1 == 0) {
-      FUN_002be624(temp_v3,"battle/AI/tmp.bf");
+      textFormatBuffer(temp_v3,"battle/AI/tmp.bf");
     }
     libc_strcpy(param_1 + 4,temp_v3);
   }
@@ -66,11 +66,11 @@ void btlAiScriptLoadFile(int *param_1,int param_2)
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 2);
     dataTable00FindById(temp_v2);
     memClear(temp_v3,0x80);
-    FUN_002be624(temp_v3,"battle/AI/%s.bf",temp_v2 + 0x8a);
+    textFormatBuffer(temp_v3,"battle/AI/%s.bf",temp_v2 + 0x8a);
     temp_v1 = btlGetMainState();
     FUN_002402c4(temp_v1,temp_v3);
     if (temp_v1 == 0) {
-      FUN_002be624(temp_v3,"battle/AI/tmp.bf");
+      textFormatBuffer(temp_v3,"battle/AI/tmp.bf");
     }
     libc_strcpy(param_1 + 4,temp_v3);
     temp_v1 = aocContentLookupSucceeds(g_aocSystem,*(unsigned short *)(*(int *)(param_2 + 0x28) + 2));

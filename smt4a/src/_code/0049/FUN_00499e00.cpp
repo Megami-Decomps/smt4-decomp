@@ -40,8 +40,8 @@ extern int btlRollClamped(unsigned short, unsigned int);
 extern int FUN_004cfe4c(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
-extern int FUN_004d04f4(void);
-extern int FUN_004d0554(void);
+extern int inputIsQuestCancelPressed(void);
+extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: releaseEntriesB. */
@@ -98,7 +98,7 @@ void FUN_00499e00(int param_1)
     FUN_00498494(param_1,0xc);
     return;
   }
-  temp_v0 = FUN_004d0554();
+  temp_v0 = inputIsQuestMenuPressed();
   if (temp_v0 != 0) {
     *(unsigned int *)(param_1 + 0x16040) = 0;
     FUN_0038b010(0);
@@ -117,7 +117,7 @@ void FUN_00499e00(int param_1)
     *(unsigned int *)(param_1 + 8) = 1;
     return;
   }
-  temp_v0 = FUN_004d04f4();
+  temp_v0 = inputIsQuestCancelPressed();
   if (temp_v0 == 0) {
     return;
   }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00158a40(int, unsigned int, unsigned int, unsigned int);
 int FUN_0016c744(int);
 int FUN_00177e6c(int, int);
-int FUN_001960f0(int, int);
+int asdModelCommitCommandRange(int, int);
 int FUN_0019eafc(void);
 int nn_gr_CTR_Shader_SearchBindSymbol(...);
 
@@ -18,7 +18,7 @@ extern unsigned char LAB_00157ab8; /* 0x157ab8 */
 /* Supplied declaration required: FUN_00158a40. */
 /* Supplied declaration required: FUN_0016c744. */
 /* Supplied declaration required: FUN_00177e6c. */
-/* Supplied declaration required: FUN_001960f0. */
+/* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: FUN_0019eafc. */
 /* Supplied declaration required: nn_gr_CTR_Shader_SearchBindSymbol. */
 
@@ -43,7 +43,7 @@ unsigned int FUN_001579dc(int param_1,unsigned int param_2,unsigned int param_3,
   FUN_0019eafc();
   temp_v1 = param_1 + 0x138;
   FUN_00177e6c(temp_v1,temp_v0);
-  FUN_001960f0(temp_v0,temp_v1);
+  asdModelCommitCommandRange(temp_v0,temp_v1);
   FUN_0016c744(param_1);
   return 1;
 }

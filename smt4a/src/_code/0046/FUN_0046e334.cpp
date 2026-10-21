@@ -6,7 +6,7 @@ extern "C" {
 
 int jyoucyuGetTableEntry(int);
 int FUN_00426fe4(int *, int, int);
-int FUN_004275c8(int);
+int recordClearWideHandle(int);
 int FUN_0042979c(int *, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -21,7 +21,7 @@ extern int g_aocMain; /* 0x570260 */
 extern unsigned char *FUN_001d25a0(unsigned int, unsigned int);
 extern int FUN_001d25ec(unsigned char *);
 /* Supplied declaration required: FUN_00426fe4. */
-/* Supplied declaration required: FUN_004275c8. */
+/* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: FUN_0042979c. */
 
 
@@ -56,7 +56,7 @@ void FUN_0046e334(unsigned int param_1,int param_2)
     *(unsigned int *)(puVar1 + 8) = uStack_14;
     temp_v0 = FUN_001d25ec(puVar1 + 4);
     if (-1 < temp_v0) {
-      FUN_004275c8(g_aocMain + 0x28);
+      recordClearWideHandle(g_aocMain + 0x28);
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x10000;
       return;
     }

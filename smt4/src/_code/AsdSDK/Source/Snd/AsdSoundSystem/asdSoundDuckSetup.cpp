@@ -1,3 +1,4 @@
+/* NON_MATCHING: clamping and duck-state stores use different registers and instruction scheduling. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {

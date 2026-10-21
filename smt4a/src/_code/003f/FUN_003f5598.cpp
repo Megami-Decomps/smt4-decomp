@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableLoadTmx(int, int);
 int FUN_00151408(unsigned int, int, int);
 int FUN_001527d8(unsigned int, unsigned int);
-int FUN_001acf98(int, int);
+int asdTMTexLoadMainHeap(int, int);
 int __aeabi_memset4(int, int, unsigned int);
 int FUN_002804b0(...);
 int rt_memclr(int, int);
@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00151408. */
 /* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: FUN_001acf98. */
+/* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: rt_memclr. */
@@ -55,7 +55,7 @@ void FUN_003f5598(int param_1)
   __aeabi_memset4(param_1 + 0x6c8,0x10,0xffffffff);
   asdTMTexTableLoadTmx(0x31,0);
   do {
-    FUN_001acf98(0x31,temp_v1);
+    asdTMTexLoadMainHeap(0x31,temp_v1);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
   temp_v0 = spriteHandleCreate(0);

@@ -1,25 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031caec` (_code @ 0x31caec, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: retail emits 'ldr r1, [pc, #40]'; compiler emits 'ldr r1, [pc, #36]' at the first differing instruction. */
+#include "common.h"
 extern "C" {
-
-extern unsigned char g_eventEffect; /* 0x57f3b4 */
-
-
-void FUN_0031caec(unsigned int param_1)
-
-{
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_eventEffect + 0x4));
-  if ((*(int *)((unsigned char *)&g_eventEffect + 0x4)) != 0) {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_eventEffect + 0x4)) + 0x1c) = param_1;
-    *(unsigned int *)(temp_v0 + 0xc) = 0;
-    *(unsigned int *)(temp_v0 + 8) = 4;
-    *(unsigned int *)(temp_v0 + 0x14) = 0x3f800000;
-  }
-  return;
+struct Effect {
+    u8 pad[8];
+    u32 state;
+    u32 progress;
+    u32 value;
+    f32 scale;
+    u8 gap[4];
+    u32 request;
+};
+extern struct {
+    u32 reserved;
+    Effect *first,*second;
 }
-
-} /* extern "C" */
+g_eventEffect;
+void FUN_0031caec(u32 request) {
+    Effect *effect=g_eventEffect.first;
+    if(effect) {
+        effect->request=request;
+        effect->progress=0;
+        effect->state=4;
+        effect->scale=1.0f;
+    }
+}
+}

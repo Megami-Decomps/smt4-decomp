@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001835b4(...);
-int FUN_0019d880(void);
+int jobGetScalarValue(void);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,14 +16,14 @@ typedef struct {
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0019d880. */
+/* Supplied declaration required: jobGetScalarValue. */
 
 
 void FUN_003cd2c4(unsigned int param_1,unsigned int param_2,int param_3)
 
 {
 /* irregular: 3 native warning(s); review required */
-  FUN_0019d880();
+  jobGetScalarValue();
   efctSetSpeed();
   FUN_001835b4(2,0x12,0x46d,param_1,param_2,0xbf);
   FUN_001835b4(2,0x12,0x46e,param_1,param_2,0xbf);

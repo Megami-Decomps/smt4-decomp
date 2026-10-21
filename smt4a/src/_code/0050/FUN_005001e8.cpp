@@ -1,20 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005001e8` (_code @ 0x5001e8, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-extern "C" {
-
-
-unsigned int FUN_005001e8(int param_1)
-
-{
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 4) != 0) {
-    temp_v0 = *(unsigned int *)(*(int *)(param_1 + 4) + 8);
-  }
-  return temp_v0;
+#include "common.h"
+struct ValueRecord { u8 unk00[8]; u32 value; };
+struct ValueHolder { u8 unk00[4]; ValueRecord *record; };
+/* Returns the held record's value, or zero when absent. */
+extern "C" u32 FUN_005001e8(ValueHolder *holder) {
+    return holder->record != NULL ? holder->record->value : 0;
 }
-
-} /* extern "C" */

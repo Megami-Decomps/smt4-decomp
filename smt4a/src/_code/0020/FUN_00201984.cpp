@@ -1,17 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00201984` (_code @ 0x201984, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses ldr r1, [pc, #28] where the compiled block uses ldr r1, [pc, #32]. */
+#include "common.h"
+
+struct Vector3 {
+    f32 x; // 0x00
+    f32 y; // 0x04
+    f32 z; // 0x08
+};
 
 extern "C" {
+extern const Vector3 DAT_005e1c68[4];
 
-
-void FUN_00201984(unsigned int param_1)
-
+Vector3 FUN_00201984(u32 index)
 {
-  if (param_1 < 4) {
-    return;
-  }
-  return;
-}
+    if (index < 4) {
+        return DAT_005e1c68[index];
+    }
 
-} /* extern "C" */
+    Vector3 result = { 0.0f, 0.0f, 0.0f };
+    return result;
+}
+}

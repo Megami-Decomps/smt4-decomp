@@ -1,27 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de9b0` (_code @ 0x3de9b0, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct BattleActionReflect;
+
+struct ReflectAction {
+    u8 unk00[4];       // 0x00
+    u8 type;           // 0x04
+    u8 unk05[0x23];    // 0x05
+    u32 value;         // 0x28
+};
 
 extern "C" {
+extern BattleActionReflect* g_btlActionReflect;
+ReflectAction* FUN_0022699c(BattleActionReflect* context, s32 actionId,
+                          s32 flags, u32 argument);
 
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-void FUN_003de9b0(short param_1,unsigned int param_2,unsigned int param_3)
-
+void FUN_003de9b0(s32 actionId, u32 argument, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x20;
-  *(unsigned int *)(temp_v0 + 0x28) = param_3;
-  return;
+    ReflectAction* action = FUN_0022699c(g_btlActionReflect, (s16)actionId, 0, argument);
+    action->type = 0x20;
+    action->value = value;
 }
-
-} /* extern "C" */
+}

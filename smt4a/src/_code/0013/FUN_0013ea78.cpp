@@ -1,23 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013ea78` (_code @ 0x13ea78, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
-extern unsigned int DAT_00640388; /* 0x640388 */
-extern unsigned int DAT_0064038c; /* 0x64038c */
-extern unsigned int DAT_00640390; /* 0x640390 */
-extern unsigned int DAT_00640394; /* 0x640394 */
+extern ParameterTriple DAT_00640388;
 
-
-void FUN_0013ea78(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Stores three parameters and resets their pending state. */
+void FUN_0013ea78(u32 first, u32 second, u32 third)
 {
-  DAT_00640388 = param_1;
-  DAT_0064038c = param_2;
-  DAT_00640390 = param_3;
-  DAT_00640394 = 0;
-  return;
+    DAT_00640388.first = first;
+    DAT_00640388.second = second;
+    DAT_00640388.third = third;
+    DAT_00640388.state = 0;
 }
 
 } /* extern "C" */

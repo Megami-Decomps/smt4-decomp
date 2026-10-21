@@ -28,7 +28,7 @@ extern unsigned int DAT_0049fc04; /* 0x49fc04 */
 extern unsigned int DAT_0049fc08; /* 0x49fc08 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00248dfc(void);
+extern int dataTableGetRecordFortyNine(void);
 extern int FUN_00253154(int);
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nodeSetScale. */
@@ -85,7 +85,7 @@ unsigned int FUN_0027c3d0(void)
     do {
       temp_v4 = 0;
       pcVar11 = (char *)0x0;
-      temp_v7 = FUN_00248dfc();
+      temp_v7 = dataTableGetRecordFortyNine();
       if (temp_v7 >= 1) {
         do {
           pcVar2 = pcVar11;
@@ -118,7 +118,7 @@ unsigned int FUN_0027c3d0(void)
             }
           }
           pcVar11 = pcVar11 + 1;
-          temp_v7 = FUN_00248dfc();
+          temp_v7 = dataTableGetRecordFortyNine();
         } while ((int)pcVar11 < temp_v7);
         if (temp_v4 != 0) {
           if (temp_v4 != 1) {
@@ -236,7 +236,7 @@ LAB_0027c7c0:
   }
   temp_v7 = 0;
   pcVar11 = (char *)0x0;
-  temp_v2 = FUN_00248dfc();
+  temp_v2 = dataTableGetRecordFortyNine();
   if (0 < temp_v2) {
     do {
       pcVar2 = pcVar11;
@@ -333,7 +333,7 @@ LAB_0027c7c0:
         }
       }
       pcVar11 = pcVar11 + 1;
-      temp_v2 = FUN_00248dfc();
+      temp_v2 = dataTableGetRecordFortyNine();
     } while ((int)pcVar11 < temp_v2);
   }
   temp_v0 = DAT_0044cd88;

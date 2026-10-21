@@ -32,9 +32,9 @@ extern unsigned char DAT_004d8b40; /* 0x4d8b40 */
 extern unsigned char DAT_004d8ca0; /* 0x4d8ca0 */
 
 /* Supplied declaration required: FUN_00246854. */
-extern int FUN_002468e0(unsigned int, int);
+extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: effPartsSetData. */
-extern unsigned int FUN_0024c3f8(unsigned int);
+extern unsigned int resourceResolveHeaderPointer(unsigned int);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_00250200. */
 /* Supplied declaration required: FUN_002629a8. */
@@ -54,7 +54,7 @@ unsigned int FUN_0031e89c(void)
   unsigned short temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = FUN_002468e0(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
+  temp_v0 = linkedFindItemByIndex(DAT_0044ea94,DAT_0044ea8c + DAT_0044f864);
   DAT_0044eaa4 = temp_v0;
   rt_memcpy_w(&DAT_004d8b40,temp_v0,0x90);
   rt_memcpy_w(&DAT_004d8ca0,temp_v0,0x80);
@@ -62,7 +62,7 @@ unsigned int FUN_0031e89c(void)
   temp_v1 = temp_v0;
   FUN_00246854();
   if (*(short *)(temp_v1 + 4) != 0x1b) {
-    temp_v2 = FUN_0024c3f8(DAT_0044ea9c);
+    temp_v2 = resourceResolveHeaderPointer(DAT_0044ea9c);
     in_r3 = *(unsigned int *)(temp_v1 + 0xc);
     rt_memcpy(in_r3,temp_v2,*(unsigned int *)(temp_v1 + 0x10));
   }

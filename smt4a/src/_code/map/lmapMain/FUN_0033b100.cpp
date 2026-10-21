@@ -8,7 +8,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_002b5cb4(void);
 int FUN_0032714c(void);
-int FUN_00352bc4(void);
+int mathPositionHeadingDegrees(void);
 int FUN_00367fac(void);
 int FUN_00368374(...);
 int lmapSceneMarkerStart(int);
@@ -50,7 +50,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_00261424(void);
 /* Supplied declaration required: FUN_002b5cb4. */
 /* Supplied declaration required: FUN_0032714c. */
-/* Supplied declaration required: FUN_00352bc4. */
+/* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_00367f98(void);
 /* Supplied declaration required: FUN_00367fac. */
 /* Supplied declaration required: FUN_00368374. */
@@ -178,14 +178,14 @@ unsigned int FUN_0033b100(int param_1)
         DAT_005f17c4 = 8;
         DAT_005f17c6 = (unsigned short)*(unsigned int *)(param_1 + 4);
         temp_v6 = *(unsigned int *)(param_1 + 0x20);
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         DAT_005f17d8 = *(unsigned int *)(param_1 + 0x20);
         DAT_005f17dc = *(float *)(param_1 + 0x24) + temp_v14;
         DAT_005f17e0 = *(unsigned int *)(param_1 + 0x28);
         DAT_005f17c9 = '\0';
         temp_v11 = *(unsigned int *)(param_1 + 0x20);
         DAT_005f17e4 = temp_v6;
-        FUN_00352bc4();
+        mathPositionHeadingDegrees();
         *(unsigned int *)(param_1 + 0x2c) = temp_v11;
         if (*(char *)(param_1 + 0x50) == '\0') {
           if (((*(int *)(param_1 + 0x17c) != 0) && (10 >= *(int *)(param_1 + 0x17c))) &&
@@ -264,14 +264,14 @@ unsigned int FUN_0033b100(int param_1)
   DAT_005f17c4 = 8;
   DAT_005f17c6 = (unsigned short)*(unsigned int *)(param_1 + 4);
   temp_v6 = *(unsigned int *)(param_1 + 0x20);
-  FUN_00352bc4();
+  mathPositionHeadingDegrees();
   DAT_005f17d8 = *(unsigned int *)(param_1 + 0x20);
   DAT_005f17dc = *(float *)(param_1 + 0x24) + temp_v14;
   DAT_005f17e0 = *(unsigned int *)(param_1 + 0x28);
   DAT_005f17c9 = '\0';
   temp_v11 = *(unsigned int *)(param_1 + 0x20);
   DAT_005f17e4 = temp_v6;
-  FUN_00352bc4();
+  mathPositionHeadingDegrees();
   *(unsigned int *)(param_1 + 0x2c) = temp_v11;
   if (*(char *)(param_1 + 0x50) == '\0') {
     temp_v8 = 0;

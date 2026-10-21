@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00255158(int, int);
+int battleGetEntryHalfword(int, int);
 int FUN_0027e6f4(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
 int btlGetMainState(void);
@@ -20,8 +20,8 @@ typedef struct {
 
 extern unsigned char LAB_0021778c; /* 0x21778c */
 
-extern int FUN_002542ec(int);
-/* Supplied declaration required: FUN_00255158. */
+extern int saveResolvePartySlot(int);
+/* Supplied declaration required: battleGetEntryHalfword. */
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
@@ -128,7 +128,7 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
           *(unsigned char *)(puVar10 + 1) = 0;
           puVar10[2] = 0;
           do {
-            temp_v3 = FUN_002542ec(temp_v4 - 1);
+            temp_v3 = saveResolvePartySlot(temp_v4 - 1);
             if ((temp_v3 != 0) && ((unsigned int)*(unsigned short *)(temp_v3 + 0x46) == *puVar10)) {
               puVar10[3] = temp_v4;
               break;
@@ -184,13 +184,13 @@ int FUN_003aeb64(unsigned int param_1,int param_2)
           }
         }
         *(unsigned short *)(puVar10 + 4) = *(unsigned short *)((int)puVar4 + 0x1c6);
-        temp_v1 = FUN_00255158((int)*(short *)(temp_v6 + 0x62),7);
+        temp_v1 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),7);
         *(unsigned char *)((int)puVar10 + 0x12) = temp_v1;
-        temp_v1 = FUN_00255158((int)*(short *)(temp_v6 + 0x62),10);
+        temp_v1 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),10);
         *(unsigned char *)((int)puVar10 + 0x13) = temp_v1;
-        temp_v1 = FUN_00255158((int)*(short *)(temp_v6 + 0x62),0xb);
+        temp_v1 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),0xb);
         *(unsigned char *)(puVar10 + 5) = temp_v1;
-        temp_v6 = FUN_00255158((int)*(short *)(temp_v6 + 0x62),0x14);
+        temp_v6 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),0x14);
         temp_v2 = temp_v2 + 1;
         *(unsigned char *)((int)puVar10 + 0x15) = temp_v6 != 0;
       }

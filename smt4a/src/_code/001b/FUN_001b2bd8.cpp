@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00100388(unsigned int, unsigned char *, unsigned int, unsigned int);
+int textFormatBuffer(unsigned int, unsigned char *, unsigned int, unsigned int);
 int FUN_001b31ac(void);
 int FUN_001b31e0(void);
 
 extern unsigned char LAB_001b2c9c; /* 0x1b2c9c */
 
-/* Supplied declaration required: FUN_00100388. */
+/* Supplied declaration required: textFormatBuffer. */
 extern int FUN_001b315c(unsigned int);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
@@ -48,7 +48,7 @@ int FUN_001b2bd8(int param_1,int param_2,char *param_3,unsigned int param_4)
               pcVar5 = *(char **)(pcVar5 + 0x3c);
             }
             if (temp_v0 == param_2 && pcVar5 == param_3) {
-              FUN_00100388(param_4,&LAB_001b2c9c,temp_v6 + 0x24,temp_v2 + temp_v4 * 0x40 + 1);
+              textFormatBuffer(param_4,&LAB_001b2c9c,temp_v6 + 0x24,temp_v2 + temp_v4 * 0x40 + 1);
               return *(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10;
             }
             temp_v4 = temp_v4 + 1;

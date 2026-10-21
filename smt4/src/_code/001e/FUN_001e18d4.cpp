@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0025ca80(int, int);
+int asdModelSlotSetTranslation(int, int);
 int asdModelSlotSetColor(int, int);
-int FUN_00263670(int, int);
+int asdModelSlotSetTint(int, int);
 int colorObjectSetRgb(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -15,9 +15,9 @@ typedef struct {
 } param_1_stack;
 
 extern int asdModelBankGetModel(int, unsigned int);
-/* Supplied declaration required: FUN_0025ca80. */
+/* Supplied declaration required: asdModelSlotSetTranslation. */
 /* Supplied declaration required: asdModelSlotSetColor. */
-/* Supplied declaration required: FUN_00263670. */
+/* Supplied declaration required: asdModelSlotSetTint. */
 extern int unitTableGetValue(int, unsigned int);
 /* Supplied declaration required: colorObjectSetRgb. */
 
@@ -37,8 +37,8 @@ void FUN_001e18d4(int param_1)
     }
     if ((temp_v1 == 1 && temp_v0 == 0) &&
        (temp_v1 = unitTableGetValue((int)(short)*(unsigned int *)(param_1 + 0xcc),0), temp_v1 != 0)) {
-      FUN_00263670((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
-      FUN_0025ca80((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
+      asdModelSlotSetTint((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
+      asdModelSlotSetTranslation((int)(short)*(unsigned int *)(param_1 + 0xcc),0);
       return;
     }
   }

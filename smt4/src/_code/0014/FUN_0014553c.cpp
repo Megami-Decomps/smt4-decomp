@@ -6,7 +6,7 @@ extern "C" {
 
 int rt_memcpy_w(int, int, int);
 
-extern signed char DAT_004729b8; /* 0x4729b8 */
+extern signed char g_textRendererSettings; /* 0x4729b8 */
 extern signed char DAT_004729b9; /* 0x4729b9 */
 extern int DAT_004729bc; /* 0x4729bc */
 
@@ -25,10 +25,10 @@ void FUN_0014553c(void)
   
   temp_v2 = DAT_004729bc;
   temp_v0 = '\0';
-  if (DAT_004729b8 != '\0') {
+  if (g_textRendererSettings != '\0') {
     temp_v0 = DAT_004729b9;
   }
-  if (DAT_004729b8 != '\0' && temp_v0 != '\0') {
+  if (g_textRendererSettings != '\0' && temp_v0 != '\0') {
     psVar3 = (short *)(DAT_004729bc + 0x4e00);
     *(unsigned short *)(DAT_004729bc + 0x4e02) = 0;
     *(unsigned int *)(temp_v2 + 0x4e2c) = 0;

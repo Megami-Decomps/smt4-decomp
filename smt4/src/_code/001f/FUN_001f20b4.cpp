@@ -12,12 +12,12 @@ int devilGetRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
-int FUN_002be624(...);
+int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
-int FUN_002bf538(void);
+int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -53,14 +53,14 @@ extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002be624. */
+/* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: FUN_002bf538. */
+/* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -110,7 +110,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       FUN_002bf288(2,0x24,0x62,param_1,param_2,0xc9);
       FUN_002bf288(2,0x24,0x4a,param_1,param_2,0xc9);
       temp_v2 = FUN_002bf4f8(0x24,0x49);
-      FUN_002be624(temp_v9,&LAB_001f2590);
+      textFormatBuffer(temp_v9,&LAB_001f2590);
       VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(2,0xffffffff,temp_v9);
@@ -172,7 +172,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                            *(short *)(temp_v2 + 10) + param_2,0xc9);
               temp_v6 = FUN_002bf4f8(0x24,0x6e);
               temp_v3 = FUN_002bd068(*temp_v10);
-              FUN_002be624(temp_v9,&LAB_001f29bc,temp_v3);
+              textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
               VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) +
                                   param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
               VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
@@ -180,7 +180,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
               FUN_002be5a4(2,0xff,temp_v9);
               temp_v6 = FUN_002bf4f8(0x24,0x6f);
               temp_v3 = FUN_002bce30(*temp_v10,0);
-              FUN_002be624(temp_v9,&LAB_001f29bc,temp_v3);
+              textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
               puVar7 = temp_v9;
               FUN_002b6dd8(puVar7,2);
               VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) +
@@ -205,7 +205,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
               }
             }
             else {
-              FUN_002be624(temp_v9,&LAB_001f29c4);
+              textFormatBuffer(temp_v9,&LAB_001f29c4);
               temp_v6 = FUN_002bf4f8(0x24,0x72);
               puVar7 = temp_v9;
               FUN_002b6dd8(puVar7,2);
@@ -225,14 +225,14 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           puVar5 = (unsigned short *)((*(unsigned int *)(temp_v2 + 0x943c) & 0x1ffff) >> 2);
           devilGetRecord();
           temp_v6 = FUN_002bf4f8(0x24,param_3 + 0x87);
-          FUN_002bf538();
+          efctSetSpeed();
           FUN_002bf288(2,0x24,0x76,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                        0xc9);
           FUN_002bf288(2,0x24,0x77,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                        0xc9);
           FUN_002bf288(2,0x24,0x78,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                        0xc9);
-          FUN_002bf538();
+          efctSetSpeed();
           FUN_002bf288(2,0x24,0x79,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                        0xc9);
           temp_v4 = FUN_0029d65c(param_5);
@@ -296,7 +296,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0xe2);
           temp_v1 = FUN_002bf4f8(0x24,0x83);
           temp_v3 = FUN_002bd068(*puVar5);
-          FUN_002be624(temp_v9,&LAB_001f29bc,temp_v3);
+          textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
@@ -304,7 +304,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           FUN_002be5a4(3,0xffffffff,temp_v9);
           temp_v1 = FUN_002bf4f8(0x24,0x84);
           temp_v3 = FUN_002bce30(*puVar5,0);
-          FUN_002be624(temp_v9,&LAB_001f29bc,temp_v3);
+          textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
           puVar7 = temp_v9;
           FUN_002b6dd8(puVar7,3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
@@ -347,10 +347,10 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           }
           FUN_002bf288(2,0x24,0x58,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_1
                        ,(int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0xdd);
-          FUN_002bf538();
+          efctSetSpeed();
           FUN_002bf288(2,0x24,0x59,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_1
                        ,(int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0xdd);
-          FUN_002bf538();
+          efctSetSpeed();
           temp_v1 = g_titleScene;
           temp_v2 = packNibblesAndByte(6,7,0);
           piVar13 = (int *)(temp_v1 + 0x12ac);

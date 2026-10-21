@@ -10,8 +10,8 @@ int asdTextureRelease(void);
 extern int DAT_0044ea9c; /* 0x44ea9c */
 extern int DAT_0044eab0; /* 0x44eab0 */
 
-extern int FUN_0024c3d8(int);
-extern int FUN_0028c814(void);
+extern int resourceResolveDataPointer(int);
+extern int textureCreateFromImage(void);
 /* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: asdTextureRelease. */
 
@@ -28,7 +28,7 @@ void FUN_002e1e58(void)
     DAT_0044eab0 = 0;
   }
   temp_v0 = DAT_0044ea9c;
-  if ((DAT_0044ea9c != 0) && (temp_v1 = FUN_0024c3d8(DAT_0044ea9c), temp_v1 != 0)) {
+  if ((DAT_0044ea9c != 0) && (temp_v1 = resourceResolveDataPointer(DAT_0044ea9c), temp_v1 != 0)) {
     if (*(short *)(temp_v0 + 0x1c) != 1) {
       if (*(short *)(temp_v0 + 0x1c) != 9) {
         return;
@@ -36,7 +36,7 @@ void FUN_002e1e58(void)
       asdEffectTextureCreate();
     }
     else {
-      temp_v1 = FUN_0028c814();
+      temp_v1 = textureCreateFromImage();
     }
     if (temp_v1 != 0) {
       DAT_0044eab0 = temp_v1;

@@ -44,7 +44,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_003e7adc(int);
-extern int FUN_003e8430(int);
+extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_003ece9c. */
 /* Supplied declaration required: FUN_003ed9b4. */
 /* Supplied declaration required: FUN_003eebf4. */
@@ -153,7 +153,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   case 0xb:
     FUN_003f2498(*param_1,*(unsigned int *)(*param_1 + 0x4ce8));
   }
-  temp_v3 = FUN_003e8430(*param_1);
+  temp_v3 = btlScriptUnitHasFlags(*param_1);
   if (temp_v3 != 0) {
     return;
   }

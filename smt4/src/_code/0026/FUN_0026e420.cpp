@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00215c5c(void);
+int saveSubtractCounterSaturating(void);
 int questEntryCheck(void);
 int gameFlagSetValue(...);
 int libc_bsearch(...);
@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char LAB_00145c78; /* 0x145c78 */
 
-/* Supplied declaration required: FUN_00215c5c. */
+/* Supplied declaration required: saveSubtractCounterSaturating. */
 extern int gameDataGetFlagBits(void);
 /* Supplied declaration required: questEntryCheck. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -61,7 +61,7 @@ unsigned int FUN_0026e420(unsigned int param_1,int param_2,int param_3)
         temp_v7 = (short)param_1;
         libc_bsearch(temp_v6,temp_v4,temp_v5,0x40,&LAB_00145c78);
       }
-      FUN_00215c5c();
+      saveSubtractCounterSaturating();
       temp_v2 = dataTableGet(0xb,0);
       if (temp_v2 == 0) {
         puVar8 = (unsigned char *)0x0;

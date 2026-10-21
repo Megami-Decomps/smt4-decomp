@@ -18,7 +18,7 @@ struct fn_002e2384_arg0 {
     undefined1 field_0x16c; /* +0x16c */
 };
 
-extern unsigned char FUN_002a2cf0(void);
+extern unsigned char cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_0031d890. */
 extern int campCecSettingExists(void);
 extern int campCecSettingIsDone(void);
@@ -43,7 +43,7 @@ unsigned int FUN_002e2384(fn_002e2384_arg0 *param_1)
       param_1->field_0x14c = 0;
       param_1->field_0x144 = 1;
       FUN_0031d890();
-      temp_v0 = FUN_002a2cf0();
+      temp_v0 = cecQueryOptionalProcess();
       temp_v2 = 3;
       param_1->field_0x16c = temp_v0;
     }

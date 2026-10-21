@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023d20c(int *, int *, int *);
+int matrixScaleColumns(int *, int *, int *);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int);
 int nw_gfx_WorldMatrixUpdater_CalculateWorldBasic(unsigned int, int *, float *, int *, unsigned char *, unsigned char *);
 
@@ -25,7 +25,7 @@ extern unsigned int DAT_004efe28; /* 0x4efe28 */
 extern unsigned int DAT_004efe2c; /* 0x4efe2c */
 extern unsigned int DAT_004efe30; /* 0x4efe30 */
 
-/* Supplied declaration required: FUN_0023d20c. */
+/* Supplied declaration required: matrixScaleColumns. */
 extern unsigned int FUN_002ac94c(void);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -106,7 +106,7 @@ void FUN_00365fb0(int *param_1,unsigned int param_2,unsigned int param_3)
     param_1[0x3b] = (int)temp_v9;
     param_1[0x3c] = (int)temp_v10;
     param_1[0x3d] = (int)temp_v11;
-    FUN_0023d20c(param_1 + 0x23,param_1 + 0x2f,param_1 + 0x1f);
+    matrixScaleColumns(param_1 + 0x23,param_1 + 0x2f,param_1 + 0x1f);
     temp_v2 = param_1[0x3e];
     temp_v3 = temp_v2 & 0xfffff81f;
     param_1[0x3e] = temp_v3;

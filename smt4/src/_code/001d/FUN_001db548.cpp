@@ -1,24 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001db548` (_code @ 0x1db548, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction selection/order differs: retail and r0, r0, #-2147483648; compiler no equivalent instruction. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0035777c(void);
+extern void *asdMemoryGetAllocatorC(void);
+extern s32 FUN_0035777c(void *allocator);
 
-extern unsigned int asdMemoryGetAllocatorC(void);
-/* Supplied declaration required: FUN_0035777c. */
-
-
-unsigned char FUN_001db548(void)
-
+/* Reports whether the allocator operation returned a nonnegative status. */
+bool FUN_001db548(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = asdMemoryGetAllocatorC();
-  FUN_0035777c();
-  return (temp_v0 & 0x80000000) == 0;
+    bool success = false;
+    if (FUN_0035777c(asdMemoryGetAllocatorC()) >= 0) {
+        success = true;
+    }
+    return success;
 }
 
 } /* extern "C" */
