@@ -1,4 +1,3 @@
-/* NON_MATCHING: game-state base and branch constant registers differ from retail. */
 #include "common.h"
 
 struct ScriptGameFlags {

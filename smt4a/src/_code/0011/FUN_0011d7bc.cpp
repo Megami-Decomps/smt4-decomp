@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011fe6c(unsigned char [8]);
 int destroyObj0055adc0(unsigned char [8]);
-int onlineStringAssign(unsigned char [8], int);
+int _ZN9Obj55aff4aSERKS_(unsigned char [8], int);
 int onlineInstanceTableGetCurrent(void);
 int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
@@ -28,7 +28,7 @@ extern unsigned char LAB_0011d93d; /* 0x11d93d */
 /* Supplied declaration required: destroyObj0055adc0. */
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -57,7 +57,7 @@ void FUN_0011d7bc(int param_1)
     FUN_002e9c0c();
     FUN_0011fe6c(temp_v4);
     if (*(char *)(param_1 + 0x160) == '\0') {
-      onlineStringAssign(temp_v5,param_1 + 0x7c);
+      _ZN9Obj55aff4aSERKS_(temp_v5,param_1 + 0x7c);
     }
     temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x70) + 0x4c))
                       (*(int **)(param_1 + 0x70),param_1 + 0x90,temp_v4,param_1 + 0x124);

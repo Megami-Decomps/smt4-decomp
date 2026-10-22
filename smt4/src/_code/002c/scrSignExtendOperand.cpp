@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler emits sxtb/sxth while retail uses pairs of shifts. */
 #include "common.h"
 
 /* Sign-extends a compact instruction's displacement according to its width flags. */

@@ -19,6 +19,7 @@ public:
 class Obj55b8d0 {
 public:
     virtual ~Obj55b8d0();
+    u32 getHandle() const { return handle; }
 
 protected:
     /* 0x00: vtable pointer */

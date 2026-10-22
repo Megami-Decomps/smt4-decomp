@@ -38,7 +38,7 @@ extern int DAT_005f1ab0; /* 0x5f1ab0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern int randRange(unsigned int);
-extern int FUN_0017760c(void);
+extern int recordGetScaledMaximum(void);
 extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
@@ -120,7 +120,7 @@ LAB_00338f14:
           if (-1 < *(char *)(temp_v3 + 0x1c88 + temp_v5)) {
             temp_v4 = gameGetSlotRecord();
             temp_v0 = temp_v0 + *(short *)(temp_v4 + 0x2a);
-            temp_v4 = FUN_0017760c();
+            temp_v4 = recordGetScaledMaximum();
             temp_v1 = temp_v1 + temp_v4;
           }
           temp_v8 = (float)temp_v10;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001676b0(int, int, int, int);
+int effectDispatchSelector(int, int, int, int);
 int efctSetSpeed(void);
 int FUN_0035ae58(int, int, int, int, int);
 int __aeabi_idivmod(int, int);
@@ -21,7 +21,7 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0035ae58. */
@@ -106,9 +106,9 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
       FUN_0035ae58((int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),
                    (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1);
       temp_v7 = (*(int *)(param_1 + 0x348) - 0x14) * -3;
-      FUN_001676b0((int)temp_v5,(int)*(short *)(temp_v2 + 8) + temp_v7 + param_4,
+      effectDispatchSelector((int)temp_v5,(int)*(short *)(temp_v2 + 8) + temp_v7 + param_4,
                    *(short *)(temp_v2 + 10) + param_5,0x7e);
-      FUN_001676b0((int)temp_v1,(int)*(short *)(temp_v2 + 8) + param_4 + temp_v7 + 0xd,
+      effectDispatchSelector((int)temp_v1,(int)*(short *)(temp_v2 + 8) + param_4 + temp_v7 + 0xd,
                    *(short *)(temp_v2 + 10) + param_5,0x7e);
       temp_v7 = g_renderCtx;
       piVar7 = (int *)(g_renderCtx + 0x1318);
@@ -122,7 +122,7 @@ void FUN_004bda84(int param_1,int param_2,int param_3,int param_4,int param_5)
       return;
     }
   }
-  FUN_001676b0((int)temp_v5,*(short *)(temp_v2 + 8) + param_4,*(short *)(temp_v2 + 10) + param_5,0x7e);
+  effectDispatchSelector((int)temp_v5,*(short *)(temp_v2 + 8) + param_4,*(short *)(temp_v2 + 10) + param_5,0x7e);
   efctSetSpeed();
   return;
 }

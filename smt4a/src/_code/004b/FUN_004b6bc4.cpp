@@ -13,7 +13,7 @@ int contentEntryGetFromFilesByKind(int, int, int);
 int FUN_004b75d0(...);
 int FUN_004b9ff4(...);
 int menu4CScrollToKind(int, int);
-int FUN_004baa7c(int, int, int);
+int resultGetListEntryLabel(int, int, int);
 int menu4CReset(...);
 int widgetShow(int);
 int dataTable33Type0Count(void);
@@ -45,7 +45,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004b9ff4. */
 extern int menu4CGetCurrentEntry(int);
 /* Supplied declaration required: menu4CScrollToKind. */
-/* Supplied declaration required: FUN_004baa7c. */
+/* Supplied declaration required: resultGetListEntryLabel. */
 /* Supplied declaration required: menu4CReset. */
 /* Supplied declaration required: widgetShow. */
 extern int dataTable33Type0GetEntry(unsigned char *, unsigned int);
@@ -118,7 +118,7 @@ void FUN_004b6bc4(int param_1,int param_2,int param_3)
         if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
            ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           acStack_168[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
-          FUN_004baa7c(param_1 + 0x9c,temp_v3,param_2);
+          resultGetListEntryLabel(param_1 + 0x9c,temp_v3,param_2);
         }
       }
 LAB_004b6d80:
@@ -148,7 +148,7 @@ LAB_004b6d80:
         if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
            ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
           acStack_168[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
-          FUN_004baa7c(param_1 + 0x9c,temp_v3,param_2);
+          resultGetListEntryLabel(param_1 + 0x9c,temp_v3,param_2);
         }
       }
 LAB_004b6ea0:

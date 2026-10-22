@@ -4,8 +4,8 @@ extern "C" {
 
 extern const u8 DAT_005585c0[];  /* vtable */
 void FUN_00103fa4(VObject *self);
-u8 *onlineStringDestroy(u8 *member);
-void sharedRefInitEmpty(u8 *member);
+u8 *_ZN9Obj55aff4D1Ev(u8 *member);
+void _ZN9Obj5593b8D1Ev(u8 *member);
 
 typedef struct Object5585c0 {
     /* 0x00 */ const void *vtbl;
@@ -20,9 +20,9 @@ void destroyObj005585c0(Object5585c0 *self)
 
     self->vtbl = DAT_005585c0;
     FUN_00103fa4((VObject *)self);
-    member = onlineStringDestroy(self->member1C);
-    member = onlineStringDestroy(member - 8);
-    sharedRefInitEmpty(member - 0x14);
+    member = _ZN9Obj55aff4D1Ev(self->member1C);
+    member = _ZN9Obj55aff4D1Ev(member - 8);
+    _ZN9Obj5593b8D1Ev(member - 0x14);
 }
 
 } /* extern "C" */

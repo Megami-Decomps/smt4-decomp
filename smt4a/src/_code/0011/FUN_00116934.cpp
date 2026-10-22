@@ -11,7 +11,7 @@ extern unsigned char DAT_00559da4; /* 0x559da4 */
 
 /* Supplied declaration required: FUN_002ea974. */
 /* Supplied declaration required: FUN_00302ee0. */
-extern int clearWords2Alt(int);
+extern int _ZN12ZeroWordPairC1Ev(int);
 
 
 int FUN_00116934(unsigned int *param_1)
@@ -37,7 +37,7 @@ int FUN_00116934(unsigned int *param_1)
   *(int *)temp_v1 = temp_v1;
   *(int *)(*(int *)(temp_v0 + 0x78) + 4) = *(int *)(temp_v0 + 0x78);
   temp_v0 = FUN_002ea974(temp_v0 + 0x80);
-  temp_v0 = clearWords2Alt(temp_v0 + 0x68);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x68);
   return temp_v0 - 0xf0;
 }
 

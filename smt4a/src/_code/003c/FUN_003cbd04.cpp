@@ -12,7 +12,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
 int FUN_0032fea0(...);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
 
@@ -40,7 +40,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern int FUN_002a4860(void);
 /* Supplied declaration required: FUN_0032fea0. */
 extern int uiSearchPrimary(int);
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004bd6b0. */
 
@@ -138,7 +138,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,0x74,0,0);
     FUN_004bd6b0(temp_v8,*(unsigned short *)(param_1 + 0x8b70),param_2);
-    FUN_00389d9c(temp_v8,(int)*(short *)(param_1 + 0x8b70),
+    statDrawClampedDelta(temp_v8,(int)*(short *)(param_1 + 0x8b70),
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,0x74,0);
     if (param_4 != 0) {

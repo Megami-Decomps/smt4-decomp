@@ -18,7 +18,7 @@ struct fn_0011c0e8_arg0 {
 extern unsigned char DAT_0055a818; /* 0x55a818 */
 
 extern int FUN_002e9ff4(unsigned int *);
-extern unsigned int *FUN_00300844(fn_0011c0e8_arg0 *, unsigned int);
+extern unsigned int *_ZN9Obj55b314C1Ei(fn_0011c0e8_arg0 *, unsigned int);
 
 
 void FUN_0011c0e8(fn_0011c0e8_arg0 *param_1)
@@ -27,7 +27,7 @@ void FUN_0011c0e8(fn_0011c0e8_arg0 *param_1)
   unsigned int *puVar1;
   int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_00300844(param_1,0);
+  puVar1 = (unsigned int *)_ZN9Obj55b314C1Ei(param_1,0);
   puVar1[6] = 0;
   *puVar1 = (unsigned int)&DAT_0055a818;
   temp_v0 = FUN_002e9ff4(puVar1 + 8);

@@ -27,7 +27,7 @@ typedef struct WorkRecord {
 extern WorkRecord *gameGetPlayerData(void);
 extern void sysMemClear(void *buffer, s32 size);
 extern void FUN_003df7c4(s32 arg);
-extern void FUN_004cc6d4(WorkRecord *record, s32 levels, s32 arg);
+extern void playerAdvanceLevelsAndRecover(WorkRecord *record, s32 levels, s32 arg);
 extern void FUN_004ccf78(s32 arg);
 extern char *strncpy(char *dest, const char *src, u32 count);
 
@@ -42,7 +42,7 @@ void FUN_003dff6c(s32 level, const char *name, const u16 *stats)
     record->name[0x11] = 0;
     FUN_004ccf78(0);
     if (level > 1) {
-        FUN_004cc6d4(record, (s16)(level - 1), 1);
+        playerAdvanceLevelsAndRecover(record, (s16)(level - 1), 1);
     }
     record->stat0 = stats[0];
     record->stat1 = stats[1];

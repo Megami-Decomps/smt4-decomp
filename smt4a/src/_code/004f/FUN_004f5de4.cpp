@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler unrolls the model-slot activation loop. */
 #include "common.h"
 struct Model {u32 unk00;u32 flags;};
 struct ModelHolder {u32 unk00;Model *model;};

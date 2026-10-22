@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0019a46c(int, unsigned char [96], int);
-int resultPairInitialize(unsigned int *, int);
-int FUN_001b5acc(int *);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ev(int *);
 int FUN_00427f6c(int *, int, unsigned char [32]);
 int FUN_00428060(...);
 int FUN_00473c5c(...);
@@ -19,8 +19,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: resultPairInitialize. */
-/* Supplied declaration required: FUN_001b5acc. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: FUN_00427f6c. */
 /* Supplied declaration required: FUN_00428060. */
@@ -44,7 +44,7 @@ void FUN_00473980(unsigned int *param_1,int param_2)
   int temp_v9;
   unsigned int uStack_14;
   
-  FUN_001b5acc(&temp_v5);
+  _ZN18WindowStatusResultC1Ev(&temp_v5);
   FUN_00427f6c(&temp_v9,param_2 + 0x84,temp_v7);
   temp_v5 = temp_v9;
   temp_v6 = uStack_14;
@@ -64,15 +64,15 @@ void FUN_00473980(unsigned int *param_1,int param_2)
         temp_v0 = param_2;
         FUN_00473c5c(param_2,param_2 + 0x5b8,0x20,temp_v1);
         puVar2 = temp_v8;
-        resultPairInitialize(puVar2,temp_v0);
+        _ZN18WindowStatusResultC1Ej(puVar2,temp_v0);
         temp_v5 = *puVar2;
         temp_v6 = puVar2[1];
         FUN_00473c5c(param_2,param_2 + 0x5f8,0x20,temp_v2);
         puVar2 = temp_v8;
-        resultPairInitialize(puVar2,param_2);
+        _ZN18WindowStatusResultC1Ej(puVar2,param_2);
         temp_v5 = *puVar2;
         temp_v6 = puVar2[1];
-        resultPairInitialize(param_1,0);
+        _ZN18WindowStatusResultC1Ej(param_1,0);
         return;
       }
     }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019a46c(unsigned char *, char *, int);
 int svcSleepThread(int, int);
-int FUN_002f5020(int, unsigned char *, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int);
 int FUN_0042cc10(unsigned int *);
 int software_interrupt(int);
 
@@ -37,7 +37,7 @@ extern int *DAT_00646074; /* 0x646074 */
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: svcSleepThread. */
 extern unsigned int wstrlen(char *);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0042cc10. */
 extern int FUN_0043de60(unsigned int *);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -64,7 +64,7 @@ int FUN_0043f440(int *param_1,int param_2,unsigned int param_3,unsigned int para
     temp_v1 = -0x279f8c0d;
   }
   else {
-    FUN_002f5020(DAT_00646070,&LAB_0043dd40,0xc);
+    __aeabi_vec_ctor_nocookie_nodtor(DAT_00646070,&LAB_0043dd40,0xc);
     temp_v1 = DAT_00646070;
     pcVar9 = "soc:U";
     DAT_00646074 = param_1;

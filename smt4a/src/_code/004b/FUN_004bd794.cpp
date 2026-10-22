@@ -30,7 +30,7 @@ typedef struct {
 
 extern unsigned char DAT_0052d780; /* 0x52d780 */
 extern unsigned char DAT_0052d7e0; /* 0x52d7e0 */
-extern unsigned char DAT_0057f25c; /* 0x57f25c */
+extern unsigned char g_callbackOwnerSlots; /* 0x57f25c */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: paramsInit. */
@@ -145,7 +145,7 @@ LAB_004bd854:
     sysPlaySe(0x11f);
   }
   *(unsigned int *)(param_1 + 8) = 1;
-  DAT_0057f25c = FUN_002857b8();
+  g_callbackOwnerSlots = FUN_002857b8();
   return;
 }
 

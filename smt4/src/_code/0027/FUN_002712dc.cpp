@@ -19,8 +19,8 @@ int FUN_0020ffe8(...);
 int FUN_0021b2ec(void);
 int FUN_0021df18(void);
 int mapDestroyOverlayModel(...);
-int FUN_0027efb8(...);
-int FUN_0027f164(...);
+int partyApplyStatusMask(...);
+int partyApplyPercentHealthDamage(...);
 float mathSnapHeading8(float angle);
 int FUN_0027f94c(...);
 int FUN_00282228(...);
@@ -241,8 +241,8 @@ extern int inputIsQuestMenuPressed(void);
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027efb8. */
-/* Supplied declaration required: FUN_0027f164. */
+/* Supplied declaration required: partyApplyStatusMask. */
+/* Supplied declaration required: partyApplyPercentHealthDamage. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f94c. */
@@ -3954,12 +3954,12 @@ LAB_002d472c:
         puVar5 = DAT_0049f920;
       }
       if (!(g_gameState == (unsigned int *)0x5 && puVar5 == (unsigned int *)0x9)) {
-        FUN_0027f164(2,3);
-        FUN_0027efb8(2,5,0xf);
+        partyApplyPercentHealthDamage(2,3);
+        partyApplyStatusMask(2,5,0xf);
       }
       else {
-        FUN_0027f164(2,5);
-        FUN_0027efb8(2,5);
+        partyApplyPercentHealthDamage(2,5);
+        partyApplyStatusMask(2,5);
       }
       piVar22 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;

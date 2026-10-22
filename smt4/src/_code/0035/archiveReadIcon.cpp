@@ -9,7 +9,7 @@ s32 wstrlenU16(const u16 *text);
 s32 archiveTryOpenFile(void **file, u32 archiveFirst, u32 archiveSecond, const ArchiveIconPath *path, u32 mode);
 s32 nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(u32 *readSize, void *file, s64 offset, void *output, u32 size);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(void *object);
-ValidationPair *resultPairInitialize(ValidationPair *result, s32 status);
+ValidationPair *_ZN18WindowStatusResultC1Ej(ValidationPair *result, s32 status);
 }
 
 inline ArchiveIconFile::ArchiveIconFile() : object(NULL)
@@ -36,7 +36,7 @@ inline s32 ArchiveIconFile::tryOpen(ArchiveIconSource source, const ArchiveIconP
 static inline ValidationPair iconReadResult(s32 status)
 {
     ValidationPair result;
-    resultPairInitialize(&result, status);
+    _ZN18WindowStatusResultC1Ej(&result, status);
     return result;
 }
 

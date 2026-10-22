@@ -7,11 +7,11 @@ struct CleanupOwner {
     /* 0x08 */ u32 handle;
 };
 extern CleanupOwner g_engineCleanupOwner;
-void FUN_0041748c(u32 handle);
+void cleanupProcessUpdate(u32 handle);
 
 void engineReleaseCleanupHandle(void)
 {
-    FUN_0041748c(g_engineCleanupOwner.handle);
+    cleanupProcessUpdate(g_engineCleanupOwner.handle);
 }
 
 } /* extern "C" */

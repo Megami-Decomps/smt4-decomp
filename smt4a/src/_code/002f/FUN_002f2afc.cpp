@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler uses different register allocation, frame setup or instruction scheduling than retail. */
 #include "common.h"
 extern "C" {
 extern const u8 DAT_00558490;

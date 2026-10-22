@@ -7,8 +7,8 @@ extern "C" {
 int FUN_002595e0(int);
 int cecProcessForward(int);
 int FUN_002597c0(void);
-int FUN_0026ef04(unsigned int, int);
-int FUN_0026f204(unsigned int, int, unsigned int);
+int uiDrawRecordNameLabels(unsigned int, int);
+int characterInfoPanelPopulate(unsigned int, int, unsigned int);
 int linkHolderApplyFlag(unsigned int, int);
 int FUN_002bd2b4(int, int, int, int);
 int rt_aeabi_memclr(int, int);
@@ -67,8 +67,8 @@ extern int partyPanelExists(unsigned char, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002595e0. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
-/* Supplied declaration required: FUN_0026ef04. */
-/* Supplied declaration required: FUN_0026f204. */
+/* Supplied declaration required: uiDrawRecordNameLabels. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_0028a318(void);
 /* Supplied declaration required: FUN_002bd2b4. */
@@ -97,9 +97,9 @@ unsigned int FUN_002fc7a0(fn_002fc7a0_arg0 *param_1,unsigned int param_2,unsigne
     if (param_1->field_0x120 == 0) {
       rt_aeabi_memclr(param_1->field_0x8 + 0x38,0x14);
     }
-    FUN_0026f204(*(unsigned int *)&param_1->field_0x10,param_1->field_0x8,
+    characterInfoPanelPopulate(*(unsigned int *)&param_1->field_0x10,param_1->field_0x8,
                  *(unsigned int *)&param_1->field_0xac);
-    FUN_0026ef04(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8);
+    uiDrawRecordNameLabels(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8);
     FUN_002595e0(param_1->field_0x8);
     linkHolderApplyFlag(*(unsigned int *)&param_1->field_0x4,1);
     param_1->field_0x100 = 0xffffffff;

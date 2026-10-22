@@ -6,7 +6,7 @@ extern "C" {
 
 int rt_memclr(unsigned int, unsigned int);
 int asdOperatorDeleteArray(unsigned int);
-int FUN_002e6e34(unsigned char [12], int *);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int *);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineStringSetFromRaw(unsigned int, unsigned int);
 int FUN_0030eef0(...);
@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned int rt_malloc(unsigned int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
 /* Supplied declaration required: FUN_0030eef0. */
@@ -43,7 +43,7 @@ int FUN_00123d50(int *param_1,unsigned int param_2,unsigned int param_3)
   int temp_v5;
   int *temp_v6;
   
-  FUN_002e6e34(temp_v3,param_1 + 0x417);
+  _ZN9Obj55b28cC1EPv(temp_v3,param_1 + 0x417);
   (**(romwright_code **)(*param_1 + 0x40))(temp_v4,param_1);
   if (-1 < temp_v4[0]) {
     param_1 = param_1 + 0xe;

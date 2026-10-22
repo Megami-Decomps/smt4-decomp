@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, unsigned int);
+int _ZN9Obj55b28cC1EPv(int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002efbd8(int);
 int FUN_002f02e0(int);
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002efbd8. */
@@ -29,7 +29,7 @@ void FUN_00107cc4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_1c = param_3;
   uStack_18 = param_4;
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(&uStack_20,temp_v0);
+  _ZN9Obj55b28cC1EPv(&uStack_20,temp_v0);
   *(unsigned int *)(param_1 + 0xb8) = param_2;
   if (*(int *)(param_1 + 0xa8) != 0) {
     FUN_002efbd8(param_1);

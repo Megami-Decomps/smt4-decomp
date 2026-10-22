@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(...);
 int uiSpriteBankApplyPreset(...);
 int scrScriptProcessStartEntry(...);
-int FUN_0040a55c(...);
+int statsSetFlag(...);
 
 int FUN_00148bb8(...);
 int FUN_00163aa4(unsigned int *);
@@ -50,8 +50,8 @@ extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: messageDismissNumericBanner. */
-extern int FUN_0040a4cc(unsigned int);
-/* Supplied declaration required: FUN_0040a55c. */
+extern int statsTestFlag(unsigned int);
+/* Supplied declaration required: statsSetFlag. */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_00496a0c. */
@@ -214,7 +214,7 @@ void FUN_004995b0(unsigned int *param_1)
     }
     temp_v4 = temp_v0;
     FUN_00148bb8(temp_v0,1);
-    if ((temp_v4 == 0) || (temp_v3 = FUN_0040a4cc(temp_v0), temp_v3 != 0)) {
+    if ((temp_v4 == 0) || (temp_v3 = statsTestFlag(temp_v0), temp_v3 != 0)) {
       if (!(param_1[4] == 4 || param_1[4] == 1)) {
         temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049999c);
         scrScriptProcessStartEntry(param_1[99],temp_v1);
@@ -234,7 +234,7 @@ void FUN_004995b0(unsigned int *param_1)
       param_1[2] = 1;
       return;
     }
-    FUN_0040a55c(temp_v0,1);
+    statsSetFlag(temp_v0,1);
     temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_004999a8);
     scrScriptProcessStartEntry(param_1[99],temp_v1);
     scrRunOpcodesStub(param_1[99]);

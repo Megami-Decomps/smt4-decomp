@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int resultPairInitialize(void);
+int _ZN18WindowStatusResultC1Ej(void);
 void aocFileContentPrepareMountBuffer(AocPollOutput*, void*, u32);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -14,8 +14,8 @@ typedef struct {
 } param_3_stack;
 
 extern int objGetFlagBit0(int);
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned int *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 /* Supplied declaration required: aocFileContentPrepareMountBuffer. */
 
 
@@ -39,11 +39,11 @@ void FUN_0047402c(unsigned int *param_1,int param_2,unsigned int *param_3)
   unsigned int temp_v7 [3];
   
   temp_v6 = temp_v6 & 0xffffff00;
-  puVar1 = (unsigned int *)FUN_001b5acc(&uStack_34);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(&uStack_34);
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = temp_v7;
-  resultPairInitialize();
+  _ZN18WindowStatusResultC1Ej();
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;

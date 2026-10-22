@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045b4d0(int *, int *, int, int);
 int FUN_0050769c(unsigned int, int);
 
@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char LAB_0045b50c; /* 0x45b50c */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int setMinus1ReturnPtr(unsigned short *);
 /* Supplied declaration required: FUN_0045b4d0. */
 /* Supplied declaration required: FUN_0050769c. */
@@ -80,13 +80,13 @@ void FUN_005078e4(int *param_1,unsigned int param_2,int *param_3,int param_4,int
         puVar2[0x10] = (short)unaff_r5;
         puVar2[0x11] = (short)unaff_r5;
         puVar2 = puVar2 + 0x12;
-        FUN_002f5020(puVar2,setMinus1ReturnPtr,4,0xc);
+        __aeabi_vec_ctor_nocookie_nodtor(puVar2,setMinus1ReturnPtr,4,0xc);
         temp_v1 = setMinus1ReturnPtr(puVar2 + 0x18);
         *(unsigned char *)(temp_v1 + 0x94) = temp_v0;
         temp_v1 = temp_v1 + 0x98;
-        FUN_002f5020(temp_v1,&LAB_0045b50c,0x18,3);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_0045b50c,0x18,3);
         temp_v1 = temp_v1 + 0x48;
-        FUN_002f5020(temp_v1,setMinus1ReturnPtr,4,3);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,setMinus1ReturnPtr,4,3);
         *(unsigned int *)(temp_v1 + 0xc) = unaff_r5;
         *(unsigned int *)(temp_v1 + 0x10) = unaff_r5;
         *(unsigned int *)(temp_v1 + 0x14) = unaff_r5;

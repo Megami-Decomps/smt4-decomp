@@ -13,7 +13,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern float FUN_00282c30(unsigned int, unsigned int);
-extern unsigned int FUN_00295e24(unsigned short, int, int);
+extern unsigned int devilCalculateRankCost(unsigned short, int, int);
 extern unsigned int dataTable9EntryOrZero(int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
@@ -61,7 +61,7 @@ void FUN_00296474(int param_1)
     temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x9108);
     if ((-1 < temp_v10) && (temp_v7 = gameGetUnitRecord(temp_v10), temp_v7 != 0)) {
       temp_v9 = param_1 + temp_v10 * 2;
-      temp_v4 = FUN_00295e24(*(unsigned short *)(temp_v7 + 0x46),
+      temp_v4 = devilCalculateRankCost(*(unsigned short *)(temp_v7 + 0x46),
                            (unsigned int)*(unsigned char *)(temp_v7 + 0x48) + (int)*(short *)(temp_v9 + 0xd49c),
                            (int)*(char *)(param_1 + temp_v10 + 0xd531));
       if (*(char *)(param_1 + temp_v10 + 0xd4ff) != '\0') {
@@ -93,7 +93,7 @@ void FUN_00296474(int param_1)
          (temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x90f0), -1 < temp_v10)))) &&
        (temp_v7 = gameGetUnitRecord(temp_v10), temp_v7 != 0)) {
       temp_v9 = param_1 + temp_v10 * 2;
-      temp_v4 = FUN_00295e24(*(unsigned short *)(temp_v7 + 0x46),
+      temp_v4 = devilCalculateRankCost(*(unsigned short *)(temp_v7 + 0x46),
                            (unsigned int)*(unsigned char *)(temp_v7 + 0x48) + (int)*(short *)(temp_v9 + 0xd49c),
                            (int)*(char *)(param_1 + temp_v10 + 0xd531));
       if (*(char *)(param_1 + temp_v10 + 0xd4ff) != '\0') {

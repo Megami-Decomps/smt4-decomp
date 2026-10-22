@@ -1,4 +1,4 @@
-/* NON_MATCHING: the state switch compiles to a jump table whose words differ in fdiff (retail: absolute addresses, build: __switch$$-relative relocs); mechanical split of the romwright decompile of the merged function, not yet rewritten. */
+/* NON_MATCHING: switch relocations are now recognized, but the draft still has incorrect scalar/float callee prototypes and unrecovered vector/stack values; retail has 782 disassembly rows versus 566 built. */
 #include "common.h"
 extern "C" {
 
@@ -58,26 +58,6 @@ extern int DAT_0049fa08; /* 0x49fa08 */
 extern int DAT_0049fa0c; /* 0x49fa0c */
 extern int DAT_0049fa10; /* 0x49fa10 */
 
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-static float romwright_sqrt_4(float value)
-{
-}
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f87d4. */
 /* Supplied declaration required: FUN_00208504. */
 /* Supplied declaration required: FUN_0021b0f0. */
@@ -167,12 +147,12 @@ void FUN_003079b4(void)
     }
     temp_v26 = temp_v24 * 0.2f;
     in_fpscr = temp_v0 | ((unsigned int)(temp_v26 <= temp_v24) << 0x1d);
-    if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
+    if (!(u8)(in_fpscr >> 0x1d)) {
       DAT_004474f4[6] = *(int *)(g_lmapScene + 0x50);
     }
     else {
       in_fpscr = temp_v0 | ((unsigned int)(0.0f <= temp_v25) << 0x1d);
-      if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
+      if (!(u8)(in_fpscr >> 0x1d)) {
         temp_v26 = (float)DAT_004474f4[6] - temp_v26;
       }
       else {

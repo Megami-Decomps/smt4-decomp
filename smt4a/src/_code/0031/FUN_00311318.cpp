@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00130e3c(int [2], int, int *);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int _ZN9Obj55aff4C1Ev(unsigned char [8]);
 int onlineFormatWideString(unsigned char [8], unsigned char *, unsigned int, int);
 int lessU32(...);
@@ -29,7 +29,7 @@ extern unsigned char LAB_003113d8; /* 0x3113d8 */
 extern unsigned int FUN_00113fa0(int, unsigned char *);
 /* Supplied declaration required: FUN_00130e3c. */
 extern int operatorNew(unsigned int);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: onlineFormatWideString. */
 /* Supplied declaration required: lessU32. */
@@ -95,7 +95,7 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
     temp_v5 = temp_v12;
     FUN_00130e3c(temp_v4,param_1 + 0xc,&temp_v5);
     *(unsigned int *)(temp_v4[0] + 0x14) = temp_v1;
-    onlineStringDestroy(temp_v7);
+    _ZN9Obj55aff4D1Ev(temp_v7);
   }
   return temp_v1;
 }

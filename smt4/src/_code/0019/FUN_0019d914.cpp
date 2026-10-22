@@ -1,2 +1,8 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0023e52c's literal pool; not written yet. */
-#include "common.h"
+#include "shard/Shard0034.h"
+
+/* Compare two record pointers by their floating-point sort keys. */
+extern "C" s32 FUN_0019d914(const FloatSortRecord *const *left,
+                           const FloatSortRecord *const *right)
+{
+    return (s32)((*left)->key - (*right)->key);
+}

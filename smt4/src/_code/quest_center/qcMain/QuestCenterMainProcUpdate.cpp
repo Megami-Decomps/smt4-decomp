@@ -41,7 +41,7 @@ extern int DAT_0049fc18; /* 0x49fc18 */
 /* Supplied declaration required: buttonHelpTexturesUnref. */
 extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
-extern int FUN_00287314(unsigned int *);
+extern int _ZN14SelectionFlagsC1Ev(unsigned int *);
 /* Supplied declaration required: FUN_00287328. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00287528. */
@@ -179,7 +179,7 @@ LAB_001a9c38:
     temp_v2 = 0;
     if (puVar3 != (unsigned int *)0x0) {
       *puVar3 = 0;
-      temp_v2 = FUN_00287314(puVar3 + 0x196);
+      temp_v2 = _ZN14SelectionFlagsC1Ev(puVar3 + 0x196);
       temp_v2 = temp_v2 - 0x658;
     }
     *(int *)(temp_v0 + 0x1c) = temp_v2;

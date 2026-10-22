@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001eb874(unsigned int, unsigned int, int, int, int, int);
-int FUN_00259838(unsigned int, int, int);
+int uiDrawCenteredResourceText(unsigned int, int, int);
 int FUN_002bed3c(void);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
 int FUN_002bf4f8(int, int);
@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_001eb874. */
 extern unsigned int FUN_0025981c(void);
-/* Supplied declaration required: FUN_00259838. */
+/* Supplied declaration required: uiDrawCenteredResourceText. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -69,7 +69,7 @@ unsigned int FUN_00210e38(void)
   if (*(char *)(temp_v0 + 0x128) != '\0') {
     temp_v2 = FUN_0025981c();
     FUN_002ec210(temp_v0 + 0x3c,0,0,temp_v2,1);
-    FUN_00259838(*(unsigned int *)(temp_v0 + 0x10),temp_v0 + 0x50,0);
+    uiDrawCenteredResourceText(*(unsigned int *)(temp_v0 + 0x10),temp_v0 + 0x50,0);
     FUN_001eb874(*(unsigned int *)(temp_v0 + 0xc),*(unsigned int *)(temp_v0 + 8),temp_v0 + 100,
                  (int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0);
     if (*(int *)(temp_v0 + 0x10c) == 1) {

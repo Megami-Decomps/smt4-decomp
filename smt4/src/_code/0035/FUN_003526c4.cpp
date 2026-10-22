@@ -5,7 +5,7 @@
 extern "C" {
 
 int recordValidatePair(unsigned int, int, unsigned int);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_003523a8(unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: recordValidatePair. */
 extern int FUN_0023a1f8(unsigned int);
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_003523a8. */
 
 
@@ -31,12 +31,12 @@ void FUN_003526c4(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   temp_v0 = FUN_0023a1f8(param_2);
   if (temp_v0 < 0) {
-    resultPairInitialize(param_1,temp_v0);
+    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
     return;
   }
   temp_v1 = param_2;
   FUN_003523a8(param_2,param_3,param_4,param_5);
-  resultPairInitialize(&temp_v2,temp_v1);
+  _ZN18WindowStatusResultC1Ej(&temp_v2,temp_v1);
   recordValidatePair(param_2,temp_v2,uStack_1c);
   *param_1 = temp_v2;
   param_1[1] = uStack_1c;

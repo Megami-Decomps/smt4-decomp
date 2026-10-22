@@ -5,12 +5,12 @@
 
 extern "C" {
 
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int FUN_00167860(...);
 int FUN_00184310(void);
 int dataTable04FindById(void);
 int FUN_00344cd0(...);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int dataRecordGetKindValue(void);
 int playerSecondaryGetKindValue(void);
 int playerPrimaryGetKindValue(void);
@@ -87,7 +87,7 @@ extern unsigned int DAT_00573bfc; /* 0x573bfc */
 /* Supplied declaration required: FUN_00162790. */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(int);
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
 /* Supplied declaration required: FUN_00180310. */
@@ -111,7 +111,7 @@ extern unsigned int FUN_002f8e98(unsigned int);
 extern int FUN_002fa75c(void);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(unsigned int);
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: dataRecordGetKindValue. */
 /* Supplied declaration required: playerSecondaryGetKindValue. */
 /* Supplied declaration required: playerPrimaryGetKindValue. */
@@ -585,7 +585,7 @@ LAB_0028d9e0:
           temp_v4 = FUN_001834a4(0xd,0x8c);
           if (temp_v17[2] != 0) {
             if ((temp_v13) && (*temp_v27 >= 0x15)) {
-              FUN_001676b0(4,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+              effectDispatchSelector(4,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x49);
             }
             else {
@@ -594,7 +594,7 @@ LAB_0028d9e0:
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x49,
                            temp_v32);
               temp_v14[0] = (unsigned char *)0x0;
-              FUN_00389d9c(temp_v18,temp_v15,
+              statDrawClampedDelta(temp_v18,temp_v15,
                            (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x49);
             }
@@ -983,7 +983,7 @@ LAB_0028d9e0:
     temp_v3 = FUN_001834a4(0xd,0xa9);
     if (temp_v13) {
       if ((temp_v17[0] != 0) && (*temp_v27 >= 0x15)) {
-        FUN_001676b0(4,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+        effectDispatchSelector(4,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,0x74);
       }
       else {
@@ -992,7 +992,7 @@ LAB_0028d9e0:
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,0x74,
                      temp_v32);
         temp_v14[0] = (unsigned char *)0x0;
-        FUN_00389d9c(temp_v18,temp_v15,
+        statDrawClampedDelta(temp_v18,temp_v15,
                      (int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,0x74);
       }

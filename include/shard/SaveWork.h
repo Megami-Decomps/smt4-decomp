@@ -16,4 +16,9 @@ typedef struct SaveWork {
     /* 0x0BD8 */ u8 unkBD8[1];
 } SaveWork;
 
+struct MapTriggerFlagView {
+    /* 0x000 */ u8 unk000[0x7D4];
+    /* 0x7D4 */ u32 flags[1];
+};
+
 #endif

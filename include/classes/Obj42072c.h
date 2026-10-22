@@ -99,4 +99,28 @@ private:
     /* 0x7A0 */ Obj42072cTail tail;
 };
 
+/* The vertex API's load-array setup views. */
+struct VertexLoadArrayEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 index;
+};
+struct VertexLoadArrayInput {
+    /* 0x00 */ u8 count;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u8 formats[12];
+    /* 0x10 */ const VertexLoadArrayEntry *entries[12];
+};
+struct VertexLoadArrayData {
+    /* 0x00 */ const void *buffer;
+    /* 0x04 */ u8 formats[12];
+    /* 0x10 */ u32 elementSizes[12];
+    /* 0x40 */ u32 indices[12];
+};
+struct VertexLoadArrayBank {
+    /* 0x000 */ u32 dirty;
+    /* 0x004 */ u8 unk004[0x15C];
+    /* 0x160 */ VertexLoadArrayData arrays[12];
+};
+typedef char VertexLoadArrayDataSizeCheck[sizeof(VertexLoadArrayData) == 0x70 ? 1 : -1];
+
 #endif

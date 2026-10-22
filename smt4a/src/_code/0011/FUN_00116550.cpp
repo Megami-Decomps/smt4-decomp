@@ -9,7 +9,7 @@ int operatorDeleteArray2(void);
 
 extern unsigned char DAT_00559ce4; /* 0x559ce4 */
 
-extern int onlineStringDestroy(int);
+extern int _ZN9Obj55aff4D1Ev(int);
 extern int FUN_002ea00c(int);
 extern int destroyObj0055ae64(int);
 extern int strDestroy(unsigned int *);
@@ -30,7 +30,7 @@ void FUN_00116550(unsigned int *param_1)
   }
   temp_v0 = strDestroy(param_1 + 0x62);
   temp_v0 = FUN_002fb028(temp_v0 - 0x78);
-  temp_v0 = onlineStringDestroy(temp_v0 - 0x20);
+  temp_v0 = _ZN9Obj55aff4D1Ev(temp_v0 - 0x20);
   temp_v0 = destroyObj0055ae64(temp_v0 - 0x18);
   temp_v0 = FUN_002ea00c(temp_v0 - 0x60);
   FUN_002ecac4(temp_v0 - 0x78);

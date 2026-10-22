@@ -7,7 +7,12 @@ struct ProjectionLens {
     f32 nearClip; // 0x04
     f32 farClip; // 0x08
     f32 aspect; // 0x0c
-    f32 fieldOfView; // 0x10, radians
+    union {
+        f32 fieldOfView; // 0x10, radians for the perspective lens
+        f32 windowSpan;  // 0x10, extent for the off-center lens
+    };
+    f32 centerX; // 0x14, off-center lens only
+    f32 centerY; // 0x18, off-center lens only
 };
 struct ProjectionCamera {
     u8 unk00[8];

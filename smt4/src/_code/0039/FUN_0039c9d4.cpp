@@ -1,4 +1,3 @@
-/* NON_MATCHING: the state stores are scheduled differently (the constant is materialised in r1 after the flags load, and the second store uses a writeback address). */
 #include "common.h"
 
 extern "C" {

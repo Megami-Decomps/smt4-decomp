@@ -8,7 +8,7 @@ int FUN_0013c174(...);
 int asdTMTexTableLoadSprites(...);
 int FUN_0014afd0(...);
 int FUN_0016ccb4(...);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_001d0fcc(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
@@ -31,8 +31,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_0014afd0. */
 extern unsigned int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
@@ -66,11 +66,11 @@ void FUN_004791d4(int param_1)
   FUN_001d0fcc(temp_v5,g_aocSystem);
   FUN_0016ccb4(g_aocMain + 0x80);
   temp_v5[0] = 0;
-  puVar2 = (unsigned int *)FUN_001b5acc(temp_v6);
+  puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v6);
   puVar2[2] = 0;
   puVar2[3] = 0;
   puVar3 = temp_v8;
-  resultPairInitialize(puVar3,0);
+  _ZN18WindowStatusResultC1Ej(puVar3,0);
   temp_v1 = *puVar3;
   temp_v2 = puVar3[1];
   *puVar2 = temp_v1;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00227048(u32 handle, u8 *member);
+void requestImageDraw(u32 handle, u8 *member);
 
 typedef struct Object {
     /* 0x00 */ u8 unk00[8];
@@ -14,14 +14,14 @@ typedef struct Object {
 
 extern Object *g_campCecEdit;
 
-/* Passes the active camp edit object's handle and member to FUN_00227048. */
+/* Passes the active camp edit object's handle and member to requestImageDraw. */
 u32 FUN_002a27e4(void)
 {
     Object *object;
 
     object = g_campCecEdit;
     if (object->active != 0) {
-        FUN_00227048(object->handle, object->member24);
+        requestImageDraw(object->handle, object->member24);
     }
     return 0;
 }

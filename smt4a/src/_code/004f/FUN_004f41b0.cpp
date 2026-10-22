@@ -109,10 +109,10 @@ extern unsigned int DAT_005e1520; /* 0x5e1520 */
 extern unsigned int DAT_005e1524; /* 0x5e1524 */
 extern unsigned int DAT_005e1528; /* 0x5e1528 */
 extern unsigned int DAT_005e152c; /* 0x5e152c */
-extern unsigned int DAT_005e1530; /* 0x5e1530 */
+extern unsigned int g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern unsigned int DAT_005e1534; /* 0x5e1534 */
 extern unsigned int DAT_005e1538; /* 0x5e1538 */
-extern unsigned int DAT_005e153c; /* 0x5e153c */
+extern unsigned int g_cameraAlternateProgressPrevious; /* 0x5e153c */
 extern unsigned int DAT_005e1540; /* 0x5e1540 */
 extern unsigned int DAT_005e1544; /* 0x5e1544 */
 
@@ -161,7 +161,7 @@ void FUN_004f41b0(fn_004f41b0_arg0 *param_1,unsigned int param_2,unsigned int pa
     DAT_005e1518 = param_1->field_0x6c4;
     DAT_005e151c = param_1->field_0x6c8;
     DAT_005e1520 = param_1->field_0x6cc;
-    DAT_005e1530 = param_1->field_0x750;
+    g_cameraAlternateProgressStart = param_1->field_0x750;
     DAT_005e1534 = param_1->field_0x754;
     DAT_005e1538 = param_1->field_0x758;
     param_1->field_0x5f4 = 0;
@@ -176,7 +176,7 @@ void FUN_004f41b0(fn_004f41b0_arg0 *param_1,unsigned int param_2,unsigned int pa
     DAT_005e1524 = 0;
     DAT_005e1544 = 0;
     DAT_005e1540 = 0;
-    DAT_005e153c = 0;
+    g_cameraAlternateProgressPrevious = 0;
     param_1->field_0x6f0 = 1;
     param_1->field_0x6ec = param_3;
     param_1->field_0x64c = param_1->field_0x64c | 0x10;

@@ -8,7 +8,7 @@ int FUN_002009c4(int);
 int FUN_00211868(int, int);
 int FUN_00244ee0(int);
 int FUN_0025cc34(void);
-int FUN_0025cc8c(void);
+int playerGetMappedCategory(void);
 int communicationBeginTransition(int);
 int communicationSetResultPointer(void);
 void FUN_0026c7b8(const unsigned char* text);
@@ -35,7 +35,7 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 /* Supplied declaration required: FUN_00211868. */
 /* Supplied declaration required: FUN_00244ee0. */
 /* Supplied declaration required: FUN_0025cc34. */
-/* Supplied declaration required: FUN_0025cc8c. */
+/* Supplied declaration required: playerGetMappedCategory. */
 /* Supplied declaration required: communicationBeginTransition. */
 /* Supplied declaration required: communicationSetResultPointer. */
 extern int FUN_0029efa8(int);
@@ -88,7 +88,7 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       else {
         temp_v5 = (short)(int)temp_v6;
         textFormatBuffer(temp_v6,&LAB_00227608);
-        FUN_0025cc8c();
+        playerGetMappedCategory();
       }
     }
     else if (param_6 != 0) {

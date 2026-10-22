@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int resultPairInitialize(unsigned int, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int, int);
 
 /* stack frame of param_3: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_0035fd5c(int *, unsigned int *, unsigned int, unsigned int);
 extern unsigned int ll_sdiv(unsigned int, unsigned int, unsigned int, unsigned int);
 
@@ -44,7 +44,7 @@ void FUN_003df850(unsigned int param_1,int *param_2,unsigned int *param_3)
     temp_v0 = 0;
     *param_3 = temp_v1;
   }
-  resultPairInitialize(param_1,temp_v0);
+  _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
   return;
 }
 

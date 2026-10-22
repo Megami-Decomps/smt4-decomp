@@ -12,8 +12,8 @@ extern unsigned char DAT_0055c6b0; /* 0x55c6b0 */
 
 /* Supplied declaration required: FUN_0047c65c. */
 /* Supplied declaration required: timeInitializeActiveState. */
-extern int flagsDESet(int);
-extern unsigned int *FUN_004d0b3c(int);
+extern int _ZN14SelectionFlagsC1Ev(int);
+extern unsigned int *_ZN9Obj422594C1Ev(int);
 
 
 unsigned int * FUN_0047c8b8(unsigned int *param_1)
@@ -26,9 +26,9 @@ unsigned int * FUN_0047c8b8(unsigned int *param_1)
   *param_1 = 0;
   temp_v0 = timeInitializeActiveState(param_1 + 0x84);
   temp_v0 = timeInitializeActiveState(temp_v0 + 0x14);
-  temp_v0 = flagsDESet(temp_v0 + 0x1c);
+  temp_v0 = _ZN14SelectionFlagsC1Ev(temp_v0 + 0x1c);
   *(unsigned char **)(temp_v0 + 0x74) = &DAT_0055c6a4;
-  puVar2 = (unsigned int *)FUN_004d0b3c(temp_v0 + 0xa8);
+  puVar2 = (unsigned int *)_ZN9Obj422594C1Ev(temp_v0 + 0xa8);
   *puVar2 = (unsigned int)&DAT_0055c6b0;
   puVar2[0x1a] = 0;
   puVar2[0x1b] = 0;

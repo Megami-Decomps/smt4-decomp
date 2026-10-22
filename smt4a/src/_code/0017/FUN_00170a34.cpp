@@ -21,7 +21,7 @@ int nn_os_LightEvent_Signal(unsigned int *);
 int nn_os_LightEvent_TryWait(void);
 int svcSleepThread(int, int);
 int FUN_002e3140(void);
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -65,7 +65,7 @@ extern int FUN_0018bc38(unsigned int, unsigned int *);
 /* Supplied declaration required: nn_os_LightEvent_TryWait. */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -87,7 +87,7 @@ void FUN_00170a34(void)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  FUN_002f5020(&temp_v6,&LAB_0018b630,4,3);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v6,&LAB_0018b630,4,3);
   temp_v6 = DAT_006416a8;
   temp_v7 = DAT_006416ac;
   temp_v8 = DAT_006416b0;

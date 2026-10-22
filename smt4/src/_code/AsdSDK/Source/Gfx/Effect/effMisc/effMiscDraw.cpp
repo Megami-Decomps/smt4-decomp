@@ -4,7 +4,7 @@
 extern "C" {
 
 void FUN_002c39a4(void);
-void FUN_002c4f8c(EffRenderState *ctx, u32 value);
+void effectRestoreSavedRenderPairs(EffRenderState *ctx, u32 value);
 void layoutApplyForState(EffRenderState *ctx);
 
 extern EffMiscKind g_effMiscKinds[];
@@ -26,7 +26,7 @@ void effMiscDraw(EffMiscObject *obj)
     if (mode == 3 || mode == 4) {
         layoutApplyForState(g_titleScene);
     } else if (mode == 5) {
-        FUN_002c4f8c(g_titleScene, saved);
+        effectRestoreSavedRenderPairs(g_titleScene, saved);
     }
 }
 

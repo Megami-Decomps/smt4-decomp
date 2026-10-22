@@ -15,7 +15,7 @@ int FUN_0030c6e4(unsigned char [8], int);
 int vectorAt24(int, unsigned int);
 int FUN_0030c720(...);
 int holderSetPairAndFlush(...);
-int FUN_0030c9cc(unsigned char [8]);
+int _ZN9Obj55a328C1Ev(unsigned char [8]);
 int FUN_0030d1ac(unsigned char [8]);
 int _ZN9Obj55aae4D1Ev(unsigned char [8]);
 
@@ -60,7 +60,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 extern int vectorSize24B(void);
 extern unsigned int vectorCount4_0030c774(void);
 /* Supplied declaration required: holderSetPairAndFlush. */
-/* Supplied declaration required: FUN_0030c9cc. */
+/* Supplied declaration required: _ZN9Obj55a328C1Ev. */
 /* Supplied declaration required: FUN_0030d1ac. */
 extern int FUN_0030d420(unsigned int *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aae4D1Ev. */
@@ -151,7 +151,7 @@ void FUN_0012c53c(int param_1)
               temp_v0 = temp_v0 - 0x10;
             }
             *(int *)(param_1 + 0x40c) = temp_v0;
-            FUN_0030c9cc(temp_v12);
+            _ZN9Obj55a328C1Ev(temp_v12);
             temp_v0 = temp_v22;
             vectorAt24(temp_v22,*(unsigned int *)(param_1 + 0x3f4));
             temp_v14 = *(unsigned int *)(temp_v0 + 0x14);

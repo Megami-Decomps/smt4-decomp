@@ -9,6 +9,13 @@ extern "C" void asdOperatorDeleteArray(void *block);
 class Obj55984cChild {
 public:
     virtual ~Obj55984cChild();
+    virtual void vfunc08();
+    virtual void vfunc0c();
+    virtual void vfunc10();
+    virtual void vfunc14();
+    virtual void vfunc18();
+    virtual s32 handle(const void *buffer, u32 argument, u32 size); /* +0x1C */
+    virtual void notify(const void *buffer, u32 argument);         /* +0x20 */
 };
 
 /* One array element: a pointer with nothing to destroy. */
@@ -44,6 +51,15 @@ class Obj55984c {
 public:
     Obj55984c();
     virtual ~Obj55984c();
+    Obj55984cChild *childAt(u32 index) const { return children.begin[index].child; }
+    Obj55984cChild *extraChild() const { return extra; }
+
+    /* Routing information embedded in an incoming online packet. */
+    struct Packet {
+        /* 0x00 */ u8 unk00[0x24];
+        /* 0x24 */ u8 childIndex;
+        /* 0x25 */ u8 kind;
+    };
 
 protected:
     /* 0x00: vtable pointer */

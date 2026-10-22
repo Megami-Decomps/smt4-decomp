@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00117d74(int, int, int);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int vectorCopyHeader(int, unsigned int);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(int, unsigned int);
@@ -25,7 +25,7 @@ extern unsigned char LAB_0010f91d; /* 0x10f91d */
 /* Supplied declaration required: FUN_00117d74. */
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: vectorCopyHeader. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea3c0. */
@@ -50,7 +50,7 @@ void FUN_0010f730(int param_1)
   temp_v2 = FUN_002ea100(temp_v3,*(unsigned int *)(param_1 + 0x88));
   temp_v0 = *(int *)(param_1 + 0xd8);
   FUN_00117d74(temp_v0,param_1 + 0x158,param_1 + 0x80);
-  onlineStringDestroy(temp_v3);
+  _ZN9Obj55aff4D1Ev(temp_v3);
   if (temp_v0 != 1) {
     temp_v2 = 0x8001000d;
     temp_v1 = FUN_002e7908(temp_v5,(unsigned int *)&temp_v2);

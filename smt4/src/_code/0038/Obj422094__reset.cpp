@@ -1,13 +1,9 @@
-#include "common.h"
+#include "classes/Obj422094.h"
 
-extern "C" {
+extern "C" void uiStateResetHook();
 
-void FUN_00381258(void);
-
-/* Forwards to FUN_00381258, the function that follows it. */
-void _ZN9Obj4220945resetEv(void)
+/* Forwards to the empty hook immediately following this method in retail. */
+void Obj422094::reset()
 {
-    FUN_00381258();
+    uiStateResetHook();
 }
-
-} /* extern "C" */

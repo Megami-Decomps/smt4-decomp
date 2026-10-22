@@ -60,7 +60,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 extern int flaggedValueHolderGetTotal(int *);
 extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: FUN_004d05c4. */
-extern unsigned int *FUN_004d0b3c(void);
+extern unsigned int *_ZN9Obj422594C1Ev(void);
 
 
 void FUN_004a2c00(int *param_1)
@@ -101,7 +101,7 @@ void FUN_004a2c00(int *param_1)
   asdOperatorNew();
   puVar5 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
-    puVar5 = (unsigned int *)FUN_004d0b3c();
+    puVar5 = (unsigned int *)_ZN9Obj422594C1Ev();
     *puVar5 = (unsigned int)&DAT_0055c90c;
   }
   param_1[0x213] = (int)puVar5;

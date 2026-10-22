@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 DAT_0055c11c;
+extern u8 _ZTV9Obj421c90[];
 
 void vtblHandleInit55C11C(VtblHandle *obj)
 {
-    obj->vtbl = &DAT_0055c11c;
+    obj->vtbl = _ZTV9Obj421c90 + 8;
     obj->handle = 0;
 }
 

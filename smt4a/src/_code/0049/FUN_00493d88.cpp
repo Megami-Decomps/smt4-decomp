@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_00192718(unsigned short);
-extern int FUN_0049c7a0(unsigned short);
+extern int contentGetUpgradedKindValue(unsigned short);
 extern int FUN_0049c9a0(unsigned short *);
 
 
@@ -24,11 +24,11 @@ int FUN_00493d88(unsigned short *param_1,unsigned short *param_2)
   temp_v4 = 0;
   temp_v2 = FUN_00192718(temp_v0);
   if ((temp_v2 == 2 || temp_v2 == 3) || temp_v2 == 8) {
-    temp_v3 = FUN_0049c7a0(temp_v0);
+    temp_v3 = contentGetUpgradedKindValue(temp_v0);
   }
   temp_v2 = FUN_00192718(temp_v1);
   if ((temp_v2 == 2 || temp_v2 == 3) || temp_v2 == 8) {
-    temp_v4 = FUN_0049c7a0(temp_v1);
+    temp_v4 = contentGetUpgradedKindValue(temp_v1);
   }
   temp_v3 = temp_v3 - temp_v4;
   if (temp_v3 == 0) {

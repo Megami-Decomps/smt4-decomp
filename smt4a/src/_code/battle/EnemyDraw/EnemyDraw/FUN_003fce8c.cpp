@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemoryAllocTracked(...);
 int asdMemoryAllocAligned(...);
-int FUN_002f5020(unsigned char *, int, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, int, int, int);
 int FUN_0042c8f8(...);
 int nn_gr_CTR_Shader_SearchBindSymbol(...);
 
@@ -19,7 +19,7 @@ extern unsigned char DAT_005cc554; /* 0x5cc554 */
 
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0042c8f8. */
 extern int animationCountFilteredRanges(int, int, unsigned int);
 extern unsigned int resourceGetId(int);
@@ -100,7 +100,7 @@ void FUN_003fce8c(int param_1,int param_2)
     nn_gr_CTR_Shader_SearchBindSymbol(&DAT_005cc554,&uStack_50,0x41983c);
     nn_gr_CTR_Shader_SearchBindSymbol(&DAT_005cc554,&uStack_48,0x419844);
     puVar2 = &uStack_8c;
-    FUN_002f5020(puVar2,0x5157dc,1,0xc);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar2,0x5157dc,1,0xc);
     puVar2 = puVar2 + -4;
     *puVar2 = 0;
     temp_v4 = 0;

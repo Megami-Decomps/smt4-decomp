@@ -4,12 +4,12 @@ extern "C" {
 extern const u8 _ZTV9Obj558b24[];
 struct String { u8 storage[8]; u16 kind; u8 reserved[2]; };
 struct Object { const void *vtable; String first; String second; u32 value; u8 active; };
-void *onlineStringConstruct(void *string, const char *value);
+void *_ZN9Obj55aff4C1EPKc(void *string, const char *value);
 void FUN_002f3378(Object *object) {
     object->vtable = _ZTV9Obj558b24 + 8;
-    onlineStringConstruct(object->first.storage, "");
+    _ZN9Obj55aff4C1EPKc(object->first.storage, "");
     object->first.kind = 0;
-    onlineStringConstruct(object->second.storage, "");
+    _ZN9Obj55aff4C1EPKc(object->second.storage, "");
     object->second.kind = 0;
     object->second.reserved[0] = 0;
     object->second.reserved[1] = 0;

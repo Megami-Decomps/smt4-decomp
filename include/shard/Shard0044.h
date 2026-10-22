@@ -28,4 +28,20 @@ typedef struct RangeOwner {
     /* 0x168 */ u32 *end;
 } RangeOwner;
 
+struct MaterialFlagRange {
+    /* 0x00 */ u32 *begin;
+    /* 0x04 */ u32 *end;
+};
+
+struct MaterialFlagArrays {
+    /* 0x00 */ u8 unk00[0x6c];
+    /* 0x6C */ MaterialFlagRange first;
+    /* 0x74 */ u8 unk74[0xc];
+    /* 0x80 */ MaterialFlagRange second;
+    /* 0x88 */ u8 unk88[8];
+    /* 0x90 */ MaterialFlagRange third;
+};
+
+typedef char MaterialFlagArraysSizeCheck[sizeof(MaterialFlagArrays) == 0x98 ? 1 : -1];
+
 #endif

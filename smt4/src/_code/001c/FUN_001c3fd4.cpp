@@ -14,7 +14,7 @@ int partyFindActiveSlotById(...);
 int FUN_0029be5c(...);
 int FUN_0029bed8(...);
 int FUN_0029c1c8(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int FUN_0029e17c(void);
 int eventQueueAddUnique(...);
 int FUN_002bee58(...);
@@ -192,7 +192,7 @@ extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029c4ac. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: beginStatusPanelClose. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029d684. */
@@ -2707,7 +2707,7 @@ LAB_001c7c50:
           *(unsigned int *)(temp_v4 + 0x80) = temp_v17;
           *(unsigned int *)(temp_v4 + 0x84) = temp_v18;
           rt_memcpy_w(temp_v4 + 0x8c,temp_v1 + 0xbdc,0x500);
-          FUN_0029c6b0(temp_v4);
+          unitRecalculateEffectiveStats(temp_v4);
           *(unsigned short *)(temp_v4 + 0x2a) = *(unsigned short *)(temp_v4 + 0xe);
           *(unsigned short *)(temp_v4 + 0x2c) = *(unsigned short *)(temp_v4 + 0x10);
           temp_v7 = FUN_0029c0c0(*(unsigned int *)(temp_v1 + 0x115c),temp_v4);

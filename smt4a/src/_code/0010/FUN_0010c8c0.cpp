@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002ee4d2(int);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_2_stack;
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ee4d2. */
 
@@ -32,7 +32,7 @@ void FUN_0010c8c0(int param_1,unsigned int *param_2)
   unsigned char temp_v2 [16];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   temp_v0 = *(int *)(param_1 + 0x74);
   if (temp_v0 != 0) {
     FUN_002ee4d2(temp_v0);

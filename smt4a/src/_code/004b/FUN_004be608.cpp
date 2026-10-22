@@ -22,7 +22,7 @@ int FUN_004be1c8(int);
 int FUN_004bea0c(int);
 int FUN_004bf174(int);
 
-extern signed char DAT_0057f25c; /* 0x57f25c */
+extern signed char g_callbackOwnerSlots; /* 0x57f25c */
 
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
@@ -186,7 +186,7 @@ unsigned int FUN_004be608(int param_1)
       scrScriptProcessDestroy();
       *(unsigned int *)(param_1 + 800) = 0;
     }
-    FUN_003343f0((int)DAT_0057f25c);
+    FUN_003343f0((int)g_callbackOwnerSlots);
     *(unsigned int *)(param_1 + 8) = 0;
     break;
   case 0xd:
@@ -199,7 +199,7 @@ unsigned int FUN_004be608(int param_1)
       scrScriptProcessDestroy();
       *(unsigned int *)(param_1 + 800) = 0;
     }
-    FUN_003343f0((int)DAT_0057f25c);
+    FUN_003343f0((int)g_callbackOwnerSlots);
     *(unsigned int *)(param_1 + 8) = 0;
   }
   return 0;

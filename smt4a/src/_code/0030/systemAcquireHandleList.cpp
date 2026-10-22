@@ -1,14 +1,9 @@
-/* NON_MATCHING: scoped-lock constructor still has a C-form symbol; natural C++ construction changes that relocation. Thumb stack allocation and global-marker setup also differ. */
+/* NON_MATCHING: native scoped-lock construction is integrated; Thumb stack allocation and global-marker setup still differ. */
 #include "classes/Obj55a218.h"
+#include "classes/Obj55b28c.h"
 
 struct SystemHandleList;
 
-struct ScopedMutexLayout {
-    const void* vtable; // 0x00
-    u8 locked;          // 0x04
-    u8 unk05[3];        // 0x05
-    void* mutex;        // 0x08
-};
 
 struct SystemHandleLink {
     SystemHandleLink* previous; // 0x00
@@ -20,8 +15,6 @@ void* operatorNew(u32 size);
 SystemHandleLink* FUN_00132f3c(SystemHandleList* list, u32 count);
 extern u8 DAT_006306ac;
 extern u8* DAT_005c4c18;
-void FUN_002e6e34(ScopedMutexLayout* lock, void* mutex);
-void _ZN9Obj55b28cD1Ev(ScopedMutexLayout* lock);
 }
 
 struct SystemHandleList {
@@ -53,13 +46,11 @@ struct SystemRegistryView {
 // Acquire the mutex and lazily initialize the shared system handle list.
 extern "C" void systemAcquireHandleList()
 {
-    ScopedMutexLayout lock;
-    FUN_002e6e34(&lock, &DAT_006306ac);
+    Obj55b28c lock(&DAT_006306ac);
     SystemRegistryView* system = (SystemRegistryView*)&g_systemTable;
     if (system->references == 0) {
         system->lists = new SystemHandleList;
     }
     ++system->references;
     DAT_005c4c18 = &system->marker;
-    _ZN9Obj55b28cD1Ev(&lock);
 }

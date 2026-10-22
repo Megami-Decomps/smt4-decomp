@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 
 extern unsigned char LAB_003e55d4; /* 0x3e55d4 */
 extern unsigned char LAB_003e5dac; /* 0x3e5dac */
 extern unsigned char DAT_00557af0; /* 0x557af0 */
 
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int modelListInit(void);
 
 
@@ -27,7 +27,7 @@ unsigned int * _ZN9Obj557ae8C1Ev(unsigned int *param_1)
   
   puVar1 = param_1 + 7;
   *param_1 = (unsigned int)&DAT_00557af0;
-  FUN_002f5020(puVar1,&LAB_003e55d4,0x5c,3);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_003e55d4,0x5c,3);
   puVar1[-6] = 0;
   puVar1[-5] = 0;
   puVar1[-1] = 1;

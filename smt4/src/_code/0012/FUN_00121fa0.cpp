@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail mov r1, #0; compiler mov r2, #0. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {

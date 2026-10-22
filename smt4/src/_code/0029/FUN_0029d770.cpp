@@ -6,7 +6,7 @@ extern "C" {
 
 int bitsetSetBit(unsigned short *, int);
 int gameRecordCopy(int, unsigned char [2]);
-int FUN_0029c6b0(unsigned short *);
+int unitRecalculateEffectiveStats(unsigned short *);
 int devilGetRecord(void);
 int memClear(unsigned short *, int);
 
@@ -39,7 +39,7 @@ typedef struct {
 
 /* Supplied declaration required: bitsetSetBit. */
 /* Supplied declaration required: gameRecordCopy. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
@@ -104,7 +104,7 @@ void FUN_0029d770(int param_1,unsigned short *param_2)
   *(unsigned int *)(param_2 + 0x18) = temp_v23;
   *(unsigned char *)((int)param_2 + 0x601) = (unsigned char)(((unsigned int)temp_v12 << 0x1a) >> 0x1c);
   bitsetSetBit(param_2,*(unsigned short *)(temp_v0 + 0x38));
-  FUN_0029c6b0(param_2);
+  unitRecalculateEffectiveStats(param_2);
   param_2[0x15] = param_2[7];
   param_2[0x16] = param_2[8];
   return;

@@ -3,12 +3,12 @@
 extern "C" {
 
 extern void *btlGetMainState(void);
-extern void FUN_003f2498(void *state, s32 message);
+extern void btlSwitchId4CE4(void *state, s32 message);
 
-/* Script command: runs FUN_003f2498 on the battle state with message 0x100002B. */
+/* Script command: displays battle message 0x100002B. */
 u32 scrCommBattleMessage2B(void)
 {
-    FUN_003f2498(btlGetMainState(), 0x100002B);
+    btlSwitchId4CE4(btlGetMainState(), 0x100002B);
     return 1;
 }
 

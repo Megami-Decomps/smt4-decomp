@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00522bf4(void);
+void _ZN15Obj55aff4VectoraSERKS_(void);
 
-/* Runs FUN_00522bf4 and returns `object`. */
+/* Runs _ZN15Obj55aff4VectoraSERKS_ and returns `object`. */
 void *FUN_00303a2e(void *object)
 {
-    FUN_00522bf4();
+    _ZN15Obj55aff4VectoraSERKS_();
     return object;
 }
 

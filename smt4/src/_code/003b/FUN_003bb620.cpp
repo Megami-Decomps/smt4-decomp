@@ -10,7 +10,7 @@ int flaggedValueHolderGetTotal(...);
 int asdTMTexTableLoadEntryAsync(int, unsigned int);
 
 /* Supplied declaration required: FUN_00230954. */
-extern int FUN_002333a4(int, unsigned int);
+extern int stateCounterBelowLimit(int, unsigned int);
 extern unsigned int FUN_002333f0(int);
 /* Supplied declaration required: FUN_00233410. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
@@ -75,7 +75,7 @@ unsigned int FUN_003bb620(int param_1)
   if (*(char *)(param_1 + 0x632) == '\0') {
     if (*(char *)(param_1 + 0x86) != '\0') {
       temp_v2 = FUN_002333f0(param_1 + 0x74);
-      temp_v0 = FUN_002333a4(param_1,temp_v2);
+      temp_v0 = stateCounterBelowLimit(param_1,temp_v2);
       if (temp_v0 != 0) {
         temp_v4 = 1;
       }

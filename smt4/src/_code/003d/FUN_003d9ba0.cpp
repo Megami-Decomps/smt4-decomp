@@ -1,4 +1,3 @@
-/* NON_MATCHING: traversal counter and resource pointer use r1/r2 opposite to retail. */
 #include "common.h"
 
 struct ModelRenderState {

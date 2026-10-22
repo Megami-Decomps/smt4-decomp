@@ -25,7 +25,7 @@ int FUN_003210bc(int, int);
 int FUN_003217d0(int);
 int FUN_003a9f7c(int);
 int FUN_003f931c(unsigned int);
-int FUN_004aaabc(...);
+int uiDrawAnimatedItemDescriptionRow(...);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -72,7 +72,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003217d0. */
 /* Supplied declaration required: FUN_003a9f7c. */
 /* Supplied declaration required: FUN_003f931c. */
-/* Supplied declaration required: FUN_004aaabc. */
+/* Supplied declaration required: uiDrawAnimatedItemDescriptionRow. */
 
 
 unsigned int FUN_0024e31c(void)
@@ -290,7 +290,7 @@ unsigned int FUN_0024e31c(void)
         temp_v5 = *(int *)(temp_v1 + 0x128a8);
         if (0 < temp_v5) {
           do {
-            FUN_004aaabc(temp_v1,temp_v6,temp_v1 + temp_v6 * 0xc + 0x12f3c,temp_v5);
+            uiDrawAnimatedItemDescriptionRow(temp_v1,temp_v6,temp_v1 + temp_v6 * 0xc + 0x12f3c,temp_v5);
             temp_v6 = temp_v6 + 1;
           } while (temp_v6 < temp_v5);
         }

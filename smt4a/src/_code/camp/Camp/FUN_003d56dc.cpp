@@ -19,7 +19,7 @@ int FUN_0039c0e4(void);
 int freeTexTable24(void);
 int FUN_003a76b8(void);
 int FUN_003b01e8(void);
-int FUN_003b6dc4(void);
+int aocScriptReleaseTableAndReset(void);
 
 int FUN_00202ea4(void);
 int FUN_0021545c(void);
@@ -346,7 +346,7 @@ extern unsigned short uiQuestRunEnabledAction(void);
 extern int FUN_003ae848(void);
 /* Supplied declaration required: FUN_003b01e8. */
 /* Supplied declaration required: FUN_003b078c. */
-/* Supplied declaration required: FUN_003b6dc4. */
+/* Supplied declaration required: aocScriptReleaseTableAndReset. */
 extern unsigned char FUN_003b6f00(void);
 extern int byteArr5Get4(void);
 extern unsigned char FUN_003c0dcc(void);
@@ -2166,7 +2166,7 @@ LAB_003d801c:
     }
     break;
   case 0x55:
-    FUN_003b6dc4();
+    aocScriptReleaseTableAndReset();
     FUN_003a76b8();
     FUN_00330b74();
     FUN_002309dc();

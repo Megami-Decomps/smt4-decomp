@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'ldr r0, [r0, #16]'; compiler emits 'ldr r3, [r0, #24]' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 struct Buffer { u8 unk00[0xC]; void *data; u32 count, capacity, offset; };

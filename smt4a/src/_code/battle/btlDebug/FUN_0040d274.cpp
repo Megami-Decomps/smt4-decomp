@@ -11,7 +11,7 @@ int FUN_004f22a4(...);
 int FUN_004f2938(...);
 int FUN_004f3ee0(int, unsigned int, int);
 int FUN_004f3f1c(int, unsigned int, int, int);
-int FUN_004f4348(int, unsigned int, int);
+void FUN_004f4348(int camera, float x, float y, float z, unsigned int duration, unsigned int mode);
 int FUN_004fb670(int, unsigned int);
 int FUN_004feecc(int, unsigned int);
 int VectorSignedToFloat(...);
@@ -27,7 +27,7 @@ typedef struct {
 extern int g_btlCamera; /* 0x571508 */
 extern float fRam0057151c; /* 0x57151c */
 extern float DAT_00571570; /* 0x571570 */
-extern unsigned int DAT_005e1530; /* 0x5e1530 */
+extern unsigned int g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern unsigned int DAT_005e1534; /* 0x5e1534 */
 extern unsigned int DAT_005e1538; /* 0x5e1538 */
 
@@ -179,7 +179,7 @@ LAB_0040d588:
         in_s2 = *(float *)(g_btlCamera + 0x5a0);
       }
     }
-    FUN_004f4348(g_btlCamera,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+    FUN_004f4348(g_btlCamera, in_s0, in_s1, in_s2, *(unsigned int *)(param_2 + 0x28), (int)*(short *)(param_2 + 0x48));
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
     temp_v4 = FUN_00152f54();
@@ -214,7 +214,7 @@ LAB_0040d588:
     temp_v4 = *(unsigned int *)(param_2 + 0x28);
     temp_v9 = *(unsigned int *)(temp_v0 + 0x57a500);
     temp_v10 = *(unsigned int *)(temp_v0 + 0x57a504);
-    DAT_005e1530 = *(unsigned int *)(g_btlCamera + 0x750);
+    g_cameraAlternateProgressStart = *(unsigned int *)(g_btlCamera + 0x750);
     DAT_005e1534 = *(unsigned int *)(g_btlCamera + 0x754);
     DAT_005e1538 = *(unsigned int *)(g_btlCamera + 0x758);
     *(unsigned int *)(g_btlCamera + 0x5dc) = *(unsigned int *)(temp_v0 + 0x57a4fc);

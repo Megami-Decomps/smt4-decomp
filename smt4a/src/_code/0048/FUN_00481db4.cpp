@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail helper argument lifetime or state-store scheduling differs. */
 #include "common.h"
 
 struct CallbackOwner {

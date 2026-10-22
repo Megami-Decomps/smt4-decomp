@@ -35,7 +35,7 @@ extern void *g_titleScene;
 extern f32 DAT_00435e20;
 void FUN_002c39a4(void *);
 f32 FUN_002ba12c(void *, f32);
-void FUN_002b93c8(NumberSprite *, f32);
+void effectRenderTransformedInstance(NumberSprite *, f32);
 s32 FUN_0019d734(const void *, const void *);
 void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
 
@@ -57,20 +57,20 @@ void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
         FloatingNumber *number = &scene->numbers[slot];
         if (number->active && number->pass == pass) {
             if (number->value >= 10000)
-                FUN_002b93c8(&number->digits[4], (f32)parallax);
+                effectRenderTransformedInstance(&number->digits[4], (f32)parallax);
             if (number->value >= 1000)
-                FUN_002b93c8(&number->digits[3], (f32)parallax);
+                effectRenderTransformedInstance(&number->digits[3], (f32)parallax);
             if (number->value >= 100)
-                FUN_002b93c8(&number->digits[2], (f32)parallax);
+                effectRenderTransformedInstance(&number->digits[2], (f32)parallax);
             if (number->value >= 10)
-                FUN_002b93c8(&number->digits[1], (f32)parallax);
-            FUN_002b93c8(&number->digits[0], (f32)parallax);
-            FUN_002b93c8(&number->symbolA, (f32)parallax);
-            FUN_002b93c8(&number->symbolB, (f32)parallax);
+                effectRenderTransformedInstance(&number->digits[1], (f32)parallax);
+            effectRenderTransformedInstance(&number->digits[0], (f32)parallax);
+            effectRenderTransformedInstance(&number->symbolA, (f32)parallax);
+            effectRenderTransformedInstance(&number->symbolB, (f32)parallax);
         }
         FloatingLabel *label = &scene->labels[slot];
         if (label->active && label->pass == pass)
-            FUN_002b93c8(&label->sprite, (f32)parallax);
+            effectRenderTransformedInstance(&label->sprite, (f32)parallax);
     }
 }
 }

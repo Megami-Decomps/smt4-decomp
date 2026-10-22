@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, unsigned int);
+int _ZN9Obj55b28cC1EPv(int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
 
 typedef int romwright_code(...);
 extern unsigned char g_flagBlock; /* 0x594958 */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 
@@ -30,7 +30,7 @@ void FUN_001177b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_10 = param_4;
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
     temp_v0 = onlineGetActiveLock();
-    FUN_002e6e34(&uStack_18,temp_v0);
+    _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0);
     for (temp_v1 = *(int *)(param_1 + 8); *(int *)(param_1 + 0xc) != temp_v1; temp_v1 = temp_v1 + 8) {
       (**(romwright_code **)(**(int **)(temp_v1 + 4) + 0xc))();
     }

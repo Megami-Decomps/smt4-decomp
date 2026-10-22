@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineTimeGetNow(int *);
 
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineTimeGetNow. */
 
@@ -30,7 +30,7 @@ void FUN_002f7218(int param_1,int param_2)
   unsigned int temp_v2;
   unsigned char temp_v3 [16];
   
-  FUN_002e6e34(temp_v3,param_1 + 0x4c);
+  _ZN9Obj55b28cC1EPv(temp_v3,param_1 + 0x4c);
   if ((*(char *)(param_1 + 0x30) != param_2) &&
      (*(char *)(param_1 + 0x30) = (char)param_2, param_2 != 0)) {
     onlineTimeGetNow(&temp_v1);

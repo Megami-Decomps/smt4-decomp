@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00123934(void);
 int FUN_00234624(unsigned char [4], unsigned int, unsigned int);
 int legacyResourceIdRemap(int);
-int resultPairInitialize(int *, int);
+int _ZN18WindowStatusResultC1Ej(int *, int);
 int FUN_003539e8(int *, int, int, unsigned char [128]);
 int halfwordBufferCopyRange(unsigned char [4], unsigned char [128], unsigned int, int);
 
@@ -24,8 +24,8 @@ extern int g_aocMain; /* 0x432fc8 */
 extern unsigned int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
 /* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_003539e8. */
 /* Supplied declaration required: halfwordBufferCopyRange. */
 
@@ -48,11 +48,11 @@ unsigned char * FUN_0038c094(unsigned char *param_1,int param_2)
   
   puVar2 = (unsigned int *)&temp_v2;
   *param_1 = 1;
-  puVar1 = (unsigned int *)FUN_002bad5c(param_1 + 4);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   puVar1[2] = 0;
   puVar6 = puVar1 + -1;
   puVar1[3] = 0;
-  resultPairInitialize(&temp_v2,0);
+  _ZN18WindowStatusResultC1Ej(&temp_v2,0);
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;

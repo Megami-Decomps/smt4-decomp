@@ -6,9 +6,9 @@ extern "C" {
 
 int asdOperatorDeleteArray(int);
 int FUN_002e9518(...);
-int onlineStringCopyConstruct(int, int);
+int _ZN9Obj55aff4C1ERKS_(int, int);
 int FUN_002e9590(int, unsigned int);
-int onlineStringAssign(int, int);
+int _ZN9Obj55aff4aSERKS_(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -19,9 +19,9 @@ typedef struct {
 extern int rt_malloc(int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e9518. */
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 /* Supplied declaration required: FUN_002e9590. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 
 
 void FUN_00522a48(int *param_1,unsigned int param_2)
@@ -57,7 +57,7 @@ void FUN_00522a48(int *param_1,unsigned int param_2)
       while (temp_v1 != temp_v3) {
         temp_v4 = temp_v4 - 8;
         temp_v3 = temp_v3 - 8;
-        onlineStringAssign(temp_v4,temp_v3);
+        _ZN9Obj55aff4aSERKS_(temp_v4,temp_v3);
       }
       FUN_002e9590(temp_v1,param_2);
       return;
@@ -83,7 +83,7 @@ void FUN_00522a48(int *param_1,unsigned int param_2)
     for (; temp_v1 != temp_v3; temp_v1 = temp_v1 + 8) {
       temp_v4 = temp_v4 + 8;
       if (temp_v4 != 0) {
-        onlineStringCopyConstruct(temp_v4,temp_v1);
+        _ZN9Obj55aff4C1ERKS_(temp_v4,temp_v1);
       }
     }
     puVar5 = (unsigned int *)*param_1;

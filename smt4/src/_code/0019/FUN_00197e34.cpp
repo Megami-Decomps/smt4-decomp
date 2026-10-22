@@ -10,7 +10,7 @@ int questIsCompleted(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int dataTable1bOr1cGetRecord(void);
 int FUN_002b75ec(...);
-int FUN_002b93c8(...);
+int effectRenderTransformedInstance(...);
 int FUN_002ba12c(...);
 int FUN_002bdf94(...);
 int FUN_002be370(...);
@@ -68,7 +68,7 @@ extern int FUN_0029efc0(int);
 extern int gameGetFlagBlock(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
@@ -354,7 +354,7 @@ LAB_00198518:
         }
         else {
           VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002b93c8(temp_v3 + 0x264);
+          effectRenderTransformedInstance(temp_v3 + 0x264);
         }
       }
       else {

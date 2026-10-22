@@ -71,12 +71,38 @@ typedef struct EffMiscDesc {
     /* 0x1C */ u16 resourceType;    /* see EffMiscShared.type */
 } EffMiscDesc;
 
+struct EffRenderRestorePair {
+    u8 first[0x40];
+    u8 second[0x40];
+};
+struct EffRenderRestoreSource {
+    u8 unk000[0x68];
+    EffRenderRestorePair primary; // 0x068
+    u8 unk0e8[0x120];
+    EffRenderRestorePair alternate; // 0x208
+    u8 unk288[0x30];
+    EffRenderRestorePair secondary; // 0x2b8
+};
+
 /* The parts of the render context the effect update looks at. */
 typedef struct EffRenderState {
-    /* 0x000 */ u8 unk000[0x5F4];
+    union {
+        /* 0x000 */ u8 unk000[0x5F4];
+        struct {
+            u8 unk000[0x528];
+            s32 selection; // 0x528
+            u32 resource; // 0x52c
+            u8 snapshot[0xc4]; // 0x530
+        } restore;
+    };
     /* 0x5F4 */ u8 mode;            /* 1 = skip the generic update, 3/4 = no post step, 5 = restore */
     /* 0x5F5 */ u8 unk5f5[0x103];
-    /* 0x6F8 */ u32 unk6f8;
+    union {
+        /* 0x6F8 */ u32 unk6f8;
+        /* 0x6F8 */ EffRenderRestoreSource *restoreSource;
+    };
+    /* 0x6fc */ u8 unk6fc[0xa90];
+    /* 0x118c */ u32 completion;
 } EffRenderState;
 
 #endif

@@ -5,7 +5,7 @@
 extern "C" {
 
 int rt_vec_dtor(unsigned char [108], unsigned char *, int, int);
-int FUN_002f5020(unsigned char [108], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [108], unsigned char *, int, int);
 int streamReadWord(int, unsigned char *);
 int FUN_0030093c(...);
 int FUN_00304d10(unsigned int, int);
@@ -16,7 +16,7 @@ extern unsigned char LAB_002ea975; /* 0x2ea975 */
 extern unsigned char LAB_002ea9dd; /* 0x2ea9dd */
 
 /* Supplied declaration required: rt_vec_dtor. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_0030093c. */
 /* Supplied declaration required: FUN_00304d10. */
@@ -35,7 +35,7 @@ void FUN_0011ea88(int param_1,unsigned int param_2)
   puVar3 = temp_v1;
   puVar1 = (unsigned char *)FUN_00304d10(param_2,0);
   if (puVar1 == (unsigned char *)0x0) {
-    FUN_002f5020(temp_v1,&LAB_002e9ff5,0xc,1);
+    __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_002e9ff5,0xc,1);
     puVar1 = temp_v1;
   }
   FUN_00310ff2(param_1,puVar1);
@@ -51,7 +51,7 @@ void FUN_0011ea88(int param_1,unsigned int param_2)
         FUN_0030093c(param_1,temp_v0);
       }
       else {
-        FUN_002f5020(temp_v1,&LAB_002ea975,0x68,1);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_002ea975,0x68,1);
         FUN_0030093c(param_1,temp_v1);
         rt_vec_dtor(temp_v1,&LAB_002ea9dd,0x68,1);
       }

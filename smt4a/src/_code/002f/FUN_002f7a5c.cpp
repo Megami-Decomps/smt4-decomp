@@ -8,7 +8,7 @@ int vectorResizeBytes(int *, unsigned int, int);
 
 extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern int *vectorInitEmpty2(unsigned int *);
 /* Supplied declaration required: vectorResizeBytes. */
 extern unsigned int FUN_002eea7c(int);
@@ -26,7 +26,7 @@ int * FUN_002f7a5c(unsigned int param_1,int param_2)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_0055ae64;
   piVar2 = (int *)vectorInitEmpty2(puVar1 + 3);
   temp_v0 = FUN_002eea7c(param_2);

@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned int FUN_0014bd84(short);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(short, unsigned int);
 extern unsigned int FUN_004bcbb4(unsigned int, short);
 
@@ -83,7 +83,7 @@ void FUN_002f67c4(int param_1,int param_2,int param_3,int param_4)
     else {
       FUN_00185e84((int)temp_v0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,
                    param_4 + 10,0,0);
-      FUN_00389d9c(*(unsigned int *)(temp_v2 + 0x24fc),(int)temp_v0,*(short *)(temp_v4 + 8) + param_2,
+      statDrawClampedDelta(*(unsigned int *)(temp_v2 + 0x24fc),(int)temp_v0,*(short *)(temp_v4 + 8) + param_2,
                    *(short *)(temp_v4 + 10) + param_3,param_4 + 10,0);
       temp_v1 = FUN_004bcbb4(*(unsigned int *)(temp_v2 + 0x24fc),temp_v0);
     }

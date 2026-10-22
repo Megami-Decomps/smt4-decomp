@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00103afc(unsigned int, unsigned int, unsigned int, int);
 int wstrstrU16(unsigned short *, unsigned char *);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int FUN_002e934e(unsigned short *, int, int);
 int FUN_002e93c2(unsigned int, unsigned int);
 
@@ -21,8 +21,8 @@ extern unsigned char LAB_001039cc; /* 0x1039cc */
 /* Supplied declaration required: FUN_00103afc. */
 /* Supplied declaration required: wstrstrU16. */
 extern int wstrcmpU16(unsigned short *, char *);
-extern unsigned int onlineStringConstruct(unsigned char *, unsigned short *);
-/* Supplied declaration required: onlineStringDestroy. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned short *);
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int onlineUrlSetHost(unsigned int, unsigned short *);
 /* Supplied declaration required: FUN_002e934e. */
 /* Supplied declaration required: FUN_002e93c2. */
@@ -70,11 +70,11 @@ unsigned int FUN_00103924(unsigned int param_1,unsigned short *param_2,int param
       return temp_v3;
     }
   }
-  temp_v1 = onlineStringConstruct(temp_v5,puVar5);
-  temp_v2 = onlineStringConstruct(temp_v4,param_2);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v5,puVar5);
+  temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v4,param_2);
   FUN_00103afc(temp_v6,temp_v2,temp_v1,temp_v7);
-  onlineStringDestroy(temp_v4);
-  onlineStringDestroy(temp_v5);
+  _ZN9Obj55aff4D1Ev(temp_v4);
+  _ZN9Obj55aff4D1Ev(temp_v5);
   *puVar1 = 0x3d;
   return temp_v3;
 }

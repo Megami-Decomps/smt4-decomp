@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler merges initial vtable and zero-state stores. */
 #include "classes/Obj557b58.h"
 extern "C" void FUN_00405dec(Obj557b58 *object);
 /* Initializes the owned-item vector and the object's state. */

@@ -16,7 +16,13 @@ struct WaveBuffer {
     /* 0x08 */ void *adpcmContext;
     /* 0x0c */ u32 unk0c;
     /* 0x10 */ u8 looping;
-    /* 0x11 */ u8 unk11[7];
+    union {
+        /* 0x11 */ u8 unk11[7];
+        struct {
+            /* 0x11 */ u8 status;
+            u8 unk12[6];
+        } playback;
+    };
 };
 
 struct WavePlayer {

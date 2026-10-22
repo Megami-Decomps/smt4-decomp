@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00239e14(int, int);
 int FUN_00239ed0(unsigned int, unsigned char *);
 int FUN_002ba81c(unsigned int, unsigned int, int);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int rt_memcpy_w(unsigned char *, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -29,7 +29,7 @@ extern int FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
 extern int tokenResolveAddress(unsigned int, int *, int);
 extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: FUN_002ba81c. */
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -49,7 +49,7 @@ void FUN_00354450(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
   
   if (param_5 >= 0x15) {
     temp_v3 = 0xe061389c;
-    resultPairInitialize(param_1,temp_v3);
+    _ZN18WindowStatusResultC1Ej(param_1,temp_v3);
     return;
   }
   temp_v1 = *param_2;
@@ -96,12 +96,12 @@ void FUN_00354450(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
           return;
         }
         temp_v3 = 0xc9413891;
-        resultPairInitialize(param_1,temp_v3);
+        _ZN18WindowStatusResultC1Ej(param_1,temp_v3);
         return;
       }
     }
   }
-  resultPairInitialize(param_1,temp_v1);
+  _ZN18WindowStatusResultC1Ej(param_1,temp_v1);
   return;
 }
 

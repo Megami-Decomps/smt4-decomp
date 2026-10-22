@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(void);
 int FUN_003343f0(int);
 int buttonHelpGetValue(void);
-int FUN_0035deb0(void);
+int uniteCreatePreviewModel(void);
 int FUN_004a1958(int);
 int screen4AEnter(int);
 int FUN_004a37a0(int, int);
@@ -27,7 +27,7 @@ extern int FUN_002a4b74(void);
 extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: buttonHelpGetValue. */
-/* Supplied declaration required: FUN_0035deb0. */
+/* Supplied declaration required: uniteCreatePreviewModel. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: screen4AEnter. */
 /* Supplied declaration required: FUN_004a37a0. */
@@ -65,7 +65,7 @@ void FUN_004a38bc(int param_1)
     FUN_003343f0(0);
     if (*(short *)(param_1 + 0x864) < 1) {
       screen4AEnter(param_1);
-      FUN_0035deb0();
+      uniteCreatePreviewModel();
       return;
     }
     *(unsigned int *)(param_1 + 0x14) = 2;

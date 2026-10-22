@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern int FUN_00230ecc(u16 id);
+extern int contentGetKindValue(u16 id);
 extern int FUN_00230f44(u16 *entry);
 extern int FUN_002ae3c0(u16 id);
 
-/* Comparison of two entries: by sort key (FUN_00230ecc for kinds 2, 3 and 8, else 0), then by FUN_00230f44. */
+/* Comparison of two entries: by sort key (contentGetKindValue for kinds 2, 3 and 8, else 0), then by FUN_00230f44. */
 int FUN_003a0078(u16 *a, u16 *b)
 {
     s32 diff;
@@ -19,11 +19,11 @@ int FUN_003a0078(u16 *a, u16 *b)
 
     kind = FUN_002ae3c0(idA);
     if (kind == 2 || kind == 3 || kind == 8) {
-        keyA = FUN_00230ecc(idA);
+        keyA = contentGetKindValue(idA);
     }
     kind = FUN_002ae3c0(idB);
     if (kind == 2 || kind == 3 || kind == 8) {
-        keyB = FUN_00230ecc(idB);
+        keyB = contentGetKindValue(idB);
     }
     diff = keyA - keyB;
     if (diff == 0) {

@@ -9,7 +9,7 @@ int FUN_0010e4c0(int);
 int FUN_00120f86(int, int);
 int FUN_001212a0(int, int);
 int FUN_002ecef0(void);
-int FUN_002f3024(int, unsigned char *);
+int _ZN9Obj5586e0C1Ev(int, unsigned char *);
 int FUN_002f8d9c(int);
 int FUN_002f9e68(int, int);
 
@@ -40,7 +40,7 @@ extern unsigned int onlineGetActiveLock(void);
 extern unsigned int FUN_002eb56c(void);
 /* Supplied declaration required: FUN_002ecef0. */
 extern int FUN_002f1858(int, unsigned char *, unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_002f3024. */
+/* Supplied declaration required: _ZN9Obj5586e0C1Ev. */
 /* Supplied declaration required: FUN_002f8d9c. */
 extern int vectorInitEmpty5(unsigned int *);
 /* Supplied declaration required: FUN_002f9e68. */
@@ -64,7 +64,7 @@ int FUN_0010eb10(unsigned int *param_1)
   FUN_002f9e68(temp_v0,2);
   temp_v0 = FUN_001156fc(temp_v0 + 0xc);
   temp_v0 = clearWords2(temp_v0 + 0x5c);
-  temp_v0 = FUN_002f3024(temp_v0 + 8,&LAB_0010ec48);
+  temp_v0 = _ZN9Obj5586e0C1Ev(temp_v0 + 8,&LAB_0010ec48);
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;
   *(unsigned int *)(temp_v0 + 0x30) = 0;
@@ -83,7 +83,7 @@ int FUN_0010eb10(unsigned int *param_1)
     puVar4 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
       temp_v2 = onlineGetActiveLock();
-      puVar4 = (unsigned int *)FUN_002f3024(temp_v1,&LAB_0010eca0);
+      puVar4 = (unsigned int *)_ZN9Obj5586e0C1Ev(temp_v1,&LAB_0010eca0);
       *puVar4 = (unsigned int)&DAT_00559890;
       puVar4[8] = temp_v2;
     }
@@ -92,7 +92,7 @@ int FUN_0010eb10(unsigned int *param_1)
     temp_v1 = operatorNew(0x20);
     puVar4 = (unsigned int *)0x0;
     if (temp_v1 != 0) {
-      puVar4 = (unsigned int *)FUN_002f3024(temp_v1,&LAB_0010eca0);
+      puVar4 = (unsigned int *)_ZN9Obj5586e0C1Ev(temp_v1,&LAB_0010eca0);
     }
   }
   *(unsigned int **)(temp_v0 - 0xa0) = puVar4;

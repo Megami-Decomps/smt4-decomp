@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b93c8(int);
+int effectRenderTransformedInstance(int);
 int FUN_002b99b8(void);
 int FUN_002ba12c(int);
 int FUN_002ba1e0(unsigned int);
@@ -28,7 +28,7 @@ extern int g_frameTex; /* 0x43e278 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002ba1e0. */
@@ -130,7 +130,7 @@ void FUN_0011340c(unsigned int param_1)
     temp_v5 = 0;
     do {
       VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002b93c8(temp_v0 + temp_v5 * 0x8c + 0x54);
+      effectRenderTransformedInstance(temp_v0 + temp_v5 * 0x8c + 0x54);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x18);
     if (*(char *)(temp_v0 + 0x24) == '\0') {

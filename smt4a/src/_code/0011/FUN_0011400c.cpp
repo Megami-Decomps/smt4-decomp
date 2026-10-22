@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_0055962c; /* 0x55962c */
 
-extern int onlineStringCopyConstruct(unsigned int *);
+extern int _ZN9Obj55aff4C1ERKS_(unsigned int *);
 extern int FUN_002fed8c(void);
 
 
@@ -19,7 +19,7 @@ int FUN_0011400c(unsigned int *param_1)
   unsigned char temp_v2;
   
   *param_1 = (unsigned int)&DAT_0055962c;
-  temp_v0 = onlineStringCopyConstruct(param_1 + 1);
+  temp_v0 = _ZN9Obj55aff4C1ERKS_(param_1 + 1);
   *(unsigned int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;

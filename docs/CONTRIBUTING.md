@@ -33,6 +33,9 @@ Every match must be one a programmer could have written for a reason.
   walk an array or struct, and small `static __inline` accessors in headers.
 - A near miss stays as it is with a `/* NON_MATCHING: ... */` comment saying what still differs.
   Don't keep a fake match to raise the count.
+- Shared record layouts must have one definition in a common header. Include that header from
+  each user; unrelated layouts with coincidentally identical names need distinct type names.
+  Recheck every previously matching consumer of either affected header with `fdiff`.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in
@@ -107,13 +110,27 @@ Constructors and destructors are written as such (`Obj55afc4::~Obj55afc4()`, ref
 `include/classes/Obj55afc4.h` and `smt4a/src/_code/0012/Obj55afc4__dtor_Obj55afc4.cpp`):
 
 - name the unit with the variant retail's function is: `D1` for the destructor a vtable lists
-  (`_ZN9Obj55afc4D1Ev`), `C1` for a constructor (`_ZN9Obj55afc4C1Ev`); armcc emits the base-object
-  variant (`D2`/`C2`) as an alias of it and calls base and member structors by their `D1`/`C1` names.
+  (`_ZN9Obj55afc4D1Ev`), `C1` for a constructor (`_ZN9Obj55afc4C1Ev`). armcc can emit the
+  base-object variants (`D2`/`C2`) as aliases or call them directly; the build tools keep the
+  unit's complete-object body and canonicalize these references to retail's `D1`/`C1` symbols.
   Files follow: `Obj55afc4__dtor_Obj55afc4.cpp` (D1), `Obj55afc4__deleting_dtor_Obj55afc4.cpp` (D0),
-  `Obj55afc4__Obj55afc4.cpp` (C1);
+  `Obj55afc4__Obj55afc4.cpp` (C1). Parameterized constructor files append parameter types, e.g.
+  `Obj55c8d0__Obj55c8d0__unsigned_int.cpp` for `_ZN9Obj55c8d0C1Ej`, so overloads stay distinct;
 - name the vtable as a sized global, the note starting with its size:
   `smt4a 0x55afc4 _ZTV9Obj55afc4 evidence size:0x1c vtable ...`. A pool word pointing at its address
   point (vtable + 8) then reads `_ZTV9Obj55afc4` plus 8 in the retail object, as armcc writes it;
+- identify a constructor by its final vtable store, not an earlier inlined base constructor's
+  store. Verify the address point in the original image's literal pool: an old source draft or
+  an oversized neighboring symbol can give it the wrong name or addend. Adjacent independent
+  vtables each get their own symbol and size, even when some method slots were stripped;
+- nonvirtual owners can still need native destructors. An empty enclosing destructor lets armcc
+  recover the owner from an embedded member's destructor result; an `extern "C"` wrapper that
+  destroys the member and returns a saved owner is not the same ABI. Account for register
+  writeback before interpreting the final pointer adjustment;
+- preserve class-value copy semantics as well as layout: a small iterator with a nontrivial
+  copy constructor uses hidden result storage, unlike an ordinary one-word aggregate;
+- verify destructor entry points against their vtable slots. If a unit starts after the
+  instruction loading its vptr, fix the function boundary rather than inventing a vtable argument;
 - defining a destructor also emits its deleting variant (`D0`) and the vtable. `build.py` (and
   `fdiff`) notice the extra function or vtable group, recompile with `--split_sections` and keep only
   the unit's own function; the vtable stays the retail bytes. A `D0` unit can be written the same way

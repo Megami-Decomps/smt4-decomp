@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 DAT_0044e098;
+extern u8 g_titleConfigModeFlag;
 
 void sysSetStateByte(u8 value)
 {
-    DAT_0044e098 = value;
+    g_titleConfigModeFlag = value;
 }
 
 } /* extern "C" */

@@ -76,7 +76,7 @@ extern int FUN_002c7e3c(void);
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_003d3a4c. */
 /* Supplied declaration required: FUN_0047fc38. */
-extern int FUN_00480960(unsigned int);
+extern int equipmentHasPositiveUpgrade(unsigned int);
 
 
 unsigned int FUN_0026b0e4(void)
@@ -220,7 +220,7 @@ LAB_0026b298:
         puVar16 = (unsigned char *)0x3d;
         temp_v9 = (unsigned int)*(unsigned short *)(temp_v20 + 0x6c);
       }
-      temp_v2 = FUN_00480960(temp_v9);
+      temp_v2 = equipmentHasPositiveUpgrade(temp_v9);
       if (temp_v2 != 0) {
         temp_v13 = 0x8400ff;
         temp_v3 = temp_v9;
@@ -305,7 +305,7 @@ LAB_0026b644:
       temp_v11 = FUN_001834a4(0x12,0x476);
       temp_v9 = temp_v18;
       FUN_0015f858(temp_v18,0);
-      temp_v4 = FUN_00480960(temp_v18);
+      temp_v4 = equipmentHasPositiveUpgrade(temp_v18);
       if (temp_v4 != 0) {
         temp_v13 = 0x8400ff;
         temp_v3 = temp_v18;

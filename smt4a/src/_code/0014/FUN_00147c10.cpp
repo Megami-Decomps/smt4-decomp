@@ -8,7 +8,7 @@ int FUN_00173818(unsigned int);
 int FUN_0018c87c(...);
 int FUN_001911a4(...);
 int FUN_00191260(void);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int UnsignedDoesSaturate(...);
 int UnsignedSaturate(...);
 int nw_ut_internal_LinkListImpl_insert(...);
@@ -29,7 +29,7 @@ extern unsigned int objectCommandQueueGet(void);
 /* Supplied declaration required: FUN_0018c87c. */
 /* Supplied declaration required: FUN_001911a4. */
 /* Supplied declaration required: FUN_00191260. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -55,7 +55,7 @@ void FUN_00147c10(int param_1)
     } while (temp_v4 < *(unsigned int *)(param_1 + 0x18));
   }
   if (*(unsigned int *)(param_1 + 0x28) >= 2) {
-    FUN_002f5020(&iStack_620,&LAB_00161d8c,0xc,0x80);
+    __aeabi_vec_ctor_nocookie_nodtor(&iStack_620,&LAB_00161d8c,0xc,0x80);
     temp_v0 = *(int *)(param_1 + 0x28);
     while (temp_v0 != 0) {
       temp_v2 = *(int *)(param_1 + 0x2c);
@@ -80,7 +80,7 @@ void FUN_00147c10(int param_1)
     } while (temp_v0 < 0x80);
   }
   if (*(unsigned int *)(param_1 + 0x74) >= 2) {
-    FUN_002f5020(&iStack_620,&LAB_00161da4,0xc,0x80);
+    __aeabi_vec_ctor_nocookie_nodtor(&iStack_620,&LAB_00161da4,0xc,0x80);
     temp_v0 = *(int *)(param_1 + 0x74);
     while (temp_v0 != 0) {
       temp_v2 = *(int *)(param_1 + 0x78);
@@ -105,7 +105,7 @@ void FUN_00147c10(int param_1)
     } while (temp_v0 < 0x80);
   }
   if (*(unsigned int *)(param_1 + 0xc0) >= 2) {
-    FUN_002f5020(&iStack_620,&LAB_00161d74,0xc,0x80);
+    __aeabi_vec_ctor_nocookie_nodtor(&iStack_620,&LAB_00161d74,0xc,0x80);
     temp_v0 = *(int *)(param_1 + 0xc0);
     while (temp_v0 != 0) {
       temp_v2 = *(int *)(param_1 + 0xc4);

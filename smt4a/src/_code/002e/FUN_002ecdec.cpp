@@ -10,7 +10,7 @@ int FUN_002f17e4(unsigned int *, unsigned int);
 extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 
 /* Supplied declaration required: rt_memclr. */
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: FUN_002f17e4. */
 
 
@@ -20,7 +20,7 @@ unsigned int * FUN_002ecdec(unsigned int param_1,unsigned int param_2)
 /* irregular: 2 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_0055ae64;
   puVar1 = puVar1 + 3;
   FUN_002f17e4(puVar1,param_2);

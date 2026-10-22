@@ -6,10 +6,10 @@
 extern "C" {
 
 int FUN_0015f858(...);
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int FUN_00167860(...);
 int FUN_00184310(void);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int dataRecordGetKindValue(...);
 int playerSecondaryGetKindValue(void);
 int playerPrimaryGetKindValue(void);
@@ -64,7 +64,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(int);
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -87,7 +87,7 @@ extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002f8e98(unsigned int);
 extern int FUN_002fa75c(void);
 extern int FUN_00372794(int, int, unsigned char *);
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: dataRecordGetKindValue. */
 /* Supplied declaration required: playerSecondaryGetKindValue. */
 /* Supplied declaration required: playerPrimaryGetKindValue. */
@@ -601,14 +601,14 @@ void FUN_003743a4(int param_1)
     temp_v7 = FUN_001834a4(0xd,0x12f);
     if (temp_v14) {
       if ((temp_v6 != 0) && (*(int *)(param_1 + 0x4ba4) >= 0x15)) {
-        FUN_001676b0(4,*(short *)(temp_v7 + 8) + temp_v4,*(short *)(temp_v7 + 10) + temp_v2,0xc9);
+        effectDispatchSelector(4,*(short *)(temp_v7 + 8) + temp_v4,*(short *)(temp_v7 + 10) + temp_v2,0xc9);
       }
       else {
         temp_v16[1] = 0;
         FUN_00185e84(temp_v8,*(short *)(temp_v7 + 8) + temp_v4,*(short *)(temp_v7 + 10) + temp_v2,0xc9);
         temp_v16[0] = 0xc9;
         temp_v16[1] = 0;
-        FUN_00389d9c(temp_v17,temp_v8,*(short *)(temp_v7 + 8) + temp_v4,*(short *)(temp_v7 + 10) + temp_v2);
+        statDrawClampedDelta(temp_v17,temp_v8,*(short *)(temp_v7 + 8) + temp_v4,*(short *)(temp_v7 + 10) + temp_v2);
       }
     }
     else {

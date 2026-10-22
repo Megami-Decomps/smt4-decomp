@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014bd84(unsigned int);
 int textDrawDefaultString(void);
 int FUN_004d0f48(int *, unsigned int);
-int FUN_004d1198(int *, unsigned int);
+int uiDrawFlagLabels(int *, unsigned int);
 
 extern unsigned int DAT_005715fc; /* 0x5715fc */
 extern int *DAT_00571600; /* 0x571600 */
@@ -18,7 +18,7 @@ extern int jobGetWork(void);
 extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int FUN_003e83b4(int, int, unsigned int);
 /* Supplied declaration required: FUN_004d0f48. */
-/* Supplied declaration required: FUN_004d1198. */
+/* Supplied declaration required: uiDrawFlagLabels. */
 
 
 unsigned int FUN_002ba870(void)
@@ -47,7 +47,7 @@ unsigned int FUN_002ba870(void)
         }
         if (temp_v1 == 0) {
           temp_v2 = FUN_003e83b4(temp_v0,piVar1[7],1);
-          FUN_004d1198(piVar1,temp_v2);
+          uiDrawFlagLabels(piVar1,temp_v2);
         }
       }
       else {

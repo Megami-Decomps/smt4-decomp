@@ -8,7 +8,7 @@ int FUN_0015e874(int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
-extern int *DAT_0063e944; /* 0x63e944 */
+extern int *g_soundHandleList; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 extern float g_asdSoundDuck; /* 0x63f4c8 */
 extern unsigned int DAT_0063f4cc; /* 0x63f4cc */
@@ -149,7 +149,7 @@ void FUN_00143d00(void)
       }
       do {
         temp_v0 = 0;
-        piVar3 = DAT_0063e944;
+        piVar3 = g_soundHandleList;
         if (0 < DAT_0063e948) {
 LAB_00143e98:
           if (piVar3 != (int *)0x0) {
@@ -157,7 +157,7 @@ LAB_00143e98:
             if ((*(unsigned char *)(piVar3 + 3) & 6) != 0) {
               temp_v2 = 0;
               temp_v0 = 0;
-              piVar3 = DAT_0063e944;
+              piVar3 = g_soundHandleList;
               if (DAT_0063e948 >= 1) {
                 do {
                   if (piVar3 == (int *)0x0) break;
@@ -170,7 +170,7 @@ LAB_00143e98:
                 } while (DAT_0063e948 > temp_v0);
               }
               temp_v0 = 0;
-              piVar3 = DAT_0063e944;
+              piVar3 = g_soundHandleList;
               if (0 < DAT_0063e948) {
                 do {
                   if (piVar3 == (int *)0x0) break;
@@ -352,7 +352,7 @@ LAB_00143f68:
   return;
 LAB_00144088:
   temp_v0 = 0;
-  piVar3 = DAT_0063e944;
+  piVar3 = g_soundHandleList;
   if (0 < DAT_0063e948) {
 LAB_001440a4:
     if (piVar3 != (int *)0x0) {
@@ -360,7 +360,7 @@ LAB_001440a4:
       if ((*(unsigned char *)(piVar3 + 3) & 6) != 0) {
         temp_v2 = 0;
         temp_v0 = 0;
-        piVar3 = DAT_0063e944;
+        piVar3 = g_soundHandleList;
         if (DAT_0063e948 >= 1) {
           do {
             if (piVar3 == (int *)0x0) break;
@@ -375,7 +375,7 @@ LAB_001440a4:
         temp_v0 = 0;
         temp_v6 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v2 = VectorFloatToUnsigned(temp_v7 + temp_v6 * g_asdSoundDuck,3) & 0xff;
-        piVar3 = DAT_0063e944;
+        piVar3 = g_soundHandleList;
         if (0 < DAT_0063e948) {
           do {
             if (piVar3 == (int *)0x0) break;

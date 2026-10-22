@@ -22,6 +22,7 @@ import concurrent.futures
 import glob
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -196,12 +197,23 @@ def read_elf(data):
     return sections, symbols
 
 
+def structor(name):
+    """The complete-object name for a base-object structor (C2 -> C1, D2 -> D1): retail has one symbol
+    per address and calls both through it, while armcc may emit and call only the base-object variant."""
+    return re.sub(r"(?<=[0-9A-Za-z])([CD])2E", r"\g<1>1E", name, count=1) if name.startswith("_ZN") else name
+
+
 def needs_carving(obj, unit):
-    """True when the object holds more than the unit's function: another function (a destructor's
-    deleting variant next to it) or a COMDAT group (a vtable the destructor's file emits)."""
+    """True when the object holds more than the unit's function (a destructor's deleting variant next
+    to it, a COMDAT group such as the vtable), holds it outside `.text` (an `i.` section for a
+    constructor defined in its class) or under its base-object name only, or calls a base-object
+    structor (C2/D2), which retail names by its complete-object symbol."""
     sections, symbols = read_elf(Path(obj).read_bytes())
     places = {(s["shndx"], s["value"] & ~1) for s in symbols if s["type"] == 2 and s["bind"] in (1, 2) and s["shndx"]}
-    return len(places) > 1 or any(s["type"] == 17 for s in sections)  # SHT_GROUP
+    own = next((s for s in symbols if s["name"] == unit["function"] and s["shndx"] and s["type"] == 2), None)
+    return (len(places) > 1 or any(s["type"] == 17 for s in sections)  # SHT_GROUP
+            or own is None or sections[own["shndx"]]["name"] != ".text"
+            or any(not s["shndx"] and structor(s["name"]) != s["name"] for s in symbols))
 
 
 def carve(obj, unit):
@@ -215,7 +227,7 @@ def carve(obj, unit):
     import split
     data = Path(obj).read_bytes()
     sections, symbols = read_elf(data)
-    own = next((s for s in symbols if s["name"] == unit["function"] and s["shndx"] and s["type"] == 2), None)
+    own = next((s for s in symbols if structor(s["name"]) == unit["function"] and s["shndx"] and s["type"] == 2), None)
     if own is None:
         return False
     index = own["shndx"]
@@ -237,7 +249,7 @@ def carve(obj, unit):
             else:
                 if target["bind"] == 2 and not target["shndx"]:
                     weak.add(target["name"])
-                relocs.append((offset, target["name"], info & 0xFF))
+                relocs.append((offset, structor(target["name"]), info & 0xFF))
     marks = sorted((s["value"], s["name"]) for s in symbols if s["shndx"] == index and s["name"] in ("$a", "$t", "$d"))
     pools = [(value, next((v for v, _n in marks if v > value), len(code))) for value, name in marks if name == "$d"]
     attributes = next((bytes(data[s["offset"]:s["offset"] + s["size"]]) for s in sections if s["type"] == 0x70000003), b"")

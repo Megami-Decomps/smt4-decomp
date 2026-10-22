@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int onlineStringDestroy(int *);
-int onlineStringAssign(...);
+int _ZN9Obj55aff4D1Ev(int *);
+int _ZN9Obj55aff4aSERKS_(...);
 int onlineSockAddrToString(int *, int);
 int FUN_00300048(void);
 
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int FUN_002ea704(void);
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: onlineSockAddrToString. */
@@ -42,12 +42,12 @@ unsigned int FUN_00300064(int param_1,unsigned int param_2,unsigned int param_3,
       temp_v3 = *(int *)(temp_v0 + 0xd0);
       temp_v0 = FUN_002ea704();
       onlineSockAddrToString(&uStack_18,temp_v0 + 0x120);
-      onlineStringAssign(temp_v3 + 0x110,&uStack_18);
-      onlineStringDestroy(&uStack_18);
+      _ZN9Obj55aff4aSERKS_(temp_v3 + 0x110,&uStack_18);
+      _ZN9Obj55aff4D1Ev(&uStack_18);
     }
     else {
       temp_v0 = FUN_002eb5f4();
-      onlineStringAssign(*(int *)(temp_v0 + 0xd0) + 0x110,param_1 + 0x88);
+      _ZN9Obj55aff4aSERKS_(*(int *)(temp_v0 + 0xd0) + 0x110,param_1 + 0x88);
     }
     if (*(short *)(param_1 + 0x90) != 0) {
       temp_v0 = FUN_002eb5f4();

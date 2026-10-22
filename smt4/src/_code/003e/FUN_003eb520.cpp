@@ -17,7 +17,7 @@ extern unsigned char DAT_004e0e90; /* 0x4e0e90 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_0035f1f4(unsigned char *);
+extern int _ZN9Obj420fa4C1Ev(unsigned char *);
 
 
 unsigned long long FUN_003eb520(unsigned int param_1,unsigned int param_2,int param_3)
@@ -30,7 +30,7 @@ unsigned long long FUN_003eb520(unsigned int param_1,unsigned int param_2,int pa
   *(unsigned int *)(param_3 + 0xc) = param_2;
   DAT_00464fe8 = 0;
   DAT_00464fec = 0;
-  temp_v0 = FUN_0035f1f4(&DAT_004e0e90);
+  temp_v0 = _ZN9Obj420fa4C1Ev(&DAT_004e0e90);
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   *(unsigned char *)(temp_v0 + 0x38) = 1;
   return romwright_piece_4_4(FUN_0033b618,temp_v0 - 8);

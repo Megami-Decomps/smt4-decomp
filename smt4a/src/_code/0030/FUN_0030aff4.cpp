@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern int onlineStringCopyConstruct(char *, int);
+extern int _ZN9Obj55aff4C1ERKS_(char *, int);
 /* Supplied declaration required: FUN_002ed91c. */
 extern char *FUN_002f7664(int);
 /* Supplied declaration required: rbTreeRotateRight_0030b12c. */
@@ -35,7 +35,7 @@ void FUN_0030aff4(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   
   pcVar1 = (char *)FUN_002f7664(param_2);
   if (pcVar1 + 0x10 != (char *)0x0) {
-    temp_v0 = onlineStringCopyConstruct(pcVar1 + 0x10,param_5);
+    temp_v0 = _ZN9Obj55aff4C1ERKS_(pcVar1 + 0x10,param_5);
     FUN_002ed91c(temp_v0 + 8,param_5 + 8);
   }
   *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;

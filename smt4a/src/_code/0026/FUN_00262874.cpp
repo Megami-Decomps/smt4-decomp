@@ -46,7 +46,7 @@ int panelSetMode3(...);
 int FUN_003343c0(...);
 int FUN_0033449c(...);
 int buttonHelpGetValue(void);
-int FUN_0035deb0(void);
+int uniteCreatePreviewModel(void);
 int FUN_0047fa90(...);
 int FUN_004fd508(...);
 
@@ -142,7 +142,7 @@ extern int FUN_00167458(int, unsigned int);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
-extern unsigned short FUN_0017760c(int);
+extern unsigned short recordGetScaledMaximum(int);
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -253,7 +253,7 @@ extern int gameGlobalsGetState(void);
 /* Supplied declaration required: FUN_0035ab40. */
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_0035deb0. */
+/* Supplied declaration required: uniteCreatePreviewModel. */
 /* Supplied declaration required: FUN_0035dfc0. */
 /* Supplied declaration required: FUN_00372100. */
 extern unsigned long long FUN_00372570(unsigned int);
@@ -1832,7 +1832,7 @@ LAB_002654dc:
               else {
                 FUN_002a5cf4();
                 FUN_0023b45c(0);
-                FUN_0035deb0();
+                uniteCreatePreviewModel();
               }
             }
             else {
@@ -1893,7 +1893,7 @@ LAB_002654dc:
               FUN_0037e1b0(0xffffffff,1);
               if (*(char *)(temp_v1 + 0x9b4) == '\x12') {
                 FUN_0022e774();
-                FUN_0035deb0();
+                uniteCreatePreviewModel();
               }
             }
             else {
@@ -3014,7 +3014,7 @@ LAB_0026700c:
             *(unsigned int *)(temp_v14 + 0xa0) = temp_v18;
             *(unsigned int *)(temp_v14 + 0xa4) = temp_v19;
             FUN_004bcd90(temp_v14);
-            temp_v3 = FUN_0017760c(temp_v14);
+            temp_v3 = recordGetScaledMaximum(temp_v14);
             *(unsigned short *)(temp_v14 + 0x2a) = temp_v3;
             *(unsigned short *)(temp_v14 + 0x2c) = *(unsigned short *)(temp_v14 + 0x10);
             *(unsigned int *)(temp_v1 + 0xfc4) = 0;

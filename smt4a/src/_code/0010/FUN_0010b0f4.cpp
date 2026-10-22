@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010cd2c(unsigned int, unsigned int *);
-int onlineStringDestroy(int *);
+int _ZN9Obj55aff4D1Ev(int *);
 int _ZN9Obj55aff4C1Ev(int *);
 int onlineFormatWideString(int *, unsigned char *, unsigned char *, int);
 
@@ -14,8 +14,8 @@ extern unsigned char g_systemTable; /* 0x59935c */
 extern unsigned char DAT_00630430; /* 0x630430 */
 
 /* Supplied declaration required: FUN_0010cd2c. */
-extern unsigned int *onlineStringConstruct(unsigned int *, unsigned char *);
-/* Supplied declaration required: onlineStringDestroy. */
+extern unsigned int *_ZN9Obj55aff4C1EPKc(unsigned int *, unsigned char *);
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 extern unsigned int FUN_002eac34(unsigned char);
 /* Supplied declaration required: onlineFormatWideString. */
@@ -39,11 +39,11 @@ void FUN_0010b0f4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     puVar2 = (unsigned int *)&uStack_18;
   }
   else {
-    puVar2 = (unsigned int *)onlineStringConstruct((unsigned int *)&uStack_18,&DAT_00630430);
+    puVar2 = (unsigned int *)_ZN9Obj55aff4C1EPKc((unsigned int *)&uStack_18,&DAT_00630430);
     temp_v0 = FUN_002eac34(*(unsigned char *)(param_1 + 0x24));
   }
   FUN_0010cd2c(temp_v0,puVar2);
-  onlineStringDestroy(&uStack_18);
+  _ZN9Obj55aff4D1Ev(&uStack_18);
   return;
 }
 

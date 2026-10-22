@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00299370(int);
 int memClear(unsigned short *, int);
-int FUN_003c1b18(unsigned short *, int, int);
+int unitApplyLevelGrowth(unsigned short *, int, int);
 int FUN_003c1ef4(int);
 int strncpy(unsigned short *, unsigned int, int);
 
@@ -33,7 +33,7 @@ struct fn_00333ef8_arg0 {
 /* Supplied declaration required: FUN_00299370. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_003c1b18. */
+/* Supplied declaration required: unitApplyLevelGrowth. */
 /* Supplied declaration required: FUN_003c1ef4. */
 
 
@@ -51,7 +51,7 @@ void FUN_00333ef8(fn_00333ef8_arg0 *param_1,unsigned int param_2,unsigned short 
   *(unsigned char *)((int)puVar1 + 0x5d) = 0;
   FUN_003c1ef4(0);
   if ((int)param_1 > 1) {
-    FUN_003c1b18(puVar1,(int)(signed char)((int)param_1 - 1),1);
+    unitApplyLevelGrowth(puVar1,(int)(signed char)((int)param_1 - 1),1);
   }
   *puVar1 = *param_3;
   puVar1[1] = param_3[1];

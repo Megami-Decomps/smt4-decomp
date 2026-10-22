@@ -15,7 +15,7 @@ int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
 int FUN_002b8244(int);
 int ifTouchRegionRemove(void);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int eventQueueAddUniqueIfValid(int);
 int FUN_002c1658(void);
 int messageClearObjectFlags(void);
@@ -46,8 +46,8 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_002a126c. */
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002c1658. */
 extern int sys43e188GetStateB(void);
@@ -107,11 +107,11 @@ void FUN_00391e48(unsigned int *param_1)
         param_1[2] = 2;
         FUN_00126fb8(g_aocMain + 0x80);
         temp_v6[0] = 0;
-        puVar5 = (unsigned int *)FUN_002bad5c(temp_v7);
+        puVar5 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v7);
         puVar5[2] = 0;
         puVar5[3] = 0;
         puVar6 = temp_v8;
-        resultPairInitialize(puVar6,0);
+        _ZN18WindowStatusResultC1Ej(puVar6,0);
         temp_v3 = *puVar6;
         temp_v0 = puVar6[1];
         puVar5[1] = temp_v0;

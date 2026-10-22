@@ -30,7 +30,7 @@ struct AocOperationState {
 
 extern "C" {
 extern AocDisplay* g_aocDisplay;
-MappedOperationStatus* resultPairInitialize(MappedOperationStatus* result, u32 code);
+MappedOperationStatus* _ZN18WindowStatusResultC1Ej(MappedOperationStatus* result, u32 code);
 
 // Clear the operation state, request the AOC display update and initialize a success result.
 void aocResetOperationState(AocOperationState* state)
@@ -46,6 +46,6 @@ void aocResetOperationState(AocOperationState* state)
     status->enabled = 1;
     status->mode = 0;
     MappedOperationStatus result;
-    status->result = *resultPairInitialize(&result, 0);
+    status->result = *_ZN18WindowStatusResultC1Ej(&result, 0);
 }
 }

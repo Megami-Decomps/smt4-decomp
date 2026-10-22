@@ -9,7 +9,7 @@ int FUN_00163aa4(unsigned int *);
 int ifTouchRegionRemove(void);
 int FUN_0016ccb4(int);
 int FUN_001760cc(unsigned int);
-int resultPairInitialize(unsigned int [5], int);
+int _ZN18WindowStatusResultC1Ej(unsigned int [5], int);
 int aocClearDisplayFlag(unsigned int);
 int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_00477d10(unsigned int *, unsigned int, int);
@@ -31,7 +31,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_0016ccb4. */
 /* Supplied declaration required: FUN_001760cc. */
 extern int sysLightEventTryWait(int);
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -90,7 +90,7 @@ void FUN_0047c36c(unsigned int *param_1)
   }
   *(unsigned char *)(param_1 + 0x84) = 1;
   param_1[0x87] = 0;
-  resultPairInitialize(temp_v2,0);
+  _ZN18WindowStatusResultC1Ej(temp_v2,0);
   temp_v1 = puVar2[1];
   param_1[0x85] = *puVar2;
   param_1[0x86] = temp_v1;

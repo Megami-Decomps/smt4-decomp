@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_0017760c(unsigned int);
+extern int recordGetScaledMaximum(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: gameGetSlotRecord. */
 
@@ -41,8 +41,8 @@ int FUN_00290978(int *param_1,int *param_2)
   else {
     temp_v1 = gameGetSlotRecord(*param_1);
     temp_v2 = gameGetSlotRecord(*param_2);
-    temp_v0 = FUN_0017760c(temp_v1);
-    temp_v3 = FUN_0017760c(temp_v2);
+    temp_v0 = recordGetScaledMaximum(temp_v1);
+    temp_v3 = recordGetScaledMaximum(temp_v2);
     temp_v0 = temp_v0 - temp_v3;
     if (temp_v0 == 0) {
       temp_v0 = 0;

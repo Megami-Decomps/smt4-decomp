@@ -8,7 +8,7 @@ int FUN_0012201a(int, int *, int);
 int asdOperatorDeleteArray(int);
 int FUN_002f4c9c(int);
 int FUN_002f4cd6(int, int, unsigned int);
-int FUN_0030fe20(int, unsigned int);
+int _ZN9Obj55b10412initCapacityEj(int, unsigned int);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002f4c9c. */
 /* Supplied declaration required: FUN_002f4cd6. */
-/* Supplied declaration required: FUN_0030fe20. */
+/* Supplied declaration required: _ZN9Obj55b10412initCapacityEj. */
 extern int wordRefCompare(int, unsigned int *);
 extern int __aeabi_uidivmod(unsigned int, int);
 
@@ -56,7 +56,7 @@ void FUN_00121fb0(int param_1,unsigned int param_2,int param_3,unsigned int para
   temp_v2 = *(unsigned int *)(param_1 + 0xc);
   temp_v0 = param_1;
   FUN_002f4c9c(param_1);
-  FUN_0030fe20(param_1,param_2);
+  _ZN9Obj55b10412initCapacityEj(param_1,param_2);
   if (param_3 != 0) {
     FUN_002f4cd6(param_1,param_3,temp_v4);
   }

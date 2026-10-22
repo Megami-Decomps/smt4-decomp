@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00107120(unsigned int, unsigned int, int, int);
 int onlineSockAddrConstruct(unsigned char [8]);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_00441db8(unsigned int *);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char LAB_00107239; /* 0x107239 */
 /* Supplied declaration required: FUN_00107120. */
 /* Supplied declaration required: onlineSockAddrConstruct. */
 extern unsigned int *operatorNewArray(unsigned int);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00441db8. */
 
 
@@ -40,7 +40,7 @@ unsigned int FUN_0010b830(unsigned int *param_1)
     puVar2 = puVar1 + 2;
     puVar1[1] = 1;
     *puVar1 = 0x18;
-    FUN_002f5020(puVar2,&LAB_00107239,0x18,1);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar2,&LAB_00107239,0x18,1);
   }
   param_1[1] = (unsigned int)puVar2;
   onlineSockAddrConstruct(temp_v1);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the process count in ip and the slot array in r4 (loading it after the early exit); built swaps them. */
 #include "common.h"
 
 extern "C" {

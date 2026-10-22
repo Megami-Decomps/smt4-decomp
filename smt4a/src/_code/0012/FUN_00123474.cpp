@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f3dc4(void);
@@ -18,7 +18,7 @@ typedef struct {
 } param_3_stack;
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -42,7 +42,7 @@ void FUN_00123474(unsigned int param_1,unsigned int *param_2,unsigned int *param
   unsigned char temp_v5 [4];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v3,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v3,temp_v0 + 0x58);
   temp_v2 = *param_3;
   temp_v0 = onlineInstanceTableGetCurrent();
   onlineInstanceTableFind(temp_v0,temp_v2);

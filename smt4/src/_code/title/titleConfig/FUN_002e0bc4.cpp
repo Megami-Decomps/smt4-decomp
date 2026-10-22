@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned char DAT_0044e0f8; /* 0x44e0f8 */
+extern unsigned char g_titleConfigValues; /* 0x44e0f8 */
 extern unsigned char DAT_0044e0f9; /* 0x44e0f9 */
 extern unsigned char DAT_0044e0fa; /* 0x44e0fa */
 extern unsigned char DAT_0044e0fb; /* 0x44e0fb */
@@ -22,20 +22,20 @@ void FUN_002e0bc4(void)
   if (temp_v0 != 0) {
     if (DAT_0044e0fc == '\0') {
       if (*(char *)(temp_v0 + 0x24b80) != '\0') {
-        DAT_0044e0f8 = *(unsigned char *)(temp_v0 + 0x24b7c);
+        g_titleConfigValues = *(unsigned char *)(temp_v0 + 0x24b7c);
         DAT_0044e0f9 = *(unsigned char *)(temp_v0 + 0x24b7d);
         DAT_0044e0fa = *(unsigned char *)(temp_v0 + 0x24b7e);
         DAT_0044e0fb = *(unsigned char *)(temp_v0 + 0x24b7f);
         return;
       }
-      *(unsigned char *)(temp_v0 + 0x24b7c) = DAT_0044e0f8;
+      *(unsigned char *)(temp_v0 + 0x24b7c) = g_titleConfigValues;
       *(unsigned char *)(temp_v0 + 0x24b7d) = DAT_0044e0f9;
       *(unsigned char *)(temp_v0 + 0x24b7e) = DAT_0044e0fa;
       *(unsigned char *)(temp_v0 + 0x24b7f) = DAT_0044e0fb;
       *(char *)(temp_v0 + 0x24b80) = '\x01';
       return;
     }
-    *(unsigned char *)(temp_v0 + 0x24b7c) = DAT_0044e0f8;
+    *(unsigned char *)(temp_v0 + 0x24b7c) = g_titleConfigValues;
     *(unsigned char *)(temp_v0 + 0x24b7d) = DAT_0044e0f9;
     *(unsigned char *)(temp_v0 + 0x24b7e) = DAT_0044e0fa;
     *(unsigned char *)(temp_v0 + 0x24b7f) = DAT_0044e0fb;

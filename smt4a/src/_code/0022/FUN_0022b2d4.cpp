@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0015f858(...);
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_003481c4(...);
@@ -117,7 +117,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -158,7 +158,7 @@ extern int FUN_003453b0(void);
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003fabfc. */
 /* Supplied declaration required: FUN_0047fc38. */
-extern int FUN_00480960(unsigned int);
+extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_00480da8. */
 
 
@@ -1596,7 +1596,7 @@ LAB_0022dbfc:
     temp_v12 = (6 - temp_v8) + temp_v7;
     temp_v5 = FUN_001834a4(0x12,temp_v12 + 0xa9);
     efctCallRoutineWithSpeedOverride(temp_v27[5] + *(short *)(temp_v5 + 8),temp_v27[6] + *(short *)(temp_v5 + 10),0xd3);
-    FUN_001676b0((int)(short)temp_v10,temp_v27[5] + *(short *)(temp_v5 + 8),
+    effectDispatchSelector((int)(short)temp_v10,temp_v27[5] + *(short *)(temp_v5 + 8),
                  temp_v27[6] + *(short *)(temp_v5 + 10),0xd3);
     temp_v5 = FUN_001834a4(0x12,temp_v12 + 0xaf);
     FUN_003481c4((int)(short)temp_v10,temp_v27[5] + *(short *)(temp_v5 + 8),
@@ -1614,7 +1614,7 @@ LAB_0022dcd0:
   if ((*(int *)(temp_v3 + 0x1368) != 2 && *(int *)(temp_v3 + 0x1368) != 3) &&
      ((*(unsigned short *)(temp_v4 + 0x13ac) & 4) != 0)) {
     temp_v3 = FUN_001834a4(0x12,0x123);
-    FUN_001676b0(2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xd3);
+    effectDispatchSelector(2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xd3);
     temp_v3 = FUN_001834a4(0x12,0x124);
     FUN_003481c4(2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xd3);
   }
@@ -1649,7 +1649,7 @@ LAB_0022de2c:
                    (s32)temp_v27[6] + (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v7 + 10),0xe2,0);
       temp_v8 = FUN_001834a4(0x12,0xa1);
       if (temp_v10 != 0) {
-        temp_v5 = FUN_00480960(temp_v10);
+        temp_v5 = equipmentHasPositiveUpgrade(temp_v10);
         if (temp_v5 != 0) {
           temp_v14 = temp_v10;
           FUN_0047fc38();
@@ -1657,7 +1657,7 @@ LAB_0022de2c:
             temp_v6 = 0xfbeb39ff;
           }
           else {
-            temp_v5 = FUN_00480960(temp_v10);
+            temp_v5 = equipmentHasPositiveUpgrade(temp_v10);
             if (temp_v5 != 0) {
               temp_v6 = 0x8400ff;
             }

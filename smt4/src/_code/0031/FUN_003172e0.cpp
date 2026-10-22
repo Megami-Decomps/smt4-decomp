@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026f204(...);
+int characterInfoPanelPopulate(...);
 int buttonHelpSetPreset(...);
 int padIsButtonRepeat(...);
 int FUN_002bf4f8(...);
@@ -26,7 +26,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0026ee68(unsigned int);
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0026f204. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -433,7 +433,7 @@ LAB_003179a8:
   if (!temp_v10 || temp_v6 != temp_v9) {
     *(int *)(*(int *)(param_1 + 8) + 0x24) =
          temp_v1 + *(int *)(param_1 + 0x134) + *(int *)(param_1 + 0x148);
-    FUN_0026f204(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
+    characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0xac));
     FUN_002bf810(0x100016c);
   }

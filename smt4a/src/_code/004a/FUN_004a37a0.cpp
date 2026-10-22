@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023ac54(...);
+int gameDataStoreSavedRecord(...);
 int rt_memcpy_w(...);
 
 typedef struct fn_004a37a0_arg1 fn_004a37a0_arg1;
@@ -63,7 +63,7 @@ typedef struct {
 } param_2_stack;
 
 extern int gameDataCopySaveEntry(fn_004a37a0_arg1 *, unsigned short *);
-/* Supplied declaration required: FUN_0023ac54. */
+/* Supplied declaration required: gameDataStoreSavedRecord. */
 extern unsigned short *slotEntryFindById(fn_004a37a0_arg1 *);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -122,7 +122,7 @@ void FUN_004a37a0(unsigned int param_1,fn_004a37a0_arg1 *param_2)
     uStack_30 = *(unsigned int *)(puVar1 + 0x24);
     rt_memcpy_w(temp_v18,puVar1 + 0x26,0x12);
     temp_v12 = (temp_v12 & 0xc3) | ((*(unsigned char *)((int)puVar1 + 299) & 0xf) << 2);
-    FUN_0023ac54(param_2,&temp_v1);
+    gameDataStoreSavedRecord(param_2,&temp_v1);
   }
   return;
 }

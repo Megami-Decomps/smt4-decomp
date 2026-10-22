@@ -53,6 +53,7 @@
 0x00100f14 FUN_00100f14 between
 0x00100f9c FUN_00100f9c between
 0x00100fc8 FUN_00100fc8 between
+0x00101080 FUN_00101080 between
 0x0010108c libc_strtokR name
 0x001010d4 digitValueInBase between
 0x001010f2 FUN_001010f2 callers
@@ -128,8 +129,8 @@
 0x0011c460 nn_hid_CTR_TouchPanelReader_ReadLatest name
 0x0011c4e4 nn_hid_CTR_AccelerometerReader_ReadLatest name
 0x0011c5a8 nn_hid_CTR_AccelerometerReader_ConvertToAcceleration name
-0x0011c624 FUN_0011c624 between
-0x0011c6ac FUN_0011c6ac between
+0x0011c624 _ZN2nn3hid3CTR19AccelerometerReaderC1EPv name
+0x0011c6ac _ZN2nn3hid3CTR19AccelerometerReaderD1Ev name
 0x0011c6c0 FUN_0011c6c0 between
 0x0011c6cc FUN_0011c6cc between
 0x0011c7fc nn_hid_CTR_PadReader_PadReader_sub_object name
@@ -227,9 +228,11 @@
 0x00123a38 addressBlockInit callers
 0x00126e5c FUN_00126e5c callers
 0x00126fb8 FUN_00126fb8 between
+0x00126fd0 FUN_00126fd0 between
 0x00127000 FUN_00127000 between
 0x001270a8 FUN_001270a8 between
 0x001270f8 FUN_001270f8 between
+0x00127138 FUN_00127138 between
 0x00127188 FUN_00127188 between
 0x001271a0 FUN_001271a0 between
 0x001272fc FUN_001272fc callers
@@ -255,12 +258,12 @@
 0x001286a0 nn_hid_CTR_AnalogStickClamper_ClampValueOfClamp name
 0x001286ec nn_hid_CTR_AnalogStickClamper_ClampCore name
 0x00128780 nn_hid_CTR_AnalogStickClamper_AnalogStickClamper_sub_object name
-0x001287e4 FUN_001287e4 between
-0x0012888c FUN_0012888c between
+0x001287e4 FUN_001287e4 callers
+0x0012888c FUN_0012888c callers
 0x00128ab4 nn_hid_CTR_AccelerometerReader_Transform name
 0x00128c30 FUN_00128c30 between
-0x00128ca8 FUN_00128ca8 between
-0x00128cd8 FUN_00128cd8 between
+0x00128ca8 FUN_00128ca8 callers
+0x00128cd8 FUN_00128cd8 callers
 0x00128d08 FUN_00128d08 between
 0x00128d20 FUN_00128d20 between
 0x00128d24 FUN_00128d24 between
@@ -269,7 +272,9 @@
 0x00128d98 FUN_00128d98 between
 0x00128de4 FUN_00128de4 between
 0x00128e20 FUN_00128e20 between
+0x00128f00 FUN_00128f00 callers
 0x00128f2c FUN_00128f2c between
+0x00128f3c FUN_00128f3c between
 0x00128f40 nn_snd_CTR_MasterManagerImpl_Finalize name
 0x00128f60 FUN_00128f60 between
 0x00128f9c nw_snd_Sound3DManager_Initialize_128F9C name
@@ -391,6 +396,7 @@
 0x00132cbc nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded name
 0x00132eb4 FUN_00132eb4 between
 0x00133050 FUN_00133050 between
+0x00133058 indexedResourceQuery between
 0x00133094 FUN_00133094 callers
 0x001330a0 FUN_001330a0 callers
 0x00133568 FUN_00133568 callers
@@ -444,7 +450,7 @@
 0x0013a8c4 nn_snd_CTR_StartSoundThread name
 0x0013a904 nn_snd_CTR_MasterManagerImpl_Initialize name
 0x0013a92c FUN_0013a92c between
-0x0013aae8 FUN_0013aae8 between
+0x0013aae8 FUN_0013aae8 callers
 0x0013ab10 FUN_0013ab10 between
 0x0013abfc nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode name
 0x0013ac30 FUN_0013ac30 between
@@ -452,6 +458,8 @@
 0x0013ac60 FUN_0013ac60 between
 0x0013ac6c FUN_0013ac6c between
 0x0013acbc nn_snd_CTR_Dspsnd_InitializeVariables name
+0x0013b0f0 nn_gxlow_CTR_ReadHWRegs name
+0x0013b0f4 nn_gxlow_CTR_ReadHWRegsBody name
 0x0013b11c nn_gxlow_CTR_CmdReqQueueTx_Finalize name
 0x0013b180 nn_gxlow_CTR_SetBufferSwap name
 0x0013b218 FUN_0013b218 between
@@ -631,6 +639,7 @@
 0x00146ee0 FUN_00146ee0 callers
 0x00146ef0 FUN_00146ef0 callers
 0x00147004 FUN_00147004 between
+0x0014701c guardedByteSetValue between
 0x0014702c nn_snd_CTR_Dspsnd_SetSyncMode name
 0x00147070 nn_snd_CTR_Dspsnd_SetRearRatio name
 0x001470c0 nn_snd_CTR_Dspsnd_SetClippingMode name
@@ -793,6 +802,7 @@
 0x0014fa90 FUN_0014fa90 callers
 0x0014faa0 FUN_0014faa0 callers
 0x0014fbc4 FUN_0014fbc4 callers
+0x0014fbe0 listNodeCopy between
 0x0014fbec FUN_0014fbec callers
 0x0014fce4 nn_snd_CTR_ThreadManager_ThreadManager_sub_object name
 0x0014fd38 FUN_0014fd38 between
@@ -913,7 +923,9 @@
 0x001560c4 FUN_001560c4 between
 0x001560dc FUN_001560dc between
 0x00156260 FUN_00156260 between
+0x00156294 FUN_00156294 between
 0x001562fc FUN_001562fc between
+0x00156330 dspFxSetReverb between
 0x00156400 nn_snd_CTR_Voice_EnableBiquadFilter name
 0x00156420 nn_snd_CTR_Voice_SetMonoFilterCoefficients name
 0x001564ac nn_snd_CTR_Dspsnd_SetChannelMix name
@@ -1438,6 +1450,7 @@
 0x002ac658 nw_snd_internal_SoundArchiveLoader_LoadImpl name
 0x002ac788 nn_fs_detail_FileBase_TrySeek name
 0x002ac838 libc_mbstowcs name
+0x002ac8a8 FUN_002ac8a8 between
 0x002ac8b0 multibyteToUtf16 between
 0x002ac900 nw_ut_internal_LinkListImpl_erase_2AC900 name
 0x002ac94c FUN_002ac94c between
@@ -1701,6 +1714,8 @@
 0x0034ee98 FUN_0034ee98 callers
 0x0034f050 mobiclipDeblockerRelease name
 0x0034f0fc FUN_0034f0fc between
+0x0034f400 FUN_0034f400 between
+0x0034f40c FUN_0034f40c between
 0x0034f484 FUN_0034f484 between
 0x0034f534 FUN_0034f534 between
 0x0034f5f8 FUN_0034f5f8 callers
@@ -1709,6 +1724,7 @@
 0x0034f6c8 FUN_0034f6c8 between
 0x0034f6cc FUN_0034f6cc between
 0x0034f6e8 FUN_0034f6e8 callers
+0x0034f758 soundResetPairState between
 0x0034f768 FUN_0034f768 between
 0x0034f780 FUN_0034f780 callers
 0x0034f7ec FUN_0034f7ec between
@@ -1882,6 +1898,7 @@
 0x00356c40 nn_fs_ipc_Directory_Close name
 0x00356f80 nn_gr_CTR_Vertex_DisableAttr name
 0x0035708c FUN_0035708c between
+0x00357194 vertexLoadArrayInstall between
 0x003572d0 FUN_003572d0 between
 0x003572dc FUN_003572dc between
 0x003572e8 FUN_003572e8 between
@@ -2045,7 +2062,7 @@
 0x0035ebc4 textChannelMatchExpression between
 0x0035efa0 textChannelParseUtf16Stream between
 0x0035f198 ngwordStateReset between
-0x0035f1f4 FUN_0035f1f4 between
+0x0035f1f4 _ZN9Obj420fa4C1Ev between
 0x0035f244 textContainsAtSign between
 0x0035f290 FUN_0035f290 between
 0x0035f50c FUN_0035f50c between
@@ -2113,6 +2130,7 @@
 0x00362040 FUN_00362040 between
 0x003620a8 nw_gfx_AnimBlender_UpdateCache name
 0x00362100 nw_gfx_AnimBlender_UpdateFrame name
+0x00362158 holderSetAuxiliaryValue between
 0x00362168 FUN_00362168 between
 0x003621a8 nw_gfx_ParticleEmitter_Accept name
 0x003621fc FUN_003621fc between
@@ -2125,6 +2143,7 @@
 0x00362c28 nw_gfx_AmbientLight_CreateOriginalValue name
 0x00362d10 nw_gfx_HemiSphereLight_Accept name
 0x00362d64 FUN_00362d64 between
+0x003630b0 FUN_003630b0 between
 0x003630b8 FUN_003630b8 between
 0x0036333c FUN_0036333c between
 0x00363390 FUN_00363390 between
@@ -2245,7 +2264,7 @@
 0x00373c04 nw_gfx_Material_Create name
 0x00373d68 FUN_00373d68 callers
 0x00373e30 FUN_00373e30 between
-0x00373ee0 FUN_00373ee0 between
+0x00373ee0 _ZN9Obj421874D1Ev between
 0x00374030 FUN_00374030 between
 0x00374050 textureCalcSrtMatrix between
 0x00375980 FUN_00375980 between
@@ -2317,14 +2336,17 @@
 0x003798f8 FUN_003798f8 callers
 0x00379904 nw_snd_internal_BasicSound_SetInitialVolume name
 0x00379920 nw_snd_SoundPlayer_detail_RemoveSound name
+0x00379954 soundResetStateWord between
 0x00379960 nw_snd_internal_BasicSound_SetPlayerPriority name
 0x00379990 nw_snd_internal_BasicSound_GetAmbientPriority name
+0x003799b8 FUN_003799b8 between
 0x003799bc FUN_003799bc callers
 0x003799c4 FUN_003799c4 callers
 0x003799d4 nw_snd_internal_ExternalSoundPlayer_RemoveSound name
 0x003799f8 FUN_003799f8 callers
 0x00379a04 FUN_00379a04 callers
 0x00379a14 FUN_00379a14 between
+0x00379b90 _ZN9Obj421aa49emptyHookEv between
 0x00379b94 FUN_00379b94 between
 0x00379bdc nw_snd_internal_CurveAdshr_Reset name
 0x00379bf8 nw_snd_internal_CurveAdshr_SetHold name
@@ -2375,6 +2397,7 @@
 0x0037b480 FUN_0037b480 between
 0x0037b4b0 FUN_0037b4b0 between
 0x0037b540 FUN_0037b540 between
+0x0037b544 FUN_0037b544 between
 0x0037b5c4 nw_snd_internal_PlayerHeapDataManager_Initialize name
 0x0037b614 FUN_0037b614 callers
 0x0037b61c FUN_0037b61c between
@@ -2500,7 +2523,7 @@
 0x003810e0 FUN_003810e0 between
 0x00381114 FUN_00381114 between
 0x00381254 _ZN9Obj4220945resetEv between
-0x00381258 FUN_00381258 between
+0x00381258 uiStateResetHook between
 0x0038125c FUN_0038125c between
 0x0038128c FUN_0038128c callers
 0x003dfea0 FUN_003dfea0 callers
@@ -2539,6 +2562,9 @@
 0x003e2c14 nw_gfx_ShaderBinaryInfo_BuildShaderProgramCommand name
 0x003e2cc0 nw_gfx_ShaderBinaryInfo_GetShaderProgramCommandSize name
 0x003e2e10 FUN_003e2e10 between
+0x003e371c allocatorObjectGetResource between
+0x003e3724 FUN_003e3724 between
+0x003e3730 FUN_003e3730 between
 0x003e3738 nw_gfx_WorldMatrixUpdater_CalculateWorldXsi name
 0x003e38d0 nw_gfx_WorldMatrixUpdater_CalculateWorldBasic name
 0x003e3c4c nw_gfx_WorldMatrixUpdater_CalculateWorldMayaSsc name
@@ -2553,7 +2579,9 @@
 0x003e4548 FUN_003e4548 between
 0x003e46d8 nw_gfx_TransformAnimEvaluator_EvaluateMemberAnim name
 0x003e4c90 nw_gfx_TransformAnimEvaluator_EvaluateMemberBakedAnim name
+0x003e4f90 resourceHolderGetCategory between
 0x003e4f98 FUN_003e4f98 between
+0x003e4ff8 FUN_003e4ff8 between
 0x003e5004 FUN_003e5004 between
 0x003e5cb8 FUN_003e5cb8 between
 0x003e5d08 FUN_003e5d08 between
@@ -2666,6 +2694,12 @@
 0x003ea2cc dataTable26GroupGetRecordS2 between
 0x003ea320 FUN_003ea320 between
 0x003ea930 FUN_003ea930 between
+0x003ea954 _ZNK9Obj4224b011equalsValueEPK20SelectionValueRecord between
+0x003ea9b0 _ZNK9Obj4224d411equalsValueEPK28ExtendedSelectionValueRecord between
+0x003eaa4c _ZNK9Obj4224f811equalsValueEPK20SelectionValueRecord between
+0x003eaa88 FUN_003eaa88 between
+0x003eab3c _ZNK9Obj4224b016implementationIdEv between
+0x003eab44 selectionEqualIdentity between
 0x003eac84 soundArchiveLoaderGetFileAddress between
 0x003eada0 FUN_003eada0 between
 0x003eade8 FUN_003eade8 between

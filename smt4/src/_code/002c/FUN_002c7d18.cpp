@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
 int FUN_00256cd8(unsigned int, double, unsigned char [16]);
-int FUN_0025b750(...);
+int forwardRecoveredCallback(...);
 int FUN_0028c92c(...);
 int FUN_002a2c7c(...);
 int FUN_002a34e8(...);
@@ -115,7 +115,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
 /* Supplied declaration required: FUN_00256cd8. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_0028c92c. */
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002a34e8. */
@@ -321,7 +321,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
               FUN_002aff70(temp_v37);
               FUN_002aff70(temp_v37);
               FUN_002aff70(temp_v37);
-              FUN_0025b750();
+              forwardRecoveredCallback();
             }
           }
           temp_v2 = temp_v2 + 1;
@@ -368,7 +368,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
               FUN_002aff70(temp_v37);
               FUN_002aff70(temp_v37);
               FUN_002aff70(temp_v37);
-              FUN_0025b750();
+              forwardRecoveredCallback();
             }
           }
           temp_v2 = temp_v2 + 1;

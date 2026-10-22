@@ -17,7 +17,7 @@ f32 jobGetScalarValue();
 void efctSetSpeed(f32);
 void FUN_00183bb0();
 void vectorSetAllOne(QuadVector *);
-void *FUN_002f5020(QuadVector *, void (*)(QuadVector *), u32, u32);
+void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32, u32);
 void quadSetOrderedVectors(const QuadVector *, const QuadVector *, const QuadVector *,
                   const QuadVector *, s32, s32);
 void FUN_00185dd4(u32, u32, s32, u32, u32, u32, u32, u32);
@@ -43,7 +43,7 @@ void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer,
     }
     if (useColors && extension != NULL) {
         QuadVector colors[4];
-        FUN_002f5020(colors, vectorSetAllOne, sizeof(QuadVector), 4);
+        __aeabi_vec_ctor_nocookie_nodtor(colors, vectorSetAllOne, sizeof(QuadVector), 4);
         colors[0] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[0];
         colors[1] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[1];
         colors[2] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[2];

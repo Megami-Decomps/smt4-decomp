@@ -7,7 +7,7 @@ extern "C" {
 typedef int romwright_code(...);
 extern unsigned char DAT_00420eb8; /* 0x420eb8 */
 
-extern int FUN_002a4288(void);
+extern int _ZN9Obj420f70D1Ev(void);
 
 
 int FUN_003565e0(unsigned int *param_1)
@@ -28,12 +28,12 @@ int FUN_003565e0(unsigned int *param_1)
   if (param_1[0x46] != 0) {
     param_1[0x46] = 0;
   }
-  temp_v0 = FUN_002a4288();
+  temp_v0 = _ZN9Obj420f70D1Ev();
   *(unsigned char **)(temp_v0 - 0x3c) = &DAT_00420eb8;
   if (*(int *)(temp_v0 - 0x18) != 0) {
     *(unsigned int *)(temp_v0 - 0x18) = 0;
   }
-  temp_v0 = FUN_002a4288();
+  temp_v0 = _ZN9Obj420f70D1Ev();
   return temp_v0 - 0xb8;
 }
 

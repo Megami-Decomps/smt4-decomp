@@ -7,7 +7,7 @@ extern "C" {
 int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
 int FUN_00230038(int *);
-int FUN_003fac30(int, int, int *, int, int, int);
+int spriteDrawWithOrigin(int, int, int *, int, int, int);
 int FUN_003fba4c(int, int, int, int *, int, int);
 int VectorFloatToUnsigned(double, int);
 
@@ -27,7 +27,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00230038. */
 extern int FUN_00387580(unsigned int);
-/* Supplied declaration required: FUN_003fac30. */
+/* Supplied declaration required: spriteDrawWithOrigin. */
 /* Supplied declaration required: FUN_003fba4c. */
 
 
@@ -97,7 +97,7 @@ unsigned int FUN_00289f10(void)
       temp_v3 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
       temp_v0 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
       temp_v2 = VectorFloatToUnsigned(temp_v6 * 255.0f,3);
-      FUN_003fac30(piVar1[0xd],0,piVar1 + 6,
+      spriteDrawWithOrigin(piVar1[0xd],0,piVar1 + 6,
                    temp_v2 + (temp_v0 + (temp_v3 + temp_v1 * 0x100) * 0x100) * 0x100,1,0);
       temp_v5 = (float)temp_v7;
       temp_v1 = VectorFloatToUnsigned(temp_v5 * temp_v8,3);

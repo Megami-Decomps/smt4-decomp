@@ -11,7 +11,7 @@ struct SdkResourceOptions {
 
 extern "C" {
 void sysFatalBreak(void);
-void resultPairInitialize(u32 *result, u32 code);
+void _ZN18WindowStatusResultC1Ej(u32 *result, u32 code);
 u32 FUN_00426800(u32 *scratch, u32 state[6], u32 count, u64 descriptor, u32 flags);
 u32 FUN_004269b0(u32 state[6], u8 mode, const u64 *descriptor, s32 count);
 
@@ -45,11 +45,11 @@ void sdkCreateEncodedResourceDescriptor(u32 *result, u64 *outDescriptor, const S
     u32 requestState[6];
     u32 code = FUN_00426800(&scratch, requestState, 1, descriptor, 0);
     if (code == 0xd8a083fa) {
-        resultPairInitialize(result, 0xc8813894);
+        _ZN18WindowStatusResultC1Ej(result, 0xc8813894);
         return;
     }
     if (static_cast<s32>(code) < 0) {
-        resultPairInitialize(result, code);
+        _ZN18WindowStatusResultC1Ej(result, code);
         return;
     }
     u32 queryState[6];
@@ -57,14 +57,14 @@ void sdkCreateEncodedResourceDescriptor(u32 *result, u64 *outDescriptor, const S
     s32 description = code & 0x3ff;
     if ((((code & 0x3fc00) >> 10) == 17 && description >= 100 && description <= 179) ||
         code == 0xd8a083fa || code == 0xc8a0802b) {
-        resultPairInitialize(result, 0xc8813887);
+        _ZN18WindowStatusResultC1Ej(result, 0xc8813887);
         return;
     }
     if (static_cast<s32>(code) < 0) {
-        resultPairInitialize(result, code);
+        _ZN18WindowStatusResultC1Ej(result, code);
         return;
     }
     *outDescriptor = descriptor;
-    resultPairInitialize(result, 0);
+    _ZN18WindowStatusResultC1Ej(result, 0);
 }
 }

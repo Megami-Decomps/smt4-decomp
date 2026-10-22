@@ -43,6 +43,37 @@ typedef struct AsdTexture {
     };
 } AsdTexture;
 
+/* Buffer-handle entry: texture and backing allocation are independently owned. */
+typedef struct AsdBufferHandle {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ AsdTexture *texture;
+    /* 0x0C */ void *buffer;
+    /* 0x10 */ u32 active;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u32 flags;
+} AsdBufferHandle;
+
+typedef struct AsdTgaHeader {
+    /* 0x00 */ u8 unk00[12];
+    /* 0x0C */ u8 widthLow;
+    /* 0x0D */ u8 widthHigh;
+    /* 0x0E */ u8 heightLow;
+    /* 0x0F */ u8 heightHigh;
+    /* 0x10 */ u8 depth;
+    /* 0x11 */ u8 descriptor;
+} AsdTgaHeader;
+typedef struct AsdNw4cUserData {
+    /* 0x00 */ char identifier[16];
+    /* 0x10 */ u32 offset;
+} AsdNw4cUserData;
+typedef struct AsdNw4cChunk {
+    /* 0x00 */ char identifier[8];
+    /* 0x08 */ u32 bytes;
+} AsdNw4cChunk;
+typedef char AsdTgaHeaderSizeCheck[sizeof(AsdTgaHeader) == 0x12 ? 1 : -1];
+typedef char AsdNw4cUserDataSizeCheck[sizeof(AsdNw4cUserData) == 0x14 ? 1 : -1];
+typedef char AsdNw4cChunkSizeCheck[sizeof(AsdNw4cChunk) == 0x0C ? 1 : -1];
+
 #ifdef __cplusplus
 extern "C" {
 #endif

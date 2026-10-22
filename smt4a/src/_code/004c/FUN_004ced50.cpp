@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0017760c(...);
+int recordGetScaledMaximum(...);
 int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 extern int gameGetPlayerData(void);
 extern int FUN_00187168(void);
 extern int gameGetSlotRecord(void);
@@ -58,7 +58,7 @@ unsigned int FUN_004ced50(void)
       if (-1 < *(char *)(temp_v1 + 0x1c88 + temp_v2)) {
         temp_v4 = gameGetSlotRecord();
         temp_v8 = (int)*(short *)(temp_v4 + 0x2a);
-        temp_v5 = FUN_0017760c();
+        temp_v5 = recordGetScaledMaximum();
         temp_v9 = SBORROW4(temp_v8,temp_v5);
         temp_v3 = temp_v8 - temp_v5;
         if (temp_v5 <= temp_v8) {
@@ -81,7 +81,7 @@ unsigned int FUN_004ced50(void)
     temp_v1 = FUN_00187168();
     if (temp_v1 != 0) {
       temp_v0 = *(short *)(temp_v6 + 0x2a);
-      temp_v1 = FUN_0017760c(temp_v6);
+      temp_v1 = recordGetScaledMaximum(temp_v6);
       if (temp_v0 < temp_v1) {
         return 1;
       }

@@ -17,7 +17,7 @@ protected:
 };
 
 /* The middle of the chain (vtable at 0x55b314, named after it until its real name is known): its
- * constructor is FUN_00300844. Its destructor calls vfunc08 (an empty hook here), which is why
+ * constructor is _ZN9Obj55b314C1Ei. Its destructor calls vfunc08 (an empty hook here), which is why
  * derived destructors still store its vtable. */
 class Obj55b314 : public Obj558a3c {
 public:

@@ -8,7 +8,7 @@ int asdOperatorNew(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: asdOperatorNew. */
-extern int *FUN_003a8824(void);
+extern int *_ZN9Obj4223c4C1Ej(void);
 extern int *FUN_003aa7d4(void);
 extern int *FUN_003aa820(void);
 extern int *bibleScreenInitializeCallbacks(void);
@@ -64,14 +64,14 @@ unsigned int FUN_001e4734(int *param_1)
     asdOperatorNew();
     piVar2 = (int *)0x0;
     if (temp_v1 != 0) {
-      piVar2 = (int *)FUN_003a8824();
+      piVar2 = (int *)_ZN9Obj4223c4C1Ej();
     }
     break;
   case 1:
     asdOperatorNew();
     piVar2 = (int *)0x0;
     if (temp_v1 != 0) {
-      piVar2 = (int *)FUN_003a8824();
+      piVar2 = (int *)_ZN9Obj4223c4C1Ej();
     }
     break;
   case 2:

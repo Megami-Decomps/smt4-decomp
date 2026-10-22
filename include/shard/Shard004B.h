@@ -55,4 +55,47 @@ typedef struct Halves34 {
     /* 0x34 */ u16 h[8];
 } Halves34;
 
+#include <stddef.h>
+
+/* A record with a conditionally scaled maximum and its current pair of values. */
+struct ScaledRecordValues {
+    /* 0x00 */ u8 unk00[0x0e];
+    /* 0x0E */ s16 maximum;
+    /* 0x10 */ u16 secondaryMaximum;
+    /* 0x12 */ u8 unk12[0x18];
+    /* 0x2A */ s16 current;
+    /* 0x2C */ u16 secondaryCurrent;
+    /* 0x2E */ u8 unk2e[0x32];
+    /* 0x60 */ u16 flags;
+    /* 0x62 */ u16 id;
+};
+
+typedef char ScaledRecordValuesSizeCheck[sizeof(ScaledRecordValues) == 0x64 ? 1 : -1];
+typedef char ScaledRecordValuesMaximumOffsetCheck[
+    offsetof(ScaledRecordValues, maximum) == 0x0e ? 1 : -1];
+typedef char ScaledRecordValuesCurrentOffsetCheck[
+    offsetof(ScaledRecordValues, current) == 0x2a ? 1 : -1];
+typedef char ScaledRecordValuesFlagsOffsetCheck[
+    offsetof(ScaledRecordValues, flags) == 0x60 ? 1 : -1];
+typedef char ScaledRecordValuesIdOffsetCheck[
+    offsetof(ScaledRecordValues, id) == 0x62 ? 1 : -1];
+
+/* The equipped item ids and their per-category rank limits. */
+struct ItemRankRecord {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u16 items[8];
+    /* 0x44 */ s8 ranks[8];
+    /* 0x4C */ s8 categoryRanks[18];
+    /* 0x5e */ u8 unk5e[4];
+    /* 0x62 */ u16 id;
+};
+
+typedef char ItemRankRecordSizeCheck[sizeof(ItemRankRecord) == 0x64 ? 1 : -1];
+typedef char ItemRankRecordIdOffsetCheck[offsetof(ItemRankRecord, id) == 0x62 ? 1 : -1];
+
+struct ItemRankDefinition {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 category;
+};
+
 #endif

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00246730(...);
-int FUN_00294414(...);
+int commandResetThreeChannels(...);
 int FUN_002ae164(...);
 int FUN_00338358(...);
 int FUN_003392cc(...);
@@ -25,7 +25,7 @@ extern int DAT_00435d18; /* 0x435d18 */
 extern int FUN_0023fad8(int);
 /* Supplied declaration required: FUN_00246730. */
 extern int FUN_00293ed0(int);
-/* Supplied declaration required: FUN_00294414. */
+/* Supplied declaration required: commandResetThreeChannels. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_00338358. */
 /* Supplied declaration required: FUN_003392cc. */
@@ -113,7 +113,7 @@ unsigned int FUN_003d1c1c(int *param_1,int param_2)
     FUN_00338358(*param_1);
     temp_v1 = FUN_00293ed0(*param_1);
     if (temp_v1 != 0) {
-      FUN_00294414(*param_1);
+      commandResetThreeChannels(*param_1);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xd;
       return 1;
     }

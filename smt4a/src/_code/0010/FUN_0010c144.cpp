@@ -23,7 +23,7 @@ extern int streamSkip(int);
 extern int streamReadU32(int, unsigned int *);
 extern int streamReadU16(int, unsigned int *);
 extern int streamReadBytes(int, int, unsigned int);
-extern int FUN_002ef9e0(unsigned char *, unsigned int);
+extern int _ZN9Obj55933cC1Et(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002f5d1e. */
 extern int FUN_002f5d2a(int, int, unsigned int);
 
@@ -80,7 +80,7 @@ unsigned int FUN_0010c144(unsigned int param_1,int param_2,int param_3,unsigned 
           if (temp_v0 == 0) {
             return 0;
           }
-          temp_v0 = FUN_002ef9e0(temp_v8,temp_v6 & 0xffff);
+          temp_v0 = _ZN9Obj55933cC1Et(temp_v8,temp_v6 & 0xffff);
           *(unsigned short *)(param_3 + 0x4c) = *(unsigned short *)(temp_v0 + 4);
         }
         if (temp_v3[0] < 4) {

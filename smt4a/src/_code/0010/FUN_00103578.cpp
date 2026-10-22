@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e34(int **, int);
+int _ZN9Obj55b28cC1EPv(int **, int);
 int FUN_002e6e50(int);
 int _ZN9Obj55b28cD1Ev(int **);
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: FUN_002e6e50. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
@@ -29,7 +29,7 @@ void FUN_00103578(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
   uStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&piStack_18,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&piStack_18,temp_v0 + 0x58);
   if (*(char *)(temp_v1 + 0x22) == '\x02') {
     FUN_002e6e50(temp_v1);
   }

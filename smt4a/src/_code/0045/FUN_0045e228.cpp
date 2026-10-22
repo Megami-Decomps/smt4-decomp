@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015fe40(int, unsigned int);
 int FUN_001cb8e4(int **, int);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_004606d8(int, int *, int *);
 int FUN_00460824(int, unsigned int, int, int);
 int FUN_0046089c(...);
@@ -63,7 +63,7 @@ extern unsigned char DAT_00548f40; /* 0x548f40 */
 /* Supplied declaration required: FUN_0015fe40. */
 extern int FUN_001946d4(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_001cb8e4. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_004606d8. */
 /* Supplied declaration required: FUN_00460824. */
 /* Supplied declaration required: FUN_0046089c. */
@@ -160,8 +160,8 @@ FUN_0045e228(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
   temp_v16 = 0;
   temp_v29 = 0xffffffff;
   iStack_44 = 0;
-  FUN_002f5020(temp_v11,&LAB_001b1aa8,8,4);
-  FUN_002f5020(temp_v24,&LAB_001b1aa8,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v11,&LAB_001b1aa8,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v24,&LAB_001b1aa8,8,4);
   temp_v29 = *(unsigned int *)(temp_v33 + 0xb0);
   if (temp_v7 == 0) {
     if (temp_v10 == 0) {

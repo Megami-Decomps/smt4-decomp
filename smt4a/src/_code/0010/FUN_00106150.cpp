@@ -17,7 +17,7 @@ extern unsigned char DAT_0055ab2c; /* 0x55ab2c */
 extern unsigned int destroyObj005593a0(void);
 /* Supplied declaration required: sysMemClear. */
 extern int operatorNew(unsigned int);
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: FUN_002ecef0. */
 extern int FUN_002ed074(unsigned int *, unsigned int);
 extern int FUN_002ed094(int);
@@ -38,7 +38,7 @@ int FUN_00106150(void)
   unsigned char temp_v3;
   int temp_v4;
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_00558914;
   temp_v0 = FUN_002ed074(puVar1 + 4,0xc);
   temp_v0 = FUN_002ed094(temp_v0 + 0x18);

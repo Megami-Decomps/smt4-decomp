@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00244ee0(void);
 int FUN_0025cc04(...);
 int FUN_0025cc34(void);
-int FUN_0025cc8c(void);
+int playerGetMappedCategory(void);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_002b6db0(...);
@@ -70,7 +70,7 @@ extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 /* Supplied declaration required: FUN_0025cc04. */
 /* Supplied declaration required: FUN_0025cc34. */
 extern int FUN_0025cc54(void);
-/* Supplied declaration required: FUN_0025cc8c. */
+/* Supplied declaration required: playerGetMappedCategory. */
 /* Supplied declaration required: FUN_0028cfd8. */
 extern short FUN_0028d24c(void);
 /* Supplied declaration required: listGetU16OrZero. */
@@ -417,7 +417,7 @@ void FUN_0025d1c4(int param_1)
               temp_v1 = 1;
               temp_v13 = 0;
               temp_v21 = 1;
-              FUN_0025cc8c();
+              playerGetMappedCategory();
               temp_v5 = (int)temp_v1;
               temp_v0 = 0;
             }
@@ -751,7 +751,7 @@ void FUN_0025d1c4(int param_1)
         temp_v1 = 1;
         temp_v12 = 0;
         temp_v21 = 1;
-        FUN_0025cc8c();
+        playerGetMappedCategory();
         temp_v5 = (int)temp_v1;
         temp_v0 = 0;
       }

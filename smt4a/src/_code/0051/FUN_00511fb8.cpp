@@ -7,7 +7,7 @@ extern "C" {
 int nn_os_CriticalSection_Initialize(...);
 int nn_os_LightEvent_Initialize(...);
 int emptyStub_002f4370(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -39,7 +39,7 @@ extern unsigned int DAT_00646074; /* 0x646074 */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
 /* Supplied declaration required: emptyStub_002f4370. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_00511fb8(unsigned int *param_1)
@@ -72,7 +72,7 @@ void FUN_00511fb8(unsigned int *param_1)
   DAT_0064602c = &DAT_0055b428;
   DAT_00646070 = 0;
   DAT_00646074 = 0;
-  FUN_002f5020(&DAT_005c0b08,&LAB_0042d1c0,4,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_005c0b08,&LAB_0042d1c0,4,2);
   emptyStub_002f4370(0,0x1f3ddc,0x100000);
   return;
 }

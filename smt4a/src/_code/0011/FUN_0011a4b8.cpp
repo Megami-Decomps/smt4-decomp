@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010c97e(unsigned int, unsigned int);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int FUN_002e6e50(int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int vectorCopyHeader(int, unsigned int);
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0010c97e. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: FUN_002e6e50. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
@@ -39,7 +39,7 @@ void FUN_0011a4b8(int param_1,int param_2)
   unsigned int temp_v4 [2];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   if (*(char *)(param_2 + 0x10) != '\x02') {
     temp_v4[0] = 0x80050001;
     temp_v1 = FUN_002e7908(temp_v3,temp_v4);

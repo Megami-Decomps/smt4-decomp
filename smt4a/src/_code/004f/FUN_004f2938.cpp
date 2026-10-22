@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
 } param_4_stack;
 
-extern unsigned int DAT_005e1530; /* 0x5e1530 */
+extern unsigned int g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern unsigned int DAT_005e1534; /* 0x5e1534 */
 extern unsigned int DAT_005e1538; /* 0x5e1538 */
 
@@ -77,7 +77,7 @@ void FUN_004f2938(fn_004f2938_arg0 *param_1,unsigned int param_2,unsigned int pa
   param_1->field_0x608 = param_1->field_0x738;
   param_1->field_0x60c = param_1->field_0x73c;
   param_1->field_0x610 = param_1->field_0x740;
-  DAT_005e1530 = param_1->field_0x750;
+  g_cameraAlternateProgressStart = param_1->field_0x750;
   DAT_005e1534 = param_1->field_0x754;
   DAT_005e1538 = param_1->field_0x758;
   temp_v0 = param_1->field_0x7f4;

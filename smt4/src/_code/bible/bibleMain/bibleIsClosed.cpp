@@ -24,9 +24,9 @@ static __inline u32 bibleIsRunning(void)
             work->done = 1;
             g_bible.mode = -1;
             if (work->view != NULL) {
-                work->view->vtbl->close(work->view);
+                work->view->stop();
                 if (work->view != NULL) {
-                    work->view->vtbl->destroy(work->view);
+                    delete work->view;
                 }
                 work->view = NULL;
             }

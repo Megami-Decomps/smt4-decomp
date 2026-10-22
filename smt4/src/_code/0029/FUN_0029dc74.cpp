@@ -47,7 +47,7 @@ typedef struct StatBlock {
 extern DevilRecord *devilGetRecord(u32 id);
 extern void memClear(void *buffer, s32 size);
 extern void bitsetSetBit(void *bits, u32 bit);
-extern void FUN_0029c6b0(StatBlock *block);
+extern void unitRecalculateEffectiveStats(StatBlock *block);
 
 void FUN_0029dc74(u32 id, StatBlock *block)
 {
@@ -80,7 +80,7 @@ void FUN_0029dc74(u32 id, StatBlock *block)
     block->resist[7] = record->resist[7];
     block->bits = 0;
     bitsetSetBit(block, record->bit);
-    FUN_0029c6b0(block);
+    unitRecalculateEffectiveStats(block);
     block->copy0 = block->unk0E;
     block->copy1 = block->unk10;
 }

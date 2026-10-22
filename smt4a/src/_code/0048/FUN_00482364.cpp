@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction scheduling only: in the z update retail loads motion->z before effect->velZ */
 /* Advances the effect's position by its velocity, and every 10 ticks runs the periodic update. */
 #include "common.h"
 

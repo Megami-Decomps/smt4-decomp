@@ -18,7 +18,7 @@ int vcallSlot12IfValid(...);
 int sysFatalBreak(void);
 int asdMemFree(void);
 int asdMemoryAllocAligned(...);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_001bcfb4(int, unsigned int, unsigned int);
 int asdLoadFileAsyncWrap(int, unsigned int, unsigned int, unsigned int);
 int FUN_001d0ea0(int *, unsigned int, int);
@@ -69,8 +69,8 @@ extern int FUN_00100836(int, unsigned int, unsigned int *);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 extern int sysLightEventTryWait(int);
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int FUN_001b5acc(char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_001bcfb4. */
 /* Supplied declaration required: asdLoadFileAsyncWrap. */
@@ -146,17 +146,17 @@ void FUN_001cc6d0(int param_1,int param_2)
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 1;
   temp_v27 = param_1;
   iStack_28 = param_2;
-  puVar3 = (unsigned int *)FUN_001b5acc(temp_v16);
+  puVar3 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v16);
   puVar3[2] = 0;
   puVar3[3] = 0;
   pcVar4 = temp_v9;
-  resultPairInitialize(pcVar4,0);
+  _ZN18WindowStatusResultC1Ej(pcVar4,0);
   temp_v4 = *(unsigned int *)(pcVar4 + 4);
   *puVar3 = *(unsigned int *)pcVar4;
   puVar3[1] = temp_v4;
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 1;
   temp_v17 = 0;
-  resultPairInitialize(&temp_v7,0);
+  _ZN18WindowStatusResultC1Ej(&temp_v7,0);
   (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
   uStack_298 = *(unsigned int *)(pcVar5 + 4);
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 100;
@@ -246,7 +246,7 @@ void FUN_001cc6d0(int param_1,int param_2)
           puVar8[2] = 0;
           FUN_001883b0(puVar8,&temp_v18,temp_v4);
           pcVar4 = acStack_40;
-          resultPairInitialize(pcVar4,puVar8);
+          _ZN18WindowStatusResultC1Ej(pcVar4,puVar8);
           (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
           uStack_298 = *(unsigned int *)(pcVar4 + 4);
           temp_v3 = legacyResourceIdRemap(temp_v16);
@@ -264,7 +264,7 @@ void FUN_001cc6d0(int param_1,int param_2)
             uStack_5c = 0;
             temp_v5 = nn_fs_detail_FileBase_TryGetSize((unsigned int)&temp_v10,(long long *)&temp_v22);
             pcVar4 = acStack_40;
-            resultPairInitialize(pcVar4,temp_v5);
+            _ZN18WindowStatusResultC1Ej(pcVar4,temp_v5);
             (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
             uStack_298 = *(unsigned int *)(pcVar4 + 4);
             temp_v3 = legacyResourceIdRemap(temp_v16);
@@ -318,11 +318,11 @@ void FUN_001cc6d0(int param_1,int param_2)
                                  ((unsigned int)&temp_v10,&temp_v20,*(unsigned int *)(param_2 + 0x14),
                                   *(unsigned int *)(param_2 + 0x24));
               pcVar4 = acStack_40;
-              resultPairInitialize(pcVar4,temp_v5);
+              _ZN18WindowStatusResultC1Ej(pcVar4,temp_v5);
               (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
               uStack_298 = *(unsigned int *)(pcVar4 + 4);
               if (temp_v20 == 0) {
-                resultPairInitialize(&temp_v7,0xd9004586);
+                _ZN18WindowStatusResultC1Ej(&temp_v7,0xd9004586);
                 (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar9;
                 uStack_298 = *(unsigned int *)(pcVar9 + 4);
               }

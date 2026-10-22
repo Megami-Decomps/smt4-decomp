@@ -8,7 +8,7 @@ int FUN_002ecad4(unsigned int *, unsigned int, int);
 
 extern unsigned char DAT_0055af54; /* 0x55af54 */
 
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: FUN_002ecad4. */
 
 
@@ -18,7 +18,7 @@ unsigned int * FUN_002e7614(unsigned int param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_0055af54;
   FUN_002ecad4(puVar1,param_2,0);
   return puVar1;

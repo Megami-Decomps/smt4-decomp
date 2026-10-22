@@ -19,7 +19,7 @@ extern struct {
     u8 unk00;
     u8 unk01[3];
     s32 which;
-} DAT_0044e098;
+} g_titleConfigModeFlag;
 extern Slot DAT_004c53c4;
 extern Slot DAT_004c53e4;
 
@@ -29,9 +29,9 @@ void bgmRestart(u32 value)
 
     if (jyoucyuGetTableEntry(1) == 0) {
         slot = NULL;
-        if (DAT_0044e098.which == 0) {
+        if (g_titleConfigModeFlag.which == 0) {
             slot = &DAT_004c53c4;
-        } else if (DAT_0044e098.which == 1) {
+        } else if (g_titleConfigModeFlag.which == 1) {
             slot = &DAT_004c53e4;
         }
         if ((slot->flags & 2) != 0) {

@@ -40,6 +40,37 @@ typedef struct Resource {
     /* 0x28 */ void *bufferB;
 } Resource;
 
+/* Grouped resource records and the workspace-size view used by the binder. */
+struct ResourceSizingRecord {
+    /* 0x00 */ s16 kind;
+    /* 0x02 */ u8 unk02[0x12];
+};
+struct ResourceSizingGroup {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u8 secondary;
+    /* 0x07 */ u8 unk07[0xD];
+    /* 0x14 */ u8 variant;
+    /* 0x15 */ u8 unk15[3];
+    /* 0x18 */ s32 recordsOffset; /* relative to the group, not this field */
+    /* 0x1C */ u32 count;
+
+    const ResourceSizingRecord *records() const
+    {
+        return (const ResourceSizingRecord *)((const u8 *)this + recordsOffset);
+    }
+};
+struct ResourceSizingState {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 count;
+    /* 0x0D */ u8 unk0d[3];
+    /* 0x10 */ ResourceSizingGroup *groups[35];
+    /* 0x9C */ u32 extraWords;
+};
+
+typedef char ResourceSizingRecordSizeCheck[sizeof(ResourceSizingRecord) == 0x14 ? 1 : -1];
+typedef char ResourceSizingGroupSizeCheck[sizeof(ResourceSizingGroup) == 0x20 ? 1 : -1];
+typedef char ResourceSizingStateSizeCheck[sizeof(ResourceSizingState) == 0xA0 ? 1 : -1];
+
 extern Handler g_handlerTable[];
 
 #endif

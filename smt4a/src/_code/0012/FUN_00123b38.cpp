@@ -5,7 +5,7 @@
 extern "C" {
 
 int strInit(unsigned char [32]);
-int onlineStringDestroy(unsigned char [12]);
+int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int _ZN9Obj55aff4C1Ev(unsigned char [12]);
 int strDestroy(unsigned char [32]);
 int FUN_002f4e90(unsigned char [59], unsigned char [32]);
@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned int FUN_00123a7c(unsigned int, unsigned char *, int);
 /* Supplied declaration required: strInit. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002f4e90. */
@@ -51,7 +51,7 @@ void FUN_00123b38(unsigned int param_1,int param_2,unsigned int *param_3)
   (**(romwright_code **)(*(int *)*param_3 + 0x1c))((int *)*param_3,temp_v1);
   FUN_002f4f00(temp_v1);
   strDestroy(temp_v3);
-  onlineStringDestroy(temp_v4);
+  _ZN9Obj55aff4D1Ev(temp_v4);
   return;
 }
 

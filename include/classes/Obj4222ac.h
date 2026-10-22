@@ -8,6 +8,28 @@
 class Obj4222ac : public Obj422318 {
 public:
     virtual ~Obj4222ac();
+
+    /* 0x70 */ u32 flags;
+    /* 0x74 */ f32 position[3];
 };
+
+typedef char Obj4222acSizeCheck[sizeof(Obj4222ac) == 0x80 ? 1 : -1];
+
+struct Obj4222acMotion {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ f32 position[3];
+    /* 0x34 */ u8 unk34[0x2c];
+    /* 0x60 */ u32 handle;
+};
+
+struct EffectGamePauseFlags {
+    /* 0x000 */ u8 unk000[0x18];
+    /* 0x018 */ u8 paused18;
+    /* 0x019 */ u8 unk019[0x32f];
+    /* 0x348 */ u8 paused348;
+};
+
+typedef char Obj4222acMotionSizeCheck[sizeof(Obj4222acMotion) == 0x64 ? 1 : -1];
+typedef char EffectGamePauseFlagsSizeCheck[sizeof(EffectGamePauseFlags) == 0x349 ? 1 : -1];
 
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler uses ldrd/strd instead of retail ldm and separate stores. */
 #include "common.h"
 struct ValuePair { u32 first,second; };
 struct Navigation { u8 unk00[96]; ValuePair value; };

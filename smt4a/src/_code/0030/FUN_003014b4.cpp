@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler replaces the fourteen-element clearing loop with __aeabi_memclr4. */
 #include "common.h"
 struct Work { u32 unk00; u32 values[14]; };
 /* Clears all fourteen work entries. */

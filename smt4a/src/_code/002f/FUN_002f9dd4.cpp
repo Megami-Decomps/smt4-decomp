@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, unsigned int);
+int _ZN9Obj55b28cC1EPv(int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_003034ec(...);
 
@@ -20,7 +20,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_003034ec. */
@@ -43,7 +43,7 @@ FUN_002f9dd4(unsigned int param_1,unsigned char *param_2,unsigned int param_3,un
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x14)) != '\0') {
     temp_v1 = param_1;
     temp_v0 = onlineGetActiveLock();
-    FUN_002e6e34(&temp_v1,temp_v0);
+    _ZN9Obj55b28cC1EPv(&temp_v1,temp_v0);
     temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),*param_2);
     temp_v0 = FUN_003034ec(param_1,&temp_v2);
     _ZN9Obj55b28cD1Ev(&temp_v1);

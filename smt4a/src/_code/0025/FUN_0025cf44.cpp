@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a2210(unsigned int, int, int, int, int, int);
+int saveSlotDrawSummary(unsigned int, int, int, int, int, int);
 int FUN_0034248c(unsigned int, int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char g_campCec; /* 0x57f110 */
 
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a2210. */
+/* Supplied declaration required: saveSlotDrawSummary. */
 extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0034248c. */
 
@@ -33,7 +33,7 @@ unsigned int FUN_0025cf44(void)
      (temp_v1 = asdTMTexTableNodeIsLoaded(0x2e,0), temp_v1 != 0)) {
     temp_v1 = FUN_001834a4(0x2e,0x97);
     FUN_0034248c(*(unsigned int *)(temp_v0 + 0x174),(*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x40,temp_v0 + 0x178,0,0);
-    FUN_002a2210(*(unsigned int *)(temp_v0 + 0x174),(*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x40,temp_v0 + 0x18c,
+    saveSlotDrawSummary(*(unsigned int *)(temp_v0 + 0x174),(*(int *)((unsigned char *)&g_campCec + 0x4)) + 0x40,temp_v0 + 0x18c,
                  (int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0);
   }
   return 0;

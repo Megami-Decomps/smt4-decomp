@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler uses different register allocation, frame setup or instruction scheduling than retail. */
 #include "common.h"
 extern "C" {
 void *FUN_002f9d6a(void **temporary, void *owner, void **value);

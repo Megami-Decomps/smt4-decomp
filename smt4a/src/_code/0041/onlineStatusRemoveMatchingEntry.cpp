@@ -1,17 +1,17 @@
 /* NON_MATCHING: string temporary frames, list cursor allocation and erase-loop guards differ; -O2 candidate. */
-#include "shard/W6_W6Match2_OnlineString.h"
+#include "shard/W4_Match4_Obj559ecc.h"
 
 struct OnlineKey { u32 words[3]; };
 struct OnlineStatusString;
 extern "C" {
 OnlineStatusString *FUN_002ea100(OnlineStatusString *, const char *);
-void FUN_002e9590(OnlineStatusString *, const OnlineStringValue *);
+void FUN_002e9590(OnlineStatusString *, const Obj55aff4 *);
 }
 struct OnlineStatusString {
     const void *vtable;
     char *data;
     OnlineStatusString(const char *text) { FUN_002ea100(this, text); }
-    ~OnlineStatusString() { onlineStringDestroy((OnlineStringValue *)this); }
+    ~OnlineStatusString() { reinterpret_cast<Obj55aff4 *>(this)->Obj55aff4::~Obj55aff4(); }
 };
 struct OnlineStatusEntry;
 struct OnlineStatusVtable { void (*destroy)(OnlineStatusEntry *); };
@@ -20,7 +20,7 @@ struct OnlineStatusEntry {
     u32 unk04;
     u64 id;
     u8 unk10[0x90];
-    OnlineStringValue *stringsBegin, *stringsEnd; // 0xa0
+    Obj55aff4 *stringsBegin, *stringsEnd; // 0xa0
     u8 unka8[0x10];
 };
 struct OnlineStatusOwner {

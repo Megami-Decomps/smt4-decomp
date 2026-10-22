@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00106fcc(int, unsigned int);
-int onlineStringDestroy(unsigned char [12]);
+int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int FUN_002f4f00(unsigned char [59]);
 int FUN_002fbb92(int, unsigned char [12]);
 int FUN_00303cd8(unsigned char [59]);
@@ -17,7 +17,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00106fcc. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int streamWriterFinish(unsigned char *);
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_002fbb92. */
@@ -35,7 +35,7 @@ void FUN_00123ae8(unsigned int param_1,int param_2,int *param_3)
   
   (**(romwright_code **)(*param_3 + 0xc))(temp_v3,param_3);
   FUN_002fbb92(param_2,temp_v3);
-  onlineStringDestroy(temp_v3);
+  _ZN9Obj55aff4D1Ev(temp_v3);
   FUN_00303cd8(temp_v1);
   temp_v2 = *(unsigned char *)(param_2 + 0x3b);
   (**(romwright_code **)(*param_3 + 0x18))(param_3,temp_v1);

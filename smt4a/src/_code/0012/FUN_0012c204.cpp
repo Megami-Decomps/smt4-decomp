@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(...);
@@ -30,7 +30,7 @@ typedef struct {
 extern unsigned char LAB_0012c3b0; /* 0x12c3b0 */
 
 extern unsigned char *FUN_002e7908(int *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea100(unsigned char *, int);
@@ -121,7 +121,7 @@ LAB_0012c32e:
       }
       temp_v2 = FUN_002ea100(temp_v15,param_1 + 0x138);
       temp_v7 = strNotEqualNullSafe(temp_v2,temp_v6);
-      onlineStringDestroy(temp_v15);
+      _ZN9Obj55aff4D1Ev(temp_v15);
       temp_v4 = temp_v7 != 0;
       if (temp_v4) {
         FUN_0030c7b6(temp_v0,temp_v6);

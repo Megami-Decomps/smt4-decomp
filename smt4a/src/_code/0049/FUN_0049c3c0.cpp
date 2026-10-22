@@ -10,18 +10,18 @@ int FUN_0014afd0(int, int);
 int asdOperatorNew(void);
 int FUN_0022677c(int, int);
 int FUN_002bf464(void);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
 int FUN_00408184(...);
 int FUN_0040a42c(...);
-int FUN_0040a508(...);
+int statsSetFirstBankFlag(...);
 int FUN_0040a640(void);
 int FUN_0040a710(...);
 int rectangleInitializeSelection(int, int, int, int);
-int rectangleResetSelection(...);
+int _ZN18SelectionRectangleC1Ev(...);
 int FUN_0049669c(unsigned int *);
 int FUN_0049a8b8(unsigned int *);
 int FUN_0049a9a8(void);
@@ -39,24 +39,24 @@ extern short *FUN_00145f04(unsigned char, unsigned int);
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0031e198. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_0040a42c. */
-/* Supplied declaration required: FUN_0040a508. */
+/* Supplied declaration required: statsSetFirstBankFlag. */
 /* Supplied declaration required: FUN_0040a640. */
 /* Supplied declaration required: FUN_0040a710. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: rectangleResetSelection. */
+/* Supplied declaration required: _ZN18SelectionRectangleC1Ev. */
 /* Supplied declaration required: FUN_0049669c. */
 /* Supplied declaration required: FUN_0049a8b8. */
 /* Supplied declaration required: FUN_0049a9a8. */
 /* Supplied declaration required: FUN_004cf7cc. */
-extern int flagsDESet(int);
-extern unsigned int *FUN_004d0b3c(void);
+extern int _ZN14SelectionFlagsC1Ev(int);
+extern unsigned int *_ZN9Obj422594C1Ev(void);
 
 
 unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param_3,int param_4)
@@ -72,14 +72,14 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
   unsigned int *puVar7;
   
   *param_1 = 0;
-  temp_v1 = rectangleResetSelection(param_1 + 0xe9);
-  temp_v1 = rectangleResetSelection(temp_v1 + 0x14);
+  temp_v1 = _ZN18SelectionRectangleC1Ev(param_1 + 0xe9);
+  temp_v1 = _ZN18SelectionRectangleC1Ev(temp_v1 + 0x14);
   *(unsigned char **)(temp_v1 + 0x750) = &DAT_0055ca10;
   temp_v1 = temp_v1 + 0x7a8;
-  FUN_002f5020(temp_v1,flagsDESet,0x74,9);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,_ZN14SelectionFlagsC1Ev,0x74,9);
   temp_v1 = temp_v1 + 0x414;
-  FUN_002f5020(temp_v1,&LAB_00493e80,0x1002,9);
-  temp_v1 = flagsDESet(temp_v1 + 0x9014);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_00493e80,0x1002,9);
+  temp_v1 = _ZN14SelectionFlagsC1Ev(temp_v1 + 0x9014);
   puVar7 = (unsigned int *)(temp_v1 - 0x9f88);
   FUN_0049a8b8(puVar7);
   *(unsigned int *)(temp_v1 - 0x9f74) = param_2;
@@ -108,7 +108,7 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
   asdOperatorNew();
   puVar4 = (unsigned int *)0x0;
   if (temp_v2 != 0) {
-    puVar4 = (unsigned int *)FUN_004d0b3c();
+    puVar4 = (unsigned int *)_ZN9Obj422594C1Ev();
     *puVar4 = (unsigned int)&DAT_0055c888;
   }
   *(unsigned int **)(temp_v1 - 0x944c) = puVar4;
@@ -169,7 +169,7 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
     }
   }
   else {
-    FUN_0040a508(param_4,1);
+    statsSetFirstBankFlag(param_4,1);
     if (!((param_4 == 6 || param_4 == 7) || param_4 == 9)) {
       if (param_4 != 8) {
         temp_v3 = 0x1000042;

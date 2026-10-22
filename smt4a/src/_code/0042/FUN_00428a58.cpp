@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0016cd0c(int *);
 int sysFatalBreak(void);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_00427a10(unsigned int *, unsigned char *);
 int FUN_00427ac4(unsigned int *, unsigned int);
 int FUN_00428308(unsigned int *, int);
@@ -45,7 +45,7 @@ extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_0016cd0c. */
 /* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int legacyResourceIdRemap(unsigned int *);
 extern unsigned long long FUN_00302420(unsigned int, unsigned int, unsigned int);
 extern unsigned int *FUN_004267fc(unsigned char *, unsigned int, unsigned int *);
@@ -97,7 +97,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   temp_v20 = param_3;
   puStack_28 = param_4;
   if (param_7 >= 0x41) {
-    resultPairInitialize(param_1,0xe0613881);
+    _ZN18WindowStatusResultC1Ej(param_1,0xe0613881);
     return;
   }
   temp_v6 = 0;
@@ -124,7 +124,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         sysFatalBreak();
       }
       if ((temp_v5 != 0x8c) && (temp_v5 != 0xd)) {
-        resultPairInitialize(temp_v18,0xe0e13883);
+        _ZN18WindowStatusResultC1Ej(temp_v18,0xe0e13883);
         return;
       }
       temp_v6 = temp_v6 + 1;
@@ -217,7 +217,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
     if (-1 < (int)puVar5) {
       temp_v5 = appletIsExitRequested();
       if ((temp_v5 != 0) || (temp_v5 = FUN_0015a410(), temp_v5 != 0)) {
-        resultPairInitialize(temp_v18,0xc9413891);
+        _ZN18WindowStatusResultC1Ej(temp_v18,0xc9413891);
         return;
       }
       FUN_00427a10(&temp_v10,&DAT_0061b000);
@@ -242,7 +242,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
             temp_v11 = *(unsigned char **)(temp_v6 * 8 + 0x61b23c);
             puVar5 = (unsigned int *)FUN_004267fc(temp_v15,1,&temp_v10);
             if ((int)puVar5 < 0) {
-              resultPairInitialize(temp_v18,puVar5);
+              _ZN18WindowStatusResultC1Ej(temp_v18,puVar5);
               return;
             }
             temp_v4 = (temp_v10 >> 8) | ((int)temp_v11 << 0x18);
@@ -316,13 +316,13 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         if ((-1 < (int)puVar5) &&
            (puVar5 = temp_v19, FUN_00428308(temp_v19,temp_v12), -1 < (int)puVar5)) {
           *temp_v20 = temp_v12;
-          resultPairInitialize(temp_v18,0);
+          _ZN18WindowStatusResultC1Ej(temp_v18,0);
           return;
         }
       }
     }
   }
-  resultPairInitialize(temp_v18,puVar5);
+  _ZN18WindowStatusResultC1Ej(temp_v18,puVar5);
   return;
 }
 

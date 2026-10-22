@@ -5,7 +5,7 @@ extern "C" {
 extern const u8 DAT_0055a4e0[];  /* vtable */
 u8 *vectorDestroyBytes(u8 *member);
 u8 *vectorTeardown_00307368(u8 *member);
-u8 *onlineStringDestroy(u8 *member);
+u8 *_ZN9Obj55aff4D1Ev(u8 *member);
 
 typedef struct Object55a4e0 {
     /* 0x00 */ const void *vtbl;
@@ -21,7 +21,7 @@ u8 *destroyObj0055a4e0(Object55a4e0 *self)
     self->vtbl = DAT_0055a4e0;
     member = vectorDestroyBytes(self->member20);
     member = vectorTeardown_00307368(member - 0x10);
-    member = onlineStringDestroy(member - 8);
+    member = _ZN9Obj55aff4D1Ev(member - 8);
     return member - 8;
 }
 

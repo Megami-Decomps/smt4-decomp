@@ -12,7 +12,7 @@ int destroyObj0055ae64(unsigned char [28]);
 int strDestroy(unsigned char [32]);
 int FUN_002ee524(unsigned char [24], unsigned char [32]);
 int sharedRefHolderDestroy2(unsigned char [24]);
-int clearWords2Alt(unsigned char [8]);
+int _ZN12ZeroWordPairC1Ev(unsigned char [8]);
 int FUN_00303038(unsigned char [24], unsigned char [32]);
 int FUN_00303088(unsigned char [8]);
 int streamReadWordCopy(unsigned char [24], int *);
@@ -37,7 +37,7 @@ extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002ee524. */
 /* Supplied declaration required: sharedRefHolderDestroy2. */
 extern int FUN_00301e8c(unsigned int, int, unsigned char *);
-/* Supplied declaration required: clearWords2Alt. */
+/* Supplied declaration required: _ZN12ZeroWordPairC1Ev. */
 /* Supplied declaration required: FUN_00303038. */
 /* Supplied declaration required: FUN_00303088. */
 extern unsigned int FUN_00303146(unsigned char *, unsigned char *);
@@ -77,7 +77,7 @@ void FUN_0011dcb8(int param_1)
     FUN_00310dc6(temp_v5,temp_v1,0x100);
     streamReadWordCopy(temp_v5,&temp_v2);
     FUN_00303038(temp_v5,temp_v4);
-    clearWords2Alt(temp_v7);
+    _ZN12ZeroWordPairC1Ev(temp_v7);
     FUN_00303088(temp_v7);
     temp_v0 = operatorNew(0x58);
     temp_v1 = 0;

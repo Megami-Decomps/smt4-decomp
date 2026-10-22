@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00103f7c(unsigned int);
-int FUN_002e6e34(unsigned int *, int);
+int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 int _ZN9Obj55b28cD1Ev(unsigned int *);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -15,7 +15,7 @@ int _ZN9Obj55b28cD1Ev(unsigned int *);
 extern int FUN_00103f12(unsigned int);
 /* Supplied declaration required: FUN_00103f7c. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
@@ -32,7 +32,7 @@ long long FUN_002e789a(unsigned int param_1,unsigned int param_2,unsigned int pa
   uStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
   temp_v0 = FUN_00103f12(param_1);
   if (temp_v0 != 0) {
     FUN_00103f7c(param_1);

@@ -51,4 +51,11 @@ private:
     /* 0x30 */ Obj421654Holder holderC;
 };
 
+/* Common callback view of the object's prefix. */
+struct Obj421654StateView {
+    /* 0x00 */ void *vtable;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 state;
+};
+
 #endif

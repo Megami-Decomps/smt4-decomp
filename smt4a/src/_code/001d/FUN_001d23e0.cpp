@@ -5,8 +5,8 @@
 extern "C" {
 
 int jyoucyuGetTableEntry(int);
-int resultPairInitialize(...);
-int FUN_001b5acc(int *);
+int _ZN18WindowStatusResultC1Ej(...);
+int _ZN18WindowStatusResultC1Ev(int *);
 int FUN_001d25a0(...);
 int FUN_001d2a2c(int, int, unsigned int, int);
 int libc_strcmp(int, unsigned int *);
@@ -33,8 +33,8 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_001a0380(int);
 extern int sysLightEventTryWait(int);
-/* Supplied declaration required: resultPairInitialize. */
-/* Supplied declaration required: FUN_001b5acc. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
 /* Supplied declaration required: FUN_001d25a0. */
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: FUN_001d2a2c. */
@@ -75,7 +75,7 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
         FUN_001d25a0(temp_v8,0);
-        resultPairInitialize(&temp_v2,temp_v1);
+        _ZN18WindowStatusResultC1Ej(&temp_v2,temp_v1);
         temp_v6 = *puVar3;
         uStack_68 = puVar3[1];
         *param_1 = temp_v8[0];
@@ -90,14 +90,14 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
     *(unsigned int *)(param_2 + 0x335) = param_3[1];
     *(unsigned int *)(param_2 + 0x339) = param_3[2];
     *(unsigned int *)(param_2 + 0x33d) = param_3[3];
-    FUN_001b5acc(&temp_v7);
+    _ZN18WindowStatusResultC1Ev(&temp_v7);
     temp_v2 = 2;
     temp_v4 = 0;
     uStack_7c = param_4;
     temp_v3 = param_5;
     FUN_001d2a2c(temp_v0,0x19a2,param_6,2);
     puVar3 = temp_v9;
-    resultPairInitialize(puVar3,temp_v0);
+    _ZN18WindowStatusResultC1Ej(puVar3,temp_v0);
     temp_v7 = *puVar3;
     uStack_54 = puVar3[1];
     temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);

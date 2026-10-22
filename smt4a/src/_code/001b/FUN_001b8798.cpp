@@ -8,7 +8,7 @@ int trackCombinationInitialize(unsigned int *, unsigned int, int, int, unsigned 
 int FUN_001c398c(...);
 int FUN_001c3bb8(...);
 int FUN_001cd01c(unsigned int *, unsigned int);
-int FUN_002f5020(int, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 
 /* stack frame of param_5: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern int objectInitDefaults(void);
 /* Supplied declaration required: FUN_001c3bb8. */
 extern unsigned int *FUN_001c3d20(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_001cd01c. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
@@ -67,7 +67,7 @@ void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
       if (temp_v0 != 0) {
         temp_v1 = objectInitDefaults();
         temp_v1 = temp_v1 + 0xcc;
-        FUN_002f5020(temp_v1,&LAB_001bd330,8,3);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_001bd330,8,3);
         unaff_r5 = (unsigned int *)(temp_v1 - 0xcc);
         *(unsigned char *)(temp_v1 + 0x18) = 0;
         *(unsigned char *)(temp_v1 + 0x19) = 2;

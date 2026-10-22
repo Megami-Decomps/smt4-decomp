@@ -29,7 +29,7 @@ extern unsigned char *DAT_0044df80; /* 0x44df80 */
 extern int g_shop; /* 0x44e050 */
 extern int DAT_0049fc18; /* 0x49fc18 */
 
-extern int FUN_00263c34(int);
+extern int _ZN9Obj55ca08D1Ev(int);
 extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
 /* Supplied declaration required: soundChannelStopAll. */
@@ -147,7 +147,7 @@ unsigned int FUN_001d9634(void)
         if (*(int *)(g_shop + 0x18) != 0) {
           FUN_003a3914();
           if (*(int *)(temp_v3 + 0x18) != 0) {
-            temp_v2 = FUN_00263c34(*(int *)(temp_v3 + 0x18) + 0x828);
+            temp_v2 = _ZN9Obj55ca08D1Ev(*(int *)(temp_v3 + 0x18) + 0x828);
             asdMemFreeNonNull(temp_v2 - 0x828);
           }
           fileSlot17Release(temp_v7);

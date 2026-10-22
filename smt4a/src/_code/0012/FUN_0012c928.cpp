@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int onlineInstanceTableGetCurrent(void);
 int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
@@ -32,7 +32,7 @@ extern unsigned char LAB_0012ca81; /* 0x12ca81 */
 
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -84,7 +84,7 @@ void FUN_0012c928(int param_1)
     temp_v4 = temp_v2;
     temp_v5 = temp_v3;
     temp_v0 = (**(romwright_code **)(*piVar5 + 0x38))(piVar5,temp_v12,temp_v1,param_1 + 0x100);
-    onlineStringDestroy(temp_v13);
+    _ZN9Obj55aff4D1Ev(temp_v13);
     if (temp_v0 != 0) {
       temp_v2 = *(unsigned int *)(temp_v12 + 0x44);
       temp_v1 = onlineInstanceTableGetCurrent();

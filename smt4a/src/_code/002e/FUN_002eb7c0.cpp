@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int sharedRefInitEmpty(void);
+int _ZN9Obj5593b8D1Ev(void);
 
 extern unsigned char DAT_0055ae2c; /* 0x55ae2c */
 
-/* Supplied declaration required: sharedRefInitEmpty. */
+/* Supplied declaration required: _ZN9Obj5593b8D1Ev. */
 
 
 void FUN_002eb7c0(unsigned int *param_1)
@@ -16,7 +16,7 @@ void FUN_002eb7c0(unsigned int *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   *param_1 = (unsigned int)&DAT_0055ae2c;
-  sharedRefInitEmpty();
+  _ZN9Obj5593b8D1Ev();
   return;
 }
 

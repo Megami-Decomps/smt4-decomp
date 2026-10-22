@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00111dc4(int, int *);
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00111dc4. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
@@ -30,7 +30,7 @@ void FUN_001036b6(unsigned int param_1,unsigned int *param_2,int *param_3)
   unsigned char temp_v2 [16];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   if (*(char *)(*param_3 + 0x22) == '\x02') {
     temp_v1 = *param_2;
     uStack_24 = param_2[1];

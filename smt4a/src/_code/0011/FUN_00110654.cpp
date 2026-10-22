@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00132006(int [2], int, unsigned short [2]);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002fb344(unsigned char [4], int, unsigned short [2]);
 
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00132006. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002fb344. */
 extern int wordRefsDiffer_002fb3b6(unsigned char *, unsigned int *);
@@ -41,7 +41,7 @@ unsigned int FUN_00110654(int param_1,int *param_2)
   unsigned char temp_v7 [4];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v4,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x58);
   temp_v0 = (**(romwright_code **)(*param_2 + 0x40))(param_2);
   if (temp_v0 != 1) {
     param_1 = param_1 + 4;

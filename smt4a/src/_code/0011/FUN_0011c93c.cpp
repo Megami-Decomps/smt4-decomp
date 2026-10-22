@@ -11,7 +11,7 @@ typedef struct {
 
 extern u8 DAT_0055a8f0;
 
-u8 *onlineStringDestroy(u8 *self);
+u8 *_ZN9Obj55aff4D1Ev(u8 *self);
 u8 *vectorDestroyBytes(u8 *self);
 u8 *vectorTeardown_00307368(u8 *self);
 
@@ -23,7 +23,7 @@ NestedObject *FUN_0011c93c(NestedObject *self)
     part = vectorDestroyBytes(self->inner);
     part = vectorTeardown_00307368(part - 0xc);
     part = vectorTeardown_00307368(part - 0xc);
-    part = onlineStringDestroy(part - 8);
+    part = _ZN9Obj55aff4D1Ev(part - 8);
     return (NestedObject *)(part - 0xc);
 }
 

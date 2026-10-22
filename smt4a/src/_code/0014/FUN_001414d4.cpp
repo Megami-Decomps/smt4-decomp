@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015e76c(int, int, unsigned int);
 
-extern int *DAT_0063e944; /* 0x63e944 */
+extern int *g_soundHandleList; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 
 /* Supplied declaration required: FUN_0015e76c. */
@@ -23,7 +23,7 @@ unsigned int FUN_001414d4(int param_1,int param_2,unsigned int param_3)
   int *piVar3;
   
   temp_v1 = 0;
-  piVar3 = DAT_0063e944;
+  piVar3 = g_soundHandleList;
   if (0 < DAT_0063e948) {
     while (piVar3 != (int *)0x0) {
       if (piVar3[6] == param_1) {

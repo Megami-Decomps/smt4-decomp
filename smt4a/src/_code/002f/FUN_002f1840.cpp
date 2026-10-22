@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler reserves the temporary pair with sub sp instead of saving r2/r3. */
 #include "common.h"
 extern "C" {
 struct Pair { u32 first, second; };

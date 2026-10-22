@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002e0ed0(int);
+int gpuSubmitFloat24Vectors(int);
 
 extern int DAT_00464c40; /* 0x464c40 */
 
-/* Supplied declaration required: FUN_002e0ed0. */
+/* Supplied declaration required: gpuSubmitFloat24Vectors. */
 
 
 void FUN_00241d44(int param_1)
@@ -16,7 +16,7 @@ void FUN_00241d44(int param_1)
   if (param_1 == 0) {
     param_1 = DAT_00464c40;
   }
-  FUN_002e0ed0(param_1);
+  gpuSubmitFloat24Vectors(param_1);
   return;
 }
 

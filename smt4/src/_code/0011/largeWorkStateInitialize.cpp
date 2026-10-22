@@ -28,20 +28,20 @@ struct LargeWorkState {
 
 extern "C" {
 void *FUN_0011b930(void *base);
-WorkResult *FUN_002bad5c(WorkResult *);
-WorkResult *resultPairInitialize(WorkResult *, u32 code);
+WorkResult *_ZN18WindowStatusResultC1Ev(WorkResult *);
+WorkResult *_ZN18WindowStatusResultC1Ej(WorkResult *, u32 code);
 
 // Initialize the large work block's base, result state, parameters and value slots.
 void largeWorkStateInitialize(LargeWorkState *state)
 {
     FUN_0011b930(state->base);
     state->enabled = 1;
-    FUN_002bad5c(&state->result);
+    _ZN18WindowStatusResultC1Ev(&state->result);
     state->mode = 0;
     state->count = 0;
     WorkResult result;
-    state->result = *resultPairInitialize(&result, 0);
-    FUN_002bad5c(&state->secondaryResult);
+    state->result = *_ZN18WindowStatusResultC1Ej(&result, 0);
+    _ZN18WindowStatusResultC1Ev(&state->secondaryResult);
     state->baseFlag = 0;
     state->active = 0;
     state->flags = 0;

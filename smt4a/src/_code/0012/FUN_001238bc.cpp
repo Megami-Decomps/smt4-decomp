@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int __aeabi_uidivmod(...);
 
@@ -15,7 +15,7 @@ extern int DAT_00594b00; /* 0x594b00 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_001239a2(int, unsigned int);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -35,7 +35,7 @@ unsigned long long FUN_001238bc(int param_1,unsigned int param_2,unsigned int pa
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_002e6e34(&uStack_20,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(&uStack_20,param_1 + 4);
   temp_v3 = 0;
   while( 1 ) {
     if (*(unsigned int *)(param_1 + 0x3c) <= temp_v3) {

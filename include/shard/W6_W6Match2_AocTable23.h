@@ -14,4 +14,17 @@ struct AocTable23View {
     Table23Record* entries; // 0x3f0
 };
 
+struct Table23TriggerPair {
+    u8 group;
+    u8 id;
+};
+struct Table23TriggerRecord {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s8 kind;
+    /* 0x09 */ u8 unk09[2];
+    /* 0x0B */ Table23TriggerPair triggers[3];
+    /* 0x11 */ u8 unk11[0x0F];
+};
+typedef char Table23TriggerRecordSizeCheck[sizeof(Table23TriggerRecord) == 0x20 ? 1 : -1];
+
 #endif

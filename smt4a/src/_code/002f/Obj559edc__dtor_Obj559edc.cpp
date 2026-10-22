@@ -11,8 +11,8 @@ extern unsigned char DAT_00559ee4; /* 0x559ee4 */
 extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int onlineStringDestroy(int);
-extern int FUN_003106d0(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(int);
+extern int _ZN9Obj55b104D1Ev(unsigned int *);
 
 
 int _ZN9Obj559edcD1Ev(unsigned int *param_1)
@@ -38,8 +38,8 @@ int _ZN9Obj559edcD1Ev(unsigned int *param_1)
   asdOperatorDeleteArray(param_1[0x18]);
   param_1[0x11] = (unsigned int)&DAT_0055a4c0;
   asdOperatorDeleteArray(param_1[0x13]);
-  temp_v0 = FUN_003106d0(param_1 + 9);
-  temp_v0 = onlineStringDestroy(temp_v0 - 0xc);
+  temp_v0 = _ZN9Obj55b104D1Ev(param_1 + 9);
+  temp_v0 = _ZN9Obj55aff4D1Ev(temp_v0 - 0xc);
   return temp_v0 - 0x18;
 }
 

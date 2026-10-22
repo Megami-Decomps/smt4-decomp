@@ -7,7 +7,7 @@ extern "C" {
 int dataTable04FindById(void);
 int FUN_0035e458(void);
 int FUN_003e4b2c(unsigned int);
-int FUN_003e5170(int, int);
+int battleRecordInitializeFromDefinition(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern int FUN_0035d89c(unsigned int);
 extern int FUN_00370ecc(unsigned int);
 extern unsigned int dataTable0aSub0GetValueById(unsigned int);
 /* Supplied declaration required: FUN_003e4b2c. */
-/* Supplied declaration required: FUN_003e5170. */
+/* Supplied declaration required: battleRecordInitializeFromDefinition. */
 
 
 void FUN_004bd410(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -67,7 +67,7 @@ void FUN_004bd410(unsigned int param_1,unsigned int param_2,unsigned int param_3
     *(short *)(temp_v3 + 300) = (short)param_1;
     *(unsigned int *)(temp_v3 + 0x130) = *(unsigned int *)(temp_v3 + 0x130) | 1;
     *(short *)(temp_v3 + 0x12e) = (short)temp_v5;
-    FUN_003e5170(temp_v3,0);
+    battleRecordInitializeFromDefinition(temp_v3,0);
   }
   temp_v0 = FUN_00370ecc(param_1);
   if (temp_v0 != 0) {

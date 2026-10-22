@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char DAT_0055ca64; /* 0x55ca64 */
 
 /* Supplied declaration required: asdOperatorDelete. */
-extern int onlineStringDestroy(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002e9ef8. */
 
 
@@ -33,7 +33,7 @@ void FUN_004d99a8(unsigned int *param_1)
   if ((int *)param_1[0xb] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[0xb] + 4))();
   }
-  temp_v0 = onlineStringDestroy(param_1 + 7);
+  temp_v0 = _ZN9Obj55aff4D1Ev(param_1 + 7);
   asdOperatorDelete(temp_v0 - 0x1c);
   return;
 }

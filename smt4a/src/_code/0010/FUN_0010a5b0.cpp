@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00124074(unsigned int, int, unsigned char **);
 int FUN_0012409c(unsigned int, int, unsigned char [32]);
 int FUN_0012fe3c(...);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int sharedRefRelease(...);
 int strAssign(int *, int, int, unsigned int);
@@ -68,7 +68,7 @@ extern unsigned int FUN_0010a53c(int, unsigned int);
 /* Supplied declaration required: FUN_00124074. */
 /* Supplied declaration required: FUN_0012409c. */
 /* Supplied declaration required: FUN_0012fe3c. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
@@ -220,7 +220,7 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
           FUN_002f3532(temp_v42,param_1 + 0x24,temp_v14);
           temp_v4 = wordRefsDiffer_002f3594(temp_v42,(unsigned int *)&temp_v35);
           if (temp_v4 == 0) {
-            FUN_002e6e34(temp_v39,param_1 + 0x4c);
+            _ZN9Obj55b28cC1EPv(temp_v39,param_1 + 0x4c);
             onlineTimeGetNow(&temp_v24);
             FUN_002f35a4(temp_v36,temp_v20,temp_v14);
             temp_v29 = temp_v36;

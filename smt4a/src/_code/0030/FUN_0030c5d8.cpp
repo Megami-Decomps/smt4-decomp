@@ -9,13 +9,13 @@ struct Object {
     u8 first[8];
     u8 second[8];
 };
-void *onlineStringCopyConstruct(void *,const void *);
+void *_ZN9Obj55aff4C1ERKS_(void *,const void *);
 void FUN_0030c5d8(void *,Object *object,const Object *source) {
     if(object) {
         object->vtable=_ZTV9Obj559ecc+8;
         object->active=source->active;
-        onlineStringCopyConstruct(object->first,source->first);
-        onlineStringCopyConstruct(object->second,source->second);
+        _ZN9Obj55aff4C1ERKS_(object->first,source->first);
+        _ZN9Obj55aff4C1ERKS_(object->second,source->second);
         object->vtable=&DAT_00559504;
     }
 }

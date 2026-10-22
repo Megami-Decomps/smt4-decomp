@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineJobSetStateTimed(int, int);
 int FUN_002f5898(int, unsigned int);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 extern int wordRefsEqual_002ea42c(int, unsigned int);
@@ -35,7 +35,7 @@ void FUN_0010ba18(int param_1)
   unsigned char temp_v5 [12];
   unsigned int temp_v6 [2];
   
-  FUN_002e6e34(temp_v2,param_1 + 0x7c);
+  _ZN9Obj55b28cC1EPv(temp_v2,param_1 + 0x7c);
   temp_v4 = 0x80010001;
   temp_v0 = FUN_002e7908(temp_v3,(unsigned int *)&temp_v4);
   temp_v1 = wordRefsEqual_002ea42c(param_1 + 0x6c,temp_v0);

@@ -10,7 +10,7 @@ typedef struct Window {
     /* 0x601 */ u8 mode;
 } Window;
 
-extern int FUN_0029c6b0(Window *window);
+extern int unitRecalculateEffectiveStats(Window *window);
 
 /* Sets the window's mode and widens its five edge values by the mode's step (mode 1-3 steps 1-3). */
 void FUN_003bc8f8(Window *window, u32 modeArg)
@@ -30,7 +30,7 @@ void FUN_003bc8f8(Window *window, u32 modeArg)
     for (i = 0; i < 5; i++) {
         window->edge[i] += step;
     }
-    FUN_0029c6b0(window);
+    unitRecalculateEffectiveStats(window);
 }
 
 }

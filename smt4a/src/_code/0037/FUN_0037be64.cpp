@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017760c(...);
+int recordGetScaledMaximum(...);
 int FUN_00184310(void);
 int slotRecordFindById(...);
 int gameDataCopySaveEntry(...);
@@ -15,7 +15,7 @@ int FUN_0034543c(int);
 int FUN_0036fcd0(unsigned int, int);
 int FUN_003e52bc(void);
 int gameFlagSetValue(int, int);
-int FUN_004bd354(int, unsigned int);
+int recordSetClampedCurrent(int, unsigned int);
 
 /* stack frame of void: 5 slot(s), 18 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ typedef struct {
 
 extern int gameDataBlocksGetSaveData(void);
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -45,7 +45,7 @@ extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_003e52bc. */
 /* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
-/* Supplied declaration required: FUN_004bd354. */
+/* Supplied declaration required: recordSetClampedCurrent. */
 
 
 void FUN_0037be64(void)
@@ -226,9 +226,9 @@ LAB_0037c2b0:
   temp_v13 = 0;
   do {
     if ((((temp_v16[temp_v13] & 0xffff) != 0) && (temp_v8 = slotRecordFindById(), temp_v8 != 0)) &&
-       (temp_v9 = FUN_0017760c(), temp_v9 < *(short *)(temp_v8 + 0x2a))) {
-      temp_v11 = FUN_0017760c(temp_v8);
-      FUN_004bd354(temp_v8,temp_v11);
+       (temp_v9 = recordGetScaledMaximum(), temp_v9 < *(short *)(temp_v8 + 0x2a))) {
+      temp_v11 = recordGetScaledMaximum(temp_v8);
+      recordSetClampedCurrent(temp_v8,temp_v11);
     }
     temp_v13 = temp_v13 + 1;
   } while (temp_v13 < 10);
@@ -244,7 +244,7 @@ LAB_0037c2b0:
       } while (temp_v9 < 10);
       temp_v9 = bitsAt60Test(temp_v8,1);
       if (temp_v9 == 0) {
-        temp_v9 = FUN_0017760c(temp_v8);
+        temp_v9 = recordGetScaledMaximum(temp_v8);
         temp_v1 = ((short)temp_v9 - *(short *)(temp_v8 + 0xe)) + *(short *)(temp_v8 + 0x2a);
         if (temp_v1 <= temp_v9) {
           temp_v9 = (int)temp_v1;

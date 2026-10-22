@@ -38,7 +38,7 @@ u32 gameDataBlocksGetWord27E90();
 void FUN_0036ca3c(u32 *, s32, s32, u32, u32);
 const CecViewMarkEntry *gameDataGetMarkEntry(s32);
 const CecViewPosition *FUN_001834a4(u32, s32);
-void FUN_002a2210(u32, const CecViewMarkEntry *, CecViewRow *, s32, s32, u32);
+void saveSlotDrawSummary(u32, const CecViewMarkEntry *, CecViewRow *, s32, s32, u32);
 void FUN_00359c78(u32 *, s32, s32);
 void effCreateRegisteredPair(s32, s32);
 void FUN_0036c91c(u32 *, s32, s32, u32, u32, u32, s32, s32, u32);
@@ -60,7 +60,7 @@ u32 campCecViewDrawEntries()
         const CecViewPosition *position = FUN_001834a4(46, i + 150);
         s32 y = position->y;
         s32 x = position->x;
-        FUN_002a2210(view->handle[i], entry, &draw->rowWork.rows[i], x, y, empty);
+        saveSlotDrawSummary(view->handle[i], entry, &draw->rowWork.rows[i], x, y, empty);
         if (selected && !draw->rowWork.footerState.inactive)
             FUN_00359c78(draw->cursor, x, y);
         if ((entry->base.flags & 0x10) && !draw->rowWork.footerState.inactive)

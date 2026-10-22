@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler exchanges r1 and r2 for the slot pointer and boolean accumulator. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 namespace {

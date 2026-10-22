@@ -5,14 +5,14 @@
 extern "C" {
 
 int bitsetSetBit(int, int);
-int FUN_0029c6b0(int);
+int unitRecalculateEffectiveStats(int);
 int FUN_0029d770(int, unsigned char [1552]);
 int FUN_0029dc74(int, unsigned char [1552]);
 int devilGetRecord(void);
 int memClear(int, int);
 
 /* Supplied declaration required: bitsetSetBit. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029dc74. */
 extern unsigned char *partyMemberFindById(unsigned short);
@@ -100,7 +100,7 @@ void FUN_003c8980(unsigned int param_1,unsigned short *param_2,int param_3)
   temp_v5 = (unsigned int)*param_2;
   devilGetRecord();
   bitsetSetBit(param_3,*(unsigned short *)(temp_v5 + 0x38));
-  FUN_0029c6b0(param_3);
+  unitRecalculateEffectiveStats(param_3);
   return;
 }
 

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_003e0064(...);
-int FUN_004bd354(...);
+int recordSetClampedCurrent(...);
 
 int btlGetMainState(void);
-int FUN_0017760c(...);
+int recordGetScaledMaximum(...);
 int dataTable04FindById(void);
 int FUN_003f0e20(...);
 int FUN_004c53fc(...);
@@ -96,12 +96,12 @@ extern unsigned int DAT_00571410; /* 0x571410 */
 extern unsigned int DAT_00571414; /* 0x571414 */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e0064. */
 extern int FUN_003ea278(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004bd354. */
+/* Supplied declaration required: recordSetClampedCurrent. */
 /* Supplied declaration required: FUN_004c53fc. */
 /* Supplied declaration required: FUN_004c571c. */
 
@@ -770,8 +770,8 @@ joined_r0x004c7570:
       }
     }
     else if (!((temp_v3 & DAT_00571408) == 0 && (temp_v5 & DAT_0057140c) == 0)) {
-      if ((puVar3[0xff] != 0) && (temp_v8 = FUN_0017760c(), temp_v8 == puVar3[0x97])) {
-        temp_v0 = FUN_0017760c(puVar3[0xff]);
+      if ((puVar3[0xff] != 0) && (temp_v8 = recordGetScaledMaximum(), temp_v8 == puVar3[0x97])) {
+        temp_v0 = recordGetScaledMaximum(puVar3[0xff]);
         temp_v8 = ((int)temp_v0 * (int)(short)(unsigned short)param_2->field_0x57) / 100;
         puVar3[0x97] = temp_v8;
       }
@@ -867,7 +867,7 @@ joined_r0x004c7570:
         FUN_003e0064((int)(short)temp_v8);
       }
       else if (puVar3[0xff] != 0) {
-        FUN_004bd354(puVar3[0xff],(int)(short)temp_v8);
+        recordSetClampedCurrent(puVar3[0xff],(int)(short)temp_v8);
       }
     }
     temp_v4 = FUN_004c53fc(0x18);

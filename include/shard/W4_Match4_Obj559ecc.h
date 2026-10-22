@@ -7,11 +7,14 @@
 class Obj55aff4 {
 public:
     Obj55aff4();
+    Obj55aff4(const char *text);
+    Obj55aff4(const Obj55aff4 &other);
+    Obj55aff4 &operator=(const Obj55aff4 &other);
     virtual ~Obj55aff4();
 
 private:
     /* 0x00: vtable pointer */
-    /* 0x04 */ u32 text;
+    /* 0x04 */ char *text;
 };
 
 /* An object holding two Obj55aff4 (vtable at 0x559ecc; named after it until its real name is known). */

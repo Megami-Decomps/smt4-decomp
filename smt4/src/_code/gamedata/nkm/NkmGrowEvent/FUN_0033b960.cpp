@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002954bc(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int dataTable06Sub1GetRecord(...);
 int FUN_002b7bca(...);
 int devilGetRecord(...);
@@ -40,7 +40,7 @@ typedef struct {
 extern unsigned char LAB_0032b33c; /* 0x32b33c */
 
 /* Supplied declaration required: FUN_002954bc. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: devilGetRecord. */
@@ -139,7 +139,7 @@ LAB_0033bab0:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 8);
   }
-  FUN_0029c6b0(param_1);
+  unitRecalculateEffectiveStats(param_1);
   FUN_002954bc(param_1);
   asdMemFree(temp_v0);
   return temp_v4;

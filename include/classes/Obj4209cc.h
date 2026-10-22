@@ -48,4 +48,33 @@ public:
     /* 0x40 */ u16 unk40;       /* starts at 7 */
 };
 
+/* Prefix used by a shared deleting-destructor callback. */
+struct Obj4209ccCallbackView {
+    /* 0x00 */ const void *vtable;
+};
+
+/* Apocalypse's model-list initialization callback uses the same owner prefix. */
+struct ModelResourceItem {
+    /* 0x00 */ void *vtable;
+    /* 0x04 */ u32 flags;
+};
+struct ModelResourceItems {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 count;
+};
+struct ModelResourceList {
+    /* 0x00 */ void *vtable;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ ModelResourceItems *items;
+};
+struct ModelResourceOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ModelResourceList *models;
+    /* 0x0C */ u8 unk0c[0x18];
+    /* 0x24 */ void *source;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ s32 state;
+};
+typedef char ModelResourceOwnerSizeCheck[sizeof(ModelResourceOwner) == 0x30 ? 1 : -1];
+
 #endif

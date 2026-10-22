@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int textFormatBuffer(...);
 int rt_memclr(...);
 int asdMemFree(...);
@@ -22,8 +22,8 @@ extern int g_aocMain; /* 0x432fc8 */
 
 extern int legacyResourceIdRemap(unsigned int *);
 extern int FUN_002ad1e0(int);
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemFree. */
@@ -51,10 +51,10 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
     *(unsigned int *)(param_2 + 0x20) = 0;
   }
   *param_1 = 0;
-  puVar1 = (unsigned int *)FUN_002bad5c(param_1 + 4);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  resultPairInitialize(&temp_v2,0);
+  _ZN18WindowStatusResultC1Ej(&temp_v2,0);
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;
@@ -62,7 +62,7 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   uStack_24 = 0;
   temp_v0 = param_2 + 0x34;
   FUN_003550f4(temp_v0,0xe5c,param_3,2);
-  resultPairInitialize(&temp_v3,temp_v0);
+  _ZN18WindowStatusResultC1Ej(&temp_v3,temp_v0);
   temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v3);
   if (temp_v0 < 0) {
     jyoucyuGetTableEntry(0);

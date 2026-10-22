@@ -13,7 +13,7 @@ int libc_strcmp(int, unsigned char *);
 int asdMemFree(...);
 int memClear(void);
 int asdMemAlloc(...);
-int FUN_002fdf34(...);
+int effectAllocateSavedRenderRecords(...);
 int FUN_0031bae0(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
@@ -72,7 +72,7 @@ extern int libc_strlen(int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: FUN_002fdf34. */
+/* Supplied declaration required: effectAllocateSavedRenderRecords. */
 /* Supplied declaration required: FUN_0031bae0. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -503,7 +503,7 @@ LAB_0024a200:
       } while (temp_v4 < *(int *)(param_2 + 0xc));
     }
   }
-  FUN_002fdf34(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
+  effectAllocateSavedRenderRecords(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
   FUN_0031bae0(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
   keyedCopyPayload(temp_v49,param_2 + 0x14);
   FUN_001ad2a0(temp_v49,temp_v47);

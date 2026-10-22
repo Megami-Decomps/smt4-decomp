@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(int *);
 int onlineCallStateIsDone(int);
@@ -23,7 +23,7 @@ typedef struct {
 } param_4_stack;
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
@@ -56,7 +56,7 @@ void FUN_002e9b30(int *param_1,int param_2,unsigned int *param_3,int param_4)
   temp_v9 = param_3;
   iStack_18 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v6,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v6,temp_v0 + 0x58);
   if (param_4 != 0) {
     onlineCallStateIsDone(param_2);
   }

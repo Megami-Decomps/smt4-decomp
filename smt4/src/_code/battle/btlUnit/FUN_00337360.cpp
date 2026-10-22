@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0023fb84(unsigned int);
+int modelAnimationEnsureData(unsigned int);
 int btlReflectInitKind9(int, unsigned int, int, unsigned int, int);
 int FUN_0024057c(int, int, int);
 int FUN_002451c4(int, unsigned int, int, int, int, int);
@@ -29,7 +29,7 @@ extern unsigned int DAT_00439a28; /* 0x439a28 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
-/* Supplied declaration required: FUN_0023fb84. */
+/* Supplied declaration required: modelAnimationEnsureData. */
 /* Supplied declaration required: btlReflectInitKind9. */
 /* Supplied declaration required: FUN_0024057c. */
 /* Supplied declaration required: FUN_002451c4. */
@@ -86,7 +86,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
           if (temp_v4 == 0) {
             return 0;
           }
-          FUN_0023fb84(temp_v3);
+          modelAnimationEnsureData(temp_v3);
           *puVar7 = *puVar7 | 2;
           *(unsigned int *)(param_1 + 0x4458) = temp_v3;
         }

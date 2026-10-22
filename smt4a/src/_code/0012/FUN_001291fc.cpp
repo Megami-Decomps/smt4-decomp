@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_0030cd9c(int, int *);
 
@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_0030cd9c. */
 
@@ -35,7 +35,7 @@ unsigned long long FUN_001291fc(int param_1,unsigned int param_2,unsigned int pa
   uStack_14 = param_2;
   uStack_10 = param_3;
   temp_v0 = param_4;
-  FUN_002e6e34(&iStack_18,param_1 + 0x10);
+  _ZN9Obj55b28cC1EPv(&iStack_18,param_1 + 0x10);
   while (*(int *)(param_1 + 0x54) != 0) {
     temp_v0 = *(unsigned int *)(*(int *)(param_1 + 0x50) + 8);
     FUN_0030cd9c(param_1 + 0x40,&temp_v0);

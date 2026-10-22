@@ -1,4 +1,3 @@
-/* NON_MATCHING: the size multiply is scheduled before the count store and needs its own register (retail reuses r4). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002f4f00(unsigned char [64]);
 int FUN_00303cd8(unsigned char [64]);
@@ -21,10 +21,10 @@ typedef struct {
 } param_5_stack;
 
 extern unsigned char LAB_00118f79; /* 0x118f79 */
-extern unsigned char DAT_0062d744; /* 0x62d744 */
+extern unsigned char g_onlinePacketHandlers; /* 0x62d744 */
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_00303cd8. */
@@ -55,7 +55,7 @@ int FUN_00118cfc(int param_1,int param_2,unsigned int param_3,unsigned int param
   uStack_1c = param_3;
   temp_v3 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   FUN_00303cd8(temp_v1);
   FUN_00303d10(temp_v1,*(unsigned short *)(param_1 + 0x20),1);
   temp_v0 = FUN_00303d1e(temp_v1,param_2);
@@ -66,7 +66,7 @@ int FUN_00118cfc(int param_1,int param_2,unsigned int param_3,unsigned int param
       FUN_00303e66(param_2,temp_v3);
       FUN_00303e66(param_2,param_5);
     }
-    (*(unsigned char * *)((unsigned char *)&DAT_0062d744 + 0x34)) = &LAB_00118f79;
+    (*(unsigned char * *)((unsigned char *)&g_onlinePacketHandlers + 0x34)) = &LAB_00118f79;
     if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = holderCheckBitsAllowed(param_1,0x10), temp_v0 != 0)) {
       onlineScopedLockRelease(temp_v2);
     }

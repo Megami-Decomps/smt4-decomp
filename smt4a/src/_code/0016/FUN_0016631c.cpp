@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162790(int, unsigned int, int);
-int FUN_001676b0(int, int, int, int);
+int effectDispatchSelector(int, int, int, int);
 int FUN_0018408c(int, int);
 int FUN_00184ae0(int, unsigned char *, unsigned int);
 int FUN_00185e84(int, int, int, int, int, int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_0052fa28; /* 0x52fa28 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184ae0. */
@@ -80,7 +80,7 @@ LAB_0016637c:
   if (!temp_v4) {
     return;
   }
-  FUN_001676b0(4,temp_v3,8,0x79);
+  effectDispatchSelector(4,temp_v3,8,0x79);
   return;
 }
 

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002a4288(void *object);
+int _ZN9Obj420f70D1Ev(void *object);
 extern u8 g_nnFndExpHeapBaseVtable;
 extern void nn_fnd_ExpHeapBase_Finalize(void *heap);
 
@@ -15,7 +15,7 @@ void expHeapDestroyA(Obj *obj)
 {
     obj->vtbl = &g_nnFndExpHeapBaseVtable;
     nn_fnd_ExpHeapBase_Finalize(obj);
-    FUN_002a4288(obj);
+    _ZN9Obj420f70D1Ev(obj);
 }
 
 } /* extern "C" */

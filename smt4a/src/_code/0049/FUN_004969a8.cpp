@@ -1,249 +1,34 @@
-/* NON_MATCHING: retail unit ends with fallthrough into separately named FUN_00496a0c after restoring LR; draft absorbed that following list-builder body, so the function boundary must be resolved first. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail groups the state/elapsed stores with stm; armcc emits separate stores and loads listKind earlier. */
+#include "common.h"
 
-extern "C" {
+struct CellListController {
+    void *vtable; // 0x00
+    s32 state; // 0x04
+    s32 elapsed; // 0x08
+    u32 unk0c;
+    s32 previousState; // 0x10
+    u32 unk14;
+    u8 mode; // 0x18
+    u8 unk19[0xb27];
+    s32 listKind; // 0xb40
+};
+extern "C" void FUN_00499d14(CellListController *controller);
+extern "C" void FUN_004964e0(CellListController *controller, s32 refresh);
+extern "C" void FUN_00496a0c(CellListController *controller, s32 refresh);
 
-int qsort(...);
-int FUN_0028a888(...);
-int asdTextDrawDirectoryEntry(...);
-int cellListAppend(...);
-int FUN_004964e0(...);
-int FUN_00499d14(void);
-int FUN_004cfeb0(...);
-int FUN_004cff88(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-
-/* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_0028a888. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern int FUN_0046e458(unsigned int, short);
-extern int dataTableValue0f(void);
-extern int FUN_00481100(unsigned int);
-/* Supplied declaration required: cellListAppend. */
-/* Supplied declaration required: FUN_004964e0. */
-/* Supplied declaration required: FUN_00499d14. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_004cfeb0. */
-/* Supplied declaration required: FUN_004cff88. */
-
-
-void FUN_004969a8(int param_1)
-
+// Enter list state sixteen and dispatch the requested list refresh.
+extern "C" void FUN_004969a8(CellListController *controller)
 {
-/* irregular: 8 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-  *(unsigned int *)(param_1 + 4) = 0x10;
-  *(unsigned int *)(param_1 + 8) = 0;
-  if (*(int *)(param_1 + 0xb40) != 8) {
-    if (*(char *)(param_1 + 0x18) == '\x01') {
-      *(unsigned int *)(param_1 + 0xb40) = 7;
+    controller->previousState = controller->state;
+    controller->state = 16;
+    controller->elapsed = 0;
+    if (controller->listKind != 8) {
+        if (controller->mode == 1)
+            controller->listKind = 7;
+        else
+            FUN_00499d14(controller);
+        FUN_004964e0(controller, 1);
+        return;
     }
-    else {
-      FUN_00499d14();
-    }
-    FUN_004964e0(param_1,1);
-    return;
-  }
-  *(unsigned short *)(param_1 + 0x9f84) = 0;
-  temp_v6 = 0x30d;
-  temp_v1 = *(int *)(param_1 + 0xb44);
-  temp_v5 = 0x12d;
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if (temp_v1 != 2) {
-        if (temp_v1 == 3) {
-          temp_v6 = 1;
-          do {
-            temp_v1 = FUN_00481100(temp_v6);
-            if (temp_v1 != 0) {
-              cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-            }
-            temp_v6 = temp_v6 + 1;
-          } while ((int)temp_v6 < 0x3d);
-          temp_v6 = 0x79f;
-          do {
-            temp_v1 = FUN_00481100(temp_v6);
-            if (temp_v1 != 0) {
-              cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-            }
-            temp_v6 = temp_v6 + 1;
-          } while ((int)temp_v6 < 0x7df);
-        }
-      }
-      else {
-        do {
-          temp_v1 = FUN_00481100(temp_v5);
-          if (temp_v1 != 0) {
-            cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
-          }
-          temp_v5 = temp_v5 + 1;
-        } while ((int)temp_v5 < 0x1a5);
-        temp_v6 = 0x1a5;
-        do {
-          temp_v1 = FUN_00481100(temp_v6);
-          if (temp_v1 != 0) {
-            cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-          }
-          temp_v6 = temp_v6 + 1;
-        } while ((int)temp_v6 < 0x21d);
-        temp_v6 = 0x21d;
-        do {
-          temp_v1 = FUN_00481100(temp_v6);
-          if (temp_v1 != 0) {
-            cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-          }
-          temp_v6 = temp_v6 + 1;
-        } while ((int)temp_v6 < 0x295);
-        temp_v6 = 0x295;
-        do {
-          temp_v1 = FUN_00481100(temp_v6);
-          if (temp_v1 != 0) {
-            cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-          }
-          temp_v6 = temp_v6 + 1;
-        } while ((int)temp_v6 < 0x30d);
-      }
-    }
-    else {
-      temp_v5 = 0x3d;
-      do {
-        temp_v1 = FUN_00481100(temp_v5);
-        if (temp_v1 != 0) {
-          cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
-        }
-        temp_v5 = temp_v5 + 1;
-      } while ((int)temp_v5 < 0xb5);
-      temp_v5 = 0xb5;
-      do {
-        temp_v1 = FUN_00481100(temp_v5);
-        if (temp_v1 != 0) {
-          cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
-        }
-        temp_v5 = temp_v5 + 1;
-      } while ((int)temp_v5 < 0x12d);
-      do {
-        temp_v1 = FUN_00481100(temp_v6);
-        if (temp_v1 != 0) {
-          cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-        }
-        temp_v6 = temp_v6 + 1;
-      } while ((int)temp_v6 < 0x33f);
-    }
-  }
-  else {
-    temp_v1 = param_1 + 0x8f84;
-    temp_v4 = 1;
-    do {
-      temp_v2 = FUN_00481100(temp_v4);
-      if (temp_v2 != 0) {
-        cellListAppend(temp_v1,temp_v4 & 0xffff,0,0,0);
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < 0x3d);
-    temp_v1 = param_1 + 0x8f84;
-    temp_v4 = 0x3d;
-    do {
-      temp_v2 = FUN_00481100(temp_v4);
-      if (temp_v2 != 0) {
-        cellListAppend(temp_v1,temp_v4 & 0xffff,0,0,0);
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < 0xb5);
-    temp_v1 = param_1 + 0x8f84;
-    temp_v4 = 0xb5;
-    do {
-      temp_v2 = FUN_00481100(temp_v4);
-      if (temp_v2 != 0) {
-        cellListAppend(temp_v1,temp_v4 & 0xffff,0,0,0);
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < 0x12d);
-    do {
-      temp_v1 = FUN_00481100(temp_v6);
-      if (temp_v1 != 0) {
-        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while ((int)temp_v6 < 0x33f);
-    do {
-      temp_v1 = FUN_00481100(temp_v5);
-      if (temp_v1 != 0) {
-        cellListAppend(param_1 + 0x8f84,temp_v5 & 0xffff,0,0,0);
-      }
-      temp_v5 = temp_v5 + 1;
-    } while ((int)temp_v5 < 0x1a5);
-    temp_v6 = 0x1a5;
-    do {
-      temp_v1 = FUN_00481100(temp_v6);
-      if (temp_v1 != 0) {
-        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while ((int)temp_v6 < 0x21d);
-    temp_v6 = 0x21d;
-    do {
-      temp_v1 = FUN_00481100(temp_v6);
-      if (temp_v1 != 0) {
-        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while ((int)temp_v6 < 0x295);
-    temp_v6 = 0x295;
-    do {
-      temp_v1 = FUN_00481100(temp_v6);
-      if (temp_v1 != 0) {
-        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while ((int)temp_v6 < 0x30d);
-    temp_v6 = 0x79f;
-    do {
-      temp_v1 = FUN_00481100(temp_v6);
-      if (temp_v1 != 0) {
-        cellListAppend(param_1 + 0x8f84,temp_v6 & 0xffff,0,0,0);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while ((int)temp_v6 < 0x7df);
-  }
-  qsort(param_1 + 0x8f84,*(unsigned short *)(param_1 + 0x9f84),4,&LAB_0049cf3c);
-  FUN_004cfeb0(param_1 + 0xf00,10,*(unsigned short *)(param_1 + 0x9f84),0,1,1);
-  *(unsigned char *)(param_1 + 0xf0d) = 1;
-  FUN_004cff88(param_1 + 0xf00,0);
-  FUN_004964e0(param_1,1);
-  temp_v2 = *(int *)(param_1 + 0xb40);
-  temp_v3 = flaggedValueHolderGetTotal(param_1 + temp_v2 * 0x74 + 0xb60);
-  temp_v1 = DAT_0057f0c8;
-  temp_v0 = *(short *)(param_1 + temp_v2 * 0x1002 + 0xf74 + temp_v3 * 4);
-  if (temp_v0 == 0) {
-    *(unsigned char *)(DAT_0057f0c8 + 0x5ea) = 0;
-  }
-  else {
-    *(unsigned char *)(DAT_0057f0c8 + 0x67c) = 1;
-    *(unsigned char *)(temp_v1 + 0x5ea) = 1;
-    temp_v2 = FUN_0046e458(g_aocSystem,temp_v0);
-    if (temp_v2 == 0) {
-      temp_v2 = dataTableValue0f();
-    }
-    FUN_0028a888(temp_v0);
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0,3,temp_v2,temp_v0);
-  }
-  return;
+    FUN_00496a0c(controller, 1);
 }
-
-} /* extern "C" */

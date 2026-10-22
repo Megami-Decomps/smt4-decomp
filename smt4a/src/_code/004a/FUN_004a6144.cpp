@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162758(...);
+int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int FUN_00180118(void);
 int FUN_0018349c(...);
@@ -35,7 +35,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00162758. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
@@ -142,7 +142,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((temp_v10 + (int)**(short **)(temp_v4 + 0xc) / 2 + (int)*(short *)(temp_v4 + 8)) -
                         temp_v3 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162758(param_1 + 200,temp_v13,temp_v11,temp_v6,temp_v6,temp_v3);
+    drawTextAtSnappedRectangle(param_1 + 200,temp_v13,temp_v11,temp_v6,temp_v6,temp_v3);
     temp_v7 = param_4;
     FUN_00180118();
     if (param_3 == 0) {
@@ -156,7 +156,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v4 = FUN_0018349c(param_1 + 200,temp_v6);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162758(param_1 + 200,temp_v13,temp_v8,temp_v7,temp_v7,temp_v3);
+    drawTextAtSnappedRectangle(param_1 + 200,temp_v13,temp_v8,temp_v7,temp_v7,temp_v3);
     temp_v7 = param_4;
     temp_v12 = 0;
     dataTable00FindById();

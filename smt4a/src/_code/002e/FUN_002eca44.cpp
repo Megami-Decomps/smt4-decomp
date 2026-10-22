@@ -41,7 +41,7 @@ extern unsigned char DAT_005585a4; /* 0x5585a4 */
 
 extern unsigned int FUN_002e7908(fn_002eca44_arg0 **, unsigned int *);
 /* Supplied declaration required: vectorCopyHeader. */
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern unsigned int FUN_002e9f94(unsigned int *, unsigned int);
 extern int FUN_002e9ff4(unsigned int *);
 
@@ -62,7 +62,7 @@ int FUN_002eca44(fn_002eca44_arg0 *param_1,unsigned int param_2,unsigned int par
   uStack_1c = param_2;
   uStack_18 = param_3;
   temp_v2 = param_4;
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_005585a4;
   *(unsigned char *)(puVar1 + 4) = 0;
   puVar1[5] = 0;

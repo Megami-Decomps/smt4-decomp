@@ -40,7 +40,7 @@ extern unsigned char LAB_0038447c; /* 0x38447c */
 /* Supplied declaration required: nodeOwnerSetEnabled. */
 /* Supplied declaration required: FUN_00234f5c. */
 /* Supplied declaration required: FUN_00235250. */
-extern int FUN_00235414(unsigned char);
+extern int storyModeCanProceed(unsigned char);
 /* Supplied declaration required: modelSetAnimationChannels. */
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287528. */
@@ -188,7 +188,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
       FUN_00381ac0();
     }
   }
-  temp_v3 = FUN_00235414(*(unsigned char *)(param_1 + 0x18));
+  temp_v3 = storyModeCanProceed(*(unsigned char *)(param_1 + 0x18));
   if (temp_v3 != 0) {
     FUN_00287528(0);
   }

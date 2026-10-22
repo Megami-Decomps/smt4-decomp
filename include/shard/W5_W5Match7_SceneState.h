@@ -68,6 +68,28 @@ struct GameState {
             /* 0x034 */ u8 unk034BeforePendingEntries[0x2dc];
             /* 0x310 */ u32 ids[32];
         } pendingEntries;
+        struct {
+            u8 unk034[0x111];
+            u8 scriptPending; // 0x145
+            u8 unk146[2];
+            u32 scriptId; // 0x148
+            char scriptName[0x48]; // 0x14c
+            s16 delay; // 0x194
+            s16 enemyIndex; // 0x196
+            u8 forced; // 0x198
+            u8 approach; // 0x199
+            u8 backAttack; // 0x19a
+            u8 hasMarker; // 0x19b
+            s16 markerX; // 0x19c
+            s16 markerY; // 0x19e
+            u8 unk1a0[0x18];
+            s32 count; // 0x1b8
+            u32 value; // 0x1bc
+            u8 unk1c0[0x1a4];
+            s32 blocked; // 0x364
+            u32 unk368;
+            s32 changeMapId; // 0x36c
+        } encounter;
     };
     /* 0x4cc */ u8 mapRequested;
     /* 0x4cd */ u8 unk4cd[3];

@@ -6,7 +6,7 @@ extern "C" {
 
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int asdMemFreeSlot(void);
-int FUN_002f5020(int, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 int paramsClearPacket(int);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned char DAT_00529ac0; /* 0x529ac0 */
 
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: paramsClearPacket. */
 
 
@@ -43,7 +43,7 @@ int FUN_00416b70(int param_1)
   unsigned int temp_v3;
   unsigned long long temp_v4;
   
-  FUN_002f5020(param_1,&LAB_004125bc,0xb0,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_004125bc,0xb0,0xc);
   temp_v0 = 0;
   temp_v1 = 0;
   do {

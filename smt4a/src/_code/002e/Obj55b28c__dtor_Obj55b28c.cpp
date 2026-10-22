@@ -1,21 +1,7 @@
-#include "romwright_types.h"
+#include "classes/Obj55b28c.h"
 
-extern "C" {
-
-int onlineScopedLockRelease(unsigned int *);
-
-extern unsigned char DAT_0055b294; /* 0x55b294 */
-
-/* Supplied declaration required: onlineScopedLockRelease. */
-
-
-unsigned int * _ZN9Obj55b28cD1Ev(unsigned int *param_1)
-
+/* Releases the mutex acquired for the guard's lifetime. */
+Obj55b28c::~Obj55b28c()
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0055b294;
-  onlineScopedLockRelease(param_1);
-  return param_1;
+    onlineScopedLockRelease(this);
 }
-
-} /* extern "C" */

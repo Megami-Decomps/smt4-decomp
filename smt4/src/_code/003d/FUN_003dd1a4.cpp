@@ -19,7 +19,7 @@ int memClear(...);
 void FUN_002d582c(unsigned int, float);
 int FUN_003da0ec(...);
 int modelAttachmentsUpdateFromParents(...);
-int FUN_003dbed8(...);
+int battleCreateSecondaryModels(...);
 int FUN_003dc924(...);
 int rt_memcpy_w(...);
 
@@ -53,7 +53,7 @@ extern int FUN_002adee0(unsigned int);
 extern int gameObjectFlagIsSet(void);
 /* Supplied declaration required: FUN_003da0ec. */
 /* Supplied declaration required: modelAttachmentsUpdateFromParents. */
-/* Supplied declaration required: FUN_003dbed8. */
+/* Supplied declaration required: battleCreateSecondaryModels. */
 /* Supplied declaration required: FUN_003dc924. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -111,7 +111,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v1 = *(unsigned int *)(param_1 + 0x3028);
   }
   else {
-    FUN_003dbed8(DAT_00435d18,*(unsigned int *)(param_1 + 0x302c));
+    battleCreateSecondaryModels(DAT_00435d18,*(unsigned int *)(param_1 + 0x302c));
     temp_v1 = (*(unsigned int *)(param_1 + 0x3028) & 0xffffffef) | 0x20;
     *(unsigned int *)(param_1 + 0x3028) = temp_v1;
   }

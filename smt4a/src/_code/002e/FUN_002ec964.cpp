@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00130588(int [2], int, unsigned int *);
 int FUN_00130824(int [2], int, int);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ec728(int, unsigned int);
 int destroyObj0055ae64(...);
@@ -27,7 +27,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00130588. */
 /* Supplied declaration required: FUN_00130824. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int strInit(int *);
 /* Supplied declaration required: FUN_002ec728. */
@@ -61,7 +61,7 @@ void FUN_002ec964(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v8 = param_2;
   temp_v9 = param_3;
   temp_v10 = param_4;
-  FUN_002e6e34(temp_v6,param_1 + 0x3c);
+  _ZN9Obj55b28cC1EPv(temp_v6,param_1 + 0x3c);
   temp_v0 = strInit(temp_v4);
   temp_v2 = temp_v8;
   temp_v1 = FUN_002ece14(temp_v3,temp_v0);

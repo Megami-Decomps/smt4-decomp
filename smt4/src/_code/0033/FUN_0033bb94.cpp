@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029bbc8(...);
 int FUN_0029bde4(...);
 int FUN_0029c1c8(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int FUN_002b7bca(...);
 int rt_memcpy_w(...);
 
@@ -22,7 +22,7 @@ extern int recordContainsPairedId(int);
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029c1c8. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern unsigned int flagCountUnlockedSlots(int);
 extern int gameGetUnitRecord(unsigned int);
 extern int gameGetSlotTable(void);
@@ -133,7 +133,7 @@ unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
     temp_v1 = temp_v1 - 1;
   }
   if (0 < temp_v1) {
-    FUN_0029c6b0(temp_v2);
+    unitRecalculateEffectiveStats(temp_v2);
     return 1;
   }
   temp_v1 = 0;
@@ -150,7 +150,7 @@ unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
     }
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 8) {
-      FUN_0029c6b0(temp_v2);
+      unitRecalculateEffectiveStats(temp_v2);
       return 0;
     }
   } while( 1 );

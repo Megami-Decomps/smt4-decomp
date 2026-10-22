@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00135a9c(...);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int onlineJobSetStateReady(...);
 int FUN_002e78d0(...);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned char LAB_00122f8c; /* 0x122f8c */
 
 /* Supplied declaration required: FUN_00135a9c. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: FUN_002e78d0. */
@@ -55,7 +55,7 @@ unsigned int FUN_00122ed4(int param_1,unsigned int param_2,int param_3)
   unsigned int temp_v6 [2];
   
   if (param_3 != 0) {
-    FUN_002e6e34(temp_v5,param_1 + 0xb8);
+    _ZN9Obj55b28cC1EPv(temp_v5,param_1 + 0xb8);
     FUN_0030f846(&temp_v4);
     while( 1 ) {
       temp_v6[0] = *(unsigned int *)(param_1 + 0x120);

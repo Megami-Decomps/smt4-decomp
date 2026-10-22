@@ -1,4 +1,3 @@
-/* NON_MATCHING: only zero/one saved-register allocation differs (r6/r7 swapped); canonical weak debug trace now reproduces the retail allocation preamble. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 

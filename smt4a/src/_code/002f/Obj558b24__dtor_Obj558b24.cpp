@@ -11,15 +11,15 @@ typedef struct {
 
 extern u8 DAT_00558b2c;
 
-u8 *onlineStringDestroy(u8 *self);
+u8 *_ZN9Obj55aff4D1Ev(u8 *self);
 
 MemberOwner *_ZN9Obj558b24D1Ev(MemberOwner *self)
 {
     u8 *subObject;
 
     self->vtbl = &DAT_00558b2c;
-    subObject = onlineStringDestroy(self->member) - 0xc;
-    return (MemberOwner *)(onlineStringDestroy(subObject) - 4);
+    subObject = _ZN9Obj55aff4D1Ev(self->member) - 0xc;
+    return (MemberOwner *)(_ZN9Obj55aff4D1Ev(subObject) - 4);
 }
 
 } /* extern "C" */

@@ -5,24 +5,24 @@
 extern "C" {
 
 int asdOperatorDeleteArray(...);
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int _ZN9Obj55859c12freeResourceEv(unsigned int *);
 int FUN_002e9e1e(int *);
 int FUN_002e9f00(unsigned int *, int);
-int sharedRefInitEmpty(unsigned int *);
+int _ZN9Obj5593b8D1Ev(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_005585a4; /* 0x5585a4 */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
 /* Supplied declaration required: FUN_002e9e1e. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: sharedRefInitEmpty. */
+/* Supplied declaration required: _ZN9Obj5593b8D1Ev. */
 
 
 void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -44,7 +44,7 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v0 = onlineContextGetInstance();
   if (temp_v0 != 0) {
     temp_v0 = onlineContextGetInstance();
-    FUN_002e6e34(&uStack_20,temp_v0 + 0x58);
+    _ZN9Obj55b28cC1EPv(&uStack_20,temp_v0 + 0x58);
     if (*(char *)(param_1 + 4) == '\x01') {
       FUN_002e9f00(param_1,4);
     }
@@ -77,7 +77,7 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
     param_1[7] = 0;
     param_1[8] = 0;
   }
-  sharedRefInitEmpty(param_1);
+  _ZN9Obj5593b8D1Ev(param_1);
   return;
 }
 

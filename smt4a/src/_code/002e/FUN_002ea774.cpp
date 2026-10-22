@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00109240(int, int, unsigned int, int);
 int FUN_0012df8a(unsigned char [8], int, int);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineSockAddrConstruct(unsigned char [32]);
 int FUN_002ea852(int, unsigned int, unsigned char [4]);
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00109240. */
 extern int FUN_00123820(unsigned int);
 /* Supplied declaration required: FUN_0012df8a. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: onlineSockAddrConstruct. */
@@ -62,7 +62,7 @@ int FUN_002ea774(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   uStack_1c = param_3;
   uStack_18 = param_4;
   temp_v1 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v8,temp_v1);
+  _ZN9Obj55b28cC1EPv(temp_v8,temp_v1);
   onlineSockAddrConstruct(temp_v7);
   temp_v2 = FUN_00123820(temp_v12);
   if (temp_v2 != 0) {

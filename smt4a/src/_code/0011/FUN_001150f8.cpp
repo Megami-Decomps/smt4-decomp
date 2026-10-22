@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00103640(unsigned int);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_00300c10(int *);
 int FUN_00300df0(int, unsigned int, unsigned int, int, int *);
@@ -35,7 +35,7 @@ extern int DAT_0062d880; /* 0x62d880 */
 #endif
 /* Supplied declaration required: FUN_00103640. */
 extern int FUN_00115390(unsigned int *);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_00300c10. */
 extern int FUN_00300c20(void);
@@ -70,7 +70,7 @@ FUN_001150f8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   temp_v0 = FUN_00115390(param_4);
   if (temp_v0 != 0) {
     DAT_0062d880 = DAT_0062d880 + 1;
-    FUN_002e6e34(temp_v6,*(int *)(param_1 + 8) + 4);
+    _ZN9Obj55b28cC1EPv(temp_v6,*(int *)(param_1 + 8) + 4);
     FUN_00103640(*(unsigned int *)(param_1 + 8));
     temp_v3 = *(int *)(param_1 + 8) + 0xb0;
     temp_v5 = *(int *)(*(int *)(param_1 + 8) + 0x34) << 3;

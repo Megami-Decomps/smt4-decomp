@@ -12,7 +12,7 @@ int strDestroy(...);
 int FUN_002ee524(...);
 int sharedRefHolderDestroy2(...);
 int FUN_002fde5c(...);
-int clearWords2Alt(unsigned char [8]);
+int _ZN12ZeroWordPairC1Ev(unsigned char [8]);
 int streamWriterWriteWord(...);
 int streamWriteWordCopy(...);
 int FUN_00303038(...);
@@ -54,7 +54,7 @@ extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002ee524. */
 /* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
-/* Supplied declaration required: clearWords2Alt. */
+/* Supplied declaration required: _ZN12ZeroWordPairC1Ev. */
 /* Supplied declaration required: streamWriterWriteWord. */
 /* Supplied declaration required: streamWriteWordCopy. */
 /* Supplied declaration required: FUN_00303038. */
@@ -130,7 +130,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
       piVar2 = (int *)0x0;
     }
     FUN_0012143c(piVar2,*(unsigned int *)(param_3 + 0x14),temp_v19);
-    clearWords2Alt(temp_v23);
+    _ZN12ZeroWordPairC1Ev(temp_v23);
     FUN_00303088(temp_v23);
     FUN_00303146(temp_v25,piVar2 + 0x14);
     temp_v2 = FUN_00124458(temp_v23,temp_v25);

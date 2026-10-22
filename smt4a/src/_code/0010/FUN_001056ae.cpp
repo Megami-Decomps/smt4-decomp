@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002ebd94(int, unsigned int);
 
@@ -13,7 +13,7 @@ int FUN_002ebd94(int, unsigned int);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_00120f44(int, int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002ebd94. */
@@ -33,7 +33,7 @@ unsigned long long FUN_001056ae(int param_1,unsigned int param_2,unsigned int pa
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_002e6e34(&uStack_20,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(&uStack_20,param_1 + 4);
   for (temp_v2 = 0;
       (temp_v2 < (int)(unsigned int)*(unsigned short *)(param_1 + 0x40) &&
       (*(int *)(*(int *)(param_1 + 0x38) + temp_v2 * 4) != 0)); temp_v2 = temp_v2 + 1) {

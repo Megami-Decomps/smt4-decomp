@@ -1,4 +1,3 @@
-/* NON_MATCHING: merged functions: this unit includes a second tail-call entry at offset 0x20, which needs its own unit. */
 #include "common.h"
 
 struct MasterSoundState {

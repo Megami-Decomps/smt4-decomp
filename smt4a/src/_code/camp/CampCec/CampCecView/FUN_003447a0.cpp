@@ -15,10 +15,10 @@ int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
 int gameDataGetMarkEntry(...);
 int FUN_0036d4b0(...);
-int FUN_0037b5e0(...);
+int uiDrawExtendedRecordLabel(...);
 int campCecDrawSetCreate(...);
-int FUN_0039a3b4(...);
-int FUN_003a4980(...);
+int textureRequestCacheGet(...);
+int characterInfoPanelPopulate(...);
 int campCecDrawPageCreate(...);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -56,10 +56,10 @@ extern unsigned int overlayGetStatusScene(void);
 /* Supplied declaration required: gameDataGetMarkEntry. */
 extern int playerSummaryIsIncomplete(void);
 /* Supplied declaration required: FUN_0036d4b0. */
-/* Supplied declaration required: FUN_0037b5e0. */
+/* Supplied declaration required: uiDrawExtendedRecordLabel. */
 /* Supplied declaration required: campCecDrawSetCreate. */
-/* Supplied declaration required: FUN_0039a3b4. */
-/* Supplied declaration required: FUN_003a4980. */
+/* Supplied declaration required: textureRequestCacheGet. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: campCecDrawPageCreate. */
 
 
@@ -138,7 +138,7 @@ void FUN_003447a0(void)
   do {
     temp_v1 = gameDataGetMarkEntry(puVar2[0x46] + temp_v4);
     if (*(short *)(temp_v1 + 0x60) != 0) {
-      FUN_0037b5e0(puVar2[temp_v4 + 0x41],temp_v1);
+      uiDrawExtendedRecordLabel(puVar2[temp_v4 + 0x41],temp_v1);
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 3);
@@ -146,13 +146,13 @@ void FUN_003447a0(void)
   puVar2[3] = temp_v4;
   *(unsigned short *)(temp_v4 + 0x34) = *(unsigned short *)(temp_v4 + 0x60);
   puVar3[0x51] = 1;
-  FUN_003a4980(puVar3[0x44],puVar3[3],0);
+  characterInfoPanelPopulate(puVar3[0x44],puVar3[3],0);
   temp_v4 = gameDataGetMarkEntry(0);
   temp_v0 = *(unsigned char *)(temp_v4 + 0x22);
   temp_v3 = (unsigned int)temp_v0;
   FUN_00182054();
   if (temp_v3 == 0) {
-    FUN_0039a3b4(puVar3[0x44],(unsigned int)temp_v0);
+    textureRequestCacheGet(puVar3[0x44],(unsigned int)temp_v0);
   }
   temp_v4 = 0;
   do {

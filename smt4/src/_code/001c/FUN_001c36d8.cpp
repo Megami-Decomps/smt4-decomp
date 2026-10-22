@@ -16,7 +16,7 @@ int FUN_00287c34(int);
 int gameFlagSetValue(...);
 int FUN_00299370(...);
 int FUN_0029c1c8(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int gameFlagIsSet(...);
 int FUN_00333edc(void);
 int FUN_0033f86c(int, int);
@@ -74,7 +74,7 @@ extern int FUN_001ed60c(void);
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c1c8. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
@@ -404,7 +404,7 @@ void FUN_001c36d8(int param_1)
                         *(unsigned char *)(temp_v6 + 0x600) = 0;
                         *(unsigned short *)(temp_v6 + 0x44) = 0;
                         objectFlagSetBit(temp_v6,2);
-                        FUN_0029c6b0(temp_v6);
+                        unitRecalculateEffectiveStats(temp_v6);
                         saveGetMapFlag(0x20,1);
                         if (temp_v1 != 0) {
                           gameFlagSetValue(0x551,1);

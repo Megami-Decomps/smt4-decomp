@@ -58,7 +58,7 @@ s32 messageMainGetValue(void);
 PlayerData* gameGetPlayerData(void);
 s32 countUnlockedSlots(void);
 s32 getUnlockedSlotCount(const PlayerData*);
-void FUN_002f01e0(u16*, u32);
+void statusReplaceSkills(u16*, u32);
 void FUN_003343f0(u32);
 
 void statusSkillsCommitOnDialogResult(void* object)
@@ -77,12 +77,12 @@ void statusSkillsCommitOnDialogResult(void* object)
         PlayerData* player = gameGetPlayerData();
         copySkills(player, work->staged);
         SkillDataView* data = reinterpret_cast<SkillDataView*>(player);
-        FUN_002f01e0(data->skills.ids, static_cast<u8>(countUnlockedSlots()));
+        statusReplaceSkills(data->skills.ids, static_cast<u8>(countUnlockedSlots()));
     } else {
         PlayerData* demon = work->demon;
         copySkills(demon, work->staged);
         SkillDataView* data = reinterpret_cast<SkillDataView*>(demon);
-        FUN_002f01e0(data->skills.ids, static_cast<u8>(getUnlockedSlotCount(demon)));
+        statusReplaceSkills(data->skills.ids, static_cast<u8>(getUnlockedSlotCount(demon)));
     }
     if (work->refreshNeeded != 0) {
         FUN_003343f0(0);

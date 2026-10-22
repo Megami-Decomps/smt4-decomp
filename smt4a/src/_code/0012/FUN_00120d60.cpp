@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00120c88(void);
 int FUN_00120cd8(void);
 int FUN_00122dd0(void);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineTimeGetNow(unsigned char [8]);
 int FUN_002ed0c0(int, int);
@@ -31,11 +31,11 @@ extern unsigned int FUN_001175a4(void);
 /* Supplied declaration required: FUN_00122dd0. */
 extern unsigned int FUN_00123100(int, unsigned int, unsigned int);
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int FUN_002e7168(int, unsigned int);
 extern int operatorNew(unsigned int);
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002ed074(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002ed0c0. */
@@ -55,7 +55,7 @@ int FUN_00120d60(void)
   unsigned char temp_v4 [8];
   unsigned char temp_v5 [16];
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_0055aefc;
   temp_v0 = FUN_002ed074(puVar1 + 7,3);
   *(unsigned char *)(temp_v0 + 0x14) = 0;
@@ -81,7 +81,7 @@ int FUN_00120d60(void)
     DAT_0059495b = 0;
   }
   FUN_00120c88();
-  FUN_002e6e34(temp_v5,&DAT_0062e6a0);
+  _ZN9Obj55b28cC1EPv(temp_v5,&DAT_0062e6a0);
   DAT_005949f0 = DAT_005949f0 + 1;
   _ZN9Obj55b28cD1Ev(temp_v5);
   FUN_002ed0c0(temp_v0 - 0x30,temp_v0 - 0x4c);
@@ -114,7 +114,7 @@ int FUN_00120d60(void)
   }
   *(unsigned int *)(temp_v0 - 0x34) = temp_v2;
   temp_v1 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v5,temp_v1 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v5,temp_v1 + 0x58);
   FUN_002fd210(*(unsigned int *)(*(int *)(temp_v0 - 0x38) + 0x44));
   _ZN9Obj55b28cD1Ev(temp_v5);
   return temp_v0 - 0x4c;

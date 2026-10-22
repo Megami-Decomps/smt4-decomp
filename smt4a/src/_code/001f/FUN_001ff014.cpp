@@ -56,7 +56,7 @@ extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: qsort. */
 extern int randRange(unsigned int);
-extern unsigned short FUN_0017760c(int);
+extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: slotRecordFindById. */
 extern int gameGetSlotRecord(void);
@@ -372,7 +372,7 @@ unsigned char FUN_001ff014(int param_1)
     *(unsigned int *)(temp_v4 + 0x48) = 0;
     FUN_004bd17c(temp_v4,temp_v4);
   }
-  temp_v0 = FUN_0017760c(temp_v4);
+  temp_v0 = recordGetScaledMaximum(temp_v4);
   *(unsigned short *)(temp_v4 + 0x2a) = temp_v0;
   *(unsigned short *)(temp_v4 + 0x2c) = *(unsigned short *)(temp_v4 + 0x10);
   if (temp_v1 == 0) {

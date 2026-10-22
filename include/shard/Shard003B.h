@@ -17,7 +17,10 @@ typedef struct ResSet {
     /* 0x00 */ u32 h0;
     /* 0x04 */ u32 h1;
     /* 0x08 */ u32 a[7];
-    /* 0x24 */ u8 unk24[0x10];
+    /* 0x24 */ union {
+        u8 unk24[0x10];
+        u32 params24[4];
+    };
     /* 0x34 */ u32 h34;
     /* 0x38 */ u32 h38;
     /* 0x3C */ u8 unk3C[4];
@@ -36,5 +39,17 @@ typedef struct Rec12C {
     /* 0x000 */ u8 unk000[0x12C];
     /* 0x12C */ u16 unk12C;
 } Rec12C;
+
+/* The two-byte input consumed by this pool implementation. */
+typedef struct PoolBytePair {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 first;
+    /* 0x18 */ u32 second;
+} PoolBytePair;
+
+typedef struct StateFlag46 {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 state;
+} StateFlag46;
 
 #endif

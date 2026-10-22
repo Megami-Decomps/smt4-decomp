@@ -14,7 +14,7 @@ typedef struct Owner1D {
     /* 0x78 */ Object *second;
 } Owner1D;
 
-extern u8 DAT_0055c824;
+extern u8 _ZTV9Obj55c81c[];
 extern u32 g_handleRegistry;
 extern void ptrListRemoveClearOwner(u32 a, u8 *data);
 
@@ -24,7 +24,7 @@ Owner1D *owner1DDestroy(Owner1D *obj)
     Object *second;
     u8 *data;
 
-    obj->vtbl = &DAT_0055c824;
+    obj->vtbl = _ZTV9Obj55c81c + 8;
     if (obj->first != NULL) {
         obj->first->vtbl->release(obj->first);
         obj->first = NULL;

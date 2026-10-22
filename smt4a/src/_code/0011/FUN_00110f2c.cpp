@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(...);
 int vectorCopyHeader(...);
 int vectorResizeBytes(...);
@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: vectorCopyHeader. */
 extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
@@ -99,7 +99,7 @@ LAB_00110f60:
     FUN_002f8b88(1);
     if ((*(char *)(param_1 + 0xc) == '\0') || (*(char *)(param_1 + 0x108f) != '\0'))
     goto LAB_00111002;
-    FUN_002e6e34(temp_v15,temp_v13);
+    _ZN9Obj55b28cC1EPv(temp_v15,temp_v13);
     temp_v1 = *(int *)(*(int *)(param_1 + 0x109c) + 0x18);
     if (temp_v1 != 0) {
       vectorResizeBytes(piVar3,temp_v1,0);
@@ -147,13 +147,13 @@ LAB_00111002:
       return;
     }
     temp_v6 = 1;
-    FUN_002e6e34(temp_v15,temp_v13);
+    _ZN9Obj55b28cC1EPv(temp_v15,temp_v13);
     *(unsigned char *)(param_1 + 0x1090) = 1;
     *(unsigned int *)(param_1 + 0x1094) = temp_v7;
     _ZN9Obj55b28cD1Ev(temp_v15);
   }
 LAB_00111096:
-  FUN_002e6e34(temp_v15,temp_v13);
+  _ZN9Obj55b28cC1EPv(temp_v15,temp_v13);
   if (temp_v2 != 0) {
     if ((temp_v11 < 0) && (temp_v11 != -0x27bf5fd5)) {
       if (*(char *)(param_1 + 0x108d) == '\0') {

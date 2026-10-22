@@ -173,7 +173,7 @@ extern int lcgRandomRange(unsigned int);
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-extern unsigned int FUN_0017760c(void);
+extern unsigned int recordGetScaledMaximum(void);
 /* Supplied declaration required: FUN_00180118. */
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
@@ -1075,7 +1075,7 @@ LAB_002bbdec:
           *(short *)(puVar20[0xfe] + 0x2a) = temp_v5;
         }
         else if (puVar20[0xff] != 0) {
-          temp_v9 = FUN_0017760c();
+          temp_v9 = recordGetScaledMaximum();
           puVar20[0x97] = temp_v9;
           temp_v10 = (unsigned int)*(short *)(puVar20[0xff] + 0x2a);
           if ((int)temp_v10 <= (int)temp_v9) {

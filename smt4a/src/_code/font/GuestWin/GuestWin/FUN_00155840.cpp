@@ -45,7 +45,7 @@ extern int dataTableGetCategoryEntry(int, unsigned short);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
-extern unsigned int FUN_0017760c(int);
+extern unsigned int recordGetScaledMaximum(int);
 extern int FUN_00177654(void);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_0018152c. */
@@ -128,7 +128,7 @@ unsigned int FUN_00155840(void)
     FUN_001835b4(2,8,0xcd,temp_v8,temp_v4,0x1a);
     FUN_001835b4(2,8,0xce,temp_v8,temp_v4,0x1f);
     FUN_001835b4(2,8,0xcf,temp_v8,temp_v4,0x1f);
-    temp_v5 = FUN_0017760c(temp_v1);
+    temp_v5 = recordGetScaledMaximum(temp_v1);
     FUN_00183788((int)*(short *)(temp_v1 + 0x2a),temp_v5,0,0,8,0xd0,0xd3,0xd2,0xd1,temp_v8,temp_v4,0x24,0);
     temp_v3 = FUN_001834a4(8,0xd9);
     temp_v2 = FUN_00177654();

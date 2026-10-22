@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_0019ff9c(u32 a, void *b);
+int messageDrawSelectedImagePair(u32 a, void *b);
 extern int FUN_001ed80c(void);
 
 typedef struct Obj {
@@ -23,7 +23,7 @@ u32 FUN_001ebdb8(void)
     Obj *obj = g_campCecEdit.obj;
 
     if (FUN_001ed80c() == 0) {
-        FUN_0019ff9c(obj->unk08, obj->unk28);
+        messageDrawSelectedImagePair(obj->unk08, obj->unk28);
     }
     return 0;
 }

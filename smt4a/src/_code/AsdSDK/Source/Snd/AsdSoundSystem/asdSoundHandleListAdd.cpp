@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-extern AsdSndHandleNode *DAT_0063e944; /* head of the registered sounds */
+extern AsdSndHandleNode *g_soundHandleList; /* head of the registered sounds */
 extern s32 DAT_0063e948;               /* how many */
 
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -15,7 +15,7 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     AsdSndHandleNode *last;
     s32 i = 0;
 
-    node = DAT_0063e944;
+    node = g_soundHandleList;
     if (0 < DAT_0063e948) {
         do {
             if (node == NULL) {
@@ -33,8 +33,8 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     node->id = id;
     node->unk0d = 0;
     node->unk0f = flag;
-    if (DAT_0063e944 != NULL) {
-        for (last = DAT_0063e944; last->next != NULL; last = last->next) {
+    if (g_soundHandleList != NULL) {
+        for (last = g_soundHandleList; last->next != NULL; last = last->next) {
         }
         node->prev = last;
         node->next = NULL;
@@ -42,7 +42,7 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     } else {
         node->prev = NULL;
         node->next = NULL;
-        DAT_0063e944 = node;
+        g_soundHandleList = node;
     }
     DAT_0063e948++;
     return 1;

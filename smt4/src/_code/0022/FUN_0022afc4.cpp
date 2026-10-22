@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00152ed8(int);
 int nodeSetTranslation(unsigned int, int, int);
-int FUN_003416bc(int, unsigned int, unsigned int);
+int modelSelectionActivate(int, unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00152ed8. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_003416bc. */
+/* Supplied declaration required: modelSelectionActivate. */
 
 
 void FUN_0022afc4(int param_1,unsigned int param_2,unsigned int param_3)
@@ -25,7 +25,7 @@ void FUN_0022afc4(int param_1,unsigned int param_2,unsigned int param_3)
   *(unsigned int *)(param_1 + 0x10) = 0;
   *(unsigned char *)(param_1 + 0x14) = 0;
   FUN_00152ed8(param_1);
-  FUN_003416bc(param_1,param_2,param_3);
+  modelSelectionActivate(param_1,param_2,param_3);
   if (*(char *)(param_1 + 0x15) != '\0') {
     *(unsigned int *)(param_1 + 0x1658) = *(unsigned int *)(param_1 + 0x1664);
     *(unsigned int *)(param_1 + 0x165c) = *(unsigned int *)(param_1 + 0x1668);

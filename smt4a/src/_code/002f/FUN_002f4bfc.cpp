@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned int *, int);
+int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 int _ZN9Obj55b28cD1Ev(unsigned int *);
 int FUN_002f4ab0(unsigned int, unsigned int);
 
@@ -18,7 +18,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4ab0. */
 extern unsigned int vectorCount4_002f4ba0(unsigned int);
@@ -42,7 +42,7 @@ long long FUN_002f4bfc(int param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v2 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_002e6e34(&temp_v2,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(&temp_v2,param_1 + 4);
   if (*(char *)(param_1 + 0x34) == '\0') {
     *(unsigned char *)(param_1 + 0x34) = 1;
     _ZN9Obj55b28cD1Ev(&temp_v2);
@@ -72,7 +72,7 @@ long long FUN_002f4bfc(int param_1,unsigned int param_2,unsigned int param_3,uns
       *(unsigned int *)(param_1 + 0x3c) =
            (int)*(unsigned int **)(param_1 + 0x3c) - (((int)puVar6 - (int)puVar3) & 0xfffffffcU);
     }
-    FUN_002e6e34(&temp_v2,param_1 + 4);
+    _ZN9Obj55b28cC1EPv(&temp_v2,param_1 + 4);
     *(unsigned char *)(param_1 + 0x34) = 2;
     _ZN9Obj55b28cD1Ev(&temp_v2);
     return romwright_piece_4_4(temp_v2,1);

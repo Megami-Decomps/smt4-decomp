@@ -15,10 +15,10 @@ struct fn_001214c4_arg0 {
 
 extern unsigned char DAT_0055b00c; /* 0x55b00c */
 
-extern unsigned int *sharedRefInit(fn_001214c4_arg0 *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(fn_001214c4_arg0 *);
 extern int FUN_002ec75c(int);
 extern int FUN_002ece14(unsigned int *, unsigned int);
-extern int clearWords2Alt(int);
+extern int _ZN12ZeroWordPairC1Ev(int);
 
 
 void FUN_001214c4(fn_001214c4_arg0 *param_1,unsigned int param_2,unsigned int param_3)
@@ -27,12 +27,12 @@ void FUN_001214c4(fn_001214c4_arg0 *param_1,unsigned int param_2,unsigned int pa
   unsigned int *puVar1;
   int temp_v0;
   
-  puVar1 = (unsigned int *)sharedRefInit(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(param_1);
   *puVar1 = (unsigned int)&DAT_0055b00c;
   temp_v0 = FUN_002ece14(puVar1 + 3,param_2);
   *(unsigned int *)(temp_v0 + 0x24) = param_3;
   temp_v0 = FUN_002ec75c(temp_v0 + 0x28);
-  temp_v0 = clearWords2Alt(temp_v0 + 0x1c);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x1c);
   *(unsigned char *)(temp_v0 - 0x47) = 0;
   return;
 }

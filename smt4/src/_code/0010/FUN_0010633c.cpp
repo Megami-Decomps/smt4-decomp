@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010bf44(unsigned int);
 int FUN_0010ddcc(int, unsigned int, unsigned int, unsigned int);
 
-extern unsigned char DAT_0044e098; /* 0x44e098 */
+extern unsigned char g_titleConfigModeFlag; /* 0x44e098 */
 extern int DAT_0044e09c; /* 0x44e09c */
 extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
 extern unsigned int DAT_004c53c8; /* 0x4c53c8 */
@@ -137,7 +137,7 @@ void FUN_0010633c(void)
             *(unsigned int *)(temp_v3 + 0x4c53d8) = 0;
           }
           FUN_0010bf44((&DAT_004c53d0)[temp_v0 * 8]);
-          temp_v1 = (unsigned int)DAT_0044e098;
+          temp_v1 = (unsigned int)g_titleConfigModeFlag;
           temp_v8 = rt_memcmp();
           temp_v3 = (int)((unsigned long long)temp_v8 >> 0x20);
           if (((int)temp_v8 == 0) && (temp_v2 = (&DAT_004c53d0)[temp_v0 * 8], temp_v2 != 0x100007b)) {

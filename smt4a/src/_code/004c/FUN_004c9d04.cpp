@@ -17,7 +17,7 @@ int countersAddSaturating(...);
 int FUN_0041a7dc(...);
 int FUN_0047f288(...);
 int FUN_004a9c24(...);
-int FUN_004bd354(...);
+int recordSetClampedCurrent(...);
 int bitsAt60Clear(...);
 int objectRefRelease(...);
 int FUN_004fb43c(...);
@@ -82,7 +82,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0047f288. */
 /* Supplied declaration required: FUN_004a9c24. */
 extern int bitsAt60Test(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004bd354. */
+/* Supplied declaration required: recordSetClampedCurrent. */
 /* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: objectRefRelease. */
 /* Supplied declaration required: FUN_004fb43c. */
@@ -245,7 +245,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
             if (temp_v6 != 0) {
               *(unsigned short *)(temp_v6 + 0x60) = *(unsigned short *)(temp_v6 + 0x60) & 0xffef;
               if (0 < (int)puVar13[0x96]) {
-                FUN_004bd354(puVar13[0xff],(int)(short)puVar13[0x96]);
+                recordSetClampedCurrent(puVar13[0xff],(int)(short)puVar13[0x96]);
               }
               puVar13[0xff] = 0;
             }
@@ -276,7 +276,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
             if (temp_v6 != 0) {
               *(unsigned short *)(temp_v6 + 0x60) = *(unsigned short *)(temp_v6 + 0x60) & 0xffef;
               if (0 < (int)puVar13[0x96]) {
-                FUN_004bd354(puVar13[0xff],(int)(short)puVar13[0x96]);
+                recordSetClampedCurrent(puVar13[0xff],(int)(short)puVar13[0x96]);
               }
             }
           }
@@ -321,7 +321,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
           }
           if ((0 < (int)puVar13[0x96]) &&
              (*(short *)(puVar13[0xff] + 0x62) == *(short *)((int)puVar13 + 0x166))) {
-            FUN_004bd354(puVar13[0xff],(int)(short)puVar13[0x96]);
+            recordSetClampedCurrent(puVar13[0xff],(int)(short)puVar13[0x96]);
           }
         }
         *(short *)(temp_v5 + 0x2000) = *(short *)(temp_v5 + 0x2000) - 1;

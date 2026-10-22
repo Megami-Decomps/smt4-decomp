@@ -16,7 +16,7 @@ int FUN_004b457c(...);
 int textFormatBuffer(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -73,7 +73,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
@@ -302,7 +302,7 @@ LAB_004b0658:
         efctCallRoutineWithSpeedOverride(*(short *)(temp_v7 + 8) + temp_v5,(int)*(short *)(temp_v7 + 10) + temp_v4 + temp_v13,0x24
                     );
         temp_v7 = FUN_001834a4(0x1d,temp_v14 * 2 + 0x11d);
-        FUN_001676b0((int)(short)temp_v16,*(short *)(temp_v7 + 8) + temp_v5,
+        effectDispatchSelector((int)(short)temp_v16,*(short *)(temp_v7 + 8) + temp_v5,
                      (int)*(short *)(temp_v7 + 10) + temp_v4 + temp_v13,0x24);
         temp_v14 = (temp_v14 + 1) & 0xffff;
         if (temp_v14 >= 6) goto LAB_004b0770;

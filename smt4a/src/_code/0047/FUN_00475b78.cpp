@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
 
@@ -25,8 +25,8 @@ extern unsigned char LAB_00514b5c; /* 0x514b5c */
 extern unsigned char LAB_00514b9c; /* 0x514b9c */
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -50,10 +50,10 @@ void FUN_00475b78(unsigned char *param_1,int param_2)
   
   piVar2 = temp_v3;
   *param_1 = 1;
-  puVar1 = (unsigned int *)FUN_001b5acc(param_1 + 4);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  resultPairInitialize(temp_v3,0);
+  _ZN18WindowStatusResultC1Ej(temp_v3,0);
   temp_v2 = piVar2[1];
   *puVar1 = *piVar2;
   puVar1[1] = temp_v2;

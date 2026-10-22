@@ -8,7 +8,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0015f858(int, int);
 int FUN_00162790(...);
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_00183bb0(void);
@@ -55,7 +55,7 @@ extern unsigned char LAB_002acdbc; /* 0x2acdbc */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -66,7 +66,7 @@ extern unsigned int FUN_001ba3d4(int);
 extern int unitMatchesAlignment(int);
 /* Supplied declaration required: FUN_0047fc38. */
 /* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
-extern int FUN_00480960(int);
+extern int equipmentHasPositiveUpgrade(int);
 
 
 void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,unsigned int param_6)
@@ -131,7 +131,7 @@ void FUN_002ac470(int param_1,int param_2,int param_3,int param_4,int param_5,un
     if (temp_v3 == 0) {
       temp_v9 = 0x9b9b9bff;
     }
-    temp_v3 = FUN_00480960(temp_v21);
+    temp_v3 = equipmentHasPositiveUpgrade(temp_v21);
     if (temp_v3 != 0) {
       temp_v9 = 0x8400ff;
       temp_v3 = temp_v21;
@@ -376,7 +376,7 @@ LAB_002ac704:
     temp_v4 = (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8);
     temp_v1 = 0xc;
   }
-  FUN_001676b0(temp_v1,temp_v4 + param_4 + 0x1e,temp_v3 + param_5,0x6f);
+  effectDispatchSelector(temp_v1,temp_v4 + param_4 + 0x1e,temp_v3 + param_5,0x6f);
   return;
 LAB_002ac6e0:
   if (param_1 != 0x13) goto LAB_002ac6e8;

@@ -12,10 +12,10 @@ int msgWindowReset(void);
 int campCecSetObjectValue(...);
 int FUN_0032ef0c(...);
 int FUN_00344bc8(...);
-int FUN_0035a0bc(...);
+int controllerApplyPreset(...);
 int screenStartOrClear(...);
 int FUN_00387ad8(int, int);
-int FUN_003a4980(...);
+int characterInfoPanelPopulate(...);
 int FUN_003d2150(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -46,10 +46,10 @@ extern unsigned int dataTableGetEntryValue(void);
 extern int FUN_0032ecac(void);
 /* Supplied declaration required: FUN_0032ef0c. */
 /* Supplied declaration required: FUN_00344bc8. */
-/* Supplied declaration required: FUN_0035a0bc. */
+/* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_00387ad8. */
-/* Supplied declaration required: FUN_003a4980. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_003d2150. */
 
 
@@ -431,7 +431,7 @@ unsigned int FUN_003aef48(int param_1)
             *(char *)(*(int *)(param_1 + 8) + 0x42) =
                  (char)temp_v1 + (char)*(unsigned int *)(param_1 + 0x120);
             temp_v4 = overlayGetStatusScene();
-            FUN_0035a0bc(temp_v4,*(int *)(param_1 + 0x128) + *(int *)(param_1 + 0x120));
+            controllerApplyPreset(temp_v4,*(int *)(param_1 + 0x128) + *(int *)(param_1 + 0x120));
           }
         }
         else {
@@ -445,7 +445,7 @@ unsigned int FUN_003aef48(int param_1)
         *(int *)(*(int *)(param_1 + 8) + 0x24) =
              temp_v1 + *(int *)(param_1 + 0x120) + *(int *)(param_1 + 0x134);
       }
-      FUN_003a4980(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
+      characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                    *(unsigned int *)(param_1 + 0x58));
       FUN_003d2150(0x100020d);
     }
@@ -477,13 +477,13 @@ unsigned int FUN_003aef48(int param_1)
           else {
             *(char *)(*(int *)(param_1 + 8) + 0x42) = (char)*(unsigned int *)(param_1 + 0x160);
             temp_v9 = overlayGetStatusScene();
-            FUN_0035a0bc(temp_v9,*(unsigned int *)(param_1 + 0x160));
+            controllerApplyPreset(temp_v9,*(unsigned int *)(param_1 + 0x160));
           }
         }
         else {
           *(char *)(*(int *)(param_1 + 8) + 0x23) = (char)*(unsigned int *)(param_1 + 0x158);
         }
-        FUN_003a4980(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
+        characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                      *(unsigned int *)(param_1 + 0x58));
         *(unsigned int *)(param_1 + 0x44) = 0;
         *(unsigned char *)(param_1 + 0x48) = 0;

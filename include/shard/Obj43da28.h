@@ -26,6 +26,19 @@ typedef struct Obj43da28 {
     /* 0x0560 */ u32 unk560;
 } Obj43da28;
 
+/* Apocalypse's six button-help kinds and their active component flags. */
+typedef struct ButtonHelpKind {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[3];
+} ButtonHelpKind;
+
+typedef struct ButtonHelpCompatibility {
+    /* 0x000 */ u8 unk000[0x5AC];
+    /* 0x5AC */ ButtonHelpKind entries[6];
+    /* 0x5C4 */ u8 unk5c4[0x10];
+    /* 0x5D4 */ u8 active[7];
+} ButtonHelpCompatibility;
+
 typedef struct Holder43da28 {
     /* 0x0 */ u8 unk0[4];
     /* 0x4 */ Obj43da28 *obj;

@@ -26,7 +26,7 @@ typedef struct Request {
 
 extern Node *FUN_001d25a0(u32 arg, s32 index);
 extern s32 FUN_001a0380(NameBuffer *name);
-extern Pair *resultPairInitialize(Pair *out, s32 code);
+extern Pair *_ZN18WindowStatusResultC1Ej(Pair *out, s32 code);
 
 /* Consumes the request's pending name: clears it and, when its lookup code has the high bit set, copies the resulting pair into the node. */
 void FUN_001d0fcc(u32 arg, Request *request)
@@ -43,7 +43,7 @@ void FUN_001d0fcc(u32 arg, Request *request)
         request->name.words[3] = 0;
         request->pending = 0;
         if ((code & 0x80000000) != 0) {
-            node->pair = *resultPairInitialize(&local, code);
+            node->pair = *_ZN18WindowStatusResultC1Ej(&local, code);
         }
     }
 }

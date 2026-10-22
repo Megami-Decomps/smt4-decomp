@@ -1,4 +1,3 @@
-/* NON_MATCHING: the constant stored into `closing` is materialised in r1 (retail: r0). */
 #include "common.h"
 
 extern "C" {
@@ -21,7 +20,7 @@ typedef struct JyoucyuHandle {
 } JyoucyuHandle;
 
 void FUN_002a7838(StreamBuffer *buffer);
-u8 *FUN_00263c34(u8 *member);
+u8 *_ZN9Obj55ca08D1Ev(u8 *member);
 void asdMemFreeNonNull(void *block);
 int jyoucyuGetTableEntry(int index);
 
@@ -34,7 +33,7 @@ void FUN_002d54e0(JyoucyuHandle *handle)
     if (screen->buffer != NULL) {
         FUN_002a7838(screen->buffer);
         if (screen->buffer != NULL) {
-            asdMemFreeNonNull(FUN_00263c34(screen->buffer->unk110) - 0x110);
+            asdMemFreeNonNull(_ZN9Obj55ca08D1Ev(screen->buffer->unk110) - 0x110);
         }
         screen->buffer = NULL;
     }

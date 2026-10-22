@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `add r0, r0, #19456` where armcc emits `mov r1, r0`. */
 #include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {

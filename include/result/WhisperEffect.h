@@ -43,4 +43,68 @@ typedef struct WhisperEffect {
     /* 0xC4 */ WhisperLine lines[5];
 } WhisperEffect;
 
+/* Animation views used by Apocalypse's result-screen update callback. */
+struct WhisperPositionKey {
+    s32 frame;
+    f32 x, y, z;
+};
+struct WhisperBlinkKey {
+    s32 frame;
+    u8 visible;
+    u8 unk05[3];
+};
+struct WhisperParticleAnimation {
+    s32 jitterFrame;
+    s32 scaleFrame;
+    s32 alphaFrame;
+    f32 phase;
+    f32 rate;
+    s32 period;
+    f32 x, y;
+};
+struct WhisperLayerAnimation {
+    f32 scale;
+    f32 alpha;
+    f32 phase;
+    f32 rate;
+    s32 scaleFrame;
+    s32 alphaFrame;
+    s32 phaseFrame;
+    s32 period;
+
+    void advancePhase()
+    {
+        ++phaseFrame;
+        ++scaleFrame;
+        ++alphaFrame;
+        phase += rate;
+        if (phase > 256.0f)
+            phase -= 256.0f;
+    }
+};
+struct WhisperLineAnimation {
+    f32 x, y, z;
+    f32 alpha;
+    const WhisperPositionKey *positions;
+    const WhisperBlinkKey *blink;
+    s32 positionFrame;
+    s32 blinkFrame;
+    u32 unk20;
+    s32 frameCount;
+    s32 frame;
+    s32 tick;
+    f32 visible;
+};
+struct WhisperAnimationView {
+    u32 task; // 0x00
+    s32 state; // 0x04
+    u8 finished; // 0x08
+    u8 unk09[3];
+    u32 handle; // 0x0c
+    f32 opacity; // 0x10
+    WhisperParticleAnimation particles[2]; // 0x14
+    WhisperLayerAnimation layers[3]; // 0x54
+    WhisperLineAnimation lines[5]; // 0xb4
+};
+
 #endif

@@ -6,7 +6,7 @@ extern "C" {
 
 int effectSpawnPositionDefault(unsigned int);
 int FUN_002573d8(void);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_002c1b64(int, int);
@@ -18,7 +18,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: FUN_002573d8. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -64,7 +64,7 @@ void FUN_001f67ec(int param_1)
     effectSpawnPositionDefault(temp_v1);
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x13);
-  FUN_0025b750();
+  forwardRecoveredCallback();
   temp_v5 = g_titleScene;
   piVar6 = (int *)(g_titleScene + 0x124c);
   temp_v2 = *piVar6;

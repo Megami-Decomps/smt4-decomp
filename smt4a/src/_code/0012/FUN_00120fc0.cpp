@@ -5,19 +5,19 @@
 extern "C" {
 
 int FUN_00106c88(int);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int onlineStringDestroy(unsigned char [8]);
-int onlineStringAssign(int, unsigned int);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
+int _ZN9Obj55aff4aSERKS_(int, unsigned int);
 
 extern unsigned char LAB_0012104c; /* 0x12104c */
 
 /* Supplied declaration required: FUN_00106c88. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned char *);
 extern int FUN_002eb5f4(void);
 
@@ -32,7 +32,7 @@ void FUN_00120fc0(int param_1)
   unsigned char temp_v3 [8];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   FUN_00106c88(*(int *)(param_1 + 4) + 0x10);
   *(unsigned int *)(*(int *)(param_1 + 4) + 0x44) = 0xffffffff;
   *(unsigned int *)(*(int *)(param_1 + 4) + 0x40) = 0xffffffff;
@@ -43,8 +43,8 @@ void FUN_00120fc0(int param_1)
       temp_v0 = FUN_002eb5f4();
       temp_v0 = *(int *)(temp_v0 + 0xd0);
       temp_v1 = FUN_002ea100(temp_v3,&LAB_0012104c);
-      onlineStringAssign(temp_v0 + 0x110,temp_v1);
-      onlineStringDestroy(temp_v3);
+      _ZN9Obj55aff4aSERKS_(temp_v0 + 0x110,temp_v1);
+      _ZN9Obj55aff4D1Ev(temp_v3);
       temp_v0 = FUN_002eb5f4();
       *(unsigned short *)(*(int *)(temp_v0 + 0xd0) + 0x118) = 0;
     }

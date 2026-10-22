@@ -12,7 +12,7 @@ int FUN_0023acdc(...);
 int FUN_0026c3c4(...);
 int FUN_0026cbb8(...);
 int FUN_002a5e7c(...);
-int FUN_002f01e0(...);
+int statusReplaceSkills(...);
 int FUN_0037dfb0(...);
 int FUN_0037e078(void);
 int FUN_00387ac4(...);
@@ -107,7 +107,7 @@ int FUN_003d2150(...);
 int FUN_003d2158(...);
 int gameFlagSetValue(...);
 int itemResetOverLimitStates(...);
-int FUN_004cc6d4(...);
+int playerAdvanceLevelsAndRecover(...);
 int FUN_004ccbf0(...);
 int FUN_004ccc7c(...);
 int FUN_004cd238(...);
@@ -242,7 +242,7 @@ extern int FUN_002c8748(void);
 /* Supplied declaration required: FUN_002e5c2c. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_002effbc(void);
-/* Supplied declaration required: FUN_002f01e0. */
+/* Supplied declaration required: statusReplaceSkills. */
 /* Supplied declaration required: FUN_002f5064. */
 extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003180c4. */
@@ -323,7 +323,7 @@ extern int recordContainsPairedId(unsigned int, unsigned int);
 /* Supplied declaration required: getUnlockedSlotCount. */
 /* Supplied declaration required: bitsAt60Test. */
 /* Supplied declaration required: FUN_004bd6b0. */
-/* Supplied declaration required: FUN_004cc6d4. */
+/* Supplied declaration required: playerAdvanceLevelsAndRecover. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 extern int FUN_004cc9dc(unsigned short, unsigned short, int);
 /* Supplied declaration required: FUN_004ccbf0. */
@@ -978,7 +978,7 @@ LAB_0020524c:
           if (temp_v13 != 0) {
             *(int *)temp_v42 = 0xff;
             temp_v26 = (unsigned int)*(unsigned short *)(temp_v7 + 0x62);
-            FUN_004cc6d4(temp_v7,(int)(short)temp_v13,0);
+            playerAdvanceLevelsAndRecover(temp_v7,(int)(short)temp_v13,0);
             FUN_004cd238(temp_v26,temp_v13 & 0xffff);
             *(unsigned int *)(temp_v6 + 0x7558) = temp_v26;
             *(unsigned int *)(temp_v6 + 0x755c) = temp_v26;
@@ -2707,7 +2707,7 @@ LAB_00207d0c:
           temp_v41 = temp_v30;
           temp_v44 = temp_v16;
           temp_v16 = statusDownGetCursorPosition();
-          FUN_002f01e0(temp_v13 + 0x34,8);
+          statusReplaceSkills(temp_v13 + 0x34,8);
           FUN_003c16e0(temp_v16 - 1);
         }
         temp_v11 = *(unsigned int *)(temp_v13 + 0x38);

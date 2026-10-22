@@ -23,7 +23,7 @@ int FUN_003868dc(int);
 int FUN_003d2150(int);
 int FUN_003d4ed8(int);
 int FUN_00483834(int);
-int FUN_0049f700(int, int, int);
+int partyTryInflictCondition(int, int, int);
 int FUN_0049f8a4(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -77,7 +77,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_00483834. */
-/* Supplied declaration required: FUN_0049f700. */
+/* Supplied declaration required: partyTryInflictCondition. */
 /* Supplied declaration required: FUN_0049f8a4. */
 extern short __aeabi_idivmod(int, int);
 
@@ -227,7 +227,7 @@ void FUN_003401a4(int param_1)
         temp_v9 = 7.5f;
       }
       FUN_0049f8a4(2,(int)temp_v12);
-      FUN_0049f700(2,5,(int)temp_v9);
+      partyTryInflictCondition(2,5,(int)temp_v9);
       *(unsigned short *)(param_1 + 0x9340) = 0xf;
       *(unsigned short *)(param_1 + 0x9344) = 4000;
       *(unsigned short *)(param_1 + 0x9342) = 0x640;

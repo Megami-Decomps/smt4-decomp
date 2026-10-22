@@ -1,2 +1,7 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00348c50's literal pool; not written yet. */
 #include "common.h"
+
+// Keep the free-camera process alive without requesting a transition.
+extern "C" s32 freeCameraProcessUpdate(void *context)
+{
+    return 0;
+}

@@ -28,7 +28,7 @@ extern int DAT_0063e6bc; /* 0x63e6bc */
 extern int DAT_0063e6c0; /* 0x63e6c0 */
 extern int DAT_0063e6c4; /* 0x63e6c4 */
 extern unsigned char DAT_0063e6cc; /* 0x63e6cc */
-extern int *DAT_0063e944; /* 0x63e944 */
+extern int *g_soundHandleList; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 extern unsigned char DAT_0063ea3c; /* 0x63ea3c */
 extern unsigned char DAT_0063ea48; /* 0x63ea48 */
@@ -92,7 +92,7 @@ void FUN_00150784(void)
           nw_snd_SoundHandle_DetachSound(temp_v3 + 0x20);
         }
       }
-      piVar6 = DAT_0063e944;
+      piVar6 = g_soundHandleList;
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 2);
     temp_v3 = 0;

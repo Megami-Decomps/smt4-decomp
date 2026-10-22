@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler computes the next cursor in r3 before the byte store instead of incrementing r2 afterwards. */
 #include "common.h"
 
 /* Appends a byte and advances the output cursor. */

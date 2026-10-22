@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00162790(...);
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int efctSetSpeed(void);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
@@ -44,7 +44,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -134,7 +134,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
       __aeabi_idivmod(*(int *)(param_3 + 0x3c) + temp_v16);
       temp_v12 = (float)VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = param_1 + temp_v16 * 8;
-      FUN_001676b0((int)(short)*(unsigned int *)(param_3 + temp_v3 * 4),
+      effectDispatchSelector((int)(short)*(unsigned int *)(param_3 + temp_v3 * 4),
                    (int)(*(float *)(temp_v17 + 0x374) + in_s0 + temp_v12),
                    (int)(*(float *)(temp_v17 + 0x378) + in_s1),param_2 + 5);
       temp_v16 = temp_v16 + 1;
@@ -149,7 +149,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
       efctSetSpeed();
       temp_v17 = param_1 + temp_v16 * 8;
       temp_v12 = (float)VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001676b0((int)(short)*(unsigned int *)(param_3 + temp_v2 * 4),
+      effectDispatchSelector((int)(short)*(unsigned int *)(param_3 + temp_v2 * 4),
                    (int)(((*(float *)(temp_v17 + 0x374) + in_s0) - (float)temp_v18) + temp_v12),
                    (int)(*(float *)(temp_v17 + 0x378) + in_s1),param_2 + 5);
       temp_v16 = temp_v16 + 1;

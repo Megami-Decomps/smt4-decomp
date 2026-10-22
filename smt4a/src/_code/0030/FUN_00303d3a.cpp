@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler releases stack arguments with add/pop instead of retail's single pop. */
 #include "common.h"
 extern "C" {
 void *strHolderAssignU32(void *holder, const u32 *value);

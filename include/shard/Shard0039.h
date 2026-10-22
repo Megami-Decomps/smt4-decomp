@@ -6,4 +6,10 @@
 
 #include "shard/Shard0038.h"
 
+/* Request-state cache with trailing storage allocated for the supported request ids. */
+struct TextureRequestCache {
+    /* 0x00 */ u8 unk00[0x94];
+    /* 0x94 */ u32 states[1];
+};
+
 #endif

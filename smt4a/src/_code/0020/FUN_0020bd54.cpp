@@ -9,7 +9,7 @@ int fadeObjectResetIfActive(...);
 int FUN_00164b5c(...);
 int quadSetOrderedVectors(...);
 int FUN_001835b4(...);
-int FUN_002f5020(float [24], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(float [24], unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -62,7 +62,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int dataTable0eSub1GetId(unsigned short);
 
 
@@ -126,7 +126,7 @@ void FUN_0020bd54(void)
   temp_v5 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
   temp_v21 = 0;
   temp_v22 = 0;
-  FUN_002f5020(temp_v23,&LAB_00192824,0x10,6);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v23,&LAB_00192824,0x10,6);
   temp_v10 = 0;
   temp_v17 = 255.0f;
   temp_v18 = 0.003921569f;

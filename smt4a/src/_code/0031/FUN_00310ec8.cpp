@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringAssign(...);
+int _ZN9Obj55aff4aSERKS_(...);
 int onlineInstanceTableFind(...);
 int FUN_002e9f00(...);
 int onlineJobSetStateDone(...);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
@@ -57,7 +57,7 @@ void FUN_00310ec8(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
         **(unsigned int **)(param_1 + 0x118) = 0;
       }
       else {
-        onlineStringAssign(*(unsigned int *)(param_1 + 0x78),param_1 + 0x7c);
+        _ZN9Obj55aff4aSERKS_(*(unsigned int *)(param_1 + 0x78),param_1 + 0x7c);
         puVar4 = *(unsigned int **)(param_1 + 0x108);
         temp_v2 = *(unsigned int *)(param_1 + 0x114);
         *puVar4 = *(unsigned int *)(param_1 + 0x110);

@@ -16,7 +16,7 @@ int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int FUN_003343f0(...);
 int FUN_00359974(int, unsigned int, unsigned int, int);
-int FUN_0035deb0(void);
+int uniteCreatePreviewModel(void);
 int panelSetTarget(unsigned int, int);
 int messageSetActiveMode(int);
 int FUN_003c5fc4(...);
@@ -49,7 +49,7 @@ extern int gameGetMode(void);
 /* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0035deb0. */
+/* Supplied declaration required: uniteCreatePreviewModel. */
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: messageSetActiveMode. */
 /* Supplied declaration required: FUN_003c5fc4. */
@@ -188,7 +188,7 @@ void FUN_004a41d8(int param_1)
     return;
   }
   screen4AEnter(param_1);
-  FUN_0035deb0();
+  uniteCreatePreviewModel();
   return;
 }
 

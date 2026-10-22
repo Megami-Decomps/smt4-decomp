@@ -39,6 +39,12 @@ struct EffectRenderGlobals {
 };
 struct EffectHandlerRequest { u32 unk00; u16 index, unk06; u32 argument; };
 
+struct EffectParameterBlock {
+    /* 0x00 */ f32 values[6];
+};
+
+typedef char EffectParameterBlockSizeCheck[sizeof(EffectParameterBlock) == 0x18 ? 1 : -1];
+
 static __inline const EffectRenderSource *effectRenderSource()
 {
     return (const EffectRenderSource *)g_effectEditor.selection.list;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int rt_vec_dtor(...);
-int FUN_002f5020(unsigned char [56], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [56], unsigned char *, int, int);
 int FUN_00304efc(...);
 int FUN_0030540c(...);
 
@@ -14,7 +14,7 @@ extern unsigned char LAB_00114615; /* 0x114615 */
 extern unsigned char LAB_0030ca9d; /* 0x30ca9d */
 
 /* Supplied declaration required: rt_vec_dtor. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int FUN_00304d10(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00304efc. */
 /* Supplied declaration required: FUN_0030540c. */
@@ -37,7 +37,7 @@ void FUN_00118ff4(int param_1,unsigned int param_2)
     }
   }
   else {
-    FUN_002f5020(temp_v2,&LAB_001145e5,0x38,1);
+    __aeabi_vec_ctor_nocookie_nodtor(temp_v2,&LAB_001145e5,0x38,1);
     FUN_00304efc(param_1,temp_v2);
     if (*(char *)(param_1 + 4) != '\0') {
       puVar2 = &LAB_00114615;
@@ -52,7 +52,7 @@ void FUN_00118ff4(int param_1,unsigned int param_2)
     FUN_0030540c(param_1,temp_v0);
     return;
   }
-  FUN_002f5020(temp_v2,&LAB_0030ca9d,0x30,1);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v2,&LAB_0030ca9d,0x30,1);
   FUN_0030540c(param_1,temp_v2);
   puVar2 = (unsigned char *)0x30ca93;
   temp_v1 = 0x30;

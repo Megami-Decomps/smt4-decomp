@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003039f4(unsigned int *, int);
-int FUN_0030fe20(unsigned int *, unsigned int);
+int _ZN9Obj55b10412initCapacityEj(unsigned int *, unsigned int);
 
 typedef struct fn_00122024_arg0 fn_00122024_arg0;
 struct fn_00122024_arg0 {
@@ -25,9 +25,9 @@ typedef struct {
 
 extern unsigned char DAT_0055b10c; /* 0x55b10c */
 
-extern unsigned int *sharedRefInit(fn_00122024_arg0 *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(fn_00122024_arg0 *);
 /* Supplied declaration required: FUN_003039f4. */
-/* Supplied declaration required: FUN_0030fe20. */
+/* Supplied declaration required: _ZN9Obj55b10412initCapacityEj. */
 extern unsigned int wordRefCompare(int, unsigned int *);
 
 
@@ -41,7 +41,7 @@ FUN_00122024(fn_00122024_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   int temp_v1;
   
   temp_v1 = param_4;
-  puVar1 = (unsigned int *)sharedRefInit(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(param_1);
   puVar1[3] = 0;
   puVar1[4] = 0;
   puVar1[5] = 0;
@@ -50,7 +50,7 @@ FUN_00122024(fn_00122024_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   *puVar1 = (unsigned int)&DAT_0055b10c;
   temp_v1 = *(unsigned int *)(param_2 + 0xc);
   temp_v0 = wordRefCompare(param_2 + 0x18,(unsigned int *)&temp_v1);
-  FUN_0030fe20(puVar1,temp_v0);
+  _ZN9Obj55b10412initCapacityEj(puVar1,temp_v0);
   FUN_003039f4(puVar1,param_2);
   return puVar1;
 }

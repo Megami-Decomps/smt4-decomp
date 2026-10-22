@@ -21,7 +21,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_0011049a. */
-extern unsigned int FUN_002e6e34(unsigned int *, int);
+extern unsigned int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002fb208. */
 /* Supplied declaration required: FUN_002fb224. */
@@ -44,7 +44,7 @@ unsigned long long FUN_00110458(unsigned int param_1,unsigned int param_2,unsign
   uStack_1c = param_2;
   uStack_18 = param_3;
   temp_v2 = param_4;
-  temp_v1 = FUN_002e6e34((unsigned int *)&uStack_20,(*(int *)((unsigned char *)&DAT_005949d8 + 0x4)) + 0xdc);
+  temp_v1 = _ZN9Obj55b28cC1EPv((unsigned int *)&uStack_20,(*(int *)((unsigned char *)&DAT_005949d8 + 0x4)) + 0xdc);
   FUN_002fb208();
   puVar3 = (unsigned int *)(temp_v0 + 0x10c);
   temp_v2 = temp_v1;

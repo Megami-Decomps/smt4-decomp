@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00121f78(unsigned int);
 int FUN_0012e494(int **, int, int *);
 int FUN_0012fce0(int **, int, int *);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(int);
 int sharedRefAddRef(int);
@@ -38,7 +38,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00121f78. */
 /* Supplied declaration required: FUN_0012e494. */
 /* Supplied declaration required: FUN_0012fce0. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
@@ -78,7 +78,7 @@ void FUN_002ef584(int param_1,int param_2)
   iStack_1c = param_1;
   temp_v14 = param_2;
   temp_v1 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v13,temp_v1);
+  _ZN9Obj55b28cC1EPv(temp_v13,temp_v1);
   temp_v5 = param_1 + 0x20;
   if ((*(char *)(param_1 + 0x3c) != '\0') &&
      (((temp_v0 = *(unsigned short *)(temp_v14 + 0x3c) & 0xf, (*(unsigned short *)(temp_v14 + 0x3c) & 0xf) == 0 ||

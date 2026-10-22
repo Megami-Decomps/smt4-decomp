@@ -33,7 +33,7 @@ extern unsigned char LAB_00385a9c; /* 0x385a9c */
 extern char s_e021_01_0044daf0[8]; /* 0x44daf0 */
 
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_00235414(unsigned char);
+extern int storyModeCanProceed(unsigned char);
 /* Supplied declaration required: FUN_00235554. */
 /* Supplied declaration required: buttonHelpResetSlots. */
 extern int FUN_0026b564(void);
@@ -87,7 +87,7 @@ void FUN_00385448(unsigned int *param_1)
     } while (temp_v5 < 2);
     buttonHelpSetPreset(0xa3);
     param_1[0x3ec] = 7;
-    temp_v4 = FUN_00235414((char)param_1[6]);
+    temp_v4 = storyModeCanProceed((char)param_1[6]);
     if (temp_v4 != 0) {
       FUN_00235554(param_1,&LAB_00385854);
     }
@@ -140,7 +140,7 @@ void FUN_00385448(unsigned int *param_1)
       temp_v1 = FUN_00296284(param_1 + 0x34,0);
       temp_v2 = FUN_00296284(param_1 + 0x57,0,1);
       if ((temp_v2 & temp_v5 & temp_v1) != 0) {
-        temp_v4 = FUN_00235414((char)param_1[6]);
+        temp_v4 = storyModeCanProceed((char)param_1[6]);
         if (temp_v4 == 0) {
           temp_v4 = FUN_00287704((char)param_1[6]);
           temp_v3 = FUN_00287704((char)param_1[6]);
@@ -160,7 +160,7 @@ void FUN_00385448(unsigned int *param_1)
         if (temp_v4 != 0) {
           buttonHelpSetPreset(0xa3);
           *(unsigned char *)(param_1 + 0x355) = 0;
-          temp_v4 = FUN_00235414((char)param_1[6]);
+          temp_v4 = storyModeCanProceed((char)param_1[6]);
           if (temp_v4 != 0) {
             FUN_00235554(param_1,&LAB_00385898);
             param_1[2] = 7;

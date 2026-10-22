@@ -10,7 +10,7 @@ int holderSetFlagBits(unsigned int, int);
 int FUN_00110b28(unsigned char [16], unsigned char **);
 int FUN_0011b63e(int, unsigned int, unsigned char [5], int);
 int operatorNew(int);
-int FUN_00432b10(unsigned char [5]);
+int _ZN9Obj5597fcC1Ev(unsigned char [5]);
 
 /* stack frame of param_1: 7 slot(s), 17 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 } param_1_stack;
 
 extern int onlineStatusRemoveMatchingEntry(...); /* 0x41460c */
-extern unsigned char DAT_00558760; /* 0x558760 */
+extern unsigned char g_smallTextEmptySentinel; /* 0x558760 */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
 /* Supplied declaration required: FUN_00103f54. */
@@ -33,7 +33,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: FUN_0011b63e. */
 /* Supplied declaration required: operatorNew. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
-/* Supplied declaration required: FUN_00432b10. */
+/* Supplied declaration required: _ZN9Obj5597fcC1Ev. */
 
 
 void FUN_004139ec(int param_1)
@@ -53,14 +53,14 @@ void FUN_004139ec(int param_1)
   unsigned int temp_v9;
   unsigned int temp_v10;
   
-  FUN_00432b10(temp_v2);
+  _ZN9Obj5597fcC1Ev(temp_v2);
   temp_v3 = 1;
   temp_v4 = 999;
   temp_v8 = 0;
   temp_v10 = 0x14;
   temp_v6 = 5;
   temp_v9 = 0xffffffff;
-  temp_v7 = &DAT_00558760;
+  temp_v7 = &g_smallTextEmptySentinel;
   FUN_00110b28(temp_v5,&temp_v7);
   temp_v0 = operatorNew(0x78);
   if (temp_v0 == 0) {

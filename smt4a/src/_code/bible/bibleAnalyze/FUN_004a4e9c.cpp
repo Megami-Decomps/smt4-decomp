@@ -19,7 +19,7 @@ int FUN_004a6c50(...);
 int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
 int FUN_004d05c4(...);
-int FUN_004d0b3c(void);
+int _ZN9Obj422594C1Ev(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -59,7 +59,7 @@ extern int FUN_004082f8(int);
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: FUN_004d05c4. */
-/* Supplied declaration required: FUN_004d0b3c. */
+/* Supplied declaration required: _ZN9Obj422594C1Ev. */
 
 
 void FUN_004a4e9c(int *param_1)
@@ -102,7 +102,7 @@ void FUN_004a4e9c(int *param_1)
     asdOperatorNew();
     puVar5 = (unsigned int *)0x0;
     if (temp_v0 != 0) {
-      puVar5 = (unsigned int *)FUN_004d0b3c();
+      puVar5 = (unsigned int *)_ZN9Obj422594C1Ev();
       *puVar5 = (unsigned int)&DAT_0055c86c;
     }
     param_1[0x213] = (int)puVar5;
@@ -131,7 +131,7 @@ void FUN_004a4e9c(int *param_1)
     asdOperatorNew();
     piVar1 = (int *)0x0;
     if (temp_v0 != 0) {
-      piVar1 = (int *)FUN_004d0b3c();
+      piVar1 = (int *)_ZN9Obj422594C1Ev();
       *piVar1 = (int)&DAT_0055c90c;
     }
     param_1[0x213] = (int)piVar1;

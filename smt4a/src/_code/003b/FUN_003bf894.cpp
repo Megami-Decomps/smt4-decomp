@@ -1,4 +1,4 @@
-/* NON_MATCHING: the callee-saved registers are assigned in a different order (r5-r8 permuted) and the early `return -1` is not merged with the final one. */
+/* NON_MATCHING: the sentinel now shares the final not-found exit; retail caches the bounded accessor's null pointer in r8 while this source uses an immediate zero. */
 #include "common.h"
 
 extern "C" {
@@ -24,8 +24,6 @@ int FUN_003bf894(int id)
     u32 handle = dataTableGet(0x2f, 1);
 
     if (0 < (int)dataTableGetCount(handle)) {
-        Entry *none = NULL;
-
         do {
             Entry *entries;
             u32 count;
@@ -34,9 +32,9 @@ int FUN_003bf894(int id)
             handle = dataTableGet(0x2f, 1);
             entries = dataTableGetEntries();
             count = dataTableGetCount(handle);
-            entry = ((u32)i < count) ? &entries[i] : none;
+            entry = entryAt(entries, count, (u32)i);
             if (entry->id == -1) {
-                return -1;
+                break;
             }
             if (entry->id == id) {
                 return i;

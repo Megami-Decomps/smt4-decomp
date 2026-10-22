@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc coalesces the state/timer stores into STM; retail uses two STRs. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {

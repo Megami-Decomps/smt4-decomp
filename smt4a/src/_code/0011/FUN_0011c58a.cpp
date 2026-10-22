@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0013232a(int, int *);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ecf70(int *, int, int *);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0013232a. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ecf70. */
 extern int iterEqual(unsigned int *, unsigned int *);
@@ -37,7 +37,7 @@ unsigned int FUN_0011c58a(int param_1,unsigned int param_2)
   iStack_14 = param_1;
   uStack_10 = param_2;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v1,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v1,temp_v0 + 0x58);
   FUN_002ecf70(&temp_v3,param_1 + 0x60,&uStack_10);
   temp_v2 = *(unsigned int *)(param_1 + 0x70);
   temp_v0 = iterEqual((unsigned int *)&temp_v3,(unsigned int *)&temp_v2);

@@ -36,7 +36,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ed258. */
 extern int FUN_002eea8a(unsigned char *, unsigned short *);
 /* Supplied declaration required: arrayElementAddress_002eee88. */
-extern unsigned int FUN_002ef9e0(unsigned char *, unsigned short);
+extern unsigned int _ZN9Obj55933cC1Et(unsigned char *, unsigned short);
 /* Supplied declaration required: FUN_002efcf2. */
 /* Supplied declaration required: FUN_002efcfc. */
 /* Supplied declaration required: FUN_002efd12. */
@@ -122,7 +122,7 @@ void FUN_0010883c(int param_1,int param_2)
     temp_v8[0] = 0;
     temp_v1 = FUN_002eea8a(temp_v5,temp_v8);
     if (temp_v1 == 0) break;
-    temp_v3 = FUN_002ef9e0(temp_v17,temp_v8[0]);
+    temp_v3 = _ZN9Obj55933cC1Et(temp_v17,temp_v8[0]);
     FUN_002efcf2(&temp_v15,param_2);
     FUN_002f07c2(temp_v18,&temp_v15,temp_v3,0);
   }

@@ -46,7 +46,7 @@ extern int isFlag10Set(void);
 extern int storyFlagRangeAnySet(void);
 /* Supplied declaration required: fileSlot17Acquire. */
 /* Supplied declaration required: fileSlot17Release. */
-extern int FUN_004d08d0(int);
+extern int _ZN9Obj55ca08D1Ev(int);
 
 
 unsigned int FUN_0027dda4(void)
@@ -148,7 +148,7 @@ unsigned int FUN_0027dda4(void)
       if (*(int *)(g_shop + 0x18) != 0) {
         FUN_00499c84();
         if (*(int *)(temp_v4 + 0x18) != 0) {
-          temp_v3 = FUN_004d08d0(*(int *)(temp_v4 + 0x18) + 0xb08);
+          temp_v3 = _ZN9Obj55ca08D1Ev(*(int *)(temp_v4 + 0x18) + 0xb08);
           asdOperatorDelete(temp_v3 - 0xb08);
         }
         fileSlot17Release(temp_v8);

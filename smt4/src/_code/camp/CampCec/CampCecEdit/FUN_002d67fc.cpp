@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0024aaa0(void);
 int FUN_0026eda8(void);
 int campCecDisplaySetRecord(...);
-int FUN_0026f204(void);
+int characterInfoPanelPopulate(void);
 int asdLoadFileAsyncSimple(...);
 int gameGetUnitRecord(...);
 int buttonHelpSetPreset(...);
@@ -56,8 +56,8 @@ extern unsigned int *g_campCecEdit; /* 0x43dad0 */
 extern unsigned int FUN_0025463c(void);
 /* Supplied declaration required: FUN_0026eda8. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
-extern unsigned int FUN_0026ef04(void);
-/* Supplied declaration required: FUN_0026f204. */
+extern unsigned int uiDrawRecordNameLabels(void);
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
@@ -149,10 +149,10 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[2] = temp_v0;
   campCecDrawSetCreate();
   puVar1[3] = temp_v0;
-  temp_v0 = FUN_0026ef04();
+  temp_v0 = uiDrawRecordNameLabels();
   campCecDrawPageCreate();
   puVar1[4] = temp_v0;
-  FUN_0026f204();
+  characterInfoPanelPopulate();
   asdLoadFileAsyncSimple(&LAB_002d6cd0,puVar1 + 0x29,0);
   asdLoadFileAsyncSimple(&LAB_002d6ce4,puVar1 + 0x2a,0);
   asdLoadFileAsyncSimple(&LAB_002d6cfc,puVar1 + 0x2b,0);

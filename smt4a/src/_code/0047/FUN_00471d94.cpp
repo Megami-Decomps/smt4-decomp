@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(void);
+int __aeabi_vec_ctor_nocookie_nodtor(void);
 int asdOperatorNewE(void);
 int FUN_00429f38(void);
 int FUN_00471468(int, int, unsigned int, int);
@@ -18,7 +18,7 @@ extern int g_aocMain; /* 0x570260 */
 
 extern int objGetFlagBit16(void);
 extern int asdOperatorDeleteB(void);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00429f38. */
 extern int FUN_0046bc7c(int, unsigned int);
@@ -47,7 +47,7 @@ void FUN_00471d94(int param_1)
         temp_v0 = temp_v0 << 4;
         asdOperatorNewE();
         if (temp_v0 != 0) {
-          FUN_002f5020();
+          __aeabi_vec_ctor_nocookie_nodtor();
         }
         *(int *)(param_1 + 0x450) = temp_v0;
         FUN_00471468(param_1,0x34,*(unsigned int *)(param_1 + 0x448),temp_v0);

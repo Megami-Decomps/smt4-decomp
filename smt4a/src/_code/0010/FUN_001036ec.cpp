@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int onlineJobSetStateReady(unsigned int);
 int sharedRefRelease(unsigned int);
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: sharedRefRelease. */
@@ -30,7 +30,7 @@ void FUN_001036ec(unsigned int param_1,unsigned int param_2,unsigned int *param_
   puStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
   temp_v1 = *param_3;
   onlineJobSetStateReady(temp_v1);
   sharedRefRelease(temp_v1);

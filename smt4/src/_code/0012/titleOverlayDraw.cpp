@@ -12,7 +12,7 @@ void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
 f32 FUN_002ba12c(RenderCtx *context, f32 scale);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
-void FUN_002b93c8(TitleDrawElement *element, f32 value);
+void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
 }
 
@@ -39,15 +39,15 @@ extern "C" void titleOverlayDraw(TitleOverlay *overlay)
         if (overlay->mode == 7 || overlay->mode == 8 || overlay->mode == 9) {
             RenderCtx *context = g_titleScene;
             setTitleRenderState(context, packNibblesAndByte(6, 1, 0));
-            FUN_002b93c8(&overlay->elements[6], static_cast<f32>(frame));
+            effectRenderTransformedInstance(&overlay->elements[6], static_cast<f32>(frame));
             context = g_titleScene;
             setTitleRenderState(context, packNibblesAndByte(6, 7, 0));
         }
-        FUN_002b93c8(&overlay->elements[0], static_cast<f32>(frame));
-        FUN_002b93c8(&overlay->elements[1], static_cast<f32>(frame));
-        FUN_002b93c8(&overlay->elements[2], static_cast<f32>(frame));
-        FUN_002b93c8(&overlay->elements[3], static_cast<f32>(frame));
-        FUN_002b93c8(&overlay->elements[5], static_cast<f32>(frame));
+        effectRenderTransformedInstance(&overlay->elements[0], static_cast<f32>(frame));
+        effectRenderTransformedInstance(&overlay->elements[1], static_cast<f32>(frame));
+        effectRenderTransformedInstance(&overlay->elements[2], static_cast<f32>(frame));
+        effectRenderTransformedInstance(&overlay->elements[3], static_cast<f32>(frame));
+        effectRenderTransformedInstance(&overlay->elements[5], static_cast<f32>(frame));
         FUN_002bedb0(g_titleScene, 3);
     }
 }

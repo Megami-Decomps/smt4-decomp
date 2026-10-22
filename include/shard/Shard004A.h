@@ -22,4 +22,37 @@ typedef struct Screen4A {
     /* 0xA874 */ u16 unkA874;
 } Screen4A;
 
+struct PackedDimensionDecoder {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 type;
+    /* 0x18 */ u8 flags;
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ u32 first;
+    /* 0x20 */ u32 second;
+};
+struct ShortValueDecoder {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 type;
+    /* 0x18 */ u8 flags;
+    /* 0x19 */ u8 unk19;
+    /* 0x1A */ u16 first;
+    /* 0x1C */ u16 second;
+    /* 0x1E */ u16 third;
+    /* 0x20 */ u16 fourth;
+    /* 0x22 */ u8 fifth;
+    /* 0x23 */ u8 sixth;
+};
+
+static __inline u16 decoderReadBigEndian16(const u8 *data)
+{
+    return (u16)(((u32)data[0] << 8) | data[1]);
+}
+static __inline u32 decoderReadBigEndian32(const u8 *data)
+{
+    return ((u32)data[0] << 24) | ((u32)data[1] << 16)
+        | ((u32)data[2] << 8) | data[3];
+}
+typedef char PackedDimensionDecoderSizeCheck[sizeof(PackedDimensionDecoder) == 0x24 ? 1 : -1];
+typedef char ShortValueDecoderSizeCheck[sizeof(ShortValueDecoder) == 0x24 ? 1 : -1];
+
 #endif

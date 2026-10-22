@@ -31,7 +31,7 @@ typedef struct {
     unsigned short sp60; /* 0x60: local_60 */
 } param_2_stack;
 
-extern unsigned short FUN_0017760c(unsigned short *);
+extern unsigned short recordGetScaledMaximum(unsigned short *);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: sysMemClear. */
@@ -96,7 +96,7 @@ void FUN_0035ad50(unsigned int param_1,unsigned short *param_2)
   *(unsigned int *)(param_2 + 0x18) = temp_v17;
   *(unsigned char *)((int)param_2 + 299) = (unsigned char)(((unsigned int)temp_v12 << 0x1a) >> 0x1c);
   FUN_004bcd90(param_2);
-  temp_v0 = FUN_0017760c(param_2);
+  temp_v0 = recordGetScaledMaximum(param_2);
   param_2[0x15] = temp_v0;
   param_2[0x16] = param_2[8];
   return;

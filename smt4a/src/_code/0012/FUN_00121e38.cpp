@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00113baa(unsigned int);
 int FUN_00121c48(void);
 int asdOperatorDeleteArray(void);
-int sharedRefInitEmpty(int);
+int _ZN9Obj5593b8D1Ev(int);
 int FUN_002eb624(...);
 int FUN_002ecf40(void);
 
@@ -21,7 +21,7 @@ extern int FUN_001145a0(int);
 extern int FUN_00129380(int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int vectorDestroyWords(int);
-/* Supplied declaration required: sharedRefInitEmpty. */
+/* Supplied declaration required: _ZN9Obj5593b8D1Ev. */
 extern int FUN_002eac34(unsigned int);
 /* Supplied declaration required: FUN_002eb624. */
 /* Supplied declaration required: FUN_002ecf40. */
@@ -93,7 +93,7 @@ void FUN_00121e38(unsigned int *param_1)
   temp_v0 = FUN_00129380(temp_v0 - 0x50);
   temp_v0 = FUN_002ed250(temp_v0 - 0x14);
   temp_v0 = FUN_002eb624(temp_v0 - 0x30);
-  sharedRefInitEmpty(temp_v0 - 0x10);
+  _ZN9Obj5593b8D1Ev(temp_v0 - 0x10);
   return;
 }
 

@@ -62,7 +62,7 @@ extern unsigned char DAT_0055af64; /* 0x55af64 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int onlineSockAddrConstruct(int, unsigned int, int);
-extern unsigned int *sharedRefInit(fn_003022b4_arg0 *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(fn_003022b4_arg0 *);
 /* Supplied declaration required: FUN_002eb530. */
 extern int constructObj00559344(unsigned int *, unsigned int);
 
@@ -82,7 +82,7 @@ FUN_003022b4(fn_003022b4_arg0 *param_1,unsigned int param_2,unsigned int param_3
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  puVar1 = (unsigned int *)sharedRefInit(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(param_1);
   puVar1[3] = 0;
   puVar1[4] = 0;
   puVar1[5] = 0;

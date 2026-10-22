@@ -107,7 +107,7 @@ extern int DAT_00571524; /* 0x571524 */
 extern int DAT_00571528; /* 0x571528 */
 extern int DAT_0057152c; /* 0x57152c */
 extern int g_freeCamera; /* 0x589144 */
-extern float DAT_005e1530; /* 0x5e1530 */
+extern float g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern float DAT_005e1534; /* 0x5e1534 */
 extern float DAT_005e1538; /* 0x5e1538 */
 
@@ -424,11 +424,11 @@ unsigned int FUN_004f2c40(float *param_1)
       }
       if (((unsigned int)param_1[0x193] & 0x8000) != 0) {
         temp_v2 = temp_v52[2];
-        temp_v4 = *temp_v52 - DAT_005e1530;
+        temp_v4 = *temp_v52 - g_cameraAlternateProgressStart;
         temp_v5 = temp_v52[1] - DAT_005e1534;
         temp_v7 = temp_v2 - DAT_005e1538;
         FUN_003d4dd4(param_1[0x1d9],param_1[0x1d7],param_1[0x1d8]);
-        param_1[0x1d4] = DAT_005e1530 + temp_v4 * temp_v2;
+        param_1[0x1d4] = g_cameraAlternateProgressStart + temp_v4 * temp_v2;
         param_1[0x1d5] = DAT_005e1534 + temp_v5 * temp_v2;
         in_s0 = DAT_005e1538 + temp_v7 * temp_v2;
         param_1[0x1d6] = in_s0;

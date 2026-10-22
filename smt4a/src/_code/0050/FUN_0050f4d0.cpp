@@ -4,7 +4,7 @@
 extern "C" {
 
 int emptyStub_002f4370(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ extern unsigned char LAB_003f2be4; /* 0x3f2be4 */
 extern int objFillFromTemplate(...); /* 0x416d04 */
 
 /* Supplied declaration required: emptyStub_002f4370. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_0050f4d0(unsigned int *param_1)
@@ -36,7 +36,7 @@ void FUN_0050f4d0(unsigned int *param_1)
   param_1[7] = 0x3f800000;
   param_1[8] = in_s0;
   param_1 = param_1 + 10;
-  FUN_002f5020(param_1,&LAB_003f2be4,0x548,2);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_003f2be4,0x548,2);
   emptyStub_002f4370(param_1 + -1,objFillFromTemplate,0x100000);
   return;
 }

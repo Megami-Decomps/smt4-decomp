@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00120310(unsigned char [64], unsigned int);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002f4f00(unsigned char [64]);
 int FUN_00303cd8(unsigned char [64]);
@@ -15,11 +15,11 @@ int onlineScopedLockRelease(unsigned char [12]);
 int FUN_00303d74(int, unsigned int, unsigned char [64]);
 
 extern unsigned char LAB_00118e5f; /* 0x118e5f */
-extern unsigned char DAT_0062d744; /* 0x62d744 */
+extern unsigned char g_onlinePacketHandlers; /* 0x62d744 */
 
 /* Supplied declaration required: FUN_00120310. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_00303cd8. */
@@ -40,14 +40,14 @@ int FUN_001187f0(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned char temp_v2 [12];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   FUN_00303cd8(temp_v1);
   FUN_00303d10(temp_v1,*(unsigned short *)(param_1 + 0x20),1);
   temp_v0 = FUN_00303d1e(temp_v1,param_2);
   if (temp_v0 != 0) {
     FUN_00303d3a(temp_v1,0xb);
     FUN_00120310(temp_v1,param_3);
-    (*(unsigned char * *)((unsigned char *)&DAT_0062d744 + 0x28)) = &LAB_00118e5f;
+    (*(unsigned char * *)((unsigned char *)&g_onlinePacketHandlers + 0x28)) = &LAB_00118e5f;
     if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = holderCheckBitsAllowed(param_1,0x10), temp_v0 != 0)) {
       onlineScopedLockRelease(temp_v2);
     }

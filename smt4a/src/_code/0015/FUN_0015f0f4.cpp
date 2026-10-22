@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001760cc(unsigned int);
 int FUN_001b3428(unsigned int *);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_001ba1c0(int, int *, int, int);
 int FUN_002e3140(void);
 int software_interrupt(int);
@@ -33,8 +33,8 @@ extern unsigned long long jobGetWork(void);
 extern int FUN_00176474(unsigned int);
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: FUN_001b3428. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned int *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_002e3140. */
 
@@ -77,17 +77,17 @@ unsigned int FUN_0015f0f4(void)
      (temp_v1 = sysLightEventTryWait(g_aocMain + 0x98), temp_v1 != 0)) {
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     FUN_001760cc(g_aocSystem);
-    puVar4 = (unsigned int *)FUN_001b5acc((unsigned int *)&temp_v7);
+    puVar4 = (unsigned int *)_ZN18WindowStatusResultC1Ev((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;
     puVar5 = temp_v11;
-    resultPairInitialize(puVar5,0);
+    _ZN18WindowStatusResultC1Ej(puVar5,0);
     temp_v3 = puVar5[1];
     *puVar4 = *puVar5;
     puVar4[1] = temp_v3;
     puVar4 = temp_v11;
     temp_v9 = 0;
-    resultPairInitialize(puVar4,0);
+    _ZN18WindowStatusResultC1Ej(puVar4,0);
     temp_v7 = *puVar4;
     temp_v8 = puVar4[1];
     temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),200);

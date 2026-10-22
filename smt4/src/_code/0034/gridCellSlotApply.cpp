@@ -22,10 +22,10 @@ s32 FUN_0027dab0(Grid0034d884 *grid, GridCell0034d884 *cell);
 Grid0034d884 *FUN_0027da30(Grid0034d884 *grid, s32 id);
 void FUN_0027d9e8(Grid0034d884 *grid, u32 slot);
 
-/* Looks up the cell at (row, column) of the grid, finds its slot and runs the two follow-up steps. */
-void gridCellSlotApply(GridOwner0034d884 *owner, s32 row, s32 column)
+/* Finds a cell by index, resolves its slot, then applies the selected slot. */
+void gridCellSlotApply(GridOwner0034d884 *owner, s32 index)
 {
-    GridCell0034d884 *cell = (GridCell0034d884 *)(owner->grid->cells + (column + row * 0x40) * 4);
+    GridCell0034d884 *cell = (GridCell0034d884 *)(owner->grid->cells + index * 0x114);
     s32 slot = FUN_0027dab0(owner->grid, cell);
 
     FUN_0027d9e8(owner->grid, FUN_0027da30(owner->grid, cell->id)->slots[slot]);

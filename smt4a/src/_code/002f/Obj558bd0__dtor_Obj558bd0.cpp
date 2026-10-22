@@ -1,7 +1,8 @@
-/* NON_MATCHING: registry/lock class identities and owned-string destructor names are not yet recovered. */
-#include "shard/W6_W6Match2_OnlineString.h"
-#include "shard/W6_W6Match2_OnlineScopedGuard.h"
+/* NON_MATCHING: registry address grouping and stack frame differ; native lock and string cleanup are integrated. */
+#include "shard/W4_Match4_Obj559ecc.h"
+#include "classes/Obj55b28c.h"
 
+struct OnlineMutex;
 struct OnlineRegistry;
 class Obj558bd0;
 
@@ -18,17 +19,17 @@ public:
 
 private:
     u8 unk04[0x44];       // 0x04
-    OnlineStringValue first; // 0x48
+    Obj55aff4 first; // 0x48
     u8 active;            // 0x50
     u8 unk51[0x0f];       // 0x51
-    OnlineStringValue second; // 0x60
-    OnlineStringValue third; // 0x68
+    Obj55aff4 second; // 0x60
+    Obj55aff4 third; // 0x68
 };
 
 // Unregister under the shared lock, finish active work, then destroy the owned strings.
 Obj558bd0::~Obj558bd0()
 {
-    OnlineScopedGuard guard(&DAT_0062e610);
+    Obj55b28c guard(&DAT_0062e610);
     Obj558bd0* object = this;
     FUN_0012ce48(&DAT_0062e5fc, &object);
     if (active != 0) {

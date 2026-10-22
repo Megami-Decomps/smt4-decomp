@@ -9,10 +9,10 @@ int FUN_00230d2c(void);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, int);
 int statusDownRebuildOwnedDemonList(short *);
 int FUN_002f001c(short *);
-int FUN_002f01e0(int, int);
+int statusReplaceSkills(int, int);
 int FUN_00333de0(void);
 int FUN_0035da20(unsigned int *, int);
-int FUN_0035da74(int, int);
+int statusMarkNewSkills(int, int);
 
 /* stack frame of param_3: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -37,10 +37,10 @@ extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: statusDownRebuildOwnedDemonList. */
 extern int statusDownGetFlag(void);
 /* Supplied declaration required: FUN_002f001c. */
-/* Supplied declaration required: FUN_002f01e0. */
+/* Supplied declaration required: statusReplaceSkills. */
 /* Supplied declaration required: FUN_00333de0. */
 /* Supplied declaration required: FUN_0035da20. */
-/* Supplied declaration required: FUN_0035da74. */
+/* Supplied declaration required: statusMarkNewSkills. */
 extern unsigned char countUnlockedSlots(void);
 extern int FUN_003e4d68(unsigned int);
 extern char FUN_004bcaa8(short, short, short *, unsigned int *, unsigned int);
@@ -91,9 +91,9 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
       temp_v3 = 8;
     }
   }
-  FUN_002f01e0(temp_v1 + 0x13e0,temp_v3);
+  statusReplaceSkills(temp_v1 + 0x13e0,temp_v3);
   if (param_1 != 0) {
-    FUN_0035da74(temp_v1 + 0x1a20,temp_v3);
+    statusMarkNewSkills(temp_v1 + 0x1a20,temp_v3);
   }
   temp_v13 = 0;
   temp_v14 = 0;

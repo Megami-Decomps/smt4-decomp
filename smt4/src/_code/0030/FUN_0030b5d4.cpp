@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail resource ownership or default-store allocation differs. */
 #include "common.h"
 
 extern "C" {

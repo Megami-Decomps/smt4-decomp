@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b93c8(int);
+int effectRenderTransformedInstance(int);
 int FUN_002ba12c(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
@@ -25,7 +25,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -101,7 +101,7 @@ void FUN_00392b2c(int param_1)
     temp_v3 = 0;
     do {
       VectorSignedToFloat((int)temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002b93c8(param_1 + temp_v3 * 0x8c + 0x37c);
+      effectRenderTransformedInstance(param_1 + temp_v3 * 0x8c + 0x37c);
       temp_v0 = g_titleScene;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x18);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(...);
 int sharedRefRelease(...);
 int strAssign(int *, unsigned int, unsigned int, unsigned int);
@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_10_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: strAssign. */
@@ -104,7 +104,7 @@ void FUN_0010895c(int *param_1,int param_2,fn_0010895c_arg2 *param_3,unsigned in
   pfStack_1c = param_3;
   temp_v17 = param_4;
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v11,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v11,temp_v0);
   vectorInitEmpty4(&temp_v9);
   while (piVar3 = temp_v9, temp_v5 < (unsigned int)param_3->field_0x10) {
     piVar6 = (int *)0x0;

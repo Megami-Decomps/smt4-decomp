@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e34(int **, int);
+int _ZN9Obj55b28cC1EPv(int **, int);
 int _ZN9Obj55b28cD1Ev(int **);
 int FUN_002ebd94(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int FUN_002ebd34(int, int *);
 /* Supplied declaration required: FUN_002ebd94. */
@@ -27,7 +27,7 @@ void FUN_0010570e(int param_1,int *param_2,unsigned int param_3,unsigned int par
   piStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002e6e34(&piStack_18,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(&piStack_18,param_1 + 4);
   FUN_002ebd94(param_1,param_2);
   temp_v0 = FUN_002ebd34(param_1,param_2);
   *(unsigned int *)(*(int *)(param_1 + 0x38) + temp_v0 * 4) = 0;

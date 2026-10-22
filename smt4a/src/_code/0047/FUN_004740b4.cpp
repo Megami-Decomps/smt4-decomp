@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTableGetEntries(void);
 int dataTableFileGetTable(int, int);
-int FUN_002f5020(void);
+int __aeabi_vec_ctor_nocookie_nodtor(void);
 int asdOperatorNewE(void);
 
 typedef struct fn_004740b4_arg0 fn_004740b4_arg0;
@@ -21,7 +21,7 @@ struct fn_004740b4_arg0 {
 extern int dataTableGetCount(void);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 
 
@@ -53,7 +53,7 @@ void FUN_004740b4(fn_004740b4_arg0 *param_1)
       temp_v0 = temp_v0 << 4;
       asdOperatorNewE();
       if (temp_v0 != 0) {
-        FUN_002f5020();
+        __aeabi_vec_ctor_nocookie_nodtor();
       }
       param_1->field_0x4c = temp_v0;
     }

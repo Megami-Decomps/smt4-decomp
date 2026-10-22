@@ -32,7 +32,7 @@ u32 FUN_0027d9e8(BtlMainState *state, u32 id);
 s32 nkdwHeaderParse(u32 handle);
 void aocHandleButtons(u32 handle, u32 mode);
 s32 FUN_00294fe0(u32 handle);
-void FUN_0023fb84(u32 handle);
+void modelAnimationEnsureData(u32 handle);
 void FUN_003af1dc(void *ui, u32 id);
 void FUN_003db5e8(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
 u32 FUN_003db0c0(BattleVersionResources *resources, BtlActionRecord *action);
@@ -82,7 +82,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
         }
         if (ready && !(action->flags & 0x200)) {
             if (FUN_00294fe0(handle)) {
-                FUN_0023fb84(handle);
+                modelAnimationEnsureData(handle);
                 action->flags |= 0x200;
             } else {
                 ready = false;

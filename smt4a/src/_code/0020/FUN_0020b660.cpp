@@ -4,7 +4,7 @@ extern "C" {
 
 void uiSpriteSetImageKeyframe(u8 *member, s32 a, s32 b);
 void frameTransitionSetMode(s32 mode);
-s32 FUN_0033e164(void);
+s32 lmapRefreshScene28Selection(void);
 s32 aocDataBlockHasEntries(void);
 
 typedef struct Game {
@@ -31,7 +31,7 @@ void FUN_0020b660(s32 newState)
     game->unk20 = 0;
     game->unk14 = 0;
     if (newState == 0x33) {
-        FUN_0033e164();
+        lmapRefreshScene28Selection();
         frameTransitionSetMode(2);
         uiSpriteSetImageKeyframe(game->member1634, 7, 0);
         return;

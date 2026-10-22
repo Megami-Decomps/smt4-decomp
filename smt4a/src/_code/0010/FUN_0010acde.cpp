@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int sharedRefRelease(...);
 int FUN_002eb310(int, int *);
@@ -33,7 +33,7 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int onlineGetActiveLock(void);
@@ -82,7 +82,7 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
   temp_v19 = param_2;
   iStack_18 = param_3;
   temp_v1 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v11,temp_v1);
+  _ZN9Obj55b28cC1EPv(temp_v11,temp_v1);
   FUN_002f3df8(temp_v10,param_1 + 4,temp_v19);
   temp_v12 = *(unsigned int *)(param_1 + 0x14);
   temp_v2 = wordRefsDiffer_002f3e5a(temp_v10,(unsigned int *)&temp_v12);
@@ -98,7 +98,7 @@ void FUN_0010acde(int param_1,int param_2,int param_3)
         *(int *)(temp_v14 + 0x14) = temp_v3;
         if (temp_v3 == 0) {
           temp_v3 = FUN_002eb5f4();
-          FUN_002e6e34(temp_v13,temp_v3 + 0x358);
+          _ZN9Obj55b28cC1EPv(temp_v13,temp_v3 + 0x358);
           temp_v3 = FUN_002eb5f4();
           FUN_002eb310(temp_v3 + 0x34c,&temp_v5);
           FUN_002f3edc(&temp_v8,param_3,&temp_v5);

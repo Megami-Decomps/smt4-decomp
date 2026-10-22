@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int onlineInstanceTableGetCurrent(void);
 int vectorInitEmpty(unsigned int **);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned int FUN_00103e8e(int, unsigned int);
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: vectorInitEmpty. */
@@ -42,7 +42,7 @@ unsigned int FUN_002e9f00(int param_1,unsigned int param_2)
   unsigned char temp_v4 [16];
   
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v4,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x58);
   vectorInitEmpty(&temp_v2);
   temp_v1 = onlineInstanceTableGetCurrent();
   FUN_002e9e8a(temp_v1,*(unsigned int *)(param_1 + 0x44),&temp_v2);

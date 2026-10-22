@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00107934(void);
 int FUN_00108b6c(void);
-int FUN_0011c624(unsigned char *, unsigned int);
+int _ZN2nn3hid3CTR19AccelerometerReaderC1EPv(unsigned char *, unsigned int);
 int FUN_002bd808(unsigned char *);
 int SUB42(double, int);
 int VectorSignedToFloat(int, int);
@@ -17,11 +17,11 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned int DAT_004729f8; /* 0x4729f8 */
-extern unsigned char DAT_004eaa88; /* 0x4eaa88 */
+extern unsigned int _ZGVreader; /* 0x4729f8 */
+extern unsigned char reader; /* 0x4eaa88 */
 extern unsigned short DAT_004eaa8c; /* 0x4eaa8c */
 extern unsigned short DAT_004eaa8e; /* 0x4eaa8e */
-extern unsigned short DAT_004eaae0; /* 0x4eaae0 */
+extern unsigned short g_accelerometerState; /* 0x4eaae0 */
 extern unsigned short DAT_004eaae2; /* 0x4eaae2 */
 extern signed char DAT_004eaae5; /* 0x4eaae5 */
 extern int DAT_004eaae8; /* 0x4eaae8 */
@@ -58,7 +58,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00107934. */
 /* Supplied declaration required: FUN_00108b6c. */
 extern unsigned int FUN_0011c454(void);
-/* Supplied declaration required: FUN_0011c624. */
+/* Supplied declaration required: _ZN2nn3hid3CTR19AccelerometerReaderC1EPv. */
 /* Supplied declaration required: FUN_002bd808. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern void nn_hid_CTR_AccelerometerReader_ConvertToAcceleration(unsigned int, unsigned int, int, unsigned int);
@@ -85,12 +85,12 @@ unsigned int FUN_0010b5e8(void)
   
   FUN_00107934();
   FUN_00108b6c();
-  if (((DAT_004729f8 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_004729f8), temp_v0 != 0)) {
+  if (((_ZGVreader & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVreader), temp_v0 != 0)) {
     temp_v1 = FUN_0011c454();
-    FUN_0011c624(&DAT_004eaa88,temp_v1);
+    _ZN2nn3hid3CTR19AccelerometerReaderC1EPv(&reader,temp_v1);
   }
   if (DAT_004eaae8 != 0) {
-    DAT_004eaa8c = DAT_004eaae0;
+    DAT_004eaa8c = g_accelerometerState;
     DAT_004eaa8e = DAT_004eaae2;
     DAT_004eaae8 = 0;
   }
@@ -98,7 +98,7 @@ unsigned int FUN_0010b5e8(void)
   DAT_004eab04 = DAT_004eaaf8;
   DAT_004eab08 = DAT_004eaafc;
   DAT_004eab0c = DAT_004eab00;
-  nn_hid_CTR_AccelerometerReader_ReadLatest((unsigned int)&DAT_004eaa88,(unsigned int)&DAT_004eaaec);
+  nn_hid_CTR_AccelerometerReader_ReadLatest((unsigned int)&reader,(unsigned int)&DAT_004eaaec);
   if (DAT_004eaae5 == '\x01') {
     temp_v5 = (float)VectorSignedToFloat((int)DAT_004eaaec,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v9 = (float)VectorSignedToFloat((int)DAT_004eaaee,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -135,7 +135,7 @@ unsigned int FUN_0010b5e8(void)
     }
     DAT_004eaaf0 = (short)(int)temp_v10;
   }
-  nn_hid_CTR_AccelerometerReader_ConvertToAcceleration((unsigned int)&DAT_004eaa88,(unsigned int)&DAT_004eaaf8,1,(unsigned int)&DAT_004eaaec);
+  nn_hid_CTR_AccelerometerReader_ConvertToAcceleration((unsigned int)&reader,(unsigned int)&DAT_004eaaf8,1,(unsigned int)&DAT_004eaaec);
   return 1;
 }
 

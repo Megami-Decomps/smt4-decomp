@@ -11,7 +11,7 @@ int FUN_00184310(void);
 int FUN_0034ea70(...);
 int FUN_003a6404(...);
 
-int FUN_001676b0(...);
+int effectDispatchSelector(...);
 int FUN_00180310(...);
 int FUN_00183bb0(void);
 int pairSetHalves(...);
@@ -112,10 +112,10 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_0017760c(int);
+extern unsigned int recordGetScaledMaximum(int);
 extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
@@ -919,7 +919,7 @@ LAB_002afb00:
               temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x28);
               efctCallRoutineWithSpeedOverride(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
               temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x27);
-              FUN_001676b0((int)(short)temp_v11,*(short *)(temp_v13 + 8) + temp_v6,
+              effectDispatchSelector((int)(short)temp_v11,*(short *)(temp_v13 + 8) + temp_v6,
                            *(short *)(temp_v13 + 10) + temp_v5,0x24);
             }
           }
@@ -932,7 +932,7 @@ LAB_002afb00:
             temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x28);
             efctCallRoutineWithSpeedOverride(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
             temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x27);
-            FUN_001676b0((int)(short)temp_v11,*(short *)(temp_v13 + 8) + temp_v6,
+            effectDispatchSelector((int)(short)temp_v11,*(short *)(temp_v13 + 8) + temp_v6,
                          *(short *)(temp_v13 + 10) + temp_v5,0x24);
           }
           temp_v18 = (temp_v18 + 1) & 0xffff;
@@ -1103,7 +1103,7 @@ LAB_002afb00:
       if (temp_v4 != 0) {
         FUN_003c2690(param_1,temp_v6,temp_v16,temp_v28);
       }
-      temp_v12 = FUN_0017760c(temp_v3);
+      temp_v12 = recordGetScaledMaximum(temp_v3);
       temp_v4 = 0;
       if (*(char *)(temp_v38 + 0xdc) != '\0') {
         if (*(char *)(temp_v38 + 0x129) == '\0') {

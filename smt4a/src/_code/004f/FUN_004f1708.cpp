@@ -29,7 +29,7 @@ struct fn_004f1708_arg0 {
     float field_0x77c; /* +0x77c */
 };
 
-extern float DAT_005e1530; /* 0x5e1530 */
+extern float g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern float DAT_005e1534; /* 0x5e1534 */
 extern float DAT_005e1538; /* 0x5e1538 */
 
@@ -48,7 +48,7 @@ void FUN_004f1708(fn_004f1708_arg0 *param_1)
                *(unsigned int *)&param_1[1].field_0x4);
   temp_v1 = param_1->field_0x77c - DAT_005e1538;
   temp_v0 = param_1->field_0x778 - DAT_005e1534;
-  param_1->field_0x750 = DAT_005e1530 + (param_1->field_0x774 - DAT_005e1530) * in_s0;
+  param_1->field_0x750 = g_cameraAlternateProgressStart + (param_1->field_0x774 - g_cameraAlternateProgressStart) * in_s0;
   param_1->field_0x754 = DAT_005e1534 + temp_v0 * in_s0;
   param_1->field_0x758 = DAT_005e1538 + temp_v1 * in_s0;
   param_1->field_0x750 =

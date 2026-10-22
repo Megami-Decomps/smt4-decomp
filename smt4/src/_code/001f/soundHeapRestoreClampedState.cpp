@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc preserves the requested state in r0 and uses r2 for the heap, adding a move before the call. */
 #include "shard/W5_W5Match2_SoundHeapOwner.h"
 
 extern "C" {

@@ -6,7 +6,7 @@ extern "C" {
 
 int obj80Select(int);
 int FUN_0035c708(int, unsigned int, int, unsigned int);
-int FUN_00401178(int, int, int, int, int, int, int);
+int drawStoreAndApplyParameters(int, int, int, int, int, int, int);
 int packedScalarControlInit(int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned char DAT_0057aa02; /* 0x57aa02 */
 
 /* Supplied declaration required: obj80Select. */
 /* Supplied declaration required: FUN_0035c708. */
-/* Supplied declaration required: FUN_00401178. */
+/* Supplied declaration required: drawStoreAndApplyParameters. */
 /* Supplied declaration required: packedScalarControlInit. */
 
 
@@ -54,7 +54,7 @@ void FUN_004d896c(int param_1,int param_2,int param_3)
       return;
     }
   }
-  FUN_00401178(param_1,*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 4),
+  drawStoreAndApplyParameters(param_1,*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 4),
                *(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 5),*(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 6),
                *(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 7),(int)*(short *)(temp_v5 + temp_v7 * 0x2c + 8),
                (int)*(short *)(temp_v5 + temp_v7 * 0x2c + 10));

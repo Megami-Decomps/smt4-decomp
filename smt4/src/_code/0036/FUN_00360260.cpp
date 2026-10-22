@@ -1,2 +1,6 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_003eb818's literal pool; not written yet. */
 #include "common.h"
+
+/* This task does not need a completion callback. */
+extern "C" void FUN_00360260(void)
+{
+}

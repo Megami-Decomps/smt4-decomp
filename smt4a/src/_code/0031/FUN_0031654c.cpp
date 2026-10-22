@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction scheduling only: retail loads the table pointer before computing index*0x50 */
 /* Adds `delta` to the s16 counter of item `index` (0-0x500) in the global item table; out-of-range indices are ignored. */
 #include "common.h"
 

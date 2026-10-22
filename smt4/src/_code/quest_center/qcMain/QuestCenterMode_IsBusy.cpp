@@ -1,4 +1,3 @@
-/* NON_MATCHING: the load of work->entry is scheduled above the store of done here; retail stores first and loads afterwards */
 /* Polls the quest center's shutdown: returns 1 while its task is running or hasn't finished;
  * otherwise releases the active entry, frees the work area and returns 0. */
 #include "common.h"

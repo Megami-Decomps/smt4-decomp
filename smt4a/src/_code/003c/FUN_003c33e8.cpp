@@ -9,7 +9,7 @@ int FUN_00162790(...);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00185e84(...);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
 
@@ -33,7 +33,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004bd6b0. */
@@ -81,7 +81,7 @@ void FUN_003c33e8(int param_1,int param_2,unsigned int param_3,int param_4,int p
     if (temp_v3 == 0) {
       FUN_004bd6b0(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60),param_2);
     }
-    FUN_00389d9c(temp_v6,(int)*(short *)(temp_v0 + 0x8b60),*(short *)(temp_v2 + 8) + param_5,
+    statDrawClampedDelta(temp_v6,(int)*(short *)(temp_v0 + 0x8b60),*(short *)(temp_v2 + 8) + param_5,
                  *(short *)(temp_v2 + 10) + param_6,0x74,0);
     temp_v2 = FUN_001834a4(0x1a,0x17c);
     temp_v4 = FUN_004bcbb4(temp_v6,*(unsigned short *)(temp_v0 + 0x8b60));

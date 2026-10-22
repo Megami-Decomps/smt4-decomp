@@ -5,7 +5,7 @@
 extern "C" {
 
 int sharedRefAddRef(...);
-int onlineStringDestroy(...);
+int _ZN9Obj55aff4D1Ev(...);
 int FUN_002e9c0c(...);
 int _ZN9Obj55aff4C1Ev(...);
 int FUN_002ea3c0(...);
@@ -37,7 +37,7 @@ extern unsigned char LAB_0011986c; /* 0x11986c */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: FUN_002ea3c0. */
@@ -118,7 +118,7 @@ void FUN_0011973c(int param_1)
       FUN_003054f0(param_1,temp_v1);
     }
     onlineUrlDestroy(temp_v6);
-    onlineStringDestroy(temp_v8);
+    _ZN9Obj55aff4D1Ev(temp_v8);
   }
   else {
     *(unsigned int *)(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x10) = 1;

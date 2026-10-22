@@ -9,12 +9,12 @@ struct CampCecViewWork {
     /* 0xB4 */ f32 value;
 };
 extern CampCecViewWork *g_campCecView;
-void FUN_0019ff9c(u32 handle, f32 *value);
+void messageDrawSelectedImagePair(u32 handle, f32 *value);
 
 /* Update the camp view using its current handle and value. */
 s32 campCecViewUpdateValue(void)
 {
-    FUN_0019ff9c(g_campCecView->handle, &g_campCecView->value);
+    messageDrawSelectedImagePair(g_campCecView->handle, &g_campCecView->value);
     return 0;
 }
 

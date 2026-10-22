@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, unsigned int);
+int _ZN9Obj55b28cC1EPv(int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002ea774(int, unsigned int, unsigned int, int);
 int FUN_002ea82a(void);
@@ -14,7 +14,7 @@ int FUN_002ea82a(void);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_00104d4c(int);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea774. */
@@ -34,7 +34,7 @@ unsigned long long FUN_0010485a(int param_1,unsigned int param_2,unsigned int pa
   uStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(&uStack_18,temp_v0);
+  _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0);
   temp_v0 = FUN_00104d4c(param_1);
   FUN_002ea774(param_1,param_2,temp_v0,1);
   if (param_1 != 0) {

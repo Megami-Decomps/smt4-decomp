@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the registry flag word in r1, built in r2. */
 #include "common.h"
 
 extern "C" {

@@ -15,8 +15,8 @@ int gameGetSlotRecord(...);
 int asdLoadFileAsyncSimple(...);
 int sysMemClear(void);
 int rt_aeabi_memclr(...);
-int FUN_0039a3b4(...);
-int FUN_003a4980(void);
+int textureRequestCacheGet(...);
+int characterInfoPanelPopulate(void);
 int campCecDrawPageCreate(void);
 int rt_memcpy_w(...);
 
@@ -71,8 +71,8 @@ extern unsigned int campCecDispatchMode(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern unsigned int overlayGetStatusScene(void);
-/* Supplied declaration required: FUN_0039a3b4. */
-/* Supplied declaration required: FUN_003a4980. */
+/* Supplied declaration required: textureRequestCacheGet. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: campCecDrawPageCreate. */
 extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -188,7 +188,7 @@ void FUN_0034280c(unsigned char param_1)
   temp_v3 = campCecDispatchMode(puVar3[2]);
   campCecDrawPageCreate();
   puVar3[3] = temp_v3;
-  FUN_003a4980();
+  characterInfoPanelPopulate();
   asdLoadFileAsyncSimple(&LAB_00342cdc,puVar3 + 0x14,0);
   asdLoadFileAsyncSimple(&LAB_00342cf0,puVar3 + 0x15,0);
   asdLoadFileAsyncSimple(&LAB_00342d08,puVar3 + 0x16,0);
@@ -196,7 +196,7 @@ void FUN_0034280c(unsigned char param_1)
   temp_v4 = (unsigned int)temp_v0;
   FUN_00182054();
   if (temp_v4 == 0) {
-    FUN_0039a3b4(puVar3[3],(unsigned int)temp_v0);
+    textureRequestCacheGet(puVar3[3],(unsigned int)temp_v0);
   }
   temp_v3 = spriteHandleCreate(0);
   puVar3[0x17] = temp_v3;

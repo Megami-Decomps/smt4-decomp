@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_002a6480(...);
-int FUN_0037b5e0(void);
+int uiDrawExtendedRecordLabel(void);
 
 int asdTMTexTableLoadSprites(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int);
@@ -113,7 +113,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00343d04. */
 extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: engineForwardVariadicCommand. */
-/* Supplied declaration required: FUN_0037b5e0. */
+/* Supplied declaration required: uiDrawExtendedRecordLabel. */
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: campCecDrawSetCreate. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -334,7 +334,7 @@ LAB_002bfc18:
       }
       campCecDrawSetCreate();
       puVar4[0x5d] = temp_v2;
-      FUN_0037b5e0();
+      uiDrawExtendedRecordLabel();
       temp_v2 = 0;
       do {
         rt_aeabi_memclr(puVar4 + temp_v2 * 5 + 0x5e,0x14);

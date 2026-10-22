@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162758(...);
+int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
 int FUN_0018349c(...);
@@ -15,7 +15,7 @@ int FUN_0049339c(...);
 int FUN_00493408(...);
 int FUN_004934ac(...);
 int FUN_0049368c(...);
-int FUN_0049c7a0(...);
+int contentGetUpgradedKindValue(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -38,19 +38,19 @@ extern unsigned char LAB_0049627c; /* 0x49627c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162758. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_0018349c. */
 extern unsigned int FUN_001ba3d0(unsigned int);
 /* Supplied declaration required: FUN_0047fc38. */
-extern int FUN_00480960(unsigned int);
+extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_0049339c. */
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0049c7a0. */
+/* Supplied declaration required: contentGetUpgradedKindValue. */
 extern unsigned int FUN_0049cad0(unsigned short *);
 extern int btlRollClamped(unsigned short, unsigned int);
 
@@ -208,7 +208,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
       }
     }
   }
-  temp_v8 = FUN_00480960(temp_v6);
+  temp_v8 = equipmentHasPositiveUpgrade(temp_v6);
   if (temp_v8 != 0) {
     temp_v12 = temp_v6;
     FUN_0047fc38();
@@ -223,8 +223,8 @@ LAB_00495f20:
   temp_v8 = FUN_0018349c(param_1 + 0x3a4,temp_v21);
   VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v8 + 8) + temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162758(param_1 + 0x3a4,temp_v9,temp_v15,temp_v10);
-  temp_v8 = FUN_0049c7a0(temp_v6);
+  drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v9,temp_v15,temp_v10);
+  temp_v8 = contentGetUpgradedKindValue(temp_v6);
   temp_v5 = 0;
   switch(*(unsigned int *)(param_1 + 0xb40)) {
   case 0:
@@ -255,7 +255,7 @@ LAB_00495f20:
     temp_v15 = gameGetPlayerData(0);
     temp_v5 = *(unsigned short *)(temp_v15 + 0xc);
   }
-  temp_v15 = FUN_0049c7a0(temp_v5);
+  temp_v15 = contentGetUpgradedKindValue(temp_v5);
   if (param_3 != 0) {
     temp_v20 = FUN_0018349c(param_1 + 0x3a4,0xb1);
     temp_v13 = (int)temp_v20;

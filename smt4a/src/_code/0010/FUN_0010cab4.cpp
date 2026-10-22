@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00117588(void);
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002f4dc2(...);
 int FUN_002f6758(void);
@@ -24,7 +24,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00117588. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineUrlGetAddress(void);
 /* Supplied declaration required: FUN_002f4dc2. */
@@ -112,7 +112,7 @@ void FUN_0010cab4(int *param_1,unsigned char *param_2,unsigned char *param_3,uns
   }
   else {
     temp_v4 = onlineContextGetInstance();
-    FUN_002e6e34(temp_v5,temp_v4 + 0x58);
+    _ZN9Obj55b28cC1EPv(temp_v5,temp_v4 + 0x58);
     temp_v4 = (**(romwright_code **)(*param_1 + 0x58))(param_1);
     if (temp_v4 != 0) {
       pcVar9 = *(romwright_code **)(*param_1 + 0x54);

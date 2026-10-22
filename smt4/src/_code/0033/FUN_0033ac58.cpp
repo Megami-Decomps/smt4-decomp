@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0023fb84(int);
+int modelAnimationEnsureData(int);
 int aocHandleButtons(int, int);
 
-/* Supplied declaration required: FUN_0023fb84. */
+/* Supplied declaration required: modelAnimationEnsureData. */
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_00294fe0(int);
 extern int nkdwHeaderParse(int);
@@ -57,7 +57,7 @@ LAB_0033acc8:
           temp_v4 = 0;
         }
         else {
-          FUN_0023fb84(temp_v0);
+          modelAnimationEnsureData(temp_v0);
           *puVar5 = *puVar5 | 2;
           temp_v3 = param_1 + temp_v2 * 0x48;
           *(unsigned int *)(temp_v3 + 0x3580) = *(unsigned int *)(temp_v0 + 4);

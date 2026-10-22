@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
-extern BgmChannelSelection DAT_00588fac;
+extern BgmChannelSelection g_resourceSharedFlag;
 extern BgmRequestChannel DAT_0061951c;
 extern BgmRequestChannel DAT_0061953c;
 int jyoucyuGetTableEntry(u32 index);
@@ -12,9 +12,9 @@ void FUN_003de02c(u32 frames)
         return;
     }
     BgmRequestChannel* channel = NULL;
-    if (DAT_00588fac.selected == 0) {
+    if (g_resourceSharedFlag.selected == 0) {
         channel = &DAT_0061951c;
-    } else if (DAT_00588fac.selected == 1) {
+    } else if (g_resourceSharedFlag.selected == 1) {
         channel = &DAT_0061953c;
     }
     u32 flags = channel->flags;

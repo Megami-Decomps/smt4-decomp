@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp1C; /* 0x1c: local_1c */
 } param_1_stack;
 
-extern unsigned int FUN_002e6e34(unsigned char *, int);
+extern unsigned int _ZN9Obj55b28cC1EPv(unsigned char *, int);
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002fb208. */
 /* Supplied declaration required: FUN_0030ceb8. */
@@ -41,7 +41,7 @@ int FUN_0030323c(int param_1)
   int temp_v7;
   int temp_v8;
   
-  temp_v0 = FUN_002e6e34(temp_v4,param_1 + 0x24);
+  temp_v0 = _ZN9Obj55b28cC1EPv(temp_v4,param_1 + 0x24);
   FUN_002fb208();
   temp_v3 = param_1 + 0x54;
   temp_v7 = temp_v0;

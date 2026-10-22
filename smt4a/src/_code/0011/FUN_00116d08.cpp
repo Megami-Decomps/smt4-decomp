@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringAssign(int, int);
+int _ZN9Obj55aff4aSERKS_(int, int);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(...);
@@ -24,7 +24,7 @@ extern unsigned char LAB_00116e34; /* 0x116e34 */
 extern unsigned char LAB_00116ebd; /* 0x116ebd */
 
 extern unsigned int *FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned int *, unsigned char *, unsigned int, unsigned char *);
@@ -106,7 +106,7 @@ void FUN_00116d08(int param_1)
         temp_v3 = param_1 + 0xfc;
         temp_v0 = FUN_002f7896(temp_v3,&LAB_00116e34);
         if ((temp_v0 == 0) && (*(unsigned int *)(param_1 + 0xe4) < 5)) {
-          onlineStringAssign(param_1 + 0x70,temp_v3);
+          _ZN9Obj55aff4aSERKS_(param_1 + 0x70,temp_v3);
           temp_v1 = FUN_002ea3c0(temp_v5,&LAB_00116ebd,0,&LAB_00116e34);
           FUN_002ea3d0(param_1,temp_v1);
           return;

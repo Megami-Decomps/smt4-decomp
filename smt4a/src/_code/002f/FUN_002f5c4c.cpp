@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002e6e34(u8 *guard, u32 *lock);
+void _ZN9Obj55b28cC1EPv(u8 *guard, u32 *lock);
 void _ZN9Obj55b28cD1Ev(u8 *guard);
 void FUN_002e7614(u8 *buffer, s32 size);
 void FUN_002ec8a8(u32 dest, u8 *buffer);
@@ -26,7 +26,7 @@ u32 FUN_002f5c4c(Object *object, u32 dest)
     u8 buffer[32];
     u8 guard[12];
 
-    FUN_002e6e34(guard, &object->lock);
+    _ZN9Obj55b28cC1EPv(guard, &object->lock);
     FUN_002e7614(buffer, 2000);
     result = object->vtbl->fill(object, dest, buffer);
     FUN_002ec8a8(dest, buffer);

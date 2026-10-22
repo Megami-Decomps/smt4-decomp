@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_2_stack;
 
-extern float DAT_00570d5c; /* 0x570d5c */
+extern float g_spriteDrawYOffset; /* 0x570d5c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -102,7 +102,7 @@ void FUN_00401b50(fn_00401b50_arg0 *param_1,float *param_2)
     temp_v5 = temp_v5 + param_1->field_0x20 * 2.0f;
     param_2[1] = temp_v5;
   }
-  temp_v5 = temp_v5 * in_s0 + DAT_00570d5c;
+  temp_v5 = temp_v5 * in_s0 + g_spriteDrawYOffset;
   *param_2 = 0.0f;
   param_2[1] = temp_v5;
   temp_v0 = param_1->field_0x28;

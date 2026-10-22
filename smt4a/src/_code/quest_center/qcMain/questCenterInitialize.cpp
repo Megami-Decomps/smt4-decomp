@@ -13,7 +13,7 @@ struct QuestCenterOpenState {
 extern "C" {
 void *jyoucyuGetTableEntry(s32 index);
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 bytes, s32 clear);
-void FUN_0040a5a0(s32 entryId, s32 enabled);
+void statsSetAdditionalFlag(s32 entryId, s32 enabled);
 s32 FUN_00236110(u32 handle);
 void effectQcFinish(u32 handle);
 s32 qcMainEndPass(u32 handle);
@@ -49,7 +49,7 @@ void questCenterInitialize(const s32 *arguments, u32 argumentBytes)
             opening.option0 = 0;
             opening.option1 = 0;
         }
-        FUN_0040a5a0(opening.entryId, 1);
+        statsSetAdditionalFlag(opening.entryId, 1);
     }
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"),
         4, 0, 0, FUN_00236110, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));

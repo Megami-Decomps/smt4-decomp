@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002f7038(int, unsigned int, unsigned int);
 
 extern unsigned int initVtable0055a580(int, int);
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002f7038. */
@@ -31,7 +31,7 @@ void FUN_0010d058(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_18 = param_4;
   if (*(int *)(param_1 + 0xa8) == 0) {
     temp_v0 = onlineContextGetInstance();
-    FUN_002e6e34(&uStack_20,temp_v0 + 0x58);
+    _ZN9Obj55b28cC1EPv(&uStack_20,temp_v0 + 0x58);
     if (*(int *)(param_1 + 0xa8) == 0) {
       temp_v0 = operatorNew(0x14);
       temp_v1 = 0;

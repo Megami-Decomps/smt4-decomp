@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0035e03c(...);
 
-int FUN_0017760c(...);
+int recordGetScaledMaximum(...);
 int FUN_002b4dcc(void);
 int FUN_002b4e7c(void);
 int playerSyncPair2A(void);
@@ -53,7 +53,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int btlGetMainState(void);
 extern int btlMainIsRunning(void);
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
@@ -158,7 +158,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
           temp_v4 = FUN_002b4dcc();
         }
         else {
-          temp_v4 = FUN_0017760c(temp_v7);
+          temp_v4 = recordGetScaledMaximum(temp_v7);
         }
       }
       temp_v9 = 0;
@@ -269,7 +269,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
           temp_v4 = FUN_002b4dcc();
         }
         else {
-          temp_v4 = FUN_0017760c(temp_v7);
+          temp_v4 = recordGetScaledMaximum(temp_v7);
         }
       }
       if (temp_v6 != 0) {
@@ -489,7 +489,7 @@ LAB_00287fec:
         temp_v1 = FUN_002b4dcc();
       }
       else {
-        temp_v1 = FUN_0017760c(temp_v7);
+        temp_v1 = recordGetScaledMaximum(temp_v7);
       }
     }
     if (temp_v6 != 0) {

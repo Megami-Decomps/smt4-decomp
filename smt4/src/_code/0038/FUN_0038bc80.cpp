@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00123934(void);
 int legacyResourceIdRemap(unsigned int *);
-int resultPairInitialize(int *, int);
+int _ZN18WindowStatusResultC1Ej(int *, int);
 int FUN_0035398c(int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,8 +18,8 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00123934. */
 /* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_0035398c. */
 
 
@@ -37,10 +37,10 @@ void FUN_0038bc80(unsigned char *param_1)
   
   puVar3 = (unsigned int *)&temp_v3;
   *param_1 = 1;
-  puVar2 = (unsigned int *)FUN_002bad5c(param_1 + 4);
+  puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  resultPairInitialize(&temp_v3,0);
+  _ZN18WindowStatusResultC1Ej(&temp_v3,0);
   temp_v2 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v2;

@@ -11,14 +11,7 @@ int asdMemFree(void *block);
 /* One of the three buffers an Obj4206e8 owns: a model-manager handle and a memory block. */
 class Obj4206e8Slot {
 public:
-    Obj4206e8Slot()
-    {
-        unk00 = 0;
-        unk04 = 7;
-        handle = 0;
-        buffer = NULL;
-        unk10 = 0;
-    }
+    Obj4206e8Slot();
 
     /* Destroys the handle and frees the buffer, if held. */
     void release()

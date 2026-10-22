@@ -8,7 +8,7 @@ extern "C" {
 
 int jyoucyuGetTableEntry(...);
 int FUN_00191f68(...);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_001ba1c0(...);
 u32 FUN_001d1038(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int byteIsAtLeast100(...);
@@ -49,8 +49,8 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00191f68. */
 extern int objGetFlagBit0(int);
 extern int sysLightEventTryWait(int);
-/* Supplied declaration required: resultPairInitialize. */
-extern int *FUN_001b5acc(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_001d1038. */
 /* Supplied declaration required: byteIsAtLeast100. */
@@ -103,12 +103,12 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
   
   ppuVar9 = &temp_v8;
   *param_1 = 1;
-  piVar1 = (int *)FUN_001b5acc(param_1 + 4);
+  piVar1 = (int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   piVar1[2] = 0;
   piVar11 = piVar1 + -1;
   piVar1[3] = 0;
   piVar2 = &temp_v10;
-  resultPairInitialize(piVar2,0);
+  _ZN18WindowStatusResultC1Ej(piVar2,0);
   temp_v3 = piVar2[1];
   *piVar1 = *piVar2;
   piVar1[1] = temp_v3;
@@ -356,7 +356,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
                 *(char *)piVar11 = '\x01';
                 piVar2 = &temp_v10;
                 piVar1[2] = 0;
-                resultPairInitialize();
+                _ZN18WindowStatusResultC1Ej();
                 temp_v3 = piVar2[1];
                 *piVar1 = *piVar2;
                 piVar1[1] = temp_v3;

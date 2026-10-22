@@ -1,12 +1,7 @@
-/* NON_MATCHING: retail inlines base destruction; canonical base destructor is out of line, and its visible-body form also differs in post-increment/vcall scheduling. */
-#include "classes/Obj55aae4.h"
+/* NON_MATCHING: retail inlines base destruction; canonical base destructor is out of line and its visible-body form has different vcall scheduling. */
+#include "classes/Obj55a328.h"
 
-class Obj55a328 : public Obj55aae4 {
-public:
-    virtual ~Obj55a328();
-};
-
-// Destroy the base array of polymorphic eight-byte elements.
+/* The base releases the owned string array. */
 Obj55a328::~Obj55a328()
 {
 }

@@ -19,7 +19,7 @@ struct Obj420a2cSource {
 /* A 0x20-byte entry filled in from a source. */
 class Obj420a2cEntry {
 public:
-    Obj420a2cEntry() { unk10 = 0; }
+    Obj420a2cEntry();
 
     /* 0x00 */ u8 unk00[0x10];
     /* 0x10 */ u32 unk10;

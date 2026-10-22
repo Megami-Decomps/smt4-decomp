@@ -11,7 +11,9 @@ is `inferred`.
 A function is renamed in `config/symbols.txt`, `config/names.map`, `config/project.json`,
 `objdiff.json`, every `src/**.cpp` and `include/**.h` that mentions it, and its source file is
 renamed with it. A global (an address in `.rodata`/`.data`/`.bss`) gets a `type:object` line in
-`config/symbols.txt` and replaces `DAT_<address>` in the sources. Each row is recorded in
+`config/symbols.txt` and replaces `DAT_<address>` in the sources; a row repeating a named global's own
+name with a note starting `size:0x..` corrects its size, and a row renaming a global to its own
+`DAT_<address>` takes its name away (named at the wrong address). Each row is recorded in
 `config/name_sources.txt`. The retail target objects then name the new symbols, so the script
 reruns `build.py split` for each game it changed (the dump has to be in `orig/`).
 """
@@ -67,6 +69,7 @@ class Game:
         self.new_symbols = []  # type:object lines to append
         self.files = []      # (old source, new source)
         self.stems = {}      # old file stem -> new file stem
+        self.resized = False
 
     def taken(self, name):
         return name in self.functions
@@ -103,8 +106,25 @@ class Game:
         self.renamed.append((f"DAT_{address:08x}", new))
         return None
 
+    def resize_global(self, name, size):
+        """A named global whose recorded size was wrong (a vtable named over its neighbour's)."""
+        line = re.search(r"^" + re.escape(name) + r" = \S+; // type:object(?: size:0x[0-9a-fA-F]+)?", self.symbols, re.M)
+        if not line:
+            return f"{self.game}: no global {name}"
+        fixed = re.sub(r"(?: size:0x[0-9a-fA-F]+)?$", f" size:{size:#x}", line[0])
+        self.symbols = self.symbols[:line.start()] + fixed + self.symbols[line.end():]
+        self.resized = True
+        return None
+
+    def unname_global(self, name):
+        """A global named at the wrong address: its line goes and the sources say `DAT_<address>` again."""
+        address = self.functions.pop(name)
+        self.by_address.pop(address, None)
+        self.symbols = re.sub(r"^" + re.escape(name) + r" = \S+; // type:object[^\n]*\n", "", self.symbols, flags=re.M)
+        self.renamed.append((name, f"DAT_{address:08x}"))
+
     def write(self):
-        if not self.renamed:
+        if not self.renamed and not self.resized:
             return False
         for old_source, new_source in self.files:
             old_path, new_path = self.dir / old_source, self.dir / new_source
@@ -117,10 +137,10 @@ class Game:
                     old_path.rename(new_path)
         word = lambda names: re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
         mapping = dict(self.renamed)
-        everything = word(mapping)
+        everything = word(mapping) if mapping else None
         # The shared top-level include/ too: a header that declares one game's global uses that game's name.
         headers = list((self.dir / "include").rglob("*.h")) + list((ROOT / "include").rglob("*.h"))
-        for path in list((self.dir / "src").rglob("*.cpp")) + headers:
+        for path in (list((self.dir / "src").rglob("*.cpp")) + headers) if everything else ():
             text = path.read_text(encoding="utf-8")
             changed = everything.sub(lambda m: mapping[m[1]], text)
             if changed != text:
@@ -161,8 +181,23 @@ def main():
     for number, game, what, new, kind, note in read_rows(args.rows):
         state = games.setdefault(game, Game(game))
         where = f"{args.rows}:{number}"
+        address = state.functions.get(what)
+        if address is not None and new == f"DAT_{address:08x}" and "x" not in (state.section_of(address) or ("", 0, 0, "x"))[3]:
+            # `<game> name DAT_<its address> ...`: a global named at the wrong address loses its name.
+            state.unname_global(what)
+            sources.append((game, f"{address:08x} {new} {kind} {note}".rstrip()))
+            continue
         if not IDENT.match(new) or new.startswith(("FUN_", "DAT_", "LAB_")):
             errors.append(f"{where}: {new!r} is not a name")
+            continue
+        resize = re.match(r"size:0x([0-9a-fA-F]+)\b", note or "")
+        if what == new and resize:
+            # `<game> name name ... size:0x..`: the global keeps its name, its size is corrected.
+            problem = state.resize_global(new, int(resize[1], 16))
+            if problem:
+                errors.append(f"{where}: {problem}")
+            else:
+                sources.append((game, f"{state.functions[new]:08x} {new} {kind} {note}".rstrip()))
             continue
         if state.taken(new):
             errors.append(f"{where}: {game} already has {new}")

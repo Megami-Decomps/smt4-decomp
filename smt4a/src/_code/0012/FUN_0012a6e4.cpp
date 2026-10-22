@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002e7908(...);
-int onlineStringDestroy(...);
-int onlineStringCopyConstruct(unsigned char [8], int);
+int _ZN9Obj55aff4D1Ev(...);
+int _ZN9Obj55aff4C1ERKS_(unsigned char [8], int);
 int onlineInstanceTableGetCurrent(void);
 int FUN_002e9c0c(int);
 int onlineInstanceTableFind(int, unsigned int);
@@ -39,8 +39,8 @@ extern unsigned char LAB_0012a8a5; /* 0x12a8a5 */
 
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -103,7 +103,7 @@ void FUN_0012a6e4(int param_1)
         FUN_00306f9a(temp_v8,puVar5,temp_v3);
       }
       else {
-        onlineStringCopyConstruct(temp_v8,temp_v3);
+        _ZN9Obj55aff4C1ERKS_(temp_v8,temp_v3);
       }
       temp_v2 = *(unsigned int *)(param_1 + 0x13c);
       FUN_00306fe0(temp_v2,*(unsigned int *)(param_1 + 0x84),*(unsigned int *)(param_1 + 0x88));
@@ -129,7 +129,7 @@ void FUN_0012a6e4(int param_1)
         temp_v2 = FUN_002e7908(&temp_v5,&temp_v7);
         onlineJobCompleteWithResult(param_1,temp_v2);
       }
-      onlineStringDestroy(temp_v8);
+      _ZN9Obj55aff4D1Ev(temp_v8);
       return;
     }
     FUN_002ea41e(temp_v10,temp_v0);

@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_003a8cc8(void);
 extern u8 DAT_00422400;
-extern u32 *FUN_0022cb58(void);
+extern u32 *_ZN9Obj42247cC1Ev(void);
 
 typedef struct Obj {
     /* 0x000 */ const void *vtbl;
@@ -14,7 +14,7 @@ typedef struct Obj {
 
 Obj *FUN_003aa820(void)
 {
-    Obj *obj = (Obj *)FUN_0022cb58();
+    Obj *obj = (Obj *)_ZN9Obj42247cC1Ev();
 
     obj->vtbl = &DAT_00422400;
     FUN_003a8cc8();

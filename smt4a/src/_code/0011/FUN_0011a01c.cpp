@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_00305644(unsigned int *, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_0011a0cc; /* 0x11a0cc */
 
 extern unsigned int pendingValueTake(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -51,7 +51,7 @@ void FUN_0011a01c(int param_1)
   temp_v3 = *(int *)(*(int *)(param_1 + 0x70) + 0x10);
   if ((temp_v3 != 0) && (temp_v0 = FUN_002eb5f4(), temp_v0 != 0)) {
     temp_v0 = FUN_002eb5f4();
-    FUN_002e6e34(temp_v7,temp_v0 + 0x58);
+    _ZN9Obj55b28cC1EPv(temp_v7,temp_v0 + 0x58);
     temp_v5 = *(unsigned int **)(temp_v0 + 0x98);
     do {
       temp_v5 = (unsigned int *)*temp_v5;

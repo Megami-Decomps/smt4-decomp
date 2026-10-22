@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: streamSkip. */
 /* Supplied declaration required: FUN_002eea8a. */
-extern int FUN_002ef9e0(unsigned char *, unsigned short);
+extern int _ZN9Obj55933cC1Et(unsigned char *, unsigned short);
 extern int streamReadByte(int, int);
 
 
@@ -67,7 +67,7 @@ unsigned int FUN_0010bb78(unsigned int param_1,int param_2,int param_3,int *para
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002ef9e0(temp_v4,temp_v3[0]);
+    temp_v0 = _ZN9Obj55933cC1Et(temp_v4,temp_v3[0]);
     *(unsigned short *)(param_3 + 0x44) = *(unsigned short *)(temp_v0 + 4);
     if ((((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 0) || ((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 1))
        && (temp_v0 = streamSkip(param_2,4), temp_v0 == 0)) {

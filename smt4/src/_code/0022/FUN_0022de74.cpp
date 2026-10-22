@@ -9,7 +9,7 @@ int bitsetSetBit(unsigned char [14], int);
 int FUN_00258a24(unsigned int);
 int FUN_0029c4c8(int);
 int FUN_0029c4e4(unsigned char [14], int);
-int FUN_0029c6b0(unsigned char [14]);
+int unitRecalculateEffectiveStats(unsigned char [14]);
 int FUN_0029d684(int);
 int FUN_0029d8a0(unsigned int);
 int FUN_0029dfc0(int);
@@ -49,7 +49,7 @@ extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00258a24. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029d8a0. */
 /* Supplied declaration required: FUN_0029dfc0. */
@@ -171,7 +171,7 @@ void FUN_0022de74(int param_1)
       temp_v29 = 0;
       memClear(temp_v30,0x500);
       bitsetSetBit(temp_v8,*(unsigned short *)(temp_v6 + 0x38));
-      FUN_0029c6b0(temp_v8);
+      unitRecalculateEffectiveStats(temp_v8);
       temp_v13 = 0;
       temp_v11 = temp_v9;
       temp_v12 = temp_v10;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00113f00(...);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int sharedRefAddRef(...);
 int onlineSockAddrCopy(...);
@@ -32,7 +32,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00113f00. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: onlineSockAddrCopy. */
@@ -62,7 +62,7 @@ unsigned int FUN_0011ca76(int param_1,fn_0011ca76_arg1 *param_2,unsigned int par
     iStack_20 = param_1;
     pfStack_1c = param_2;
     temp_v5 = param_3;
-    FUN_002e6e34(temp_v4,param_1 + 0x224);
+    _ZN9Obj55b28cC1EPv(temp_v4,param_1 + 0x224);
     piVar1 = (int *)FUN_00311202(param_1 + 0x1d8);
     if ((piVar1 != (int *)0x0) && (*piVar1 != 0)) {
       FUN_002ec8a8(*piVar1,param_2);

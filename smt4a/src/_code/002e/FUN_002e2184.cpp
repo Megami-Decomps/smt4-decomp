@@ -5,7 +5,7 @@
 extern "C" {
 
 int linkHolderSetFlag(void);
-int FUN_0040ba84(unsigned int, unsigned int, int);
+int playerLoadOutfitModels(unsigned int, unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int linkHolderCallFirst(void);
 /* Supplied declaration required: linkHolderSetFlag. */
-/* Supplied declaration required: FUN_0040ba84. */
+/* Supplied declaration required: playerLoadOutfitModels. */
 
 
 void FUN_002e2184(unsigned int *param_1,unsigned int param_2)
@@ -44,7 +44,7 @@ void FUN_002e2184(unsigned int *param_1,unsigned int param_2)
     param_1[1] = temp_v2;
     param_1[2] = temp_v3;
     param_1[8] = param_2;
-    FUN_0040ba84(param_1[7],param_2,7);
+    playerLoadOutfitModels(param_1[7],param_2,7);
     if (param_1[7] != 0) {
       linkHolderSetFlag();
       return;

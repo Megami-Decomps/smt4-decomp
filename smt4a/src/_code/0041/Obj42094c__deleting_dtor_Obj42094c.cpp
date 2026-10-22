@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002a1ca0(void *object);
+void textureOwnerReset(void *object);
 void asdOperatorDelete(Filter4Poly *filter);
 void asdMemFree(void *block);
 
@@ -19,7 +19,7 @@ void _ZN9Obj42094cD0Ev(Filter4Poly *filter)
     }
     filter->vtable = g_filter4PolyBaseVtable;
     if (filter->object != NULL) {
-        FUN_002a1ca0(filter->object);
+        textureOwnerReset(filter->object);
         filter->object = NULL;
     }
     if (filter->dataA != NULL) {

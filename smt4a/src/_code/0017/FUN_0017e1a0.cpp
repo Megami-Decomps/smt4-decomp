@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses push {r4, r5, lr} where the compiled block uses push {lr}. */
 #include "common.h"
 
 extern "C" {

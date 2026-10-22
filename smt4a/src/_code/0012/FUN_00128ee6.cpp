@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0013400a(int, int, int *);
 int FUN_001341d4(int, unsigned int);
-int onlineStringDestroy(int *);
+int _ZN9Obj55aff4D1Ev(int *);
 int _ZN9Obj55aff4C1Ev(int *);
 int FUN_002fbc1a(int, int *);
-int FUN_00306d44(...);
+int clearStringVector(...);
 int FUN_0030d3ba(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -19,11 +19,11 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0013400a. */
 /* Supplied declaration required: FUN_001341d4. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 extern int streamReadU32(int, unsigned int *);
 /* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: FUN_00306d44. */
+/* Supplied declaration required: clearStringVector. */
 /* Supplied declaration required: FUN_0030d3ba. */
 
 
@@ -40,7 +40,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
   iStack_20 = param_2;
   uStack_1c = param_3;
   temp_v2 = param_4;
-  FUN_00306d44(param_2);
+  clearStringVector(param_2);
   temp_v0 = streamReadU32(param_1,&temp_v2);
   if (temp_v0 != 0) {
     FUN_001341d4(param_2,temp_v2);
@@ -51,8 +51,8 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
       _ZN9Obj55aff4C1Ev(&iStack_20);
       FUN_002fbc1a(param_1,&iStack_20);
       if (*(char *)(param_1 + 4) != '\0') {
-        FUN_00306d44();
-        onlineStringDestroy(&iStack_20);
+        clearStringVector();
+        _ZN9Obj55aff4D1Ev(&iStack_20);
         return;
       }
       temp_v0 = *(int *)(param_2 + 4);
@@ -63,7 +63,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
       else {
         FUN_0013400a(param_2,temp_v0,&iStack_20);
       }
-      onlineStringDestroy(&iStack_20);
+      _ZN9Obj55aff4D1Ev(&iStack_20);
     }
   }
   return;

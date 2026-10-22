@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001d25a0(int *, int);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(void);
 int FUN_0047402c(int *, int, int);
 
@@ -21,7 +21,7 @@ extern unsigned char LAB_004745f0; /* 0x4745f0 */
 
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_001d25a0. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0047402c. */
 
@@ -59,7 +59,7 @@ void FUN_00471adc(int param_1)
     puVar2 = puVar1 + 2;
     *puVar1 = 0x50;
     puVar1[1] = temp_v5;
-    FUN_002f5020(puVar2,&LAB_004745f0,0x50,temp_v5);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar2,&LAB_004745f0,0x50,temp_v5);
   }
   *(unsigned int **)(param_1 + 0x318) = puVar2;
   temp_v5 = 0;

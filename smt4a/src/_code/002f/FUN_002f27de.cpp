@@ -1,4 +1,4 @@
-/* NON_MATCHING: scoped-lock construction still uses an unmigrated constructor entry; local guard/iterator layout and loop entry differ, and the final zero store is not forwarded from comparison. */
+/* NON_MATCHING: native scoped-lock construction is integrated; iterator layout, loop entry and final zero forwarding still differ. */
 #include "classes/Obj55b28c.h"
 
 struct SharedListNode {
@@ -29,7 +29,6 @@ struct SharedListOwner {
 
 extern "C" {
 void* onlineGetActiveLock(void);
-void FUN_002e6e34(void* storage, void* mutex);
 void sharedRefRelease(void* reference);
 void wordMoveOut_002f1324(SharedListIterator* old, SharedListIterator* current, s32 postfix);
 u32 wordRefsDiffer_002f3e5a(const SharedListIterator* first, const SharedListIterator* second);
@@ -38,8 +37,7 @@ void FUN_002f3ff0(SharedList* list, const SharedListIterator* item);
 // Releases and erases every shared reference while holding the active online lock.
 void FUN_002f27de(SharedListOwner* owner)
 {
-    u32 lockStorage[3];
-    FUN_002e6e34(lockStorage, onlineGetActiveLock());
+    Obj55b28c guard(onlineGetActiveLock());
     SharedListIterator current = { owner->list.sentinel->next };
     for (;;) {
         SharedListIterator end = { owner->list.sentinel };
@@ -54,6 +52,5 @@ void FUN_002f27de(SharedListOwner* owner)
     owner->firstLimit = owner->capacity;
     owner->secondLimit = owner->capacity;
     owner->count = 0;
-    reinterpret_cast<Obj55b28c*>(lockStorage)->Obj55b28c::~Obj55b28c();
 }
 }

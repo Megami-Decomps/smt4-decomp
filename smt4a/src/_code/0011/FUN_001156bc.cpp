@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdOperatorDeleteArray(void);
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int socketResetReturn(void);
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: socketResetReturn. */
 
@@ -27,7 +27,7 @@ void FUN_001156bc(int param_1,int param_2,unsigned int param_3,unsigned int para
   iStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002e6e34(&iStack_18,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(&iStack_18,param_1 + 4);
   temp_v0 = 0;
   do {
     if (*(int *)(temp_v0 * 4 + param_1 + 0x34) == param_2) break;

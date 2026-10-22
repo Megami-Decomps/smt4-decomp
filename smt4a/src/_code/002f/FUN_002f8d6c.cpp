@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *);
+int _ZN9Obj55b28cC1EPv(int *);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002f8820(int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f8820. */
 
@@ -28,7 +28,7 @@ void FUN_002f8d6c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_10 = param_4;
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 500) + 0x18))();
   if (temp_v0 != 0) {
-    FUN_002e6e34(&uStack_18);
+    _ZN9Obj55b28cC1EPv(&uStack_18);
     FUN_002f8820(param_1);
     _ZN9Obj55b28cD1Ev(&uStack_18);
     return;

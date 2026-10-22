@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00161a10(void);
-int resultPairInitialize(int *, int);
+int _ZN18WindowStatusResultC1Ej(int *, int);
 int legacyResourceIdRemap(int);
 int FUN_00428940(int *, int, int, unsigned char [128]);
 int halfwordBufferCopyRange(unsigned char [4], unsigned char [128], unsigned int, int);
@@ -21,8 +21,8 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00428940. */
 /* Supplied declaration required: halfwordBufferCopyRange. */
@@ -48,11 +48,11 @@ unsigned char * FUN_00474b7c(unsigned char *param_1,int param_2)
   
   puVar2 = (unsigned int *)&temp_v2;
   *param_1 = 1;
-  puVar1 = (unsigned int *)FUN_001b5acc(param_1 + 4);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   puVar1[2] = 0;
   puVar6 = puVar1 + -1;
   puVar1[3] = 0;
-  resultPairInitialize(&temp_v2,0);
+  _ZN18WindowStatusResultC1Ej(&temp_v2,0);
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;

@@ -10,8 +10,8 @@ int asdOperatorDeleteArray(void);
 int onlineContextGetInstance(void);
 int sharedRefAddRef(unsigned int);
 int operatorNew(int);
-int onlineStringConstruct(unsigned char [4], unsigned char *);
-int onlineStringDestroy(unsigned char [4]);
+int _ZN9Obj55aff4C1EPKc(unsigned char [4], unsigned char *);
+int _ZN9Obj55aff4D1Ev(unsigned char [4]);
 int onlineObjectThreadRootStart(int, int);
 int FUN_002f8da8(void);
 
@@ -54,8 +54,8 @@ extern int *FUN_00116770(void);
 /* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: operatorNew. */
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int *FUN_002eb77c(int, unsigned int, unsigned char *);
 /* Supplied declaration required: onlineObjectThreadRootStart. */
 extern unsigned int *FUN_002f58d0(int, unsigned char *, unsigned int);
@@ -78,14 +78,14 @@ void FUN_0010e4dc(int param_1)
     if (*(int *)(param_1 + 0x14c) == 0) {
       temp_v0 = operatorNew(0x34);
       if (temp_v0 != 0) {
-        onlineStringConstruct(temp_v3,&LAB_0010e638);
+        _ZN9Obj55aff4C1EPKc(temp_v3,&LAB_0010e638);
         puVar2 = (unsigned int *)FUN_002f58d0(temp_v0,temp_v3,DAT_00594a40);
         puVar2[0xb] = 0;
         *puVar2 = (unsigned int)&DAT_0055888c;
         puVar2[10] = 0;
         puVar2[9] = 0;
         *(unsigned int **)(param_1 + 0x14c) = puVar2;
-        onlineStringDestroy(temp_v3);
+        _ZN9Obj55aff4D1Ev(temp_v3);
       }
       else {
         *(unsigned int *)(param_1 + 0x14c) = 0;
@@ -101,12 +101,12 @@ void FUN_0010e4dc(int param_1)
   else if ((*(int *)(param_1 + 0x154) == 0) && (temp_v0 = onlineContextGetInstance(), temp_v0 != 0)) {
     temp_v0 = operatorNew(0x40);
     if (temp_v0 != 0) {
-      onlineStringConstruct(temp_v2,&LAB_0010e664);
+      _ZN9Obj55aff4C1EPKc(temp_v2,&LAB_0010e664);
       puVar2 = (unsigned int *)FUN_002eb77c(temp_v0,0,temp_v4);
       puVar2[0xf] = param_1;
       *puVar2 = (unsigned int)&DAT_00559154;
       *(unsigned int **)(param_1 + 0x154) = puVar2;
-      onlineStringDestroy(temp_v2);
+      _ZN9Obj55aff4D1Ev(temp_v2);
       temp_v1 = *(unsigned int *)(param_1 + 0x154);
     }
     else {

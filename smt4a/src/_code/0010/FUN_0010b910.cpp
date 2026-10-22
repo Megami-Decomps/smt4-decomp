@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int onlineStringConstruct(unsigned char [8], unsigned char *);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4C1EPKc(unsigned char [8], unsigned char *);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
@@ -26,8 +26,8 @@ extern unsigned char DAT_00630314; /* 0x630314 */
 
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
@@ -70,14 +70,14 @@ void FUN_0010b910(int param_1)
     else {
       temp_v0 = operatorNew(0x34);
       if (temp_v0 != 0) {
-        onlineStringConstruct(temp_v4,&LAB_0010b9ec);
+        _ZN9Obj55aff4C1EPKc(temp_v4,&LAB_0010b9ec);
         puVar2 = (unsigned int *)FUN_002f58d0(temp_v0,temp_v4,*(unsigned int *)(param_1 + 0xac));
         puVar2[0xb] = 0;
         *puVar2 = (unsigned int)&DAT_00558878;
         puVar2[10] = 0;
         puVar2[9] = 0;
         *(unsigned int **)(param_1 + 0x78) = puVar2;
-        onlineStringDestroy(temp_v4);
+        _ZN9Obj55aff4D1Ev(temp_v4);
         temp_v0 = *(int *)(param_1 + 0x78);
       }
       else {

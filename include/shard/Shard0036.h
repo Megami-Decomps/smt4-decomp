@@ -74,4 +74,11 @@ typedef struct Ref208 {
     /* 0x08 */ Work0C *work;
 } Ref208;
 
+
+/* The shared model object's visibility state. */
+typedef struct VisibilityState1C {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 visible;
+} VisibilityState1C;
+
 #endif

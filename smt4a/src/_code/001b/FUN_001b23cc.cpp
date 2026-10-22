@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 
 extern unsigned char LAB_001b1aa8; /* 0x1b1aa8 */
 extern unsigned char LAB_001b95b0; /* 0x1b95b0 */
@@ -14,7 +14,7 @@ extern unsigned char DAT_0055c340; /* 0x55c340 */
 extern unsigned char DAT_0055c354; /* 0x55c354 */
 
 extern unsigned int *FUN_001b9b28(void);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_001b23cc(void)
@@ -38,9 +38,9 @@ void FUN_001b23cc(void)
   *(unsigned char *)(puVar1 + 0x1e) = 0x7f;
   *(unsigned char *)((int)puVar1 + 0x79) = 0x7f;
   puVar1 = puVar1 + 0x3d;
-  FUN_002f5020(puVar1,&LAB_001b95c4,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_001b95c4,0x10,4);
   puVar1 = puVar1 + 0x10;
-  FUN_002f5020(puVar1,&LAB_001b95b0,0xc,4);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_001b95b0,0xc,4);
   *(unsigned char *)((int)puVar1 + 0x31) = 0;
   *(unsigned char *)((int)puVar1 + 0x32) = 0;
   puVar1[0x10] = 0;
@@ -51,7 +51,7 @@ void FUN_001b23cc(void)
   puVar1[0x14] = 0;
   puVar1[0x16] = 0;
   puVar1 = puVar1 + 0x17;
-  FUN_002f5020(puVar1,&LAB_001b1aa8,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_001b1aa8,8,4);
   temp_v0 = 0;
   temp_v1 = 0;
   do {

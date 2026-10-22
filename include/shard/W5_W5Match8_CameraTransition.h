@@ -60,4 +60,31 @@ struct W5Match8CameraTransition {
     /* 0x87C */ u32 positionFrame;
     /* 0x880 */ u32 positionMode;
 };
+struct CameraTransitionGlobals {
+    /* 0x00 */ W5Match8CameraTransition *camera;
+    /* 0x04 */ u8 unk04[0x24];
+    /* 0x28 */ s32 mode;
+};
+
+/* Additive view of the position-transition fields inside the camera object. */
+struct CameraPositionTransitionView {
+    /* 0x000 */ u8 unk000[0x7C];
+    /* 0x07C */ W5Match8Vec3 position;
+    /* 0x088 */ u8 unk088[0x554];
+    /* 0x5DC */ W5Match8Vec3 target;
+    /* 0x5E8 */ u8 unk5e8[0x20];
+    /* 0x608 */ W5Match8Vec3 targetStart;
+    /* 0x614 */ u8 unk614[0x38];
+    /* 0x64C */ u32 flags;
+    /* 0x650 */ u8 unk650[0xE8];
+    /* 0x738 */ W5Match8Vec3 primaryProgress;
+    /* 0x744 */ u32 duration;
+    /* 0x748 */ u32 frame;
+    /* 0x74C */ u32 mode;
+    /* 0x750 */ W5Match8Vec3 alternateProgress;
+    /* 0x75C */ u8 unk75c[0x74];
+    /* 0x7D0 */ W5Match8Vec3 offset;
+};
+typedef char CameraPositionTransitionViewSizeCheck[sizeof(CameraPositionTransitionView) == 0x7DC ? 1 : -1];
+
 #endif

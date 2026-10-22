@@ -5,7 +5,7 @@
 extern "C" {
 
 int packNibblesAndByte(...);
-int FUN_002f5020(int, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 
 extern unsigned char LAB_00192824; /* 0x192824 */
 extern unsigned int DAT_0063098c; /* 0x63098c */
@@ -15,7 +15,7 @@ extern unsigned int DAT_00630998; /* 0x630998 */
 extern unsigned int DAT_0063099c; /* 0x63099c */
 
 /* Supplied declaration required: packNibblesAndByte. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_0050e874(void)
@@ -29,7 +29,7 @@ void FUN_0050e874(void)
   *(unsigned int *)(in_r12 + 0x20) = in_s0;
   *(unsigned int *)(in_r12 + 0x24) = in_s0;
   *(unsigned int *)(in_r12 + 0x28) = in_s0;
-  FUN_002f5020(in_r12 + 0x2c,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(in_r12 + 0x2c,&LAB_00192824,0x10,4);
   DAT_0063098c = packNibblesAndByte(6,7,0);
   DAT_00630990 = packNibblesAndByte(6,1,0);
   DAT_00630994 = packNibblesAndByte(6,1,2);

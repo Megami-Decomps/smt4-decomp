@@ -46,7 +46,7 @@ extern unsigned char LAB_0039096c; /* 0x39096c */
 extern unsigned int *g_aocMain; /* 0x432fc8 */
 
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_002333a4(unsigned int *, unsigned int);
+extern int stateCounterBelowLimit(unsigned int *, unsigned int);
 extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_00233404. */
 /* Supplied declaration required: FUN_00233410. */
@@ -231,7 +231,7 @@ void FUN_003901bc(unsigned int *param_1)
     }
     if (*(char *)((int)param_1 + 0x2c6) != '\0') {
       temp_v1 = FUN_002333f0(param_1 + 0xad);
-      temp_v2 = FUN_002333a4(param_1 + 0x90,temp_v1);
+      temp_v2 = stateCounterBelowLimit(param_1 + 0x90,temp_v1);
       if (temp_v2 != 0) {
         temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
         temp_v2 = FUN_002335f8(puVar1,temp_v1);

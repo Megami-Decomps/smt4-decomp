@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned char g_flagBlock; /* 0x594958 */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int wordRefsDiffer_002fe9f2(int, int);
 
@@ -32,7 +32,7 @@ void FUN_00113d48(int param_1,int param_2)
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x5)) != '\0') {
     iStack_14 = param_1;
     temp_v2 = param_2;
-    FUN_002e6e34(temp_v1,param_1 + 0x18);
+    _ZN9Obj55b28cC1EPv(temp_v1,param_1 + 0x18);
     temp_v0 = wordRefsDiffer_002fe9f2(param_1 + 8,param_1 + 0x10);
     piVar2 = (int *)(param_1 + 0xc);
     if (temp_v0 != 0) {

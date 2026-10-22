@@ -3,13 +3,13 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
-extern AsdSndHandleNode *DAT_0063e944;
+extern AsdSndHandleNode *g_soundHandleList;
 extern s32 DAT_0063e948;
 
 u8 asdSoundHandleListFind(s32 id)
 {
     u8 result = 0;
-    AsdSndHandleNode *node = DAT_0063e944;
+    AsdSndHandleNode *node = g_soundHandleList;
     const s32 count = DAT_0063e948;
     s32 index = 0;
 

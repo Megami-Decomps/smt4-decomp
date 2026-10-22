@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001322b6(int, unsigned char [4]);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineTimeGetNow(unsigned char [8]);
 int wordMoveOut_002f3724(unsigned char [4], int *, int);
@@ -29,7 +29,7 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001322b6. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned long long FUN_002eab1c(unsigned char *, int);
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -61,7 +61,7 @@ void FUN_0010a8a4(int param_1)
   int temp_v12;
   unsigned char temp_v13 [4];
   
-  FUN_002e6e34(temp_v9,param_1 + 0x4c);
+  _ZN9Obj55b28cC1EPv(temp_v9,param_1 + 0x4c);
   onlineTimeGetNow(temp_v8);
   temp_v5 = *(int *)(*(int *)(param_1 + 0x18) + 8);
   while( 1 ) {

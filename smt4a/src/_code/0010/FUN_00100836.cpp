@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses Thumb movs while compiler emits mov and schedules argument moves differently. */
 #include "common.h"
 
 extern "C" {

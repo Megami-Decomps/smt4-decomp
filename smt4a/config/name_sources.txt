@@ -4470,3 +4470,257 @@
 001bab10 texCommandListBuild inferred Builds the command list that sets up a texture: function state, the two lower units, then the main unit.
 0031e5dc scrPartyEntryJoin inferred Script command: adds the party entry named by the argument and plays the join sound once the state holder is idle.
 003d1d6c partyPanelSortByMode inferred Sorts the party panel entries with the comparator selected by the current mode and its ordering flag.
+0043907c _ZN9Obj420fa4C1Ev inferred constructor installs the text-scanner vtable at 0x55b370
+0055b370 _ZTV9Obj420fa4 inferred size:0x14 text-scanner vtable, twin of IV 0x420fa4
+004d08d0 _ZN9Obj55ca08D1Ev inferred nonvirtual destructor removes registered touch regions
+00188340 _ZN9Obj557dccC1Ej inferred constructor stores incoming u32 argument at offset 4
+004a82cc _ZN9Obj55c920C1Ev inferred constructor initializes selection and embedded touch-selection interfaces
+0055c920 _ZTV9Obj55c920 inferred size:0x34 base selection vtable with eleven method slots
+004a4588 _ZN9Obj55c89cC1Ej inferred derived menu constructor taking a mode value
+0055c89c _ZTV9Obj55c89c inferred size:0x34 derived menu vtable with eleven method slots
+004a68cc _ZN9Obj55c8d0C1Ev inferred default constructor of the flagged Bible view
+004a6880 _ZN9Obj55c8d0C1Ej inferred flagged Bible view constructor taking a selection value
+0055c8d0 _ZTV9Obj55c8d0 inferred size:0x34 flagged Bible view vtable with eleven method slots
+004a4bc8 _ZN9Obj55c8d013resetHandlersEv inferred initializes the derived view's three handler tables
+004a133c _ZN9Obj55c89c13resetHandlersEv inferred initializes the mode-specific menu after base construction
+004d03b4 _ZN14SelectionFlagsC1Ev inferred member constructor initializes the two selection flag bytes
+00493764 _ZN18SelectionRectangleC1Ev inferred constructor clears four rectangle coordinates and sets selection to minus one
+00300844 _ZN9Obj55b314C1Ei inferred middle polymorphic base constructor takes a signed selection value
+00106e4c _ZN9Obj558a3cC1Ev inferred root state-byte constructor called by Obj55b314
+002e9520 _ZN9Obj55aff4C1ERKS_ inferred copy constructor duplicates the source string member
+002e9598 _ZN9Obj55aff4aSERKS_ inferred string copy-assignment releases and duplicates only when the handles differ
+002e9300 _ZN9Obj55aff4C1EPKc inferred string constructor duplicates its const char pointer
+002e9318 _ZN9Obj55aff4D1Ev inferred destructor listed in the Obj55aff4 vtable
+002ef9e0 _ZN9Obj55933cC1Et inferred polymorphic halfword-value constructor
+0055933c _ZTV9Obj55933c inferred size:0xc one-method halfword-value vtable
+003024c4 _ZN9Obj5590e4C1Eh inferred polymorphic kind-byte constructor
+005590e4 _ZTV9Obj5590e4 inferred size:0x14 abstract value vtable with two stripped destructor slots
+004218dc _ZN9Obj4209ccC1Ev inferred constructor of the model-part owner, twin of IV Obj4209cc
+00557e6c _ZTV9Obj4209cc inferred size:0x10 model-part-owner vtable, twin of IV 0x4209cc
+00423a3c _ZN9Obj420a2cC1Ev inferred constructor of the three-entry source owner
+00422300 _ZN14Obj420a2cEntryC1Ev inferred constructor used by the entry array callback
+00432cf8 _ZN9Obj55a800D1Ev inferred array-owner destructor invokes each 0xb8-byte element's virtual destructor
+0055a800 _ZTV9Obj55a800 inferred size:0x10 array-owner vtable, followed by the 0x55a810 table
+0055c6a8 _ZTV9Obj4221a4 inferred size:0x1c vtable ends where independent Obj4221c0 table begins
+0055c6dc _ZTV9Obj4221d4 inferred size:0x10 vtable ends where independent Obj4221e4 table begins
+0055c71c _ZTV9Obj422214 inferred size:0x1c vtable ends where independent Obj422224 table begins
+0055c684 _ZTV9Obj42217c inferred size:0x10 common window-result base vtable, twin of IV 0x42217c
+0047365c _ZN9Obj4221c0C1Ev inferred constructor of independent window-result object
+0055c6c4 _ZTV9Obj4221c0 inferred size:0x14 independent result-object vtable, twin of IV 0x4221c0
+004746cc _ZN9Obj4221e4C1Ev inferred constructor of independent window-result object
+0055c6ec _ZTV9Obj4221e4 inferred size:0x18 independent result-object vtable, twin of IV 0x4221e4
+00474938 _ZN9Obj4221fcC1Ev inferred constructor of independent window-result object
+0055c704 _ZTV9Obj4221fc inferred size:0x18 independent result-object vtable, twin of IV 0x4221fc
+00474ca4 _ZN9Obj422224C1Ev inferred constructor of independent window-result object
+0055c738 _ZTV9Obj422224 inferred size:0x18 independent result-object vtable, twin of IV 0x422224
+00475cb0 _ZN9Obj422248C1Ev inferred constructor of independent window-result object
+0055c750 _ZTV9Obj422248 inferred size:0x18 independent result-object vtable, twin of IV 0x422248
+00475e40 _ZN9Obj422260C1Ev inferred constructor of independent window-result object
+0055c768 _ZTV9Obj422260 inferred size:0x18 independent result-object vtable, twin of IV 0x422260
+00476024 _ZN9Obj422278C1Ev inferred constructor of result object with value and active fields
+0055c780 _ZTV9Obj422278 inferred size:0x18 independent result-object vtable, twin of IV 0x422278
+00476d64 _ZN9Obj422290C1Ev inferred constructor of independent window-result object
+0055c798 _ZTV9Obj422290 inferred size:0x18 independent result-object vtable, twin of IV 0x422290
+001b5acc _ZN18WindowStatusResultC1Ev inferred member constructor initializes the result-code sentinel
+001b57a8 _ZN18WindowStatusResultC1Ej inferred member constructor translates an SDK result into its game description
+0055c6c4 DAT_0055c6c4 inferred renaming to the verified IV twin class name
+0055c738 DAT_0055c738 inferred renaming to the verified IV twin class name
+0055c6c4 _ZTV9Obj4221bc inferred size:0x18 result-object vtable, twin of IV 0x4221bc
+0055c738 _ZTV9Obj422230 inferred size:0x18 result-object vtable, twin of IV 0x422230
+0047365c _ZN9Obj4221bcC1Ev inferred constructor twin of IV Obj4221bc
+00474ca4 _ZN9Obj422230C1Ev inferred constructor twin of IV Obj422230
+002f5020 __aeabi_vec_ctor_nocookie_nodtor inferred ARM ABI array-construction helper used for native element arrays
+0055c954 _ZTV9Obj55c954 inferred size:0x24 seven-method allocated operation vtable
+0055c978 _ZTV9Obj55c978 inferred size:0x24 seven-method allocated operation vtable
+0055c99c _ZTV9Obj55c99c inferred size:0x24 seven-method allocated node vtable
+002e6e34 _ZN9Obj55b28cC1EPv inferred scoped mutex-guard constructor retains and locks its opaque mutex
+002fed24 _ZN9Obj5592acC1ERK9Obj55aff4 inferred constructor copies a string and appends the new node to its registry
+0062e58c g_onlineTrackedStrings inferred tracked-string registry with first last end count and embedded mutex
+004d0b3c _ZN9Obj422594C1Ev inferred twin touch-region owner constructor
+00432b10 _ZN9Obj5597fcC1Ev inferred constructor first constructs Obj55a5a8 then installs final vtable at 0x5597fc
+005597fc _ZTV9Obj5597fc inferred size:0x2c derived vector-state vtable with nine method slots
+0030395c _ZN15Obj55aff4VectorC1Ej inferred vector constructor reserves at least 32 polymorphic strings and fills its initial count
+00302f28 _ZN12ZeroWordPairC1Ev inferred constructor zeroes both words of the member pair
+002f6ed2 copyZeroWordPair inferred copies both words from a pair pointer
+00135804 assignWordVector inferred assigns the contiguous word-vector member
+00558760 g_smallTextEmptySentinel inferred default pointer for empty small-buffer text strings
+0058955c g_defaultWordPairValue inferred pointer to the default two-word member value
+004611ac _ZN9Obj421c90C1Ev inferred twin constructor clears the link and trailing state fields
+0055c114 _ZTV9Obj421c90 inferred size:0x1c twin state-object vtable with destructor and three abstract slots
+0030c9cc _ZN9Obj55a328C1Ev inferred complete constructor installs Obj55aae4 base then the derived Obj55a328 vtable
+00306d24 _ZN9Obj55a788C1Ejt inferred descriptor constructor takes a word value and halfword kind
+0055a788 _ZTV9Obj55a788 inferred size:0x10 two stripped virtual slots, next table's address point is 0x55a7a0
+00306d38 _ZN9Obj55a788aSERKS_ inferred copy-assignment wrapper returns the original descriptor
+00306d44 clearStringVector inferred clears the vector's constructed range through the existing range helper
+002f3024 _ZN9Obj5586e0C1Ev inferred constructor of polymorphic object and its embedded state object
+005586e0 _ZTV9Obj5586e0 inferred size:0x24 seven-slot parent vtable
+0055b074 _ZTV9Obj55b074 inferred size:0x10 embedded state-object vtable with a stripped deleting destructor
+002f6ed2 _ZN12ZeroWordPairaSERKS_ inferred pair copy-assignment returns its original destination in r0; void ABI incorrectly permits writeback to r0
+00522bf4 _ZN15Obj55aff4VectoraSERKS_ inferred complete polymorphic-string vector copy-assignment returns the destination object
+0053a204 g_onlineEmptyText inferred empty text sentinel used by the online-string default constructor
+0055c684 _ZTV9Obj42217c inferred size:0x18 twin status vtable includes stripped slot 0x08 and pure virtual slot 0x0c, ending at 0x55c69c
+0055951c _ZTV9Obj55951c inferred size:0x38 copied online-message value vtable, next vtable address point 0x55955c
+001327b4 onlineMessageListInsertCopy inferred copies the polymorphic message value into a newly allocated list node
+0030710c onlineMessageAllocateNode inferred obtains storage for a message-list node from its pool
+0043387c _ZN9Obj55ac68C1Ev inferred complete constructor of the word/string-state owner
+0055ad84 _ZTV9Obj55ad84 inferred size:0x10 base state-owner vtable, next address point 0x55ad9c
+00303928 _ZN9Obj5596acC1EhRK10WordVector inferred constructs the typed word value from a kind byte and source vector
+005596ac _ZTV9Obj5596ac inferred size:0x10 derived word-value vtable, next address point 0x5596c4
+0055a4b8 _ZTV9Obj55a4b8 inferred size:0x10 base word-value vtable, next address point 0x55a4d0
+002ff858 _ZN10WordVectorC1Ej inferred word-vector count constructor with the existing growth policy
+002ff8a8 _ZN10WordVectoraSERKS_ inferred word-vector assignment wrapper returns its destination
+0011b272 _ZN9Obj5596acaSERKS_ inferred copies the word-value state bytes and contained vector
+002e9f80 _ZN9Obj5593b8C1Ev inferred reference-counted base constructor initializes count one and clears its state flag
+005593b8 _ZTV9Obj5593b8 inferred size:0x10 shared-reference base vtable
+003038fc _ZN9Obj55b104C1Ejj inferred shared buffer constructor takes initial capacity and cursor offset
+0055b104 _ZTV9Obj55b104 inferred size:0x10 shared-buffer vtable, next address point 0x55b11c
+0030fe20 _ZN9Obj55b10412initCapacityEj inferred initializes the buffer allocation and resets its cursors
+002f4cac _ZN9Obj55b1045resetEv inferred resets both cursors to the configured offset from the buffer start
+0030fe6c _ZNK12ByteIteratorplEj inferred iterator addition returns a one-pointer iterator through hidden result r0, with source this in r1 and offset in r2
+002ea0b8 _ZN9Obj5593b8D1Ev inferred destructor in Obj5593b8 vtable slot zero; restores its vptr and clears the reference count
+003106d0 _ZN9Obj55b104D1Ev inferred destructor in Obj55b104 vtable slot zero; frees buffer storage and destroys Obj5593b8 base
+0047d8e8 _ZN14Obj422214OwnerD1Ev inferred same owner layout and member-destructor return chaining as smt4 0x394214
+00414204 uiOpenSelectedValueDialog inferred Formats selected value and constructs dialog settings callback and holder
+004aaabc uiDrawAnimatedItemDescriptionRow inferred Draws animated row label effect or category icon and description
+002c91d0 whisperAdvanceAnimations inferred Advances particle layer and line keyframe animations for whisper effect
+001533f0 renderCtxSetMirroredScissorRect inferred Clips scissor bounds against viewport and updates cached state
+004d1198 uiDrawFlagLabels inferred Draws text labels corresponding to enabled 64-bit flag bits
+004baa7c resultGetListEntryLabel inferred Chooses result-list entry pointer and label id by mode
+0037b5e0 uiDrawExtendedRecordLabel inferred Draws an extended record label including StreetPass description
+004a6828 callbackInvokeBoundMethod inferred Dispatches stored C++ member pointer including virtual and this adjustments
+0029d7f8 mapIfDrawWorldIndicators inferred Sorts and draws map interface world quads player target and marker effects
+001208e0 handleHolderOptionalQuery inferred Obj55a218 virtual query returns zero
+0032afe0 noopCallback inferred empty callback stored in a literal pool
+004a66c0 bibleViewUnusedHook inferred Obj55c8d0 empty virtual hook
+001208aa handleHolderDispatchStatus inferred dispatches virtual slot 0x0c
+00280068 objectGetSignedFlag inferred returns signed flag at 0x8a
+004a82c4 bibleViewGetSignedFlag inferred returns signed flag at 0x10
+00124dda filterRunDefaultUpdate inferred calls FUN_00103260 with zero mode
+001afc2c copyWordPair inferred copies two words
+002e0780 formatGetDigitCharacter inferred bounded eleven-byte character lookup with ASCII zero fallback
+0037a050 localTmnlOnComplete inferred sets local terminal byte 0x04 and returns work pointer
+00221bd4 compareFloatKeys inferred indirect float key difference converted to signed integer
+004a68f8 bibleViewDelete inferred restores base vptr and destroys embedded touch-selection member before freeing
+001bda40 dspDelayApplyUpdate inferred copies flag-selected delay-effect parameters then updates DSP
+003e66f8 npcShopUpdateState inferred advances NPC shop opening, transaction and closing script states
+004ce0c4 priceMenuUpdateScripts inferred advances script states and charges selected price
+002e3304 bufferDeleteOwnedPair inferred releases and destroys owned pair before operator delete
+0033e164 lmapRefreshScene28Selection inferred refreshes selection ten for active scene twenty-eight
+0017760c recordGetScaledMaximum inferred returns optional 1.25-times signed maximum
+0023ac54 gameDataStoreSavedRecord inferred copies an 80-byte indexed record and sets present bit
+004bd354 recordSetClampedCurrent inferred clamps and returns current value between one and scaled maximum
+0035deb0 uniteCreatePreviewModel inferred lazily creates fusion preview model with available VRAM budget
+0035a0bc controllerApplyPreset inferred selects controller preset and applies its position to linked targets
+0053627c g_digitCharacters inferred eleven-byte character lookup used by formatGetDigitCharacter
+00357f98 resourceEmptyCallback inferred Empty callback supplied by FUN_00291728.
+002df90c resourceDefaultFalseCallback inferred Callback supplied by FUN_00291728 returns zero.
+003de09c resourceGetSharedFlag inferred Returns the byte DAT_00588fac.
+003d213c callbackCompareDescendingState inferred Compares the 32-bit values at offset four by right minus left.
+00423d6c callbackResetStateAndCount inferred Clears words at offsets four and eight.
+00423e00 callbackResetStateCountAndPending inferred Clears words at offsets four, eight, and twelve.
+002897ac jobResetOwnerCallback inferred Calls slot 0x0c of the owner returned through jobGetWork then returns zero.
+00330524 battleDispatchAuxiliaryCommandMessage inferred Reads command result and dispatches auxiliary message at battle-state offset 0x226c.
+00588fac g_resourceSharedFlag inferred Byte returned by resourceGetSharedFlag.
+00120894 _ZN9Obj55a2189emptyHookEv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0010a39c _ZNK9Obj558c2817supportsOperationEv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+00123b9e _ZNK9Obj55a17817supportsOperationEv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+004125bc optionalCallbackNoop inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0047499c _ZN9Obj4221fcdlEPv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+004ad208 _ZN9Obj55c99c16forwardOperationEv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0050491c _ZNK9Obj55b8d016implementationIdEv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+00507170 _ZNK9Obj55bc9010descriptorEv inferred retail behavior; C-form current-symbol definition for integrator member conversion
+00115950 _ZN9Obj55984cD0Ev inferred retail behavior; C-form current-symbol definition for integrator member conversion
+00423a04 _ZNK9Obj420a2c13getOutputWordEj inferred retail behavior; C-form current-symbol definition for integrator member conversion
+003d4e88 dataSet16CompareByteKeys inferred retail behavior; C-form current-symbol definition for integrator member conversion
+00467de8 recordCompareSecondWord inferred retail behavior; C-form current-symbol definition for integrator member conversion
+00316148 shopProcessMarkFinished inferred retail behavior; C-form current-symbol definition for integrator member conversion
+004b0150 _ZN9Obj55c9e49copyFlagsEPK20SelectionValueRecord inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0047609c _ZN9Obj422278D0Ev inferred retail behavior; C-form current-symbol definition for integrator member conversion
+002c3328 callbackDispatchToPresentOwner inferred retail behavior; C-form current-symbol definition for integrator member conversion
+004a8318 _ZN9Obj55c920D0Ev inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0019e4a8 effectSubmitDefaultParameters inferred retail behavior; C-form current-symbol definition for integrator member conversion
+001432cc systemInitializeAndResetSharedState inferred retail behavior; C-form current-symbol definition for integrator member conversion
+003b6dc4 aocScriptReleaseTableAndReset inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0040a508 statsSetFirstBankFlag inferred retail behavior; C-form current-symbol definition for integrator member conversion
+004bd2b4 recordRestoreScaledMaximumPair inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0025ca50 effectApplyFiveComponentsWithDefaults inferred retail behavior; C-form current-symbol definition for integrator member conversion
+0053d618 g_defaultEffectParameterBlock inferred six-float block copied before effect submission
+0057f25c g_callbackOwnerSlots inferred owner pointer in second global slot used by callback dispatch
+003e5170 battleRecordInitializeFromDefinition inferred initializes battle stats and skills from a definition, then restores scaled maxima
+00474d08 deleteObjectAllocation inferred Tail-forwards the object pointer to asdOperatorDelete.
+00423a10 entryOwnerGetHandle inferred Returns Obj420a2c::handles[index] at offset 0x10.
+00119094 destroyAndDeleteObj55a178 inferred Calls FUN_003054b8 and passes its returned pointer to operatorDelete.
+00124240 copyWithReversedArguments inferred Adapts the source-first virtual callback to target-first FUN_00119da2.
+00151d9c modelManagerUpdateCallback inferred Calls FUN_00162a50 and returns zero.
+003de0ac compareHalfwordsDescending inferred Returns the unsigned right halfword minus the unsigned left halfword.
+004827d0 owner1DDelete inferred Runs owner1DDestroy and releases its returned owner through asdOperatorDelete.
+0029865c cleanupCompletionCallback inferred Returns -1 when engineCleanupIsDone reports completion, zero otherwise.
+0031619c terminalSignalComplete inferred Sets g_tmnl's byte at offset 4 to one.
+004ad20c selectionCopyWordValue inferred Copies payload word 0x18 plus identity words at 4 and 8.
+003b6de4 scriptPublishGameResultCallback inferred Sends g_gameState's word at 0xa4 to scrSetResult, calls FUN_003130cc, and returns one.
+0035973c soundReleaseCallbackAllocation inferred Frees and clears g_asdSoundSystem's allocation word at 0x4e0.
+004ad1d8 selectionReadBytePair inferred Decodes byte inputs into words at 0x14 and 0x18, returning two or -1 for short input.
+0050d1a4 selectionEqualWordValue inferred Compares identity words and the payload word at 0x18.
+004acf78 selectionCopyPackedValue inferred Copies halfwords 0x1a-0x20, bytes 0x22/0x23/0x18, and identity words.
+004a409c menuDispatchSelectedHandler inferred Dispatches the non-null member-function pointer indexed by word 0x14 in the table at 0xa8f8.
+0050cfb4 selectionEqualIntegerValues inferred Compares identity words, byte 0x18, and words 0x1c/0x20.
+0050d010 selectionEqualPackedValue inferred Compares identity words and the packed payload fields 0x18-0x23.
+0032ccf8 soundSetRegisteredVolume inferred Finds a sound id, clamps volume to 127, normalizes it and starts its volume fade.
+0063e944 g_soundHandleList inferred Head pointer and signed count of AsdSndHandleNode registrations.
+001631b8 jobStopChild inferred Looks up the job's work and stops its child handle at offset 4 with zero delay.
+00401178 drawStoreAndApplyParameters inferred Stores the option/position/value triples and forwards to FUN_00401198.
+00162758 drawTextAtSnappedRectangle inferred Adds rectangle origin and extent to floating coordinates, truncates to integer pixels, and forwards to FUN_00162790.
+0040a4cc statsTestFlag inferred Queries one of 32 bits in the persistent stats flags at offset 0x264.
+0040a55c statsSetFlag inferred Sets or clears one of 32 bits in the persistent stats flags at offset 0x264.
+002a1ca0 textureOwnerReset inferred Releases the owned texture and allocation and clears state/count.
+002e08c8 animationEvaluateCallback inferred Clamps elapsed time, invokes the callback and retains current/previous results.
+0025cab8 effectSubmitDefaultVectors inferred Submits three float vectors with all four integer selectors set to -1 between default begin/end blocks.
+0049c7a0 contentGetUpgradedKindValue inferred Includes capped equipment bonuses for the primary downloadable-content kind value.
+0035da74 statusMarkNewSkills inferred Replaces the status skill list and marks skills missing from its previous eight-slot history.
+002f01e0 statusReplaceSkills inferred Copies the supplied skills, clears new-skill flags and configures the nonempty-prefix selector.
+001676b0 effectDispatchSelector inferred Maps selector kinds to effect table 11 and restores global effect speed after submission.
+0041aab0 battleUpdateRotatingObjects inferred Advances object counters and rotates the selected index using the battle-frame period of 37.
+0041748c cleanupProcessUpdate inferred Drives script/async cleanup phases, delegates specialized states and returns -1 on state seven.
+00151418 renderSceneUpdate inferred Dispatches active render owners, conditionally visits the render tree and resets per-frame traversal state.
+00295be0 uiResetLayerWidgetState inferred Resets sixty-four layer records, nine widgets and three overlays in DAT_00581270.
+003f7c2c unlockLogMenuUpdate inferred Advances unlock-log UI animation, script and resource-loading states.
+003e2bd8 battleEncounterTaskUpdate inferred Dispatches twenty-seven encounter phases and completes only after action counts and event commands drain.
+00284524 mobiclipProcessUpdate inferred Movie process callback registered by mobiclipProcessCreate; enumerates movies and drives playback, skipping and recovery.
+0040ba84 playerLoadOutfitModels inferred Resolves head/body/leg equipment model variants and loads their player BAM resource paths.
+003a4980 characterInfoPanelPopulate inferred Apocalypse profile panel population, including special-item labels and portrait texture requests.
+00118988 onlineDispatchPacket inferred Dispatches packet kinds 1 through 44 and constructs an error result for invalid kinds.
+0062d744 g_onlinePacketHandlers inferred 44-entry callback table indexed by validated packet kind minus one.
+00439f44 synchronizedListMarkEntry inferred Locks the owner, searches its list, and sets the pending flag unless the entry is state three.
+004ace04 packedDimensionDecode inferred Decodes a two-byte header and packed 24/8-bit dimensions.
+004acef0 shortValueRecordDecode inferred Decodes the header, four big-endian short values, and two trailing bytes.
+004f23b0 cameraBeginPositionTransition inferred Initializes the mode-dependent position transition and its camera offsets.
+005e1530 g_cameraAlternateProgressStart inferred Receives the alternate progress vector when a position transition begins.
+005e153c g_cameraAlternateProgressPrevious inferred Receives the saved alternate-progress vector in camera mode one.
+005e1548 g_cameraUnoffsetStartPosition inferred Stores the starting position after subtracting the camera offset.
+0042138c modelResourceOwnerInitialize inferred Builds the source model list, initializes named channels, and registers models.
+00185990 uiSpriteSetAnimationCommand inferred Selects a command stream and resets supplied animation channels.
+00140bb8 accelerometerUpdate inferred Initializes the reader, refreshes the sample, and optionally rotates/clamps raw axes.
+005c1478 g_accelerometerInitGuard inferred Guard word for one-time accelerometer reader construction.
+00647448 g_accelerometerState inferred Reader state followed by the live accelerometer sample and transform fields.
+006474a0 g_accelerometerLiveState inferred Interior live-state alias at accelerometer state plus 0x58.
+006474ac g_accelerometerRawSample inferred Interior raw-sample alias containing three signed axes and status.
+00359094 gpuSubmitFloat24Vectors inferred Packs two vectors and a coordinate pair into float24 words before submission.
+0063f548 g_gpuFloat24ExponentTable inferred 256-entry IEEE exponent conversion table used by float24 packing.
+0027d754 mapEnemyCleanupUpdate inferred Unregisters and releases map-enemy resources through the cleanup state machine.
+0024ebe4 battleRosterMotionUpdate inferred Updates active roster motion, model handles, color/alpha interpolation, and state counters.
+0057aa68 g_battleMotionCombatantClearMask inferred 64-bit combatant flag mask cleared when ordinary motion completes.
+0040a5a0 statsSetAdditionalFlag inferred Sets or clears a bit in the stats block's additional flag bytes.
+003e4510 areaConsumeOneShotFlags inferred Tests and clears the paired one-shot area flags 128 and 129.
+0039a3b4 textureRequestCacheGet inferred Maps a request to its texture code and returns/initializes its cache state.
+003fac30 spriteDrawWithOrigin inferred Adjusts position by the sprite origin and dimensions before forwarding the draw.
+00570d5c g_spriteDrawYOffset inferred Global Y offset added by the origin-adjusted sprite draw.
+0048560c textDrawEncodedGlyph inferred Draws a two-byte glyph with missing-glyph substitution and dim/highlight controls.
+00385264 transitionDrawExpandingImages inferred Expands two transition images and fades them near the end of the frame sequence.
+002c2d70 scalarTimelineUpdate inferred Advances scalar keyframe intervals and applies the current step toward the target.
+00389d9c statDrawClampedDelta inferred Draws a bounded stat delta with separate colors for its limits and sign.
+0049f700 partyTryInflictCondition inferred Applies probabilistic conditions to selected player/party groups while respecting resistances.
+004cc6d4 playerAdvanceLevelsAndRecover inferred Advances levels and growth, then adjusts HP/MP according to recovery flags.
+00227048 requestImageDraw inferred Draws the selected request image and its loaded code overlay.
+004f8a58 battleCloneRoutedMaterialChannels inferred Clones a matching model and transfers selected material animation channels.
+002a2210 saveSlotDrawSummary inferred Draws a save-slot summary with portraits, level, elapsed time, and location.
+00480960 equipmentHasPositiveUpgrade inferred Checks category-specific positive upgrade bonuses for equipment categories four through six.

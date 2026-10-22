@@ -14,7 +14,7 @@ int nodeTreeReleaseItemClearOwner(double);
 int FUN_0028324c(int, double, int);
 int FUN_00283328(int, double, int);
 int nodeTreeReleaseItem(...);
-int FUN_002c2d70(...);
+int scalarTimelineUpdate(...);
 int FUN_002e5de0(...);
 int sysMemClear(float *, int);
 int FUN_0034a16c(float *, float *, float *, float *);
@@ -73,7 +73,7 @@ extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028324c. */
 /* Supplied declaration required: FUN_00283328. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
-/* Supplied declaration required: FUN_002c2d70. */
+/* Supplied declaration required: scalarTimelineUpdate. */
 /* Supplied declaration required: FUN_002e5de0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a16c. */
@@ -315,7 +315,7 @@ void FUN_00260158(float *param_1)
   temp_v17 = param_1 + 4;
   temp_v16 = param_1 + 1;
   temp_v18 = param_1 + 7;
-  FUN_002c2d70(param_1 + 0x66,param_1 + 0xd,param_1 + 0x11,param_1 + 0xf);
+  scalarTimelineUpdate(param_1 + 0x66,param_1 + 0xd,param_1 + 0x11,param_1 + 0xf);
   temp_v17 = param_1 + 5;
   temp_v16 = param_1 + 2;
   temp_v18 = param_1 + 8;

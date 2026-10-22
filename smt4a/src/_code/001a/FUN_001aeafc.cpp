@@ -1,4 +1,3 @@
-/* NON_MATCHING: backing-buffer load is scheduled before the state reset instead of after it. */
 #include "common.h"
 
 struct OwnedResource;

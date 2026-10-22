@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001676b0(int, int, int, int);
+int effectDispatchSelector(int, int, int, int);
 int FUN_0035ae58(int, int, int, int, int);
 int __aeabi_idivmod(int, int);
 
@@ -22,7 +22,7 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_001676b0. */
+/* Supplied declaration required: effectDispatchSelector. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_0035ae58. */
@@ -118,9 +118,9 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
                   FUN_0035ae58(param_3 + *(short *)(temp_v1 + 8),*(short *)(temp_v1 + 10) + param_4,
                                (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1],1);
                   temp_v10 = (*piVar6 - 0x14) * -3;
-                  FUN_001676b0((int)temp_v11,(int)*(short *)(temp_v1 + 8) + temp_v10 + param_3,
+                  effectDispatchSelector((int)temp_v11,(int)*(short *)(temp_v1 + 8) + temp_v10 + param_3,
                                *(short *)(temp_v1 + 10) + param_4,0x7e);
-                  FUN_001676b0((int)temp_v0,(int)*(short *)(temp_v1 + 8) + param_3 + temp_v10 + 0xd,
+                  effectDispatchSelector((int)temp_v0,(int)*(short *)(temp_v1 + 8) + param_3 + temp_v10 + 0xd,
                                *(short *)(temp_v1 + 10) + param_4,0x7e);
                   temp_v10 = g_renderCtx;
                   piVar7 = (int *)(g_renderCtx + 0x1318);
@@ -141,7 +141,7 @@ void FUN_004b42b0(int param_1,int param_2,int param_3,int param_4)
             } while( 1 );
           }
         }
-        FUN_001676b0((int)temp_v11,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,
+        effectDispatchSelector((int)temp_v11,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,
                      0x7e);
         return;
       }

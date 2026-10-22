@@ -8,7 +8,7 @@ int FUN_00218c50(int);
 int btlDrawFloatingNumbers(int, int);
 int pairSetHalves(int, int, int);
 int FUN_002b7638(...);
-int FUN_002b93c8(int);
+int effectRenderTransformedInstance(int);
 int FUN_002ba12c(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -56,7 +56,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_002b7638. */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -137,7 +137,7 @@ unsigned int FUN_001b72e0(void)
           pairSetHalves(temp_v4 + 0xe0ac,(int)(short)(int)*(float *)(temp_v4 + 0xe1d0),
                        (int)(short)(int)*(float *)(temp_v4 + 0xe1d4));
           VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002b93c8(temp_v4 + 0xe0ac);
+          effectRenderTransformedInstance(temp_v4 + 0xe0ac);
           temp_v0 = g_titleScene;
           if (*(char *)(temp_v4 + 0xe1bd) != '\0') {
             temp_v2 = packNibblesAndByte(6,1,0);
@@ -154,9 +154,9 @@ unsigned int FUN_001b72e0(void)
                                                  ));
             *(unsigned int *)(temp_v4 + 0xe168) = *(unsigned int *)(temp_v4 + 0xe1c8);
             VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002b93c8(temp_v0);
+            effectRenderTransformedInstance(temp_v0);
             VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002b93c8(temp_v0);
+            effectRenderTransformedInstance(temp_v0);
             temp_v4 = g_titleScene;
             temp_v0 = packNibblesAndByte(6,7,0);
             piVar5 = (int *)(temp_v4 + 0x12ac);

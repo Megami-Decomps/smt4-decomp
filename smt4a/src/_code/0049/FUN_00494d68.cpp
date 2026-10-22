@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162758(...);
+int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int FUN_0018349c(...);
 int FUN_001ba3d0(...);
@@ -37,13 +37,13 @@ extern unsigned char LAB_004954e0; /* 0x4954e0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162758. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: FUN_001ba3d0. */
 /* Supplied declaration required: FUN_0047fc38. */
 extern int FUN_0047fe44(unsigned int);
-extern int FUN_00480960(unsigned int);
+extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_0049339c. */
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004934ac. */
@@ -193,7 +193,7 @@ LAB_00495274:
           temp_v4 = -0x64646401;
         }
         if (!(temp_v10 == 0x787878ff || temp_v10 == temp_v4)) {
-          temp_v4 = FUN_00480960(temp_v12);
+          temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
           if (temp_v4 != 0) {
             temp_v7 = temp_v12;
             FUN_0047fc38();
@@ -229,7 +229,7 @@ LAB_00495274:
         temp_v10 = -0x64646401;
       }
       else {
-        temp_v4 = FUN_00480960(temp_v12);
+        temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
         if (temp_v4 != 0) {
           temp_v7 = temp_v12;
           FUN_0047fc38();
@@ -249,7 +249,7 @@ LAB_00495274:
         temp_v10 = -0x64646401;
       }
       else {
-        temp_v4 = FUN_00480960(temp_v12);
+        temp_v4 = equipmentHasPositiveUpgrade(temp_v12);
         if (temp_v4 != 0) {
           temp_v7 = temp_v12;
           FUN_0047fc38();
@@ -266,7 +266,7 @@ LAB_00495274:
   temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v15);
   VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162758(param_1 + 0x3a4,temp_v5,temp_v10,temp_v14);
+  drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v5,temp_v10,temp_v14);
   if (temp_v16 != 0) {
     if (*(int *)(param_1 + 0xb40) != 8) {
       temp_v5 = FUN_0049cad0();

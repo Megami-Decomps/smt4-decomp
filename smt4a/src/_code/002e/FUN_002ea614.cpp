@@ -12,7 +12,7 @@ int FUN_002ecac4(int);
 extern unsigned char DAT_0055b1ec; /* 0x55b1ec */
 extern unsigned char DAT_00594ec4; /* 0x594ec4 */
 
-extern int onlineStringDestroy(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 /* Supplied declaration required: FUN_002ea2a8. */
 /* Supplied declaration required: FUN_002ea2b4. */
 /* Supplied declaration required: ptrHolderDestroy. */
@@ -35,7 +35,7 @@ void FUN_002ea614(unsigned int *param_1,unsigned int param_2,unsigned int param_
   FUN_002ea2a8(&uStack_10,0);
   FUN_002ea2b4(&DAT_00594ec4,&uStack_10);
   ptrHolderDestroy(&uStack_10);
-  temp_v0 = onlineStringDestroy(param_1 + 0x44);
+  temp_v0 = _ZN9Obj55aff4D1Ev(param_1 + 0x44);
   temp_v0 = ptrHolderDestroyAlias(temp_v0 - 8);
   temp_v0 = FUN_002fb028(temp_v0 - 0xa0);
   FUN_002ecac4(temp_v0 - 0x68);

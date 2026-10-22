@@ -11,7 +11,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00185e84(...);
 int largeGridDrawButtonStrip(int, int, int, int);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
 
@@ -38,7 +38,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern int FUN_00284140(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: largeGridDrawButtonStrip. */
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004bd6b0. */
@@ -98,7 +98,7 @@ void FUN_003cce74(int param_1,unsigned int param_2,int param_3,int param_4)
     if (temp_v5 == 0) {
       FUN_004bd6b0(temp_v8,*(unsigned short *)(temp_v3 + 0x8b60),temp_v0);
     }
-    FUN_00389d9c(temp_v8,(int)*(short *)(temp_v3 + 0x8b60),
+    statDrawClampedDelta(temp_v8,(int)*(short *)(temp_v3 + 0x8b60),
                  (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_3,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_4,0x74,0);
     temp_v0 = FUN_001834a4(0x1a,0x1a6);

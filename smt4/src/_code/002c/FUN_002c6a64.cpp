@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, int);
-int FUN_002b93c8(int);
+int effectRenderTransformedInstance(int);
 int FUN_002ba12c(int);
 int FUN_002bf288(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -25,7 +25,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -55,7 +55,7 @@ void FUN_002c6a64(int param_1)
   temp_v3 = btlGetMainState();
   if ((*(unsigned int *)(temp_v3 + 0x44a0) & 0x200) == 0) {
     VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(param_1 + 0x1c4);
+    effectRenderTransformedInstance(param_1 + 0x1c4);
   }
   temp_v6 = (float)((unsigned long long)temp_v8 >> 0x20);
   FUN_002ba12c(g_titleScene);
@@ -101,7 +101,7 @@ void FUN_002c6a64(int param_1)
   }
   if (*(char *)(param_1 + 0x25d) != '\0') {
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     temp_v2 = g_titleScene;
     temp_v4 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
@@ -112,7 +112,7 @@ void FUN_002c6a64(int param_1)
       *(unsigned char *)(temp_v2 + 0x12c4) = 0;
     }
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(param_1 + 0x138);
+    effectRenderTransformedInstance(param_1 + 0x138);
     temp_v2 = g_titleScene;
     temp_v4 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
@@ -123,7 +123,7 @@ void FUN_002c6a64(int param_1)
       *(unsigned char *)(temp_v2 + 0x12c4) = 0;
     }
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(param_1 + 0xac);
+    effectRenderTransformedInstance(param_1 + 0xac);
     return;
   }
   return;

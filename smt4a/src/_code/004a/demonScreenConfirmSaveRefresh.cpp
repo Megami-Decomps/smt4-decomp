@@ -72,13 +72,13 @@ s32 FUN_002a4b74();
 LiveDemon *slotEntryFindById(u16);
 s32 gameDataCopySaveEntry(u16, SavedDemon *);
 void rt_memcpy_w(void *, const void *, u32);
-void FUN_0023ac54(u16, SavedDemon *);
+void gameDataStoreSavedRecord(u16, SavedDemon *);
 void FUN_004a1958(DemonScreen *);
 u32 buttonHelpGetValue();
 void sysPlaySe(u32);
 void FUN_003343f0(u32);
 void screen4AEnter(DemonScreen *);
-void FUN_0035deb0();
+void uniteCreatePreviewModel();
 
 // Refresh selected saved demons from their current stats after confirming the dialog.
 void demonScreenConfirmSaveRefresh(DemonScreen *screen)
@@ -110,7 +110,7 @@ void demonScreenConfirmSaveRefresh(DemonScreen *screen)
                 saved.extra = demon->extra;
                 rt_memcpy_w(saved.inherited, demon->inherited, sizeof(saved.inherited));
                 saved.flags = demon->flags & 0xf;
-                FUN_0023ac54(id, &saved);
+                gameDataStoreSavedRecord(id, &saved);
             }
         }
         FUN_004a1958(screen);
@@ -119,7 +119,7 @@ void demonScreenConfirmSaveRefresh(DemonScreen *screen)
     FUN_003343f0(0);
     if (screen->list.count <= 0) {
         screen4AEnter(screen);
-        FUN_0035deb0();
+        uniteCreatePreviewModel();
         return;
     }
     screen->state = 2;

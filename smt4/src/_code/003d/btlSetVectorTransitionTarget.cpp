@@ -9,12 +9,12 @@ struct VectorTransitionGlobals {
 
 extern "C" {
 extern VectorTransitionGlobals g_btlMain;
-void FUN_003d6c88(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z);
+void battleRouteVectorTransition(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z);
 
 void btlSetVectorTransitionTarget(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z)
 {
     if (g_btlMain.routingMode >= 1) {
-        FUN_003d6c88(g_btlMain.state, target, mode, x, y, z);
+        battleRouteVectorTransition(g_btlMain.state, target, mode, x, y, z);
         return;
     }
     state->alternateDestination.x = x;

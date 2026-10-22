@@ -10,13 +10,13 @@ typedef struct {
 } param_3_stack;
 
 extern int DAT_00571530; /* 0x571530 */
-extern unsigned int DAT_005e1530; /* 0x5e1530 */
+extern unsigned int g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern unsigned int DAT_005e1534; /* 0x5e1534 */
 extern unsigned int DAT_005e1538; /* 0x5e1538 */
-extern unsigned int DAT_005e153c; /* 0x5e153c */
+extern unsigned int g_cameraAlternateProgressPrevious; /* 0x5e153c */
 extern unsigned int DAT_005e1540; /* 0x5e1540 */
 extern unsigned int DAT_005e1544; /* 0x5e1544 */
-extern unsigned int DAT_005e1548; /* 0x5e1548 */
+extern unsigned int g_cameraUnoffsetStartPosition; /* 0x5e1548 */
 extern unsigned int DAT_005e154c; /* 0x5e154c */
 extern unsigned int DAT_005e1550; /* 0x5e1550 */
 
@@ -41,14 +41,14 @@ void FUN_004f1b2c(int param_1,unsigned int param_2,unsigned int param_3)
       *(unsigned int *)(param_1 + 0x884) = 0;
     }
     else {
-      DAT_005e1530 = *(unsigned int *)(param_1 + 0x884);
+      g_cameraAlternateProgressStart = *(unsigned int *)(param_1 + 0x884);
       DAT_005e1534 = *(unsigned int *)(param_1 + 0x888);
       DAT_005e1538 = *(unsigned int *)(param_1 + 0x88c);
       *puVar1 = in_s0;
       *(unsigned int *)(param_1 + 0x5e0) = in_s1;
       *(unsigned int *)(param_1 + 0x5e4) = in_s2;
       DAT_005e1544 = DAT_005e1538;
-      DAT_005e153c = DAT_005e1530;
+      g_cameraAlternateProgressPrevious = g_cameraAlternateProgressStart;
       DAT_005e1540 = DAT_005e1534;
       *(unsigned int *)(param_1 + 0x88c) = 0;
       *(unsigned int *)(param_1 + 0x888) = 0;
@@ -63,10 +63,10 @@ void FUN_004f1b2c(int param_1,unsigned int param_2,unsigned int param_3)
     }
   }
   else {
-    DAT_005e1548 = *(unsigned int *)(param_1 + 0x7c);
+    g_cameraUnoffsetStartPosition = *(unsigned int *)(param_1 + 0x7c);
     DAT_005e154c = *(unsigned int *)(param_1 + 0x80);
     DAT_005e1550 = *(unsigned int *)(param_1 + 0x84);
-    DAT_005e1530 = *(unsigned int *)(param_1 + 0x884);
+    g_cameraAlternateProgressStart = *(unsigned int *)(param_1 + 0x884);
     DAT_005e1534 = *(unsigned int *)(param_1 + 0x888);
     DAT_005e1538 = *(unsigned int *)(param_1 + 0x88c);
     *puVar1 = in_s0;

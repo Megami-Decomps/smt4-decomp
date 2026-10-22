@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned int *, int);
+int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 int _ZN9Obj55b28cD1Ev(unsigned int *);
 
 typedef int romwright_code(...);
@@ -13,7 +13,7 @@ typedef int romwright_code(...);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *FUN_0030f044(int, unsigned int);
 
@@ -33,7 +33,7 @@ long long FUN_001239f2(int param_1,unsigned int param_2,unsigned int param_3,uns
   uStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
   if (*(int *)(param_1 + 8) != 0) {
     piVar2 = (int *)FUN_0030f044(param_1,0xb);
     if ((piVar2 == (int *)0x0) || (temp_v0 = (**(romwright_code **)(*piVar2 + 0x2c))(), temp_v0 == 0)) {

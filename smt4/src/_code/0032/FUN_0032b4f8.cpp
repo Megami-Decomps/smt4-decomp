@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00241d44(float *);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int FUN_002b011c(void);
 int FUN_002c1ac8(float *);
 int FUN_002c1b64(unsigned int, unsigned int);
@@ -63,7 +63,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00241d44. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002c1ac8. */
@@ -261,7 +261,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
     FUN_00241d44(&temp_v21);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 4);
-  FUN_0025b750();
+  forwardRecoveredCallback();
   return;
 }
 

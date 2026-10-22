@@ -5,7 +5,7 @@
 extern "C" {
 
 int effectSpawnPositionDefault(unsigned int);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int FUN_002b011c(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002b011c. */
 
 
@@ -49,7 +49,7 @@ void FUN_002d5900(unsigned int param_1,unsigned int param_2)
     effectSpawnPositionDefault(param_2);
     effectSpawnPositionDefault(param_1);
     effectSpawnPositionDefault(param_2);
-    FUN_0025b750();
+    forwardRecoveredCallback();
     return;
   }
   return;

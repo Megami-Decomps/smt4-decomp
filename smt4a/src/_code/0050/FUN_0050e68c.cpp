@@ -5,7 +5,7 @@
 extern "C" {
 
 int nn_os_CriticalSection_Initialize(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 extern int FUN_0042d1cc(...); /* 0x42d1cc */
 extern unsigned char LAB_0043a2e8; /* 0x43a2e8 */
@@ -23,7 +23,7 @@ extern unsigned int DAT_006464a4; /* 0x6464a4 */
 extern unsigned char DAT_006464a8; /* 0x6464a8 */
 
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_0050e68c(unsigned int param_1,unsigned int param_2,unsigned int *param_3)
@@ -36,7 +36,7 @@ void FUN_0050e68c(unsigned int param_1,unsigned int param_2,unsigned int *param_
   DAT_005c0b2c = 0;
   DAT_006463c4 = 0;
   nn_os_CriticalSection_Initialize(&DAT_006463c4,FUN_0042d1cc,0x100000);
-  FUN_002f5020(&DAT_006463d0,&LAB_0043a2e8,0xc,0x10);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_006463d0,&LAB_0043a2e8,0xc,0x10);
   DAT_00646490 = 0;
   DAT_00646494 = 0;
   DAT_00646498 = 0;

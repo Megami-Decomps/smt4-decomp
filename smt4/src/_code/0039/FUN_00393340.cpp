@@ -10,9 +10,9 @@ int FUN_003930e4(unsigned int *);
 extern unsigned char DAT_0042219c; /* 0x42219c */
 extern unsigned char DAT_004221a8; /* 0x4221a8 */
 
-extern unsigned int *uiSelectionControllerConstruct(int);
+extern unsigned int *_ZN9Obj422594C1Ev(int);
 /* Supplied declaration required: timeInitializeActiveState. */
-extern int FUN_00287314(int);
+extern int _ZN14SelectionFlagsC1Ev(int);
 /* Supplied declaration required: FUN_003930e4. */
 
 
@@ -26,9 +26,9 @@ unsigned int * FUN_00393340(unsigned int *param_1)
   *param_1 = 0;
   temp_v0 = timeInitializeActiveState(param_1 + 0x84);
   temp_v0 = timeInitializeActiveState(temp_v0 + 0x14);
-  temp_v0 = FUN_00287314(temp_v0 + 0x1c);
+  temp_v0 = _ZN14SelectionFlagsC1Ev(temp_v0 + 0x1c);
   *(unsigned char **)(temp_v0 + 0x74) = &DAT_0042219c;
-  puVar2 = (unsigned int *)uiSelectionControllerConstruct(temp_v0 + 0xa8);
+  puVar2 = (unsigned int *)_ZN9Obj422594C1Ev(temp_v0 + 0xa8);
   *puVar2 = (unsigned int)&DAT_004221a8;
   puVar2[0x1a] = 0;
   puVar2[0x1b] = 0;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00373ee0(unsigned int);
+int _ZN9Obj421874D1Ev(unsigned int);
 int nw_ut_MoveArray_nn_math_MTX34_MoveArray_sub_object(...);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00373ee0. */
+/* Supplied declaration required: _ZN9Obj421874D1Ev. */
 /* Supplied declaration required: nw_ut_MoveArray_nn_math_MTX34_MoveArray_sub_object. */
 
 
@@ -76,7 +76,7 @@ void FUN_00368504(unsigned int *param_1,unsigned int param_2)
   if (*(int **)(temp_v1 - 0x20) != (int *)0x0 && temp_v2 != 0) {
     (**(romwright_code **)(**(int **)(temp_v1 - 0x20) + 0xc))();
   }
-  FUN_00373ee0(temp_v1 - 0x3c);
+  _ZN9Obj421874D1Ev(temp_v1 - 0x3c);
   return;
 }
 

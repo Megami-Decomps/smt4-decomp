@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003faab4(...);
-int FUN_003fb2c0(...);
+int ownedTreeRecycleSubtree(...);
 
 typedef struct fn_003fb11c_arg1 fn_003fb11c_arg1;
 struct fn_003fb11c_arg1 {
@@ -24,7 +24,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_003faab4. */
-/* Supplied declaration required: FUN_003fb2c0. */
+/* Supplied declaration required: ownedTreeRecycleSubtree. */
 
 
 void FUN_003fb11c(unsigned int *param_1,fn_003fb11c_arg1 *param_2,int *param_3,int *param_4)
@@ -51,7 +51,7 @@ void FUN_003fb11c(unsigned int *param_1,fn_003fb11c_arg1 *param_2,int *param_3,i
   if ((!(temp_v2 || pvVar4 != pvVar1)) && (param_2->field_0x18 != 0)) {
     temp_v0 = *(int *)((int)pvVar1 + 4);
     while (temp_v0 != 0) {
-      FUN_003fb2c0(param_2,*(unsigned int *)(temp_v0 + 0xc));
+      ownedTreeRecycleSubtree(param_2,*(unsigned int *)(temp_v0 + 0xc));
       temp_v1 = *(int *)(temp_v0 + 8);
       *(int *)(temp_v0 + 0xc) = param_2->field_0x8;
       puVar2 = *(unsigned int **)(temp_v0 + 0x1c);

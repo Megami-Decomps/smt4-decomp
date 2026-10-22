@@ -1,4 +1,3 @@
-/* NON_MATCHING: multiplication operands are reversed in armcc's emitted MUL. */
 #include "common.h"
 
 extern "C" {

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002ff858(unsigned int *, int);
+int _ZN10WordVectorC1Ej(unsigned int *, int);
 
 extern unsigned char DAT_0055ac80; /* 0x55ac80 */
 extern unsigned char DAT_0055ad9c; /* 0x55ad9c */
 
-/* Supplied declaration required: FUN_002ff858. */
+/* Supplied declaration required: _ZN10WordVectorC1Ej. */
 
 
 void FUN_0011f57c(unsigned int *param_1)
@@ -19,7 +19,7 @@ void FUN_0011f57c(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055ad9c;
   *(unsigned char *)(param_1 + 1) = 0;
   param_1 = param_1 + 2;
-  FUN_002ff858(param_1,0);
+  _ZN10WordVectorC1Ej(param_1,0);
   param_1[-2] = (unsigned int)&DAT_0055ac80;
   return;
 }

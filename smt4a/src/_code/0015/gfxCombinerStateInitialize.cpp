@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match7_CombinerState.h"
 
 extern "C" {
-void* FUN_002f5020(u8* begin, void* (*construct)(void*), u32 stride, u32 count);
+void* __aeabi_vec_ctor_nocookie_nodtor(u8* begin, void* (*construct)(void*), u32 stride, u32 count);
 void* gfxCombinerStageConstruct(void* stage);
 void* FUN_00197eac(void* operand);
 void* FUN_00197ea8(void* source);
@@ -12,8 +12,8 @@ namespace {
 inline void initializeCombinerChannel(CombinerChannel* channel, u8 stageIndex)
 {
     channel->function = 0;
-    FUN_002f5020(channel->operands, FUN_00197eac, sizeof(u8), 3);
-    FUN_002f5020(channel->sources, FUN_00197ea8, sizeof(u8), 3);
+    __aeabi_vec_ctor_nocookie_nodtor(channel->operands, FUN_00197eac, sizeof(u8), 3);
+    __aeabi_vec_ctor_nocookie_nodtor(channel->sources, FUN_00197ea8, sizeof(u8), 3);
     channel->scale = 0;
     channel->bufferInput = 0;
     channel->operands[0] = channel->operands[1] = channel->operands[2] = 0;
@@ -25,7 +25,7 @@ inline void initializeCombinerChannel(CombinerChannel* channel, u8 stageIndex)
 // Start with a constant-black stage followed by five pass-through stages.
 extern "C" void* gfxCombinerStateInitialize(void* storage)
 {
-    CombinerState* state = static_cast<CombinerState*>(FUN_002f5020(
+    CombinerState* state = static_cast<CombinerState*>(__aeabi_vec_ctor_nocookie_nodtor(
         static_cast<u8*>(storage), gfxCombinerStageConstruct, sizeof(CombinerStage), 6));
     state->bufferColor.r = 0;
     state->bufferColor.g = 0;

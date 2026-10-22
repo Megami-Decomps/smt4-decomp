@@ -17,12 +17,12 @@ typedef struct Object {
 
 extern u8 DAT_00422400;
 
-extern Object *FUN_0022cb58(void *heap);
+extern Object *_ZN9Obj42247cC1Ev(void *heap);
 extern void FUN_003a8cc8(Object *obj);
 
 Object *FUN_003aa7d4(void *heap, u32 value)
 {
-    Object *obj = FUN_0022cb58(heap);
+    Object *obj = _ZN9Obj42247cC1Ev(heap);
 
     obj->vtbl = &DAT_00422400;
     FUN_003a8cc8(obj);

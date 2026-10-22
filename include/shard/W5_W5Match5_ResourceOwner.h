@@ -5,7 +5,7 @@
 
 class Obj557dcc {
 public:
-    Obj557dcc();
+    Obj557dcc(u32 value);
     virtual ~Obj557dcc();
 
     /* 0x04 */ u32 value;

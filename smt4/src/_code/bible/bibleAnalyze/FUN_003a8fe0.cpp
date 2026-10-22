@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022dde8(...);
 int FUN_0022e2fc(void);
 int rectangleInitializeSelection(...);
-int uiSelectionControllerConstruct(void);
+int _ZN9Obj422594C1Ev(void);
 int uiInitializeEightTimerSet(...);
 int FUN_00233670(...);
 int FUN_00240cec(int);
@@ -43,7 +43,7 @@ extern int *DAT_0043d990; /* 0x43d990 */
 /* Supplied declaration required: FUN_0022dde8. */
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: uiSelectionControllerConstruct. */
+/* Supplied declaration required: _ZN9Obj422594C1Ev. */
 /* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_00233670. */
 extern int rangeLimitMin(int *);
@@ -97,7 +97,7 @@ void FUN_003a8fe0(int *param_1)
     asdOperatorNew();
     puVar5 = (unsigned int *)0x0;
     if (temp_v0 != 0) {
-      puVar5 = (unsigned int *)uiSelectionControllerConstruct();
+      puVar5 = (unsigned int *)_ZN9Obj422594C1Ev();
       *puVar5 = (unsigned int)&DAT_00422394;
     }
     param_1[0x164] = (int)puVar5;
@@ -126,7 +126,7 @@ void FUN_003a8fe0(int *param_1)
     asdOperatorNew();
     piVar1 = (int *)0x0;
     if (temp_v0 != 0) {
-      piVar1 = (int *)uiSelectionControllerConstruct();
+      piVar1 = (int *)_ZN9Obj422594C1Ev();
       *piVar1 = (int)&DAT_00422434;
     }
     param_1[0x164] = (int)piVar1;

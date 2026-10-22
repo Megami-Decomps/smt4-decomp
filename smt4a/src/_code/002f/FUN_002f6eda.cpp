@@ -5,7 +5,7 @@
 extern "C" {
 
 int onlineContextGetInstance(void);
-int FUN_002e6e34(unsigned int *, int);
+int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 int _ZN9Obj55b28cD1Ev(unsigned int *);
 int sharedRefRelease(void);
 int sharedRefAddRef(void);
@@ -17,7 +17,7 @@ int FUN_002e78d0(unsigned int, unsigned int, int);
 #endif
 extern unsigned int FUN_0011c750(int, unsigned int, int);
 /* Supplied declaration required: onlineContextGetInstance. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
@@ -40,7 +40,7 @@ long long FUN_002f6eda(int param_1,unsigned int param_2,unsigned int param_3,uns
   uStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
   temp_v0 = onlineOwnerHasPendingJob(param_1);
   if (temp_v0 != 0) {
     _ZN9Obj55b28cD1Ev(&uStack_18);

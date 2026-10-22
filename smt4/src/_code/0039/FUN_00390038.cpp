@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00126fb8(int);
 int FUN_00297060(int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int memClear(int, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
@@ -29,8 +29,8 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002a126c. */
 extern unsigned int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 extern unsigned int fileLoadSync(char *, unsigned char *, unsigned int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
@@ -63,11 +63,11 @@ void FUN_00390038(int param_1)
   FUN_002a126c(temp_v5,g_aocSystem);
   FUN_00126fb8(g_aocMain + 0x80);
   temp_v5[0] = 0;
-  puVar2 = (unsigned int *)FUN_002bad5c(temp_v6);
+  puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v6);
   puVar2[2] = 0;
   puVar2[3] = 0;
   puVar3 = temp_v8;
-  resultPairInitialize(puVar3,0);
+  _ZN18WindowStatusResultC1Ej(puVar3,0);
   temp_v1 = *puVar3;
   temp_v2 = puVar3[1];
   *puVar2 = temp_v1;

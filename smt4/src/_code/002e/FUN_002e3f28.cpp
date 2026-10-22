@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler schedules the prologue, loads and argument setup differently from retail. */
 #include "common.h"
 
 namespace { struct Battle { u8 padding[0x4968]; s16 first; s16 second; }; }

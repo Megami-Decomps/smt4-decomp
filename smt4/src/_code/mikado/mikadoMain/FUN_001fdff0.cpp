@@ -24,8 +24,8 @@ extern unsigned int DAT_0044cfd8; /* 0x44cfd8 */
 extern unsigned int DAT_0044cfdc; /* 0x44cfdc */
 
 /* Supplied declaration required: FUN_00254dfc. */
-extern int FUN_00263c34(int);
-extern int FUN_00287314(int);
+extern int _ZN9Obj55ca08D1Ev(int);
+extern int _ZN14SelectionFlagsC1Ev(int);
 /* Supplied declaration required: FUN_002a7838. */
 /* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -60,7 +60,7 @@ unsigned int FUN_001fdff0(void)
         if (*(int *)(temp_v1 + 8) != 0) {
           FUN_002a7838();
           if (*(int *)(temp_v1 + 8) != 0) {
-            temp_v2 = FUN_00263c34(*(int *)(temp_v1 + 8) + 0x110);
+            temp_v2 = _ZN9Obj55ca08D1Ev(*(int *)(temp_v1 + 8) + 0x110);
             asdMemFreeNonNull(temp_v2 - 0x110);
           }
           *(unsigned int *)(temp_v1 + 8) = 0;
@@ -84,7 +84,7 @@ unsigned int FUN_001fdff0(void)
       *(unsigned int *)(puVar3 + 0x20) = 0;
       temp_v2 = FUN_00254dfc(puVar3 + 0x3c);
       temp_v2 = FUN_00254dfc(temp_v2 + 6);
-      temp_v2 = FUN_00287314(temp_v2 + 0x5a);
+      temp_v2 = _ZN14SelectionFlagsC1Ev(temp_v2 + 0x5a);
       *(unsigned char **)(temp_v2 + 0x74) = &DAT_00422590;
       temp_v2 = temp_v2 - 0x9c;
     }

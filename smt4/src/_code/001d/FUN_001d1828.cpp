@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00269bc4(unsigned int);
 int FUN_0029b130(short [20], unsigned int, int);
-int FUN_0029c528(unsigned int, int, int, int, int);
-int FUN_0029c6b0(int);
+int uniteMergeInheritedSkillsAndStats(unsigned int, int, int, int, int);
+int unitRecalculateEffectiveStats(int);
 int FUN_0029cde0(int, int);
 int FUN_0029dc74(unsigned int, int);
 int gameGetSlotTable(void);
@@ -32,8 +32,8 @@ extern int g_partyPanel; /* 0x43dcf0 */
 extern int FUN_002624b8(unsigned int, int, int);
 /* Supplied declaration required: FUN_00269bc4. */
 /* Supplied declaration required: FUN_0029b130. */
-/* Supplied declaration required: FUN_0029c528. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: uniteMergeInheritedSkillsAndStats. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: FUN_0029dc74. */
@@ -79,7 +79,7 @@ unsigned int FUN_001d1828(void)
     temp_v7 = FUN_002624b8(*(unsigned int *)(temp_v1 + 0x115c),temp_v9[0],temp_v9[1]);
     if (temp_v7 != 0) {
       FUN_0029dc74((*(unsigned int *)(temp_v1 + 0xb4c) & 0x1ffff) >> 2,temp_v1 + 0xb50);
-      FUN_0029c528(*(unsigned int *)(temp_v1 + 0x115c),temp_v9[0],temp_v9[1],0,temp_v1 + 0xb50);
+      uniteMergeInheritedSkillsAndStats(*(unsigned int *)(temp_v1 + 0x115c),temp_v9[0],temp_v9[1],0,temp_v1 + 0xb50);
       temp_v8[0] = 0;
       temp_v8[1] = 0;
       temp_v8[2] = 0;
@@ -199,7 +199,7 @@ LAB_001d1a4c:
         }
         temp_v2 = temp_v2 + 1;
         if (temp_v2 >= 8) {
-          FUN_0029c6b0(temp_v1 + 0xb50);
+          unitRecalculateEffectiveStats(temp_v1 + 0xb50);
           return 1;
         }
       } while( 1 );

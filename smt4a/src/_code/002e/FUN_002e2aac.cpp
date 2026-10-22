@@ -9,7 +9,7 @@ void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
 void FUN_0037dab0(void);
 void FUN_003a76b8(void);
-void FUN_003b6dc4(void);
+void aocScriptReleaseTableAndReset(void);
 void asdMemFree(void *memory);
 s32 jobStop(u32 job, s32 flag);
 
@@ -24,7 +24,7 @@ void FUN_002e2aac(void)
     Game *game;
 
     game = g_camp;
-    FUN_003b6dc4();
+    aocScriptReleaseTableAndReset();
     FUN_003a76b8();
     FUN_00330b74();
     FUN_002309dc();

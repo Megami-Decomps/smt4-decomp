@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00299370(int);
-int FUN_0029c6b0(int);
+int unitRecalculateEffectiveStats(int);
 
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
@@ -220,7 +220,7 @@ unsigned char FUN_0031c344(int param_1,int param_2,int param_3)
       FUN_00299370(0);
     }
     else {
-      FUN_0029c6b0(temp_v1);
+      unitRecalculateEffectiveStats(temp_v1);
     }
   }
   return temp_v3;

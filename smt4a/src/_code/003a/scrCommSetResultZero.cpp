@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mov r0, #0` where armcc emits `mov r0, #0`. */
 #include "common.h"
 
 extern "C" {

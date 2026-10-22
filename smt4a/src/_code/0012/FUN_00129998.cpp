@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(unsigned int *, unsigned char *, int, unsigned int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned int DAT_00594a00; /* 0x594a00 */
 
 extern unsigned int rt_malloc(int);
 extern unsigned int *operatorNewArray(unsigned int);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int *paramsCopyConstruct(int, int);
 
 
@@ -34,7 +34,7 @@ void FUN_00129998(int param_1)
      (puVar1 = (unsigned int *)operatorNewArray(0xfffffff4), puVar1 != (unsigned int *)0x0)) {
     puVar1[1] = 0xffffffff;
     *puVar1 = 0x14;
-    FUN_002f5020(puVar1 + 2,&LAB_0030e6b9,0x14,0xffffffff);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar1 + 2,&LAB_0030e6b9,0x14,0xffffffff);
   }
   temp_v0 = rt_malloc(DAT_00594a00 * 0x14);
   *(unsigned int *)(param_1 + 8) = temp_v0;

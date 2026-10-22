@@ -5,7 +5,7 @@
 extern "C" {
 
 int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 
 /* stack frame of param_1: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned char LAB_00192824; /* 0x192824 */
 extern unsigned int DAT_0063077c; /* 0x63077c */
 
 /* Supplied declaration required: quadSetOrderedVectors. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_001834e4(unsigned int *param_1)
@@ -69,7 +69,7 @@ void FUN_001834e4(unsigned int *param_1)
   unsigned int uStack_10;
   unsigned int uStack_c;
   
-  FUN_002f5020(&temp_v0,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v0,&LAB_00192824,0x10,4);
   temp_v0 = *param_1;
   uStack_84 = param_1[1];
   uStack_80 = param_1[2];

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(unsigned char [212], unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [212], unsigned char *, int, int);
 int FUN_0035cdac(unsigned int, unsigned int, unsigned int, int, int);
 int FUN_0038aa84(...);
 int rt_memcpy_w(...);
@@ -25,7 +25,7 @@ typedef struct {
 
 extern unsigned char LAB_003df478; /* 0x3df478 */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0035cdac. */
 /* Supplied declaration required: FUN_0038aa84. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -142,7 +142,7 @@ unsigned int FUN_0038a7dc(unsigned int param_1,unsigned int param_2,int param_3,
       temp_v13 = 1;
       temp_v14 = 1;
       temp_v11 = 0;
-      FUN_002f5020(temp_v15,&LAB_003df478,0x14,10);
+      __aeabi_vec_ctor_nocookie_nodtor(temp_v15,&LAB_003df478,0x14,10);
       temp_v11 = *puVar2;
       temp_v12 = puVar2[1];
       temp_v13 = puVar2[2];

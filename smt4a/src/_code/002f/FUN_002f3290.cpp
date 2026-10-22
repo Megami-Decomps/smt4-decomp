@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler shrink-wraps the frame and addresses the selected object through a separate literal. */
 #include "common.h"
 extern "C" {
 extern struct { u8 unk00[0x0D]; u8 active; u8 unk0E[0x86]; void *object; } g_flagBlock;

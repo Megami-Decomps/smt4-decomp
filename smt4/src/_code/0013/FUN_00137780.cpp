@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail push {r4, r5, lr}; compiler push {lr}. */
 #include "common.h"
 
 extern "C" {

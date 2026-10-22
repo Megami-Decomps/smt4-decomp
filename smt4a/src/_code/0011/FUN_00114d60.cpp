@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int onlineStringConstruct(unsigned char [12], unsigned int);
-int onlineStringDestroy(unsigned char [12]);
+int _ZN9Obj55aff4C1EPKc(unsigned char [12], unsigned int);
+int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
 int wideBufferAppend(...);
@@ -24,8 +24,8 @@ extern unsigned char LAB_00114dfc; /* 0x114dfc */
 extern unsigned char DAT_00537f3c; /* 0x537f3c */
 
 extern int wstrlen(int);
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 /* Supplied declaration required: wideBufferAppend. */
@@ -57,12 +57,12 @@ void FUN_00114d60(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v0 = wideBufferAppend(temp_v0,&DAT_00537f3c);
   temp_v0 = wideBufferAppendHolderValue(temp_v0,param_4);
   wideBufferAppend(temp_v0,&DAT_00537f3c);
-  onlineStringConstruct(temp_v5,temp_v4);
+  _ZN9Obj55aff4C1EPKc(temp_v5,temp_v4);
   FUN_002f6be2(temp_v5,&temp_v2);
   temp_v1 = wstrlen(temp_v2);
   FUN_002fbd0a(param_1,*(unsigned int *)(param_1 + 4),temp_v2,temp_v1 + temp_v2);
   operatorDeleteArrayNullable(temp_v2);
-  onlineStringDestroy(temp_v5);
+  _ZN9Obj55aff4D1Ev(temp_v5);
   FUN_002ea3a8(temp_v3);
   return;
 }

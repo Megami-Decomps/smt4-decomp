@@ -9,7 +9,7 @@ int FUN_00230aec(...);
 int FUN_00230cc0(...);
 void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int FUN_00230d84(int, int, int, int, int);
-int FUN_00230ecc(...);
+int contentGetKindValue(...);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int gameGetPlayerData(...);
@@ -47,7 +47,7 @@ extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
 extern unsigned int FUN_00230e04(unsigned short *);
-/* Supplied declaration required: FUN_00230ecc. */
+/* Supplied declaration required: contentGetKindValue. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int FUN_0028fb3c(unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
@@ -211,7 +211,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   VectorSignedToFloat(*(short *)(temp_v5 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v5 + 8) + temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be56c(param_1 + 0x380,temp_v8,temp_v14,temp_v9);
-  temp_v5 = FUN_00230ecc(temp_v22);
+  temp_v5 = contentGetKindValue(temp_v22);
   temp_v3 = 0;
   switch(*(unsigned int *)(param_1 + 0x860)) {
   case 0:
@@ -242,7 +242,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v6 = gameGetPlayerData(0);
     temp_v3 = *(unsigned short *)(temp_v6 + 0xc);
   }
-  temp_v6 = FUN_00230ecc(temp_v3);
+  temp_v6 = contentGetKindValue(temp_v3);
   if (param_3 != 0) {
     temp_v18 = FUN_002bf4f0(param_1 + 0x380,0xb1);
     temp_v11 = (int)temp_v18;

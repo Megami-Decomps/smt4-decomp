@@ -1,4 +1,3 @@
-/* NON_MATCHING: the initial cyclic-buffer index load/scaled address uses r3 where retail uses r2; the remaining instructions match. */
 #include "battle/btlMain.h"
 
 struct BtlCombatantValueRingView {

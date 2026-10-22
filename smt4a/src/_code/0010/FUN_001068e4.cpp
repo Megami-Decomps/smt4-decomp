@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00106a5c(...);
 int FUN_0016cd18(unsigned int, int, int, int, int);
 int asdOperatorDeleteArray(...);
-int onlineStringDestroy(...);
+int _ZN9Obj55aff4D1Ev(...);
 int FUN_002ea100(...);
 int FUN_002ed8a0(unsigned int [2], int, unsigned int);
 int FUN_002ed91c(int, int);
@@ -52,8 +52,8 @@ extern int FUN_0016ceb8(unsigned int, unsigned int *, unsigned int, unsigned int
 extern int FUN_001a0380(unsigned int);
 extern unsigned int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: onlineStringDestroy. */
-extern int onlineStringCopyConstruct(unsigned char *, unsigned int);
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+extern int _ZN9Obj55aff4C1ERKS_(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002ed8a0. */
 extern int wordRefsEqual_002ed902(unsigned int *, int *);
@@ -99,7 +99,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
       temp_v0 = FUN_002ea100(&temp_v6,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
       FUN_002ed8a0(temp_v8,DAT_005949dc + 0x128,temp_v0);
       temp_v1 = wordRefsEqual_002ed902(temp_v8,&temp_v4);
-      onlineStringDestroy(&temp_v6);
+      _ZN9Obj55aff4D1Ev(&temp_v6);
       if (temp_v1 != 0) goto LAB_001069c6;
     }
     for (piVar4 = (int *)0x0; piVar4 < param_4; piVar4 = (int *)((int)piVar4 + 1)) {
@@ -109,7 +109,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
       puVar5 = temp_v9;
       temp_v4 = temp_v1;
       temp_v6 = vectorInitEmpty2(temp_v10);
-      temp_v1 = onlineStringCopyConstruct(puVar5,temp_v0);
+      temp_v1 = _ZN9Obj55aff4C1ERKS_(puVar5,temp_v0);
       temp_v1 = temp_v1 + 8;
       FUN_002ed91c(temp_v1,temp_v6);
       FUN_002ed96e(temp_v3,temp_v4,temp_v1 - 8);
@@ -117,7 +117,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
       FUN_002eda4a(temp_v9);
       vectorDestroyBytes(temp_v10);
       FUN_002eda74((int)piVar4 * 0xc + temp_v13,temp_v1 + 0x18);
-      onlineStringDestroy(temp_v11);
+      _ZN9Obj55aff4D1Ev(temp_v11);
     }
     temp_v1 = 1;
   }

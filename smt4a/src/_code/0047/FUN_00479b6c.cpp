@@ -13,7 +13,7 @@ int FUN_0016c4b8(int, unsigned int);
 int FUN_0017ffa8(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0025cab8(int, int);
+int effectSubmitDefaultVectors(int, int);
 int sysMemClear(...);
 int FUN_00473754(...);
 int FUN_00473910(...);
@@ -53,7 +53,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0025cab8. */
+/* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00473754. */
 /* Supplied declaration required: FUN_00473910. */
@@ -113,7 +113,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
       temp_v6 = temp_v9 + temp_v1;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0025cab8(temp_v4,temp_v6);
+      effectSubmitDefaultVectors(temp_v4,temp_v6);
     }
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
       temp_v4 = temp_v5;

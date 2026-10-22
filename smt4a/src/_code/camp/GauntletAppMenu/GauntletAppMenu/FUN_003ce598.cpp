@@ -91,7 +91,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_003dc0c0. */
 /* Supplied declaration required: FUN_003e41f8. */
 extern int FUN_003e4230(unsigned int);
-extern int FUN_003e4510(unsigned int);
+extern int areaConsumeOneShotFlags(unsigned int);
 extern unsigned int dataRecordGetValue(unsigned int);
 /* Supplied declaration required: FUN_003e45bc. */
 extern int gameDataFlagTestBit(unsigned int);
@@ -377,7 +377,7 @@ unsigned int FUN_003ce598(void)
             else {
               temp_v7 = 10;
               FUN_001517b4(10,1);
-              if ((temp_v7 != 0) && (temp_v7 = FUN_003e4510(temp_v5), temp_v7 != 0)) {
+              if ((temp_v7 != 0) && (temp_v7 = areaConsumeOneShotFlags(temp_v5), temp_v7 != 0)) {
                 eventQueueAddUniqueIfValid(0x100020f);
               }
             }

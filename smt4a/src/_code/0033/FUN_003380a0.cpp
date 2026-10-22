@@ -8,7 +8,7 @@ int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, unsigned int);
 int skinObjectUpdateMatrices(int);
 int sysMemClear(unsigned char *, int);
-int FUN_002f5020(unsigned char *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
 int FUN_002ff8e8(unsigned int);
 int camSetMatrixB(int, int *);
 int FUN_00409bc8(int, unsigned int);
@@ -40,7 +40,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002ff8e8. */
 /* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: FUN_00409bc8. */
@@ -135,9 +135,9 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   if (param_1[0x16] != 0) {
     param_1[0x16] = 0;
   }
-  FUN_002f5020(puVar2,&LAB_0042cbb0,0x70,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar2,&LAB_0042cbb0,0x70,0xc);
   puVar2 = puVar2 + 0x540;
-  FUN_002f5020(puVar2,&LAB_0042cb68,0x14,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar2,&LAB_0042cb68,0x14,0xc);
   *(unsigned int *)(puVar2 + -0x6a0) = 0;
   sysMemClear(puVar2 + -0x69c,0x150);
   temp_v3 = 0;

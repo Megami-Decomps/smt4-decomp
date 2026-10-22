@@ -5,7 +5,7 @@
 extern "C" {
 
 int rt_vec_dtor(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int streamReadWord(int, unsigned char *);
 int FUN_00304d10(...);
 int FUN_00310f9e(...);
@@ -19,7 +19,7 @@ extern unsigned char LAB_002e9ff5; /* 0x2e9ff5 */
 extern unsigned char LAB_002ec9f5; /* 0x2ec9f5 */
 
 /* Supplied declaration required: rt_vec_dtor. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_00304d10. */
 /* Supplied declaration required: FUN_00310f9e. */
@@ -40,7 +40,7 @@ void FUN_0011d2e0(int param_1,unsigned int param_2)
   puVar3 = temp_v2;
   puVar1 = (unsigned char *)FUN_00304d10(param_2,0);
   if (puVar1 == (unsigned char *)0x0) {
-    FUN_002f5020(temp_v2,&LAB_002e9ff5,0xc,1);
+    __aeabi_vec_ctor_nocookie_nodtor(temp_v2,&LAB_002e9ff5,0xc,1);
     puVar1 = temp_v2;
   }
   FUN_00310ff2(param_1,puVar1);
@@ -63,7 +63,7 @@ void FUN_0011d2e0(int param_1,unsigned int param_2)
     }
   }
   else {
-    FUN_002f5020(temp_v2,&LAB_002e7635,0x20,1);
+    __aeabi_vec_ctor_nocookie_nodtor(temp_v2,&LAB_002e7635,0x20,1);
     FUN_00310fa6(param_1,temp_v2);
     if (*(char *)(param_1 + 4) != '\0') {
       puVar3 = &LAB_002ec9f5;
@@ -78,7 +78,7 @@ void FUN_0011d2e0(int param_1,unsigned int param_2)
     FUN_00310f9e(param_1,temp_v0);
     return;
   }
-  FUN_002f5020(temp_v2,&LAB_0011076d,0xf8,1);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v2,&LAB_0011076d,0xf8,1);
   FUN_00310f9e(param_1,temp_v2);
   puVar3 = &LAB_0011077d;
   temp_v1 = 0xf8;

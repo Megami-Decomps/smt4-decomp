@@ -17,15 +17,15 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern unsigned int DAT_005c1478; /* 0x5c1478 */
-extern unsigned char DAT_00647448; /* 0x647448 */
+extern unsigned int g_accelerometerInitGuard; /* 0x5c1478 */
+extern unsigned char g_accelerometerState; /* 0x647448 */
 extern unsigned short DAT_0064744c; /* 0x64744c */
 extern unsigned short DAT_0064744e; /* 0x64744e */
-extern unsigned short DAT_006474a0; /* 0x6474a0 */
+extern unsigned short g_accelerometerLiveState; /* 0x6474a0 */
 extern unsigned short DAT_006474a2; /* 0x6474a2 */
 extern signed char DAT_006474a5; /* 0x6474a5 */
 extern int DAT_006474a8; /* 0x6474a8 */
-extern short DAT_006474ac; /* 0x6474ac */
+extern short g_accelerometerRawSample; /* 0x6474ac */
 extern short DAT_006474ae; /* 0x6474ae */
 extern short DAT_006474b0; /* 0x6474b0 */
 extern unsigned char DAT_006474b2; /* 0x6474b2 */
@@ -85,12 +85,12 @@ unsigned int FUN_00140ba4(void)
   
   FUN_0013c1fc();
   FUN_0013d33c();
-  if (((DAT_005c1478 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c1478), temp_v0 != 0)) {
+  if (((g_accelerometerInitGuard & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&g_accelerometerInitGuard), temp_v0 != 0)) {
     temp_v1 = FUN_0015959c();
-    FUN_0015976c(&DAT_00647448,temp_v1);
+    FUN_0015976c(&g_accelerometerState,temp_v1);
   }
   if (DAT_006474a8 != 0) {
-    DAT_0064744c = DAT_006474a0;
+    DAT_0064744c = g_accelerometerLiveState;
     DAT_0064744e = DAT_006474a2;
     DAT_006474a8 = 0;
   }
@@ -98,9 +98,9 @@ unsigned int FUN_00140ba4(void)
   DAT_006474c4 = DAT_006474b8;
   DAT_006474c8 = DAT_006474bc;
   DAT_006474cc = DAT_006474c0;
-  nn_hid_CTR_AccelerometerReader_ReadLatest((unsigned int)&DAT_00647448,(unsigned int)&DAT_006474ac);
+  nn_hid_CTR_AccelerometerReader_ReadLatest((unsigned int)&g_accelerometerState,(unsigned int)&g_accelerometerRawSample);
   if (DAT_006474a5 == '\x01') {
-    temp_v5 = (float)VectorSignedToFloat((int)DAT_006474ac,(unsigned char)(in_fpscr >> 0x16) & 3);
+    temp_v5 = (float)VectorSignedToFloat((int)g_accelerometerRawSample,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v9 = (float)VectorSignedToFloat((int)DAT_006474ae,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat((int)DAT_006474b0,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = romwright_sqrt_4(temp_v5 * temp_v5 + temp_v9 * temp_v9 + temp_v8 * temp_v8);
@@ -124,7 +124,7 @@ unsigned int FUN_00140ba4(void)
     if ((-0x3a2 < temp_v0) && (temp_v7 = temp_v11, temp_v0 < 0x3a2)) {
       temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
     }
-    DAT_006474ac = (short)(int)temp_v7;
+    g_accelerometerRawSample = (short)(int)temp_v7;
     temp_v7 = temp_v10;
     if ((-0x3a2 < temp_v2) && (temp_v7 = temp_v11, temp_v2 < 0x3a2)) {
       temp_v7 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -135,7 +135,7 @@ unsigned int FUN_00140ba4(void)
     }
     DAT_006474b0 = (short)(int)temp_v10;
   }
-  nn_hid_CTR_AccelerometerReader_ConvertToAcceleration((unsigned int)&DAT_00647448,(unsigned int)&DAT_006474b8,1,(unsigned int)&DAT_006474ac);
+  nn_hid_CTR_AccelerometerReader_ConvertToAcceleration((unsigned int)&g_accelerometerState,(unsigned int)&DAT_006474b8,1,(unsigned int)&g_accelerometerRawSample);
   return 1;
 }
 

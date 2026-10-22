@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00244ee0(...);
 int FUN_0025cc34(void);
-int FUN_0025cc8c(void);
+int playerGetMappedCategory(void);
 int FUN_002b6db0(...);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
@@ -52,7 +52,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 /* Supplied declaration required: FUN_0025cc34. */
 extern int FUN_0025cc54(void);
-/* Supplied declaration required: FUN_0025cc8c. */
+/* Supplied declaration required: playerGetMappedCategory. */
 extern short FUN_0028d24c(void);
 extern short listGetU16OrZero(unsigned int, unsigned int);
 extern unsigned int FUN_0028fb40(int);
@@ -466,7 +466,7 @@ void FUN_002f1558(int param_1)
       textFormatBuffer(puVar11,&LAB_002f1ff4,&LAB_002f1ff8);
       temp_v1 = (short)(int)puVar11;
       temp_v9 = 0;
-      FUN_0025cc8c();
+      playerGetMappedCategory();
       temp_v6 = (int)temp_v1;
       temp_v16 = 0;
     }

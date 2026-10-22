@@ -52,7 +52,7 @@ extern unsigned int DAT_00573cb0; /* 0x573cb0 */
 extern unsigned int DAT_00573cb4; /* 0x573cb4 */
 
 extern int btlGetMainState(void);
-extern int FUN_0017760c(unsigned int);
+extern int recordGetScaledMaximum(unsigned int);
 /* Supplied declaration required: FUN_003ff22c. */
 /* Supplied declaration required: FUN_003ff524. */
 extern int btlCanSelectReservePartyMember(unsigned int *);
@@ -265,7 +265,7 @@ LAB_003ffb9c:
       }
     }
     else if ((!((param_1[1] & DAT_00573ca4) != 0 || (DAT_00573ca0 & *param_1) != 0)) ||
-            (temp_v5 = FUN_0017760c(param_1[0xff]), temp_v5 >= (int)param_1[0x97])) {
+            (temp_v5 = recordGetScaledMaximum(param_1[0xff]), temp_v5 >= (int)param_1[0x97])) {
       temp_v8 = temp_v8 | 0x200000;
     }
   }

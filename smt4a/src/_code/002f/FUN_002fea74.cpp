@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'pop {r2, r3, r4, pc}'; compiler emits 'add sp, #8' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 struct Target;

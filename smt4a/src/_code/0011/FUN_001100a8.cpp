@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
-int onlineStringAssign(int, unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
+int _ZN9Obj55aff4aSERKS_(int, unsigned char [8]);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eb60c(void);
@@ -15,8 +15,8 @@ int FUN_002fa794(unsigned char [8], int);
 extern unsigned char LAB_0010fa5d; /* 0x10fa5d */
 extern unsigned char LAB_00110164; /* 0x110164 */
 
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
@@ -51,8 +51,8 @@ void FUN_001100a8(int param_1)
         return;
       }
       FUN_002fa794(temp_v2,param_1 + 0xac);
-      onlineStringAssign(temp_v0 + 0x10,temp_v2);
-      onlineStringDestroy(temp_v2);
+      _ZN9Obj55aff4aSERKS_(temp_v0 + 0x10,temp_v2);
+      _ZN9Obj55aff4D1Ev(temp_v2);
       puVar4 = (unsigned char *)0x110001;
       puVar3 = temp_v3;
     }

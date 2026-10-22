@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned char LAB_001e4bd8; /* 0x1e4bd8 */
 extern unsigned char LAB_001f833c; /* 0x1f833c */
-extern int FUN_002c439c(...); /* 0x2c439c */
+extern int jobStopChild(...); /* 0x2c439c */
 extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00214568. */
@@ -44,7 +44,7 @@ void FUN_001f8290(unsigned int *param_1)
   int temp_v1;
   
   puVar1 = &LAB_001f833c;
-  taskCreateDraw(&LAB_001f833c,2,0,0,&LAB_001e4bd8,FUN_002c439c,param_1,*param_1);
+  taskCreateDraw(&LAB_001f833c,2,0,0,&LAB_001e4bd8,jobStopChild,param_1,*param_1);
   param_1[1] = (unsigned int)puVar1;
   resultCreateDefault();
   FUN_00214568(param_1 + 0x5d);

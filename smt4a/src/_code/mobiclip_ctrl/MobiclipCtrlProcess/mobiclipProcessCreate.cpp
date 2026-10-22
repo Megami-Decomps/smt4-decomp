@@ -38,7 +38,7 @@ extern const char DAT_005329c0[];
 extern const char DAT_00532a48[];
 extern const char DAT_00532a24[];
 extern const char *DAT_00588040[];
-void FUN_00284524();
+void mobiclipProcessUpdate();
 void mobiclipProcessDestroy();
 void FUN_002c3038();
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
@@ -57,7 +57,7 @@ u32 mobiclipProcessCreate(s32 movie, u8 options)
     MovieProcess *work = (MovieProcess *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MovieProcess), 1);
     g_mobiclipProcess.work = work;
     sysMemClear(work, sizeof(MovieProcess));
-    work->process = asdProcessCreateSimple(DAT_005329cc, 4, 0, 0, FUN_00284524, mobiclipProcessDestroy, work);
+    work->process = asdProcessCreateSimple(DAT_005329cc, 4, 0, 0, mobiclipProcessUpdate, mobiclipProcessDestroy, work);
     work->leftDraw = taskCreateDraw(DAT_005329c0, 0x7e, 0, 0, FUN_002c3038, NULL, work, work->process);
     if (!DAT_005329a0[movie])
         work->rightDraw = taskCreateDraw((const char *)DAT_005329a0 + 0x78, 0xda, 0, 0, FUN_002c3038, NULL, work, work->process);

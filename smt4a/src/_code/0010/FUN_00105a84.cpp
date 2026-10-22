@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int onlineStringDestroy(...);
-int onlineStringAssign(unsigned int, unsigned int);
+int _ZN9Obj55aff4D1Ev(...);
+int _ZN9Obj55aff4aSERKS_(unsigned int, unsigned int);
 int FUN_002e9c0c(void);
 int FUN_002ea100(...);
 int FUN_002ea214(int, unsigned int);
@@ -33,8 +33,8 @@ extern unsigned char LAB_00105ba0; /* 0x105ba0 */
 
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002ea214. */
@@ -86,8 +86,8 @@ void FUN_00105a84(int param_1)
   ptrHolderDestroy(temp_v13);
   temp_v4 = *(unsigned int *)(param_1 + 0x10c);
   temp_v1 = FUN_002ea100(temp_v14,temp_v2);
-  onlineStringAssign(temp_v4 + 8,temp_v1);
-  onlineStringDestroy(temp_v14);
+  _ZN9Obj55aff4aSERKS_(temp_v4 + 8,temp_v1);
+  _ZN9Obj55aff4D1Ev(temp_v14);
   FUN_002ea2e8(temp_v8);
   FUN_002ea314(temp_v8,*(unsigned int *)(temp_v7 + 0x1c));
   FUN_002ea100(temp_v10,temp_v2 + 0x248);
@@ -103,7 +103,7 @@ void FUN_00105a84(int param_1)
   temp_v5 = param_1 + 0x108;
   FUN_002ea374(temp_v0,temp_v12,temp_v9,temp_v2 + 0x204);
   if (temp_v0 != 0) {
-    onlineStringDestroy(temp_v10);
+    _ZN9Obj55aff4D1Ev(temp_v10);
     FUN_002ea3a8(temp_v8);
     temp_v1 = FUN_002ea3c0(temp_v15,0x105bad,0,&LAB_00105ba0);
     FUN_002ea3d0(param_1,temp_v1);
@@ -112,7 +112,7 @@ void FUN_00105a84(int param_1)
     temp_v3 = 0x8001000d;
     temp_v1 = FUN_002e7908(&temp_v4,(unsigned int *)&temp_v3);
     FUN_002ea214(param_1,temp_v1);
-    onlineStringDestroy(temp_v10);
+    _ZN9Obj55aff4D1Ev(temp_v10);
     FUN_002ea3a8(temp_v8);
   }
   return;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001208a0(int);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int onlineJobSetStateReady(int);
 int sharedRefAddRef(int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_0062e558; /* 0x62e558 */
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_001208a0. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineJobSetStateReady. */
 /* Supplied declaration required: sharedRefAddRef. */
@@ -63,9 +63,9 @@ void FUN_0030f4bc(int param_1,unsigned int param_2)
     if (*(char *)(temp_v0 + 0x38) != '\0') {
       puVar3 = (unsigned char *)(param_1 + 0x88);
     }
-    FUN_002e6e34(temp_v3,puVar4);
-    FUN_002e6e34(temp_v4,param_1 + 0x58);
-    FUN_002e6e34(temp_v5,puVar3);
+    _ZN9Obj55b28cC1EPv(temp_v3,puVar4);
+    _ZN9Obj55b28cC1EPv(temp_v4,param_1 + 0x58);
+    _ZN9Obj55b28cC1EPv(temp_v5,puVar3);
     FUN_0030f8a2(param_1,temp_v0,temp_v7);
     _ZN9Obj55b28cD1Ev(temp_v5);
     _ZN9Obj55b28cD1Ev(temp_v4);

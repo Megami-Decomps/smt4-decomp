@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00107630(unsigned int, int);
 int FUN_0012430a(void);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(int);
 int FUN_002ef790(void);
@@ -28,7 +28,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00107630. */
 /* Supplied declaration required: FUN_0012430a. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int onlineGetActiveLock(void);
@@ -57,7 +57,7 @@ void FUN_0010cdce(int param_1)
   unsigned char temp_v8 [8];
   
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v6,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v6,temp_v0);
   vectorInitEmpty4(&temp_v4);
   temp_v2 = *(int *)(*(int *)(param_1 + 0x30) + 8);
   while( 1 ) {

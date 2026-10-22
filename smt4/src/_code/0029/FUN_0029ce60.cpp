@@ -6,7 +6,7 @@ extern "C" {
 
 int bitsetSetBit(unsigned char [72], int);
 int randomGetUpperSixBits(...);
-int FUN_0029c6b0(unsigned char [72]);
+int unitRecalculateEffectiveStats(unsigned char [72]);
 int FUN_0029d770(unsigned int, unsigned char [72]);
 int FUN_0029dc74(...);
 int dataTable06Sub1GetRecord(void);
@@ -65,7 +65,7 @@ extern signed char DAT_0043d9b0; /* 0x43d9b0 */
 /* Supplied declaration required: randomGetUpperSixBits. */
 extern int flagBitIsSet(unsigned int);
 extern int FUN_002973ec(void);
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029dc74. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
@@ -208,7 +208,7 @@ LAB_0029cf80:
         memClear(temp_v38,0x500);
         devilGetRecord();
         bitsetSetBit(temp_v20,*(unsigned short *)(temp_v6 + 0x38));
-        FUN_0029c6b0(temp_v20);
+        unitRecalculateEffectiveStats(temp_v20);
         puVar12 = temp_v20;
       }
     }

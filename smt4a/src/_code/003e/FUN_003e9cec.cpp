@@ -34,7 +34,7 @@ struct fn_003e9cec_arg2 {
     ushort field_0x64; /* +0x64 */
 };
 
-extern unsigned int FUN_0017760c(fn_003e9cec_arg2 *);
+extern unsigned int recordGetScaledMaximum(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
@@ -83,7 +83,7 @@ void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *
     param_2[0xd7] = 1;
   }
   *(int *)(param_2 + 0xd8) = (int)param_3->field_0x2a;
-  temp_v5 = FUN_0017760c(param_3);
+  temp_v5 = recordGetScaledMaximum(param_3);
   *(unsigned int *)(param_2 + 0xdc) = temp_v5;
   temp_v1 = param_3->field_0x2c;
   *(int *)(param_2 + 0xe0) = (int)temp_v1;

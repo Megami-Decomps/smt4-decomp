@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12], int *);
 int FUN_002e7908(int *, unsigned int *);
 int FUN_002fc056(unsigned int, unsigned int);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp3C; /* 0x3c: local_3c */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e7908. */
 extern int *wordRefMin(unsigned int *, unsigned char *);
@@ -50,7 +50,7 @@ void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
   iStack_20 = param_2;
   temp_v8 = param_3;
   piStack_18 = param_4;
-  FUN_002e6e34(temp_v3,param_2 + 0x105c);
+  _ZN9Obj55b28cC1EPv(temp_v3,param_2 + 0x105c);
   if ((*(char *)(param_2 + 0xc) == '\0') || (*(char *)(param_2 + 0x108f) != '\0')) {
     if (*(int *)(param_2 + 0x1050) < 0) {
       temp_v2 = *(int *)(param_2 + 0x1058);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004bdce0(int, unsigned int, unsigned int);
 int FUN_004bee88(int, unsigned int, unsigned int);
 
-extern unsigned char DAT_0057f25c; /* 0x57f25c */
+extern unsigned char g_callbackOwnerSlots; /* 0x57f25c */
 
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
@@ -24,9 +24,9 @@ unsigned int FUN_0031d7cc(void)
   unsigned int temp_v2;
   int temp_v3;
   
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f25c + 0x4));
-  if ((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) != 0) {
-    temp_v1 = vec2GetXInt((*(int *)((unsigned char *)&DAT_0057f25c + 0x4)) + 0x30);
+  temp_v0 = (*(int *)((unsigned char *)&g_callbackOwnerSlots + 0x4));
+  if ((*(int *)((unsigned char *)&g_callbackOwnerSlots + 0x4)) != 0) {
+    temp_v1 = vec2GetXInt((*(int *)((unsigned char *)&g_callbackOwnerSlots + 0x4)) + 0x30);
     temp_v2 = vec2GetYInt(temp_v0 + 0x30);
     temp_v3 = *(int *)(temp_v0 + 0x344);
     if ((temp_v3 == 1) || ((temp_v3 != 2 && (temp_v3 == 3)))) {

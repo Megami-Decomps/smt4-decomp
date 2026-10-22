@@ -28,7 +28,7 @@ extern unsigned char DAT_00558c30; /* 0x558c30 */
 /* Supplied declaration required: FUN_0012d86c. */
 /* Supplied declaration required: nodeListReleaseStorage. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int onlineStringDestroy(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 extern int FUN_002eb624(int);
 extern int *arrayElementAddress_002f32d4(unsigned int *, int);
 /* Supplied declaration required: FUN_002f3474. */
@@ -77,7 +77,7 @@ unsigned long long _ZN9Obj558c28D1Ev(unsigned int *param_1,unsigned int param_2,
     }
     asdOperatorDeleteArray(temp_v1);
   }
-  temp_v1 = onlineStringDestroy(param_1 + 0x50);
+  temp_v1 = _ZN9Obj55aff4D1Ev(param_1 + 0x50);
   for (temp_v0 = *(int *)(temp_v1 - 0x2c); temp_v0 != *(int *)(temp_v1 - 0x28); temp_v0 = temp_v0 + 4) {
   }
   asdOperatorDeleteArray();

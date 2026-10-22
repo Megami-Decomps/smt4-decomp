@@ -411,6 +411,12 @@ typedef struct SlotTable {
     /* 0x1C88 */ s8 slots[0x18];      /* -1 = empty */
 } SlotTable;
 
+struct PartyStatusSlots {
+    /* 0x0000 */ SlotTable active;
+    /* 0x1CA0 */ s8 reserve[3];
+};
+typedef char PartyStatusSlotsSizeCheck[sizeof(PartyStatusSlots) == 0x1CA3 ? 1 : -1];
+
 typedef struct JobRef {
     /* 0x00 */ u32 job;
     /* 0x04 */ u8 unk04[0x1];

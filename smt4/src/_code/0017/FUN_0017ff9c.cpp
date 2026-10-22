@@ -1,2 +1,2 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_001f3044's literal pool; not written yet. */
+/* NON_MATCHING: unimplemented 0x6aa8-byte routine; no romwright reference draft or byte-identical Apocalypse twin is available. */
 #include "common.h"

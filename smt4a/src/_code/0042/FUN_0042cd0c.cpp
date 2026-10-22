@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017fd38(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int nn_os(...);
 int software_interrupt(...);
 
@@ -22,7 +22,7 @@ extern int FUN_002e306c(...); /* 0x2e306c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0017fd38. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nn_os. */
 
 
@@ -48,7 +48,7 @@ FUN_0042cd0c(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3,u
     nn_os(&temp_v1,param_3,FUN_002e306c);
     return (unsigned int *)ppuVar1;
   }
-  FUN_002f5020(&temp_v2,&LAB_0018b630,4,10);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v2,&LAB_0018b630,4,10);
   if ((int)param_3 < 1) {
     temp_v0 = 0;
   }

@@ -12,7 +12,7 @@ int FUN_002c1e30(int *, int);
 int FUN_002c1edc(int *, int *, int *, int *);
 int FUN_002c2044(int *, int);
 int asdMemoryGetDefaultAllocator(void);
-int FUN_003416bc(int *, int, unsigned int);
+int modelSelectionActivate(int *, int, unsigned int);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 
 typedef struct fn_00341340_arg1 fn_00341340_arg1;
@@ -57,7 +57,7 @@ typedef struct {
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 extern int asdLoadFileSyncDefault(fn_00341340_arg1 *);
-/* Supplied declaration required: FUN_003416bc. */
+/* Supplied declaration required: modelSelectionActivate. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 
 
@@ -221,7 +221,7 @@ LAB_00341470:
   FUN_002c1edc(param_1 + 0xb,param_1 + 0x14d,param_1 + 0x150,param_1 + 0x157);
   FUN_002c1e30(param_1 + 0xb,1);
   FUN_00298d50(param_1 + 0xb);
-  FUN_003416bc(param_1,0,0xffffffff);
+  modelSelectionActivate(param_1,0,0xffffffff);
   return;
 }
 

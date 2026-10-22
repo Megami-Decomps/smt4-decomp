@@ -15,12 +15,12 @@ struct ElementVectorState {
 
 extern "C" {
 void FUN_0045b580(void *element);
-void *FUN_002f5020(u8 *begin, void (*visit)(void *), u32 stride, u32 count);
+void *__aeabi_vec_ctor_nocookie_nodtor(u8 *begin, void (*visit)(void *), u32 stride, u32 count);
 
 
 ElementVectorState *FUN_0040633c(ElementVectorState *state)
 {
-    state = (ElementVectorState *)FUN_002f5020(&state->elements[0][0], FUN_0045b580,
+    state = (ElementVectorState *)__aeabi_vec_ctor_nocookie_nodtor(&state->elements[0][0], FUN_0045b580,
         sizeof(state->elements[0]), sizeof(state->elements) / sizeof(state->elements[0]));
     state->first.x = 0.0f;
     state->first.y = 0.0f;

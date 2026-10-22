@@ -8,11 +8,11 @@ struct ObjFUN_0030e6b8 {
 };
 
 extern const u8 DAT_0055ad48[];
-ObjFUN_0030e6b8 *FUN_003024c4(ObjFUN_0030e6b8 *obj, u32 flag);
+ObjFUN_0030e6b8 *_ZN9Obj5590e4C1Eh(ObjFUN_0030e6b8 *obj, u32 flag);
 
 ObjFUN_0030e6b8 *FUN_0030e6b8(ObjFUN_0030e6b8 *obj)
 {
-    obj = FUN_003024c4(obj, 1);
+    obj = _ZN9Obj5590e4C1Eh(obj, 1);
     obj->vtable = DAT_0055ad48;
     return obj;
 }

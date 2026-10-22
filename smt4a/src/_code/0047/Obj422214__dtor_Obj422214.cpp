@@ -1,4 +1,3 @@
-/* NON_MATCHING: the load of `buffers` is scheduled before the vtable store (retail stores first, in r0, then loads through r4) */
 #include "classes/Obj422214.h"
 
 extern "C" {

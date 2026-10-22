@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00115560(int, unsigned int);
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 
 extern unsigned char g_listenerTable; /* 0x594ad8 */
@@ -15,7 +15,7 @@ extern unsigned char g_listenerTable; /* 0x594ad8 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00115560. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
@@ -32,7 +32,7 @@ unsigned long long FUN_002f7f00(int param_1,unsigned int param_2,unsigned int pa
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002e6e34(&uStack_18,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(&uStack_18,param_1 + 4);
   temp_v1 = 0;
   while ((temp_v0 = *(int *)(temp_v1 * 4 + param_1 + 0x34), temp_v0 == 0 ||
          (*(char *)(temp_v0 + 0x34) != '\x02'))) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(void);
+int __aeabi_vec_ctor_nocookie_nodtor(void);
 int FUN_00462724(unsigned char *, int, int);
 
 typedef struct fn_00512398_arg0 fn_00512398_arg0;
@@ -40,7 +40,7 @@ extern unsigned char *DAT_005c0f78; /* 0x5c0f78 */
 extern unsigned char *DAT_005c0f7c; /* 0x5c0f7c */
 extern unsigned char DAT_00646b38; /* 0x646b38 */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00462724. */
 
 
@@ -48,7 +48,7 @@ void FUN_00512398(fn_00512398_arg0 *param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002f5020();
+  __aeabi_vec_ctor_nocookie_nodtor();
   param_1->field_0x38 = 0;
   param_1->field_0x3c = 0;
   param_1->field_0x40 = 0;

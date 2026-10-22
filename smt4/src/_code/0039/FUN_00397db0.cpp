@@ -10,7 +10,7 @@ int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
-int FUN_00398aa0(...);
+int uiDrawEncodedGlyph(...);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -35,7 +35,7 @@ extern int recordTableGet(unsigned int, int);
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00398aa0. */
+/* Supplied declaration required: uiDrawEncodedGlyph. */
 
 
 void FUN_00397db0(int param_1)
@@ -139,7 +139,7 @@ void FUN_00397db0(int param_1)
           temp_v8 = FUN_002bf4f8(0x2e,0x22);
           temp_v13 = 1;
           (*(unsigned int *)temp_v12) = 0x0;
-          FUN_00398aa0(param_1,(int)temp_v10,
+          uiDrawEncodedGlyph(param_1,(int)temp_v10,
                        *(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8) +
                        (int)*(short *)(temp_v8 + 8),
                        (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10));

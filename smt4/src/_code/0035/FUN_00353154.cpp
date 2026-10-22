@@ -5,7 +5,7 @@
 extern "C" {
 
 int recordValidatePair(unsigned int, int, unsigned int);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_0035f7dc(void);
 int rt_memcpy(unsigned int, unsigned char [64], int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: recordValidatePair. */
 extern int FUN_0023a1f8(unsigned int);
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_0035f7dc. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -33,7 +33,7 @@ void FUN_00353154(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   temp_v0 = FUN_0023a1f8(param_2);
   if (temp_v0 < 0) {
-    resultPairInitialize(param_1,temp_v0);
+    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
     return;
   }
   puVar2 = temp_v2;
@@ -42,7 +42,7 @@ void FUN_00353154(unsigned int *param_1,unsigned int param_2,unsigned int param_
     rt_memcpy(param_3,temp_v2,0x20);
     puVar2 = (unsigned char *)0x0;
   }
-  resultPairInitialize(&temp_v1,puVar2);
+  _ZN18WindowStatusResultC1Ej(&temp_v1,puVar2);
   recordValidatePair(param_2,temp_v1,uStack_54);
   *param_1 = temp_v1;
   param_1[1] = uStack_54;

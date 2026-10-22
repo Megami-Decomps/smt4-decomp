@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0011ef7c(int, int, unsigned int, int);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int FUN_002e9c0c(void);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3c0(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_0010fb68; /* 0x10fb68 */
 /* Supplied declaration required: FUN_0011ef7c. */
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -73,7 +73,7 @@ void FUN_0010faa0(int param_1)
     temp_v2 = temp_v3;
     temp_v0 = *(int *)(param_1 + 0x6c);
     FUN_0011ef7c(temp_v0,param_1 + 0x130,*(unsigned int *)(param_1 + 0xc4),param_1 + 0x70);
-    onlineStringDestroy(temp_v3);
+    _ZN9Obj55aff4D1Ev(temp_v3);
     if (temp_v0 != 0) {
       if (*(char *)(param_1 + 0x140) != '\x01') {
         temp_v1 = FUN_002ea3c0(&temp_v2,&LAB_0010fa5d,0,&LAB_0010fb68);

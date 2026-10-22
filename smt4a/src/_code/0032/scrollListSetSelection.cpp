@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final offset/top stores are merged into one stm (after add r0, r0, #32); retail stores offset then top separately. */
+/* NON_MATCHING: armcc merges the final offset/top stores into an stm after rebasing by +32; retail stores offset and top separately. */
 #include "common.h"
 
 extern "C" {
@@ -38,8 +38,9 @@ u32 scrollListSetSelection(ScrollList *list, s32 index)
         list->offset = offset;
         maxOffset = count - (list->visible <= count ? list->visible : count);
         if (offset > maxOffset) {
+            index -= maxOffset;
             list->offset = maxOffset;
-            list->top = index - maxOffset;
+            list->top = index;
         }
     }
     return 1;

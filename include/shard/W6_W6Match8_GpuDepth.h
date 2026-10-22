@@ -21,6 +21,11 @@ union GpuFloatEncoding {
     f32 value;
     u32 bits;
     s32 signedBits;
+    struct {
+        u32 fraction : 23;
+        u32 exponent : 8;
+        u32 sign : 1;
+    } ieee;
 };
 
 // Encode the GPU's signed half-float fields, flushing values below its exponent range.
@@ -53,5 +58,25 @@ static __inline u32 gpuDepthEncodeUnorm24(f32 depth)
     }
     return 0;
 }
+
+extern "C" const u32 g_gpuFloat24ExponentTable[256];
+
+/* Float24 has a sign bit, seven exponent bits, and sixteen fraction bits. */
+static __forceinline u32 gpuEncodeFloat24(f32 value)
+{
+    GpuFloatEncoding encoding;
+    encoding.value = value;
+    if ((encoding.bits & 0x7FFFFFFF) == 0) {
+        return encoding.ieee.sign << 23;
+    }
+    return g_gpuFloat24ExponentTable[encoding.ieee.exponent] | (encoding.ieee.fraction >> 7)
+        | (encoding.ieee.sign << 23);
+}
+
+struct GpuFloat24Vectors {
+    u32 first[3];
+    u32 second[3];
+    u32 coordinates[2];
+};
 
 #endif

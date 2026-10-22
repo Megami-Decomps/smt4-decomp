@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int vectorCopyHeader(int, unsigned int);
 int onlineJobSetStateDone(int);
 int FUN_002ea928(int);
@@ -32,7 +32,7 @@ extern unsigned char DAT_00559748; /* 0x559748 */
 
 extern unsigned int FUN_001237f8(int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: onlineJobSetStateDone. */
 /* Supplied declaration required: FUN_002ea928. */
@@ -86,7 +86,7 @@ void FUN_0011a76c(int param_1)
   else {
     temp_v0 = 1;
   }
-  onlineStringDestroy(temp_v14);
+  _ZN9Obj55aff4D1Ev(temp_v14);
   if (temp_v0) {
     FUN_002ea974(temp_v13);
     temp_v2 = onlineUrlGetAddress(temp_v1);

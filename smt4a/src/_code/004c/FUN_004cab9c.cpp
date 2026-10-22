@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int DAT_0057aa68; /* 0x57aa68 */
+extern unsigned int g_battleMotionCombatantClearMask; /* 0x57aa68 */
 extern unsigned int DAT_0057aa6c; /* 0x57aa6c */
 
 /* Supplied declaration required: btlGetMainState. */
@@ -50,7 +50,7 @@ void FUN_004cab9c(int param_1)
       if (-1 < *(short *)(param_1 + 0x68)) {
         puVar3 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + *(short *)(param_1 + 0x68) * 0x408);
         temp_v4 = ~DAT_0057aa6c;
-        *puVar3 = *puVar3 & ~DAT_0057aa68;
+        *puVar3 = *puVar3 & ~g_battleMotionCombatantClearMask;
         puVar3[1] = puVar3[1] & temp_v4;
       }
     }

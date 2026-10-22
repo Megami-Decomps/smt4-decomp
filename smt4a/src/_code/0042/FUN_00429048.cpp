@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019a46c(unsigned int *, int, int);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int sysMemClear(unsigned int *, int);
 int FUN_00427a10(unsigned int, unsigned char *);
 int FUN_00427e68(int, int);
@@ -47,7 +47,7 @@ extern int FUN_0015a410(void);
 extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00427a10. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
@@ -91,12 +91,12 @@ void FUN_00429048(unsigned int param_1,int *param_2,int param_3)
           FUN_00427a10(param_1,&DAT_0061b000);
           return;
         }
-        resultPairInitialize(param_1,0xc9413891);
+        _ZN18WindowStatusResultC1Ej(param_1,0xc9413891);
         return;
       }
     }
   }
-  resultPairInitialize(param_1,temp_v1);
+  _ZN18WindowStatusResultC1Ej(param_1,temp_v1);
   return;
 }
 

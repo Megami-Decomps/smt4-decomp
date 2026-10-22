@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003e5170(int, unsigned int);
+int battleRecordInitializeFromDefinition(int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_003e5170. */
+/* Supplied declaration required: battleRecordInitializeFromDefinition. */
 
 
 void FUN_003e4f04(unsigned int param_1,unsigned int param_2)
@@ -52,12 +52,12 @@ void FUN_003e4f04(unsigned int param_1,unsigned int param_2)
       *(short *)(temp_v0 + 300) = (short)param_1;
       *(unsigned int *)(temp_v0 + 0x130) = *(unsigned int *)(temp_v0 + 0x130) | 1;
       *(short *)(temp_v0 + 0x12e) = (short)temp_v2;
-      FUN_003e5170(temp_v0,param_2);
+      battleRecordInitializeFromDefinition(temp_v0,param_2);
       return;
     }
   }
   *(unsigned int *)(temp_v0 + 0x130) = *(unsigned int *)(temp_v0 + 0x130) | 1;
-  FUN_003e5170(temp_v0,param_2);
+  battleRecordInitializeFromDefinition(temp_v0,param_2);
   return;
 }
 

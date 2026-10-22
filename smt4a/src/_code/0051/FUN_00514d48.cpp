@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00122024(int, unsigned int *);
 int rt_malloc(...);
 int asdOperatorDeleteArray(unsigned int);
-int onlineStringDestroy(unsigned char *[2]);
+int _ZN9Obj55aff4D1Ev(unsigned char *[2]);
 int FUN_002e9518(int, int);
 int _ZN9Obj55aff4C1Ev(...);
 int _ZN9Obj559edcD1Ev(unsigned char **);
@@ -44,15 +44,15 @@ extern unsigned char DAT_0055ad28; /* 0x55ad28 */
 /* Supplied declaration required: FUN_00122024. */
 /* Supplied declaration required: rt_malloc. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9518. */
-extern int onlineStringCopyConstruct(unsigned int *, unsigned int *);
+extern int _ZN9Obj55aff4C1ERKS_(unsigned int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
 /* Supplied declaration required: _ZN9Obj559edcD1Ev. */
-extern int clearWords2Alt(int);
+extern int _ZN12ZeroWordPairC1Ev(int);
 extern int FUN_00303146(int, unsigned int *);
-extern int FUN_003038fc(int, unsigned int);
-extern int FUN_00303928(int, unsigned int, unsigned int *);
+extern int _ZN9Obj55b104C1Ejj(int, unsigned int);
+extern int _ZN9Obj5596acC1EhRK10WordVector(int, unsigned int, unsigned int *);
 
 
 int * FUN_00514d48(int *param_1,unsigned int param_2)
@@ -94,21 +94,21 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v15 = 0;
   temp_v13 = param_1;
   temp_v0 = _ZN9Obj55aff4C1Ev(temp_v16);
-  temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
+  temp_v0 = _ZN9Obj55b104C1Ejj(temp_v0 + 0xc,0);
   temp_v17 = 0;
   temp_v18 = 0;
   temp_v19 = (unsigned int *)0x0;
-  temp_v0 = FUN_00303928(temp_v0 + 0x20,3,&temp_v17);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x20,3,&temp_v17);
   asdOperatorDeleteArray(temp_v17);
   temp_v20 = 0;
   temp_v21 = 0;
   temp_v22 = 0;
-  temp_v0 = FUN_00303928(temp_v0 + 0x14,3,&temp_v20);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x14,3,&temp_v20);
   asdOperatorDeleteArray(temp_v20);
-  temp_v0 = clearWords2Alt(temp_v0 + 0x18);
-  temp_v0 = clearWords2Alt(temp_v0 + 8);
-  temp_v0 = clearWords2Alt(temp_v0 + 0x18);
-  temp_v0 = clearWords2Alt(temp_v0 + 8);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x18);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 8);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x18);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 8);
   _ZN9Obj55aff4C1Ev(temp_v7);
   *(int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -117,7 +117,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   *(int *)(temp_v0 + 8) = temp_v1;
   *(int *)(temp_v0 + 0xc) = temp_v1;
   *(int *)(temp_v0 + 0x10) = temp_v1 + 0x100;
-  onlineStringDestroy(temp_v7);
+  _ZN9Obj55aff4D1Ev(temp_v7);
   temp_v10 = &DAT_0055a884;
   *(int *)(temp_v0 + 0x14) = 0;
   *(unsigned int *)(temp_v0 + 0x18) = 0;
@@ -155,7 +155,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
         temp_v19[3] = temp_v2;
         temp_v19[4] = temp_v23[4];
         temp_v19[5] = temp_v23[5];
-        temp_v0 = onlineStringCopyConstruct(temp_v19 + 6,temp_v23 + 6);
+        temp_v0 = _ZN9Obj55aff4C1ERKS_(temp_v19 + 6,temp_v23 + 6);
         *(unsigned short *)(temp_v0 + 8) = *(unsigned short *)(puVar1 + 8);
         temp_v0 = temp_v0 + 0xc;
         FUN_00122024(temp_v0,puVar1 + 9);

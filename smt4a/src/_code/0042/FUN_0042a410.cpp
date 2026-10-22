@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail array destruction or constructor lifetime code generation differs. */
 #include "common.h"
 
 extern "C" {

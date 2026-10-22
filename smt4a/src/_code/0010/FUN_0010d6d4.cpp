@@ -29,7 +29,7 @@ extern unsigned char DAT_0055af54; /* 0x55af54 */
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: streamReaderReadU32. */
 /* Supplied declaration required: FUN_002e7908. */
-extern unsigned int *sharedRefInit(unsigned char *, int, int *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(unsigned char *, int, int *);
 /* Supplied declaration required: FUN_002e9ff4. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ecad4. */
@@ -65,7 +65,7 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
     FUN_002e7908(param_1,&temp_v6);
   }
   else {
-    puVar1 = (unsigned int *)sharedRefInit(temp_v9,param_3[1],param_3 + 2);
+    puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(temp_v9,param_3[1],param_3 + 2);
     *puVar1 = (unsigned int)&DAT_0055af54;
     FUN_002ecad4(puVar1,temp_v2,0);
     strAssign(temp_v9,*param_3,param_3[1] - *param_3,0xffffffff);

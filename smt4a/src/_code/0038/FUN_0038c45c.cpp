@@ -19,7 +19,7 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-extern int FUN_0017760c(unsigned int);
+extern int recordGetScaledMaximum(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
 
@@ -50,7 +50,7 @@ unsigned int FUN_0038c45c(void)
         }
       }
       else if (((temp_v1 & DAT_00570298) != 0 || (temp_v2 & DAT_0057029c) != 0) &&
-              (temp_v0 = FUN_0017760c(puVar5[0xff]), (int)puVar5[0x97] <= temp_v0)) {
+              (temp_v0 = recordGetScaledMaximum(puVar5[0xff]), (int)puVar5[0x97] <= temp_v0)) {
         scrSetResult(1);
         return 1;
       }
@@ -62,7 +62,7 @@ unsigned int FUN_0038c45c(void)
     temp_v3 = btlGetMainState();
     FUN_003eaf20();
     if ((temp_v3 != 0) &&
-       (temp_v0 = FUN_0017760c(*(unsigned int *)(temp_v3 + 0x400)), *(int *)(temp_v3 + 0x25c) <= temp_v0)) {
+       (temp_v0 = recordGetScaledMaximum(*(unsigned int *)(temp_v3 + 0x400)), *(int *)(temp_v3 + 0x25c) <= temp_v0)) {
       scrSetResult(1);
       return 1;
     }

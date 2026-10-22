@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail cmp r0, r1; compiler sub r1, r1, r0. */
 #include "common.h"
 
 extern "C" {

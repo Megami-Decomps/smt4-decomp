@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int FUN_002e7908(int *, int *);
 int vectorCopyHeader(...);
@@ -25,7 +25,7 @@ extern signed char DAT_00594973; /* 0x594973 */
 extern int *DAT_00594aa8; /* 0x594aa8 */
 
 extern unsigned int FUN_00123830(int *);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: vectorCopyHeader. */
@@ -82,7 +82,7 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
     vectorCopyHeader(temp_v11,temp_v0);
     temp_v1 = param_2[0x22];
     if (temp_v1 != 0) {
-      FUN_002e6e34(temp_v3,temp_v1 + 4);
+      _ZN9Obj55b28cC1EPv(temp_v3,temp_v1 + 4);
       temp_v7 = *(int *)(temp_v1 + 0x34);
       uStack_38 = *(unsigned int *)(temp_v1 + 0x38);
       uStack_34 = *(unsigned int *)(temp_v1 + 0x3c);
@@ -94,7 +94,7 @@ void FUN_001085bc(unsigned int param_1,int *param_2)
         temp_v4 = *temp_v11;
         uStack_4c = temp_v11[1];
         uStack_48 = temp_v11[2];
-        FUN_002e6e34(temp_v10,temp_v1 + 4,uStack_48,temp_v5);
+        _ZN9Obj55b28cC1EPv(temp_v10,temp_v1 + 4,uStack_48,temp_v5);
         temp_v5[0] = 1;
         temp_v1 = temp_v1 + 0x34;
         temp_v2 = FUN_002ea6fc(temp_v1,temp_v5);

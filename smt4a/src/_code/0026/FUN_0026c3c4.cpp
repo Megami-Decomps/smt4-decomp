@@ -5,7 +5,7 @@
 extern "C" {
 
 int slotRecordFindById(...);
-int FUN_002f01e0(int, unsigned int);
+int statusReplaceSkills(int, unsigned int);
 int FUN_0035da20(unsigned int *, int);
 int rt_memcpy(int, unsigned int, unsigned int);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Supplied declaration required: slotRecordFindById. */
-/* Supplied declaration required: FUN_002f01e0. */
+/* Supplied declaration required: statusReplaceSkills. */
 /* Supplied declaration required: FUN_0035da20. */
 extern unsigned int countUnlockedSlots(void);
 extern char FUN_004bcaa8(unsigned short, unsigned short, int, unsigned int *, unsigned char);
@@ -55,7 +55,7 @@ void FUN_0026c3c4(unsigned int param_1)
   }
   temp_v1 = temp_v3 + 0x13e0;
   rt_memcpy(temp_v1,param_1,temp_v4 << 1);
-  FUN_002f01e0(temp_v1,temp_v4 & 0xff);
+  statusReplaceSkills(temp_v1,temp_v4 & 0xff);
   temp_v5 = 0;
   temp_v6 = 0;
   temp_v7 = 0;

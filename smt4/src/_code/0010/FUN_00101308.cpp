@@ -10,7 +10,7 @@ int FUN_00103f90(...);
 int FUN_001042b8(...);
 int FUN_00106e60(...);
 int FUN_00106f70(...);
-int FUN_002c0d08(...);
+int appletUnlockAndSleepIfShellClosed(...);
 int FUN_002c55b4(...);
 int appletIsExitRequested(...);
 int sleepQueryAnswer(...);
@@ -104,7 +104,7 @@ int FUN_00106c28(...);
 int FUN_00106d40(...);
 int FUN_00106e10(...);
 int randomStateSeed(...);
-int FUN_0010dc00(...);
+int initializeAndResetSubsystems(...);
 int asdGxCommandListCreate(...);
 int asdLoadFileSync(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
@@ -365,9 +365,9 @@ extern int FUN_00107538(unsigned int);
 /* Supplied declaration required: FUN_00107598. */
 /* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: FUN_0010b5e8. */
-/* Supplied declaration required: FUN_0010dc00. */
+/* Supplied declaration required: initializeAndResetSubsystems. */
 /* Supplied declaration required: FUN_00123934. */
-/* Supplied declaration required: FUN_002c0d08. */
+/* Supplied declaration required: appletUnlockAndSleepIfShellClosed. */
 extern unsigned long long FUN_002c5434(unsigned int);
 /* Supplied declaration required: FUN_002c55b4. */
 /* Supplied declaration required: appletIsExitRequested. */
@@ -468,7 +468,7 @@ void FUN_00101308(void)
   asdMemoryInit(0x100000);
   asdMemorySetUseAllocatorA(1);
   FUN_0010250c();
-  FUN_0010dc00();
+  initializeAndResetSubsystems();
   FUN_00106e10();
   nn_pl_CTR_InitializeGameCoin();
   FUN_00106c28();
@@ -867,7 +867,7 @@ LAB_00101b80:
       if (!(temp_v2 == 1 || temp_v2 == 2)) {
         if (temp_v2 == 3) {
           if (DAT_00446db2 != '\0') {
-            FUN_002c0d08();
+            appletUnlockAndSleepIfShellClosed();
             temp_v3 = temp_v9;
           }
           else {

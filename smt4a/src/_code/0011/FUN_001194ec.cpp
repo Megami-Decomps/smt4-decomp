@@ -5,8 +5,8 @@
 extern "C" {
 
 int sharedRefAddRef(...);
-int onlineStringDestroy(unsigned char [8]);
-int onlineStringAssign(...);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
+int _ZN9Obj55aff4aSERKS_(...);
 int FUN_002e9c0c(void);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(...);
@@ -41,8 +41,8 @@ extern int FUN_00124130(int);
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: FUN_002e9c0c. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea2e8. */
@@ -97,9 +97,9 @@ void FUN_001194ec(int param_1)
     (**(romwright_code **)(**(int **)(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x24) + 0x14))();
     temp_v1 = *(int *)(*(int *)(param_1 + 0x198) + 0x78);
     temp_v0 = FUN_002ea100(temp_v10,*(unsigned int *)(param_1 + 0x74));
-    onlineStringAssign(temp_v1 + 0x1c,temp_v0);
-    onlineStringDestroy(temp_v10);
-    onlineStringAssign(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x14,param_1 + 0x6c);
+    _ZN9Obj55aff4aSERKS_(temp_v1 + 0x1c,temp_v0);
+    _ZN9Obj55aff4D1Ev(temp_v10);
+    _ZN9Obj55aff4aSERKS_(*(int *)(*(int *)(param_1 + 0x198) + 0x78) + 0x14,param_1 + 0x6c);
     FUN_002e9c0c();
     temp_v7 = *(unsigned int *)(param_1 + 0x318);
     temp_v8 = *(unsigned int *)(param_1 + 0x31c);

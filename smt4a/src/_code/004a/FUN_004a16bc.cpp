@@ -13,7 +13,7 @@ int FUN_003180c4(int, unsigned char [304]);
 int FUN_0032d0c8(...);
 int FUN_003343f0(int);
 int FUN_0035ad50(int, unsigned char [304]);
-int FUN_0035deb0(void);
+int uniteCreatePreviewModel(void);
 int screen4AEnter(int);
 int sendEvent100020E(void);
 void FUN_004d0680(Screen4A*);
@@ -36,7 +36,7 @@ extern int gameGetMode(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: FUN_0035deb0. */
+/* Supplied declaration required: uniteCreatePreviewModel. */
 /* Supplied declaration required: screen4AEnter. */
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: sendEvent100020E. */
@@ -98,7 +98,7 @@ void FUN_004a16bc(int param_1)
   else {
     if (temp_v2 != 0) {
       screen4AEnter(param_1);
-      FUN_0035deb0();
+      uniteCreatePreviewModel();
       return;
     }
     if (temp_v8 != 0) {

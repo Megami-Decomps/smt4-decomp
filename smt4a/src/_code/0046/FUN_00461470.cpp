@@ -8,7 +8,7 @@ extern unsigned char DAT_0055c160; /* 0x55c160 */
 extern unsigned char DAT_0055c180; /* 0x55c180 */
 extern unsigned char DAT_0055c1c4; /* 0x55c1c4 */
 
-extern unsigned int *FUN_004611ac(unsigned int *);
+extern unsigned int *_ZN9Obj421c90C1Ev(unsigned int *);
 
 
 void FUN_00461470(unsigned int *param_1)
@@ -19,7 +19,7 @@ void FUN_00461470(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_0055c1c4;
   param_1[1] = 0;
   param_1[2] = 0;
-  puVar1 = (unsigned int *)FUN_004611ac(param_1 + 3);
+  puVar1 = (unsigned int *)_ZN9Obj421c90C1Ev(param_1 + 3);
   *puVar1 = (unsigned int)&DAT_0055c180;
   puVar1[-3] = (unsigned int)&DAT_0055c160;
   *(unsigned char *)(puVar1 + 0x95) = 0;

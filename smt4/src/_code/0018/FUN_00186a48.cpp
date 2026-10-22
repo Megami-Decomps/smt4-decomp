@@ -6,7 +6,7 @@ extern "C" {
 
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int FUN_002b0750(int, int, int, int, int, int, int, int);
-int FUN_002b93c8(...);
+int effectRenderTransformedInstance(...);
 int FUN_002ba12c(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: drawSkillCategoryLabel. */
 /* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
@@ -192,7 +192,7 @@ void FUN_00186a48(void)
     }
     else {
       VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002b93c8(temp_v1 + 0x2f0);
+      effectRenderTransformedInstance(temp_v1 + 0x2f0);
     }
     FUN_002ba12c(g_titleScene);
     temp_v8 = temp_v8 + temp_v11;
@@ -221,7 +221,7 @@ void FUN_00186a48(void)
       (**(romwright_code **)(temp_v10 + 0x12c8))();
       *(unsigned char *)(temp_v10 + 0x12c4) = 0;
     }
-    FUN_002b93c8(temp_v1 + 0x37c);
+    effectRenderTransformedInstance(temp_v1 + 0x37c);
     temp_v1 = g_titleScene;
     temp_v10 = packNibblesAndByte(6,7,0);
     piVar8 = (int *)(temp_v1 + 0x12ac);

@@ -16,7 +16,7 @@ int asdMdlManagerDestroy(...);
 int FUN_00212204(...);
 int lightOwnerRegister(...);
 int asdMdlManagerMarkDestroy(...);
-int FUN_002e08c8(...);
+int animationEvaluateCallback(...);
 int faderSetValue(...);
 int FUN_00359370(...);
 int animPlayerSetLoopPolicy(...);
@@ -47,7 +47,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_00212204. */
 /* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_002e08c8. */
+/* Supplied declaration required: animationEvaluateCallback. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
@@ -96,7 +96,7 @@ unsigned int FUN_002caea0(void)
         lightOwnerRegister(temp_v1,1);
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
-        FUN_002e08c8(*(unsigned int *)(*piVar4 + 8));
+        animationEvaluateCallback(*(unsigned int *)(*piVar4 + 8));
         faderSetValue(*(unsigned int *)(*piVar4 + 8));
       }
       FUN_003d502c(0);

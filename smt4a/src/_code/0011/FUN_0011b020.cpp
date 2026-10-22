@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001327b4(int, int);
+int onlineMessageListInsertCopy(int, int);
 int FUN_00307084(void);
 int FUN_003070aa(...);
 
@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_0011b0c8; /* 0x11b0c8 */
 
-/* Supplied declaration required: FUN_001327b4. */
+/* Supplied declaration required: onlineMessageListInsertCopy. */
 extern int FUN_002f7896(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_00307084. */
 /* Supplied declaration required: FUN_003070aa. */
@@ -66,7 +66,7 @@ unsigned int FUN_0011b020(int param_1,int param_2)
         }
         temp_v6 = (unsigned int *)*temp_v6;
       }
-      FUN_001327b4(temp_v0,param_2);
+      onlineMessageListInsertCopy(temp_v0,param_2);
       if (*(unsigned int *)(param_1 + 0x74) >= 6) {
         temp_v4 = *(unsigned int *)(*(int *)(param_1 + 0x70) + 4);
         FUN_003070aa(temp_v5,temp_v0,&temp_v4);

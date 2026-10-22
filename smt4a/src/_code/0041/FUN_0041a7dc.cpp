@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction scheduling only: retail loads the float zero for `scale` late (between the w34 and w3C stores); armcc hoists it to the top. */
 #include "common.h"
 
 extern "C" {

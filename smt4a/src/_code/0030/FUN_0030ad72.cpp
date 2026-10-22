@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int onlineStringCopyConstruct(int, int);
+int _ZN9Obj55aff4C1ERKS_(int, int);
 
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 extern int FUN_00310478(void);
 
 
@@ -19,8 +19,8 @@ int FUN_0030ad72(unsigned int param_1,int param_2)
   
   temp_v0 = FUN_00310478();
   if (temp_v0 + 0x10 != 0) {
-    temp_v1 = onlineStringCopyConstruct(temp_v0 + 0x10,param_2);
-    onlineStringCopyConstruct(temp_v1 + 8,param_2 + 8);
+    temp_v1 = _ZN9Obj55aff4C1ERKS_(temp_v0 + 0x10,param_2);
+    _ZN9Obj55aff4C1ERKS_(temp_v1 + 8,param_2 + 8);
   }
   return temp_v0;
 }

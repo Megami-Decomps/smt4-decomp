@@ -14,7 +14,7 @@ int cecProcessCall2(void);
 int FUN_0031d890(void);
 int FUN_0032e25c(int, int);
 int playerSummaryFill(int);
-int FUN_003a4980(unsigned int, int, unsigned int);
+int characterInfoPanelPopulate(unsigned int, int, unsigned int);
 
 typedef struct fn_00387bb8_arg0 fn_00387bb8_arg0;
 struct fn_00387bb8_arg0 {
@@ -54,7 +54,7 @@ extern int partyPanelExists(void);
 /* Supplied declaration required: FUN_0032e25c. */
 /* Supplied declaration required: playerSummaryFill. */
 extern int gameDataTestFlags(unsigned int);
-/* Supplied declaration required: FUN_003a4980. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 
 
 unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
@@ -79,7 +79,7 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
     if (param_1->field_0x108 == 0) {
       rt_aeabi_memclr(param_1->field_0x8 + 0x50,0x14);
     }
-    FUN_003a4980(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8,
+    characterInfoPanelPopulate(*(unsigned int *)&param_1->field_0xc,param_1->field_0x8,
                  *(unsigned int *)&param_1->field_0x58);
     campCecDispatchMode(param_1->field_0x8);
     FUN_002f4014(param_1->field_0x8);

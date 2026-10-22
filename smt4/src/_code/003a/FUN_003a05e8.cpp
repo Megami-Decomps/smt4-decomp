@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00230ecc(unsigned short);
+extern int contentGetKindValue(unsigned short);
 extern int FUN_00230f44(unsigned short *);
 extern int FUN_002ae3c0(unsigned short);
 
@@ -24,11 +24,11 @@ int FUN_003a05e8(unsigned short *param_1,unsigned short *param_2)
   temp_v4 = 0;
   temp_v2 = FUN_002ae3c0(temp_v0);
   if ((temp_v2 == 2 || temp_v2 == 3) || temp_v2 == 8) {
-    temp_v3 = FUN_00230ecc(temp_v0);
+    temp_v3 = contentGetKindValue(temp_v0);
   }
   temp_v2 = FUN_002ae3c0(temp_v1);
   if ((temp_v2 == 2 || temp_v2 == 3) || temp_v2 == 8) {
-    temp_v4 = FUN_00230ecc(temp_v1);
+    temp_v4 = contentGetKindValue(temp_v1);
   }
   temp_v4 = temp_v4 - temp_v3;
   if (temp_v4 == 0) {

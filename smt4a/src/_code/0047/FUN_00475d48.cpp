@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00161a10(void);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int legacyResourceIdRemap(unsigned int *);
 int FUN_004289cc(int *, int, int, int *, int);
 int table30GetEntry(unsigned char [4], unsigned int, unsigned int);
@@ -24,8 +24,8 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_004289cc. */
 /* Supplied declaration required: table30GetEntry. */
@@ -64,11 +64,11 @@ unsigned char * FUN_00475d48(unsigned char *param_1,int param_2)
   unsigned int temp_v8;
   
   *param_1 = 1;
-  puVar2 = (unsigned int *)FUN_001b5acc(param_1 + 4);
+  puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   puVar2[2] = 0;
   puVar2[3] = 0;
   puVar3 = (unsigned int *)&temp_v4;
-  resultPairInitialize(puVar3,0);
+  _ZN18WindowStatusResultC1Ej(puVar3,0);
   temp_v2 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v2;

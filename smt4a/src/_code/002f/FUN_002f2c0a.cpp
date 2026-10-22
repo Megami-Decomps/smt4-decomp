@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail copies the id byte (+0x25) to a stack temp (strb to sp) before taking its high nibble; built keeps it in a register */
 #include "common.h"
 
 extern "C" {

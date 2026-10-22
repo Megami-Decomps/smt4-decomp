@@ -10,7 +10,7 @@ typedef struct Object {
 
 extern u8 DAT_0055a5a0;
 
-int onlineStringDestroy(int ptr);
+int _ZN9Obj55aff4D1Ev(int ptr);
 int vectorDestroyBytes(void *member);
 int vectorTeardown_00307368(int ptr);
 
@@ -23,7 +23,7 @@ int FUN_0011b4e4(Object *self)
     ptr = vectorDestroyBytes(self->member);
     ptr = vectorTeardown_00307368(ptr - 0xc);
     ptr = vectorTeardown_00307368(ptr - 0xc);
-    ptr = onlineStringDestroy(ptr - 8);
+    ptr = _ZN9Obj55aff4D1Ev(ptr - 8);
     return ptr - 0x10;
 }
 

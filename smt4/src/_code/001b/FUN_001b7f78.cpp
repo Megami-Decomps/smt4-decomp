@@ -229,7 +229,7 @@ int FUN_0027c3d0(void);
 int FUN_0027cc48(...);
 int FUN_0027cc6c(void);
 int FUN_0027d0ec(void);
-int FUN_0027d40c(...);
+int mapCompleteGroup(...);
 int navigationSetArguments(...);
 int mapEntryTriggerForScene(...);
 int mapSkyTableLoad(...);
@@ -585,7 +585,7 @@ extern int FUN_00276348(int);
 extern int FUN_0027cda0(void);
 extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027d0ec. */
-/* Supplied declaration required: FUN_0027d40c. */
+/* Supplied declaration required: mapCompleteGroup. */
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: mapEntryTriggerForScene. */
 /* Supplied declaration required: mapSkyTableLoad. */
@@ -1153,13 +1153,13 @@ LAB_001b848c:
     uStack_1c4 = 0;
     FUN_0028529c(DAT_0049f924 & 0xff,0,0,0);
     if (g_gameState == 10) {
-      FUN_0027d40c(0x81001401);
+      mapCompleteGroup(0x81001401);
       uStack_1c8 = 0;
       uStack_1c4 = 0;
       FUN_0028529c(0x43,1,0);
     }
     if (g_gameState == 0x12) {
-      FUN_0027d40c(0x81801401);
+      mapCompleteGroup(0x81801401);
       uStack_1c8 = 0;
       uStack_1c4 = 0;
       FUN_0028529c(0x59,1,0);

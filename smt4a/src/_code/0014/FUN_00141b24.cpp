@@ -14,7 +14,7 @@ extern unsigned int DAT_0063e774; /* 0x63e774 */
 extern unsigned int DAT_0063e900; /* 0x63e900 */
 extern unsigned char DAT_0063e904; /* 0x63e904 */
 extern unsigned char DAT_0063e905; /* 0x63e905 */
-extern int *DAT_0063e944; /* 0x63e944 */
+extern int *g_soundHandleList; /* 0x63e944 */
 extern unsigned int DAT_0063e948; /* 0x63e948 */
 extern unsigned char DAT_0063e984; /* 0x63e984 */
 extern unsigned char DAT_0063e986; /* 0x63e986 */
@@ -70,7 +70,7 @@ void FUN_00141b24(void)
     }
     do {
       temp_v2 = temp_v2 + 1;
-      piVar2 = DAT_0063e944;
+      piVar2 = g_soundHandleList;
       if ((int)temp_v2 >= 2) {
         while (piVar2 != (int *)0x0) {
           if (*piVar2 != 0) {
@@ -81,7 +81,7 @@ void FUN_00141b24(void)
           asdMemFree(piVar2);
           piVar2 = piVar6;
         }
-        DAT_0063e944 = (int *)0x0;
+        g_soundHandleList = (int *)0x0;
         temp_v2 = 0;
         DAT_0063e948 = 0;
         do {

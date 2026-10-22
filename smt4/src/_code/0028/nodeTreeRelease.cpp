@@ -14,7 +14,7 @@ typedef struct Node {
     struct Node *next;   /* 0x30 */
 } Node;
 
-extern void FUN_0028ec64(void);
+extern void nodeTreeReleaseFollowingSiblings(Node *node);
 
 /* Releases the node's subtree and unlinks it from its parent and siblings; once only. */
 void nodeTreeRelease(Node *node)
@@ -29,7 +29,7 @@ void nodeTreeRelease(Node *node)
         first = node->child->next;
         if (first != NULL) {
             if (first->next != NULL) {
-                FUN_0028ec64();
+                nodeTreeReleaseFollowingSiblings(first->next);
             }
             nodeTreeRelease(first);
         }

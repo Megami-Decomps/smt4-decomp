@@ -8,7 +8,7 @@ int FUN_0014a930(...);
 int asdProcessCreateSimple(...);
 int FUN_0015f378(...);
 int FUN_002e3140(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -25,7 +25,7 @@ extern int FUN_001a6c40(...); /* 0x1a6c40 */
 /* Supplied declaration required: FUN_0015f378. */
 extern int FUN_0015f434(int);
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 int FUN_001481e4(int param_1)
@@ -41,7 +41,7 @@ int FUN_001481e4(int param_1)
   
   ppcVar3 = &temp_v1;
   param_1 = param_1 + 0xc;
-  FUN_002f5020(param_1,FUN_001a6c40,0xb8,0x60);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,FUN_001a6c40,0xb8,0x60);
   *(unsigned char *)(param_1 + 0x4500) = 0;
   temp_v0 = FUN_0015f434(param_1 + 0x4504);
   *(unsigned int *)(temp_v0 + 0x10) = 0;

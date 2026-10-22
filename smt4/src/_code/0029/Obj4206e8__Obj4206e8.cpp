@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail refers to FUN_00335124 while compiler references its constructor symbol alias. */
 #include "classes/Obj4206e8.h"
 
 /* Builds the three slots (default constructed), with no handle and the unk0C flag set. */

@@ -37,7 +37,7 @@ extern unsigned int gameSlotTableGetHeader(void);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: uiOwnerUpdateAnimationChannels. */
-extern int FUN_002333a4(int, unsigned int);
+extern int stateCounterBelowLimit(int, unsigned int);
 extern unsigned int FUN_002333f0(int);
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: messageMainSetTargetFlags. */
@@ -96,7 +96,7 @@ void FUN_003abed8(int param_1)
   }
   if (*(char *)(param_1 + 0x56e) != '\0') {
     temp_v2 = FUN_002333f0(param_1 + 0x55c);
-    temp_v3 = FUN_002333a4(param_1 + 0x20,temp_v2);
+    temp_v3 = stateCounterBelowLimit(param_1 + 0x20,temp_v2);
     if (temp_v3 != 0) {
       temp_v7 = 1;
     }

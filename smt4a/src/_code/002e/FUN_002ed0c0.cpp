@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, unsigned char *);
+int _ZN9Obj55b28cC1EPv(int *, unsigned char *);
 int _ZN9Obj55b28cD1Ev(int *);
 
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
@@ -24,7 +24,7 @@ void FUN_002ed0c0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002e6e34(&uStack_18,&DAT_0062e6a0);
+  _ZN9Obj55b28cC1EPv(&uStack_18,&DAT_0062e6a0);
   *(unsigned int *)(param_1 + 0xc) = param_2;
   _ZN9Obj55b28cD1Ev(&uStack_18);
   return;

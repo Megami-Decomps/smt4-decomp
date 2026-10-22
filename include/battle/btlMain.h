@@ -37,6 +37,13 @@ typedef struct BtlMainState {
 struct BtlCombatantEntryA;
 struct BattleRosterRecordA;
 
+/* The command block and the auxiliary message it accompanies. */
+typedef struct BtlCommandMessageStateA {
+    /* 0x000 */ u32 commandWords[4];
+    /* 0x010 */ u8 unk010[0x25C];
+    /* 0x26C */ u32 auxiliaryMessage;
+} BtlCommandMessageStateA;
+
 /* The same block in Apocalypse. */
 typedef struct BtlMainStateA {
     /* 0x0000 */ u32 job;         /* job that runs the battle */
@@ -60,6 +67,7 @@ typedef struct BtlMainStateA {
     union {
         /* 0x2000 */ u8 unk2000[0x2cd0];
         /* 0x2000 */ u32 commandWords[4]; /* pending command is low/high words [2]/[3] */
+        /* 0x2000 */ BtlCommandMessageStateA commandMessage;
         struct {
             u8 unk2000[0x25a0];
             /* 0x45A0 */ u32 words[2];

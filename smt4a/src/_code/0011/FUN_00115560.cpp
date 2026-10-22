@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int FUN_002f2978(unsigned int, unsigned int, unsigned int, unsigned int *, unsigned int *);
 int FUN_002f2e3c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int *, int);
-int FUN_002f5020(unsigned char [4], unsigned char *, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [4], unsigned char *, int);
 int FUN_00301484(unsigned int);
 
 typedef int romwright_code(...);
@@ -25,11 +25,11 @@ typedef struct {
 extern unsigned char LAB_00106e41; /* 0x106e41 */
 extern unsigned char g_listenerTable; /* 0x594ad8 */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f2978. */
 /* Supplied declaration required: FUN_002f2e3c. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00301484. */
 
 
@@ -56,9 +56,9 @@ unsigned int FUN_00115560(int param_1,unsigned int param_2)
   
   iStack_1c = param_1;
   temp_v13 = param_2;
-  FUN_002f5020(temp_v6,&LAB_00106e41,8);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v6,&LAB_00106e41,8);
   temp_v5 = 0;
-  FUN_002e6e34(temp_v8,param_1 + 4);
+  _ZN9Obj55b28cC1EPv(temp_v8,param_1 + 4);
   temp_v0 = 0;
   do {
     temp_v4 = temp_v0 * 4 + param_1;
@@ -84,7 +84,7 @@ unsigned int FUN_00115560(int param_1,unsigned int param_2)
   if ((temp_v5 != 0) &&
      (temp_v2 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_listenerTable + 0x48)) + 0x10))((*(int * *)((unsigned char *)&g_listenerTable + 0x48)),temp_v6,temp_v5,temp_v13),
      temp_v2 != 0)) {
-    FUN_002e6e34(temp_v12,param_1 + 4);
+    _ZN9Obj55b28cC1EPv(temp_v12,param_1 + 4);
     for (temp_v0 = 0; temp_v0 < temp_v5; temp_v0 = temp_v0 + 1) {
       temp_v9 = temp_v0 * 4;
       puVar7 = *(unsigned int **)(temp_v11[temp_v0] * 4 + param_1 + 0x34);

@@ -13,6 +13,21 @@ struct NwFontFileHeader {
     /* 0x12 */ u16 reserved;
 };
 
+struct FontGlyphLookup;
+struct FontGlyphLookupVTable {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ bool (*hasGlyph)(FontGlyphLookup *font, u16 code);
+};
+struct FontGlyphLookup {
+    /* 0x00 */ FontGlyphLookupVTable *vtable;
+};
+struct FontGlyphResourceOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ FontGlyphLookup *font;
+};
+typedef char FontGlyphLookupVTableSizeCheck[sizeof(FontGlyphLookupVTable) == 0x48 ? 1 : -1];
+typedef char FontGlyphResourceOwnerSizeCheck[sizeof(FontGlyphResourceOwner) == 0x0C ? 1 : -1];
+
 extern "C" {
 bool nw_font_ResFontSetResource(NwResFontBase* font, NwFontFileHeader* file);
 void nw_font_ResFontSetResourceBuffer(NwResFontBase* font, NwFontFileHeader* file, NwFontInfo* info);

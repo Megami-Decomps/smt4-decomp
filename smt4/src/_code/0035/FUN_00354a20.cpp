@@ -5,7 +5,7 @@
 extern "C" {
 
 int recordValidatePair(int, int, unsigned int);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_0035f774(unsigned char *, char [16], int, int, unsigned int, unsigned int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char libc_toupper(void);
 /* Supplied declaration required: recordValidatePair. */
 extern int FUN_0023a1f8(int);
 extern int legacyResourceIdRemap(unsigned int *);
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_00354834(int);
 /* Supplied declaration required: FUN_0035f774. */
 
@@ -50,7 +50,7 @@ void FUN_00354a20(unsigned int *param_1,int param_2,int param_3)
     puVar3 = temp_v4;
     FUN_0035f774(puVar3,s_sys_ECardStatus_0044e4c8,3,param_2 + 4,*(unsigned int *)(param_2 + 8),
                  *(unsigned int *)(param_2 + 0xc));
-    resultPairInitialize(&temp_v3,puVar3);
+    _ZN18WindowStatusResultC1Ej(&temp_v3,puVar3);
     recordValidatePair(param_2,temp_v3,uStack_44);
     temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v3);
     if (temp_v1 < 0) {
@@ -60,11 +60,11 @@ void FUN_00354a20(unsigned int *param_1,int param_2,int param_3)
     }
     temp_v1 = FUN_00354834(param_2);
     if (-1 < temp_v1) {
-      resultPairInitialize(param_1,0);
+      _ZN18WindowStatusResultC1Ej(param_1,0);
       return;
     }
   }
-  resultPairInitialize(param_1,temp_v1);
+  _ZN18WindowStatusResultC1Ej(param_1,temp_v1);
   return;
 }
 

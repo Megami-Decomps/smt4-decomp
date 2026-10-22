@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only: retail loads slot 0 after the store of the cleared counter; built hoists the load above it. */
 #include "common.h"
 
 extern "C" {

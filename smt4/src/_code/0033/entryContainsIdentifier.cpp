@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail grouped bit tests or aggregate-copy runtime selection differs. */
 #include "common.h"
 
 struct EntryState { u32 unk00; s32 id; };

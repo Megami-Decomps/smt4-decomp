@@ -13,10 +13,10 @@ extern unsigned char DAT_00559ee4; /* 0x559ee4 */
 extern unsigned int vectorInitEmpty(unsigned char *);
 /* Supplied declaration required: vectorDestroyWords. */
 extern int _ZN9Obj55aff4C1Ev(unsigned int *);
-extern int clearWords2Alt(int);
-extern int FUN_003038fc(int, unsigned int);
-extern int FUN_00303928(int, unsigned int, unsigned int);
-extern int FUN_0030395c(int, unsigned int);
+extern int _ZN12ZeroWordPairC1Ev(int);
+extern int _ZN9Obj55b104C1Ejj(int, unsigned int);
+extern int _ZN9Obj5596acC1EhRK10WordVector(int, unsigned int, unsigned int);
+extern int _ZN15Obj55aff4VectorC1Ej(int, unsigned int);
 
 
 int FUN_00117b3c(unsigned int *param_1)
@@ -31,18 +31,18 @@ int FUN_00117b3c(unsigned int *param_1)
   *param_1 = (unsigned int)&DAT_00559ee4;
   *(unsigned char *)(param_1 + 1) = 0;
   temp_v0 = _ZN9Obj55aff4C1Ev(param_1 + 6);
-  temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
+  temp_v0 = _ZN9Obj55b104C1Ejj(temp_v0 + 0xc,0);
   temp_v1 = vectorInitEmpty(temp_v2);
-  temp_v0 = FUN_00303928(temp_v0 + 0x20,3,temp_v1);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x20,3,temp_v1);
   vectorDestroyWords(temp_v2);
   temp_v1 = vectorInitEmpty(temp_v3);
-  temp_v0 = FUN_00303928(temp_v0 + 0x14,3,temp_v1);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x14,3,temp_v1);
   vectorDestroyWords(temp_v3);
-  temp_v0 = clearWords2Alt(temp_v0 + 0x18);
-  temp_v0 = clearWords2Alt(temp_v0 + 8);
-  temp_v0 = clearWords2Alt(temp_v0 + 0x18);
-  temp_v0 = clearWords2Alt(temp_v0 + 8);
-  temp_v0 = FUN_0030395c(temp_v0 + 8,0);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x18);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 8);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 0x18);
+  temp_v0 = _ZN12ZeroWordPairC1Ev(temp_v0 + 8);
+  temp_v0 = _ZN15Obj55aff4VectorC1Ej(temp_v0 + 8,0);
   temp_v0 = temp_v0 + 0xc;
   FUN_0012cfde(temp_v0,0);
   return temp_v0 - 0xac;

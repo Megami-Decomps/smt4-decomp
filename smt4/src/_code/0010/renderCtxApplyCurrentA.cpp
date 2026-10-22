@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002c4f8c(TitleScene *scene, u32 value);
+void effectRestoreSavedRenderPairs(TitleScene *scene, u32 value);
 u32 FUN_002c501c(void);
 
 extern TitleScene *g_titleScene;
@@ -13,7 +13,7 @@ u32 renderCtxApplyCurrentA(void)
 
     if (FUN_002c501c() != 0) {
         value = FUN_002c501c();
-        FUN_002c4f8c(g_titleScene, value);
+        effectRestoreSavedRenderPairs(g_titleScene, value);
     }
     return 0;
 }

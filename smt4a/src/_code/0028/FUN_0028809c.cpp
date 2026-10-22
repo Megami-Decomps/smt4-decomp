@@ -17,7 +17,7 @@ typedef struct {
 
 extern int btlGetMainState(void);
 extern int btlMainIsRunning(void);
-extern int FUN_0017760c(int);
+extern int recordGetScaledMaximum(int);
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(void);
 extern int FUN_0023ad2c(int);
@@ -87,7 +87,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
       temp_v8 = FUN_002b4dcc();
     }
     else {
-      temp_v8 = FUN_0017760c(temp_v6);
+      temp_v8 = recordGetScaledMaximum(temp_v6);
     }
   }
   temp_v3 = FUN_0023ad2c(param_3);

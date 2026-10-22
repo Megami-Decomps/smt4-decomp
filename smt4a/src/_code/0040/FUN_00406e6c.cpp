@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(int, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned int *, unsigned int *);
 
 extern unsigned char LAB_001f3e14; /* 0x1f3e14 */
@@ -24,7 +24,7 @@ extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int setMinus1ReturnPtr(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
@@ -123,7 +123,7 @@ int FUN_00406e6c(unsigned int *param_1)
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   temp_v1 = temp_v0 + 0x30;
   *(unsigned int *)(temp_v0 + 0x2c) = 0;
-  FUN_002f5020(temp_v1,&LAB_001f3e14,0xc,8);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_001f3e14,0xc,8);
   return temp_v1 - 0x114;
 }
 

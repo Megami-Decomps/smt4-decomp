@@ -20,8 +20,8 @@ void asdMemFree(void*);
 void* asdMemoryAlloc(u32, u32, u32, u32, u32);
 void rt_memclr(void*, u32);
 s32 textFormatBuffer(char*, const char*, ...);
-AocPollStorage* FUN_001b5acc(AocPollStorage*);
-AocPollResult* resultPairInitialize(AocPollResult*, s32);
+AocPollStorage* _ZN18WindowStatusResultC1Ev(AocPollStorage*);
+AocPollResult* _ZN18WindowStatusResultC1Ej(AocPollResult*, s32);
 u32 legacyResourceIdRemap(const AocPollResult*);
 u32 FUN_0042a410(u32*, u32, u32, u32, u32, u32);
 u32 jyoucyuGetTableEntry(u32);
@@ -36,17 +36,17 @@ void aocFileContentPrepareMountBuffer(AocPollOutput* output, void* context, u32 
         work->buffer = NULL;
     }
     output->status = 0;
-    AocPollStorage* storage = FUN_001b5acc(&output->storage);
+    AocPollStorage* storage = _ZN18WindowStatusResultC1Ev(&output->storage);
     storage->unk08 = 0;
     storage->unk0c = 0;
     // Subsequent status updates belong to the storage returned by the initializer.
     output = reinterpret_cast<AocPollOutput*>(
         reinterpret_cast<u8*>(storage) - offsetof(AocPollOutput, storage));
     AocPollResult result;
-    output->storage.result = *resultPairInitialize(&result, 0);
+    output->storage.result = *_ZN18WindowStatusResultC1Ej(&result, 0);
 
     const u32 rawResult = FUN_0042a410(&work->bufferSize, 0x19A2, content, 2, 2, 0);
-    resultPairInitialize(&result, static_cast<s32>(rawResult));
+    _ZN18WindowStatusResultC1Ej(&result, static_cast<s32>(rawResult));
     if (legacyResourceIdRemap(&result) >> 31) {
         jyoucyuGetTableEntry(0);
         output->status = 100;

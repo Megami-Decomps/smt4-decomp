@@ -106,11 +106,11 @@ int FUN_0013b5c8(...);
 int FUN_0013b6e0(...);
 int FUN_0013b790(...);
 int randomStateSeed(...);
-int FUN_001432cc(...);
+int systemInitializeAndResetSharedState(...);
 int asdGxCommandListCreate(...);
 int FUN_001642e4(...);
 int jyoucyuGetTableEntry(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 24 slot(s), 94 byte(s) */
@@ -379,7 +379,7 @@ extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_00140ba4. */
-/* Supplied declaration required: FUN_001432cc. */
+/* Supplied declaration required: systemInitializeAndResetSharedState. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdGxCommandListCreate. */
@@ -394,7 +394,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned long long FUN_00170390(unsigned int);
 /* Supplied declaration required: FUN_001703b0. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0030fc80. */
 extern void nn_cfg_CTR_Initialize(void);
 extern void nn_pl_CTR_InitializeGameCoin(void);
@@ -463,7 +463,7 @@ void FUN_00135c30(void)
   asdMemoryInit(0x100000);
   asdMemorySetUseAllocatorA(1);
   FUN_00136df8();
-  FUN_001432cc();
+  systemInitializeAndResetSharedState();
   temp_v2 = jyoucyuGetTableEntry(0);
   if (temp_v2 == 0) {
     asdFileHashPackOpen(&LAB_0013602c,&LAB_00136020,1);
@@ -502,7 +502,7 @@ void FUN_00135c30(void)
   FUN_00138d34();
   asdGxPresetVectorSet(0);
   asdGxPresetVectorSet(1);
-  FUN_002f5020(&temp_v22,&LAB_0013ba98,0x3c,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v22,&LAB_0013ba98,0x3c,2);
   *(unsigned int *)((int)ppcVar5 + 0x80) = 0;
   *(unsigned short *)((int)ppcVar5 + 0x84) = 0x8058;
   *(unsigned int *)((int)ppcVar5 + 0x88) = 0;

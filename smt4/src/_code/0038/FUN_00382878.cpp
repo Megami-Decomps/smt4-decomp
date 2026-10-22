@@ -25,7 +25,7 @@ typedef struct {
 
 extern unsigned char LAB_00382cd0; /* 0x382cd0 */
 
-extern int FUN_00235414(unsigned char);
+extern int storyModeCanProceed(unsigned char);
 extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00287528. */
 extern int objectFlagBitIsSet(unsigned int, unsigned int);
@@ -62,7 +62,7 @@ void FUN_00382878(int param_1)
   unsigned char temp_v10 [72];
   unsigned char temp_v11 [36];
   
-  temp_v1 = FUN_00235414(*(unsigned char *)(param_1 + 0x18));
+  temp_v1 = storyModeCanProceed(*(unsigned char *)(param_1 + 0x18));
   if (temp_v1 != 0) {
     temp_v9 = (unsigned char *)0xffffffff;
     FUN_00287528(&temp_v9);
@@ -167,7 +167,7 @@ void FUN_00382878(int param_1)
   temp_v3 = dataTable26GroupGetRecordS2(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
   temp_v4 = dataTable26GroupGetRecord(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
   puVar10 = (unsigned char *)(temp_v3 + (unsigned int)*(unsigned char *)(temp_v1 + 10) * 0x20);
-  temp_v5 = FUN_00235414(*(unsigned char *)(param_1 + 0x18));
+  temp_v5 = storyModeCanProceed(*(unsigned char *)(param_1 + 0x18));
   if ((temp_v5 != 0) && (*(int *)(param_1 + 0x1c) == 0)) {
     puVar10 = (unsigned char *)(temp_v3 + (unsigned int)*(unsigned char *)(temp_v1 + 10) * 0x20 + 0x20);
   }

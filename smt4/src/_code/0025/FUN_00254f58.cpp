@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0033b4ac(int, int);
+int battleSortTurnOrder(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_1_stack;
 
 extern short FUN_00255de0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0033b4ac. */
+/* Supplied declaration required: battleSortTurnOrder. */
 
 
 void FUN_00254f58(int param_1)
@@ -76,7 +76,7 @@ void FUN_00254f58(int param_1)
     } while ((int)temp_v3 < (int)temp_v7);
     if (0 < temp_v2) {
       *(unsigned short *)(param_1 + 0x2f1e) = 0;
-      FUN_0033b4ac(param_1,0);
+      battleSortTurnOrder(param_1,0);
       temp_v1 = *(unsigned short *)(param_1 + *(short *)(param_1 + 0x2f1e) * 2 + 0x2f06);
       *(unsigned short *)(param_1 + 0x1fc8) = temp_v1;
       return;

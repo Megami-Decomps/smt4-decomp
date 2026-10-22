@@ -5,13 +5,13 @@
 extern "C" {
 
 int onlineContextGetInstance(void);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
 int sharedRefAddRef(int);
 int FUN_002e78d0(unsigned int, int, int);
-int onlineStringConstruct(unsigned char [12], unsigned int);
-int onlineStringDestroy(unsigned char [12]);
+int _ZN9Obj55aff4C1EPKc(unsigned char [12], unsigned int);
+int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int FUN_002f7218(unsigned int, int);
 
 typedef struct fn_002e791c_arg0 fn_002e791c_arg0;
@@ -45,15 +45,15 @@ typedef struct {
 extern int FUN_00103fd4(void);
 extern int FUN_0011997c(int, unsigned int, fn_002e791c_arg0 *, unsigned int, unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: onlineContextGetInstance. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int onlineInstantiationContextGetCurrent(void);
 /* Supplied declaration required: FUN_002f7218. */
 
@@ -82,7 +82,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   temp_v0 = onlineInstantiationContextGetCurrent();
   FUN_002f7218(temp_v0,0);
   temp_v1 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v3,temp_v1 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v3,temp_v1 + 0x58);
   if (param_1->field_0x9c != 0) {
     if (*(char *)(param_1->field_0x9c + 0x22) != '\x05') {
       _ZN9Obj55b28cD1Ev(temp_v3);
@@ -123,12 +123,12 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
     temp_v1 = operatorNew(0x328);
     if (temp_v1 != 0) {
       temp_v0 = *(unsigned int *)(param_1 + 1);
-      onlineStringConstruct(temp_v4,temp_v7);
+      _ZN9Obj55aff4C1EPKc(temp_v4,temp_v7);
       temp_v1 = FUN_0011997c(temp_v1,*(unsigned int *)(temp_v5 + 0x44),param_1,temp_v6,temp_v4,
                            param_5,param_6,param_7,param_8,param_9,param_10,temp_v0,
                            *(unsigned int *)&param_1->field_0x90);
       param_1->field_0x94 = temp_v1;
-      onlineStringDestroy(temp_v4);
+      _ZN9Obj55aff4D1Ev(temp_v4);
       temp_v1 = param_1->field_0x94;
     }
     else {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010cdce(int *);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int FUN_002ea734(int *);
 int FUN_002eab08(...);
 int FUN_002eab2a(unsigned int);
@@ -22,7 +22,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0010cdce. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 extern int _ZN9Obj55b28cD1Ev(unsigned char *);
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea734. */
@@ -69,7 +69,7 @@ int FUN_00104952(int *param_1)
       param_1[0x23] = temp_v6;
       FUN_0010cdce(param_1 + 5);
       temp_v2 = onlineGetActiveLock();
-      FUN_002e6e34(temp_v8,temp_v2);
+      _ZN9Obj55b28cC1EPv(temp_v8,temp_v2);
       (**(romwright_code **)(*param_1 + 0x54))(param_1);
       temp_v9 = *(int *)(param_1[0x19] + 8);
       while( 1 ) {

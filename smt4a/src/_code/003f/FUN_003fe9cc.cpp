@@ -5,7 +5,7 @@
 extern "C" {
 
 int rt_aeabi_memclr(unsigned int *, int);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_003fe544(unsigned int *, unsigned int, unsigned int);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned int *, unsigned int *);
 
@@ -27,7 +27,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_003fe544. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
@@ -46,7 +46,7 @@ FUN_003fe9cc(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   param_1[2] = 0;
   param_1[3] = 0;
   param_1 = param_1 + 9;
-  FUN_002f5020(param_1,&LAB_003fe99c,0x30,2);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_003fe99c,0x30,2);
   param_1[0x1d] = 0;
   param_1[0x1e] = 0;
   param_1[0x21] = 0;

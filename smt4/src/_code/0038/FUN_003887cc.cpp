@@ -14,7 +14,7 @@ int byteIsAtLeast100(...);
 int FUN_002b486c(...);
 int FUN_002b4b88(...);
 int FUN_002ba968(...);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_002bcc60(...);
 int FUN_002c526c(...);
 int jyoucyuGetTableEntry(...);
@@ -57,8 +57,8 @@ extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b486c. */
 /* Supplied declaration required: FUN_002b4b88. */
 /* Supplied declaration required: FUN_002ba968. */
-/* Supplied declaration required: resultPairInitialize. */
-extern int *FUN_002bad5c(unsigned char *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -104,12 +104,12 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
   
   ppuVar9 = &temp_v8;
   *param_1 = 1;
-  piVar1 = (int *)FUN_002bad5c(param_1 + 4);
+  piVar1 = (int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
   piVar1[2] = 0;
   piVar11 = piVar1 + -1;
   piVar1[3] = 0;
   piVar2 = &temp_v10;
-  resultPairInitialize(piVar2,0);
+  _ZN18WindowStatusResultC1Ej(piVar2,0);
   temp_v3 = piVar2[1];
   *piVar1 = *piVar2;
   piVar1[1] = temp_v3;
@@ -358,7 +358,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
                 *(char *)piVar11 = '\x01';
                 piVar2 = &temp_v10;
                 piVar1[2] = 0;
-                resultPairInitialize();
+                _ZN18WindowStatusResultC1Ej();
                 temp_v3 = piVar2[1];
                 *piVar1 = *piVar2;
                 piVar1[1] = temp_v3;

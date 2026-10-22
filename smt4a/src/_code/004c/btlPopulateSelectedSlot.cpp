@@ -43,7 +43,7 @@ void FUN_003eb314(BattleSlotState *, BattleSlotCore *, void *);
 PartySlotMap *gameGetSlotTable();
 RecoverableSlot *gameGetSlotRecord(s32);
 s32 bitsAt60Test(RecoverableSlot *, u32);
-u16 FUN_0017760c(RecoverableSlot *);
+u16 recordGetScaledMaximum(RecoverableSlot *);
 void bitsAt60Clear(RecoverableSlot *, u32);
 void FUN_003e9cec(BattleSlotState *, BattleSlotCore *, RecoverableSlot *, u32);
 BattleSlotVisual *FUN_003e83b4(BattleSlotState *, s32, u32);
@@ -65,7 +65,7 @@ void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
         PartySlotMap *party = gameGetSlotTable();
         RecoverableSlot *record = gameGetSlotRecord(party->selected[slot]);
         if (bitsAt60Test(record, 1)) {
-            record->hp = FUN_0017760c(record);
+            record->hp = recordGetScaledMaximum(record);
             bitsAt60Clear(record, 2);
         }
         FUN_003e9cec(battle, &scratch.core, record, 0);

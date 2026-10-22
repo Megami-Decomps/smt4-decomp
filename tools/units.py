@@ -16,13 +16,16 @@ Code that runs straight into the next function, which nothing else reaches, is t
 start (armcc put a load or move before its push): the row moves it. A function that runs on into the
 next one (no return, jump or linker NOP at the seam), which nothing calls or takes the address of and
 only the run itself branches to, is a piece of one function the analysis cut up: the row joins them.
+A unit holding a tail call armlink turned into a NOP (after an epilogue that keeps lr, or right
+before the next `push {..., lr}`) holds two functions: the row splits it there.
 
-`units.py add ROWS.tsv`: each row `<game> <hex address> <hex size> arm|thumb|extend|move|drop|join
+`units.py add ROWS.tsv`: each row `<game> <hex address> <hex size> arm|thumb|extend|move|drop|join|split
 [<note>]`. A new function `FUN_<address>` gets a source file saying it is not written yet; `extend`
 gives the function at the address the new size; `move` starts the function inside the bytes at the
 address (one named `FUN_<old address>` is renamed in every file); `drop` removes the function at the
 address and its source (data taken for code; the size is ignored); `join` makes the pieces in the
-bytes one function, keeping the first real name, else the first written source, else the first piece.
+bytes one function, keeping the first real name, else the first written source, else the first piece;
+`split` cuts the function at the address at the offset in the size column.
 
 `split` and `add` update `config/symbols.txt`, `config/project.json` and `objdiff.json`, then run
 `build.py split` to rebuild the retail target objects.
@@ -175,7 +178,8 @@ def function_end(split, entry, code, thumb):
 
 
 def missing(game):
-    """[(address, size, 'arm' | 'thumb' | 'extend' | 'move' | 'join', note)] of what the analysis missed."""
+    """[(address, size, 'arm' | 'thumb' | 'extend' | 'move' | 'join' | 'split', note)] of what the analysis
+    got wrong ('split': the size column is the offset of the second function)."""
     root = ROOT / game
     split, n3ds = module(game, "split"), module(game, "n3ds")
     project = json.loads((root / "config" / "project.json").read_text(encoding="utf-8"))
@@ -225,6 +229,15 @@ def missing(game):
                 value = struct.unpack_from("<I", data, at)[0]
                 reached.append((value & ~1, bool(value & 1), f"its address is in {name}'s literal pool"))
                 called.add(value & ~1)
+    # Named data objects with a size (vtables above all) hold code addresses too: their slots.
+    objects = split.read_objects(root / "config" / "symbols.txt")
+    for address, size in split.read_object_sizes(root / "config" / "symbols.txt").items():
+        for at in range(address, address + size - 3, 4):
+            if base <= at and at + 4 <= base + len(code):
+                value = struct.unpack_from("<I", code, at - base)[0]
+                if any(start <= value & ~1 < end for start, end in text):
+                    reached.append((value & ~1, bool(value & 1), f"its address is in {objects.get(address, hex(address))}"))
+                    called.add(value & ~1)
     referenced = {to for to, _thumb, _note in reached}
 
     def candidate(address, thumb):
@@ -253,7 +266,7 @@ def missing(game):
     new, pending = {}, []
     for address, thumb, note in reached:
         if candidate(address, thumb) and address not in new:
-            if "literal pool" not in note or clean_start(address, thumb):
+            if note.startswith(("called", "branched")) or clean_start(address, thumb):
                 new[address] = (thumb, note)
             else:
                 pending.append((address, thumb, note))
@@ -340,8 +353,17 @@ def missing(game):
                 continue
         rows.append((address, size, "thumb" if thumb else "arm", note))
     # Fragments: a function that runs on into the next one (no return, jump or linker NOP at the seam),
-    # which nothing calls or takes the address of and only the run itself branches to, is one function.
-    # Each joined piece grows the run before the next seam is tested, so one pass finds whole runs.
+    # or whose switch table jumps into it, which nothing calls or takes the address of and only the run
+    # itself branches to, is one function. Each joined piece grows the run before the next seam is
+    # tested, so one pass finds whole runs.
+    def case_targets(start, size):
+        data, out = body(start, size, False), set()
+        for at in range(0, len(data) - 3, 4):
+            table = split.switch_table(data, at)
+            if table:
+                out.update(struct.unpack_from("<I", data, case)[0] for case in range(table[0], min(table[0] + table[1] * 4, len(data) - 3), 4))
+        return out
+
     runs, order, at = {}, list(known), 0   # runs: {first piece: [piece starts]}
     while at + 1 < len(order):
         before, after = order[at], order[at + 1]
@@ -350,8 +372,9 @@ def missing(game):
         seam = struct.unpack_from("<H" if thumb else "<I", code, after - base - step)[0]
         if (before + sizes[before] == after and functions[after][2] == thumb and after not in called
                 and all(before <= origin < after + sizes[after] for origin in branch_origins.get(after, ()))
-                and seam not in (0xE1A00000, 0xE320F000, 0x46C0, 0xBF00)
-                and function_end(split, before, body(before, sizes[before] + sizes[after], thumb), thumb) > sizes[before]):
+                and ((seam not in (0xE1A00000, 0xE320F000, 0x46C0, 0xBF00)
+                      and function_end(split, before, body(before, sizes[before] + sizes[after], thumb), thumb) > sizes[before])
+                     or (not thumb and any(after <= case < after + sizes[after] for case in case_targets(before, sizes[before]))))):
             runs.setdefault(before, [before]).append(after)
             sizes[before] += sizes[after]
             del order[at + 1]
@@ -359,6 +382,27 @@ def missing(game):
         at += 1
     for first, run in runs.items():
         rows.append((first, sizes[first], "join", " + ".join(names[a] for a in run) + " run into each other"))
+    # Two functions in one unit: a tail call armlink turned into a NOP (mov r0, r0) after an epilogue that
+    # restores lr without returning, or right before the next `push {..., lr}`, and the parts do not
+    # branch into each other.
+    joined = {piece for run in runs.values() for piece in run}
+    for address, (name, size, thumb) in functions.items():
+        if thumb or address in joined or size < 12:
+            continue
+        data = body(address, size, False)
+        pools = split.literal_pools(address, data, False)[0]
+        in_pool = lambda at: any(start <= at < end for start, end in pools)
+        word = lambda at: struct.unpack_from("<I", data, at)[0]
+        cut = next((at + 4 for at in range(0, len(data) - 4, 4) if not in_pool(at) and word(at) == 0xE1A00000 and (
+            (at >= 4 and ((word(at - 4) & 0xFFFF4000 == 0xE8BD4000 and not word(at - 4) & 0x8000) or word(at - 4) == 0xE49DE004))
+            or (not in_pool(at + 4) and word(at + 4) & 0xFFFF4000 == 0xE92D4000))), None)
+        if cut is None:
+            continue
+        jumps = [(origin, to) for origin, to, links in split.direct_branches(address, data, False, pools) if not links]
+        if any(origin >= address + cut and address <= to < address + cut for origin, to in jumps) or \
+                any(origin < address + cut and address + cut < to < address + size for origin, to in jumps):
+            continue
+        rows.append((address, cut, "split", f"{name}: a tail call armlink made a NOP ends it at +{cut - 4:#x}"))
     return sorted(rows)
 
 
@@ -369,30 +413,39 @@ def add(game, address, size, kind, note, state, renames):
     symbols, project, objdiff = state
     units, entries = project["units"], objdiff["units"]
     lines = [(int(m[3], 16), m) for m in re.finditer(FUNCTION_LINE, symbols, re.M)]
+    if kind == "split":
+        found = next((m for a, m in lines if a == address), None)
+        if not found:
+            raise SystemExit(f"{game}: no function at {address:#x} in config/symbols.txt")
+        return split(game, found[1], size, note, (symbols, project, objdiff))
     if kind == "drop":
         # Not code after all (data the analysis or `missing` took for a function): retail bytes again.
         found = next((m for a, m in lines if a == address), None)
         if not found:
             raise SystemExit(f"{game}: no function at {address:#x} in config/symbols.txt")
         symbols = symbols[:found.start()] + symbols[found.end() + 1:]
-        unit = next(u for u in units if u["function"] == found[1])
-        units.remove(unit)
-        entries[:] = [e for e in entries if e["metadata"]["source_path"] != unit["source"]]
-        (ROOT / game / unit["source"]).unlink()
+        unit = next((u for u in units if u["function"] == found[1]), None)
+        if unit:   # the analysis left a few functions without a unit
+            units.remove(unit)
+            entries[:] = [e for e in entries if e["metadata"]["source_path"] != unit["source"]]
+            (ROOT / game / unit["source"]).unlink()
         return symbols, project, objdiff
     if kind == "join":
         # One function the analysis cut into pieces: one piece keeps its name and source and spans them
-        # all (the first with a real name, else the first whose source is written, else the first); the
-        # other pieces and their sources go.
-        pieces = [(a, m[1]) for a, m in lines if address <= a < address + size]
+        # all (the first with a real name, else the first whose source is written, else the first with a
+        # unit); the other pieces and their sources go.
         source = {u["function"]: ROOT / game / u["source"] for u in units}
+        pieces = [(a, m[1]) for a, m in lines if address <= a < address + size]
+        sourced = [(a, name) for a, name in pieces if name in source]
         written = lambda name: not source[name].read_text(encoding="utf-8").startswith("/* NON_MATCHING")
-        keep = next((a for a, name in pieces if not re.fullmatch(r"FUN_[0-9a-f]{8}", name)),
-                    next((a for a, name in pieces if written(name)), pieces[0][0]))
+        keep = next((a for a, name in sourced if not re.fullmatch(r"FUN_[0-9a-f]{8}", name)),
+                    next((a for a, name in sourced if written(name)), sourced[0][0]))
         for a, name in pieces:
             if a != keep:
                 if not re.fullmatch(r"FUN_[0-9a-f]{8}", name):
                     print(f"{game}: {name} is part of {dict(pieces)[keep]} now; its name and source are dropped")
+                if a == address:   # the joined function starts here: whoever called this piece calls it
+                    renames.append(("alias", name, dict(pieces)[keep]))
                 state = add(game, a, 0, "drop", note, state, renames)
         return add(game, address, size, "extend" if keep == address else "move", note, state, renames)
     if kind in ("extend", "move"):
@@ -465,12 +518,22 @@ def main():
             # A function named for its old address takes the new one, in every file that mentions it.
             import names
             files = names.Game(game)
-            for old, new in renames:
+            for old, new in [r for r in renames if r[0] != "alias"]:
                 files.rename_function(old, new)
             files.write()
             names_map = ROOT / game / "config" / "names.map"
             names_map.write_text(re.sub(r"^[0-9a-f]{8} FUN_[0-9a-f]{8}\n", "", names_map.read_text(encoding="utf-8"), flags=re.M),
                                  encoding="utf-8", newline="\n")
+            # A joined function's head piece is gone, but callers named it: they call the joined function.
+            final = dict(r for r in renames if r[0] != "alias")
+            aliases = {old: final.get(new, new) for _tag, old, new in (r for r in renames if r[0] == "alias")}
+            if aliases:
+                word = re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(map(re.escape, aliases)) + r")(?![A-Za-z0-9_])")
+                for path in [*(ROOT / game / "src").rglob("*.cpp"), *(ROOT / game / "include").rglob("*.h"), *(ROOT / "include").rglob("*.h")]:
+                    text = path.read_text(encoding="utf-8")
+                    changed = word.sub(lambda m: aliases[m[1]], text)
+                    if changed != text:
+                        path.write_text(changed, encoding="utf-8", newline="\n")
         print(f"{game}: {len(items)} rows applied ({len(renames)} functions renamed for their new address); "
               "rebuilding orig/target with build.py split")
         subprocess.run([sys.executable, "-B", "build.py", "split"], cwd=ROOT / game, check=True)

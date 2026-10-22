@@ -10,15 +10,15 @@ int FUN_002ebfbc(...);
 int FUN_0030a84c(...);
 int SBORROW4(...);
 
-int FUN_0026ef04(...);
+int uiDrawRecordNameLabels(...);
 int saveGetIndexedMapValue(...);
 int FUN_0026f100(int, int, unsigned int);
 int FUN_0026f188(unsigned int, int);
-int FUN_0026f204(...);
+int characterInfoPanelPopulate(...);
 int FUN_0026f784(void);
 int linkHolderApplyFlag(...);
 int FUN_00293f10(int, int);
-int FUN_002975ac(...);
+int statusCameraHandleControls(...);
 int FUN_0029ede8(int, unsigned int, unsigned int);
 int FUN_002bf4f8(...);
 int FUN_002bf810(...);
@@ -38,18 +38,18 @@ extern int g_campCecView; /* 0x43db10 */
 /* Supplied declaration required: FUN_0026eda8. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
 extern int FUN_0026ee68(unsigned int);
-/* Supplied declaration required: FUN_0026ef04. */
+/* Supplied declaration required: uiDrawRecordNameLabels. */
 /* Supplied declaration required: saveGetIndexedMapValue. */
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026f100. */
 /* Supplied declaration required: FUN_0026f188. */
 extern unsigned int FUN_0026f1f0(void);
-/* Supplied declaration required: FUN_0026f204. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_0026f784. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_0028d594(void);
 /* Supplied declaration required: FUN_00293f10. */
-/* Supplied declaration required: FUN_002975ac. */
+/* Supplied declaration required: statusCameraHandleControls. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -141,7 +141,7 @@ unsigned int FUN_001c1014(void)
       FUN_00293f10(temp_v1,1);
       if (temp_v1 != 0) {
         if (*(char *)(temp_v0 + 0x164) == '\0') {
-          FUN_0026f204(*(unsigned int *)(temp_v0 + 0x138),*(unsigned int *)(temp_v0 + 0xc),
+          characterInfoPanelPopulate(*(unsigned int *)(temp_v0 + 0x138),*(unsigned int *)(temp_v0 + 0xc),
                        *(unsigned int *)(temp_v0 + 0x160));
           *(unsigned char *)(temp_v0 + 0x164) = 1;
         }
@@ -338,7 +338,7 @@ LAB_001c1220:
     do {
       temp_v8 = saveGetIndexedMapValue(*(int *)(temp_v1 + 0x140) + temp_v7);
       if (*(short *)(temp_v8 + 0x48) != 0) {
-        FUN_0026ef04(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 300),temp_v8);
+        uiDrawRecordNameLabels(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 300),temp_v8);
       }
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 3);
@@ -348,7 +348,7 @@ LAB_001c1220:
     temp_v8 = 1;
     *(unsigned int *)(temp_v0 + 0x158) = 0;
   }
-  FUN_002975ac(*(unsigned int *)(temp_v0 + 8));
+  statusCameraHandleControls(*(unsigned int *)(temp_v0 + 8));
   if (temp_v8 == 0) {
     temp_v9 = *(int *)(temp_v0 + 0x13c);
     temp_v8 = 0;
@@ -551,7 +551,7 @@ LAB_001c1220:
       do {
         temp_v8 = saveGetIndexedMapValue(*(int *)(temp_v1 + 0x140) + temp_v7);
         if (*(short *)(temp_v8 + 0x48) != 0) {
-          FUN_0026ef04(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 300),temp_v8);
+          uiDrawRecordNameLabels(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 300),temp_v8);
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 3);
@@ -561,7 +561,7 @@ LAB_001c1220:
       temp_v8 = 1;
       *(unsigned int *)(temp_v0 + 0x158) = 0;
     }
-    FUN_002975ac(*(unsigned int *)(temp_v0 + 8));
+    statusCameraHandleControls(*(unsigned int *)(temp_v0 + 8));
     if (*(char *)(temp_v0 + 0x15d) != '\0') {
       temp_v17[0] = *(int *)(temp_v0 + 0xac);
       temp_v17[1] = 1;
@@ -593,7 +593,7 @@ LAB_001c1220:
       temp_v7 = temp_v8 - 2;
     }
     if (!((temp_v10 || temp_v8 == 2) || temp_v7 < 0 != temp_v11)) {
-      FUN_0026f204(*(unsigned int *)(g_campCecView + 0x138),*(unsigned int *)(g_campCecView + 0xc),
+      characterInfoPanelPopulate(*(unsigned int *)(g_campCecView + 0x138),*(unsigned int *)(g_campCecView + 0xc),
                    *(unsigned int *)(g_campCecView + 0x160));
       FUN_0030a84c(*(unsigned int *)(temp_v1 + 0xc),temp_v17);
       temp_v7 = *(int *)(temp_v1 + 8);

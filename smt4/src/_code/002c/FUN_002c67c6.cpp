@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses shift pairs for narrowing while compiler may use extension instructions. */
 #include "common.h"
 
 

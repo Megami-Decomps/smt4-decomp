@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryAlloc(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045a6a4(...);
 int FUN_0045ab0c(...);
 int asdMemoryAllocDefault(...);
@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char LAB_0040633c; /* 0x40633c */
 
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0045a6a4. */
 /* Supplied declaration required: FUN_0045ab0c. */
 /* Supplied declaration required: asdMemoryAllocDefault. */
@@ -60,7 +60,7 @@ void FUN_004063b0(int param_1,int param_2)
     puVar4 = puVar3 + 2;
     *puVar3 = 0x704;
     puVar3[1] = temp_v2;
-    FUN_002f5020(puVar4,&LAB_0040633c,0x704,temp_v2);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar4,&LAB_0040633c,0x704,temp_v2);
   }
   *(unsigned int **)(param_1 + 0xfc) = puVar4;
   *(unsigned int *)(param_1 + 0x100) = (unsigned int)*(unsigned short *)(param_1 + 0xf2);

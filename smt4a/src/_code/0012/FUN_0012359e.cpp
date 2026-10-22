@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
@@ -25,7 +25,7 @@ void FUN_0012359e(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_c = param_3;
   uStack_8 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_10,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_10,temp_v0 + 0x58);
   _ZN9Obj55b28cD1Ev(&uStack_10);
   return;
 }

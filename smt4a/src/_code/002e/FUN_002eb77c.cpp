@@ -29,7 +29,7 @@ struct fn_002eb77c_arg0 {
 
 extern unsigned char DAT_0055ae2c; /* 0x55ae2c */
 
-extern unsigned int *sharedRefInit(fn_002eb77c_arg0 *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(fn_002eb77c_arg0 *);
 
 
 void FUN_002eb77c(fn_002eb77c_arg0 *param_1,unsigned char param_2,unsigned char *param_3)
@@ -37,7 +37,7 @@ void FUN_002eb77c(fn_002eb77c_arg0 *param_1,unsigned char param_2,unsigned char 
 {
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)sharedRefInit(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(param_1);
   puVar1[3] = 0;
   puVar1[4] = 0;
   puVar1[7] = 0;

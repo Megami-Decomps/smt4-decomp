@@ -3,7 +3,7 @@
 extern "C" {
 
 extern u8 g_filter4PolyBaseVtable;
-extern void FUN_002a1ca0(u32 handle);
+extern void textureOwnerReset(u32 handle);
 extern void asdMemFree(u32 ptr);
 extern void asdOperatorDelete(FilterObj *obj);
 
@@ -12,7 +12,7 @@ void _ZN9Obj420794D0Ev(FilterObj *obj)
 {
     obj->vtbl = &g_filter4PolyBaseVtable;
     if (obj->handle != 0) {
-        FUN_002a1ca0(obj->handle);
+        textureOwnerReset(obj->handle);
         obj->handle = 0;
     }
     if (obj->buffer != 0) {

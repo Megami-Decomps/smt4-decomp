@@ -19,15 +19,67 @@ typedef struct SpriteInfo {
     /* 0x0C */ s16 *size;        /* width, height */
 } SpriteInfo;
 
+/* A cached GPU value with a four-slot state stack and an optional flush callback. */
+struct RenderCtxCachedState {
+    s32 index; // 0x00
+    u32 unk04;
+    u32 values[4]; // 0x08
+    u8 dirty; // 0x18
+    u8 unk19[3];
+    void (*flush)(u32 value); // 0x1c
+
+    void set(u32 value)
+    {
+        u32 previous = values[index];
+        values[index] = value;
+        if (dirty || previous != value) {
+            flush(value);
+            dirty = 0;
+        }
+    }
+
+    void push(u32 value)
+    {
+        u32 previous = values[index];
+        values[++index] = value;
+        if (dirty || previous != value) {
+            flush(value);
+            dirty = 0;
+        }
+    }
+
+    void pop()
+    {
+        u32 previous = values[index--];
+        u32 value = values[index];
+        if (dirty || previous != value) {
+            flush(value);
+            dirty = 0;
+        }
+    }
+};
+
 /* The render context's state stack: the current slot holds 3 while scissoring is enabled. */
 typedef struct RenderCtx {
-    /* 0x0000 */ u8 unk0000[0x1318];
+    union {
+        /* 0x0000 */ u8 unk0000[0x1318];
+        struct {
+            u8 unk0000[0x52c];
+            /* 0x052c */ u32 viewport;
+        } viewportView;
+        struct {
+            u8 unk0000[0x1258];
+            /* 0x1258 */ RenderCtxCachedState state;
+        } drawStateView;
+    };
     /* 0x1318 */ s32 stateIndex;
     /* 0x131C */ s32 unk131C;
     /* 0x1320 */ s32 states[4];
     /* 0x1330 */ u8 dirty;
     /* 0x1331 */ u8 unk1331[3];
     /* 0x1334 */ void (*flush)(int state);
+    /* 0x1338 */ RenderCtxCachedState scissorMinimum;
+    /* 0x1358 */ RenderCtxCachedState scissorMaximum;
 } RenderCtx;
 
 enum {

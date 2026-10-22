@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int resultPairInitialize(unsigned int, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int, int);
 int FUN_00352098(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_6_stack;
 
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_00352098. */
 
 
@@ -41,7 +41,7 @@ void FUN_003df0c4(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
       *param_3 = param_5;
     }
   }
-  resultPairInitialize(param_1,param_4);
+  _ZN18WindowStatusResultC1Ej(param_1,param_4);
   return;
 }
 

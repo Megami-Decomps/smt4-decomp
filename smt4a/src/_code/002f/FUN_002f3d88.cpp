@@ -6,7 +6,7 @@ struct Guard {
 };
 extern u8 DAT_0062e6a0;
 void FUN_002ecef0();
-void FUN_002e6e34(Guard *,void *);
+void _ZN9Obj55b28cC1EPv(Guard *,void *);
 void _ZN9Obj55b28cD1Ev(Guard *);
 void *FUN_002ecf28();
 void sharedRefAddRef(void *);
@@ -15,7 +15,7 @@ void FUN_00106150(void *);
 void FUN_002f3d88() {
     FUN_002ecef0();
     Guard guard;
-    FUN_002e6e34(&guard,&DAT_0062e6a0);
+    _ZN9Obj55b28cC1EPv(&guard,&DAT_0062e6a0);
     if(FUN_002ecf28()) sharedRefAddRef(FUN_002ecf28());
     else {
         void *object=operatorNew(96);

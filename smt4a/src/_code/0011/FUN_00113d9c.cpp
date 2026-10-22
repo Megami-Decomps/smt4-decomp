@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int *);
+int _ZN9Obj55b28cC1EPv(int *, int *);
 int _ZN9Obj55b28cD1Ev(int *);
 int listIteratorNext3(int **);
 
@@ -20,7 +20,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: listIteratorNext3. */
 extern int wordRefsDiffer_002fe9f2(int **, int *);
@@ -41,7 +41,7 @@ unsigned long long FUN_00113d9c(int *param_1,unsigned int param_2,unsigned int p
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x5)) != '\0') {
     uStack_10 = param_3;
     uStack_c = param_4;
-    FUN_002e6e34(&uStack_14,param_1 + 6);
+    _ZN9Obj55b28cC1EPv(&uStack_14,param_1 + 6);
     temp_v1 = (int *)param_1[2];
     while (temp_v0 = wordRefsDiffer_002fe9f2(&temp_v1,param_1 + 4), temp_v0 != 0) {
       (**(romwright_code **)(*temp_v1 + 8))();

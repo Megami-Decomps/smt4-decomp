@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00186e2c(int, unsigned int);
 int jobSavePositionSnapshot(unsigned int);
-int FUN_002e08c8(unsigned int);
+int animationEvaluateCallback(unsigned int);
 int faderSetValue(unsigned int);
 int FUN_00359370(unsigned int, int);
 int FUN_003ae9d8(...);
@@ -29,7 +29,7 @@ extern int g_bustupCutAnim; /* 0x57f4c4 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00186e2c. */
 /* Supplied declaration required: jobSavePositionSnapshot. */
-/* Supplied declaration required: FUN_002e08c8. */
+/* Supplied declaration required: animationEvaluateCallback. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
 /* Supplied declaration required: FUN_003ae9d8. */
@@ -110,7 +110,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
     }
   }
   piVar5 = (int *)(temp_v0 + 0x5e8);
-  FUN_002e08c8(*(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8));
+  animationEvaluateCallback(*(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8));
   pcVar4 = (romwright_code *)faderSetValue(*(unsigned int *)(*piVar5 + 8));
   if (param_2 == 0) {
     pcVar4 = FUN_001f3eec;
@@ -169,7 +169,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
       FUN_00449814(temp_v1,temp_v2);
     }
   }
-  FUN_002e08c8(*(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8));
+  animationEvaluateCallback(*(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8));
   faderSetValue(*(unsigned int *)(*piVar5 + 8));
   temp_v1 = *(int *)(*(int *)(*piVar5 + 8) + 0x4c);
   if (temp_v1 != 0) {

@@ -28,7 +28,7 @@ struct fn_004cb394_arg1 {
 
 extern int DAT_0057aa10; /* 0x57aa10 */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
-extern unsigned int DAT_0057aa68; /* 0x57aa68 */
+extern unsigned int g_battleMotionCombatantClearMask; /* 0x57aa68 */
 extern unsigned int DAT_0057aa6c; /* 0x57aa6c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -55,7 +55,7 @@ void FUN_004cb394(unsigned int *param_1,fn_004cb394_arg1 *param_2)
   temp_v0 = DAT_0057aa10;
   if (((param_2->field_0x50 & 2) != 0) &&
      (FUN_003f0e20(param_1,(int)param_2->field_0x6a), param_1 != (unsigned int *)0x0)) {
-    if (((param_1[1] & DAT_0057aa6c) == 0 && (DAT_0057aa68 & *param_1) == 0) ||
+    if (((param_1[1] & DAT_0057aa6c) == 0 && (g_battleMotionCombatantClearMask & *param_1) == 0) ||
        (param_2->field_0x6c == 0xffff)) {
       param_2->field_0x74 = 0xffffffff;
     }

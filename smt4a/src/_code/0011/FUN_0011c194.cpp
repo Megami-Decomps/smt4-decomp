@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ecf70(int *, int, int *);
 
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ecf70. */
 extern int wordRefsEqual_002ecfd2(int *, unsigned int *);
@@ -38,7 +38,7 @@ unsigned int FUN_0011c194(int param_1,unsigned int param_2)
   iStack_10 = param_1;
   uStack_c = param_2;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v2,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v2,temp_v0 + 0x58);
   FUN_002ecf70(&temp_v4,param_1 + 0x60,&uStack_c);
   temp_v3 = temp_v4;
   temp_v5 = *(unsigned int *)(param_1 + 0x70);

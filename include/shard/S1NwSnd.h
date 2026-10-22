@@ -33,6 +33,27 @@ typedef struct SoundPlayer {
     /* 0x0C */ LinkList priorityList;
 } SoundPlayer;
 
+struct SoundPlayerResetState {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 value;
+};
+
+struct SoundPlayerPairState {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+};
+
+typedef char SoundPlayerResetStateSizeCheck[sizeof(SoundPlayerResetState) == 0x14 ? 1 : -1];
+typedef char SoundPlayerPairStateSizeCheck[sizeof(SoundPlayerPairState) == 0x0c ? 1 : -1];
+
+struct FrameHeapStateView {
+    /* 0x00 */ u8 base[0x20];
+    /* 0x20 */ u32 first;
+    /* 0x24 */ u32 last;
+};
+typedef char FrameHeapStateViewSizeCheck[sizeof(FrameHeapStateView) == 0x28 ? 1 : -1];
+
 static __inline ListNode *linkListEnd(LinkList *list)
 {
     return &list->node;

@@ -66,7 +66,7 @@ extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_00420fc0. */
 /* Supplied declaration required: FUN_00421078. */
 /* Supplied declaration required: deadEffectStartLoad. */
-extern unsigned int FUN_004218dc(void);
+extern unsigned int _ZN9Obj4209ccC1Ev(void);
 /* Supplied declaration required: FUN_004f913c. */
 /* Supplied declaration required: FUN_004fa15c. */
 /* Supplied declaration required: FUN_004fa414. */
@@ -204,7 +204,7 @@ void FUN_004f65d4(int param_1)
       asdOperatorNew();
       temp_v9 = 0;
       if (temp_v4 != 0) {
-        temp_v9 = FUN_004218dc();
+        temp_v9 = _ZN9Obj4209ccC1Ev();
       }
       *(unsigned int *)(param_1 + 0x33c0) = temp_v9;
       deadEffectStartLoad();
@@ -218,7 +218,7 @@ void FUN_004f65d4(int param_1)
     asdOperatorNew();
     temp_v9 = 0;
     if (temp_v4 != 0) {
-      temp_v9 = FUN_004218dc();
+      temp_v9 = _ZN9Obj4209ccC1Ev();
     }
     *(unsigned int *)(param_1 + 0x33c0) = temp_v9;
     deadEffectStartLoad();

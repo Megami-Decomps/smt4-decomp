@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineSockAddrEquals(int, int);
 
@@ -34,7 +34,7 @@ unsigned long long FUN_0010a53c(int param_1,int param_2,unsigned int param_3,uns
   iStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_002e6e34(&iStack_20,param_1 + 0x4c);
+  _ZN9Obj55b28cC1EPv(&iStack_20,param_1 + 0x4c);
   temp_v3 = 0;
   temp_v2 = *(int *)(*(int *)(param_1 + 0x18) + 8);
   while (temp_v2 != *(int *)(param_1 + 0x18)) {

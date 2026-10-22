@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(int **);
+int _ZN9Obj55aff4D1Ev(int **);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002e9f00(int, int, int);
 int _ZN9Obj55aff4C1Ev(int **);
@@ -26,7 +26,7 @@ extern unsigned char LAB_0012ad90; /* 0x12ad90 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002e9f00. */
@@ -68,7 +68,7 @@ unsigned long long FUN_0012ad10(int param_1,int *param_2,int param_3,unsigned in
         FUN_002e9f00(param_1 + 0x98,4,temp_v0);
       }
     }
-    onlineStringDestroy(&piStack_1c);
+    _ZN9Obj55aff4D1Ev(&piStack_1c);
   }
   return romwright_piece_4_4(piStack_1c,temp_v1);
 }

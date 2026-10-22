@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler schedules the result-sign test before capturing the current PC; retail captures the error site first. */
 #include "common.h"
 extern "C" {
 u32 FUN_002bbaf8(void);

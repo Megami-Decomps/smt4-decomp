@@ -15,7 +15,7 @@ int FUN_0019b770(...);
 int FUN_0019f678(...);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -83,7 +83,7 @@ extern unsigned int DAT_0063098c; /* 0x63098c */
 /* Supplied declaration required: FUN_0019f678. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 int FUN_00184efc(unsigned int param_1,int param_2,unsigned int *param_3,int param_4)
@@ -168,8 +168,8 @@ int FUN_00184efc(unsigned int param_1,int param_2,unsigned int *param_3,int para
   puStack_2c = param_3;
   temp_v35 = param_4;
   temp_v17 = DAT_0063077c;
-  FUN_002f5020(temp_v25,&LAB_00192824,0x10,4);
-  FUN_002f5020(temp_v22,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v25,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v22,&LAB_00192824,0x10,4);
   temp_v27 = &g_asdSoundOptions;
   temp_v25[0x10] = 0.0f;
   if (DAT_0063098a != '\0') {

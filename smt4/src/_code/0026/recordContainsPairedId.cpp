@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler unrolls the signed identifier-pair loop instead of the retail single-pair loop. */
 #include "shard/W5_W5Match2_PairedIds.h"
 extern "C" {
 /* Search the four identifier pairs, allowing a null owner. */

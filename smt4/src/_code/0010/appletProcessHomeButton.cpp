@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c0d08(void);
+int appletUnlockAndSleepIfShellClosed(void);
 u8 nn_applet_CTR_IsExpectedToProcessHomeButton(void);
 u8 nn_os_CriticalSection_TryEnter(void *section);
 void nn_os_LightEvent_ClearSignal(void *event);
@@ -24,7 +24,7 @@ u32 appletProcessHomeButton(void)
             nn_os_LightEvent_ClearSignal(g_appletHomeButtonEvent);
             result = (nn_os_CriticalSection_TryEnter(g_nnAppletCriticalSection) == 0) ? 2 : 3;
         } else {
-            FUN_002c0d08();
+            appletUnlockAndSleepIfShellClosed();
             result = 1;
         }
     }

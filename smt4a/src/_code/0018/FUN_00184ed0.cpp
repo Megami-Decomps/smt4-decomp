@@ -16,12 +16,12 @@ typedef struct {
     EntryOwner *owner;  /* 0x04 */
 } EntryGlobals;
 
-extern EntryGlobals DAT_0057f25c;
+extern EntryGlobals g_callbackOwnerSlots;
 
 s32 FUN_00184ed0(void)
 {
     s32 value;
-    EntryOwner *owner = DAT_0057f25c.owner;
+    EntryOwner *owner = g_callbackOwnerSlots.owner;
 
     if (owner == NULL) {
         value = 0;

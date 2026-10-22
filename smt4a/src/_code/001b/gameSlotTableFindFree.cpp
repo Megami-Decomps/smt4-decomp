@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses mov r2, r0 where the compiled block uses mov r1, #0. */
 #include "common.h"
 
 struct SlotTable {

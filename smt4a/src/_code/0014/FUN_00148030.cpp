@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int resultPairInitialize(unsigned int [3], int);
-int FUN_001b5acc(...);
+int _ZN18WindowStatusResultC1Ej(unsigned int [3], int);
+int _ZN18WindowStatusResultC1Ev(...);
 
 extern int FUN_001585d4(int);
-/* Supplied declaration required: resultPairInitialize. */
-/* Supplied declaration required: FUN_001b5acc. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
 
 
 void FUN_00148030(int param_1)
@@ -26,14 +26,14 @@ void FUN_00148030(int param_1)
   puVar3 = temp_v3;
   temp_v0 = FUN_001585d4(param_1 + 8);
   *(unsigned char *)(temp_v0 + 0x314) = 1;
-  puVar2 = (unsigned int *)FUN_001b5acc(temp_v0 + 0x318);
+  puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(temp_v0 + 0x318);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  resultPairInitialize(temp_v3,0);
+  _ZN18WindowStatusResultC1Ej(temp_v3,0);
   temp_v1 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v1;
-  temp_v2 = FUN_001b5acc(puVar2 + 10);
+  temp_v2 = _ZN18WindowStatusResultC1Ev(puVar2 + 10);
   temp_v0 = (int)temp_v2;
   *(unsigned int *)(temp_v0 - 0x30) = 0;
   *(unsigned char *)(temp_v0 - 0x18) = 0;

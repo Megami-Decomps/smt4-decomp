@@ -23,7 +23,7 @@ int FUN_0029bde4(...);
 int FUN_0029bed8(...);
 int FUN_0029c1c8(int, int, int);
 int slotSetRequest(int, int, unsigned int);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int dataTable06Sub1GetRecord(void);
 int devilGetRecord(void);
 int FUN_002bd06c(...);
@@ -74,7 +74,7 @@ extern int randBetween(unsigned int, int);
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c1c8. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern int FUN_0029ea68(unsigned short);
@@ -225,7 +225,7 @@ unsigned int FUN_001ebedc(int param_1)
       *(int *)(temp_v7 + 0x40) = temp_v20[3];
       rt_memcpy_w(temp_v7 + 0x8c,param_1 + 0x16c,0x500);
       rt_memcpy_w(param_1 + 0x6e4,temp_v7,0x604);
-      FUN_0029c6b0(param_1 + 0x6e4);
+      unitRecalculateEffectiveStats(param_1 + 0x6e4);
       temp_v6 = 0;
       do {
         if (*(unsigned short *)(param_1 + 0x126) == temp_v6) {

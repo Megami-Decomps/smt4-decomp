@@ -73,7 +73,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern float DAT_00570d5c; /* 0x570d5c */
+extern float g_spriteDrawYOffset; /* 0x570d5c */
 extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005c4c30; /* 0x5c4c30 */
 extern unsigned int DAT_0064c084; /* 0x64c084 */
@@ -198,7 +198,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
   if (param_1->field_0x10 != 0) {
     temp_v49 = *param_4;
     temp_v51 = param_4[2];
-    temp_v50 = (float)param_4[1] + DAT_00570d5c;
+    temp_v50 = (float)param_4[1] + g_spriteDrawYOffset;
     temp_v0 = (unsigned int)*(unsigned short *)(param_1->field_0x24 + param_2 * 4);
     temp_v4 = (temp_v0 - 1) + (unsigned int)*(unsigned short *)(param_1->field_0x24 + param_2 * 4 + 2);
     temp_v1 = temp_v0;

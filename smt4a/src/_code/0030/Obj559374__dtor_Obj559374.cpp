@@ -1,4 +1,4 @@
-/* NON_MATCHING: vptr/test scheduling differs; compiler returns saved this instead of subtracting 4 from the member destructor result. */
+/* NON_MATCHING: initial vptr/test scheduling differs; native member destruction otherwise matches. */
 #include "shard/W6_W6Match1_Obj559374.h"
 
 struct Obj559374Implementation {

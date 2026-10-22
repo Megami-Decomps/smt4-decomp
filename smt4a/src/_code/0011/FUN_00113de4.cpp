@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int listIteratorNext3(int [2]);
 int FUN_002fea02(int *, int, int *);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned char g_flagBlock; /* 0x594958 */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: listIteratorNext3. */
 extern int wordRefsDiffer_002fe9f2(int *, int *);
@@ -44,7 +44,7 @@ void FUN_00113de4(int param_1,int param_2)
   if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x5)) != '\0') {
     iStack_1c = param_1;
     temp_v6 = param_2;
-    FUN_002e6e34(temp_v3,param_1 + 0x18);
+    _ZN9Obj55b28cC1EPv(temp_v3,param_1 + 0x18);
     temp_v2 = *(int *)(param_1 + 8);
     piVar2 = (int *)(param_1 + 0x10);
     while (temp_v0 = wordRefsDiffer_002fe9f2(&temp_v2,piVar2), temp_v0 != 0) {

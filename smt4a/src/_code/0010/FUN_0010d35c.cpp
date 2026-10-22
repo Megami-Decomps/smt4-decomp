@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, unsigned char *);
+int _ZN9Obj55b28cC1EPv(int *, unsigned char *);
 int _ZN9Obj55b28cD1Ev(int *);
 int sharedRefRelease(void);
 
@@ -13,7 +13,7 @@ extern int DAT_005949dc; /* 0x5949dc */
 extern int *DAT_00594abc; /* 0x594abc */
 extern unsigned char DAT_00630344; /* 0x630344 */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 
@@ -29,7 +29,7 @@ void FUN_0010d35c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_002e6e34(&uStack_20,&DAT_00630344);
+  _ZN9Obj55b28cC1EPv(&uStack_20,&DAT_00630344);
   if (DAT_005949dc != 0) {
     if (*(int *)(DAT_005949dc + 4) != 1) {
       sharedRefRelease();

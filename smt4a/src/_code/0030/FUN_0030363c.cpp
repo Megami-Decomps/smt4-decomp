@@ -7,7 +7,7 @@ struct OnlineByteSequence;
 extern "C" {
 void FUN_002eea8a(StreamReader* reader, u16* value);
 bool streamReaderHasBytes(StreamReader* reader, u32 size);
-void FUN_002f4cac(OnlineByteSequence* output);
+void _ZN9Obj55b1045resetEv(OnlineByteSequence* output);
 OnlineBuffer* streamWriterFinish(StreamReader* reader);
 const u8* onlineBufferGetData(OnlineBuffer* buffer);
 void FUN_002f4cd6(OnlineByteSequence* output, const u8* data, u32 size);
@@ -21,7 +21,7 @@ bool FUN_0030363c(StreamReader* reader, OnlineByteSequence* output)
     if (!streamReaderHasBytes(reader, length)) {
         return false;
     }
-    FUN_002f4cac(output);
+    _ZN9Obj55b1045resetEv(output);
     if (length != 0) {
         const u8* data = onlineBufferGetData(streamWriterFinish(reader));
         FUN_002f4cd6(output, data + reader->position, length);

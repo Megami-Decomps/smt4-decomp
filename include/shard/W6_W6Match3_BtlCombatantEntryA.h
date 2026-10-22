@@ -20,6 +20,10 @@ struct BtlCombatantEntryA {
             /* 0x168 */ u8 unk168BeforeSelection[0xd2];
             /* 0x23A */ u8 marked;
         } selection;
+        struct {
+            /* 0x168 */ u8 unk168BeforeMotion[0xD1];
+            /* 0x239 */ u8 state;
+        } motion;
     };
     /* 0x258 */ s32 hp;
     /* 0x25C */ s32 maxHp;

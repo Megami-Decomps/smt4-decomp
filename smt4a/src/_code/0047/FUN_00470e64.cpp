@@ -11,7 +11,7 @@ int FUN_001b31ac(...);
 int FUN_001b31e0(...);
 int asdOperatorDeleteB(...);
 int sysMemClear(...);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int asdOperatorNewE(...);
 int FUN_00429f38(...);
 int nnnstdMemCpy(...);
@@ -56,7 +56,7 @@ extern int FUN_001b315c(void);
 extern int objGetFlagBit16(void);
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00429f38. */
 extern int FUN_0046bc7c(fn_00470e64_arg0 *, unsigned int);
@@ -111,7 +111,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
       temp_v7 = temp_v0 * 0x10;
       asdOperatorNewE();
       if (temp_v7 != 0) {
-        FUN_002f5020();
+        __aeabi_vec_ctor_nocookie_nodtor();
       }
       param_1->field_0x454 = temp_v7;
     }

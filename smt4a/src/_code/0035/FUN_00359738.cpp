@@ -1,2 +1,9 @@
-/* NON_MATCHING: fragment of a larger function (linker NOP at entry forwards into a second function body at +4; requires unit split). */
 #include "common.h"
+
+extern "C" void soundReleaseCallbackAllocation(void);
+
+/* Forward to the following shared implementation. */
+extern "C" void FUN_00359738(void)
+{
+    soundReleaseCallbackAllocation();
+}

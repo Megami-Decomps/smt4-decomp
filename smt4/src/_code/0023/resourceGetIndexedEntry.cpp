@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler changes signed-index range branching and indexed resource-load scheduling. */
 #include "shard/W5_W5Match2_PlainData.h"
 extern "C" {
 /* Return the selected table resource, or null beyond the signed entry count. */

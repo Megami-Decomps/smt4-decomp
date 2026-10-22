@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern Obj25CRef DAT_0057f25c;
+extern Obj25CRef g_callbackOwnerSlots;
 extern u32 FUN_003e4d68(u32 index);
 extern s32 FUN_004801ac(u32 data, u32 value, s32 flag);
 
 /* Stores `value` and marks the slots whose id FUN_004801ac does not accept for it. */
 void obj25CRefreshFlags(u32 value)
 {
-    Obj25C *obj = DAT_0057f25c.instance;
+    Obj25C *obj = g_callbackOwnerSlots.instance;
     s32 i;
     u32 id;
 

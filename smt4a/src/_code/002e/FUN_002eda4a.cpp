@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void onlineStringDestroy(u8 *member);
+void _ZN9Obj55aff4D1Ev(u8 *member);
 u8 *vectorDestroyBytes(u8 *member);
 
 typedef struct Holder {
@@ -16,7 +16,7 @@ void FUN_002eda4a(Holder *object)
     u8 *member;
 
     member = vectorDestroyBytes(object->member08);
-    onlineStringDestroy(member - 8);
+    _ZN9Obj55aff4D1Ev(member - 8);
 }
 
 } /* extern "C" */

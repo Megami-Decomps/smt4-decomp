@@ -53,7 +53,7 @@ s32 FUN_003ac738(u32);
 s32 FUN_003aca54(u32);
 void rectangleInitializeSelection(u32 *, s32, s32, s32);
 void *asdOperatorNew(u32);
-void uiSelectionControllerConstruct(FlaggedEntry *);
+void _ZN9Obj422594C1Ev(FlaggedEntry *);
 void FUN_0022d434(BibleScreen *);
 void partyIdsReset(u16 *);
 void FUN_0022dde8(u16 *, u16);
@@ -84,7 +84,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     rectangleInitializeSelection(fields->rectangle, 320, 0, 29);
     BibleSelectionController *controller = (BibleSelectionController *)asdOperatorNew(sizeof(BibleSelectionController));
     if (controller) {
-        uiSelectionControllerConstruct(&controller->header.base);
+        _ZN9Obj422594C1Ev(&controller->header.base);
         controller->header.object.vtable = &DAT_00422434;
     }
     fields->controller = controller;

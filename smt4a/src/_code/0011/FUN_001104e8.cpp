@@ -8,7 +8,7 @@ extern unsigned char DAT_0055937c; /* 0x55937c */
 extern unsigned char g_flagBlock; /* 0x594958 */
 
 extern int operatorNew(unsigned int);
-extern int onlineStringCopyConstruct(unsigned int *);
+extern int _ZN9Obj55aff4C1ERKS_(unsigned int *);
 extern unsigned int FUN_002fb252(void);
 
 
@@ -20,7 +20,7 @@ int FUN_001104e8(unsigned int *param_1)
   unsigned int temp_v2;
   
   *param_1 = (unsigned int)&DAT_0055937c;
-  temp_v0 = onlineStringCopyConstruct(param_1 + 1);
+  temp_v0 = _ZN9Obj55aff4C1ERKS_(param_1 + 1);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x14) = 0;
   *(unsigned char *)(temp_v0 + 0x18) = 0;

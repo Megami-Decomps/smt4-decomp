@@ -10,7 +10,7 @@ int FUN_001a30ec(unsigned int *);
 int FUN_001a3220(unsigned int *, int);
 int FUN_001a3338(unsigned int, int, unsigned int *, int, unsigned int);
 int FUN_001b6598(int *, int, unsigned int, int);
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int nn_applet_CTR_detail_CaptureDisplayBuffer(unsigned int, int *, unsigned int *);
 int nn_os_TransferMemoryBlock_Finalize(int *);
 int software_interrupt(int);
@@ -48,7 +48,7 @@ extern unsigned int DAT_0061a628; /* 0x61a628 */
 /* Supplied declaration required: FUN_001a3220. */
 /* Supplied declaration required: FUN_001a3338. */
 /* Supplied declaration required: FUN_001b6598. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nn_applet_CTR_detail_CaptureDisplayBuffer. */
 extern void nn_applet_CTR_detail_GetDisplayInfo(unsigned int);
 /* Supplied declaration required: nn_os_TransferMemoryBlock_Finalize. */
@@ -73,7 +73,7 @@ unsigned int FUN_001b02a8(unsigned int param_1)
   unsigned int temp_v10;
   unsigned int temp_v11;
   
-  FUN_002f5020(&temp_v9,&LAB_001a2a68,0x10,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v9,&LAB_001a2a68,0x10,2);
   nn_applet_CTR_detail_GetDisplayInfo((unsigned int)&temp_v9);
   FUN_001a2b80(param_1);
   DAT_0061a61c = temp_v10;

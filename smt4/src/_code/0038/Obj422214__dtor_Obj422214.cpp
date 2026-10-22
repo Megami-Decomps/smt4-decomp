@@ -1,4 +1,3 @@
-/* NON_MATCHING: same statements; retail stores the vtable pointer before it loads the buffer pointer, the scheduler loads it first here. */
 #include "classes/Obj422214.h"
 
 extern "C" {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringConstruct(unsigned int, unsigned short [130]);
+int _ZN9Obj55aff4C1EPKc(unsigned int, unsigned short [130]);
 int onlineUrlEnsureParsed(int);
 int onlineSockAddrFormatIpv4(int, unsigned short [130], int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned short sp110; /* 0x110: local_110 */
 } param_2_stack;
 
-/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 /* Supplied declaration required: onlineUrlEnsureParsed. */
 /* Supplied declaration required: onlineSockAddrFormatIpv4. */
 
@@ -32,7 +32,7 @@ void FUN_002ee938(unsigned int param_1,int param_2)
       temp_v0 >> 0x18 != 0) {
     onlineSockAddrFormatIpv4(*(int *)(param_2 + 4),temp_v1,0x80);
   }
-  onlineStringConstruct(param_1,temp_v1);
+  _ZN9Obj55aff4C1EPKc(param_1,temp_v1);
   return;
 }
 

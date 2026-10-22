@@ -13,7 +13,7 @@ extern TitleDraw g_titleFlags;
 extern u32 g_titleScene;
 
 extern s32 FUN_002c501c(void);
-extern void FUN_002c4f8c(u32 scene, u32 arg);
+extern void effectRestoreSavedRenderPairs(u32 scene, u32 arg);
 extern s32 FUN_002c5210(void);
 extern void asdGxCommandListBegin(u32 commandList);
 
@@ -21,7 +21,7 @@ extern void asdGxCommandListBegin(u32 commandList);
 u32 FUN_00102738(void)
 {
     if (FUN_002c501c() != 0) {
-        FUN_002c4f8c(g_titleScene, FUN_002c501c());
+        effectRestoreSavedRenderPairs(g_titleScene, FUN_002c501c());
     }
     if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && FUN_002c5210() == 1) {
         asdGxCommandListBegin(g_titleFlags.commandList);

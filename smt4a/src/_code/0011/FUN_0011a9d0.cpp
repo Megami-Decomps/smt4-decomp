@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010b348(unsigned int);
 int asdOperatorDeleteArray(...);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
 int onlineUrlDestroy(void);
@@ -25,7 +25,7 @@ extern unsigned char DAT_0055a38c; /* 0x55a38c */
 /* Supplied declaration required: FUN_0010b348. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern int FUN_002ea00c(unsigned int *);
@@ -50,7 +50,7 @@ void FUN_0011a9d0(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_0055a38c;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v1,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v1,temp_v0 + 0x58);
   if (param_1[0xae] != 0) {
     sharedRefRelease();
     param_1[0xae] = 0;

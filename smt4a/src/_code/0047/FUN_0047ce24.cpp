@@ -15,7 +15,7 @@ int jobGetScalarValue(void);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int renderCtxCallB(void);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int renderStatePop(void);
 int FUN_0032cef8(unsigned int);
 int VectorSignedToFloat(...);
@@ -83,7 +83,7 @@ extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: renderCtxCallB. */
 extern int asdSoundGetOption2(void);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: renderStatePop. */
 extern unsigned int flagsAt6CGet(void);
 extern int asdSoundGetOption0(void);
@@ -160,8 +160,8 @@ int FUN_0047ce24(unsigned int param_1,int param_2,unsigned int *param_3)
   iStack_2c = param_2;
   puStack_28 = param_3;
   jobGetScalarValue();
-  FUN_002f5020(temp_v19 + 0x10,&LAB_00192824,0x10,4);
-  FUN_002f5020(temp_v19,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v19 + 0x10,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v19,&LAB_00192824,0x10,4);
   temp_v18 = 0;
   temp_v4 = asdSoundGetOption2();
   if (temp_v4 != 0) {

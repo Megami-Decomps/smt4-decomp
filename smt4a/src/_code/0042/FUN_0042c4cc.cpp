@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002f5020(unsigned char *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
 
 extern unsigned char LAB_0042c464; /* 0x42c464 */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_0042c4cc(unsigned char *param_1)
@@ -22,7 +22,7 @@ void FUN_0042c4cc(unsigned char *param_1)
   param_1[1] = 0;
   param_1[2] = 0;
   param_1 = param_1 + 4;
-  FUN_002f5020(param_1,&LAB_0042c464,0x2c,8);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_0042c464,0x2c,8);
   param_1[0x180] = 0;
   param_1[0x181] = 0;
   param_1[0x182] = 0;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler unrolls the signed count-pair loop instead of the retail single-pair loop. */
 #include "shard/W5_W5Match2_CountPairs.h"
 extern "C" {
 /* Return true only when every count pair is nonpositive. */

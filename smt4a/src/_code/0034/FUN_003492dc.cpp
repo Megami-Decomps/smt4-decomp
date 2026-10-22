@@ -10,7 +10,7 @@ int asdMemFree(void);
 int ifTouchResetRecord(void);
 int asdOperatorDelete(void);
 
-extern unsigned char DAT_0057f25c; /* 0x57f25c */
+extern unsigned char g_callbackOwnerSlots; /* 0x57f25c */
 
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -28,14 +28,14 @@ void FUN_003492dc(void)
   int temp_v1;
   unsigned short unaff_r9;
   
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4));
-  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4))[0xc4];
+  puVar1 = (*(unsigned int * *)((unsigned char *)&g_callbackOwnerSlots + 0x4));
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&g_callbackOwnerSlots + 0x4))[0xc4];
   if (0 < temp_v0) {
     temp_v1 = 0;
     if (0 < temp_v0) {
       unaff_r9 = 0xffff;
     }
-    (*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4))[0xc4] = temp_v0 + 1;
+    (*(unsigned int * *)((unsigned char *)&g_callbackOwnerSlots + 0x4))[0xc4] = temp_v0 + 1;
     if (0 < temp_v0) {
       do {
         ifTouchRegionRemove();
@@ -62,9 +62,9 @@ void FUN_003492dc(void)
     puVar1[199] = 0;
   }
   jobStop(*puVar1,0);
-  if ((*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4)) != (unsigned int *)0x0) {
+  if ((*(unsigned int * *)((unsigned char *)&g_callbackOwnerSlots + 0x4)) != (unsigned int *)0x0) {
     asdOperatorDelete();
-    (*(unsigned int * *)((unsigned char *)&DAT_0057f25c + 0x4)) = (unsigned int *)0x0;
+    (*(unsigned int * *)((unsigned char *)&g_callbackOwnerSlots + 0x4)) = (unsigned int *)0x0;
   }
   return;
 }

@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_001760cc(int);
 int jyoucyuGetTableEntry(int);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_001d0fcc(int *, int);
 int FUN_00429f38(void);
 int aocClearDisplayFlag(int);
@@ -35,8 +35,8 @@ extern int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_001760cc. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int sysLightEventTryWait(int);
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_001b5acc(unsigned int *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 /* Supplied declaration required: FUN_001d0fcc. */
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_00429f38. */
@@ -74,11 +74,11 @@ unsigned int FUN_0024b280(void)
   
   temp_v0 = g_aocBoot;
   temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),1);
-  puVar1 = (unsigned int *)FUN_001b5acc((unsigned int *)&uStack_4c);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev((unsigned int *)&uStack_4c);
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = (unsigned int *)&uStack_38;
-  resultPairInitialize(puVar2,0);
+  _ZN18WindowStatusResultC1Ej(puVar2,0);
   temp_v4 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v4;

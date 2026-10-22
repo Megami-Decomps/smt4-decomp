@@ -5,7 +5,7 @@
 extern "C" {
 
 int emptyStub_002f4370(...);
-int FUN_00423a3c(...);
+int _ZN9Obj420a2cC1Ev(...);
 int FUN_00425e74(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -136,7 +136,7 @@ extern unsigned int DAT_00618510; /* 0x618510 */
 extern unsigned int DAT_00618514; /* 0x618514 */
 
 /* Supplied declaration required: emptyStub_002f4370. */
-/* Supplied declaration required: FUN_00423a3c. */
+/* Supplied declaration required: _ZN9Obj420a2cC1Ev. */
 /* Supplied declaration required: FUN_00425e74. */
 
 
@@ -205,7 +205,7 @@ void FUN_00510084(void)
   DAT_00588024 = 0;
   DAT_00588030 = "㻼B㿜B㸔B㾠B";
   DAT_00588034 = 0;
-  FUN_00423a3c(&DAT_00617e70,"㻼B㿜B㸔B㾠B",0x100000);
+  _ZN9Obj420a2cC1Ev(&DAT_00617e70,"㻼B㿜B㸔B㾠B",0x100000);
   DAT_00617f1c = 0;
   DAT_00617f18 = "㪌B㳼B㭈B";
   DAT_00617f20 = 0;

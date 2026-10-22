@@ -1,53 +1,26 @@
 #ifndef CLASSES_OBJ55AAE4_H
 #define CLASSES_OBJ55AAE4_H
 
-#include "common.h"
+#include "classes/Obj55a788.h"
+#include "classes/Obj55aff4Vector.h"
 
-extern "C" void asdOperatorDeleteArray(void *block);
-
-/* An eight-byte polymorphic element, destroyed through its virtual destructor. */
-class Obj55aae4Element {
-public:
-    virtual ~Obj55aae4Element();
-
-protected:
-    /* 0x00: vtable pointer */
-    /* 0x04 */ u32 unk04;
-};
-
-/* A growable array of elements: first, one-past-last and end of the allocation. Destroying it
- * destroys each element and frees the block. */
-struct Obj55aae4Array {
-    /* 0x00 */ Obj55aae4Element *begin;
-    /* 0x04 */ Obj55aae4Element *end;
-    /* 0x08 */ Obj55aae4Element *capacity;
-
-    static void destroyRange(Obj55aae4Element *first, Obj55aae4Element *last)
-    {
-        for (; first != last; ++first) {
-            first->~Obj55aae4Element();
-        }
-    }
-
-    ~Obj55aae4Array()
-    {
-        destroyRange(begin, end);
-        asdOperatorDeleteArray(begin);
-    }
-};
-
-/* The object whose vtable is at 0x55aae4 (named after it until its real name is known): it
- * owns an array of elements at +0x30. Slot 0 is the destructor; the vtable is stored by
- * FUN_0030c9cc, _ZN9Obj55a328D1Ev and the destructor. */
+/* The polymorphic base holds a descriptor and an array of string values. */
 class Obj55aae4 {
 public:
-    Obj55aae4();
+    Obj55aae4() : state(0), descriptor(0, 0xffff), elements(0) {}
     virtual ~Obj55aae4();
 
 protected:
-    /* 0x00: vtable pointer */
-    /* 0x04 */ u8 unk04[0x2C];
-    /* 0x30 */ Obj55aae4Array elements;
+    /* 0x04 */ u8 state;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0c;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ Obj55a788 descriptor;
+    /* 0x24 */ u32 unk24;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ u32 unk2c;
+    /* 0x30 */ Obj55aff4Vector elements;
 };
 
 #endif

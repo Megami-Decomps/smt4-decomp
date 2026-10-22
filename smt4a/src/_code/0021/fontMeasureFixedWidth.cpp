@@ -1,4 +1,3 @@
-/* NON_MATCHING: multiply operands are reversed between r0 and r4. */
 #include "common.h"
 
 extern "C" {

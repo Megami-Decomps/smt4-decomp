@@ -32,4 +32,40 @@ typedef struct TitleConfigA {
     /* 0x15C */ void *process;
 } TitleConfigA;
 
+struct TitleConfigCallbackView {
+    /* 0x000 */ u32 job;
+    /* 0x004 */ u8 closing;
+    /* 0x005 */ u8 unk005[3];
+    /* 0x008 */ u32 state;
+    /* 0x00C */ u8 unk00c[8];
+    /* 0x014 */ s16 buttons[3];
+    /* 0x01A */ s16 countA;
+    /* 0x01C */ s16 resetButton;
+    /* 0x01E */ s16 leftButton;
+    /* 0x020 */ s16 rightButton;
+    /* 0x022 */ s16 slider;
+    /* 0x024 */ s16 countB;
+    /* 0x026 */ u8 unk026[2];
+    /* 0x028 */ s32 settings[3];
+    /* 0x034 */ u8 saved[0x28];
+    /* 0x05C */ u8 window[0x8C];
+    /* 0x0E8 */ u8 cursor[0x64];
+    /* 0x14C */ void *dataA;
+    /* 0x150 */ void *dataB;
+    /* 0x154 */ void *process;
+};
+struct TitleConfigValues {
+    /* 0x00 */ u8 music;
+    /* 0x01 */ u8 sound;
+    /* 0x02 */ u8 voice;
+    /* 0x03 */ u8 auxiliary;
+    /* 0x04 */ u8 changed;
+};
+struct TitleConfigHelpEntry {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ char text[0x80];
+};
+typedef char TitleConfigCallbackViewSizeCheck[sizeof(TitleConfigCallbackView) == 0x158 ? 1 : -1];
+typedef char TitleConfigHelpEntrySizeCheck[sizeof(TitleConfigHelpEntry) == 0x96 ? 1 : -1];
+
 #endif

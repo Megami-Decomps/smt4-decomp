@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot base register and floating-point zero load scheduling differ from retail. */
 #include "common.h"
 
 namespace { struct Slot { f32 scale; u32 active; u32 value; u32 extra; u8 state; u8 padding[3]; }; }

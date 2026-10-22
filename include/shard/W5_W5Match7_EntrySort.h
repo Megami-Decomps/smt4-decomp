@@ -34,6 +34,18 @@ struct EntrySortBonus {
     /* 0x08 */ u8 unk08[8];
 };
 
+union EquipmentUpgradeBonuses {
+    EntrySortBonus common;
+    s16 values[8];
+};
+struct EquipmentUpgradeRecord {
+    /* 0x00 */ u32 firstId;
+    /* 0x04 */ u32 lastId;
+    /* 0x08 */ u8 category;
+    /* 0x09 */ u8 unk09[3];
+};
+typedef char EquipmentUpgradeBonusesSizeCheck[sizeof(EquipmentUpgradeBonuses) == 0x10 ? 1 : -1];
+
 struct SortDefaults { s32 left, right; };
 
 extern "C" {

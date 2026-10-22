@@ -36,7 +36,7 @@ extern unsigned char DAT_0063e905; /* 0x63e905 */
 extern unsigned int DAT_0063e93c; /* 0x63e93c */
 extern unsigned char DAT_0063e940; /* 0x63e940 */
 extern unsigned char DAT_0063e941; /* 0x63e941 */
-extern unsigned int DAT_0063e944; /* 0x63e944 */
+extern unsigned int g_soundHandleList; /* 0x63e944 */
 extern unsigned int DAT_0063e948; /* 0x63e948 */
 extern unsigned char DAT_0063e984; /* 0x63e984 */
 extern unsigned char DAT_0063e986; /* 0x63e986 */
@@ -143,7 +143,7 @@ void FUN_00142b84(int param_1)
   DAT_0063e940 = 0;
   DAT_0063e941 = 0x40;
   DAT_0063e948 = 0;
-  DAT_0063e944 = 0;
+  g_soundHandleList = 0;
   DAT_0063e984 = 0x40;
   DAT_0063e986 = 0;
   DAT_0063e987 = 0;

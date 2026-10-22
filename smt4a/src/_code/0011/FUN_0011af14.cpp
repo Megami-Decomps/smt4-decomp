@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
-int onlineStringAssign(unsigned int, unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
+int _ZN9Obj55aff4aSERKS_(unsigned int, unsigned char [8]);
 int onlineInstanceTableFind(int, unsigned int);
 int destroyObj0055ae64(unsigned char [24]);
 int FUN_002f6be2(int, int *);
@@ -24,8 +24,8 @@ typedef struct {
 extern unsigned char DAT_00589540; /* 0x589540 */
 
 extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: destroyObj0055ae64. */
@@ -59,8 +59,8 @@ void FUN_0011af14(int param_1)
     FUN_002f6be2(param_1 + 0x70,&temp_v2);
     FUN_00302058(temp_v3,*(unsigned int *)(param_1 + 0x6c),temp_v2);
     FUN_002fa794(temp_v4,temp_v3);
-    onlineStringAssign(*(unsigned int *)(param_1 + 0x78),temp_v4);
-    onlineStringDestroy(temp_v4);
+    _ZN9Obj55aff4aSERKS_(*(unsigned int *)(param_1 + 0x78),temp_v4);
+    _ZN9Obj55aff4D1Ev(temp_v4);
     destroyObj0055ae64(temp_v3);
     operatorDeleteArrayNullable(temp_v2);
     (*(unsigned int *)((unsigned char *)&DAT_00589540 + 0x18)) = *(unsigned int *)(param_1 + 0x6c);

@@ -7,7 +7,7 @@ extern void sysMemClear(void *ptr, u32 size);
 extern void rt_memcpy_w(void *dst, const void *src, u32 size);
 extern void FUN_004bd6b0(UnitRecord *unit, u16 skill, s32 slot);
 extern void FUN_004bcd90(UnitRecord *unit);
-extern u16 FUN_0017760c(UnitRecord *unit);
+extern u16 recordGetScaledMaximum(UnitRecord *unit);
 
 /* Builds unit record `out` from table entry `id`. */
 void unitRecordBuild(s32 id, UnitRecord *out)
@@ -38,7 +38,7 @@ void unitRecordBuild(s32 id, UnitRecord *out)
     }
     out->unk30 = 0;
     FUN_004bcd90(out);
-    out->unk2A = FUN_0017760c(out);
+    out->unk2A = recordGetScaledMaximum(out);
     out->unk2C = out->unk10;
 }
 

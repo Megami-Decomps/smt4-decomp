@@ -15,7 +15,7 @@ int FUN_00185e84(...);
 int dataTable04FindById(void);
 int unitRecordBuild(...);
 int FUN_0035ad50(...);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(...);
@@ -57,7 +57,7 @@ extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(int, unsigned int);
 extern int recordContainsPairedId(unsigned char *, int);
 extern unsigned int FUN_004bcbb4(unsigned char *, int);
@@ -217,7 +217,7 @@ LAB_00288c34:
          (temp_v4 = recordContainsPairedId(temp_v11,param_3), temp_v4 == 0)) {
         FUN_004bd6b0(temp_v11,param_3,0);
       }
-      FUN_00389d9c(temp_v11,temp_v2,
+      statDrawClampedDelta(temp_v11,temp_v2,
                    (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xc9,0);
     }

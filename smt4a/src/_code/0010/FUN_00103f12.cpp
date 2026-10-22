@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned int *, int);
+int _ZN9Obj55b28cC1EPv(unsigned int *, int);
 int _ZN9Obj55b28cD1Ev(unsigned int *);
 int FUN_002e9aa8(int, int);
 int FUN_002e9c0c(int);
@@ -14,7 +14,7 @@ int FUN_002e9c0c(int);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int onlineCallStateIsDone(void);
 /* Supplied declaration required: FUN_002e9aa8. */
@@ -34,7 +34,7 @@ long long FUN_00103f12(int param_1,unsigned int param_2,unsigned int param_3,uns
   uStack_14 = param_3;
   uStack_10 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
   if (*(char *)(param_1 + 0x10) != '\x01') {
     temp_v0 = onlineCallStateIsDone();
     if (temp_v0 != 0) {

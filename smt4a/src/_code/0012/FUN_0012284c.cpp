@@ -10,8 +10,8 @@ int FUN_00122250(unsigned int, unsigned int, char *, int);
 int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
 int FUN_002e7908(...);
-int onlineStringConstruct(unsigned char [8], int);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4C1EPKc(unsigned char [8], int);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int vectorCopyHeader(int, unsigned int);
 int FUN_002ea12c(void);
 int FUN_002ea704(void);
@@ -42,8 +42,8 @@ extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea12c. */
 /* Supplied declaration required: FUN_002ea704. */
@@ -132,9 +132,9 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
               FUN_002f3378(temp_v4);
               temp_v0 = FUN_002ea704();
               FUN_002fd784(temp_v0,temp_v4);
-              onlineStringConstruct(temp_v6,param_5);
+              _ZN9Obj55aff4C1EPKc(temp_v6,param_5);
               FUN_0010d0cc();
-              onlineStringDestroy(temp_v6);
+              _ZN9Obj55aff4D1Ev(temp_v6);
               temp_v1 = FUN_002e789a(param_3);
               if (temp_v1 != 0) {
                 temp_v1 = operatorNew(0x2b8);

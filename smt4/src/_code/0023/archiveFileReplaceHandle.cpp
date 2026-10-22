@@ -18,7 +18,7 @@ struct ArchivePathWork {
 
 extern "C" {
 void FUN_0023a170(u64 handle);
-void resultPairInitialize(u32 request, u32 result);
+void _ZN18WindowStatusResultC1Ej(u32 request, u32 result);
 u32 FUN_003520dc(u32 *archive, ArchivePathWork *, u32 type, u64 id, u32 flags);
 u32 handleRequestSubmit(ArchiveFile *, u32 type, u64 id, u32 zero, u32 flags,
                  u32 mode, void *path, u32 capacity, u32 unused);
@@ -32,7 +32,7 @@ void archiveFileReplaceHandle(u32 request, ArchiveFile *file, const ArchiveReque
         file->handle = 0;
     }
     if (source->invalid) {
-        resultPairInitialize(request, 0xe0e13883);
+        _ZN18WindowStatusResultC1Ej(request, 0xe0e13883);
         return;
     }
     u64 archiveId = (static_cast<u64>(0x4008c) << 32) |
@@ -41,31 +41,31 @@ void archiveFileReplaceHandle(u32 request, ArchiveFile *file, const ArchiveReque
     u32 archive;
     u32 result = FUN_003520dc(&archive, &path, 1, archiveId, 0);
     if (result == 0xd8a083fa) {
-        resultPairInitialize(request, 0xd881388a);
+        _ZN18WindowStatusResultC1Ej(request, 0xd881388a);
         return;
     }
     if (result & 0x80000000) {
-        resultPairInitialize(request, result);
+        _ZN18WindowStatusResultC1Ej(request, result);
         return;
     }
     result = handleRequestSubmit(file, 1, archiveId, 0, 1, 1, file->path, 0x40, 0);
     if (((result >> 10) & 0xff) == 17 &&
         (result & 0x3ff) >= 100 && (result & 0x3ff) < 180) {
         file->handle = 0;
-        resultPairInitialize(request, 0xd881388a);
+        _ZN18WindowStatusResultC1Ej(request, 0xd881388a);
         return;
     }
     if (result & 0x80000000) {
-        resultPairInitialize(request, result);
+        _ZN18WindowStatusResultC1Ej(request, result);
         return;
     }
     result = FUN_00352920(file);
     if (!(result & 0x80000000)) {
-        resultPairInitialize(request, 0);
+        _ZN18WindowStatusResultC1Ej(request, 0);
         return;
     }
     FUN_0023a170(file->handle);
     file->handle = 0;
-    resultPairInitialize(request, result);
+    _ZN18WindowStatusResultC1Ej(request, result);
 }
 }

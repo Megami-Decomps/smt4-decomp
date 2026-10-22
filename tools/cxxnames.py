@@ -108,17 +108,20 @@ VARIANT_FILE = {"C2": "base_", "C3": "alloc_", "D0": "deleting_", "D2": "base_"}
 
 def file_stem(name):
     """A file name for a function: `Obj558be0__stop` for `_ZN9Obj558be04stopEv`,
-    `Obj55afc4__dtor_Obj55afc4` for its destructor (D1), `Obj55afc4__deleting_dtor_Obj55afc4` for D0."""
+    `Obj55afc4__dtor_Obj55afc4` for its destructor (D1), `Obj55afc4__deleting_dtor_Obj55afc4` for D0,
+    `Obj55c8d0__Obj55c8d0__unsigned_int` for a constructor taking a u32 (overloads need their own files)."""
     readable = demangle(name)
     if readable == name:
         return name
     variant = re.search(r"(C[123]|D[012])E", name)
     prefix = VARIANT_FILE.get(variant[1], "") if variant else ""
-    base = readable.split("(")[0]
+    base, _, params = readable.partition("(")
     head, _, last = base.rpartition("::")
     last = last.replace("~", "dtor_")
     if variant and head:
         last = prefix + (last if last.startswith("dtor_") else "ctor_" + last if prefix else last)
+    if variant and variant[1].startswith("C") and params.rstrip(")").strip() not in ("", "void"):
+        last += "__" + params.rstrip(")")
     base = f"{head}::{last}" if head else last
     return re.sub(r"[^A-Za-z0-9_]", "_", base.replace("::", "__"))
 

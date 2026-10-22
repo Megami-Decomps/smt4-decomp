@@ -6,7 +6,7 @@ extern "C" {
 
 int strAssign(unsigned char [32], int *, int, unsigned int);
 int FUN_002e7614(...);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int initVtable00558630(unsigned char [16]);
 int onlineTimeGetNow(int *);
 int strDestroy(...);
@@ -29,7 +29,7 @@ extern unsigned char LAB_002fbdc8; /* 0x2fbdc8 */
 
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: initVtable00558630. */
 /* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: strDestroy. */
@@ -66,7 +66,7 @@ int FUN_002fbd38(int param_1)
     temp_v2 = 0;
     FUN_002f7b9c(temp_v7,temp_v1);
     FUN_002f6be2(temp_v7,&temp_v2);
-    onlineStringDestroy(temp_v7);
+    _ZN9Obj55aff4D1Ev(temp_v7);
     FUN_002fbde4(param_1 + 0xf,0x29,&LAB_002fbdc8,temp_v2);
     *(unsigned char *)(param_1 + 0x37) = 0;
     operatorDeleteArrayNullable(temp_v2);

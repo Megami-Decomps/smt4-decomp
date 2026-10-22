@@ -7,7 +7,7 @@ extern "C" {
 int mtx44TransformPosition(...);
 int FUN_00257374(...);
 int FUN_002573d8(void);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int FUN_0028c92c(...);
 int FUN_002ad314(...);
 int FUN_002aff70(...);
@@ -135,7 +135,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: FUN_00257374. */
 /* Supplied declaration required: FUN_002573d8. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_0028c92c. */
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: FUN_002aff70. */
@@ -382,7 +382,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
       temp_v69[6] = *puVar2;
       temp_v69[7] = puVar2[1];
       FUN_002aff70(puVar8[3]);
-      FUN_0025b750();
+      forwardRecoveredCallback();
       temp_v10 = temp_v10 + 1;
       temp_v8 = (float *)((int)temp_v8 + temp_v9);
       temp_v64 = (unsigned int *)((int)temp_v64 + iStack_64);

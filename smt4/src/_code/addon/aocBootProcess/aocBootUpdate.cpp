@@ -11,7 +11,7 @@ int FUN_0027eafc(void);
 int jobOwnerFreeSlotAndStop(int);
 int FUN_002a126c(int *, int);
 int FUN_002ba9ac(int);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int jyoucyuGetTableEntry(int);
 int aocResetOperationState(int);
 int FUN_003887cc(int *, int);
@@ -41,8 +41,8 @@ extern int strIsEmpty(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba9ac. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned int *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: aocResetOperationState. */
 /* Supplied declaration required: FUN_003887cc. */
@@ -74,11 +74,11 @@ unsigned int aocBootUpdate(void)
   
   temp_v0 = g_aocBoot;
   temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),1);
-  puVar1 = (unsigned int *)FUN_002bad5c((unsigned int *)&uStack_4c);
+  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev((unsigned int *)&uStack_4c);
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = (unsigned int *)&uStack_38;
-  resultPairInitialize(puVar2,0);
+  _ZN18WindowStatusResultC1Ej(puVar2,0);
   temp_v4 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v4;

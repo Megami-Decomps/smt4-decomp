@@ -22,7 +22,7 @@ extern unsigned char DAT_005595c8; /* 0x5595c8 */
 #endif
 /* Supplied declaration required: FUN_0013175e. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int onlineStringDestroy(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 extern int FUN_002ea00c(int);
 extern int FUN_002f8760(int);
 /* Supplied declaration required: FUN_002fe97c. */
@@ -45,7 +45,7 @@ unsigned long long FUN_00113c60(unsigned int *param_1,unsigned int param_2,int p
   temp_v2 = param_2;
   temp_v3 = param_3;
   uStack_10 = param_4;
-  temp_v0 = onlineStringDestroy(param_1 + 0x44);
+  temp_v0 = _ZN9Obj55aff4D1Ev(param_1 + 0x44);
   piVar4 = (int *)(temp_v0 - 0x1c);
   temp_v1 = *(int *)(temp_v0 - 0xc);
   if (temp_v1 != 0) {

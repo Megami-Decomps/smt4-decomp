@@ -45,11 +45,13 @@ public:
  * is known); its destructor removes them all. ObjBase3c2ef0 and the windows derive from it. */
 class Obj422594 {
 public:
+    Obj422594();
     virtual ~Obj422594();
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
 
     /* 0x00: vtable pointer */
-    /* 0x04 */ u8 unk04[0x4C];
+    /* 0x04 */ u16 state;
+    /* 0x06 */ u8 unk06[0x4A];
     /* 0x50 */ Obj422594Region region;
     /* 0x64 */ u8 ready;
 };

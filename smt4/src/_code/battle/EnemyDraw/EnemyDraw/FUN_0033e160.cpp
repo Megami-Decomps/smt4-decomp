@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int matrixScaleColumnsAlt(...);
 int FUN_00241d44(...);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int mathMatrixTranslateLocal(float *, float *, int *);
 int FUN_002b011c(void);
 int mtx44Copy(float *, unsigned int *);
@@ -110,7 +110,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: matrixScaleColumnsAlt. */
 /* Supplied declaration required: FUN_00241d44. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: mtx44Copy. */
@@ -362,7 +362,7 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
         FUN_00241d44(&temp_v48);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 4);
-      FUN_0025b750();
+      forwardRecoveredCallback();
     }
   }
   return;

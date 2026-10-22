@@ -30,8 +30,8 @@ extern unsigned int DAT_0058801c; /* 0x58801c */
 /* Supplied declaration required: menu4CSetValue42. */
 /* Supplied declaration required: FUN_004ba890. */
 /* Supplied declaration required: clearThreeHalfwords. */
-extern int flagsDESet(int);
-extern int FUN_004d08d0(int);
+extern int _ZN14SelectionFlagsC1Ev(int);
+extern int _ZN9Obj55ca08D1Ev(int);
 
 
 unsigned int FUN_002bd1f4(void)
@@ -60,7 +60,7 @@ unsigned int FUN_002bd1f4(void)
         if (*(int *)(temp_v1 + 8) != 0) {
           FUN_0019e290();
           if (*(int *)(temp_v1 + 8) != 0) {
-            temp_v2 = FUN_004d08d0(*(int *)(temp_v1 + 8) + 0x110);
+            temp_v2 = _ZN9Obj55ca08D1Ev(*(int *)(temp_v1 + 8) + 0x110);
             asdOperatorDelete(temp_v2 - 0x110);
           }
           *(unsigned int *)(temp_v1 + 8) = 0;
@@ -84,7 +84,7 @@ unsigned int FUN_002bd1f4(void)
       *(unsigned int *)(puVar3 + 0x20) = 0;
       temp_v2 = clearThreeHalfwords(puVar3 + 0x3c);
       temp_v2 = clearThreeHalfwords(temp_v2 + 6);
-      temp_v2 = flagsDESet(temp_v2 + 0x5a);
+      temp_v2 = _ZN14SelectionFlagsC1Ev(temp_v2 + 0x5a);
       *(unsigned char **)(temp_v2 + 0x74) = &DAT_0055ca10;
       temp_v2 = temp_v2 - 0x9c;
     }

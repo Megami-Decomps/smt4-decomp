@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00133ab8(int, int);
 int rt_malloc(...);
-int onlineStringConstruct(unsigned char [12], unsigned char *);
-int onlineStringDestroy(unsigned char [12]);
-int FUN_002f5020(int, unsigned char *, int, int);
+int _ZN9Obj55aff4C1EPKc(unsigned char [12], unsigned char *);
+int _ZN9Obj55aff4D1Ev(unsigned char [12]);
+int __aeabi_vec_ctor_nocookie_nodtor(int, unsigned char *, int, int);
 int FUN_002f5928(...);
 int FUN_002f9e68(int, int);
 int keyValueCopyConstruct(int *, int, unsigned int);
@@ -36,9 +36,9 @@ extern int FUN_0012272c(int, unsigned int, unsigned int);
 extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: rt_malloc. */
 extern int operatorNew(unsigned int);
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002f5928. */
 /* Supplied declaration required: FUN_002f9e68. */
 extern unsigned int bufGrowCapacity4(unsigned int, int *);
@@ -94,7 +94,7 @@ int FUN_0011bc64(unsigned int *param_1)
   *(int *)(temp_v0 + 0x40) = *piVar6 + temp_v4 * 0xc;
   *(int *)(temp_v0 + 0x3c) = *piVar6 + temp_v11 * 0xc;
   temp_v0 = temp_v0 + 0x4c;
-  FUN_002f5020(temp_v0,&LAB_0013315b,8,2);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_0013315b,8,2);
   temp_v7[0] = temp_v7[0] & 0xffff0000;
   piVar6 = (int *)(temp_v0 + 0x10);
   temp_v7[1] = 0;
@@ -142,10 +142,10 @@ int FUN_0011bc64(unsigned int *param_1)
   temp_v2 = operatorNew(0x34);
   temp_v3 = DAT_00594a50;
   if (temp_v2 != 0) {
-    onlineStringConstruct(temp_v9,&LAB_0011be18);
+    _ZN9Obj55aff4C1EPKc(temp_v9,&LAB_0011be18);
     temp_v3 = FUN_00311700(temp_v2,temp_v9,temp_v3);
     *(unsigned int *)(temp_v1 + 0x30) = temp_v3;
-    onlineStringDestroy(temp_v9);
+    _ZN9Obj55aff4D1Ev(temp_v9);
   }
   else {
     *(unsigned int *)(temp_v1 + 0x30) = 0;

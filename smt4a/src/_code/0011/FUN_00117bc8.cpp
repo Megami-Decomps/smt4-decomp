@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void onlineStringAssign(u8 *dest, const u8 *source);
-void FUN_002f6ed2(u8 *dest, const u8 *source);
+void _ZN9Obj55aff4aSERKS_(u8 *dest, const u8 *source);
+void _ZN12ZeroWordPairaSERKS_(u8 *dest, const u8 *source);
 void FUN_003039f4(u8 *dest, const u8 *source);
 void FUN_00303a22(u8 *dest, const u8 *source);
 void FUN_00303a2e(u8 *dest, const u8 *source);
@@ -43,20 +43,20 @@ Record *FUN_00117bc8(Record *dest, const Record *source)
     dest->value08 = source->value08;
     dest->word10 = source->word10;
     dest->word14 = source->word14;
-    onlineStringAssign(dest->part18, source->part18);
+    _ZN9Obj55aff4aSERKS_(dest->part18, source->part18);
     dest->half20 = source->half20;
     FUN_003039f4(dest->part24, source->part24);
     FUN_00303a22(dest->part44, source->part44);
     FUN_00303a22(dest->part58, source->part58);
-    FUN_002f6ed2(dest->part70, source->part70);
-    FUN_002f6ed2(dest->part78, source->part78);
+    _ZN12ZeroWordPairaSERKS_(dest->part70, source->part70);
+    _ZN12ZeroWordPairaSERKS_(dest->part78, source->part78);
     dest->half80 = source->half80;
     dest->byte82 = source->byte82;
     dest->word84 = source->word84;
     dest->word88 = source->word88;
     dest->word8C = source->word8C;
-    FUN_002f6ed2(dest->part90, source->part90);
-    FUN_002f6ed2(dest->part98, source->part98);
+    _ZN12ZeroWordPairaSERKS_(dest->part90, source->part90);
+    _ZN12ZeroWordPairaSERKS_(dest->part98, source->part98);
     FUN_00303a2e(dest->partA0, source->partA0);
     FUN_00303a3a(dest->partAC, source->partAC);
     return dest;

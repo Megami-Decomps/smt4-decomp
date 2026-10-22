@@ -11,7 +11,7 @@ typedef struct TitleState001027d4 {
 
 s32 FUN_002c5210(void);
 s32 FUN_002c501c(void);
-void FUN_002c4f8c(u32 scene, s32 arg);
+void effectRestoreSavedRenderPairs(u32 scene, s32 arg);
 void FUN_002c4e98(u32 arg);
 
 extern TitleState001027d4 g_titleFlags; /* 0x446db0 */
@@ -22,7 +22,7 @@ u32 titleSceneStep(void)
 {
     if (FUN_002c5210() == 1 && g_titleFlags.ready != 0) {
         if (FUN_002c501c() != 0) {
-            FUN_002c4f8c(g_titleScene, FUN_002c501c());
+            effectRestoreSavedRenderPairs(g_titleScene, FUN_002c501c());
         }
         if (g_titleFlags.skipped == 0) {
             FUN_002c4e98(g_titleFlags.sceneArg);

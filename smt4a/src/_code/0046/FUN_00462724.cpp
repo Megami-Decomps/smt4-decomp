@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002f5020(unsigned char *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
 
 extern unsigned char LAB_001aafb0; /* 0x1aafb0 */
 extern unsigned char LAB_001f3e28; /* 0x1f3e28 */
 extern unsigned char LAB_00462714; /* 0x462714 */
 extern unsigned char LAB_00515804; /* 0x515804 */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_00462724(unsigned char *param_1)
@@ -30,15 +30,15 @@ void FUN_00462724(unsigned char *param_1)
   *(unsigned int *)(param_1 + 0xc) = 0;
   *(unsigned int *)(param_1 + 0x10) = 0;
   param_1 = param_1 + 0x14;
-  FUN_002f5020(param_1,&LAB_001aafb0,0x10,2);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_001aafb0,0x10,2);
   param_1 = param_1 + 0x20;
-  FUN_002f5020(param_1,&LAB_001aafb0,0x10,2);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_001aafb0,0x10,2);
   param_1 = param_1 + 0x20;
-  FUN_002f5020(param_1,&LAB_00515804,0xc,2);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_00515804,0xc,2);
   param_1 = param_1 + 0x22c;
-  FUN_002f5020(param_1,&LAB_001f3e28,8,2);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_001f3e28,8,2);
   param_1 = param_1 + 0x10;
-  FUN_002f5020(param_1,&LAB_00462714,8,4);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_00462714,8,4);
   temp_v2 = 0;
   *(unsigned int *)(param_1 + -0x28c) = 0x3f800000;
   *(unsigned int *)(param_1 + -0x288) = 0x3f800000;

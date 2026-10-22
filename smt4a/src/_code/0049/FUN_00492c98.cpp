@@ -10,7 +10,7 @@ int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
 int FUN_00183bb0(void);
 int FUN_00185dd4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int jobGetScalarValue(void);
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 
 /* stack frame of param_8: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: jobGetScalarValue. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_00492c98(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -88,7 +88,7 @@ void FUN_00492c98(unsigned int param_1,unsigned int param_2,unsigned int param_3
     return;
   }
   if (param_8 != 0 && temp_v1 != 0) {
-    FUN_002f5020(&temp_v2,&LAB_00192824,0x10,4);
+    __aeabi_vec_ctor_nocookie_nodtor(&temp_v2,&LAB_00192824,0x10,4);
     temp_v1 = *(int *)(temp_v0 + 0xc);
     temp_v2 = *(unsigned int *)(temp_v1 + 0x10);
     uStack_b4 = *(unsigned int *)(temp_v1 + 0x14);

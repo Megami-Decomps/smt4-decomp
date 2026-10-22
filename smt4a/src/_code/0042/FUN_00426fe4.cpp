@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysFatalBreak(void);
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 int FUN_00426800(int *, unsigned char [24], int);
 int FUN_00427360(int *, int *);
 int FUN_00429d58(...);
@@ -19,7 +19,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_00426800. */
 /* Supplied declaration required: FUN_00427360. */
 /* Supplied declaration required: FUN_00429d58. */
@@ -44,7 +44,7 @@ void FUN_00426fe4(unsigned int param_1,int *param_2,unsigned int *param_3)
     param_2[1] = 0;
   }
   if ((char)param_3[1] != '\0') {
-    resultPairInitialize(param_1,0xe0e13883);
+    _ZN18WindowStatusResultC1Ej(param_1,0xe0e13883);
     return;
   }
   temp_v1 = *param_3;
@@ -64,7 +64,7 @@ void FUN_00426fe4(unsigned int param_1,int *param_2,unsigned int *param_3)
   piVar5 = (int *)0xd881388a;
   if (piVar4 != (int *)0xd8a083fa) {
     if ((int)piVar4 < 0) {
-      resultPairInitialize(param_1,piVar4);
+      _ZN18WindowStatusResultC1Ej(param_1,piVar4);
       return;
     }
     piVar4 = param_2;
@@ -73,13 +73,13 @@ void FUN_00426fe4(unsigned int param_1,int *param_2,unsigned int *param_3)
     if (((((unsigned int)piVar4 & 0x3fc00) != 0x4400) || (((unsigned int)piVar4 & 0x3ff) < 100)) ||
        (((unsigned int)piVar4 & 0x3ff) >= 0xb4)) {
       if ((int)piVar4 < 0) {
-        resultPairInitialize(param_1,piVar4);
+        _ZN18WindowStatusResultC1Ej(param_1,piVar4);
         return;
       }
       piVar5 = param_2;
       FUN_00427360(param_2,piVar4);
       if (-1 < (int)piVar5) {
-        resultPairInitialize(param_1,0);
+        _ZN18WindowStatusResultC1Ej(param_1,0);
         return;
       }
       FUN_00429d58(*param_2,param_2[1]);
@@ -87,7 +87,7 @@ void FUN_00426fe4(unsigned int param_1,int *param_2,unsigned int *param_3)
     *param_2 = 0;
     param_2[1] = 0;
   }
-  resultPairInitialize(param_1,piVar5);
+  _ZN18WindowStatusResultC1Ej(param_1,piVar5);
   return;
 }
 

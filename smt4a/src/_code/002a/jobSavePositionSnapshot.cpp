@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler writes the valid flag before copying the saved three-word snapshot. */
 #include "shard/W5_W5Match2_JobSnapshot.h"
 extern "C" {
 JobSnapshotWork *jobGetWork(u32 job);

@@ -2,27 +2,28 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_Obj55ac68.h"
+#include <new>
 
 extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00103f54(...);
 int holderSetFlagBits(...);
-int FUN_0011b272(int, unsigned int);
+int _ZN9Obj5596acaSERKS_(int, unsigned int);
 int FUN_0011b634(...);
 int FUN_00120648(...);
 int asdOperatorDeleteArray(...);
 int operatorNew(...);
-int onlineStringAssign(int, unsigned int);
-int FUN_002f4cac(...);
+int _ZN9Obj55aff4aSERKS_(int, unsigned int);
+int _ZN9Obj55b1045resetEv(...);
 int FUN_002f4cd6(...);
-int FUN_00303928(...);
+int _ZN9Obj5596acC1EhRK10WordVector(...);
 int FUN_00387edc(...);
 int FUN_004311c0(...);
 int _ZN9Obj55aad4D1Ev(...);
 int _ZN9Obj55ac68D1Ev(...);
 int FUN_00522a48(...);
-int FUN_00522bf4(...);
+int _ZN15Obj55aff4VectoraSERKS_(...);
 int rt_memcpy_w(...);
 
 typedef int romwright_code(...);
@@ -67,29 +68,29 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
-/* Supplied declaration required: FUN_0011b272. */
+/* Supplied declaration required: _ZN9Obj5596acaSERKS_. */
 /* Supplied declaration required: FUN_0011b634. */
 /* Supplied declaration required: FUN_00120648. */
 extern int campCecHasObject(void);
 extern unsigned int FUN_002bf520(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: operatorNew. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int _ZN9Obj55aff4C1Ev(unsigned char *);
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002f4cac. */
+/* Supplied declaration required: _ZN9Obj55b1045resetEv. */
 /* Supplied declaration required: FUN_002f4cd6. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
-extern int FUN_003038fc(int, unsigned int);
-/* Supplied declaration required: FUN_00303928. */
-extern int FUN_0030395c(int, unsigned int);
+extern int _ZN9Obj55b104C1Ejj(int, unsigned int);
+/* Supplied declaration required: _ZN9Obj5596acC1EhRK10WordVector. */
+extern int _ZN15Obj55aff4VectorC1Ej(int, unsigned int);
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: _ZN9Obj55aad4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55ac68D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
-/* Supplied declaration required: FUN_00522bf4. */
+/* Supplied declaration required: _ZN15Obj55aff4VectoraSERKS_. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -139,38 +140,38 @@ void FUN_00413144(int param_1)
   temp_v11 = 0;
   temp_v12 = 0;
   temp_v13 = 0;
-  temp_v0 = FUN_00303928(temp_v0 + 8,3,&temp_v11);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 8,3,&temp_v11);
   asdOperatorDeleteArray(temp_v11);
   {
     OnlineWordVectorStorage empty = { NULL, NULL, NULL };
-    temp_v0 = FUN_00303928(temp_v0 + 0x14, 3, &empty);
+    temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x14, 3, &empty);
     asdOperatorDeleteArray(empty.begin);
   }
-  temp_v0 = FUN_003038fc(temp_v0 + 0x18,0);
-  temp_v0 = FUN_0030395c(temp_v0 + 0x20,0);
+  temp_v0 = _ZN9Obj55b104C1Ejj(temp_v0 + 0x18,0);
+  temp_v0 = _ZN15Obj55aff4VectorC1Ej(temp_v0 + 0x20,0);
   temp_v0 = temp_v0 + 0x20;
-  temp_v0 = reinterpret_cast<int>(FUN_0043387c(
+  temp_v0 = reinterpret_cast<int>(_ZN9Obj55ac68C1Ev(
       reinterpret_cast<Obj55ac68Storage*>(temp_v0)));
   *(unsigned char **)(temp_v0 - 0x88) = &DAT_0055a30c;
   *(unsigned int *)(temp_v0 - 0x80) = 0;
   *(unsigned int *)(temp_v0 - 0x7c) = 0;
   *(unsigned int *)(temp_v0 - 0x78) = 0;
-  temp_v1 = (u32)onlineStringConstruct((OnlineStringValue*)temp_v34,(const char*)&LAB_004134dc);
-  onlineStringAssign(temp_v0 - 0x74,temp_v1);
-  onlineStringDestroy((OnlineStringValue*)temp_v34);
+  temp_v1 = (u32)new (temp_v34) Obj55aff4((const char*)&LAB_004134dc);
+  _ZN9Obj55aff4aSERKS_(temp_v0 - 0x74,temp_v1);
+  reinterpret_cast<Obj55aff4*>(temp_v34)->Obj55aff4::~Obj55aff4();
   temp_v27 = 0;
   temp_v28 = 0;
   temp_v29 = 0;
-  temp_v1 = FUN_00303928(&temp_v10,3,&temp_v27);
-  FUN_0011b272(temp_v0 - 0x6c,temp_v1);
+  temp_v1 = _ZN9Obj5596acC1EhRK10WordVector(&temp_v10,3,&temp_v27);
+  _ZN9Obj5596acaSERKS_(temp_v0 - 0x6c,temp_v1);
   temp_v10 = &DAT_0055a4c0;
   asdOperatorDeleteArray(temp_v12);
   asdOperatorDeleteArray(temp_v27);
   temp_v27 = 0;
   temp_v28 = 0;
   temp_v29 = 0;
-  temp_v1 = FUN_00303928(&temp_v10,3,&temp_v27);
-  FUN_0011b272(temp_v0 - 0x58,temp_v1);
+  temp_v1 = _ZN9Obj5596acC1EhRK10WordVector(&temp_v10,3,&temp_v27);
+  _ZN9Obj5596acaSERKS_(temp_v0 - 0x58,temp_v1);
   temp_v10 = &DAT_0055a4c0;
   asdOperatorDeleteArray(temp_v12);
   asdOperatorDeleteArray(temp_v27);
@@ -178,20 +179,20 @@ void FUN_00413144(int param_1)
   temp_v31 = (unsigned int *)0x0;
   temp_v32 = (unsigned int *)0x0;
   temp_v33 = 0;
-  FUN_00522bf4(temp_v0 - 0x20,&temp_v31);
+  _ZN15Obj55aff4VectoraSERKS_(temp_v0 - 0x20,&temp_v31);
   puVar1 = temp_v32;
   for (puVar4 = temp_v31; puVar4 != puVar1; puVar4 = puVar4 + 2) {
     (**(romwright_code **)*puVar4)(puVar4);
   }
   asdOperatorDeleteArray(temp_v31);
-  FUN_002f4cac(temp_v0 - 0x40);
+  _ZN9Obj55b1045resetEv(temp_v0 - 0x40);
   *(unsigned int *)(temp_v0 - 0x10) = 0;
   *(unsigned int *)(temp_v0 - 0xc) = 0;
   *(unsigned short *)(temp_v0 - 4) = 0;
   *(unsigned char *)(temp_v0 - 2) = 0;
   Obj55ac68Storage initialState;
   *(unsigned int *)(temp_v0 - 8) = 0;
-  FUN_0043387c(&initialState);
+  _ZN9Obj55ac68C1Ev(&initialState);
   FUN_00120648(temp_v0, &initialState);
   _ZN9Obj55ac68D1Ev(&initialState);
   temp_v5 = *(unsigned int *)(param_1 + 0x90);
@@ -204,7 +205,7 @@ void FUN_00413144(int param_1)
   else {
     FUN_00387edc(temp_v23);
   }
-  FUN_002f4cac(temp_v8);
+  _ZN9Obj55b1045resetEv(temp_v8);
   FUN_002f4cd6(temp_v8,temp_v23,100);
   temp_v1 = 0x19a2;
   temp_v14 = (unsigned int *)0x0;
@@ -220,8 +221,8 @@ void FUN_00413144(int param_1)
   textFormatBuffer(&temp_v17,&LAB_004134e8,temp_v1,temp_v2);
   temp_v1 = FUN_002ea100(temp_v30,(unsigned int *)&temp_v17);
   FUN_00522a48(&temp_v14,temp_v1);
-  onlineStringDestroy((OnlineStringValue*)temp_v30);
-  FUN_00522bf4(temp_v9,&temp_v14);
+  reinterpret_cast<Obj55aff4*>(temp_v30)->Obj55aff4::~Obj55aff4();
+  _ZN15Obj55aff4VectoraSERKS_(temp_v9,&temp_v14);
   temp_v6 = 0x70;
   temp_v0 = operatorNew(0x78);
   if (temp_v0 == 0) {

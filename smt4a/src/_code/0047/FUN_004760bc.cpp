@@ -14,7 +14,7 @@ int asdOperatorDeleteB(...);
 int FUN_002e56e4(int, unsigned char *);
 int sysMemClear(...);
 int wstrlenU16(...);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int FUN_0037a728(...);
 int FUN_00426eb8(...);
@@ -72,7 +72,7 @@ extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: FUN_002e56e4. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: wstrlenU16. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0037a728. */
 /* Supplied declaration required: FUN_00426eb8. */
@@ -239,7 +239,7 @@ int FUN_004760bc(int param_1)
     puVar5 = puVar4 + 2;
     *puVar4 = 0x9c8;
     puVar4[1] = temp_v6;
-    FUN_002f5020(puVar5,&LAB_0047d834,0x9c8,temp_v6);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar5,&LAB_0047d834,0x9c8,temp_v6);
   }
   *(unsigned int **)(temp_v5 + 0x688) = puVar5;
   temp_v22 = 0;

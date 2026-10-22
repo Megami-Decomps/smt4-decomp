@@ -2,10 +2,10 @@
 
 extern "C" {
 
-void FUN_00151418(void *context);
+void renderSceneUpdate(void *context);
 s32 FUN_00141260(void *context)
 {
-    FUN_00151418(context);
+    renderSceneUpdate(context);
     return 0;
 }
 

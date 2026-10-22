@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned int *);
+int _ZN9Obj55aff4D1Ev(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned char g_systemTable; /* 0x59935c */
@@ -13,7 +13,7 @@ extern unsigned char g_systemTable; /* 0x59935c */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int FUN_002ee96a(unsigned int *, unsigned int);
 
 
@@ -37,7 +37,7 @@ long long FUN_0030f000(unsigned int param_1,unsigned int param_2,unsigned int pa
     }
     (**(romwright_code **)(*(int *)puVar2[2] + 0xc))(&uStack_20);
     temp_v0 = FUN_002ee96a(&uStack_20,param_2);
-    onlineStringDestroy(&uStack_20);
+    _ZN9Obj55aff4D1Ev(&uStack_20);
     if (temp_v0 != 0) break;
     puVar2 = (unsigned int *)*puVar2;
   }

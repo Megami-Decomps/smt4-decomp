@@ -33,7 +33,7 @@ extern int FUN_00121206(int, unsigned char);
 /* Supplied declaration required: FUN_002eac34. */
 extern int streamReadBytes(int, int, unsigned int);
 /* Supplied declaration required: FUN_002eea8a. */
-extern int FUN_002ef9e0(unsigned char *, unsigned short);
+extern int _ZN9Obj55933cC1Et(unsigned char *, unsigned short);
 extern int streamReadByte(int, int);
 extern int FUN_002f5c4c(int, unsigned int);
 
@@ -91,7 +91,7 @@ unsigned int FUN_0010bf1c(unsigned int param_1,int param_2,int param_3,unsigned 
     if (temp_v0 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002ef9e0(temp_v10,temp_v8[0]);
+    temp_v0 = _ZN9Obj55933cC1Et(temp_v10,temp_v8[0]);
     *(unsigned short *)(param_3 + 0x44) = *(unsigned short *)(temp_v0 + 4);
     if (((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 0) || ((*(unsigned short *)(param_3 + 0x3c) & 0xf) == 1)) {
       temp_v0 = streamReadBytes(param_2,param_3 + 0x50,4);

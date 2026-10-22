@@ -29,4 +29,11 @@ typedef struct QcGlobalsA {
     /* 0x09 */ u8 unk09[0x3];
 } QcGlobalsA;
 
+/* Persistent quest-center flag banks, separate from the screen's work area. */
+typedef struct QcFlagBlock {
+    /* 0x00 */ u8 stateFlags[4];
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0c */ u8 questFlags[4];
+} QcFlagBlock;
+
 #endif

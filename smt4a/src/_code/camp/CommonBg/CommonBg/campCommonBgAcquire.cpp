@@ -1,88 +1,55 @@
-/* NON_MATCHING: taskCreateDraw's fade callback is raw address 0x2a37a4 with no symbol/unit; recover the callback boundary before matching. */
-#include "romwright_types.h"
+#include <string.h>
+#include "shard/W6_W6Match5_CommonBackground.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
-
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int uiFadeOpen(...);
-int campCommonBgCreateCrazingSumaho(...);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern int commonBackgroundUpdateFade(...); /* 0x227c5c */
-extern unsigned char LAB_002a35fc; /* 0x2a35fc */
-extern unsigned char LAB_002a3600; /* 0x2a3600 */
-extern unsigned char LAB_002a37a4; /* 0x2a37a4 */
-extern unsigned char LAB_0031a5a4; /* 0x31a5a4 */
-extern unsigned char LAB_0031a5b4; /* 0x31a5b4 */
-extern unsigned char LAB_0031a5c8; /* 0x31a5c8 */
-extern signed char g_commonBg; /* 0x57f208 */
-extern unsigned int *DAT_0057f20c; /* 0x57f20c */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: uiFadeOpen. */
-/* Supplied declaration required: campCommonBgCreateCrazingSumaho. */
-
-
-void campCommonBgAcquire(void)
-
-{
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  
-  if (g_commonBg < '\x01') {
-    if (DAT_0057f20c == (unsigned int *)0x0) {
-      puVar1 = (unsigned int *)0x100;
-      asdMemoryAllocTracked(0x100,0x100,0,0x18,1);
-      DAT_0057f20c = puVar1;
-    }
-    puVar1 = DAT_0057f20c;
-    *DAT_0057f20c = 0;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    puVar2 = &LAB_0031a5a4;
-    asdProcessCreateSimple(&LAB_0031a5a4,4,0,0,commonBackgroundUpdateFade,&LAB_002a35fc,0);
-    *puVar1 = (unsigned int)puVar2;
-    taskCreateDraw(&LAB_0031a5b4,0xe8,0,0,&LAB_002a3600,0,0,puVar2);
-    taskCreateDraw(&LAB_0031a5c8,0x15f,0,0,&LAB_002a37a4,0,0,*puVar1);
-    uiFadeOpen();
-    puVar1 = DAT_0057f20c;
-    DAT_0057f20c[2] = 0;
-    puVar1[4] = 0;
-    puVar1[5] = 0;
-    campCommonBgCreateCrazingSumaho();
-  }
-  puVar1 = DAT_0057f20c;
-  if ((DAT_0057f20c != (unsigned int *)0x0) && (DAT_0057f20c[2] == 0)) {
-    temp_v0 = gameFlagIsSet(0x400);
-    if (temp_v0 != 0) {
-      puVar1[3] = 0;
-    }
-    else {
-      puVar1[3] = 1;
-    }
-    puVar1[2] = 1;
-    puVar1[4] = 0x3f800000;
-    puVar1[5] = 0;
-  }
-  g_commonBg = g_commonBg + '\x01';
-  return;
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
+s32 commonBackgroundUpdateFade(u32 handle);
+void FUN_002a35fc(u32 handle);
+s32 FUN_002a3600(u32 handle);
+s32 FUN_002a37a4(u32 handle);
+void uiFadeOpen();
+void campCommonBgCreateCrazingSumaho();
+s32 gameFlagIsSet(u32 flag);
 }
 
-} /* extern "C" */
+// Acquire the shared camp background and create its update/draw processes on first use.
+extern "C" void campCommonBgAcquire()
+{
+    if (g_commonBg.referenceBytes[0] <= 0) {
+        if (g_commonBg.background == NULL) {
+            asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\CommonBg\\CommonBg.cpp", 890);
+            g_commonBg.background = (CommonBackgroundState *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x18, 1);
+        }
+        CommonBackgroundState *background = g_commonBg.background;
+        memset(background, 0, sizeof(*background));
+        background->counters.unk00 = asdProcessCreateSimple((const s8 *)"COMBG CALC", 4, 0, 0,
+                                                          commonBackgroundUpdateFade, FUN_002a35fc, 0);
+        taskCreateDraw((const s8 *)"COMBG DDRAW", 0xe8, 0, 0, FUN_002a3600, NULL, 0,
+                       (void *)background->counters.unk00);
+        taskCreateDraw((const s8 *)"COMBG DDRAW FADE", 0x15f, 0, 0, FUN_002a37a4, NULL, 0,
+                       (void *)background->counters.unk00);
+        uiFadeOpen();
+        background = g_commonBg.background;
+        background->state = 0;
+        background->progress = 0;
+        background->timer = 0;
+        campCommonBgCreateCrazingSumaho();
+    }
+    CommonBackgroundState *background = g_commonBg.background;
+    if (background != NULL && background->state == 0) {
+        if (gameFlagIsSet(0x400))
+            background->unk0c = 0;
+        else
+            background->unk0c = 1;
+        background->state = 1;
+        background->progress = 1;
+        background->timer = 0;
+    }
+    ++g_commonBg.referenceBytes[0];
+}

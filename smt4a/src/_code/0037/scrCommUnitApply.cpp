@@ -7,9 +7,9 @@ extern void *btlGetMainState(void);
 extern Unit3FC *FUN_003f0e20(void *state, s32 id);
 extern u32 gameGetSlotRecord(s32 index);
 extern void FUN_004bcd1c(u32 unit, u32 value);
-extern void FUN_004bd2b4(u32 unit);
+extern void recordRestoreScaledMaximumPair(u32 unit);
 
-/* Script command: for unit `argument 0` (battle roster below 0x6D, else party) runs FUN_004bcd1c with argument 1 and FUN_004bd2b4. */
+/* Script command: for unit `argument 0` (battle roster below 0x6D, else party) runs FUN_004bcd1c with argument 1 and recordRestoreScaledMaximumPair. */
 u32 scrCommUnitApply(void)
 {
     s32 id = scrGetArg(0);
@@ -23,7 +23,7 @@ u32 scrCommUnitApply(void)
         unit = gameGetSlotRecord(id - 0x6D);
     }
     FUN_004bcd1c(unit, value);
-    FUN_004bd2b4(unit);
+    recordRestoreScaledMaximumPair(unit);
     return 1;
 }
 

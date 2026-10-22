@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00162758(int, unsigned int, unsigned int, unsigned int);
+int drawTextAtSnappedRectangle(int, unsigned int, unsigned int, unsigned int);
 int FUN_00180118(unsigned int);
 int FUN_0018349c(...);
 int VectorSignedToFloat(int, int);
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int uRam0057f0b0; /* 0x57f0b0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162758. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0018349c. */
 extern unsigned int FUN_002a4b28(unsigned short);
@@ -66,7 +66,7 @@ void FUN_004a7ba0(int param_1,unsigned short param_2,int param_3,int param_4,int
   temp_v2 = FUN_0018349c(param_1 + 200,temp_v5);
   VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162758(param_1 + 200,temp_v6,temp_v7,temp_v4);
+  drawTextAtSnappedRectangle(param_1 + 200,temp_v6,temp_v7,temp_v4);
   return;
 }
 

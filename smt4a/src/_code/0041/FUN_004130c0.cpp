@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ea12c(void);
-int FUN_00414204(void);
+int uiOpenSelectedValueDialog(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002ea12c. */
-/* Supplied declaration required: FUN_00414204. */
+/* Supplied declaration required: uiOpenSelectedValueDialog. */
 
 
 void FUN_004130c0(int param_1,unsigned int param_2)
@@ -28,7 +28,7 @@ code_r0x004130c0:
   case 0:
     break;
   case 4:
-    FUN_00414204();
+    uiOpenSelectedValueDialog();
     return;
   default:
     return;

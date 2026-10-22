@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a6350(unsigned int, int);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int nw_ut_internal_LinkListImpl_insert(...);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
@@ -24,7 +24,7 @@ extern int constructObj0055bfc4(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001a6350. */
 extern unsigned int FUN_001b1f04(void);
 extern unsigned int *FUN_001b95dc(unsigned int, int);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -86,7 +86,7 @@ unsigned int FUN_0019029c(int param_1,int param_2,unsigned int *param_3,int para
               puVar1[10] = 0xffffffff;
               puVar1[0xb] = 0;
               puVar1 = puVar1 + 0xc;
-              FUN_002f5020(puVar1,&LAB_001b1aa8,8,4);
+              __aeabi_vec_ctor_nocookie_nodtor(puVar1,&LAB_001b1aa8,8,4);
               puVar2 = puVar1 + -0xc;
               puVar1[8] = 0;
               puVar1[9] = 0;

@@ -2,6 +2,7 @@
 #define SHARD_W5_W5MATCH1_RECORDKEYS_H
 
 #include "common.h"
+#include "shard/FloatSortRecord.h"
 
 struct ByteStateWork {
     /* 0x00 */ u8 padding[0x85];
@@ -60,10 +61,6 @@ struct MapEnemyState {
     /* 0x08 */ u32 timer;
 };
 
-struct FloatSortRecord {
-    /* 0x00 */ u8 padding[0x0C];
-    /* 0x0C */ f32 key;
-};
 
 struct Point2 {
     /* 0x00 */ f32 x;

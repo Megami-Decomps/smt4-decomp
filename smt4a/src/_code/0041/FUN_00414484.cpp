@@ -5,7 +5,7 @@
 extern "C" {
 
 void FUN_002e32a4(int kind, ...);
-int onlineStringDestroy(...);
+int _ZN9Obj55aff4D1Ev(...);
 int FUN_002e9590(...);
 int vectorCopyHeader(...);
 int FUN_002ea100(...);
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_00414604; /* 0x414604 */
 
 /* Supplied declaration required: FUN_002e32a4. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9590. */
 /* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea100. */
@@ -67,7 +67,7 @@ void FUN_00414484(int param_1)
           if ((*(int *)(temp_v1 + 0xa4) - *(int *)(temp_v1 + 0xa0)) >> 3 != 0) {
             FUN_002e9590(temp_v3);
           }
-          onlineStringDestroy(temp_v3);
+          _ZN9Obj55aff4D1Ev(temp_v3);
         }
         temp_v1 = temp_v1 + 0xb8;
       } while (*(int *)(param_1 + 0xbc) != temp_v1);

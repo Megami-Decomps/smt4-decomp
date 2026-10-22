@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int FUN_00310ff2(unsigned int, unsigned int *);
 
 extern unsigned char LAB_002e9ff5; /* 0x2e9ff5 */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int *FUN_00304d10(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00310ff2. */
 
@@ -28,7 +28,7 @@ void FUN_0011f3dc(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_10 = param_4;
   puVar1 = (unsigned int *)FUN_00304d10(param_2,0);
   if (puVar1 == (unsigned int *)0x0) {
-    FUN_002f5020(&uStack_18,&LAB_002e9ff5,0xc,1);
+    __aeabi_vec_ctor_nocookie_nodtor(&uStack_18,&LAB_002e9ff5,0xc,1);
     puVar1 = (unsigned int *)&uStack_18;
   }
   FUN_00310ff2(param_1,puVar1);

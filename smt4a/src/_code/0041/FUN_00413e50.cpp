@@ -7,23 +7,23 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00103f54(...);
 int holderSetFlagBits(...);
-int FUN_0011b272(unsigned char [52], unsigned int);
+int _ZN9Obj5596acaSERKS_(unsigned char [52], unsigned int);
 int FUN_0011b648(...);
 int FUN_0012055e(unsigned char [24], unsigned char **);
 int asdOperatorDeleteArray(...);
 int operatorNew(...);
-int onlineStringDestroy(...);
-int onlineStringAssign(unsigned char [8], unsigned int);
+int _ZN9Obj55aff4D1Ev(...);
+int _ZN9Obj55aff4aSERKS_(unsigned char [8], unsigned int);
 int FUN_002ea100(...);
-int FUN_002f4cac(unsigned char [32]);
+int _ZN9Obj55b1045resetEv(unsigned char [32]);
 int FUN_002f4cd6(unsigned char [32], unsigned char [104], int);
-int FUN_00303928(...);
+int _ZN9Obj5596acC1EhRK10WordVector(...);
 int FUN_00387edc(unsigned char [104]);
 int FUN_004311c0(void);
 int FUN_00432dd8(void);
 int _ZN9Obj55ac38D1Ev(...);
 int FUN_00522a48(...);
-int FUN_00522bf4(...);
+int _ZN15Obj55aff4VectoraSERKS_(...);
 int rt_memcpy_w(unsigned char [104], unsigned int, int);
 
 typedef int romwright_code(...);
@@ -71,7 +71,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: holderSetFlagBits. */
-/* Supplied declaration required: FUN_0011b272. */
+/* Supplied declaration required: _ZN9Obj5596acaSERKS_. */
 /* Supplied declaration required: FUN_0011b648. */
 /* Supplied declaration required: FUN_0012055e. */
 extern unsigned int randRange(unsigned int);
@@ -81,22 +81,22 @@ extern unsigned int FUN_002bf520(void);
 extern int rt_malloc(unsigned int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: operatorNew. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int _ZN9Obj55aff4C1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002ea100. */
-/* Supplied declaration required: FUN_002f4cac. */
+/* Supplied declaration required: _ZN9Obj55b1045resetEv. */
 /* Supplied declaration required: FUN_002f4cd6. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
-extern int FUN_003038fc(int, unsigned int);
-/* Supplied declaration required: FUN_00303928. */
-extern int FUN_0030395c(int, unsigned int);
+extern int _ZN9Obj55b104C1Ejj(int, unsigned int);
+/* Supplied declaration required: _ZN9Obj5596acC1EhRK10WordVector. */
+extern int _ZN15Obj55aff4VectorC1Ej(int, unsigned int);
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: FUN_00432dd8. */
 /* Supplied declaration required: _ZN9Obj55ac38D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
-/* Supplied declaration required: FUN_00522bf4. */
+/* Supplied declaration required: _ZN15Obj55aff4VectoraSERKS_. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -158,18 +158,18 @@ void FUN_00413e50(int param_1)
   temp_v8 = &DAT_0055ac40;
   temp_v9 = 0;
   temp_v0 = _ZN9Obj55aff4C1Ev(temp_v11);
-  temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
+  temp_v0 = _ZN9Obj55b104C1Ejj(temp_v0 + 0xc,0);
   temp_v34 = 0;
   temp_v35 = 0;
   temp_v36 = 0;
-  temp_v0 = FUN_00303928(temp_v0 + 0x20,3,&temp_v34);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x20,3,&temp_v34);
   asdOperatorDeleteArray(temp_v34);
   temp_v37 = 0;
   temp_v38 = 0;
   temp_v39 = 0;
-  temp_v0 = FUN_00303928(temp_v0 + 0x14,3,&temp_v37);
+  temp_v0 = _ZN9Obj5596acC1EhRK10WordVector(temp_v0 + 0x14,3,&temp_v37);
   asdOperatorDeleteArray(temp_v37);
-  temp_v0 = FUN_0030395c(temp_v0 + 0x20,0);
+  temp_v0 = _ZN15Obj55aff4VectorC1Ej(temp_v0 + 0x20,0);
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   *(unsigned int *)(temp_v0 + 0x14) = 0;
@@ -181,23 +181,23 @@ void FUN_00413e50(int param_1)
   *(unsigned char **)(temp_v0 + 0x18) = &DAT_0055a9d8;
   *(unsigned short *)(temp_v0 + 0x1e) = 0xffff;
   *(unsigned char *)(temp_v0 + 0x20) = 1;
-  temp_v0 = FUN_0030395c(temp_v0 + 0x24,0);
+  temp_v0 = _ZN15Obj55aff4VectorC1Ej(temp_v0 + 0x24,0);
   *(unsigned char **)(temp_v0 - 0x90) = &DAT_0055a500;
   FUN_00432dd8();
   temp_v10 = 0;
   temp_v1 = FUN_002ea100(temp_v32,&LAB_004141dc);
-  onlineStringAssign(temp_v11,temp_v1);
-  onlineStringDestroy(temp_v32);
+  _ZN9Obj55aff4aSERKS_(temp_v11,temp_v1);
+  _ZN9Obj55aff4D1Ev(temp_v32);
   temp_v12 = 999;
   temp_v29 = 0;
   temp_v30 = 0;
   temp_v31 = 0;
-  temp_v1 = FUN_00303928(temp_v27,0,&temp_v29);
-  FUN_0011b272(temp_v14,temp_v1);
+  temp_v1 = _ZN9Obj5596acC1EhRK10WordVector(temp_v27,0,&temp_v29);
+  _ZN9Obj5596acaSERKS_(temp_v14,temp_v1);
   temp_v27[0] = &DAT_0055a4c0;
   asdOperatorDeleteArray(temp_v28);
   asdOperatorDeleteArray(temp_v29);
-  FUN_002f4cac(temp_v13);
+  _ZN9Obj55b1045resetEv(temp_v13);
   FUN_002f4cd6(temp_v13,temp_v23,100);
   temp_v0 = gameFlagIsSet(0x580);
   if (temp_v0 == 0) {
@@ -228,8 +228,8 @@ void FUN_00413e50(int param_1)
   }
   temp_v1 = FUN_002ea100(temp_v33,&temp_v17);
   FUN_00522a48(&temp_v24,temp_v1);
-  onlineStringDestroy(temp_v33);
-  FUN_00522bf4(temp_v15,&temp_v24);
+  _ZN9Obj55aff4D1Ev(temp_v33);
+  _ZN15Obj55aff4VectoraSERKS_(temp_v15,&temp_v24);
   temp_v0 = operatorNew(0x78);
   if (temp_v0 == 0) {
     temp_v1 = 0;

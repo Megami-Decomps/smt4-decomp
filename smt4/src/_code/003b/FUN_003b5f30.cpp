@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029a17c(int, int, int, int, int);
-int FUN_002b93c8(int);
+int effectRenderTransformedInstance(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
@@ -222,7 +222,7 @@ void FUN_003b5f30(int param_1,int param_2,int param_3)
               (**(romwright_code **)(temp_v2 + 0x12c8))();
               *(unsigned char *)(temp_v2 + 0x12c4) = 0;
             }
-            FUN_002b93c8(param_1 + temp_v8 * 0x8c + 0x1fd8);
+            effectRenderTransformedInstance(param_1 + temp_v8 * 0x8c + 0x1fd8);
             temp_v2 = g_titleScene;
             temp_v9 = packNibblesAndByte(6,7,0);
             piVar12 = (int *)(temp_v2 + 0x12ac);

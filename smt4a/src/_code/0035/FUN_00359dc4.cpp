@@ -14,9 +14,9 @@ int FUN_002e2114(void);
 int FUN_002e2184(unsigned int, unsigned int);
 int overlayGetStatusScene(void);
 int overlayIsNotBusy(void);
-int FUN_0035a0bc(unsigned int, int);
+int controllerApplyPreset(unsigned int, int);
 int screenStartOrClear(unsigned int, int);
-int FUN_003a4980(unsigned int, unsigned int, unsigned int);
+int characterInfoPanelPopulate(unsigned int, unsigned int, unsigned int);
 int FUN_003a7a88(int, int);
 int FUN_003e5810(unsigned int, int);
 int FUN_003e5c68(unsigned int, int);
@@ -34,9 +34,9 @@ extern unsigned int gameGetPlayerData(void);
 extern int FUN_0032cfc8(void);
 extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: overlayIsNotBusy. */
-/* Supplied declaration required: FUN_0035a0bc. */
+/* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
-/* Supplied declaration required: FUN_003a4980. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_003e5810. */
 /* Supplied declaration required: FUN_003e5c68. */
@@ -94,8 +94,8 @@ void FUN_00359dc4(int param_1)
           *(unsigned int *)(temp_v0 + 0x108) = 2;
           *(unsigned char *)(param_1 + 0x10e) = 1;
           linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),1);
-          FUN_0035a0bc(*(unsigned int *)(param_1 + 4),*(unsigned char *)(*(int *)(param_1 + 8) + 0x42));
-          FUN_003a4980(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
+          controllerApplyPreset(*(unsigned int *)(param_1 + 4),*(unsigned char *)(*(int *)(param_1 + 8) + 0x42));
+          characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                        *(unsigned int *)(param_1 + 0x58));
           temp_v0 = FUN_0032cfc8();
           if (temp_v0 == 0) {

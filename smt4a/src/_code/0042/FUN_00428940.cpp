@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_00427ac4(int, int);
 int recordValidatePair(unsigned int, int, unsigned int);
 int FUN_00429210(int *, unsigned int, int, unsigned int, unsigned int);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_00427ac4. */
 extern int FUN_004283cc(unsigned int);
 /* Supplied declaration required: recordValidatePair. */
@@ -40,7 +40,7 @@ void FUN_00428940(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
     param_1[1] = uStack_1c;
     return;
   }
-  resultPairInitialize(param_1,temp_v0);
+  _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
   return;
 }
 

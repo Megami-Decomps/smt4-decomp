@@ -10,7 +10,7 @@ int asdSoundObjectStop(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 extern unsigned char DAT_0063e37c; /* 0x63e37c */
-extern int *DAT_0063e944; /* 0x63e944 */
+extern int *g_soundHandleList; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
@@ -30,7 +30,7 @@ unsigned int FUN_0013ebe8(int param_1,int param_2,unsigned int param_3,unsigned 
   unsigned int in_fpscr;
   
   temp_v1 = 0;
-  piVar4 = DAT_0063e944;
+  piVar4 = g_soundHandleList;
   if (0 < DAT_0063e948) {
     while (piVar4 != (int *)0x0) {
       if (piVar4[6] == param_1) {

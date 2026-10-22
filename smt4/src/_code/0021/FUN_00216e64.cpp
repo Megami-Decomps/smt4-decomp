@@ -24,7 +24,7 @@ int FUN_00297060(...);
 int FUN_0029bd4c(void);
 int FUN_0029bed8(...);
 int FUN_0029c424(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int beginStatusPanelClose(void);
 int FUN_0029d8f4(int, int);
 int scrScriptProcessDestroy(unsigned int);
@@ -76,7 +76,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c424. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029d8f4. */
@@ -273,7 +273,7 @@ LAB_002174ac:
       temp_v8 = *(unsigned int *)(param_1 + 0x3570);
       FUN_00297060(temp_v8,temp_v4);
       *puVar16 = temp_v8;
-      FUN_0029c6b0(temp_v2);
+      unitRecalculateEffectiveStats(temp_v2);
       FUN_002954bc(temp_v2);
     }
     if (*(char *)(temp_v14 + 0x8a) == '\0') {

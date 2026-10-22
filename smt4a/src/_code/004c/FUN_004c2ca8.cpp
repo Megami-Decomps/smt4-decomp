@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(...);
 int FUN_001568f8(...);
-int FUN_0017760c(void);
+int recordGetScaledMaximum(void);
 int FUN_00192550(void);
 int FUN_00192608(void);
 int gameGetSlotRecord(...);
@@ -57,7 +57,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -200,7 +200,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
       if ((temp_v1 & 0xfff) == 4000) {
         if (puVar6 == (unsigned int *)0x0) {
           gameGetSlotRecord(param_6 - 0x6d);
-          temp_v8 = FUN_0017760c();
+          temp_v8 = recordGetScaledMaximum();
 LAB_004c3310:
           temp_v9 = 0;
           goto LAB_004c3314;
@@ -218,7 +218,7 @@ LAB_004c329c:
             goto LAB_004c3238;
           }
           gameGetSlotRecord(param_6 - 0x6d);
-          temp_v2 = FUN_0017760c();
+          temp_v2 = recordGetScaledMaximum();
           temp_v8 = ((int)temp_v2 * (int)(short)(unsigned short)*(unsigned char *)(temp_v6 + 0x4b)) / 100;
           goto LAB_004c3310;
         }
@@ -280,7 +280,7 @@ LAB_004c3334:
       }
       else {
         gameGetSlotRecord(param_6 - 0x6d);
-        temp_v2 = FUN_0017760c();
+        temp_v2 = recordGetScaledMaximum();
         temp_v11 = (float)VectorSignedToFloat((int)temp_v2 *
                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x38),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -314,7 +314,7 @@ LAB_004c3334:
     }
     else {
       gameGetSlotRecord(param_6 - 0x6d);
-      temp_v8 = FUN_0017760c();
+      temp_v8 = recordGetScaledMaximum();
     }
     temp_v9 = 0;
   }

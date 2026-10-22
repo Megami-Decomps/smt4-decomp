@@ -10,7 +10,7 @@ int FUN_003f0e20(int, int);
 extern int btlGetMainState(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_0017760c(void);
+extern int recordGetScaledMaximum(void);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_003f0e20. */
 
@@ -87,7 +87,7 @@ void FUN_004c80f0(int param_1,int param_2,int param_3)
     temp_v2 = gameGetSlotRecord(param_1 - 0x6d);
     if (param_2 == 0) {
       temp_v0 = *(short *)(temp_v2 + 0x2a);
-      temp_v4 = FUN_0017760c();
+      temp_v4 = recordGetScaledMaximum();
       param_3 = temp_v0 + param_3;
       if (param_3 < 0) {
         param_3 = 0;

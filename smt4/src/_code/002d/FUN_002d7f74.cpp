@@ -10,7 +10,7 @@ int FUN_0028186c(void);
 int layoutApplyForState(int);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
-int FUN_002c4f8c(int, unsigned int);
+int effectRestoreSavedRenderPairs(int, unsigned int);
 
 typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
@@ -25,7 +25,7 @@ extern int DAT_0044eaac; /* 0x44eaac */
 /* Supplied declaration required: layoutApplyForState. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c4f8c. */
+/* Supplied declaration required: effectRestoreSavedRenderPairs. */
 extern unsigned int FUN_002c501c(void);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -78,7 +78,7 @@ void FUN_002d7f74(void)
   }
   else {
     temp_v1 = FUN_002c501c();
-    FUN_002c4f8c(g_titleScene,temp_v1);
+    effectRestoreSavedRenderPairs(g_titleScene,temp_v1);
   }
   effMenuCallHandler(1);
   if (DAT_0044eaa0 != 0) {

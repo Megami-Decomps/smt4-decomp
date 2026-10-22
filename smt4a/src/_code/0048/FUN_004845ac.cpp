@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00485108(...);
-int FUN_0048560c(int, int, int, int);
+int textDrawEncodedGlyph(int, int, int, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -34,7 +34,7 @@ extern int FUN_0019dc44(unsigned int, int);
 extern int FUN_002a4878(int);
 extern int uiSearchSecondary(int);
 /* Supplied declaration required: FUN_00485108. */
-/* Supplied declaration required: FUN_0048560c. */
+/* Supplied declaration required: textDrawEncodedGlyph. */
 
 
 void FUN_004845ac(int param_1)
@@ -113,7 +113,7 @@ void FUN_004845ac(int param_1)
     temp_v8 = FUN_001834a4(0x23,0x22);
     temp_v13 = 1;
     (*(unsigned int *)temp_v12) = 0x0;
-    FUN_0048560c(param_1,(int)temp_v9,
+    textDrawEncodedGlyph(param_1,(int)temp_v9,
                  *(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v8 + 8)
                  ,(int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v8 + 10));
     if (*(char *)(param_1 + 1) == '\x02') {

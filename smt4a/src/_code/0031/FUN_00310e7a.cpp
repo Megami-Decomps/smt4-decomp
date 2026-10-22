@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringCopyConstruct(unsigned int, int);
+int _ZN9Obj55aff4C1ERKS_(unsigned int, int);
 int FUN_0030f234(unsigned int, unsigned int, int, unsigned int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 extern int FUN_002eea7c(int);
 /* Supplied declaration required: FUN_0030f234. */
 
@@ -31,7 +31,7 @@ void FUN_00310e7a(unsigned int param_1,int param_2,int param_3)
     FUN_0030f234(param_1,*(unsigned int *)(param_2 + 4),temp_v0,*(unsigned int *)(param_3 + 4),temp_v1);
     return;
   }
-  onlineStringCopyConstruct(param_1,temp_v2);
+  _ZN9Obj55aff4C1ERKS_(param_1,temp_v2);
   return;
 }
 

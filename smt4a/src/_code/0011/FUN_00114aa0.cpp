@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00114a30(int, int);
 int asdOperatorDeleteArray(void);
-int FUN_002e6e34(int *, unsigned char *);
+int _ZN9Obj55b28cC1EPv(int *, unsigned char *);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_003002c8(void);
 
@@ -22,7 +22,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 extern int FUN_00114a08(void);
 /* Supplied declaration required: FUN_00114a30. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *FUN_002ea704(void);
 /* Supplied declaration required: FUN_003002c8. */
@@ -41,7 +41,7 @@ void FUN_00114aa0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  FUN_002e6e34(&uStack_20,&DAT_0062e6a0);
+  _ZN9Obj55b28cC1EPv(&uStack_20,&DAT_0062e6a0);
   DAT_005949d0 = DAT_005949d0 - 1;
   if ((DAT_005949d0 != 0) || (temp_v0 = FUN_00114a08(), temp_v0 == 0)) {
     _ZN9Obj55b28cD1Ev(&uStack_20);

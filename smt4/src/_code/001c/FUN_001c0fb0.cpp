@@ -17,7 +17,7 @@ struct CecViewCamera {
 extern "C" {
 
 extern CecViewCamera *g_campCecView;
-extern void FUN_002cc2bc(u32 handle, u32 target, f32 *scale, s32 flags, s32 value, s32 mode);
+extern void actorDetailsDrawPanel(u32 handle, u32 target, f32 *scale, s32 flags, s32 value, s32 mode);
 
 /* Resets the view scale and updates the active camera target. */
 s32 FUN_001c0fb0(void)
@@ -25,7 +25,7 @@ s32 FUN_001c0fb0(void)
     CecViewCamera *view = g_campCecView;
     view->scale = 1.0f;
     if (view->active != 0) {
-        FUN_002cc2bc(view->handle, view->target, &view->scale, 0, 0, view->mode);
+        actorDetailsDrawPanel(view->handle, view->target, &view->scale, 0, 0, view->mode);
     }
     return 0;
 }

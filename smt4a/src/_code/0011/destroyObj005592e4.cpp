@@ -9,7 +9,7 @@ u8 *FUN_002fb028(u8 *member);
 u8 *FUN_002ea00c(u8 *member);
 u8 *destroyObj0055ae64(u8 *member);
 u8 *ptrHolderDestroy(u8 *member);
-u8 *onlineStringDestroy(u8 *member);
+u8 *_ZN9Obj55aff4D1Ev(u8 *member);
 void FUN_002ecac4(u8 *member);
 
 typedef struct Object5592e4 {
@@ -34,8 +34,8 @@ void destroyObj005592e4(Object5592e4 *self)
     member = ptrHolderDestroy(member - 0x10);
     member = ptrHolderDestroy(member - 8);
     member = ptrHolderDestroy(member - 8);
-    member = onlineStringDestroy(member - 0xC);
-    member = onlineStringDestroy(member - 0x10);
+    member = _ZN9Obj55aff4D1Ev(member - 0xC);
+    member = _ZN9Obj55aff4D1Ev(member - 0x10);
     FUN_002ecac4(member - 0x70);
 }
 

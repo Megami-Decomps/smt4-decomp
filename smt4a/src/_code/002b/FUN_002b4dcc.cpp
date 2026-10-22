@@ -12,7 +12,7 @@ extern unsigned int DAT_0057398c; /* 0x57398c */
 extern unsigned int DAT_005739a0; /* 0x5739a0 */
 extern unsigned int DAT_005739a4; /* 0x5739a4 */
 
-extern unsigned int FUN_0017760c(void);
+extern unsigned int recordGetScaledMaximum(void);
 
 
 unsigned int FUN_002b4dcc(unsigned int param_1)
@@ -26,7 +26,7 @@ unsigned int FUN_002b4dcc(unsigned int param_1)
   unsigned int *puVar6;
   
   temp_v0 = g_btlMain;
-  temp_v1 = FUN_0017760c();
+  temp_v1 = recordGetScaledMaximum();
   temp_v2 = temp_v1;
   if (temp_v0 != 0) {
     temp_v2 = *(unsigned int *)(temp_v0 + 0x88);

@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(unsigned int, double);
 int FUN_00262210(...);
 int FUN_002963ec(...);
-int FUN_002b93c8(...);
+int effectRenderTransformedInstance(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf288(...);
@@ -31,7 +31,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00262210. */
 /* Supplied declaration required: FUN_002963ec. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -77,7 +77,7 @@ void FUN_0032fe34(int param_1)
       break;
     }
     param_1 = param_1 + 0x20;
-    FUN_002b93c8(param_1);
+    effectRenderTransformedInstance(param_1);
     break;
   case 2:
   case 0x11:
@@ -90,7 +90,7 @@ void FUN_0032fe34(int param_1)
         (**(romwright_code **)(temp_v8 + 0x12c8))();
         *(unsigned char *)(temp_v8 + 0x12c4) = 0;
       }
-      FUN_002b93c8(param_1 + 0xac);
+      effectRenderTransformedInstance(param_1 + 0xac);
       temp_v8 = g_titleScene;
       temp_v6 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12ac);
@@ -101,7 +101,7 @@ void FUN_0032fe34(int param_1)
         *(unsigned char *)(temp_v8 + 0x12c4) = 0;
       }
     }
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     break;
   case 3:
     temp_v6 = packNibblesAndByte(6,7,0);
@@ -112,7 +112,7 @@ void FUN_0032fe34(int param_1)
       (**(romwright_code **)(temp_v8 + 0x12c8))();
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     temp_v8 = g_titleScene;
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v6 = packNibblesAndByte(6,1,0);
@@ -124,10 +124,10 @@ void FUN_0032fe34(int param_1)
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
     param_1 = param_1 + 0xac;
-    FUN_002b93c8(param_1);
+    effectRenderTransformedInstance(param_1);
     break;
   case 4:
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) != '\0') {
       temp_v5 = vec2GetXInt(param_1 + 0x20);
       temp_v14 = CONCAT44(temp_v5,in_s0);
@@ -184,7 +184,7 @@ void FUN_0032fe34(int param_1)
         (**(romwright_code **)(temp_v8 + 0x12c8))();
         *(unsigned char *)(temp_v8 + 0x12c4) = 0;
       }
-      FUN_002b93c8(param_1 + 0xac);
+      effectRenderTransformedInstance(param_1 + 0xac);
     }
     temp_v8 = g_titleScene;
     temp_v6 = packNibblesAndByte(6,7,0);
@@ -195,7 +195,7 @@ void FUN_0032fe34(int param_1)
       (**(romwright_code **)(temp_v8 + 0x12c8))();
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     temp_v8 = g_titleScene;
     if (*(char *)(param_1 + 0x2f5) != '\0') {
       temp_v6 = packNibblesAndByte(6,1,0);
@@ -206,7 +206,7 @@ void FUN_0032fe34(int param_1)
         (**(romwright_code **)(temp_v8 + 0x12c8))();
         *(unsigned char *)(temp_v8 + 0x12c4) = 0;
       }
-      FUN_002b93c8(param_1 + 0x138);
+      effectRenderTransformedInstance(param_1 + 0x138);
     }
     temp_v8 = g_titleScene;
     temp_v6 = packNibblesAndByte(6,7,0);
@@ -220,7 +220,7 @@ void FUN_0032fe34(int param_1)
     break;
   case 6:
   case 0xf:
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v11 = *(unsigned int *)(param_1 + 0xb0);
     temp_v5 = vec2GetXInt(param_1 + 0x20);
@@ -252,7 +252,7 @@ void FUN_0032fe34(int param_1)
     break;
   case 7:
   case 0x12:
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v1 = vec2GetXInt(param_1 + 0x20);
     temp_v2 = vec2GetYInt(param_1 + 0x20);
@@ -270,7 +270,7 @@ void FUN_0032fe34(int param_1)
       }
     }
     param_1 = param_1 + 0xac;
-    FUN_002b93c8(param_1);
+    effectRenderTransformedInstance(param_1);
     break;
   case 9:
   case 0xb:
@@ -284,7 +284,7 @@ void FUN_0032fe34(int param_1)
         (**(romwright_code **)(temp_v8 + 0x12c8))();
         *(unsigned char *)(temp_v8 + 0x12c4) = 0;
       }
-      FUN_002b93c8(param_1 + 0x20);
+      effectRenderTransformedInstance(param_1 + 0x20);
       temp_v8 = g_titleScene;
       temp_v6 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12ac);
@@ -297,10 +297,10 @@ void FUN_0032fe34(int param_1)
       goto LAB_00330840;
     }
     param_1 = param_1 + 0x20;
-    FUN_002b93c8(param_1);
+    effectRenderTransformedInstance(param_1);
     break;
   case 10:
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     if ((*(char *)(param_1 + 0x2f5) == '\0') ||
        (temp_v4 = *(unsigned int *)(param_1 + 0x2ec),
        temp_v8 = (int)(((long long)(int)temp_v4 * -0x53896e7b + ((unsigned long long)temp_v4 << 0x20)) >> 0x20),
@@ -316,7 +316,7 @@ void FUN_0032fe34(int param_1)
       (**(romwright_code **)(temp_v8 + 0x12c8))(temp_v6);
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
-    FUN_002b93c8(param_1 + 0xac);
+    effectRenderTransformedInstance(param_1 + 0xac);
     temp_v8 = g_titleScene;
     temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12ac);
@@ -338,7 +338,7 @@ void FUN_0032fe34(int param_1)
       (**(romwright_code **)(temp_v8 + 0x12c8))();
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     temp_v8 = g_titleScene;
     temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12ac);
@@ -349,7 +349,7 @@ void FUN_0032fe34(int param_1)
       *(unsigned char *)(temp_v8 + 0x12c4) = 0;
     }
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
-    FUN_002b93c8(param_1 + 0xac);
+    effectRenderTransformedInstance(param_1 + 0xac);
     temp_v11 = *(unsigned int *)(param_1 + 0x13c);
     temp_v5 = vec2GetXInt(param_1 + 0x20);
     temp_v14 = CONCAT44(temp_v5,in_s0);
@@ -379,7 +379,7 @@ void FUN_0032fe34(int param_1)
     efctSetSpeed();
     break;
   case 0xd:
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
 LAB_00330840:
     temp_v10 = *(unsigned int *)(param_1 + 0xb0);
@@ -418,7 +418,7 @@ LAB_00330840:
         *(unsigned char *)(temp_v8 + 0x12c4) = 0;
       }
     }
-    FUN_002b93c8(param_1 + 0x20);
+    effectRenderTransformedInstance(param_1 + 0x20);
   }
   temp_v8 = g_titleScene;
   temp_v6 = packNibblesAndByte(6,7,0);

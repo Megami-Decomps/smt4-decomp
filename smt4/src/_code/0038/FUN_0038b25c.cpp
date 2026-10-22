@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00123934(void);
 int FUN_002baa04(int *, int, unsigned int);
-int FUN_002bad5c(int *);
+int _ZN18WindowStatusResultC1Ev(int *);
 int jyoucyuGetTableEntry(int);
 int FUN_00353b00(int *, int, int, int);
 
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00123934. */
 extern int legacyResourceIdRemap(int *);
 /* Supplied declaration required: FUN_002baa04. */
-/* Supplied declaration required: FUN_002bad5c. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ev. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00353b00. */
 
@@ -39,7 +39,7 @@ void FUN_0038b25c(int *param_1,int param_2)
   int iStack_14;
   
   FUN_00123934();
-  FUN_002bad5c(&temp_v2);
+  _ZN18WindowStatusResultC1Ev(&temp_v2);
   iStack_2c = param_2 + 0x18;
   temp_v1 = param_2 + 4;
   uStack_28 = 1;

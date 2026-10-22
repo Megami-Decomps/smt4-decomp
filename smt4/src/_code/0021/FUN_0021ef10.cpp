@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable2eSub2GetCount(...);
 int FUN_0025090c(int, int, int, unsigned char [144]);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int FUN_002be5a4(int, unsigned int, unsigned char [144]);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002c0944(unsigned int);
@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: FUN_0025090c. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
 extern unsigned long long FUN_002bf4f8(unsigned int, unsigned int);
@@ -75,7 +75,7 @@ unsigned int FUN_0021ef10(void)
     FUN_002c39a4(g_titleScene);
     FUN_002c1b64(g_titleScene,0);
     FUN_002c0944(temp_v6);
-    FUN_0025b750();
+    forwardRecoveredCallback();
     temp_v4 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar7;

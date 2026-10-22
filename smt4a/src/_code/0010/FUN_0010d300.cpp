@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010d3a4(void);
-int FUN_002e6e34(int *, unsigned char *);
+int _ZN9Obj55b28cC1EPv(int *, unsigned char *);
 int _ZN9Obj55b28cD1Ev(int *);
 int sharedRefAddRef(void);
 int emptyStub_002f74e8(int, int);
@@ -16,7 +16,7 @@ extern unsigned char DAT_00630344; /* 0x630344 */
 
 /* Supplied declaration required: FUN_0010d3a4. */
 extern unsigned int FUN_00113e60(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
@@ -36,7 +36,7 @@ void FUN_0010d300(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002e6e34(&uStack_18,&DAT_00630344);
+  _ZN9Obj55b28cC1EPv(&uStack_18,&DAT_00630344);
   emptyStub_002f74e8(0,0x400012b);
   if (DAT_005949dc != 0) {
     sharedRefAddRef();

@@ -6,7 +6,7 @@ extern "C" {
 
 int uiAnimateStaggeredSlidesAndFades(...);
 int FUN_0026f188(...);
-int FUN_0026f204(...);
+int characterInfoPanelPopulate(...);
 int FUN_0026f784(...);
 int linkHolderApplyFlag(...);
 int FUN_00297060(...);
@@ -37,7 +37,7 @@ struct fn_002e1744_arg0 {
 /* Supplied declaration required: uiAnimateStaggeredSlidesAndFades. */
 /* Supplied declaration required: FUN_0026f188. */
 extern unsigned int FUN_0026f1f0(void);
-/* Supplied declaration required: FUN_0026f204. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_0026f784. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_0028d594(void);
@@ -76,7 +76,7 @@ unsigned int FUN_002e1744(fn_002e1744_arg0 *param_1,unsigned int param_2,int par
           *(unsigned int *)((int)pvVar2 + 0x108) = 2;
           param_1->field_0x124 = 1;
           linkHolderApplyFlag(param_1->field_0x4,1);
-          FUN_0026f204(param_1->field_0x10,*(unsigned int *)&param_1->field_0x8,param_1->field_0xac);
+          characterInfoPanelPopulate(param_1->field_0x10,*(unsigned int *)&param_1->field_0x8,param_1->field_0xac);
           temp_v0 = FUN_0028d594();
           if (temp_v0 == 0) {
             temp_v2 = FUN_0026f1f0();

@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail bic r1, r2, #255; compiler bic r2, r2, #255. */
 #include "common.h"
 
 struct TextFlagDefaults {

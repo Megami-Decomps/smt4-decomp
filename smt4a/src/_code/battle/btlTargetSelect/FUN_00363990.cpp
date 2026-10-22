@@ -9,7 +9,7 @@ int paramsInit(...);
 int taskCreateDraw(...);
 int asdOperatorNew(int, unsigned int *);
 int asdMemoryAlloc(int, int, int, int, int);
-int FUN_002f5020(unsigned int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_0036b644(...);
 int paramsClearPacket(...);
 
@@ -40,7 +40,7 @@ extern unsigned int *g_btlTargetSelect; /* 0x57a9a8 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_0036b644. */
 extern unsigned int FUN_004093f4(void);
 /* Supplied declaration required: paramsClearPacket. */
@@ -74,7 +74,7 @@ void FUN_00363990(unsigned int *param_1)
   if (puVar4 != (unsigned int *)0x0) {
     puVar5 = puVar4 + 1;
     *puVar4 = (unsigned int)&DAT_00557d50;
-    FUN_002f5020(puVar5,&LAB_0041895c,0x10,5);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar5,&LAB_0041895c,0x10,5);
     puVar6 = puVar5 + -1;
     *(unsigned char *)((int)puVar5 + 0xf) = 0;
     *(unsigned char *)((int)puVar5 + 0x1f) = 0;

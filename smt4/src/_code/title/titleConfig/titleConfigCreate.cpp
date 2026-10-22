@@ -1,103 +1,90 @@
-/* NON_MATCHING: process callback 0x1eaa18 has no symbol or extracted unit; its boundary must be recovered before a real callback declaration can replace the draft. */
-/* NON_MATCHING: romwright 0.5.0 decompilation of `titleConfigCreate` (_code @ 0x2f4ce8, 0x1a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: process-callback literal/store scheduling and final saved-options tail-call address formation differ from retail. */
+#include "AsdSDK/AsdDebug.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+
+struct TitleConfigWordPair { u32 first, second; };
+union TitleConfigAudioSettings {
+    TitleConfigWordPair words;
+    struct { u8 music, effects, voice; u8 unk03[5]; } values;
+};
+struct TitleConfigCreateWork {
+    /* 0x000 */ u32 process;
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ u32 state;
+    /* 0x00C */ u8 unk00c[0xe];
+    /* 0x01A */ s16 countA;
+    /* 0x01C */ TitleConfigWordPair handles;
+    /* 0x024 */ s16 countB;
+    /* 0x026 */ u8 unk026[2];
+    /* 0x028 */ u32 musicStep;
+    /* 0x02C */ u32 effectsStep;
+    /* 0x030 */ u32 voiceStep;
+    /* 0x034 */ TitleConfigWordPair savedOptions;
+    /* 0x03C */ UiResourceParameters resources;
+    /* 0x05C */ SpritePlaybackView sprite;
+    /* 0x0E8 */ u8 selector[0x64];
+    /* 0x14C */ void *scriptData;
+    /* 0x150 */ void *modelData;
+    /* 0x154 */ void *script;
+};
+
+typedef char TitleConfigCreateWorkSize[sizeof(TitleConfigCreateWork) == 0x158 ? 1 : -1];
 
 extern "C" {
-
-int memFill8(...);
-int asdLoadFileAsyncSimple(...);
-int FUN_0029ee6c(...);
-int FUN_0029f848(...);
-int FUN_002ad8b4(...);
-int buttonHelpSetPreset(...);
-int timerStart(...);
-int FUN_002bd954(...);
-int paramsInit(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int drawParameterBlockClear(...);
-
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned char LAB_001eaa18; /* 0x1eaa18 */
-extern int titleConfigDestroy(...); /* 0x2caf74 */
-extern int FUN_002cb054(...); /* 0x2cb054 */
-extern unsigned char LAB_002f4ecc; /* 0x2f4ecc */
-extern unsigned char LAB_002f4ee4; /* 0x2f4ee4 */
-extern unsigned char LAB_002f4efc; /* 0x2f4efc */
-extern unsigned char LAB_002f4f0c; /* 0x2f4f0c */
-extern unsigned char DAT_00407dd6; /* 0x407dd6 */
-extern unsigned char DAT_0044e0f8; /* 0x44e0f8 */
-extern unsigned char DAT_0044e0f9; /* 0x44e0f9 */
-extern unsigned char DAT_0044e0fa; /* 0x44e0fa */
-extern unsigned int *g_titleConfig; /* 0x44e2d0 */
-
-extern unsigned int classifyValueByThreshold(unsigned char);
-/* Supplied declaration required: memFill8. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: FUN_002ad8b4. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-extern unsigned int bgmVolumeToStep(unsigned char);
-extern unsigned int calcByteThresholdRank(unsigned char);
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void titleConfigCreate(void)
-
-{
-/* irregular: 15 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x158,1);
-  puVar2 = &LAB_002f4ecc;
-  g_titleConfig = puVar1;
-  asdProcessCreateSimple(&LAB_002f4ecc,2,0,0,&LAB_001eaa18,titleConfigDestroy,puVar1);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002f4ee4,0xe6,0,0,FUN_002cb054,0,0,puVar2);
-  drawParameterBlockClear(puVar1 + 0xf);
-  paramsInit(puVar1 + 0xf,&DAT_00407dd6,0x18,0,0,0,0,0,0,0,0);
-  FUN_002bd954(puVar1 + 0x17,0x2f,0,puVar1 + 0xf,0xc9);
-  timerStart(puVar1 + 0x17,0);
-  FUN_0029f848(puVar1 + 0x3a,3,3,1,0,1);
-  puVar1[2] = 0;
-  *(unsigned short *)((int)puVar1 + 0x1a) = 0;
-  memFill8(puVar1 + 7,0xffffffff);
-  *(unsigned short *)(puVar1 + 9) = 0;
-  asdLoadFileAsyncSimple(&LAB_002f4efc,puVar1 + 0x53,0);
-  asdLoadFileAsyncSimple(&LAB_002f4f0c,puVar1 + 0x54,0);
-  buttonHelpSetPreset(0x99);
-  FUN_0029ee6c(0,0x323232ff);
-  temp_v0 = bgmVolumeToStep(DAT_0044e0f8);
-  puVar1[10] = temp_v0;
-  temp_v0 = classifyValueByThreshold(DAT_0044e0f9);
-  puVar1[0xb] = temp_v0;
-  temp_v0 = calcByteThresholdRank(DAT_0044e0fa);
-  puVar1[0xc] = temp_v0;
-  FUN_002ad8b4(puVar1 + 0xd,&DAT_0044e0f8);
-  return;
+extern TitleConfigCreateWork *g_titleConfig;
+extern const u8 DAT_00407dd6[];
+extern TitleConfigAudioSettings g_titleConfigValues;
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+u32 asdProcessCreateSimple(const char *name, s32 group, s32 first, s32 second,
+                           s32 (*update)(void), void (*end)(void), void *work);
+u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
+                    s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
+s32 titleConfigUpdate(void);
+void titleConfigDestroy(void);
+s32 FUN_002cb054(void);
+void drawParameterBlockClear(UiResourceParameters *resources);
+void paramsInit(UiResourceParameters *resources, const void *first, u16 firstCount,
+                 const void *second, u16 secondCount, const void *third, u16 thirdCount,
+                 const void *fourth, u16 fourthCount, const void *fifth, u16 fifthCount);
+void FUN_002bd954(SpritePlaybackView *sprite, s32 kind, s32 count,
+                   UiResourceParameters *resources, u16 flags, f32 speed);
+void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
+void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
+void memFill8(void *destination, u32 value);
+void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
+void buttonHelpSetPreset(s32 preset);
+void FUN_0029ee6c(s32 first, u32 color);
+u32 bgmVolumeToStep(u8 volume);
+u32 classifyValueByThreshold(u8 volume);
+u32 calcByteThresholdRank(u8 volume);
+void FUN_002ad8b4(TitleConfigWordPair *destination, const TitleConfigWordPair *source);
 }
 
-} /* extern "C" */
+/* Allocate the title configuration menu, its rendering task and its resource requests. */
+extern "C" void titleConfigCreate(void)
+{
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\title\\titleConfig.cpp", 829);
+    TitleConfigCreateWork *work = (TitleConfigCreateWork *)asdMemAlloc(0x100, 0x100, 0, 0x158, 1);
+    g_titleConfig = work;
+    work->process = asdProcessCreateSimple("TITLE_CONFIG_MAIN", 2, 0, 0, titleConfigUpdate,
+                                           titleConfigDestroy, work);
+    taskCreateDraw("TITLE_CONFIG D", 0xe6, 0, 0, FUN_002cb054, NULL, NULL, work->process);
+    drawParameterBlockClear(&work->resources);
+    paramsInit(&work->resources, DAT_00407dd6, 0x18, NULL, 0, NULL, 0, NULL, 0, NULL, 0);
+    FUN_002bd954(&work->sprite, 0x2f, 0, &work->resources, 0xc9, 1.0f);
+    timerStart(&work->sprite, 0, 0);
+    FUN_0029f848(work->selector, 3, 3, 1, 0, 1);
+    work->state = 0;
+    work->countA = 0;
+    memFill8(&work->handles, -1u);
+    work->countB = 0;
+    asdLoadFileAsyncSimple("camp/config.bf", &work->scriptData, 0);
+    asdLoadFileAsyncSimple("camp/config.mbm", &work->modelData, 0);
+    buttonHelpSetPreset(0x99);
+    FUN_0029ee6c(0, 0x323232ff);
+    work->musicStep = bgmVolumeToStep(g_titleConfigValues.values.music);
+    work->effectsStep = classifyValueByThreshold(g_titleConfigValues.values.effects);
+    work->voiceStep = calcByteThresholdRank(g_titleConfigValues.values.voice);
+    FUN_002ad8b4(&work->savedOptions, &g_titleConfigValues.words);
+}

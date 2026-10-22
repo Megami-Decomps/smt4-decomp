@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(...);
+int _ZN9Obj55aff4D1Ev(...);
 int FUN_002e9590(...);
 int vectorCopyHeader(...);
 int FUN_002ea100(...);
@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9590. */
 /* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002ea100. */
@@ -53,7 +53,7 @@ void FUN_004148fc(int param_1,int param_2)
           if ((*(int *)(temp_v0 + 0xa4) - *(int *)(temp_v0 + 0xa0)) >> 3 != 0) {
             FUN_002e9590(temp_v4);
           }
-          onlineStringDestroy(temp_v4);
+          _ZN9Obj55aff4D1Ev(temp_v4);
         }
         temp_v0 = temp_v0 + 0xb8;
       } while (*(int *)(param_1 + 0xec) != temp_v0);

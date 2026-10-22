@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001340c6(int *, int, int, unsigned int);
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int onlineStringSetFromRaw(...);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
@@ -26,8 +26,8 @@ extern unsigned char LAB_00307540; /* 0x307540 */
 extern unsigned char LAB_00307544; /* 0x307544 */
 
 /* Supplied declaration required: FUN_001340c6. */
-extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
-/* Supplied declaration required: onlineStringDestroy. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
@@ -58,7 +58,7 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
   unsigned int temp_v8;
   unsigned char temp_v9 [8];
   
-  temp_v6 = onlineStringConstruct(temp_v9,&LAB_00307540);
+  temp_v6 = _ZN9Obj55aff4C1EPKc(temp_v9,&LAB_00307540);
   temp_v0 = vectorCount8_0030fcf6(param_2);
   if (temp_v0 < 6) {
     temp_v3 = param_2[1];
@@ -71,7 +71,7 @@ void FUN_0030745c(unsigned int param_1,int *param_2)
       FUN_0030edec(param_2,*param_2 + 0x30,param_2[1]);
     }
   }
-  onlineStringDestroy(temp_v9);
+  _ZN9Obj55aff4D1Ev(temp_v9);
   FUN_002f76ca(*param_2,&LAB_00307544);
   FUN_002ea2e8(temp_v7);
   temp_v2 = FUN_0043126c();

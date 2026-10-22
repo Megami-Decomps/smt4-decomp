@@ -24,7 +24,7 @@ extern int *FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002eb7e0. */
 extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002ef34c. */
-extern int FUN_002ef9e0(unsigned char *, unsigned int);
+extern int _ZN9Obj55933cC1Et(unsigned char *, unsigned int);
 
 
 void FUN_002f012e(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -69,7 +69,7 @@ void FUN_002f012e(int param_1,int param_2,unsigned int param_3,unsigned int para
     }
   }
   *(unsigned char *)(piVar1 + 9) = *(unsigned char *)(param_1 + 0x14c);
-  temp_v0 = FUN_002ef9e0(temp_v2,temp_v3);
+  temp_v0 = _ZN9Obj55933cC1Et(temp_v2,temp_v3);
   *(unsigned short *)(piVar1 + 0x11) = *(unsigned short *)(temp_v0 + 4);
   *(char *)(piVar1 + 0x21) = (char)param_4;
   FUN_002ef34c(temp_v1,param_1,piVar1);

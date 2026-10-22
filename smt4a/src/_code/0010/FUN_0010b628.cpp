@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010b5bc(unsigned int, int *);
-int onlineStringDestroy(int *);
+int _ZN9Obj55aff4D1Ev(int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned char g_systemTable; /* 0x59935c */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_0010b5bc. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int wordRefsDiffer_002f4d8c(unsigned int *, unsigned int **);
 
 
@@ -44,7 +44,7 @@ unsigned long long FUN_0010b628(unsigned int param_1,unsigned int param_2,unsign
     if (temp_v0 == 0) break;
     (**(romwright_code **)(**(int **)(**(int **)((*(int *)((unsigned char *)&g_systemTable + 0x1c)) + 0x10) + 8) + 0xc))(&uStack_1c);
     FUN_0010b5bc(param_1,&uStack_1c);
-    onlineStringDestroy(&uStack_1c);
+    _ZN9Obj55aff4D1Ev(&uStack_1c);
   }
   return romwright_piece_4_4(uStack_1c,temp_v1);
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00108548(int *);
 int FUN_00134f44(int, int, int **);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002eaba4(int, int *);
 int pairCopyIfNotNull(int, int);
@@ -24,7 +24,7 @@ extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 /* Supplied declaration required: FUN_00108548. */
 /* Supplied declaration required: FUN_00134f44. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002eaba4. */
 extern int FUN_002eb5f4(void);
@@ -48,7 +48,7 @@ void FUN_002ef268(int *param_1,int param_2)
   
   param_1[0x30] = param_2;
   temp_v0 = FUN_002eb5f4();
-  FUN_002e6e34(temp_v4,temp_v0 + 0x394);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x394);
   temp_v0 = FUN_002eb5f4();
   temp_v6 = param_1[0x1e];
   temp_v1 = *(int *)(temp_v0 + 0x38c);

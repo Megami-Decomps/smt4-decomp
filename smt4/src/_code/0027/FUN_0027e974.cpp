@@ -3,7 +3,7 @@
 extern "C" {
 
 extern int _ZN9Obj422594D1Ev(void *block);
-extern int FUN_00263c34(int value);
+extern int _ZN9Obj55ca08D1Ev(int value);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x2E8];
@@ -14,7 +14,7 @@ int FUN_0027e974(Obj *obj)
 {
     int value = _ZN9Obj422594D1Ev(obj->block);
 
-    value = FUN_00263c34(value - 0x34);
+    value = _ZN9Obj55ca08D1Ev(value - 0x34);
     return value - 0x2b4;
 }
 

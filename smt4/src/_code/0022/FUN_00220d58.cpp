@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002975ac(unsigned int);
+int statusCameraHandleControls(unsigned int);
 int buttonHelpSetPreset(int);
 int FUN_002bf810(int);
 int FUN_002bff6c(int, int, int, int, int);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern int FUN_0026ee68(unsigned int);
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002975ac. */
+/* Supplied declaration required: statusCameraHandleControls. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -95,7 +95,7 @@ unsigned int FUN_00220d58(int param_1)
     }
     *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
   }
-  FUN_002975ac(*(unsigned int *)(param_1 + 4));
+  statusCameraHandleControls(*(unsigned int *)(param_1 + 4));
   FUN_002ebfbc(param_1 + 0x78);
   return temp_v3;
 }

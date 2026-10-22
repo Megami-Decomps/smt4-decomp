@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorDeleteArray(void);
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 int FUN_002e9f00(unsigned int *, int);
 int FUN_002ea00c(unsigned int *);
@@ -15,7 +15,7 @@ extern unsigned char DAT_0055970c; /* 0x55970c */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e9f00. */
 /* Supplied declaration required: FUN_002ea00c. */
@@ -37,7 +37,7 @@ void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_
   uStack_10 = param_4;
   if (*(char *)(param_1 + 4) == '\x01') {
     temp_v0 = onlineContextGetInstance();
-    FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
+    _ZN9Obj55b28cC1EPv(&uStack_18,temp_v0 + 0x58);
     if (*(char *)(param_1 + 4) == '\x01') {
       FUN_002e9f00(param_1,4);
     }

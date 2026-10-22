@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162758(...);
+int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int FUN_0018349c(...);
 int FUN_00493408(...);
@@ -38,7 +38,7 @@ extern unsigned char LAB_004983a0; /* 0x4983a0 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162758. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: FUN_00493408. */
@@ -151,7 +151,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v10);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162758(param_1 + 0x3a4,temp_v11,temp_v9,temp_v6);
+    drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v11,temp_v9,temp_v6);
     temp_v4 = FUN_0049cab8(temp_v1);
     if (temp_v4 != 0) {
       temp_v11 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v11 + 2)),temp_v1) & 0xfc00ffff;
@@ -201,7 +201,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v10);
       VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00162758(param_1 + 0x3a4,temp_v11,temp_v9,temp_v6);
+      drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v11,temp_v9,temp_v6);
     }
     if (param_3 != 0) {
       temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xf4);

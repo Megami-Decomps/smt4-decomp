@@ -38,7 +38,7 @@ struct PrimitiveSource {
 };
 
 extern "C" {
-void *FUN_002f5020(void *array, void (*construct)(void *), u32 size, u32 count);
+void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void (*construct)(void *), u32 size, u32 count);
 void FUN_0042cbb0(void *);
 void FUN_0042cb68(void *);
 void FUN_0042cb74(PrimitiveBatch *);
@@ -55,8 +55,8 @@ void primitiveSourceBuildBatch(PrimitiveSource *source)
 {
     if (source->indexCount != 0) {
         PrimitiveBatchWork work;
-        FUN_002f5020(work.batches, FUN_0042cbb0, sizeof(PrimitiveBatch), 12);
-        FUN_002f5020(work.vectors, FUN_0042cb68, sizeof(PrimitiveVector), 12);
+        __aeabi_vec_ctor_nocookie_nodtor(work.batches, FUN_0042cbb0, sizeof(PrimitiveBatch), 12);
+        __aeabi_vec_ctor_nocookie_nodtor(work.vectors, FUN_0042cb68, sizeof(PrimitiveVector), 12);
         work.count = 0;
         sysMemClear(work.state, sizeof(work.state));
         for (u32 i = 0; i < 12; ++i) {

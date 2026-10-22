@@ -2,7 +2,7 @@
 #define SHARD_W6_W6MATCH7_OBJ55AC68_H
 
 #include "common.h"
-#include "shard/W6_W6Match2_OnlineString.h"
+#include "shard/W4_Match4_Obj559ecc.h"
 
 struct OnlineWordVectorStorage {
     u32* begin;
@@ -19,9 +19,9 @@ struct OnlineWordValueStorage {
 };
 
 struct OnlineStringVectorStorage {
-    OnlineStringValue* begin;
-    OnlineStringValue* end;
-    OnlineStringValue* capacityEnd;
+    Obj55aff4* begin;
+    Obj55aff4* end;
+    Obj55aff4* capacityEnd;
 };
 
 // Storage for the existing Obj55ac68 constructor/destructor entry points.
@@ -44,6 +44,6 @@ struct Obj55ac68Storage {
     /* 0x73 */ u8 unk73;
 };
 
-extern "C" Obj55ac68Storage* FUN_0043387c(Obj55ac68Storage* object);
+extern "C" Obj55ac68Storage* _ZN9Obj55ac68C1Ev(Obj55ac68Storage* object);
 
 #endif

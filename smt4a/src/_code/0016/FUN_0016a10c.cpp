@@ -1,4 +1,3 @@
-/* NON_MATCHING: the mode word is built through an extra register copy (mov r3, #1; mov r2, r3) and a branch where retail predicates the store (movne r2, #1; strne r2, [r0, #36]). */
 #include "common.h"
 
 extern "C" {

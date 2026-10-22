@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int FUN_002ee938(...);
 int FUN_002ee978(...);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002ee938. */
 extern int FUN_002ee96a(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ee978. */
@@ -57,8 +57,8 @@ unsigned int * FUN_002fe1b8(int param_1,unsigned int param_2)
     else {
       temp_v0 = 0;
     }
-    onlineStringDestroy(temp_v4);
-    onlineStringDestroy(temp_v5);
+    _ZN9Obj55aff4D1Ev(temp_v4);
+    _ZN9Obj55aff4D1Ev(temp_v5);
     if (temp_v0) {
       return temp_v3 + 2;
     }

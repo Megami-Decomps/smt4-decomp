@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], unsigned char *);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned char *);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002fa124(unsigned char [8], unsigned char *, unsigned int **);
 
@@ -15,13 +15,13 @@ typedef struct {
 
 extern unsigned char DAT_005592b4; /* 0x5592b4 */
 extern unsigned char DAT_0062e588; /* 0x62e588 */
-extern unsigned int *DAT_0062e58c; /* 0x62e58c */
+extern unsigned int *g_onlineTrackedStrings; /* 0x62e58c */
 extern unsigned int *DAT_0062e594; /* 0x62e594 */
 extern unsigned char DAT_0062e59c; /* 0x62e59c */
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int onlineStringDestroy(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 extern int wordRefsDiffer_002fa114(unsigned int **);
 /* Supplied declaration required: FUN_002fa124. */
 
@@ -37,8 +37,8 @@ int _ZN9Obj5592acD1Ev(unsigned int *param_1)
   unsigned int *temp_v4 [3];
   
   *param_1 = (unsigned int)&DAT_005592b4;
-  FUN_002e6e34(temp_v3,&DAT_0062e59c);
-  for (temp_v4[0] = DAT_0062e58c; (temp_v4[0] != DAT_0062e594 && (temp_v4[0] != param_1));
+  _ZN9Obj55b28cC1EPv(temp_v3,&DAT_0062e59c);
+  for (temp_v4[0] = g_onlineTrackedStrings; (temp_v4[0] != DAT_0062e594 && (temp_v4[0] != param_1));
       temp_v4[0] = (unsigned int *)temp_v4[0][1]) {
   }
   temp_v0 = wordRefsDiffer_002fa114(temp_v4);
@@ -47,7 +47,7 @@ int _ZN9Obj5592acD1Ev(unsigned int *param_1)
     FUN_002fa124(temp_v2,&DAT_0062e588,&temp_v1);
   }
   _ZN9Obj55b28cD1Ev(temp_v3);
-  temp_v0 = onlineStringDestroy(param_1 + 3);
+  temp_v0 = _ZN9Obj55aff4D1Ev(param_1 + 3);
   return temp_v0 - 0xc;
 }
 

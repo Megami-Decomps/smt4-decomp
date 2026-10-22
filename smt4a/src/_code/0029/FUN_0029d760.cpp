@@ -8,7 +8,7 @@ int FUN_002342d0(int, int);
 int FUN_002b6cb0(void);
 int FUN_002b968c(int *);
 int FUN_002cf8e4(void);
-int FUN_00385264(int);
+int transitionDrawExpandingImages(int);
 
 extern int g_mapIf; /* 0x58103c */
 extern int g_gameState; /* 0x5f15fc */
@@ -18,7 +18,7 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: FUN_002b6cb0. */
 /* Supplied declaration required: FUN_002b968c. */
 /* Supplied declaration required: FUN_002cf8e4. */
-/* Supplied declaration required: FUN_00385264. */
+/* Supplied declaration required: transitionDrawExpandingImages. */
 
 
 unsigned int FUN_0029d760(void)
@@ -37,7 +37,7 @@ unsigned int FUN_0029d760(void)
     }
     if (*(char *)(temp_v0 + 0xcd08) != '\0') {
       piVar2 = (int *)(temp_v0 + 0xcd0c);
-      FUN_00385264(*piVar2);
+      transitionDrawExpandingImages(*piVar2);
       *piVar2 = *piVar2 + 1;
     }
     FUN_002342d0((int)*(float *)(temp_v0 + 0xcd20),(int)*(float *)(temp_v0 + 0xcd24));

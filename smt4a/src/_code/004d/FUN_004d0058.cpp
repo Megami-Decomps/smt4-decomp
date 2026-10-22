@@ -1,4 +1,3 @@
-/* NON_MATCHING: mode-one call block is merged before the comparison instead of placed after the return. */
 #include "common.h"
 
 struct StateCounter { u8 data[0x64]; };
@@ -17,12 +16,7 @@ s32 FUN_002a4860(const StateCounter *counter);
 // Check whether the mode-selected counter plus an offset remains below its limit.
 s32 FUN_004d0058(StateWindow *window, s32 offset)
 {
-    s32 value;
-    if (window->mode != 1) {
-        value = FUN_002a4860(&window->counter);
-    } else {
-        value = FUN_002a4844(&window->counter);
-    }
+    s32 value = window->mode == 1 ? FUN_002a4844(&window->counter) : FUN_002a4860(&window->counter);
     return window->limit > value + offset;
 }
 }

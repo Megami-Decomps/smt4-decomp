@@ -29,4 +29,16 @@ struct ColorKeyTrack {
     s32 duration;          /* 0x314 */
 };
 
+struct ScalarTimelineKey {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 value;
+    /* 0x10 */ s32 frame;
+    /* 0x14 */ u32 unk14;
+};
+struct ScalarTimeline {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ ScalarTimelineKey keys[4];
+};
+typedef char ScalarTimelineKeySizeCheck[sizeof(ScalarTimelineKey) == 0x18 ? 1 : -1];
+
 #endif

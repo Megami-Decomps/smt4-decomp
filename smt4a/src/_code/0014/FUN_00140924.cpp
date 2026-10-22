@@ -6,7 +6,7 @@ extern "C" {
 
 int asdSoundObjectStop(void);
 
-extern int *DAT_0063e944; /* 0x63e944 */
+extern int *g_soundHandleList; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 
 extern int FUN_0016003c(void);
@@ -21,7 +21,7 @@ unsigned int FUN_00140924(int param_1)
   int *piVar2;
   
   temp_v0 = 0;
-  piVar2 = DAT_0063e944;
+  piVar2 = g_soundHandleList;
   if (0 < DAT_0063e948) {
     while (piVar2 != (int *)0x0) {
       if (piVar2[6] == param_1) {

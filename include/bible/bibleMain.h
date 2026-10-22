@@ -4,19 +4,20 @@
 
 #include "common.h"
 
-struct BibleView;
-
-/* Virtual table of the bible screen's view object. */
-typedef struct BibleViewVtbl {
-    /* 0x00 */ void *unk00;
-    /* 0x04 */ void (*destroy)(struct BibleView *view);
-    /* 0x08 */ void *unk08[2];
-    /* 0x10 */ void (*close)(struct BibleView *view);
-} BibleViewVtbl;
-
-typedef struct BibleView {
-    /* 0x00 */ BibleViewVtbl *vtbl;
-} BibleView;
+/* Shared virtual interface of the compendium's concrete views. */
+class BibleView {
+public:
+    virtual ~BibleView() {}
+    virtual void start() = 0;
+    virtual void unk0c() = 0;
+    virtual void stop() = 0;
+    virtual void unk14() = 0;
+    virtual void unk18() = 0;
+    virtual s32 isReady() = 0;
+    virtual void unk20() = 0;
+    virtual void unk24() = 0;
+    virtual void unk28() = 0;
+};
 
 /* The bible (demon compendium) screen's work area. */
 typedef struct BibleWork {

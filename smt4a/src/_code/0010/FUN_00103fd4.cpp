@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char LAB_00104000; /* 0x104000 */
 extern unsigned char DAT_005585c0; /* 0x5585c0 */
 
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern int _ZN9Obj55aff4C1Ev(unsigned int *);
 extern int FUN_002ea100(int, unsigned char *);
 
@@ -18,7 +18,7 @@ void FUN_00103fd4(void)
   unsigned int *puVar1;
   int temp_v0;
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   puVar1[3] = 0;
   puVar1[4] = 0;
   *puVar1 = (unsigned int)&DAT_005585c0;

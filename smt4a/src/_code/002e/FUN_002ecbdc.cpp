@@ -29,7 +29,7 @@ extern unsigned char DAT_0055ae64; /* 0x55ae64 */
 #endif
 extern int *wordRefMax(int *, unsigned int *);
 extern int rt_malloc(int);
-extern unsigned int *sharedRefInit(fn_002ecbdc_arg0 *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(fn_002ecbdc_arg0 *);
 /* Supplied declaration required: FUN_0031066a. */
 extern unsigned int bufGrowCapacity(unsigned int, int *);
 
@@ -50,7 +50,7 @@ unsigned long long FUN_002ecbdc(fn_002ecbdc_arg0 *param_1,int param_2,unsigned i
   temp_v2 = param_2;
   temp_v3 = param_3;
   uStack_18 = param_4;
-  puVar1 = (unsigned int *)sharedRefInit(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(param_1);
   piVar4 = (int *)(puVar1 + 3);
   *puVar1 = (unsigned int)&DAT_0055ae64;
   puVar1[3] = 0;

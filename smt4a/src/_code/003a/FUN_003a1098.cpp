@@ -10,7 +10,7 @@ int memAlloc(int, int, int, int);
 int FUN_0016c4b8(...);
 int asdMemFree(void);
 int FUN_002371b0(void);
-int FUN_0025cab8(void);
+int effectSubmitDefaultVectors(void);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
 int FUN_002a1850(...);
@@ -56,7 +56,7 @@ extern int FUN_001692ac(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_001c5b4c(unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_0025cab8. */
+/* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_002a1850. */
@@ -295,15 +295,15 @@ joined_r0x003a122c:
       if (temp_v0 != 1) {
         if (temp_v0 != 2) {
           if (temp_v0 == 8) {
-            FUN_0025cab8();
+            effectSubmitDefaultVectors();
           }
         }
         else {
-          FUN_0025cab8();
+          effectSubmitDefaultVectors();
         }
       }
       else {
-        FUN_0025cab8();
+        effectSubmitDefaultVectors();
       }
       break;
     case 0xc:
@@ -318,7 +318,7 @@ joined_r0x003a122c:
       FUN_003762c0((int)((float)temp_v12 + 48.0f),(int)((float)((unsigned long long)temp_v12 >> 0x20) + 48.0f),0x20
                   );
       FUN_0016c4b8(g_renderCtx,temp_v7);
-      FUN_0025cab8();
+      effectSubmitDefaultVectors();
       FUN_0016c4b8(g_renderCtx,0);
       FUN_0032c810(0xffffffff);
       FUN_0032c810(0xffffffff);

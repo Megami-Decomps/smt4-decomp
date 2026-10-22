@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringCopyConstruct(...);
+int _ZN9Obj55aff4C1ERKS_(...);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002eca44(int);
 int FUN_002f6be2(unsigned int, int);
@@ -36,7 +36,7 @@ extern unsigned char LAB_00303bcc; /* 0x303bcc */
 extern unsigned char DAT_005592e4; /* 0x5592e4 */
 
 extern int operatorNew(unsigned int);
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002ec75c(int);
@@ -75,9 +75,9 @@ int FUN_00303aac(fn_00303aac_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1[0x1a] = param_2;
   *puVar1 = (unsigned int)&DAT_005592e4;
   puVar1[0x1b] = temp_v5;
-  temp_v0 = onlineStringCopyConstruct(puVar1 + 0x1c,temp_v6);
+  temp_v0 = _ZN9Obj55aff4C1ERKS_(puVar1 + 0x1c,temp_v6);
   *(unsigned int *)(temp_v0 + 0xc) = param_6;
-  temp_v0 = onlineStringCopyConstruct(temp_v0 + 0x10,param_7);
+  temp_v0 = _ZN9Obj55aff4C1ERKS_(temp_v0 + 0x10,param_7);
   *(unsigned char *)(temp_v0 + 8) = param_9;
   temp_v0 = FUN_002fafc4(temp_v0 + 0xc,0);
   temp_v0 = FUN_002fafc4(temp_v0 + 8,0);

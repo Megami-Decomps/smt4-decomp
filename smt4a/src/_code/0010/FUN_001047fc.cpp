@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00119f24(void);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002ea734(int *);
 
@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00119f24. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea734. */
@@ -37,7 +37,7 @@ unsigned int FUN_001047fc(int *param_1)
   
   FUN_00119f24();
   temp_v1 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v4,temp_v1);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v1);
   (**(romwright_code **)(*param_1 + 0x54))(param_1);
   temp_v5 = *(int *)(param_1[0x19] + 8);
   while( 1 ) {

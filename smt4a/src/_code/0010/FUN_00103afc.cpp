@@ -6,11 +6,11 @@ extern "C" {
 
 int onlineUrlEnsureParsed(void);
 int FUN_002e954a(int, unsigned int);
-int onlineStringAssign(void);
+int _ZN9Obj55aff4aSERKS_(void);
 
 /* Supplied declaration required: onlineUrlEnsureParsed. */
 /* Supplied declaration required: FUN_002e954a. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 
 
 unsigned int FUN_00103afc(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -27,7 +27,7 @@ unsigned int FUN_00103afc(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v0 = param_1 + 0x28;
   }
   FUN_002e954a(temp_v0,param_2);
-  onlineStringAssign();
+  _ZN9Obj55aff4aSERKS_();
   *(unsigned char *)(param_1 + 0x65) = 0;
   return 1;
 }

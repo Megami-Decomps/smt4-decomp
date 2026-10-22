@@ -12,7 +12,7 @@ typedef struct {
 
 extern int streamSkip(unsigned int, unsigned int);
 extern int streamReadBytes(unsigned int, int, unsigned int);
-extern int FUN_002ef9e0(unsigned char *, unsigned short);
+extern int _ZN9Obj55933cC1Et(unsigned char *, unsigned short);
 
 
 unsigned int
@@ -56,7 +56,7 @@ FUN_002f5c90(unsigned int param_1,unsigned int param_2,int param_3,unsigned int 
       *(unsigned short *)(param_3 + 0x3c) = *(unsigned short *)(param_3 + 0x6e);
       *(unsigned char *)(param_3 + 0x65) = *(unsigned char *)(param_3 + 0x70);
       *(unsigned char *)(param_3 + 0x84) = *(unsigned char *)(param_3 + 0x71);
-      temp_v0 = FUN_002ef9e0(temp_v2,*(unsigned short *)(param_3 + 0x72));
+      temp_v0 = _ZN9Obj55933cC1Et(temp_v2,*(unsigned short *)(param_3 + 0x72));
       *(unsigned short *)(param_3 + 0x44) = *(unsigned short *)(temp_v0 + 4);
     }
     temp_v1 = 1;

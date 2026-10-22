@@ -9,7 +9,7 @@ int FUN_0027dd9c(unsigned int);
 int FUN_003cc944(unsigned int, int, int);
 int FUN_003cf438(unsigned int, int, int);
 int entryTableInvalidate(unsigned int);
-int FUN_003dbed8(unsigned int, unsigned int);
+int battleCreateSecondaryModels(unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_003cc944. */
 /* Supplied declaration required: FUN_003cf438. */
 /* Supplied declaration required: entryTableInvalidate. */
-/* Supplied declaration required: FUN_003dbed8. */
+/* Supplied declaration required: battleCreateSecondaryModels. */
 
 
 void FUN_0033a360(int param_1)
@@ -53,7 +53,7 @@ void FUN_0033a360(int param_1)
   FUN_0023e52c(g_btlScriptUnit,temp_v0,5,0);
   FUN_003cc944(g_btlScriptUnit,temp_v0,1);
   FUN_0027dd9c(DAT_00435d18);
-  FUN_003dbed8(DAT_00435d18,*(unsigned int *)(temp_v0 + 0x594));
+  battleCreateSecondaryModels(DAT_00435d18,*(unsigned int *)(temp_v0 + 0x594));
   return;
 }
 

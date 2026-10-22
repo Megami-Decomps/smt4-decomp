@@ -23,7 +23,7 @@ int FUN_0022fb78(int, int);
 int FUN_002c7e24(void);
 int unitRecordBuild(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int recordFindAcceptedById(int);
 int recordContainsPairedId(...);
 int FUN_004bcbb4(...);
@@ -90,7 +90,7 @@ extern int FUN_002c7e54(void);
 /* Supplied declaration required: unitRecordBuild. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 /* Supplied declaration required: recordFindAcceptedById. */
 extern unsigned int FUN_003df57c(unsigned short, unsigned int);
 extern int countUnlockedSlots(void);
@@ -320,7 +320,7 @@ LAB_001fca00:
         if (temp_v17 == 0) {
           FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v7 + 0x59c),temp_v11);
         }
-        FUN_00389d9c(temp_v19,(int)*(short *)(temp_v7 + 0x59c),
+        statDrawClampedDelta(temp_v19,(int)*(short *)(temp_v7 + 0x59c),
                      temp_v29 + (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v4 + 8),
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,0xb5,0);
       }
@@ -502,7 +502,7 @@ LAB_001fd80c:
                   if (temp_v17 == 0) {
                     FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
                   }
-                  FUN_00389d9c(temp_v19,(int)*(short *)(temp_v25 + 0xbc),
+                  statDrawClampedDelta(temp_v19,(int)*(short *)(temp_v25 + 0xbc),
                                (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v12 + 8) + param_1,
                                (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v12 + 10) + param_2
                                ,0xc9,0);
@@ -526,7 +526,7 @@ LAB_001fd80c:
                   if (temp_v8 == 0) {
                     FUN_004bd6b0(temp_v19,*(unsigned short *)(temp_v25 + 0xbc),0);
                   }
-                  FUN_00389d9c(temp_v19,(int)*(short *)(temp_v25 + 0xbc),
+                  statDrawClampedDelta(temp_v19,(int)*(short *)(temp_v25 + 0xbc),
                                *(short *)(temp_v12 + 8) + temp_v17,*(short *)(temp_v12 + 10) + param_2,
                                0xb5,0);
                 }
@@ -634,7 +634,7 @@ LAB_001fcee8:
       if (temp_v7 == 0) {
         FUN_004bd6b0(temp_v19,*(unsigned int *)(temp_v2 + 0x658),0);
       }
-      FUN_00389d9c(temp_v19,(int)(short)*(unsigned int *)(temp_v2 + 0x658),
+      statDrawClampedDelta(temp_v19,(int)(short)*(unsigned int *)(temp_v2 + 0x658),
                    (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v12,
                    (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0xb5,0);
     }

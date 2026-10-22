@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
-int onlineStringAssign(...);
+int _ZN9Obj55aff4aSERKS_(...);
 int onlineStringSetFromRaw(...);
 int FUN_002ea3d0(...);
 int FUN_002f12d0(...);
@@ -25,9 +25,9 @@ extern unsigned char DAT_0062d704; /* 0x62d704 */
 
 extern int libc_strncmp(unsigned char *, unsigned char *, unsigned int);
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
@@ -59,10 +59,10 @@ void FUN_0011ae64(unsigned int param_1,int param_2,unsigned int param_3,int para
   uStack_1c = param_3;
   iStack_18 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v4,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x58);
   *(unsigned int *)(param_2 + 0x68) = param_3;
   *(int *)(param_2 + 0x6c) = param_4;
-  onlineStringAssign(param_2 + 0x70,param_5);
+  _ZN9Obj55aff4aSERKS_(param_2 + 0x70,param_5);
   *(unsigned int *)(param_2 + 0x78) = param_7;
   FUN_002f76ca(param_6,"normaltoken");
   if ((DAT_00589558 == param_4) &&

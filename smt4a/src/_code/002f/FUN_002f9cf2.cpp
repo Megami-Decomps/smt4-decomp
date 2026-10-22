@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [16], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002ea974(unsigned char [104]);
 int onlineUrlSetAddress(unsigned char [104], unsigned int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002ea974. */
@@ -38,7 +38,7 @@ unsigned int FUN_002f9cf2(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned char temp_v5 [16];
   
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v5,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v5,temp_v0);
   temp_v3[0] = (unsigned int *)**(unsigned int **)(param_1 + 0xd4);
   while( 1 ) {
     temp_v4[0] = *(unsigned int *)(param_1 + 0xd4);

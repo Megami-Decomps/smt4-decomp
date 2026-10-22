@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00124c60(...);
 int FUN_002b75ec(...);
 int FUN_002b7638(...);
-int FUN_002b93c8(...);
+int effectRenderTransformedInstance(...);
 int FUN_002bd82c(...);
 int SBORROW4(...);
 
@@ -50,7 +50,7 @@ extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002b7638. */
 extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bd82c. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -243,7 +243,7 @@ char FUN_00116a54(void)
         temp_v12 = (float)temp_v14;
         FUN_002ba12c(g_titleScene);
         VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002b93c8(temp_v4 + temp_v5 * 0x8c + 0x498);
+        effectRenderTransformedInstance(temp_v4 + temp_v5 * 0x8c + 0x498);
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);

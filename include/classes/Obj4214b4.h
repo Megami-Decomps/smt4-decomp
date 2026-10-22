@@ -8,6 +8,7 @@
 class Obj4214b4 {
 public:
     virtual ~Obj4214b4();
+    void *getResource() const { return resource; }
 
 protected:
     /* 0x00: vtable pointer */

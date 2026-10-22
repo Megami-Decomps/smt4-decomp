@@ -4,25 +4,25 @@
 
 extern "C" {
 
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 extern unsigned char LAB_00197ea8; /* 0x197ea8 */
 extern unsigned char LAB_00197eac; /* 0x197eac */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 int gfxCombinerStageConstruct(int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002f5020();
+  __aeabi_vec_ctor_nocookie_nodtor();
   param_1 = param_1 + 3;
-  FUN_002f5020(param_1,&LAB_00197ea8,1,3);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_00197ea8,1,3);
   param_1 = param_1 + 6;
-  FUN_002f5020(param_1,&LAB_00197eac,1,3);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_00197eac,1,3);
   param_1 = param_1 + 3;
-  FUN_002f5020(param_1,&LAB_00197ea8,1,3);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1,&LAB_00197ea8,1,3);
   return param_1 - 0xd;
 }
 

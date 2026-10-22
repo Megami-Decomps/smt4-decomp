@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler changes the register allocation and store/frame scheduling shown by retail. */
 #include "common.h"
 extern "C" {
 extern const u8 DAT_00558490;

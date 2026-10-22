@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int onlineStringConstruct(unsigned int, short *);
-int onlineStringCopyConstruct(unsigned int, int, int, unsigned int, unsigned int);
+int _ZN9Obj55aff4C1EPKc(unsigned int, short *);
+int _ZN9Obj55aff4C1ERKS_(unsigned int, int, int, unsigned int, unsigned int);
 int FUN_0030f234(unsigned int, short *, unsigned int, unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -14,8 +14,8 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int wstrlenU16(short *);
-/* Supplied declaration required: onlineStringConstruct. */
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 extern int FUN_002eea7c(int);
 /* Supplied declaration required: FUN_0030f234. */
 
@@ -34,10 +34,10 @@ void FUN_00306f9a(unsigned int param_1,short *param_2,int param_3,unsigned int p
       FUN_0030f234(param_1,param_2,temp_v1,*(unsigned int *)(param_3 + 4),temp_v0);
       return;
     }
-    onlineStringConstruct(param_1,param_2);
+    _ZN9Obj55aff4C1EPKc(param_1,param_2);
     return;
   }
-  onlineStringCopyConstruct(param_1,param_3,param_3,param_4,param_4);
+  _ZN9Obj55aff4C1ERKS_(param_1,param_3,param_3,param_4,param_4);
   return;
 }
 

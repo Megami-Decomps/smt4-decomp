@@ -8,7 +8,7 @@ struct EquipmentIdRange {
     u8 unk09[3];
 };
 
-struct EquipmentUpgradeRecord {
+struct EquipmentUpgradeBonusRecord {
     s16 rating;
     s16 bonus;
     u8 unk04[8];
@@ -16,7 +16,7 @@ struct EquipmentUpgradeRecord {
 
 struct EquipmentUpgradeStorage {
     u8 unk00[8];
-    EquipmentUpgradeRecord records[3][120];
+    EquipmentUpgradeBonusRecord records[3][120];
 };
 
 struct EquipmentBonusCaps {

@@ -29,7 +29,7 @@ struct AocOperationView {
 };
 
 extern "C" AocDisplay* g_aocDisplay;
-extern "C" AocErrorDescriptor* resultPairInitialize(AocErrorDescriptor* output, u32 code);
+extern "C" AocErrorDescriptor* _ZN18WindowStatusResultC1Ej(AocErrorDescriptor* output, u32 code);
 
 extern "C" void aocResetOperationState(AocSystemA* system)
 {
@@ -45,5 +45,5 @@ extern "C" void aocResetOperationState(AocSystemA* system)
     status->active = true;
     status->state = 0;
     AocErrorDescriptor success;
-    status->error = *resultPairInitialize(&success, 0);
+    status->error = *_ZN18WindowStatusResultC1Ej(&success, 0);
 }

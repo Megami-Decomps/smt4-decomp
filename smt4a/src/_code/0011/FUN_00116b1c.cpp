@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001068e4(int *, int, char [23], int);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002e7908(unsigned int, int *);
-int onlineStringAssign(int, unsigned int);
+int _ZN9Obj55aff4aSERKS_(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002f12d0(unsigned int, unsigned char [4]);
 
@@ -27,11 +27,11 @@ extern char s__V_V_V_V___00589588[23]; /* 0x589588 */
 
 /* Supplied declaration required: FUN_001068e4. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e7908. */
-/* Supplied declaration required: onlineStringAssign. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002f12d0. */
@@ -60,9 +60,9 @@ void FUN_00116b1c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   uStack_1c = param_3;
   uStack_18 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v4,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x58);
   *(unsigned int *)(param_2 + 0x6c) = param_3;
-  onlineStringAssign(param_2 + 0x70,param_4);
+  _ZN9Obj55aff4aSERKS_(param_2 + 0x70,param_4);
   *(unsigned char *)(param_2 + 0x78) = param_5;
   *(unsigned int *)(param_2 + 0x7c) = param_6;
   *(unsigned int *)(param_2 + 0x104) = param_7;

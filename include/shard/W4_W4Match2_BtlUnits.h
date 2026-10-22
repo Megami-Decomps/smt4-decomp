@@ -42,4 +42,21 @@ typedef struct BtlState {
     /* 0x49C5 */ s8 hasActiveEntry;
 } BtlState;
 
+struct TurnOrderUnit {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s16 tieIndex;
+    /* 0x00A */ u8 unk00a[0x1B8];
+    /* 0x1C2 */ s16 speed;
+    /* 0x1C4 */ u8 unk1c4[0x90];
+    /* 0x254 */ s16 speedBonus;
+    /* 0x256 */ u8 unk256[0x32];
+};
+struct TurnOrderState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ TurnOrderUnit *units;
+    /* 0x1FC4 */ u8 unk1fc4[0xF42];
+    /* 0x2F06 */ s16 order[12];
+};
+typedef char TurnOrderUnitSizeCheck[sizeof(TurnOrderUnit) == 0x288 ? 1 : -1];
+
 #endif

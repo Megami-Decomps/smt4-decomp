@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [20], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [20], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [20], int, unsigned int, unsigned int);
 int onlineTimeGetNow(unsigned int *);
 int SBORROW4(...);
@@ -25,7 +25,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -45,7 +45,7 @@ void FUN_0010cbe8(fn_0010cbe8_arg0 *param_1)
   unsigned char temp_v7 [20];
   
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v7,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v7,temp_v0);
   onlineTimeGetNow(&temp_v5);
   temp_v2 = param_1->field_0x8;
   temp_v4 = temp_v5 - param_1->field_0x10;

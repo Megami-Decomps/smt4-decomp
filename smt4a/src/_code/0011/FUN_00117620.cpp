@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00128fd8(unsigned char [12], int, unsigned int *);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int FUN_002f9dd4(...);
 
@@ -23,7 +23,7 @@ typedef struct {
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_00128fd8. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 extern unsigned char *packNibbles(unsigned int *, unsigned char, unsigned int);
@@ -53,7 +53,7 @@ unsigned int FUN_00117620(int param_1,int param_2,unsigned int param_3,unsigned 
   uStack_18 = param_3;
   puStack_14 = param_4;
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v4,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0);
   temp_v5 = temp_v5 & 0xffffff00;
   if (param_3 != 0) {
     puVar2 = (unsigned char *)packNibbles(&temp_v2,*(unsigned char *)(temp_v8 + 4),param_3);

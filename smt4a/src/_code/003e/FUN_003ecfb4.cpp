@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017760c(...);
+int recordGetScaledMaximum(...);
 int FUN_00184310(...);
 int sysMemClear(...);
 int rt_memclr(...);
@@ -36,7 +36,7 @@ struct fn_003ecfb4_arg2 {
 };
 
 extern int saveSlotFindSelected(void);
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
@@ -72,14 +72,14 @@ void FUN_003ecfb4(unsigned int param_1,unsigned char *param_2,fn_003ecfb4_arg2 *
   if (param_4 != 0) {
     temp_v3 = saveSlotFindSelected();
     *(int *)(param_2 + 0xd8) = (int)*(short *)(temp_v3 + 0x2a);
-    temp_v4 = FUN_0017760c(temp_v3);
+    temp_v4 = recordGetScaledMaximum(temp_v3);
     *(unsigned int *)(param_2 + 0xdc) = temp_v4;
     *(int *)(param_2 + 0xe0) = (int)*(short *)(temp_v3 + 0x2c);
     temp_v1 = *(short *)(temp_v3 + 0x10);
   }
   else {
     *(int *)(param_2 + 0xd8) = (int)param_3->field_0x2a;
-    temp_v4 = FUN_0017760c(param_3);
+    temp_v4 = recordGetScaledMaximum(param_3);
     *(unsigned int *)(param_2 + 0xdc) = temp_v4;
     *(int *)(param_2 + 0xe0) = (int)param_3->field_0x2c;
     temp_v1 = param_3->field_0x10;

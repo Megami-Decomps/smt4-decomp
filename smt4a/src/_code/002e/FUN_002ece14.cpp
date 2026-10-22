@@ -31,7 +31,7 @@ struct fn_002ece14_arg1 {
 
 extern unsigned char DAT_0055af54; /* 0x55af54 */
 
-extern unsigned int *sharedRefInit(fn_002ece14_arg0 *);
+extern unsigned int *_ZN9Obj5593b8C1Ev(fn_002ece14_arg0 *);
 /* Supplied declaration required: FUN_002ec8a8. */
 extern unsigned int bufAllocateStorage(unsigned int *);
 
@@ -43,7 +43,7 @@ unsigned int * FUN_002ece14(fn_002ece14_arg0 *param_1,fn_002ece14_arg1 *param_2)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)sharedRefInit(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(param_1);
   *puVar1 = (unsigned int)&DAT_0055af54;
   puVar1[5] = param_2->field_0x14;
   *(unsigned char *)(puVar1 + 7) = 0;

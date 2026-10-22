@@ -15,7 +15,7 @@ typedef struct Object {
 extern u8 DAT_0055a9e8;
 extern u8 DAT_0055ad7c;
 
-u8 *FUN_003038fc(u8 *member, s32 arg);
+u8 *_ZN9Obj55b104C1Ejj(u8 *member, s32 arg);
 
 /* Constructs the object: base vtable, cleared flag, the member at 0x10, then the final vtable. */
 void FUN_0030ca9c(Object *object)
@@ -24,7 +24,7 @@ void FUN_0030ca9c(Object *object)
 
     object->vtable = &DAT_0055ad7c;
     object->flag = 0;
-    self = (Object *)(FUN_003038fc(object->member, 0) - 0x10);
+    self = (Object *)(_ZN9Obj55b104C1Ejj(object->member, 0) - 0x10);
     self->vtable = &DAT_0055a9e8;
 }
 

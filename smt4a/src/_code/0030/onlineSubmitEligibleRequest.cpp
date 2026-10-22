@@ -1,5 +1,5 @@
 /* NON_MATCHING: Thumb status testing, guard-address setup and cleanup-block layout differ; retail shares the exit epilogue. Candidate Ospace/O2. */
-#include "shard/W6_W6Match2_OnlineScopedGuard.h"
+#include "classes/Obj55b28c.h"
 #include "nn/Result.h"
 
 struct OnlineRequestManager {
@@ -39,7 +39,7 @@ extern OnlineRequestSettings DAT_005949d8;
 u32 onlineSubmitEligibleRequest(void*, const OnlineRequestState* state, OnlineClient* client)
 {
     OnlineRequestManager* manager = onlineContextGetInstance();
-    OnlineScopedGuard guard((OnlineMutex*)&manager->mutex);
+    Obj55b28c guard(&manager->mutex);
     if (FUN_002e789a(state)) {
         u32 argument = state->argument;
         OnlineSubmitResult result;

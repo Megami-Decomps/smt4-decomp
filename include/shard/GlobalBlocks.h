@@ -120,4 +120,58 @@ typedef struct Block5c0ac8 {
 } Block5c0ac8;
 extern Block5c0ac8 g_nnosHeapState;
 
+/* Shared subsystem defaults, reset as a 0x70-byte block. */
+struct SubsystemDefaults {
+    /* 0x00 */ u16 state;
+    /* 0x02 */ u16 capacity;
+    /* 0x04 */ u8 enabled;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 count;
+    /* 0x0C */ u8 unk0c[0x64];
+};
+struct ConditionalByteState {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 value;
+    /* 0x09 */ u8 unk09[0x27];
+    /* 0x30 */ u8 locked;
+};
+
+typedef char SubsystemDefaultsSizeCheck[sizeof(SubsystemDefaults) == 0x70 ? 1 : -1];
+typedef char ConditionalByteStateSizeCheck[sizeof(ConditionalByteState) == 0x31 ? 1 : -1];
+
+struct AccelerometerReaderState {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 centerX;
+    /* 0x06 */ u16 centerY;
+    /* 0x08 */ u8 unk08[0x50];
+};
+struct AccelerometerRawState {
+    /* 0x00 */ s16 axes[3];
+    /* 0x06 */ u8 status;
+};
+struct AccelerometerLiveState {
+    /* 0x00 */ u16 centerX;
+    /* 0x02 */ u16 centerY;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ s8 transform;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ s32 calibrationPending;
+    /* 0x0C */ s16 raw[3];
+    /* 0x12 */ u8 status;
+    /* 0x13 */ u8 unk13[5];
+    /* 0x18 */ f32 acceleration[3];
+    /* 0x24 */ f32 previousAcceleration[3];
+    /* 0x30 */ f32 basisX[3];
+    /* 0x3C */ u32 unk3c;
+    /* 0x40 */ f32 basisY[3];
+    /* 0x4C */ u32 unk4c;
+    /* 0x50 */ f32 basisZ[3];
+};
+struct AccelerometerFullState {
+    /* 0x00 */ AccelerometerReaderState reader;
+    /* 0x58 */ AccelerometerLiveState live;
+};
+typedef char AccelerometerReaderStateSizeCheck[sizeof(AccelerometerReaderState) == 0x58 ? 1 : -1];
+typedef char AccelerometerLiveStateSizeCheck[sizeof(AccelerometerLiveState) == 0x5C ? 1 : -1];
+
 #endif

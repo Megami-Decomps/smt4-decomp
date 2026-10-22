@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `add r1, r0, #256` where armcc emits `ldm r3, {r0, r1, r2, r3}`. */
 #include "common.h"
 
 extern "C" {

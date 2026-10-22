@@ -19,7 +19,7 @@ int FUN_00185e84(...);
 int gameGetSlotRecord(...);
 int FUN_0023d150(...);
 int FUN_0026ec00(...);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 11 slot(s), 44 byte(s) */
@@ -65,7 +65,7 @@ extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(unsigned int, unsigned int);
 extern unsigned int FUN_004bcbb4(int, unsigned int);
 
@@ -189,7 +189,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0x6f,temp_v16,0
                 );
     if (-1 < (int)temp_v8) {
-      FUN_00389d9c(temp_v12,(int)(short)temp_v9,
+      statDrawClampedDelta(temp_v12,(int)(short)temp_v9,
                    (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0x88,0);
     }
@@ -293,7 +293,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
                  (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0x88,temp_v16,0
                 );
     if (-1 < (int)temp_v8) {
-      FUN_00389d9c(temp_v12,(int)(short)temp_v9,
+      statDrawClampedDelta(temp_v12,(int)(short)temp_v9,
                    (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10) + param_2,0x88,0);
     }

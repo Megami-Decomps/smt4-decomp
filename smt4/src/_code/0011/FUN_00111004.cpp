@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ba8f4(unsigned int *);
 int FUN_002ba968(int, int *, int, int);
 int FUN_002ba9ac(unsigned int);
-int resultPairInitialize(unsigned int *, int);
+int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_002c40f8(unsigned int *, unsigned int *, int, int, int);
 int FUN_002c526c(void);
 
@@ -32,8 +32,8 @@ extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba8f4. */
 /* Supplied declaration required: FUN_002ba968. */
 /* Supplied declaration required: FUN_002ba9ac. */
-/* Supplied declaration required: resultPairInitialize. */
-extern unsigned int *FUN_002bad5c(unsigned int *);
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
+extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: FUN_002c40f8. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -79,17 +79,17 @@ unsigned int FUN_00111004(void)
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     FUN_002ba9ac(g_aocSystem);
     temp_v6 = ((unsigned int)((unsigned int)in_stack_ffffffb8 >> 8) & 0xffffffU);
-    puVar4 = (unsigned int *)FUN_002bad5c((unsigned int *)&temp_v7);
+    puVar4 = (unsigned int *)_ZN18WindowStatusResultC1Ev((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;
     puVar5 = temp_v11;
-    resultPairInitialize(puVar5,0);
+    _ZN18WindowStatusResultC1Ej(puVar5,0);
     temp_v3 = puVar5[1];
     *puVar4 = *puVar5;
     puVar4[1] = temp_v3;
     puVar4 = temp_v11;
     temp_v9 = 0;
-    resultPairInitialize(puVar4,0);
+    _ZN18WindowStatusResultC1Ej(puVar4,0);
     temp_v7 = *puVar4;
     temp_v8 = puVar4[1];
     temp_v10 = romwright_piece_3_1(temp_v6,200);

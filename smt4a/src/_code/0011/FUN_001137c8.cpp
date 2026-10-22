@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011394c(...);
 int FUN_00121050(...);
 int FUN_001224d0(...);
-int onlineStringDestroy(...);
+int _ZN9Obj55aff4D1Ev(...);
 int onlineUrlSetHost(unsigned char [108], unsigned int);
 int FUN_002e93c2(unsigned char [108], unsigned int);
 int onlineSockAddrSetHost(...);
@@ -37,7 +37,7 @@ extern unsigned int DAT_00594a8c; /* 0x594a8c */
 /* Supplied declaration required: FUN_0011394c. */
 /* Supplied declaration required: FUN_00121050. */
 /* Supplied declaration required: FUN_001224d0. */
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: onlineUrlSetHost. */
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: onlineSockAddrSetHost. */
@@ -112,9 +112,9 @@ void FUN_001137c8(int param_1,unsigned int param_2)
     temp_v0 = 1;
   }
   if (temp_v4) {
-    onlineStringDestroy(temp_v7);
+    _ZN9Obj55aff4D1Ev(temp_v7);
   }
-  onlineStringDestroy(temp_v14);
+  _ZN9Obj55aff4D1Ev(temp_v14);
   if (temp_v0) {
     temp_v2 = FUN_002fe4f8(temp_v13,temp_v11,DAT_00594a8c,90000);
     FUN_002fe544(param_1 + 0x54,temp_v2);
@@ -123,19 +123,19 @@ void FUN_001137c8(int param_1,unsigned int param_2)
   else {
     FUN_002fe400(temp_v7,temp_v11);
     onlineUrlSetHost(temp_v11,temp_v8);
-    onlineStringDestroy(temp_v7);
+    _ZN9Obj55aff4D1Ev(temp_v7);
     temp_v2 = FUN_002fe454(temp_v11);
     FUN_002e93c2(temp_v11,temp_v2);
     onlineSockAddrConstruct(temp_v9);
     FUN_002fe400(temp_v7,temp_v11);
     onlineSockAddrSetHost(temp_v9,temp_v8);
-    onlineStringDestroy(temp_v7);
+    _ZN9Obj55aff4D1Ev(temp_v7);
     temp_v3 = FUN_002fe454(temp_v11);
     temp_v10 = (unsigned short)((temp_v3 & 0xff) << 8) | ((unsigned short)(temp_v3 >> 8) & 0xff);
     onlineSockAddrConstruct(temp_v5);
     FUN_002fe468(temp_v7,temp_v11);
     onlineSockAddrSetHost(temp_v5,temp_v8);
-    onlineStringDestroy(temp_v7);
+    _ZN9Obj55aff4D1Ev(temp_v7);
     temp_v3 = FUN_002fe4bc(temp_v11);
     temp_v6 = (unsigned short)((temp_v3 & 0xff) << 8) | ((unsigned short)(temp_v3 >> 8) & 0xff);
     piVar3 = (int *)FUN_002ea704();

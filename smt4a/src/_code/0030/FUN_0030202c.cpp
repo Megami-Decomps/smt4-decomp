@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'push {r1, r2, r3, r4, r5, r6, r7, lr}'; compiler emits 'push {r4, r5, r6, lr}' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 struct Triple { u32 first, second, third; };

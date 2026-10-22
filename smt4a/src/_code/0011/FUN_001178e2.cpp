@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void onlineStringAssign(u8 *dest, const u8 *source);
+void _ZN9Obj55aff4aSERKS_(u8 *dest, const u8 *source);
 
 typedef struct Record {
     /* 0x00 */ u8 unk00[4];
@@ -12,12 +12,12 @@ typedef struct Record {
     /* 0x10 */ u8 partB[1];
 } Record;
 
-/* Assignment: copies `kind` and the two parts (through onlineStringAssign) from `source` and returns `dest`. */
+/* Assignment: copies `kind` and the two parts (through _ZN9Obj55aff4aSERKS_) from `source` and returns `dest`. */
 Record *FUN_001178e2(Record *dest, const Record *source)
 {
     dest->kind = source->kind;
-    onlineStringAssign(dest->partA, source->partA);
-    onlineStringAssign(dest->partB, source->partB);
+    _ZN9Obj55aff4aSERKS_(dest->partA, source->partA);
+    _ZN9Obj55aff4aSERKS_(dest->partB, source->partB);
     return dest;
 }
 

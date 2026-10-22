@@ -13,7 +13,7 @@ int gpuEmitDepthBufferCommands(...);
 int gxEmitFramebufferAccessMasks(...);
 int FUN_001b14dc(...);
 int sysMemClear(unsigned char *, int);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045b170(unsigned int *, unsigned int *, int, int);
 int FUN_00500cac(...);
 unsigned int* FUN_00500d38(unsigned int [4], unsigned int*, int);
@@ -48,7 +48,7 @@ extern unsigned char *asdGxAppendStateReset(unsigned char *, unsigned int);
 extern unsigned int FUN_001a1e28(void);
 /* Supplied declaration required: FUN_001b14dc. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int FUN_0042c4cc(unsigned char *);
 extern unsigned char *FUN_0042cbd8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0045b170. */
@@ -99,7 +99,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
       *puVar13 = 0;
       puVar13[1] = 0;
       puVar4 = puVar13 + 2;
-      FUN_002f5020(puVar4,&LAB_0045b30c,0x20,2);
+      __aeabi_vec_ctor_nocookie_nodtor(puVar4,&LAB_0045b30c,0x20,2);
       puVar4[0x10] = 0;
       puVar4[0x12] = 0;
       puVar4[0x13] = 0;
@@ -153,7 +153,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
         *puVar12 = 0;
         temp_v4 = FUN_0042c4cc(puVar12 + 4);
         temp_v4 = temp_v4 + 0x1b0;
-        FUN_002f5020(temp_v4,setFourMinus1,0x10,8);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v4,setFourMinus1,0x10,8);
         temp_v5 = 0;
         *(unsigned int **)(temp_v4 + 0x80) = puVar13;
         do {

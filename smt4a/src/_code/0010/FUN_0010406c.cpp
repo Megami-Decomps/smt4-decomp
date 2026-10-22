@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned char [32], int);
-int onlineStringDestroy(unsigned char [4]);
+int _ZN9Obj55aff4D1Ev(unsigned char [4]);
 int FUN_002e9c0c(void);
 int onlineStringSetFromRaw(int, unsigned char [256]);
 int FUN_002ea100(unsigned char [4], unsigned char [32]);
@@ -45,7 +45,7 @@ extern unsigned char LAB_001041fc; /* 0x1041fc */
 /* Supplied declaration required: sysMemClear. */
 extern int operatorNew(unsigned int);
 extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002e9c0c. */
 /* Supplied declaration required: onlineStringSetFromRaw. */
 /* Supplied declaration required: FUN_002ea100. */
@@ -141,7 +141,7 @@ LAB_00104110:
         temp_v5 = param_1 + 0x108;
         FUN_002ea374(temp_v19,temp_v20,temp_v9,temp_v21);
         if (temp_v0 != 0) {
-          onlineStringDestroy(temp_v17);
+          _ZN9Obj55aff4D1Ev(temp_v17);
           FUN_002ea3a8(temp_v8);
           temp_v1 = FUN_002ea3c0(temp_v22,0x104205,0,&LAB_001041fc);
           FUN_002ea3d0(param_1,temp_v1);
@@ -150,7 +150,7 @@ LAB_00104110:
         temp_v3 = 0x8001000d;
         temp_v1 = FUN_002e7908(&temp_v4,(unsigned int *)&temp_v3);
         FUN_002ea214(param_1,temp_v1);
-        onlineStringDestroy(temp_v17);
+        _ZN9Obj55aff4D1Ev(temp_v17);
         FUN_002ea3a8(temp_v8);
         return;
       }

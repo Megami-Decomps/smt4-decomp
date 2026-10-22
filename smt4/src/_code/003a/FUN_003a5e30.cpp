@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rectangleResetSelection(...);
+int _ZN18SelectionRectangleC1Ev(...);
 int rectangleInitializeSelection(int, int, int, int);
 int uiInitializeEightTimerSet(int);
 int FUN_002637c8(void);
@@ -18,7 +18,7 @@ int asdOperatorNew(void);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
-int FUN_00343aac(int, int);
+int questCenterSetFlag(int, int);
 int FUN_00343b08(...);
 int FUN_00343c0c(...);
 int FUN_003a169c(unsigned int *);
@@ -29,13 +29,13 @@ extern unsigned char LAB_003a0104; /* 0x3a0104 */
 extern unsigned char DAT_004223b0; /* 0x4223b0 */
 extern unsigned char DAT_00422590; /* 0x422590 */
 
-/* Supplied declaration required: rectangleResetSelection. */
+/* Supplied declaration required: _ZN18SelectionRectangleC1Ev. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-extern unsigned int *uiSelectionControllerConstruct(void);
+extern unsigned int *_ZN9Obj422594C1Ev(void);
 /* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_00282bfc. */
-extern int FUN_00287314(int);
+extern int _ZN14SelectionFlagsC1Ev(int);
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
@@ -47,7 +47,7 @@ extern short *FUN_002c0a2c(unsigned char, unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_00343aac. */
+/* Supplied declaration required: questCenterSetFlag. */
 /* Supplied declaration required: FUN_00343b08. */
 /* Supplied declaration required: FUN_00343c0c. */
 /* Supplied declaration required: FUN_003a169c. */
@@ -68,14 +68,14 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   unsigned int *puVar7;
   
   *param_1 = 0;
-  temp_v1 = rectangleResetSelection(param_1 + 0xe0);
-  temp_v1 = rectangleResetSelection(temp_v1 + 0x14);
+  temp_v1 = _ZN18SelectionRectangleC1Ev(param_1 + 0xe0);
+  temp_v1 = _ZN18SelectionRectangleC1Ev(temp_v1 + 0x14);
   *(unsigned char **)(temp_v1 + 0x494) = &DAT_00422590;
   temp_v1 = temp_v1 + 0x4ec;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,FUN_00287314,0x74,9);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,_ZN14SelectionFlagsC1Ev,0x74,9);
   temp_v1 = temp_v1 + 0x414;
   __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_003a0104,0x1002,9);
-  temp_v1 = FUN_00287314(temp_v1 + 0x9014);
+  temp_v1 = _ZN14SelectionFlagsC1Ev(temp_v1 + 0x9014);
   puVar7 = (unsigned int *)(temp_v1 - 0x9ca8);
   FUN_003a4518(puVar7);
   *(unsigned int *)(temp_v1 - 0x9c98) = param_2;
@@ -104,7 +104,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   asdOperatorNew();
   puVar4 = (unsigned int *)0x0;
   if (temp_v2 != 0) {
-    puVar4 = (unsigned int *)uiSelectionControllerConstruct();
+    puVar4 = (unsigned int *)_ZN9Obj422594C1Ev();
     *puVar4 = (unsigned int)&DAT_004223b0;
   }
   *(unsigned int **)(temp_v1 - 0x944c) = puVar4;
@@ -137,7 +137,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   temp_v3 = 0x1000060;
   if (param_3 != 0) {
     if (param_3 == 1) {
-      FUN_00343aac(param_4,1);
+      questCenterSetFlag(param_4,1);
       if (param_4 != 5) {
         if (param_4 != 9) {
           temp_v3 = 0x100005c;

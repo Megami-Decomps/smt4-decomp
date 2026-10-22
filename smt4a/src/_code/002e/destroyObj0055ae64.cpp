@@ -4,7 +4,7 @@ extern "C" {
 
 extern const u8 DAT_0055ae64[];  /* vtable */
 u8 *vectorDestroyBytes(u8 *member);
-void sharedRefInitEmpty(u8 *member);
+void _ZN9Obj5593b8D1Ev(u8 *member);
 
 typedef struct Object55ae64 {
     /* 0x00 */ const void *vtbl;
@@ -19,7 +19,7 @@ void destroyObj0055ae64(Object55ae64 *self)
 
     self->vtbl = DAT_0055ae64;
     member = vectorDestroyBytes(self->member0C);
-    sharedRefInitEmpty(member - 0xC);
+    _ZN9Obj5593b8D1Ev(member - 0xC);
 }
 
 } /* extern "C" */

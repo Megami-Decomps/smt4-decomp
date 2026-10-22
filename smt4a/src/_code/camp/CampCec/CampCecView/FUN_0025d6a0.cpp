@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00167c14(...);
 int FUN_0036c7a8(...);
 int uiGetFloatValue(void);
-int FUN_0039a3b4(...);
+int textureRequestCacheGet(...);
 int FUN_003aedc8(...);
 int FUN_003e54b8(...);
 int SBORROW4(...);
@@ -24,11 +24,11 @@ int FUN_002e2184(...);
 int campCecSetObjectValue(int);
 int gameDataGetMarkEntry(...);
 int FUN_00359974(int, unsigned int);
-int FUN_0035a0bc(...);
+int controllerApplyPreset(...);
 int screenStartOrClear(...);
-int FUN_0037b5e0(...);
+int uiDrawExtendedRecordLabel(...);
 int FUN_0039bb48(...);
-int FUN_003a4980(...);
+int characterInfoPanelPopulate(...);
 int FUN_003a7a88(...);
 int FUN_003b60c0(unsigned int, int);
 int FUN_003d2150(...);
@@ -62,15 +62,15 @@ extern int FUN_0032cfc8(void);
 extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: gameDataGetMarkEntry. */
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0035a0bc. */
+/* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: FUN_0036c7a8. */
 /* Supplied declaration required: screenStartOrClear. */
-/* Supplied declaration required: FUN_0037b5e0. */
+/* Supplied declaration required: uiDrawExtendedRecordLabel. */
 /* Supplied declaration required: uiGetFloatValue. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0039a3b4. */
+/* Supplied declaration required: textureRequestCacheGet. */
 /* Supplied declaration required: FUN_0039bb48. */
-/* Supplied declaration required: FUN_003a4980. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_003aedc8. */
 /* Supplied declaration required: FUN_003b60c0. */
@@ -186,9 +186,9 @@ unsigned int FUN_0025d6a0(void)
         if (temp_v1 != 0) {
           *(unsigned int *)(temp_v0 + 0x144) = 0;
           if (*(char *)(temp_v0 + 0x13c) == '\0') {
-            FUN_003a4980(*(unsigned int *)(temp_v0 + 0x110),*(unsigned int *)(temp_v0 + 0xc));
+            characterInfoPanelPopulate(*(unsigned int *)(temp_v0 + 0x110),*(unsigned int *)(temp_v0 + 0xc));
             *(unsigned char *)(temp_v0 + 0x13c) = 1;
-            FUN_0035a0bc(*(unsigned int *)(temp_v0 + 8),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x42));
+            controllerApplyPreset(*(unsigned int *)(temp_v0 + 8),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x42));
           }
           temp_v6 = (unsigned int)*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22);
           FUN_00182054();
@@ -396,7 +396,7 @@ LAB_0025d9ec:
       do {
         temp_v9 = gameDataGetMarkEntry(*(int *)(temp_v1 + 0x118) + temp_v5);
         if (*(short *)(temp_v9 + 0x60) != 0) {
-          FUN_0037b5e0(*(unsigned int *)(temp_v1 + temp_v5 * 4 + 0x104),temp_v9);
+          uiDrawExtendedRecordLabel(*(unsigned int *)(temp_v1 + temp_v5 * 4 + 0x104),temp_v9);
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 3);
@@ -623,7 +623,7 @@ LAB_0025dd50:
           do {
             temp_v9 = gameDataGetMarkEntry(*(int *)(temp_v1 + 0x118) + temp_v5);
             if (*(short *)(temp_v9 + 0x60) != 0) {
-              FUN_0037b5e0(*(unsigned int *)(temp_v1 + temp_v5 * 4 + 0x104),temp_v9);
+              uiDrawExtendedRecordLabel(*(unsigned int *)(temp_v1 + temp_v5 * 4 + 0x104),temp_v9);
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 3);
@@ -691,7 +691,7 @@ LAB_0025e324:
           *(unsigned int *)(temp_v0 + 0x144) = 2;
           *(unsigned char *)(temp_v0 + 0x13d) = 0;
           linkHolderApplyFlag(*(unsigned int *)(temp_v0 + 8),0);
-          FUN_0035a0bc(*(unsigned int *)(temp_v0 + 8),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x42));
+          controllerApplyPreset(*(unsigned int *)(temp_v0 + 8),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x42));
           *(unsigned int *)(temp_v0 + 0x140) = 0;
           *(unsigned int *)(temp_v0 + 0x11c) = 0;
           goto LAB_0025e4d4;
@@ -708,7 +708,7 @@ LAB_0025e324:
         temp_v1 = temp_v5 - 2;
       }
       if ((!((temp_v10 || temp_v5 == 2) || temp_v1 < 0 != temp_v11)) && (*(int *)(temp_v0 + 0x144) != 1)) {
-        FUN_003a4980(*(unsigned int *)(temp_v0 + 0x110),*(unsigned int *)(temp_v0 + 0xc));
+        characterInfoPanelPopulate(*(unsigned int *)(temp_v0 + 0x110),*(unsigned int *)(temp_v0 + 0xc));
         *(unsigned int *)(temp_v0 + 0x148) = *(unsigned int *)(temp_v0 + 0x114);
         *(int *)(temp_v0 + 0x140) = *(int *)(temp_v0 + 0x140) + 1;
         *(unsigned int *)(temp_v0 + 0x144) = 1;
@@ -736,7 +736,7 @@ LAB_0025e5ec:
       if (*(int *)(*(int *)(temp_v0 + 0x110) + temp_v1 * 4 + 0x94) != 0) goto LAB_0025e63c;
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 9);
-    FUN_0039a3b4(*(int *)(temp_v0 + 0x110),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22));
+    textureRequestCacheGet(*(int *)(temp_v0 + 0x110),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22));
   }
 LAB_0025e63c:
   temp_v5 = fourPtrsAllNull(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c));

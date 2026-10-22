@@ -11,13 +11,13 @@ extern u8 entry;
 void FUN_0042b478(void *);
 void FUN_0042ce3c(void *);
 void FUN_001aa330(void *);
-void FUN_002f5020(void *, void (*)(void *), u32 size, u32 count);
+void __aeabi_vec_ctor_nocookie_nodtor(void *, void (*)(void *), u32 size, u32 count);
 s32 emptyStub_002f4370(void *, UnitHeapModuleDestructor, void *module);
 
 // Initialize the record pool, module lock and three fixed-size unit heaps.
 void unitHeapModuleInitialize(void)
 {
-    FUN_002f5020(DAT_0062d410, FUN_0042b478, sizeof(UnitHeapModuleRecord), 32);
+    __aeabi_vec_ctor_nocookie_nodtor(DAT_0062d410, FUN_0042b478, sizeof(UnitHeapModuleRecord), 32);
     DAT_005893a8 = 0;
     DAT_0062d400 = 0;
     nn_os_CriticalSection_Initialize(&DAT_0062d400);

@@ -5,8 +5,8 @@
 extern "C" {
 
 int uniteBuildInheritedSkillCandidates(unsigned int, int, int);
-int FUN_0029c528(unsigned int, int, int, int, int);
-int FUN_0029c6b0(int);
+int uniteMergeInheritedSkillsAndStats(unsigned int, int, int, int, int);
+int unitRecalculateEffectiveStats(int);
 int FUN_0029cde0(int, int);
 int FUN_0029dc74(unsigned int, int, int, unsigned int, unsigned int);
 int rt_memcpy_w(int, int, int);
@@ -19,8 +19,8 @@ typedef struct {
 extern unsigned int *g_unite; /* 0x43dd68 */
 
 /* Supplied declaration required: uniteBuildInheritedSkillCandidates. */
-/* Supplied declaration required: FUN_0029c528. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: uniteMergeInheritedSkillsAndStats. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: FUN_0029dc74. */
@@ -66,7 +66,7 @@ unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param
     if (temp_v2 == 0 || temp_v0 == 0) {
       return 0;
     }
-    FUN_0029c528(*puVar1,temp_v2,temp_v0,0,param_1);
+    uniteMergeInheritedSkillsAndStats(*puVar1,temp_v2,temp_v0,0,param_1);
     uniteBuildInheritedSkillCandidates((puVar1[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,temp_v2,temp_v0);
     temp_v2 = 0;
     do {
@@ -90,7 +90,7 @@ unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x18);
-    FUN_0029c6b0(param_1);
+    unitRecalculateEffectiveStats(param_1);
   }
   return 1;
 }

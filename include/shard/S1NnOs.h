@@ -10,4 +10,10 @@ typedef struct LightEvent {
     /* 0x04 */ s32 lock; /* SimpleLock word */
 } LightEvent;
 
+/* Work block passed to the applet parameter registration helper. */
+typedef struct AppletParameterState {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 parameter;
+} AppletParameterState;
+
 #endif

@@ -41,4 +41,30 @@ typedef struct SizeCalculator {
     /* 0x08 */ u32 maxAlignment;
 } SizeCalculator;
 
+/* Six self-relative vertex buffers share a resource element count. */
+struct VertexBufferStorage {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 handle;
+    /* 0x1C */ void *allocation;
+};
+
+struct VertexBufferResource {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x28];
+    /* 0x2C */ u32 count;
+    /* 0x30 */ u8 unk30[8];
+    /* 0x38 */ RelativePointer streams[6];
+
+    static VertexBufferResource *cast(void *object)
+    {
+        VertexBufferResource *resource = (VertexBufferResource *)object;
+        return resource != NULL && (resource->flags & 0x20000009) == 0x20000009 ? resource : NULL;
+    }
+
+    VertexBufferStorage *stream(u8 index)
+    {
+        return (VertexBufferStorage *)streams[index].get();
+    }
+};
+
 #endif

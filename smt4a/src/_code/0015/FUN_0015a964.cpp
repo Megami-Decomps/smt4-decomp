@@ -9,7 +9,7 @@ int FUN_001a2e74(unsigned int, int);
 int FUN_001a30ec(unsigned int *);
 int FUN_001a3220(unsigned int *, int);
 int FUN_001a3338(unsigned int, int, unsigned int *, int, unsigned int);
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -32,7 +32,7 @@ extern unsigned int DAT_0061a628; /* 0x61a628 */
 /* Supplied declaration required: FUN_001a30ec. */
 /* Supplied declaration required: FUN_001a3220. */
 /* Supplied declaration required: FUN_001a3338. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern void nn_applet_CTR_detail_GetDisplayInfo(unsigned int);
 
 
@@ -45,7 +45,7 @@ unsigned int FUN_0015a964(unsigned int param_1)
   unsigned int temp_v1;
   unsigned int temp_v2;
   
-  FUN_002f5020(&temp_v0,&LAB_001a2a68,0x10,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v0,&LAB_001a2a68,0x10,2);
   nn_applet_CTR_detail_GetDisplayInfo((unsigned int)&temp_v0);
   FUN_001a2b80(param_1);
   DAT_0061a61c = temp_v1;

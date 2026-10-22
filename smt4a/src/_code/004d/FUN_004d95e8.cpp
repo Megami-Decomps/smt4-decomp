@@ -9,7 +9,7 @@ int holderSetFlagBits(int, int);
 int FUN_0017fd20(unsigned int *, int);
 int FUN_002e3140(void);
 int onlineContextGetInstance(void);
-int FUN_002e6e34(unsigned char [12], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefAddRef(unsigned int *);
 int operatorNew(int);
@@ -33,7 +33,7 @@ extern unsigned char DAT_0055cae4; /* 0x55cae4 */
 /* Supplied declaration required: FUN_0017fd20. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: onlineContextGetInstance. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: operatorNew. */
@@ -108,7 +108,7 @@ unsigned int * FUN_004d95e8(int param_1,unsigned int param_2,unsigned int param_
   puVar3[0x1c] = (unsigned int)puVar5;
   if (-1 < (int)puVar5) {
     temp_v2 = onlineContextGetInstance();
-    FUN_002e6e34(temp_v3,temp_v2 + 0x58);
+    _ZN9Obj55b28cC1EPv(temp_v3,temp_v2 + 0x58);
     temp_v2 = FUN_002e789a(temp_v1);
     if (temp_v2 != 0) {
       puVar3[0x1a] = *(unsigned int *)(temp_v1 + 0x44);

@@ -9,7 +9,7 @@ int FUN_0029c2cc(...);
 int sndObjectForwardField8(...);
 
 int FUN_0019213c(void);
-int FUN_00210104(...);
+int modelEvaluateFirstScalarChannel(...);
 int FUN_0026e324(...);
 int FUN_0026f824(...);
 int FUN_0026fe0c(void);
@@ -93,7 +93,7 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0019213c. */
-/* Supplied declaration required: FUN_00210104. */
+/* Supplied declaration required: modelEvaluateFirstScalarChannel. */
 /* Supplied declaration required: FUN_00210194. */
 /* Supplied declaration required: commonBgBeginExit. */
 extern int FUN_00215a14(void);
@@ -435,7 +435,7 @@ unsigned int FUN_001e9990(void)
       puVar3[0x26] = (int)temp_v9;
       FUN_0028703c(*(unsigned int *)(puVar3[0x24] + 8));
       in_s0 = (float)temp_v9;
-      FUN_00210104(*(unsigned int *)(puVar3[0x24] + 8));
+      modelEvaluateFirstScalarChannel(*(unsigned int *)(puVar3[0x24] + 8));
       puVar10 = (unsigned int *)puVar3[0x24];
       *puVar10 = *puVar10 & 0xfffffffd;
       *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 1;

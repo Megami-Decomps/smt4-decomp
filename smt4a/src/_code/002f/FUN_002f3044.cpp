@@ -9,13 +9,13 @@ struct Object {
     u8 mutex[0x30];
     void *slots[8];
 };
-void FUN_002e6e34(Guard *,void *);
+void _ZN9Obj55b28cC1EPv(Guard *,void *);
 void _ZN9Obj55b28cD1Ev(Guard *);
 void *operatorNew(u32);
 void *FUN_00301490(void *);
 void *FUN_002f3044(Object *object) {
     Guard guard;
-    FUN_002e6e34(&guard,object->mutex);
+    _ZN9Obj55b28cC1EPv(&guard,object->mutex);
     u32 slot=0;
     while(slot<8 && object->slots[slot])++slot;
     void *result=operatorNew(64);

@@ -9,4 +9,11 @@ struct OnlineCallbackResult {
     u32 extra;  // 0x08
 };
 
+/* OnlineCore's Result additionally records the diagnostic source location. */
+struct OnlineDiagnosticResult {
+    /* 0x00 */ u32 code;
+    /* 0x04 */ const char *file;
+    /* 0x08 */ u32 line;
+};
+
 #endif

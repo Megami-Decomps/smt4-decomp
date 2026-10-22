@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int FUN_002c0944(unsigned int);
 int FUN_002c1b64(int, int);
 int FUN_002c39a4(int);
@@ -12,7 +12,7 @@ int FUN_002c39a4(int);
 typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -45,7 +45,7 @@ unsigned int FUN_0020f3a8(int *param_1)
   FUN_002c39a4(g_titleScene);
   FUN_002c1b64(g_titleScene,0);
   FUN_002c0944(temp_v4);
-  FUN_0025b750();
+  forwardRecoveredCallback();
   temp_v0 = g_titleScene;
   piVar5 = (int *)(g_titleScene + 0x124c);
   temp_v1 = *piVar5;

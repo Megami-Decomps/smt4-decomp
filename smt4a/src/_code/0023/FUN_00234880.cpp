@@ -18,7 +18,7 @@ extern int g_gameState; /* 0x5f15fc */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
 extern int saveSlotFindSelected(void);
-extern int FUN_0017760c(void);
+extern int recordGetScaledMaximum(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
@@ -73,7 +73,7 @@ void FUN_00234880(void)
         if (-1 < *(char *)(temp_v6 + 0x1c88 + temp_v10)) {
           temp_v7 = gameGetSlotRecord();
           temp_v3 = temp_v3 + *(short *)(temp_v7 + 0x2a);
-          temp_v7 = FUN_0017760c();
+          temp_v7 = recordGetScaledMaximum();
           temp_v4 = temp_v4 + temp_v7;
         }
         temp_v10 = temp_v10 + 1;

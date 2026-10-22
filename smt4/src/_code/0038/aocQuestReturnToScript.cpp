@@ -8,7 +8,7 @@
 extern "C" {
 extern AocMain *g_aocMain;
 RequestParameters *timeInitializeActiveState(RequestParameters *parameters);
-TimeWords *resultPairInitialize(TimeWords *result, u32 code);
+TimeWords *_ZN18WindowStatusResultC1Ej(TimeWords *result, u32 code);
 void FUN_002ba968(QueuedRequestState *state, const RequestParameters *parameters, u32 argument, s32 mode);
 void scrScriptProcessDestroy(ScriptState *process);
 ScriptState *FUN_00297060(void *script, void *messages);
@@ -46,7 +46,7 @@ void aocQuestReturnToScript(Obj526238 *object)
             requestKind = 1;
             parameters.words[3] = 0;
             TimeWords result;
-            const TimeWords *converted = resultPairInitialize(&result, 0);
+            const TimeWords *converted = _ZN18WindowStatusResultC1Ej(&result, 0);
             parameters.words[1] = converted->low;
             parameters.words[2] = converted->high;
             requestKind = 200;

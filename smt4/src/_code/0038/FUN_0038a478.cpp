@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b75ec(...);
-int FUN_002b93c8(unsigned int *);
+int effectRenderTransformedInstance(unsigned int *);
 int FUN_002ba12c(int);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
@@ -33,7 +33,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -100,7 +100,7 @@ unsigned int FUN_0038a478(void)
       *(unsigned char *)(temp_v4 + 0x12c4) = 0;
     }
     VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(puVar2 + 0x156);
+    effectRenderTransformedInstance(puVar2 + 0x156);
     temp_v4 = g_titleScene;
     temp_v1 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v4 + 0x12ac);
@@ -111,7 +111,7 @@ unsigned int FUN_0038a478(void)
       *(unsigned char *)(temp_v4 + 0x12c4) = 0;
     }
     VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(puVar2 + 0x110);
+    effectRenderTransformedInstance(puVar2 + 0x110);
     temp_v4 = g_titleScene;
     piVar11 = (int *)(g_titleScene + 0x124c);
     temp_v1 = *piVar11;

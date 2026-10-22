@@ -11,7 +11,7 @@ int FUN_00116594(void);
 int FUN_001165c0(int);
 int FUN_0011c0bc(int);
 int FUN_00123306(...);
-int FUN_002e6e34(char **, int);
+int _ZN9Obj55b28cC1EPv(char **, int);
 int _ZN9Obj55b28cD1Ev(char **);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(...);
@@ -54,7 +54,7 @@ extern unsigned char LAB_0011c4a0; /* 0x11c4a0 */
 /* Supplied declaration required: FUN_0011c0bc. */
 /* Supplied declaration required: FUN_00123306. */
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
@@ -110,7 +110,7 @@ void FUN_0011c290(int *param_1,int param_2,int param_3,int param_4)
   FUN_003112f6(piVar1 + 1,temp_v4);
   if (temp_v13[0] != '\x01') {
     temp_v0 = onlineContextGetInstance();
-    FUN_002e6e34(&temp_v5,temp_v0 + 0x58);
+    _ZN9Obj55b28cC1EPv(&temp_v5,temp_v0 + 0x58);
     (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v8[0],temp_v9,param_3);
     _ZN9Obj55b28cD1Ev(&temp_v5);
   }

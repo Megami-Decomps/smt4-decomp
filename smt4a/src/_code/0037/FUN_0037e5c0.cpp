@@ -11,7 +11,7 @@ int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00185e84(int, int, int, int, int, int);
 int statusDownCreatePanelEffects(int, int, int);
-int FUN_00389d9c(...);
+int statDrawClampedDelta(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -37,7 +37,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185e84. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: statusDownCreatePanelEffects. */
-/* Supplied declaration required: FUN_00389d9c. */
+/* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(short, unsigned int);
 extern unsigned int FUN_004bcbb4(unsigned int, short);
 
@@ -80,7 +80,7 @@ void FUN_0037e5c0(int param_1,int param_2,int param_3)
     else {
       FUN_00185e84((int)temp_v0,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0xd3,
                    0,0);
-      FUN_00389d9c(*(unsigned int *)(temp_v3 + 0x24fc),(int)temp_v0,*(short *)(temp_v1 + 8) + param_2,
+      statDrawClampedDelta(*(unsigned int *)(temp_v3 + 0x24fc),(int)temp_v0,*(short *)(temp_v1 + 8) + param_2,
                    *(short *)(temp_v1 + 10) + param_3,0xd3,0);
       temp_v2 = FUN_004bcbb4(*(unsigned int *)(temp_v3 + 0x24fc),temp_v0);
     }

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int onlineStringConstruct(...);
+int _ZN9Obj55aff4C1EPKc(...);
 int FUN_002eca44(int);
-int FUN_002f5020(int, int, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int, int, int, int);
 
 typedef struct fn_00116f6c_arg0 fn_00116f6c_arg0;
 struct fn_00116f6c_arg0 {
@@ -26,11 +26,11 @@ extern unsigned char DAT_00559dd4; /* 0x559dd4 */
 extern unsigned char DAT_00559e24; /* 0x559e24 */
 
 extern int FUN_00103884(int);
-/* Supplied declaration required: onlineStringConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4C1EPKc. */
 extern unsigned int *FUN_002eca10(fn_00116f6c_arg0 *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002eca44. */
 extern int vectorInitEmpty2(int);
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -46,7 +46,7 @@ int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar1[0x1b] = 0;
   *puVar1 = (unsigned int)&DAT_00559dd4;
   puVar1[0x1a] = (unsigned int)&DAT_00559e24;
-  temp_v0 = onlineStringConstruct(puVar1 + 0x1c,&LAB_00116fe0);
+  temp_v0 = _ZN9Obj55aff4C1EPKc(puVar1 + 0x1c,&LAB_00116fe0);
   *(unsigned char *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   temp_v0 = temp_v0 + 0x10;
@@ -56,10 +56,10 @@ int FUN_00116f6c(fn_00116f6c_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 + 8) = 0;
   temp_v0 = vectorInitEmpty2(temp_v0 + 0xc);
   *(unsigned char *)(temp_v0 + 0xc) = 0;
-  temp_v0 = onlineStringConstruct(temp_v0 + 0x10,&LAB_00116fe0);
+  temp_v0 = _ZN9Obj55aff4C1EPKc(temp_v0 + 0x10,&LAB_00116fe0);
   *(unsigned int *)(temp_v0 + 8) = 0;
   temp_v0 = temp_v0 + 0xc;
-  FUN_002f5020(temp_v0,0x2ed913,0xc,4);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,0x2ed913,0xc,4);
   return temp_v0 - 0x108;
 }
 

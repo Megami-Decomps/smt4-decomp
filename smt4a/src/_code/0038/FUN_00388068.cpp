@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern int gameDataBlocksGetSaveData(void);
-extern int FUN_0017760c(int);
+extern int recordGetScaledMaximum(int);
 extern int gameFlagIsSet(unsigned int);
 extern int slotRecordFindById(void);
 /* Supplied declaration required: FUN_003e52bc. */
@@ -43,7 +43,7 @@ void FUN_00388068(void)
     do {
       if ((((*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x28310) & 0xffff) != 0) &&
           (temp_v2 = slotRecordFindById(), temp_v2 != 0)) && (temp_v3 = bitsAt60Test(temp_v2,1), temp_v3 == 0)) {
-        temp_v3 = FUN_0017760c(temp_v2);
+        temp_v3 = recordGetScaledMaximum(temp_v2);
         temp_v0 = ((short)temp_v3 - *(short *)(temp_v2 + 0xe)) + *(short *)(temp_v2 + 0x2a);
         if (temp_v0 <= temp_v3) {
           temp_v3 = (int)temp_v0;

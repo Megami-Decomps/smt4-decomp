@@ -7,13 +7,13 @@ extern "C" {
 int FUN_003d4dd4(unsigned int, unsigned int, unsigned int);
 
 extern int DAT_00571530; /* 0x571530 */
-extern float DAT_005e1530; /* 0x5e1530 */
+extern float g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern float DAT_005e1534; /* 0x5e1534 */
 extern float DAT_005e1538; /* 0x5e1538 */
-extern float DAT_005e153c; /* 0x5e153c */
+extern float g_cameraAlternateProgressPrevious; /* 0x5e153c */
 extern float DAT_005e1540; /* 0x5e1540 */
 extern float DAT_005e1544; /* 0x5e1544 */
-extern float DAT_005e1548; /* 0x5e1548 */
+extern float g_cameraUnoffsetStartPosition; /* 0x5e1548 */
 extern float DAT_005e154c; /* 0x5e154c */
 extern float DAT_005e1550; /* 0x5e1550 */
 
@@ -39,7 +39,7 @@ void FUN_004f2094(int param_1)
   pfVar4 = (float *)(param_1 + 0x5dc);
   if (DAT_00571530 == 2) {
     temp_v2 = *(float *)(param_1 + 0x5e0);
-    temp_v3 = *pfVar4 - DAT_005e1548;
+    temp_v3 = *pfVar4 - g_cameraUnoffsetStartPosition;
     temp_v4 = temp_v2 - DAT_005e154c;
     temp_v5 = *(float *)(param_1 + 0x5e4) - DAT_005e1550;
     FUN_003d4dd4(*(unsigned int *)(param_1 + 0x8b0),*(unsigned int *)(param_1 + 0x8a8),
@@ -63,7 +63,7 @@ void FUN_004f2094(int param_1)
     *(float *)(param_1 + 0x888) = temp_v4 * temp_v2;
     return;
   }
-  *pfVar3 = DAT_005e153c;
+  *pfVar3 = g_cameraAlternateProgressPrevious;
   *(float *)&*(unsigned int *)(param_1 + 0x888) = temp_v0;
   *(float *)&*(unsigned int *)(param_1 + 0x88c) = temp_v1;
   FUN_003d4dd4(*(unsigned int *)(param_1 + 0x8b0),*(unsigned int *)(param_1 + 0x8a8),
@@ -77,13 +77,13 @@ void FUN_004f2094(int param_1)
        in_s0;
   temp_v2 = DAT_005e1538;
   temp_v0 = DAT_005e1534;
-  DAT_005e153c = *(float *)(param_1 + 0x884);
+  g_cameraAlternateProgressPrevious = *(float *)(param_1 + 0x884);
   DAT_005e1540 = *(float *)(param_1 + 0x888);
   DAT_005e1544 = *(float *)(param_1 + 0x88c);
-  *pfVar3 = DAT_005e1530;
+  *pfVar3 = g_cameraAlternateProgressStart;
   *(float *)&*(unsigned int *)(param_1 + 0x888) = temp_v0;
   *(float *)(param_1 + 0x88c) = temp_v2;
-  *(float *)(param_1 + 0x854) = DAT_005e153c + *(float *)(param_1 + 0x608);
+  *(float *)(param_1 + 0x854) = g_cameraAlternateProgressPrevious + *(float *)(param_1 + 0x608);
   *(float *)(param_1 + 0x858) = DAT_005e1540 + *(float *)(param_1 + 0x60c);
   temp_v2 = DAT_005e1544 + *(float *)(param_1 + 0x610);
   *(float *)(param_1 + 0x85c) = temp_v2;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int *);
+int _ZN9Obj55b28cC1EPv(int *, int *);
 int _ZN9Obj55b28cD1Ev(int *);
 int ringPop(void);
 
@@ -12,7 +12,7 @@ int ringPop(void);
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: ringPop. */
 
@@ -31,7 +31,7 @@ unsigned long long FUN_0010ef7a(int *param_1,unsigned int param_2,unsigned int p
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002e6e34(&uStack_18,param_1 + 1);
+  _ZN9Obj55b28cC1EPv(&uStack_18,param_1 + 1);
   temp_v0 = *param_1;
   if (*(int *)(temp_v0 + 0x18) != 0) {
     temp_v1 = *(int *)(*(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0x14) * 4);

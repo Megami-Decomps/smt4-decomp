@@ -5,7 +5,7 @@
 extern "C" {
 
 int onlineContextGetInstance(void);
-int FUN_002e6e34(unsigned char [16], int);
+int _ZN9Obj55b28cC1EPv(unsigned char [16], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [16]);
 int FUN_002e78d0(unsigned int, int, int);
 int strDestroy(unsigned char [32]);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int FUN_001059f4(int, unsigned int, unsigned int, unsigned int, unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: onlineContextGetInstance. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
@@ -50,7 +50,7 @@ FUN_00111482(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   temp_v6 = param_3;
   uStack_18 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(temp_v4,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0 + 0x58);
   temp_v0 = FUN_002e789a(param_1);
   if (temp_v0 != 0) {
     FUN_002ece14(temp_v3,temp_v6);

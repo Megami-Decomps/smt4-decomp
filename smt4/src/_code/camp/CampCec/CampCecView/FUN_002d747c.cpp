@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0026eda8(...);
 int campCecDisplaySetRecord(...);
-int FUN_0026ef04(unsigned int);
+int uiDrawRecordNameLabels(unsigned int);
 int saveGetIndexedMapValue(...);
-int FUN_0026f204(unsigned int, unsigned int, unsigned int);
+int characterInfoPanelPopulate(unsigned int, unsigned int, unsigned int);
 int FUN_0026f784(void);
 int linkHolderApplyFlag(...);
 int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
@@ -48,9 +48,9 @@ extern unsigned int *g_campCecView; /* 0x43db10 */
 extern unsigned int FUN_0024aaa0(void);
 /* Supplied declaration required: FUN_0026eda8. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
-/* Supplied declaration required: FUN_0026ef04. */
+/* Supplied declaration required: uiDrawRecordNameLabels. */
 /* Supplied declaration required: saveGetIndexedMapValue. */
-/* Supplied declaration required: FUN_0026f204. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_0026f784. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
@@ -157,7 +157,7 @@ void FUN_002d747c(void)
   do {
     temp_v4 = saveGetIndexedMapValue(puVar1[0x50] + temp_v0,temp_v4);
     if (*(short *)(temp_v4 + 0x48) != 0) {
-      FUN_0026ef04(puVar1[temp_v0 + 0x4b]);
+      uiDrawRecordNameLabels(puVar1[temp_v0 + 0x4b]);
       temp_v4 = temp_v3;
     }
     temp_v0 = temp_v0 + 1;
@@ -165,7 +165,7 @@ void FUN_002d747c(void)
   temp_v1 = saveGetIndexedMapValue(puVar1[0x4f],temp_v4);
   puVar1[3] = temp_v1;
   puVar1 = g_campCecView;
-  FUN_0026f204(g_campCecView[0x4e],g_campCecView[3],g_campCecView[0x58]);
+  characterInfoPanelPopulate(g_campCecView[0x4e],g_campCecView[3],g_campCecView[0x58]);
   FUN_0030a84c(puVar1[3],&temp_v5);
   temp_v4 = puVar1[2];
   FUN_0026f784();

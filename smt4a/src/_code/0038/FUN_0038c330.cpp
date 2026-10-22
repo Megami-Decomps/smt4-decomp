@@ -1,4 +1,3 @@
-/* NON_MATCHING: combatant/status-mask temporaries use r1/r0 instead of retail r0/r1. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 

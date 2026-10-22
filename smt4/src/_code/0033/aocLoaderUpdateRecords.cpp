@@ -49,7 +49,7 @@ AocRecord *FUN_0027d9e8(AocLoader *loader, u32 id);
 s32 nkdwHeaderParse(AocRecord *record);
 s32 FUN_00294fe0(AocRecord *record);
 void aocHandleButtons(AocRecord *record, s32 mode);
-void FUN_0023fb84(AocRecord *record);
+void modelAnimationEnsureData(AocRecord *record);
 AocLoaderTask *FUN_00334228(AocLoaderTask *task, AocLoader *loader);
 
 } /* extern "C" */
@@ -79,7 +79,7 @@ AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
             if (FUN_00294fe0(record) == 0) {
                 ready = 0;
             } else {
-                FUN_0023fb84(record);
+                modelAnimationEnsureData(record);
                 slot->state |= 2;
                 loader->records[i] = *record;
             }

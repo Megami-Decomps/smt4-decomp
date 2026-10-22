@@ -5,7 +5,7 @@
 extern "C" {
 
 int emptyStub_002f4370(unsigned int *, int, int);
-int FUN_002f5020(void);
+int __aeabi_vec_ctor_nocookie_nodtor(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,14 +18,14 @@ extern unsigned int DAT_005b445c; /* 0x5b445c */
 extern unsigned int DAT_005b4460; /* 0x5b4460 */
 
 /* Supplied declaration required: emptyStub_002f4370. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 void FUN_00512220(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_002f5020();
+  __aeabi_vec_ctor_nocookie_nodtor();
   DAT_005b4454 = 0;
   DAT_005b4458 = 1;
   DAT_005b445c = 0;

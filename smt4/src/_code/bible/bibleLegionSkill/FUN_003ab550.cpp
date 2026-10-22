@@ -39,7 +39,7 @@ extern int *DAT_0043d9f8; /* 0x43d9f8 */
 
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-extern unsigned int *uiSelectionControllerConstruct(void);
+extern unsigned int *_ZN9Obj422594C1Ev(void);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_00233670. */
@@ -91,7 +91,7 @@ void FUN_003ab550(int *param_1)
   asdOperatorNew();
   puVar5 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
-    puVar5 = (unsigned int *)uiSelectionControllerConstruct();
+    puVar5 = (unsigned int *)_ZN9Obj422594C1Ev();
     *puVar5 = (unsigned int)&DAT_00422434;
   }
   param_1[0x164] = (int)puVar5;

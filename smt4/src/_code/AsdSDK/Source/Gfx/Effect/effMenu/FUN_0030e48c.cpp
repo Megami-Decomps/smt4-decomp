@@ -8,7 +8,7 @@ extern "C" {
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int effectSpawnPositionDefault(...);
-int FUN_0025b750(void);
+int forwardRecoveredCallback(void);
 int FUN_00263028(...);
 int FUN_002630e0(...);
 int FUN_002b011c(void);
@@ -17,7 +17,7 @@ int FUN_002c1b64(...);
 int memAlloc(int, int, int, int);
 int FUN_002c39a4(int);
 int asdMemFree(void);
-int FUN_002c4f8c(int, unsigned int);
+int effectRestoreSavedRenderPairs(int, unsigned int);
 int FUN_002c733c(...);
 int effectDrawProjectedCircleFan(...);
 int VectorSignedToFloat(...);
@@ -51,7 +51,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: FUN_0025b750. */
+/* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_00263028. */
 /* Supplied declaration required: FUN_002630e0. */
 /* Supplied declaration required: FUN_002b011c. */
@@ -60,7 +60,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c39a4. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c4f8c. */
+/* Supplied declaration required: effectRestoreSavedRenderPairs. */
 extern unsigned int FUN_002c501c(void);
 extern int FUN_002c5d80(unsigned int);
 /* Supplied declaration required: FUN_002c733c. */
@@ -247,7 +247,7 @@ joined_r0x0030e620:
       FUN_00263028((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
       temp_v7 = asdCameraValueGet(temp_v7);
-      FUN_002c4f8c(g_titleScene,temp_v7);
+      effectRestoreSavedRenderPairs(g_titleScene,temp_v7);
       break;
     case 9:
       temp_v15 = param_2[2];
@@ -262,7 +262,7 @@ joined_r0x0030e620:
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
-      FUN_0025b750();
+      forwardRecoveredCallback();
       break;
     case 10:
       temp_v7 = param_2[8];

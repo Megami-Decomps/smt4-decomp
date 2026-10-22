@@ -3,7 +3,7 @@
 extern "C" {
 
 void asdTextureRelease(void *buffer);
-void FUN_002e3304(u32 handle);
+void bufferDeleteOwnedPair(u32 handle);
 void asdMemFree(void *memory);
 
 typedef struct Holder {
@@ -19,7 +19,7 @@ void FUN_002ce8b0(Holder *object)
     if (object->buffer != NULL) {
         asdTextureRelease(object->buffer);
     }
-    FUN_002e3304(object->handle);
+    bufferDeleteOwnedPair(object->handle);
     asdMemFree(object);
 }
 

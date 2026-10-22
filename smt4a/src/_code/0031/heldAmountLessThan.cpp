@@ -5,7 +5,7 @@ extern "C" {
 extern Player1C *gameGetPlayerData(void);
 extern SlotTable *gameGetSlotTable(void);
 extern Lookup62 *gameGetSlotRecord(s8 slot);
-extern s32 FUN_0017760c(Lookup62 *entry);
+extern s32 recordGetScaledMaximum(Lookup62 *entry);
 extern Lookup62 *FUN_003e4d68(u32 index);
 extern u32 FUN_00187168(Lookup62 *entry);
 
@@ -25,7 +25,7 @@ u32 heldAmountLessThan(s32 amount, u32 id)
         table = gameGetSlotTable();
         for (i = 0; i < 0x18; i++) {
             if (table->slots[i] >= 0 && (entry = gameGetSlotRecord(table->slots[i])) != NULL && entry->id == id) {
-                if (FUN_0017760c(entry) < amount) {
+                if (recordGetScaledMaximum(entry) < amount) {
                     return 1;
                 }
                 return 0;

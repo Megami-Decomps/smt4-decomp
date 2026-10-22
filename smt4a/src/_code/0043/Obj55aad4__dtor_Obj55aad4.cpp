@@ -11,8 +11,8 @@ extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 extern unsigned char DAT_0055aadc; /* 0x55aadc */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int onlineStringDestroy(int);
-extern int FUN_003106d0(int);
+extern int _ZN9Obj55aff4D1Ev(int);
+extern int _ZN9Obj55b104D1Ev(int);
 extern int _ZN9Obj55ac68D1Ev(unsigned int *);
 
 
@@ -31,12 +31,12 @@ int _ZN9Obj55aad4D1Ev(unsigned int *param_1)
     (**(romwright_code **)*puVar2)(puVar2);
   }
   asdOperatorDeleteArray(*(int *)(temp_v0 - 0x20));
-  temp_v0 = FUN_003106d0(temp_v0 - 0x40);
+  temp_v0 = _ZN9Obj55b104D1Ev(temp_v0 - 0x40);
   *(unsigned char **)(temp_v0 - 0x18) = &DAT_0055a4c0;
   asdOperatorDeleteArray(*(unsigned int *)(temp_v0 - 0x10));
   *(unsigned char **)(temp_v0 - 0x2c) = &DAT_0055a4c0;
   asdOperatorDeleteArray(*(unsigned int *)(temp_v0 - 0x24));
-  temp_v0 = onlineStringDestroy(temp_v0 - 0x34);
+  temp_v0 = _ZN9Obj55aff4D1Ev(temp_v0 - 0x34);
   return temp_v0 - 0x14;
 }
 

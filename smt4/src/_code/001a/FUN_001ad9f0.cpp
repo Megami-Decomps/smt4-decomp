@@ -8,7 +8,7 @@ int FUN_00186a48(void);
 int uiFadeDraw(int);
 int FUN_00197e34(void);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
-int FUN_002b93c8(...);
+int effectRenderTransformedInstance(...);
 int FUN_002ba12c(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -35,7 +35,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: uiFadeDraw. */
 /* Supplied declaration required: FUN_00197e34. */
 /* Supplied declaration required: drawSkillCategoryLabel. */
-/* Supplied declaration required: FUN_002b93c8. */
+/* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
@@ -145,7 +145,7 @@ unsigned int FUN_001ad9f0(void)
     temp_v7 = 0.28f;
     FUN_002ba12c(g_titleScene);
     VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b93c8(temp_v9);
+    effectRenderTransformedInstance(temp_v9);
   }
   temp_v2 = g_titleScene;
   piVar8 = (int *)(g_titleScene + 0x124c);

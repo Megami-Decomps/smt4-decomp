@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int buffersClearFlagsRefresh(int);
 
@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: buffersClearFlagsRefresh. */
 
@@ -41,7 +41,7 @@ void FUN_002f312e(int param_1,int param_2,unsigned int param_3)
   iStack_20 = param_1;
   temp_v8 = param_2;
   temp_v9 = param_3;
-  FUN_002e6e34(temp_v5,*(unsigned int *)(param_1 + 0x22c));
+  _ZN9Obj55b28cC1EPv(temp_v5,*(unsigned int *)(param_1 + 0x22c));
   if (*(int *)(param_1 + 0x18) != *(int *)(param_1 + 0x14)) {
     if (*(char *)(param_1 + 0x22a) != '\0') {
       buffersClearFlagsRefresh(param_1);

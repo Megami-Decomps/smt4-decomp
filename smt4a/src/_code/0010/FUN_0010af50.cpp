@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0012e1dc(...);
 int asdOperatorDeleteArray(...);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int FUN_002f27de(...);
 
@@ -27,7 +27,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0012e1dc. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
 extern int FUN_002eb624(void **);
@@ -49,7 +49,7 @@ int FUN_0010af50(fn_0010af50_arg0 *param_1)
   unsigned char temp_v6 [8];
   
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v3,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v3,temp_v0);
   FUN_002f27de(param_1);
   _ZN9Obj55b28cD1Ev(temp_v3);
   temp_v1 = FUN_002eb624(&param_1[2].field_0x14);

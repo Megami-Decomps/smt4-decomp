@@ -41,7 +41,7 @@ int FUN_00334694(...);
 int FUN_00359a08(...);
 int FUN_0035dc10(void);
 int FUN_0035dd60(...);
-int FUN_0035deb0(void);
+int uniteCreatePreviewModel(void);
 int FUN_00408184(...);
 int countersRaiseA(...);
 int FUN_004bd17c(...);
@@ -217,7 +217,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_001643b4. */
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned short FUN_0017760c(int);
+extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183f58. */
@@ -342,7 +342,7 @@ extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035dc10. */
 /* Supplied declaration required: FUN_0035dd60. */
 /* Supplied declaration required: contentEntryFindById. */
-/* Supplied declaration required: FUN_0035deb0. */
+/* Supplied declaration required: uniteCreatePreviewModel. */
 extern int lmapSceneGetScript(void);
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
@@ -2944,7 +2944,7 @@ LAB_001f9868:
       return 0;
     }
     if (piVar3[0x101] == 0x1f) {
-      FUN_0035deb0();
+      uniteCreatePreviewModel();
     }
     ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(piVar3[0x2482] + 4));
     if ((int *)piVar3[0x2482] != (int *)0x0) {
@@ -3035,7 +3035,7 @@ LAB_001f9868:
       *(unsigned int *)(temp_v5 + 0x44) = 0;
       *(unsigned int *)(temp_v5 + 0x48) = 0;
       FUN_004bd17c(temp_v5);
-      temp_v3 = FUN_0017760c(temp_v5);
+      temp_v3 = recordGetScaledMaximum(temp_v5);
       *(unsigned short *)(temp_v5 + 0x2a) = temp_v3;
       *(unsigned short *)(temp_v5 + 0x2c) = *(unsigned short *)(temp_v5 + 0x10);
       if (temp_v4 == 0) {

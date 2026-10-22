@@ -19,7 +19,7 @@ int handleRegistryRegisterObject(...);
 int btlCameraFinishTransition(...);
 int FUN_004f65d4(...);
 int FUN_004f7778(...);
-int FUN_004f8a58(...);
+int battleCloneRoutedMaterialChannels(...);
 int FUN_004f8d90(...);
 int rt_memcpy_w(...);
 
@@ -54,7 +54,7 @@ extern int FUN_0040ab8c(unsigned int);
 /* Supplied declaration required: btlCameraFinishTransition. */
 /* Supplied declaration required: FUN_004f65d4. */
 /* Supplied declaration required: FUN_004f7778. */
-/* Supplied declaration required: FUN_004f8a58. */
+/* Supplied declaration required: battleCloneRoutedMaterialChannels. */
 /* Supplied declaration required: FUN_004f8d90. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -205,7 +205,7 @@ LAB_004fab24:
         temp_v6 = temp_v2 * 0x1d0 + 0x50;
         if (((*(unsigned int *)(*(int *)(temp_v3 + 0x1ed4) + temp_v6) & 1) != 0) &&
            ((*(unsigned int *)(*(int *)(temp_v4 + 0x1ed4) + temp_v6) & 0x400) != 0)) {
-          FUN_004f8a58(param_1,temp_v7,temp_v2);
+          battleCloneRoutedMaterialChannels(param_1,temp_v7,temp_v2);
         }
       }
     }

@@ -43,7 +43,7 @@ extern int FUN_00128cd0(int);
 /* Supplied declaration required: FUN_002e7168. */
 extern int operatorNew(unsigned int);
 extern int vectorInitEmpty(int);
-extern unsigned int *sharedRefInit(void);
+extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 extern unsigned int FUN_002eac34(unsigned int);
 extern int FUN_002ecd54(int);
 /* Supplied declaration required: FUN_002ecef0. */
@@ -67,7 +67,7 @@ int FUN_00121cc4(void)
   unsigned int temp_v5;
   unsigned char temp_v6 [12];
   
-  puVar1 = (unsigned int *)sharedRefInit();
+  puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_0055b0ec;
   temp_v0 = FUN_002e7168(puVar1 + 4,0x20000000);
   temp_v0 = FUN_002ed074(temp_v0 + 0x30,1);

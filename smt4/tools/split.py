@@ -121,12 +121,13 @@ def thumb2_literal_load(first, second):
 
 def switch_table(code, at):
     """(table offset, entries) of an armcc ARM switch at `at`, else None: `cmp rM, #N` before
-    `ldr pc, [pc, rM, lsl #2]`, then `b default`, then N words: the case addresses."""
+    `ldr pc, [pc, rM, lsl #2]` (armcc schedules up to a dozen instructions between them), then
+    `b default`, then N words: the case addresses."""
     word = struct.unpack_from("<I", code, at)[0]
     if word & 0x0FFFFFF0 != 0x079FF100:
         return None
     index = word & 0xF
-    for back in range(at - 4, max(at - 24, -1), -4):
+    for back in range(at - 4, max(at - 64, -1), -4):
         cmp = struct.unpack_from("<I", code, back)[0]
         if cmp & 0x0FFFF000 == 0x03500000 | index << 16:  # CMP rM, #imm
             rotate = (cmp >> 8 & 0xF) * 2

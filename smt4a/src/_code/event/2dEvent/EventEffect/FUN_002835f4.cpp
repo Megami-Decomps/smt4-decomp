@@ -12,7 +12,7 @@ int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
 int FUN_0025cba0(...);
-int FUN_002f5020(int *, unsigned char *, int, int);
+int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -55,7 +55,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0025cba0. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 unsigned int FUN_002835f4(void)
@@ -109,7 +109,7 @@ unsigned int FUN_002835f4(void)
     (**(romwright_code **)(temp_v3 + 0x1274))();
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
-  FUN_002f5020(&temp_v11,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v11,&LAB_00192824,0x10,4);
   temp_v11 = 0x3f800000;
   temp_v12 = 0x3f800000;
   temp_v13 = 0x3f800000;

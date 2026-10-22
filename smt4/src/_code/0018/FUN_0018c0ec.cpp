@@ -27,7 +27,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_0029bd4c(void);
 int FUN_0029bde4(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int flagCountUnlockedSlots(...);
 int beginStatusPanelClose(void);
 int FUN_0029ee6c(...);
@@ -81,9 +81,9 @@ int rt_memclr(...);
 int memClear(...);
 int FUN_0033b7a0(...);
 int FUN_0033b838(...);
-int FUN_003c1b18(...);
+int unitApplyLevelGrowth(...);
 unsigned int devilCollectLevelGainSkills(void*, int levelGain, unsigned short* output);
-int FUN_003c2310(...);
+int demonApplyLevelGrowth(...);
 int rt_memcpy_w(...);
 
 int mapDepartAdvanceState(void);
@@ -170,7 +170,7 @@ extern int FUN_00295c60(unsigned short, unsigned char);
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: FUN_00295d7c. */
-extern unsigned int FUN_00295e24(unsigned short, int, int);
+extern unsigned int devilCalculateRankCost(unsigned short, int, int);
 /* Supplied declaration required: FUN_00295eb0. */
 extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: FUN_00295f54. */
@@ -196,7 +196,7 @@ extern int FUN_002973d8(void);
 extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: flagCountUnlockedSlots. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -269,10 +269,10 @@ extern unsigned int FUN_0033b8f4(int);
 extern unsigned int FUN_0033be40(int);
 /* Supplied declaration required: FUN_0033be90. */
 /* Supplied declaration required: FUN_0033c0d4. */
-/* Supplied declaration required: FUN_003c1b18. */
+/* Supplied declaration required: unitApplyLevelGrowth. */
 extern int devilLevelUpsAffordable(unsigned short, unsigned char, int);
 extern int FUN_003c1de8(unsigned char, int);
-/* Supplied declaration required: FUN_003c2310. */
+/* Supplied declaration required: demonApplyLevelGrowth. */
 extern int __aeabi_idivmod(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -622,7 +622,7 @@ LAB_0018c354:
         if (temp_v18 != 0) {
           if (*(char *)(temp_v17 + 0xd4ff) != '\0') {
             temp_v5 = temp_v2 + temp_v8 * 2;
-            temp_v16 = FUN_00295e24(*(unsigned short *)(temp_v18 + 0x46),
+            temp_v16 = devilCalculateRankCost(*(unsigned short *)(temp_v18 + 0x46),
                                   (int)*(short *)(temp_v5 + 0xd49c) + (unsigned int)*(unsigned char *)(temp_v18 + 0x48),
                                   (int)*(char *)(temp_v17 + 0xd531));
             temp_v18 = temp_v2 + temp_v8 * 8;
@@ -676,7 +676,7 @@ LAB_0018c354:
                 *temp_v38 = 1;
               }
               else {
-                temp_v21 = FUN_00295e24(*(unsigned short *)(temp_v18 + 0x46),temp_v6,
+                temp_v21 = devilCalculateRankCost(*(unsigned short *)(temp_v18 + 0x46),temp_v6,
                                       (int)*(char *)(temp_v17 + 0xd531));
                 temp_v14 = *(unsigned int *)(temp_v7 + 0x3ac);
                 temp_v16 = temp_v21 * 0x1000;
@@ -813,7 +813,7 @@ LAB_0018d058:
           *(int *)(temp_v2 + 0xd550) = temp_v18 << 0xc;
           if (temp_v8 != 0) {
             *temp_v29 = 0xff;
-            FUN_003c1b18(temp_v4,(int)(char)temp_v8,0);
+            unitApplyLevelGrowth(temp_v4,(int)(char)temp_v8,0);
             *(int *)(temp_v2 + 0xcfcc) = temp_v8 * 5;
             *(int *)(temp_v2 + 0xcfd0) = temp_v8 * 5;
             *(unsigned short *)(temp_v2 + 0x36ca) = 0;
@@ -875,7 +875,7 @@ LAB_0018d058:
                     *(unsigned char *)(temp_v18 + 0x4290) = 1;
                   }
                 }
-                FUN_003c2310(temp_v17,temp_v7);
+                demonApplyLevelGrowth(temp_v17,temp_v7);
                 temp_v9 = FUN_0033be40(temp_v17);
                 *(unsigned int *)(temp_v18 + 0x428c) = temp_v9;
                 temp_v8 = FUN_0033b838(temp_v17,temp_v7,0);
@@ -1339,7 +1339,7 @@ joined_r0x0018edf0:
         if (*(short *)(temp_v8 + 0x3c6a) != 0) {
           temp_v18 = temp_v18 + 1;
         }
-        FUN_0029c6b0(temp_v4);
+        unitRecalculateEffectiveStats(temp_v4);
         FUN_002954bc(temp_v4);
         if (temp_v18 >= 1) {
           temp_v8 = 0;
@@ -1515,7 +1515,7 @@ joined_r0x0018edf0:
         }
         *piVar17 = temp_v8;
         FUN_0029c424(0);
-        FUN_0029c6b0(temp_v4);
+        unitRecalculateEffectiveStats(temp_v4);
         FUN_002954bc(temp_v4);
         FUN_0029bde4(temp_v4);
       }
@@ -1782,7 +1782,7 @@ joined_r0x0018edf0:
         }
         else if (temp_v8 == 100) {
           FUN_0029c424(0);
-          FUN_0029c6b0(temp_v4);
+          unitRecalculateEffectiveStats(temp_v4);
           FUN_002954bc(temp_v4);
           if (*(char *)(temp_v18 + 0x3c70) != '\0') {
             FUN_00296774(temp_v2,0x11);

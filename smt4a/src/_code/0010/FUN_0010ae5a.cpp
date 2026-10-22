@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0012e25c(unsigned char *, int, int);
-int FUN_002e6e34(unsigned char [12], unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefAddRef(int);
 int FUN_002f3df8(unsigned char [4], int);
@@ -18,7 +18,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0012e25c. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern unsigned int onlineGetActiveLock(void);
@@ -42,7 +42,7 @@ unsigned int FUN_0010ae5a(int param_1,int param_2)
   unsigned char temp_v8 [8];
   
   temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v4,temp_v0);
+  _ZN9Obj55b28cC1EPv(temp_v4,temp_v0);
   temp_v6 = *(unsigned int *)(param_1 + 0x14);
   FUN_002f3df8(temp_v5,param_1 + 4);
   temp_v1 = wordRefsDiffer_002f3e5a(temp_v5,(unsigned int *)&temp_v6);

@@ -9,7 +9,7 @@ int FUN_0030ff4c(void);
 
 extern unsigned char DAT_0055b09c; /* 0x55b09c */
 
-extern int onlineStringDestroy(int);
+extern int _ZN9Obj55aff4D1Ev(int);
 /* Supplied declaration required: FUN_002ecac4. */
 extern int vectorDestroyBytes(unsigned int *);
 /* Supplied declaration required: FUN_0030ff4c. */
@@ -27,7 +27,7 @@ void FUN_0012199c(unsigned int *param_1)
     param_1[0x1b] = 0;
   }
   temp_v0 = vectorDestroyBytes(param_1 + 0x1f);
-  temp_v0 = onlineStringDestroy(temp_v0 - 0xc);
+  temp_v0 = _ZN9Obj55aff4D1Ev(temp_v0 - 0xc);
   FUN_002ecac4(temp_v0 - 0x70);
   return;
 }

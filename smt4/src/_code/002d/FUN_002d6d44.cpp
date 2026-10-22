@@ -8,9 +8,9 @@ int scrRunOpcodesStub(...);
 int partyPanelReset(void);
 int FUN_002579bc(...);
 int FUN_0026d5a4(void);
-int FUN_0026ef04(...);
+int uiDrawRecordNameLabels(...);
 int FUN_0026f188(...);
-int FUN_0026f204(...);
+int characterInfoPanelPopulate(...);
 int linkHolderApplyFlag(...);
 int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
@@ -29,10 +29,10 @@ int FUN_003111e8(...);
 /* Supplied declaration required: FUN_002579bc. */
 extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_0026d5a4. */
-/* Supplied declaration required: FUN_0026ef04. */
+/* Supplied declaration required: uiDrawRecordNameLabels. */
 /* Supplied declaration required: FUN_0026f188. */
 extern unsigned int FUN_0026f1f0(void);
-/* Supplied declaration required: FUN_0026f204. */
+/* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
@@ -155,7 +155,7 @@ unsigned int FUN_002d6d44(int param_1)
     if (*(short *)(param_1 + 0x120) == 0) {
       rt_aeabi_memclr(*(int *)(param_1 + 8) + 0x38,0x14);
     }
-    FUN_0026f204(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
+    characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0xac));
     *(unsigned int *)(param_1 + 0x114) = 2;
     *(unsigned int *)(param_1 + 0x110) = 5;
@@ -218,9 +218,9 @@ unsigned int FUN_002d6d44(int param_1)
     temp_v3 = FUN_00259800();
     FUN_002bd2b4(*(int *)(param_1 + 8),(int)*(short *)(param_1 + 0x120),
                  *(unsigned char *)(*(int *)(param_1 + 8) + 0x37),temp_v3);
-    FUN_0026f204(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
+    characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0x10),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0xac));
-    FUN_0026ef04(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8));
+    uiDrawRecordNameLabels(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8));
     *(unsigned int *)(param_1 + 0x104) = 7;
     *(unsigned int *)(param_1 + 0x100) = 0xffffffff;
     *(unsigned int *)(param_1 + 0x110) = 5;

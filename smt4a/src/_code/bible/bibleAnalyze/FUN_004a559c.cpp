@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162758(...);
+int drawTextAtSnappedRectangle(...);
 int FUN_0049339c(int, int, int, int, int);
 int FUN_0049368c(...);
 int FUN_004a6144(...);
@@ -34,7 +34,7 @@ extern union romwright_storage_s__U_U_0057f0a4_9_1 s__U_U_0057f0a4; /* 0x57f0a4 
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162758. */
+/* Supplied declaration required: drawTextAtSnappedRectangle. */
 extern int FUN_0018349c(int, unsigned int);
 extern int FUN_002a482c(int);
 extern int FUN_0031d174(int);
@@ -87,7 +87,7 @@ void FUN_004a559c(int param_1)
   VectorSignedToFloat((int)*(short *)(temp_v6 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(((int)*(short *)(temp_v6 + 8) + (int)**(short **)(temp_v6 + 0xc) / 2) - temp_v2 / 2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162758(param_1 + 200,2,0xffffffff,temp_v8);
+  drawTextAtSnappedRectangle(param_1 + 200,2,0xffffffff,temp_v8);
   temp_v2 = FUN_002a482c(param_1 + 0x20);
   temp_v5 = 0;
   temp_v6 = *(int *)(param_1 + 0x28);

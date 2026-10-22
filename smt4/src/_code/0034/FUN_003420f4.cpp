@@ -1,2 +1,15 @@
-/* NON_MATCHING: fragment of a larger function (conditional return leaves a fallthrough path outside this unit). */
-#include "common.h"
+#include "shard/GameDataBlocks.h"
+
+extern "C" const ProgressFlagView *FUN_0023d2ec(void);
+
+/* Read one of the 110 persistent progress flags. */
+extern "C" bool FUN_003420f4(u32 index)
+{
+    if (index >= 110) {
+        return false;
+    }
+    const u8 *flags = FUN_0023d2ec()->flags;
+    u8 value = flags[index >> 3];
+    u8 mask = (u8)(1 << (index & 7));
+    return (value & mask) != 0;
+}

@@ -8,7 +8,7 @@ int FUN_0013ebe8(unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001418b8(unsigned int);
 int asdSoundHandleListFind(void);
 
-extern unsigned char DAT_00588fac; /* 0x588fac */
+extern unsigned char g_resourceSharedFlag; /* 0x588fac */
 extern unsigned int DAT_00588fb0; /* 0x588fb0 */
 extern unsigned int DAT_0061951c; /* 0x61951c */
 extern unsigned int DAT_00619520; /* 0x619520 */
@@ -138,7 +138,7 @@ void FUN_0013ab18(void)
             *(unsigned int *)(temp_v3 + 0x619530) = 0;
           }
           FUN_001418b8((&DAT_00619528)[temp_v0 * 8]);
-          temp_v1 = (unsigned int)DAT_00588fac;
+          temp_v1 = (unsigned int)g_resourceSharedFlag;
           temp_v3 = rt_memcmp();
           if (((temp_v3 == 0) && (temp_v3 = (&DAT_00619528)[temp_v0 * 8], temp_v3 != 0x100008b)) &&
              (temp_v3 != 0x100008c && temp_v3 != 0x100008d)) {

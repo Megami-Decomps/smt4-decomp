@@ -18,7 +18,7 @@ int FUN_0026ff54(void);
 int FUN_00270028(...);
 int navigationRequestFieldMode(...);
 int FUN_00276968(...);
-int FUN_0027d40c(...);
+int mapCompleteGroup(...);
 int FUN_00287c34(...);
 int FUN_00298d50(...);
 int soundChannelStopAll(...);
@@ -110,7 +110,7 @@ int FUN_00396a98(...);
 int FUN_001d34a8(...);
 int FUN_001fa800(void);
 int FUN_00264794(void);
-int FUN_0026481c(...);
+int mapTriggerMarkTable23Matches(...);
 int FUN_00275dec(void);
 int gameCopyPersistentSave(void);
 int navigationResetTimer(void);
@@ -362,7 +362,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_00264548(void);
 /* Supplied declaration required: FUN_002646d4. */
 /* Supplied declaration required: FUN_00264794. */
-/* Supplied declaration required: FUN_0026481c. */
+/* Supplied declaration required: mapTriggerMarkTable23Matches. */
 /* Supplied declaration required: FUN_002648e8. */
 /* Supplied declaration required: FUN_0026493c. */
 /* Supplied declaration required: lmapMainStep. */
@@ -436,7 +436,7 @@ extern int FUN_00276348(unsigned int);
 /* Supplied declaration required: FUN_0027cc48. */
 /* Supplied declaration required: FUN_0027cc6c. */
 extern int questMapSetCursor(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0027d40c. */
+/* Supplied declaration required: mapCompleteGroup. */
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: mapEntryTriggerForScene. */
 /* Supplied declaration required: mapSkyTableLoad. */
@@ -1095,9 +1095,9 @@ unsigned int FUN_001d3e3c(void)
                 temp_v16 = (unsigned int)DAT_0049fa19;
                 temp_v15 = (unsigned int)DAT_0049fa18;
                 FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-                FUN_0026481c(DAT_0049fa14,DAT_0049fa15);
-                FUN_0026481c(DAT_0049fa16,DAT_0049fa17);
-                FUN_0026481c(DAT_0049fa18,DAT_0049fa19);
+                mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
+                mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
+                mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
                 if (DAT_0049f9dc == -1) {
                   puVar7[3] = 0x1f;
                   puVar7[4] = 0;
@@ -1147,9 +1147,9 @@ unsigned int FUN_001d3e3c(void)
                           temp_v16 = (unsigned int)DAT_0049fa19;
                           temp_v15 = (unsigned int)DAT_0049fa18;
                           FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-                          FUN_0026481c(DAT_0049fa14,DAT_0049fa15);
-                          FUN_0026481c(DAT_0049fa16,DAT_0049fa17);
-                          FUN_0026481c(DAT_0049fa18,DAT_0049fa19);
+                          mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
+                          mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
+                          mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
                           temp_v6 = DAT_0049f994;
                           DAT_0049f934 = 1;
                           DAT_0049fb46 = 0;
@@ -1298,9 +1298,9 @@ LAB_001d58a0:
                   temp_v16 = (unsigned int)DAT_0049fa19;
                   temp_v15 = (unsigned int)DAT_0049fa18;
                   FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-                  FUN_0026481c(DAT_0049fa14,DAT_0049fa15);
-                  FUN_0026481c(DAT_0049fa16,DAT_0049fa17);
-                  FUN_0026481c(DAT_0049fa18,DAT_0049fa19);
+                  mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
+                  mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
+                  mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
                   if (DAT_0049f9dc == -1) {
                     puVar7[3] = 0x23;
                     puVar7[4] = 0;
@@ -1333,9 +1333,9 @@ LAB_001d58a0:
               temp_v16 = (unsigned int)DAT_0049fa19;
               temp_v15 = (unsigned int)DAT_0049fa18;
               FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-              FUN_0026481c(DAT_0049fa14,DAT_0049fa15);
-              FUN_0026481c(DAT_0049fa16,DAT_0049fa17);
-              FUN_0026481c(DAT_0049fa18,DAT_0049fa19);
+              mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
+              mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
+              mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
               if (DAT_0049f9dc != -1) {
                 temp_v6 = FUN_00276264();
                 if (*(short *)(temp_v6 + 0x28) == 0) {
@@ -1360,9 +1360,9 @@ LAB_001d58a0:
             temp_v16 = (unsigned int)DAT_0049fa19;
             temp_v15 = (unsigned int)DAT_0049fa18;
             FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-            FUN_0026481c(DAT_0049fa14,DAT_0049fa15);
-            FUN_0026481c(DAT_0049fa16,DAT_0049fa17);
-            FUN_0026481c(DAT_0049fa18,DAT_0049fa19);
+            mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
+            mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
+            mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
             if (DAT_0049f9dc != -1) {
               temp_v6 = FUN_00276264();
               if (*(short *)(temp_v6 + 0x28) == 0) {
@@ -1411,9 +1411,9 @@ joined_r0x001d535c:
             temp_v16 = (unsigned int)DAT_0049fa19;
             temp_v15 = (unsigned int)DAT_0049fa18;
             FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-            FUN_0026481c(DAT_0049fa14,DAT_0049fa15);
-            FUN_0026481c(DAT_0049fa16,DAT_0049fa17);
-            FUN_0026481c(DAT_0049fa18,DAT_0049fa19);
+            mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
+            mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
+            mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
             puVar7[3] = 0x56;
             puVar7[4] = 0;
             return 0;
@@ -3566,7 +3566,7 @@ LAB_001d4774:
   }
   FUN_00276968(1,8);
   if (g_gameState == 0x65) {
-    FUN_0027d40c(0x10101003);
+    mapCompleteGroup(0x10101003);
   }
   puVar7[3] = puVar7[3] + 1;
   puVar7[4] = 0;

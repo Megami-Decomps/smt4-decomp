@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017760c(...);
+int recordGetScaledMaximum(...);
 int FUN_00180118(void);
 int FUN_00184310(void);
 int FUN_0035ad50(unsigned short *, unsigned char [16]);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned short sp130; /* 0x130: local_130 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0017760c. */
+/* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameGetSlotTable(void);
@@ -49,7 +49,7 @@ void FUN_004a8584(unsigned short *param_1,unsigned short *param_2,int param_3)
   if (param_3 != 0) {
     FUN_0035ad50(param_2,temp_v5);
     param_1[6] = temp_v7;
-    temp_v0 = FUN_0017760c(temp_v5);
+    temp_v0 = recordGetScaledMaximum(temp_v5);
     param_1[8] = temp_v0;
     param_1[10] = temp_v6;
     temp_v2 = gameGetSlotTable();
@@ -66,19 +66,19 @@ void FUN_004a8584(unsigned short *param_1,unsigned short *param_2,int param_3)
     temp_v4 = 0;
 LAB_004a8668:
     param_1[7] = *(unsigned short *)(temp_v4 + 100);
-    temp_v0 = FUN_0017760c(temp_v4);
+    temp_v0 = recordGetScaledMaximum(temp_v4);
     param_1[9] = temp_v0;
     temp_v6 = *(unsigned short *)(temp_v4 + 0x10);
   }
   else {
     FUN_0035ad50(param_2,temp_v5);
     param_1[6] = temp_v7;
-    temp_v0 = FUN_0017760c(temp_v5);
+    temp_v0 = recordGetScaledMaximum(temp_v5);
     param_1[8] = temp_v0;
     param_1[10] = temp_v6;
     FUN_0035ad50(param_2,temp_v5);
     param_1[7] = temp_v7;
-    temp_v0 = FUN_0017760c(temp_v5);
+    temp_v0 = recordGetScaledMaximum(temp_v5);
     param_1[9] = temp_v0;
   }
   param_1[0xb] = temp_v6;

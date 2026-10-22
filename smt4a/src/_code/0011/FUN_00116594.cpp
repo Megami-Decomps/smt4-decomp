@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e6e34(int *, int);
+int _ZN9Obj55b28cC1EPv(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
 
 typedef int romwright_code(...);
 extern unsigned char g_systemTable; /* 0x59935c */
 
 extern int onlineContextGetInstance(void);
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
 
@@ -28,7 +28,7 @@ void FUN_00116594(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_c = param_3;
   uStack_8 = param_4;
   temp_v0 = onlineContextGetInstance();
-  FUN_002e6e34(&uStack_10,temp_v0 + 0x58);
+  _ZN9Obj55b28cC1EPv(&uStack_10,temp_v0 + 0x58);
   if ((*(int * *)((unsigned char *)&g_systemTable + 0xc)) != (int *)0x0) {
     (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_systemTable + 0xc)) + 0xc))();
   }

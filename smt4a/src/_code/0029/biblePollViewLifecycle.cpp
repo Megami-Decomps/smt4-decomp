@@ -1,109 +1,42 @@
-/* NON_MATCHING: genuine Bible C++ allocation requires Obj55c89c(u32) and overloaded Obj55c8d0()/(u32) class/constructor symbol integration. Native is a zero-input global g_bible routine; retain draft rather than add lowered ctor calls or fake vtables. */
-#include "romwright_types.h"
+/* NON_MATCHING: native allocation and virtual interfaces are integrated; retail's allocation NOPs and branch scheduling remain unmatched. */
+#include "bible/bibleMain.h"
+#include "classes/Obj55c89c.h"
+#include "classes/Obj55c8d0.h"
 
-extern "C" {
+extern "C" BibleGlobals g_bible;
 
-int asdOperatorNew(void);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: asdOperatorNew. */
-extern int *FUN_004a4588(void);
-extern int *FUN_004a6880(void);
-extern int *constructFlagged4A(void);
-
-
-unsigned int biblePollViewLifecycle(unsigned int param_1,int *param_2)
-
+/* Creates the selected page, waits for completion, then closes and destroys its view. */
+extern "C" u32 biblePollViewLifecycle()
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = *param_2;
-  temp_v0 = *(char *)(temp_v3 + 0xd);
-  if (temp_v0 != '\0') {
-    if (temp_v0 == '\x01') {
-      if (*(int **)(temp_v3 + 0x18) == (int *)0x0) {
-        return 0;
-      }
-      temp_v1 = (**(romwright_code **)(**(int **)(temp_v3 + 0x18) + 0x1c))();
-      if (temp_v1 == 0) {
-        return 0;
-      }
-      *(unsigned char *)(temp_v3 + 0xd) = 2;
-      return 0;
-    }
-    if (temp_v0 == '\x02') {
-      if (*(int *)(temp_v3 + 0x18) == 0) {
-        return 0;
-      }
-      *(unsigned char *)(temp_v3 + 0xd) = 3;
-      *(unsigned char *)(temp_v3 + 0xc) = 1;
-      param_2[1] = -1;
-      (**(romwright_code **)(**(int **)(temp_v3 + 0x18) + 0x10))();
-      if (*(int **)(temp_v3 + 0x18) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(temp_v3 + 0x18) + 4))();
-      }
-      *(unsigned int *)(temp_v3 + 0x18) = 0;
-      return 0;
-    }
-    if (temp_v0 != '\x03') {
-      return 0;
-    }
-    return 0xffffffff;
-  }
-  temp_v2 = param_2[1];
-  temp_v1 = 0xa9f8;
-  if (temp_v2 != 0) {
-    if (temp_v2 != 1) {
-      temp_v1 = 0xaa58;
-      if (temp_v2 != 2) {
-        if (temp_v2 != 3) {
-          piVar2 = *(int **)(temp_v3 + 0x18);
-          (**(romwright_code **)(*piVar2 + 8))();
-          *(unsigned char *)(temp_v3 + 0xd) = 1;
-          return 0;
+    BibleWork *work = g_bible.work;
+    switch (work->unk0d) {
+    case 0:
+        switch (g_bible.mode) {
+        case 0: work->view = new Obj55c89c(0); break;
+        case 1: work->view = new Obj55c89c(1); break;
+        case 2: work->view = new Obj55c8d0; break;
+        case 3: work->view = new Obj55c8d0(work->unk10); break;
         }
-        asdOperatorNew();
-        piVar2 = (int *)0x0;
-        if (temp_v1 != 0) {
-          piVar2 = (int *)FUN_004a6880();
+        work->view->start();
+        work->unk0d = 1;
+        break;
+    case 1:
+        if (work->view != NULL && work->view->isReady() != 0) {
+            work->unk0d = 2;
         }
-      }
-      else {
-        asdOperatorNew();
-        piVar2 = (int *)0x0;
-        if (temp_v1 != 0) {
-          piVar2 = (int *)constructFlagged4A();
+        break;
+    case 2:
+        if (work->view != NULL) {
+            work->unk0d = 3;
+            work->done = 1;
+            g_bible.mode = -1;
+            work->view->stop();
+            delete work->view;
+            work->view = NULL;
         }
-      }
+        break;
+    case 3:
+        return static_cast<u32>(-1);
     }
-    else {
-      asdOperatorNew();
-      if (temp_v1 != 0) {
-        piVar2 = (int *)FUN_004a4588();
-        *(int **)(temp_v3 + 0x18) = piVar2;
-        (**(romwright_code **)(*piVar2 + 8))();
-        *(unsigned char *)(temp_v3 + 0xd) = 1;
-        return 0;
-      }
-      piVar2 = (int *)0x0;
-    }
-  }
-  else {
-    asdOperatorNew();
-    piVar2 = (int *)0x0;
-    if (temp_v1 != 0) {
-      piVar2 = (int *)FUN_004a4588();
-    }
-  }
-  *(int **)(temp_v3 + 0x18) = piVar2;
-  (**(romwright_code **)(*piVar2 + 8))();
-  *(unsigned char *)(temp_v3 + 0xd) = 1;
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */

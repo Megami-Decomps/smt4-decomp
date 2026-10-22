@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_0012ee8c(int [2], unsigned int, int);
-int onlineStringDestroy(unsigned char [8]);
-int onlineStringCopyConstruct(...);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
+int _ZN9Obj55aff4C1ERKS_(...);
 int FUN_0030af1c(unsigned char [16]);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0012ee8c. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringCopyConstruct. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4C1ERKS_. */
 extern unsigned int _ZN9Obj55aff4C1Ev(unsigned char *);
 /* Supplied declaration required: FUN_0030af1c. */
 
@@ -33,11 +33,11 @@ int FUN_002e954a(unsigned int param_1,unsigned int param_2)
   unsigned char temp_v4 [8];
   
   temp_v2 = _ZN9Obj55aff4C1Ev(temp_v4);
-  temp_v0 = onlineStringCopyConstruct(temp_v3,param_2);
-  temp_v0 = onlineStringCopyConstruct(temp_v0 + 8,temp_v2);
+  temp_v0 = _ZN9Obj55aff4C1ERKS_(temp_v3,param_2);
+  temp_v0 = _ZN9Obj55aff4C1ERKS_(temp_v0 + 8,temp_v2);
   FUN_0012ee8c(temp_v1,param_1,temp_v0 - 8);
   FUN_0030af1c(temp_v3);
-  onlineStringDestroy(temp_v4);
+  _ZN9Obj55aff4D1Ev(temp_v4);
   return temp_v1[0] + 0x18;
 }
 

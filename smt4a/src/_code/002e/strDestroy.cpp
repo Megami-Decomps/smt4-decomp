@@ -12,13 +12,13 @@ typedef struct {
 extern u8 DAT_0055af54;
 
 void asdOperatorDeleteArray(u32 resource);
-void sharedRefInitEmpty(ResourceOwner *self);
+void _ZN9Obj5593b8D1Ev(ResourceOwner *self);
 
 void strDestroy(ResourceOwner *self)
 {
     self->vtbl = &DAT_0055af54;
     asdOperatorDeleteArray(self->resource);
-    sharedRefInitEmpty(self);
+    _ZN9Obj5593b8D1Ev(self);
 }
 
 } /* extern "C" */

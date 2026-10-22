@@ -22,7 +22,7 @@ extern unsigned char DAT_0055962c; /* 0x55962c */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int onlineStringDestroy(unsigned int *);
+extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 /* Supplied declaration required: _ZN9Obj5592acD1Ev. */
 /* Supplied declaration required: FUN_002fee58. */
 extern int wordRefsDiffer_002fee88(int *, int *);
@@ -75,7 +75,7 @@ FUN_00114048(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
       asdOperatorDeleteArray(piVar2);
     }
   }
-  temp_v0 = onlineStringDestroy(param_1 + 1);
+  temp_v0 = _ZN9Obj55aff4D1Ev(param_1 + 1);
   return romwright_piece_4_4(temp_v1,temp_v0 - 4);
 }
 

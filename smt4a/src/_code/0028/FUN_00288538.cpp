@@ -48,7 +48,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0037245c. */
 /* Supplied declaration required: FUN_003c40b4. */
 /* Supplied declaration required: FUN_0047fc38. */
-extern int FUN_00480960(int);
+extern int equipmentHasPositiveUpgrade(int);
 
 
 void FUN_00288538(int param_1)
@@ -102,7 +102,7 @@ void FUN_00288538(int param_1)
           temp_v6 = 0xfbeb39ff;
         }
         else {
-          temp_v4 = FUN_00480960(temp_v9);
+          temp_v4 = equipmentHasPositiveUpgrade(temp_v9);
           if (temp_v4 != 0) {
             temp_v6 = 0x8400ff;
           }
@@ -168,7 +168,7 @@ void FUN_00288538(int param_1)
           temp_v6 = 0xfbeb39ff;
         }
         else {
-          temp_v2 = FUN_00480960(temp_v9);
+          temp_v2 = equipmentHasPositiveUpgrade(temp_v9);
           if (temp_v2 != 0) {
             temp_v6 = 0x8400ff;
           }
@@ -216,7 +216,7 @@ void FUN_00288538(int param_1)
             temp_v6 = 0xfbeb39ff;
           }
           else {
-            temp_v2 = FUN_00480960(temp_v9);
+            temp_v2 = equipmentHasPositiveUpgrade(temp_v9);
             if (temp_v2 != 0) {
               temp_v6 = 0x8400ff;
             }

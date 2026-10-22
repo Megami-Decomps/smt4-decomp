@@ -3,8 +3,8 @@
 
 extern "C" {
 extern AocMain *g_aocMain;
-AocPollStorage *FUN_002bad5c(AocPollStorage *storage);
-AocPollResult *resultPairInitialize(AocPollResult *result, s32 code);
+AocPollStorage *_ZN18WindowStatusResultC1Ev(AocPollStorage *storage);
+AocPollResult *_ZN18WindowStatusResultC1Ej(AocPollResult *result, s32 code);
 s32 FUN_00394230(void *request, s32 *code, s32 *detail);
 s32 queryResultFailureOnly(const u32 *result);
 void FUN_0038b25c(AocPollResult *result, AocMain *main);
@@ -17,11 +17,11 @@ s32 FUN_0038b3e8(AocMain *main);
 void aocPollPendingOperation(AocPollOutput *output, AocPollStep *step)
 {
     output->status = 1;
-    AocPollStorage *storage = FUN_002bad5c(&output->storage);
+    AocPollStorage *storage = _ZN18WindowStatusResultC1Ev(&output->storage);
     storage->unk08 = 0;
     storage->unk0c = 0;
     AocPollResult result;
-    storage->result = *resultPairInitialize(&result, 0);
+    storage->result = *_ZN18WindowStatusResultC1Ej(&result, 0);
     AocMain *main = g_aocMain;
     if (step->phase == 0) {
         AocPollResult failure;
@@ -40,7 +40,7 @@ void aocPollPendingOperation(AocPollOutput *output, AocPollStep *step)
             return;
         }
         if (result.code < 0) {
-            storage->result = *resultPairInitialize(&failure, result.code);
+            storage->result = *_ZN18WindowStatusResultC1Ej(&failure, result.code);
             if (result.detail == 0) {
                 output->status = 102;
             } else {

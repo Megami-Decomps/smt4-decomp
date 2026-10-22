@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010e05c(...);
-int FUN_002e6e34(...);
+int _ZN9Obj55b28cC1EPv(...);
 int _ZN9Obj55b28cD1Ev(...);
 int FUN_002e93c2(...);
 int FUN_002ea704(...);
@@ -40,7 +40,7 @@ typedef struct {
 extern unsigned char DAT_005949d8; /* 0x5949d8 */
 
 /* Supplied declaration required: FUN_0010e05c. */
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e93c2. */
 /* Supplied declaration required: FUN_002ea704. */
@@ -80,7 +80,7 @@ FUN_0010e300(fn_0010e300_arg0 *param_1,unsigned int param_2,unsigned short *para
   puStack_1c = param_3;
   temp_v8 = param_4;
   temp_v1 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v7,temp_v1);
+  _ZN9Obj55b28cC1EPv(temp_v7,temp_v1);
   temp_v0 = 0;
   temp_v4[0] = 0;
   if (param_2 == 0) {

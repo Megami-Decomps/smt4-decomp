@@ -13,8 +13,8 @@ int mapIfClose(void);
 int mapDepartSetTarget(unsigned int, unsigned int);
 int FUN_00277b5c(unsigned int, unsigned int);
 int randomGetNormalizedFloat(void);
-int FUN_0027efb8(int, int, int);
-int FUN_0027f164(int, int);
+int partyApplyStatusMask(int, int, int);
+int partyApplyPercentHealthDamage(int, int);
 int FUN_00291e40(int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bf810(int);
@@ -63,8 +63,8 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00277b5c. */
 /* Supplied declaration required: randomGetNormalizedFloat. */
-/* Supplied declaration required: FUN_0027efb8. */
-/* Supplied declaration required: FUN_0027f164. */
+/* Supplied declaration required: partyApplyStatusMask. */
+/* Supplied declaration required: partyApplyPercentHealthDamage. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -220,8 +220,8 @@ LAB_00264b84:
     temp_v14[5] = 0.6f;
     if (*(int *)(param_1 + 0xd0) == 0) {
       FUN_00291e40(0x1000186);
-      FUN_0027f164(2,3);
-      FUN_0027efb8(2,5,0xf);
+      partyApplyPercentHealthDamage(2,3);
+      partyApplyStatusMask(2,5,0xf);
       *(unsigned short *)(param_1 + 0x4eec) = 0xf;
       *(unsigned short *)(param_1 + 0x4ef0) = 4000;
       *(unsigned short *)(param_1 + 0x4eee) = 0x640;

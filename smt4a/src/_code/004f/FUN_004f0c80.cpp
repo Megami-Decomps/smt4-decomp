@@ -14,10 +14,10 @@ typedef struct {
 
 extern float DAT_005e1518; /* 0x5e1518 */
 extern float DAT_005e1524; /* 0x5e1524 */
-extern float DAT_005e1530; /* 0x5e1530 */
+extern float g_cameraAlternateProgressStart; /* 0x5e1530 */
 extern float DAT_005e1534; /* 0x5e1534 */
 extern float DAT_005e1538; /* 0x5e1538 */
-extern float DAT_005e153c; /* 0x5e153c */
+extern float g_cameraAlternateProgressPrevious; /* 0x5e153c */
 extern float DAT_005e1540; /* 0x5e1540 */
 extern float DAT_005e1544; /* 0x5e1544 */
 
@@ -49,7 +49,7 @@ void FUN_004f0c80(int param_1,unsigned int param_2)
          (*(float *)(param_1 + 0x5cc) - *(float *)(param_1 + 0x610)) * in_s0;
     temp_v1 = DAT_005e1544 - DAT_005e1538;
     temp_v0 = DAT_005e1540 - DAT_005e1534;
-    *(float *)(param_1 + 0x750) = DAT_005e1530 + (DAT_005e153c - DAT_005e1530) * in_s0;
+    *(float *)(param_1 + 0x750) = g_cameraAlternateProgressStart + (g_cameraAlternateProgressPrevious - g_cameraAlternateProgressStart) * in_s0;
     *(float *)(param_1 + 0x754) = DAT_005e1534 + temp_v0 * in_s0;
     *(float *)(param_1 + 0x758) = DAT_005e1538 + temp_v1 * in_s0;
     temp_v0 = *(float *)(param_1 + 0x600);

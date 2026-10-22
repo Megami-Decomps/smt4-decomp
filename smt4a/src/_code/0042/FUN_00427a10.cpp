@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int resultPairInitialize(...);
+int _ZN18WindowStatusResultC1Ej(...);
 
-/* Supplied declaration required: resultPairInitialize. */
+/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 
 
 void FUN_00427a10(unsigned int *param_1,int param_2)
@@ -18,7 +18,7 @@ void FUN_00427a10(unsigned int *param_1,int param_2)
   
   temp_v0 = *(int *)(param_2 + 0x20);
   if (temp_v0 == 1) {
-    resultPairInitialize(param_1,0);
+    _ZN18WindowStatusResultC1Ej(param_1,0);
     return;
   }
   if (temp_v0 < 2) {
@@ -30,32 +30,32 @@ void FUN_00427a10(unsigned int *param_1,int param_2)
     }
     if (temp_v0 == -2) {
       if (-1 < *(int *)(param_2 + 0x24)) {
-        resultPairInitialize(param_1,0xf9613919);
+        _ZN18WindowStatusResultC1Ej(param_1,0xf9613919);
         return;
       }
-      resultPairInitialize();
+      _ZN18WindowStatusResultC1Ej();
       return;
     }
     if (temp_v0 == 0) {
-      resultPairInitialize(param_1,0xc9213801);
+      _ZN18WindowStatusResultC1Ej(param_1,0xc9213801);
       return;
     }
   }
   else {
     if (temp_v0 == 10) {
-      resultPairInitialize(param_1,0xc9213802);
+      _ZN18WindowStatusResultC1Ej(param_1,0xc9213802);
       return;
     }
     if (temp_v0 == 0xb) {
-      resultPairInitialize(param_1,0xc9213803);
+      _ZN18WindowStatusResultC1Ej(param_1,0xc9213803);
       return;
     }
     if (temp_v0 == 0xc) {
-      resultPairInitialize(param_1,0xc9213804);
+      _ZN18WindowStatusResultC1Ej(param_1,0xc9213804);
       return;
     }
   }
-  resultPairInitialize(param_1,0xc9613918);
+  _ZN18WindowStatusResultC1Ej(param_1,0xc9613918);
   return;
 }
 

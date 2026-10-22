@@ -33,7 +33,7 @@ int FUN_00295660(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029bed8(...);
-int FUN_0029c6b0(...);
+int unitRecalculateEffectiveStats(...);
 int FUN_0029e788(void);
 int FUN_0029e874(...);
 int FUN_0029ede8(...);
@@ -72,7 +72,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_0029c4ac. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
-/* Supplied declaration required: FUN_0029c6b0. */
+/* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029d8f4. */
@@ -163,7 +163,7 @@ unsigned int FUN_001dbf34(int param_1)
       }
       *(unsigned short *)(param_1 + 0xd4) = 0;
       temp_v0 = *(short *)(temp_v3 + 0x12);
-      FUN_0029c6b0(temp_v3);
+      unitRecalculateEffectiveStats(temp_v3);
       temp_v1 = *(short *)(temp_v3 + 0x12);
       temp_v7 = temp_v1 == 999;
       if (temp_v1 >= 0x3e7) {
@@ -184,7 +184,7 @@ unsigned int FUN_001dbf34(int param_1)
         }
         *(unsigned short *)(param_1 + 0xd6) = 0;
         temp_v0 = *(short *)(temp_v3 + 0x14);
-        FUN_0029c6b0(temp_v3);
+        unitRecalculateEffectiveStats(temp_v3);
         temp_v1 = *(short *)(temp_v3 + 0x14);
         temp_v7 = temp_v1 == 999;
         if (temp_v1 >= 0x3e7) {
@@ -205,7 +205,7 @@ unsigned int FUN_001dbf34(int param_1)
           }
           *(unsigned short *)(param_1 + 0xd8) = 0;
           temp_v0 = *(short *)(temp_v3 + 0x16);
-          FUN_0029c6b0(temp_v3);
+          unitRecalculateEffectiveStats(temp_v3);
           temp_v1 = *(short *)(temp_v3 + 0x16);
           temp_v7 = temp_v1 == 999;
           if (temp_v1 >= 0x3e7) {
@@ -226,7 +226,7 @@ unsigned int FUN_001dbf34(int param_1)
             }
             *(unsigned short *)(param_1 + 0xda) = 0;
             temp_v0 = *(short *)(temp_v3 + 0x18);
-            FUN_0029c6b0(temp_v3);
+            unitRecalculateEffectiveStats(temp_v3);
             temp_v1 = *(short *)(temp_v3 + 0x18);
             temp_v7 = temp_v1 == 999;
             if (temp_v1 >= 0x3e7) {
@@ -244,7 +244,7 @@ unsigned int FUN_001dbf34(int param_1)
               FUN_0029e874(0);
               temp_v6 = FUN_00262f78();
               FUN_002942c4(temp_v6,1);
-              FUN_0029c6b0(temp_v3);
+              unitRecalculateEffectiveStats(temp_v3);
               objectFlagsClear(temp_v3,0x220);
               FUN_002954bc(temp_v3);
               *(unsigned int *)(param_1 + 0xd38) = 6;
@@ -264,7 +264,7 @@ unsigned int FUN_001dbf34(int param_1)
             }
             *(unsigned short *)(param_1 + 0xdc) = 0;
             temp_v0 = *(short *)(temp_v3 + 0x1a);
-            FUN_0029c6b0(temp_v3);
+            unitRecalculateEffectiveStats(temp_v3);
             temp_v1 = *(short *)(temp_v3 + 0x1a);
             temp_v7 = temp_v1 == 999;
             if (temp_v1 >= 0x3e7) {

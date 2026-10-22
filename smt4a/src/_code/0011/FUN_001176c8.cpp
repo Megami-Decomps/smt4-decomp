@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e34(unsigned int *, unsigned int);
+int _ZN9Obj55b28cC1EPv(unsigned int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned int *);
 int sharedRefRelease(int);
 int FUN_002ea974(unsigned char [104]);
@@ -29,7 +29,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_002e6e34. */
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern unsigned int onlineGetActiveLock(void);
@@ -66,7 +66,7 @@ void FUN_001176c8(int *param_1,int param_2)
   FUN_002f9dd4(param_1,&temp_v7);
   if (piVar1 == (int *)0x0) {
     temp_v1 = onlineGetActiveLock();
-    FUN_002e6e34(&temp_v2,temp_v1);
+    _ZN9Obj55b28cC1EPv(&temp_v2,temp_v1);
     for (temp_v0 = param_1[2]; param_1[3] != temp_v0; temp_v0 = temp_v0 + 8) {
     }
     sharedRefRelease(param_2);

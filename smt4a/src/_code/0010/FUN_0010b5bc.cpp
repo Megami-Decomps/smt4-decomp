@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int onlineStringDestroy(unsigned char [8]);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
 int FUN_002f4d64(unsigned char [4], int, unsigned int **);
 
 typedef int romwright_code(...);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char g_systemTable; /* 0x59935c */
 
-/* Supplied declaration required: onlineStringDestroy. */
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern int FUN_002ee96a(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002f4d64. */
 extern int wordRefsDiffer_002f4d8c(unsigned int **, unsigned int *);
@@ -44,7 +44,7 @@ unsigned int FUN_0010b5bc(unsigned int param_1,unsigned int param_2)
     }
     (**(romwright_code **)(*(int *)temp_v1[2] + 0xc))(temp_v2);
     temp_v0 = FUN_002ee96a(temp_v2,param_2);
-    onlineStringDestroy(temp_v2);
+    _ZN9Obj55aff4D1Ev(temp_v2);
   } while (temp_v0 == 0);
   if ((int *)temp_v1[2] != (int *)0x0) {
     (**(romwright_code **)(*(int *)temp_v1[2] + 4))();

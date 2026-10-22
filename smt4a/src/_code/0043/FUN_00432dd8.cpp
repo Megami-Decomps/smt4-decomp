@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_0011b272(unsigned int, unsigned int);
+int _ZN9Obj5596acaSERKS_(unsigned int, unsigned int);
 int FUN_0011e41a(unsigned char **, unsigned char *);
 int FUN_0012055e(unsigned int, unsigned char **);
 int FUN_0012083e(...);
 int FUN_001304a8(...);
 int rt_malloc(...);
 int asdOperatorDeleteArray(...);
-int onlineStringDestroy(unsigned char [8]);
-int onlineStringAssign(unsigned int, unsigned int);
-int FUN_002f4cac(unsigned int);
-int FUN_00522bf4(unsigned int, unsigned int **);
+int _ZN9Obj55aff4D1Ev(unsigned char [8]);
+int _ZN9Obj55aff4aSERKS_(unsigned int, unsigned int);
+int _ZN9Obj55b1045resetEv(unsigned int);
+int _ZN15Obj55aff4VectoraSERKS_(unsigned int, unsigned int **);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 42 slot(s), 137 byte(s) */
@@ -71,19 +71,19 @@ extern unsigned char DAT_0055aafc; /* 0x55aafc */
 extern unsigned char DAT_0055acb0; /* 0x55acb0 */
 extern unsigned char DAT_0055add0; /* 0x55add0 */
 
-/* Supplied declaration required: FUN_0011b272. */
+/* Supplied declaration required: _ZN9Obj5596acaSERKS_. */
 /* Supplied declaration required: FUN_0011e41a. */
 /* Supplied declaration required: FUN_0012055e. */
 /* Supplied declaration required: FUN_0012083e. */
 /* Supplied declaration required: FUN_001304a8. */
 /* Supplied declaration required: rt_malloc. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: onlineStringAssign. */
-/* Supplied declaration required: FUN_002f4cac. */
-extern unsigned int FUN_00303928(unsigned char **, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_00522bf4. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
+/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
+/* Supplied declaration required: _ZN9Obj55b1045resetEv. */
+extern unsigned int _ZN9Obj5596acC1EhRK10WordVector(unsigned char **, unsigned int, unsigned int *);
+/* Supplied declaration required: _ZN15Obj55aff4VectoraSERKS_. */
 
 
 void FUN_00432dd8(unsigned int param_1)
@@ -146,16 +146,16 @@ void FUN_00432dd8(unsigned int param_1)
   
   *(unsigned int *)(param_1 + 8) = 0;
   temp_v45 = param_1;
-  temp_v2 = onlineStringConstruct(temp_v43,&LAB_0043313c);
-  onlineStringAssign(param_1 + 0xc,temp_v2);
-  onlineStringDestroy(temp_v43);
+  temp_v2 = _ZN9Obj55aff4C1EPKc(temp_v43,&LAB_0043313c);
+  _ZN9Obj55aff4aSERKS_(param_1 + 0xc,temp_v2);
+  _ZN9Obj55aff4D1Ev(temp_v43);
   temp_v1 = temp_v45;
   *(unsigned short *)(temp_v45 + 0x14) = 0;
   temp_v37 = 0;
   temp_v38 = 0;
   temp_v39 = 0;
-  temp_v2 = FUN_00303928(temp_v20,3,(unsigned int *)&temp_v37);
-  FUN_0011b272(temp_v1 + 0x38,temp_v2);
+  temp_v2 = _ZN9Obj5596acC1EhRK10WordVector(temp_v20,3,(unsigned int *)&temp_v37);
+  _ZN9Obj5596acaSERKS_(temp_v1 + 0x38,temp_v2);
   temp_v20[0] = &DAT_0055a4c0;
   asdOperatorDeleteArray(temp_v21);
   asdOperatorDeleteArray(temp_v37);
@@ -163,8 +163,8 @@ void FUN_00432dd8(unsigned int param_1)
   temp_v37 = 0;
   temp_v38 = 0;
   temp_v39 = 0;
-  temp_v2 = FUN_00303928(temp_v20,3,(unsigned int *)&temp_v37);
-  FUN_0011b272(temp_v1 + 0x4c,temp_v2);
+  temp_v2 = _ZN9Obj5596acC1EhRK10WordVector(temp_v20,3,(unsigned int *)&temp_v37);
+  _ZN9Obj5596acaSERKS_(temp_v1 + 0x4c,temp_v2);
   temp_v20[0] = &DAT_0055a4c0;
   asdOperatorDeleteArray(temp_v21);
   asdOperatorDeleteArray(temp_v37);
@@ -174,13 +174,13 @@ void FUN_00432dd8(unsigned int param_1)
   temp_v40 = (unsigned int *)0x0;
   temp_v41 = (unsigned int *)0x0;
   temp_v42 = 0;
-  FUN_00522bf4(temp_v45 + 0x6c,&temp_v40);
+  _ZN15Obj55aff4VectoraSERKS_(temp_v45 + 0x6c,&temp_v40);
   puVar4 = temp_v41;
   for (puVar8 = temp_v40; puVar8 != puVar4; puVar8 = puVar8 + 2) {
     (**(romwright_code **)*puVar8)(puVar8);
   }
   asdOperatorDeleteArray(temp_v40);
-  FUN_002f4cac(temp_v45 + 0x18);
+  _ZN9Obj55b1045resetEv(temp_v45 + 0x18);
   temp_v4 = 0;
   temp_v6 = 1;
   temp_v3 = &DAT_0055a9d8;

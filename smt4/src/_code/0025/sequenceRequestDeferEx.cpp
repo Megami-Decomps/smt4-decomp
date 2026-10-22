@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler coalesces the six argument loads/stores into VFP block copies. */
 #include "shard/W6_W6Match2_SequenceExtended.h"
 
 extern "C" ExtendedSequencePending g_deferredSequenceRequest;

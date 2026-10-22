@@ -21,7 +21,7 @@ typedef struct JyoucyuHandle {
 } JyoucyuHandle;
 
 void FUN_0019e290(StreamBuffer *buffer);
-u8 *FUN_004d08d0(u8 *member);
+u8 *_ZN9Obj55ca08D1Ev(u8 *member);
 void asdOperatorDelete(void *block);
 int jyoucyuGetTableEntry(int index);
 
@@ -34,7 +34,7 @@ void FUN_002d54e0(JyoucyuHandle *handle)
     if (screen->buffer != NULL) {
         FUN_0019e290(screen->buffer);
         if (screen->buffer != NULL) {
-            asdOperatorDelete(FUN_004d08d0(screen->buffer->unk110) - 0x110);
+            asdOperatorDelete(_ZN9Obj55ca08D1Ev(screen->buffer->unk110) - 0x110);
         }
         screen->buffer = NULL;
     }

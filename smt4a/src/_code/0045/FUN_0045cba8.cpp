@@ -13,7 +13,7 @@ int asdSoundObjectStop(...);
 int FUN_001756d0(...);
 int FUN_0018c87c(...);
 int nw_snd_SoundArchive_GetSoundType(int, int *);
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 int FUN_0045db6c(...);
 int FUN_0045f410(...);
 int obj50Set(...);
@@ -81,7 +81,7 @@ extern unsigned long long FUN_00178400(unsigned int, int *, unsigned char *);
 extern int FUN_0019472c(unsigned int, int *, unsigned int **);
 extern int soundInfoOwnerReadInfo(unsigned int, int *, unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int FUN_0045b844(unsigned int, int *);
 extern unsigned long long FUN_0045b904(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0045c944. */
@@ -661,7 +661,7 @@ LAB_0045d254:
           if (temp_v59 == 2) {
             ppiVar7 = &temp_v53;
             temp_v52 = (int *)0x0;
-            FUN_002f5020(ppiVar7,FUN_0045bc98,0xd,4);
+            __aeabi_vec_ctor_nocookie_nodtor(ppiVar7,FUN_0045bc98,0xd,4);
             ppiVar7[0xd] = (int *)0x3f800000;
             *(unsigned char *)(ppiVar7 + 0xe) = 0x7f;
             *(unsigned char *)((int)ppiVar7 + 0x3b) = 0;

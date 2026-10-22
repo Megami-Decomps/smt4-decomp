@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysMemClear(unsigned int *, int);
-int onlineStringDestroy(unsigned char [12]);
+int _ZN9Obj55aff4D1Ev(unsigned char [12]);
 int FUN_00307134(unsigned int *, unsigned int);
 
 typedef struct fn_002ed0dc_arg0 fn_002ed0dc_arg0;
@@ -39,10 +39,10 @@ extern unsigned char DAT_0055a400; /* 0x55a400 */
 
 extern int FUN_0012f32c(void);
 /* Supplied declaration required: sysMemClear. */
-extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
-/* Supplied declaration required: onlineStringDestroy. */
+extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
+/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int *initVtable00558fb4(fn_002ed0dc_arg0 *, unsigned int);
-extern unsigned int FUN_0030710c(unsigned int *, unsigned int);
+extern unsigned int onlineMessageAllocateNode(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00307134. */
 
 
@@ -80,16 +80,16 @@ unsigned int * FUN_002ed0dc(fn_002ed0dc_arg0 *param_1,unsigned int param_2)
   puVar1[0x1b] = 0;
   puVar1[0x1c] = 0;
   puVar1[0x1d] = 0;
-  temp_v1 = FUN_0030710c(puVar3,1);
+  temp_v1 = onlineMessageAllocateNode(puVar3,1);
   puVar1[0x1c] = temp_v1;
   *(unsigned int *)temp_v1 = temp_v1;
   *(unsigned int *)(puVar1[0x1c] + 4) = puVar1[0x1c];
   puVar1[0x1e] = 0;
   puVar1[0x1f] = 0;
   puVar1[0xb] = puVar1[0xb] | 8;
-  temp_v1 = onlineStringConstruct(temp_v2,&LAB_002ed16c);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v2,&LAB_002ed16c);
   FUN_00307134(puVar1,temp_v1);
-  onlineStringDestroy(temp_v2);
+  _ZN9Obj55aff4D1Ev(temp_v2);
   return puVar1;
 }
 

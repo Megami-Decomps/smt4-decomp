@@ -16,7 +16,7 @@ extern int FUN_003abe00(...); /* 0x3abe00 */
 extern int FUN_003abed8(...); /* 0x3abed8 */
 extern unsigned char DAT_00422450; /* 0x422450 */
 
-extern unsigned int *FUN_0022cb58(void);
+extern unsigned int *_ZN9Obj42247cC1Ev(void);
 
 
 void bibleScreenInitializeCallbacks(void)
@@ -27,7 +27,7 @@ void bibleScreenInitializeCallbacks(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = (unsigned int *)FUN_0022cb58();
+  puVar1 = (unsigned int *)_ZN9Obj42247cC1Ev();
   temp_v1 = 0xd;
   *puVar1 = (unsigned int)&DAT_00422450;
   temp_v0 = 0;

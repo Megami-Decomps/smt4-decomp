@@ -24,12 +24,12 @@ extern "C" {
 
 extern CampCecEdit* g_campCecEdit;
 s32 FUN_001ed80c(void);
-void FUN_002cc2bc(u32 handle, u32 target, f32* scale, s32 flags, s32 value, s32 mode);
+void actorDetailsDrawPanel(u32 handle, u32 target, f32* scale, s32 flags, s32 value, s32 mode);
 
 static inline void updateCecEditCamera(CecEditCameraState* edit, const CecEditCameraControl* controls)
 {
     if (controls->active != 0) {
-        FUN_002cc2bc(edit->camera.handle, edit->camera.target, &edit->camera.scale,
+        actorDetailsDrawPanel(edit->camera.handle, edit->camera.target, &edit->camera.scale,
                      0, 0, controls->mode);
     }
 }

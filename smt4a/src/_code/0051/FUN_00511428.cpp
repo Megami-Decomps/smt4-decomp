@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f5020(...);
+int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char LAB_003df478; /* 0x3df478 */
 extern unsigned char LAB_00416378; /* 0x416378 */
 extern unsigned char DAT_005def48; /* 0x5def48 */
 
-/* Supplied declaration required: FUN_002f5020. */
+/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
 unsigned int FUN_00511428(unsigned int *param_1)
@@ -35,8 +35,8 @@ unsigned int FUN_00511428(unsigned int *param_1)
   param_1[9] = 0;
   param_1[0xb] = 1;
   param_1[0xc] = 1;
-  FUN_002f5020(param_1 + 0xd,&LAB_003df478,0x14,10);
-  FUN_002f5020(&DAT_005def48,&LAB_00416378,0x20,0x96);
+  __aeabi_vec_ctor_nocookie_nodtor(param_1 + 0xd,&LAB_003df478,0x14,10);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_005def48,&LAB_00416378,0x20,0x96);
   temp_v0 = 0x96;
   temp_v1 = 0x5e0258;
   while (temp_v2 = temp_v0 != 0, temp_v0 = temp_v0 - 1, temp_v2) {

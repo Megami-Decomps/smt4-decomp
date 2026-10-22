@@ -43,7 +43,7 @@ typedef struct {
     unsigned short sp140; /* 0x140: local_140 */
 } param_1_stack;
 
-extern unsigned short FUN_0017760c(unsigned char *);
+extern unsigned short recordGetScaledMaximum(unsigned char *);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameGetSlotTable(void);
 extern int FUN_0023b3d0(void);
@@ -195,7 +195,7 @@ void FUN_004a3b48(int param_1)
       temp_v27 = 0;
       temp_v28 = 0;
       FUN_004bcd90(temp_v8);
-      temp_v10 = FUN_0017760c(temp_v8);
+      temp_v10 = recordGetScaledMaximum(temp_v8);
       temp_v11 = temp_v9;
       temp_v12 = 0;
       objBInitBlock19D0(temp_v8,0);

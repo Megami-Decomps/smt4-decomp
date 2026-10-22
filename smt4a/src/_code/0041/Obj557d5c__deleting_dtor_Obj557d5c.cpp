@@ -14,14 +14,14 @@ typedef struct TablePair {
     /* 0x1C */ ItemTable tableB;
 } TablePair;
 
-extern u8 DAT_00557d60;
+extern u8 _ZTV9Obj557d58[];
 extern void itemTableClear(ItemTable *table);
 extern void asdOperatorDelete(TablePair *obj);
 
 /* Destroys the object: restores its vtable, clears both item tables twice (base and member destruction) and frees it. */
 void _ZN9Obj557d5cD0Ev(TablePair *obj)
 {
-    obj->vtbl = &DAT_00557d60;
+    obj->vtbl = _ZTV9Obj557d58 + 8;
     itemTableClear(&obj->tableA);
     itemTableClear(&obj->tableB);
     itemTableClear(&obj->tableB);
