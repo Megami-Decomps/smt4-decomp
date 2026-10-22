@@ -33,7 +33,7 @@ s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 bool panelIsMissingOrFlagClear();
-s32 FUN_002a4b74();
+s32 messageGetChoiceResult();
 void FUN_003c3e14();
 void obj04Finish();
 }
@@ -57,7 +57,7 @@ extern "C" void npcShopUpdateSelectionScript(NpcShopSelectWork *work)
 {
     if (work->step != 0) {
         if (work->step == 1 && scrRunOpcodesStub(work->script) == 2 && panelIsMissingOrFlagClear()) {
-            s32 selected = FUN_002a4b74();
+            s32 selected = messageGetChoiceResult();
             if (selected == -1) {
                 npcShopChangeState(work, 7);
             } else if (selected == 3) {

@@ -8,7 +8,7 @@ int FUN_0012316c(unsigned int, unsigned int);
 int FUN_001233d4(unsigned int, unsigned int *);
 int asdGfxSetCmdBufferUnk38(unsigned char *);
 int asdGfxSetCmdBufferState(int, int);
-int FUN_00123560(void);
+int asdGxMarkSubmissionReady(void);
 int nngxBindCmdlist(unsigned int);
 int asdModelResetCommandBuffer(void);
 
@@ -24,7 +24,7 @@ extern int DAT_004c632c; /* 0x4c632c */
 /* Supplied declaration required: FUN_001233d4. */
 /* Supplied declaration required: asdGfxSetCmdBufferUnk38. */
 /* Supplied declaration required: asdGfxSetCmdBufferState. */
-/* Supplied declaration required: FUN_00123560. */
+/* Supplied declaration required: asdGxMarkSubmissionReady. */
 /* Supplied declaration required: nngxBindCmdlist. */
 /* Supplied declaration required: asdModelResetCommandBuffer. */
 
@@ -60,7 +60,7 @@ void FUN_002c2890(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
     } while (temp_v0 < (unsigned int)param_1[2]);
   }
   nngxBindCmdlist(*param_1);
-  FUN_00123560();
+  asdGxMarkSubmissionReady();
   asdGfxSetCmdBufferUnk38(&LAB_001192c4);
   if (DAT_004c632c != 0) {
     *(unsigned char *)(DAT_004c632c + 0x3c) = 1;

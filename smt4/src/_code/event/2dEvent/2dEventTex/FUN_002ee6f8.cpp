@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern int FUN_001f4264(...); /* 0x1f4264 */
+extern int eventTexUpdateScreenShake(...); /* 0x1f4264 */
 extern int FUN_001f42d4(...); /* 0x1f42d4 */
 extern unsigned char LAB_002e36d8; /* 0x2e36d8 */
 extern unsigned char LAB_002ee9e0; /* 0x2ee9e0 */
@@ -60,7 +60,7 @@ unsigned int FUN_002ee6f8(void)
   g_eventTex = puVar2;
   *(unsigned char *)(puVar2 + 0x17) = 1;
   puVar3 = &LAB_002ee9e0;
-  asdProcessCreateSimple(&LAB_002ee9e0,2,0,0,FUN_001f4264,&LAB_002e36d8,puVar2);
+  asdProcessCreateSimple(&LAB_002ee9e0,2,0,0,eventTexUpdateScreenShake,&LAB_002e36d8,puVar2);
   *puVar2 = (unsigned int)puVar3;
   taskCreateDraw(&LAB_002ee9f0,0x7d,0,0,FUN_001f42d4,0,puVar2,puVar3);
   taskCreateDraw(&LAB_002ee9f0,0xdb,0,0,FUN_001f42d4,0,puVar2,*puVar2);

@@ -94,8 +94,8 @@ extern int *gameGetSlotTable(void);
 extern unsigned int *FUN_0022e9b8(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: FUN_0026c4f0. */
-extern char FUN_00284140(int);
-extern int FUN_002a4860(unsigned int *);
+extern char recordGetModeForId(int);
+extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 extern unsigned int computeCountLimit(void);
 /* Supplied declaration required: contentEntryFindById. */
@@ -150,7 +150,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
     do {
       temp_v1 = (unsigned int)*(unsigned short *)((int)puVar2 + temp_v7 * 2 + 0x8f7c);
       contentEntryFindById();
-      temp_v2 = FUN_002a4860(puVar8);
+      temp_v2 = resourceRunOperationIfUnblocked(puVar8);
       temp_v3 = FUN_002a4894(puVar8);
       if (*(short *)((int)puVar2 + (temp_v2 + temp_v3) * 2 + 0x62a0) == *(short *)(temp_v1 + 0x1a)) {
         temp_v10 = *(unsigned short *)((int)puVar2 + temp_v7 * 2 + 0x8f7c);
@@ -251,11 +251,11 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   FUN_001835b4(2,0x1a,0x151,param_1,param_2,0x7b);
   FUN_001835b4(2,0x1a,0x152,param_1,param_2,0x7c);
   FUN_001835b4(2,0x1a,0x153,param_1,param_2,0x7d);
-  temp_v15[0] = FUN_00284140((int)*(short *)(puVar2 + 0x10e));
+  temp_v15[0] = recordGetModeForId((int)*(short *)(puVar2 + 0x10e));
   temp_v7 = 1;
   do {
     temp_v2 = FUN_002a4894(puVar2 + 0x19f3);
-    temp_v0 = FUN_00284140((int)*(short *)((int)puVar2 + (temp_v7 + temp_v2 * 4) * 2 + 0x45c));
+    temp_v0 = recordGetModeForId((int)*(short *)((int)puVar2 + (temp_v7 + temp_v2 * 4) * 2 + 0x45c));
     temp_v15[temp_v7] = temp_v0;
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 5);

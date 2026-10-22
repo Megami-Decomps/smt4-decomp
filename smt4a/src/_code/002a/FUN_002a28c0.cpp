@@ -18,7 +18,7 @@ int FUN_0032e25c(...);
 int dataStoreProcessCreate(void);
 int ownerSetName(unsigned int, unsigned int);
 int engineForwardVariadicCommand(unsigned int, int, unsigned int, unsigned int);
-int FUN_00387edc(void);
+int saveBuildSummary(void);
 int loadSlotEnsureLoaded(int);
 
 typedef struct fn_002a28c0_arg0 fn_002a28c0_arg0;
@@ -75,7 +75,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: ownerSetName. */
 extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: engineForwardVariadicCommand. */
-/* Supplied declaration required: FUN_00387edc. */
+/* Supplied declaration required: saveBuildSummary. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 
 
@@ -117,7 +117,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       asdLoadFileAsyncSimple(&LAB_002a2c40,&param_1->field_0x350,0);
       asdLoadFileAsyncSimple(&LAB_002a2c54,&param_1->field_0x354,0);
       FUN_002bf520();
-      FUN_00387edc();
+      saveBuildSummary();
       temp_v0 = FUN_0031cee0();
       temp_v4 = FUN_002bf520();
       *(unsigned char *)(temp_v4 + 0x21) = temp_v0;

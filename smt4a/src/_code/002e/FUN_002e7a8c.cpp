@@ -69,7 +69,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_002618f8(void);
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: partyPanelDrawHighlight. */
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
@@ -608,7 +608,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       FUN_00183bb0();
       if (*(int *)(temp_v2 + 0x30) >= 2) {
         temp_v5 = 0x24;
-        temp_v11 = FUN_00284140((int)*(short *)(temp_v2 + 0x9fc));
+        temp_v11 = recordGetModeForId((int)*(short *)(temp_v2 + 0x9fc));
         if (temp_v11 == 1 || temp_v11 == 2) {
           temp_v5 = 0x26;
         }
@@ -616,7 +616,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
         temp_v9 = vec2GetYInt(temp_v2 + 0x68);
         FUN_001835b4(2,0x11,temp_v5,temp_v7 + temp_v11,temp_v8 + temp_v9,0xa6);
         temp_v5 = 0x25;
-        temp_v11 = FUN_00284140((int)*(short *)(temp_v2 + 0x9fe));
+        temp_v11 = recordGetModeForId((int)*(short *)(temp_v2 + 0x9fe));
         if (temp_v11 == 1 || temp_v11 == 2) {
           temp_v5 = 0x27;
         }

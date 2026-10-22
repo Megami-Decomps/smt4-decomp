@@ -31,7 +31,7 @@ int FUN_002900d0(void);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_002954f4(unsigned int, int);
 int btlTalkBustUpCreate(void);
-int FUN_0029b074(void);
+int scrResultStopJobAndReleaseUi(void);
 int resultCreate(int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
@@ -83,7 +83,7 @@ extern unsigned int FUN_002903f0(void);
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002973d8(void);
-/* Supplied declaration required: FUN_0029b074. */
+/* Supplied declaration required: scrResultStopJobAndReleaseUi. */
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: partyFindActiveSlotById. */
@@ -94,7 +94,7 @@ extern int gameGetSupportUnitData(void);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bd06c. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -224,7 +224,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     if (temp_v1 == 0) {
       return 0;
     }
-    FUN_0029b074();
+    scrResultStopJobAndReleaseUi();
     scrCommMessageSetMode(0xffffffff);
     messageSlotSet(0);
     buttonHelpSetPreset(0x90);
@@ -364,7 +364,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
   case 5:
     temp_v5 = 0x3a;
     temp_v6 = scrWorkGetValue(2);
-    temp_v2 = FUN_002bd1fc();
+    temp_v2 = gameGetPlayerName();
     libc_strcpy(&temp_v12,temp_v2);
     FUN_00295660(0,&temp_v12);
     if (temp_v6 >= 2) {

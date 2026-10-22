@@ -72,7 +72,7 @@ unsigned long long FUN_002def6c(void)
   FUN_003f19dc(puVar1);
   piVar6 = puVar1 + 0x1125;
   if (*piVar6 != 0) {
-    FUN_003e5c00();
+    resourceOwnerReleaseAll();
     if ((int *)*piVar6 != (int *)0x0) {
       (**(code **)(*(int *)*piVar6 + 4))();
     }

@@ -9,7 +9,7 @@ int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int FUN_002eb338(int *, unsigned char [12], unsigned int);
 int onlineTimeGetNow(unsigned char [12]);
-int FUN_002f2da0(int *, int, int **);
+int sharedRefAssignFromOwner(int *, int, int **);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
@@ -47,7 +47,7 @@ extern unsigned int DAT_00594a20; /* 0x594a20 */
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int wordRefsDiffer_002eb690(int *, int *);
 extern int FUN_002f2a70(int);
-/* Supplied declaration required: FUN_002f2da0. */
+/* Supplied declaration required: sharedRefAssignFromOwner. */
 
 
 void FUN_0011b7b0(int param_1,int *param_2)
@@ -100,7 +100,7 @@ void FUN_0011b7b0(int param_1,int *param_2)
       FUN_0011ca08(temp_v11,temp_v1);
       if ((unsigned int)DAT_00594984 < *(unsigned int *)(temp_v11 + 0x10)) {
         temp_v4 = *(int **)(temp_v11 + 8);
-        FUN_002f2da0(&iStack_44,temp_v11,&temp_v4);
+        sharedRefAssignFromOwner(&iStack_44,temp_v11,&temp_v4);
       }
       sharedRefRelease(temp_v1);
     }

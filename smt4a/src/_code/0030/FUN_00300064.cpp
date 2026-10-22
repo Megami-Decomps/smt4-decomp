@@ -7,14 +7,14 @@ extern "C" {
 int _ZN9Obj55aff4D1Ev(int *);
 int _ZN9Obj55aff4aSERKS_(...);
 int onlineSockAddrToString(int *, int);
-int FUN_00300048(void);
+int watcherRefreshEnabledState(void);
 
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
 extern int FUN_002ea704(void);
 extern int FUN_002eb5f4(void);
 /* Supplied declaration required: onlineSockAddrToString. */
-/* Supplied declaration required: FUN_00300048. */
+/* Supplied declaration required: watcherRefreshEnabledState. */
 
 
 unsigned int FUN_00300064(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ unsigned int FUN_00300064(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v1 = *(unsigned int *)(param_1 + 0x94);
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
-        FUN_00300048();
+        watcherRefreshEnabledState();
         return 0;
       }
       temp_v0 = FUN_002eb5f4();

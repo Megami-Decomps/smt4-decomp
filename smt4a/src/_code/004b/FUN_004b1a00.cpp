@@ -60,7 +60,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(unsigned short);
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(int);
@@ -75,7 +75,7 @@ extern unsigned int FUN_00180114(unsigned short);
 extern int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002685cc. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002a4894. */
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0032fea0. */
@@ -162,7 +162,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   FUN_001835b4(2,0x1d,0xd1,param_2,param_3,0x65);
   FUN_001835b4(2,0x1d,0xd2,param_2,param_3,0x6a);
   temp_v1 = FUN_001834a4(0x1d,0xd3);
-  temp_v2 = FUN_0015687c();
+  temp_v2 = gameGetPlayerName();
   textFormatBuffer(temp_v12,&LAB_004b1dc8,temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -188,7 +188,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
       temp_v15 = 1;
       temp_v1 = FUN_001834a4(0x1d,0x169);
       efctSetSpeed();
-      temp_v3 = FUN_00284140((int)*(short *)(param_1 + *(short *)(param_1 + 0x7868) * 2 + 0x43b6));
+      temp_v3 = recordGetModeForId((int)*(short *)(param_1 + *(short *)(param_1 + 0x7868) * 2 + 0x43b6));
       if ((!(temp_v3 == 1 || temp_v3 == 2)) && (temp_v3 != 6)) {
         temp_v2 = 0x9fe7ffff;
       }
@@ -338,7 +338,7 @@ LAB_004b1d78:
     temp_v3 = FUN_001834a4(temp_v22,temp_v1 + 0x103);
     efctSetSpeed();
     temp_v8 = FUN_002a4894(temp_v29);
-    temp_v8 = FUN_00284140((int)*(short *)(param_1 + temp_v8 * 2 + 0x43b6));
+    temp_v8 = recordGetModeForId((int)*(short *)(param_1 + temp_v8 * 2 + 0x43b6));
     if ((temp_v8 == 1 || temp_v8 == 2) || (temp_v8 == 6)) {
       temp_v10 = 0xf5ff9fff;
     }
@@ -492,7 +492,7 @@ LAB_004b1d78:
     temp_v3 = FUN_001834a4(temp_v22,temp_v1 + 0x10b);
     efctSetSpeed();
     temp_v8 = FUN_002a4894(temp_v26);
-    temp_v8 = FUN_00284140((int)*(short *)(param_1 + temp_v8 * 2 + 0x43c6));
+    temp_v8 = recordGetModeForId((int)*(short *)(param_1 + temp_v8 * 2 + 0x43c6));
     if ((temp_v8 == 1 || temp_v8 == 2) || (temp_v8 == 6)) {
       temp_v10 = 0xf5ff9fff;
     }

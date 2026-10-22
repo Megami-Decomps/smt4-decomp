@@ -16,7 +16,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_00297050(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973ec(void);
-int FUN_0029be5c(int, int);
+int gameCounterAddSaturating(int, int);
 int FUN_0029ee6c(...);
 int FUN_002bf4f8(int, int);
 int dataTableGetCount(...);
@@ -42,7 +42,7 @@ extern int g_config; /* 0x43dc58 */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_002973ec. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
@@ -178,7 +178,7 @@ LAB_0018bf50:
             *(unsigned int *)(temp_v8 + 100) = 1;
             return;
           }
-          FUN_0029be5c(0x29,1);
+          gameCounterAddSaturating(0x29,1);
         }
       }
       else {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00235554(...);
+int scrScriptProcessStartMappedEntry(...);
 int buttonHelpResetSlots(void);
 int FUN_00287704(...);
 int FUN_00296284(...);
@@ -34,7 +34,7 @@ extern char s_e021_01_0044daf0[8]; /* 0x44daf0 */
 
 extern int scrRunOpcodesStub(unsigned int);
 extern int storyModeCanProceed(unsigned char);
-/* Supplied declaration required: FUN_00235554. */
+/* Supplied declaration required: scrScriptProcessStartMappedEntry. */
 /* Supplied declaration required: buttonHelpResetSlots. */
 extern int FUN_0026b564(void);
 extern int FUN_0027ee9c(void);
@@ -89,18 +89,18 @@ void FUN_00385448(unsigned int *param_1)
     param_1[0x3ec] = 7;
     temp_v4 = storyModeCanProceed((char)param_1[6]);
     if (temp_v4 != 0) {
-      FUN_00235554(param_1,&LAB_00385854);
+      scrScriptProcessStartMappedEntry(param_1,&LAB_00385854);
     }
     else if ((char)param_1[6] != '\x02') {
       if ((char)param_1[6] != '\x03') {
-        FUN_00235554(param_1,&LAB_00385860);
+        scrScriptProcessStartMappedEntry(param_1,&LAB_00385860);
       }
       else {
-        FUN_00235554(param_1,&LAB_0038587c);
+        scrScriptProcessStartMappedEntry(param_1,&LAB_0038587c);
       }
     }
     else {
-      FUN_00235554(param_1,&LAB_00385870);
+      scrScriptProcessStartMappedEntry(param_1,&LAB_00385870);
     }
     temp_v5 = param_1[2] + 1;
     param_1[2] = temp_v5;
@@ -162,7 +162,7 @@ void FUN_00385448(unsigned int *param_1)
           *(unsigned char *)(param_1 + 0x355) = 0;
           temp_v4 = storyModeCanProceed((char)param_1[6]);
           if (temp_v4 != 0) {
-            FUN_00235554(param_1,&LAB_00385898);
+            scrScriptProcessStartMappedEntry(param_1,&LAB_00385898);
             param_1[2] = 7;
             return;
           }
@@ -171,10 +171,10 @@ void FUN_00385448(unsigned int *param_1)
           temp_v4 = slotGroupFindFree(temp_v3,*(unsigned char *)(temp_v4 + 10));
           if (temp_v4 == -1) {
             if ((char)param_1[6] != '\0') {
-              FUN_00235554(param_1,&LAB_00385a6c);
+              scrScriptProcessStartMappedEntry(param_1,&LAB_00385a6c);
             }
             else {
-              FUN_00235554(param_1,&LAB_00385a80);
+              scrScriptProcessStartMappedEntry(param_1,&LAB_00385a80);
             }
             param_1[2] = 7;
             return;
@@ -198,10 +198,10 @@ void FUN_00385448(unsigned int *param_1)
   case 4:
     temp_v4 = FUN_00381ae0((int)(char)param_1[4]);
     if (temp_v4 != 0) {
-      FUN_00235554(param_1,&LAB_00385a90);
+      scrScriptProcessStartMappedEntry(param_1,&LAB_00385a90);
     }
     else {
-      FUN_00235554(param_1,&LAB_00385a9c);
+      scrScriptProcessStartMappedEntry(param_1,&LAB_00385a9c);
     }
     temp_v5 = param_1[2] + 1;
     param_1[2] = temp_v5;

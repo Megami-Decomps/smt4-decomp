@@ -11,7 +11,7 @@ int FUN_0019a0fc(...);
 int mathMatrixTranslateLocal(float *, float *, int *);
 int FUN_001d3de0(...);
 int FUN_002371b0(void);
-int FUN_00317c3c(...);
+int gpuSubmitFloatVectorsOrDefault(...);
 int FUN_0032c808(void);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -114,7 +114,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_001d3de0. */
 /* Supplied declaration required: FUN_002371b0. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_00317c3c. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
 
 
@@ -360,7 +360,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
       FUN_0032c808();
       temp_v2 = 0;
       do {
-        FUN_00317c3c(&temp_v47);
+        gpuSubmitFloatVectorsOrDefault(&temp_v47);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 4);
       FUN_002371b0();

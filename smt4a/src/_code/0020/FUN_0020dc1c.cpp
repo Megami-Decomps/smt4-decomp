@@ -7,14 +7,14 @@ extern "C" {
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
-int FUN_0020b660(...);
+int campChangeState(...);
 int FUN_0021b274(...);
-int FUN_002277d8(void);
+int campResetScreen(void);
 int FUN_00228b04(...);
 int FUN_0022e774(void);
 int campRebuildEnabledFlagList(...);
 int gameGlobalsQueueValues(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_004803e4(...);
 int flagValueSub(...);
 int flagValueIsPositive(...);
@@ -27,7 +27,7 @@ int FUN_00203b40(int, int, int, int);
 int FUN_00215bd0(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a7324(...);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
@@ -77,17 +77,17 @@ extern int FUN_001643a0(void);
 /* Supplied declaration required: FUN_001834a4. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_0020b660. */
+/* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_0021b274. */
-/* Supplied declaration required: FUN_002277d8. */
+/* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: ifTouchRegionAdd. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
 extern int widgetSubCallIfVisible(int);
@@ -106,7 +106,7 @@ extern int itemSelectionCanUse(int, int);
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037245c. */
 /* Supplied declaration required: objBSetRecord2000. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_004803e4. */
 /* Supplied declaration required: FUN_0048053c. */
@@ -181,7 +181,7 @@ void FUN_0020dc1c(void)
                 temp_v8 = 1;
                 FUN_00203b40(temp_v6,temp_v5,temp_v5,1);
                 flaggedEntrySetValueA(temp_v6,temp_v2);
-                temp_v5 = FUN_002a4860(temp_v6);
+                temp_v5 = resourceRunOperationIfUnblocked(temp_v6);
                 temp_v6 = FUN_002a4894(temp_v6);
                 temp_v6 = itemSelectionCanUse(temp_v4,temp_v5 + temp_v6);
                 if (temp_v6 == 0) {
@@ -233,7 +233,7 @@ LAB_0020de28:
     if ((*(char *)(temp_v4 + 0x99e) != '\0') && (temp_v6 = FUN_0023b3d0(), temp_v6 != 0)) {
       FUN_002c85b0(0);
       FUN_0031f718(0xffffffff,0);
-      temp_v6 = FUN_002a4860();
+      temp_v6 = resourceRunOperationIfUnblocked();
       temp_v5 = FUN_002a4894(temp_v4 + 0x32b8);
       temp_v6 = *(int *)(temp_v4 + (temp_v5 + temp_v6) * 4 + 0x3338);
       temp_v2 = gameGetPlayerData();
@@ -267,7 +267,7 @@ LAB_0020de28:
     temp_v6 = temp_v3;
     FUN_003450d4(temp_v3,temp_v2,temp_v4 + 0x1b3e,0);
     if (temp_v6 != 0) {
-      temp_v6 = FUN_002a4860(temp_v3);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
       temp_v5 = FUN_002a4894(temp_v3);
       temp_v3 = *(int *)(temp_v4 + (temp_v6 + temp_v5) * 4 + 0x3338);
       temp_v2 = gameGetPlayerData();
@@ -303,14 +303,14 @@ LAB_0020de28:
           }
           return;
         }
-        temp_v6 = FUN_002a4860(temp_v3);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
         temp_v5 = FUN_002a4894(temp_v3);
         temp_v3 = itemSelectionCanUse(temp_v4,temp_v6 + temp_v5);
         if (temp_v3 == 0) {
           return;
         }
         eventQueueAddUniqueIfValid(0x100020e);
-        FUN_003d2150(0x10000cc);
+        sysPlayVoice(0x10000cc);
         temp_v6 = temp_v4 + (temp_v6 + temp_v5) * 4;
         FUN_004803e4(*(unsigned int *)(temp_v6 + 0x3338));
         gameGetPlayerData();
@@ -331,7 +331,7 @@ LAB_0020de28:
         FUN_00372100(temp_v12,0);
         objBSetRecord2000(&temp_v7);
         FUN_003343c0(1);
-        temp_v6 = FUN_002a4860(temp_v4 + 0xc0);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v4 + 0xc0);
         temp_v5 = FUN_002a4894(temp_v4 + 0xc0);
         temp_v0 = *(unsigned short *)(temp_v4 + (temp_v5 + temp_v6) * 2 + 0x21b0);
         flagValueSub(temp_v0,1);
@@ -346,7 +346,7 @@ LAB_0020de28:
         return;
       }
       eventQueueAddUniqueIfValid(0x100020d);
-      temp_v6 = FUN_002a4860(temp_v3);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v3);
       temp_v5 = FUN_002a4894(temp_v3);
       temp_v3 = *(int *)(temp_v4 + (temp_v6 + temp_v5) * 4 + 0x3338);
       temp_v2 = gameGetPlayerData();
@@ -421,17 +421,17 @@ LAB_0020de28:
     if (temp_v6 == 0) {
       campRebuildEnabledFlagList(0xb);
     }
-    FUN_002277d8();
+    campResetScreen();
     temp_v6 = objectApplyIfUnblocked(temp_v4 + 0xc0);
     if (temp_v6 >= 1) {
       FUN_0021b274(1,0xffffffff,0);
       *(unsigned int *)(temp_v4 + 0x24) = 10;
-      FUN_0020b660(4);
+      campChangeState(4);
       return;
     }
     FUN_0021b274(3,0xffffffff,0);
     *(unsigned int *)(temp_v4 + 0x24) = 6;
-    FUN_0020b660(5);
+    campChangeState(5);
     return;
   }
   return;

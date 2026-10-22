@@ -11,7 +11,7 @@ int asdTMTexLoadMainHeap(int, int);
 int __aeabi_memset4(int, int, unsigned int);
 int asdLoadFileAsyncSimple(...);
 int rt_memclr(int, int);
-int FUN_003f5268(int, int, int);
+int dialogEnterState(int, int, int);
 int FUN_003f84e8(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_003f5268. */
+/* Supplied declaration required: dialogEnterState. */
 /* Supplied declaration required: FUN_003f84e8. */
 
 
@@ -63,7 +63,7 @@ void FUN_003f5598(int param_1)
   FUN_001527d8(temp_v0,0xffffffff);
   positionStateSet(*(unsigned int *)(param_1 + 0x5d8),0,0x646464ff);
   FUN_003f84e8(param_1);
-  FUN_003f5268(param_1,1,0);
+  dialogEnterState(param_1,1,0);
   return;
 }
 

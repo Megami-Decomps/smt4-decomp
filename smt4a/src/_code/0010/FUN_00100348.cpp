@@ -10,7 +10,7 @@ extern "C" {
 extern u8 LAB_00100d79;
 
 u32 FUN_002e31ba(u32 context, Range* range, u32 options, u8* data);
-s32 FUN_002e31e0(u32 mode, Range* range);
+s32 libcFormatAppendByte(u32 mode, Range* range);
 
 u32 FUN_00100348(u32 first, u32 count, u32 context, u32 options)
 {
@@ -20,7 +20,7 @@ u32 FUN_00100348(u32 first, u32 count, u32 context, u32 options)
 
     u32 result = FUN_002e31ba(context, &range, options, &LAB_00100d79);
     if (count != 0) {
-        FUN_002e31e0(0, &range);
+        libcFormatAppendByte(0, &range);
     }
     return result;
 }

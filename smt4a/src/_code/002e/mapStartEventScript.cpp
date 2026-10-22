@@ -18,7 +18,7 @@ s32 FUN_0046e08c(AocSystemA *system, u32 id, s32 flags);
 void *aocDrawText7(AocSystemA *system, u32 id, s32 flags);
 void *aocDrawText8(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
-void *FUN_0020214c(const char *path);
+void *asdLoadFileSyncDefault(const char *path);
 MapScriptProcess *FUN_00275bc8(void *script, void *messages);
 s32 scrScriptProcessGetEntry(MapScriptProcess *process, s32 entry);
 s32 tableGroupFindEntryIndex(void *script, const char *name);
@@ -48,8 +48,8 @@ u32 mapStartEventScript()
             return 0;
         }
     } else {
-        map->script = FUN_0020214c(scriptPath);
-        map->messages = FUN_0020214c(messagePath);
+        map->script = asdLoadFileSyncDefault(scriptPath);
+        map->messages = asdLoadFileSyncDefault(messagePath);
     }
     map->process = FUN_00275bc8(map->script, map->messages);
     map->process->mode = 2;

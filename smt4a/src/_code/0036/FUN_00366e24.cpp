@@ -22,7 +22,7 @@ int mapIfReleaseSlot3(void);
 int FUN_00324e38(unsigned int);
 int FUN_00325ba4(int, int, int, int *, float [7], unsigned int);
 int FUN_00327ee8(void);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int FUN_003d4ed8(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -63,7 +63,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00325ba4. */
 /* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
@@ -125,7 +125,7 @@ void FUN_00366e24(void)
                 FUN_001bbf0c();
                 FUN_0014af98();
                 soundVolumeSettingSet();
-                FUN_003d2150(0x10002e7);
+                sysPlayVoice(0x10002e7);
                 soundVolumeSettingSet(temp_v0);
               }
               temp_v2 = g_lmapScene;

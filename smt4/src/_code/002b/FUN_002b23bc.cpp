@@ -14,7 +14,7 @@ unsigned int FUN_002b23bc(int param_1,int param_2,unsigned int param_3,unsigned 
   local_18 = param_1;
   FUN_002c683e(param_3,&local_18,param_4,&LAB_001008b9);
   if (param_2 != 0) {
-    FUN_002c682a(0,&local_18);
+    libcFormatAppendByte(0,&local_18);
   }
   return param_3;
 }

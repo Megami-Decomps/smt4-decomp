@@ -59,8 +59,8 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: jobGetScalarValue. */
-extern int FUN_00284140(int);
-extern int FUN_002a4860(int);
+extern int recordGetModeForId(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int uiSearchPrimary(int);
 
@@ -125,7 +125,7 @@ unsigned int FUN_0032ba8c(void)
   temp_v25 = 0;
   efctSetSpeed();
   FUN_00164b5c(2,0x24,0xc,temp_v2,temp_v3,0xb);
-  temp_v4 = FUN_002a4860(temp_v1 + 0xf0);
+  temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xf0);
   temp_v28 = FUN_002a4894(temp_v1 + 0xf0);
   temp_v28 = temp_v28 + temp_v4;
   temp_v8 = 0;
@@ -150,7 +150,7 @@ unsigned int FUN_0032ba8c(void)
       temp_v24 = 0;
       temp_v25 = 0;
       temp_v29 = 0x9fddddff;
-      if ((temp_v26 != 0) && (temp_v4 = FUN_002a4860(temp_v1 + 0xf0), temp_v4 + temp_v8 == temp_v28)) {
+      if ((temp_v26 != 0) && (temp_v4 = resourceRunOperationIfUnblocked(temp_v1 + 0xf0), temp_v4 + temp_v8 == temp_v28)) {
         temp_v0 = 1;
         temp_v29 = 0x2bceffff;
       }
@@ -190,7 +190,7 @@ unsigned int FUN_0032ba8c(void)
         }
       }
       temp_v9 = FUN_001834a4(0x24,0x1a);
-      temp_v6 = FUN_002a4860(temp_v1 + 0xf0);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v1 + 0xf0);
       if ((unsigned int)(temp_v6 + temp_v8) < 3) {
         dataTableGet(0x3a,1);
         temp_v5 = dataTableGetEntries();
@@ -203,7 +203,7 @@ unsigned int FUN_0032ba8c(void)
       }
       if (temp_v0) {
         FUN_001835b4(2,0x24,0x1c,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0x1f);
-        temp_v6 = FUN_00284140((int)*(short *)(temp_v1 + 0x1c));
+        temp_v6 = recordGetModeForId((int)*(short *)(temp_v1 + 0x1c));
         temp_v9 = g_renderCtx;
         if ((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6) {
           temp_v6 = packNibblesAndByte(6,1,0);
@@ -232,27 +232,27 @@ unsigned int FUN_0032ba8c(void)
       }
       temp_v27 = *(short *)(temp_v4 + 8) + temp_v2;
       temp_v6 = *(short *)(temp_v4 + 10) + temp_v3;
-      temp_v9 = FUN_002a4860(temp_v1 + 0xf0);
+      temp_v9 = resourceRunOperationIfUnblocked(temp_v1 + 0xf0);
       temp_v4 = g_titleConfig;
       temp_v9 = *(int *)(temp_v1 + (temp_v9 + temp_v8) * 4 + 0x28);
       FUN_00164b5c(2,0x24,3,temp_v27,temp_v6,0x1f);
       temp_v9 = FUN_001834a4(0x24,temp_v9 + 0x5b);
       if (temp_v0) {
-        temp_v5 = FUN_00284140((int)*(short *)(temp_v4 + 0x1e));
+        temp_v5 = recordGetModeForId((int)*(short *)(temp_v4 + 0x1e));
         if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
           FUN_00164b5c(2,0x24,4,temp_v27,temp_v6,0x1f);
         }
         else {
           FUN_00164b5c(2,0x24,5,temp_v27,temp_v6,0x15);
         }
-        temp_v5 = FUN_00284140((int)*(short *)(temp_v4 + 0x20));
+        temp_v5 = recordGetModeForId((int)*(short *)(temp_v4 + 0x20));
         if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
           FUN_00164b5c(2,0x24,6,temp_v27,temp_v6,0x1f);
         }
         else {
           FUN_00164b5c(2,0x24,7,temp_v27,temp_v6,0x15);
         }
-        temp_v4 = FUN_00284140((int)*(short *)(temp_v4 + 0x22));
+        temp_v4 = recordGetModeForId((int)*(short *)(temp_v4 + 0x22));
         temp_v6 = *(short *)(temp_v9 + 10) + temp_v6;
         temp_v9 = *(short *)(temp_v9 + 8) + temp_v27;
         if (!((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6)) {

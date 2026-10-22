@@ -6,14 +6,14 @@ extern "C" {
 
 int asd3dSoundActorIsPlaying(void);
 int FUN_002877d4(...);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int DAT_00448c20; /* 0x448c20 */
 
 /* Supplied declaration required: asd3dSoundActorIsPlaying. */
 /* Supplied declaration required: FUN_002877d4. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 extern unsigned int FUN_00291e40(unsigned int);
 
 
@@ -37,7 +37,7 @@ void FUN_001d36cc(void)
       if ((*(char *)(temp_v4 + 0xc) != '\0') && (*(short *)(temp_v4 + 0x1c) == 1)) {
         temp_v6 = *(float *)(*(int *)(temp_v4 + 0x10) * 4 - 0x3bb7d48);
         temp_v5 = *(float *)(DAT_004474f4 + 0x4c);
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         if (*(int *)(temp_v4 + 0x18) != 0) {
           temp_v1 = *(int *)(temp_v4 + 0x14);
           if (temp_v5 > temp_v6 + temp_v7) {

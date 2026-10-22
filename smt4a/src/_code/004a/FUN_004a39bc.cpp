@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlocks274300. */
@@ -59,7 +59,7 @@ void FUN_004a39bc(int param_1)
       temp_v2[1] = 3;
       temp_v2[2] = 2;
     }
-    temp_v0 = FUN_002a4b74();
+    temp_v0 = messageGetChoiceResult();
     temp_v0 = temp_v2[temp_v0];
     if (temp_v0 != 1) {
       if (temp_v0 == 2) {

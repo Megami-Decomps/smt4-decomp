@@ -111,7 +111,7 @@ extern int configIsClosed(void);
 extern int s4LoadIsActive(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00283d74. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int FUN_0028a230(unsigned int *);
 /* Supplied declaration required: FUN_002c7150. */
 extern int jyoucyuGetLevel(void);
@@ -134,7 +134,7 @@ extern int FUN_0035e6d4(unsigned int *);
 /* Supplied declaration required: texEntrySpritesLoad. */
 /* Supplied declaration required: FUN_0037a2e4. */
 extern int titleConfigIsClosed(void);
-extern int FUN_0038b358(void);
+extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: FUN_0039c244. */
 /* Supplied declaration required: FUN_003b5064. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -682,9 +682,9 @@ LAB_0029fb00:
     puVar5 = DAT_00589170;
     temp_v5 = 0;
     do {
-      temp_v7 = FUN_00284140((int)*(short *)((int)puVar5 + temp_v5 * 2 + 0x50));
+      temp_v7 = recordGetModeForId((int)*(short *)((int)puVar5 + temp_v5 * 2 + 0x50));
       if ((temp_v7 == 1) ||
-         (temp_v7 = FUN_00284140((int)*(short *)((int)puVar5 + temp_v5 * 2 + 0x50)), temp_v7 == 2)) {
+         (temp_v7 = recordGetModeForId((int)*(short *)((int)puVar5 + temp_v5 * 2 + 0x50)), temp_v7 == 2)) {
         puVar5[2] = temp_v5;
         *(unsigned char *)((int)puVar5 + 0x91) = 1;
         break;
@@ -693,7 +693,7 @@ LAB_0029fb00:
     } while (temp_v5 < 5);
     temp_v5 = 0;
     do {
-      temp_v7 = FUN_00284140((int)*(short *)((int)puVar5 + temp_v5 * 2 + 0x50));
+      temp_v7 = recordGetModeForId((int)*(short *)((int)puVar5 + temp_v5 * 2 + 0x50));
       if (temp_v7 == 6) {
         puVar5[2] = temp_v5;
         *(unsigned char *)((int)puVar5 + 0x3f) = 1;
@@ -840,7 +840,7 @@ LAB_0029fb00:
   case 0xe:
     temp_v5 = FUN_002ef9f0();
     if (temp_v5 != 0) break;
-    temp_v5 = FUN_0038b358();
+    temp_v5 = saveLoadUIHasResult();
     if (temp_v5 != 0) {
       *(unsigned char *)((int)puVar4 + 0x3e) = 1;
       soundChannelStopAll(0xf);

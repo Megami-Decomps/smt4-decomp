@@ -17,7 +17,7 @@ int FUN_004118d0(unsigned int *);
 int FUN_00411c04(unsigned int *, int);
 int FUN_00411cec(...);
 int FUN_00412488(...);
-int FUN_004f1530(unsigned int *);
+int mathVectorClear(unsigned int *);
 int FUN_004fe7e4(int, int, int);
 int FUN_004fea10(int, int, int);
 
@@ -37,7 +37,7 @@ extern int FUN_00187168(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int partyCountActiveSlots(void);
-extern unsigned int FUN_003e4fdc(unsigned int);
+extern unsigned int partyFindActiveRecordById(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ecfb4. */
@@ -50,7 +50,7 @@ extern int btlStageGetModeIndex(unsigned int *);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00411cec. */
 /* Supplied declaration required: FUN_00412488. */
-/* Supplied declaration required: FUN_004f1530. */
+/* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: FUN_004fe7e4. */
 /* Supplied declaration required: FUN_004fea10. */
 
@@ -87,7 +87,7 @@ void FUN_00410f84(unsigned int *param_1)
       param_1[0x61] = 0;
     }
     asdLoadFileAsyncSimple(&DAT_00529834,param_1 + 0x61,0);
-    FUN_004f1530(g_btlCamera);
+    mathVectorClear(g_btlCamera);
     puVar1 = g_btlCamera;
     g_btlCamera[3] = 0;
     puVar1[4] = 0;
@@ -127,7 +127,7 @@ void FUN_00410f84(unsigned int *param_1)
     temp_v1 = btlGetMainState();
     temp_v0 = temp_v1;
     FUN_003eaf20();
-    temp_v2 = FUN_003e4fdc(param_1[7] & 0xffff);
+    temp_v2 = partyFindActiveRecordById(param_1[7] & 0xffff);
     FUN_003ecfb4(temp_v1,temp_v0 + 0x164,temp_v2,1);
     *(unsigned int *)(temp_v0 + 0x400) = temp_v2;
     *(unsigned int *)(temp_v1 + 0x4d68) = temp_v2;

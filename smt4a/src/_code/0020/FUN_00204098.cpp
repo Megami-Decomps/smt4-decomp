@@ -19,7 +19,7 @@ int FUN_00387ac4(...);
 int stateHolderEnterState7(void);
 int statusDownEnterState11(...);
 int FUN_003b0744(void);
-int FUN_003c16e0(...);
+int statusDownSelectListIndex(...);
 int engineGetFloatTableValue(...);
 int FUN_003f36a4(...);
 int FUN_003f391c(void);
@@ -49,7 +49,7 @@ int FUN_004bd6b0(...);
 int textFormatBuffer(...);
 int FUN_00180118(...);
 int FUN_00184310(void);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_00203b40(...);
 int FUN_00215bd0(void);
 int FUN_00275bc8(...);
@@ -94,7 +94,7 @@ int FUN_00167458(...);
 int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_00203b1c(void);
+int gameGetUnlockedCountLimit(void);
 int uiUpdateChainedSpriteRows(...);
 int FUN_0023c384(...);
 int mapDepartAdvanceState(void);
@@ -103,7 +103,7 @@ int sysMemClear(...);
 int panelSetMode3(...);
 int FUN_00340a94(...);
 int FUN_00387240(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003d2158(...);
 int gameFlagSetValue(...);
 int itemResetOverLimitStates(...);
@@ -203,8 +203,8 @@ extern char *dataTableGetEntries(void);
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
 extern float FUN_001b4874(int, unsigned int);
-/* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_00203b1c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
+/* Supplied declaration required: gameGetUnlockedCountLimit. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0020b490. */
@@ -228,7 +228,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002818a0. */
 /* Supplied declaration required: mapDepartAdvanceState. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
 /* Supplied declaration required: FUN_002a7288. */
@@ -296,8 +296,8 @@ extern int stateHolderStateIs0xD(void);
 extern int FUN_003a7b74(void);
 /* Supplied declaration required: FUN_003b0744. */
 extern int statusDownGetCursorPosition(void);
-/* Supplied declaration required: FUN_003c16e0. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: statusDownSelectListIndex. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -745,7 +745,7 @@ LAB_00204688:
         temp_v16 = FUN_004ccbf0((unsigned int)*(unsigned short *)((int)temp_v45 + 0x62) +
                               (int)*(short *)(temp_v6 + 0x788a));
         temp_v13 = temp_v16 * 0x1000;
-        temp_v7 = FUN_00203b1c();
+        temp_v7 = gameGetUnlockedCountLimit();
         if ((int)((unsigned int)*(unsigned short *)((int)temp_v45 + 0x62) + (int)*(short *)(temp_v6 + 0x788a)) >=
             temp_v7) {
           temp_v7 = 0x788e;
@@ -848,7 +848,7 @@ LAB_00204688:
             }
             *(long long *)(temp_v16 + 0x7880) = temp_v36 + *(long long *)(temp_v16 + 0x7880);
             *(long long *)(temp_v16 + 0x7878) = temp_v36 + *(long long *)(temp_v16 + 0x7878);
-            temp_v27 = FUN_00203b1c();
+            temp_v27 = gameGetUnlockedCountLimit();
             temp_v8 = (unsigned int)*(unsigned short *)(temp_v51 + 100) + (int)*(short *)(temp_v16 + 0x788a);
             if (temp_v8 >= temp_v27) {
               *(unsigned char *)(temp_v16 + 0x788e) = 0;
@@ -936,7 +936,7 @@ LAB_00204688:
     } while (temp_v7 != 0);
     temp_v48 = temp_v6 + 0x7e00;
     if (*(char *)(temp_v6 + 0x7e49) == '\0') {
-      temp_v11 = FUN_003d2150(0x100021d);
+      temp_v11 = sysPlayVoice(0x100021d);
       *(unsigned int *)(temp_v6 + 0x7e44) = temp_v11;
       *(unsigned char *)(temp_v6 + 0x7e49) = 1;
     }
@@ -987,7 +987,7 @@ LAB_0020524c:
             *(unsigned char *)(temp_v6 + 0x7892) = 1;
             itemResetOverLimitStates(temp_v13);
           }
-          temp_v13 = FUN_00203b1c();
+          temp_v13 = gameGetUnlockedCountLimit();
           if (temp_v13 <= *(unsigned short *)(temp_v7 + 0x62)) {
             *(unsigned int *)(temp_v7 + 0x30) = 0;
           }
@@ -1097,7 +1097,7 @@ LAB_00205528:
                 FUN_0021b968(temp_v6,temp_v7,*(unsigned short *)(temp_v8 + 0x62),(unsigned int)temp_v45 ^ 1);
                 FUN_002818a0(temp_v8);
               }
-              temp_v13 = FUN_00203b1c();
+              temp_v13 = gameGetUnlockedCountLimit();
               if (temp_v13 <= *(unsigned short *)(temp_v8 + 100)) {
                 *(unsigned int *)(temp_v8 + 0x30) = 0;
               }
@@ -1136,7 +1136,7 @@ LAB_00205528:
                 FUN_004cd4b8(temp_v13,(int)(short)temp_v8);
                 *(unsigned short *)(temp_v27 + 0x4490) = 0;
               }
-              temp_v26 = FUN_00203b1c();
+              temp_v26 = gameGetUnlockedCountLimit();
               if (temp_v26 <= *(unsigned short *)(temp_v13 + 100)) {
                 *(unsigned int *)(temp_v13 + 0x30) = 0;
               }
@@ -1407,7 +1407,7 @@ LAB_00205528:
 LAB_00206230:
       textFormatBuffer(&temp_v49,&LAB_0020658c,pcVar26 + 1);
       ppcVar15 = &temp_v49;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;
       temp_v11 = *(unsigned int *)(temp_v6 + 0x43a8);
       FUN_00275bc8(temp_v11,ppcVar15);
@@ -1637,7 +1637,7 @@ joined_r0x002075ac:
     case 2:
       scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       FUN_00371ef4();
-      FUN_003d2150(0x1000219);
+      sysPlayVoice(0x1000219);
       *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
       break;
     case 3:
@@ -1947,7 +1947,7 @@ joined_r0x002075ac:
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
       if (temp_v7 == 2) {
         FUN_00333dc8(0);
-        temp_v7 = FUN_002a4b74();
+        temp_v7 = messageGetChoiceResult();
         if (temp_v7 != 0) {
           *(unsigned int *)(temp_v6 + 0x436c) = 6;
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),6);
@@ -2020,7 +2020,7 @@ joined_r0x002075ac:
               obj04Finish();
               sysPlaySe(0x9c);
               scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43a0),7);
-              temp_v11 = FUN_003d2150(0x100020e);
+              temp_v11 = sysPlayVoice(0x100020e);
               *(unsigned int *)(temp_v6 + 0x75d8) = temp_v11;
               *(unsigned int *)(temp_v6 + 0x436c) = 0x14;
             }
@@ -2033,7 +2033,7 @@ joined_r0x002075ac:
               obj04Finish();
               sysPlaySe(0x9c);
               scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43a0),8);
-              temp_v11 = FUN_003d2150(0x100020f);
+              temp_v11 = sysPlayVoice(0x100020f);
               *(unsigned int *)(temp_v6 + 0x75d8) = temp_v11;
               *(unsigned int *)(temp_v6 + 0x436c) = 0x15;
             }
@@ -2086,7 +2086,7 @@ joined_r0x002073c8:
             if ((temp_v16 == 0x14) &&
                (temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0)), temp_v7 == 2)) {
               FUN_00333dc8(0);
-              temp_v7 = FUN_002a4b74();
+              temp_v7 = messageGetChoiceResult();
               if (temp_v7 == 0) {
                 *(unsigned int *)(temp_v6 + 0x436c) = 3;
                 temp_v11 = 0x67;
@@ -2145,7 +2145,7 @@ joined_r0x002073c8:
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
       if (temp_v7 == 2) {
         FUN_00333dc8(0);
-        temp_v7 = FUN_002a4b74();
+        temp_v7 = messageGetChoiceResult();
         if (temp_v7 != 0) {
           *(unsigned int *)(temp_v6 + 0x436c) = 2;
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),8);
@@ -2219,7 +2219,7 @@ joined_r0x002073c8:
       FUN_00163aa4(temp_v6 + 0x6b0);
       if (*(char *)(temp_v6 + 0x73a) != '\0') {
         *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
-        temp_v11 = FUN_003d2150(0x100021d);
+        temp_v11 = sysPlayVoice(0x100021d);
         *(unsigned int *)(temp_v6 + 0x7e44) = temp_v11;
         *(unsigned char *)(temp_v6 + 0x7e49) = 1;
       }
@@ -2375,7 +2375,7 @@ joined_r0x002073c8:
 LAB_00207d0c:
       textFormatBuffer(&temp_v49,&LAB_0020658c,pcVar26 + 1);
       ppcVar15 = &temp_v49;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;
       temp_v11 = *(unsigned int *)(temp_v6 + 0x43a8);
       FUN_00275bc8(temp_v11,ppcVar15);
@@ -2568,7 +2568,7 @@ LAB_00207d0c:
     case 2:
       scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       FUN_00371ef4();
-      FUN_003d2150(0x1000219);
+      sysPlayVoice(0x1000219);
       temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
       *(int *)(temp_v6 + 0x436c) = temp_v7;
       break;
@@ -2708,7 +2708,7 @@ LAB_00207d0c:
           temp_v44 = temp_v16;
           temp_v16 = statusDownGetCursorPosition();
           statusReplaceSkills(temp_v13 + 0x34,8);
-          FUN_003c16e0(temp_v16 - 1);
+          statusDownSelectListIndex(temp_v16 - 1);
         }
         temp_v11 = *(unsigned int *)(temp_v13 + 0x38);
         temp_v22 = *(unsigned int *)(temp_v13 + 0x3c);

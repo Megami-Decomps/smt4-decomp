@@ -12,7 +12,7 @@ int infoWinSetTimer(...);
 int FUN_002d22c0(int);
 int naviRequestSelectedMap(void);
 int lmapEnableSceneState(void);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int rectRecRead(int, int, int *, int *);
 int sub68OwnerGetBlock60(int);
 int FUN_00492c18(int, unsigned int **);
@@ -49,10 +49,10 @@ extern int mapIfGetState(void);
 /* Supplied declaration required: naviRequestSelectedMap. */
 extern int gameFlagsClassify(void);
 /* Supplied declaration required: lmapEnableSceneState. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
-extern int FUN_00492bc0(int);
+extern int naviGetActiveStateValue(int);
 /* Supplied declaration required: FUN_00492c18. */
 /* Supplied declaration required: setFullScreenRect. */
 /* Supplied declaration required: FUN_004d0420. */
@@ -106,10 +106,10 @@ unsigned int FUN_00489480(int param_1)
   if (temp_v6 != 0) {
     if (DAT_005f161d != '\0') {
       if (DAT_005f1a5e != '\0') {
-        temp_v1 = FUN_00492bc0(temp_v7);
+        temp_v1 = naviGetActiveStateValue(temp_v7);
         temp_v2 = NaviMain_GetCurrentMap(temp_v7);
         if ((temp_v1 != temp_v2) && (DAT_005f1a5c == '\0')) {
-          FUN_003d2150(0x100020f);
+          sysPlayVoice(0x100020f);
           naviRequestSelectedMap();
           temp_v1 = 0;
           do {
@@ -120,7 +120,7 @@ unsigned int FUN_00489480(int param_1)
           goto LAB_00489788;
         }
       }
-      FUN_003d2150(0x100020f);
+      sysPlayVoice(0x100020f);
       *(unsigned char *)(param_1 + 0x5c) = 5;
       *(unsigned int *)(param_1 + 8) = 0;
       *(unsigned int *)(param_1 + 4) = 0xd;
@@ -137,7 +137,7 @@ unsigned int FUN_00489480(int param_1)
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
       dialogClose(1);
-      temp_v1 = FUN_00492bc0(temp_v7);
+      temp_v1 = naviGetActiveStateValue(temp_v7);
       temp_v2 = NaviMain_GetCurrentMap(temp_v7);
       if (temp_v1 == temp_v2) {
         DAT_005f1a5e = '\0';
@@ -162,7 +162,7 @@ unsigned int FUN_00489480(int param_1)
         }
         return temp_v3;
       }
-      FUN_003d2150(0x10000d3);
+      sysPlayVoice(0x10000d3);
       *(unsigned char *)(param_1 + 0x5c) = 5;
       *(unsigned int *)(param_1 + 8) = 0;
       *(unsigned int *)(param_1 + 4) = 0xd;

@@ -15,8 +15,8 @@ int eventQueueAddUniqueIfValid(...);
 int FUN_0019de98(...);
 int FUN_0020b908(...);
 int FUN_00228b04(int, int);
-int FUN_0023c08c(int);
-int FUN_002a4860(...);
+int uniteStartOrQueueRequest(int);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a48e0(int, int);
 int FUN_002a4964(int, int);
 int FUN_002a7b74(void);
@@ -50,10 +50,10 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: FUN_0023c08c. */
-extern int FUN_00284140(int);
+/* Supplied declaration required: uniteStartOrQueueRequest. */
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_00284ee4. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4964. */
@@ -119,13 +119,13 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   puVar12 = (unsigned char *)(param_1 + 0x8eac);
   if ((temp_v4 != 0) || (temp_v4 = temp_v14, FUN_00228b04(temp_v14,1), temp_v4 != 0)) {
     temp_v10 = FUN_002a4894(temp_v14);
-    temp_v4 = FUN_002a4860(temp_v14);
+    temp_v4 = resourceRunOperationIfUnblocked(temp_v14);
     temp_v5 = FUN_002a4894(temp_v14);
     temp_v4 = temp_v4 + temp_v5;
-    temp_v5 = FUN_002a4860(temp_v14);
+    temp_v5 = resourceRunOperationIfUnblocked(temp_v14);
     if ((*piVar11 >= 9) && ((char)temp_v18 == '\0')) {
-      temp_v11 = FUN_00284140((int)*(short *)(param_1 + *(short *)(param_1 + 0x8e88) * 2 + 0x438));
-      temp_v6 = FUN_00284140((int)*(short *)(param_1 + 0x446));
+      temp_v11 = recordGetModeForId((int)*(short *)(param_1 + *(short *)(param_1 + 0x8e88) * 2 + 0x438));
+      temp_v6 = recordGetModeForId((int)*(short *)(param_1 + 0x446));
       temp_v12 = (unsigned int *)objectApplyIfUnblocked(temp_v14);
       temp_v1 = *(char *)(param_1 + 0x8eac);
       *puVar12 = 0;
@@ -156,7 +156,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
           }
         }
         if ((temp_v10 >= 7) && (temp_v4 < (int)temp_v12 - 2)) {
-          temp_v5 = FUN_002a4860(temp_v14);
+          temp_v5 = resourceRunOperationIfUnblocked(temp_v14);
           flaggedEntrySetValueA(temp_v14,temp_v10 - 1);
           FUN_002a48e0(temp_v14,temp_v5 + 1);
         }
@@ -174,7 +174,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   FUN_001517b4(0,1);
   temp_v16 = param_1 + 0x8b60;
   if (temp_v4 != 0 || (char)temp_v18 != '\0') {
-    temp_v4 = FUN_002a4860(temp_v14);
+    temp_v4 = resourceRunOperationIfUnblocked(temp_v14);
     temp_v5 = FUN_002a4894(temp_v14);
     temp_v4 = temp_v4 + temp_v5;
     if ((*piVar11 <= temp_v4) || (*(char *)(param_1 + 0x8eac) != '\0')) {
@@ -223,7 +223,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 8);
       FUN_002a7b74();
-      FUN_0023c08c(0xe);
+      uniteStartOrQueueRequest(0xe);
       eventQueueAddUniqueIfValid(0x100020f);
       return temp_v15;
     }
@@ -237,7 +237,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
     if (temp_v4 < *(int *)(param_1 + 0x8e80)) {
       eventQueueAddUniqueIfValid(0x100020e);
       *(unsigned char *)(param_1 + 0x8e8a) = 0;
-      temp_v4 = FUN_002a4860();
+      temp_v4 = resourceRunOperationIfUnblocked();
       temp_v5 = FUN_002a4894(param_1 + 0x8db0);
       if (*(short *)(param_1 + (temp_v5 + temp_v4) * 2 + 0x8b60) != 0) {
         FUN_00359b6c();
@@ -267,7 +267,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
             *param_3 = 0;
           }
           else {
-            temp_v6 = FUN_002a4860(temp_v17);
+            temp_v6 = resourceRunOperationIfUnblocked(temp_v17);
             temp_v8 = FUN_002a4894(temp_v17);
             temp_v7 = (unsigned int)*(unsigned short *)(param_1 + (temp_v8 + temp_v6) * 2 + 0x6832);
             *param_3 = temp_v7;

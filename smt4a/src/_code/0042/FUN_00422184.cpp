@@ -15,7 +15,7 @@ int VectorSignedToFloat(int, int);
 /* Supplied declaration required: FUN_00168fbc. */
 /* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
 /* Supplied declaration required: asdTextureCreate. */
-extern unsigned int FUN_001bc2ec(unsigned int);
+extern unsigned int asdGxGetPhysicalAddress(unsigned int);
 
 
 void FUN_00422184(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -52,7 +52,7 @@ void FUN_00422184(float *param_1,unsigned int param_2,unsigned int param_3,unsig
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = VectorFloatToUnsigned(temp_v3 * temp_v1,3);
   nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)((int)temp_v0 + 0x24),temp_v2);
-  temp_v2 = FUN_001bc2ec(*(unsigned int *)((int)param_1[4] + 0x24));
+  temp_v2 = asdGxGetPhysicalAddress(*(unsigned int *)((int)param_1[4] + 0x24));
   *(unsigned int *)((int)param_1[4] + 0x30) = temp_v2;
   param_1[6] = 1.0f;
   *(unsigned char *)(param_1 + 7) = 0;

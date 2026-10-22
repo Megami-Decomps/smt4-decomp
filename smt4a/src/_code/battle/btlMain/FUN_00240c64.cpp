@@ -45,7 +45,7 @@ extern unsigned int DAT_00573b24; /* 0x573b24 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern unsigned int gameGetSlotTable(void);
-extern unsigned int FUN_001bce18(void);
+extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: FUN_0024d9c4. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -79,7 +79,7 @@ void FUN_00240c64(unsigned int *param_1,int param_2)
   temp_v1 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);
   DAT_00573928 = temp_v1;
-  temp_v1 = FUN_001bce18();
+  temp_v1 = flagValueGetStorage();
   rt_memcpy(DAT_00573928,temp_v1,0x10b8);
   FUN_0024d9c4();
   temp_v5 = 0;

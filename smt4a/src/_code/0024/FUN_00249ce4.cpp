@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [64], unsigned char *, int);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 
 extern unsigned char LAB_00249d8c; /* 0x249d8c */
 extern unsigned char LAB_00249da4; /* 0x249da4 */
@@ -15,7 +15,7 @@ extern unsigned char *g_mapTable; /* 0x5821c4 */
 extern unsigned int DAT_005821cc; /* 0x5821cc */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 
 
 void FUN_00249ce4(int param_1)
@@ -31,24 +31,24 @@ void FUN_00249ce4(int param_1)
   DAT_005821cc = 0x80;
   if (param_1 == 300) {
     puVar1 = &LAB_00249da4;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     g_mapTable = puVar1;
     return;
   }
   if (param_1 != 200) {
     if (param_1 >= 100) {
       textFormatBuffer(temp_v0,&LAB_00249d8c,param_1 - 100);
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       g_mapTable = puVar1;
       return;
     }
     textFormatBuffer(temp_v0,&LAB_00249dd4,param_1);
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     g_mapTable = puVar2;
     return;
   }
   puVar1 = &LAB_00249dbc;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   g_mapTable = puVar1;
   return;
 }

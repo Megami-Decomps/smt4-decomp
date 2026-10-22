@@ -127,7 +127,7 @@ unsigned int FUN_0010095c(unsigned int param_1,unsigned int param_2,int param_3,
     FUN_002e3f68(temp_v8);
     if (*(int *)(temp_v7 - 4) != 0) {
       temp_v2 = temp_v15;
-      temp_v2 = (int)FUN_002e3338((char*)temp_v15,(s32)temp_v16,(const char*)temp_v7,*(va_list*)&temp_v18);
+      temp_v2 = (int)asdStringFormatGrow((char*)temp_v15,(s32)temp_v16,(const char*)temp_v7,*(va_list*)&temp_v18);
       FUN_002e3f68(&temp_v7);
     }
     else {

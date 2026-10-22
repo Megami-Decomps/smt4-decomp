@@ -15,7 +15,7 @@ int FUN_00229b10(...);
 int bgmSwitchCurrent(...);
 int FUN_00247478(unsigned char [28], int, unsigned int);
 int btlMainFindEntryByListedId(int, int);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_002ae164(void);
 int FUN_002bf80c(...);
 int memClear(int *, int);
@@ -52,7 +52,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 extern int battleUiIsFadeAndFieldReady(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028d1f4(int);
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002bf80c. */
@@ -336,7 +336,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
           FUN_00229b10(param_1,param_2);
           temp_v1 = FUN_0028d1f4(temp_v16);
           FUN_003dda20(1,param_2,-temp_v1);
-          FUN_0029be5c(1,temp_v1);
+          gameCounterAddSaturating(1,temp_v1);
         }
         temp_v10 = 1;
         temp_v9 = 1;

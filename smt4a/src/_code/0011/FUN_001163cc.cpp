@@ -11,7 +11,7 @@ int destroyObj0055ae64(unsigned char [24]);
 int FUN_002f451c(int *, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
-int FUN_0030202c(int, int, unsigned int);
+int onlineJobApplyStateTriple(int, int, unsigned int);
 int FUN_00302058(unsigned char [24], unsigned int, unsigned int);
 int FUN_003020dc(int, unsigned int, unsigned int, int);
 
@@ -34,7 +34,7 @@ extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002f451c. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-/* Supplied declaration required: FUN_0030202c. */
+/* Supplied declaration required: onlineJobApplyStateTriple. */
 /* Supplied declaration required: FUN_00302058. */
 /* Supplied declaration required: FUN_003020dc. */
 
@@ -68,7 +68,7 @@ void FUN_001163cc(int param_1)
     if (temp_v1 == 0) {
       temp_v3[0] = 0x80010001;
       temp_v0 = FUN_002e7908(temp_v6,temp_v3);
-      FUN_0030202c(param_1,3,temp_v0);
+      onlineJobApplyStateTriple(param_1,3,temp_v0);
       return;
     }
   }

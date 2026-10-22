@@ -44,7 +44,7 @@ extern int FUN_001ba3d4(unsigned short);
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_0022fcb8. */
 /* Supplied declaration required: menuStateReset. */
-extern int FUN_002a4860(unsigned int *);
+extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_002c13b0. */
 /* Supplied declaration required: FUN_002c13d4. */
@@ -88,7 +88,7 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
   switch(puVar2[0x3013]) {
   case 1:
     if (param_4 != 0) {
-      temp_v4 = FUN_002a4860(puVar2 + 0x18c4);
+      temp_v4 = resourceRunOperationIfUnblocked(puVar2 + 0x18c4);
       temp_v1 = FUN_002a4894(puVar2 + 0x18c4);
       if (temp_v1 + temp_v4 != 0) {
         if (temp_v1 + temp_v4 == 1) {

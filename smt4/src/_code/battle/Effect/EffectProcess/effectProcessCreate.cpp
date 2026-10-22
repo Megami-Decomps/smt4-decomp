@@ -7,7 +7,7 @@ extern EffectProcess *g_effectProcessActive;
 void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 void taskInitLists();
-void FUN_00200b10(u32);
+void textureCacheReset(u32);
 void FUN_00317a90();
 void FUN_00221ba8();
 void FUN_002c2044(EffectProcess *, u32);
@@ -31,7 +31,7 @@ u32 effectProcessCreate(u8 keepScene)
     memClear(work, sizeof(EffectProcess));
     work->keepScene = keepScene;
     taskInitLists();
-    FUN_00200b10(0);
+    textureCacheReset(0);
     if (!work->keepScene)
         FUN_00317a90();
     FUN_00221ba8();

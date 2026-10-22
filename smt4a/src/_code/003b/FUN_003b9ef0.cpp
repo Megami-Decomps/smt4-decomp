@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002750d8(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 
 int FUN_0013cab8(...);
 int FUN_00272f54(void);
@@ -14,7 +14,7 @@ int navigationSetArguments(...);
 int FUN_00303460(...);
 int blockResetAxis(unsigned int);
 int FUN_00313648(...);
-int FUN_00314c38(...);
+int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
 int naviMainApplyRequestValue(...);
 int FUN_0035846c(void);
@@ -79,13 +79,13 @@ extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_00272f54. */
 /* Supplied declaration required: FUN_002750d8. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bcafc. */
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: FUN_00313648. */
-/* Supplied declaration required: FUN_00314c38. */
+/* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_0035846c. */
@@ -98,7 +98,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003b5d20. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
@@ -120,12 +120,12 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   temp_v2 = g_mapMain;
   if (DAT_005f1890 != '\0') {
     DAT_005f1890 = '\0';
-    temp_v1 = FUN_002a4b74();
+    temp_v1 = messageGetChoiceResult();
     if (temp_v1 == 0) {
       FUN_00313648(0x26);
       *(unsigned int *)(temp_v2 + 0x28) = 0x88;
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
-      FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
+      naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
       naviMainSetRequestValue(1);
       return;
     }
@@ -135,9 +135,9 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   }
   else if (DAT_005f188d != '\0') {
     DAT_005f188d = '\0';
-    temp_v1 = FUN_002a4b74();
+    temp_v1 = messageGetChoiceResult();
     if (temp_v1 == 0) {
-      FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
+      naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
       *(unsigned int *)(temp_v2 + 0x28) = 0x42;
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       return;
@@ -148,9 +148,9 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   }
   else if (DAT_005f188e != '\0') {
     DAT_005f188e = '\0';
-    temp_v1 = FUN_002a4b74();
+    temp_v1 = messageGetChoiceResult();
     if (temp_v1 == 0) {
-      FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
+      naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
       *(unsigned char *)(temp_v2 + 0x16) = 1;
       FUN_00313648(0x26);
       *(unsigned int *)(temp_v2 + 0x28) = 0x65;
@@ -187,7 +187,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
   if (DAT_005f1650 == 0) {
     if (DAT_005f1654 != 0) {
       DAT_005f1654 = 0;
-      FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
+      naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
       FUN_0036b004();
       *(unsigned int *)(temp_v2 + 0x3c) = DAT_005f16a0;
       *(unsigned char *)(temp_v2 + 0xf) = 1;
@@ -315,7 +315,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     return;
   }
   DAT_005f1650 = 0;
-  FUN_00314c38(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
+  naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
   if (g_gameState != 5) {
     if ((g_gameState != 3) || (DAT_005f1600 != 3)) goto LAB_003ba158;
   }
@@ -328,10 +328,10 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       else {
         temp_v1 = DAT_005f16e0 + 0x10000d6;
       }
-      FUN_003d2150(temp_v1);
+      sysPlayVoice(temp_v1);
     }
     else {
-      FUN_003d2150(0x1000130);
+      sysPlayVoice(0x1000130);
     }
     DAT_005f1a50 = DAT_005f16e0;
   }

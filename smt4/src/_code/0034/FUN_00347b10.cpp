@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023b5e0(int, float *, int);
-int FUN_00241d44(int *);
+int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_002573d8(void);
 int forwardRecoveredCallback(void);
 int FUN_002c1b64(int, unsigned int);
@@ -39,7 +39,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0023b5e0. */
-/* Supplied declaration required: FUN_00241d44. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -157,15 +157,15 @@ void FUN_00347b10(int param_1)
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
   FUN_002573d8();
-  FUN_00241d44(&temp_v15);
+  gpuSubmitFloatVectorsOrDefault(&temp_v15);
   temp_v0 = 1;
   if (temp_v0 < **(int **)(param_1 + 0x60) + 1) {
     do {
-      FUN_00241d44(&temp_v11);
+      gpuSubmitFloatVectorsOrDefault(&temp_v11);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < **(int **)(param_1 + 0x60) + 1);
   }
-  FUN_00241d44(&temp_v11);
+  gpuSubmitFloatVectorsOrDefault(&temp_v11);
   forwardRecoveredCallback();
   temp_v0 = g_titleScene;
   piVar10 = (int *)(g_titleScene + 0x124c);

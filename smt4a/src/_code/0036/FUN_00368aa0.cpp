@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0033ab6c(int, int);
+int gameFlagSetIndexedBit(int, int);
 int FUN_0037c7a8(void);
 int dataTable2CType0Count(void);
 
 extern int gameFlagBitsTest(int);
-/* Supplied declaration required: FUN_0033ab6c. */
+/* Supplied declaration required: gameFlagSetIndexedBit. */
 extern char *dataTable2CGetEntry(int);
 /* Supplied declaration required: FUN_0037c7a8. */
 /* Supplied declaration required: dataTable2CType0Count. */
@@ -38,7 +38,7 @@ void FUN_00368aa0(unsigned int param_1)
         temp_v1 = gameFlagBitsTest((int)pcVar1[3]);
         temp_v0 = 0;
         if (temp_v1 != 0) {
-          FUN_0033ab6c((int)pcVar1[3],0);
+          gameFlagSetIndexedBit((int)pcVar1[3],0);
           temp_v0 = (unsigned int)pcVar1[3];
           FUN_0037c7a8();
         }

@@ -12,7 +12,7 @@ int jobStop(...);
 int FUN_001f4f14(...);
 int FUN_0021799c(void);
 int FUN_00222b5c(...);
-int FUN_00225200(...);
+int playSceneResumeState(...);
 int FUN_00287188(...);
 int FUN_00289f18(...);
 int FUN_00289fa8(...);
@@ -103,7 +103,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0021799c. */
 /* Supplied declaration required: FUN_00222b5c. */
 /* Supplied declaration required: FUN_002251d4. */
-/* Supplied declaration required: FUN_00225200. */
+/* Supplied declaration required: playSceneResumeState. */
 extern int FUN_00225220(int);
 extern int battleTalkGetBustState(void);
 /* Supplied declaration required: recordQueryStateThree. */
@@ -161,7 +161,7 @@ extern int jobGetWork(void);
 extern unsigned int FUN_002cdd74(void);
 extern int FUN_002d0080(int);
 extern int FUN_002d0298(int);
-extern int FUN_002d8e40(void);
+extern int partyPanelGetState(void);
 extern unsigned int partyPanelGetValue(void);
 extern int FUN_002dc3ec(int);
 /* Supplied declaration required: FUN_002dc55c. */
@@ -563,7 +563,7 @@ LAB_0019e7b8:
         }
         else {
           *(unsigned char *)(temp_v0 + 0x7e49) = 1;
-          temp_v12 = FUN_002d8e40();
+          temp_v12 = partyPanelGetState();
           if (temp_v12 == 0xb) {
             temp_v7 = partyPanelGetValue();
             temp_v6 = FUN_002cdd74();
@@ -574,7 +574,7 @@ LAB_0019e7b8:
         *(unsigned int *)(temp_v0 + 0x7e38) = 7;
         temp_v4 = FUN_0028c028();
         if (temp_v4 != 0) {
-          FUN_00225200(temp_v0 + 0x2460);
+          playSceneResumeState(temp_v0 + 0x2460);
         }
         temp_v8 = g_btlUiBlock;
         temp_v4 = playSceneIsFadeOutDone(g_btlUiBlock + 8);

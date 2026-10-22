@@ -41,7 +41,7 @@ int jyoucyuGetTableEntry(int);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int asdTMTexLoadMainHeap(int, int);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int mapPopupReset(void);
 int FUN_00246128(void);
 int FUN_00275bc8(...);
@@ -58,7 +58,7 @@ int FUN_0037c8e4(...);
 int FUN_00398258(...);
 int FUN_003a6b10(...);
 int FUN_003ca244(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int loadSlotEnsureLoaded(int);
 int gameFlagSetValue(int, int);
 int FUN_00480a54(void);
@@ -127,7 +127,7 @@ extern int gameFlagIsSet(unsigned int, int, int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: dataTableFree. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: mapPopupReset. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00234528. */
@@ -139,7 +139,7 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_00295108. */
 extern int messageMainGetValue(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002b5e08. */
 extern int popupIsActive(void);
 /* Supplied declaration required: gameDataAddCappedPoints. */
@@ -174,7 +174,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: FUN_003a6b10. */
 /* Supplied declaration required: scrCommResetPanel. */
 /* Supplied declaration required: FUN_003ca244. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -306,10 +306,10 @@ unsigned int FUN_002991d4(void)
     else {
       FUN_001681c4();
       puVar15 = &LAB_00299cdc;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(unsigned char **)(temp_v4 + 0x100) = puVar15;
       puVar15 = &LAB_00299cf0;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(unsigned char **)(temp_v4 + 0x104) = puVar15;
       temp_v11 = *(int *)(temp_v4 + 0x100);
       FUN_00275bc8(temp_v11,puVar15);
@@ -489,7 +489,7 @@ unsigned int FUN_002991d4(void)
     }
     if (*(int *)(temp_v4 + 0x4c) == 6) {
       *(unsigned char *)(temp_v4 + 0x70) = 1;
-      FUN_003d2150(0x10000c7);
+      sysPlayVoice(0x10000c7);
     }
     if (*(int *)(temp_v4 + 0x4c) == 7) {
       if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(g_lmapView + 0xb0) == 0)) {
@@ -767,10 +767,10 @@ LAB_0029a094:
   case 7:
     FUN_001681c4();
     puVar15 = &LAB_0029a5c4;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v4 + 0x100) = puVar15;
     puVar15 = &LAB_0029a5dc;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v4 + 0x104) = puVar15;
     temp_v11 = *(int *)(temp_v4 + 0x100);
     FUN_00275bc8(temp_v11,puVar15);
@@ -856,7 +856,7 @@ LAB_0029a094:
         FUN_00163aa4(temp_v4 + 0x148);
         if (*(char *)(temp_v4 + 0x1d2) != '\0') {
           *(unsigned int *)(temp_v4 + 0x490) = 2;
-          temp_v12 = FUN_003d2150(0x100021d);
+          temp_v12 = sysPlayVoice(0x100021d);
           *(unsigned int *)(temp_v4 + 0x49c) = temp_v12;
         }
         break;
@@ -949,7 +949,7 @@ LAB_0029a094:
     *(int *)(g_mapDepart + 0x4c) = temp_v11;
     if (temp_v11 == 6) {
       *(unsigned char *)(temp_v4 + 0x70) = 1;
-      FUN_003d2150(0x10000c7);
+      sysPlayVoice(0x10000c7);
     }
     if (*(int *)(temp_v4 + 0x4c) == 7) {
       if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(g_lmapView + 0xb0) == 0)) {
@@ -1019,10 +1019,10 @@ LAB_002993c0:
     }
     FUN_001681c4();
     puVar15 = &LAB_0029a5c4;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v4 + 0x100) = puVar15;
     puVar15 = &LAB_0029a5dc;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v4 + 0x104) = puVar15;
     temp_v11 = *(int *)(temp_v4 + 0x100);
     FUN_00275bc8(temp_v11,puVar15);
@@ -1048,7 +1048,7 @@ LAB_002993c0:
       *(unsigned int *)(temp_v4 + 0x108) = 0;
       *(unsigned int *)(temp_v4 + 0x100) = 0;
       *(unsigned int *)(temp_v4 + 0x104) = 0;
-      temp_v11 = FUN_002a4b74();
+      temp_v11 = messageGetChoiceResult();
       if (temp_v11 != 0) {
         blockResetAxis(0xffffffff);
       }

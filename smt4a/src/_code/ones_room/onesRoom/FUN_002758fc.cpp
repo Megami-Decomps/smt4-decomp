@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int asdMemoryAlloc(...);
 int sysPlaySe(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_0022677c(...);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
@@ -30,7 +30,7 @@ extern unsigned int *g_onesRoom; /* 0x588134 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -63,10 +63,10 @@ void FUN_002758fc(int param_1)
   FUN_003b61ec();
   sysPlaySe(0xa4);
   puVar2 = &LAB_00275a40;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[1] = (unsigned int)puVar2;
   puVar2 = &LAB_00275a58;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[3] = (unsigned int)puVar2;
   temp_v0 = puVar1[1];
   FUN_00275bc8(temp_v0,puVar2);

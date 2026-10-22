@@ -7,7 +7,7 @@ void FUN_0017cdb0(void);
 u32 FUN_00188ca4(void);
 u32 FUN_00188c94(void);
 f32 FUN_00168fbc(u32 format, u32 type, u32* hardwareFormat);
-u32 FUN_001bc2ec(u32 address);
+u32 asdGxGetPhysicalAddress(u32 address);
 void* asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 void FUN_0017cf74(const void* source, void* destination, u32 bytes);
 
@@ -38,9 +38,9 @@ void asdTextureSetImage(AsdTexture* texture)
                 texture->auxiliaryData = asdMemoryAlloc(ASD_HEAP_VRAM_B, ASD_ALIGN_DEFAULT, 0, bytes, 1);
             }
             FUN_0017cf74(texture->storage.pixels, texture->auxiliaryData, bytes);
-            texture->image.physicalAddress = FUN_001bc2ec((u32)texture->auxiliaryData);
+            texture->image.physicalAddress = asdGxGetPhysicalAddress((u32)texture->auxiliaryData);
         } else {
-            texture->image.physicalAddress = FUN_001bc2ec((u32)texture->storage.pixels);
+            texture->image.physicalAddress = asdGxGetPhysicalAddress((u32)texture->storage.pixels);
         }
     } else {
         if (texture->unk08 != ASD_HEAP_EXTRA) {
@@ -53,9 +53,9 @@ void asdTextureSetImage(AsdTexture* texture)
                 texture->auxiliaryData = asdMemoryAlloc(ASD_HEAP_VRAM_B, ASD_ALIGN_DEFAULT, 0, bytes, 1);
             }
             FUN_0017cf74(texture->storage.pixels, texture->auxiliaryData, bytes);
-            texture->image.physicalAddress = FUN_001bc2ec((u32)texture->auxiliaryData);
+            texture->image.physicalAddress = asdGxGetPhysicalAddress((u32)texture->auxiliaryData);
         } else {
-            texture->image.physicalAddress = FUN_001bc2ec((u32)texture->storage.pixels);
+            texture->image.physicalAddress = asdGxGetPhysicalAddress((u32)texture->storage.pixels);
         }
     }
     FUN_0017cdb0();

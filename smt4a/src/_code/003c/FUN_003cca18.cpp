@@ -9,7 +9,7 @@ int eventQueueAddUniqueIfValid(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_0020b908(int, int);
 int FUN_00228b04(int, int);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int unitRecordBuild(unsigned int, int *);
 int FUN_003450d4(int, int, int, unsigned int);
 int FUN_00359b6c(...);
@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -62,7 +62,7 @@ unsigned int FUN_003cca18(int param_1,unsigned int param_2,unsigned int *param_3
   puStack_20 = param_3;
   FUN_003450d4(temp_v0,0,param_1 + 0x478,0xffffffff);
   if ((temp_v1 != 0) || (temp_v1 = temp_v0, FUN_00228b04(temp_v0,1), temp_v1 != 0)) {
-    temp_v1 = FUN_002a4860(temp_v0);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v0);
     temp_v0 = FUN_002a4894(temp_v0);
     if (*(short *)(param_1 + (temp_v0 + temp_v1) * 2 + 0x8b60) != 0) {
       FUN_00359b6c();
@@ -81,7 +81,7 @@ unsigned int FUN_003cca18(int param_1,unsigned int param_2,unsigned int *param_3
         *param_3 = 0;
       }
       else {
-        temp_v1 = FUN_002a4860();
+        temp_v1 = resourceRunOperationIfUnblocked();
         temp_v0 = FUN_002a4894(param_1 + 0x67cc);
         temp_v2 = (unsigned int)*(unsigned short *)(param_1 + (temp_v0 + temp_v1) * 2 + 0x6832);
         *param_3 = temp_v2;
@@ -96,7 +96,7 @@ unsigned int FUN_003cca18(int param_1,unsigned int param_2,unsigned int *param_3
       if (temp_v1 != 0) {
         eventQueueAddUniqueIfValid(0x100020f);
         *(unsigned char *)(param_1 + 0x8e8a) = 1;
-        temp_v1 = FUN_002a4860();
+        temp_v1 = resourceRunOperationIfUnblocked();
         temp_v0 = FUN_002a4894(param_1 + 0x8e14);
         FUN_00359b6c(*(unsigned short *)(param_1 + (temp_v0 + temp_v1) * 2 + 0x8b70));
       }

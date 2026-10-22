@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+int asdDeallocateArrayStorage(int, int, int);
 int FUN_00192550(void);
 int dataTable04FindById(void);
 int sysMemClear(int [21], int);
@@ -17,7 +17,7 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern unsigned short *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: dataTable04FindById. */
@@ -130,7 +130,7 @@ void FUN_00335c6c(void)
           }
           temp_v7 = *piVar22;
           temp_v10 = *(int *)(temp_v6 + 0x4e5c);
-          FUN_001006ec(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
+          asdDeallocateArrayStorage(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
           *(unsigned short **)(temp_v6 + 0x4e60) = puVar11 + temp_v11;
           *(unsigned short **)(temp_v6 + 0x4e5c) = puVar11 + ((temp_v10 - temp_v7) >> 1) + 1;
           *piVar22 = (int)puVar11;
@@ -203,7 +203,7 @@ void FUN_00335c6c(void)
           }
           temp_v7 = *piVar22;
           temp_v10 = *(int *)(temp_v6 + 0x4e5c);
-          FUN_001006ec(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
+          asdDeallocateArrayStorage(temp_v7,(*(int *)(temp_v6 + 0x4e60) - temp_v7) >> 1,0);
           *(unsigned short **)(temp_v6 + 0x4e60) = puVar11 + temp_v11;
           *(unsigned short **)(temp_v6 + 0x4e5c) = puVar11 + ((temp_v10 - temp_v7) >> 1) + 1;
           *piVar22 = (int)puVar11;

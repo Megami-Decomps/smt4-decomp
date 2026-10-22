@@ -18,7 +18,7 @@ int FUN_00180118(unsigned int);
 int FUN_00184310(...);
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_0022e774(void);
 int FUN_0026c3c4(int);
 int FUN_00275bc8(...);
@@ -32,7 +32,7 @@ int FUN_003180c4(...);
 int FUN_00333dc8(...);
 int statusDisplayBindUnitRecord(int, int, int);
 int FUN_00336de4(...);
-int FUN_0035ab40(int);
+int gameClearOwnedSlot(int);
 int FUN_0035da20(...);
 int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
@@ -75,7 +75,7 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int gameGetSlotRecord(int);
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_0020b490. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
@@ -86,7 +86,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
 extern int FUN_002a4b28(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a7288. */
 /* Supplied declaration required: libc_strcpy. */
@@ -96,7 +96,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_00336de4. */
-/* Supplied declaration required: FUN_0035ab40. */
+/* Supplied declaration required: gameClearOwnedSlot. */
 /* Supplied declaration required: FUN_0035da20. */
 /* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -165,7 +165,7 @@ void FUN_002f5064(int param_1)
       temp_v4 = FUN_003f3908(temp_v2);
       temp_v3 = FUN_002a4b28();
       *(unsigned char *)(param_1 + 0x7f2c) = temp_v3 == 0;
-      FUN_0035ab40(temp_v2);
+      gameClearOwnedSlot(temp_v2);
       temp_v3 = temp_v2;
       FUN_003f33b0(temp_v2,temp_v4,temp_v11 + 0x4564);
       temp_v12 = (unsigned int)(param_1 + 0x75d4);
@@ -283,7 +283,7 @@ void FUN_002f5064(int param_1)
 LAB_002f56d4:
       textFormatBuffer(temp_v19,&LAB_002f5758,pcVar14 + 1);
       puVar8 = temp_v19;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(unsigned char **)(param_1 + 0x43b0) = puVar8;
       temp_v4 = *(unsigned int *)(param_1 + 0x43a8);
       FUN_00275bc8(temp_v4,puVar8);
@@ -371,7 +371,7 @@ LAB_002f56d4:
     case 2:
       temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
       if (temp_v2 == 2) {
-        temp_v2 = FUN_002a4b74();
+        temp_v2 = messageGetChoiceResult();
         if (temp_v2 == 0) {
           *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
           FUN_00333dc8(1);

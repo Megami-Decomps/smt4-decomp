@@ -53,7 +53,7 @@ int SBORROW4(...);
 
 int uiSpriteSelectAnim(...);
 int FUN_0022e774(void);
-int FUN_00284140(...);
+int recordGetModeForId(...);
 int FUN_0028a538(...);
 int FUN_002a7324(...);
 int flaggedEntrySetValueA(...);
@@ -79,7 +79,7 @@ int FUN_002174f4(void);
 int useCounterStart(void);
 int FUN_0023b45c(...);
 int ifTouchRegionAdd(...);
-int FUN_002a4844(...);
+int resourceRunEmbeddedOperationIfUnblocked(...);
 int FUN_002a4914(...);
 int FUN_002c8538(...);
 int FUN_002c8550(...);
@@ -122,7 +122,7 @@ int FUN_00183f58(...);
 int FUN_0019de98(...);
 int FUN_00228b04(...);
 int FUN_00231574(void);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
 int objectApplyIfUnblocked(...);
 int FUN_003450d4(...);
@@ -151,7 +151,7 @@ int fusionListAvailableSpecialRecipes(...);
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
 int sysPlaySe(...);
-int FUN_0023c08c(...);
+int uniteStartOrQueueRequest(...);
 int rebuildFusionCatalogLists(void);
 int FUN_002859d8(...);
 int FUN_002a7b74(void);
@@ -255,27 +255,27 @@ extern int useCounterIsFinished(void);
 extern int FUN_0023b3b8(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: FUN_0023c08c. */
+/* Supplied declaration required: uniteStartOrQueueRequest. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_0026264c. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: rebuildFusionCatalogLists. */
-/* Supplied declaration required: FUN_00284140. */
+/* Supplied declaration required: recordGetModeForId. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_002859d8. */
 /* Supplied declaration required: FUN_0028a2e8. */
 /* Supplied declaration required: FUN_0028a538. */
-/* Supplied declaration required: FUN_002a4844. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunEmbeddedOperationIfUnblocked. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4878(int *);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a4b28. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
 /* Supplied declaration required: FUN_002a7288. */
@@ -504,7 +504,7 @@ unsigned int FUN_001f5294(void)
     }
     *(unsigned char *)(piVar19 + 0x10c) = 0;
     if (-1 < piVar19[0x122]) {
-      FUN_0023c08c();
+      uniteStartOrQueueRequest();
       piVar19[0x122] = -1;
     }
   }
@@ -598,7 +598,7 @@ unsigned int FUN_001f5294(void)
       FUN_001517b4();
       if (temp_v4 != 0) {
         FUN_002a7b74();
-        FUN_0023c08c(3);
+        uniteStartOrQueueRequest(3);
         *(unsigned char *)(piVar3 + 0x2424) = 0;
         piVar3[0x172] = 0;
       }
@@ -621,7 +621,7 @@ unsigned int FUN_001f5294(void)
         FUN_002a7b74();
         temp_v15 = 0x16;
       }
-      FUN_0023c08c(temp_v15);
+      uniteStartOrQueueRequest(temp_v15);
     }
     if ((char)piVar3[0x108] == '\x01') {
       FUN_00184b90(piVar3,1);
@@ -644,7 +644,7 @@ unsigned int FUN_001f5294(void)
       }
       else {
         FUN_002a7b74();
-        FUN_0023c08c(0x17);
+        uniteStartOrQueueRequest(0x17);
         sysPlaySe(0xa0);
         FUN_002c39dc(0,0,0xffffffff);
       }
@@ -692,7 +692,7 @@ unsigned int FUN_001f5294(void)
             FUN_002a7b74();
             temp_v15 = 0x18;
           }
-          FUN_0023c08c(temp_v15);
+          uniteStartOrQueueRequest(temp_v15);
         }
       }
     }
@@ -801,7 +801,7 @@ unsigned int FUN_001f5294(void)
           temp_v4 = 0;
           FUN_001517b4(0,1);
           if (!(temp_v4 == 0 && (char)temp_v39[0] == '\0')) {
-            temp_v4 = FUN_002a4860(piVar17);
+            temp_v4 = resourceRunOperationIfUnblocked(piVar17);
             temp_v5 = FUN_002a4894(piVar17);
             temp_v16 = *(short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x90a8);
             temp_v15 = dataTableGet(0x24,1);
@@ -814,9 +814,9 @@ unsigned int FUN_001f5294(void)
                   if (psVar24 != (short *)0x0) {
                     eventQueueAddUniqueIfValid(0x100020e);
                     FUN_002a7b74();
-                    FUN_0023c08c(*(unsigned int *)(psVar24 + 2));
+                    uniteStartOrQueueRequest(*(unsigned int *)(psVar24 + 2));
                     sysPlaySe(0xa0);
-                    temp_v4 = FUN_002a4860(piVar17);
+                    temp_v4 = resourceRunOperationIfUnblocked(piVar17);
                     temp_v5 = FUN_002a4894(piVar17);
                     bitsHolderSetBit(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x90a8));
                   }
@@ -889,7 +889,7 @@ unsigned int FUN_001f5294(void)
         FUN_00183f58(1,0);
         FUN_00183f58(2,0,0,1);
       }
-      temp_v5 = FUN_002a4860();
+      temp_v5 = resourceRunOperationIfUnblocked();
       temp_v6 = FUN_002a4894(piVar3 + 0x13f);
       temp_v10 = piVar3[temp_v6 + temp_v5 + 0x249f];
       temp_v15 = dataTableGet(0x24,0);
@@ -938,7 +938,7 @@ unsigned int FUN_001f5294(void)
         }
         gameFlagSetValue(0x455,1);
         FUN_002a7b74();
-        FUN_0023c08c(3);
+        uniteStartOrQueueRequest(3);
         sysPlaySe(0x53);
         FUN_00183f58(0,8,0x2d,1);
         FUN_00183f58(1,0);
@@ -967,7 +967,7 @@ unsigned int FUN_001f5294(void)
         FUN_002a7b74();
         temp_v15 = 2;
       }
-      FUN_0023c08c(temp_v15);
+      uniteStartOrQueueRequest(temp_v15);
     }
     temp_v5 = 10;
     FUN_001517b4(10,1);
@@ -985,7 +985,7 @@ unsigned int FUN_001f5294(void)
           FUN_00231574();
         }
         FUN_002a7b74();
-        FUN_0023c08c(4);
+        uniteStartOrQueueRequest(4);
         temp_v5 = 0;
         do {
           *(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x438) = 0xffff;
@@ -1005,7 +1005,7 @@ unsigned int FUN_001f5294(void)
         temp_v18 = 1;
         if (*(char *)(temp_v4 + 0x33) != '\0') {
           FUN_002a7b74();
-          FUN_0023c08c(0x11);
+          uniteStartOrQueueRequest(0x11);
           piVar3[0x174] = 0;
         }
         eventQueueAddUniqueIfValid(0x100020e);
@@ -1047,7 +1047,7 @@ unsigned int FUN_001f5294(void)
         piVar19 = piVar17;
         FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
         if (piVar19 != (int *)0x0) {
-          temp_v5 = FUN_002a4860(piVar17);
+          temp_v5 = resourceRunOperationIfUnblocked(piVar17);
           temp_v6 = FUN_002a4894(piVar17);
           temp_v10 = piVar3[temp_v6 + temp_v5 + 0x249f];
           temp_v15 = dataTableGet(0x24,0);
@@ -1066,7 +1066,7 @@ unsigned int FUN_001f5294(void)
           piVar19 = piVar17;
           FUN_00228b04(piVar17,1);
           if (piVar19 != (int *)0x0) {
-            temp_v5 = FUN_002a4860(piVar17);
+            temp_v5 = resourceRunOperationIfUnblocked(piVar17);
             temp_v6 = FUN_002a4894(piVar17);
             temp_v10 = piVar3[temp_v6 + temp_v5 + 0x249f];
             temp_v15 = dataTableGet(0x24,0);
@@ -1084,7 +1084,7 @@ unsigned int FUN_001f5294(void)
             temp_v5 = 0;
             FUN_001517b4(0,1);
             if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
-              temp_v5 = FUN_002a4860(piVar17);
+              temp_v5 = resourceRunOperationIfUnblocked(piVar17);
               temp_v6 = FUN_002a4894(piVar17);
               temp_v10 = piVar3[temp_v6 + temp_v5 + 0x249f];
               temp_v26 = dataTableGet(0x24,0);
@@ -1320,7 +1320,7 @@ LAB_001f6b9c:
       piVar3[0x2428] = -1;
       if (*(char *)(temp_v4 + 0x33) != '\0') {
         FUN_002a7b74();
-        FUN_0023c08c(0x11);
+        uniteStartOrQueueRequest(0x11);
         piVar3[0x174] = 0;
       }
     }
@@ -1360,7 +1360,7 @@ LAB_001f6b9c:
         temp_v5 = 0;
         FUN_001517b4(0,1);
         if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
-          temp_v5 = FUN_002a4860();
+          temp_v5 = resourceRunOperationIfUnblocked();
           temp_v6 = FUN_002a4894(piVar3 + 0x13f);
           temp_v10 = piVar3[temp_v6 + temp_v5 + 0x249f];
           temp_v15 = dataTableGet(0x24,0);
@@ -1373,7 +1373,7 @@ LAB_001f6b9c:
             temp_v31 = (int *)(unsigned int)*(unsigned char *)(temp_v5 + temp_v10 * 0x94);
           }
           temp_v32 = (int *)FUN_0031fd08(temp_v31);
-          temp_v5 = FUN_002a4860(piVar3 + 0x158);
+          temp_v5 = resourceRunOperationIfUnblocked(piVar3 + 0x158);
           temp_v6 = FUN_002a4894(piVar3 + 0x158);
           temp_v6 = temp_v6 + temp_v5;
           switch((unsigned int)temp_v31) {
@@ -1649,7 +1649,7 @@ LAB_001f732c:
             piVar3[0x2428] = -1;
             if (*(char *)(temp_v4 + 0x33) != '\0') {
               FUN_002a7b74();
-              FUN_0023c08c(0x11);
+              uniteStartOrQueueRequest(0x11);
               piVar3[0x174] = 0;
             }
           }
@@ -1690,7 +1690,7 @@ LAB_001f732c:
         }
       }
     }
-    temp_v4 = FUN_002a4860();
+    temp_v4 = resourceRunOperationIfUnblocked();
     temp_v5 = FUN_002a4894(piVar3 + 0x13f);
     temp_v10 = piVar3[temp_v5 + temp_v4 + 0x249f];
     temp_v15 = dataTableGet(0x24,0);
@@ -1702,7 +1702,7 @@ LAB_001f732c:
     else {
       temp_v7 = (unsigned int)*(unsigned char *)(temp_v4 + temp_v10 * 0x94);
     }
-    temp_v4 = FUN_002a4860(piVar3 + 0x158);
+    temp_v4 = resourceRunOperationIfUnblocked(piVar3 + 0x158);
     temp_v5 = FUN_002a4894(piVar3 + 0x158);
     if (temp_v7 == 4) {
       if (temp_v5 + temp_v4 != 0) {
@@ -1736,7 +1736,7 @@ LAB_001f732c:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    temp_v5 = FUN_002a4860();
+    temp_v5 = resourceRunOperationIfUnblocked();
     temp_v6 = FUN_002a4894(piVar3 + 0x13f);
     temp_v10 = piVar3[temp_v6 + temp_v5 + 0x249f];
     temp_v15 = dataTableGet(0x24,0);
@@ -1821,7 +1821,7 @@ LAB_001f732c:
       FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
-        temp_v4 = FUN_002a4844(piVar17);
+        temp_v4 = resourceRunEmbeddedOperationIfUnblocked(piVar17);
         temp_v5 = FUN_002a4878(piVar17);
         FUN_002a4964(piVar3 + 0x1876,temp_v4 + temp_v5);
         piVar3[0xff] = piVar3[0xff] + 1;
@@ -1842,7 +1842,7 @@ LAB_001f77ec:
       FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
-        temp_v4 = FUN_002a4860(piVar17);
+        temp_v4 = resourceRunOperationIfUnblocked(piVar17);
         temp_v5 = FUN_002a4894(piVar17);
         FUN_002a4914(piVar3 + 0x188f,temp_v4 + temp_v5);
         piVar3[0xff] = piVar3[0xff] + 1;
@@ -1852,11 +1852,11 @@ LAB_001f77ec:
     temp_v5 = 0;
     FUN_001517b4(0,1);
     if (!(temp_v5 == 0 && (char)temp_v39[0] == '\0')) {
-      temp_v5 = FUN_002a4844();
+      temp_v5 = resourceRunEmbeddedOperationIfUnblocked();
       temp_v6 = FUN_002a4878(piVar3 + 0x188f);
       temp_v1 = *(unsigned short *)((int)piVar3 + (temp_v5 + temp_v6) * 2 + 0x62a0);
       if (*(char *)(temp_v4 + 0x38) != '\0') {
-        temp_v5 = FUN_002a4860();
+        temp_v5 = resourceRunOperationIfUnblocked();
         temp_v6 = FUN_002a4894(piVar3 + 0x1876);
         temp_v1 = *(unsigned short *)((int)piVar3 + (temp_v6 + temp_v5) * 2 + 0x62a0);
       }
@@ -1920,7 +1920,7 @@ LAB_001f77ec:
           piVar3[0x103] = 5;
           FUN_0020b908(0x24,1);
           FUN_002a7b74();
-          FUN_0023c08c(2);
+          uniteStartOrQueueRequest(2);
           temp_v15 = 0x100020f;
           eventQueueAddUniqueIfValid(temp_v15);
         }
@@ -1980,7 +1980,7 @@ LAB_001f77ec:
   case 0xd:
     temp_v45 = 0;
     temp_v40[0] = piVar3 + 0x19f3;
-    temp_v5 = FUN_002a4860();
+    temp_v5 = resourceRunOperationIfUnblocked();
     temp_v41 = flaggedEntryGetValueA(piVar3 + 0x19f3);
     temp_v41 = temp_v41 + temp_v5;
     temp_v5 = FUN_0023b3d0();
@@ -2079,7 +2079,7 @@ LAB_001f77ec:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    temp_v5 = FUN_002a4860(temp_v40[0]);
+    temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
     temp_v6 = FUN_002a4894(temp_v40[0]);
     temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v6 + temp_v5) * 2 + 0x6832);
     if (((char)temp_v40[0][0x18] != '\0') && ((char)piVar3[0x1a0c] != '\0')) {
@@ -2143,7 +2143,7 @@ LAB_001f77ec:
         FUN_002a7324(1);
       }
     }
-    temp_v28 = (int *)FUN_00284140((int)(short)piVar3[0x117]);
+    temp_v28 = (int *)recordGetModeForId((int)(short)piVar3[0x117]);
     if ((temp_v28 == (int *)0x6) && ((char)piVar3[0x1a0c] != '\0')) {
       temp_v45 = 1;
       *(unsigned char *)(piVar3 + 0x1a0c) = 0;
@@ -2154,17 +2154,17 @@ LAB_001f77ec:
     if (0 < temp_v5) {
       temp_v31 = piVar3 + 0x1a0c;
       do {
-        temp_v5 = FUN_00284140((int)*(short *)((int)piVar3 + temp_v6 * 4 + 0x45e));
+        temp_v5 = recordGetModeForId((int)*(short *)((int)piVar3 + temp_v6 * 4 + 0x45e));
         if ((temp_v5 != 0) &&
-           (temp_v28 = (int *)FUN_00284140((int)*(short *)((int)piVar3 + temp_v6 * 4 + 0x45e)),
+           (temp_v28 = (int *)recordGetModeForId((int)*(short *)((int)piVar3 + temp_v6 * 4 + 0x45e)),
            temp_v28 == (int *)0x1 || temp_v28 == (int *)0x2)) {
           flaggedEntrySetValueA(temp_v40[0],temp_v6);
-          temp_v5 = FUN_002a4860(temp_v40[0]);
+          temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
           temp_v11 = FUN_002a4894(temp_v40[0]);
           if (temp_v41 != temp_v11 + temp_v5) {
             temp_v45 = 1;
           }
-          temp_v5 = FUN_002a4860(temp_v40[0]);
+          temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
           temp_v11 = FUN_002a4894(temp_v40[0]);
           temp_v7 = 0;
           temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v11 + temp_v5) * 2 + 0x6832);
@@ -2198,17 +2198,17 @@ LAB_001f77ec:
             FUN_0023b45c(0);
           }
         }
-        temp_v5 = FUN_00284140((int)(short)piVar3[temp_v6 + 0x118]);
+        temp_v5 = recordGetModeForId((int)(short)piVar3[temp_v6 + 0x118]);
         if ((temp_v5 != 0) &&
-           (temp_v28 = (int *)FUN_00284140((int)(short)piVar3[temp_v6 + 0x118]),
+           (temp_v28 = (int *)recordGetModeForId((int)(short)piVar3[temp_v6 + 0x118]),
            temp_v28 == (int *)0x1 || temp_v28 == (int *)0x2)) {
           flaggedEntrySetValueA(temp_v40[0],temp_v6);
-          temp_v5 = FUN_002a4860(temp_v40[0]);
+          temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
           temp_v11 = FUN_002a4894(temp_v40[0]);
           if (temp_v41 != temp_v11 + temp_v5) {
             temp_v45 = 1;
           }
-          temp_v5 = FUN_002a4860(temp_v40[0]);
+          temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
           temp_v11 = FUN_002a4894(temp_v40[0]);
           temp_v7 = 0;
           temp_v10 = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v11 + temp_v5) * 2 + 0x6832);
@@ -2258,12 +2258,12 @@ LAB_001f77ec:
       FUN_003450d4(temp_v40[0],temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = temp_v40[0], FUN_00228b04(temp_v40[0],1), piVar19 != (int *)0x0)) {
-        temp_v5 = FUN_002a4860(temp_v40[0]);
+        temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
         temp_v6 = FUN_002a4894(temp_v40[0]);
         if (temp_v5 + temp_v6 != temp_v41) {
           temp_v45 = 1;
         }
-        temp_v5 = FUN_002a4860(temp_v40[0]);
+        temp_v5 = resourceRunOperationIfUnblocked(temp_v40[0]);
         temp_v6 = FUN_002a4894(temp_v40[0]);
         temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v6 + temp_v5) * 2 + 0x6832);
         piVar19 = piVar3 + temp_v47[0] * 2 + 0x4ee;
@@ -2321,21 +2321,21 @@ LAB_001f77ec:
               piVar19 = (int *)gameGetSlotTable();
               if (*piVar19 < piVar3[0x106]) {
                 FUN_002a7b74();
-                FUN_0023c08c(0xc);
+                uniteStartOrQueueRequest(0xc);
                 eventQueueAddUniqueIfValid(0x100020f);
               }
               else {
                 temp_v7 = computeCountLimit();
                 if (temp_v7 < (unsigned short)puVar15[3]) {
                   FUN_002a7b74();
-                  FUN_0023c08c(8);
+                  uniteStartOrQueueRequest(8);
                   eventQueueAddUniqueIfValid(0x100020f);
                 }
                 else {
                   temp_v4 = slotRecordFindById(*puVar15);
                   if (temp_v4 != 0) {
                     FUN_002a7b74();
-                    FUN_0023c08c(9);
+                    uniteStartOrQueueRequest(9);
                     eventQueueAddUniqueIfValid(0x100020f);
                   }
                   else {
@@ -2344,7 +2344,7 @@ LAB_001f77ec:
                     if (((temp_v4 != 0) || ((unsigned int)piVar3[temp_v47[0] * 2 + 0x4ee] >> 0x1e != 3)) ||
                        ((piVar3[temp_v47[0] * 2 + 0x4ef] & 3U) != 3)) {
                       piVar17 = g_unite + 0x19f3;
-                      temp_v4 = FUN_002a4860();
+                      temp_v4 = resourceRunOperationIfUnblocked();
                       temp_v5 = FUN_002a4894(piVar17);
                       temp_v1 = *(unsigned short *)((int)piVar19 + (temp_v5 + temp_v4) * 2 + 0x6832);
                       temp_v7 = (unsigned int)piVar19[(unsigned int)temp_v1 * 2 + 0x4ee] >> 0x1e;
@@ -2384,7 +2384,7 @@ LAB_001f77ec:
                       goto LAB_001f8c54;
                     }
                     FUN_002a7b74();
-                    FUN_0023c08c(10);
+                    uniteStartOrQueueRequest(10);
                     eventQueueAddUniqueIfValid(0x100020f);
                   }
                 }
@@ -2401,7 +2401,7 @@ LAB_001f77ec:
                 FUN_0037e1b0(0xffffffff,1);
                 FUN_0022e774();
                 FUN_002a7b74();
-                FUN_0023c08c(4);
+                uniteStartOrQueueRequest(4);
                 piVar3[0x103] = 0xb;
                 FUN_0020b908(0x24,1);
                 temp_v15 = 0x100020f;
@@ -2462,7 +2462,7 @@ LAB_001f8d58:
     if (temp_v5 != 0) {
       useCounterRelease();
       FUN_0023b45c(0);
-      temp_v5 = FUN_002a4860();
+      temp_v5 = resourceRunOperationIfUnblocked();
       temp_v6 = FUN_002a4894(piVar3 + 0x19f3);
       temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v6 + temp_v5) * 2 + 0x6832);
       piVar19 = piVar3 + temp_v47[0] * 2 + 0x4ee;
@@ -2545,7 +2545,7 @@ LAB_001f8d58:
     }
     if (piVar3[0x101] != 0x1c) {
       if ((*(char *)((int)piVar3 + 0x9071) == '\0') && (piVar3[0x101] != 0x1e)) {
-        temp_v4 = FUN_002a4860();
+        temp_v4 = resourceRunOperationIfUnblocked();
         temp_v5 = FUN_002a4894(piVar3 + 0x19f3);
         temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x6832);
       }
@@ -2624,9 +2624,9 @@ LAB_001f8d58:
     return 0;
   case 0x10:
     if (piVar3[0xff] == 1) {
-      temp_v4 = FUN_002a4860();
+      temp_v4 = resourceRunOperationIfUnblocked();
       temp_v5 = FUN_002a4894(piVar3 + 0x2385);
-      temp_v6 = FUN_002a4860();
+      temp_v6 = resourceRunOperationIfUnblocked();
       temp_v11 = FUN_002a4894(piVar3 + 0x236c);
       temp_v6 = temp_v6 + temp_v11;
       FUN_003c3f8c(piVar3,temp_v6,1);
@@ -2652,7 +2652,7 @@ LAB_001f8d58:
     }
     piVar19 = piVar3 + 0x2385;
     temp_v4 = FUN_002a4894();
-    temp_v5 = FUN_002a4860(piVar19);
+    temp_v5 = resourceRunOperationIfUnblocked(piVar19);
     if (*(short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x8b72) != 0) {
       if (temp_v4 + 1 >= 8) {
         FUN_002a48e0(piVar19,temp_v5 + 1);
@@ -2683,7 +2683,7 @@ LAB_001f8d58:
       FUN_002a48e0(piVar17,0);
       FUN_002a4964(piVar17,0);
     }
-    temp_v4 = FUN_002a4860(piVar19);
+    temp_v4 = resourceRunOperationIfUnblocked(piVar19);
     temp_v5 = FUN_002a4894(piVar19);
     FUN_00359b6c(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x8b70));
     temp_v15 = 0;
@@ -2694,7 +2694,7 @@ LAB_001f8d58:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    temp_v5 = FUN_002a4860();
+    temp_v5 = resourceRunOperationIfUnblocked();
     temp_v6 = FUN_002a4894(piVar3 + 0x2385);
     temp_v4 = 0;
     temp_v11 = 0;
@@ -2741,7 +2741,7 @@ LAB_001f8d58:
       if (temp_v4 != 0) {
         if (piVar3[0x101] != 0x1c) {
           if (piVar3[0x101] != 0x1e) {
-            temp_v4 = FUN_002a4860();
+            temp_v4 = resourceRunOperationIfUnblocked();
             temp_v5 = FUN_002a4894(piVar3 + 0x19f3);
             temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x6832);
             if (piVar3[0x101] == 2) {
@@ -2780,7 +2780,7 @@ LAB_001f9868:
           if (temp_v4 != 0) {
             *(unsigned char *)((int)piVar3 + 0x495) = 1;
             FUN_0031f688();
-            FUN_0023c08c(7);
+            uniteStartOrQueueRequest(7);
             piVar3[0x100] = 0x14;
             temp_v15 = 0x100020e;
             eventQueueAddUniqueIfValid(temp_v15);
@@ -2789,7 +2789,7 @@ LAB_001f9868:
           }
         }
         *(unsigned char *)((int)piVar3 + 0x495) = 0;
-        FUN_0023c08c(6);
+        uniteStartOrQueueRequest(6);
         temp_v15 = 0x100020e;
         eventQueueAddUniqueIfValid(temp_v15);
         piVar3[0xff] = piVar3[0xff] + 1;
@@ -2803,7 +2803,7 @@ LAB_001f9868:
       if (temp_v4 != 0) {
         if (piVar3[0x101] != 0x1c) {
           if (piVar3[0x101] != 0x1e) {
-            temp_v4 = FUN_002a4860();
+            temp_v4 = resourceRunOperationIfUnblocked();
             temp_v5 = FUN_002a4894(piVar3 + 0x19f3);
             temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x6832);
             unitRecordBuild((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,piVar3 + 0x19a7);
@@ -2874,7 +2874,7 @@ LAB_001f9868:
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
-    temp_v4 = FUN_002a4b74();
+    temp_v4 = messageGetChoiceResult();
     if (temp_v4 == 0) {
       if (piVar3[0x101] != 0x1c) {
         if (piVar3[0x101] != 0x1e) {
@@ -2893,7 +2893,7 @@ LAB_001f9868:
         FUN_0020b908(0x24,1);
       }
       temp_v15 = 6;
-      FUN_0023c08c(temp_v15);
+      uniteStartOrQueueRequest(temp_v15);
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
@@ -3057,7 +3057,7 @@ LAB_001f9868:
     }
     else {
       if ((*(char *)((int)piVar3 + 0x9071) == '\0') && (piVar3[0x101] != 0x1f)) {
-        temp_v4 = FUN_002a4860();
+        temp_v4 = resourceRunOperationIfUnblocked();
         temp_v5 = FUN_002a4894(piVar3 + 0x19f3);
         temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x6832);
       }
@@ -3194,7 +3194,7 @@ LAB_001f9868:
           piVar19[0x2429] = temp_v4;
           piVar19[0x246c] = 0;
           FUN_002a7b74();
-          FUN_0023c08c(0x12);
+          uniteStartOrQueueRequest(0x12);
           FUN_0020b908(0x27,1);
           temp_v4 = lmapSceneGetScript();
           if (temp_v4 != 0) {
@@ -3285,7 +3285,7 @@ LAB_001f9868:
         return 0;
       }
       FUN_002a7b74();
-      FUN_0023c08c(4);
+      uniteStartOrQueueRequest(4);
     }
     temp_v5 = 0;
     temp_v30 = (int *)0x0;
@@ -3294,7 +3294,7 @@ LAB_001f9868:
       do {
         temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x8f7c);
         contentEntryFindById();
-        temp_v6 = FUN_002a4860(temp_v25);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v25);
         temp_v11 = FUN_002a4894(temp_v25);
         if (*(short *)((int)piVar3 + (temp_v11 + temp_v6) * 2 + 0x62a0) == *(short *)(temp_v7 + 0x1a)) {
           temp_v30 = (int *)(unsigned int)*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x8f7c);
@@ -3320,7 +3320,7 @@ LAB_001f9868:
         }
         gameFlagSetValue(0x457,1);
         FUN_002a7b74();
-        FUN_0023c08c(4);
+        uniteStartOrQueueRequest(4);
         sysPlaySe(0x5b);
       }
     }
@@ -3339,7 +3339,7 @@ LAB_001f9868:
         if (*(char *)(temp_v4 + 0x38) != '\0') goto LAB_001fab44;
         goto LAB_001fac50;
       }
-      temp_v5 = FUN_002a4844(piVar17);
+      temp_v5 = resourceRunEmbeddedOperationIfUnblocked(piVar17);
       temp_v6 = FUN_002a4878(piVar17);
       FUN_002a4964(piVar3 + 0x23ac,temp_v5 + temp_v6);
       if (temp_v36 == 0) {
@@ -3360,7 +3360,7 @@ LAB_001fab44:
       FUN_003450d4(piVar17,temp_v15,piVar3 + 0x10e,(int)*(short *)((int)piVar3 + 0x476));
       if ((piVar19 != (int *)0x0) ||
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
-        temp_v5 = FUN_002a4860(piVar17);
+        temp_v5 = resourceRunOperationIfUnblocked(piVar17);
         temp_v6 = FUN_002a4894(piVar17);
         FUN_002a4914(piVar3 + 0x23c5,temp_v5 + temp_v6);
         if (temp_v36 == 0) {
@@ -3507,7 +3507,7 @@ LAB_001fac1c:
       do {
         temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x8f7c);
         contentEntryFindById();
-        temp_v5 = FUN_002a4860(temp_v27);
+        temp_v5 = resourceRunOperationIfUnblocked(temp_v27);
         temp_v6 = FUN_002a4894(temp_v27);
         if (*(short *)((int)piVar3 + (temp_v5 + temp_v6) * 2 + 0x62a0) == *(short *)(temp_v7 + 0x1a)) {
           temp_v25 = (int *)(unsigned int)*(unsigned short *)((int)piVar3 + temp_v4 * 2 + 0x8f7c);
@@ -3654,7 +3654,7 @@ LAB_001fac1c:
       }
       temp_v33 = piVar3 + 0x1a00;
       temp_v25 = (int *)(int)(char)piVar3[0x1a0c];
-      temp_v4 = FUN_00284140((int)(short)piVar3[0x117]);
+      temp_v4 = recordGetModeForId((int)(short)piVar3[0x117]);
       if (((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6) && ((char)temp_v33[0xc] != '\0')) {
         *(unsigned char *)(piVar3 + 0x1a0c) = 0;
         FUN_0023b45c();
@@ -3663,9 +3663,9 @@ LAB_001fac1c:
       if (*(short *)((int)piVar3 + 0x8f7a) != 0) {
         temp_v27 = (unsigned int *)(piVar3 + 0x1a0c);
         do {
-          temp_v6 = FUN_00284140((int)*(short *)((int)piVar3 + temp_v5 * 2 + 0x45e));
+          temp_v6 = recordGetModeForId((int)*(short *)((int)piVar3 + temp_v5 * 2 + 0x45e));
           if (((temp_v6 != 0) &&
-              (temp_v4 = FUN_00284140((int)*(short *)((int)piVar3 + temp_v5 * 2 + 0x45e)),
+              (temp_v4 = recordGetModeForId((int)*(short *)((int)piVar3 + temp_v5 * 2 + 0x45e)),
               (temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6)) && ((int)(char)temp_v33[0xc] != temp_v5 + 1)
              ) {
             *(char *)temp_v27 = (char)(temp_v5 + 1);
@@ -3719,7 +3719,7 @@ LAB_001fac1c:
               FUN_0037e1b0(0xffffffff,1);
               FUN_0022e774();
               FUN_002a7b74();
-              FUN_0023c08c(4);
+              uniteStartOrQueueRequest(4);
               *(unsigned short *)(piVar3 + 0x10e) = 0xffff;
               ifTouchRegionRemove();
               *(unsigned short *)(piVar3 + 0x117) = 0xffff;
@@ -3754,14 +3754,14 @@ LAB_001fac1c:
             piVar19 = (int *)gameGetSlotTable();
             if (*piVar19 < temp_v5) {
               FUN_002a7b74();
-              FUN_0023c08c(0xc);
+              uniteStartOrQueueRequest(0xc);
               temp_v15 = 0x100020f;
             }
             else {
               temp_v10 = computeCountLimit();
               if (temp_v10 < (unsigned short)puVar15[3]) {
                 FUN_002a7b74();
-                FUN_0023c08c(8);
+                uniteStartOrQueueRequest(8);
                 temp_v15 = 0x100020f;
               }
               else {
@@ -3771,7 +3771,7 @@ LAB_001fac1c:
                   piVar19 = g_unite;
                   if ((temp_v7 & ~temp_v10) != 0) {
                     FUN_002a7b74();
-                    FUN_0023c08c(10);
+                    uniteStartOrQueueRequest(10);
                     eventQueueAddUniqueIfValid(0x100020f);
                     piVar3[0xff] = piVar3[0xff] + 1;
                     return 0;
@@ -3877,14 +3877,14 @@ LAB_001fb9c4:
                   return 0;
                 }
                 FUN_002a7b74();
-                FUN_0023c08c(9);
+                uniteStartOrQueueRequest(9);
                 temp_v15 = 0x100020f;
               }
             }
           }
           else {
             FUN_002a7b74();
-            FUN_0023c08c(0xb);
+            uniteStartOrQueueRequest(0xb);
             temp_v15 = 0x100020f;
           }
           eventQueueAddUniqueIfValid(temp_v15);
@@ -4018,7 +4018,7 @@ joined_r0x001fbbe8:
         else if ('\x02' < temp_v12) {
           *(char *)piVar19 = '\0';
         }
-        temp_v5 = FUN_002a4860();
+        temp_v5 = resourceRunOperationIfUnblocked();
         temp_v6 = FUN_002a4894(piVar3 + 0x19f3);
         temp_v47[0] = (unsigned int)*(unsigned short *)((int)piVar3 + (temp_v6 + temp_v5) * 2 + 0x6832);
         if ((char)piVar3[0x1a0c] == '\0') {
@@ -4073,7 +4073,7 @@ joined_r0x001fbbe8:
           do {
             temp_v7 = (unsigned int)*(unsigned short *)((int)piVar3 + temp_v5 * 2 + 0x8f7c);
             contentEntryFindById();
-            temp_v6 = FUN_002a4860(temp_v28);
+            temp_v6 = resourceRunOperationIfUnblocked(temp_v28);
             temp_v11 = FUN_002a4894(temp_v28);
             if (*(short *)((int)piVar3 + (temp_v11 + temp_v6) * 2 + 0x62a0) == *(short *)(temp_v7 + 0x1a))
             {
@@ -4195,7 +4195,7 @@ LAB_001fc128:
       FUN_0020b908(5,1);
       FUN_002a7b74();
       temp_v15 = 3;
-      FUN_0023c08c(temp_v15);
+      uniteStartOrQueueRequest(temp_v15);
     }
     piVar3[0xff] = piVar3[0xff] + 1;
     return 0;

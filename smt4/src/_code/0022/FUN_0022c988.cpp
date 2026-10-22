@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int FUN_002a0cc8(int);
 int FUN_002b7bca(int, int, int, unsigned int);
 int buttonHelpSetPreset(unsigned int);
@@ -19,8 +19,8 @@ typedef struct {
 extern unsigned char DAT_00402284; /* 0x402284 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 extern int FUN_002a0d0c(void);
@@ -44,7 +44,7 @@ void FUN_0022c988(int param_1)
   
   temp_v1 = useCounterIsFinished();
   if (temp_v1 != 0) {
-    FUN_0029e17c();
+    useCounterRelease();
     if (*(char *)(param_1 + 0x5a4) == '\x01') {
       temp_v2 = 0x46;
     }
@@ -57,7 +57,7 @@ void FUN_0022c988(int param_1)
     *(unsigned int *)(param_1 + 0x18) = 0;
   }
   else {
-    temp_v1 = FUN_0029e130();
+    temp_v1 = useCounterGetCurrentValue();
     if (temp_v1 != 0x4b) {
       if (*(short *)(param_1 + 0x5a8) != 0) {
         temp_v1 = FUN_002a0d0c();

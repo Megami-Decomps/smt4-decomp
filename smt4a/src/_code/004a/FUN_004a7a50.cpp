@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int FUN_002a4b28(short);
 /* Supplied declaration required: devilDrawIconRelative. */
 /* Supplied declaration required: FUN_004934ac. */
-extern int FUN_004d0bf0(short);
+extern int gameStockContainsEntry(short);
 
 
 void FUN_004a7a50(int param_1,int param_2,short param_3,int param_4,int param_5,unsigned int param_6)
@@ -58,7 +58,7 @@ void FUN_004a7a50(int param_1,int param_2,short param_3,int param_4,int param_5,
   else {
     devilDrawIconRelative(param_1 + 200,0,temp_v4,temp_v1,param_6);
   }
-  if ((param_2 != 0) && (temp_v1 = FUN_004d0bf0(param_3), temp_v1 != 0)) {
+  if ((param_2 != 0) && (temp_v1 = gameStockContainsEntry(param_3), temp_v1 != 0)) {
     if (param_5 == 0) {
       FUN_004934ac(param_1 + 200,0x486,temp_v3,temp_v0,param_6);
       return;

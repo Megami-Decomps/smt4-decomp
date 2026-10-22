@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0024fd70(unsigned int, int *, int);
-int FUN_0024febc(unsigned int, int *, int);
+int mathMatrixApplyScale(unsigned int, int *, int);
 int FUN_0025009c(void);
-int FUN_002569fc(void);
+int matrix44SetIdentity(void);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,9 +17,9 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0024fd70. */
-/* Supplied declaration required: FUN_0024febc. */
+/* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: FUN_0025009c. */
-/* Supplied declaration required: FUN_002569fc. */
+/* Supplied declaration required: matrix44SetIdentity. */
 
 
 void FUN_0021a110(unsigned int param_1,unsigned int *param_2,int param_3)
@@ -35,10 +35,10 @@ void FUN_0021a110(unsigned int param_1,unsigned int *param_2,int param_3)
     FUN_0025009c();
   }
   else {
-    FUN_002569fc();
+    matrix44SetIdentity();
   }
   if (in_s0 != 0x3f800000) {
-    FUN_0024febc(param_1,&temp_v0,2);
+    mathMatrixApplyScale(param_1,&temp_v0,2);
   }
   if (param_2 != (unsigned int *)0x0) {
     temp_v0 = *param_2;

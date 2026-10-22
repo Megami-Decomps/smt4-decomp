@@ -26,7 +26,7 @@ typedef struct {
 
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(int);
-extern int FUN_00228ab0(void);
+extern int gameGetSaveSlotData(void);
 extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 extern int FUN_002b4dcc(int);
@@ -73,7 +73,7 @@ unsigned int FUN_00400284(int param_1,int param_2,fn_00400284_arg2 *param_3,unsi
       temp_v0 = btlMainGetUnk14();
     }
     else if (param_2 != 0) {
-      temp_v0 = FUN_00228ab0();
+      temp_v0 = gameGetSaveSlotData();
     }
     else {
       temp_v0 = gameGetSlotRecord(param_1);

@@ -18,7 +18,7 @@ extern int g_aocSystem; /* 0x433158 */
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: dataTable00FindById. */
-extern int FUN_002b6a54(int, int);
+extern int supportUnitGetEntry(int, int);
 extern int FUN_002b6ad0(void);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
@@ -52,7 +52,7 @@ void btlAiScriptLoadFile(int *param_1,int param_2)
   *(unsigned int *)(g_aocSystem + 0x444) = 0xffffffff;
   temp_v1 = *(int *)(param_2 + 0x28);
   if (temp_v0) {
-    temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 4),(int)*(short *)(temp_v1 + 6));
+    temp_v1 = supportUnitGetEntry((int)*(short *)(temp_v1 + 4),(int)*(short *)(temp_v1 + 6));
     memClear(temp_v3,0x80);
     textFormatBuffer(temp_v3,"battle/AI/%s.bf",temp_v1 + 0x48);
     temp_v1 = btlGetMainState();

@@ -36,7 +36,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0026140c(void);
 extern unsigned int mapGetDisplayName(unsigned char);
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: FUN_00318df4. */
@@ -114,7 +114,7 @@ unsigned int FUN_0022a0a0(void)
               } while (temp_v6 < temp_v8);
             }
           }
-          temp_v6 = FUN_002a4860(temp_v5);
+          temp_v6 = resourceRunOperationIfUnblocked(temp_v5);
           temp_v4 = FUN_002a4894(temp_v5);
           temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
           FUN_0019de98(temp_v7,0xf4f4f4ff);
@@ -143,7 +143,7 @@ unsigned int FUN_0022a0a0(void)
     if (temp_v5 < temp_v9) {
       FUN_00163aa4(temp_v0 + 0x6b8);
     }
-    temp_v5 = FUN_002a4860(temp_v8);
+    temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
     temp_v6 = FUN_002a4894(temp_v8);
     temp_v7 = FUN_001834a4(0x15,0x48);
     temp_v9 = temp_v8;
@@ -167,7 +167,7 @@ unsigned int FUN_0022a0a0(void)
           if (-1 < *(int *)(temp_v0 + 0x750)) {
             temp_v9 = FUN_0026140c();
             pbVar11 = (unsigned char *)(temp_v9 + *(int *)(temp_v0 + 0x750));
-            temp_v9 = FUN_002a4860(temp_v8);
+            temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
             temp_v8 = FUN_002a4894(temp_v8);
             temp_v2 = *(unsigned char *)(temp_v9 + temp_v8 + temp_v0 + 0x758) & 0x7f;
             temp_v1 = temp_v2 | (*pbVar11 & 0x80);
@@ -214,7 +214,7 @@ unsigned int FUN_0022a0a0(void)
       }
       *(unsigned char *)(temp_v0 + 0x74d) = 1;
     }
-    temp_v9 = FUN_002a4860(temp_v8);
+    temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
     temp_v8 = FUN_002a4894(temp_v8);
     temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
     FUN_0019de98(temp_v7,0xf4f4f4ff);

@@ -21,7 +21,7 @@ int FUN_0029f848(...);
 int soundChannelRequestIfEnabled(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002c1658(...);
-int FUN_00333de4(...);
+int gamePlayerClearPairedId(...);
 int FUN_00334058(...);
 int SBORROW4(...);
 
@@ -116,7 +116,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: whisperEffectFinish. */
 /* Supplied declaration required: whisperEffectStart. */
-/* Supplied declaration required: FUN_00333de4. */
+/* Supplied declaration required: gamePlayerClearPairedId. */
 /* Supplied declaration required: FUN_00334058. */
 
 
@@ -619,7 +619,7 @@ LAB_001cfdfc:
               temp_v10 = temp_v7;
               FUN_0029cde0(temp_v7,temp_v13);
               if (temp_v10 == 0 && !temp_v24) {
-                FUN_00333de4(*(unsigned short *)(temp_v6 + temp_v9 * 2 + 0x34));
+                gamePlayerClearPairedId(*(unsigned short *)(temp_v6 + temp_v9 * 2 + 0x34));
                 break;
               }
               temp_v9 = temp_v9 + 1;

@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_001695a0. */
 extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
@@ -103,7 +103,7 @@ int FUN_00348850(int param_1)
       }
     }
     else {
-      temp_v5 = FUN_0015687c();
+      temp_v5 = gameGetPlayerName();
       FUN_003180c4(0x28,temp_v5);
       temp_v5 = scrWorkGetValue(1);
       messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);

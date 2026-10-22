@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00429f38(void);
+int asdFsIsSdCardDetected(void);
 
 extern int g_aocMain; /* 0x570260 */
 
 extern int objGetFlagBit16(void);
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 
 
 unsigned int FUN_00471960(int param_1)
@@ -20,7 +20,7 @@ unsigned int FUN_00471960(int param_1)
   int temp_v1;
   
   temp_v0 = param_1;
-  FUN_00429f38();
+  asdFsIsSdCardDetected();
   if (temp_v0 != 0) {
     temp_v0 = objGetFlagBit16();
     if (temp_v0 != 0) {

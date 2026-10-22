@@ -16,7 +16,7 @@ int controllerApplyPreset(...);
 int screenStartOrClear(...);
 int FUN_00387ad8(int, int);
 int characterInfoPanelPopulate(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -50,7 +50,7 @@ extern int FUN_0032ecac(void);
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_00387ad8. */
 /* Supplied declaration required: characterInfoPanelPopulate. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 unsigned int FUN_003aef48(int param_1)
@@ -447,7 +447,7 @@ unsigned int FUN_003aef48(int param_1)
       }
       characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                    *(unsigned int *)(param_1 + 0x58));
-      FUN_003d2150(0x100020d);
+      sysPlayVoice(0x100020d);
     }
     temp_v1 = padButtonIsPressed(0);
     if (temp_v1 == 0) {
@@ -493,7 +493,7 @@ unsigned int FUN_003aef48(int param_1)
         campCecSetObjectValue(0);
         temp_v4 = 0x100020f;
         temp_v9 = 3;
-        FUN_003d2150(temp_v4);
+        sysPlayVoice(temp_v4);
       }
     }
     else {
@@ -520,7 +520,7 @@ LAB_003af720:
       temp_v4 = 0x100020e;
       temp_v7 = temp_v8;
       temp_v9 = 3;
-      FUN_003d2150(temp_v4);
+      sysPlayVoice(temp_v4);
     }
   }
   if ((*(int *)(param_1 + 0x128) + *(int *)(param_1 + 0x120) != temp_v8) &&

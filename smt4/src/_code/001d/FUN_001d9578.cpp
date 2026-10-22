@@ -9,7 +9,7 @@ int sequenceRequestFlushDeferred(void);
 int FUN_00397aa4(int);
 
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
-extern int FUN_002f34bc(void);
+extern int sequenceRequestIsDeferred(void);
 /* Supplied declaration required: FUN_00397aa4. */
 /* Supplied declaration required: nameFormUpdate. */
 
@@ -33,7 +33,7 @@ unsigned int FUN_001d9578(int param_1)
         if (temp_v0 != '\x03') {
           return 0;
         }
-        temp_v2 = FUN_002f34bc();
+        temp_v2 = sequenceRequestIsDeferred();
         if (temp_v2 != 0) {
           sequenceRequestFlushDeferred();
         }

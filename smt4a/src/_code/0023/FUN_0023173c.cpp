@@ -28,7 +28,7 @@ extern unsigned int uRam005738f0; /* 0x5738f0 */
 extern unsigned int uRam005738f4; /* 0x5738f4 */
 
 extern unsigned int FUN_0014bd84(int);
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_0015f858. */
 extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_00180118. */
@@ -114,7 +114,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
          (-1 < *(int *)(puVar1 + 0x412))) {
         if (!((*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0 &&
              (*(unsigned int *)(puVar1 + 8) & uRam005738f0) == 0)) {
-          temp_v0 = FUN_0015687c();
+          temp_v0 = gameGetPlayerName();
           libc_strcpy(temp_v4,temp_v0);
         }
         else {
@@ -151,7 +151,7 @@ joined_r0x002318b0:
         if (temp_v3 && -1 < temp_v2) {
           if (!((*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0 &&
                (*(unsigned int *)(puVar1 + 8) & uRam005738f0) == 0)) {
-            temp_v0 = FUN_0015687c();
+            temp_v0 = gameGetPlayerName();
             libc_strcpy(temp_v4,temp_v0);
           }
           else {
@@ -162,7 +162,7 @@ joined_r0x002318b0:
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
           if (!((*(unsigned int *)(puVar1 + 0x20c) & uRam005738f0) == 0 &&
                (*(unsigned int *)(puVar1 + 0x20e) & uRam005738f4) == 0)) {
-            temp_v0 = FUN_0015687c();
+            temp_v0 = gameGetPlayerName();
             libc_strcpy(temp_v4,temp_v0);
           }
           else {
@@ -182,7 +182,7 @@ joined_r0x002318b0:
          (-1 < *(int *)(puVar1 + 0x412))) {
         if (!((*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0 &&
              (uRam005738f0 & *(unsigned int *)(puVar1 + 8)) == 0)) {
-          temp_v0 = FUN_0015687c();
+          temp_v0 = gameGetPlayerName();
           libc_strcpy(temp_v4,temp_v0);
         }
         else {
@@ -227,7 +227,7 @@ joined_r0x002318b0:
         if (temp_v3 && -1 < temp_v2) {
           if (!((*(unsigned int *)(puVar1 + 8) & uRam005738f0) == 0 &&
                (*(unsigned int *)(puVar1 + 10) & uRam005738f4) == 0)) {
-            temp_v0 = FUN_0015687c();
+            temp_v0 = gameGetPlayerName();
             libc_strcpy(temp_v4,temp_v0);
           }
           else {

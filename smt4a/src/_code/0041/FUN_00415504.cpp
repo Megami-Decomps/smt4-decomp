@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0016c4b8(int, unsigned int);
 int FUN_00186940(void);
 int FUN_002371b0(void);
-int FUN_00317c3c(int *);
+int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_00409e78(int, float *, int);
 
 typedef int romwright_code(...);
@@ -42,7 +42,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_00186940. */
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_00317c3c. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_00409e78. */
 
 
@@ -157,15 +157,15 @@ void FUN_00415504(int param_1)
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
   FUN_00186940();
-  FUN_00317c3c(&temp_v15);
+  gpuSubmitFloatVectorsOrDefault(&temp_v15);
   temp_v0 = 1;
   if (temp_v0 < **(int **)(param_1 + 0x60) + 1) {
     do {
-      FUN_00317c3c(&temp_v11);
+      gpuSubmitFloatVectorsOrDefault(&temp_v11);
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < **(int **)(param_1 + 0x60) + 1);
   }
-  FUN_00317c3c(&temp_v11);
+  gpuSubmitFloatVectorsOrDefault(&temp_v11);
   FUN_002371b0();
   temp_v0 = g_renderCtx;
   piVar10 = (int *)(g_renderCtx + 0x1258);

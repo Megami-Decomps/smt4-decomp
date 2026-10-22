@@ -64,7 +64,7 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_002734ec(int);
+extern int questSysUpdateLoad(int);
 /* Supplied declaration required: FUN_002893ec. */
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_00289574. */
@@ -276,7 +276,7 @@ unsigned int FUN_0019f3dc(void)
     return 0;
   }
   if (temp_v3 == 0x60) {
-    temp_v3 = FUN_002734ec(g_aocMain + 0xa8);
+    temp_v3 = questSysUpdateLoad(g_aocMain + 0xa8);
     if (temp_v3 == 0) {
       return 0;
     }

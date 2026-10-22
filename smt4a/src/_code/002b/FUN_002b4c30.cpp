@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001bc460(void);
-int FUN_002e1450(void);
+int matrix44SetIdentity(void);
 int FUN_00514598(void);
 
 extern unsigned int DAT_006472dc; /* 0x6472dc */
@@ -23,7 +23,7 @@ extern unsigned int DAT_00647340; /* 0x647340 */
 extern unsigned int DAT_00647344; /* 0x647344 */
 
 /* Supplied declaration required: FUN_001bc460. */
-/* Supplied declaration required: FUN_002e1450. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: FUN_00514598. */
 
 
@@ -34,7 +34,7 @@ void FUN_002b4c30(unsigned int *param_1,unsigned int *param_2)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  FUN_002e1450();
+  matrix44SetIdentity();
   DAT_006472dc = *param_2;
   DAT_006472e0 = param_2[1];
   DAT_006472e4 = param_2[2];

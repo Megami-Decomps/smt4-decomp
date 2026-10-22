@@ -43,7 +43,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int curveEvaluateStandard(unsigned char *, unsigned int);
-extern int FUN_002335f8(int, int);
+extern int aocIsEntryIndexValid(int, int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: FUN_002ae9ec. */
@@ -95,7 +95,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
   temp_v5 = g_aocMain;
   temp_v10 = (int)*(short *)(temp_v3 + 8);
   temp_v9 = (int)*(short *)(temp_v3 + 10);
-  temp_v3 = FUN_002335f8(g_aocMain,param_3);
+  temp_v3 = aocIsEntryIndexValid(g_aocMain,param_3);
   if (temp_v3 != 0) {
     temp_v3 = *(int *)(temp_v5 + 0x678) + param_3 * 0x9c8;
     memClear(temp_v12,0x100);

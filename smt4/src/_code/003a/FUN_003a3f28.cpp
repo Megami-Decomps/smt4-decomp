@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002305fc(int);
 int flaggedValueHolderGetTotal(int);
 int FUN_0027f3dc(...);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int FUN_002a0cc8(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -32,8 +32,8 @@ extern int useCounterGetValue(void);
 /* Supplied declaration required: FUN_002305fc. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_0027f3dc. */
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 
@@ -49,7 +49,7 @@ void FUN_003a3f28(int param_1)
   
   temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
-    FUN_0029e17c();
+    useCounterRelease();
     FUN_002a0cc8(0);
     FUN_002305fc(param_1);
     temp_v0 = *(int *)(param_1 + 0x860);
@@ -82,7 +82,7 @@ void FUN_003a3f28(int param_1)
     temp_v2 = param_1 + *(int *)(param_1 + 0x860) * 0x1002;
     temp_v3 = temp_v2 + 0xc94;
     flaggedValueHolderGetTotal(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x880);
-    temp_v0 = FUN_0029e130();
+    temp_v0 = useCounterGetCurrentValue();
     if (temp_v0 == 0xf) {
       temp_v0 = useCounterGetValue();
       if (temp_v0 == 0) {

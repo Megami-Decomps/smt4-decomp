@@ -17,7 +17,7 @@ extern int FUN_0012f59c(void);
 /* Supplied declaration required: FUN_0012fa30. */
 extern int FUN_0014204c(unsigned int, unsigned char *);
 extern int FUN_002c3984(void);
-extern unsigned int FUN_002c3994(void);
+extern unsigned int nnosGetHeapBase(void);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Initialize. */
 
 
@@ -39,7 +39,7 @@ FUN_0012113c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   temp_v0 = FUN_0012f59c();
   if (temp_v0 != 0) {
     if (param_7 != 0) {
-      temp_v1 = FUN_002c3994();
+      temp_v1 = nnosGetHeapBase();
       temp_v0 = FUN_002c3984();
       if (param_6 < temp_v1) {
         return 0;

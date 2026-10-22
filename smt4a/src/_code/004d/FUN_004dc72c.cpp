@@ -34,7 +34,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004a92d0. */
 /* Supplied declaration required: FUN_004a96b8. */
 /* Supplied declaration required: FUN_004a9c40. */
-extern int FUN_004aa020(unsigned int);
+extern int btlUiPollWidgetResult(unsigned int);
 /* Supplied declaration required: FUN_004aa7c8. */
 extern int btlUiIsMenuReady(unsigned int);
 /* Supplied declaration required: FUN_004eb838. */
@@ -82,7 +82,7 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
       FUN_004a92d0(g_btlUiBlock,(short)param_2[0xb],1);
     }
   }
-  temp_v1 = FUN_004aa020(g_btlUiBlock);
+  temp_v1 = btlUiPollWidgetResult(g_btlUiBlock);
   if (temp_v1 == 0) {
     return 0;
   }

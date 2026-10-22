@@ -10,7 +10,7 @@ int FUN_003659f4(void);
 int sub68OwnerStart2(void);
 int FUN_00378964(void);
 int FUN_00378a1c(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 
 int ARM_common_memcpy4_9(...);
 int eventQueueAddUnique(...);
@@ -136,7 +136,7 @@ extern int mathCirclesOverlap(void);
 /* Supplied declaration required: FUN_00378a1c. */
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_00385384. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_0046e800. */
@@ -547,7 +547,7 @@ LAB_0024a684:
             if ((((temp_v1 == 3 || temp_v1 == 4) || (temp_v1 == 5 || temp_v1 == 7)) ||
                 (temp_v1 == 0xd || temp_v1 == 0xf)) ||
                ((temp_v1 == 8 || temp_v1 == 9 || (temp_v1 == 10 || temp_v1 == 0x10)))) {
-              FUN_003d2150(0x10000b1);
+              sysPlayVoice(0x10000b1);
             }
           }
         }

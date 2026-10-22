@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -22,7 +22,7 @@ extern unsigned int DAT_00573bd4; /* 0x573bd4 */
 extern int btlGetMainState(void);
 extern unsigned int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4894. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
 extern int gameDataFlagTestBit(unsigned int);
@@ -60,7 +60,7 @@ void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
     *param_2 = 1;
     break;
   case 1:
-    temp_v3 = FUN_002a4860();
+    temp_v3 = resourceRunOperationIfUnblocked();
     temp_v8 = FUN_002a4894(param_1 + 0x3a4c);
     temp_v8 = temp_v8 + temp_v3;
     if (*(short *)(param_1 + *(int *)(param_1 + 0x3890) * 2 + 0x4210) != -1) {
@@ -116,7 +116,7 @@ void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
       do {
         temp_v6 = gameDataFlagTestBit(temp_v10[temp_v3]);
         if (temp_v6 != 0) {
-          temp_v6 = FUN_002a4860(param_1 + 0x3b78);
+          temp_v6 = resourceRunOperationIfUnblocked(param_1 + 0x3b78);
           temp_v7 = FUN_002a4894(param_1 + 0x3b78);
           if (temp_v7 + temp_v6 == temp_v8) {
             temp_v2 = (short)temp_v10[temp_v3 + 3];
@@ -131,7 +131,7 @@ void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
         }
       } while( 1 );
     }
-    temp_v1 = FUN_002a4860();
+    temp_v1 = resourceRunOperationIfUnblocked();
     temp_v2 = FUN_002a4894(param_1 + 0x3b78);
     temp_v2 = temp_v2 + temp_v1;
     break;
@@ -145,7 +145,7 @@ void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
     break;
   case 7:
     *param_2 = 8;
-    temp_v3 = FUN_002a4860();
+    temp_v3 = resourceRunOperationIfUnblocked();
     temp_v8 = FUN_002a4894(param_1 + 0x3b14);
     temp_v2 = *(short *)(param_1 + (temp_v8 + temp_v3) * 2 + 0x3ca8);
     break;

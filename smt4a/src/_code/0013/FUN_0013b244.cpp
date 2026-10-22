@@ -53,7 +53,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0015a1b4. */
 /* Supplied declaration required: FUN_0015a20c. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
-extern unsigned int FUN_00184df8(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 
 
 void FUN_0013b244(fn_0013b244_arg0 *param_1)
@@ -85,7 +85,7 @@ void FUN_0013b244(fn_0013b244_arg0 *param_1)
   FUN_0013c884(param_1,1);
   temp_v0 = asdGxPresetsGetByKind(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = FUN_00184df8(0);
+  temp_v0 = asdGxPresetsGetHeightByKind(0);
   temp_v2 = 0.0f;
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_0015a20c(param_1);

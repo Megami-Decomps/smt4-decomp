@@ -8,7 +8,7 @@ int btlGetMainState(void);
 int asdListBoxSetIntItem(...);
 int FUN_0031f0f4(...);
 int asdListBoxSetToggleItem(...);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int btlSlotSetStoreValue(...);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int FUN_0031cfd0(unsigned short);
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int *FUN_003e83b4(unsigned int, unsigned int, unsigned int);
 extern unsigned int btlFindEntryValue(int, unsigned int);
@@ -91,8 +91,8 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
       if ((-1 < (short)puVar2[2]) &&
          ((*puVar2 & DAT_00571618) != 0 || (puVar2[1] & DAT_0057161c) != 0)) {
         btlGetMainState();
-        FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xd,0xffffffce,0x32);
-        FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xe,0xffffffce,0x32);
+        asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xd,0xffffffce,0x32);
+        asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xe,0xffffffce,0x32);
       }
       temp_v0 = btlFindEntryValue((int)(short)puVar2[2],7);
       asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x10,temp_v0,0xfffffffd,3,0);

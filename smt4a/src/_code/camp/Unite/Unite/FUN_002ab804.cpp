@@ -22,7 +22,7 @@ int uiSpriteSetKeyframe(...);
 int FUN_00184b90(...);
 int __aeabi_memset4(...);
 int FUN_001cd3ec(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int rebuildFusionCatalogLists(...);
 int FUN_00275bc8(...);
 int FUN_002e3140(...);
@@ -92,7 +92,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: rebuildFusionCatalogLists. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -252,10 +252,10 @@ void FUN_002ab804(void)
   piVar2[0x10d] = -1;
   puVar3 = &LAB_002abf64;
   piVar2[0x122] = -1;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   piVar2[0x109] = (int)puVar3;
   puVar3 = &LAB_002abf74;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   piVar2[0x10a] = (int)puVar3;
   FUN_00275bc8();
   piVar2[0x10b] = (int)puVar3;

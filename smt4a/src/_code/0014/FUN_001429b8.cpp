@@ -9,7 +9,7 @@ int FUN_0016120c(unsigned int, unsigned int);
 int FUN_00161474(unsigned int, unsigned int *);
 int FUN_001615e4(unsigned char *);
 int asdGfxSetCmdBufferState(int, int);
-int FUN_0016163c(void);
+int asdGxMarkSubmissionReady(void);
 int nngxBindCmdlist(unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern int DAT_0061a50c; /* 0x61a50c */
 /* Supplied declaration required: FUN_00161474. */
 /* Supplied declaration required: FUN_001615e4. */
 /* Supplied declaration required: asdGfxSetCmdBufferState. */
-/* Supplied declaration required: FUN_0016163c. */
+/* Supplied declaration required: asdGxMarkSubmissionReady. */
 /* Supplied declaration required: nngxBindCmdlist. */
 
 
@@ -60,7 +60,7 @@ void FUN_001429b8(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
     } while (temp_v0 < (unsigned int)param_1[2]);
   }
   nngxBindCmdlist(*param_1);
-  FUN_0016163c();
+  asdGxMarkSubmissionReady();
   FUN_001615e4(&LAB_001536e0);
   if (DAT_0061a50c != 0) {
     *(unsigned char *)(DAT_0061a50c + 0x3c) = 1;

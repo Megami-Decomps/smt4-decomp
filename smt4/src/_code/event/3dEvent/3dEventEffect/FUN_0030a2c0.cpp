@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a1248(...);
+int asdLoadFileAsyncNoCallback(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -23,7 +23,7 @@ extern int FUN_002248b8(...); /* 0x2248b8 */
 extern unsigned char LAB_002fed38; /* 0x2fed38 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002a1248. */
+/* Supplied declaration required: asdLoadFileAsyncNoCallback. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -64,7 +64,7 @@ unsigned int FUN_0030a2c0(unsigned int param_1,unsigned int param_2,unsigned int
   puVar1[7] = temp_v0;
   puVar1[8] = temp_v1;
   puVar1[9] = temp_v2;
-  FUN_002a1248(param_1,puVar1 + 2,1,0x80);
+  asdLoadFileAsyncNoCallback(param_1,puVar1 + 2,1,0x80);
   return *puVar1;
 }
 

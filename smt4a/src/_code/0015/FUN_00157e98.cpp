@@ -9,7 +9,7 @@ int FUN_0017cdcc(unsigned int, unsigned int);
 int asdModelCommitCommandRange(unsigned int *, unsigned int *);
 int FUN_0019a270(unsigned int *, int, int);
 int FUN_0019a2ac(unsigned int *, int, int);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
@@ -19,7 +19,7 @@ extern unsigned int *FUN_001696f4(void);
 /* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: FUN_0019a270. */
 /* Supplied declaration required: FUN_0019a2ac. */
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 
 
 unsigned int FUN_00157e98(int param_1,int param_2)
@@ -55,7 +55,7 @@ unsigned int FUN_00157e98(int param_1,int param_2)
     temp_v0 = param_2 + 0xa8;
     temp_v1 = param_2 + 0x38;
   }
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   *puVar1 = *(unsigned char *)(param_1 + 0xb2) | 0x80000000;
   puVar1[1] = 0xf02c0;
   FUN_0019a2ac(puVar1 + 2,temp_v0,0xff02c1);

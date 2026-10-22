@@ -15,7 +15,7 @@ int FUN_00187a84(int, int, int, unsigned int *);
 int FUN_00187d90(unsigned int, int);
 int FUN_0018a9bc(...);
 int asdModelCommitCommandRange(unsigned char *, unsigned char *);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 int FUN_0019f828(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern int asdGxPresetsGetEnable(unsigned int);
 /* Supplied declaration required: FUN_00187d90. */
 /* Supplied declaration required: FUN_0018a9bc. */
 /* Supplied declaration required: asdModelCommitCommandRange. */
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 /* Supplied declaration required: FUN_0019f828. */
 
 
@@ -217,7 +217,7 @@ LAB_0015783c:
   FUN_00158b2c(temp_v16);
   puVar2 = temp_v17;
   FUN_00158b2c(puVar2);
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   FUN_0015fcec(temp_v12,puVar2);
   asdModelCommitCommandRange(puVar2,puVar3);
   temp_v4 = 0;

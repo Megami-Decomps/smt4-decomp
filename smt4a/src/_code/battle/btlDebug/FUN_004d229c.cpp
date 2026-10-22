@@ -11,7 +11,7 @@ int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
 int asdListBoxSetToggleItem(unsigned int, int, int);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int FUN_003592dc(unsigned int);
 
 typedef struct fn_004d229c_arg1 fn_004d229c_arg1;
@@ -60,7 +60,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: FUN_003592dc. */
 
 
@@ -84,7 +84,7 @@ void FUN_004d229c(int param_1,fn_004d229c_arg1 *param_2)
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d25e8);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0,0xffffff01,0xff);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0,0xffffff01,0xff);
   asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),1,
                (param_2->field_0x45a8 & DAT_00571770) != 0 ||
                (param_2->field_0x45ac & DAT_00571774) != 0);
@@ -99,7 +99,7 @@ void FUN_004d229c(int param_1,fn_004d229c_arg1 *param_2)
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,DAT_0057aa02,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),9,DAT_0057aa03,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),10,DAT_0057aa14,0,0x78,0);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xb,0,1);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xb,0,1);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xc,(int)DAT_0057a664,0xfffffa24,0x5dc,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,(int)DAT_0057a668,0xfffffa24,0x5dc,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xe,(int)DAT_0057a666,0xfffffa24,0x5dc,0);

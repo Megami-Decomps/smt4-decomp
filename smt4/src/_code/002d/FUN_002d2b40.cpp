@@ -21,12 +21,12 @@ typedef char CheckSceneStateSize[sizeof(GameState) == 0x678 ? 1 : -1];
 extern "C" {
 extern MapEnemy *g_mapEnemy;
 EnemyEncounterMap *gameGetMapBlock();
-void FUN_0029be5c(u32 flag, s32 value);
+void gameCounterAddSaturating(u32 flag, s32 value);
 void textFormatBuffer(char *output, const char *format, ...);
 void sequenceRequestDefer(s32 message, u32 argument);
-void FUN_0027db90();
+void sequenceRequestClearDeferred();
 void FUN_0027d8b4(u32 result);
-f32 FUN_00287aec(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
+f32 mathDistanceBetweenPoints(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 f32 FUN_0028250c(f32 angle);
 f32 FUN_00282390(f32 angle);
 void FUN_00253860(MapEnemyEncounterView *enemy, s32 state);
@@ -47,7 +47,7 @@ static __inline void applyEnemyEncounter(MapEnemyEncounterView *enemy, EnemyEnco
     } else if (forced ? enemy->message > 0 : enemy->message != 0) {
         sequenceRequestDefer(enemy->message, enemy->messageArgument);
     } else if (forced) {
-        FUN_0027db90();
+        sequenceRequestClearDeferred();
     }
     FUN_0027d8b4(enemy->result);
     if (enemy->count > 0) {
@@ -76,7 +76,7 @@ extern "C" u32 FUN_002d2b40()
         if (g_gameState.encounter.delay == 1) {
             g_gameState.encounter.forced = 1;
             MapEnemyEncounterView *enemy = reinterpret_cast<MapEnemyEncounterView *>(&enemies->entries[g_gameState.encounter.enemyIndex]);
-            FUN_0029be5c(21, 1);
+            gameCounterAddSaturating(21, 1);
             applyEnemyEncounter(enemy, map, true);
             return enemy->result;
         }
@@ -91,7 +91,7 @@ extern "C" u32 FUN_002d2b40()
         f32 y = enemy->y;
         f32 z = enemy->z;
         MapVector player = g_lmapScene->position;
-        if (FUN_00287aec(player.x, player.y, player.z, x, y, z) >= 60.0f) {
+        if (mathDistanceBetweenPoints(player.x, player.y, player.z, x, y, z) >= 60.0f) {
             if ((enemy->kind != 6 && enemy->kind != 16) || enemy->behavior != 4)
                 continue;
             MapVector ahead;
@@ -101,7 +101,7 @@ extern "C" u32 FUN_002d2b40()
             ahead.x += FUN_0028250c(enemy->heading * 0.017453292f) * 100.0f;
             ahead.z += FUN_00282390(enemy->heading * 0.017453292f) * 100.0f;
             player = g_lmapScene->position;
-            if (FUN_00287aec(player.x, player.y, player.z, ahead.x, ahead.y, ahead.z) >= 60.0f)
+            if (mathDistanceBetweenPoints(player.x, player.y, player.z, ahead.x, ahead.y, ahead.z) >= 60.0f)
                 continue;
         }
         g_gameState.encounter.approach = 0;

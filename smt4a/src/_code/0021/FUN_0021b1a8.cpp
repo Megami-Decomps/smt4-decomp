@@ -18,7 +18,7 @@ typedef struct HelpMenu {
 
 extern const char *DAT_0052ccbc[]; /* help texts for the fixed ids (odd slots are used here) */
 
-extern int FUN_002a4860(void *list);
+extern int resourceRunOperationIfUnblocked(void *list);
 extern int FUN_002a4894(void *list);
 extern int FUN_0019de98(const char *text, u32 color);
 
@@ -28,7 +28,7 @@ void FUN_0021b1a8(HelpMenu *menu)
     const char *text;
     u32 id;
     u32 i;
-    int first = FUN_002a4860(menu->list);
+    int first = resourceRunOperationIfUnblocked(menu->list);
     int count = FUN_002a4894(menu->list);
 
     id = menu->ids[count + first];

@@ -14,7 +14,7 @@ int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
-int FUN_0020b660(...);
+int campChangeState(...);
 int FUN_0021b274(...);
 int FUN_00228b04(int, int);
 int FUN_0028b088(...);
@@ -45,17 +45,17 @@ extern unsigned short ifTouchGetButtonHelpValue(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0020b660. */
+/* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_0028b088. */
 extern int FUN_002a21e8(void);
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
 /* Supplied declaration required: FUN_002cb278. */
 /* Supplied declaration required: buttonHelpScriptStart. */
@@ -126,7 +126,7 @@ void FUN_003daf0c(int param_1)
         FUN_0028b088(0);
         FUN_0021b274(3,0xffffffff,0);
         *(unsigned int *)(temp_v5 + 0x24) = 6;
-        FUN_0020b660(5);
+        campChangeState(5);
         campTouchRegionsRemoveGroup(temp_v7,1);
       }
       else {
@@ -155,13 +155,13 @@ void FUN_003daf0c(int param_1)
         FUN_0019de98(0,0xf4f4f4ff);
         temp_v1 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v1;
-        FUN_0020b660(0x2b);
+        campChangeState(0x2b);
         temp_v2 = 0x100020e;
       }
       eventQueueAddUniqueIfValid(temp_v2);
       return;
     }
-    temp_v6 = FUN_002a4860(temp_v7);
+    temp_v6 = resourceRunOperationIfUnblocked(temp_v7);
     temp_v3 = FUN_002a4894(temp_v7);
     temp_v6 = temp_v5 + (temp_v3 + temp_v6) * 2;
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x21b0);
@@ -197,7 +197,7 @@ void FUN_003daf0c(int param_1)
         *(unsigned int *)(temp_v5 + 0x34) = (unsigned int)*(unsigned short *)(temp_v6 + 0x21b0);
         FUN_0021b274(3,0xffffffff,0);
         *(unsigned int *)(temp_v5 + 0x24) = 0xb;
-        FUN_0020b660(5);
+        campChangeState(5);
         campTouchRegionsRemoveGroup(temp_v7,1);
         messageDismissNumericBanner(1);
         uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
@@ -218,14 +218,14 @@ void FUN_003daf0c(int param_1)
     if (temp_v7 == 0) {
       return;
     }
-    temp_v7 = FUN_002a4b74();
+    temp_v7 = messageGetChoiceResult();
     if (temp_v7 == 0) {
       flagValueSub(0x79f,1);
       temp_v5 = flagValueIsPositive(0x79f);
       if (temp_v5 == 0) {
         campRebuildEnabledFlagList(0xb);
       }
-      FUN_0020b660(0x4d);
+      campChangeState(0x4d);
       return;
     }
     temp_v7 = 3;
@@ -260,7 +260,7 @@ void FUN_003daf0c(int param_1)
       uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xc;
-      FUN_0020b660(5);
+      campChangeState(5);
       return;
     }
     break;
@@ -272,7 +272,7 @@ void FUN_003daf0c(int param_1)
       uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xd;
-      FUN_0020b660(5);
+      campChangeState(5);
       return;
     }
     break;
@@ -284,7 +284,7 @@ void FUN_003daf0c(int param_1)
       uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xe;
-      FUN_0020b660(5);
+      campChangeState(5);
       return;
     }
   }

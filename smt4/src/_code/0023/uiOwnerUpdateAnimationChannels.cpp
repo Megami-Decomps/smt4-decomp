@@ -27,7 +27,7 @@ struct UiOwner {
 extern "C" {
 void FUN_00230954(OwnerUpdater* updater, OwnerValues* values);
 void FUN_00233410(OwnerValues* values);
-u32 FUN_00233344(OwnerAnimation* animation, s32 channel);
+u32 uiAnimationAdvanceChannel(OwnerAnimation* animation, s32 channel);
 
 // Updates the owner's values and renderer, then advances animation channels two and three.
 u32 uiOwnerUpdateAnimationChannels(UiOwner* owner)
@@ -35,7 +35,7 @@ u32 uiOwnerUpdateAnimationChannels(UiOwner* owner)
     FUN_00230954(&owner->updater, &owner->values);
     owner->renderer->apply(&owner->values);
     FUN_00233410(&owner->values);
-    FUN_00233344(&owner->animation, 2);
-    return FUN_00233344(&owner->animation, 3);
+    uiAnimationAdvanceChannel(&owner->animation, 2);
+    return uiAnimationAdvanceChannel(&owner->animation, 3);
 }
 }

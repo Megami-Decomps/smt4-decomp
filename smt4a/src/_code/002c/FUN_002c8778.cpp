@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 void FUN_002c8778(unsigned short param_1)
@@ -55,7 +55,7 @@ void FUN_002c8778(unsigned short param_1)
   *(unsigned int *)(temp_v0 + 8) = temp_v1;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   sysPlaySe(0x1a);
-  FUN_003d2150(0x10000ca);
+  sysPlayVoice(0x10000ca);
   return;
 }
 

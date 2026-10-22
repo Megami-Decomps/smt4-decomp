@@ -1,4 +1,4 @@
-/* A set of data entries (each listing rows that name data-table files) searched by the FUN_003893xx / FUN_00387860 family. */
+/* A set of data entries (each listing rows that name data-table files) searched by the FUN_003893xx / dataSetGetTableRecord family. */
 #ifndef SHARD_W4_MATCH6_DATASET_H
 #define SHARD_W4_MATCH6_DATASET_H
 

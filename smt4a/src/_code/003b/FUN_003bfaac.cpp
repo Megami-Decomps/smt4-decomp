@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0039c0e4(void);
-int FUN_003f5268(int, int, int);
+int dialogEnterState(int, int, int);
 
 extern signed char DAT_0057f255; /* 0x57f255 */
 extern int DAT_0057f258; /* 0x57f258 */
@@ -15,7 +15,7 @@ extern int DAT_0057f258; /* 0x57f258 */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0039c0e4. */
-/* Supplied declaration required: FUN_003f5268. */
+/* Supplied declaration required: dialogEnterState. */
 
 
 unsigned char FUN_003bfaac(void)
@@ -31,7 +31,7 @@ unsigned char FUN_003bfaac(void)
     uiSpriteSetKeyframe(DAT_0057f258 + 0x16c,2,0);
     uiSpriteSetImageKeyframe(temp_v0 + 0x16c,1,0);
     *(unsigned char *)(temp_v0 + 0x5d4) = 1;
-    FUN_003f5268(temp_v0,10,0);
+    dialogEnterState(temp_v0,10,0);
   }
   temp_v1 = *(char *)(DAT_0057f258 + 0x5d4) == '\0';
   if (temp_v1) {

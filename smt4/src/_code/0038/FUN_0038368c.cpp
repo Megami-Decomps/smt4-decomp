@@ -52,7 +52,7 @@ extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bcf4c. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern unsigned int vec2GetYInt(unsigned int *);
@@ -291,7 +291,7 @@ void FUN_0038368c(unsigned int *param_1)
           }
         }
         else {
-          temp_v5 = FUN_002bd1fc();
+          temp_v5 = gameGetPlayerName();
           libc_strcat(temp_v21,temp_v5);
           if ((int)param_1[0x167] < 0xf) {
             temp_v8 = temp_v4;

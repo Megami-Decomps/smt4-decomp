@@ -5,7 +5,7 @@
 extern "C" {
 
 int mapDepartSetTarget(unsigned int, unsigned int);
-int FUN_0027db90(void);
+int sequenceRequestClearDeferred(void);
 int gameJumpRequestClear(void);
 int FUN_002a03d8(int, int);
 int asdSequenceRequest(unsigned int, unsigned int *, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned int DAT_0049fc34; /* 0x49fc34 */
 
 extern int FUN_002080e8(void);
 /* Supplied declaration required: mapDepartSetTarget. */
-/* Supplied declaration required: FUN_0027db90. */
+/* Supplied declaration required: sequenceRequestClearDeferred. */
 extern int gameStateIsFlagSetAndLarge(void);
 extern int FUN_00287304(void);
 /* Supplied declaration required: gameJumpRequestClear. */
@@ -76,7 +76,7 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
             mapDepartSetTarget(0xffffffff,0xffffffff);
             gameJumpRequestClear();
             *(unsigned char *)(param_1 + 0x19) = 1;
-            FUN_0027db90();
+            sequenceRequestClearDeferred();
             return;
           }
           temp_v3 = 0;
@@ -128,7 +128,7 @@ void FUN_00394508(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   mapDepartSetTarget(0xffffffff,0xffffffff);
   gameJumpRequestClear();
   *(unsigned char *)(param_1 + 0x19) = 1;
-  FUN_0027db90();
+  sequenceRequestClearDeferred();
   return;
 }
 

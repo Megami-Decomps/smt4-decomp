@@ -5,7 +5,7 @@ extern "C" {
 
 f32 phaseCosInterpolate(f32 phase);
 f32 FUN_002b70cc(f32 phase);
-void FUN_002569fc(Matrix44* matrix);
+void matrix44SetIdentity(Matrix44* matrix);
 void matrixCopyToGlobal(const Matrix44* matrix);
 
 void matrixSetRotationY(f32 radians)
@@ -14,7 +14,7 @@ void matrixSetRotationY(f32 radians)
     f32 cosine = phaseCosInterpolate(phase);
     f32 sine = FUN_002b70cc(phase);
     Matrix44 matrix;
-    FUN_002569fc(&matrix);
+    matrix44SetIdentity(&matrix);
     matrix.values[0] = cosine;
     matrix.values[2] = -sine;
     matrix.values[8] = sine;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00324cc0(void);
+int mathVec3Dot(void);
 
 int sysPlaySe(int);
 int FUN_001bbf0c(void);
@@ -59,7 +59,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: FUN_00313648. */
-/* Supplied declaration required: FUN_00324cc0. */
+/* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mapIfReleaseRequestObject. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -382,7 +382,7 @@ LAB_00327dc8:
           FUN_003250ac(temp_v18);
         }
         temp_v7 = (float)temp_v10;
-        FUN_00324cc0();
+        mathVec3Dot();
         temp_v2 = DAT_005f162f;
         if (temp_v7 < (float)temp_v17) goto LAB_00328050;
         temp_v6 = temp_v6 + 1;

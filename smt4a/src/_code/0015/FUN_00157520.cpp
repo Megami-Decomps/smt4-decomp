@@ -12,14 +12,14 @@ typedef struct Vector48 {
     /* 0x08 */ Elem48 *end;
 } Vector48;
 
-extern int FUN_001006ec(Elem48 *first, int count, int arg);
+extern int asdDeallocateArrayStorage(Elem48 *first, int count, int arg);
 
-/* Runs FUN_001006ec over all elements of the vector and returns the vector. */
+/* Runs asdDeallocateArrayStorage over all elements of the vector and returns the vector. */
 Vector48 *FUN_00157520(Vector48 *vec)
 {
     Elem48 *first = vec->begin;
 
-    FUN_001006ec(first, vec->end - first, 0);
+    asdDeallocateArrayStorage(first, vec->end - first, 0);
     return vec;
 }
 

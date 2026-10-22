@@ -1,4 +1,3 @@
-/* NON_MATCHING: ARMCC removes retail's initial mov r2,r0 receiver copy; the remaining comparator body shifts by one instruction. */
 #include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" GameUnitSortRecord *gameGetUnitRecord(s32 index);

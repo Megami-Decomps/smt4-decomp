@@ -11,7 +11,7 @@ int FUN_002637c8(void);
 int FUN_00282bfc(int, int);
 int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_002a03d8(...);
 int asdOperatorNew(void);
@@ -19,7 +19,7 @@ int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int questCenterSetFlag(int, int);
-int FUN_00343b08(...);
+int qcSetPersistentStateFlag(...);
 int FUN_00343c0c(...);
 int FUN_003a169c(unsigned int *);
 int FUN_003a4518(unsigned int *);
@@ -39,7 +39,7 @@ extern int _ZN14SelectionFlagsC1Ev(int);
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern short *FUN_002c0a2c(unsigned char, unsigned int);
@@ -48,7 +48,7 @@ extern short *FUN_002c0a2c(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_002c58c8. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: questCenterSetFlag. */
-/* Supplied declaration required: FUN_00343b08. */
+/* Supplied declaration required: qcSetPersistentStateFlag. */
 /* Supplied declaration required: FUN_00343c0c. */
 /* Supplied declaration required: FUN_003a169c. */
 /* Supplied declaration required: FUN_003a4518. */
@@ -156,7 +156,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
     }
   }
   else {
-    FUN_00343b08(param_4,1);
+    qcSetPersistentStateFlag(param_4,1);
     if (!(param_4 == 6 || param_4 == 7)) {
       if (param_4 != 8) {
         temp_v3 = 0x100005b;
@@ -190,7 +190,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 9);
-  FUN_0029be5c(0x1c,1);
+  gameCounterAddSaturating(0x1c,1);
   return puVar7;
 }
 

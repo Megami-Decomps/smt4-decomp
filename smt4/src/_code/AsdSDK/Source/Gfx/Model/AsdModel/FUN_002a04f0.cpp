@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelSlotSetActive(...);
-int FUN_002a4258(...);
+int asdModelGetSlotRecord(...);
 int FUN_002c2968(...);
 int FUN_003946b4(...);
 int nw_gfx_SceneNode_IsCircularReference(...);
@@ -39,7 +39,7 @@ extern unsigned char DAT_004dace0; /* 0x4dace0 */
 
 extern unsigned int asdModelGetSlotArray3(fn_002a04f0_arg0 *);
 /* Supplied declaration required: asdModelSlotSetActive. */
-/* Supplied declaration required: FUN_002a4258. */
+/* Supplied declaration required: asdModelGetSlotRecord. */
 extern int asdModelGetSlotArray2(fn_002a04f0_arg0 *);
 extern int asdModelGetSlotArray1(fn_002a04f0_arg0 *);
 extern int FUN_002af294(int, int);
@@ -63,9 +63,9 @@ void FUN_002a04f0(fn_002a04f0_arg0 *param_1)
   int temp_v8;
   
   temp_v0 = asdModelGetSlotArray3(param_1);
-  temp_v1 = FUN_002a4258(param_1);
+  temp_v1 = asdModelGetSlotRecord(param_1);
   temp_v2 = **(unsigned int **)(*(int *)(temp_v1 + 4) + 0x4c);
-  temp_v3 = FUN_002a4258(param_1);
+  temp_v3 = asdModelGetSlotRecord(param_1);
   temp_v4 = asdModelGetSlotArray1(param_1);
   temp_v8 = 0;
   do {

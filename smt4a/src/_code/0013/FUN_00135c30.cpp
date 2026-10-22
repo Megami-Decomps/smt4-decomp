@@ -9,7 +9,7 @@ int FUN_00137f94(...);
 int appletReplySleepQueryAllow(...);
 int FUN_00138a08(...);
 int FUN_00138cc4(...);
-int FUN_00138d1c(...);
+int appletUnlockAndRestoreDisplay(...);
 int FUN_00139518(...);
 int titleSelectMovieResource(...);
 int FUN_0013b7e0(...);
@@ -73,7 +73,7 @@ int FUN_0013a894(...);
 int FUN_0013ae58(...);
 int FUN_0013b244(...);
 int FUN_0013b3d0(...);
-int FUN_0013b548(...);
+int asdGxLoadMaterialShader(...);
 int FUN_0013ba0c(...);
 int FUN_0013ba3c(...);
 int FUN_0013ba70(...);
@@ -169,10 +169,10 @@ extern unsigned char LAB_0013660c; /* 0x13660c */
 extern unsigned char LAB_00136620; /* 0x136620 */
 extern int titleEndCommandList(...); /* 0x136f30 */
 extern int titleSubmitCommandList(...); /* 0x136f74 */
-extern int FUN_00136fc0(...); /* 0x136fc0 */
+extern int titlePrepareDrawFrame(...); /* 0x136fc0 */
 extern int titleBeginCommandList(...); /* 0x137020 */
 extern int titleSceneStep(...); /* 0x13705c */
-extern int FUN_001370bc(...); /* 0x1370bc */
+extern int titleSubmitCommandAndUpdateMode(...); /* 0x1370bc */
 extern int FUN_0013710c(...); /* 0x13710c */
 extern unsigned char LAB_00137668; /* 0x137668 */
 extern unsigned char LAB_0013767c; /* 0x13767c */
@@ -317,7 +317,7 @@ extern int FUN_00138ca4(void);
 extern int FUN_00138cb4(void);
 /* Supplied declaration required: FUN_00138cc4. */
 /* Supplied declaration required: gameDataBlocksMaskClearBits. */
-/* Supplied declaration required: FUN_00138d1c. */
+/* Supplied declaration required: appletUnlockAndRestoreDisplay. */
 /* Supplied declaration required: FUN_00138d34. */
 /* Supplied declaration required: asdPrimInit. */
 /* Supplied declaration required: FUN_00138e14. */
@@ -363,7 +363,7 @@ extern unsigned int FUN_0013af10(void);
 /* Supplied declaration required: FUN_0013b3d0. */
 /* Supplied declaration required: FUN_0013b4ac. */
 /* Supplied declaration required: titleConfigApplyTarget. */
-/* Supplied declaration required: FUN_0013b548. */
+/* Supplied declaration required: asdGxLoadMaterialShader. */
 /* Supplied declaration required: FUN_0013b5c8. */
 /* Supplied declaration required: FUN_0013b6e0. */
 /* Supplied declaration required: FUN_0013b790. */
@@ -543,7 +543,7 @@ void FUN_00135c30(void)
   FUN_0013ba0c();
   FUN_001394ec(7);
   FUN_001389ec(2);
-  FUN_0013b548();
+  asdGxLoadMaterialShader();
   asdTMTexTableLoadTmx(0x21,0);
   FUN_0014afd0(0x21,0);
   gameDataAllocBlocks();
@@ -569,7 +569,7 @@ void FUN_00135c30(void)
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_001364b8,0x6b,0);
-  temp_v22 = FUN_00136fc0;
+  temp_v22 = titlePrepareDrawFrame;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_001364cc,0x70,0);
@@ -609,7 +609,7 @@ void FUN_00135c30(void)
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136558,0xd3,0);
-  temp_v22 = FUN_001370bc;
+  temp_v22 = titleSubmitCommandAndUpdateMode;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136568,0xe4,0);
@@ -813,7 +813,7 @@ LAB_00136430:
           }
           appletReplySleepQueryAllow();
           FUN_00137848();
-          FUN_00138d1c();
+          appletUnlockAndRestoreDisplay();
           temp_v3 = temp_v7;
           if (g_mobiclipProcess != 0) {
             titleSelectMovieResource(2);

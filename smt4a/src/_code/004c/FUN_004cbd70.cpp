@@ -47,7 +47,7 @@ extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026c3c4. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a7288. */
 extern int FUN_002c7cb4(void);
 extern int FUN_002effbc(void);
@@ -63,7 +63,7 @@ extern int FUN_0037df64(void);
 extern int stateHolderStateIs0x12(void);
 /* Supplied declaration required: statusDownEnterState11. */
 extern int statusDownGetCursorPosition(void);
-extern unsigned int FUN_003d2150(unsigned int);
+extern unsigned int sysPlayVoice(unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_004bcd90. */
@@ -139,7 +139,7 @@ LAB_004cbdc8:
             return;
           }
           FUN_00333dc8(0);
-          temp_v0 = FUN_002a4b74();
+          temp_v0 = messageGetChoiceResult();
           if (temp_v0 != 0) {
             *(unsigned int *)(param_1 + 8) = 2;
             scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x20),8);
@@ -153,7 +153,7 @@ LAB_004cbdc8:
             return;
           }
           FUN_00333dc8(0);
-          temp_v0 = FUN_002a4b74();
+          temp_v0 = messageGetChoiceResult();
           if (temp_v0 == 0) {
             *(unsigned int *)(param_1 + 8) = 3;
             sysPlaySe(0x67);
@@ -223,7 +223,7 @@ LAB_004cbdc8:
           obj04Finish();
           sysPlaySe(0x9c);
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x14),8);
-          temp_v2 = FUN_003d2150(0x100020f);
+          temp_v2 = sysPlayVoice(0x100020f);
           *(unsigned int *)(param_1 + 8) = 0x15;
           *(unsigned int *)(param_1 + 0x28) = temp_v2;
           return;
@@ -239,7 +239,7 @@ LAB_004cbdc8:
       obj04Finish();
       sysPlaySe(0x9c);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x14),7);
-      temp_v2 = FUN_003d2150(0x100020e);
+      temp_v2 = sysPlayVoice(0x100020e);
       *(unsigned int *)(param_1 + 8) = 0x14;
       *(unsigned int *)(param_1 + 0x28) = temp_v2;
       return;

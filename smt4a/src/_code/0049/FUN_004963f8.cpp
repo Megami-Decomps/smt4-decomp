@@ -22,7 +22,7 @@ typedef struct {
 extern int FUN_00192718(short);
 /* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: FUN_00408184. */
-extern int FUN_0049ccec(short);
+extern int aocGetContentFlags(short);
 /* Supplied declaration required: FUN_0049cd18. */
 /* Supplied declaration required: FUN_004a0ef4. */
 
@@ -55,7 +55,7 @@ void FUN_004963f8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         FUN_0049cd18(&temp_v4,temp_v3,0);
       }
       else {
-        temp_v1 = FUN_0049ccec(temp_v0);
+        temp_v1 = aocGetContentFlags(temp_v0);
         gameDataAddCappedPoints(temp_v1 * temp_v3);
         temp_v4 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v4 + 2)),temp_v0) & 0xfc00ffff;
         FUN_0049cd18(&temp_v4,-temp_v3,0);

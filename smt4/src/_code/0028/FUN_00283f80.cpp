@@ -43,7 +43,7 @@ extern unsigned char LAB_00284814; /* 0x284814 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: messageKindForward. */
 extern unsigned int FUN_0028fb40(int);
-extern int FUN_002995d8(int);
+extern int recordAcceptsStickDirection(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -97,7 +97,7 @@ void FUN_00283f80(int param_1,int param_2,int param_3,int param_4,int param_5)
   FUN_002be650(temp_v13,0);
   if (temp_v5 != 0) {
     temp_v11 = 0xff;
-    temp_v4 = FUN_002995d8(temp_v13);
+    temp_v4 = recordAcceptsStickDirection(temp_v13);
     if (temp_v4 == 0) {
       temp_v11 = 0x5a5a5aff;
     }

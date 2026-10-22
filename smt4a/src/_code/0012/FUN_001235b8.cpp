@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00195fc4(void);
+int sysRequestFatalBreak(void);
 int asdOperatorDeleteB(int);
 int FUN_0030f20a(...);
 
 extern unsigned char LAB_001235f4; /* 0x1235f4 */
 extern unsigned char DAT_0064bf20; /* 0x64bf20 */
 
-/* Supplied declaration required: FUN_00195fc4. */
+/* Supplied declaration required: sysRequestFatalBreak. */
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: FUN_0030f20a. */
 
@@ -26,7 +26,7 @@ void FUN_001235b8(int param_1,int param_2)
     FUN_0030f20a(&DAT_0064bf20,&LAB_001235f4,param_2);
     asdOperatorDeleteB(param_2);
     do {
-      FUN_00195fc4();
+      sysRequestFatalBreak();
 LAB_001235e8:
       temp_v0 = 0x123610;
 LAB_001235dc:

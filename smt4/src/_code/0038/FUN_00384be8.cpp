@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00210194(unsigned int);
-int FUN_00235554(unsigned int *, unsigned char *);
+int scrScriptProcessStartMappedEntry(unsigned int *, unsigned char *);
 int FUN_00259258(void);
 int FUN_00290d5c(int);
 int scrScriptProcessStartEntry(...);
@@ -37,12 +37,12 @@ extern unsigned char LAB_00385254; /* 0x385254 */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00210194. */
 extern int dataTable27Sub0GetRecord(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_00235554. */
+/* Supplied declaration required: scrScriptProcessStartMappedEntry. */
 /* Supplied declaration required: FUN_00259258. */
 extern int effIsFinished(unsigned int);
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
-extern unsigned int FUN_00290e9c(void);
+extern unsigned int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -113,7 +113,7 @@ void FUN_00384be8(unsigned int *param_1)
       } while ((int)temp_v2 < (int)param_1[0x363]);
       if ((int)param_1[0x368] >= 2) {
         FUN_00290d5c(0xa0);
-        FUN_00235554(param_1,&LAB_00384f78);
+        scrScriptProcessStartMappedEntry(param_1,&LAB_00384f78);
         FUN_00259258();
         return;
       }
@@ -126,7 +126,7 @@ void FUN_00384be8(unsigned int *param_1)
     if (temp_v4 != 2) {
       temp_v4 = messageWindowIsState1();
       if (temp_v4 != 0) {
-        temp_v2 = FUN_00290e9c();
+        temp_v2 = messageTargetGetValue();
         param_1[0x369] = temp_v2;
         if (temp_v2 != 0xffffffff) {
           param_1[0x3ec] = param_1[param_1[temp_v2 + 0x364] * 2 + 0x358];

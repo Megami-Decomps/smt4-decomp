@@ -4,7 +4,7 @@
 extern "C" {
 
 int asdCecSetBoxArgs(unsigned int, unsigned int);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int asdCecInit(void);
 int FUN_0028022c(void);
 
@@ -14,7 +14,7 @@ extern unsigned char DAT_00557ec8; /* 0x557ec8 */
 extern unsigned int g_resourceDispatchContext; /* 0x57f2c8 */
 
 /* Supplied declaration required: asdCecSetBoxArgs. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: asdCecInit. */
 /* Supplied declaration required: FUN_0028022c. */
 extern unsigned int FUN_0042d694(unsigned int);
@@ -36,10 +36,10 @@ int FUN_004bb440(unsigned int *param_1)
   FUN_0028022c();
   asdCecInit();
   puVar2 = &LAB_004bb4a4;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 - 8) = puVar2;
   puVar2 = &LAB_004bb4bc;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 - 4) = puVar2;
   temp_v1 = FUN_0042d694(0x19a2);
   asdCecSetBoxArgs(temp_v1,g_resourceDispatchContext);

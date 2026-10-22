@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_00291e40(int);
 
 extern int DAT_00447e10; /* 0x447e10 */
@@ -13,7 +13,7 @@ extern signed char DAT_0049f934; /* 0x49f934 */
 extern signed char DAT_0049f93e; /* 0x49f93e */
 extern int DAT_0049fb30; /* 0x49fb30 */
 
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00291e40. */
 
 
@@ -73,7 +73,7 @@ joined_r0x001e2fa8:
                 }
                 else {
                   temp_v9 = *(float *)(g_lmapScene + 0x1c);
-                  FUN_00287aec();
+                  mathDistanceBetweenPoints();
                   if (0x4395ffff >= (int)temp_v9) {
                     temp_v2 = *(int *)(temp_v5 + 0x54);
                     *(unsigned char *)(temp_v5 + 0x15) = 1;

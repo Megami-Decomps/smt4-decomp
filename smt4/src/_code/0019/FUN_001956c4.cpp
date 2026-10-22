@@ -12,7 +12,7 @@ int FUN_002900d0(void);
 int FUN_0029016c(...);
 int FUN_002902a0(...);
 int FUN_002903f0(void);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int FUN_0029efa8(...);
 int FUN_0029efc0(...);
 int dataTable1bOr1cGetRecord(void);
@@ -65,8 +65,8 @@ extern int gameJumpRequestIsPending(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
@@ -1098,7 +1098,7 @@ joined_r0x0019627c:
   case 0x1e:
     temp_v5 = useCounterIsFinished();
     if (temp_v5 == 0) {
-      temp_v5 = FUN_0029e130();
+      temp_v5 = useCounterGetCurrentValue();
       if (temp_v5 != 0x4b) {
         uiQuestSortListByEntryKind((int)*(char *)(temp_v1 + 0x5c4));
         if (*(char *)(temp_v1 + 0x5c4) != '\0') {
@@ -1121,7 +1121,7 @@ joined_r0x0019627c:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_0029e17c();
+    useCounterRelease();
     FUN_002905d0();
     FUN_00290404();
     temp_v7 = 2;

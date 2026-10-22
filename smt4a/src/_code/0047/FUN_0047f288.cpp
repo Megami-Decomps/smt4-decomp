@@ -1,16 +1,16 @@
-/* NON_MATCHING: tail call supplies a PC-relative literal string outside the assigned target object; needs literal extent recovery. */
-/* romwright 0.5.0 decompilation of FUN_0047f288 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: retail preserves the volume in s16 across actor lookup; this source loads the constant afterward. */
+#include "battle/btlMain.h"
 
+extern "C" {
+BtlMainStateA *btlGetMainState(void);
+u32 FUN_0014af98(s32 actor);
+void FUN_001628c0(const char *voice, u32 enabled, u32 kind, u32 flags, f32 leftVolume, f32 rightVolume);
+
+// Play the fixed battle voice cue at equal channel volumes.
 void FUN_0047f288(void)
-
 {
-  int iVar1;
-  unsigned int uVar2;
-  
-  iVar1 = FUN_0014aa78();
-  uVar2 = FUN_0014af98((int)*(short *)(iVar1 + 0x2000));
-  FUN_001628c0(0x47f2cc,uVar2,2,0);
-  return;
+    FUN_001628c0("I001026",
+                 FUN_0014af98(*reinterpret_cast<s16 *>(btlGetMainState()->commandWords)),
+                 2, 0, 0.707f, 0.707f);
 }
-*/
-#include "common.h"
+}

@@ -11,7 +11,7 @@ int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_0019de98(...);
 int FUN_002c8550(...);
 int FUN_0034a9c4(...);
-int FUN_0035de50(void);
+int fusionReleaseRegisteredHandle(void);
 int rectangleInitializeSelection(...);
 int FUN_004a1958(...);
 int FUN_004a3e04(...);
@@ -49,7 +49,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0034a9c4. */
-/* Supplied declaration required: FUN_0035de50. */
+/* Supplied declaration required: fusionReleaseRegisteredHandle. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: FUN_004a3e04. */
@@ -129,7 +129,7 @@ void FUN_004a2c00(int *param_1)
   FUN_0019de98(0,0xf4f4f4ff);
   param_1[5] = 0;
   param_1[6] = 0;
-  FUN_0035de50();
+  fusionReleaseRegisteredHandle();
   DAT_0057f0b8 = 0xffffffff;
   FUN_004a3e04(param_1);
   temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);

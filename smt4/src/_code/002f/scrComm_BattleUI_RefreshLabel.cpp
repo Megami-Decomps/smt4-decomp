@@ -24,7 +24,7 @@ extern u32 g_btlUiBlock;
 BattleState *btlGetMainState(void);
 GameOptions *gameGetSupportUnitData(void);
 s32 FUN_00336a84(void);
-Label *FUN_002b6a54(s32 a, u16 b);
+Label *supportUnitGetEntry(s32 a, u16 b);
 s32 FUN_002942c4(s32 number, s32 arg);
 s32 FUN_003ae620(u32 block);
 
@@ -37,7 +37,7 @@ u32 scrComm_BattleUI_RefreshLabel(void)
 
     FUN_00336a84();
     labelB = gameGetSupportUnitData()->labelB;
-    label = FUN_002b6a54(gameGetSupportUnitData()->labelA, labelB);
+    label = supportUnitGetEntry(gameGetSupportUnitData()->labelA, labelB);
     FUN_002942c4((s16)(label->number + 1), 0);
     state->uiFlags |= 0x2000000;
     FUN_003ae620(g_btlUiBlock);

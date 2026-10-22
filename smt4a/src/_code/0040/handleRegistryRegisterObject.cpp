@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+int asdDeallocateArrayStorage(int, int, int);
 
 extern int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0040ad60) */
@@ -70,7 +70,7 @@ void handleRegistryRegisterObject(int param_1,int param_2)
         }
         temp_v1 = *(int *)(param_1 + 0x18);
         temp_v2 = *(int *)(param_1 + 0x1c);
-        FUN_001006ec(temp_v1,(*(int *)(param_1 + 0x20) - temp_v1) >> 2,0);
+        asdDeallocateArrayStorage(temp_v1,(*(int *)(param_1 + 0x20) - temp_v1) >> 2,0);
         *(int **)(param_1 + 0x20) = piVar2 + temp_v3;
         *(int **)(param_1 + 0x1c) = piVar2 + ((temp_v2 - temp_v1) >> 2) + 1;
         *(int **)(param_1 + 0x18) = piVar2;

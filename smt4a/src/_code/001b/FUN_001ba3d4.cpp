@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int *FUN_0019c06c(void);
-extern int FUN_001bce18(void);
+extern int flagValueGetStorage(void);
 
 
 unsigned short FUN_001ba3d4(int param_1)
@@ -20,7 +20,7 @@ unsigned short FUN_001ba3d4(int param_1)
   temp_v1 = 0;
   if (piVar3 != (int *)0x0) {
     temp_v0 = piVar3[2];
-    temp_v2 = FUN_001bce18();
+    temp_v2 = flagValueGetStorage();
     switch((char)temp_v0) {
     case 0:
       break;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00344348's literal pool; not written yet. */
+/* NON_MATCHING: assembles currency/item rewards and advances their sliding confirmation display; reward-panel work layout and several child-panel/callback prototypes remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_0035a3f0 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_0035a3f0(int param_1)
@@ -113,7 +113,7 @@ unsigned int FUN_0035a3f0(int param_1)
     *(unsigned char *)(param_1 + 0x7ec) = 0;
     *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
     *(unsigned int *)(param_1 + 0x7e8) = 0;
-    FUN_003d2150(0x100020e);
+    sysPlayVoice(0x100020e);
     FUN_003216ec();
     break;
   case 4:

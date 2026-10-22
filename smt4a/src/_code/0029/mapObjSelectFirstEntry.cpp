@@ -3,12 +3,12 @@
 extern "C" {
 
 extern MapObjectCallbackWork *g_mapObj;
-void *FUN_003797e4(u32 index);
+void *mapObjGetCombinedEntry(u32 index);
 
 /* Select the map object's first table entry. */
 void mapObjSelectFirstEntry(void)
 {
-    g_mapObj->entry = FUN_003797e4(0);
+    g_mapObj->entry = mapObjGetCombinedEntry(0);
 }
 
 }

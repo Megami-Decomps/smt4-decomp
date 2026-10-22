@@ -52,7 +52,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_001385ac. */
-extern int FUN_001385d4(void);
+extern int asdGxIsReady(void);
 /* Supplied declaration required: FUN_0014493c. */
 /* Supplied declaration required: FUN_00144a64. */
 /* Supplied declaration required: allocationTrackPairedResult. */
@@ -325,7 +325,7 @@ void FUN_00131c98(int param_1,int param_2,int param_3)
   }
   *(unsigned int *)(temp_v5 + 0x10) = temp_v2;
   *(unsigned char *)(temp_v5 + 0x28) = 0;
-  temp_v5 = FUN_001385d4();
+  temp_v5 = asdGxIsReady();
   if ((temp_v5 != 0) && (param_3 == 0)) {
     allocationTrackPairedResult(*(unsigned int *)(param_1 + 0x14),DAT_00472950,0,0,0);
     temp_v5 = FUN_002c5be8();

@@ -30,7 +30,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_0026140c(void);
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a4964. */
 extern int objectApplyIfUnblocked(int);
@@ -57,7 +57,7 @@ void FUN_0028a2e8(int param_1)
   temp_v0 = g_unite;
   temp_v2 = FUN_0026140c();
   temp_v3 = temp_v0 + 0x4fc;
-  temp_v4 = FUN_002a4860();
+  temp_v4 = resourceRunOperationIfUnblocked();
   temp_v5 = FUN_002a4894(temp_v3);
   temp_v10 = 0;
   temp_v11 = 0;

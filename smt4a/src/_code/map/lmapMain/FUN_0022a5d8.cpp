@@ -69,8 +69,8 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00261468. */
 /* Supplied declaration required: gameDataGetPlayerName. */
-extern int FUN_00284140(int);
-extern int FUN_002a4860(int);
+extern int recordGetModeForId(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: textGetNameToken. */
 extern int objectApplyIfUnblocked(int);
@@ -180,11 +180,11 @@ unsigned int FUN_0022a5d8(void)
         FUN_00164b5c(2,0x15,1,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xd3);
         temp_v7 = -1;
         if (*(char *)(temp_v1 + 0x74e) != '\x02') {
-          temp_v3 = FUN_002a4860(temp_v19);
+          temp_v3 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758);
           FUN_00261468(temp_v4);
           textFormatBuffer(temp_v17,&LAB_0022a9d8,temp_v4);
-          temp_v3 = FUN_002a4860(temp_v19);
+          temp_v3 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v0 = *(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758);
           if (temp_v0 >= 0x6a) {
             pcVar7 = (char *)0x0;
@@ -271,13 +271,13 @@ unsigned int FUN_0022a5d8(void)
           }
           textFormatBuffer(temp_v18,&LAB_0022a9d8,pcVar7);
           if ((g_lmapMain != '\0') &&
-             (temp_v3 = FUN_002a4860(temp_v19),
+             (temp_v3 = resourceRunOperationIfUnblocked(temp_v19),
              *(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758) == DAT_005f1b00)) {
             temp_v7 = 0x787878ff;
           }
         }
         else {
-          temp_v3 = FUN_002a4860(temp_v19);
+          temp_v3 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758);
           tmnlGetEntryText(temp_v4);
           textFormatBuffer(temp_v17,&LAB_0022a9d8,temp_v4);
@@ -328,7 +328,7 @@ unsigned int FUN_0022a5d8(void)
       efctSetSpeed();
       FUN_001835b4(2,0x15,0x13,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xe2);
       temp_v7 = FUN_002a4894(temp_v19);
-      temp_v7 = FUN_00284140((int)*(short *)(temp_v1 + temp_v7 * 2 + 0x772));
+      temp_v7 = recordGetModeForId((int)*(short *)(temp_v1 + temp_v7 * 2 + 0x772));
       temp_v3 = -0xa006001;
       if (((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6) && (*(int *)(temp_v1 + 0x744) != 3)) {
         FUN_001835b4(2,0x15,0x50,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xe4);
@@ -351,22 +351,22 @@ unsigned int FUN_0022a5d8(void)
         FUN_001835b4(2,0x15,0x4a,(int)*(short *)(temp_v6 + 8),(int)*(short *)(temp_v6 + 10),0xe6);
         efctSetSpeed();
       }
-      temp_v7 = FUN_002a4860(temp_v19);
+      temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
       if (*(char *)(temp_v7 + temp_v2 + temp_v1 + 0x758) != '>') {
         if (*(int *)(temp_v1 + 0x744) == 3) {
           temp_v8 = temp_v3;
         }
         if (*(char *)(temp_v1 + 0x74e) != '\x02') {
-          temp_v7 = FUN_002a4860(temp_v19);
+          temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
           FUN_00261468(temp_v4);
           textFormatBuffer(temp_v17,&LAB_0022b2cc,temp_v4);
-          temp_v7 = FUN_002a4860(temp_v19);
+          temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
           const unsigned char* tokenName = textGetNameToken(temp_v4);
           textFormatBuffer(temp_v18,&LAB_0022b2cc,tokenName);
           if (g_lmapMain != '\0') {
-            temp_v8 = FUN_002a4860(temp_v19);
+            temp_v8 = resourceRunOperationIfUnblocked(temp_v19);
             if (*(unsigned char *)(temp_v8 + temp_v2 + temp_v1 + 0x758) == DAT_005f1b00) {
               temp_v8 = 0x787878ff;
             }
@@ -376,7 +376,7 @@ unsigned int FUN_0022a5d8(void)
           }
         }
         else {
-          temp_v7 = FUN_002a4860(temp_v19);
+          temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
           tmnlGetEntryText(temp_v4);
           textFormatBuffer(temp_v17,&LAB_0022b2cc,temp_v4);

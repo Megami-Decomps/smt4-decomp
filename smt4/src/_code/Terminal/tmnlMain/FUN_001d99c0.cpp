@@ -22,7 +22,7 @@ int FUN_0028d5ac(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_0029ae60(...);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_0029c2cc(...);
 int soundChannelStopAll(...);
 int asdWorkAreaReset(void);
@@ -51,7 +51,7 @@ int FUN_00297060(...);
 int FUN_0029b8ec(...);
 int FUN_0029bb08(...);
 int slotSetRequest(...);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
@@ -170,12 +170,12 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_0029b8ec. */
 /* Supplied declaration required: FUN_0029bb08. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
@@ -628,14 +628,14 @@ LAB_001da638:
           scrRunOpcodesStub(puVar2[10]);
           temp_v6 = useCounterIsFinished();
           if (temp_v6 != 0) {
-            FUN_0029e17c();
+            useCounterRelease();
             puVar2[4] = 99;
             puVar2[5] = 0;
             slotSetRequest(0,10,0xff);
             slotSetRequest(1,10,0xff);
           }
           else {
-            temp_v6 = FUN_0029e130();
+            temp_v6 = useCounterGetCurrentValue();
             if (temp_v6 != 0x4b) {
               puVar7 = puVar2;
               FUN_001d04a4(puVar2,temp_v6);
@@ -897,7 +897,7 @@ LAB_001da638:
         else {
           temp_v6 = scrRunOpcodesStub(puVar2[10]);
           if (temp_v6 == 2) {
-            FUN_0029be5c(0x21,1);
+            gameCounterAddSaturating(0x21,1);
             *(unsigned char *)(puVar2 + 0x157) = 0;
             FUN_002bf810(0x10000a8);
             FUN_002636b0();
@@ -944,7 +944,7 @@ LAB_001da638:
     temp_v6 = screenFadeIsBusy();
     if (temp_v6 == 0) {
       FUN_0028d5ac();
-      FUN_0029e17c();
+      useCounterRelease();
       FUN_002636d0(0);
       FUN_0029b8ec(puVar2[0xc]);
       *(unsigned char *)(puVar2 + 0x15b) = 0;

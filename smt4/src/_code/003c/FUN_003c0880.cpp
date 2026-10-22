@@ -12,7 +12,7 @@ int FUN_00297060(void);
 int buttonHelpSetPreset(int);
 int FUN_003c06ac(int *);
 int FUN_003dbe68(int);
-int FUN_003dc13c(void);
+int btlEventAreResourcesReady(void);
 
 extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern int DAT_00435d18; /* 0x435d18 */
@@ -27,7 +27,7 @@ extern int nodeListCountActiveById(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_003c06ac. */
 /* Supplied declaration required: FUN_003dbe68. */
-/* Supplied declaration required: FUN_003dc13c. */
+/* Supplied declaration required: btlEventAreResourcesReady. */
 extern unsigned long long FUN_003dcc34(int);
 
 
@@ -58,7 +58,7 @@ unsigned int FUN_003c0880(int *param_1,int param_2)
     }
     else {
       temp_v1 = DAT_00435d18;
-      FUN_003dc13c();
+      btlEventAreResourcesReady();
       if (temp_v1 == 0) {
         return 0;
       }

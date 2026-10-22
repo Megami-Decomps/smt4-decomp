@@ -14,7 +14,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: slotSetRequest. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_002e07f4(void);
 
@@ -58,7 +58,7 @@ unsigned int FUN_0031a5e4(void)
     }
     break;
   case 1:
-    temp_v2 = FUN_00284140((int)*(short *)(temp_v0 + 0x14));
+    temp_v2 = recordGetModeForId((int)*(short *)(temp_v0 + 0x14));
     temp_v1 = *(int *)(temp_v0 + 0x18) + 1;
     temp_v3 = (int)(((long long)(int)temp_v1 * -0x77777777 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
     *(unsigned int *)(temp_v0 + 0x18) = temp_v1 + ((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xf;

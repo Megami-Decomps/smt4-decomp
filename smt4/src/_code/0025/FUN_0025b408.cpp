@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002878e4(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int g_gameState; /* 0x49f91c */
 
@@ -17,7 +17,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_002878e4. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 unsigned int FUN_0025b408(void)
@@ -36,7 +36,7 @@ unsigned int FUN_0025b408(void)
       return 1;
     }
   }
-  else if ((romwright_fabs_4(in_s1 - in_s4) < in_s7) && (FUN_00287aec(), in_s0 < in_s6)) {
+  else if ((romwright_fabs_4(in_s1 - in_s4) < in_s7) && (mathDistanceBetweenPoints(), in_s0 < in_s6)) {
     return 1;
   }
   return 0;

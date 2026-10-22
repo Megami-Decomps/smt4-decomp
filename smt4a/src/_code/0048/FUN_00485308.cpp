@@ -20,7 +20,7 @@ typedef struct {
 extern int scrRunOpcodesStub(unsigned int);
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_00318dc4(void);
 /* Supplied declaration required: stateSetterEnterState. */
@@ -56,7 +56,7 @@ void FUN_00485308(int param_1)
     }
     temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
     if (temp_v0 == 2) {
-      temp_v0 = FUN_002a4b74();
+      temp_v0 = messageGetChoiceResult();
       if (temp_v0 != 0) {
         if (*(char *)(param_1 + 0x261) == '\x04') {
           *(unsigned char *)(param_1 + 0x260) = 0;

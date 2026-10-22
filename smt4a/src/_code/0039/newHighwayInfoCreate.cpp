@@ -27,7 +27,7 @@ extern const char DAT_0052d468[], DAT_0052d454[], DAT_0052d440[];
 extern const char DAT_0052d418[], DAT_0052d3f0[];
 void *asdOperatorNew(u32 size);
 void FUN_0035d080(void *);
-void FUN_0037d9b8(void *);
+void engineResourceSetSecondaryValue(void *);
 u32 asdProcessCreateSimple(const char *, s32, s32, s32, HighwayCallback, HighwayCallback, void *);
 void taskCreateDraw(const char *, s32, s32, s32, HighwayCallback, void *, void *, u32);
 void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
@@ -37,7 +37,7 @@ u32 spriteHandleCreate(u32 flags);
 void FUN_001527d8(u32 sprite, s32 value);
 void positionStateSet(u32 sprite, s32 mode, u32 color, f32 value);
 void FUN_003f84e8(HighwayInfo *);
-void FUN_003f5268(HighwayInfo *, s32 state, s32 mode);
+void dialogEnterState(HighwayInfo *, s32 state, s32 mode);
 
 // Create the highway topic window, loading its table, messages, textures and sprite.
 void newHighwayInfoCreate(u32 owner)
@@ -54,8 +54,8 @@ void newHighwayInfoCreate(u32 owner)
     }
     g_engineResourceHandles.secondary = info;
     info->process = asdProcessCreateSimple(DAT_0052d468, 4, 0, 0, FUN_0035d080, NULL, NULL);
-    taskCreateDraw(DAT_0052d454, 0x81, 0, 0, FUN_0037d9b8, NULL, NULL, info->process);
-    taskCreateDraw(DAT_0052d440, 0xdd, 0, 0, FUN_0037d9b8, NULL, NULL, info->process);
+    taskCreateDraw(DAT_0052d454, 0x81, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, info->process);
+    taskCreateDraw(DAT_0052d440, 0xdd, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, info->process);
     info->owner = owner;
     asdLoadFileAsyncSimple(DAT_0052d418, &info->table, 0);
     asdLoadFileAsyncSimple(DAT_0052d3f0, &info->messages, 0);
@@ -67,6 +67,6 @@ void newHighwayInfoCreate(u32 owner)
     positionStateSet(info->sprite, 0, 0x646464ff, 0.0f);
     FUN_003f84e8(info);
     info->active = 1;
-    FUN_003f5268(info, 9, 0);
+    dialogEnterState(info, 9, 0);
 }
 }

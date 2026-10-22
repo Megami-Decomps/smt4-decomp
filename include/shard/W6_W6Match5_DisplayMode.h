@@ -2,18 +2,35 @@
 #define SHARD_W6_W6MATCH5_DISPLAYMODE_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct GraphicsQueueEntry {
     u8 unk00[2];
     u8 ready; // 0x02
-    u8 unk03[0x19];
+    u8 unk03;
+    u32 unk04; // 0x04
+    u32 byteCount; // 0x08
+    u32 flags; // 0x0c
+    u8 unk10[0x0c];
 };
 struct GraphicsQueue {
-    u8 unk00[0x18];
+    union {
+        u8 unk00[0x18];
+        struct {
+            u8 unk00[0x10];
+            u32 submittedBytes; // 0x10
+            u8 unk14[4];
+        } accounting;
+    };
     GraphicsQueueEntry *entries; // 0x18
     u8 unk1c[8];
     u32 activeCount; // 0x24
+    u32 currentEntry; // 0x28
 };
+
+typedef char GraphicsQueueEntrySizeCheck[sizeof(GraphicsQueueEntry) == 0x1c ? 1 : -1];
+typedef char GraphicsQueueEntryBytesOffsetCheck[offsetof(GraphicsQueueEntry, byteCount) == 8 ? 1 : -1];
+typedef char GraphicsQueueCurrentEntryOffsetCheck[offsetof(GraphicsQueue, currentEntry) == 0x28 ? 1 : -1];
 
 struct GraphicsTarget {
     u32 unk00;

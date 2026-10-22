@@ -25,7 +25,7 @@ struct RegionPoint {
 extern "C" {
 extern MapRegionTable DAT_004c14a0;
 void FUN_0025247c(f32 *out, f32 fromX, f32 fromY, f32 fromZ, f32 toX, f32 toY, f32 toZ);
-f32 FUN_002c86ec(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
+f32 mathVec3Dot(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 // Select the containing map region independently for ordinary and alternate kinds.
 void mapSelectContainingRegions(RegionPoint point)
@@ -55,7 +55,7 @@ void mapSelectContainingRegions(RegionPoint point)
                 FUN_0025247c(&direction.x, region->edgeD.origin.x, region->edgeD.origin.y, region->edgeD.origin.z, point.x, 0.0f, point.z);
                 break;
             }
-            if (FUN_002c86ec(normal.x, normal.y, normal.z, direction.x, direction.y, direction.z) < 0.0f) {
+            if (mathVec3Dot(normal.x, normal.y, normal.z, direction.x, direction.y, direction.z) < 0.0f) {
                 goto nextRegion;
             }
         }

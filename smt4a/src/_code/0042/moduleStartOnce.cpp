@@ -11,13 +11,13 @@ typedef struct State0042d6a8 {
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
-s32 FUN_004320e4(s32 value);
+s32 svcRequestChannelByIndex(s32 value);
 void svcSleepThread(s32 value, s32 flags);
 
 extern State0042d6a8 DAT_005b4486; /* 0x5b4486 */
 extern u8 DAT_006426b4[];          /* 0x6426b4: critical section */
 
-/* Starts the module once (16000000), under its critical section. Returns 0xc8a10bf0 when it was not initialised, or the failure from FUN_004320e4. */
+/* Starts the module once (16000000), under its critical section. Returns 0xc8a10bf0 when it was not initialised, or the failure from svcRequestChannelByIndex. */
 s32 moduleStartOnce(void)
 {
     s32 result = 0;
@@ -28,7 +28,7 @@ s32 moduleStartOnce(void)
     } else if (DAT_005b4486.started == 0) {
         section = DAT_006426b4;
         nn_os_CriticalSection_Enter(section);
-        result = FUN_004320e4(0);
+        result = svcRequestChannelByIndex(0);
         if ((result & 0x80000000) != 0) {
             nn_os_CriticalSection_Leave(section);
             return result;

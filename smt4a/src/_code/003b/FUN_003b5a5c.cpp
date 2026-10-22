@@ -8,7 +8,7 @@ int FUN_0014e188(int, int, int, int, int);
 int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int saveSlotFindById(unsigned int);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned char g_messageMain; /* 0x57f588 */
 extern int FUN_00187168(void);
 extern unsigned int scrGetArg(unsigned int);
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 unsigned int FUN_003b5a5c(void)
@@ -79,7 +79,7 @@ unsigned int FUN_003b5a5c(void)
       FUN_0014e188(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,0x14,0xc12,temp_v0 + 0x194,0xb);
       uiSpriteSetKeyframe(temp_v0 + *(int *)(temp_v0 + 0x9c) * 0x8c + 0xdbc,0xb,0);
       *(unsigned char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xa0) = 4;
-      FUN_003d2150(0x100016f);
+      sysPlayVoice(0x100016f);
     }
     if (((*(char *)(temp_v0 + 0x90) == '\0') || (*(char *)(temp_v0 + 0x8d) != '\x02')) ||
        (*(char *)(*(int *)(temp_v0 + 0x9c) + temp_v0 + 0xa0) != '\0')) {

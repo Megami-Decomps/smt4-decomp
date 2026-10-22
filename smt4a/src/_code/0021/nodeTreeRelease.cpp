@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0021a5f0(void);
+int nodeTreeReleaseSiblingsFirst(void);
 
 typedef struct fn_0021a610_arg0 fn_0021a610_arg0;
 struct fn_0021a610_arg0 {
@@ -17,7 +17,7 @@ struct fn_0021a610_arg0 {
     void *field_0x30; /* +0x30 */
 };
 
-/* Supplied declaration required: FUN_0021a5f0. */
+/* Supplied declaration required: nodeTreeReleaseSiblingsFirst. */
 
 
 void nodeTreeRelease(fn_0021a610_arg0 *param_1)
@@ -32,7 +32,7 @@ void nodeTreeRelease(fn_0021a610_arg0 *param_1)
       pfVar2 = *(fn_0021a610_arg0 **)((int)param_1->field_0x28 + 0x30);
       if (pfVar2 != (fn_0021a610_arg0 *)0x0) {
         if (pfVar2->field_0x30 != (void *)0x0) {
-          FUN_0021a5f0();
+          nodeTreeReleaseSiblingsFirst();
         }
         nodeTreeRelease(pfVar2);
       }

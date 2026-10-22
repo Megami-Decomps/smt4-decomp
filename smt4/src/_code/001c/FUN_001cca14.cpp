@@ -62,7 +62,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00187114. */
 /* Supplied declaration required: FUN_00204ed0. */
-extern unsigned long long FUN_0026aa78(void);
+extern unsigned long long statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
@@ -506,7 +506,7 @@ LAB_001ccb9c:
     temp_v19 = temp_v10 + 0x230c;
     temp_v12 = 0;
     do {
-      temp_v15 = FUN_0026aa78();
+      temp_v15 = statusGetAvailableChoiceCount();
       if (temp_v12 >= (int)temp_v15) {
         FUN_002bf288(2,0x1a,temp_v12 + 0x54b,temp_v1,temp_v2,0xb5);
       }

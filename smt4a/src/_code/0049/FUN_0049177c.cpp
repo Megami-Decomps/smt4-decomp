@@ -35,7 +35,7 @@ extern int FUN_00384d34(int);
 extern int gameOwnedBitTest2(int);
 extern int FUN_004083a8(unsigned char, unsigned char);
 extern float *sub68OwnerGetBlock60(int);
-extern int FUN_00492bc0(void);
+extern int naviGetActiveStateValue(void);
 extern float *lmapSceneGetObj(int);
 extern int FUN_00492c5c(int);
 /* Supplied declaration required: words2Copy. */
@@ -69,7 +69,7 @@ void FUN_0049177c(int param_1)
   
   gameFlagsGetBlock();
   temp_v2 = param_1 + 0x4cc;
-  temp_v3 = FUN_00492bc0();
+  temp_v3 = naviGetActiveStateValue();
   pfVar5 = (float *)lmapSceneGetObj(temp_v2);
   temp_v14 = *pfVar5;
   temp_v11 = pfVar5[2];

@@ -11,7 +11,7 @@ int FUN_00201984(int);
 int FUN_004d854c(unsigned int);
 int callOnHandleField4B(unsigned int);
 int callOnHandleField4C(unsigned int);
-int FUN_004d8724(void);
+int btlModelCopyContentIfMissing(void);
 int callOnHandleField4D(unsigned int);
 
 extern unsigned char LAB_003eac80; /* 0x3eac80 */
@@ -26,7 +26,7 @@ extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: FUN_004d854c. */
 /* Supplied declaration required: callOnHandleField4B. */
 /* Supplied declaration required: callOnHandleField4C. */
-/* Supplied declaration required: FUN_004d8724. */
+/* Supplied declaration required: btlModelCopyContentIfMissing. */
 extern int FUN_004d87e4(unsigned int);
 /* Supplied declaration required: callOnHandleField4D. */
 extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
@@ -61,7 +61,7 @@ void FUN_003eaa9c(int param_1)
       }
       temp_v2 = param_1 + temp_v1 * 4;
       *(unsigned int *)(temp_v2 + 0x22bc) = temp_v3;
-      FUN_004d8724();
+      btlModelCopyContentIfMissing();
       FUN_004d854c(*(unsigned int *)(temp_v2 + 0x22bc));
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 4);

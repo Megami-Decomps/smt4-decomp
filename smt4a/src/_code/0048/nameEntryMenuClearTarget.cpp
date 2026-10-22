@@ -18,7 +18,7 @@ typedef struct NameEntryMenu {
 } NameEntryMenu;
 
 extern s32 FUN_00163aa4(u8 *ui, f32 speed);
-extern NameBuffer *FUN_0015687c(void);
+extern NameBuffer *gameGetPlayerName(void);
 extern NameBuffer *gameDataGetPlayerName(void);
 extern NameBuffer *gameBlockGetArea221AA(void);
 extern void nameEntryCopyEditedName(NameEntryMenu *menu, NameBuffer *buffer);
@@ -40,7 +40,7 @@ void nameEntryMenuClearTarget(NameEntryMenu *menu)
 
     if (FUN_00163aa4(menu->ui, 1.0f) != 0) {
         if (menu->target == 0 || menu->target == -1) {
-            buffer = FUN_0015687c();
+            buffer = gameGetPlayerName();
             nameBufferClear(buffer);
             nameEntryCopyEditedName(menu, buffer);
         }

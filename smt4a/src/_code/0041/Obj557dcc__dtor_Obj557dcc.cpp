@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001006ec(int, unsigned int, int);
+int asdDeallocateArrayStorage(int, unsigned int, int);
 int resourceListDestroy(void);
 int asdOperatorDelete(int);
 
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 /* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdOperatorDelete. */
 
@@ -39,7 +39,7 @@ unsigned int * _ZN9Obj557dccD1Ev(unsigned int *param_1)
   if (temp_v1 != temp_v0) {
     param_1[4] = temp_v0 - ((temp_v0 - temp_v1) & 0xfffffffcU);
   }
-  FUN_001006ec(temp_v1,(param_1[5] - temp_v1) >> 2,0);
+  asdDeallocateArrayStorage(temp_v1,(param_1[5] - temp_v1) >> 2,0);
   return param_1;
 }
 

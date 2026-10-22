@@ -9,7 +9,7 @@ int FUN_00314bbc(void);
 int FUN_00319f64(...);
 int FUN_003278c8(int);
 int FUN_00328150(...);
-int FUN_0033ab6c(...);
+int gameFlagSetIndexedBit(...);
 int VectorSignedToFloat(...);
 
 #ifndef ROMWRIGHT_ISNAN_DEFINED
@@ -71,7 +71,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00319f64. */
 /* Supplied declaration required: FUN_003278c8. */
 /* Supplied declaration required: FUN_00328150. */
-/* Supplied declaration required: FUN_0033ab6c. */
+/* Supplied declaration required: gameFlagSetIndexedBit. */
 
 
 unsigned int FUN_002e364c(float *param_1)
@@ -287,7 +287,7 @@ unsigned int FUN_002e364c(float *param_1)
             temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
             in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-              FUN_0033ab6c((int)*(short *)(temp_v3 + 6),1);
+              gameFlagSetIndexedBit((int)*(short *)(temp_v3 + 6),1);
               FUN_00319f64((int)*(short *)(temp_v3 + 6));
               temp_v5 = temp_v5 | 4;
               FUN_00328150(g_gameState,(int)*(short *)(temp_v3 + 6));

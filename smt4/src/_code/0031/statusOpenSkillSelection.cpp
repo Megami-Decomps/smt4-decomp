@@ -26,7 +26,7 @@ s32 FUN_00288e68(u32 id);
 void FUN_002a0c08(s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 running, s32 initial);
-s32 FUN_0026aa78();
+s32 statusGetAvailableChoiceCount();
 void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32, s32);
 void FUN_0029eb5c(void *selector, s32 index);
 
@@ -49,11 +49,11 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
     FUN_002a0c08(14);
     buttonHelpSetPreset(5);
     timerStart(screen->timer, 1, 0);
-    if (count >= FUN_0026aa78()) {
-        FUN_0029f848(screen->selector, FUN_0026aa78() + 1, 9, 1, 1, 1);
+    if (count >= statusGetAvailableChoiceCount()) {
+        FUN_0029f848(screen->selector, statusGetAvailableChoiceCount() + 1, 9, 1, 1, 1);
         screen->nextState = 25;
     } else {
-        FUN_0029f848(screen->selector, FUN_0026aa78(), 9, 1, 1, 1);
+        FUN_0029f848(screen->selector, statusGetAvailableChoiceCount(), 9, 1, 1, 1);
         FUN_0029eb5c(screen->selector, count);
         screen->nextState = 22;
     }

@@ -9,7 +9,7 @@ int FUN_002ea704(void);
 int onlineTimeGetNow(int *);
 int _ZN9Obj558b24D1Ev(...);
 int FUN_002fa434(...);
-int FUN_00300048(void);
+int watcherRefreshEnabledState(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned long long FUN_002ecfe4(int);
 /* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa434. */
 extern int FUN_002fdb0c(unsigned char *);
-/* Supplied declaration required: FUN_00300048. */
+/* Supplied declaration required: watcherRefreshEnabledState. */
 extern int FUN_00300064(int);
 
 
@@ -56,13 +56,13 @@ void FUN_001148a8(int param_1)
   }
   temp_v0 = (char)*(unsigned int *)(param_1 + 0x98);
   if ((temp_v0 < '\0') || (temp_v0 == '\0')) {
-    FUN_00300048();
+    watcherRefreshEnabledState();
     return;
   }
   if (temp_v0 != '\x01') {
     if (temp_v0 != '\x02') {
       if (temp_v0 != '\x03') {
-        FUN_00300048();
+        watcherRefreshEnabledState();
         return;
       }
       temp_v1 = FUN_00300064(param_1);

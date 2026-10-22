@@ -18,7 +18,7 @@ extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_004a8750. */
 extern int flaggedValueHolderGetTotal(int);
 extern unsigned int FUN_004d05b4(void);
-extern int FUN_004d0bf0(unsigned int);
+extern int gameStockContainsEntry(unsigned int);
 extern int FUN_004d0cd4(void);
 
 
@@ -49,7 +49,7 @@ unsigned int FUN_004a34a0(int param_1,unsigned int param_2)
       temp_v0 = '\x01';
     }
     else {
-      temp_v2 = FUN_004d0bf0(param_2);
+      temp_v2 = gameStockContainsEntry(param_2);
       if (temp_v2 != 0) {
         temp_v0 = '\x02';
       }

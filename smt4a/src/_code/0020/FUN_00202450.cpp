@@ -18,7 +18,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern unsigned int FUN_002a4878(int);
-extern int FUN_0033132c(void);
+extern int partyCountOccupiedSlots(void);
 /* Supplied declaration required: FUN_00335060. */
 extern int FUN_003da8f4(int, unsigned int);
 
@@ -89,7 +89,7 @@ unsigned int FUN_00202450(void)
       }
       if (temp_v5 == 0x2f) {
 LAB_00202648:
-        temp_v5 = FUN_0033132c();
+        temp_v5 = partyCountOccupiedSlots();
         goto joined_r0x00202628;
       }
       if (temp_v5 < 0x30) {
@@ -98,7 +98,7 @@ LAB_00202648:
             if (temp_v5 != 0x2d) goto LAB_00202664;
           }
           else {
-            temp_v5 = FUN_0033132c();
+            temp_v5 = partyCountOccupiedSlots();
             goto joined_r0x00202628;
           }
         }
@@ -111,7 +111,7 @@ LAB_002025cc:
       (!(temp_v0 == 0x26 || temp_v0 == 0x2c))) &&
      (((!(temp_v0 == 0x41 || temp_v0 == 0x2d) && (!(temp_v0 == 0x2e || temp_v0 == 0x2f))) &&
       (!((temp_v0 == 0x30 || temp_v0 == 0x31) || temp_v0 == 0x32))))) {
-    temp_v5 = FUN_0033132c();
+    temp_v5 = partyCountOccupiedSlots();
 joined_r0x00202628:
     if (0 < temp_v5) {
       FUN_00335060(temp_v2);

@@ -16,7 +16,7 @@ int mapTableValueSet(...);
 int FUN_00319f64(int);
 int FUN_00352e9c(int, int);
 int FUN_003b51a4(void);
-int FUN_003d2150(void);
+int sysPlayVoice(void);
 int FUN_003fd7c0(...);
 int FUN_003fd924(...);
 int FUN_003fe86c(...);
@@ -50,10 +50,10 @@ extern int FUN_002ddd7c(void);
 /* Supplied declaration required: mapTableValueSet. */
 /* Supplied declaration required: FUN_00319f64. */
 extern int FUN_0033bfac(void);
-extern int FUN_00352cd8(int);
+extern int gameTestFlagBlockBit(int);
 /* Supplied declaration required: FUN_00352e9c. */
 /* Supplied declaration required: FUN_003b51a4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
@@ -303,7 +303,7 @@ void FUN_002737a8(void)
             FUN_003fd7c0(temp_v1,2);
           }
           if (*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xa6) == 0x4d) {
-            temp_v2 = FUN_00352cd8((int)*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xb2));
+            temp_v2 = gameTestFlagBlockBit((int)*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xb2));
             if (temp_v2 != 0) {
               if ((short)piVar1[temp_v4 * 0xf + 0x29] == 2) goto LAB_00273ee8;
               in_s0 = (int)temp_v9;
@@ -320,7 +320,7 @@ void FUN_002737a8(void)
                 FUN_003fe86c(temp_v1,1,2);
                 *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 1;
                 if (temp_v2 >= 200) {
-                  FUN_003d2150();
+                  sysPlayVoice();
                 }
                 if (temp_v2 < 0x1f5) {
                   *(int *)(temp_v1 + 0x1fc) = (int)((unsigned long long)temp_v9 >> 0x20);

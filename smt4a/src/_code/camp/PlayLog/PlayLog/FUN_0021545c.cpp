@@ -33,7 +33,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002007f4. */
 /* Supplied declaration required: FUN_00228b04. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int objectApplyIfUnblocked(int);
 extern int FUN_002e50d4(void);
@@ -104,12 +104,12 @@ void FUN_0021545c(void)
     }
     temp_v9[0] = 0;
     temp_v2 = FUN_001834a4(0x25,0x1c);
-    temp_v7 = FUN_002a4860(temp_v0 + 0x2dc);
+    temp_v7 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
     temp_v6 = temp_v0 + 0x2dc;
     FUN_003450d4(temp_v6,temp_v2,0,(int)*(short *)(temp_v0 + 0x34c),(int)*(short *)(temp_v0 + 0x348),
                  (int)*(short *)(temp_v0 + 0x34a),temp_v9,0,0);
     if (temp_v6 != 0) {
-      temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
     }
     else {
       temp_v6 = temp_v0 + 0x2dc;
@@ -159,18 +159,18 @@ void FUN_0021545c(void)
       }
       temp_v6 = objectApplyIfUnblocked(temp_v0 + 0x2dc);
       if (temp_v6 >= 6) {
-        temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
         while ((temp_v6 == temp_v7 &&
-               ((temp_v6 = FUN_002a4860(temp_v0 + 0x2dc), temp_v6 != 0 ||
+               ((temp_v6 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc), temp_v6 != 0 ||
                 (temp_v6 = FUN_002a4894(temp_v0 + 0x2dc), temp_v6 != 0))))) {
-          temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
+          temp_v6 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
           temp_v4 = objectApplyIfUnblocked(temp_v0 + 0x2dc);
           if ((temp_v6 == temp_v4 - 5) && (temp_v6 = FUN_002a4894(temp_v0 + 0x2dc), temp_v6 == 4)) break;
           FUN_00228b04(temp_v0 + 0x2dc,0);
-          temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
+          temp_v6 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
         }
       }
-      temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
     }
     if (temp_v6 != temp_v7) {
       eventQueueAddUniqueIfValid(0x100020d);

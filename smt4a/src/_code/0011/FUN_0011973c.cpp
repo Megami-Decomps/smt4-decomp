@@ -19,7 +19,7 @@ int onlineJobSetStateWaiting(...);
 int FUN_002f7cba(...);
 int FUN_003054f0(...);
 int FUN_003056a0(...);
-int FUN_003056e4(...);
+int onlineUrlAssign(...);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -55,7 +55,7 @@ extern int FUN_003054ce(unsigned int);
 /* Supplied declaration required: FUN_003054f0. */
 extern unsigned long long ownerChildValue(unsigned int, int *);
 /* Supplied declaration required: FUN_003056a0. */
-/* Supplied declaration required: FUN_003056e4. */
+/* Supplied declaration required: onlineUrlAssign. */
 
 
 void FUN_0011973c(int param_1)
@@ -90,7 +90,7 @@ void FUN_0011973c(int param_1)
       temp_v3 = 10;
       onlineFormatWideString(temp_v8,"prudps:/address=%ls;port=%d;stream=%d;sid=%d;PID=%d;CID=1;type=%d",
                    *(unsigned int *)(param_1 + 0x7c),*(unsigned short *)(param_1 + 0x80) + 1);
-      FUN_003056e4(temp_v6,temp_v8);
+      onlineUrlAssign(temp_v6,temp_v8);
     }
     FUN_002e9c0c();
     temp_v4[3] = *(unsigned int *)(param_1 + 0x318);

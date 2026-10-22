@@ -10,7 +10,7 @@ int memClear(...);
 
 int FUN_00233404(void);
 int FUN_00233410(unsigned int *);
-int FUN_002335f8(...);
+int aocIsEntryIndexValid(...);
 int flaggedValueHolderGetTotal(...);
 int FUN_0023392c(...);
 int FUN_0023478c(...);
@@ -50,7 +50,7 @@ extern int stateCounterBelowLimit(unsigned int *, unsigned int);
 extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_00233404. */
 /* Supplied declaration required: FUN_00233410. */
-/* Supplied declaration required: FUN_002335f8. */
+/* Supplied declaration required: aocIsEntryIndexValid. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: FUN_0023478c. */
@@ -123,7 +123,7 @@ void FUN_003901bc(unsigned int *param_1)
       param_1[1099] = 0;
       temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
       puVar1 = g_aocMain;
-      temp_v4 = FUN_002335f8(g_aocMain,temp_v2);
+      temp_v4 = aocIsEntryIndexValid(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar1[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
         if (*(char *)(temp_v2 + 0x9b3) != '\0') {
           puVar1 = g_aocMain;
@@ -211,7 +211,7 @@ void FUN_003901bc(unsigned int *param_1)
     if (temp_v2 != temp_v11) {
       temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
       puVar3 = g_aocMain;
-      temp_v4 = FUN_002335f8(g_aocMain,temp_v2);
+      temp_v4 = aocIsEntryIndexValid(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar3[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
         if (*(char *)(temp_v2 + 0x9b3) != '\0') {
           puVar3 = g_aocMain;
@@ -234,7 +234,7 @@ void FUN_003901bc(unsigned int *param_1)
       temp_v2 = stateCounterBelowLimit(param_1 + 0x90,temp_v1);
       if (temp_v2 != 0) {
         temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
-        temp_v2 = FUN_002335f8(puVar1,temp_v1);
+        temp_v2 = aocIsEntryIndexValid(puVar1,temp_v1);
         if (temp_v2 != 0) {
           temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
           if (*(char *)(puVar1[0x19e] + temp_v2 * 0x9c8 + 0x9b3) != '\0') {

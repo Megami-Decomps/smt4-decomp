@@ -61,7 +61,7 @@ extern int campIsState85(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int findByteThresholdTier(unsigned char);
-extern unsigned int FUN_0032b62c(unsigned char);
+extern unsigned int categoryGetThresholdIndex(unsigned char);
 extern unsigned int thresholdIndexFind(unsigned char);
 /* Supplied declaration required: fillTwoWordsWithByte. */
 /* Supplied declaration required: paramsClearPacket. */
@@ -102,7 +102,7 @@ void FUN_0037a2e4(void)
   FUN_0019de98(0,0xf4f4f4ff);
   temp_v0 = campIsState85();
   if ((temp_v0 != 0) && (temp_v0 = gameDataBlocksGetSaveData(), *(char *)(temp_v0 + 0x27e94) != '\0')) {
-    temp_v1 = FUN_0032b62c(*(unsigned char *)(temp_v0 + 0x27e90));
+    temp_v1 = categoryGetThresholdIndex(*(unsigned char *)(temp_v0 + 0x27e90));
     puVar1[10] = temp_v1;
     temp_v1 = findByteThresholdTier(*(unsigned char *)(temp_v0 + 0x27e91));
     puVar1[0xb] = temp_v1;
@@ -114,7 +114,7 @@ void FUN_0037a2e4(void)
     *(unsigned char *)(puVar1 + 0xe) = DAT_00588fc4;
     return;
   }
-  temp_v1 = FUN_0032b62c(DAT_00588fc0);
+  temp_v1 = categoryGetThresholdIndex(DAT_00588fc0);
   puVar1[10] = temp_v1;
   temp_v1 = findByteThresholdTier(DAT_00588fc1);
   puVar1[0xb] = temp_v1;

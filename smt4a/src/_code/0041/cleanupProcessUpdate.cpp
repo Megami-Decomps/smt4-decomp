@@ -22,7 +22,7 @@ s32 FUN_0041774c(CleanupProcessState *state);
 void scrScriptProcessStartEntry(void *script, u32 entry);
 void scrRunOpcodesStub(void *script);
 void FUN_00371ef4(void);
-void FUN_003d2150(u32 value);
+void sysPlayVoice(u32 value);
 s32 stateHolderStateIsNot4(void);
 s32 FUN_0023b3d0(void);
 void FUN_0034a968(void);
@@ -48,7 +48,7 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
         case 0:
             scrScriptProcessStartEntry(process->script, process->entry);
             FUN_00371ef4();
-            FUN_003d2150(0x01000219);
+            sysPlayVoice(0x01000219);
             process->stage = 1;
         case 1:
             scrRunOpcodesStub(process->script);

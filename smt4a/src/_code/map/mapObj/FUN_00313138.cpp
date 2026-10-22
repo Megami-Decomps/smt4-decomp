@@ -8,7 +8,7 @@ int textFormatBuffer(unsigned char [128], unsigned char *, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001cd3ec(void);
 int libc_strcpy(int, int);
-int FUN_003797e4(void);
+int mapObjGetCombinedEntry(void);
 int FUN_0040aad4(unsigned int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -23,7 +23,7 @@ extern int g_mapObj; /* 0x581284 */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_003797e4. */
+/* Supplied declaration required: mapObjGetCombinedEntry. */
 extern int dataTableGetRecordFortyFive(void);
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
@@ -55,7 +55,7 @@ unsigned int FUN_00313138(void)
       }
       else {
         temp_v1 = (int)*(short *)(g_mapObj + 10);
-        FUN_003797e4();
+        mapObjGetCombinedEntry();
         temp_v2 = g_mapObj + *(short *)(g_mapObj + 0xc) * 0x48;
         temp_v3 = FUN_0040ab8c(*(unsigned int *)(temp_v2 + 0x3c));
         if (temp_v3 != 0) {
@@ -97,7 +97,7 @@ unsigned int FUN_00313138(void)
     }
     else {
       temp_v1 = (int)*(short *)(g_mapObj + 10);
-      FUN_003797e4();
+      mapObjGetCombinedEntry();
       temp_v2 = g_mapObj + *(short *)(g_mapObj + 0xc) * 0x48;
       *(int *)(temp_v2 + 0x38) = (int)*(short *)(temp_v1 + 4);
       *(unsigned char *)(temp_v2 + 0x40) = 0;
@@ -119,7 +119,7 @@ unsigned int FUN_00313138(void)
   if ((int)psVar6 < temp_v1) {
     do {
       psVar2 = psVar6;
-      FUN_003797e4();
+      mapObjGetCombinedEntry();
       temp_v1 = g_mapObj;
       if ((((-1 < *psVar2) && (*psVar2 == *(short *)(g_mapObj + 4))) &&
           (psVar2[1] == *(short *)(g_mapObj + 6))) && (psVar2[2] < 100)) {

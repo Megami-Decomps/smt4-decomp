@@ -44,7 +44,7 @@ u32 FUN_003c7760(BattleEventWork *work, BattleEventContext *context);
 void scrScriptProcessStartEntry(void *script, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void FUN_003dadd8(void *state);
-s32 FUN_003dc13c(void *state);
+s32 btlEventAreResourcesReady(void *state);
 void FUN_003dbe68(void *state);
 s32 FUN_003dcc34(void *state);
 }
@@ -127,7 +127,7 @@ extern "C" u32 battleEventProcessUpdate(BattleEventWork *work, BattleEventContex
             FUN_003dadd8(DAT_00435d18);
             work->stage = 1;
         case 1:
-            if (!FUN_003dc13c(DAT_00435d18))
+            if (!btlEventAreResourcesReady(DAT_00435d18))
                 return 0;
             FUN_003dbe68(DAT_00435d18);
             work->stage = 2;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001183bc(...);
+int asdTextSetValueFlagsAndScalar(...);
 int FUN_002bc0e0(...);
 int positionStateSet(...);
 int FUN_002bd82c(...);
@@ -36,7 +36,7 @@ extern unsigned char DAT_00403d5c; /* 0x403d5c */
 extern unsigned char DAT_00403da4; /* 0x403da4 */
 extern unsigned char DAT_00403df8; /* 0x403df8 */
 
-/* Supplied declaration required: FUN_001183bc. */
+/* Supplied declaration required: asdTextSetValueFlagsAndScalar. */
 /* Supplied declaration required: FUN_002bc0e0. */
 /* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
@@ -65,7 +65,7 @@ unsigned int * FUN_002c4a34(void)
   temp_v0 = asdTextCreate(0);
   puVar1[1] = temp_v0;
   FUN_002bd82c(temp_v0,0x320202ff);
-  FUN_001183bc(puVar1[1],3,0xffffffff);
+  asdTextSetValueFlagsAndScalar(puVar1[1],3,0xffffffff);
   positionStateSet(puVar1[1],0,0x646464ff);
   *(unsigned char *)(puVar1 + 2) = 0;
   *(unsigned char *)(puVar1 + 0xd) = 0;

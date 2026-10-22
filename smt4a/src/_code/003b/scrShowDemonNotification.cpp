@@ -31,7 +31,7 @@ void *saveSlotFindById(u16);
 void FUN_004bd410(u16);
 void FUN_003e48dc(unsigned int);
 const BannerDemon *FUN_00370ecc(u16);
-void FUN_003d2150(u32);
+void sysPlayVoice(u32);
 
 u32 scrShowDemonNotification()
 {
@@ -68,7 +68,7 @@ u32 scrShowDemonNotification()
         FUN_0014e188(&banner->sprites[banner->index], 20, 3090, banner->owner, 11, 1.0f);
         uiSpriteSetKeyframe(&banner->sprites[banner->index], 10, 0);
         banner->entries.queue.status[banner->index] = 1;
-        FUN_003d2150(0x100016e);
+        sysPlayVoice(0x100016e);
     }
     return banner->active && banner->phase == 2 && banner->entries.queue.status[banner->index] == 2;
 }

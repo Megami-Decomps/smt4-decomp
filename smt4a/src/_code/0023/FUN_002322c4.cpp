@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00145e24(int, unsigned int);
 int FUN_00157558(void);
-int FUN_00409718(int);
+int uiSpriteRefreshMode(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00145e24. */
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00409718. */
+/* Supplied declaration required: uiSpriteRefreshMode. */
 
 
 void FUN_002322c4(int param_1)
@@ -45,7 +45,7 @@ void FUN_002322c4(int param_1)
     }
     return;
   }
-  FUN_00409718(g_renderCtx);
+  uiSpriteRefreshMode(g_renderCtx);
   return;
 }
 

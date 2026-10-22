@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b0b98(...);
+int drawSetComparisonColor(...);
 int messageKindForward(...);
 int FUN_00288844(...);
 int FUN_0028886c(void);
@@ -111,7 +111,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001b0b98. */
+/* Supplied declaration required: drawSetComparisonColor. */
 /* Supplied declaration required: FUN_001ee4e4. */
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
@@ -133,7 +133,7 @@ extern int FUN_0029e9cc(unsigned short);
 extern unsigned int aocIndexValueOrDefault(unsigned int);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
@@ -486,7 +486,7 @@ LAB_001a3ea8:
               }
             }
             else if (*temp_v38 != '\t') {
-              temp_v21 = FUN_002bd1fc();
+              temp_v21 = gameGetPlayerName();
               textFormatBuffer(temp_v35,&LAB_001a43d4,temp_v21);
             }
             else {
@@ -549,10 +549,10 @@ LAB_001a3ea8:
             if (*(char *)(temp_v5 + 0x1e62) != '\0') {
               puVar19 = (unsigned int *)(temp_v34 + 0x18b4);
               psVar24 = (short *)*puVar19;
-              temp_v11 = FUN_001b0b98(*(unsigned short *)(temp_v34 + 0x18b2),
+              temp_v11 = drawSetComparisonColor(*(unsigned short *)(temp_v34 + 0x18b2),
                                     *(unsigned short *)(temp_v7 + 0x1302),0);
               if ((temp_v11 == 0) &&
-                 (temp_v10 = FUN_001b0b98(*(unsigned int *)(temp_v10 + 0x1304),*puVar19,0), temp_v10 == 0))
+                 (temp_v10 = drawSetComparisonColor(*(unsigned int *)(temp_v10 + 0x1304),*puVar19,0), temp_v10 == 0))
               {
                 drawSetColorFromRGBA8(0x676767ff);
               }

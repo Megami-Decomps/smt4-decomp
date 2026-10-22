@@ -21,9 +21,9 @@ int FUN_002de104(...);
 int FUN_00303460(...);
 int FUN_00303bd4(...);
 int FUN_00313648(...);
-int FUN_00314c38(...);
+int naviMainSetFlagsAndActivate(...);
 int FUN_003180c4(...);
-int FUN_003278ac(...);
+int mapTrapEnable(...);
 int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
 int FUN_003adc58(...);
@@ -49,7 +49,7 @@ int mapMainStartEntry(...);
 int mapTrapGetUnk38(...);
 int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003d4ed8(...);
 int FUN_003e54b8(...);
 int gameFlagSetValue(...);
@@ -118,12 +118,12 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: mapMainStartEntry. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: mapTrapGetUnk38. */
-/* Supplied declaration required: FUN_00314c38. */
+/* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
-/* Supplied declaration required: FUN_003278ac. */
+/* Supplied declaration required: mapTrapEnable. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00365c94. */
@@ -131,7 +131,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: FUN_003b5714. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -210,7 +210,7 @@ void FUN_002d9b50(void)
         }
         *(unsigned char *)(g_lmapScene + 0x291) = 0;
         FUN_002d1f40(8,0x78,0);
-        temp_v11 = FUN_003d2150(0x10000d2);
+        temp_v11 = sysPlayVoice(0x10000d2);
         *(unsigned int *)(g_lmapScene + 0x264) = temp_v11;
         break;
       case 1:
@@ -292,7 +292,7 @@ void FUN_002d9b50(void)
                 temp_v6 = FUN_00184964(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
-                FUN_003d2150(temp_v6 + 0x10002de);
+                sysPlayVoice(temp_v6 + 0x10002de);
                 soundVolumeSettingSet(temp_v1);
               }
               FUN_00324e38(0xffffffff);
@@ -316,7 +316,7 @@ void FUN_002d9b50(void)
               temp_v6 = FUN_00184964(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
-              FUN_003d2150(temp_v6 + 0x10002e2);
+              sysPlayVoice(temp_v6 + 0x10002e2);
               soundVolumeSettingSet(temp_v1);
             }
             if (*(int *)(g_lmapScene + 0x270) == 3) {
@@ -342,7 +342,7 @@ void FUN_002d9b50(void)
               temp_v6 = FUN_00184964(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
-              FUN_003d2150(temp_v6 + 0x10002e0);
+              sysPlayVoice(temp_v6 + 0x10002e0);
               soundVolumeSettingSet(temp_v1);
               goto LAB_002da1e4;
             }
@@ -400,7 +400,7 @@ LAB_002da3cc:
               temp_v6 = FUN_00184964(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
-              FUN_003d2150(temp_v6 + 0x10002dc);
+              sysPlayVoice(temp_v6 + 0x10002dc);
               soundVolumeSettingSet(temp_v1);
             }
             FUN_00324e38(0xffffffff);
@@ -431,7 +431,7 @@ LAB_002da3cc:
           else {
             popupStateClose();
             FUN_003d2158(*(unsigned int *)(g_lmapScene + 0x264),0);
-            FUN_003278ac();
+            mapTrapEnable();
             FUN_00324e38(0);
             temp_v6 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 3;
@@ -553,7 +553,7 @@ LAB_002da3cc:
           *(unsigned int *)(temp_v6 + 8) = 0;
           slotSetRequest(0,10,0xff);
           slotSetRequest(1,10,0xff);
-          FUN_003d2150(0x10000c4);
+          sysPlayVoice(0x10000c4);
         }
         break;
       case 7:
@@ -590,7 +590,7 @@ LAB_002da3cc:
               temp_v11 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3)
               ;
               *(unsigned int *)(g_lmapView + 0x18) = temp_v11;
-              FUN_00314c38(*(unsigned short *)(temp_v6 + 0x18) & 0xff,*(unsigned short *)(temp_v6 + 0x1a) & 0xff,0,0,0,0
+              naviMainSetFlagsAndActivate(*(unsigned short *)(temp_v6 + 0x18) & 0xff,*(unsigned short *)(temp_v6 + 0x1a) & 0xff,0,0,0,0
                           );
               DAT_005f1604 = (unsigned int)*(unsigned short *)(temp_v6 + 0x18);
               naviMainSetRequestTriple(*(unsigned short *)(temp_v6 + 0x12),*(unsigned short *)(temp_v6 + 0x14),
@@ -619,7 +619,7 @@ LAB_002dad8c:
         temp_v6 = *(int *)(g_lmapScene + 8) + 1;
         *(int *)(g_lmapScene + 8) = temp_v6;
         if (temp_v6 == 5) {
-          FUN_003d2150(0x10000c5);
+          sysPlayVoice(0x10000c5);
           temp_v11 = FUN_00152f44();
           temp_v1 = FUN_0014af98();
           FUN_001628c0(&LAB_002dae38,temp_v1,temp_v11,1);
@@ -648,7 +648,7 @@ LAB_002dad8c:
                 temp_v6 = *(int *)(g_lmapScene + 8) + 1;
                 *(int *)(g_lmapScene + 8) = temp_v6;
                 if (temp_v6 == 1) {
-                  FUN_003d2150(0x10000c3);
+                  sysPlayVoice(0x10000c3);
                 }
                 if (*(int *)(g_lmapScene + 8) == 0x14) {
                   DAT_005f1adc = 0;
@@ -722,7 +722,7 @@ LAB_002dad8c:
                               "碂辂閂暁銂薂䂁钂銂膂邂邂薂蒂䦁䂁熂膂邂覂蒂貂馂䂁邂銂薂鎂鎂䂁钂袂薂䂁瞂䂁憂閂钂钂辂躂䒁"
                               );
                   *(unsigned int *)(g_lmapScene + 4) = 2;
-                  temp_v11 = FUN_003d2150(0x10000d2);
+                  temp_v11 = sysPlayVoice(0x10000d2);
                   *(unsigned int *)(g_lmapScene + 0x264) = temp_v11;
                 }
               }

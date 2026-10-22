@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287a78(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00291e40(unsigned int);
 
@@ -46,7 +46,7 @@ extern float DAT_0049fad0; /* 0x49fad0 */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287a78. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
 extern int gameGetPlayerData(void);
@@ -74,7 +74,7 @@ unsigned int FUN_00253968(fn_00253968_arg0 *param_1)
   }
   if (DAT_0049fa98 != '\0' && temp_v0 != 0) {
     temp_v3 = DAT_0049fa9c;
-    FUN_00287aec();
+    mathDistanceBetweenPoints();
     if ((temp_v3 < 0x437a0000) && (temp_v3 = DAT_0049fa9c, FUN_00287a78(), temp_v3 < 0x428c0000)) {
 LAB_00253a80:
       if (DAT_0049fab0 == 0) {
@@ -119,7 +119,7 @@ LAB_00253a80:
       FUN_0028250c();
       FUN_00282390();
       temp_v3 = DAT_0049fa9c;
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if ((temp_v3 < 0x437a0000) && (temp_v3 = DAT_0049fa9c, FUN_00287a78(), temp_v3 < 0x428c0000))
       goto LAB_00253a80;
     }

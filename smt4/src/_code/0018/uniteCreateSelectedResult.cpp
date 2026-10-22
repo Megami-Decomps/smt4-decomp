@@ -87,7 +87,7 @@ u32 randNextInRange(u32 maximum);
 void unitRecalculateEffectiveStats(PartyMemberView* member);
 u32 FUN_0029c0c0(void* context, PartyMemberView* member);
 void FUN_0029bed8(u32 id);
-void FUN_0029be5c(int flag, int value);
+void gameCounterAddSaturating(int flag, int value);
 void FUN_0029bde4(PartyMemberView* member);
 }
 
@@ -243,9 +243,9 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
     member->savedValueB = member->currentValueB;
     if (needsNotification)
         FUN_0029bed8(member->id);
-    FUN_0029be5c(38, 1);
+    gameCounterAddSaturating(38, 1);
     if (succeeded)
-        FUN_0029be5c(39, 1);
+        gameCounterAddSaturating(39, 1);
     FUN_0029bde4(member);
     return succeeded ? 1 : 0;
 }

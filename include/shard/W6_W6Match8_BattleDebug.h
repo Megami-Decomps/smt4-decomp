@@ -27,7 +27,7 @@ struct BattleDebugGlobals {
 extern "C" {
 extern BattleDebugGlobals g_btlDebugState;
 void btlDebugOpen(BtlMainState *state, s32 menuMode);
-s32 FUN_001d3da0(u32 handle);
+s32 btlDebugDispatchCurrentJob(u32 handle);
 void FUN_0021ec34(u32 handle);
 }
 

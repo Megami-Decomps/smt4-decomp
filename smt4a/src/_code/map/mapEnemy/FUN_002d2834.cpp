@@ -134,7 +134,7 @@ extern unsigned int gameDataGetTableValue(void);
 extern int FUN_002d7c88(unsigned int);
 /* Supplied declaration required: FUN_00303a5c. */
 /* Supplied declaration required: effectSpawnTypeTen. */
-extern int FUN_003303fc(void);
+extern int mapCollisionExists(void);
 extern int byte76Get(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_0033b100(char *);
@@ -598,7 +598,7 @@ LAB_002d3484:
               *(unsigned int *)(temp_v10 + 0x54) = *(unsigned int *)(temp_v10 + 0x3c);
               *(unsigned int *)(temp_v10 + 0x58) = *(unsigned int *)(temp_v10 + 0x40);
               *(unsigned int *)(temp_v10 + 0x5c) = *(unsigned int *)(temp_v10 + 0x44);
-              if ((*(int *)(temp_v50 + 0x14e8) != 0) && (temp_v3 = FUN_003303fc(), temp_v3 == 0)) {
+              if ((*(int *)(temp_v50 + 0x14e8) != 0) && (temp_v3 = mapCollisionExists(), temp_v3 == 0)) {
                 temp_v27 = *(float *)(g_lmapScene + 0x1c);
                 temp_v28 = *(float *)(g_lmapScene + 0x20);
                 temp_v29 = *(float *)(g_lmapScene + 0x24);

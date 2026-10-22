@@ -9,7 +9,7 @@ int vectorCopyHeader(unsigned int, unsigned int);
 int FUN_002ea41e(unsigned char [32], int);
 int strDestroy(unsigned char [32]);
 int FUN_00301e66(unsigned int, int);
-int FUN_0030202c(...);
+int onlineJobApplyStateTriple(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern unsigned int FUN_002e7908(unsigned char *, unsigned int *);
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_00301e66. */
 extern int FUN_00301e8c(unsigned int, int, unsigned char *);
-/* Supplied declaration required: FUN_0030202c. */
+/* Supplied declaration required: onlineJobApplyStateTriple. */
 
 
 void FUN_00116188(int param_1)
@@ -63,12 +63,12 @@ void FUN_00116188(int param_1)
       temp_v1 = FUN_002e7908(temp_v6,(unsigned int *)&temp_v7);
       temp_v2 = 2;
     }
-    FUN_0030202c(param_1,temp_v2,temp_v1);
+    onlineJobApplyStateTriple(param_1,temp_v2,temp_v1);
     strDestroy(temp_v3);
   }
   else {
     FUN_002ea41e(temp_v3,param_1 + 0x78);
-    FUN_0030202c(param_1,*(unsigned char *)(param_1 + 0x88),temp_v3);
+    onlineJobApplyStateTriple(param_1,*(unsigned char *)(param_1 + 0x88),temp_v3);
   }
   return;
 }

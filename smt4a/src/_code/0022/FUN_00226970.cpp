@@ -1,4 +1,4 @@
-/* NON_MATCHING: fragment of a larger function (Fragment contains only null checks and a conditional return; non-null inputs fall through beyond the supplied instructions.). */
+/* NON_MATCHING: expands indexed 4-/8-bit image palettes to RGBA and uploads the texture; the nonzero image-flag path reaches conversion without initializing its scratch buffer/palette stride, and the reference folds the allocator's error path into this function. */
 /* romwright 0.5.0 decompilation of FUN_00226970 for reference (not compiled; its own view of the boundaries):
 
 unsigned char * FUN_00226970(unsigned char *param_1,int param_2,unsigned int param_3,unsigned int param_4)

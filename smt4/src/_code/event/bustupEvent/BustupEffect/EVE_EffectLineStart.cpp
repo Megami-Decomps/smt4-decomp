@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int FUN_001dfbe0(...); /* 0x1dfbe0 */
+extern int effLineJobUpdate(...); /* 0x1dfbe0 */
 extern unsigned char LAB_001dfc44; /* 0x1dfc44 */
 extern int jobWorkFreeWork(...); /* 0x2db900 */
 extern unsigned char DAT_00403738; /* 0x403738 */
@@ -57,7 +57,7 @@ unsigned int EVE_EffectLineStart(void)
     puVar3[1] = 0;
     puVar3[2] = temp_v0;
     pcVar5 = "EffectLine";
-    asdProcessCreateSimple("EffectLine",2,0,0,FUN_001dfbe0,jobWorkFreeWork,puVar3);
+    asdProcessCreateSimple("EffectLine",2,0,0,effLineJobUpdate,jobWorkFreeWork,puVar3);
     taskCreateDraw(&DAT_00403738,0x71,0,0,&LAB_001dfc44,0,puVar3,pcVar5);
     bustupCutAnimSetJobParam(pcVar5);
   }

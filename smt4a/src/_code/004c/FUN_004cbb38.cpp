@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int sysPlaySe(...);
 int FUN_00184310(...);
 int FUN_0019de98(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_0022e774(...);
 int FUN_002613f0(...);
 int FUN_00275bc8(...);
@@ -54,7 +54,7 @@ struct fn_004cbb38_arg0_p2c {
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotRecord(int);
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002613f0. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -141,7 +141,7 @@ LAB_004cbbbc:
       FUN_00184310();
       temp_v3 = FUN_003316b4((int)*(char *)(temp_v2 + 0x38));
       textFormatBuffer(temp_v7,"battle/DevilMsg/%s.mbm",temp_v3 + 1);
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(unsigned char **)&param_1->field_0x24 = puVar6;
       temp_v4 = *(unsigned int *)&param_1->field_0x1c;
       FUN_00275bc8(temp_v4,puVar6);

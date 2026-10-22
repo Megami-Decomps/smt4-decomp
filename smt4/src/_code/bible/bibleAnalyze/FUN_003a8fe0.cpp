@@ -54,7 +54,7 @@ extern int rangeLimitMin(int *);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-extern int FUN_003420f4(int);
+extern int gameTestProgressFlag(int);
 /* Supplied declaration required: FUN_003a8aa0. */
 /* Supplied declaration required: partyIdsReset. */
 
@@ -111,7 +111,7 @@ void FUN_003a8fe0(int *param_1)
     temp_v0 = 1;
     *(unsigned short *)((int)param_1 + 0xa6ba) = 0;
     do {
-      temp_v1 = FUN_003420f4(temp_v0);
+      temp_v1 = gameTestProgressFlag(temp_v0);
       if (temp_v1 != 0) {
         *(short *)((int)param_1 + *(short *)((int)param_1 + 0xa6ba) * 2 + 0xa5ba) = (short)temp_v0;
         if (param_1[0x296d] == temp_v0) {

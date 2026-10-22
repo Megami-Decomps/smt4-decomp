@@ -42,7 +42,7 @@ BattleAction *FUN_00256898(s32, u32);
 u32 FUN_0026beb4(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
 u32 randRange(s32);
-void FUN_0029be5c(s32, u32);
+void gameCounterAddSaturating(s32, u32);
 u32 FUN_0027e3b8(BtlEvent *);
 u32 btlEventSelectTrigger(BtlEvent *, u32, s32, u32);
 void FUN_0027e38c(BtlEvent *);
@@ -78,7 +78,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     if (script->flags & 0x40000)
         success = true;
     if (fields->result == 4 || success) {
-        FUN_0029be5c(4, 1);
+        gameCounterAddSaturating(4, 1);
         reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->result = 4;
         if (FUN_0027e3b8(g_btlEvent))
             return;
@@ -87,7 +87,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
             return;
         }
     } else {
-        FUN_0029be5c(5, 1);
+        gameCounterAddSaturating(5, 1);
         reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->result = 0;
         owner->script->flags |= 0x2000;
     }

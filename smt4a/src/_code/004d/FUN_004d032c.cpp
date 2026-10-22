@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern unsigned int FUN_002a4844(char *);
-extern unsigned int FUN_002a4860(void);
+extern unsigned int resourceRunEmbeddedOperationIfUnblocked(char *);
+extern unsigned int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: recordTrackDirtyValue. */
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
@@ -29,10 +29,10 @@ void FUN_004d032c(char *param_1,unsigned int param_2)
   unsigned int temp_v0;
   
   if (*param_1 != '\x01') {
-    temp_v0 = FUN_002a4860();
+    temp_v0 = resourceRunOperationIfUnblocked();
   }
   else {
-    temp_v0 = FUN_002a4844(param_1 + 0x10);
+    temp_v0 = resourceRunEmbeddedOperationIfUnblocked(param_1 + 0x10);
   }
   if (*param_1 == '\0') {
     FUN_002a48e0(param_1 + 0x10,temp_v0);

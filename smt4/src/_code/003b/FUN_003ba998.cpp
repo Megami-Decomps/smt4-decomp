@@ -21,7 +21,7 @@ int FUN_00275dec(void);
 int dialogOpen(...);
 int FUN_0027e7b4(...);
 int FUN_002a03d8(int, int);
-int FUN_002a0400(...);
+int objModelCreateFromSource(...);
 int eventQueueAddUnique(...);
 int textFormatBuffer(...);
 int asdOperatorNew(void);
@@ -44,7 +44,7 @@ int campGetState(void);
 int FUN_00275be8(int);
 int FUN_00275dc4(void);
 int mapClearPendingEntries(void);
-int FUN_0027d948(void);
+int naviClearObjectBlock(void);
 int FUN_00287c34(int);
 int FUN_00289880(void);
 int FUN_0028a420(int);
@@ -56,7 +56,7 @@ int asdMemFreeNonNull(int);
 int dataTable1bOr1cGetRecord(void);
 int libc_strcpy(unsigned char *, unsigned int);
 int asdMemFree(void);
-int FUN_002e1ba8(void);
+int commonBgStopChildAndReset(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -107,7 +107,7 @@ extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_00275dec. */
 /* Supplied declaration required: mapClearPendingEntries. */
-/* Supplied declaration required: FUN_0027d948. */
+/* Supplied declaration required: naviClearObjectBlock. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 extern int screenFadeIsBusy(void);
@@ -118,7 +118,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a0400. */
+/* Supplied declaration required: objModelCreateFromSource. */
 /* Supplied declaration required: FUN_002a4bac. */
 /* Supplied declaration required: asdMemFreeNonNull. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -133,7 +133,7 @@ extern int FUN_002c2218(int);
 extern int gameGetMapBlock(void);
 extern unsigned int fileLoadSync(unsigned char *, int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e1ba8. */
+/* Supplied declaration required: commonBgStopChildAndReset. */
 /* Supplied declaration required: dataTable33GetEntries. */
 
 
@@ -178,7 +178,7 @@ void FUN_003ba998(int param_1)
     infoWinStartTimer(0);
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
     *(unsigned int *)(param_1 + 0x30) = 0;
-    FUN_002e1ba8();
+    commonBgStopChildAndReset();
     if (*(char *)(param_1 + 0xe58) != '\0') {
       FUN_002a4bac(*(unsigned int *)(param_1 + 0xe5c));
       if (*piVar12 != 0) {
@@ -241,7 +241,7 @@ void FUN_003ba998(int param_1)
       temp_v6 = gameGetMapBlock();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       FUN_00273f5c();
-      FUN_0027d948();
+      naviClearObjectBlock();
       mapClearPendingEntries();
       if (pcVar4[2] != '\0') {
         DAT_0049fa94 = 1;
@@ -356,7 +356,7 @@ void FUN_003ba998(int param_1)
             } while (temp_v4 < (int)puVar7);
           }
           temp_v4 = param_1 + *(char *)(temp_v6 + 0x2b) * 4;
-          FUN_002a0400(*(unsigned int *)(param_1 + 0xe5c),*(unsigned int *)(temp_v4 + 0xe60),
+          objModelCreateFromSource(*(unsigned int *)(param_1 + 0xe5c),*(unsigned int *)(temp_v4 + 0xe60),
                        *(unsigned int *)(temp_v4 + 0xe88));
         }
       }

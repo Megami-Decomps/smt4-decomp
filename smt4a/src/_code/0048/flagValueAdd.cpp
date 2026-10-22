@@ -25,7 +25,7 @@ struct FlagValueStorage {
 
 extern "C" void FUN_0041849c(u16 id);
 extern "C" FlagValueDescription *FUN_0019c06c(s32 id);
-extern "C" FlagValueStorage *FUN_001bce18(void);
+extern "C" FlagValueStorage *flagValueGetStorage(void);
 extern "C" u32 FUN_001774d8(s32 id);
 
 /* Add to a capped numeric flag, or set a boolean flag, and record the changed id. */
@@ -38,7 +38,7 @@ extern "C" void flagValueAdd(s32 id, u32 amount)
     if (description == NULL)
         return;
     u8 category = description->category;
-    FlagValueStorage *storage = FUN_001bce18();
+    FlagValueStorage *storage = flagValueGetStorage();
     u8 *bank;
     switch (category) {
     case 1: bank = storage->bank1; break;
@@ -71,7 +71,7 @@ extern "C" void flagValueAdd(s32 id, u32 amount)
         break;
     }
     }
-    storage = FUN_001bce18();
+    storage = flagValueGetStorage();
     s32 changedByte = (id - 1) >> 3;
     if ((u32)changedByte < 252)
         storage->changed[changedByte] |= 1u << ((id - 1) & 7);

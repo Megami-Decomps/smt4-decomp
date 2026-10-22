@@ -22,7 +22,7 @@ typedef struct ItemMenu {
 extern int messageMainSetTargetFlags(int arg);
 extern int playerSkillInsertFirstFree(u16 itemId);
 extern int FUN_00295c04(int amount);
-extern int FUN_0029be5c(int kind, int amount);
+extern int gameCounterAddSaturating(int kind, int amount);
 extern int flaggedValueHolderGetTotal(void *selector);
 extern int messageMainTargetIsClear(void);
 extern int sys43e188GetState(void);
@@ -39,7 +39,7 @@ void itemMenuTakeSelected(ItemMenu *menu)
         playerSkillInsertFirstFree(entries[flaggedValueHolderGetTotal(menu->selector)].itemId);
         amount = menu->entries[flaggedValueHolderGetTotal(menu->selector)].amount;
         FUN_00295c04(-amount);
-        FUN_0029be5c(1, amount);
+        gameCounterAddSaturating(1, amount);
         menu->state = 3;
         menu->step = 0;
     }

@@ -1,22 +1,15 @@
-/* NON_MATCHING: deleting destructor in Obj4223c4's vtable needs its native D0 identity to reproduce the member-destructor pointer recovery. */
-/* romwright 0.5.0 decompilation of _ZN9Obj4223c4D0Ev for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: C-form destructor preserves the owner in r4; retail recovers it from the member destructor's returned this. */
+#include "classes/Obj4223c4.h"
 
-void _ZN9Obj4223c4D0Ev(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
+extern "C" {
+extern const u32 _ZTV9Obj42247c[];
+void asdMemFreeNonNull(void *allocation);
 
+// Tear down the selection interface and release the compendium menu.
+void _ZN9Obj4223c4D0Ev(Obj4223c4 *self)
 {
-  int iVar1;
-  unsigned int in_s0;
-  
-  *param_1 = &DAT_00422484;
-  iVar1 = FUN_00263c34(param_1 + 0x157);
-  if (iVar1 != 0x55c) {
-    iVar1 = FUN_002c38a4(DAT_00465124);
-    if ((param_3 & 0x1fffff) != 0) {
-      *(unsigned int *)(iVar1 + 0x28) = in_s0;
-    }
-    return;
-  }
-  return;
+    *reinterpret_cast<const u32 **>(self) = _ZTV9Obj42247c + 2;
+    self->touchSelection.~Obj55ca08();
+    asdMemFreeNonNull(self);
 }
-*/
-#include "common.h"
+}

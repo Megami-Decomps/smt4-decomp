@@ -1,4 +1,4 @@
-/* NON_MATCHING: unit ends at 0x004f0080 on a cmp and falls into inherited-frame continuation FUN_004f0080; the continuation chain must be joined before compiling. */
+/* NON_MATCHING: processes battle-action effects and actor/status masks across the repaired full body; the reference loses multi-register returns and typed action, actor, and scratch-record layouts. */
 /* romwright 0.5.0 decompilation of FUN_004eea40 for reference (not compiled; its own view of the boundaries):
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address * /

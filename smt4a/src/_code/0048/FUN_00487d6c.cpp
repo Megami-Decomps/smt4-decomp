@@ -9,7 +9,7 @@ int efctSetSpeed(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(int, int, unsigned int);
 int FUN_001835b4(int, int, int, int, int, unsigned int);
-int FUN_00492bc0(void);
+int naviGetActiveStateValue(void);
 int lmapSceneGetObj(int);
 int naviMainSelectPair(int);
 int FUN_0049325c(...);
@@ -44,7 +44,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 extern int lmapSceneGetUnk0(void);
 extern int lmapMainGetUnkCC(void);
 extern int gameFlagsClassify(void);
-/* Supplied declaration required: FUN_00492bc0. */
+/* Supplied declaration required: naviGetActiveStateValue. */
 /* Supplied declaration required: lmapSceneGetObj. */
 /* Supplied declaration required: naviMainSelectPair. */
 /* Supplied declaration required: FUN_0049325c. */
@@ -84,7 +84,7 @@ void FUN_00487d6c(int param_1)
   temp_v2 = FUN_001692ac(5,1);
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v1 = param_1 + 0x4cc;
-  FUN_00492bc0();
+  naviGetActiveStateValue();
   naviMainSelectPair(temp_v1);
   lmapSceneGetObj(temp_v1);
   temp_v8 = 0;

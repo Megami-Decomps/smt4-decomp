@@ -6,12 +6,12 @@ extern "C" {
 
 int uiSpriteSelectAnim(...);
 int pairSetFirstResetSecond(...);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 extern int FUN_00291e14(void);
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 void FUN_0028fce8(int param_1,int param_2,int param_3)
@@ -45,7 +45,7 @@ void FUN_0028fce8(int param_1,int param_2,int param_3)
     if (0 < *(short *)(param_1 + 0x244c)) {
       temp_v3 = temp_v3 + *(short *)(param_1 + 0x244c);
     }
-    FUN_003d2150(0x1000214);
+    sysPlayVoice(0x1000214);
     unaff_r6 = 0;
     if (0 < *(short *)(param_1 + 0x244e)) {
       unaff_r11 = 0xfa6;

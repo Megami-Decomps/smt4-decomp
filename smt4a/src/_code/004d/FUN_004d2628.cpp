@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdListBoxSetIntItem(...);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetIntItem. */
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int);
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 
 
@@ -31,13 +31,13 @@ void FUN_004d2628(int param_1,int param_2)
   case 0:
     puVar2 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_1 + 0x1c) = *puVar2;
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),1,0xffffff01,0xff);
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),2,0xffffff01,0xff);
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),3,0xffffff01,0xff);
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),4,0,0x168);
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),5,0,0x168);
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),6,0,0x168);
-    FUN_00340edc(*(unsigned int *)(param_1 + 0x10),7,0,10);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),1,0xffffff01,0xff);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),2,0xffffff01,0xff);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),3,0xffffff01,0xff);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),4,0,0x168);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),5,0,0x168);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),6,0,0x168);
+    asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),7,0,10);
     asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,
                  (int)*(short *)(param_2 + *(int *)(param_1 + 0x1c) * 2 + 0x2344),0xffffffff,0xff,0)
     ;

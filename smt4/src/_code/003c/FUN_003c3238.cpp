@@ -14,7 +14,7 @@ extern const char DAT_00400574[];
 extern const char DAT_0040057c[];
 extern const char DAT_00400584[];
 s32 textFormatBuffer(char *output, const char *format, ...);
-const char *FUN_002bd1fc();
+const char *gameGetPlayerName();
 const char *FUN_002bd06c(u16 entry);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 }
@@ -29,7 +29,7 @@ extern "C" void FUN_003c3238(void *context, const StatusHelpRecord *record)
     const char *description = NULL;
     if (record->flags & 2) {
         textFormatBuffer(label, DAT_0040056c);
-        description = FUN_002bd1fc();
+        description = gameGetPlayerName();
     } else if (record->flags & 8) {
         textFormatBuffer(label, DAT_00400574);
         description = FUN_002bd06c(record->entryId);

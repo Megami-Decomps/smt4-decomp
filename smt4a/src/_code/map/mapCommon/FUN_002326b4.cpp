@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int FUN_00178b04(...);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int mapFilterLoad(void);
 int FUN_00244220(void);
 int FUN_002d7f08(void);
@@ -56,7 +56,7 @@ extern unsigned int DAT_005f1b6c; /* 0x5f1b6c */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: mapFilterLoad. */
 /* Supplied declaration required: FUN_00244220. */
 /* Supplied declaration required: FUN_002d7f08. */
@@ -85,10 +85,10 @@ void FUN_002326b4(void)
   FUN_0014afd0(0x13,3);
   FUN_0014afd0(0x13,4);
   puVar1 = &LAB_00232a70;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar2 = &LAB_00232a8c;
   DAT_005f1b08 = puVar1;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   temp_v0 = 0x20;
   DAT_005f1b0c = puVar2;
   FUN_00178b04(0x20,&LAB_00232aa8,0x279);

@@ -8,7 +8,7 @@ int asdModelSlotSetColor(int);
 int asdModelSlotSetTint(int);
 int FUN_0029c2cc(unsigned int, int);
 int modelSlotAttachChild(unsigned int, int);
-int FUN_002a55a8(unsigned int, int);
+int asdModelResetAndSelectSecondaryMotion(unsigned int, int);
 void FUN_002d582c(unsigned int, float);
 int FUN_002e1230(unsigned int, int);
 
@@ -25,7 +25,7 @@ extern unsigned char LAB_00155650; /* 0x155650 */
 /* Supplied declaration required: asdModelSlotSetTint. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: modelSlotAttachChild. */
-/* Supplied declaration required: FUN_002a55a8. */
+/* Supplied declaration required: asdModelResetAndSelectSecondaryMotion. */
 /* Supplied declaration required: FUN_002d582c. */
 /* Supplied declaration required: FUN_002e1230. */
 
@@ -55,7 +55,7 @@ void FUN_00263988(int param_1,int param_2)
     }
     *(int *)(param_1 + 0x550) = param_2;
     modelSlotAttachChild(*(unsigned int *)(param_1 + param_2 * 4 + 0x3c),0);
-    FUN_002a55a8(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),param_2);
+    asdModelResetAndSelectSecondaryMotion(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),param_2);
     temp_v3 = 0x3f800000;
     FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34), 1.0f);
     temp_v0 = *(int *)(*(int *)(param_1 + *piVar3 * 4 + 0x3c) + 4);

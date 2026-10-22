@@ -46,7 +46,7 @@ extern int vec2GetXInt(int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
@@ -104,7 +104,7 @@ void FUN_00214dc4(void)
       }
       temp_v2 = FUN_001834a4(0x25,temp_v8 + 0x15);
       FUN_00164b5c(2,0x25,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
-      temp_v3 = FUN_002a4860(temp_v0 + 0x2dc);
+      temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
       temp_v9 = (unsigned int)*(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424);
       temp_v4 = dataTableGet(0x37,0);
       temp_v3 = dataTableGetEntries();
@@ -120,14 +120,14 @@ void FUN_00214dc4(void)
         temp_v6 = FUN_001834a4(0x25,0x14);
         if (*(char *)(temp_v3 + 0x3f) != '\x01') {
           if (*(char *)(temp_v3 + 0x37) != '0') {
-            temp_v7 = FUN_002a4860(temp_v0 + 0x2dc);
+            temp_v7 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
             FUN_002c0940(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v7 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
             textFormatBuffer(temp_v10,&LAB_00215178,temp_v11,temp_v3 + 0x37);
           }
           else {
-            temp_v3 = FUN_002a4860(temp_v0 + 0x2dc);
+            temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
             FUN_002c0940(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
@@ -135,7 +135,7 @@ void FUN_00214dc4(void)
           }
         }
         else {
-          temp_v3 = FUN_002a4860(temp_v0 + 0x2dc);
+          temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
           temp_v5 = *(unsigned int *)(temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c);
           temp_v9 = temp_v5 % 0xe10;
           FUN_002c0940(temp_v11,temp_v5 / 0xe10,temp_v9 * -0x77777777);

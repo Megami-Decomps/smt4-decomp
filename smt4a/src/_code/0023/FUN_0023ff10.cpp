@@ -19,7 +19,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 extern int partyEntryFlagsBit3(unsigned int);
 extern unsigned int FUN_004186e0(void);
@@ -106,7 +106,7 @@ void FUN_0023ff10(void)
       sysPlaySe(0x76);
     }
   }
-  temp_v1 = FUN_002a4860();
+  temp_v1 = resourceRunOperationIfUnblocked();
   temp_v3 = FUN_002a4894(temp_v4 + 0x9ac);
   temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + (temp_v3 + temp_v1) * 2 + 0xad6);
   temp_v5 = temp_v8;

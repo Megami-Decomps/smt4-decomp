@@ -11,13 +11,13 @@ int FUN_00295024(void);
 int FUN_00295108(...);
 int FUN_002c7b8c(...);
 int rt_aeabi_memclr(unsigned short [300], int);
-int FUN_00365898(...);
+int mapIfDispatchCommand(...);
 int mapIfStartTransition(...);
 int FUN_003deea4(...);
 int FUN_003df43c(...);
 int FUN_00417b70(...);
 int partyEntryFlagsBit3(...);
-int FUN_004185c4(...);
+int gameFlagSlotSetEnableBit(...);
 int flagValueAdd(int, int);
 
 /* stack frame of void: 11 slot(s), 42 byte(s) */
@@ -53,7 +53,7 @@ extern int FUN_001bd118(unsigned int);
 extern int FUN_002c2758(unsigned short);
 /* Supplied declaration required: FUN_002c7b8c. */
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_00365898. */
+/* Supplied declaration required: mapIfDispatchCommand. */
 /* Supplied declaration required: mapIfStartTransition. */
 extern int dataTable2FType1GetEntry(int);
 extern int recordIsAvailable(unsigned int);
@@ -66,7 +66,7 @@ extern int FUN_003df390(unsigned int);
 /* Supplied declaration required: FUN_00417b70. */
 extern int partyEntryBitsBit5(unsigned int);
 /* Supplied declaration required: partyEntryFlagsBit3. */
-/* Supplied declaration required: FUN_004185c4. */
+/* Supplied declaration required: gameFlagSlotSetEnableBit. */
 extern int partyEntryFlagsBit1(unsigned int);
 extern int partyEntryBitsBit1(unsigned int);
 /* Supplied declaration required: flagValueAdd. */
@@ -220,7 +220,7 @@ int FUN_00235438(void)
                   }
                 }
               }
-              FUN_004185c4(temp_v10,0);
+              gameFlagSlotSetEnableBit(temp_v10,0);
             }
           }
         }
@@ -283,10 +283,10 @@ int FUN_00235438(void)
                     temp_v11 = temp_v22 & 0xffff;
                     temp_v6 = 9;
                   }
-                  FUN_00365898(temp_v6,temp_v7,temp_v11);
+                  mapIfDispatchCommand(temp_v6,temp_v7,temp_v11);
                 }
                 else {
-                  FUN_00365898(6,temp_v1,0);
+                  mapIfDispatchCommand(6,temp_v1,0);
                   FUN_003deea4(temp_v10);
                   temp_v17 = 1;
                   temp_v21 = 1;
@@ -296,16 +296,16 @@ int FUN_00235438(void)
                 temp_v7 = (unsigned int)temp_v0;
                 temp_v11 = temp_v22 & 0xffff;
                 temp_v6 = 0xb;
-                FUN_00365898(temp_v6,temp_v7,temp_v11);
+                mapIfDispatchCommand(temp_v6,temp_v7,temp_v11);
               }
               else {
-                FUN_00365898(10,temp_v1,0);
+                mapIfDispatchCommand(10,temp_v1,0);
                 FUN_003deea4(temp_v10);
                 temp_v17 = 1;
                 temp_v21 = 1;
               }
             }
-            FUN_004185c4(temp_v10,0);
+            gameFlagSlotSetEnableBit(temp_v10,0);
           }
         }
 LAB_002358f0:

@@ -21,7 +21,7 @@ int modelSelectSecondaryMotion(...);
 int FUN_0028c618(...);
 int nodeSetTranslation(...);
 int FUN_00293e08(int);
-int FUN_00293e78(int, int *);
+int nodeOwnerSetTranslations(int, int *);
 int FUN_00294450(...);
 int FUN_00297684(int);
 int FUN_002a55ec(...);
@@ -58,7 +58,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00293e08. */
-/* Supplied declaration required: FUN_00293e78. */
+/* Supplied declaration required: nodeOwnerSetTranslations. */
 /* Supplied declaration required: FUN_00294450. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -137,14 +137,14 @@ void FUN_00273fc0(void)
     piVar7 = (int *)0xc7c34f80;
     temp_v4 = (int *)0xc7c34f80;
     temp_v5 = 0;
-    FUN_00293e78(g_lmapScene[0x65],&temp_v3);
+    nodeOwnerSetTranslations(g_lmapScene[0x65],&temp_v3);
   }
   else {
     temp_v3 = g_lmapScene[7];
     piVar3 = (int *)g_lmapScene[8];
     temp_v5 = g_lmapScene[9];
     temp_v4 = piVar3;
-    FUN_00293e78(g_lmapScene[0x65],&temp_v3);
+    nodeOwnerSetTranslations(g_lmapScene[0x65],&temp_v3);
     FUN_003351e0(g_lmapScene[0x65]);
     piVar7 = (int *)0x3f800000;
     FUN_00293e08(g_lmapScene[0x65]);

@@ -13,19 +13,19 @@ float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int FUN_001e2be4(void);
 int FUN_002562e4(int, int);
-int FUN_00256370(int, int);
+int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0027f48c(int, int);
 int FUN_0027f848(void);
 int FUN_0027f958(float *, unsigned int *, int);
-int FUN_0027fa98(...);
+int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_00287b0c(void);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_003a66c4(void);
 int FUN_003a6988(void);
 int SBORROW4(...);
@@ -57,24 +57,24 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 /* Supplied declaration required: FUN_001e2be4. */
 /* Supplied declaration required: FUN_001f9188. */
 /* Supplied declaration required: FUN_002562e4. */
-/* Supplied declaration required: FUN_00256370. */
+/* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00287b0c. */
 extern unsigned int FUN_00291e40(unsigned int);
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
 extern int gameGetMapBlock(void);
@@ -171,8 +171,8 @@ void FUN_001fa8e4(void)
         }
         if ((temp_v7 != 0 && temp_v8 != 0x24) && (*(int *)(DAT_004474f4 + 0xac) == 0)) {
           *(unsigned int *)(temp_v2 + 0xd94) = 0;
-          FUN_0027fa98(3);
-          FUN_0029be5c(0x14,1);
+          lmapSetSceneId(3);
+          gameCounterAddSaturating(0x14,1);
           FUN_002804ec(g_lmapScene + 0x28);
           mapSelectContainingRegions();
           return;
@@ -238,7 +238,7 @@ void FUN_001fa8e4(void)
       *(int *)(temp_v2 + 0xdb8) = temp_v7;
       if (temp_v7 >= 0x1f) {
         *(int *)(temp_v2 + 0xdb8) = temp_v8 - 0x1d;
-        FUN_0029be5c(0x1d,1);
+        gameCounterAddSaturating(0x1d,1);
       }
     }
     else {
@@ -367,11 +367,11 @@ void FUN_001fa8e4(void)
     temp_v6 = (unsigned int)((unsigned long long)temp_v22 >> 0x20);
     if (((g_gameState != 0x24) && (temp_v8 = FUN_0025a140(2,5), temp_v8 != 0)) && (!temp_v0)) {
       temp_v13 = (float)temp_v15;
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       temp_v13 = *(float *)(g_lmapScene + 0x160) - temp_v13;
       *(float *)(g_lmapScene + 0x160) = temp_v13;
       if (temp_v13 < temp_v17) {
-        FUN_00256370(2,5);
+        partyApplyNonlethalAilmentDamage(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = temp_v6;
         FUN_002562e4(0xf,0x50);
         temp_v6 = FUN_00291e40(0x1000186);
@@ -381,12 +381,12 @@ void FUN_001fa8e4(void)
       }
     }
     temp_v12 = (float)temp_v15;
-    FUN_00287aec();
+    mathDistanceBetweenPoints();
     temp_v13 = *(float *)(temp_v2 + 0xdb4) + temp_v12;
     *(float *)(temp_v2 + 0xdb4) = temp_v13;
     if ((int)temp_v13 >= 0x47c35001) {
       *(float *)(temp_v2 + 0xdb4) = temp_v13 - 100000.0f;
-      FUN_0029be5c(0x12,1);
+      gameCounterAddSaturating(0x12,1);
     }
     temp_v6 = 0x44bb8000;
     temp_v13 = *(float *)(temp_v2 + 0xdbc) + temp_v12;
@@ -419,7 +419,7 @@ void FUN_001fa8e4(void)
     temp_v13 = (float)temp_v15;
     if ((temp_v9 & 2) != 0) {
       if (!temp_v0) {
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         temp_v8 = g_lmapScene;
         temp_v13 = *(float *)(g_lmapScene + 0x15c) - temp_v13;
         *(float *)(g_lmapScene + 0x15c) = temp_v13;
@@ -434,14 +434,14 @@ void FUN_001fa8e4(void)
           else {
             *(unsigned int *)(temp_v8 + 0x15c) = temp_v6;
           }
-          FUN_0027fa98(0x20);
+          lmapSetSceneId(0x20);
         }
       }
       DAT_0049f94f = 4;
     }
     else {
       if (temp_v17 < *(float *)(g_lmapScene + 0x15c)) {
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v13;
       }
       temp_v13 = *(float *)(g_lmapScene + 0x15c);
@@ -452,8 +452,8 @@ void FUN_001fa8e4(void)
       DAT_0049f94f = 0xff;
     }
     if ((temp_v9 & 4) != 0) {
-      FUN_0027fa98(0x1f);
-      FUN_0029be5c(0x16,1);
+      lmapSetSceneId(0x1f);
+      gameCounterAddSaturating(0x16,1);
     }
     mapSelectContainingRegions();
     if ((temp_v9 & 0x800) != 0) {

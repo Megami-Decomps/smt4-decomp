@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023b4f4(int *, unsigned char [64], int *, int);
 int FUN_0023b5e0(...);
-int FUN_00241d44(int *);
+int gpuSubmitFloatVectorsOrDefault(int *);
 int forwardRecoveredCallback(void);
 int FUN_002b011c(void);
 int FUN_002c1b64(int, unsigned int);
@@ -52,7 +52,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0023b4f4. */
 /* Supplied declaration required: FUN_0023b5e0. */
-/* Supplied declaration required: FUN_00241d44. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -166,7 +166,7 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
   FUN_002b011c();
   temp_v3 = 0;
   do {
-    FUN_00241d44(&temp_v24);
+    gpuSubmitFloatVectorsOrDefault(&temp_v24);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 4);
   forwardRecoveredCallback();
@@ -185,7 +185,7 @@ void FUN_0034bcf4(fn_0034bcf4_arg0 *param_1)
   FUN_002b011c();
   temp_v3 = 4;
   do {
-    FUN_00241d44(&temp_v24);
+    gpuSubmitFloatVectorsOrDefault(&temp_v24);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   forwardRecoveredCallback();

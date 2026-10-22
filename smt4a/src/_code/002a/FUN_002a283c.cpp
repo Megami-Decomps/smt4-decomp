@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002277d8(void);
+int campResetScreen(void);
 int scrScriptProcessStartEntry(undefined4, int);
 int FUN_0031d890(void);
 
@@ -20,7 +20,7 @@ struct fn_002a283c_arg0 {
 };
 
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_002277d8. */
+/* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0031d890. */
 
@@ -39,7 +39,7 @@ unsigned int FUN_002a283c(fn_002a283c_arg0 *param_1)
       param_1->field_0x144 = 1;
       param_1->field_0x150 = 0;
       FUN_0031d890();
-      FUN_002277d8();
+      campResetScreen();
       temp_v1 = 3;
     }
   }

@@ -18,7 +18,7 @@ extern int campIsState85(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00202400. */
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ae320. */
 extern int FUN_002f7730(int, unsigned int);
@@ -42,7 +42,7 @@ void FUN_00334560(void)
   temp_v5 = g_uiQuest;
   *(unsigned char *)(g_uiQuest + 0x90c) = 1;
   uiQuestSpritesCreate();
-  temp_v1 = FUN_002a4860();
+  temp_v1 = resourceRunOperationIfUnblocked();
   temp_v2 = FUN_002a4894(temp_v5 + 0x948);
   temp_v0 = *(unsigned short *)(temp_v5 + (temp_v2 + temp_v1) * 2 + 0xa10);
   temp_v6 = (unsigned int)temp_v0;

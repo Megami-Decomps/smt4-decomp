@@ -29,7 +29,7 @@ int FUN_00253860(...);
 int FUN_00253c70(...);
 int FUN_0025b4b0(...);
 int FUN_00281e34(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_002a0428(...);
 int randNextInRange(...);
 int VectorSignedToFloat(...);
@@ -107,7 +107,7 @@ extern int FUN_0025c05c(void);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: FUN_00287a78. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -289,9 +289,9 @@ void FUN_00208e4c(void)
                     if (((char *)(temp_v8 + 0x34) != (char *)0x0) &&
                        (*(char *)(temp_v8 + 0x171) == '\0')) {
                       temp_v20 = *(float *)(g_lmapScene + 0x1c);
-                      FUN_00287aec();
+                      mathDistanceBetweenPoints();
                       temp_v11 = *(float *)(g_lmapScene + 0x1c);
-                      FUN_00287aec();
+                      mathDistanceBetweenPoints();
                       if (((int)(temp_v20 - temp_v11) < 0x43fa0000) ||
                          (((int)temp_v11 < 0x43960000 && ((int)temp_v20 >= 0x43c80001)))) {
                         temp_v17 = 1;
@@ -322,7 +322,7 @@ LAB_002091f4:
           }
           if ((DAT_0049fadc == 0 && !(unsigned char)(temp_v13 | temp_v16)) && ((int)romwright_fabs_4(temp_v18) < 0x42f00000)) {
             temp_v18 = *(float *)(g_lmapScene + 0x1c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v22 <= temp_v18) << 0x1d);
             if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
                (temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0), temp_v6 == -1)) {
@@ -358,7 +358,7 @@ LAB_002093d8:
             }
             if (!temp_v16 && temp_v4 == 0) {
               temp_v18 = *(float *)(temp_v3 + 0x3c);
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v22 - 200.0f) << 0x1d);
               if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
                 *(unsigned int *)(temp_v3 + 0xb8) = 9;
@@ -406,7 +406,7 @@ LAB_002093d8:
         temp_v4 = randNextInRange(100);
         if ((temp_v4 < 0x46) && ((int)romwright_fabs_4(temp_v22) < 0x42f00000)) {
           temp_v22 = *(float *)(g_lmapScene + 0x1c);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v22) << 0x1d);
           if ((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) &&
              (temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0), temp_v6 == -1)) {
@@ -434,7 +434,7 @@ LAB_0020c7d0:
 LAB_002095d4:
             if (*(char *)(temp_v5 + 0x3049) == '\0') {
               temp_v6 = *(int *)(temp_v5 + 0x14);
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               if (temp_v6 < 0x43160000) break;
             }
             temp_v6 = 0;
@@ -484,7 +484,7 @@ LAB_002096e8:
           }
           else {
             temp_v18 = *(float *)(temp_v5 + 0x14);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= DAT_0049fb84) << 0x1d);
             if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
               if ((*(char *)(temp_v3 + 0xb2) != '\0') && (DAT_0049fae0 / 2 > *(int *)(temp_v5 + 0x3038))
@@ -703,7 +703,7 @@ LAB_00209658:
           temp_v40 = temp_v31 + 35.0f;
           temp_v34 = *(float *)(g_lmapScene + 0x20) + 35.0f;
           temp_v6 = *(int *)(g_lmapScene + 0x1c);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           if (temp_v6 >= 0x44960000) goto LAB_00209c48;
         }
         else {
@@ -714,7 +714,7 @@ LAB_00209c48:
           *(unsigned int *)(temp_v3 + 0x6c) = 1;
           *(unsigned int *)(temp_v3 + 100) = 2;
           temp_v18 = *(float *)(temp_v3 + 200);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           if ((int)temp_v18 >= 0x41f00000) {
             temp_v18 = 1.0f / temp_v18;
             temp_v22 = (*(float *)(temp_v3 + 200) - temp_v30) * temp_v18;
@@ -744,7 +744,7 @@ LAB_00209c48:
               temp_v32 = fStack_78;
             }
             temp_v6 = *(int *)(temp_v3 + 0x54);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if (temp_v6 >= 0x3f800000) {
               *(float *)(temp_v3 + 0x54) = temp_v30;
               *(float *)(temp_v3 + 0x58) = temp_v31;
@@ -787,7 +787,7 @@ LAB_00209c48:
         temp_v32 = *(float *)(temp_v3 + 0x5c);
         *(unsigned int *)(temp_v3 + 100) = 2;
         *(unsigned int *)(temp_v3 + 0x6c) = 1;
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         temp_v22 = 1.0f;
         FUN_00281e34();
         temp_v18 = *(float *)(temp_v3 + 0x60);
@@ -945,12 +945,12 @@ LAB_00209c48:
           }
           if (*(char *)(temp_v44 + 0x3d) == '\0') {
             temp_v6 = *(int *)(temp_v3 + 0x3c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if (temp_v6 >= 0x451c4001) goto LAB_0020a934;
           }
           if (*(char *)(temp_v3 + 0xb1) == '\0') {
             temp_v8 = *(int *)(g_lmapScene + 0x1c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             temp_v17 = SBORROW4(temp_v8,0x453b8000);
             temp_v6 = temp_v8 - 0x453b8000;
             temp_v16 = temp_v8 == 0x453b8000;
@@ -1031,7 +1031,7 @@ LAB_0020a4b4:
           *(unsigned int *)(temp_v3 + 0x6c) = 1;
         }
         else {
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           FUN_00281e34();
           temp_v22 = *(float *)(temp_v3 + 0x60);
           FUN_002535ec();
@@ -1052,7 +1052,7 @@ LAB_0020a4b4:
           temp_v20 = temp_v22;
           if ((temp_v6 != temp_v2) && (temp_v8 = temp_v5 + temp_v6 * 0x180, *(char *)(temp_v8 + 0x34) != '\0')
              ) {
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if ((int)temp_v22 < 0x3f800000) {
               temp_v22 = 1.0f;
             }
@@ -1133,12 +1133,12 @@ LAB_0020a6f0:
               }
               if (*(char *)(temp_v44 + 0x3d) == '\0') {
                 temp_v6 = *(int *)(temp_v3 + 0x3c);
-                FUN_00287aec();
+                mathDistanceBetweenPoints();
                 if (temp_v6 >= 0x451c4001) goto LAB_0020a934;
               }
               if (*(char *)(temp_v3 + 0xb1) == '\0') {
                 temp_v8 = *(int *)(g_lmapScene + 0x1c);
-                FUN_00287aec();
+                mathDistanceBetweenPoints();
                 temp_v17 = SBORROW4(temp_v8,0x453b8000);
                 temp_v6 = temp_v8 - 0x453b8000;
                 temp_v16 = temp_v8 == 0x453b8000;
@@ -1170,7 +1170,7 @@ LAB_0020a6f0:
             else {
 LAB_0020a9e0:
               temp_v22 = *(float *)(temp_v3 + 0xdc);
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               temp_v20 = *(float *)(temp_v3 + 0xe8);
               temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v20 < temp_v22) << 0x1f) |
                       ((unsigned int)(temp_v20 == temp_v22) << 0x1e);
@@ -1187,7 +1187,7 @@ LAB_0020a9e0:
                   *(unsigned int *)(temp_v3 + 0x6c) = 1;
                 }
                 else {
-                  FUN_00287aec();
+                  mathDistanceBetweenPoints();
                   FUN_00281e34();
                   temp_v22 = *(float *)(temp_v3 + 0x60);
                   FUN_002535ec();
@@ -1205,7 +1205,7 @@ LAB_0020a9e0:
                   if ((temp_v6 != temp_v2) &&
                      (temp_v8 = temp_v5 + temp_v6 * 0x180, *(char *)(temp_v8 + 0x34) != '\0')) {
                     temp_v22 = (float)temp_v23;
-                    FUN_00287aec();
+                    mathDistanceBetweenPoints();
                     if ((int)temp_v22 < 0x3f800000) {
                       temp_v22 = 1.0f;
                     }
@@ -1431,7 +1431,7 @@ joined_r0x0020ae6c:
             *(unsigned char *)(temp_v3 + 0x170) = 0;
             *(unsigned char *)(temp_v3 + 0x171) = 0;
             temp_v6 = *(int *)(g_lmapScene + 0x1c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if (temp_v6 < 0x43fa0000) {
               *(int *)(temp_v3 + 0xd8) = *(int *)(temp_v3 + 0xd8) + 300;
             }
@@ -1507,7 +1507,7 @@ joined_r0x0020ae6c:
             *(unsigned char *)(temp_v3 + 0x170) = 0;
             *(unsigned char *)(temp_v3 + 0x171) = 0;
             temp_v6 = *(int *)(g_lmapScene + 0x1c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if (temp_v6 < 0x43fa0000) {
               temp_v6 = *(int *)(temp_v3 + 0xd8) + 300;
             }
@@ -1559,7 +1559,7 @@ joined_r0x0020ae6c:
         temp_v32 = temp_v18;
         if (*(char *)(temp_v44 + 0x3d) == '\0') {
           temp_v6 = *(int *)(temp_v3 + 0x3c);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           if (temp_v6 >= 0x44e10001) goto LAB_0020a934;
         }
         temp_v6 = *(int *)(temp_v3 + 0x130) - 1;
@@ -1599,7 +1599,7 @@ joined_r0x0020ae6c:
           }
           *(float *)(temp_v3 + 0x110) = temp_v22;
           temp_v22 = *(float *)(temp_v5 + 0x14);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           *(float *)(temp_v3 + 0x114) = temp_v22;
           temp_v22 = temp_v22 / *(float *)(temp_v3 + 0x110);
           temp_v20 = 25.0f;
@@ -1633,7 +1633,7 @@ joined_r0x0020ae6c:
             }
             else if (*(int *)(temp_v3 + 0x108) >= 0x41700001) {
               temp_v22 = *(float *)(temp_v3 + 0x11c);
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               in_fpscr = (in_fpscr & 0xfffffff) |
                          ((unsigned int)(*(float *)(temp_v3 + 0x114) <= temp_v22) << 0x1d);
               if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) goto LAB_0020b4ec;
@@ -1754,7 +1754,7 @@ LAB_0020b4ec:
           *(float *)(temp_v3 + 0x108) = *(float *)(temp_v3 + 0x108) - 1.0f;
         }
         temp_v6 = *(int *)(temp_v3 + 0x11c);
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         if (temp_v6 >= 0x3f800001) {
           FUN_00281e34();
           temp_v19 = *(unsigned int *)(temp_v3 + 0x128);
@@ -1772,7 +1772,7 @@ LAB_0020b4ec:
           temp_v16 = temp_v8 == 0xf;
         }
         if (!(temp_v16 || temp_v6 < 0 != temp_v17)) {
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           FUN_00281e34();
           temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
           FUN_002535ec();
@@ -1799,7 +1799,7 @@ LAB_0020b4ec:
           if ((temp_v6 != temp_v2) && (temp_v8 = temp_v5 + temp_v6 * 0x180, *(char *)(temp_v8 + 0x34) != '\0')
              ) {
             temp_v22 = (float)temp_v23;
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if ((int)temp_v22 < 0x3f800000) {
               temp_v22 = 1.0f;
             }
@@ -1863,7 +1863,7 @@ LAB_0020ba2c:
           temp_v32 = temp_v18;
           if (*(char *)(temp_v45 + 0x3d) == '\0') {
             temp_v6 = *(int *)(temp_v3 + 0x3c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             if (temp_v6 >= 0x44e10001) goto LAB_0020a934;
           }
           temp_v6 = *(int *)(temp_v3 + 0x130) - 1;
@@ -1903,7 +1903,7 @@ LAB_0020ba2c:
             }
             *(float *)(temp_v3 + 0x110) = temp_v22;
             temp_v22 = *(float *)(temp_v5 + 0x14);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             *(float *)(temp_v3 + 0x114) = temp_v22;
             temp_v20 = temp_v22 / *(float *)(temp_v3 + 0x110);
             *(float *)(temp_v3 + 0x118) = temp_v20;
@@ -1941,7 +1941,7 @@ LAB_0020ba2c:
           else {
 LAB_0020bd68:
             temp_v22 = *(float *)(temp_v3 + 0xdc);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             temp_v20 = *(float *)(temp_v3 + 0x108);
             temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v20 < temp_v22) << 0x1f) |
                     ((unsigned int)(temp_v20 == temp_v22) << 0x1e);
@@ -1954,7 +1954,7 @@ LAB_0020bd68:
                 *(float *)(temp_v3 + 0x108) = temp_v20 - 1.0f;
               }
               temp_v6 = *(int *)(temp_v3 + 0x11c);
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               if (temp_v6 >= 0x3f800001) {
                 FUN_00281e34();
                 temp_v19 = *(unsigned int *)(temp_v3 + 0x128);
@@ -1972,7 +1972,7 @@ LAB_0020bd68:
                 temp_v16 = temp_v8 == 0xf;
               }
               if (!(temp_v16 || temp_v6 < 0 != temp_v17)) {
-                FUN_00287aec();
+                mathDistanceBetweenPoints();
                 FUN_00281e34();
                 temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
                 FUN_002535ec();
@@ -1999,7 +1999,7 @@ LAB_0020bd68:
                 if ((temp_v6 != temp_v2) &&
                    (temp_v8 = temp_v5 + temp_v6 * 0x180, *(char *)(temp_v8 + 0x34) != '\0')) {
                   temp_v22 = (float)temp_v23;
-                  FUN_00287aec();
+                  mathDistanceBetweenPoints();
                   if ((int)temp_v22 < 0x3f800000) {
                     temp_v22 = 1.0f;
                   }
@@ -2302,7 +2302,7 @@ LAB_0020a934:
         temp_v34 = *(float *)(g_lmapScene + 0x20) + 35.0f;
         if ((int)romwright_fabs_4(*(float *)(g_lmapScene + 0x20) - temp_v31) < 0x42f00000) {
           temp_v6 = *(int *)(g_lmapScene + 0x1c);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           if ((temp_v6 < 0x44bb8000) && (temp_v6 = FUN_0025b4b0(&temp_v33,&temp_v39,0), temp_v6 == -1))
           goto LAB_0020c7d0;
         }
@@ -2367,7 +2367,7 @@ LAB_0020a934:
       case 0x16:
         if (*(int *)(temp_v5 + 0x3038) < DAT_0049fae0) {
           temp_v6 = *(int *)(temp_v5 + 0x14);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           if (temp_v6 < 0x44bb8000) {
             *(unsigned int *)(temp_v3 + 0xd8) = 0;
             *(int *)(temp_v5 + 0x3038) = *(int *)(temp_v5 + 0x3038) + 1;
@@ -2514,7 +2514,7 @@ LAB_0020a934:
           temp_v30 = *(float *)(temp_v3 + 0x54);
           temp_v31 = *(float *)(temp_v3 + 0x58);
           temp_v32 = *(float *)(temp_v3 + 0x5c);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           FUN_00281e34();
           temp_v19 = *(unsigned int *)(temp_v3 + 0x60);
           FUN_002535ec();
@@ -2570,7 +2570,7 @@ LAB_0020cf74:
           temp_v31 = *(float *)(temp_v3 + 0x58);
           temp_v32 = *(float *)(temp_v3 + 0x5c);
           temp_v19 = *(unsigned int *)(g_lmapScene + 0x1c);
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           *(unsigned int *)(temp_v3 + 0x70) = temp_v19;
         }
         temp_v2 = temp_v2 + 1;

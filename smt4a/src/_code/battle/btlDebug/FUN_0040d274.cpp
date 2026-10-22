@@ -9,7 +9,7 @@ int FUN_003e7fa4(...);
 int FUN_004f1b2c(...);
 int FUN_004f22a4(...);
 int FUN_004f2938(...);
-int FUN_004f3ee0(int, unsigned int, int);
+int cameraBeginScalarTransition(int, unsigned int, int);
 int FUN_004f3f1c(int, unsigned int, int, int);
 void FUN_004f4348(int camera, float x, float y, float z, unsigned int duration, unsigned int mode);
 int FUN_004fb670(int, unsigned int);
@@ -48,7 +48,7 @@ extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_004f22a4. */
 extern int FUN_004f2708(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f2938. */
-/* Supplied declaration required: FUN_004f3ee0. */
+/* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f3f1c. */
 /* Supplied declaration required: FUN_004f4348. */
 /* Supplied declaration required: FUN_004fb670. */
@@ -98,7 +98,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
     if ((*(int *)(param_2 + 0x14) != 0) &&
        ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) == 0)) {
       VectorSignedToFloat((int)*(short *)(param_2 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_004f3ee0(g_btlCamera,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+      cameraBeginScalarTransition(g_btlCamera,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
       return;
     }
     break;

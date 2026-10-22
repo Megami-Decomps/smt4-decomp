@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001bc2ec(void);
+int asdGxGetPhysicalAddress(void);
 int vramAreaGetBaseAddress(int);
 
 /* stack frame of param_7: 4 slot(s), 16 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_7_stack;
 
-/* Supplied declaration required: FUN_001bc2ec. */
+/* Supplied declaration required: asdGxGetPhysicalAddress. */
 /* Supplied declaration required: vramAreaGetBaseAddress. */
 
 
@@ -40,7 +40,7 @@ void FUN_001b8bb4(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   temp_v6 = 0;
   temp_v8 = ~(*(unsigned char *)(param_6 + 0x40) >> 2) & 1;
   vramAreaGetBaseAddress(0x20000);
-  temp_v0 = FUN_001bc2ec();
+  temp_v0 = asdGxGetPhysicalAddress();
   temp_v7 = 0;
   temp_v5 = 0;
   temp_v9 = *param_7;
@@ -98,7 +98,7 @@ void FUN_001b8bb4(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
         break;
       case 5:
       case 10:
-        temp_v3 = FUN_001bc2ec();
+        temp_v3 = asdGxGetPhysicalAddress();
         *puVar6 = temp_v3 >> 3;
         if (temp_v8 != 0) {
           temp_v7 = temp_v7 + 1;
@@ -109,7 +109,7 @@ void FUN_001b8bb4(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
         break;
       case 6:
       case 0xb:
-        temp_v4 = FUN_001bc2ec();
+        temp_v4 = asdGxGetPhysicalAddress();
         *puVar6 = temp_v4 - temp_v0;
         if (temp_v8 != 0) {
           temp_v7 = temp_v7 + 1;
@@ -120,7 +120,7 @@ void FUN_001b8bb4(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
         break;
       case 7:
       case 0xc:
-        temp_v4 = FUN_001bc2ec();
+        temp_v4 = asdGxGetPhysicalAddress();
         *puVar6 = (temp_v4 - temp_v0) | 0x80000000;
         if (temp_v8 != 0) {
           temp_v7 = temp_v7 + 1;
@@ -131,7 +131,7 @@ void FUN_001b8bb4(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
         break;
       case 8:
       case 0xd:
-        temp_v4 = FUN_001bc2ec();
+        temp_v4 = asdGxGetPhysicalAddress();
         *puVar6 = temp_v4 - temp_v0;
         if (temp_v8 != 0) {
           temp_v7 = temp_v7 + 1;

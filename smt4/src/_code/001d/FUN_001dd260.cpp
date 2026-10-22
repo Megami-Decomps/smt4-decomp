@@ -1,4 +1,3 @@
-/* NON_MATCHING: the selected signed halfword is correct, but its address uses a separate constant register instead of retail's folded immediate offset. */
 #include "common.h"
 
 struct TouchValueRecord {

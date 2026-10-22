@@ -48,7 +48,7 @@ extern unsigned int configGetSettings(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int FUN_002a6464(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c9104. */
@@ -90,7 +90,7 @@ void FUN_0041de6c(int param_1)
     if (temp_v0 != 2) {
       return;
     }
-    temp_v0 = FUN_002a4b74();
+    temp_v0 = messageGetChoiceResult();
     if (temp_v0 != 0) {
       gameDataBlocksReleaseHold(1);
       *(unsigned char *)(param_1 + 0xe) = 0;

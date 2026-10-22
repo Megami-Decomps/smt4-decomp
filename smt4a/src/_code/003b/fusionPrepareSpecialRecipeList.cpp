@@ -44,7 +44,7 @@ FusionRecipeEntry *contentEntryFindById(u32 id);
 u32 FUN_004dad8c(void *context);
 void FUN_0022e774();
 void FUN_002a7b74();
-void FUN_0023c08c(s32 mode);
+void uniteStartOrQueueRequest(s32 mode);
 void FUN_0020b908(s32 id, s32 enabled);
 LmapScript *lmapSceneGetScript();
 void FUN_003857b4(u8 value);
@@ -85,7 +85,7 @@ void fusionPrepareSpecialRecipeList()
     FUN_0022e774();
     recipes->progress = 0;
     FUN_002a7b74();
-    FUN_0023c08c(18);
+    uniteStartOrQueueRequest(18);
     FUN_0020b908(0x26, 1);
     LmapScript *script = lmapSceneGetScript();
     if (script != NULL) {

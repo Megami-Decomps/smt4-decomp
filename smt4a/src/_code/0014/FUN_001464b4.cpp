@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_001006c2(...);
-int FUN_001006ec(unsigned int, int, int);
+int asdDeallocateArrayStorage(unsigned int, int, int);
 
 extern unsigned char DAT_00557c50; /* 0x557c50 */
 
 /* Supplied declaration required: FUN_001006c2. */
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 
 
 unsigned int * FUN_001464b4(unsigned int *param_1)
@@ -50,7 +50,7 @@ unsigned int * FUN_001464b4(unsigned int *param_1)
     }
     puVar3 = puVar3 + 1;
   }
-  FUN_001006ec(param_1[6],(int)(param_1[8] - param_1[6]) >> 2,0);
+  asdDeallocateArrayStorage(param_1[6],(int)(param_1[8] - param_1[6]) >> 2,0);
   temp_v1 = param_1[6];
   param_1[6] = (unsigned int)puVar2;
   param_1[7] = ((param_1[7] - temp_v1) & 0xfffffffcU) + (int)puVar2;
@@ -74,7 +74,7 @@ unsigned int * FUN_001464b4(unsigned int *param_1)
       }
       puVar3 = puVar3 + 2;
     }
-    FUN_001006ec(param_1[9],(int)(param_1[0xb] - param_1[9]) >> 3,0);
+    asdDeallocateArrayStorage(param_1[9],(int)(param_1[0xb] - param_1[9]) >> 3,0);
     temp_v1 = param_1[9];
     param_1[9] = (unsigned int)puVar2;
     param_1[10] = ((param_1[10] - temp_v1) & 0xfffffff8U) + (int)puVar2;

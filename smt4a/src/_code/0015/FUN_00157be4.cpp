@@ -20,7 +20,7 @@ void asdModelAdvanceCommandCursor(void);
 void FUN_0016d338(Queue *queue, s32 value);
 void FUN_0017d43c(void);
 void FUN_0017d5f8(void);
-s32 FUN_0019eafc(void);
+s32 asdGxGetCommandCursor(void);
 
 /* When the player has a queue: if the queue holds unread words, picks its current entry and (if there is one) hands it on; then runs FUN_0017d43c. */
 void FUN_00157be4(Player *player)
@@ -36,7 +36,7 @@ void FUN_00157be4(Player *player)
             player->current = current;
             if (current != 0) {
                 FUN_0017d5f8();
-                FUN_0016d338(queue, FUN_0019eafc());
+                FUN_0016d338(queue, asdGxGetCommandCursor());
             }
         }
         FUN_0017d43c();

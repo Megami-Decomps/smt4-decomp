@@ -9,7 +9,7 @@ void FUN_0016e1a4(void)
   unsigned long long uVar3;
   unsigned char auStack_1c [8];
   
-  uVar3 = FUN_00195fc4();
+  uVar3 = sysRequestFatalBreak();
   piVar1 = (int *)uVar3;
   iVar2 = (**(code **)(*piVar1 + 8))(piVar1,*(code **)(*piVar1 + 8),0,0,0);
   if (iVar2 < 0) {

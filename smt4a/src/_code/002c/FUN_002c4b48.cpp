@@ -21,8 +21,8 @@ int libc_strcpy(unsigned int [32], unsigned int);
 int sysMemClear(unsigned int [32], int);
 int FUN_003180c4(int, unsigned int [32]);
 int FUN_00359974(int, unsigned int, unsigned int, int);
-int FUN_0037c88c(void);
-int FUN_004185c4(...);
+int messageDismissNumericBannerForced(void);
+int gameFlagSlotSetEnableBit(...);
 int idOwnerGetRecordHalf(void);
 int QuestCenter_GetActiveEntry(void);
 
@@ -46,7 +46,7 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageSlotSet. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int FUN_002ba85c(void);
 /* Supplied declaration required: scrCommMessageSetMode. */
 extern int scrGetCommandFrame(void);
@@ -56,9 +56,9 @@ extern int scrGetCommandFrame(void);
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: messageArmMenuAnimation. */
-/* Supplied declaration required: FUN_0037c88c. */
+/* Supplied declaration required: messageDismissNumericBannerForced. */
 extern int obj04StateIs4(void);
-/* Supplied declaration required: FUN_004185c4. */
+/* Supplied declaration required: gameFlagSlotSetEnableBit. */
 /* Supplied declaration required: idOwnerGetRecordHalf. */
 extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
@@ -171,7 +171,7 @@ unsigned int FUN_002c4b48(void)
     if (temp_v3 == 0) {
       return 0;
     }
-    FUN_0037c88c();
+    messageDismissNumericBannerForced();
     scrWorkSetValue(0,0x14);
     temp_v3 = 1;
     temp_v8 = 2;
@@ -195,7 +195,7 @@ unsigned int FUN_002c4b48(void)
               temp_v3 = gameFlagsGetBlock();
               QuestCenter_GetActiveEntry();
               temp_v2 = idOwnerGetRecordHalf();
-              FUN_004185c4(temp_v2,0);
+              gameFlagSlotSetEnableBit(temp_v2,0);
               *(unsigned short *)(temp_v3 + 0x1096) = 0;
               *(unsigned short *)(temp_v3 + 0x1094) = 0;
             }
@@ -277,7 +277,7 @@ unsigned int FUN_002c4b48(void)
       if (temp_v3 != 1) {
         return 0;
       }
-      temp_v3 = FUN_002a4b74();
+      temp_v3 = messageGetChoiceResult();
       if (temp_v3 != 0) {
         scrWorkSetValue(0,0x13);
         temp_v8 = 2;
@@ -287,7 +287,7 @@ unsigned int FUN_002c4b48(void)
         temp_v8 = 1;
       }
       scrWorkSetValue(temp_v8,temp_v3 != 0);
-      FUN_0037c88c();
+      messageDismissNumericBannerForced();
       return 0;
     }
   }

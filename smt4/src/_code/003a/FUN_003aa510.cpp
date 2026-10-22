@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022dde8(int, int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
-int FUN_00233344(int, int);
+int uiAnimationAdvanceChannel(int, int);
 int FUN_00233404(void);
 int FUN_0029d684(int);
 int FUN_0029defc(int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022dde8. */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_00233344. */
+/* Supplied declaration required: uiAnimationAdvanceChannel. */
 /* Supplied declaration required: FUN_00233404. */
 extern int flaggedValueHolderGetTotal(int);
 extern int rangeLimitMin(int);
@@ -66,7 +66,7 @@ void FUN_003aa510(int param_1)
     FUN_003a98b8(param_1);
   }
   else {
-    FUN_00233344(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b2));
+    uiAnimationAdvanceChannel(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b2));
     temp_v7 = param_1 + *(short *)(param_1 + 0xa5b2) * 0x8c + 0xfc;
     temp_v3 = vec2GetYInt(temp_v7);
     temp_v4 = vec2GetXInt(temp_v7);

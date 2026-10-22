@@ -5,7 +5,7 @@
 extern "C" {
 
 int nngxBindCmdlist(int);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: nngxBindCmdlist. */
 extern int asdModelCommitCommandRange(int *, int *);
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 
 
 void FUN_00186a64(int *param_1)
@@ -26,7 +26,7 @@ void FUN_00186a64(int *param_1)
   int temp_v0;
   
   piVar1 = param_1;
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   piVar2 = piVar1;
   if (((unsigned int)piVar1 & 8) == 0) {
     *piVar1 = 0;
@@ -36,7 +36,7 @@ void FUN_00186a64(int *param_1)
   *piVar2 = 1;
   piVar2[1] = 0xf023d;
   temp_v0 = asdModelCommitCommandRange(piVar1,piVar2 + 2);
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   param_1[1] = temp_v0 - *param_1;
   param_1[3] = 2;
   nngxBindCmdlist(param_1[2]);

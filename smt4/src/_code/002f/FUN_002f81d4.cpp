@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0024fcdc(int, unsigned char [64], int);
 int FUN_0024fd70(unsigned char [64], int *, int);
-int FUN_0024febc(unsigned char [64], int *, int);
+int mathMatrixApplyScale(unsigned char [64], int *, int);
 int FUN_0025009c(unsigned char [76], int);
-int FUN_002569fc(unsigned char [64]);
+int matrix44SetIdentity(unsigned char [64]);
 int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
 int matrixCopyFull(unsigned char [64], unsigned char [64]);
 
@@ -21,9 +21,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0024fcdc. */
 /* Supplied declaration required: FUN_0024fd70. */
-/* Supplied declaration required: FUN_0024febc. */
+/* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: FUN_0025009c. */
-/* Supplied declaration required: FUN_002569fc. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: matrixCopyFull. */
 
@@ -43,10 +43,10 @@ void FUN_002f81d4(int param_1,unsigned int *param_2,int param_3,unsigned int *pa
     temp_v0 = *param_4;
     temp_v1 = param_4[1];
     temp_v2 = param_4[2];
-    FUN_0024febc(temp_v3,&temp_v0,0);
+    mathMatrixApplyScale(temp_v3,&temp_v0,0);
   }
   else {
-    FUN_002569fc(temp_v3);
+    matrix44SetIdentity(temp_v3);
   }
   if (param_3 != 0) {
     FUN_0025009c(temp_v5,param_3);

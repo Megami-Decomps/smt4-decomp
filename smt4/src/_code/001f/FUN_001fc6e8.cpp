@@ -50,9 +50,9 @@ int FUN_0027dbc8(...);
 int FUN_0027de98(void);
 int btlEventSelectTrigger(...);
 int FUN_0027e760(...);
-void FUN_00290ed8(unsigned int frames);
+void bgmRequestSelectedChannelFade(unsigned int frames);
 int btlTalkBustUpCreate(void);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_002bff50(void);
 int battleInitializeEnemyFormation(...);
@@ -162,7 +162,7 @@ extern int FUN_0029022c(void);
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -355,7 +355,7 @@ void FUN_001fc6e8(unsigned int param_1)
     FUN_001d2628(temp_v4);
     btlTalkBustUpCreate();
     FUN_002bff50();
-    FUN_00290ed8(0x1e);
+    bgmRequestSelectedChannelFade(0x1e);
     temp_v3 = *(int *)(temp_v4 + 0xec);
     *(int *)(temp_v4 + 0x49dc) = temp_v3;
     temp_v6 = *(unsigned int *)(temp_v4 + 0x44a0);
@@ -451,7 +451,7 @@ void FUN_001fc6e8(unsigned int param_1)
       } while (temp_v3 < 0x36);
       FUN_0027dbc8(8,1);
       if ((*(unsigned int *)(temp_v4 + 0x44a0) & 8) != 0) {
-        FUN_0029be5c(3,1);
+        gameCounterAddSaturating(3,1);
         return;
       }
     }

@@ -9,9 +9,9 @@ int FUN_00269dc8(void);
 int bgmReleaseStopped(void);
 int FUN_0027581c(void);
 int passiveSkillLookupRecord(void);
-void FUN_00290ed8(unsigned int frames);
+void bgmRequestSelectedChannelFade(unsigned int frames);
 int FUN_00296774(int, int);
-int FUN_0029be5c(int, int);
+int gameCounterAddSaturating(int, int);
 int soundChannelStopAll(int);
 int soundChannelRequestIfEnabled(int, int);
 int gameGetPlayerData(void);
@@ -36,7 +36,7 @@ extern int g_result; /* 0x44dc20 */
 extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: FUN_00296774. */
 extern int FUN_00298f88(unsigned short);
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -94,7 +94,7 @@ void FUN_002cdf2c(int param_1)
   else {
     temp_v4 = FUN_0033361c();
     if (temp_v4 == 0) {
-      FUN_00290ed8(0x1e);
+      bgmRequestSelectedChannelFade(0x1e);
     }
   }
   soundChannelRequestIfEnabled(0x100003c,0);
@@ -131,9 +131,9 @@ void FUN_002cdf2c(int param_1)
     if (temp_v14 >= 6) {
       temp_v14 = FUN_00298f88(*(unsigned short *)(param_1 + 0x38));
       if (temp_v14 == 0) {
-        FUN_0029be5c(0x22,1);
-        FUN_0029be5c(0x23,temp_v4);
-        FUN_0029be5c(0x24,temp_v11);
+        gameCounterAddSaturating(0x22,1);
+        gameCounterAddSaturating(0x23,temp_v4);
+        gameCounterAddSaturating(0x24,temp_v11);
       }
       temp_v11 = *(int *)(param_1 + 0x34);
       temp_v4 = playerPadTestBit(1);

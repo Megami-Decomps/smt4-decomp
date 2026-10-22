@@ -5,7 +5,7 @@ extern "C" {
 extern EffectRenderSettings DAT_00634c90;
 extern EffectRenderGlobals DAT_006471dc;
 void FUN_00390038(EffectEditorSnapshot *);
-void FUN_003008c4(EffectHandlerRequest *, const EffectRenderVector *);
+void resourceRunHandlerCallback(EffectHandlerRequest *, const EffectRenderVector *);
 void FUN_002f8794();
 void FUN_001ad5ec(EffectEditorSnapshot *, const EffectRenderVector *, EffectEditorWords *);
 void FUN_001bc3e4();
@@ -21,7 +21,7 @@ void effectEditorApplyHandlerState(EffectHandlerRequest *request)
     EffectRenderControls *controls = &settings->controls;
     FUN_00390038(&controls->snapshot);
     EffectRenderVector initial = globals->current;
-    FUN_003008c4(request, &initial);
+    resourceRunHandlerCallback(request, &initial);
     if (controls->parameters.flags & 0x60) {
         globals->current = settings->initial;
         globals->vector = effectRenderSource()->origin;

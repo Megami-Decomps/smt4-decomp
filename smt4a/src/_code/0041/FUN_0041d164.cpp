@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0016c4b8(int, unsigned int);
 int FUN_002371b0(void);
-int FUN_00317c3c(int *);
+int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_0032c808(void);
 int FUN_00409e78(...);
 int FUN_0043b6c0(int *, unsigned char [64], int *, int);
@@ -53,7 +53,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_00317c3c. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
 /* Supplied declaration required: FUN_00409e78. */
 /* Supplied declaration required: FUN_0043b6c0. */
@@ -166,7 +166,7 @@ void FUN_0041d164(fn_0041d164_arg0 *param_1)
   FUN_0032c808();
   temp_v3 = 0;
   do {
-    FUN_00317c3c(&temp_v24);
+    gpuSubmitFloatVectorsOrDefault(&temp_v24);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 4);
   FUN_002371b0();
@@ -185,7 +185,7 @@ void FUN_0041d164(fn_0041d164_arg0 *param_1)
   FUN_0032c808();
   temp_v3 = 4;
   do {
-    FUN_00317c3c(&temp_v24);
+    gpuSubmitFloatVectorsOrDefault(&temp_v24);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   FUN_002371b0();

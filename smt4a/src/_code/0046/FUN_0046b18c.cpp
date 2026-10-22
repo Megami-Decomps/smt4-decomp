@@ -15,7 +15,7 @@ int scrScriptProcessDestroy(void);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002a4b74(void);
+int messageGetChoiceResult(void);
 int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
 int FUN_003423cc(int);
@@ -49,7 +49,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int messageMainGetValue(void);
-/* Supplied declaration required: FUN_002a4b74. */
+/* Supplied declaration required: messageGetChoiceResult. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int messageWindowIsState1(void);
@@ -155,9 +155,9 @@ void FUN_0046b18c(unsigned int *param_1)
       }
     }
     else {
-      temp_v3 = FUN_002a4b74();
+      temp_v3 = messageGetChoiceResult();
       if (temp_v3 != -1) {
-        temp_v2 = FUN_002a4b74();
+        temp_v2 = messageGetChoiceResult();
         param_1[0x2b5] = temp_v2;
         FUN_0046a278(param_1,temp_v2);
         temp_v2 = param_1[param_1[0x2b5] + 0x2b0];

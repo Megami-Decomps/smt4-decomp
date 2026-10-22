@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0026c568(...); /* 0x26c568 */
-extern int FUN_00334a54(...); /* 0x334a54 */
+extern int asdMTeXReleaseJobContext(...); /* 0x334a54 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 extern unsigned int FUN_0014afd0(unsigned int, unsigned int);
@@ -24,7 +24,7 @@ extern unsigned int FUN_0014afd0(unsigned int, unsigned int);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int FUN_00191e00(unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int aocLoadTextureNode(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
@@ -60,7 +60,7 @@ void FUN_0037b280(int param_1)
     if (puVar1[5] != -1) {
       temp_v1 = aocRunByName(g_aocSystem,puVar1[4],puVar1[5],1);
       if (temp_v1 != 0) {
-        temp_v0 = FUN_00191e00(g_aocSystem,puVar1[4],puVar1[5],0x10000);
+        temp_v0 = aocLoadTextureNode(g_aocSystem,puVar1[4],puVar1[5],0x10000);
       }
       else {
         temp_v0 = FUN_0014afd0(puVar1[4],puVar1[5]);
@@ -79,7 +79,7 @@ void FUN_0037b280(int param_1)
   puVar1[0x27] = 0;
   puVar1[0x28] = 0;
   puVar1[0x29] = 0;
-  asdProcessCreateSimple("EVE_BustupTex",4,0,0,FUN_0026c568,FUN_00334a54,puVar1);
+  asdProcessCreateSimple("EVE_BustupTex",4,0,0,FUN_0026c568,asdMTeXReleaseJobContext,puVar1);
   return;
 }
 

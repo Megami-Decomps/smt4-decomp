@@ -27,11 +27,11 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern unsigned char *slotRecordFindById(unsigned int);
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002bf4f4. */
 /* Supplied declaration required: FUN_002c8550. */
-extern int FUN_0032cfc8(void);
+extern int buttonHelpGetPanelMode(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00333dc8. */
@@ -71,7 +71,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     break;
   case 0xd:
     sysPlaySe(0x56);
-    temp_v4 = FUN_002a4860();
+    temp_v4 = resourceRunOperationIfUnblocked();
     temp_v1 = FUN_002a4894(temp_v0 + 0x67cc);
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x6832);
     if (*(char *)(temp_v0 + 0x6830) == '\0') {
@@ -102,7 +102,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     temp_v4 = *(int *)(g_unite + 0x400);
     if ((temp_v4 != 0x10 && temp_v4 != 0x11) && temp_v4 != 0x12) {
       sysPlaySe(0x57);
-      temp_v4 = FUN_002a4860();
+      temp_v4 = resourceRunOperationIfUnblocked();
       temp_v1 = FUN_002a4894(temp_v0 + 0x8e14);
       FUN_00359b6c(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x8b70));
       FUN_002c8550(0xf);
@@ -118,7 +118,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
   case 0x16:
   case 0x1d:
   case 0x1f:
-    temp_v4 = FUN_0032cfc8();
+    temp_v4 = buttonHelpGetPanelMode();
     sysPlaySe(0xa0);
     FUN_003343f0(1);
     FUN_00333dc8(1);

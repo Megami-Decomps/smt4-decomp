@@ -212,7 +212,7 @@ code_r0x001dd71c:
     func_0x00105ef8();
     FUN_001036fc();
     FUN_00106650();
-    FUN_002c587c();
+    titleConfigApplyAudio();
     func_0x003336c8();
     iVar6 = 0;
     DAT_0044d048 = 0;

@@ -30,7 +30,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003b6354. */
 /* Supplied declaration required: FUN_003c33e8. */
@@ -97,7 +97,7 @@ void FUN_0037c988(int param_1,unsigned int param_2,int param_3,int param_4,unsig
       FUN_003c33e8(param_1,temp_v5,temp_v10,param_5,*(short *)(temp_v1 + 8) + temp_v6,
                    *(short *)(temp_v1 + 10) + temp_v7);
       if ((param_4 == 1) && (*(int *)(param_1 + 0x3fc) >= 5)) {
-        temp_v2 = FUN_002a4860(temp_v8);
+        temp_v2 = resourceRunOperationIfUnblocked(temp_v8);
         temp_v3 = FUN_002a4894(temp_v8);
         if (*(short *)(param_1 + temp_v5 * 2 + 0x8b60) ==
             *(short *)(param_1 + (temp_v3 + temp_v2) * 2 + 0x8b70)) {

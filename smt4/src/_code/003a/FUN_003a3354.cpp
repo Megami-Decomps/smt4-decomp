@@ -40,7 +40,7 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 /* Supplied declaration required: FUN_00233240. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
-extern int FUN_00290e9c(void);
+extern int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -98,7 +98,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       if (*(char *)((int)param_1 + 0x4de) != '\0') {
         temp_v3 = messageWindowIsState1();
         if (temp_v3 != 0) {
-          temp_v3 = FUN_00290e9c();
+          temp_v3 = messageTargetGetValue();
           temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b] + 4);
           FUN_0029ee6c(temp_v3 + 0x40,0x323232ff);
         }
@@ -141,7 +141,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       *param_1 = *param_1 & 0xfffff0ff;
       temp_v3 = messageWindowIsState1();
       if (temp_v3 != 0) {
-        temp_v3 = FUN_00290e9c();
+        temp_v3 = messageTargetGetValue();
         temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b]);
         FUN_0029ee6c(temp_v3 + 0x40,0x323232ff);
       }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+int asdDeallocateArrayStorage(int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001abbc4(void);
 int FUN_001ad70c(unsigned short *, int);
@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char LAB_0019fb28; /* 0x19fb28 */
 
 extern unsigned int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001abbc4. */
 extern int asdAtbcGetEntryCount(unsigned short *);
@@ -130,7 +130,7 @@ void FUN_0019f888(int param_1)
               }
               temp_v3 = *piVar14;
               temp_v5 = *(int *)(param_1 + 0x10);
-              FUN_001006ec(temp_v3,(*(int *)(param_1 + 0x14) - temp_v3) >> 2,0);
+              asdDeallocateArrayStorage(temp_v3,(*(int *)(param_1 + 0x14) - temp_v3) >> 2,0);
               *(unsigned int **)(param_1 + 0x14) = puVar8 + temp_v4;
               *(unsigned int **)(param_1 + 0x10) = puVar8 + ((temp_v5 - temp_v3) >> 2) + 1;
               *piVar14 = (int)puVar8;

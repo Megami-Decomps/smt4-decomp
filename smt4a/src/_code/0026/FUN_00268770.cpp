@@ -28,7 +28,7 @@ int FUN_0015f490(...);
 int eventQueueAddUnique(...);
 int FUN_001834a4(...);
 int useCounterStart(void);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
 int FUN_002a4964(...);
 int objectApplyIfUnblocked(...);
@@ -49,7 +49,7 @@ int FUN_00228b04(...);
 int FUN_0023092c(void);
 int FUN_00230b9c(unsigned int, unsigned int, int);
 int FUN_00230d30(void);
-int FUN_00284140(...);
+int recordGetModeForId(...);
 int FUN_002c7ce8(...);
 int flaggedEntryGetValueA(...);
 int flaggedEntrySetValueA(...);
@@ -111,9 +111,9 @@ extern int uniteNotBusy(void);
 extern int FUN_0026140c(void);
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_00284140. */
-extern short FUN_002a4844(int);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: recordGetModeForId. */
+extern short resourceRunEmbeddedOperationIfUnblocked(int);
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a4964. */
@@ -149,7 +149,7 @@ extern int FUN_0037b564(void);
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: statusDownInitializeSkillList. */
 extern int fieldStateAllowsAction(void);
-extern unsigned int FUN_003d2150(unsigned int);
+extern unsigned int sysPlayVoice(unsigned int);
 /* Supplied declaration required: FUN_003d4104. */
 /* Supplied declaration required: FUN_003e40d0. */
 /* Supplied declaration required: FUN_00480da8. */
@@ -186,21 +186,21 @@ unsigned int FUN_00268770(void)
   *(unsigned char *)(g_statusDown + 0x24a0) = 0;
   temp_v6 = flaggedEntryGetValueA(temp_v2 + 0x5ec);
   *(unsigned char *)(temp_v2 + 0x59b) = 0;
-  temp_v7 = FUN_00284140((int)*(short *)(temp_v2 + 0x58e));
+  temp_v7 = recordGetModeForId((int)*(short *)(temp_v2 + 0x58e));
   *(unsigned int *)(temp_v2 + 0x530) = temp_v7;
-  temp_v7 = FUN_00284140((int)*(short *)(temp_v2 + 0x590));
+  temp_v7 = recordGetModeForId((int)*(short *)(temp_v2 + 0x590));
   *(unsigned int *)(temp_v2 + 0x534) = temp_v7;
-  temp_v7 = FUN_00284140((int)*(short *)(temp_v2 + 0x58c));
+  temp_v7 = recordGetModeForId((int)*(short *)(temp_v2 + 0x58c));
   *(unsigned int *)(temp_v2 + 0x538) = temp_v7;
-  temp_v7 = FUN_00284140((int)*(short *)(temp_v2 + 0x592));
+  temp_v7 = recordGetModeForId((int)*(short *)(temp_v2 + 0x592));
   *(unsigned int *)(temp_v2 + 0x53c) = temp_v7;
-  temp_v7 = FUN_00284140((int)*(short *)(temp_v2 + 0x594));
+  temp_v7 = recordGetModeForId((int)*(short *)(temp_v2 + 0x594));
   *(unsigned int *)(temp_v2 + 0x540) = temp_v7;
   temp_v14 = 0;
   *(unsigned int *)(temp_v2 + 0x52c) = 0xffffffff;
   do {
     if ((-1 < *(short *)(temp_v2 + temp_v14 * 2 + 0x544)) &&
-       (temp_v8 = FUN_00284140(), temp_v8 == 1 || temp_v8 == 2)) {
+       (temp_v8 = recordGetModeForId(), temp_v8 == 1 || temp_v8 == 2)) {
       *(int *)(temp_v2 + 0x52c) = temp_v14;
       break;
     }
@@ -546,16 +546,16 @@ LAB_00268d68:
           temp_v6 = 0;
           FUN_001517b4(0,1);
           if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
-            temp_v6 = FUN_002a4860(temp_v14);
+            temp_v6 = resourceRunOperationIfUnblocked(temp_v14);
             temp_v8 = FUN_002a4894(temp_v14);
             temp_v10 = objectApplyIfUnblocked(temp_v14);
             if ((temp_v6 + temp_v8) - temp_v10 != -1) {
-              FUN_002a4860();
+              resourceRunOperationIfUnblocked();
               FUN_002a4894(temp_v14);
-              temp_v6 = FUN_002a4860(temp_v14);
+              temp_v6 = resourceRunOperationIfUnblocked(temp_v14);
               temp_v14 = FUN_002a4894(temp_v14);
               *(int *)(temp_v2 + 0x654) = temp_v14 + temp_v6;
-              temp_v7 = FUN_003d2150(0x100020e);
+              temp_v7 = sysPlayVoice(0x100020e);
               *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
               temp_v7 = *(unsigned int *)(temp_v2 + 0x524);
               temp_v14 = FUN_002c7e54();
@@ -585,7 +585,7 @@ LAB_00268d68:
             temp_v7 = *puVar13;
             *puVar13 = 8;
             *(unsigned int *)(temp_v6 + 0x51c) = temp_v7;
-            temp_v7 = FUN_003d2150(0x100020e);
+            temp_v7 = sysPlayVoice(0x100020e);
             *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
             *(unsigned int *)(temp_v2 + 0x668) = 0;
             *(unsigned int *)(temp_v2 + 0x524) = temp_v12;
@@ -594,7 +594,7 @@ LAB_00268d68:
             temp_v6 = 1;
             FUN_001517b4();
             if (temp_v6 != 0) {
-              temp_v7 = FUN_003d2150(0x100020f);
+              temp_v7 = sysPlayVoice(0x100020f);
               *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
               temp_v6 = objectApplyIfUnblocked(temp_v14);
               *(int *)(temp_v2 + 0x654) = temp_v6 - 1;
@@ -983,7 +983,7 @@ joined_r0x002694c0:
     FUN_00163aa4(temp_v2 + 0x140);
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
       temp_v9 = temp_v2 + 0x2354;
-      temp_v6 = FUN_002a4860();
+      temp_v6 = resourceRunOperationIfUnblocked();
       temp_v14 = FUN_002a4894(temp_v9);
       temp_v8 = FUN_002a4878(temp_v9);
       temp_v10 = FUN_001834a4(0x12,0x406);
@@ -1058,10 +1058,10 @@ LAB_00269f7c:
                 }
                 break;
               }
-              temp_v4 = FUN_002a4860(temp_v9);
+              temp_v4 = resourceRunOperationIfUnblocked(temp_v9);
               temp_v5 = FUN_002a4894(temp_v9);
               *(short *)(temp_v2 + 0x234e) = temp_v5 + temp_v4;
-              temp_v4 = FUN_002a4844(temp_v9);
+              temp_v4 = resourceRunEmbeddedOperationIfUnblocked(temp_v9);
               temp_v5 = FUN_002a4878(temp_v9);
               *(short *)(temp_v2 + 0x234c) = temp_v5 + temp_v4;
               *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -1069,20 +1069,20 @@ LAB_00269f7c:
             }
           }
           *(unsigned char *)(temp_v2 + 0x59b) = 1;
-          temp_v4 = FUN_002a4860(temp_v9);
+          temp_v4 = resourceRunOperationIfUnblocked(temp_v9);
           temp_v5 = FUN_002a4894(temp_v9);
           *(short *)(temp_v2 + 0x234e) = temp_v5 + temp_v4;
-          temp_v4 = FUN_002a4844(temp_v9);
+          temp_v4 = resourceRunEmbeddedOperationIfUnblocked(temp_v9);
           temp_v5 = FUN_002a4878(temp_v9);
           *(short *)(temp_v2 + 0x234c) = temp_v5 + temp_v4;
           break;
         }
       }
       *(unsigned char *)(temp_v2 + 0x59b) = 0xff;
-      temp_v4 = FUN_002a4860(temp_v9);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v9);
       temp_v5 = FUN_002a4894(temp_v9);
       *(short *)(temp_v2 + 0x234e) = temp_v5 + temp_v4;
-      temp_v4 = FUN_002a4844(temp_v9);
+      temp_v4 = resourceRunEmbeddedOperationIfUnblocked(temp_v9);
       temp_v5 = FUN_002a4878(temp_v9);
       *(short *)(temp_v2 + 0x234c) = temp_v5 + temp_v4;
     }
@@ -1119,7 +1119,7 @@ LAB_00269f7c:
     break;
   case 0x18:
     if (*(char *)(temp_v2 + 0x52a) == '\0') {
-      temp_v6 = FUN_002a4860(temp_v2 + 0x23c0);
+      temp_v6 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
       if ((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v14 = FUN_00230544(), temp_v14 != 0)) {
         temp_v14 = 4;
         FUN_001517b4(4,0);
@@ -1153,7 +1153,7 @@ LAB_00269f7c:
       FUN_003450d4(temp_v14,temp_v7,0,(int)*(short *)(temp_v2 + 0x58c),(int)*(short *)(temp_v2 + 0x58e),
                    (int)*(short *)(temp_v2 + 0x590),temp_v2 + 0x24a0,0,0);
       if (temp_v14 != 0) {
-        temp_v14 = FUN_002a4860(temp_v2 + 0x23c0);
+        temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
         if (temp_v14 != temp_v6) {
           temp_v7 = 0x100020d;
           eventQueueAddUniqueIfValid(temp_v7);
@@ -1163,21 +1163,21 @@ LAB_00269f7c:
         temp_v14 = temp_v2 + 0x23c0;
         FUN_00228b04(temp_v14,0);
         if ((temp_v14 != 0) && (temp_v14 = objectApplyIfUnblocked(temp_v2 + 0x23c0), temp_v14 >= 11)) {
-          FUN_002a4860(temp_v2 + 0x23c0);
+          resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
           temp_v14 = FUN_002a4894(temp_v2 + 0x23c0);
           if ((temp_v14 != 9) && (temp_v14 = FUN_002a4894(temp_v2 + 0x23c0), temp_v14 != 0)) {
             eventQueueAddUniqueIfValid(0x100020d);
           }
-          temp_v14 = FUN_002a4860(temp_v2 + 0x23c0);
+          temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
           while ((temp_v14 == temp_v6 &&
-                 ((temp_v14 = FUN_002a4860(temp_v2 + 0x23c0), temp_v14 != 0 ||
+                 ((temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0), temp_v14 != 0 ||
                   (temp_v14 = FUN_002a4894(temp_v2 + 0x23c0), temp_v14 != 0))))) {
-            temp_v14 = FUN_002a4860(temp_v2 + 0x23c0);
+            temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
             temp_v8 = objectApplyIfUnblocked(temp_v2 + 0x23c0);
             if ((temp_v14 == temp_v8 - 10) && (temp_v14 = FUN_002a4894(temp_v2 + 0x23c0), temp_v14 == 9))
             break;
             FUN_00228b04(temp_v2 + 0x23c0,0);
-            temp_v14 = FUN_002a4860(temp_v2 + 0x23c0);
+            temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x23c0);
           }
         }
       }
@@ -1502,7 +1502,7 @@ LAB_00269f7c:
      ((temp_v6 == 0x12 || temp_v6 == 4 ||
       ((temp_v6 == 0xc || temp_v6 == 8 || ((temp_v6 == 9 || temp_v6 == 0xf) || temp_v6 == 0x10)))))) {
     temp_v6 = temp_v2 + 0x5ec;
-    temp_v14 = FUN_002a4860();
+    temp_v14 = resourceRunOperationIfUnblocked();
     temp_v8 = FUN_002a4894(temp_v6);
     temp_v14 = temp_v14 + temp_v8;
     if (*(int *)(temp_v2 + 0x518) == 7) {
@@ -1534,7 +1534,7 @@ LAB_0026adc4:
   }
   if (*(int *)(temp_v2 + 0x518) == 0x13) {
     temp_v13 = 0;
-    temp_v6 = FUN_002a4860();
+    temp_v6 = resourceRunOperationIfUnblocked();
     temp_v14 = FUN_002a4894(temp_v2 + 0x67c);
     temp_v14 = temp_v14 + temp_v6;
     if (temp_v14 == 0) {
@@ -1566,7 +1566,7 @@ LAB_0026adc4:
       FUN_0019de98(temp_v17,0xf4f4f4ff);
     }
     else {
-      temp_v6 = FUN_002a4860();
+      temp_v6 = resourceRunOperationIfUnblocked();
       temp_v14 = FUN_002a4894(temp_v2 + 0xee4);
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v14 + temp_v6) * 4 + 0x6e2);
       if (temp_v11 != 0) {
@@ -1578,7 +1578,7 @@ LAB_0026adc4:
   }
   if (*(int *)(temp_v2 + 0x518) == 0x16) {
     temp_v6 = FUN_002a4878();
-    temp_v14 = FUN_002a4860(temp_v2 + 0x2354);
+    temp_v14 = resourceRunOperationIfUnblocked(temp_v2 + 0x2354);
     temp_v8 = FUN_002a4894(temp_v2 + 0x2354);
     temp_v6 = temp_v2 + (temp_v6 + (temp_v8 + temp_v14) * 4) * 4;
     temp_v4 = *(short *)(temp_v6 + 0xf4a);

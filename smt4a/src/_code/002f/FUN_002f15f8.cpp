@@ -9,7 +9,7 @@ int uiSpriteSetKeyframe(int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a4964(int, int);
 int uiFadeRequestClear(void);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern unsigned char FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: uiFadeRequestClear. */
 extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 void FUN_002f15f8(unsigned int param_1,int param_2)
@@ -82,7 +82,7 @@ void FUN_002f15f8(unsigned int param_1,int param_2)
   *(unsigned int *)(temp_v0 + 8) = temp_v3;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   sysPlaySe(0x1a);
-  FUN_003d2150(0x10000cb);
+  sysPlayVoice(0x10000cb);
   return;
 }
 

@@ -27,7 +27,7 @@ void btlDebugOpen(BtlMainState *state, s32 menuMode)
     BattleDebugOwnerView *owner = (BattleDebugOwnerView *)state;
     owner->flags |= 1;
     owner->job = taskCreateDraw((const s8 *)"btlDebug Calc", 2, 0, 0,
-                               FUN_001d3da0, FUN_0021ec34, (u32)state, state->job);
+                               btlDebugDispatchCurrentJob, FUN_0021ec34, (u32)state, state->job);
     taskCreateDraw((const s8 *)"btlDebug DrawUp", 0x73, 0, 0,
                    FUN_001fc5c0, NULL, (u32)state, owner->job);
     taskCreateDraw((const s8 *)"btlDebug DrawDown", 0xe6, 0, 0,

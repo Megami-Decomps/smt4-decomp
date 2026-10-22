@@ -13,7 +13,7 @@ int FUN_00400d80(void);
 int FUN_00401198(int);
 void FUN_0040128c(FrameColorUpdateWork *);
 int objectOwner3Release(int);
-int FUN_004013f0(int);
+int resourceOwnerSetChildEulerAngles(int);
 int FUN_004d896c(int, unsigned int, unsigned int);
 int FUN_004d8bf8(int);
 
@@ -27,7 +27,7 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 /* Supplied declaration required: FUN_00401198. */
 /* Supplied declaration required: FUN_0040128c. */
 /* Supplied declaration required: objectOwner3Release. */
-/* Supplied declaration required: FUN_004013f0. */
+/* Supplied declaration required: resourceOwnerSetChildEulerAngles. */
 extern int FUN_00401440(int);
 extern unsigned short FUN_00406798(unsigned int, char *);
 /* Supplied declaration required: FUN_004d896c. */
@@ -60,7 +60,7 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
     temp_v1 = FUN_00401440(param_1);
     if (temp_v1 == 0) break;
     btlStageUpdateNodePositions((BattleStageModelA*)param_1,((BattleStageModelA*)param_1)->position);
-    FUN_004013f0(param_1);
+    resourceOwnerSetChildEulerAngles(param_1);
     temp_v0 = FUN_00406798(*(unsigned int *)(g_handleRegistry + 4),"Light_EFT");
     *(unsigned short *)(param_1 + 0xac) = temp_v0;
     FUN_004d8bf8(param_1);
@@ -78,7 +78,7 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
     break;
   case 4:
     btlStageUpdateNodePositions((BattleStageModelA*)param_1,((BattleStageModelA*)param_1)->position);
-    FUN_004013f0(param_1);
+    resourceOwnerSetChildEulerAngles(param_1);
     FUN_00401198(param_1);
     FUN_0040128c((FrameColorUpdateWork *)param_1);
   }

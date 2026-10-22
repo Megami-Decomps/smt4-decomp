@@ -50,7 +50,7 @@ extern int FUN_00256940(int, int, unsigned int);
 extern int btlSceneIsReady(int);
 extern int FUN_00293230(int);
 /* Supplied declaration required: memClear. */
-extern int FUN_003af0fc(int);
+extern int btlUiIsSceneTransitionReady(int);
 /* Supplied declaration required: FUN_003c0484. */
 /* Supplied declaration required: FUN_003cf884. */
 /* Supplied declaration required: memClearTwo200. */
@@ -124,7 +124,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
     *param_2 = temp_v5;
   }
   temp_v7 = FUN_00293230(*param_1);
-  if ((temp_v7 != 0) && (temp_v7 = FUN_003af0fc(g_btlUiBlock), temp_v7 == 0)) {
+  if ((temp_v7 != 0) && (temp_v7 = btlUiIsSceneTransitionReady(g_btlUiBlock), temp_v7 == 0)) {
     return 0;
   }
   temp_v7 = *param_1;

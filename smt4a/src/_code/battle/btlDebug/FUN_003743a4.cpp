@@ -79,9 +79,9 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned char *gameGetSlotRecord(void);
 extern int FUN_001ba3d4(int);
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern unsigned char *btlMainGetUnk14(void);
-extern int FUN_002a4860(unsigned int);
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int FUN_002a4894(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002f8e98(unsigned int);
@@ -181,7 +181,7 @@ void FUN_003743a4(int param_1)
   temp_v16[1] = 0xbb;
   temp_v16[0] = temp_v2;
   FUN_001835b4(2,0xd,0x11d,temp_v4);
-  temp_v3 = FUN_00284140((int)*(short *)(param_1 + 0x4830));
+  temp_v3 = recordGetModeForId((int)*(short *)(param_1 + 0x4830));
   temp_v16[1] = 0xc3;
   if (!(temp_v3 == 1 || temp_v3 == 2)) {
     temp_v16[0] = temp_v2;
@@ -337,7 +337,7 @@ void FUN_003743a4(int param_1)
     } while (temp_v18 < *temp_v21);
   }
   temp_v8 = 0;
-  temp_v3 = FUN_002a4860(*(unsigned int *)(param_1 + 0x3c40));
+  temp_v3 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
   temp_v6 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
   temp_v5 = temp_v3 + temp_v6;
   temp_v3 = FUN_002cc9e0(param_1,1);

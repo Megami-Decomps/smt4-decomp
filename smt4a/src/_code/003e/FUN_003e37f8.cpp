@@ -31,7 +31,7 @@ extern int FUN_0023b3d0(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a7288. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
@@ -133,7 +133,7 @@ void FUN_003e37f8(int param_1)
     if (temp_v0 != 2) {
       return;
     }
-    temp_v0 = FUN_002a4b74();
+    temp_v0 = messageGetChoiceResult();
     if ((temp_v0 != -1) && (temp_v0 != 1)) {
       *(unsigned int *)(param_1 + 8) = 3;
       return;

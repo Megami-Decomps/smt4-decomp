@@ -43,7 +43,7 @@ extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: msgWindowReset. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: messageBannerRestartOrClear. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -102,7 +102,7 @@ void FUN_0047b224(unsigned int *param_1)
   else {
     temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v1 == 2) {
-      temp_v1 = FUN_002a4b74();
+      temp_v1 = messageGetChoiceResult();
       if (temp_v1 == 0) {
         param_1[2] = 2;
         FUN_0016ccb4(g_aocMain + 0x80);

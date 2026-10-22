@@ -9,7 +9,7 @@ int gfxObjectDestroy(int);
 int statusCameraDestroy(void);
 int FUN_00294834(int, int, int, int, int, int);
 int FUN_002958f8(int, int);
-int FUN_0029be5c(int, int);
+int gameCounterAddSaturating(int, int);
 int FUN_0029c2cc(int, int);
 int fileSlotFree(...);
 int scrScriptProcessDestroy(int);
@@ -47,7 +47,7 @@ extern int *g_unite; /* 0x43dd68 */
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_0029c2cc. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: fileSlotFree. */
@@ -105,7 +105,7 @@ void FUN_00223dcc(void)
     asdMemFree(piVar1[0x257c]);
     piVar1[0x257c] = 0;
     temp_v0 = FUN_002907a8();
-    FUN_0029be5c(0x25,temp_v0 - piVar1[0x107]);
+    gameCounterAddSaturating(0x25,temp_v0 - piVar1[0x107]);
     temp_v0 = lmapSceneGetScript();
     if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
       temp_v1[3] = 0x96;

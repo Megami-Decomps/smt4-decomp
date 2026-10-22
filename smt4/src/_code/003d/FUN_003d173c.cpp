@@ -26,11 +26,11 @@ int objectScriptDestroy(...);
 int FUN_00338fb0(...);
 int FUN_0033911c(int);
 int FUN_00339254(...);
-int FUN_00339754(int);
+int armySummonResetRootTransform(int);
 int FUN_00339dc0(...);
-int FUN_0033a264(int);
+int modelClearPendingAnimation(int);
 int groupStartItems(...);
-int FUN_003d5ef4(unsigned int);
+int mathVectorClear(unsigned int);
 int modelSlotDetachChild(unsigned int);
 int objectDestroyGfx(...);
 int FUN_003dc02c(...);
@@ -74,12 +74,12 @@ extern int FUN_00293ed0(int);
 /* Supplied declaration required: FUN_00338fb0. */
 /* Supplied declaration required: FUN_0033911c. */
 /* Supplied declaration required: FUN_00339254. */
-/* Supplied declaration required: FUN_00339754. */
+/* Supplied declaration required: armySummonResetRootTransform. */
 /* Supplied declaration required: objResourceRelease. */
 /* Supplied declaration required: FUN_00339dc0. */
-/* Supplied declaration required: FUN_0033a264. */
+/* Supplied declaration required: modelClearPendingAnimation. */
 /* Supplied declaration required: groupStartItems. */
-/* Supplied declaration required: FUN_003d5ef4. */
+/* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: modelSlotDetachChild. */
 /* Supplied declaration required: objectDestroyGfx. */
 /* Supplied declaration required: FUN_003dc02c. */
@@ -103,7 +103,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
   
   temp_v5 = 0;
   FUN_00338358(*param_1);
-  FUN_00339754(*param_1);
+  armySummonResetRootTransform(*param_1);
   temp_v0 = FUN_00293ed0(*param_1);
   temp_v4 = 0;
   if (temp_v0 != 0) {
@@ -165,9 +165,9 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         }
         else {
           FUN_0033911c(*param_1);
-          FUN_0033a264(*param_1);
+          modelClearPendingAnimation(*param_1);
           modelSlotDetachChild(g_btlMain);
-          FUN_003d5ef4(g_btlMain);
+          mathVectorClear(g_btlMain);
           btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
           slotResetIdle(*param_1,0,10);
           FUN_002505c0(0,param_2,0x100010a,0,0,0,1);

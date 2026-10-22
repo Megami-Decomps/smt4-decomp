@@ -40,7 +40,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int FUN_002a4894(int);
 
 
@@ -202,7 +202,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
     temp_v11 = (int)*(short *)(temp_v11 + 0x28);
     temp_v12 = (int)*(short *)(param_1 + *piVar14 * 0x150 + 0x4458);
   }
-  temp_v6 = FUN_00284140((int)*(short *)(param_1 + temp_v4 * 2 + 0x43b6));
+  temp_v6 = recordGetModeForId((int)*(short *)(param_1 + temp_v4 * 2 + 0x43b6));
   if ((temp_v6 == 1 || temp_v6 == 2) || (temp_v6 == 6)) {
     temp_v6 = 1;
   }
@@ -211,14 +211,14 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   }
   temp_v9 = param_1 + temp_v4 * 4;
   temp_v10 = temp_v9 + 0x4300;
-  temp_v9 = FUN_00284140((int)*(short *)(temp_v9 + 0x43da));
+  temp_v9 = recordGetModeForId((int)*(short *)(temp_v9 + 0x43da));
   if ((temp_v9 == 1 || temp_v9 == 2) || (temp_v9 == 6)) {
     temp_v2 = 1;
   }
   else {
     temp_v2 = 0;
   }
-  temp_v9 = FUN_00284140((int)*(short *)(temp_v10 + 0xd8));
+  temp_v9 = recordGetModeForId((int)*(short *)(temp_v10 + 0xd8));
   if ((temp_v9 == 1 || temp_v9 == 2) || (temp_v9 == 6)) {
     temp_v3 = 1;
   }

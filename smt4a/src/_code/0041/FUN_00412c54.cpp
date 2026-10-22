@@ -28,7 +28,7 @@ typedef struct {
     unsigned char sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int FUN_001bc2ec(int);
+extern unsigned int asdGxGetPhysicalAddress(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: FUN_0042c7c8. */
@@ -78,7 +78,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x30));
     temp_v9 = 0;
-    temp_v1 = FUN_001bc2ec(temp_v0);
+    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
     FUN_0042c7c8(param_2,&temp_v7,temp_v1,0xb);
   }
   if ((*(unsigned int *)(param_1 + 4) & 2) != 0) {
@@ -86,7 +86,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x34));
     temp_v4 = 1;
-    temp_v1 = FUN_001bc2ec(temp_v0);
+    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
     FUN_0042c7c8(param_2,&temp_v2,temp_v1,0xf);
   }
   if ((*(unsigned int *)(param_1 + 4) & 0x20) != 0) {
@@ -94,7 +94,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x38));
     temp_v4 = 1;
-    temp_v1 = FUN_001bc2ec(temp_v0);
+    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
     FUN_0042c7c8(param_2,&temp_v2,temp_v1,0xd);
   }
   if ((*(unsigned int *)(param_1 + 4) & 4) != 0) {
@@ -102,7 +102,7 @@ void FUN_00412c54(int param_1,unsigned int param_2)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x3c));
     temp_v14 = 2;
-    temp_v1 = FUN_001bc2ec(temp_v0);
+    temp_v1 = asdGxGetPhysicalAddress(temp_v0);
     FUN_0042c7c8(param_2,&temp_v12,temp_v1,7);
   }
   return;

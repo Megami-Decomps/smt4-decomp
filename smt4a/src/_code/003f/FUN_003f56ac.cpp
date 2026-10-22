@@ -10,7 +10,7 @@ int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(...);
 int FUN_002a48e0(int);
-int FUN_003f5268(...);
+int dialogEnterState(...);
 int FUN_003f6f68(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,11 +23,11 @@ typedef struct {
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a48e0. */
 extern int objectApplyIfUnblocked(int);
 extern int flaggedEntryGetValueA(int);
-/* Supplied declaration required: FUN_003f5268. */
+/* Supplied declaration required: dialogEnterState. */
 /* Supplied declaration required: FUN_003f6f68. */
 
 
@@ -43,7 +43,7 @@ void FUN_003f56ac(int param_1)
   temp_v0 = 9;
   FUN_001517b4(9,0);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002a4860(param_1 + 0xbc);
+    temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
     if (temp_v0 == 0) goto LAB_003f57a4;
     eventQueueAddUniqueIfValid(0x100020d);
     *(int *)(param_1 + 0x50) = *(int *)(param_1 + 0x50) - 1;
@@ -52,7 +52,7 @@ void FUN_003f56ac(int param_1)
   temp_v0 = 10;
   FUN_001517b4(10,0);
   if ((temp_v0 != 0) && (temp_v0 = objectApplyIfUnblocked(param_1 + 0xbc), temp_v0 >= 7)) {
-    temp_v0 = FUN_002a4860(param_1 + 0xbc);
+    temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0xbc);
     temp_v1 = objectApplyIfUnblocked(param_1 + 0xbc);
     if ((temp_v0 != temp_v1 - 7) &&
        ((temp_v0 = flaggedEntryGetValueA(param_1 + 0xbc), temp_v0 != 0 ||
@@ -71,7 +71,7 @@ LAB_003f57a4:
       uiSpriteSetKeyframe(param_1 + 0x284,3,0);
       uiSpriteSetImageKeyframe(param_1 + 0x284,1,0);
       *(unsigned char *)(param_1 + 0x5e4) = 1;
-      FUN_003f5268(param_1,6,7);
+      dialogEnterState(param_1,6,7);
     }
     temp_v0 = 7;
     FUN_001517b4(7,1);
@@ -80,7 +80,7 @@ LAB_003f57a4:
       uiSpriteSetKeyframe(param_1 + 0x284,2,0);
       uiSpriteSetImageKeyframe(param_1 + 0x284,1,0);
       *(unsigned char *)(param_1 + 0x5e5) = 1;
-      FUN_003f5268(param_1,6,7);
+      dialogEnterState(param_1,6,7);
     }
   }
   temp_v0 = 1;
@@ -92,10 +92,10 @@ LAB_003f57a4:
     uiSpriteSetKeyframe(param_1 + 0x540,1,0);
     uiSpriteSetImageKeyframe(param_1 + 0x540,0);
     if (*(int *)(param_1 + 0x3c) != 0) {
-      FUN_003f5268(param_1,5,8);
+      dialogEnterState(param_1,5,8);
       return;
     }
-    FUN_003f5268(param_1,5,3);
+    dialogEnterState(param_1,5,3);
     return;
   }
   return;

@@ -6,7 +6,7 @@ extern "C" {
 
 int aocTexExpandCompressedData(int, unsigned int, int);
 int asdTextureEntryApply(int);
-int FUN_002a6e2c(int, int);
+int asdTextureSelectHeap(int, int);
 int asdTextureCreate(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned char LAB_00394114; /* 0x394114 */
 
 /* Supplied declaration required: aocTexExpandCompressedData. */
 /* Supplied declaration required: asdTextureEntryApply. */
-/* Supplied declaration required: FUN_002a6e2c. */
+/* Supplied declaration required: asdTextureSelectHeap. */
 /* Supplied declaration required: asdTextureCreate. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
 
@@ -73,10 +73,10 @@ void FUN_00393fa4(unsigned int *param_1,int *param_2)
   *(int *)(temp_v3 + 0xc) = temp_v4;
   if ((temp_v1 & 0x60) != 0) {
     if ((temp_v1 & 0x20) != 0) {
-      FUN_002a6e2c(temp_v3,0x20000);
+      asdTextureSelectHeap(temp_v3,0x20000);
     }
     else {
-      FUN_002a6e2c(temp_v3,0x30000);
+      asdTextureSelectHeap(temp_v3,0x30000);
     }
   }
   asdTextureEntryApply(temp_v3);

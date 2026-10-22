@@ -17,7 +17,7 @@ typedef struct EffHolder {
     /* 0x30 */ u32 userData;
 } EffHolder;
 
-extern EffObject *FUN_002b4078(u32 owner);
+extern EffObject *effEmitterAllocate(u32 owner);
 extern int FUN_0035105c(EffObject *effect, u32 owner, u32 kind);
 extern int effTlpReplace(EffObject *effect, u32 *params);
 extern int objResourceReplace(EffObject *effect, u32 *params);
@@ -31,7 +31,7 @@ extern int effParticleParamRebuildHandles3c(EffObject *effect, u32 *params);
 void effHolderSetParams(EffHolder *holder, u32 kind, u32 *params)
 {
     if (holder->effect == NULL) {
-        holder->effect = FUN_002b4078(holder->owner);
+        holder->effect = effEmitterAllocate(holder->owner);
         holder->effect->userData = holder->userData;
     }
     switch (kind) {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001640cc(float *);
 int FUN_0016c4b8(unsigned int, unsigned int);
 int FUN_002371b0(void);
-int FUN_00317c3c(float *);
+int gpuSubmitFloatVectorsOrDefault(float *);
 int FUN_0032c808(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -67,7 +67,7 @@ extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_00317c3c. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_0032c808. */
 
 
@@ -258,7 +258,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
   temp_v4 = 0;
   do {
     VectorSignedToFloat(0x100 - param_1,(unsigned char)(temp_v6 >> 0x16) & 3);
-    FUN_00317c3c(&temp_v21);
+    gpuSubmitFloatVectorsOrDefault(&temp_v21);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 4);
   FUN_002371b0();

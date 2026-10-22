@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002569fc(unsigned char [4]);
+int matrix44SetIdentity(unsigned char [4]);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 
@@ -36,7 +36,7 @@ extern unsigned int DAT_004ea990; /* 0x4ea990 */
 extern unsigned int DAT_004ea994; /* 0x4ea994 */
 extern unsigned int DAT_004ea998; /* 0x4ea998 */
 
-/* Supplied declaration required: FUN_002569fc. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 
@@ -66,7 +66,7 @@ void FUN_003f6cd8(void)
   temp_v0 = temp_v1;
   phaseCosInterpolate();
   FUN_002b70cc();
-  FUN_002569fc(temp_v2);
+  matrix44SetIdentity(temp_v2);
   DAT_004ea95c = temp_v1;
   DAT_004ea960 = uStack_4c;
   DAT_004ea964 = -temp_v0;

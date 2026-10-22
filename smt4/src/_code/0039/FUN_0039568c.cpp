@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001e296c(unsigned int, int);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_0039560c(int);
 
 extern signed char DAT_0049f934; /* 0x49f934 */
@@ -15,7 +15,7 @@ extern int DAT_0049fb78; /* 0x49fb78 */
 extern signed char DAT_0049fc64; /* 0x49fc64 */
 
 /* Supplied declaration required: FUN_001e296c. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_0039560c. */
 
@@ -45,7 +45,7 @@ void FUN_0039568c(int param_1)
       if ((temp_v1 + ((temp_v2 >> 3) - (temp_v2 >> 0x1f)) * -0xf == 0) &&
          (temp_v1 = randNextInRange(100), temp_v1 < 0x1e)) {
         temp_v3 = *(float *)(temp_v0 + 0x28);
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         if (temp_v3 < DAT_0049fb70) {
           *(unsigned int *)(param_1 + 0x20) = DAT_0049fb74;
           temp_v2 = *(int *)(temp_v0 + 0x58);

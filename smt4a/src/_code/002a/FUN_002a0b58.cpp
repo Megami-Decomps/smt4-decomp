@@ -1,4 +1,4 @@
-/* NON_MATCHING: unimplemented 0x800-byte menu/input state machine; reference draft retained and no byte-identical SMT IV twin found. */
+/* NON_MATCHING: animates menu opacity, waits for resources, and dispatches input to three child menus; the reference loses child-job returns and typed menu-work fields. */
 /* romwright 0.5.0 decompilation of FUN_002a0b58 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_002a0b58(void)
@@ -57,7 +57,7 @@ unsigned int FUN_002a0b58(void)
         *(unsigned short *)(iVar6 + 0x18) = uVar1;
         *(short *)(iVar6 + 0x1a) = *(short *)(iVar6 + 0x1a) + 1;
         iVar2 = DAT_00589164;
-        iVar3 = FUN_002a4860(DAT_00589164 + 0xf0);
+        iVar3 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
         iVar2 = FUN_002a4894(iVar2 + 0xf0);
         FUN_00187180(0x3a,1);
         iVar4 = FUN_00192798();
@@ -71,7 +71,7 @@ unsigned int FUN_002a0b58(void)
     }
     break;
   case 1:
-    iVar2 = FUN_002a4860(iVar6 + 0xf0);
+    iVar2 = resourceRunOperationIfUnblocked(iVar6 + 0xf0);
     iVar3 = FUN_002a4894(iVar6 + 0xf0);
     uVar9 = iVar2 + iVar3;
     FUN_00187180(0x3a,1);
@@ -79,7 +79,7 @@ unsigned int FUN_002a0b58(void)
     iVar2 = iVar6 + uVar9 * 4;
     iVar3 = *(int *)(iVar2 + 0x28);
     if (-1 < *(short *)(iVar6 + 0x1c)) {
-      iVar4 = FUN_00284140();
+      iVar4 = recordGetModeForId();
       if (iVar4 != 6) {
         iVar4 = 9;
         FUN_001517b4(9,1);
@@ -102,7 +102,7 @@ unsigned int FUN_002a0b58(void)
       }
       else {
         DAT_00588fc0 = 0x32;
-        uVar8 = FUN_0032b62c();
+        uVar8 = categoryGetThresholdIndex();
         *(unsigned int *)(iVar6 + 0x28) = uVar8;
       }
       FUN_00169ddc(0x100020e);
@@ -110,7 +110,7 @@ unsigned int FUN_002a0b58(void)
 code_r0x002a0df0:
     bVar10 = 0;
     bVar11 = 0;
-    iVar4 = FUN_00284140((int)*(short *)(iVar6 + 0x1e));
+    iVar4 = recordGetModeForId((int)*(short *)(iVar6 + 0x1e));
     if (iVar4 != 1) {
       if (iVar4 == 2) {
         bVar10 = 1;
@@ -122,7 +122,7 @@ code_r0x002a0df0:
         bVar10 = 1;
       }
     }
-    iVar4 = FUN_00284140((int)*(short *)(iVar6 + 0x20));
+    iVar4 = recordGetModeForId((int)*(short *)(iVar6 + 0x20));
     if (iVar4 != 1) {
       if (iVar4 == 2) {
         bVar11 = 1;
@@ -151,7 +151,7 @@ code_r0x002a0df0:
         iVar4 = 3;
         FUN_001517b4(3,0);
         if (iVar4 != 0) goto code_r0x002a0ee4;
-        iVar4 = FUN_00284140((int)*(short *)(iVar6 + 0x22));
+        iVar4 = recordGetModeForId((int)*(short *)(iVar6 + 0x22));
         if ((iVar4 == 1) || (iVar4 == 2)) {
           iVar4 = FUN_001834a4(0x24,0x33);
           iVar7 = FUN_002618c8();
@@ -208,7 +208,7 @@ code_r0x002a0ee4:
       FUN_00228b04(iVar3,1);
       iVar2 = DAT_00589164;
       if (iVar3 != 0) {
-        iVar6 = FUN_002a4860(DAT_00589164 + 0xf0);
+        iVar6 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
         iVar2 = FUN_002a4894(iVar2 + 0xf0);
         FUN_00187180(0x3a,1);
         iVar3 = FUN_00192798();
@@ -220,11 +220,11 @@ code_r0x002a0ee4:
         iVar4 = 0;
         do {
           if ((iVar4 != iVar3) &&
-             (iVar7 = FUN_00284140((int)*(short *)(iVar2 + iVar4 * 2 + 0x14)), iVar7 == 6)) {
+             (iVar7 = recordGetModeForId((int)*(short *)(iVar2 + iVar4 * 2 + 0x14)), iVar7 == 6)) {
             FUN_00169ddc(0x100020d);
             FUN_002a4964(iVar2 + 0xf0,iVar4);
             iVar6 = DAT_00589164;
-            iVar2 = FUN_002a4860(DAT_00589164 + 0xf0);
+            iVar2 = resourceRunOperationIfUnblocked(DAT_00589164 + 0xf0);
             iVar6 = FUN_002a4894(iVar6 + 0xf0);
             FUN_00187180(0x3a,1);
             iVar3 = FUN_00192798();
@@ -265,7 +265,7 @@ code_r0x002a0ee4:
   case 2:
     iVar2 = FUN_00224880(*(unsigned int *)(iVar6 + 0x15c));
     if (iVar2 == 2) {
-      iVar2 = FUN_002a4b74();
+      iVar2 = messageGetChoiceResult();
       if (iVar2 != 0) {
         if (iVar2 == 1) {
           *(unsigned int *)(iVar6 + 8) = 1;

@@ -26,7 +26,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: gameOptionsClassifyMode. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -50,7 +50,7 @@ void FUN_0021a4b0(void)
   
   temp_v2 = g_uiQuest;
   *(unsigned char *)(g_uiQuest + 0x93f) = 1;
-  temp_v0 = FUN_002a4860();
+  temp_v0 = resourceRunOperationIfUnblocked();
   temp_v1 = FUN_002a4894(temp_v2 + 0x9ac);
   temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v1 + temp_v0) * 2 + 0xad6);
   FUN_00417e08(temp_v4);

@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, unsigned int);
 int distSpatial(void);
-int FUN_003797e4(void);
+int mapObjGetCombinedEntry(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -28,7 +28,7 @@ extern int g_mapObj; /* 0x581284 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_003797e4. */
+/* Supplied declaration required: mapObjGetCombinedEntry. */
 extern int dataTableGetRecordFortyFive(void);
 
 
@@ -60,7 +60,7 @@ void FUN_00325ba4(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
     temp_v7 = (unsigned long long)(unsigned int)((float)temp_v8 + 50.0f) << 0x20;
     do {
       psVar3 = psVar4;
-      FUN_003797e4();
+      mapObjGetCombinedEntry();
       if (((-1 < *psVar3) && (*psVar3 == *(short *)(g_mapObj + 4))) &&
          ((int)psVar3[1] == (int)*(short *)(g_mapObj + 6))) {
         temp_v1 = (int)psVar3[2];

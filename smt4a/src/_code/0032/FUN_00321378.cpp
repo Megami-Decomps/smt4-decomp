@@ -1,62 +1,58 @@
-/* NON_MATCHING: fragment of a larger function (only cmp r0,#0; bxeq lr; nonnull path falls into following unit). */
-/* romwright 0.5.0 decompilation of FUN_00321378 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: ARMCC predicates opening-loop setup and merges the immediate/deferred pair-setting paths; retail outlines the deferred branch after the closing loop. */
+#include "ui/UiSpriteState.h"
 
-void FUN_00321378(int param_1,short param_2,short param_3)
+struct RowTransitionSprites {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ UiSpriteState primary[10];
+    /* 0x0598 */ UiSpriteState secondary[10];
+    /* 0x0B10 */ UiSpriteState tertiary[10];
+    /* 0x1088 */ UiSpriteState quaternary[10];
+    /* 0x1600 */ u8 unk1600[0xB7C];
+    /* 0x217C */ UiSpriteState heading;
+    /* 0x2208 */ UiSpriteState markers[4];
+    /* 0x2438 */ u8 unk2438[8];
+    /* 0x2440 */ u32 immediate;
+    /* 0x2444 */ u8 unk2444[4];
+    /* 0x2448 */ s16 rowCount;
+    /* 0x244A */ s16 closingCount;
+};
 
-{
-  int iVar1;
-  unsigned int uVar2;
-  int iVar3;
-  int iVar4;
-  
-  if (param_1 != 0) {
-    iVar3 = 0;
-    param_2 = *(short *)(param_1 + 0x2448) + param_2;
-    *(short *)(param_1 + 0x2448) = param_2;
-    *(short *)(param_1 + 0x244a) = *(short *)(param_1 + 0x244a) + param_3;
-    if (0 < param_2) {
-      do {
-        iVar4 = param_1 + iVar3 * 0x8c;
-        FUN_001846d0(iVar4 + 0xb10,6);
-        FUN_001846d0(iVar4 + 0x1088,4);
-        FUN_001846d0(iVar4 + 0x598,0);
-        FUN_001846d0(iVar4 + 0x20,2);
-        if (iVar3 < 4) {
-          if (iVar3 == 0) {
-            FUN_001846d0(param_1 + 0x217c,0xc);
-          }
-          FUN_001846d0(iVar4 + 0x2208,0xc);
-        }
-        if (*(int *)(param_1 + 0x2440) != 0) {
-          FUN_00184b80(iVar4 + 0x20,1);
-        }
-        else {
-          iVar1 = FUN_00291e14();
-          if (iVar1 == 0) {
-            uVar2 = 0;
-          }
-          else {
-            uVar2 = 0xfb0;
-          }
-          FUN_00184b80(iVar4 + 0x20,uVar2);
-        }
-        iVar3 = iVar3 + 1;
-      } while (iVar3 < *(short *)(param_1 + 0x2448));
-    }
-    if (0 < *(short *)(param_1 + 0x244a)) {
-      iVar3 = 0;
-      do {
-        iVar4 = param_1 + ((*(short *)(param_1 + 0x2448) - iVar3) - 1) * 0x8c;
-        FUN_00184b80(iVar4 + 0x598,6);
-        FUN_001846d0(iVar4 + 0x598,1);
-        FUN_001846d0(iVar4 + 0xb10,6);
-        FUN_001846d0(iVar4 + 0x1088,4);
-        iVar3 = iVar3 + 1;
-      } while (iVar3 < *(short *)(param_1 + 0x244a));
-    }
-    return;
-  }
-  return;
+extern "C" {
+void uiSpriteSelectAnim(UiSpriteState* sprite, u32 animation);
+void pairSetFirstResetSecond(UiSpriteState* sprite, u32 value);
+s32 FUN_00291e14(void);
 }
-*/
-#include "common.h"
+
+// Select opening and closing animations for the active rows and their markers.
+extern "C" void FUN_00321378(RowTransitionSprites* sprites, s16 addedRows, s16 closingRows)
+{
+    if (sprites == NULL) {
+        return;
+    }
+    sprites->rowCount += addedRows;
+    sprites->closingCount += closingRows;
+    for (s32 index = 0; index < sprites->rowCount; ++index) {
+        uiSpriteSelectAnim(&sprites->tertiary[index], 6);
+        uiSpriteSelectAnim(&sprites->quaternary[index], 4);
+        uiSpriteSelectAnim(&sprites->secondary[index], 0);
+        uiSpriteSelectAnim(&sprites->primary[index], 2);
+        if (index < 4) {
+            if (index == 0) {
+                uiSpriteSelectAnim(&sprites->heading, 12);
+            }
+            uiSpriteSelectAnim(&sprites->markers[index], 12);
+        }
+        if (sprites->immediate) {
+            pairSetFirstResetSecond(&sprites->primary[index], 1);
+        } else {
+            pairSetFirstResetSecond(&sprites->primary[index], FUN_00291e14() ? 0xFB0 : 0);
+        }
+    }
+    for (s32 index = 0; index < sprites->closingCount; ++index) {
+        s32 row = sprites->rowCount - index - 1;
+        pairSetFirstResetSecond(&sprites->secondary[row], 6);
+        uiSpriteSelectAnim(&sprites->secondary[row], 1);
+        uiSpriteSelectAnim(&sprites->tertiary[row], 6);
+        uiSpriteSelectAnim(&sprites->quaternary[row], 4);
+    }
+}

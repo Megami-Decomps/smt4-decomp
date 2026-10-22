@@ -14,7 +14,7 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0022af9c. */
 /* Supplied declaration required: FUN_0022b064. */
-extern int FUN_002734ec(int);
+extern int questSysUpdateLoad(int);
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
@@ -28,7 +28,7 @@ void FUN_003ba38c(int param_1)
   int temp_v0;
   
   if (*(int *)(param_1 + 0x2c) != 0) {
-    if ((*(int *)(param_1 + 0x2c) == 1) && (temp_v0 = FUN_002734ec(g_aocMain + 0xa8), temp_v0 != 0))
+    if ((*(int *)(param_1 + 0x2c) == 1) && (temp_v0 = questSysUpdateLoad(g_aocMain + 0xa8), temp_v0 != 0))
     {
       FUN_002895a8(g_aocMain + 0xa8);
       temp_v0 = gameJumpRequestIsPending();

@@ -30,7 +30,7 @@ extern int FUN_001774d8(unsigned int);
 /* Supplied declaration required: FUN_001ba3d4. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -114,7 +114,7 @@ void FUN_003e618c(int param_1)
     }
     if (((temp_v0 == 1) && (temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18)), temp_v0 == 2)) &&
        (temp_v0 = panelIsMissingOrFlagClear(), temp_v0 != 0)) {
-      temp_v0 = FUN_002a4b74();
+      temp_v0 = messageGetChoiceResult();
       if (temp_v0 == 0) {
         *(unsigned int *)(param_1 + 8) = 2;
       }

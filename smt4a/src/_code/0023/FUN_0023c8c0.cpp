@@ -30,7 +30,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ac470. */
 extern int objectApplyIfUnblocked(int);
@@ -223,17 +223,17 @@ LAB_0023ce68:
   FUN_001835b4(2,0x14,0x510,temp_v11,param_3,0x6a);
   temp_v3 = 0;
   do {
-    temp_v1 = FUN_002a4860(temp_v9);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v4 = objectApplyIfUnblocked(temp_v9);
     if (temp_v4 <= temp_v1 + temp_v3) break;
-    temp_v1 = FUN_002a4860(temp_v9);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v9);
     FUN_002ac470(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3,
                  0xffffffff);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 9);
   FUN_0023d150(temp_v9,temp_v11,param_3,0);
   if (temp_v12 != 0) {
-    temp_v3 = FUN_002a4860(temp_v9);
+    temp_v3 = resourceRunOperationIfUnblocked(temp_v9);
     temp_v1 = FUN_002a4894(temp_v9);
     temp_v0 = *(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2);
     temp_v6 = FUN_002a4894(temp_v9);

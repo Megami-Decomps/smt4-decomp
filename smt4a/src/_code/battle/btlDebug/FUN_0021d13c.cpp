@@ -21,7 +21,7 @@ int FUN_00371c3c(...);
 int messageDismissNumericBanner(...);
 int FUN_0038e4cc(...);
 int statusDownGetValue(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003ec6d8(...);
 int FUN_003eeb4c(...);
 int FUN_003f1114(...);
@@ -59,7 +59,7 @@ int useCounterStart(void);
 int FUN_002686b8(void);
 int FUN_00270104(...);
 int btlMainGetUnk14(void);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
 int FUN_002a4914(...);
 int FUN_0031f208(...);
@@ -175,11 +175,11 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002686b8. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_00270104. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_0028c620. */
 /* Supplied declaration required: btlMainGetUnk14. */
 extern int FUN_00291e14(void);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a4914. */
@@ -194,7 +194,7 @@ extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
-extern int FUN_0032cfc8(void);
+extern int buttonHelpGetPanelMode(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchSecondary(int);
@@ -210,7 +210,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: statusDownGetValue. */
 extern int stateHolderIsMissingOrState0(void);
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df57c. */
 extern int FUN_003e0024(void);
 extern int playerHasFlagBit(unsigned int);
@@ -734,7 +734,7 @@ joined_r0x0021db60:
     FUN_00270104(param_1);
     *(unsigned int *)(param_1 + 0x4ba4) = 0;
 LAB_0021df58:
-    temp_v4 = FUN_0032cfc8();
+    temp_v4 = buttonHelpGetPanelMode();
     if (temp_v4 == 0) {
       FUN_00270104(param_1);
     }
@@ -749,7 +749,7 @@ LAB_0021df58:
       temp_v4 = gameFlagIsSet(0x525);
       FUN_002cc9e0(param_1,1);
       if (temp_v4 != 0) {
-        temp_v7 = FUN_00284140((int)*(short *)(param_1 + 0x4824));
+        temp_v7 = recordGetModeForId((int)*(short *)(param_1 + 0x4824));
         if (temp_v7 == 6) {
           temp_v30[0] = '\x01';
         }
@@ -764,7 +764,7 @@ LAB_0021e058:
           temp_v16 = 0;
           temp_v29 = 0;
           temp_v32 = (short *)0x0;
-          temp_v4 = FUN_002a4860(*(unsigned int *)(param_1 + 0x3c40));
+          temp_v4 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
           temp_v7 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
           temp_v4 = temp_v4 + temp_v7;
           temp_v7 = FUN_002cc9e0(param_1,1);
@@ -1082,7 +1082,7 @@ LAB_0021e950:
                 FUN_00228b04(temp_v4,1);
                 if (temp_v4 != 0) goto LAB_0021e950;
               }
-              temp_v4 = FUN_002a4860(*(unsigned int *)(param_1 + 0x3c40));
+              temp_v4 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
               temp_v7 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
               piVar19 = (int *)(param_1 + 0x3dac);
               *(unsigned int *)(param_1 + *piVar16 * 4 + 0x3c98) = 0;
@@ -1214,7 +1214,7 @@ LAB_0021e950:
     FUN_0020ad6c(param_1,10,1);
     FUN_00270104(param_1);
 LAB_0021ed20:
-    temp_v4 = FUN_0032cfc8();
+    temp_v4 = buttonHelpGetPanelMode();
     if (temp_v4 == 0) {
       FUN_00270104(param_1);
     }
@@ -1272,7 +1272,7 @@ LAB_0021ed20:
         eventQueueAddUniqueIfValid(temp_v8);
         break;
       }
-      temp_v4 = FUN_002a4860(*piVar19);
+      temp_v4 = resourceRunOperationIfUnblocked(*piVar19);
       temp_v7 = FUN_002a4894(*piVar19);
       temp_v6 = (unsigned int)*(unsigned short *)(param_1 + (temp_v7 + temp_v4) * 2 + 0x3ca8);
       temp_v5 = temp_v6;
@@ -1597,7 +1597,7 @@ LAB_0021f708:
     temp_v10 = (unsigned int)temp_v23;
     if (0 < temp_v4) {
       do {
-        temp_v4 = FUN_00284140((int)*(short *)(param_1 + temp_v7 * 2 + 0x4846));
+        temp_v4 = recordGetModeForId((int)*(short *)(param_1 + temp_v7 * 2 + 0x4846));
         temp_v10 = (unsigned int)temp_v23;
         if (temp_v4 == 6) {
           temp_v30[0] = '\x01';
@@ -1903,7 +1903,7 @@ LAB_0021fbdc:
     temp_v10 = (unsigned int)temp_v23;
     if (0 < temp_v4) {
       do {
-        temp_v4 = FUN_00284140((int)*(short *)(param_1 + temp_v7 * 2 + 0x4846));
+        temp_v4 = recordGetModeForId((int)*(short *)(param_1 + temp_v7 * 2 + 0x4846));
         temp_v10 = (unsigned int)temp_v23;
         if (temp_v4 == 6) {
           temp_v30[0] = '\x01';
@@ -1958,7 +1958,7 @@ joined_r0x0022027c:
     eventQueueAddUniqueIfValid(temp_v8);
     break;
   case 0x24:
-    temp_v4 = FUN_00284140((int)*(short *)(param_1 + *piVar16 * 2 + 0x4846));
+    temp_v4 = recordGetModeForId((int)*(short *)(param_1 + *piVar16 * 2 + 0x4846));
     if (temp_v4 == 6) {
       temp_v30[0] = '\x01';
     }
@@ -2221,13 +2221,13 @@ LAB_00220a34:
                 *(unsigned char *)(temp_v7 + 0x41e8) = 1;
                 temp_v9 = uiEntryGetState(*temp_v37,temp_v4);
                 if (temp_v9 != 0) {
-                  FUN_003d2150(0x100022a);
+                  sysPlayVoice(0x100022a);
                 }
               }
             }
             else {
               *(unsigned char *)(temp_v7 + 0x41e8) = 1;
-              FUN_003d2150(0x100022a);
+              sysPlayVoice(0x100022a);
             }
           }
           else {
@@ -2236,7 +2236,7 @@ LAB_00220a34:
               *(unsigned char *)(temp_v7 + 0x41e8) = 1;
               temp_v9 = uiEntryGetState(*temp_v37,temp_v4);
               if (temp_v9 != 0) {
-                FUN_003d2150(0x100022a);
+                sysPlayVoice(0x100022a);
               }
             }
           }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00219908(void);
-int FUN_002629a8(int, int);
+int resourceQueueDeferredDestroy(int, int);
 int registrationEntryInsert(int, int);
 int asdTextureRelease(void);
 int FUN_002c15fc(int);
@@ -41,7 +41,7 @@ extern unsigned int DAT_0044eae8; /* 0x44eae8 */
 extern unsigned int DAT_0044f864; /* 0x44f864 */
 
 /* Supplied declaration required: FUN_00219908. */
-/* Supplied declaration required: FUN_002629a8. */
+/* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: asdTextureRelease. */
@@ -108,7 +108,7 @@ unsigned int FUN_001dcc64(void)
     DAT_0044ea90 = 0;
   }
   if (DAT_0044eaa0 != 0) {
-    FUN_002629a8(DAT_0044eaa0,3);
+    resourceQueueDeferredDestroy(DAT_0044eaa0,3);
     DAT_0044eaa0 = 0;
   }
   DAT_0044eacc = 0;

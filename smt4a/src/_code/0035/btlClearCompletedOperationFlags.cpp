@@ -2,12 +2,12 @@
 
 extern "C" {
 extern u64 DAT_00570de8;
-s32 FUN_001632f8();
+s32 infoWinIsActive();
 
 // Clear the configured battle flags once the pending operation has finished.
 bool btlClearCompletedOperationFlags()
 {
-    if (FUN_001632f8() != 0) {
+    if (infoWinIsActive() != 0) {
         return false;
     }
     BattleMaskState* state = btlGetMainState();

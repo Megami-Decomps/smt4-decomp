@@ -11,9 +11,9 @@ int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_00228b04(int, int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, unsigned char [16], int, int);
-int FUN_003f5268(...);
+int dialogEnterState(...);
 int FUN_003f6abc(int);
-int FUN_003ff1d4(unsigned int, int);
+int gameFlagsSetAlternateMode(unsigned int, int);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -31,13 +31,13 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_00228b04. */
-extern unsigned int FUN_002a4860(int);
+extern unsigned int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003450d4. */
-/* Supplied declaration required: FUN_003f5268. */
+/* Supplied declaration required: dialogEnterState. */
 /* Supplied declaration required: FUN_003f6abc. */
 extern int flagsBGetBit1(unsigned int);
-/* Supplied declaration required: FUN_003ff1d4. */
+/* Supplied declaration required: gameFlagsSetAlternateMode. */
 
 
 void FUN_003f5ed8(int param_1)
@@ -68,7 +68,7 @@ void FUN_003f5ed8(int param_1)
     *(float *)(param_1 + 0x5d0) = *(float *)(param_1 + 0x5d0) + 0.053333335f;
   }
   FUN_00228b04(param_1 + 0x58,1);
-  temp_v3 = FUN_002a4860(param_1 + 0x58);
+  temp_v3 = resourceRunOperationIfUnblocked(param_1 + 0x58);
   *(unsigned int *)(param_1 + 0x48) = temp_v3;
   temp_v0 = FUN_002a4894(param_1 + 0x58);
   *(int *)(param_1 + 0x44) = temp_v0;
@@ -105,9 +105,9 @@ void FUN_003f5ed8(int param_1)
       uiSpriteSetImageKeyframe(param_1 + 0x540,1,0);
       temp_v0 = flagsBGetBit1(*(unsigned int *)(param_1 + 0x54));
       if (temp_v0 != 0) {
-        FUN_003ff1d4(*(unsigned int *)(param_1 + 0x54),0);
+        gameFlagsSetAlternateMode(*(unsigned int *)(param_1 + 0x54),0);
       }
-      FUN_003f5268(param_1,5,0);
+      dialogEnterState(param_1,5,0);
     }
     else {
       temp_v0 = 1;
@@ -116,7 +116,7 @@ void FUN_003f5ed8(int param_1)
         eventQueueAddUniqueIfValid(0x100020f);
         uiSpriteSetKeyframe(param_1 + 0x16c,2,0);
         uiSpriteSetImageKeyframe(param_1 + 0x16c,1,0);
-        FUN_003f5268(param_1,2,0);
+        dialogEnterState(param_1,2,0);
         return;
       }
     }

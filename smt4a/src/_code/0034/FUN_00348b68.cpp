@@ -20,7 +20,7 @@ extern unsigned int scrGetArg(unsigned int);
 extern int scrGetArgString(unsigned int);
 /* Supplied declaration required: FUN_002bf09c. */
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_003d2150(void);
+extern unsigned int sysPlayVoice(void);
 
 
 void FUN_00348b68(void)
@@ -44,7 +44,7 @@ void FUN_00348b68(void)
   temp_v2 = scrGetArgString(0);
   FUN_002bf09c();
   if (-1 < temp_v2) {
-    temp_v0 = FUN_003d2150();
+    temp_v0 = sysPlayVoice();
     soundVolumeSettingSet(temp_v1);
     scrSetResult(temp_v0);
   }

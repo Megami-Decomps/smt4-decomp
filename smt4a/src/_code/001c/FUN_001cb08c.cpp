@@ -46,7 +46,7 @@ struct fn_001cb08c_arg1 {
     int field_0x38; /* +0x38 */
 };
 
-extern unsigned int FUN_001bc2ec(int);
+extern unsigned int asdGxGetPhysicalAddress(int);
 
 
 void FUN_001cb08c(fn_001cb08c_arg0 *param_1,fn_001cb08c_arg1 *param_2)
@@ -105,7 +105,7 @@ void FUN_001cb08c(fn_001cb08c_arg0 *param_1,fn_001cb08c_arg1 *param_2)
   if (temp_v5 && temp_v1 != 1) {
     param_1->field_0x28 = param_1->field_0x28 | (((param_2->field_0x28 - 1U) & 0xf) << 0x10);
   }
-  temp_v1 = FUN_001bc2ec(temp_v4);
+  temp_v1 = asdGxGetPhysicalAddress(temp_v4);
   param_1->field_0x2c = param_1->field_0x2c | ((temp_v1 & 0x7fffffff) >> 3);
   return;
 }

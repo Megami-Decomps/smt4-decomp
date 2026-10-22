@@ -1,4 +1,4 @@
-/* NON_MATCHING: fragment of a larger function (fragment; cmp r0, #0; bxeq lr returns only for null and otherwise falls through beyond the supplied unit.). */
+/* NON_MATCHING: complete 0x200c-byte debug-menu renderer invokes callbacks and draws typed menu rows, values, selection highlights, and text; menu-entry and rendering-stack types remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_00241b24 for reference (not compiled; its own view of the boundaries):
 
 void FUN_00241b24(int *param_1,int param_2)

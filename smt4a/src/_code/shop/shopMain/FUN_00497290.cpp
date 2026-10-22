@@ -34,7 +34,7 @@ extern unsigned int DAT_00588f74; /* 0x588f74 */
 
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0037e0b8. */
@@ -98,9 +98,9 @@ void FUN_00497290(int param_1)
   FUN_004954e8(param_1);
   messageChoiceShowCurrent(param_1);
   temp_v0 = inputIsQuestRepeatRight();
-  if ((temp_v0 == 0) && (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v0 != 6)) {
+  if ((temp_v0 == 0) && (temp_v0 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v0 != 6)) {
     temp_v0 = FUN_004d0494();
-    if (((temp_v0 != 0) || (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v0 == 6)) &&
+    if (((temp_v0 != 0) || (temp_v0 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v0 == 6)) &&
        (*(int *)(param_1 + 0xb40) != 7)) {
       if (*(int *)(param_1 + 0xb40) == 3) {
         FUN_0038b57c(0);

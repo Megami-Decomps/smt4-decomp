@@ -61,8 +61,8 @@ extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
 extern int FUN_002684d0(unsigned int, int);
 /* Supplied declaration required: FUN_0026ec00. */
-extern int FUN_00284140(int);
-extern int FUN_002a4860(int);
+extern int recordGetModeForId(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: statDrawClampedDelta. */
@@ -109,12 +109,12 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   FUN_001835b4(2,0x14,0x439,param_1,param_2,0x6a);
   temp_v7 = 0;
   do {
-    temp_v1 = FUN_002a4860(temp_v13);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v2 = objectApplyIfUnblocked(temp_v13);
     if (temp_v2 <= temp_v1 + temp_v7) break;
-    temp_v1 = FUN_002a4860(temp_v13);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v9 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b70);
-    temp_v1 = FUN_002a4860(temp_v13);
+    temp_v1 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v8 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b74);
     if (-1 < (int)temp_v8) {
       temp_v12 = gameGetSlotRecord(temp_v8);
@@ -133,11 +133,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v17 = FUN_0014bd84(temp_v9);
     if (temp_v17 != 0) {
       temp_v15 = 0xffffffff;
-      temp_v3 = FUN_002a4860(temp_v13);
+      temp_v3 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v3 = FUN_002684d0(temp_v9,(int)(short)*(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 8 + 0x1b74))
       ;
       if ((temp_v3 != 0) && (temp_v3 = FUN_0022a030(temp_v8,temp_v9), temp_v3 != 0)) {
-        temp_v3 = FUN_002a4860(temp_v13);
+        temp_v3 = resourceRunOperationIfUnblocked(temp_v13);
         temp_v3 = *(int *)(temp_v6 + (temp_v3 + temp_v7) * 8 + 0x1b74);
         temp_v10 = 1;
         if (temp_v3 < 0) {
@@ -213,10 +213,10 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   } while (temp_v7 < 0xb);
   FUN_0023d150(temp_v13,param_1,param_2,1);
   if ((temp_v18 != 0) && (temp_v7 = objectApplyIfUnblocked(temp_v6 + 0x1ec), temp_v7 >= 1)) {
-    temp_v7 = FUN_002a4860(temp_v13);
+    temp_v7 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v1 = FUN_002a4894(temp_v13);
     temp_v9 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b70);
-    temp_v7 = FUN_002a4860(temp_v13);
+    temp_v7 = resourceRunOperationIfUnblocked(temp_v13);
     temp_v1 = FUN_002a4894(temp_v13);
     temp_v8 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b74);
     if (-1 < (int)temp_v8) {
@@ -224,7 +224,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     }
     temp_v16 = temp_v8 >> 0x1f;
     temp_v7 = FUN_002a4894(temp_v13);
-    temp_v7 = FUN_00284140((int)*(short *)(temp_v6 + temp_v7 * 2 + 0x1b3e));
+    temp_v7 = recordGetModeForId((int)*(short *)(temp_v6 + temp_v7 * 2 + 0x1b3e));
     temp_v5 = 0x9fe7ffff;
     if ((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6) {
       temp_v5 = 0xf5ff9fff;
@@ -236,12 +236,12 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v1 = FUN_001834a4(0x14,0x449);
     temp_v17 = FUN_0014bd84(temp_v9);
     if (temp_v17 != 0) {
-      temp_v2 = FUN_002a4860(temp_v13);
+      temp_v2 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v3 = FUN_002a4894(temp_v13);
       temp_v2 = FUN_002684d0(temp_v9,(int)(short)*(unsigned int *)(temp_v6 + (temp_v3 + temp_v2) * 8 + 0x1b74))
       ;
       if ((temp_v2 != 0) && (temp_v2 = FUN_0022a030(temp_v8,temp_v9), temp_v2 != 0)) {
-        temp_v2 = FUN_002a4860(temp_v13);
+        temp_v2 = resourceRunOperationIfUnblocked(temp_v13);
         temp_v3 = FUN_002a4894(temp_v13);
         temp_v0 = 1;
         if (*(int *)(temp_v6 + (temp_v3 + temp_v2) * 8 + 0x1b74) < 0) {

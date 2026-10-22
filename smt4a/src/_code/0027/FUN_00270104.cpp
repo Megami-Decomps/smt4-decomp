@@ -30,7 +30,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int slotRecordFindById(unsigned short);
 extern int gameGetSlotRecord(void);
 extern int btlMainGetUnk14(void);
-extern int FUN_002a4860(unsigned int);
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int FUN_002a4894(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002f8e14(unsigned int);
@@ -58,7 +58,7 @@ void FUN_00270104(int param_1)
   unsigned char temp_v6;
   unsigned int temp_v7 [8];
   
-  temp_v1 = FUN_002a4860(*(unsigned int *)(param_1 + 0x3c40));
+  temp_v1 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
   temp_v2 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
   temp_v4 = temp_v1 + temp_v2;
   temp_v1 = FUN_002cc9e0(param_1,0);

@@ -20,7 +20,7 @@ int mapIfReleaseSlot0AndReset(void);
 int sub68OwnerCall7(void);
 int sub68OwnerCall9(void);
 int FUN_003868dc(int);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int FUN_003d4ed8(int);
 int FUN_00483834(int);
 int partyTryInflictCondition(int, int, int);
@@ -73,7 +73,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: sub68OwnerCall7. */
 /* Supplied declaration required: sub68OwnerCall9. */
 /* Supplied declaration required: FUN_003868dc. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_00483834. */
@@ -348,16 +348,16 @@ void FUN_003401a4(int param_1)
       return;
     case 1:
       if (*(int *)(param_1 + 0xd4) == 2) {
-        FUN_003d2150(0x1000219);
+        sysPlayVoice(0x1000219);
       }
       if (*(int *)(param_1 + 0xd4) == 0x2d) {
-        FUN_003d2150(0x10000c9);
+        sysPlayVoice(0x10000c9);
       }
       if (*(int *)(param_1 + 0xd4) == 0x9c) {
-        FUN_003d2150(0x10000c8);
+        sysPlayVoice(0x10000c8);
       }
       if (*(int *)(param_1 + 0xd4) == 0xf0) {
-        FUN_003d2150(0x10002aa);
+        sysPlayVoice(0x10002aa);
       }
       *(int *)(param_1 + 0xd4) = *(int *)(param_1 + 0xd4) + 1;
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x9f4));

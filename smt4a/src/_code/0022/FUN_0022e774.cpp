@@ -7,12 +7,12 @@ extern "C" {
 int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_001aeafc(void);
+int resourceOwnerReleaseAndReset(void);
 int gameStateChange(...);
 int statusCameraDestroy(void);
 int FUN_003857b4(int);
 int linkHolderRunAll(unsigned int, int *);
-int FUN_003e5c00(void);
+int resourceOwnerReleaseAll(void);
 
 typedef int romwright_code(...);
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -30,13 +30,13 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: gameStateChange. */
 /* Supplied declaration required: statusCameraDestroy. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: linkHolderRunAll. */
-/* Supplied declaration required: FUN_003e5c00. */
+/* Supplied declaration required: resourceOwnerReleaseAll. */
 
 
 void FUN_0022e774(void)
@@ -70,14 +70,14 @@ void FUN_0022e774(void)
       }
     }
     else if (*(int *)(temp_v0 + 0x2034) != 0) {
-      FUN_003e5c00();
+      resourceOwnerReleaseAll();
       temp_v1 = lmapMainIsRunning();
       if (temp_v1 != 0) {
         *(unsigned char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
       }
       else {
         *(unsigned char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
-        FUN_001aeafc();
+        resourceOwnerReleaseAndReset();
       }
       if (DAT_00588fd2 != '\0') {
         if (*(int **)(temp_v0 + 0x2034) != (int *)0x0) {

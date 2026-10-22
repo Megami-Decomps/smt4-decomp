@@ -7,7 +7,7 @@ extern "C" {
 int vectorCopyHeader(unsigned int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(...);
-int FUN_0030202c(int, int, unsigned char *);
+int onlineJobApplyStateTriple(int, int, unsigned char *);
 
 /* stack frame of param_1: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002ea6fc(unsigned int);
-/* Supplied declaration required: FUN_0030202c. */
+/* Supplied declaration required: onlineJobApplyStateTriple. */
 
 
 void FUN_00116344(int param_1)
@@ -60,7 +60,7 @@ void FUN_00116344(int param_1)
     temp_v2 = *(unsigned char *)(param_1 + 0x120);
     puVar4 = temp_v4;
   }
-  FUN_0030202c(param_1,temp_v2,puVar4);
+  onlineJobApplyStateTriple(param_1,temp_v2,puVar4);
   return;
 }
 

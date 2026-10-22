@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int gameDataBlocksAddFlags(...);
-int FUN_002a2d14(...);
+int asdProcessClearSelectedFlags(...);
 int FUN_002c76d8(...);
 int FUN_00333574(...);
 
@@ -39,7 +39,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
-/* Supplied declaration required: FUN_002a2d14. */
+/* Supplied declaration required: asdProcessClearSelectedFlags. */
 /* Supplied declaration required: FUN_002c76d8. */
 /* Supplied declaration required: FUN_00333574. */
 
@@ -75,7 +75,7 @@ unsigned int FUN_003c113c(void)
   puVar4 = &LAB_003c12b0;
   asdProcessCreateSimple(&LAB_003c12b0,4,0,0,FUN_0037116c,work8BufDestroy,puVar2);
   *puVar2 = (unsigned int)puVar4;
-  FUN_002a2d14();
+  asdProcessClearSelectedFlags();
   taskCreateDraw(&LAB_003c12bc,0x86,0,0,FUN_003a7938,0,0,*puVar2);
   taskCreateDraw(&LAB_003c12c8,0xe2,0,0,FUN_003a7938,0,0,*puVar2);
   puVar2[1] = 0xc;

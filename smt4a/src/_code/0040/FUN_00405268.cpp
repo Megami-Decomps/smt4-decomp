@@ -1,124 +1,134 @@
-/* NON_MATCHING: found outside every function: called by FUN_0037d4b0; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_00405268 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: ARMCC folds sprite-field addresses and merges transition tails differently; retail also retains extra branches in its animation-variant selection. */
+#include "ui/UiSpriteState.h"
 
-/* WARNING: Removing unreachable block (ram,0x004054a0) * /
-/* WARNING: Removing unreachable block (ram,0x00405494) * /
-/* WARNING: Removing unreachable block (ram,0x004054a8) * /
+struct ContentTextureDescriptor {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u16 table;
+    /* 0x08 */ u16 node;
+};
 
-unsigned int FUN_00405268(int param_1)
+struct ContentListState {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 state;
+    /* 0x005 */ u8 nextState;
+    /* 0x006 */ u8 unk006[0x1E];
+    /* 0x024 */ u8 ownsTextureTable;
+    /* 0x025 */ u8 unk025[0xCF];
+    /* 0x0F4 */ s32 scroll;
+    /* 0x0F8 */ s32 selection;
+    /* 0x0FC */ u8 unk0FC[8];
+    /* 0x104 */ u8 ownsTextureNode;
+    /* 0x105 */ u8 unk105[3];
+    /* 0x108 */ s32 animationPhase;
+    /* 0x10C */ u8 unk10C[0x40];
+    /* 0x14C */ UiSpriteState firstSprite;
+    /* 0x1D8 */ UiSpriteState secondSprite;
+    /* 0x264 */ UiSpriteState thirdSprite;
+    /* 0x2F0 */ u8 unk2F0[0x118];
+    /* 0x408 */ u16 itemIds[0x12E];
+    /* 0x664 */ ContentTextureDescriptor* texture;
+    /* 0x668 */ u8 firstFlag;
+    /* 0x669 */ u8 secondFlag;
+};
 
-{
-  short sVar1;
-  unsigned short uVar2;
-  int iVar3;
-  unsigned int uVar4;
-  unsigned char bVar5;
-  
-  switch(*(unsigned char *)(param_1 + 4)) {
-  case 1:
-    FUN_004036fc(param_1);
-    break;
-  case 2:
-    iVar3 = FUN_00163aa4(param_1 + 0x14c);
-    if (iVar3 == 0) {
-      return 0;
-    }
-    FUN_004029f4(param_1,*(unsigned char *)(param_1 + 5),0);
-    break;
-  case 3:
-    FUN_00403e2c(param_1);
-    break;
-  case 4:
-    sVar1 = *(short *)(*(int *)(param_1 + 0x664) + 6);
-    uVar2 = *(unsigned short *)(*(int *)(param_1 + 0x664) + 8);
-    if (sVar1 != 0) {
-      iVar3 = FUN_00341940(sVar1);
-      if (iVar3 == 0) {
-        return 0;
-      }
-      iVar3 = FUN_0018206c(sVar1,uVar2);
-      if (iVar3 == 0) {
-        return 0;
-      }
-    }
-    FUN_004029f4(param_1,*(unsigned char *)(param_1 + 5),0);
-    break;
-  case 5:
-    iVar3 = FUN_00163aa4(param_1 + 0x1d8);
-    if (iVar3 == 0) {
-      return 0;
-    }
-    if (*(short *)(param_1 + 0x234) != 1) {
-      sVar1 = *(short *)(*(int *)(param_1 + 0x664) + 6);
-      uVar2 = *(unsigned short *)(*(int *)(param_1 + 0x664) + 8);
-      if ((sVar1 != 0) &&
-         (((iVar3 = FUN_00341940(sVar1), iVar3 == 0 ||
-           (iVar3 = FUN_0018206c(sVar1,uVar2), iVar3 == 0)) && (*(char *)(param_1 + 0x104) != '\0'))
-         )) {
-        FUN_004029f4(param_1,4,*(unsigned char *)(param_1 + 5));
-        return 0;
-      }
-    }
-    else if (*(char *)(param_1 + 0x104) != '\0') {
-      FUN_0019a7f4(*(unsigned short *)(*(int *)(param_1 + 0x664) + 6),
-                   *(unsigned short *)(*(int *)(param_1 + 0x664) + 8));
-      if (*(char *)(param_1 + 0x24) != '\0') {
-        FUN_002e132c(0x32);
-        *(unsigned char *)(param_1 + 0x24) = 0;
-      }
-      *(unsigned char *)(param_1 + 0x104) = 0;
-    }
-    FUN_004029f4(param_1,*(unsigned char *)(param_1 + 5),0);
-    break;
-  case 6:
-    iVar3 = FUN_00163aa4(param_1 + 0x264);
-    if (iVar3 != 0) {
-      if (*(short *)(param_1 + 0x2c0) != 1) {
-        FUN_004029f4(param_1,7,0);
-        *(unsigned char *)(param_1 + 0x668) = 0;
-        *(unsigned char *)(param_1 + 0x669) = 0;
-      }
-      else {
-        bVar5 = *(short *)(param_1 + 0x2b4) != 7;
-        uVar2 = 0;
-        if (!bVar5) {
-          uVar2 = 4;
-        }
-        else if (bVar5) {
-          uVar2 = 5;
-        }
-        FUN_00184758(param_1 + 0x264,uVar2,0);
-        FUN_00184c00(param_1 + 0x264,0,0);
-        iVar3 = *(int *)(param_1 + 0x108) + 1;
-        *(int *)(param_1 + 0x108) = iVar3;
-        if (1 < iVar3) {
-          *(unsigned int *)(param_1 + 0x108) = 0;
-        }
-      }
-    }
-    break;
-  case 7:
-    FUN_00402f58(param_1);
-    break;
-  case 8:
-    iVar3 = FUN_0023b258();
-    if (iVar3 != 0) {
-      FUN_0035d8a4();
-      FUN_004029f4(param_1,3,0);
-    }
-    else {
-      iVar3 = FUN_002c7c54();
-      if (iVar3 != 0x69) {
-        FUN_004057dc(param_1);
-        uVar4 = (unsigned int)*(unsigned short *)
-                       (param_1 + (*(int *)(param_1 + 0xf8) + *(int *)(param_1 + 0xf4)) * 2 + 0x408)
-        ;
-        FUN_0039b984();
-        *(unsigned int *)(param_1 + 0x664) = uVar4;
-      }
-    }
-  }
-  return 0;
+extern "C" {
+void contentListWaitAndInitialize(ContentListState* list);
+s32 FUN_00163aa4(UiSpriteState* sprite, f32 speed);
+void FUN_004029f4(ContentListState* list, u32 state, u32 entry);
+void FUN_00403e2c(ContentListState* list);
+void* textureGetIndexedResource(u32 table);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+void asdTMTexTableFreeEntry(u32 table);
+void uiSpriteSetKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
+void uiSpriteSetImageKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
+void FUN_00402f58(ContentListState* list);
+s32 useCounterIsFinished(void);
+void useCounterRelease(void);
+s32 FUN_002c7c54(void);
+void sortOwnerRun(ContentListState* list);
+ContentTextureDescriptor* FUN_0039b984(u32 id);
 }
-*/
-#include "common.h"
+
+// Drive content-list initialization, texture ownership, and sprite transitions.
+extern "C" u32 FUN_00405268(ContentListState* list)
+{
+    switch (list->state) {
+    case 1:
+        contentListWaitAndInitialize(list);
+        break;
+    case 2:
+        if (FUN_00163aa4(&list->firstSprite, 1.0f)) {
+            FUN_004029f4(list, list->nextState, 0);
+        }
+        break;
+    case 3:
+        FUN_00403e2c(list);
+        break;
+    case 4: {
+        u16 table = list->texture->table;
+        u16 node = list->texture->node;
+        if (table != 0) {
+            if (!textureGetIndexedResource(table) ||
+                !asdTMTexTableNodeIsLoaded(table, node)) {
+                break;
+            }
+        }
+        FUN_004029f4(list, list->nextState, 0);
+        break;
+    }
+    case 5:
+        if (!FUN_00163aa4(&list->secondSprite, 1.0f)) {
+            break;
+        }
+        if (list->secondSprite.mode != 1) {
+            u16 table = list->texture->table;
+            u16 node = list->texture->node;
+            if (table != 0 &&
+                (!textureGetIndexedResource(table) ||
+                 !asdTMTexTableNodeIsLoaded(table, node)) &&
+                list->ownsTextureNode) {
+                FUN_004029f4(list, 4, list->nextState);
+                break;
+            }
+        } else if (list->ownsTextureNode) {
+            asdTMTexTableReleaseNode(list->texture->table, list->texture->node);
+            if (list->ownsTextureTable) {
+                asdTMTexTableFreeEntry(0x32);
+                list->ownsTextureTable = 0;
+            }
+            list->ownsTextureNode = 0;
+        }
+        FUN_004029f4(list, list->nextState, 0);
+        break;
+    case 6:
+        if (FUN_00163aa4(&list->thirdSprite, 1.0f)) {
+            if (list->thirdSprite.mode != 1) {
+                FUN_004029f4(list, 7, 0);
+                list->firstFlag = 0;
+                list->secondFlag = 0;
+            } else {
+                s16 frame = list->thirdSprite.animation == 7 ? 4 : 5;
+                uiSpriteSetKeyframe(&list->thirdSprite, frame, 0);
+                uiSpriteSetImageKeyframe(&list->thirdSprite, 0, 0);
+                if (++list->animationPhase > 1) {
+                    list->animationPhase = 0;
+                }
+            }
+        }
+        break;
+    case 7:
+        FUN_00402f58(list);
+        break;
+    case 8:
+        if (useCounterIsFinished()) {
+            useCounterRelease();
+            FUN_004029f4(list, 3, 0);
+        } else if (FUN_002c7c54() != 0x69) {
+            sortOwnerRun(list);
+            list->texture = FUN_0039b984(list->itemIds[list->selection + list->scroll]);
+        }
+        break;
+    }
+    return 0;
+}

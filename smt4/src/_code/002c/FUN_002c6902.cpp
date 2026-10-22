@@ -4,7 +4,7 @@
 extern "C" {
 u32 FUN_002c6864(u32 owner, u32 mask);
 u32 FUN_002c6966(u32 owner, u32 mask, const char *text);
-u8 *FUN_002c6a04(void);
+u8 *libcLocaleGetTables(void);
 
 // An asterisk introduces five hexadecimal words; the mask selects which to replace.
 u32 FUN_002c6902(u32 owner, u32 mask, const char *text)
@@ -26,7 +26,7 @@ u32 FUN_002c6902(u32 owner, u32 mask, const char *text)
                 value = (value << 4) | character;
             }
             if (mask & (1u << index))
-                reinterpret_cast<u32 *>(FUN_002c6a04())[index] = value;
+                reinterpret_cast<u32 *>(libcLocaleGetTables())[index] = value;
         }
     }
     return FUN_002c6864(owner, mask);

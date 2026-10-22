@@ -7,7 +7,7 @@ u32 dataTableGetCount(const void *table);
 const PlayerGrowthEntry *dataTableGetEntries(const void *table);
 s32 FUN_003e0154(void);
 s32 FUN_003e0164(void);
-u32 FUN_00203b1c(void);
+u32 gameGetUnlockedCountLimit(void);
 void FUN_004cd340(void *stats, const PlayerGrowthRecipe *recipe, u32 mode);
 void gameDataAddCappedPoints(u32 amount);
 void FUN_003df7c4(u32 mode);
@@ -26,7 +26,7 @@ void playerAdvanceLevelsAndRecover(PlayerData *player, s32 levels, s32 growStats
     s32 previousHp = FUN_003e0154();
     s32 previousMp = FUN_003e0164();
     for (s32 level = 0; level < levels; ++level) {
-        if (FUN_00203b1c() <= player->unk62) {
+        if (gameGetUnlockedCountLimit() <= player->unk62) {
             break;
         }
         if (growStats != 0) {

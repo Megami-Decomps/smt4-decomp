@@ -13,7 +13,7 @@ int FUN_0028250c(void);
 int FUN_00287a78(void);
 int gameFlagSetValue(int, int);
 int FUN_00295a18(int, int);
-int FUN_0029be5c(int, int);
+int gameCounterAddSaturating(int, int);
 int asdMdlManagerDestroy(void);
 int eventQueueAddUnique(int);
 int libc_strcpy(unsigned char *, int);
@@ -69,7 +69,7 @@ extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_00287a78. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00295a18. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: libc_strcpy. */
@@ -263,14 +263,14 @@ LAB_002709b8:
                   }
                   temp_v0 = *(short *)(temp_v6 + 0x7c);
                   if ((temp_v0 == 3 || temp_v0 == 4) || (temp_v0 == 5 || temp_v0 == 7)) {
-                    FUN_0029be5c(0x18,1);
+                    gameCounterAddSaturating(0x18,1);
                   }
                   if (*(short *)(temp_v6 + 0x7c) == 1) {
-                    FUN_0029be5c(0x19,1);
+                    gameCounterAddSaturating(0x19,1);
                   }
                   temp_v0 = *(short *)(temp_v6 + 0x7c);
                   if ((temp_v0 == 0 || temp_v0 == 2) || temp_v0 == 6) {
-                    FUN_0029be5c(0x13,1);
+                    gameCounterAddSaturating(0x13,1);
                   }
                 }
                 DAT_0049f9a0 = *(unsigned int *)(temp_v6 + 100);

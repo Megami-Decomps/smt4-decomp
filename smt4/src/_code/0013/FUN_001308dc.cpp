@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00140918(unsigned int *[3]);
 int FUN_00141fd0(...);
-int FUN_0014d3cc(...);
+int soundArchiveReadBankInfo(...);
 int FUN_0014d530(...);
 int FUN_002ac444(unsigned char [20], int);
 int FUN_002ac4a0(...);
@@ -47,7 +47,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00140918. */
 extern unsigned int optionalNestedValueGet(unsigned int **);
 /* Supplied declaration required: FUN_00141fd0. */
-/* Supplied declaration required: FUN_0014d3cc. */
+/* Supplied declaration required: soundArchiveReadBankInfo. */
 extern int FUN_0014d3fc(int, unsigned int, unsigned int *);
 extern int FUN_0014d478(int, unsigned int, unsigned int *);
 extern int FUN_0014d4ec(int, unsigned int, unsigned int *);
@@ -144,7 +144,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       if (temp_v1 != 1) {
         if (temp_v1 != 2) {
           if (((temp_v1 == 3) && (temp_v20 != 0xffffffff)) &&
-             ((temp_v8 = unaff_r8, temp_v0 = FUN_0014d3cc(param_1[1],temp_v20,&temp_v8), temp_v0 != 0
+             ((temp_v8 = unaff_r8, temp_v0 = soundArchiveReadBankInfo(param_1[1],temp_v20,&temp_v8), temp_v0 != 0
               && (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v8), temp_v0 != 0)))) {
             FUN_002ac5f4(&temp_v5);
             temp_v3 = FUN_002ac5d8(&temp_v5);
@@ -206,7 +206,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
                   do {
                     if (((unaff_r9[temp_v2 + 1] != -1) &&
                         (temp_v23 = unaff_r8,
-                        temp_v0 = FUN_0014d3cc(param_1[1],unaff_r9[temp_v2 + 1],&temp_v23), temp_v0 != 0))
+                        temp_v0 = soundArchiveReadBankInfo(param_1[1],unaff_r9[temp_v2 + 1],&temp_v23), temp_v0 != 0))
                        && (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v23), temp_v0 != 0)) {
                       FUN_002ac5f4(temp_v24);
                       temp_v3 = FUN_002ac5d8(temp_v24);
@@ -245,7 +245,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
             temp_v1 = 0;
             do {
               if (((temp_v14[temp_v1] != 0xffffffff) &&
-                  (temp_v10 = unaff_r8, temp_v0 = FUN_0014d3cc(param_1[1],temp_v14[temp_v1],&temp_v10),
+                  (temp_v10 = unaff_r8, temp_v0 = soundArchiveReadBankInfo(param_1[1],temp_v14[temp_v1],&temp_v10),
                   temp_v0 != 0)) &&
                  (temp_v0 = (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v10), temp_v0 != 0)) {
                 FUN_002ac5f4(&temp_v22,temp_v0);

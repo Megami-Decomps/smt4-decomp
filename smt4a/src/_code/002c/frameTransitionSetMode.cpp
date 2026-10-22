@@ -31,7 +31,7 @@ struct FrameTransitionWork {
 extern "C" {
 extern FrameTransitionWork *g_frameTex;
 extern const FrameTransitionPresets g_frameTransitionDefaultPresets;
-void FUN_003d2150(u32 sound);
+void sysPlayVoice(u32 sound);
 void FUN_003b7b4c(FrameTransitionWork *work);
 void FUN_0014e188(UiAnimatedSprite *sprite, u32 group, u32 id,
                   UiResourceParameters *resources, u16 flags, f32 speed);
@@ -53,7 +53,7 @@ void frameTransitionSetMode(s32 mode)
         work->flag1044 = 0;
         return;
     case 1:
-        FUN_003d2150(0x10000be);
+        sysPlayVoice(0x10000be);
         work->enabled = 1;
         work->frame = 0;
         work->closing = 0;
@@ -71,7 +71,7 @@ void frameTransitionSetMode(s32 mode)
         uiSpriteSetImageKeyframe(&work->sprites[3], 1, 0);
         return;
     case 2:
-        FUN_003d2150(0x10000bf);
+        sysPlayVoice(0x10000bf);
         work->frame = 0;
         work->closing = 1;
         work->speed = 7.0f;

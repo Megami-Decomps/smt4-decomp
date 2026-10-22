@@ -21,7 +21,7 @@ int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
 int FUN_0020caec(...);
 int gameDataCopySaveEntry(...);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002f3a90(void);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
@@ -79,8 +79,8 @@ extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
 extern int FUN_0022e9b8(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
-extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002a4860. */
+extern int recordGetModeForId(int);
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 extern unsigned int computeCountLimit(void);
 /* Supplied declaration required: FUN_002f3a90. */
@@ -208,7 +208,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
     efctSetSpeed();
   }
   temp_v21 = temp_v2 + 0x67cc;
-  temp_v9 = FUN_002a4860();
+  temp_v9 = resourceRunOperationIfUnblocked();
   temp_v4 = 0;
   temp_v8 = uiSearchPrimary(temp_v2 + 0x67cc);
   if (0 < temp_v8) {
@@ -366,7 +366,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v8 = uiSearchPrimary(temp_v21);
     } while (temp_v4 < temp_v8);
   }
-  temp_v4 = FUN_002a4860(temp_v21);
+  temp_v4 = resourceRunOperationIfUnblocked(temp_v21);
   temp_v6 = FUN_002a4894(temp_v21);
   temp_v8 = temp_v24;
   temp_v9 = temp_v23;
@@ -387,11 +387,11 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   efctSetSpeed();
   FUN_001835b4(2,0x1a,0x12d,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x7e);
   temp_v6 = FUN_002a4894(temp_v21);
-  temp_v6 = FUN_00284140((int)*(short *)(temp_v2 + temp_v6 * 2 + 0x438));
+  temp_v6 = recordGetModeForId((int)*(short *)(temp_v2 + temp_v6 * 2 + 0x438));
   temp_v14 = FUN_002a4894(temp_v21);
-  temp_v14 = FUN_00284140((int)*(short *)(temp_v2 + temp_v14 * 4 + 0x45e));
+  temp_v14 = recordGetModeForId((int)*(short *)(temp_v2 + temp_v14 * 4 + 0x45e));
   temp_v10 = FUN_002a4894(temp_v21);
-  temp_v10 = FUN_00284140((int)*(short *)(temp_v2 + temp_v10 * 4 + 0x460));
+  temp_v10 = recordGetModeForId((int)*(short *)(temp_v2 + temp_v10 * 4 + 0x460));
   if ((((!(temp_v6 == 1 || temp_v6 == 2)) && (!(temp_v6 == 6 || temp_v14 == 1))) &&
       (!(temp_v14 == 2 || temp_v14 == 6))) && (!((temp_v10 == 1 || temp_v10 == 2) || temp_v10 == 6))) {
     FUN_001835b4(2,0x1a,0x248,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x7e);

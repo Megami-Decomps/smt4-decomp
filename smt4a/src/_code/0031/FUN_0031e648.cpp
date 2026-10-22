@@ -5,7 +5,7 @@ extern "C" {
 
 s32 scrGetArg(void);
 s32 scrGetCommandFrame(void);
-int FUN_00418820(s32 arg);
+int gameFlagSlotAdvanceCounter(s32 arg);
 s32 FUN_00162ea4(void);
 int FUN_002f0c18(s32 arg);
 int FUN_002f1554(s32 arg);
@@ -20,7 +20,7 @@ u8 FUN_0031e648(void)
     s32 done;
 
     if (scrGetCommandFrame() == 0) {
-        FUN_00418820(arg);
+        gameFlagSlotAdvanceCounter(arg);
         if (FUN_00162ea4() != 0) {
             return 1;
         }

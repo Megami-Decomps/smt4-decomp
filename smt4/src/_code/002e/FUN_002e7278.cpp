@@ -9,8 +9,8 @@ int FUN_001a9f6c(...);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
 int FUN_0024fd70(...);
-int FUN_0024febc(...);
-int FUN_002569fc(...);
+int mathMatrixApplyScale(...);
+int matrix44SetIdentity(...);
 int matrix43Multiply(...);
 int FUN_002a2c7c(...);
 int FUN_002f8938(...);
@@ -159,8 +159,8 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
 /* Supplied declaration required: FUN_0024fd70. */
-/* Supplied declaration required: FUN_0024febc. */
-/* Supplied declaration required: FUN_002569fc. */
+/* Supplied declaration required: mathMatrixApplyScale. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002f8938. */
@@ -370,7 +370,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                       ((unsigned int)(0.0f <= pfVar9->field_0x14 * temp_v4 +
                                      param_1->field_0x2c * temp_v4 * temp_v4 * 0.5f) << 0x1d);
               if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
-                FUN_002569fc();
+                matrix44SetIdentity();
               }
               else {
                 temp_v57 = pfVar9->field_0x4;
@@ -405,7 +405,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                 temp_v28 = DAT_00472568 * temp_v28;
                 temp_v29 = DAT_0047256c * pfVar8[6];
               }
-              FUN_0024febc(&temp_v30,&temp_v27,2);
+              mathMatrixApplyScale(&temp_v30,&temp_v27,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x7c) = temp_v27;
               *(float *)(temp_v2 + 0x80) = temp_v28;
@@ -479,7 +479,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                              param_1->field_0x2c * temp_v1 *
                              temp_v1 * (float)((unsigned long long)temp_v13 >> 0x20)) << 0x1d);
               if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
-                FUN_002569fc();
+                matrix44SetIdentity();
               }
               else {
                 temp_v19 = pfVar9->field_0x4;
@@ -487,7 +487,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                 temp_v21 = pfVar9->field_0xc;
                 FUN_001a9f6c(temp_v55,&temp_v19,0);
               }
-              FUN_002569fc(&temp_v30);
+              matrix44SetIdentity(&temp_v30);
               matrix43Multiply(&temp_v30,temp_v55,&temp_v39);
               temp_v2 = pfVar9->field_0x0;
               *(unsigned int *)(temp_v2 + 0x4c) = temp_v30;
@@ -512,7 +512,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                 temp_v28 = DAT_00472568 * temp_v28;
                 temp_v29 = DAT_0047256c * pfVar8[6];
               }
-              FUN_0024febc(&temp_v30,&temp_v27,2);
+              mathMatrixApplyScale(&temp_v30,&temp_v27,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x7c) = temp_v27;
               *(float *)(temp_v2 + 0x80) = temp_v28;

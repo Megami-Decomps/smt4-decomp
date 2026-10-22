@@ -14,7 +14,7 @@ void *resourceResolveHeaderPointer(EffectSelectionBlock *block);
 void effPartsSetData(EffectSelectionBlock *block, void *data, u32 size, u16 id);
 void *effBlockCreateFromBlock(EffectSelectionBlock *block);
 void effectEditorApplyHandlerState(void *instance);
-void FUN_002629a8(void *resource, s32 flags);
+void resourceQueueDeferredDestroy(void *resource, s32 flags);
 }
 
 static __inline EffectSelectionTemplate *findEditorTemplate(const EffectSelectionBlock *block)
@@ -64,7 +64,7 @@ extern "C" u32 effectEditorActivateSelection()
     g_effectEditor.unk64 = 0;
     g_effectEditor.unk68 = 0;
     if (g_effectEditor.selection.resource != NULL) {
-        FUN_002629a8(g_effectEditor.selection.resource, 3);
+        resourceQueueDeferredDestroy(g_effectEditor.selection.resource, 3);
         g_effectEditor.selection.resource = NULL;
     }
     return 0x800000;

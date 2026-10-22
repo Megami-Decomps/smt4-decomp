@@ -33,7 +33,7 @@ extern ActionPreparationMasks g_btlMain;
 void FUN_004bc778(PreparedBattleAction *, s32, s32, s32, s32, s32);
 u32 FUN_004bb80c(s32);
 void FUN_004bb9c0(PreparedBattleAction *, u32);
-void FUN_004bbb74(s32);
+void aocGetTableRecordOrFallback(s32);
 void FUN_004bbc4c(PreparedBattleAction *, s32, s32, s32);
 s32 FUN_004186a4();
 u32 FUN_004186e0();
@@ -61,7 +61,7 @@ void btlActionPrepareFromSource(BattleActionSource *source, PreparedBattleAction
                          (s8)source->variation, (s8)source->target);
         }
     } else if (source->enemyId >= 0) {
-        FUN_004bbb74(source->enemyId);
+        aocGetTableRecordOrFallback(source->enemyId);
         FUN_004bbc4c(action, source->enemyId, (s8)source->variation, (s8)source->target);
     }
     u64 flags;

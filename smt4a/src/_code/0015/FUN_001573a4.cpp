@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001006ec(int, unsigned int, int);
+int asdDeallocateArrayStorage(int, unsigned int, int);
 int FUN_0016d1f4(void);
 
 extern unsigned int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 extern unsigned char FUN_0016b034(int, int);
 /* Supplied declaration required: FUN_0016d1f4. */
 
@@ -89,7 +89,7 @@ int * FUN_001573a4(unsigned int *param_1,unsigned int param_2,int param_3,unsign
       }
       puVar4 = puVar4 + 0xc;
     }
-    FUN_001006ec(*piVar10,(param_1[-6] - *piVar10) / 0x30,0);
+    asdDeallocateArrayStorage(*piVar10,(param_1[-6] - *piVar10) / 0x30,0);
     temp_v2 = *piVar10;
     *piVar10 = (int)puVar3;
     param_1[-7] = (unsigned int)(puVar3 + ((param_1[-7] - temp_v2) / 0x30) * 0xc);

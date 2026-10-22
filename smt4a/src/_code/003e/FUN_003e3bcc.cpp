@@ -69,7 +69,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b28(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a7288. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -93,7 +93,7 @@ extern int getUnlockedSlotCount(unsigned int);
 /* Supplied declaration required: FUN_004bd6b0. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 /* Supplied declaration required: FUN_004cd4b8. */
-extern int FUN_004d0bf0(unsigned int);
+extern int gameStockContainsEntry(unsigned int);
 extern unsigned int FUN_004d0cd4(void);
 extern int FUN_004d0eec(void);
 
@@ -174,7 +174,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
         if (temp_v0 != 2) {
           return;
         }
-        temp_v0 = FUN_002a4b74();
+        temp_v0 = messageGetChoiceResult();
         if ((temp_v0 != -1) && (temp_v0 != 1)) {
           param_1->field_0x8 = 2;
         }
@@ -187,7 +187,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       }
       if (temp_v0 == 2) {
         temp_v5 = *(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24);
-        temp_v0 = FUN_004d0bf0(*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x20)
+        temp_v0 = gameStockContainsEntry(*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x20)
                              >> 0x10);
         if (temp_v0 != 0) {
           temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fe4);

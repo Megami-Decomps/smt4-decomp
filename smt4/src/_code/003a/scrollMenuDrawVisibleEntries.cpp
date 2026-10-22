@@ -32,7 +32,7 @@ struct ComparisonMenuScene {
 
 extern "C" {
 void pairCopy(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
-void FUN_0039fc20(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
+void uiMenuAnchorGetOffset(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
 void FUN_00230cc0(const ComparisonMenuAnchor *, u32, s32, s32, u32);
 void FUN_00231bcc(const ComparisonMenuAnchor *, u32, s32, s32, u32, u32);
 s32 FUN_0029e924(ComparisonMenuSelection *);
@@ -46,7 +46,7 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
 {
     ComparisonMenuPoint position, offset;
     pairCopy(&scene->anchor, &position);
-    FUN_0039fc20(&scene->anchor, &offset);
+    uiMenuAnchorGetOffset(&scene->anchor, &offset);
     union { f32 value; s32 signedBits; u32 bits; } x;
     x.value = position.x + offset.x;
     if (x.signedBits >= 0x43a00000 || x.bits >= 0xc3a00000)

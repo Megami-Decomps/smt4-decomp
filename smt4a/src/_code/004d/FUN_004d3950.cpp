@@ -10,7 +10,7 @@ int jobSetText(unsigned int, unsigned char *);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int FUN_003592dc(unsigned int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -30,7 +30,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: FUN_003592dc. */
 extern int FUN_00400d68(int);
 
@@ -53,20 +53,20 @@ void FUN_004d3950(int param_1,int param_2)
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d3c70);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)(g_btlStageModel + 0x58),0,2,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)(g_btlStageModel + 0x5c),0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),5,*(unsigned int *)(g_btlStageModel + 0x60),0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),6,*(unsigned int *)(g_btlStageModel + 100),0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),7,*(unsigned int *)(g_btlStageModel + 0x68),0,10000,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,*(unsigned int *)(g_btlStageModel + 0x6c),0,10000,0);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),9,0,10);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),9,0,10);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),10,
                (*(unsigned int *)(*(int *)(g_handleRegistry + 4) + 0xcc) & 0x80000000) != 0,0,1,0);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xb,0xffff3cb0,50000);
-  FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xc,0xffff3cb0,50000);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xb,0xffff3cb0,50000);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xc,0xffff3cb0,50000);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,*(unsigned int *)(g_btlStageModel + 0x7c),0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xe,*(unsigned int *)(g_btlStageModel + 0x80),0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xf,*(unsigned int *)(g_btlStageModel + 0x84),0,0xff,0);

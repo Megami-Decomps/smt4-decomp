@@ -11,7 +11,7 @@ int FUN_002e0898(...);
 int jobSetText(...);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(...);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int jobSetWork7C(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -29,7 +29,7 @@ extern unsigned char DAT_005281bc; /* 0x5281bc */
 /* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: jobSetWork7C. */
 
 
@@ -48,9 +48,9 @@ void FUN_004f4648(int param_1,int param_2,unsigned int param_3)
   asdListBoxAddItem(param_3,&DAT_005281bc);
   FUN_001568f8();
   asdListBoxSetIntItem(param_3,0,*(unsigned short *)(param_2 + 2),1,999,0);
-  FUN_00340edc(param_3,1,0xfffffc18);
-  FUN_00340edc(param_3,2,0xfffffc18,1000);
-  FUN_00340edc(param_3,3,0xfffffc18,1000);
+  asdListBoxSetFloatItem(param_3,1,0xfffffc18);
+  asdListBoxSetFloatItem(param_3,2,0xfffffc18,1000);
+  asdListBoxSetFloatItem(param_3,3,0xfffffc18,1000);
   asdListBoxSetByteValue(param_3,1);
   return;
 }

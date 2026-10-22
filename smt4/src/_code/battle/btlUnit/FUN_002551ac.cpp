@@ -13,7 +13,7 @@ int FUN_002550d8(...);
 int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
 int btlGetMainState(void);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_002b7bca(int [2], int, int, unsigned char *);
 int FUN_003ddee0(int, unsigned int, int, int);
 int SBORROW4(int, int);
@@ -56,7 +56,7 @@ extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_00293230(unsigned int *);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_002b7bca. */
 extern int FUN_003bd0e8(int);
 /* Supplied declaration required: FUN_003ddee0. */
@@ -503,7 +503,7 @@ LAB_00255c1c:
       }
       temp_v5 = 7;
     }
-    FUN_0029be5c(temp_v5,param_5);
+    gameCounterAddSaturating(temp_v5,param_5);
   }
   return 1;
 }

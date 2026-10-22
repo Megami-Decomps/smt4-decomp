@@ -4,7 +4,7 @@
 extern "C" {
 extern const char DAT_00634c50[];
 void engineFreeCallback(void* memory);
-void FUN_00362788(EffMenuNode* node, const char* text);
+void effEditorSetTextValue(EffMenuNode* node, const char* text);
 
 // Recreate the effect editor's .EPL label at its fixed menu position.
 void FUN_003aa520()
@@ -17,6 +17,6 @@ void FUN_003aa520()
     g_effectEditor.label = label;
     label->initialKind = 0xb6;
     label->unk04 = 100;
-    FUN_00362788(g_effectEditor.label, DAT_00634c50);
+    effEditorSetTextValue(g_effectEditor.label, DAT_00634c50);
 }
 }

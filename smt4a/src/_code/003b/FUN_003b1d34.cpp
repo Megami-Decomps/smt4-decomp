@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_004f1530(int);
+int mathVectorClear(int);
 int FUN_004f1c5c(int, int);
 int FUN_004f1edc(int);
 
 extern int g_btlCamera; /* 0x571508 */
 
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_004f1530. */
+/* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: FUN_004f1c5c. */
 /* Supplied declaration required: FUN_004f1edc. */
 
@@ -28,7 +28,7 @@ unsigned int FUN_003b1d34(void)
   if (g_btlCamera != 0) {
     if (temp_v1 != 0) {
       if (temp_v1 == 1) {
-        FUN_004f1530(g_btlCamera);
+        mathVectorClear(g_btlCamera);
         *(unsigned int *)(temp_v0 + 0x3c) = 0;
         *(unsigned int *)(temp_v0 + 0x38) = 1;
         *(unsigned int *)(temp_v0 + 0xc) = 0;

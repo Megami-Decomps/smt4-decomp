@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int g_mapGimic; /* 0x447a48 */
 extern int g_lmapScene; /* 0x447e88 */
 
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 void FUN_0021df18(void)
@@ -29,7 +29,7 @@ void FUN_0021df18(void)
     temp_v0 = g_mapGimic + temp_v1 * 0x28;
     if ((*(char *)(temp_v0 + 0x1c) != '\0') && (*(short *)(temp_v0 + 0x32) == 0xf)) {
       temp_v4 = *(float *)(g_lmapScene + 0x1c);
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if ((int)temp_v4 < temp_v3) {
         temp_v2 = temp_v1;
         temp_v3 = (int)temp_v4;

@@ -20,10 +20,10 @@ int markerOwnerUpdatePositions(...);
 int FUN_00411c04(int, int);
 int FUN_00416610(unsigned int);
 int FUN_0047f98c(unsigned int);
-int FUN_004f1530(...);
+int mathVectorClear(...);
 int FUN_004f1c5c(...);
 int FUN_004f1edc(...);
-int FUN_004f3ee0(...);
+int cameraBeginScalarTransition(...);
 int FUN_004f41b0(...);
 int FUN_004f5238(...);
 int FUN_004fb43c(...);
@@ -98,10 +98,10 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00416610. */
 /* Supplied declaration required: FUN_0047f98c. */
-/* Supplied declaration required: FUN_004f1530. */
+/* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: FUN_004f1c5c. */
 /* Supplied declaration required: FUN_004f1edc. */
-/* Supplied declaration required: FUN_004f3ee0. */
+/* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004fb43c. */
@@ -359,7 +359,7 @@ void FUN_00410628(int param_1)
     slotSetRequest(0,0,0xff);
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
-    FUN_004f3ee0(g_btlCamera,1,0);
+    cameraBeginScalarTransition(g_btlCamera,1,0);
     return;
   case 4:
     temp_v3 = *(int *)(param_1 + 0x14) + 1;
@@ -367,7 +367,7 @@ void FUN_00410628(int param_1)
     if (temp_v3 < 7) {
       return;
     }
-    FUN_004f1530(g_btlCamera);
+    mathVectorClear(g_btlCamera);
     markerOwnerUpdatePositions(g_btlStageModel);
     FUN_004f1c5c(g_btlCamera,0);
     FUN_004f1edc(g_btlCamera);

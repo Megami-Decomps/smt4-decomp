@@ -31,8 +31,8 @@ int FUN_0039bb48(...);
 int characterInfoPanelPopulate(...);
 int FUN_003a7a88(...);
 int FUN_003b60c0(unsigned int, int);
-int FUN_003d2150(...);
-int FUN_003e5810(...);
+int sysPlayVoice(...);
+int resourceEntryMarkReleased(...);
 int FUN_003e5c68(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -58,7 +58,7 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e2184. */
 /* Supplied declaration required: campCecSetObjectValue. */
 extern int overlayGetStatusScene(void);
-extern int FUN_0032cfc8(void);
+extern int buttonHelpGetPanelMode(void);
 extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: gameDataGetMarkEntry. */
 /* Supplied declaration required: FUN_00359974. */
@@ -74,9 +74,9 @@ extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_003aedc8. */
 /* Supplied declaration required: FUN_003b60c0. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003e54b8. */
-/* Supplied declaration required: FUN_003e5810. */
+/* Supplied declaration required: resourceEntryMarkReleased. */
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: FUN_003e5c68. */
 
@@ -162,11 +162,11 @@ unsigned int FUN_0025d6a0(void)
         FUN_002e2114();
         if (temp_v5 != 0) {
           temp_v5 = overlayGetStatusScene();
-          FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),0);
+          resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),0);
           temp_v5 = overlayGetStatusScene();
-          FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),1);
+          resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),1);
           temp_v5 = overlayGetStatusScene();
-          FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),2);
+          resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),2);
           FUN_002e2184(*(unsigned int *)(temp_v1 + 8),temp_v17);
           FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
           linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);
@@ -197,7 +197,7 @@ unsigned int FUN_0025d6a0(void)
                          *(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22));
             goto LAB_0025e5ec;
           }
-          temp_v1 = FUN_0032cfc8();
+          temp_v1 = buttonHelpGetPanelMode();
           if (temp_v1 == 0) {
             FUN_00359974(0,*(unsigned int *)(temp_v0 + 0x120));
             temp_v2 = overlayGetBuffer1();
@@ -335,7 +335,7 @@ LAB_0025d9ec:
                     }
                     *(unsigned int *)(temp_v0 + 0x84) = 0;
                     *(unsigned int *)(temp_v0 + 0x7c) = 0x14a;
-                    FUN_003d2150(0x100020e);
+                    sysPlayVoice(0x100020e);
                   }
                 }
                 else {
@@ -403,7 +403,7 @@ LAB_0025d9ec:
       temp_v5 = gameDataGetMarkEntry(*(unsigned int *)(temp_v1 + 0x114));
       *(int *)(temp_v1 + 0xc) = temp_v5;
       *(unsigned short *)(temp_v5 + 0x34) = *(unsigned short *)(temp_v5 + 0x60);
-      FUN_003d2150(0x100020d);
+      sysPlayVoice(0x100020d);
       temp_v1 = 1;
       *(unsigned int *)(temp_v0 + 0x130) = 0;
       *(unsigned int *)(temp_v0 + 0x140) = 0;
@@ -537,7 +537,7 @@ LAB_0025dd50:
                     }
                     *(unsigned int *)(temp_v0 + 0x84) = 0;
                     *(unsigned int *)(temp_v0 + 0x7c) = 0x14a;
-                    FUN_003d2150(0x100020e);
+                    sysPlayVoice(0x100020e);
                   }
                 }
                 else {
@@ -630,7 +630,7 @@ LAB_0025dd50:
           temp_v5 = gameDataGetMarkEntry(*(unsigned int *)(temp_v1 + 0x114));
           *(int *)(temp_v1 + 0xc) = temp_v5;
           *(unsigned short *)(temp_v5 + 0x34) = *(unsigned short *)(temp_v5 + 0x60);
-          FUN_003d2150(0x100020d);
+          sysPlayVoice(0x100020d);
           temp_v1 = 1;
           *(unsigned int *)(temp_v0 + 0x130) = 0;
         }
@@ -646,7 +646,7 @@ LAB_0025dd50:
 LAB_0025e324:
         if (temp_v1 != 1) {
           if (temp_v1 == 2) {
-            FUN_003d2150(0x100020f);
+            sysPlayVoice(0x100020f);
             *(unsigned int *)(temp_v0 + 0x11c) = 2;
           }
         }
@@ -678,11 +678,11 @@ LAB_0025e324:
           FUN_002e2114();
           if (temp_v5 != 0) {
             temp_v5 = overlayGetStatusScene();
-            FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),0);
+            resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),0);
             temp_v5 = overlayGetStatusScene();
-            FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),1);
+            resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),1);
             temp_v5 = overlayGetStatusScene();
-            FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),2);
+            resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),2);
             FUN_002e2184(*(unsigned int *)(temp_v1 + 8),temp_v17);
             FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
             linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);

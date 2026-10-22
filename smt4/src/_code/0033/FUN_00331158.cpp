@@ -6,7 +6,7 @@ extern "C" {
 
 int guestWinRequestClose(void);
 int FUN_0028fc60(void);
-int FUN_00299174(...);
+int campReleaseScreenTouchRegions(...);
 int FUN_00299218(int, unsigned int);
 int FUN_00299900(...);
 int FUN_00299bc4(...);
@@ -33,7 +33,7 @@ extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: guestWinRequestClose. */
 /* Supplied declaration required: FUN_0028fc60. */
-/* Supplied declaration required: FUN_00299174. */
+/* Supplied declaration required: campReleaseScreenTouchRegions. */
 /* Supplied declaration required: FUN_00299218. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
@@ -106,7 +106,7 @@ void FUN_00331158(int param_1)
           *puVar7 = 5;
           *(unsigned int *)(temp_v0 + 0x1c) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;
-          FUN_00299174(temp_v6,1);
+          campReleaseScreenTouchRegions(temp_v6,1);
         }
         else {
           temp_v6 = 9;
@@ -158,7 +158,7 @@ void FUN_00331158(int param_1)
           *puVar7 = 5;
           *(unsigned int *)(temp_v0 + 0x1c) = 0;
           *(unsigned int *)(temp_v0 + 0x14) = 0;
-          FUN_00299174(temp_v6,1);
+          campReleaseScreenTouchRegions(temp_v6,1);
           guestWinRequestClose();
           FUN_0029cc44(1);
         }

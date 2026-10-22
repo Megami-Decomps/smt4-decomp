@@ -9,14 +9,14 @@ struct DemonEvolutionData {
 
 extern "C" {
 const DemonEvolutionData* FUN_00184310(u16 id);
-u32 FUN_004d0bf0(u32 id);
+u32 gameStockContainsEntry(u32 id);
 
 // Report evolution availability, excluding a target already present in the party.
 u8 btlGetDemonEvolutionStatus(const UnitRecord* unit)
 {
     const DemonEvolutionData* evolution = FUN_00184310(unit->id);
     u8 status = 1;
-    if (evolution->targetId != 0 && FUN_004d0bf0(evolution->targetId) == 0) {
+    if (evolution->targetId != 0 && gameStockContainsEntry(evolution->targetId) == 0) {
         status = evolution->requiredLevel <= unit->unk64 ? 0 : 2;
     }
     return status;

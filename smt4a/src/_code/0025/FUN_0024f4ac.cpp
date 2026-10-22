@@ -1,4 +1,4 @@
-/* NON_MATCHING: fragment of a larger function (uses inherited registers or stack slots without establishing its own frame). */
+/* NON_MATCHING: complete 0xd334-byte camp/menu controller now establishes its own frame, but the retained draft only covers an old interior input-dispatch fragment with inherited registers; the repaired full body requires fresh reconstruction. */
 /* romwright 0.5.0 decompilation of FUN_0024f4ac for reference (not compiled; its own view of the boundaries):
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address * /

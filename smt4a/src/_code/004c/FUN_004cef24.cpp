@@ -1,105 +1,117 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_002e5ba0; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_004cef24 for reference (not compiled; its own view of the boundaries):
-
-unsigned int FUN_004cef24(int param_1)
-
-{
-  int iVar1;
-  unsigned int uVar2;
-  int iVar3;
-  unsigned char bVar4;
-  
-  switch(*(unsigned int *)(param_1 + 0x10)) {
-  case 0:
-    FUN_002804b0("battle/gameover/gameover.bf",param_1 + 0x18,0);
-    FUN_002804b0("battle/gameover/gameover.mbm",param_1 + 0x20,0);
-    FUN_0013f1b8(0x22,0);
-    iVar3 = 1;
-    do {
-      FUN_001acf98(0x22,iVar3);
-      iVar3 = iVar3 + 1;
-    } while (iVar3 < 7);
-    *(unsigned int *)(param_1 + 0x10) = 1;
-    if ((*(char *)(param_1 + 8) == '\x03') && (iVar3 = FUN_00399e04(), iVar3 != 0)) {
-      FUN_00342334(0);
-    }
-  case 1:
-    bVar4 = *(int *)(param_1 + 0x18) != 0;
-    iVar3 = 0;
-    if (bVar4) {
-      iVar3 = *(int *)(param_1 + 0x20);
-    }
-    if (bVar4 && iVar3 != 0) {
-      iVar3 = 1;
-      do {
-        iVar1 = FUN_0018206c(0x22,iVar3);
-        if (iVar1 == 0) {
-          return 0;
-        }
-        iVar3 = iVar3 + 1;
-      } while (iVar3 < 7);
-      iVar3 = *(int *)(param_1 + 0x18);
-      FUN_00275bc8(iVar3,*(unsigned int *)(param_1 + 0x20));
-      *(int *)(param_1 + 0x1c) = iVar3;
-      *(unsigned int *)(iVar3 + 0x108) = 1;
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0);
-      if (*(char *)(param_1 + 8) != '\x02') {
-        *(unsigned int *)(param_1 + 0x10) = 4;
-      }
-      else {
-        FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),4);
-        uVar2 = 2;
-        *(unsigned int *)(param_1 + 0x10) = uVar2;
-      }
-    }
-    break;
-  case 2:
-    iVar3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
-    if (iVar3 == 2) {
-      FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),3);
-      *(unsigned int *)(param_1 + 0x10) = 3;
-    }
-    break;
-  case 3:
-    iVar3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
-    if (iVar3 != 2) {
-      return 0;
-    }
-    *(unsigned int *)(param_1 + 0x10) = 4;
-  case 4:
-    iVar3 = FUN_004cf140(param_1);
-    if (iVar3 != 0) {
-      return 0;
-    }
-    uVar2 = 5;
-    *(unsigned int *)(param_1 + 0x10) = uVar2;
-    break;
-  case 5:
-    if ((*(char *)(param_1 + 8) == '\x03') && (iVar3 = FUN_00399e04(), iVar3 != 0)) {
-      FUN_00342334(1);
-    }
-    iVar3 = 1;
-    do {
-      FUN_0019a7f4(0x22,iVar3);
-      iVar3 = iVar3 + 1;
-    } while (iVar3 < 7);
-    FUN_002e132c(0x22);
-    if (*(int *)(param_1 + 0x1c) != 0) {
-      FUN_0019c364();
-      *(unsigned int *)(param_1 + 0x1c) = 0;
-    }
-    if (*(int *)(param_1 + 0x18) != 0) {
-      FUN_0019a5a0();
-      *(unsigned int *)(param_1 + 0x18) = 0;
-    }
-    if (*(int *)(param_1 + 0x20) != 0) {
-      FUN_0019a5a0();
-      *(unsigned int *)(param_1 + 0x20) = 0;
-    }
-    *(unsigned int *)(param_1 + 0xc) = 3;
-    *(unsigned int *)(param_1 + 0x10) = 0;
-  }
-  return 0;
-}
-*/
+/* NON_MATCHING: ARMCC hoists state constants into r7/r8 and emits separate final status/state stores instead of retail's stm; control flow and relocations are reconstructed. */
 #include "common.h"
+
+struct GameOverScriptProcess {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ u32 enabled;
+};
+
+struct GameOverTransition {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 mode;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ u32 status;
+    /* 0x10 */ u32 state;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ void* scriptData;
+    /* 0x1C */ GameOverScriptProcess* process;
+    /* 0x20 */ void* messageData;
+};
+
+extern "C" {
+void asdLoadFileAsyncSimple(const char* path, void** destination, u32 flags);
+void asdTMTexTableLoadTmx(u32 table, u32 flags);
+void asdTMTexLoadMainHeap(u32 table, u32 index);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
+void asdTMTexTableReleaseNode(u32 table, u32 index);
+void asdTMTexTableFreeEntry(u32 table);
+s32 campButtonHelpIsActive(void);
+void FUN_00342334(u32 enabled);
+GameOverScriptProcess* FUN_00275bc8(void* script, void* messages);
+void scrScriptProcessStartEntry(GameOverScriptProcess* process, u32 entry);
+s32 scrRunOpcodesStub(GameOverScriptProcess* process);
+s32 FUN_004cf140(GameOverTransition* transition);
+void scrScriptProcessDestroy(GameOverScriptProcess* process);
+void asdMemFree(void* data);
+extern const char DAT_00530edc[];
+extern const char DAT_00530ebc[];
+}
+
+// Load, run, and release the game-over script and its texture bank.
+extern "C" u32 FUN_004cef24(GameOverTransition* transition)
+{
+    switch (transition->state) {
+    case 0:
+        asdLoadFileAsyncSimple(DAT_00530edc, &transition->scriptData, 0);
+        asdLoadFileAsyncSimple(DAT_00530ebc, &transition->messageData, 0);
+        asdTMTexTableLoadTmx(0x22, 0);
+        for (s32 index = 1; index < 7; ++index) {
+            asdTMTexLoadMainHeap(0x22, index);
+        }
+        transition->state = 1;
+        if (transition->mode == 3 && campButtonHelpIsActive()) {
+            FUN_00342334(0);
+        }
+        // Fall through while the asynchronous resources are already available.
+    case 1:
+        if (transition->scriptData != NULL && transition->messageData != NULL) {
+            for (s32 index = 1; index < 7; ++index) {
+                if (!asdTMTexTableNodeIsLoaded(0x22, index)) {
+                    return 0;
+                }
+            }
+            transition->process = FUN_00275bc8(transition->scriptData, transition->messageData);
+            transition->process->enabled = 1;
+            scrScriptProcessStartEntry(transition->process, 0);
+            if (transition->mode != 2) {
+                transition->state = 4;
+            } else {
+                scrScriptProcessStartEntry(transition->process, 4);
+                transition->state = 2;
+            }
+        }
+        break;
+    case 2:
+        if (scrRunOpcodesStub(transition->process) == 2) {
+            scrScriptProcessStartEntry(transition->process, 3);
+            transition->state = 3;
+        }
+        break;
+    case 3:
+        if (scrRunOpcodesStub(transition->process) != 2) {
+            return 0;
+        }
+        transition->state = 4;
+        // Fall through to the game-over interaction.
+    case 4:
+        if (FUN_004cf140(transition)) {
+            return 0;
+        }
+        transition->state = 5;
+        break;
+    case 5:
+        if (transition->mode == 3 && campButtonHelpIsActive()) {
+            FUN_00342334(1);
+        }
+        for (s32 index = 1; index < 7; ++index) {
+            asdTMTexTableReleaseNode(0x22, index);
+        }
+        asdTMTexTableFreeEntry(0x22);
+        if (transition->process != NULL) {
+            scrScriptProcessDestroy(transition->process);
+            transition->process = NULL;
+        }
+        if (transition->scriptData != NULL) {
+            asdMemFree(transition->scriptData);
+            transition->scriptData = NULL;
+        }
+        if (transition->messageData != NULL) {
+            asdMemFree(transition->messageData);
+            transition->messageData = NULL;
+        }
+        transition->status = 3;
+        transition->state = 0;
+        break;
+    }
+    return 0;
+}

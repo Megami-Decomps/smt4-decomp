@@ -15,7 +15,7 @@ extern EventTex *g_eventTex;
 extern s32 jobIsValid(u32 job);
 extern s32 jobGetStatus(u32 job);
 extern s32 jobWorkGetFirstWordB(u32 job);
-extern s32 FUN_00126184(u32 job);
+extern s32 eventTexJobGetId(u32 job);
 extern s32 FUN_00126704(u32 job);
 extern s32 FUN_00126714(u32 job);
 extern void jobBlendSetRate(u32 job, s32 on);
@@ -46,7 +46,7 @@ u32 eventTexSelectJobsById(s32 id)
     }
     for (i = 0; i < 10; i++) {
         if (jobIsValid(tex->slots[i]) != 0) {
-            if (FUN_00126184(tex->slots[i]) == id) {
+            if (eventTexJobGetId(tex->slots[i]) == id) {
                 jobBlendSetRate(tex->slots[i], 1);
                 FUN_002bff38(FUN_00126714(tex->slots[i]));
                 found = 1;

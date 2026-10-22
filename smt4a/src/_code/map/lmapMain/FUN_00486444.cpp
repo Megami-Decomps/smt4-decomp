@@ -73,7 +73,7 @@ extern unsigned char FUN_0048b1bc(int context, float angle);
 /* Supplied declaration required: FUN_004915f0. */
 /* Supplied declaration required: FUN_00491c60. */
 extern unsigned long long *sub68OwnerGetBlock60(int);
-extern int FUN_00492bc0(int);
+extern int naviGetActiveStateValue(int);
 /* Supplied declaration required: lmapSceneGetObj. */
 extern int naviMainSelectPair(int);
 extern unsigned int FUN_00492c5c(int);
@@ -248,7 +248,7 @@ LAB_004866c8:
   FUN_004884d8(param_1);
   FUN_00486d0c(param_1);
   FUN_004888e4(param_1);
-  temp_v4 = FUN_00492bc0(temp_v3);
+  temp_v4 = naviGetActiveStateValue(temp_v3);
   temp_v6 = NaviMain_GetCurrentMap(temp_v3);
   if ((temp_v4 == temp_v6) && ((int)*(char *)(param_1 + 100) == *(int *)(param_1 + 0x20510))) {
     puVar9 = (unsigned long long *)sub68OwnerGetBlock60(temp_v3);

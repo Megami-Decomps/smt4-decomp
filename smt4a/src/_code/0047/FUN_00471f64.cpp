@@ -5,7 +5,7 @@
 extern "C" {
 
 int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int FUN_00429f38(void);
+int asdFsIsSdCardDetected(void);
 
 /* stack frame of param_2: 3 slot(s), 10 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: libc_bsearch. */
 extern int objGetFlagBit16(void);
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 
 
 unsigned int FUN_00471f64(int param_1,unsigned short param_2)
@@ -36,7 +36,7 @@ unsigned int FUN_00471f64(int param_1,unsigned short param_2)
   libc_bsearch(puVar1,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(g_aocSystem + 900),0x134,
                &LAB_00476dfc);
   if (puVar1 != (unsigned short *)0x0) {
-    FUN_00429f38();
+    asdFsIsSdCardDetected();
     if (puVar1 != (unsigned short *)0x0) {
       temp_v0 = objGetFlagBit16();
       if (temp_v0 != 0) {

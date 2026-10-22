@@ -57,7 +57,7 @@ extern int FUN_0013d2dc(...); /* 0x13d2dc */
 extern int FUN_0013db18(...); /* 0x13db18 */
 extern int jobRenderOnce(...); /* 0x13dbb4 */
 extern int FUN_0013dc70(...); /* 0x13dc70 */
-extern int FUN_0013dd18(...); /* 0x13dd18 */
+extern int frameTexDrawWhenReady(...); /* 0x13dd18 */
 extern int FUN_0013e7c4(...); /* 0x13e7c4 */
 extern int FUN_0013e848(...); /* 0x13e848 */
 extern int FUN_0013e8f8(...); /* 0x13e8f8 */
@@ -150,7 +150,7 @@ void FUN_00138e14(void)
   taskCreateDraw(&LAB_001393f8,0x7a,0,0,FUN_0013e7c4,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139404,0xd6,0,0,FUN_0013e848,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139410,0x7c,0,0,FUN_0013dc70,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_0013941c,0xd8,0,0,FUN_0013dd18,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_0013941c,0xd8,0,0,frameTexDrawWhenReady,0,g_frameTex,*puVar2);
   return;
 }
 

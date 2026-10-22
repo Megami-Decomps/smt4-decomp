@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001517b4(...);
 int eventQueueAddUnique(...);
-int FUN_002277d8(void);
+int campResetScreen(void);
 int useCounterStart(void);
 int msgWindowReset(void);
 int FUN_002a48e0(...);
@@ -32,7 +32,7 @@ int FUN_0021b1a8(...);
 int FUN_00228b04(...);
 int FUN_00237650(void);
 int scrScriptProcessStartEntry(...);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a4964(...);
 int FUN_003450d4(...);
 int FUN_003dc0c0(...);
@@ -63,18 +63,18 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0021b1a8. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_002277d8. */
+/* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_00237650. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: msgWindowReset. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4964. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_003180c4. */
 extern unsigned int flaggedEntryGetValueA(int);
@@ -241,7 +241,7 @@ unsigned int FUN_003ce598(void)
       eventQueueAddUniqueIfValid();
       return 0;
     }
-    temp_v7 = FUN_002a4860(temp_v6 + 0x10);
+    temp_v7 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
     temp_v3 = FUN_002a4894(temp_v6 + 0x10);
     temp_v7 = FUN_003e45bc(*(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74),0);
     if (temp_v7 == 0) {
@@ -298,7 +298,7 @@ unsigned int FUN_003ce598(void)
     }
     return 0;
   case 3:
-    temp_v7 = FUN_002a4860(temp_v6 + 0x10);
+    temp_v7 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
     temp_v3 = FUN_002a4894(temp_v6 + 0x10);
     temp_v5 = *(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74);
     temp_v10[0] = '\0';
@@ -400,12 +400,12 @@ unsigned int FUN_003ce598(void)
   case 4:
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x530));
     if (temp_v7 == 2) {
-      temp_v7 = FUN_002a4b74();
+      temp_v7 = messageGetChoiceResult();
       if (temp_v7 != 0) {
         FUN_003dc0c0(temp_v6,3);
       }
       else {
-        temp_v7 = FUN_002a4860(temp_v6 + 0x10);
+        temp_v7 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
         temp_v3 = FUN_002a4894(temp_v6 + 0x10);
         FUN_003e45bc(*(unsigned int *)(temp_v6 + (temp_v3 + temp_v7) * 4 + 0x74),0);
         eventQueueAddUnique(0x1000308);
@@ -433,7 +433,7 @@ unsigned int FUN_003ce598(void)
         temp_v4 = (unsigned int)*(unsigned char *)(temp_v6 + 0x2b7);
       }
       if (temp_v9 && temp_v4 == 0) {
-        temp_v8 = FUN_002a4860(temp_v6 + 0x10);
+        temp_v8 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
         temp_v5 = flaggedEntryGetValueA(temp_v6 + 0x10);
         FUN_003d1aa0(temp_v6);
         FUN_002a48e0(temp_v6 + 0x10,temp_v8);
@@ -470,7 +470,7 @@ unsigned int FUN_003ce598(void)
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x530));
     if (temp_v7 == 2) {
       gameFlagSetValue(0x4b7,1);
-      FUN_002277d8();
+      campResetScreen();
       FUN_0021b1a8(temp_v6);
       FUN_003dc0c0(temp_v6,3);
     }

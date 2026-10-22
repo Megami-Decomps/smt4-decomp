@@ -76,6 +76,10 @@ typedef struct BtlMainStateA {
             u8 unk2000[0x25a8];
             /* 0x45A8 */ u32 words[2];
         } markerMasks;
+        struct {
+            /* 0x2000 */ u8 unk2000BeforeSort[0x1006];
+            /* 0x3006 */ s16 indices[12];
+        } turnOrder;
     };
     /* 0x4CD0 */ u8 unk4cd0;
     /* 0x4CD1 */ u8 unk4cd1;

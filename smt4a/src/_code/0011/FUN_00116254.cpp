@@ -11,7 +11,7 @@ int FUN_002ea3d0(int, unsigned int);
 int FUN_002f451c(int *, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
-int FUN_0030202c(int, int, unsigned int);
+int onlineJobApplyStateTriple(int, int, unsigned int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -36,7 +36,7 @@ extern unsigned int FUN_002e7908(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002f451c. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-/* Supplied declaration required: FUN_0030202c. */
+/* Supplied declaration required: onlineJobApplyStateTriple. */
 
 
 void FUN_00116254(int param_1)
@@ -92,7 +92,7 @@ void FUN_00116254(int param_1)
   else {
     temp_v5 = 0x8001000d;
     temp_v0 = FUN_002e7908((unsigned int *)&temp_v2,(unsigned int *)&temp_v5);
-    FUN_0030202c(param_1,3,temp_v0);
+    onlineJobApplyStateTriple(param_1,3,temp_v0);
   }
   return;
 }

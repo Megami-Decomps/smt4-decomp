@@ -13,7 +13,7 @@ int gameMoneyAdd(...);
 int FUN_0029c43c(...);
 int FUN_0029cc44(...);
 int FUN_0029e648(...);
-int FUN_00338704(...);
+int btlScriptQueueRequestIfIdle(...);
 int FUN_003bf5a8(...);
 int FUN_003c017c(...);
 int workAdoptGlobalHandle(...);
@@ -34,7 +34,7 @@ int buttonHelpSetPreset(...);
 int FUN_00343f44(...);
 int FUN_003c0d70(...);
 int FUN_003c149c(...);
-int FUN_003d9ba0(...);
+int btlEffectDisableModels(...);
 int FUN_003d9f74(...);
 int keyedValueFindPair(...);
 
@@ -49,7 +49,7 @@ int FUN_0027e5e4(...);
 int FUN_00293230(...);
 int FUN_00338060(...);
 int FUN_003445f8(...);
-int FUN_003ae108(...);
+int btlUiInitializeDisplayChannel(...);
 int FUN_003ae418(...);
 int FUN_003ae574(...);
 int FUN_003bcdb0(...);
@@ -65,7 +65,7 @@ int FUN_003d86a0(...);
 int FUN_003de758(...);
 
 int FUN_0023c638(...);
-int FUN_0023c6e4(...);
+int asdModelClearSlotColors(...);
 int FUN_0023c700(...);
 int FUN_00244fb0(...);
 int slotResetIdle(...);
@@ -121,7 +121,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: btlReflectCreateKind18. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
-/* Supplied declaration required: FUN_0023c6e4. */
+/* Supplied declaration required: asdModelClearSlotColors. */
 /* Supplied declaration required: FUN_0023c700. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: modelSetAnimationChannels. */
@@ -160,7 +160,7 @@ extern int FUN_002d8e10(void);
 /* Supplied declaration required: asdModelBankGetModelUnk08. */
 extern unsigned int FUN_00336740(int);
 /* Supplied declaration required: FUN_00338060. */
-/* Supplied declaration required: FUN_00338704. */
+/* Supplied declaration required: btlScriptQueueRequestIfIdle. */
 /* Supplied declaration required: FUN_00343f44. */
 /* Supplied declaration required: FUN_00344158. */
 /* Supplied declaration required: FUN_003445f8. */
@@ -169,7 +169,7 @@ extern unsigned int FUN_0039471c(unsigned int);
 extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: FUN_00394bbc. */
 /* Supplied declaration required: FUN_003adc64. */
-/* Supplied declaration required: FUN_003ae108. */
+/* Supplied declaration required: btlUiInitializeDisplayChannel. */
 /* Supplied declaration required: FUN_003ae418. */
 /* Supplied declaration required: FUN_003ae574. */
 /* Supplied declaration required: FUN_003aef64. */
@@ -194,7 +194,7 @@ extern int FUN_003d700c(int);
 /* Supplied declaration required: FUN_003d86a0. */
 /* Supplied declaration required: workAdoptGlobalHandle. */
 extern int FUN_003d9af8(int, int);
-/* Supplied declaration required: FUN_003d9ba0. */
+/* Supplied declaration required: btlEffectDisableModels. */
 /* Supplied declaration required: FUN_003d9f74. */
 /* Supplied declaration required: keyedValueFindPair. */
 /* Supplied declaration required: FUN_003de758. */
@@ -333,7 +333,7 @@ LAB_00344fc0:
     VectorSignedToFloat((int)(char)psVar2[0x11],(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0023c6e4(temp_v4,*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),(int)(char)psVar2[0x10],
+    asdModelClearSlotColors(temp_v4,*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),(int)(char)psVar2[0x10],
                  (int)*(char *)((int)psVar2 + 0x21));
     temp_v5 = *(int *)(psVar2 + 0x26);
     *(int *)(psVar2 + 0x26) = temp_v5 + 1;
@@ -347,7 +347,7 @@ LAB_00344fc0:
     VectorSignedToFloat(*(int *)(psVar2 + 0x14) - *(int *)(psVar2 + 0x26),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     asdModelBankGetModelUnk08((int)*(short *)(DAT_004398d4 + 0x8c),0);
-    FUN_0023c6e4(temp_v4);
+    asdModelClearSlotColors(temp_v4);
     temp_v5 = *(int *)(psVar2 + 0x26);
     *(int *)(psVar2 + 0x26) = temp_v5 + 1;
     if (*(int *)(psVar2 + 0x14) <= temp_v5 + 1) break;
@@ -648,7 +648,7 @@ LAB_00345938:
         if ((*puVar9 & 0x20) != 0) {
           temp_v5 = 4;
         }
-        FUN_003ae108(g_btlUiBlock,temp_v5);
+        btlUiInitializeDisplayChannel(g_btlUiBlock,temp_v5);
         if (psVar2[0x12] != 0) {
           FUN_003d6df0(g_btlMain);
         }
@@ -1002,7 +1002,7 @@ LAB_00346258:
     }
     break;
   case ')':
-    FUN_003d9ba0(DAT_00435d18);
+    btlEffectDisableModels(DAT_00435d18);
     break;
   case '*':
     temp_v7 = **(unsigned int **)(psVar2 + 0xc);
@@ -1165,7 +1165,7 @@ LAB_003453f8:
       puVar9 = (unsigned int *)*param_1;
       btlMainFindEntryByListedId(puVar9,(int)*(short *)(*(int *)(psVar2 + 10) + 0x62));
       if ((*puVar9 & 1) != 0 && (*puVar9 & 0x20) != 0) {
-        FUN_00338704(*param_1);
+        btlScriptQueueRequestIfIdle(*param_1);
       }
     }
     break;

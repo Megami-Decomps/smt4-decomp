@@ -29,7 +29,7 @@ s32 vec2GetYInt(const void *point);
 s32 vec2GetXInt(const void *point);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(void *animation);
-s32 FUN_004cf964(void *animation, s32 track);
+s32 objectGetIndexedSignedFlag(void *animation, s32 track);
 void FUN_004a1958(AnimatedPage *page);
 s32 FUN_002a482c(void *selector);
 void FUN_004a3e04(AnimatedPage *page);
@@ -49,9 +49,9 @@ void uiAnimatedPageToggleStep(AnimatedPage *page)
         page->phase = 1;
         return;
     }
-    if (FUN_004cf964(page->animation, page->track) && page->phase == 1) {
+    if (objectGetIndexedSignedFlag(page->animation, page->track) && page->phase == 1) {
         page->phase = 2;
-    } else if (FUN_004cf964(page->animation, page->track) && page->phase == 2) {
+    } else if (objectGetIndexedSignedFlag(page->animation, page->track) && page->phase == 2) {
         page->alternate = !page->alternate;
         FUN_004a1958(page);
         g_animatedPageSelection.selection = FUN_002a482c(page->selector) + 1;
@@ -61,7 +61,7 @@ void uiAnimatedPageToggleStep(AnimatedPage *page)
         uiSpriteBankApplyPreset(page->animation);
         page->phase = 3;
         return;
-    } else if (FUN_004cf964(page->animation, page->track) && page->phase == 3) {
+    } else if (objectGetIndexedSignedFlag(page->animation, page->track) && page->phase == 3) {
         page->state = 2;
         page->phase = 0;
     }

@@ -29,7 +29,7 @@ extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
 extern int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bff50. */
 
 
@@ -103,7 +103,7 @@ int FUN_002d8910(int param_1)
       }
     }
     else {
-      temp_v5 = FUN_002bd1fc();
+      temp_v5 = gameGetPlayerName();
       FUN_00295660(0x28,temp_v5);
       temp_v5 = scrWorkGetValue(1);
       messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);

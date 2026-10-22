@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdMemFree(char *);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_003478dc(int, char *);
 
 extern int FUN_00100d60(char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 extern int findRecordByKey(int);
@@ -30,7 +30,7 @@ int FUN_0034813c(char *param_1)
   if (temp_v2 != 0xff) {
     return temp_v2;
   }
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   if ((param_1 != (char *)0x0) && (*param_1 == 'V')) {
     temp_v0 = param_1[1];
     temp_v3 = temp_v0 == 'E';

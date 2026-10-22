@@ -21,7 +21,7 @@ typedef struct NameTask {
 
 extern NameBuffer *gameDataGetSecondName(void);
 extern NameBuffer *gameDataGetPlayerName(void);
-extern NameBuffer *FUN_002bd1fc(void);
+extern NameBuffer *gameGetPlayerName(void);
 extern int FUN_002bf818(void *a);
 extern void nameEntryCopyEditedName(NameTask *task, NameBuffer *name);
 extern int FUN_00296ee0(NameTask *task, int arg);
@@ -35,7 +35,7 @@ void nameFormApply(NameTask *task)
         return;
     }
     if (task->form.nameKind == 0 || task->form.nameKind == -1) {
-        name = FUN_002bd1fc();
+        name = gameGetPlayerName();
         name->words[0] = 0;
         name->words[1] = 0;
         name->words[2] = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00267074(...);
 int contentEntryGetE(void);
-int FUN_002eb1a4(int);
+int naviSetMapSlotDefault(int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int g_mapEnemy; /* 0x447600 */
 /* Supplied declaration required: FUN_00267074. */
 /* Supplied declaration required: contentEntryGetE. */
 extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_002eb1a4. */
+/* Supplied declaration required: naviSetMapSlotDefault. */
 
 
 void FUN_002f3c28(void)
@@ -189,7 +189,7 @@ void FUN_002f3c28(void)
       }
       else {
 LAB_002f3fe8:
-        FUN_002eb1a4(temp_v7);
+        naviSetMapSlotDefault(temp_v7);
       }
     }
 LAB_002f3ff0:

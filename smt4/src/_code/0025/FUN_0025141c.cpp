@@ -80,7 +80,7 @@ extern int gameGetUnitRecord(void);
 extern unsigned int categoryGetColor(int);
 extern int gameGetPlayerData(void);
 extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -128,7 +128,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
   temp_v14 = 0;
   if ((int)param_1->field_0x34 < 0) {
     temp_v7 = gameGetPlayerData();
-    temp_v2 = FUN_002bd1fc();
+    temp_v2 = gameGetPlayerName();
     textFormatBuffer(temp_v17,&LAB_00251798,temp_v2);
     temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x76);
     temp_v9 = -1;

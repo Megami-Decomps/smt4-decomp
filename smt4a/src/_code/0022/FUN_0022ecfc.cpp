@@ -47,8 +47,8 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0023dedc. */
-extern int FUN_00284140(int);
-extern int FUN_002a4860(int);
+extern int recordGetModeForId(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
@@ -115,7 +115,7 @@ void FUN_0022ecfc(void)
   if (0 < temp_v4) {
     do {
       if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = FUN_002a4894(temp_v3), temp_v4 != temp_v10)) {
-        temp_v4 = FUN_002a4860(temp_v3);
+        temp_v4 = resourceRunOperationIfUnblocked(temp_v3);
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v4 + temp_v10) * 2);
         temp_v4 = FUN_001834a4(0x1e,temp_v10 + 0x9e);
         if (temp_v11 != 0) {
@@ -169,13 +169,13 @@ void FUN_0022ecfc(void)
       (temp_v4 == 9 || temp_v4 == 10)))) {
     temp_v4 = FUN_002a4894(temp_v3);
     temp_v10 = FUN_001834a4(0x1e,temp_v4 + 0xb5);
-    temp_v5 = FUN_002a4860(temp_v3);
+    temp_v5 = resourceRunOperationIfUnblocked(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);
     efctSetSpeed();
     FUN_00164b5c(2,0x1e,0x11,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0x97);
     efctSetSpeed();
     FUN_001835b4(2,0x1e,0xab,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0x9c);
-    temp_v12 = FUN_00284140((int)*(short *)(temp_v0 + temp_v4 * 2 + 0xd28));
+    temp_v12 = recordGetModeForId((int)*(short *)(temp_v0 + temp_v4 * 2 + 0xd28));
     temp_v13 = temp_v12 == 1;
     temp_v14 = temp_v12 == 2;
     temp_v15 = temp_v12 == 6;

@@ -15,8 +15,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-extern int FUN_00284140(int);
-extern unsigned int FUN_002a4860(int);
+extern int recordGetModeForId(int);
+extern unsigned int resourceRunOperationIfUnblocked(int);
 extern int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_003450d4. */
 
@@ -36,7 +36,7 @@ void FUN_0041e450(int param_1)
                (int)*(short *)(param_1 + 0x440),(int)*(short *)(param_1 + 0x442),param_1 + 0x44c,0,1
               );
   if (temp_v1 != 0) {
-    temp_v0 = FUN_002a4860(param_1 + 0x3d8);
+    temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0x3d8);
     *(unsigned int *)(param_1 + 0x304) = temp_v0;
     temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
     *(int *)(param_1 + 0x308) = temp_v1;
@@ -59,7 +59,7 @@ void FUN_0041e450(int param_1)
       } while (temp_v1 < *(int *)(param_1 + 0x18));
     }
   }
-  temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x446));
+  temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x446));
   *(unsigned char *)(param_1 + 0x44e) = 0;
   *(unsigned char *)(param_1 + 0x44d) = 0;
   if (temp_v1 == 1 || temp_v1 == 2) {

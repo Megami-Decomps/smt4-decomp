@@ -20,7 +20,7 @@ int FUN_001695a0(void);
 int FUN_00183318(int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int scrScriptProcessGetEntry(unsigned int, unsigned int);
 int FUN_00275bc8(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
@@ -78,7 +78,7 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: FUN_00183318. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -191,10 +191,10 @@ unsigned int FUN_00225ddc(void)
       }
       else {
         puVar4 = temp_v6;
-        FUN_0020214c();
+        asdLoadFileSyncDefault();
         puVar2[0xb] = (unsigned int)puVar4;
         puVar4 = temp_v7;
-        FUN_0020214c();
+        asdLoadFileSyncDefault();
         puVar2[0xd] = (unsigned int)puVar4;
       }
       campCommonBgAcquire();

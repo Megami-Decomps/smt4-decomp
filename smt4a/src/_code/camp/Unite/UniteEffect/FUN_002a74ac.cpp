@@ -12,7 +12,7 @@ int sysPlaySe(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_0019e330(...);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_00275bc8(...);
 int FUN_00371c3c(...);
 int FUN_00387240(...);
@@ -68,7 +68,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_001fc348. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: uniteCameraDestroy. */
 extern int FUN_003316b4(int);
@@ -223,14 +223,14 @@ void FUN_002a74ac(void)
     } while (temp_v3 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
   }
   puVar4 = &LAB_002a7a68;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 + 0x334) = puVar4;
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
   FUN_00184310();
   temp_v3 = FUN_003316b4((int)*(char *)(temp_v1 + 0x38));
   textFormatBuffer(temp_v12,&LAB_002a7a7c,temp_v3 + 1);
   puVar4 = temp_v12;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 + 0x33c) = puVar4;
   temp_v2 = *(unsigned int *)(temp_v0 + 0x334);
   FUN_00275bc8(temp_v2,puVar4);

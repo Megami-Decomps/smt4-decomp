@@ -20,7 +20,7 @@ extern int FUN_00152314(int, unsigned int, int **);
 /* Supplied declaration required: FUN_002a4b0c. */
 /* Supplied declaration required: FUN_002a78c0. */
 extern int FUN_002c3984(void);
-extern unsigned int FUN_002c3994(void);
+extern unsigned int nnosGetHeapBase(void);
 
 
 unsigned int nw_snd_internal_SoundArchiveLoader_LoadImpl
@@ -56,7 +56,7 @@ unsigned int nw_snd_internal_SoundArchiveLoader_LoadImpl
     return 0;
   }
   if (param_5 != 0) {
-    temp_v2 = FUN_002c3994();
+    temp_v2 = nnosGetHeapBase();
     temp_v1 = FUN_002c3984();
     if ((temp_v0 < temp_v2) || (temp_v1 + temp_v2 < temp_v0 + (int)unaff_r4)) {
       temp_v0 = 0;

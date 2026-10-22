@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int screenShowMessage(int);
 int FUN_00359b6c(unsigned int);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern int g_camp; /* 0x57f108 */
 
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_00359b6c. */
@@ -32,14 +32,14 @@ void FUN_0028b088(int param_1)
   temp_v0 = g_camp;
   if (param_1 == 0x17) {
     temp_v1 = g_camp + 0x444;
-    temp_v2 = FUN_002a4860();
+    temp_v2 = resourceRunOperationIfUnblocked();
     temp_v1 = FUN_002a4894(temp_v1);
     screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2e9c));
     return;
   }
   if (param_1 < 0x18) {
     if (param_1 == 0xe) {
-      temp_v1 = FUN_002a4860(g_camp + 0x188);
+      temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x188);
       temp_v2 = FUN_002a4894(temp_v0 + 0x188);
       screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2a78));
       return;
@@ -48,7 +48,7 @@ void FUN_0028b088(int param_1)
       if (param_1 != 10) {
         if (param_1 < 0xb) {
           if ((param_1 != 0) && (param_1 == 9)) {
-            temp_v1 = FUN_002a4860(g_camp + 0x1ec);
+            temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x1ec);
             temp_v2 = FUN_002a4894(temp_v0 + 0x1ec);
             FUN_00359b6c(*(unsigned int *)(temp_v0 + (temp_v2 + temp_v1) * 8 + 0x1b70));
             return;
@@ -56,13 +56,13 @@ void FUN_0028b088(int param_1)
         }
         else {
           if (param_1 == 0xb) {
-            temp_v1 = FUN_002a4860(g_camp + 0xc0);
+            temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0xc0);
             temp_v2 = FUN_002a4894(temp_v0 + 0xc0);
             screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x21b0));
             return;
           }
           if (param_1 == 0xd) {
-            temp_v1 = FUN_002a4860(g_camp + 0x124);
+            temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x124);
             temp_v2 = FUN_002a4894(temp_v0 + 0x124);
             screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x22a8));
             return;
@@ -72,25 +72,25 @@ void FUN_0028b088(int param_1)
     }
     else {
       if (param_1 == 0x13) {
-        temp_v1 = FUN_002a4860(g_camp + 0x2b4);
+        temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x2b4);
         temp_v2 = FUN_002a4894(temp_v0 + 0x2b4);
         screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2b68));
         return;
       }
       if (param_1 == 0x14) {
-        temp_v1 = FUN_002a4860(g_camp + 0x318);
+        temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x318);
         temp_v2 = FUN_002a4894(temp_v0 + 0x318);
         screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2c58));
         return;
       }
       if (param_1 == 0x15) {
-        temp_v1 = FUN_002a4860(g_camp + 0x37c);
+        temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x37c);
         temp_v2 = FUN_002a4894(temp_v0 + 0x37c);
         screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2d48));
         return;
       }
       if (param_1 == 0x16) {
-        temp_v1 = FUN_002a4860(g_camp + 0x3e0);
+        temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x3e0);
         temp_v2 = FUN_002a4894(temp_v0 + 0x3e0);
         screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2dac));
         return;
@@ -99,7 +99,7 @@ void FUN_0028b088(int param_1)
     return;
   }
   if (param_1 == 0x4a) {
-    temp_v1 = FUN_002a4860(g_camp + 0x37c);
+    temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x37c);
     temp_v2 = FUN_002a4894(temp_v0 + 0x37c);
     screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2d48));
     return;
@@ -111,18 +111,18 @@ void FUN_0028b088(int param_1)
           if (param_1 != 0x49) {
             return;
           }
-          temp_v1 = FUN_002a4860(g_camp + 0x318);
+          temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x318);
           temp_v2 = FUN_002a4894(temp_v0 + 0x318);
           screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2c58));
           return;
         }
-        temp_v1 = FUN_002a4860(g_camp + 0x2b4);
+        temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x2b4);
         temp_v2 = FUN_002a4894(temp_v0 + 0x2b4);
         screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2b68));
         return;
       }
       temp_v1 = g_camp + 0x50c;
-      temp_v2 = FUN_002a4860();
+      temp_v2 = resourceRunOperationIfUnblocked();
       temp_v1 = FUN_002a4894(temp_v1);
       screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x307c));
       return;
@@ -130,14 +130,14 @@ void FUN_0028b088(int param_1)
   }
   else {
     if (param_1 == 0x4b) {
-      temp_v1 = FUN_002a4860(g_camp + 0x3e0);
+      temp_v1 = resourceRunOperationIfUnblocked(g_camp + 0x3e0);
       temp_v2 = FUN_002a4894(temp_v0 + 0x3e0);
       screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2dac));
       return;
     }
     if (param_1 == 0x4c) {
       temp_v1 = g_camp + 0x444;
-      temp_v2 = FUN_002a4860();
+      temp_v2 = resourceRunOperationIfUnblocked();
       temp_v1 = FUN_002a4894(temp_v1);
       screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2e9c));
       return;
@@ -147,14 +147,14 @@ void FUN_0028b088(int param_1)
         return;
       }
       temp_v1 = g_camp + 0x50c;
-      temp_v2 = FUN_002a4860();
+      temp_v2 = resourceRunOperationIfUnblocked();
       temp_v1 = FUN_002a4894(temp_v1);
       screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x307c));
       return;
     }
   }
   temp_v1 = g_camp + 0x4a8;
-  temp_v2 = FUN_002a4860();
+  temp_v2 = resourceRunOperationIfUnblocked();
   temp_v1 = FUN_002a4894(temp_v1);
   screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2f8c));
   return;

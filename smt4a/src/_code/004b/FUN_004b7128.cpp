@@ -6,13 +6,13 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdTMTexLoadMainHeap(int, unsigned int);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_00275bc8(unsigned int, char *);
 int asdLoadFileAsyncSimple(...);
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 
@@ -56,10 +56,10 @@ void FUN_004b7128(int param_1)
   asdLoadFileAsyncSimple(temp_v3,param_1 + 0x1128,0);
   asdLoadFileAsyncSimple(temp_v4,param_1 + 0x112c,0);
   pcVar1 = "map/all/mapsys_scr.bf";
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(char **)(param_1 + 0x1150) = pcVar1;
   pcVar1 = "map/all/mapsys_mes.mbm";
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(char **)(param_1 + 0x1154) = pcVar1;
   temp_v2 = *(unsigned int *)(param_1 + 0x1150);
   FUN_00275bc8(temp_v2,pcVar1);

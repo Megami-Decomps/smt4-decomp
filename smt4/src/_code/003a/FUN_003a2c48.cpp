@@ -9,7 +9,7 @@ int FUN_00230954(int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_002328b4(void);
 int FUN_00233240(int, int);
-int FUN_00233344(int, int);
+int uiAnimationAdvanceChannel(int, int);
 int FUN_00233410(int);
 int FUN_00233818(...);
 int ifTouchRegionClearAll(...);
@@ -37,7 +37,7 @@ extern unsigned char LAB_003a2f78; /* 0x3a2f78 */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_00233344. */
+/* Supplied declaration required: uiAnimationAdvanceChannel. */
 /* Supplied declaration required: FUN_00233410. */
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233818. */
@@ -126,8 +126,8 @@ void FUN_003a2c48(int param_1)
     FUN_00230954(param_1 + 0x828);
     (**(romwright_code **)(**(int **)(param_1 + 0x85c) + 0xc))(*(int **)(param_1 + 0x85c),temp_v2);
     FUN_00233410(temp_v2);
-    FUN_00233344(param_1 + 0x3a8,2);
-    FUN_00233344(param_1 + 0x3a8,3);
+    uiAnimationAdvanceChannel(param_1 + 0x3a8,2);
+    uiAnimationAdvanceChannel(param_1 + 0x3a8,3);
     temp_v2 = flaggedValueHolderGetTotal(temp_v2);
     FUN_0029212c(*(unsigned short *)(param_1 + temp_v2 * 6 + 0x9d1e));
     temp_v2 = FUN_0027ee9c();

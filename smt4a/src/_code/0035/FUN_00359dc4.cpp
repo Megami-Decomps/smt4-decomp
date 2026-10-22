@@ -18,7 +18,7 @@ int controllerApplyPreset(unsigned int, int);
 int screenStartOrClear(unsigned int, int);
 int characterInfoPanelPopulate(unsigned int, unsigned int, unsigned int);
 int FUN_003a7a88(int, int);
-int FUN_003e5810(unsigned int, int);
+int resourceEntryMarkReleased(unsigned int, int);
 int FUN_003e5c68(unsigned int, int);
 
 /* Supplied declaration required: sysPlaySe. */
@@ -31,14 +31,14 @@ extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_002e2184. */
 /* Supplied declaration required: overlayGetStatusScene. */
-extern int FUN_0032cfc8(void);
+extern int buttonHelpGetPanelMode(void);
 extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: overlayIsNotBusy. */
 /* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: FUN_003a7a88. */
-/* Supplied declaration required: FUN_003e5810. */
+/* Supplied declaration required: resourceEntryMarkReleased. */
 /* Supplied declaration required: FUN_003e5c68. */
 
 
@@ -58,11 +58,11 @@ void FUN_00359dc4(int param_1)
       (FUN_003a7a88(temp_v0,1), temp_v0 != 0)))) {
     if (*(char *)(param_1 + 0x194) == '\0') {
       temp_v0 = overlayGetStatusScene();
-      FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),0);
+      resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),0);
       temp_v0 = overlayGetStatusScene();
-      FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),1);
+      resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),1);
       temp_v0 = overlayGetStatusScene();
-      FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),2);
+      resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),2);
       temp_v1 = gameGetPlayerData();
       temp_v2 = overlayGetStatusScene();
       FUN_002e2184(temp_v2,temp_v1);
@@ -97,7 +97,7 @@ void FUN_00359dc4(int param_1)
           controllerApplyPreset(*(unsigned int *)(param_1 + 4),*(unsigned char *)(*(int *)(param_1 + 8) + 0x42));
           characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                        *(unsigned int *)(param_1 + 0x58));
-          temp_v0 = FUN_0032cfc8();
+          temp_v0 = buttonHelpGetPanelMode();
           if (temp_v0 == 0) {
             temp_v1 = overlayGetBuffer1();
             screenStartOrClear(temp_v1,0xf);

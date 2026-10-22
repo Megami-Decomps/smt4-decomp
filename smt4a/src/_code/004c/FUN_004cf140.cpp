@@ -7,7 +7,7 @@ extern "C" {
 int ifTouchRegionRemove(void);
 int slotSetRequest(int, int, int);
 int ifTouchRegionAdd(int, int, int, int);
-int FUN_0037ed38(void);
+int campCommonBgInitializeCrazingSumaho(void);
 int ref208SetPair1C(int);
 int commonBgReleaseOwnedJob(void);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -21,7 +21,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: ifTouchRegionAdd. */
-/* Supplied declaration required: FUN_0037ed38. */
+/* Supplied declaration required: campCommonBgInitializeCrazingSumaho. */
 /* Supplied declaration required: ref208SetPair1C. */
 extern int ref208HasObj(void);
 /* Supplied declaration required: commonBgReleaseOwnedJob. */
@@ -48,7 +48,7 @@ unsigned int FUN_004cf140(int param_1)
     *(unsigned char *)(param_1 + 0x24) = 0;
     temp_v1 = ref208HasObj();
     if (temp_v1 == 0) {
-      FUN_0037ed38();
+      campCommonBgInitializeCrazingSumaho();
       *(unsigned char *)(param_1 + 0x24) = 1;
     }
     ref208SetPair1C(1);

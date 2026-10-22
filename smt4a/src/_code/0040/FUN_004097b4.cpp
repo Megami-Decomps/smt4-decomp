@@ -22,7 +22,7 @@ extern unsigned int asdGxPresetsGetByKind(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern unsigned int FUN_00184df8(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 extern int FUN_00387580(unsigned int);
 extern int FUN_003a48dc(unsigned int, unsigned int, unsigned int);
 extern int flagsPackFourBooleans(unsigned char);
@@ -49,7 +49,7 @@ void FUN_004097b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   temp_v5 = 0;
   temp_v0 = *(unsigned int *)(param_1 + 0x11f0);
-  temp_v1 = FUN_00184df8(*(unsigned int *)(param_1 + 0x52c));
+  temp_v1 = asdGxPresetsGetHeightByKind(*(unsigned int *)(param_1 + 0x52c));
   VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = asdGxPresetsGetByKind(*(unsigned int *)(param_1 + 0x52c));
   VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -11,11 +11,11 @@ int FUN_0026b9bc(void);
 int FUN_0026bc6c(void);
 int FUN_0029bbc8(void);
 int partyFindActiveSlotById(...);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_0029bed8(...);
 int FUN_0029c1c8(...);
 int unitRecalculateEffectiveStats(...);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int eventQueueAddUnique(...);
 int FUN_002bee58(...);
 int memClear(...);
@@ -148,7 +148,7 @@ extern int gameGetNavigationState(void);
 /* Supplied declaration required: FUN_0026d670. */
 /* Supplied declaration required: FUN_0026d6a4. */
 extern int gameGetPendingNavigationState(void);
-extern int FUN_00282cb4(void);
+extern int campCecIsActive(void);
 extern unsigned short FUN_00282ccc(void);
 extern unsigned char FUN_00282e70(void);
 /* Supplied declaration required: FUN_0028a924. */
@@ -179,7 +179,7 @@ extern int FUN_0029ae44(void);
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: partyFindActiveSlotById. */
 /* Supplied declaration required: FUN_0029bd4c. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_0029bed8. */
 extern unsigned int FUN_0029c0c0(unsigned int, int);
 /* Supplied declaration required: FUN_0029c1c8. */
@@ -205,8 +205,8 @@ extern int FUN_0029dfa8(void);
 extern int gameGetFlagByte12e8(void);
 extern int FUN_0029e02c(void);
 extern int FUN_0029e0f8(void);
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e890. */
 /* Supplied declaration required: FUN_0029e8b8. */
@@ -402,7 +402,7 @@ joined_r0x001c43a0:
     break;
   case 1:
     if ((((*(char *)(temp_v1 + 0x66c) == '\x01') && (temp_v6 = FUN_0026d6a4(1), temp_v6 != 0)) &&
-        (temp_v6 = FUN_0029dfa8(), temp_v6 != 0)) && (temp_v6 = FUN_00282cb4(), temp_v6 != 0)) {
+        (temp_v6 = FUN_0029dfa8(), temp_v6 != 0)) && (temp_v6 = campCecIsActive(), temp_v6 != 0)) {
       FUN_0026cf4c();
     }
     break;
@@ -2204,7 +2204,7 @@ LAB_001c7720:
   case 0xf:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
-      FUN_0029e17c();
+      useCounterRelease();
       FUN_002a0cc8(0);
       if (*(char *)(temp_v1 + 0x66c) != '\x01') {
         FUN_0026c214();
@@ -2215,7 +2215,7 @@ LAB_001c7720:
       partyPanelSetState(temp_v7,temp_v14);
       break;
     }
-    temp_v6 = FUN_0029e130();
+    temp_v6 = useCounterGetCurrentValue();
     if (temp_v6 == 0x4b) break;
     temp_v6 = 0;
     if (*(int *)(temp_v1 + 0x674) >= 0) {
@@ -2271,7 +2271,7 @@ LAB_001c7990:
     temp_v6 = messageMainTargetIsClear();
     if (temp_v6 == 1) {
       temp_v7 = FUN_0028d1f4(*(unsigned short *)(temp_v1 + 0x36));
-      FUN_0029be5c(1,temp_v7);
+      gameCounterAddSaturating(1,temp_v7);
       temp_v14 = 1;
       temp_v7 = 10;
       partyPanelSetState(temp_v7,temp_v14);
@@ -2716,7 +2716,7 @@ LAB_001c7c50:
           if (temp_v6 == 0) {
             FUN_0029bed8(*(unsigned short *)(temp_v4 + 0x46));
           }
-          FUN_0029be5c(0x26,1);
+          gameCounterAddSaturating(0x26,1);
           FUN_002e3378(*(unsigned short *)(temp_v4 + 0x46));
         }
         temp_v14 = 1;

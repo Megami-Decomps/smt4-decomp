@@ -8,7 +8,7 @@ int FUN_00192550(void);
 int dataTable04FindById(void);
 int FUN_003e8bb0(unsigned char [4], int, unsigned int);
 int FUN_003f0e94(int, unsigned int);
-int FUN_004a92b8(unsigned int);
+int btlUIClearWorkTables(unsigned int);
 int FUN_004ab80c(unsigned int, char [4], unsigned int *, int *);
 int FUN_004e980c(int *, unsigned int *);
 int FUN_004eb838(int *, unsigned int *);
@@ -38,7 +38,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e94. */
-/* Supplied declaration required: FUN_004a92b8. */
+/* Supplied declaration required: btlUIClearWorkTables. */
 /* Supplied declaration required: FUN_004ab80c. */
 extern int FUN_004aba9c(unsigned int);
 /* Supplied declaration required: FUN_004e980c. */
@@ -159,7 +159,7 @@ LAB_004de6b4:
         }
         temp_v3 = temp_v3 + 1;
       } while ((int)temp_v3 < 0x40);
-      FUN_004a92b8(g_btlUiBlock);
+      btlUIClearWorkTables(g_btlUiBlock);
       FUN_004eb838(param_1,param_2);
       return 1;
     }
@@ -178,7 +178,7 @@ LAB_004de5cc:
          ) {
         *param_2 = temp_v3 | 0x4004;
       }
-      FUN_004a92b8(g_btlUiBlock);
+      btlUIClearWorkTables(g_btlUiBlock);
       FUN_004eb838(param_1,param_2);
       return 1;
     }
@@ -209,7 +209,7 @@ LAB_004de56c:
   temp_v4 = *param_1;
   *(unsigned int *)(temp_v4 + 0x2008) = temp_v8;
   *(unsigned int *)(temp_v4 + 0x200c) = uStack_6c;
-  FUN_004a92b8(g_btlUiBlock);
+  btlUIClearWorkTables(g_btlUiBlock);
   FUN_004eb838(param_1,param_2);
   return 1;
 }

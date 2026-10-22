@@ -30,7 +30,7 @@ u8 indexedByteLookup(u32 step);
 u8 thresholdGetPrimary(u32 step);
 u8 thresholdGetSecondary(u32 step);
 u8 digitGlyphLookup(u32 step);
-void FUN_002c587c(void);
+void titleConfigApplyAudio(void);
 void *titleConfigGetModeFlag(void);
 void audioApplyChannelVolume(u32 index, void *touch, u32 enabled);
 void workCommandRefreshActiveSlots(void);
@@ -123,7 +123,7 @@ u32 titleConfigUpdate(void)
         g_titleConfigValues.voice = thresholdGetSecondary(work->settings[2]);
         g_titleConfigValues.auxiliary = digitGlyphLookup(work->settings[1]);
         if (value != previous) {
-            FUN_002c587c();
+            titleConfigApplyAudio();
             audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
             audioApplyChannelVolume(1, titleConfigGetModeFlag(), 1);
             if (selected < 2) {
@@ -164,7 +164,7 @@ u32 titleConfigUpdate(void)
             eventQueueAddUniqueIfValid(0x100016E);
             timerStart(work->window, 1, 0);
             FUN_002ad8b4(&g_titleConfigValues, work->saved);
-            FUN_002c587c();
+            titleConfigApplyAudio();
             audioApplyChannelVolume(0, titleConfigGetModeFlag(), 1);
             audioApplyChannelVolume(1, titleConfigGetModeFlag(), 1);
             work->state = 3;

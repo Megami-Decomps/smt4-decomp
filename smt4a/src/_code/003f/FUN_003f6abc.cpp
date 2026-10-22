@@ -9,7 +9,7 @@ int FUN_001688c4(unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, int);
 int flagsSetOrClearBit(int, int);
-int FUN_003ff1d4(int, int);
+int gameFlagsSetAlternateMode(int, int);
 int FUN_003ff20c(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: flagsSetOrClearBit. */
 extern int flagsBGetBit1(unsigned short);
-/* Supplied declaration required: FUN_003ff1d4. */
+/* Supplied declaration required: gameFlagsSetAlternateMode. */
 extern int flagsBGetBit2(unsigned short);
 /* Supplied declaration required: FUN_003ff20c. */
 
@@ -59,7 +59,7 @@ void FUN_003f6abc(int param_1)
   *(unsigned int *)(param_1 + 0x3c) = 0;
   temp_v3 = flagsBGetBit1(temp_v0);
   if (temp_v3 != 0) {
-    FUN_003ff1d4(temp_v0,0);
+    gameFlagsSetAlternateMode(temp_v0,0);
     temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x5e0) + 0x30);
     if (temp_v4 != 0) {
       *(unsigned int *)(param_1 + 0x3c) = temp_v4;

@@ -15,7 +15,7 @@ u32 scrGetArg(u32);
 const TalkReplacementDefinition *dataTable00FindById(u32);
 const TalkReplacementDemon *FUN_00184310(u32);
 const TalkReplacementPlayer *gameGetPlayerData();
-s32 FUN_004d0bf0(u16);
+s32 gameStockContainsEntry(u16);
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 s32 FUN_00184964(s32, s32);
 void FUN_00180118(u16);
@@ -30,7 +30,7 @@ u32 scrTalkChooseReplacementDemon()
     const TalkReplacementDefinition *successor = dataTable00FindById(successorId);
     FUN_00184310(successorId);
     if (!successorId || !successor || !(successor->flags & 0x80) ||
-        gameGetPlayerData()->level < (successor->level & 0x7fffU) || FUN_004d0bf0(successorId)) {
+        gameGetPlayerData()->level < (successor->level & 0x7fffU) || gameStockContainsEntry(successorId)) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Talk\\btlTalkCommand.cpp", 1054);
         s16 *candidates = (s16 *)asdMemoryAllocTracked(0x100, 0x100, 0, 1201 * sizeof(s16), 1);
         u16 count = 0;
@@ -52,7 +52,7 @@ u32 scrTalkChooseReplacementDemon()
                 const TalkReplacementDemon *demon = FUN_00184310((u16)id);
                 const TalkReplacementDefinition *definition = dataTable00FindById((u16)id);
                 if (lower <= demon->level && demon->level <= upper && (definition->flags & 0x80) &&
-                    !FUN_004d0bf0(demon->id)) {
+                    !gameStockContainsEntry(demon->id)) {
                     FUN_00180118(demon->id);
                     candidates[count++] = demon->id;
                 }

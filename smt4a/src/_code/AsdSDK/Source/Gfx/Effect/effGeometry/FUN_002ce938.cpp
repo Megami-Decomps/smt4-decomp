@@ -6,7 +6,7 @@ extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_002e1450(unsigned int *);
+int matrix44SetIdentity(unsigned int *);
 int slotInit(unsigned int, int, int, int);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char DAT_0054baf8; /* 0x54baf8 */
 
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_002e1450. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: slotInit. */
 extern unsigned int slotReset(void);
 
@@ -65,7 +65,7 @@ unsigned int * FUN_002ce938(int param_1,int param_2,int param_3,unsigned short p
       puVar3[3] = in_s0;
     } while ((int)temp_v1 < param_1);
   }
-  FUN_002e1450(puVar1 + 6);
+  matrix44SetIdentity(puVar1 + 6);
   *(unsigned short *)((int)puVar1 + 0x12) = param_4 | 0x100;
   *(short *)(puVar1 + 2) = (short)param_1;
   *(short *)((int)puVar1 + 0xe) = (short)(param_2 * param_1);

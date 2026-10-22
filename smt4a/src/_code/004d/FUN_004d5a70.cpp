@@ -10,7 +10,7 @@ int jobSetText(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(...);
 int asdListBoxSetToggleItem(...);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int FUN_003592dc(...);
 
 typedef struct fn_004d5a70_arg0 fn_004d5a70_arg0;
@@ -45,7 +45,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: FUN_003592dc. */
 
 
@@ -70,11 +70,11 @@ void FUN_004d5a70(fn_004d5a70_arg0 *param_1,int param_2)
   asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x20) >> 5);
   asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x40) >> 6);
   asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x80) >> 7);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,4,0,10);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,6,0xfffffc19,999);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,7,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,4,0,10);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,6,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,7,0xfffffc19,999);
   return;
 }
 

@@ -21,7 +21,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0022e354. */
-extern int FUN_002b6a54(int, unsigned short);
+extern int supportUnitGetEntry(int, unsigned short);
 extern int gameGetSupportUnitData(void);
 
 
@@ -37,7 +37,7 @@ unsigned short FUN_003c862c(fn_003c862c_arg0 *param_1,unsigned int param_2,unsig
   temp_v0 = gameGetSupportUnitData();
   temp_v1 = gameGetSupportUnitData();
   if ((*(short *)(temp_v1 + 0x46) != 0) && (*(short *)(temp_v1 + 0x604) != 0)) {
-    temp_v0 = FUN_002b6a54((int)*(short *)(temp_v0 + 0x604),*(unsigned short *)(temp_v0 + 0x606));
+    temp_v0 = supportUnitGetEntry((int)*(short *)(temp_v0 + 0x604),*(unsigned short *)(temp_v0 + 0x606));
     temp_v2 = (unsigned int)(*(unsigned short *)(temp_v0 + (int)param_1 * 2 + 0x24) & 0xfc00);
   }
   else {

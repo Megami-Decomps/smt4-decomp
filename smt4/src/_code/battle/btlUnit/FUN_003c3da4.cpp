@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022a358(...);
+int asdListBoxSetFloatItem(...);
 int asdListBoxSetItemMode3(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
@@ -38,7 +38,7 @@ extern unsigned int DAT_00439ce8; /* 0x439ce8 */
 extern unsigned int DAT_00439cf0; /* 0x439cf0 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
-/* Supplied declaration required: FUN_0022a358. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
@@ -71,7 +71,7 @@ void FUN_003c3da4(int param_1,int param_2)
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),6,DAT_00439ce2,0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),7,DAT_00439ce3,0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),8,DAT_00439cf0,0,0x78,0);
-  FUN_0022a358(*(unsigned int *)(param_1 + 0x10),9,0,1);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),9,0,1);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),10,(int)DAT_00439a50,0xfffffa24,0x5dc,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xb,(int)DAT_00439a54,0xfffffa24,0x5dc,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xc,(int)DAT_00439a52,0xfffffa24,0x5dc,0);

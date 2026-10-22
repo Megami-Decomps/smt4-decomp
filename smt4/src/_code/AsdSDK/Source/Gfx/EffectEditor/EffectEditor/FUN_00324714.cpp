@@ -9,7 +9,7 @@ int effPartsSetData(unsigned int, unsigned int, unsigned int, int);
 int effBlockCreateFromBlock(void);
 int effectEditorApplyHandlerState(void);
 int FUN_0025c650(unsigned int, unsigned int *);
-int FUN_002629a8(int, int);
+int resourceQueueDeferredDestroy(int, int);
 int rt_memcpy_w144(unsigned int *, int);
 int libc_strcpy(unsigned int *, unsigned int);
 int nodeListFindByKey(unsigned int, unsigned int);
@@ -43,7 +43,7 @@ extern unsigned int resourceResolveHeaderPointer(unsigned int);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: FUN_0025c650. */
-/* Supplied declaration required: FUN_002629a8. */
+/* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: rt_memcpy_w144. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: nodeListFindByKey. */
@@ -132,7 +132,7 @@ LAB_00324888:
       DAT_0044eae4 = 0;
       DAT_0044eae8 = 0;
       if (DAT_0044eaa0 != 0) {
-        FUN_002629a8(DAT_0044eaa0,3);
+        resourceQueueDeferredDestroy(DAT_0044eaa0,3);
         DAT_0044eaa0 = 0;
       }
       return 0x800000;

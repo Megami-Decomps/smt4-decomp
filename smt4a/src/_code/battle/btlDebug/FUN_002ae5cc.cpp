@@ -105,7 +105,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_0016432c. */
@@ -528,7 +528,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
         FUN_002b4e7c();
         temp_v30 = (int)(short)temp_v8;
         temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
-        temp_v12 = FUN_0015687c();
+        temp_v12 = gameGetPlayerName();
         textFormatBuffer(temp_v32,&LAB_002af620,temp_v12);
         temp_v48 = heldAmountLessThan(temp_v30,0xffffffff);
         if (temp_v7 < 1) {

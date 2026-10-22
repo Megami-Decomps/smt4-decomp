@@ -37,7 +37,7 @@ extern int FUN_00339e90(int);
 /* Supplied declaration required: FUN_00339fa8. */
 /* Supplied declaration required: FUN_0033a360. */
 extern int FUN_0033ac58(int);
-extern int FUN_003d6b48(unsigned int);
+extern int cameraCreateFromStateResource(unsigned int);
 /* Supplied declaration required: FUN_003d6fd4. */
 /* Supplied declaration required: FUN_003dba3c. */
 /* Supplied declaration required: btlAuxAreResourcesReady. */
@@ -56,7 +56,7 @@ unsigned int FUN_003d1c1c(int *param_1,int param_2)
     *(unsigned int *)(param_2 + 8) = 1;
     return 0;
   case 1:
-    temp_v1 = FUN_003d6b48(g_btlMain);
+    temp_v1 = cameraCreateFromStateResource(g_btlMain);
     if (temp_v1 == 0) {
       return 0;
     }

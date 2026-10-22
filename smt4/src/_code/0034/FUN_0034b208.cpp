@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0023b5e0(...);
-int FUN_00241d44(...);
+int gpuSubmitFloatVectorsOrDefault(...);
 int forwardRecoveredCallback(...);
 int FUN_002b011c(...);
 int FUN_002c1b64(...);
@@ -56,7 +56,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0023b5e0. */
-/* Supplied declaration required: FUN_00241d44. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -186,7 +186,7 @@ void FUN_0034b208(fn_0034b208_arg0 *param_1)
       FUN_002b011c();
       temp_v0 = 0;
       do {
-        FUN_00241d44(&temp_v31);
+        gpuSubmitFloatVectorsOrDefault(&temp_v31);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 4);
       forwardRecoveredCallback();

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(int, int);
 int FUN_0026e848(int);
 int FUN_0026fa30(void);
-int FUN_002884c8(int);
+int partyPanelToggleDisplayMode(int);
 int __aeabi_idivmod(unsigned int, unsigned int);
 
 extern int g_partyPanel; /* 0x57f268 */
@@ -15,7 +15,7 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_0026e848. */
 /* Supplied declaration required: FUN_0026fa30. */
-/* Supplied declaration required: FUN_002884c8. */
+/* Supplied declaration required: partyPanelToggleDisplayMode. */
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 extern unsigned int widgetSubCallIfVisible(int);
@@ -79,7 +79,7 @@ LAB_0020ac8c:
   if (temp_v3 == 0) {
     return 0;
   }
-  FUN_002884c8(param_1);
+  partyPanelToggleDisplayMode(param_1);
   FUN_0026fa30();
   return 1;
 }

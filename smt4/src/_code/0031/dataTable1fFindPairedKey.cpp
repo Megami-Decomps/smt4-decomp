@@ -11,7 +11,7 @@ struct PairedKeyTable {
 
 extern "C" {
 PairedKeyTable* fileSlotGetBuffer(u32 slot);
-s32 FUN_001e16bc(const void* key, const void* record);
+s32 dataCompareSignedWordKeys(const void* key, const void* record);
 void* libc_bsearch(const void* key, const void* base, u32 count, u32 size,
                    s32 (*compare)(const void*, const void*));
 
@@ -26,6 +26,6 @@ PairedKeyRecord* dataTable1fFindPairedKey(u16 first, u16 second)
     key.second = second;
     return static_cast<PairedKeyRecord*>(libc_bsearch(
         &key, records, (size - sizeof(PairedKeyTable)) / sizeof(PairedKeyRecord),
-        sizeof(PairedKeyRecord), FUN_001e16bc));
+        sizeof(PairedKeyRecord), dataCompareSignedWordKeys));
 }
 }

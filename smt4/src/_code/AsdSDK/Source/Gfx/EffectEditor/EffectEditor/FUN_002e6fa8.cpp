@@ -7,7 +7,7 @@ extern "C" {
 int effMenuNodeCreate(void);
 int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
 int libc_strcpy(unsigned char *, unsigned char [50]);
-int FUN_002e70e0(unsigned int *, unsigned char [50]);
+int namedObjectFormatFullName(unsigned int *, unsigned char [50]);
 int FUN_002f2aa8(void);
 int namedObjectFormatName(unsigned int *, unsigned char [50]);
 
@@ -28,7 +28,7 @@ extern unsigned char DAT_004d8bd0; /* 0x4d8bd0 */
 /* Supplied declaration required: effMenuNodeCreate. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e70e0. */
+/* Supplied declaration required: namedObjectFormatFullName. */
 /* Supplied declaration required: FUN_002f2aa8. */
 /* Supplied declaration required: namedObjectFormatName. */
 
@@ -49,7 +49,7 @@ unsigned char * FUN_002e6fa8(void)
   puVar2 = &DAT_00400001;
   if (DAT_0044eac8 != (unsigned int *)0x0) {
     FUN_002f2aa8();
-    FUN_002e70e0(DAT_0044eac8,temp_v0);
+    namedObjectFormatFullName(DAT_0044eac8,temp_v0);
     namedObjectFormatName(DAT_0044eac8,temp_v1);
     temp_v2 = DAT_0044eac8[2];
     if (temp_v2 == 1) {

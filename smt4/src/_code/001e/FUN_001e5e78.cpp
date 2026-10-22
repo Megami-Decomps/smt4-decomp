@@ -8,10 +8,10 @@ int CONCAT44(double, double);
 int mapFlagSet(unsigned int);
 int FUN_0025a1fc(...);
 int FUN_0025a8d8(...);
-int FUN_0025b478(...);
+int mapFlagIsSet(...);
 int randomGetNormalizedFloat(void);
 int FUN_0028250c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_00287b0c(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00291e40(int);
@@ -69,11 +69,11 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0025a1fc. */
 /* Supplied declaration required: FUN_0025a8d8. */
 extern int FUN_0025b408(void);
-/* Supplied declaration required: FUN_0025b478. */
+/* Supplied declaration required: mapFlagIsSet. */
 extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
@@ -149,7 +149,7 @@ void FUN_001e5e78(int param_1)
   }
   temp_v12 = *(int *)(DAT_004474f4 + 0x58);
   temp_v32 = param_1;
-  FUN_00287aec();
+  mathDistanceBetweenPoints();
   temp_v6 = g_mapIf;
   temp_v21 = 0x4248000000000000;
   temp_v22 = 0x3f800000;
@@ -159,7 +159,7 @@ void FUN_001e5e78(int param_1)
       temp_v9 = temp_v6 + temp_v12 * 0x194;
       if (*(char *)(temp_v9 + 0x1d0) != '\0') {
         temp_v13 = *(unsigned int *)(g_lmapScene + 0x1c);
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         *(unsigned int *)(temp_v9 + 0x218) = temp_v13;
       }
       temp_v9 = g_mapIf;
@@ -300,7 +300,7 @@ LAB_001e6120:
       switch(*(unsigned int *)(temp_v12 + 0x1d4)) {
       case 0:
         *(unsigned short *)(temp_v12 + 0x1dc) = 0;
-        if ((*(int *)(temp_v12 + 500) != -1) && (temp_v9 = FUN_0025b478(), temp_v9 == 0)) {
+        if ((*(int *)(temp_v12 + 500) != -1) && (temp_v9 = mapFlagIsSet(), temp_v9 == 0)) {
           *(unsigned int *)(temp_v12 + 0x1d4) = 1;
           break;
         }
@@ -308,7 +308,7 @@ LAB_001e6120:
         *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         break;
       case 1:
-        temp_v9 = FUN_0025b478(*(unsigned int *)(temp_v12 + 500));
+        temp_v9 = mapFlagIsSet(*(unsigned int *)(temp_v12 + 500));
         if (temp_v9 != 0) {
           temp_v8 = 2;
           *(unsigned short *)(temp_v12 + 0x1dc) = 0;
@@ -430,7 +430,7 @@ LAB_001e6120:
         }
         break;
       case 5:
-        temp_v9 = FUN_0025b478(*(unsigned int *)(temp_v12 + 500));
+        temp_v9 = mapFlagIsSet(*(unsigned int *)(temp_v12 + 500));
         if (temp_v9 != 0) {
           temp_v8 = 6;
           *(unsigned short *)(temp_v12 + 0x1dc) = 0;

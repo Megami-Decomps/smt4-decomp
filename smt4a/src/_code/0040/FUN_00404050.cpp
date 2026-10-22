@@ -28,7 +28,7 @@ extern unsigned char LAB_004042ec; /* 0x4042ec */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_0015687c(void);
+extern int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -91,7 +91,7 @@ void FUN_00404050(unsigned int param_1,unsigned int param_2,int param_3,int para
     libc_strcmp(temp_v3,"<pc 0>");
     if (temp_v2 == 0) {
       gameGetPlayerData();
-      temp_v3 = FUN_0015687c();
+      temp_v3 = gameGetPlayerName();
     }
     textFormatBuffer(temp_v4,&LAB_004042ec,temp_v3);
     VectorSignedToFloat(temp_v1 + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);

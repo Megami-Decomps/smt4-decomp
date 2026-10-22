@@ -34,7 +34,7 @@ struct fn_00337cfc_arg2 {
 
 /* Supplied declaration required: randomGetLowerTenBits. */
 /* Supplied declaration required: randomGetUpperSixBits. */
-extern int FUN_002b6a54(int, unsigned short);
+extern int supportUnitGetEntry(int, unsigned short);
 extern int FUN_002b6ad0(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_003c8538. */
@@ -101,7 +101,7 @@ void FUN_00337cfc(unsigned int param_1,unsigned char *param_2,fn_00337cfc_arg2 *
            (unsigned short)(temp_v4 << 10) | (*(unsigned short *)(param_2 + temp_v5 * 2 + 0x126) & 0x3ff);
       temp_v5 = temp_v6;
     } while ((int)temp_v6 < 0x12);
-    temp_v3 = FUN_002b6a54((int)param_3->field_0x604,param_3->field_0x606);
+    temp_v3 = supportUnitGetEntry((int)param_3->field_0x604,param_3->field_0x606);
     param_2[0x14a] = (char)((unsigned int)(*(int *)(temp_v3 + 8) << 2) >> 0x18);
   }
   else {

@@ -133,7 +133,7 @@ extern BattleTaskGameState g_gameState;
 extern BattleTaskAocMain *g_aocMain;
 s32 jobIsValid(u32 job);
 s32 spriteTablesLoadedEnough(void *ui);
-s32 FUN_00394720();
+s32 jyoucyuEnsureResidentEntry();
 void FUN_0027e760(BattleTaskGate *gate);
 s32 btlEncountCheck(BattleTaskContext *work);
 s32 FUN_0027e6f4(BattleTaskContext *work, u32 kind);
@@ -170,8 +170,8 @@ void FUN_00294f64(void *resource);
 void listBoxClearSelectionAndReset(void *event);
 void FUN_0027de24(void *event);
 void FUN_0027dd9c(void *event);
-void FUN_003da848(void *event);
-void FUN_003d5ef4(void *main);
+void btlEventResetSlots(void *event);
+void mathVectorClear(void *main);
 void transformClearVectors(void *main);
 s32 dialogIsActive();
 void infoWinStartTimer(u32 state);
@@ -190,9 +190,9 @@ void *rt_memcpy_w(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 void *FUN_00282be4();
 void FUN_00338790(BattleTaskContext *work);
-void FUN_0027db90();
+void sequenceRequestClearDeferred();
 void FUN_00208be8();
-s32 FUN_002f34bc();
+s32 sequenceRequestIsDeferred();
 void sequenceRequestFlushDeferred();
 void FUN_0027db24(u32 result);
 void FUN_002faf88();
@@ -288,8 +288,8 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
     listBoxClearSelectionAndReset(DAT_00435d18);
     FUN_0027de24(DAT_00435d18);
     FUN_0027dd9c(DAT_00435d18);
-    FUN_003da848(DAT_00435d18);
-    FUN_003d5ef4(g_btlMain);
+    btlEventResetSlots(DAT_00435d18);
+    mathVectorClear(g_btlMain);
     transformClearVectors(g_btlMain);
     work->flags &= 0xfbffeea7;
     if (dialogIsActive())
@@ -359,11 +359,11 @@ static inline void completeBattleTask(BattleTaskContext *work)
     if ((work->flags & 0x40000) && (work->result == 2 || work->result == 4))
         work->result = 13;
     else if (work->result == 3)
-        FUN_0027db90();
+        sequenceRequestClearDeferred();
     if ((work->flags2 & 4) && work->result == 2)
         work->result = 14;
     else if (work->result == 4)
-        FUN_0027db90();
+        sequenceRequestClearDeferred();
 
     bool fade = (work->flags3 & 2) != 0;
     if (!fade) {
@@ -385,16 +385,16 @@ static inline void completeBattleTask(BattleTaskContext *work)
         FUN_00208be8();
         if (work->result == 2) {
             if (work->resultMode == 1) {
-                FUN_0027db90();
+                sequenceRequestClearDeferred();
                 FUN_002faf88();
             } else if (work->resultMode == 0) {
-                FUN_0027db90();
+                sequenceRequestClearDeferred();
                 asdSequenceRequestInitial();
             }
         } else if (work->result == 14) {
             if (!FUN_0039440c(&g_aocMain->controller))
                 FUN_00394508(&g_aocMain->controller);
-        } else if (FUN_002f34bc()) {
+        } else if (sequenceRequestIsDeferred()) {
             sequenceRequestFlushDeferred();
         } else if (gameStateIsFlagSetAndLarge()) {
             s32 area = g_gameState.area - 200;
@@ -430,7 +430,7 @@ extern "C" s32 battleMainProcessUpdate()
         break;
     case 2:
         if (work->phase == 0) {
-            if (spriteTablesLoadedEnough(g_btlUiBlock) && FUN_00394720() && work->ready) {
+            if (spriteTablesLoadedEnough(g_btlUiBlock) && jyoucyuEnsureResidentEntry() && work->ready) {
                 FUN_0027e760(DAT_004398d4);
                 work->phase = 1;
             }

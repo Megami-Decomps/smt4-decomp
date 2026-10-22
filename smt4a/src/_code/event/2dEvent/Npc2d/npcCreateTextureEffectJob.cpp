@@ -11,7 +11,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s
 void sysMemClear(void *memory, u32 size);
 s32 FUN_00162ea4();
 bool aocRunByName(u32 system, u32 table, u32 node, s32 checked);
-s32 FUN_00191e00(u32 system, u32 table, u32 node, u32 kind);
+s32 aocLoadTextureNode(u32 system, u32 table, u32 node, u32 kind);
 TexNode *FUN_0014afd0(s32 table, s32 node);
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
@@ -47,7 +47,7 @@ u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y)
     } else {
         work->resourceState = 0;
         if (aocRunByName(g_aocSystem, work->table, work->node, 1)) {
-            FUN_00191e00(g_aocSystem, work->table, work->node, 0x10000);
+            aocLoadTextureNode(g_aocSystem, work->table, work->node, 0x10000);
         } else {
             FUN_0014afd0(work->table, work->node);
         }

@@ -9,7 +9,7 @@ int FUN_00168770(void);
 int FUN_00168e00(...);
 int FUN_001835b4(...);
 int FUN_001879d0(int);
-int FUN_002a4860(int);
+int resourceRunOperationIfUnblocked(int);
 int objectApplyIfUnblocked(int);
 int uiSearchPrimary(int);
 int VectorSignedToFloat(...);
@@ -31,7 +31,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: uiSearchPrimary. */
 
@@ -79,10 +79,10 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
     if (temp_v2 < 1) {
       temp_v2 = 1;
     }
-    temp_v4 = FUN_002a4860(param_1);
+    temp_v4 = resourceRunOperationIfUnblocked(param_1);
     temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (int)(temp_v9 * temp_v8);
-    temp_v3 = FUN_002a4860(param_1);
+    temp_v3 = resourceRunOperationIfUnblocked(param_1);
     temp_v5 = uiSearchPrimary(param_1);
     temp_v6 = objectApplyIfUnblocked(param_1);
     if ((temp_v3 + temp_v5 == temp_v6) &&

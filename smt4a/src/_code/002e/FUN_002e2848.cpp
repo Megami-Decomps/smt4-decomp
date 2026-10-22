@@ -5,7 +5,7 @@
 extern "C" {
 
 int eventQueueAddUnique(int);
-int FUN_002a4844(...);
+int resourceRunEmbeddedOperationIfUnblocked(...);
 int FUN_002a4914(...);
 int FUN_002a4964(...);
 
@@ -17,9 +17,9 @@ typedef struct {
 /* Supplied declaration required: eventQueueAddUnique. */
 extern short FUN_002618c8(void);
 extern short FUN_002618e0(void);
-extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002a4844. */
-extern int FUN_002a4860(unsigned int);
+extern int recordGetModeForId(int);
+/* Supplied declaration required: resourceRunEmbeddedOperationIfUnblocked. */
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int FUN_002a4878(unsigned int);
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002a4914. */
@@ -43,9 +43,9 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
   int temp_v5;
   unsigned char temp_v6;
   
-  temp_v1 = FUN_00284140((int)param_5);
-  temp_v2 = FUN_00284140((int)param_6);
-  temp_v3 = FUN_00284140((int)param_4);
+  temp_v1 = recordGetModeForId((int)param_5);
+  temp_v2 = recordGetModeForId((int)param_6);
+  temp_v3 = recordGetModeForId((int)param_4);
   if (!(temp_v1 == 6 || temp_v1 == 2)) {
     if (temp_v2 != 6 && temp_v2 != 2) {
       if (temp_v3 == 0) {
@@ -82,18 +82,18 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
       }
       temp_v0 = __aeabi_idivmod(temp_v2 * temp_v1);
       temp_v1 = FUN_002a4894(param_1);
-      temp_v2 = FUN_002a4860(param_1);
+      temp_v2 = resourceRunOperationIfUnblocked(param_1);
       if (temp_v2 + temp_v1 != (int)temp_v0 && param_8 != 0) {
         eventQueueAddUnique(0x100020d);
       }
       FUN_002a4964(param_1,(int)temp_v0);
       return 1;
     }
-    temp_v1 = FUN_002a4860(param_1);
+    temp_v1 = resourceRunOperationIfUnblocked(param_1);
     temp_v2 = FUN_002a4894(param_1);
     temp_v1 = temp_v2 + temp_v1 + 1;
     if (param_7 != 0) {
-      temp_v1 = FUN_002a4844();
+      temp_v1 = resourceRunEmbeddedOperationIfUnblocked();
       temp_v2 = FUN_002a4878(param_1);
       temp_v2 = temp_v2 + temp_v1 + 1;
       temp_v1 = widgetSubCallIfVisible(param_1);
@@ -111,11 +111,11 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
     }
   }
   else {
-    temp_v1 = FUN_002a4860(param_1);
+    temp_v1 = resourceRunOperationIfUnblocked(param_1);
     temp_v2 = FUN_002a4894(param_1);
     temp_v2 = temp_v2 + temp_v1;
     if (param_7 != 0) {
-      temp_v1 = FUN_002a4844(param_1);
+      temp_v1 = resourceRunEmbeddedOperationIfUnblocked(param_1);
       temp_v2 = FUN_002a4878(param_1);
       temp_v2 = temp_v2 + temp_v1;
     }

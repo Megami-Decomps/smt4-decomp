@@ -40,7 +40,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: useCounterStart. */
-extern unsigned int FUN_002a4860(int);
+extern unsigned int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
@@ -63,7 +63,7 @@ void FUN_00403e2c(int param_1)
   FUN_00163aa4(param_1 + 0x2f0);
   FUN_00163aa4(param_1 + 0x37c);
   FUN_00228b04(param_1 + 0x90,1);
-  temp_v0 = FUN_002a4860(param_1 + 0x90);
+  temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0x90);
   *(unsigned int *)(param_1 + 0xf8) = temp_v0;
   temp_v1 = FUN_002a4894(param_1 + 0x90);
   *(int *)(param_1 + 0xf4) = temp_v1;

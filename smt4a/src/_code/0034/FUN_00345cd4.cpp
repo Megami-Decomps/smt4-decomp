@@ -10,7 +10,7 @@ int skinObjectUpdateMatrices(int);
 int FUN_00182540(void);
 int requestDispatch(void);
 int FUN_00300100(int);
-int FUN_00409718(int);
+int uiSpriteRefreshMode(int);
 
 typedef int romwright_code(...);
 extern int g_renderCtx; /* 0x59dbb4 */
@@ -27,7 +27,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00182540. */
 /* Supplied declaration required: requestDispatch. */
 /* Supplied declaration required: FUN_00300100. */
-/* Supplied declaration required: FUN_00409718. */
+/* Supplied declaration required: uiSpriteRefreshMode. */
 
 
 void FUN_00345cd4(void)
@@ -74,7 +74,7 @@ void FUN_00345cd4(void)
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
   if (g_effectEditor != '\0') {
-    FUN_00409718(g_renderCtx);
+    uiSpriteRefreshMode(g_renderCtx);
   }
   else {
     temp_v1 = FUN_00152f54();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00137780(int, unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
+int gxSetBufferSwap(int, unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int DAT_004c63cc; /* 0x4c63cc */
 extern int DAT_004c63d8; /* 0x4c63d8 */
 extern int DAT_004c63f4; /* 0x4c63f4 */
 
-/* Supplied declaration required: FUN_00137780. */
+/* Supplied declaration required: gxSetBufferSwap. */
 
 
 void FUN_001235b8(int param_1)
@@ -93,7 +93,7 @@ void FUN_001235b8(int param_1)
                         DAT_004c63cc) + *(int *)(DAT_004c63c0 + 4);
         temp_v7 = temp_v1 | 0x20;
       }
-      FUN_00137780(temp_v6,*(unsigned int *)(temp_v0 + 0x4c63dc),
+      gxSetBufferSwap(temp_v6,*(unsigned int *)(temp_v0 + 0x4c63dc),
                    temp_v3 * (*(int *)(temp_v4 + 0xc) *
                             ((*(int *)(temp_v4 + 0x10) - (&DAT_004c6298)[temp_v6]) -
                             *(int *)(temp_v0 + 0x4c63d0)) + *(int *)(temp_v0 + 0x4c63c4)) +

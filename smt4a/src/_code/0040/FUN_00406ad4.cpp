@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001006c2(...);
-int FUN_001006ec(int, int, int);
+int asdDeallocateArrayStorage(int, int, int);
 void FUN_002e32a4(int kind, ...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char LAB_00406e64; /* 0x406e64 */
 
 /* Supplied declaration required: FUN_001006c2. */
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 /* Supplied declaration required: FUN_002e32a4. */
 
 
@@ -65,7 +65,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       }
       puVar8 = puVar8 + 2;
     }
-    FUN_001006ec(*(int *)(param_1 + 0x108),
+    asdDeallocateArrayStorage(*(int *)(param_1 + 0x108),
                  (*(int *)(param_1 + 0x110) - *(int *)(param_1 + 0x108)) >> 3,0);
     temp_v3 = *(int *)(param_1 + 0x108);
     *(unsigned int **)(param_1 + 0x108) = puVar1;
@@ -152,7 +152,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
           }
           temp_v0 = *piVar11;
           temp_v2 = *(int *)(param_1 + 0x10c);
-          FUN_001006ec(temp_v0,(*(int *)(param_1 + 0x110) - temp_v0) >> 3,0);
+          asdDeallocateArrayStorage(temp_v0,(*(int *)(param_1 + 0x110) - temp_v0) >> 3,0);
           *(unsigned int **)(param_1 + 0x110) = puVar9 + temp_v7 * 2;
           *(unsigned int **)(param_1 + 0x10c) = puVar9 + ((temp_v2 - temp_v0) >> 3) * 2 + 2;
           *piVar11 = (int)puVar9;
@@ -182,7 +182,7 @@ void FUN_00406ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         temp_v1 = *piVar11;
         for (temp_v2 = temp_v1; temp_v2 != *(int *)(temp_v0 + 0x118); temp_v2 = temp_v2 + 4) {
         }
-        FUN_001006ec(temp_v1,(*(int *)(temp_v0 + 0x11c) - temp_v1) >> 2,0);
+        asdDeallocateArrayStorage(temp_v1,(*(int *)(temp_v0 + 0x11c) - temp_v1) >> 2,0);
         temp_v2 = *piVar11;
         *piVar11 = (int)puVar1;
         *(unsigned int *)(temp_v0 + 0x118) = ((*(int *)(temp_v0 + 0x118) - temp_v2) & 0xfffffffcU) + (int)puVar1;

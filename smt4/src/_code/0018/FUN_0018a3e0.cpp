@@ -20,7 +20,7 @@ int campUpdateCategoryHighlightColors(void);
 int FUN_00298ad8(void);
 int FUN_00298d0c(...);
 int FUN_00298d28(...);
-int FUN_00299174(...);
+int campReleaseScreenTouchRegions(...);
 int FUN_00299218(...);
 int FUN_00299900(...);
 int FUN_00299bc4(int, int);
@@ -59,7 +59,7 @@ extern int FUN_00298848(unsigned int, int);
 /* Supplied declaration required: FUN_00298d28. */
 /* Supplied declaration required: FUN_002990a0. */
 /* Supplied declaration required: guestWinRequestOpen. */
-/* Supplied declaration required: FUN_00299174. */
+/* Supplied declaration required: campReleaseScreenTouchRegions. */
 /* Supplied declaration required: FUN_00299218. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
@@ -141,7 +141,7 @@ void FUN_0018a3e0(void)
     if (temp_v3 == 0) {
       return;
     }
-    FUN_00299174(temp_v6 + 0x1dc,1);
+    campReleaseScreenTouchRegions(temp_v6 + 0x1dc,1);
     beginStatusPanelClose();
     FUN_00298d0c(0);
     FUN_00299900(0);
@@ -196,7 +196,7 @@ void FUN_0018a3e0(void)
     temp_v4 = FUN_0029e02c();
     if (temp_v4 != 0) {
       FUN_0029acb0();
-      FUN_00299174(temp_v6 + 0x1dc,1);
+      campReleaseScreenTouchRegions(temp_v6 + 0x1dc,1);
       temp_v4 = 0;
       temp_v3 = FUN_0029d644(temp_v6 + 0x1dc);
       if (0 < temp_v3) {
@@ -322,7 +322,7 @@ LAB_0018a948:
             FUN_002a0cc8(1);
             return;
           }
-          FUN_00299174(temp_v6 + 0x1dc,1);
+          campReleaseScreenTouchRegions(temp_v6 + 0x1dc,1);
           timerStart(temp_v6 + 0x6d4,3,0);
           FUN_0029dfc0(0);
           FUN_00298d0c(0);
@@ -375,7 +375,7 @@ LAB_0018a948:
       }
       return;
     }
-    FUN_00299174(temp_v6 + 0x1dc,1);
+    campReleaseScreenTouchRegions(temp_v6 + 0x1dc,1);
     if (*(char *)(temp_v6 + 0x25bc) != '\0') {
       *(unsigned char *)(temp_v6 + 0x98) = 1;
       FUN_00298ad8();

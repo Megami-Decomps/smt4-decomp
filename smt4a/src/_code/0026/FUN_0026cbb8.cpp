@@ -23,7 +23,7 @@ int whisperEffectStart(...);
 int roundObjFinish(...);
 int soundChannelRequestIfEnabled(...);
 int soundChannelStopAll(...);
-int FUN_003df4ec(...);
+int gamePlayerClearPairedId(...);
 int countUnlockedSlots(void);
 int FUN_003e0174(...);
 int engineGetFloatTableValue(...);
@@ -105,10 +105,10 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_002685cc. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a49e4. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a7288. */
 extern int objectApplyIfUnblocked(unsigned int);
 extern int FUN_002effbc(void);
@@ -131,7 +131,7 @@ extern int btlTalkBustupMatchesEntry(unsigned short);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003df4a4. */
-/* Supplied declaration required: FUN_003df4ec. */
+/* Supplied declaration required: gamePlayerClearPairedId. */
 /* Supplied declaration required: countUnlockedSlots. */
 /* Supplied declaration required: FUN_003e0174. */
 /* Supplied declaration required: engineGetFloatTableValue. */
@@ -577,7 +577,7 @@ LAB_0026e1e4:
       if (temp_v5 != 2) {
         return;
       }
-      temp_v5 = FUN_002a4b74();
+      temp_v5 = messageGetChoiceResult();
       if (temp_v5 != 0) {
         scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43ac),0xe);
         if ((int)(*puVar27 - *piVar22) < 1) {
@@ -841,7 +841,7 @@ LAB_0026e66c:
               temp_v14 = temp_v27;
               FUN_0032fea0(temp_v27,temp_v7);
               if (temp_v14 == 0 && !temp_v22) {
-                FUN_003df4ec(*(unsigned short *)(temp_v6 + temp_v9 * 2 + 0x34));
+                gamePlayerClearPairedId(*(unsigned short *)(temp_v6 + temp_v9 * 2 + 0x34));
                 break;
               }
               temp_v9 = temp_v9 + 1;
@@ -913,7 +913,7 @@ LAB_0026e66c:
       if (temp_v6 != temp_v28) {
         eventQueueAddUniqueIfValid(0x100020d);
       }
-      temp_v6 = FUN_00284140((int)*(short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6));
+      temp_v6 = recordGetModeForId((int)*(short *)(param_1 + *(short *)(temp_v32 + 0x68) * 2 + 0x43b6));
       if (temp_v6 != 0) {
         temp_v6 = uiSearchPrimary(temp_v26);
         flaggedEntrySetValueA(temp_v26,temp_v6 - 1);

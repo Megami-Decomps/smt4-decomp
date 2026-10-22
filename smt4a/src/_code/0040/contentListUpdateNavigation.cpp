@@ -8,7 +8,7 @@ struct ContentNavigation {
     s32 topRow; // 0x8c
 };
 extern "C" {
-s32 FUN_002a4860(ContentGrid *);
+s32 resourceRunOperationIfUnblocked(ContentGrid *);
 s32 FUN_002a4894(ContentGrid *);
 s32 objectApplyIfUnblocked(ContentGrid *);
 s32 FUN_00228b04(ContentGrid *, u32);
@@ -19,32 +19,32 @@ void FUN_002a48e0(ContentGrid *);
 
 void contentListUpdateNavigation(ContentNavigation *screen)
 {
-    s32 previousRow = FUN_002a4860(&screen->grid);
+    s32 previousRow = resourceRunOperationIfUnblocked(&screen->grid);
     if (FUN_00228b04(&screen->grid, 0)) {
         if (objectApplyIfUnblocked(&screen->grid) > 8) {
-            FUN_002a4860(&screen->grid);
+            resourceRunOperationIfUnblocked(&screen->grid);
             if (FUN_002a4894(&screen->grid) != 7 && FUN_002a4894(&screen->grid) != 0)
                 eventQueueAddUniqueIfValid(0x100020d);
-            while (FUN_002a4860(&screen->grid) == previousRow &&
-                   (FUN_002a4860(&screen->grid) != 0 || FUN_002a4894(&screen->grid) != 0)) {
-                s32 row = FUN_002a4860(&screen->grid);
+            while (resourceRunOperationIfUnblocked(&screen->grid) == previousRow &&
+                   (resourceRunOperationIfUnblocked(&screen->grid) != 0 || FUN_002a4894(&screen->grid) != 0)) {
+                s32 row = resourceRunOperationIfUnblocked(&screen->grid);
                 s32 count = objectApplyIfUnblocked(&screen->grid);
                 if (row == count - 8 && FUN_002a4894(&screen->grid) == 7)
                     break;
                 FUN_00228b04(&screen->grid, 0);
             }
         }
-        screen->topRow = FUN_002a4860(&screen->grid);
+        screen->topRow = resourceRunOperationIfUnblocked(&screen->grid);
     }
     if (FUN_001517b4(9, 0)) {
-        if (FUN_002a4860(&screen->grid) == 0)
+        if (resourceRunOperationIfUnblocked(&screen->grid) == 0)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
         --screen->topRow;
         FUN_002a48e0(&screen->grid);
     }
     if (FUN_001517b4(10, 0) && objectApplyIfUnblocked(&screen->grid) >= 8) {
-        s32 row = FUN_002a4860(&screen->grid);
+        s32 row = resourceRunOperationIfUnblocked(&screen->grid);
         s32 count = objectApplyIfUnblocked(&screen->grid);
         if (row != count - 8 &&
             (flaggedEntryGetValueA(&screen->grid) || objectApplyIfUnblocked(&screen->grid) >= 8)) {

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0022c7d4(unsigned int *, int, int, int);
+int sharedAllocationArrayCopyRange(unsigned int *, int, int, int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0022c7d4. */
+/* Supplied declaration required: sharedAllocationArrayCopyRange. */
 
 
 unsigned int FUN_003af8d0(unsigned int *param_1)
@@ -46,7 +46,7 @@ unsigned int FUN_003af8d0(unsigned int *param_1)
       temp_v0 = param_1[9];
       temp_v1 = (temp_v3 * 0x10 - 0x10) + temp_v0;
       temp_v2 = ((temp_v1 + 0x10) - temp_v0) >> 4;
-      FUN_0022c7d4(param_1 + 8,(temp_v1 - temp_v0) >> 4,temp_v2,temp_v3 - temp_v2);
+      sharedAllocationArrayCopyRange(param_1 + 8,(temp_v1 - temp_v0) >> 4,temp_v2,temp_v3 - temp_v2);
       temp_v0 = param_1[9];
       temp_v2 = param_1[0xb];
       puVar1 = (unsigned int *)(temp_v0 + (temp_v3 - 1) * 0x10);

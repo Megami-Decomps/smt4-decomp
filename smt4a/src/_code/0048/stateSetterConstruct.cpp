@@ -13,7 +13,7 @@ int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int,
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_00203b40(unsigned char *, int, int, int, int, int);
 int FUN_00275bc8(void);
 int campButtonHelpAcquire(void);
@@ -50,12 +50,12 @@ extern unsigned short DAT_00588108; /* 0x588108 */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: paramsInit. */
-extern unsigned int *FUN_0015687c(void);
+extern unsigned int *gameGetPlayerName(void);
 extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_00203b40. */
 extern unsigned int *gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -115,7 +115,7 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0xac) = 0;
   param_1[0x562] = 0;
   if (param_1[0x261] == '\0' || param_1[0x261] == -1) {
-    puVar1 = (unsigned int *)FUN_0015687c();
+    puVar1 = (unsigned int *)gameGetPlayerName();
     *(unsigned int *)(param_1 + 0xb0) = *puVar1;
     *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
     *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
@@ -156,10 +156,10 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   FUN_00203b40(param_1 + 0x198,0x69,7,0xf,1,1);
   FUN_00203b40(param_1 + 0x1fc,4,1,4,1,1);
   puVar2 = &LAB_0048502c;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(unsigned char **)(param_1 + 0x264) = puVar2;
   puVar2 = &LAB_0048503c;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   *(unsigned char **)(param_1 + 0x268) = puVar2;
   FUN_00275bc8();
   *(unsigned char **)(param_1 + 0x26c) = puVar2;

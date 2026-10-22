@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001006ec(int, int, int, unsigned int, unsigned int);
+int asdDeallocateArrayStorage(int, int, int, unsigned int, unsigned int);
 
 extern unsigned char DAT_0064c004; /* 0x64c004 */
 extern unsigned char DAT_0064c010; /* 0x64c010 */
 
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 
 
 void FUN_002e5780(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -23,7 +23,7 @@ void FUN_002e5780(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
     piVar2 = (int *)((unsigned char *)*param_1 + -0xc);
     if ((*piVar2 == -1) ||
        ((piVar2 != (int *)&DAT_0064c004 && (temp_v0 = *piVar2 - 1, *piVar2 = temp_v0, temp_v0 == -1)))) {
-      FUN_001006ec(*param_1 - 0xc,*(int *)(*param_1 - 8) + 0xe,0,param_4,param_4);
+      asdDeallocateArrayStorage(*param_1 - 0xc,*(int *)(*param_1 - 8) + 0xe,0,param_4,param_4);
     }
   }
   return;

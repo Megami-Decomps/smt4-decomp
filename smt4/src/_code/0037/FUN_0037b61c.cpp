@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0014c250. */
-extern int FUN_00152394(unsigned int, unsigned int, unsigned int *);
+extern int soundArchiveReadWaveArchiveInfo(unsigned int, unsigned int, unsigned int *);
 extern unsigned int *FUN_002ac5d8(unsigned char *);
 /* Supplied declaration required: FUN_002ac5f4. */
 extern unsigned int FUN_002ac780(unsigned int, unsigned int);
@@ -54,7 +54,7 @@ unsigned int FUN_0037b61c(int param_1,int param_2,unsigned int param_3)
           temp_v4 = puVar1[temp_v2 * 2 + 2];
           temp_v5[0] = 0xffffffff;
           temp_v6 = '\0';
-          temp_v0 = FUN_00152394(*(unsigned int *)(param_1 + 4),temp_v3,temp_v5);
+          temp_v0 = soundArchiveReadWaveArchiveInfo(*(unsigned int *)(param_1 + 4),temp_v3,temp_v5);
           if (temp_v0 == 0) {
             return 0;
           }

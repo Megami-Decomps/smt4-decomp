@@ -1,84 +1,106 @@
-/* NON_MATCHING: found outside every function: called by FUN_002840fc; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_0049f084 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: four texture-ID guards compile to beq instead of retail's ble after ldrh; all other instructions and relocations match. */
+#include "ui/UiSpriteState.h"
 
-unsigned int FUN_0049f084(int param_1)
+struct EventRowTextures {
+    /* 0x00 */ u8 unk00[0x36];
+    /* 0x36 */ u16 firstTexture;
+    /* 0x38 */ u8 unk38[8];
+    /* 0x40 */ u16 secondTexture;
+};
 
-{
-  int iVar1;
-  
-  switch(*(unsigned char *)(param_1 + 4)) {
-  case 1:
-    iVar1 = FUN_00163aa4(param_1 + 0x23c);
-    if (iVar1 == 0) {
-      return 0;
-    }
-    FUN_0049d140(param_1,*(unsigned char *)(param_1 + 5),0);
-    break;
-  case 2:
-    FUN_0049d770(param_1);
-    break;
-  case 3:
-    FUN_0049df84(param_1);
-    break;
-  case 4:
-    if (((*(short *)(*(int *)(param_1 + 0x84) + 0x36) == 0) ||
-        (iVar1 = FUN_0018206c(0x33), iVar1 != 0)) &&
-       ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 ||
-        (iVar1 = FUN_0018206c(0x33), iVar1 != 0)))) {
-      FUN_0049d140(param_1,6,0);
-    }
-    break;
-  case 5:
-    iVar1 = FUN_00163aa4(param_1 + 0x2c8);
-    if (iVar1 != 0) {
-      FUN_0049d140(param_1,*(unsigned char *)(param_1 + 5),0);
-    }
-    break;
-  case 6:
-    FUN_0049e224(param_1);
-    iVar1 = 1;
-    FUN_001517b4();
-    if (iVar1 != 0) {
-      FUN_001641b4(0x100020f);
-      FUN_001846d0(param_1 + 0x2c8,1);
-      FUN_0049d140(param_1,5,3);
-    }
-    break;
-  case 7:
-    FUN_0049ea54(param_1);
-    break;
-  case 8:
-    if ((*(short *)(*(int *)(param_1 + 0x84) + 0x36) != 0) &&
-       (iVar1 = FUN_0018206c(0x33), iVar1 == 0)) {
-      return 0;
-    }
-    if ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) != 0) &&
-       (iVar1 = FUN_0018206c(0x33), iVar1 == 0)) {
-      return 0;
-    }
-    iVar1 = FUN_00163aa4(param_1 + 0x23c);
-    FUN_00163aa4(param_1 + 0x2c8);
-    if (iVar1 != 0) {
-      FUN_0049d140(param_1,*(unsigned char *)(param_1 + 5),0);
-    }
-    break;
-  case 9:
-    FUN_0049e224(param_1);
-    iVar1 = 1;
-    FUN_001517b4();
-    if (iVar1 == 0) {
-      iVar1 = 0;
-      FUN_001517b4(0,1);
-      if (iVar1 == 0) {
-        return 0;
-      }
-    }
-    FUN_001641b4(0x100020e);
-    FUN_001846d0(param_1 + 0x23c,1);
-    FUN_001846d0(param_1 + 0x2c8,1);
-    FUN_0049d140(param_1,8,0);
-  }
-  return 0;
+typedef UiSpriteState EventRowSprite;
+
+struct EventRow {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 state;
+    /* 0x005 */ u8 nextState;
+    /* 0x006 */ u8 unk006[0x7E];
+    /* 0x084 */ EventRowTextures* textures;
+    /* 0x088 */ u8 unk088[0x1B4];
+    /* 0x23C */ EventRowSprite firstSprite;
+    /* 0x2C8 */ EventRowSprite secondSprite;
+};
+
+extern "C" {
+s32 FUN_00163aa4(EventRowSprite* sprite, f32 speed);
+void FUN_0049d140(EventRow* row, u32 state, u32 entry);
+void FUN_0049d770(EventRow* row);
+void FUN_0049df84(EventRow* row);
+s32 asdTMTexTableNodeIsLoaded(u32 table, s32 node);
+void updateNineRowListInput(EventRow* row);
+s32 FUN_001517b4(u32 button, u32 mode);
+void eventQueueAddUniqueIfValid(u32 event);
+void uiSpriteSelectAnim(EventRowSprite* sprite, u32 animation);
+void FUN_0049ea54(EventRow* row);
 }
-*/
-#include "common.h"
+
+// Advance an event-list row while its textures and transition animations complete.
+extern "C" u32 FUN_0049f084(EventRow* row)
+{
+    switch (row->state) {
+    case 1:
+        if (!FUN_00163aa4(&row->firstSprite, 1.0f)) {
+            break;
+        }
+        FUN_0049d140(row, row->nextState, 0);
+        break;
+    case 2:
+        FUN_0049d770(row);
+        break;
+    case 3:
+        FUN_0049df84(row);
+        break;
+    case 4:
+        if ((row->textures->firstTexture <= 0 ||
+             asdTMTexTableNodeIsLoaded(0x33, row->textures->firstTexture)) &&
+            (row->textures->secondTexture <= 0 ||
+             asdTMTexTableNodeIsLoaded(0x33, row->textures->secondTexture))) {
+            FUN_0049d140(row, 6, 0);
+        }
+        break;
+    case 5:
+        if (FUN_00163aa4(&row->secondSprite, 1.0f)) {
+            FUN_0049d140(row, row->nextState, 0);
+        }
+        break;
+    case 6:
+        updateNineRowListInput(row);
+        if (FUN_001517b4(1, 1)) {
+            eventQueueAddUniqueIfValid(0x100020F);
+            uiSpriteSelectAnim(&row->secondSprite, 1);
+            FUN_0049d140(row, 5, 3);
+        }
+        break;
+    case 7:
+        FUN_0049ea54(row);
+        break;
+    case 8:
+        if (row->textures->firstTexture > 0 &&
+            !asdTMTexTableNodeIsLoaded(0x33, row->textures->firstTexture)) {
+            break;
+        }
+        if (row->textures->secondTexture > 0 &&
+            !asdTMTexTableNodeIsLoaded(0x33, row->textures->secondTexture)) {
+            break;
+        }
+        {
+            s32 complete = FUN_00163aa4(&row->firstSprite, 1.0f);
+            FUN_00163aa4(&row->secondSprite, 1.0f);
+            if (complete) {
+                FUN_0049d140(row, row->nextState, 0);
+            }
+        }
+        break;
+    case 9:
+        updateNineRowListInput(row);
+        if (!FUN_001517b4(1, 1) && !FUN_001517b4(0, 1)) {
+            break;
+        }
+        eventQueueAddUniqueIfValid(0x100020E);
+        uiSpriteSelectAnim(&row->firstSprite, 1);
+        uiSpriteSelectAnim(&row->secondSprite, 1);
+        FUN_0049d140(row, 8, 0);
+        break;
+    }
+    return 0;
+}

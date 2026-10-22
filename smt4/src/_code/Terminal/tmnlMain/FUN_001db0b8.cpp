@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00263508(...);
 int FUN_00282bfc(...);
 int gameFlagSetValue(...);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int messageStatesSetFirst(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -35,7 +35,7 @@ extern unsigned int *g_tmnl; /* 0x432ce0 */
 extern int FUN_0026354c(unsigned int);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: messageStatesSetFirst. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
@@ -101,7 +101,7 @@ void FUN_001db0b8(unsigned int *param_1)
     *(char *)((int)puVar1 + 9) = (char)temp_v1;
     *(unsigned char *)((int)puVar1 + 5) = 0;
     FUN_00263508(temp_v1 & 0xff,1);
-    FUN_0029be5c(0x1c,1);
+    gameCounterAddSaturating(0x1c,1);
     puVar1[4] = 0;
     puVar1[5] = 0;
   }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022e0fc(int, int);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int buttonHelpSetPreset(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -14,8 +14,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0022e0fc. */
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -32,13 +32,13 @@ void FUN_003abe00(int param_1)
   
   temp_v1 = useCounterIsFinished();
   if (temp_v1 != 0) {
-    FUN_0029e17c();
+    useCounterRelease();
     buttonHelpSetPreset(0x3e);
     *(unsigned int *)(param_1 + 0x14) = 3;
     *(unsigned int *)(param_1 + 0x18) = 0;
     return;
   }
-  temp_v1 = FUN_0029e130();
+  temp_v1 = useCounterGetCurrentValue();
   if (temp_v1 == 0x4b) {
     return;
   }

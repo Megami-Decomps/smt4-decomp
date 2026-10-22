@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_003d209c(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_003d209c. */
 
 
@@ -56,7 +56,7 @@ void FUN_002e14a4(void)
   puVar1[0x12] = 0x1a;
   puVar1[0x13] = 0x1e;
   puVar2 = &LAB_002e15c8;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[0x26] = (unsigned int)puVar2;
   temp_v0 = spriteHandleCreate(0);
   puVar1[0x28] = temp_v0;

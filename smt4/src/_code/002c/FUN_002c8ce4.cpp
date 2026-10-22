@@ -9,15 +9,15 @@ int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00280988(void);
 int FUN_002879dc(...);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 int FUN_002562e4(int, int);
-int FUN_00256370(int, int);
+int partyApplyNonlethalAilmentDamage(int, int);
 int FUN_0025bc80(void);
 int FUN_0027f48c(...);
 int FUN_0027f848(void);
 int FUN_0027f958(unsigned int *, unsigned int [13], int);
-int FUN_0027fa98(unsigned int);
+int lmapSetSceneId(unsigned int);
 int FUN_0027fca0(...);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -56,14 +56,14 @@ extern signed char DAT_0049fce8; /* 0x49fce8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002562e4. */
-/* Supplied declaration required: FUN_00256370. */
+/* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
@@ -71,7 +71,7 @@ extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002879dc. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00291e40. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -129,7 +129,7 @@ void FUN_002c8ce4(void)
         *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
         if (((g_gameState != 0x24) && (temp_v2 = FUN_0025a140(2,5), temp_v2 != 0)) &&
            (*(float *)(g_lmapScene + 0x160) < temp_v12)) {
-          FUN_00256370(2,5);
+          partyApplyNonlethalAilmentDamage(2,5);
           *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
           FUN_002562e4(0xf,0x50);
           temp_v3 = FUN_00291e40(0x1000186);
@@ -150,7 +150,7 @@ void FUN_002c8ce4(void)
           }
           *(unsigned int *)(g_lmapScene + 0x15c) = temp_v3;
           temp_v3 = 0x20;
-          FUN_0027fa98(temp_v3);
+          lmapSetSceneId(temp_v3);
         }
         else {
           FUN_0027f958(&temp_v16,temp_v17,0);
@@ -250,7 +250,7 @@ joined_r0x002c99a8:
               *(unsigned int *)(temp_v2 + 0x188) = 4;
             }
             temp_v3 = 1;
-            FUN_0027fa98(temp_v3);
+            lmapSetSceneId(temp_v3);
           }
         }
         goto LAB_002c9a54;
@@ -324,20 +324,20 @@ joined_r0x002c99a8:
         }
         temp_v13 = temp_v9;
         if ((g_gameState != 0x24) && (temp_v2 = FUN_0025a140(2,5), temp_v13 = temp_v9, temp_v2 != 0)) {
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           *(float *)(g_lmapScene + 0x160) = *(float *)(g_lmapScene + 0x160) - temp_v9;
         }
         temp_v1 = g_lmapScene + 0x28;
         FUN_002804ec();
         temp_v9 = temp_v13;
         if ((temp_v1 & 2) != 0) {
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v13;
           DAT_0049f94f = 4;
         }
         else {
           if (temp_v12 < *(float *)(g_lmapScene + 0x15c)) {
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v13;
           }
           if (temp_v12 < *(float *)(g_lmapScene + 0x15c)) {

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_004f3ee0(int, int, int);
+int cameraBeginScalarTransition(int, int, int);
 int FUN_004f3f1c(...);
 int FUN_004f41b0(int, int, int);
 
 extern int g_btlCamera; /* 0x571508 */
 
-/* Supplied declaration required: FUN_004f3ee0. */
+/* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f3f1c. */
 /* Supplied declaration required: FUN_004f41b0. */
 
@@ -27,7 +27,7 @@ unsigned int FUN_004e81bc(unsigned int param_1,int param_2,int param_3)
   if (param_3 != 0) {
     if (temp_v1 == 0xf) {
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x100000;
-      FUN_004f3ee0(temp_v0,0x32,1);
+      cameraBeginScalarTransition(temp_v0,0x32,1);
       FUN_004f3f1c(g_btlCamera,0x32,1,0);
     }
     if (*(unsigned int *)(param_2 + 0x56c) < 0x42) {
@@ -42,12 +42,12 @@ unsigned int FUN_004e81bc(unsigned int param_1,int param_2,int param_3)
         }
       }
       else {
-        FUN_004f3ee0(g_btlCamera,6,1);
+        cameraBeginScalarTransition(g_btlCamera,6,1);
         FUN_004f3f1c(g_btlCamera,6,1);
       }
     }
     else {
-      FUN_004f3ee0(g_btlCamera,0x32,1);
+      cameraBeginScalarTransition(g_btlCamera,0x32,1);
       FUN_004f3f1c(g_btlCamera,0x32,1,0);
     }
     if (*(unsigned int *)(param_2 + 0x56c) < 0x2c) {

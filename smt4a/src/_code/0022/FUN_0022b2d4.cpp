@@ -111,7 +111,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 extern unsigned int FUN_0014bd84(unsigned int);
 extern unsigned int FUN_0014bf3c(short, unsigned int);
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
@@ -543,7 +543,7 @@ LAB_0022b9b8:
           }
         }
         else if (*(char *)(temp_v2 + 0x2018) != '\n') {
-          temp_v6 = FUN_0015687c();
+          temp_v6 = gameGetPlayerName();
           textFormatBuffer(temp_v29,&LAB_0022c41c,temp_v6);
         }
         else {

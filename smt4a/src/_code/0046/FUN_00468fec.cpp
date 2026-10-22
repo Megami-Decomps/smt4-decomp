@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00214da4(void);
-int FUN_002a4b74(void);
+int messageGetChoiceResult(void);
 int dataTableFindMatching35(void);
 int messageBannerRestartOrClear(void);
 int panelSetTarget(int, int);
@@ -23,7 +23,7 @@ extern unsigned int FUN_0019de98(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00214da4. */
 extern int scrRunOpcodesStub(unsigned int);
 extern int messageMainGetValue(void);
-/* Supplied declaration required: FUN_002a4b74. */
+/* Supplied declaration required: messageGetChoiceResult. */
 /* Supplied declaration required: dataTableFindMatching35. */
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: messageBannerRestartOrClear. */
@@ -146,7 +146,7 @@ void FUN_00468fec(unsigned int *param_1)
       return;
     }
     FUN_003a7630(0);
-    temp_v2 = FUN_002a4b74();
+    temp_v2 = messageGetChoiceResult();
     switch(temp_v2) {
     case 0:
       FUN_00214da4();
@@ -197,9 +197,9 @@ void FUN_00468fec(unsigned int *param_1)
       param_1[1] = 0x11;
       param_1[2] = 0;
     }
-    temp_v0 = FUN_002a4b74();
+    temp_v0 = messageGetChoiceResult();
     if (temp_v0 != -1) {
-      temp_v3 = FUN_002a4b74();
+      temp_v3 = messageGetChoiceResult();
       param_1[0x33b] = temp_v3;
       return;
     }

@@ -4,7 +4,7 @@ extern "C" {
 
 extern u32 scrGetArg(s32 index);
 extern void scrSetResult(u32 value);
-extern u32 FUN_004d0bf0(u32 id);
+extern u32 gameStockContainsEntry(u32 id);
 extern u32 partyFindSlotById(u32 id);
 extern u32 gameGetSlotRecord(u32 lookup);
 extern s32 bitsAt60Test(u32 data, u32 flag);
@@ -17,7 +17,7 @@ u32 scrCommClassifyId(void)
     u32 lookup;
 
     if (id != 0) {
-        if (FUN_004d0bf0(id & 0xFFFF) == 0) {
+        if (gameStockContainsEntry(id & 0xFFFF) == 0) {
             result = -1;
         } else {
             lookup = partyFindSlotById(id & 0xFFFF);

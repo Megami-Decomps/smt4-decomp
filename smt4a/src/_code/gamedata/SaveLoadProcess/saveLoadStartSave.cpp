@@ -42,7 +42,7 @@ u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay, u16 endDelay,
 s32 FUN_00371750(u32 process);
 void work8BufDestroy(u32 process);
 s32 FUN_003a7938(u32 process);
-void FUN_002a2d14(u32 process, u32 mask, u32 mode);
+void asdProcessClearSelectedFlags(u32 process, u32 mask, u32 mode);
 }
 
 // The end callback owns the work area and its optional save buffer.
@@ -78,7 +78,7 @@ extern "C" u32 saveLoadStartSave(s32 slot, u8 option)
     work->process = asdProcessCreateSimple(
         reinterpret_cast<const s8*>("Save"), 4, 0, 0, FUN_00371750, work8BufDestroy,
         reinterpret_cast<u32>(work));
-    FUN_002a2d14(work->process, 0x80000, 0);
+    asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     work->phase = 0;
     work->option = option;
     taskCreateDraw(reinterpret_cast<const s8*>("Boot UpDraw"), 0x86, 0, 0,

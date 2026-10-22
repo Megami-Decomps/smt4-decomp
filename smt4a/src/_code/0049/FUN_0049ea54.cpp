@@ -40,7 +40,7 @@ extern void asdTMTexLoadMainHeap(s32 group, s32 id);
 extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
 extern void flagsSetOrClearBit(void *panel, s32 arg);
 extern s32 textureGetIndexedResource(s32 id);
-extern void FUN_003d2150(u32 id);
+extern void sysPlayVoice(u32 id);
 extern s32 loadSlotIsLoaded(s32 id);
 extern void FUN_0049d140(Screen *screen, s32 a, s32 b);
 extern void FUN_0049de10(Screen *screen);
@@ -79,7 +79,7 @@ void FUN_0049ea54(Screen *screen)
     uiSpriteSelectAnim(screen->widgetA, 0);
     uiSpriteSelectAnim(screen->widgetB, 0);
     FUN_0049d140(screen, 8, 9);
-    FUN_003d2150(0x1000170);
+    sysPlayVoice(0x1000170);
 }
 
 }

@@ -14,7 +14,7 @@ typedef struct {
 
 extern int g_uiQuest; /* 0x57f28c */
 
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int FUN_002f7730(unsigned int, unsigned int);
 /* Supplied declaration required: partyEntrySetBitsBit4. */
@@ -40,7 +40,7 @@ void FUN_002ae320(void)
     temp_v5 = g_uiQuest + 0x9ac;
     temp_v3 = g_uiQuest + 0xad6;
   }
-  temp_v0 = FUN_002a4860(temp_v5);
+  temp_v0 = resourceRunOperationIfUnblocked(temp_v5);
   temp_v5 = FUN_002a4894(temp_v5);
   temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + (temp_v5 + temp_v0) * 2);
   temp_v1 = questHasSpecialDetailPage(temp_v4);

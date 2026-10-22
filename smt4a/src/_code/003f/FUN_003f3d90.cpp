@@ -1,31 +1,30 @@
-/* NON_MATCHING: fragment of a larger function (unit ends at a conditional return; the non-returning path falls through into code outside its bounds) */
-/* romwright 0.5.0 decompilation of FUN_003f3d90 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: ARMCC keeps x in r6 from entry instead of copying r4 to r6, and omits retail's nop before the member-speed call. */
+#include "ui/PartyPanel.h"
 
-void FUN_003f3d90(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
-{
-  int iVar1;
-  int iVar2;
-  
-  if (param_4 != 0) {
-    iVar1 = FUN_003493ac();
-    if ((iVar1 == 1 || iVar1 == 4) || ((iVar1 == 0xc || iVar1 == 0xf) || iVar1 == 0x11)) {
-      FUN_001677c0();
-      FUN_001835b4(2,0x11,0xb5,param_2,param_3,0xc9);
-      iVar1 = 0;
-      do {
-        iVar2 = FUN_0035d0a4(iVar1 + 0xd);
-        if (iVar2 != 0) {
-          FUN_001677c0();
-        }
-        FUN_001835b4(2,0x11,iVar1 + 0xb8,param_2,param_3,0xce);
-        FUN_001677c0();
-        iVar1 = iVar1 + 1;
-      } while (iVar1 < 3);
-    }
-    return;
-  }
-  return;
+extern "C" {
+u32 partyPanelGetFlag(void);
+PartyMember* partyPanelGetMember(s32 index);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(u32 group, u32 table, s32 effect, u32 x, u32 y, s32 layer);
 }
-*/
-#include "common.h"
+
+// Apply the panel effect speed to its main effect and three member effects.
+extern "C" void FUN_003f3d90(void* context, u32 x, u32 y, s32 enabled, f32 speed)
+{
+    if (enabled == 0) {
+        return;
+    }
+    u32 flag = partyPanelGetFlag();
+    if (flag == 1 || flag == 4 || flag == 12 || flag == 15 || flag == 17) {
+        efctSetSpeed(speed);
+        FUN_001835b4(2, 0x11, 0xB5, x, y, 0xC9);
+        for (s32 index = 0; index < 3; ++index) {
+            PartyMember* member = partyPanelGetMember(index + 13);
+            if (member != NULL) {
+                efctSetSpeed(member->effectSpeed * speed);
+            }
+            FUN_001835b4(2, 0x11, index + 0xB8, x, y, 0xCE);
+            efctSetSpeed(speed);
+        }
+    }
+}

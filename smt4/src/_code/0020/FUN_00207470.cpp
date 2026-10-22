@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002b2344(u32 value);
+int bufferDestroyOwner(u32 value);
 int asdTextureRelease(u32 value);
 int asdMemFree(void *ptr);
 
@@ -18,7 +18,7 @@ void FUN_00207470(Obj *obj)
     if (obj->unkB4 != 0) {
         asdTextureRelease(obj->unkB4);
     }
-    FUN_002b2344(obj->unk18);
+    bufferDestroyOwner(obj->unk18);
     asdMemFree(obj);
 }
 

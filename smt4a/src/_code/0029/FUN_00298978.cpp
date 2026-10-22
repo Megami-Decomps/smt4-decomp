@@ -17,7 +17,7 @@ int FUN_001695a0(void);
 int gameFlagIsSet(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_00212204(int);
 int asdLoadFileSetUseRawPaths(int);
 int msgWindowReset(void);
@@ -54,7 +54,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_00212204. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
@@ -240,10 +240,10 @@ unsigned int FUN_00298978(void)
         puVar2[3] = 0;
         return 0;
       }
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       puVar2[0xb] = (unsigned int)puVar8;
       puVar7 = temp_v5;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       puVar2[0xd] = (unsigned int)puVar7;
     }
     campCommonBgAcquire();

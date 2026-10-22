@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002005ec(void);
-int FUN_002b3950(unsigned int);
+int mathInterpolatePackedTable(unsigned int);
 int FUN_002ba1e0(unsigned int);
 int FUN_002c1b64(...);
 int FUN_002e0460(void);
@@ -34,7 +34,7 @@ extern int DAT_0049fca0; /* 0x49fca0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002005ec. */
-/* Supplied declaration required: FUN_002b3950. */
+/* Supplied declaration required: mathInterpolatePackedTable. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern unsigned int FUN_002c1c0c(unsigned int, unsigned int);
@@ -129,7 +129,7 @@ unsigned int FUN_001fd9f4(void)
     }
     temp_v6 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = VectorFloatToUnsigned(temp_v6 * 2184.5f,3);
-    FUN_002b3950(temp_v7 & 0xffff);
+    mathInterpolatePackedTable(temp_v7 & 0xffff);
     temp_v1 = g_titleScene;
     temp_v0 = FUN_002c5d80(5,0);
     piVar7 = (int *)(temp_v1 + 0x124c);

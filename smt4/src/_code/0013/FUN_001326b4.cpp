@@ -41,7 +41,7 @@ extern signed char DAT_004dad85; /* 0x4dad85 */
 extern unsigned int DAT_004dad88; /* 0x4dad88 */
 extern unsigned int *DAT_004dad90; /* 0x4dad90 */
 
-extern int FUN_001385d4(void);
+extern int asdGxIsReady(void);
 /* Supplied declaration required: FUN_00138c94. */
 /* Supplied declaration required: FUN_0013c6c0. */
 /* Supplied declaration required: nnosConvertVirtToPhys. */
@@ -111,7 +111,7 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
     FUN_002abb5c(*(unsigned int *)(temp_v1 + 8));
     DAT_004dad85 = '\x01';
   }
-  temp_v1 = FUN_001385d4();
+  temp_v1 = asdGxIsReady();
   if (temp_v1 == 0) {
     asdGxCommandListStartRecord(DAT_004dad90);
   }

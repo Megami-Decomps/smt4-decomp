@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(int, unsigned char *);
 int FUN_00333318(void);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 
 extern unsigned char DAT_0052fde8; /* 0x52fde8 */
 extern unsigned char DAT_0052fe0c; /* 0x52fe0c */
@@ -17,7 +17,7 @@ extern int DAT_0057f584; /* 0x57f584 */
 extern int FUN_00162ea4(void);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00333318. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 unsigned int FUN_0025ff44(void)
@@ -47,7 +47,7 @@ unsigned int FUN_0025ff44(void)
     }
     *(unsigned char *)(temp_v0 + 0x14) = 1;
     *(unsigned int *)(temp_v0 + 8) = 1;
-    FUN_003d2150(0x10000ce);
+    sysPlayVoice(0x10000ce);
   }
   return 1;
 }

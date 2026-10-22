@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_002903f0(void);
 int FUN_003bbfdc(unsigned int *, unsigned int);
-Table03Record* FUN_003bc134(s32 index);
+Table03Record* aocGetTableRecordOrFallback(s32 index);
 int FUN_003bc248(unsigned int *, unsigned int, int, int);
 int spriteDescriptorInitFromTemplate(...);
 
@@ -64,7 +64,7 @@ void FUN_0027dc24(int param_1,unsigned int *param_2,int param_3,int param_4)
     }
   }
   else if (-1 < *(int *)(param_1 + 0xc4)) {
-    FUN_003bc134(*(int *)(param_1 + 0xc4));
+    aocGetTableRecordOrFallback(*(int *)(param_1 + 0xc4));
     FUN_003bc248(param_2,*(unsigned int *)(param_1 + 0xc4),(int)(char)*(unsigned int *)(param_1 + 0x150)
                  ,(int)(char)*(unsigned int *)(param_1 + 0x154));
   }

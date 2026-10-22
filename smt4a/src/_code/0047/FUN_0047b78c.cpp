@@ -11,7 +11,7 @@ int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(...);
 int uiSpriteBankApplyPreset(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00429f38(...);
+int asdFsIsSdCardDetected(...);
 int FUN_00474734(...);
 int FUN_00476e58(...);
 int FUN_00477d10(...);
@@ -46,11 +46,11 @@ extern int jobIsValid(unsigned int);
 extern int byteIsAtLeast100(unsigned int *);
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_00284140(int);
-extern int FUN_002a4b74(void);
+extern int recordGetModeForId(int);
+extern int messageGetChoiceResult(void);
 extern int FUN_002e1a18(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -166,7 +166,7 @@ void FUN_0047b78c(unsigned int *param_1)
         }
       }
       else {
-        FUN_00429f38();
+        asdFsIsSdCardDetected();
         if (temp_v0 != 0) {
           puVar2 = param_1 + 0x83;
           FUN_00474734(puVar2,0);
@@ -196,7 +196,7 @@ void FUN_0047b78c(unsigned int *param_1)
       else {
         temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
         if (temp_v1 == 2) {
-          temp_v1 = FUN_002a4b74();
+          temp_v1 = messageGetChoiceResult();
           if (temp_v1 != 0) {
             if (temp_v1 == 1) {
               param_1[2] = 2;
@@ -247,7 +247,7 @@ void FUN_0047b78c(unsigned int *param_1)
     temp_v1 = FUN_002e1a18(0x10);
     if ((temp_v1 != 0) ||
        ((((*param_1 & 0x2000) != 0 && (*puVar2 != 0xffffffff)) &&
-        (temp_v1 = FUN_00284140((int)(short)*puVar2), temp_v1 == 6)))) {
+        (temp_v1 = recordGetModeForId((int)(short)*puVar2), temp_v1 == 6)))) {
       eventQueueAddUniqueIfValid(0x100020e);
       if ((*param_1 & 0x1000) != 0) {
         *puVar7 = 2;

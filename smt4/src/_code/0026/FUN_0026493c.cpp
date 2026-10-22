@@ -22,7 +22,7 @@ int FUN_002bff50(void);
 int FUN_002dfea4(void);
 int mapIfResetCounter(void);
 int FUN_002eb184(void);
-int FUN_002fb4dc(void);
+int naviRefreshMainBlock(void);
 int FUN_002fb988(int);
 int VectorSignedToFloat(int, int);
 
@@ -74,7 +74,7 @@ extern int FUN_002c8684(unsigned int);
 /* Supplied declaration required: FUN_002dfea4. */
 /* Supplied declaration required: mapIfResetCounter. */
 /* Supplied declaration required: FUN_002eb184. */
-/* Supplied declaration required: FUN_002fb4dc. */
+/* Supplied declaration required: naviRefreshMainBlock. */
 /* Supplied declaration required: FUN_002fb988. */
 extern short __aeabi_idivmod(int, int);
 
@@ -320,7 +320,7 @@ LAB_00264b84:
     switch(*(unsigned int *)(param_1 + 0xd0)) {
     case 0:
       DAT_0049fb45 = 0;
-      FUN_002fb4dc();
+      naviRefreshMainBlock();
       FUN_0020d7f4();
       temp_v7 = g_lmapScene;
       puVar11 = (unsigned int *)(g_lmapScene + 0x20);

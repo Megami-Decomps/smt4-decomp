@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002306f8(unsigned int *, unsigned int, int);
 int FUN_0026e630(unsigned int);
 int FUN_00295c04(unsigned int);
-int FUN_0029be5c(int, unsigned int);
+int gameCounterAddSaturating(int, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,9 +22,9 @@ typedef struct {
 /* Supplied declaration required: FUN_002306f8. */
 /* Supplied declaration required: FUN_0026e630. */
 /* Supplied declaration required: FUN_00295c04. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 extern int FUN_002ae3c0(short);
-extern int FUN_003a637c(short);
+extern int aocGetContentFlags(short);
 
 
 void FUN_003a1378(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -39,7 +39,7 @@ void FUN_003a1378(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   temp_v4 = param_4;
   FUN_00295c04(*(unsigned int *)(param_1 + 0x15d20));
-  FUN_0029be5c(0x1f,*(unsigned int *)(param_1 + 0x15d20));
+  gameCounterAddSaturating(0x1f,*(unsigned int *)(param_1 + 0x15d20));
   temp_v2 = 0;
   if (*(short *)(param_1 + 0x15d1c) != 0) {
     do {
@@ -55,7 +55,7 @@ void FUN_003a1378(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         FUN_002306f8(&temp_v4,temp_v3,0);
       }
       else {
-        temp_v1 = FUN_003a637c(temp_v0);
+        temp_v1 = aocGetContentFlags(temp_v0);
         FUN_0026e630(temp_v1 * temp_v3);
         temp_v4 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v4 + 2)),temp_v0) & 0xfc00ffff;
         FUN_002306f8(&temp_v4,-temp_v3,0);

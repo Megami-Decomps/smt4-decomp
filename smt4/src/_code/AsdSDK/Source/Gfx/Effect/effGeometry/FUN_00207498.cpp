@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002569fc(unsigned int *);
+int matrix44SetIdentity(unsigned int *);
 int recordPrepareActive(unsigned int, int, int, int);
 int asdOperatorNew(int, int);
 int memAlloc(int, int, int, int, int, int);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002569fc. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: recordPrepareActive. */
 extern unsigned int FUN_002693e4(void);
 /* Supplied declaration required: asdOperatorNew. */
@@ -62,7 +62,7 @@ unsigned int * FUN_00207498(int param_1,int param_2,int param_3,unsigned short p
       puVar3[3] = in_s0;
     } while ((int)temp_v1 < param_1);
   }
-  FUN_002569fc(puVar1 + 6);
+  matrix44SetIdentity(puVar1 + 6);
   *(unsigned short *)((int)puVar1 + 0x12) = param_4 | 0x100;
   *(short *)(puVar1 + 2) = (short)param_1;
   *(short *)((int)puVar1 + 0xe) = (short)(param_2 * param_1);

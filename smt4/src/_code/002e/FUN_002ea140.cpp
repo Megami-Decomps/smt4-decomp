@@ -5,7 +5,7 @@
 extern "C" {
 
 int mapIfActivateRecord(int, unsigned int);
-int FUN_0027fa98(unsigned int);
+int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
 int FUN_0027fca0(int);
 int mapSelectContainingRegions(void);
@@ -13,7 +13,7 @@ int FUN_002804ec(int);
 int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
 
@@ -33,7 +33,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 /* Supplied declaration required: mapIfActivateRecord. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
@@ -41,7 +41,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
@@ -136,7 +136,7 @@ void FUN_002ea140(void)
         *(unsigned int *)(temp_v1 + 0x54) = 0;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
         *(unsigned char *)(temp_v1 + 0x6c) = 0;
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         temp_v0 = DAT_0049f9a8;
         temp_v4 = DAT_0049f9a4;
         temp_v1 = g_lmapScene;
@@ -194,7 +194,7 @@ void FUN_002ea140(void)
       }
       FUN_0027fca0(0);
       temp_v4 = 1;
-      FUN_0027fa98(temp_v4);
+      lmapSetSceneId(temp_v4);
       FUN_002804ec(g_lmapScene + 0x28);
       mapSelectContainingRegions();
       return;
@@ -211,7 +211,7 @@ void FUN_002ea140(void)
       return;
     }
     temp_v4 = 0x10;
-    FUN_0027fa98(temp_v4);
+    lmapSetSceneId(temp_v4);
   }
   FUN_002804ec(g_lmapScene + 0x28);
   mapSelectContainingRegions();

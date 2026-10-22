@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int flagsAtGetBit1(unsigned short);
 
 
@@ -57,7 +57,7 @@ void FUN_0049d938(int param_1,int param_2,int param_3)
       temp_v9 = 0x9fe7ffff;
       temp_v8 = *(short *)(temp_v3 + 8) + param_2;
       temp_v6 = *(short *)(temp_v3 + 10) + param_3;
-      temp_v3 = FUN_00284140((int)*(short *)(param_1 + temp_v7 * 2 + 0x1fc));
+      temp_v3 = recordGetModeForId((int)*(short *)(param_1 + temp_v7 * 2 + 0x1fc));
       if ((temp_v3 == 1 || temp_v3 == 2) || temp_v3 == 6) {
         temp_v9 = 0xf5ff9fff;
       }

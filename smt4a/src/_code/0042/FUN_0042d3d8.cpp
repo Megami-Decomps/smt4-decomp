@@ -27,7 +27,7 @@ extern int FUN_0042fbd4(void);
 /* Supplied declaration required: FUN_0042fd28. */
 extern unsigned int FUN_0042ff1c(unsigned int *);
 extern int FUN_00430394(unsigned int);
-extern int FUN_004320e4(unsigned int);
+extern int svcRequestChannelByIndex(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -53,7 +53,7 @@ int FUN_0042d3d8(int param_1,int param_2)
       return -0x375ef410;
     }
     if (DAT_005b4488 == '\0') {
-      temp_v0 = FUN_004320e4(0);
+      temp_v0 = svcRequestChannelByIndex(0);
       if (temp_v0 < 0) {
         nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
         return temp_v0;

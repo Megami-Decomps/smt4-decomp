@@ -10,7 +10,7 @@ int dataTableGet(int, int);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
-extern int FUN_00203b1c(void);
+extern int gameGetUnlockedCountLimit(void);
 
 
 int FUN_004cc9dc(int param_1,int param_2,unsigned int *param_3)
@@ -36,10 +36,10 @@ int FUN_004cc9dc(int param_1,int param_2,unsigned int *param_3)
     temp_v0 = dataTableGetEntries();
     temp_v4 = (unsigned int)*(unsigned short *)((temp_v0 + temp_v3 * 2) - 2);
   }
-  for (temp_v3 = param_2; temp_v0 = FUN_00203b1c(), temp_v3 < temp_v0; temp_v3 = temp_v3 + 1) {
+  for (temp_v3 = param_2; temp_v0 = gameGetUnlockedCountLimit(), temp_v3 < temp_v0; temp_v3 = temp_v3 + 1) {
     dataTableGet(9,1);
     temp_v0 = dataTableGetEntries();
-    temp_v1 = FUN_00203b1c();
+    temp_v1 = gameGetUnlockedCountLimit();
     if (temp_v3 >= temp_v1) {
       temp_v2 = 0;
     }

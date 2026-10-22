@@ -14,7 +14,7 @@ int FUN_00287528(int);
 int FUN_00287704(...);
 int asdLoadFileAsyncSimple(unsigned char [64], int, int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_002a0428(void);
 int FUN_002a09b4(unsigned char [144], int);
 int textFormatBuffer(...);
@@ -22,7 +22,7 @@ int asdOperatorNew(void);
 int memClear(void);
 void FUN_002d582c(unsigned int, float);
 int FUN_002e1230(unsigned int, int);
-int FUN_00381ac0(void);
+int sysResetTimestampState(void);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -47,7 +47,7 @@ extern int storyModeCanProceed(unsigned char);
 /* Supplied declaration required: FUN_00287704. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a09b4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -56,8 +56,8 @@ extern int FUN_002c2218(int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002d582c. */
 /* Supplied declaration required: FUN_002e1230. */
-extern int FUN_00381914(void);
-/* Supplied declaration required: FUN_00381ac0. */
+extern int timerStampIsExpired(void);
+/* Supplied declaration required: sysResetTimestampState. */
 
 
 void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char param_4)
@@ -182,10 +182,10 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   asdLoadFileAsyncSimple(temp_v7,param_1 + 0x5b0,0);
   if (*(char *)(param_1 + 0x18) != '\x02' && *(char *)(param_1 + 0x18) != '\x03') {
     FUN_00287704();
-    temp_v3 = FUN_00381914();
+    temp_v3 = timerStampIsExpired();
     if (temp_v3 != 0) {
       FUN_00287704(*(unsigned char *)(param_1 + 0x18));
-      FUN_00381ac0();
+      sysResetTimestampState();
     }
   }
   temp_v3 = storyModeCanProceed(*(unsigned char *)(param_1 + 0x18));
@@ -194,7 +194,7 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   }
   FUN_00282bfc(0,0xff);
   FUN_00282bfc(1,0xff);
-  FUN_0029be5c(0x1c,1);
+  gameCounterAddSaturating(0x1c,1);
   return;
 }
 

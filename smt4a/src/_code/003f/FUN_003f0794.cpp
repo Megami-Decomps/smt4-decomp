@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int btlStageLoadTable(void);
 int FUN_00275bc8(void);
 int battleMapAccessoryLoad(void);
@@ -12,7 +12,7 @@ int FUN_003cdb28(void);
 int FUN_003ce360(void);
 int loadSlotEnsureLoaded(int);
 int FUN_00470e64(unsigned int);
-int FUN_0047ec9c(void);
+int jyoucyuEnsureResidentEntry(void);
 int callJyoucyuGetTableEntry1B(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -32,7 +32,7 @@ extern char *DAT_00573964; /* 0x573964 */
 extern char *DAT_00573968; /* 0x573968 */
 extern char *DAT_0057396c; /* 0x57396c */
 
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: btlStageLoadTable. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: battleMapAccessoryLoad. */
@@ -40,7 +40,7 @@ extern char *DAT_0057396c; /* 0x57396c */
 /* Supplied declaration required: FUN_003ce360. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: FUN_00470e64. */
-/* Supplied declaration required: FUN_0047ec9c. */
+/* Supplied declaration required: jyoucyuEnsureResidentEntry. */
 /* Supplied declaration required: callJyoucyuGetTableEntry1B. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -70,41 +70,41 @@ void FUN_003f0794(int param_1)
       loadSlotEnsureLoaded(0x48);
       FUN_00470e64(g_aocSystem);
       pcVar3 = "battle/Legion/LegionMsg.mbm";
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar4 = "battle/Legion/LegionMsgTable.tbb";
       DAT_00573948 = pcVar3;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar3 = "battle/Legion/LegionScr.bf";
       DAT_0057394c = pcVar4;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar4 = "battle/Common/common.mbm";
       DAT_00573950 = pcVar3;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar3 = "battle/talk/TalkSystem.mbm";
       DAT_00573954 = pcVar4;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar4 = "battle/talk/TalkBaseData.tbb";
       DAT_00573958 = pcVar3;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar3 = "battle/Systematic.tbb";
       DAT_0057395c = pcVar4;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar4 = "event/quest/SubQuestGuest.mbm";
       DAT_00573960 = pcVar3;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar3 = "battle/BossDeadTable.tbb";
       DAT_00573964 = pcVar4;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       pcVar4 = "battle/PartnerAttack.mbm";
       DAT_00573968 = pcVar3;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       DAT_0057396c = pcVar4;
       btlStageLoadTable();
       battleMapAccessoryLoad();
       temp_v1 = *(unsigned short *)(param_1 + 0x4d0a) + 1;
       *(short *)(param_1 + 0x4d0a) = (short)temp_v1;
     case 1:
-      FUN_0047ec9c();
+      jyoucyuEnsureResidentEntry();
       if (temp_v1 != 0) {
         *(char **)(param_1 + 0x2280) = DAT_00573948;
         *(char **)(param_1 + 0x2284) = DAT_0057394c;

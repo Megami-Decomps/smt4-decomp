@@ -8,7 +8,7 @@ int FUN_0022de74(int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_002328b4(void);
 int FUN_00233240(int, int);
-int FUN_00233344(int, int);
+int uiAnimationAdvanceChannel(int, int);
 int FUN_00233404(void);
 int FUN_0029ce60(unsigned int, int, int);
 int messageTargetSetValue(unsigned int, int);
@@ -30,7 +30,7 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_00233344. */
+/* Supplied declaration required: uiAnimationAdvanceChannel. */
 /* Supplied declaration required: FUN_00233404. */
 extern int flaggedValueHolderGetTotal(int);
 extern int FUN_00240d5c(int);
@@ -69,7 +69,7 @@ void FUN_003a72a4(int param_1)
   if (temp_v1 == 0) {
     return;
   }
-  FUN_00233344(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
+  uiAnimationAdvanceChannel(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
   temp_v1 = param_1 + *(short *)(param_1 + 0xa5b4) * 0x8c + 0xfc;
   temp_v2 = vec2GetYInt(temp_v1);
   temp_v3 = vec2GetXInt(temp_v1);

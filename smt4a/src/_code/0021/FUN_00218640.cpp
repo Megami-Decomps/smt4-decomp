@@ -81,7 +81,7 @@ extern int idIsAtLeast350(unsigned int);
 /* Supplied declaration required: gameFlagBlockGet. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern short *dataTableGetEntry37(unsigned int);
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_002ebda8. */
@@ -156,7 +156,7 @@ void FUN_00218640(void)
   }
   temp_v20 = (unsigned long long)temp_v19 << 0x20;
   efctSetSpeed();
-  temp_v6 = FUN_002a4860(temp_v13);
+  temp_v6 = resourceRunOperationIfUnblocked(temp_v13);
   temp_v13 = FUN_002a4894(temp_v13);
   temp_v1 = *(unsigned short *)(temp_v12 + (temp_v13 + temp_v6) * 2);
   if (*(char *)(temp_v30 + 0x3e) != '\0') {

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0021e224(int);
 int FUN_002878e4(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_00287b0c(void);
 int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
@@ -35,7 +35,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 
 /* Supplied declaration required: FUN_0021e224. */
 /* Supplied declaration required: FUN_002878e4. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0028c618. */
@@ -109,7 +109,7 @@ void FUN_00274798(void)
 LAB_002748b4:
           if ((*(char *)(g_deferredMapModels + 0xe3c) == '\0') || (*(char *)(temp_v1 + 0xe) != '\0')) {
             temp_v11 = *(int *)(g_lmapScene + 0x1c);
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             temp_v8 = *(int *)(temp_v1 + 0x38);
             if (temp_v8 != 0) {
               if (*(char *)(temp_v1 + 0xe) != '\0') {
@@ -164,7 +164,7 @@ LAB_002748b4:
                 if (*(char *)(temp_v2 + 0xc) != '\0') {
                   *(unsigned char *)(temp_v2 + 0xd) = 0;
                   temp_v12 = *(float *)(g_lmapScene + 0x1c);
-                  FUN_00287aec();
+                  mathDistanceBetweenPoints();
                   if (temp_v8 < 3) {
                     if (temp_v19[0] != -1) {
                       if (temp_v19[1] == -1) {

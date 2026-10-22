@@ -27,7 +27,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_0015687c(void);
+extern int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -118,7 +118,7 @@ void FUN_004045ac(int param_1,int param_2,int param_3)
     libc_strcmp(temp_v5,"<pc 0>");
     if (temp_v3 == 0) {
       gameGetPlayerData();
-      temp_v5 = FUN_0015687c();
+      temp_v5 = gameGetPlayerName();
     }
     textFormatBuffer(temp_v8,&LAB_00404968,temp_v5);
     temp_v3 = FUN_001834a4(0x32,5);

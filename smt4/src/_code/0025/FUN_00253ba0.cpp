@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int g_mapEnemy; /* 0x447600 */
 extern int g_lmapScene; /* 0x447e88 */
 
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 unsigned int FUN_00253ba0(int param_1)
@@ -30,7 +30,7 @@ unsigned int FUN_00253ba0(int param_1)
     return 0;
   }
   temp_v5 = *(float *)(g_lmapScene + 0x1c);
-  FUN_00287aec();
+  mathDistanceBetweenPoints();
   temp_v7 = 300.0f;
   temp_v2 = 0;
   if (*(int *)(param_1 + 0x84) == 2) {
@@ -45,7 +45,7 @@ unsigned int FUN_00253ba0(int param_1)
     }
     if (temp_v4 && temp_v0 != '\0') {
       temp_v6 = *(float *)(g_lmapScene + 0x1c);
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if (*(int *)(temp_v3 + 0xb8) == 2) {
         temp_v6 = temp_v6 + temp_v7;
       }

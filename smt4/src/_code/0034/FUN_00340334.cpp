@@ -1,4 +1,4 @@
-/* NON_MATCHING: linker-erased tail call at +0x18 has no recovered target. */
+/* NON_MATCHING: entry consumes four VFP words with vldmia sp! without creating a frame, then falls through a linker-NOP into FUN_00340350; its inherited-stack calling boundary remains unresolved. */
 /* romwright 0.5.0 decompilation of FUN_00340334 for reference (not compiled; its own view of the boundaries):
 
 void FUN_00340334(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,

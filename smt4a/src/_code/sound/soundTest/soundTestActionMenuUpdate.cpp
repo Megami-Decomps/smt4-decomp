@@ -15,7 +15,7 @@ void jobStop(u32, s32);
 u32 padButtonIsPressed(u32);
 u32 padButtonRepeat(u32);
 void FUN_003d4c68(u32);
-void FUN_003de02c(u32);
+void bgmRequestSelectedChannelFade(u32);
 void soundChannelRequestIfEnabled(u32, u32, u32);
 void soundChannelStopAll(u32);
 void bgmPlay(s32, u32, u32);
@@ -64,7 +64,7 @@ u32 soundTestActionMenuUpdate()
         FUN_003d4c68(0x100000f);
         break;
     case 1:
-        FUN_003de02c(30);
+        bgmRequestSelectedChannelFade(30);
         break;
     case 2:
         soundChannelRequestIfEnabled(0x1000003, 0, 60);

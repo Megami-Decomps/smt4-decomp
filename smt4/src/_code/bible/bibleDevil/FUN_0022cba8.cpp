@@ -17,7 +17,7 @@ int FUN_00231bcc(int, int, int);
 int FUN_00240d5c(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002bed3c(void);
-int FUN_0039fc20(int, float [3]);
+int uiMenuAnchorGetOffset(int, float [3]);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern unsigned long long rangeLimitMin(int);
 extern int FUN_0029e924(int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_0039fc20. */
+/* Supplied declaration required: uiMenuAnchorGetOffset. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0022cf08) */
@@ -75,7 +75,7 @@ void FUN_0022cba8(int param_1)
   float temp_v18 [3];
   
   pairCopy(param_1 + 200,&temp_v16);
-  FUN_0039fc20(param_1 + 200,temp_v18);
+  uiMenuAnchorGetOffset(param_1 + 200,temp_v18);
   if (((int)(temp_v16 + temp_v18[0]) < 0x43a00000) && ((unsigned int)(temp_v16 + temp_v18[0]) < 0xc3a00000))
   {
     temp_v16 = *(float *)(param_1 + 0x594);

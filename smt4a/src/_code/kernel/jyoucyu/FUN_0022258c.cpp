@@ -13,7 +13,7 @@ int FUN_00212774(void);
 int configSettingsResetDefaults(void);
 int FUN_002326b4(void);
 int FUN_0023b410(void);
-int FUN_00281a0c(void);
+int asdMTeXLoadTableEntries(void);
 int commonBgLoadSpritesOnFirstUse(void);
 int FUN_00283d74(int);
 int dataTableRefAcquire(void);
@@ -45,7 +45,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: configSettingsResetDefaults. */
 /* Supplied declaration required: FUN_002326b4. */
 /* Supplied declaration required: FUN_0023b410. */
-/* Supplied declaration required: FUN_00281a0c. */
+/* Supplied declaration required: asdMTeXLoadTableEntries. */
 /* Supplied declaration required: commonBgLoadSpritesOnFirstUse. */
 /* Supplied declaration required: FUN_00283d74. */
 /* Supplied declaration required: dataTableRefAcquire. */
@@ -78,7 +78,7 @@ void FUN_0022258c(unsigned int param_1)
           param_1 = (unsigned int)DAT_0057ffba;
         }
         if (temp_v0 && param_1 == 0) {
-          FUN_00281a0c();
+          asdMTeXLoadTableEntries();
           texTableRefAcquire();
           FUN_00212774();
           FUN_002c3364();

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00241d44(float *);
+int gpuSubmitFloatVectorsOrDefault(float *);
 int forwardRecoveredCallback(void);
 int FUN_002b011c(void);
 int FUN_002c1ac8(float *);
@@ -62,7 +62,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00241d44. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002b011c. */
@@ -258,7 +258,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
   temp_v4 = 0;
   do {
     VectorSignedToFloat(0x100 - param_1,(unsigned char)(temp_v6 >> 0x16) & 3);
-    FUN_00241d44(&temp_v21);
+    gpuSubmitFloatVectorsOrDefault(&temp_v21);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 4);
   forwardRecoveredCallback();

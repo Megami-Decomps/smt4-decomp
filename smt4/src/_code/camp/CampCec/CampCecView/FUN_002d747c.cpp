@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026eda8(...);
+int campCecResetScalarEffect(...);
 int campCecDisplaySetRecord(...);
 int uiDrawRecordNameLabels(unsigned int);
 int saveGetIndexedMapValue(...);
@@ -46,7 +46,7 @@ extern unsigned char LAB_002d784c; /* 0x2d784c */
 extern unsigned int *g_campCecView; /* 0x43db10 */
 
 extern unsigned int FUN_0024aaa0(void);
-/* Supplied declaration required: FUN_0026eda8. */
+/* Supplied declaration required: campCecResetScalarEffect. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
 /* Supplied declaration required: uiDrawRecordNameLabels. */
 /* Supplied declaration required: saveGetIndexedMapValue. */
@@ -171,7 +171,7 @@ void FUN_002d747c(void)
   FUN_0026f784();
   if (temp_v4 != 0) {
     campCecDisplaySetRecord(puVar1[2],&temp_v5);
-    FUN_0026eda8(puVar1[2]);
+    campCecResetScalarEffect(puVar1[2]);
     linkHolderApplyFlag(puVar1[2],0);
     puVar1[0x53] = puVar1[0x4f];
   }

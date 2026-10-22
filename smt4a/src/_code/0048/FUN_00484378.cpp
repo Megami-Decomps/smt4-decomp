@@ -27,7 +27,7 @@ typedef struct {
 extern int scrRunOpcodesStub(unsigned int);
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: logFormatBuffer. */
 extern int convertToBufferAndStore(unsigned int *, int);
@@ -49,7 +49,7 @@ void FUN_00484378(int param_1)
   if (*(char *)(param_1 + 0x270) != '\0') {
     temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
     if (temp_v1 == 2) {
-      temp_v1 = FUN_002a4b74();
+      temp_v1 = messageGetChoiceResult();
       if (temp_v1 != 0) {
         stateSetterEnterState(param_1,2);
         sysPlaySe(0x97);

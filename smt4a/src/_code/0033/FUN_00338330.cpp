@@ -5,12 +5,12 @@
 extern "C" {
 
 int matrixCopyFull(unsigned char [64], unsigned char [64]);
-int FUN_00226cb0(unsigned char [64], int *, int);
+int mathMatrixApplyScale(unsigned char [64], int *, int);
 int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
 int FUN_002a1fb4(int, unsigned char [64], int);
 int FUN_002a2048(unsigned char [64], int *, int);
 int FUN_002b4c30(unsigned char [76], int);
-int FUN_002e1450(unsigned char [64]);
+int matrix44SetIdentity(unsigned char [64]);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -20,12 +20,12 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: matrixCopyFull. */
-/* Supplied declaration required: FUN_00226cb0. */
+/* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a1fb4. */
 /* Supplied declaration required: FUN_002a2048. */
 /* Supplied declaration required: FUN_002b4c30. */
-/* Supplied declaration required: FUN_002e1450. */
+/* Supplied declaration required: matrix44SetIdentity. */
 
 
 void FUN_00338330(int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
@@ -43,10 +43,10 @@ void FUN_00338330(int param_1,unsigned int *param_2,int param_3,unsigned int *pa
     temp_v0 = *param_4;
     temp_v1 = param_4[1];
     temp_v2 = param_4[2];
-    FUN_00226cb0(temp_v3,&temp_v0,0);
+    mathMatrixApplyScale(temp_v3,&temp_v0,0);
   }
   else {
-    FUN_002e1450(temp_v3);
+    matrix44SetIdentity(temp_v3);
   }
   if (param_3 != 0) {
     FUN_002b4c30(temp_v5,param_3);

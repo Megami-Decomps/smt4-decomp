@@ -8,7 +8,7 @@ int FUN_00231bcc(...);
 float FUN_00231d2c(int);
 int FUN_00231dec(...);
 int FUN_00232554(...);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_002bedb0(...);
 int FUN_002bee04(unsigned int, int, unsigned int);
 int FUN_0039af94(int);
@@ -37,7 +37,7 @@ extern unsigned char FUN_00231ca4(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: FUN_00232554. */
 extern float *lmapSceneGetObj(void);
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 extern int FUN_00288f78(unsigned int);
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
@@ -112,7 +112,7 @@ void FUN_003996c8(int param_1)
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0x5a8d) == '\0') {
       temp_v6 = *(int *)(param_1 + 0x121d8);
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if (temp_v6 >= 0x3f800001) {
         *(unsigned char *)(param_1 + 0x5a8d) = 1;
       }

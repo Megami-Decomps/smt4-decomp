@@ -25,7 +25,7 @@ extern unsigned char DAT_0052bfdc; /* 0x52bfdc */
 /* Supplied declaration required: FUN_00162790. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_00284140(unsigned int);
+extern int recordGetModeForId(unsigned int);
 /* Supplied declaration required: FUN_003cd2c4. */
 
 
@@ -38,7 +38,7 @@ void FUN_003c40b4(int param_1,int param_2,int param_3,short param_4,int param_5,
   unsigned int in_fpscr;
   
   temp_v1 = 0;
-  temp_v0 = FUN_00284140(param_6);
+  temp_v0 = recordGetModeForId(param_6);
   if ((temp_v0 == 1 || temp_v0 == 2) || temp_v0 == 6) {
     if (param_5 == -0x60180001) {
       param_5 = -0xa006001;

@@ -14,7 +14,7 @@ int FUN_0029e648(...);
 int asdMdlManagerDestroy(...);
 int timerStart(...);
 
-int FUN_00299174(...);
+int campReleaseScreenTouchRegions(...);
 int flaggedEntrySetValueB(...);
 int FUN_002992e0(...);
 int FUN_00299370(...);
@@ -55,12 +55,12 @@ extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_002990a0. */
 /* Supplied declaration required: guestWinRequestOpen. */
-/* Supplied declaration required: FUN_00299174. */
+/* Supplied declaration required: campReleaseScreenTouchRegions. */
 extern unsigned int FUN_00299218(int, unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_002992e0. */
 /* Supplied declaration required: FUN_00299370. */
-extern int FUN_002995d8(short);
+extern int recordAcceptsStickDirection(short);
 extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002996d8. */
 /* Supplied declaration required: FUN_0029974c. */
@@ -332,7 +332,7 @@ void FUN_0018854c(unsigned int param_1)
       temp_v5 = FUN_0029efc0(temp_v11);
       temp_v11 = FUN_0029efa8(temp_v11);
       psVar14 = (short *)(temp_v9 + (temp_v11 + temp_v5) * 2);
-      temp_v5 = FUN_002995d8(*psVar14);
+      temp_v5 = recordAcceptsStickDirection(*psVar14);
       if (temp_v5 == 0) {
         eventQueueAddUniqueIfValid(0x100016e);
         return;
@@ -536,7 +536,7 @@ void FUN_0018854c(unsigned int param_1)
             temp_v4 = FUN_0029e958(temp_v5 + 0x34);
           } while (temp_v6 < temp_v4);
         }
-        FUN_00299174(temp_v11,0);
+        campReleaseScreenTouchRegions(temp_v11,0);
         *(unsigned int *)(temp_v5 + 0x1c) = 2;
         if (param_1 == 0x11) {
           temp_v5 = gameFlagIsSet(0x410);
@@ -652,7 +652,7 @@ joined_r0x00188f3c:
             temp_v4 = FUN_0029e958(temp_v5 + 0x34);
           } while (temp_v6 < temp_v4);
         }
-        FUN_00299174(temp_v11,0);
+        campReleaseScreenTouchRegions(temp_v11,0);
         *(unsigned int *)(temp_v5 + 0x1c) = 2;
         if (param_1 != 0x11) {
           if (param_1 != 0x12) {
@@ -721,7 +721,7 @@ joined_r0x00188f3c:
       *(unsigned int *)(temp_v9 + 0x14) = 0;
       asdMdlManagerDestroy(*(unsigned int *)(temp_v5 + 0x25c0));
       *(unsigned int *)(temp_v5 + 0x25c0) = 0;
-      FUN_00299174(temp_v11,0);
+      campReleaseScreenTouchRegions(temp_v11,0);
       guestWinRequestOpen();
       FUN_0029e648(1,0);
       FUN_002990a0();

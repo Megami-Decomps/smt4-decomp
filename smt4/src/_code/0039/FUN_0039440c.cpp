@@ -18,7 +18,7 @@ struct SequenceArguments {
 
 extern "C" {
 
-void FUN_0027db90();
+void sequenceRequestClearDeferred();
 void gameRestoreWorkSave(s32 mode);
 void asdSequenceRequest(s32 kind, const SequenceArguments *arguments, u32 size);
 
@@ -33,7 +33,7 @@ s32 FUN_0039440c(SequenceRequestState *request)
     arguments.flags = ~0u;
     for (u32 index = 0; index < 6; ++index)
         arguments.values[index] = request->arguments[index];
-    FUN_0027db90();
+    sequenceRequestClearDeferred();
     gameRestoreWorkSave(2);
     asdSequenceRequest(4, &arguments, 32);
     return 1;

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001f71b4(void);
+int resourceCollectionDestroy(void);
 int bufferObjDestroy(u32 obj);
 int objectBufferFree(void);
 int asdMemFree(int ptr);
@@ -25,7 +25,7 @@ void FUN_002d1918(Obj *obj)
     Sub *sub;
 
     if (obj->unk2C != 0) {
-        FUN_001f71b4();
+        resourceCollectionDestroy();
     }
     if (obj->sub != NULL) {
         sub = obj->sub;

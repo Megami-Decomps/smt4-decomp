@@ -10,7 +10,7 @@ int asdMemFree(...);
 int asdTMTexTableReleaseNode(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_002cc220(void);
 int asdTMTexTableFreeEntry(int);
-int FUN_00341f4c(void);
+int helpReleaseDataTable(void);
 int campButtonHelpRelease(void);
 int FUN_0038b3f8(int, int);
 int FUN_003a7a88(int, int);
@@ -31,7 +31,7 @@ extern int FUN_00187168(void);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_002cc220. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_00341f4c. */
+/* Supplied declaration required: helpReleaseDataTable. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003a7a88. */
@@ -92,7 +92,7 @@ void FUN_00318c3c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   campButtonHelpRelease();
   DAT_0057f0c5 = DAT_0057f0c5 - '\x01';
   if (DAT_0057f0c5 < '\x01') {
-    FUN_00341f4c();
+    helpReleaseDataTable();
     asdMemFree(DAT_0057f0cc);
     asdMemFree(DAT_0057f0d0);
     asdTMTexTableReleaseNode(10,0,param_3,param_4,unaff_r4,in_lr);

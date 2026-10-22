@@ -1,4 +1,3 @@
-/* NON_MATCHING: the slot constant 0 is set before the argument call, and the stat is addressed with mov r1, #114 / register offset instead of add + ldrsh [r0, #114]. */
 #include "common.h"
 
 extern "C" {

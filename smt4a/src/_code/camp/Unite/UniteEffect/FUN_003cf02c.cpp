@@ -38,7 +38,7 @@ int FUN_00178b04(...);
 int FUN_0019eb14(void);
 int FUN_002859d8(...);
 int FUN_002c8894(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(...);
 int FUN_003f9ac4(...);
@@ -108,7 +108,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: btlTalkBustUpReleaseContent. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003d2a00. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -193,10 +193,10 @@ unsigned int FUN_003cf02c(void)
         }
         temp_v5 = 0x10000b6;
       }
-      FUN_003d2150(temp_v5);
+      sysPlayVoice(temp_v5);
     }
     else {
-      FUN_003d2150(0x10000b4);
+      sysPlayVoice(0x10000b4);
     }
     temp_v6 = DAT_0057f2c4;
     *(unsigned int *)(DAT_0057f2c4 + 4) = 2;
@@ -465,7 +465,7 @@ LAB_003cf9bc:
           if (*(int *)(temp_v2 + 0x24) != -1) {
             FUN_003d2158(*(int *)(temp_v2 + 0x24),0);
             *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
-            FUN_003d2150(0x10000b7);
+            sysPlayVoice(0x10000b7);
           }
         }
       }
@@ -563,7 +563,7 @@ LAB_003cf9bc:
         }
       }
       if (*(int *)(temp_v2 + 8) == temp_v6) {
-        temp_v5 = FUN_003d2150(0x10000b8);
+        temp_v5 = sysPlayVoice(0x10000b8);
         *(unsigned int *)(temp_v2 + 0x24) = temp_v5;
       }
     }
@@ -573,7 +573,7 @@ LAB_003cf9bc:
         temp_v6 = temp_v9;
       }
       if (*(int *)(temp_v2 + 8) == temp_v6) {
-        FUN_003d2150(0x10000b7);
+        sysPlayVoice(0x10000b7);
       }
     }
     if (*(short *)(temp_v2 + 0x1e) == 2) {

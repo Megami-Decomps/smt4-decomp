@@ -22,7 +22,7 @@ typedef struct UseCounter {
 
 extern UseCounter g_useCounter;
 
-s32 FUN_002a4860(void);
+s32 resourceRunOperationIfUnblocked(void);
 s32 FUN_002a4894(UseSub *sub);
 
 /* The current use-counter value byte (105 while the state is inactive). */
@@ -33,7 +33,7 @@ u8 FUN_002c7c54(void)
 
     if (state->active != 0) {
         UseSub *sub = &state->sub;
-        s32 first = FUN_002a4860();
+        s32 first = resourceRunOperationIfUnblocked();
         s32 second = FUN_002a4894(sub);
 
         value = state->values[second + first];

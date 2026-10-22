@@ -37,7 +37,7 @@ typedef struct Screen {
 } Screen;
 
 extern void FUN_00230954(SubState *subState, Entry *entry);
-extern void FUN_00233344(void *display, s32 id);
+extern void uiAnimationAdvanceChannel(void *display, s32 id);
 extern void FUN_00233410(Entry *entry);
 extern s32 stateCounterBelowLimit(Entry *entry, u32 value);
 extern u32 FUN_002333f0(SubState *subState);
@@ -50,8 +50,8 @@ u32 FUN_0022fbc0(Screen *screen)
     FUN_00230954(&screen->subState, entry);
     screen->handler->vtbl->apply(screen->handler, entry);
     FUN_00233410(entry);
-    FUN_00233344(screen->display, 2);
-    FUN_00233344(screen->display, 3);
+    uiAnimationAdvanceChannel(screen->display, 2);
+    uiAnimationAdvanceChannel(screen->display, 3);
     accepted = 0;
     if (screen->subState.ready != 0) {
         if (stateCounterBelowLimit(entry, FUN_002333f0(&screen->subState)) != 0) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019de98(...);
 int ptrListRemoveClearOwner(...);
-int FUN_0020b660(...);
+int campChangeState(...);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
 int FUN_0026f148(...);
@@ -33,7 +33,7 @@ int FUN_0036cf98(...);
 int FUN_0038b57c(...);
 int FUN_0038b5fc(...);
 int FUN_0039a41c(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003df7c4(...);
 
 int FUN_00178b04(...);
@@ -83,16 +83,16 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_0020b660. */
+/* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0022e714(void);
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0026f148. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_0028b088. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
@@ -125,7 +125,7 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: FUN_0039a41c. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -229,7 +229,7 @@ void FUN_001fdde8(int param_1)
       gameGlobalsQueueValues(psVar4,0);
       FUN_00372100(psVar4,0);
       FUN_002a7324(1);
-      temp_v4 = FUN_002a4860(temp_v13);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v13 = FUN_002a4894(temp_v13);
       temp_v7 = *(short *)(temp_v9 + (temp_v13 + temp_v4) * 2);
       if (param_1 != 0x16) {
@@ -331,7 +331,7 @@ void FUN_001fdde8(int param_1)
     }
     else {
       if (*(char *)(temp_v5 + 0x3c) != '\0') {
-        temp_v4 = FUN_002a4860(temp_v13);
+        temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
         temp_v8 = FUN_002a4894(temp_v13);
         temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
         if (param_1 != 0x16) {
@@ -399,7 +399,7 @@ void FUN_001fdde8(int param_1)
     temp_v4 = 0;
     FUN_001517b4(0,1);
     if (temp_v4 != 0 || temp_v14[0] != '\0') {
-      temp_v5 = FUN_002a4860(temp_v13);
+      temp_v5 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v13 = FUN_002a4894(temp_v13);
       psVar13 = (short *)(temp_v9 + (temp_v13 + temp_v5) * 2);
       temp_v5 = unitMatchesAlignment(*psVar13);
@@ -453,7 +453,7 @@ void FUN_001fdde8(int param_1)
         FUN_00372100(psVar4,0);
       }
       eventQueueAddUniqueIfValid(0x100020e);
-      FUN_003d2150(0x10000cc);
+      sysPlayVoice(0x10000cc);
       return;
     }
     temp_v4 = 1;
@@ -476,10 +476,10 @@ void FUN_001fdde8(int param_1)
     }
     temp_v4 = 8;
     FUN_001517b4(8,0);
-    if ((temp_v4 == 0) && (temp_v4 = FUN_00284140((int)*(short *)(temp_v5 + 0x1b3a)), temp_v4 != 6)) {
+    if ((temp_v4 == 0) && (temp_v4 = recordGetModeForId((int)*(short *)(temp_v5 + 0x1b3a)), temp_v4 != 6)) {
       temp_v4 = 7;
       FUN_001517b4(7,0);
-      if ((temp_v4 == 0) && (temp_v4 = FUN_00284140((int)*(short *)(temp_v5 + 0x1b3c)), temp_v4 != 6)) {
+      if ((temp_v4 == 0) && (temp_v4 = recordGetModeForId((int)*(short *)(temp_v5 + 0x1b3c)), temp_v4 != 6)) {
         temp_v9 = 9;
         FUN_001517b4(9,1);
         if (temp_v9 == 0) {
@@ -531,12 +531,12 @@ void FUN_001fdde8(int param_1)
         FUN_0019de98(0,0xf4f4f4ff);
         temp_v2 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v2;
-        FUN_0020b660(0x2b);
+        campChangeState(0x2b);
         temp_v3 = 0x100020e;
         eventQueueAddUniqueIfValid(temp_v3);
         return;
       }
-      temp_v4 = FUN_002a4860(temp_v13);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v8 = temp_v8 + temp_v4;
       if (param_1 != 0x16) {
@@ -582,7 +582,7 @@ void FUN_001fdde8(int param_1)
       }
     }
     else {
-      temp_v4 = FUN_002a4860(temp_v13);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v8 = temp_v8 + temp_v4;
       if (param_1 != 0x16) {
@@ -637,7 +637,7 @@ void FUN_001fdde8(int param_1)
     if (temp_v10 != 0) {
       FUN_0028b088(0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
-      FUN_0020b660(5);
+      campChangeState(5);
       campTouchRegionsRemoveGroup(temp_v13,0);
       return;
     }
@@ -650,7 +650,7 @@ void FUN_001fdde8(int param_1)
       FUN_0028b088(0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
-      FUN_0020b660(5);
+      campChangeState(5);
       ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4));
       if (*(int **)(temp_v5 + 0x32ac) != (int *)0x0) {
         (**(romwright_code **)(**(int **)(temp_v5 + 0x32ac) + 4))();
@@ -733,21 +733,21 @@ LAB_001fe16c:
     case 0x4b:
       FUN_0026f148(0x4b);
       FUN_0037e0b8(1);
-      temp_v4 = FUN_002a4860(temp_v13);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4c:
       FUN_0026f148(0x4c);
       FUN_0037e0b8(0);
-      temp_v4 = FUN_002a4860(temp_v13);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4d:
       FUN_0026f148(0x4d);
       FUN_0037e0b8(2);
-      temp_v4 = FUN_002a4860(temp_v13);
+      temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;

@@ -14,7 +14,7 @@ extern void gameDataBlocksSetFlagBits(u8 id, s32 value);
 extern u32 gameDataBlocksGetWord27E90(void);
 extern u8 gameFlagIsSet(u32 id);
 extern Lookup62_64 *saveSlotFindSelected(void);
-extern Lookup62_64 *FUN_00228ab0(s32 index);
+extern Lookup62_64 *gameGetSaveSlotData(s32 index);
 extern s32 wstrlen(const u16 *str);
 extern void FUN_002e59f8(const u16 *src, u16 *dst, u32 size);
 
@@ -46,7 +46,7 @@ void playerSummaryFill(PlayerSummary *summary)
         summary->unk3A = entry->unk64;
     }
     for (i = 0; i < 3; i++) {
-        member = FUN_00228ab0(i);
+        member = gameGetSaveSlotData(i);
         if (member != NULL) {
             summary->unk3C[i] = member->unk62;
         } else {

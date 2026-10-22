@@ -36,7 +36,7 @@ extern unsigned int FUN_0026f1f0(void);
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
-extern int FUN_00290e9c(void);
+extern int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00295214. */
 /* Supplied declaration required: devilCreateRaceEffect. */
@@ -64,7 +64,7 @@ unsigned int FUN_002d6d44(int param_1)
   case 0:
     temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
-      temp_v1 = FUN_00290e9c();
+      temp_v1 = messageTargetGetValue();
       if (temp_v1 == *(int *)(param_1 + 0x15c)) {
         return 0;
       }
@@ -72,7 +72,7 @@ unsigned int FUN_002d6d44(int param_1)
       if (temp_v1 == 0) {
         return 0;
       }
-      temp_v1 = FUN_00290e9c();
+      temp_v1 = messageTargetGetValue();
       *(int *)(param_1 + 0x15c) = temp_v1;
       if (temp_v1 != 0) {
         temp_v3 = FUN_0026f1f0();

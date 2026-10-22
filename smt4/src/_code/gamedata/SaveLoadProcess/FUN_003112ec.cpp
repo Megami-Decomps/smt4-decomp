@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_00193c60(void);
+extern int saveLoadGetThreadStatus(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -40,7 +40,7 @@ unsigned int FUN_003112ec(void)
   int *piVar5;
   float temp_v4;
   
-  temp_v0 = FUN_00193c60();
+  temp_v0 = saveLoadGetThreadStatus();
   if (temp_v0 != 0) {
     FUN_002c39a4(g_titleScene);
     temp_v0 = g_titleScene;

@@ -23,7 +23,7 @@ extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
 /* Supplied declaration required: sysPlaySe. */
 extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002a482c(int);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: buttonHelpGetValue. */
@@ -44,7 +44,7 @@ void FUN_004a38bc(int param_1)
   
   temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x85c));
   if (temp_v0 == 2) {
-    temp_v0 = FUN_002a4b74();
+    temp_v0 = messageGetChoiceResult();
     if (temp_v0 == 0) {
       temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_004a37a0(param_1,*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868));

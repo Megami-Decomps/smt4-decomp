@@ -14,7 +14,7 @@ int FUN_003ebc08(...);
 int gameFlagSetValue(...);
 int FUN_004ab734(...);
 int btlUiPanelStart(...);
-int FUN_004abb94(...);
+int btlUiClearSelectionSlots(...);
 int FUN_004f8f08(...);
 
 extern unsigned int DAT_005715d0; /* 0x5715d0 */
@@ -44,7 +44,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004ab734. */
 /* Supplied declaration required: btlUiPanelStart. */
-/* Supplied declaration required: FUN_004abb94. */
+/* Supplied declaration required: btlUiClearSelectionSlots. */
 /* Supplied declaration required: FUN_004f8f08. */
 
 
@@ -104,7 +104,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
       if ((DAT_005715d0 & *puVar5) == 0 && (DAT_005715d4 & *(unsigned int *)(temp_v2 + 0x45a4)) == 0) {
         *(unsigned short *)(temp_v2 + 0x4c70) = 8;
         *(unsigned short *)(temp_v2 + 0x4c72) = 8;
-        FUN_004abb94(g_btlUiBlock);
+        btlUiClearSelectionSlots(g_btlUiBlock);
         FUN_003ebc08(temp_v2,1);
         temp_v0 = ~DAT_005715e8;
         temp_v4 = ~DAT_005715f0;

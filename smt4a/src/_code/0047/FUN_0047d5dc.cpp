@@ -6,7 +6,7 @@ extern "C" {
 
 int asdTextureCreate(void);
 int asdTextureEntryApply(int);
-int FUN_001ad15c(int, int);
+int asdTextureSelectHeap(int, int);
 int FUN_001ba204(int, unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned char LAB_0047d74c; /* 0x47d74c */
 
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdTextureEntryApply. */
-/* Supplied declaration required: FUN_001ad15c. */
+/* Supplied declaration required: asdTextureSelectHeap. */
 /* Supplied declaration required: FUN_001ba204. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
 
@@ -73,10 +73,10 @@ void FUN_0047d5dc(unsigned int *param_1,int *param_2)
   *(int *)(temp_v3 + 0xc) = temp_v4;
   if ((temp_v1 & 0x60) != 0) {
     if ((temp_v1 & 0x20) != 0) {
-      FUN_001ad15c(temp_v3,0x20000);
+      asdTextureSelectHeap(temp_v3,0x20000);
     }
     else {
-      FUN_001ad15c(temp_v3,0x30000);
+      asdTextureSelectHeap(temp_v3,0x30000);
     }
   }
   asdTextureEntryApply(temp_v3);

@@ -30,7 +30,7 @@ typedef struct {
 extern int dataTable9EntryOrZero(unsigned char);
 extern int FUN_0029aafc(void);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -97,7 +97,7 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
   param_1[0x23] = param_2[6];
   temp_v4 = FUN_0029aafc();
   rt_memcpy_w(param_1 + 0x24,param_2 + 0x1a,temp_v4 << 1);
-  temp_v5 = FUN_002bd1fc();
+  temp_v5 = gameGetPlayerName();
   libc_strcpy(param_1 + 0x2ce,temp_v5);
   if ((short)param_1[0xd] >= 1000) {
     param_1[0xd] = 999;

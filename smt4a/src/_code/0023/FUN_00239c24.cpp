@@ -16,7 +16,7 @@ int FUN_002ddea0(void);
 int FUN_002de4d4(int, int, int);
 int FUN_002edf08(void);
 int FUN_002ef048(void);
-int FUN_00314c38(int, int, int, int, int, int);
+int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
 int FUN_003273ac(int);
 int FUN_003276f0(...);
 int FUN_00331efc(void);
@@ -53,7 +53,7 @@ extern int FUN_00262614(int);
 /* Supplied declaration required: FUN_002edf08. */
 /* Supplied declaration required: FUN_002ef048. */
 extern int flagCategoryIsAvailable(int);
-/* Supplied declaration required: FUN_00314c38. */
+/* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003273ac. */
 extern int FUN_00327540(int);
 /* Supplied declaration required: FUN_003276f0. */
@@ -185,7 +185,7 @@ void FUN_00239c24(void)
         *(char *)(temp_v3 + 0x3b) = (char)*(unsigned short *)(temp_v5 + 0x5814d6);
       }
       DAT_005f1604 = (unsigned int)*(short *)(temp_v5 + 0x5814c8);
-      FUN_00314c38(DAT_005f1604 & 0xff,0,0,0,0,0);
+      naviMainSetFlagsAndActivate(DAT_005f1604 & 0xff,0,0,0,0,0);
     }
     else {
       FUN_002edf08();

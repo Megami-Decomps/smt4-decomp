@@ -43,7 +43,7 @@ extern unsigned int FUN_0019e52c(unsigned short);
 extern int FUN_0022e714(void);
 extern int FUN_0023b3b8(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a4914. */
@@ -78,7 +78,7 @@ void FUN_004bea0c(int param_1)
   temp_v4 = 0;
   temp_v3 = 0;
   do {
-    temp_v0 = FUN_00284140((int)*(short *)(param_1 + temp_v3 * 2 + 0x2f8));
+    temp_v0 = recordGetModeForId((int)*(short *)(param_1 + temp_v3 * 2 + 0x2f8));
     if ((temp_v0 == 1 || temp_v0 == 2) || temp_v0 == 6) {
       temp_v6 = SCARRY4(temp_v3,1);
       temp_v0 = temp_v3 + 1;
@@ -92,7 +92,7 @@ void FUN_004bea0c(int param_1)
       if (!temp_v5 && temp_v0 < 0 == temp_v6) {
         FUN_002a4964(param_1 + 0x260,(int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1e)) >> 2);
         FUN_002a4914(param_1 + 0x260,temp_v3 % 4);
-        temp_v4 = FUN_00284140((int)*(short *)(param_1 + temp_v3 * 2 + 0x2f8));
+        temp_v4 = recordGetModeForId((int)*(short *)(param_1 + temp_v3 * 2 + 0x2f8));
       }
       break;
     }

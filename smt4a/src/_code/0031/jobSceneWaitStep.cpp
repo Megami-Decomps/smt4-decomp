@@ -6,7 +6,7 @@ extern s32 scrRunOpcodesStub(u32 job);
 extern u8 *dataTable15Sub0FindEntry(u32 index);
 extern void FUN_0019de98(u8 *obj, u32 color);
 extern void sysPlaySe(u32 id);
-extern void FUN_002277d8(void);
+extern void campResetScreen(void);
 
 /* Waits for the job to finish; then flags the scene, plays a sound and moves to state 3. */
 u32 jobSceneWaitStep(JobScene *scene)
@@ -18,7 +18,7 @@ u32 jobSceneWaitStep(JobScene *scene)
         u8 *obj = dataTable15Sub0FindEntry(0x34);
         FUN_0019de98(obj, 0xF4F4F4FF);
         sysPlaySe(0x10D);
-        FUN_002277d8();
+        campResetScreen();
         next = 3;
     }
     return next;

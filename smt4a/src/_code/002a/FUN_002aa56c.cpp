@@ -57,7 +57,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0020caec. */
 extern int FUN_0022e9b8(void);
-extern int FUN_00284140(unsigned int);
+extern int recordGetModeForId(unsigned int);
 extern int FUN_002a4b28(unsigned short);
 extern unsigned int computeCountLimit(void);
 
@@ -256,7 +256,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   FUN_001835b4(2,0x1a,0x78,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc9);
   efctSetSpeed();
   FUN_001835b4(2,0x1a,0x79,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,0xc9);
-  temp_v5 = FUN_00284140(param_5);
+  temp_v5 = recordGetModeForId(param_5);
   temp_v7 = *(short *)(temp_v4 + 10) + param_2;
   temp_v8 = *(short *)(temp_v4 + 8) + param_1;
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {

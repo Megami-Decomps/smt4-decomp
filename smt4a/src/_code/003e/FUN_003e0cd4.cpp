@@ -52,7 +52,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: eventCommandClearPending. */
 /* Supplied declaration required: stateFinishIfPresent. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
-extern int FUN_004a96d4(unsigned int);
+extern int btlUiIsPanelHolderReady(unsigned int);
 extern int FUN_004f2708(int, fn_003e0cd4_arg1 *, unsigned int);
 extern int recordAreAllCountsNonpositive(unsigned int);
 
@@ -80,7 +80,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
   if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1), temp_v8 < 1))
       && (temp_v8 = recordAreAllCountsNonpositive(g_btlAux), temp_v8 != 0)) &&
      (((param_2->field_0x45a0 & DAT_00573860) == 0 && (*(unsigned int *)(param_2 + 1) & DAT_00573864) == 0
-      || (temp_v8 = FUN_004a96d4(g_btlUiBlock), temp_v8 != 0)))) {
+      || (temp_v8 = btlUiIsPanelHolderReady(g_btlUiBlock), temp_v8 != 0)))) {
     temp_v7 = DAT_00573854;
     temp_v6 = DAT_00573850;
     temp_v5 = DAT_00573844;

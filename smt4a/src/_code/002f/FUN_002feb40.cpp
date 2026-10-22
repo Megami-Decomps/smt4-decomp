@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsigned char [50]);
-int FUN_00362768(unsigned int *, unsigned char [50]);
+int namedObjectFormatFullName(unsigned int *, unsigned char [50]);
 int FUN_00375ec8(void);
 int namedObjectFormatName(unsigned int *, unsigned char [50]);
 int effMenuNodeCreate(void);
@@ -24,7 +24,7 @@ extern int DAT_0059dbfc; /* 0x59dbfc */
 extern unsigned int *DAT_0059dc28; /* 0x59dc28 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00362768. */
+/* Supplied declaration required: namedObjectFormatFullName. */
 /* Supplied declaration required: FUN_00375ec8. */
 /* Supplied declaration required: namedObjectFormatName. */
 /* Supplied declaration required: effMenuNodeCreate. */
@@ -46,7 +46,7 @@ unsigned char * FUN_002feb40(void)
   puVar2 = &LAB_00400001;
   if (DAT_0059dc28 != (unsigned int *)0x0) {
     FUN_00375ec8();
-    FUN_00362768(DAT_0059dc28,temp_v0);
+    namedObjectFormatFullName(DAT_0059dc28,temp_v0);
     namedObjectFormatName(DAT_0059dc28,temp_v1);
     temp_v2 = DAT_0059dc28[2];
     if (temp_v2 == 1) {

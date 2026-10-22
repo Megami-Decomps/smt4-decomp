@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00266f30(int);
 int FUN_00266fac(...);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int libc_strcpy(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int g_deferredMapModels; /* 0x447e58 */
 
 /* Supplied declaration required: FUN_00266f30. */
 /* Supplied declaration required: FUN_00266fac. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: libc_strcpy. */
 
 
@@ -37,7 +37,7 @@ void FUN_001fa800(void)
   do {
     if (*(char *)(g_deferredMapModels + temp_v1 * 0x38 + 0xc) != '\0') {
       temp_v2 = (int)temp_v3;
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if (temp_v2 < 0x43480000) {
         temp_v0 = (int)*(short *)(g_deferredMapModels + temp_v1 * 0x38 + 0x14);
         FUN_00266f30(temp_v0);

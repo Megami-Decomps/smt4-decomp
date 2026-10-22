@@ -13,11 +13,11 @@ int uiSpriteSelectAnim(...);
 int FUN_001ad9b4(void);
 int FUN_0021a4b0(void);
 int uiFadeRequestHalf(void);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
 int rt_aeabi_memclr(...);
 int FUN_002f15f8(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003d498c(...);
 void uiQuestRefreshDetailPages(int);
 int gameFlagSetValue(...);
@@ -69,9 +69,9 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0023ff10. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: uiFadeRequestHalf. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4894. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002ae320. */
 extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7c54(void);
@@ -82,7 +82,7 @@ extern int FUN_00335384(int);
 /* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d474c. */
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -323,12 +323,12 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v9 = FUN_002a4860();
+    temp_v9 = resourceRunOperationIfUnblocked();
     temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
-      FUN_003d2150(0x1000308);
+      sysPlayVoice(0x1000308);
       FUN_001ad9b4();
       if (*(char *)(temp_v4 + 6) == '\t') {
         temp_v7 = 10;
@@ -355,9 +355,9 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a4860();
+    resourceRunOperationIfUnblocked();
     FUN_002a4894(temp_v1 + 0x9ac);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
       FUN_0023ff10();
@@ -390,9 +390,9 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a4860();
+    resourceRunOperationIfUnblocked();
     FUN_002a4894(temp_v1 + 0x9ac);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
       FUN_0023ff10();
@@ -426,9 +426,9 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a4860();
+    resourceRunOperationIfUnblocked();
     FUN_002a4894(temp_v1 + 0x9ac);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
       FUN_0023ff10();
@@ -460,14 +460,14 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 != 0) {
       FUN_003d474c();
       FUN_0023ff10();
       temp_v7 = 2;
       break;
     }
-    temp_v9 = FUN_002a4860();
+    temp_v9 = resourceRunOperationIfUnblocked();
     temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
     FUN_001ad9b4();
@@ -507,7 +507,7 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v9 = FUN_002a4860();
+    temp_v9 = resourceRunOperationIfUnblocked();
     temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
     temp_v4 = temp_v8;
@@ -561,9 +561,9 @@ unsigned int FUN_00215cb8(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a4860();
+    resourceRunOperationIfUnblocked();
     FUN_002a4894(temp_v1 + 0x9ac);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
       FUN_0021a4b0();
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -589,9 +589,9 @@ joined_r0x002167bc:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a4860();
+    resourceRunOperationIfUnblocked();
     FUN_002a4894(temp_v1 + 0x9ac);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
       FUN_0021a4b0();
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -611,9 +611,9 @@ joined_r0x002167bc:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_002a4860();
+    resourceRunOperationIfUnblocked();
     FUN_002a4894(temp_v1 + 0x9ac);
-    temp_v9 = FUN_002a4b74();
+    temp_v9 = messageGetChoiceResult();
     if (temp_v9 == 0) {
       temp_v3 = FUN_004186e0();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
@@ -705,7 +705,7 @@ joined_r0x002167bc:
           temp_v9 = temp_v1 + 0x9ac;
           temp_v5 = temp_v1 + 0xad6;
         }
-        temp_v6 = FUN_002a4860(temp_v9);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v9);
         temp_v9 = FUN_002a4894(temp_v9);
         temp_v3 = *(unsigned short *)(temp_v5 + (temp_v9 + temp_v6) * 2);
         if (*(char *)(temp_v1 + 0x93e) != '\0') {
@@ -772,7 +772,7 @@ joined_r0x002167bc:
         temp_v7 = 2;
         break;
       }
-      temp_v9 = FUN_002a4860();
+      temp_v9 = resourceRunOperationIfUnblocked();
       temp_v5 = FUN_002a4894(temp_v1 + 0x9ac);
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v9) * 2 + 0xad6);
       FUN_001ad9b4();
@@ -783,12 +783,12 @@ joined_r0x002167bc:
         }
         temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x8fc),temp_v7);
         if (temp_v9 != 0) {
-          FUN_003d2150(0x1000308);
+          sysPlayVoice(0x1000308);
           FUN_0021a4b0();
         }
       }
       else {
-        FUN_003d2150(0x1000308);
+        sysPlayVoice(0x1000308);
         FUN_0021a4b0();
       }
       temp_v2 = 0;
@@ -1026,7 +1026,7 @@ LAB_00217264:
         else {
           temp_v5 = temp_v1 + 0xad6;
         }
-        temp_v6 = FUN_002a4860(temp_v9);
+        temp_v6 = resourceRunOperationIfUnblocked(temp_v9);
         temp_v9 = FUN_002a4894(temp_v9);
         temp_v3 = *(unsigned short *)(temp_v5 + (temp_v9 + temp_v6) * 2);
         if (*(int *)(temp_v1 + 0x92c) != 0) {

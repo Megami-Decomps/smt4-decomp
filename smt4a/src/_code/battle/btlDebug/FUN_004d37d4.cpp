@@ -10,7 +10,7 @@ int jobSetText(...);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(...);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int FUN_003592dc(...);
 
 typedef struct fn_004d37d4_arg0 fn_004d37d4_arg0;
@@ -51,7 +51,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: FUN_003592dc. */
 
 
@@ -78,8 +78,8 @@ void FUN_004d37d4(fn_004d37d4_arg0 *param_1,int param_2)
   asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,2,DAT_00573bda,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,3,DAT_00573bdb,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,4,DAT_00573bdc,0,0x78,0);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,5,0,1);
-  FUN_00340edc(*(unsigned int *)&param_1->field_0x10,6,0,1);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,5,0,1);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,6,0,1);
   return;
 }
 

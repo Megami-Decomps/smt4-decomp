@@ -7,7 +7,7 @@ extern "C" {
 int asdListBoxAddItem(...);
 int FUN_002271e8(...);
 int FUN_00227200(...);
-int FUN_0022a358(...);
+int asdListBoxSetFloatItem(...);
 int asdListBoxSetItemMode3(...);
 int asdListBoxSetByteValue(...);
 int jobSetText(...);
@@ -25,7 +25,7 @@ extern unsigned char DAT_00400600; /* 0x400600 */
 /* Supplied declaration required: asdListBoxAddItem. */
 /* Supplied declaration required: FUN_002271e8. */
 /* Supplied declaration required: FUN_00227200. */
-/* Supplied declaration required: FUN_0022a358. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: jobSetText. */
@@ -48,9 +48,9 @@ void FUN_003d8b34(int param_1,int param_2,unsigned int param_3)
   asdListBoxAddItem(param_3,&DAT_00400600);
   FUN_0027da30();
   asdListBoxSetItemMode3(param_3,0,*(unsigned short *)(param_2 + 2),1,999,0);
-  FUN_0022a358(param_3,1,0xfffffc18);
-  FUN_0022a358(param_3,2,0xfffffc18,1000);
-  FUN_0022a358(param_3,3,0xfffffc18,1000);
+  asdListBoxSetFloatItem(param_3,1,0xfffffc18);
+  asdListBoxSetFloatItem(param_3,2,0xfffffc18,1000);
+  asdListBoxSetFloatItem(param_3,3,0xfffffc18,1000);
   asdListBoxSetByteValue(param_3,1);
   return;
 }

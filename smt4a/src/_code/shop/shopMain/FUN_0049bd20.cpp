@@ -24,7 +24,7 @@ int FUN_004954e8(int);
 int FUN_0049706c(...);
 int FUN_00498494(int, int);
 int messageChoiceShowCurrent(int);
-int FUN_004989f0(...);
+int shopStartSelectionScript(...);
 int FUN_00498de0(...);
 int FUN_0049af90(int);
 int sendEvent100020F(void);
@@ -46,7 +46,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -63,7 +63,7 @@ extern int FUN_0040ab8c(void);
 /* Supplied declaration required: FUN_0049706c. */
 /* Supplied declaration required: FUN_00498494. */
 /* Supplied declaration required: messageChoiceShowCurrent. */
-/* Supplied declaration required: FUN_004989f0. */
+/* Supplied declaration required: shopStartSelectionScript. */
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_0049af90. */
 extern unsigned int FUN_0049cad0(unsigned short *);
@@ -148,9 +148,9 @@ LAB_0049be70:
     }
   }
   temp_v1 = inputIsQuestRepeatRight();
-  if ((temp_v1 == 0) && (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v1 != 6)) {
+  if ((temp_v1 == 0) && (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v1 != 6)) {
     temp_v1 = FUN_004d0494();
-    if ((temp_v1 == 0) && (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v1 != 6)) {
+    if ((temp_v1 == 0) && (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v1 != 6)) {
       temp_v1 = inputIsQuestMenuPressed();
       temp_v0 = '\0';
       if (temp_v1 != 0) {
@@ -194,7 +194,7 @@ LAB_0049be70:
             temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_0049c3b4);
             scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
             scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
-            FUN_004989f0(param_1,1);
+            shopStartSelectionScript(param_1,1);
             *(unsigned int *)(param_1 + 8) = 3;
             FUN_0019de98(0,0xf4f4f4ff);
           }
@@ -220,7 +220,7 @@ LAB_0049be70:
             temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_0049c3b4);
             scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
             scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
-            FUN_004989f0(param_1,2);
+            shopStartSelectionScript(param_1,2);
             *(unsigned int *)(param_1 + 8) = 4;
             FUN_0019de98(0,0xf4f4f4ff);
           }

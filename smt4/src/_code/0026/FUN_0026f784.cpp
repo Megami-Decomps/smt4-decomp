@@ -6,7 +6,7 @@ extern "C" {
 
 int objSetAnglesDegrees(unsigned int, unsigned int *);
 int FUN_00293e08(unsigned int);
-int FUN_00293e78(unsigned int, int *);
+int nodeOwnerSetTranslations(unsigned int, int *);
 int FUN_00297684(void);
 int lmapSceneSetUnk134(int);
 
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: objSetAnglesDegrees. */
 /* Supplied declaration required: FUN_00293e08. */
-/* Supplied declaration required: FUN_00293e78. */
+/* Supplied declaration required: nodeOwnerSetTranslations. */
 extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: lmapSceneSetUnk134. */
@@ -41,7 +41,7 @@ unsigned int FUN_0026f784(unsigned int *param_1)
       temp_v2 = *param_1;
       uStack_14 = param_1[1];
       uStack_10 = param_1[2];
-      FUN_00293e78(param_1[7],&temp_v2);
+      nodeOwnerSetTranslations(param_1[7],&temp_v2);
       FUN_00293e08(param_1[7]);
       objSetAnglesDegrees(param_1[7],param_1 + 3);
       lmapSceneSetUnk134(0);

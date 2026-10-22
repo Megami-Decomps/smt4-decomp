@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 FUN_001802d4(s32 key);
-s32 FUN_00284140(s32 key);
+s32 recordGetModeForId(s32 key);
 s32 getMaskB5(u32 mode);
 s32 getMaskB6(u32 mode);
 s32 getMaskType3(u32 mode);
@@ -18,8 +18,8 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
     stepper->incrementActive = 0;
     stepper->decrementActive = 0;
     const s32 previous = stepper->value;
-    const s32 incrementState = FUN_00284140(stepper->incrementKey);
-    const s32 decrementState = FUN_00284140(stepper->decrementKey);
+    const s32 incrementState = recordGetModeForId(stepper->incrementKey);
+    const s32 decrementState = recordGetModeForId(stepper->decrementKey);
     if (incrementState != 0) {
         stepper->incrementActive = 1;
     }

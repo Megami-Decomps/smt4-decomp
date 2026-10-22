@@ -3,12 +3,12 @@
 
 extern "C" {
 
-u8 *FUN_002c6a04(void);
+u8 *libcLocaleGetTables(void);
 
-/* Returns FUN_002c6a04() advanced by 4 bytes. */
+/* Returns libcLocaleGetTables() advanced by 4 bytes. */
 u8 *FUN_002c6a50(void)
 {
-    return FUN_002c6a04() + 4;
+    return libcLocaleGetTables() + 4;
 }
 
 } /* extern "C" */

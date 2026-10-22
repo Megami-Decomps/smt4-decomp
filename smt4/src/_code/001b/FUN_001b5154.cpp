@@ -23,8 +23,8 @@ extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1658. */
 extern int FUN_00337324(int);
-extern int FUN_003382e8(int);
-extern int FUN_00344f2c(unsigned int, unsigned int);
+extern int btlScriptUnitIsPresentAndActive(int);
+extern int btlReflectCountEntriesById(unsigned int, unsigned int);
 extern int FUN_003adab8(void);
 /* Supplied declaration required: FUN_003c033c. */
 
@@ -91,12 +91,12 @@ unsigned int FUN_001b5154(void)
               return 0;
             }
           }
-          temp_v3 = FUN_00344f2c(g_btlActionReflect,0x2a);
+          temp_v3 = btlReflectCountEntriesById(g_btlActionReflect,0x2a);
           if (0 < temp_v3) {
             return 0;
           }
           if (((g_btlUiBlock == 0) || (temp_v3 = FUN_003adab8(), temp_v3 == 0)) ||
-             (temp_v3 = FUN_003382e8(temp_v1), temp_v3 == 0)) {
+             (temp_v3 = btlScriptUnitIsPresentAndActive(temp_v1), temp_v3 == 0)) {
             return 0;
           }
           if ((*puVar6 & 0x40) != 0) {

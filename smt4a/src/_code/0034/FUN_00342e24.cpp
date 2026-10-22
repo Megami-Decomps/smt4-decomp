@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0034280c's literal pool; not written yet. */
+/* NON_MATCHING: handles character-info menu selections, repopulates the information panel, and switches child jobs; typed menu work and several callback contracts remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_00342e24 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_00342e24(int param_1)
@@ -41,7 +41,7 @@ unsigned int FUN_00342e24(int param_1)
       FUN_0037b578(uVar6,uVar3);
       return 0;
     }
-    uVar2 = FUN_002a4b74();
+    uVar2 = messageGetChoiceResult();
     if (uVar2 == 0xffffffff) {
       FUN_0034913c();
       *(unsigned short *)(param_1 + 0x108) = *(unsigned short *)(param_1 + 0x10a);
@@ -126,7 +126,7 @@ unsigned int FUN_00342e24(int param_1)
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) {
       if (iVar4 != 1) {
         return 0;
@@ -165,7 +165,7 @@ code_r0x00343274:
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 == -1) {
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
       *(unsigned int *)(param_1 + 0xec) = 0xffffffff;
@@ -256,7 +256,7 @@ code_r0x00343274:
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) {
       if (iVar4 != 1) {
         return 0;
@@ -309,7 +309,7 @@ code_r0x00343274:
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) {
       if (iVar4 != 1) {
         return 0;
@@ -328,7 +328,7 @@ code_r0x00343274:
     FUN_0019ea64(0);
     *(unsigned char *)(param_1 + 0x154) = 1;
     FUN_00281720(*(unsigned int *)(param_1 + 4),1);
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) {
       FUN_002e2680(0);
       *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
@@ -365,7 +365,7 @@ code_r0x00343274:
       *(unsigned char *)(param_1 + 0x111) = *(char *)(param_1 + 0x111) == '\0';
       *(unsigned int *)(param_1 + 0x1c) = 0;
       *(unsigned int *)(param_1 + 0x14) = 0x14a;
-      FUN_003d2150(0x100020e);
+      sysPlayVoice(0x100020e);
     }
     if (*(char *)(param_1 + 0x111) != '\0') {
       uStack_28 = *(unsigned int *)(param_1 + 0x1c);
@@ -402,7 +402,7 @@ code_r0x00343274:
       if (iVar4 != 2) {
         return 0;
       }
-      iVar4 = FUN_002a4b74();
+      iVar4 = messageGetChoiceResult();
       if (iVar4 == 0) {
         uVar6 = *(unsigned int *)(param_1 + 8);
         puVar5 = (unsigned int *)FUN_001801a4();
@@ -502,7 +502,7 @@ code_r0x00343274:
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     goto joined_r0x0034387c;
   case 0x15:
     iVar4 = FUN_00224880(*(unsigned int *)(param_1 + 0x4c));
@@ -538,7 +538,7 @@ code_r0x00343274:
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
 joined_r0x0034387c:
     if (iVar4 != 0) {
       if (iVar4 != 1) {

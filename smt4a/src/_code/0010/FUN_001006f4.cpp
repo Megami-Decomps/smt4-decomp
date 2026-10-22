@@ -40,7 +40,7 @@ unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int pa
       param_2 = 0;
     }
     temp_v0 = 0;
-    temp_v0 = (int)FUN_002e3338(0,0,(const char*)*(unsigned int *)
+    temp_v0 = (int)asdStringFormatGrow(0,0,(const char*)*(unsigned int *)
                       (
                       "壐V墂V墐V姖V妯V壀V姳V妯V妼V執V壦V埏V夌V壸V妈V夼V奢V够V堸V垵V塞V堢V墩V"
                       + param_2 * 4),*(va_list*)&param_3);

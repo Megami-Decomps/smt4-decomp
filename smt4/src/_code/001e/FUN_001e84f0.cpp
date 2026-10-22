@@ -132,7 +132,7 @@ joined_r0x001e8660:
           if (DAT_0049fb46 != 0) {
 LAB_001e867c:
             in_s0 = (float)DAT_004474f4[0x13];
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             iVar8 = *(int *)(iVar8 + 0x1e4);
             if (((!(iVar8 == 1 || iVar8 == 3)) && (!(iVar8 == 2 || iVar8 == 4))) &&
                (!(iVar8 == 5 || iVar8 == 7))) {
@@ -483,7 +483,7 @@ LAB_001e8a6c:
         uVar33 = CONCAT44(*(unsigned int *)(iVar18 + 0x2c),fVar3);
         uVar35 = *(unsigned long long *)(iVar18 + 0x24);
         fVar36 = 130.0f;
-        FUN_002f35d8();
+        cameraGetTargetAngle();
         fVar34 = (float)uVar35;
         fVar36 = (float)((unsigned long long)uVar35 >> 0x20) + fVar36;
         fVar14 = (in_s0 + *(float *)(pcVar17 + 0x74)) * 0.7111111f;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f2da0(int *, int, int *);
+int sharedRefAssignFromOwner(int *, int, int *);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002f2da0. */
+/* Supplied declaration required: sharedRefAssignFromOwner. */
 extern int wordRefsDiffer_002f2dec(int *, int);
 
 
@@ -37,7 +37,7 @@ unsigned long long FUN_00119d74(int param_1,unsigned int param_2,int param_3,uns
   uStack_14 = param_4;
   while (temp_v0 = wordRefsDiffer_002f2dec(&temp_v2,param_1 + 0xc), temp_v0 != 0) {
     temp_v1 = temp_v2;
-    FUN_002f2da0(&temp_v3,param_1,&temp_v1);
+    sharedRefAssignFromOwner(&temp_v3,param_1,&temp_v1);
     temp_v2 = temp_v3;
   }
   return romwright_piece_4_4(temp_v2,temp_v1);

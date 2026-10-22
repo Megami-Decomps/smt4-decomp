@@ -17,7 +17,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
 int FUN_001fc4f0(...);
-int FUN_002a4860(int);
+int resourceRunOperationIfUnblocked(int);
 int FUN_002a4894(int);
 int VectorSignedToFloat(...);
 
@@ -55,8 +55,8 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001fc4f0. */
-extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002a4860. */
+extern int recordGetModeForId(int);
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4894. */
 extern int uiSearchPrimary(int);
 
@@ -104,7 +104,7 @@ void FUN_002027fc(void)
     (**(romwright_code **)(temp_v5 + 0x1274))(temp_v1);
     *(unsigned char *)(temp_v5 + 0x1270) = 0;
   }
-  FUN_002a4860(temp_v0);
+  resourceRunOperationIfUnblocked(temp_v0);
   FUN_002a4894(temp_v0);
   temp_v3 = vec2GetXInt(temp_v0 + 0xe8);
   temp_v4 = vec2GetYInt(temp_v0 + 0xe8);
@@ -135,7 +135,7 @@ void FUN_002027fc(void)
         temp_v3 = 0;
         if (*(int *)(temp_v0 + 0x88) == temp_v10) {
           temp_v17 = 0x2bceffff;
-          temp_v8 = FUN_00284140((int)*(short *)(temp_v0 + temp_v10 * 2 + 0x6e));
+          temp_v8 = recordGetModeForId((int)*(short *)(temp_v0 + temp_v10 * 2 + 0x6e));
           temp_v14 = temp_v8 == 1;
           temp_v15 = temp_v8 == 2;
           temp_v16 = temp_v8 == 6;

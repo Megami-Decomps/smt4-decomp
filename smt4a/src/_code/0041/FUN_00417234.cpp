@@ -19,7 +19,7 @@ int FUN_003b0744(void);
 /* Supplied declaration required: scrRunOpcodesStub. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: obj04Finish. */
 extern int stateHolderCountMinus1(void);
@@ -92,7 +92,7 @@ unsigned int FUN_00417234(int param_1)
       return 0;
     }
     FUN_00333dc8(0);
-    temp_v3 = FUN_002a4b74();
+    temp_v3 = messageGetChoiceResult();
     if (temp_v3 == 0) {
       FUN_003b0744();
       *(unsigned int *)(param_1 + 0xc) = 5;
@@ -132,7 +132,7 @@ unsigned int FUN_00417234(int param_1)
       return 0;
     }
     FUN_00333dc8(0);
-    temp_v3 = FUN_002a4b74();
+    temp_v3 = messageGetChoiceResult();
     if (temp_v3 == 0) {
       *(unsigned int *)(param_1 + 0x10) = 0;
       *(unsigned int *)(param_1 + 8) = 6;

@@ -18,7 +18,7 @@ extern int g_camp; /* 0x57f108 */
 extern int gameGetPlayerData(void);
 extern unsigned int markerKindGetColor(int);
 extern int gameGetSlotRecord(int);
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: sysMemClear. */
@@ -122,7 +122,7 @@ LAB_003d395c:
     temp_v1 = *(int *)(temp_v0 + 0xbc);
   }
   else {
-    temp_v2 = FUN_002a4860(temp_v0 + 0x1ec);
+    temp_v2 = resourceRunOperationIfUnblocked(temp_v0 + 0x1ec);
     temp_v1 = FUN_002a4894(temp_v0 + 0x1ec);
     temp_v1 = temp_v1 + temp_v2;
   }

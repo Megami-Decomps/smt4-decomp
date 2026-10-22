@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c86ec(void);
+int mathVec3Dot(void);
 
 int FUN_001fa760(void);
 int mapIfActivateRecord(int, unsigned int);
@@ -12,13 +12,13 @@ int FUN_0025247c(...);
 int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
 int FUN_0027f48c(int, int);
-int FUN_0027fa98(unsigned int);
+int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
 int FUN_002804ec(int);
 int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
 int mapPartDestroy(void);
@@ -49,17 +49,17 @@ extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027f48c. */
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
-/* Supplied declaration required: FUN_002c86ec. */
+/* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: mapPartDestroy. */
 /* Supplied declaration required: mapIfReleaseSlot0. */
 
@@ -129,7 +129,7 @@ void FUN_0027fde4(void)
             *(unsigned int *)(temp_v2 + 0x54) = 0;
             *(unsigned int *)(temp_v2 + 0x58) = 0x40400000;
             *(unsigned char *)(temp_v2 + 0x6c) = 0;
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             temp_v4 = DAT_0049f9a8;
             temp_v11 = DAT_0049f9a4;
             temp_v2 = g_lmapScene;
@@ -239,7 +239,7 @@ void FUN_0027fde4(void)
              (temp_v3 = *(int *)(temp_v2 + 8) + 1, *(int *)(temp_v2 + 8) = temp_v3, temp_v3 < 4))
           goto LAB_00280248;
           temp_v11 = 1;
-          FUN_0027fa98(temp_v11);
+          lmapSetSceneId(temp_v11);
         }
         else {
           mapPartDestroy();
@@ -261,7 +261,7 @@ void FUN_0027fde4(void)
         mapPartDestroy();
         mapIfSetMode1();
         temp_v11 = 8;
-        FUN_0027fa98(temp_v11);
+        lmapSetSceneId(temp_v11);
       }
     }
   }
@@ -282,7 +282,7 @@ void FUN_0027fde4(void)
 LAB_00280248:
   if (*(char *)(g_lmapScene + 0x115) != '\0') {
     temp_v6 = *(float *)(g_lmapScene + 0x28);
-    FUN_00287aec();
+    mathDistanceBetweenPoints();
     temp_v2 = g_lmapScene;
     temp_v7 = *(float *)(g_lmapScene + 0x130);
     if (temp_v7 >= temp_v6) {
@@ -352,7 +352,7 @@ LAB_00280248:
           FUN_0025247c(temp_v18);
         }
         temp_v6 = (float)temp_v9;
-        FUN_002c86ec();
+        mathVec3Dot();
         temp_v1 = DAT_0049f94b;
         if (temp_v6 < (float)temp_v17) goto LAB_002804c4;
         temp_v5 = temp_v5 + 1;

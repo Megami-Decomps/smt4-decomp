@@ -75,6 +75,10 @@
 0x001076fc nngxIsStereoVisionAllowed name
 0x0010a714 mobiclipRestoreDisplayState name
 0x0010afbc mobiclipCtrlClosePlayer name
+0x0010f820 nnosGetApplicationMemorySize name
+0x0010f830 addressBlockAllocate between
+0x0010f898 FUN_0010f898 between
+0x0010f930 runtimeInitializeSharedHandle between
 0x0010f96c nnosGetAppMemAlloc name
 0x0010f97c FUN_0010f97c between
 0x0010f9d0 FUN_0010f9d0 between
@@ -1587,8 +1591,6 @@
 0x002bb54c nn_fs_detail_FileBase_TryGetSize name
 0x002bb7ec nn_os_AddressSpaceManager_Allocate name
 0x002bb99c FUN_002bb99c between
-0x002bbaf8 FUN_002bbaf8 between
-0x002bbb2c FUN_002bbb2c between
 0x002bbb5c gameGetQuestCenterBlock between
 0x002bbb74 FUN_002bbb74 between
 0x002bbbc8 FUN_002bbbc8 between
@@ -1664,6 +1666,7 @@
 0x002c38fc nn_os_CriticalSection_Initialize name
 0x002c3940 rt_aeabi_memclr name
 0x002c3944 rt_memclr name
+0x002c3994 nnosGetHeapBase name
 0x002c3fe4 nn_os_Thread_FinalizeImpl name
 0x002c4038 FUN_002c4038 between
 0x002c4040 nn_os_LightEvent_Signal name
@@ -1713,11 +1716,6 @@
 0x0034ee48 FUN_0034ee48 callers
 0x0034ee98 FUN_0034ee98 callers
 0x0034f050 mobiclipDeblockerRelease name
-0x0034f0fc FUN_0034f0fc between
-0x0034f400 FUN_0034f400 between
-0x0034f40c FUN_0034f40c between
-0x0034f484 FUN_0034f484 between
-0x0034f534 FUN_0034f534 between
 0x0034f5f8 FUN_0034f5f8 callers
 0x0034f630 FUN_0034f630 callers
 0x0034f668 mobiclipReadIsComplete name
@@ -1749,6 +1747,8 @@
 0x00350e30 FUN_00350e30 callers
 0x00350f24 FUN_00350f24 callers
 0x00350ff8 FUN_00350ff8 callers
+0x003511cc FUN_003511cc between
+0x00351488 mobiclipYieldPlaybackThread name
 0x003516c0 mobiclipS4PlayerDestroy name
 0x0035191c FUN_0035191c between
 0x0035196c FUN_0035196c between

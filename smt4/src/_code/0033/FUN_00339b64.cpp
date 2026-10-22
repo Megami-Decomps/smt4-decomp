@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00297060(void);
 int FUN_00328d2c(void);
 int FUN_00328fa4(void);
-int FUN_00394720(void);
+int jyoucyuEnsureResidentEntry(void);
 int FUN_00394cc4(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -29,7 +29,7 @@ extern int resourceFindActiveIndex(unsigned int);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00328d2c. */
 /* Supplied declaration required: FUN_00328fa4. */
-/* Supplied declaration required: FUN_00394720. */
+/* Supplied declaration required: jyoucyuEnsureResidentEntry. */
 /* Supplied declaration required: FUN_00394cc4. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -53,7 +53,7 @@ void FUN_00339b64(int param_1)
       temp_v1 = *(unsigned short *)(param_1 + 0x49fe) + 1;
       *(short *)(param_1 + 0x49fe) = (short)temp_v1;
     case 1:
-      FUN_00394720();
+      jyoucyuEnsureResidentEntry();
       if (temp_v1 != 0) {
         *(unsigned int *)(param_1 + 0x2248) = DAT_00435d9c;
         *(unsigned int *)(param_1 + 0x224c) = DAT_00435da0;

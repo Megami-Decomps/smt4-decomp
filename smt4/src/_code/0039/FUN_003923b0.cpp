@@ -12,7 +12,7 @@ int FUN_00233e70(...);
 int FUN_00233fcc(...);
 int timeInitializeActiveState(...);
 int FUN_00234124(...);
-int FUN_0027eafc(...);
+int asdFsIsSdCardDetected(...);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionRemove(...);
 int eventQueueAddUniqueIfValid(...);
@@ -47,7 +47,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00234124. */
 extern int FUN_0026ee68(unsigned int);
 extern int strIsEmpty(unsigned int *);
-/* Supplied declaration required: FUN_0027eafc. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
@@ -166,7 +166,7 @@ void FUN_003923b0(unsigned int *param_1)
         }
       }
       else {
-        FUN_0027eafc();
+        asdFsIsSdCardDetected();
         if (temp_v0 != 0) {
           puVar2 = param_1 + 0x83;
           FUN_00233fcc(puVar2,0);

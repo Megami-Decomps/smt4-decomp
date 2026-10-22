@@ -70,7 +70,7 @@ extern unsigned char LAB_003f4738; /* 0x3f4738 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -158,7 +158,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
   }
   else {
     temp_v6 = gameGetPlayerData();
-    temp_v2 = FUN_0015687c();
+    temp_v2 = gameGetPlayerName();
     textFormatBuffer(temp_v16,&LAB_003f436c,temp_v2);
     temp_v10 = -1;
     temp_v12 = (unsigned int)*(unsigned short *)(temp_v6 + 0x62);

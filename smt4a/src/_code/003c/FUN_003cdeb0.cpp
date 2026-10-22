@@ -39,8 +39,8 @@ extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_00284140(int);
-extern int FUN_002a4860(void);
+extern int recordGetModeForId(int);
+extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: largeGridDrawButtonStrip. */
@@ -82,7 +82,7 @@ void FUN_003cdeb0(int param_1,unsigned int param_2,int param_3,int param_4)
   temp_v17 = param_2;
   iStack_2c = param_3;
   iStack_28 = param_4;
-  temp_v9 = FUN_002a4860();
+  temp_v9 = resourceRunOperationIfUnblocked();
   temp_v10 = FUN_002a4894(temp_v8);
   temp_v9 = temp_v9 + temp_v10;
   temp_v10 = FUN_002a4894(temp_v8);
@@ -122,7 +122,7 @@ void FUN_003cdeb0(int param_1,unsigned int param_2,int param_3,int param_4)
                  (int)*(short *)(temp_v13 + 10) +
                  param_4 + ((((int)temp_v4 - (int)temp_v5) + (int)temp_v6) - (int)temp_v7),0x83);
   }
-  temp_v11 = FUN_00284140((int)*(short *)(param_1 + temp_v11 * 2 + 0x438));
+  temp_v11 = recordGetModeForId((int)*(short *)(param_1 + temp_v11 * 2 + 0x438));
   temp_v15 = 0x9fe7ffff;
   if (temp_v9 >= temp_v12) {
     temp_v15 = 0x9b9b9bff;

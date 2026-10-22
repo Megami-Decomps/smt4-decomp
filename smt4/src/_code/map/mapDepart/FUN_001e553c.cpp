@@ -20,7 +20,7 @@ int FUN_00291e40(int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int fileSlotLoad(int);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int scrScriptProcessDestroy(...);
 int buttonHelpSetPresetDefault(void);
 int asdMemFree(...);
@@ -81,7 +81,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: fileSlotLoad. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: fileSlotFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
@@ -370,7 +370,7 @@ LAB_001e5a1c:
       if (*(int *)(temp_v2 + 0xc) == 0) {
         FUN_002dfe08(*(unsigned int *)(temp_v2 + 0x10));
         FUN_0021dea8(*(unsigned int *)(temp_v2 + 0x10),5,0);
-        FUN_0029be5c(0x13,1);
+        gameCounterAddSaturating(0x13,1);
       }
       temp_v4 = DAT_0049f9c4;
       FUN_0025b670();
@@ -454,7 +454,7 @@ LAB_001e5a1c:
       }
       else {
         mapDepartSetTarget(0x18,1,0);
-        FUN_0029be5c(0x1b,1);
+        gameCounterAddSaturating(0x1b,1);
       }
       *(unsigned int *)(temp_v2 + 0x18) = 0xb;
       *(unsigned int *)(temp_v2 + 0x1c) = 0;

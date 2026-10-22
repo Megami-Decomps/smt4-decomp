@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int g_lmapScene; /* 0x447e88 */
 extern int g_mapStateSlots; /* 0x44cd88 */
 
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 void FUN_001fc0a8(void)
@@ -40,7 +40,7 @@ void FUN_001fc0a8(void)
       }
       if (temp_v8 && temp_v0 != '\0') {
         temp_v10 = *(unsigned int *)(g_lmapScene + 0x1c);
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         *(unsigned int *)(temp_v5 + 0x9c) = temp_v10;
         *(unsigned int *)(temp_v5 + 0xa0) = 999;
       }

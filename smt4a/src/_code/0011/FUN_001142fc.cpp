@@ -30,7 +30,7 @@ extern unsigned int _ZN9Obj55aff4C1EPKc(unsigned char *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 extern unsigned int *FUN_002fd1e8(fn_001142fc_arg0 *, unsigned int);
 extern int FUN_002ff664(unsigned int *);
-extern int FUN_002ff6ca(unsigned int *, unsigned char *, unsigned int, unsigned char *);
+extern int onlineListInitialize(unsigned int *, unsigned char *, unsigned int, unsigned char *);
 
 
 void FUN_001142fc(fn_001142fc_arg0 *param_1)
@@ -61,7 +61,7 @@ void FUN_001142fc(fn_001142fc_arg0 *param_1)
   *(unsigned int *)(temp_v1 + 4) = 0;
   *(unsigned int *)(puVar2[0xc] + 8) = puVar2[0xc];
   *(unsigned int *)(puVar2[0xc] + 0xc) = puVar2[0xc];
-  temp_v1 = FUN_002ff6ca(puVar2 + 0xf,temp_v3,1,temp_v4);
+  temp_v1 = onlineListInitialize(puVar2 + 0xf,temp_v3,1,temp_v4);
   *(unsigned int *)(temp_v1 + 0x20) = 0;
   *(unsigned int *)(temp_v1 + 0x1c) = 1;
   return;

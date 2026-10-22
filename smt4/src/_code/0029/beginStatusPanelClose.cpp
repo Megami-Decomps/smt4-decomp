@@ -9,7 +9,7 @@ public:
 };
 extern "C" {
 void *lmapSceneGetScript();
-void FUN_00293e78(StatusScreenModel *, const Vec3 *);
+void nodeOwnerSetTranslations(StatusScreenModel *, const Vec3 *);
 void lmapSceneSetUnk134(s32);
 void statusCameraDestroy();
 void mdlPartsRelease(StatusScreenModel *);
@@ -29,7 +29,7 @@ void beginStatusPanelClose()
             if (script) {
                 const Vec3 *origin = (const Vec3 *)state->unk1E84;
                 Vec3 position = { origin->x, origin->y + 1000.0f, origin->z };
-                FUN_00293e78((StatusScreenModel *)state->unk1E80, &position);
+                nodeOwnerSetTranslations((StatusScreenModel *)state->unk1E80, &position);
                 lmapSceneSetUnk134(1);
             } else {
                 mdlPartsRelease((StatusScreenModel *)state->unk1E80);

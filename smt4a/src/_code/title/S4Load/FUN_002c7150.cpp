@@ -9,7 +9,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int asdMemoryAlloc(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002a2d14(...);
+int asdProcessClearSelectedFlags(...);
 int rt_aeabi_memclr(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -38,7 +38,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002a2d14. */
+/* Supplied declaration required: asdProcessClearSelectedFlags. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
 
@@ -82,7 +82,7 @@ unsigned int FUN_002c7150(void)
   taskCreateDraw(&LAB_002c7354,0x7e,0,0,FUN_0027dbac,0,0,puVar3);
   taskCreateDraw(&LAB_002c7364,0xda,0,0,FUN_0027dbac,0,0,*puVar1);
   taskCreateDraw(&LAB_002c7378,0xec,0,0,FUN_002bd488,0,0,*puVar1);
-  FUN_002a2d14(*puVar1,0x80000,0);
+  asdProcessClearSelectedFlags(*puVar1,0x80000,0);
   return *puVar1;
 }
 

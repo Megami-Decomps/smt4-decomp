@@ -12,7 +12,7 @@ int randomGetNormalizedFloat(void);
 int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_00298d50(...);
 int FUN_002adf00(float [3], int);
 int FUN_002c159c(unsigned char *);
@@ -64,7 +64,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002adf00. */
 /* Supplied declaration required: FUN_002c159c. */
@@ -251,7 +251,7 @@ void FUN_00276a3c(void)
   temp_v18 = 40.0f;
   if ((char)DAT_004474f4[0x87] != '\0') {
     temp_v3 = *(int *)(g_lmapScene + 0x1c);
-    FUN_00287aec();
+    mathDistanceBetweenPoints();
     if (temp_v3 < 0x43340000) {
       FUN_002c159c(&g_fixedCamera);
     }
@@ -417,7 +417,7 @@ void FUN_00276a3c(void)
     temp_v14 = temp_v16;
     if ((char)DAT_004474f4[0xae] == '\0') {
       temp_v10 = (float)DAT_004474f4[temp_v4 + 0x32];
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if (temp_v16 < temp_v11) {
         temp_v10 = (float)DAT_004474f4[0x10] - (float)DAT_004474f4[0xd];
         temp_v12 = (float)DAT_004474f4[0x11] - (float)DAT_004474f4[0xe];
@@ -595,7 +595,7 @@ void FUN_00276a3c(void)
     }
     FUN_00298d50(&g_fixedCamera);
     temp_v3 = *(int *)(g_lmapScene + 0x1c);
-    FUN_00287aec();
+    mathDistanceBetweenPoints();
     if (temp_v3 < 0x43340000) {
       FUN_002c159c(&g_fixedCamera);
     }

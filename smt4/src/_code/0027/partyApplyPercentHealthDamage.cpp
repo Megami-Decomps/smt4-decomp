@@ -29,7 +29,7 @@ DamageSlots *gameGetSlotTable();
 DamageUnit *gameGetUnitRecord(s32 slot);
 s32 gameGetOptionProgressStatus();
 DamageUnit *gameGetSupportUnitData();
-void FUN_0029be5c(s32 event, s32 amount);
+void gameCounterAddSaturating(s32 event, s32 amount);
 u16 FUN_002903f0();
 s32 FUN_00287894(u32 id);
 }
@@ -63,7 +63,7 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
             s32 amount = previous - remaining;
             player->currentHealth = static_cast<s16>(stored);
             if (amount > 0)
-                FUN_0029be5c(23, amount);
+                gameCounterAddSaturating(23, amount);
         }
     }
     s32 count;
@@ -98,7 +98,7 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
             }
             s32 amount = previous - remaining;
             if (amount > 0)
-                FUN_0029be5c(23, amount);
+                gameCounterAddSaturating(23, amount);
         }
     }
     if (group != 3 && group != 4)

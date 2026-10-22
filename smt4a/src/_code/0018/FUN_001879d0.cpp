@@ -10,7 +10,7 @@ typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned long long FUN_001696f4(void);
-extern unsigned int FUN_00184df8(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 extern float nn_ulcd_CTR_StereoCamera_GetParallax(unsigned int, float);
 
 
@@ -46,7 +46,7 @@ void FUN_001879d0(int param_1)
         temp_v5 = in_fpscr & 0xfffffff;
       }
       nn_ulcd_CTR_StereoCamera_GetParallax(param_1 + 0x4a0,temp_v4);
-      temp_v2 = FUN_00184df8(0);
+      temp_v2 = asdGxPresetsGetHeightByKind(0);
       VectorUnsignedToFloat(temp_v2,(unsigned char)(temp_v5 >> 0x16) & 3);
       return;
     }

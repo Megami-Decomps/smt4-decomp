@@ -15,7 +15,7 @@ int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
 int FUN_003c1060(void);
 int FUN_003c1094(...);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ extern int FUN_002e1a18(unsigned int);
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c1094. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 
 
 unsigned int FUN_00318e84(int param_1)
@@ -73,7 +73,7 @@ unsigned int FUN_00318e84(int param_1)
     }
     *(unsigned int *)(param_1 + 0x14) = 0x14a;
     *(unsigned int *)(param_1 + 0x1c) = 0;
-    FUN_003d2150(0x100020e);
+    sysPlayVoice(0x100020e);
   }
   else {
     switch(*(unsigned int *)(param_1 + 0x14c)) {

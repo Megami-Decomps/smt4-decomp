@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00233344(unsigned int *, unsigned int);
+extern int uiAnimationAdvanceChannel(unsigned int *, unsigned int);
 extern unsigned int FUN_002aa024(unsigned int, unsigned int);
 extern int FUN_002b8ee0(unsigned int *, unsigned int);
 extern unsigned int *jobGetWork(void);
@@ -26,7 +26,7 @@ unsigned int FUN_00391000(void)
       return 0;
     }
     if (temp_v0 == 2) {
-      temp_v1 = FUN_00233344(puVar1 + 0x5ec,1);
+      temp_v1 = uiAnimationAdvanceChannel(puVar1 + 0x5ec,1);
       if (temp_v1 == 0) {
         return 0;
       }

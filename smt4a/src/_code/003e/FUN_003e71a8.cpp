@@ -12,7 +12,7 @@ int asdTMTexLoadMainHeap(int, int);
 int slotSetRequest(int, int, int);
 int ifTouchRegionAdd(int, int, int, int);
 int asdTMTexTableFreeEntry(...);
-int FUN_0037ed38(void);
+int campCommonBgInitializeCrazingSumaho(void);
 int ref208SetPair1C(int);
 int commonBgReleaseOwnedJob(void);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -33,7 +33,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int textureGetIndexedResource(unsigned int);
-/* Supplied declaration required: FUN_0037ed38. */
+/* Supplied declaration required: campCommonBgInitializeCrazingSumaho. */
 /* Supplied declaration required: ref208SetPair1C. */
 /* Supplied declaration required: commonBgReleaseOwnedJob. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -83,7 +83,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
       temp_v7 = (unsigned int)temp_v8;
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
-    FUN_0037ed38();
+    campCommonBgInitializeCrazingSumaho();
     ref208SetPair1C(1);
     temp_v2 = 0;
     param_1[0x10] = 0;

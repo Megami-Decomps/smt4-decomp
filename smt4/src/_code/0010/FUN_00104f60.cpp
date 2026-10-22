@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction scheduling and register choice only (retail routes FUN_0010f820's result through r4 before nnosInitAddressSpaceOnce and
+/* NON_MATCHING: instruction scheduling and register choice only (retail routes nnosGetApplicationMemorySize's result through r4 before nnosInitAddressSpaceOnce and
  * schedules the constructor stores differently); the same instructions otherwise. */
 #include "shard/S2AsdMemInit.h"
 
@@ -14,7 +14,7 @@ u32 nnosGetAppMemAlloc(void);
 u32 FUN_0010f97c(void);
 void FUN_0010f898(u32 size);
 void FUN_0010f9d0(u32 size);
-u32 FUN_0010f820(void);
+u32 nnosGetApplicationMemorySize(void);
 void nnosInitAddressSpaceOnce(u32 base, u32 size);
 void FUN_0010fae4(void);
 void nn_init_InitializeAllocator(u32 size);
@@ -54,7 +54,7 @@ void FUN_00104f60(u32 reserveSize, u32 allocatorSize, u32 extraReserve)
 
     FUN_0010f898(appMemSize - FUN_0010f97c() - reserveSize);
     FUN_0010f9d0(reserveSize);
-    addressSpaceSize = FUN_0010f820();
+    addressSpaceSize = nnosGetApplicationMemorySize();
     nnosInitAddressSpaceOnce(0x8000000, addressSpaceSize);
     if (allocatorSize != 0) {
         FUN_0010fae4();
@@ -76,7 +76,7 @@ void FUN_00104f60(u32 reserveSize, u32 allocatorSize, u32 extraReserve)
     expHeapConstruct(&system->extraHeap);
     g_asdMemory.system = system;
 
-    addressBlockAllocate(g_asdMemory.system, FUN_0010f820() - allocatorSize - extraReserve);
+    addressBlockAllocate(g_asdMemory.system, nnosGetApplicationMemorySize() - allocatorSize - extraReserve);
     g_asdMemory.system->main.base = g_asdMemory.system->block.base;
     g_asdMemory.system->main.size = g_asdMemory.system->block.size;
     rt_memclr(g_asdMemory.system->main.base, g_asdMemory.system->main.size);

@@ -10,7 +10,7 @@ int mapIfReleaseSlot2(void);
 int FUN_00248114(void);
 int mapIfActivateRecord(int, unsigned int);
 int mapInterfaceSetStateTwo(void);
-int FUN_0027fa98(unsigned int);
+int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
 int FUN_0027fca0(unsigned int);
 int mapSelectContainingRegions(void);
@@ -47,7 +47,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
@@ -250,7 +250,7 @@ void FUN_002e9b60(void)
         }
         temp_v8 = 1;
       }
-      FUN_0027fa98(temp_v8);
+      lmapSetSceneId(temp_v8);
     }
   }
   else {

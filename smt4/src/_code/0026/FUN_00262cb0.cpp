@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
-extern unsigned int FUN_0026aa78(void);
+extern unsigned int statusGetAvailableChoiceCount(void);
 
 
 unsigned int FUN_00262cb0(unsigned int param_1)
@@ -20,7 +20,7 @@ unsigned int FUN_00262cb0(unsigned int param_1)
   unsigned char temp_v5;
   
   temp_v4 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x90;
-  temp_v0 = FUN_0026aa78();
+  temp_v0 = statusGetAvailableChoiceCount();
   if ((int)temp_v0 < 1) {
     temp_v1 = 0;
   }

@@ -14,7 +14,7 @@ int FUN_002f0c18(void);
 int FUN_0034a290(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
-void FUN_003de02c(unsigned int frames);
+void bgmRequestSelectedChannelFade(unsigned int frames);
 int FUN_003e503c(unsigned int);
 int FUN_00408184(int, int);
 int VectorSignedToFloat(int, int);
@@ -103,7 +103,7 @@ void FUN_00331714(int param_1)
   else {
     temp_v5 = FUN_003ddfd8();
     if (temp_v5 == 0) {
-      FUN_003de02c(0x1e);
+      bgmRequestSelectedChannelFade(0x1e);
     }
   }
   temp_v0 = *(short *)(param_1 + 0x38);

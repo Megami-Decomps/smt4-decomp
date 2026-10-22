@@ -1,15 +1,7 @@
-#include "common.h"
+#include "ui/PartyPanel.h"
 
 extern "C" {
 
-typedef struct PartyMember {
-    /* 0x00 */ u8 unk00[0x8C];
-} PartyMember;                              /* 0x8C bytes */
-
-typedef struct PartyPanel {
-    /* 0x00 */ u8 unk00[0x68];
-    /* 0x68 */ PartyMember members[0x11];
-} PartyPanel;
 
 extern PartyPanel *g_partyPanel; /* 0x57f268 */
 

@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
-extern unsigned int FUN_0026aa78(void);
+extern unsigned int statusGetAvailableChoiceCount(void);
 
 
 int FUN_00212088(void)
@@ -22,7 +22,7 @@ int FUN_00212088(void)
   
   temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
   temp_v5 = 0;
-  temp_v2 = FUN_0026aa78();
+  temp_v2 = statusGetAvailableChoiceCount();
   if (0 < (int)(temp_v2 - 1)) {
     psVar4 = (short *)(temp_v1 + 0x106);
     if (((temp_v2 & 1) == 0) && (psVar4 = (short *)(temp_v1 + 0x108), *psVar4 != 0)) {

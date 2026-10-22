@@ -25,7 +25,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int cecQueryOptionalProcess(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: cecProcessForward. */
 extern int FUN_002e2014(void);
@@ -95,7 +95,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
               }
             }
             else {
-              temp_v1 = FUN_002a4b74();
+              temp_v1 = messageGetChoiceResult();
               if (temp_v1 != 0) {
                 if (temp_v1 == 1) {
                   *(unsigned char *)(temp_v3 + 0x40) = 1;
@@ -113,7 +113,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
             }
           }
           else {
-            temp_v1 = FUN_002a4b74();
+            temp_v1 = messageGetChoiceResult();
             if (temp_v1 == 0) {
               sysPlaySe(0x3e);
               temp_v1 = cecProcessGetValue();

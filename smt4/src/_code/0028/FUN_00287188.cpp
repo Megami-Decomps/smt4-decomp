@@ -27,7 +27,7 @@ extern unsigned int DAT_0043da34; /* 0x43da34 */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-extern int FUN_002b6a54(int, unsigned short);
+extern int supportUnitGetEntry(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -64,7 +64,7 @@ void FUN_00287188(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v2 = gameGetSupportUnitData();
     temp_v0 = *(unsigned short *)(temp_v2 + 0x606);
     temp_v2 = gameGetSupportUnitData();
-    temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
+    temp_v2 = supportUnitGetEntry((int)*(short *)(temp_v2 + 0x604),temp_v0);
     FUN_002958f8((int)(short)(*(short *)(temp_v2 + 0x5a) + 1),0);
   }
   temp_v2 = 0;

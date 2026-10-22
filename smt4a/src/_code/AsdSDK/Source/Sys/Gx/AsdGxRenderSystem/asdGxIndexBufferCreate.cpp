@@ -6,7 +6,7 @@ extern "C" {
 extern AsdGxPresets g_asdGxPresets;
 AsdGxTexture *asdTextureCreate(s32 mode);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 options, u32 size, s32 fromFront);
-u32 FUN_001bc2ec(void);
+u32 asdGxGetPhysicalAddress(void);
 
 AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
 {
@@ -40,7 +40,7 @@ AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\Gx\\AsdGxRenderSystem.cpp", 2959);
     texture->pixels = asdMemoryAlloc(0x10000, 0x100, 0, texture->byteSize, 1);
-    texture->handle = FUN_001bc2ec();
+    texture->handle = asdGxGetPhysicalAddress();
     return texture;
 }
 }

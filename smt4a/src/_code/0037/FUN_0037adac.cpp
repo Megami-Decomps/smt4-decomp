@@ -32,7 +32,7 @@ extern unsigned char *FUN_002befc0(void);
 extern unsigned char *FUN_002e09b4(unsigned char **, int, unsigned int);
 extern unsigned char *holderReleaseObject(unsigned char **);
 /* Supplied declaration required: FUN_002e0c80. */
-extern unsigned char *FUN_002e0fac(void);
+extern unsigned char *taggedObjectRelease(void);
 extern unsigned char *taggedOwnerRelease(unsigned char **);
 /* Supplied declaration required: fileObjSeekRead. */
 extern unsigned char *FUN_00317d48(unsigned char **);
@@ -166,7 +166,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
         if (param_1 != 1) {
           if (param_1 != 2) {
             if (param_1 == 3) {
-              puVar5 = (unsigned char *)FUN_002e0fac();
+              puVar5 = (unsigned char *)taggedObjectRelease();
             }
           }
           else {

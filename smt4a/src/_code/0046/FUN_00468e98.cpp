@@ -41,7 +41,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002a746c(void);
 extern int FUN_002f153c(void);
-extern unsigned char FUN_0031f90c(void);
+extern unsigned char uiQuestGetPanelMode(void);
 /* Supplied declaration required: uiQuestGetActive. */
 extern unsigned char uiQuestGetState(void);
 /* Supplied declaration required: FUN_0034aae4. */
@@ -75,7 +75,7 @@ void FUN_00468e98(fn_00468e98_arg0 *param_1)
     temp_v2 = FUN_00372140();
     param_1->field_0xa68 = temp_v2;
     temp_v3 = FUN_002f153c();
-    temp_v0 = FUN_0031f90c();
+    temp_v0 = uiQuestGetPanelMode();
     param_1->field_0xa62 = temp_v0;
     uiQuestGetActive();
     temp_v5 = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdProcessCreateSimple(...);
 int paramsInit(...);
-int FUN_001513ec(...);
+int asdTextSetValueFlagsAndScalar(...);
 int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
@@ -39,7 +39,7 @@ extern unsigned char DAT_005300a0; /* 0x5300a0 */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_001513ec. */
+/* Supplied declaration required: asdTextSetValueFlagsAndScalar. */
 /* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
@@ -65,7 +65,7 @@ unsigned int * FUN_00145280(void)
   temp_v0 = spriteHandleCreate(0);
   puVar1[1] = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);
-  FUN_001513ec(puVar1[1],3,0xff);
+  asdTextSetValueFlagsAndScalar(puVar1[1],3,0xff);
   positionStateSet(puVar1[1],0,0xffffffff);
   *(unsigned char *)(puVar1 + 2) = 0;
   *(unsigned char *)(puVar1 + 0xd) = 0;

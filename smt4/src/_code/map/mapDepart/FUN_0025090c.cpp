@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001b43f0(...);
-int FUN_00246944(...);
+int dataTableFindRecordById(...);
 int textFormatBuffer(...);
 int libc_strcpy(...);
 
@@ -26,7 +26,7 @@ extern unsigned char *DAT_00447574; /* 0x447574 */
 extern unsigned char *DAT_00447578; /* 0x447578 */
 
 /* Supplied declaration required: FUN_001b43f0. */
-/* Supplied declaration required: FUN_00246944. */
+/* Supplied declaration required: dataTableFindRecordById. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
@@ -117,7 +117,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
       return;
     }
     if (param_1 == (char *)0x65) {
-      temp_v3 = FUN_00246944(pcVar3,puVar6);
+      temp_v3 = dataTableFindRecordById(pcVar3,puVar6);
       libc_strcpy(temp_v5,temp_v3);
       textFormatBuffer(param_4,&LAB_00250c54,temp_v5);
       FUN_001b43f0(0x65,param_2);
@@ -133,7 +133,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
           textFormatBuffer(param_4,DAT_0044755c);
           return;
         }
-        temp_v3 = FUN_00246944(param_1);
+        temp_v3 = dataTableFindRecordById(param_1);
         libc_strcpy(temp_v5,temp_v3);
         FUN_001b43f0(param_1,param_2);
         libc_strcpy(temp_v6,param_1);
@@ -149,7 +149,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
                 if (param_1 != (char *)0x22) {
                   if ((param_1 == (char *)0xcb) ||
                      ((param_1 != (char *)0x65 && ((int)param_1 >= 0x66)))) {
-                    temp_v3 = FUN_00246944(param_1);
+                    temp_v3 = dataTableFindRecordById(param_1);
                     libc_strcpy(temp_v5,temp_v3);
                     textFormatBuffer(param_4,&LAB_00250c54,temp_v5);
                     return;
@@ -182,7 +182,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
           textFormatBuffer(param_4,DAT_00447564);
           return;
         }
-        temp_v3 = FUN_00246944(param_1);
+        temp_v3 = dataTableFindRecordById(param_1);
         libc_strcpy(temp_v5,temp_v3);
         FUN_001b43f0(param_1,param_2);
         libc_strcpy(temp_v6,param_1);
@@ -203,7 +203,7 @@ void FUN_0025090c(char *param_1,unsigned char *param_2,int param_3,unsigned int 
     textFormatBuffer(param_4,DAT_00447554);
     return;
   }
-  temp_v3 = FUN_00246944(param_1);
+  temp_v3 = dataTableFindRecordById(param_1);
   libc_strcpy(temp_v5,temp_v3);
   FUN_001b43f0(param_1,param_2);
   libc_strcpy(temp_v6,param_1);

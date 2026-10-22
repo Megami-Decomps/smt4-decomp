@@ -9,7 +9,7 @@ int fileHandleClose(unsigned char **, int);
 int FUN_002beec4(void);
 int FUN_002e0a6c(unsigned char **, int, unsigned int, unsigned int);
 int holderReleaseObject(...);
-int FUN_002e0fac(void);
+int taggedObjectRelease(void);
 int taggedOwnerRelease(unsigned char **);
 int taggedOwnerRelease2(...);
 
@@ -33,7 +33,7 @@ extern unsigned char *FUN_002befc0(void);
 extern unsigned char *FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0a6c. */
 /* Supplied declaration required: holderReleaseObject. */
-/* Supplied declaration required: FUN_002e0fac. */
+/* Supplied declaration required: taggedObjectRelease. */
 /* Supplied declaration required: taggedOwnerRelease. */
 extern unsigned char *FUN_0032cab4(unsigned char **);
 /* Supplied declaration required: taggedOwnerRelease2. */
@@ -105,7 +105,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
         if (param_1 != 1) {
           if (param_1 != 2) {
             if (param_1 == 3) {
-              FUN_002e0fac();
+              taggedObjectRelease();
             }
           }
           else {
@@ -125,7 +125,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
         if (param_1 != 1) {
           if (param_1 != 2) {
             if (param_1 == 3) {
-              puVar4 = (unsigned char *)FUN_002e0fac();
+              puVar4 = (unsigned char *)taggedObjectRelease();
             }
           }
           else {

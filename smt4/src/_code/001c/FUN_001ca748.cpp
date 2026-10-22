@@ -17,7 +17,7 @@ int FUN_0026ab64(...);
 int devilCreateRaceEffect(...);
 int FUN_00296e90(void);
 int flaggedEntrySetValueB(...);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
@@ -92,8 +92,8 @@ extern unsigned short *FUN_0029acb0(void);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0029d65c. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
@@ -778,7 +778,7 @@ LAB_001cb104:
   case 0x12:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
-      FUN_0029e17c();
+      useCounterRelease();
       FUN_002a0cc8(0);
       temp_v6 = FUN_0029ac94();
       if (temp_v6 == 0xd || temp_v6 == 6) {
@@ -797,7 +797,7 @@ LAB_001cb104:
       *(unsigned int *)(temp_v6 + 0x404) = temp_v7;
     }
     else {
-      temp_v15 = FUN_0029e130();
+      temp_v15 = useCounterGetCurrentValue();
       temp_v6 = g_statusDown;
       if (temp_v15 != 0x4b) {
         temp_v15 = FUN_002a0d0c();
@@ -943,7 +943,7 @@ LAB_001cbbac:
   case 0x14:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
-      FUN_0029e17c();
+      useCounterRelease();
       FUN_002a0cc8(0);
       temp_v6 = FUN_0029ac94();
       if ((((temp_v6 == 8) || (temp_v6 = FUN_0029ac94(), temp_v6 == 9)) ||
@@ -963,7 +963,7 @@ LAB_001cbbac:
       *(unsigned int *)(temp_v6 + 0x404) = temp_v7;
     }
     else {
-      temp_v6 = FUN_0029e130();
+      temp_v6 = useCounterGetCurrentValue();
       if (temp_v6 != 0x4b) {
         statusInventorySort();
         *(unsigned char *)(temp_v2 + 0x410) = 1;

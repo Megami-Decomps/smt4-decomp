@@ -52,7 +52,7 @@ int dataStoreGetProgress(void);
 int cecProcessCall3(void);
 int dataStoreShutdown(void);
 int maskToCode(...);
-int FUN_003881e0(int);
+int campCecSetValue(int);
 int rt_memcpy_w(int, unsigned int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -92,7 +92,7 @@ extern int FUN_001ba3d4(short);
 /* Supplied declaration required: FUN_002a17d4. */
 extern unsigned int dataStoreGetEntry(int);
 /* Supplied declaration required: gameDataGetRecordValue. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf520. */
 /* Supplied declaration required: FUN_002c76d8. */
 /* Supplied declaration required: libc_strcpy. */
@@ -126,7 +126,7 @@ extern int playerSummaryIsIncomplete(int);
 /* Supplied declaration required: gameDataBlocksGetWord27E90. */
 /* Supplied declaration required: maskToCode. */
 extern short *dataTable4AGetEntry8(int);
-/* Supplied declaration required: FUN_003881e0. */
+/* Supplied declaration required: campCecSetValue. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 extern short *dataTable4AType1GetEntry8(short *);
 /* Supplied declaration required: FUN_0039a638. */
@@ -134,7 +134,7 @@ extern int dataStoreIsFinished(void);
 extern int dataStoreIsIdle(void);
 /* Supplied declaration required: dataTable4AType2Count. */
 /* Supplied declaration required: dataTable4AType1Count. */
-extern int FUN_004d0bf0(unsigned short);
+extern int gameStockContainsEntry(unsigned short);
 /* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -256,9 +256,9 @@ joined_r0x003a52e4:
   case 6:
     temp_v8 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x360));
     if (temp_v8 == 2) {
-      temp_v8 = FUN_002a4b74();
+      temp_v8 = messageGetChoiceResult();
       if (temp_v8 == 0) {
-        FUN_003881e0(1);
+        campCecSetValue(1);
       }
       temp_v9 = maskToCode(*(unsigned int *)(param_1 + 0x3dc));
       *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
@@ -508,7 +508,7 @@ joined_r0x003a5980:
             temp_v13 = gameDataBlocksGetWord27E90();
             if ((((unsigned int)(int)(short)puVar15[1] <= temp_v13) &&
                 ((int)(short)*puVar15 != (unsigned int)*(unsigned short *)(param_1 + 0x14e))) &&
-               (temp_v11 = FUN_004d0bf0(*puVar15), temp_v11 == 0)) {
+               (temp_v11 = gameStockContainsEntry(*puVar15), temp_v11 == 0)) {
               temp_v13 = (unsigned int)*puVar15;
               FUN_00184310();
               if ((unsigned int)*(unsigned short *)(temp_v13 + 6) <= *(unsigned short *)(temp_v19 + 0x66) + 1) {
@@ -536,7 +536,7 @@ joined_r0x003a5980:
               if (temp_v4 < 0x5a) {
                 puVar13 = (unsigned short *)(*(int *)(g_campCecRecv + 0x34c) + temp_v4 * 0xc);
               }
-              temp_v3 = FUN_004d0bf0(*puVar13);
+              temp_v3 = gameStockContainsEntry(*puVar13);
             } while (temp_v3 != 0);
             *(unsigned short **)(param_1 + 0x344) = puVar13;
           }

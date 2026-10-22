@@ -5,7 +5,7 @@
 extern "C" {
 
 int effPartCreate(void);
-int FUN_002629a8(int, int);
+int resourceQueueDeferredDestroy(int, int);
 int registrationEntryInsert(...);
 
 extern unsigned int DAT_0044ea8c; /* 0x44ea8c */
@@ -19,7 +19,7 @@ extern unsigned int DAT_0044f864; /* 0x44f864 */
 extern unsigned char DAT_004d8bd0; /* 0x4d8bd0 */
 
 /* Supplied declaration required: effPartCreate. */
-/* Supplied declaration required: FUN_002629a8. */
+/* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
 
 
@@ -33,7 +33,7 @@ unsigned int FUN_00327858(void)
     registrationEntryInsert(DAT_0044ea90,3);
     DAT_0044ea90 = 0;
     if (DAT_0044eaa0 != 0) {
-      FUN_002629a8(DAT_0044eaa0,3);
+      resourceQueueDeferredDestroy(DAT_0044eaa0,3);
       DAT_0044eaa0 = 0;
     }
   }

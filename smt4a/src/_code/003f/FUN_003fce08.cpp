@@ -34,7 +34,7 @@ extern Resource *asdTMTexTableGetNode(void *owner, u32 key);
 extern s32 resourceIsReady(void);
 extern void FUN_003fc294(Starter *starter, u32 arg);
 extern s32 FUN_003fcbe0(Starter *starter);
-extern void FUN_003fcc94(Starter *starter);
+extern void aocReleaseObjectBufferAndFlag(Starter *starter);
 
 s32 FUN_003fce08(Starter *starter, u32 arg)
 {
@@ -45,7 +45,7 @@ s32 FUN_003fce08(Starter *starter, u32 arg)
     }
     if (starter->started == 0) {
         if (FUN_003fcbe0(starter) != 0) {
-            FUN_003fcc94(starter);
+            aocReleaseObjectBufferAndFlag(starter);
         }
         u32 key = starter->key;
         u32 value = resource->value;

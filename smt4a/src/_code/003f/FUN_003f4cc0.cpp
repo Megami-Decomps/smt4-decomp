@@ -29,7 +29,7 @@ extern unsigned char LAB_003f5218; /* 0x3f5218 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00180114(unsigned short);
@@ -136,7 +136,7 @@ LAB_003f510c:
           }
           else {
             gameGetPlayerData();
-            temp_v3 = FUN_0015687c();
+            temp_v3 = gameGetPlayerName();
             textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
           }
           temp_v5 = FUN_001834a4(0x11);

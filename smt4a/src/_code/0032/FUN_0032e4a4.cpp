@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00344348's literal pool; not written yet. */
+/* NON_MATCHING: script-driven unit transition waits on sprite effects, prepares message strings, and dispatches events; the owner, selected-unit descriptors, and script-result layouts remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_0032e4a4 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_0032e4a4(int param_1)
@@ -73,7 +73,7 @@ unsigned int FUN_0032e4a4(int param_1)
     FUN_003216ec();
     FUN_001f4908(0,0x1e,0xffffffff);
     uVar8 = 0x1000214;
-    FUN_003d2150(uVar8);
+    sysPlayVoice(uVar8);
     break;
   case 3:
     iVar9 = FUN_0034efb0();
@@ -265,7 +265,7 @@ code_r0x0032ea88:
     FUN_00275f44(*(unsigned int *)(param_1 + 0x360),0x18);
     FUN_0031d890();
     uVar8 = 0x100013f;
-    FUN_003d2150(uVar8);
+    sysPlayVoice(uVar8);
     break;
   case 5:
     uVar2 = FUN_002a469c();

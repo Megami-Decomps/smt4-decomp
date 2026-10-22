@@ -22,7 +22,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
 extern int FUN_003de75c(unsigned int);
 /* Supplied declaration required: partyEntryFlagsBit3. */
@@ -50,13 +50,13 @@ void FUN_003d474c(void)
   temp_v4 = g_uiQuest;
   if (*(char *)(g_uiQuest + 0x90c) != '\0') {
     temp_v2 = g_uiQuest + 0x948;
-    temp_v3 = FUN_002a4860();
+    temp_v3 = resourceRunOperationIfUnblocked();
     temp_v2 = FUN_002a4894(temp_v2);
     temp_v1 = *(unsigned short *)(temp_v4 + (temp_v2 + temp_v3) * 2 + 0xa10);
   }
   else {
     temp_v2 = g_uiQuest + 0x9ac;
-    temp_v3 = FUN_002a4860();
+    temp_v3 = resourceRunOperationIfUnblocked();
     temp_v2 = FUN_002a4894(temp_v2);
     temp_v1 = *(unsigned short *)(temp_v4 + (temp_v2 + temp_v3) * 2 + 0xad6);
   }

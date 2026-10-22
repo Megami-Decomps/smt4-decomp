@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-extern int FUN_001bc2ec(void);
+extern int asdGxGetPhysicalAddress(void);
 
 
 void FUN_00153084(int param_1,int param_2,int param_3)
@@ -91,7 +91,7 @@ LAB_00153148:
         asdMemoryAllocAligned(0x10000,0x100,0,temp_v3,0x40,1);
       }
       piVar4[2] = temp_v0;
-      temp_v3 = FUN_001bc2ec();
+      temp_v3 = asdGxGetPhysicalAddress();
       piVar4[3] = temp_v3;
     }
     temp_v2 = temp_v2 + 1;

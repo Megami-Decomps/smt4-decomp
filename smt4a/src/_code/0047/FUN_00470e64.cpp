@@ -13,7 +13,7 @@ int asdOperatorDeleteB(...);
 int sysMemClear(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int asdOperatorNewE(...);
-int FUN_00429f38(...);
+int asdFsIsSdCardDetected(...);
 int nnnstdMemCpy(...);
 int rt_memcpy_w(...);
 
@@ -58,7 +58,7 @@ extern int objGetFlagBit16(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 extern int FUN_0046bc7c(fn_00470e64_arg0 *, unsigned int);
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -98,7 +98,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
   piVar1 = &param_1->field_0x45c;
   param_1->field_0x45c = 0;
   temp_v13 = piVar1;
-  FUN_00429f38();
+  asdFsIsSdCardDetected();
   if (piVar1 == (int *)0x0) {
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     return;

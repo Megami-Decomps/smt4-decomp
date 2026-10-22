@@ -8,7 +8,7 @@ int sysPlaySe(...);
 int FUN_00183e58(void);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_0048816c(...);
 int FUN_0048d248(...);
 int rectRecRead(...);
@@ -56,12 +56,12 @@ extern int FUN_00325064(void);
 /* Supplied declaration required: naviRequestSelectedMap. */
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_0048816c. */
 /* Supplied declaration required: FUN_0048d248. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
-extern int FUN_00492bc0(int);
+extern int naviGetActiveStateValue(int);
 /* Supplied declaration required: FUN_00492c18. */
 extern int FUN_00492c5c(int);
 extern unsigned int FUN_00492c84(int);
@@ -167,7 +167,7 @@ LAB_004899f8:
           temp_v0 = param_1;
           FUN_0048816c(param_1,1);
           if (temp_v0 != 0) {
-            FUN_003d2150(0x100020d);
+            sysPlayVoice(0x100020d);
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
             temp_v0 = param_1;
             FUN_0048816c(param_1,1);
@@ -180,7 +180,7 @@ LAB_004899f8:
           }
         }
         else if (temp_v10[0x545] != 0) {
-          FUN_003d2150(0x100020e);
+          sysPlayVoice(0x100020e);
           temp_v10[0x544] = (unsigned int)(temp_v10[0x544] == 0);
           *(unsigned char *)(param_1 + 0x56) = 5;
           *(unsigned char *)(param_1 + 0x59) = 0;
@@ -191,7 +191,7 @@ LAB_004899f8:
       case 1:
         if (*(char *)(param_1 + 0xc) != '\0') {
           if (*(char *)((int)temp_v12 + 0x8e) == '\x06') {
-            FUN_003d2150(0x100020e);
+            sysPlayVoice(0x100020e);
             *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffcffff) | 0x2000000;
             *puVar7 = 1;
             *puVar8 = 1;
@@ -215,7 +215,7 @@ LAB_004899f8:
         if (temp_v9[0] == 0) {
           return 1;
         }
-        FUN_003d2150(0x100020e);
+        sysPlayVoice(0x100020e);
         piVar5 = (int *)(temp_v10 + 0x545);
         temp_v0 = *piVar5 + 1;
         *piVar5 = temp_v0;
@@ -251,10 +251,10 @@ LAB_004899f8:
         if (*(char *)(param_1 + 0xc) != '\0') {
           FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
           if (temp_v9[0] != 0) {
-            FUN_003d2150(0x1000229);
+            sysPlayVoice(0x1000229);
             if (DAT_005f1a5e != '\0') {
               temp_v0 = FUN_00492c5c(temp_v7);
-              temp_v1 = FUN_00492bc0(temp_v7);
+              temp_v1 = naviGetActiveStateValue(temp_v7);
               if (temp_v0 == temp_v1) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
                 sub68OwnerGetBlock60(temp_v7);
@@ -287,10 +287,10 @@ LAB_004899f8:
         else {
           FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
           if (temp_v9[0] != 0) {
-            FUN_003d2150(0x1000229);
+            sysPlayVoice(0x1000229);
             if (DAT_005f1a5e != '\0') {
               temp_v0 = FUN_00492c5c(temp_v7);
-              temp_v1 = FUN_00492bc0(temp_v7);
+              temp_v1 = naviGetActiveStateValue(temp_v7);
               if (temp_v0 == temp_v1) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
                 sub68OwnerGetBlock60(temp_v7);
@@ -326,7 +326,7 @@ LAB_004899f8:
           }
           continue;
         }
-        FUN_003d2150(0x100020e);
+        sysPlayVoice(0x100020e);
         *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffcffff) | 0x2000000;
         *puVar7 = 1;
         *puVar8 = 1;
@@ -343,7 +343,7 @@ LAB_004899f8:
           temp_v0 = param_1;
           FUN_0048816c(param_1,0xffffffff);
           if (temp_v0 != 0) {
-            FUN_003d2150(0x100020d);
+            sysPlayVoice(0x100020d);
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
             temp_v0 = param_1;
             FUN_0048816c(param_1,0xffffffff);
@@ -359,7 +359,7 @@ LAB_004899f8:
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
           FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
           if (temp_v9[0] != 0) {
-            FUN_003d2150(0x1000229);
+            sysPlayVoice(0x1000229);
             if (DAT_005f1a5e != '\0') {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
               temp_v2 = FUN_00492c84(temp_v7);
@@ -387,7 +387,7 @@ LAB_004899f8:
         *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
         FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
         if (temp_v9[0] != 0) {
-          FUN_003d2150(0x1000229);
+          sysPlayVoice(0x1000229);
           if (DAT_005f1a5e != '\0') {
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
             temp_v2 = FUN_00492c84(temp_v7);

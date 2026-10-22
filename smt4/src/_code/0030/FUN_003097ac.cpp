@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00245a4c(void);
+int asdGxGetCurrentPresetKind(void);
 int asdModelCommandBlockRelease(void);
 int cursorResetFromParam(void);
 
@@ -17,7 +17,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int DAT_004729e0; /* 0x4729e0 */
 extern int DAT_004729e4; /* 0x4729e4 */
 
-/* Supplied declaration required: FUN_00245a4c. */
+/* Supplied declaration required: asdGxGetCurrentPresetKind. */
 extern unsigned int FUN_002ae1e8(void);
 extern unsigned int FUN_002ae210(void);
 /* Supplied declaration required: asdModelCommandBlockRelease. */
@@ -34,9 +34,9 @@ void FUN_003097ac(unsigned int param_1)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  FUN_00245a4c();
+  asdGxGetCurrentPresetKind();
   temp_v1 = FUN_002ae210();
-  FUN_00245a4c();
+  asdGxGetCurrentPresetKind();
   temp_v2 = FUN_002ae1e8();
   cursorResetFromParam();
   temp_v0 = DAT_004729e0;

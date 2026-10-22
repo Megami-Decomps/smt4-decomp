@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00358f74(void);
+void asdCecResetMessageBox(void);
 
-/* Forwards to FUN_00358f74, the function that follows it. */
+/* Forwards to asdCecResetMessageBox, the function that follows it. */
 void FUN_00358f70(void)
 {
-    FUN_00358f74();
+    asdCecResetMessageBox();
 }
 
 } /* extern "C" */

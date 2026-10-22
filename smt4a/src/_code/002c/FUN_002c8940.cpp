@@ -10,7 +10,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
 
@@ -40,9 +40,9 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_0022e9b8(void);
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int FUN_002861fc(unsigned short);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 extern int bitTableIndexIsClear(unsigned short);
 /* Supplied declaration required: FUN_00344cd0. */
@@ -73,7 +73,7 @@ void FUN_002c8940(int param_1,int param_2)
   FUN_00164b5c(2,0x1a,6,param_1,param_2,0x65);
   FUN_001835b4(2,0x1a,0x1d2,param_1,param_2,0x6a);
   temp_v2 = temp_v1 + 0x9148;
-  temp_v3 = FUN_002a4860();
+  temp_v3 = resourceRunOperationIfUnblocked();
   temp_v8 = 0;
   temp_v4 = uiSearchPrimary(temp_v2);
   if (0 < temp_v4) {
@@ -104,7 +104,7 @@ void FUN_002c8940(int param_1,int param_2)
       temp_v4 = uiSearchPrimary(temp_v2);
     } while (temp_v8 < temp_v4);
   }
-  temp_v3 = FUN_002a4860(temp_v2);
+  temp_v3 = resourceRunOperationIfUnblocked(temp_v2);
   temp_v4 = FUN_002a4894(temp_v2);
   temp_v3 = temp_v1 + (temp_v4 + temp_v3) * 2;
   temp_v4 = FUN_002861fc(*(unsigned short *)(temp_v3 + 0x90a8));
@@ -125,7 +125,7 @@ void FUN_002c8940(int param_1,int param_2)
   efctSetSpeed();
   FUN_001835b4(2,0x1a,0x3b,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x7e);
   temp_v5 = FUN_002a4894(temp_v2);
-  temp_v5 = FUN_00284140((int)*(short *)(temp_v1 + temp_v5 * 2 + 0x438));
+  temp_v5 = recordGetModeForId((int)*(short *)(temp_v1 + temp_v5 * 2 + 0x438));
   temp_v6 = *(short *)(temp_v8 + 10) + param_2;
   temp_v7 = *(short *)(temp_v8 + 8) + param_1;
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {

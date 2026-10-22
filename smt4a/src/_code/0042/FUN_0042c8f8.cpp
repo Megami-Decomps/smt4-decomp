@@ -6,7 +6,7 @@ extern "C" {
 
 void FUN_004ff4e0(u32 arg0, u8 *vertices, u32 arg2, u32 arg3, s32 arg4);
 void nn_gxlow_CTR_FlushDataCacheForward(void *address, u32 size);
-u32 FUN_001bc2ec(void *address);
+u32 asdGxGetPhysicalAddress(void *address);
 void FUN_0042ca00(GxVertexState *state, const GxVertexLayout *layout, u32 vertexAddress);
 
 /* Builds the quad batch's index buffer (two triangles per quad), flushes both buffers and binds
@@ -26,10 +26,10 @@ void FUN_0042c8f8(GxQuadBatch *batch, const GxVertexLayout *layout, u32 arg2, u3
     }
     nn_gxlow_CTR_FlushDataCacheForward(batch->vertices, batch->quadCount * GX_QUAD_VERTEX_BYTES);
     nn_gxlow_CTR_FlushDataCacheForward(batch->indices, batch->quadCount * 12);
-    batch->indexAddress = FUN_001bc2ec(batch->indices);
+    batch->indexAddress = asdGxGetPhysicalAddress(batch->indices);
     batch->indexed = 0;
     batch->indexCount = batch->quadCount * GX_QUAD_INDEX_COUNT;
-    FUN_0042ca00(&batch->vertexState, layout, FUN_001bc2ec(batch->vertices));
+    FUN_0042ca00(&batch->vertexState, layout, asdGxGetPhysicalAddress(batch->vertices));
 }
 
 } /* extern "C" */

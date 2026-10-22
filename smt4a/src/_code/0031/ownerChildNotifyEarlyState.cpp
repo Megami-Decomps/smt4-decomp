@@ -13,9 +13,9 @@ typedef struct Owner00316164 {
 
 extern Owner00316164 *g_shop;
 
-void FUN_0049597c(Child00316164 *child);
+void shopRefreshChildDirtyRows(Child00316164 *child);
 
-/* While the shop owner is in state 0, 1 or 2, hands its child (if any) to FUN_0049597c. Always returns 0. */
+/* While the shop owner is in state 0, 1 or 2, hands its child (if any) to shopRefreshChildDirtyRows. Always returns 0. */
 u32 ownerChildNotifyEarlyState(void)
 {
     Owner00316164 *owner = g_shop;
@@ -25,7 +25,7 @@ u32 ownerChildNotifyEarlyState(void)
     case 1:
     case 2:
         if (owner != NULL && owner->child != NULL) {
-            FUN_0049597c(owner->child);
+            shopRefreshChildDirtyRows(owner->child);
         }
         break;
     }

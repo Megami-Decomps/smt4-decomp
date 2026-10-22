@@ -8,7 +8,7 @@ extern const char DAT_00533d3c[]; /* "ArousalSkill PROC" */
 
 void *asdOperatorNew(u32 size);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 a, s32 b, void (*onEnd)(void), void (*onRun)(void), s32 c);
-void FUN_00387308(void);
+void sceneDestroyOwnedJobObject(void);
 void loadSlotRequestAsync(s32 slot, s32 flags);
 u16 ifTouchGetButtonHelpValue(void);
 void FUN_002c7e6c(void);
@@ -40,7 +40,7 @@ void FUN_0036b6d8(s32 mode, u32 id)
         scene = NULL;
     }
     g_engineCleanupOwner.scene = scene;
-    scene->process = asdProcessCreateSimple(DAT_00533d3c, 4, 0, 0, FUN_00387308, (void (*)(void))0x00358f28, 0);
+    scene->process = asdProcessCreateSimple(DAT_00533d3c, 4, 0, 0, sceneDestroyOwnedJobObject, (void (*)(void))0x00358f28, 0);
     scene->mode = mode;
     scene->id = id;
     scene->unk3A = 0;

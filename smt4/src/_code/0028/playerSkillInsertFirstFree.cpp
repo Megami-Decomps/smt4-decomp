@@ -10,13 +10,13 @@ struct PlayerSkillDataBlock {
 };
 
 extern "C" {
-s32 FUN_0026aa78(void);
+s32 statusGetAvailableChoiceCount(void);
 
 // Add a skill to the first empty slot within the player's unlocked capacity.
 void playerSkillInsertFirstFree(u32 skill)
 {
     PlayerSkillSlots *player = &((PlayerSkillDataBlock *)g_gameDataBlocks.unk04)->player;
-    s32 capacity = FUN_0026aa78();
+    s32 capacity = statusGetAvailableChoiceCount();
     for (s32 index = 0; index < capacity; ++index) {
         if (player->skills[index] == 0) {
             player->skills[index] = skill;

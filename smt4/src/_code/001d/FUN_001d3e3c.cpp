@@ -37,7 +37,7 @@ int FUN_002640a4(...);
 int mapTableRelease(void);
 int FUN_002700d0(void);
 int slotPoolReleaseResources(void);
-int FUN_002701e8(void);
+int mapStatesReleaseMarks(void);
 int entryTableMarkDestroy(void);
 int FUN_002702dc(void);
 int FUN_00277d2c(...);
@@ -65,7 +65,7 @@ int mapInterfaceSetStateTwo(void);
 int FUN_00273840(...);
 int mapIfSetMode1(void);
 int mapDepartSetTarget(...);
-int FUN_0027fa98(...);
+int lmapSetSceneId(...);
 int FUN_002893ec(...);
 int FUN_002895a8(...);
 int FUN_00289608(...);
@@ -140,7 +140,7 @@ int FUN_00275364(void);
 int FUN_002764a8(void);
 int mapIfClose(void);
 int FUN_00280ccc(void);
-int FUN_0028529c(...);
+int naviRegisterTransitionsAndRequest(...);
 int FUN_00295660(...);
 int FUN_002a0428(...);
 int FUN_002a04f0(...);
@@ -161,11 +161,11 @@ int FUN_0027d7b0(...);
 int mapIfSetMode2(void);
 int FUN_0027d8b4(...);
 int mapClearPendingEntries(void);
-int FUN_0027d948(void);
+int naviClearObjectBlock(void);
 int FUN_0027d968(void);
 int FUN_0027d98c(void);
 int FUN_0027db24(...);
-int FUN_0027db90(void);
+int sequenceRequestClearDeferred(void);
 int FUN_00281788(void);
 int FUN_0028527c(int);
 int gameRestoreWorkSave(int);
@@ -386,14 +386,14 @@ extern int FUN_00264548(void);
 /* Supplied declaration required: FUN_00270028. */
 /* Supplied declaration required: FUN_002700d0. */
 /* Supplied declaration required: slotPoolReleaseResources. */
-/* Supplied declaration required: FUN_002701e8. */
+/* Supplied declaration required: mapStatesReleaseMarks. */
 /* Supplied declaration required: entryTableMarkDestroy. */
 /* Supplied declaration required: FUN_002702dc. */
 /* Supplied declaration required: navigationRequestFieldMode. */
 /* Supplied declaration required: FUN_0027052c. */
 /* Supplied declaration required: scrLoaderResetWithFlag. */
 /* Supplied declaration required: scrLoaderRelease. */
-extern int FUN_002734ec(int);
+extern int questSysUpdateLoad(int);
 extern int questSysLoadStep(int);
 /* Supplied declaration required: scrLoaderReset. */
 /* Supplied declaration required: scrLoaderFreeBuffers. */
@@ -448,21 +448,21 @@ extern int questMapSetCursor(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027d8b4. */
 extern int FUN_0027d8c8(void);
 /* Supplied declaration required: mapClearPendingEntries. */
-/* Supplied declaration required: FUN_0027d948. */
+/* Supplied declaration required: naviClearObjectBlock. */
 /* Supplied declaration required: FUN_0027d968. */
 /* Supplied declaration required: FUN_0027d98c. */
 /* Supplied declaration required: FUN_0027db24. */
-/* Supplied declaration required: FUN_0027db90. */
+/* Supplied declaration required: sequenceRequestClearDeferred. */
 /* Supplied declaration required: frameTexResetFlags. */
 extern int mapDepartIsRunning(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_00280ac0. */
 /* Supplied declaration required: FUN_00280ccc. */
 /* Supplied declaration required: FUN_00281784. */
 /* Supplied declaration required: FUN_00281788. */
 /* Supplied declaration required: FUN_0028527c. */
-/* Supplied declaration required: FUN_0028529c. */
+/* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 /* Supplied declaration required: gameRestoreWorkSave. */
 extern int FUN_00287800(void);
 extern int FUN_00287894(void);
@@ -637,7 +637,7 @@ unsigned int FUN_001d3e3c(void)
             gameFlagSetValue((int)*(short *)(temp_v4 + 0x22),1);
           }
           else {
-            FUN_0027d948();
+            naviClearObjectBlock();
             mapClearPendingEntries();
           }
         }
@@ -673,7 +673,7 @@ unsigned int FUN_001d3e3c(void)
       if ((temp_v6 != 0) || (!temp_v12)) {
         DAT_0049fa61 = '\0';
         DAT_0049f9c8 = 0;
-        FUN_0027db90();
+        sequenceRequestClearDeferred();
         FUN_0027d8b4(0);
         DAT_0049fa1a = '\0';
       }
@@ -1094,7 +1094,7 @@ unsigned int FUN_001d3e3c(void)
                 DAT_0049f934 = '\x01';
                 temp_v16 = (unsigned int)DAT_0049fa19;
                 temp_v15 = (unsigned int)DAT_0049fa18;
-                FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
+                naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
                 mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
                 mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
                 mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
@@ -1146,7 +1146,7 @@ unsigned int FUN_001d3e3c(void)
                           navigationResetTimer();
                           temp_v16 = (unsigned int)DAT_0049fa19;
                           temp_v15 = (unsigned int)DAT_0049fa18;
-                          FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
+                          naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
                           mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
                           mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
                           mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
@@ -1297,7 +1297,7 @@ LAB_001d58a0:
                   DAT_0049fb46 = 0;
                   temp_v16 = (unsigned int)DAT_0049fa19;
                   temp_v15 = (unsigned int)DAT_0049fa18;
-                  FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
+                  naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
                   mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
                   mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
                   mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
@@ -1332,7 +1332,7 @@ LAB_001d58a0:
               DAT_0049f934 = '\x01';
               temp_v16 = (unsigned int)DAT_0049fa19;
               temp_v15 = (unsigned int)DAT_0049fa18;
-              FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
+              naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
               mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
               mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
               mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
@@ -1359,7 +1359,7 @@ LAB_001d58a0:
             DAT_0049f934 = '\x01';
             temp_v16 = (unsigned int)DAT_0049fa19;
             temp_v15 = (unsigned int)DAT_0049fa18;
-            FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
+            naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
             mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
             mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
             mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
@@ -1410,7 +1410,7 @@ joined_r0x001d535c:
           if (DAT_0049f9d4 == '\0') {
             temp_v16 = (unsigned int)DAT_0049fa19;
             temp_v15 = (unsigned int)DAT_0049fa18;
-            FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
+            naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
             mapTriggerMarkTable23Matches(DAT_0049fa14,DAT_0049fa15);
             mapTriggerMarkTable23Matches(DAT_0049fa16,DAT_0049fa17);
             mapTriggerMarkTable23Matches(DAT_0049fa18,DAT_0049fa19);
@@ -1525,7 +1525,7 @@ joined_r0x001d535c:
     }
     *(unsigned short *)(temp_v4 + 0x22) = 0;
     FUN_00273f5c();
-    FUN_0027d948();
+    naviClearObjectBlock();
     mapClearPendingEntries();
     if (pcVar9[2] != '\0') {
       DAT_0049fa94 = 1;
@@ -1671,7 +1671,7 @@ LAB_001d61bc:
     lmapMainStep();
     if (puVar7[4] == 0) {
       scrLoaderReset(g_aocMain + 0xa8);
-      FUN_0027fa98(2);
+      lmapSetSceneId(2);
       buttonHelpSetPresetDefault();
       FUN_002bff50();
       temp_v4 = puVar7[4] + 1;
@@ -1732,7 +1732,7 @@ joined_r0x001d6448:
       return 0;
     }
     if (puVar7[4] != 0) {
-      temp_v6 = FUN_002734ec(g_aocMain + 0xa8);
+      temp_v6 = questSysUpdateLoad(g_aocMain + 0xa8);
       if (temp_v6 == 0) {
         return 0;
       }
@@ -2040,7 +2040,7 @@ LAB_001d6bd0:
     FUN_00281784();
     FUN_00266584(puVar17[0x10]);
     FUN_002646d4(1);
-    FUN_0027d948();
+    naviClearObjectBlock();
     mapClearPendingEntries();
     puVar17 = g_lmapMainState;
     if (g_lmapMainState != (unsigned int *)0x0) {
@@ -2507,7 +2507,7 @@ LAB_001d6bd0:
     asdMdlManagerMarkDestroy(puVar7[0x2f]);
     asdMdlManagerMarkDestroy(puVar7[0x36]);
     entryTableMarkDestroy();
-    FUN_002701e8();
+    mapStatesReleaseMarks();
     puVar7[3] = puVar7[3] + 1;
     puVar7[4] = 0;
     break;
@@ -2839,7 +2839,7 @@ LAB_001d6bd0:
     asdMdlManagerMarkDestroy(puVar7[0x2f]);
     asdMdlManagerMarkDestroy(puVar7[0x36]);
     entryTableMarkDestroy();
-    FUN_002701e8();
+    mapStatesReleaseMarks();
     puVar7[3] = puVar7[3] + 1;
     puVar7[4] = 0;
     break;
@@ -3092,7 +3092,7 @@ LAB_001d884c:
     puVar7[3] = temp_v6;
     break;
   case 0x57:
-    FUN_002701e8();
+    mapStatesReleaseMarks();
     FUN_002702dc();
     g_gameState = DAT_0049fd14;
     puVar7[0x10] = DAT_0049fd14;
@@ -3236,7 +3236,7 @@ joined_r0x001d8c24:
     asdMdlManagerMarkDestroy(puVar7[0x36]);
     cameraRegistryRemove(&g_fixedCamera);
     entryTableMarkDestroy();
-    FUN_002701e8();
+    mapStatesReleaseMarks();
     NaviMain_Destroy();
     if (puVar7[0x26b] != 0) {
       scrScriptProcessDestroy();

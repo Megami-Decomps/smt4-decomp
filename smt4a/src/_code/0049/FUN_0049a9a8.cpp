@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0040a60c(...);
+int gameTestIndexedAuxiliaryFlag(...);
 int cellListAppend(...);
 int dataTable17Count(void);
 int FUN_0049d048(unsigned char *, int);
@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned long long FUN_00145f04(unsigned char, unsigned int, unsigned int);
 extern unsigned long long FUN_00192718(short);
-/* Supplied declaration required: FUN_0040a60c. */
+/* Supplied declaration required: gameTestIndexedAuxiliaryFlag. */
 /* Supplied declaration required: cellListAppend. */
 extern unsigned long long FUN_00494020(void);
 extern int dataTable17Type1GetEntry(unsigned int *, unsigned int);
@@ -103,7 +103,7 @@ void FUN_0049a9a8(int param_1)
       temp_v7 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
       if ((int)temp_v13 != 0) {
         temp_v11 = 0;
-        if (((int)temp_v13 == 2) && (temp_v2 = FUN_0040a60c(temp_v1), temp_v2 == 0)) {
+        if (((int)temp_v13 == 2) && (temp_v2 = gameTestIndexedAuxiliaryFlag(temp_v1), temp_v2 == 0)) {
           temp_v11 = 1;
         }
         temp_v13 = FUN_00192718(temp_v1);
@@ -238,7 +238,7 @@ LAB_0049ad3c:
     temp_v9 = 0;
     goto LAB_0049ad64;
   }
-  temp_v9 = FUN_0040a60c(0x7b2,temp_v7);
+  temp_v9 = gameTestIndexedAuxiliaryFlag(0x7b2,temp_v7);
   temp_v14 = 0x40;
   cellListAppend(temp_v15,0x7b2,temp_v9 == 0,0);
   temp_v9 = 0;

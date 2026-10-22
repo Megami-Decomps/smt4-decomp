@@ -44,7 +44,7 @@ extern int uniteStateIsDone(void);
 extern int idListAnyValid(unsigned int);
 extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026e8b8. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002a4878. */
 extern int uniteRequestGet(void);
 extern unsigned int widgetSubCallIfVisible(int);
@@ -173,7 +173,7 @@ void FUN_00217f14(void)
         temp_v11 = vec2GetXInt(temp_v2);
         temp_v2 = vec2GetYInt(temp_v2);
         efctSetSpeed();
-        temp_v1 = FUN_00284140((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x1b22));
+        temp_v1 = recordGetModeForId((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x1b22));
         if (temp_v1 == 2) {
           temp_v7 = 0;
           temp_v1 = temp_v7;

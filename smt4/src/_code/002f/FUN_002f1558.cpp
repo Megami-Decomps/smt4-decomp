@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00244ee0(...);
-int FUN_0025cc34(void);
+int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int FUN_002b6db0(...);
 int FUN_002b6dd8(...);
@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00244ee0. */
 extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
-/* Supplied declaration required: FUN_0025cc34. */
+/* Supplied declaration required: mapGetSelectedRecordCategoryTable. */
 extern int FUN_0025cc54(void);
 /* Supplied declaration required: playerGetMappedCategory. */
 extern short FUN_0028d24c(void);
@@ -434,7 +434,7 @@ void FUN_002f1558(int param_1)
         textFormatBuffer(puVar11,&LAB_002f1ff4,&LAB_002f2000);
         temp_v1 = (short)(int)puVar11;
         temp_v9 = 0;
-        FUN_0025cc34();
+        mapGetSelectedRecordCategoryTable();
         temp_v6 = (int)temp_v1;
         temp_v16 = 0;
       }

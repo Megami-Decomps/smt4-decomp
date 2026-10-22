@@ -6,7 +6,7 @@ extern "C" {
 
 int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_001aeafc(unsigned int);
+int resourceOwnerReleaseAndReset(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 
 
 void FUN_0019f548(int param_1)
@@ -28,7 +28,7 @@ void FUN_0019f548(int param_1)
   int temp_v0;
   int temp_v1;
   
-  FUN_001aeafc(g_handleRegistry);
+  resourceOwnerReleaseAndReset(g_handleRegistry);
   if (*(int *)(param_1 + 0x18) != 0) {
     ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x18) + 4));
     if (*(int **)(param_1 + 0x18) != (int *)0x0) {

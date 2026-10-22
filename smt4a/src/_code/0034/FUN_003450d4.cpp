@@ -5,7 +5,7 @@
 extern "C" {
 
 int eventQueueAddUnique(int);
-int FUN_00284140(int);
+int recordGetModeForId(int);
 int FUN_002e2848(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int);
 int flaggedEntrySetValueB(void);
 int flaggedEntrySetValueA(unsigned int, int);
@@ -27,9 +27,9 @@ typedef struct {
 } param_9_stack;
 
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_00284140. */
-extern int FUN_002a4844(unsigned int);
-extern int FUN_002a4860(unsigned int);
+/* Supplied declaration required: recordGetModeForId. */
+extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int);
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int FUN_002a4878(unsigned int);
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002e2848. */
@@ -56,9 +56,9 @@ FUN_003450d4(unsigned int param_1,fn_003450d4_arg1 *param_2,int param_3,unsigned
   unsigned int temp_v8;
   
   temp_v8 = 0;
-  FUN_00284140((int)(short)param_5);
-  FUN_00284140((int)(short)param_6);
-  FUN_00284140((int)(short)param_4);
+  recordGetModeForId((int)(short)param_5);
+  recordGetModeForId((int)(short)param_6);
+  recordGetModeForId((int)(short)param_4);
   temp_v0 = 0;
   temp_v7 = -1;
   temp_v2 = uiSearchPrimary(param_1);
@@ -69,7 +69,7 @@ FUN_003450d4(unsigned int param_1,fn_003450d4_arg1 *param_2,int param_3,unsigned
     }
     temp_v6 = 0;
     if (0 < temp_v2) {
-      while (temp_v3 = FUN_00284140((int)*(short *)(param_3 + temp_v6 * 2)), temp_v3 != 6) {
+      while (temp_v3 = recordGetModeForId((int)*(short *)(param_3 + temp_v6 * 2)), temp_v3 != 6) {
         temp_v4 = temp_v6;
         if ((temp_v3 == 1 || temp_v3 == 2) || (temp_v6 = temp_v6 + 1, temp_v4 = temp_v7, temp_v2 <= temp_v6))
         goto LAB_00345180;
@@ -79,9 +79,9 @@ FUN_003450d4(unsigned int param_1,fn_003450d4_arg1 *param_2,int param_3,unsigned
     }
   }
 LAB_00345180:
-  temp_v2 = FUN_002a4844(param_1);
+  temp_v2 = resourceRunEmbeddedOperationIfUnblocked(param_1);
   temp_v7 = FUN_002a4878(param_1);
-  temp_v6 = FUN_002a4860(param_1);
+  temp_v6 = resourceRunOperationIfUnblocked(param_1);
   temp_v3 = FUN_002a4894(param_1);
   if (temp_v4 >= 0) {
     if (param_8 != 0) {
@@ -100,10 +100,10 @@ LAB_00345180:
                  param_9);
   }
   if (param_9 != 0) {
-    temp_v4 = FUN_002a4844(param_1);
+    temp_v4 = resourceRunEmbeddedOperationIfUnblocked(param_1);
     temp_v5 = FUN_002a4878(param_1);
     if (temp_v5 + temp_v4 == temp_v2 + temp_v7) {
-      temp_v4 = FUN_002a4860(param_1);
+      temp_v4 = resourceRunOperationIfUnblocked(param_1);
       temp_v2 = FUN_002a4894(param_1);
       if (temp_v2 + temp_v4 == temp_v6 + temp_v3) {
         *param_7 = temp_v0;

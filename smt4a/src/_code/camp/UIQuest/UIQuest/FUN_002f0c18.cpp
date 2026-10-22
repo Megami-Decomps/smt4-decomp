@@ -18,7 +18,7 @@ int uiSpriteSetImageKeyframe(...);
 int pairSetHalves(...);
 int FUN_001ad9b4(...);
 int FUN_001ff724(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int uiFadeSetVisible(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
@@ -71,7 +71,7 @@ extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_001ff724. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: uiFadeSetVisible. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
@@ -114,10 +114,10 @@ void FUN_002f0c18(void)
   puVar2 = g_uiQuest;
   uiFadeSetVisible(0);
   puVar3 = &LAB_002f1084;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar2[0x23d] = (unsigned int)puVar3;
   puVar3 = &LAB_002f10a0;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar2[0x23e] = (unsigned int)puVar3;
   FUN_00275bc8();
   puVar2[0x23f] = (unsigned int)puVar3;

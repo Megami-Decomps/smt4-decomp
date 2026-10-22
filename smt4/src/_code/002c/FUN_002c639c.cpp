@@ -178,7 +178,7 @@ unsigned int FUN_002c639c(unsigned int *param_1,unsigned int param_2,int param_3
     in_stack_ffffffa0 = in_stack_ffffffa0 - 1;
     param_2 = uVar7;
     if (in_stack_ffffffa0 == 0) {
-      iVar3 = FUN_002c6a04();
+      iVar3 = libcLocaleGetTables();
       (*(code *)param_1[1])
                 (*(unsigned char *)((int)*(int **)(iVar3 + 0xc) + **(int **)(iVar3 + 0xc)),param_1[2]);
       param_1[8] = param_1[8] + 1;

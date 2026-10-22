@@ -53,7 +53,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_0011b454(unsigned int);
+extern unsigned int dataTableGetNamePayload(unsigned int);
 extern int FUN_0028f1bc(unsigned int);
 extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028f4b4. */
@@ -219,7 +219,7 @@ void FUN_00197e34(void)
     }
     FUN_002ba12c(g_titleScene);
     temp_v13 = FUN_002bf4f8(0x29,0x1a);
-    temp_v19 = FUN_0011b454(temp_v25);
+    temp_v19 = dataTableGetNamePayload(temp_v25);
     textFormatBuffer(temp_v24,&LAB_00198208,temp_v19);
     temp_v11 = temp_v4 + (int)temp_v17;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);

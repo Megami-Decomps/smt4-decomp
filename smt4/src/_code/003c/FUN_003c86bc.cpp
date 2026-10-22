@@ -8,7 +8,7 @@ int gameGetSupportUnitData(void);
 int memClear(unsigned short *, int);
 
 extern int gameGetPlayerData(void);
-extern int FUN_002b6a54(unsigned int, unsigned int);
+extern int supportUnitGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetSupportUnitData. */
 extern int randNextInRange(short);
 /* Supplied declaration required: memClear. */
@@ -70,7 +70,7 @@ void FUN_003c86bc(void)
     }
   }
   memClear(puVar12,0x604);
-  temp_v8 = FUN_002b6a54(temp_v12,temp_v13);
+  temp_v8 = supportUnitGetEntry(temp_v12,temp_v13);
   puVar12[0x302] = temp_v7;
   puVar12[0x303] = (short)temp_v13;
   puVar12[0x23] = 0x4b1;

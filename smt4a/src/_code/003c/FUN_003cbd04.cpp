@@ -37,7 +37,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_002a4860(void);
+extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: FUN_0032fea0. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: statDrawClampedDelta. */
@@ -69,7 +69,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
   iStack_30 = param_2;
   temp_v8 = param_3;
   iStack_28 = param_4;
-  temp_v1 = FUN_002a4860();
+  temp_v1 = resourceRunOperationIfUnblocked();
   efctSetSpeed();
   temp_v2 = FUN_001834a4(0x1a,param_2 + 0x185);
   FUN_001835b4(2,0x1a,0x16f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);

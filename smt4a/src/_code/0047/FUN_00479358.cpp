@@ -53,9 +53,9 @@ extern int legacyResourceIdRemap(unsigned int *);
 extern int bgmGetStateById(unsigned int);
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -181,7 +181,7 @@ void FUN_00479358(unsigned int *param_1)
             *(unsigned char *)((int)param_1 + 0x2e6) = 0;
           }
           else {
-            temp_v0 = FUN_00284140((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
+            temp_v0 = recordGetModeForId((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
             if (((temp_v0 == 1) || (temp_v0 == 2)) && (temp_v4 != temp_v2)) {
               temp_v5 = 1;
             }
@@ -324,7 +324,7 @@ LAB_00479870:
     FUN_00169548(1);
     temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v2 == 2) {
-      temp_v2 = FUN_002a4b74();
+      temp_v2 = messageGetChoiceResult();
       if (temp_v2 != 0) {
         if (temp_v2 == 1) {
           param_1[2] = 0;

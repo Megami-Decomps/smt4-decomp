@@ -21,7 +21,7 @@ extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int objectApplyIfUnblocked(void);
 
@@ -75,7 +75,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
         }
       }
       else if (*(int *)(param_1 + 0x3fc) < 6) {
-        temp_v2 = FUN_002a4860(temp_v0);
+        temp_v2 = resourceRunOperationIfUnblocked(temp_v0);
         temp_v0 = FUN_002a4894(temp_v0);
         if (*param_9 != '\0') {
           *param_8 = *(int *)(param_1 + 0x3fc) * -3 + *param_8;
@@ -88,7 +88,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
       }
     }
     else if (0 < *(int *)(param_1 + 0x3fc)) {
-      temp_v2 = FUN_002a4860(temp_v0);
+      temp_v2 = resourceRunOperationIfUnblocked(temp_v0);
       temp_v0 = FUN_002a4894(temp_v0);
       if (*(short *)(temp_v1 + 0x8b60) == *(short *)(param_1 + (temp_v0 + temp_v2) * 2 + 0x8b70)) {
         temp_v0 = vec2GetXInt(param_1 + 0x2e0);

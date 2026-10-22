@@ -7,12 +7,12 @@ struct NaviMain {
     /* 0x68 */ u32 request;
 };
 extern NaviMain *g_naviMain;
-void FUN_0048ccdc(u32 *request);
+void uiSpriteGroupInitialize(u32 *request);
 
 void naviMainReleaseRequest(void)
 {
     if (g_naviMain != NULL) {
-        FUN_0048ccdc(&g_naviMain->request);
+        uiSpriteGroupInitialize(&g_naviMain->request);
     }
 }
 

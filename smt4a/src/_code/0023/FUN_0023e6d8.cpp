@@ -43,7 +43,7 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: playerGetWords. */
 /* Supplied declaration required: FUN_004c6c8c. */
-extern int FUN_004c6eb8(int, fn_0023e6d8_arg0 *, unsigned int);
+extern int mathApplyReductionMultiplier(int, fn_0023e6d8_arg0 *, unsigned int);
 
 
 int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
@@ -120,7 +120,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
       if ((temp_v0 & 0xfff) != 0) {
         if (temp_v4 != 0) {
           VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v5 = FUN_004c6eb8(temp_v12,pfVar7,0);
+          temp_v5 = mathApplyReductionMultiplier(temp_v12,pfVar7,0);
         }
         VectorUnsignedToFloat
                   (*(unsigned short *)((int)&param_1->field_0x38 + 2) & 0xffff0fff,
@@ -131,7 +131,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
         temp_v2 = temp_v5;
         if (temp_v4 != 0) {
           VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v2 = FUN_004c6eb8(temp_v12,pfVar7,0);
+          temp_v2 = mathApplyReductionMultiplier(temp_v12,pfVar7,0);
           temp_v0 = *(unsigned short *)((int)&param_1->field_0x38 + 2);
           if ((temp_v0 & 0xfff) != 0) {
             VectorUnsignedToFloat(temp_v0 & 0xffff0fff,(unsigned char)(in_fpscr >> 0x16) & 3);

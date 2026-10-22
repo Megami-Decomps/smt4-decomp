@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026eda8(...);
+int campCecResetScalarEffect(...);
 int campCecDisplaySetRecord(...);
 int FUN_002ebfbc(...);
 int FUN_0030a84c(...);
@@ -35,7 +35,7 @@ extern int g_campCecView; /* 0x43db10 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0026eda8. */
+/* Supplied declaration required: campCecResetScalarEffect. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
 extern int FUN_0026ee68(unsigned int);
 /* Supplied declaration required: uiDrawRecordNameLabels. */
@@ -600,7 +600,7 @@ LAB_001c1220:
       FUN_0026f784();
       if (temp_v7 != 0) {
         campCecDisplaySetRecord(*(unsigned int *)(temp_v1 + 8),temp_v17);
-        FUN_0026eda8(*(unsigned int *)(temp_v1 + 8));
+        campCecResetScalarEffect(*(unsigned int *)(temp_v1 + 8));
         linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);
         *(unsigned int *)(temp_v1 + 0x14c) = *(unsigned int *)(temp_v1 + 0x13c);
       }

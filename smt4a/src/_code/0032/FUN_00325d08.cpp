@@ -20,7 +20,7 @@ int FUN_0025ef68(...);
 int distSpatial(void);
 int FUN_002d1f40(...);
 int FUN_002e364c(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003fd7c0(...);
 int FUN_00408184(...);
 int SBORROW4(...);
@@ -103,7 +103,7 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
@@ -407,7 +407,7 @@ LAB_00326fcc:
         *(float *)(temp_v0 + 0x10a0) = temp_v13;
       }
       else if (*(float *)(temp_v0 + 0x15c0) < temp_v11) {
-        FUN_003d2150(0x10000d1);
+        sysPlayVoice(0x10000d1);
         temp_v3 = gameFlagIsSet(0x4c9);
         if ((temp_v3 == 0) || (temp_v3 = FUN_002e5db4(), temp_v3 != 0)) {
           *(unsigned int *)(g_lmapScene + 0x1d0) = 0xf;
@@ -510,7 +510,7 @@ LAB_00326fcc:
               if (*(int *)(g_lmapScene + 0x1d0) != 10) {
                 FUN_0014af98();
                 soundVolumeSettingSet();
-                FUN_003d2150(temp_v3 + 0x10002e2);
+                sysPlayVoice(temp_v3 + 0x10002e2);
                 soundVolumeSettingSet(temp_v4);
               }
             }
@@ -552,7 +552,7 @@ LAB_00326870:
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
               soundVolumeSettingSet();
-              FUN_003d2150(temp_v3 + 0x10002e0);
+              sysPlayVoice(temp_v3 + 0x10002e0);
               soundVolumeSettingSet(temp_v4);
             }
             goto LAB_00326870;
@@ -577,7 +577,7 @@ LAB_003267fc:
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
               soundVolumeSettingSet();
-              FUN_003d2150(temp_v3 + 0x10002de);
+              sysPlayVoice(temp_v3 + 0x10002de);
               soundVolumeSettingSet(temp_v4);
             }
           }
@@ -608,7 +608,7 @@ LAB_003268e4:
           if (*(int *)(g_lmapScene + 0x1d0) != 10) {
             FUN_0014af98();
             soundVolumeSettingSet();
-            FUN_003d2150(temp_v3 + 0x10002dc);
+            sysPlayVoice(temp_v3 + 0x10002dc);
             soundVolumeSettingSet(temp_v4);
           }
         }

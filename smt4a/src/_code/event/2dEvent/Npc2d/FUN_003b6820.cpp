@@ -6,7 +6,7 @@ extern "C" {
 
 int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(...);
-int FUN_00191e00(...);
+int aocLoadTextureNode(...);
 int dataTable19FindAddonWord(...);
 int asdTMTexLoadMainHeap(...);
 int FUN_00283498(...);
@@ -25,7 +25,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00191e00. */
+/* Supplied declaration required: aocLoadTextureNode. */
 /* Supplied declaration required: dataTable19FindAddonWord. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
@@ -106,7 +106,7 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
     puVar2[3] = 0;
     temp_v0 = aocRunByName(g_aocSystem,puVar2[0x10],puVar2[0x11],1);
     if (temp_v0 != 0) {
-      FUN_00191e00(g_aocSystem,puVar2[0x10],puVar2[0x11],0x10000);
+      aocLoadTextureNode(g_aocSystem,puVar2[0x10],puVar2[0x11],0x10000);
     }
     else {
       asdTMTexLoadMainHeap(puVar2[0x10],puVar2[0x11]);

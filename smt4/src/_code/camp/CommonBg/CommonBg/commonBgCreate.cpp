@@ -23,7 +23,7 @@ extern unsigned char LAB_002d7d1c; /* 0x2d7d1c */
 extern unsigned char LAB_002d7d2c; /* 0x2d7d2c */
 extern unsigned char LAB_002d7d64; /* 0x2d7d64 */
 extern unsigned char LAB_002d7d78; /* 0x2d7d78 */
-extern int FUN_002ed5dc(...); /* 0x2ed5dc */
+extern int commonBgDestroyJobWork(...); /* 0x2ed5dc */
 extern int FUN_002ed628(...); /* 0x2ed628 */
 extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 extern unsigned int *DAT_0043dc28; /* 0x43dc28 */
@@ -65,7 +65,7 @@ void commonBgCreate(void)
   asdTMTexTableLoadSprites(0x2d);
   FUN_002c58c8(0x2d,0);
   puVar3 = &LAB_002d7d64;
-  taskCreateDraw(&LAB_002d7d64,2,8,0,FUN_00221310,FUN_002ed5dc,puVar1,*DAT_0043dc24);
+  taskCreateDraw(&LAB_002d7d64,2,8,0,FUN_00221310,commonBgDestroyJobWork,puVar1,*DAT_0043dc24);
   *puVar1 = (unsigned int)puVar3;
   taskCreateDraw(&LAB_002d7d78,0xe7,8,0,FUN_002ed628,0,puVar1,puVar3);
   return;

@@ -35,7 +35,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: largeGridDrawButtonStrip. */
 /* Supplied declaration required: statDrawClampedDelta. */
@@ -78,7 +78,7 @@ void FUN_003cce74(int param_1,unsigned int param_2,int param_3,int param_4)
     ;
     FUN_001835b4(2,0x1a,0x1a0,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,0x83)
     ;
-    temp_v2 = FUN_00284140((int)*(short *)(param_1 + temp_v2 * 2 + 0x438));
+    temp_v2 = recordGetModeForId((int)*(short *)(param_1 + temp_v2 * 2 + 0x438));
     if ((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6) {
       temp_v6 = 0xf5ff9fff;
     }
@@ -108,7 +108,7 @@ void FUN_003cce74(int param_1,unsigned int param_2,int param_3,int param_4)
                  &LAB_003cd1b0,temp_v6);
   }
   else {
-    temp_v0 = FUN_00284140((int)*(short *)(param_1 + temp_v2 * 2 + 0x438));
+    temp_v0 = recordGetModeForId((int)*(short *)(param_1 + temp_v2 * 2 + 0x438));
     if ((temp_v0 == 1 || temp_v0 == 2) || temp_v0 == 6) {
       temp_v6 = 0xf5ff9fff;
     }

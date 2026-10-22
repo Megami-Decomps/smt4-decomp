@@ -16,8 +16,8 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_002a4844(char *);
-extern int FUN_002a4860(void);
+extern int resourceRunEmbeddedOperationIfUnblocked(char *);
+extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: recordTrackDirtyValue. */
 /* Supplied declaration required: FUN_002a48e0. */
 extern int flaggedEntryGetValueB(char *);
@@ -40,10 +40,10 @@ void FUN_004d0100(char *param_1)
   unsigned char temp_v7;
   
   if (*param_1 != '\x01') {
-    temp_v1 = FUN_002a4860();
+    temp_v1 = resourceRunOperationIfUnblocked();
   }
   else {
-    temp_v1 = FUN_002a4844(param_1 + 0x10);
+    temp_v1 = resourceRunEmbeddedOperationIfUnblocked(param_1 + 0x10);
   }
   if (*param_1 != '\x01') {
     temp_v2 = flaggedEntryGetValueA();

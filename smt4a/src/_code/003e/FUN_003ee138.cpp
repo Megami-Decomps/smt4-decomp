@@ -29,8 +29,8 @@ extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 
 extern unsigned int gameGetSlotTable(void);
-extern unsigned int FUN_001bce18(void);
-extern unsigned int FUN_00228ab0(int);
+extern unsigned int flagValueGetStorage(void);
+extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e9cec. */
 /* Supplied declaration required: FUN_004ca63c. */
@@ -68,7 +68,7 @@ void FUN_003ee138(int param_1)
     rt_memcpy_w(DAT_00573938,temp_v3,0x2d30);
   }
   if (DAT_0057393c != 0) {
-    temp_v3 = FUN_001bce18();
+    temp_v3 = flagValueGetStorage();
     rt_memcpy(DAT_0057393c,temp_v3,0x10b8);
   }
   piVar14 = (int *)(temp_v12 + 0x4e48);
@@ -91,7 +91,7 @@ void FUN_003ee138(int param_1)
     rt_memcpy_w(temp_v3,DAT_0057392c,0x2d30);
   }
   if (DAT_00573930 != 0) {
-    temp_v3 = FUN_001bce18();
+    temp_v3 = flagValueGetStorage();
     rt_memcpy(temp_v3,DAT_00573930,0x10b8);
   }
   temp_v4 = *piVar14;
@@ -151,7 +151,7 @@ LAB_003ee510:
           temp_v4 = 0;
           do {
             if (-1 < *(char *)(DAT_0057392c + temp_v4 + 0x1ca0)) {
-              temp_v3 = FUN_00228ab0(temp_v4);
+              temp_v3 = gameGetSaveSlotData(temp_v4);
               FUN_003e9cec(temp_v12,temp_v11,temp_v3,0);
               FUN_004ca63c(temp_v12,temp_v11,0,temp_v4 + 1,0);
             }

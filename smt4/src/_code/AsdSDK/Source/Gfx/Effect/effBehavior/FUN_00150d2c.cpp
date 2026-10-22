@@ -19,12 +19,12 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_00150f34. */
-extern int FUN_00152394(int, unsigned int, unsigned int *);
+extern int soundArchiveReadWaveArchiveInfo(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002a78c0. */
 /* Supplied declaration required: FUN_002a7ac4. */
 extern unsigned int FUN_002ac780(int);
 extern int FUN_002c3984(void);
-extern unsigned int FUN_002c3994(void);
+extern unsigned int nnosGetHeapBase(void);
 extern unsigned int nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(unsigned char *);
 extern unsigned int nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(unsigned char *);
 
@@ -54,7 +54,7 @@ unsigned int FUN_00150d2c(int *param_1,unsigned int param_2,int *param_3,unsigne
   if (temp_v2 == 0) {
     temp_v8 = 0xffffffff;
     temp_v10 = 0;
-    temp_v3 = FUN_00152394(param_1[1],param_2,(unsigned int *)&temp_v8);
+    temp_v3 = soundArchiveReadWaveArchiveInfo(param_1[1],param_2,(unsigned int *)&temp_v8);
     temp_v0 = temp_v9;
     temp_v2 = 0;
     if ((temp_v3 != 0) && (temp_v2 = 0, temp_v9 != 0)) {
@@ -67,7 +67,7 @@ unsigned int FUN_00150d2c(int *param_1,unsigned int param_2,int *param_3,unsigne
         piVar6 = (int *)nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlockOffset(temp_v11);
         if (piVar6 <= piVar5) {
           temp_v2 = (**(romwright_code **)(*param_3 + 8))(param_3,piVar5 + temp_v0 + 1);
-          temp_v4 = FUN_002c3994();
+          temp_v4 = nnosGetHeapBase();
           temp_v3 = FUN_002c3984();
           temp_v7 = temp_v2 <= temp_v4;
           temp_v6 = temp_v4 == temp_v2;

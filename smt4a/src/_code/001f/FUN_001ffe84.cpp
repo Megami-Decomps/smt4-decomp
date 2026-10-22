@@ -7,7 +7,7 @@ extern "C" {
 int ifTouchRegionRemove(void);
 int sysPlaySe(...);
 int FUN_0019de98(...);
-int FUN_002277d8(void);
+int campResetScreen(void);
 int FUN_00228b04(...);
 int FUN_002b5c88(void);
 int buttonHelpScriptStart(...);
@@ -21,7 +21,7 @@ int FUN_003da8f4(...);
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int gameGetSlotRecord(void);
-int FUN_0020b660(...);
+int campChangeState(...);
 int FUN_0020d700(void);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
@@ -59,10 +59,10 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: gameGetSlotRecord. */
-/* Supplied declaration required: FUN_0020b660. */
+/* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0021b274. */
-/* Supplied declaration required: FUN_002277d8. */
+/* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0022a030(int, int);
 extern int FUN_0022e714(void);
@@ -71,7 +71,7 @@ extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_002684d0(int, int);
 /* Supplied declaration required: FUN_0028b088. */
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
@@ -124,7 +124,7 @@ void FUN_001ffe84(void)
     if (temp_v4 == 0) {
       return;
     }
-    temp_v4 = FUN_002a4860(g_camp + 0x1ec);
+    temp_v4 = resourceRunOperationIfUnblocked(g_camp + 0x1ec);
     temp_v5 = FUN_002a4894(temp_v3 + 0x1ec);
     temp_v3 = temp_v3 + (temp_v5 + temp_v4) * 8;
     if (*(int *)(temp_v3 + 0x1b74) < 0) {
@@ -135,7 +135,7 @@ void FUN_001ffe84(void)
       temp_v3 = FUN_004bcbb4(temp_v7,*(unsigned int *)(temp_v3 + 0x1b70));
     }
     FUN_003344b4(0,-temp_v3);
-    temp_v3 = FUN_002a4860(temp_v8 + 0x1ec);
+    temp_v3 = resourceRunOperationIfUnblocked(temp_v8 + 0x1ec);
     temp_v4 = FUN_002a4894(temp_v8 + 0x1ec);
     if (g_camp != 0) {
       *(int *)(g_camp + 0xbc) = temp_v3 + temp_v4;
@@ -160,7 +160,7 @@ void FUN_001ffe84(void)
     FUN_0028b088(0);
     FUN_0021b274(3,0xffffffff,0);
     *(unsigned int *)(temp_v8 + 0x24) = 6;
-    FUN_0020b660(5);
+    campChangeState(5);
     if (*(char *)(temp_v8 + 0x32a8) != '\0') {
       *(unsigned char *)(temp_v8 + 0xa4) = 1;
       FUN_0020d700();
@@ -170,7 +170,7 @@ void FUN_001ffe84(void)
     return;
   }
   FUN_003d386c(0);
-  temp_v3 = FUN_002a4860(temp_v8 + 0x1ec);
+  temp_v3 = resourceRunOperationIfUnblocked(temp_v8 + 0x1ec);
   temp_v4 = FUN_002a4894(temp_v8 + 0x1ec);
   temp_v3 = temp_v3 + temp_v4;
   temp_v0 = 0;
@@ -192,7 +192,7 @@ void FUN_001ffe84(void)
     temp_v5 = FUN_0022e714();
     temp_v4 = g_camp;
     if (temp_v5 == 0) {
-      temp_v5 = FUN_002a4860(g_camp + 0x1ec);
+      temp_v5 = resourceRunOperationIfUnblocked(g_camp + 0x1ec);
       temp_v6 = FUN_002a4894(temp_v4 + 0x1ec);
       temp_v4 = temp_v4 + (temp_v6 + temp_v5) * 8;
       if (*(int *)(temp_v4 + 0x1b74) < 0) {
@@ -239,14 +239,14 @@ void FUN_001ffe84(void)
         temp_v3 = FUN_0035db94();
         if (temp_v3 < 1) {
           *(unsigned int *)(temp_v8 + 0x24) = 0x18;
-          FUN_0020b660(5);
+          campChangeState(5);
           return;
         }
         temp_v7 = 3;
       }
       FUN_0021b274(temp_v7,0xffffffff,0);
       *(unsigned int *)(temp_v8 + 0x24) = 0x18;
-      FUN_0020b660(5);
+      campChangeState(5);
       return;
     }
   }
@@ -328,7 +328,7 @@ void FUN_001ffe84(void)
         }
         eventQueueAddUniqueIfValid(0x100021c);
         buttonHelpScriptStart(0);
-        FUN_0020b660(0x47);
+        campChangeState(0x47);
         sysPlaySe(0xa0);
         FUN_003343f0(1);
         return;
@@ -361,7 +361,7 @@ void FUN_001ffe84(void)
         }
         eventQueueAddUniqueIfValid(0x100021c);
         buttonHelpScriptStart(4);
-        FUN_0020b660(0x47);
+        campChangeState(0x47);
         sysPlaySe(0xa0);
         FUN_003343f0(1);
         return;
@@ -371,7 +371,7 @@ void FUN_001ffe84(void)
       FUN_0023b45c(0);
       FUN_0035dbd4(0);
       *(unsigned int *)(temp_v8 + 0x24) = 0x12;
-      FUN_0020b660(5);
+      campChangeState(5);
     }
     else {
       temp_v7 = 0x100020f;
@@ -395,7 +395,7 @@ void FUN_001ffe84(void)
           FUN_0019de98(0,0xf4f4f4ff);
           temp_v2 = ifTouchGetButtonHelpValue();
           *(unsigned short *)(temp_v8 + 0x3a) = temp_v2;
-          FUN_0020b660(0x2b);
+          campChangeState(0x2b);
           eventQueueAddUniqueIfValid(temp_v7);
           return;
         }
@@ -414,8 +414,8 @@ void FUN_001ffe84(void)
     FUN_0028b088(0);
     FUN_0021b274(3,0xffffffff,0);
     *(unsigned int *)(temp_v8 + 0x24) = 6;
-    FUN_0020b660(5);
-    FUN_002277d8();
+    campChangeState(5);
+    campResetScreen();
     temp_v7 = 0x100020f;
   }
   eventQueueAddUniqueIfValid(temp_v7);

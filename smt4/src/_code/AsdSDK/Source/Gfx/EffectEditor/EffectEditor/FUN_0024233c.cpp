@@ -14,7 +14,7 @@ int FUN_0024dd90(unsigned int *);
 int effBlockCreateFromBlock(void);
 int effectEditorApplyHandlerState(void);
 int effBlockSetBlobB(unsigned int, unsigned int [2], int);
-int FUN_002629a8(...);
+int resourceQueueDeferredDestroy(...);
 int registrationEntryInsert(...);
 int FUN_002a3d58(...);
 int textFormatBuffer(int, unsigned char *, unsigned int);
@@ -81,7 +81,7 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: effBlockSetBlobB. */
-/* Supplied declaration required: FUN_002629a8. */
+/* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: FUN_002a3d58. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -256,7 +256,7 @@ LAB_002424b8:
           asdMemFree(temp_v0);
           return puVar9;
         }
-        FUN_002629a8(DAT_0044eaa0,3);
+        resourceQueueDeferredDestroy(DAT_0044eaa0,3);
         DAT_0044eaa0 = 0;
       }
       param_2 = param_2 + temp_v6 * 0x1c;
@@ -273,12 +273,12 @@ LAB_002424b8:
         temp_v6 = temp_v5;
         effBlockCreateFromBlock();
         DAT_0044eaa0 = temp_v6;
-        FUN_002629a8(temp_v5,3);
+        resourceQueueDeferredDestroy(temp_v5,3);
       }
     }
   }
   else if (DAT_0044eaa0 != 0) {
-    FUN_002629a8(DAT_0044eaa0,3);
+    resourceQueueDeferredDestroy(DAT_0044eaa0,3);
     DAT_0044eaa0 = 0;
   }
   asdMemFree(temp_v0);

@@ -8,7 +8,7 @@ int asdMemoryAlloc(...);
 int FUN_00168fbc(int, int, int);
 int asdTextureCreate(void);
 int asdMemoryAllocAligned(...);
-int FUN_001bc2ec(void);
+int asdGxGetPhysicalAddress(void);
 
 /* stack frame of param_7: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00168fbc. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_001bc2ec. */
+/* Supplied declaration required: asdGxGetPhysicalAddress. */
 
 
 int * FUN_00341224(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
@@ -143,11 +143,11 @@ LAB_00341340:
     asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[2] = temp_v4;
-  temp_v2 = FUN_001bc2ec();
+  temp_v2 = asdGxGetPhysicalAddress();
   piVar2[3] = temp_v2;
   piVar2[5] = temp_v6;
   piVar1[2] = piVar2[2];
-  temp_v3 = FUN_001bc2ec();
+  temp_v3 = asdGxGetPhysicalAddress();
   temp_v6 = 0;
   *(unsigned int *)(piVar1[3] + 0x30) = temp_v3;
   temp_v4 = 0;
@@ -181,7 +181,7 @@ LAB_00341340:
     if (param_7 != 0x20000) {
       if (param_7 != 0x30000) {
         piVar2[8] = temp_v0;
-        temp_v0 = FUN_001bc2ec();
+        temp_v0 = asdGxGetPhysicalAddress();
         piVar2[9] = temp_v0;
         piVar2[0xb] = temp_v6;
         piVar1[1] = (int)(piVar2 + 6);
@@ -200,7 +200,7 @@ LAB_00341340:
     asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[8] = temp_v0;
-  temp_v0 = FUN_001bc2ec();
+  temp_v0 = asdGxGetPhysicalAddress();
   piVar2[9] = temp_v0;
   piVar2[0xb] = temp_v6;
   piVar1[1] = (int)(piVar2 + 6);

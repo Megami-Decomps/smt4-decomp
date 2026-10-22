@@ -9,7 +9,7 @@ int dataTable04FindById(void);
 int gameDataCopySaveEntry(int, unsigned short *);
 int FUN_002854d8(int, int);
 int FUN_002a6894(unsigned short *);
-int FUN_002c7a5c(int, int);
+int gameItemSetFlag(int, int);
 int sysMemClear(unsigned short *, int);
 int FUN_0031f190(int, int);
 int FUN_004bcd90(unsigned short *);
@@ -53,7 +53,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: FUN_002854d8. */
 /* Supplied declaration required: FUN_002a6894. */
-/* Supplied declaration required: FUN_002c7a5c. */
+/* Supplied declaration required: gameItemSetFlag. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f190. */
 /* Supplied declaration required: FUN_004bcd90. */
@@ -112,7 +112,7 @@ void FUN_002305d0(unsigned short *param_1,unsigned char param_2,unsigned short p
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x18);
-    FUN_002c7a5c(param_3,1);
+    gameItemSetFlag(param_3,1);
     FUN_002854d8(param_3,1);
   }
   temp_v2 = (unsigned int)param_3;

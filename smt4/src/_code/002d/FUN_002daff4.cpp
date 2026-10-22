@@ -47,7 +47,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_0028f694. */
 extern unsigned int FUN_0028fb40(int);
-extern int FUN_002995d8(int);
+extern int recordAcceptsStickDirection(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -105,7 +105,7 @@ void FUN_002daff4(int param_1,int param_2,int param_3,int param_4,int param_5)
   FUN_002be650(temp_v13,0);
   if (temp_v6 != 0) {
     temp_v11 = 0xffffffff;
-    temp_v5 = FUN_002995d8(temp_v13);
+    temp_v5 = recordAcceptsStickDirection(temp_v13);
     if (temp_v5 == 0) {
       temp_v11 = 0x5a5a5aff;
     }

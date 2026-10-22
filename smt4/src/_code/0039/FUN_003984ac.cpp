@@ -50,7 +50,7 @@ extern unsigned int *gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern unsigned int *FUN_002bd1fc(void);
+extern unsigned int *gameGetPlayerName(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -112,7 +112,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0xac) = 0;
   param_1[0x944] = 0;
   if (param_1[0x649] == '\0' || param_1[0x649] == -1) {
-    puVar1 = (unsigned int *)FUN_002bd1fc();
+    puVar1 = (unsigned int *)gameGetPlayerName();
     *(unsigned int *)(param_1 + 0xb0) = *puVar1;
     *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
     *(unsigned int *)(param_1 + 0xb8) = puVar1[2];

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001bc2ec(...);
+int asdGxGetPhysicalAddress(...);
 int vramAreaGetBaseAddress(int);
 
 extern unsigned char DAT_005448d8; /* 0x5448d8 */
 extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 
-/* Supplied declaration required: FUN_001bc2ec. */
+/* Supplied declaration required: asdGxGetPhysicalAddress. */
 /* Supplied declaration required: vramAreaGetBaseAddress. */
 
 
@@ -36,7 +36,7 @@ unsigned int FUN_001cb4c8(int param_1,int *param_2,int param_3)
     puVar4 = g_commandBufferCursor;
   }
   vramAreaGetBaseAddress(0x20000);
-  temp_v0 = FUN_001bc2ec();
+  temp_v0 = asdGxGetPhysicalAddress();
   temp_v1 = param_2[8];
   if (temp_v1 == 0) {
     if (param_2[3] != 0) {
@@ -46,7 +46,7 @@ unsigned int FUN_001cb4c8(int param_1,int *param_2,int param_3)
       temp_v1 = 0;
     }
   }
-  temp_v1 = FUN_001bc2ec(temp_v1);
+  temp_v1 = asdGxGetPhysicalAddress(temp_v1);
   *puVar4 = temp_v1 - temp_v0;
   puVar4[1] = 0xf0227;
   temp_v2 = param_2[2];

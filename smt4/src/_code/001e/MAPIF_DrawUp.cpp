@@ -20,7 +20,7 @@ extern GameStateView g_gameState;
 
 s32 FUN_001fb5c4(void);
 s32 FUN_001f9ce0(void);
-s32 FUN_002fb114(s32 counter);
+s32 effectDrawExpandingPanels(s32 counter);
 
 /* Draws the map interface for the upper screen and advances its frame counter while counting. */
 u32 MAPIF_DrawUp(void)
@@ -36,7 +36,7 @@ u32 MAPIF_DrawUp(void)
         }
         if (mapIf->counting != 0) {
             counter = &mapIf->counter;
-            FUN_002fb114(*counter);
+            effectDrawExpandingPanels(*counter);
             *counter = *counter + 1;
         }
     }

@@ -18,7 +18,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern unsigned int FUN_00184df8(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 
 
 void FUN_0013c00c(int param_1)
@@ -57,7 +57,7 @@ void FUN_0013c00c(int param_1)
     FUN_0016c4b8(g_renderCtx,0);
     temp_v2 = asdGxPresetsGetByKind(*(unsigned int *)(g_renderCtx + 0x52c));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = FUN_00184df8(*(unsigned int *)(g_renderCtx + 0x52c));
+    temp_v2 = asdGxPresetsGetHeightByKind(*(unsigned int *)(g_renderCtx + 0x52c));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_0014e314((temp_v3 & 0xffffff00) | temp_v7);
     temp_v0 = g_renderCtx;

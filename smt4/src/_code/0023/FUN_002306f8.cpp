@@ -8,7 +8,7 @@ int aocRecordLookup84(void);
 int FUN_00250d84(int, int);
 int FUN_00295a18(void);
 int FUN_00295c04(int);
-int FUN_0029be5c(int, int);
+int gameCounterAddSaturating(int, int);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_00295c04. */
 extern int FUN_002973ec(void);
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 extern unsigned int aocEntryGetKind(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -79,10 +79,10 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
         temp_v2 = temp_v2 * -param_2;
         FUN_00295c04(temp_v2);
         if (-1 < temp_v2) {
-          FUN_0029be5c(0x1f,temp_v2);
+          gameCounterAddSaturating(0x1f,temp_v2);
           return;
         }
-        FUN_0029be5c(0x1e,-temp_v2);
+        gameCounterAddSaturating(0x1e,-temp_v2);
         return;
       }
     }
@@ -123,10 +123,10 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
         temp_v2 = -temp_v2 * param_2;
         FUN_00295c04(temp_v2);
         if (-1 < temp_v2) {
-          FUN_0029be5c(0x1f,temp_v2);
+          gameCounterAddSaturating(0x1f,temp_v2);
           return;
         }
-        FUN_0029be5c(0x1e,-temp_v2);
+        gameCounterAddSaturating(0x1e,-temp_v2);
         return;
       }
     }

@@ -48,7 +48,7 @@ extern int gameGetUnitRecord(int);
 extern unsigned int *gameGetSlotTable(void);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 extern int gameGetPlayerData(void);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: libc_strcpy. */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(unsigned int);
@@ -96,7 +96,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
       puVar10 = (unsigned short *)(temp_v2 + param_2 * 0x74);
       puVar5 = (unsigned int *)gameGetSlotTable();
       temp_v3 = 0;
-      temp_v9 = FUN_002bd1fc();
+      temp_v9 = gameGetPlayerName();
       libc_strcpy(temp_v17,temp_v9);
       temp_v10 = puVar10[4];
       temp_v11 = puVar10[5];

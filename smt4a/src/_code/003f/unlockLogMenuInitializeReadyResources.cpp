@@ -48,7 +48,7 @@ UnlockLogScript *FUN_00275bc8(void *flow, u32 screen);
 void FUN_003f5bd8(UnlockLogWork *work, s32 count);
 void FUN_00203b40(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 enabled, s32 colors);
 s32 FUN_001643b4(u32 group, u32 index);
-void FUN_003f5268(UnlockLogWork *work, u32 state, u32 argument);
+void dialogEnterState(UnlockLogWork *work, u32 state, u32 argument);
 
 void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
 {
@@ -79,6 +79,6 @@ void unlockLogMenuInitializeReadyResources(UnlockLogWork *work)
     work->buttons[1] = FUN_001643b4(0x31, 0xaa);
     work->buttons[2] = FUN_001643b4(0x31, 0xab);
     work->regionCount += 3;
-    FUN_003f5268(work, 2, 3);
+    dialogEnterState(work, 2, 3);
 }
 }

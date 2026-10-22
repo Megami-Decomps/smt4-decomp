@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by jobDispatchOptionalOwner; not written yet. */
+/* NON_MATCHING: optional-owner job state machine restores roster flags and drives a scripted selection prompt; owner records, prompt objects, and callback result types remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_003d8f60 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_003d8f60(unsigned int *param_1,int param_2)

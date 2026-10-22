@@ -66,7 +66,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
@@ -354,7 +354,7 @@ LAB_004b07c8:
         textFormatBuffer(temp_v31,&LAB_004b0b24,temp_v8);
       }
       else {
-        temp_v8 = FUN_0015687c();
+        temp_v8 = gameGetPlayerName();
         textFormatBuffer(temp_v31,&LAB_004b0b24,temp_v8);
       }
       temp_v16 = temp_v27[temp_v4];

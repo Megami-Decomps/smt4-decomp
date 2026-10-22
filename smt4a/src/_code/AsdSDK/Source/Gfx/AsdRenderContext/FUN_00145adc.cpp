@@ -40,7 +40,7 @@ extern unsigned int FUN_00157acc(void);
 /* Supplied declaration required: FUN_001642e4. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_00178b04. */
-extern unsigned int FUN_00184df8(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 /* Supplied declaration required: FUN_0018a9bc. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
 
@@ -92,14 +92,14 @@ void FUN_00145adc(int param_1)
   pcVar2 = "DefaultTextureVS.shbin";
   FUN_001642e4("DefaultTextureVS.shbin",&temp_v6,1,0x80);
   FUN_001579dc(*(unsigned int *)(param_1 + 0x530),pcVar2,temp_v6,0);
-  temp_v0 = FUN_00184df8(0);
+  temp_v0 = asdGxPresetsGetHeightByKind(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = asdGxPresetsGetByKind(0);
   temp_v5 = 0;
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_0015a050();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x5fc,1);
-  temp_v0 = FUN_00184df8(2);
+  temp_v0 = asdGxPresetsGetHeightByKind(2);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = asdGxPresetsGetByKind(2);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

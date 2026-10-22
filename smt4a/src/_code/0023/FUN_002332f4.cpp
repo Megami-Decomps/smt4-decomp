@@ -6,7 +6,7 @@ extern "C" {
 
 int ptrListRemoveClearOwner(...);
 int FUN_00245f70(int);
-void FUN_002749c8(int id);
+void mapIfClearMatchingRecord(int id);
 int FUN_00274a30(void);
 int FUN_002941c8(...);
 int FUN_002d1f40(int, int, int);
@@ -308,7 +308,7 @@ unsigned int FUN_002332f4(void)
               *(unsigned int *)(temp_v5 + 0x60) = 2;
               *(unsigned int *)(temp_v5 + 100) = 0;
               FUN_00398078(*(unsigned int *)(temp_v5 + 0x80));
-              FUN_002749c8(*(unsigned int *)(temp_v5 + 0x80));
+              mapIfClearMatchingRecord(*(unsigned int *)(temp_v5 + 0x80));
               if (*(int *)(temp_v5 + 0xa8) != 0) {
                 *(short *)(temp_v24 + 0x22) = (short)*(int *)(temp_v5 + 0xa8);
                 FUN_002b63d0();

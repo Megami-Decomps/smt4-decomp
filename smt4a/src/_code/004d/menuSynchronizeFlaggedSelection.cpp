@@ -23,9 +23,9 @@ struct FlaggedMenuList {
 };
 
 extern "C" {
-s32 FUN_00284140(s16 id);
-s32 FUN_002a4844(FlaggedEntry *entry);
-s32 FUN_002a4860(FlaggedEntry *entry);
+s32 recordGetModeForId(s16 id);
+s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
+s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
 u32 flaggedEntryGetValueA(FlaggedEntry *entry);
 u32 flaggedEntryGetValueB(FlaggedEntry *entry);
 void FUN_002a48e0(FlaggedEntry *entry, u32 value);
@@ -41,7 +41,7 @@ void menuSynchronizeFlaggedSelection(MenuSelectionScan *scan, FlaggedMenuList *l
         scan->selectable = 0;
         scan->blocked = 0;
         for (s32 i = 0; i < scan->count; ++i) {
-            s32 state = FUN_00284140(scan->ids[i]);
+            s32 state = recordGetModeForId(scan->ids[i]);
             if (state == 1 || state == 2) {
                 scan->selectable = 1;
                 scan->selected = i;
@@ -55,13 +55,13 @@ void menuSynchronizeFlaggedSelection(MenuSelectionScan *scan, FlaggedMenuList *l
     }
     if (scan->selectable != 0) {
         s32 selected = scan->selected;
-        s32 offset = list->mode == 1 ? FUN_002a4844(&list->entry) : FUN_002a4860(&list->entry);
+        s32 offset = list->mode == 1 ? resourceRunEmbeddedOperationIfUnblocked(&list->entry) : resourceRunOperationIfUnblocked(&list->entry);
         if (offset + selected < list->count) {
             s32 current = list->mode == 1 ? flaggedEntryGetValueB(&list->entry) : flaggedEntryGetValueA(&list->entry);
             if (scan->playSound != 0 && current != selected) {
                 eventQueueAddUnique(0x100020d);
             }
-            offset = list->mode == 1 ? FUN_002a4844(&list->entry) : FUN_002a4860(&list->entry);
+            offset = list->mode == 1 ? resourceRunEmbeddedOperationIfUnblocked(&list->entry) : resourceRunOperationIfUnblocked(&list->entry);
             if (list->mode == 0) {
                 FUN_002a48e0(&list->entry, offset);
                 flaggedEntrySetValueA(&list->entry, selected);

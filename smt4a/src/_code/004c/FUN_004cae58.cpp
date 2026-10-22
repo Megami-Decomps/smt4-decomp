@@ -10,7 +10,7 @@ int FUN_003f2638(...);
 int callOnHandleField4A(...);
 int FUN_004d8668(...);
 int FUN_004d86a0(...);
-int FUN_004d86c0(...);
+int asdModelStartReferencedAnimation(...);
 int targetStartIndexWithFlag2(...);
 int FUN_004d888c(...);
 int obj4FStartSwitch(...);
@@ -59,7 +59,7 @@ extern unsigned long long FUN_003eca48(fn_004cae58_arg0 *, unsigned short);
 extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: FUN_004d8668. */
 /* Supplied declaration required: FUN_004d86a0. */
-/* Supplied declaration required: FUN_004d86c0. */
+/* Supplied declaration required: asdModelStartReferencedAnimation. */
 /* Supplied declaration required: targetStartIndexWithFlag2. */
 extern int handleOwnerIsActive(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
@@ -193,7 +193,7 @@ LAB_004cb0b4:
       if (temp_v6 != temp_v3) {
         FUN_004d888c(*(unsigned int *)(param_2 + 0x1bc));
         if ((*(unsigned int *)(temp_v8 + 0x10) & 1) != 0) {
-          FUN_004d86c0(*(unsigned int *)(param_2 + 0x1bc),(*(unsigned int *)(temp_v8 + 0x10) & 0x7ff) >> 1);
+          asdModelStartReferencedAnimation(*(unsigned int *)(param_2 + 0x1bc),(*(unsigned int *)(temp_v8 + 0x10) & 0x7ff) >> 1);
         }
         if ((*(unsigned int *)(temp_v8 + 0x10) & 0x800) != 0) {
           targetStartIndexWithFlag2(*(unsigned int *)(param_2 + 0x1bc),(*(unsigned int *)(temp_v8 + 0x10) & 0x3fffff) >> 0xc)

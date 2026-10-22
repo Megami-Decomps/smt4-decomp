@@ -9,7 +9,7 @@ int FUN_00422ef8(void);
 int FUN_00426140(void);
 int FUN_00512e38(void);
 int valuePairClear(void);
-int FUN_00513620(void);
+int videoResetDeblockerState(void);
 int FUN_00513718(void);
 int mobiclipAllocatorReset(void);
 int FUN_00513f6c(void);
@@ -37,7 +37,7 @@ extern unsigned int DAT_00617e30; /* 0x617e30 */
 /* Supplied declaration required: FUN_00426140. */
 /* Supplied declaration required: FUN_00512e38. */
 /* Supplied declaration required: valuePairClear. */
-/* Supplied declaration required: FUN_00513620. */
+/* Supplied declaration required: videoResetDeblockerState. */
 /* Supplied declaration required: FUN_00513718. */
 /* Supplied declaration required: mobiclipAllocatorReset. */
 /* Supplied declaration required: FUN_00513f6c. */
@@ -57,7 +57,7 @@ void FUN_001f51ac(void)
   FUN_00512e38();
   FUN_00513718();
   mobiclipAllocatorReset();
-  FUN_00513620();
+  videoResetDeblockerState();
   temp_v0 = DAT_00617c78;
   nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617c48);
   asdMemFree(temp_v0);

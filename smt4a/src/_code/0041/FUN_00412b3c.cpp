@@ -36,7 +36,7 @@ typedef struct {
     unsigned char sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int FUN_001bc2ec(unsigned int);
+extern unsigned int asdGxGetPhysicalAddress(unsigned int);
 /* Supplied declaration required: FUN_0042c7c8. */
 
 
@@ -78,22 +78,22 @@ void FUN_00412b3c(fn_00412b3c_arg0 *param_1,unsigned int param_2)
   temp_v5 = 0;
   if ((param_1->field_0x4 & 1) != 0) {
     temp_v13 = 0;
-    temp_v0 = FUN_001bc2ec(param_1->field_0x30);
+    temp_v0 = asdGxGetPhysicalAddress(param_1->field_0x30);
     FUN_0042c7c8(param_2,&temp_v11,temp_v0,0xb);
   }
   if ((param_1->field_0x4 & 2) != 0) {
     temp_v3 = 1;
-    temp_v0 = FUN_001bc2ec(param_1->field_0x34);
+    temp_v0 = asdGxGetPhysicalAddress(param_1->field_0x34);
     FUN_0042c7c8(param_2,&temp_v1,temp_v0,0xf);
   }
   if ((param_1->field_0x4 & 0x20) != 0) {
     temp_v3 = 1;
-    temp_v0 = FUN_001bc2ec(param_1->field_0x38);
+    temp_v0 = asdGxGetPhysicalAddress(param_1->field_0x38);
     FUN_0042c7c8(param_2,&temp_v1,temp_v0,0xd);
   }
   if ((param_1->field_0x4 & 4) != 0) {
     temp_v8 = 2;
-    temp_v0 = FUN_001bc2ec(param_1->field_0x3c);
+    temp_v0 = asdGxGetPhysicalAddress(param_1->field_0x3c);
     FUN_0042c7c8(param_2,&temp_v6,temp_v0,7);
   }
   return;

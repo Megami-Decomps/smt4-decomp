@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e31ba(unsigned int, int *, int *, int);
-int FUN_002e31e0(int, int *);
+int libcFormatAppendByte(int, int *);
 
 /* Supplied declaration required: FUN_002e31ba. */
-/* Supplied declaration required: FUN_002e31e0. */
+/* Supplied declaration required: libcFormatAppendByte. */
 
 
 unsigned int libc_sprintf(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -25,7 +25,7 @@ unsigned int libc_sprintf(unsigned int param_1,unsigned int param_2,unsigned int
   uStack_8 = param_3;
   uStack_4 = param_4;
   FUN_002e31ba(param_2,&uStack_20,&uStack_8,0x2e31e1);
-  FUN_002e31e0(0,&uStack_20);
+  libcFormatAppendByte(0,&uStack_20);
                     /* WARNING: Treating indirect jump as return */
   return param_2;
 }

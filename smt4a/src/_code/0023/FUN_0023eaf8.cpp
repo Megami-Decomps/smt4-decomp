@@ -21,7 +21,7 @@ int uiSpriteSetImageKeyframe(...);
 int asdMemFree(void);
 int FUN_00228b04(int, int);
 int FUN_0023ff10(void);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_002ae320(void);
 int FUN_003450d4(int, unsigned int, int, int, int, int, char [8], int, int);
 int FUN_003d474c(void);
@@ -57,7 +57,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0023ff10. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ae320. */
 extern int objectApplyIfUnblocked(int);
@@ -126,7 +126,7 @@ void FUN_0023eaf8(void)
     }
   }
   else {
-    temp_v3 = FUN_002a4860(temp_v11);
+    temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
     temp_v4 = FUN_002a4894(temp_v11);
     temp_v1 = *(short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
     temp_v15[0] = '\0';
@@ -135,10 +135,10 @@ void FUN_0023eaf8(void)
     FUN_003450d4(temp_v11,temp_v5,temp_v2 + 0xd28,(int)*(short *)(temp_v2 + 0xd42),
                  (int)*(short *)(temp_v2 + 0xd3e),(int)*(short *)(temp_v2 + 0xd40),temp_v15,0,1);
     if (temp_v3 != 0) {
-      temp_v3 = FUN_002a4860(temp_v11);
+      temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v4 = FUN_002a4894(temp_v11);
       if (*(short *)(temp_v8 + (temp_v4 + temp_v3) * 2) != temp_v1) {
-        temp_v3 = FUN_002a4860(temp_v11);
+        temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
         temp_v4 = FUN_002a4894(temp_v11);
         temp_v9 = *(unsigned short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
         temp_v10 = (unsigned int)temp_v9;
@@ -191,7 +191,7 @@ void FUN_0023eaf8(void)
       temp_v3 = temp_v11;
       FUN_00228b04(temp_v11,1);
       if (temp_v3 != 0) {
-        temp_v3 = FUN_002a4860(temp_v11);
+        temp_v3 = resourceRunOperationIfUnblocked(temp_v11);
         temp_v4 = FUN_002a4894(temp_v11);
         temp_v9 = *(unsigned short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
         temp_v10 = (unsigned int)temp_v9;
@@ -317,7 +317,7 @@ LAB_0023f080:
                 temp_v3 = 0;
                 FUN_001517b4(0,1);
                 if (temp_v3 != 0 || temp_v15[0] != '\0') {
-                  temp_v4 = FUN_002a4860(temp_v11);
+                  temp_v4 = resourceRunOperationIfUnblocked(temp_v11);
                   temp_v7 = FUN_002a4894(temp_v11);
                   temp_v3 = g_uiQuest;
                   temp_v10 = (unsigned int)*(unsigned short *)(temp_v8 + (temp_v7 + temp_v4) * 2);
@@ -432,11 +432,11 @@ LAB_0023f21c:
 LAB_0023f2a8:
     temp_v14 = *(char *)(temp_v2 + 0x90c) == '\0';
     if (!temp_v14) {
-      temp_v12 = FUN_002a4860(temp_v11);
+      temp_v12 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
     else {
-      temp_v12 = FUN_002a4860(temp_v11);
+      temp_v12 = resourceRunOperationIfUnblocked(temp_v11);
       temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
     slotBlockSetPair(temp_v14,temp_v5,temp_v12);

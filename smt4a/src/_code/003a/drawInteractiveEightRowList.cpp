@@ -12,7 +12,7 @@ struct EightRowListDraw {
     u8 headerOverride;
 };
 extern "C" {
-s32 FUN_002a4860(FlaggedEntry *);
+s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
 s32 FUN_002a4894(FlaggedEntry *);
 void FUN_003b6250(s32, s32, f32);
 void uiDrawLayeredSpriteEffect(s32, s32, f32);
@@ -22,8 +22,8 @@ void efctSetSpeed(f32);
 
 void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interactive, s32 x, s32 y, f32 scale)
 {
-    FUN_002a4860(&work->grid);
-    s32 base = FUN_002a4860(&work->grid);
+    resourceRunOperationIfUnblocked(&work->grid);
+    s32 base = resourceRunOperationIfUnblocked(&work->grid);
     s32 selected = FUN_002a4894(&work->grid);
     bool headerSelected = false;
     if (interactive && (base + selected >= work->selectionLimit || work->headerOverride)) {
@@ -33,7 +33,7 @@ void drawInteractiveEightRowList(EightRowListDraw *work, u32 style, s32 interact
         uiDrawLayeredSpriteEffect(x, y, scale);
     }
     for (s32 row = 0; row < 8; ++row) {
-        bool valid = FUN_002a4860(&work->grid) + row < work->entryCount;
+        bool valid = resourceRunOperationIfUnblocked(&work->grid) + row < work->entryCount;
         if (!interactive || FUN_002a4894(&work->grid) != row || headerSelected || !work->selectionActive) {
             bool highlighted = FUN_002a4894(&work->grid) == row && !work->selectionActive && interactive;
             FUN_003cbd04(work, row, style, valid, x, y, highlighted, scale);

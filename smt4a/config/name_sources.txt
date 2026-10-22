@@ -4724,3 +4724,226 @@
 004f8a58 battleCloneRoutedMaterialChannels inferred Clones a matching model and transfers selected material animation channels.
 002a2210 saveSlotDrawSummary inferred Draws a save-slot summary with portraits, level, elapsed time, and location.
 00480960 equipmentHasPositiveUpgrade inferred Checks category-specific positive upgrade bonuses for equipment categories four through six.
+004cf964 objectGetIndexedSignedFlag inferred [high] Forward the indexed 0x8c-byte state record at owner+0x20 to objectGetSignedFlag.
+001bc2ec asdGxGetPhysicalAddress inferred Converts a CPU address to the physical address used by GPU buffers and texture images.
+00330d68 scrCommMapTrapBeginMoveToScene inferred Starts map-trap movement to a scene and reports script-command completion.
+0039dcd0 scrCommBtlTalkBustUpReleaseAllSlots inferred Releases every battle-talk bust-up slot and reports script-command completion.
+0036f800 scrCommGameSlotFindFree inferred Stores the free game slot returned by gameSlotTableFindFree as the script result.
+003303fc mapCollisionExists inferred Tests whether the global map-collision object exists.
+004a92b8 btlUIClearWorkTables inferred Clears the battle UI embedded work tables.
+001513ec asdTextSetValueFlagsAndScalar inferred Sets a text work value and scalar and updates the masked default text flags.
+00183478 asdGxIsReady inferred Tests both graphics-enabled and graphics-ready flags.
+00184df8 asdGxPresetsGetHeightByKind inferred Returns the selected graphics target height used by viewport and fade-quad sizing.
+002219e4 btlFloatingNumberComparePriorityDescending inferred Orders floating-number records by descending signed primary and secondary priority.
+003b6cdc scrCommAocQueueRequest inferred Queues an add-on-content request from two script arguments.
+00429f38 asdFsIsSdCardDetected inferred Queries SD-card detection through the filesystem session and reports service failures.
+002e1450 matrix44SetIdentity inferred Sets a four-by-four matrix to the identity transform.
+00261984 infoWinShowDefault inferred Starts the information-window sprites and initializes its default timed display.
+004d0bf0 gameStockContainsEntry inferred Searches occupied stock slots for an entry identifier.
+001370bc titleSubmitCommandAndUpdateMode inferred Submits the enabled active title command list and updates title mode when command processing is ready.
+00221a6c dataCompareSignedWordKeys inferred Compares two signed word keys by subtraction.
+001b9fd4 dataCompareRecordKeys inferred Compares two records by their signed key fields.
+001ac63c dataTableCompareEntryIds inferred Orders data-table records by their identifier fields.
+00492bc0 naviGetActiveStateValue inferred Selects the current navigation state value according to the alternate-state flag.
+0034f558 dataCompareResolvedRecordKeys inferred Resolves both entry identifiers and compares their record key fields.
+004a75b0 btlDevilCompareRankOrderAndId inferred Sorts by rank, descending secondary order, then by entry identifier.
+0035feb0 dataCompareEntryCategoryAndKey inferred Sorts entry categories ascending and each category descending by its key.
+0034f6fc btlDevilCompareValueKindAndOrder inferred Sorts by descending resolved value, descending kind, stored order, then identifier.
+002a4860 resourceRunOperationIfUnblocked inferred Runs the payload operation only when its blocked field is clear.
+002a4844 resourceRunEmbeddedOperationIfUnblocked inferred Runs the embedded child operation only when its owner is not blocked.
+0049597c shopRefreshChildDirtyRows inferred Forwards the shop child to listRefreshDirtyRows during the owner early-state notification.
+0037ed38 campCommonBgInitializeCrazingSumaho inferred Forwards to campCommonBgCreateCrazingSumaho when common-background owners initialize.
+00195fc4 sysRequestFatalBreak inferred Tail-calls sysFatalBreak; callers use it on fatal runtime conditions.
+00432998 ctrNetInitialize inferred Forwards the result pointer to the CTRNetInit initialization implementation.
+0037c88c messageDismissNumericBannerForced inferred Calls messageDismissNumericBanner with dismissal enabled.
+0037d6b4 scrCommLmapClearExtraFlag inferred Runs lmapClearExtraFlag and reports script command completion.
+00324cc0 mathVec3Dot inferred Computes the dot product of two three-component vectors.
+0017ef14 sysCopyWordIfOutputPresent inferred Copies the source word only when the output pointer is non-null.
+00141270 asdModelRenderLightPassCallback inferred Runs asdModelRenderLightPass as a process auxiliary callback and returns zero.
+00135b38 sysCopyByteRange inferred Copies bytes from a half-open source range and returns the advanced destination.
+00318ddc buttonHelpGetPanelState inferred Returns the current state of the button-help panel.
+00329a78 mapDepartReleaseOnTaskEnd inferred Marks the map-depart block for release when its task ends and returns it.
+002a2d14 asdProcessClearSelectedFlags inferred Clears the requested bits on process nodes selected by identifier and mode.
+003278ac mapTrapEnable inferred Sets both enable fields on the global map-trap controller.
+003034ec listGetFirstValue inferred Returns the first list node value or null for an empty list.
+004320e4 svcRequestChannelByIndex inferred Converts a valid channel index to a single-bit service request and otherwise returns an invalid-index result.
+00203b1c gameGetUnlockedCountLimit inferred Returns the expanded count limit when its unlock flag is set, otherwise the base limit.
+004d86e4 animationIsReferencedClipComplete inferred Tests completion of the referenced resource animation handle; missing resources count as complete.
+00284140 recordGetModeForId inferred Returns the stored record mode only if its identifier matches the requested one.
+003ff1d4 gameFlagsSetAlternateMode inferred Replaces bit one of the global flag byte with the supplied mode value.
+004d86c0 asdModelStartReferencedAnimation inferred Starts the referenced model animation at frame zero when its holder exists.
+002f2da0 sharedRefAssignFromOwner inferred Builds a shared reference from the owner, releases the previous reference, and stores the replacement.
+002419a0 dataCompareFloatRecordMagnitudes inferred Compares record pointers by squared floating-point key magnitude.
+00362788 effEditorSetTextValue inferred Copies an effect-editor text value and updates its stored string length.
+004c6eb8 mathApplyReductionMultiplier inferred Multiplies the integer value only when the floating-point multiplier is below one.
+002b4358 effInstanceAdvanceFrame inferred Advances the effect instance frame by the frame step and runs its update.
+0016a10c asdLoadConfigureModeFlags inferred Translates request enable and extra flags into the load configuration mode bits.
+003008c4 resourceRunHandlerCallback inferred Runs the resource type optional callback with its data pointer and supplied argument.
+004185c4 gameFlagSlotSetEnableBit inferred Replaces the enable bit in the selected flag-slot entry.
+0030202c onlineJobApplyStateTriple inferred Marks the job state done and applies a copied triple to the matching online instance if present.
+002720a4 effOwnerRunAtUnitScale inferred Runs an attached effect and updates its owner at unit scale when the effect exists.
+0020214c asdLoadFileSyncDefault inferred Loads a file synchronously with default arguments and the fixed loader mode.
+0037d2b8 scrCommGetPlayerRecordValue inferred Returns the selected player record byte through scrSetResult, or zero for no record.
+003c110c scrCommSetFlagSlotEnabled inferred Sets flag-slot enablement using a script-selected identifier and boolean argument.
+00281a0c asdMTeXLoadTableEntries inferred Loads a texture table then initializes all of its entries.
+004f5de4 asdModelActivateOwnedSlots inferred Sets the activation flag on every model present in the owner fifty-slot collection.
+00418820 gameFlagSlotAdvanceCounter inferred Increments the flag-slot counter with zero-skipping and marks the entry updated.
+003c3d84 scrCommSetGameStateText inferred Enables the game-state text record, sets its identifier, and copies the script string into it.
+002c7a5c gameItemSetFlag inferred Updates the item flag bit for an in-range item and returns whether the item index is valid.
+00228ab0 gameGetSaveSlotData inferred Returns the selected save-slot data or null when the slot has no entry.
+00352cd8 gameTestFlagBlockBit inferred Tests a bit in the global flag block bit set.
+003e5810 resourceEntryMarkReleased inferred Marks an entry released, sets its handle-body release flag, and unregisters the body.
+00274e00 resourceRemoveSlotOwners inferred Removes owner registrations for each populated resource slot in reverse slot order.
+004f17f0 btlCameraStartPrimaryTransition inferred Sets the primary camera transition value, duration and mode and resets its progress counters.
+0031c4bc scrCommStopCurrentEffect inferred Stops a finished current effect, otherwise begins fade-out on the first command frame and waits.
+004f183c btlCameraStartAngleTransition inferred Sets camera angle transition value, duration and mode and resets its progress counters.
+003c16e0 statusDownSelectListIndex inferred Clamps the requested status-list index to its available entries before selecting it.
+003df4ec gamePlayerClearPairedId inferred Clears the first matching player identifier and its paired per-entry flag.
+0039d478 scrCommTestUnitAction inferred Tests an action against the script-selected unit parameter block and returns a boolean result.
+00340edc asdListBoxSetFloatItem inferred Configures an existing list-box item as a ranged float item and marks the list box dirty.
+0016163c asdGxMarkSubmissionReady inferred Marks the latest queued graphics entry ready, or clears pending state when submission is disabled.
+00169240 gameGetIndexedSlotMember inferred Resolves the selected game slot through its stored table-entry identifier and returns the embedded member.
+0035de50 fusionReleaseRegisteredHandle inferred Unregisters and destroys the fusion screen optional registered handle.
+004ba890 uiTextScreenRunPhaseUpdate inferred Runs the current screen-phase callback and then updates the UI texture loader.
+0031d588 gameQueuePendingEntryId inferred Queues an unregistered script-selected identifier in the first empty pending-entry slot.
+004bbb74 aocGetTableRecordOrFallback inferred Prefers the add-on-content record for an index and otherwise falls back to the base data table.
+0035c1e8 scrCommStartTextureEffect inferred Starts a timed texture effect when a handle slot is free, exposes its job, and returns the job identifier.
+00289748 effLineJobUpdate inferred Updates the effect-line object, advances lifetime only while ready, and finishes when duration is reached.
+003e4fdc partyFindActiveRecordById inferred Searches the twelve party records for an enabled record with the requested unit identifier.
+003de02c bgmRequestSelectedChannelFade inferred Schedules the selected BGM request channel fade unless the protected resource entry is active.
+004d9e58 gameOptionsRememberUniqueId inferred Stores a permitted new identifier in the first empty option slot without introducing duplicates.
+002749c8 mapIfClearMatchingRecord inferred Hides and deactivates map-interface records with the requested identifier and the active display category.
+00398110 mapGimicIsActiveHandleReady inferred Finds an active map-gimmick slot with the requested identifier whose object handle passes the readiness check.
+003e5c00 resourceOwnerReleaseAll inferred Releases and clears each populated resource slot and the owner extra resource.
+002b4078 effEmitterAllocate inferred Allocates a zero-filled emitter, marks its initial state, and stores the requested particle capacity.
+00482364 effAdvancePosition inferred Advances effect position by velocity and runs its periodic update every tenth tick.
+00330f48 scrCommMapPlace inferred Clears the placement-pending flag, places the map target using three script arguments, and clears placement state.
+002d7e6c mapGimicInitializeProcessing inferred Resets map-gimmick processing handles, selection, counters and progress before initialization.
+00334a54 asdMTeXReleaseJobContext inferred Releases the job context primary and secondary resource handles before shared teardown.
+003fcc94 aocReleaseObjectBufferAndFlag inferred Frees and clears the object buffer and resets the add-on-content flag associated with its identifier.
+002277d8 campResetScreen inferred Resets camp setup, unit and member sprite states, and clears its current-screen state word.
+0046ffb0 dataSetGetRecordByIndex inferred Resolves a flattened record index across all entry tables in a data set.
+001acfac asdMTeXLoadNodeTexturePath inferred Resolves the node texture path, selects compression mode, and starts the texture load.
+00226cb0 mathMatrixApplyScale inferred Applies a scale vector to a matrix by replacement, row scaling, or column scaling according to mode.
+004a96d4 btlUiIsPanelHolderReady inferred Treats a missing battle panel as ready and otherwise checks its holder.
+00522df0 sysWordVectorRelease inferred Releases the word-vector storage and returns the vector object.
+0040a60c gameTestIndexedAuxiliaryFlag inferred Tests a one-based flag index in the auxiliary flag block.
+002fea74 resourceRetireAndQueueTarget inferred Releases a target through its owner or virtual destructor, then queues its pointer in the object ring.
+001aeafc resourceOwnerReleaseAndReset inferred Releases the owned polymorphic resource, resets state, and tears down backing buffers.
+0035ab40 gameClearOwnedSlot inferred Finds and clears the first slot owned by the supplied owner identifier.
+004aa020 btlUiPollWidgetResult inferred Polls the current widget, reads its selected identifiers, and changes the battle UI state according to the result.
+00331060 scrCommFinishMapDeparture inferred Clears departure flags, stops relevant battle and audio state, and requests the departure sequence when selection permits.
+003f5268 dialogEnterState inferred Changes dialog state, plays its state-specific sound, and starts the corresponding screen or choice presentation.
+00341f4c helpReleaseDataTable inferred Frees the help data table when help texture references reach zero.
+00317c3c gpuSubmitFloatVectorsOrDefault inferred Submits float vectors, substituting the shared default vector pointer for a null argument.
+004abb94 btlUiClearSelectionSlots inferred Clears selection slots in the global battle UI object, including battle debug setup.
+00141260 renderSceneUpdateCallback inferred Calls renderSceneUpdate on the callback context and returns success.
+0039dce0 scrCommBtlTalkBustUpCreate inferred Script command that creates the battle-talk bust-up and returns command completion.
+004f1530 mathVectorClear inferred Sets all three floating-point components of the supplied vector to zero.
+0037d588 scrCommGameDataGetTableValue inferred Writes gameDataGetTableValue to the script result and reports command completion.
+00362768 namedObjectFormatFullName inferred Concatenates both stored name components into the effect editor's formatted name buffer.
+002e4810 scrCommBtlMessageShowPlainBody inferred Shows a plain message using the battle main state's script owner.
+002e512c effectProcessSetVector inferred Copies a three-component vector into the active effect process's effect parameter.
+0021280c scrBranchPopIndex inferred Pops and stores a branch index when the script branch context is enabled.
+0035d1b4 scrCommGameFlagEntryGetBit inferred Fetches two script arguments and writes the selected game-flag entry bit to the script result.
+002447e8 mapEnemySelectUpdatePhase inferred Selects one of the enemy update phases and resets its timer while the enemy subsystem is active.
+0014a844 asdGfxSetTargetParameter inferred Updates either or both graphics target parameters according to the supplied selector.
+003c33b0 scrCommNamedRecordActivate inferred Activates the AOC main object's named record using the script's identifier and string arguments.
+00300e28 geometryDestroyOwner inferred Drops optional shared-block references, destroys the geometry handle, and frees its owner.
+0038d1c4 scrCommBtlUnitGetTableValue inferred Returns the script-selected halfword from the current battle script unit's value table.
+00372fc0 scrCommBtlUnitIsFlagSet inferred Returns whether the script-selected flag byte is set for the current battle script unit.
+0039dc98 scrCommGameRecordAddValue inferred Adds the second script argument to the selected record's current value through the clamped setter.
+0035c2ec scrCommBustupCutAnimSetPlacement inferred Applies the script's job and slot arguments to bust-up placement with default snap and coordinates.
+0037d438 gauntletAppMenuHasActiveFlags inferred Tests whether any of the four gauntlet-app menu flag bytes is set before camp kills its task.
+002d88a0 mapIfReleasePanel inferred Releases the map-interface panel's child object, clears its pointer, and marks the panel inactive.
+00349048 scrCommMapPlaceSet inferred Applies three script arguments to mapPlaceSet and clears the pending game-state field.
+004d8724 btlModelCopyContentIfMissing inferred Lazily allocates destination model content and copies the source body only when destination content is absent.
+00244254 mapDepartUnlinkChildren inferred Removes the optional child links of both map-depart entries from the global handle registry.
+004aa380 btlUiClearEntryStates inferred Clears the state halfword of each of the five battle UI entries.
+002e3338 asdStringFormatGrow inferred Formats a va_list into a buffer, allocating and growing it until the formatted text fits.
+0013b548 asdGxLoadMaterialShader inferred Loads the shared shader binary and resolves its world and materialColor bindings during graphics setup.
+00301a60 onlineCompleteVectorJob inferred Publishes successful vector output, notifies the matching online instance, and marks the job complete.
+00427d6c pricingSelectionBuildPredicate inferred Builds a string-equality pricing-selection predicate for purchasable or released commerce records.
+0020b660 campChangeState inferred Changes camp state while preserving the previous state and applying state-specific setup and AOC fallback.
+002b40ec resourceCollectionDestroy inferred Destroys owned resource and list arrays, drops shared references, releases optional owner and geometry resources, and frees the collection.
+002df6f0 btlEffectSettingsReleaseTask inferred Stops the task's child job, cleans registry state, and destroys the global battle-effect settings object.
+0013dd18 frameTexDrawWhenReady inferred Draw callback that submits the global render context only when both frame-texture job readiness flags permit it.
+00191e00 aocLoadTextureNode inferred Resolves an AOC file entry, creates its texture-table node, initializes and applies it, and returns the node or zero.
+0037dab0 partyPanelDestroy inferred Destroys the party panel's script, buffers and resource arrays, stops its job, frees it, and clears the global pointer.
+00136fc0 titlePrepareDrawFrame inferred Applies pending render-pair state and begins the title draw command list when drawing is enabled.
+001527e4 eventTexSelectJobsById inferred Selects active event-texture jobs matching the supplied identifier and deselects the others.
+001632f8 infoWinIsActive inferred Forwards infoWinHasValue; battle callers wait for it to clear before completing pending operations.
+0038b358 saveLoadUIHasResult inferred Reads the save/load UI result flag; camp and title callers act only when the returned flag is nonzero.
+00426134 movieY2rGetTransferEventStorage inferred Returns the address of the Y2R transfer-event handle so movie code can wait for conversion completion.
+003d2150 sysPlayVoice inferred Starts a voice sound through the normal volume-aware sound request helper with default options.
+001006ec asdDeallocateArrayStorage inferred Forwards raw array/vector storage to asdOperatorDelete; container callers pass element counts and sizes that it ignores.
+002e31e0 libcFormatAppendByte inferred Writes one formatted-output byte through a cursor and advances that cursor, including for sprintf's terminating zero.
+003881e0 campCecSetValue inferred Stores the camp CEC value supplied by the camp screen or its received CEC data.
+002c1650 textureCacheReset inferred Clears the complete texture cache storage during effect-system initialization.
+003056e4 onlineUrlAssign inferred Assigns the source URL holder's text to the destination URL object and returns the destination.
+002a4b74 messageGetChoiceResult inferred Returns the message choice result used to select subsequent script/UI actions, with zero meaning no choice yet.
+0015687c gameGetPlayerName inferred Returns the player-name buffer embedded in player data, which callers copy into messages and save summaries.
+00340c68 asdCecCopySettings inferred Copies the CEC work object's stored two-word settings into the caller's settings buffer.
+001396c8 asdMemoryInitializeDefault inferred Initializes application memory and the main Asd heap using the startup reservation and allocator defaults.
+0032cfc8 buttonHelpGetPanelMode inferred Returns the button-help panel mode used when starting or restoring status and selection screens.
+00138d1c appletUnlockAndRestoreDisplay inferred Leaves the applet critical section and clears forced LCD black after the applet transition.
+00513620 videoResetDeblockerState inferred Clears the Mobiclip deblocker's two global state words during movie shutdown, matching the SMT IV reset helper.
+001bce18 flagValueGetStorage inferred Returns the persistent flag-value banks and changed-bit bookkeeping used by flagValueAdd, flagValueSub, and packed-flag tests.
+0031f90c uiQuestGetPanelMode inferred Returns the quest panel's mode, distinct from the outer quest UI mode returned by uiQuestGetMode.
+004abe14 btlUiGetActiveState inferred Queries the battle widget's active scene state, returning the idle state when it is inactive.
+0013f014 jobClearCachedWork inferred Queries the job work and clears the cached work pointer in the allocation-state record.
+0019eafc asdGxGetCommandCursor inferred Returns the current graphics command-list cursor through gxGetCommandListParameter.
+00481db4 callbackOwnerInitialize inferred Clears the callback owner's state and installs its dispatch table.
+00300048 watcherRefreshEnabledState inferred Reads the current object's virtual value and applies it to the watcher enable state.
+0021a5f0 nodeTreeReleaseSiblingsFirst inferred Releases the following sibling chain before releasing this node's subtree.
+0037d9b8 engineResourceSetSecondaryValue inferred Updates the secondary engine resource owner when it exists and reports success.
+00316120 nameFormUpdateCallback inferred Updates the selected name form while its owning framework is active and returns callback success.
+0047ec9c jyoucyuEnsureResidentEntry inferred Requests the resident entry only when jyoucyuGetTableEntry reports it is not already available.
+002a3de8 scrCommRequestSequence inferred Reads the sequence request arguments, defers the request, and flushes the deferred sequence.
+003a75dc scrCommMapGimicPlayMotion inferred Passes the selected script argument and argument one to mapGimicPlayMotionById.
+0049ccec aocGetContentFlags inferred Returns the add-on content record's flags when its entry kind permits that record lookup.
+00237930 scrCommPollWindowAndReleaseTask inferred Initializes on the first command frame, waits for the script window result, and releases its task window.
+003fd6dc gameFlagsClearEntryLowBits inferred Clears the low two bits of each entry returned by flagsAtGetPtr.
+0031d528 scrCommOpenDialog inferred Reads the dialog script string, prepares its text, and opens the dialog.
+002ff6ca onlineListInitialize inferred Initializes a flagged online list and allocates its self-linked sentinel node.
+004f3ee0 cameraBeginScalarTransition inferred Initializes the camera's scalar transition value, duration, mode, and progress.
+001432e4 accelerometerInitialize inferred Clears accelerometer state and establishes its default capacity, enabled flag, and mode.
+002e0fac taggedObjectRelease inferred Releases and clears a tagged object handle, invoking the fatal-break hook first when its tag requests it.
+0033132c partyCountOccupiedSlots inferred Counts the nonempty records across the twelve queried party slots.
+0027550c mapObjectsUnregisterHandles inferred Removes the registered owner handle from every occupied map-object slot.
+00358f74 asdCecResetMessageBox inferred Opens the CEC message box, resets its contents, and closes it after a successful open.
+003cb208 geometryOwnerDestroyEntries inferred Destroys each owned geometry entry and frees the entry-array allocation.
+00387308 sceneDestroyOwnedJobObject inferred Destroys the owned scene object, stops its job, frees it, and clears the owner pointer.
+00437e50 rangeListAllMatch inferred Requires every range in the circular list to satisfy the supplied range predicate.
+0033ab6c gameFlagSetIndexedBit inferred Sets or clears the indexed bit in the game flag block.
+001466cc nnAmConnectOnce inferred Lazily obtains the application-manager service session and preserves any initialization or connection failure.
+002816d0 campCecEditReset inferred Resets the camp CEC edit screen, message window, linked handle, and working selections.
+001ad15c asdTextureSelectHeap inferred Selects a texture's heap and records which VRAM bank it uses.
+004013f0 resourceOwnerSetChildEulerAngles inferred Applies the three-component Euler rotation to each occupied child-resource slot.
+00337f48 effEditorReleaseEffectAndSound inferred Releases and clears the effect editor's effect and sound handles, then releases the supplied handle.
+0038c330 scrCommBattleTestCombatantStatus inferred Returns whether the selected battle combatant has the requested status bit.
+0036f7b0 scrCommBustupCutSetPlacement inferred Passes four script arguments to bustupCutAnimSetPlacement.
+00212118 naviMainBeginClose inferred Shuts down the navigation scene's members and marks the scene as closing.
+0035b1c0 commonBgStopChildAndReset inferred Stops the active common-background child job and resets the background's progress and timer.
+0032b62c categoryGetThresholdIndex inferred Returns the threshold-table bucket containing the supplied category value.
+0035991c asdTMTexTableActivateImage inferred Prepares the selected texture-table node's image and activates its loaded texture state.
+001822ec ifTouchIsRepeatingSelection inferred Tests whether the selected touch ID is active and its hold counter is on an initial or repeating input interval.
+004f1ad0 uiStartRangeAnimationFromTable inferred Starts a ranged timer animation from the selected preset, clearing an invalid prior range first.
+00224668 naviMainPollClose inferred Waits for the navigation job to finish, then frees the scene's texture and the scene itself.
+0048ccdc uiSpriteGroupInitialize inferred Initializes the sprite group's ownership state and animated sprite, then selects its initial keyframe.
+002884c8 partyPanelToggleDisplayMode inferred Toggles the party-panel mode, updates its sprite keyframe, and propagates the mode to its handle arrays.
+002309dc campReleaseRegisteredTouchRegions inferred Removes every registered camp touch region and clears the registration and ready state.
+0010024e inputGetKeyFlags inferred Derives the combined input-classification flags for a key from the raw key table.
+00409718 uiSpriteRefreshMode inferred Selects the normal or alternate sprite source for the current state and refreshes the output when its mode changes.
+0026f0c4 campReleaseSlotTouchRegions inferred Invalidates the camp's per-slot touch IDs, removes their registered regions, and clears the touch flag.
+004b797c placeMenuApplySelectedEntry inferred Waits for the selection script to finish, frees its resources, and applies the selected place-menu entry.
+002e525c scrCommEventTextureMoveBackward inferred Drives the current event-texture job backward, using a slower velocity while holding, and stops a completed job.
+0032d388 campCecDestroyOverlay inferred Releases the active camp CEC overlay's buffers, scripts, textures, and job, with the full teardown path handling scene and audio cleanup.
+0037d740 scrCommTestStringEquality inferred Compares the script string argument with the stored string and writes the equality result.
+00314c38 naviMainSetFlagsAndActivate inferred Applies the requested flag groups and activates the navigation transition menu when its state permits.
+0037d04c scrCommQueryBattleEffectResource inferred Builds the battle effect resource path from the script ID and returns its resource-query result when the query path is available.
+003797e4 mapObjGetCombinedEntry inferred Gets a map-object entry from the base table or the appended add-on-content entries.
+00365898 mapIfDispatchCommand inferred Activates the map interface and dispatches the requested command through its command-specific path.
+0023c08c uniteStartOrQueueRequest inferred Starts an accepted unite script request immediately or saves it as pending while the system is busy.
+004989f0 shopStartSelectionScript inferred Builds the shop item text and starts the selection script with the appropriate entry and message type.
+00387edc saveBuildSummary inferred Builds the save summary from the slot table, save data, selected slot, party slots, and summary record.

@@ -2,7 +2,7 @@
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" const FlagValueRange *FUN_0019c06c(u32 id);
-extern "C" FlagValueStorage *FUN_001bce18(void);
+extern "C" FlagValueStorage *flagValueGetStorage(void);
 
 /* Clear a bit flag or subtract from a halfword flag without underflowing it. */
 extern "C" void flagValueSub(s32 id, u32 amount)
@@ -13,7 +13,7 @@ extern "C" void flagValueSub(s32 id, u32 amount)
     const FlagValueRange *range = FUN_0019c06c(id);
     if (range != NULL) {
         u8 bankId = range->bank;
-        FlagValueStorage *storage = FUN_001bce18();
+        FlagValueStorage *storage = flagValueGetStorage();
         u8 *bank;
         switch (bankId) {
         case 0: bank = storage->bank0; break;

@@ -26,7 +26,7 @@ int FUN_0027f94c(...);
 int FUN_00282228(...);
 int calcHeadingRoundedToCardinalDirection(void);
 int FUN_002c29d8(...);
-int FUN_002c86ec(void);
+int mathVec3Dot(void);
 int FUN_002d1e4c(void);
 int mapDestroyPrimaryModel(void);
 int placementUpdateSceneState(void);
@@ -71,20 +71,20 @@ float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
 int FUN_001e2be4(void);
 int FUN_002562e4(...);
-int FUN_00256370(...);
+int partyApplyNonlethalAilmentDamage(...);
 int FUN_0027f48c(...);
 int FUN_0027f848(void);
 int FUN_0027f958(...);
-int FUN_0027fa98(...);
+int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_00287b0c(void);
 int FUN_00291e40(...);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int FUN_003a66c4(void);
 int FUN_003a6988(void);
 int SBORROW4(...);
@@ -229,7 +229,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: mapIfActivateRecord. */
 /* Supplied declaration required: FUN_0025247c. */
 /* Supplied declaration required: FUN_002562e4. */
-/* Supplied declaration required: FUN_00256370. */
+/* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
@@ -247,7 +247,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
@@ -261,13 +261,13 @@ extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002879dc. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
 extern int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
@@ -278,7 +278,7 @@ extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c29d8. */
 /* Supplied declaration required: FUN_002c5be8. */
 extern unsigned int asdModelGetStatic38(void);
-/* Supplied declaration required: FUN_002c86ec. */
+/* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: lmapFindNearestMatchingTargetPoint. */
 /* Supplied declaration required: FUN_002d1e4c. */
 /* Supplied declaration required: mapEnemyAdvancePursuit. */
@@ -481,8 +481,8 @@ void FUN_002712dc(void)
           }
           if ((temp_v7 != 0 && puVar5 != (unsigned int *)0x24) && (DAT_004474f4[0x2b] == 0)) {
             *(unsigned int *)(temp_v31 + 0xd94) = 0;
-            FUN_0027fa98(3);
-            FUN_0029be5c(0x14,1);
+            lmapSetSceneId(3);
+            gameCounterAddSaturating(0x14,1);
             FUN_002804ec(g_lmapScene + 10);
             mapSelectContainingRegions();
             return;
@@ -549,7 +549,7 @@ void FUN_002712dc(void)
         *(int *)(temp_v31 + 0xdb8) = temp_v13;
         if (temp_v13 >= 0x1f) {
           *(int *)(temp_v31 + 0xdb8) = temp_v7 - 0x1d;
-          FUN_0029be5c(0x1d,1);
+          gameCounterAddSaturating(0x1d,1);
         }
       }
       else {
@@ -679,11 +679,11 @@ void FUN_002712dc(void)
       if (((g_gameState != (unsigned int *)0x24) && (temp_v4 = FUN_0025a140(2,5), temp_v4 != 0)) &&
          (!temp_v15)) {
         temp_v17 = (float)temp_v30;
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         temp_v19 = (float)g_lmapScene[0x58];
         g_lmapScene[0x58] = (int)(temp_v19 - temp_v17);
         if (temp_v19 - temp_v17 < temp_v36) {
-          FUN_00256370(2,5);
+          partyApplyNonlethalAilmentDamage(2,5);
           g_lmapScene[0x58] = temp_v13;
           FUN_002562e4(0xf,0x50);
           temp_v13 = FUN_00291e40(0x1000186);
@@ -693,12 +693,12 @@ void FUN_002712dc(void)
         }
       }
       temp_v19 = (float)temp_v30;
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       temp_v17 = *(float *)(temp_v31 + 0xdb4) + temp_v19;
       *(float *)(temp_v31 + 0xdb4) = temp_v17;
       if ((int)temp_v17 >= 0x47c35001) {
         *(float *)(temp_v31 + 0xdb4) = temp_v17 - 100000.0f;
-        FUN_0029be5c(0x12,1);
+        gameCounterAddSaturating(0x12,1);
       }
       temp_v13 = 0x44bb8000;
       temp_v17 = *(float *)(temp_v31 + 0xdbc) + temp_v19;
@@ -731,7 +731,7 @@ void FUN_002712dc(void)
       temp_v17 = (float)temp_v30;
       if (((unsigned int)piVar22 & 2) != 0) {
         if (!temp_v15) {
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           piVar23 = g_lmapScene;
           temp_v19 = (float)g_lmapScene[0x57];
           g_lmapScene[0x57] = (int)(temp_v19 - temp_v17);
@@ -746,14 +746,14 @@ void FUN_002712dc(void)
             else {
               piVar23[0x57] = temp_v13;
             }
-            FUN_0027fa98(0x20);
+            lmapSetSceneId(0x20);
           }
         }
         DAT_0049f94f = 4;
       }
       else {
         if (temp_v36 < (float)g_lmapScene[0x57]) {
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           g_lmapScene[0x57] = (int)((float)g_lmapScene[0x57] - temp_v17);
         }
         temp_v17 = (float)g_lmapScene[0x57];
@@ -764,8 +764,8 @@ void FUN_002712dc(void)
         DAT_0049f94f = 0xff;
       }
       if (((unsigned int)piVar22 & 4) != 0) {
-        FUN_0027fa98(0x1f);
-        FUN_0029be5c(0x16,1);
+        lmapSetSceneId(0x1f);
+        gameCounterAddSaturating(0x16,1);
       }
       mapSelectContainingRegions();
       if (((unsigned int)piVar22 & 0x800) != 0) {
@@ -846,7 +846,7 @@ void FUN_002712dc(void)
           g_lmapScene[2] = g_lmapScene[2] + 1;
           if (((g_gameState != (unsigned int *)0x24) && (temp_v13 = FUN_0025a140(2,5), temp_v13 != 0)) &&
              ((float)g_lmapScene[0x58] < temp_v19)) {
-            FUN_00256370(2,5);
+            partyApplyNonlethalAilmentDamage(2,5);
             g_lmapScene[0x58] = 0x447a0000;
             FUN_002562e4(0xf,0x50);
             temp_v13 = FUN_00291e40(0x1000186);
@@ -867,7 +867,7 @@ void FUN_002712dc(void)
             }
             g_lmapScene[0x57] = temp_v13;
             temp_v6 = 0x20;
-            FUN_0027fa98(temp_v6);
+            lmapSetSceneId(temp_v6);
           }
           else {
             FUN_0027f958(&fStack_5c,&fStack_58,0);
@@ -967,7 +967,7 @@ joined_r0x002c99a8:
                 piVar22[0x62] = 4;
               }
               temp_v6 = 1;
-              FUN_0027fa98(temp_v6);
+              lmapSetSceneId(temp_v6);
             }
           }
           goto LAB_002c9a54;
@@ -1042,20 +1042,20 @@ joined_r0x002c99a8:
           temp_v34 = temp_v18;
           if ((g_gameState != (unsigned int *)0x24) &&
              (temp_v13 = FUN_0025a140(2,5), temp_v34 = temp_v18, temp_v13 != 0)) {
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             g_lmapScene[0x58] = (int)((float)g_lmapScene[0x58] - temp_v18);
           }
           piVar22 = g_lmapScene + 10;
           FUN_002804ec();
           temp_v18 = temp_v34;
           if (((unsigned int)piVar22 & 2) != 0) {
-            FUN_00287aec();
+            mathDistanceBetweenPoints();
             g_lmapScene[0x57] = (int)((float)g_lmapScene[0x57] - temp_v34);
             DAT_0049f94f = 4;
           }
           else {
             if (temp_v19 < (float)g_lmapScene[0x57]) {
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               g_lmapScene[0x57] = (int)((float)g_lmapScene[0x57] - temp_v34);
             }
             if (temp_v19 < (float)g_lmapScene[0x57]) {
@@ -1515,7 +1515,7 @@ LAB_002c9a70:
               piVar22[0x15] = 0;
               piVar22[0x16] = 0x40400000;
               *(unsigned char *)(piVar22 + 0x1b) = 0;
-              FUN_00287aec();
+              mathDistanceBetweenPoints();
               temp_v7 = DAT_0049f9a8;
               temp_v17 = DAT_0049f9a4;
               piVar22 = g_lmapScene;
@@ -1624,7 +1624,7 @@ LAB_002c9a70:
             if ((temp_v7 == 0x5c) && (temp_v7 = piVar22[2], piVar22[2] = temp_v7 + 1, temp_v7 + 1 >= 4))
             {
               temp_v6 = 1;
-              FUN_0027fa98(temp_v6);
+              lmapSetSceneId(temp_v6);
             }
           }
           else {
@@ -1647,7 +1647,7 @@ LAB_002c9a70:
           mapPartDestroy();
           mapIfSetMode1();
           temp_v6 = 8;
-          FUN_0027fa98(temp_v6);
+          lmapSetSceneId(temp_v6);
         }
       }
     }
@@ -1667,7 +1667,7 @@ LAB_002c9a70:
     }
     if (*(char *)((int)g_lmapScene + 0x115) != '\0') {
       temp_v18 = (float)g_lmapScene[10];
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       piVar22 = g_lmapScene;
       temp_v17 = (float)g_lmapScene[0x4c];
       if (temp_v17 >= temp_v18) {
@@ -1823,7 +1823,7 @@ LAB_002c9a70:
             if ((temp_v7 == 0x5c) && (temp_v7 = piVar22[2], piVar22[2] = temp_v7 + 1, temp_v7 + 1 >= 4))
             {
               temp_v6 = 1;
-              FUN_0027fa98(temp_v6);
+              lmapSetSceneId(temp_v6);
             }
           }
           else {
@@ -1846,7 +1846,7 @@ LAB_002c9a70:
           mapDestroyInterfaceModel();
           mapIfSetMode1();
           temp_v6 = 10;
-          FUN_0027fa98(temp_v6);
+          lmapSetSceneId(temp_v6);
         }
       }
     }
@@ -2024,7 +2024,7 @@ LAB_002c9a70:
           if (temp_v7 == 0x37) {
             g_lmapScene[2] = g_lmapScene[2] + 1;
             mapDestroySecondaryModel();
-            FUN_0027fa98(0xc);
+            lmapSetSceneId(0xc);
             FUN_002804ec(g_lmapScene + 10);
             mapSelectContainingRegions();
             return;
@@ -2038,7 +2038,7 @@ LAB_002c9a70:
                 return;
               }
               temp_v6 = 1;
-              FUN_0027fa98(temp_v6);
+              lmapSetSceneId(temp_v6);
               FUN_002804ec(g_lmapScene + 10);
               mapSelectContainingRegions();
               return;
@@ -2327,7 +2327,7 @@ LAB_002e94f0:
       }
       g_lmapScene[0x16] = 0x40a00000;
       temp_v6 = 0xc;
-      FUN_0027fa98(temp_v6);
+      lmapSetSceneId(temp_v6);
     }
     FUN_002804ec(g_lmapScene + 10);
     mapSelectContainingRegions();
@@ -2523,7 +2523,7 @@ LAB_002e94f0:
           }
           temp_v6 = 1;
         }
-        FUN_0027fa98(temp_v6);
+        lmapSetSceneId(temp_v6);
       }
     }
     else {
@@ -2631,7 +2631,7 @@ LAB_002e94f0:
           piVar22[0x15] = 0;
           piVar22[0x16] = 0x40400000;
           *(unsigned char *)(piVar22 + 0x1b) = 0;
-          FUN_00287aec();
+          mathDistanceBetweenPoints();
           temp_v7 = DAT_0049f9a8;
           temp_v17 = DAT_0049f9a4;
           piVar22 = g_lmapScene;
@@ -2686,7 +2686,7 @@ LAB_002e94f0:
         if ((temp_v7 == 0x5c) && (temp_v7 = piVar22[2], piVar22[2] = temp_v7 + 1, temp_v7 + 1 >= 4)) {
           FUN_0027fca0(0);
           temp_v6 = 1;
-          FUN_0027fa98(temp_v6);
+          lmapSetSceneId(temp_v6);
         }
       }
       else {
@@ -2699,7 +2699,7 @@ LAB_002e94f0:
       piVar22[2] = temp_v7 + 1;
       if (temp_v7 + 1 >= 0x10) {
         temp_v6 = 0x10;
-        FUN_0027fa98(temp_v6);
+        lmapSetSceneId(temp_v6);
       }
     }
     FUN_002804ec(g_lmapScene + 10);
@@ -2916,7 +2916,7 @@ LAB_002e94f0:
               g_lmapScene[2] = g_lmapScene[2] + 1;
               mapDestroySecondaryModel();
               temp_v6 = 0x12;
-              FUN_0027fa98(temp_v6);
+              lmapSetSceneId(temp_v6);
             }
           }
           else {
@@ -2937,7 +2937,7 @@ LAB_002e94f0:
           if ((temp_v7 == 0x5c) &&
              (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 >= 4)) {
             temp_v6 = 1;
-            FUN_0027fa98(temp_v6);
+            lmapSetSceneId(temp_v6);
           }
         }
         else {
@@ -3166,7 +3166,7 @@ LAB_002d472c:
             if (temp_v7 != 0x5b) {
               if ((temp_v7 == 0x5c) &&
                  (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 >= 4)) {
-                FUN_0027fa98(1);
+                lmapSetSceneId(1);
               }
             }
             else {
@@ -3184,7 +3184,7 @@ LAB_002d472c:
         else if (temp_v7 != 0x65) {
           if (temp_v7 == 0x66) {
             mapDestroyOverlayModel();
-            FUN_0027fa98(0x14);
+            lmapSetSceneId(0x14);
             piVar22 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar22[2] = 0;
@@ -3219,7 +3219,7 @@ LAB_002d472c:
     }
     else {
       mapDestroyOverlayModel();
-      FUN_0027fa98(0x14);
+      lmapSetSceneId(0x14);
       piVar22 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar22[2] = 0;
@@ -3425,7 +3425,7 @@ LAB_002d472c:
           }
           temp_v6 = 1;
         }
-        FUN_0027fa98(temp_v6);
+        lmapSetSceneId(temp_v6);
       }
     }
     else {
@@ -3469,7 +3469,7 @@ LAB_002d472c:
         fStack_24 = temp_v20;
         if ((temp_v7 == 2) &&
            (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 >= 6)) {
-          FUN_0027fa98(1);
+          lmapSetSceneId(1);
         }
       }
       else {
@@ -3539,7 +3539,7 @@ LAB_002d472c:
         if ((temp_v7 == 2) &&
            (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 >= 0x1f)) {
           FUN_0027fc14(0);
-          FUN_0027fa98(1);
+          lmapSetSceneId(1);
         }
       }
       else {
@@ -3616,7 +3616,7 @@ LAB_002d472c:
             piVar22[0x16] = 0x40a00000;
             fStack_28 = temp_v35;
             fStack_24 = temp_v20;
-            FUN_0027fa98(1);
+            lmapSetSceneId(1);
           }
         }
       }
@@ -3660,7 +3660,7 @@ LAB_002d472c:
             piVar22[0x16] = 0x40a00000;
             fStack_28 = temp_v35;
             fStack_24 = temp_v20;
-            FUN_0027fa98(1);
+            lmapSetSceneId(1);
           }
         }
       }
@@ -3831,7 +3831,7 @@ LAB_002d472c:
           if ((temp_v7 == 3) &&
              (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 >= 11)) {
             piVar22[0x16] = 0x40a00000;
-            FUN_0027fa98(1);
+            lmapSetSceneId(1);
           }
         }
         else {
@@ -3929,7 +3929,7 @@ LAB_002d472c:
         piVar22[0x16] = 0x40a00000;
         fStack_28 = temp_v35;
         fStack_24 = temp_v20;
-        FUN_0027fa98(1);
+        lmapSetSceneId(1);
       }
     }
     else {
@@ -4016,7 +4016,7 @@ code_r0x00280364:
             FUN_0025247c((int)&uStack_4c + 4);
           }
           temp_v18 = temp_v17;
-          FUN_002c86ec();
+          mathVec3Dot();
           temp_v3 = DAT_0049f94b;
           if (temp_v17 < (float)temp_v38) goto LAB_002804c4;
           temp_v13 = temp_v13 + 1;

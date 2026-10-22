@@ -11,7 +11,7 @@ int FUN_0014f0dc(...);
 int taskCreateDraw(...);
 int FUN_001523b8(...);
 int asdMemoryAllocTracked(...);
-int FUN_002c1650(...);
+int textureCacheReset(...);
 int sysMemClear(...);
 int FUN_0031b96c(...);
 int FUN_003afc2c(...);
@@ -46,7 +46,7 @@ extern int g_effectProcessActive; /* 0x5702f4 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_002c1650. */
+/* Supplied declaration required: textureCacheReset. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031b96c. */
 /* Supplied declaration required: FUN_003afc2c. */
@@ -70,7 +70,7 @@ unsigned int FUN_0031b654(unsigned char param_1)
   sysMemClear();
   *(unsigned char *)(temp_v0 + 0x538) = param_1;
   taskInitLists();
-  FUN_002c1650(0);
+  textureCacheReset(0);
   if (*(char *)(temp_v0 + 0x538) == '\0') {
     FUN_003afc2c();
   }

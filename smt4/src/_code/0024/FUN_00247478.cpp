@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002ae164(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
-int FUN_002b6a54(int, int);
+int supportUnitGetEntry(int, int);
 int devilGetRecord(void);
 int rt_memcpy(unsigned int, unsigned short *, int);
 
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_002b6a54. */
+/* Supplied declaration required: supportUnitGetEntry. */
 extern int FUN_002b6ad0(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: rt_memcpy. */
@@ -196,7 +196,7 @@ void FUN_00247478(unsigned int param_1,unsigned int param_2,unsigned int *param_
     else if ((temp_v3 & 0x20) != 0) {
       temp_v4 = FUN_002b6ad0();
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002b6a54((int)(short)param_3[0x34],(int)*(short *)((int)param_3 + 0xd2));
+        temp_v4 = supportUnitGetEntry((int)(short)param_3[0x34],(int)*(short *)((int)param_3 + 0xd2));
         temp_v6 = (unsigned short)((unsigned int)(*(int *)(temp_v4 + 8) << 10) >> 0x1b);
         temp_v5 = (unsigned short)((unsigned int)(*(int *)(temp_v4 + 8) << 0x15) >> 0x1c);
         temp_v10 = *(unsigned short *)(temp_v4 + 0x12);
@@ -302,7 +302,7 @@ LAB_002478f4:
   else if ((temp_v3 & 0x20) != 0) {
     temp_v4 = FUN_002b6ad0();
     if (temp_v4 != 0) {
-      temp_v3 = FUN_002b6a54((int)(short)param_3[0x34],(int)*(short *)((int)param_3 + 0xd2));
+      temp_v3 = supportUnitGetEntry((int)(short)param_3[0x34],(int)*(short *)((int)param_3 + 0xd2));
     }
     else {
       temp_v3 = (unsigned int)*(unsigned short *)(param_3[0xa0] + 0x46);

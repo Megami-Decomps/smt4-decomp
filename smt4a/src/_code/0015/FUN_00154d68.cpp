@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommitCommandRange(unsigned int *, unsigned int *);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: asdModelCommitCommandRange. */
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 
 
 void FUN_00154d68(unsigned int *param_1,int param_2,unsigned int param_3,int param_4)
@@ -25,7 +25,7 @@ void FUN_00154d68(unsigned int *param_1,int param_2,unsigned int param_3,int par
   unsigned int temp_v1;
   
   puVar1 = param_1;
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   *puVar1 = 1;
   puVar1[1] = 0xf0111;
   puVar1[2] = 1;

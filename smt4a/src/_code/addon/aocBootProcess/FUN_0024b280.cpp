@@ -9,7 +9,7 @@ int FUN_001760cc(int);
 int jyoucyuGetTableEntry(int);
 int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_001d0fcc(int *, int);
-int FUN_00429f38(void);
+int asdFsIsSdCardDetected(void);
 int aocClearDisplayFlag(int);
 void aocResetOperationState(AocSystemA*);
 int FUN_0046f3ac(int *, int);
@@ -39,7 +39,7 @@ extern int sysLightEventTryWait(int);
 extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 /* Supplied declaration required: FUN_001d0fcc. */
 extern int byteIsAtLeast100(unsigned int *);
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0046f3ac. */
 /* Supplied declaration required: flagObjAdvance. */
@@ -108,7 +108,7 @@ unsigned int FUN_0024b280(void)
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
         temp_v2 = temp_v3;
       }
-      FUN_00429f38();
+      asdFsIsSdCardDetected();
       if (temp_v2 != 0) {
         *(unsigned char *)(temp_v0 + 8) = 1;
         *(unsigned char *)(g_aocMain + 0xd50) = 1;

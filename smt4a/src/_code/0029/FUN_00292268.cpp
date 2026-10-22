@@ -75,7 +75,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
-extern int FUN_003303fc(void);
+extern int mapCollisionExists(void);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0036d984. */
 /* Supplied declaration required: controllerSetDestination. */
@@ -240,7 +240,7 @@ void FUN_00292268(void)
       DAT_005f0d40 = 20.0f;
     }
   }
-  temp_v1 = FUN_003303fc();
+  temp_v1 = mapCollisionExists();
   if ((temp_v1 != 0) && (DAT_005f0c98 + temp_v15 < temp_v24)) {
     temp_v24 = temp_v24 + temp_v14;
   }

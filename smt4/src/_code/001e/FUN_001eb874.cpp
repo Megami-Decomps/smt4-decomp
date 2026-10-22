@@ -1,4 +1,4 @@
-/* NON_MATCHING: boundaries now contain a complete 0x53c-byte save-slot renderer; reference draft remains unimplemented and no byte-identical Apocalypse twin was found. */
+/* NON_MATCHING: draws save-slot frames, names, location, and play time; save-slot/text record layouts and lost draw-call arguments still need reconstruction. */
 /* romwright 0.5.0 decompilation of FUN_001eb874 for reference (not compiled; its own view of the boundaries):
 
 void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,int param_5,int param_6

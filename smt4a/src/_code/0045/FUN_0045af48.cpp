@@ -13,7 +13,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_001b14dc. */
-extern unsigned int FUN_001bc2ec(unsigned int);
+extern unsigned int asdGxGetPhysicalAddress(unsigned int);
 
 
 void FUN_0045af48(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
@@ -28,7 +28,7 @@ void FUN_0045af48(unsigned int *param_1,unsigned int *param_2,unsigned int param
   unsigned int *temp_v3;
   unsigned int *temp_v4;
   
-  temp_v1 = FUN_001bc2ec(param_3);
+  temp_v1 = asdGxGetPhysicalAddress(param_3);
   *param_1 = param_3;
   *(unsigned char *)(param_1 + 1) = *(unsigned char *)((int)param_5 + 0x22);
   *(unsigned char *)((int)param_1 + 5) = 0;

@@ -5,6 +5,6 @@
 #include <stdarg.h>
 
 // A zero capacity permits allocation and growth, initially to 64 bytes.
-extern "C" char* FUN_002e3338(char* buffer, s32 capacity, const char* format, va_list arguments);
+extern "C" char* asdStringFormatGrow(char* buffer, s32 capacity, const char* format, va_list arguments);
 
 #endif

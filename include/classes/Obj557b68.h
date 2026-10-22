@@ -7,7 +7,7 @@ struct Obj557b68Entry {
     u32 values[2]; // 0x00
 };
 
-extern "C" void FUN_001006ec(void* entries, s32 count, s32 allocator);
+extern "C" void asdDeallocateArrayStorage(void* entries, s32 count, s32 allocator);
 extern "C" void asdOperatorDelete(void* block);
 
 struct Obj557b68EntryVector {
@@ -17,7 +17,7 @@ struct Obj557b68EntryVector {
 
     ~Obj557b68EntryVector()
     {
-        FUN_001006ec(begin, capacity - begin, 0);
+        asdDeallocateArrayStorage(begin, capacity - begin, 0);
     }
 };
 

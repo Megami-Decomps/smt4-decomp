@@ -51,7 +51,7 @@ extern unsigned int categoryGetColor(int);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_002b6dd8. */
 extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -94,7 +94,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
             }
             if ((int)param_1->field_0x34 < 0) {
               gameGetPlayerData();
-              temp_v5 = FUN_002bd1fc();
+              temp_v5 = gameGetPlayerName();
               textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
             }
             else {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0027d7b0(...);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int VectorSignedToFloat(int, int);
 
 extern int g_lmapMainState; /* 0x447060 */
@@ -14,7 +14,7 @@ extern int g_lmapScene; /* 0x447e88 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -59,7 +59,7 @@ void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 0x4ed0) = temp_v2;
   temp_v3 = *(float *)(temp_v0 + 0x4ebc);
-  FUN_00287aec();
+  mathDistanceBetweenPoints();
   temp_v6 = *(float *)(temp_v0 + 0x4ec8) - *(float *)(temp_v0 + 0x4ebc);
   *(float *)(temp_v0 + 0x4edc) = *(float *)(temp_v0 + 0x4ed0) - *(float *)(temp_v0 + 0x4ec4);
   *(float *)(temp_v0 + 0x4ed4) = temp_v6;

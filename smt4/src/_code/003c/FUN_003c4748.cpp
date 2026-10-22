@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022a358(...);
+int asdListBoxSetFloatItem(...);
 int asdListBoxSetItemMode3(...);
 int asdListBoxSetByteValue(unsigned int, int);
 int asdListBoxAddItems(void);
@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char LAB_003c49a0; /* 0x3c49a0 */
 extern int DAT_004398d4; /* 0x4398d4 */
 
-/* Supplied declaration required: FUN_0022a358. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
@@ -40,16 +40,16 @@ void FUN_003c4748(int param_1,int param_2)
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_003c49a0);
-  FUN_0022a358(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
-  FUN_0022a358(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
-  FUN_0022a358(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)(DAT_004398d4 + 0x40),0,2,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)(DAT_004398d4 + 0x44),0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),5,*(unsigned int *)(DAT_004398d4 + 0x48),0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),6,*(unsigned int *)(DAT_004398d4 + 0x4c),0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),7,*(unsigned int *)(DAT_004398d4 + 0x50),0,10000,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),8,*(unsigned int *)(DAT_004398d4 + 0x54),0,10000,0);
-  FUN_0022a358(*(unsigned int *)(param_1 + 0x10),9,0,10);
+  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),9,0,10);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),10,*(unsigned int *)(DAT_004398d4 + 0x5c),0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xb,*(unsigned int *)(DAT_004398d4 + 0x60),0,0xff,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)(DAT_004398d4 + 100),0,0xff,0);

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00152394(unsigned int, unsigned int, unsigned int [2]);
+int soundArchiveReadWaveArchiveInfo(unsigned int, unsigned int, unsigned int [2]);
 int FUN_00235c70(unsigned int, unsigned int);
 int FUN_002a7ac4(unsigned char [12], unsigned int, int);
 int FUN_002ac5f4(unsigned char [12], unsigned int);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_5_stack;
 
-/* Supplied declaration required: FUN_00152394. */
+/* Supplied declaration required: soundArchiveReadWaveArchiveInfo. */
 /* Supplied declaration required: FUN_00235c70. */
 /* Supplied declaration required: FUN_002a7ac4. */
 extern unsigned int *FUN_002ac5d8(unsigned char *);
@@ -63,7 +63,7 @@ FUN_0037be24(unsigned int *param_1,char *param_2,unsigned int param_3,unsigned i
     else {
       temp_v3[0] = 0xffffffff;
       temp_v4 = '\0';
-      FUN_00152394(param_4,*puVar4,temp_v3);
+      soundArchiveReadWaveArchiveInfo(param_4,*puVar4,temp_v3);
       *param_1 = *puVar4;
       param_1[1] = param_5;
       *param_2 = temp_v4;

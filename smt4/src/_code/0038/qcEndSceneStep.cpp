@@ -14,7 +14,7 @@ typedef struct Scene003849d0 {
     /* 0x5c4 */ Handle003849d0 *handle;
 } Scene003849d0;
 
-s32 FUN_00235554(Scene003849d0 *scene, const char *name);
+s32 scrScriptProcessStartMappedEntry(Scene003849d0 *scene, const char *name);
 void FUN_002636d0(s32 value);
 s32 buttonHelpResetSlots(void);
 s32 msgWindowReset(void);
@@ -32,7 +32,7 @@ void qcEndSceneStep(Scene003849d0 *scene)
     s32 step = scene->step;
 
     if (step == 0) {
-        FUN_00235554(scene, "qc_end");
+        scrScriptProcessStartMappedEntry(scene, "qc_end");
         buttonHelpSetPreset(0x9e);
         scene->step = scene->step + 1;
         return;

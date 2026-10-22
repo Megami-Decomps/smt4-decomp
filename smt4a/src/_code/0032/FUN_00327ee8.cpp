@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00324cc0(void);
+int mathVec3Dot(void);
 int FUN_003250ac(unsigned char [44]);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern unsigned char DAT_005f162f; /* 0x5f162f */
 extern unsigned char DAT_005f1631; /* 0x5f1631 */
 extern int DAT_006160dc; /* 0x6160dc */
 
-/* Supplied declaration required: FUN_00324cc0. */
+/* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: FUN_003250ac. */
 
 
@@ -73,7 +73,7 @@ void FUN_00327ee8(void)
           FUN_003250ac(temp_v8);
         }
         temp_v5 = (float)in_d8;
-        FUN_00324cc0();
+        mathVec3Dot();
         temp_v2 = DAT_005f162f;
         if (temp_v5 < (float)temp_v7) goto LAB_00328050;
         temp_v3 = temp_v3 + 1;

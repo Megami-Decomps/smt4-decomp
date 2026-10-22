@@ -9,7 +9,7 @@ int FUN_00241f2c(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00298d64(...);
 int flaggedEntrySetValueA(...);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
@@ -59,7 +59,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_00298d64. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern unsigned int flaggedEntryGetValueA(int);
-/* Supplied declaration required: FUN_0029e17c. */
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
@@ -431,7 +431,7 @@ unsigned int FUN_003291e0(int *param_1)
   case 6:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
-      FUN_0029e17c();
+      useCounterRelease();
       buttonHelpSetPreset(0x19);
       FUN_00242000(temp_v7);
       FUN_00248738(temp_v7,3);

@@ -12,7 +12,7 @@ int FUN_0019e3d0(...);
 int FUN_001a1c28(...);
 int FUN_0021252c(...);
 int facingUpdateAngles(int, int);
-int FUN_00409718(int);
+int uiSpriteRefreshMode(int);
 int matrixSetTranslation(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [48], float *);
@@ -75,7 +75,7 @@ extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: FUN_0021252c. */
 /* Supplied declaration required: facingUpdateAngles. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_00409718. */
+/* Supplied declaration required: uiSpriteRefreshMode. */
 /* Supplied declaration required: matrixSetTranslation. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
@@ -134,7 +134,7 @@ void FUN_00237dd0(int param_1)
   if (*(char *)(param_1 + 1000) == '\0') {
     return;
   }
-  FUN_00409718(g_renderCtx);
+  uiSpriteRefreshMode(g_renderCtx);
   temp_v0 = FUN_0018aeb8();
   mtx44Copy(temp_v18,temp_v0);
   temp_v3 = g_renderCtx;

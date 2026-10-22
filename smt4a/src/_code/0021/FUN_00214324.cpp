@@ -20,7 +20,7 @@ int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(...);
 int dataTableFree(int);
 int slotSetRequest(...);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int bgmFadeOut(int);
 int scrRunOpcodesStub(...);
 int FUN_00275bc8(void);
@@ -72,7 +72,7 @@ extern short *dataTableGetEntries(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int slotIsReady(unsigned int);
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: scrRunOpcodesStub. */
@@ -80,7 +80,7 @@ extern int slotIsReady(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetValue(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int messageWindowIsState1(void);
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_003423cc. */
@@ -273,9 +273,9 @@ LAB_002146c0:
     temp_v7 = panelIsMissingOrFlagClear();
     if (temp_v7 == 0) break;
     obj04Finish();
-    temp_v7 = FUN_002a4b74();
+    temp_v7 = messageGetChoiceResult();
     if (-1 < temp_v7) {
-      temp_v7 = FUN_002a4b74();
+      temp_v7 = messageGetChoiceResult();
       puVar2[0x3f] = temp_v7;
       puVar2[0x3e] = (int)*(short *)(puVar2 + temp_v7 * 4 + 0x19);
       puVar4 = g_npcRoom;
@@ -316,11 +316,11 @@ LAB_002146c0:
     }
     textFormatBuffer(&temp_v8,&LAB_00214b8c,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     puVar2[0x16] = (unsigned int)puVar4;
     textFormatBuffer(&temp_v8,&LAB_00214ba8,*(unsigned short *)puVar2[puVar2[0x3e] + 10],
                  *(unsigned short *)puVar2[puVar2[0x3e] + 10]);
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     puVar2[0x17] = (unsigned int)puVar5;
     FUN_00275bc8();
     puVar2[0x18] = (unsigned int)puVar5;

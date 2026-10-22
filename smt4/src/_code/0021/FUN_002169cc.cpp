@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_002fc29c's literal pool; not written yet. */
+/* NON_MATCHING: job-owned scene transition waits for 28 resources, updates model flags, and swaps active display callbacks; nested resource/model layouts and hard-float callback results remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_002169cc for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_002169cc(void)

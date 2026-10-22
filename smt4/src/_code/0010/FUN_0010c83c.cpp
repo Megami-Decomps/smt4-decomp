@@ -39,7 +39,7 @@ extern int eventTexSelectJobsById(short);
 extern int FUN_0011921c(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
 /* Supplied declaration required: FUN_0011a0d4. */
-extern unsigned int FUN_0011b454(void);
+extern unsigned int dataTableGetNamePayload(void);
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
@@ -50,7 +50,7 @@ extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bd0f8. */
 /* Supplied declaration required: FUN_002bd158. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: libc_strcpy. */
@@ -163,7 +163,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           }
         }
         else {
-          temp_v6 = FUN_002bd1fc();
+          temp_v6 = gameGetPlayerName();
           libc_strcpy(temp_v11,temp_v6);
         }
       }
@@ -253,7 +253,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       temp_v4 = *(unsigned short *)(param_2 + temp_v9 * 2);
       *param_4 = temp_v8;
       if (*(short *)(param_2 + temp_v8 * 2) != 0) {
-        temp_v6 = FUN_0011b454();
+        temp_v6 = dataTableGetNamePayload();
         FUN_002bcfc0(temp_v6,temp_v11);
         FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
         return 1;

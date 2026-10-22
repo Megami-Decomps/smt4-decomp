@@ -14,7 +14,7 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 void FUN_002355ac(s32 enabled);
 void FUN_00259258(void);
-void FUN_00235554(QuestConfirmWork* work, const char* name);
+void scrScriptProcessStartMappedEntry(QuestConfirmWork* work, const char* name);
 void* dataTable28Sub0GetRecord(void* output, s32 kind);
 void placeWinStartText(void);
 
@@ -24,7 +24,7 @@ void questConfirmSetup(QuestConfirmWork* work)
     if (gameFlagIsSet(0x24) != 0)
         FUN_002355ac(1);
     FUN_00259258();
-    FUN_00235554(work, "qc_confirm");
+    scrScriptProcessStartMappedEntry(work, "qc_confirm");
     dataTable28Sub0GetRecord(work->table, work->kind);
     placeWinStartText();
     work->state = 6;

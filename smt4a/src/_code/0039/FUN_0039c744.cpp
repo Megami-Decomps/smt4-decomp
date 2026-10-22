@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0020b908(int, int);
-int FUN_0023c08c(int);
+int uniteStartOrQueueRequest(int);
 int FUN_002a7b74(void);
 int FUN_003857b4(int);
 int soundChannelRequestIfEnabled(unsigned int, int, int);
@@ -21,7 +21,7 @@ extern unsigned int *g_unite; /* 0x57f290 */
 
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_0020b908. */
-/* Supplied declaration required: FUN_0023c08c. */
+/* Supplied declaration required: uniteStartOrQueueRequest. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a7b74. */
 extern int lmapSceneGetScript(void);
@@ -61,7 +61,7 @@ void FUN_0039c744(void)
   puVar1[0x2429] = temp_v2;
   puVar1[0x246c] = 0;
   FUN_002a7b74();
-  FUN_0023c08c(0x12);
+  uniteStartOrQueueRequest(0x12);
   FUN_0020b908(0x25,1);
   temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {

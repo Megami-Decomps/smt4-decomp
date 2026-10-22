@@ -42,7 +42,7 @@ int gameFlagSetValue(...);
 int FUN_0040a244(void);
 int FUN_004c8b10(void);
 int FUN_004c8e30(...);
-int FUN_004f1530(...);
+int mathVectorClear(...);
 int motionClearVectors(...);
 int obj4FSlotsReset(...);
 int obj4FSlots28Reset(...);
@@ -64,7 +64,7 @@ int FUN_003eebf4(unsigned int, int);
 int FUN_003f034c(...);
 int FUN_003f26d4(unsigned int);
 int chainCountIdUnflagged(...);
-int FUN_0047ec9c(void);
+int jyoucyuEnsureResidentEntry(void);
 int FUN_004a9d1c(...);
 int FUN_004aa2e0(unsigned int, int);
 int FUN_004ac0bc(...);
@@ -183,7 +183,7 @@ extern int dataTableGetEntries(void);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 extern unsigned int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
-extern unsigned int FUN_001bce18(void);
+extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_00215978. */
 extern int scrRunOpcodesStub(unsigned int);
@@ -233,7 +233,7 @@ extern int FUN_003ed878(unsigned int);
 extern int isZero(unsigned int);
 /* Supplied declaration required: FUN_0047dc50. */
 /* Supplied declaration required: FUN_0047dd4c. */
-/* Supplied declaration required: FUN_0047ec9c. */
+/* Supplied declaration required: jyoucyuEnsureResidentEntry. */
 /* Supplied declaration required: callJyoucyuGetTableEntry1. */
 /* Supplied declaration required: FUN_004a9d1c. */
 /* Supplied declaration required: FUN_004aa2e0. */
@@ -261,7 +261,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: state4DStart. */
 /* Supplied declaration required: hasFlag80Or1000. */
 /* Supplied declaration required: btlUnitGet. */
-/* Supplied declaration required: FUN_004f1530. */
+/* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: motionClearVectors. */
 /* Supplied declaration required: obj4FSlotsReset. */
 /* Supplied declaration required: obj4FSlots28Reset. */
@@ -345,7 +345,7 @@ unsigned int FUN_0024bcd4(void)
   case 2:
     if (*(int *)(temp_v2 + 0x9c) == 0) {
       temp_v3 = flagGroupsCDAtLeast11();
-      if (((temp_v3 != 0) && (FUN_0047ec9c(), temp_v3 != 0)) && (*(int *)(temp_v2 + 0x2288) != 0)) {
+      if (((temp_v3 != 0) && (jyoucyuEnsureResidentEntry(), temp_v3 != 0)) && (*(int *)(temp_v2 + 0x2288) != 0)) {
         state4DStart(g_btlStageModel);
         *(unsigned int *)(temp_v2 + 0x9c) = 1;
       }
@@ -808,7 +808,7 @@ joined_r0x0024cba8:
       FUN_004f8fa0(g_btlAux);
       obj4FSlots28Reset(g_btlAux);
       obj4FSlotsReset(g_btlAux);
-      FUN_004f1530(g_btlCamera);
+      mathVectorClear(g_btlCamera);
       motionClearVectors(g_btlCamera);
       temp_v5 = ~DAT_00573a00;
       temp_v12 = ~DAT_00573a08;
@@ -979,7 +979,7 @@ LAB_0024d284:
         rt_memcpy_w(temp_v6,DAT_00573924,0x2d30);
       }
       if (DAT_00573928 != 0) {
-        temp_v6 = FUN_001bce18();
+        temp_v6 = flagValueGetStorage();
         rt_memcpy(temp_v6,DAT_00573928,0x10b8);
       }
     }
@@ -990,7 +990,7 @@ LAB_0024d284:
         rt_memcpy_w(temp_v6,DAT_00573924,0x2d30);
       }
       if (DAT_00573928 != 0) {
-        temp_v6 = FUN_001bce18();
+        temp_v6 = flagValueGetStorage();
         rt_memcpy(temp_v6,DAT_00573928,0x10b8);
       }
     }
@@ -1111,7 +1111,7 @@ LAB_0024d284:
           rt_memcpy_w(temp_v6,DAT_00573924,0x2d30);
         }
         if (DAT_00573928 != 0) {
-          temp_v6 = FUN_001bce18();
+          temp_v6 = flagValueGetStorage();
           rt_memcpy(temp_v6,DAT_00573928,0x10b8);
         }
       }

@@ -6,7 +6,7 @@ extern "C" {
 extern EffectSelectionTemplate DAT_0059e9a8;
 void engineFreeCallback(void *memory);
 LinkedItem *linkedFindItemByIndex(LinkedItems *list, s32 index);
-void FUN_00362788(EffMenuNode *node, const char *text);
+void effEditorSetTextValue(EffMenuNode *node, const char *text);
 
 void effectEditorCreateSelectedNameLabel()
 {
@@ -21,6 +21,6 @@ void effectEditorCreateSelectedNameLabel()
     LinkedItem *item = linkedFindItemByIndex(
         (LinkedItems *)g_effectEditor.selection.list,
         g_effectEditor.selection.index + DAT_0059e9a8.indices.extraOffset);
-    FUN_00362788(g_effectEditor.text.name, item->label.text);
+    effEditorSetTextValue(g_effectEditor.text.name, item->label.text);
 }
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_001bc2ec(int);
+extern unsigned int asdGxGetPhysicalAddress(int);
 
 
 void FUN_001caea8(int param_1,int param_2)
@@ -80,11 +80,11 @@ void FUN_001caea8(int param_1,int param_2)
         }
       }
       if (temp_v0 != 0) break;
-      temp_v4 = FUN_001bc2ec(temp_v2);
+      temp_v4 = asdGxGetPhysicalAddress(temp_v2);
       temp_v0 = 1;
       *(unsigned int *)(param_1 + 0x2c) = *(unsigned int *)(param_1 + 0x2c) | ((temp_v4 & 0x7fffffff) >> 3);
     }
-    temp_v4 = FUN_001bc2ec(temp_v2);
+    temp_v4 = asdGxGetPhysicalAddress(temp_v2);
     temp_v3 = temp_v0 + 1;
     puVar5[temp_v0 + 7] = ((temp_v4 >> 3) & 0xe03fffff) | puVar5[temp_v0 + 7];
     temp_v0 = temp_v3;

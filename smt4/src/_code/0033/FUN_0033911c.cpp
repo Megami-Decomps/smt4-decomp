@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00293e08(void);
-int FUN_00293e78(unsigned int, int *);
+int nodeOwnerSetTranslations(unsigned int, int *);
 int FUN_002a5704(unsigned int, int);
 int FUN_002adde8(unsigned int, unsigned char *, int *);
 int FUN_003351e0(unsigned int);
@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char LAB_003391c0; /* 0x3391c0 */
 
 /* Supplied declaration required: FUN_00293e08. */
-/* Supplied declaration required: FUN_00293e78. */
+/* Supplied declaration required: nodeOwnerSetTranslations. */
 /* Supplied declaration required: FUN_002a5704. */
 /* Supplied declaration required: FUN_002adde8. */
 /* Supplied declaration required: FUN_003351e0. */
@@ -44,7 +44,7 @@ void FUN_0033911c(int param_1)
       temp_v1 = 0;
       temp_v2 = 0;
     }
-    FUN_00293e78(*(unsigned int *)(param_1 + 0x4394),&temp_v0);
+    nodeOwnerSetTranslations(*(unsigned int *)(param_1 + 0x4394),&temp_v0);
     FUN_003351e0(*(unsigned int *)(param_1 + 0x4394));
     FUN_002a5704(*(unsigned int *)(param_1 + 0x4394),0x19);
   }

@@ -6,7 +6,7 @@ extern "C" {
 
 int sharedRefAddRef(int);
 int onlineTimeGetNow(int *);
-int FUN_002f2da0(unsigned char [4], int, int *);
+int sharedRefAssignFromOwner(unsigned char [4], int, int *);
 int wordRefsDiffer_002f2dec(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: onlineTimeGetNow. */
-/* Supplied declaration required: FUN_002f2da0. */
+/* Supplied declaration required: sharedRefAssignFromOwner. */
 /* Supplied declaration required: wordRefsDiffer_002f2dec. */
 
 
@@ -40,12 +40,12 @@ void FUN_0011ca08(int param_1,int param_2)
     temp_v0 = wordRefsDiffer_002f2dec(param_1 + 4,&temp_v1);
     if (temp_v0 == 0) {
       temp_v2 = param_2;
-      FUN_002f2da0(temp_v3,param_1,&temp_v2);
+      sharedRefAssignFromOwner(temp_v3,param_1,&temp_v2);
     }
   }
   else {
     temp_v2 = param_2;
-    FUN_002f2da0(temp_v3,param_1,&temp_v2);
+    sharedRefAssignFromOwner(temp_v3,param_1,&temp_v2);
   }
   temp_v0 = wordRefsDiffer_002f2dec(param_1 + 4,param_1 + 0xc);
   if (temp_v0 != 0) {

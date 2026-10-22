@@ -12,7 +12,7 @@ int FUN_002328b4(void);
 int FUN_00234cd8(unsigned int, int, int);
 void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_002758d8(void);
-int FUN_002a0400(unsigned int, unsigned int, unsigned int);
+int objModelCreateFromSource(unsigned int, unsigned int, unsigned int);
 int objModelDestroy(unsigned int);
 int FUN_003b9c00(int);
 int VectorSignedToFloat(int, int);
@@ -37,7 +37,7 @@ extern unsigned short flaggedValueHolderGetTotal(int);
 extern int inputIsQuestConfirmPressed(void);
 /* Supplied declaration required: FUN_002758d8. */
 extern int inputIsQuestMenuPressed(void);
-/* Supplied declaration required: FUN_002a0400. */
+/* Supplied declaration required: objModelCreateFromSource. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: objModelDestroy. */
 /* Supplied declaration required: FUN_003b9c00. */
@@ -118,7 +118,7 @@ void FUN_003b875c(int param_1)
       if (-1 < *(char *)(temp_v5 + 0x2b)) {
         objModelDestroy(*(unsigned int *)(param_1 + 0xe5c));
         temp_v2 = param_1 + *(char *)(temp_v5 + 0x2b) * 4;
-        FUN_002a0400(*puVar10,*(unsigned int *)(temp_v2 + 0xe60),*(unsigned int *)(temp_v2 + 0xe88));
+        objModelCreateFromSource(*puVar10,*(unsigned int *)(temp_v2 + 0xe60),*(unsigned int *)(temp_v2 + 0xe88));
       }
     }
   }

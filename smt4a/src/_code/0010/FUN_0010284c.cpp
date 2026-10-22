@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e31ba(unsigned int, int *, unsigned int, int);
-int FUN_002e31e0(int, int *);
+int libcFormatAppendByte(int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002e31ba. */
-/* Supplied declaration required: FUN_002e31e0. */
+/* Supplied declaration required: libcFormatAppendByte. */
 
 
 unsigned int FUN_0010284c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -26,7 +26,7 @@ unsigned int FUN_0010284c(unsigned int param_1,unsigned int param_2,unsigned int
   temp_v0 = param_1;
   uStack_c = param_4;
   FUN_002e31ba(param_2,&temp_v0,param_3,0x2e31e1);
-  FUN_002e31e0(0,&temp_v0);
+  libcFormatAppendByte(0,&temp_v0);
   return param_2;
 }
 

@@ -95,9 +95,9 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0020caec. */
 extern unsigned int *FUN_0022e9b8(void);
 extern int FUN_0026140c(void);
-extern int FUN_00284140(int);
-extern int FUN_002a4844(unsigned int *);
-extern int FUN_002a4860(unsigned int *);
+extern int recordGetModeForId(int);
+extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
+extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int FUN_002a4878(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_002a4b28. */
@@ -205,7 +205,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
     }
   }
   if (*(char *)(temp_v1 + 0x38) == '\0') {
-    temp_v1 = FUN_002a4844(temp_v15);
+    temp_v1 = resourceRunEmbeddedOperationIfUnblocked(temp_v15);
     temp_v9 = 0;
     temp_v2 = uiSearchSecondary(temp_v15);
     if (0 < temp_v2) {
@@ -397,7 +397,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
                  (int)*(short *)(puVar2 + 0x11d),0x97,1);
     return;
   }
-  temp_v1 = FUN_002a4860(temp_v14);
+  temp_v1 = resourceRunOperationIfUnblocked(temp_v14);
   temp_v9 = 0;
   temp_v2 = uiSearchPrimary(temp_v14);
   if (0 < temp_v2) {
@@ -510,7 +510,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   }
   temp_v1 = FUN_002a4894(temp_v14);
   temp_v1 = FUN_001834a4(0x1a,temp_v1 + 0x3f);
-  temp_v2 = FUN_002a4860(temp_v14);
+  temp_v2 = resourceRunOperationIfUnblocked(temp_v14);
   temp_v9 = FUN_002a4894(temp_v14);
   psVar6 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + (temp_v9 + temp_v2) * 2 + 0x62a0);
   FUN_00184310();
@@ -552,7 +552,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   FUN_001835b4(2,0x1a,0x3b,(int)&param_1->field_0x0 + (int)*(short *)(temp_v1 + 8),
                *(short *)(temp_v1 + 10) + param_2,0x7e);
   temp_v2 = FUN_002a4894(temp_v14);
-  temp_v2 = FUN_00284140((int)*(short *)((int)puVar2 + temp_v2 * 2 + 0x438));
+  temp_v2 = recordGetModeForId((int)*(short *)((int)puVar2 + temp_v2 * 2 + 0x438));
   temp_v9 = *(short *)(temp_v1 + 10) + param_2;
   temp_v8 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v1 + 8);
   if (!((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6)) {

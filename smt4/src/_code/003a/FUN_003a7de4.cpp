@@ -6,7 +6,7 @@ extern "C" {
 
 int messageMainSetTargetFlags(int);
 int FUN_00295c04(unsigned int);
-int FUN_0029be5c(int, unsigned int);
+int gameCounterAddSaturating(int, unsigned int);
 int FUN_0029c1c8(int, int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_002a0cc8(int);
@@ -19,7 +19,7 @@ typedef struct {
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: FUN_00295c04. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: FUN_0029c1c8. */
 extern int FUN_0029c1fc(void);
 extern int messageMainTargetIsClear(void);
@@ -48,7 +48,7 @@ void FUN_003a7de4(int param_1)
     temp_v2 = (unsigned int)temp_v0;
     FUN_0029ce60(temp_v2,*(unsigned char *)(param_1 + 0x5a5),0);
     FUN_00295c04(-temp_v2);
-    FUN_0029be5c(0x28,temp_v2);
+    gameCounterAddSaturating(0x28,temp_v2);
     FUN_002a0cc8(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;

@@ -33,7 +33,7 @@ extern int dataTable17Sub1GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00233730. */
 extern unsigned int FUN_002ae3c0(short);
 extern unsigned long long FUN_002c0a2c(unsigned char, unsigned int, unsigned int);
-extern int FUN_00343bd8(short);
+extern int gameTestIndexedAuxiliaryFlag(short);
 extern int FUN_003a0284(void);
 /* Supplied declaration required: dataTable17Sub1ChildGetCount. */
 /* Supplied declaration required: dataTable17Sub1ChildGetEntries. */
@@ -121,7 +121,7 @@ unsigned int FUN_003a45fc(int param_1)
       temp_v3 = FUN_003a0284();
       if (temp_v3 != 0) {
         temp_v10 = 0;
-        if ((temp_v3 == 2) && (temp_v3 = FUN_00343bd8(temp_v1), temp_v3 == 0)) {
+        if ((temp_v3 == 2) && (temp_v3 = gameTestIndexedAuxiliaryFlag(temp_v1), temp_v3 == 0)) {
           temp_v10 = 1;
         }
         temp_v5 = FUN_002ae3c0(temp_v1);

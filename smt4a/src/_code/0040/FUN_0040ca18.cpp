@@ -67,7 +67,7 @@ extern unsigned int DAT_00571368; /* 0x571368 */
 extern unsigned int DAT_0057136c; /* 0x57136c */
 
 extern int btlGetMainState(void);
-extern int FUN_001632f8(void);
+extern int infoWinIsActive(void);
 extern int FUN_002c7bf4(fn_0040ca18_arg1_p28 *);
 extern int FUN_004c600c(int);
 extern int FUN_004c86ec(fn_0040ca18_arg1_p28 *);
@@ -104,7 +104,7 @@ void FUN_0040ca18(fn_0040ca18_arg0 *param_1,fn_0040ca18_arg1 *param_2)
     return;
   }
   if (param_2->field_0x24 != 0) {
-    if ((param_2->field_0x24 == 1) && (temp_v2 = FUN_001632f8(), temp_v2 == 0)) {
+    if ((param_2->field_0x24 == 1) && (temp_v2 = infoWinIsActive(), temp_v2 == 0)) {
       param_2->field_0x2 = 0;
       return;
     }

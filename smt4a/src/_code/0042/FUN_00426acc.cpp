@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001029f4(unsigned int, int, int);
 int sysFatalBreak(void);
 int recordTableAppend(unsigned char *);
-int FUN_00427d6c(int);
+int pricingSelectionBuildPredicate(int);
 int wordPairClear(void);
 int FUN_00428334(int, unsigned char **, unsigned int);
 int FUN_00428428(int, int, int);
@@ -46,7 +46,7 @@ extern unsigned char DAT_00642b80; /* 0x642b80 */
 /* Supplied declaration required: sysFatalBreak. */
 extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: recordTableAppend. */
-/* Supplied declaration required: FUN_00427d6c. */
+/* Supplied declaration required: pricingSelectionBuildPredicate. */
 /* Supplied declaration required: wordPairClear. */
 /* Supplied declaration required: FUN_00428334. */
 extern unsigned char *dataGetBlockBase(int);
@@ -107,7 +107,7 @@ void FUN_00426acc(int param_1,int param_2,unsigned int param_3,int *param_4)
     recordTableAppend(&LAB_00426dd8);
     recordTableAppend(&LAB_00426de4);
     recordTableAppend(&LAB_00426df4);
-    FUN_00427d6c((char)param_4[10]);
+    pricingSelectionBuildPredicate((char)param_4[10]);
     temp_v23 = (int *)*param_4;
     if ((int *)*param_4 == (int *)0x0) {
       temp_v23 = param_4;

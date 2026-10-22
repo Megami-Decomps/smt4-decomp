@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ba3d0(unsigned short);
 /* Supplied declaration required: scrRunOpcodesStub. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0038b010. */
@@ -99,14 +99,14 @@ void FUN_00499fdc(int param_1)
       return;
     }
     temp_v1 = inputIsQuestRepeatRight();
-    if ((temp_v1 != 0) || (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v1 == 6)) {
+    if ((temp_v1 != 0) || (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
       FUN_00496a0c(param_1,1);
       sendEvent1000210();
       return;
     }
     temp_v1 = FUN_004d0494();
-    if ((temp_v1 != 0) || (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v1 == 6)) {
+    if ((temp_v1 != 0) || (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f7c);
       FUN_00496a0c(param_1,1);
       sendEvent1000210();

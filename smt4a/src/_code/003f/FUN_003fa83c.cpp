@@ -12,7 +12,7 @@ int asyncOperationStartOrPoll(int, unsigned int *, unsigned int *);
 int FUN_003fa1c8(unsigned int *);
 int FUN_00414a24(void);
 int FUN_004321a0(void);
-int FUN_00432998(void);
+int ctrNetInitialize(void);
 int FUN_00441f84(void);
 int FUN_00442630(void);
 int FUN_00442a94(void);
@@ -41,7 +41,7 @@ extern int refIsNonNegative(unsigned int *);
 extern unsigned int *FUN_003fa580(unsigned int *);
 /* Supplied declaration required: FUN_00414a24. */
 /* Supplied declaration required: FUN_004321a0. */
-/* Supplied declaration required: FUN_00432998. */
+/* Supplied declaration required: ctrNetInitialize. */
 /* Supplied declaration required: FUN_00441f84. */
 /* Supplied declaration required: FUN_00442630. */
 /* Supplied declaration required: FUN_00442a94. */
@@ -83,7 +83,7 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
     break;
   case 2:
     puVar3 = param_1 + 6;
-    FUN_00432998();
+    ctrNetInitialize();
     if (puVar3 == (unsigned int *)0x0) {
       return (unsigned int *)0x1;
     }

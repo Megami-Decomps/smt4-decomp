@@ -16,7 +16,7 @@ int legacyResourceIdRemap(...);
 int FUN_002e3140(...);
 int deletingDtor_002e56ec(...);
 int FUN_002fb0d4(...);
-int FUN_00429f38(...);
+int asdFsIsSdCardDetected(...);
 int FUN_0046c528(...);
 int FUN_0046e334(...);
 int FUN_0046fb60(...);
@@ -58,7 +58,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: deletingDtor_002e56ec. */
 /* Supplied declaration required: FUN_002fb0d4. */
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: FUN_0046c528. */
 /* Supplied declaration required: FUN_0046e334. */
 /* Supplied declaration required: FUN_0046fb60. */
@@ -122,7 +122,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
     temp_v3 = *(int *)(param_2 + 0x344);
     switch(temp_v3) {
     case 0:
-      FUN_00429f38();
+      asdFsIsSdCardDetected();
       if (temp_v3 == 0) {
         jyoucyuGetTableEntry(0);
         *(char *)piVar11 = '\0';

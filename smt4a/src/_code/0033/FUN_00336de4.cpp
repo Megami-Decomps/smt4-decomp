@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014afd0(int, unsigned int);
 int FUN_00184310(void);
-int FUN_00191e00(unsigned int, int, unsigned int, int);
+int aocLoadTextureNode(unsigned int, int, unsigned int, int);
 int dataTable00FindById(void);
 int FUN_001a6568(unsigned int, int, unsigned int, int);
 int asdTMTexLoadMainHeap(int, unsigned int);
@@ -18,7 +18,7 @@ extern int g_btlTalkBustUp; /* 0x5710dc */
 
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00191e00. */
+/* Supplied declaration required: aocLoadTextureNode. */
 /* Supplied declaration required: dataTable00FindById. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
@@ -48,7 +48,7 @@ void FUN_00336de4(int param_1,int param_2)
     if (param_2 == 0) {
       temp_v1 = aocRunByName(g_aocSystem,0x10,temp_v2,1);
       if (temp_v1 != 0) {
-        FUN_00191e00(g_aocSystem,0x10,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
+        aocLoadTextureNode(g_aocSystem,0x10,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
       }
       else {
         FUN_0014afd0(0x10,*(unsigned int *)(temp_v0 + 0x2f8));

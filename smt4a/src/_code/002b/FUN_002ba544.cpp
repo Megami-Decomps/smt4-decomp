@@ -7,7 +7,7 @@ extern "C" {
 int dataTable2CType0Count(void);
 
 extern int gameFlagBitsTest(int);
-extern unsigned int FUN_0033ab6c(int, unsigned int);
+extern unsigned int gameFlagSetIndexedBit(int, unsigned int);
 extern char *dataTable2CGetEntry(int);
 /* Supplied declaration required: dataTable2CType0Count. */
 
@@ -35,7 +35,7 @@ void FUN_002ba544(unsigned int param_1)
         temp_v1 = gameFlagBitsTest((int)pcVar1[3]);
         temp_v0 = 0;
         if (temp_v1 != 0) {
-          temp_v0 = FUN_0033ab6c((int)pcVar1[3],0);
+          temp_v0 = gameFlagSetIndexedBit((int)pcVar1[3],0);
         }
       }
       temp_v2 = temp_v2 + 1;

@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(int *, unsigned char *, int);
 int FUN_001654f8(int, int);
 int FUN_001ad9b4(void);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_0023723c(unsigned int, int, unsigned int, int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 void uiQuestRefreshDetailPages(int);
@@ -30,7 +30,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_003de464(int, unsigned int);
@@ -64,7 +64,7 @@ void FUN_003d498c(int param_1,unsigned int param_2)
     }
     else {
       textFormatBuffer(&temp_v2,&LAB_003d4b5c,param_1);
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       *(unsigned int **)(temp_v0 + 0x92c) = puVar3;
       *(unsigned char *)(temp_v0 + 0x943) = 0;
     }

@@ -7,7 +7,7 @@ extern "C" {
 int aocClearDisplayFlag(int);
 int FUN_0027e9c0(int);
 int FUN_0027ea28(int, int, int, int);
-int FUN_0027eafc(void);
+int asdFsIsSdCardDetected(void);
 int jobOwnerFreeSlotAndStop(int);
 int FUN_002a126c(int *, int);
 int FUN_002ba9ac(int);
@@ -35,7 +35,7 @@ extern int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_0027e9c0. */
 extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: FUN_0027ea28. */
-/* Supplied declaration required: FUN_0027eafc. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_002a126c. */
 extern int byteIsAtLeast100(unsigned int *);
@@ -108,7 +108,7 @@ unsigned int aocBootUpdate(void)
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
         temp_v2 = temp_v3;
       }
-      FUN_0027eafc();
+      asdFsIsSdCardDetected();
       if (temp_v2 != 0) {
         *(unsigned char *)(temp_v0 + 8) = 1;
         *(unsigned char *)(g_aocMain + 0xd50) = 1;

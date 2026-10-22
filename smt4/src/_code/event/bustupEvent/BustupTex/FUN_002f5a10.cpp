@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001ce4a4(...); /* 0x1ce4a4 */
-extern int FUN_002cfb68(...); /* 0x2cfb68 */
+extern int asdMTeXReleaseJobContext(...); /* 0x2cfb68 */
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern unsigned int FUN_002ae8e4(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -73,7 +73,7 @@ void FUN_002f5a10(int param_1)
   puVar1[0xb] = 0x3f800000;
   *(unsigned char *)(puVar1 + 0xc) = 0;
   *(unsigned char *)((int)puVar1 + 0x31) = 1;
-  asdProcessCreateSimple("EVE_BustupTex",2,0,0,FUN_001ce4a4,FUN_002cfb68,puVar1);
+  asdProcessCreateSimple("EVE_BustupTex",2,0,0,FUN_001ce4a4,asdMTeXReleaseJobContext,puVar1);
   return;
 }
 

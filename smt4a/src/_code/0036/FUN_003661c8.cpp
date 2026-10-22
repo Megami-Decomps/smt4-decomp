@@ -16,7 +16,7 @@ int FUN_00317af8(...);
 int FUN_00324e38(...);
 int FUN_00352308(void);
 int FUN_003b5714(unsigned int, unsigned int, unsigned int);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int VectorSignedToFloat(...);
 
 int FUN_002342b8(void);
@@ -77,7 +77,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00352308. */
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003b5714. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
@@ -421,7 +421,7 @@ LAB_00366704:
       FUN_001bbf0c();
       FUN_0014af98();
       soundVolumeSettingSet();
-      FUN_003d2150(0x10002e5);
+      sysPlayVoice(0x10002e5);
       soundVolumeSettingSet(temp_v0);
       temp_v1 = g_lmapScene;
       *(unsigned int *)(g_lmapScene + 0x68) = 0x41700000;
@@ -534,7 +534,7 @@ LAB_00366a74:
         FUN_001bbf0c();
         FUN_0014af98();
         soundVolumeSettingSet();
-        FUN_003d2150(0x10002e6);
+        sysPlayVoice(0x10002e6);
         soundVolumeSettingSet(temp_v0);
       }
       if (*(int *)(g_lmapScene + 8) != 6) break;

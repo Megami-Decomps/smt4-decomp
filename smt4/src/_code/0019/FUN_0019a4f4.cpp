@@ -39,7 +39,7 @@ int FUN_0028d320(...);
 int FUN_0028d5ac(void);
 int FUN_00292f4c(...);
 int FUN_002987d8(...);
-int FUN_0029e17c(void);
+int useCounterRelease(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
@@ -138,8 +138,8 @@ extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: FUN_0029cc44. */
 extern int FUN_0029d644(char *);
 extern int FUN_0029d65c(int);
-extern int FUN_0029e130(void);
-/* Supplied declaration required: FUN_0029e17c. */
+extern int useCounterGetCurrentValue(void);
+/* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
@@ -498,11 +498,11 @@ joined_r0x0019aa34:
   case 4:
     temp_v5 = useCounterIsFinished();
     if (temp_v5 == 0) {
-      temp_v5 = FUN_0029e130();
+      temp_v5 = useCounterGetCurrentValue();
       if (temp_v5 != 9) {
         if (temp_v5 == 10) {
           FUN_0028d5ac();
-          FUN_0029e17c();
+          useCounterRelease();
           playSceneSetState(param_1,5,0);
         }
       }
@@ -510,11 +510,11 @@ joined_r0x0019aa34:
         *(unsigned int *)(param_1 + 0x3050) = *(unsigned int *)(param_1 + 0x304c);
         playSceneSetState(param_1,7,0);
         FUN_0028d5ac();
-        FUN_0029e17c();
+        useCounterRelease();
       }
       break;
     }
-    FUN_0029e17c();
+    useCounterRelease();
     if (*(int *)(param_1 + 0x304c) - 8U < 6) {
       FUN_00292f4c(param_1);
     }

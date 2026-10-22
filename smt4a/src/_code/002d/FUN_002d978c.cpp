@@ -13,7 +13,7 @@ int FUN_002e364c(int);
 int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int FUN_003d4ed8(unsigned int);
 int VectorSignedToFloat(int, int);
 
@@ -36,7 +36,7 @@ extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 
 
@@ -106,7 +106,7 @@ LAB_002d99dc:
           FUN_001bbf0c();
           FUN_0014af98();
           soundVolumeSettingSet();
-          FUN_003d2150(0x10002e6);
+          sysPlayVoice(0x10002e6);
           soundVolumeSettingSet(temp_v0);
           temp_v3 = g_lmapScene;
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
@@ -152,7 +152,7 @@ LAB_002d9870:
         FUN_001bbf0c();
         FUN_0014af98();
         soundVolumeSettingSet();
-        FUN_003d2150(0x10002e5);
+        sysPlayVoice(0x10002e5);
         soundVolumeSettingSet(temp_v0);
         temp_v3 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;

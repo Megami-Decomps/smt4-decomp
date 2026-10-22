@@ -24,7 +24,7 @@ int FUN_00327ee8(void);
 int FUN_0033abd4(void);
 int mathPositionHeadingDegrees(void);
 int FUN_003b5714(unsigned int, unsigned int, unsigned int);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003d4ed8(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -66,7 +66,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003b5714. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
@@ -200,7 +200,7 @@ LAB_00367d2c:
         FUN_001bbf0c();
         FUN_0014af98();
         soundVolumeSettingSet();
-        FUN_003d2150(0x10002e5);
+        sysPlayVoice(0x10002e5);
         soundVolumeSettingSet(temp_v0);
         temp_v1 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x68) = 0x41000000;
@@ -361,7 +361,7 @@ LAB_00367d2c:
     temp_v2 = *(int *)(temp_v1 + 8) + 1;
     *(int *)(temp_v1 + 8) = temp_v2;
     if (temp_v2 == 10) {
-      FUN_003d2150(0x1000112);
+      sysPlayVoice(0x1000112);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
       slotSetRequest(0,10,0xff);

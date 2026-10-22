@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern s32 FUN_00215c9c(void);
+extern s32 uiQuestStateIsIdle(void);
 extern void FUN_00215cd4(u16 questId);
 extern void FUN_00269dc8(s32 arg);
 extern void FUN_00296934(void);
@@ -29,7 +29,7 @@ u8 scrComm_QuestUI_OpenWithArg(void)
         FUN_00269dc8(result);
         FUN_00215cd4(questId);
     }
-    result = FUN_00215c9c();
+    result = uiQuestStateIsIdle();
     if (result != 0) {
         FUN_00296934();
         buttonHelpSetPreset(0x90);

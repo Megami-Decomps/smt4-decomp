@@ -25,7 +25,7 @@ struct SharedElements {
 extern "C" {
 extern InitializationCounters DAT_00447e50;
 extern SharedElements DAT_004b896c;
-void FUN_00340650(void* element);
+void asdProcessRegisterWorkCallback(void* element);
 void FUN_00340664(void* element);
 void* __aeabi_vec_ctor_nocookie_nodtor(
     void* elements, void (*constructor)(void*), u32 stride, u32 count);
@@ -41,7 +41,7 @@ void* FUN_003ec4a4(u32 first, u32 second, InitializationArguments* arguments)
     DAT_00447e50.second = 0;
     SharedElements* elements = static_cast<SharedElements*>(
         __aeabi_vec_ctor_nocookie_nodtor(
-            &DAT_004b896c, FUN_00340650, sizeof(FirstElement), 16));
+            &DAT_004b896c, asdProcessRegisterWorkCallback, sizeof(FirstElement), 16));
     return FUN_002c5d54(elements->second, FUN_00340664, sizeof(SecondElement), 32);
 }
 }

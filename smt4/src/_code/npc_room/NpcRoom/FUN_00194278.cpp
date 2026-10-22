@@ -8,7 +8,7 @@ int npcRoomDestroy(void);
 int FUN_00290d5c(...);
 
 int scrRunOpcodesStub(...);
-void FUN_00290ed8(unsigned int frames);
+void bgmRequestSelectedChannelFade(unsigned int frames);
 int bgmFadeOut(int);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
@@ -60,7 +60,7 @@ extern int slotIsReady(unsigned int);
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern int FUN_00290e78(void);
-extern int FUN_00290e9c(void);
+extern int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: buttonHelpRelease. */
@@ -172,7 +172,7 @@ unsigned int FUN_00194278(void)
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 3);
       if (*psVar7 == 0x22) {
-        FUN_00290ed8(0x1e);
+        bgmRequestSelectedChannelFade(0x1e);
         soundChannelRequestIfEnabled(0x100005e,0,0x3c);
       }
       puVar3[0x41] = 0;
@@ -235,7 +235,7 @@ LAB_001945e8:
     temp_v5 = messageWindowIsState1();
     if ((temp_v5 != 0) && (temp_v5 = 0, 0 < (int)puVar3[0x39])) {
       do {
-        temp_v2 = FUN_00290e9c();
+        temp_v2 = messageTargetGetValue();
         temp_v7 = 0;
         do {
           temp_v1 = (int)*(short *)((int)puVar3 + temp_v7 * 2 + temp_v5 * 0x10 + 100);

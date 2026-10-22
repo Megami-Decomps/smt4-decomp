@@ -6,7 +6,7 @@ extern "C" {
 
 int uiAdjustIntegerFromRepeat(...);
 int FUN_001c36d8(...);
-int FUN_00285c9c(void);
+int gameRestorePrimaryWorkSave(void);
 int FUN_00287728(...);
 int gameFlagSetValue(...);
 int scrScriptProcessStartEntry(...);
@@ -32,11 +32,11 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_00215a24(void);
 extern int screenFadeIsBusy(void);
 extern int jobWorkerPollAndFree(void);
-/* Supplied declaration required: FUN_00285c9c. */
+/* Supplied declaration required: gameRestorePrimaryWorkSave. */
 /* Supplied declaration required: FUN_00287728. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: gameFlagSetValue. */
-extern unsigned int FUN_00290e9c(void);
+extern unsigned int messageTargetGetValue(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: slotSetRequest. */
@@ -224,7 +224,7 @@ unsigned int FUN_001b10e4(void)
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
       break;
     }
-    temp_v2 = FUN_00290e9c();
+    temp_v2 = messageTargetGetValue();
     temp_v4 = dataTableGet(0x3c,0);
     temp_v0 = dataTableGetEntries();
     temp_v3 = dataTableGetCount(temp_v4);
@@ -243,7 +243,7 @@ unsigned int FUN_001b10e4(void)
     }
     temp_v5 = FUN_00215a24();
     if (temp_v5 == 0) {
-      FUN_00285c9c();
+      gameRestorePrimaryWorkSave();
       *(unsigned int *)(temp_v0 + 0xc) = 10;
       buttonHelpSetPreset(0xa7);
       temp_v4 = *(unsigned int *)(temp_v0 + 0x8c);

@@ -50,7 +50,7 @@ typedef struct {
 extern unsigned int DAT_00573a50; /* 0x573a50 */
 extern unsigned int DAT_00573a54; /* 0x573a54 */
 
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: saveSlotFindSelected. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00187168. */
@@ -60,7 +60,7 @@ extern unsigned int dataTableFileGetTable(int, unsigned int);
 extern int gameGetSlotRecord(int);
 extern unsigned int *gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
-extern unsigned int FUN_001bce18(void);
+extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: FUN_00284fdc. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_memclr. */
@@ -116,7 +116,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
       puVar10 = (unsigned short *)(temp_v3 + param_2 * 0x84);
       puVar6 = (unsigned int *)gameGetSlotTable();
       temp_v4 = 0;
-      temp_v2 = FUN_0015687c();
+      temp_v2 = gameGetPlayerName();
       libc_strcpy(temp_v19,temp_v2);
       temp_v12 = puVar10[4];
       temp_v13 = puVar10[5];
@@ -179,7 +179,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 3);
-      temp_v2 = FUN_001bce18();
+      temp_v2 = flagValueGetStorage();
       rt_memclr(temp_v2,0x10b8);
       temp_v3 = 0;
       temp_v7 = temp_v6;

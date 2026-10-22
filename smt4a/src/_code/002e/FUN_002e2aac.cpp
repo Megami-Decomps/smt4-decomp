@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002309dc(void);
+void campReleaseRegisteredTouchRegions(void);
 void FUN_002e26a4(void);
 void FUN_00330b74(void);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
-void FUN_0037dab0(void);
+void partyPanelDestroy(void);
 void FUN_003a76b8(void);
 void aocScriptReleaseTableAndReset(void);
 void asdMemFree(void *memory);
@@ -27,8 +27,8 @@ void FUN_002e2aac(void)
     aocScriptReleaseTableAndReset();
     FUN_003a76b8();
     FUN_00330b74();
-    FUN_002309dc();
-    FUN_0037dab0();
+    campReleaseRegisteredTouchRegions();
+    partyPanelDestroy();
     campCommonBgRelease();
     campButtonHelpRelease();
     FUN_002e26a4();

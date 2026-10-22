@@ -53,7 +53,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00181ad0. */
 /* Supplied declaration required: FUN_00183468. */
-extern int FUN_00183478(void);
+extern int asdGxIsReady(void);
 /* Supplied declaration required: FUN_00197f58. */
 /* Supplied declaration required: FUN_00198fe8. */
 /* Supplied declaration required: FUN_00199878. */
@@ -325,7 +325,7 @@ void FUN_00176800(int param_1,int param_2,int param_3)
   }
   *(unsigned int *)(temp_v5 + 0x10) = temp_v2;
   *(unsigned char *)(temp_v5 + 0x28) = 0;
-  temp_v5 = FUN_00183478();
+  temp_v5 = asdGxIsReady();
   if ((temp_v5 != 0) && (param_3 == 0)) {
     FUN_00197f58(*(unsigned int *)(param_1 + 0x14),DAT_005c1430,0,0,0);
     temp_v5 = FUN_00183468();

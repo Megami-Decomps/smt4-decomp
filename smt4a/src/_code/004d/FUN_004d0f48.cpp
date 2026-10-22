@@ -1,4 +1,4 @@
-/* NON_MATCHING: fragment of a larger function (conditional return falls through beyond the assigned unit). */
+/* NON_MATCHING: draws a six-entry icon list with alignment labels and a formatted numeric value; typed list work, text buffers, and VFP text-position arguments remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_004d0f48 for reference (not compiled; its own view of the boundaries):
 
 void FUN_004d0f48(unsigned int param_1,int param_2)
@@ -55,7 +55,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
     uStack_e0 = 0x3f800000;
     uStack_dc = 0x3f800000;
     if (DAT_005715f8 != '\0') {
-      FUN_004bbb74();
+      aocGetTableRecordOrFallback();
       FUN_004bbc4c(auStack_110,param_2,0);
     }
     else {

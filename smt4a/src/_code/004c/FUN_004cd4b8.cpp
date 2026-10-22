@@ -1,4 +1,4 @@
-/* NON_MATCHING: fragment of a larger function (conditional return falls through beyond the assigned unit). */
+/* NON_MATCHING: computes unit growth/reward updates from table records and applies level/stat changes; the reference loses record lookup returns and typed packed growth-result fields. */
 /* romwright 0.5.0 decompilation of FUN_004cd4b8 for reference (not compiled; its own view of the boundaries):
 
 void FUN_004cd4b8(int param_1,int param_2)
@@ -103,7 +103,7 @@ void FUN_004cd4b8(int param_1,int param_2)
   iVar9 = 0;
   if (0 < param_2) {
     do {
-      uVar14 = FUN_00203b1c();
+      uVar14 = gameGetUnlockedCountLimit();
       if (uVar14 <= *(unsigned short *)(param_1 + 100)) break;
       uVar14 = *(unsigned short *)(param_1 + 100) + 1;
       uVar12 = uVar14 & 0xffff;

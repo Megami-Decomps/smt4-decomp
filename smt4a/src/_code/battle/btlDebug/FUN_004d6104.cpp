@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int FUN_004d2628(...);
 int FUN_004d352c(...);
 int FUN_004d3c94(...);
@@ -123,7 +123,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: listBoxItemHasOwner. */
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: asdListBoxGetFloatValuePtr. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: FUN_003592dc. */
 /* Supplied declaration required: asdListBoxGetSelectedItemId. */
 /* Supplied declaration required: FUN_003ed238. */
@@ -1010,10 +1010,10 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     asdListBoxAddItems();
     asdListBoxSetByteValue(param_1[4],1);
     jobSetText(param_1[4],"btl Sake Menu");
-    FUN_00340edc(param_1[4],0,0,10);
-    FUN_00340edc(param_1[4],1,0);
-    FUN_00340edc(param_1[4],2,0,1);
-    FUN_00340edc(param_1[4],3,0xffffffff,0);
+    asdListBoxSetFloatItem(param_1[4],0,0,10);
+    asdListBoxSetFloatItem(param_1[4],1,0);
+    asdListBoxSetFloatItem(param_1[4],2,0,1);
+    asdListBoxSetFloatItem(param_1[4],3,0xffffffff,0);
     asdListBoxSetToggleItem(param_1[4],4,(int)DAT_0057aa04);
     temp_v6 = 0x1a;
     break;

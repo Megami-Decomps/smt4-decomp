@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e31ba(unsigned int, int *, int *, unsigned char *);
-int FUN_002e31e0(int, int *);
+int libcFormatAppendByte(int, int *);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_00100d79; /* 0x100d79 */
 
 /* Supplied declaration required: FUN_002e31ba. */
-/* Supplied declaration required: FUN_002e31e0. */
+/* Supplied declaration required: libcFormatAppendByte. */
 
 
 unsigned int FUN_001028b8(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -36,7 +36,7 @@ unsigned int FUN_001028b8(int param_1,int param_2,unsigned int param_3,unsigned 
   uStack_4 = param_4;
   FUN_002e31ba(param_3,&temp_v0,&uStack_4,&LAB_00100d79);
   if (param_2 != 0) {
-    FUN_002e31e0(0,&temp_v0);
+    libcFormatAppendByte(0,&temp_v0);
   }
                     /* WARNING: Treating indirect jump as return */
   return param_3;

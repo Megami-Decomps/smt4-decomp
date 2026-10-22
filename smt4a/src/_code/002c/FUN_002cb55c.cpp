@@ -25,7 +25,7 @@ typedef struct {
     unsigned short sp40; /* 0x40: local_40 */
 } param_3_stack;
 
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_002b4e7c. */
 /* Supplied declaration required: libc_strcpy. */
@@ -100,7 +100,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   param_1[0x27] = param_2[6];
   temp_v4 = countUnlockedSlots();
   rt_memcpy_w(param_1 + 0x28,param_2 + 0x1a,temp_v4 << 1);
-  temp_v5 = FUN_0015687c();
+  temp_v5 = gameGetPlayerName();
   libc_strcpy(param_1 + 0x2d2,temp_v5);
   if ((short)param_1[0x11] >= 1000) {
     param_1[0x11] = 999;

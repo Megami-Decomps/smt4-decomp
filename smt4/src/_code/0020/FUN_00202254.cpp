@@ -8,7 +8,7 @@ extern unsigned char* DAT_004474f4;
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, float *);
 void FUN_002e29c0(float x, float z, float heading);
-float FUN_002f35d8(void);
+float cameraGetTargetAngle(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
@@ -99,7 +99,7 @@ void FUN_00202254(void)
     }
     if (DAT_004bd0dc != '\0') {
       {
-        float cameraHeading = FUN_002f35d8();
+        float cameraHeading = cameraGetTargetAngle();
         FUN_002e29c0(*(float*)(DAT_004474f4 + 0x4c),*(float*)(DAT_004474f4 + 0x54),cameraHeading);
       }
       temp_v2 = temp_v18;

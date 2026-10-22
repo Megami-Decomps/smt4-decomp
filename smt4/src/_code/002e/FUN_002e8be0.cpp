@@ -10,7 +10,7 @@ int mapIfReleaseSlot1(void);
 int mapIfActivateRecord(int, unsigned int);
 int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
-int FUN_0027fa98(unsigned int);
+int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
 int FUN_0027fca0(int);
 int mapSelectContainingRegions(void);
@@ -44,7 +44,7 @@ extern int mapIfHasSelection(void);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
@@ -191,7 +191,7 @@ void FUN_002e8be0(void)
         mapDestroyInterfaceModel();
         mapIfSetMode1();
         temp_v4 = 10;
-        FUN_0027fa98(temp_v4);
+        lmapSetSceneId(temp_v4);
         FUN_002804ec(g_lmapScene + 0x28);
         mapSelectContainingRegions();
         return;
@@ -205,7 +205,7 @@ void FUN_002e8be0(void)
             return;
           }
           temp_v4 = 1;
-          FUN_0027fa98(temp_v4);
+          lmapSetSceneId(temp_v4);
           FUN_002804ec(g_lmapScene + 0x28);
           mapSelectContainingRegions();
           return;

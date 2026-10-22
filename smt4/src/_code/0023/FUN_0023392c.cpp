@@ -21,7 +21,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_002335f8(int, unsigned int);
+extern int aocIsEntryIndexValid(int, unsigned int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: FUN_00289c98. */
@@ -90,7 +90,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
     FUN_002b8454(2,0xb,0x4b,1);
     FUN_002b8454(3,0,0,1);
     temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x90);
-    temp_v1 = FUN_002335f8(temp_v2,temp_v0);
+    temp_v1 = aocIsEntryIndexValid(temp_v2,temp_v0);
     if (temp_v1 != 0) {
       temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
       if (*(char *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9b3) != '\0') {

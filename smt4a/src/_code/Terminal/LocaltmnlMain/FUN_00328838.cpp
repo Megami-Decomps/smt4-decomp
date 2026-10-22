@@ -16,23 +16,23 @@ int placeWinRelease(void);
 int messageSetMode(...);
 int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(...);
-int FUN_001aeafc(...);
+int resourceOwnerReleaseAndReset(...);
 int FUN_001f3eec(...);
 int FUN_00214da4(void);
 int FUN_0022677c(...);
 int gameStateClearFlag(void);
-int FUN_00314c38(...);
+int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
 int FUN_00324c48(...);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int FUN_00387ac4(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003d2158(...);
 int soundChannelStopAll(...);
 int FUN_003e5858(void);
 int linkHolderClearFlag(...);
-int FUN_003e5c00(void);
+int resourceOwnerReleaseAll(void);
 int VectorFloatToUnsigned(double, int);
 
 int textFormatBuffer(...);
@@ -44,7 +44,7 @@ int resOwnerRunNodeHandlers(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
 int slotSetRequest(...);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int placeWinStartText(...);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
@@ -147,12 +147,12 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00214da4. */
 extern int scrRunOpcodesStub(unsigned int);
@@ -160,9 +160,9 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int screenFadeIsBusy(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: gameStateClearFlag. */
-/* Supplied declaration required: FUN_00314c38. */
+/* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
 extern int FUN_00323bc4(unsigned int);
@@ -173,7 +173,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_00387ac4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -190,7 +190,7 @@ extern int linkHolderCheckFirst(unsigned int);
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
-/* Supplied declaration required: FUN_003e5c00. */
+/* Supplied declaration required: resourceOwnerReleaseAll. */
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
@@ -430,10 +430,10 @@ unsigned int FUN_00328838(void)
     controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0);
     linkedTargetSetFloat(*(unsigned int *)(temp_v0 + 0x28));
     puVar5 = &LAB_003290c4;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v0 + 0x18) = puVar5;
     puVar5 = &LAB_003290e4;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     *(unsigned char **)(temp_v0 + 0x1c) = puVar5;
     temp_v4 = *(int *)(temp_v0 + 0x18);
     FUN_00275bc8(temp_v4,puVar5);
@@ -471,7 +471,7 @@ unsigned int FUN_00328838(void)
   case 4:
     temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x20));
     if (temp_v4 != 2) break;
-    temp_v4 = FUN_002a4b74();
+    temp_v4 = messageGetChoiceResult();
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 8) = 0xf;
       slotSetRequest(0,10,0xff);
@@ -575,7 +575,7 @@ unsigned int FUN_00328838(void)
     if (*(char *)(temp_v0 + 0x558) == '\0') break;
     soundChannelStopAll(0xf);
     FUN_003d2158(0x10000b2,0);
-    FUN_003d2150(0x10000b3);
+    sysPlayVoice(0x10000b3);
     temp_v3 = 0xf;
     *(unsigned int *)(temp_v0 + 8) = temp_v3;
     break;
@@ -639,7 +639,7 @@ unsigned int FUN_00328838(void)
     temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x20));
     if (temp_v4 != 2) break;
     *(unsigned char *)(temp_v0 + 0x558) = 0;
-    FUN_003d2150(0x10000b2);
+    sysPlayVoice(0x10000b2);
     FUN_00387ac4(0);
     sysPlaySe(0x59);
     FUN_00387ac4(0);
@@ -681,11 +681,11 @@ unsigned int FUN_00328838(void)
         *(unsigned int *)(temp_v0 + 0x24) = 0;
       }
       FUN_001695a0();
-      FUN_001aeafc(g_handleRegistry);
+      resourceOwnerReleaseAndReset(g_handleRegistry);
       temp_v4 = g_localTmnl;
       asdCameraInitAreas();
       if (*(int *)(temp_v4 + 0x28) != 0) {
-        FUN_003e5c00();
+        resourceOwnerReleaseAll();
         if (*(int **)(temp_v4 + 0x28) != (int *)0x0) {
           (**(romwright_code **)(**(int **)(temp_v4 + 0x28) + 4))();
         }
@@ -736,7 +736,7 @@ unsigned int FUN_00328838(void)
                      (int)*(char *)(temp_v0 + 0x56fcd3));
         uStack_fc = (unsigned int)DAT_005f172a;
         temp_v9 = (unsigned int)DAT_005f1729;
-        FUN_00314c38(0,0,DAT_005f1727,DAT_005f1728);
+        naviMainSetFlagsAndActivate(0,0,DAT_005f1727,DAT_005f1728);
       }
       gameStateClearFlag();
       asdSequenceRequest(6,0);
@@ -765,12 +765,12 @@ unsigned int FUN_00328838(void)
       FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),0,temp_v4 * 0x1010100 + 0xff);
     }
     if (*(int *)(temp_v0 + 0x554) == 0x28) {
-      FUN_003d2150(0x10000c6);
+      sysPlayVoice(0x10000c6);
       *(unsigned char *)(temp_v0 + 0x584) = 1;
       resOwnerRunNodeHandlers(*(unsigned int *)(temp_v0 + 0x580));
     }
     if (*(int *)(temp_v0 + 0x554) == 0x49) {
-      FUN_003d2150(0x10000b3);
+      sysPlayVoice(0x10000b3);
       *(unsigned char *)(temp_v0 + 0x590) = 1;
       resOwnerRunNodeHandlers(*(unsigned int *)(temp_v0 + 0x58c));
     }

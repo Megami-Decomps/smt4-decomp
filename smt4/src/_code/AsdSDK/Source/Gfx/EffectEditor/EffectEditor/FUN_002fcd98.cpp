@@ -9,7 +9,7 @@ int FUN_00246854(void);
 int effBlockCreateFromBlock(void);
 int eventDispatch(...);
 int effectEditorApplyHandlerState(void);
-int FUN_002629a8(...);
+int resourceQueueDeferredDestroy(...);
 int FUN_00281bb0(...);
 int FUN_002a353c(...);
 int FUN_002a36fc(...);
@@ -43,7 +43,7 @@ typedef struct {
 } void_stack;
 
 extern int FUN_002e6fa8(...); /* 0x2e6fa8 */
-extern int FUN_002fcd5c(...); /* 0x2fcd5c */
+extern int effectEditorReleaseObjects(...); /* 0x2fcd5c */
 extern unsigned char LAB_002fd4d8; /* 0x2fd4d8 */
 extern unsigned char LAB_002fd4e4; /* 0x2fd4e4 */
 extern unsigned char LAB_002fd4f0; /* 0x2fd4f0 */
@@ -112,7 +112,7 @@ extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: eventDispatch. */
 /* Supplied declaration required: effectEditorApplyHandlerState. */
-/* Supplied declaration required: FUN_002629a8. */
+/* Supplied declaration required: resourceQueueDeferredDestroy. */
 /* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: FUN_00281bb0. */
 /* Supplied declaration required: FUN_002a353c. */
@@ -400,7 +400,7 @@ LAB_002fd1c8:
   *(unsigned char *)(puVar17 + 1) = 0x1e;
   puVar17[4] = 0;
   puVar17[2] = (unsigned int)FUN_003238d0;
-  puVar17[3] = (unsigned int)FUN_002fcd5c;
+  puVar17[3] = (unsigned int)effectEditorReleaseObjects;
   puVar17[5] = temp_v15;
   temp_v12 = temp_v10 + 3;
   *(unsigned char *)(temp_v4 + (temp_v10 + 2) * 0x18 + 4) = 0x18;
@@ -421,7 +421,7 @@ LAB_002fd1c8:
   puVar6[4] = 0;
   puVar6[5] = temp_v15;
   puVar6[2] = (unsigned int)FUN_0032465c;
-  puVar6[3] = (unsigned int)FUN_002fcd5c;
+  puVar6[3] = (unsigned int)effectEditorReleaseObjects;
   if (temp_v13) {
     puVar6 = (unsigned int *)(temp_v4 + DAT_0044f870 * 0x18);
     *puVar6 = (unsigned int)&DAT_0044eafc;
@@ -568,7 +568,7 @@ LAB_002fd1c8:
   else {
 LAB_002fd78c:
     if (DAT_0044eaa0 != 0) {
-      FUN_002629a8(DAT_0044eaa0,3);
+      resourceQueueDeferredDestroy(DAT_0044eaa0,3);
       DAT_0044eaa0 = 0;
     }
     temp_v11 = DAT_0044f864 + DAT_0044ea8c;

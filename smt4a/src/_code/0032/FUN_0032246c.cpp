@@ -13,7 +13,7 @@ int FUN_001bc460(...);
 int eventDispatch(...);
 int eventDispatchIfSet(...);
 int handlerTableCall(...);
-int FUN_003008c4(...);
+int resourceRunHandlerCallback(...);
 int quadSourceCopyOut(...);
 int quadHolderCopyOut(...);
 
@@ -83,7 +83,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: eventDispatch. */
 /* Supplied declaration required: eventDispatchIfSet. */
 /* Supplied declaration required: handlerTableCall. */
-/* Supplied declaration required: FUN_003008c4. */
+/* Supplied declaration required: resourceRunHandlerCallback. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: quadHolderCopyOut. */
 
@@ -290,7 +290,7 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
             DAT_00647344 = temp_v18;
             DAT_00647358 = temp_v25;
             handlerTableCall(*puVar3);
-            FUN_003008c4(*puVar3,&temp_v27);
+            resourceRunHandlerCallback(*puVar3,&temp_v27);
             eventDispatch(*puVar3);
           }
           temp_v1 = temp_v1 + 1;
@@ -309,7 +309,7 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
           }
           if (-1 < (int)pfVar2[4]) {
             handlerTableCall(*puVar3);
-            FUN_003008c4(*puVar3,pfVar2);
+            resourceRunHandlerCallback(*puVar3,pfVar2);
             eventDispatch(*puVar3);
           }
           temp_v1 = temp_v1 + 1;

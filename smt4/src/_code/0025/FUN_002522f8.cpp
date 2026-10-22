@@ -16,7 +16,7 @@ unsigned int FUN_002522f8(int param_1,int param_2,unsigned int param_3,unsigned 
   uStack_4 = param_4;
   FUN_002c683e(param_3,&local_28,&uStack_4,&LAB_001008b9);
   if (param_2 != 0) {
-    FUN_002c682a(0,&local_28);
+    libcFormatAppendByte(0,&local_28);
   }
                     /* WARNING: Treating indirect jump as return * /
   return param_3;

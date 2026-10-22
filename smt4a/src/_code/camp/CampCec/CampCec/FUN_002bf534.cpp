@@ -31,7 +31,7 @@ int FUN_00331380(int);
 int ownerSetName(...);
 int FUN_00343d04(unsigned int *);
 int engineForwardVariadicCommand(...);
-int FUN_00387edc(...);
+int saveBuildSummary(...);
 int campCecDrawSetCreate(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int loadSlotRequestAsync(...);
@@ -114,7 +114,7 @@ extern unsigned int gameDataBlocksGetWord27E8C(void);
 extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: engineForwardVariadicCommand. */
 /* Supplied declaration required: uiDrawExtendedRecordLabel. */
-/* Supplied declaration required: FUN_00387edc. */
+/* Supplied declaration required: saveBuildSummary. */
 /* Supplied declaration required: campCecDrawSetCreate. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: loadSlotRequestAsync. */
@@ -241,7 +241,7 @@ void FUN_002bf534(int param_1)
   if (temp_v2 != 0) {
     gameDataBlocksSetFlagBits(4,1);
   }
-  FUN_00387edc(DAT_0057f114 + 0x10);
+  saveBuildSummary(DAT_0057f114 + 0x10);
   temp_v1 = FUN_0031cee0();
   *(unsigned char *)((int)DAT_0057f114 + 0x61) = temp_v1;
   temp_v1 = FUN_002391e0();

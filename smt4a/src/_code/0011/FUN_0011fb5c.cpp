@@ -18,7 +18,7 @@ int onlineFormatWideString(...);
 int onlineJobSetStateWaiting(...);
 int FUN_002f7cba(...);
 int FUN_003056a0(...);
-int FUN_003056e4(...);
+int onlineUrlAssign(...);
 int ownedPtrReset(...);
 int FUN_00310784(...);
 
@@ -55,7 +55,7 @@ extern int wstrNotEqualById(int, unsigned int);
 extern int FUN_003054ce(unsigned int);
 extern unsigned long long ownerChildValue(unsigned int, int *);
 /* Supplied declaration required: FUN_003056a0. */
-/* Supplied declaration required: FUN_003056e4. */
+/* Supplied declaration required: onlineUrlAssign. */
 /* Supplied declaration required: ownedPtrReset. */
 /* Supplied declaration required: FUN_00310784. */
 
@@ -92,7 +92,7 @@ void FUN_0011fb5c(int param_1)
       temp_v3 = 10;
       onlineFormatWideString(temp_v8,"prudps:/address=%s;port=%d;stream=%d;sid=%d;PID=%d;CID=1;type=%d",
                    *(unsigned int *)(param_1 + 0x74),*(unsigned short *)(param_1 + 0x78) + 1);
-      FUN_003056e4(temp_v6,temp_v8);
+      onlineUrlAssign(temp_v6,temp_v8);
     }
     temp_v1 = *(unsigned int *)(param_1 + 0x30c);
     *(unsigned int *)(param_1 + 0x30c) = 0;

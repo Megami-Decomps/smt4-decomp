@@ -15,7 +15,7 @@ int FUN_00149950(unsigned int, unsigned char *);
 int FUN_00149a88(...);
 int FUN_00149ae0(unsigned char *, unsigned char *);
 int FUN_0014a82c(...);
-int FUN_0014a844(...);
+int asdGfxSetTargetParameter(...);
 int asdGfxSetMode(...);
 int FUN_00161074(unsigned int);
 int FUN_0017cfe8(...);
@@ -97,7 +97,7 @@ extern unsigned char DAT_0063ff89; /* 0x63ff89 */
 /* Supplied declaration required: FUN_00149a88. */
 /* Supplied declaration required: FUN_00149ae0. */
 /* Supplied declaration required: FUN_0014a82c. */
-/* Supplied declaration required: FUN_0014a844. */
+/* Supplied declaration required: asdGfxSetTargetParameter. */
 /* Supplied declaration required: asdGfxSetMode. */
 /* Supplied declaration required: FUN_00161074. */
 /* Supplied declaration required: FUN_0017cfe8. */
@@ -236,7 +236,7 @@ void FUN_00139c90(unsigned int *param_1)
   }
   DAT_0063ff4c = 0x4682937d;
   DAT_0063ff48 = 0;
-  FUN_0014a844(0x400,&LAB_0013f4ac);
+  asdGfxSetTargetParameter(0x400,&LAB_0013f4ac);
   FUN_0014a82c(0x4fe74faf,0,&LAB_001447b0);
   FUN_0013f048();
   DAT_0063ff88 = DAT_0063fe48 != 0x500;

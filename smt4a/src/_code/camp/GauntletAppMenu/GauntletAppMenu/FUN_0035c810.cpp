@@ -12,7 +12,7 @@ int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_003dc0c0(...);
@@ -54,7 +54,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003dc0c0. */
@@ -122,10 +122,10 @@ unsigned int FUN_0035c810(void)
   *(unsigned short *)((int)puVar1 + 0x4b6) = 2;
   uiSpriteSelectAnim(puVar1 + 0x11f,1);
   puVar2 = &LAB_0035caf0;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[0x14a] = (unsigned int)puVar2;
   puVar2 = &LAB_0035cb08;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[0x14b] = (unsigned int)puVar2;
   FUN_00275bc8();
   puVar1[0x14c] = (unsigned int)puVar2;

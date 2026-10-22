@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ec9d0(...);
+int asdProcessClearSelectedFlags(...);
 int gameDataFlagsSet(...);
 int gameDataFlagsSetBits(...);
 int gameDataBlocksAddFlags(...);
@@ -28,7 +28,7 @@ extern unsigned char DAT_0043e2f4; /* 0x43e2f4 */
 extern unsigned short DAT_0043e2f6; /* 0x43e2f6 */
 extern unsigned int DAT_0043e2f8; /* 0x43e2f8 */
 
-/* Supplied declaration required: FUN_001ec9d0. */
+/* Supplied declaration required: asdProcessClearSelectedFlags. */
 /* Supplied declaration required: gameDataFlagsSet. */
 /* Supplied declaration required: gameDataFlagsSetBits. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
@@ -69,7 +69,7 @@ unsigned int FUN_00322d18(unsigned int param_1,unsigned char param_2)
   puVar4 = &LAB_00322e3c;
   asdProcessCreateSimple(&LAB_00322e3c,2,0,0,FUN_002efba0,jobTeardownFlagsAndWork,puVar2);
   *puVar2 = (unsigned int)puVar4;
-  FUN_001ec9d0();
+  asdProcessClearSelectedFlags();
   puVar2[1] = 0;
   *(unsigned char *)(puVar2 + 5) = param_2;
   return *puVar2;

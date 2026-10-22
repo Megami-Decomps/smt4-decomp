@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002c682a(int, int *);
+int libcFormatAppendByte(int, int *);
 int FUN_002c683e(unsigned int, int *, int *, int);
 
-/* Supplied declaration required: FUN_002c682a. */
+/* Supplied declaration required: libcFormatAppendByte. */
 /* Supplied declaration required: FUN_002c683e. */
 
 
@@ -25,7 +25,7 @@ unsigned int libc_sprintf(unsigned int param_1,unsigned int param_2,unsigned int
   uStack_8 = param_3;
   uStack_4 = param_4;
   FUN_002c683e(param_2,&uStack_20,&uStack_8,0x2c682b);
-  FUN_002c682a(0,&uStack_20);
+  libcFormatAppendByte(0,&uStack_20);
                     /* WARNING: Treating indirect jump as return */
   return param_2;
 }

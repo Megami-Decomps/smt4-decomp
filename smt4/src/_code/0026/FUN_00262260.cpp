@@ -40,7 +40,7 @@ extern int gameGetUnitRecord(void);
 extern unsigned int playerGetSkillRank(unsigned short);
 extern int gameGetPlayerData(void);
 extern unsigned int FUN_003bf53c(int, fn_00262260_arg0 *, unsigned int);
-extern unsigned int FUN_003bf584(unsigned int, fn_00262260_arg0 *, unsigned int);
+extern unsigned int mathApplyReductionMultiplier(unsigned int, fn_00262260_arg0 *, unsigned int);
 
 
 unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int param_3)
@@ -120,7 +120,7 @@ unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int par
         temp_v3 = 0;
         if (temp_v4 != 0) {
           VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v3 = FUN_003bf584(temp_v11,pfVar6,0);
+          temp_v3 = mathApplyReductionMultiplier(temp_v11,pfVar6,0);
         }
       }
     }

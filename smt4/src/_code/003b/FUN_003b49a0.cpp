@@ -67,7 +67,7 @@ extern int playerGetSkillRank(unsigned short);
 /* Supplied declaration required: FUN_002b6c34. */
 extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -147,7 +147,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x28,0xd1,param_2,param_3,0x65);
   FUN_002bf288(2,0x28,0xd2,param_2,param_3,0x6a);
   temp_v1 = FUN_002bf4f8(0x28,0xd3);
-  temp_v2 = FUN_002bd1fc();
+  temp_v2 = gameGetPlayerName();
   textFormatBuffer(temp_v10,&LAB_003b4cc8,temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);

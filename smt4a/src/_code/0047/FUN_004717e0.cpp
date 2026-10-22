@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTableGetEntries(void);
-int FUN_00429f38(void);
+int asdFsIsSdCardDetected(void);
 
 extern int g_aocMain; /* 0x570260 */
 
@@ -13,7 +13,7 @@ extern int dataTableGetCount(int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern int dataTableFileGetTable(int, unsigned int);
 extern int objGetFlagBit16(void);
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 
 
 int FUN_004717e0(int param_1)
@@ -27,7 +27,7 @@ int FUN_004717e0(int param_1)
   temp_v0 = *(int *)(param_1 + 0x44c);
   temp_v2 = 0;
   if (temp_v0 != 0) {
-    FUN_00429f38();
+    asdFsIsSdCardDetected();
     if (temp_v0 == 0) {
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       return 0;

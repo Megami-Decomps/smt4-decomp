@@ -64,7 +64,7 @@ extern int devilCompareByRankGradeAscending(...); /* 0x2ce824 */
 extern int FUN_002fe074(...); /* 0x2fe074 */
 extern int FUN_00321cc0(...); /* 0x321cc0 */
 extern int FUN_00337110(...); /* 0x337110 */
-extern int FUN_0034f6fc(...); /* 0x34f6fc */
+extern int btlDevilCompareValueKindAndOrder(...); /* 0x34f6fc */
 extern unsigned char LAB_0034f784; /* 0x34f784 */
 extern int recordKindOrderCompare(...); /* 0x3603a0 */
 extern int FUN_00375b80(...); /* 0x375b80 */
@@ -730,7 +730,7 @@ LAB_0028727c:
               qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_002b2ca8);
             }
             else {
-              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_0034f6fc);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,btlDevilCompareValueKindAndOrder);
             }
           }
         }

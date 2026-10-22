@@ -16,7 +16,7 @@ int FUN_00490a10(...);
 int FUN_0049177c(...);
 float FUN_00492adc(int);
 float FUN_00492b98(void);
-int FUN_00492bc0(...);
+int naviGetActiveStateValue(...);
 int naviMainSelectPair(int);
 int FUN_00492c70(int);
 int words2Copy(int, float *);
@@ -67,7 +67,7 @@ extern unsigned char FUN_0048b1bc(int context, float angle);
 /* Supplied declaration required: FUN_00490a10. */
 /* Supplied declaration required: FUN_0049177c. */
 extern unsigned long long *sub68OwnerGetBlock60(int);
-/* Supplied declaration required: FUN_00492bc0. */
+/* Supplied declaration required: naviGetActiveStateValue. */
 extern float *lmapSceneGetObj(int);
 /* Supplied declaration required: naviMainSelectPair. */
 extern int FUN_00492c5c(int);
@@ -136,7 +136,7 @@ void FUN_00487470(int param_1)
   temp_v42 = param_1;
   gameFlagsGetBlock();
   temp_v37 = temp_v42 + 0x4cc;
-  temp_v31 = FUN_00492bc0();
+  temp_v31 = naviGetActiveStateValue();
   naviMainSelectPair(temp_v37);
   pfVar3 = (float *)lmapSceneGetObj(temp_v37);
   temp_v18 = *pfVar3;
@@ -431,7 +431,7 @@ LAB_00487744:
     temp_v29 = (float)VectorSignedToFloat((int)((640.0f / temp_v20) * (temp_v24 - temp_v18)) + unaff_r8,
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
   }
-  temp_v2 = FUN_00492bc0(temp_v37,temp_v2);
+  temp_v2 = naviGetActiveStateValue(temp_v37,temp_v2);
   temp_v5 = NaviMain_GetCurrentMap(temp_v37);
   if (temp_v2 == temp_v5) {
     if (temp_v38 == 0) {

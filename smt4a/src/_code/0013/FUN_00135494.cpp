@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00135b38(int, int, int);
+int sysCopyByteRange(int, int, int);
 int asdOperatorDeleteArray(void);
 int FUN_003075d4(...);
 int FUN_00307604(...);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00135b38. */
+/* Supplied declaration required: sysCopyByteRange. */
 extern int *wordRefMax(int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
@@ -67,7 +67,7 @@ void FUN_00135494(int *param_1,int param_2,int param_3,int param_4)
         FUN_003075d4(param_3,param_4,temp_v4,param_1);
         FUN_00307604(param_2,temp_v4,param_2 + temp_v3,param_1);
       }
-      FUN_00135b38(temp_v8,param_3,param_2);
+      sysCopyByteRange(temp_v8,param_3,param_2);
     }
     else {
       temp_v7 = bufGrowCapacity(temp_v0,param_1);

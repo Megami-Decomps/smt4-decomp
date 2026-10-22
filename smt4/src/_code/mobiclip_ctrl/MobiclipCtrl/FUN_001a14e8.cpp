@@ -29,7 +29,7 @@ extern int FUN_0034f488(unsigned int *, unsigned int *, unsigned int, unsigned i
 /* Supplied declaration required: FUN_0034fbc8. */
 extern unsigned int stateObjectClassify(unsigned char *, int);
 extern unsigned int tableRecordGetChecked(unsigned char *, int);
-extern int FUN_00350614(unsigned char *, unsigned int);
+extern int movieRecordTableGetEntry(unsigned char *, unsigned int);
 extern unsigned int FUN_00350ab8(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00350ac4. */
 /* Supplied declaration required: FUN_00350bd0. */
@@ -53,7 +53,7 @@ void FUN_001a14e8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   FUN_00350bd0(&DAT_004c3b20,param_3);
   FUN_00350ac4(&DAT_004c3b20,0);
   temp_v2 = FUN_00350ab8(&DAT_004c3b20,0);
-  temp_v3 = FUN_00350614(&DAT_004c3b20,temp_v2);
+  temp_v3 = movieRecordTableGetEntry(&DAT_004c3b20,temp_v2);
   puVar5 = &DAT_004c3a50;
   _ZN9Obj420a2c12buildEntriesEv(&DAT_004c3a50,&DAT_004c3a44,temp_v3,0);
   if (puVar5 == (unsigned char *)0x0) {

@@ -17,7 +17,7 @@ extern int g_frameTex; /* 0x57f65c */
 
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdTextureCreate. */
-extern unsigned int FUN_001bc2ec(void);
+extern unsigned int asdGxGetPhysicalAddress(void);
 
 
 void FUN_002c23cc(int param_1)
@@ -47,7 +47,7 @@ void FUN_002c23cc(int param_1)
       temp_v2 = 0x30000;
       asdMemoryAlloc(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = FUN_001bc2ec();
+      temp_v2 = asdGxGetPhysicalAddress();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       *piVar5 = temp_v1;
     }
@@ -63,7 +63,7 @@ void FUN_002c23cc(int param_1)
       temp_v2 = 0x20000;
       asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = FUN_001bc2ec();
+      temp_v2 = asdGxGetPhysicalAddress();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       temp_v3 = 0;
       *piVar5 = temp_v1;
@@ -78,7 +78,7 @@ void FUN_002c23cc(int param_1)
       temp_v2 = 0x20000;
       asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
       *(unsigned int *)(temp_v3 + 0x24) = temp_v2;
-      temp_v2 = FUN_001bc2ec();
+      temp_v2 = asdGxGetPhysicalAddress();
       *(unsigned int *)(temp_v3 + 0x30) = temp_v2;
       *(int *)(temp_v0 + 0x1498) = temp_v3;
       temp_v1 = 0;
@@ -93,7 +93,7 @@ void FUN_002c23cc(int param_1)
       temp_v2 = 0x20000;
       asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = FUN_001bc2ec();
+      temp_v2 = asdGxGetPhysicalAddress();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       *(int *)(temp_v0 + 0x149c) = temp_v1;
     }

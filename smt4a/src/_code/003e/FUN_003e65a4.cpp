@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0015f858. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
 extern int tableGroupFindEntryIndex(unsigned int, char *);
@@ -46,7 +46,7 @@ void FUN_003e65a4(int param_1)
         if (temp_v0 == 0) {
           return;
         }
-        temp_v0 = FUN_002a4b74();
+        temp_v0 = messageGetChoiceResult();
         if (!(temp_v0 == -1 || temp_v0 == 3)) {
           *(int *)(param_1 + 0x4c) = temp_v0;
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),*(unsigned short *)(param_1 + temp_v0 * 0xc + 0x2c)

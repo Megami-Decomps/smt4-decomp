@@ -10,7 +10,7 @@ int asdGxCommandListSetNewListId(...);
 int FUN_0010ea10(...);
 int FUN_001124ac(unsigned char *, unsigned char *);
 int FUN_001131f8(...);
-int FUN_00113210(...);
+int asdGfxSetTargetParameter(...);
 int FUN_002bef68(...);
 int FUN_002c24dc(...);
 int FUN_002c2534(unsigned int, int, int, unsigned int);
@@ -92,7 +92,7 @@ extern unsigned char DAT_004e3be1; /* 0x4e3be1 */
 /* Supplied declaration required: FUN_0010ea10. */
 /* Supplied declaration required: FUN_001124ac. */
 /* Supplied declaration required: FUN_001131f8. */
-/* Supplied declaration required: FUN_00113210. */
+/* Supplied declaration required: asdGfxSetTargetParameter. */
 /* Supplied declaration required: FUN_002bef68. */
 /* Supplied declaration required: FUN_002c24dc. */
 /* Supplied declaration required: FUN_002c2534. */
@@ -236,7 +236,7 @@ void FUN_001054bc(unsigned int *param_1)
   }
   DAT_004e3ba4 = 0x4682937d;
   DAT_004e3ba0 = 0;
-  FUN_00113210(0x400,&LAB_0010a6fc);
+  asdGfxSetTargetParameter(0x400,&LAB_0010a6fc);
   FUN_001131f8(0x4fe74faf,0,&LAB_0010e7f0);
   FUN_0010a544();
   DAT_004e3be0 = DAT_004e3aa0 != 0x500;

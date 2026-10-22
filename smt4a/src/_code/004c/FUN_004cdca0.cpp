@@ -9,7 +9,7 @@ int scrScriptProcessDestroy(int);
 int placeWinRelease(void);
 int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_001aeafc(unsigned int);
+int resourceOwnerReleaseAndReset(unsigned int);
 int mapReleaseTableTexture(void);
 int FUN_002c2358(void);
 int campCommonBgRelease(void);
@@ -24,7 +24,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: placeWinRelease. */
 /* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: mapReleaseTableTexture. */
 /* Supplied declaration required: FUN_002c2358. */
 /* Supplied declaration required: campCommonBgRelease. */
@@ -62,7 +62,7 @@ void FUN_004cdca0(int param_1)
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
-  FUN_001aeafc(g_handleRegistry);
+  resourceOwnerReleaseAndReset(g_handleRegistry);
   if (*(int *)(param_1 + 0x544) != 0) {
     gfxObjectDestroy(*(int *)(param_1 + 0x544));
     *(unsigned int *)(param_1 + 0x544) = 0;

@@ -8,7 +8,7 @@ int FUN_001f9334(int);
 int dataTable2fSub0GetCount(void);
 int dataTable29Sub0GetEntryWithAoc(void);
 int FUN_002533f4(int, int, int);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_002a0428(unsigned int, int);
 int dataTable00FindById(void);
 int gameFlagIsSet(...);
@@ -76,7 +76,7 @@ extern int FUN_0025c05c(void);
 extern int *dataTable2fSub0GetRecord(int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: dataTable00FindById. */
 extern int gameGetPlayerData(void);
@@ -224,7 +224,7 @@ LAB_0021c198:
         temp_v9 = VectorSignedToFloat((int)*(short *)(pcVar6 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v10 = VectorSignedToFloat((int)*(short *)(pcVar6 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = *(unsigned int *)(g_lmapScene + 0x1c);
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         temp_v12 = romwright_piece_4_4(temp_v8,temp_v9);
         temp_v1 = 0;
 LAB_0021c1e4:

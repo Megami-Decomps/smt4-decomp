@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00201148(...);
 int FUN_002276f8(...);
-int FUN_0023c6e4(...);
+int asdModelClearSlotColors(...);
 int modelSetAnimationChannels(...);
 int animPlayerSetLoopPolicy(...);
 int FUN_0028c618(...);
@@ -36,7 +36,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 
 /* Supplied declaration required: FUN_00201148. */
 /* Supplied declaration required: FUN_002276f8. */
-/* Supplied declaration required: FUN_0023c6e4. */
+/* Supplied declaration required: asdModelClearSlotColors. */
 /* Supplied declaration required: modelSetAnimationChannels. */
 extern int keyedRecordFindByName(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
@@ -97,11 +97,11 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
   }
   if ((*(unsigned int *)(param_1 + 0x3028) & 4) != 0) {
     FUN_00201148(temp_v8);
-    FUN_0023c6e4(param_2);
+    asdModelClearSlotColors(param_2);
   }
   if ((*(unsigned int *)(param_1 + 0x3028) & 8) != 0) {
     FUN_00201148(temp_v8);
-    FUN_0023c6e4(param_2);
+    asdModelClearSlotColors(param_2);
     temp_v2 = gameObjectFlagIsSet();
     if (temp_v2 == 0) {
       *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) & 0xfffffff7;

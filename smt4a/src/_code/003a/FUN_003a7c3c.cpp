@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a4964(int, int);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int FUN_003d498c(unsigned int, int);
 int uiQuestSpritesCreate(void);
 
@@ -25,7 +25,7 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: uiQuestSpritesCreate. */
 
@@ -81,7 +81,7 @@ void FUN_003a7c3c(unsigned int param_1)
   *(unsigned int *)(temp_v0 + 4) = 0x17;
   *(unsigned int *)(temp_v0 + 0x10) = 0;
   sysPlaySe(0x1a);
-  FUN_003d2150(0x1000308);
+  sysPlayVoice(0x1000308);
   return;
 }
 

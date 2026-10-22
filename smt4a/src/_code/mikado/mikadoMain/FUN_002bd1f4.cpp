@@ -9,7 +9,7 @@ int FUN_0019e290(void);
 int asdOperatorDelete(int);
 int FUN_004b6fc4(void);
 int menu4CSetValue42(unsigned int, unsigned short [2]);
-int FUN_004ba890(unsigned int);
+int uiTextScreenRunPhaseUpdate(unsigned int);
 int clearThreeHalfwords(...);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned int DAT_0058801c; /* 0x58801c */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: FUN_004b6fc4. */
 /* Supplied declaration required: menu4CSetValue42. */
-/* Supplied declaration required: FUN_004ba890. */
+/* Supplied declaration required: uiTextScreenRunPhaseUpdate. */
 /* Supplied declaration required: clearThreeHalfwords. */
 extern int _ZN14SelectionFlagsC1Ev(int);
 extern int _ZN9Obj55ca08D1Ev(int);
@@ -68,7 +68,7 @@ unsigned int FUN_002bd1f4(void)
       }
     }
     else {
-      FUN_004ba890(*(unsigned int *)(DAT_00588014 + 8));
+      uiTextScreenRunPhaseUpdate(*(unsigned int *)(DAT_00588014 + 8));
       if (*(char *)(*(int *)(temp_v1 + 8) + 0x24) != '\0') {
         *(unsigned char *)(temp_v1 + 5) = 2;
       }

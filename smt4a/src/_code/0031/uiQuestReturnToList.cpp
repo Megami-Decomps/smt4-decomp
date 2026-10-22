@@ -13,7 +13,7 @@ extern "C" {
 void uiSpriteSetKeyframe(void *sprite, s32 frame, s32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
 void uiQuestSpritesCreate(void);
-s32 FUN_002a4860(void);
+s32 resourceRunOperationIfUnblocked(void);
 s32 FUN_002a4894(void *cursor);
 void FUN_003d498c(u32 id, s32 enabled);
 void FUN_003423cc(s32 sound);
@@ -37,7 +37,7 @@ void uiQuestReturnToList(void)
         return;
     }
     uiQuestSpritesCreate();
-    s32 page = FUN_002a4860();
+    s32 page = resourceRunOperationIfUnblocked();
     s32 cursor = FUN_002a4894(quest->cursor);
     u16 id = quest->list[page + cursor];
     FUN_003d498c(id, 1);

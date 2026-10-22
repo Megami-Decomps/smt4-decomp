@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
-int FUN_003034ec(...);
+int listGetFirstValue(...);
 
 /* stack frame of param_4: 2 slot(s), 2 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern unsigned int onlineGetActiveLock(void);
-/* Supplied declaration required: FUN_003034ec. */
+/* Supplied declaration required: listGetFirstValue. */
 
 
 unsigned int
@@ -45,12 +45,12 @@ FUN_002f9dd4(unsigned int param_1,unsigned char *param_2,unsigned int param_3,un
     temp_v0 = onlineGetActiveLock();
     _ZN9Obj55b28cC1EPv(&temp_v1,temp_v0);
     temp_v2 = romwright_piece_3_1((((unsigned int)(temp_v2) >> 8) & 0xffffffU),*param_2);
-    temp_v0 = FUN_003034ec(param_1,&temp_v2);
+    temp_v0 = listGetFirstValue(param_1,&temp_v2);
     _ZN9Obj55b28cD1Ev(&temp_v1);
   }
   else {
     temp_v1 = romwright_piece_3_1((int)((unsigned int)param_1 >> 8),*param_2);
-    temp_v0 = FUN_003034ec(param_1);
+    temp_v0 = listGetFirstValue(param_1);
   }
   return temp_v0;
 }

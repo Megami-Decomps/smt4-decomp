@@ -25,7 +25,7 @@ extern unsigned char DAT_004dace0; /* 0x4dace0 */
 extern unsigned int asdModelGetSlotArray3(int);
 /* Supplied declaration required: asdModelSlotClearActive. */
 /* Supplied declaration required: FUN_001569d8. */
-extern unsigned int FUN_002a4258(int);
+extern unsigned int asdModelGetSlotRecord(int);
 extern int asdModelGetSlotArray2(int);
 extern int asdModelGetSlotArray1(int);
 /* Supplied declaration required: asdMemFreeNonNull. */
@@ -82,7 +82,7 @@ void asdModelSlotRelease(int param_1)
   }
   *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
   temp_v2 = asdModelGetSlotArray3(temp_v8);
-  temp_v3 = FUN_002a4258(temp_v8);
+  temp_v3 = asdModelGetSlotRecord(temp_v8);
   temp_v0 = temp_v8 * 0x40;
   FUN_001569d8(temp_v2,temp_v3,&DAT_004dace0 + temp_v0);
   temp_v7[0] = (unsigned int *)**(unsigned int **)(temp_v8 * 4 + 0x464aa4);

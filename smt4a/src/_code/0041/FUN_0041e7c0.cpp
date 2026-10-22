@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00228b04(int, int);
-int FUN_002a4860(int);
+int resourceRunOperationIfUnblocked(int);
 int FUN_002a48e0(int, int);
 int FUN_002f0384(int);
 int flaggedEntrySetValueA(int, int);
@@ -13,7 +13,7 @@ int SBORROW4(int, int);
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a48e0. */
 extern int FUN_002bedac(unsigned int);
 extern int objectApplyIfUnblocked(int);
@@ -44,7 +44,7 @@ void FUN_0041e7c0(int param_1)
   temp_v0 = param_1 + 0x3d8;
   FUN_00228b04(temp_v0,1);
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002a4860(param_1 + 0x3d8);
+    temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0x3d8);
     temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
     temp_v2 = objectApplyIfUnblocked(param_1 + 0x3d8);
     temp_v5 = *(int *)(param_1 + 0x300);
@@ -66,7 +66,7 @@ void FUN_0041e7c0(int param_1)
         flaggedEntrySetValueA(param_1 + 0x3d8,0);
       }
     }
-    temp_v4 = FUN_002a4860(param_1 + 0x3d8);
+    temp_v4 = resourceRunOperationIfUnblocked(param_1 + 0x3d8);
     *(unsigned int *)(param_1 + 0x304) = temp_v4;
     temp_v0 = flaggedEntryGetValueA(param_1 + 0x3d8);
     *(int *)(param_1 + 0x308) = temp_v0;

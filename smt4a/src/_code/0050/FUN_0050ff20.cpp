@@ -1,4 +1,4 @@
-/* NON_MATCHING: first array-construction helper and its callback literal are missing symbols in the target object. */
+/* NON_MATCHING: array-construction helpers are now named, but the callback literal resolves to FUN_004125c0 + 0xC (0x4125cc), not a registered callback entry; the first helper also consumes incoming arguments absent from the draft. */
 /* romwright 0.5.0 decompilation of FUN_0050ff20 for reference (not compiled; its own view of the boundaries):
 
 int FUN_0050ff20(int param_1)

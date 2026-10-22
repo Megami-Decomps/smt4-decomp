@@ -23,7 +23,7 @@ struct RequestedUnitSlots {
 }
 
 extern "C" {
-s32 FUN_0031c274();
+s32 partyPanelGetRequestedUnitId();
 u8* gameGetSlotTable();
 RequestedUnitRecord* gameGetUnitRecord(u32 index);
 u8 flagWordTestBit(const RequestedUnitRecord*, u32 bit);
@@ -33,8 +33,8 @@ s32 campCecClassifyRequestedUnit(void* context)
 {
     RequestedUnitWork* work = static_cast<RequestedUnitWork*>(context);
     s32 result = 0;
-    if (FUN_0031c274()) {
-        work->requestedId = static_cast<s16>(FUN_0031c274());
+    if (partyPanelGetRequestedUnitId()) {
+        work->requestedId = static_cast<s16>(partyPanelGetRequestedUnitId());
         work->status = -1;
         RequestedUnitSlots* slots = reinterpret_cast<RequestedUnitSlots*>(gameGetSlotTable());
         for (s32 i = 0; i < 3; ++i) {

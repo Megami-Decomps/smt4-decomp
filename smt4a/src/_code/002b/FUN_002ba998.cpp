@@ -83,7 +83,7 @@ int FUN_00301ad0(...);
 int FUN_0037693c(...);
 int btlPartnerAttackInitialize(...);
 int soundChannelRequestIfEnabled(...);
-void FUN_003de02c(unsigned int frames);
+void bgmRequestSelectedChannelFade(unsigned int frames);
 int FUN_003e9cec(int, unsigned char [688], unsigned int, int);
 int btlActionPrepareFromSource(int, int, int);
 int FUN_003ea69c(int, unsigned char [688], unsigned int);
@@ -186,7 +186,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dialogClose. */
 extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: FUN_0021c118. */
-extern unsigned int FUN_00228ab0(unsigned int);
+extern unsigned int gameGetSaveSlotData(unsigned int);
 /* Supplied declaration required: FUN_0023244c. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 extern int dialogIsActive(void);
@@ -361,7 +361,7 @@ void FUN_002ba998(unsigned int param_1)
     temp_v9 = 0;
     do {
       if (-1 < *(char *)(temp_v6 + temp_v9 + 0x1ca0)) {
-        temp_v11 = FUN_00228ab0(temp_v9);
+        temp_v11 = gameGetSaveSlotData(temp_v9);
         FUN_003e9cec(temp_v7,temp_v23,temp_v11,0);
         FUN_004ca63c(temp_v7,temp_v23,0,temp_v9 + 1,0);
       }
@@ -427,7 +427,7 @@ void FUN_002ba998(unsigned int param_1)
       DAT_00573940 = -1;
     }
     else {
-      FUN_003de02c(0x1e);
+      bgmRequestSelectedChannelFade(0x1e);
     }
     temp_v6 = *(int *)(temp_v7 + 0x118);
     *(int *)(temp_v7 + 0x4ce8) = temp_v6;

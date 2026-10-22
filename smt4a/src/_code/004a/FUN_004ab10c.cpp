@@ -30,7 +30,7 @@ extern unsigned int DAT_0057a9ec; /* 0x57a9ec */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_00228ab0(int);
+extern int gameGetSaveSlotData(int);
 extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_003eebf4. */
@@ -144,7 +144,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
             *(unsigned char *)(puVar11 + 1) = 0;
             puVar11[2] = 0;
             do {
-              temp_v3 = FUN_00228ab0(temp_v4 - 1);
+              temp_v3 = gameGetSaveSlotData(temp_v4 - 1);
               if ((temp_v3 != 0) && ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == *puVar11)) {
                 puVar11[3] = temp_v4;
                 break;

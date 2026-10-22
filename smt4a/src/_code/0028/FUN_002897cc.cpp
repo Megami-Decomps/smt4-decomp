@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014afd0(...);
 int jobStop(...);
 int eventQueueAddUnique(int);
-int FUN_00191e00(unsigned int, unsigned int, unsigned int, int);
+int aocLoadTextureNode(unsigned int, unsigned int, unsigned int, int);
 int asdTMTexTableReleaseNode(...);
 int aocHandleButtons(int, int);
 int VectorSignedToFloat(...);
@@ -76,7 +76,7 @@ extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern unsigned long long asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_00184964(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00191e00. */
+/* Supplied declaration required: aocLoadTextureNode. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_00203d74(void);
@@ -128,7 +128,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
       temp_v2 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
                            1);
       if (temp_v2 != 0) {
-        FUN_00191e00(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
+        aocLoadTextureNode(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
                      0x10000);
       }
       else {

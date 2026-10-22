@@ -10,7 +10,7 @@ extern "C" {
 s32 FUN_001e2e4c(u32 character, OutputCursor* output);
 s32 FUN_002e31ba(const char* format, OutputCursor* output, va_list arguments,
                  s32 (*writeCharacter)(u32, OutputCursor*));
-s32 FUN_002e31e0(u32 character, OutputCursor* output);
+s32 libcFormatAppendByte(u32 character, OutputCursor* output);
 
 s32 textFormatBuffer(u8* destination, const char* format, ...)
 {
@@ -20,7 +20,7 @@ s32 textFormatBuffer(u8* destination, const char* format, ...)
     OutputCursor output;
     output.current = destination;
     s32 result = FUN_002e31ba(format, &output, arguments, FUN_001e2e4c);
-    FUN_002e31e0(0, &output);
+    libcFormatAppendByte(0, &output);
 
     va_end(arguments);
     return result;

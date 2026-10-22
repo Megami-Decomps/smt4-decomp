@@ -9,7 +9,7 @@ int FUN_0015dc2c(...);
 u32 FUN_0015dd58(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_002a116c(...);
 int FUN_002a1200(...);
-int FUN_002a1248(...);
+int asdLoadFileAsyncNoCallback(...);
 int FUN_002a126c(...);
 int legacyResourceIdRemap(...);
 int asdLoadFileAsync(...);
@@ -62,7 +62,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_0015dd58. */
 /* Supplied declaration required: FUN_002a116c. */
 /* Supplied declaration required: FUN_002a1200. */
-/* Supplied declaration required: FUN_002a1248. */
+/* Supplied declaration required: asdLoadFileAsyncNoCallback. */
 /* Supplied declaration required: FUN_002a126c. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 extern int byteIsAtLeast100(unsigned int *);
@@ -180,7 +180,7 @@ void FUN_0015c81c(int param_1,int param_2)
                        *(unsigned int *)(param_2 + 0x28));
         }
         else {
-          FUN_002a1248(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
+          asdLoadFileAsyncNoCallback(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
                        *(unsigned int *)(param_2 + 0x28),*(unsigned int *)(param_2 + 0x2c));
         }
         *(unsigned char *)(param_2 + 8) = 2;

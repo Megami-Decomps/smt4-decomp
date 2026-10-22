@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0024aaa0(void);
-int FUN_0026eda8(void);
+int campCecResetScalarEffect(void);
 int campCecDisplaySetRecord(...);
 int characterInfoPanelPopulate(void);
 int asdLoadFileAsyncSimple(...);
@@ -54,7 +54,7 @@ extern unsigned int *g_campCecEdit; /* 0x43dad0 */
 
 /* Supplied declaration required: FUN_0024aaa0. */
 extern unsigned int FUN_0025463c(void);
-/* Supplied declaration required: FUN_0026eda8. */
+/* Supplied declaration required: campCecResetScalarEffect. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
 extern unsigned int uiDrawRecordNameLabels(void);
 /* Supplied declaration required: characterInfoPanelPopulate. */
@@ -179,7 +179,7 @@ void FUN_002d67fc(unsigned char param_1)
   temp_v1 = FUN_0024aaa0();
   campCecDisplaySetRecord(temp_v1,temp_v0);
   FUN_0024aaa0();
-  FUN_0026eda8();
+  campCecResetScalarEffect();
   temp_v4 = gameGetSlotTable();
   temp_v3 = 0;
   puVar1[0x47] = 0;

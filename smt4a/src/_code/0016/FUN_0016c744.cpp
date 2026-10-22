@@ -8,7 +8,7 @@ int asdModelCommandBlockRelease(void);
 int cursorResetFromParam(void);
 int FUN_00177e6c(int, int);
 int asdModelCommitCommandRange(int, int);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 int FUN_001b4128(int *, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern int DAT_005b3fe8; /* 0x5b3fe8 */
 /* Supplied declaration required: cursorResetFromParam. */
 /* Supplied declaration required: FUN_00177e6c. */
 /* Supplied declaration required: asdModelCommitCommandRange. */
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 /* Supplied declaration required: FUN_001b4128. */
 
 
@@ -38,7 +38,7 @@ void FUN_0016c744(int param_1)
   unsigned int uStack_14;
   
   temp_v0 = param_1;
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   param_1 = param_1 + 0x138;
   FUN_00177e6c(param_1,temp_v0);
   asdModelCommitCommandRange(temp_v0,param_1);

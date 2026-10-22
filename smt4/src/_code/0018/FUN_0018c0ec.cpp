@@ -33,9 +33,9 @@ int beginStatusPanelClose(void);
 int FUN_0029ee6c(...);
 int buttonHelpSetPreset(...);
 int FUN_002d9680(void);
-int FUN_002efe94(...);
+int statusDownSetEntries(...);
 int statusDownEnterState4(void);
-int FUN_0030ab68(void);
+int statusDownEnterRefreshState(void);
 
 int scrRunOpcodesStub(...);
 int FUN_00204358(...);
@@ -248,7 +248,7 @@ extern unsigned int asdLoadFileSyncDefault(int *);
 extern int FUN_002efe2c(void);
 extern int FUN_002efe58(void);
 extern int statusDownValueGet(void);
-/* Supplied declaration required: FUN_002efe94. */
+/* Supplied declaration required: statusDownSetEntries. */
 /* Supplied declaration required: statusDownEnterState4. */
 extern int FUN_002f6564(void);
 extern int FUN_002f6614(void);
@@ -259,7 +259,7 @@ extern int FUN_002f6614(void);
 extern int FUN_0030aaf4(void);
 extern int FUN_0030ab14(void);
 /* Supplied declaration required: FUN_0030ab34. */
-/* Supplied declaration required: FUN_0030ab68. */
+/* Supplied declaration required: statusDownEnterRefreshState. */
 /* Supplied declaration required: lmapMainCallIfActive2. */
 /* Supplied declaration required: FUN_00317e34. */
 extern int FUN_00322e44(void);
@@ -1130,7 +1130,7 @@ LAB_0018da7c:
           temp_v4 = (int)(char)((char)temp_v4 + '\x01');
           *psVar9 = *(short *)(temp_v8 + 0x3c6a);
         }
-        FUN_002efe94(temp_v26,temp_v4);
+        statusDownSetEntries(temp_v26,temp_v4);
       }
       break;
     case 3:
@@ -1449,7 +1449,7 @@ joined_r0x0018edf0:
       temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3574));
       if (temp_v4 == 2) {
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),6);
-        FUN_0030ab68();
+        statusDownEnterRefreshState();
         FUN_0029c424(0);
         buttonHelpSetPreset(0x67);
         temp_v4 = 6;
@@ -1506,7 +1506,7 @@ joined_r0x0018edf0:
         }
         if (temp_v18 >= 1) {
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),6);
-          FUN_0030ab68();
+          statusDownEnterRefreshState();
           temp_v8 = 6;
         }
         else {

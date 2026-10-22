@@ -28,7 +28,7 @@ extern int FUN_002a4b28(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003f0e20. */
-extern int FUN_004d0bf0(unsigned short);
+extern int gameStockContainsEntry(unsigned short);
 
 
 unsigned int FUN_003bcb64(void)
@@ -74,7 +74,7 @@ unsigned int FUN_003bcb64(void)
          ((*(short *)((int)puVar8 + 0x6e) != *(short *)(temp_v2 + 0x6e) &&
           (*(unsigned short *)((int)puVar8 + 0x27a) <= *(unsigned short *)(temp_v2 + 0x27a))))) {
         temp_v9 = puVar8 + 0x40;
-        temp_v4 = FUN_004d0bf0(*(unsigned short *)((int)puVar8 + 0x166));
+        temp_v4 = gameStockContainsEntry(*(unsigned short *)((int)puVar8 + 0x166));
         if (((temp_v4 == 0) &&
             ((puVar8[0x101] != 0 && ((*(unsigned short *)(puVar8[0x101] + 0x16) & 0x40) != 0)))) &&
            (*(short *)(temp_v8 + 0x66) != *(short *)((int)temp_v9 + 0x66))) {

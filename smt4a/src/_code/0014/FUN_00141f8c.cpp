@@ -42,13 +42,13 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_0014f2a8. */
 /* Supplied declaration required: uiGetTableEntry. */
-extern int FUN_001527e4(short);
+extern int eventTexSelectJobsById(short);
 extern int FUN_00153588(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
 /* Supplied declaration required: FUN_00154bbc. */
 extern unsigned int FUN_00156850(unsigned short, unsigned int);
 extern unsigned int FUN_00156868(void);
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_0016432c. */
@@ -129,7 +129,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
             }
           }
           else {
-            temp_v5 = FUN_0015687c();
+            temp_v5 = gameGetPlayerName();
             libc_strcpy(temp_v9,temp_v5);
           }
           break;
@@ -211,7 +211,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         if (temp_v7 != 0) {
           return 1;
         }
-        temp_v7 = FUN_001527e4(temp_v0);
+        temp_v7 = eventTexSelectJobsById(temp_v0);
         if (temp_v7 != 0) {
           return 1;
         }

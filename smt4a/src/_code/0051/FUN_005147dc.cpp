@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
-int FUN_002e1450(int *);
+int matrix44SetIdentity(int *);
 
 /* stack frame of void: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -40,7 +40,7 @@ extern unsigned int DAT_00647358; /* 0x647358 */
 
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_002e1450. */
+/* Supplied declaration required: matrix44SetIdentity. */
 
 
 void FUN_005147dc(void)
@@ -67,7 +67,7 @@ void FUN_005147dc(void)
   temp_v0 = temp_v1;
   FUN_001b63b0();
   FUN_001a1ee0();
-  FUN_002e1450(&temp_v2);
+  matrix44SetIdentity(&temp_v2);
   DAT_00647334 = temp_v0;
   DAT_00647338 = temp_v3;
   DAT_0064731c = temp_v2;

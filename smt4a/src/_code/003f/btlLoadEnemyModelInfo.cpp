@@ -6,7 +6,7 @@ struct EnemyModelOwner {
 };
 
 extern "C" {
-void* FUN_0020214c(const char* path);
+void* asdLoadFileSyncDefault(const char* path);
 void asdLoadFileAsyncSimple(const char* path, void** destination, s32 flags);
 
 // Load the enemy model table once, synchronously or asynchronously.
@@ -17,7 +17,7 @@ void btlLoadEnemyModelInfo(EnemyModelOwner* owner, s32 asynchronous)
             asdLoadFileAsyncSimple("battle/EnemyModelInfo.tbb", &owner->modelInfo, 0);
             return;
         }
-        owner->modelInfo = FUN_0020214c("battle/EnemyModelInfo.tbb");
+        owner->modelInfo = asdLoadFileSyncDefault("battle/EnemyModelInfo.tbb");
     }
 }
 }

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int g_vectorQueueWork; /* 0x447e40 */
 
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 void FUN_001e33e4(void)
@@ -35,7 +35,7 @@ void FUN_001e33e4(void)
       if (temp_v0 != 0) {
         *puVar1 = *puVar1 | 1;
         temp_v2 = (float)puVar1[1];
-        FUN_00287aec();
+        mathDistanceBetweenPoints();
         if (temp_v2 < temp_v6) {
           temp_v2 = -temp_v2;
         }

@@ -20,7 +20,7 @@ int FUN_00416960(...);
 int FUN_0047f314(...);
 int partyAddMoneyClamped(...);
 int FUN_004c8c10(...);
-int FUN_004d86c0(...);
+int asdModelStartReferencedAnimation(...);
 int FUN_004d888c(...);
 int FUN_004e5f2c(...);
 int FUN_004f56cc(...);
@@ -44,7 +44,7 @@ int FUN_004c8284(...);
 int FUN_004c9d04(...);
 int FUN_004cae0c(...);
 int FUN_004cb348(...);
-int FUN_004f5de4(...);
+int asdModelActivateOwnedSlots(...);
 int FUN_004f5fb8(...);
 int FUN_004f63dc(...);
 int FUN_004f7628(...);
@@ -72,7 +72,7 @@ int FUN_004cab9c(...);
 int FUN_004cad84(void);
 void FUN_004cb8a0(TransitionView *state);
 int FUN_004cbab0(...);
-int FUN_004f1ad0(...);
+int uiStartRangeAnimationFromTable(...);
 void btlCameraSetFormationSlot(BattleActionCamera *, BattleMaskState *, int);
 int flags64CSetTarget(...);
 int FUN_004f26cc(...);
@@ -173,7 +173,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_001632f8(void);
+extern int infoWinIsActive(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -251,12 +251,12 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004cb8a0. */
 /* Supplied declaration required: FUN_004cbab0. */
 extern int holderObjectCall(unsigned int);
-/* Supplied declaration required: FUN_004d86c0. */
-extern int FUN_004d86e4(unsigned int);
+/* Supplied declaration required: asdModelStartReferencedAnimation. */
+extern int animationIsReferencedClipComplete(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: btlUnitGet. */
-/* Supplied declaration required: FUN_004f1ad0. */
+/* Supplied declaration required: uiStartRangeAnimationFromTable. */
 /* Supplied declaration required: btlCameraSetFormationSlot. */
 /* Supplied declaration required: flags64CSetTarget. */
 /* Supplied declaration required: FUN_004f26cc. */
@@ -266,7 +266,7 @@ extern int FUN_004f283c(int);
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004f56cc. */
 extern int FUN_004f5c84(int, int);
-/* Supplied declaration required: FUN_004f5de4. */
+/* Supplied declaration required: asdModelActivateOwnedSlots. */
 /* Supplied declaration required: FUN_004f5fb8. */
 /* Supplied declaration required: FUN_004f63dc. */
 /* Supplied declaration required: FUN_004f741c. */
@@ -707,7 +707,7 @@ LAB_0040e864:
         psVar2[1] = temp_v4;
         break;
       }
-      temp_v3 = FUN_001632f8();
+      temp_v3 = infoWinIsActive();
 joined_r0x0040ec14:
       if (temp_v3 != 0) {
         temp_v4 = 1;
@@ -738,7 +738,7 @@ joined_r0x0040ec14:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_001632f8();
+    temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x14':
     temp_v3 = btlGetMainState();
@@ -760,7 +760,7 @@ joined_r0x0040ec14:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_001632f8();
+    temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x15':
     FUN_0040ca18(param_1,psVar2);
@@ -785,7 +785,7 @@ joined_r0x0040ec14:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_001632f8();
+    temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x17':
     temp_v3 = btlGetMainState();
@@ -807,7 +807,7 @@ joined_r0x0040ec14:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_001632f8();
+    temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x18':
     temp_v3 = btlGetMainState();
@@ -829,7 +829,7 @@ joined_r0x0040ec14:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_001632f8();
+    temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x19':
     temp_v3 = btlGetMainState();
@@ -944,7 +944,7 @@ joined_r0x0040ec14:
     }
     break;
   case ' ':
-    FUN_004f1ad0(g_btlCamera,*(unsigned int *)(psVar2 + 0x14));
+    uiStartRangeAnimationFromTable(g_btlCamera,*(unsigned int *)(psVar2 + 0x14));
     break;
   case '!':
     temp_v8 = btlGetMainState();
@@ -1194,7 +1194,7 @@ LAB_0040f684:
     }
     break;
   case '3':
-    FUN_004f5de4(g_btlAux);
+    asdModelActivateOwnedSlots(g_btlAux);
     break;
   case '4':
     temp_v11 = (DAT_00571334 & (*(unsigned int **)(psVar2 + 0xc))[1]) != 0;
@@ -1486,7 +1486,7 @@ LAB_0040fb78:
           psVar2[1] = temp_v4;
           break;
         }
-        temp_v3 = FUN_004d86e4(*(unsigned int *)(temp_v3 + 0x22bc));
+        temp_v3 = animationIsReferencedClipComplete(*(unsigned int *)(temp_v3 + 0x22bc));
         if (temp_v3 == 0) {
           temp_v4 = 1;
           psVar2[1] = temp_v4;
@@ -1516,7 +1516,7 @@ LAB_0040fb78:
     }
     if (((temp_v11 && temp_v5 != 0) && (temp_v6 = (int)psVar2[0x12], temp_v6 < 4)) &&
        (*(char *)(temp_v3 + temp_v6 + 0x2340) != '\0')) {
-      FUN_004d86c0(*(unsigned int *)(temp_v3 + temp_v6 * 4 + 0x22bc),(int)psVar2[0x13]);
+      asdModelStartReferencedAnimation(*(unsigned int *)(temp_v3 + temp_v6 * 4 + 0x22bc),(int)psVar2[0x13]);
     }
     break;
   case 'H':

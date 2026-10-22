@@ -18,7 +18,7 @@ extern "C" {
 u8* FUN_002a0d0c(void);
 void FUN_002b7bca(void*, s32, s32, EntryComparator);
 void FUN_0027f3dc(void*, s32, s32, EntryComparator);
-s32 FUN_001d1cb8(const void*, const void*);
+s32 devilSlotCompareRaceDescending(const void*, const void*);
 s32 entryCompareByDataValue(const void*, const void*);
 s32 FUN_00206d9c(const void*, const void*);
 s32 devilCompareNonEmptyFirstB(const void*, const void*);
@@ -50,7 +50,7 @@ void statusInventorySort(void)
         if (*options >> 7) {
             FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), devilCompareNonEmptyFirst);
         } else {
-            FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), FUN_001d1cb8);
+            FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), devilSlotCompareRaceDescending);
         }
     }
     if ((*options & 0x7F) != 3) {

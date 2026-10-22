@@ -6,7 +6,7 @@ extern "C" {
 extern void nninitRegion(void);
 extern void FUN_0010236c(void);
 extern void FUN_00106db4(void);
-extern void FUN_00104f50(void);
+extern void asdMemInitializeDefaults(void);
 extern void FUN_00100cb8(void);
 extern void nninitCallStaticInitializers(void);
 extern void nninitSetup(void);
@@ -18,7 +18,7 @@ void entry(void)
     nninitRegion();
     FUN_0010236c();
     FUN_00106db4();
-    FUN_00104f50();
+    asdMemInitializeDefaults();
     FUN_00100cb8();
     nninitCallStaticInitializers();
     nninitSetup();

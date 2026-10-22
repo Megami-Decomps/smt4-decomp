@@ -107,14 +107,14 @@ extern int gameGetUnitRecord(int);
 /* Supplied declaration required: pairSetHalves. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6940. */
-extern int FUN_002b6a54(int, unsigned short);
+extern int supportUnitGetEntry(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -523,7 +523,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         FUN_0026242c();
         temp_v27 = (int)(short)temp_v12;
         temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
-        temp_v18 = FUN_002bd1fc();
+        temp_v18 = gameGetPlayerName();
         textFormatBuffer(temp_v29,&LAB_00260738,temp_v18);
         temp_v45 = FUN_00288ddc(temp_v27,0xffffffff);
       }
@@ -1045,7 +1045,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         categoryGetColor(1);
         drawSetColorFromRGBA8();
       }
-      temp_v3 = FUN_002b6a54((int)*(short *)(temp_v3 + 0x604),*(unsigned short *)(temp_v3 + 0x606));
+      temp_v3 = supportUnitGetEntry((int)*(short *)(temp_v3 + 0x604),*(unsigned short *)(temp_v3 + 0x606));
       FUN_002b6940(*(unsigned short *)(temp_v3 + 0x5a),*(short *)(temp_v4 + 8) + temp_v5,
                    (*(short *)(temp_v4 + 10) + temp_v6) - temp_v28,0x42);
       FUN_002bed3c();
@@ -1138,7 +1138,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v15 = gameGetSupportUnitData();
           temp_v1 = *(unsigned short *)(temp_v15 + 0x606);
           temp_v15 = gameGetSupportUnitData();
-          temp_v15 = FUN_002b6a54((int)*(short *)(temp_v15 + 0x604),temp_v1);
+          temp_v15 = supportUnitGetEntry((int)*(short *)(temp_v15 + 0x604),temp_v1);
           textureLoadOptionalDemonModel((int)(short)(*(short *)(temp_v15 + 0x5a) + 1),*(short *)(temp_v3 + 8) + temp_v4,
                        (int)*(short *)(temp_v3 + 10),0x54,0);
           temp_v3 = g_titleScene;

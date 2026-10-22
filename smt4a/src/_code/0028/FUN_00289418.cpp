@@ -32,7 +32,7 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_0018408c. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002f67c4. */
 /* Supplied declaration required: FUN_00334c6c. */
@@ -65,7 +65,7 @@ void FUN_00289418(int param_1,int param_2,float alpha)
   if ((temp_v3 >= *(int *)(temp_v6 + 0x24ec)) && (temp_v8 = *(char *)(temp_v6 + 0x2578) != '\0', temp_v8)) {
     temp_v10 = 0x9fe7ffff;
     temp_v4 = FUN_001834a4(0x12,0x58d);
-    temp_v5 = FUN_00284140((int)*(short *)(temp_v5 + *(int *)(temp_v5 + 0x257c) * 2 + 0x544));
+    temp_v5 = recordGetModeForId((int)*(short *)(temp_v5 + *(int *)(temp_v5 + 0x257c) * 2 + 0x544));
     temp_v9 = (temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6;
     if (temp_v9) {
       temp_v10 = 0xf5ff9fff;

@@ -19,7 +19,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_00496a0c. */
 /* Supplied declaration required: FUN_0049706c. */
@@ -42,14 +42,14 @@ void FUN_00498594(int param_1)
   FUN_004954e8();
   messageChoiceShowCurrent(param_1);
   temp_v0 = inputIsQuestRepeatRight();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v0 == 6)) {
+  if ((temp_v0 != 0) || (temp_v0 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v0 == 6)) {
     *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
     FUN_00496a0c(param_1,1);
     sendEvent1000210();
     return;
   }
   temp_v0 = FUN_004d0494();
-  if ((temp_v0 == 0) && (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v0 != 6)) {
+  if ((temp_v0 == 0) && (temp_v0 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v0 != 6)) {
     temp_v0 = inputIsQuestMenuPressed();
     if (temp_v0 != 0) {
       uiSpriteBankApplyPreset(param_1 + 0x3cc,1);

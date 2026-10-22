@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0010a5f0(int);
+int asdFontAllocateGlyphSets(int);
 int FUN_0010a694(...);
 int FUN_0010a770(...);
-int FUN_0010afac(...);
+int scrCommSetQueueRequestCallback(...);
 int FUN_0010b390(int);
 int FUN_0010b3b0(unsigned char *);
 int asdTextRegisterSlot(...);
@@ -41,10 +41,10 @@ extern unsigned char DAT_0043e1f8; /* 0x43e1f8 */
 extern unsigned int DAT_00464d68; /* 0x464d68 */
 extern unsigned int uRam004729cc; /* 0x4729cc */
 
-/* Supplied declaration required: FUN_0010a5f0. */
+/* Supplied declaration required: asdFontAllocateGlyphSets. */
 /* Supplied declaration required: FUN_0010a694. */
 /* Supplied declaration required: FUN_0010a770. */
-/* Supplied declaration required: FUN_0010afac. */
+/* Supplied declaration required: scrCommSetQueueRequestCallback. */
 /* Supplied declaration required: FUN_0010b390. */
 /* Supplied declaration required: FUN_0010b3b0. */
 /* Supplied declaration required: asdTextRegisterSlot. */
@@ -63,7 +63,7 @@ void FUN_00102b10(void)
 /* irregular: 19 native warning(s); review required */
   unsigned char *puVar1;
   
-  FUN_0010a5f0(6);
+  asdFontAllocateGlyphSets(6);
   puVar1 = &LAB_00102c74;
   FUN_002c4904(&LAB_00102c74);
   FUN_002c450c(0,puVar1);
@@ -95,7 +95,7 @@ void FUN_00102b10(void)
   callbackBindingInstall(&LAB_0010a2f8,FUN_0010c83c);
   FUN_0010a694(0xf87a,1,0);
   FUN_0010a694(0xf87b,4,0);
-  FUN_0010afac(scrCommQueueRequest);
+  scrCommSetQueueRequestCallback(scrCommQueueRequest);
   FUN_0010a770(FUN_00109b08);
   asdTextRegisterSlot(0xf87a,1,FUN_00108074);
   asdTextRegisterSlot(0xf87b,4,FUN_0010930c);

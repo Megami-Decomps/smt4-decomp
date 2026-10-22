@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00270028(...);
-int FUN_0029be5c(...);
+int gameCounterAddSaturating(...);
 int asdMemFree(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -23,7 +23,7 @@ extern int btlEncountDestroy(...); /* 0x2d5034 */
 extern unsigned int *g_btlEncount; /* 0x435d30 */
 
 /* Supplied declaration required: FUN_00270028. */
-/* Supplied declaration required: FUN_0029be5c. */
+/* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -60,7 +60,7 @@ void FUN_00207f68(unsigned int *param_1)
     *(unsigned short *)(param_1 + temp_v0 * 8 + 0xfe) = 0xffff;
     temp_v0 = temp_v0 + 1;
   } while (temp_v1 != 0);
-  FUN_0029be5c(2,1);
+  gameCounterAddSaturating(2,1);
   if ((((*(char *)((int)param_1 + 0x44b7) == '\0') && (-1 < (int)param_1[0x30])) &&
       ((param_1[0x38] & 0x2000000) == 0)) &&
      (puVar5 = param_1 + 0x1128, (*puVar5 & 2) == 0 && (*puVar5 & 0x40000000) == 0)) {

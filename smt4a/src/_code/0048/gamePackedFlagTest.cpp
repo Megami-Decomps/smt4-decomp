@@ -6,12 +6,12 @@ struct PackedFlagState {
 };
 
 extern "C" {
-PackedFlagState *FUN_001bce18(void);
+PackedFlagState *flagValueGetStorage(void);
 
 // Test a one-based flag id, rejecting indices outside the packed bank.
 s32 gamePackedFlagTest(s32 id)
 {
-    PackedFlagState *state = FUN_001bce18();
+    PackedFlagState *state = flagValueGetStorage();
     s32 bit = id - 1;
     if ((u32)(bit >> 3) >= sizeof(state->flags)) {
         return 0;

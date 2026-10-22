@@ -64,7 +64,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 extern int FUN_002a4894(int);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
@@ -294,7 +294,7 @@ void FUN_00202ea4(void)
     case 1:
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(g_config + 0x84));
       if (temp_v7 == 2) {
-        temp_v7 = FUN_002a4b74();
+        temp_v7 = messageGetChoiceResult();
         if (temp_v7 != 0) {
           stateModeDispatch(*(unsigned int *)(temp_v6 + 0xc4));
           sysPlaySe(5);
@@ -326,7 +326,7 @@ void FUN_00202ea4(void)
     case 2:
       temp_v7 = scrRunOpcodesStub(*(unsigned int *)(g_config + 0x84));
       if (temp_v7 == 2) {
-        temp_v7 = FUN_002a4b74();
+        temp_v7 = messageGetChoiceResult();
         if (temp_v7 != 0) {
           stateModeDispatch(*(unsigned int *)(temp_v6 + 0xc4));
           sysPlaySe(5);

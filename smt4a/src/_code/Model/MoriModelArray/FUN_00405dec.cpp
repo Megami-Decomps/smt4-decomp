@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+int asdDeallocateArrayStorage(int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001a79e8(unsigned int, unsigned int);
 void FUN_002e32a4(int kind, ...);
@@ -25,7 +25,7 @@ extern unsigned char LAB_00406158; /* 0x406158 */
 extern unsigned char LAB_0040615c; /* 0x40615c */
 
 extern unsigned int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001a79e8. */
 /* Supplied declaration required: FUN_002e32a4. */
@@ -84,7 +84,7 @@ void FUN_00405dec(int param_1,int param_2)
       }
       puVar6 = puVar6 + 1;
     }
-    FUN_001006ec(*(int *)(param_1 + 4),(*(int *)(param_1 + 0xc) - *(int *)(param_1 + 4)) >> 2,0);
+    asdDeallocateArrayStorage(*(int *)(param_1 + 4),(*(int *)(param_1 + 0xc) - *(int *)(param_1 + 4)) >> 2,0);
     temp_v2 = *(int *)(param_1 + 4);
     *(unsigned int **)(param_1 + 4) = puVar1;
     *(unsigned int *)(param_1 + 8) = ((*(int *)(param_1 + 8) - temp_v2) & 0xfffffffcU) + (int)puVar1;
@@ -144,7 +144,7 @@ void FUN_00405dec(int param_1,int param_2)
           }
           temp_v0 = *piVar10;
           temp_v3 = *(int *)(param_1 + 8);
-          FUN_001006ec(temp_v0,(*(int *)(param_1 + 0xc) - temp_v0) >> 2,0);
+          asdDeallocateArrayStorage(temp_v0,(*(int *)(param_1 + 0xc) - temp_v0) >> 2,0);
           *(unsigned int **)(param_1 + 0xc) = puVar8 + temp_v4;
           *(unsigned int **)(param_1 + 8) = puVar8 + ((temp_v3 - temp_v0) >> 2) + 1;
           *piVar10 = (int)puVar8;

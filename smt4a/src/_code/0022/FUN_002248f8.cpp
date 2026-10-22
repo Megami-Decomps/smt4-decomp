@@ -24,7 +24,7 @@ int FUN_00333f6c(void);
 int FUN_003343f0(...);
 int FUN_00336aec(...);
 int campCommonBgRelease(void);
-int FUN_0037dab0(void);
+int partyPanelDestroy(void);
 int FUN_0038b3f8(...);
 int FUN_003a7a88(...);
 int pairQueueAppend(...);
@@ -165,7 +165,7 @@ extern int FUN_0035fa18(int, int, int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: menu32EnterState27. */
 extern int menu32State387CNotIn22To25(void);
-/* Supplied declaration required: FUN_0037dab0. */
+/* Supplied declaration required: partyPanelDestroy. */
 extern int menu32ModeIsNot5(int);
 /* Supplied declaration required: FUN_0038b3f8. */
 extern int menu32ModeIsNot6(int);
@@ -622,7 +622,7 @@ LAB_00225054:
             pairQueueAppend(temp_v4,temp_v6,temp_v7);
           }
         }
-        FUN_0037dab0();
+        partyPanelDestroy();
         *(unsigned int *)(temp_v0 + 0x74a0) = 0xb;
         temp_v4 = menu32State387CIs7();
         if (temp_v4 != 0) {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the compiler stores the selection sentinel before the four rectangle floats. */
 #include "classes/SelectionState.h"
 
 /* An empty rectangle has no selected item. */

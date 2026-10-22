@@ -7,11 +7,11 @@ struct SaveLoadProcess {
     /* 0x05 */ s8 state;
 };
 extern SaveLoadProcess g_saveLoadProcess;
-s32 FUN_00429f38(void);
+s32 asdFsIsSdCardDetected(void);
 
 s32 saveLoadProcessGetState(void)
 {
-    return FUN_00429f38() != 0 ? g_saveLoadProcess.state : 0;
+    return asdFsIsSdCardDetected() != 0 ? g_saveLoadProcess.state : 0;
 }
 
 } /* extern "C" */

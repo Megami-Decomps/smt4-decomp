@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_001835b4(...);
-int FUN_002a4844(unsigned int);
-int FUN_002a4860(...);
+int resourceRunEmbeddedOperationIfUnblocked(unsigned int);
+int resourceRunOperationIfUnblocked(...);
 int widgetSubCallIfVisible(...);
 int objectApplyIfUnblocked(...);
 int uiSearchSecondary(...);
@@ -30,9 +30,9 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002a4844. */
-/* Supplied declaration required: FUN_002a4860. */
+extern int recordGetModeForId(int);
+/* Supplied declaration required: resourceRunEmbeddedOperationIfUnblocked. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: widgetSubCallIfVisible. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: uiSearchSecondary. */
@@ -68,10 +68,10 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v6 = param_10;
   temp_v8 = 0;
   if (-1 < param_13) {
-    temp_v8 = FUN_00284140((int)(short)param_13);
+    temp_v8 = recordGetModeForId((int)(short)param_13);
   }
-  temp_v2 = FUN_00284140((int)(short)param_14);
-  temp_v3 = FUN_00284140((int)(short)temp_v1);
+  temp_v2 = recordGetModeForId((int)(short)param_14);
+  temp_v3 = recordGetModeForId((int)(short)temp_v1);
   FUN_001835b4(2,param_4,param_5,param_2,param_3,temp_v0);
   puVar1 = (unsigned int *)&param_8;
   if (temp_v8 != 0) {
@@ -102,10 +102,10 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
       if (temp_v9 < 1) {
         temp_v9 = 1;
       }
-      temp_v6 = FUN_002a4844(param_1);
+      temp_v6 = resourceRunEmbeddedOperationIfUnblocked(param_1);
       temp_v11 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = (int)(temp_v11 * temp_v10);
-      temp_v4 = FUN_002a4844(param_1);
+      temp_v4 = resourceRunEmbeddedOperationIfUnblocked(param_1);
       temp_v5 = uiSearchSecondary(param_1);
       temp_v7 = widgetSubCallIfVisible(param_1);
       if ((temp_v4 + temp_v5 == temp_v7) && (temp_v2 + temp_v9 < (int)**(short **)(temp_v8 + 0xc))) {
@@ -142,10 +142,10 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
       if (temp_v4 < 1) {
         temp_v4 = 1;
       }
-      temp_v6 = FUN_002a4860(param_1);
+      temp_v6 = resourceRunOperationIfUnblocked(param_1);
       temp_v11 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = (int)(temp_v11 * temp_v10);
-      temp_v5 = FUN_002a4860(param_1);
+      temp_v5 = resourceRunOperationIfUnblocked(param_1);
       temp_v9 = uiSearchPrimary(param_1);
       temp_v7 = objectApplyIfUnblocked(param_1);
       if ((temp_v5 + temp_v9 == temp_v7) &&

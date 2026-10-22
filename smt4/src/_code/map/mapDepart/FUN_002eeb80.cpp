@@ -21,7 +21,7 @@ int FUN_00275a30(void);
 int FUN_00275bc8(void);
 int FUN_00275be8(int);
 int FUN_00275dc4(void);
-int FUN_0027653c(void);
+int mapUpdatePerFrame(void);
 int mapEntryTriggerForScene(unsigned int);
 int frameTexResetFlags(void);
 int FUN_00280ac0(int);
@@ -70,7 +70,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
-/* Supplied declaration required: FUN_0027653c. */
+/* Supplied declaration required: mapUpdatePerFrame. */
 /* Supplied declaration required: mapEntryTriggerForScene. */
 /* Supplied declaration required: frameTexResetFlags. */
 /* Supplied declaration required: FUN_00280ac0. */
@@ -161,7 +161,7 @@ unsigned int FUN_002eeb80(void)
       FUN_00294834(200,200,200,0x82,0x82,0x82,0x1e,0x1e,0x1e,0x96,0x96,0x96);
       DAT_0044751c = 100;
       DAT_0049f93f = '\x01';
-      FUN_0027653c();
+      mapUpdatePerFrame();
     }
   }
   else {

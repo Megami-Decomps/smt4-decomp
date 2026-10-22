@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00103504(...);
 int appletReplySleepQueryAllow(...);
 int FUN_00103f90(...);
-int FUN_001042b8(...);
+int appletUnlockAndRestoreDisplay(...);
 int FUN_00106e60(...);
 int FUN_00106f70(...);
 int appletUnlockAndSleepIfShellClosed(...);
@@ -24,7 +24,7 @@ int FUN_00103d48(...);
 int randSetSeed(...);
 int asdPrimSwapBuffers(...);
 int FUN_0010402c(...);
-int FUN_001041e8(...);
+int sysShutdownAndClearBusy(...);
 int asdSoundShutdown(...);
 int FUN_001052d8(...);
 int FUN_00105394(...);
@@ -59,14 +59,14 @@ int FUN_00104e28(...);
 int FUN_00104e44(...);
 int FUN_00104ec4(...);
 int FUN_00105948(...);
-int FUN_00105c78(...);
+int titleConfigResetDefaults(...);
 int FUN_00105cac(...);
 int FUN_00105e50(...);
 int FUN_00105ef8(...);
 int FUN_00106080(...);
 int FUN_00106650(...);
 int FUN_00106a18(...);
-int FUN_00106ba8(...);
+int asdGxLoadMaterialShader(...);
 int FUN_0010707c(...);
 int FUN_001070ac(...);
 int FUN_001071a0(...);
@@ -74,7 +74,7 @@ int gameDataFlagsClearAndRefresh(...);
 int FUN_002c5758(...);
 int asdProcessCreateSimple(...);
 int asdSequenceRequest(...);
-int FUN_002c587c(...);
+int titleConfigApplyAudio(...);
 int FUN_002c58c8(...);
 int asdTMTexTableLoadTmx(...);
 
@@ -162,10 +162,10 @@ extern unsigned char LAB_00101d58; /* 0x101d58 */
 extern unsigned char LAB_00101d6c; /* 0x101d6c */
 extern int titleEndCommandList(...); /* 0x1026a8 */
 extern int titleSubmitCommandList(...); /* 0x1026ec */
-extern int FUN_00102738(...); /* 0x102738 */
+extern int titlePrepareDrawFrame(...); /* 0x102738 */
 extern int titleBeginCommandList(...); /* 0x102798 */
 extern int titleSceneStep(...); /* 0x1027d4 */
-extern int FUN_00102834(...); /* 0x102834 */
+extern int titleSubmitCommandAndUpdateMode(...); /* 0x102834 */
 extern int FUN_00102884(...); /* 0x102884 */
 extern unsigned char LAB_00102d38; /* 0x102d38 */
 extern unsigned char LAB_00102d4c; /* 0x102d4c */
@@ -282,7 +282,7 @@ extern unsigned long long asdSoundRefreshPlayerState(void);
 /* Supplied declaration required: FUN_00103504. */
 extern unsigned int asdModelGetStatic40(void);
 /* Supplied declaration required: FUN_001036fc. */
-extern int FUN_001037b4(void);
+extern int asdSystemGetOperationPending(void);
 extern unsigned int asdModelGetStringConst(void);
 extern unsigned int asdModelGetStatic3C(void);
 /* Supplied declaration required: asdMemoryInit. */
@@ -305,9 +305,9 @@ extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00104074. */
 extern int FUN_001041c8(void);
 extern int appletGetBusyFlag(void);
-/* Supplied declaration required: FUN_001041e8. */
+/* Supplied declaration required: sysShutdownAndClearBusy. */
 /* Supplied declaration required: FUN_0010421c. */
-/* Supplied declaration required: FUN_001042b8. */
+/* Supplied declaration required: appletUnlockAndRestoreDisplay. */
 extern unsigned int asdModelGetStatic50(void);
 /* Supplied declaration required: FUN_001042dc. */
 /* Supplied declaration required: asdPrimInit. */
@@ -333,7 +333,7 @@ extern unsigned long long FUN_00105478(void);
 /* Supplied declaration required: FUN_00105a10. */
 /* Supplied declaration required: FUN_00105b94. */
 /* Supplied declaration required: asdGxResumeAndApplyPreset. */
-/* Supplied declaration required: FUN_00105c78. */
+/* Supplied declaration required: titleConfigResetDefaults. */
 extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_00105cac. */
 /* Supplied declaration required: asdGxPresetsGetDepth. */
@@ -350,7 +350,7 @@ extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_00106650. */
 extern unsigned int FUN_00106708(void);
 /* Supplied declaration required: FUN_00106a18. */
-/* Supplied declaration required: FUN_00106ba8. */
+/* Supplied declaration required: asdGxLoadMaterialShader. */
 /* Supplied declaration required: FUN_00106c28. */
 /* Supplied declaration required: FUN_00106d40. */
 /* Supplied declaration required: FUN_00106e10. */
@@ -383,7 +383,7 @@ extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_002c5758. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_002c587c. */
+/* Supplied declaration required: titleConfigApplyAudio. */
 /* Supplied declaration required: FUN_002c58c8. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: asdGxCommandListCreate. */
@@ -584,7 +584,7 @@ void FUN_00101308(void)
   FUN_0010707c();
   FUN_00104e28(7);
   FUN_00103f74(2);
-  FUN_00106ba8();
+  asdGxLoadMaterialShader();
   asdTMTexTableLoadTmx(0x2c,0);
   FUN_002c58c8(0x2c,0);
   gameDataAllocBlocks();
@@ -594,8 +594,8 @@ void FUN_00101308(void)
   FUN_00105ef8();
   FUN_00106650();
   FUN_001036fc();
-  FUN_00105c78();
-  FUN_002c587c();
+  titleConfigResetDefaults();
+  titleConfigApplyAudio();
   FUN_00104ec4();
   asdSequenceRequest(0x18,0);
   temp_v26 = (romwright_code *)&LAB_00103bd4;
@@ -610,7 +610,7 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101830,0x69,0);
-  temp_v26 = FUN_00102738;
+  temp_v26 = titlePrepareDrawFrame;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c14,0x6e,0);
@@ -650,7 +650,7 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101ca0,0xd3,0);
-  temp_v26 = FUN_00102834;
+  temp_v26 = titleSubmitCommandAndUpdateMode;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101cb0,0xe1,0);
@@ -712,7 +712,7 @@ LAB_00101b80:
         software_interrupt(0x28);
         uRam00446dd0.whole = temp_v23;
         FUN_0010b5e8();
-        temp_v2 = FUN_001037b4();
+        temp_v2 = asdSystemGetOperationPending();
         g_titleFlags = temp_v2 != 0;
         temp_v2 = nngxIsStereoVisionAllowed();
         if (temp_v2 != 0) {
@@ -837,7 +837,7 @@ LAB_00101b80:
             }
             temp_v2 = FUN_001050cc();
             if (temp_v2 != 0) {
-              FUN_001041e8();
+              sysShutdownAndClearBusy();
             }
             asdSoundShutdown();
             FUN_00103504();
@@ -852,7 +852,7 @@ LAB_00101b80:
           }
           appletReplySleepQueryAllow();
           FUN_002c5620();
-          FUN_001042b8();
+          appletUnlockAndRestoreDisplay();
           temp_v3 = temp_v7;
           if (g_mobiclipProcess != 0) {
             FUN_002c560c(2);

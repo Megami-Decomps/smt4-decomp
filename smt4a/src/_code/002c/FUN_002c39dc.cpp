@@ -19,7 +19,7 @@ int dataTable04FindById(void);
 int __aeabi_memset4(int, int, int);
 int FUN_0020b718(...);
 int FUN_0020d934(void);
-int FUN_00228ab0(...);
+int gameGetSaveSlotData(...);
 int FUN_0026f3a0(void);
 void partyPanelRefreshSelectedItemValues(void*, int);
 int FUN_0028c2ec(...);
@@ -52,7 +52,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: FUN_0020d934. */
-/* Supplied declaration required: FUN_00228ab0. */
+/* Supplied declaration required: gameGetSaveSlotData. */
 /* Supplied declaration required: FUN_002304d0. */
 extern int FUN_0025e684(void);
 /* Supplied declaration required: FUN_0026f3a0. */
@@ -459,7 +459,7 @@ LAB_002c4018:
           } while (temp_v3 < 3);
           if (-1 < temp_v2) {
             *(unsigned char *)(temp_v0 + temp_v2 + 0x9c1) = 0;
-            FUN_00228ab0(temp_v2);
+            gameGetSaveSlotData(temp_v2);
           }
           gameGetSlotRecord((int)*(short *)(temp_v0 + 0x38));
           temp_v12 = temp_v10;

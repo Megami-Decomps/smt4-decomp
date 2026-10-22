@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00111bb4(void);
 int FUN_00111cfc(void);
-int FUN_00111ff8(void);
+int textureClearBindingState(void);
 int FUN_00112014(void);
 int FUN_0011235c(void);
 int FUN_00112490(void);
@@ -20,7 +20,7 @@ extern signed char DAT_004c62a0; /* 0x4c62a0 */
 
 /* Supplied declaration required: FUN_00111bb4. */
 /* Supplied declaration required: FUN_00111cfc. */
-/* Supplied declaration required: FUN_00111ff8. */
+/* Supplied declaration required: textureClearBindingState. */
 /* Supplied declaration required: FUN_00112014. */
 /* Supplied declaration required: FUN_0011235c. */
 /* Supplied declaration required: FUN_00112490. */
@@ -41,7 +41,7 @@ void FUN_00107598(void)
     FUN_00111cfc();
     FUN_0011235c();
     FUN_00111bb4();
-    FUN_00111ff8();
+    textureClearBindingState();
     DAT_004c62a0 = '\0';
     FUN_0011d12c();
     temp_v0 = 0;

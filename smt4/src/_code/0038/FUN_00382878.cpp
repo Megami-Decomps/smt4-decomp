@@ -12,9 +12,9 @@ int libc_strcat(...);
 int FUN_002bcf4c(void);
 int FUN_002bcfc0(...);
 int gameFlagIsSet(int);
-int FUN_00381490(unsigned int, int, int, int, unsigned int);
+int qcUtilityBuildAndMarkTabList(unsigned int, int, int, int, unsigned int);
 int FUN_00381958(unsigned int, int, unsigned int, int);
-int FUN_00381ac0(void);
+int sysResetTimestampState(void);
 
 /* stack frame of param_1: 3 slot(s), 9 byte(s) */
 typedef struct {
@@ -35,12 +35,12 @@ extern int objectFlagBitIsSet(unsigned int, unsigned int);
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */
 /* Supplied declaration required: FUN_002bcfc0. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_00381490. */
+/* Supplied declaration required: qcUtilityBuildAndMarkTabList. */
 /* Supplied declaration required: FUN_00381958. */
 extern int FUN_003819b8(void);
-/* Supplied declaration required: FUN_00381ac0. */
+/* Supplied declaration required: sysResetTimestampState. */
 extern int dataTable26GroupGetRecordS2(int, unsigned char, unsigned int);
 
 
@@ -69,7 +69,7 @@ void FUN_00382878(int param_1)
     if (*(unsigned char **)(param_1 + 0x1c) != temp_v9) {
       *(unsigned char **)(param_1 + 0x1c) = temp_v9;
       FUN_00287704(*(unsigned char *)(param_1 + 0x18));
-      FUN_00381ac0();
+      sysResetTimestampState();
     }
     temp_v2 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
     temp_v1 = objectFlagBitIsSet(temp_v2,4);
@@ -160,7 +160,7 @@ void FUN_00382878(int param_1)
       }
       temp_v6 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
       temp_v9 = (unsigned char *)0x14;
-      FUN_00381490(temp_v6,temp_v1,param_1 + 0x20,temp_v8,temp_v2);
+      qcUtilityBuildAndMarkTabList(temp_v6,temp_v1,param_1 + 0x20,temp_v8,temp_v2);
     }
   }
   temp_v1 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
@@ -191,7 +191,7 @@ void FUN_00382878(int param_1)
         }
       }
       else {
-        temp_v2 = FUN_002bd1fc();
+        temp_v2 = gameGetPlayerName();
         libc_strcat(temp_v11,temp_v2);
       }
     }

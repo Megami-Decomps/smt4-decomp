@@ -10,7 +10,7 @@ struct HelpTextureGlobalsView {
 };
 
 extern "C" {
-void FUN_00341f4c();
+void helpReleaseDataTable();
 void asdMemFree(void* memory);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void asdTMTexTableFreeEntry(s32 table);
@@ -21,7 +21,7 @@ void helpTexturesRelease()
     HelpTextureGlobalsView* help = (HelpTextureGlobalsView*)&g_buttonHelp;
     --help->references;
     if (help->references <= 0) {
-        FUN_00341f4c();
+        helpReleaseDataTable();
         asdMemFree(help->first);
         asdMemFree(help->second);
         asdTMTexTableReleaseNode(10, 0);

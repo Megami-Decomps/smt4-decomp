@@ -15,7 +15,7 @@ typedef struct {
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-extern int FUN_00282cb4(void);
+extern int campCecIsActive(void);
 extern int FUN_00282ccc(void);
 extern int FUN_00282e70(void);
 extern int buttonHelpGetEntryValue(unsigned int);
@@ -143,7 +143,7 @@ void FUN_0026c214(void)
     }
     buttonHelpSetPreset(temp_v4);
     temp_v2 = FUN_0029dfa8();
-    if ((temp_v2 == 0) || (temp_v2 = FUN_00282cb4(), temp_v2 == 0)) goto LAB_0026c400;
+    if ((temp_v2 == 0) || (temp_v2 = campCecIsActive(), temp_v2 == 0)) goto LAB_0026c400;
     if (*(char *)(temp_v5 + 0x42) == '\0') {
       temp_v4 = 0xe3;
     }

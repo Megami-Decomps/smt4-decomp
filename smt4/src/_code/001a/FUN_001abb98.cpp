@@ -7,7 +7,7 @@ extern "C" {
 int mapSpawnActiveSlotEffects(void);
 int FUN_002849a4(...);
 int FUN_0028527c(int);
-int FUN_0028529c(int, int, int, int, int, int);
+int naviRegisterTransitionsAndRequest(int, int, int, int, int, int);
 int FUN_002852f0(int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
@@ -68,7 +68,7 @@ extern unsigned char *puRam004bd108; /* 0x4bd108 */
 /* Supplied declaration required: FUN_002849a4. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028527c. */
-/* Supplied declaration required: FUN_0028529c. */
+/* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 /* Supplied declaration required: FUN_002852f0. */
 extern int FUN_00285574(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
@@ -201,7 +201,7 @@ void FUN_001abb98(void)
         *(char *)((int)puVar8 + 0x3b) = (char)*(unsigned short *)(temp_v7 + 0x447f52);
       }
       DAT_0049f924 = (unsigned int)*(short *)(temp_v7 + 0x447f44);
-      FUN_0028529c(DAT_0049f924 & 0xff,0,0,0,0,0);
+      naviRegisterTransitionsAndRequest(DAT_0049f924 & 0xff,0,0,0,0,0);
     }
     else {
       temp_v1 = *(char *)((int)puVar8 + 0x791);

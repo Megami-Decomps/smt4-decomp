@@ -14,7 +14,7 @@ int FUN_001835b4(...);
 int FUN_0022f770(...);
 int FUN_0022f9c8(...);
 int FUN_0023dcec(...);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
@@ -46,7 +46,7 @@ extern int FUN_0022e9b8(void);
 /* Supplied declaration required: FUN_0022f9c8. */
 /* Supplied declaration required: FUN_0023dcec. */
 extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 extern unsigned int computeCountLimit(void);
 extern int dataTableGetEntry24Byte1(int);
@@ -121,7 +121,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
       }
     }
     temp_v1 = temp_v0 + 0x4fc;
-    temp_v14 = FUN_002a4860();
+    temp_v14 = resourceRunOperationIfUnblocked();
     temp_v4 = uiSearchPrimary(temp_v0 + 0x4fc);
     temp_v9 = 0;
     if (temp_v9 < temp_v4) {
@@ -209,7 +209,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < temp_v4);
     }
-    temp_v10 = FUN_002a4860(temp_v1);
+    temp_v10 = resourceRunOperationIfUnblocked(temp_v1);
     temp_v4 = FUN_002a4894(temp_v1);
     temp_v10 = temp_v10 + temp_v4;
     temp_v4 = uniteIsStateTwentyTwo();

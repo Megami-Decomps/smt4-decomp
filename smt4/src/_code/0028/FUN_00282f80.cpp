@@ -21,7 +21,7 @@ extern int devilRecordCompare(...); /* 0x206f30 */
 extern int devilIdCompareGradeDesc(...); /* 0x206f94 */
 extern int dataTable08Sub2CompareByRank(...); /* 0x206fd4 */
 extern int dataComparePrimaryRank(...); /* 0x207014 */
-extern int FUN_00207054(...); /* 0x207054 */
+extern int btlDevilCompareRankAndOrder(...); /* 0x207054 */
 extern int FUN_00207094(...); /* 0x207094 */
 extern int table08IdCompareRankThenCategory(...); /* 0x2070e0 */
 extern int FUN_002190e4(...); /* 0x2190e4 */
@@ -51,7 +51,7 @@ extern int dataTable08Sub2CompareByRankAscending(...); /* 0x2e48d0 */
 extern int FUN_002e4910(...); /* 0x2e4910 */
 extern int FUN_002e4950(...); /* 0x2e4950 */
 extern int dataTable08CompareIds(...); /* 0x2e4990 */
-extern int FUN_002e49dc(...); /* 0x2e49dc */
+extern int btlDevilCompareRankAscending(...); /* 0x2e49dc */
 extern int dataTable08Sub0CompareBySortKeys(...); /* 0x2e4a0c */
 extern int dataTableKeyRankCompare(...); /* 0x2e4a60 */
 extern int FUN_002e4aac(...); /* 0x2e4aac */
@@ -268,7 +268,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_002e49dc);
+        FUN_002b7bca(temp_v1,temp_v2,2,btlDevilCompareRankAscending);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x10) {
@@ -422,7 +422,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00207054);
+        FUN_002b7bca(temp_v5,temp_v2,2,btlDevilCompareRankAndOrder);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x25) {

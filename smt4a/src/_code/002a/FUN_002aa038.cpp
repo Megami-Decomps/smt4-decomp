@@ -9,7 +9,7 @@ int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00240210(...);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -30,8 +30,8 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_0022e9b8(void);
 /* Supplied declaration required: FUN_00240210. */
-extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002a4860. */
+extern int recordGetModeForId(int);
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 extern unsigned int dataTableGetEntry24Byte0(unsigned int);
 extern int objectApplyIfUnblocked(int);
@@ -62,7 +62,7 @@ void FUN_002aa038(int param_1,int param_2)
     return;
   }
   temp_v1 = temp_v0 + 0x4fc;
-  temp_v2 = FUN_002a4860();
+  temp_v2 = resourceRunOperationIfUnblocked();
   temp_v3 = FUN_002a4894(temp_v1);
   temp_v4 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
   efctSetSpeed();
@@ -71,7 +71,7 @@ void FUN_002aa038(int param_1,int param_2)
   if (*(int *)(temp_v0 + 0x3fc) >= 4) {
     FUN_001835b4(2,0x1a,0xb5,param_1,param_2,0x97);
   }
-  temp_v13 = FUN_002a4860(temp_v0 + 0x560);
+  temp_v13 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = 0;
   do {
     temp_v5 = FUN_001834a4(0x1a,temp_v3 + 0xb6);
@@ -111,7 +111,7 @@ void FUN_002aa038(int param_1,int param_2)
   } while (temp_v3 < 8);
   temp_v1 = FUN_002a4894(temp_v1);
   temp_v1 = FUN_001834a4(0x1a,temp_v1 + 200);
-  temp_v2 = FUN_002a4860(temp_v0 + 0x560);
+  temp_v2 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = FUN_002a4894(temp_v0 + 0x560);
   temp_v5 = FUN_002a4894(temp_v0 + 0x560);
   temp_v5 = FUN_001834a4(0x1a,temp_v5 + 200);
@@ -137,7 +137,7 @@ void FUN_002aa038(int param_1,int param_2)
   efctSetSpeed();
   FUN_001835b4(2,0x1a,0xc1,temp_v11,param_2,0xb5);
   temp_v1 = FUN_002a4894(temp_v0 + 0x560);
-  temp_v1 = FUN_00284140((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x44c));
+  temp_v1 = recordGetModeForId((int)*(short *)(temp_v0 + temp_v1 * 2 + 0x44c));
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
     FUN_001835b4(2,0x1a,0x247,temp_v11,param_2,0xb5);
     FUN_001835b4(2,0x1a,0xc2,temp_v11,param_2,0xba);

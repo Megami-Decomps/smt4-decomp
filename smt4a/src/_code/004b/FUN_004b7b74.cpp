@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(int);
 int dialogOpen(int);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int FUN_00275bc8(int, unsigned char *);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002a49e4(unsigned int, int);
@@ -20,7 +20,7 @@ extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -63,10 +63,10 @@ void FUN_004b7b74(int param_1)
           *(unsigned int *)(param_1 + 0x28) = 0xb;
           *(unsigned int *)(param_1 + 0x2c) = 0;
           puVar4 = &LAB_004b7d44;
-          FUN_0020214c();
+          asdLoadFileSyncDefault();
           *(unsigned char **)(param_1 + 0x115c) = puVar4;
           puVar4 = &LAB_004b7d58;
-          FUN_0020214c();
+          asdLoadFileSyncDefault();
           *(unsigned char **)(param_1 + 0x1160) = puVar4;
           temp_v1 = *(int *)(param_1 + 0x115c);
           FUN_00275bc8(temp_v1,puVar4);

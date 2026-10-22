@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in saveLoadUIOpen's literal pool; not written yet. */
+/* NON_MATCHING: runs save/load UI initialization, slot selection, save-data copies, and confirmation substates; typed save-menu work and asynchronous save-operation contracts remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_001c8e28 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_001c8e28(void)
@@ -661,7 +661,7 @@ code_r0x001c9900:
           FUN_002c09bc();
           FUN_001a1a64();
           FUN_0026b4cc();
-          FUN_0029be5c(0x20,1);
+          gameCounterAddSaturating(0x20,1);
           iVar8 = FUN_002c09bc();
           FUN_00322d18(DAT_0044de30 + 1,*(unsigned char *)(iVar8 + 2));
         }

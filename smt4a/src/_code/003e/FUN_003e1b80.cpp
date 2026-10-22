@@ -13,7 +13,7 @@ int FUN_003ed6e8(int);
 int btlLoadBossAppearData(...);
 int FUN_003f26d4(int);
 int FUN_004aa2e0(unsigned int, int);
-int FUN_004f3ee0(...);
+int cameraBeginScalarTransition(...);
 int FUN_004f41b0(int, int, int);
 int FUN_004f6d34(void);
 int FUN_004f7b84(...);
@@ -57,7 +57,7 @@ extern int FUN_003f1230(int);
 /* Supplied declaration required: FUN_003f26d4. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004aa2e0. */
-/* Supplied declaration required: FUN_004f3ee0. */
+/* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f6d34. */
 /* Supplied declaration required: FUN_004f7b84. */
@@ -182,7 +182,7 @@ LAB_003e1f28:
         if (temp_v6 < temp_v1) {
           do {
             if (param_3 == *(int *)(temp_v7 + temp_v6 * 0x14)) {
-              FUN_004f3ee0(g_btlCamera,1,0);
+              cameraBeginScalarTransition(g_btlCamera,1,0);
               param_1[4] = param_1[4] + 1;
               return;
             }
@@ -192,7 +192,7 @@ LAB_003e1f28:
         dataTableFileGetTable(temp_v0,0);
         dataTableGetEntries();
       }
-      FUN_004f3ee0(g_btlCamera,1,0);
+      cameraBeginScalarTransition(g_btlCamera,1,0);
     }
   }
   else {

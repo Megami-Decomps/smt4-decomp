@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0026e324(unsigned int);
 int FUN_002ad8b4(unsigned int, unsigned int);
 int asdMemFree(...);
-int FUN_002c587c(void);
+int titleConfigApplyAudio(void);
 int FUN_002e0bc4(void);
 int rt_memcpy_w(...);
 
@@ -22,7 +22,7 @@ extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_002ad8b4. */
 extern unsigned int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c587c. */
+/* Supplied declaration required: titleConfigApplyAudio. */
 /* Supplied declaration required: FUN_002e0bc4. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -41,7 +41,7 @@ void FUN_0026ff54(void)
     temp_v0 = gameDataBlocksGetSaveData();
     rt_memcpy_w(temp_v0,DAT_0044de40,0x24d28);
     FUN_002e0bc4();
-    FUN_002c587c();
+    titleConfigApplyAudio();
     FUN_0026e324(g_aocSystem);
     asdMemFree(DAT_0044de38);
     asdMemFree(DAT_0044de3c);

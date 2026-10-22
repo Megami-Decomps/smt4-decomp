@@ -36,7 +36,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 == 0) {
       FUN_001f4908(0,10,0xff);
       FUN_001f4908(1,10,0xff);
@@ -113,7 +113,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) {
       FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),*(unsigned int *)(iVar2 + 0x10));
       *(int *)(iVar2 + 8) = *(int *)(iVar2 + 0xc);
@@ -331,7 +331,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 != 2) {
       return 0;
     }
-    uVar3 = FUN_002a4b74();
+    uVar3 = messageGetChoiceResult();
     if (1 < uVar3) {
       *(unsigned int *)(iVar2 + 0x9c) = 0;
       *(unsigned int *)(iVar2 + 0xc) = 0x15;
@@ -358,7 +358,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     if (iVar4 != 2) {
       return 0;
     }
-    iVar4 = FUN_002a4b74();
+    iVar4 = messageGetChoiceResult();
     if (iVar4 != 0) goto code_r0x00236f38;
     FUN_002e59f8(iVar2 + *(int *)(iVar2 + 0xa0) * 0x80 + 700,*(unsigned int *)(iVar2 + 0x14),0x80);
     auStack_108[0] = *(unsigned int *)(iVar2 + 0x18);

@@ -35,7 +35,7 @@ extern unsigned int FUN_0014bd84(short);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: statusDownCreatePanelEffects. */
 /* Supplied declaration required: statDrawClampedDelta. */
 extern unsigned int FUN_003df57c(short, unsigned int);
@@ -59,7 +59,7 @@ void FUN_0037e5c0(int param_1,int param_2,int param_3)
   temp_v5 = 0x9fe7ffff;
   temp_v0 = *(short *)(g_statusDown + 0x24ac + param_1 * 8);
   efctSetSpeed();
-  temp_v1 = FUN_00284140((int)*(short *)(temp_v3 + param_1 * 2 + 0x544));
+  temp_v1 = recordGetModeForId((int)*(short *)(temp_v3 + param_1 * 2 + 0x544));
   if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
     temp_v5 = 0xf5ff9fff;
   }

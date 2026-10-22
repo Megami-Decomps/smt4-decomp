@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_004320e4; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by svcRequestChannelByIndex; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_0016f160 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_0016f160(unsigned int param_1)

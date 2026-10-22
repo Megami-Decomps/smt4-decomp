@@ -26,7 +26,7 @@ extern unsigned int FUN_002a0d0c(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_002cc2a4(unsigned int);
+extern unsigned int buttonHelpGetLayoutEntry(unsigned int);
 
 
 void useCounterStart(void)
@@ -77,8 +77,8 @@ void useCounterStart(void)
     temp_v5 = buttonHelpGetSecondaryState();
     *(char *)(temp_v0 + 0x7f5) = (char)temp_v5;
     if (temp_v5 == 0) {
-      temp_v2 = FUN_002cc2a4(0);
-      temp_v3 = FUN_002cc2a4(1);
+      temp_v2 = buttonHelpGetLayoutEntry(0);
+      temp_v3 = buttonHelpGetLayoutEntry(1);
       textFormatBuffer(temp_v0 + 0x7f6,&LAB_0029e320,temp_v2,temp_v3);
     }
     FUN_00295214(0);

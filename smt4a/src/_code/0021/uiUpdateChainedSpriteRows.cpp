@@ -16,7 +16,7 @@ struct ChainedSpriteWork {
 
 extern "C" {
 s32 FUN_00163aa4(UiAnimatedSprite *sprite, f32 delta);
-void FUN_003d2150(u32 sound);
+void sysPlayVoice(u32 sound);
 
 u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
 {
@@ -29,7 +29,7 @@ u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
     for (s32 i = 0; i < 6; ++i) {
         if (uiAnimatedSpriteIsFinished(&work->first[i])) {
             if (work->soundEnabled[i] != 0 && work->soundPlayed[i] == 0) {
-                FUN_003d2150(0x1000215);
+                sysPlayVoice(0x1000215);
                 work->soundPlayed[i] = 1;
             }
             FUN_00163aa4(&work->second[i], 1.0f);

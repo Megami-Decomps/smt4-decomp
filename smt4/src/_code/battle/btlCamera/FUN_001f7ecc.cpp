@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_001e4a1c(...); /* 0x1e4a1c */
+extern int btlDispatchCurrentJob(...); /* 0x1e4a1c */
 extern unsigned char LAB_001f7f60; /* 0x1f7f60 */
 extern int scrDestroyActive(...); /* 0x2c9e40 */
 extern int g_btlMain; /* 0x4342c8 */
@@ -34,7 +34,7 @@ void FUN_001f7ecc(unsigned int *param_1)
   int temp_v0;
   
   puVar1 = &LAB_001f7f60;
-  taskCreateDraw(&LAB_001f7f60,2,0,0,FUN_001e4a1c,scrDestroyActive,param_1,*param_1);
+  taskCreateDraw(&LAB_001f7f60,2,0,0,btlDispatchCurrentJob,scrDestroyActive,param_1,*param_1);
   param_1[0x11] = (unsigned int)puVar1;
   if (g_btlMain == 0) {
     temp_v0 = 0x100;

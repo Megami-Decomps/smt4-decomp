@@ -30,7 +30,7 @@ extern unsigned int FUN_001522d4(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a7ac4. */
 extern unsigned int FUN_002ac780(int);
 extern int FUN_002c3984(void);
-extern unsigned int FUN_002c3994(void);
+extern unsigned int nnosGetHeapBase(void);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -64,7 +64,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
     }
     piVar2 = (int *)FUN_001522ac(temp_v8,param_3);
     temp_v2 = (**(romwright_code **)(*param_4 + 8))(param_4,piVar2 + 8);
-    temp_v3 = FUN_002c3994();
+    temp_v3 = nnosGetHeapBase();
     temp_v1 = FUN_002c3984();
     temp_v7 = temp_v2 <= temp_v3;
     temp_v6 = temp_v3 == temp_v2;

@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int matrixScaleColumnsAlt(...);
-int FUN_00241d44(...);
+int gpuSubmitFloatVectorsOrDefault(...);
 int forwardRecoveredCallback(void);
 int mathMatrixTranslateLocal(float *, float *, int *);
 int FUN_002b011c(void);
@@ -109,7 +109,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: matrixScaleColumnsAlt. */
-/* Supplied declaration required: FUN_00241d44. */
+/* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_002b011c. */
@@ -359,7 +359,7 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
       FUN_002b011c();
       temp_v0 = 0;
       do {
-        FUN_00241d44(&temp_v48);
+        gpuSubmitFloatVectorsOrDefault(&temp_v48);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 4);
       forwardRecoveredCallback();

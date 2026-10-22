@@ -23,7 +23,7 @@ int FUN_00303460(int);
 int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int FUN_003d4ed8(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -64,7 +64,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
@@ -236,7 +236,7 @@ LAB_0033e908:
           FUN_001bbf0c();
           FUN_0014af98();
           soundVolumeSettingSet();
-          FUN_003d2150(0x10002e5);
+          sysPlayVoice(0x10002e5);
           soundVolumeSettingSet(temp_v0);
           FUN_002342b8();
           temp_v2 = *(int *)(g_lmapScene + 4);

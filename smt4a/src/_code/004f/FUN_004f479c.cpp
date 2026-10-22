@@ -10,7 +10,7 @@ int FUN_002e0898(...);
 int jobSetText(...);
 int asdListBoxSetIntItem(...);
 int asdListBoxSetByteValue(...);
-int FUN_00340edc(...);
+int asdListBoxSetFloatItem(...);
 int jobSetWork7C(...);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned int *g_btlCamera; /* 0x571508 */
 /* Supplied declaration required: jobSetText. */
 /* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: FUN_00340edc. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: jobSetWork7C. */
 
 
@@ -60,9 +60,9 @@ void FUN_004f479c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     asdListBoxAddItem(param_3,"瞂삍垕쾕墍");
     asdListBoxAddItem(param_3,"碂삍垕쾕墍");
     asdListBoxAddItem(param_3,"禂삍垕쾕墍");
-    FUN_00340edc(param_3,0,0xfffffc18);
-    FUN_00340edc(param_3,1,0xfffffc18,1000);
-    FUN_00340edc(param_3,2,0xfffffc18,1000);
+    asdListBoxSetFloatItem(param_3,0,0xfffffc18);
+    asdListBoxSetFloatItem(param_3,1,0xfffffc18,1000);
+    asdListBoxSetFloatItem(param_3,2,0xfffffc18,1000);
   }
   asdListBoxSetByteValue(param_3,1);
   return;

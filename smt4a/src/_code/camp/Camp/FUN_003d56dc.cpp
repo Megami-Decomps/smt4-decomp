@@ -14,7 +14,7 @@ int FUN_00330b74(void);
 int campCommonBgRelease(void);
 int FUN_0037a2e4(void);
 int campButtonHelpRelease(void);
-int FUN_0037dab0(void);
+int partyPanelDestroy(void);
 int FUN_0039c0e4(void);
 int freeTexTable24(void);
 int FUN_003a76b8(void);
@@ -23,19 +23,19 @@ int aocScriptReleaseTableAndReset(void);
 
 int FUN_00202ea4(void);
 int FUN_0021545c(void);
-int FUN_002309dc(void);
+int campReleaseRegisteredTouchRegions(void);
 int useCounterStart(void);
 int campCecScriptStart(...);
 int FUN_002bf534(...);
 int FUN_002e2404(...);
 int campCecSetObjectValue(...);
 int FUN_00319aec(...);
-int FUN_0032d388(...);
+int campCecDestroyOverlay(...);
 int FUN_0034aae4(void);
 int sub68OwnerCall4(void);
 int useCounterRelease(void);
 int clearFlags310To31F(void);
-int FUN_003881e0(...);
+int campCecSetValue(...);
 int messageDismissNumericBanner(...);
 int FUN_0039c244(void);
 int FUN_0039c2a4(...);
@@ -52,7 +52,7 @@ int FUN_001fdde8(void);
 int FUN_00215bd0(void);
 int bgmFadeOut(...);
 int FUN_0022e774(void);
-int FUN_0026f0c4(void);
+int campReleaseSlotTouchRegions(void);
 int msgWindowReset(void);
 int FUN_00287598(void);
 int processQueryChain(void);
@@ -75,9 +75,9 @@ int FUN_00192550(void);
 int FUN_001ffe84(void);
 int FUN_0020dc1c(void);
 int FUN_0021b274(...);
-int FUN_002277d8(void);
+int campResetScreen(void);
 int FUN_0023b45c(...);
-int FUN_0023c08c(...);
+int uniteStartOrQueueRequest(...);
 int campRebuildEnabledFlagList(...);
 int FUN_0026f7f0(void);
 int FUN_002a7324(...);
@@ -97,7 +97,7 @@ int FUN_003a7c00(...);
 int FUN_003d386c(...);
 int FUN_003daf0c(...);
 
-int FUN_0020b660(...);
+int campChangeState(...);
 int FUN_00215bbc(void);
 int configDestroy(void);
 int playLogDestroy(void);
@@ -183,7 +183,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_001ffe84. */
 /* Supplied declaration required: FUN_00202ea4. */
 extern int uniteStateIsDone(void);
-/* Supplied declaration required: FUN_0020b660. */
+/* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0020dc1c. */
 extern int bibleIsClosed(void);
@@ -193,12 +193,12 @@ extern int configIsClosed(void);
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: bgmFadeOut. */
-/* Supplied declaration required: FUN_002277d8. */
+/* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: configDestroy. */
 extern int playLogIsClosed(void);
 extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_002309dc. */
+/* Supplied declaration required: campReleaseRegisteredTouchRegions. */
 extern int campCecHasObject(void);
 extern int FUN_00237620(void);
 extern int FUN_00239480(void);
@@ -207,10 +207,10 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0023b45c. */
 extern int uniteNotBusy(void);
-/* Supplied declaration required: FUN_0023c08c. */
+/* Supplied declaration required: uniteStartOrQueueRequest. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int gameDataBlocksGetTable(void);
-/* Supplied declaration required: FUN_0026f0c4. */
+/* Supplied declaration required: campReleaseSlotTouchRegions. */
 /* Supplied declaration required: FUN_0026f7f0. */
 /* Supplied declaration required: campCecScriptStart. */
 /* Supplied declaration required: ifTouchRegionAdd. */
@@ -222,10 +222,10 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: processQueryChain. */
 extern int FUN_002a21e8(void);
 extern int FUN_002a2814(void);
-extern int FUN_002a4860(unsigned int *);
+extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern unsigned int FUN_002a4878(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a7324. */
 extern int FUN_002a73f8(void);
 extern int FUN_002a7410(void);
@@ -274,12 +274,12 @@ extern int objIsNotInState0xF(void);
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_0031db84. */
 /* Supplied declaration required: FUN_0031f718. */
-extern int FUN_0031f90c(void);
+extern int uiQuestGetPanelMode(void);
 /* Supplied declaration required: uniteValueRefresh. */
 /* Supplied declaration required: FUN_0031fb04. */
 /* Supplied declaration required: lmapMainCallIfActive. */
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_0032d388. */
+/* Supplied declaration required: campCecDestroyOverlay. */
 extern int FUN_003309e0(void);
 /* Supplied declaration required: FUN_00330b74. */
 /* Supplied declaration required: FUN_00331380. */
@@ -320,18 +320,18 @@ extern int uiQuestGetStep(void);
 /* Supplied declaration required: FUN_0037a2e4. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_0037c8e4. */
-extern int FUN_0037d438(void);
+extern int gauntletAppMenuHasActiveFlags(void);
 extern int obj14IsZero(void);
-/* Supplied declaration required: FUN_0037dab0. */
+/* Supplied declaration required: partyPanelDestroy. */
 extern int partyPanelHasMembers(void);
 /* Supplied declaration required: FUN_0037e1b0. */
 extern int titleConfigIsClosed(void);
 extern int campCecGet(void);
-/* Supplied declaration required: FUN_003881e0. */
+/* Supplied declaration required: campCecSetValue. */
 /* Supplied declaration required: FUN_0038843c. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: gauntletAppMenuKillTask. */
-extern int FUN_0038b358(void);
+extern int saveLoadUIHasResult(void);
 extern int aocDataBlockHasEntries(void);
 extern int flagAt4IsClear(void);
 /* Supplied declaration required: FUN_0039c0e4. */
@@ -655,12 +655,12 @@ unsigned int FUN_003d56dc(void)
     *(unsigned char *)(puVar2 + 0x29) = *(unsigned char *)((int)puVar2 + 0xa6);
     FUN_0020d700();
     if (*(char *)((int)puVar2 + 0x32a9) != '\0') {
-      FUN_0020b660(0x1e);
+      campChangeState(0x1e);
       *(unsigned char *)((int)puVar2 + 0x32a9) = 0;
     }
     else {
       puVar2[9] = 6;
-      FUN_0020b660(2);
+      campChangeState(2);
     }
     FUN_0019de98(0,0xf4f4f4ff);
     if (puVar2[10] != 0x22) {
@@ -709,14 +709,14 @@ unsigned int FUN_003d56dc(void)
         sysPlaySe(temp_v5);
         FUN_0028b088(temp_v6);
         temp_v4 = puVar2[9];
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
         break;
       }
       temp_v5 = 7;
       sysPlaySe(temp_v5);
       FUN_0028b088(temp_v6);
       temp_v4 = puVar2[9];
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
       break;
     }
     if (temp_v4 != 0x1d) {
@@ -735,13 +735,13 @@ unsigned int FUN_003d56dc(void)
             if (temp_v4 == 0x30) {
               FUN_0028b088(temp_v6);
               temp_v4 = puVar2[9];
-              FUN_0020b660(temp_v4);
+              campChangeState(temp_v4);
               break;
             }
             FUN_002add8c();
             FUN_0028b088(temp_v6);
             temp_v4 = puVar2[9];
-            FUN_0020b660(temp_v4);
+            campChangeState(temp_v4);
             break;
           }
           FUN_003423e8(2);
@@ -764,7 +764,7 @@ unsigned int FUN_003d56dc(void)
     }
     FUN_0028b088(temp_v6);
     temp_v4 = puVar2[9];
-    FUN_0020b660(temp_v4);
+    campChangeState(temp_v4);
     break;
   case 5:
     FUN_00163aa4();
@@ -803,7 +803,7 @@ unsigned int FUN_003d56dc(void)
             FUN_002add8c();
           }
           temp_v4 = 1;
-          FUN_0020b660(temp_v4);
+          campChangeState(temp_v4);
           break;
         case 0xb:
           FUN_002c39dc(9,puVar2[0xd],0xffffffff);
@@ -813,7 +813,7 @@ unsigned int FUN_003d56dc(void)
         case 0xc:
         case 0xd:
         case 0xe:
-          FUN_0020b660(temp_v4);
+          campChangeState(temp_v4);
         }
       }
       else {
@@ -821,21 +821,21 @@ unsigned int FUN_003d56dc(void)
           FUN_002c39dc(7,puVar2[0xd],0xffffffff);
           FUN_00284ee4(1);
           temp_v4 = puVar2[9];
-          FUN_0020b660(temp_v4);
+          campChangeState(temp_v4);
           break;
         }
         if (!((temp_v4 != 0x18 && temp_v4 != 0x38) && temp_v4 != 0x39)) {
-          FUN_0020b660(temp_v4);
+          campChangeState(temp_v4);
         }
       }
       break;
     }
-    temp_v4 = FUN_002a4860(puVar2 + 0x7b);
+    temp_v4 = resourceRunOperationIfUnblocked(puVar2 + 0x7b);
     temp_v10 = FUN_002a4894(puVar2 + 0x7b);
     FUN_002c39dc(6,puVar2[(temp_v10 + temp_v4) * 2 + 0x6dc],puVar2[(temp_v10 + temp_v4) * 2 + 0x6dd]);
     FUN_00284ee4(1);
     temp_v4 = puVar2[9];
-    FUN_0020b660(temp_v4);
+    campChangeState(temp_v4);
     break;
   case 6:
     FUN_003dc628();
@@ -850,7 +850,7 @@ unsigned int FUN_003d56dc(void)
     FUN_00163aa4(puVar2 + 0x222);
     if (*(char *)((int)puVar2 + 0x6e2) != '\0') {
       temp_v4 = 8;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 8:
@@ -894,7 +894,7 @@ unsigned int FUN_003d56dc(void)
       }
       sysPlaySe(0x52);
       temp_v4 = 9;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 9:
@@ -912,7 +912,7 @@ unsigned int FUN_003d56dc(void)
       } while (temp_v4 < 8);
     }
     if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (*(char *)((int)puVar2 + 0x912) != '\0')) {
-      FUN_0020b660(6);
+      campChangeState(6);
       if ((*(char *)((int)puVar2 + 0xb9) != 3) &&
          (FUN_002f3bc4(&temp_v15,(int)*(char *)((int)puVar2 + 0xb9),(int)*(char *)(puVar2 + 0x2e)),
          puVar8 != (unsigned int *)0x0)) {
@@ -942,7 +942,7 @@ unsigned int FUN_003d56dc(void)
         puVar12[9] = 10;
         temp_v6 = 4;
       }
-      FUN_0020b660(temp_v6);
+      campChangeState(temp_v6);
       FUN_0037c8e4(1,0);
       FUN_0038843c();
       FUN_002f78a0(puVar12);
@@ -970,11 +970,11 @@ LAB_003d6870:
       if (temp_v4 == 0) break;
       puVar12[8] = puVar12[8] + 1;
     }
-    FUN_002277d8();
+    campResetScreen();
     FUN_0021b274(1,0xffffffff,0);
     puVar12[9] = 10;
     temp_v4 = 4;
-    FUN_0020b660(temp_v4);
+    campChangeState(temp_v4);
     break;
   case 0xd:
     FUN_0020dc1c();
@@ -995,19 +995,19 @@ LAB_003d6870:
       if (temp_v4 == 0) {
         campRebuildEnabledFlagList(0xb);
       }
-      FUN_002277d8();
+      campResetScreen();
       temp_v4 = objectApplyIfUnblocked(puVar12 + 0x30);
       if (temp_v4 >= 1) {
         FUN_0021b274(1,0xffffffff,0);
         puVar12[9] = 10;
         temp_v4 = 4;
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
         break;
       }
       FUN_0021b274(3,0xffffffff,0);
       puVar12[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
       break;
     }
     FUN_002e738c(2);
@@ -1027,7 +1027,7 @@ LAB_003d6870:
   case 0x12:
     temp_v4 = FUN_00284e94();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_002a4860(puVar12 + 0x7b);
+      temp_v4 = resourceRunOperationIfUnblocked(puVar12 + 0x7b);
       temp_v10 = FUN_002a4894(puVar12 + 0x7b);
       temp_v4 = FUN_0022a030(puVar12[(temp_v10 + temp_v4) * 2 + 0x6dd],
                            puVar12[(temp_v10 + temp_v4) * 2 + 0x6dc]);
@@ -1037,7 +1037,7 @@ LAB_003d6870:
       FUN_0023b45c(0);
       FUN_0021b274(1,0xffffffff,0);
       puVar12[9] = 0x11;
-      FUN_0020b660(4);
+      campChangeState(4);
       FUN_0035dbd4(1);
     }
     break;
@@ -1054,7 +1054,7 @@ LAB_003d6870:
       FUN_00215bbc();
       FUN_00331380(1);
       temp_v4 = 0x17;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x16:
@@ -1069,7 +1069,7 @@ LAB_003d6870:
       FUN_00284ee4(0);
       FUN_00215bbc();
       temp_v4 = 0x17;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x17:
@@ -1093,7 +1093,7 @@ LAB_003d6870:
       FUN_003a7788();
       FUN_0020d700();
       puVar12[9] = 6;
-      FUN_0020b660(2);
+      campChangeState(2);
       if (*(char *)(puVar12 + 0x29) != '\b') {
         campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         temp_v4 = FUN_0034919c();
@@ -1108,13 +1108,13 @@ LAB_003d6870:
       if (temp_v0 == '\b') {
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         uniteSetMode(3);
-        FUN_0023c08c(0);
+        uniteStartOrQueueRequest(0);
       }
     }
     break;
   case 0x18:
     FUN_003d386c(1);
-    temp_v4 = FUN_002a4860(puVar2 + 0x7b);
+    temp_v4 = resourceRunOperationIfUnblocked(puVar2 + 0x7b);
     temp_v10 = FUN_002a4894(puVar2 + 0x7b);
     if (g_camp != (unsigned int *)0x0) {
       g_camp[0x2f] = temp_v4 + temp_v10;
@@ -1130,7 +1130,7 @@ LAB_003d6870:
         if (0 >= temp_v4) {
           puVar2[9] = 0x11;
           temp_v4 = 4;
-          FUN_0020b660(temp_v4);
+          campChangeState(temp_v4);
           break;
         }
         temp_v6 = 1;
@@ -1138,7 +1138,7 @@ LAB_003d6870:
       FUN_0021b274(temp_v6,0xffffffff,0);
       puVar2[9] = 0x11;
       temp_v4 = 4;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x19:
@@ -1154,7 +1154,7 @@ LAB_003d6870:
       FUN_00215bbc();
       FUN_00331380(1);
       temp_v4 = 0x1b;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x1a:
@@ -1170,7 +1170,7 @@ LAB_003d6870:
       FUN_00215bbc();
       FUN_00331380(1);
       temp_v4 = 0x1c;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x1b:
@@ -1253,7 +1253,7 @@ LAB_003d6870:
       FUN_002c39dc(1,0,0xffffffff);
       campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar12[9] = 6;
-      FUN_0020b660(2);
+      campChangeState(2);
       temp_v4 = FUN_0034919c();
       if (temp_v4 == 0) {
         FUN_0037c8e4(1,0);
@@ -1282,7 +1282,7 @@ LAB_003d6870:
       FUN_002ab804();
       uniteSetMode(3);
       temp_v4 = 0x1f;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x1f:
@@ -1294,10 +1294,10 @@ LAB_003d6870:
       FUN_003b078c();
       uiSpriteSetKeyframe(puVar2 + 0x222,9,0);
       uiSpriteSetImageKeyframe(puVar2 + 0x222,0x13,0);
-      FUN_0023c08c(0);
+      uniteStartOrQueueRequest(0);
       puVar2[9] = 6;
       temp_v4 = 2;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x20:
@@ -1312,16 +1312,16 @@ LAB_003d6870:
       uniteSetMode(3);
       FUN_0026f7f0();
       puVar2[9] = 6;
-      FUN_0020b660(5);
+      campChangeState(5);
       FUN_002a7b74();
-      FUN_0023c08c(0);
+      uniteStartOrQueueRequest(0);
     }
     break;
   case 0x21:
     temp_v4 = uniteRequestGet();
     if ((temp_v4 == 0x10) && (temp_v4 = uniteNotBusy(), temp_v4 != 0)) {
       slotSetRequest(0,0x14,0xff);
-      FUN_0020b660(0x22);
+      campChangeState(0x22);
       soundChannelStopAll(10);
       FUN_00287598();
     }
@@ -1348,12 +1348,12 @@ LAB_003d6870:
         *(unsigned char *)(puVar12 + 0xcad) = 1;
       }
       *(unsigned char *)((int)puVar2 + 0xb7) = 0;
-      FUN_0026f0c4();
+      campReleaseSlotTouchRegions();
       temp_v4 = querySlotHasHandle();
       if (temp_v4 != 0) {
         workCommandRefreshActiveSlots();
       }
-      FUN_0020b660(3);
+      campChangeState(3);
       FUN_003d54f8(0,10);
       temp_v4 = mapMainIsBusy();
       if (temp_v4 != 0) {
@@ -1413,7 +1413,7 @@ LAB_003d6870:
         FUN_003da8f4((int)*(char *)(puVar2 + 0x29),
                      (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x29) + 0xa7));
         FUN_002a7b74();
-        FUN_0023c08c(0);
+        uniteStartOrQueueRequest(0);
       }
       FUN_002add8c();
       FUN_0031d890();
@@ -1421,7 +1421,7 @@ LAB_003d6870:
       campSetSpriteAnimationPreset(2,1,0xffffffff,0);
       puVar2[9] = 6;
       temp_v4 = 2;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x24:
@@ -1434,7 +1434,7 @@ LAB_003d6870:
     FUN_00163aa4(puVar2 + 0x222);
     if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = bibleIsClosed(), temp_v4 != 0)) {
       puVar2[9] = 6;
-      FUN_0020b660(5);
+      campChangeState(5);
       FUN_0026f7f0();
       FUN_0031d890();
       temp_v4 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),
@@ -1451,7 +1451,7 @@ LAB_003d6870:
         FUN_002f78a0(puVar2);
       }
       uniteSetMode(3);
-      FUN_0023c08c(0);
+      uniteStartOrQueueRequest(0);
       uniteValueRefresh();
     }
     break;
@@ -1459,11 +1459,11 @@ LAB_003d6870:
     temp_v4 = puVar2[3];
     processQueryChain();
     if (temp_v4 == 4) {
-      temp_v4 = FUN_0037d438();
+      temp_v4 = gauntletAppMenuHasActiveFlags();
       if (temp_v4 != 0) {
         gauntletAppMenuKillTask();
         temp_v4 = 0x33;
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
         break;
       }
       gauntletAppMenuKillTask();
@@ -1475,7 +1475,7 @@ LAB_003d6870:
       campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       FUN_0031d890();
       puVar2[9] = 6;
-      FUN_0020b660(2);
+      campChangeState(2);
       temp_v4 = FUN_0034919c();
       if (temp_v4 == 0) {
         FUN_0037c8e4(1,0);
@@ -1496,7 +1496,7 @@ LAB_003d6870:
       }
       FUN_0028b088(0);
       puVar2[9] = 6;
-      FUN_0020b660(5);
+      campChangeState(5);
       FUN_0037c8e4(1,0);
       FUN_0038843c();
       FUN_002f78a0(puVar2);
@@ -1524,7 +1524,7 @@ LAB_003d6870:
       DAT_005e1eb8 = FUN_00372140();
       temp_v4 = FUN_002f153c();
       temp_v10 = uiQuestGetActive();
-      temp_v12 = FUN_0031f90c();
+      temp_v12 = uiQuestGetPanelMode();
       temp_v11 = uiQuestGetStep();
       temp_v8 = uiQuestGetMode();
       FUN_0034aae4();
@@ -1539,12 +1539,12 @@ LAB_003d6870:
         DAT_005e1eb1 = (unsigned char)temp_v10;
         DAT_005e1eb2 = (unsigned char)temp_v12;
         DAT_005e1eb3 = (unsigned char)temp_v11;
-        FUN_0020b660(0x33);
+        campChangeState(0x33);
       }
       else {
         FUN_0028b088(0);
         puVar2[9] = 6;
-        FUN_0020b660(5);
+        campChangeState(5);
         FUN_0037c8e4(1,0);
         FUN_0038843c();
         FUN_002f78a0(puVar2);
@@ -1586,7 +1586,7 @@ LAB_003d6870:
       if (puVar12[10] == 0x11) {
         FUN_0023b45c(0);
       }
-      FUN_0020b660(puVar12[10]);
+      campChangeState(puVar12[10]);
       if (puVar12[7] == 0x1d) {
         temp_v6 = 3;
       }
@@ -1607,7 +1607,7 @@ LAB_003d6870:
     if (temp_v4 != 0) {
       FUN_002add8c();
       temp_v4 = 6;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x2e:
@@ -1619,7 +1619,7 @@ joined_r0x003d7c38:
       FUN_0021b274(0,0xffffffff);
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x2f:
@@ -1636,7 +1636,7 @@ joined_r0x003d7c38:
     if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = jobIsValid(puVar2[4]), temp_v4 == 0)) {
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x31:
@@ -1671,7 +1671,7 @@ joined_r0x003d7c38:
         puVar2[0xb] = 0;
       }
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x32:
@@ -1679,16 +1679,16 @@ joined_r0x003d7c38:
       FUN_0039c244();
     }
     if (((int)puVar2[5] >= 2) && (temp_v4 = FUN_002ef9f0(), temp_v4 == 0)) {
-      temp_v4 = FUN_0038b358();
+      temp_v4 = saveLoadUIHasResult();
       if (temp_v4 != 0) {
         DAT_005e1eba = 1;
         DAT_005f1634 = 1;
         temp_v4 = 0x55;
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
         break;
       }
       puVar2[9] = 6;
-      FUN_0020b660(5);
+      campChangeState(5);
       FUN_0037c8e4(1,0);
       FUN_0038843c();
       FUN_002f78a0(puVar2);
@@ -1704,7 +1704,7 @@ joined_r0x003d7c38:
     temp_v4 = FUN_002ebce4();
     if (((temp_v4 != 0) && (*(char *)((int)puVar2 + 0x6e2) != '\0')) &&
        (temp_v4 = FUN_003309e0(), temp_v4 != 0)) {
-      FUN_0020b660(0x55);
+      campChangeState(0x55);
     }
     puVar12 = puVar2 + 0x58d;
     FUN_00163aa4(puVar12);
@@ -1725,11 +1725,11 @@ LAB_003d801c:
         FUN_002f78a0(puVar2);
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         temp_v4 = 1;
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
         break;
       }
       FUN_00319aec(0);
-      FUN_0020b660(0x36);
+      campChangeState(0x36);
       temp_v4 = 0;
       puVar2[0xb] = temp_v4;
     }
@@ -1748,13 +1748,13 @@ LAB_003d801c:
         FUN_002f78a0(puVar2);
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         temp_v4 = 1;
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
       }
     }
     else {
       temp_v4 = FUN_00237620();
       if (temp_v4 == 0) {
-        temp_v4 = FUN_002a4b74();
+        temp_v4 = messageGetChoiceResult();
         if (temp_v4 != 0) {
           campCecScriptStart(0x27);
           sysPlaySe(0x92);
@@ -1765,7 +1765,7 @@ LAB_003d801c:
         campSetSpriteAnimationPreset(2,3,0xffffffff,0);
         messageDismissNumericBanner(1);
         FUN_00319aec(0);
-        FUN_0020b660(0x36);
+        campChangeState(0x36);
         temp_v4 = 0;
         puVar2[0xb] = temp_v4;
       }
@@ -1774,8 +1774,8 @@ LAB_003d801c:
   case 0x36:
     if (puVar2[0xb] != 0) {
       if ((puVar2[0xb] == 1) && (temp_v4 = overlayIsNotBusy(), temp_v4 != 0)) {
-        FUN_0032d388(1);
-        FUN_0020b660(0x37);
+        campCecDestroyOverlay(1);
+        campChangeState(0x37);
         temp_v4 = 0;
         puVar2[0xb] = temp_v4;
       }
@@ -1795,7 +1795,7 @@ LAB_003d801c:
         if ((temp_v4 == 2) && (temp_v4 = overlayIsNotBusy(), temp_v4 != 0)) {
           temp_v4 = campCecGet();
           if (temp_v4 != 0) {
-            FUN_003881e0(0);
+            campCecSetValue(0);
             FUN_003343f0(0);
             temp_v6 = 0x34;
             puVar2[7] = temp_v6;
@@ -1840,7 +1840,7 @@ LAB_003d801c:
         puVar2[9] = 6;
         puVar2[0xb] = 0;
         temp_v4 = 5;
-        FUN_0020b660(temp_v4);
+        campChangeState(temp_v4);
       }
     }
     else {
@@ -1875,7 +1875,7 @@ LAB_003d801c:
       campSetSpriteAnimationPreset(2,1,0xffffffff,0);
       FUN_0019de98(0,0xf4f4f4ff);
       temp_v4 = 1;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
       break;
     }
     temp_v4 = FUN_002bfd04();
@@ -1884,8 +1884,8 @@ LAB_003d801c:
       FUN_0020d700();
       campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar2[9] = 6;
-      FUN_0020b660(2);
-      FUN_002309dc();
+      campChangeState(2);
+      campReleaseRegisteredTouchRegions();
     }
     break;
   case 0x3e:
@@ -1902,16 +1902,16 @@ LAB_003d801c:
       if (puVar2[7] != 0x3f) {
         campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         puVar2[9] = 6;
-        FUN_0020b660(2);
-        FUN_002309dc();
+        campChangeState(2);
+        campReleaseRegisteredTouchRegions();
         break;
       }
       temp_v2 = FUN_0036d134();
       *(unsigned char *)((int)puVar12 + 0x32b6) = temp_v2;
       campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar2[9] = 6;
-      FUN_0020b660(2);
-      FUN_002309dc();
+      campChangeState(2);
+      campReleaseRegisteredTouchRegions();
     }
     break;
   case 0x41:
@@ -1922,8 +1922,8 @@ LAB_003d801c:
       campCecSetObjectValue(0);
       campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar2[9] = 6;
-      FUN_0020b660(2);
-      FUN_002309dc();
+      campChangeState(2);
+      campReleaseRegisteredTouchRegions();
       break;
     }
     temp_v4 = campCecEditIsStateSixteen();
@@ -1937,7 +1937,7 @@ LAB_003d801c:
       puVar2[9] = 6;
       campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       temp_v4 = 1;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x46:
@@ -1967,21 +1967,21 @@ LAB_003d801c:
       puVar2[9] = 6;
       campSetSpriteAnimationPreset(2,1,0xffffffff,0);
       FUN_0019de98(0,0xf4f4f4ff);
-      FUN_0020b660(1);
+      campChangeState(1);
       campCecSetObjectValue(0);
     }
     else {
       temp_v4 = FUN_002a2814();
       if (temp_v4 != 0) {
-        FUN_0032d388(0);
+        campCecDestroyOverlay(0);
         FUN_002c39dc(1,0,0xffffffff);
         FUN_00284ee4(1);
         *(unsigned char *)(puVar2 + 0x29) = 9;
         FUN_0020d700();
         campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         puVar2[9] = 6;
-        FUN_0020b660(2);
-        FUN_002309dc();
+        campChangeState(2);
+        campReleaseRegisteredTouchRegions();
       }
     }
     break;
@@ -1997,7 +1997,7 @@ LAB_003d801c:
       }
       sysPlaySe(temp_v6);
       temp_v4 = puVar2[10];
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x48:
@@ -2008,7 +2008,7 @@ LAB_003d801c:
       FUN_0021b274(3,0xffffffff,0);
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x49:
@@ -2024,7 +2024,7 @@ LAB_003d801c:
       FUN_00215bbc();
       FUN_00331380(1);
       temp_v4 = 0x4a;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x4b:
@@ -2040,7 +2040,7 @@ LAB_003d801c:
       FUN_00215bbc();
       FUN_00331380(1);
       temp_v4 = 0x4c;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x4c:
@@ -2064,7 +2064,7 @@ LAB_003d801c:
       FUN_003a7788();
       FUN_0020d700();
       puVar12[9] = 6;
-      FUN_0020b660(2);
+      campChangeState(2);
       if (*(char *)(puVar12 + 0x29) != '\b') {
         campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         temp_v4 = FUN_0034919c();
@@ -2079,7 +2079,7 @@ LAB_003d801c:
       if (temp_v0 == '\b') {
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         uniteSetMode(3);
-        FUN_0023c08c(0);
+        uniteStartOrQueueRequest(0);
       }
     }
     break;
@@ -2088,7 +2088,7 @@ LAB_003d801c:
     messageDismissNumericBanner(1);
     slotSetRequest(0,10,0xff);
     slotSetRequest(1,10,0xff);
-    FUN_0020b660(0x4f);
+    campChangeState(0x4f);
     DAT_005f19ef = 1;
     break;
   case 0x4f:
@@ -2096,7 +2096,7 @@ LAB_003d801c:
     if (temp_v4 != 0) {
       FUN_002bf4f4(1);
       temp_v4 = 0x55;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x50:
@@ -2108,12 +2108,12 @@ LAB_003d801c:
       *(unsigned char *)((int)puVar12 + 0x32b2) = temp_v2;
       temp_v2 = FUN_003b6f00();
       *(unsigned char *)((int)puVar12 + 0x32b3) = temp_v2;
-      FUN_002277d8();
+      campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
       FUN_0028b088(0);
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x51:
@@ -2125,24 +2125,24 @@ LAB_003d801c:
       *(unsigned char *)((int)puVar12 + 0x32b2) = temp_v2;
       temp_v2 = FUN_003b6f00();
       *(unsigned char *)((int)puVar12 + 0x32b3) = temp_v2;
-      FUN_002277d8();
+      campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
       FUN_0028b088(0);
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x52:
     temp_v4 = FUN_002c2bd0();
     if (temp_v4 != 0) {
       FUN_0031d088();
-      FUN_002277d8();
+      campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
       FUN_0028b088(0);
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x53:
@@ -2150,7 +2150,7 @@ LAB_003d801c:
     if ((temp_v4 != 0) && (temp_v4 = loadSlotIsLoaded(0x3a), temp_v4 != 0)) {
       FUN_0037a2e4();
       temp_v4 = 0x54;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x54:
@@ -2162,15 +2162,15 @@ LAB_003d801c:
       FUN_0028b088(0);
       puVar2[9] = 6;
       temp_v4 = 5;
-      FUN_0020b660(temp_v4);
+      campChangeState(temp_v4);
     }
     break;
   case 0x55:
     aocScriptReleaseTableAndReset();
     FUN_003a76b8();
     FUN_00330b74();
-    FUN_002309dc();
-    FUN_0037dab0();
+    campReleaseRegisteredTouchRegions();
+    partyPanelDestroy();
     campCommonBgRelease();
     campButtonHelpRelease();
     FUN_002e26a4();
@@ -2181,7 +2181,7 @@ LAB_003d801c:
   case 0x56:
     temp_v4 = aocDataBlockHasEntries();
     if (temp_v4 != 0) {
-      FUN_0020b660(0x55);
+      campChangeState(0x55);
     }
   }
   puVar2[5] = puVar2[5] + 1;

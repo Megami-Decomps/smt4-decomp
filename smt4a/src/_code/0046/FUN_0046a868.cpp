@@ -34,7 +34,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
-extern unsigned int FUN_00184df8(unsigned int);
+extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 /* Supplied declaration required: FUN_0046868c. */
 
 
@@ -87,7 +87,7 @@ void FUN_0046a868(unsigned int *param_1)
     FUN_0016c4b8(g_renderCtx,0);
     temp_v2 = asdGxPresetsGetByKind(*(unsigned int *)(g_renderCtx + 0x52c));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = FUN_00184df8(*(unsigned int *)(g_renderCtx + 0x52c));
+    temp_v2 = asdGxPresetsGetHeightByKind(*(unsigned int *)(g_renderCtx + 0x52c));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_0014e314(temp_v5 & 0xff);
     temp_v0 = g_renderCtx;

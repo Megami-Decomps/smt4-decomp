@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002c6a04(void);
+int libcLocaleGetTables(void);
 
 extern unsigned char LAB_002c69fc; /* 0x2c69fc */
 
-/* Supplied declaration required: FUN_002c6a04. */
+/* Supplied declaration required: libcLocaleGetTables. */
 
 
 unsigned char * FUN_002c6864(unsigned char *param_1,unsigned int param_2)
@@ -28,7 +28,7 @@ unsigned char * FUN_002c6864(unsigned char *param_1,unsigned int param_2)
     pcVar7 = (char *)(param_1 + 1);
     temp_v5 = 0;
     *param_1 = 0x2a;
-    temp_v1 = FUN_002c6a04();
+    temp_v1 = libcLocaleGetTables();
     do {
       temp_v2 = 0;
       temp_v3 = *(unsigned int *)(temp_v1 + temp_v5 * 4);
@@ -56,11 +56,11 @@ unsigned char * FUN_002c6864(unsigned char *param_1,unsigned int param_2)
         if (param_2 != 2) {
           return (unsigned char *)0x0;
         }
-        temp_v1 = FUN_002c6a04();
+        temp_v1 = libcLocaleGetTables();
         temp_v3 = *(unsigned int *)(temp_v1 + 4);
       }
       else {
-        puVar4 = (unsigned int *)FUN_002c6a04();
+        puVar4 = (unsigned int *)libcLocaleGetTables();
         temp_v3 = *puVar4;
       }
     }
@@ -68,16 +68,16 @@ unsigned char * FUN_002c6864(unsigned char *param_1,unsigned int param_2)
       if (param_2 != 0x10) {
         return (unsigned char *)0x0;
       }
-      temp_v1 = FUN_002c6a04();
+      temp_v1 = libcLocaleGetTables();
       temp_v3 = *(unsigned int *)(temp_v1 + 0x10);
     }
     else {
-      temp_v1 = FUN_002c6a04();
+      temp_v1 = libcLocaleGetTables();
       temp_v3 = *(unsigned int *)(temp_v1 + 0xc);
     }
   }
   else {
-    temp_v1 = FUN_002c6a04();
+    temp_v1 = libcLocaleGetTables();
     temp_v3 = *(unsigned int *)(temp_v1 + 8);
   }
   if (temp_v3 == 0) {

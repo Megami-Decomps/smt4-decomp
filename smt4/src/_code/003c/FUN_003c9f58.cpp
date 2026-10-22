@@ -10,8 +10,8 @@ int FUN_00229c5c(unsigned int, int, int);
 int FUN_002ae164(...);
 int dataTable08Sub1GetRecord(void);
 int FUN_003adc20(unsigned int);
-int FUN_003ae2ec(unsigned int, unsigned int, unsigned int);
-int FUN_003ae868(unsigned int);
+int btlUiGetAcceptedSelection(unsigned int, unsigned int, unsigned int);
+int btlUiAdvanceFadeInTransition(unsigned int);
 
 extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int g_btlActionReflect; /* 0x434290 */
@@ -27,9 +27,9 @@ extern int nodeListCountActiveById(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern int FUN_002cf124(void);
 /* Supplied declaration required: FUN_003adc20. */
-/* Supplied declaration required: FUN_003ae2ec. */
+/* Supplied declaration required: btlUiGetAcceptedSelection. */
 extern int FUN_003ae58c(unsigned int);
-/* Supplied declaration required: FUN_003ae868. */
+/* Supplied declaration required: btlUiAdvanceFadeInTransition. */
 
 
 unsigned int FUN_003c9f58(int *param_1,unsigned int *param_2)
@@ -53,13 +53,13 @@ unsigned int FUN_003c9f58(int *param_1,unsigned int *param_2)
     if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
       if ((*param_2 & 0x80) == 0) {
         *param_2 = *param_2 | 0x80;
-        FUN_003ae868(g_btlUiBlock);
+        btlUiAdvanceFadeInTransition(g_btlUiBlock);
         FUN_00229c5c(g_btlUiBlock,(short)param_2[0xb],1);
       }
     }
     else if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) != 0) && ((*param_2 & 0x1000) == 0)) {
       *param_2 = *param_2 | 0x1000;
-      FUN_003ae868(g_btlUiBlock);
+      btlUiAdvanceFadeInTransition(g_btlUiBlock);
       FUN_00229c5c(g_btlUiBlock,(short)param_2[0xb],1);
     }
   }
@@ -67,7 +67,7 @@ unsigned int FUN_003c9f58(int *param_1,unsigned int *param_2)
   if (temp_v1 == 0) {
     return 0;
   }
-  FUN_003ae2ec(g_btlUiBlock,param_2[10] + 0x14c,param_2[10] + 0x14e);
+  btlUiGetAcceptedSelection(g_btlUiBlock,param_2[10] + 0x14c,param_2[10] + 0x14e);
   if ((*param_2 & 0x80) != 0) {
     if ((*(unsigned int *)param_2[8] & 2) != 0) {
       temp_v1 = FUN_0023dcb8();

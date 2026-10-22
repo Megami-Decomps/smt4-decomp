@@ -34,7 +34,7 @@ extern int DAT_004e3bd4; /* 0x4e3bd4 */
 /* Supplied declaration required: FUN_002c2424. */
 /* Supplied declaration required: asdModelResetCommandBuffer. */
 extern unsigned int FUN_002c3984(void);
-extern unsigned int FUN_002c3994(void);
+extern unsigned int nnosGetHeapBase(void);
 /* Supplied declaration required: nngxRunCmdlist. */
 
 
@@ -51,7 +51,7 @@ void FUN_001058a4(unsigned int param_1)
   asdModelResetCommandBuffer();
   asdGxCommandListBindBack();
   temp_v0 = FUN_002c3984();
-  temp_v1 = FUN_002c3994();
+  temp_v1 = nnosGetHeapBase();
   FUN_002c2424(temp_v1,temp_v0);
   FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&g_asdGxPresets + 0x150)));
   FUN_002bf0d8();

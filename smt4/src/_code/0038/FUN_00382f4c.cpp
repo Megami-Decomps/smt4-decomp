@@ -10,7 +10,7 @@ int messageMainSetTargetFlags(int);
 int FUN_002355ac(int);
 int FUN_002636b0(void);
 int FUN_00269dc8(void);
-int FUN_00290e9c(void);
+int messageTargetGetValue(void);
 int FUN_002973d8(void);
 int FUN_0029cc44(int);
 int messageTargetSetValue(unsigned int, int);
@@ -28,7 +28,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_002636b0. */
 /* Supplied declaration required: FUN_00269dc8. */
-/* Supplied declaration required: FUN_00290e9c. */
+/* Supplied declaration required: messageTargetGetValue. */
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -55,7 +55,7 @@ void FUN_00382f4c(int param_1)
   if (temp_v0 != 2) {
     temp_v0 = messageWindowIsState1();
     if (temp_v0 != 0) {
-      temp_v0 = FUN_00290e9c();
+      temp_v0 = messageTargetGetValue();
       if (*(char *)(param_1 + 0x18) == '\0') {
         temp_v1 = 0x405718;
       }
@@ -89,9 +89,9 @@ void FUN_00382f4c(int param_1)
           FUN_00223cf0();
           FUN_002636b0();
           *(unsigned char *)(param_1 + 0xd55) = 0;
-          temp_v2 = FUN_00290e9c();
+          temp_v2 = messageTargetGetValue();
           *(unsigned int *)(param_1 + 0xfbc) = temp_v2;
-          if ((*(char *)(param_1 + 0x18) != '\0') && (temp_v0 = FUN_00290e9c(), temp_v0 == 0)) {
+          if ((*(char *)(param_1 + 0x18) != '\0') && (temp_v0 = messageTargetGetValue(), temp_v0 == 0)) {
             *(unsigned char *)(param_1 + 0xd55) = 1;
             FUN_0029cc44(0);
           }

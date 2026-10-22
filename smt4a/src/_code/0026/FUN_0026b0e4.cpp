@@ -21,7 +21,7 @@ int FUN_0018408c(...);
 int FUN_00184310(void);
 int FUN_001fc720(int, int);
 int FUN_0022fb78(...);
-int FUN_002a4860(...);
+int resourceRunOperationIfUnblocked(...);
 int FUN_00344cd0(...);
 int FUN_003d3a4c(...);
 int FUN_0047fc38(void);
@@ -68,7 +68,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
 /* Supplied declaration required: FUN_0022fb78. */
 extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_002a4860. */
+/* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 extern unsigned short *FUN_002c7e24(void);
@@ -335,7 +335,7 @@ LAB_0026b644:
   case 0x17:
     temp_v11 = g_statusDown + 0x2354;
     temp_v23 = temp_v11;
-    temp_v2 = FUN_002a4860();
+    temp_v2 = resourceRunOperationIfUnblocked();
     temp_v10 = FUN_002a4894(temp_v11);
     temp_v11 = FUN_002a4878(temp_v11);
     efctSetSpeed();
@@ -350,7 +350,7 @@ LAB_0026b644:
     do {
       temp_v2 = 0;
       do {
-        temp_v10 = FUN_002a4860(temp_v23);
+        temp_v10 = resourceRunOperationIfUnblocked(temp_v23);
         temp_v10 = temp_v2 + (temp_v10 + temp_v11) * 4;
         if (*(short *)(temp_v24 + 0x48) <= temp_v10) break;
         temp_v5 = FUN_001834a4(0x12,temp_v2 + temp_v11 * 4 + 0x4ae);
@@ -509,7 +509,7 @@ LAB_0026b644:
       temp_v11 = 0;
       do {
         temp_v2 = FUN_001834a4(0x12,temp_v11 + 0x48d);
-        temp_v10 = FUN_002a4860(temp_v4 + 0x23c0);
+        temp_v10 = resourceRunOperationIfUnblocked(temp_v4 + 0x23c0);
         FUN_00164168(*(unsigned int *)(temp_v4 + 0x23b8),*(short *)(temp_v2 + 8) + temp_v0,
                      *(short *)(temp_v2 + 10) + temp_v1,0xb5,6,temp_v10 + temp_v11);
         temp_v11 = temp_v11 + 1;

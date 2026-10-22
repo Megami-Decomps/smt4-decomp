@@ -8,7 +8,7 @@ int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int streamReset(int *);
 int strHolderAssignHolderValue(int, int *);
-int FUN_002f2da0(...);
+int sharedRefAssignFromOwner(...);
 int objectCountIncrement(int);
 int listIteratorNext2(int *);
 int FUN_00310510(int *, unsigned char **, int *);
@@ -52,7 +52,7 @@ extern int *FUN_002f2afc(void);
 /* Supplied declaration required: strHolderAssignHolderValue. */
 extern int FUN_002f2b30(void);
 extern int FUN_002f2c38(int, int);
-/* Supplied declaration required: FUN_002f2da0. */
+/* Supplied declaration required: sharedRefAssignFromOwner. */
 /* Supplied declaration required: objectCountIncrement. */
 /* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int);
@@ -120,7 +120,7 @@ unsigned int FUN_00120960(int param_1,int param_2,unsigned int param_3,unsigned 
         if ((*(unsigned short *)(temp_v13 + 0x122) < DAT_00594988) && (*(char *)(temp_v13 + 0x131) == '\0'))
         break;
         temp_v12 = temp_v13;
-        FUN_002f2da0(temp_v10,param_1,&temp_v12);
+        sharedRefAssignFromOwner(temp_v10,param_1,&temp_v12);
         temp_v13 = temp_v10[0];
       }
       temp_v20 = temp_v13 + 0x100;
@@ -141,7 +141,7 @@ LAB_00120aa8:
         temp_v2 = FUN_002efd4a((unsigned int *)&temp_v15,temp_v22);
         if (temp_v2 != 0) {
           temp_v10[0] = temp_v13;
-          FUN_002f2da0(&temp_v12,param_1,temp_v10);
+          sharedRefAssignFromOwner(&temp_v12,param_1,temp_v10);
           temp_v13 = temp_v12;
         }
         else {
@@ -202,7 +202,7 @@ LAB_00120aa8:
     }
     sharedRefAddRef(temp_v2);
     temp_v11 = temp_v13;
-    FUN_002f2da0(&temp_v12,param_1,&temp_v11);
+    sharedRefAssignFromOwner(&temp_v12,param_1,&temp_v11);
     temp_v13 = temp_v12;
   } while( 1 );
 }

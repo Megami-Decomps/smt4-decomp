@@ -6,11 +6,11 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_001bc460(...);
-int FUN_00226cb0(...);
+int mathMatrixApplyScale(...);
 int FUN_00237354(...);
 int matrix43Multiply(...);
 int FUN_002a2048(...);
-int FUN_002e1450(...);
+int matrix44SetIdentity(...);
 int FUN_00381f00(...);
 int quadSourceCopyOut(...);
 int quadHolderCopyOut(...);
@@ -156,11 +156,11 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001bc460. */
-/* Supplied declaration required: FUN_00226cb0. */
+/* Supplied declaration required: mathMatrixApplyScale. */
 /* Supplied declaration required: FUN_00237354. */
 /* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a2048. */
-/* Supplied declaration required: FUN_002e1450. */
+/* Supplied declaration required: matrix44SetIdentity. */
 /* Supplied declaration required: FUN_00381f00. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: quadHolderCopyOut. */
@@ -370,7 +370,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                       ((unsigned int)(0.0f <= pfVar9->field_0x14 * temp_v4 +
                                      param_1->field_0x2c * temp_v4 * temp_v4 * 0.5f) << 0x1d);
               if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
-                FUN_002e1450();
+                matrix44SetIdentity();
               }
               else {
                 temp_v57 = pfVar9->field_0x4;
@@ -405,7 +405,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v28 = DAT_005c1138 * temp_v28;
                 temp_v29 = DAT_005c113c * pfVar8[6];
               }
-              FUN_00226cb0(&temp_v30,&temp_v27,2);
+              mathMatrixApplyScale(&temp_v30,&temp_v27,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x7c) = temp_v27;
               *(float *)(temp_v2 + 0x80) = temp_v28;
@@ -479,7 +479,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                              param_1->field_0x2c * temp_v1 *
                              temp_v1 * (float)((unsigned long long)temp_v13 >> 0x20)) << 0x1d);
               if (!romwright_subpiece_4_1_0(temp_v3 >> 0x1d,0)) {
-                FUN_002e1450();
+                matrix44SetIdentity();
               }
               else {
                 temp_v19 = pfVar9->field_0x4;
@@ -487,7 +487,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v21 = pfVar9->field_0xc;
                 FUN_00237354(temp_v55,&temp_v19,0);
               }
-              FUN_002e1450(&temp_v30);
+              matrix44SetIdentity(&temp_v30);
               matrix43Multiply(&temp_v30,temp_v55,&temp_v39);
               temp_v2 = pfVar9->field_0x0;
               *(unsigned int *)(temp_v2 + 0x4c) = temp_v30;
@@ -512,7 +512,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v28 = DAT_005c1138 * temp_v28;
                 temp_v29 = DAT_005c113c * pfVar8[6];
               }
-              FUN_00226cb0(&temp_v30,&temp_v27,2);
+              mathMatrixApplyScale(&temp_v30,&temp_v27,2);
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x7c) = temp_v27;
               *(float *)(temp_v2 + 0x80) = temp_v28;

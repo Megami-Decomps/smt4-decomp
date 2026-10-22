@@ -41,7 +41,7 @@ extern int g_aocSystem; /* 0x433158 */
 extern unsigned int *g_aocJob; /* 0x43e0d0 */
 
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_001aba04(void);
+extern int messageAnyWindowActive(void);
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_00282bfc. */
@@ -74,7 +74,7 @@ extern int padIsButtonPressed(unsigned int);
 extern int jyoucyuGetTableEntry(unsigned int);
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: FUN_002cb8d8. */
-extern int FUN_002d860c(void);
+extern int debugFlagEditorUpdate(void);
 /* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: eventCommandStop. */
@@ -105,7 +105,7 @@ unsigned int FUN_001e4d70(void)
     g_aocJob[3] = g_aocJob[3] + 1;
     temp_v0 = scrRunOpcodesStub(puVar1[0xc]);
     if (temp_v0 != 2) {
-      temp_v0 = FUN_001aba04();
+      temp_v0 = messageAnyWindowActive();
       if (temp_v0 != 0) {
         return 0;
       }
@@ -154,7 +154,7 @@ unsigned int FUN_001e4d70(void)
   }
   if (temp_v0 >= 3) {
     if (temp_v0 == 0x58) {
-      temp_v0 = FUN_002d860c();
+      temp_v0 = debugFlagEditorUpdate();
       if (temp_v0 == 0) {
         return 0;
       }

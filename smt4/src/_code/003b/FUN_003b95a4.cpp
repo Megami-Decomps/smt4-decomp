@@ -12,7 +12,7 @@ int FUN_00234cd8(unsigned int, int, int);
 void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_00234f5c(...);
 int placeWinStartText(...);
-int FUN_002a0400(unsigned int, unsigned int, unsigned int);
+int objModelCreateFromSource(unsigned int, unsigned int, unsigned int);
 int textFormatBuffer(...);
 int FUN_003ba754(int);
 int dataTable33GetEntries(void);
@@ -33,7 +33,7 @@ extern int FUN_0022b8c0(int);
 /* Supplied declaration required: nodeOwnerSetEnabled. */
 /* Supplied declaration required: FUN_00234f5c. */
 /* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: FUN_002a0400. */
+/* Supplied declaration required: objModelCreateFromSource. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
@@ -104,7 +104,7 @@ void FUN_003b95a4(int param_1)
             } while (temp_v0 < (int)puVar3);
           }
           temp_v0 = param_1 + *(char *)(temp_v1 + 0x2b) * 4;
-          FUN_002a0400(*(unsigned int *)(param_1 + 0xe5c),*(unsigned int *)(temp_v0 + 0xe60),
+          objModelCreateFromSource(*(unsigned int *)(param_1 + 0xe5c),*(unsigned int *)(temp_v0 + 0xe60),
                        *(unsigned int *)(temp_v0 + 0xe88));
         }
       }

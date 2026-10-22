@@ -9,16 +9,16 @@ typedef struct SlotTable {
 #define MONEY_MAX 999999999
 
 extern SlotTable *gameGetSlotTable(void);
-extern void FUN_0029be5c(s32 kind, s32 amount);
+extern void gameCounterAddSaturating(s32 kind, s32 amount);
 
-/* Adds `amount` to the player's money (reporting gains through FUN_0029be5c) and clamps it to 0..999999999. */
+/* Adds `amount` to the player's money (reporting gains through gameCounterAddSaturating) and clamps it to 0..999999999. */
 void gameMoneyAdd(s32 amount)
 {
     SlotTable *table = gameGetSlotTable();
 
     table->money += amount;
     if (amount > 0) {
-        FUN_0029be5c(0, amount);
+        gameCounterAddSaturating(0, amount);
     }
     if (table->money < 0) {
         table->money = 0;

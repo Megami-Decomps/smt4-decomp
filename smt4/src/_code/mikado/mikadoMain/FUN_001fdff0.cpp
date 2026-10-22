@@ -10,7 +10,7 @@ int asdMemFreeNonNull(int);
 int asdOperatorNew(void);
 int FUN_003b8158(void);
 int FUN_003ba734(unsigned int, unsigned short [2]);
-int FUN_003bb3fc(unsigned int);
+int sceneUpdateHandlerAndWidget(unsigned int);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern int _ZN14SelectionFlagsC1Ev(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_003b8158. */
 /* Supplied declaration required: FUN_003ba734. */
-/* Supplied declaration required: FUN_003bb3fc. */
+/* Supplied declaration required: sceneUpdateHandlerAndWidget. */
 
 
 unsigned int FUN_001fdff0(void)
@@ -68,7 +68,7 @@ unsigned int FUN_001fdff0(void)
       }
     }
     else {
-      FUN_003bb3fc(*(unsigned int *)(DAT_0044cfd4 + 8));
+      sceneUpdateHandlerAndWidget(*(unsigned int *)(DAT_0044cfd4 + 8));
       if (*(char *)(*(int *)(temp_v1 + 8) + 0x24) != '\0') {
         *(unsigned char *)(temp_v1 + 5) = 2;
       }

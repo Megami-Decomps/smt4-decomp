@@ -19,19 +19,19 @@ int scrScriptProcessDestroy(void);
 int placeWinRelease(void);
 int messageSetMode(...);
 int asdCameraInitAreas(void);
-int FUN_001aeafc(...);
+int resourceOwnerReleaseAndReset(...);
 int FUN_00214da4(void);
 int gameStateClearFlag(void);
-int FUN_00314c38(...);
+int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
 int FUN_00324c48(...);
 int useCounterSelectMode2(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
 int FUN_003a2278(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int linkHolderClearFlag(...);
-int FUN_003e5c00(void);
+int resourceOwnerReleaseAll(void);
 int FUN_00408184(...);
 
 int FUN_001628c0(...);
@@ -66,7 +66,7 @@ int sysPlaySe(...);
 int gameFlagIsSet(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
-int FUN_0020214c(void);
+int asdLoadFileSyncDefault(void);
 int placeWinStartText(...);
 int FUN_0022677c(...);
 int FUN_00275bc8(...);
@@ -191,12 +191,12 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00214da4. */
 /* Supplied declaration required: FUN_0021b6ec. */
@@ -215,7 +215,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: gameStateClearFlag. */
-/* Supplied declaration required: FUN_00314c38. */
+/* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
@@ -232,7 +232,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003870a8. */
 /* Supplied declaration required: FUN_003a2278. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -248,7 +248,7 @@ extern int linkHolderCheckFirst(unsigned int);
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
-/* Supplied declaration required: FUN_003e5c00. */
+/* Supplied declaration required: resourceOwnerReleaseAll. */
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
@@ -547,10 +547,10 @@ unsigned int FUN_0027e0d8(void)
     puVar3[6] = g_gameState;
     puVar3[7] = DAT_005f1600;
     puVar9 = &LAB_0027ece0;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     puVar3[8] = (unsigned int)puVar9;
     puVar9 = &LAB_0027ecf8;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     puVar3[9] = (unsigned int)puVar9;
     temp_v7 = puVar3[8];
     FUN_00275bc8(temp_v7,puVar9);
@@ -558,7 +558,7 @@ unsigned int FUN_0027e0d8(void)
     *(unsigned int *)(temp_v7 + 0x108) = 2;
     FUN_003180c4(0x28,s_________0056fd3d + (unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 2);
     puVar9 = &LAB_0027ed10;
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     puVar3[0xe] = (unsigned int)puVar9;
     temp_v7 = FUN_0013def0(0);
     if (temp_v7 == 3) {
@@ -807,7 +807,7 @@ LAB_0027edcc:
     if (*(char *)(puVar3 + 0x15c) == '\0') break;
     soundChannelStopAll(0xf);
     FUN_003d2158(0x10000b2,0);
-    FUN_003d2150(0x10000b3);
+    sysPlayVoice(0x10000b3);
     temp_v4 = 0x12;
     puVar3[4] = temp_v4;
     break;
@@ -910,7 +910,7 @@ LAB_0027edcc:
     if (temp_v7 != 2) break;
     FUN_00408184(0x21,1);
     *(unsigned char *)(puVar3 + 0x15c) = 0;
-    FUN_003d2150(0x10000b2);
+    sysPlayVoice(0x10000b2);
     FUN_00214da4();
     sysPlaySe(0x59);
     puVar3[4] = 5;
@@ -933,7 +933,7 @@ LAB_0027edcc:
   case 0xf:
     FUN_00408184(0x21,1);
     *(unsigned char *)(puVar3 + 0x15c) = 0;
-    FUN_003d2150(0x10000b2);
+    sysPlayVoice(0x10000b2);
     FUN_00214da4();
     sysPlaySe(0x59);
     puVar3[4] = 5;
@@ -956,10 +956,10 @@ LAB_0027edcc:
     temp_v7 = screenFadeIsBusy();
     if (temp_v7 == 0) {
       puVar9 = &LAB_0027f160;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       puVar3[0xb] = (unsigned int)puVar9;
       puVar9 = &LAB_0027f174;
-      FUN_0020214c();
+      asdLoadFileSyncDefault();
       puVar3[0xc] = (unsigned int)puVar9;
       temp_v7 = puVar3[0xb];
       FUN_00275bc8(temp_v7,puVar9);
@@ -1013,11 +1013,11 @@ LAB_0027edcc:
         puVar3[0xe] = 0;
       }
       FUN_001695a0();
-      FUN_001aeafc(g_handleRegistry);
+      resourceOwnerReleaseAndReset(g_handleRegistry);
       puVar8 = g_tmnl;
       asdCameraInitAreas();
       if (puVar8[0xf] != 0) {
-        FUN_003e5c00();
+        resourceOwnerReleaseAll();
         if ((int *)puVar8[0xf] != (int *)0x0) {
           (**(romwright_code **)(*(int *)puVar8[0xf] + 4))();
         }
@@ -1084,7 +1084,7 @@ LAB_0027edcc:
         else {
           if (temp_v3 >= 100) {
             temp_v10 = 0;
-            FUN_00314c38(0xb3,0x27,0,0,0);
+            naviMainSetFlagsAndActivate(0xb3,0x27,0,0,0);
             DAT_005f1a50 = -1;
             temp_v7 = (unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c;
             mapPlaceSet((int)*(short *)(temp_v7 + 0x56fd38),(int)*(char *)(temp_v7 + 0x56fd3a),
@@ -1162,12 +1162,12 @@ LAB_0027edcc:
       FUN_00406768(*(unsigned int *)(g_handleRegistry + 4),0,temp_v7 * 0x1010100 + 0xff);
     }
     if (puVar3[0x15b] == 0x28) {
-      FUN_003d2150(0x10000c6);
+      sysPlayVoice(0x10000c6);
       *(unsigned char *)(puVar3 + 0x166) = 1;
       resOwnerRunNodeHandlers(puVar3[0x165]);
     }
     if (puVar3[0x15b] == 0x49) {
-      FUN_003d2150(0x10000b3);
+      sysPlayVoice(0x10000b3);
       *(unsigned char *)(puVar3 + 0x169) = 1;
       resOwnerRunNodeHandlers(puVar3[0x168]);
     }

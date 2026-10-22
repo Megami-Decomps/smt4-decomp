@@ -69,11 +69,11 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_0022e750(void);
 extern int dialogIsActive(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a49e4. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int statsAreAllCapped(int);
@@ -234,7 +234,7 @@ LAB_002c9da8:
     temp_v19 = 0;
     do {
       temp_v14 = param_1 + temp_v19 * 4;
-      temp_v13 = FUN_00284140((int)*(short *)(temp_v14 + 0x43d8));
+      temp_v13 = recordGetModeForId((int)*(short *)(temp_v14 + 0x43d8));
       if (temp_v13 == 1 || temp_v13 == 2) {
         flaggedEntrySetValueA(temp_v20,temp_v19);
         break;
@@ -244,7 +244,7 @@ LAB_002c9da8:
         temp_v10 = 1;
         break;
       }
-      temp_v14 = FUN_00284140((int)*(short *)(temp_v14 + 0x43da));
+      temp_v14 = recordGetModeForId((int)*(short *)(temp_v14 + 0x43da));
       if (temp_v14 == 1 || temp_v14 == 2) {
         flaggedEntrySetValueA(temp_v20,temp_v19);
         break;
@@ -415,7 +415,7 @@ LAB_002ca354:
     if (temp_v14 != 2) break;
     messageSetMode(1);
     FUN_00333dc8(0);
-    temp_v14 = FUN_002a4b74();
+    temp_v14 = messageGetChoiceResult();
     if (temp_v14 != 0) {
       *(unsigned int *)(param_1 + 0x436c) = 3;
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),0);

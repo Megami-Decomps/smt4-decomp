@@ -5,7 +5,7 @@
 extern "C" {
 
 int mapDestroySecondaryModel(void);
-int FUN_0027fa98(...);
+int lmapSetSceneId(...);
 int slotSetRequest(...);
 int FUN_002bf810(...);
 
@@ -49,7 +49,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
@@ -293,7 +293,7 @@ LAB_002ea9b4:
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
           mapDestroySecondaryModel();
           temp_v6 = 0x12;
-          FUN_0027fa98(temp_v6);
+          lmapSetSceneId(temp_v6);
           FUN_002804ec(g_lmapScene + 0x28);
           mapSelectContainingRegions();
           return;
@@ -317,7 +317,7 @@ LAB_002ea9b4:
             return;
           }
           temp_v6 = 1;
-          FUN_0027fa98(temp_v6);
+          lmapSetSceneId(temp_v6);
           FUN_002804ec(g_lmapScene + 0x28);
           mapSelectContainingRegions();
           return;

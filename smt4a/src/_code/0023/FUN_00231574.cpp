@@ -10,7 +10,7 @@ int FUN_003a7a88(int, int);
 
 extern int g_unite; /* 0x57f290 */
 
-extern unsigned long long FUN_002a4844(int);
+extern unsigned long long resourceRunEmbeddedOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003a7a88. */
@@ -34,9 +34,9 @@ void FUN_00231574(void)
   unsigned long long temp_v11;
   
   temp_v0 = g_unite;
-  temp_v11 = FUN_002a4844(g_unite + 0x623c);
+  temp_v11 = resourceRunEmbeddedOperationIfUnblocked(g_unite + 0x623c);
   if (*(char *)(temp_v0 + 0x420) == '\x02') {
-    temp_v11 = FUN_002a4844(temp_v0 + 0x8f14);
+    temp_v11 = resourceRunEmbeddedOperationIfUnblocked(temp_v0 + 0x8f14);
   }
   temp_v5 = (unsigned int)((unsigned long long)temp_v11 >> 0x20);
   temp_v8 = 0;

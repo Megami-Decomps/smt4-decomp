@@ -18,7 +18,7 @@ int VectorSignedToFloat(...);
 int mapDestroySecondaryModel(void);
 int mapIfReleaseSlot2(void);
 int mapInterfaceSetStateTwo(void);
-int FUN_0027fa98(...);
+int lmapSetSceneId(...);
 int FUN_0027fae4(void);
 int FUN_0027fc14(...);
 int mapSelectContainingRegions(void);
@@ -58,7 +58,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
@@ -233,7 +233,7 @@ void FUN_002e8fdc(void)
         if (temp_v1 == 0x37) {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
           mapDestroySecondaryModel();
-          FUN_0027fa98(0xc);
+          lmapSetSceneId(0xc);
           FUN_002804ec(g_lmapScene + 0x28);
           mapSelectContainingRegions();
           return;
@@ -248,7 +248,7 @@ void FUN_002e8fdc(void)
               return;
             }
             temp_v3 = 1;
-            FUN_0027fa98(temp_v3);
+            lmapSetSceneId(temp_v3);
             FUN_002804ec(g_lmapScene + 0x28);
             mapSelectContainingRegions();
             return;
@@ -539,7 +539,7 @@ LAB_002e9794:
     }
     *(unsigned int *)(g_lmapScene + 0x58) = 0x40a00000;
     temp_v3 = 0xc;
-    FUN_0027fa98(temp_v3);
+    lmapSetSceneId(temp_v3);
   }
   FUN_002804ec(g_lmapScene + 0x28);
   mapSelectContainingRegions();

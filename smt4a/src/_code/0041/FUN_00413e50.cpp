@@ -18,7 +18,7 @@ int FUN_002ea100(...);
 int _ZN9Obj55b1045resetEv(unsigned char [32]);
 int FUN_002f4cd6(unsigned char [32], unsigned char [104], int);
 int _ZN9Obj5596acC1EhRK10WordVector(...);
-int FUN_00387edc(unsigned char [104]);
+int saveBuildSummary(unsigned char [104]);
 int FUN_004311c0(void);
 int FUN_00432dd8(void);
 int _ZN9Obj55ac38D1Ev(...);
@@ -91,7 +91,7 @@ extern unsigned int FUN_002fafd8(int, unsigned int);
 extern int _ZN9Obj55b104C1Ejj(int, unsigned int);
 /* Supplied declaration required: _ZN9Obj5596acC1EhRK10WordVector. */
 extern int _ZN15Obj55aff4VectorC1Ej(int, unsigned int);
-/* Supplied declaration required: FUN_00387edc. */
+/* Supplied declaration required: saveBuildSummary. */
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: FUN_00432dd8. */
 /* Supplied declaration required: _ZN9Obj55ac38D1Ev. */
@@ -153,7 +153,7 @@ void FUN_00413e50(int param_1)
     rt_memcpy_w(temp_v23,temp_v1,100);
   }
   else {
-    FUN_00387edc(temp_v23);
+    saveBuildSummary(temp_v23);
   }
   temp_v8 = &DAT_0055ac40;
   temp_v9 = 0;

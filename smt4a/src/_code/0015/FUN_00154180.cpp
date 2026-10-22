@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommitCommandRange(unsigned int *, unsigned int *);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: asdModelCommitCommandRange. */
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 
 
 void FUN_00154180(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -88,7 +88,7 @@ void FUN_00154180(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     puVar3 = (unsigned int *)(((unsigned int)temp_v6 & 0x7fffff) | (temp_v2 << 0x17) | (((unsigned int)temp_v6 >> 0x1f) << 0x1e));
   }
   temp_v0 = (int)puVar3 << 1;
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   *puVar3 = temp_v3;
   puVar3[1] = 0x70041;
   puVar3[2] = temp_v1 << 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022c7d4(...);
+int sharedAllocationArrayCopyRange(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned int containerGrowCapacity(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0022c7d4. */
+/* Supplied declaration required: sharedAllocationArrayCopyRange. */
 
 
 unsigned int FUN_0022c100(unsigned int *param_1,unsigned int param_2,unsigned int *param_3)
@@ -67,7 +67,7 @@ unsigned int FUN_0022c100(unsigned int *param_1,unsigned int param_2,unsigned in
           } while (temp_v2 != 0);
         }
         temp_v0 = temp_v4 + param_2;
-        FUN_0022c7d4(param_1,temp_v0,temp_v4,temp_v1);
+        sharedAllocationArrayCopyRange(param_1,temp_v0,temp_v4,temp_v1);
         if ((unsigned int)param_1[3] <= temp_v0) {
           temp_v0 = param_1[3];
         }
@@ -199,7 +199,7 @@ unsigned int FUN_0022c100(unsigned int *param_1,unsigned int param_2,unsigned in
     if (temp_v4 != temp_v3) {
       temp_v1 = temp_v0 - ((temp_v3 - temp_v4) >> 4);
       temp_v3 = (temp_v3 - temp_v6) >> 4;
-      FUN_0022c7d4(param_1,(temp_v4 - temp_v6) >> 4,temp_v3,temp_v0 - temp_v3);
+      sharedAllocationArrayCopyRange(param_1,(temp_v4 - temp_v6) >> 4,temp_v3,temp_v0 - temp_v3);
       temp_v6 = param_1[1];
       temp_v3 = param_1[3];
       puVar3 = (unsigned int *)(temp_v6 + temp_v1 * 0x10);

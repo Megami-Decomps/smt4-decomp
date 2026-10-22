@@ -11,7 +11,7 @@ int FUN_0026a958(int);
 int mdlPartsRelease(void);
 int FUN_00294f64(void);
 int infoWinStartTimer(int);
-int FUN_0029b074(void);
+int scrResultStopJobAndReleaseUi(void);
 int scrScriptProcessDestroy(void);
 int asdMemFreeNonNull(int);
 int FUN_002c3f5c(void);
@@ -43,7 +43,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: infoWinStartTimer. */
-/* Supplied declaration required: FUN_0029b074. */
+/* Supplied declaration required: scrResultStopJobAndReleaseUi. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMemFreeNonNull. */
 extern int jobIsValid(unsigned int);
@@ -76,7 +76,7 @@ void FUN_0020f04c(void)
   if (g_btlUiBlock != 0) {
     FUN_001e1874(puVar1);
   }
-  FUN_0029b074();
+  scrResultStopJobAndReleaseUi();
   piVar4 = (int *)(puVar1 + 0x127b);
   iStack_20 = *piVar4;
   puVar2 = temp_v1;

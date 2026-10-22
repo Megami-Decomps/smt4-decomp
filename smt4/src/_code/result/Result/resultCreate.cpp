@@ -22,7 +22,7 @@ typedef struct {
 
 extern int FUN_0018c0ec(...); /* 0x18c0ec */
 extern int FUN_001a16c0(...); /* 0x1a16c0 */
-extern int FUN_001c88d8(...); /* 0x1c88d8 */
+extern int scrResultDestroy(...); /* 0x1c88d8 */
 extern unsigned char LAB_001c8974; /* 0x1c8974 */
 extern int g_result; /* 0x44dc20 */
 
@@ -48,7 +48,7 @@ void resultCreate(unsigned char param_1)
     asdMemAlloc(0x100,0x100,0,0xd658,1);
     pcVar2 = "Result CALC";
     g_result = temp_v0;
-    asdProcessCreateSimple("Result CALC",2,0,0,FUN_0018c0ec,FUN_001c88d8,0);
+    asdProcessCreateSimple("Result CALC",2,0,0,FUN_0018c0ec,scrResultDestroy,0);
     puVar3 = (unsigned int *)(temp_v0 + 0xd644);
     *puVar3 = (unsigned int)pcVar2;
     taskCreateDraw("Result DrawUpLeft",0x80,0,0,FUN_001a16c0,0,0,pcVar2);

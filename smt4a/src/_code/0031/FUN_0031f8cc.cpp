@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation only: retail forms the cursor address in r0 and copies it to r5 */
-/* Returns the table value for the current position (FUN_002a4860 + FUN_002a4894 of the cursor sub-state). */
+/* Returns the table value for the current position (resourceRunOperationIfUnblocked + FUN_002a4894 of the cursor sub-state). */
 #include "common.h"
 
 extern "C" {
@@ -16,14 +16,14 @@ typedef struct Holder {
 
 extern Holder *g_uiQuest;
 
-extern s32 FUN_002a4860(Cursor *cursor);
+extern s32 resourceRunOperationIfUnblocked(Cursor *cursor);
 extern s32 FUN_002a4894(Cursor *cursor);
 
 u16 FUN_0031f8cc(void)
 {
     Holder *holder = g_uiQuest;
     Cursor *cursor = &holder->cursor;
-    s32 base = FUN_002a4860(cursor);
+    s32 base = resourceRunOperationIfUnblocked(cursor);
     s32 offset = FUN_002a4894(cursor);
 
     return holder->values[offset + base];

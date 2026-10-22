@@ -51,7 +51,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: vec2GetXInt. */
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00169240(unsigned int);
+extern unsigned int gameGetIndexedSlotMember(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
@@ -67,7 +67,7 @@ extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_00384cf4. */
 /* Supplied declaration required: FUN_0048816c. */
 /* Supplied declaration required: uiDrawSpriteWithOptionalVertexColors. */
-extern unsigned int FUN_00492bc0(void);
+extern unsigned int naviGetActiveStateValue(void);
 /* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int naviMainSelectPair(unsigned char *);
 /* Supplied declaration required: FUN_00492c5c. */
@@ -113,7 +113,7 @@ void FUN_0048a5e4(int param_1)
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v19 = (unsigned char *)(param_1 + 0x4cc);
   VectorSignedToFloat(0x100 - DAT_00587f20,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = FUN_00492bc0();
+  temp_v3 = naviGetActiveStateValue();
   temp_v2 = naviMainSelectPair(temp_v19);
   lmapSceneGetObj(temp_v19);
   temp_v16 = 0.0f;
@@ -144,7 +144,7 @@ void FUN_0048a5e4(int param_1)
         libc_strcpy(temp_v9,temp_v17);
       }
       else {
-        temp_v2 = FUN_00169240(0);
+        temp_v2 = gameGetIndexedSlotMember(0);
         libc_strcpy(temp_v9,temp_v2);
       }
     }
@@ -172,7 +172,7 @@ void FUN_0048a5e4(int param_1)
           temp_v4 = temp_v3;
         }
         else {
-          temp_v4 = FUN_00169240(0);
+          temp_v4 = gameGetIndexedSlotMember(0);
         }
       }
       libc_strcpy(temp_v9,temp_v4);

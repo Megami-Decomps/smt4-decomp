@@ -10,7 +10,7 @@ int FUN_00189a38(int, int);
 extern signed char DAT_00589364; /* 0x589364 */
 extern unsigned int DAT_005c0a80; /* 0x5c0a80 */
 
-extern int FUN_001466cc(void);
+extern int nnAmConnectOnce(void);
 /* Supplied declaration required: FUN_00146720. */
 extern int FUN_00147088(unsigned int *, char *);
 extern int FUN_001470f0(void);
@@ -27,7 +27,7 @@ void FUN_0013b6e0(void)
   if (DAT_00589364 == '\0') {
     FUN_00146720();
     nn_cfg_CTR_Initialize();
-    temp_v0 = FUN_001466cc();
+    temp_v0 = nnAmConnectOnce();
     if (-1 < temp_v0) {
       temp_v0 = FUN_00147088(&DAT_005c0a80,"nim:aoc");
       if ((-1 < temp_v0) && (temp_v0 = FUN_001470f0(), -1 < temp_v0)) {

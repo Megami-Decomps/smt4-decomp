@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00273840(int);
-int FUN_0027fa98(int);
+int lmapSetSceneId(int);
 int FUN_0027fc14(int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(unsigned int, int);
@@ -59,7 +59,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00273840. */
-/* Supplied declaration required: FUN_0027fa98. */
+/* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -170,7 +170,7 @@ unsigned int FUN_002eef98(void)
   if (*DAT_004474f4 != 3) {
     *(unsigned char *)(DAT_004474f4 + 0x29) = 1;
     FUN_0027fc14(3);
-    FUN_0027fa98(0x1d);
+    lmapSetSceneId(0x1d);
   }
   FUN_00273840(1);
   return 1;

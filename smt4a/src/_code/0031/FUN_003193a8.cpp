@@ -17,7 +17,7 @@ int objBInitBlock19D0(void);
 int FUN_0033449c(...);
 int FUN_0038b3f8(...);
 int FUN_0038b548(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 
 int sysPlaySe(...);
 int FUN_00180118(unsigned int);
@@ -90,7 +90,7 @@ extern int maskToCode(void);
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_0038b548. */
 /* Supplied declaration required: FUN_003a7a88. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -364,7 +364,7 @@ unsigned int FUN_003193a8(int param_1)
             (temp_v6 = statusDownGetFlag(), temp_v6 == 0)) &&
            ((temp_v6 = padButtonIsPressed(0), temp_v6 != 0 || (temp_v6 = FUN_002e1a18(1), temp_v6 != 0)))) {
           FUN_003343f0(1);
-          FUN_003d2150(0x100020e);
+          sysPlayVoice(0x100020e);
           *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
           FUN_0022e774();
         }

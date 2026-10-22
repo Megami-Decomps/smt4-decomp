@@ -6,7 +6,7 @@ extern "C" {
 
 int asdOperatorDelete(void);
 int bufProcRelease(void);
-int FUN_004aa380(unsigned int);
+int btlUiClearEntryStates(unsigned int);
 int FUN_004ddd10(...);
 int FUN_004de37c(int *, unsigned int *, int, unsigned int);
 int btlUnitSetParam(int *, int, int);
@@ -54,12 +54,12 @@ extern int FUN_003e69ac(unsigned int);
 /* Supplied declaration required: bufProcRelease. */
 extern int FUN_003e7adc(int);
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_004aa380. */
+/* Supplied declaration required: btlUiClearEntryStates. */
 extern int FUN_004aa768(unsigned int, int);
 extern int FUN_004aaf80(unsigned int);
 extern int FUN_004ab784(unsigned int);
 extern int FUN_004abac8(unsigned int);
-extern int FUN_004abe14(unsigned int);
+extern int btlUiGetActiveState(unsigned int);
 extern int FUN_004c8a9c(void);
 extern int isEntryUsable(unsigned int);
 extern int *FUN_004dc72c(int *, unsigned int *, int, unsigned int);
@@ -125,7 +125,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004eb838(param_1,puVar9);
     break;
   case 4:
-    temp_v4 = FUN_004abe14(g_btlUiBlock);
+    temp_v4 = btlUiGetActiveState(g_btlUiBlock);
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
@@ -151,7 +151,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     if (0 < temp_v6) {
       return (int *)0x0;
     }
-    FUN_004aa380(g_btlUiBlock);
+    btlUiClearEntryStates(g_btlUiBlock);
     *(unsigned short *)(*(int *)(temp_v4 + 0x2c) + 0x1be) = 10;
     temp_v4 = *(int *)(*param_1 + 0xa4);
     temp_v3 = 0xb;

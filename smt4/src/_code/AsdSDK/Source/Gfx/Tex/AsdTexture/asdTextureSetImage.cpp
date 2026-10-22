@@ -4,7 +4,7 @@
 
 extern "C" {
 void FUN_002bf0d8(void);
-u32 FUN_002c3994(void);
+u32 nnosGetHeapBase(void);
 u32 FUN_002c3984(void);
 f32 FUN_002a66e0(u32 format, u32 type, u32* hardwareFormat);
 u32 osVirtToPhysAddress(u32 address);
@@ -15,7 +15,7 @@ void asdTextureSetImage(AsdTexture* texture)
 {
     FUN_002bf0d8();
     const u32 address = (u32)texture->storage.pixels;
-    const u32 base = FUN_002c3994();
+    const u32 base = nnosGetHeapBase();
     const u32 size = FUN_002c3984();
     if (base > address || address >= base + size || (address & 0x7f) != 0 ||
         (address & 0xfe000000) != ((address + texture->storage.unk28) & 0xfe000000)) {

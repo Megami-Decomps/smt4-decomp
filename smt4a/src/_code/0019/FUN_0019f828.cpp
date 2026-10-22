@@ -7,13 +7,13 @@ struct UniformContext {
 };
 
 extern "C" {
-u32* FUN_0019eafc(UniformContext* context);
+u32* asdGxGetCommandCursor(UniformContext* context);
 void asdModelCommitCommandRange(u32* begin, u32* end);
 
 // Writes one float32 vertex uniform in the GPU's reversed component order.
 void FUN_0019f828(UniformContext* context, const u32 values[4])
 {
-    u32* begin = FUN_0019eafc(context);
+    u32* begin = asdGxGetCommandCursor(context);
     u32* command = begin;
     *command++ = context->index | 0x80000000;
     *command++ = 0x804f02c0;

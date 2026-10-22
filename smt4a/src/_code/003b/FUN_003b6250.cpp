@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_0022e9b8(void);
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 /* Supplied declaration required: largeGridDrawButtonStrip. */
 
 
@@ -35,7 +35,7 @@ void FUN_003b6250(int param_1,int param_2)
   temp_v0 = FUN_0022e9b8();
   temp_v2 = 0x9fe7ffff;
   efctSetSpeed();
-  temp_v1 = FUN_00284140((int)*(short *)(temp_v0 + *(short *)(temp_v0 + 0x8e88) * 2 + 0x438));
+  temp_v1 = recordGetModeForId((int)*(short *)(temp_v0 + *(short *)(temp_v0 + 0x8e88) * 2 + 0x438));
   if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
     temp_v2 = 0xf5ff9fff;
   }

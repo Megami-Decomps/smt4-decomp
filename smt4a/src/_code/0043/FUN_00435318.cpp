@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00435318. */
 extern int *idListCheck(int *, unsigned int);
 /* Supplied declaration required: FUN_00437cac. */
-extern int FUN_00437e50(unsigned int, unsigned char **);
+extern int rangeListAllMatch(unsigned int, unsigned char **);
 /* Supplied declaration required: FUN_00437e98. */
 /* Supplied declaration required: idListFind. */
 /* Supplied declaration required: rangeSetAddPresetGroup. */
@@ -172,7 +172,7 @@ LAB_004354ac:
       *param_1 = *(int *)(*param_1 + 4);
       ppuVar9 = &temp_v10;
       FUN_00437e98();
-      if ((ppuVar9 == (unsigned char **)0x0) || (temp_v4 = FUN_00437e50(param_2,&temp_v10), temp_v4 == 0))
+      if ((ppuVar9 == (unsigned char **)0x0) || (temp_v4 = rangeListAllMatch(param_2,&temp_v10), temp_v4 == 0))
       {
         if (temp_v12 == 0) {
           return (int *)0x2;
@@ -224,7 +224,7 @@ LAB_004354ac:
           ppuVar9 = &temp_v10;
           FUN_00437e98();
           if ((ppuVar9 != (unsigned char **)0x0) &&
-             (temp_v4 = FUN_00437e50(param_2,&temp_v10), temp_v4 != 0)) {
+             (temp_v4 = rangeListAllMatch(param_2,&temp_v10), temp_v4 != 0)) {
             if (temp_v12 != 0) {
               puVar13 = temp_v11;
               if ((unsigned char **)temp_v11 != &temp_v10) {

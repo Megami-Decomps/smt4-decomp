@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdFileWait(void);
-int FUN_0016a10c(int *, unsigned int);
+int asdLoadConfigureModeFlags(int *, unsigned int);
 int asdFileRequestRelease(unsigned int *);
 int FUN_001abae0(void);
 int FUN_001add78(int *, unsigned char [268]);
@@ -39,7 +39,7 @@ extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdFileWait. */
-/* Supplied declaration required: FUN_0016a10c. */
+/* Supplied declaration required: asdLoadConfigureModeFlags. */
 extern int FUN_0019dbb8(unsigned int);
 /* Supplied declaration required: asdFileRequestRelease. */
 extern int asdFileRequestHasFailed(unsigned int *);
@@ -111,7 +111,7 @@ asdLoadFileSync(unsigned int *param_1,unsigned int param_2,unsigned int param_3,
   temp_v20 = 0;
   temp_v21 = 0;
   FUN_001add78(&temp_v3,temp_v22);
-  FUN_0016a10c(&temp_v3,param_5);
+  asdLoadConfigureModeFlags(&temp_v3,param_5);
   temp_v12 = param_6;
   temp_v18 = param_2;
   FUN_001abae0();

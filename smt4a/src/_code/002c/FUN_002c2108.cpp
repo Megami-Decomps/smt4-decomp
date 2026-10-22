@@ -3,12 +3,12 @@
 extern "C" {
 const char *scrGetArgString(void);
 s32 FUN_002bf09c(const char *name);
-u32 FUN_003d2150(s32 index);
+u32 sysPlayVoice(s32 index);
 void scrSetResult(u32 result);
 /* Resolves the script's named record and stores its value as the result. */
 s32 FUN_002c2108(void) {
     s32 index = FUN_002bf09c(scrGetArgString());
-    if (index >= 0) scrSetResult(FUN_003d2150(index));
+    if (index >= 0) scrSetResult(sysPlayVoice(index));
     return 1;
 }
 }

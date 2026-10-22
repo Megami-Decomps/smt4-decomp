@@ -28,7 +28,7 @@ void movieSyncDrainSourcePositions(MovieSync *);
 void FUN_0034fbc8(MovieSync *);
 void FUN_00350e30(MovieSync *);
 void FUN_0034f630(MovieReadHandle *);
-void FUN_00351488(MovieSync *);
+void mobiclipYieldPlaybackThread(MovieSync *);
 void FUN_00350320(MovieSync *);
 
 // Pump movie synchronization until playback is ready, interrupted, or stopped.
@@ -66,7 +66,7 @@ u8 mobiclipPollUntilReady(void)
         if (g_mobiclipCtrl.stop) {
             interrupted = true;
         }
-        FUN_00351488(&DAT_004c3b20);
+        mobiclipYieldPlaybackThread(&DAT_004c3b20);
     } while (!ready && !interrupted && DAT_004c3b20.state != 7 && DAT_004c3b20.state != 1);
     if (ready) {
         return 1;

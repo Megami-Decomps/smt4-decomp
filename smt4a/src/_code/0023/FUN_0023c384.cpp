@@ -37,7 +37,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
-extern int FUN_00203b1c(void);
+extern int gameGetUnlockedCountLimit(void);
 extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
@@ -133,7 +133,7 @@ void FUN_0023c384(int param_1)
             puVar10 = (unsigned int *)(temp_v12 + 0x78a8);
             *(long long *)puVar10 = temp_v17 + *(long long *)puVar10;
             *(long long *)puVar14 = temp_v17 + temp_v4;
-            temp_v8 = FUN_00203b1c();
+            temp_v8 = gameGetUnlockedCountLimit();
             temp_v10 = (unsigned int)*(unsigned short *)(temp_v11 + 100) + (int)*(short *)(temp_v12 + 0x78b2);
             if (temp_v10 >= temp_v8) {
               *(unsigned char *)(temp_v12 + 0x78b6) = 0;

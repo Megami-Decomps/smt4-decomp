@@ -17,7 +17,7 @@ int btlScriptUnitHasFlags(...);
 int FUN_003eaf20(void);
 int FUN_003ee0c0(int);
 int FUN_003f1244(void);
-int FUN_004a92b8(void);
+int btlUIClearWorkTables(void);
 int FUN_004abfd0(...);
 int FUN_004c1114(int, int);
 int btlSlotSetStoreValue(...);
@@ -103,7 +103,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f1244. */
-/* Supplied declaration required: FUN_004a92b8. */
+/* Supplied declaration required: btlUIClearWorkTables. */
 extern int FUN_004abac8(int);
 /* Supplied declaration required: FUN_004abfd0. */
 extern int FUN_004abfec(int);
@@ -297,7 +297,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
     *(unsigned int *)(temp_v19 + 0x45a0) = temp_v18 & ~DAT_00571258;
     *(unsigned int *)(temp_v19 + 0x45a4) = temp_v17 & temp_v20;
     *(unsigned int *)(g_btlUiBlock + 0x74a0) = 0;
-    FUN_004a92b8();
+    btlUIClearWorkTables();
     temp_v16 = 0x1f;
     temp_v19 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
   }

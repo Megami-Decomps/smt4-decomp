@@ -20,7 +20,7 @@ int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
 int FUN_004964e0(...);
 int FUN_00496a0c(...);
 int FUN_00497690(...);
-int FUN_004989f0(...);
+int shopStartSelectionScript(...);
 int FUN_00499d14(...);
 int dataTable17Type0GetEntry(unsigned char [16], unsigned int);
 
@@ -44,7 +44,7 @@ extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetValue(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: messageWindowIsState1. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
@@ -56,7 +56,7 @@ extern int statsTestFlag(unsigned int);
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_00496a0c. */
 /* Supplied declaration required: FUN_00497690. */
-/* Supplied declaration required: FUN_004989f0. */
+/* Supplied declaration required: shopStartSelectionScript. */
 /* Supplied declaration required: FUN_00499d14. */
 /* Supplied declaration required: dataTable17Type0GetEntry. */
 
@@ -94,7 +94,7 @@ void FUN_004995b0(unsigned int *param_1)
         if (temp_v3 != 0) {
           obj04Finish();
           FUN_0019de98(0,0xf4f4f4ff);
-          temp_v3 = FUN_002a4b74();
+          temp_v3 = messageGetChoiceResult();
           if (temp_v3 != -1) {
             param_1[0x2d0] = param_1[temp_v3 + 0x5803];
             FUN_004964e0(param_1,1);
@@ -112,7 +112,7 @@ void FUN_004995b0(unsigned int *param_1)
             param_1[0x5810] = 1;
           }
           FUN_00497690(param_1,0);
-          FUN_004989f0(param_1,0);
+          shopStartSelectionScript(param_1,0);
           param_1[2] = 1;
           return;
         }
@@ -137,7 +137,7 @@ void FUN_004995b0(unsigned int *param_1)
         if (temp_v3 != 0) {
           obj04Finish();
           FUN_0019de98(0,0xf4f4f4ff);
-          temp_v3 = FUN_002a4b74();
+          temp_v3 = messageGetChoiceResult();
           if (temp_v3 == -1) {
             messageDismissNumericBanner(1);
             param_1[4] = param_1[1];
@@ -171,7 +171,7 @@ void FUN_004995b0(unsigned int *param_1)
             FUN_00497690(param_1,2);
             if ((int)param_1[0x5807] >= 2) {
               *(unsigned char *)(param_1 + 0x5811) = 1;
-              FUN_004989f0(param_1,2);
+              shopStartSelectionScript(param_1,2);
               param_1[2] = 4;
               *(unsigned char *)(param_1 + 0x5811) = 0;
               return;
@@ -181,7 +181,7 @@ void FUN_004995b0(unsigned int *param_1)
             FUN_00497690(param_1,1);
             if ((int)param_1[0x5807] >= 2) {
               *(unsigned char *)((int)param_1 + 0x16045) = 1;
-              FUN_004989f0(param_1,1);
+              shopStartSelectionScript(param_1,1);
               param_1[2] = 3;
               *(unsigned char *)((int)param_1 + 0x16045) = 0;
               return;
@@ -229,7 +229,7 @@ void FUN_004995b0(unsigned int *param_1)
       }
       scrRunOpcodesStub(param_1[99]);
       FUN_00497690(param_1,0);
-      FUN_004989f0(param_1,0);
+      shopStartSelectionScript(param_1,0);
       uiSpriteBankApplyPreset(param_1 + 0xf3,1);
       param_1[2] = 1;
       return;

@@ -44,7 +44,7 @@ extern unsigned int *DAT_00636e10; /* 0x636e10 */
 /* Supplied declaration required: asdGxCommandListEnd. */
 /* Supplied declaration required: asdGxCommandListBegin. */
 /* Supplied declaration required: FUN_00167eb0. */
-extern int FUN_00183478(void);
+extern int asdGxIsReady(void);
 /* Supplied declaration required: asdGxCommandListStartRecord. */
 /* Supplied declaration required: FUN_00186a64. */
 /* Supplied declaration required: FUN_0018c8c8. */
@@ -111,7 +111,7 @@ void FUN_0017721c(int param_1,unsigned int param_2,unsigned int param_3,int para
     FUN_0018d01c(*(unsigned int *)(temp_v1 + 8));
     DAT_00636e05 = '\x01';
   }
-  temp_v1 = FUN_00183478();
+  temp_v1 = asdGxIsReady();
   if (temp_v1 == 0) {
     asdGxCommandListStartRecord(DAT_00636e10);
   }

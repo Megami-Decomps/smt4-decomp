@@ -14,7 +14,7 @@ int FUN_0019f548(void);
 int FUN_001a6500(int);
 int FUN_001add1c(int);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_001aeafc(unsigned int);
+int resourceOwnerReleaseAndReset(unsigned int);
 int asdOperatorDelete(int);
 
 typedef int romwright_code(...);
@@ -35,7 +35,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_001a6500. */
 /* Supplied declaration required: FUN_001add1c. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: asdOperatorDelete. */
 
 
@@ -57,7 +57,7 @@ void FUN_001919a4(int param_1)
     }
     *(unsigned int *)(param_1 + 0xcdc) = 0;
   }
-  FUN_001aeafc(g_handleRegistry);
+  resourceOwnerReleaseAndReset(g_handleRegistry);
   if (*(int *)(param_1 + 0xce8) != 0) {
     ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0xce8) + 4));
     if (*(int **)(param_1 + 0xce8) != (int *)0x0) {

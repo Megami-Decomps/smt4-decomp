@@ -33,7 +33,7 @@ extern unsigned char LAB_001f40f8; /* 0x1f40f8 */
 extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0026aa78(void);
+extern int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_0028d1f4. */
 /* Supplied declaration required: FUN_0028f694. */
@@ -82,7 +82,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x1d,0x44e,param_1,param_2,0x6a);
   temp_v6 = 0;
   do {
-    temp_v1 = FUN_0026aa78();
+    temp_v1 = statusGetAvailableChoiceCount();
     if (temp_v6 >= temp_v1) {
       FUN_002bf288(2,0x1d,temp_v6 + 0x5a8,param_1,param_2,0x6a);
     }

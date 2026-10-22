@@ -11,7 +11,7 @@ int FUN_0025ef68(int, int, int);
 int FUN_002e364c(int);
 int FUN_00303460(...);
 int FUN_00313648(int);
-int FUN_00314c38(int, int, int, int, int, int);
+int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
 int mathPositionHeadingDegrees(void);
 int linkHolderSetFlag(unsigned int);
 int linkHolderClearFlag(unsigned int);
@@ -38,7 +38,7 @@ extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: FUN_00313648. */
-/* Supplied declaration required: FUN_00314c38. */
+/* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkHolderSetFlag. */
@@ -213,7 +213,7 @@ void FUN_002d91cc(void)
     *(unsigned int *)(temp_v0 + 0x58) = temp_v9;
     *(unsigned int *)(temp_v0 + 4) = 5;
     *(unsigned int *)(temp_v0 + 8) = 0;
-    FUN_00314c38(0x86,0,0,0,0,0);
+    naviMainSetFlagsAndActivate(0x86,0,0,0,0,0);
     DAT_005f1604 = 0x86;
     return;
   case 5:

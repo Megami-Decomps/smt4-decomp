@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001006ec(int, int, int);
+int asdDeallocateArrayStorage(int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int setMinus1ReturnPtr(...);
 int rt_memcpy_w(int, int, int);
@@ -12,7 +12,7 @@ int rt_memcpy_w(int, int, int);
 extern unsigned char LAB_004066cc; /* 0x4066cc */
 
 extern int *FUN_001006c2(int, unsigned int);
-/* Supplied declaration required: FUN_001006ec. */
+/* Supplied declaration required: asdDeallocateArrayStorage. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: setMinus1ReturnPtr. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -94,7 +94,7 @@ void FUN_004064a8(int param_1,int param_2,int param_3,unsigned int *param_4)
       }
       temp_v4 = *piVar9;
       temp_v1 = *(int *)(param_1 + 0x118);
-      FUN_001006ec(temp_v4,(*(int *)(param_1 + 0x11c) - temp_v4) >> 2,0);
+      asdDeallocateArrayStorage(temp_v4,(*(int *)(param_1 + 0x11c) - temp_v4) >> 2,0);
       *(int **)(param_1 + 0x11c) = piVar4 + temp_v5;
       *(int **)(param_1 + 0x118) = piVar4 + ((temp_v1 - temp_v4) >> 2) + 1;
       *piVar9 = (int)piVar4;

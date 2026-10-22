@@ -8,7 +8,7 @@ extern "C" {
 
 u32 FUN_0015dd58(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_002348a8(...);
-int FUN_0027eafc(...);
+int asdFsIsSdCardDetected(...);
 int legacyResourceIdRemap(...);
 int byteIsAtLeast100(...);
 int FUN_002b486c(...);
@@ -49,7 +49,7 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_0015dd58. */
 extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: FUN_002348a8. */
-/* Supplied declaration required: FUN_0027eafc. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: byteIsAtLeast100. */
 extern int objGetFlagBit0(int);
@@ -123,7 +123,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
     temp_v3 = *(int *)(param_2 + 0x344);
     switch(temp_v3) {
     case 0:
-      FUN_0027eafc();
+      asdFsIsSdCardDetected();
       if (temp_v3 == 0) {
         jyoucyuGetTableEntry(0);
         *(char *)piVar11 = '\0';

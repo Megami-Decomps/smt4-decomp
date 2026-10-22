@@ -21,7 +21,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: saveSlotFindById. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: obj04Finish. */
@@ -92,7 +92,7 @@ unsigned int FUN_0041774c(int param_1)
   case 3:
     temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     if (temp_v3 == 2) {
-      temp_v3 = FUN_002a4b74();
+      temp_v3 = messageGetChoiceResult();
       if (temp_v3 == 0) {
         FUN_003e4e4c(*(unsigned int *)(param_1 + 0x34) & 0xffff);
         temp_v3 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);

@@ -1,51 +1,36 @@
-/* NON_MATCHING: fragment of a larger function (conditional bxge returns but the other path falls through beyond the unit). */
-/* romwright 0.5.0 decompilation of FUN_003f2aec for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: retail addresses sort values through an embedded +0x164 record and spills the entries-pointer address; direct shared-record fields produce different addressing/register allocation. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include <stddef.h>
 
-void FUN_003f2aec(int param_1,int param_2)
+typedef char CombatantSortBaseOffsetCheck[
+    offsetof(BtlCombatantEntryA, sortBase.value) == 0x26E ? 1 : -1];
+typedef char CombatantSortBonusOffsetCheck[
+    offsetof(BtlCombatantEntryA, sortBonus.value) == 0x390 ? 1 : -1];
+typedef char CombatantSortSizeCheck[sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
+typedef char TurnOrderOffsetCheck[
+    offsetof(BtlMainStateA, turnOrder.indices) == 0x3006 ? 1 : -1];
 
+// Sort occupied turn-order slots by descending speed, breaking ties by unit index.
+extern "C" void FUN_003f2aec(BtlMainStateA* battle, s32 firstSlot)
 {
-  short sVar1;
-  short sVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  short sVar8;
-  short sVar9;
-  int iVar10;
-  int iVar11;
-  
-  if (10 < param_2) {
-    return;
-  }
-  do {
-    iVar4 = param_1 + param_2 * 2;
-    iVar3 = param_2;
-    if (-1 < *(short *)(iVar4 + 0x3006)) {
-      while (iVar3 = iVar3 + 1, iVar3 < 0xc) {
-        iVar5 = param_1 + iVar3 * 2;
-        sVar1 = *(short *)(iVar5 + 0x3006);
-        iVar6 = (int)sVar1;
-        if (-1 < iVar6) {
-          sVar2 = *(short *)(iVar4 + 0x3006);
-          iVar11 = *(int *)(param_1 + 0x1ffc);
-          iVar10 = iVar11 + sVar2 * 0x408 + 0x164;
-          iVar7 = iVar6 * 0x408 + 0x164 + iVar11;
-          sVar8 = *(short *)(iVar10 + 0x10a) + *(short *)(iVar10 + 0x22c);
-          sVar9 = *(short *)(iVar7 + 0x10a) + *(short *)(iVar7 + 0x22c);
-          if ((sVar8 < sVar9) ||
-             ((sVar8 == sVar9 &&
-              (*(short *)(iVar11 + iVar6 * 0x408 + 8) < *(short *)(iVar11 + sVar2 * 0x408 + 8))))) {
-            *(short *)(iVar4 + 0x3006) = sVar1;
-            *(short *)(iVar5 + 0x3006) = sVar2;
-          }
+    for (s32 slot = firstSlot; slot < 11; ++slot) {
+        if (battle->turnOrder.indices[slot] >= 0) {
+            for (s32 candidate = slot + 1; candidate < 12; ++candidate) {
+                s16 candidateIndex = battle->turnOrder.indices[candidate];
+                if (candidateIndex >= 0) {
+                    s16 currentIndex = battle->turnOrder.indices[slot];
+                    const BtlCombatantEntryA* current = &battle->entries[currentIndex];
+                    const BtlCombatantEntryA* other = &battle->entries[candidateIndex];
+                    s16 currentSpeed = current->sortBase.value + current->sortBonus.value;
+                    s16 otherSpeed = other->sortBase.value + other->sortBonus.value;
+                    if (currentSpeed < otherSpeed ||
+                        (currentSpeed == otherSpeed && other->unitIndex < current->unitIndex)) {
+                        battle->turnOrder.indices[slot] = candidateIndex;
+                        battle->turnOrder.indices[candidate] = currentIndex;
+                    }
+                }
+            }
         }
-      }
     }
-    param_2 = param_2 + 1;
-  } while (param_2 < 0xb);
-  return;
 }
-*/
-#include "common.h"

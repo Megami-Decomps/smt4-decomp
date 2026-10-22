@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023547c(int);
-int FUN_00235554(unsigned int *, unsigned char *);
+int scrScriptProcessStartMappedEntry(unsigned int *, unsigned char *);
 int FUN_00250d84(int, unsigned int);
 int FUN_00269dc8(void);
 int buttonHelpResetSlots(void);
@@ -13,7 +13,7 @@ int FUN_00287528(int);
 int gameFlagSetValue(int, int);
 int FUN_0028eeb8(int);
 int FUN_00296934(void);
-int FUN_0029b074(void);
+int scrResultStopJobAndReleaseUi(void);
 int resultCreate(int);
 int FUN_0029bbc8(void);
 int partyFindActiveSlotById(int);
@@ -53,7 +53,7 @@ extern char s_e022_02_0044db24[8]; /* 0x44db24 */
 extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int FUN_00223ca0(void);
 /* Supplied declaration required: FUN_0023547c. */
-/* Supplied declaration required: FUN_00235554. */
+/* Supplied declaration required: scrScriptProcessStartMappedEntry. */
 extern int FUN_00241990(void);
 /* Supplied declaration required: FUN_00250d84. */
 extern int FUN_00250ec0(unsigned int);
@@ -69,7 +69,7 @@ extern int FUN_00287894(unsigned short);
 extern int idIsAtLeast350(unsigned int);
 extern int questIsCompleted(unsigned int);
 extern int FUN_00298fa0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0029b074. */
+/* Supplied declaration required: scrResultStopJobAndReleaseUi. */
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: partyFindActiveSlotById. */
@@ -154,7 +154,7 @@ LAB_003822fc:
             if (param_1[2] != 0xb) {
               buttonHelpSetPreset(0xa3);
               FUN_0029ee6c(0,0x323232ff);
-              FUN_00235554(param_1,&LAB_00382660);
+              scrScriptProcessStartMappedEntry(param_1,&LAB_00382660);
               temp_v4 = param_1[2] + 1;
             }
             else {
@@ -175,7 +175,7 @@ LAB_003822fc:
       return;
     }
     buttonHelpSetPreset(0xa3);
-    FUN_00235554(param_1,&LAB_00382674);
+    scrScriptProcessStartMappedEntry(param_1,&LAB_00382674);
     temp_v4 = 10;
     break;
   case 1:
@@ -212,7 +212,7 @@ LAB_003822fc:
     }
     FUN_00296934();
     *param_1 = *param_1 & 0xffffffdf;
-    FUN_00235554(param_1,&LAB_00382684);
+    scrScriptProcessStartMappedEntry(param_1,&LAB_00382684);
     temp_v4 = 6;
     break;
   case 5:
@@ -281,13 +281,13 @@ LAB_003822fc:
     if (temp_v2 == 0) {
       return;
     }
-    FUN_0029b074();
+    scrResultStopJobAndReleaseUi();
     FUN_002bff50();
     puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
     dataTable1bOr1cGetRecord();
     FUN_0034888c(*puVar5);
     buttonHelpSetPreset(0xa3);
-    FUN_00235554(param_1,&LAB_00382694);
+    scrScriptProcessStartMappedEntry(param_1,&LAB_00382694);
     temp_v4 = 8;
     break;
   case 8:

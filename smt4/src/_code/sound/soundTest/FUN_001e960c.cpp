@@ -7,7 +7,7 @@ extern "C" {
 int bgmPlay(unsigned int, int, int);
 int bgmStopNoForce(...);
 int FUN_00287328(int);
-void FUN_00290ed8(unsigned int frames);
+void bgmRequestSelectedChannelFade(unsigned int frames);
 int soundChannelStopAll(int);
 int soundChannelRequestIfEnabled(unsigned int, int, int);
 int padIsButtonPressed(int);
@@ -88,7 +88,7 @@ unsigned int FUN_001e960c(void)
     FUN_00287328(0x1000010);
     break;
   case 1:
-    FUN_00290ed8(0x1e);
+    bgmRequestSelectedChannelFade(0x1e);
     break;
   case 2:
     temp_v1 = 0x1000004;

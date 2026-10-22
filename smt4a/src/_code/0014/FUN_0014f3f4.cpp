@@ -72,7 +72,7 @@ extern int ifTouchIsActive(void);
 /* Supplied declaration required: FUN_00168594. */
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
-extern int FUN_00169240(unsigned int);
+extern int gameGetIndexedSlotMember(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -145,7 +145,7 @@ char FUN_0014f3f4(void)
       FUN_00157558(g_renderCtx);
       temp_v7 = FUN_001692ac(1,0);
       renderStackPushIndexed(g_renderCtx,3,temp_v7);
-      temp_v8 = FUN_00169240(0);
+      temp_v8 = gameGetIndexedSlotMember(0);
       if (temp_v8 != 0) {
         temp_v22 = FUN_001834a4(0x13,0x11f1);
         temp_v23 = FUN_001834a4(0x13,0x11f2);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int uiSpriteSelectAnim(void *ui, int arg);
-int FUN_003d2150(int id);
+int sysPlayVoice(int id);
 
 extern RunWinWork *g_runWin;
 
@@ -19,7 +19,7 @@ void runWinClose(void)
         run->nextState = 3;
     }
     uiSpriteSelectAnim(run->ui, 1);
-    FUN_003d2150(0x10002aa);
+    sysPlayVoice(0x10002aa);
 }
 
 } /* extern "C" */

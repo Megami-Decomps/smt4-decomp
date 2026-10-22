@@ -42,7 +42,7 @@ extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: __aeabi_memset4. */
-extern unsigned int FUN_001bce18(void);
+extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: sysMemClear. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: flagValueAdd. */
@@ -218,7 +218,7 @@ void FUN_003ebec8(int param_1)
   }
   temp_v4 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);
-  temp_v3 = FUN_001bce18();
+  temp_v3 = flagValueGetStorage();
   rt_memcpy(temp_v4,temp_v3,0x10b8);
   if (DAT_0057393c == 0) {
     temp_v5 = 0x100;
@@ -226,7 +226,7 @@ void FUN_003ebec8(int param_1)
     DAT_0057393c = temp_v5;
     rt_memcpy();
   }
-  temp_v3 = FUN_001bce18();
+  temp_v3 = flagValueGetStorage();
   rt_memcpy(temp_v3,DAT_00573930,0x10b8);
   if ((!temp_v10) && (temp_v5 = 0, 0 < temp_v8)) {
     do {
@@ -235,9 +235,9 @@ void FUN_003ebec8(int param_1)
       psVar11 = psVar11 + 2;
     } while (temp_v5 < temp_v8);
   }
-  temp_v3 = FUN_001bce18();
+  temp_v3 = flagValueGetStorage();
   rt_memcpy(DAT_00573930,temp_v3,0x10b8);
-  temp_v3 = FUN_001bce18();
+  temp_v3 = flagValueGetStorage();
   rt_memcpy(temp_v3,temp_v4,0x10b8);
   if (temp_v4 != 0) {
     asdMemFree(temp_v4);

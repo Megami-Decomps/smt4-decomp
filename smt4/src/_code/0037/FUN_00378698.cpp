@@ -61,7 +61,7 @@ typedef struct {
 extern unsigned char LAB_0014c240; /* 0x14c240 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0014d3cc(unsigned int, int, unsigned int *);
+extern int soundArchiveReadBankInfo(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_002b4ee4. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_003795b0. */
@@ -173,7 +173,7 @@ FUN_00378698(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
   iStack_44 = temp_v0;
   do {
     temp_v21 = 0xffffffff;
-    temp_v2 = FUN_0014d3cc(*(unsigned int *)(param_1 + 4),temp_v8[temp_v6 * 2],(unsigned int *)&temp_v21);
+    temp_v2 = soundArchiveReadBankInfo(*(unsigned int *)(param_1 + 4),temp_v8[temp_v6 * 2],(unsigned int *)&temp_v21);
     if (temp_v2 != 0) {
       temp_v2 = vcallSlot5(*(unsigned int *)(param_1 + 0xbc),temp_v21);
       temp_v8[temp_v6 * 2 + 1] = temp_v2;

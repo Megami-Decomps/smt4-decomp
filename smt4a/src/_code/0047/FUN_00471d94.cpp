@@ -6,7 +6,7 @@ extern "C" {
 
 int __aeabi_vec_ctor_nocookie_nodtor(void);
 int asdOperatorNewE(void);
-int FUN_00429f38(void);
+int asdFsIsSdCardDetected(void);
 int FUN_00471468(int, int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern int objGetFlagBit16(void);
 extern int asdOperatorDeleteB(void);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: FUN_00429f38. */
+/* Supplied declaration required: asdFsIsSdCardDetected. */
 extern int FUN_0046bc7c(int, unsigned int);
 /* Supplied declaration required: FUN_00471468. */
 
@@ -37,7 +37,7 @@ void FUN_00471d94(int param_1)
     *(unsigned int *)(param_1 + 0x450) = 0;
   }
   *(unsigned int *)(param_1 + 0x448) = 0;
-  FUN_00429f38();
+  asdFsIsSdCardDetected();
   if (temp_v0 != 0) {
     temp_v0 = objGetFlagBit16();
     if (temp_v0 != 0) {

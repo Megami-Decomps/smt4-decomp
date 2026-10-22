@@ -7,7 +7,7 @@ extern "C" {
 int dataTableGetCount(...);
 int gameFlagBlockGetEntry(...);
 int FUN_001ad9b4(...);
-int FUN_00203b1c(...);
+int gameGetUnlockedCountLimit(...);
 int FUN_004ccbf0(...);
 
 typedef struct fn_003df168_arg1 fn_003df168_arg1;
@@ -30,7 +30,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: gameFlagBlockGetEntry. */
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_00203b1c. */
+/* Supplied declaration required: gameGetUnlockedCountLimit. */
 /* Supplied declaration required: FUN_004ccbf0. */
 
 
@@ -140,9 +140,9 @@ LAB_003df23c:
     }
     else {
       temp_v6 = gameGetPlayerData();
-      temp_v7 = FUN_00203b1c();
+      temp_v7 = gameGetUnlockedCountLimit();
       if (*(unsigned short *)(temp_v6 + 0x62) >= temp_v7) {
-        temp_v6 = FUN_00203b1c();
+        temp_v6 = gameGetUnlockedCountLimit();
         temp_v7 = FUN_004ccbf0(temp_v6 - 1);
         param_1[0xd] = temp_v7;
       }

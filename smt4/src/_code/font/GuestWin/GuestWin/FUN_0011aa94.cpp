@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b6940. */
-extern int FUN_002b6a54(int, unsigned short);
+extern int supportUnitGetEntry(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int FUN_002b6b04(void);
 extern int gameGetSupportUnitData(void);
@@ -134,7 +134,7 @@ unsigned int FUN_0011aa94(void)
       temp_v1 = gameGetSupportUnitData();
       temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
       temp_v1 = gameGetSupportUnitData();
-      temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
+      temp_v1 = supportUnitGetEntry((int)*(short *)(temp_v1 + 0x604),temp_v0);
       FUN_002b6940(*(unsigned short *)(temp_v1 + 0x5a),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24);
       temp_v1 = gameGetSupportUnitData();

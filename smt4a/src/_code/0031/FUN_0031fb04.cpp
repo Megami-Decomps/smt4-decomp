@@ -11,7 +11,7 @@ int scrScriptProcessDestroy(int);
 int FUN_001a0d08(int *);
 int dataTableFree(int);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
-int FUN_001aeafc(unsigned int);
+int resourceOwnerReleaseAndReset(unsigned int);
 int FUN_002e3140(void);
 int asdOperatorDelete(...);
 int uniteCameraDestroy(void);
@@ -38,7 +38,7 @@ extern int *g_unite; /* 0x57f290 */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001aeafc. */
+/* Supplied declaration required: resourceOwnerReleaseAndReset. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: asdOperatorDelete. */
 extern int FUN_002e50d4(void);
@@ -85,7 +85,7 @@ void FUN_0031fb04(void)
   temp_v0 = FUN_002e50d4();
   FUN_00408184(0x25,temp_v0 - piVar1[0x107]);
   if ((char)piVar1[0x2496] != '\0') {
-    FUN_001aeafc(g_handleRegistry);
+    resourceOwnerReleaseAndReset(g_handleRegistry);
   }
   if ((int *)piVar1[0x2484] != (int *)0x0) {
     (**(romwright_code **)(*(int *)piVar1[0x2484] + 4))();

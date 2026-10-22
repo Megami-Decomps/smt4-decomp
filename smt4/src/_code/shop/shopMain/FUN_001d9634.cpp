@@ -11,8 +11,8 @@ int textFormatBuffer(unsigned char [24], unsigned char *, int, unsigned int);
 int asdOperatorNew(void);
 int asdSequenceRequest(...);
 int FUN_00343b48(void);
-int FUN_003a0994(unsigned int);
-int FUN_003a14ac(void);
+int shopResetMessageState(unsigned int);
+int sceneRunLoadingPhaseUpdate(void);
 int FUN_003a3914(void);
 int FUN_003a5e30(void);
 int fileSlot17Acquire(int [2]);
@@ -40,8 +40,8 @@ extern int FUN_00287304(void);
 /* Supplied declaration required: asdSequenceRequest. */
 extern int FUN_00343af0(void);
 /* Supplied declaration required: FUN_00343b48. */
-/* Supplied declaration required: FUN_003a0994. */
-/* Supplied declaration required: FUN_003a14ac. */
+/* Supplied declaration required: shopResetMessageState. */
+/* Supplied declaration required: sceneRunLoadingPhaseUpdate. */
 /* Supplied declaration required: FUN_003a3914. */
 /* Supplied declaration required: FUN_003a5e30. */
 extern int storyFlagRangeAnySet(void);
@@ -156,7 +156,7 @@ unsigned int FUN_001d9634(void)
       }
     }
     else if (((g_shop != 0) && (*(int *)(g_shop + 0x18) != 0)) &&
-            (FUN_003a14ac(), (**(unsigned int **)(temp_v3 + 0x18) & 1) != 0)) {
+            (sceneRunLoadingPhaseUpdate(), (**(unsigned int **)(temp_v3 + 0x18) & 1) != 0)) {
       *(unsigned char *)(temp_v3 + 5) = 2;
     }
   }
@@ -197,7 +197,7 @@ unsigned int FUN_001d9634(void)
         }
         *(unsigned int *)(temp_v3 + 0x18) = temp_v5;
       }
-      FUN_003a0994(*(unsigned int *)(temp_v3 + 0x18));
+      shopResetMessageState(*(unsigned int *)(temp_v3 + 0x18));
       *(unsigned char *)(temp_v3 + 5) = 1;
     }
   }

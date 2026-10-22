@@ -19,7 +19,7 @@ extern int *g_lmapScene; /* 0x581288 */
 extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: lmapClearExtraFlag. */
-extern int FUN_003d2150(unsigned int);
+extern int sysPlayVoice(unsigned int);
 /* Supplied declaration required: FUN_003d2158. */
 
 
@@ -84,7 +84,7 @@ void FUN_00385578(void)
         temp_v0 = temp_v2[temp_v0];
         g_lmapScene[0xa0] = temp_v0;
         FUN_002d1f40(temp_v0,0x28,10);
-        temp_v0 = FUN_003d2150(0x100009e);
+        temp_v0 = sysPlayVoice(0x100009e);
         piVar1 = g_lmapScene;
         g_lmapScene[0xa1] = 0;
         piVar1[0xa2] = 3;

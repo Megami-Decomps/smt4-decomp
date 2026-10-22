@@ -66,7 +66,7 @@ void FUN_00359738();
 void soundEffectFreeBuffers();
 void engineSetStateFlag();
 void FUN_001f4e7c();
-s32 FUN_00429f38();
+s32 asdFsIsSdCardDetected();
 s32 FUN_0022655c(const char *path);
 void FUN_00213bc8(const char *path);
 u32 FUN_003d2eec(const char *path);
@@ -198,7 +198,7 @@ extern "C" s32 mobiclipProcessUpdate()
         work->state = 3;
     case 3:
         if (work->special) {
-            if (!FUN_00429f38()) {
+            if (!asdFsIsSdCardDetected()) {
                 work->state = 9;
                 work->error = 1;
                 return 0;

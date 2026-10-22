@@ -22,7 +22,7 @@ extern unsigned int DAT_0043d998; /* 0x43d998 */
 
 extern int FUN_0022caa4(unsigned char *, unsigned int);
 /* Supplied declaration required: pointConvertToFloat. */
-extern int FUN_00233344(int, int);
+extern int uiAnimationAdvanceChannel(int, int);
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_0029da34. */
@@ -46,7 +46,7 @@ void FUN_003a88f4(int param_1)
   unsigned char temp_v4 [64];
   unsigned char temp_v5 [4];
   
-  temp_v0 = FUN_00233344(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b2));
+  temp_v0 = uiAnimationAdvanceChannel(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b2));
   temp_v3 = param_1 + *(short *)(param_1 + 0xa5b2) * 0x8c + 0xfc;
   temp_v1 = vec2GetYInt(temp_v3);
   temp_v2 = vec2GetXInt(temp_v3);

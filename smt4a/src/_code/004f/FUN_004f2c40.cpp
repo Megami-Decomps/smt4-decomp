@@ -18,7 +18,7 @@ int FUN_0014f0dc(...);
 int FUN_0018a924(...);
 int FUN_00280070(...);
 int effectSetValueVec(...);
-int FUN_002e512c(...);
+int effectProcessSetVector(...);
 int effectProcessSetValue(void);
 int words5Clear(...);
 int cameraAnimationSampleAndAdvance(...);
@@ -137,7 +137,7 @@ extern int rangeIsValid(float *);
 /* Supplied declaration required: FUN_00280070. */
 extern int effectProcessIsActive(void);
 /* Supplied declaration required: effectSetValueVec. */
-/* Supplied declaration required: FUN_002e512c. */
+/* Supplied declaration required: effectProcessSetVector. */
 /* Supplied declaration required: effectProcessSetValue. */
 /* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: FUN_003d4dd4. */
@@ -642,7 +642,7 @@ LAB_004f33d8:
     temp_v3 = effectProcessIsActive();
     if (temp_v3 != 0) {
       effectSetValueVec(&temp_v14);
-      FUN_002e512c(&temp_v17);
+      effectProcessSetVector(&temp_v17);
       effectProcessSetValue();
     }
     param_1[0x163] = temp_v14;

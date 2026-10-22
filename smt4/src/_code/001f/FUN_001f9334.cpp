@@ -8,7 +8,7 @@ int FUN_00256550(unsigned int);
 int contentEntryGetE(void);
 int FUN_00267144(void);
 int FUN_00273f5c(void);
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 int FUN_002a0428(unsigned int, int);
 int gameFlagIsSet(...);
 int FUN_002f3c28(void);
@@ -41,7 +41,7 @@ extern int dataTableGetRecordFifty(void);
 /* Supplied declaration required: FUN_00273f5c. */
 extern int FUN_0027d968(void);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: gameFlagIsSet. */
 extern int randNextInRange(unsigned int);
@@ -220,7 +220,7 @@ LAB_001f9924:
                       temp_v12 = 0;
                       *(int *)(temp_v7 + 0xac) = (int)pcVar9[0xb];
                       temp_v6 = *(int *)(g_lmapScene + 0x1c);
-                      FUN_00287aec();
+                      mathDistanceBetweenPoints();
                       if (temp_v6 < 0x43480000) {
                         temp_v12 = 1;
                       }
@@ -394,7 +394,7 @@ LAB_001f9924:
                 *(unsigned short *)(temp_v7 + 0x16e) = temp_v1;
                 FUN_00256550(*(unsigned int *)(temp_v7 + 0x1a8));
                 temp_v6 = *(int *)(g_lmapScene + 0x1c);
-                FUN_00287aec();
+                mathDistanceBetweenPoints();
                 *(int *)(temp_v7 + 0xac) = (int)pcVar9[0xb];
                 if ((temp_v6 < 0x43480000) && (pcVar9[10] != '\x03')) {
                   *(unsigned int *)(temp_v7 + 0xb8) = 2;

@@ -11,7 +11,7 @@ int sysMemClear(int *, int);
 int FUN_003e8bb0(unsigned char [28], int, unsigned int);
 int FUN_003f0e20(int, int);
 int FUN_0047fa50(...);
-int FUN_004a92b8(...);
+int btlUIClearWorkTables(...);
 int FUN_004aba84(unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_004abde4(...);
 int FUN_004e6fb0(int *);
@@ -54,7 +54,7 @@ extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_0047fa50. */
-/* Supplied declaration required: FUN_004a92b8. */
+/* Supplied declaration required: btlUIClearWorkTables. */
 extern int FUN_004aa098(unsigned int, unsigned int);
 extern unsigned int FUN_004aba54(unsigned int);
 /* Supplied declaration required: FUN_004aba84. */
@@ -278,7 +278,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
     temp_v14 = 1;
     FUN_004eb838(param_1,param_2);
     temp_v13 = 1;
-    FUN_004a92b8(g_btlUiBlock);
+    btlUIClearWorkTables(g_btlUiBlock);
     FUN_004eae30(param_1,0,0xffffffff);
   }
   else if ((*param_2 & 0x1000) != 0) {
@@ -298,7 +298,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
     temp_v14 = 1;
     FUN_004eb838(param_1,param_2);
     temp_v13 = 1;
-    FUN_004a92b8(g_btlUiBlock);
+    btlUIClearWorkTables(g_btlUiBlock);
     FUN_004eae30(param_1,0,0xffffffff);
   }
   else {
@@ -328,7 +328,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
         temp_v14 = 1;
         FUN_004eb838(param_1,param_2);
         temp_v13 = 1;
-        FUN_004a92b8(g_btlUiBlock);
+        btlUIClearWorkTables(g_btlUiBlock);
         FUN_004eae30(param_1,0,0xffffffff);
       }
     }

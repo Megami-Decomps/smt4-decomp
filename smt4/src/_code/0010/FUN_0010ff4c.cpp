@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011bf9c(...);
 int FUN_0011ccd4(...);
-int FUN_0011cce0(...);
+int sndMasterFinalize(...);
 int FUN_00128f2c(...);
 int FUN_002bb470(...);
 
@@ -21,7 +21,7 @@ extern unsigned char g_nnSndVoiceManager; /* 0x4e8568 */
 
 /* Supplied declaration required: FUN_0011bf9c. */
 /* Supplied declaration required: FUN_0011ccd4. */
-/* Supplied declaration required: FUN_0011cce0. */
+/* Supplied declaration required: sndMasterFinalize. */
 /* Supplied declaration required: FUN_00128f2c. */
 /* Supplied declaration required: FUN_002bb470. */
 extern void nn_snd_CTR_Dspsnd_Finalize(unsigned int, unsigned char);
@@ -36,7 +36,7 @@ unsigned char FUN_0010ff4c(void)
     FUN_0011bf9c(FUN_00129084,FUN_00129478,&LAB_00128f60);
     FUN_002bb470();
     FUN_00128f2c();
-    FUN_0011cce0(&g_nnSndMasterManager);
+    sndMasterFinalize(&g_nnSndMasterManager);
     FUN_0011ccd4(&g_nnSndVoiceManager);
     if (DAT_0044e7c3 == '\0') {
       nn_snd_CTR_Dspsnd_Finalize((unsigned int)&g_dspsndState,0);

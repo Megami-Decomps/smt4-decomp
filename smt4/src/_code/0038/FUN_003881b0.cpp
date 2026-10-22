@@ -1,4 +1,4 @@
-/* NON_MATCHING: fragment of a larger function (conditional bxeq returns but the other path falls through beyond the unit). */
+/* NON_MATCHING: draws a transformed sprite using matrix, scale, and texture state; the reference loses VFP arguments/results and the typed sprite-work layout. */
 /* romwright 0.5.0 decompilation of FUN_003881b0 for reference (not compiled; its own view of the boundaries):
 
 void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)

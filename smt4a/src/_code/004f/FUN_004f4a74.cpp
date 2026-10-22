@@ -1,4 +1,4 @@
-/* NON_MATCHING: unimplemented 0x694-byte battle-dialogue state machine; reference draft retained and no byte-identical SMT IV twin found. */
+/* NON_MATCHING: runs battle-dialogue choices, resets roster state, and creates/destroys dialogue jobs; typed dialogue work and allocation/callback prototypes remain unreconstructed. */
 /* romwright 0.5.0 decompilation of FUN_004f4a74 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_004f4a74(unsigned int *param_1,int param_2)
@@ -162,7 +162,7 @@ code_r0x004f4c54:
     FUN_002e342c(auStack_98,uVar2);
     uVar2 = FUN_0028029c();
     FUN_002371b4(1);
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
     FUN_002371b4(uVar2);
     if (*(char *)((int)puVar6 + 10) == '\x01') {
       FUN_004f5144(param_1,param_2,puVar6);

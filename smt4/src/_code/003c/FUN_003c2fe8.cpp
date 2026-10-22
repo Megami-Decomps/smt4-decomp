@@ -17,7 +17,7 @@ extern const DebugHelpLabels DAT_004004a8;
 const char *FUN_002bd06c(u16 message);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 void memClear(void *data, u32 size);
-void FUN_003bc134(s32 index);
+void aocGetTableRecordOrFallback(s32 index);
 void FUN_003bc248(DebugHelpText *help, s32 index, s32 first, s32 second);
 void *dataTable02GetEntryByIndex(s32 index);
 void FUN_003bbfdc(DebugHelpText *help, void *entry);
@@ -42,7 +42,7 @@ extern "C" void FUN_003c2fe8(void *, s32 index)
     help.scaleX = 1.0f;
     help.scaleY = 1.0f;
     if (g_btlDebugState.category != 0) {
-        FUN_003bc134(index);
+        aocGetTableRecordOrFallback(index);
         FUN_003bc248(&help, index, 0, 0);
     } else {
         FUN_003bbfdc(&help, dataTable02GetEntryByIndex(index));

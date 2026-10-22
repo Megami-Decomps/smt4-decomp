@@ -11,7 +11,7 @@ int software_interrupt(int);
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_0042349c. */
-extern int *FUN_00426134(void);
+extern int *movieY2rGetTransferEventStorage(void);
 
 
 void FUN_0042337c(int param_1)
@@ -45,7 +45,7 @@ void FUN_0042337c(int param_1)
         return;
       }
     }
-    piVar2 = (int *)FUN_00426134();
+    piVar2 = (int *)movieY2rGetTransferEventStorage();
     software_interrupt(0x24);
     if (*piVar2 < 0) {
       FUN_002e3140();

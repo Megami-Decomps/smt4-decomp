@@ -35,7 +35,7 @@ extern int gameFlagIsSet(void);
 extern int scrRunOpcodesStub(unsigned int);
 extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 extern int panelIsMissingOrFlagClear(void);
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -81,7 +81,7 @@ void FUN_003e32b0(int param_1)
     else {
       temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
       if ((temp_v1 == 2) && (temp_v1 = panelIsMissingOrFlagClear(), temp_v1 != 0)) {
-        temp_v1 = FUN_002a4b74();
+        temp_v1 = messageGetChoiceResult();
         if (!(temp_v1 == -1 || temp_v1 == 3)) {
           temp_v1 = *(int *)(param_1 + temp_v1 * 4 + 0x8c);
           *(int *)(param_1 + 0xa0) = temp_v1;

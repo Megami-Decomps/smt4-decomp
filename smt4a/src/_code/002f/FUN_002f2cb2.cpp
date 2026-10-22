@@ -7,7 +7,7 @@ extern "C" {
 int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int onlineTimeGetNow(unsigned char [8]);
-int FUN_002f2da0(...);
+int sharedRefAssignFromOwner(...);
 int objectCountIncrement(int);
 int listIteratorNext2(int *);
 
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: onlineTimeGetNow. */
-/* Supplied declaration required: FUN_002f2da0. */
+/* Supplied declaration required: sharedRefAssignFromOwner. */
 extern int FUN_002f2dc2(unsigned int *, unsigned char *);
 /* Supplied declaration required: objectCountIncrement. */
 /* Supplied declaration required: listIteratorNext2. */
@@ -69,7 +69,7 @@ void FUN_002f2cb2(int *param_1,int param_2,unsigned int param_3)
         }
         if (*(char *)(temp_v8 + 0x131) == '\0') break;
         temp_v4 = temp_v8;
-        FUN_002f2da0(&temp_v3,param_2,&temp_v4);
+        sharedRefAssignFromOwner(&temp_v3,param_2,&temp_v4);
         temp_v8 = temp_v3;
       }
       if (*(unsigned short *)(temp_v8 + 0x86) == temp_v12) break;
@@ -104,7 +104,7 @@ void FUN_002f2cb2(int *param_1,int param_2,unsigned int param_3)
     objectCountIncrement(temp_v1);
     sharedRefAddRef(temp_v1);
     temp_v5[0] = temp_v8;
-    FUN_002f2da0(&temp_v9,param_2,temp_v5);
+    sharedRefAssignFromOwner(&temp_v9,param_2,temp_v5);
     temp_v8 = temp_v9;
     (**(romwright_code **)(*temp_v11 + 0x10))(temp_v11,temp_v1,0);
     sharedRefRelease(temp_v1);

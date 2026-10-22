@@ -8,7 +8,7 @@ int FUN_0014afd0(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAlloc(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_0022677c(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
@@ -38,7 +38,7 @@ extern unsigned int *g_clearSave; /* 0x57f394 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
@@ -69,10 +69,10 @@ void FUN_00290484(int param_1)
   campButtonHelpAcquire();
   FUN_003b61ec();
   puVar2 = &LAB_0029060c;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[0x23] = (unsigned int)puVar2;
   puVar2 = &LAB_00290624;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar1[0x25] = (unsigned int)puVar2;
   temp_v0 = puVar1[0x23];
   FUN_00275bc8(temp_v0,puVar2);

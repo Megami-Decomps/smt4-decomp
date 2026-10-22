@@ -29,7 +29,13 @@ struct BtlCombatantEntryA {
     /* 0x25C */ s32 maxHp;
     /* 0x260 */ s32 mp;
     /* 0x264 */ s32 maxMp;
-    /* 0x268 */ u8 unk268[0xc];
+    union {
+        /* 0x268 */ u8 unk268[0xc];
+        struct {
+            /* 0x268 */ u8 unk268[6];
+            /* 0x26E */ s16 value;
+        } sortBase;
+    };
     /* 0x274 */ u16 statusFlags;
     union {
         /* 0x276 */ u8 unk276[0x192];
@@ -42,6 +48,10 @@ struct BtlCombatantEntryA {
             s16 kind;    /* 0x322 */
             s16 variant; /* 0x324 */
         } attackSelection;
+        struct {
+            /* 0x276 */ u8 unk276BeforeSortBonus[0x11A];
+            /* 0x390 */ s16 value;
+        } sortBonus;
     };
 };
 

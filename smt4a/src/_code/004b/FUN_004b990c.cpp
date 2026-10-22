@@ -39,7 +39,7 @@ int libc_strcpy(unsigned char *, unsigned int);
 int objectE0ResetFlags1040(void);
 int obj04Finish(void);
 int sub68OwnerCall4(void);
-int FUN_0035b1c0(void);
+int commonBgStopChildAndReset(void);
 int FUN_00363c58(int);
 int clearFlags310To31F(void);
 int FUN_003b5064(void);
@@ -98,7 +98,7 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: sub68OwnerCall4. */
-/* Supplied declaration required: FUN_0035b1c0. */
+/* Supplied declaration required: commonBgStopChildAndReset. */
 /* Supplied declaration required: frameTexInitActive. */
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: clearFlags310To31F. */
@@ -168,7 +168,7 @@ void FUN_004b990c(int param_1)
     dialogClose(0);
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
     *(unsigned int *)(param_1 + 0x30) = 0;
-    FUN_0035b1c0();
+    commonBgStopChildAndReset();
     if (*(char *)(param_1 + 0x1214) != '\0') {
       FUN_0019f548(*(unsigned int *)(param_1 + 0x1218));
       if (*(int *)(param_1 + 0x1218) != 0) {

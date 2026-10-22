@@ -68,7 +68,7 @@ struct DemonScreen {
 };
 extern "C" {
 s32 scrRunOpcodesStub(u32);
-s32 FUN_002a4b74();
+s32 messageGetChoiceResult();
 LiveDemon *slotEntryFindById(u16);
 s32 gameDataCopySaveEntry(u16, SavedDemon *);
 void rt_memcpy_w(void *, const void *, u32);
@@ -85,7 +85,7 @@ void demonScreenConfirmSaveRefresh(DemonScreen *screen)
 {
     if (scrRunOpcodesStub(screen->dialog) != 2)
         return;
-    if (!FUN_002a4b74()) {
+    if (!messageGetChoiceResult()) {
         SavedDemon saved;
         for (s32 i = 0; i < screen->list.count; ++i) {
             DemonSelectionList *selection = &screen->list;

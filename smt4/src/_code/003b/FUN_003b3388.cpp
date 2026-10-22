@@ -76,7 +76,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bd068(unsigned short);
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be370. */
@@ -347,7 +347,7 @@ LAB_003b35ac:
         textFormatBuffer(temp_v23,&LAB_003b3c9c,temp_v15);
       }
       else {
-        temp_v15 = FUN_002bd1fc();
+        temp_v15 = gameGetPlayerName();
         textFormatBuffer(temp_v23,&LAB_003b3c9c,temp_v15);
       }
       temp_v5 = aiStack_e0[temp_v21];

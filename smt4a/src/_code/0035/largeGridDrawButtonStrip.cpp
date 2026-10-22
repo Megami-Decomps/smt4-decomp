@@ -18,7 +18,7 @@ struct LargeGridButtonDraw {
 extern "C" {
 void efctSetSpeed(f32);
 void FUN_001835b4(u32, u32, u32, s32, s32, u32);
-s32 FUN_00284140(s32);
+s32 recordGetModeForId(s32);
 s32 vec2GetYInt(GridButtonSlide *);
 s32 vec2GetXInt(GridButtonSlide *);
 
@@ -30,7 +30,7 @@ void largeGridDrawButtonStrip(LargeGridButtonDraw *work, s32 x, s32 y, s32 butto
     FUN_001835b4(2, 26, 410, x, y, 121);
     efctSetSpeed(scale);
     FUN_001835b4(2, 26, 411, x, y, 126);
-    s32 type = FUN_00284140(work->touches[button]);
+    s32 type = recordGetModeForId(work->touches[button]);
     bool highlighted = type == 1 || type == 2 || type == 6;
     if (highlighted) {
         FUN_001835b4(2, 26, 660, x, y, 126);

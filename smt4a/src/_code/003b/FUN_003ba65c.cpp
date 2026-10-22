@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00317af8(float *, unsigned char [16], int);
-int FUN_003d2150(int);
+int sysPlayVoice(int);
 int FUN_0050d8e4(void);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -26,7 +26,7 @@ extern int FUN_00163fd4(unsigned int);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_0050d8e4. */
 
 
@@ -277,7 +277,7 @@ unsigned char FUN_003ba65c(void)
       temp_v2 = temp_v2 & 0xfd;
     }
     *(unsigned char *)(DAT_0057f69c + 0x27e97) = temp_v2;
-    FUN_003d2150(0x1000211);
+    sysPlayVoice(0x1000211);
     DAT_0057f6b8 = 0;
     return temp_v0;
   }

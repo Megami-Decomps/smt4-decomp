@@ -13,7 +13,7 @@ typedef struct {
 
 /* Supplied declaration required: asdOperatorNew. */
 extern int FUN_00481b80(void);
-extern int FUN_00481db4(void);
+extern int callbackOwnerInitialize(void);
 extern int FUN_004823ec(void);
 
 
@@ -52,7 +52,7 @@ void FUN_00482610(int param_1,int param_2)
     asdOperatorNew();
     temp_v0 = 0;
     if (temp_v1 != 0) {
-      temp_v0 = FUN_00481db4();
+      temp_v0 = callbackOwnerInitialize();
     }
   }
   *(int *)(param_1 + 0x74) = temp_v0;

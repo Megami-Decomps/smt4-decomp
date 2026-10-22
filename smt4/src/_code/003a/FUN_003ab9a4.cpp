@@ -13,7 +13,7 @@ extern unsigned int gameSlotTableGetHeader(void);
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_00262cb0(unsigned short);
-extern int FUN_0026aa78(void);
+extern int statusGetAvailableChoiceCount(void);
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029c43c. */
 
@@ -50,7 +50,7 @@ void FUN_003ab9a4(int param_1)
         }
         else {
           temp_v1 = FUN_00212088();
-          temp_v3 = FUN_0026aa78();
+          temp_v3 = statusGetAvailableChoiceCount();
           if (temp_v1 >= temp_v3) {
             temp_v0 = '\x05';
             *pcVar5 = temp_v0;

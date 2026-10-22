@@ -16,7 +16,7 @@ typedef struct StateObject {
 extern s32 FUN_00348f70(void);
 extern s32 FUN_0034904c(void);
 extern s32 gameFlagIsSet(u32 id);
-extern void FUN_00235554(StateObject *obj, const char *name);
+extern void scrScriptProcessStartMappedEntry(StateObject *obj, const char *name);
 extern void FUN_002355ac(s32 arg);
 extern void FUN_00259258(void);
 extern void placeWinStartText(void);
@@ -27,7 +27,7 @@ void FUN_00384800(StateObject *obj)
 {
     if (FUN_0034904c() != 0 && FUN_00348f70() != 0) {
         buttonHelpSetPreset(0x3C);
-        FUN_00235554(obj, "qc_sysque_add");
+        scrScriptProcessStartMappedEntry(obj, "qc_sysque_add");
         obj->state = 13;
         obj->stateStep = 0;
         return;
@@ -36,7 +36,7 @@ void FUN_00384800(StateObject *obj)
         FUN_002355ac(1);
     }
     FUN_00259258();
-    FUN_00235554(obj, "qc_start");
+    scrScriptProcessStartMappedEntry(obj, "qc_start");
     dataTable28Sub0GetRecord(obj->display, obj->slot);
     placeWinStartText();
     obj->state = 6;

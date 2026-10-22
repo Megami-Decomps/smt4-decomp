@@ -19,7 +19,7 @@ int __aeabi_uidivmod(...);
 int FUN_0020ffe8(...);
 int objSetAnglesDegrees(...);
 int FUN_00293e08(...);
-int FUN_00293e78(...);
+int nodeOwnerSetTranslations(...);
 int FUN_00293f10(...);
 int aocHandleButtons(...);
 int FUN_002942c4(int, int);
@@ -86,7 +86,7 @@ extern int FUN_00293b8c(void);
 /* Supplied declaration required: statusDownRestoreTabForMode. */
 /* Supplied declaration required: objSetAnglesDegrees. */
 /* Supplied declaration required: FUN_00293e08. */
-/* Supplied declaration required: FUN_00293e78. */
+/* Supplied declaration required: nodeOwnerSetTranslations. */
 extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: aocHandleButtons. */
@@ -446,7 +446,7 @@ LAB_0018fbe4:
         temp_v16 = *(unsigned int *)(pcVar4 + 0x1e8c);
         temp_v10 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v14 = (char *)romwright_f2u((float)((*(float *)(pcVar4 + 0x1e84) + temp_v10 * temp_v11)));
-        FUN_00293e78(*(unsigned int *)pcVar13,&temp_v14);
+        nodeOwnerSetTranslations(*(unsigned int *)pcVar13,&temp_v14);
         in_s0 = *(float *)(pcVar4 + 0x1e9c);
         FUN_00293e08(*(unsigned int *)pcVar13);
         objSetAnglesDegrees(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
@@ -602,7 +602,7 @@ LAB_0018ffcc:
           temp_v12 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
           in_s0 = *(float *)(pcVar4 + 0x1e84) + temp_v12 * temp_v11;
           temp_v15 = in_s0;
-          FUN_00293e78(*(unsigned int *)pcVar5,&temp_v15);
+          nodeOwnerSetTranslations(*(unsigned int *)pcVar5,&temp_v15);
         }
       }
 LAB_00190190:

@@ -23,7 +23,7 @@ extern unsigned int *DAT_00435d78; /* 0x435d78 */
 extern int dialogIsActive(void);
 extern int FUN_002b6b04(void);
 /* Supplied declaration required: FUN_002bd06c. */
-extern unsigned int FUN_002bd1fc(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: jobGetWork. */
 /* Supplied declaration required: asdMemFree. */
@@ -88,7 +88,7 @@ unsigned int FUN_001b5498(void)
           if ((*(int *)(psVar2 + 8) != 0 || *(int *)(psVar2 + 10) != 0) &&
              (-1 < *(int *)(psVar2 + 0x14e))) {
             if ((*(unsigned int *)(psVar2 + 8) & 2) != 0) {
-              temp_v1 = FUN_002bd1fc();
+              temp_v1 = gameGetPlayerName();
               libc_strcpy(temp_v4,temp_v1);
             }
             else {
@@ -110,7 +110,7 @@ unsigned int FUN_001b5498(void)
           if ((*(int *)(psVar2 + 10) != 0 || *(int *)(psVar2 + 8) != 0) &&
              (-1 < *(int *)(psVar2 + 0x14e))) {
             if ((*(unsigned int *)(psVar2 + 8) & 2) != 0) {
-              temp_v1 = FUN_002bd1fc();
+              temp_v1 = gameGetPlayerName();
               libc_strcpy(temp_v4,temp_v1);
             }
             else {

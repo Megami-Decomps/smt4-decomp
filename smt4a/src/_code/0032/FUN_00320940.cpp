@@ -23,7 +23,7 @@ typedef struct {
 extern int g_camp; /* 0x57f108 */
 
 extern unsigned int gameGetPlayerData(void);
-extern int FUN_002a4860(int);
+extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_00372100. */
@@ -79,7 +79,7 @@ void FUN_00320940(int param_1)
     temp_v3 = temp_v1 + 0x50c;
     temp_v2 = temp_v1 + 0x307c;
   }
-  temp_v1 = FUN_002a4860(temp_v3);
+  temp_v1 = resourceRunOperationIfUnblocked(temp_v3);
   temp_v3 = FUN_002a4894(temp_v3);
   temp_v1 = temp_v1 + temp_v3;
   rt_memcpy_w(&temp_v4,temp_v0,100);

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00195fc4(void);
+int sysRequestFatalBreak(void);
 int FUN_001d3f18(...);
 int runtimeShiftLeftWide(...);
 
-/* Supplied declaration required: FUN_00195fc4. */
+/* Supplied declaration required: sysRequestFatalBreak. */
 /* Supplied declaration required: FUN_001d3f18. */
 /* Supplied declaration required: runtimeShiftLeftWide. */
 
@@ -27,7 +27,7 @@ unsigned int FUN_004acc1c(unsigned int *param_1,unsigned int param_2)
   unsigned long long temp_v6;
   
   if (param_2 >= 0x41) {
-    FUN_00195fc4();
+    sysRequestFatalBreak();
   }
   temp_v1 = param_1[2];
   temp_v4 = 0x40 - ((0x40 - temp_v1) & 7);

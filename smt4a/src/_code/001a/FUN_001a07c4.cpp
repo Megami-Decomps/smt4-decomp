@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001bc2ec(...);
+int asdGxGetPhysicalAddress(...);
 
-/* Supplied declaration required: FUN_001bc2ec. */
+/* Supplied declaration required: asdGxGetPhysicalAddress. */
 
 
 unsigned int * FUN_001a07c4(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -19,9 +19,9 @@ unsigned int * FUN_001a07c4(unsigned int *param_1,unsigned int *param_2,unsigned
   param_1[1] = 0x804f0238;
   *param_2 = (unsigned int)(param_1 + 2);
   param_1[2] = 0;
-  temp_v0 = FUN_001bc2ec(param_3);
+  temp_v0 = asdGxGetPhysicalAddress(param_3);
   param_1[3] = temp_v0 >> 3;
-  temp_v0 = FUN_001bc2ec(param_1 + 6);
+  temp_v0 = asdGxGetPhysicalAddress(param_1 + 6);
   param_1[4] = temp_v0 >> 3;
   param_1[5] = 1;
   return param_1 + 6;

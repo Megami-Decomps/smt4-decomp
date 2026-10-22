@@ -50,7 +50,7 @@ u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, 
 s32 uiCallbackUpdate(u32);
 void uiCallbackFree(u32);
 s32 FUN_003ac738(u32);
-s32 FUN_003aca54(u32);
+s32 btlDevilListFinishDrawCallback(u32);
 void rectangleInitializeSelection(u32 *, s32, s32, s32);
 void *asdOperatorNew(u32);
 void _ZN9Obj422594C1Ev(FlaggedEntry *);
@@ -80,7 +80,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     work->screen = screen;
     fields->calculate = asdProcessCreateSimple("BIBLE DEVIL CALC", 2, 0, 0, uiCallbackUpdate, uiCallbackFree, work);
     fields->drawUpper = taskCreateDraw("BIBLE DEVIL UP", 111, 1, 0, FUN_003ac738, NULL, DAT_0043d9c8.work, fields->calculate);
-    fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, FUN_003aca54, NULL, DAT_0043d9c8.work, fields->calculate);
+    fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, btlDevilListFinishDrawCallback, NULL, DAT_0043d9c8.work, fields->calculate);
     rectangleInitializeSelection(fields->rectangle, 320, 0, 29);
     BibleSelectionController *controller = (BibleSelectionController *)asdOperatorNew(sizeof(BibleSelectionController));
     if (controller) {

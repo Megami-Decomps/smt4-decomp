@@ -9,7 +9,7 @@ int FUN_002bb5a4(unsigned int *, unsigned char **, int);
 int asdFatalError(void);
 int FUN_002c618c(unsigned char **, int, int, int *);
 int FUN_0034dddc(unsigned int *, unsigned int *, unsigned int *);
-int FUN_00351488(unsigned char *);
+int mobiclipYieldPlaybackThread(unsigned char *);
 int FUN_00351498(unsigned char *, unsigned int *, unsigned int *);
 int FUN_003f66f0(unsigned int *, unsigned int, unsigned int *);
 
@@ -41,7 +41,7 @@ extern int FUN_002b90c8(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_002c618c. */
 /* Supplied declaration required: FUN_0034dddc. */
 extern unsigned int FUN_0034e134(unsigned int *);
-/* Supplied declaration required: FUN_00351488. */
+/* Supplied declaration required: mobiclipYieldPlaybackThread. */
 /* Supplied declaration required: FUN_00351498. */
 /* Supplied declaration required: FUN_003f66f0. */
 
@@ -87,7 +87,7 @@ void FUN_0032b3c4(int param_1)
   puStack_234 = &DAT_004c3af8;
   FUN_00351498(&DAT_004c3b20,&DAT_004c3a38,&DAT_0044d024);
   do {
-    FUN_00351488(&DAT_004c3b20);
+    mobiclipYieldPlaybackThread(&DAT_004c3b20);
   } while (DAT_004c3b2c != 7 && DAT_004c3b2c != 1);
   return;
 }

@@ -31,7 +31,7 @@ int rectangleInitializeSelection(unsigned int *, int, int, int);
 int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00233240(unsigned int *, int);
-int FUN_00233344(...);
+int uiAnimationAdvanceChannel(...);
 int flaggedValueHolderGetTotal(...);
 int FUN_0029212c(...);
 int FUN_002937c8(...);
@@ -68,7 +68,7 @@ extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_00233344. */
+/* Supplied declaration required: uiAnimationAdvanceChannel. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_00240d5c(unsigned int *);
@@ -122,8 +122,8 @@ void FUN_003a4a60(unsigned int *param_1)
   unsigned char temp_v7;
   
   temp_v7 = 0;
-  FUN_00233344(param_1 + 0xea,2);
-  FUN_00233344(param_1 + 0xea,3);
+  uiAnimationAdvanceChannel(param_1 + 0xea,2);
+  uiAnimationAdvanceChannel(param_1 + 0xea,3);
   switch(param_1[2]) {
   case 0:
     *param_1 = *param_1 | 0x1000;
@@ -137,7 +137,7 @@ void FUN_003a4a60(unsigned int *param_1)
     param_1[0x575a] = temp_v6;
     break;
   case 1:
-    FUN_00233344(param_1 + 0xea,6);
+    uiAnimationAdvanceChannel(param_1 + 0xea,6);
     temp_v4 = vec2GetYInt(param_1 + 0x1c4);
     temp_v2 = vec2GetXInt(param_1 + 0x1c4);
     pointConvertToFloat(param_1 + 0xe5,temp_v2,temp_v4);
@@ -167,8 +167,8 @@ void FUN_003a4a60(unsigned int *param_1)
     temp_v6 = flaggedValueHolderGetTotal(puVar10);
     FUN_00230954(param_1 + 0x20a,puVar10);
     (**(romwright_code **)(*(int *)param_1[0x217] + 0xc))((int *)param_1[0x217],puVar10);
-    FUN_00233344(param_1 + 0xea,2);
-    FUN_00233344(param_1 + 0xea,3);
+    uiAnimationAdvanceChannel(param_1 + 0xea,2);
+    uiAnimationAdvanceChannel(param_1 + 0xea,3);
     temp_v1 = flaggedValueHolderGetTotal(puVar10);
     if (temp_v6 == temp_v1) {
       FUN_002937c8(puVar10);
@@ -269,7 +269,7 @@ void FUN_003a4a60(unsigned int *param_1)
     break;
   case 3:
     if ((*param_1 & 0x1000) != 0) {
-      FUN_00233344(param_1 + 0xea,7);
+      uiAnimationAdvanceChannel(param_1 + 0xea,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1e7);
       temp_v2 = vec2GetXInt(param_1 + 0x1e7);
       pointConvertToFloat(param_1 + 0xe5,temp_v2,temp_v4);
@@ -392,7 +392,7 @@ joined_r0x003a5580:
     param_1[3] = param_1[3] + 1;
     scrRunOpcodesStub(param_1[0x5a]);
     if ((*param_1 & 0x1000) != 0) {
-      FUN_00233344(param_1 + 0xea,7);
+      uiAnimationAdvanceChannel(param_1 + 0xea,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1e7);
       temp_v2 = vec2GetXInt(param_1 + 0x1e7);
       pointConvertToFloat(param_1 + 0xe5,temp_v2,temp_v4);

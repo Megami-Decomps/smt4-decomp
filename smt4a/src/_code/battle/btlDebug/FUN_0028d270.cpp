@@ -99,9 +99,9 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 extern unsigned int FUN_001ba3d4(int);
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int btlMainGetUnk14(void);
-extern int FUN_002a4860(unsigned int);
+extern int resourceRunOperationIfUnblocked(unsigned int);
 extern int FUN_002a4894(unsigned int);
 extern int objectApplyIfUnblocked(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
@@ -211,7 +211,7 @@ void FUN_0028d270(int param_1)
   temp_v2 = vec2GetYInt(param_1 + 0x12b8);
   temp_v15 = 0;
   temp_v23 = 0;
-  temp_v19 = FUN_002a4860(*temp_v24);
+  temp_v19 = resourceRunOperationIfUnblocked(*temp_v24);
   temp_v0 = *(short *)(param_1 + *temp_v25 * 2 + 0x4210);
   if (temp_v0 != -1) {
     if (temp_v0 != -2) {
@@ -632,7 +632,7 @@ LAB_0028d9e0:
     efctSetSpeed();
     return;
   }
-  temp_v11 = FUN_002a4860(*temp_v24);
+  temp_v11 = resourceRunOperationIfUnblocked(*temp_v24);
   temp_v3 = FUN_002a4894(*temp_v24);
   temp_v10 = temp_v11 + temp_v3;
   if (*temp_v25 == 1) {
@@ -657,7 +657,7 @@ LAB_0028d9e0:
   temp_v14[0] = (unsigned char *)0x5b;
   FUN_001835b4(2,0xd,0x99,*(short *)(temp_v11 + 8) + temp_v1,*(short *)(temp_v11 + 10) + temp_v2);
   temp_v3 = FUN_002a4894(*temp_v24);
-  temp_v3 = FUN_00284140((int)*(short *)(param_1 + temp_v3 * 2 + 0x4824));
+  temp_v3 = recordGetModeForId((int)*(short *)(param_1 + temp_v3 * 2 + 0x4824));
   if (((temp_v3 == 1 || temp_v3 == 2) || temp_v3 == 6) || (temp_v21 != 0)) {
     temp_v16 = -0xa006001;
     temp_v14[0] = (unsigned char *)0x60;

@@ -72,7 +72,7 @@ extern unsigned char DAT_0049f950; /* 0x49f950 */
 extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_00262d40. */
 /* Supplied declaration required: campRebuildOwnedInventoryCategory. */
-extern unsigned int FUN_0026aa78(void);
+extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_0026c868. */
 /* Supplied declaration required: FUN_00282f80. */
 /* Supplied declaration required: FUN_00288e68. */
@@ -197,7 +197,7 @@ void FUN_0028a420(void)
       temp_v7 = 1;
     }
   }
-  temp_v2 = FUN_0026aa78();
+  temp_v2 = statusGetAvailableChoiceCount();
   FUN_0029f848(puVar1 + 0x90,temp_v2,0xb,1,1,1);
   FUN_00282f80(10);
   campRefreshEquipmentCategory(0x11);

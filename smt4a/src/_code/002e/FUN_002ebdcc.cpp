@@ -39,7 +39,7 @@ int FUN_003deea4(...);
 int FUN_003df168(int *, unsigned int);
 int gameFlagSetValue(...);
 int FUN_00417a60(...);
-int FUN_004185c4(unsigned int, int);
+int gameFlagSlotSetEnableBit(unsigned int, int);
 int optionsClearFlag1(void);
 
 /* stack frame of void: 14 slot(s), 56 byte(s) */
@@ -60,7 +60,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern unsigned int FUN_0015687c(void);
+extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_0015f858. */
 extern int engineCleanupIsDone(void);
 extern int gameFlagsGetBlock(void);
@@ -78,7 +78,7 @@ extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageSlotSet. */
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
@@ -104,7 +104,7 @@ extern unsigned int btlTalkBustUpGetId(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00417c24. */
-/* Supplied declaration required: FUN_004185c4. */
+/* Supplied declaration required: gameFlagSlotSetEnableBit. */
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
 /* Supplied declaration required: flagValueSub. */
@@ -168,7 +168,7 @@ unsigned int FUN_002ebdcc(void)
         scrWorkSetValue(2,0);
         if (*(char *)(temp_v4 + 6) == '\0') {
           temp_v2 = gameFlagsGetBlock();
-          FUN_004185c4(temp_v1,0);
+          gameFlagSlotSetEnableBit(temp_v1,0);
           *(unsigned short *)(temp_v2 + 0x1096) = 0;
           *(unsigned short *)(temp_v2 + 0x1094) = 0;
         }
@@ -315,7 +315,7 @@ unsigned int FUN_002ebdcc(void)
     if (temp_v2 != 1) {
       return 0;
     }
-    temp_v2 = FUN_002a4b74();
+    temp_v2 = messageGetChoiceResult();
     if (temp_v2 != 0) {
       scrWorkSetValue(1,0);
       scrWorkSetValue(0,4);
@@ -367,7 +367,7 @@ unsigned int FUN_002ebdcc(void)
   case 5:
     temp_v9 = 0x3a;
     temp_v10 = scrWorkGetValue(2);
-    temp_v3 = FUN_0015687c();
+    temp_v3 = gameGetPlayerName();
     libc_strcpy(&temp_v13,temp_v3);
     FUN_003180c4(0,&temp_v13);
     if (temp_v10 >= 2) {

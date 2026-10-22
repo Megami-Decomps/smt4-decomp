@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommitCommandRange(unsigned int *, unsigned int *);
-int FUN_0019eafc(void);
+int asdGxGetCommandCursor(void);
 int FUN_00500fe4(unsigned int *, unsigned int *, unsigned int);
 int FUN_00501084(unsigned int *, unsigned int *);
 int rt_memcpy_w(unsigned int *, unsigned int *, unsigned int);
@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: asdModelCommitCommandRange. */
-/* Supplied declaration required: FUN_0019eafc. */
+/* Supplied declaration required: asdGxGetCommandCursor. */
 /* Supplied declaration required: FUN_00500fe4. */
 /* Supplied declaration required: FUN_00501084. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -30,7 +30,7 @@ void FUN_00412678(unsigned int *param_1,unsigned int *param_2,unsigned int param
   unsigned int *puVar2;
   unsigned int temp_v0;
   
-  FUN_0019eafc();
+  asdGxGetCommandCursor();
   *param_1 = 0x100;
   param_1[1] = 0x20229;
   param_1[2] = 0x300;

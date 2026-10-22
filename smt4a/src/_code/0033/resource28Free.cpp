@@ -3,7 +3,7 @@
 extern "C" {
 
 extern void asdMemFree(void *ptr);
-extern void FUN_002b40ec(void *p);
+extern void resourceCollectionDestroy(void *p);
 extern void objectBufferFree(void *p);
 extern void block6Free(u32 handle);
 
@@ -13,7 +13,7 @@ void resource28Free(Resource28 *res)
     Handles10 *handles;
 
     if (res->unk2C != NULL) {
-        FUN_002b40ec(res->unk2C);
+        resourceCollectionDestroy(res->unk2C);
     }
     if (res->handles != NULL) {
         handles = res->handles;

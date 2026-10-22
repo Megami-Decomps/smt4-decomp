@@ -167,7 +167,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00222488. */
-extern unsigned int FUN_00228ab0(int);
+extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: FUN_0023acdc. */
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: infoWinSetTimer. */
@@ -407,7 +407,7 @@ void FUN_004eb928(int *param_1,unsigned int param_2)
         temp_v5 = 0;
         do {
           if ((-1 < *(char *)(temp_v3 + temp_v5 + 0x1ca0)) &&
-             (temp_v17 = FUN_00228ab0(temp_v5),
+             (temp_v17 = gameGetSaveSlotData(temp_v5),
              *(short *)(temp_v17 + 0x62) == *(short *)((int)puVar29 + 0x166))) {
             puVar29[0xff] = temp_v17;
             temp_v1 = partySlotFindIndex();

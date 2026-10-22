@@ -13,7 +13,7 @@ int gameFlagIsSet(...);
 int dataTableGetCount(...);
 int dataTableGetEntries(...);
 int __aeabi_memset4(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
 int campCommonBgAcquire(...);
@@ -57,7 +57,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: campCommonBgAcquire. */
@@ -238,10 +238,10 @@ LAB_002e6874:
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 8);
   puVar9 = &LAB_002e6b54;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar8[0x12] = (unsigned int)puVar9;
   puVar9 = &LAB_002e6b68;
-  FUN_0020214c();
+  asdLoadFileSyncDefault();
   puVar8[0x13] = (unsigned int)puVar9;
   FUN_00275bc8();
   puVar8[0x14] = (unsigned int)puVar9;

@@ -23,9 +23,9 @@ extern unsigned char g_useCounter; /* 0x57f27c */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern unsigned int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a4964. */
-extern int FUN_00318ddc(void);
+extern int buttonHelpGetPanelState(void);
 extern unsigned int screenGetEntry(unsigned int);
-extern int FUN_0032cfc8(void);
+extern int buttonHelpGetPanelMode(void);
 /* Supplied declaration required: FUN_00387ac4. */
 
 
@@ -71,10 +71,10 @@ void useCounterStart(void)
   if (*(char *)(temp_v0 + 0x74e) == '\x02') {
     return;
   }
-  temp_v5 = FUN_0032cfc8();
+  temp_v5 = buttonHelpGetPanelMode();
   *(char *)(temp_v0 + 0x7f4) = (char)temp_v5;
   if (temp_v5 != 0) {
-    temp_v5 = FUN_00318ddc();
+    temp_v5 = buttonHelpGetPanelState();
     *(char *)(temp_v0 + 0x7f5) = (char)temp_v5;
     if (temp_v5 == 0) {
       temp_v2 = screenGetEntry(0);

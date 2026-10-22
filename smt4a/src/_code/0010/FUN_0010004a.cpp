@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_0010024e(unsigned int);
+extern unsigned int inputGetKeyFlags(unsigned int);
 extern int *FUN_002e2a98(void);
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_0010004a(unsigned int param_1)
   
   piVar2 = (int *)FUN_002e2a98();
   if (*(char *)(*piVar2 + 0x100) == '\0') {
-    temp_v1 = FUN_0010024e(param_1);
+    temp_v1 = inputGetKeyFlags(param_1);
     return temp_v1;
   }
   if (param_1 < 0x10000) {

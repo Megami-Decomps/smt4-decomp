@@ -23,7 +23,7 @@ extern unsigned char LAB_00138c90; /* 0x138c90 */
 extern int asdModelProcessShutdown(...); /* 0x13ea8c */
 extern unsigned char LAB_001400f8; /* 0x1400f8 */
 extern unsigned char LAB_00141260; /* 0x141260 */
-extern int FUN_00141270(...); /* 0x141270 */
+extern int asdModelRenderLightPassCallback(...); /* 0x141270 */
 extern unsigned char *g_asdModelProcess; /* 0x5b3cd4 */
 
 /* Supplied declaration required: asdProcessSetAuxiliaryCallback. */
@@ -52,7 +52,7 @@ unsigned char * FUN_00138b18(int param_1,unsigned int param_2,unsigned int param
       return (unsigned char *)0x0;
     }
     puVar2 = &LAB_00138c74;
-    asdProcessCreateSimple(&LAB_00138c74,param_2,0,0,FUN_00141270,0,puVar1);
+    asdProcessCreateSimple(&LAB_00138c74,param_2,0,0,asdModelRenderLightPassCallback,0,puVar1);
     *puVar1 = (unsigned int)puVar2;
     asdProcessSetAuxiliaryCallback();
     puVar2 = &LAB_00138c90;

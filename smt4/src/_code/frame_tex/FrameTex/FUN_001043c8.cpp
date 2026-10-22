@@ -58,11 +58,11 @@ extern int FUN_001093e8(...); /* 0x1093e8 */
 extern int FUN_0010949c(...); /* 0x10949c */
 extern int FUN_00109520(...); /* 0x109520 */
 extern int titlePartStart(...); /* 0x109f40 */
-extern int FUN_00109fb4(...); /* 0x109fb4 */
+extern int titleCaptureSurfaceOnce(...); /* 0x109fb4 */
 extern int FUN_0010a03c(...); /* 0x10a03c */
 extern int FUN_0010a110(...); /* 0x10a110 */
 extern int titleBackdropRender(...); /* 0x10a3a4 */
-extern int FUN_0010a450(...); /* 0x10a450 */
+extern int titleCaptureHalfSizeSurfaceOnce(...); /* 0x10a450 */
 extern int FUN_0010b224(...); /* 0x10b224 */
 extern int FUN_0010b2d0(...); /* 0x10b2d0 */
 extern unsigned char DAT_00404164; /* 0x404164 */
@@ -141,13 +141,13 @@ void FUN_001043c8(void)
   taskCreateDraw(&LAB_00104850,0x65,0,0,FUN_0010889c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_0010485c,0xcc,0,0,FUN_00108b0c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104868,0x77,0,0,titleBackdropRender,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00104878,0xd5,0,0,FUN_0010a450,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00104878,0xd5,0,0,titleCaptureHalfSizeSurfaceOnce,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104888,0x82,0,0,FUN_0010a03c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104898,0xe0,0,0,FUN_0010a110,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104868,0x7e,0,0,FUN_0010b224,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104878,0xdc,0,0,FUN_0010b2d0,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104980,0x77,0,0,titlePartStart,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_0010498c,0xd5,0,0,FUN_00109fb4,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_0010498c,0xd5,0,0,titleCaptureSurfaceOnce,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104998,0x79,0,0,FUN_0010949c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001049a4,0xd7,0,0,FUN_00109520,0,g_frameTex,*puVar2);
   return;

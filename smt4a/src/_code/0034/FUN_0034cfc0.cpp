@@ -67,7 +67,7 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int FUN_001ba3d4(int);
 /* Supplied declaration required: FUN_0026ec00. */
-extern int FUN_00284140(int);
+extern int recordGetModeForId(int);
 extern int unitMatchesAlignment(int);
 /* Supplied declaration required: FUN_0047fc38. */
 /* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
@@ -129,7 +129,7 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v15 = 0;
   temp_v16 = 0;
   equipmentGetCappedUpgradeBonuses(temp_v22,&temp_v13);
-  temp_v2 = FUN_00284140((int)*(short *)(temp_v2 + param_2 * 2 + 0x1b3a));
+  temp_v2 = recordGetModeForId((int)*(short *)(temp_v2 + param_2 * 2 + 0x1b3a));
   temp_v10 = 0x9fe7ffff;
   if ((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6) {
     temp_v10 = 0xf5ff9fff;

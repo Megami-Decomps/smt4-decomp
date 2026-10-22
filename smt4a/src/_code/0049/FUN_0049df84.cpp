@@ -39,7 +39,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
-extern unsigned int FUN_002a4860(int);
+extern unsigned int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: flagsSetOrClearBit. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -63,7 +63,7 @@ void FUN_0049df84(int param_1)
   FUN_00163aa4(param_1 + 0x354);
   FUN_00163aa4(param_1 + 0x3e0);
   FUN_00228b04(param_1 + 0x18c,1);
-  temp_v1 = FUN_002a4860(param_1 + 0x18c);
+  temp_v1 = resourceRunOperationIfUnblocked(param_1 + 0x18c);
   *(unsigned int *)(param_1 + 0x1f0) = temp_v1;
   temp_v2 = FUN_002a4894(param_1 + 0x18c);
   *(int *)(param_1 + 500) = temp_v2;

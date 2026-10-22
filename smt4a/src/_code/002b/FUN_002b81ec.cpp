@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b621c(void);
 int FUN_002dae68(void);
 int FUN_0033ad04(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int controllerGetSourceValue(...);
 int controllerGetSourceTiming(...);
 int FUN_003fd7c0(...);
@@ -97,7 +97,7 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033ad04. */
 /* Supplied declaration required: FUN_00354098. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 extern unsigned int FUN_003d4ed8(unsigned int);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
@@ -520,7 +520,7 @@ void FUN_002b81ec(void)
         in_fpscr = temp_v9 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v23 != temp_v23)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v9 >> 0x18);
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-          FUN_003d2150(0x10000d1);
+          sysPlayVoice(0x10000d1);
           temp_v5 = gameFlagIsSet(0x4c9);
           if ((temp_v5 == 0) || (temp_v5 = FUN_002e5db4(), temp_v5 != 0)) {
             *(unsigned int *)(g_lmapScene + 0x1d0) = 0xf;

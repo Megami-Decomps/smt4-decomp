@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0020214c(...);
+int asdLoadFileSyncDefault(...);
 int FUN_0046e150(...);
 
 typedef struct fn_003fcd20_arg0 fn_003fcd20_arg0;
@@ -28,7 +28,7 @@ struct fn_003fcd20_arg0 {
 extern int *g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0020214c. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_0046e150. */
 extern int FUN_004705ec(int *, int, unsigned int);
 
@@ -53,7 +53,7 @@ void FUN_003fcd20(fn_003fcd20_arg0 *param_1,int param_2)
     FUN_0046e150(g_aocSystem,param_2,aiStack_50);
   }
   else {
-    FUN_0020214c();
+    asdLoadFileSyncDefault();
   }
   param_1->field_0x28 = piVar3;
   param_1->field_0x4 = -param_2;

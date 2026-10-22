@@ -15,7 +15,7 @@ int gameGlobalsQueueValues(...);
 int FUN_003720e4(...);
 int FUN_00372100(...);
 int FUN_003c5fc4(...);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_003df7c4(...);
 int FUN_00496a0c(...);
 int FUN_0049cd18(...);
@@ -62,7 +62,7 @@ extern int gameRecordExists(void);
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a482c(unsigned int *);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002c2c80. */
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -80,7 +80,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: messageMainSetFlag. */
 /* Supplied declaration required: FUN_003c5fc4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df7c4. */
 extern int FUN_00481100(unsigned short);
 /* Supplied declaration required: pointConvertToFloat. */
@@ -341,7 +341,7 @@ void FUN_0049b00c(unsigned int *param_1)
   case 6:
     temp_v5 = scrRunOpcodesStub(param_1[99]);
     if (temp_v5 != 2) break;
-    temp_v5 = FUN_002a4b74();
+    temp_v5 = messageGetChoiceResult();
     if (temp_v5 == 0) {
       param_1[2] = 7;
       sysPlaySe(0x78);
@@ -456,7 +456,7 @@ joined_r0x0049bb38:
   case 10:
     temp_v5 = scrRunOpcodesStub(param_1[99]);
     if (temp_v5 != 2) break;
-    temp_v5 = FUN_002a4b74();
+    temp_v5 = messageGetChoiceResult();
     if (temp_v5 == 0) {
       temp_v6 = param_1[0x2d0];
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
@@ -488,7 +488,7 @@ joined_r0x0049bb38:
       FUN_003df7c4(0);
       gameGlobalsQueueValues(puVar5,0);
       FUN_00372100(puVar5,0);
-      FUN_003d2150(0x10000cc);
+      sysPlayVoice(0x10000cc);
     }
     temp_v5 = gameRecordExists();
     if (temp_v5 != 0) {

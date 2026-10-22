@@ -33,9 +33,9 @@ extern int FUN_00321a98(...); /* 0x321a98 */
 extern int FUN_00321b8c(...); /* 0x321b8c */
 extern int kindRefTieBreak(...); /* 0x34f028 */
 extern int itemCompareByNibbles(...); /* 0x34f4f0 */
-extern int FUN_0034f558(...); /* 0x34f558 */
+extern int dataCompareResolvedRecordKeys(...); /* 0x34f558 */
 extern int FUN_0034f678(...); /* 0x34f678 */
-extern int FUN_0035feb0(...); /* 0x35feb0 */
+extern int dataCompareEntryCategoryAndKey(...); /* 0x35feb0 */
 extern int FUN_0035ff04(...); /* 0x35ff04 */
 extern int uiCompareEntrySecondaryKeyAscending(...); /* 0x35ff78 */
 extern int entryRefCompareByGroupThenOrder(...); /* 0x35ffcc */
@@ -309,7 +309,7 @@ LAB_003d0c64:
         if ((*pbVar5 & 0x7f) == 0x13) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = objectApplyIfUnblocked(temp_v3);
-            qsort(temp_v4,temp_v2,2,FUN_0035feb0);
+            qsort(temp_v4,temp_v2,2,dataCompareEntryCategoryAndKey);
           }
           else {
             temp_v2 = objectApplyIfUnblocked(temp_v3);
@@ -358,7 +358,7 @@ LAB_003d0c64:
         }
         else {
           temp_v2 = objectApplyIfUnblocked(temp_v3);
-          qsort(temp_v4,temp_v2,2,FUN_0034f558);
+          qsort(temp_v4,temp_v2,2,dataCompareResolvedRecordKeys);
         }
       }
       temp_v0 = *(unsigned char *)(temp_v1 + 0xb);

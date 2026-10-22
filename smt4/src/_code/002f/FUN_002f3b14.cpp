@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00287aec(void);
+int mathDistanceBetweenPoints(void);
 
 extern int g_mapIf; /* 0x447a78 */
 
-/* Supplied declaration required: FUN_00287aec. */
+/* Supplied declaration required: mathDistanceBetweenPoints. */
 
 
 void FUN_002f3b14(void)
@@ -31,7 +31,7 @@ void FUN_002f3b14(void)
        ((temp_v1 = *(int *)(temp_v3 + 0x1e4), temp_v1 == 0x1d || temp_v1 == 0x26 ||
         ((temp_v1 == 0x1e || temp_v1 == 0x1f) || temp_v1 == 0x25)))) {
       temp_v1 = (int)temp_v4;
-      FUN_00287aec();
+      mathDistanceBetweenPoints();
       if (temp_v1 < 0x41200000) {
         *(unsigned int *)(temp_v3 + 0x1d4) = 0x12;
         return;

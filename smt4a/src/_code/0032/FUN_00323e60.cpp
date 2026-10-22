@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00271d28(void);
 int FUN_002b2d74(unsigned int, int, int *);
 int objectBufferFree(void);
-int FUN_002b4078(void);
+int effEmitterAllocate(void);
 int effParticleParamCopy(int, unsigned int);
 int polygonTrackRebuildResources(int *, int, int);
 int FUN_003a1ef4(void);
@@ -15,7 +15,7 @@ int FUN_003a1ef4(void);
 /* Supplied declaration required: FUN_00271d28. */
 /* Supplied declaration required: FUN_002b2d74. */
 /* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: FUN_002b4078. */
+/* Supplied declaration required: effEmitterAllocate. */
 /* Supplied declaration required: effParticleParamCopy. */
 /* Supplied declaration required: polygonTrackRebuildResources. */
 /* Supplied declaration required: FUN_003a1ef4. */
@@ -42,7 +42,7 @@ int * FUN_00323e60(int param_1)
   piVar1[0xc] = temp_v1;
   if (piVar1[0xb] == 0) {
     temp_v0 = *piVar1;
-    FUN_002b4078();
+    effEmitterAllocate();
     piVar1[0xb] = temp_v0;
     *(int *)(temp_v0 + 0x4c) = piVar1[0xc];
   }

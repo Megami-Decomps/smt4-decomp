@@ -48,7 +48,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int screenFadeIsBusy(void);
 extern unsigned int messageMainGetValue(void);
-extern int FUN_002a4b74(void);
+extern int messageGetChoiceResult(void);
 extern int FUN_002e07f4(void);
 extern int FUN_002ef9f0(void);
 extern int FUN_0037de28(void);
@@ -166,7 +166,7 @@ unsigned int FUN_00241058(void)
     if (temp_v5 != 2) {
       return 0;
     }
-    temp_v5 = FUN_002a4b74();
+    temp_v5 = messageGetChoiceResult();
     if (temp_v5 == 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 0xb;
       slotSetRequest(0,10,0xff);
@@ -202,7 +202,7 @@ unsigned int FUN_00241058(void)
     temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x90));
     if (temp_v5 == 2) {
       clearTwoWordsAndByte(temp_v0 + 0x10);
-      temp_v5 = FUN_002a4b74();
+      temp_v5 = messageGetChoiceResult();
       if (temp_v5 != 0) {
         if (temp_v5 == 1) {
           *(unsigned char *)(temp_v0 + 0x17) = 1;
@@ -263,7 +263,7 @@ unsigned int FUN_00241058(void)
     if (temp_v5 != 2) {
       return 0;
     }
-    temp_v5 = FUN_002a4b74();
+    temp_v5 = messageGetChoiceResult();
     if (temp_v5 == 0) {
       slotSetRequest(0,0x14,0xff);
       slotSetRequest(1,0x14,0xff);

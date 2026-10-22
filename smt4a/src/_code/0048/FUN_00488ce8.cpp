@@ -11,14 +11,14 @@ int FUN_00183e58(void);
 int FUN_00317af8(...);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
-int FUN_003d2150(...);
+int sysPlayVoice(...);
 int FUN_00489480(int);
 int FUN_0048981c(void);
 int FUN_0048d248(...);
 int rectRecRead(int, int, int *, unsigned int **);
 int naviMainGetValue(...);
 int sub68OwnerGetBlock60(...);
-int FUN_00492bc0(...);
+int naviGetActiveStateValue(...);
 int FUN_00492c18(...);
 int FUN_004d03c8(float **, unsigned int **);
 int FUN_004d040c(int, unsigned int *, double, int);
@@ -81,14 +81,14 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: naviRequestSelectedMap. */
 /* Supplied declaration required: FUN_003a35a4. */
-/* Supplied declaration required: FUN_003d2150. */
+/* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_00489480. */
 /* Supplied declaration required: FUN_0048981c. */
 /* Supplied declaration required: FUN_0048d248. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: naviMainGetValue. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
-/* Supplied declaration required: FUN_00492bc0. */
+/* Supplied declaration required: naviGetActiveStateValue. */
 /* Supplied declaration required: FUN_00492c18. */
 extern int FUN_00492c5c(int);
 extern unsigned int FUN_00492c84(int);
@@ -261,10 +261,10 @@ unsigned int FUN_00488ce8(int param_1)
     puVar10 = (unsigned int *)(param_1 + 0x20510);
     puVar8 = (unsigned char *)(param_1 + 0x7b90);
     if (temp_v1 != 0) {
-      FUN_003d2150(0x1000229);
+      sysPlayVoice(0x1000229);
       if (DAT_005f1a5e != '\0') {
         temp_v1 = FUN_00492c5c(temp_v14);
-        temp_v0 = FUN_00492bc0(temp_v14);
+        temp_v0 = naviGetActiveStateValue(temp_v14);
         if (temp_v1 == temp_v0) {
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
           sub68OwnerGetBlock60(temp_v14);
@@ -293,7 +293,7 @@ unsigned int FUN_00488ce8(int param_1)
     else {
       temp_v1 = inputIsQuestCancelPressed();
       if (temp_v1 != 0) {
-        FUN_003d2150(0x1000229);
+        sysPlayVoice(0x1000229);
         if (DAT_005f1a5e != '\0') {
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
           temp_v3 = FUN_00492c84(temp_v14);
@@ -318,7 +318,7 @@ unsigned int FUN_00488ce8(int param_1)
         temp_v1 = FUN_004d04c4();
         if (temp_v1 != 0) {
           if (*(int *)(temp_v0 + 0x1514) != 0) {
-            FUN_003d2150(0x100020e);
+            sysPlayVoice(0x100020e);
             piVar9 = (int *)(temp_v0 + 0x1510);
             if (*piVar9 != 0) {
               *piVar9 = 0;
@@ -332,7 +332,7 @@ unsigned int FUN_00488ce8(int param_1)
         else {
           temp_v1 = FUN_004d0584();
           if (temp_v1 != 0) {
-            FUN_003d2150(0x100020e);
+            sysPlayVoice(0x100020e);
             piVar9 = (int *)(temp_v0 + 0x1514);
             temp_v1 = *piVar9;
             *piVar9 = temp_v1 + 1;
@@ -356,9 +356,9 @@ unsigned int FUN_00488ce8(int param_1)
           else {
             temp_v1 = inputIsQuestMenuPressed();
             if (temp_v1 != 0) {
-              FUN_003d2150(0x100020f);
+              sysPlayVoice(0x100020f);
               if (DAT_005f1a5e != '\0') {
-                temp_v1 = FUN_00492bc0(temp_v14);
+                temp_v1 = naviGetActiveStateValue(temp_v14);
                 temp_v0 = NaviMain_GetCurrentMap(temp_v14);
                 if ((temp_v1 != temp_v0) && (DAT_005f1a5c == '\0')) {
                   naviRequestSelectedMap();
@@ -372,7 +372,7 @@ unsigned int FUN_00488ce8(int param_1)
                 }
               }
               temp_v1 = FUN_00492c5c(temp_v14);
-              temp_v0 = FUN_00492bc0(temp_v14);
+              temp_v0 = naviGetActiveStateValue(temp_v14);
               if (temp_v1 == temp_v0) {
                 sub68OwnerGetBlock60(temp_v14);
                 temp_v16 = temp_v7;
@@ -382,7 +382,7 @@ unsigned int FUN_00488ce8(int param_1)
                 *puVar8 = 1;
                 *puVar7 = 1;
               }
-              puVar10 = (unsigned int *)FUN_00492bc0(temp_v14);
+              puVar10 = (unsigned int *)naviGetActiveStateValue(temp_v14);
               puVar6 = (unsigned int *)NaviMain_GetCurrentMap(temp_v14);
               temp_v4 = puVar10 == puVar6;
               if (temp_v4) {

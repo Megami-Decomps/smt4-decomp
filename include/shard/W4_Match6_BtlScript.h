@@ -1,4 +1,4 @@
-/* The battle script object (smt4) and the scripted unit's flags, shared by FUN_00338704 and FUN_00338c38. */
+/* The battle script object (smt4) and the scripted unit's flags, shared by btlScriptQueueRequestIfIdle and FUN_00338c38. */
 #ifndef SHARD_W4_MATCH6_BTLSCRIPT_H
 #define SHARD_W4_MATCH6_BTLSCRIPT_H
 

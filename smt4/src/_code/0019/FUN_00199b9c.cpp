@@ -57,7 +57,7 @@ extern int flagBitIsSet(int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_002b6a54(int, unsigned short);
+extern int supportUnitGetEntry(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: FUN_002b7bca. */
@@ -218,7 +218,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     temp_v1 = gameGetSupportUnitData();
     temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
     temp_v1 = gameGetSupportUnitData();
-    temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
+    temp_v1 = supportUnitGetEntry((int)*(short *)(temp_v1 + 0x604),temp_v0);
     FUN_002942c4((int)(short)(*(short *)(temp_v1 + 0x5a) + 1),0);
   }
   partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),0,1);

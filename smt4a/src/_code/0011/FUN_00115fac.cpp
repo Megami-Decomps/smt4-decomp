@@ -8,7 +8,7 @@ extern "C" {
 int FUN_00133f1c(void);
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned char [4], int);
-int FUN_00301a60(...);
+int onlineCompleteVectorJob(...);
 int FUN_00301bd4(...);
 int FUN_00301be2(int *, int, int *, int [6]);
 int arrayElementAddress_00301c5c(...);
@@ -45,7 +45,7 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
 extern int refIsNonNegative(unsigned int);
-/* Supplied declaration required: FUN_00301a60. */
+/* Supplied declaration required: onlineCompleteVectorJob. */
 extern int vectorSize12A(void);
 /* Supplied declaration required: FUN_00301bd4. */
 /* Supplied declaration required: FUN_00301be2. */
@@ -94,7 +94,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
   if (temp_v0 != 0) {
     if (*(char *)(param_1 + 0xb8) != '\x02') {
       FUN_002ea41e(temp_v7,param_1 + 0xa8);
-      FUN_00301a60(param_1,puVar2);
+      onlineCompleteVectorJob(param_1,puVar2);
       return;
     }
     if (*(char *)(param_1 + 0xa0) != '\0') {
@@ -103,13 +103,13 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
         temp_v10[0] = -0x7f96ffff;
         piVar4 = temp_v10;
         puVar2 = (unsigned char *)FUN_002e7908(puVar3,piVar4);
-        FUN_00301a60(param_1,puVar2);
+        onlineCompleteVectorJob(param_1,puVar2);
         return;
       }
       temp_v0 = refIsNonNegative(*(unsigned int *)(param_1 + 0x94));
       if (temp_v0 == 0) {
         puVar2 = *(unsigned char **)(param_1 + 0x94);
-        FUN_00301a60(param_1,puVar2);
+        onlineCompleteVectorJob(param_1,puVar2);
         return;
       }
     }
@@ -198,7 +198,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
     piVar4 = temp_v10;
   }
   puVar2 = (unsigned char *)FUN_002e7908(puVar3,piVar4);
-  FUN_00301a60(param_1,puVar2);
+  onlineCompleteVectorJob(param_1,puVar2);
   return;
 }
 

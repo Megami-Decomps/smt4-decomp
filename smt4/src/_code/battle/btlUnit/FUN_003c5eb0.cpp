@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022a358(...);
+int asdListBoxSetFloatItem(...);
 int asdListBoxSetItemMode2(...);
 int asdListBoxSetByteValue(...);
 int asdListBoxAddItems(...);
@@ -39,7 +39,7 @@ typedef struct {
 
 extern int g_btlMain; /* 0x4342c8 */
 
-/* Supplied declaration required: FUN_0022a358. */
+/* Supplied declaration required: asdListBoxSetFloatItem. */
 /* Supplied declaration required: asdListBoxSetItemMode2. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
@@ -62,11 +62,11 @@ void FUN_003c5eb0(fn_003c5eb0_arg0 *param_1,int param_2)
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,0,(*(unsigned int *)(g_btlMain + 0x634) & 0x20) >> 5);
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,1,(*(unsigned int *)(g_btlMain + 0x634) & 0x40) >> 6);
   asdListBoxSetItemMode2(*(unsigned int *)&param_1->field_0x10,2,(*(unsigned int *)(g_btlMain + 0x634) & 0x80) >> 7);
-  FUN_0022a358(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
-  FUN_0022a358(*(unsigned int *)&param_1->field_0x10,4,0,10);
-  FUN_0022a358(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);
-  FUN_0022a358(*(unsigned int *)&param_1->field_0x10,6,0xfffffc19,999);
-  FUN_0022a358(*(unsigned int *)&param_1->field_0x10,7,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,3,0xfffffff6,10);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,4,0,10);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,5,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,6,0xfffffc19,999);
+  asdListBoxSetFloatItem(*(unsigned int *)&param_1->field_0x10,7,0xfffffc19,999);
   return;
 }
 

@@ -10,7 +10,7 @@ int FUN_002c4924(void);
 int memClear(int, int);
 int FUN_002cf3b4(void);
 int FUN_0033f81c(void);
-int FUN_003bbf54(void);
+int inventoryResetSavedTableEntries(void);
 int FUN_003c25f0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int *DAT_0043e2b4; /* 0x43e2b4 */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002cf3b4. */
 /* Supplied declaration required: FUN_0033f81c. */
-/* Supplied declaration required: FUN_003bbf54. */
+/* Supplied declaration required: inventoryResetSavedTableEntries. */
 /* Supplied declaration required: FUN_003c25f0. */
 
 
@@ -210,7 +210,7 @@ void FUN_001a1110(void)
   *(unsigned char *)(temp_v0 + 0xb688) = 0;
   FUN_0033f81c();
   FUN_002c4924();
-  FUN_003bbf54();
+  inventoryResetSavedTableEntries();
   FUN_003c25f0();
   rt_memclr(DAT_0043e2ac + 0x1ec18,0x80);
   FUN_002cf3b4();
