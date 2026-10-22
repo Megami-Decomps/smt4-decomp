@@ -1,91 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001399b0` (_code @ 0x1399b0, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the light-array base is not cached separately and the final attachment becomes a tail call. */
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/S1GfxModel.h"
 
 extern "C" {
+struct Triple;
+extern Triple DAT_00636ebc;
+extern Triple DAT_00636ec8;
+extern u32 DAT_00636e30[];
+extern u32 DAT_00636e6c[];
+extern GfxModelState g_gfxSettings;
+extern ModelSlotList* g_asdModelSlotArray0[2];
+void tripleClear(Triple* object);
+AsdAllocator* asdMemoryGetDefaultAllocator(void);
+u32* FUN_0014850c(AsdAllocator* allocator, const u32* description);
+void FUN_0013d42c(const u32* settings, u32 options);
+void FUN_001767a4(u32* light, u32 builder);
+void FUN_00176538(u32* light);
+void FUN_001445d4(void);
+void FUN_00141724(void);
+void FUN_00143424(void);
+bool FUN_0018e9d8(ModelSlotList* parent, u32 child);
 
-int FUN_0013d42c(unsigned int, unsigned int);
-int FUN_00141724(void);
-int FUN_00143424(void);
-int FUN_001445d4(void);
-int FUN_0014850c(unsigned int, unsigned int *);
-int tripleClear(unsigned char *);
-int FUN_00176538(unsigned int);
-int FUN_001767a4(unsigned int, unsigned int);
-int FUN_0018e9d8(...);
-
-extern unsigned int DAT_005b3c10; /* 0x5b3c10 */
-extern int DAT_005b3c14; /* 0x5b3c14 */
-extern int DAT_005b3c20; /* 0x5b3c20 */
-extern int DAT_005b3c38; /* 0x5b3c38 */
-extern unsigned int g_effAsdLightHandle; /* 0x5b3c80 */
-extern unsigned int DAT_005b3c84; /* 0x5b3c84 */
-extern unsigned int g_asdModelTransformBuilder; /* 0x5b3c88 */
-extern int g_asdModelSlotArray0; /* 0x5b3ca0 */
-extern int DAT_005b3ca4; /* 0x5b3ca4 */
-extern unsigned int DAT_00636e30; /* 0x636e30 */
-extern unsigned int DAT_00636e6c; /* 0x636e6c */
-extern unsigned char DAT_00636ebc; /* 0x636ebc */
-extern unsigned char DAT_00636ec8; /* 0x636ec8 */
-
-/* Supplied declaration required: FUN_0013d42c. */
-/* Supplied declaration required: FUN_00141724. */
-/* Supplied declaration required: FUN_00143424. */
-/* Supplied declaration required: FUN_001445d4. */
-/* Supplied declaration required: FUN_0014850c. */
-/* Supplied declaration required: tripleClear. */
-extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: FUN_00176538. */
-/* Supplied declaration required: FUN_001767a4. */
-/* Supplied declaration required: FUN_0018e9d8. */
-
-
-void FUN_001399b0(unsigned int param_1,unsigned int param_2)
-
+// Initialize the two model-slot light resources and attach their existing scene nodes.
+void FUN_001399b0(const u32* settings, u32 options)
 {
-/* irregular: 11 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  tripleClear(&DAT_00636ebc);
-  tripleClear(&DAT_00636ec8);
-  DAT_005b3c10 = 0;
-  temp_v0 = asdMemoryGetDefaultAllocator();
-  FUN_0014850c(temp_v0,&DAT_00636e30);
-  g_effAsdLightHandle = temp_v0;
-  temp_v0 = asdMemoryGetDefaultAllocator();
-  FUN_0014850c(temp_v0,&DAT_00636e6c);
-  DAT_005b3c84 = temp_v0;
-  FUN_0013d42c(param_1,param_2);
-  temp_v3 = 0;
-  do {
-    FUN_001767a4((&g_effAsdLightHandle)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
-    FUN_00176538((&g_effAsdLightHandle)[temp_v3]);
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 2);
-  FUN_001445d4();
-  FUN_00141724();
-  FUN_00143424();
-  temp_v3 = temp_v1;
-  if (g_asdModelSlotArray0 != 0) {
-    if (DAT_005b3c14 != 0) {
-      FUN_0018e9d8();
+    // The counter occupies padding beginning at byte three in the shared view.
+    // A typed union there would increase its alignment and move existing fields.
+    struct InitializationView {
+        u8 unk00[0x1C];
+        u32 modelCount;
+        u32 primaryNode;
+        u8 unk24[8];
+        u32 secondaryNode;
+        u8 unk30[0x14];
+        u32 auxiliaryNode;
+        u8 unk48[0x44];
+        u32* lights[2];
+        u32 builders[2];
+    };
+    typedef char InitializationOffsets[offsetof(InitializationView, modelCount) == 0x1C &&
+        offsetof(InitializationView, auxiliaryNode) == 0x44 &&
+        offsetof(InitializationView, lights) == 0x8C &&
+        offsetof(InitializationView, builders) == 0x94 ? 1 : -1];
+    tripleClear(&DAT_00636ebc);
+    tripleClear(&DAT_00636ec8);
+    InitializationView* state = reinterpret_cast<InitializationView*>(&g_gfxSettings);
+    state->modelCount = 0;
+    state->lights[0] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e30);
+    state->lights[1] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
+    FUN_0013d42c(settings, options);
+    for (s32 i = 0; i < 2; ++i) {
+        FUN_001767a4(state->lights[i], state->builders[i]);
+        FUN_00176538(state->lights[i]);
     }
-    temp_v3 = 0;
-    if (DAT_005b3c38 != 0) {
-      FUN_0018e9d8(g_asdModelSlotArray0);
-      temp_v3 = temp_v2;
+    FUN_001445d4();
+    FUN_00141724();
+    FUN_00143424();
+    if (g_asdModelSlotArray0[0] != NULL) {
+        if (state->primaryNode != 0) {
+            FUN_0018e9d8(g_asdModelSlotArray0[0], state->primaryNode);
+        }
+        if (state->auxiliaryNode != 0) {
+            FUN_0018e9d8(g_asdModelSlotArray0[0], state->auxiliaryNode);
+        }
     }
-  }
-  if (DAT_005b3ca4 != 0) {
-    temp_v3 = DAT_005b3c20;
-  }
-  if (DAT_005b3ca4 != 0 && temp_v3 != 0) {
-    FUN_0018e9d8();
-  }
-  return;
+    if (g_asdModelSlotArray0[1] != NULL && state->secondaryNode != 0) {
+        FUN_0018e9d8(g_asdModelSlotArray0[1], state->secondaryNode);
+    }
 }
-
-} /* extern "C" */
+}

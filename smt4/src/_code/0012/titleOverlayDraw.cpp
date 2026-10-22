@@ -10,7 +10,7 @@ u32 FUN_002c5d80(u32 slot, u32 flags);
 void FUN_002bee04(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
-f32 FUN_002ba12c(RenderCtx *context, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
@@ -35,7 +35,7 @@ extern "C" void titleOverlayDraw(TitleOverlay *overlay)
         FUN_002bee04(g_titleScene, 3, value);
         efctSetSpeed(1.0f);
         FUN_002bed3c();
-        s32 frame = static_cast<s32>(FUN_002ba12c(g_titleScene, 0.27f));
+        s32 frame = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
         if (overlay->mode == 7 || overlay->mode == 8 || overlay->mode == 9) {
             RenderCtx *context = g_titleScene;
             setTitleRenderState(context, packNibblesAndByte(6, 1, 0));

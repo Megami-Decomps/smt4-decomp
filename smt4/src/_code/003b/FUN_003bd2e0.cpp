@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(...);
 int FUN_0022a918(unsigned int, unsigned int);
-int FUN_0022ab08(...);
+int selectionCopySupportedValue(...);
 int FUN_0022abe0(void);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_00247478(...);
@@ -65,7 +65,7 @@ typedef struct {
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_0022a918. */
-/* Supplied declaration required: FUN_0022ab08. */
+/* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0022abe0. */
 extern int FUN_0023ea94(void);
 extern int randRange(unsigned int);
@@ -307,7 +307,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             temp_v14 = (float)VectorUnsignedToFloat
                                       (temp_v31[temp_v13] & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v15 = CONCAT44(temp_v14 * (float)temp_v18,(int)temp_v15);
-            FUN_0022ab08(temp_v28[temp_v13],temp_v38);
+            selectionCopySupportedValue(temp_v28[temp_v13],temp_v38);
             temp_v3 = temp_v40;
             temp_v8 = temp_v39;
             puVar7 = (unsigned int *)btlGetMainState();

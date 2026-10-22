@@ -21,7 +21,7 @@ int FUN_003273ac(int);
 int FUN_003276f0(...);
 int FUN_00331efc(void);
 int FUN_00398004(int);
-int FUN_003ae3c4(...);
+void FUN_003ae3c4(float x, float y, float z);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -273,9 +273,7 @@ void FUN_00239c24(void)
     if (*(char *)(temp_v3 + 0x1664) != '\0') {
       temp_v4 = (short)*(char *)(temp_v3 + 0x1665) * 700 + 0x15e;
       temp_v3 = (short)*(char *)(temp_v3 + 0x1666) * 700 + 0x15e;
-      VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_003ae3c4(temp_v4,temp_v3);
+      FUN_003ae3c4((float)temp_v4, 0.0f, (float)temp_v3);
     }
   }
   temp_v3 = gameFlagsGetBlock();

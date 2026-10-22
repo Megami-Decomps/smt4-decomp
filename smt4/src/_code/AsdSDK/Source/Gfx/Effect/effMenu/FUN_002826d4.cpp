@@ -1,48 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002826d4` (_code @ 0x2826d4, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation argument registers, grouped payload stores, and separate tail-array addressing differ. */
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *memAlloc(u32, u32, u32, u32, u32, u32);
+extern const char DAT_004102c8[];
+extern EffMenuLists g_effMenuHandles;
 
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned int *DAT_004ea7e0; /* 0x4ea7e0 */
-extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
-
-/* Supplied declaration required: memAlloc. */
-
-
-void FUN_002826d4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned long long param_5)
-
+// Append a render effect with caller-supplied horizontal and vertical parameters.
+__softfp void FUN_002826d4(u32 first, u32 second, u32 third, u32 fourth,
+                          f32 horizontal, f32 vertical)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  puVar2 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x68,0x10,1);
-  puVar2[2] = param_1;
-  puVar2[3] = param_2;
-  puVar2[4] = param_3;
-  puVar2[5] = param_4;
-  puVar2[6] = (int)param_5;
-  puVar2[7] = (int)((unsigned long long)param_5 >> 0x20);
-  puVar2[1] = 5;
-  puVar1 = puVar2;
-  if (DAT_004ea7e0 != (unsigned int *)0x0) {
-    *DAT_004ea7f4 = (unsigned int)puVar2;
-    puVar1 = DAT_004ea7e0;
-  }
-  DAT_004ea7e0 = puVar1;
-  DAT_004ea7f4 = puVar2;
-  *puVar2 = 0;
-  return;
+    asdDebugTrace(DAT_004102c8, 641);
+    EffMenuRenderNode *node = (EffMenuRenderNode *)memAlloc(0x10000, 0x100, 0,
+        sizeof(EffMenuRenderNode), 0x10, 1);
+    node->unk08 = first;
+    node->unk0c = second;
+    node->unk10 = third;
+    node->unk14 = fourth;
+    node->horizontal = horizontal;
+    node->vertical = vertical;
+    node->unk04 = 5;
+    if (g_effMenuHandles.head[3] == NULL) {
+        g_effMenuHandles.head[3] = node;
+    } else {
+        g_effMenuHandles.tail[3]->next = node;
+    }
+    g_effMenuHandles.tail[3] = node;
+    node->next = NULL;
 }
-
-} /* extern "C" */
+}

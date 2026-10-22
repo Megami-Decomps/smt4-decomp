@@ -50,7 +50,7 @@ int mapTrapEnable(...);
 int naviMainApplyRequestValue(...);
 int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
-int FUN_003adc58(...);
+int uiPlayGatedActionFeedback(...);
 int FUN_003d54f8(...);
 int playerSetClampedValue(...);
 int linkedTargetSetFloat(...);
@@ -103,7 +103,7 @@ int FUN_003e54b8(...);
 
 int soundVolumeSettingGet(...);
 int FUN_002b621c(...);
-int FUN_002dae68(...);
+int mapEaseSceneHeading(...);
 int FUN_003135bc(...);
 int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
@@ -346,7 +346,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: mapIfReleasePanel. */
 /* Supplied declaration required: mapIfOverlayRelease. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002de104. */
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_002e364c. */
@@ -393,7 +393,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: FUN_00376c64. */
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
-/* Supplied declaration required: FUN_003adc58. */
+/* Supplied declaration required: uiPlayGatedActionFeedback. */
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -1243,7 +1243,7 @@ LAB_002b82a8:
       piVar18[9] = (int)((float)piVar18[9] + ((float)piVar18[0xc] - (float)piVar18[9]) * 0.33333334f)
       ;
     }
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     piVar7 = g_lmapScene + 8;
     temp_v32 = g_lmapScene[9];
@@ -1258,7 +1258,7 @@ LAB_002b82a8:
   case 2:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -1289,7 +1289,7 @@ LAB_002b82a8:
     rt_memcpy_w(afStack_108,&DAT_00531df8,0xa0);
     temp_v18 = (float)g_lmapScene[10];
     temp_v33 = romwright_piece_4_4(g_lmapScene[0xb],g_lmapScene[0xc]);
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     temp_v25 = 0.33333334f;
     temp_v19 = 0.0f;
@@ -1930,7 +1930,7 @@ LAB_003270b0:
     FUN_002e364c(g_lmapScene + 10);
 LAB_003270bc:
     FUN_00327ee8();
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     piVar10 = g_lmapScene + 7;
     piVar7 = g_lmapScene + 0x10;
@@ -1951,7 +1951,7 @@ LAB_003270bc:
   case 4:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     temp_v32 = 0;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
@@ -1989,7 +1989,7 @@ LAB_003270bc:
   case 5:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     piVar18[7] = (int)((float)piVar18[7] + ((float)piVar18[10] - (float)piVar18[7]) * 0.083333336f);
@@ -2045,7 +2045,7 @@ LAB_003270bc:
   case 6:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     temp_v17 = soundVolumeSettingGet();
     piVar18 = g_lmapScene;
     temp_v32 = g_lmapScene[1];
@@ -2179,7 +2179,7 @@ LAB_003270bc:
     fStack_24 = fStack_1c;
     fStack_20 = temp_v18;
     fStack_1c = temp_v25;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     temp_v18 = (float)g_lmapScene[7] +
              ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.33333334f;
@@ -2400,7 +2400,7 @@ LAB_003270bc:
   case 9:
     fStack_30 = temp_v35;
     fStack_2c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -2570,7 +2570,7 @@ LAB_003270bc:
     temp_v17 = soundVolumeSettingGet();
     uStack_5c = romwright_piece_4_4(temp_v17,(int)uStack_5c);
     if (g_lmapScene[1] < 10) {
-      FUN_002dae68();
+      mapEaseSceneHeading();
       piVar18 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -3052,7 +3052,7 @@ LAB_00366704:
     fStack_2c = temp_v37;
     temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
-      FUN_002dae68();
+      mapEaseSceneHeading();
       piVar18 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -3280,7 +3280,7 @@ LAB_00366704:
     fStack_28 = temp_v35;
     fStack_1c = fStack_24;
     fStack_24 = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     temp_v18 = (float)g_lmapScene[7] +
              ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.33333334f;
@@ -3429,7 +3429,7 @@ LAB_00366704:
     fStack_2c = temp_v37;
     temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
-      FUN_002dae68();
+      mapEaseSceneHeading();
       piVar18 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -3693,7 +3693,7 @@ LAB_00367f20:
     fStack_24 = temp_v37;
     temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
-      FUN_002dae68();
+      mapEaseSceneHeading();
       piVar18 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -3934,7 +3934,7 @@ LAB_0033eae8:
     fStack_24 = temp_v18;
     temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
-      FUN_002dae68();
+      mapEaseSceneHeading();
       piVar18 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -4408,7 +4408,7 @@ LAB_0033eae8:
     temp_v32 = g_lmapScene[0xc];
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     temp_v6 = g_lmapScene[1];
     if (temp_v6 != 0xb) {
@@ -4837,7 +4837,7 @@ LAB_002da3cc:
           }
           if (g_lmapScene[2] >= 6) {
             mapTrapGetUnk3C();
-            FUN_003adc58();
+            uiPlayGatedActionFeedback();
             FUN_00303460(0);
             mapSetSceneState(1);
             DAT_005f161c = 0;
@@ -5068,7 +5068,7 @@ LAB_002dad8c:
             temp_v32 = mapJobIsDone();
             if (temp_v32 != 0) {
               DAT_005f1adc = 0;
-              FUN_003adc58();
+              uiPlayGatedActionFeedback();
               FUN_00303460(0);
               mapSetSceneState(1);
               DAT_005f161c = 0;
@@ -5235,7 +5235,7 @@ LAB_002dad8c:
   case 0x21:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     piVar18[0x15] = 0;
@@ -5484,7 +5484,7 @@ code_r0x00313648:
     else {
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_002dae68();
+      mapEaseSceneHeading();
       piVar18 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] + ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.1f);
@@ -5575,7 +5575,7 @@ code_r0x00313648:
               ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.33333334f);
     piVar18[8] = (int)((float)piVar18[8] + ((float)piVar18[0xb] - (float)piVar18[8]) * 0.33333334f);
     piVar18[9] = (int)((float)piVar18[9] + ((float)piVar18[0xc] - (float)piVar18[9]) * 0.33333334f);
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     piVar10 = g_lmapScene + 8;
     temp_v12 = g_lmapScene[9];
@@ -5683,7 +5683,7 @@ code_r0x00313648:
     temp_v32 = g_lmapScene[0xc];
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     if (g_lmapScene[1] != 0) {
       if (g_lmapScene[1] == 1) {
@@ -5740,7 +5740,7 @@ code_r0x00313648:
   case 0x29:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     if (DAT_005f1774 != '\0') {
@@ -6049,7 +6049,7 @@ code_r0x00313648:
     temp_v32 = 0;
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     rt_memcpy_w(afStack_1a8,0x531f38,0xa0);
     piVar18 = g_lmapScene;
     temp_v6 = g_lmapScene[1];
@@ -6312,7 +6312,7 @@ code_r0x00313648:
   case 0x33:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar18 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     piVar18[7] = (int)((float)piVar18[7] + ((float)piVar18[10] - (float)piVar18[7]) * 0.33333334f);
@@ -8139,7 +8139,7 @@ LAB_00328050:
   case 0x38:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     piVar10 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -8164,7 +8164,7 @@ LAB_00246d70:
     temp_v32 = 0;
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    FUN_002dae68();
+    mapEaseSceneHeading();
     rt_memcpy_w(temp_v43,0x531e98,0xa0);
     piVar18 = g_lmapScene;
     if (g_lmapScene[1] != 0) {

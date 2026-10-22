@@ -1,59 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022daac` (_code @ 0x22daac, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Layout-context register saves, coordinate scheduling, and the alternate-zero block differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+UiLayoutEntryPrefixIV *FUN_002bf4f0(UiLayoutResourceIV *resource, u32 entryId);
+u32 FUN_002bd06c(u32 value);
+void FUN_002be56c(UiLayoutResourceIV *resource, u32 layer, u32 mask,
+                  u32 convertedValue, f32 x, f32 y, f32 opacity,
+                  f32 rotation, f32 scale);
 
-int FUN_002bd06c(unsigned int);
-int FUN_002be56c(int, unsigned int, unsigned int, unsigned int);
-int FUN_002bf4f0(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002bf4f0. */
-
-
-void FUN_0022daac(int param_1,unsigned int param_2,int param_3,int param_4,int param_5)
-
+void FUN_0022daac(void *owner, u32 value, u32 entryIndex,
+                  s32 alternate, s32 fade)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  
-  VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (param_4 != 0) {
-    temp_v2 = FUN_002bf4f0(param_1 + 200,param_3 + 0x42f);
-    temp_v3 = 0x499;
-    temp_v4 = 3;
-    temp_v5 = 0xffffffff;
-  }
-  else {
-    temp_v2 = FUN_002bf4f0(param_1 + 200,param_3 + 0x40e);
-    temp_v3 = 0x48b;
-    temp_v4 = 2;
-    temp_v5 = 0xff;
-  }
-  temp_v0 = *(short *)(temp_v2 + 8);
-  temp_v1 = *(short *)(temp_v2 + 10);
-  param_2 = param_2 & 0xffff;
-  FUN_002bd06c(param_2);
-  temp_v2 = FUN_002bf4f0(param_1 + 200,temp_v3);
-  VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be56c(param_1 + 200,temp_v4,temp_v5,param_2);
-  return;
-}
+    // RSB is a wrapping 32-bit subtraction before signed conversion to float.
+    const f32 opacity = static_cast<f32>(
+        static_cast<s32>(256U - static_cast<u32>(fade))) * (1.0f / 256.0f);
+    UiLayoutResourceIV *resource = reinterpret_cast<UiLayoutResourceIV *>(
+        static_cast<u8 *>(owner) + 0xC8);
 
-} /* extern "C" */
+    const UiLayoutEntryPrefixIV *entry;
+    u32 anchorId;
+    u32 layer;
+    u32 mask;
+    if (alternate != 0) {
+        entry = FUN_002bf4f0(resource, entryIndex + 0x42FU);
+        anchorId = 0x499;
+        layer = 3;
+        mask = 0xFFFFFFFFU;
+    } else {
+        entry = FUN_002bf4f0(resource, entryIndex + 0x40EU);
+        anchorId = 0x48B;
+        layer = 2;
+        mask = 0xFF;
+    }
+
+    const s16 entryX = entry->x;
+    const s16 entryY = entry->y;
+    const u32 convertedValue = FUN_002bd06c(value & 0xFFFFU);
+    const UiLayoutEntryPrefixIV *anchor = FUN_002bf4f0(resource, anchorId);
+    FUN_002be56c(resource, layer, mask, convertedValue,
+                 static_cast<f32>(static_cast<s32>(anchor->x) + entryX),
+                 static_cast<f32>(static_cast<s32>(anchor->y) + entryY),
+                 opacity, 0.0f, 1.0f);
+}
+}

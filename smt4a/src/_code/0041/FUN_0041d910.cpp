@@ -1,54 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041d910` (_code @ 0x41d910, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler unrolls the two-corner-set loop instead of retaining retail's indexed loop. */
+#include "common.h"
 
-extern "C" {
+struct MirroredQuadVertex { f32 x, y, z; u8 unk0c[8]; };
+struct MirroredQuad { MirroredQuadVertex vertices[4]; };
+struct MirroredQuadExtent { u8 unk00[0x10]; f32 x, y; u8 unk18[0x10]; };
+struct MirroredQuadOwner {
+    u32 unk00;
+    MirroredQuad *quads;
+    u8 unk08[0x14];
+    MirroredQuadExtent *extents;
+};
 
-
-void FUN_0041d910(int param_1)
-
+// Set the four signed corner combinations for each of the two extent records.
+extern "C" void FUN_0041d910(MirroredQuadOwner *owner)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float *pfVar5;
-  int temp_v4;
-  unsigned int *puVar7;
-  unsigned int temp_v5;
-  int temp_v6;
-  float temp_v7;
-  
-  temp_v3 = 0;
-  do {
-    temp_v6 = temp_v3 * 0x28 + 0x10;
-    temp_v4 = temp_v3 * 0x28 + 0x14;
-    pfVar5 = (float *)(*(int *)(param_1 + 4) + temp_v3 * 0x50);
-    temp_v7 = *(float *)(*(int *)(param_1 + 0x1c) + temp_v4);
-    temp_v0 = temp_v3 * 0x50;
-    temp_v1 = temp_v3 * 0x50;
-    temp_v2 = temp_v3 * 0x50;
-    *pfVar5 = -*(float *)(*(int *)(param_1 + 0x1c) + temp_v6);
-    pfVar5[1] = temp_v7;
-    pfVar5[2] = 0.0f;
-    temp_v3 = temp_v3 + 1;
-    temp_v7 = *(float *)(*(int *)(param_1 + 0x1c) + temp_v4);
-    pfVar5 = (float *)(temp_v0 + 0x14 + *(int *)(param_1 + 4));
-    *pfVar5 = -*(float *)(*(int *)(param_1 + 0x1c) + temp_v6);
-    pfVar5[1] = -temp_v7;
-    pfVar5[2] = 0.0f;
-    puVar7 = (unsigned int *)(*(int *)(param_1 + 4) + temp_v1 + 0x28);
-    temp_v5 = *(unsigned int *)(*(int *)(param_1 + 0x1c) + temp_v6);
-    puVar7[1] = *(unsigned int *)(*(int *)(param_1 + 0x1c) + temp_v4);
-    *puVar7 = temp_v5;
-    puVar7[2] = 0;
-    temp_v7 = *(float *)(temp_v4 + *(int *)(param_1 + 0x1c));
-    puVar7 = (unsigned int *)(temp_v2 + 0x3c + *(int *)(param_1 + 4));
-    *puVar7 = *(unsigned int *)(*(int *)(param_1 + 0x1c) + temp_v6);
-    *(float *)&puVar7[1] = -temp_v7;
-    puVar7[2] = 0;
-  } while (temp_v3 < 2);
-  return;
+    for (s32 i = 0; i < 2; ++i) {
+        owner->quads[i].vertices[0].x = -owner->extents[i].x;
+        owner->quads[i].vertices[0].y = owner->extents[i].y;
+        owner->quads[i].vertices[0].z = 0.0f;
+        owner->quads[i].vertices[1].x = -owner->extents[i].x;
+        owner->quads[i].vertices[1].y = -owner->extents[i].y;
+        owner->quads[i].vertices[1].z = 0.0f;
+        owner->quads[i].vertices[2].x = owner->extents[i].x;
+        owner->quads[i].vertices[2].y = owner->extents[i].y;
+        owner->quads[i].vertices[2].z = 0.0f;
+        owner->quads[i].vertices[3].x = owner->extents[i].x;
+        owner->quads[i].vertices[3].y = -owner->extents[i].y;
+        owner->quads[i].vertices[3].z = 0.0f;
+    }
 }
-
-} /* extern "C" */

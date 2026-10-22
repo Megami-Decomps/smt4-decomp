@@ -1,34 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b79d8` (_code @ 0x2b79d8, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: array/count base registers, flag-subobject address hoisting, and final loop comparison order differ. */
+#include "shard/W9_W9Match7_FlagGatedEntries.h"
 
 extern "C" {
+extern FlagGatedEntryState DAT_00580c90;
+extern FlagGatedEntry DAT_005f32a0[];
+int gameFlagIsSet(s32 flag);
 
-extern int DAT_00580c94; /* 0x580c94 */
-
-extern int gameFlagIsSet(void);
-
-
+/* Disable live entries whose required flag is absent or exclusion flag is set. */
 void FUN_002b79d8(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  if (temp_v2 < DAT_00580c94) {
-    do {
-      temp_v0 = temp_v2 * 0x17c;
-      if (((*(char *)(temp_v0 + 0x5f3404) == '\0') && (*(int *)(temp_v0 + 0x5f33cc) != 0)) &&
-         (((*(short *)(temp_v0 + 0x5f3400) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) ||
-          ((*(short *)(temp_v0 + 0x5f3402) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) {
-        *(unsigned char *)(temp_v0 + 0x5f3404) = 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < DAT_00580c94);
-  }
-  return;
+    for (s32 index = 0; index < DAT_00580c90.count; ++index) {
+        FlagGatedEntry *entry = &DAT_005f32a0[index];
+        if (!entry->disabled && entry->object &&
+            ((entry->requiredFlag && !gameFlagIsSet(entry->requiredFlag)) ||
+             (entry->excludedFlag && gameFlagIsSet(entry->excludedFlag)))) {
+            entry->disabled = 1;
+        }
+    }
 }
-
-} /* extern "C" */
+}

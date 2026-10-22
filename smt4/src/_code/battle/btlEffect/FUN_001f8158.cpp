@@ -21,7 +21,7 @@ typedef struct {
 extern int btlEffectDispatchCurrentJob(...); /* 0x1e4a84 */
 extern unsigned char LAB_001f8230; /* 0x1f8230 */
 extern unsigned char LAB_001f8244; /* 0x1f8244 */
-extern int FUN_0020ee0c(...); /* 0x20ee0c */
+extern unsigned int FUN_0020ee0c(unsigned int process);
 extern int btlEffectDestroy(...); /* 0x2c9fd0 */
 extern unsigned char g_btlEffect; /* 0x435d00 */
 

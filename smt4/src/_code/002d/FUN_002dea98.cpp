@@ -13,7 +13,7 @@ static __inline u64 CONCAT44(u32 high, u32 low)
 int FUN_0021a1a4(unsigned short *, int, int);
 int FUN_00256a50(...);
 int matrixScaleRows(...);
-int FUN_00256cd8(...);
+int gfxResolveTimedTextureFrame(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int mtx44TransformPosition(...);
@@ -122,7 +122,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_0021a1a4. */
 /* Supplied declaration required: FUN_00256a50. */
 /* Supplied declaration required: matrixScaleRows. */
-/* Supplied declaration required: FUN_00256cd8. */
+/* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: mtx44TransformPosition. */
@@ -311,7 +311,7 @@ void FUN_002dea98(EffectEmitterB *emitter)
     refCountIncrement(temp_v77);
   }
   else if (emitter->refA != 0) {
-    FUN_00256cd8(emitter->refA,temp_v4,&temp_v82);
+    gfxResolveTimedTextureFrame(emitter->refA,temp_v4,&temp_v82);
     temp_v68 = (u32)(temp_v83);
     temp_v89 = (u32)(temp_v84);
     temp_v29 = 0;

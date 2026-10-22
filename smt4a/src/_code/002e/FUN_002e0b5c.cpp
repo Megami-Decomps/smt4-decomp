@@ -1,69 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e0b5c` (_code @ 0x2e0b5c, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler factors repeated filesystem module/range tests; retail retains separate checks. */
+#include "nn/Result.h"
 
 extern "C" {
+extern u8 DAT_005b40c8;
+u32 globalBlockGetFirst();
+u32 FUN_00429d98(u32 handle);
+void FUN_0013ebd8(u32 result);
 
-int FUN_0013ebd8(void);
-int FUN_00429d98(void);
-int SBORROW4(...);
-
-extern signed char DAT_005b40c8; /* 0x5b40c8 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0013ebd8. */
-extern unsigned int globalBlockGetFirst(unsigned int);
-/* Supplied declaration required: FUN_00429d98. */
-
-
-unsigned int FUN_002e0b5c(void)
-
+// Poll content mounting, caching success and classifying the supported filesystem error ranges.
+u32 FUN_002e0b5c()
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 1;
-  if (DAT_005b40c8 != '\0') {
-    temp_v3 = 2;
-  }
-  else {
-    temp_v2 = globalBlockGetFirst(0);
-    FUN_00429d98();
-    FUN_0013ebd8();
-    if ((temp_v2 & 0x80000000) == 0) {
-      DAT_005b40c8 = '\x01';
+    if (DAT_005b40c8)
+        return 2;
+    u32 result = FUN_00429d98(globalBlockGetFirst());
+    FUN_0013ebd8(result);
+    if (nnResultIsSuccess(result)) {
+        DAT_005b40c8 = 1;
+        return 1;
     }
-    else {
-      temp_v0 = (temp_v2 & 0x3fc00) >> 10;
-      if ((((temp_v0 != 0x11) || ((temp_v2 & 0x3ff) < 0x154)) || ((temp_v2 & 0x3ff) >= 0x168)) &&
-         (((temp_v0 != 0x11 || ((temp_v2 & 0x3ff) < 0x168)) || ((temp_v2 & 0x3ff) >= 0x186)))) {
-        if (temp_v0 != 0x11) {
-          return 0;
-        }
-        temp_v0 = temp_v2 & 0x3ff;
-        temp_v4 = SBORROW4(0x186,temp_v0);
-        temp_v1 = 0x186 - temp_v0;
-        if (temp_v0 >= 0x186) {
-          temp_v4 = SBORROW4(temp_v0,400);
-          temp_v1 = temp_v0 - 400;
-        }
-        if (temp_v1 < 0 == temp_v4) {
-          return 0;
-        }
-      }
-      if (((temp_v2 & 0x3ff) < 0x154) || ((temp_v2 & 0x3ff) >= 0x168)) {
-        temp_v3 = 4;
-      }
-      else {
-        temp_v3 = 3;
-      }
-    }
-  }
-  return temp_v3;
+    u32 module = nnResultModule(result);
+    s32 description = nnResultDescription(result);
+    if ((module != 17 || description < 340 || description >= 360) &&
+        (module != 17 || description < 360 || description >= 390) &&
+        (module != 17 || description < 390 || description >= 400))
+        return 0;
+    return description >= 340 && description < 360 ? 3 : 4;
 }
-
-} /* extern "C" */
+}

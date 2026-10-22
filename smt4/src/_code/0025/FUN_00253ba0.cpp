@@ -1,63 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00253ba0` (_code @ 0x253ba0, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector argument base registers and evaluation order differ from retail. */
+#include "map/mapEnemy.h"
+#include "shard/W5_W5Match7_SceneState.h"
 
-extern "C" {
+extern "C" MapEnemy *g_mapEnemy;
+extern "C" f32 mathDistanceBetweenPoints(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 
-int mathDistanceBetweenPoints(void);
-
-extern int g_mapEnemy; /* 0x447600 */
-extern int g_lmapScene; /* 0x447e88 */
-
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-
-
-unsigned int FUN_00253ba0(int param_1)
-
+/* Test whether this marked enemy outranks every other marked enemy by adjusted distance. */
+extern "C" u32 FUN_00253ba0(MapEnemyEntry *enemy)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v1 = g_mapEnemy;
-  if (*(char *)(param_1 + 0x7d) == '\0') {
-    return 0;
-  }
-  temp_v5 = *(float *)(g_lmapScene + 0x1c);
-  mathDistanceBetweenPoints();
-  temp_v7 = 300.0f;
-  temp_v2 = 0;
-  if (*(int *)(param_1 + 0x84) == 2) {
-    temp_v5 = temp_v5 + 300.0f;
-  }
-  do {
-    temp_v3 = temp_v1 + temp_v2 * 0x180;
-    temp_v4 = *(char *)(temp_v3 + 0x34) != '\0';
-    temp_v0 = '\0';
-    if (temp_v4) {
-      temp_v0 = *(char *)(temp_v3 + 0xb1);
-    }
-    if (temp_v4 && temp_v0 != '\0') {
-      temp_v6 = *(float *)(g_lmapScene + 0x1c);
-      mathDistanceBetweenPoints();
-      if (*(int *)(temp_v3 + 0xb8) == 2) {
-        temp_v6 = temp_v6 + temp_v7;
-      }
-      if (temp_v6 < temp_v5) {
+    /* Aligned position fields cannot be added to the entry's byte-aligned prefix union. */
+    struct EnemyPositionView {
+        u8 unk00[8];
+        MapVector position;
+        u8 unk14[0xC];
+        MapVector target;
+    };
+    MapEnemy *enemies = g_mapEnemy;
+    if (!enemy->unk7D) {
         return 0;
-      }
     }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x20) {
-      return 1;
+    EnemyPositionView *position = reinterpret_cast<EnemyPositionView *>(enemy);
+    f32 distance = mathDistanceBetweenPoints(g_lmapScene->position.x, g_lmapScene->position.y,
+        g_lmapScene->position.z, position->target.x, position->target.y, position->target.z);
+    if (enemy->state == 2) {
+        distance += 300.0f;
     }
-  } while( 1 );
+    for (s32 index = 0; index < MAP_ENEMY_COUNT; ++index) {
+        MapEnemyEntry *candidate = &enemies->entries[index];
+        if (candidate->active && candidate->unk7D) {
+            position = reinterpret_cast<EnemyPositionView *>(candidate);
+            f32 candidateDistance = mathDistanceBetweenPoints(g_lmapScene->position.x, g_lmapScene->position.y,
+                g_lmapScene->position.z, position->position.x, position->position.y, position->position.z);
+            if (candidate->state == 2) {
+                candidateDistance += 300.0f;
+            }
+            if (candidateDistance < distance) {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
-
-} /* extern "C" */

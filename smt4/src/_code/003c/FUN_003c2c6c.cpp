@@ -1,77 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c2c6c` (_code @ 0x3c2c6c, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The embedded-entry pointer is retained rather than recomputed; getter/setter registers differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+s32 FUN_0029efc0(FlaggedEntry *entry);
+s32 FUN_0029e93c(FlaggedEntry *entry);
+s32 flaggedEntryGetValueA(FlaggedEntry *entry);
+s32 flaggedEntryGetValueB(FlaggedEntry *entry);
+s32 FUN_00298d64(FlaggedEntry *entry, s32 value);
+s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
+s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
+s32 flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
 
-int recordTrackDirtyValue(char *, int);
-int FUN_00298d64(char *, int);
-int flaggedEntrySetValueB(char *, int);
-int flaggedEntrySetValueA(char *, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: recordTrackDirtyValue. */
-extern int flaggedEntryGetValueB(char *);
-/* Supplied declaration required: FUN_00298d64. */
-/* Supplied declaration required: flaggedEntrySetValueB. */
-/* Supplied declaration required: flaggedEntrySetValueA. */
-extern int flaggedEntryGetValueA(void);
-extern int FUN_0029e93c(char *);
-extern int FUN_0029efc0(void);
-
-
-void FUN_003c2c6c(char *param_1)
-
+void FUN_003c2c6c(EntryCountdownPrefixIV *state)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (*param_1 != '\x01') {
-    temp_v0 = FUN_0029efc0();
-  }
-  else {
-    temp_v0 = FUN_0029e93c(param_1 + 0x10);
-  }
-  if (*param_1 != '\x01') {
-    temp_v1 = flaggedEntryGetValueA();
-  }
-  else {
-    temp_v1 = flaggedEntryGetValueB(param_1 + 0x10);
-  }
-  if (temp_v0 >= 1) {
-    temp_v0 = temp_v0 - 1;
-  }
-  else if (temp_v1 >= 1) {
-    temp_v1 = temp_v1 - 1;
-  }
-  else {
-    temp_v2 = *(int *)(param_1 + 8);
-    temp_v0 = *(int *)(param_1 + 4);
-    if (temp_v0 < temp_v2) {
-      temp_v1 = temp_v0 - 1;
-      temp_v0 = temp_v2 - temp_v0;
-    }
-    else {
-      temp_v0 = 0;
-      temp_v1 = temp_v2 - 1;
-    }
-  }
-  if (*param_1 == '\0') {
-    FUN_00298d64(param_1 + 0x10,temp_v0);
-    flaggedEntrySetValueA(param_1 + 0x10,temp_v1);
-  }
-  if (*param_1 != '\x01') {
-    return;
-  }
-  recordTrackDirtyValue(param_1 + 0x10,temp_v0);
-  flaggedEntrySetValueB(param_1 + 0x10,temp_v1);
-  return;
-}
+    FlaggedEntry *entry = reinterpret_cast<FlaggedEntry *>(
+        reinterpret_cast<u8 *>(state) + 0x10);
 
-} /* extern "C" */
+    s32 primary;
+    if (state->mode == 1)
+        primary = FUN_0029e93c(entry);
+    else
+        primary = FUN_0029efc0(entry);
+
+    s32 secondary;
+    if (state->mode == 1)
+        secondary = flaggedEntryGetValueB(entry);
+    else
+        secondary = flaggedEntryGetValueA(entry);
+
+    if (primary > 0) {
+        --primary;
+    } else if (secondary > 0) {
+        --secondary;
+    } else if (state->resetTotal > state->resetSplit) {
+        secondary = static_cast<s32>(static_cast<u32>(state->resetSplit) - 1u);
+        primary = static_cast<s32>(static_cast<u32>(state->resetTotal) -
+                                   static_cast<u32>(state->resetSplit));
+    } else {
+        primary = 0;
+        secondary = static_cast<s32>(static_cast<u32>(state->resetTotal) - 1u);
+    }
+
+    if (state->mode == 0) {
+        FUN_00298d64(entry, primary);
+        flaggedEntrySetValueA(entry, secondary);
+    }
+    if (state->mode == 1) {
+        recordTrackDirtyValue(entry, primary);
+        flaggedEntrySetValueB(entry, secondary);
+    }
+}
+}

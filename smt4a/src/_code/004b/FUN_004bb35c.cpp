@@ -1,60 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb35c` (_code @ 0x4bb35c, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: error switch bounds and communication-card literal placement differ. */
+#include "addon/CecCard.h"
 
 extern "C" {
+extern u32 g_resourceDispatchContext;
+extern char s__SHIN_MEGAMITENSEI_4_0057f2cc[33];
+extern char s_Shin_Megami_Tensei_I_0057f34a[34];
+u32 FUN_0042d694(u32);
+s32 FUN_003a476c(u32, u32, const char *, const void *, u32, const char *, u32, u32);
+void cecSettingsSet(s32, s32, s32, s32);
+s32 cecWriteMessageBoxNameAndData(u32, u32, const char *, const void *, u32);
 
-int cecSettingsSet(int, int, int, int);
-int FUN_003a476c(unsigned int, unsigned int, char [33], unsigned int, int, char [34], int, int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned int g_resourceDispatchContext; /* 0x57f2c8 */
-extern char s__SHIN_MEGAMITENSEI_4_0057f2cc[33]; /* 0x57f2cc */
-extern char s_Shin_Megami_Tensei_I_0057f34a[34]; /* 0x57f34a */
-
-extern int cecWriteMessageBoxNameAndData(unsigned int, unsigned int, char *, unsigned int, unsigned int);
-/* Supplied declaration required: cecSettingsSet. */
-/* Supplied declaration required: FUN_003a476c. */
-extern unsigned int FUN_0042d694(unsigned int);
-
-
-unsigned int FUN_004bb35c(int param_1)
-
+// Initialize the card message box, translating its state to menu status bits.
+u32 FUN_004bb35c(CecCardOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_0042d694(0x19a2);
-  FUN_003a476c(temp_v0,g_resourceDispatchContext,s__SHIN_MEGAMITENSEI_4_0057f2cc,*(unsigned int *)(param_1 + 4),
-               0x1200,s_Shin_Megami_Tensei_I_0057f34a,0x20,99);
-  switch(temp_v0) {
-  default:
-    cecSettingsSet(2,3,0xff,0);
-    temp_v0 = FUN_0042d694(0x19a2);
-    temp_v1 = cecWriteMessageBoxNameAndData(temp_v0,g_resourceDispatchContext,s_Shin_Megami_Tensei_I_0057f34a,
-                         *(unsigned int *)(param_1 + 4),0x1200);
-    if (temp_v1 != 5) {
-      return 0;
+    u32 box = FUN_0042d694(0x19a2);
+    s32 result = FUN_003a476c(box, g_resourceDispatchContext, s__SHIN_MEGAMITENSEI_4_0057f2cc,
+                            owner->data, 0x1200, s_Shin_Megami_Tensei_I_0057f34a, 32, 99);
+    switch (result) {
+    case 2:
+    case 3:
+    case 5:
+    case 7:
+        return 0x11;
+    case 4:
+        return 3;
+    case 6:
+        return 0x81;
+    default:
+        cecSettingsSet(2, 3, 255, 0);
+        box = FUN_0042d694(0x19a2);
+        result = cecWriteMessageBoxNameAndData(box, g_resourceDispatchContext,
+                                             s_Shin_Megami_Tensei_I_0057f34a, owner->data, 0x1200);
+        return result == 5 ? 0x11 : 0;
     }
-    return 0x11;
-  case 2:
-  case 3:
-  case 5:
-  case 7:
-    return 0x11;
-  case 4:
-    return 3;
-  case 6:
-    return 0x81;
-  }
 }
-
-} /* extern "C" */
+}

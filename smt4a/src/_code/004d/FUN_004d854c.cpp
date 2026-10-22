@@ -1,58 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d854c` (_code @ 0x4d854c, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: nullable-owner guards merge and transform constants are scheduled differently. */
+#include "battle/btlView.h"
 
 extern "C" {
+extern void *g_handleRegistry;
+void FUN_0040aad4(BattleViewOwner *owner, BattleViewObject *parent);
+void FUN_003fd924(BattleViewObject *object, u32 index, u32 kind, f32 x, f32 y, f32 z);
+void FUN_003fd7c0(BattleViewObject *object, u32 index, u32 kind, f32 value);
+void controllerSetPosition(BattleViewObject *object, f32 x, f32 y, f32 z);
+void FUN_003fd7b4(BattleViewObject *object, f32 x, f32 y, f32 z);
+void controllerSetRotationEulerDegrees(BattleViewObject *object, f32 x, f32 y, f32 z);
+void handleRegistryRegisterObject(void *registry, BattleViewObject *object);
 
-int controllerSetPosition(unsigned int);
-int FUN_003fd7b4(unsigned int);
-int FUN_003fd7c0(unsigned int, int, int);
-int FUN_003fd924(unsigned int, int, int);
-int controllerSetRotationEulerDegrees(unsigned int);
-int FUN_0040aad4(int, int);
-int handleRegistryRegisterObject(unsigned int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_003fd7c0. */
-/* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: FUN_0040aad4. */
-/* Supplied declaration required: handleRegistryRegisterObject. */
-
-
-void FUN_004d854c(int *param_1)
-
+void FUN_004d854c(BattleViewOwner **slot)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_0040aad4(*param_1,0);
-  temp_v0 = *(unsigned int *)(*param_1 + 4);
-  if (*param_1 != 0) {
-    FUN_003fd924(temp_v0,0,1);
-  }
-  if (*param_1 != 0) {
-    FUN_003fd7c0(*(unsigned int *)(*param_1 + 4),0,2);
-  }
-  if (*param_1 != 0) {
-    controllerSetPosition(*(unsigned int *)(*param_1 + 4));
-  }
-  if (*param_1 != 0) {
-    FUN_003fd7b4(*(unsigned int *)(*param_1 + 4));
-  }
-  if (*param_1 != 0) {
-    controllerSetRotationEulerDegrees(*(unsigned int *)(*param_1 + 4));
-  }
-  handleRegistryRegisterObject(g_handleRegistry,temp_v0);
-  return;
+    FUN_0040aad4(*slot, 0);
+    BattleViewObject *registered = (*slot)->object;
+    if (*slot != 0) {
+        FUN_003fd924((*slot)->object, 0, 1, 1.0f, 1.0f, 1.0f);
+    }
+    if (*slot != 0) {
+        FUN_003fd7c0((*slot)->object, 0, 2, 1.0f);
+    }
+    if (*slot != 0) {
+        controllerSetPosition((*slot)->object, 0.0f, 0.0f, 0.0f);
+    }
+    if (*slot != 0) {
+        FUN_003fd7b4((*slot)->object, 1.0f, 1.0f, 1.0f);
+    }
+    if (*slot != 0) {
+        controllerSetRotationEulerDegrees((*slot)->object, 1.0f, 1.0f, 1.0f);
+    }
+    handleRegistryRegisterObject(g_handleRegistry, registered);
 }
-
-} /* extern "C" */
+}

@@ -14,7 +14,7 @@ int FUN_0018152c(...);
 int FUN_001835b4(...);
 int FUN_00183788(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -53,7 +53,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int gameGetOptions(void);
 extern int gameOptionsClassifyMode(void);
 
@@ -93,7 +93,7 @@ unsigned int FUN_00155840(void)
     }
     temp_v3 = vec2GetXInt(temp_v4 + 0x30);
     temp_v9 = 0.25f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     efctSetSpeed();
     temp_v2 = FUN_001834a4(8,0xda);

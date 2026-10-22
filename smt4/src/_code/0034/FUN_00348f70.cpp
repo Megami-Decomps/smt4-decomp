@@ -1,57 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348f70` (_code @ 0x348f70, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the two updated quest flag bytes use different temporary registers. */
+#include "quest_center/QuestRuntime.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
+GameSaveData *gameDataBlocksGetSaveData(void);
+u32 questReadRuntimeFlag(u32 questId, u32 selector);
+const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 questId);
+s32 questRequirementsMet(u32 questId);
+QuestRuntimeFlagBlock *gameGetFlagBlock(void);
+s32 FUN_00287894(u32 questId);
+void FUN_0028eeb8(u32 questId);
 
-int FUN_0028eeb8(int);
-int dataTable1bOr1cGetRecord(void);
-
-extern int questRequirementsMet(unsigned int);
-extern int FUN_00287894(unsigned int);
-/* Supplied declaration required: FUN_0028eeb8. */
-extern int FUN_00298fa0(unsigned int, unsigned int);
-extern int gameGetFlagBlock(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int gameDataBlocksGetSaveData(void);
-
-
-unsigned int FUN_00348f70(void)
-
+/* Activate newly eligible category-six quests and snapshot their progress bookkeeping. */
+u32 FUN_00348f70(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = gameDataBlocksGetSaveData();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  *(unsigned int *)(temp_v0 + 0x1f85c) = *(unsigned int *)(temp_v0 + 0x1f458);
-  do {
-    temp_v0 = FUN_00298fa0(temp_v2 & 0xffff,0);
-    if (temp_v0 == 0) {
-      temp_v1 = temp_v2;
-      dataTable1bOr1cGetRecord();
-      if ((((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\x06')) && ((*(unsigned char *)(temp_v1 + 7) & 1) == 0))
-         && (temp_v0 = questRequirementsMet(temp_v2 & 0xffff), temp_v0 != 0)) {
-        temp_v1 = temp_v2;
-        temp_v0 = gameGetFlagBlock();
-        temp_v0 = temp_v0 + temp_v1 * 4;
-        *(unsigned char *)(temp_v0 + 0x201) = 0;
-        *(unsigned char *)(temp_v0 + 0x202) = *(unsigned char *)(temp_v0 + 0x202) & 0xfe;
-        *(unsigned char *)(temp_v0 + 0x200) = (*(unsigned char *)(temp_v0 + 0x200) & 0x3f) | 0x21;
-        temp_v0 = FUN_00287894(temp_v1);
-        if (temp_v0 == 0) {
-          FUN_0028eeb8(temp_v1);
+    GameSaveData *save = gameDataBlocksGetSaveData();
+    save->questSnapshot.value = save->questCurrentValue;
+    u32 changed = 0;
+    for (s32 index = 0; index < 400; ++index) {
+        if (!questReadRuntimeFlag(static_cast<u16>(index), 0)) {
+            const QuestRuntimeDefinition *definition = dataTable1bOr1cGetRecord(static_cast<u16>(index));
+            if (definition && definition->kind == 6 && !(definition->flags & 1) &&
+                questRequirementsMet(static_cast<u16>(index))) {
+                u16 questId = static_cast<u16>(index);
+                QuestRuntimeStatus *status = &gameGetFlagBlock()->quests[questId];
+                status->progress = 0;
+                status->stateFlags &= ~1;
+                status->flags = (status->flags & ~0xC0) | 0x21;
+                if (!FUN_00287894(questId)) {
+                    FUN_0028eeb8(questId);
+                }
+                changed = 1;
+            }
         }
-        temp_v3 = 1;
-      }
     }
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 400);
-  return temp_v3;
+    return changed;
 }
-
-} /* extern "C" */
+}

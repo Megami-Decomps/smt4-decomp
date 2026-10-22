@@ -6,7 +6,7 @@ extern "C" {
 
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bcf4c(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -39,7 +39,7 @@ extern int FUN_002b6ad0(void);
 extern int FUN_002b6b04(void);
 extern int gameGetSupportUnitData(void);
 extern int gameGetOptionProgressStatus(void);
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: FUN_002be5a4. */
@@ -91,7 +91,7 @@ unsigned int FUN_0011aa94(void)
     }
     temp_v3 = vec2GetXInt(temp_v4 + 0x30);
     temp_v9 = 0.27f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     efctSetSpeed();
     temp_v2 = FUN_002bf4f8(0xe,0xda);

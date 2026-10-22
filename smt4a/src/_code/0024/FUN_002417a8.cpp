@@ -1,48 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002417a8` (_code @ 0x2417a8, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: status/category comparison branches are shared differently from retail. */
+/* Orders entries by status, category six last, then their table sort order. */
+#include "gamedata/EntrySortRecord.h"
 
 extern "C" {
+u32 partyEntryFlagsBit3(u16 id);
+EntrySortRecord *FUN_001ad9b4(u16 id);
 
-int FUN_001ad9b4(void);
-
-/* Supplied declaration required: FUN_001ad9b4. */
-extern unsigned int partyEntryFlagsBit3(unsigned short);
-
-
-void FUN_002417a8(unsigned short *param_1,unsigned short *param_2)
-
+static inline s32 compareEntryOrder(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = partyEntryFlagsBit3(*param_1);
-  temp_v2 = 0;
-  temp_v1 = partyEntryFlagsBit3(*param_2);
-  if ((temp_v1 & ~temp_v0) != 0) {
-    temp_v2 = -1;
-  }
-  if (((temp_v0 & ~temp_v1) == 0) && (temp_v2 == 0)) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_001ad9b4();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_001ad9b4();
-    if ((temp_v0 != 0) && (temp_v1 != 0)) {
-      if (*(char *)(temp_v0 + 6) != '\x06') {
-        if (*(char *)(temp_v1 + 6) == '\x06') {
-          return;
-        }
-      }
-      else if (*(char *)(temp_v1 + 6) != '\x06') {
-        return;
-      }
-      FUN_001ad9b4();
-      FUN_001ad9b4();
+    EntrySortRecord *first = FUN_001ad9b4(*left);
+    EntrySortRecord *second = FUN_001ad9b4(*right);
+    s32 order = 0;
+    if (first != NULL && second != NULL) {
+        order = first->order - second->order;
     }
-  }
-  return;
+    return order;
 }
 
-} /* extern "C" */
+s32 FUN_002417a8(const u16 *left, const u16 *right)
+{
+    u32 firstFlags = partyEntryFlagsBit3(*left);
+    s32 order = 0;
+    u32 secondFlags = partyEntryFlagsBit3(*right);
+    if ((secondFlags & ~firstFlags) != 0) {
+        order = -1;
+    }
+    if ((firstFlags & ~secondFlags) != 0) {
+        order = 1;
+    } else if (order == 0) {
+        EntrySortRecord *first = FUN_001ad9b4(*left);
+        EntrySortRecord *second = FUN_001ad9b4(*right);
+        if (first == NULL || second == NULL) {
+            return 0;
+        }
+        if (first->category != 6) {
+            if (second->category == 6) {
+                return -1;
+            }
+        } else if (second->category != 6) {
+            return 1;
+        }
+        order = compareEntryOrder(left, right);
+    }
+    return order;
+}
+}

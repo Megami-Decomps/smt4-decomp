@@ -52,7 +52,7 @@ AocRecord *stateEntryFindById(AocLoader *loader, u32 id);
 s32 nkdwLoaderParse(AocRecord *record);
 s32 FUN_003fce08(AocRecord *record, s32 arg);
 void aocHandleButtons(AocRecord *record, s32 mode);
-void FUN_003fce8c(AocRecord *record, s32 arg);
+void btlEnsureEnemyDrawResources(AocRecord *record, s32 arg);
 AocLoaderTask *FUN_003e0510(AocLoaderTask *task, AocLoader *loader);
 
 } /* extern "C" */
@@ -81,7 +81,7 @@ AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
             if (FUN_003fce08(record, 1) == 0) {
                 ready = 0;
             } else {
-                FUN_003fce8c(record, 1);
+                btlEnsureEnemyDrawResources(record, 1);
                 loader->slots[i].state |= 2;
                 loader->records[i] = *record;
             }

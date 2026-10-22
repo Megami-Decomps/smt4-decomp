@@ -49,7 +49,10 @@ typedef struct FrameWork {
     /* 0x0F98 */ u8 unkF98;
     /* 0x0F99 */ u8 unkF99;
     /* 0x0F9A */ u8 fadeActive;
-    /* 0x0F9B */ u8 unk0F9B[0x1];
+    /* 0x0F9B */ union {
+        u8 unk0F9B[1];
+        u8 useStandardTextureExtent;
+    };
     /* 0x0F9C */ u8 fadeEnabled;
     /* 0x0F9D */ u8 unkF9D;
     /* 0x0F9E */ u8 unkF9E;
@@ -98,5 +101,7 @@ typedef char FrameWorkASizeCheck[sizeof(FrameWorkA) == 0x1490 ? 1 : -1];
 typedef char FrameWorkOffsets[offsetof(FrameWork, unk10) == 0x10 &&
     offsetof(FrameWork, unk18) == 0x18 && offsetof(FrameWork, unkF98) == 0xF98 &&
     offsetof(FrameWork, unkE8C) == 0xE8C ? 1 : -1];
+typedef char FrameWorkTextureExtentOffsetCheck[
+    offsetof(FrameWork, useStandardTextureExtent) == 0xF9B ? 1 : -1];
 
 #endif

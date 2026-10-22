@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_00208e4c(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
@@ -57,7 +57,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00208e4c. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
@@ -202,7 +202,7 @@ void FUN_001d3018(void)
       temp_v15 = (float)temp_v22;
       temp_v12 = temp_v13 * temp_v16 * temp_v17 + (float)temp_v19 * temp_v12 * temp_v17 +
                (float)((unsigned long long)temp_v19 >> 0x20) * temp_v14 * temp_v17;
-      FUN_00287b0c();
+      mathGetShortestAngleDelta();
       temp_v11 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v15 < temp_v18) << 0x1f) |
                ((unsigned int)(temp_v15 == temp_v18) << 0x1e);
       *(float *)(temp_v7 + 0xb4) = temp_v15;

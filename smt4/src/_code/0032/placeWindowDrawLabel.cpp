@@ -29,7 +29,7 @@ void FUN_002c39a4(RenderCtx *context);
 u32 FUN_002c5d80(u32 slot, u32 flags);
 s32 vec2GetXInt(const PlaceWindowPosition *position);
 s32 vec2GetYInt(const PlaceWindowPosition *position);
-f32 FUN_002ba12c(RenderCtx *context, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void FUN_002bf380(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
 PlaceWindowFrame *FUN_002bf4f8(u32 group, u32 frame);
 void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 offset, f32 opacity);
@@ -47,7 +47,7 @@ u32 placeWindowDrawLabel(void)
     u32 state = FUN_002c5d80(1, 0);
     renderStackPush(&context->stackA, state);
     s32 x = vec2GetXInt(&window->position);
-    x += static_cast<s32>(FUN_002ba12c(g_titleScene, 0.27f));
+    x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
     s32 y = vec2GetYInt(&window->position);
     FUN_002bf380(2, 0xe, 0xe, x, y, 0x65);
     PlaceWindowFrame *frame = FUN_002bf4f8(0xe, 0x10b);

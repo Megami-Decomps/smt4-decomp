@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002268d0(...);
-int FUN_0022699c(...);
+int btlQueueReflectAction(...);
 int FUN_002505c0(...);
 int FUN_002550d8(int, int, int, int);
 int FUN_0027da30(...);
@@ -25,7 +25,7 @@ typedef struct {
 extern int g_btlActionReflect; /* 0x434290 */
 
 /* Supplied declaration required: FUN_002268d0. */
-/* Supplied declaration required: FUN_0022699c. */
+/* Supplied declaration required: btlQueueReflectAction. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: FUN_0027da30. */
@@ -57,7 +57,7 @@ FUN_0027df30(int param_1,unsigned int param_2,int param_3,unsigned int param_4,i
     btlMainFindEntryByListedId(temp_v2,(int)*(short *)(param_3 + 0x62));
     if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_11)) {
       temp_v4 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)temp_v1,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,(int)temp_v1,0,param_2);
       *(unsigned char *)(temp_v4 + 4) = 6;
       *(int *)(temp_v4 + 0x18) = temp_v2;
       *(int *)(temp_v4 + 0x28) = param_11;
@@ -71,13 +71,13 @@ FUN_0027df30(int param_1,unsigned int param_2,int param_3,unsigned int param_4,i
         FUN_002268d0(param_1,0,param_2,param_3,param_5,param_6,5,param_12,1);
       }
       temp_v4 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v2,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
       *(unsigned char *)(temp_v4 + 4) = 0x1c;
       *(int *)(temp_v4 + 0x14) = param_3;
       *(unsigned int *)(temp_v4 + 0x28) = 0;
       *(int *)(temp_v4 + 0x4c) = param_5;
       temp_v4 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v2,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
       *(unsigned char *)(temp_v4 + 4) = 0x1c;
       *(int *)(temp_v4 + 0x14) = param_3;
       *(unsigned int *)(temp_v4 + 0x28) = 1;
@@ -91,7 +91,7 @@ LAB_0027e16c:
         FUN_002268d0(param_1,0,param_2,param_3,param_5,0,2,param_12,1);
       }
       temp_v4 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v2,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
       *(unsigned char *)(temp_v4 + 4) = 0x1c;
       *(int *)(temp_v4 + 0x14) = param_3;
       *(unsigned int *)(temp_v4 + 0x28) = 0;
@@ -109,7 +109,7 @@ LAB_0027e16c:
       FUN_002268d0(param_1,0,param_2,param_3,param_6,0,3,param_12,1);
     }
     temp_v4 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,temp_v2,0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
     *(unsigned char *)(temp_v4 + 4) = 0x1c;
     *(int *)(temp_v4 + 0x14) = param_3;
     *(unsigned int *)(temp_v4 + 0x28) = 1;
@@ -132,7 +132,7 @@ LAB_0027e16c:
       }
     }
     temp_v2 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,(int)(short)((short)param_1 + 1),0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_1 + 1),0,param_2);
     *(unsigned char *)(temp_v2 + 4) = 0x1d;
     *(int *)(temp_v2 + 0x14) = param_3;
     *(unsigned int *)(temp_v2 + 0x28) = 0;
@@ -140,11 +140,11 @@ LAB_0027e16c:
     if ((temp_v0) && ((temp_v3 & ~param_8 & 0x586) == 0)) {
       temp_v4 = (int)(short)((short)param_1 + 2);
       temp_v2 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v4,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v4,0,param_2);
       *(unsigned char *)(temp_v2 + 4) = 0x14;
       *(int *)(temp_v2 + 0x14) = param_3;
       temp_v2 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v4,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v4,0,param_2);
       *(unsigned char *)(temp_v2 + 4) = 10;
       *(int *)(temp_v2 + 0x14) = param_3;
       *(unsigned int *)(temp_v2 + 0x28) = param_8;

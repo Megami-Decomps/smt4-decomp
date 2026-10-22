@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00288e68(void);
 int FUN_0029212c(int);
-int FUN_0029c94c(...);
+int buttonHelpShowSkillDetails(...);
 int FUN_0029ee6c(int, int);
 int FUN_0029efc0(...);
 
@@ -19,7 +19,7 @@ extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_0029212c. */
-/* Supplied declaration required: FUN_0029c94c. */
+/* Supplied declaration required: buttonHelpShowSkillDetails. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
@@ -40,7 +40,7 @@ void FUN_00299900(unsigned int param_1)
   case 9:
     temp_v1 = FUN_0029efc0(g_camp + 0x1dc);
     temp_v2 = FUN_0029efa8(temp_v0 + 0x1dc);
-    FUN_0029c94c(*(unsigned int *)(temp_v0 + (temp_v2 + temp_v1) * 8 + 0xe3c));
+    buttonHelpShowSkillDetails(*(unsigned int *)(temp_v0 + (temp_v2 + temp_v1) * 8 + 0xe3c));
     return;
   case 10:
     break;
@@ -102,7 +102,7 @@ void FUN_00299900(unsigned int param_1)
   temp_v2 = FUN_0029efa8(temp_v0 + 0x240);
   if (*(short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x1db4) != 0) {
     FUN_00288e68();
-    FUN_0029c94c();
+    buttonHelpShowSkillDetails();
     return;
   }
   FUN_0029ee6c(0,0x323232ff);

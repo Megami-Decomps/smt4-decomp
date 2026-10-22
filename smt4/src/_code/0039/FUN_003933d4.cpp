@@ -1,60 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003933d4` (_code @ 0x3933d4, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: intrinsic-dimension cases are merged differently and resource constants occupy different literal-pool positions. */
+/* Draws an indexed resource record, using its intrinsic dimensions when requested. */
+#include "common.h"
 
 extern "C" {
+void *asdTMTexTableCallFileB(u32 bank, u32 id);
+void FUN_002a6d1c(void *parameters, u32 flags, u32 first, u32 second, u32 third);
+void FUN_003937e4(void *group, void *entry, const void *parameters);
 
-int FUN_002a6d1c(unsigned int [5], unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_003937e4(int, int, unsigned int [5]);
-
-/* stack frame of param_8: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_8_stack;
-
-/* Supplied declaration required: FUN_002a6d1c. */
-extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003937e4. */
-
-
-void FUN_003933d4(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5,
-                 unsigned int param_6,unsigned int param_7,unsigned int param_8)
-
+void FUN_003933d4(void *object, u32 flags, u32 bank, u32 id, s32 index, u32 first, u32 second, u32 third)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  unsigned int temp_v2 [5];
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = asdTMTexTableCallFileB(param_3,param_4);
-  temp_v1 = *param_1 + (param_5 / 1000) * 0x20;
-  *(unsigned int *)(temp_v1 + 8) = *(unsigned int *)(temp_v0 + 8);
-  temp_v0 = **(int **)(temp_v1 + 4) + (param_5 % 1000) * 0x14;
-  psVar2 = *(short **)(temp_v0 + 0xc);
-  FUN_002a6d1c(temp_v2,param_2,param_6,param_7,param_8);
-  if (psVar2 != (short *)0x0) {
-    if (psVar2[2] == 0) {
-      if ((*(unsigned char *)(psVar2 + 6) & 1) == 0) {
-        FUN_003937e4(temp_v1,temp_v0,temp_v2);
-        return;
-      }
-      temp_v2[0] = temp_v2[0] | 0x8000;
-      temp_v3 = (int)*psVar2;
-      temp_v4 = (int)psVar2[1];
+    struct TextureHeader { u8 unk00[8]; void *resource; };
+    struct Dimensions {
+        s16 width;
+        s16 height;
+        u16 kind;
+        u8 unk06[6];
+        u8 flags;
+    };
+    struct Entry {
+        u8 unk00[0xC];
+        Dimensions *dimensions;
+        u32 unk10;
+    };
+    struct EntryList { Entry *begin; };
+    struct Group {
+        u32 unk00;
+        EntryList *entries;
+        void *resource;
+        u8 unk0C[0x14];
+    };
+    struct Owner { Group *groups; };
+    struct DrawParameters {
+        u32 flags;
+        s32 x;
+        s32 y;
+        u32 alpha;
+        u32 unk10;
+        u32 width;
+        u32 height;
+        u8 unk1C[0x10];
+        u16 scaleX;
+        u16 scaleY;
+        f32 angle;
+        s16 anchorX;
+        s16 anchorY;
+        s16 offsetX;
+        s16 offsetY;
+    };
+    TextureHeader *texture = (TextureHeader *)asdTMTexTableCallFileB(bank, id);
+    Group *group = &((Owner *)object)->groups[index / 1000];
+    group->resource = texture->resource;
+    Entry *entry = &group->entries->begin[index % 1000];
+    Dimensions *dimensions = entry->dimensions;
+    DrawParameters parameters;
+    FUN_002a6d1c(&parameters, flags, first, second, third);
+    if (dimensions != NULL) {
+        if (dimensions->kind == 0) {
+            if (!(dimensions->flags & 1)) {
+                FUN_003937e4(group, entry, &parameters);
+                return;
+            }
+            parameters.flags |= 0x8000;
+            parameters.width = dimensions->width;
+            parameters.height = dimensions->height;
+        } else if (dimensions->kind == 1) {
+            parameters.width = dimensions->width;
+            parameters.height = dimensions->height;
+        }
     }
-    if (psVar2[2] == 1) {
-      temp_v3 = (int)*psVar2;
-      temp_v4 = (int)psVar2[1];
-    }
-  }
-  FUN_003937e4(temp_v1,temp_v0,temp_v2);
-  return;
+    FUN_003937e4(group, entry, &parameters);
 }
-
-} /* extern "C" */
+}

@@ -1,56 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df4dc` (_code @ 0x3df4dc, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: native result construction uses different saved registers and omits retail's removed-hook NOPs. */
+#include "classes/WindowStatus.h"
 
 extern "C" {
+u32 FUN_00352f50(u64 handle);
+u32 FUN_00352078(u32 mode, u64 handle, void *buffer, u32 size);
 
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_00352078(int, int, int, int, unsigned int, unsigned int);
-int FUN_00352f50(void);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00352078. */
-/* Supplied declaration required: FUN_00352f50. */
-
-
-void FUN_003df4dc(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
-
+// Execute a file operation and translate the service's two special failures to window status codes.
+WindowStatusResult FUN_003df4dc(const u64 *handle, void *buffer, u32 size)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_2;
-  if (temp_v0 == 0 && param_2[1] == 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,0xe0a13882);
-    return;
-  }
-  FUN_00352f50();
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  temp_v0 = 1;
-  FUN_00352078(1,0,*param_2,param_2[1],param_3,param_4);
-  if (temp_v0 == -0x277f7fc5) {
-    _ZN18WindowStatusResultC1Ej(param_1,0xd8813889);
-    return;
-  }
-  if (temp_v0 == -0x26ff7fc2) {
-    _ZN18WindowStatusResultC1Ej(param_1,0xd8e1389b);
-    return;
-  }
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,0);
-  return;
+    if (*handle == 0)
+        return WindowStatusResult(0xe0a13882);
+    u32 result = FUN_00352f50(*handle);
+    if ((s32)result < 0)
+        return WindowStatusResult(result);
+    result = FUN_00352078(1, *handle, buffer, size);
+    if (result == 0xd880803b)
+        return WindowStatusResult(0xd8813889);
+    if (result == 0xd900803e)
+        return WindowStatusResult(0xd8e1389b);
+    if ((s32)result < 0)
+        return WindowStatusResult(result);
+    return WindowStatusResult(0);
 }
-
-} /* extern "C" */
+}

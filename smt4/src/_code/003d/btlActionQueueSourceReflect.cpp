@@ -27,7 +27,7 @@ struct BattleMember {
 
 extern BattleActionQueue *g_btlActionReflect;
 void *btlGetMainState(void);
-BattleAction *FUN_0022699c(BattleActionQueue *queue, s16 id, u32 mode, u32 argument);
+BattleAction *btlQueueReflectAction(BattleActionQueue *queue, s16 id, u32 mode, u32 argument);
 BattleMember *FUN_0027da30(void *state, s32 memberId);
 
 /* Queues a kind-0x27 reflect action for an active source record unless one with the same argument is already queued. */
@@ -48,7 +48,7 @@ BattleAction *btlActionQueueSourceReflect(s32 id, u32 argument, BtlActionRecord 
         }
     }
     state = btlGetMainState();
-    action = FUN_0022699c(g_btlActionReflect, (s16)id, 0, argument);
+    action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
     member = FUN_0027da30(state, source->memberId);
     action->kind = 0x27;
     action->source = source;

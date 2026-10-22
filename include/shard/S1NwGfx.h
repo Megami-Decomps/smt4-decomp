@@ -14,6 +14,11 @@ typedef struct RelativePointer {
     {
         return offset != 0 ? (void *)((u8 *)this + offset) : NULL;
     }
+
+    void set(void *target)
+    {
+        offset = target != NULL ? reinterpret_cast<u32>(target) - reinterpret_cast<u32>(this) : 0;
+    }
 } RelativePointer;
 
 /* One vertex stream of a shape. */

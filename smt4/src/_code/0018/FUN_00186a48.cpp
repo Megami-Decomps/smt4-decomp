@@ -7,7 +7,7 @@ extern "C" {
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int FUN_002b0750(int, int, int, int, int, int, int, int);
 int effectRenderTransformedInstance(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002bf288(...);
@@ -33,7 +33,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: drawSkillCategoryLabel. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -82,7 +82,7 @@ void FUN_00186a48(void)
     temp_v8 = vec2GetYInt(temp_v1 + 0x34);
   }
   temp_v12 = 0.3f;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   if (*(int *)(temp_v1 + 4) >= 0x12) {
     if (*(int *)(temp_v1 + 4) == 0x13) {
       VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -116,7 +116,7 @@ void FUN_00186a48(void)
   }
   temp_v13 = 0.295f;
   temp_v12 = temp_v13;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v7 = FUN_002bf4f8(0x29,0x4e);
   if (*(int *)(temp_v1 + 4) != 0x13) {
     if ((*(int *)(temp_v1 + 4) == 0x11) && (temp_v2 = *(int *)(temp_v1 + 0x10), 5 >= temp_v2)) {
@@ -181,12 +181,12 @@ void FUN_00186a48(void)
     }
     efctSetSpeed();
     temp_v13 = 0.29f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     if (*(char *)(temp_v1 + 0x37a) != '\0') {
       FUN_002bf288(2,0x29,0x52,*(int *)(temp_v1 + 0x5e8) + temp_v9 + (int)temp_v13,
                    *(int *)(temp_v1 + 0x5e8) + temp_v8,0xa1);
       temp_v13 = 0.285f;
-      FUN_002ba12c(g_titleScene);
+      renderCtxCalculateStereoParallax(g_titleScene);
       FUN_002bf288(2,0x29,0x53,(temp_v9 - *(int *)(temp_v1 + 0x5e8)) + (int)temp_v13,
                    temp_v8 - *(int *)(temp_v1 + 0x5e8),0xa6);
     }
@@ -194,7 +194,7 @@ void FUN_00186a48(void)
       VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
       effectRenderTransformedInstance(temp_v1 + 0x2f0);
     }
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v8 = temp_v8 + temp_v11;
     FUN_002bf288(2,0x29,0x51,temp_v9 + temp_v10 + (int)temp_v12,temp_v8,0xa1);
     temp_v11 = FUN_002bf4f8(0x29,0x54);

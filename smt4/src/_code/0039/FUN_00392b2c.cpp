@@ -5,7 +5,7 @@
 extern "C" {
 
 int effectRenderTransformedInstance(int);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002bf380(int, int, int, int, int, int);
@@ -26,7 +26,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -79,13 +79,13 @@ void FUN_00392b2c(int param_1)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
     temp_v4 = 0.38f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     FUN_002bf380(2,0x11,0,0,0,0xb);
     efctSetSpeed();
     FUN_002bf288(2,0x1d,2000,(int)temp_v4,0,0xb);
     efctSetSpeed();
     temp_v4 = 0.36f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v3 = g_titleScene;
     temp_v5 = (unsigned long long)(unsigned int)(int)temp_v4;
     temp_v0 = packNibblesAndByte(6,1,0);

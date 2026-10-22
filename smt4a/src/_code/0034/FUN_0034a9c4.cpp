@@ -1,53 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034a9c4` (_code @ 0x34a9c4, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: session and option registers differ, and the record-flag test lowers to BIC rather than TST. */
+#include "shard/Shard0033.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
+extern ObjBRef g_gameGlobals;
+void FUN_0035ad50(u32 id, void *record);
+void FUN_0026fd50(void *display, const void *record, u32 mode, u32 options);
+DevilRecord *dataTable00FindById(u32 id);
 
-int dataTable00FindById(void);
-int FUN_0026fd50(int, unsigned char [300], int, unsigned int);
-int FUN_0035ad50(unsigned int, unsigned char [300]);
-
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_0026fd50. */
-/* Supplied declaration required: FUN_0035ad50. */
-
-
-void FUN_0034a9c4(unsigned int param_1,unsigned int param_2)
-
+// Load a character into the session display and update whether it can be selected.
+void FUN_0034a9c4(u32 id, u32 options)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2 [300];
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  temp_v1 = 1;
-  *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010) = 1;
-  FUN_0035ad50(param_1,temp_v2);
-  *(unsigned char *)(temp_v0 + 0x2017) = 5;
-  FUN_0026fd50(temp_v0 + 0x1390,temp_v2,0,param_2);
-  *(unsigned char *)(temp_v0 + 0x20b0) = 1;
-  if (-1 < (short)param_1) {
-    param_1 = param_1 & 0xffff;
-    dataTable00FindById();
-    if (param_1 == 0) {
-      temp_v1 = 0;
+    u8 record[300];
+    ObjB *session = g_gameGlobals.instance;
+    bool allowed = true;
+    session->sessionDisplay.active = 1;
+    FUN_0035ad50(id, record);
+    session->unk2017 = 5;
+    FUN_0026fd50(session->block1390, record, 0, options);
+    session->unk20B0 = 1;
+    if ((s16)id >= 0) {
+        DevilRecord *devil = dataTable00FindById(id & 0xffff);
+        if (devil == NULL)
+            allowed = false;
+        else {
+            allowed = !(devil->links.linkFlags & 0x400);
+            if (g_gameGlobals.instance && g_gameGlobals.instance->unk2017 == 17)
+                allowed = false;
+        }
     }
-    else {
-      temp_v1 = (*(unsigned short *)(param_1 + 0x16) & 0x400) == 0;
-      if (((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2017) == '\x11')) {
-        temp_v1 = 0;
-      }
-    }
-  }
-  *(unsigned char *)(temp_v0 + 0x2032) = temp_v1;
-  if ((!temp_v1) && (*(char *)(temp_v0 + 0x137d) != '\0')) {
-    *(unsigned char *)(temp_v0 + 0x137d) = 0;
-  }
-  return;
+    session->sessionEligibility.allowed = allowed;
+    if (!allowed && session->sessionSelection.pending)
+        session->sessionSelection.pending = 0;
 }
-
-} /* extern "C" */
+}

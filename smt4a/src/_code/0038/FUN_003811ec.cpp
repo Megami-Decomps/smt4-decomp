@@ -18,7 +18,7 @@ typedef struct SortItem {
 } SortItem;
 
 extern int idIsAbove400(int id);
-extern int FUN_003a679c(int id);
+extern int itemGetCategorySortOrder(int id);
 extern int dataTable04GetCategoryOrder(int id);
 extern DataRow *dataTable04FindById(int id);
 extern SlotRecord *gameGetSlotRecord(int slot);
@@ -41,7 +41,7 @@ int FUN_003811ec(SortItem *a, SortItem *b)
         subA = 99;
         orderA = 0;
     } else {
-        rankA = FUN_003a679c(a->id);
+        rankA = itemGetCategorySortOrder(a->id);
         subA = dataTable04GetCategoryOrder(a->id);
         orderA = dataTable04FindById(a->id)->order;
     }
@@ -50,7 +50,7 @@ int FUN_003811ec(SortItem *a, SortItem *b)
         subB = 99;
         orderB = 0;
     } else {
-        rankB = FUN_003a679c(b->id);
+        rankB = itemGetCategorySortOrder(b->id);
         subB = dataTable04GetCategoryOrder(b->id);
         orderB = dataTable04FindById(b->id)->order;
     }

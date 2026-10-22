@@ -5,7 +5,7 @@
 extern "C" {
 
 int effectRenderTransformedInstance(int);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -14,7 +14,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int btlGetMainState(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int vec2GetXInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -36,7 +36,7 @@ void FUN_00218c50(int param_1)
   if ((*(int *)(param_1 + 0x2180) != 0) &&
      (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x200) == 0)) {
     temp_v6 = 0.29f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v0 = vec2GetXInt(param_1 + 0x20f0);
     temp_v0 = temp_v0 + (int)temp_v6;
     temp_v5 = 0;

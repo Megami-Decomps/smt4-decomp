@@ -1,56 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042d5b4` (_code @ 0x42d5b4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: critical-section constant reloads and result-branch lowering differ. */
+#include "common.h"
+
+struct ResourceSyncState {
+    u8 enabled;
+    u8 ready;
+    u8 pending;
+    u8 unk03;
+    s8 available;
+};
 
 extern "C" {
+extern ResourceSyncState DAT_005b4486;
+extern u32 DAT_006426b4;
+s32 FUN_0042fbd4(void);
+u32 resourceDispatch2(u32);
+u32 FUN_004320c4(u32);
+void nn_os_CriticalSection_Enter(void *);
+void nn_os_CriticalSection_Leave(void *);
 
-extern signed char DAT_005b4486; /* 0x5b4486 */
-extern signed char DAT_005b4487; /* 0x5b4487 */
-extern signed char DAT_005b4488; /* 0x5b4488 */
-extern signed char DAT_005b448a; /* 0x5b448a */
-extern unsigned int DAT_006426b4; /* 0x6426b4 */
-
-extern int FUN_0042fbd4(void);
-extern unsigned int resourceDispatch2(unsigned int);
-extern unsigned int FUN_004320c4(unsigned int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned int FUN_0042d5b4(int param_1)
-
+// Synchronize pending resource work, optionally dispatching a new request.
+u32 FUN_0042d5b4(s32 dispatch)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0xc8a10bf0;
-  if ((DAT_005b4486 != '\0') || (temp_v0 = FUN_0042fbd4(), temp_v0 != 0)) {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_006426b4);
-    temp_v1 = 0;
-    if (param_1 != 0) {
-      temp_v0 = FUN_0042fbd4();
-      if (temp_v0 == 0 && DAT_005b448a == '\0') {
-        temp_v1 = 0xc8810bea;
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
-        return temp_v1;
-      }
-      temp_v1 = resourceDispatch2(0xe);
+    u32 result = 0;
+    if (DAT_005b4486.enabled == 0 && FUN_0042fbd4() == 0)
+        return 0xc8a10bf0;
+    nn_os_CriticalSection_Enter(&DAT_006426b4);
+    if (dispatch != 0) {
+        if ((FUN_0042fbd4() | DAT_005b4486.available) == 0) {
+            nn_os_CriticalSection_Leave(&DAT_006426b4);
+            return 0xc8810bea;
+        }
+        result = resourceDispatch2(14);
     }
-    if (DAT_005b4487 == '\0') {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
-      return 0xc8a10bf0;
+    if (DAT_005b4486.ready == 0) {
+        nn_os_CriticalSection_Leave(&DAT_006426b4);
+        return 0xc8a10bf0;
     }
-    if (DAT_005b4488 != '\0') {
-      temp_v1 = FUN_004320c4(0);
-      if ((temp_v1 & 0x80000000) != 0) {
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
-        return temp_v1;
-      }
-      DAT_005b4488 = '\0';
+    if (DAT_005b4486.pending != 0) {
+        result = FUN_004320c4(0);
+        if (result & 0x80000000) {
+            nn_os_CriticalSection_Leave(&DAT_006426b4);
+            return result;
+        }
+        DAT_005b4486.pending = 0;
     }
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426b4);
-  }
-  return temp_v1;
+    nn_os_CriticalSection_Leave(&DAT_006426b4);
+    return result;
 }
-
-} /* extern "C" */
+}

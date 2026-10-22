@@ -39,7 +39,7 @@ extern unsigned char DAT_004057c0; /* 0x4057c0 */
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_0028eeb8. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern int FUN_00298fa0(unsigned int, unsigned int);
+extern int questReadRuntimeFlag(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -109,7 +109,7 @@ void FUN_00381b8c(unsigned int *param_1)
     temp_v3 = temp_v2;
     dataTable1bOr1cGetRecord();
     if (((temp_v3 != 0) && (*(char *)(temp_v3 + 6) == '\0')) &&
-       (temp_v1 = FUN_00298fa0(temp_v2,1), temp_v1 == 0)) {
+       (temp_v1 = questReadRuntimeFlag(temp_v2,1), temp_v1 == 0)) {
       FUN_0028eeb8(temp_v2);
     }
     temp_v2 = (temp_v2 + 1) & 0xffff;

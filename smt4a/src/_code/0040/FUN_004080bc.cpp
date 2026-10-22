@@ -1,63 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004080bc` (_code @ 0x4080bc, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the route pointer in r0 and copies the direction using paired loads; this source reloads r0 for the call. */
+#include "shard/S1Mover.h"
 
+struct RouteNode {
+    u8 unk00[0x1c];
+    Vec3f position; // 0x1c
+    u8 unk28[8];
+    Vec3f *direction; // 0x30
+};
+struct RouteNodeTable {
+    u8 unk00[0x48];
+    RouteNode **nodes; // 0x48
+};
+struct RouteResource {
+    u8 unk00[0x34];
+    RouteNodeTable *table; // 0x34
+};
+struct RouteActor {
+    u32 unk00;
+    u32 controller; // 0x04
+};
+struct RouteController {
+    s32 nodeCount; // 0x000
+    s32 selectedNode; // 0x004
+    u8 unk008[8];
+    u32 elapsed; // 0x010
+    u8 active; // 0x014
+    u8 restorePosition; // 0x015
+    u8 unk016[6];
+    RouteActor *actor; // 0x01c
+    u8 unk020[0x574];
+    RouteResource *resource; // 0x594
+    s32 mode; // 0x598
+    u8 unk59c[0x18];
+    Vec3f position; // 0x5b4
+    Vec3f direction; // 0x5c0
+    u8 unk5cc[0x3c];
+    Vec3f currentPosition; // 0x608
+    Vec3f savedPosition; // 0x614
+};
 extern "C" {
+void FUN_00407598(RouteController *route);
+void controllerSetDestination(u32 controller, const Vec3f *position);
 
-int controllerSetDestination(unsigned int, int *);
-int FUN_00407598(void);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_00407598. */
-
-
-void FUN_004080bc(int *param_1,int param_2,int param_3,int param_4)
-
+// Select an interior route node and restore the actor's saved position when requested.
+void FUN_004080bc(RouteController *route, s32 index, s32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  param_1[4] = 0;
-  *(unsigned char *)(param_1 + 5) = 0;
-  temp_v3 = param_2 == 0;
-  if (-1 < param_2) {
-    param_4 = *param_1;
-    temp_v3 = param_4 == param_2;
-  }
-  if (!temp_v3 && (-1 < param_2 && param_2 <= param_4)) {
-    param_1[1] = param_2;
-    param_1[0x166] = param_3;
-    temp_v0 = *(int *)(*(int *)(*(int *)(param_1[0x165] + 0x34) + 0x48) + param_2 * 4);
-    piVar2 = *(int **)(temp_v0 + 0x30);
-    temp_v1 = *(int *)(temp_v0 + 0x20);
-    temp_v2 = *(int *)(temp_v0 + 0x24);
-    param_1[0x16d] = *(int *)(temp_v0 + 0x1c);
-    param_1[0x16e] = temp_v1;
-    param_1[0x16f] = temp_v2;
-    temp_v0 = *piVar2;
-    temp_v1 = piVar2[1];
-    param_1[0x172] = piVar2[2];
-    param_1[0x170] = temp_v0;
-    param_1[0x171] = temp_v1;
-    FUN_00407598();
-  }
-  if (*(char *)((int)param_1 + 0x15) == '\0') {
-    return;
-  }
-  param_1[0x182] = param_1[0x185];
-  param_1[0x183] = param_1[0x186];
-  param_1[0x184] = param_1[0x187];
-  controllerSetDestination(*(unsigned int *)(param_1[7] + 4),param_1 + 0x182);
-  return;
+    route->elapsed = 0;
+    route->active = 0;
+    if (index >= 0 && index != route->nodeCount && index <= route->nodeCount) {
+        route->selectedNode = index;
+        route->mode = mode;
+        RouteNode *node = route->resource->table->nodes[index];
+        route->position = node->position;
+        route->direction = *node->direction;
+        FUN_00407598(route);
+    }
+    if (route->restorePosition) {
+        route->currentPosition = route->savedPosition;
+        controllerSetDestination(route->actor->controller, &route->currentPosition);
+    }
 }
-
-} /* extern "C" */
+}

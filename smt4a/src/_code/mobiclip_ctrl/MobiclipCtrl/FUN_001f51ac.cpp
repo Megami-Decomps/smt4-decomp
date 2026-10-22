@@ -1,82 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f51ac` (_code @ 0x1f51ac, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler directly loads saved allocation pointers; retail preserves the getter's r0 result and reloads each heap address. */
+#include "mobiclip_ctrl/MobiclipHeaps.h"
 
 extern "C" {
-
-int asdMemFree(unsigned int);
-int FUN_00422ef8(void);
-int FUN_00426140(void);
-int FUN_00512e38(void);
-int valuePairClear(void);
-int videoResetDeblockerState(void);
-int FUN_00513718(void);
-int mobiclipAllocatorReset(void);
-int FUN_00513f6c(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned int DAT_00617c48; /* 0x617c48 */
-extern unsigned int DAT_00617c78; /* 0x617c78 */
-extern unsigned int DAT_00617ca0; /* 0x617ca0 */
-extern unsigned int DAT_00617cd0; /* 0x617cd0 */
-extern unsigned int DAT_00617cf8; /* 0x617cf8 */
-extern unsigned int DAT_00617d28; /* 0x617d28 */
-extern unsigned int DAT_00617d50; /* 0x617d50 */
-extern unsigned int DAT_00617d80; /* 0x617d80 */
-extern unsigned int DAT_00617da8; /* 0x617da8 */
-extern unsigned int DAT_00617dd8; /* 0x617dd8 */
-extern unsigned int DAT_00617e00; /* 0x617e00 */
-extern unsigned int DAT_00617e30; /* 0x617e30 */
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00422ef8. */
-/* Supplied declaration required: FUN_00426140. */
-/* Supplied declaration required: FUN_00512e38. */
-/* Supplied declaration required: valuePairClear. */
-/* Supplied declaration required: videoResetDeblockerState. */
-/* Supplied declaration required: FUN_00513718. */
-/* Supplied declaration required: mobiclipAllocatorReset. */
-/* Supplied declaration required: FUN_00513f6c. */
-extern void nn_fnd_ExpHeapBase_Finalize(unsigned int);
-
-
-void FUN_001f51ac(void)
-
-{
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_00422ef8();
-  FUN_00426140();
-  FUN_00513f6c();
-  valuePairClear();
-  FUN_00512e38();
-  FUN_00513718();
-  mobiclipAllocatorReset();
-  videoResetDeblockerState();
-  temp_v0 = DAT_00617c78;
-  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617c48);
-  asdMemFree(temp_v0);
-  temp_v0 = DAT_00617cd0;
-  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617ca0);
-  asdMemFree(temp_v0);
-  temp_v0 = DAT_00617d28;
-  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617cf8);
-  asdMemFree(temp_v0);
-  temp_v0 = DAT_00617d80;
-  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617d50);
-  asdMemFree(temp_v0);
-  temp_v0 = DAT_00617dd8;
-  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617da8);
-  asdMemFree(temp_v0);
-  temp_v0 = DAT_00617e30;
-  nn_fnd_ExpHeapBase_Finalize((unsigned int)&DAT_00617e00);
-  asdMemFree(temp_v0);
-  return;
+void FUN_00422ef8(void);
+void FUN_00426140(void);
+void FUN_00513f6c(void);
+void valuePairClear(void);
+void FUN_00512e38(void);
+void FUN_00513718(void);
+void mobiclipAllocatorReset(void);
+void videoResetDeblockerState(void);
+extern MobiclipHeap DAT_00617c48;
+extern MobiclipHeap DAT_00617ca0;
+extern MobiclipHeap DAT_00617cf8;
+extern MobiclipHeap DAT_00617d50;
+extern MobiclipHeap DAT_00617da8;
+extern MobiclipHeap DAT_00617e00;
 }
 
-} /* extern "C" */
+/* Shut down movie devices and release all six backing heaps. */
+extern "C" void FUN_001f51ac(void)
+{
+    FUN_00422ef8();
+    FUN_00426140();
+    FUN_00513f6c();
+    valuePairClear();
+    FUN_00512e38();
+    FUN_00513718();
+    mobiclipAllocatorReset();
+    videoResetDeblockerState();
+    mobiclipFinalizeHeap(&DAT_00617c48);
+    mobiclipFinalizeHeap(&DAT_00617ca0);
+    mobiclipFinalizeHeap(&DAT_00617cf8);
+    mobiclipFinalizeHeap(&DAT_00617d50);
+    mobiclipFinalizeHeap(&DAT_00617da8);
+    mobiclipFinalizeHeap(&DAT_00617e00);
+}

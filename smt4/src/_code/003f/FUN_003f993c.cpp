@@ -1,52 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f993c` (_code @ 0x3f993c, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Hermite VFP scheduling and tail-call lowering differ. */
+#include "shard/AnimCurve.h"
 
 extern "C" {
+const AnimKey *FUN_003f887c(const QuantizedAnimCurve *, f32);
+f32 nn_math_ARMv6_HermiteC_FAST(f32, f32, f32, f32, f32, f32);
 
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned short *FUN_003f887c(void);
-extern unsigned int nn_math_ARMv6_HermiteC_FAST(int, int, unsigned int);
-
-
-unsigned int FUN_003f993c(unsigned short *param_1)
-
+// Evaluate a quantized Hermite segment with signed fixed-point key tangents.
+f32 FUN_003f993c(const QuantizedAnimCurve *curve, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 2 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v2;
-  
-  puVar1 = (unsigned short *)FUN_003f887c();
-  temp_v2 = (float)VectorUnsignedToFloat((unsigned int)*puVar1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = (in_fpscr & 0xfffffff) |
-          ((unsigned int)(*(float *)(param_1 + 8) * temp_v2 * 0.03125f == in_s0) << 0x1e);
-  temp_v1 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-  if (!temp_v1) {
-    temp_v1 = puVar1 == param_1 + (unsigned int)*param_1 * 3 + 7;
-  }
-  if (temp_v1) {
-    VectorUnsignedToFloat((unsigned int)puVar1[1],(unsigned char)(temp_v0 >> 0x16) & 3);
-    return (unsigned int)puVar1[1];
-  }
-  VectorUnsignedToFloat((unsigned int)puVar1[3],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorSignedToFloat((int)(short)puVar1[5],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)puVar1[1],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)puVar1[4],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorSignedToFloat((int)(short)puVar1[2],(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v0 = nn_math_ARMv6_HermiteC_FAST((int)(short)puVar1[2],(int)(short)puVar1[5],(unsigned int)puVar1[4]);
-  return temp_v0;
+    const AnimKey *key = FUN_003f887c(curve, time);
+    f32 keyTime = curve->timeScale * (static_cast<f32>(key->frame) * 0.03125f);
+    if (keyTime == time || key == &curve->keys[curve->keyCount - 1])
+        return curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale;
+    f32 nextTime = curve->timeScale * (static_cast<f32>(key[1].frame) * 0.03125f);
+    return nn_math_ARMv6_HermiteC_FAST(
+        curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale,
+        static_cast<f32>(static_cast<s16>(key->unk02[1])) * 0.00390625f,
+        curve->valueBase + static_cast<f32>(key[1].unk02[0]) * curve->valueScale,
+        static_cast<f32>(static_cast<s16>(key[1].unk02[1])) * 0.00390625f,
+        time - keyTime, nextTime - keyTime);
 }
-
-} /* extern "C" */
+}

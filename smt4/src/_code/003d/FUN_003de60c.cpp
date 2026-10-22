@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022699c(int, int, int, unsigned int);
+int btlQueueReflectAction(int, int, int, unsigned int);
 
 typedef struct fn_003de60c_arg3 fn_003de60c_arg3;
 struct fn_003de60c_arg3 {
@@ -26,7 +26,7 @@ typedef struct {
 
 extern int g_btlActionReflect; /* 0x434290 */
 
-/* Supplied declaration required: FUN_0022699c. */
+/* Supplied declaration required: btlQueueReflectAction. */
 extern int btlGetMainState(void);
 
 
@@ -51,7 +51,7 @@ FUN_003de60c(short param_1,unsigned int param_2,unsigned int param_3,fn_003de60c
          (param_4->field_0xf0 < 0 || *(int *)(temp_v3 + 0xf0) < 0)) {
         if (*(float *)(temp_v3 + 0x14) > param_4->field_0x14) {
           temp_v1 = g_btlActionReflect;
-          FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
+          btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
           *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
           *(int *)(temp_v1 + 0x14) = temp_v3;
           *(unsigned char *)(temp_v1 + 4) = 0x22;
@@ -60,7 +60,7 @@ FUN_003de60c(short param_1,unsigned int param_2,unsigned int param_3,fn_003de60c
         }
         else {
           temp_v1 = g_btlActionReflect;
-          FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
+          btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
           *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
           *(int *)(temp_v1 + 0x14) = temp_v3;
           *(unsigned char *)(temp_v1 + 4) = 0x21;

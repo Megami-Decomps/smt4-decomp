@@ -13,14 +13,14 @@ int FUN_001527d8(...);
 int FUN_00157558(int);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_0025cc78(...);
 int effectSpawnDefaultArguments(...);
 int FUN_0035d8f0(int, int, int, int, int);
@@ -54,7 +54,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
@@ -65,7 +65,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0019acdc(short, unsigned int);
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0025cc78. */
@@ -141,7 +141,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       efctSetSpeed();
       temp_v22 = 0.35f;
       temp_v17 = 0x3eb3333300000000;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)((unsigned long long)temp_v17 >> 0x20);
       if ((*(unsigned char *)(param_2 + 0x20) & 4) != 0) {
         temp_v5 = 0;
@@ -166,7 +166,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
           temp_v3 = 1;
         }
         temp_v22 = temp_v13;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         temp_v5 = FUN_001834a4(0x2e,0x23);
         temp_v7 = FUN_001834a4(0x2e,0x22);
         FUN_00168e00((int)*(short *)(temp_v7 + 8) + (int)temp_v13 + param_4,
@@ -185,21 +185,21 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
             *(unsigned char *)(temp_v5 + 0x1330) = 0;
           }
         }
-        FUN_00168770();
+        renderPopStateStacks();
       }
       else {
         temp_v22 = temp_v13;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         FUN_001835b4(2,0x2e,0x21,param_4 + (int)temp_v13,param_5,0x72);
       }
       temp_v12 = temp_v22;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       FUN_00164b5c(2,0x2e,temp_v20[*(unsigned char *)(param_2 + 0x22)],param_4 + (int)temp_v22,param_5,0x73);
       temp_v13 = temp_v12;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       FUN_00164b5c(2,0x2e,6,param_4 + (int)temp_v12,param_5,0x71);
       temp_v22 = temp_v13;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v5 = (int)temp_v13;
       if (*(unsigned short *)(param_2 + 0x36) < 100) {
         temp_v6 = 0xd;
@@ -222,7 +222,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
                    ,5,0x73,temp_v19);
       FUN_00183bb0();
       temp_v13 = temp_v22;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v12 = (float)(int)temp_v22;
       temp_v16 = 0.5f;
       temp_v5 = 0;
@@ -248,11 +248,11 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       } while (temp_v5 < 8);
       if (param_6 != 0) {
         temp_v22 = temp_v13;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         FUN_00164b5c(2,0x2e,0xf,(int)param_3[1] + param_4 + (int)temp_v13,param_5,0x71);
         FUN_00164b5c(2,0x2e,0x10,(int)param_3[1] + param_4 + (int)temp_v13,param_5,0x71);
         temp_v13 = temp_v22;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         temp_v5 = 0;
         do {
           if (*(short *)((int)param_1 + temp_v5 * 2 + 0x24) != 0) {
@@ -279,7 +279,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         temp_v18 = 0xe6c80000;
       }
       temp_v22 = temp_v13;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       if ((*(unsigned char *)(param_2 + 0x20) & 2) != 0) {
         temp_v6 = 0xf33700;
       }
@@ -294,7 +294,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       FUN_001527d8(param_1[0xd],0xffffff00);
       FUN_0025cc78(param_1[0xd],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72)
       ;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)(int)temp_v22;
       temp_v22 = temp_v13;
       temp_v5 = FUN_001834a4(0x2e,0x24);

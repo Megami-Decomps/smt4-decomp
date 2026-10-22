@@ -1,74 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00266a2c` (_code @ 0x266a2c, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: BGM-state dispatch order and local-tail/global-anchor addressing differ. */
+#include "common.h"
+#include "map/lmapMain.h"
+#include <stddef.h>
 
 extern "C" {
+extern LmapMainState *g_lmapMainState;
+extern u32 DAT_0049f944;
+extern s8 DAT_0049fa39;
+extern s8 DAT_0049fa61;
 
-int bgmReleaseStopped(void);
-int FUN_00287328(unsigned int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int g_lmapMainState; /* 0x447060 */
-extern unsigned int DAT_0049f944; /* 0x49f944 */
-extern signed char DAT_0049fa39; /* 0x49fa39 */
-extern signed char DAT_0049fa61; /* 0x49fa61 */
-
-/* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_00287328. */
-extern int bgmGetStateById(unsigned int);
-extern int FUN_00287894(void);
-extern int FUN_002903f0(void);
-
+s32 bgmReleaseStopped(void);
+s32 bgmGetStateById(u32 id);
+s32 FUN_00287328(u32 id);
+s32 FUN_00287894(void);
+s32 FUN_002903f0(void);
 
 void FUN_00266a2c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if (((DAT_0049fa61 == '\0') && (DAT_0049fa39 != '\0')) &&
-     (*(char *)(g_lmapMainState + 0x999) == '\0')) {
-    if (*(int *)(g_lmapMainState + 0x40) == 0x66) {
-      DAT_0049f944 = 0x1000055;
-    }
-    else if (*(int *)(g_lmapMainState + 0x40) == 0x67) {
-      DAT_0049f944 = 0x1000056;
-    }
-    else if (*(int *)(g_lmapMainState + 0x48) == 5) {
-      DAT_0049f944 = 0x1000054;
-    }
-    else {
-      DAT_0049f944 = 0x1000053;
-    }
-    if ((*(int *)(g_lmapMainState + 0x994) != 1 && *(int *)(g_lmapMainState + 0x994) != 2) &&
-       (temp_v0 = FUN_002903f0(), temp_v0 != 0)) {
-      temp_v0 = FUN_00287894();
-      if (temp_v0 == 1) {
-        DAT_0049f944 = 0x1000037;
-      }
-      else if (temp_v0 == 0) {
-        DAT_0049f944 = 0x1000038;
-      }
-    }
-    temp_v0 = bgmGetStateById(DAT_0049f944);
-    if (temp_v0 != 0) {
-      if (temp_v0 == 1 || temp_v0 == 2) {
+    /* These accesses are beyond the recovered canonical type's end.
+     * This local view starts at byte 0x994, not at a new object boundary.
+     * Its rounded sizeof is a C++ layout property, not an allocation size. */
+    struct BgmTailViewIV {
+        s32 mode;
+        u8 unk998;
+        u8 suppressed;
+    };
+    typedef char BgmTailViewIVLayoutCheck[
+        offsetof(BgmTailViewIV, mode) == 0 &&
+        offsetof(BgmTailViewIV, suppressed) == 5 &&
+        sizeof(BgmTailViewIV) == 8 ? 1 : -1];
+
+    const BgmTailViewIV *tail = reinterpret_cast<const BgmTailViewIV *>(
+        reinterpret_cast<const u8 *>(g_lmapMainState) + 0x994);
+
+    if (DAT_0049fa61 != 0 || DAT_0049fa39 == 0 ||
+        tail->suppressed != 0) {
+        bgmReleaseStopped();
+        DAT_0049fa39 = 1;
         return;
-      }
     }
-    else {
-      bgmReleaseStopped();
+
+    if (g_lmapMainState->unk40 == 0x66) {
+        DAT_0049f944 = 0x01000055;
+    } else if (g_lmapMainState->unk40 == 0x67) {
+        DAT_0049f944 = 0x01000056;
+    } else if (g_lmapMainState->unk48 == 5) {
+        DAT_0049f944 = 0x01000054;
+    } else {
+        DAT_0049f944 = 0x01000053;
+    }
+
+    if (tail->mode != 1 && tail->mode != 2 && FUN_002903f0() != 0) {
+        const s32 overrideState = FUN_00287894();
+        if (overrideState == 1) {
+            DAT_0049f944 = 0x01000037;
+        } else if (overrideState == 0) {
+            DAT_0049f944 = 0x01000038;
+        }
+    }
+
+    const s32 state = bgmGetStateById(DAT_0049f944);
+    if (state == 1 || state == 2) {
+        return;
+    }
+    if (state == 0) {
+        bgmReleaseStopped();
     }
     FUN_00287328(DAT_0049f944);
-    return;
-  }
-  bgmReleaseStopped();
-  DAT_0049fa39 = 1;
-  return;
 }
-
-} /* extern "C" */
+}

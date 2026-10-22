@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int efctSetSpeed(void);
@@ -24,7 +24,7 @@ extern unsigned int DAT_0043df0c; /* 0x43df0c */
 extern int DAT_0043df10; /* 0x43df10 */
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -70,7 +70,7 @@ unsigned char FUN_002222e8(void)
       (**(romwright_code **)(temp_v4 + 0x12c8))();
       *(unsigned char *)(temp_v4 + 0x12c4) = 0;
     }
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = DAT_0043df04 * 1000;
     efctSetSpeed();
     FUN_002bf288(2,DAT_0043df00,temp_v4,0,0,0xfa);

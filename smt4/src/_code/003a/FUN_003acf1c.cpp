@@ -1,74 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003acf1c` (_code @ 0x3acf1c, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Selection-identifier loads and saved-register allocation differ. */
+#include "common.h"
+#include "gamedata/Table00.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-
-int FUN_002942c4(int, int);
-int dataTable00FindById(void);
-
-extern unsigned char g_countdown; /* 0x43d9e0 */
-
-/* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: dataTable00FindById. */
-
-
-void FUN_003acf1c(unsigned int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_countdown + 0x4));
-  if (*(unsigned int *)((*(int *)((unsigned char *)&g_countdown + 0x4)) + 0xc) != param_1) {
-    if (*(unsigned int *)((*(int *)((unsigned char *)&g_countdown + 0x4)) + 0xc) == 0) {
-      *(unsigned int *)((*(int *)((unsigned char *)&g_countdown + 0x4)) + 4) = param_1;
-      puVar2 = (unsigned short *)0x0;
-      *(unsigned short *)(temp_v0 + 8) = 0xffff;
-      dataTable00FindById();
-      temp_v1 = 0;
-      do {
-        if ((unsigned short)puVar2[0x50] == param_1) {
-          *(unsigned short *)(temp_v0 + 8) = *puVar2;
-          break;
-        }
-        temp_v1 = temp_v1 + 1;
-        puVar2 = puVar2 + 0x54;
-      } while (temp_v1 < 0x4b1);
-      *(unsigned int *)(temp_v0 + 0x14) = param_1;
-      puVar2 = (unsigned short *)0x0;
-      *(unsigned short *)(temp_v0 + 0x18) = 0xffff;
-      dataTable00FindById();
-      temp_v1 = 0;
-      do {
-        if ((unsigned short)puVar2[0x50] == param_1) {
-          *(unsigned short *)(temp_v0 + 0x18) = *puVar2;
-          break;
-        }
-        temp_v1 = temp_v1 + 1;
-        puVar2 = puVar2 + 0x54;
-      } while (temp_v1 < 0x4b1);
-      if (-1 < *(short *)(temp_v0 + 8)) {
-        FUN_002942c4((int)*(short *)(temp_v0 + 8),1);
-      }
-    }
-    *(unsigned int *)(temp_v0 + 0xc) = param_1;
-    puVar2 = (unsigned short *)0x0;
-    *(unsigned short *)(temp_v0 + 0x10) = 0xffff;
-    dataTable00FindById();
-    temp_v1 = 0;
-    while ((unsigned short)puVar2[0x50] != param_1) {
-      temp_v1 = temp_v1 + 1;
-      puVar2 = puVar2 + 0x54;
-      if (temp_v1 >= 0x4b1) {
-        return;
-      }
-    }
-    *(unsigned short *)(temp_v0 + 0x10) = *puVar2;
-  }
-  return;
+extern CountdownContextPrefixIV g_countdown;
+const Table00Record *dataTable00FindById(u32 id);
+s32 FUN_002942c4(s32 index, s32 mode);
 }
 
-} /* extern "C" */
+extern "C" void FUN_003acf1c(u32 requestedId)
+{
+    SelectionStatePrefixIV *state = g_countdown.selection;
+    if (state->currentId == requestedId)
+        return;
+
+    if (state->currentId == 0) {
+        state->initialId = requestedId;
+        state->initialIndex = -1;
+        const Table00Record *record = dataTable00FindById(0);
+        for (s32 i = 0; i < 1201; ++i, ++record) {
+            if (record->selection.selectionId == requestedId) {
+                state->initialIndex = (s16)record->id;
+                break;
+            }
+        }
+
+        state->secondaryId = requestedId;
+        state->secondaryIndex = -1;
+        record = dataTable00FindById(0);
+        for (s32 i = 0; i < 1201; ++i, ++record) {
+            if (record->selection.selectionId == requestedId) {
+                state->secondaryIndex = (s16)record->id;
+                break;
+            }
+        }
+
+        if (state->initialIndex >= 0)
+            FUN_002942c4(state->initialIndex, 1);
+    }
+
+    state->currentId = requestedId;
+    state->currentIndex = -1;
+    const Table00Record *record = dataTable00FindById(0);
+    for (s32 i = 0; i < 1201; ++i, ++record) {
+        if (record->selection.selectionId == requestedId) {
+            state->currentIndex = (s16)record->id;
+            break;
+        }
+    }
+}

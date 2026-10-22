@@ -6,6 +6,31 @@
 
 struct BtlUnitRecordA;
 
+struct BattleCandidateRecord {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 flags;
+};
+typedef char BattleCandidateRecordFlagsOffsetCheck[
+    offsetof(BattleCandidateRecord, flags) == 0x16 ? 1 : -1];
+
+struct BattleSlotSourceRecordA {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 id;
+};
+typedef char BattleSlotSourceRecordAIdOffsetCheck[
+    offsetof(BattleSlotSourceRecordA, id) == 0x62 && sizeof(BattleSlotSourceRecordA) == 0x64 ? 1 : -1];
+
+struct BtlCombatantActionA {
+    /* 0x00 */ s16 unk00;
+    /* 0x02 */ s16 kind;
+    /* 0x04 */ s16 id;
+    /* 0x06 */ s16 unk06;
+};
+
+typedef char BtlCombatantActionASizeCheck[sizeof(BtlCombatantActionA) == 8 ? 1 : -1];
+typedef char BtlCombatantActionAKindOffsetCheck[
+    offsetof(BtlCombatantActionA, kind) == 2 && offsetof(BtlCombatantActionA, id) == 4 ? 1 : -1];
+
 struct BtlCombatantEntryA {
     /* 0x000 */ u64 flags;
     /* 0x008 */ s16 unitIndex;
@@ -79,9 +104,24 @@ struct BtlCombatantEntryA {
             /* 0x276 */ u8 unk276BeforeIndexedFlags[0x6A];
             /* 0x2E0 */ u8 values[21]; /* per-index flags the scripts query */
         } indexedFlags;
+        struct {
+            /* 0x276 */ u8 unk276BeforeActions[0xB2];
+            /* 0x328 */ BtlCombatantActionA single;
+            /* 0x330 */ u8 unk330[8];
+            /* 0x338 */ BtlCombatantActionA available[10];
+        } actionList;
     };
     /* 0x3F8 */ BtlUnitRecordA *record; /* the unit record the combatant was built from */
-    /* 0x3FC */ u8 unk3FC[0xC];
+    union {
+        /* 0x3FC */ u8 unk3FC[0xC];
+        /* 0x3FC */ u32 sourceId;
+        /* 0x3FC */ BtlUnitRecordA *secondaryRecord;
+        /* 0x3FC */ BattleSlotSourceRecordA *sourceRecord;
+        struct {
+            /* 0x3FC */ u8 unk3FC[8];
+            /* 0x404 */ BattleCandidateRecord *record;
+        } candidate;
+    };
 };
 
 typedef char BtlCombatantEntryASizeCheck[sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
@@ -99,5 +139,16 @@ typedef char BtlCombatantEncodedLevelsOffsetCheck[
     offsetof(BtlCombatantEntryA, encodedLevels.levels) == 0x30A ? 1 : -1];
 typedef char BtlCombatantThresholdOffsetCheck[
     offsetof(BtlCombatantEntryA, thresholdView.unk27A) == 0x27A ? 1 : -1];
+typedef char BtlCombatantActionListOffsetCheck[
+    offsetof(BtlCombatantEntryA, actionList.single) == 0x328 &&
+    offsetof(BtlCombatantEntryA, actionList.available) == 0x338 ? 1 : -1];
+typedef char BtlCombatantSourceIdOffsetCheck[
+    offsetof(BtlCombatantEntryA, sourceId) == 0x3FC ? 1 : -1];
+typedef char BtlCombatantSlotSourceOffsetCheck[
+    offsetof(BtlCombatantEntryA, sourceRecord) == 0x3FC ? 1 : -1];
+typedef char BtlCombatantSecondaryRecordOffsetCheck[
+    offsetof(BtlCombatantEntryA, secondaryRecord) == 0x3FC ? 1 : -1];
+typedef char BtlCombatantCandidateRecordOffsetCheck[
+    offsetof(BtlCombatantEntryA, candidate.record) == 0x404 ? 1 : -1];
 
 #endif

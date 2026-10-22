@@ -42,7 +42,7 @@ extern int bustupCutAnimSelectSlotsById(short);
 extern unsigned int dataTableGetNamePayload(void);
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 extern unsigned int aocIndexValueOrDefault(unsigned short);
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bcf10. */
 /* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_002bcf4c. */
@@ -310,7 +310,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
     }
   }
   else {
-    temp_v6 = FUN_002bce30(*(unsigned short *)(param_2 + *param_4 * 2 + 2),1);
+    temp_v6 = demonGetRaceLabel(*(unsigned short *)(param_2 + *param_4 * 2 + 2),1);
     libc_strcpy(temp_v11,temp_v6);
     FUN_002bd158(temp_v11,temp_v12);
     FUN_002bd0f8(param_3,param_5,temp_v12,param_6);

@@ -1,78 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00109580` (_code @ 0x109580, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Reverb parameter store grouping and shared global-anchor addressing differ. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-
-int FUN_00120dc4(int, unsigned char *);
-int asdMemoryAlloc(int, int, int, unsigned char *);
-int nw_snd_FxReverb_AssignWorkBuffer(unsigned char *, unsigned int, unsigned char *);
-int nw_snd_FxReverb_GetRequiredMemSize(unsigned char *);
-int nw_snd_FxReverb_SetParam(unsigned char *);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned int DAT_0044e0e4; /* 0x44e0e4 */
-extern unsigned char DAT_004c54f4; /* 0x4c54f4 */
-extern unsigned int DAT_004c5604; /* 0x4c5604 */
-extern unsigned int DAT_004c5608; /* 0x4c5608 */
-extern unsigned int DAT_004c560c; /* 0x4c560c */
-extern unsigned int DAT_004c5610; /* 0x4c5610 */
-extern unsigned int DAT_004c5614; /* 0x4c5614 */
-extern unsigned int *DAT_004c5618; /* 0x4c5618 */
-extern unsigned int DAT_004c561c; /* 0x4c561c */
-extern unsigned int DAT_004c5620; /* 0x4c5620 */
-extern unsigned char DAT_004c5624; /* 0x4c5624 */
-extern unsigned char DAT_004c5625; /* 0x4c5625 */
-extern unsigned int DAT_004c5628; /* 0x4c5628 */
-extern unsigned int DAT_004c562c; /* 0x4c562c */
-extern unsigned int DAT_004c5630; /* 0x4c5630 */
-
-/* Supplied declaration required: FUN_00120dc4. */
-/* Supplied declaration required: asdMemoryAlloc. */
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: nw_snd_FxReverb_AssignWorkBuffer. */
-/* Supplied declaration required: nw_snd_FxReverb_GetRequiredMemSize. */
-/* Supplied declaration required: nw_snd_FxReverb_SetParam. */
-
+extern const char DAT_004076c8[];
+extern SoundReverbEffect DAT_004c54f4;
+extern SoundReverbParameters DAT_004c5604;
+extern void *g_soundEffectBuffers[];
+void *jyoucyuGetTableEntry(u32 index);
+s32 nw_snd_FxReverb_SetParam(SoundReverbEffect *effect,
+                             const SoundReverbParameters *parameters);
+u32 nw_snd_FxReverb_GetRequiredMemSize(SoundReverbEffect *effect);
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 kind);
+s32 nw_snd_FxReverb_AssignWorkBuffer(SoundReverbEffect *effect,
+                                    void *buffer, u32 size);
+s32 FUN_00120dc4(u32 bus, SoundReverbEffect *effect);
 
 void FUN_00109580(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    DAT_004c5604 = 0x5a;
-    DAT_004c5608 = 0x4b0;
-    DAT_004c560c = 0x1e;
-    DAT_004c5610 = 0x3f000000;
-    DAT_004c5614 = 0x3f4ccccd;
-    DAT_004c5628 = 0xbe0;
-    DAT_004c562c = 0xe60;
-    DAT_004c5630 = 0x820;
-    DAT_004c5618 = &DAT_004c5628;
-    DAT_004c561c = 0x3ecccccd;
-    DAT_004c5620 = 0x3ecccccd;
-    DAT_004c5625 = 1;
-    DAT_004c5624 = 0;
-    nw_snd_FxReverb_SetParam(&DAT_004c54f4);
-    puVar2 = &DAT_004c54f4;
-    nw_snd_FxReverb_GetRequiredMemSize(&DAT_004c54f4);
-    temp_v1 = 0x10000;
-    asdMemoryAlloc(0x10000,0x100,0,puVar2);
-    DAT_0044e0e4 = temp_v1;
-    nw_snd_FxReverb_AssignWorkBuffer(&DAT_004c54f4,temp_v1,puVar2);
-    FUN_00120dc4(1,&DAT_004c54f4);
-    return;
-  }
-  return;
+    if (jyoucyuGetTableEntry(1) == NULL)
+        return;
+    DAT_004c5604.integerParameters[0] = 90;
+    DAT_004c5604.integerParameters[1] = 1200;
+    DAT_004c5604.integerParameters[2] = 30;
+    DAT_004c5604.scalarParameters[0] = 0.5f;
+    DAT_004c5604.scalarParameters[1] = 0.8f;
+    DAT_004c5604.integerValues[0] = 3040;
+    DAT_004c5604.integerValues[1] = 3680;
+    DAT_004c5604.integerValues[2] = 2080;
+    DAT_004c5604.integerTable = DAT_004c5604.integerValues;
+    DAT_004c5604.additionalScalars[0] = 0.4f;
+    DAT_004c5604.additionalScalars[1] = 0.4f;
+    DAT_004c5604.flags[1] = 1;
+    DAT_004c5604.flags[0] = 0;
+    nw_snd_FxReverb_SetParam(&DAT_004c54f4, &DAT_004c5604);
+    u32 requiredSize = nw_snd_FxReverb_GetRequiredMemSize(&DAT_004c54f4);
+    asdDebugTrace(DAT_004076c8, 108);
+    void *buffer = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
+    g_soundEffectBuffers[11] = buffer;
+    nw_snd_FxReverb_AssignWorkBuffer(&DAT_004c54f4, buffer, requiredSize);
+    FUN_00120dc4(1, &DAT_004c54f4);
 }
-
-} /* extern "C" */
+}

@@ -16,7 +16,7 @@ int FUN_00168470(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int camSetMatrixA(int, unsigned char [84]);
 int mtx44Copy(...);
 int FUN_0019a0fc(unsigned char [84], unsigned char [84], int *);
@@ -62,7 +62,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
 extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: mtx44Copy. */
@@ -118,7 +118,7 @@ unsigned int FUN_0015519c(void)
       *(unsigned char *)(temp_v6 + 0x1270) = 0;
     }
     temp_v7 = 0.29f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     efctSetSpeed();
     temp_v8 = *(unsigned int *)(temp_v0 + 0x60);
     temp_v2 = FUN_0018aeb8();

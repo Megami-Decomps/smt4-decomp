@@ -10,9 +10,9 @@ int FUN_001f4568(int, int, int, unsigned char [136]);
 int skillFormatTargetLabel(unsigned char [136], int);
 int FUN_0024bda8(unsigned char [136], unsigned int);
 int FUN_002907c4(...);
-int FUN_00295660(int, unsigned char [136]);
+int textEncodeFontSlot(int, unsigned char [136]);
 int asdTextDrawDirectoryEntry(...);
-int FUN_0029c94c(...);
+int buttonHelpShowSkillDetails(...);
 int FUN_0029da34(...);
 int FUN_0029dc74(...);
 int FUN_0029ede8(int, int, unsigned int, int);
@@ -48,9 +48,9 @@ extern unsigned int FUN_00282ccc(void);
 extern int FUN_00282e70(void);
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_0029212c. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_0029c94c. */
+/* Supplied declaration required: buttonHelpShowSkillDetails. */
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029dc74. */
 /* Supplied declaration required: FUN_0029ede8. */
@@ -128,12 +128,12 @@ void FUN_0026c868(void)
           FUN_002907c4(&uStack_a8,temp_v1 & 0xf);
           FUN_002907c4(temp_v11,*(unsigned char *)(temp_v4 + 0x58) >> 4);
           textFormatBuffer(temp_v12,&LAB_00317284,&uStack_a8,temp_v11);
-          FUN_00295660(0x25,temp_v12);
+          textEncodeFontSlot(0x25,temp_v12);
         }
         FUN_0024bda8(temp_v12,*(unsigned int *)(temp_v4 + 0x54) >> 0x14);
-        FUN_00295660(0x26,temp_v12);
+        textEncodeFontSlot(0x26,temp_v12);
         skillFormatTargetLabel(temp_v12,*(unsigned char *)(temp_v4 + 0x59));
-        FUN_00295660(0x27,temp_v12);
+        textEncodeFontSlot(0x27,temp_v12);
         if (*(char *)(temp_v4 + 0x5b) == '\0') {
           textFormatBuffer(temp_v12,&LAB_0031728c);
         }
@@ -155,9 +155,9 @@ void FUN_0026c868(void)
         if (*(char *)(temp_v4 + 0x5b) == '\t') {
           textFormatBuffer(temp_v12,&LAB_003172d4);
         }
-        FUN_00295660(0x28,temp_v12);
+        textEncodeFontSlot(0x28,temp_v12);
         FUN_001f4568(1,0,0,temp_v12);
-        FUN_00295660(0x29,temp_v12);
+        textEncodeFontSlot(0x29,temp_v12);
         uStack_a4 = DAT_0043da30;
         uStack_a8 = 3;
         temp_v11[0] = 0;
@@ -315,7 +315,7 @@ void FUN_0026c868(void)
   case 5:
   case 6:
   case 7:
-    FUN_0029c94c(*(unsigned short *)(g_partyPanel + 0x36));
+    buttonHelpShowSkillDetails(*(unsigned short *)(g_partyPanel + 0x36));
     return;
   case 8:
   case 9:

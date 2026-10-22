@@ -15,7 +15,7 @@ int FUN_0027fc14(int);
 int FUN_0027fca0(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(int);
-int FUN_00280988(void);
+int mapEaseSceneHeading(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00291e40(...);
@@ -52,7 +52,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: FUN_00280988. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00291e40. */
@@ -78,7 +78,7 @@ void FUN_002e9b60(void)
   f32 nearestYaw;
   
   if (*(int *)(g_lmapScene + 4) < 10) {
-    FUN_00280988();
+    mapEaseSceneHeading();
     temp_v0 = g_lmapScene;
     *(float *)(g_lmapScene + 0x1c) =
          *(float *)(g_lmapScene + 0x1c) +

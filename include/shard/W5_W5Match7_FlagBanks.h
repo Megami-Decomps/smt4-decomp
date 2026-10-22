@@ -93,10 +93,40 @@ struct FlagWorkBanks {
             /* 0x10a0 */ f32 unk10a0;
             /* 0x10a4 */ u32 unk10a4;
         } sceneEntry;
+        struct {
+            /* 0x07C4 */ u8 unk07C4BeforeSpawn[0xEA0];
+            /* 0x1664 */ u8 pending;
+            /* 0x1665 */ s8 x;
+            /* 0x1666 */ s8 z;
+        } spawnRequest;
+        struct {
+            u8 unk07c4BeforeMappedFlags[0x548];
+            u32 words[5]; // 0x0d0c
+        } mappedFlags;
+        struct {
+            u8 unk07c4BeforeGridSize[0x640];
+            s8 width; // 0x0e04
+            s8 height; // 0x0e05
+        } gridSize;
+        struct {
+            u8 unk07c4BeforeSavePointMap[0xe08];
+            u32 handle; // 0x15cc
+        } savePointMap;
+        struct {
+            u8 prefix[0x8D0];
+            /* 0x1094 */ u16 incomplete;
+            /* 0x1096 */ u16 completed;
+        } questProgress;
     };
     /* 0x167c */ u32 third[1];
 };
 typedef char FlagWorkBanksSizeCheck[sizeof(FlagWorkBanks) == 0x1680 ? 1 : -1];
+typedef char FlagWorkBanksMappedFlagsOffsetCheck[
+    offsetof(FlagWorkBanks, mappedFlags.words) == 0xd0c &&
+    offsetof(FlagWorkBanks, gridSize.width) == 0xe04 &&
+    offsetof(FlagWorkBanks, gridSize.height) == 0xe05 ? 1 : -1];
+typedef char FlagWorkBanksSavePointMapOffsetCheck[
+    offsetof(FlagWorkBanks, savePointMap.handle) == 0x15cc ? 1 : -1];
 typedef char FlagWorkBanksTable4cOffsetsCheck[
     offsetof(FlagWorkBanks, table4cHead.unk3a) == 0x3a &&
     offsetof(FlagWorkBanks, table4c.level) == 0x7c5 &&
@@ -123,6 +153,13 @@ typedef char FlagWorkBanksSavePointOffsetsCheck[
     offsetof(FlagWorkBanks, savePoint.scale) == 0x2c &&
     offsetof(FlagWorkBanks, savePoint.heading) == 0x38 &&
     offsetof(FlagWorkBanks, savePointObject.objectId) == 0xe10 ? 1 : -1];
+typedef char FlagWorkBanksSpawnOffsetsCheck[
+    offsetof(FlagWorkBanks, spawnRequest.pending) == 0x1664 &&
+    offsetof(FlagWorkBanks, spawnRequest.x) == 0x1665 &&
+    offsetof(FlagWorkBanks, spawnRequest.z) == 0x1666 ? 1 : -1];
+typedef char FlagWorkBanksQuestProgressOffsetsCheck[
+    offsetof(FlagWorkBanks, questProgress.incomplete) == 0x1094 &&
+    offsetof(FlagWorkBanks, questProgress.completed) == 0x1096 ? 1 : -1];
 extern "C" FlagWorkBanks *gameFlagsGetBlock(void);
 
 struct FlagValueRange {

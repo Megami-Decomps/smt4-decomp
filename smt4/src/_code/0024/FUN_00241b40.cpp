@@ -1,70 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00241b40` (_code @ 0x241b44, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Button-help preset tail-call lowering and navigation-case block order differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
+#include <stddef.h>
 
 extern "C" {
+extern CampHelpPrefixIV *g_camp;
+s32 buttonHelpSetPreset(s32 preset);
+s32 partyPanelIsActive(void);
+s32 FUN_002579bc(s32 enabled);
+s32 FUN_00257a50(void *output, s32 selection, s32 category);
+s32 FUN_0029da34(s32 channel, s32 enabled, u32 value, void *data);
 
-int FUN_002579bc(int);
-int FUN_00257a50(unsigned char [70], int, int);
-int FUN_0029da34(int, int, int, unsigned char [70]);
-int buttonHelpSetPreset(int);
-
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned short sp5D2; /* 0x5d2: local_5d2 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002579bc. */
-/* Supplied declaration required: FUN_00257a50. */
-extern int partyPanelIsActive(void);
-/* Supplied declaration required: FUN_0029da34. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-
-
-void FUN_00241b40(int *param_1)
-
+void FUN_00241b40(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [70];
-  unsigned short temp_v3;
-  
-  puVar1 = temp_v2;
-  temp_v1 = *param_1;
-  if (*(char *)(temp_v1 + 0xab) != '\0') {
-    if (*(char *)(temp_v1 + 0xad) != '\x03') {
-      buttonHelpSetPreset(0x50);
-      FUN_00257a50(temp_v2,(int)*(char *)(temp_v1 + 0xad),(int)*(char *)(temp_v1 + 0xac));
-      if (puVar1 != (unsigned char *)0x0) {
-        FUN_0029da34(0,1,temp_v3,temp_v2);
-      }
-      return;
-    }
-    buttonHelpSetPreset(0x4f);
-    return;
-  }
-  temp_v0 = partyPanelIsActive();
-  if (temp_v0 == 0) {
-    if (*(char *)(temp_v1 + 0x98) != '\x01') {
-      buttonHelpSetPreset(3);
-      FUN_002579bc(0);
-      return;
-    }
-    buttonHelpSetPreset(1);
-    FUN_002579bc(1);
-    return;
-  }
-  if (*(char *)(temp_v1 + 0x98) != '\x01') {
-    buttonHelpSetPreset(4);
-    FUN_002579bc(0);
-    return;
-  }
-  buttonHelpSetPreset(2);
-  FUN_002579bc(1);
-  return;
-}
+    // This is local backing storage, not a recovered helper-object boundary.
+    // The only interpreted output is the halfword at +0x46.
+    struct OutputPrefix {
+        u8 unknown00[0x46];
+        u16 value46;
+    };
+    union OutputStorage {
+        u8 bytes[0x610];
+        OutputPrefix prefix;
+    };
+    typedef char OutputPrefixOffsetCheck[
+        offsetof(OutputPrefix, value46) == 0x46 &&
+        sizeof(OutputPrefix) == 0x48 ? 1 : -1];
+    typedef char OutputStorageSizeCheck[
+        sizeof(OutputStorage) == 0x610 ? 1 : -1];
 
-} /* extern "C" */
+    CampHelpPrefixIV *camp = g_camp;
+
+    if (camp->specialHelpActive != 0) {
+        if (camp->helpSelection == 3) {
+            buttonHelpSetPreset(0x4f);
+            return;
+        }
+
+        buttonHelpSetPreset(0x50);
+        OutputStorage output;
+        if (FUN_00257a50(output.bytes, camp->helpSelection,
+                        camp->helpCategory) != 0) {
+            FUN_0029da34(0, 1, output.prefix.value46, output.bytes);
+        }
+        return;
+    }
+
+    if (partyPanelIsActive() == 0) {
+        if (camp->navigationMode == 1) {
+            buttonHelpSetPreset(1);
+            FUN_002579bc(1);
+        } else {
+            buttonHelpSetPreset(3);
+            FUN_002579bc(0);
+        }
+    } else {
+        if (camp->navigationMode == 1) {
+            buttonHelpSetPreset(2);
+            FUN_002579bc(1);
+        } else {
+            buttonHelpSetPreset(4);
+            FUN_002579bc(0);
+        }
+    }
+}
+}

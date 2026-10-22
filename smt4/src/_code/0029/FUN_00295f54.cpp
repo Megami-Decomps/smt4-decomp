@@ -7,7 +7,7 @@ extern "C" {
 int infoWinSetTimer(...);
 int dialogOpen(int);
 int infoWinSetMessage(unsigned int, unsigned int);
-int FUN_00295660(int, int *);
+int textEncodeFontSlot(int, int *);
 int infoWinStartTimer(int);
 int FUN_002bd06c(unsigned int);
 int libc_strcpy(int *, unsigned int);
@@ -32,12 +32,12 @@ extern int dialogGetTimer(void);
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: infoWinSetMessage. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 extern int gameGetUnitRecord(int);
 extern int FUN_002b6b04(void);
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: libc_strcpy. */
 
@@ -93,10 +93,10 @@ void FUN_00295f54(int param_1,int param_2)
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
       FUN_002bd06c(temp_v2);
       libc_strcpy(&temp_v5,temp_v2);
-      FUN_00295660(8,&temp_v5);
-      temp_v1 = FUN_002bce30(*(unsigned short *)(temp_v0 + 0x46),0);
+      textEncodeFontSlot(8,&temp_v5);
+      temp_v1 = demonGetRaceLabel(*(unsigned short *)(temp_v0 + 0x46),0);
       libc_strcpy(&temp_v5,temp_v1);
-      FUN_00295660(0x10,&temp_v5);
+      textEncodeFontSlot(0x10,&temp_v5);
       temp_v1 = *(unsigned int *)(param_1 + 0x356c);
       temp_v4 = 0xc9;
 LAB_00296090:

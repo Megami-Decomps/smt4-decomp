@@ -82,7 +82,7 @@ int MapDepart_Init(...);
 
 int FUN_002646d4(...);
 int lmapMainStep(void);
-int FUN_00266584(...);
+int mapInitializeStoryMarkerEffects(...);
 int objSetBaseAndValue(...);
 int saveSetNavigationPosition(...);
 int FUN_00273c54(void);
@@ -141,7 +141,7 @@ int FUN_002764a8(void);
 int mapIfClose(void);
 int FUN_00280ccc(void);
 int naviRegisterTransitionsAndRequest(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_002a0428(...);
 int FUN_002a04f0(...);
 int FUN_002bd158(void);
@@ -371,7 +371,7 @@ extern int FUN_00264548(void);
 /* Supplied declaration required: FUN_00265bf8. */
 /* Supplied declaration required: FUN_00265f50. */
 /* Supplied declaration required: entryListCollectMatches. */
-/* Supplied declaration required: FUN_00266584. */
+/* Supplied declaration required: mapInitializeStoryMarkerEffects. */
 /* Supplied declaration required: objSetBaseAndValue. */
 /* Supplied declaration required: FUN_002666b0. */
 /* Supplied declaration required: FUN_00266a2c. */
@@ -481,7 +481,7 @@ extern int gameJumpRequestIsPending(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: tableGroupFindEntryIndex. */
 /* Supplied declaration required: helpResourcesRelease. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int messageMainGetChoiceResult(void);
@@ -988,7 +988,7 @@ unsigned int FUN_001d3e3c(void)
       DAT_0049f934 = 1;
       FUN_002be650(DAT_0049f9cc,1);
       FUN_002bd158();
-      FUN_00295660(0,temp_v30);
+      textEncodeFontSlot(0,temp_v30);
       rt_memcpy_w(&DAT_0049f978,&LAB_001d5040,0x17);
       return 0;
     }
@@ -1114,7 +1114,7 @@ unsigned int FUN_001d3e3c(void)
                   DAT_0049f978 = 0x5f726373;
                   DAT_0049f97c = 0x73757566;
                 }
-                FUN_00295660(0,temp_v6);
+                textEncodeFontSlot(0,temp_v6);
                 puVar7[3] = 0x25;
                 puVar7[4] = 0;
                 navigationResetTimer();
@@ -1318,7 +1318,7 @@ LAB_001d58a0:
                     DAT_0049f980 = &LAB_00315f61;
                   }
                 }
-                FUN_00295660(0,temp_v6);
+                textEncodeFontSlot(0,temp_v6);
                 puVar7[3] = 0x25;
                 puVar7[4] = 0;
                 navigationResetTimer();
@@ -1401,7 +1401,7 @@ joined_r0x001d535c:
               DAT_0049f978 = 0x5f726373;
               DAT_0049f97c = 0x73757566;
             }
-            FUN_00295660(0,temp_v6);
+            textEncodeFontSlot(0,temp_v6);
             puVar7[3] = 0x25;
             puVar7[4] = 0;
             navigationResetTimer();
@@ -1543,7 +1543,7 @@ joined_r0x001d535c:
     FUN_003966a4(puVar7 + 0x3b);
     puVar7 = g_lmapMainState;
     FUN_00281784();
-    FUN_00266584(puVar7[0x10]);
+    mapInitializeStoryMarkerEffects(puVar7[0x10]);
     FUN_002646d4(1);
     FUN_00266a2c();
     break;
@@ -1685,7 +1685,7 @@ LAB_001d61bc:
     scrLoaderFreeBuffers(g_aocMain + 0xa8);
     puVar17 = g_lmapMainState;
     FUN_00281784();
-    FUN_00266584(puVar17[0x10]);
+    mapInitializeStoryMarkerEffects(puVar17[0x10]);
     FUN_002646d4(1);
     FUN_00275f00();
     DAT_0049f934 = '\0';
@@ -2038,7 +2038,7 @@ LAB_001d6bd0:
       return 0;
     }
     FUN_00281784();
-    FUN_00266584(puVar17[0x10]);
+    mapInitializeStoryMarkerEffects(puVar17[0x10]);
     FUN_002646d4(1);
     naviClearObjectBlock();
     mapClearPendingEntries();
@@ -2141,7 +2141,7 @@ LAB_001d6bd0:
         FUN_002c29d8(1,10,0xff);
       }
       FUN_00281784();
-      FUN_00266584(puVar7[0x10]);
+      mapInitializeStoryMarkerEffects(puVar7[0x10]);
       FUN_002646d4(0);
       FUN_00266a2c();
       FUN_00273840(0);
@@ -2185,7 +2185,7 @@ LAB_001d6bd0:
     FUN_0027db24(0);
     puVar17 = g_lmapMainState;
     FUN_00281784();
-    FUN_00266584(puVar17[0x10]);
+    mapInitializeStoryMarkerEffects(puVar17[0x10]);
     FUN_002646d4(1);
     FUN_00275f00();
     FUN_00266a2c();
@@ -2355,7 +2355,7 @@ LAB_001d6bd0:
         buttonHelpSetPresetDefault();
         FUN_002be650(DAT_0049fa5c,1);
         FUN_002bd158();
-        FUN_00295660(0,temp_v30);
+        textEncodeFontSlot(0,temp_v30);
         FUN_002bff50();
         temp_v7 = tableGroupFindEntryIndex(puVar7[0x269],&LAB_001d7978);
         puVar7[0x267] = temp_v7;
@@ -2981,7 +2981,7 @@ LAB_001d6bd0:
     }
     puVar7[0x3b] = temp_v8;
     FUN_00266a2c();
-    FUN_00266584(puVar7[0x10]);
+    mapInitializeStoryMarkerEffects(puVar7[0x10]);
     FUN_0027b2b4(puVar7[0x10],puVar7[0x12]);
     FUN_00277d2c(puVar7[0x10],puVar7[0x12]);
     mapSkyTableLoad(puVar7[0x10]);
@@ -3555,7 +3555,7 @@ LAB_001d4774:
     FUN_00266a2c();
   }
   DAT_0049fb9c = 0;
-  FUN_00266584(puVar7[0x10]);
+  mapInitializeStoryMarkerEffects(puVar7[0x10]);
   FUN_0027b2b4(puVar7[0x10],puVar7[0x12]);
   FUN_00277d2c(puVar7[0x10],puVar7[0x12]);
   mapSkyTableLoad(puVar7[0x10]);

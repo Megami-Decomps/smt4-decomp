@@ -20,7 +20,7 @@ int VectorSignedToFloat(...);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001834a4. */
 extern unsigned long long slotIsReady(unsigned int);
-extern int FUN_0028a230(int);
+extern int menuAreModeTexturesLoaded(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0035e6d4. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -81,7 +81,7 @@ LAB_003c4fac:
   puVar5 = (unsigned int *)(param_1 + 0x9c);
   switch(*(unsigned int *)(param_1 + 0x7c)) {
   case 0:
-    temp_v2 = FUN_0028a230(param_1);
+    temp_v2 = menuAreModeTexturesLoaded(param_1);
     if (temp_v2 != 0) {
       FUN_003d54f8(0,10);
       *(unsigned char *)(param_1 + 0x60) = 1;

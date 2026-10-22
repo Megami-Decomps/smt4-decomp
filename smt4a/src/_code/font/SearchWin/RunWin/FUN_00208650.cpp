@@ -11,7 +11,7 @@ int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -37,7 +37,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 char FUN_00208650(void)
@@ -71,7 +71,7 @@ char FUN_00208650(void)
     FUN_001835b4(2,8,0x14f,0,0,0x6d);
     temp_v2 = vec2GetXInt(temp_v10 + 0x38);
     temp_v12 = 0.25f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = temp_v2 + (int)temp_v12;
     temp_v3 = vec2GetYInt(temp_v10 + 0x38);
     efctSetSpeed();

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_00352d30(unsigned int *);
+int mapProbePositionDownward(unsigned int *);
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapMain; /* 0x581274 */
@@ -35,7 +35,7 @@ extern float DAT_005f1bac; /* 0x5f1bac */
 
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00352d30. */
+/* Supplied declaration required: mapProbePositionDownward. */
 
 
 void FUN_0036b0cc(void)
@@ -49,7 +49,7 @@ void FUN_0036b0cc(void)
   float temp_v4;
   
   temp_v0 = g_mapMain;
-  FUN_00352d30(&DAT_005f16c0);
+  mapProbePositionDownward(&DAT_005f16c0);
   DAT_005f1b70 = 1;
   DAT_005f1b74 = *(unsigned int *)(temp_v0 + 0x30);
   DAT_005f1b78 = *(unsigned int *)(temp_v0 + 0x34);

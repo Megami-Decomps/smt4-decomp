@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_001640cc(...);
 int FUN_0016c4b8(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int camSetMatrixA(...);
 int FUN_0019ac70(...);
 int FUN_0019f678(...);
@@ -53,7 +53,7 @@ extern float DAT_0064c01c; /* 0x64c01c */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019f678. */
@@ -345,7 +345,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
       temp_v16 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = temp_v16 * temp_v20;
     }
-    FUN_001879d0(g_renderCtx,temp_v6);
+    renderCtxCalculateStereoParallax(g_renderCtx,temp_v6);
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 == (float)temp_v19) << 0x1e);
     if (temp_v24[0x91] != '\0') {
       VectorSignedToFloat((int)temp_v16,(unsigned char)(temp_v6 >> 0x16) & 3);

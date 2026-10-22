@@ -1,79 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00359b6c` (_code @ 0x359b6c, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Skill-help text-buffer stack reuse and final argument-slot placement differ. */
+#include "common.h"
+#include "gamedata/Table04Record.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern ButtonHelpGlobalsPrefixA g_buttonHelp;
+u32 FUN_0016a0e8(void);
+s32 idIsAbove400(s32 id);
+Table04ExtraRecord *FUN_0034a290(s32 id);
+Table04Record *dataTable04FindById(s32 id);
+s32 battleAttributeFormatName(void *output, u32 attribute);
+s32 skillFormatTargetLabel(void *output, u32 target);
+s32 textFormatBuffer(void *output, const char *format, ...);
+s32 FUN_003180c4(u32 entry, void *text);
+s32 asdTextDrawDirectoryEntry(u32 directory, s32 entry, u32 color,
+                              s32 flags, s32 kind, u32 context, s32 id);
 
-int textFormatBuffer(int *, unsigned char *);
-int dataTable04FindById(void);
-int battleAttributeFormatName(int *, unsigned int);
-int skillFormatTargetLabel(int *, unsigned int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-int FUN_003180c4(int, int *);
-int FUN_0034a290(void);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp80; /* 0x80: local_80 */
-} param_1_stack;
-
-extern unsigned char LAB_00359c6c; /* 0x359c6c */
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0016a0e8(void);
-extern int idIsAbove400(int);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0034a290. */
-
-
-void FUN_00359b6c(int param_1)
-
+void FUN_00359b6c(s32 id)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int uStack_7c;
-  int temp_v4;
-  
-  temp_v0 = DAT_0057f0c8;
-  if (param_1 == 0) {
-    *(unsigned char *)(DAT_0057f0c8 + 0x5ea) = 0;
-  }
-  else {
-    *(unsigned char *)(DAT_0057f0c8 + 0x67c) = 1;
-    *(unsigned char *)(temp_v0 + 0x5ea) = 1;
-    temp_v1 = FUN_0016a0e8();
-    temp_v2 = idIsAbove400(param_1);
-    if (temp_v2 != 0) {
-      temp_v2 = param_1;
-      FUN_0034a290();
-      battleAttributeFormatName(&temp_v3,(*(unsigned int *)(temp_v2 + 0x44) & 0xffff) >> 0xb);
-      FUN_003180c4(0x24,&temp_v3);
-      textFormatBuffer(&temp_v3,&LAB_00359c6c);
-      FUN_003180c4(0x25,&temp_v3);
+    ButtonHelpStatePrefixA *state = g_buttonHelp.state;
+    if (id == 0) {
+        state->selectionActive = 0;
+        return;
     }
-    else {
-      temp_v2 = param_1;
-      dataTable04FindById();
-      battleAttributeFormatName(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb);
-      FUN_003180c4(0x24,&temp_v3);
-      skillFormatTargetLabel(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);
-      FUN_003180c4(0x25,&temp_v3);
-    }
-    temp_v3 = 3;
-    uStack_7c = temp_v1;
-    temp_v4 = param_1;
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x678),2,0xffffffff,0);
-  }
-  return;
-}
 
-} /* extern "C" */
+    state->refreshRequested = 1;
+    state->selectionActive = 1;
+    const u32 context = FUN_0016a0e8();
+
+    // Aligned scratch storage covering the observed stack reservation.
+    // This does not establish a native text object's size or capacity.
+    u32 text[0x6c / sizeof(u32)];
+
+    if (idIsAbove400(id) != 0) {
+        Table04ExtraRecord *record = FUN_0034a290(id);
+        battleAttributeFormatName(text,
+            (static_cast<u32>(record->flags) >> 11) & 31u);
+        FUN_003180c4(0x24, text);
+        // Shift-JIS full-width "Self", preserved byte for byte.
+        textFormatBuffer(text, "\x82\x72\x82\x85\x82\x8c\x82\x86");
+        FUN_003180c4(0x25, text);
+    } else {
+        Table04Record *record = dataTable04FindById(id);
+        battleAttributeFormatName(text, (record->properties >> 11) & 31u);
+        FUN_003180c4(0x24, text);
+        skillFormatTargetLabel(text, (record->properties >> 5) & 15u);
+        FUN_003180c4(0x25, text);
+    }
+
+    asdTextDrawDirectoryEntry(state->directory, 2, 0xffffffffu, 0,
+                              3, context, id);
+}
+}

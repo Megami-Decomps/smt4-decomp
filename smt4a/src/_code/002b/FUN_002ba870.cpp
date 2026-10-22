@@ -1,68 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba870` (_code @ 0x2ba870, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges the two selected-item drawing cases unlike retail. */
+#include "common.h"
 
+struct BattleDebugMenu {
+    s32 state;
+    u8 unk04[12];
+    u32 list;
+    u8 unk14[8];
+    s32 subject;
+};
+struct BattleDebugMenuGlobals {
+    u32 unk00;
+    u32 resource;
+    BattleDebugMenu *menu;
+};
+struct BattleDebugDrawWork {
+    u8 prefix[0x4CD4];
+    u32 font;
+};
 extern "C" {
-
-int FUN_0014bd84(unsigned int);
-int textDrawDefaultString(void);
-int FUN_004d0f48(int *, unsigned int);
-int uiDrawFlagLabels(int *, unsigned int);
-
-extern unsigned int DAT_005715fc; /* 0x5715fc */
-extern int *DAT_00571600; /* 0x571600 */
-
-/* Supplied declaration required: FUN_0014bd84. */
-extern int jobGetWork(void);
-/* Supplied declaration required: textDrawDefaultString. */
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-extern unsigned int FUN_003e83b4(int, int, unsigned int);
-/* Supplied declaration required: FUN_004d0f48. */
-/* Supplied declaration required: uiDrawFlagLabels. */
-
-
-unsigned int FUN_002ba870(void)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  piVar1 = DAT_00571600;
-  if (DAT_00571600 != (int *)0x0) {
-    temp_v1 = *DAT_00571600;
-    if (temp_v1 != 1) {
-      if (temp_v1 != 10) {
-        if (temp_v1 != 0xc) {
-          if (temp_v1 != 0xe) {
-            return 0;
-          }
-          temp_v1 = asdListBoxGetSelectedItemId(DAT_00571600[4]);
-        }
-        else {
-          temp_v1 = asdListBoxGetSelectedItemId(DAT_00571600[4]);
-        }
-        if (temp_v1 == 0) {
-          temp_v2 = FUN_003e83b4(temp_v0,piVar1[7],1);
-          uiDrawFlagLabels(piVar1,temp_v2);
-        }
-      }
-      else {
-        temp_v1 = asdListBoxGetSelectedItemId(DAT_00571600[4]);
-        if (temp_v1 == 0xc) {
-          FUN_0014bd84(*(unsigned int *)(temp_v0 + 0x4cd4));
-          textDrawDefaultString();
-        }
-      }
-    }
-    else {
-      FUN_004d0f48(DAT_00571600,DAT_005715fc);
-    }
-  }
-  return 0;
+BattleDebugDrawWork *jobGetWork(void);
+void FUN_0014bd84(u32);
+void textDrawDefaultString(f32, f32);
+u32 asdListBoxGetSelectedItemId(u32);
+u32 FUN_003e83b4(BattleDebugDrawWork *, s32, s32);
+void FUN_004d0f48(BattleDebugMenu *, u32);
+void uiDrawFlagLabels(BattleDebugMenu *, u32);
+extern BattleDebugMenuGlobals DAT_005715f8;
 }
 
-} /* extern "C" */
+extern "C" u32 FUN_002ba870(void)
+{
+    BattleDebugDrawWork *work = jobGetWork();
+    BattleDebugMenu *menu = DAT_005715f8.menu;
+    if (menu != NULL) {
+        switch (menu->state) {
+        case 1:
+            FUN_004d0f48(menu, DAT_005715f8.resource);
+            break;
+        case 10:
+            if (asdListBoxGetSelectedItemId(menu->list) == 12) {
+                FUN_0014bd84(work->font);
+                textDrawDefaultString(256.0f, 42.0f);
+            }
+            break;
+        case 12:
+        case 14:
+            if (asdListBoxGetSelectedItemId(menu->list) == 0) {
+                uiDrawFlagLabels(menu, FUN_003e83b4(work, menu->subject, 1));
+            }
+            break;
+        }
+    }
+    return 0;
+}

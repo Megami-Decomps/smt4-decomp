@@ -1,39 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001294e0` (_code @ 0x1294e0, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: channel bitfields and ADPCM setup recovered; argument preservation, conditional result moves and dirty-flag scheduling still differ. */
+#include "common.h"
+
+struct SoundWaveInfo {
+    /* 0x00 */ u8 format;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 sampleCount;
+};
+
+struct SoundChannelVoice {
+    /* 0x00 */ u32 channel;
+    /* 0x04 */ u8 unk04[0x1A];
+    /* 0x1E */ u16 status : 2;
+    u16 format : 2;
+    u16 reserved : 12;
+    /* 0x20 */ s32 sampleCount;
+    /* 0x24 */ u8 unk24[0x48];
+    /* 0x6C */ u16 dirtyFlags;
+};
 
 extern "C" {
+extern u8 g_dspsndState;
+SoundWaveInfo* FUN_00129010(u32 wave);
+void* FUN_0013ac6c(u32 wave, u32 index);
+u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(void* state, u8 channel, const void* parameters);
 
-extern unsigned char g_dspsndState; /* 0x4e6f64 */
-
-extern unsigned char *FUN_00129010(unsigned int);
-extern int FUN_0013ac6c(unsigned int, unsigned int);
-extern unsigned char nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(unsigned int, unsigned char, unsigned int);
-
-
-unsigned int
-FUN_001294e0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-            unsigned int param_5)
-
+// Prepare the channel's format, length and optional ADPCM decoder parameters.
+u32 FUN_001294e0(SoundChannelVoice* voice, u32 wave, u32 unusedA, u32 unusedB, u32 index)
 {
-  unsigned short temp_v0;
-  unsigned char *pbVar2;
-  int temp_v1;
-  
-  pbVar2 = (unsigned char *)FUN_00129010(param_2);
-  if ((*pbVar2 == 2) && (temp_v1 = FUN_0013ac6c(param_2,param_5), temp_v1 != 0)) {
-    nn_snd_CTR_Dspsnd_SetChannelAdpcmParam((unsigned int)&g_dspsndState,(unsigned char)*param_1,temp_v1);
-  }
-  temp_v0 = *(unsigned short *)((int)param_1 + 0x1e);
-  *(unsigned short *)((int)param_1 + 0x1e) = (temp_v0 & 0xfffc) | 1;
-  *(unsigned short *)((int)param_1 + 0x1e) = (temp_v0 & 0xfff0) | 1 | ((*pbVar2 & 3) << 2);
-  temp_v1 = *(int *)(pbVar2 + 4);
-  if (temp_v1 < 0) {
-    temp_v1 = 0;
-  }
-  param_1[8] = temp_v1;
-  *(unsigned short *)(param_1 + 0x1b) = *(unsigned short *)(param_1 + 0x1b) | 2;
-  return 1;
+    SoundWaveInfo* info = FUN_00129010(wave);
+    if (info->format == 2) {
+        void* adpcm = FUN_0013ac6c(wave, index);
+        if (adpcm != NULL) {
+            nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(&g_dspsndState, (u8)voice->channel, adpcm);
+        }
+    }
+    voice->status = 1;
+    voice->format = info->format;
+    voice->sampleCount = info->sampleCount < 0 ? 0 : info->sampleCount;
+    voice->dirtyFlags |= 2;
+    return 1;
 }
-
-} /* extern "C" */
+}

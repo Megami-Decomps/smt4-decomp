@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "ui/UiSpriteState.h"
 
 #include "shard/Shard0031.h"
 
@@ -21,11 +22,30 @@ typedef struct MenuState {
 
 /* Apocalypse live game-session data, held by the singleton reference below. */
 typedef struct ObjB {
-    /* 0x00 */ u8 unk00[0x274];
+    union {
+        /* 0x00 */ u8 unk00[0x274];
+        struct {
+            u8 prefix[0x18];
+            u32 first;
+            u32 second;
+            u8 active;
+        } menuReset;
+    };
     /* 0x274 */ u8 block274[4];
     /* 0x278 */ u8 unk278[0x88];
     /* 0x300 */ u8 block300[4];
-    /* 0x304 */ u8 unk304[0xFD8];
+    union {
+        /* 0x304 */ u8 unk304[0xFD8];
+        struct {
+            u8 prefix[0x1A0];
+            /* 0x4A4 */ UiSpriteState headers[3];
+        } spriteHeaders;
+        struct {
+            u8 prefix[0x4E8];
+            /* 0x7EC */ UiSpriteState primary[10];
+            /* 0xD64 */ UiSpriteState secondary[10];
+        } spriteLists;
+    };
     /* 0x12DC */ u8 block12DC[4];
     /* 0x12E0 */ u8 unk12E0[0x88];
     /* 0x1368 */ s32 activeState;
@@ -33,7 +53,13 @@ typedef struct ObjB {
     /* 0x1370 */ u8 unk1370[4];
     /* 0x1374 */ u32 unk1374;
     /* 0x1378 */ u32 unk1378;
-    /* 0x1379 */ u8 unk137C[2];
+    union {
+        /* 0x137C */ u8 unk137C[2];
+        struct {
+            u8 unk137C;
+            /* 0x137D */ u8 pending;
+        } sessionSelection;
+    };
     /* 0x137E */ u8 unk137E;
     /* 0x137F */ s8 unk137F;
     /* 0x1380 */ u8 unk1380[0x1];
@@ -57,7 +83,13 @@ typedef struct ObjB {
     /* 0x2004 */ u32 unk2004;
     /* 0x2008 */ u32 unk2008;
     /* 0x200C */ u16 unk200C;
-    /* 0x200E */ u8 unk200E[3];
+    union {
+        /* 0x200E */ u8 unk200E[3];
+        struct {
+            u8 unk200E[2];
+            /* 0x2010 */ u8 active;
+        } sessionDisplay;
+    };
     /* 0x2011 */ s8 unk2011;
     /* 0x2012 */ s8 unk2012;
     /* 0x2013 */ u8 unk2013;
@@ -71,7 +103,13 @@ typedef struct ObjB {
     /* 0x2020 */ u32 unk2020;
     /* 0x2024 */ u8 unk2024[0x1];
     /* 0x2025 */ u8 unk2025;
-    /* 0x2026 */ u8 unk2026[0xE];
+    union {
+        /* 0x2026 */ u8 unk2026[0xE];
+        struct {
+            u8 unk2026[0xC];
+            /* 0x2032 */ u8 allowed;
+        } sessionEligibility;
+    };
     /* 0x2034 */ u32 unk2034;
     /* 0x2038 */ u8 unk2038[0x1C];
     /* 0x2054 */ s32 statusCameraHeightOffset;
@@ -94,6 +132,18 @@ typedef struct ObjB {
     /* 0x20D8 */ u8 unk20D8[0x18];
     /* 0x20F0 */ s8 unk20F0;
 } ObjB;
+
+typedef char ObjBSessionOffsetsCheck[sizeof(ObjB) == 0x20F4 &&
+    offsetof(ObjB, sessionSelection.pending) == 0x137D &&
+    offsetof(ObjB, sessionDisplay.active) == 0x2010 &&
+    offsetof(ObjB, sessionEligibility.allowed) == 0x2032 ? 1 : -1];
+typedef char ObjBMenuSpriteOffsetsCheck[
+    offsetof(ObjB, menuReset.first) == 0x18 &&
+    offsetof(ObjB, menuReset.second) == 0x1C &&
+    offsetof(ObjB, menuReset.active) == 0x20 &&
+    offsetof(ObjB, spriteHeaders.headers) == 0x4A4 &&
+    offsetof(ObjB, spriteLists.primary) == 0x7EC &&
+    offsetof(ObjB, spriteLists.secondary) == 0xD64 ? 1 : -1];
 
 typedef struct ObjBRef {
     /* 0x00 */ u8 unk00;

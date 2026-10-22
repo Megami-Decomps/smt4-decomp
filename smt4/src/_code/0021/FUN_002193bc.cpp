@@ -1,43 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002193bc` (_code @ 0x2193bc, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
 
-extern "C" {
+extern "C" u32 questIsCompleted(u16 id);
 
-int dataTable1bOr1cGetRecord(void);
-
-extern unsigned int questIsCompleted(unsigned short);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_002193bc(unsigned short *param_1,unsigned short *param_2)
-
+static __inline s32 compareQuestOrder(const u16* left, const u16* right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = questIsCompleted(*param_1);
-  temp_v1 = questIsCompleted(*param_2);
-  if (((temp_v0 & ~temp_v1) == 0) && ((temp_v1 & ~temp_v0) == 0)) {
-    temp_v0 = (unsigned int)*param_1;
-    dataTable1bOr1cGetRecord();
-    temp_v1 = (unsigned int)*param_2;
-    dataTable1bOr1cGetRecord();
-    if ((temp_v0 != 0) && (temp_v1 != 0)) {
-      if (*(char *)(temp_v0 + 6) != '\x06') {
-        if (*(char *)(temp_v1 + 6) == '\x06') {
-          return;
-        }
-      }
-      else if (*(char *)(temp_v1 + 6) != '\x06') {
-        return;
-      }
-      dataTable1bOr1cGetRecord();
-      dataTable1bOr1cGetRecord();
+    SecondarySortRecord* a = dataTable1bOr1cGetRecord(*left);
+    SecondarySortRecord* b = dataTable1bOr1cGetRecord(*right);
+    s32 result = 0;
+    if (a != NULL && b != NULL) {
+        result = b->classification.order - a->classification.order;
     }
-  }
-  return;
+    return result;
 }
 
-} /* extern "C" */
+// Sort quests by completion status, special category, then descending display order.
+extern "C" s32 FUN_002193bc(const u16* left, const u16* right)
+{
+    u32 completedLeft = questIsCompleted(*left);
+    s32 result = 0;
+    u32 completedRight = questIsCompleted(*right);
+    if ((completedRight & ~completedLeft) != 0) {
+        result = 1;
+    }
+    if ((completedLeft & ~completedRight) != 0) {
+        result = -1;
+    } else if (result == 0) {
+        SecondarySortRecord* a = dataTable1bOr1cGetRecord(*left);
+        SecondarySortRecord* b = dataTable1bOr1cGetRecord(*right);
+        if (a == NULL) {
+            return 0;
+        }
+        if (b == NULL) {
+            return 0;
+        }
+        if (a->classification.kind != 6 && b->classification.kind == 6) {
+            result = 1;
+        } else if (a->classification.kind == 6 && b->classification.kind != 6) {
+            result = -1;
+        } else {
+            result = compareQuestOrder(left, right);
+        }
+    }
+    return result;
+}

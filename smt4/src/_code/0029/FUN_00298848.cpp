@@ -1,83 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00298848` (_code @ 0x298848, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: skill-property tests and party-slot scan branches are laid out differently. */
+#include "gamedata/Table04Record.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
-
-int FUN_0026c464(int, int, int);
-int FUN_0026c654(...);
-int FUN_002ae164(void);
-
-/* Supplied declaration required: FUN_0026c464. */
-/* Supplied declaration required: FUN_0026c654. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002ae164. */
-
-
-unsigned int FUN_00298848(int param_1,int param_2)
-
-{
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v0 = param_1;
-  FUN_002ae164();
-  if (temp_v0 != 0) {
-    temp_v4 = *(unsigned int *)(temp_v0 + 0x28);
-    temp_v2 = 3;
-    temp_v6 = (temp_v4 & 0x7ff) >> 9 == 1;
-    temp_v7 = (temp_v4 & 0x7ff) >> 9 == 3;
-    temp_v8 = temp_v6 || temp_v7;
-    if (temp_v6 || temp_v7) {
-      temp_v8 = *(char *)(temp_v0 + 0x23) == '\x03';
-    }
-    if (temp_v8) {
-      temp_v8 = (temp_v4 & 0x1ff) >> 5 != 3;
-      if (temp_v8) {
-        temp_v2 = 8;
-      }
-      if (temp_v8 && temp_v2 != (temp_v4 & 0x1ff) >> 5) {
-        temp_v0 = gameGetSlotTable();
-        temp_v5 = -1;
-        do {
-          temp_v1 = param_2;
-          FUN_0026c654(param_2,0xffffffff,param_1,1);
-          while( 1 ) {
-            if (temp_v1 == 0) {
-              return 1;
-            }
-            temp_v5 = temp_v5 + 1;
-            if (temp_v5 >= 0x18) goto LAB_00298934;
-            if (temp_v5 < 0) break;
-            temp_v3 = (int)*(char *)(temp_v0 + temp_v5 + 0x90f0);
-            if (-1 < temp_v3) {
-              temp_v1 = param_2;
-              FUN_0026c654(param_2,temp_v3,param_1,1);
-            }
-          }
-        } while( 1 );
-      }
-      FUN_0026c464(param_2,param_1,1);
-      if (param_2 == 0) {
-        return 1;
-      }
-    }
-    else {
-LAB_00298934:
-      if (param_1 == 0x8c) {
-        return 1;
-      }
-    }
-  }
-  return 0;
+Table04Record *FUN_002ae164(s32);
+s32 FUN_0026c464(void *, s32, s32);
+s32 FUN_0026c654(void *, s32, s32, s32);
+SlotTable *gameGetSlotTable(void);
 }
 
-} /* extern "C" */
+extern "C" u32 FUN_00298848(s32 skillId, void *context)
+{
+    const Table04Record *skill = FUN_002ae164(skillId);
+    if (skill == NULL) return 0;
+    u32 effect = (skill->properties >> 9) & 3;
+    if ((effect == 1 || effect == 3) && skill->sort.category == 3) {
+        u32 target = (skill->properties >> 5) & 15;
+        if (target != 3 && !(target & 8)) {
+            /* These party slots lie beyond the recovered SlotTable prefix. */
+            struct PartyConditionView {
+                u8 prefix[0x90F0];
+                s8 slots[24];
+            };
+            typedef char SlotOffsetCheck[offsetof(PartyConditionView, slots) == 0x90F0 ? 1 : -1];
+            const PartyConditionView *party = reinterpret_cast<const PartyConditionView *>(gameGetSlotTable());
+            if (FUN_0026c654(context, -1, skillId, 1) == 0) return 1;
+            for (s32 i = 0; i < 24; ++i) {
+                s32 slot = party->slots[i];
+                if (slot >= 0 && FUN_0026c654(context, slot, skillId, 1) == 0) return 1;
+            }
+        } else {
+            if (FUN_0026c464(context, skillId, 1) == 0) return 1;
+        }
+    }
+    return skillId == 0x8C;
+}

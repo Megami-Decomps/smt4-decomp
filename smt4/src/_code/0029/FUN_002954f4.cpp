@@ -1,75 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002954f4` (_code @ 0x2954f4, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The canonical u16 record lookup introduces UXTH; portrait-load branch placement also differs. */
+#include "common.h"
+#include "gamedata/Table00.h"
+#include "gamedata/DevilRecord.h"
+#include "addon/aocMain.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+Table00Record *dataTable00FindById(s32 id);
+s32 aocRunByName(AocSystem *system, u32 table, u32 entry, u32 mode);
+s32 FUN_002a5ee4(AocSystem *system, s32 table, u32 entry, s32 flags);
+s32 FUN_002ae8e4(AocSystem *system, s32 table, u32 entry, s32 flags);
+s32 asdTMTexTableLoadEntryAsync(s32 table, u32 entry);
+s32 FUN_002c58c8(s32 table, u32 entry);
+s32 FUN_0032c3fc(BattleTalkBustUpPrefixIV *bustUp);
+s32 panelSetupButtons(BattleTalkBustUpPrefixIV *bustUp);
 
-int panelSetupButtons(int);
-int asdTMTexTableLoadEntryAsync(int, unsigned int);
-int FUN_002a5ee4(unsigned int, int, unsigned int, int);
-int FUN_002ae8e4(unsigned int, int, unsigned int, int);
-int dataTable00FindById(void);
-int devilGetRecord(void);
-int FUN_002c58c8(int, unsigned int);
-int FUN_0032c3fc(int);
+extern AocSystem *g_aocSystem;
+extern BattleTalkBustUpPrefixIV *g_btlTalkBustUp;
 
-extern unsigned int g_aocSystem; /* 0x433158 */
-extern int g_btlTalkBustUp; /* 0x434210 */
-
-/* Supplied declaration required: panelSetupButtons. */
-/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-/* Supplied declaration required: FUN_002a5ee4. */
-/* Supplied declaration required: FUN_002ae8e4. */
-extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_0032c3fc. */
-
-
-void FUN_002954f4(int param_1,int param_2)
-
+void FUN_002954f4(s32 devilId, s32 asynchronous)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_btlTalkBustUp;
-  if (g_btlTalkBustUp != 0) {
-    temp_v1 = param_1;
-    dataTable00FindById();
-    *(unsigned int *)(temp_v0 + 0x2f0) = (unsigned int)*(unsigned char *)(temp_v1 + 0xa2);
-    temp_v1 = param_1;
-    devilGetRecord();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x90);
-    *(unsigned int *)(temp_v0 + 0x2f8) = temp_v2;
-    *(int *)(temp_v0 + 0x308) = param_1;
-    if (param_2 == 0) {
-      temp_v1 = aocRunByName(g_aocSystem,0x18,temp_v2,1);
-      if (temp_v1 != 0) {
-        FUN_002ae8e4(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
-      }
-      else {
-        FUN_002c58c8(0x18,*(unsigned int *)(temp_v0 + 0x2f8));
-      }
-      FUN_0032c3fc(temp_v0);
-      panelSetupButtons(temp_v0);
-      *(unsigned int *)(temp_v0 + 0x2e8) = 2;
-      *(unsigned int *)(temp_v0 + 0x2ec) = 0;
-      return;
-    }
-    temp_v1 = aocRunByName(g_aocSystem,0x18,temp_v2,1);
-    if (temp_v1 != 0) {
-      FUN_002a5ee4(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
-    }
-    else {
-      asdTMTexTableLoadEntryAsync(0x18,*(unsigned int *)(temp_v0 + 0x2f8));
-    }
-    *(unsigned int *)(temp_v0 + 0x2e8) = 1;
-    *(unsigned int *)(temp_v0 + 0x2ec) = 0;
-  }
-  return;
-}
+    BattleTalkBustUpPrefixIV *bustUp = g_btlTalkBustUp;
+    if (bustUp == 0)
+        return;
 
-} /* extern "C" */
+    bustUp->recordValue = dataTable00FindById(devilId)->bustUp.value;
+    bustUp->textureEntry = reinterpret_cast<DevilRecord *>(devilGetRecord(devilId))->model;
+    bustUp->devilId = devilId;
+
+    if (asynchronous == 0) {
+        if (aocRunByName(g_aocSystem, 0x18, bustUp->textureEntry, 1) != 0)
+            FUN_002ae8e4(g_aocSystem, 0x18, bustUp->textureEntry, 0x10000);
+        else
+            FUN_002c58c8(0x18, bustUp->textureEntry);
+
+        FUN_0032c3fc(bustUp);
+        panelSetupButtons(bustUp);
+        bustUp->state = 2;
+        bustUp->stateCounter = 0;
+    } else {
+        if (aocRunByName(g_aocSystem, 0x18, bustUp->textureEntry, 1) != 0)
+            FUN_002a5ee4(g_aocSystem, 0x18, bustUp->textureEntry, 0x10000);
+        else
+            asdTMTexTableLoadEntryAsync(0x18, bustUp->textureEntry);
+
+        bustUp->state = 1;
+        bustUp->stateCounter = 0;
+    }
+}
+}

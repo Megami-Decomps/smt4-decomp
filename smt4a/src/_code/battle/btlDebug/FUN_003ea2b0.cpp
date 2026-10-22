@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable00FindById(void);
 int aocHandleButtons(unsigned int, int);
-int FUN_003fce8c(unsigned int, int);
+int btlEnsureEnemyDrawResources(unsigned int, int);
 int FUN_004cae0c(int, int, int);
 int FUN_004cb90c(int);
 int FUN_004f9450(void);
@@ -40,7 +40,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 extern unsigned int stateEntryFindById(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003fce8c. */
+/* Supplied declaration required: btlEnsureEnemyDrawResources. */
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_004cae0c. */
@@ -98,7 +98,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
           if (temp_v6 == 0) {
             return 0;
           }
-          FUN_003fce8c(temp_v4,1);
+          btlEnsureEnemyDrawResources(temp_v4,1);
           *(unsigned int *)(param_1 + 0x201c) = *(unsigned int *)(param_1 + 0x201c) | 2;
           *(unsigned int *)(param_1 + 0x4558) = temp_v4;
         }

@@ -29,7 +29,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
-extern int FUN_004929d8(unsigned char *, unsigned int);
+extern int dataLookupDisplayName(unsigned char *, unsigned int);
 /* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_004cf8dc(int, int);
 extern int flaggedValueHolderGetTotal(int);
@@ -73,7 +73,7 @@ void FUN_004a4658(int param_1)
     sysPlaySe(temp_v1);
   }
   if (*(char *)(param_1 + 0x860) != '\0') {
-    temp_v0 = FUN_004929d8(temp_v6,*(unsigned int *)(param_1 + 0xa874));
+    temp_v0 = dataLookupDisplayName(temp_v6,*(unsigned int *)(param_1 + 0xa874));
     if (temp_v0 == 0) {
       temp_v0 = 0x52b5bc;
     }

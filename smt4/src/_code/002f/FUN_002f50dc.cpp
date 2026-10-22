@@ -1,48 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f50dc` (_code @ 0x2f50dc, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command writes recovered; title render-stack addressing and literal/register grouping still differ. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern void* g_titleScene;
+extern u32* DAT_004729e0;
+extern u32 DAT_004729e4;
+void asdModelCommandBlockRelease(void);
+void cursorResetFromParam(u32 mode);
 
-int asdModelCommandBlockRelease(void);
-int cursorResetFromParam(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-extern int DAT_004729e0; /* 0x4729e0 */
-extern int DAT_004729e4; /* 0x4729e4 */
-
-/* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: cursorResetFromParam. */
-
-
-void FUN_002f50dc(int param_1)
-
+// Write the cursor mode and current title render states into the model command stream.
+void FUN_002f50dc(u32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  cursorResetFromParam();
-  temp_v0 = DAT_004729e0;
-  *(int *)(DAT_004729e0 + DAT_004729e4 * 4) = param_1;
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0065;
-  DAT_004729e4 = DAT_004729e4 + 2;
-  if (param_1 != 0) {
-    *(unsigned int *)(temp_v0 + DAT_004729e4 * 4) =
-         *(unsigned int *)(g_titleScene + *(int *)(g_titleScene + 0x132c) * 4 + 0x1334);
-    *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0066;
-    DAT_004729e4 = DAT_004729e4 + 2;
-    *(unsigned int *)(temp_v0 + DAT_004729e4 * 4) =
-         *(unsigned int *)(g_titleScene + *(int *)(g_titleScene + 0x134c) * 4 + 0x1354);
-    *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0067;
-    DAT_004729e4 = DAT_004729e4 + 2;
-  }
-  asdModelCommandBlockRelease();
-  return;
+    // These stacks lie beyond the known TitleJobWork prefix; do not grow that shared type.
+    struct TitleRenderStates {
+        /* 0x0000 */ u8 unk0000[0x132C];
+        /* 0x132C */ RenderStateStack stacks[2];
+    };
+    cursorResetFromParam(mode);
+    u32* commands = DAT_004729e0;
+    commands[DAT_004729e4] = mode;
+    commands[DAT_004729e4 + 1] = 0xF0065;
+    DAT_004729e4 += 2;
+    if (mode != 0) {
+        TitleRenderStates* title = static_cast<TitleRenderStates*>(g_titleScene);
+        commands[DAT_004729e4] = title->stacks[0].entries[title->stacks[0].count];
+        commands[DAT_004729e4 + 1] = 0xF0066;
+        DAT_004729e4 += 2;
+        title = static_cast<TitleRenderStates*>(g_titleScene);
+        commands[DAT_004729e4] = title->stacks[1].entries[title->stacks[1].count];
+        commands[DAT_004729e4 + 1] = 0xF0067;
+        DAT_004729e4 += 2;
+    }
+    asdModelCommandBlockRelease();
 }
-
-} /* extern "C" */
+}

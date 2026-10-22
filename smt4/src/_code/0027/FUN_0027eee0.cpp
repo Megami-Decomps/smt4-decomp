@@ -4,10 +4,10 @@
 
 extern "C" {
 /* Updates or returns the requested state. */
-f32 FUN_00287b0c(void);
+f32 mathGetShortestAngleDelta(void);
 f32 FUN_0027eee0(void)
 {
-    f32 value = FUN_00287b0c();
+    f32 value = mathGetShortestAngleDelta();
     return value < 0.0f ? -value : value;
 }
 }

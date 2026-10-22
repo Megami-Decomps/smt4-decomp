@@ -1,43 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bbde0` (_code @ 0x1bbde0, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP saves, range-check outlining and polynomial scheduling differ; zero division is constant-folded. */
+#include "common.h"
+#include <math.h>
 
-extern "C" {
+extern "C" int __set_errno(int error);
+extern "C" __softfp f32 FUN_001c459c(f32 value);
 
-int __set_errno(int);
-int FUN_001c459c(double);
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+extern "C" f32 FUN_001bbde0(f32 value)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: __set_errno. */
-/* Supplied declaration required: FUN_001c459c. */
-
-
-void FUN_001bbde0(void)
-
-{
-/* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
-  float in_s0;
-  
-  if ((int)in_s0 * 2 + 0x9a000000U < 0x19000001) {
-    if ((unsigned int)((int)in_s0 << 1) >= 0x7e000001) {
-      FUN_001c459c((1.0f - romwright_fabs_4(in_s0)) * 0.5f);
+    union { f32 value; u32 bits; } input;
+    input.value = value;
+    u32 magnitude = input.bits << 1;
+    f32 offset = 0.0f;
+    f32 tail = 0.0f;
+    if (magnitude - 0x66000000u <= 0x19000000u) {
+        f32 square;
+        if (magnitude > 0x7E000000u) {
+            square = (1.0f - fabsf(value)) * 0.5f;
+            value = FUN_001c459c(square);
+            if (input.bits & 0x80000000u) {
+                value = -value;
+                offset = 3.140625f;
+                tail = 0.0009676535846665502f;
+            }
+            value *= -2.0f;
+        } else {
+            square = value * value;
+            offset = 1.5703125f;
+            tail = 0.0004838267923332751f;
+        }
+        f32 polynomial = 0.16666673123836517f + square *
+            (0.07498761266469955f + square *
+            (0.0450202152132988f + square *
+            (0.026433361694216728f + square * 0.03832830488681793f)));
+        return (tail - value) - (value * square) * polynomial + offset;
     }
-    return;
-  }
-  if ((unsigned int)((int)in_s0 * 2) < 0x66000000) {
-    return;
-  }
-  if (0xff000000 < (unsigned int)((int)in_s0 << 1)) {
-    return;
-  }
-  __set_errno(1);
-  return;
+    if (magnitude < 0x66000000u) {
+        return 1.5707963705062866f;
+    }
+    if (magnitude > 0xFF000000u) {
+        return value + value;
+    }
+    __set_errno(1);
+    return tail / tail;
 }
-
-} /* extern "C" */

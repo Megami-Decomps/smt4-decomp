@@ -1,70 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027d7b0` (_code @ 0x27d7b0, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The table pointer remains in a register rather than the retail stack slot; loop argument registers differ. */
+#include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
+#include "shard/W6_W6Match2_AocTable23.h"
 
-extern "C" {
+extern "C" AocSystem *g_aocSystem;
 
-int dataTableGetCount(...);
-int dataTableGet(...);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
-
-
-unsigned int FUN_0027d7b0(int param_1,int param_2,char *param_3,unsigned int param_4)
-
+// Find a record by its two signed key bytes and unsigned variant byte.
+extern "C" u32 FUN_0027d7b0(s32 category, s32 subtype, u32 variant)
 {
-/* irregular: 2 native warning(s); review required */
-  char *pcVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  char *pcVar6;
-  unsigned int temp_v4;
-  
-  dataTableGet(0x23,1,param_3,param_4,param_4);
-  temp_v0 = dataTableGetCount();
-  temp_v4 = 0;
-  temp_v0 = *(int *)(g_aocSystem + 0x3ec) + temp_v0;
-  if (0 < temp_v0) {
-    do {
-      temp_v1 = dataTableGet(0x23,1);
-      temp_v2 = dataTableGetEntries();
-      temp_v3 = dataTableGetCount(temp_v1);
-      if (temp_v4 < temp_v3) {
-        pcVar6 = (char *)(temp_v2 + temp_v4 * 0xc);
-      }
-      else {
-        pcVar6 = (char *)0x0;
-        if (temp_v4 < temp_v3 + *(int *)(g_aocSystem + 0x3ec)) {
-          pcVar6 = (char *)(*(int *)(g_aocSystem + 0x3f0) + (temp_v4 - temp_v3) * 0xc);
+    // The extension table lies beyond both recovered AocSystem prefixes.
+    struct Table23SystemView {
+        u8 unk000[0x3EC];
+        u32 count;
+        Table23Record *entries;
+    };
+    typedef char Table23SystemViewOffsetCheck[
+        offsetof(Table23SystemView, count) == 0x3EC &&
+        offsetof(Table23SystemView, entries) == 0x3F0 ? 1 : -1];
+    u32 baseCount = dataTableGetCount(dataTableGet(0x23, 1));
+    s32 totalCount = baseCount + ((Table23SystemView *)g_aocSystem)->count;
+    for (u32 index = 0; (s32)index < totalCount; ++index) {
+        void *table = dataTableGet(0x23, 1);
+        const Table23Record *entries = (const Table23Record *)dataTableGetEntries(table);
+        u32 count = dataTableGetCount(table);
+        const Table23Record *entry;
+        if (index < count) {
+            entry = &entries[index];
+        } else {
+            const Table23SystemView *system = (const Table23SystemView *)g_aocSystem;
+            u32 extraCount = system->count;
+            const Table23Record *extraEntries = system->entries;
+            entry = index < count + extraCount ? &extraEntries[index - count] : NULL;
         }
-      }
-      if (*pcVar6 == -1) {
-        return 0xffffffff;
-      }
-      if (*pcVar6 == param_1) {
-        pcVar1 = pcVar6 + 1;
-        if (*pcVar1 == param_2) {
-          pcVar6 = (char *)(unsigned int)(unsigned char)pcVar6[2];
+        if (entry->key.category == -1) {
+            return 0xFFFFFFFF;
         }
-        if (*pcVar1 == param_2 && pcVar6 == param_3) {
-          return temp_v4;
+        if (entry->key.category == category && entry->key.subtype == subtype &&
+            entry->key.variant == variant) {
+            return index;
         }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < temp_v0);
-  }
-  return 0xffffffff;
+    }
+    return 0xFFFFFFFF;
 }
-
-} /* extern "C" */

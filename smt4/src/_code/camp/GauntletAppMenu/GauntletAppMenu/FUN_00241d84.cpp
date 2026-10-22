@@ -13,11 +13,11 @@ typedef struct {
 } void_stack;
 
 extern int FUN_0019d758(...); /* 0x19d758 */
-extern int FUN_001a80b4(...); /* 0x1a80b4 */
+extern int itemCompareCategoryPriorityValue(...); /* 0x1a80b4 */
 extern int gauntletAppCompareBySortKeys(...); /* 0x1a8214 */
 extern int appComparePurchaseOrder(...); /* 0x1b1974 */
 extern int FUN_001f64c0(...); /* 0x1f64c0 */
-extern int FUN_0020713c(...); /* 0x20713c */
+extern int itemCompareCategoryPriorityDescending(...); /* 0x20713c */
 extern int gauntletAppCompareBySortKeysDescending(...); /* 0x20729c */
 extern int entryRefCompareByKindLevelOrder(...); /* 0x21966c */
 extern int g_gauntletAppMenu; /* 0x43dc88 */
@@ -45,11 +45,11 @@ void FUN_00241d84(void)
   if ((*(unsigned char *)(temp_v1 + 0xd) & 0x7f) == 0x21) {
     if (temp_v3 != 0) {
       temp_v2 = FUN_0029ee54(temp_v0 + 0x10);
-      FUN_002b7bca(temp_v0 + 0x74,temp_v2,4,FUN_001a80b4);
+      FUN_002b7bca(temp_v0 + 0x74,temp_v2,4,itemCompareCategoryPriorityValue);
     }
     else {
       temp_v2 = FUN_0029ee54(temp_v0 + 0x10);
-      FUN_002b7bca(temp_v0 + 0x74,temp_v2,4,FUN_0020713c);
+      FUN_002b7bca(temp_v0 + 0x74,temp_v2,4,itemCompareCategoryPriorityDescending);
     }
   }
   if ((*pbVar5 & 0x7f) == 0x15) {

@@ -1,65 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001643b4` (_code @ 0x1643b4, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges the two rectangle-source branches and their capacity checks; retail retains separate stores. */
+#include "ui/TouchRectangleRequest.h"
+extern "C" TouchRectangleRequest *FUN_001834a4();
 
-extern "C" {
-
-extern unsigned char g_ifTouch; /* 0x57f248 */
-
-extern int FUN_001834a4(void);
-
-
-int FUN_001643b4(void)
-
+// Append the current requested touch rectangle, stripping the encoded dimension flags.
+extern "C" s32 FUN_001643b4()
 {
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  unsigned short temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned short *puVar9;
-  int temp_v8;
-  
-  temp_v7 = (*(int *)((unsigned char *)&g_ifTouch + 0x4));
-  temp_v6 = FUN_001834a4();
-  temp_v5 = (*(int *)((unsigned char *)&g_ifTouch + 0x4));
-  if (*(short *)(temp_v7 + 0x64a) < 200) {
-    puVar9 = *(unsigned short **)(temp_v6 + 0xc);
-    if (puVar9 != (unsigned short *)0x0) {
-      temp_v2 = *puVar9;
-      temp_v3 = puVar9[1];
-      temp_v4 = *(unsigned short *)(temp_v6 + 10);
-      temp_v7 = (int)*(short *)((*(int *)((unsigned char *)&g_ifTouch + 0x4)) + 0x64a);
-      if (temp_v7 < 200) {
-        temp_v8 = (*(int *)((unsigned char *)&g_ifTouch + 0x4)) + temp_v7 * 8;
-        *(unsigned short *)(temp_v8 + 10) = *(unsigned short *)(temp_v6 + 8);
-        *(unsigned short *)(temp_v8 + 0xc) = temp_v4;
-        *(unsigned short *)(temp_v8 + 0xe) = temp_v2;
-        *(unsigned short *)(temp_v8 + 0x10) = temp_v3;
-        *(short *)(temp_v5 + 0x64a) = *(short *)(temp_v5 + 0x64a) + 1;
-        return temp_v7;
-      }
+    IfTouchState *initialState = g_ifTouch.state;
+    TouchRectangleRequest *request = FUN_001834a4();
+    IfTouchState *state = g_ifTouch.state;
+    if (initialState->regionCount >= 200)
+        return -1;
+    u16 x = request->x;
+    u16 y = request->y;
+    u16 width;
+    u16 height;
+    if (request->dimensions) {
+        width = request->dimensions->width;
+        height = request->dimensions->height;
+    } else {
+        width = request->width & 0x7fff;
+        height = request->height & 0x7fff;
     }
-    else {
-      temp_v0 = *(unsigned short *)(temp_v6 + 6);
-      temp_v1 = *(unsigned short *)(temp_v6 + 4);
-      temp_v2 = *(unsigned short *)(temp_v6 + 10);
-      temp_v7 = (int)*(short *)((*(int *)((unsigned char *)&g_ifTouch + 0x4)) + 0x64a);
-      if (temp_v7 < 200) {
-        temp_v8 = (*(int *)((unsigned char *)&g_ifTouch + 0x4)) + temp_v7 * 8;
-        *(unsigned short *)(temp_v8 + 10) = *(unsigned short *)(temp_v6 + 8);
-        *(unsigned short *)(temp_v8 + 0xc) = temp_v2;
-        *(unsigned short *)(temp_v8 + 0xe) = temp_v1 & 0x7fff;
-        *(unsigned short *)(temp_v8 + 0x10) = temp_v0 & 0x7fff;
-        *(short *)(temp_v5 + 0x64a) = *(short *)(temp_v5 + 0x64a) + 1;
-        return temp_v7;
-      }
-    }
-  }
-  return -1;
+    s32 index = state->regionCount;
+    if (index >= 200)
+        return -1;
+    state->regions[index].x = x;
+    state->regions[index].y = y;
+    state->regions[index].width = width;
+    state->regions[index].height = height;
+    ++state->regionCount;
+    return index;
 }
-
-} /* extern "C" */

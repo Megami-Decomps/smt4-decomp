@@ -7,12 +7,12 @@ extern "C" {
 int CONCAT44(double, int);
 int FUN_00162790(...);
 int efctSetSpeed(void);
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_001692d4(void);
 int FUN_00180310(...);
 int FUN_001835b4(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_003d3020(int, int, int);
 int drawFacingElbowSegments(int, float *, float *, unsigned int, int);
 int VectorSignedToFloat(...);
@@ -40,13 +40,13 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #endif
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 /* Supplied declaration required: FUN_001692d4. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003d3020. */
 /* Supplied declaration required: drawFacingElbowSegments. */
 
@@ -93,9 +93,9 @@ void FUN_00408c3c(int param_1)
   temp_v16 = temp_v8 + 10.0f;
   temp_v10 = 0.7f;
   temp_v6 = temp_v10;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v9 = CONCAT44(temp_v8,(int)temp_v10);
-  temp_v0 = FUN_001879d0(g_renderCtx);
+  temp_v0 = renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v12 = CONCAT44(temp_v11,(int)temp_v6);
   temp_v7 = (unsigned int)temp_v9;
   temp_v8 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -192,7 +192,7 @@ void FUN_00408c3c(int param_1)
       *(unsigned char *)(temp_v1 + 0x1330) = 0;
     }
   }
-  FUN_00168770();
+  renderPopStateStacks();
   if (*(char *)(param_1 + 0x24) == '\0') {
     temp_v1 = 3;
   }

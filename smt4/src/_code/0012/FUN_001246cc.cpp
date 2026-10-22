@@ -1,66 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001246cc` (_code @ 0x1246cc, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: category-array address formation and shared unlink epilogue placement differ; 67 built versus 65 retail rows. */
+#include "sys/AllocationTracking.h"
 
 extern "C" {
+extern AllocationTracking DAT_00465120;
+u32 FUN_002b30fc(AllocationHeader *header);
 
-int FUN_002b30fc(void);
-
-extern int *DAT_00465128; /* 0x465128 */
-
-/* Supplied declaration required: FUN_002b30fc. */
-
-
-int * FUN_001246cc(int param_1)
-
+AllocationHeader *FUN_001246cc(void *payload)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  int *piVar4;
-  
-  piVar3 = DAT_00465128;
-  piVar4 = *(int **)(param_1 - 4);
-  DAT_00465128[6] = DAT_00465128[6] - 1;
-  piVar3[7] = piVar3[7] - *piVar4;
-  if ((*(unsigned short *)(piVar4 + 2) & 0xff) < 8) {
-    piVar3 = piVar4;
-    FUN_002b30fc();
-    DAT_00465128[(int)piVar3 + 0xf] = DAT_00465128[(int)piVar3 + 0xf] - *piVar4;
-    piVar3 = piVar4;
-    FUN_002b30fc();
-    DAT_00465128[(int)piVar3 + 0x17] =
-         (DAT_00465128[(int)piVar3 + 0x17] - (*piVar4 - (unsigned int)*(unsigned short *)(piVar4 + 1))) + 0x3c;
-  }
-  piVar3 = DAT_00465128;
-  temp_v0 = piVar4[3];
-  piVar1 = piVar4 + 3;
-  if (temp_v0 != 0) {
-    if (piVar4[4] == 0) {
-      DAT_00465128[1] = temp_v0;
-      *(unsigned int *)(*piVar1 + 4) = 0;
+    AllocationHeader *header = reinterpret_cast<AllocationHeader **>(payload)[-1];
+    AllocationUsage *usage = DAT_00465120.usage;
+    --usage->count;
+    usage->bytes -= header->size;
+    if ((header->tag & 0xFF) < 8) {
+        u32 category = FUN_002b30fc(header);
+        DAT_00465120.usage->categoryBytes[category] -= header->size;
+        category = FUN_002b30fc(header);
+        DAT_00465120.usage->categoryPayloadBytes[category] =
+            (DAT_00465120.usage->categoryPayloadBytes[category] -
+             (header->size - header->alignment)) + sizeof(AllocationHeader);
     }
-    else {
-      *(int *)(temp_v0 + 4) = piVar4[4];
-      *(int *)piVar4[4] = *piVar1;
+    AllocationLink *link = &header->link;
+    if (link->previous) {
+        if (!link->next) {
+            DAT_00465120.usage->tail = link->previous;
+            link->previous->next = NULL;
+        } else {
+            link->previous->next = link->next;
+            link->next->previous = link->previous;
+        }
+    } else {
+        if (link->next) {
+            DAT_00465120.usage->head = link->next;
+            link->next->previous = NULL;
+        } else {
+            DAT_00465120.usage->tail = NULL;
+            DAT_00465120.usage->head = NULL;
+        }
     }
-  }
-  else {
-    if (piVar4[4] != 0) {
-      *DAT_00465128 = piVar4[4];
-      piVar3 = (int *)piVar4[4];
+    if (DAT_00465120.usage->cursor == link) {
+        DAT_00465120.usage->cursor = NULL;
     }
-    else {
-      DAT_00465128[1] = 0;
-    }
-    *piVar3 = 0;
-  }
-  if ((int *)DAT_00465128[2] == piVar1) {
-    DAT_00465128[2] = 0;
-  }
-  *(unsigned short *)(piVar4 + 2) = 0;
-  return piVar4;
+    header->tag = 0;
+    return header;
 }
-
-} /* extern "C" */
+}

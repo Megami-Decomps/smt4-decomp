@@ -1,60 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f51bc` (_code @ 0x2f51bc, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rectangle storage and saved-argument registers differ; the second preset uses an addend rather than a separate symbol. */
+#include "title/titleMain.h"
 
+struct TitleGxPreset {
+    u8 data[0x2c];
+};
 extern "C" {
+extern TitleScene *g_titleScene;
+extern TitleGxPreset g_asdGxPresets[3];
+extern TitleGxPreset *DAT_004e3b4c;
+void FUN_002c39a4(TitleScene *scene);
+void FUN_002c3a14(TitleScene *scene);
+void FUN_00343364(TitleScene *scene, const f32 *rectangle, u32 mode, u32 flags, f32 opacity);
 
-int FUN_002c39a4(int);
-int FUN_002c3a14(int);
-int FUN_00343364(int, unsigned char [8], unsigned int, unsigned int);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_2_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-extern unsigned int g_asdGxPresets; /* 0x4e39e0 */
-extern unsigned int DAT_004e3a0c; /* 0x4e3a0c */
-extern unsigned int *DAT_004e3b4c; /* 0x4e3b4c */
-
-/* Supplied declaration required: FUN_002c39a4. */
-/* Supplied declaration required: FUN_002c3a14. */
-/* Supplied declaration required: FUN_00343364. */
-
-
-void FUN_002f51bc(unsigned int param_1,unsigned int param_2)
-
+// Draw a rectangle using the current graphics preset, restoring the scene's selection afterward.
+void FUN_002f51bc(u32 mode, u32 flags, f32 x, f32 y, f32 width, f32 height, f32 opacity)
 {
-/* irregular: irregular input(s): in_d1; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned long long in_d1;
-  unsigned char temp_v2 [8];
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = *(unsigned int *)(g_titleScene + 0x528);
-  temp_v3 = (unsigned int)in_d1;
-  temp_v4 = (unsigned int)((unsigned long long)in_d1 >> 0x20);
-  if (DAT_004e3b4c == &g_asdGxPresets) {
-    temp_v1 = 0;
-  }
-  else if (DAT_004e3b4c == &DAT_004e3a0c) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 2;
-  }
-  *(unsigned int *)(g_titleScene + 0x528) = temp_v1;
-  FUN_002c3a14(g_titleScene);
-  FUN_002c39a4(g_titleScene);
-  FUN_00343364(g_titleScene,temp_v2,param_1,param_2);
-  *(unsigned int *)(g_titleScene + 0x528) = temp_v0;
-  return;
+    f32 rectangle[4] = {x, y, width, height};
+    s32 savedPreset = g_titleScene->unk528;
+    s32 preset;
+    if (DAT_004e3b4c == &g_asdGxPresets[0])
+        preset = 0;
+    else if (DAT_004e3b4c == &g_asdGxPresets[1])
+        preset = 1;
+    else
+        preset = 2;
+    g_titleScene->unk528 = preset;
+    FUN_002c3a14(g_titleScene);
+    FUN_002c39a4(g_titleScene);
+    FUN_00343364(g_titleScene, rectangle, mode, flags, opacity);
+    g_titleScene->unk528 = savedPreset;
 }
-
-} /* extern "C" */
+}

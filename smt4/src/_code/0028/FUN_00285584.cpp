@@ -12,7 +12,7 @@ int FUN_002ae038(...);
 int FUN_002ae9ec(...);
 int FUN_002b64b8(void);
 int FUN_002b659c(int, int, int, int);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
@@ -85,7 +85,7 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
 extern int FUN_002b8660(void);
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -153,7 +153,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
        ((temp_v1 = FUN_002c1d5c(), temp_v1 == 0 || (temp_v1 = FUN_002b8660(), temp_v1 == 0)))) {
       temp_v6 = (float)piVar2[6];
       temp_v11 = *(unsigned long long *)(piVar2 + 8);
-      FUN_002ba12c(g_titleScene);
+      renderCtxCalculateStereoParallax(g_titleScene);
       temp_v1 = (int)temp_v6;
       temp_v10 = (float)((unsigned long long)temp_v11 >> 0x20);
       temp_v6 = (float)temp_v11;

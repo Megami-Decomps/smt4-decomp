@@ -11,7 +11,7 @@ s32 FUN_001692ac(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 void sysMemClear(void *memory, u32 bytes);
 u32 requestIdToCode(u32 id);
-f32 FUN_001879d0(RenderCtxA *context, f32 value);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 depth, s32 flags, s32 mode);
 void FUN_001835b4(s32 layer, s32 group, s32 image, s32 depth, s32 flags, s32 mode);
 s32 asdTMTexTableNodeIsLoaded(u32 group, u32 code);
@@ -34,10 +34,10 @@ void requestImageDraw(const RequestImageSelector *owner, const f32 *alpha)
     for (u32 index = 0; index < 9; ++index) {
         images[index].second = requestIdToCode(index) * 1000;
     }
-    s32 depth = (s32)FUN_001879d0(g_renderCtx, 0.35f);
+    s32 depth = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
     FUN_00164b5c(2, 0x2E, images[owner->selection].first, depth, 0, 11);
     if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(owner->selection))) {
-        depth = (s32)FUN_001879d0(g_renderCtx, 0.35f);
+        depth = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
         FUN_001835b4(2, 0x2E, images[owner->selection].second, depth, 0, 12);
     }
     renderStackPop(&g_renderCtx->stackA);

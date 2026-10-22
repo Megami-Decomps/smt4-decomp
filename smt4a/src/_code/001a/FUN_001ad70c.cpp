@@ -1,62 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ad70c` (_code @ 0x1ad70c, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail leaves the payload return register uninitialized on failure and retains a constant-count loop. */
+/* Finds an indexed EPL block payload in an ATBC or ABCH model container. */
+#include "shard/S3AsdModelAttr.h"
 
 extern "C" {
+extern const char g_asdModelContainerAtbcMagic[];
+extern const char g_asdModelContainerAbchMagic[];
+extern const char DAT_0053d1a0[];
+s32 rt_memcmp(const void *left, const void *right, u32 bytes);
+void FUN_002e59f8(const void *source, void *destination, u32 bytes);
 
-int FUN_002e59f8(int, unsigned char [8], int);
-int SBORROW4(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002e59f8. */
-extern int rt_memcmp(int, char *, unsigned int);
-
-
-int FUN_001ad70c(int param_1,int param_2)
-
+void *FUN_001ad70c(const AsdAtbcHeader *container, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int unaff_r8;
-  unsigned char temp_v3;
-  unsigned char temp_v4 [8];
-  int temp_v5;
-  
-  temp_v0 = rt_memcmp(param_1,"ATBC",4);
-  if ((temp_v0 == 0) || (temp_v0 = rt_memcmp(param_1,"ABCH",4), temp_v0 == 0)) {
-    temp_v2 = *(int *)(param_1 + 8);
-    temp_v3 = temp_v2 == 0;
-    temp_v0 = temp_v2;
-    if (0 < temp_v2) {
-      temp_v0 = temp_v2 - param_2;
-      temp_v3 = temp_v2 == param_2;
-    }
-    if (!temp_v3 && temp_v0 < 0 == (0 < temp_v2 && SBORROW4(temp_v2,param_2))) {
-      temp_v0 = 0;
-      param_1 = param_1 + *(int *)(param_1 + 0x10);
-      do {
-        temp_v1 = rt_memcmp(param_1,"EPLSIGN",7);
-        if (temp_v1 != 0) {
-          return unaff_r8;
+    void *payload = NULL;
+    if (rt_memcmp(container, g_asdModelContainerAtbcMagic, 4) == 0 ||
+        rt_memcmp(container, g_asdModelContainerAbchMagic, 4) == 0) {
+        if (container->count > 0 && container->count > index) {
+            const AsdEplBlockHeader *block = (const AsdEplBlockHeader *)
+                ((const u8 *)container + container->firstOffset);
+            for (s32 current = 0; block != NULL; ++current) {
+                if (rt_memcmp(block, DAT_0053d1a0, 7) != 0) {
+                    break;
+                }
+                AsdEplBlockHeader header;
+                FUN_002e59f8(block, &header, sizeof(header));
+                payload = (void *)(block + 1);
+                if (current == index) {
+                    break;
+                }
+                block = (const AsdEplBlockHeader *)((const u8 *)block + header.size);
+            }
         }
-        FUN_002e59f8(param_1,temp_v4,0x10);
-        unaff_r8 = param_1 + 0x10;
-        if (param_2 == temp_v0) {
-          return unaff_r8;
-        }
-        temp_v0 = temp_v0 + 1;
-        param_1 = param_1 + temp_v5;
-      } while (temp_v2 != 0);
     }
-  }
-  return unaff_r8;
+    return payload;
 }
-
-} /* extern "C" */
+}

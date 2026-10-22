@@ -1,63 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `bgmPlay` (_code @ 0x201f30, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: channel-selection branches and sound-state writeback registers differ. */
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
-
-extern int DAT_00588fb0; /* 0x588fb0 */
-extern unsigned int DAT_0061951c; /* 0x61951c */
-extern unsigned int DAT_0061953c; /* 0x61953c */
-
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-void bgmPlay(int param_1,unsigned int param_2,unsigned int param_3)
-
-{
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    puVar4 = &DAT_0061951c;
-    if ((DAT_00588fb0 != 0) &&
-       (puVar2 = &DAT_0061951c, puVar4 = (unsigned int *)0x0, DAT_00588fb0 == 1)) {
-      puVar4 = &DAT_0061953c;
-    }
-    else {
-      puVar2 = &DAT_0061953c;
-    }
-    if (puVar2[4] != 0) {
-      temp_v1 = puVar4[7];
-      if ((temp_v1 & 0x22) == 0) {
-        puVar4[1] = param_2;
-        puVar4[3] = param_1;
-        puVar4[7] = temp_v1 | 0x405;
-        return;
-      }
-      puVar4[2] = param_3;
-      puVar4[4] = param_1;
-      puVar4[6] = param_2;
-      puVar4[7] = (temp_v1 & 0xffffffcf) | 0x508;
-    }
-    else if (puVar2[3] != param_1) {
-      temp_v1 = puVar2[7];
-      if ((temp_v1 & 0x22) != 0) {
-        puVar2[2] = param_3;
-        puVar2[4] = param_1;
-        puVar2[6] = param_2;
-        puVar2[7] = (temp_v1 & 0xffffffcf) | 0x508;
-        return;
-      }
-      puVar2[1] = param_2;
-      puVar2[3] = param_1;
-      puVar2[7] = temp_v1 | 0x405;
-      return;
-    }
-  }
-  return;
+extern BgmChannelSelection g_resourceSharedFlag;
+extern BgmRequestChannel DAT_0061951c[2];
+s32 jyoucyuGetTableEntry(u32);
 }
 
-} /* extern "C" */
+/* Queue a faded switch when needed; otherwise request the track directly. */
+static __inline void bgmChannelRequest(BgmRequestChannel *channel, s32 id, u32 parameter, u32 frames)
+{
+    u32 flags = channel->flags;
+    if ((flags & 0x22) != 0) {
+        channel->fadeFrames = frames;
+        channel->track.nextId = id;
+        channel->track.nextParam = parameter;
+        channel->flags = (flags & ~0x30) | 0x508;
+    } else {
+        channel->play.param = parameter;
+        channel->track.currentId = id;
+        channel->flags = flags | 0x405;
+    }
+}
+
+/* Play on the selected channel if the other is busy, or reuse the idle channel. */
+extern "C" void bgmPlay(s32 id, u32 parameter, u32 frames)
+{
+    BgmRequestChannel *selected = NULL;
+    BgmRequestChannel *other;
+    if (jyoucyuGetTableEntry(1) != 0) {
+        return;
+    }
+    if (g_resourceSharedFlag.selected == 0) {
+        selected = &DAT_0061951c[0];
+        other = &DAT_0061951c[1];
+    } else if (g_resourceSharedFlag.selected == 1) {
+        selected = &DAT_0061951c[1];
+        other = &DAT_0061951c[0];
+    } else {
+        other = &DAT_0061951c[1];
+    }
+    if (other->track.nextId != 0) {
+        bgmChannelRequest(selected, id, parameter, frames);
+    } else if (other->track.currentId != id) {
+        bgmChannelRequest(other, id, parameter, frames);
+    }
+}

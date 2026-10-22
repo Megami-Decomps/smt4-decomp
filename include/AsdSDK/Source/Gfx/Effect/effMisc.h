@@ -6,6 +6,9 @@
 #define ASDSDK_SOURCE_GFX_EFFECT_EFFMISC_H
 
 #include "common.h"
+#include <stddef.h>
+
+struct EffParticleParam;
 
 typedef struct EffMiscVec4 {
     f32 x, y, z, w;
@@ -48,11 +51,21 @@ typedef struct EffEmitter {
     /* 0x00 */ u32 maxCount;
     /* 0x04 */ s32 unk04;           /* -1 when created */
     /* 0x08 */ f32 scale;           /* 1.0 when created */
-    /* 0x0C */ u8 unk0c[0x28];
+    union {
+        /* 0x0C */ u8 unk0c[0x28];
+        struct {
+            /* 0x0C */ u8 unk0C[0x20];
+            /* 0x2C */ EffParticleParam *parameter;
+            /* 0x30 */ void *buffer;
+        } particle;
+    };
     /* 0x34 */ u16 unk34;          /* 1 in the small variant */
     /* 0x36 */ u8 unk36[2];
     /* 0x38 */ u8 unk38[0x24];
 } EffEmitter;
+typedef char EffEmitterParticleOffsetsCheck[sizeof(EffEmitter) == 0x5C &&
+    offsetof(EffEmitter, particle.parameter) == 0x2C &&
+    offsetof(EffEmitter, particle.buffer) == 0x30 ? 1 : -1];
 
 /* The emitter description a particle count is derived from. */
 typedef struct EffEmitterDesc {

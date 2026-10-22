@@ -1,48 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00358cbc` (_code @ 0x358cbc, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler hoists configuration pointers instead of retail's offset-literal accesses. */
+#include "shard/Shard0031.h"
+
+struct TitleConfigState {
+    u8 options[4];
+    u8 dirty;
+};
 
 extern "C" {
+extern TitleConfigState DAT_00588fc0;
+GameDataBlock *gameDataBlocksGetSaveData(void);
 
-extern unsigned char DAT_00588fc0; /* 0x588fc0 */
-extern unsigned char DAT_00588fc1; /* 0x588fc1 */
-extern unsigned char DAT_00588fc2; /* 0x588fc2 */
-extern unsigned char DAT_00588fc3; /* 0x588fc3 */
-extern signed char DAT_00588fc4; /* 0x588fc4 */
-
-extern int gameDataBlocksGetSaveData(void);
-
-
+// Exchange the four title options with saved data, preferring unsaved local changes.
 void FUN_00358cbc(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = gameDataBlocksGetSaveData();
-  if (temp_v0 != 0) {
-    if (DAT_00588fc4 == '\0') {
-      if (*(char *)(temp_v0 + 0x27e94) != '\0') {
-        DAT_00588fc0 = *(unsigned char *)(temp_v0 + 0x27e90);
-        DAT_00588fc1 = *(unsigned char *)(temp_v0 + 0x27e91);
-        DAT_00588fc2 = *(unsigned char *)(temp_v0 + 0x27e92);
-        DAT_00588fc3 = *(unsigned char *)(temp_v0 + 0x27e93);
+    GameDataBlock *save = gameDataBlocksGetSaveData();
+    if (save == NULL)
         return;
-      }
-      *(unsigned char *)(temp_v0 + 0x27e90) = DAT_00588fc0;
-      *(unsigned char *)(temp_v0 + 0x27e91) = DAT_00588fc1;
-      *(unsigned char *)(temp_v0 + 0x27e92) = DAT_00588fc2;
-      *(unsigned char *)(temp_v0 + 0x27e93) = DAT_00588fc3;
-      *(char *)(temp_v0 + 0x27e94) = '\x01';
-      return;
+    u8 *options = reinterpret_cast<u8 *>(&save->unk27E90);
+    if (DAT_00588fc0.dirty != 0) {
+        options[0] = DAT_00588fc0.options[0];
+        options[1] = DAT_00588fc0.options[1];
+        options[2] = DAT_00588fc0.options[2];
+        options[3] = DAT_00588fc0.options[3];
+        save->unk27E94[0] = 1;
+        DAT_00588fc0.dirty = 0;
+    } else if (save->unk27E94[0] != 0) {
+        DAT_00588fc0.options[0] = options[0];
+        DAT_00588fc0.options[1] = options[1];
+        DAT_00588fc0.options[2] = options[2];
+        DAT_00588fc0.options[3] = options[3];
+    } else {
+        options[0] = DAT_00588fc0.options[0];
+        options[1] = DAT_00588fc0.options[1];
+        options[2] = DAT_00588fc0.options[2];
+        options[3] = DAT_00588fc0.options[3];
+        save->unk27E94[0] = 1;
     }
-    *(unsigned char *)(temp_v0 + 0x27e90) = DAT_00588fc0;
-    *(unsigned char *)(temp_v0 + 0x27e91) = DAT_00588fc1;
-    *(unsigned char *)(temp_v0 + 0x27e92) = DAT_00588fc2;
-    *(unsigned char *)(temp_v0 + 0x27e93) = DAT_00588fc3;
-    *(unsigned char *)(temp_v0 + 0x27e94) = 1;
-    DAT_00588fc4 = '\0';
-  }
-  return;
 }
-
-} /* extern "C" */
+}

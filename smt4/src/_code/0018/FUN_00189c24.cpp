@@ -34,7 +34,7 @@ extern int FUN_00298e00(unsigned int);
 extern int questIsCompleted(unsigned int);
 extern int FUN_00298e40(unsigned int, int, int *);
 extern int FUN_00298f88(unsigned int);
-extern int FUN_00298fa0(unsigned int, unsigned int);
+extern int questReadRuntimeFlag(unsigned int, unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029d644(int);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -76,7 +76,7 @@ void FUN_00189c24(void)
   rt_memclr(temp_v2 + 0x78a,500);
   temp_v7 = 0;
   do {
-    temp_v3 = FUN_00298fa0(temp_v7,0);
+    temp_v3 = questReadRuntimeFlag(temp_v7,0);
     if (temp_v3 == 0) goto LAB_00189e6c;
     do {
       if ((0x15d >= temp_v7) ||

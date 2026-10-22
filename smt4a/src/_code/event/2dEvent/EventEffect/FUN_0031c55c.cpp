@@ -8,7 +8,7 @@ int FUN_00157558(int);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -30,7 +30,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 unsigned char FUN_0031c55c(void)
@@ -70,7 +70,7 @@ unsigned char FUN_0031c55c(void)
       (**(romwright_code **)(temp_v4 + 0x12d4))();
       *(unsigned char *)(temp_v4 + 0x12d0) = 0;
     }
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = DAT_0057f3d4 * 1000;
     efctSetSpeed();
     FUN_001835b4(2,DAT_0057f3d0,temp_v4,0,0,0xfa);

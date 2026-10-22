@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022a690(int);
 int FUN_0022a918(unsigned int, unsigned int);
 int FUN_0022aa38(unsigned int *, unsigned int);
-int FUN_0022ab08(int, unsigned int [3]);
+int selectionCopySupportedValue(int, unsigned int [3]);
 int FUN_0023ea94(void);
 int randRange(int);
 int FUN_00246134(...);
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022a690. */
 /* Supplied declaration required: FUN_0022a918. */
 /* Supplied declaration required: FUN_0022aa38. */
-/* Supplied declaration required: FUN_0022ab08. */
+/* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0023ea94. */
 /* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_00246134. */
@@ -161,7 +161,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
       }
       temp_v4 = param_5;
       FUN_00246134();
-      FUN_0022ab08(temp_v1,temp_v18);
+      selectionCopySupportedValue(temp_v1,temp_v18);
       puVar9 = puVar6;
       FUN_0022aa38(puVar6,temp_v18[0] & 0xff);
       if (puVar9 != (unsigned int *)0x0) {

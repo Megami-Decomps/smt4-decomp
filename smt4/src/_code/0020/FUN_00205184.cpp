@@ -10,7 +10,7 @@ int gfxObjectDestroy(...);
 int FUN_0028703c(...);
 int FUN_00287728(...);
 int FUN_0029bb14(...);
-int FUN_0029c2cc(...);
+void FUN_0029c2cc(...);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
 int modelSlotAttachChild(...);

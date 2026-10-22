@@ -3,6 +3,7 @@
 #define MAP_MAPMAIN_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The map mode's block (Shin Megami Tensei IV layout), kept by a module global. */
 typedef struct MapMain {
@@ -39,7 +40,13 @@ typedef struct MapMainA {
     /* 0x00 */ u8 unk00[0x28];
     /* 0x28 */ s32 unk28;
     /* 0x2C */ s32 unk2C;
-    /* 0x30 */ u8 unk30[0x10];
+    /* 0x30 */ union {
+        u8 unk30[0x10];
+        struct {
+            /* 0x30 */ s32 mapId;
+            /* 0x34 */ s32 areaId;
+        } transition;
+    };
     /* 0x40 */ u8 unk40;
     /* 0x41 */ u8 unk41[0x17];
     /* 0x58 */ u32 job;
@@ -49,5 +56,7 @@ typedef struct MapMainA {
 
 typedef char MapMainASizeCheck[sizeof(MapMainA) == 0xC0 ? 1 : -1];
 typedef char MapMainSizeCheck[sizeof(MapMain) == 0xC8 ? 1 : -1];
+typedef char MapMainATransitionOffsets[offsetof(MapMainA, transition.mapId) == 0x30 &&
+    offsetof(MapMainA, transition.areaId) == 0x34 ? 1 : -1];
 
 #endif

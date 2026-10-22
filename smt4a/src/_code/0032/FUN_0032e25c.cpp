@@ -1,55 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032e25c` (_code @ 0x32e25c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected-id store and signed comparison scheduling differ from retail. */
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
+// These fields extend beyond the shared table and sort-info prefixes; keep their views local.
+struct DisplaySlotTable {
+    u8 unk0000[0x1c88];
+    s8 indices[24]; // 0x1c88
+};
+struct DisplaySlotInfo {
+    u8 unk00[6];
+    u16 sortKey; // 0x06
+    u8 unk08[0x38];
+    u16 name[8]; // 0x40
+};
+struct DisplaySlotRecord {
+    u8 unk00[0x34];
+    u16 name[8]; // 0x34
+};
+struct SlotNameDisplay {
+    u8 unk00[0x34];
+    s16 selectedId; // 0x34
+    u8 unk36[0x1a];
+    u16 name[8]; // 0x50
+    u16 entryId; // 0x60
+    u16 sortKey; // 0x62
+};
 extern "C" {
+DisplaySlotTable *gameGetSlotTable();
+void FUN_002e59f8(const u16 *source, u16 *destination, u32 bytes);
 
-int FUN_00184310(void);
-int FUN_002e59f8(int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00184310. */
-extern int gameGetSlotRecord(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002e59f8. */
-
-
-void FUN_0032e25c(int param_1,int param_2)
-
+// Fill a display name and sort key from the selected party record, or from the default entry.
+void FUN_0032e25c(SlotNameDisplay *display, s32 entryId)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = gameGetSlotTable();
-  if (param_2 == 0) {
-    temp_v0 = 0x218;
-    *(unsigned short *)(param_1 + 0x34) = 0;
-    *(unsigned short *)(param_1 + 0x60) = 0x218;
-    FUN_00184310();
-    *(unsigned short *)(param_1 + 0x62) = *(unsigned short *)(temp_v0 + 6);
-    FUN_002e59f8(temp_v0 + 0x40,param_1 + 0x50,0x10);
-    return;
-  }
-  temp_v3 = 0;
-  *(short *)(param_1 + 0x34) = (short)param_2;
-  temp_v1 = temp_v0;
-  do {
-    temp_v2 = (int)*(char *)(temp_v0 + temp_v3 + 0x1c88);
-    if ((-1 < temp_v2) &&
-       (temp_v1 = gameGetSlotRecord(temp_v2), *(short *)(temp_v1 + 0x62) == *(short *)(param_1 + 0x34))) break;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x18);
-  *(short *)(param_1 + 0x60) = (short)param_2;
-  *(unsigned short *)(param_1 + 0x62) = *(unsigned short *)(temp_v1 + 100);
-  FUN_002e59f8(temp_v1 + 0x34,param_1 + 0x50,0x10);
-  return;
+    DisplaySlotTable *table = gameGetSlotTable();
+    if (entryId == 0) {
+        display->selectedId = 0;
+        display->entryId = 536;
+        DisplaySlotInfo *info = (DisplaySlotInfo *)FUN_00184310(536);
+        display->sortKey = info->sortKey;
+        FUN_002e59f8(info->name, display->name, 16);
+        return;
+    }
+    display->selectedId = (s16)entryId;
+    SlotRecord *record = (SlotRecord *)table;
+    for (s32 i = 0; i < 24; ++i) {
+        s32 index = table->indices[i];
+        if (index >= 0) {
+            record = gameGetSlotRecord(index);
+            if ((s16)record->entryId == display->selectedId)
+                break;
+        }
+    }
+    display->entryId = (u16)entryId;
+    display->sortKey = record->sortKey;
+    FUN_002e59f8(((DisplaySlotRecord *)record)->name, display->name, 16);
 }
-
-} /* extern "C" */
+}

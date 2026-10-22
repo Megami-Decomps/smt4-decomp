@@ -12,7 +12,7 @@ int FUN_00296774(...);
 int messageMainFinishWindow(void);
 int FUN_0029aafc(void);
 int soundChannelStopAll(...);
-int FUN_0029c94c(...);
+int buttonHelpShowSkillDetails(...);
 int FUN_0029cde0(...);
 int flaggedEntrySetValueA(...);
 int FUN_0029efd8(...);
@@ -87,7 +87,7 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_0029c48c(void);
-/* Supplied declaration required: FUN_0029c94c. */
+/* Supplied declaration required: buttonHelpShowSkillDetails. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
@@ -488,7 +488,7 @@ void FUN_001cea8c(int param_1)
     FUN_0029f848(temp_v9,temp_v11,temp_v11,1,1,1);
     FUN_0029f848(temp_v10,temp_v15,8,1,1,1);
     temp_v15 = FUN_0029efa8(temp_v10);
-    FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v15 * 2 + 0x34));
+    buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v15 * 2 + 0x34));
     temp_v8 = 0;
     temp_v15 = FUN_0029ee54(temp_v9);
     if (0 < temp_v15) {
@@ -730,7 +730,7 @@ LAB_001cfdfc:
         }
         else {
           temp_v4 = FUN_0029efa8(temp_v9);
-          FUN_0029c94c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
+          buttonHelpShowSkillDetails(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
           *piVar9 = *piVar9 + 1;
         }
         temp_v4 = FUN_0029aafc();
@@ -739,7 +739,7 @@ LAB_001cfdfc:
           do {
             if (*(short *)(param_1 + temp_v5 * 2 + 0xd114) == 0) {
               flaggedEntrySetValueA(temp_v9);
-              FUN_0029c94c(0);
+              buttonHelpShowSkillDetails(0);
               break;
             }
             temp_v5 = temp_v5 + 1;
@@ -784,7 +784,7 @@ LAB_001cf28c:
       eventQueueAddUniqueIfValid(0x100016c);
     }
     temp_v4 = FUN_0029efa8(temp_v10);
-    FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
+    buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
     return;
   case 3:
     scrRunOpcodesStub(*puVar28);
@@ -811,7 +811,7 @@ LAB_001cf28c:
         eventQueueAddUniqueIfValid(0x100016c);
       }
       temp_v4 = FUN_0029efa8(temp_v9);
-      FUN_0029c94c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
+      buttonHelpShowSkillDetails(*(unsigned short *)(param_1 + temp_v4 * 2 + 0xd114));
     }
     else {
       temp_v4 = 0;
@@ -845,7 +845,7 @@ LAB_001cf28c:
     temp_v4 = *piVar9;
     if (temp_v4 == 2) {
       temp_v4 = FUN_0029efa8(temp_v10);
-      FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
+      buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
       return;
     }
     break;
@@ -938,14 +938,14 @@ LAB_001cf6b0:
         FUN_002b7bca(temp_v7,8,2,&LAB_002c6e64);
         *piVar9 = 2;
         temp_v4 = FUN_0029efa8(temp_v10);
-        FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
+        buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
         return;
       }
     }
     temp_v4 = *piVar9;
     if (temp_v4 == 2) {
       temp_v4 = FUN_0029efa8(temp_v10);
-      FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
+      buttonHelpShowSkillDetails(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
       return;
     }
   }

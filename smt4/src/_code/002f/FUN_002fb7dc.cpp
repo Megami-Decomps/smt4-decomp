@@ -5,7 +5,7 @@
 extern "C" {
 
 int entryListCollectMatches(int);
-int FUN_00266584(unsigned int);
+int mapInitializeStoryMarkerEffects(unsigned int);
 int objSetBaseAndValue(int, int, unsigned int);
 int FUN_00266a2c(void);
 int FUN_002702dc(void);
@@ -22,7 +22,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: entryListCollectMatches. */
-/* Supplied declaration required: FUN_00266584. */
+/* Supplied declaration required: mapInitializeStoryMarkerEffects. */
 /* Supplied declaration required: objSetBaseAndValue. */
 /* Supplied declaration required: FUN_00266a2c. */
 /* Supplied declaration required: FUN_002702dc. */
@@ -93,7 +93,7 @@ unsigned int FUN_002fb7dc(void)
     *(unsigned char *)(g_lmapMainState + 0xb) = 0;
     *(unsigned int *)(temp_v0 + 0xec) = *(unsigned int *)(temp_v0 + 0xec) & 0xfffffffd;
     FUN_00281784();
-    FUN_00266584(*(unsigned int *)(temp_v0 + 0x40));
+    mapInitializeStoryMarkerEffects(*(unsigned int *)(temp_v0 + 0x40));
     objSetBaseAndValue(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
     entryListCollectMatches(temp_v0 + 0xec);
     DAT_0049f934 = 0;

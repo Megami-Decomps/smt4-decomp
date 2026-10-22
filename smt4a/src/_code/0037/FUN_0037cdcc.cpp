@@ -1,58 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037cdcc` (_code @ 0x37cdcc, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed request accesses remove retail's reloads and known-zero owner initialization. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include <stddef.h>
+
+struct TextRequestResultView {
+    u8 unk000[0xc8];
+    u8 selection[0x34];
+    u32 labelValue;
+    u32 state;
+    u32 linkedValue;
+};
+typedef char TextRequestResultOffsetsCheck[offsetof(TextRequestResultView, selection) == 0xc8 &&
+    offsetof(TextRequestResultView, labelValue) == 0xfc &&
+    offsetof(TextRequestResultView, state) == 0x100 &&
+    offsetof(TextRequestResultView, linkedValue) == 0x104 ? 1 : -1];
 
 extern "C" {
+void FUN_00381874(EffectTextRequest *request);
+u32 formattedTextCopyLabel(EffectTextRequest *request, void *result);
+u32 linkedObjGetValue(EffectTextRequest *request);
+void FUN_003c4984(EffectTextRequest *request, void *selection);
+void handleHolderFree(EffectTextRequest *request);
+void nodeListFree(void *owner);
+EffectTextRequest *effMenuCreate(u32 kind, u32 context);
 
-int nodeListFree(int);
-int FUN_00381874(unsigned int *);
-int effMenuCreate(int, unsigned int);
-int handleHolderFree(unsigned int *);
-int FUN_003c4984(unsigned int *, int);
-
-extern int DAT_0059dc1c; /* 0x59dc1c */
-extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
-
-/* Supplied declaration required: nodeListFree. */
-/* Supplied declaration required: FUN_00381874. */
-/* Supplied declaration required: effMenuCreate. */
-/* Supplied declaration required: handleHolderFree. */
-extern unsigned int linkedObjGetValue(unsigned int *);
-extern unsigned int formattedTextCopyLabel(unsigned int *, int);
-/* Supplied declaration required: FUN_003c4984. */
-
-
-void FUN_0037cdcc(unsigned int param_1,unsigned int param_2,int param_3)
-
+void FUN_0037cdcc(u32 unused, u32 context, TextRequestResultView *result)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  
-  if (DAT_0059dc1c != 0) {
-    FUN_00381874(DAT_0059dc20);
-    *(unsigned int *)(param_3 + 0x100) = *(unsigned int *)((int)DAT_0059dc20 + 8);
-    temp_v0 = formattedTextCopyLabel(DAT_0059dc20,param_3);
-    *(unsigned int *)(param_3 + 0xfc) = temp_v0;
-    temp_v0 = linkedObjGetValue(DAT_0059dc20);
-    *(unsigned int *)(param_3 + 0x104) = temp_v0;
-    FUN_003c4984(DAT_0059dc20,param_3 + 200);
-    if (*(int *)(param_3 + 0x100) == 1) {
-      handleHolderFree(DAT_0059dc20);
-      DAT_0059dc20 = (unsigned int *)0x0;
-      nodeListFree(DAT_0059dc1c);
-      DAT_0059dc1c = 0;
+    if (g_effectEditor.textRequest.owner != 0) {
+        FUN_00381874(g_effectEditor.textRequest.request);
+        result->state = g_effectEditor.textRequest.request->state;
+        result->labelValue = formattedTextCopyLabel(g_effectEditor.textRequest.request, result);
+        result->linkedValue = linkedObjGetValue(g_effectEditor.textRequest.request);
+        FUN_003c4984(g_effectEditor.textRequest.request, result->selection);
+        if (result->state == 1) {
+            handleHolderFree(g_effectEditor.textRequest.request);
+            g_effectEditor.textRequest.request = 0;
+            nodeListFree(g_effectEditor.textRequest.owner);
+            g_effectEditor.textRequest.owner = 0;
+        }
+        return;
     }
-    return;
-  }
-  puVar2 = (unsigned int *)0x0;
-  DAT_0059dc1c = 0;
-  effMenuCreate(0,param_2);
-  DAT_0059dc20 = puVar2;
-  *puVar2 = 0xba;
-  puVar2[1] = 0x1c;
-  *(unsigned int *)(param_3 + 0x100) = 0;
-  return;
+    EffectTextRequest *request = effMenuCreate(0, context);
+    g_effectEditor.textRequest.request = request;
+    request->type = 0xba;
+    request->size = 0x1c;
+    result->state = 0;
 }
-
-} /* extern "C" */
+}

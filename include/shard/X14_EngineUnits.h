@@ -23,7 +23,15 @@ typedef struct EngineUnits {
     /* 0x442C */ EngineUnit units[37];
     /* 0x74BC */ u8 unk74BC[4];
     /* 0x74C0 */ s32 current;  /* index of the active unit */
-    /* 0x74C4 */ u8 unk74C4[0xA6C];
+    union {
+        /* 0x74C4 */ u8 unk74C4[0xA6C];
+        struct {
+            u8 prefix[0x78];
+            /* 0x753C */ u8 reserve[3];
+            /* 0x753F */ u8 active[24];
+            /* 0x7557 */ u8 pending;
+        } partyMarkers;
+    };
     /* 0x7F30 */ u32 job;
 } EngineUnits;
 
@@ -43,5 +51,10 @@ typedef char EngineUnitsOffsets[sizeof(EngineUnit) == 0x150 && offsetof(EngineUn
     offsetof(EngineUnits, exitMode) == 0x4398 && offsetof(EngineUnits, exitSe) == 0x439A &&
     offsetof(EngineUnits, job) == 0x7F30 &&
     offsetof(EngineUnitRecord, id) == 0x62 ? 1 : -1];
+typedef char EngineUnitsPartyMarkerOffsetsCheck[
+    offsetof(EngineUnits, partyMarkers.reserve) == 0x753C &&
+    offsetof(EngineUnits, partyMarkers.active) == 0x753F &&
+    offsetof(EngineUnits, partyMarkers.pending) == 0x7557 &&
+    sizeof(EngineUnits) == 0x7F34 ? 1 : -1];
 
 #endif

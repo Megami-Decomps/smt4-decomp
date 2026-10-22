@@ -1,56 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019dde4` (_code @ 0x19dde4, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: model-work initialization uses different base registers and final flag-store scheduling. */
+/* Clears model-placement work and creates the configured map model when present. */
+#include "shard/W5_W5Match2_MapCallbacks.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
+#include "map/mapDepart.h"
 
 extern "C" {
-
-int asdMdlManagerCreateLoaded(unsigned char *, int);
-int FUN_002a0428(void);
-
-extern unsigned char LAB_0019de94; /* 0x19de94 */
-extern unsigned int *g_mapModelWork; /* 0x44cda0 */
-extern int DAT_0049faf8; /* 0x49faf8 */
-
-/* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_002a0428. */
-
+extern ModelRequestWork *g_mapModelWork;
+extern GameState g_gameState;
+NodeEnableNode *asdMdlManagerCreateLoaded(const char *path, s32 kind);
+void FUN_002a0428(NodeEnableNode *model, s32 enabled);
 
 void FUN_0019dde4(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  unsigned int *puVar4;
-  
-  puVar1 = g_mapModelWork;
-  *g_mapModelWork = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  *(unsigned char *)(puVar1 + 3) = 0;
-  *(unsigned char *)(puVar1 + 4) = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  *(unsigned char *)(puVar1 + 10) = 0;
-  puVar1[0xb] = 0;
-  temp_v0 = DAT_0049faf8;
-  puVar1 = g_mapModelWork;
-  g_mapModelWork[2] = DAT_0049faf8;
-  if (0 < temp_v0) {
-    puVar3 = &LAB_0019de94;
-    asdMdlManagerCreateLoaded(&LAB_0019de94,7);
-    puVar1[0xb] = (unsigned int)puVar3;
-    FUN_002a0428();
-    puVar4 = (unsigned int *)puVar1[0xb];
-    *puVar4 = *puVar4 | 2;
-    *(unsigned char *)(*(int *)(puVar4[2] + 0x2c) + 0x1f6) = 0;
-    *g_mapModelWork = 1;
-  }
-  return;
+    /* Float members cannot be added to the byte-aligned unk0D region without shifting it. */
+    struct Placement {
+        u8 active;
+        u8 unk01[3];
+        f32 position[3];
+        f32 heading;
+        u32 counter;
+        u8 enabled;
+        u8 unk19[3];
+        NodeEnableNode *model;
+    };
+    struct ModelPlacementView {
+        s32 state;
+        s32 counter;
+        s32 resourceId;
+        u8 requested;
+        u8 unk0D[3];
+        Placement placement;
+    };
+    ModelPlacementView *work = (ModelPlacementView *)g_mapModelWork;
+    work->state = 0;
+    work->counter = 0;
+    work->resourceId = 0;
+    work->requested = 0;
+    work->placement.active = 0;
+    work->placement.position[0] = 0.0f;
+    work->placement.position[1] = 0.0f;
+    work->placement.position[2] = 0.0f;
+    work->placement.heading = 0.0f;
+    work->placement.counter = 0;
+    work->placement.enabled = 0;
+    work->placement.model = NULL;
+    /* A word view in unk1C0 would round its 0x91-byte extent up and shift later fields. */
+    struct PlacementConfigView {
+        u8 unk000[0x1DC];
+        s32 modelPlacementId;
+    };
+    s32 resourceId = ((PlacementConfigView *)&g_gameState)->modelPlacementId;
+    work = (ModelPlacementView *)g_mapModelWork;
+    work->resourceId = resourceId;
+    if (resourceId > 0) {
+        Placement *placement = &work->placement;
+        placement->model = asdMdlManagerCreateLoaded("map/unit/u006.bam", 7);
+        FUN_002a0428(placement->model, 1);
+        NodeEnableNode *model = placement->model;
+        model->flags |= 2;
+        model->resource->target->enabled = 0;
+        ((ModelPlacementView *)g_mapModelWork)->state = 1;
+    }
 }
-
-} /* extern "C" */
+}

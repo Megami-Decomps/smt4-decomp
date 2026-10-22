@@ -1,60 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c9474` (_code @ 0x4c9474, 0xc0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the help-state mask base uses r2 instead of retail ip, with different stack argument grouping. */
+/* Starts a battle help action unless the current state suppresses help messages. */
+#include "battle/btlMain.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
+extern BtlHelpGlobalsA g_btlHelp;
+BtlMainStateA *btlGetMainState(void);
+u32 FUN_00200a68(u32 kind, s32 id, void *owner, u32 command, s32 mode, u32 value, u32 route, u32 flags);
+u32 FUN_004c8e30(void *owner, s32 mode, u32 value);
 
-int FUN_00200a68(...);
-int FUN_004c8e30(...);
-
-typedef struct fn_004c9474_arg0 fn_004c9474_arg0;
-struct fn_004c9474_arg0 {
-    unsigned char pad_0x0[0x2268];
-    undefined4 field_0x2268; /* +0x2268 */
-    unsigned char pad_0x226c[0x2334];
-    undefined4 field_0x45a0; /* +0x45a0 */
-    undefined4 field_0x45a4; /* +0x45a4 */
-};
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int DAT_00573908; /* 0x573908 */
-extern unsigned int DAT_0057390c; /* 0x57390c */
-extern unsigned int DAT_00573910; /* 0x573910 */
-extern unsigned int DAT_00573914; /* 0x573914 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00200a68. */
-/* Supplied declaration required: FUN_004c8e30. */
-
-
-unsigned int FUN_004c9474(fn_004c9474_arg0 *param_1,int param_2,short param_3,unsigned int param_4)
-
+u32 FUN_004c9474(void *owner, s32 mode, s32 id, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  if (((DAT_00573908 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0 &&
-       (DAT_0057390c & *(unsigned int *)(temp_v0 + 0x45a4)) == 0) &&
-     ((*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573910) == 0 &&
-      (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0)) {
-    if (param_2 != 0) {
-      temp_v1 = 5;
-      FUN_00200a68(5,(int)param_3,param_1,*(unsigned int *)(temp_v0 + 0x2268),param_2,param_4,7,0);
-      return temp_v1;
+    BtlMainStateA *state = btlGetMainState();
+    u64 flags = state->stateFlags64.bits;
+    if ((flags & ((u64)g_btlHelp.blockedStates[0] | ((u64)g_btlHelp.blockedStates[1] << 32))) == 0 &&
+        (flags & ((u64)g_btlHelp.blockedTransitions[0] | ((u64)g_btlHelp.blockedTransitions[1] << 32))) == 0) {
+        if (mode != 0) {
+            return FUN_00200a68(5, (s16)id, owner, state->commandMessage.command.currentCommand,
+                                mode, value, 7, 0);
+        }
+        return FUN_004c8e30(owner, 0, value);
     }
-    FUN_004c8e30(param_1,0,param_4);
-    return (unsigned int)param_1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

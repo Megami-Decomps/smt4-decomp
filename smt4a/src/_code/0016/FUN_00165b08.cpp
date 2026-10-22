@@ -18,7 +18,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int jobGetScalarValue(void);
 int rt_aeabi_memclr(...);
 int VectorSignedToFloat(...);
@@ -56,7 +56,7 @@ extern int FUN_00184ed0(void);
 extern int saveSlotFindById(unsigned int);
 extern int FUN_00187068(int);
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
@@ -94,7 +94,7 @@ void FUN_00165b08(void)
   renderStackPushIndexed(g_renderCtx,3,temp_v2);
   FUN_00183bb0();
   temp_v14 = 0x3e800000;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v10 = 0;
   temp_v15 = (unsigned long long)temp_v14 << 0x20;
   temp_v9 = 0;
@@ -123,7 +123,7 @@ void FUN_00165b08(void)
         temp_v5 = temp_v5 + *(int *)(temp_v7 + temp_v9 * 4 + 0xec);
       }
       temp_v13 = (float)((unsigned long long)temp_v15 >> 0x20);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v4 = (int)temp_v13 + temp_v4;
       efctSetSpeed();
       temp_v8 = FUN_001834a4(0x14,temp_v10 + 0xc34);
@@ -237,7 +237,7 @@ LAB_00165eec:
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xc);
   if (*(char *)(temp_v7 + 0xe8) != '\0') {
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     jobGetScalarValue();
     efctSetSpeed();
     temp_v7 = FUN_00184ed0();

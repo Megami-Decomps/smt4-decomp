@@ -1,57 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cd7c4` (_code @ 0x3cd7c4, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packet-mode switch is folded differently; retail also relocates the initial result constant. */
+#include "shard/W6_W6Match2_EffectEditor.h"
 
-extern "C" {
+struct EffectEditorPacket {
+    u8 data[0xFC];
+    s32 type;
+    s32 state;
+    u32 value;
+};
 
-int effBlockCopyDataB(unsigned int, unsigned char [4], int);
-int taskRunWithObject(unsigned int, unsigned char [252]);
-int FUN_0037cdcc(unsigned int, unsigned int, unsigned char [252]);
-int FUN_003ca0ec(unsigned int, unsigned int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-} param_2_stack;
-
-extern unsigned char LAB_00400002; /* 0x400002 */
-extern unsigned int DAT_0059dbf4; /* 0x59dbf4 */
-extern unsigned int DAT_0059dbfc; /* 0x59dbfc */
-extern unsigned int DAT_0059dc04; /* 0x59dc04 */
-
-/* Supplied declaration required: effBlockCopyDataB. */
-/* Supplied declaration required: taskRunWithObject. */
-/* Supplied declaration required: FUN_0037cdcc. */
-/* Supplied declaration required: FUN_003ca0ec. */
-
-
-unsigned char * FUN_003cd7c4(unsigned int param_1,unsigned int param_2)
-
+static inline s32 effectPacketMode(s32 type)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned char temp_v0 [252];
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [4];
-  
-  puVar1 = (unsigned char *)0x600001;
-  FUN_0037cdcc(param_1,param_2,temp_v0);
-  if (temp_v2 == 2) {
-    puVar1 = (unsigned char *)0x400000;
-  }
-  else if (temp_v2 == 1) {
-    FUN_003ca0ec(DAT_0059dbf4,DAT_0059dc04);
-    if (temp_v1 != 8) {
-      taskRunWithObject(DAT_0059dbfc,temp_v0);
+    switch (type) {
+    case 1: return 1;
+    case 2: return 2;
+    case 4: return 3;
+    case 8: return 4;
+    case 16: return 6;
+    case 32: return 5;
+    case 64: return 7;
+    case 128: return 8;
+    case 256: return 9;
+    default: return 0;
     }
-    else {
-      effBlockCopyDataB(DAT_0059dbfc,temp_v3,4);
-    }
-    puVar1 = &LAB_00400002;
-  }
-  return puVar1;
 }
 
-} /* extern "C" */
+extern "C" {
+void FUN_0037cdcc(u32, u32, EffectEditorPacket *);
+void FUN_003ca0ec(void *, EffectSelectionItem *);
+void effBlockCopyDataB(EffectSelectionBlock *, const void *, u32, u32);
+void taskRunWithObject(EffectSelectionBlock *, const EffectEditorPacket *, s32);
+}
+
+extern "C" u32 FUN_003cd7c4(u32 request, u32 argument)
+{
+    EffectEditorPacket packet;
+    u32 result = 0x600001;
+    FUN_0037cdcc(request, argument, &packet);
+    if (packet.state == 2) {
+        result = 0x400000;
+    } else if (packet.state == 1) {
+        FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);
+        if (packet.type == 8) {
+            effBlockCopyDataB(g_effectEditor.selection.block, &packet.value, 4, 4);
+        } else {
+            taskRunWithObject(g_effectEditor.selection.block, &packet, effectPacketMode(packet.type));
+        }
+        result = 0x400002;
+    }
+    return result;
+}

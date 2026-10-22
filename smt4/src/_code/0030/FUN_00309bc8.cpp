@@ -7,7 +7,7 @@ extern "C" {
 int skillFormatTargetLabel(unsigned char [100], int);
 int FUN_0024bda8(unsigned char [100], unsigned int);
 int FUN_002907c4(...);
-int FUN_00295660(int, unsigned char [100]);
+int textEncodeFontSlot(int, unsigned char [100]);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_0029ede8(int, int, unsigned int, int);
 int dataTable08Sub2GetRecord(void);
@@ -32,7 +32,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
@@ -75,12 +75,12 @@ void FUN_00309bc8(int param_1,unsigned int param_2)
       FUN_002907c4(&temp_v5,temp_v0 & 0xf);
       FUN_002907c4(temp_v6,*(unsigned char *)(temp_v3 + 0x58) >> 4);
       textFormatBuffer(temp_v7,&LAB_00309d98,&temp_v5,temp_v6);
-      FUN_00295660(0x25,temp_v7);
+      textEncodeFontSlot(0x25,temp_v7);
     }
     FUN_0024bda8(temp_v7,*(unsigned int *)(temp_v4 + 0x54) >> 0x14);
-    FUN_00295660(0x26,temp_v7);
+    textEncodeFontSlot(0x26,temp_v7);
     skillFormatTargetLabel(temp_v7,*(unsigned char *)(temp_v3 + 0x59));
-    FUN_00295660(0x27,temp_v7);
+    textEncodeFontSlot(0x27,temp_v7);
     if (*(char *)(temp_v4 + 0x5b) == '\0') {
       textFormatBuffer(temp_v7,&LAB_00309da0);
     }
@@ -102,7 +102,7 @@ void FUN_00309bc8(int param_1,unsigned int param_2)
     if (*(char *)(temp_v4 + 0x5b) == '\t') {
       textFormatBuffer(temp_v7,&LAB_00309de8);
     }
-    FUN_00295660(0x28,temp_v7);
+    textEncodeFontSlot(0x28,temp_v7);
     if (param_1 == 0) {
       param_1 = DAT_0043da30;
     }

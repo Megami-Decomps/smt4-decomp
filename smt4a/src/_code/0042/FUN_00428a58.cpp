@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0016cd0c(int *);
 int sysFatalBreak(void);
 int _ZN18WindowStatusResultC1Ej(...);
-int FUN_00427a10(unsigned int *, unsigned char *);
+int nnAsyncMapOperationResult(unsigned int *, unsigned char *);
 int FUN_00427ac4(unsigned int *, unsigned int);
 int FUN_00428308(unsigned int *, int);
 int FUN_004287ec(unsigned int, unsigned int, unsigned int, int);
@@ -49,7 +49,7 @@ extern unsigned int FUN_0016ccfc(void);
 extern int legacyResourceIdRemap(unsigned int *);
 extern unsigned long long FUN_00302420(unsigned int, unsigned int, unsigned int);
 extern unsigned int *FUN_004267fc(unsigned char *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_00427a10. */
+/* Supplied declaration required: nnAsyncMapOperationResult. */
 /* Supplied declaration required: FUN_00427ac4. */
 extern unsigned int *FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00428308. */
@@ -220,7 +220,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         _ZN18WindowStatusResultC1Ej(temp_v18,0xc9413891);
         return;
       }
-      FUN_00427a10(&temp_v10,&DAT_0061b000);
+      nnAsyncMapOperationResult(&temp_v10,&DAT_0061b000);
       temp_v14 = temp_v10;
       puStack_54 = temp_v11;
       temp_v5 = legacyResourceIdRemap(&temp_v14);

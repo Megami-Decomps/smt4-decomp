@@ -13,7 +13,7 @@ int skinObjectUpdateMatrices(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(int [24], unsigned char *, int);
 
@@ -46,7 +46,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0023b4a4(unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -78,7 +78,7 @@ unsigned int FUN_00472820(void)
   puVar2 = (unsigned int *)jobGetWork();
   if ((*puVar2 & 0x10) != 0) {
     temp_v11 = DAT_00570284;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = g_renderCtx;
     temp_v14 = (int)temp_v11;
     temp_v1 = FUN_001692ac(1,0);

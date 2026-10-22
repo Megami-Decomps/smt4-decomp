@@ -1,57 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246d38` (_code @ 0x246d38, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved queue, actor, target and status registers differ despite matching action operations. */
+#include "battle/btlReflect.h"
 
+struct ReflectedMemberStatus { u8 unk00[0xfa]; u16 flags; };
 extern "C" {
+void *btlGetMainState();
+ReflectedMemberStatus *FUN_0027da30(void *battle, s32 member);
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s16 actor, s16 secondary, u32 options);
 
-int FUN_0022699c(int, int, int, unsigned int);
-int FUN_0027da30(int, int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: FUN_0027da30. */
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_00246d38(short param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
+// Queue a status clear and, when no blocking status remains, the follow-up recovery actions.
+u32 FUN_00246d38(s16 actor, u32 options, ReflectTarget *target, u32 mask)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = 0;
-  temp_v0 = *(short *)(param_3 + 0x62) < 0x6d;
-  if (temp_v0) {
-    temp_v1 = btlGetMainState();
-    FUN_0027da30(temp_v1,(int)*(short *)(param_3 + 0x62));
-    if (temp_v1 != 0) {
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0xfa);
+    u32 flags = 0;
+    bool rosterMember = target->entryIndex < 109;
+    if (rosterMember) {
+        ReflectedMemberStatus *member = FUN_0027da30(btlGetMainState(), target->entryIndex);
+        if (member)
+            flags = member->flags;
     }
-  }
-  if (param_4 != 0) {
-    temp_v1 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-    *(unsigned char *)(temp_v1 + 4) = 0x1d;
-    *(int *)(temp_v1 + 0x14) = param_3;
-    temp_v2 = temp_v2 & ~param_4;
-    *(unsigned int *)(temp_v1 + 0x28) = 0;
-    *(unsigned int *)(temp_v1 + 0x4c) = param_4;
-  }
-  if ((temp_v0) && ((temp_v2 & 0x586) == 0)) {
-    temp_v1 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,(int)(short)(param_1 + 1),0,param_2);
-    *(unsigned char *)(temp_v1 + 4) = 0x14;
-    *(int *)(temp_v1 + 0x14) = param_3;
-    temp_v1 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,(int)(short)(param_1 + 1),0,param_2);
-    *(unsigned char *)(temp_v1 + 4) = 10;
-    *(int *)(temp_v1 + 0x14) = param_3;
-    *(unsigned int *)(temp_v1 + 0x28) = param_4;
-  }
-  return 1;
+    if (mask) {
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
+        action->kind = 29;
+        action->target = (u32)target;
+        flags &= ~mask;
+        action->value = 0;
+        action->parameter = mask;
+    }
+    if (rosterMember && !(flags & 0x586)) {
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 1), 0, options);
+        action->kind = 20;
+        action->target = (u32)target;
+        action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 1), 0, options);
+        action->kind = 10;
+        action->target = (u32)target;
+        action->value = mask;
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

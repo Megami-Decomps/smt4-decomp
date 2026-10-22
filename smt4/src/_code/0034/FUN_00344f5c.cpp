@@ -15,7 +15,7 @@ int FUN_0029cc44(...);
 int FUN_0029e648(...);
 int btlScriptQueueRequestIfIdle(...);
 int FUN_003bf5a8(...);
-int FUN_003c017c(...);
+int channelRunMagnitudeQueries(...);
 int workAdoptGlobalHandle(...);
 
 int FUN_0020ffd8(...);
@@ -176,7 +176,7 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: FUN_003bcdb0. */
 /* Supplied declaration required: FUN_003bf5a8. */
 /* Supplied declaration required: btlAddClampedVital. */
-/* Supplied declaration required: FUN_003c017c. */
+/* Supplied declaration required: channelRunMagnitudeQueries. */
 /* Supplied declaration required: btlDispatchTargetActionKind. */
 /* Supplied declaration required: FUN_003c0390. */
 /* Supplied declaration required: btlMessageStartUnlessFlagged. */
@@ -190,7 +190,7 @@ extern int btlSlotsGetMaxValue(int);
 /* Supplied declaration required: FUN_003d6644. */
 /* Supplied declaration required: FUN_003d6df0. */
 /* Supplied declaration required: FUN_003d6f98. */
-extern int FUN_003d700c(int);
+extern int cameraTestDefaultPose(int);
 /* Supplied declaration required: FUN_003d86a0. */
 /* Supplied declaration required: workAdoptGlobalHandle. */
 extern int FUN_003d9af8(int, int);
@@ -689,7 +689,7 @@ LAB_00345938:
     if (((-1 < *(int *)(g_btlMain + 0x760)) &&
         (temp_v9 = FUN_00256940(g_btlMain,temp_v5,0), temp_v9 != 0)) &&
        (((*(unsigned int *)(temp_v5 + 0x44a0) & 0x1000) == 0 ||
-        (temp_v9 = FUN_003d700c(g_btlMain), temp_v9 == 0)))) {
+        (temp_v9 = cameraTestDefaultPose(g_btlMain), temp_v9 == 0)))) {
       FUN_002568c4(0,*(unsigned int *)(psVar2 + 4));
     }
     if ((*puVar9 & 0x200) != 0) {
@@ -1043,7 +1043,7 @@ LAB_00346258:
     FUN_003bf5a8((int)*(short *)(*(int *)(psVar2 + 10) + 0x62),*(unsigned int *)(psVar2 + 0x14));
     break;
   case ',':
-    FUN_003c017c((int)*(short *)(*(int *)(psVar2 + 10) + 0x62),*(unsigned int *)(psVar2 + 0x14),
+    channelRunMagnitudeQueries((int)*(short *)(*(int *)(psVar2 + 10) + 0x62),*(unsigned int *)(psVar2 + 0x14),
                  *(unsigned int *)(psVar2 + 0x26),0);
     break;
   case '-':

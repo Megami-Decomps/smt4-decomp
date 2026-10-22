@@ -7,6 +7,7 @@
 #define ASDSDK_SOURCE_SYS_GX_ASDGXRENDERSYSTEM_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define ASD_GL_TEXTURE_2D 0xde1
 #define ASD_GL_UNSIGNED_SHORT 0x1403
@@ -45,5 +46,19 @@ typedef struct AsdGxTexture {
     /* 0x30 */ u32 handle;         /* the nngx object */
     /* 0x34 */ u32 unk34;
 } AsdGxTexture;
+
+struct AsdGxDrawCommand {
+    /* 0x00 */ u32 target;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u32 index;
+    /* 0x18 */ u32 first;
+    /* 0x1C */ u32 second;
+    /* 0x20 */ u32 values[1];
+};
+typedef char AsdGxDrawCommandOffsetsCheck[
+    offsetof(AsdGxDrawCommand, index) == 0x14 &&
+    offsetof(AsdGxDrawCommand, first) == 0x18 &&
+    offsetof(AsdGxDrawCommand, second) == 0x1C &&
+    offsetof(AsdGxDrawCommand, values) == 0x20 ? 1 : -1];
 
 #endif

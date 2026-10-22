@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002305fc(unsigned int *);
+int buttonHelpSelectMenuPreset(unsigned int *);
 int FUN_00233670(unsigned int *, int, unsigned int, unsigned int);
 int FUN_00233818(void);
 int ifTouchRegionClearAll(unsigned int);
 int ifTouchRegionRemove(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002305fc. */
+/* Supplied declaration required: buttonHelpSelectMenuPreset. */
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: ifTouchRegionClearAll. */
@@ -59,7 +59,7 @@ void FUN_002302d8(unsigned int *param_1,int param_2)
   *(unsigned short *)((int)param_1 + 0x15d4e) = temp_v0;
   *(short *)(param_1 + 0x5754) = (short)param_1[0x5754] + 2;
   if (param_2 != 0) {
-    FUN_002305fc(param_1);
+    buttonHelpSelectMenuPreset(param_1);
   }
   temp_v1 = *param_1 & 0xfffff1ff;
   *param_1 = temp_v1;

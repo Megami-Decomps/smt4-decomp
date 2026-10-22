@@ -1,74 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e0174` (_code @ 0x3e0174, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: party pointer and unlocked-capacity saved registers are exchanged. */
+#include "common.h"
 
+struct PartyMemberList {
+    u8 unk00[0x34];
+    u16 ids[8];
+    s8 states[8];
+};
 extern "C" {
+PartyMemberList *gameGetPlayerData();
+s32 gameDataFlagTestBit(u32 flag);
+s32 FUN_0019d390(u32 id);
 
-int FUN_0019d390(void);
-
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_0019d390. */
-extern int gameDataFlagTestBit(unsigned int);
-
-
-void FUN_003e0174(unsigned int param_1)
-
+// Increase an existing member's count to its limit, or add it to the first unlocked empty slot.
+void FUN_003e0174(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v1 = gameGetPlayerData();
-  temp_v3 = 4;
-  temp_v2 = gameDataFlagTestBit(0x77);
-  if (temp_v2 != 0) {
-    temp_v3 = 5;
-  }
-  temp_v2 = gameDataFlagTestBit(0x78);
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v3 + 1;
-  }
-  temp_v2 = gameDataFlagTestBit(0x79);
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v3 + 1;
-  }
-  temp_v2 = gameDataFlagTestBit(0x7a);
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v3 + 1;
-  }
-  if (temp_v3 >= 9) {
-    temp_v3 = 8;
-  }
-  temp_v2 = 0;
-  if (temp_v3 != 0) {
-    do {
-      if (*(unsigned short *)(temp_v1 + temp_v2 * 2 + 0x34) == param_1) {
-        FUN_0019d390();
-        temp_v0 = *(char *)(temp_v1 + temp_v2 + 0x44);
-        if ((int)param_1 <= (int)temp_v0) {
-          return;
+    PartyMemberList *party = gameGetPlayerData();
+    s32 capacity = 4;
+    if (gameDataFlagTestBit(0x77))
+        capacity = 5;
+    if (gameDataFlagTestBit(0x78))
+        ++capacity;
+    if (gameDataFlagTestBit(0x79))
+        ++capacity;
+    if (gameDataFlagTestBit(0x7a))
+        ++capacity;
+    if (capacity > 8)
+        capacity = 8;
+    for (s32 i = 0; i < capacity; ++i) {
+        if (party->ids[i] == id) {
+            s32 limit = FUN_0019d390(id);
+            s8 state = party->states[i];
+            if (state < limit)
+                party->states[i] = state + 1;
+            return;
         }
-        *(char *)(temp_v1 + temp_v2 + 0x44) = temp_v0 + '\x01';
-        return;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < (int)temp_v3);
-  }
-  temp_v2 = 0;
-  if (temp_v3 == 0) {
-    return;
-  }
-  do {
-    if (*(short *)(temp_v1 + temp_v2 * 2 + 0x34) == 0) {
-      *(short *)(temp_v1 + temp_v2 * 2 + 0x34) = (short)param_1;
-      *(unsigned char *)(temp_v2 + temp_v1 + 0x44) = 1;
-      return;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < (int)temp_v3);
-  return;
+    for (s32 i = 0; i < capacity; ++i) {
+        if (party->ids[i] == 0) {
+            party->ids[i] = (u16)id;
+            party->states[i] = 1;
+            return;
+        }
+    }
 }
-
-} /* extern "C" */
+}

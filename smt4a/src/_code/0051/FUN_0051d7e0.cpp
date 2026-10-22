@@ -1,53 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0051d7e0` (_code @ 0x51d7e0, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-key search uses different VFP constant registers and bounds-test scheduling. */
+/* Locates the unsigned animation key preceding a normalized sample time. */
+#include "shard/AnimCurve.h"
+extern "C" f32 hardfp_floorf(f32 value);
 
-extern "C" {
-
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int hardfp_floorf(void);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: hardfp_floorf. */
-
-
-unsigned short * FUN_0051d7e0(unsigned short *param_1)
-
+extern "C" AnimKey *FUN_0051d7e0(QuantizedAnimCurve *curve, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (in_s0 / *(float *)(param_1 + 8)) * 32.0f + 0.5f;
-  hardfp_floorf();
-  temp_v1 = (unsigned int)temp_v0;
-  puVar1 = param_1 + 10;
-  if (param_1[10] <= temp_v1) {
-    puVar1 = param_1 + (unsigned int)*param_1 * 3 + 7;
-    if (temp_v1 < *puVar1) {
-      temp_v0 = (float)VectorSignedToFloat(*param_1 - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = VectorFloatToUnsigned(*(float *)(param_1 + 2) * temp_v0 * in_s0,3);
-      puVar1 = param_1 + temp_v2 * 3 + 10;
-      if (*puVar1 <= temp_v1) {
-        do {
-          puVar2 = puVar1;
-          puVar1 = puVar2 + 3;
-        } while (*puVar1 <= temp_v1);
-        return puVar2;
-      }
-      do {
-        puVar1 = puVar1 + -3;
-      } while (temp_v1 < *puVar1);
+    /* keyRate sits in the byte-aligned unk02 prefix, which cannot gain float alignment. */
+    struct QuantizedCurveView {
+        u16 count;
+        u16 unk02;
+        f32 keyRate;
+        u8 unk08[8];
+        f32 timeScale;
+        AnimKey keys[1];
+    };
+    QuantizedCurveView *track = (QuantizedCurveView *)curve;
+    u32 frame = (u32)hardfp_floorf(time / track->timeScale * 32.0f + 0.5f);
+    AnimKey *key = track->keys;
+    if (frame >= key->frame) {
+        key = &track->keys[track->count - 1];
+        if (frame < key->frame) {
+            u32 estimate = (u32)(track->keyRate * (f32)(track->count - 1) * time);
+            key = &track->keys[estimate];
+            if (key->frame <= frame) {
+                do {
+                    ++key;
+                } while (key->frame <= frame);
+                return key - 1;
+            }
+            do {
+                --key;
+            } while (frame < key->frame);
+        }
     }
-  }
-  return puVar1;
+    return key;
 }
-
-} /* extern "C" */

@@ -1,52 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ea8fc` (_code @ 0x1ea8fc, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation-result and task-creation argument registers differ, changing literal-pool order. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
+struct SoundTestWork {
+    u32 process; // 0x00
+    u8 active; // 0x04
+    u8 unk05[3];
+    u32 selectedSound; // 0x08
+    u32 selectedBank; // 0x0c
+    u32 playingSound; // 0x10
+};
 extern "C" {
+extern SoundTestWork *DAT_0044e110;
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 track);
+u32 asdProcessCreateSimple(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument);
+u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument, u32 parent);
+void FUN_001e960c();
+void FUN_002ca6e0();
+void FUN_002ca6f8();
+void FUN_002f4b34();
 
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int FUN_001e960c(...); /* 0x1e960c */
-extern unsigned char LAB_001ea9e8; /* 0x1ea9e8 */
-extern unsigned char LAB_001ea9f8; /* 0x1ea9f8 */
-extern unsigned char LAB_002ca6e0; /* 0x2ca6e0 */
-extern unsigned char LAB_002ca6f8; /* 0x2ca6f8 */
-extern unsigned char LAB_002f4b34; /* 0x2f4b34 */
-extern unsigned int *DAT_0044e110; /* 0x44e110 */
-
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_001ea8fc(void)
-
+// Allocate the sound-test state and start its control and drawing jobs.
+void FUN_001ea8fc()
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x14,1);
-  DAT_0044e110 = puVar1;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  puVar2 = &LAB_001ea9e8;
-  asdProcessCreateSimple(&LAB_001ea9e8,2,0,0,FUN_001e960c,&LAB_002ca6e0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_001ea9f8,0xe6,0,0,&LAB_002ca6f8,&LAB_002f4b34,0,puVar2);
-  return;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\sound\\soundTest.cpp", 49);
+    SoundTestWork *work = (SoundTestWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(SoundTestWork), 1);
+    DAT_0044e110 = work;
+    work->selectedSound = 0;
+    work->selectedBank = 0;
+    work->playingSound = 0;
+    work->active = 0;
+    work->process = asdProcessCreateSimple("ST Cont", 2, 0, 0, FUN_001e960c, FUN_002ca6e0, 0);
+    taskCreateDraw("ST Draw", 230, 0, 0, FUN_002ca6f8, FUN_002f4b34, 0, work->process);
 }
-
-} /* extern "C" */
+}

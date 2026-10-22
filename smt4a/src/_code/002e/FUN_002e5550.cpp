@@ -1,58 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e5550` (_code @ 0x2e5550, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float narrowing keeps fewer saved registers and schedules exponent tests differently. */
+/* Narrows a parsed double to float, reporting underflow and saturation overflow. */
+#include "common.h"
+#include <math.h>
 
 extern "C" {
+void FUN_00101598(s32 error, s32 detail);
+void __set_errno(s32 error);
+__softfp f64 FUN_001d2978(f64 value, s32 *exponent);
 
-int FUN_00101598(int, int);
-int __set_errno(int);
-int FUN_001d2978(int, int, int [7]);
-int SUB84(double, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: SUB84 (SUBPIECE). */
-/* Supplied declaration required: FUN_00101598. */
-/* Supplied declaration required: __set_errno. */
-/* Supplied declaration required: FUN_001d2978. */
-
-
-void FUN_002e5550(float *param_1,double *param_2)
-
+void FUN_002e5550(f32 *output, const f64 *input)
 {
-/* irregular: 4 native warning(s); review required */
-  float temp_v0;
-  double temp_v1;
-  double temp_v2;
-  int temp_v3 [7];
-  
-  temp_v1 = *param_2;
-  FUN_001d2978(SUB84(temp_v1,0),(int)((unsigned long long)temp_v1 >> 0x20),temp_v3);
-  temp_v2 = 0.0;
-  temp_v3[0] = temp_v3[0] + 0x7e;
-  if ((temp_v3[0] < 1) && (temp_v1 != 0.0)) {
-    temp_v0 = (float)temp_v1;
-    if (temp_v0 == 0.0f) {
-      FUN_00101598(2,0);
+    f64 inputValue = *input;
+    s32 exponent;
+    FUN_001d2978(inputValue, &exponent);
+    exponent += 0x7E;
+    f32 value;
+    if (exponent <= 0 && inputValue != 0.0) {
+        value = (f32)inputValue;
+        if (value == 0.0f) {
+            FUN_00101598(2, 0);
+        }
+    } else if (exponent < 0xFF) {
+        value = (f32)inputValue;
+    } else {
+        __set_errno(2);
+        value = inputValue >= 0.0 ? (f32)HUGE_VAL : -(f32)HUGE_VAL;
     }
-  }
-  else if (temp_v3[0] < 0xff) {
-    temp_v0 = (float)temp_v1;
-  }
-  else {
-    __set_errno(2);
-    if (temp_v2 <= temp_v1) {
-      temp_v0 = INFINITY;
-    }
-    else {
-      temp_v0 = -INFINITY;
-    }
-  }
-  *param_1 = temp_v0;
-  return;
+    *output = value;
 }
-
-} /* extern "C" */
+}

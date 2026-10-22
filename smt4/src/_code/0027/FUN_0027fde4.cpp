@@ -15,7 +15,7 @@ int FUN_0027f48c(int, int);
 int lmapSetSceneId(unsigned int);
 int FUN_0027fc14(int);
 int FUN_002804ec(int);
-int FUN_00280988(void);
+int mapEaseSceneHeading(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
@@ -52,7 +52,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: FUN_00280988. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
@@ -94,7 +94,7 @@ void FUN_0027fde4(void)
   temp_v8 = *(unsigned long long *)(g_lmapScene + 0x28);
   temp_v10 = *(unsigned int *)(g_lmapScene + 0x30);
   uStack_38 = in_d8;
-  FUN_00280988();
+  mapEaseSceneHeading();
   temp_v2 = g_lmapScene;
   temp_v6 = *(float *)(g_lmapScene + 0x1c) +
           (*(float *)(g_lmapScene + 0x28) - *(float *)(g_lmapScene + 0x1c)) * 0.33333334f;

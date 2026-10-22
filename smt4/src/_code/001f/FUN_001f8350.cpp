@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 
 extern int DAT_004474f4; /* 0x4474f4 */
@@ -13,7 +13,7 @@ extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 
 
@@ -135,7 +135,7 @@ void FUN_001f8350(void)
   }
   mathPositionHeadingDegrees();
   temp_v7 = *(float *)(DAT_004474f4 + 0x18);
-  FUN_00287b0c();
+  mathGetShortestAngleDelta();
   temp_v8 = *(float *)(g_lmapScene + 0x20);
   if (temp_v7 < temp_v9) {
     temp_v7 = -temp_v7;

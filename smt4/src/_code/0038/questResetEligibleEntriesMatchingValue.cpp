@@ -8,7 +8,7 @@ struct QuestRecordView {
 }
 
 extern "C" {
-s32 FUN_00298fa0(u16 questIndex, u32 mode);
+s32 questReadRuntimeFlag(u16 questIndex, u32 mode);
 s32 questRequirementsMet(u16 questIndex);
 QuestRecordView* dataTable1bOr1cGetRecord(u16 questIndex);
 void flagEntryReset(u16 questIndex);
@@ -20,7 +20,7 @@ s32 questResetEligibleEntriesMatchingValue(u32 matchingValue)
 {
     s32 changed = 0;
     for (u32 questIndex = 0; questIndex < 400; ++questIndex) {
-        if (FUN_00298fa0(static_cast<u16>(questIndex), 0) != 0)
+        if (questReadRuntimeFlag(static_cast<u16>(questIndex), 0) != 0)
             continue;
         if (questRequirementsMet(static_cast<u16>(questIndex)) == 0)
             continue;

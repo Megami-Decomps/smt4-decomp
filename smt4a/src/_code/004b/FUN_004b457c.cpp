@@ -15,7 +15,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int libc_strcpy(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -68,7 +68,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: libc_strcpy. */
 extern int actorIsActive(void);
 extern int FUN_004ccbf0(int);
@@ -120,7 +120,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v31 = param_2;
   iStack_28 = param_3;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v11 = 0;
   temp_v12 = 0;
   temp_v13 = 0;
@@ -243,7 +243,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
       FUN_001835b4(2,temp_v28,0x13d,*(short *)(param_1 + 0x7c70) + temp_v7,temp_v30,0x7e);
     }
     temp_v10 = 0.26f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v0 = (int)temp_v10 + temp_v31;
     FUN_001834a4(temp_v28,0x137);
     FUN_001834a4(temp_v28,0x14c);

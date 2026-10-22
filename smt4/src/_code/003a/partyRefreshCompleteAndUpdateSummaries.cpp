@@ -60,7 +60,7 @@ void FUN_0029ee6c(s32, u32);
 void beginStatusPanelClose();
 void FUN_00233240(void *, s32);
 void FUN_00232848();
-void FUN_0026c57c();
+void uniteLoadPreviewRoomModel();
 
 void partyRefreshCompleteAndUpdateSummaries(PartyRefresh *work)
 {
@@ -105,7 +105,7 @@ void partyRefreshCompleteAndUpdateSummaries(PartyRefresh *work)
         work->state = 11;
         work->phase = 0;
         FUN_00232848();
-        FUN_0026c57c();
+        uniteLoadPreviewRoomModel();
         return;
     }
     work->state = 2;

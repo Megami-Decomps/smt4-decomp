@@ -8,7 +8,7 @@ int FUN_0026e324(unsigned int);
 int FUN_002ad8b4(unsigned int, unsigned int);
 int asdMemFree(...);
 int titleConfigApplyAudio(void);
-int FUN_002e0bc4(void);
+int titleSynchronizeSavedConfig(void);
 int rt_memcpy_w(...);
 
 extern unsigned int g_aocSystem; /* 0x433158 */
@@ -23,7 +23,7 @@ extern unsigned int gameDataBlocksGetTable(void);
 extern unsigned int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: titleConfigApplyAudio. */
-/* Supplied declaration required: FUN_002e0bc4. */
+/* Supplied declaration required: titleSynchronizeSavedConfig. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -40,7 +40,7 @@ void FUN_0026ff54(void)
     FUN_002ad8b4(temp_v0,DAT_0044de3c);
     temp_v0 = gameDataBlocksGetSaveData();
     rt_memcpy_w(temp_v0,DAT_0044de40,0x24d28);
-    FUN_002e0bc4();
+    titleSynchronizeSavedConfig();
     titleConfigApplyAudio();
     FUN_0026e324(g_aocSystem);
     asdMemFree(DAT_0044de38);

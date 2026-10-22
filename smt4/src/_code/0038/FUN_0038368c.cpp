@@ -10,7 +10,7 @@ int FUN_002ae038(...);
 int FUN_002ae9ec(...);
 int libc_strcat(...);
 int FUN_002b75ec(...);
-int FUN_002ba12c(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002bcf4c(void);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
@@ -50,7 +50,7 @@ extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002be5a4. */
@@ -112,21 +112,21 @@ void FUN_0038368c(unsigned int *param_1)
     temp_v10 = VectorFloatToUnsigned(temp_v9 * 255.0f,3);
     temp_v11 = 0.3f;
     temp_v10 = temp_v10 & 0xff;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v12 = 0.31f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v19 = (int)temp_v12;
     temp_v12 = 0.32f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v17 = (int)temp_v12;
     temp_v12 = 0.33f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v16 = (int)temp_v12;
     temp_v12 = 0.34f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v1 = (int)temp_v12;
     temp_v12 = 0.35f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v15 = (int)temp_v12;
     temp_v2 = vec2GetXInt(param_1 + 0x11);
     temp_v3 = vec2GetYInt(param_1 + 0x11);

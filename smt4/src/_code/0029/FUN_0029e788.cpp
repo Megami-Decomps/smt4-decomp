@@ -1,50 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029e788` (_code @ 0x29e788, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: menu-reset offset-pool reuse and register scheduling differ. */
+#include "shard/Shard0033.h"
+
+// IV's three initial headers and menu controls differ from the Apocalypse session view.
+struct MenuSessionResetViewIV {
+    u8 unk0000[0x10];
+    u32 state;
+    u8 unk0014[4];
+    u32 first;
+    u32 second;
+    u8 active;
+    u8 unk0021[0x3f7];
+    UiSpriteState headers[3];
+    u8 unk05bc[0x230];
+    UiSpriteState primary[10];
+    UiSpriteState secondary[10];
+    s32 mode;
+    u32 selection;
+    u8 unk12e4[0xc];
+    u8 flag12f0;
+    u8 unk12f1[0xb6f];
+    u8 flag1e60;
+    u8 unk1e61[6];
+    u8 kind;
+};
+typedef char MenuSessionResetOffsetsCheck[offsetof(MenuSessionResetViewIV, first) == 0x18 &&
+    offsetof(MenuSessionResetViewIV, headers) == 0x418 &&
+    offsetof(MenuSessionResetViewIV, primary) == 0x7ec &&
+    offsetof(MenuSessionResetViewIV, secondary) == 0xd64 &&
+    offsetof(MenuSessionResetViewIV, mode) == 0x12dc &&
+    offsetof(MenuSessionResetViewIV, flag12f0) == 0x12f0 &&
+    offsetof(MenuSessionResetViewIV, flag1e60) == 0x1e60 &&
+    offsetof(MenuSessionResetViewIV, kind) == 0x1e67 ? 1 : -1];
 
 extern "C" {
+extern ObjBRef g_gameGlobals;
+void FUN_002bee58(UiSpriteState *sprite, s32 index);
+void timerStart(UiSpriteState *sprite, s32 duration, u32 flags);
 
-int timerStart(int, int, int);
-int FUN_002bee58(int, int);
-
-extern int DAT_0044e144; /* 0x44e144 */
-
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
-
-
-void FUN_0029e788(void)
-
+void FUN_0029e788()
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = DAT_0044e144;
-  FUN_002bee58(DAT_0044e144 + 0x418,0);
-  FUN_002bee58(temp_v0 + 0x4a4,1);
-  FUN_002bee58(temp_v0 + 0x530,2);
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v1 * 0x8c;
-    timerStart(temp_v2 + 0x7ec,4,0);
-    timerStart(temp_v2 + 0xd64,1,0);
-    temp_v2 = DAT_0044e144;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 10);
-  *(unsigned char *)(DAT_0044e144 + 0x1e60) = 0;
-  if ((*(char *)(temp_v2 + 0x1e67) != '\t') &&
-     (temp_v1 = *(int *)(temp_v2 + 0x12dc), (temp_v1 == 4 || temp_v1 == 5) || temp_v1 == 6)) {
-    *(unsigned int *)(temp_v2 + 0x12e0) = 0;
-  }
-  *(unsigned int *)(temp_v0 + 0x18) = 0;
-  *(unsigned char *)(temp_v0 + 0x12f0) = 0;
-  *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  *(unsigned char *)(temp_v0 + 0x20) = 0;
-  *(unsigned int *)(temp_v2 + 0x10) = 0;
-  *(unsigned int *)(temp_v2 + 0x12dc) = 1;
-  return;
+    MenuSessionResetViewIV *session = (MenuSessionResetViewIV *)g_gameGlobals.instance;
+    FUN_002bee58(&session->headers[0], 0);
+    FUN_002bee58(&session->headers[1], 1);
+    FUN_002bee58(&session->headers[2], 2);
+    for (s32 index = 0; index < 10; ++index) {
+        timerStart(&session->primary[index], 4, 0);
+        timerStart(&session->secondary[index], 1, 0);
+    }
+    MenuSessionResetViewIV *current = (MenuSessionResetViewIV *)g_gameGlobals.instance;
+    current->flag1e60 = 0;
+    if (current->kind != 9) {
+        s32 mode = current->mode;
+        if (mode == 4 || mode == 5 || mode == 6) {
+            current->selection = 0;
+        }
+    }
+    session->first = 0;
+    session->flag12f0 = 0;
+    session->second = 0;
+    session->active = 0;
+    current->state = 0;
+    current->mode = 1;
 }
-
-} /* extern "C" */
+}

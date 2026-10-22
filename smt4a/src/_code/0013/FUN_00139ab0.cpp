@@ -1,71 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00139ab0` (_code @ 0x139ab0, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: synchronization recovered; retail preserves producer-count arithmetic and reloads the final LCD flag through its global address. */
+#include "shard/W6_W6Match3_GxPresetResumeState.h"
 
 extern "C" {
+extern GxPresetResumeState g_asdGxPresets;
+void asdFileWakeWorker(void);
+void asdGxSetTopScreenMode(u32 mode);
+void FUN_0014a878(s32 event);
+void gxLcdClearForceBlack(void);
 
-int asdFileWakeWorker(void);
-int asdGxSetTopScreenMode(unsigned int);
-int FUN_0014a878(int);
-int gxLcdClearForceBlack(void);
-
-extern int DAT_0063ff44; /* 0x63ff44 */
-extern int DAT_0063ff48; /* 0x63ff48 */
-extern int DAT_0063ff50; /* 0x63ff50 */
-extern int DAT_0063ff54; /* 0x63ff54 */
-extern signed char DAT_0063ff58; /* 0x63ff58 */
-
-/* Supplied declaration required: asdFileWakeWorker. */
-/* Supplied declaration required: asdGxSetTopScreenMode. */
-/* Supplied declaration required: FUN_0014a878. */
-/* Supplied declaration required: gxLcdClearForceBlack. */
-
-
+// Drain queued display events, apply a pending screen mode, and reveal the LCD.
 void FUN_00139ab0(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = 0;
-  temp_v0 = DAT_0063ff48 - DAT_0063ff44;
-  if (0 < temp_v0) {
-    do {
-      FUN_0014a878(0x402);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v0);
-  }
-  asdFileWakeWorker();
-  FUN_0014a878(0x402);
-  temp_v0 = DAT_0063ff54;
-  DAT_0063ff44 = 0;
-  if (-1 < DAT_0063ff54) {
-    temp_v3 = DAT_0063ff54 == 0;
-    DAT_0063ff50 = DAT_0063ff54;
-    DAT_0063ff54 = -1;
-    if (temp_v3) {
-      temp_v1 = 0x700;
+    s32 available = (g_asdGxPresets.unk1c0 + 1) - g_asdGxPresets.unk1bc;
+    s32 queued = available - 1;
+    for (s32 i = 0; i < queued; ++i) {
+        FUN_0014a878(0x402);
     }
-    else {
-      if (temp_v0 != 1) {
-        if (DAT_0063ff58 == '\0') {
-          gxLcdClearForceBlack();
-          DAT_0063ff58 = '\x01';
+    asdFileWakeWorker();
+    FUN_0014a878(0x402);
+    g_asdGxPresets.unk1bc = 0;
+    s32 mode = g_asdGxPresets.pending;
+    if (mode >= 0) {
+        g_asdGxPresets.current = mode;
+        g_asdGxPresets.pending = -1;
+        if (mode == 0) {
+            asdGxSetTopScreenMode(0x700);
+        } else if (mode == 1) {
+            asdGxSetTopScreenMode(0x702);
         }
-        return;
-      }
-      temp_v1 = 0x702;
     }
-    asdGxSetTopScreenMode(temp_v1);
-  }
-  if (DAT_0063ff58 == '\0') {
-    gxLcdClearForceBlack();
-    DAT_0063ff58 = '\x01';
-  }
-  return;
+    if (!g_asdGxPresets.forceBlackCleared) {
+        gxLcdClearForceBlack();
+        g_asdGxPresets.forceBlackCleared = 1;
+    }
 }
-
-} /* extern "C" */
+}

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdModelSlotSetColor(int);
 int asdModelSlotSetTint(int);
-int FUN_0029c2cc(unsigned int, int);
+void FUN_0029c2cc(unsigned int, int);
 int modelSlotAttachChild(unsigned int, int);
 int asdModelResetAndSelectSecondaryMotion(unsigned int, int);
 void FUN_002d582c(unsigned int, float);

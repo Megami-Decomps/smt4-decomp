@@ -8,7 +8,7 @@ int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_002dae68(void);
+int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
 int FUN_00324e38(unsigned int);
 int FUN_00327ee8(void);
@@ -31,7 +31,7 @@ extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
@@ -51,7 +51,7 @@ void FUN_002d978c(void)
   unsigned int in_fpscr;
   float temp_v4;
   
-  FUN_002dae68();
+  mapEaseSceneHeading();
   temp_v0 = soundVolumeSettingGet();
   temp_v3 = g_lmapScene;
   temp_v2 = *(int *)(g_lmapScene + 4);

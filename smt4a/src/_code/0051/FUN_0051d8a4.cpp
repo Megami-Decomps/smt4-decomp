@@ -1,53 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0051d8a4` (_code @ 0x51d8a4, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial half-frame constant load and VFP division/addition registers differ; key search matches retail. */
+#include "shard/W5_W5Match5_TwinRecords.h"
 
-extern "C" {
+extern "C" f32 hardfp_floorf(f32 value);
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int hardfp_floorf(void);
+using namespace SampleValueDecoding;
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: hardfp_floorf. */
-
-
-unsigned short * FUN_0051d8a4(unsigned short *param_1)
-
+/* Find the key at or immediately before the rounded playback frame. */
+extern "C" EncodedValue *FUN_0051d8a4(ValueDecoder *decoder, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = in_s0 / *(float *)(param_1 + 8) + 0.5f;
-  hardfp_floorf();
-  temp_v1 = VectorFloatToUnsigned(temp_v0,3);
-  puVar1 = param_1 + 10;
-  if ((unsigned char)param_1[10] <= temp_v1) {
-    puVar1 = param_1 + (unsigned int)*param_1 * 3 + 7;
-    if (temp_v1 < (unsigned char)*puVar1) {
-      temp_v0 = (float)VectorSignedToFloat(*param_1 - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = VectorFloatToUnsigned(*(float *)(param_1 + 2) * temp_v0 * in_s0,3);
-      puVar1 = param_1 + temp_v2 * 3 + 10;
-      if ((unsigned char)*puVar1 <= temp_v1) {
-        do {
-          puVar2 = puVar1;
-          puVar1 = puVar2 + 3;
-        } while ((unsigned char)*puVar1 <= temp_v1);
-        return puVar2;
-      }
-      do {
-        puVar1 = puVar1 + -3;
-      } while (temp_v1 < (unsigned char)*puVar1);
+    /* The variable-size curve extends past ValueDecoder's fixed header. */
+    struct CompactKey {
+        u8 frame;
+        u8 payload[5];
+    };
+    struct CompactCurveView {
+        u16 keyCount;                 /* 0x00 */
+        u16 unk02;
+        f32 keyRate;                  /* 0x04 */
+        u8 unk08[8];
+        f32 frameDuration;            /* 0x10 */
+        CompactKey keys[1];           /* 0x14 */
+    };
+    CompactCurveView *curve = reinterpret_cast<CompactCurveView *>(decoder);
+    u32 frame = (u32)hardfp_floorf(time / curve->frameDuration + 0.5f);
+    CompactKey *key = curve->keys;
+    if (key->frame <= frame) {
+        key = &curve->keys[curve->keyCount - 1];
+        if (frame < key->frame) {
+            u32 estimate = (u32)(curve->keyRate * ((f32)(curve->keyCount - 1) * time));
+            key = &curve->keys[estimate];
+            if (frame < key->frame) {
+                do {
+                    --key;
+                } while (frame < key->frame);
+            } else {
+                do {
+                    ++key;
+                } while (key->frame <= frame);
+                return reinterpret_cast<EncodedValue *>(key - 1);
+            }
+        }
     }
-  }
-  return puVar1;
+    return reinterpret_cast<EncodedValue *>(key);
 }
-
-} /* extern "C" */

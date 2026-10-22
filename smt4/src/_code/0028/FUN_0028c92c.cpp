@@ -1,90 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028c92c` (_code @ 0x28c92c, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 54 vs built 52 rows; camera-selection branches and matrix block-copy scheduling differ. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtx *g_titleScene;
+void *asdCameraValueGet(s32);
+s32 FUN_002c5210(void);
+void *FUN_0034334c(RenderCtx *);
+void *FUN_00343358(RenderCtx *);
 
-extern int g_titleScene; /* 0x44ea00 */
-
-extern int asdCameraValueGet(int);
-extern int FUN_002c5210(void);
-extern int FUN_0034334c(int);
-extern int FUN_00343358(int);
-
-
-void FUN_0028c92c(unsigned int *param_1)
-
+void FUN_0028c92c(void *destination)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  temp_v1 = *(int *)(g_titleScene + 0x528);
-  temp_v0 = 0;
-  if (*(char *)(g_titleScene + 0x5f4) != '\x03') {
-    if (*(char *)(g_titleScene + 0x5f4) != '\x04') {
-      temp_v2 = asdCameraValueGet(temp_v1);
+    struct Matrix3x4 {
+        f32 values[3][4];
+    };
+    struct Matrix4x4 {
+        Matrix3x4 transform;
+        f32 lastRow[4];
+    };
+    // The stereo alternatives extend past the shared primary-matrix view.
+    struct CameraMatrixViews {
+        u8 unk000[0x38];
+        Matrix3x4 primary;
+        u8 unk068[0x170];
+        Matrix3x4 secondary;
+        u8 unk208[0x80];
+        Matrix3x4 tertiary;
+    };
+    s32 mode = g_titleScene->stereoMode;
+    bool special = false;
+    CameraMatrixViews *camera;
+    if (g_titleScene->cameraSelection.type == 3) {
+        camera = static_cast<CameraMatrixViews *>(FUN_00343358(g_titleScene));
+        special = true;
+    } else if (g_titleScene->cameraSelection.type == 4) {
+        camera = static_cast<CameraMatrixViews *>(FUN_0034334c(g_titleScene));
+        special = true;
+    } else {
+        camera = static_cast<CameraMatrixViews *>(asdCameraValueGet(mode));
     }
-    else {
-      temp_v2 = FUN_0034334c(g_titleScene);
-      temp_v0 = 1;
-    }
-  }
-  else {
-    temp_v2 = FUN_00343358(g_titleScene);
-    temp_v0 = 1;
-  }
-  if (temp_v1 == 2) {
-    puVar4 = (unsigned int *)(temp_v2 + 0x38);
-  }
-  else {
-    temp_v3 = FUN_002c5210();
-    if (temp_v3 != 1 || temp_v0) {
-      puVar4 = (unsigned int *)(temp_v2 + 0x38);
-    }
-    else if (temp_v1 == 1) {
-      puVar4 = (unsigned int *)(temp_v2 + 0x288);
-    }
-    else {
-      puVar4 = (unsigned int *)(temp_v2 + 0x1d8);
-    }
-  }
-  temp_v4 = puVar4[1];
-  temp_v5 = puVar4[2];
-  temp_v6 = puVar4[3];
-  temp_v7 = puVar4[4];
-  temp_v8 = puVar4[5];
-  temp_v9 = puVar4[6];
-  temp_v10 = puVar4[7];
-  *param_1 = *puVar4;
-  param_1[1] = temp_v4;
-  param_1[2] = temp_v5;
-  param_1[3] = temp_v6;
-  param_1[4] = temp_v7;
-  param_1[5] = temp_v8;
-  param_1[6] = temp_v9;
-  param_1[7] = temp_v10;
-  temp_v4 = puVar4[8];
-  temp_v5 = puVar4[9];
-  temp_v6 = puVar4[10];
-  param_1[0xb] = puVar4[0xb];
-  param_1[8] = temp_v4;
-  param_1[9] = temp_v5;
-  param_1[10] = temp_v6;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0x3f800000;
-  return;
+    const Matrix3x4 *matrix = &camera->primary;
+    if (mode != 2 && FUN_002c5210() == 1 && !special)
+        matrix = mode == 1 ? &camera->tertiary : &camera->secondary;
+    Matrix4x4 *out = static_cast<Matrix4x4 *>(destination);
+    out->transform = *matrix;
+    out->lastRow[0] = 0;
+    out->lastRow[1] = 0;
+    out->lastRow[2] = 0;
+    out->lastRow[3] = 1;
 }
-
-} /* extern "C" */
+}

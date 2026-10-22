@@ -3,6 +3,7 @@
 #define UI_PARTYPANELSTATE_H
 #include "common.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
+#include <stddef.h>
 typedef struct TimerSlot {
     /* 0x00 */ u8 data[0x8C];
 } TimerSlot;
@@ -10,6 +11,12 @@ typedef struct TimerSlot {
 typedef struct PartyPanelState {
     union {
         /* 0x0000 */ u8 unk0000[0x1C];
+        struct {
+            u32 job;
+            u8 prefix04[8];
+            void *files[2];
+            void *script;
+        } resources;
         struct {
             /* 0x0000 */ u8 unk0000prefix[0x18];
             /* 0x0018 */ u32 phase;
@@ -64,7 +71,10 @@ typedef struct PartyPanelState {
     };
     /* 0x07FC */ u8 unk7FC[0x95C];
     /* 0x1158 */ u32 statusValue;
-    /* 0x115C */ u8 unk115C[0x694];
+    union {
+        /* 0x115C */ u8 unk115C[0x694];
+        /* 0x115C */ void *ownedBuffer;
+    };
     /* 0x17F0 */ u8 unk17F0;
 } PartyPanelState;
 
@@ -96,5 +106,10 @@ typedef struct PartyPanelStateA {
 typedef char PartyPanelStateSizeCheck[sizeof(PartyPanelState) == 0x17F4 ? 1 : -1];
 typedef char PartyPanelAnimationStateASizeCheck[sizeof(PartyPanelAnimationStateA) == 0x890 ? 1 : -1];
 typedef char PartyPanelStateASizeCheck[sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
+typedef char PartyPanelStateResourcesOffsetCheck[
+    offsetof(PartyPanelState, resources.job) == 0 &&
+    offsetof(PartyPanelState, resources.files) == 0xC &&
+    offsetof(PartyPanelState, resources.script) == 0x14 &&
+    offsetof(PartyPanelState, ownedBuffer) == 0x115C ? 1 : -1];
 
 #endif

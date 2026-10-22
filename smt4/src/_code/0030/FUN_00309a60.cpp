@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001db820(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int FUN_001db820(unsigned long long id, unsigned int directories, unsigned int files, const char *iconPath);
 int FUN_002c3510(void);
 int SBORROW4(...);
 int nn_fs_DeleteExtSaveData(unsigned int, unsigned int);
@@ -70,7 +70,7 @@ unsigned int FUN_00309a60(unsigned int param_1,unsigned int param_2,unsigned int
       return temp_v3;
     }
   }
-  FUN_001db820(param_3,param_4,param_5,param_6,param_7);
+  FUN_001db820(((unsigned long long)param_4 << 32) | param_3,param_5,param_6,(const char *)param_7);
   FUN_002c3510();
   return param_3;
 }

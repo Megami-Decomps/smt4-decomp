@@ -13,7 +13,7 @@ int skinObjectUpdateMatrices(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -40,7 +40,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_00485718(int param_1)
@@ -64,7 +64,7 @@ void FUN_00485718(int param_1)
   
   efctSetSpeed();
   temp_v7 = 0.25f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v8 = (int)temp_v7;
   FUN_00157558(g_renderCtx);
   FUN_00183bb0();

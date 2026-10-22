@@ -26,7 +26,7 @@ extern unsigned int vec2GetYInt(int);
 extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
-extern int FUN_004929d8(unsigned char *, unsigned int);
+extern int dataLookupDisplayName(unsigned char *, unsigned int);
 /* Supplied declaration required: pointConvertToFloat. */
 extern int flaggedValueHolderGetTotal(int);
 
@@ -57,7 +57,7 @@ void FUN_004a4d70(int param_1)
       FUN_0032d0c8(0,1,*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x868));
       return;
     }
-    temp_v2 = FUN_004929d8(temp_v4,*(unsigned int *)(param_1 + 0xa874));
+    temp_v2 = dataLookupDisplayName(temp_v4,*(unsigned int *)(param_1 + 0xa874));
     if (temp_v2 == 0) {
       temp_v2 = 0x52b5bc;
     }

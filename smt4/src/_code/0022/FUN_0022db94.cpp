@@ -1,62 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022db94` (_code @ 0x22db94, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: highlighted-label cold branch placement and VFP scheduling differ. */
+#include "ui/UiSpriteState.h"
+#include "shard/S1ListPanel.h"
 
+struct ListLabelWork {
+    u8 prefix[0xC8];
+    UiSpriteState sprite;
+};
 extern "C" {
-
-int FUN_002be56c(int, unsigned int, unsigned int, unsigned int);
-int FUN_002bf4f0(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int curveEvaluateStandard(unsigned int, unsigned int);
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: FUN_002bf4f0. */
-
-
-void FUN_0022db94(int param_1,unsigned short param_2,int param_3,int param_4,int param_5)
-
-{
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int in_fpscr;
-  
-  VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (param_4 != 0) {
-    temp_v2 = FUN_002bf4f0(param_1 + 200,param_3 + 0x42f);
-    temp_v5 = 0x498;
-    temp_v6 = 3;
-    temp_v7 = 0xffffffff;
-  }
-  else {
-    temp_v2 = FUN_002bf4f0(param_1 + 200,param_3 + 0x40e);
-    temp_v5 = 0x48a;
-    temp_v7 = 0x7a4c00ff;
-    temp_v6 = 2;
-  }
-  temp_v0 = *(short *)(temp_v2 + 8);
-  temp_v1 = *(short *)(temp_v2 + 10);
-  temp_v3 = FUN_002bce30(param_2,0);
-  temp_v2 = curveEvaluateStandard(temp_v3,2);
-  temp_v4 = FUN_002bf4f0(param_1 + 200,temp_v5);
-  VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(((int)temp_v0 + (int)**(short **)(temp_v4 + 0xc) / 2 + (int)*(short *)(temp_v4 + 8))
-                      - temp_v2 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be56c(param_1 + 200,temp_v6,temp_v7,temp_v3);
-  return;
+SpriteInfo *FUN_002bf4f0(UiSpriteState *, u32);
+const char *demonGetRaceLabel(u16, u32);
+s32 curveEvaluateStandard(const char *, u32);
+void FUN_002be56c(UiSpriteState *, u32, u32, const char *, f32, f32, f32, f32, f32);
 }
 
-} /* extern "C" */
+extern "C" void FUN_0022db94(ListLabelWork *work, u16 id, s32 row, s32 highlighted, s32 depth)
+{
+    f32 z = f32(256 - depth) * 0.00390625f;
+    SpriteInfo *rowSprite;
+    u32 background;
+    u32 font;
+    u32 color;
+    if (highlighted) {
+        rowSprite = FUN_002bf4f0(&work->sprite, row + 0x42F);
+        background = 0x498;
+        font = 3;
+        color = 0xFFFFFFFF;
+    } else {
+        rowSprite = FUN_002bf4f0(&work->sprite, row + 0x40E);
+        background = 0x48A;
+        font = 2;
+        color = 0x7A4C00FF;
+    }
+    s16 rowX = rowSprite->x;
+    s16 rowY = rowSprite->y;
+    const char *text = demonGetRaceLabel(id, 0);
+    s32 width = curveEvaluateStandard(text, 2);
+    SpriteInfo *frame = FUN_002bf4f0(&work->sprite, background);
+    s32 y = frame->y + rowY;
+    s32 x = rowX + frame->size[0] / 2 + frame->x - width / 2;
+    FUN_002be56c(&work->sprite, font, color, text, f32(x), f32(y), z, 1.0f, 1.0f);
+}

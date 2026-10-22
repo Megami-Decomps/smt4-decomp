@@ -1,73 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034914c` (_code @ 0x34914c, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail packs the depth bias using different integer temporaries and accesses merged graphics globals through their owning bases. */
+#include "shard/W6_W6Match8_GpuDepth.h"
 
+struct ModelDrawMaterial {
+    u8 unk000[0x294];
+    f32 depthBias; // 0x294
+};
+struct ModelDrawSelection {
+    u8 unk00[8];
+    s32 materialIndex; // 0x08
+};
+struct ModelMaterialContext {
+    u8 unk00[0xa4];
+    ModelDrawMaterial *current; // 0xa4
+    u8 unkA8[4];
+    ModelDrawMaterial **materials; // 0xac
+    u8 unkB0[8];
+    s32 materialIndex; // 0xb8
+};
 extern "C" {
+void FUN_002c35b0(u32 flags);
+void asdGxCommandListStartRecord(u32 list);
+extern u32 DAT_004720f0;
+extern u32 DAT_004dad90;
 
-int asdGxCommandListStartRecord(unsigned int);
-int FUN_002c35b0(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int DAT_004720f0; /* 0x4720f0 */
-extern unsigned int DAT_004dad90; /* 0x4dad90 */
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+// Bind a material and encode its negated depth bias into the GPU's float24 format.
+void FUN_0034914c(const ModelDrawSelection *selection, ModelMaterialContext *context)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: asdGxCommandListStartRecord. */
-/* Supplied declaration required: FUN_002c35b0. */
-
-
-void FUN_0034914c(int param_1,int param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  float temp_v2;
-  
-  FUN_002c35b0(0);
-  temp_v0 = *(int *)(*(int *)(param_2 + 0xac) + *(int *)(param_1 + 8) * 4);
-  *(int *)(param_2 + 0xb8) = *(int *)(param_1 + 8);
-  if (*(int *)(param_2 + 0xa4) != temp_v0) {
-    *(int *)(param_2 + 0xa4) = temp_v0;
-    if (*(float *)(temp_v0 + 0x294) == 0.0f) {
-      DAT_004720f0 = 0;
-    }
-    else {
-      temp_v2 = -*(float *)(temp_v0 + 0x294);
-      DAT_004720f0 = 0;
-      if (((unsigned int)temp_v2 & 0x80000000) != 0) {
-        DAT_004720f0 = 0x800000;
-      }
-      if (romwright_fabs_4(temp_v2) == 0.0f) {
-        temp_v1 = 0;
-      }
-      else {
-        temp_v1 = ((unsigned int)romwright_fabs_4(temp_v2) >> 0x17) - 0x40;
-        if ((int)temp_v1 < 0) {
-          asdGxCommandListStartRecord(DAT_004dad90);
-          return;
+    FUN_002c35b0(0);
+    ModelDrawMaterial *material = context->materials[selection->materialIndex];
+    context->materialIndex = selection->materialIndex;
+    if (context->current != material) {
+        context->current = material;
+        if (material->depthBias == 0.0f) {
+            DAT_004720f0 = 0;
+        } else {
+            GpuFloatEncoding encoding;
+            encoding.value = -material->depthBias;
+            u32 sign = encoding.bits & 0x80000000 ? 0x800000 : 0;
+            DAT_004720f0 = sign;
+            u32 magnitude = encoding.bits & 0x7fffffff;
+            s32 exponent = 0;
+            if (magnitude) {
+                exponent = (magnitude >> 23) - 64;
+                if (exponent < 0) {
+                    asdGxCommandListStartRecord(DAT_004dad90);
+                    return;
+                }
+                if (exponent >= 128) {
+                    DAT_004720f0 = 0x7f0000;
+                    asdGxCommandListStartRecord(DAT_004dad90);
+                    return;
+                }
+            }
+            DAT_004720f0 = ((encoding.bits & 0x7fffff) >> 7) | sign | ((exponent & 0x7f) << 16);
         }
-        if ((int)temp_v1 >= 0x80) {
-          DAT_004720f0 = 0x7f0000;
-          asdGxCommandListStartRecord(DAT_004dad90);
-          return;
-        }
-      }
-      DAT_004720f0 = (((unsigned int)temp_v2 & 0x7fffff) >> 7) | DAT_004720f0 | ((temp_v1 & 0x7f) << 0x10);
     }
-  }
-  asdGxCommandListStartRecord(DAT_004dad90);
-  return;
+    asdGxCommandListStartRecord(DAT_004dad90);
 }
-
-} /* extern "C" */
+}

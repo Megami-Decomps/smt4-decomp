@@ -1,65 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c28e8` (_code @ 0x3c28e8, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: frame-load hoisting, palette-test lowering, and quad argument/VFP allocation differ. */
+#include "ui/ByteScreenFade.h"
 
 extern "C" {
+extern void* g_titleScene;
+void FUN_002c1b64(void* context, u32 target);
+void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
+                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
-int FUN_002c0944(unsigned int);
-int FUN_002c1b64(unsigned int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002c0944. */
-/* Supplied declaration required: FUN_002c1b64. */
-
-
-void FUN_003c28e8(unsigned char *param_1,unsigned int param_2,int param_3)
-
+void FUN_003c28e8(ByteScreenFade* fade, u32, u32 mode)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v0 = (int)(char)param_1[10];
-  temp_v1 = 0;
-  if (temp_v0 < 1) {
-    temp_v0 = 1;
-  }
-  if (param_3 != 1) {
-    if (param_3 == 2) {
-      if ((char)param_1[0xb] < temp_v0) {
-        param_1[0xb] = param_1[0xb] + 1;
-      }
-      else {
-        *param_1 = *param_1 & 0xfe;
-      }
-      if ((param_1[8] != 0) && (param_1[8] == 1)) {
-        temp_v1 = -0x100;
-      }
+    s32 duration = fade->duration;
+    if (duration < 1) {
+        duration = 1;
     }
-  }
-  else {
-    if ((char)param_1[0xb] < '\x01') {
-      *param_1 = *param_1 & 0xfe;
-      return;
+    u32 baseColor = 0;
+    switch (mode) {
+    case 1:
+        if (fade->frame > 0) {
+            --fade->frame;
+        } else {
+            fade->flags &= ~1;
+            return;
+        }
+        break;
+    case 2:
+        if (fade->frame < duration) {
+            ++fade->frame;
+        } else {
+            fade->flags &= ~1;
+        }
+        if (fade->palette == 1) {
+            baseColor = 0xFFFFFF00;
+        }
+        break;
     }
-    param_1[0xb] = param_1[0xb] - 1;
-  }
-  temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (float)VectorSignedToFloat((int)(char)param_1[0xb],(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002c1b64(g_titleScene,0);
-  FUN_002c0944(temp_v1 + ((int)(temp_v2 * (255.0f / temp_v3)) & 0xffU));
-  return;
+    f32 alphaScale = 255.0f / (f32)duration;
+    s16 alpha = (s16)((f32)fade->frame * alphaScale);
+    u32 color = baseColor + (u8)alpha;
+    FUN_002c1b64(g_titleScene, 0);
+    f32 width = 400.0f;
+    if (fade->screen == 1) {
+        width = 320.0f;
+    }
+    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, width, 240.0f, 0.0f);
 }
-
-} /* extern "C" */
+}

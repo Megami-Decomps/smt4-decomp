@@ -9,7 +9,7 @@ int uiFadeDraw(int);
 int FUN_00197e34(void);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int effectRenderTransformedInstance(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002bf288(int, int, int, int, int, int);
@@ -36,7 +36,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00197e34. */
 /* Supplied declaration required: drawSkillCategoryLabel. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -121,7 +121,7 @@ unsigned int FUN_001ad9f0(void)
     }
     temp_v2 = g_uiQuest;
     temp_v7 = 0.3f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v9 = temp_v2 + 0x408;
     temp_v4 = vec2GetXInt();
     temp_v1 = vec2GetYInt(temp_v2 + 0x408);
@@ -143,7 +143,7 @@ unsigned int FUN_001ad9f0(void)
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(3,0xffffffff,temp_v8);
     temp_v7 = 0.28f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     effectRenderTransformedInstance(temp_v9);
   }

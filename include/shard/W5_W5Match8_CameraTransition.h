@@ -1,6 +1,7 @@
 #ifndef W5_W5MATCH8_CAMERA_TRANSITION_H
 #define W5_W5MATCH8_CAMERA_TRANSITION_H
 #include "common.h"
+#include <stddef.h>
 struct W5Match8Vec3 { f32 x, y, z; };
 struct W5Match8CameraTransition {
     /* 0x000 */ u8 unk000[0x5BC];
@@ -12,7 +13,10 @@ struct W5Match8CameraTransition {
     /* 0x5E8 */ u8 unk5E8[0x18];
     /* 0x600 */ f32 distance;
     /* 0x604 */ f32 angle;
-    /* 0x608 */ u8 unk608[0x3C];
+    /* 0x608 */ union {
+        u8 unk608[0x3C];
+        W5Match8Vec3 targetStart;
+    };
     /* 0x644 */ u32 savedSource;
     /* 0x648 */ u8 unk648[0x4];
     /* 0x64C */ u32 flags;
@@ -30,14 +34,30 @@ struct W5Match8CameraTransition {
     /* 0x75C */ u32 alternateDuration;
     /* 0x760 */ u32 alternateFrame;
     /* 0x764 */ u32 alternateMode;
-    /* 0x768 */ u8 unk768[0x48];
+    /* 0x768 */ union {
+        u8 unk768[0x48];
+        struct {
+            u8 unk768[0x18];
+            /* 0x780 */ u32 duration;
+            /* 0x784 */ u32 frame;
+            /* 0x788 */ u32 mode;
+            /* 0x78C */ u8 unk78C[4];
+            /* 0x790 */ s32 offset;
+        } arc;
+    };
     /* 0x7B0 */ W5Match8Vec3 rotation;
     /* 0x7BC */ u32 rotationDuration;
     /* 0x7C0 */ u32 rotationFrame;
     /* 0x7C4 */ u32 rotationMode;
     /* 0x7C8 */ u8 unk7C8[0x14];
     /* 0x7DC */ W5Match8Vec3 rotationProgress;
-    /* 0x7E8 */ u8 unk7E8[0x18];
+    /* 0x7E8 */ union {
+        u8 unk7E8[0x18];
+        struct {
+            W5Match8Vec3 start;
+            W5Match8Vec3 end;
+        } ground;
+    };
     /* 0x800 */ f32 primaryProgress;
     /* 0x804 */ u8 unk804[0x8];
     /* 0x80C */ u32 primaryDuration;
@@ -86,5 +106,11 @@ struct CameraPositionTransitionView {
     /* 0x7D0 */ W5Match8Vec3 offset;
 };
 typedef char CameraPositionTransitionViewSizeCheck[sizeof(CameraPositionTransitionView) == 0x7DC ? 1 : -1];
+typedef char CameraArcTransitionOffsets[offsetof(W5Match8CameraTransition, targetStart) == 0x608 &&
+    offsetof(W5Match8CameraTransition, arc.duration) == 0x780 &&
+    offsetof(W5Match8CameraTransition, arc.offset) == 0x790 &&
+    offsetof(W5Match8CameraTransition, ground.start) == 0x7E8 &&
+    offsetof(W5Match8CameraTransition, ground.end) == 0x7F4 &&
+    sizeof(W5Match8CameraTransition) == 0x884 ? 1 : -1];
 
 #endif

@@ -1,51 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c61e4` (_code @ 0x3c61e4, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: required/unavailable mask loads use different LDM grouping and scratch registers; loop and result paths match. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+void scrSetResult(s32 result);
 
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003c61e4(void)
-
+// Report whether an available, nonexcluded battle candidate has a positive condition.
+u32 FUN_003c61e4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  do {
-    temp_v0 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + temp_v3 * 0x408);
-    temp_v1 = *puVar4;
-    temp_v2 = puVar4[1];
-    if (((DAT_005702a0 & temp_v1) != 0 || (DAT_005702a4 & temp_v2) != 0) &&
-       ((DAT_0057028c & temp_v2) != 0 || (g_btlCandidateMasks & temp_v1) != 0)) {
-      if (((temp_v1 & DAT_005702b0) == 0 && (temp_v2 & DAT_005702b4) == 0) && (0 < (int)puVar4[0x31])) {
-        scrSetResult(1);
-        return 1;
-      }
+    // A word in the entry's halfword-aligned union needs a local aligned view.
+    struct CandidateConditionView {
+        u8 unk000[0xC4];
+        s32 value;
+    };
+    for (s32 index = 0; index < 109; ++index) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            ((CandidateConditionView *)entry)->value > 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

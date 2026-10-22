@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_0049d244(int param_1,int param_2,int param_3)
@@ -42,11 +42,11 @@ void FUN_0049d244(int param_1,int param_2,int param_3)
   
   temp_v4 = 0.25f;
   temp_v5 = 0x3e80000000000000;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   if (*(char *)(param_1 + 4) == '\b' || *(char *)(param_1 + 4) == '\t') {
     efctSetSpeed();
     temp_v3 = (float)((unsigned long long)temp_v5 >> 0x20);
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     FUN_001835b4(2,0x33,0x2e,(int)temp_v3,0,0x65);
     efctSetSpeed();
   }
@@ -66,10 +66,10 @@ void FUN_0049d244(int param_1,int param_2,int param_3)
     return;
   }
   temp_v4 = temp_v3;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   FUN_001835b4(2,0x33,3,param_2 + (int)temp_v3,param_3,0x65);
   temp_v2 = FUN_001834a4(0x33,4);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v1 = (int)*(short *)(temp_v2 + 8) + (int)temp_v4 + param_2;
   VectorSignedToFloat(0x96,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

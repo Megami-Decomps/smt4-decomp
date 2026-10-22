@@ -1,53 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001db820` (_code @ 0x1db820, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains side-effect-free error-category checks and linker-NOP hints omitted by this readable control flow. */
+/* Creates external save data using an icon file, then mounts it and records the active state. */
+#include "nn/Result.h"
 
 extern "C" {
+void *fileLoadSync(const char *path, u32 *size, u32 flags);
+s32 FUN_00354e48(u64 id, const void *icon, u32 size, u32 files, u32 directories);
+void FUN_002c3510(u32 result);
+u32 FUN_002c3520(void);
+s32 FUN_00354dac(u32 handle, u64 id);
+extern u8 g_appletBusyFlag;
 
-int FUN_002c3510(...);
-int FUN_00354dac(int, int, int, unsigned int);
-int FUN_00354e48(int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
-
-extern unsigned char g_appletBusyFlag; /* 0x465228 */
-
-extern unsigned int fileLoadSync(unsigned int, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002c3510. */
-extern unsigned long long FUN_002c3520(void);
-/* Supplied declaration required: FUN_00354dac. */
-/* Supplied declaration required: FUN_00354e48. */
-
-
-int FUN_001db820(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                unsigned int param_5)
-
+s32 FUN_001db820(u64 id, u32 directories, u32 files, const char *iconPath)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned long long temp_v2;
-  int temp_v3;
-  
-  temp_v0 = fileLoadSync(param_5,(unsigned int *)&temp_v3,0);
-  temp_v1 = param_1;
-  FUN_00354e48(param_1,param_2,temp_v0,temp_v3,param_4,param_3);
-  FUN_002c3510();
-  if (-1 < temp_v1) {
-    temp_v2 = FUN_002c3520();
-    temp_v1 = (int)temp_v2;
-    FUN_00354dac(temp_v1,(int)((unsigned long long)temp_v2 >> 0x20),param_1,param_2);
-    FUN_002c3510();
-    if (-1 < temp_v1) {
-      g_appletBusyFlag = 1;
+    u32 size;
+    void *icon = fileLoadSync(iconPath, &size, 0);
+    s32 result = FUN_00354e48(id, icon, size, files, directories);
+    FUN_002c3510(result);
+    if (nnResultIsFailure(result)) {
+        return result;
     }
-    FUN_002c3510(temp_v1);
-  }
-  return temp_v1;
+    result = FUN_00354dac(FUN_002c3520(), id);
+    FUN_002c3510(result);
+    if (nnResultIsSuccess(result)) {
+        g_appletBusyFlag = 1;
+    }
+    FUN_002c3510(result);
+    return result;
 }
-
-} /* extern "C" */
+}

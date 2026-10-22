@@ -1,57 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4a98` (_code @ 0x1f4a98, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture-resource field addressing and scan/copy register scheduling differ. */
+#include "test/MotouchiTexture.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *memAlloc(u32, u32, u32, u32, u32, u32);
+void rt_memcpy(void *, const void *, u32);
 
-int memAlloc(int, int, int, unsigned int, int, int);
-int rt_memcpy(void);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_001f4a98(int param_1,int *param_2,unsigned int param_3)
-
+// Find a TXOB resource in the buffer and copy its image into owned storage.
+void FUN_001f4a98(MotouchiTexture *texture, const u32 *data, u32 size)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0;
-  *(unsigned int *)(param_1 + 0x24) = 0;
-  *(unsigned int *)(param_1 + 4) = 0xde1;
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  if (param_3 != 0) {
-    do {
-      if (*param_2 == 0x424f5854) {
-        *(int *)(param_1 + 0x18) = param_2[5];
-        *(int *)(param_1 + 0x14) = param_2[6];
-        *(int *)(param_1 + 0x1c) = param_2[7];
-        *(int *)(param_1 + 0x20) = param_2[8];
-        *(int *)(param_1 + 0x10) = -param_2[9];
-        *(int *)(param_1 + 0x28) = param_2[0x10];
-        if (param_2[0x11] + (int)(param_2 + 0x11) == 0) {
-          return;
-        }
-        temp_v1 = 0x10000;
-        memAlloc(0x10000,0x100,0,*(unsigned int *)(param_1 + 0x28),0x80,1);
-        *(unsigned int *)(param_1 + 0x24) = temp_v1;
-        rt_memcpy();
+    texture->data = NULL;
+    texture->target = 0xde1;
+    texture->unk08 = 0;
+    texture->unk0c = 0;
+    for (u32 offset = 0; offset < size; offset += sizeof(u32), ++data) {
+        if (*data != 0x424f5854)
+            continue;
+        const MotouchiTextureResource *resource = reinterpret_cast<const MotouchiTextureResource *>(data);
+        texture->height = resource->height;
+        texture->width = resource->width;
+        texture->format = resource->format;
+        texture->pixelType = resource->pixelType;
+        texture->mipLevel = -resource->mipLevel;
+        texture->dataSize = resource->dataSize;
+        const u8 *image = reinterpret_cast<const u8 *>(&resource->dataOffset) + resource->dataOffset;
+        if (image == NULL)
+            return;
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\test\\motouchiTest.cpp", 887);
+        texture->data = memAlloc(0x10000, 0x100, 0, texture->dataSize, 0x80, 1);
+        rt_memcpy(texture->data, image, texture->dataSize);
         return;
-      }
-      temp_v0 = temp_v0 + 4;
-      param_2 = param_2 + 1;
-    } while (temp_v0 < param_3);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

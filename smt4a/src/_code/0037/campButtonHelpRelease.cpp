@@ -1,65 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `campButtonHelpRelease` (_code @ 0x37b450, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Releases button help when its last user leaves, including outstanding touch timers. */
+#include "ui/ButtonHelp.h"
 
 extern "C" {
-
-int jobStop(unsigned int, int);
-int uiSpriteSelectAnim(unsigned int *, int);
-int asdMemFree(unsigned int *);
-int scrScriptProcessDestroy(unsigned int);
-int ifTouchDecrementTimer(void);
-int asdMemFreeSlot(unsigned int);
-
-extern signed char g_buttonHelp; /* 0x57f0c4 */
-extern unsigned int *DAT_0057f0c8; /* 0x57f0c8 */
-
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: ifTouchDecrementTimer. */
-/* Supplied declaration required: asdMemFreeSlot. */
-
+extern ButtonHelpGlobalsA g_buttonHelp;
+void jobStop(u32 job, s32 mode);
+void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
+void asdMemFree(void *block);
+void scrScriptProcessDestroy(u32 process);
+void ifTouchDecrementTimer(void);
+void asdMemFreeSlot(u32 slot);
 
 void campButtonHelpRelease(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_0057f0c8;
-  g_buttonHelp = g_buttonHelp - '\x01';
-  if (g_buttonHelp < '\x01') {
-    asdMemFreeSlot(DAT_0057f0c8[0x19e]);
-    puVar1[0x19e] = 0;
-    if (puVar1[4] != 3) {
-      temp_v0 = 0;
-      do {
-        uiSpriteSelectAnim(puVar1 + temp_v0 * 0x23 + 0xd,1);
-        if (*(char *)(puVar1 + temp_v0 + 0x16b) != '\0') {
-          ifTouchDecrementTimer();
-          puVar1[0x174] = puVar1[0x174] - 1;
+    --g_buttonHelp.references;
+    if (g_buttonHelp.references <= 0) {
+        ButtonHelpWorkA *work = g_buttonHelp.work;
+        asdMemFreeSlot(work->unk678);
+        work->unk678 = 0;
+        if (work->state != 3) {
+            for (s32 i = 0; i < 6; ++i) {
+                uiSpriteSelectAnim(&work->units[i], 1);
+                if (work->kinds[i].kind != 0) {
+                    ifTouchDecrementTimer();
+                    --work->count;
+                }
+            }
+            if (work->count > 0) {
+                for (s32 i = 0; i < work->count; ++i) {
+                    ifTouchDecrementTimer();
+                }
+                work->count = 0;
+            }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 6);
-      if (0 < (int)puVar1[0x174]) {
-        temp_v0 = 0;
-        do {
-          ifTouchDecrementTimer();
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < (int)puVar1[0x174]);
-        puVar1[0x174] = 0;
-      }
+        scrScriptProcessDestroy(work->process);
+        jobStop(work->job, 0);
+        asdMemFree(work);
+        g_buttonHelp.work = NULL;
+        g_buttonHelp.references = 0;
     }
-    scrScriptProcessDestroy(puVar1[0x1a0]);
-    jobStop(*puVar1,0);
-    asdMemFree(puVar1);
-    DAT_0057f0c8 = (unsigned int *)0x0;
-    g_buttonHelp = '\0';
-  }
-  return;
 }
-
-} /* extern "C" */
+}

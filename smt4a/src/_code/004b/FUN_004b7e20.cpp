@@ -17,7 +17,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_002bf4f4(...);
 int moveCameraCtrlCreateEntry(unsigned int, unsigned char *, int);
 int linkSlotSetFlag1C(unsigned int, int);
-int FUN_0040738c(unsigned int);
+void FUN_0040738c(unsigned int owner, float frame);
 int linkSlotSetFlag20(unsigned int, int);
 int listSelectItem(unsigned int, int);
 int FUN_00407a80(unsigned int);
@@ -81,8 +81,7 @@ void FUN_004b7e20(int param_1)
     if (temp_v3 >= 0xf) {
       *(int *)(param_1 + 0x2c) = temp_v2;
     }
-    VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_0040738c(*(unsigned int *)(param_1 + 0x1218));
+    FUN_0040738c(*(unsigned int *)(param_1 + 0x1218), (float)temp_v3);
     return;
   }
   if (temp_v2 < 0x16) {

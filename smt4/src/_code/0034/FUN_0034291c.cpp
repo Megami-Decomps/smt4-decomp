@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b64b8(void);
 int FUN_002b659c(int, int, int, int);
-int FUN_002ba12c(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002bc0e0(void);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
@@ -35,7 +35,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 #endif
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bc0e0. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -83,9 +83,9 @@ void FUN_0034291c(int param_1)
   temp_v13 = temp_v6 + 10.0f;
   temp_v7 = 0.7f;
   temp_v3 = temp_v7;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v5 = (int)temp_v7;
-  temp_v0 = FUN_002ba12c(g_titleScene);
+  temp_v0 = renderCtxCalculateStereoParallax(g_titleScene);
   temp_v8 = (int)temp_v3;
   temp_v3 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v7 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

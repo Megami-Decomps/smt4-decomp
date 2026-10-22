@@ -1,58 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f9c40` (_code @ 0x4f9c40, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: assist-slot loop, path buffers and cache-name addresses use different saved registers. */
+#include "common.h"
 
+struct AssistEffectSlot {
+    u8 index;
+    u8 unk01[3];
+    void *data;
+    char name[128];
+    u8 flags;
+    u8 unk89[3];
+};
+struct AssistEffectOwner { u8 unk0000[0x3284]; AssistEffectSlot slots[2]; };
 extern "C" {
+extern const char DAT_00528480[2][32];
+extern const char DAT_005284c0[];
+void sysMemClear(void *memory, u32 size);
+void asdMemFree(void *memory);
+void textFormatBuffer(char *output, const char *format, ...);
+char *libc_strcpy(char *output, const char *input);
+const char *FUN_00100d60(const char *text, u32 character);
+u32 findRecordByKey(const char *name);
+void asdLoadFileAsyncSimple(const char *path, void **data, u32 mode);
 
-int textFormatBuffer(...);
-int asdMemFree(...);
-int asdLoadFileAsyncSimple(...);
-int libc_strcpy(...);
-int sysMemClear(...);
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00100d60(unsigned char *, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-extern int findRecordByKey(int);
-
-
-unsigned int FUN_004f9c40(int param_1)
-
+// Reset the two assist-effect slots and asynchronously load resources absent from the effect cache.
+u32 FUN_004f9c40(AssistEffectOwner *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [128];
-  unsigned char temp_v4 [132];
-  
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x3284) = 0xff;
-    sysMemClear(temp_v1 + 0x328c,0x80);
-    if (*(int *)(temp_v1 + 0x3288) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x3288) = 0;
+    for (s32 i = 0; i < 2; ++i) {
+        AssistEffectSlot *slot = &owner->slots[i];
+        slot->index = 0xff;
+        sysMemClear(slot->name, sizeof(slot->name));
+        if (slot->data) {
+            asdMemFree(slot->data);
+            slot->data = NULL;
+        }
+        slot->flags = 0;
+        char path[128], formatted[128];
+        sysMemClear(path, sizeof(path));
+        sysMemClear(formatted, sizeof(formatted));
+        textFormatBuffer(formatted, DAT_005284c0, DAT_00528480[i]);
+        libc_strcpy(path, formatted);
+        const char *name = FUN_00100d60(path, '/');
+        libc_strcpy(slot->name, name + 1);
+        if (findRecordByKey(slot->name) == 0xff) {
+            asdLoadFileAsyncSimple(path, &slot->data, 1);
+            slot->flags |= 1;
+        }
     }
-    *(unsigned char *)(temp_v1 + 0x330c) = 0;
-    sysMemClear(temp_v3,0x80);
-    sysMemClear(temp_v4,0x80);
-    textFormatBuffer(temp_v4,"battle/effect/%s.eft","ef_Assist_04" + temp_v2 * 0x20);
-    libc_strcpy(temp_v3,temp_v4);
-    temp_v0 = FUN_00100d60(temp_v3,0x2f);
-    libc_strcpy(temp_v1 + 0x328c,temp_v0 + 1);
-    temp_v0 = findRecordByKey(temp_v1 + 0x328c);
-    if (temp_v0 == 0xff) {
-      asdLoadFileAsyncSimple(temp_v3,temp_v1 + 0x3288,1);
-      *(unsigned char *)(temp_v1 + 0x330c) = *(unsigned char *)(temp_v1 + 0x330c) | 1;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

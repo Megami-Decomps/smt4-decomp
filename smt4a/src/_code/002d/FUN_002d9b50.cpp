@@ -26,7 +26,7 @@ int FUN_003180c4(...);
 int mapTrapEnable(...);
 int FUN_00365c94(...);
 int naviMainSetRequestTriple(...);
-int FUN_003adc58(...);
+int uiPlayGatedActionFeedback(...);
 int FUN_003b5714(...);
 int FUN_003d2158(...);
 int playerSetClampedValue(...);
@@ -129,7 +129,7 @@ extern int mapJobIsDone(void);
 /* Supplied declaration required: FUN_00365c94. */
 extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
-/* Supplied declaration required: FUN_003adc58. */
+/* Supplied declaration required: uiPlayGatedActionFeedback. */
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
@@ -473,7 +473,7 @@ LAB_002da3cc:
         }
         if (*(int *)(g_lmapScene + 8) >= 6) {
           mapTrapGetUnk3C();
-          FUN_003adc58();
+          uiPlayGatedActionFeedback();
           FUN_00303460(0);
           mapSetSceneState(1);
           DAT_005f161c = 0;
@@ -700,7 +700,7 @@ LAB_002dad8c:
           temp_v6 = mapJobIsDone();
           if (temp_v6 != 0) {
             DAT_005f1adc = 0;
-            FUN_003adc58();
+            uiPlayGatedActionFeedback();
             FUN_00303460(0);
             mapSetSceneState(1);
             DAT_005f161c = 0;

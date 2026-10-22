@@ -1,73 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00242f94` (_code @ 0x242f94, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: layout constants load after allocation and split retail's four-float store, with different saved registers; 76 built versus 74 retail rows. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "AsdSDK/EffectEditorSelectionTransfer.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
+extern f32 DAT_0044eb1c[2];
+extern const u8 DAT_00400001;
+extern const u8 DAT_00400003;
+void *memCopy(void *destination, const void *source, u32 size);
+EffectEditorOptions *FUN_0024dd90(EffectEditorOptions *options);
+void effEditorNodeChainApply(EffectEditorOptions *options);
+void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 clear);
+void effMenuListAppend(EffMenuNode *node, s32 list);
+s32 padIsButtonPressed(u32 button);
+u8 FUN_0024dd80(s32 button);
 
-int effEditorNodeChainApply(int);
-int FUN_0024dd80(int);
-int FUN_0024dd90(int);
-int effMenuListAppend(void);
-int memCopy(...);
-int padIsButtonPressed(...);
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern unsigned char DAT_00400003; /* 0x400003 */
-extern unsigned char DAT_0044eb1c; /* 0x44eb1c */
-
-/* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
-/* Supplied declaration required: FUN_0024dd90. */
-/* Supplied declaration required: effMenuListAppend. */
-/* Supplied declaration required: memCopy. */
-/* Supplied declaration required: padIsButtonPressed. */
-/* Supplied declaration required: memAlloc. */
-
-
-unsigned char * FUN_00242f94(unsigned long long *param_1,unsigned int param_2,int param_3)
-
+u32 FUN_00242f94(f32 *selection, u32 value, EffectEditorOptions *options)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned long long temp_v3;
-  
-  memCopy(param_1,&DAT_0044eb1c,8);
-  if ((*(signed char *)((unsigned char *)&DAT_0044eb1c - 0x93)) == '\0') {
-    FUN_0024dd90(param_3);
-  }
-  memCopy(&DAT_0044eb1c,param_1,8);
-  effEditorNodeChainApply(param_3);
-  temp_v3 = *param_1;
-  temp_v1 = 0x43360000;
-  temp_v2 = 0x42200000;
-  temp_v0 = 0x10000;
-  memAlloc(0x10000,0x100,0,0x68,0x10,1);
-  *(unsigned int *)(temp_v0 + 8) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
-  *(int *)(temp_v0 + 0x10) = (int)temp_v3;
-  *(int *)(temp_v0 + 0x14) = (int)((unsigned long long)temp_v3 >> 0x20);
-  *(unsigned int *)(temp_v0 + 4) = 0xc;
-  *(unsigned int *)(temp_v0 + 0x18) = param_2;
-  effMenuListAppend();
-  temp_v0 = padIsButtonPressed(1);
-  if (temp_v0 == 0) {
-    FUN_0024dd80(1);
-    temp_v0 = padIsButtonPressed();
-    if (temp_v0 == 0) {
-      if ((*(unsigned int *)(param_3 + 0x10) & 8) == 0) {
-        return &(*(unsigned char *)((unsigned char *)&DAT_00400003 - 0x2));
-      }
-      return &DAT_00400003;
+    u32 result = reinterpret_cast<u32>(&DAT_00400001);
+    memCopy(selection, DAT_0044eb1c, 2 * sizeof(f32));
+    if (!g_effectEditor.dispatch.mode) {
+        FUN_0024dd90(options);
     }
-  }
-  return (unsigned char *)0x400000;
+    memCopy(DAT_0044eb1c, selection, 2 * sizeof(f32));
+    asdDebugHookVoid();
+    effEditorNodeChainApply(options);
+    asdDebugHookVoid();
+    f32 selectionX = selection[0];
+    f32 selectionY = selection[1];
+    asdDebugTrace("../Source/Gfx/Effect/effMenu.h", 797);
+    EffMenuRenderNode *node = static_cast<EffMenuRenderNode *>(
+        memAlloc(0x10000, 0x100, 0, sizeof(EffMenuRenderNode), 0x10, 1));
+    node->layoutX = 182.0f;
+    node->layoutY = 40.0f;
+    node->selectionX = selectionX;
+    node->selectionY = selectionY;
+    node->unk04 = 12;
+    node->unk18 = value;
+    effMenuListAppend(node, 3);
+    if (padIsButtonPressed(1) || padIsButtonPressed(FUN_0024dd80(1))) {
+        result = 0x400000;
+    } else if (options->unk10 & 8) {
+        result = reinterpret_cast<u32>(&DAT_00400003);
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

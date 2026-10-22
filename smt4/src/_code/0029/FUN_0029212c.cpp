@@ -7,7 +7,7 @@ extern "C" {
 int skillFormatTargetLabel(...);
 int FUN_0024bda8(...);
 int FUN_002907c4(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int asdTextDrawDirectoryEntry(...);
 int FUN_0029ede8(...);
 int FUN_002ae164(void);
@@ -52,7 +52,7 @@ extern int DAT_0043da2c; /* 0x43da2c */
 /* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern int FUN_00295cec(void);
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
@@ -142,7 +142,7 @@ void FUN_0029212c(int param_1)
       else {
         textFormatBuffer(&temp_v12,&LAB_0029263c);
       }
-      FUN_00295660(0x24,&temp_v12);
+      textEncodeFontSlot(0x24,&temp_v12);
       temp_v4 = recordPackedValue(temp_v5);
       FUN_0029ede8(0x25,temp_v4,0xffffffff,0);
     }
@@ -164,12 +164,12 @@ void FUN_0029212c(int param_1)
       FUN_002907c4(temp_v13,temp_v0 & 0xf);
       FUN_002907c4(temp_v14,*(unsigned char *)(temp_v5 + 0x58) >> 4);
       textFormatBuffer(&temp_v12,&LAB_0029264c,temp_v13,temp_v14);
-      FUN_00295660(0x25,&temp_v12);
+      textEncodeFontSlot(0x25,&temp_v12);
     }
     FUN_0024bda8(&temp_v12,*(unsigned int *)(temp_v5 + 0x54) >> 0x14);
-    FUN_00295660(0x26,&temp_v12);
+    textEncodeFontSlot(0x26,&temp_v12);
     skillFormatTargetLabel(&temp_v12,*(unsigned char *)(temp_v5 + 0x59));
-    FUN_00295660(0x27,&temp_v12);
+    textEncodeFontSlot(0x27,&temp_v12);
     if (*(char *)(temp_v5 + 0x5b) == '\0') {
       textFormatBuffer(&temp_v12,&LAB_00292654);
     }
@@ -217,7 +217,7 @@ void FUN_0029212c(int param_1)
       else {
         textFormatBuffer(&temp_v12,&LAB_002926b0);
       }
-      FUN_00295660(temp_v8 + 0x24,&temp_v12);
+      textEncodeFontSlot(temp_v8 + 0x24,&temp_v12);
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 5);
     memClear(acStack_c8,0x5c);
@@ -321,7 +321,7 @@ void FUN_0029212c(int param_1)
       }
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 5);
-    FUN_00295660(0x29,&temp_v12);
+    textEncodeFontSlot(0x29,&temp_v12);
     if (*(short *)(temp_v5 + 0x6a) != 0) {
       temp_v4 = aocIndexValueOrDefault();
       textFormatBuffer(&temp_v12,&LAB_00292650,temp_v4);
@@ -331,7 +331,7 @@ void FUN_0029212c(int param_1)
     }
     temp_v4 = 0x2a;
   }
-  FUN_00295660(temp_v4,&temp_v12);
+  textEncodeFontSlot(temp_v4,&temp_v12);
   temp_v12 = 3;
   uStack_124 = temp_v17;
   iStack_120 = temp_v19;

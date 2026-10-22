@@ -9,7 +9,7 @@ int dataTable0cLookupById(...);
 int FUN_00288e68(void);
 int FUN_0029212c(...);
 int FUN_0029bd4c(void);
-int FUN_0029c94c(...);
+int buttonHelpShowSkillDetails(...);
 int devilGetRecord(...);
 int textFormatBuffer(...);
 
@@ -88,7 +88,7 @@ extern int asdSoundSlotBIsPlaying(unsigned int);
 extern int FUN_0029ac94(void);
 extern unsigned short *FUN_0029acb0(void);
 /* Supplied declaration required: FUN_0029bd4c. */
-/* Supplied declaration required: FUN_0029c94c. */
+/* Supplied declaration required: buttonHelpShowSkillDetails. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: ifTouchGetSelectionModeForRegion. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
@@ -118,7 +118,7 @@ extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int querySlotHasHandle(void);
-extern unsigned int FUN_002bce30(unsigned int, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -1270,7 +1270,7 @@ LAB_001cc6b4:
       FUN_0029ee6c(temp_v18,0x323232ff);
     }
     else {
-      FUN_0029c94c(temp_v11);
+      buttonHelpShowSkillDetails(temp_v11);
     }
   }
   if (*(int *)(temp_v2 + 0x400) == 0x10) {
@@ -1332,7 +1332,7 @@ LAB_001cc6b4:
       devilGetRecord(temp_v14,temp_v4);
       dataTable0cLookupById(*(unsigned short *)(temp_v11 + 0x38));
       temp_v7 = FUN_002bd068(temp_v14);
-      temp_v12 = FUN_002bce30(temp_v14,0);
+      temp_v12 = demonGetRaceLabel(temp_v14,0);
       textFormatBuffer(temp_v18,&LAB_001cca0c,temp_v12,temp_v7);
       puVar16 = temp_v18;
     }
@@ -1352,7 +1352,7 @@ LAB_001cc6b4:
     temp_v11 = (unsigned int)temp_v1;
     FUN_00288e68();
     if (temp_v11 != 0) {
-      FUN_0029c94c();
+      buttonHelpShowSkillDetails();
       *(int *)(temp_v2 + 0x40c) = *(int *)(temp_v2 + 0x40c) + 1;
       return 0;
     }
@@ -1365,7 +1365,7 @@ LAB_001cc6b4:
       temp_v11 = (unsigned int)temp_v1;
       FUN_00288e68();
       if (temp_v11 != 0) {
-        FUN_0029c94c();
+        buttonHelpShowSkillDetails();
         *(int *)(temp_v2 + 0x40c) = *(int *)(temp_v2 + 0x40c) + 1;
         return 0;
       }

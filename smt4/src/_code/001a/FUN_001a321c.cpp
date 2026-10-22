@@ -15,7 +15,7 @@ int FUN_002b64b8(void);
 int FUN_002b659c(...);
 int FUN_002b6c34(...);
 int devilGetRecord(void);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int FUN_002be370(...);
 int FUN_002be650(...);
@@ -129,9 +129,9 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int aocIndexValueOrDefault(unsigned int);
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -503,7 +503,7 @@ LAB_001a3ea8:
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_002be5a4(3,temp_v21,temp_v35);
             if (*pcVar21 != '\0') {
-              temp_v21 = FUN_002bce30(*puVar18,0);
+              temp_v21 = demonGetRaceLabel(*puVar18,0);
               textFormatBuffer(temp_v35,&LAB_001a43d4,temp_v21);
             }
             else {
@@ -1699,7 +1699,7 @@ LAB_001a68b0:
   }
 LAB_001a6a8c:
   if (*(char *)(temp_v5 + 0x1eb4) != '\0') {
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v28 = (short *)(int)temp_v20;
     if (temp_v17 < *(float *)(temp_v34 + 0x294)) {
       efctSetSpeed();

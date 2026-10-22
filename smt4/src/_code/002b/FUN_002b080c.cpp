@@ -8,7 +8,7 @@ int FUN_002aa100(...);
 int FUN_002aa200(...);
 int sentinelLookupGetValue(void);
 int FUN_002ae424(...);
-int FUN_002ba12c(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -67,7 +67,7 @@ extern unsigned int FUN_00145e44(unsigned short);
 /* Supplied declaration required: FUN_002aa200. */
 /* Supplied declaration required: sentinelLookupGetValue. */
 /* Supplied declaration required: FUN_002ae424. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002b0d7c) */
@@ -139,7 +139,7 @@ void FUN_002b080c(int *param_1, int arg1, int arg2)
   temp_v25 = 0;
   piStack_30 = param_1;
   if (g_asdTextDefaults != '\0') {
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     in_s0 = in_s2 + in_s0;
   }
   temp_v5 = param_1[5];

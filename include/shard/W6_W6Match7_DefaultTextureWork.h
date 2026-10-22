@@ -43,6 +43,12 @@ struct DefaultTextureGlobals {
 typedef void *DriverTextureAllocate(u32 heap, u32 alignment, u32 flags, u32 size);
 typedef void DriverTextureRelease(u32 heap, u32 alignment, u32 flags, void *block);
 
+struct DriverMemoryCallbacks {
+    /* 0x00 */ DriverTextureAllocate *allocate;
+    /* 0x04 */ DriverTextureRelease *release;
+};
+typedef char DriverMemoryCallbacksSizeCheck[sizeof(DriverMemoryCallbacks) == 8 ? 1 : -1];
+
 extern "C" {
 s32 gfxDefaultTexturesInitialize(DefaultTextureWork *work);
 s32 gfxDefaultTexturesInitialize(DefaultTextureWork *work);

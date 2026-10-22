@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b621c(void);
-int FUN_002dae68(void);
+int mapEaseSceneHeading(void);
 int FUN_0033ad04(void);
 int sysPlayVoice(...);
 int controllerGetSourceValue(...);
@@ -88,7 +88,7 @@ extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b621c. */
 /* Supplied declaration required: FUN_002b80b8. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: mapSetSceneState. */
@@ -804,7 +804,7 @@ void FUN_002b81ec(void)
              *(float *)(temp_v5 + 0x24) +
              (*(float *)(temp_v5 + 0x30) - *(float *)(temp_v5 + 0x24)) * 0.33333334f;
       }
-      FUN_002dae68();
+      mapEaseSceneHeading();
       temp_v5 = g_lmapScene;
       puVar15 = (unsigned int *)(g_lmapScene + 0x20);
       temp_v3 = *(unsigned int *)(g_lmapScene + 0x24);

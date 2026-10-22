@@ -1,71 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002adba8` (_code @ 0x2adba8, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command-entry post-indexed addressing and saved context/input registers differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+extern u8 *g_commandBufferCursor;
+void nngxLockEnter(void);
+void nngxLockLeave(void);
+void FUN_002bdb48(u32 committedOffset, u32 writeOffset);
+void FUN_002ba2b8(void);
+void *rt_memcpy_w(void *destination, const void *source, u32 byteCount);
 
-int nngxLockEnter(void);
-int nngxLockLeave(void);
-int FUN_002ba2b8(void);
-int FUN_002bdb48(void);
-int rt_memcpy_w(int, unsigned int, unsigned int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int g_commandBufferCursor; /* 0x4652a0 */
-extern signed char DAT_004c62a1; /* 0x4c62a1 */
-extern signed char DAT_004c62a2; /* 0x4c62a2 */
-extern int DAT_004c632c; /* 0x4c632c */
-extern int DAT_004c6330; /* 0x4c6330 */
-
-/* Supplied declaration required: nngxLockEnter. */
-/* Supplied declaration required: nngxLockLeave. */
-/* Supplied declaration required: FUN_002ba2b8. */
-/* Supplied declaration required: FUN_002bdb48. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_002adba8(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Append copied GPU words or enqueue an external command block for submission.
+void FUN_002adba8(const void *commands, u32 byteCount, s32 copyCommands)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  
-  temp_v1 = DAT_004c632c;
-  temp_v0 = g_commandBufferCursor;
-  temp_v2 = g_commandBufferCursor - *(int *)(DAT_004c632c + 4);
-  *(int *)(DAT_004c632c + 0xc) = temp_v2;
-  if (param_3 != 0) {
-    rt_memcpy_w(temp_v0,param_1,param_2);
-    g_commandBufferCursor = g_commandBufferCursor + (param_2 & 0xfffffffc);
-  }
-  else {
-    if (*(int *)(temp_v1 + 0x14) != temp_v2) {
-      FUN_002bdb48();
+    AsdCmdBuffer *list = g_asdGfxContext.cmdBuffer;
+    list->writeOffset = g_commandBufferCursor - list->start;
+    if (copyCommands != 0) {
+        rt_memcpy_w(g_commandBufferCursor, commands, byteCount);
+        g_commandBufferCursor += byteCount & ~3u;
+    } else {
+        if (list->committedOffset != list->writeOffset) {
+            FUN_002bdb48(list->committedOffset, list->writeOffset);
+        }
+        if (list->committedOffset == list->writeOffset) {
+            AsdCmdRecord *entry = &list->entries[list->listCount];
+            entry->kind = 1;
+            entry->byteCount = byteCount;
+            entry->commands = commands;
+            entry->flags |= 2;
+            nngxLockEnter();
+            ++list->listCount;
+            if (g_asdGfxContext.activeBuffer == list &&
+                g_asdGfxContext.submission.enabled && !g_asdGfxContext.submission.pending) {
+                g_asdGfxContext.submission.pending = 1;
+                FUN_002ba2b8();
+            }
+            nngxLockLeave();
+        }
     }
-    if (*(int *)(temp_v1 + 0x14) == *(int *)(temp_v1 + 0xc)) {
-      puVar4 = (unsigned char *)(*(int *)(temp_v1 + 0x18) + *(int *)(temp_v1 + 0x20) * 0x1c);
-      *puVar4 = 1;
-      *(unsigned int *)(puVar4 + 8) = param_2;
-      *(unsigned int *)(puVar4 + 4) = param_1;
-      *(unsigned int *)(puVar4 + 0xc) = *(unsigned int *)(puVar4 + 0xc) | 2;
-      nngxLockEnter();
-      *(int *)(temp_v1 + 0x20) = *(int *)(temp_v1 + 0x20) + 1;
-      if (((DAT_004c6330 == temp_v1) && (DAT_004c62a2 != '\0')) && (DAT_004c62a1 == '\0')) {
-        DAT_004c62a1 = '\x01';
-        FUN_002ba2b8();
-      }
-      nngxLockLeave();
-      return;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

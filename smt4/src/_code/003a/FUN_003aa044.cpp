@@ -38,7 +38,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int FUN_002bce30(unsigned int, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -128,7 +128,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     else {
       temp_v14 = 3;
     }
-    temp_v7 = FUN_002bce30(param_4 & 0xffff,0);
+    temp_v7 = demonGetRaceLabel(param_4 & 0xffff,0);
     temp_v4 = curveEvaluateStandard(temp_v7,2);
     if (param_3 == 0) {
       temp_v9 = 0x105b;

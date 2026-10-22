@@ -1,87 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00473754` (_code @ 0x473754, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: byte swapping expands to shifts and OR instead of REV16; control-code branches and loop registers differ. */
+#include "common.h"
 
 extern "C" {
+s32 wstrlenU16(const u16 *text);
+void rt_memclr(void *memory, u32 size);
 
-int rt_memclr(int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-/* Supplied declaration required: rt_memclr. */
-extern int wstrlenU16(int);
-
-
-int FUN_00473754(unsigned int param_1,int param_2,int param_3)
-
+// Split encoded text into at most eight 64-character lines, stopping at the terminal tags.
+s32 FUN_00473754(void *, const u16 *text, u16 (*lines)[64])
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned short *puVar7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int unaff_r11;
-  int temp_v10;
-  
-  temp_v2 = wstrlenU16(param_2);
-  temp_v9 = 0;
-  if (temp_v2 != 0) {
-    rt_memclr(param_3,0x80);
-    if (0 < temp_v2) {
-      unaff_r11 = 0xf890;
+    s32 length = wstrlenU16(text);
+    if (length == 0)
+        return 0;
+    rt_memclr(lines, sizeof(*lines));
+    s32 lineCount = 1;
+    s32 column = 0;
+    for (s32 i = 0; i < length; ++i) {
+        u16 character = text[i];
+        u32 code = (u16)((character << 8) | (character >> 8));
+        if (code == 0xf890 || code == 0xffff)
+            return column ? lineCount : lineCount - 1;
+        if (code == 0xf801) {
+            if (lineCount >= 8)
+                return lineCount;
+            ++lines;
+            column = 0;
+            ++lineCount;
+            rt_memclr(lines, sizeof(*lines));
+        } else {
+            (*lines)[column++] = character;
+        }
     }
-    temp_v8 = 0;
-    temp_v9 = 1;
-    temp_v7 = 0;
-    temp_v5 = temp_v4;
-    temp_v10 = param_3;
-    if (0 < temp_v2) {
-      do {
-        puVar7 = (unsigned short *)(param_2 + temp_v7 * 2);
-        temp_v1 = *puVar7;
-        temp_v3 = ((temp_v1 & 0xff) << 8) | (unsigned int)(temp_v1 >> 8);
-        if (temp_v3 != unaff_r11) {
-          temp_v5 = temp_v3 - 0xff00;
-        }
-        if (temp_v3 == unaff_r11 || temp_v5 == 0xff) {
-          if (temp_v8 != 0) {
-            return temp_v9;
-          }
-          return temp_v9 - 1;
-        }
-        if (temp_v3 == 0xf801) {
-          if (temp_v9 >= 8) {
-            return temp_v9;
-          }
-          param_3 = param_3 + 0x80;
-          temp_v8 = 0;
-          temp_v9 = temp_v9 + 1;
-          rt_memclr(param_3,0x80);
-          temp_v5 = temp_v6;
-          temp_v10 = param_3;
-        }
-        else {
-          temp_v1 = *puVar7;
-          temp_v5 = (unsigned int)temp_v1;
-          temp_v0 = temp_v8 * 2;
-          temp_v8 = temp_v8 + 1;
-          *(unsigned short *)(temp_v10 + temp_v0) = temp_v1;
-        }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < temp_v2);
-    }
-  }
-  return temp_v9;
+    return lineCount;
 }
-
-} /* extern "C" */
+}

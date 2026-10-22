@@ -1,58 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bf3f0` (_code @ 0x3bf3f0, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail outlines the background-reset alternative after the tail call; compiler keeps that branch inline. */
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
-
-int sysPlaySe(int);
+int sysPlaySe(int soundId);
 int sub68OwnerCall6(void);
 int sub68OwnerCall8(void);
 int FUN_003b61ec(void);
 int commonBgReset(void);
+int gameFlagIsSet(u32 flag);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: sysPlaySe. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: sub68OwnerCall6. */
-/* Supplied declaration required: sub68OwnerCall8. */
-/* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: commonBgReset. */
-
-
-void FUN_003bf3f0(int param_1)
-
+/* Switch the map overlay and restore its background when closing it. */
+void FUN_003bf3f0(s32 open)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_1 != 0) {
-    (*(unsigned char *)((unsigned char *)&g_gameState + 0x295)) = 1;
-    sub68OwnerCall8();
-    FUN_003b61ec();
-    sysPlaySe(0x92);
-    return;
-  }
-  (*(unsigned char *)((unsigned char *)&g_gameState + 0x295)) = 0;
-  temp_v0 = gameFlagIsSet(0x49a);
-  if (temp_v0 != 0) {
-    commonBgReset();
-  }
-  else {
-    FUN_003b61ec();
-  }
-  temp_v0 = gameFlagIsSet(0xc);
-  if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)) {
-    FUN_003b61ec();
-  }
-  sub68OwnerCall6();
-  sysPlaySe(0x10e);
-  return;
+    if (open) {
+        g_gameState.mapFlags.unk295 = 1;
+        sub68OwnerCall8();
+        FUN_003b61ec();
+        sysPlaySe(0x92);
+        return;
+    }
+    g_gameState.mapFlags.unk295 = 0;
+    if (gameFlagIsSet(0x49A)) {
+        commonBgReset();
+    } else {
+        FUN_003b61ec();
+    }
+    if (gameFlagIsSet(0xC) && !gameFlagIsSet(0x10)) {
+        FUN_003b61ec();
+    }
+    sub68OwnerCall6();
+    sysPlaySe(0x10E);
 }
-
-} /* extern "C" */
+}

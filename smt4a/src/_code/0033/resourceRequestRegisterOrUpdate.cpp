@@ -1,26 +1,6 @@
 /* NON_MATCHING: compiler folds per-entry member bases and uses five saved registers rather than six; -O2 candidate. */
-#include "common.h"
+#include "shard/W9_W9Match1_ResourceRequest.h"
 
-struct ResourceRequestLabel {
-    char text[21];
-};
-struct ResourceRequest {
-    u16 kind;
-    u16 option;
-    u16 variant;
-    u16 flags;
-    f32 position[3];
-    u32 parameter;
-    u8 active;
-    ResourceRequestLabel label;
-};
-struct RegisteredResourceRequest {
-    ResourceRequest request;
-    u32 handle; // 0x30
-    u8 unk34[8];
-    u8 marked; // 0x3c
-    u8 unk3d[3];
-};
 struct ResourceRequestRegistry {
     u8 unk0000[0x4850];
     s32 count;

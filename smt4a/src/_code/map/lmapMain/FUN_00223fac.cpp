@@ -1,51 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00223fac` (_code @ 0x223fac, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: countdown and three-argument flag update recovered; cold initialization placement and overlapping countdown-symbol relocation differ. */
+#include "map/mapDepart.h"
+
+struct MapPopupState {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ s32 timer;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ u32 process;
+};
 
 extern "C" {
+extern MapPopupState* g_popupState;
+extern GameStateA g_gameState;
+s32 randRange(s32 maximum);
+void gameFlagSetValue(u32 flag, s32 value, s32 persist);
+s32 gameFlagIsSet(u32 flag);
+s32 gameFlagStateIsOne(void);
+u32 FUN_002d8b58(u32 kind, u32 resource);
 
-int randRange(int);
-int gameFlagSetValue(int, int);
-
-extern int *g_popupState; /* 0x58104c */
-extern int DAT_005f1ac4; /* 0x5f1ac4 */
-
-/* Supplied declaration required: randRange. */
-extern int gameFlagIsSet(unsigned int);
-extern int gameFlagStateIsOne(void);
-extern int FUN_002d8b58(unsigned int, unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
-
-
+// Periodically open the map popup while its progress flag is enabled.
 void FUN_00223fac(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  if ((*g_popupState == 0) && (temp_v0 = gameFlagStateIsOne(), temp_v0 != 0)) {
-    temp_v0 = gameFlagIsSet(0x111a);
-    if (temp_v0 != 0) {
-      randRange(99);
+    if (g_popupState->state == 0 && gameFlagStateIsOne()) {
+        if (gameFlagIsSet(0x111A)) {
+            randRange(99);
+        } else {
+            g_gameState.popup.countdown = 0;
+            gameFlagSetValue(0x111A, 1, 1);
+        }
+        if (g_gameState.popup.countdown <= 0) {
+            g_gameState.popup.countdown = 5;
+            g_popupState->state = 20;
+            g_popupState->timer = 0;
+            g_popupState->process = FUN_002d8b58(21, 187);
+        } else {
+            --g_gameState.popup.countdown;
+        }
     }
-    else {
-      DAT_005f1ac4 = 0;
-      gameFlagSetValue(0x111a,1);
-    }
-    piVar1 = g_popupState;
-    if (DAT_005f1ac4 < 1) {
-      DAT_005f1ac4 = 5;
-      *g_popupState = 0x14;
-      piVar1[1] = 0;
-      temp_v0 = FUN_002d8b58(0x15,0xbb);
-      g_popupState[5] = temp_v0;
-    }
-    else {
-      DAT_005f1ac4 = DAT_005f1ac4 - 1;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

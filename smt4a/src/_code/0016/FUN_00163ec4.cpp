@@ -1,59 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00163ec4` (_code @ 0x163ec4, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Adjusted-text fraction registers and return predication differ. */
+#include "common.h"
+#include "camp/RenderCtx.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+extern TextDrawDefaultsPrefixA g_asdTextDefaults;
 
-int FUN_00162790(unsigned int, unsigned int, int);
-int FUN_001879d0(unsigned int);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(...);
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern signed char g_asdTextDefaults; /* 0x5b3d54 */
-extern unsigned int DAT_005b3d60; /* 0x5b3d60 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001879d0. */
-
-
-void FUN_00163ec4(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
-{
-/* irregular: irregular input(s): in_fpscr, in_s0; 6 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned int in_fpscr;
-  float in_s0;
-  
-  VectorSignedToFloat(0x100 - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = *(int *)(param_1 + 0x54) != 0;
-  temp_v0 = '\0';
-  if (temp_v2) {
-    temp_v0 = *(char *)(param_1 + 0x5c);
-  }
-  if (temp_v2 && temp_v0 != '\0') {
-    if (in_s0 == 0.0f) {
-      temp_v1 = 0;
-    }
-    else if (in_s0 == 1.0f) {
-      temp_v1 = 0xff;
-    }
-    else {
-      temp_v1 = VectorFloatToUnsigned(in_s0 * 255.0f,3) & 0xff;
-    }
-    temp_v1 = DAT_005b3d60 | temp_v1;
-    if (g_asdTextDefaults != '\0') {
-      FUN_001879d0(g_renderCtx);
-    }
-    FUN_00162790(*(unsigned int *)(param_1 + 0x50),temp_v1,param_1 + 0x5c);
-  }
-  return;
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 fraction);
+f32 FUN_00162790(u32 resource, u32 color, const char *text,
+                 f32 x, f32 y, f32 z, f32 scale, f32 opacity);
 }
 
-} /* extern "C" */
+extern "C" f32 FUN_00163ec4(TextDrawStatePrefixA *state, s32 x, s32 y,
+                            s32 adjustment, f32 opacity)
+{
+    const f32 fraction = static_cast<f32>(
+        static_cast<s32>(256u - static_cast<u32>(adjustment))) * (1.0f / 256.0f);
+    const f32 originalX = static_cast<f32>(x);
+    const f32 drawY = static_cast<f32>(y);
+
+    if (state->enabled == 0 || state->text[0] == 0)
+        return 0.0f;
+
+    u32 alpha;
+    if (opacity == 0.0f)
+        alpha = 0;
+    else if (opacity == 1.0f)
+        alpha = 255;
+    else
+        alpha = static_cast<u32>(opacity * 255.0f) & 255u;
+
+    const u32 color = g_asdTextDefaults.colorBits | alpha;
+    f32 drawX = originalX;
+    if (g_asdTextDefaults.adjustmentEnabled != 0)
+        drawX = renderCtxCalculateStereoParallax(g_renderCtx, fraction) + drawX;
+
+    const f32 advance = FUN_00162790(state->resource, color, state->text,
+                                    drawX, drawY, 0.0f, state->scale, opacity);
+    const f32 displacement = (advance + drawX) - originalX;
+    return displacement > 0.0f ? displacement : 0.0f;
+}

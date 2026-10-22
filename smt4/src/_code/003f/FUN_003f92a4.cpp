@@ -1,51 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f92a4` (_code @ 0x3f92a4, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed key decoding and interpolation use different VFP and byte-extraction registers. */
+/* Linearly interpolates a scalar stored in twelve-bit packed animation keys. */
+#include "shard/AnimCurve.h"
 
-extern "C" {
+struct FrameCurve;
+struct CurveKey;
+extern "C" CurveKey *FUN_003f87cc(FrameCurve *curve, f32 time);
 
-int VectorUnsignedToFloat(...);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-extern unsigned short *FUN_003f87cc(void);
-
-
-int FUN_003f92a4(unsigned short *param_1)
-
+extern "C" f32 FUN_003f92a4(FrameCurve *source, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short *puVar2;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v3;
-  
-  puVar2 = (unsigned short *)FUN_003f87cc();
-  temp_v3 = (float)VectorUnsignedToFloat((unsigned int)(unsigned char)*puVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 8) * temp_v3 == in_s0) << 0x1e);
-  temp_v2 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-  if (!temp_v2) {
-    temp_v2 = puVar2 == param_1 + (unsigned int)*param_1 * 2 + 8;
-  }
-  if (temp_v2) {
-    temp_v1 = (unsigned int)*(unsigned char *)((int)puVar2 + 1) + ((unsigned char)puVar2[1] & 0xf) * 0x100;
-    VectorUnsignedToFloat(temp_v1,(unsigned char)(temp_v0 >> 0x16) & 3);
-  }
-  else {
-    VectorUnsignedToFloat((unsigned int)(unsigned char)puVar2[2],(unsigned char)(temp_v0 >> 0x16) & 3);
-    VectorUnsignedToFloat
-              ((unsigned int)*(unsigned char *)((int)puVar2 + 1) + ((unsigned char)puVar2[1] & 0xf) * 0x100,
-               (unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v1 = (unsigned int)*(unsigned char *)((int)puVar2 + 5) + ((unsigned char)puVar2[3] & 0xf) * 0x100;
-    VectorUnsignedToFloat(temp_v1,(unsigned char)(temp_v0 >> 0x16) & 3);
-  }
-  return temp_v1;
+    /* The lookup's private FrameCurve type leaves its scale/base pair in byte padding. */
+    struct NarrowCurveView {
+        u16 count;
+        u8 unk02[6];
+        f32 scale;
+        f32 base;
+        f32 frameDuration;
+        PackedAnimKeyNarrow keys[1];
+    };
+    NarrowCurveView *curve = (NarrowCurveView *)source;
+    PackedAnimKeyNarrow *key = (PackedAnimKeyNarrow *)FUN_003f87cc(source, time);
+    f32 keyTime = curve->frameDuration * (f32)(u32)key->frame;
+    u32 value = key->valueLow + ((u32)(key->valueHigh & 15) << 8);
+    if (keyTime == time || key == &curve->keys[curve->count - 1]) {
+        return curve->base + (f32)value * curve->scale;
+    }
+    PackedAnimKeyNarrow *next = key + 1;
+    f32 factor = (time - keyTime) /
+                 (curve->frameDuration * (f32)(u32)next->frame - keyTime);
+    f32 first = curve->base + (f32)value * curve->scale;
+    u32 nextValue = next->valueLow + ((u32)(next->valueHigh & 15) << 8);
+    f32 second = curve->base + (f32)nextValue * curve->scale;
+    return first * (1.0f - factor) + second * factor;
 }
-
-} /* extern "C" */

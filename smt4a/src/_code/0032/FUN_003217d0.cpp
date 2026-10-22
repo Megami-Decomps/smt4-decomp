@@ -8,7 +8,7 @@ int CONCAT44(double, int);
 int FUN_001634b4(int);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_003b21a4(int);
 int VectorSignedToFloat(int, int);
 
@@ -32,7 +32,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003b21a4. */
 
 
@@ -58,7 +58,7 @@ void FUN_003217d0(int param_1)
   }
   temp_v7 = 0.29f;
   temp_v6 = temp_v7;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v8 = CONCAT44(temp_v6,(int)temp_v7);
   temp_v3 = btlGetMainState();
   if ((*(unsigned int *)(temp_v3 + 0x45a0) & DAT_0057a9b0) == 0 &&
@@ -67,7 +67,7 @@ void FUN_003217d0(int param_1)
     FUN_001634b4(param_1 + 0x2dc);
   }
   temp_v6 = (float)((unsigned long long)temp_v8 >> 0x20);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v3 = (int)temp_v6;
   if (*(char *)(param_1 + 0x400) != '\0') {
     temp_v7 = 0.0f;

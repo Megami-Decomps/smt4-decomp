@@ -1,62 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002700d0` (_code @ 0x2700d0, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "map/MapStateSlots.h"
 
 extern "C" {
+extern MapStateSlots *g_mapStateSlots;
+void asdMdlManagerDestroy(void *model);
 
-int asdMdlManagerDestroy(...);
-
-extern int g_mapStateSlots; /* 0x44cd88 */
-
-/* Supplied declaration required: asdMdlManagerDestroy. */
-
-
-void FUN_002700d0(void)
-
+void FUN_002700d0()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v1 = 0;
-  do {
-    temp_v2 = g_mapStateSlots + temp_v1 * 0x4c;
-    if (*(char *)(temp_v2 + 0x9d8) != '\0') {
-      asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0xa08));
-      *(unsigned int *)(temp_v2 + 0xa08) = 0;
+    // Three additional slots follow the shared state prefix in this owner.
+    struct CleanupStateView {
+        MapStateSlots common;
+        MapStateSlot extraSlots[3];
+    };
+    typedef char CleanupStateLayoutCheck[offsetof(CleanupStateView, extraSlots) == 0x9d8 ? 1 : -1];
+    for (s32 index = 0; index < 3; ++index) {
+        MapStateSlot *slot = &((CleanupStateView *)g_mapStateSlots)->extraSlots[index];
+        if (slot->active != 0) {
+            asdMdlManagerDestroy(slot->resources.model);
+            slot->resources.model = NULL;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  temp_v1 = 0;
-  do {
-    temp_v2 = g_mapStateSlots + temp_v1 * 0x4c;
-    temp_v3 = *(char *)(temp_v2 + 0x58) != '\0';
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = (unsigned int)*(unsigned char *)(temp_v2 + 0x84);
+    for (s32 index = 0; index < 32; ++index) {
+        MapStateSlot *slot = &g_mapStateSlots->slots[index];
+        if (slot->active != 0 && slot->resources.ready != 0 && slot->resources.model != NULL) {
+            asdMdlManagerDestroy(slot->resources.model);
+            slot->resources.model = NULL;
+        }
     }
-    temp_v4 = temp_v0 != 0;
-    if (temp_v3 && temp_v4) {
-      temp_v0 = *(unsigned int *)(temp_v2 + 0x88);
+    for (s32 index = 0; index < 8; ++index) {
+        if (g_mapStateSlots->references.models[index].model != NULL) {
+            asdMdlManagerDestroy(g_mapStateSlots->references.models[index].model);
+            g_mapStateSlots->references.models[index].model = NULL;
+        }
     }
-    if ((temp_v3 && temp_v4) && temp_v0 != 0) {
-      asdMdlManagerDestroy();
-      *(unsigned int *)(temp_v2 + 0x88) = 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x20);
-  temp_v1 = 0;
-  do {
-    if (*(int *)(g_mapStateSlots + temp_v1 * 8 + 0x1c) != 0) {
-      asdMdlManagerDestroy();
-      *(unsigned int *)(g_mapStateSlots + temp_v1 * 8 + 0x1c) = 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 8);
-  return;
 }
-
-} /* extern "C" */
+}

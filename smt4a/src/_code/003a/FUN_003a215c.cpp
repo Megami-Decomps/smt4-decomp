@@ -1,59 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a215c` (_code @ 0x3a215c, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: axis products and diagonal expressions use different VFP registers and store scheduling. */
+/* Builds the global axis-angle rotation matrix from the configured axis and an angle in radians. */
+#include "shard/W8Match1_MatrixRotation.h"
 
 extern "C" {
+extern MatrixRotationWork DAT_006471dc;
+f32 FUN_001b63b0(f32 phase);
+f32 FUN_001a1ee0(f32 phase);
 
-int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
-
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_0064731c; /* 0x64731c */
-extern float DAT_00647320; /* 0x647320 */
-extern float DAT_00647324; /* 0x647324 */
-extern unsigned int DAT_00647328; /* 0x647328 */
-extern float DAT_0064732c; /* 0x64732c */
-extern float DAT_00647330; /* 0x647330 */
-extern float DAT_00647334; /* 0x647334 */
-extern unsigned int DAT_00647338; /* 0x647338 */
-extern float DAT_0064733c; /* 0x64733c */
-extern float DAT_00647340; /* 0x647340 */
-extern float DAT_00647344; /* 0x647344 */
-extern unsigned int DAT_00647348; /* 0x647348 */
-
-/* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
-
-
-void FUN_003a215c(void)
-
+void FUN_003a215c(f32 angle)
 {
-/* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
-  float in_s0;
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  
-  temp_v2 = in_s0 * 40.743664f;
-  temp_v0 = temp_v2;
-  FUN_001b63b0();
-  FUN_001a1ee0();
-  temp_v1 = 1.0f - temp_v2;
-  DAT_0064731c = DAT_006472dc * DAT_006472dc + (1.0f - DAT_006472dc * DAT_006472dc) * temp_v2;
-  DAT_00647320 = DAT_006472e4 * temp_v0 + DAT_006472dc * DAT_006472e0 * temp_v1;
-  DAT_00647324 = DAT_006472dc * DAT_006472e4 * temp_v1 - DAT_006472e0 * temp_v0;
-  DAT_00647328 = 0;
-  DAT_0064732c = DAT_006472dc * DAT_006472e0 * temp_v1 - DAT_006472e4 * temp_v0;
-  DAT_00647330 = DAT_006472e0 * DAT_006472e0 + (1.0f - DAT_006472e0 * DAT_006472e0) * temp_v2;
-  DAT_00647334 = DAT_006472dc * temp_v0 + DAT_006472e0 * DAT_006472e4 * temp_v1;
-  DAT_00647338 = 0;
-  DAT_0064733c = DAT_006472e0 * temp_v0 + DAT_006472dc * DAT_006472e4 * temp_v1;
-  DAT_00647340 = DAT_006472e0 * DAT_006472e4 * temp_v1 - DAT_006472dc * temp_v0;
-  DAT_00647344 = DAT_006472e4 * DAT_006472e4 + (1.0f - DAT_006472e4 * DAT_006472e4) * temp_v2;
-  DAT_00647348 = 0;
-  return;
+    f32 phase = angle * 40.743664f;
+    f32 cosine = FUN_001b63b0(phase);
+    f32 sine = FUN_001a1ee0(phase);
+    f32 complement = 1.0f - cosine;
+    f32 x = DAT_006471dc.axisInput.values[0];
+    f32 y = DAT_006471dc.axisInput.values[1];
+    f32 z = DAT_006471dc.axisInput.values[2];
+    f32 *matrix = DAT_006471dc.rotation.values;
+    matrix[0] = x * x + (1.0f - x * x) * cosine;
+    matrix[1] = z * sine + x * y * complement;
+    matrix[2] = x * z * complement - y * sine;
+    matrix[3] = 0.0f;
+    matrix[4] = x * y * complement - z * sine;
+    matrix[5] = y * y + (1.0f - y * y) * cosine;
+    matrix[6] = x * sine + y * z * complement;
+    matrix[7] = 0.0f;
+    matrix[8] = y * sine + x * z * complement;
+    matrix[9] = y * z * complement - x * sine;
+    matrix[10] = z * z + (1.0f - z * z) * cosine;
+    matrix[11] = 0.0f;
 }
-
-} /* extern "C" */
+}

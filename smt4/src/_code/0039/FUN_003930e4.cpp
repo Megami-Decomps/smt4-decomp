@@ -25,7 +25,7 @@ extern int FUN_00391e48(...); /* 0x391e48 */
 extern int FUN_003920d8(...); /* 0x3920d8 */
 extern int FUN_003923b0(...); /* 0x3923b0 */
 extern int FUN_003928b4(...); /* 0x3928b4 */
-extern int FUN_003932a4(...); /* 0x3932a4 */
+extern int aocUpdateRequestTransition(...); /* 0x3932a4 */
 
 
 void FUN_003930e4(int param_1)
@@ -87,7 +87,7 @@ void FUN_003930e4(int param_1)
   *(unsigned int *)(param_1 + 0x9c) = 0;
   *(romwright_code **)(param_1 + 0xa0) = FUN_0038f410;
   *(unsigned int *)(param_1 + 0xa4) = 0;
-  *(romwright_code **)(param_1 + 0xa8) = FUN_003932a4;
+  *(romwright_code **)(param_1 + 0xa8) = aocUpdateRequestTransition;
   *(unsigned int *)(param_1 + 0xac) = 0;
   *(unsigned int *)(param_1 + 200) = 0x38efb4;
   *(unsigned int *)(param_1 + 0xcc) = 0;

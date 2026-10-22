@@ -1,54 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00365bc4` (_code @ 0x365bc4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: empty-table branch goes through the final null result rather than directly returning the zero count. */
+#include "gamedata/DataTable.h"
 
-extern "C" {
+struct Table67Record {
+    s32 id;
+    u8 data[0x60];
+};
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-int FUN_00365bc4(int param_1)
-
+/* Find the first record with the requested ID in table 67's second section. */
+extern "C" Table67Record *FUN_00365bc4(s32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v0 = dataTableGet(0x43,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v4 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v5 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(int *)(temp_v1 + temp_v5 * 100) == param_1) {
-          temp_v4 = temp_v1 + temp_v5 * 100;
-          return temp_v4;
+    void *table = dataTableGet(67, 1);
+    Table67Record *entries = (Table67Record *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    if (count != 0) {
+        for (s32 i = 0; (u32)i < count; ++i) {
+            if (entries[i].id == id) {
+                return &entries[i];
+            }
         }
-        temp_v5 = temp_v5 + 1;
-      } while ((int)temp_v5 < (int)temp_v3);
     }
-    while( 1 ) {
-      temp_v5 = temp_v3;
-      if (temp_v2 <= temp_v5) {
-        return 0;
-      }
-      if (*(int *)(temp_v1 + temp_v5 * 100) == param_1) break;
-      if (*(int *)(temp_v1 + temp_v5 * 100 + 100) == param_1) {
-        return temp_v1 + temp_v5 * 100 + 100;
-      }
-      temp_v3 = temp_v5 + 2;
-    }
-    temp_v4 = temp_v1 + temp_v5 * 100;
-  }
-  return temp_v4;
+    return NULL;
 }
-
-} /* extern "C" */

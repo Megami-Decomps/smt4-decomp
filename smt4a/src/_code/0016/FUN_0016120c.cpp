@@ -1,59 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016120c` (_code @ 0x16120c, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocator callback and command-buffer bases use different registers and literal-pool positions. */
+/* Reallocates the active graphics command buffer and its trailing record list. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+extern DriverMemoryCallbacks g_gfxAllocateCallback;
+extern u8 *g_commandBufferCursor;
+extern u8 *g_commandBufferEnd;
+void sysMemClear(void *block, s32 size);
 
-int sysMemClear(int, int);
-
-typedef int romwright_code(...);
-extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
-extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
-extern int g_commandBufferCursor; /* 0x5b40e0 */
-extern int g_commandBufferEnd; /* 0x5b40e4 */
-extern unsigned int *DAT_0061a50c; /* 0x61a50c */
-
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_0016120c(int param_1,int param_2)
-
+void FUN_0016120c(s32 bytes, s32 records)
 {
-/* irregular: irregular input(s): in_r12; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  romwright_code *in_r12;
-  
-  puVar1 = DAT_0061a50c;
-  if (DAT_0061a50c != (unsigned int *)0x0) {
-    if (DAT_0061a50c[1] != 0) {
-      in_r12 = g_gfxReleaseCallback;
+    AsdCmdBuffer *buffer = g_asdGfxContext.cmdBuffer;
+    if (buffer != NULL) {
+        if (buffer->start != NULL && g_gfxAllocateCallback.release != NULL) {
+            g_gfxAllocateCallback.release(ASD_HEAP_EXTRA, 0x105, buffer->unk00, buffer->start);
+        }
+        u8 *storage = NULL;
+        if (g_gfxAllocateCallback.allocate != NULL) {
+            storage = (u8 *)g_gfxAllocateCallback.allocate(ASD_HEAP_EXTRA, 0x105, buffer->unk00,
+                                                          bytes + records * 0x1C);
+        }
+        buffer->size = bytes;
+        buffer->unk0c = 0;
+        buffer->listCount = 0;
+        buffer->unk10 = 0;
+        buffer->unk28 = 0;
+        buffer->unk24 = 0;
+        buffer->unk34 = 0;
+        buffer->start = storage;
+        buffer->unk30 = 0;
+        buffer->list = storage + bytes;
+        buffer->unk1c = records;
+        sysMemClear(buffer->list, records * 0x1C);
+        g_commandBufferCursor = buffer->start;
+        g_commandBufferEnd = g_commandBufferCursor + buffer->size;
     }
-    if (DAT_0061a50c[1] != 0 && in_r12 != (romwright_code *)0x0) {
-      (*in_r12)(0x10000,0x105,*DAT_0061a50c);
-    }
-    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
-      temp_v0 = 0;
-    }
-    else {
-      temp_v0 = (*g_gfxAllocateCallback)(0x10000,0x105,*puVar1,param_1 + param_2 * 0x1c);
-    }
-    puVar1[2] = param_1;
-    puVar1[3] = 0;
-    puVar1[8] = 0;
-    puVar1[4] = 0;
-    puVar1[10] = 0;
-    puVar1[9] = 0;
-    puVar1[0xd] = 0;
-    puVar1[1] = temp_v0;
-    puVar1[0xc] = 0;
-    puVar1[6] = temp_v0 + param_1;
-    puVar1[7] = param_2;
-    sysMemClear(temp_v0 + param_1,param_2 * 0x1c);
-    g_commandBufferCursor = puVar1[1];
-    g_commandBufferEnd = g_commandBufferCursor + puVar1[2];
-  }
-  return;
 }
-
-} /* extern "C" */
+}

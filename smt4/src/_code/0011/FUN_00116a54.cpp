@@ -13,7 +13,7 @@ int SBORROW4(...);
 
 int FUN_00124d24(int);
 int titleOverlayDraw(int);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
 int vec2GetYInt(...);
 int FUN_002bedb0(...);
@@ -43,7 +43,7 @@ extern signed char DAT_00493828; /* 0x493828 */
 extern int FUN_001247d0(unsigned int);
 /* Supplied declaration required: FUN_00124c60. */
 /* Supplied declaration required: FUN_00124d24. */
-extern int FUN_00125e30(void);
+extern int ifTouchIsActive(void);
 /* Supplied declaration required: titleOverlayDraw. */
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_002b753c(unsigned int);
@@ -51,7 +51,7 @@ extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b7638. */
 extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bd82c. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -129,7 +129,7 @@ char FUN_00116a54(void)
   case 0x11:
   case 0x12:
     temp_v12 = 0.27f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v5 = (int)temp_v12;
     if (*(char *)(temp_v4 + 9) == '\a' || *(char *)(temp_v4 + 9) == '\t') {
       efctSetSpeed();
@@ -241,7 +241,7 @@ char FUN_00116a54(void)
     do {
       if (*(char *)(temp_v4 + temp_v5 + 0x37) != '\0') {
         temp_v12 = (float)temp_v14;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         effectRenderTransformedInstance(temp_v4 + temp_v5 * 0x8c + 0x498);
       }
@@ -297,7 +297,7 @@ LAB_00117048:
     temp_v6 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v6);
     if (*(char *)(temp_v4 + 8) == '\x01' || *(char *)(temp_v4 + 8) == '\x04') {
-      temp_v9 = FUN_00125e30();
+      temp_v9 = ifTouchIsActive();
       if (temp_v9 != 0) {
         temp_v9 = FUN_002bf4f8(0xe,0x7d8);
         temp_v10 = 0;
@@ -353,7 +353,7 @@ LAB_00117048:
         do {
           temp_v10 = FUN_002bf4f8(0xe,temp_v5 + temp_v9);
           temp_v12 = (float)((unsigned long long)temp_v14 >> 0x20);
-          FUN_002ba12c(g_titleScene);
+          renderCtxCalculateStereoParallax(g_titleScene);
           temp_v16 = 6;
           temp_v17 = temp_v9;
           FUN_002b75ec(*(unsigned int *)(temp_v4 + 4),(int)*(short *)(temp_v10 + 8) + (int)temp_v12);
@@ -364,7 +364,7 @@ LAB_00117048:
       if (temp_v5 != 0) {
         temp_v5 = FUN_002bf4f8(0xe,0x42);
         temp_v12 = 0.27f;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8) +
                                             (int)**(short **)(temp_v5 + 0xc) / 2,
@@ -381,7 +381,7 @@ LAB_00117048:
     temp_v6 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v6);
     temp_v12 = 0.27f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v18 = FUN_002b753c(*(unsigned int *)(temp_v4 + 4));
     temp_v5 = FUN_002bf4f8(0xe,0x8e);
     temp_v1 = *(short *)(temp_v5 + 8);

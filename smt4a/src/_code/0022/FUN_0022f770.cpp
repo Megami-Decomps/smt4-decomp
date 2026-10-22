@@ -27,7 +27,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0021b390. */
 extern unsigned int dataTableGetEntry24Byte0(unsigned int);
 extern unsigned int dataTableGetEntry24Member(unsigned int);
-extern int FUN_0031fd08(void);
+extern int selectionGetValidatedField(void);
 
 
 void FUN_0022f770(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -45,7 +45,7 @@ void FUN_0022f770(int param_1,int param_2,int param_3,int param_4,int param_5)
   
   temp_v0 = param_1 + param_2 * 4;
   temp_v6 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + 0x927c));
-  temp_v1 = FUN_0031fd08();
+  temp_v1 = selectionGetValidatedField();
   efctSetSpeed();
   if (param_5 != 0) {
     FUN_00164b5c(2,0x1a,0x12,param_3,param_4,0x65);

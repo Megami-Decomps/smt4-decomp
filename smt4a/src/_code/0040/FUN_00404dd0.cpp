@@ -7,7 +7,7 @@ extern "C" {
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(int, unsigned int, int, int, int, int);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_00404dd0(int param_1,int param_2,int param_3)
@@ -46,7 +46,7 @@ void FUN_00404dd0(int param_1,int param_2,int param_3)
     temp_v1 = (int)(*(short **)(temp_v0 + 0xc))[1] - (*(unsigned short *)(temp_v1 + 6) & 0xffff7fff);
   }
   temp_v3 = 0.26f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   FUN_001835b4(2,*(unsigned int *)(param_1 + 0x1c),*(int *)(param_1 + 0x20) * 1000,
                *(short *)(temp_v0 + 8) + param_2 + (int)temp_v3 + temp_v2 / 2 +
                (int)*(short *)(*(int *)(param_1 + 0x664) + 0xc),

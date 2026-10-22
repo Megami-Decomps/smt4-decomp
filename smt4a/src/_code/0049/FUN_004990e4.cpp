@@ -10,7 +10,7 @@ int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001834a4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_003fabfc(unsigned int, int, float [3], unsigned int, int);
 int FUN_00499b58(unsigned int *);
 int asdAnimGetTrackLastFrame(unsigned int, int);
@@ -37,7 +37,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int placeWinGetValue(void);
 extern int FUN_00284f50(void);
 extern int FUN_00284f70(void);
@@ -103,7 +103,7 @@ void FUN_004990e4(unsigned int *param_1)
     }
     if ((temp_v6 && 0 < (int)temp_v2) && ((int)temp_v2 < 0x14)) {
       temp_v7 = 0.33f;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v7 = (float)VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8[1] = 46.0f;
       temp_v8[2] = 0.0f;

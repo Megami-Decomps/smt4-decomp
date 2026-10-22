@@ -17,7 +17,7 @@ int FUN_00258618(...);
 int FUN_00282bfc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int soundChannelStopAll(...);
 int slotSetRequest(...);
 int scrScriptProcessDestroy(...);
@@ -33,7 +33,7 @@ int asdAnimGetTrackLastFrame(unsigned int, int);
 int soundSlotStopById(void);
 int scrScriptProcessStartEntry(...);
 int asdMdlManagerCreateLoaded(...);
-int FUN_0029c2cc(...);
+void FUN_0029c2cc(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int FUN_002a0428(...);
@@ -92,7 +92,7 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int FUN_00295618(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -110,7 +110,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bee58. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
@@ -491,10 +491,10 @@ LAB_0032a1a4:
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
     FUN_002bd06c(temp_v5);
     libc_strcpy(temp_v14,temp_v5);
-    FUN_00295660(8,temp_v14);
-    temp_v6 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0xc),1);
+    textEncodeFontSlot(8,temp_v14);
+    temp_v6 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0xc),1);
     libc_strcpy(temp_v14,temp_v6);
-    FUN_00295660(0x10,temp_v14);
+    textEncodeFontSlot(0x10,temp_v14);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x2a0),0x10);
     buttonHelpSetPreset(0x58);
     FUN_002954f4(*(unsigned short *)(temp_v2 + 0xc),1);

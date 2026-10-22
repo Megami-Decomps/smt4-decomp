@@ -8,7 +8,7 @@ int CONCAT44(...);
 int FUN_0024d5bc(...);
 int renderCtxCallB(...);
 int FUN_002ae9ec(...);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: renderCtxCallB. */
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
@@ -72,7 +72,7 @@ unsigned int FUN_0022413c(void)
   temp_v1 = jobGetWork();
   if (*(int *)(temp_v1 + 4) == 1 || *(int *)(temp_v1 + 4) == 2) {
     temp_v8 = 0.29f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v9 = (unsigned int)temp_v8;
     FUN_002bed3c();
     efctSetSpeed();

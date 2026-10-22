@@ -16,7 +16,7 @@ void FUN_002bed3c();
 void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 option);
 void FUN_002c1b64(RenderCtx *context, s32 mode);
-f32 FUN_002ba12c(RenderCtx *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void FUN_002b76d0(const EffectColor *first, const EffectColor *second,
                   const EffectColor *third, const EffectColor *fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -40,7 +40,7 @@ u32 campCecDrawDimmingOverlay()
             color.blue = 0.0f;
             color.alpha = 0.5f;
             FUN_002c1b64(g_titleScene, 0);
-            f32 offset = FUN_002ba12c(g_titleScene, 0.35f);
+            f32 offset = renderCtxCalculateStereoParallax(g_titleScene, 0.35f);
             FUN_002b76d0(&color, &color, &color, &color,
                           (f32)(s32)offset, 0.0f, 400.0f, 240.0f, 0.95703125f);
             efctSetSpeed(1.0f);

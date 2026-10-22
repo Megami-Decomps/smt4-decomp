@@ -1,72 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a9a8c` (_code @ 0x3a9a8c, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final table-selection branch, roll/weight registers, and loop comparison orientation differ. */
+#include "battle/btlMain.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+void *btlGetTable(BtlMainStateA *state, u32 table);
+s32 scrGetArg(u32 index);
+s32 randRange(u32 maximum);
+void scrSetResult(s32 value);
 
-int scrSetResult(int);
-
-extern unsigned int btlGetMainState(void);
-extern int randRange(unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(unsigned int);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int btlGetTable(unsigned int, unsigned int);
-
-
-unsigned int FUN_003a9a8c(void)
-
+// Choose a one-based result from one of the battle's percentage-weight tables.
+u32 FUN_003a9a8c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v6 = 0;
-  if (temp_v0 != 1) {
-    if (temp_v0 != 2) {
-      if (temp_v0 == 3) {
-        temp_v6 = btlGetMainState();
-        temp_v6 = btlGetTable(temp_v6,0xc);
-      }
+    s32 kind = scrGetArg(0);
+    void *table = NULL;
+    if (kind == 1) {
+        table = btlGetTable(btlGetMainState(), 10);
+    } else if (kind == 2) {
+        table = btlGetTable(btlGetMainState(), 11);
+    } else if (kind == 3) {
+        table = btlGetTable(btlGetMainState(), 12);
     }
-    else {
-      temp_v6 = btlGetMainState();
-      temp_v6 = btlGetTable(temp_v6,0xb);
+    const u16 *weights = (const u16 *)dataTableGetEntries(table);
+    s32 count = dataTableGetCount(table);
+    s32 roll = randRange(99);
+    s32 cumulative = 0;
+    s32 result = 0;
+    for (s32 index = 0; index < count; ++index) {
+        u32 weight = weights[index];
+        if (weight != 0) {
+            cumulative += weight;
+            if (roll < cumulative) {
+                result = index + 1;
+                break;
+            }
+        }
     }
-  }
-  else {
-    temp_v6 = btlGetMainState();
-    temp_v6 = btlGetTable(temp_v6,10);
-  }
-  temp_v1 = dataTableGetEntries(temp_v6);
-  temp_v2 = dataTableGetCount(temp_v6);
-  temp_v3 = randRange(99);
-  temp_v0 = 0;
-  temp_v7 = 0;
-  temp_v4 = 0;
-  if (temp_v4 < temp_v2) {
-    do {
-      temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v4 * 2);
-      if (temp_v5 != 0) {
-        temp_v0 = temp_v0 + temp_v5;
-      }
-      if (temp_v5 != 0 && temp_v3 < temp_v0) {
-        temp_v7 = temp_v4 + 1;
-        break;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v2);
-  }
-  scrSetResult(temp_v7);
-  return 1;
+    scrSetResult(result);
+    return 1;
 }
-
-} /* extern "C" */
+}

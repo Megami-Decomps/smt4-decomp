@@ -15,7 +15,7 @@ int FUN_001b63b0(...);
 int FUN_001bc460(...);
 int FUN_001bced4(...);
 int FUN_002371b0(...);
-int FUN_00291644(...);
+int gfxResolveTimedTextureFrame(...);
 int FUN_0032c808(...);
 int quadSourceCopyOut(...);
 int quadHolderCopyOut(...);
@@ -122,7 +122,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: FUN_001bced4. */
 /* Supplied declaration required: FUN_002371b0. */
-/* Supplied declaration required: FUN_00291644. */
+/* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: FUN_0032c808. */
 /* Supplied declaration required: quadSourceCopyOut. */
 /* Supplied declaration required: quadHolderCopyOut. */
@@ -311,7 +311,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
             DAT_0064732c = temp_v19;
             DAT_00647334 = temp_v1;
             if ((temp_v0 & 0xff) != 0) {
-              FUN_00291644(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
+              gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               FUN_0016c4b8(g_renderCtx,temp_v29);
               FUN_001b63b0();
               FUN_001a1ee0();
@@ -358,7 +358,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
             DAT_006472ec = temp_v19;
             DAT_006472f8 = temp_v4;
             if ((temp_v0 & 0xff) != 0) {
-              FUN_00291644(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
+              gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               FUN_0016c4b8(g_renderCtx,temp_v29);
               FUN_001b63b0();
               FUN_001a1ee0();

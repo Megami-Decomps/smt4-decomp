@@ -15,11 +15,11 @@ typedef struct Table04Record {
 } Table04Record;
 
 s32 idIsAbove400(s32 id);
-s32 FUN_003a679c(s32 id);
+s32 itemGetCategorySortOrder(s32 id);
 s32 dataTable04GetCategoryOrder(s32 id);
 Table04Record *dataTable04FindById(s32 id);
 
-/* Sort comparator for demon list entries: by FUN_003a679c, then dataTable04GetCategoryOrder, then descending table 0x04 key,
+/* Sort comparator for demon list entries: by itemGetCategorySortOrder, then dataTable04GetCategoryOrder, then descending table 0x04 key,
  * then id, then the party slot's entry id (ids above 400 sort last). */
 s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
 {
@@ -36,7 +36,7 @@ s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
         aSecond = 99;
         aKey = 0;
     } else {
-        aFirst = FUN_003a679c(a->id);
+        aFirst = itemGetCategorySortOrder(a->id);
         aSecond = dataTable04GetCategoryOrder(a->id);
         aKey = dataTable04FindById(a->id)->sortKey;
     }
@@ -45,7 +45,7 @@ s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
         bSecond = 99;
         bKey = 0;
     } else {
-        bFirst = FUN_003a679c(b->id);
+        bFirst = itemGetCategorySortOrder(b->id);
         bSecond = dataTable04GetCategoryOrder(b->id);
         bKey = dataTable04FindById(b->id)->sortKey;
     }

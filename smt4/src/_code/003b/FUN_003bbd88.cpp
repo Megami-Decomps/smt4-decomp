@@ -1,60 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bbd88` (_code @ 0x3bbd88, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Message-box shared-global addressing and switch-block layout differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern u32 DAT_0043ddb8;
+extern char s__SHIN_MEGAMITENSEI_4_0043ddd0[33];
+extern char DAT_0043de3c[];
 
-int cecSettingsSet(int, int, int, int);
-int FUN_003103e4(unsigned int, unsigned int, char [33], unsigned int, int, char [22], int, int);
+u32 FUN_00357818(u32 resourceId);
+u32 FUN_003103e4(u32 resource, u32 applicationId,
+                 const char *applicationName, u32 messageData,
+                 u32 messageSize, const char *messageBoxName,
+                 u32 parameter6, u32 parameter7);
+s32 cecSettingsSet(u32 category, u32 setting, u32 value, u32 flags);
+u32 cecWriteMessageBoxNameAndData(u32 resource, u32 applicationId,
+                                const char *messageBoxName,
+                                u32 messageData, u32 messageSize);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned int DAT_0043ddb8; /* 0x43ddb8 */
-extern char s__SHIN_MEGAMITENSEI_4_0043ddd0[33]; /* 0x43ddd0 */
-extern char s_Shin_Megami_Tensei_I_0043de3c[22]; /* 0x43de3c */
-
-extern int cecWriteMessageBoxNameAndData(unsigned int, unsigned int, char *, unsigned int, unsigned int);
-/* Supplied declaration required: cecSettingsSet. */
-/* Supplied declaration required: FUN_003103e4. */
-extern unsigned int FUN_00357818(unsigned int);
-
-
-unsigned int FUN_003bbd88(int param_1)
-
+u32 FUN_003bbd88(CecMessageBoxRequestPrefixIV *request)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00357818(0xe5c);
-  FUN_003103e4(temp_v0,DAT_0043ddb8,s__SHIN_MEGAMITENSEI_4_0043ddd0,*(unsigned int *)(param_1 + 4),
-               0x1200,s_Shin_Megami_Tensei_I_0043de3c,0xc,99);
-  switch(temp_v0) {
-  default:
-    cecSettingsSet(2,3,0xff,0);
-    temp_v0 = FUN_00357818(0xe5c);
-    temp_v1 = cecWriteMessageBoxNameAndData(temp_v0,DAT_0043ddb8,s_Shin_Megami_Tensei_I_0043de3c,
-                         *(unsigned int *)(param_1 + 4),0x1200);
-    if (temp_v1 != 5) {
-      return 0;
-    }
-    return 0x11;
-  case 2:
-  case 3:
-  case 5:
-  case 7:
-    return 0x11;
-  case 4:
-    return 3;
-  case 6:
-    return 0x81;
-  }
-}
+    const u32 resource = FUN_00357818(0xe5c);
+    const u32 result = FUN_003103e4(
+        resource, DAT_0043ddb8, s__SHIN_MEGAMITENSEI_4_0043ddd0,
+        request->messageData, 0x1200, DAT_0043de3c, 12, 99);
 
-} /* extern "C" */
+    switch (result) {
+    case 2:
+    case 3:
+    case 5:
+    case 7:
+        return 0x11;
+    case 4:
+        return 3;
+    case 6:
+        return 0x81;
+    default:
+        break;
+    }
+
+    cecSettingsSet(2, 3, 0xff, 0);
+    const u32 writeResource = FUN_00357818(0xe5c);
+    const u32 writeResult = cecWriteMessageBoxNameAndData(
+        writeResource, DAT_0043ddb8, DAT_0043de3c,
+        request->messageData, 0x1200);
+    return writeResult == 5 ? 0x11 : 0;
+}
+}

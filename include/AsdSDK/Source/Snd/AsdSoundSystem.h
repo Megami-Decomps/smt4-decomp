@@ -8,6 +8,7 @@
 #define ASDSDK_SOURCE_SND_ASDSOUNDSYSTEM_H
 
 #include "common.h"
+#include <stddef.h>
 #include "shard/S3SoundArchiveLoader.h"
 
 #define ASD_SND_SLOT_A_COUNT 4
@@ -74,7 +75,13 @@ typedef struct AsdSndWaveVoice {
     /* 0x3c */ f32 mix[2];               /* SetMixParam input: front-left/right gains */
     /* 0x44 */ u8 unk44[0x28];
     /* 0x6c */ void *data;               /* heap copy of the sample data */
-    /* 0x70 */ u8 unk70[8];
+    union {
+        /* 0x70 */ u8 unk70[8];
+        struct {
+            struct AsdSndWaveVoice *next;
+            struct AsdSndWaveVoice *prev;
+        } link;
+    };
     /* 0x78 */ s32 fadeFrames;
     /* 0x7c */ s32 unk7c;
     /* 0x80 */ u32 headerSize;           /* bytes before the samples */
@@ -87,6 +94,10 @@ typedef struct AsdSndWaveVoice {
         /* 0x94 */ f32 targetVolume;
     };
 } AsdSndWaveVoice;
+typedef char AsdSndWaveVoiceLinkOffsetCheck[
+    offsetof(AsdSndWaveVoice, link.next) == 0x70 &&
+    offsetof(AsdSndWaveVoice, link.prev) == 0x74 &&
+    sizeof(AsdSndWaveVoice) == 0x98 ? 1 : -1];
 
 /* The ducking state: while it is on, slot A's sounds are scaled by `level`. */
 typedef struct AsdSndDuck {

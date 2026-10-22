@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int FUN_00357ea0(...); /* 0x357ea0 */
+extern unsigned int FUN_00357ea0(unsigned int process); /* 0x357ea0 */
 extern unsigned char LAB_00363b98; /* 0x363b98 */
 extern unsigned char LAB_00363bb4; /* 0x363bb4 */
 extern unsigned char LAB_00363bcc; /* 0x363bcc */

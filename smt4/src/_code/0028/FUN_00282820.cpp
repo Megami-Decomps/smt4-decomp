@@ -1,63 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00282820` (_code @ 0x282820, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reflection factory arguments and special-name comparisons use different saved registers. */
+/* Creates a named reflection action and marks the two special death animations. */
+#include "battle/btlReflect.h"
 
 extern "C" {
+extern void *DAT_00435d18;
+u32 FUN_003d98a0(void *table, const char *name);
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+s32 libc_strcmp(const char *first, const char *second);
 
-int FUN_0022699c(int, int, int, unsigned int);
-int libc_strcmp(unsigned char *, int);
-
-extern unsigned char LAB_00282914; /* 0x282914 */
-extern unsigned char LAB_0028291c; /* 0x28291c */
-extern int g_btlActionReflect; /* 0x434290 */
-extern unsigned int DAT_00435d18; /* 0x435d18 */
-
-/* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: libc_strcmp. */
-extern int FUN_003d98a0(unsigned int, int);
-
-
-int FUN_00282820(short param_1,unsigned int param_2,unsigned short param_3,int param_4,unsigned short param_5,
-                unsigned short param_6,unsigned int param_7,int param_8)
-
+__softfp ReflectAction *FUN_00282820(s32 actor, u32 options, u16 first, s32 target,
+    u16 third, u16 fourth, f32 value, const char *name)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = FUN_003d98a0(DAT_00435d18,param_8);
-  if (temp_v0 != 0) {
-    temp_v0 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-    *(unsigned char *)(temp_v0 + 4) = 3;
-  }
-  else {
-    if (param_4 < 0x6d) {
-      temp_v0 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-      *(unsigned char *)(temp_v0 + 4) = 0;
-      *(unsigned short *)(temp_v0 + 0x24) = param_3;
-      *(short *)(temp_v0 + 0x26) = (short)param_4;
-      *(unsigned short *)(temp_v0 + 0x48) = param_5;
-      *(unsigned short *)(temp_v0 + 0x4a) = param_6;
-      *(unsigned int *)(temp_v0 + 0x28) = param_7;
-      if (param_8 != 0) {
-        puVar2 = &LAB_00282914;
-        libc_strcmp(&LAB_00282914,param_8);
-        if (puVar2 != (unsigned char *)0x0) {
-          puVar2 = &LAB_0028291c;
-          libc_strcmp(&LAB_0028291c,param_8);
-          if (puVar2 != (unsigned char *)0x0) {
-            return temp_v0;
-          }
-        }
-        *(unsigned char *)(temp_v0 + 0x20) = 1;
-      }
-      return temp_v0;
+    if (FUN_003d98a0(DAT_00435d18, name)) {
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+        action->kind = 3;
+        return action;
     }
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (target >= 0x6D) {
+        return NULL;
+    }
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+    action->kind = 0;
+    action->first = first;
+    action->second = (u16)target;
+    action->extraIds.third = third;
+    action->extraIds.fourth = fourth;
+    action->scalar = value;
+    if (name != NULL &&
+        (libc_strcmp("Dead_12", name) == 0 || libc_strcmp("Dead_13", name) == 0)) {
+        action->specialDeath.enabled = 1;
+    }
+    return action;
 }
-
-} /* extern "C" */
+}

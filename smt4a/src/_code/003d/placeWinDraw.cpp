@@ -28,7 +28,7 @@ void FUN_00157558(RenderCtxA *);
 s32 FUN_001692ac(s32 mode, s32 flags);
 s32 vec2GetXInt(const PlaceWindowPosition *);
 s32 vec2GetYInt(const PlaceWindowPosition *);
-f32 FUN_001879d0(RenderCtxA *, f32 offset);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 offset);
 void FUN_00164b5c(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 PlaceWindowSpritePosition *FUN_001834a4(u32 group, u32 sprite);
 void FUN_00162790(s32 layer, u32 color, const void *text, f32 x, f32 y,
@@ -45,7 +45,7 @@ u8 placeWinDraw(void)
         RenderCtxA *context = g_renderCtx;
         renderStackPush(&context->stackA, FUN_001692ac(1, 0));
         s32 x = vec2GetXInt(&window->position);
-        s32 translatedX = x + static_cast<s32>(FUN_001879d0(g_renderCtx, 0.25f));
+        s32 translatedX = x + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
         s32 y = vec2GetYInt(&window->position);
         FUN_00164b5c(2, 8, 0xe, translatedX, y, 0x65);
         PlaceWindowSpritePosition *sprite = FUN_001834a4(8, 0x10b);

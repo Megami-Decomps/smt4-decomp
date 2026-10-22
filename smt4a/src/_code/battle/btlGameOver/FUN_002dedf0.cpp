@@ -1,69 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dedf0` (_code @ 0x2dedf0, 0xc0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: battle-mask word addressing uses literal offsets instead of retail paired loads, and dispatch blocks are merged. */
+#include "battle/btlGameOver.h"
 
+// Apocalypse's owning battle work extends past the shared game-over work prefix.
+struct GameOverBattleWorkA {
+    u8 unk0000[0x4c];
+    u32 job; // 0x004c
+    u8 unk0050[0x58];
+    s32 mode; // 0x00a8
+    u8 unk00ac[0x44f4];
+    u32 states[2]; // 0x45a0
+    u32 transitions[2]; // 0x45a8
+};
 extern "C" {
+extern BtlGameOverGlobalsA g_btlGameOver;
+GameOverBattleWorkA *jobGetWork();
+s32 asdProcessGetFrames(u32 job);
+s32 FUN_003e6f50(BtlGameOverA *state);
 
-int FUN_003e6f50(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int g_btlGameOver; /* 0x5738c8 */
-extern unsigned int DAT_005738d0; /* 0x5738d0 */
-extern unsigned int DAT_005738d4; /* 0x5738d4 */
-extern unsigned int DAT_005738d8; /* 0x5738d8 */
-extern unsigned int DAT_005738dc; /* 0x5738dc */
-extern unsigned int DAT_005738e0; /* 0x5738e0 */
-extern unsigned int DAT_005738e4; /* 0x5738e4 */
-
-extern int jobGetWork(void);
-extern int asdProcessGetFrames(unsigned int);
-/* Supplied declaration required: FUN_003e6f50. */
-
-
-int FUN_002dedf0(void)
-
+// Advance the saturated game-over timer and dispatch once battle flags permit it.
+s32 FUN_002dedf0()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = g_btlGameOver;
-  if (g_btlGameOver == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v2 = *(int *)(g_btlGameOver + 8) + 1;
-    *(unsigned int *)(g_btlGameOver + 8) = temp_v2;
-    if (temp_v2 >= 0x10000) {
-      *(unsigned int *)(temp_v1 + 8) = 0xffff;
+    GameOverBattleWorkA *work = jobGetWork();
+    BtlGameOverA *state = g_btlGameOver.state;
+    if (state == NULL)
+        return 0;
+    if (++state->timing.frameCounter >= 0x10000)
+        state->timing.frameCounter = 0xffff;
+    if (work->mode == 2) {
+        if ((work->transitions[1] & g_btlGameOver.forcedStates[1]) |
+            (work->transitions[0] & g_btlGameOver.forcedStates[0]))
+            return FUN_003e6f50(state);
+        if (((work->states[1] & g_btlGameOver.blockedStates[1]) |
+             (work->states[0] & g_btlGameOver.blockedStates[0])) == 0 &&
+            ((work->states[1] & g_btlGameOver.blockedTransitions[1]) |
+             (work->states[0] & g_btlGameOver.blockedTransitions[0])) == 0)
+            return FUN_003e6f50(state);
     }
-    if (*(int *)(temp_v0 + 0xa8) == 2) {
-      if ((*(unsigned int *)(temp_v0 + 0x45ac) & DAT_005738e4) != 0 ||
-          (DAT_005738e0 & *(unsigned int *)(temp_v0 + 0x45a8)) != 0) {
-        FUN_003e6f50(temp_v1);
-        return temp_v1;
-      }
-      if (((DAT_005738d4 & *(unsigned int *)(temp_v0 + 0x45a4)) == 0 &&
-           (DAT_005738d0 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0) &&
-         ((DAT_005738dc & *(unsigned int *)(temp_v0 + 0x45a4)) == 0 &&
-          (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_005738d8) == 0)) {
-        FUN_003e6f50(temp_v1);
-        return temp_v1;
-      }
-    }
-    temp_v0 = asdProcessGetFrames(*(unsigned int *)(temp_v0 + 0x4c));
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = -1;
-    }
-  }
-  return temp_v1;
+    return asdProcessGetFrames(work->job) ? -1 : 0;
 }
-
-} /* extern "C" */
+}

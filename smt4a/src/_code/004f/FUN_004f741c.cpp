@@ -1,58 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f741c` (_code @ 0x4f741c, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack-buffer address caching and effect-name pointer scheduling differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
+
+struct AuxiliaryResourceView {
+    u8 unk0000[0x2E20];
+    BattleVersionResourceSlot slots[4];
+};
 
 extern "C" {
+extern const char DAT_00528380[][32];
+extern const char DAT_005284c0[];
+void* sysMemClear(void* destination, u32 size);
+void asdMemFree(void* memory);
+s32 textFormatBuffer(char* destination, const char* format, ...);
+char* libc_strcpy(char* destination, const char* source);
+char* FUN_00100d60(char* text, s32 character);
+u32 findRecordByKey(const char* name);
+u32 asdLoadFileAsyncSimple(const char* path, u8** data, u32 flags);
 
-int textFormatBuffer(...);
-int asdMemFree(...);
-int asdLoadFileAsyncSimple(...);
-int libc_strcpy(...);
-int sysMemClear(...);
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00100d60(unsigned char *, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-extern int findRecordByKey(int);
-
-
-unsigned int FUN_004f741c(int param_1)
-
+// Reset the auxiliary effect slots and enqueue uncached files from the fixed effect-name table.
+u32 FUN_004f741c(BtlAuxA* auxiliary)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [128];
-  unsigned char temp_v4 [132];
-  
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x2e20) = 0xff;
-    sysMemClear(temp_v1 + 0x2e28,0x80);
-    if (*(int *)(temp_v1 + 0x2e24) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2e24) = 0;
+    AuxiliaryResourceView* resources = reinterpret_cast<AuxiliaryResourceView*>(auxiliary);
+    char path[128];
+    char formatted[128];
+    for (s32 index = 0; index < 4; ++index) {
+        BattleVersionResourceSlot* slot = &resources->slots[index];
+        slot->state = 0xFF;
+        sysMemClear(slot->name, sizeof(slot->name));
+        if (slot->data) {
+            asdMemFree(slot->data);
+            slot->data = NULL;
+        }
+        slot->readiness.flags = 0;
+        sysMemClear(path, sizeof(path));
+        sysMemClear(formatted, sizeof(formatted));
+        textFormatBuffer(formatted, DAT_005284c0, DAT_00528380[index]);
+        libc_strcpy(path, formatted);
+        libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
+        if (findRecordByKey(slot->name) == 0xFF) {
+            asdLoadFileAsyncSimple(path, &slot->data, 1);
+            slot->readiness.flags |= 1;
+        }
     }
-    *(unsigned char *)(temp_v1 + 0x2ea8) = 0;
-    sysMemClear(temp_v3,0x80);
-    sysMemClear(temp_v4,0x80);
-    textFormatBuffer(temp_v4,"battle/effect/%s.eft","Move_out_c" + temp_v2 * 0x20);
-    libc_strcpy(temp_v3,temp_v4);
-    temp_v0 = FUN_00100d60(temp_v3,0x2f);
-    libc_strcpy(temp_v1 + 0x2e28,temp_v0 + 1);
-    temp_v0 = findRecordByKey(temp_v1 + 0x2e28);
-    if (temp_v0 == 0xff) {
-      asdLoadFileAsyncSimple(temp_v3,temp_v1 + 0x2e24,1);
-      *(unsigned char *)(temp_v1 + 0x2ea8) = *(unsigned char *)(temp_v1 + 0x2ea8) | 1;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

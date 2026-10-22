@@ -1,56 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00247af8` (_code @ 0x247af8, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains request arguments in GPRs; the build spills the payload size through a VFP register. */
+#include "gamedata/SaveLoadThreadRequest.h"
+#include "shard/Sys43e310.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00404290[];
+extern const char DAT_004042ac[];
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
+void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 
-int asdLoadFileAsyncSimple(...);
-int asdMemoryAlloc(int, int, int, int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned char DAT_00404290; /* 0x404290 */
-extern unsigned char DAT_0043e312; /* 0x43e312 */
-extern unsigned char DAT_0043e313; /* 0x43e313 */
-extern unsigned char *DAT_0043e314; /* 0x43e314 */
-extern unsigned int DAT_0043e31c; /* 0x43e31c */
-
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-void FUN_00247af8(unsigned char param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+// Initialize a save/load request and start loading its interface resources.
+void FUN_00247af8(u8 kind, u32 file, u32 slot, void *payload, u32 size)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  puVar1 = (unsigned char *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x5c,1);
-  DAT_0043e314 = puVar1;
-  *puVar1 = param_1;
-  *(unsigned int *)(puVar1 + 0x20) = 0xffffffff;
-  *(unsigned int *)(puVar1 + 0x18) = param_5;
-  *(unsigned int *)(puVar1 + 0x14) = param_4;
-  *(unsigned int *)(puVar1 + 0x24) = 0xffffffff;
-  *(unsigned int *)(puVar1 + 4) = param_2;
-  *(unsigned int *)(puVar1 + 8) = param_3;
-  *(unsigned int *)(puVar1 + 0xc) = 0;
-  *(unsigned int *)(puVar1 + 0x58) = 0;
-  *(unsigned int *)(puVar1 + 0x50) = 0;
-  *(unsigned int *)(puVar1 + 0x54) = 0;
-  asdLoadFileAsyncSimple(&DAT_00404290,puVar1 + 0x50,0);
-  if (*(int *)(puVar1 + 0x54) == 0) {
-    asdLoadFileAsyncSimple("saveLoadER/saveLoadER.mbm",puVar1 + 0x54,0);
-  }
-  DAT_0043e31c = 0xffffffff;
-  DAT_0043e312 = 0;
-  DAT_0043e313 = 0;
-  return;
+    // The public thread prefix ends before its request pointer and result.
+    struct ThreadView {
+        u8 unk00;
+        s8 busy;
+        s8 firstState, secondState;
+        SaveLoadThreadRequest *request;
+        u32 unk08;
+        s32 result;
+    };
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoad_Thread.cpp", 254);
+    SaveLoadThreadRequest *request = (SaveLoadThreadRequest *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(SaveLoadThreadRequest), 1);
+    ThreadView *thread = (ThreadView *)&g_saveLoadThread;
+    thread->request = request;
+    request->kind = kind;
+    request->firstResult = -1;
+    request->payloadSize = size;
+    request->payload = payload;
+    request->secondResult = -1;
+    request->file = file;
+    request->slot = slot;
+    request->unk0c = 0;
+    request->unk58 = 0;
+    request->messageFile = NULL;
+    request->modelFile = NULL;
+    asdLoadFileAsyncSimple(DAT_00404290, &request->messageFile, 0);
+    if (request->modelFile == NULL) {
+        asdLoadFileAsyncSimple(DAT_004042ac, &request->modelFile, 0);
+    }
+    thread->result = -1;
+    thread->firstState = 0;
+    thread->secondState = 0;
 }
-
-} /* extern "C" */
+}

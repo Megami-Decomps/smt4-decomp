@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(int);
 int FUN_00183e58(void);
-int FUN_003adc58(void);
+int uiPlayGatedActionFeedback(void);
 int FUN_003b61ec(void);
 int commonBgReset(void);
 
@@ -25,7 +25,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00183e58. */
 extern int gameFlagIsSet(unsigned int);
 extern int FUN_00384cf4(void);
-/* Supplied declaration required: FUN_003adc58. */
+/* Supplied declaration required: uiPlayGatedActionFeedback. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: commonBgReset. */
 
@@ -54,7 +54,7 @@ void FUN_0048a378(int param_1)
   }
   if (DAT_005f1a5c == '\0') {
     if (DAT_005f161d == '\0') {
-      FUN_003adc58();
+      uiPlayGatedActionFeedback();
       return;
     }
     if (*(char *)(param_1 + 0xc) != '\0') {

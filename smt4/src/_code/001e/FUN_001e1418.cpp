@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, unsigned int, int);
 int efctSetSpeed(void);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -54,7 +54,7 @@ unsigned int FUN_001e1418(void)
     *(unsigned char *)(temp_v0 + 0x1264) = 0;
   }
   temp_v4 = 0.33f;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   FUN_002bf288(2,2,0x1ffb8,(int)temp_v4 - 0x38,0xfffffff8,1);
   FUN_002bed3c();
   efctSetSpeed();

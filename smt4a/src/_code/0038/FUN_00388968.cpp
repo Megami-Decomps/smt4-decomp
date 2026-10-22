@@ -1,48 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00388968` (_code @ 0x388968, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: panel tail-flag addressing and sprite initialization registers differ. */
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobalsA g_messageMain;
+s32 scrGetCommandFrame(void);
+u32 scrGetArg(u32);
+void FUN_0014e188(void *, s32, s32, void *, s32, f32);
+void uiSpriteSelectAnim(void *, s32);
 
-int FUN_0014e188(int, int, int, int, int);
-int uiSpriteSelectAnim(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-extern unsigned int scrGetArg(unsigned int);
-extern int scrGetCommandFrame(void);
-
-
-unsigned char FUN_00388968(void)
-
+// Start the designated message-panel animation and wait for its pending flag to clear.
+u8 FUN_00388968(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  temp_v1 = scrGetCommandFrame();
-  if (temp_v1 == 0) {
-    temp_v2 = scrGetArg(0);
-    temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-    temp_v3 = (*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x144c;
-    FUN_0014e188(temp_v3,4,0xabe1,(*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x194,0xb);
-    uiSpriteSelectAnim(temp_v3,0xb);
-    *(unsigned int *)(temp_v1 + 0x19f4) = temp_v2;
-    *(unsigned char *)(temp_v1 + 0x19f1) = 1;
-    *(unsigned char *)(temp_v1 + 0x19f2) = 1;
-    *(unsigned char *)(temp_v1 + 0x19f0) = 1;
-  }
-  return *(char *)(temp_v0 + 0x19f1) == '\0';
+    // A word in the odd-sized trailing byte padding needs an aligned local view.
+    struct MessageAnimationView {
+        u8 unk0000[0x19f0];
+        u8 active;
+        u8 pending;
+        u8 ready;
+        u8 unk19f3;
+        u32 value;
+    };
+    MessageAnimationView *initial = reinterpret_cast<MessageAnimationView *>(g_messageMain.panel);
+    if (scrGetCommandFrame() == 0) {
+        u32 value = scrGetArg(0);
+        MessagePanelA *panel = g_messageMain.panel;
+        void *sprite = panel->spritesCA4[14];
+        FUN_0014e188(sprite, 4, 0xabe1, panel->block194, 11, 1.0f);
+        uiSpriteSelectAnim(sprite, 11);
+        MessageAnimationView *animation = reinterpret_cast<MessageAnimationView *>(panel);
+        animation->value = value;
+        animation->pending = 1;
+        animation->ready = 1;
+        animation->active = 1;
+    }
+    return initial->pending == 0;
 }
-
-} /* extern "C" */
+}

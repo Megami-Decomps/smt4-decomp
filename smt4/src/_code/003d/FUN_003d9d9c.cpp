@@ -1,62 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d9d9c` (_code @ 0x3d9d9c, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail supplies an extra zero integer register to the rotation setter and retains different selection-cache addressing. */
+/* Resets active model animation players and publishes their selected animation indices. */
+#include "shard/W6_W6Match2_AnimationVisualState.h"
 
 extern "C" {
+void modelSetAnimationChannels(void *model, s32 channels, f32 blend);
+void animPlayerSetLoopPolicy(void *player, s32 policy);
+void FUN_0028c618(void *player, f32 x, f32 y, f32 z);
+void FUN_002a0428(void *model, s32 enabled);
+void FUN_002d582c(void *model, f32 frame);
 
-int modelSetAnimationChannels(unsigned int, int);
-int animPlayerSetLoopPolicy(unsigned int, int);
-int FUN_0028c618(unsigned int, int);
-int FUN_002a0428(unsigned int, int);
-void FUN_002d582c(unsigned int, float);
-
-/* Supplied declaration required: modelSetAnimationChannels. */
-/* Supplied declaration required: animPlayerSetLoopPolicy. */
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002d582c. */
-
-
-void FUN_003d9d9c(int param_1)
-
+void FUN_003d9d9c(void *object)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 0x28;
-    puVar4 = (unsigned int *)(temp_v0 + 400);
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x1b4);
-    temp_v4 = (temp_v1 & 2) != 0;
-    if (temp_v4) {
-      temp_v1 = *puVar4;
+    struct PlayerView {
+        u8 unk00[0xC];
+        s32 index;
+        u8 unk10[0x1C];
+        AnimationVisualPart *part;
+    };
+    struct ModelView {
+        u32 flags;
+        u32 unk04;
+        PlayerView *player;
+    };
+    struct SlotView {
+        ModelView *model;
+        u32 animation;
+        u8 unk08[0x14];
+        s32 listIndex;
+        u32 unk20;
+        u32 flags;
+    };
+    struct Selection {
+        u32 animation;
+        s32 index;
+    };
+    struct AnimationOwnerView {
+        u8 unk000[0x190];
+        SlotView slots[50];
+        u8 unk960[0x6D0];
+        Selection selections[1];
+    };
+    AnimationOwnerView *owner = (AnimationOwnerView *)object;
+    for (s32 i = 0; i < 50; ++i) {
+        SlotView *slot = &owner->slots[i];
+        if ((slot->flags & 2) && slot->model != NULL) {
+            if (slot->model->player->index < 0) {
+                FUN_002a0428(slot->model, 1);
+            }
+            FUN_0028c618(slot->model->player, 0.0f, 0.0f, 0.0f);
+            modelSetAnimationChannels(slot->model, 0, 0.0f);
+            FUN_002d582c(slot->model, 0.0f);
+            animPlayerSetLoopPolicy(slot->model->player, 1);
+            ModelView *model = slot->model;
+            model->flags |= 2;
+            model->player->part->enabled = 0;
+            if (slot->listIndex >= 0) {
+                Selection *selection = &owner->selections[slot->listIndex];
+                selection->animation = slot->animation;
+                selection->index = slot->listIndex;
+            }
+        }
     }
-    if (temp_v4 && temp_v1 != 0) {
-      if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
-        FUN_002a0428(temp_v1,1);
-      }
-      FUN_0028c618(*(unsigned int *)(*puVar4 + 8),0);
-      modelSetAnimationChannels(*puVar4,0);
-      FUN_002d582c(*puVar4, 0.0f);
-      animPlayerSetLoopPolicy(*(unsigned int *)(*puVar4 + 8),1);
-      puVar4 = (unsigned int *)*puVar4;
-      *puVar4 = *puVar4 | 2;
-      *(unsigned char *)(*(int *)(puVar4[2] + 0x2c) + 0x1f6) = 0;
-      if (-1 < *(int *)(temp_v0 + 0x1ac)) {
-        temp_v2 = param_1 + *(int *)(temp_v0 + 0x1ac) * 8;
-        *(unsigned int *)(temp_v2 + 0x1030) = *(unsigned int *)(temp_v0 + 0x194);
-        *(unsigned int *)(temp_v2 + 0x1034) = *(unsigned int *)(temp_v0 + 0x1ac);
-      }
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x32);
-  return;
 }
-
-} /* extern "C" */
+}

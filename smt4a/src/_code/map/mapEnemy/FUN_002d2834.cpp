@@ -30,7 +30,7 @@ int randRange(...);
 int FUN_00178b04(...);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_0020eb44(...);
+int mapPlayActorKindSound(...);
 int FUN_002826dc(...);
 int distSpatial(void);
 int mathPositionHeadingDegrees(void);
@@ -122,7 +122,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: vec4Forward. */
-/* Supplied declaration required: FUN_0020eb44. */
+/* Supplied declaration required: mapPlayActorKindSound. */
 extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: FUN_00272e0c. */
 /* Supplied declaration required: FUN_002826dc. */
@@ -462,7 +462,7 @@ LAB_002d2fbc:
           if (*(int *)(temp_v10 + 0x1a4) != 0x1e) break;
           temp_v2 = randRange(100);
           if (temp_v2 < 0xf) {
-            FUN_0020eb44(pcVar15,0);
+            mapPlayActorKindSound(pcVar15,0);
           }
           *(unsigned int *)(temp_v10 + 0x1a4) = 0;
         }
@@ -749,7 +749,7 @@ LAB_002d33dc:
           *(unsigned int *)(temp_v10 + 0x58) = *(unsigned int *)(temp_v10 + 0x40);
           *(unsigned int *)(temp_v10 + 0x5c) = *(unsigned int *)(temp_v10 + 0x44);
           if (temp_v3 == 1) {
-            FUN_0020eb44(pcVar15,0);
+            mapPlayActorKindSound(pcVar15,0);
           }
           if (*(int *)(temp_v10 + 0xbc) >= 0x47) {
             if (*(int *)(temp_v10 + 0xac) != 0) {
@@ -951,7 +951,7 @@ LAB_002d3c7c:
               if (*(int *)(temp_v10 + 0x1a4) == 0x1e) {
                 temp_v2 = randRange(100);
                 if (temp_v2 < 0xf) {
-                  FUN_0020eb44(pcVar15,0);
+                  mapPlayActorKindSound(pcVar15,0);
                 }
                 *(unsigned int *)(temp_v10 + 0x1a4) = 0;
               }
@@ -1008,7 +1008,7 @@ LAB_002d3c7c:
             temp_v8 = -temp_v8;
           }
           if (*(int *)(temp_v10 + 0xbc) == 1) {
-            FUN_0020eb44(pcVar15,1);
+            mapPlayActorKindSound(pcVar15,1);
           }
           if ((*(int *)(temp_v10 + 0xbc) >= 9) && ((int)temp_v8 < 0x41c80000)) {
             *(unsigned int *)(temp_v10 + 100) = 4;
@@ -2484,7 +2484,7 @@ LAB_002d68ec:
           *(unsigned int *)(temp_v10 + 0x78) = *(unsigned int *)(temp_v10 + 0x58);
           *(unsigned int *)(temp_v10 + 0x7c) = *(unsigned int *)(temp_v10 + 0x5c);
           if (DAT_005f17c9 == '\0') {
-            FUN_0020eb44(pcVar15,2);
+            mapPlayActorKindSound(pcVar15,2);
           }
         }
         temp_v30 = *(float *)(temp_v10 + 0x74);
@@ -2621,7 +2621,7 @@ LAB_002d68ec:
           *(unsigned char *)(temp_v10 + 0x171) = 1;
         }
         if (*(int *)(temp_v10 + 0xbc) == 1) {
-          FUN_0020eb44(pcVar15,0);
+          mapPlayActorKindSound(pcVar15,0);
         }
         temp_v3 = *(int *)(temp_v10 + 0xbc) + 1;
         *(int *)(temp_v10 + 0xbc) = temp_v3;
@@ -2784,7 +2784,7 @@ LAB_002d68ec:
           *(unsigned char *)(temp_v10 + 0x1b8) = 1;
           *(unsigned int *)(temp_v10 + 0x6c) = 3;
           *(unsigned int *)(temp_v10 + 100) = 0;
-          FUN_0020eb44(pcVar15);
+          mapPlayActorKindSound(pcVar15);
         }
         temp_v30 = *(float *)(temp_v10 + 0x54);
         temp_v31 = *(float *)(temp_v10 + 0x58);
@@ -2883,7 +2883,7 @@ LAB_002d68ec:
           FUN_002d1f40(0xf,0x1e,0);
         }
         if (*(int *)(temp_v10 + 0xbc) == 4) {
-          FUN_0020eb44(pcVar15,1);
+          mapPlayActorKindSound(pcVar15,1);
         }
         if ((int)*(float *)(temp_v10 + 0x158) < *(int *)(temp_v10 + 0xbc)) {
           temp_v42 = *(float *)(temp_v10 + 0x54);
@@ -2959,7 +2959,7 @@ LAB_002d68ec:
           *(unsigned char *)(temp_v10 + 0x1b8) = 1;
           *(unsigned int *)(temp_v10 + 0x6c) = 3;
           *(unsigned int *)(temp_v10 + 100) = 0;
-          FUN_0020eb44(pcVar15);
+          mapPlayActorKindSound(pcVar15);
         }
         temp_v30 = *(float *)(temp_v10 + 0x54);
         temp_v31 = *(float *)(temp_v10 + 0x58);
@@ -2967,7 +2967,7 @@ LAB_002d68ec:
         *(unsigned char *)(temp_v10 + 0x174) = 1;
         *(int *)(temp_v10 + 0xbc) = *(int *)(temp_v10 + 0xbc) + 1;
         if (*(int *)(temp_v10 + 0xbc) == 4) {
-          FUN_0020eb44(pcVar15,1);
+          mapPlayActorKindSound(pcVar15,1);
         }
         if ((*(int *)(temp_v10 + 0xbc) >= 11) && (temp_v3 = FUN_0033b100(pcVar15), temp_v3 != 0)) {
           temp_v19 = 0x10;

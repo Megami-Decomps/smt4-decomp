@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, int);
 int effectRenderTransformedInstance(int);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bf288(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
@@ -26,7 +26,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int btlGetMainState(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -50,7 +50,7 @@ void FUN_002c6a64(int param_1)
   
   temp_v7 = 0.29f;
   temp_v6 = temp_v7;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v8 = CONCAT44(temp_v6,(int)temp_v7);
   temp_v3 = btlGetMainState();
   if ((*(unsigned int *)(temp_v3 + 0x44a0) & 0x200) == 0) {
@@ -58,7 +58,7 @@ void FUN_002c6a64(int param_1)
     effectRenderTransformedInstance(param_1 + 0x1c4);
   }
   temp_v6 = (float)((unsigned long long)temp_v8 >> 0x20);
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v3 = (int)temp_v6;
   if (*(char *)(param_1 + 0x25c) != '\0') {
     temp_v7 = 0.0f;

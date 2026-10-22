@@ -1,50 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00263028` (_code @ 0x263028, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: perpendicular normalization and effect calls agree, but VFP temporaries use different registers. */
+#include "common.h"
+#include <math.h>
 
 extern "C" {
+void FUN_002b011c();
+void effectSpawnPositionDefault(u32 effect, f32 x, f32 y, f32 z);
+void forwardRecoveredCallback();
 
-int effectSpawnPositionDefault(unsigned int);
-int forwardRecoveredCallback(void);
-int FUN_002b011c(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+// Emit paired effects at each endpoint and at a one-unit perpendicular offset.
+void FUN_00263028(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY, f32 endX, f32 endY, f32 height)
 {
-    return (float)sqrt((double)value);
+    f32 dx = endX - startX;
+    f32 dy = endY - startY;
+    f32 normalX = dy;
+    f32 normalY = -dx;
+    f32 length = sqrtf(normalX * normalX + normalY * normalY);
+    if (length != 0.0f) {
+        normalX /= length;
+        normalY /= length;
+        FUN_002b011c();
+        effectSpawnPositionDefault(firstEffect, startX, startY, height);
+        effectSpawnPositionDefault(secondEffect, endX, endY, height);
+        effectSpawnPositionDefault(firstEffect, normalX + startX, normalY + startY, height);
+        effectSpawnPositionDefault(secondEffect, normalX + endX, normalY + endY, height);
+        forwardRecoveredCallback();
+    }
 }
-#endif
-/* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: forwardRecoveredCallback. */
-/* Supplied declaration required: FUN_002b011c. */
-
-
-void FUN_00263028(unsigned int param_1,unsigned int param_2)
-
-{
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 7 native warning(s); review required */
-  float in_s0;
-  float in_s1;
-  float in_s2;
-  float in_s3;
-  
-  if (romwright_sqrt_4((in_s3 - in_s1) * (in_s3 - in_s1) + -(in_s2 - in_s0) * -(in_s2 - in_s0)) != 0.0f) {
-    FUN_002b011c();
-    effectSpawnPositionDefault(param_1);
-    effectSpawnPositionDefault(param_2);
-    effectSpawnPositionDefault(param_1);
-    effectSpawnPositionDefault(param_2);
-    forwardRecoveredCallback();
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */

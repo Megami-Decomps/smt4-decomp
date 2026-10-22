@@ -1,64 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291ce8` (_code @ 0x291ce8, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation-result, selection-sentinel, and preparation-argument instruction scheduling differ. */
+#include "battle/btlStage.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern BtlStageGlobals g_btlStage;
+u32 taskCreateDraw(const char *name, u32 priority, u32, u32, void (*start)(void *), void (*end)(void *), void *work, u32 parent);
+void btlStageRunWork(void *work);
+void btlStageDestroy(void *work);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
+void btlActionPrepareFromSource(BtlMainStateA *source, void *action, s32 useSaved);
 
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int btlActionPrepareFromSource(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern int btlStageRunWork(...); /* 0x276230 */
-extern unsigned char LAB_00291dc8; /* 0x291dc8 */
-extern int btlStageDestroy(...); /* 0x315080 */
-extern int g_btlStageModel; /* 0x57a4f8 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: btlActionPrepareFromSource. */
-
-
-void FUN_00291ce8(unsigned int *param_1)
-
+void FUN_00291ce8(BtlMainStateA *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  puVar1 = &LAB_00291dc8;
-  taskCreateDraw(&LAB_00291dc8,4,0,0,btlStageRunWork,btlStageDestroy,param_1,*param_1);
-  param_1[0x15] = (unsigned int)puVar1;
-  temp_v0 = 0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xc4,1);
-  g_btlStageModel = temp_v0;
-  *(unsigned int *)(temp_v0 + 0xb8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb0) = 0;
-  *(unsigned short *)(temp_v0 + 0xac) = 0xffff;
-  temp_v1 = param_1[0x5e];
-  temp_v3 = -1 < temp_v1;
-  if (temp_v3) {
-    temp_v1 = param_1[0x5f];
-  }
-  if (!temp_v3 || temp_v1 < 0) {
-    btlActionPrepareFromSource(param_1,param_1 + 0x3d,0);
-    param_1[0x5e] = (int)*(char *)(param_1 + 0x45);
-    param_1[0x5f] = (int)*(char *)((int)param_1 + 0x115);
-  }
-  temp_v2 = param_1[0x5f];
-  *(unsigned int *)(temp_v0 + 0xa4) = param_1[0x5e];
-  *(unsigned int *)(temp_v0 + 0xa8) = temp_v2;
-  return;
+    // Stage setup fields extend the small public stage-owner prefix.
+    struct PreparedStageView {
+        u8 unk00[0x20];
+        s8 stageId;
+        s8 stageVariant;
+        u8 unk22[2];
+    };
+    struct StageOwnerView {
+        u32 parentJob;
+        u8 unk04[0x50];
+        u32 job;
+        u8 unk58[0x9c];
+        PreparedStageView prepared;
+        u8 unk118[0x60];
+        BtlStageIdPair identifiers;
+    };
+    typedef char StageOwnerLayoutCheck[offsetof(StageOwnerView, job) == 0x54 &&
+        offsetof(StageOwnerView, prepared) == 0xf4 &&
+        offsetof(StageOwnerView, identifiers) == 0x178 ? 1 : -1];
+    StageOwnerView *work = (StageOwnerView *)owner;
+    work->job = taskCreateDraw("btlStage Calc", 4, 0, 0, btlStageRunWork, btlStageDestroy, owner, owner->job);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlStage.cpp", 472);
+    BtlStage *stage = (BtlStage *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BtlStage), 1);
+    g_btlStage.stage = stage;
+    stage->apocalypse.parameters[0] = stage->apocalypse.parameters[1] = stage->apocalypse.parameters[2] = 0.0f;
+    stage->apocalypse.selection = -1;
+    if (work->identifiers.stageId < 0 || work->identifiers.stageVariant < 0) {
+        btlActionPrepareFromSource(owner, &work->prepared, 0);
+        work->identifiers.stageId = work->prepared.stageId;
+        work->identifiers.stageVariant = work->prepared.stageVariant;
+    }
+    stage->apocalypse.identifiers = work->identifiers;
 }
-
-} /* extern "C" */
+}

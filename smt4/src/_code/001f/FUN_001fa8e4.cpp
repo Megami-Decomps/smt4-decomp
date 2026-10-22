@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f9188(void);
-int FUN_00280988(void);
+int mapEaseSceneHeading(void);
 int mapEnemyAdvancePursuit(void);
 
 int CONCAT44(...);
@@ -24,7 +24,7 @@ int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int gameCounterAddSaturating(...);
 int FUN_003a66c4(void);
 int FUN_003a6988(void);
@@ -67,12 +67,12 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: FUN_00280988. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 extern unsigned int FUN_00291e40(unsigned int);
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int padIsButtonRepeat(unsigned int);
@@ -248,7 +248,7 @@ void FUN_001fa8e4(void)
       temp_v24 = temp_v24 * 57.32484f;
       if (*(char *)(g_lmapScene + 0x10) != '\0') {
         temp_v21 = *(float *)(g_lmapScene + 0x14);
-        FUN_00287b0c();
+        mathGetShortestAngleDelta();
         temp_v12 = temp_v21;
         if (temp_v21 < temp_v17) {
           temp_v12 = -temp_v21;
@@ -287,7 +287,7 @@ void FUN_001fa8e4(void)
       }
       temp_v12 = -temp_v12;
       temp_v21 = *(float *)(g_lmapScene + 0x50);
-      FUN_00287b0c();
+      mathGetShortestAngleDelta();
       temp_v18 = temp_v21;
       if (temp_v21 < temp_v17) {
         temp_v18 = -temp_v21;
@@ -486,7 +486,7 @@ void FUN_001fa8e4(void)
            *(float *)(temp_v8 + 0x24) +
            (*(float *)(temp_v8 + 0x30) - *(float *)(temp_v8 + 0x24)) * 0.33333334f;
     }
-    FUN_00280988();
+    mapEaseSceneHeading();
     temp_v8 = g_lmapScene;
     puVar14 = (unsigned int *)(g_lmapScene + 0x20);
     temp_v6 = *(unsigned int *)(g_lmapScene + 0x24);

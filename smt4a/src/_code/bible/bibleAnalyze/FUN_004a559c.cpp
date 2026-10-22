@@ -38,7 +38,7 @@ extern union romwright_storage_s__U_U_0057f0a4_9_1 s__U_U_0057f0a4; /* 0x57f0a4 
 extern int FUN_0018349c(int, unsigned int);
 extern int FUN_002a482c(int);
 extern int FUN_0031d174(int);
-extern unsigned int FUN_004929d8(unsigned char *, unsigned int);
+extern unsigned int dataLookupDisplayName(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0049339c. */
 /* Supplied declaration required: FUN_0049368c. */
 /* Supplied declaration required: FUN_004a6144. */
@@ -80,7 +80,7 @@ void FUN_004a559c(int param_1)
   }
   FUN_0049368c(param_1 + 200,temp_v6 - 4,0,0,temp_v4,1);
   FUN_0049368c(param_1 + 200,temp_v6,0,0,temp_v4,1);
-  temp_v1 = FUN_004929d8(temp_v7,*(unsigned int *)(param_1 + 0xa874));
+  temp_v1 = dataLookupDisplayName(temp_v7,*(unsigned int *)(param_1 + 0xa874));
   textFormatBuffer(temp_v8,&LAB_004a57f4,temp_v1,(*(unsigned int *)&s__U_U_0057f0a4.u1[0]));
   temp_v6 = FUN_0018349c(param_1 + 200,0x102b);
   temp_v2 = curveEvaluateStandard(temp_v8,2);

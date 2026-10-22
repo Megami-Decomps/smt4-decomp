@@ -33,8 +33,25 @@ typedef struct MapIfRecord {
             u8 unk28[0x19];
             u8 pending; // 0x41
         } request;
+        struct {
+            u8 unk28[0x28];
+            f32 x; // 0x50
+            f32 y; // 0x54
+            f32 z; // 0x58
+        } position;
+        struct {
+            u16 counter; // 0x28
+            u8 unk2a[0x1a];
+            s32 timer; // 0x44
+        } update;
     };
 } MapIfRecord;
+
+typedef char MapIfRecordPositionCheck[sizeof(MapIfRecord) == 0x194 &&
+    offsetof(MapIfRecord, position.x) == 0x50 ? 1 : -1];
+typedef char MapIfRecordUpdateCheck[sizeof(MapIfRecord) == 0x194 &&
+    offsetof(MapIfRecord, update.counter) == 0x28 &&
+    offsetof(MapIfRecord, update.timer) == 0x44 ? 1 : -1];
 
 #define MAP_IF_WIDGETS 0x23
 #define MAP_IF_SLOTS 4
@@ -55,6 +72,15 @@ typedef struct MapIfSlot {
     /* 0x1C */ u32 handle;
 } MapIfSlot;
 
+typedef struct MapIfFastModelState {
+    u8 active;
+    u8 unk01[3];
+    u32 first;
+    u32 second;
+    f32 position[3];
+    f32 heading;
+} MapIfFastModelState;
+
 /* The interface's state block (Shin Megami Tensei IV layout). */
 typedef struct MapIfState {
     /* 0x0000 */ u32 job;
@@ -68,7 +94,10 @@ typedef struct MapIfState {
     /* 0x0038 */ s32 unk38;
     /* 0x003C */ u8 unk3C[0x194];
     /* 0x01D0 */ MapIfRecord records[128];
-    /* 0xCBD0 */ u8 unkCBD0[0x1C];
+    union {
+        /* 0xCBD0 */ u8 unkCBD0[0x1C];
+        /* 0xCBD0 */ MapIfFastModelState fastModel;
+    };
     /* 0xCBEC */ u32 unkCBEC;
     /* 0xCBF0 */ MapIfSlot slots[MAP_IF_SLOTS];
     /* 0xCC70 */ u8 unkCC70[0x48];
@@ -155,5 +184,10 @@ typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD28 ? 1 : -1];
 typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x8 ? 1 : -1];
 typedef char MapIfGlobalsASizeCheck[sizeof(MapIfGlobalsA) == 0x8 ? 1 : -1];
 typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, head.unk1C) == 0x1C ? 1 : -1];
+typedef char MapIfFastModelOffsetsCheck[sizeof(MapIfFastModelState) == 0x1c &&
+    offsetof(MapIfFastModelState, active) == 0 && offsetof(MapIfFastModelState, first) == 4 &&
+    offsetof(MapIfFastModelState, second) == 8 && offsetof(MapIfFastModelState, position) == 0xc &&
+    offsetof(MapIfFastModelState, heading) == 0x18 &&
+    offsetof(MapIfState, fastModel) == 0xcbd0 ? 1 : -1];
 
 #endif

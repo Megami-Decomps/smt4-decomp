@@ -61,7 +61,7 @@ int mapIfReleaseSlot0(void);
 int FUN_001f9188(void);
 int FUN_0025bc80(void);
 int FUN_0027fca0(...);
-int FUN_00280988(void);
+int mapEaseSceneHeading(void);
 int FUN_002879dc(...);
 int mapEnemyAdvancePursuit(void);
 int rt_memcpy_w(...);
@@ -82,7 +82,7 @@ int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int FUN_00291e40(...);
 int gameCounterAddSaturating(...);
 int FUN_003a66c4(void);
@@ -253,7 +253,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: FUN_00280988. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00281e34. */
 extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
@@ -262,7 +262,7 @@ extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
@@ -559,7 +559,7 @@ void FUN_002712dc(void)
         fStack_64 = fStack_64 * 57.32484f;
         if ((char)g_lmapScene[4] != '\0') {
           temp_v35 = (float)g_lmapScene[5];
-          FUN_00287b0c();
+          mathGetShortestAngleDelta();
           temp_v19 = temp_v35;
           if (temp_v35 < temp_v36) {
             temp_v19 = -temp_v35;
@@ -598,7 +598,7 @@ void FUN_002712dc(void)
         }
         temp_v19 = -temp_v19;
         temp_v35 = (float)g_lmapScene[0x14];
-        FUN_00287b0c();
+        mathGetShortestAngleDelta();
         temp_v34 = temp_v35;
         if (temp_v35 < temp_v36) {
           temp_v34 = -temp_v35;
@@ -791,7 +791,7 @@ void FUN_002712dc(void)
         piVar22[9] = (int)((float)piVar22[9] +
                           ((float)piVar22[0xc] - (float)piVar22[9]) * 0.33333334f);
       }
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       piVar9 = g_lmapScene + 8;
       temp_v31 = g_lmapScene[9];
@@ -811,7 +811,7 @@ void FUN_002712dc(void)
   case 2:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -1240,7 +1240,7 @@ LAB_002c9a64:
     }
 LAB_002c9a70:
     mapSelectContainingRegions();
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     piVar23 = g_lmapScene + 7;
     piVar9 = g_lmapScene + 0x10;
@@ -1261,7 +1261,7 @@ LAB_002c9a70:
   case 4:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     temp_v7 = 0;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
@@ -1299,7 +1299,7 @@ LAB_002c9a70:
   case 5:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     if (DAT_0049fa60 != '\0') {
@@ -1369,7 +1369,7 @@ LAB_002c9a70:
   case 6:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     temp_v7 = g_lmapScene[1];
     if (temp_v7 != 0) {
@@ -1484,7 +1484,7 @@ LAB_002c9a70:
     fStack_2c = fStack_1c;
     fStack_20 = fStack_3c;
     fStack_1c = temp_v18;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     temp_v18 = (float)g_lmapScene[7] +
              ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.33333334f;
@@ -1709,7 +1709,7 @@ LAB_002c9a70:
     fStack_24 = fStack_1c;
     fStack_20 = temp_v18;
     fStack_1c = temp_v17;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -1882,7 +1882,7 @@ LAB_002c9a70:
       fStack_3c = fStack_20;
       fStack_28 = fStack_38;
       fStack_38 = fStack_1c;
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -2345,7 +2345,7 @@ LAB_002e94f0:
       fStack_28 = temp_v20;
       fStack_20 = fStack_1c;
       fStack_1c = temp_v18;
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -2562,7 +2562,7 @@ LAB_002e94f0:
   case 0xf:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     temp_v18 = (float)g_lmapScene[7] +
              ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.33333334f;
@@ -2722,7 +2722,7 @@ LAB_002e94f0:
       fStack_24 = fStack_1c;
       fStack_20 = temp_v18;
       fStack_1c = temp_v17;
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -2993,7 +2993,7 @@ LAB_002e94f0:
     fStack_30 = fStack_20;
     fStack_2c = fStack_1c;
     if (g_lmapScene[1] < 10) {
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -3244,7 +3244,7 @@ LAB_002d472c:
       fStack_24 = fStack_1c;
       fStack_20 = temp_v18;
       fStack_1c = temp_v17;
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] +
@@ -3710,7 +3710,7 @@ LAB_002d472c:
     temp_v31 = g_lmapScene[0xc];
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     temp_v7 = g_lmapScene[1];
     if (temp_v7 != 0xb) {
@@ -4036,7 +4036,7 @@ LAB_002804c4:
   case 0x21:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x1b) = 0;
     piVar22[0x15] = 0;
@@ -4278,7 +4278,7 @@ LAB_0027142c:
     else {
       fStack_28 = temp_v35;
       fStack_24 = temp_v20;
-      FUN_00280988();
+      mapEaseSceneHeading();
       piVar22 = g_lmapScene;
       g_lmapScene[7] =
            (int)((float)g_lmapScene[7] + ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.1f);
@@ -4368,7 +4368,7 @@ LAB_0027142c:
               ((float)g_lmapScene[10] - (float)g_lmapScene[7]) * 0.33333334f);
     piVar22[8] = (int)((float)piVar22[8] + ((float)piVar22[0xb] - (float)piVar22[8]) * 0.33333334f);
     piVar22[9] = (int)((float)piVar22[9] + ((float)piVar22[0xc] - (float)piVar22[9]) * 0.33333334f);
-    FUN_00280988();
+    mapEaseSceneHeading();
     piVar22 = g_lmapScene;
     piVar23 = g_lmapScene + 8;
     temp_v13 = g_lmapScene[9];
@@ -4410,7 +4410,7 @@ LAB_0027142c:
       break;
     case 1:
       temp_v17 = (float)DAT_004474f4[6];
-      FUN_00287b0c();
+      mathGetShortestAngleDelta();
       temp_v5 = in_fpscr & 0xfffffff;
       temp_v18 = temp_v17;
       if (temp_v17 < 0.0f) {
@@ -5141,7 +5141,7 @@ LAB_0027142c:
     piVar22[8] = (int)((float)piVar22[8] + ((float)piVar22[0xb] - (float)piVar22[8]) * 0.16666667f);
     piVar22[9] = (int)((float)piVar22[9] + ((float)piVar22[0xc] - (float)piVar22[9]) * 0.33333334f);
     temp_v17 = (float)g_lmapScene[0x13];
-    FUN_00287b0c();
+    mathGetShortestAngleDelta();
     temp_v18 = temp_v17;
     if (temp_v17 < 0.0f) {
       temp_v18 = -temp_v17;

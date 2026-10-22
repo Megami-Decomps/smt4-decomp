@@ -1,61 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187068` (_code @ 0x187068, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the adjacent stack-base move and zero-register copy are scheduled in the opposite order. */
+#include "gamedata/PartySortRecord.h"
+#include "shard/W6_W6Match1_PartySlot.h"
 
 extern "C" {
-
-int qsort(unsigned int [2], int, int, unsigned char *);
-
-extern unsigned char LAB_0019d4a4; /* 0x19d4a4 */
-
-/* Supplied declaration required: qsort. */
-extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-extern int gameGetSlotTable(void);
-
-
-int FUN_00187068(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3 [2];
-  unsigned int temp_v4 [35];
-  
-  if (param_1 < 0xc) {
-    temp_v2 = 0;
-    do {
-      if ((temp_v2 & 0xffff) < 0xc) {
-        temp_v0 = gameGetSlotTable();
-        temp_v0 = temp_v0 + (temp_v2 & 0xffff) * 0x134;
-        if ((temp_v0 != -0x1ddc) && (*(short *)(temp_v0 + 0x1f08) != 0)) {
-          temp_v3[temp_v2 * 3] = temp_v2;
-          *(unsigned short *)(temp_v4 + temp_v2 * 3) = *(unsigned short *)(temp_v0 + 0x1f08);
-          temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 0x1f08),0);
-          temp_v4[temp_v2 * 3 - 1] = temp_v1;
-        }
-        else {
-          temp_v3[temp_v2 * 3] = temp_v2;
-          *(unsigned short *)(temp_v4 + temp_v2 * 3) = 0;
-          temp_v4[temp_v2 * 3 - 1] = 99;
-        }
-      }
-      else {
-        temp_v3[temp_v2 * 3] = temp_v2;
-        *(unsigned short *)(temp_v4 + temp_v2 * 3) = 0;
-        temp_v4[temp_v2 * 3 - 1] = 99;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while ((int)temp_v2 < 0xc);
-    qsort(temp_v3,0xc,0xc,&LAB_0019d4a4);
-    temp_v2 = temp_v3[param_1 * 3];
-    if ((temp_v2 & 0xffff) < 0xc) {
-      temp_v0 = gameGetSlotTable();
-      return temp_v0 + (temp_v2 & 0xffff) * 0x134 + 0x1ddc;
-    }
-  }
-  return 0;
+PartySlotTableA *gameGetSlotTable();
+u32 FUN_0019acdc(u16 id, u32 mode);
+s32 FUN_0019d4a4(const SortRecord *left, const SortRecord *right);
+void qsort(void *records, u32 count, u32 stride, s32 (*compare)(const SortRecord *, const SortRecord *));
 }
 
-} /* extern "C" */
+static __inline PartySlotA *resolveRankedPartySlot(u16 index)
+{
+    if (index >= 12)
+        return NULL;
+    return &gameGetSlotTable()->slots[index];
+}
+
+// Sort the twelve party slots by their definition rank and id, then return the requested slot.
+extern "C" PartySlotA *FUN_00187068(u32 rank)
+{
+    if (rank < 12) {
+        SortRecord records[12];
+        for (s32 i = 0; i < 12; ++i) {
+            PartySlotA *slot = resolveRankedPartySlot((u16)i);
+            if (slot && slot->id) {
+                records[i].value = i;
+                records[i].secondary = slot->id;
+                records[i].primary = FUN_0019acdc(slot->id, 0);
+            } else {
+                records[i].value = i;
+                records[i].secondary = 0;
+                records[i].primary = 99;
+            }
+        }
+        qsort(records, 12, sizeof(SortRecord), FUN_0019d4a4);
+        u16 index = (u16)records[rank].value;
+        if (index < 12)
+            return &gameGetSlotTable()->slots[index];
+    }
+    return NULL;
+}

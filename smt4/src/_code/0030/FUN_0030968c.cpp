@@ -1,56 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030968c` (_code @ 0x30968c, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command-stack base arithmetic and cursor-load scheduling differ. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
-
-int FUN_00248ae8(int);
-int asdModelCommandBlockRelease(void);
-int cursorResetFromParam(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-extern int DAT_004729e0; /* 0x4729e0 */
-extern int DAT_004729e4; /* 0x4729e4 */
-
-/* Supplied declaration required: FUN_00248ae8. */
-/* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: cursorResetFromParam. */
-
-
-void FUN_0030968c(unsigned int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  cursorResetFromParam();
-  temp_v0 = DAT_004729e0;
-  *(unsigned int *)(DAT_004729e0 + DAT_004729e4 * 4) =
-       *(unsigned int *)(g_titleScene + *(int *)(g_titleScene + 0x128c) * 4 + 0x1294) |
-       (param_1 & 0xfffff0ff);
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0107;
-  DAT_004729e4 = DAT_004729e4 + 2;
-  temp_v1 = (param_1 & 0x70) >> 4;
-  if (temp_v1 >= 2) {
-    if (temp_v1 == 6 || temp_v1 == 7) {
-      temp_v1 = 2;
-    }
-    else {
-      temp_v1 = 3;
-    }
-  }
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4) = temp_v1 << 0x18;
-  *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0x80126;
-  DAT_004729e4 = DAT_004729e4 + 2;
-  asdModelCommandBlockRelease();
-  FUN_00248ae8(1);
-  return;
+extern RenderCtx *g_titleScene;
+extern u32 *DAT_004729e0;
+extern s32 DAT_004729e4;
+void cursorResetFromParam(void);
+void asdModelCommandBlockRelease(void);
+void FUN_00248ae8(s32);
 }
 
-} /* extern "C" */
+/* Emit blend-state and alpha-mode commands for the title scene. */
+extern "C" void FUN_0030968c(u32 flags)
+{
+    cursorResetFromParam();
+    u32 *commands = DAT_004729e0;
+    const RenderStateStack *blend =
+        (const RenderStateStack *)g_titleScene->additional.unk128c;
+    commands[DAT_004729e4] = blend->entries[blend->count] | (flags & ~0xF00);
+    commands[DAT_004729e4 + 1] = 0xF0107;
+    DAT_004729e4 += 2;
+    u32 alphaMode = (flags & 0x70) >> 4;
+    if (alphaMode >= 2) {
+        alphaMode = alphaMode == 6 || alphaMode == 7 ? 2 : 3;
+    }
+    commands[DAT_004729e4] = alphaMode << 24;
+    commands[DAT_004729e4 + 1] = 0x80126;
+    DAT_004729e4 += 2;
+    asdModelCommandBlockRelease();
+    FUN_00248ae8(1);
+}

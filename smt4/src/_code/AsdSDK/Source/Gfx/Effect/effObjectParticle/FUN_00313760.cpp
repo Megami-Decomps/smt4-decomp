@@ -1,58 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00313760` (_code @ 0x313760, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent allocation and state-pointer assignments are merged into STM instead of two retail STRs. */
+#include "AsdSDK/Source/Gfx/Effect/effParticle.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00410334[];
+EffParticleSource *FUN_002691d8(u32 id, u32 owner, u32 flags);
+void objectBufferFree(void *object);
+void asdMemFree(void *block);
+void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 tracked);
+void FUN_003024d0(EffObjectParticle *object, EffObjectParticleState *state);
 
-int FUN_002691d8(unsigned int, unsigned int, unsigned int);
-int objectBufferFree(void);
-int memAlloc(int, int, int, unsigned int, int, int);
-int asdMemFree(void);
-int FUN_003024d0(unsigned int *, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_002691d8. */
-/* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_003024d0. */
-
-
-void FUN_00313760(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
-
+/* Replace the particle source and allocate one initialized state per source entry. */
+void FUN_00313760(EffObjectParticle *object, u32 sourceId, u32 flags)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (param_1[0x27] != 0) {
-    objectBufferFree();
-  }
-  param_2 = param_2 & 0xffff;
-  FUN_002691d8(param_2,*param_1,param_3);
-  param_1[0x27] = param_2;
-  if (param_1[0x29] != 0) {
-    asdMemFree();
-  }
-  temp_v2 = *(unsigned int *)(param_1[0x27] + 8);
-  temp_v0 = 0x10000;
-  memAlloc(0x10000,0x100,0,temp_v2 * 0x1c,0x10,1);
-  param_1[0x29] = temp_v0;
-  temp_v1 = 0;
-  param_1[0x28] = temp_v0;
-  if (temp_v2 != 0) {
-    do {
-      FUN_003024d0(param_1,temp_v0);
-      temp_v1 = temp_v1 + 1;
-      temp_v0 = temp_v0 + 0x1c;
-    } while (temp_v1 < temp_v2);
-  }
-  return;
+    if (object->source) {
+        objectBufferFree(object->source);
+    }
+    object->source = FUN_002691d8((u16)sourceId, object->owner, flags);
+    if (object->allocation) {
+        asdMemFree(object->allocation);
+    }
+    u32 count = object->source->count;
+    u32 bytes = count * sizeof(EffObjectParticleState);
+    asdDebugTrace(DAT_00410334, 547);
+    object->allocation = memAlloc(0x10000, 0x100, 0, bytes, 16, 1);
+    EffObjectParticleState *state = static_cast<EffObjectParticleState *>(object->allocation);
+    object->states = state;
+    for (u32 index = 0; index < count; ++index, ++state) {
+        FUN_003024d0(object, state);
+    }
 }
-
-} /* extern "C" */
+}

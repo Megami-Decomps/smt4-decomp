@@ -11,7 +11,7 @@ int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
 int FUN_00289234(unsigned int);
 int eventTexSetJobParam(void);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_0029c1c8(unsigned int, unsigned int, int);
 int devilGetRecord(...);
 int FUN_002bd06c(unsigned int);
@@ -36,13 +36,13 @@ extern int DAT_0044cfa0; /* 0x44cfa0 */
 /* Supplied declaration required: FUN_00289234. */
 /* Supplied declaration required: eventTexSetJobParam. */
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0029c1c8. */
 extern unsigned int FUN_0029c1fc(void);
 extern int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 extern int jobIsValid(void);
 /* Supplied declaration required: libc_strcpy. */
@@ -139,10 +139,10 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
     FUN_002bd06c(temp_v5);
     libc_strcpy(temp_v8,temp_v5);
     temp_v0 = scrWorkGetValue(1);
-    temp_v2 = FUN_002bce30(temp_v0,1);
+    temp_v2 = demonGetRaceLabel(temp_v0,1);
     libc_strcpy(temp_v9,temp_v2);
-    FUN_00295660(8,temp_v8);
-    FUN_00295660(9,temp_v9);
+    textEncodeFontSlot(8,temp_v8);
+    textEncodeFontSlot(9,temp_v9);
     temp_v1 = fileSlotGetBuffer(0x1e);
     FUN_002bff38(0x14);
     temp_v7[0] = 0;

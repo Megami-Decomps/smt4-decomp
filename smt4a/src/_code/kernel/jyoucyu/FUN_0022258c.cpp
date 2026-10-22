@@ -22,7 +22,7 @@ int FUN_002bf464(void);
 int dataTableResolveEntryVariants(void);
 int FUN_002c3364(void);
 int tmSpriteTableAcquire(void);
-int FUN_0031f4fc(void);
+int statusAcquireBustUpResources(void);
 int FUN_00387454(void);
 int engineClearStateTriple(void);
 int saveLoadEnsureResources(void);
@@ -54,7 +54,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: dataTableResolveEntryVariants. */
 /* Supplied declaration required: FUN_002c3364. */
 /* Supplied declaration required: tmSpriteTableAcquire. */
-/* Supplied declaration required: FUN_0031f4fc. */
+/* Supplied declaration required: statusAcquireBustUpResources. */
 /* Supplied declaration required: FUN_00387454. */
 /* Supplied declaration required: engineClearStateTriple. */
 /* Supplied declaration required: saveLoadEnsureResources. */
@@ -83,7 +83,7 @@ void FUN_0022258c(unsigned int param_1)
           FUN_00212774();
           FUN_002c3364();
           gameSessionAcquireSpriteTable();
-          FUN_0031f4fc();
+          statusAcquireBustUpResources();
           dataTableRefAcquire();
           resetFlagGroupsCD();
           FUN_003c5c88();

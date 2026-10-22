@@ -1,48 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00492e20` (_code @ 0x492e20, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: owner/group saved registers and pointer-versus-inline dimension load scheduling differ from retail. */
 #include "classes/Obj422594.h"
 #include "classes/Obj4221a4.h"
+#include "gfx/SpriteTextureRect.h"
 #include "shard/W6_W6Match1_TouchRegionOwner.h"
 
 extern "C" {
+extern const u32 DAT_00587fe4[3];
+extern const u32 DAT_00587ff0[3];
+extern const u32 DAT_00587ffc[3];
+u32 recordCompareKind(const Obj422594 *owner);
+SpriteTextureRect *FUN_001834a4(u32 group, u32 id);
+void touchRegisterFirstRegion(Obj422594 *owner, s32 x, s32 y, s32 width, s32 height);
+void touchRegisterSecondRegion(Obj422594 *owner, s32 x, s32 y, s32 width, s32 height);
+void FUN_004d091c(TouchRegionOwner *owner, s32 x, s32 y, s32 width, s32 height);
 
-void FUN_004d091c(TouchRegionOwner* owner, u16 x, u16 y, u16 width, u16 height);
-int touchRegisterFirstRegion(unsigned int, int, int);
-int touchRegisterSecondRegion(unsigned int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: touchRegisterFirstRegion. */
-/* Supplied declaration required: touchRegisterSecondRegion. */
-extern int recordCompareKind(unsigned int);
-
-
-void FUN_00492e20(unsigned int param_1, const void *source)
-
+// Initialize the terminal window's two sprite regions and its table-defined touch rectangle.
+void FUN_00492e20(Obj422594 *owner, const void *source)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  ((Obj422594 *)param_1)->Obj422594::initialize(source);
-  temp_v0 = recordCompareKind(param_1);
-  temp_v0 = FUN_001834a4(0x13,*(unsigned int *)(temp_v0 * 4 + 0x587fe4));
-  touchRegisterFirstRegion(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
-  temp_v0 = recordCompareKind(param_1);
-  temp_v0 = FUN_001834a4(0x13,*(unsigned int *)(temp_v0 * 4 + 0x587ff0));
-  touchRegisterSecondRegion(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10));
-  temp_v0 = recordCompareKind(param_1);
-  temp_v0 = FUN_001834a4(0x13,*(unsigned int *)(temp_v0 * 4 + 0x587ffc));
-  const Obj4221a4Entry* rectangle = reinterpret_cast<const Obj4221a4Entry*>(temp_v0);
-  const TouchRegionInlineSize* inlineSize = reinterpret_cast<const TouchRegionInlineSize*>(rectangle->unk00);
-  FUN_004d091c(reinterpret_cast<TouchRegionOwner*>(param_1),rectangle->x,rectangle->y,
-               rectangle->size != NULL ? rectangle->size->width : inlineSize->width & 0x7fff,
-               rectangle->size != NULL ? rectangle->size->height : inlineSize->height & 0x7fff);
-  return;
+    owner->Obj422594::initialize(source);
+    const Obj4221a4Entry *first = (const Obj4221a4Entry *)FUN_001834a4(19, DAT_00587fe4[recordCompareKind(owner)]);
+    const TouchRegionInlineSize *firstSize = (const TouchRegionInlineSize *)first->unk00;
+    touchRegisterFirstRegion(owner, first->x, first->y,
+        first->size ? first->size->width : firstSize->width & 0x7fff,
+        first->size ? first->size->height : firstSize->height & 0x7fff);
+    const Obj4221a4Entry *second = (const Obj4221a4Entry *)FUN_001834a4(19, DAT_00587ff0[recordCompareKind(owner)]);
+    const TouchRegionInlineSize *secondSize = (const TouchRegionInlineSize *)second->unk00;
+    touchRegisterSecondRegion(owner, second->x, second->y,
+        second->size ? second->size->width : secondSize->width & 0x7fff,
+        second->size ? second->size->height : secondSize->height & 0x7fff);
+    const Obj4221a4Entry *rectangle = (const Obj4221a4Entry *)FUN_001834a4(19, DAT_00587ffc[recordCompareKind(owner)]);
+    const TouchRegionInlineSize *size = (const TouchRegionInlineSize *)rectangle->unk00;
+    FUN_004d091c((TouchRegionOwner *)owner, rectangle->x, rectangle->y,
+        rectangle->size ? rectangle->size->width : size->width & 0x7fff,
+        rectangle->size ? rectangle->size->height : size->height & 0x7fff);
 }
-
-} /* extern "C" */
+}

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_003d939c(int);
 int VectorSignedToFloat(int, int);
 
@@ -21,7 +21,7 @@ extern int aocJobIsValid(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int btlMainIsSecondJobValid(void);
 /* Supplied declaration required: FUN_003d939c. */
 
@@ -55,12 +55,12 @@ unsigned int FUN_00321544(void)
     }
     if ((*(char *)(temp_v0 + 0x2f4) != '\0') && (*(int *)(temp_v0 + 0x2e8) == 2)) {
       temp_v5 = 0.27f;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v1 = (int)temp_v5;
       temp_v2 = aocJobIsValid();
       if ((temp_v2 != 0) || (temp_v2 = btlMainIsSecondJobValid(), temp_v2 != 0)) {
         temp_v5 = 0.26f;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         temp_v1 = (int)temp_v5;
       }
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

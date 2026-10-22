@@ -1,53 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002505c0` (_code @ 0x2505c0, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved parameter registers and action-kind/next-link load scheduling differ. */
+#include "battle/btlReflect.h"
 
 extern "C" {
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
 
-int FUN_0022699c(short *, int, int, unsigned int);
-
-extern short *g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-void FUN_002505c0(short param_1,unsigned int param_2,short *param_3,int param_4,int param_5,
-                 unsigned int param_6,short param_7)
-
+// Queue a keyed scalar change, invalidating its secondary ID when a duplicate already exists.
+void FUN_002505c0(s32 actor, u32 options, void *key, s32 mode, s32 checkDuplicates,
+                  u32 parameter, s32 first)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  short temp_v0;
-  short *psVar2;
-  short *psVar3;
-  short *psVar4;
-  
-  psVar2 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  if (param_5 != 0) {
-    psVar4 = *(short **)(g_btlActionReflect + 4);
-    do {
-      do {
-        psVar3 = psVar4;
-        if (psVar3 == (short *)0x0) goto LAB_00250654;
-        psVar4 = *(short **)(psVar3 + 6);
-      } while ((char)psVar3[2] != '1');
-      temp_v0 = *psVar3;
-      if (temp_v0 == *psVar2) {
-        psVar3 = *(short **)(psVar3 + 0x16);
-      }
-    } while ((temp_v0 != *psVar2 || psVar3 != param_3) || (psVar2[1] < 0));
-    psVar2[1] = -1;
-  }
-LAB_00250654:
-  *(unsigned char *)(psVar2 + 2) = 0x31;
-  *(short **)(psVar2 + 0x16) = param_3;
-  *(unsigned int *)(psVar2 + 0x26) = param_6;
-  if (param_4 != 0) {
-    psVar2[0x14] = 1;
-    psVar2[0x15] = 0;
-  }
-  psVar2[0x12] = param_7;
-  return;
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+    if (checkDuplicates) {
+        ReflectAction *previous = g_btlActionReflect->head;
+        while (previous != NULL) {
+            ReflectAction *next = previous->next;
+            if (previous->kind == 0x31 && (s16)previous->actorId == (s16)action->actorId &&
+                previous->payload == (u32)key && (s16)action->secondaryId >= 0) {
+                action->secondaryId = 0xFFFF;
+                break;
+            }
+            previous = next;
+        }
+    }
+    action->kind = 0x31;
+    action->payload = (u32)key;
+    action->parameter = parameter;
+    if (mode != 0) {
+        action->value = 1;
+    }
+    action->first = first;
 }
-
-} /* extern "C" */
+}

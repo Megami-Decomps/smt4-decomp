@@ -1,72 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dcfe0` (_code @ 0x2dcfe0, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identity-quaternion zero-store scheduling and return-value register allocation differ. */
+#include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
+#include "AsdSDK/AsdDebug.h"
+#include <string.h>
+
+struct AsdAmbientLight;
+struct AsdModelGroupLink;
 
 extern "C" {
+extern const char DAT_004101c0[];
+extern void* DAT_00464b7c[2];
+extern void* g_asdModelTransformBuilder[2];
+void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);
+int memClear(void* memory, int size);
+void* rt_memcpy(void* destination, const void* source, u32 size);
+const void* resourceResolveHeaderPointer(const void* resource);
+AsdAmbientLight* FUN_002cb80c(void);
+void FUN_002e113c(AsdModelGroupLink* light, s32 group);
+void sceneTraverserVisit(void* traverser, void* builder);
 
-int sceneTraverserVisit(unsigned int, unsigned int);
-int memAlloc(int, int, int, int, int, int);
-int memClear(void);
-int FUN_002cb80c(void);
-int FUN_002e113c(void);
-int rt_memcpy(unsigned int *, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-
-extern unsigned int resourceResolveHeaderPointer(int);
-/* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002cb80c. */
-/* Supplied declaration required: FUN_002e113c. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int * FUN_002dcfe0(int param_1)
-
+EffAsdLight* FUN_002dcfe0(const EffAsdLightDesc* resource)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int *puVar3;
-  
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x110,0x10,1);
-  memClear();
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[3] = 0x3f800000;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[7] = 0x3f800000;
-  puVar1[9] = 0xffffffff;
-  puVar1[8] = 0x3f800000;
-  if (param_1 != 0) {
-    puVar1[10] = (unsigned int)*(unsigned short *)(param_1 + 0xc);
-    temp_v0 = resourceResolveHeaderPointer(param_1);
-    rt_memcpy(puVar1 + 0xc,temp_v0,0xb4);
-    puVar3 = puVar1 + 0xc;
-    if (puVar1[0x31] == 1) {
-      puVar3 = (unsigned int *)puVar1[0x32];
+    // The IV allocation ends at 0x110; the shared light header also covers Apocalypse's tail.
+    struct LightParameters {
+        u8 unk00[0x94];
+        s32 kind;
+        AsdAmbientLight* ambient;
+        u8 unk9C[0x18];
+    };
+    struct LightWork {
+        EffLightVec4 rotation0;
+        EffLightVec4 rotation1;
+        f32 scale;
+        s32 group;
+        u32 kind;
+        u32 unk2C;
+        LightParameters parameters;
+        u8 unkE4[0x28];
+        AsdAmbientLight* ownedAmbient;
+    };
+    typedef char LightWorkSizeCheck[sizeof(LightWork) == 0x110 ? 1 : -1];
+    asdDebugTrace(DAT_004101c0, 34);
+    LightWork* light = static_cast<LightWork*>(
+        memAlloc(0x10000, 0x100, 0, sizeof(LightWork), 0x10, 1));
+    memClear(light, sizeof(LightWork));
+    memset(&light->rotation0, 0, sizeof(light->rotation0));
+    light->rotation0.w = 1.0f;
+    memset(&light->rotation1, 0, sizeof(light->rotation1));
+    light->rotation1.w = 1.0f;
+    light->scale = 1.0f;
+    light->group = -1;
+    if (!resource) {
+        return reinterpret_cast<EffAsdLight*>(light);
     }
-    if (puVar1[0x31] == 1 && puVar3 == (unsigned int *)0x0) {
-      FUN_002cb80c();
-      FUN_002e113c();
-      puVar1[0x43] = (unsigned int)puVar3;
+    light->kind = resource->kind;
+    rt_memcpy(&light->parameters, resourceResolveHeaderPointer(resource), sizeof(LightParameters));
+    const LightParameters* parameters = &light->parameters;
+    if (parameters->kind == 1 && !parameters->ambient) {
+        AsdAmbientLight* ambient = FUN_002cb80c();
+        FUN_002e113c(reinterpret_cast<AsdModelGroupLink*>(ambient), 0);
+        light->ownedAmbient = ambient;
     }
-    sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
-  }
-  return puVar1;
+    sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+    return reinterpret_cast<EffAsdLight*>(light);
 }
-
-} /* extern "C" */
+}

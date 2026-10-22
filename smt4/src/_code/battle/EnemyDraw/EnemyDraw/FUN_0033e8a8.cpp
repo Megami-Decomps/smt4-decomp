@@ -82,7 +82,7 @@ extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdMemoryAlloc. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int mapMainIsBusy(void);
-extern int QuestCenterMode_IsBusy(void);
+extern int questCenterPollShutdown(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -160,7 +160,7 @@ void FUN_0033e8a8(int param_1)
   }
   temp_v3 = aocJobIsValid();
   if (((((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) ||
-       (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
+       (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = questCenterPollShutdown(), temp_v3 != 0)) &&
      ((temp_v3 = FUN_002b8694(), temp_v3 == 0 && (temp_v3 = FUN_002b8660(), temp_v3 != 0)))) {
     temp_v20 = romwright_piece_4_4((int)(temp_v20 >> 0x20),0x3fc00000);
   }

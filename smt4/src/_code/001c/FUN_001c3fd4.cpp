@@ -27,7 +27,7 @@ int scrRunOpcodesStub(...);
 int FUN_0026beb4(...);
 int FUN_0026c214(void);
 int FUN_0026c464(...);
-int FUN_0026c57c(void);
+int uniteLoadPreviewRoomModel(void);
 int FUN_0028a924(...);
 int FUN_0028d1f4(...);
 int FUN_00295eb0(...);
@@ -129,7 +129,7 @@ extern int FUN_002015a4(void);
 /* Supplied declaration required: FUN_0026beb4. */
 /* Supplied declaration required: FUN_0026c214. */
 /* Supplied declaration required: FUN_0026c464. */
-/* Supplied declaration required: FUN_0026c57c. */
+/* Supplied declaration required: uniteLoadPreviewRoomModel. */
 extern int gameGetNavigationState(void);
 /* Supplied declaration required: FUN_0026c654. */
 /* Supplied declaration required: FUN_0026c710. */
@@ -1639,7 +1639,7 @@ LAB_001c6680:
                   *(unsigned char *)(temp_v1 + 0x34) = 0;
                   FUN_0026d5a4();
                   FUN_0029dfc0(0);
-                  FUN_0026c57c();
+                  uniteLoadPreviewRoomModel();
                 }
               }
               else {

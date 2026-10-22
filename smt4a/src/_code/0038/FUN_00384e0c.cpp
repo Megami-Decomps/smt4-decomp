@@ -8,7 +8,7 @@ int dataTableGetEntry49(int);
 int gameFlagIsSet(...);
 int FUN_00314bf8(int);
 int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
-int FUN_003ae61c(int, int, int, int);
+int navigationSetOrQueueRequest(int, int, int, int);
 int FUN_003bf87c(void);
 int dataTable49Type1Count(void);
 int gameFlagSetValue(unsigned int, int);
@@ -30,7 +30,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_00314bf8. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
-/* Supplied declaration required: FUN_003ae61c. */
+/* Supplied declaration required: navigationSetOrQueueRequest. */
 extern int dataTable49GetEntry(int);
 /* Supplied declaration required: FUN_003bf87c. */
 /* Supplied declaration required: dataTable49Type1Count. */
@@ -105,7 +105,7 @@ void FUN_00384e0c(int param_1)
         naviMainSetFlagsAndActivate(*(unsigned char *)(temp_v3 + 0x4a),*(unsigned char *)(temp_v3 + 0x4b),0,0,0,0);
         VectorSignedToFloat((int)*(short *)(temp_v3 + 0x36),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v3 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_003ae61c((int)*(short *)(temp_v3 + 0x2e),(int)*(short *)(temp_v3 + 0x30),
+        navigationSetOrQueueRequest((int)*(short *)(temp_v3 + 0x2e),(int)*(short *)(temp_v3 + 0x30),
                      (int)*(short *)(temp_v3 + 0x32),(int)*(short *)(temp_v3 + 0x36));
       }
       temp_v4 = temp_v4 + 1;

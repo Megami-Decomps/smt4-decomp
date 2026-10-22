@@ -12,7 +12,7 @@ int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0018408c(unsigned char *, int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int jobGetScalarValue(void);
 int FUN_002f6f44(...);
 int partyDrawCategorySelectionIcon(unsigned int, int, int, int);
@@ -44,7 +44,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002f6f44. */
 /* Supplied declaration required: partyDrawCategorySelectionIcon. */
@@ -98,7 +98,7 @@ void FUN_002f6048(int param_1)
   }
   temp_v11 = 0.26f;
   temp_v9 = temp_v11;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   VectorSignedToFloat((int)temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001634b4(param_1 + 0x5ac);
   temp_v3 = FUN_001834a4(0x1e,0x51);
@@ -111,7 +111,7 @@ void FUN_002f6048(int param_1)
   FUN_0018408c(puVar6,3);
   temp_v2 = FUN_001834a4(0x1e,0x55);
   temp_v3 = ((int)**(short **)(temp_v2 + 0xc) - (int)(puVar6 + temp_v8 + (int)temp_v0)) / 2;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v10 = (int)temp_v9;
   temp_v14 = param_1 + 0x638;
   temp_v6 = vec2GetXInt();

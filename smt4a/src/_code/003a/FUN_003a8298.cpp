@@ -1,67 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8298` (_code @ 0x3a8298, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: weight summation uses an incremented pointer and LDM rather than retail's indexed loads. */
+#include "gamedata/DataTable.h"
 
-extern "C" {
+extern "C" u32 randRange(u32 maximum);
 
-int dataTableGetEntries(...);
-
-extern unsigned int randRange(unsigned int);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-/* Supplied declaration required: dataTableGetEntries. */
-
-
-unsigned int FUN_003a8298(void)
-
+/* Choose a low-byte id using the upper twenty-four bits of each table word as its weight. */
+extern "C" u32 FUN_003a8298(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v1 = dataTableGet(5,7);
-  puVar4 = (unsigned int *)dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v1);
-  temp_v6 = 0;
-  if (temp_v2 != 0) {
-    temp_v7 = (temp_v2 & 1) != 0;
-    if (temp_v7) {
-      temp_v6 = *puVar4 >> 8;
+    u32 result = 0;
+    void *table = dataTableGet(5, 7);
+    const u32 *entries = static_cast<const u32 *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    u32 total = 0;
+    for (u32 index = 0; index < count; ++index) {
+        total += entries[index] >> 8;
     }
-    temp_v3 = (unsigned int)temp_v7;
-    temp_v5 = 0;
-    for (temp_v4 = temp_v2 >> 1; temp_v4 != 0; temp_v4 = temp_v4 - 1) {
-      puVar1 = puVar4 + temp_v3;
-      temp_v0 = temp_v3 + 1;
-      temp_v3 = temp_v3 + 2;
-      temp_v6 = temp_v6 + (*puVar1 >> 8);
-      temp_v5 = temp_v5 + (puVar4[temp_v0] >> 8);
+    entries = static_cast<const u32 *>(dataTableGetEntries(table));
+    u32 choice = randRange((total - 1) & 0xFFFF);
+    u32 accumulated = 0;
+    for (u32 index = 0; index < count; ++index, ++entries) {
+        accumulated += *entries >> 8;
+        if (choice < accumulated) {
+            result = *entries & 0xFF;
+            break;
+        }
     }
-    temp_v6 = temp_v6 + temp_v5;
-  }
-  puVar4 = (unsigned int *)dataTableGetEntries(temp_v1);
-  temp_v6 = randRange((temp_v6 - 1) & 0xffff);
-  temp_v4 = 0;
-  temp_v3 = 0;
-  if (temp_v3 < temp_v2) {
-    do {
-      temp_v4 = temp_v4 + (*puVar4 >> 8);
-      if (temp_v6 < temp_v4) {
-        return *puVar4 & 0xff;
-      }
-      temp_v3 = temp_v3 + 1;
-      puVar4 = puVar4 + 1;
-    } while (temp_v3 < temp_v2);
-  }
-  return 0;
+    return result;
 }
-
-} /* extern "C" */

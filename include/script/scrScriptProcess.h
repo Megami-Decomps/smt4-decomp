@@ -21,4 +21,12 @@ typedef struct ScriptResourceList {
     /* 0x08 */ ScriptResource *tail;
 } ScriptResourceList;
 
+/* Prefix used when a freshly created script is put into execution mode. */
+struct ScriptRunState {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ s32 mode;
+};
+typedef char ScriptRunStateModeOffsetCheck[
+    __INTADDR__(&((ScriptRunState *)0)->mode) == 0x108 ? 1 : -1];
+
 #endif

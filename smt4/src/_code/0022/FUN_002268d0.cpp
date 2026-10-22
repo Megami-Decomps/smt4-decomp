@@ -1,60 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002268d0` (_code @ 0x2268d0, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: context registers and duplicate-action kind/options load scheduling differ. */
+#include "battle/btlReflect.h"
 
 extern "C" {
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+s16 battleGetEntryHalfword(s32 entryIndex, u32 kind);
 
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-extern short battleGetEntryHalfword(int, unsigned int);
-
-
-int FUN_002268d0(short param_1,short param_2,unsigned int param_3,int param_4,unsigned int param_5,
-                unsigned int param_6,unsigned int param_7,unsigned char param_8,unsigned char param_9)
-
+// Queue a target action, advancing the entry sequence when a matching target is already queued.
+ReflectAction *FUN_002268d0(s32 actor, s32 secondary, u32 options, ReflectTarget *target,
+                            u32 parameter, u32 second, u32 value,
+                            u8 commandFlags, u8 targetFlags)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = 0;
-  temp_v4 = *(int *)(g_btlActionReflect + 8);
-  while (temp_v1 = temp_v4, temp_v1 != 0) {
-    temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
-    temp_v4 = *(int *)(temp_v1 + 0xc);
-    temp_v5 = temp_v3 == 1;
-    if (temp_v5) {
-      temp_v3 = *(unsigned int *)(temp_v1 + 8);
+    ReflectContext *context = g_btlActionReflect;
+    bool duplicate = false;
+    ReflectAction *previous = context->head;
+    while (previous != NULL) {
+        ReflectAction *next = previous->next;
+        if (previous->kind == 1 && previous->options == options &&
+            previous->target == (u32)target) {
+            duplicate = true;
+        }
+        previous = next;
     }
-    if ((temp_v5 && temp_v3 == param_3) && (*(int *)(temp_v1 + 0x14) == param_4)) {
-      temp_v0 = 1;
-    }
-  }
-  temp_v4 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,(int)param_2,param_3);
-  *(int *)(temp_v4 + 0x14) = param_4;
-  *(unsigned char *)(temp_v4 + 4) = 1;
-  *(unsigned int *)(temp_v4 + 0x28) = param_7;
-  *(unsigned int *)(temp_v4 + 0x4c) = param_5;
-  *(unsigned int *)(temp_v4 + 0x1c) = param_6;
-  *(unsigned char *)(temp_v4 + 0x22) = param_8;
-  *(unsigned char *)(temp_v4 + 0x44) = param_9;
-  if (!temp_v0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = battleGetEntryHalfword((int)*(short *)(param_4 + 0x62),1);
-    temp_v2 = temp_v2 - 1;
-  }
-  *(short *)(temp_v4 + 0x24) = temp_v2;
-  return temp_v4;
+    ReflectAction *action = btlQueueReflectAction(context, (s16)actor, (s16)secondary, options);
+    action->target = (u32)target;
+    action->kind = 1;
+    action->value = value;
+    action->parameter = parameter;
+    action->wordValues.second = second;
+    action->command.flags = commandFlags;
+    action->targetFlags.flags = targetFlags;
+    action->first = duplicate ? battleGetEntryHalfword(target->entryIndex, 1) - 1 : 0;
+    return action;
 }
-
-} /* extern "C" */
+}

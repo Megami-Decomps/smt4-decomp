@@ -1,57 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f757c` (_code @ 0x3f757c, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: text placement uses different saved registers and a tail-called speed reset. */
+#include "shard/S1ListPanel.h"
+
+struct RenderCtxA;
 
 extern "C" {
-
-int FUN_00162790(int, unsigned int, int, int);
-int efctSetSpeed(void);
-int FUN_0018408c(int, int);
-int FUN_001879d0(unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_9: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_9_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_001879d0. */
-
-
-void FUN_003f757c(unsigned int param_1,int param_2,int param_3,int param_4,int param_5,
-                 unsigned int param_6,unsigned int param_7,unsigned int param_8,int param_9)
-
-{
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  float temp_v2;
-  
-  temp_v1 = 0;
-  efctSetSpeed();
-  temp_v0 = FUN_001834a4(0x31,param_6);
-  if (param_9 != 0) {
-    temp_v1 = param_5;
-    FUN_0018408c(param_5,3);
-    temp_v1 = (**(short **)(temp_v0 + 0xc) - temp_v1) / 2;
-  }
-  temp_v2 = 0.26f;
-  FUN_001879d0(g_renderCtx);
-  temp_v1 = *(short *)(temp_v0 + 8) + param_2 + (int)temp_v2 + temp_v1;
-  VectorSignedToFloat(0xfb - param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0xffffffff,param_5,temp_v1);
-  efctSetSpeed();
-  return;
+extern RenderCtxA *g_renderCtx;
+void efctSetSpeed(f32);
+SpriteInfo *FUN_001834a4(u32, u32);
+s32 FUN_0018408c(u32, u32);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
+void FUN_00162790(u32, s32, u32, f32, f32, f32, f32, f32);
 }
 
-} /* extern "C" */
+extern "C" void FUN_003f757c(u32, s32 x, s32 y, s32 depth, u32 text,
+                             u32 spriteId, u32, u32, s32 centered, f32 speed)
+{
+    s32 alignment = 0;
+    efctSetSpeed(speed);
+    SpriteInfo *sprite = FUN_001834a4(49, spriteId);
+    if (centered != 0) {
+        alignment = (sprite->size[0] - FUN_0018408c(text, 3)) / 2;
+    }
+    s32 screenX = sprite->x + x + s32(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f)) + alignment;
+    FUN_00162790(3, -1, text, f32(screenX), f32(sprite->y + y),
+                 f32(251 - depth) * 0.00390625f, 0.0f, speed);
+    efctSetSpeed(1.0f);
+}

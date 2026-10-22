@@ -1,115 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b5d20` (_code @ 0x3b5d20, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "map/mapMain.h"
+#include "map/mapDepart.h"
 
 extern "C" {
-
-int FUN_00244ac8(void);
-int FUN_002747dc(void);
-int FUN_0029aa60(int);
-int FUN_002b7ce0(void);
-int FUN_002c670c(int);
-int FUN_002ddea0(void);
-int FUN_00311b74(void);
-int FUN_00313440(void);
-int FUN_00364740(unsigned int, unsigned int);
-int lmapGetSpawnIndex(void);
-int FUN_003cb744(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_mapIf; /* 0x58103c */
-extern int g_mapMain; /* 0x581274 */
-extern signed char DAT_005f1623; /* 0x5f1623 */
-
-/* Supplied declaration required: FUN_00244ac8. */
-/* Supplied declaration required: FUN_002747dc. */
-/* Supplied declaration required: FUN_0029aa60. */
-/* Supplied declaration required: FUN_002b7ce0. */
-/* Supplied declaration required: FUN_002c670c. */
-/* Supplied declaration required: FUN_002ddea0. */
-/* Supplied declaration required: FUN_00311b74. */
-/* Supplied declaration required: FUN_00313440. */
-/* Supplied declaration required: FUN_00364740. */
-/* Supplied declaration required: lmapGetSpawnIndex. */
-/* Supplied declaration required: FUN_003cb744. */
-
+extern MapMainA *g_mapMain;
+extern GameStateA g_gameState;
+s32 lmapGetSpawnIndex(void);
+void FUN_00244ac8(void);
+void FUN_002747dc(void);
+void FUN_00364740(s32 mapId, s32 areaId);
+void FUN_002c670c(s32 enabled);
+void FUN_002ddea0(void);
+void FUN_002b7ce0(void);
+void FUN_00313440(void);
+void FUN_003cb744(void);
+void FUN_00245d78(s32 enabled);
 
 void FUN_003b5d20(void)
-
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = g_mapMain;
-  if (DAT_005f1623 != '\0') {
-    temp_v2 = lmapGetSpawnIndex();
-    if (temp_v2 != 0) {
-      FUN_00244ac8();
-      FUN_002747dc();
-      temp_v3 = lmapGetSpawnIndex();
-      FUN_00364740(*(unsigned int *)(temp_v0 + 0x30),temp_v3);
-      FUN_002c670c(1);
+    MapMainA *main = g_mapMain;
+    if (g_gameState.progressEnabled) {
+        if (lmapGetSpawnIndex()) {
+            FUN_00244ac8();
+            FUN_002747dc();
+            s32 spawn = lmapGetSpawnIndex();
+            FUN_00364740(main->transition.mapId, spawn);
+            FUN_002c670c(1);
+            FUN_00245d78(1);
+            return;
+        }
+        FUN_00244ac8();
+        FUN_002747dc();
+        FUN_002c670c(1);
+        FUN_002ddea0();
+        FUN_002b7ce0();
+        FUN_00245d78(1);
+        return;
+    } else {
+        FUN_00244ac8();
+        s32 mapId = main->transition.mapId;
+        s32 areaId = main->transition.areaId;
+        FUN_002747dc();
+        FUN_00364740(mapId, areaId);
+        FUN_00313440();
+        FUN_002ddea0();
+        FUN_002b7ce0();
+        FUN_003cb744();
     }
-    else {
-      FUN_00244ac8();
-      FUN_002747dc();
-      FUN_002c670c(1);
-      FUN_002ddea0();
-      FUN_002b7ce0();
-    }
-  }
-  else {
-    FUN_00244ac8();
-    temp_v5 = *(unsigned int *)(temp_v0 + 0x30);
-    temp_v3 = *(unsigned int *)(temp_v0 + 0x34);
-    FUN_002747dc();
-    FUN_00364740(temp_v5,temp_v3);
-    FUN_00313440();
-    FUN_002ddea0();
-    FUN_002b7ce0();
-    FUN_003cb744();
-  }
-  temp_v0 = g_mapIf;
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v2 + 1;
-    temp_v2 = temp_v0 + temp_v2 * 0x194;
-    if (*(char *)(temp_v2 + 0x1dc) != '\0') {
-      *(unsigned int *)(temp_v2 + 0x1e4) = 1;
-    }
-    temp_v2 = temp_v1;
-  } while (temp_v1 < 0x80);
-  temp_v2 = 0;
-  do {
-    FUN_0029aa60(1);
-    FUN_00311b74();
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 3);
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v2 + 1;
-    temp_v4 = temp_v0 + temp_v2 * 0x194;
-    temp_v6 = *(char *)(temp_v4 + 0x1dc) != '\0';
-    temp_v2 = 0;
-    if (temp_v6) {
-      temp_v2 = *(int *)(temp_v4 + 0x220);
-    }
-    if (temp_v6 && 0 < temp_v2) {
-      *(unsigned int *)(temp_v4 + 0x220) = 0x10;
-    }
-    temp_v2 = temp_v1;
-  } while (temp_v1 < 0x80);
-  return;
+    FUN_00245d78(1);
 }
-
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_003c5de0(int, unsigned int, int, int, int);
 int VectorSignedToFloat(int, int);
 int __aeabi_idivmod(unsigned int);
@@ -22,7 +22,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003c5de0. */
 extern int FUN_004ab718(void);
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -64,7 +64,7 @@ void FUN_0041a834(int param_1,unsigned long long *param_2)
     efctSetSpeed();
     temp_v11 = *param_2;
     temp_v8 = 0.29f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v1 = *(int *)(param_1 + 0x38);
     temp_v3 = (int)temp_v8;
     temp_v2 = temp_v1;

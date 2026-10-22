@@ -1,61 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a37f0` (_code @ 0x3a37f0, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot restoration uses unsigned branches where retail uses signed comparisons. */
+/* Preserves valid active-slot ids while rebuilding the party and reactivates those slots. */
+#include "common.h"
+
+struct ActiveSlotView {
+    u8 unk000[0x12C];
+    u16 id;
+};
 
 extern "C" {
+void rt_aeabi_memclr(void *memory, u32 size);
+void FUN_003e48dc(s32 id);
+void FUN_003e4e4c(u32 mode);
+ActiveSlotView *FUN_003e503c(u16 slot);
+void gameFlagSetValue(u32 flag, u32 value);
+void *gameDataBlocksGetSaveData(void);
+void *saveSlotFindById(s16 id);
+u32 FUN_00187168(void *slot);
 
-int rt_aeabi_memclr(int, int);
-void FUN_003e48dc(unsigned int);
-int FUN_003e4e4c(int);
-int FUN_003e503c(void);
-int gameFlagSetValue(int, int);
-
-extern int gameDataBlocksGetSaveData(void);
-extern int saveSlotFindById(short);
-extern int FUN_00187168(void);
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_003e4e4c. */
-/* Supplied declaration required: FUN_003e503c. */
-/* Supplied declaration required: gameFlagSetValue. */
-
-
-unsigned int FUN_003a37f0(void)
-
+u32 FUN_003a37f0(void)
 {
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = gameDataBlocksGetSaveData();
-  rt_aeabi_memclr(temp_v1 + 0x29814,0x18);
-  temp_v5 = 0;
-  temp_v4 = 0;
-  do {
-    temp_v2 = temp_v4;
-    FUN_003e503c();
-    if ((temp_v2 != 0) && (temp_v3 = FUN_00187168(), temp_v3 != 0)) {
-      temp_v3 = temp_v5 * 2;
-      temp_v5 = temp_v5 + 1;
-      *(unsigned short *)(temp_v1 + temp_v3 + 0x29814) = *(unsigned short *)(temp_v2 + 300);
+    struct SavedPartyView {
+        u8 unk00000[0x29814];
+        u16 ids[12];
+    };
+    SavedPartyView *saved = (SavedPartyView *)gameDataBlocksGetSaveData();
+    rt_aeabi_memclr(saved->ids, sizeof(saved->ids));
+    u32 count = 0;
+    for (u32 index = 0; index < 12; ++index) {
+        ActiveSlotView *slot = FUN_003e503c((u16)index);
+        if (slot != NULL && FUN_00187168(slot)) {
+            saved->ids[count++] = slot->id;
+        }
     }
-    temp_v4 = temp_v4 + 1;
-  } while ((int)temp_v4 < 0xc);
-  FUN_003e4e4c(0);
-  temp_v5 = 0;
-  do {
-    temp_v0 = *(short *)(temp_v1 + temp_v5 * 2 + 0x29814);
-    if (((temp_v0 != 0) && (temp_v3 = saveSlotFindById(temp_v0), temp_v3 != 0)) &&
-       (temp_v3 = FUN_00187168(), temp_v3 != 0)) {
-      FUN_003e48dc(temp_v0);
+    FUN_003e4e4c(0);
+    for (u32 index = 0; index < 12; ++index) {
+        s16 id = (s16)saved->ids[index];
+        if (id != 0) {
+            void *slot = saveSlotFindById(id);
+            if (slot != NULL && FUN_00187168(slot)) {
+                FUN_003e48dc(id);
+            }
+        }
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0xc);
-  gameFlagSetValue(0x4f8,1);
-  return 1;
+    gameFlagSetValue(0x4F8, 1);
+    return 1;
 }
-
-} /* extern "C" */
+}

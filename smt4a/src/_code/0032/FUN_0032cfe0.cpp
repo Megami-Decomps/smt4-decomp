@@ -1,153 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032cfe0` (_code @ 0x32cfe0, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: record-table base loads and slot-record tail-call placement differ from retail. */
+#include "ui/ItemListSelection.h"
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
+
+struct ItemListDetailRecord {
+    u32 unk00;
+    u16 id;
+    u8 unk06[0x1a];
+};
+// The record ID and array lie beyond the shared selection-owner prefix.
+struct ItemListDetailOwnerView {
+    u8 unk000[0x20];
+    FlaggedValueHolder selection;
+    u8 unk094[0x7cc];
+    u8 useSlotRecord;
+    u8 detailKind;
+    u8 unk862[2];
+    ItemListDetailRecord records[1];
+};
+typedef char ItemListDetailLayoutCheck[sizeof(ItemListDetailRecord) == 0x20 &&
+    offsetof(ItemListDetailRecord, id) == 4 &&
+    offsetof(ItemListDetailOwnerView, selection) == 0x20 &&
+    offsetof(ItemListDetailOwnerView, useSlotRecord) == 0x860 &&
+    offsetof(ItemListDetailOwnerView, detailKind) == 0x861 &&
+    offsetof(ItemListDetailOwnerView, records) == 0x864 ? 1 : -1];
 
 extern "C" {
+s32 flaggedValueHolderGetTotal(FlaggedValueHolder *holder);
+SlotTableEntry *slotRecordFindById(u32 id);
+void FUN_0035ad50(u32 id, SlotTableEntry *record);
+u32 FUN_002a4b28(u16 id);
+void FUN_0032d0c8(u32 screen, u32 kind, u16 id, const SlotTableEntry *record);
 
-int textFormatBuffer(...);
-int FUN_00184310(void);
-int battleAttributeFormatName(unsigned char [140], int);
-int skillFormatTargetLabel(unsigned char [140], int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-int FUN_002ad414(int, unsigned int, unsigned int, unsigned char [140]);
-int FUN_002c0940(...);
-int FUN_003180c4(int, unsigned char [140]);
-int FUN_0032d0c8(...);
-int FUN_00359974(int, unsigned int, unsigned int, int);
-int FUN_0035ad50(int, unsigned char [144]);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_1_stack;
-
-extern unsigned char LAB_0032d2f4; /* 0x32d2f4 */
-extern unsigned char LAB_0032d2fc; /* 0x32d2fc */
-extern unsigned char LAB_0032d308; /* 0x32d308 */
-extern unsigned char LAB_0032d324; /* 0x32d324 */
-extern unsigned char LAB_0032d334; /* 0x32d334 */
-extern unsigned char LAB_0032d340; /* 0x32d340 */
-extern unsigned char LAB_0032d34c; /* 0x32d34c */
-extern unsigned char LAB_0032d358; /* 0x32d358 */
-extern unsigned char LAB_0032d364; /* 0x32d364 */
-extern unsigned char LAB_0032d370; /* 0x32d370 */
-extern unsigned char LAB_0032d37c; /* 0x32d37c */
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00184310. */
-extern unsigned int slotRecordFindById(unsigned short);
-/* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_002ad414. */
-/* Supplied declaration required: FUN_002c0940. */
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0035ad50. */
-extern int flaggedValueHolderGetTotal(int);
-
-
-void FUN_0032cfe0(int param_1)
-
+static inline u16 itemListGetSelectedDetailId(ItemListDetailOwnerView *work)
 {
-/* irregular: 11 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5 [144];
-  int uStack_b0;
-  unsigned int uStack_ac;
-  unsigned int temp_v6 [2];
-  unsigned char temp_v7 [140];
-  
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  temp_v1 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-  if (*(char *)(param_1 + 0x860) != '\0') {
-    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v1 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-    if (*(char *)(param_1 + 0x861) == '\x01') {
-      temp_v3 = slotRecordFindById(temp_v1);
-      temp_v2 = DAT_0057f0c8;
-      temp_v4 = (unsigned int)temp_v1;
-      FUN_00184310();
-      if (temp_v4 == 0) {
-        *(unsigned char *)(temp_v2 + 0x5ea) = 0;
-      }
-      else {
-        *(unsigned char *)(temp_v2 + 0x67c) = 1;
-        *(unsigned char *)(temp_v2 + 0x5ea) = 1;
-        temp_v0 = (*(unsigned short *)(temp_v4 + 10) & 0xff) >> 5;
-        if (temp_v0 == (*(unsigned short *)(temp_v4 + 10) & 0x7ff) >> 8) {
-          FUN_00359974(0x25,temp_v0,0xffffffff,0);
-        }
-        else {
-          FUN_002c0940(&uStack_b0);
-          FUN_002c0940(temp_v6,(*(unsigned short *)(temp_v4 + 10) & 0x7ff) >> 8);
-          textFormatBuffer(temp_v7,&LAB_0032d2f4,&uStack_b0,temp_v6);
-          FUN_003180c4(0x25,temp_v7);
-        }
-        battleAttributeFormatName(temp_v7,*(unsigned char *)(temp_v4 + 0xc));
-        FUN_003180c4(0x26,temp_v7);
-        skillFormatTargetLabel(temp_v7,(*(unsigned short *)(temp_v4 + 10) & 0x1f) >> 1);
-        FUN_003180c4(0x27,temp_v7);
-        if (*(char *)(temp_v4 + 0xe) == '\0') {
-          textFormatBuffer(temp_v7,&LAB_0032d2fc);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\x01') {
-          textFormatBuffer(temp_v7,&LAB_0032d308);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\x05') {
-          textFormatBuffer(temp_v7,&LAB_0032d324);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\x06') {
-          textFormatBuffer(temp_v7,&LAB_0032d334);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\a') {
-          textFormatBuffer(temp_v7,&LAB_0032d340);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\b') {
-          textFormatBuffer(temp_v7,&LAB_0032d34c);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\t') {
-          textFormatBuffer(temp_v7,&LAB_0032d358);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\v') {
-          textFormatBuffer(temp_v7,&LAB_0032d364);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\f') {
-          textFormatBuffer(temp_v7,&LAB_0032d370);
-        }
-        if (*(char *)(temp_v4 + 0xe) == '\r') {
-          textFormatBuffer(temp_v7,&LAB_0032d37c);
-        }
-        FUN_003180c4(0x28,temp_v7);
-        FUN_002ad414(0,temp_v3,(unsigned int)temp_v1,temp_v7);
-        FUN_003180c4(0x29,temp_v7);
-        uStack_ac = DAT_0057f0cc;
-        uStack_b0 = 3;
-        temp_v6[0] = 1;
-        asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v2 + 0x678),2,0xffffffff,0);
-      }
-      return;
-    }
-    FUN_0035ad50(temp_v1,temp_v5);
-  }
-  else {
-    FUN_0035ad50(temp_v1,temp_v5);
-    temp_v2 = FUN_002a4b28(temp_v1);
-    if (temp_v2 == 0) {
-      FUN_0032d0c8(0,2,temp_v1,temp_v5);
-      return;
-    }
-  }
-  FUN_0032d0c8(0,1,temp_v1,temp_v5);
-  return;
+    return work->records[flaggedValueHolderGetTotal(&work->selection)].id;
 }
 
-} /* extern "C" */
+void FUN_0032cfe0(ItemListSelectionOwner *owner)
+{
+    ItemListDetailOwnerView *work = (ItemListDetailOwnerView *)owner;
+    s16 id = (s16)itemListGetSelectedDetailId(work);
+    if (work->useSlotRecord) {
+        id = (s16)itemListGetSelectedDetailId(work);
+        if (work->detailKind == 1) {
+            SlotTableEntry *slot = slotRecordFindById((u16)id);
+            // Retail's corresponding tail call falls through into the adjacent renderer.
+            FUN_0032d0c8(0, 1, (u16)id, slot);
+        } else {
+            SlotTableEntry record;
+            FUN_0035ad50((u16)id, &record);
+            FUN_0032d0c8(0, 1, (u16)id, &record);
+        }
+    } else {
+        SlotTableEntry record;
+        FUN_0035ad50((u16)id, &record);
+        if (FUN_002a4b28((u16)id) == 0) {
+            FUN_0032d0c8(0, 2, (u16)id, &record);
+        } else {
+            FUN_0032d0c8(0, 1, (u16)id, &record);
+        }
+    }
+}
+}

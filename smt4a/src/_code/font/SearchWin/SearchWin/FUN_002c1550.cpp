@@ -1,74 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c1550` (_code @ 0x2c1550, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "font/SearchWin/SearchWin.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
+extern SearchWinWork* DAT_0057f584;
+u32 FUN_00162ea4(void);
+void jobStop(u32 job, u32 flags);
+void asdMemFree(void* memory);
+void uiSpriteSelectAnim(UiSpriteState* sprite, s32 animation);
+void sysPlayVoice(u32 id);
 
-int jobStop(unsigned int, int);
-int uiSpriteSelectAnim(unsigned int *, int);
-int asdMemFree(unsigned int *);
-int sysPlayVoice(int);
-
-extern unsigned int *DAT_0057f584; /* 0x57f584 */
-
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: sysPlayVoice. */
-
-
-unsigned int FUN_002c1550(void)
-
+// Start the close animation, or release a completed/cancelled search window.
+s32 FUN_002c1550(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = DAT_0057f584;
-  temp_v1 = 0;
-  if (DAT_0057f584 != (unsigned int *)0x0) {
-    temp_v0 = FUN_00162ea4();
-    puVar2 = DAT_0057f584;
-    if (temp_v0 != 0) {
-      jobStop(*DAT_0057f584,0);
-      asdMemFree(puVar2);
-      DAT_0057f584 = (unsigned int *)0x0;
-      return 1;
-    }
-    temp_v0 = puVar1[2];
-    if (temp_v0 != 3) {
-      if (puVar1[3] != 3) {
-        if (temp_v0 != 4) {
-          if (DAT_0057f584[2] == 2) {
-            DAT_0057f584[2] = 3;
-          }
-          else {
-            DAT_0057f584[3] = 3;
-          }
-          uiSpriteSelectAnim(puVar2 + 0xe,1);
-          sysPlayVoice(0x10000cf);
-          return 0;
+    // The shared byte padding begins at 0x15; inserting an aligned sprite there would move it.
+    struct WindowSpriteView {
+        u8 unk00[0x38];
+        UiSpriteState sprite;
+    };
+    typedef char WindowSpriteOffset[offsetof(WindowSpriteView, sprite) == 0x38 ? 1 : -1];
+    s32 closed = 0;
+    SearchWinWork* window = DAT_0057f584;
+    if (window != NULL) {
+        if (FUN_00162ea4() != 0) {
+            SearchWinWork* closing = DAT_0057f584;
+            jobStop(closing->job, 0);
+            asdMemFree(closing);
+            DAT_0057f584 = NULL;
+            return 1;
         }
-      }
-      else if (temp_v0 != 4) {
-        return 0;
-      }
-      jobStop(*DAT_0057f584,0);
-      asdMemFree(puVar2);
-      temp_v1 = 1;
-      DAT_0057f584 = (unsigned int *)0x0;
+        if (window->state != 3) {
+            if (window->secondaryState != 3 && window->state != 4) {
+                SearchWinWork* current = DAT_0057f584;
+                if (current->state == 2) {
+                    current->state = 3;
+                } else {
+                    current->secondaryState = 3;
+                }
+                WindowSpriteView* view = reinterpret_cast<WindowSpriteView*>(current);
+                uiSpriteSelectAnim(&view->sprite, 1);
+                sysPlayVoice(0x010000CF);
+            } else if (window->state == 4) {
+                SearchWinWork* closing = DAT_0057f584;
+                jobStop(closing->job, 0);
+                asdMemFree(closing);
+                closed = 1;
+                DAT_0057f584 = NULL;
+            }
+        }
+    } else if (FUN_00162ea4() != 0) {
+        closed = 1;
     }
-  }
-  else {
-    temp_v0 = FUN_00162ea4();
-    if (temp_v0 != 0) {
-      temp_v1 = 1;
-    }
-  }
-  return temp_v1;
+    return closed;
 }
-
-} /* extern "C" */
+}

@@ -5338,3 +5338,51 @@
 0041539c _ZN9Obj42080c25refreshTextureCoordinatesEv inferred Override of Obj420794 slot +10 refreshes the quad texture-coordinate rectangle.
 0041da04 _ZN9Obj42099025refreshTextureCoordinatesEv inferred Override of Obj420794 slot +10 refreshes quad texture-coordinate rectangles.
 00473270 _ZN9Obj4221a410initializeEPKv inferred same table +08 override as smt4
+00427a10 nnAsyncMapOperationResult inferred [med] Maps operation states and the stored completion result into nn::Result values.
+001879d0 renderCtxCalculateStereoParallax inferred [high] Transforms and clamps depth, queries stereo parallax, and scales it for the active eye.
+003938ac motionPlayerUpdateAndApply inferred [high] Updates playback, applies source and holder transforms, updates sound speed, and synchronizes the frame.
+003a679c itemGetCategorySortOrder inferred [high] Maps the table04 item category to its ordering rank, with the empty-ID sentinel.
+002b52a4 btlEffectCreateTasks inferred [high] Creates the battle-effect owner, parented worker jobs, and filter-draw work.
+00231f50 itemCompareCategoryThenValue inferred [high] Compares item category priority, then the item sort value.
+004929d8 dataLookupDisplayName inferred [high] Looks up a display name with overrides, sentinel records and fallback text.
+003cc808 effectEditorEditSelectedRecord inferred [high] Matching twin of the selected-record scratch editor ported to IV.
+003ae61c navigationSetOrQueueRequest inferred [high] Applies a navigation request now, or saves it until the navigation screen opens.
+003b1408 btlScriptGetBestEntryCategory inferred [high] Reports the table-four category of the highest-valued battle-list entry.
+0028a230 menuAreModeTexturesLoaded inferred [high] Tests whether the textures required by the current screen mode have loaded.
+0046e97c packageFindIndexedRecord inferred [high] Resolves an indexed record across loaded type-40 package tables.
+0046dfb4 packageFindIndexedExtendedRecord inferred [high] Resolves an indexed record across loaded type-38 package tables.
+0039cfd4 btlScriptTestCandidateEncodedKind inferred [high] Tests whether the requested candidate's indexed encoded value is of kind one.
+003335ac shopRequestSequence inferred [high] Requests the shop sequence using script arguments or a queued shop selection.
+00138b18 modelStartWorkerProcesses inferred [high] Allocates and starts the model calculator and its two render passes.
+004082f8 gameTestProgressFlag inferred [high] Tests one of 110 persistent progress bits
+0047c81c aocUpdateRequestTransition inferred [high] Submits a request and completes after AOC operation flags clear
+004f9b94 resourceTestPendingRecordsReady inferred [med] Rejects marked records without a resource
+0013a078 asdGxSubmitFrame inferred [high] Flushes and submits GPU command lists then flips frame buffers
+0031f4fc statusAcquireBustUpResources inferred [high] Acquires shared portrait textures and allocates zeroed lookup buffers
+004f7628 btlResetMatchingBoundObjects inferred [high] Resets matching bound objects and restores visibility from roster flags
+003a903c btlSetReserveParameterById inferred [high] Updates the word parameter for eligible reserve combatants with the requested id.
+00301ed4 btlCreateGameOverJobs inferred [high] Creates calculation and dual-screen draw jobs and allocates game-over state.
+00350ee0 effMenuAppendNamedEntry inferred [high] Allocates a named menu entry and links it to the list tail.
+0046c1b4 dataFindGroupedSectionRecord inferred [high] Resolves an index across enabled groups' kind-thirty-seven table sections.
+00312c90 gfxDestroyModelGroups inferred [high] Twin model-group teardown and activation reset.
+00328078 mapFindContainingRegionResult inferred [high] Finds the spatial table region containing the requested point.
+00291644 gfxResolveTimedTextureFrame inferred [high] Twin timed texture-frame resolver.
+002ce57c gauntletAppCompareCategoryAndValueDescending inferred [high] Compares gauntlet app entries by category priority and descending value.
+003d2588 sWinRequestMappedTexture inferred [high] Resolves the window texture identifier and starts its AOC or main-heap texture request.
+00352d30 mapProbePositionDownward inferred [high] Probe above the position and step the collision query downward.
+002dae68 mapEaseSceneHeading inferred [high] Ease the scene heading toward the requested direction.
+00137350 ifTouchAcquireUser inferred [high] Initialize touch state on the first user and increment its user count.
+003e4f04 partyRefreshOrInsertSlot inferred [high] Refresh an existing party record or insert it into the first empty slot.
+003b0e6c btlScriptTestEligibleMemberPredicate inferred [high] Test the supplied predicate on eligible combatants with the requested id.
+0020eb44 mapPlayActorKindSound inferred [high] Play the actor-kind sound above its position and retain the looping variant's handle.
+004118d0 btlSpawnStageHeightEffects inferred [high] Spawn three stage-height-relative effects and their associated effect resource.
+003adc58 uiPlayGatedActionFeedback inferred [high] Play blocked, unavailable or successful action feedback using game mode and story flags.
+0046dd38 packageFindIndexedTripleRecord inferred [high] Finds a triple-word record by accumulated index across loaded hash-marked package tables.
+0025d4a0 cecUpdateEditMode inferred [high] Dispatch Cec edit mode, apply mode transitions and update the UI value.
+004e62b4 battleApplyInteractionSelection inferred [high] Select an interaction value, update the unit counter and apply the selected battle action.
+003fce8c btlEnsureEnemyDrawResources inferred [high] Allocates mode-specific enemy-draw resources on first use and initializes them.
+0036ef60 effEditorCreateJobs inferred [high] Creates effEditorCalc plus upper/lower 2D and left/right 3D jobs.
+0014f308 gfxDrawSolidRectangle inferred [high] Twin normalizes packed ARGB channels and draws a rectangle with identical corner colors.
+00168770 renderPopStateStacks inferred [high] Pops the three render-context state stacks.
+0031fd08 selectionGetValidatedField inferred [high] Validates the selection and dispatches the requested record field.
+0046af60 eventUpdatePickedObjectEndScript inferred [high] Runs the picked-object end script and advances or resets its end state.

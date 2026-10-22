@@ -76,7 +76,7 @@ int FUN_002726b8(...);
 int FUN_002919b4(...);
 int FUN_00291ce8(...);
 int btlCameraCreate(...);
-int FUN_002b52a4(...);
+int btlEffectCreateTasks(...);
 int btlTalkBustUpCreate(void);
 int sysMemClear(...);
 int FUN_00301ad0(...);
@@ -202,7 +202,7 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002b4f28. */
 /* Supplied declaration required: btlCameraCreate. */
 /* Supplied declaration required: FUN_002b50e4. */
-/* Supplied declaration required: FUN_002b52a4. */
+/* Supplied declaration required: btlEffectCreateTasks. */
 /* Supplied declaration required: btlResultTaskStart. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: FUN_002cf698. */
@@ -417,7 +417,7 @@ void FUN_002ba998(unsigned int param_1)
     FUN_004a8edc(g_btlUiBlock,0);
     FUN_002726b8(temp_v7);
     FUN_00291ce8(temp_v7);
-    FUN_002b52a4(temp_v7);
+    btlEffectCreateTasks(temp_v7);
     FUN_00301ad0(temp_v7);
     FUN_0027249c(temp_v7);
     btlPartnerAttackInitialize(temp_v7);

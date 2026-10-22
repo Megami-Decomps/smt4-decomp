@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0026faa4(void);
-int FUN_0029c2cc(...);
+void FUN_0029c2cc(...);
 int sndObjectForwardField8(...);
 
 int FUN_0019213c(void);

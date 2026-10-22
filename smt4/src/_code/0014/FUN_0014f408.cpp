@@ -1,79 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014f408` (_code @ 0x14f408, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Huffman loop-counter lowering, packed-output registers, and child-address arithmetic differ. */
+#include "common.h"
 
-extern "C" {
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_2_stack;
-
-
-void FUN_0014f408(unsigned int *param_1,unsigned int *param_2)
-
+extern "C" void FUN_0014f408(u32 *input, u32 *output)
 {
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned char *pbVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *unaff_r5;
-  unsigned int temp_v5;
-  unsigned char *pbVar9;
-  int temp_v6;
-  int temp_v7;
-  unsigned char *temp_v8;
-  
-  temp_v4 = 0;
-  temp_v7 = 0;
-  temp_v3 = *param_1 >> 8;
-  temp_v1 = *param_1;
-  if (temp_v3 != 0) {
-    unaff_r5 = param_1 + 1;
-  }
-  temp_v5 = (unsigned char)temp_v1 & 0xf;
-  if (temp_v3 == 0) {
-    unaff_r5 = param_1 + 2;
-    temp_v3 = param_1[1];
-  }
-  pbVar9 = (unsigned char *)((int)unaff_r5 + 1);
-  temp_v8 = (unsigned char *)((int)unaff_r5 + (unsigned int)(unsigned char)*unaff_r5 * 2 + 2);
-  if ((int)temp_v3 < 1) {
-    return;
-  }
-  pbVar5 = pbVar9;
-  do {
-    temp_v6 = 1;
-    temp_v2 = *(int *)temp_v8;
-    temp_v8 = temp_v8 + 4;
-    puVar4 = param_2;
-    do {
-      temp_v0 = *pbVar5;
-      pbVar5 = (unsigned char *)(-(temp_v2 >> 0x1f) + ((temp_v0 & 0x3f) + ((unsigned int)pbVar5 >> 1) + 1) * 2);
-      param_2 = puVar4;
-      if ((((unsigned int)temp_v0 << -(temp_v2 >> 0x1f)) & 0x80) != 0) {
-        temp_v7 = temp_v7 + 1;
-        temp_v4 = (temp_v4 >> temp_v5) | ((unsigned int)*pbVar5 << ((0x20 - temp_v5) & 0xff));
-        pbVar5 = pbVar9;
-        if (temp_v7 == ((unsigned char)temp_v1 & 7) + 4) {
-          temp_v7 = 0;
-          temp_v3 = temp_v3 - 4;
-          param_2 = puVar4 + 1;
-          *puVar4 = temp_v4;
-        }
-      }
-      if ((int)temp_v3 < 1) {
-        return;
-      }
-      temp_v6 = temp_v6 + 1;
-      temp_v2 = temp_v2 << 1;
-      puVar4 = param_2;
-    } while (temp_v6 < 0x21);
-  } while( 1 );
-}
+    u32 remaining = input[0] >> 8;
+    const u32 symbolWidth = reinterpret_cast<const u8 *>(input)[0] & 15u;
+    const u32 symbolsPerWord = (symbolWidth & 7u) + 4u;
+    const u8 *tree;
 
-} /* extern "C" */
+    if (remaining != 0) {
+        tree = reinterpret_cast<const u8 *>(input + 1);
+    } else {
+        remaining = input[1];
+        tree = reinterpret_cast<const u8 *>(input + 2);
+    }
+
+    const u8 *root = tree + 1;
+    const u8 *node = root;
+    const u8 *bitstream = tree + static_cast<u32>(tree[0]) * 2u + 2u;
+    u32 packedWord = 0;
+    u32 symbolCount = 0;
+
+    if (static_cast<s32>(remaining) <= 0)
+        return;
+
+    for (;;) {
+        u32 bits = *reinterpret_cast<const u32 *>(bitstream);
+        bitstream += 4;
+
+        for (u32 bitIndex = 0; bitIndex < 32; ++bitIndex) {
+            const u32 branch = bits >> 31;
+            const u32 descriptor = *node;
+
+            // Retail rounds the node's absolute address down to an even byte.
+            node = reinterpret_cast<const u8 *>(
+                (reinterpret_cast<u32>(node) & ~1u) +
+                ((descriptor & 63u) + 1u) * 2u + branch);
+
+            if (((descriptor << branch) & 128u) != 0) {
+                const u32 symbol = *node;
+                ++symbolCount;
+
+                // An ARM register left shift by 32 produces zero.
+                packedWord = (packedWord >> symbolWidth) |
+                    (symbol << (32u - symbolWidth));
+                node = root;
+
+                if (symbolCount == symbolsPerWord) {
+                    symbolCount = 0;
+                    remaining -= 4u;
+                    *output++ = packedWord;
+                }
+            }
+
+            if (static_cast<s32>(remaining) <= 0)
+                return;
+
+            bits <<= 1;
+        }
+    }
+}

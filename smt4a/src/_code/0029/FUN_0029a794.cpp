@@ -8,7 +8,7 @@ int FUN_0014e188(int, int, int, int, int);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int);
 int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(int, int);
-int FUN_00352d30(float *);
+int mapProbePositionDownward(float *);
 int FUN_00352eec(void);
 int paramsClearPacket(int);
 
@@ -48,7 +48,7 @@ extern unsigned short DAT_005f1e1a; /* 0x5f1e1a */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_00352d30. */
+/* Supplied declaration required: mapProbePositionDownward. */
 /* Supplied declaration required: FUN_00352eec. */
 /* Supplied declaration required: paramsClearPacket. */
 
@@ -117,7 +117,7 @@ void FUN_0029a794(int param_1,int param_2)
   *(unsigned int *)(param_1 + 0x4bc) = 0;
   *(unsigned int *)(param_1 + 0x4c0) = 0;
   *(unsigned int *)(param_1 + 0x4c4) = 0;
-  FUN_00352d30(&DAT_005f16c0);
+  mapProbePositionDownward(&DAT_005f16c0);
   if (param_2 != 0) {
     *(short *)(temp_v0 + 0x2c) = (short)(int)DAT_005f16bc;
     *(short *)(temp_v0 + 0x2e) = (short)g_gameState;

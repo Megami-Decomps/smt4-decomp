@@ -177,7 +177,13 @@ typedef struct StateAtF4 {
     /* 0x54 */ void *buf54;
     /* 0x58 */ void *unk58;
     /* 0x5C */ u32 unk5C;
-    /* 0x60 */ u8 unk60[0x94];
+    union {
+        /* 0x60 */ u8 unk60[0x94];
+        struct {
+            s32 (*callbacks[36])(struct StateAtF4 *state);
+            s32 previousMode;
+        } dispatch;
+    };
     /* 0xF4 */ s32 mode;
     /* 0xF8 */ s32 phase;
     /* 0x0FC */ u8 unk0FC[0x12];
@@ -185,11 +191,19 @@ typedef struct StateAtF4 {
     /* 0x10F */ u8 unk10F;
     /* 0x110 */ u8 unk110[0x3C];
     /* 0x14C */ u32 unk14C;
-    /* 0x150 */ u8 unk150[0x1C];
+    union {
+        /* 0x150 */ u8 unk150[0x1C];
+        /* 0x150 */ s32 frameCounter;
+    };
     /* 0x16C */ u8 unk16C[0xE];
     /* 0x17A */ u8 unk17A[0xF];
     /* 0x189 */ u8 unk189;
 } StateAtF4;
+typedef char StateAtF4DispatchOffsetCheck[
+    offsetof(StateAtF4, dispatch.callbacks) == 0x60 &&
+    offsetof(StateAtF4, dispatch.previousMode) == 0xF0 &&
+    offsetof(StateAtF4, frameCounter) == 0x150 &&
+    sizeof(StateAtF4) == 0x18C ? 1 : -1];
 
 typedef struct FlagAt4 {
     /* 0x00 */ u8 unk00[4];

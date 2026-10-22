@@ -28,7 +28,7 @@ int sysShutdownAndClearBusy(...);
 int asdSoundShutdown(...);
 int FUN_001052d8(...);
 int FUN_00105394(...);
-int FUN_001058a4(...);
+int asdGxSubmitFrame(...);
 int FUN_00105970(...);
 int asdGxResumeAndApplyPreset(...);
 int asdGxPresetsGetDepth(...);
@@ -48,12 +48,12 @@ int VectorSignedToFloat(...);
 int software_interrupt(...);
 
 int FUN_001028bc(...);
-int FUN_00102a10(...);
+int ifTouchAcquire(...);
 int gameDataAllocBlocks(...);
 int FUN_00102e34(...);
 int FUN_001036fc(...);
 int FUN_00103f74(...);
-int FUN_00104074(...);
+int modelStartProcessGroup(...);
 int FUN_001043c8(...);
 int FUN_00104e28(...);
 int FUN_00104e44(...);
@@ -272,7 +272,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00102438. */
 /* Supplied declaration required: FUN_0010250c. */
 /* Supplied declaration required: FUN_001028bc. */
-/* Supplied declaration required: FUN_00102a10. */
+/* Supplied declaration required: ifTouchAcquire. */
 /* Supplied declaration required: FUN_00102b10. */
 /* Supplied declaration required: gameDataAllocBlocks. */
 /* Supplied declaration required: FUN_00102e34. */
@@ -302,7 +302,7 @@ extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00103fec. */
 /* Supplied declaration required: asdPrimSwapBuffers. */
 /* Supplied declaration required: FUN_0010402c. */
-/* Supplied declaration required: FUN_00104074. */
+/* Supplied declaration required: modelStartProcessGroup. */
 extern int FUN_001041c8(void);
 extern int appletGetBusyFlag(void);
 /* Supplied declaration required: sysShutdownAndClearBusy. */
@@ -327,7 +327,7 @@ extern unsigned long long appletProcessHomeButton(void);
 extern unsigned long long FUN_00105478(void);
 /* Supplied declaration required: gfxSetupResGraphicsFile. */
 /* Supplied declaration required: FUN_001054bc. */
-/* Supplied declaration required: FUN_001058a4. */
+/* Supplied declaration required: asdGxSubmitFrame. */
 /* Supplied declaration required: FUN_00105948. */
 /* Supplied declaration required: FUN_00105970. */
 /* Supplied declaration required: FUN_00105a10. */
@@ -576,7 +576,7 @@ void FUN_00101308(void)
   FUN_00103fec();
   asdTMTexTableLoadList(&LAB_001017ec);
   FUN_00103cec();
-  FUN_00102a10();
+  ifTouchAcquire();
   FUN_001028bc();
   FUN_00105948();
   FUN_001071a0();
@@ -691,7 +691,7 @@ void FUN_00101308(void)
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101d6c,0x160,0);
   FUN_00105cac(3);
-  FUN_00104074(0x67,0x68,0xe3,0);
+  modelStartProcessGroup(0x67,0x68,0xe3,0);
   FUN_001043c8(1);
   FUN_00102e34(0);
   temp_v22 = 0.25f;
@@ -765,7 +765,7 @@ LAB_00101b80:
             temp_v4 = FUN_00106708();
           }
           asdPrimSwapBuffers(temp_v4);
-          FUN_001058a4(iRam00446dcc >= 2);
+          asdGxSubmitFrame(iRam00446dcc >= 2);
           temp_v24 = jyoucyuGetTableEntry(1);
           temp_v4 = (unsigned int)temp_v24;
           temp_v15 = temp_v4 == 0;

@@ -13,7 +13,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int jobGetScalarValue(void);
 int VectorSignedToFloat(...);
 
@@ -40,7 +40,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
 extern short FUN_0019e52c(unsigned short);
 
@@ -63,7 +63,7 @@ void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int p
   unsigned char temp_v9 [84];
   
   temp_v7 = 0.26f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   jobGetScalarValue();
   efctSetSpeed();
   temp_v2 = FUN_0019e52c(*(unsigned short *)(param_2 + 300));
@@ -71,7 +71,7 @@ void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int p
   temp_v3 = FUN_00180114();
   textFormatBuffer(temp_v8,&LAB_0037243c,temp_v3);
   temp_v6 = temp_v7;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v3 = 0xbba;
   if (param_3 == 0) {
     temp_v3 = 0xbb9;
@@ -81,7 +81,7 @@ void FUN_003721b0(unsigned int param_1,int param_2,int param_3,int param_4,int p
   temp_v4 = *(short *)(temp_v4 + 10) + param_5;
   FUN_001835b4(2,0x14,0xc12,temp_v5,temp_v4,0xbf);
   FUN_001835b4(2,0x14,temp_v3,temp_v5,temp_v4,0xbf);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v4 = FUN_001834a4(0x14,param_3 + 0xbda);
   temp_v5 = param_4 + (int)temp_v6;
   FUN_0018152c((int)temp_v2,*(short *)(temp_v4 + 8) + temp_v5,*(short *)(temp_v4 + 10) + param_5,0xc4,0);

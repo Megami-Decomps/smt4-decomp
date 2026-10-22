@@ -1,68 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036fd64` (_code @ 0x36fd64, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: equipment category selection and lookup loop branches are shared differently. */
+/* Finds an equipment record's index in the table section selected by its category. */
+#include "gamedata/EquipmentTable.h"
 
-extern "C" {
-
-extern unsigned int dataTableGet(unsigned int, unsigned char);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-unsigned int FUN_0036fd64(int param_1,unsigned int param_2)
-
+extern "C" u32 FUN_0036fd64(s32 category, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v6 = 0;
-  if (param_1 == 5) {
-    temp_v6 = 2;
-  }
-  else if (param_1 < 5) {
-    if (param_1 != 3) {
-      temp_v6 = param_1 == 4;
-    }
-  }
-  else if (param_1 == 0x5c) {
-    temp_v6 = 4;
-  }
-  else if (param_1 == 0x5d) {
-    temp_v6 = 3;
-  }
-  temp_v0 = dataTableGet(10,temp_v6);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v1 + temp_v4 * 0x68 + 8) == param_2) {
-          return temp_v4;
+    u8 section = 0;
+    if (category == 5) {
+        section = 2;
+    } else if (category < 5) {
+        if (category != 3) {
+            section = category == 4;
         }
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < (int)temp_v3);
+    } else if (category == 92) {
+        section = 4;
+    } else if (category == 93) {
+        section = 3;
     }
-  }
-  while( 1 ) {
-    if (temp_v2 <= temp_v3) {
-      return 0;
+    void *table = dataTableGet(10, section);
+    EquipmentTableRecord *entries = (EquipmentTableRecord *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    for (u32 i = 0; i < count; ++i) {
+        if (entries[i].id == id) {
+            return i;
+        }
     }
-    temp_v5 = temp_v1 + temp_v3 * 0x68;
-    if (*(unsigned short *)(temp_v5 + 8) == param_2) break;
-    if (*(unsigned short *)(temp_v5 + 0x70) == param_2) {
-      return temp_v3 + 1;
-    }
-    temp_v3 = temp_v3 + 2;
-  }
-  return temp_v3;
+    return 0;
 }
-
-} /* extern "C" */

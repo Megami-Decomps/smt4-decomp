@@ -3,7 +3,7 @@
 extern "C" {
 extern MemoryDebugState g_allocationAddressRanges;
 s32 padButtonIsPressed(u32 button);
-void FUN_0014f308(s32 first, s32 second, s32 third, s32 fourth, u32 value);
+void gfxDrawSolidRectangle(s32 first, s32 second, s32 third, s32 fourth, u32 value);
 void FUN_001522a0(s32 index, u32 value);
 u32 FUN_0014e444(s32 mode, DebugLabelCallback label, DebugDetailCallback detail);
 
@@ -14,7 +14,7 @@ u32 memoryDebugRefresh()
         MemoryDebugSettings* settings = g_allocationAddressRanges.settings;
         settings->limit = settings->limit == 0x08800000 ? 0x14000000 : 0x08800000;
     }
-    FUN_0014e444(0, FUN_001522a0, FUN_0014f308);
+    FUN_0014e444(0, FUN_001522a0, gfxDrawSolidRectangle);
     return 0;
 }
 }

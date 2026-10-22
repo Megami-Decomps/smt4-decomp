@@ -1,95 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002072f0` (_code @ 0x2072f0, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail repeats fallback record lookups through comparator stages that this source expresses as separate helpers. */
+/* Orders valid unit slots by demon priority/race, slot rank, then descending demon ID. */
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
+GameUnitSortRecord *gameGetUnitRecord(s32 index);
+s32 devilSortCompareUnitRankRaceId(const s32 *left, const s32 *right);
 
-int gameGetUnitRecord(...);
-int devilGetRecord(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: gameGetUnitRecord. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_002072f0(int *param_1,int *param_2)
-
+static inline s32 compareRaceThenRank(const s32 *left, const s32 *right)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  if (*param_1 < 0) {
-    if (*param_2 < 0) {
-      return 0;
-    }
-  }
-  else {
-    if (*param_2 < 0) {
-      return -1;
-    }
-    temp_v0 = gameGetUnitRecord(*param_1);
-    temp_v1 = gameGetUnitRecord(*param_2);
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
-    devilGetRecord();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-    devilGetRecord();
-    temp_v0 = (unsigned int)*(unsigned char *)(temp_v3 + 5) - (unsigned int)*(unsigned char *)(temp_v2 + 5);
-    if (temp_v0 != 0) {
-      return temp_v0;
-    }
-    if (-1 < *param_1) {
-      if (*param_2 < 0) {
-        return -1;
-      }
-      temp_v0 = gameGetUnitRecord();
-      temp_v1 = gameGetUnitRecord(*param_2);
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
-      devilGetRecord();
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-      devilGetRecord();
-      temp_v0 = (unsigned int)*(unsigned char *)(temp_v3 + 2) - (unsigned int)*(unsigned char *)(temp_v2 + 2);
-      if (temp_v0 != 0) {
-        return temp_v0;
-      }
-      temp_v0 = 0;
-      if (*param_1 < 0) {
-        if (-1 < *param_2) {
-          temp_v0 = 1;
+    s32 result;
+    if (*left < 0) {
+        result = *right < 0 ? 0 : 1;
+    } else if (*right < 0) {
+        result = -1;
+    } else {
+        GameUnitSortRecord *first = gameGetUnitRecord(*left);
+        GameUnitSortRecord *second = gameGetUnitRecord(*right);
+        DevilSortRecord *firstDemon = devilGetRecord(first->id);
+        DevilSortRecord *secondDemon = devilGetRecord(second->id);
+        result = secondDemon->race - firstDemon->race;
+        if (result == 0) {
+            return devilSortCompareUnitRankRaceId(left, right);
         }
-      }
-      else if (*param_2 < 0) {
-        temp_v0 = -1;
-      }
-      else {
-        temp_v1 = gameGetUnitRecord(*param_1);
-        temp_v4 = gameGetUnitRecord(*param_2);
-        temp_v0 = (unsigned int)*(unsigned char *)(temp_v1 + 0x48) - (unsigned int)*(unsigned char *)(temp_v4 + 0x48);
-        if (temp_v0 == 0) {
-          temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-          devilGetRecord();
-          temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
-          devilGetRecord();
-          temp_v0 = (unsigned int)*(unsigned char *)(temp_v3 + 2) - (unsigned int)*(unsigned char *)(temp_v2 + 2);
-          if (temp_v0 == 0) {
-            return (unsigned int)*(unsigned short *)(temp_v4 + 0x46) - (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-          }
-        }
-      }
-      return temp_v0;
     }
-    if (*param_2 < 0) {
-      return 0;
-    }
-  }
-  return 1;
+    return result;
 }
 
-} /* extern "C" */
+s32 FUN_002072f0(const s32 *left, const s32 *right)
+{
+    s32 order = 0;
+    if (*left < 0) {
+        if (*right >= 0) {
+            order = 1;
+        }
+    } else if (*right < 0) {
+        order = -1;
+    } else {
+        /* The secondary priority byte is past the shared demon sort prefix. */
+        struct DevilPriorityView {
+            DevilSortRecord header;
+            u8 unk04;
+            u8 priority;
+        };
+        GameUnitSortRecord *first = gameGetUnitRecord(*left);
+        GameUnitSortRecord *second = gameGetUnitRecord(*right);
+        DevilPriorityView *firstDemon = (DevilPriorityView *)devilGetRecord(first->id);
+        DevilPriorityView *secondDemon = (DevilPriorityView *)devilGetRecord(second->id);
+        order = (s32)secondDemon->priority - firstDemon->priority;
+        if (order == 0) {
+            return compareRaceThenRank(left, right);
+        }
+    }
+    return order;
+}
+}

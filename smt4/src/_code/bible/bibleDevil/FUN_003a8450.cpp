@@ -10,8 +10,8 @@ int FUN_00233240(...);
 int FUN_00233818(int);
 int ifTouchRegionClearAll(unsigned int);
 int messageMainSetTargetFlags(...);
-int FUN_0026c57c(void);
-int FUN_00295660(int, int [33]);
+int uniteLoadPreviewRoomModel(void);
+int textEncodeFontSlot(int, int [33]);
 int scrScriptProcessStartEntry(...);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(...);
@@ -44,11 +44,11 @@ extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
 extern int inputIsQuestCancelPressed(void);
-/* Supplied declaration required: FUN_0026c57c. */
+/* Supplied declaration required: uniteLoadPreviewRoomModel. */
 extern int gameGetNavigationState(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -62,7 +62,7 @@ extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003a7ec8. */
@@ -129,10 +129,10 @@ void FUN_003a8450(int param_1)
       temp_v2 = (unsigned int)temp_v0;
       FUN_002bd06c(temp_v2);
       libc_strcpy(temp_v7,temp_v2);
-      FUN_00295660(8,temp_v7);
-      temp_v4 = FUN_002bce30(temp_v0,1);
+      textEncodeFontSlot(8,temp_v7);
+      temp_v4 = demonGetRaceLabel(temp_v0,1);
       libc_strcpy(temp_v7,temp_v4);
-      FUN_00295660(0x10,temp_v7);
+      textEncodeFontSlot(0x10,temp_v7);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),0);
       *(unsigned int *)(param_1 + 0x14) = 3;
       *(unsigned int *)(param_1 + 0x18) = 0;
@@ -193,7 +193,7 @@ void FUN_003a8450(int param_1)
   *(unsigned int *)(param_1 + 0x14) = 0xb;
   *(unsigned int *)(param_1 + 0x18) = 0;
   FUN_00232848();
-  FUN_0026c57c();
+  uniteLoadPreviewRoomModel();
   return;
 }
 

@@ -15,7 +15,7 @@ int FUN_001bc124(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_00246014(void);
 int mapIfOverlayRelease(void);
-int FUN_002dae68(void);
+int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
 int mapIfReleaseSlot3(void);
@@ -55,7 +55,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00246014. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfOverlayRelease. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
@@ -90,7 +90,7 @@ void FUN_00366e24(void)
   
   temp_v0 = soundVolumeSettingGet();
   if (*(int *)(g_lmapScene + 4) < 10) {
-    FUN_002dae68();
+    mapEaseSceneHeading();
     temp_v2 = g_lmapScene;
     *(float *)(g_lmapScene + 0x1c) =
          *(float *)(g_lmapScene + 0x1c) +

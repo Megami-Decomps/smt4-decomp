@@ -3,7 +3,9 @@
 #define MAP_LMAPMAIN_H
 
 #include "common.h"
+#include "map/VectorPairTransition.h"
 #include <stddef.h>
+#include "map/mapDepart.h"
 
 /* The field map's global state (Apocalypse). Only the fields the readable code touches are named. */
 typedef struct LmapMain {
@@ -91,13 +93,36 @@ typedef struct LmapMainStateA {
 
 /* Another map block (Apocalypse), reached through the word after DAT_005806a0. */
 typedef struct LmapExtraA {
-    /* 0x000 */ u8 unk000[0xB0];
+    union {
+        /* 0x000 */ u8 unk000[0xB0];
+        struct {
+            /* 0x000 */ u8 unk000BeforeUp[0x20];
+            /* 0x020 */ MapVector up;
+            /* 0x02C */ u8 unk02C[0xC];
+            /* 0x038 */ MapVector eye;
+            /* 0x044 */ MapVector target;
+            /* 0x050 */ MapVector savedEye;
+            /* 0x05C */ MapVector savedTarget;
+            /* 0x068 */ u8 unk068[0x38];
+            /* 0x0A0 */ f32 parameterA0;
+            /* 0x0A4 */ f32 parameterA4;
+            /* 0x0A8 */ u8 enabled;
+            /* 0x0A9 */ u8 unk0A9[3];
+            /* 0x0AC */ u32 state;
+        } camera;
+    };
     /* 0x0B0 */ s32 unkB0;
     /* 0x0B4 */ u8 unk0B4[0x14];
     /* 0x0C8 */ s32 unkC8;
     /* 0x0CC */ u8 unk0CC[0x140];
     /* 0x20C */ s32 unk20C;
-    /* 0x210 */ u8 unk210[0x98];
+    union {
+        /* 0x210 */ u8 unk210[0x98];
+        struct {
+            u8 unk210[0x14];
+            /* 0x224 */ VectorPairTransitionA parameters;
+        } cameraTransition;
+    };
     /* 0x2A8 */ u32 unk2A8;
     /* 0x2AC */ s32 priority;
     /* 0x2B0 */ s16 unk2B0;
@@ -112,6 +137,7 @@ typedef struct LmapExtraA {
 } LmapExtraA;
 
 typedef char LmapExtraASizeCheck[sizeof(LmapExtraA) == 0x308 ? 1 : -1];
+typedef char LmapExtraATransitionOffset[offsetof(LmapExtraA, cameraTransition.parameters) == 0x224 ? 1 : -1];
 
 typedef struct LmapExtraGlobalsA {
     /* 0x00 */ u32 unk00;
@@ -188,5 +214,18 @@ typedef char LmapMainStateASizeCheck[sizeof(LmapMainStateA) == 0xF8 ? 1 : -1];
 typedef char LmapSceneTransformSizeCheck[sizeof(LmapSceneTransform) == 0x38 ? 1 : -1];
 typedef char LmapSceneASizeCheck[sizeof(LmapSceneA) == 0x27C ? 1 : -1];
 typedef char LmapExtraASizeCheck[sizeof(LmapExtraA) == 0x308 ? 1 : -1];
+
+typedef char LmapExtraACameraOffsetsCheck[
+    offsetof(LmapExtraA, camera.up) == 0x20 &&
+    offsetof(LmapExtraA, camera.eye) == 0x38 &&
+    offsetof(LmapExtraA, camera.target) == 0x44 &&
+    offsetof(LmapExtraA, camera.savedEye) == 0x50 &&
+    offsetof(LmapExtraA, camera.savedTarget) == 0x5C &&
+    offsetof(LmapExtraA, camera.parameterA0) == 0xA0 &&
+    offsetof(LmapExtraA, camera.parameterA4) == 0xA4 &&
+    offsetof(LmapExtraA, camera.enabled) == 0xA8 &&
+    offsetof(LmapExtraA, camera.state) == 0xAC &&
+    offsetof(LmapExtraA, unkB0) == 0xB0 &&
+    sizeof(LmapExtraA) == 0x308 ? 1 : -1];
 
 #endif

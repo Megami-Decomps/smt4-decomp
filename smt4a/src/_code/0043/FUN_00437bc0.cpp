@@ -1,65 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00437bc0` (_code @ 0x437bc0, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: link/node register sharing, endpoint branch placement, and call padding differ. */
+#include "shard/W6_W6Match6_IntervalList.h"
+#include <new>
 
 extern "C" {
+void FUN_004387bc(void* allocator, RangeNode* node, u32 count);
+RangeNode* FUN_004387f0(void* allocator, u32 count);
 
-int FUN_004387bc(int, int *, int);
-int FUN_004387f0(int *, int);
-
-/* Supplied declaration required: FUN_004387bc. */
-/* Supplied declaration required: FUN_004387f0. */
-
-
-void FUN_00437bc0(int *param_1,unsigned int param_2)
-
+// Reserve one id by trimming, unlinking, or splitting an inclusive free interval.
+u32 FUN_00437bc0(RangeSet* ranges, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  int *piVar5;
-  
-  piVar3 = (int *)param_1[1];
-  while( 1 ) {
-    if (piVar3 == param_1) {
-      return;
+    for (RangeLink* link = ranges->next; link != ranges; link = link->next) {
+        RangeNode* node = static_cast<RangeNode*>(link);
+        u16 first = node->range.first;
+        u16 last = node->range.last;
+        if (first == value) {
+            if (last == value) {
+                node->unlink();
+                FUN_004387bc(ranges->allocator, node, 1);
+                return 1;
+            }
+            node->range.first = first + 1;
+            return 1;
+        }
+        if (last == value) {
+            node->range.last = last - 1;
+            return 1;
+        }
+        if (first > value || value > last) {
+            continue;
+        }
+        node->range.last = value - 1;
+        RangeLink* following = node->next;
+        RangeNode* inserted = FUN_004387f0(ranges->allocator, 1);
+        if (inserted == NULL) {
+            return 0;
+        }
+        new (inserted) RangeNode(following);
+        inserted->range.first = value + 1;
+        inserted->range.last = last;
+        return 1;
     }
-    temp_v0 = *(unsigned short *)(piVar3 + 2);
-    temp_v1 = *(unsigned short *)((int)piVar3 + 10);
-    temp_v2 = (unsigned int)temp_v1;
-    if (temp_v0 == param_2) {
-      if (temp_v2 == param_2) {
-        *(int *)(*piVar3 + 4) = piVar3[1];
-        *(int *)piVar3[1] = *piVar3;
-        FUN_004387bc(param_1[2],piVar3,1);
-        return;
-      }
-      *(unsigned short *)(piVar3 + 2) = temp_v0 + 1;
-      return;
-    }
-    if (temp_v2 == param_2) {
-      *(unsigned short *)((int)piVar3 + 10) = temp_v1 - 1;
-      return;
-    }
-    if ((temp_v0 <= param_2) && (param_2 <= temp_v2)) break;
-    piVar3 = (int *)piVar3[1];
-  }
-  *(short *)((int)piVar3 + 10) = (short)param_2 - 1;
-  piVar5 = (int *)piVar3[1];
-  piVar3 = (int *)param_1[2];
-  FUN_004387f0(piVar3,1);
-  if (piVar3 == (int *)0x0) {
-    return;
-  }
-  *piVar3 = *piVar5;
-  piVar3[1] = (int)piVar5;
-  *piVar5 = (int)piVar3;
-  *(int **)(*piVar3 + 4) = piVar3;
-  *(short *)(piVar3 + 2) = (short)param_2 + 1;
-  *(unsigned short *)((int)piVar3 + 10) = temp_v1;
-  return;
+    return 1;
 }
-
-} /* extern "C" */
+}

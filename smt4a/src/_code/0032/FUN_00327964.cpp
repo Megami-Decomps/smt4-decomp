@@ -15,7 +15,7 @@ int FUN_002342b8(void);
 int FUN_0025ef68(int, int, int);
 int distSpatial(void);
 int FUN_002b7f58(void);
-int FUN_002dae68(void);
+int mapEaseSceneHeading(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
 int mapSetSceneState(unsigned int);
@@ -55,7 +55,7 @@ extern int padButtonIsPressed(unsigned int);
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b7f58. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapSetSceneState. */
@@ -116,7 +116,7 @@ void FUN_00327964(void)
   uStack_1c = (unsigned int)((unsigned long long)in_d11 >> 0x20);
   temp_v9 = *(unsigned long long *)(g_lmapScene + 0x28);
   temp_v11 = *(unsigned int *)(g_lmapScene + 0x30);
-  FUN_002dae68();
+  mapEaseSceneHeading();
   temp_v3 = g_lmapScene;
   temp_v7 = *(float *)(g_lmapScene + 0x1c) +
           (*(float *)(g_lmapScene + 0x28) - *(float *)(g_lmapScene + 0x1c)) * 0.33333334f;

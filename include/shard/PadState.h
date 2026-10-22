@@ -3,6 +3,7 @@
 #define SHARD_PADSTATE_H
 
 #include "common.h"
+#include <stddef.h>
 
 typedef struct PadState {
     /* 0x00 */ u8 unk00[0x2];
@@ -21,10 +22,22 @@ typedef struct PadState {
     /* 0x38 */ u32 unk38;
     /* 0x3C */ u32 unk3C;
     /* 0x40 */ u32 unk40;
-    /* 0x44 */ u8 unk44[0x2E];
+    union {
+        /* 0x44 */ u8 unk44[0x2E];
+        /* 0x44 */ u8 inventoryCounts[8];
+    };
     /* 0x72 */ u16 unk72;
     /* 0x74 */ s16 x;
     /* 0x76 */ u8 unk76;
 } PadState;
+typedef char PadStateInventoryOffsetCheck[
+    offsetof(PadState, unk34) == 0x34 &&
+    offsetof(PadState, inventoryCounts) == 0x44 && sizeof(PadState) == 0x78 ? 1 : -1];
+
+/* These four words are also the eight halfword inventory identifiers. */
+static __inline u16 *padStateInventoryIds(PadState *state)
+{
+    return reinterpret_cast<u16 *>(&state->unk34);
+}
 
 #endif

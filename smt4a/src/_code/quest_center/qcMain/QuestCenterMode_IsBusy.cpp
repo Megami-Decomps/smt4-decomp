@@ -1,48 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `QuestCenterMode_IsBusy` (_code @ 0x1633d8, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: shutdown entry load is scheduled before the done-byte store. */
+/* Polls quest-center shutdown, releasing its work once the task has finished. */
+#include "quest_center/qcMain.h"
 
 extern "C" {
 
-int FUN_001919a4(void);
-int asdMemFree(unsigned int *);
-int asdOperatorDelete(unsigned int);
+int FUN_001919a4(QuestEntry *entry);
+int asdMemFree(void *ptr);
+int asdOperatorDelete(void *ptr);
+int jobFind(u32 task);
 
-extern unsigned char g_qcMain; /* 0x588c2c */
+extern QcGlobalsA g_qcMain;
 
-extern int jobFind(unsigned int);
-/* Supplied declaration required: FUN_001919a4. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdOperatorDelete. */
-
-
-unsigned int QuestCenterMode_IsBusy(void)
-
+u32 QuestCenterMode_IsBusy(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4));
-  if ((*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)) != (unsigned int *)0x0) {
-    temp_v0 = jobFind(*(*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)));
-    puVar2 = (*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4));
-    if ((temp_v0 != 0) || (*(char *)(puVar1 + 6) == '\0')) {
-      return 1;
+    QcWork *work = g_qcMain.work;
+    if (work != NULL) {
+        if (jobFind(work->task) != 0 || work->done == 0) {
+            return 1;
+        }
+        work = g_qcMain.work;
+        if (work != NULL) {
+            work->done = 1;
+            if (work->entry != NULL) {
+                FUN_001919a4(work->entry);
+                asdOperatorDelete(work->entry);
+                work->entry = NULL;
+            }
+            asdMemFree(g_qcMain.work);
+            g_qcMain.work = NULL;
+        }
     }
-    if ((*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)) != (unsigned int *)0x0) {
-      *(unsigned char *)((*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)) + 6) = 1;
-      if (puVar2[7] != 0) {
-        FUN_001919a4();
-        asdOperatorDelete(puVar2[7]);
-        puVar2[7] = 0;
-      }
-      asdMemFree((*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)));
-      (*(unsigned int * *)((unsigned char *)&g_qcMain + 0x4)) = (unsigned int *)0x0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+}

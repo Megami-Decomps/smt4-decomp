@@ -9,7 +9,7 @@ int FUN_002b6c34(...);
 int FUN_002b6db0(...);
 int FUN_002b6dd8(...);
 int cameraSetViewMatrix(int, unsigned char [84]);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
@@ -69,7 +69,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002b6db0. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: cameraSetViewMatrix. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -134,7 +134,7 @@ unsigned int FUN_0011a434(void)
       *(unsigned char *)(temp_v2 + 0x1264) = 0;
     }
     temp_v5 = 0.29f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     efctSetSpeed();
     temp_v8 = *(unsigned int *)(temp_v0 + 0x60);
     temp_v7 = 0x3f800000;

@@ -1,67 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f55c8` (_code @ 0x4f55c8, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 65 vs built 66 rows; resource-array pointer arithmetic and teardown store scheduling differ. */
+#include "common.h"
 
 extern "C" {
+void asdMemFree(void *);
+void sysMemClear(void *, u32);
+void workOwnerRelease(void *);
+void btlCameraFinishTransition(void *);
+void obj4FSlots28Reset(void *);
+void panelReset(void *);
+void FUN_004f8fa0(void *);
 
-int asdMemFree(void);
-int sysMemClear(int, int);
-int workOwnerRelease(int);
-int btlCameraFinishTransition(int);
-int obj4FSlots28Reset(int);
-int panelReset(void);
-int FUN_004f8fa0(int);
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: workOwnerRelease. */
-/* Supplied declaration required: btlCameraFinishTransition. */
-/* Supplied declaration required: obj4FSlots28Reset. */
-/* Supplied declaration required: panelReset. */
-/* Supplied declaration required: FUN_004f8fa0. */
-
-
-void FUN_004f55c8(int param_1)
-
+void FUN_004f55c8(void *camera)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  *(unsigned int *)(param_1 + 0x33bc) = 0;
-  panelReset();
-  btlCameraFinishTransition(param_1);
-  FUN_004f8fa0(param_1);
-  obj4FSlots28Reset(param_1);
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x3c;
-    *(unsigned int *)(temp_v0 + 0x139c) = 0;
-    *(unsigned int *)(temp_v0 + 0x1398) = 0xffffffff;
-    workOwnerRelease(temp_v0 + 0x13a0);
-    temp_v1 = temp_v1 + 1;
-    *(unsigned int *)(temp_v0 + 0x13d0) = 0;
-  } while (temp_v1 < 0x32);
-  *(unsigned int *)(param_1 + 0x339c) = 0;
-  *(unsigned char *)(param_1 + 0x33ac) = 0xc;
-  *(unsigned int *)(param_1 + 0x1f54) = 0;
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0x1f58) = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x8c;
-    *(unsigned char *)(temp_v0 + 0x281c) = 0xff;
-    sysMemClear(temp_v0 + 0x2824,0x80);
-    if (*(int *)(temp_v0 + 0x2820) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v0 + 0x2820) = 0;
+    struct CameraResourceSlot {
+        s32 id;
+        u32 state;
+        u8 owner[0x30];
+        u32 pending;
+    };
+    struct CameraPanelSlot {
+        u8 kind;
+        u8 unk01[3];
+        void *allocation;
+        u8 data[0x80];
+        u8 active;
+        u8 unk89[3];
+    };
+    // Resource arrays and the final scale lie beyond the shared camera prefix.
+    struct CameraCleanupView {
+        u8 unk0000[0x1398];
+        CameraResourceSlot resources[50];
+        u8 unk1F50[4];
+        u32 active;
+        u32 count;
+        u8 unk1F5C[0x8C0];
+        CameraPanelSlot panels[11];
+        u8 unk2E20[0x57C];
+        u32 flags;
+        u8 unk33A0[0xC];
+        u8 mode;
+        u8 unk33AD[0xF];
+        u32 pending;
+        u8 unk33C0[0x1C8];
+        u32 anchor;
+        u8 unk358C[0x66E4];
+        f32 scale;
+    };
+    CameraCleanupView *state = static_cast<CameraCleanupView *>(camera);
+    state->pending = 0;
+    panelReset(camera);
+    btlCameraFinishTransition(camera);
+    FUN_004f8fa0(camera);
+    obj4FSlots28Reset(camera);
+    for (s32 index = 0; index < 50; ++index) {
+        CameraResourceSlot *slot = &state->resources[index];
+        slot->state = 0;
+        slot->id = -1;
+        workOwnerRelease(slot->owner);
+        slot->pending = 0;
     }
-    temp_v1 = temp_v1 + 1;
-    *(unsigned char *)(temp_v0 + 0x28a4) = 0;
-  } while (temp_v1 < 0xb);
-  *(unsigned int *)(param_1 + 0x339c) = *(unsigned int *)(param_1 + 0x339c) | 0x100;
-  *(unsigned int *)(param_1 + 0x3588) = 0;
-  *(unsigned int *)(param_1 + 0x9c70) = 0x3f800000;
-  return;
+    state->flags = 0;
+    state->mode = 12;
+    state->active = 0;
+    state->count = 0;
+    for (s32 index = 0; index < 11; ++index) {
+        CameraPanelSlot *slot = &state->panels[index];
+        slot->kind = 0xFF;
+        sysMemClear(slot->data, sizeof(slot->data));
+        if (slot->allocation != NULL) {
+            asdMemFree(slot->allocation);
+            slot->allocation = NULL;
+        }
+        slot->active = 0;
+    }
+    state->flags |= 0x100;
+    state->anchor = 0;
+    state->scale = 1.0f;
 }
-
-} /* extern "C" */
+}

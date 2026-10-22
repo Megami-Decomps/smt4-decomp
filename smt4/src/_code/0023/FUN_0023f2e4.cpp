@@ -1,60 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f2e4` (_code @ 0x23f2e4, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 54 vs built 55 rows; model-slot pointer addressing and destruction branch layout differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
+void asdMdlManagerMarkDestroy(void *);
+void asdLoadFileAsyncSimple(const char *, void **, s32);
+s32 libc_strcmp(const char *, const char *);
+char *strncpy(char *, const char *, u32);
 
-int asdMdlManagerMarkDestroy(void);
-int asdLoadFileAsyncSimple(unsigned int, int, int);
-int libc_strcmp(int, unsigned int);
-int strncpy(int, unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: libc_strcmp. */
-
-
-void FUN_0023f2e4(int param_1,int param_2,unsigned int param_3,unsigned short param_4)
-
+void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  
-  temp_v1 = param_1 + param_2 * 0x50;
-  *(unsigned short *)(temp_v1 + 0x14) = param_4;
-  if (*(int *)(temp_v1 + 0x18) != 0) {
-    temp_v0 = temp_v1 + 0x20;
-    libc_strcmp(temp_v0,param_3);
-    if (temp_v0 == 0) {
-      return;
+    struct ModelSlot {
+        u32 state;
+        u16 id;
+        u16 unk06;
+        AsdMdlObject *model;
+        void *request;
+        char name[0x40];
+    };
+    struct ModelSlotsView {
+        u32 unk00;
+        u32 blocked;
+        u32 asyncEnabled;
+        u32 unk0C;
+        ModelSlot slots[1];
+    };
+    struct ModelVisibilityView {
+        u8 unk000[0x1F6];
+        u8 visible;
+    };
+    // The visibility link lies immediately beyond the shared model-node prefix.
+    struct ModelNodeVisibilityView {
+        AsdMdlNode node;
+        ModelVisibilityView *visibility;
+    };
+    ModelSlotsView *state = static_cast<ModelSlotsView *>(owner);
+    ModelSlot *slot = &state->slots[index];
+    slot->id = id;
+    if (slot->model != NULL) {
+        if (libc_strcmp(slot->name, name) == 0)
+            return;
+        if (slot->model != NULL) {
+            slot->state = 2;
+            slot->model->flags |= 2;
+            ModelNodeVisibilityView *node = reinterpret_cast<ModelNodeVisibilityView *>(slot->model->node);
+            node->visibility->visible = 0;
+            if (node->node.unk0c >= 0) {
+                asdMdlManagerMarkDestroy(slot->model->node);
+                return;
+            }
+        }
+    } else {
+        if (state->blocked == 0 && state->asyncEnabled != 0) {
+            asdLoadFileAsyncSimple(name, &slot->request, 1);
+            slot->state = 4;
+            return;
+        }
+        slot->state = 5;
     }
-    if (*(int *)(temp_v1 + 0x18) != 0) {
-      *(unsigned int *)(temp_v1 + 0x10) = 2;
-      puVar2 = *(unsigned int **)(temp_v1 + 0x18);
-      *puVar2 = *puVar2 | 2;
-      *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
-      if (-1 < *(int *)(*(int *)(*(int *)(temp_v1 + 0x18) + 8) + 0xc)) {
-        asdMdlManagerMarkDestroy();
-      }
-    }
-  }
-  else {
-    if ((*(int *)(param_1 + 4) == 0) && (*(int *)(param_1 + 8) != 0)) {
-      asdLoadFileAsyncSimple(param_3,temp_v1 + 0x1c,1);
-      *(unsigned int *)(temp_v1 + 0x10) = 4;
-      return;
-    }
-    *(unsigned int *)(temp_v1 + 0x10) = 5;
-  }
-  strncpy(temp_v1 + 0x20,param_3,0x40);
-  return;
+    strncpy(slot->name, name, sizeof(slot->name));
 }
-
-} /* extern "C" */
+}

@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int skinObjectUpdateMatrices(...);
 int FUN_001834a4(int, int);
 int FUN_001834e4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_001b4a00(float *, float *);
 int mathMatrixTranslateLocal(float *, float *, float *);
 int FUN_001f3eec(void);
@@ -83,7 +83,7 @@ extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -92,7 +92,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834e4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_001b4a00. */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -165,7 +165,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
         temp_v13 = *(float *)(temp_v2 + 0x20);
       }
       temp_v8 = *(float *)(temp_v2 + 0x18);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v3 = (int)temp_v8;
       if (*(int *)(temp_v2 + 0x4c) == 0) {
         if (*(char *)(temp_v2 + 0x88) != '\0') {
@@ -265,7 +265,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
                                               *(int *)(temp_v2 + 0x10) + param_2,
                                               (unsigned char)(temp_v7 >> 0x16) & 3);
           FUN_00164b5c(2,0x27,1,(int)(temp_v13 - *(float *)(temp_v2 + 0x98)));
-          FUN_00168770();
+          renderPopStateStacks();
           temp_v3 = g_renderCtx;
           if (temp_v1) {
             piVar7 = (int *)(g_renderCtx + 0x1318);

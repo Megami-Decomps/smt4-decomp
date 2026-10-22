@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_0020eb44(char *, int);
+int mapPlayActorKindSound(char *, int);
 int distSpatial(void);
 int FUN_0033abb4(void);
 int mathPositionHeadingDegrees(void);
@@ -55,7 +55,7 @@ extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_0020eb44. */
+/* Supplied declaration required: mapPlayActorKindSound. */
 extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_0033abb4. */
@@ -249,7 +249,7 @@ LAB_0033baac:
               else {
                 DAT_005f18e8 = *(unsigned int *)(temp_v6 + 0xa4);
               }
-              FUN_0020eb44(pcVar7,2);
+              mapPlayActorKindSound(pcVar7,2);
               DAT_005f1acc = *(unsigned int *)(pcVar7 + 4);
               return *(unsigned int *)(pcVar7 + 0x70);
             }

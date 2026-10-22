@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_0018408c(unsigned char *, int);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_003f6cc0(...);
 int FUN_003f707c(int, int, int, int, int, int, int, int);
 int FUN_003f757c(...);
@@ -37,7 +37,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003f6cc0. */
 /* Supplied declaration required: FUN_003f707c. */
 /* Supplied declaration required: FUN_003f757c. */
@@ -77,7 +77,7 @@ void FUN_003f78f8(int param_1,int param_2,int param_3)
   temp_v3 = 0.26f;
   puVar5 = temp_v6;
   temp_v2 = temp_v3;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   efctSetSpeed();
   temp_v0 = FUN_001834a4(0x31,0xf1);
   FUN_0018408c(puVar5,3);
@@ -87,7 +87,7 @@ void FUN_003f78f8(int param_1,int param_2,int param_3)
   FUN_00162790(3,0xff,puVar5,temp_v1);
   FUN_003f757c(temp_v7,param_2,param_3,0xd8,temp_v4,0xf6,0xf5,0,1);
   FUN_003f6cc0(temp_v7,param_2,param_3,0xd8,0xb,0x106);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v0 = FUN_001834a4(0x31,0xfb);
   temp_v1 = (int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2;
   VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

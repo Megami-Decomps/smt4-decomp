@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(unsigned char [104], unsigned char *, unsigned int);
 int effBlockCopyDataB(unsigned int, int *, int);
 int nodeListFree(unsigned int *);
-int FUN_00350ee0(unsigned int *, unsigned char [104], int, unsigned int, int);
+int effMenuAppendNamedEntry(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_00381874(unsigned int *);
 int effMenuCreate(unsigned int *, unsigned int);
 int handleHolderFree(unsigned int *);
@@ -34,7 +34,7 @@ extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
 /* Supplied declaration required: effBlockCopyDataB. */
 extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: nodeListFree. */
-/* Supplied declaration required: FUN_00350ee0. */
+/* Supplied declaration required: effMenuAppendNamedEntry. */
 /* Supplied declaration required: FUN_00381874. */
 /* Supplied declaration required: effMenuCreate. */
 /* Supplied declaration required: handleHolderFree. */
@@ -79,7 +79,7 @@ unsigned char * FUN_003c8878(unsigned int param_1)
       temp_v2 = 0;
       do {
         textFormatBuffer(temp_v7,&LAB_003c8a1c,temp_v2);
-        FUN_00350ee0(DAT_0059dc1c,temp_v7,8,temp_v2,0);
+        effMenuAppendNamedEntry(DAT_0059dc1c,temp_v7,8,temp_v2,0);
         temp_v2 = temp_v2 + 1;
         param_1 = temp_v1;
       } while (temp_v2 < 0x16);

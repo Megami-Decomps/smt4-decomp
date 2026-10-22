@@ -12,7 +12,7 @@ int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_00183bb0(void);
 int libc_strcpy(...);
-int FUN_00328078(...);
+int mapFindContainingRegionResult(...);
 int FUN_003849cc(unsigned int, unsigned int, int, unsigned char [132], unsigned int);
 int FUN_00384cf4(...);
 int listGetAdjacentEntryId(...);
@@ -60,7 +60,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_00325064(void);
-/* Supplied declaration required: FUN_00328078. */
+/* Supplied declaration required: mapFindContainingRegionResult. */
 extern unsigned int mapRegionLookupValue(int);
 extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_003849cc. */
@@ -168,7 +168,7 @@ void FUN_0048a5e4(int param_1)
       if (temp_v5 != 0) {
         temp_v5 = FUN_00384cf4(temp_v5,temp_v4);
         if (temp_v5 != 0) {
-          FUN_00328078(temp_v3,temp_v2);
+          mapFindContainingRegionResult(temp_v3,temp_v2);
           temp_v4 = temp_v3;
         }
         else {

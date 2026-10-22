@@ -9,7 +9,7 @@ int vec2GetXInt(int);
 int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_003f5b14(...);
 int FUN_003f5d94(int, int, int);
 int FUN_003f6e24(int, int, int);
@@ -30,7 +30,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003f5b14. */
 /* Supplied declaration required: FUN_003f5d94. */
 /* Supplied declaration required: FUN_003f6e24. */
@@ -58,7 +58,7 @@ void FUN_003f82b8(int param_1)
     vec2GetXInt(param_1 + 0x540);
     vec2GetYInt(param_1 + 0x540);
     temp_v5 = 0.26f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v0 = temp_v0 + (int)temp_v5;
     efctSetSpeed();
     FUN_001835b4(2,0x31,0,temp_v0,temp_v1,0x8d);
@@ -76,7 +76,7 @@ void FUN_003f82b8(int param_1)
   case 10:
   case 0xb:
     temp_v5 = 0.26f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     FUN_003f5b14(param_1,temp_v0,temp_v1,0xe2,0xe5);
     temp_v3 = 0;
     do {

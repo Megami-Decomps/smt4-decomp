@@ -1,58 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00349cdc` (_code @ 0x349cdc, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: header stores do not combine into STRD and cached-count register allocation differs. */
+/* Emits a selected cached graphics-command record, generating its words on first use. */
+#include "gfx/CachedCommands.h"
 
 extern "C" {
+extern u8 DAT_00490e3e;
+void FUN_0023ae1c(u32 *destination, u32 parameter, u32 command);
+u32 *FUN_0023bba0(CachedCommandWords *commands, u32 *words);
+void FUN_0023bb00(CachedCommandWords *commands, u32 *destination, const void *trailer);
+void rt_memcpy_w(void *destination, const void *source, u32 bytes);
 
-int FUN_0023ae1c(unsigned int *, unsigned int, int);
-int FUN_0023bb00(int *, unsigned int *, int);
-int FUN_0023bba0(int *, int);
-int rt_memcpy_w(unsigned int *, int, int);
-
-typedef struct fn_00349cdc_arg2 fn_00349cdc_arg2;
-struct fn_00349cdc_arg2 {
-    undefined4 field_0x0; /* +0x0 */
-    undefined4 field_0x4; /* +0x4 */
-    byte field_0x8; /* +0x8 */
-};
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern unsigned char DAT_00490e3e; /* 0x490e3e */
-
-/* Supplied declaration required: FUN_0023ae1c. */
-/* Supplied declaration required: FUN_0023bb00. */
-/* Supplied declaration required: FUN_0023bba0. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00349cdc(int param_1,unsigned int *param_2,fn_00349cdc_arg2 *param_3,unsigned int param_4)
-
+void FUN_00349cdc(CachedCommandTable *table, u32 *destination, u32 index, u32 parameter)
 {
-/* irregular: 4 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  
-  temp_v0 = *(int *)(*(int *)(param_1 + 8) + (int)param_3 * 4);
-  if (temp_v0 != 0) {
-    *param_2 = DAT_00490e3e | 0x80000000;
-    param_2[1] = 0xf02c0;
-    FUN_0023ae1c(param_2 + 2,param_4,0xbf02c1);
-    piVar3 = (int *)(temp_v0 + 0x10);
-    if (*piVar3 == 0) {
-      piVar1 = piVar3;
-      FUN_0023bba0(piVar3,temp_v0 + 0x14);
-      *piVar3 = ((int)piVar1 + (-4 - (int)piVar3)) >> 2;
+    CachedCommandRecord *record = table->records[index];
+    if (record != NULL) {
+        const void *trailer = record->trailer;
+        destination[0] = 0x80000000u | DAT_00490e3e;
+        destination[1] = 0xF02C0;
+        destination += 2;
+        FUN_0023ae1c(destination, parameter, 0xBF02C1);
+        CachedCommandWords *commands = &record->commands;
+        destination += 14;
+        if (commands->count == 0) {
+            u32 *end = FUN_0023bba0(commands, commands->words);
+            commands->count = end - commands->words;
+        }
+        rt_memcpy_w(destination, commands->words, commands->count * sizeof(u32));
+        FUN_0023bb00(commands, destination + commands->count, trailer);
     }
-    rt_memcpy_w(param_2 + 0x10,temp_v0 + 0x14,*piVar3 << 2);
-    FUN_0023bb00(piVar3,param_2 + 0x10 + *piVar3,temp_v0 + 0x7a0);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

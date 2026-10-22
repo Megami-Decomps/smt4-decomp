@@ -25,7 +25,7 @@ s32 FUN_001692ac(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void efctSetSpeed(f32);
 void FUN_001835b4(u32, u32, s32, s32, s32, s32);
-void FUN_001879d0(RenderCtxA *, f32);
+void renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 
 u8 smokeFadeDrawCallback()
 {
@@ -44,7 +44,7 @@ u8 smokeFadeDrawCallback()
     context = g_renderCtx;
     s32 blend = packNibblesAndByte(6, 1, 0);
     renderStackPush(&context->stackB, blend);
-    FUN_001879d0(g_renderCtx, 0.25f);
+    renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
     s32 secondImage = g_smokeFadeImages[1].index * 1000;
     efctSetSpeed(state->secondOpacity);
     FUN_001835b4(2, g_smokeFadeImages[1].group, secondImage, 0, 0, 0xfb);

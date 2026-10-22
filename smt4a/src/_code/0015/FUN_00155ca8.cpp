@@ -7,11 +7,11 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_00164168(...);
 int efctSetSpeed(void);
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -29,12 +29,12 @@ extern int btlMainIsRunning(void);
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 char FUN_00155ca8(void)
@@ -80,11 +80,11 @@ char FUN_00155ca8(void)
   temp_v2 = vec2GetXInt(temp_v1 + 0x54);
   temp_v12 = 0.25f;
   temp_v11 = temp_v12;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v2 = temp_v2 + (int)temp_v12;
   temp_v3 = vec2GetYInt(temp_v1 + 0x54);
   temp_v6 = vec2GetXInt(temp_v1 + 0xe0);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v6 = temp_v6 + (int)temp_v11;
   if (*(char *)(temp_v1 + 0x32d) != '\0') {
     temp_v2 = vec2GetXInt(temp_v1 + 0x54);
@@ -189,7 +189,7 @@ char FUN_00155ca8(void)
         *(unsigned char *)(temp_v6 + 0x1330) = 0;
       }
     }
-    FUN_00168770();
+    renderPopStateStacks();
     efctSetSpeed();
   }
   efctSetSpeed();

@@ -108,7 +108,7 @@ int gameGetSlotTable(void);
 int FUN_0026264c(...);
 int FUN_002a4964(...);
 int FUN_002a4b28(...);
-int FUN_0031fd08(...);
+int selectionGetValidatedField(...);
 int findSkillMetadataById(void);
 int bitsAt60Test(...);
 int FUN_004da77c(...);
@@ -311,7 +311,7 @@ extern int flaggedEntryGetValueA(int *);
 /* Supplied declaration required: FUN_0031f688. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: pairLogAppend. */
-/* Supplied declaration required: FUN_0031fd08. */
+/* Supplied declaration required: selectionGetValidatedField. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
@@ -1096,7 +1096,7 @@ unsigned int FUN_001f5294(void)
               else {
                 temp_v7 = (unsigned int)*(unsigned char *)(temp_v5 + temp_v10 * 0x94);
               }
-              temp_v10 = FUN_0031fd08();
+              temp_v10 = selectionGetValidatedField();
               piVar19 = (int *)0x0;
               temp_v28 = (int *)0x0;
               switch(temp_v7) {
@@ -1372,7 +1372,7 @@ LAB_001f6b9c:
           else {
             temp_v31 = (int *)(unsigned int)*(unsigned char *)(temp_v5 + temp_v10 * 0x94);
           }
-          temp_v32 = (int *)FUN_0031fd08(temp_v31);
+          temp_v32 = (int *)selectionGetValidatedField(temp_v31);
           temp_v5 = resourceRunOperationIfUnblocked(piVar3 + 0x158);
           temp_v6 = FUN_002a4894(piVar3 + 0x158);
           temp_v6 = temp_v6 + temp_v5;
@@ -1643,7 +1643,7 @@ LAB_001f732c:
               *(unsigned short *)(temp_v4 + 0x26) = 0;
             }
           }
-          piVar19 = (int *)FUN_0031fd08(temp_v31);
+          piVar19 = (int *)selectionGetValidatedField(temp_v31);
           if (piVar19 != temp_v32) {
             *(unsigned char *)(piVar3 + 0x2424) = 1;
             piVar3[0x2428] = -1;

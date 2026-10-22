@@ -1,48 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035e9fc` (_code @ 0x35e9fc, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command setup and 64-bit mask loads use different order and registers. */
+#include "battle/btlMain.h"
+#include "battle/btlUnit.h"
+#include "battle/btlScript.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
+
+// These mask fields extend beyond the shared candidate-mask prefix.
+struct CandidateCommandMasksView {
+    u8 unk00[0x58];
+    u64 required;
+    u64 excluded;
+};
+struct PendingCommandDataView {
+    u8 unk000[0x1c0];
+    s16 argument;
+};
+typedef char PendingCommandViewsCheck[offsetof(CandidateCommandMasksView, required) == 0x58 &&
+    offsetof(CandidateCommandMasksView, excluded) == 0x60 &&
+    offsetof(PendingCommandDataView, argument) == 0x1c0 ? 1 : -1];
 
 extern "C" {
+s32 scrGetArg(u32 index);
+BtlUnitA *btlUnitGet(u32 index);
+BtlMainStateA *btlGetMainState();
+void gameFlagSetValue(u32 flag, s32 value, s32 notify);
 
-int gameFlagSetValue(int, int);
-
-extern unsigned int DAT_005702e0; /* 0x5702e0 */
-extern unsigned int DAT_005702e4; /* 0x5702e4 */
-extern unsigned int DAT_005702e8; /* 0x5702e8 */
-extern unsigned int DAT_005702ec; /* 0x5702ec */
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
-extern int btlUnitGet(unsigned int);
-
-
-unsigned int FUN_0035e9fc(void)
-
+u32 FUN_0035e9fc()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v1 = *(int *)(temp_v1 + 0x28);
-  *(unsigned short *)(temp_v1 + 0x1be) = 2;
-  *(short *)(temp_v1 + 0x1c0) = (short)temp_v0;
-  if (*(short *)(temp_v1 + 2) == 0x323 && temp_v0 == 0x80) {
-    temp_v0 = btlUnitGet(g_btlScriptUnit);
-    *(int *)(*(int *)(temp_v0 + 0x20) + 0x3b4) = *(int *)(*(int *)(temp_v0 + 0x20) + 0x3b4) + 1;
-  }
-  temp_v0 = btlGetMainState();
-  if (((((DAT_005702e0 & *(unsigned int *)(temp_v0 + 0x45a0)) != 0 ||
-         (DAT_005702e4 & *(unsigned int *)(temp_v0 + 0x45a4)) != 0) &&
-       ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_005702ec) == 0 &&
-        (DAT_005702e8 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0)) && (*(short *)(temp_v1 + 2) == 0x1b6)) &&
-     (((*(unsigned short *)(temp_v1 + 0x110) & 0x10) != 0 && (*(short *)(temp_v1 + 0x1c0) == 0x9b)))) {
-    gameFlagSetValue(0x596,1);
-  }
-  return 1;
+    s32 command = scrGetArg(0);
+    BtlUnitDataA *data = btlUnitGet(g_btlScriptUnit)->data;
+    data->unk1BE = 2;
+    ((PendingCommandDataView *)data)->argument = (s16)command;
+    if ((s16)data->unk02 == 0x323 && command == 0x80) {
+        ++btlUnitGet(g_btlScriptUnit)->params[0xed];
+    }
+    u64 flags = btlGetMainState()->stateFlags64.bits;
+    const CandidateCommandMasksView *masks = (const CandidateCommandMasksView *)&g_btlCandidateMasks;
+    if ((flags & masks->required) != 0 && (flags & masks->excluded) == 0 &&
+        (s16)data->unk02 == 0x1b6 && (data->unk110 & 0x10) != 0 &&
+        ((PendingCommandDataView *)data)->argument == 0x9b) {
+        gameFlagSetValue(0x596, 1, 1);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

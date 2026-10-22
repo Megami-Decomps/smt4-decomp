@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001634b4(int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -18,7 +18,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001634b4. */
 extern int vec2GetXInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_002fb5c4(int param_1)
@@ -40,7 +40,7 @@ void FUN_002fb5c4(int param_1)
      (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573c70) == 0 &&
      (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573c74) == 0)) {
     temp_v6 = 0.29f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v0 = vec2GetXInt(param_1 + 0x20f0);
     temp_v5 = 0;
     temp_v0 = temp_v0 + (int)temp_v6;

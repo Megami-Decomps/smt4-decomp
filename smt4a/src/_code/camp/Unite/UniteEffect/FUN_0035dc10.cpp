@@ -1,64 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035dc10` (_code @ 0x35dc10, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains removed debug-log setup/NOPs around allocation and resource creation. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
+struct UniteEffectWork { u32 process; u8 unk004[0x9ec]; };
 extern "C" {
+extern UniteEffectWork *DAT_0057f2c4;
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
+void sysMemClear(void *memory, u32 size);
+s32 FUN_003cf02c(u32 process);
+s32 FUN_003d0a30(u32 process);
+s32 FUN_003d26cc(u32 process);
+u32 asdProcessCreateSimple(const char *name, s32 group, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work);
+u32 taskCreateDraw(const char *name, s32 priority, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
+void btlTalkBustUpCreate();
+void FUN_001695a0();
+void loadSlotEnsureLoaded(u32 slot);
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int FUN_001695a0(...);
-int btlTalkBustUpCreate(...);
-int sysMemClear(...);
-int loadSlotEnsureLoaded(...);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char LAB_0035dd40; /* 0x35dd40 */
-extern unsigned char LAB_0035dd50; /* 0x35dd50 */
-extern int FUN_003cf02c(...); /* 0x3cf02c */
-extern int FUN_003d26cc(...); /* 0x3d26cc */
-extern int FUN_003da030(...); /* 0x3da030 */
-extern unsigned int *DAT_0057f2c4; /* 0x57f2c4 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: btlTalkBustUpCreate. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: loadSlotEnsureLoaded. */
-
-
-void FUN_0035dc10(void)
-
+// Create the unite effect's calculation and paired draw processes once, then preload its resources.
+void FUN_0035dc10()
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (DAT_0057f2c4 == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x9f0,1);
-    DAT_0057f2c4 = puVar1;
-  }
-  puVar1 = DAT_0057f2c4;
-  sysMemClear();
-  puVar2 = &LAB_0035dd40;
-  asdProcessCreateSimple(&LAB_0035dd40,4,0,0,FUN_003cf02c,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0035dd50,0xeb,0,0,FUN_003da030,0,0,puVar2);
-  taskCreateDraw(&LAB_0035dd50,0x71,0,0,FUN_003d26cc,0,0,*puVar1);
-  btlTalkBustUpCreate();
-  FUN_001695a0();
-  loadSlotEnsureLoaded(0x25);
-  return;
+    if (!DAT_0057f2c4)
+        DAT_0057f2c4 = (UniteEffectWork *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x9f0, 1);
+    UniteEffectWork *work = DAT_0057f2c4;
+    sysMemClear(work, sizeof(*work));
+    work->process = asdProcessCreateSimple("TMD CALC", 4, 0, NULL, FUN_003cf02c, NULL, NULL);
+    taskCreateDraw("TMD DDRAW", 235, 0, NULL, FUN_003d0a30, NULL, NULL, work->process);
+    taskCreateDraw("TMD DDRAW", 113, 0, NULL, FUN_003d26cc, NULL, NULL, work->process);
+    btlTalkBustUpCreate();
+    FUN_001695a0();
+    loadSlotEnsureLoaded(37);
 }
-
-} /* extern "C" */
+}

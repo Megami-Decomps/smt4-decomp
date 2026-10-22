@@ -55,7 +55,10 @@ typedef struct ButtonHelpScreenEntry {
     /* 0x00 */ u8 data[0x40];
 } ButtonHelpScreenEntry;
 typedef struct ButtonHelpWorkA {
-    /* 0x000 */ u8 unk000[0xC];
+    union {
+        /* 0x000 */ u8 unk000[0xC];
+        /* 0x000 */ u32 job;
+    };
     /* 0x00C */ s32 unk0C;
     /* 0x010 */ s32 state;
     /* 0x014 */ u8 unk014[0x20];
@@ -95,7 +98,10 @@ typedef struct ButtonHelpGlobals {
     /* 0x0C */ s32 bf;
 } ButtonHelpGlobals;
 typedef struct ButtonHelpGlobalsA {
-    /* 0x00 */ u32 unk00;
+    union {
+        /* 0x00 */ u32 unk00;
+        /* 0x00 */ s8 references;
+    };
     /* 0x04 */ ButtonHelpWorkA *work;
 } ButtonHelpGlobalsA;
 
@@ -116,5 +122,7 @@ typedef char ButtonHelpWorkSizeCheck[sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
 typedef char ButtonHelpWorkASizeCheck[sizeof(ButtonHelpWorkA) == 0x684 ? 1 : -1];
 typedef char ButtonHelpGlobalsSizeCheck[sizeof(ButtonHelpGlobals) == 0x10 ? 1 : -1];
 typedef char ButtonHelpGlobalsASizeCheck[sizeof(ButtonHelpGlobalsA) == 0x8 ? 1 : -1];
+typedef char ButtonHelpJobOffsetCheck[__INTADDR__(&((ButtonHelpWorkA *)0)->job) == 0 ? 1 : -1];
+typedef char ButtonHelpReferencesOffsetCheck[__INTADDR__(&((ButtonHelpGlobalsA *)0)->references) == 0 ? 1 : -1];
 
 #endif

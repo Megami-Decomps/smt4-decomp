@@ -1,69 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048b420` (_code @ 0x48b420, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scissor state caching saves an extra register and changes the stack frame and slot-clear sequence. */
+/* Applies a panel-relative scissor rectangle, or clears its render-context scissor slot. */
+#include "common.h"
 
 extern "C" {
+void rectRecRead(u32 table, u32 id, s32 *x, s32 *y, s32 *width, s32 *height);
+void words2Copy(const void *source, void *destination);
+void renderSetClippedScissor(s32 x, s32 y, s32 width, s32 height);
+extern void *g_renderCtx;
 
-int rectRecRead(int, int, int *, int *, int *, int *);
-int words2Copy(int, float *);
-void renderSetClippedScissor(int, int, int, int);
-int VectorSignedToFloat(int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: rectRecRead. */
-/* Supplied declaration required: words2Copy. */
-/* Supplied declaration required: renderSetClippedScissor. */
-
-
-void FUN_0048b420(int param_1,int param_2)
-
+void FUN_0048b420(void *panel, s32 enabled)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int in_fpscr;
-  float temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int uStack_18;
-  int temp_v5;
-  float fStack_10;
-  float temp_v6;
-  
-  temp_v0 = g_renderCtx;
-  if (param_2 != 0) {
-    rectRecRead(0x13,0xfa4,&temp_v5,&temp_v3,&temp_v4,&uStack_18);
-    words2Copy(param_1 + 0x4d0,&fStack_10);
-    temp_v2 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = (int)(fStack_10 + temp_v2);
-    temp_v2 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v3 = (int)(temp_v6 + temp_v2);
-    renderSetClippedScissor(temp_v5,temp_v3,temp_v4,uStack_18);
-  }
-  else {
-    piVar3 = (int *)(g_renderCtx + 0x1318);
-    temp_v1 = piVar3[*piVar3 + 2];
-    piVar3[*piVar3 + 2] = 0;
-    if (*(char *)(temp_v0 + 0x1330) != '\0' || temp_v1 != 0) {
-      (**(romwright_code **)(temp_v0 + 0x1334))();
-      *(unsigned char *)(temp_v0 + 0x1330) = 0;
-      return;
+    if (enabled) {
+        s32 x, y, width, height;
+        struct Point { f32 x, y; } offset;
+        rectRecRead(19, 4004, &x, &y, &width, &height);
+        words2Copy((u8 *)panel + 0x4D0, &offset);
+        x = (s32)(offset.x + (f32)x);
+        y = (s32)(offset.y + (f32)y);
+        renderSetClippedScissor(x, y, width, height);
+        return;
     }
-  }
-  return;
+    struct ScissorState {
+        u32 index;
+        u32 unk04;
+        u32 slots[4];
+        u8 active;
+        u8 unk19[3];
+        void (*refresh)(u32 enabled);
+    };
+    /* This render-context tail is beyond the currently shared context prefix. */
+    ScissorState *state = (ScissorState *)((u8 *)g_renderCtx + 0x1318);
+    u32 previous = state->slots[state->index];
+    state->slots[state->index] = 0;
+    if (state->active || previous != 0) {
+        state->refresh(0);
+        state->active = 0;
+    }
 }
-
-} /* extern "C" */
+}

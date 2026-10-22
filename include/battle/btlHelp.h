@@ -3,6 +3,7 @@
 #define BATTLE_BTLHELP_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The help block, kept by a module global (Apocalypse). */
 typedef struct BtlHelpA {
@@ -27,5 +28,18 @@ typedef struct BtlHelpListA {
     /* 0x04 */ BtlHelpEntryA *tail;
     /* 0x08 */ s32 count;
 } BtlHelpListA;
+
+/* The help module's global state and the battle states which suppress new messages. */
+struct BtlHelpGlobalsA {
+    /* 0x00 */ BtlHelpListA *list;
+    /* 0x04 */ u8 unk04[0x1c];
+    /* 0x20 */ u32 blockedStates[2];
+    /* 0x28 */ u32 blockedTransitions[2];
+};
+
+typedef char BtlHelpGlobalsAMasksOffsetCheck[
+    offsetof(BtlHelpGlobalsA, blockedStates) == 0x20 &&
+    offsetof(BtlHelpGlobalsA, blockedTransitions) == 0x28 &&
+    sizeof(BtlHelpGlobalsA) == 0x30 ? 1 : -1];
 
 #endif

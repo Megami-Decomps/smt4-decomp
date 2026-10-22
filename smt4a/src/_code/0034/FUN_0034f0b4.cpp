@@ -1,45 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f0b4` (_code @ 0x34f0b4, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Fusion-pair base-address grouping and shared comparison-tail lowering differ. */
+#include "common.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern UniteWork *g_unite;
+UniteSortRecordPrefixA *FUN_00184310(u32 id);
 
-int FUN_00184310(void);
-
-extern int g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: FUN_00184310. */
-
-
-int FUN_0034f0b4(unsigned short *param_1,unsigned short *param_2)
-
+s32 FUN_0034f0b4(const u16 *leftIndex, const u16 *rightIndex)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  
-  temp_v0 = g_unite;
-  puVar2 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x13b8) & 0x7fff);
-  puVar3 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x13b8) & 0x7fff);
-  FUN_00184310();
-  FUN_00184310();
-  temp_v1 = (unsigned int)(unsigned char)puVar3[1] - (unsigned int)(unsigned char)puVar2[1];
-  if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar2[3] - (unsigned int)puVar3[3], temp_v1 == 0)) {
-    temp_v1 = (unsigned int)*puVar3 - (unsigned int)*puVar2;
-  }
-  if (temp_v1 == 0) {
-    puVar2 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_1 * 8 + 0x13b8) & 0x3fffffff) >> 0xf);
-    puVar3 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_2 * 8 + 0x13b8) & 0x3fffffff) >> 0xf);
-    FUN_00184310();
-    FUN_00184310();
-    temp_v1 = (unsigned int)(unsigned char)puVar3[1] - (unsigned int)(unsigned char)puVar2[1];
-    if ((temp_v1 == 0) && (temp_v1 = (unsigned int)puVar2[3] - (unsigned int)puVar3[3], temp_v1 == 0)) {
-      temp_v1 = (unsigned int)*puVar3 - (unsigned int)*puVar2;
-    }
-  }
-  return temp_v1;
-}
+    UniteWork *const unite = g_unite;
+    const UnitePairEntry *const entries = unite->pairList.pairs;
 
-} /* extern "C" */
+    u32 leftId = entries[*leftIndex].packedIds & 0x7fffU;
+    u32 rightId = entries[*rightIndex].packedIds & 0x7fffU;
+    const UniteSortRecordPrefixA *left = FUN_00184310(leftId);
+    const UniteSortRecordPrefixA *right = FUN_00184310(rightId);
+
+    s32 result = s32(right->categoryKey) - s32(left->categoryKey);
+    if (result == 0) {
+        result = s32(left->ascendingKey) - s32(right->ascendingKey);
+        if (result == 0)
+            result = s32(right->descendingKey) - s32(left->descendingKey);
+    }
+    if (result != 0)
+        return result;
+
+    // Reload both indices and packed words after the lookup calls, using
+    // the original work block rather than reloading the global pointer.
+    leftId = (entries[*leftIndex].packedIds >> 15) & 0x7fffU;
+    rightId = (entries[*rightIndex].packedIds >> 15) & 0x7fffU;
+    left = FUN_00184310(leftId);
+    right = FUN_00184310(rightId);
+
+    result = s32(right->categoryKey) - s32(left->categoryKey);
+    if (result == 0) {
+        result = s32(left->ascendingKey) - s32(right->ascendingKey);
+        if (result == 0)
+            result = s32(right->descendingKey) - s32(left->descendingKey);
+    }
+    return result;
+}
+}

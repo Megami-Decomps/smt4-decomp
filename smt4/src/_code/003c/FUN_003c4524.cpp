@@ -1,71 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4524` (_code @ 0x3c4524, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: debug menu values and toggles recovered; one extra saved pointer and flag-result register allocation differ. */
+#include "battle/btlMain.h"
+
+struct BattleDebugList {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 list;
+};
 
 extern "C" {
+s32 listBoxItemHasOwner(u32 list, u32 item);
+u32* asdListBoxGetItemValuePtr(u32 list, u32 item);
+u32 asdListBoxGetSelectedItemId(u32 list);
 
-extern int listBoxItemHasOwner(unsigned int, unsigned int);
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-
-
-void FUN_003c4524(int param_1,int param_2)
-
+// Apply the selected battle debug-menu value or toggle its corresponding battle flag.
+void FUN_003c4524(BattleDebugList* menu, BtlMainState* battle)
 {
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar5;
-  
-  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
-  puVar5 = (unsigned int *)(param_2 + 0x44a8);
-  switch(temp_v0) {
-  case 0:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *puVar5 | 0x1000;
+    // Both fields lie beyond the known IV battle-state prefix.
+    struct BattleDebugState {
+        /* 0x0000 */ u8 unk0000[0x2268];
+        /* 0x2268 */ u32 command;
+        /* 0x226C */ u8 unk226C[0x223C];
+        /* 0x44A8 */ u32 flags;
+    };
+    BattleDebugState* state = reinterpret_cast<BattleDebugState*>(battle);
+    u32 selected = asdListBoxGetSelectedItemId(menu->list);
+    u32 flags;
+    switch (selected) {
+    case 0:
+        flags = listBoxItemHasOwner(menu->list, selected) ?
+                state->flags | 0x1000 : state->flags & ~0x1000;
+        break;
+    case 1:
+        flags = listBoxItemHasOwner(menu->list, selected) ?
+                state->flags | 0x2000 : state->flags & ~0x2000;
+        break;
+    case 2:
+        state->command = *asdListBoxGetItemValuePtr(menu->list, selected);
+        return;
+    case 3:
+        flags = listBoxItemHasOwner(menu->list, selected) ?
+                state->flags | 0x40000 : state->flags & ~0x40000;
+        break;
+    case 4:
+        flags = listBoxItemHasOwner(menu->list, selected) ?
+                state->flags | 0x200000 : state->flags & ~0x200000;
+        break;
+    default:
+        return;
     }
-    else {
-      temp_v2 = *puVar5 & 0xffffefff;
-    }
-    break;
-  case 1:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *puVar5 | 0x2000;
-    }
-    else {
-      temp_v2 = *puVar5 & 0xffffdfff;
-    }
-    break;
-  case 2:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(param_2 + 0x2268) = *puVar2;
-    return;
-  case 3:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *puVar5 | 0x40000;
-    }
-    else {
-      temp_v2 = *puVar5 & 0xfffbffff;
-    }
-    break;
-  case 4:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *puVar5 | 0x200000;
-    }
-    else {
-      temp_v2 = *puVar5 & 0xffdfffff;
-    }
-    break;
-  default:
-    return;
-  }
-  *puVar5 = temp_v2;
-  return;
+    state->flags = flags;
 }
-
-} /* extern "C" */
+}

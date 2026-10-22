@@ -1,47 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dc7a0` (_code @ 0x2dc7a0, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: fusion-pair array base and packed-ID extraction use different address registers. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
-extern "C" {
+extern "C" UniteWork *g_unite;
 
-int devilGetRecord(void);
-
-extern int g_unite; /* 0x43dd68 */
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_002dc7a0(unsigned short *param_1,unsigned short *param_2)
-
+static inline s32 compareFusionDemons(u16 first, u16 second)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  
-  temp_v0 = g_unite;
-  puVar2 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x1390) & 0x7fff);
-  puVar3 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x1390) & 0x7fff);
-  devilGetRecord();
-  devilGetRecord();
-  temp_v1 = (unsigned int)(unsigned char)puVar3[1] - (unsigned int)(unsigned char)puVar2[1];
-  if ((temp_v1 == 0) &&
-     (temp_v1 = (unsigned int)*(unsigned char *)((int)puVar2 + 3) - (unsigned int)*(unsigned char *)((int)puVar3 + 3), temp_v1 == 0)) {
-    temp_v1 = (unsigned int)*puVar3 - (unsigned int)*puVar2;
-  }
-  if (temp_v1 == 0) {
-    puVar2 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_1 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    puVar3 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_2 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    devilGetRecord();
-    devilGetRecord();
-    temp_v1 = (unsigned int)(unsigned char)puVar3[1] - (unsigned int)(unsigned char)puVar2[1];
-    if ((temp_v1 == 0) &&
-       (temp_v1 = (unsigned int)*(unsigned char *)((int)puVar2 + 3) - (unsigned int)*(unsigned char *)((int)puVar3 + 3), temp_v1 == 0)) {
-      temp_v1 = (unsigned int)*puVar3 - (unsigned int)*puVar2;
+    const DevilSortRecord *a = devilGetRecord(first);
+    const DevilSortRecord *b = devilGetRecord(second);
+    s32 order = s32(b->race) - s32(a->race);
+    if (order == 0) {
+        order = s32(a->level) - s32(b->level);
+        if (order == 0) {
+            order = s32(b->id) - s32(a->id);
+        }
     }
-  }
-  return temp_v1;
+    return order;
 }
 
-} /* extern "C" */
+extern "C" s32 FUN_002dc7a0(const u16 *first, const u16 *second)
+{
+    UniteWork *work = g_unite;
+    s32 order = compareFusionDemons(work->pairListIV.pairs[*first].firstId,
+                                   work->pairListIV.pairs[*second].firstId);
+    if (order == 0) {
+        order = compareFusionDemons(work->pairListIV.pairs[*first].secondId,
+                                    work->pairListIV.pairs[*second].secondId);
+    }
+    return order;
+}

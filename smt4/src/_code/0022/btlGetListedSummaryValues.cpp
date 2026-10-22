@@ -1,11 +1,6 @@
 #include "shard/W4_Match6_BtlEntry.h"
 
-struct BattleEntrySummary {
-    /* 0x00 */ u16 unk00;
-    /* 0x02 */ u16 value;
-    /* 0x04 */ s16 stat;
-    /* 0x06 */ u8 unk06[0x22];
-};
+#include "battle/BattleEntrySummary.h"
 
 extern "C" {
 BtlMainState* btlGetMainState(void);

@@ -12,7 +12,7 @@ extern int sceneScriptDoneSetState(...); /* 0x3ab7a0 */
 extern int FUN_003ab7c8(...); /* 0x3ab7c8 */
 extern int FUN_003ab948(...); /* 0x3ab948 */
 extern int FUN_003ab9a4(...); /* 0x3ab9a4 */
-extern int FUN_003abe00(...); /* 0x3abe00 */
+extern int menuUpdateCollectionSort(...); /* 0x3abe00 */
 extern int FUN_003abed8(...); /* 0x3abed8 */
 extern unsigned char DAT_00422450; /* 0x422450 */
 
@@ -49,7 +49,7 @@ void bibleScreenInitializeCallbacks(void)
   puVar1[0x2973] = 0;
   puVar1[0x2974] = (unsigned int)FUN_003abed8;
   puVar1[0x2975] = 0;
-  puVar1[0x2976] = (unsigned int)FUN_003abe00;
+  puVar1[0x2976] = (unsigned int)menuUpdateCollectionSort;
   puVar1[0x2977] = 0;
   puVar1[0x2978] = (unsigned int)FUN_003ab9a4;
   puVar1[0x2979] = 0;

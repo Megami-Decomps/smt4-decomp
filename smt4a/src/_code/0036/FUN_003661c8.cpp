@@ -21,7 +21,7 @@ int VectorSignedToFloat(...);
 
 int FUN_002342b8(void);
 int mapIfOverlayRelease(void);
-int FUN_002dae68(void);
+int mapEaseSceneHeading(void);
 int FUN_002e364c(...);
 int FUN_00303460(...);
 int mapIfReleaseSlot3(void);
@@ -65,7 +65,7 @@ extern int padButtonIsPressed(unsigned int);
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: mapIfOverlayRelease. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
@@ -103,7 +103,7 @@ void FUN_003661c8(void)
   
   temp_v0 = soundVolumeSettingGet();
   if (*(int *)(g_lmapScene + 4) < 10) {
-    FUN_002dae68();
+    mapEaseSceneHeading();
     temp_v1 = g_lmapScene;
     *(float *)(g_lmapScene + 0x1c) =
          *(float *)(g_lmapScene + 0x1c) +

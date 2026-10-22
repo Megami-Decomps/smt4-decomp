@@ -19,11 +19,11 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00221a08(...); /* 0x221a08 */
-extern int FUN_00231f50(...); /* 0x231f50 */
+extern int itemCompareCategoryThenValue(...); /* 0x231f50 */
 extern int gauntletAppCompareBySortKeys(...); /* 0x2320b0 */
 extern int appComparePurchaseOrder(...); /* 0x2418f8 */
 extern int FUN_002b2c44(...); /* 0x2b2c44 */
-extern int FUN_002ce57c(...); /* 0x2ce57c */
+extern int gauntletAppCompareCategoryAndValueDescending(...); /* 0x2ce57c */
 extern int gauntletAppCompareBySortKeysDescending(...); /* 0x2ce6dc */
 extern int entryRefCompareByKindLevelOrder(...); /* 0x2fdfc0 */
 extern int g_gauntletAppMenu; /* 0x57f238 */
@@ -96,11 +96,11 @@ void FUN_003d1aa0(int param_1)
   if ((*(unsigned char *)(temp_v2 + 0xd) & 0x7f) == 0x21) {
     if (temp_v5 != 0) {
       temp_v3 = objectApplyIfUnblocked(temp_v1 + 0x10);
-      qsort(temp_v1 + 0x74,temp_v3,4,FUN_00231f50,unaff_r4,unaff_r5,unaff_r6,in_lr);
+      qsort(temp_v1 + 0x74,temp_v3,4,itemCompareCategoryThenValue,unaff_r4,unaff_r5,unaff_r6,in_lr);
     }
     else {
       temp_v3 = objectApplyIfUnblocked(temp_v1 + 0x10);
-      qsort(temp_v1 + 0x74,temp_v3,4,FUN_002ce57c,unaff_r4,unaff_r5,unaff_r6,in_lr);
+      qsort(temp_v1 + 0x74,temp_v3,4,gauntletAppCompareCategoryAndValueDescending,unaff_r4,unaff_r5,unaff_r6,in_lr);
     }
   }
   if ((*pbVar8 & 0x7f) == 0x15) {

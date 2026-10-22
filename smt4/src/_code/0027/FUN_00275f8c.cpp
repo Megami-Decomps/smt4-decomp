@@ -1,49 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00275f8c` (_code @ 0x275f8c, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Map-flag indexed addressing and update-store scheduling differ. */
+#include "common.h"
+#include "map/mapDepart.h"
+
+struct MapBlock;
 
 extern "C" {
-
-int mapIfClearGroupState(int);
-
-extern int DAT_0049f958; /* 0x49f958 */
-extern int DAT_0049f95c; /* 0x49f95c */
-extern unsigned char DAT_0049fb49; /* 0x49fb49 */
-
-/* Supplied declaration required: mapIfClearGroupState. */
-extern int dataTable23Type0FindIndexById(void);
-extern int gameGetMapBlock(void);
-
+extern GameState g_gameState;
+s32 dataTable23Type0FindIndexById(s32 groupId);
+MapBlock *gameGetMapBlock(void);
+s32 mapIfClearGroupState(s32 groupId);
 
 void FUN_00275f8c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if ((DAT_0049f958 != 0) && (temp_v0 = dataTable23Type0FindIndexById(), temp_v0 != -1)) {
-    temp_v1 = gameGetMapBlock();
-    if (-1 < temp_v0) {
-      temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
-      *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));
+    if (g_gameState.groupClear.activeGroupId != 0) {
+        const s32 index = dataTable23Type0FindIndexById(
+            g_gameState.groupClear.activeGroupId);
+        if (index != -1) {
+            MapBlock *map = gameGetMapBlock();
+            if (index >= 0) {
+                // Local storage view: the map block's type and capacity are unknown.
+                u32 *flags = reinterpret_cast<u32 *>(
+                    reinterpret_cast<u8 *>(map) + 0x7D4);
+                flags[index / 32] |= 1u << (index % 32);
+            }
+            mapIfClearGroupState(g_gameState.groupClear.activeGroupId);
+        }
     }
-    mapIfClearGroupState(DAT_0049f958);
-  }
-  if (DAT_0049f95c != 0) {
-    temp_v0 = dataTable23Type0FindIndexById();
-    if (temp_v0 != -1) {
-      temp_v1 = gameGetMapBlock();
-      if (-1 < temp_v0) {
-        temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
-        *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));
-      }
-      mapIfClearGroupState(DAT_0049f95c);
-    }
-    DAT_0049f95c = 0;
-  }
-  DAT_0049fb49 = 0;
-  return;
-}
 
-} /* extern "C" */
+    if (g_gameState.groupClear.pendingGroupId != 0) {
+        const s32 index = dataTable23Type0FindIndexById(
+            g_gameState.groupClear.pendingGroupId);
+        if (index != -1) {
+            MapBlock *map = gameGetMapBlock();
+            if (index >= 0) {
+                u32 *flags = reinterpret_cast<u32 *>(
+                    reinterpret_cast<u8 *>(map) + 0x7D4);
+                flags[index / 32] |= 1u << (index % 32);
+            }
+            mapIfClearGroupState(g_gameState.groupClear.pendingGroupId);
+        }
+        g_gameState.groupClear.pendingGroupId = 0;
+    }
+    g_gameState.groupClearFlags.updateFlag = 0;
+}
+}

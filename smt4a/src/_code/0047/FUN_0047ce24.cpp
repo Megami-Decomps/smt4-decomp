@@ -8,7 +8,7 @@ int FUN_00167618(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(...);
 int quadSetOrderedVectors(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_0019ac70(int *, unsigned int);
 int FUN_0019b770(...);
 int jobGetScalarValue(void);
@@ -75,7 +75,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: quadSetOrderedVectors. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019b770. */
 /* Supplied declaration required: jobGetScalarValue. */
@@ -379,7 +379,7 @@ LAB_0047cf80:
             temp_v12 = (float)VectorSignedToFloat(0x100 - temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = temp_v12 * temp_v13;
           }
-          FUN_001879d0(g_renderCtx);
+          renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v15 = temp_v12;
           temp_v4 = asdSoundGetOption1();
           if (temp_v4 != 0) {

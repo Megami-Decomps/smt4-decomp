@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0022699c(int, int, int, unsigned int);
+int btlQueueReflectAction(int, int, int, unsigned int);
 int FUN_0023c1bc(int, unsigned int, unsigned int);
 int btlGetMainState(void);
 
 extern int g_btlActionReflect; /* 0x434290 */
 
-/* Supplied declaration required: FUN_0022699c. */
+/* Supplied declaration required: btlQueueReflectAction. */
 /* Supplied declaration required: FUN_0023c1bc. */
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
@@ -31,27 +31,27 @@ unsigned int FUN_002267b8(unsigned int param_1,unsigned int param_2,unsigned int
     FUN_0023c1bc(0,param_2,param_1);
     temp_v2 = 0;
     temp_v0 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,temp_v1,0,param_2);
     *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
     *(unsigned char *)(temp_v0 + 4) = 0x21;
     *(unsigned int *)(temp_v0 + 0x14) = param_3;
     *(unsigned int *)(temp_v0 + 0x28) = 0;
     *(unsigned int *)(temp_v0 + 0x4c) = 0;
     temp_v0 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,temp_v1,0,param_2);
   }
   else {
     FUN_0023c1bc(0,param_2,param_1);
     temp_v2 = 0x10;
     temp_v0 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,temp_v1,0,param_2);
     *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
     *(unsigned char *)(temp_v0 + 4) = 0x21;
     *(unsigned int *)(temp_v0 + 0x14) = param_3;
     *(unsigned int *)(temp_v0 + 0x28) = 0;
     *(unsigned int *)(temp_v0 + 0x4c) = 0;
     temp_v0 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,temp_v1,0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,temp_v1,0,param_2);
   }
   *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
   *(unsigned int *)(temp_v0 + 0x14) = param_3;

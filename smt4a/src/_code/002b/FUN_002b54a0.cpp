@@ -1,52 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b54a0` (_code @ 0x2b54a0, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: action records recovered; armcc combines the 64-bit mask loads and peels the first list iteration, unlike retail's scalar loads and compact loop. */
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702a8; /* 0x5702a8 */
-extern unsigned int DAT_005702ac; /* 0x5702ac */
-
-
-unsigned int FUN_002b54a0(unsigned int *param_1,int param_2)
-
+// Check the combatant's single action or available action list for a matching skill.
+u32 FUN_002b54a0(const BtlCombatantEntryA* combatant, s32 skill)
 {
-  short temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  if ((!((param_1[1] & DAT_005702a4) == 0 && (*param_1 & DAT_005702a0) == 0)) ||
-     (temp_v1 = 0, !((DAT_005702ac & param_1[1]) == 0 && (DAT_005702a8 & *param_1) == 0))) {
-    temp_v0 = *(short *)((int)param_1 + 0x32a);
-    temp_v2 = temp_v0 == 2 || temp_v0 == 3;
-    if (temp_v0 == 2 || temp_v0 == 3) {
-      temp_v2 = (short)param_1[0xcb] == param_2;
+    if ((combatant->flags & g_btlCandidateMasks.unavailable) != 0 ||
+        (g_btlCandidateMasks.singleAction & combatant->flags) != 0) {
+        s16 kind = combatant->actionList.single.kind;
+        if ((kind == 2 || kind == 3) && combatant->actionList.single.id == skill) {
+            return 1;
+        }
+    } else {
+        s32 i = 0;
+        do {
+            s16 kind = combatant->actionList.available[i].kind;
+            if ((kind == 2 || kind == 3) && combatant->actionList.available[i].id == skill) {
+                return 1;
+            }
+            ++i;
+        } while (i < 10);
     }
-    if (temp_v2) {
-      return 1;
-    }
-  }
-  else {
-    do {
-      temp_v0 = *(short *)((int)param_1 + temp_v1 * 8 + 0x33a);
-      temp_v2 = temp_v0 == 2 || temp_v0 == 3;
-      if (temp_v0 == 2 || temp_v0 == 3) {
-        temp_v2 = (short)param_1[temp_v1 * 2 + 0xcf] == param_2;
-      }
-      if (temp_v2) {
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 10);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

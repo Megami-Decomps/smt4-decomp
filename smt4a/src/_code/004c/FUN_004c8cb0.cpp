@@ -1,57 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c8cb0` (_code @ 0x4c8cb0, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: suppression-mask loads and call-stack argument registers differ from retail. */
+#include "battle/btlMain.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
+extern BtlHelpGlobalsA g_btlHelp;
+BtlMainStateA* btlGetMainState(void);
+s32 FUN_003eaf20(BtlMainStateA* battle);
+u32 FUN_00200a68(u32 kind, u32 flags, u32 object, u32 command,
+                 s32 mode, u32 option, s32 category, u32 resource);
 
-int FUN_00200a68(unsigned int, int, unsigned int, unsigned int, int, unsigned int, int, int);
-int FUN_003eaf20(void);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern unsigned int DAT_00573908; /* 0x573908 */
-extern unsigned int DAT_0057390c; /* 0x57390c */
-extern unsigned int DAT_00573910; /* 0x573910 */
-extern unsigned int DAT_00573914; /* 0x573914 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00200a68. */
-/* Supplied declaration required: FUN_003eaf20. */
-
-
-unsigned int FUN_004c8cb0(unsigned int param_1,int param_2,unsigned int param_3)
-
+// Issue a targeted resource request unless the help state suppresses new requests.
+u32 FUN_004c8cb0(u32 object, s32 index, u32 option)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  if (((DAT_00573908 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0 &&
-       (DAT_0057390c & *(unsigned int *)(temp_v0 + 0x45a4)) == 0) &&
-     ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0 &&
-      (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573910) == 0)) {
-    temp_v3 = param_2 < 0;
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x2278);
-    if (!temp_v3) {
-      FUN_003eaf20();
+    BtlMainStateA* battle = btlGetMainState();
+    if ((((u64)g_btlHelp.blockedStates[0] | ((u64)g_btlHelp.blockedStates[1] << 32)) &
+         battle->stateFlags64.bits) != 0 ||
+        (battle->stateFlags64.bits &
+         ((u64)g_btlHelp.blockedTransitions[0] | ((u64)g_btlHelp.blockedTransitions[1] << 32))) != 0) {
+        return 0;
     }
-    else {
-      temp_v0 = 0;
-      param_2 = -1;
+    // This command lies beyond the shared command-message subrecord's recovered end.
+    struct CommandView {
+        u8 unk00[0x2278];
+        u32 command;
+    };
+    typedef char CommandViewOffset[offsetof(CommandView, command) == 0x2278 ? 1 : -1];
+    u32 command = reinterpret_cast<CommandView*>(battle)->command;
+    if (index >= 0) {
+        return FUN_00200a68(1, 0, object, command, FUN_003eaf20(battle), option, index, 0);
     }
-    temp_v1 = (unsigned int)!temp_v3;
-    FUN_00200a68(temp_v1,0,param_1,temp_v2,temp_v0,param_3,param_2,0);
-    return temp_v1;
-  }
-  return 0;
+    return FUN_00200a68(0, 0, object, command, 0, option, -1, 0);
 }
-
-} /* extern "C" */
+}

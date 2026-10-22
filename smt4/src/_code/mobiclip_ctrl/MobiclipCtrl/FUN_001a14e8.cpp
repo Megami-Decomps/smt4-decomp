@@ -1,85 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a14e8` (_code @ 0x1a14ec, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the existing zero-argument decoder method omits retail's unused argument setup; shared-context addresses differ. */
+#include "mobiclip_ctrl/MobiclipStartState.h"
 #include "classes/Obj420a2c.h"
 
+
 extern "C" {
+extern MobiclipStartTable DAT_004c3b20;
+extern Obj420a2c DAT_004c3a50;
+extern u32 DAT_004c3a44;
+extern u8 DAT_004c3af8[];
+extern MobiclipStartClock g_mobiclipCtrl;
+void FUN_00350bd0(MobiclipStartTable *table, u32 first, u32 second);
+void FUN_00350ac4(MobiclipStartTable *table, u32 index);
+u32 FUN_00350ab8(MobiclipStartTable *table, u32 index);
+const MobiclipStartRecord *movieRecordTableGetEntry(MobiclipStartTable *table, u32 index);
+const void *tableRecordGetChecked(MobiclipStartTable *table, s32 index);
+u32 FUN_0034f488(void *audio, u32 *context, const void *record, u32 depth, u32 mode);
+void FUN_002ad61c(u32 error);
+s32 stateObjectClassify(MobiclipStartTable *table, const MobiclipStartRecord *record);
+u32 FUN_0034fbc8(ThreadControl *control);
 
-int FUN_002ad61c(...);
-int FUN_0034fbc8(unsigned char *, int, unsigned int, unsigned int);
-int FUN_00350ac4(unsigned char *, int);
-int FUN_00350bd0(unsigned char *, unsigned int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern unsigned int DAT_0044d028; /* 0x44d028 */
-extern int DAT_0044d02c; /* 0x44d02c */
-extern unsigned int DAT_004c3a44; /* 0x4c3a44 */
-extern unsigned char DAT_004c3a50; /* 0x4c3a50 */
-extern unsigned int DAT_004c3af8; /* 0x4c3af8 */
-extern unsigned char DAT_004c3b20; /* 0x4c3b20 */
-extern int DAT_004c4068; /* 0x4c4068 */
-
-/* Supplied declaration required: FUN_002ad61c. */
-/* Supplied declaration required: _ZN9Obj420a2c12buildEntriesEv. */
-extern int FUN_0034f488(unsigned int *, unsigned int *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0034fbc8. */
-extern unsigned int stateObjectClassify(unsigned char *, int);
-extern unsigned int tableRecordGetChecked(unsigned char *, int);
-extern int movieRecordTableGetEntry(unsigned char *, unsigned int);
-extern unsigned int FUN_00350ab8(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00350ac4. */
-/* Supplied declaration required: FUN_00350bd0. */
-extern unsigned long long ll_sdiv(unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_001a14e8(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Initialize the primary movie decoder and optional audio stream, then start at the computed clock position.
+void FUN_001a14e8()
 {
-/* irregular: 5 native warning(s); review required */
-  long long temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char *puVar5;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned long long temp_v6;
-  unsigned int temp_v7;
-  
-  FUN_00350bd0(&DAT_004c3b20,param_3);
-  FUN_00350ac4(&DAT_004c3b20,0);
-  temp_v2 = FUN_00350ab8(&DAT_004c3b20,0);
-  temp_v3 = movieRecordTableGetEntry(&DAT_004c3b20,temp_v2);
-  puVar5 = &DAT_004c3a50;
-  ((Obj420a2c *)(&DAT_004c3a50))->Obj420a2c::buildEntries();
-  if (puVar5 == (unsigned char *)0x0) {
-    FUN_002ad61c();
-  }
-  temp_v7 = param_4;
-  if (DAT_004c4068 != -1) {
-    temp_v2 = tableRecordGetChecked(&DAT_004c3b20,DAT_004c4068);
-    temp_v7 = 0x10;
-    temp_v4 = FUN_0034f488(&DAT_004c3af8,&DAT_004c3a44,temp_v2,1);
-    if (temp_v4 == 0) {
-      FUN_002ad61c(1);
+    FUN_00350bd0(&DAT_004c3b20, 0, 0);
+    FUN_00350ac4(&DAT_004c3b20, 0);
+    const MobiclipStartRecord *record = movieRecordTableGetEntry(&DAT_004c3b20, FUN_00350ab8(&DAT_004c3b20, 0));
+    if (!DAT_004c3a50.Obj420a2c::buildEntries())
+        FUN_002ad61c(1);
+    if (DAT_004c3b20.audioIndex != -1) {
+        const void *audioRecord = tableRecordGetChecked(&DAT_004c3b20, DAT_004c3b20.audioIndex);
+        if (!FUN_0034f488(DAT_004c3af8, &DAT_004c3a44, audioRecord, 1, 16))
+            FUN_002ad61c(1);
     }
-  }
-  temp_v0 = (unsigned long long)*(unsigned int *)(temp_v3 + 0x10) * 1000000;
-  temp_v6 = ll_sdiv((int)temp_v0,(int)((unsigned long long)temp_v0 >> 0x20),*(unsigned int *)(temp_v3 + 0xc),0);
-  DAT_0044d02c = (int)((unsigned long long)temp_v6 >> 0x20);
-  DAT_0044d028 = (unsigned int)temp_v6;
-  temp_v5 = stateObjectClassify(&DAT_004c3b20,temp_v3);
-  temp_v1 = DAT_0044d028;
-  temp_v3 = ((int)temp_v5 >> 0x1f) * DAT_0044d028 +
-          (int)((unsigned long long)DAT_0044d028 * (unsigned long long)temp_v5 >> 0x20);
-  DAT_0044d02c = temp_v5 * DAT_0044d02c + temp_v3;
-  DAT_0044d028 = (int)((unsigned long long)DAT_0044d028 * (unsigned long long)temp_v5);
-  FUN_0034fbc8(&DAT_004c3b20,temp_v3,temp_v1,temp_v7);
-  return;
+    g_mobiclipCtrl.position = (s64)((u64)record->ticks * 1000000) / record->timeScale;
+    s32 count = stateObjectClassify(&DAT_004c3b20, record);
+    g_mobiclipCtrl.position *= count;
+    FUN_0034fbc8(&DAT_004c3b20.thread);
 }
-
-} /* extern "C" */
+}

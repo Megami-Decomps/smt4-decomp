@@ -1,58 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a6610` (_code @ 0x4a6610, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch case-block ordering and jump-table destinations differ. */
+#include "gamedata/SelectionValueRecord.h"
+#include "ui/ItemListSelection.h"
 
 extern "C" {
+SelectionValueRecord *FUN_0026140c(void);
+void FUN_004a84e8(ItemListSelectionEntry *entry, s32 selection);
 
-int FUN_004a84e8(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_004a84e8. */
-
-
-void FUN_004a6610(int param_1,int param_2)
-
+// Select the item-list presentation variant, retaining its alternate-state bit.
+void FUN_004a6610(ItemListSelectionOwner *owner, s32 useAlternate)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  
-  if (*(short *)(param_1 + 0x864) != 0) {
-    temp_v1 = FUN_0026140c();
-    pbVar3 = (unsigned char *)(temp_v1 + 0xc);
-    switch(*pbVar3 & 0x7f) {
-    default:
-      temp_v0 = '\x06';
-      *pbVar3 = (*pbVar3 & 0x80) | 1;
-      break;
+    if (owner->selection.value == 0) {
+        return;
+    }
+    u8 &variant = FUN_0026140c()->variant.flags;
+    s8 selection;
+    switch (variant & 0x7F) {
     case 1:
-      temp_v0 = '\x06';
-      break;
+        selection = 6;
+        break;
     case 2:
-      temp_v0 = '\x02';
-      break;
+        selection = 2;
+        break;
     case 3:
-      temp_v0 = '\x16';
-      break;
+        selection = 22;
+        break;
     case 4:
-      temp_v0 = '\x0e';
-      break;
+        selection = 14;
+        break;
     case 5:
-      temp_v0 = '\x14';
+        selection = 20;
+        break;
+    default:
+        selection = 6;
+        variant = (variant & ~0x7F) | 1;
+        break;
     }
-    if ((param_2 != 0) && ((*pbVar3 & 0x80) != 0)) {
-      temp_v0 = temp_v0 + '\x01';
+    if (useAlternate != 0 && (variant & 0x80) != 0) {
+        ++selection;
     }
-    FUN_004a84e8(param_1 + 0x864,temp_v0);
-    return;
-  }
-  return;
+    FUN_004a84e8(&owner->selection, selection);
 }
-
-} /* extern "C" */
+}

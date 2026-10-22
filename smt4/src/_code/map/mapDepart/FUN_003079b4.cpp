@@ -10,7 +10,7 @@ int FUN_00282228(int *);
 int calcHeadingRoundedToCardinalDirection(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int FUN_002d1e4c(void);
 
 /* stack frame of void: 24 slot(s), 96 byte(s) */
@@ -67,7 +67,7 @@ extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: FUN_002c5be8. */
 /* Supplied declaration required: FUN_002d1e4c. */
 /* Supplied declaration required: entryOwnerSetPosition. */
@@ -139,7 +139,7 @@ void FUN_003079b4(void)
     break;
   case 1:
     temp_v25 = (float)DAT_004474f4[6];
-    FUN_00287b0c();
+    mathGetShortestAngleDelta();
     temp_v0 = in_fpscr & 0xfffffff;
     temp_v24 = temp_v25;
     if (temp_v25 < 0.0f) {

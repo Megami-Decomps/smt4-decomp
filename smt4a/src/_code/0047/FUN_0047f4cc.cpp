@@ -1,43 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047f4cc` (_code @ 0x47f4cc, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: recovered all float arguments and the 16-byte name buffer; initial bit extraction scheduling and suffix literal-pool order still differ. */
+#include "common.h"
 
 extern "C" {
+void textFormatBuffer(char* output, const char* format, ...);
+u32 FUN_0014af98(void);
+u32 FUN_001628c0(const char* name, u32 volume, s32 category, s32 flags, float gain, float pitch);
+extern const char DAT_0052a96c[];
+extern const char DAT_0052a978[];
+extern const char DAT_0052a97c[];
+extern const char DAT_0052a980[];
 
-int textFormatBuffer(...);
-int FUN_001628c0(...);
-int VectorFloatToUnsigned(...);
-int VectorUnsignedToFloat(...);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014af98(void);
-/* Supplied declaration required: FUN_001628c0. */
-
-
-void FUN_0047f4cc(unsigned int param_1)
-
+// Play an indexed sound, optionally choosing its suffixed resource variant.
+u32 FUN_0047f4cc(u32 sound, float volume, float gain, float pitch)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  
-  if ((param_1 & 0xfffff) >> 8 != 0 && param_1 >> 0x14 != 0) {
-    textFormatBuffer(temp_v3,"I%03u%03u");
-    if ((param_1 & 0xff) >> 4 != 0) {
-      textFormatBuffer(temp_v3,"%s%s");
+    u32 group = (sound >> 8) & 0xfff;
+    u32 index = sound >> 20;
+    u32 variant = (sound >> 4) & 0xf;
+    char name[16];
+    if (group != 0 && index != 0) {
+        textFormatBuffer(name, DAT_0052a96c, index, group);
+        if (variant != 0) {
+            textFormatBuffer(name, DAT_0052a978, name,
+                             variant == 1 ? DAT_0052a97c : DAT_0052a980);
+        }
+        u32 baseVolume = FUN_0014af98();
+        return FUN_001628c0(name, (u32)(baseVolume * volume) & 0xff, 2, 0, gain, pitch);
     }
-    temp_v0 = FUN_0014af98();
-    temp_v1 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = VectorFloatToUnsigned(temp_v1 * in_s0,3);
-    FUN_001628c0(temp_v3,temp_v2 & 0xff,2,0);
-  }
-  return;
+    return 0;
 }
-
-} /* extern "C" */
+}

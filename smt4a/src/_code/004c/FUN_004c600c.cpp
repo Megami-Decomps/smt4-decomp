@@ -1,62 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c600c` (_code @ 0x4c600c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: required-mask load pairing and saved registers differ in candidate search. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+struct OpposingCandidateMasks {
+    u64 required;
+    u8 unk08[0x28];
+    u64 excluded;
+};
+typedef char OpposingCandidateMasksOffsetCheck[offsetof(OpposingCandidateMasks, excluded) == 0x30 ? 1 : -1];
 
 extern "C" {
+extern OpposingCandidateMasks DAT_005713f0;
+BtlMainStateA *btlGetMainState();
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 selection);
 
-int FUN_003f0e20(int, int);
-
-extern unsigned int DAT_005713f0; /* 0x5713f0 */
-extern unsigned int DAT_005713f4; /* 0x5713f4 */
-extern unsigned int DAT_00571420; /* 0x571420 */
-extern unsigned int DAT_00571424; /* 0x571424 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_003f0e20. */
-
-
-int FUN_004c600c(int param_1)
-
+s32 FUN_004c600c(s32 selection)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  unsigned int temp_v5;
-  
-  if (param_1 - 4U < 0x32) {
-    temp_v3 = 0;
-    temp_v4 = 4;
-  }
-  else {
-    temp_v3 = 4;
-    temp_v4 = 0x32;
-  }
-  temp_v1 = btlGetMainState();
-  temp_v5 = temp_v3 + temp_v4;
-  if (temp_v3 < temp_v5) {
-    do {
-      puVar6 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v3 * 0x408);
-      if (((DAT_005713f0 & *puVar6) != 0 || (DAT_005713f4 & puVar6[1]) != 0) &&
-         ((*puVar6 & DAT_00571420) == 0 && (puVar6[1] & DAT_00571424) == 0)) {
-        temp_v0 = *(short *)((int)puVar6 + 0x6e);
-        temp_v2 = btlGetMainState();
-        FUN_003f0e20(temp_v2,(int)temp_v0);
-        temp_v4 = 0;
-        if (temp_v2 != 0) {
-          temp_v4 = *(int *)(temp_v2 + 0x120);
+    // The value lies in the shared entry's byte-aligned union, so keep this local.
+    struct CandidateValueView { u8 unk000[0x120]; s32 value; };
+    typedef char CandidateValueOffsetCheck[offsetof(CandidateValueView, value) == 0x120 ? 1 : -1];
+    s32 first;
+    s32 count;
+    if ((u32)selection - 4 < 50) {
+        first = 0;
+        count = 4;
+    } else {
+        first = 4;
+        count = 50;
+    }
+    BtlMainStateA *state = btlGetMainState();
+    s32 end = first + count;
+    for (s32 index = first; end > index; ++index) {
+        BtlCombatantEntryA *entry = &state->entries[index];
+        u64 flags = entry->flags;
+        if ((flags & DAT_005713f0.required) != 0 && (flags & DAT_005713f0.excluded) == 0) {
+            s16 candidateSelection = entry->indexView.selectionIndex;
+            BtlCombatantEntryA *candidate = FUN_003f0e20(btlGetMainState(), candidateSelection);
+            if (candidate != NULL && ((CandidateValueView *)candidate)->value > 0) {
+                return entry->indexView.selectionIndex;
+            }
         }
-        if ((temp_v2 != 0 && temp_v4 != 0) && -1 < temp_v4) {
-          return (int)*(short *)((int)puVar6 + 0x6e);
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while ((int)temp_v3 < (int)temp_v5);
-  }
-  return -1;
+    }
+    return -1;
 }
-
-} /* extern "C" */
+}

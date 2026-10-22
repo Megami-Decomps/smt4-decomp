@@ -1,58 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023092c` (_code @ 0x23092c, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler unrolls the eight-entry removal loop and uses different inner-loop termination/address scheduling. */
+#include "shard/X14_StatusDown.h"
 
-extern "C" {
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} void_stack;
-
-extern int g_statusDown; /* 0x588fe8 */
-
-
-void FUN_0023092c(void)
-
+/* Remove the current selection from the recent list and close adjacent selection gaps. */
+extern "C" void FUN_0023092c(void)
 {
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = g_statusDown;
-  temp_v3 = 8;
-  temp_v2 = 0;
-  do {
-    temp_v5 = temp_v1 + temp_v2 * 2;
-    temp_v0 = *(short *)(temp_v5 + 0x5cc);
-    if ((temp_v0 != 0) && (temp_v0 == *(short *)(temp_v1 + 0x5bc))) {
-      *(unsigned short *)(temp_v5 + 0x5cc) = 0;
-    }
-    temp_v3 = temp_v3 - 1;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v3 != 0);
-  temp_v2 = 0;
-  *(unsigned short *)(temp_v1 + 0x5bc) = 0;
-  do {
-    if (0 < 7 - temp_v2) {
-      temp_v3 = 0;
-      temp_v5 = 7 - temp_v2;
-      do {
-        temp_v4 = temp_v1 + (temp_v2 + temp_v3) * 2;
-        if ((*(short *)(temp_v4 + 0x5bc) == 0) && (*(short *)(temp_v4 + 0x5be) != 0)) {
-          *(short *)(temp_v4 + 0x5bc) = *(short *)(temp_v4 + 0x5be);
-          *(unsigned short *)(temp_v4 + 0x5be) = 0;
+    /* A halfword view avoids changing the odd-aligned padding union in StatusDown. */
+    struct SelectionHistoryView {
+        u8 unk000[0x5BC];
+        u16 selections[8];
+        u16 recent[8];
+    };
+    SelectionHistoryView *history = reinterpret_cast<SelectionHistoryView *>(g_statusDown);
+    for (s32 index = 0; index < 8; ++index) {
+        if (history->recent[index] && history->recent[index] == history->selections[0]) {
+            history->recent[index] = 0;
         }
-        temp_v5 = temp_v5 - 1;
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v5 != 0);
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 7);
-  return;
+    history->selections[0] = 0;
+    for (s32 first = 0; first < 7; ++first) {
+        for (s32 offset = 0; offset < 7 - first; ++offset) {
+            u16 *selection = &history->selections[first + offset];
+            if (selection[0] == 0 && selection[1] != 0) {
+                selection[0] = selection[1];
+                selection[1] = 0;
+            }
+        }
+    }
 }
-
-} /* extern "C" */

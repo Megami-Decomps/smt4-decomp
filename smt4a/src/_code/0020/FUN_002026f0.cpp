@@ -1,46 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002026f0` (_code @ 0x2026f0, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch lowers to comparisons rather than retail's jump table; final branch target loads also differ. */
+#include "shard/ScriptStep.h"
 
-extern "C" {
+/* Local extended view: the common ScriptStep ends at the instruction index. */
+struct ConditionalScriptLabel {
+    u8 unk00[0x18];
+    s32 instruction;
+    u8 unk1C[4];
+};
+struct ConditionalScriptInstruction {
+    u16 opcode;
+    u16 label;
+};
+struct ConditionalScriptContext {
+    ScriptStep execution;
+    s32 valueOffset; /* 0x1C, relative to this context */
+    u8 unk20[0x98];
+    ConditionalScriptLabel *labels; /* 0xB8 */
+    ConditionalScriptInstruction *instructions; /* 0xBC */
+};
+extern "C" s32 FUN_003d2004(ConditionalScriptContext *);
+extern "C" f32 scrPopFloat(ConditionalScriptContext *);
 
-int scrPopFloat(int);
-
-extern int FUN_003d2004(int);
-/* Supplied declaration required: scrPopFloat. */
-
-
-unsigned int FUN_002026f0(int param_1)
-
+/* Continue after a true value, otherwise branch to the instruction's label. */
+extern "C" u32 FUN_002026f0(ConditionalScriptContext *context)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  float in_s0;
-  
-  switch(*(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x1f)) {
-  case 0:
-  case 2:
-    temp_v0 = FUN_003d2004(param_1);
-    if (temp_v0 != 0) {
-      temp_v0 = *(int *)(param_1 + 0x18) + 1;
-      *(int *)(param_1 + 0x18) = temp_v0;
-      return 1;
+    switch (((const u8 *)context)[context->valueOffset + 0x1F]) {
+    case 0:
+    case 2:
+        if (FUN_003d2004(context) != 0) {
+            ++context->execution.step;
+            return 1;
+        }
+        break;
+    case 1:
+    case 3:
+        if (scrPopFloat(context) != 0.0f) {
+            ++context->execution.step;
+            return 1;
+        }
+        break;
     }
-    break;
-  case 1:
-  case 3:
-    scrPopFloat(param_1);
-    if (in_s0 != 0.0f) {
-      temp_v0 = *(int *)(param_1 + 0x18) + 1;
-      *(int *)(param_1 + 0x18) = temp_v0;
-      return 1;
-    }
-  }
-  temp_v0 = *(int *)(*(int *)(param_1 + 0xb8) +
-                  (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xbc) + *(int *)(param_1 + 0x18) * 4 + 2) *
-                  0x20 + 0x18);
-  *(int *)(param_1 + 0x18) = temp_v0;
-  return 1;
+    context->execution.step = context->labels[
+        context->instructions[context->execution.step].label].instruction;
+    return 1;
 }
-
-} /* extern "C" */

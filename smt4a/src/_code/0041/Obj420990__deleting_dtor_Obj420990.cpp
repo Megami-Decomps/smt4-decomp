@@ -1,4 +1,4 @@
-/* NON_MATCHING: shared class header uses IV's release/delete symbols and base-vtable name. */
+/* NON_MATCHING: shared base destructor calls IV's bufferHandleRelease/asdMemFreeNonNull rather than Apocalypse's textureOwnerReset/asdOperatorDelete. */
 #include "classes/Obj420990.h"
 
 /* Releases the two handle entries, then everything the base filter holds. */

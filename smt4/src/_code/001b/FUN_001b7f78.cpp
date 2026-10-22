@@ -16,7 +16,7 @@ int FUN_001b46e0(void);
 int mapGimicReleaseAll(void);
 int mapRangeDestroyModels(void);
 int FUN_002148e4(void);
-int FUN_0021e074(void);
+int gfxDestroyModelGroups(void);
 int FUN_0026f960(...);
 int bgmReleaseStopped(void);
 int FUN_0026faa4(void);
@@ -183,7 +183,7 @@ int naviMainApplySetting(...);
 int lmapSetSceneId(...);
 int FUN_002804ec(...);
 int tableGroupFindEntryIndex(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_002a04f0(...);
 int FUN_002bd158(void);
 int FUN_002be650(...);
@@ -480,7 +480,7 @@ extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: FUN_0021baf4. */
 /* Supplied declaration required: FUN_0021bc04. */
 /* Supplied declaration required: FUN_0021be00. */
-/* Supplied declaration required: FUN_0021e074. */
+/* Supplied declaration required: gfxDestroyModelGroups. */
 extern int FUN_0021e4bc(void);
 /* Supplied declaration required: mapCollisionAllocBuffers. */
 /* Supplied declaration required: mapApplyDeparturePoint. */
@@ -648,7 +648,7 @@ extern int FUN_002903f0(void);
 /* Supplied declaration required: tableGroupFindEntryIndex. */
 /* Supplied declaration required: helpResourcesRelease. */
 /* Supplied declaration required: FUN_00294834. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int messageMainGetChoiceResult(void);
@@ -1633,7 +1633,7 @@ LAB_001b9210:
       DAT_0049f9ac = *(float *)(g_lmapScene + 0x50);
       FUN_002be650(DAT_0049f9cc,0);
       FUN_002bd158();
-      FUN_00295660(0,temp_v22);
+      textEncodeFontSlot(0,temp_v22);
       rt_memcpy_w(&DAT_0049f978,0x1b95f8,0x16);
       return 0;
     }
@@ -2663,7 +2663,7 @@ joined_r0x001ba508:
                     DAT_0049f978 = 0x5f726373;
                     DAT_0049f97c = (unsigned char *)0x73757566;
                   }
-                  FUN_00295660(0);
+                  textEncodeFontSlot(0);
                   puVar14[9] = 0x31;
                   puVar14[10] = 0;
                   navigationResetTimer();
@@ -3399,7 +3399,7 @@ LAB_001bc008:
         buttonHelpSetPresetDefault();
         FUN_002be650(DAT_0049fa5c,1);
         FUN_002bd158();
-        FUN_00295660(0,temp_v22);
+        textEncodeFontSlot(0,temp_v22);
         FUN_002bff50();
         temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],0x1bc5a4);
         puVar14[0x2d] = temp_v16;
@@ -5199,7 +5199,7 @@ LAB_001bec78:
     mapRangeDestroyModels();
     objectDestroyModelManager();
     FUN_002148e4();
-    FUN_0021e074();
+    gfxDestroyModelGroups();
     FUN_002d3e18();
     mapEplFree();
     temp_v9 = puVar14[9] + 1;
@@ -5674,7 +5674,7 @@ joined_r0x001bfcb4:
       mapRangeDestroyModels();
       objectDestroyModelManager();
       FUN_002148e4();
-      FUN_0021e074();
+      gfxDestroyModelGroups();
       FUN_002d3e18();
       mapTableRelease();
       mapEplFree();

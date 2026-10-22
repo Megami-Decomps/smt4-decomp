@@ -61,7 +61,7 @@ extern unsigned int fileLoadSync(unsigned char *, unsigned int *, unsigned int);
 extern int FUN_002c58c8(void *, unsigned int);
 /* Supplied declaration required: FUN_002c618c. */
 extern int FUN_002e151c(void *, unsigned int);
-extern int FUN_002e1574(void *, unsigned int);
+extern int asdTMTexTableActivateImage(void *, unsigned int);
 /* Supplied declaration required: FUN_0033e8a8. */
 extern int aocTextureRequestHasNewContent(fn_0033dcec_arg0 *);
 /* Supplied declaration required: resourceReleaseAllocationAndDispatchUpdate. */
@@ -116,7 +116,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x30000);
       }
       else {
-        temp_v4 = FUN_002e1574(param_1->field_0x8,param_1->field_0xc);
+        temp_v4 = asdTMTexTableActivateImage(param_1->field_0x8,param_1->field_0xc);
       }
     }
     else if ((param_2 & 1) != 0) {

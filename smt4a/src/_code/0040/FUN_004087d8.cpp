@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_00168594(int, int);
 int FUN_001834a4(int, int);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -31,7 +31,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_004087d8(int param_1,int param_2)
@@ -65,7 +65,7 @@ void FUN_004087d8(int param_1,int param_2)
   FUN_001834a4(0x2b,0x56);
   temp_v2 = FUN_001834a4(0x2b,0x59);
   temp_v5 = 0.26f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   FUN_00164b5c(2,0x2b,7,(int)temp_v5,0,0xf1);
   temp_v6 = 0.0f;
   temp_v0 = **(short **)(temp_v2 + 0xc);

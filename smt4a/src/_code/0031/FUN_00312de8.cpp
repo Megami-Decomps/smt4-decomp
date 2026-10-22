@@ -1,69 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00312de8` (_code @ 0x312de8, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: timed vector-slot allocation recovered; endpoint copy grouping and saved source/index registers still differ. */
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
+extern MapTimerBanks* g_vectorQueueWork;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-#ifndef ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__________0058127c_17_1 {
-    char whole[17];
-    unsigned char u1[17];
-    signed char s1[17];
-};
-typedef char romwright_storage_s__________0058127c_17_1_size_check[(sizeof(union romwright_storage_s__________0058127c_17_1) == 17) ? 1 : -1];
-typedef char romwright_storage_s__________0058127c_17_1_u1_width_check[(sizeof(((union romwright_storage_s__________0058127c_17_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__________0058127c_17_1_s1_width_check[(sizeof(((union romwright_storage_s__________0058127c_17_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__________0058127c_17_1 s__________0058127c; /* 0x58127c */
-
-
-char * FUN_00312de8(int param_1)
-
+// Allocate a timed vector transition, taking its endpoints from a selected bank.
+MapTimerSlot* FUN_00312de8(s32 bankIndex, float duration)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_s0;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v1 = 0;
-  temp_v2 = (*(unsigned int *)&s__________0058127c.u1[0]) + param_1 * 0x284;
-  do {
-    temp_v0 = (*(unsigned int *)&s__________0058127c.u1[0]) + temp_v1 * 0x30;
-    pcVar2 = (char *)(temp_v0 + 0x2844);
-    if (*pcVar2 == '\0') {
-      *pcVar2 = '\x01';
-      *(unsigned char *)(temp_v0 + 0x2845) = 0;
-      *(unsigned int *)(temp_v0 + 0x284c) = 0;
-      *(int *)(temp_v0 + 0x2848) = param_1;
-      temp_v3 = *(unsigned int *)(temp_v2 + 8);
-      temp_v4 = *(unsigned int *)(temp_v2 + 0xc);
-      *(unsigned int *)(temp_v0 + 0x2850) = *(unsigned int *)(temp_v2 + 4);
-      *(unsigned int *)(temp_v0 + 0x2854) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x2858) = temp_v4;
-      temp_v3 = *(unsigned int *)(temp_v2 + 0x2c);
-      temp_v4 = *(unsigned int *)(temp_v2 + 0x30);
-      *(unsigned int *)(temp_v0 + 0x2864) = *(unsigned int *)(temp_v2 + 0x34);
-      *(unsigned int *)(temp_v0 + 0x285c) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x2860) = temp_v4;
-      *(unsigned int *)(temp_v0 + 0x2868) = in_s0;
-      *(unsigned int *)(temp_v0 + 0x286c) = 0;
-      *(int *)(temp_v0 + 0x2870) = temp_v1;
-      return pcVar2;
+    struct Vector {
+        float x, y, z;
+    };
+    struct BankView {
+        /* 0x000 */ u32 active;
+        /* 0x004 */ Vector origin;
+        /* 0x010 */ u8 unk010[0x1C];
+        /* 0x02C */ Vector target;
+        /* 0x038 */ u8 unk038[0x24C];
+    };
+    // The slot's byte-aligned padding cannot acquire float members without shifting it.
+    struct SlotView {
+        /* 0x00 */ u8 active;
+        /* 0x01 */ u8 mode;
+        /* 0x02 */ u8 unk02[2];
+        /* 0x04 */ s32 bank;
+        /* 0x08 */ u32 state;
+        /* 0x0C */ Vector origin;
+        /* 0x18 */ Vector target;
+        /* 0x24 */ float duration;
+        /* 0x28 */ float elapsed;
+        /* 0x2C */ s32 id;
+    };
+    MapTimerBanks* work = g_vectorQueueWork;
+    const BankView* bank = reinterpret_cast<const BankView*>(&work->banks[bankIndex]);
+    for (s32 i = 0; i < 32; ++i) {
+        SlotView* slot = reinterpret_cast<SlotView*>(&work->slots[i]);
+        if (!slot->active) {
+            slot->active = 1;
+            slot->mode = 0;
+            slot->state = 0;
+            slot->bank = bankIndex;
+            slot->origin = bank->origin;
+            slot->target = bank->target;
+            slot->duration = duration;
+            slot->elapsed = 0.0f;
+            slot->id = i;
+            return reinterpret_cast<MapTimerSlot*>(slot);
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x20);
-  return (char *)0x0;
+    return NULL;
 }
-
-} /* extern "C" */
+}

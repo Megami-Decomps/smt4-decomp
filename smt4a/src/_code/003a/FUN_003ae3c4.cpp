@@ -1,49 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ae3c4` (_code @ 0x3ae3c4, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: restored XYZ arguments, but saved VFP registers and the spawn-flag address calculation differ. */
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
+FlagWorkBanks *gameFlagsGetBlock();
+s32 lmapGetSpawnIndex();
+void sceneRegisterBoxEffect(u32, u32, const char *, u32,
+                            u32, s32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32,
+                            f32 x, f32 y, f32 z, f32 width, f32 height, f32 depth, f32 rotation);
 
-int sceneRegisterBoxEffect(int, int, unsigned char *, int, int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-
-/* stack frame of void: 14 slot(s), 56 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-} void_stack;
-
-extern unsigned char LAB_003ae494; /* 0x3ae494 */
-
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: sceneRegisterBoxEffect. */
-extern int lmapGetSpawnIndex(void);
-
-
-void FUN_003ae3c4(void)
-
+// Register the pending spawn's box effect at the supplied world position.
+void FUN_003ae3c4(f32 x, f32 y, f32 z)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagsGetBlock();
-  temp_v1 = lmapGetSpawnIndex();
-  if ((*(char *)(temp_v0 + 0x1664) != '\0') && (temp_v1 >= 100)) {
-    sceneRegisterBoxEffect(0,0,&LAB_003ae494,0x58,0,0xffffffff,0,0,0,0,0,0,0,0,0,0,0,0,0);
-  }
-  return;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    s32 spawn = lmapGetSpawnIndex();
+    if (flags->spawnRequest.pending != 0 && spawn >= 100) {
+        sceneRegisterBoxEffect(0, 0, "NA", 0x58, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                               x, y - 200.0f, z, 700.0f, 400.0f, 700.0f, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

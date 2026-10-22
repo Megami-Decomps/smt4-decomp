@@ -8,7 +8,7 @@ extern "C" {
 int battleRecordUnitMaskHistoryEvents(...);
 int btlSelectActionTier(void);
 int FUN_004e5f2c(...);
-int FUN_004e62b4(...);
+int battleApplyInteractionSelection(...);
 int FUN_004fb43c(...);
 int FUN_004fb798(...);
 int FUN_004fbd5c(...);
@@ -48,7 +48,7 @@ extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: battleRecordUnitMaskHistoryEvents. */
 /* Supplied declaration required: btlSelectActionTier. */
 /* Supplied declaration required: FUN_004e5f2c. */
-/* Supplied declaration required: FUN_004e62b4. */
+/* Supplied declaration required: battleApplyInteractionSelection. */
 extern int FUN_004e83ac(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fb798. */
@@ -143,11 +143,11 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
     temp_v2 = param_2[9];
     if ((*(unsigned int *)(temp_v2 + 0x50) & 0x400) != 0) {
       btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(temp_v2 + 0x6a),10,0x3c,0x3c);
-      FUN_004e62b4(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0x46,0);
+      battleApplyInteractionSelection(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0x46,0);
     }
     else {
         btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(temp_v2 + 0x6a),10,0x1e,0x1e);
-      FUN_004e62b4(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0x28,0);
+      battleApplyInteractionSelection(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0x28,0);
     }
   }
   else {

@@ -1,55 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003161b4` (_code @ 0x3161b8, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: caption VFP/load scheduling and cached-state push/pop register allocation differ. */
+#include "shard/S1ListPanel.h"
 
 extern "C" {
+extern RenderCtx* g_renderCtx;
+extern const void* DAT_0056fd38;
+extern const u8 DAT_0056df38[][60];
+void FUN_00162790(u32 font, u32 color, const u8* text,
+                  f32 x, f32 y, f32 depth, f32 scaleX, f32 scaleY);
+u32 FUN_001692ac(u32 mode, u32 options);
 
-int FUN_00162790(int, unsigned int, unsigned int);
-
-typedef int romwright_code(...);
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00162790. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-
-
-unsigned int FUN_003161b4(int *param_1)
-
+u32 FUN_003161b4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  temp_v1 = *(int *)(*param_1 + 0x10);
-  if (temp_v1 - 1U < 0x11) {
-    if (temp_v1 == 1) {
-      FUN_00162790(3,0xffffffff,(unsigned int)*(unsigned char *)(*param_1 + 9) * 0x3c + 0x56fd3f);
+    struct TerminalView {
+        u8 unk00[9];
+        u8 selection;
+        u8 unk0A[6];
+        u32 state;
+    };
+    const TerminalView* work = static_cast<const TerminalView*>(DAT_0056fd38);
+    if (work->state - 1 >= 17) {
+        return 1;
     }
-    temp_v1 = g_renderCtx;
-    temp_v0 = FUN_001692ac(1,0);
-    piVar5 = (int *)(temp_v1 + 0x1258);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v3 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
+    if (work->state == 1) {
+        FUN_00162790(3, 0xFFFFFFFF, DAT_0056df38[work->selection] + 7,
+                      150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
     }
-    temp_v1 = g_renderCtx;
-    piVar5 = (int *)(g_renderCtx + 0x1258);
-    temp_v0 = *piVar5;
-    temp_v2 = piVar5[temp_v0 + 2];
-    *piVar5 = temp_v0 - 1;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v2 != piVar5[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
-    }
-  }
-  return 0;
+    RenderCtx* context = g_renderCtx;
+    u32 value = FUN_001692ac(1, 0);
+    context->drawStateView.state.push(value);
+    g_renderCtx->drawStateView.state.pop();
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -15,7 +15,7 @@ int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
-int FUN_002bce30(...);
+int demonGetRaceLabel(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -71,7 +71,7 @@ extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bce30. */
+/* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -156,7 +156,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,temp_v16,temp_v19);
     temp_v4 = FUN_002bf4f8(0x24,0x4e);
-    temp_v16 = FUN_002bce30(*puVar5,0);
+    temp_v16 = demonGetRaceLabel(*puVar5,0);
     textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v16);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -226,7 +226,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(1,0xff,temp_v19,(int)*(short *)(temp_v12 + 10));
         temp_v12 = FUN_002bf4f8(0x24,0x119);
-        temp_v15 = FUN_002bce30(*psVar13,0);
+        temp_v15 = demonGetRaceLabel(*psVar13,0);
         textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
         puVar16 = temp_v19;
         FUN_002b6dd8(puVar16,2);
@@ -275,7 +275,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(1,0xff,temp_v19,(int)*(short *)(temp_v11 + 8));
         temp_v12 = FUN_002bf4f8(0x24,0x119);
-        temp_v15 = FUN_002bce30(*psVar13,0);
+        temp_v15 = demonGetRaceLabel(*psVar13,0);
         textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
         puVar16 = temp_v19;
         FUN_002b6dd8(puVar16,2);
@@ -398,7 +398,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(2,temp_v15,temp_v19,(int)*(short *)(temp_v10 + 8));
       temp_v10 = FUN_002bf4f8(0x24,0x13a);
-      temp_v15 = FUN_002bce30(*psVar13,0);
+      temp_v15 = demonGetRaceLabel(*psVar13,0);
       textFormatBuffer(temp_v19,&LAB_001efd54,temp_v15);
       puVar16 = temp_v19;
       FUN_002b6dd8(puVar16,2);
@@ -471,7 +471,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(2,temp_v15,temp_v19,(int)*(short *)(temp_v10 + 8));
       temp_v10 = FUN_002bf4f8(0x24,0x13a);
-      temp_v15 = FUN_002bce30(*psVar13,0);
+      temp_v15 = demonGetRaceLabel(*psVar13,0);
       textFormatBuffer(temp_v19,&LAB_001f0518,temp_v15);
       puVar16 = temp_v19;
       FUN_002b6dd8(puVar16,2);

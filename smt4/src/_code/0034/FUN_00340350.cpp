@@ -1,77 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00340350` (_code @ 0x340350, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: fog color conversion order, VFP save grouping and depth-range arithmetic scheduling differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
+struct ModelFogSettings {
+    u8 unk00[0x40];
+    s32 mode; // 0x40
+    s32 red, green, blue; // 0x44..0x4c
+    s32 start, distance; // 0x50..0x54
+    u32 parameter; // 0x58
+};
+struct ModelFogRange {
+    u32 mode;
+    f32 start, end;
+    u32 parameter;
+};
+// The model's fog data extends beyond the shared AsdMdlNode prefix.
+struct ModelFogView {
+    u8 unk00[0xb4];
+    f32 red, green, blue, alpha; // 0xb4..0xc0
+    u32 unkC4;
+    s32 rangeOffset; // 0xc8, relative to this field
+};
 extern "C" {
+u32 asdModelIdListGet(s32 index, s32 list);
 
-int VectorSignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int asdModelIdListGet(unsigned int);
-
-
-void FUN_00340350(int param_1)
-
+// Apply normalized fog color and mapped depth range to the primary model.
+void FUN_00340350(const ModelFogSettings *settings)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int in_fpscr;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v2 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x50),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x54),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x44),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x48),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = temp_v5 * 0.003921569f;
-  temp_v4 = temp_v4 * 0.003921569f;
-  temp_v7 = temp_v2 * 0.001f + 25570.0f;
-  temp_v3 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x4c),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = temp_v2 * 0.001f + temp_v6 * 0.001f + 25570.0f;
-  temp_v3 = temp_v3 * 0.003921569f;
-  temp_v0 = asdModelIdListGet(0);
-  temp_v0 = *(int *)(temp_v0 + 8);
-  *(float *)(temp_v0 + 0xbc) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0xc0) = 0x3f800000;
-  *(float *)(temp_v0 + 0xb4) = temp_v5;
-  *(float *)(temp_v0 + 0xb8) = temp_v4;
-  piVar2 = (int *)(temp_v0 + 200);
-  temp_v0 = *piVar2;
-  if (temp_v0 != 0) {
-    piVar2 = (int *)((int)piVar2 + temp_v0);
-  }
-  temp_v1 = *(int *)(param_1 + 0x40);
-  if (temp_v0 == 0) {
-    piVar2 = (int *)0x0;
-  }
-  if (temp_v1 == 0) {
-    *piVar2 = 1;
-  }
-  else {
-    if (temp_v1 == 1) {
-      temp_v0 = 2;
+    f32 start = (f32)settings->start * 0.001f + 25570.0f;
+    f32 end = (f32)settings->start * 0.001f + (f32)settings->distance * 0.001f + 25570.0f;
+    f32 red = (f32)settings->red * 0.003921569f;
+    f32 green = (f32)settings->green * 0.003921569f;
+    f32 blue = (f32)settings->blue * 0.003921569f;
+    AsdMdlObject *model = (AsdMdlObject *)asdModelIdListGet(0, 0);
+    ModelFogView *fog = (ModelFogView *)model->node;
+    fog->blue = blue;
+    fog->alpha = 1.0f;
+    fog->red = red;
+    fog->green = green;
+    ModelFogRange *range = fog->rangeOffset ? (ModelFogRange *)((u8 *)&fog->rangeOffset + fog->rangeOffset) : NULL;
+    switch (settings->mode) {
+    case 0: range->mode = 1; break;
+    case 1: range->mode = 2; break;
+    case 2: range->mode = 3; break;
     }
-    else {
-      if (temp_v1 != 2) {
-        piVar2[1] = (int)temp_v7;
-        piVar2[2] = (int)temp_v2;
-        piVar2[3] = *(int *)(param_1 + 0x58);
-        return;
-      }
-      temp_v0 = 3;
-    }
-    *piVar2 = temp_v0;
-  }
-  piVar2[1] = (int)temp_v7;
-  piVar2[2] = (int)temp_v2;
-  piVar2[3] = *(int *)(param_1 + 0x58);
-  return;
+    range->start = start;
+    range->end = end;
+    range->parameter = settings->parameter;
 }
-
-} /* extern "C" */
+}

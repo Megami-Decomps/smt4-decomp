@@ -9,7 +9,7 @@ int FUN_002878fc(int);
 int FUN_002879dc(int, int, int);
 int FUN_00287a78(void);
 int mathDistanceBetweenPoints(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00291e40(int);
 int asdMdlManagerDestroy(void);
@@ -31,7 +31,7 @@ extern short DAT_0049faae; /* 0x49faae */
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: FUN_00287a78. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -65,7 +65,7 @@ unsigned int FUN_001a8cf8(void)
         if (DAT_0049fa98 != '\0' && temp_v0 != 0) {
           mathPositionHeadingDegrees();
           temp_v6 = *(unsigned int *)(temp_v4 + 0x3c);
-          FUN_00287b0c();
+          mathGetShortestAngleDelta();
           if ((temp_v6 < 0xc2b40000) && ((int)temp_v6 < 0x42b40000)) {
             temp_v1 = 1;
           }

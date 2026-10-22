@@ -1,60 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011a0d4` (_code @ 0x11a0d4, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: null-case result initialization and animation-state branches differ. */
+#include "event/bustupEvent/BustupCutAnim.h"
 
 extern "C" {
+extern BustupCutAnim *g_bustupCutAnim;
+s32 jobIsValid(u32);
+s32 jobWorkGetFirstWord(u32);
+s32 FUN_00126160(u32);
+void FUN_00126170(u32, s32);
+void textureRequestIndexedFrame(u32, u32, u32, u32, u32);
 
-int FUN_00126170(unsigned int, int);
-int textureRequestIndexedFrame(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_5_stack;
-
-extern int g_bustupCutAnim; /* 0x43dfc0 */
-
-extern int FUN_00126160(unsigned int);
-/* Supplied declaration required: FUN_00126170. */
-/* Supplied declaration required: textureRequestIndexedFrame. */
-extern int jobWorkGetFirstWord(unsigned int);
-extern int jobIsValid(unsigned int);
-
-
-unsigned int
-FUN_0011a0d4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5)
-
+// Request a texture frame on the idle bustup slot with the requested owner id.
+u32 FUN_0011a0d4(s32 owner, u32 resource, u32 frame, u32 flags, u32 argument)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned long long temp_v5;
-  
-  temp_v0 = g_bustupCutAnim;
-  temp_v5 = (unsigned long long)param_5;
-  if (g_bustupCutAnim != 0) {
-    temp_v2 = 1;
-    do {
-      temp_v3 = temp_v0 + temp_v2 * 4;
-      temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x630));
-      if ((temp_v1 != 0) && (temp_v1 = jobWorkGetFirstWord(*(unsigned int *)(temp_v3 + 0x630)), temp_v1 == param_1))
-      {
-        temp_v1 = FUN_00126160(*(unsigned int *)(temp_v3 + 0x630));
-        temp_v4 = (unsigned int)temp_v5;
-        if (temp_v1 == 0) {
-          FUN_00126170(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x630),1);
-          textureRequestIndexedFrame(*(unsigned int *)(temp_v3 + 0x630),param_2,param_3,param_4,temp_v4);
-          return 1;
+    BustupCutAnim *animation = g_bustupCutAnim;
+    u32 result = 0;
+    if (animation != NULL) {
+        for (s32 slot = 1; slot < BUSTUP_CUT_SLOTS; ++slot) {
+            if (jobIsValid(animation->slots[slot]) &&
+                jobWorkGetFirstWord(animation->slots[slot]) == owner &&
+                FUN_00126160(animation->slots[slot]) == 0) {
+                FUN_00126170(animation->slots[slot], 1);
+                textureRequestIndexedFrame(animation->slots[slot], resource, frame, flags, argument);
+                result = 1;
+                break;
+            }
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 4);
-  }
-  return 0;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -1,54 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `bgmFadeOut` (_code @ 0x290f48, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
-
-extern unsigned int DAT_0044e09c; /* 0x44e09c */
-extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
-extern unsigned int DAT_004c53c8; /* 0x4c53c8 */
-extern unsigned int DAT_004c53cc; /* 0x4c53cc */
-extern unsigned int DAT_004c53e0; /* 0x4c53e0 */
-extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
-extern unsigned int DAT_004c53e8; /* 0x4c53e8 */
-extern unsigned int DAT_004c53ec; /* 0x4c53ec */
-extern unsigned int DAT_004c5400; /* 0x4c5400 */
-
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-void bgmFadeOut(unsigned int param_1)
-
-{
-  int temp_v0;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    if ((DAT_004c53e0 & 2) != 0) {
-      if ((DAT_004c53e0 & 0x20) != 0) {
-        DAT_004c53e0 = (DAT_004c53e0 & 0xffffffdf) | 0x40;
-        DAT_0044e09c = DAT_004c53c4;
-        DAT_004c53c8 = param_1;
-      }
-      else if ((DAT_004c53e0 & 0x400) == 0) {
-        DAT_004c53cc = 0x1e;
-        DAT_004c53e0 = DAT_004c53e0 | 8;
-      }
-    }
-    if ((DAT_004c5400 & 2) != 0) {
-      if ((DAT_004c5400 & 0x20) != 0) {
-        DAT_004c5400 = (DAT_004c5400 & 0xffffffdf) | 0x40;
-        DAT_0044e09c = DAT_004c53e4;
-        DAT_004c53e8 = param_1;
-      }
-      else if ((DAT_004c5400 & 0x400) == 0) {
-        DAT_004c53ec = 0x1e;
-        DAT_004c5400 = DAT_004c5400 | 8;
-        return;
-      }
-    }
-  }
-  return;
+extern BgmChannelSelection g_titleConfigModeFlag;
+extern BgmRequestChannel DAT_004c53c4;
+extern BgmRequestChannel DAT_004c53e4;
+int jyoucyuGetTableEntry(u32 index);
 }
 
-} /* extern "C" */
+/* Cancel a pending transition or start the channel's normal fade-out. */
+static __inline void bgmFadeChannel(BgmRequestChannel *channel, u32 parameter)
+{
+    if (channel->flags & 2) {
+        if (channel->flags & 0x20) {
+            channel->flags = (channel->flags & ~0x20) | 0x40;
+            channel->play.param = parameter;
+            g_titleConfigModeFlag.selected = channel->play.unk00;
+        } else if (!(channel->flags & 0x400)) {
+            channel->fadeFrames = 30;
+            channel->flags |= 8;
+        }
+    }
+}
+
+/* Request a fade-out on both active BGM channels. */
+extern "C" void bgmFadeOut(u32 parameter)
+{
+    if (jyoucyuGetTableEntry(1) == 0) {
+        bgmFadeChannel(&DAT_004c53c4, parameter);
+        bgmFadeChannel(&DAT_004c53e4, parameter);
+    }
+}

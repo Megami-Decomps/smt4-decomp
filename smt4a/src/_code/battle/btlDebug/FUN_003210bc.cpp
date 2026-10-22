@@ -7,7 +7,7 @@ extern "C" {
 int qsort(char [68], int, int, unsigned char *);
 int FUN_00157558(unsigned int);
 int FUN_001634b4(int);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_002219e4; /* 0x2219e4 */
@@ -18,7 +18,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_001634b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_003210bc(int param_1,int param_2)
@@ -46,7 +46,7 @@ void FUN_003210bc(int param_1,int param_2)
   temp_v5 = 0;
   if (param_2 != 0) {
     temp_v6 = DAT_00573c00;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v5 = (int)temp_v6;
   }
   temp_v1 = '\0';

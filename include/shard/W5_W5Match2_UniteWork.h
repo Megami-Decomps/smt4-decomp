@@ -60,6 +60,10 @@ struct UniteWork {
     /* 0x0438 */ union {
         /* 0x0438 */ u8 unk0438[0x9018];
         struct {
+            /* 0x0438 */ u8 unk0438BeforeSelection[0x8A50];
+            /* 0x8E88 */ s16 selectedIndex;
+        } selectionA;
+        struct {
             /* 0x438 */ u8 unk0438[0x40];
             /* 0x478 */ s32 pendingRequest;
         } scriptIV;
@@ -143,7 +147,14 @@ struct UniteWorkIV {
     /* 0x0000 */ UniteWork common;
     /* 0x9454 */ u8 unk9454[0x10];
     /* 0x9464 */ u32 unk9464;
-    /* 0x9468 */ u8 unk9468[0x170];
+    union {
+        /* 0x9468 */ u8 unk9468[0x170];
+        struct {
+            /* 0x9468 */ u8 unk9468[0x160];
+            /* 0x95C8 */ void *previewSound;
+            /* 0x95CC */ struct AsdMdlObject *previewModel;
+        } preview;
+    };
     /* 0x95D8 */ s32 unk95D8;
 };
 
@@ -160,5 +171,11 @@ typedef char UniteWorkIVFlagsOffsetCheck[offsetof(UniteWork, eventFlagsIV.ready)
 
 typedef char UniteRequestOffsets[offsetof(UniteWork, menu.scriptProcess) == 0x42C && offsetof(UniteWork, menu.active) == 0x430 && offsetof(UniteWork, scriptIV.pendingRequest) == 0x478 && offsetof(UniteWork, scriptA.pendingRequest) == 0x488 && offsetof(UniteWorkIV, unk9464) == 0x9464 && offsetof(UniteWorkIV, unk95D8) == 0x95D8 && sizeof(UniteWorkIV) == 0x95DC ? 1 : -1];
 typedef char UniteWorkReturnStateOffsets[offsetof(UniteWork, returnState.soundChannel) == 0x48C && offsetof(UniteWork, returnState.unk90A4) == 0x90A4 && offsetof(UniteWork, returnState.unk91B0) == 0x91B0 ? 1 : -1];
+typedef char UniteWorkIVPreviewOffsets[offsetof(UniteWorkIV, preview.previewSound) == 0x95C8 && offsetof(UniteWorkIV, preview.previewModel) == 0x95CC ? 1 : -1];
+
+typedef char UniteWorkSelectionAOffsetCheck[
+    offsetof(UniteWork, unk0438) == 0x438 &&
+    offsetof(UniteWork, selectionA.selectedIndex) == 0x8E88 &&
+    sizeof(UniteWork) == 0x9454 ? 1 : -1];
 
 #endif

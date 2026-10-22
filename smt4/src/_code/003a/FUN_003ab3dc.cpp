@@ -10,7 +10,7 @@ int FUN_00231bcc(int, int, int, int, int, int);
 int flaggedValueHolderGetTotal(...);
 int FUN_00240d5c(...);
 int FUN_00288e68(...);
-int FUN_0029c94c(void);
+int buttonHelpShowSkillDetails(void);
 int FUN_003abae8(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -26,7 +26,7 @@ typedef struct {
 extern int rangeLimitMin(int);
 /* Supplied declaration required: FUN_00240d5c. */
 /* Supplied declaration required: FUN_00288e68. */
-/* Supplied declaration required: FUN_0029c94c. */
+/* Supplied declaration required: buttonHelpShowSkillDetails. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: FUN_003abae8. */
 
@@ -65,7 +65,7 @@ void FUN_003ab3dc(int param_1)
       FUN_003abae8(param_1,temp_v4,temp_v3,1,0x20);
       temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_00288e68((int)*(short *)(param_1 + temp_v0 * 0x20 + 0x5ac));
-      FUN_0029c94c();
+      buttonHelpShowSkillDetails();
     }
     FUN_0022d7b0(param_1,0x1f);
     return;

@@ -4,7 +4,7 @@ struct RenderCtx;
 
 extern "C" {
 extern RenderCtx *g_renderCtx;
-f32 FUN_001879d0(RenderCtx *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void efctSetSpeed(f32 alpha);
 void FUN_001835b4(s32 layer, s32 font, s32 x, s32 y, u32 color, s32 glyph);
 
@@ -12,7 +12,7 @@ void FUN_001835b4(s32 layer, s32 font, s32 x, s32 y, u32 color, s32 glyph);
  * alpha. */
 void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 alpha)
 {
-    s32 offset = (s32)FUN_001879d0(g_renderCtx, 0.26f);
+    s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(alpha);
     for (s32 i = 0; i < 3; i++) {
         FUN_001835b4(2, 0x31, firstX + i, offset + y, color, 0x65 + i);

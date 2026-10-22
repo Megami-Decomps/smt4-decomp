@@ -1,43 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c368` (_code @ 0x23c368, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved argument registers and the second action's constant/store schedule differ; packed float payloads now use VFP. */
+#include "battle/btlReflect.h"
 
-extern "C" {
+extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
 
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-unsigned int
-FUN_0023c368(short param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,short param_5,
-            unsigned int param_6,unsigned int param_7,int param_8)
-
+/* Queue a start/end pair with separate scalar payloads. */
+extern "C" u32 FUN_0023c368(s32 actor, u32 options, u32 target, u32 parameter,
+                           s32 actorDelta, u32 startValueBits, u32 endValueBits, s32 enabled)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  if (param_8 == 0) {
-    *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
-  }
-  *(unsigned char *)(temp_v0 + 4) = 0x21;
-  *(unsigned int *)(temp_v0 + 0x14) = param_3;
-  *(unsigned int *)(temp_v0 + 0x28) = param_6;
-  *(unsigned int *)(temp_v0 + 0x4c) = param_4;
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)(short)(param_1 + param_5),0,param_2);
-  if (param_8 == 0) {
-    *(unsigned char *)(temp_v0 + 5) = *(unsigned char *)(temp_v0 + 5) | 4;
-  }
-  *(unsigned int *)(temp_v0 + 0x14) = param_3;
-  *(unsigned char *)(temp_v0 + 4) = 0x22;
-  *(unsigned int *)(temp_v0 + 0x28) = param_7;
-  *(unsigned int *)(temp_v0 + 0x4c) = 0;
-  return 1;
-}
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
+    if (!enabled) {
+        action->flagView.flags |= 4;
+    }
+    action->kind = 0x21;
+    action->target = target;
+    action->scalar = reinterpret_cast<const f32 &>(startValueBits);
+    action->parameter = parameter;
 
-} /* extern "C" */
+    action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + actorDelta), 0, options);
+    if (!enabled) {
+        action->flagView.flags |= 4;
+    }
+    action->target = target;
+    action->kind = 0x22;
+    action->scalar = reinterpret_cast<const f32 &>(endValueBits);
+    action->parameter = 0;
+    return 1;
+}

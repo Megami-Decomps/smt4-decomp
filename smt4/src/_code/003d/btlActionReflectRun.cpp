@@ -7,11 +7,11 @@ struct BattleActionReflect {
 
 extern "C" {
 extern BattleActionReflect* g_btlActionReflect;
-BattleActionReflect* FUN_0022699c(BattleActionReflect* reflect, s32 actionId, s32 flags, u32 argument);
+BattleActionReflect* btlQueueReflectAction(BattleActionReflect* reflect, s32 actionId, s32 flags, u32 argument);
 
 void btlActionReflectRun(s32 actionId, u32 argument)
 {
-    BattleActionReflect* result = FUN_0022699c(g_btlActionReflect, (s16)actionId, 0, argument);
+    BattleActionReflect* result = btlQueueReflectAction(g_btlActionReflect, (s16)actionId, 0, argument);
     result->actionType = 0x29;
 }
 }

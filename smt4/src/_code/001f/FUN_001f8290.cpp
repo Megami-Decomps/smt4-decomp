@@ -1,81 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f8290` (_code @ 0x1f8290, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
+struct ExperienceReward {
+    s32 member;
+    s32 experience;
+};
+struct BattleResultOwner {
+    u32 parent; // 0x000
+    u32 job; // 0x004
+    u8 unk008[0x16c];
+    u8 firstDisplay[0x40]; // 0x174
+    u8 secondDisplay[0x3c]; // 0x1b4
+    ExperienceReward rewards[64]; // 0x1f0
+    s32 rewardCount; // 0x3f0
+};
 extern "C" {
+extern void *g_btlUiBlock;
+u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), void *owner, u32 parent);
+void callbackNormalizeNegativeResult();
+void jobStopChild();
+void resultCreateDefault();
+void FUN_00214568(void *display);
+void FUN_00223360(void *display);
+void resultAddExperienceReward(const ExperienceReward *reward);
+void btlUiPlaySceneFadeOutWhenReady(void *battleUi);
+void btlUiResetWidgetForStateSixteen(void *battleUi);
 
-int FUN_00214568(...);
-int FUN_00223360(...);
-int btlUiPlaySceneFadeOutWhenReady(...);
-int playSceneSetState(...);
-int resultCreateDefault(...);
-int taskCreateDraw(...);
-void resultAddExperienceReward(const int *);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned char LAB_001e4bd8; /* 0x1e4bd8 */
-extern unsigned char LAB_001f833c; /* 0x1f833c */
-extern int jobStopChild(...); /* 0x2c439c */
-extern int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_00214568. */
-/* Supplied declaration required: FUN_00223360. */
-/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
-/* Supplied declaration required: playSceneSetState. */
-/* Supplied declaration required: resultCreateDefault. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-/* WARNING: Removing unreachable block (ram,0x002bd91c) */
-
-void FUN_001f8290(unsigned int *param_1)
-
+// Start result display, transfer the pending experience rewards and transition battle UI to results.
+void FUN_001f8290(BattleResultOwner *owner)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = &LAB_001f833c;
-  taskCreateDraw(&LAB_001f833c,2,0,0,&LAB_001e4bd8,jobStopChild,param_1,*param_1);
-  param_1[1] = (unsigned int)puVar1;
-  resultCreateDefault();
-  FUN_00214568(param_1 + 0x5d);
-  FUN_00223360(param_1 + 0x6d);
-  temp_v0 = 0;
-  if (temp_v0 < (int)param_1[0xfc]) {
-    do {
-      resultAddExperienceReward((const int *)(param_1 + temp_v0 * 2 + 0x7c));
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (int)param_1[0xfc]);
-  }
-  param_1[0xfc] = 0;
-  btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
-  temp_v0 = g_btlUiBlock;
-  *(unsigned int *)(g_btlUiBlock + 0x7e38) = 0x10;
-  if (*(int *)(temp_v0 + 0x54a8) == 0) {
-    return;
-  }
-  playSceneSetState(temp_v0 + 0x2460,0x27,1);
-  temp_v1 = *(int *)(temp_v0 + 0x3764);
-  if (temp_v1 == 0) {
-    return;
-  }
-  *(unsigned short *)(temp_v0 + 0x3768) = 9;
-  *(unsigned short *)(temp_v0 + 0x376a) = 0;
-  *(unsigned char *)(temp_v0 + 0x379e) = 0;
-  *(unsigned char *)(temp_v0 + 0x37a2) = 0;
-  *(unsigned char *)(temp_v0 + 0x376c) = 0;
-  *(int *)(temp_v0 + 0x3724) = (int)*(short *)(temp_v1 + 0x6c) << 0xc;
-  *(int *)(temp_v0 + 0x3728) = (int)*(short *)(temp_v1 + 0x6e) << 0xc;
-  return;
+    owner->job = taskCreateDraw("btlResult Calc", 2, 0, 0, callbackNormalizeNegativeResult, jobStopChild, owner, owner->parent);
+    resultCreateDefault();
+    FUN_00214568(owner->firstDisplay);
+    FUN_00223360(owner->secondDisplay);
+    for (s32 i = 0; i < owner->rewardCount; ++i)
+        resultAddExperienceReward(&owner->rewards[i]);
+    owner->rewardCount = 0;
+    btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
+    btlUiResetWidgetForStateSixteen(g_btlUiBlock);
 }
-
-} /* extern "C" */
+}

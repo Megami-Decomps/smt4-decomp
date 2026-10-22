@@ -14,7 +14,7 @@ int FUN_0021af44(...);
 int gameDataEntrySetLevel(...);
 int messageForwardDefaultMode(...);
 int FUN_002903f0(void);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int infoWinStartTimer(...);
 int asdLoadFileAsyncSimple(...);
 int soundChannelStopAll(...);
@@ -157,7 +157,7 @@ extern int FUN_00287894(void);
 /* Supplied declaration required: gameOptionsEnableAndReset. */
 extern int FUN_0029022c(void);
 /* Supplied declaration required: FUN_002903f0. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
@@ -727,7 +727,7 @@ LAB_001fd348:
         memClear(&temp_v16,0x60);
         FUN_002bd06c(temp_v6);
         libc_strcpy(&temp_v16,temp_v6);
-        FUN_00295660(0xd,&temp_v16);
+        textEncodeFontSlot(0xd,&temp_v16);
         FUN_002bff50();
         messageForwardDefaultMode(*(unsigned int *)(temp_v4 + 0x2230),0,0,6,0);
         *(unsigned int *)(temp_v4 + 0x44a0) = *(unsigned int *)(temp_v4 + 0x44a0) | 0x100000;

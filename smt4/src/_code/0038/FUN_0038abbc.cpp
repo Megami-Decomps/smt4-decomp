@@ -1,59 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038abbc` (_code @ 0x38abbc, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 61 vs built 61 rows; process argument setup and flag-update register allocation differ. */
+#include "gfx/DrawParameterOwner.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+extern u32 g_aocMain;
+extern const char DAT_003ff778[]; // "Aoc board CALC"
+extern const char DAT_003ff768[]; // "Aoc board UP L"
+extern const char DAT_003ff758[]; // "Aoc board UP R"
+extern const char DAT_003ff748[]; // "Aoc board DOWN"
+u32 FUN_002347b8(u32, u32, void *);
+s32 FUN_0038a1e0(u32);
+s32 FUN_0038a478(u32);
+s32 FUN_0038aa80(u32);
+u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
+u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
 
-int FUN_002347b8(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern int FUN_0038a1e0(...); /* 0x38a1e0 */
-extern int FUN_0038a478(...); /* 0x38a478 */
-extern int FUN_0038aa80(...); /* 0x38aa80 */
-extern unsigned int g_aocMain; /* 0x432fc8 */
-
-/* Supplied declaration required: FUN_002347b8. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_0038abbc(unsigned int *param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
-
+void FUN_0038abbc(DrawParameterOwner *state, u32 resource, u8 enabled, u32 parameter)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  char *pcVar3;
-  
-  param_1[3] = param_4;
-  param_1[2] = 0;
-  *(unsigned char *)(param_1 + 0x105) = param_3;
-  temp_v0 = g_aocMain;
-  FUN_002347b8(g_aocMain,param_2,param_1 + 5);
-  param_1[4] = temp_v0;
-  temp_v0 = *param_1;
-  temp_v1 = temp_v0 & 0xffffffdf;
-  *param_1 = temp_v1;
-  if ((temp_v0 & 0x10) == 0) {
-    *param_1 = temp_v1 | 0x10;
-    param_1[0x106] = 0;
-    pcVar3 = "Aoc board CALC";
-    asdProcessCreateSimple("Aoc board CALC",2,0,0,FUN_0038a1e0,0,param_1);
-    param_1[1] = (unsigned int)pcVar3;
-    taskCreateDraw("Aoc board UP L",0x82,1,0,FUN_0038a478,0,param_1,pcVar3);
-    taskCreateDraw("Aoc board UP R",0xe0,1,0,FUN_0038a478,0,param_1,param_1[1]);
-    taskCreateDraw("Aoc board DOWN",0x160,1,0,FUN_0038aa80,0,param_1,param_1[1]);
-  }
-  return;
+    state->control.parameter = parameter;
+    state->control.frame = 0;
+    state->enabled = enabled;
+    state->control.resource = FUN_002347b8(g_aocMain, resource, state->unk014);
+    u32 flags = state->control.flags;
+    state->control.flags = flags & ~0x20u;
+    if ((flags & 0x10) == 0) {
+        state->control.flags = (flags & ~0x20u) | 0x10;
+        state->unk418 = 0;
+        state->control.process = asdProcessCreateSimple(DAT_003ff778, 2, 0, 0,
+                                                       FUN_0038a1e0, NULL, reinterpret_cast<u32>(state));
+        taskCreateDraw(DAT_003ff768, 0x82, 1, 0, FUN_0038a478, NULL,
+                       reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
+        taskCreateDraw(DAT_003ff758, 0xE0, 1, 0, FUN_0038a478, NULL,
+                       reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
+        taskCreateDraw(DAT_003ff748, 0x160, 1, 0, FUN_0038aa80, NULL,
+                       reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
+    }
 }
-
-} /* extern "C" */
+}

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0022699c(int, int, int, unsigned int);
+int btlQueueReflectAction(int, int, int, unsigned int);
 
 extern int g_btlActionReflect; /* 0x434290 */
 
-/* Supplied declaration required: FUN_0022699c. */
+/* Supplied declaration required: btlQueueReflectAction. */
 
 
 void FUN_003ddbcc(short param_1,unsigned int param_2,unsigned int param_3,unsigned short param_4,
@@ -21,7 +21,7 @@ void FUN_003ddbcc(short param_1,unsigned int param_2,unsigned int param_3,unsign
   for (temp_v0 = *(int *)(g_btlActionReflect + 8); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0xc)) {
   }
   temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
+  btlQueueReflectAction(g_btlActionReflect,(int)param_1,0,param_2);
   *(unsigned char *)(temp_v0 + 4) = 0xc;
   *(unsigned short *)(temp_v0 + 0x26) = param_6;
   *(unsigned short *)(temp_v0 + 0x24) = param_4;

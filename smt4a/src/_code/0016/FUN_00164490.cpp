@@ -14,7 +14,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -41,7 +41,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -83,7 +83,7 @@ void FUN_00164490(int param_1)
     if (param_1 != 0) {
       temp_v4 = FUN_001834a4(8,0x94);
       temp_v12 = 0.26f;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v2 = temp_v2 + (int)temp_v12;
     }
     else {
@@ -131,7 +131,7 @@ void FUN_00164490(int param_1)
       temp_v5 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
       temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
       temp_v12 = temp_v14;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = FUN_001834a4(8,0x100);
       FUN_00164b5c(2,8,0x16,(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
@@ -143,7 +143,7 @@ void FUN_00164490(int param_1)
     if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x17d) != '\0') {
       temp_v5 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
       temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v14 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v4 = FUN_001834a4(8,0x100);
       FUN_00164b5c(2,8,0x17,(int)*(short *)(temp_v4 + 8) + (int)(temp_v12 + temp_v14),

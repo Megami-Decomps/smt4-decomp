@@ -12,7 +12,7 @@ int FUN_002bf4f8(int, int);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c39a4(int);
-int FUN_002d670c(...);
+int uiDrawDirectoryRows(...);
 int FUN_002e15f8(int, int, int);
 int uiDrawPanelWithValue(int, int, int, unsigned int, int);
 int FUN_002ec2e0(...);
@@ -40,7 +40,7 @@ extern unsigned int FUN_0025981c(void);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002d670c. */
+/* Supplied declaration required: uiDrawDirectoryRows. */
 /* Supplied declaration required: FUN_002e15f8. */
 /* Supplied declaration required: uiDrawPanelWithValue. */
 /* Supplied declaration required: FUN_002ec2e0. */
@@ -93,7 +93,7 @@ unsigned int FUN_00210e38(void)
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
     FUN_002bf380(2,0x39,0x12,temp_v2,temp_v8,0xb);
-    FUN_002d670c(temp_v0 + 0x8c,*(unsigned int *)(temp_v0 + 0xb0),*(unsigned int *)(temp_v0 + 0xac),
+    uiDrawDirectoryRows(temp_v0 + 0x8c,*(unsigned int *)(temp_v0 + 0xb0),*(unsigned int *)(temp_v0 + 0xac),
                  *(unsigned int *)(temp_v0 + 0x138),*(unsigned int *)(temp_v0 + 0x134),
                  *(unsigned int *)(temp_v0 + 0x148));
     temp_v4 = *(unsigned int *)(temp_v0 + 0x130);

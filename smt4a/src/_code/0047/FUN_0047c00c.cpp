@@ -10,7 +10,7 @@ int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -31,7 +31,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int textureGetIndexedResource(unsigned int);
 
 
@@ -73,9 +73,9 @@ void FUN_0047c00c(int param_1)
       (**(romwright_code **)(temp_v1 + 0x12d4))(temp_v0);
       *(unsigned char *)(temp_v1 + 0x12d0) = 0;
     }
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = 0.36f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v0 = (int)temp_v4;
     temp_v1 = textureGetIndexedResource(0x2f);
     if (temp_v1 != 0) {

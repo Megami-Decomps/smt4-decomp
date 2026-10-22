@@ -15,7 +15,7 @@ const EquipmentHelpPlayer *gameGetPlayerData();
 void FUN_0029ede8(u32, u32, s32, s32);
 void FUN_002907c4(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
-void FUN_00295660(u32, const char *);
+void textEncodeFontSlot(u32, const char *);
 void FUN_0024bda8(char *, u32);
 void skillFormatTargetLabel(char *, s32);
 void FUN_001f4568(u32, u32, u32, char *);
@@ -40,12 +40,12 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
         FUN_002907c4(minimum, hits & 0xf);
         FUN_002907c4(maximum, entry->unk00[0x58] >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); // CP932 full-width wave dash.
-        FUN_00295660(0x25, text);
+        textEncodeFontSlot(0x25, text);
     }
     FUN_0024bda8(text, rankedTableRecordGetSortFlags(entry) >> 20);
-    FUN_00295660(0x26, text);
+    textEncodeFontSlot(0x26, text);
     skillFormatTargetLabel(text, entry->category);
-    FUN_00295660(0x27, text);
+    textEncodeFontSlot(0x27, text);
     // The original labels are full-width Latin characters encoded in CP932.
     if ((s8)entry->rank == 0)
         textFormatBuffer(text, "\x82\x6d\x82\x8f\x82\x8e\x82\x85"); // None
@@ -61,9 +61,9 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
         textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8e\x82\x84"); // Bind
     if ((s8)entry->rank == 9)
         textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8b"); // Sick
-    FUN_00295660(0x28, text);
+    textEncodeFontSlot(0x28, text);
     FUN_001f4568(1, 0, 0, text);
-    FUN_00295660(0x29, text);
+    textEncodeFontSlot(0x29, text);
     if (!directory)
         directory = ((EquipmentHelpHolder *)&g_buttonHelp)->defaultDirectory;
     asdTextDrawDirectoryEntry((AsdText *)help->unk558, 3, -1, 0, 3, directory, index);

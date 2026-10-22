@@ -14,7 +14,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(void);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int markerKindGetColor(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -52,7 +52,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: markerKindGetColor. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -97,12 +97,12 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
   efctSetSpeed();
   temp_v12 = 0.29f;
   temp_v9 = temp_v12;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v8 = (int)temp_v12;
   temp_v12 = temp_v9;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v17 = (int)temp_v9;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v13 = romwright_piece_4_4(in_s2,(int)temp_v12);
   temp_v16 = (int)in_s1;
   temp_v24 = romwright_piece_4_4(temp_v17,temp_v16);

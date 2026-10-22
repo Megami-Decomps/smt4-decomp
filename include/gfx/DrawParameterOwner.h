@@ -3,7 +3,16 @@
 #include "shard/W6_W6Match7_DrawParameters.h"
 #include <stddef.h>
 struct DrawParameterOwner {
-    u32 words[5]; // 0x000
+    union {
+        u32 words[5]; // 0x000
+        struct {
+            u32 flags;
+            u32 process;
+            u32 frame;
+            u32 parameter;
+            u32 resource;
+        } control;
+    };
     u8 unk014[0x400]; // 0x014
     u8 enabled; // 0x414
     u8 dirty; // 0x415
@@ -12,6 +21,13 @@ struct DrawParameterOwner {
     u32 unk41C; // 0x41C
     Params002c312c parameters; // 0x420
 };
+typedef char DrawParameterOwnerControlLayoutCheck[sizeof(DrawParameterOwner) == 0x440 &&
+    offsetof(DrawParameterOwner, control.flags) == 0 &&
+    offsetof(DrawParameterOwner, control.process) == 4 &&
+    offsetof(DrawParameterOwner, control.frame) == 8 &&
+    offsetof(DrawParameterOwner, control.parameter) == 0xC &&
+    offsetof(DrawParameterOwner, control.resource) == 0x10 &&
+    offsetof(DrawParameterOwner, unk014) == 0x14 ? 1 : -1];
 struct DrawParameterDefaults {
     u8 first[0x78]; // 0x000
     u8 second[0x48]; // 0x078

@@ -1,67 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fdcd8` (_code @ 0x4fdcd8, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: actor/options saved registers are reversed; the null-name return joins a different epilogue. */
+#include "battle/btlReflect.h"
+#include "battle/btlMain.h"
 
 extern "C" {
+extern BtlAuxA* g_btlAux;
+u32 btlEffectNameHasPrefix(BtlAuxA* auxiliary, const char* name);
+ReflectAction* FUN_004102d8(ReflectContext* context, s32 actor, s32 secondary, u32 options);
+s32 libc_strcmp(const char* first, const char* second);
 
-int libc_strcmp(unsigned char *, int);
-int FUN_004102d8(int, int, int, unsigned int);
-
-extern unsigned char LAB_004fdde4; /* 0x4fdde4 */
-extern unsigned char LAB_004fddec; /* 0x4fddec */
-extern int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int g_btlAux; /* 0x573808 */
-
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: FUN_004102d8. */
-extern int btlEffectNameHasPrefix(unsigned int, int);
-
-
-int FUN_004fdcd8(short param_1,unsigned int param_2,unsigned short param_3,int param_4,unsigned short param_5,
-                unsigned short param_6,unsigned int param_7,int param_8)
-
+ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
+                           u32 third, u32 fourth, u32 value, const char* name)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = btlEffectNameHasPrefix(g_btlAux,param_8);
-  if (temp_v0 != 0) {
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-    *(unsigned char *)(temp_v0 + 4) = 4;
-  }
-  else {
-    if (param_4 < 0x6d) {
-      temp_v0 = g_btlActionReflect;
-      FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-      *(unsigned char *)(temp_v0 + 4) = 1;
-      *(unsigned short *)(temp_v0 + 0x24) = param_3;
-      *(short *)(temp_v0 + 0x26) = (short)param_4;
-      *(unsigned short *)(temp_v0 + 0x48) = param_5;
-      *(unsigned short *)(temp_v0 + 0x4a) = param_6;
-      *(unsigned int *)(temp_v0 + 0x28) = param_7;
-      *(unsigned int *)(temp_v0 + 0x34) = 0;
-      *(unsigned int *)(temp_v0 + 0x38) = 0;
-      *(unsigned int *)(temp_v0 + 0x4c) = 0;
-      *(unsigned int *)(temp_v0 + 0x50) = 1;
-      if (param_8 != 0) {
-        puVar2 = &LAB_004fdde4;
-        libc_strcmp(&LAB_004fdde4,param_8);
-        if (puVar2 != (unsigned char *)0x0) {
-          puVar2 = &LAB_004fddec;
-          libc_strcmp(&LAB_004fddec,param_8);
-          if (puVar2 != (unsigned char *)0x0) {
-            return temp_v0;
-          }
-        }
-        *(unsigned char *)(temp_v0 + 0x20) = 1;
-      }
-      return temp_v0;
+    // These two floating payload words are specific to this action kind.
+    struct FloatPayloadView {
+        u8 unk00[0x34];
+        f32 first;
+        f32 second;
+    };
+    if (btlEffectNameHasPrefix(g_btlAux, name)) {
+        ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+        action->kind = 4;
+        return action;
     }
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (target >= 109) {
+        return NULL;
+    }
+    ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+    action->kind = 1;
+    action->first = (u16)first;
+    action->second = (u16)target;
+    action->extraIds.third = (u16)third;
+    action->extraIds.fourth = (u16)fourth;
+    action->value = value;
+    reinterpret_cast<FloatPayloadView*>(action)->first = 0.0f;
+    reinterpret_cast<FloatPayloadView*>(action)->second = 0.0f;
+    action->parameter = 0;
+    action->word50 = 1;
+    if (!name) {
+        return action;
+    }
+    if (!libc_strcmp("Dead_12", name) || !libc_strcmp("Dead_13", name)) {
+        action->specialDeath.enabled = 1;
+    }
+    return action;
 }
-
-} /* extern "C" */
+}

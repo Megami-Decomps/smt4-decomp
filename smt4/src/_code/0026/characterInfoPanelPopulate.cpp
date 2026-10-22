@@ -40,7 +40,7 @@ const char *FUN_002be650(u32 id, u32 flags);
 void FUN_002bcfc0(const char *source, char *destination);
 const char *FUN_002bd06c(u32 demon);
 void FUN_0024ee4c(char *destination, const char *source);
-const char *FUN_002bce30(u32 demon, u32 flags);
+const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
 void textFormatBuffer(char *destination, const char *format, ...);
@@ -105,7 +105,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
     if (record->demon)
-        FUN_002bcfc0(FUN_002bce30(record->demon, 0), buffer);
+        FUN_002bcfc0(demonGetRaceLabel(record->demon, 0), buffer);
     else
         FUN_002a7c80(buffer, "\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->race, 2, -1u, 0, 0, buffer);

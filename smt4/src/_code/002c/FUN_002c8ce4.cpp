@@ -7,7 +7,7 @@ extern "C" {
 
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
-int FUN_00280988(void);
+int mapEaseSceneHeading(void);
 int FUN_002879dc(...);
 int mathDistanceBetweenPoints(void);
 
@@ -67,7 +67,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027fca0. */
 /* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: FUN_00280988. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002879dc. */
@@ -526,7 +526,7 @@ LAB_002c9a64:
   }
 LAB_002c9a70:
   mapSelectContainingRegions();
-  FUN_00280988();
+  mapEaseSceneHeading();
   temp_v2 = g_lmapScene;
   puVar7 = (unsigned int *)(g_lmapScene + 0x1c);
   puVar8 = (unsigned int *)(g_lmapScene + 0x40);

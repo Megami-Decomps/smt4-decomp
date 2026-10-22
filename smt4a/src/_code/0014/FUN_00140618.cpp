@@ -1,57 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00140618` (_code @ 0x140618, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: capture flag-address formation and predicated byte checks differ. */
+#include "shard/JobWork.h"
+#include "camp/RenderCtx.h"
+
+// Apocalypse's capture controls are not at the offsets used by the shared IV work prefix.
+struct CaptureWorkViewA {
+    u8 unk0000[8];
+    JobSurface *surface;
+    u8 unk000c[0x1408];
+    u8 enabled;
+    u8 unk1415;
+    u8 result;
+    u8 unk1417;
+    u8 captured;
+    u8 skipped;
+    u8 unk141a[0x33];
+    u8 available;
+};
+typedef char CaptureWorkViewOffsetsCheck[offsetof(CaptureWorkViewA, surface) == 8 &&
+    offsetof(CaptureWorkViewA, enabled) == 0x1414 &&
+    offsetof(CaptureWorkViewA, result) == 0x1416 &&
+    offsetof(CaptureWorkViewA, captured) == 0x1418 &&
+    offsetof(CaptureWorkViewA, skipped) == 0x1419 &&
+    offsetof(CaptureWorkViewA, available) == 0x144d ? 1 : -1];
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+void *stateValuesGetBySelector(u32 selector);
+void FUN_00157558(RenderCtxA *context);
+u8 FUN_00154edc(u32 selector, JobSurface *surface);
+void surfaceCopy(JobSurface *destination, JobSurface *source);
 
-int FUN_00154edc(int, unsigned int);
-int surfaceCopy(unsigned int, unsigned int);
-int FUN_00157558(unsigned int);
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-extern int stateValuesGetBySelector(unsigned int);
-/* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: surfaceCopy. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
-
-
-unsigned char FUN_00140618(void)
-
+u8 FUN_00140618()
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v2 = jobGetWork();
-  temp_v3 = stateValuesGetBySelector(0);
-  if (temp_v3 != 0) {
-    *(unsigned char *)(temp_v2 + 0x1419) = 1;
-  }
-  else if (*(char *)(temp_v2 + 0x1414) != '\0') {
-    temp_v0 = *(char *)(temp_v2 + 0x1418);
-    temp_v4 = temp_v0 == '\0';
-    if (temp_v4) {
-      temp_v0 = *(char *)(temp_v2 + 0x1419);
+    CaptureWorkViewA *work = (CaptureWorkViewA *)jobGetWork();
+    if (stateValuesGetBySelector(0) != 0) {
+        work->skipped = 1;
+    } else if (work->enabled) {
+        if (!work->captured && !work->skipped && work->available) {
+            FUN_00157558(g_renderCtx);
+            work->surface->width = 512;
+            work->surface->height = 512;
+            work->result = FUN_00154edc(0, work->surface);
+            surfaceCopy(work->surface, work->surface);
+            work->surface->width >>= 1;
+            work->surface->height >>= 1;
+            work->captured = 1;
+        }
     }
-    if ((temp_v4 && temp_v0 == '\0') && (*(char *)(temp_v2 + 0x144d) != '\0')) {
-      FUN_00157558(g_renderCtx);
-      *(unsigned int *)(*(int *)(temp_v2 + 8) + 0x14) = 0x200;
-      *(unsigned int *)(*(int *)(temp_v2 + 8) + 0x18) = 0x200;
-      temp_v1 = 0;
-      FUN_00154edc(0,*(unsigned int *)(temp_v2 + 8));
-      *(unsigned char *)(temp_v2 + 0x1416) = temp_v1;
-      surfaceCopy(*(unsigned int *)(temp_v2 + 8),*(unsigned int *)(temp_v2 + 8));
-      *(int *)(*(int *)(temp_v2 + 8) + 0x14) = *(int *)(*(int *)(temp_v2 + 8) + 0x14) >> 1;
-      *(int *)(*(int *)(temp_v2 + 8) + 0x18) = *(int *)(*(int *)(temp_v2 + 8) + 0x18) >> 1;
-      *(unsigned char *)(temp_v2 + 0x1418) = 1;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

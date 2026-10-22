@@ -1,112 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001299fc` (_code @ 0x1299fc, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: GPU initialization global-address grouping and zero-store scheduling differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern NngxInitializationPrefixIV g_nngxState;
+extern u32 g_nngxGpu;
+extern u32 g_nngxCriticalSection;
+extern u32 DAT_00471a80;
+extern const u32 DAT_0040b740;
+extern NngxCommandPrefixIV DAT_00431c40;
 
-int FUN_0013b218(void);
-int asdModelForwardChecked(char *, unsigned int, unsigned int, int);
-int FUN_002c1398(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned int DAT_00431c40; /* 0x431c40 */
-extern unsigned int DAT_00431c44; /* 0x431c44 */
-extern unsigned int DAT_00431c48; /* 0x431c48 */
-extern unsigned int DAT_00431c6c; /* 0x431c6c */
-extern unsigned int DAT_00431c70; /* 0x431c70 */
-extern unsigned int DAT_00431c74; /* 0x431c74 */
-extern unsigned int DAT_00431c78; /* 0x431c78 */
-extern unsigned int DAT_00431c7c; /* 0x431c7c */
-extern unsigned int DAT_00431c80; /* 0x431c80 */
-extern unsigned int DAT_00431c84; /* 0x431c84 */
-extern unsigned char DAT_00431c88; /* 0x431c88 */
-extern unsigned int DAT_00431c8c; /* 0x431c8c */
-extern unsigned char DAT_00431c90; /* 0x431c90 */
-extern unsigned int DAT_00431c98; /* 0x431c98 */
-extern unsigned int DAT_00431c9c; /* 0x431c9c */
-extern unsigned int DAT_00431ca4; /* 0x431ca4 */
-extern unsigned int DAT_00431ca8; /* 0x431ca8 */
-extern unsigned int DAT_00431cac; /* 0x431cac */
-extern unsigned char DAT_00431cb0; /* 0x431cb0 */
-extern signed char g_nngxState; /* 0x471a70 */
-extern unsigned char DAT_00471a72; /* 0x471a72 */
-#ifndef ROMWRIGHT_STORAGE_s_______00471a73_15_1_DEFINED
-#define ROMWRIGHT_STORAGE_s_______00471a73_15_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s_______00471a73_15_1 {
-    char whole[15];
-    unsigned char u1[15];
-    signed char s1[15];
-};
-typedef char romwright_storage_s_______00471a73_15_1_size_check[(sizeof(union romwright_storage_s_______00471a73_15_1) == 15) ? 1 : -1];
-typedef char romwright_storage_s_______00471a73_15_1_u1_width_check[(sizeof(((union romwright_storage_s_______00471a73_15_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s_______00471a73_15_1_s1_width_check[(sizeof(((union romwright_storage_s_______00471a73_15_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s_______00471a73_15_1 s_______00471a73; /* 0x471a73 */
-extern unsigned int g_nngxGpu; /* 0x471a84 */
-extern unsigned int *DAT_00471a8c; /* 0x471a8c */
-extern unsigned int g_nngxCriticalSection; /* 0x4e6c5c */
-
-/* Supplied declaration required: FUN_0013b218. */
-/* Supplied declaration required: asdModelForwardChecked. */
-/* Supplied declaration required: FUN_002c1398. */
-extern unsigned int libc_strlen(void);
-extern unsigned int nn_gxlow_CTR_Gpu_AcquireRight(unsigned int, unsigned int, unsigned char);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+void nn_os_CriticalSection_Enter(u32 *criticalSection);
+void nn_os_CriticalSection_Leave(u32 *criticalSection);
+void FUN_002c1398(void);
+void FUN_0013b218(void);
+u32 libc_strlen(const char *text);
+void asdModelForwardChecked(u32 *destination, const char *source,
+                            u32 length, s32 flags);
+u32 nn_gxlow_CTR_Gpu_AcquireRight(u32 *gpu, u32 processHandle, s32 mode);
 
 void FUN_001299fc(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&g_nngxCriticalSection);
-  if (g_nngxState != '\0') {
-    nn_os_CriticalSection_Leave((unsigned int)&g_nngxCriticalSection);
-    return;
-  }
-  g_nngxState = 1;
-  if (s_______00471a73.whole[0] == '\0') {
-    FUN_002c1398();
-    s_______00471a73.whole[0] = '\x01';
-  }
-  temp_v0 = (*(unsigned int *)&s_______00471a73.u1[1]);
-  temp_v1 = libc_strlen();
-  asdModelForwardChecked(s_______00471a73.whole + 0xd,temp_v0,temp_v1,0);
-  g_nngxGpu = (*(unsigned int *)0x00471a80);
-  nn_gxlow_CTR_Gpu_AcquireRight((unsigned int)&g_nngxGpu,0xffff8001,(unsigned char)DAT_00471a72);
-  DAT_00431c40 = 0;
-  DAT_00431c48 = 0xffffffff;
-  DAT_00431c44 = 0;
-  DAT_00431c6c = 0;
-  DAT_00431c70 = 0;
-  DAT_00431c74 = 0;
-  DAT_00431c78 = 0;
-  DAT_00431c7c = 0;
-  DAT_00431c80 = 0;
-  DAT_00431c84 = 0;
-  DAT_00431c88 = 0;
-  DAT_00431c8c = 0;
-  DAT_00431c90 = 0;
-  DAT_00431c98 = 0;
-  DAT_00431c9c = 0;
-  DAT_00431ca4 = 0;
-  DAT_00431ca8 = 0;
-  DAT_00431cac = 0;
-  DAT_00431cb0 = 1;
-  DAT_00471a8c = &DAT_00431c40;
-  FUN_0013b218();
-  nn_os_CriticalSection_Leave((unsigned int)&g_nngxCriticalSection);
-  return;
-}
+    nn_os_CriticalSection_Enter(&g_nngxCriticalSection);
+    if (g_nngxState.initialized != 0) {
+        nn_os_CriticalSection_Leave(&g_nngxCriticalSection);
+        return;
+    }
 
-} /* extern "C" */
+    g_nngxState.initialized = 1;
+    if (g_nngxState.configurationInitialized == 0) {
+        FUN_002c1398();
+        g_nngxState.configurationInitialized = 1;
+    }
+
+    const char *configuration = g_nngxState.configuration;
+    asdModelForwardChecked(&DAT_00471a80, configuration,
+                           libc_strlen(configuration), 0);
+    g_nngxState.acquiredGpu = g_nngxState.configuredGpu;
+    nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, DAT_0040b740,
+                                 g_nngxState.acquireMode);
+
+    DAT_00431c40.word00 = 0;
+    DAT_00431c40.word08 = 0xffffffffU;
+    DAT_00431c40.word04 = 0;
+    DAT_00431c40.word2c = 0;
+    DAT_00431c40.word30 = 0;
+    DAT_00431c40.word34 = 0;
+    DAT_00431c40.word38 = 0;
+    DAT_00431c40.word3c = 0;
+    DAT_00431c40.word40 = 0;
+    DAT_00431c40.word44 = 0;
+    DAT_00431c40.byte48 = 0;
+    DAT_00431c40.word4c = 0;
+    DAT_00431c40.byte50 = 0;
+    DAT_00431c40.word58 = 0;
+    DAT_00431c40.word5c = 0;
+    DAT_00431c40.word64 = 0;
+    DAT_00431c40.word68 = 0;
+    DAT_00431c40.word6c = 0;
+    DAT_00431c40.byte70 = 1;
+    g_nngxState.commandState = &DAT_00431c40;
+    FUN_0013b218();
+    nn_os_CriticalSection_Leave(&g_nngxCriticalSection);
+}
+}

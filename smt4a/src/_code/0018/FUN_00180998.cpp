@@ -4,7 +4,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_0019aee4(...);
 int FUN_0019be8c(...);
 int sentinelLookupGetValue(void);
@@ -61,7 +61,7 @@ extern unsigned int DAT_0063af94; /* 0x63af94 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019aee4. */
 /* Supplied declaration required: FUN_0019be8c. */
 /* Supplied declaration required: sentinelLookupGetValue. */
@@ -146,7 +146,7 @@ void FUN_00180998(int *param_1, int arg1, int arg2)
   temp_v33 = 0;
   piStack_30 = param_1;
   if (g_asdTextDefaults != '\0') {
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     in_s0 = in_s2 + in_s0;
   }
   temp_v24 = (unsigned long long)(unsigned int)in_s0;

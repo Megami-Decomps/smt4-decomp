@@ -34,7 +34,7 @@ extern "C" {
 extern void *g_titleScene;
 extern f32 DAT_00435e20;
 void FUN_002c39a4(void *);
-f32 FUN_002ba12c(void *, f32);
+f32 renderCtxCalculateStereoParallax(void *, f32);
 void effectRenderTransformedInstance(NumberSprite *, f32);
 s32 FUN_0019d734(const void *, const void *);
 void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
@@ -45,7 +45,7 @@ void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
     FUN_002c39a4(g_titleScene);
     s32 parallax = 0;
     if (pass)
-        parallax = (s32)FUN_002ba12c(g_titleScene, DAT_00435e20);
+        parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, DAT_00435e20);
     for (s32 i = 0; i < 16; ++i) {
         order[i].index = i;
         order[i].priority = scene->numbers[i].priority;

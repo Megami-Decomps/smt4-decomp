@@ -27,7 +27,7 @@ int SBORROW4(...);
 
 int soundVolumeSettingGet(void);
 int FUN_001bc124(void);
-int FUN_002dae68(void);
+int mapEaseSceneHeading(void);
 int FUN_003135bc(...);
 int mapSetSceneState(...);
 int FUN_00317af8(...);
@@ -93,7 +93,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002d1f40. */
-/* Supplied declaration required: FUN_002dae68. */
+/* Supplied declaration required: mapEaseSceneHeading. */
 /* Supplied declaration required: FUN_002e364c. */
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003135bc. */
@@ -167,7 +167,7 @@ void FUN_00325d08(void)
   rt_memcpy_w(aiStack_108,&DAT_00531df8,0xa0);
   temp_v11 = *(float *)(g_lmapScene + 0x28);
   temp_v10 = romwright_piece_4_4(*(unsigned int *)(g_lmapScene + 0x2c),*(unsigned int *)(g_lmapScene + 0x30));
-  FUN_002dae68();
+  mapEaseSceneHeading();
   temp_v3 = g_lmapScene;
   temp_v17 = 0.33333334f;
   temp_v13 = 0.0f;
@@ -810,7 +810,7 @@ LAB_003270b0:
   FUN_002e364c(g_lmapScene + 0x28);
 LAB_003270bc:
   FUN_00327ee8();
-  FUN_002dae68();
+  mapEaseSceneHeading();
   temp_v3 = g_lmapScene;
   puVar9 = (unsigned int *)(g_lmapScene + 0x1c);
   puVar11 = (unsigned int *)(g_lmapScene + 0x40);

@@ -1,49 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f5f94` (_code @ 0x1f5f94, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 65 vs built 66 rows; pair-list addressing adds a literal instead of retail's shared address base. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
-extern "C" {
-
-int devilGetRecord(void);
-
-extern int g_unite; /* 0x43dd68 */
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_001f5f94(unsigned short *param_1,unsigned short *param_2)
-
+static __inline s32 compareFusionComponent(u16 leftId, u16 rightId)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  
-  temp_v0 = g_unite;
-  puVar2 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_1 * 8 + 0x1390) & 0x7fff);
-  puVar3 = (unsigned short *)(*(unsigned int *)(g_unite + (unsigned int)*param_2 * 8 + 0x1390) & 0x7fff);
-  devilGetRecord();
-  devilGetRecord();
-  temp_v1 = (unsigned int)(unsigned char)puVar2[1] - (unsigned int)(unsigned char)puVar3[1];
-  if (temp_v1 == 0) {
-    temp_v1 = (unsigned int)*(unsigned char *)((int)puVar3 + 3) - (unsigned int)*(unsigned char *)((int)puVar2 + 3);
-    if (temp_v1 == 0) {
-      temp_v1 = (unsigned int)*puVar2 - (unsigned int)*puVar3;
+    const DevilSortRecord *left = devilGetRecord(leftId);
+    const DevilSortRecord *right = devilGetRecord(rightId);
+    s32 difference = left->race - right->race;
+    if (difference == 0) {
+        difference = right->level - left->level;
+        if (difference == 0)
+            difference = left->id - right->id;
     }
-  }
-  if (temp_v1 == 0) {
-    puVar2 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_1 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    puVar3 = (unsigned short *)((*(unsigned int *)(temp_v0 + (unsigned int)*param_2 * 8 + 0x1390) & 0x3fffffff) >> 0xf);
-    devilGetRecord();
-    devilGetRecord();
-    temp_v1 = (unsigned int)(unsigned char)puVar2[1] - (unsigned int)(unsigned char)puVar3[1];
-    if ((temp_v1 == 0) &&
-       (temp_v1 = (unsigned int)*(unsigned char *)((int)puVar3 + 3) - (unsigned int)*(unsigned char *)((int)puVar2 + 3), temp_v1 == 0)) {
-      temp_v1 = (unsigned int)*puVar2 - (unsigned int)*puVar3;
-    }
-  }
-  return temp_v1;
+    return difference;
 }
 
-} /* extern "C" */
+extern "C" {
+extern UniteWork *g_unite;
+
+// Sort fusion pairs by each component's race, descending level, and demon id.
+s32 FUN_001f5f94(const u16 *left, const u16 *right)
+{
+    UniteWork *work = g_unite;
+    s32 difference = compareFusionComponent(
+        static_cast<u16>(work->pairListIV.pairs[*left].firstId),
+        static_cast<u16>(work->pairListIV.pairs[*right].firstId));
+    if (difference == 0)
+        difference = compareFusionComponent(
+            static_cast<u16>(work->pairListIV.pairs[*left].secondId),
+            static_cast<u16>(work->pairListIV.pairs[*right].secondId));
+    return difference;
+}
+}

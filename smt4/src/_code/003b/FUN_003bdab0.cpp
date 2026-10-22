@@ -12,7 +12,7 @@ int gameGetUnitRecord(...);
 int FUN_002ae164(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
-int FUN_003bd9e8(...);
+int battleGetPassiveAffinityMultiplier(...);
 int FUN_003be918(unsigned int, unsigned int, int, int, int);
 int FUN_003beba8(...);
 int SBORROW4(...);
@@ -54,7 +54,7 @@ extern unsigned int playerGetSkillRank(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_003bd9e8. */
+/* Supplied declaration required: battleGetPassiveAffinityMultiplier. */
 /* Supplied declaration required: FUN_003be918. */
 /* Supplied declaration required: FUN_003beba8. */
 
@@ -308,7 +308,7 @@ LAB_003be190:
         else {
           temp_v7 = 0;
         }
-        FUN_003bd9e8(param_5,0x14);
+        battleGetPassiveAffinityMultiplier(param_5,0x14);
         temp_v11 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v7 = (unsigned int)((float)temp_v13 * temp_v12 * (float)((unsigned long long)temp_v13 >> 0x20) + 0.0f + temp_v11);
         if (puVar5 != (unsigned int *)0x0) goto LAB_003be190;

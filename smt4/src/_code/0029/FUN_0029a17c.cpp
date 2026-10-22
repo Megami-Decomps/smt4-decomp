@@ -1,61 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029a17c` (_code @ 0x29a17c, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Mirrored-rectangle screen-width selection and state-stack address formation differ. */
+#include "common.h"
+#include "camp/RenderCtx.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern TitleSceneRectanglePrefixIV *g_titleScene;
 
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-
-void FUN_0029a17c(int param_1,int param_2,unsigned int param_3,int param_4,int param_5)
-
+void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height,
+                  s32 useNarrowScreen)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int *piVar5;
-  
-  temp_v0 = g_titleScene;
-  temp_v2 = 0x140;
-  if (param_5 == 0) {
-    temp_v2 = 400;
-  }
-  temp_v1 = temp_v2 - (param_1 + param_3);
-  param_2 = (0xf0 - param_4) - param_2;
-  if ((int)temp_v1 < 0) {
-    param_3 = param_3 + temp_v1;
-    if ((int)param_3 < 0) {
-      param_3 = 0;
-    }
-    temp_v1 = 0;
-  }
-  if (param_2 < 0) {
-    param_4 = param_4 + param_2;
-    if (param_4 < 0) {
-      param_4 = 0;
-    }
-    param_2 = 0;
-  }
-  temp_v1 = temp_v1 | (param_2 << 0x10);
-  piVar5 = (int *)(g_titleScene + 0x132c);
-  temp_v3 = piVar5[*piVar5 + 2];
-  piVar5[*piVar5 + 2] = temp_v1;
-  if (*(char *)(temp_v0 + 0x1344) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x1348))();
-    *(unsigned char *)(temp_v0 + 0x1344) = 0;
-  }
-  temp_v0 = g_titleScene;
-  param_3 = param_3 | (param_4 << 0x10);
-  piVar5 = (int *)(g_titleScene + 0x134c);
-  temp_v1 = piVar5[*piVar5 + 2];
-  piVar5[*piVar5 + 2] = param_3;
-  if (*(char *)(temp_v0 + 0x1364) != '\0' || temp_v1 != param_3) {
-    (**(romwright_code **)(temp_v0 + 0x1368))();
-    *(unsigned char *)(temp_v0 + 0x1364) = 0;
-  }
-  return;
-}
+    const u32 screenWidth = useNarrowScreen == 0 ? 400u : 320u;
+    u32 left = screenWidth - (static_cast<u32>(x) + width);
+    u32 top = 240u - static_cast<u32>(height) - static_cast<u32>(y);
+    u32 clippedWidth = width;
+    u32 clippedHeight = static_cast<u32>(height);
 
-} /* extern "C" */
+    if (static_cast<s32>(left) < 0) {
+        clippedWidth += left;
+        if (static_cast<s32>(clippedWidth) < 0)
+            clippedWidth = 0;
+        left = 0;
+    }
+    if (static_cast<s32>(top) < 0) {
+        clippedHeight += top;
+        if (static_cast<s32>(clippedHeight) < 0)
+            clippedHeight = 0;
+        top = 0;
+    }
+
+    renderStackSet(&g_titleScene->rectangleOrigin,
+                   static_cast<s32>(left | (top << 16)));
+
+    // The first callback may replace the global scene pointer.
+    renderStackSet(&g_titleScene->rectangleExtent,
+                   static_cast<s32>(clippedWidth | (clippedHeight << 16)));
+}
+}

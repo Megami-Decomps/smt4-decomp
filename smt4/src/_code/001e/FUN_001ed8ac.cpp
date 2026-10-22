@@ -1,56 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ed8ac` (_code @ 0x1ed8ac, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: checksum byte swaps and 64-bit byte assembly use different registers and instruction ordering. */
+#include "common.h"
 
-extern "C" {
+struct PackedHeaderValue {
+    u32 low;
+    u32 high;
+};
 
-#ifndef ROMWRIGHT_PIECE_1_1_DEFINED
-#define ROMWRIGHT_PIECE_1_1_DEFINED
-#define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
-#endif
-
-
-unsigned int FUN_001ed8ac(char *param_1,unsigned int *param_2,short *param_3)
-
+static __inline u16 readBigEndianHalfword(const u8 *data)
 {
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned short temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  
-  if ((*param_1 == 'L') && (param_1[1] == '2')) {
-    temp_v3 = *(unsigned short *)(param_1 + 2);
-    temp_v7 = *(unsigned int *)(param_1 + 4);
-    temp_v0 = param_1[7];
-    temp_v6 = ((temp_v7 >> 8) & 0xff) << 0x10;
-    temp_v4 = ((temp_v7 >> 0x10) & 0xff) << 8;
-    temp_v8 = (temp_v7 << 0x18) | temp_v6 | temp_v4 | (unsigned int)temp_v0;
-    temp_v1 = param_1[10];
-    temp_v2 = param_1[0xb];
-    temp_v5 = ((unsigned int)(unsigned char)param_1[8] << 0x18) | ((unsigned int)(unsigned char)param_1[9] << 0x10);
-    param_2[1] = temp_v8;
-    if ((int)temp_v8 < 0) {
-      temp_v8 = ((temp_v7 << 0x18) & 0x7fffffff) | temp_v6 | temp_v4 | (unsigned int)temp_v0;
-    }
-    *param_2 = temp_v5 | ((unsigned int)temp_v1 << 8) | (unsigned int)temp_v2;
-    temp_v6 = (temp_v8 >> 0x10) ^ 0xaaaa ^ (temp_v8 & 0xffff) ^ (temp_v5 >> 0x10) ^
-            (unsigned int)romwright_piece_1_1(temp_v1,temp_v2);
-    temp_v9 = (((temp_v3 & 0xff) << 8) | (unsigned int)(temp_v3 >> 8)) == temp_v6;
-    if (temp_v9) {
-      temp_v6 = 1;
-    }
-    *param_3 = ((*(unsigned short *)(param_1 + 0xc) << 8) | (*(unsigned short *)(param_1 + 0xc) >> 8)) + 1;
-    if (temp_v9) {
-      return temp_v6;
-    }
-  }
-  return 0;
+    u16 value = *(const u16 *)data;
+    return (u16)((value << 8) | (value >> 8));
 }
 
-} /* extern "C" */
+extern "C" {
+// Decode an L2 header's big-endian value and verify its halfword checksum.
+u32 FUN_001ed8ac(const u8 *header, PackedHeaderValue *value, u16 *count)
+{
+    if (*header++ != 'L' || *header++ != '2') {
+        return 0;
+    }
+    u16 checksum = readBigEndianHalfword(header);
+    header += 2;
+    u64 encoded = ((u64)header[0] << 56) | ((u64)header[1] << 48)
+                | ((u64)header[2] << 40) | ((u64)header[3] << 32)
+                | ((u64)header[4] << 24) | ((u64)header[5] << 16)
+                | ((u64)header[6] << 8) | header[7];
+    header += 8;
+    value->high = (u32)(encoded >> 32);
+    u32 high = value->high;
+    if ((s32)high < 0) {
+        high &= 0x7fffffff;
+    }
+    value->low = (u32)encoded;
+    u32 expected = (high >> 16) ^ 0xaaaa ^ (high & 0xffff)
+                 ^ ((value->low >> 16) & 0xffff) ^ (value->low & 0xffff);
+    *count = readBigEndianHalfword(header) + 1;
+    return checksum == expected;
+}
+}

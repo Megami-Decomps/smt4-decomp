@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b75ec(...);
 int effectRenderTransformedInstance(unsigned int *);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(unsigned int *);
@@ -74,7 +74,7 @@ unsigned int FUN_0038a478(void)
   puVar2 = (unsigned int *)jobGetWork();
   if ((*puVar2 & 0x10) != 0) {
     temp_v10 = DAT_00433180;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = g_titleScene;
     temp_v11 = (int)temp_v10;
     temp_v1 = FUN_002c5d80(1,0);

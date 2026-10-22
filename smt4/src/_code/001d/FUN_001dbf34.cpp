@@ -29,7 +29,7 @@ int FUN_002942c4(unsigned int, int);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
-int FUN_00295660(int, unsigned char [32]);
+int textEncodeFontSlot(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029bed8(...);
@@ -64,7 +64,7 @@ extern int FUN_00293aac(void);
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
@@ -116,7 +116,7 @@ unsigned int FUN_001dbf34(int param_1)
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
     FUN_002bd06c(temp_v4);
     libc_strcpy(temp_v8,temp_v4);
-    FUN_00295660(0,temp_v8);
+    textEncodeFontSlot(0,temp_v8);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x16);
     temp_v2 = btlTalkBustUpGetValue();
     if (temp_v2 == 0) {
@@ -152,7 +152,7 @@ unsigned int FUN_001dbf34(int param_1)
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
     FUN_002bd06c(temp_v4);
     libc_strcpy(temp_v8,temp_v4);
-    FUN_00295660(0,temp_v8);
+    textEncodeFontSlot(0,temp_v8);
     temp_v2 = (int)*(short *)(param_1 + 0xd4);
     if (temp_v2 >= 1) {
       temp_v5 = 2;

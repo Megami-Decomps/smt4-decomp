@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(int, int, int, int, int, int);
 int efctSetSpeed(void);
@@ -21,7 +21,7 @@ extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern int g_titleScene; /* 0x44ea00 */
 
 extern int saveLoadGetThreadStatus(void);
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -57,7 +57,7 @@ unsigned int FUN_003112ec(void)
     efctSetSpeed();
     FUN_002bed3c();
     temp_v4 = 0.27f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     FUN_002bf288(2,0xe,(*(unsigned short *)((unsigned char *)&g_byteSettings + 0x6)) + 0x185,(int)temp_v4,0,6);
     temp_v0 = g_titleScene;
     piVar5 = (int *)(g_titleScene + 0x124c);

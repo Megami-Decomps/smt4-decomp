@@ -1,53 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb744` (_code @ 0x3cb744, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: trigonometric zero initialization uses a saved GPR rather than retail VFP zero, changing live-register allocation. */
+/* Registers the active YHVH actor's forward-offset collision box. */
+#include "map/mapGimic.h"
 
 extern "C" {
-
-int FUN_0018a924(int *, unsigned int [6]);
-int sceneRegisterBoxEffect(int, int, unsigned char *, int, int, unsigned int, int, int, int, int, int, int, int, unsigned int, int, int, int, unsigned int, int);
-
-/* stack frame of void: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} void_stack;
-
-extern unsigned char LAB_003cb844; /* 0x3cb844 */
-extern int g_mapGimic; /* 0x580ca0 */
-
-/* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: sceneRegisterBoxEffect. */
-
+extern MapGimic *g_mapGimic;
+void FUN_0018a924(f32 *sine, f32 *cosine, f32 phase);
+s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
+    u32 effect, s32 variant, u32 option0, u32 option1, u32 option2,
+    u32 option3, u32 option4, u32 option5, u32 flag0, s32 flag1, u32 option,
+    u32 data0, u32 data1, s32 data2, u32 priority,
+    f32 x, f32 y, f32 z, f32 extent0, f32 extent1, f32 extent2, f32 yaw);
 
 void FUN_003cb744(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1 [6];
-  
-  temp_v0 = 0;
-  temp_v1[0] = 0;
-  if (*(char *)(g_mapGimic + 0x9b4) != '\0') {
-    FUN_0018a924(&temp_v0,temp_v1);
-    sceneRegisterBoxEffect(0x208,0,&LAB_003cb844,0x57,0xc,0xffffffff,0,0,0,0,0,0,0,0xffffffff,1,1,1,0xffffffff
-                 ,0);
-  }
-  return;
+    /* The special actor follows the shared map-gimmick prefix. */
+    struct SpecialActor {
+        u8 active;
+        u8 unk01[3];
+        f32 position[3];
+        f32 heading;
+    };
+    struct SpecialActorView {
+        MapGimic base;
+        SpecialActor actor;
+    };
+    f32 phase[2] = {0.0f, 0.0f};
+    SpecialActor *actor = &((SpecialActorView *)g_mapGimic)->actor;
+    if (actor->active) {
+        f32 x = actor->position[0];
+        f32 y = actor->position[1];
+        f32 z = actor->position[2];
+        FUN_0018a924(&phase[0], &phase[1], actor->heading * (256.0f / 360.0f));
+        sceneRegisterBoxEffect(520, 0, "YHVH", 87, 12, -1,
+            0, 0, 0, 0, 0, 0, 0, -1, 1, 1, 1, -1, 0,
+            x + phase[0] * 100.0f, y, z + phase[1] * 100.0f,
+            300.0f, 200.0f, 120.0f, actor->heading);
+    }
 }
-
-} /* extern "C" */
+}

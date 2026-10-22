@@ -1,34 +1,7 @@
-#include "common.h"
+#include "shard/W9_W9Match1_MotionPlayer.h"
 
 extern "C" {
 
-typedef struct MotionInfo {
-    /* 0x00 */ u8 unk00[0x54];
-    /* 0x54 */ u32 frame;
-} MotionInfo;
-
-typedef struct MotionSource {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ u32 flags;
-    /* 0x10 */ s32 keyCount;
-    /* 0x14 */ u8 unk14[0xC];
-    /* 0x20 */ MotionInfo *info;
-} MotionSource;
-
-typedef struct MotionTargets {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ u32 first;
-    /* 0x14 */ u32 second;
-} MotionTargets;
-
-typedef struct MotionPlayer {
-    /* 0x00 */ void *active;
-    /* 0x04 */ u8 unk04[0x20];
-    /* 0x24 */ f32 speed;
-    /* 0x28 */ MotionTargets *targets;
-    /* 0x2C */ u32 sound;
-    /* 0x30 */ MotionSource *source;
-} MotionPlayer;
 
 void quadSourceCopyOut(MotionSource *source, f32 *offset);
 void quadHolderCopyOut(MotionSource *source, f32 *rotation);

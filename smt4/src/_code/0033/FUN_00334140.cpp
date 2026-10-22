@@ -1,59 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00334140` (_code @ 0x334140, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: arrangement entry indexing uses different registers and loaded-file handling is outlined differently. */
+#include "battle/BattleAssetWork.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/Table00.h"
 
 extern "C" {
+extern const char DAT_00400918[];
+s32 FUN_0027e6f4(BtlMainState *battle, s32 kind);
+const Table00Record *dataTable00FindById(u32 id);
+void memClear(void *memory, u32 size);
+s32 textFormatBuffer(char *output, const char *format, ...);
+void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);
+u32 entryCollectNewIdentifiers(BattleArrangementWork *work, BtlMainState *battle);
+u32 FUN_002408ac(BattleArrangementWork *work, BtlMainState *battle);
 
-int FUN_002408ac(...);
-int entryCollectNewIdentifiers(...);
-int FUN_0027e6f4(...);
-int asdLoadFileAsyncSimple(...);
-int dataTable00FindById(...);
-int textFormatBuffer(...);
-int memClear(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002408ac. */
-/* Supplied declaration required: entryCollectNewIdentifiers. */
-/* Supplied declaration required: FUN_0027e6f4. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_00334140(unsigned int *param_1,int param_2)
-
+u32 FUN_00334140(BattleArrangementWork *work, BtlMainState *battle)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [128];
-  
-  temp_v0 = param_2;
-  FUN_0027e6f4(param_2,1);
-  if (-1 < temp_v0) {
-    *(unsigned int *)(param_2 + 0x44a0) = *(unsigned int *)(param_2 + 0x44a0) | 0x4000000;
-    temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_2 + 0x1fc0) + temp_v0 * 0x288 + 0xce);
-    dataTable00FindById();
-    memClear(temp_v2,0x80);
-    textFormatBuffer(temp_v2,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v1 + 0x9e),
-                 *(unsigned char *)(temp_v1 + 0x9f));
-    asdLoadFileAsyncSimple(temp_v2,(int *)(param_2 + 0x1e88),0);
-    *param_1 = 3;
-    if (*(int *)(param_2 + 0x1e88) != 0) {
-      *param_1 = 4;
-      entryCollectNewIdentifiers(param_1,param_2);
+    s32 index = FUN_0027e6f4(battle, 1);
+    if (index >= 0) {
+        battle->battleFlags |= 0x4000000;
+        const Table00Record *record = dataTable00FindById(battle->entries[index].id);
+        char path[128];
+        memClear(path, sizeof(path));
+        textFormatBuffer(path, DAT_00400918,
+                         record->arrangement.first, record->arrangement.second);
+        asdLoadFileAsyncSimple(path, &battle->arrangement.file, 0);
+        work->phase = 3;
+        if (battle->arrangement.file) {
+            work->phase = 4;
+            return entryCollectNewIdentifiers(work, battle);
+        }
+        return 0;
+    } else {
+        work->phase = 7;
+        return FUN_002408ac(work, battle);
     }
-    return;
-  }
-  *param_1 = 7;
-  FUN_002408ac(param_1,param_2);
-  return;
 }
-
-} /* extern "C" */
+}

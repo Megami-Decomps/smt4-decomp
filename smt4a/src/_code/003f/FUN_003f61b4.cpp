@@ -5,10 +5,10 @@
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(...);
 int FUN_001835b4(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int resourceRunOperationIfUnblocked(int);
 int objectApplyIfUnblocked(int);
 int uiSearchPrimary(int);
@@ -26,11 +26,11 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: uiSearchPrimary. */
@@ -55,7 +55,7 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
   
   param_1 = param_1 + 0xbc;
   temp_v8 = 0.26f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   efctSetSpeed();
   param_2 = param_2 + (int)temp_v8;
   FUN_001835b4(2,0x31,0x74,param_2,param_3,0xc9);
@@ -115,7 +115,7 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
       *(unsigned char *)(temp_v1 + 0x1330) = 0;
     }
   }
-  FUN_00168770();
+  renderPopStateStacks();
   efctSetSpeed();
   return;
 }

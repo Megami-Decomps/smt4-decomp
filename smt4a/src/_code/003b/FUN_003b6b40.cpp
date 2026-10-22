@@ -1,57 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6b40` (_code @ 0x3b6b40, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: paired bustup job selection uses different saved-register allocation. */
+/* Places two bustup jobs in opposite slots, preserving a job already on the other side. */
+#include "common.h"
 
 extern "C" {
-
+u32 scrGetArg(u32 index);
+s32 bustupCutAnimFindSlot(u32 job);
 void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int scrGetArg(unsigned int);
-extern int bustupCutAnimFindSlot(unsigned int);
-
-
-unsigned int FUN_003b6b40(void)
-
+u32 FUN_003b6b40(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = bustupCutAnimFindSlot(temp_v0);
-  temp_v3 = bustupCutAnimFindSlot(temp_v1);
-  if (temp_v2 < 0) {
-    if (temp_v3 < 0) {
-      bustupCutAnimSetPlacement(temp_v0,2,0,0,0);
-      bustupCutAnimSetPlacement(temp_v1,1,0,0,0);
-      return 1;
+    u32 first = scrGetArg(0);
+    u32 second = scrGetArg(1);
+    s32 firstSlot = bustupCutAnimFindSlot(first);
+    s32 secondSlot = bustupCutAnimFindSlot(second);
+    if (firstSlot < 0) {
+        if (secondSlot < 0) {
+            bustupCutAnimSetPlacement(first, 2, 0, 0, 0);
+            bustupCutAnimSetPlacement(second, 1, 0, 0, 0);
+            return 1;
+        }
+    } else if (firstSlot > 0) {
+        if (secondSlot > 0) {
+            bustupCutAnimSetPlacement(first, 2, 0, 0, 0);
+            bustupCutAnimSetPlacement(second, 1, 0, 0, 0);
+            return 1;
+        }
+        bustupCutAnimSetPlacement(first, 2, 0, 0, 0);
+        bustupCutAnimSetPlacement(second, 1, 1, 0, 0);
+        return 1;
     }
-  }
-  else if (0 < temp_v2) {
-    if (0 < temp_v3) {
-      bustupCutAnimSetPlacement(temp_v0,2,0,0,0);
-      bustupCutAnimSetPlacement(temp_v1,1,0,0,0);
-      return 1;
-    }
-    bustupCutAnimSetPlacement(temp_v0,2,0,0,0);
-    temp_v4 = 1;
-    bustupCutAnimSetPlacement(temp_v1,temp_v4,1,0,0);
+    bustupCutAnimSetPlacement(second, 1, 0, 0, 0);
+    bustupCutAnimSetPlacement(first, 2, 1, 0, 0);
     return 1;
-  }
-  bustupCutAnimSetPlacement(temp_v1,1,0,0,0);
-  temp_v4 = 2;
-  temp_v1 = temp_v0;
-  bustupCutAnimSetPlacement(temp_v1,temp_v4,1,0,0);
-  return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,29 +1,7 @@
 /* NON_MATCHING: default optimization retains/caches current components, groups vector stores and schedules FP registers differently; alternate optimization candidate. */
-#include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "map/VectorPairTransition.h"
 
 namespace {
-struct VectorPair {
-    BattleVector3 first;
-    BattleVector3 second;
-};
-struct VectorPairTransition {
-    u8 unk00[0x18];
-    VectorPair target;
-    VectorPair current;
-    s32 smoothing;
-    s32 duration;
-    s32 frame;
-    VectorPair delta;
-    f32 smoothingDivisor;
-}; // 0x70
-struct VectorTransitionWork {
-    u8 unk000[0x220];
-    VectorPairTransition transition;
-};
-struct VectorTransitionGlobals {
-    u32 unk00;
-    VectorTransitionWork* work;
-};
 
 inline void addVector(BattleVector3& current, const BattleVector3& delta)
 {

@@ -1,54 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdMemoryAlloc` (_code @ 0x2c5300, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: aligned-header pointer arithmetic is combined differently and the retail VRAM-branch NOP is absent. */
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include <stddef.h>
 
+struct AlignedAllocationHeader { u32 size; u16 alignment, flags; };
+struct AlignedAllocationView {
+    u8 prefix[0x38];
+    AlignedAllocationHeader *allocation;
+    u8 data[1];
+};
+struct MemoryAllocationGlobals { u32 unk00; void *lock; };
 extern "C" {
+extern MemoryAllocationGlobals DAT_00465120;
+void nn_os_CriticalSection_Enter(void *lock);
+void nn_os_CriticalSection_Leave(void *lock);
+void *FUN_002b24d8(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
+void FUN_002b23f4(AlignedAllocationHeader *allocation);
+void rt_memclr(void *memory, u32 size);
 
-int FUN_002b23f4(void);
-int FUN_002b24d8(...);
-int rt_memclr(unsigned int *, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned char DAT_00465120; /* 0x465120 */
-
-/* Supplied declaration required: FUN_002b23f4. */
-/* Supplied declaration required: FUN_002b24d8. */
-/* Supplied declaration required: rt_memclr. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned int * asdMemoryAlloc(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int param_4,
-                   unsigned int param_5)
-
+// Allocate VRAM directly; ordinary allocations carry an aligned header and are cleared before use.
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if (param_1 != (unsigned int *)0x20000 && param_1 != (unsigned int *)0x30000) {
-    nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-    temp_v0 = (param_4 + 0x13bU) & 0xffffff80;
-    FUN_002b24d8(param_1,param_2,param_3,temp_v0,param_5);
-    *param_1 = temp_v0;
-    *(unsigned short *)(param_1 + 1) = 0x80;
-    temp_v0 = (0x80 - ((unsigned int)(param_1 + 0xf) & 0x7f)) & 0x7f;
-    *(unsigned short *)((int)param_1 + 6) = 0;
-    puVar1 = (unsigned int *)((int)param_1 + temp_v0 + 0x3c);
-    *(unsigned int **)((int)param_1 + temp_v0 + 0x38) = param_1;
-    FUN_002b23f4();
-    rt_memclr(puVar1,param_4);
-    nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-    return puVar1;
-  }
-  nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-  FUN_002b24d8(param_1,param_2,param_3,param_4,param_5);
-  nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-  return param_1;
+    if (heap != ASD_HEAP_VRAM_A && heap != ASD_HEAP_VRAM_B) {
+        nn_os_CriticalSection_Enter(DAT_00465120.lock);
+        u32 allocatedSize = (size + 0x100 + offsetof(AlignedAllocationView, data) - 1) & ~127u;
+        AlignedAllocationHeader *header = (AlignedAllocationHeader *)FUN_002b24d8(heap, alignment, pool, allocatedSize, flags);
+        header->size = allocatedSize;
+        header->alignment = 128;
+        u32 padding = (128 - (((u32)header + offsetof(AlignedAllocationView, data)) & 127)) & 127;
+        header->flags = 0;
+        AlignedAllocationView *allocation = (AlignedAllocationView *)((u8 *)header + padding);
+        allocation->allocation = header;
+        void *memory = allocation->data;
+        FUN_002b23f4(header);
+        rt_memclr(memory, size);
+        nn_os_CriticalSection_Leave(DAT_00465120.lock);
+        return memory;
+    }
+    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    void *memory = FUN_002b24d8(heap, alignment, pool, size, flags);
+    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    return memory;
 }
-
-} /* extern "C" */
+}

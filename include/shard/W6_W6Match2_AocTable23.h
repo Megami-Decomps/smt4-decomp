@@ -2,9 +2,17 @@
 #define SHARD_W6_W6MATCH2_AOC_TABLE23_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct Table23Record {
-    u8 data[0x0c];
+    union {
+        u8 data[0x0c];
+        struct {
+            s8 category;
+            s8 subtype;
+            u8 variant;
+        } key;
+    };
 };
 
 // The common extension tail lies beyond both canonical AocSystem prefixes.
@@ -26,5 +34,10 @@ struct Table23TriggerRecord {
     /* 0x11 */ u8 unk11[0x0F];
 };
 typedef char Table23TriggerRecordSizeCheck[sizeof(Table23TriggerRecord) == 0x20 ? 1 : -1];
+
+typedef char Table23RecordKeyOffsetsCheck[
+    offsetof(Table23Record, key.category) == 0 &&
+    offsetof(Table23Record, key.subtype) == 1 &&
+    offsetof(Table23Record, key.variant) == 2 && sizeof(Table23Record) == 0xC ? 1 : -1];
 
 #endif

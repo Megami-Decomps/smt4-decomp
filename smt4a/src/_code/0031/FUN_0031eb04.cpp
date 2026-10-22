@@ -1,93 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031eb04` (_code @ 0x31eb04, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the maze-owner and list-owner global addresses use exchanged registers. */
+#include "map/mapRndMaze.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
+#include <stddef.h>
 
+/* These handle arrays extend beyond the common MapRndMazeA prefix. */
+struct MazeHandleTables {
+    u8 unk000[0x394];
+    u8 active;
+    u8 unk395[0x1F];
+    RegisteredHandle *roots[6];
+    RegisteredHandle *groups[6][64];
+    RegisteredHandle *special[4];
+};
+typedef char MazeHandleTablesOffsetsCheck[
+    offsetof(MazeHandleTables, groups) == 0x3CC &&
+    offsetof(MazeHandleTables, special) == 0x9CC ? 1 : -1];
 extern "C" {
-
-int ptrListRemoveClearOwner(unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned char DAT_0060ff9c; /* 0x60ff9c */
-extern int DAT_006105d4; /* 0x6105d4 */
-extern int DAT_006105d8; /* 0x6105d8 */
-extern int DAT_006105dc; /* 0x6105dc */
-extern int DAT_006105e0; /* 0x6105e0 */
-
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-
-
-void FUN_0031eb04(unsigned int param_1,int param_2)
-
-{
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  temp_v7 = 0;
-  DAT_0060ff9c = 0;
-  do {
-    temp_v6 = 1;
-    do {
-      temp_v0 = *(int *)(temp_v7 * 0x100 + temp_v6 * 4 + 0x60ffd4);
-      if (temp_v0 != 0) {
-        param_2 = *(int *)(temp_v0 + 4);
-      }
-      if (temp_v0 != 0 && param_2 != 0) {
-        ptrListRemoveClearOwner(g_handleRegistry);
-        param_2 = temp_v1;
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 0x40);
-    temp_v6 = *(int *)(temp_v7 * 4 + 0x60ffbc);
-    if (temp_v6 != 0) {
-      param_2 = *(int *)(temp_v6 + 4);
-    }
-    if (temp_v6 != 0 && param_2 != 0) {
-      ptrListRemoveClearOwner(g_handleRegistry);
-      param_2 = temp_v2;
-    }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 6);
-  if (DAT_006105dc != 0) {
-    param_2 = *(int *)(DAT_006105dc + 4);
-  }
-  if (DAT_006105dc != 0 && param_2 != 0) {
-    ptrListRemoveClearOwner(g_handleRegistry);
-    param_2 = temp_v3;
-  }
-  if (DAT_006105d8 != 0) {
-    param_2 = *(int *)(DAT_006105d8 + 4);
-  }
-  if (DAT_006105d8 != 0 && param_2 != 0) {
-    ptrListRemoveClearOwner(g_handleRegistry);
-    param_2 = temp_v4;
-  }
-  if (DAT_006105d4 != 0) {
-    param_2 = *(int *)(DAT_006105d4 + 4);
-  }
-  if (DAT_006105d4 != 0 && param_2 != 0) {
-    ptrListRemoveClearOwner(g_handleRegistry);
-    param_2 = temp_v5;
-  }
-  if (DAT_006105e0 != 0) {
-    param_2 = *(int *)(DAT_006105e0 + 4);
-  }
-  if (DAT_006105e0 == 0 || param_2 == 0) {
-    return;
-  }
-  ptrListRemoveClearOwner(g_handleRegistry);
-  return;
+extern MazeHandleTables g_mapRndMaze;
+extern void *g_handleRegistry;
+void ptrListRemoveClearOwner(void *, u32);
 }
 
-} /* extern "C" */
+static __inline void mazeUnregisterHandle(RegisteredHandle *handle)
+{
+    if (handle != NULL && handle->id != 0) {
+        ptrListRemoveClearOwner(g_handleRegistry, handle->id);
+    }
+}
+
+/* Unregister maze objects, preserving each group's reserved zero slot. */
+extern "C" void FUN_0031eb04(void)
+{
+    g_mapRndMaze.active = 0;
+    for (s32 group = 0; group < 6; ++group) {
+        for (s32 slot = 1; slot < 64; ++slot) {
+            mazeUnregisterHandle(g_mapRndMaze.groups[group][slot]);
+        }
+        mazeUnregisterHandle(g_mapRndMaze.roots[group]);
+    }
+    mazeUnregisterHandle(g_mapRndMaze.special[2]);
+    mazeUnregisterHandle(g_mapRndMaze.special[1]);
+    mazeUnregisterHandle(g_mapRndMaze.special[0]);
+    mazeUnregisterHandle(g_mapRndMaze.special[3]);
+}

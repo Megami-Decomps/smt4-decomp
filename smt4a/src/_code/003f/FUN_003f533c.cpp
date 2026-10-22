@@ -8,7 +8,7 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, unsigned int);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 
 /* stack frame of param_10: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_003f533c(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,
@@ -42,7 +42,7 @@ void FUN_003f533c(unsigned int param_1,int param_2,int param_3,unsigned int para
   
   temp_v3 = 0.26f;
   temp_v2 = temp_v3;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   efctSetSpeed();
   drawSetColorFromRGBA8(param_9);
   temp_v0 = FUN_001834a4(0x31,param_6);
@@ -54,7 +54,7 @@ void FUN_003f533c(unsigned int param_1,int param_2,int param_3,unsigned int para
   else {
     FUN_001835b4(2,0x31,0xa0,temp_v1,temp_v0,param_4);
   }
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v0 = FUN_001834a4(0x31,param_7);
   FUN_00180310(6,(int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2,*(short *)(temp_v0 + 10) + param_3,
                0,4,param_4,&LAB_003f54bc,param_5 % 10);

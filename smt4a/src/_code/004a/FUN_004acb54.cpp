@@ -1,54 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004acb54` (_code @ 0x4acb54, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: payload load scheduling and transfer-queue register allocation differ. */
+#include "shard/CircularTransferQueue.h"
 
 extern "C" {
-
-int FUN_00521984(int, int);
-int FUN_00521d14(int, int, unsigned int);
-
-/* Supplied declaration required: FUN_00521984. */
-/* Supplied declaration required: FUN_00521d14. */
-
-
-void FUN_004acb54(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (*(int *)(param_1 + 0x38) != 0) {
-    temp_v0 = param_1 + 0x1c;
-    FUN_00521984(temp_v0,*(int *)(param_1 + 0x30) + *(int *)(param_1 + 0x3c) * 0x10);
-    if (temp_v0 != 0) {
-      temp_v1 = *(int *)(param_1 + 0x3c);
-      temp_v3 = temp_v1 + 1;
-      temp_v0 = *(int *)(*(int *)(*(int *)(param_1 + 0x30) + temp_v1 * 0x10 + 4) + 0xc);
-      temp_v2 = *(int *)(param_1 + 0x14) + temp_v0;
-      if (*(unsigned int *)(param_1 + 0xc) <= temp_v2) {
-        temp_v2 = temp_v2 - *(unsigned int *)(param_1 + 0xc);
-      }
-      *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) - temp_v0;
-      *(unsigned int *)(param_1 + 0x14) = temp_v2;
-      temp_v2 = *(unsigned int *)(param_1 + 0x34);
-      if (temp_v2 < temp_v3) {
-        FUN_00521d14(param_1 + 0x2c,temp_v1,temp_v2);
-        temp_v3 = temp_v3 - temp_v2;
-        temp_v1 = 0;
-      }
-      FUN_00521d14(param_1 + 0x2c,temp_v1,temp_v3);
-      temp_v2 = *(int *)(param_1 + 0x3c) + 1;
-      if (*(unsigned int *)(param_1 + 0x34) <= temp_v2) {
-        temp_v2 = temp_v2 - *(unsigned int *)(param_1 + 0x34);
-      }
-      *(unsigned int *)(param_1 + 0x3c) = temp_v2;
-      *(int *)(param_1 + 0x38) = *(int *)(param_1 + 0x38) - 1;
-    }
-  }
-  return;
+u32 FUN_00521984(void *, const TransferDescriptor *);
+void FUN_00521d14(TransferDescriptorRing *, u32, u32);
 }
 
-} /* extern "C" */
+/* Forward the next queued transfer and reclaim its descriptor and byte range. */
+extern "C" u32 FUN_004acb54(CircularTransferQueue *queue)
+{
+    if (queue->descriptors.pending == 0) {
+        return 0;
+    }
+    if (FUN_00521984(queue->output,
+        &queue->descriptors.items[queue->descriptors.readIndex]) == 0) {
+        return 0;
+    }
+    u32 index = queue->descriptors.readIndex;
+    u32 end = index + 1;
+    u32 bytes = queue->descriptors.items[index].payload->size;
+    u32 position = queue->readPosition + bytes;
+    if (position >= queue->capacity) {
+        position -= queue->capacity;
+    }
+    queue->queuedBytes -= bytes;
+    queue->readPosition = position;
+    TransferDescriptorRing *descriptors = &queue->descriptors;
+    u32 capacity = descriptors->capacity;
+    if (end > capacity) {
+        FUN_00521d14(descriptors, index, capacity);
+        end -= capacity;
+        index = 0;
+    }
+    FUN_00521d14(descriptors, index, end);
+    index = descriptors->readIndex + 1;
+    if (index >= descriptors->capacity) {
+        index -= descriptors->capacity;
+    }
+    descriptors->readIndex = index;
+    --descriptors->pending;
+    return 1;
+}

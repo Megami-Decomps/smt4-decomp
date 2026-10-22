@@ -1,45 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba1e0` (_code @ 0x2ba1e0, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: quad argument retention and GPR/VFP scheduling differ. */
+#include "common.h"
 
 extern "C" {
+void FUN_002b0124(u32 mode);
+void FUN_002aff74(u32 color, f32 x, f32 y, f32 z, f32 u, f32 v);
+void submitDefaultFloatParameters();
 
-int FUN_002adba8(int *, int, int);
-int FUN_002aff74(unsigned int);
-int FUN_002b0124(int);
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp64; /* 0x64: local_64 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_002adba8. */
-/* Supplied declaration required: FUN_002aff74. */
-/* Supplied declaration required: FUN_002b0124. */
-
-
-void FUN_002ba1e0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Submit four colored, textured vertices and finish the quad's parameter packet.
+void FUN_002ba1e0(u32 color0, u32 color1, u32 color2, u32 color3,
+    f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+    f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
+    f32 u0, f32 v0, f32 u1, f32 v1, f32 u2, f32 v2, f32 u3, f32 v3)
 {
-/* irregular: 4 native warning(s); review required */
-  int uStack_20;
-  unsigned int uStack_1c;
-  
-  uStack_20 = param_3;
-  uStack_1c = param_4;
-  FUN_002b0124(1);
-  FUN_002aff74(param_1);
-  FUN_002aff74(param_2);
-  FUN_002aff74(param_3);
-  FUN_002aff74(param_4);
-  uStack_20 = 1;
-  uStack_1c = 0x10245;
-  FUN_002adba8(&uStack_20,0x18,1);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    FUN_002b0124(1);
+    FUN_002aff74(color0, x0, y0, z0, u0, v0);
+    FUN_002aff74(color1, x1, y1, z1, u1, v1);
+    FUN_002aff74(color2, x2, y2, z2, u2, v2);
+    FUN_002aff74(color3, x3, y3, z3, u3, v3);
+    submitDefaultFloatParameters();
 }
-
-} /* extern "C" */
+}

@@ -61,7 +61,7 @@ extern int FUN_002886c8(unsigned short);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: fileSlotLoad. */
 extern int FUN_00298f88(unsigned short);
-extern int FUN_00298fa0(unsigned short, unsigned int);
+extern int questReadRuntimeFlag(unsigned short, unsigned int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
@@ -118,7 +118,7 @@ void FUN_00269dc8(void)
   FUN_00189c24();
   temp_v0 = 0;
   do {
-    temp_v2 = FUN_00298fa0(temp_v0,2);
+    temp_v2 = questReadRuntimeFlag(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_00298f88(temp_v0), temp_v2 != 0)) &&
        ((temp_v2 = FUN_002886c8(temp_v0), temp_v2 != 0 || (temp_v2 = FUN_002886b0(temp_v0), temp_v2 != 0)))) {
       gameFlagClearModeBits(temp_v0);
@@ -127,7 +127,7 @@ void FUN_00269dc8(void)
   } while (temp_v0 < 400);
   temp_v0 = 0;
   do {
-    temp_v2 = FUN_00298fa0(temp_v0,2);
+    temp_v2 = questReadRuntimeFlag(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_00298f88(temp_v0), temp_v2 == 0)) &&
        ((temp_v2 = FUN_002886c8(temp_v0), temp_v2 != 0 || (temp_v2 = FUN_002886b0(temp_v0), temp_v2 != 0)))) {
       gameFlagClearModeBits(temp_v0);

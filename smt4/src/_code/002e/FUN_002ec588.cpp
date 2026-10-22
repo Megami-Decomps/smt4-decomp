@@ -23,7 +23,7 @@ int FUN_00262f78(void);
 int FUN_00262f94(void);
 int gameDataBlocksAddFlags(int);
 int FUN_0026b9bc(void);
-int FUN_00295660(int, unsigned int [60]);
+int textEncodeFontSlot(int, unsigned int [60]);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int gameGetUnitRecord(...);
 int devilGetRecord(void);
@@ -71,7 +71,7 @@ extern int gameDataBlocksGetFlagByteA(void);
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_0026b9bc. */
 extern int FUN_0028fb40(unsigned short);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: randBetween. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -215,7 +215,7 @@ unsigned int FUN_002ec588(int param_1)
         temp_v2 = cecSlotGet(temp_v8);
         if ((*(unsigned char *)(temp_v2 + 0x20) & 0xc) != 0) {
           libc_strcpy(temp_v12,temp_v2 + 0xe);
-          FUN_00295660(0,temp_v12);
+          textEncodeFontSlot(0,temp_v12);
           if ((*(unsigned char *)(temp_v2 + 0x20) & 4) == 0) {
             temp_v9 = 0x14;
           }

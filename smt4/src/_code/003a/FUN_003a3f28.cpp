@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002305fc(int);
+int buttonHelpSelectMenuPreset(int);
 int flaggedValueHolderGetTotal(int);
 int FUN_0027f3dc(...);
 int useCounterRelease(void);
@@ -29,7 +29,7 @@ extern int FUN_003a075c(...); /* 0x3a075c */
 extern int FUN_003a63a8(...); /* 0x3a63a8 */
 
 extern int useCounterGetValue(void);
-/* Supplied declaration required: FUN_002305fc. */
+/* Supplied declaration required: buttonHelpSelectMenuPreset. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_0027f3dc. */
 extern int useCounterGetCurrentValue(void);
@@ -51,7 +51,7 @@ void FUN_003a3f28(int param_1)
   if (temp_v0 != 0) {
     useCounterRelease();
     FUN_002a0cc8(0);
-    FUN_002305fc(param_1);
+    buttonHelpSelectMenuPreset(param_1);
     temp_v0 = *(int *)(param_1 + 0x860);
     if (*(int *)(param_1 + 0x10) == 1) {
       if (temp_v0 == 8) {

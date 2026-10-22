@@ -1,48 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246080` (_code @ 0x246080, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail contains a discarded queue traversal; omitted rather than retaining dead work. */
+#include "battle/btlReflect.h"
+#include "battle/btlAction.h"
+#include "battle/btlMain.h"
 
 extern "C" {
+ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+BtlMainState *btlGetMainState(void);
+s16 battleGetEntryHalfword(s32 memberId, u32 field);
+s32 FUN_00293230(BtlMainState *battle);
 
-int FUN_0022699c(int, int, int, unsigned int);
-int btlGetMainState(void);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-extern short battleGetEntryHalfword(int, unsigned int);
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-
-
-int FUN_00246080(short param_1,short param_2,unsigned int param_3,int param_4,int param_5)
-
+/* Queue a reflected action with the target's zero-based entry id. */
+ReflectAction *FUN_00246080(s32 actor, s32 secondary, u32 options, BtlActionRecord *target, s32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  for (temp_v2 = *(int *)(g_btlActionReflect + 8); temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0xc)) {
-  }
-  temp_v2 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,(int)param_2,param_3);
-  *(unsigned char *)(temp_v2 + 4) = 7;
-  *(int *)(temp_v2 + 0x28) = param_5;
-  *(int *)(temp_v2 + 0x14) = param_4;
-  temp_v0 = battleGetEntryHalfword((int)*(short *)(param_4 + 0x62),1);
-  *(short *)(temp_v2 + 0x24) = temp_v0 - 1;
-  if (param_5 != 4) {
-    if (param_5 == 3) {
-      btlGetMainState();
-      temp_v1 = FUN_00293230();
-      if (temp_v1 == 0) {
-        return temp_v2;
-      }
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, (s16)secondary, options);
+    action->kind = 7;
+    action->value = value;
+    action->target = reinterpret_cast<u32>(target);
+    action->first = battleGetEntryHalfword(target->memberId, 1) - 1;
+    if (value != 4) {
+        if (value == 3 && !FUN_00293230(btlGetMainState())) {
+            return action;
+        }
+        action->flagView.flags |= 4;
     }
-    *(unsigned char *)(temp_v2 + 5) = *(unsigned char *)(temp_v2 + 5) | 4;
-  }
-  return temp_v2;
+    return action;
 }
-
-} /* extern "C" */
+}

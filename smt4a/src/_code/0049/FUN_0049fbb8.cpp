@@ -1,56 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049fbb8` (_code @ 0x49fbb8, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one redundant stack store remains for the seeded comparison result; all other instruction rows agree. */
+#include "shard/Shard0031.h"
 
 extern "C" {
-
-int FUN_002c7bb0(...);
-
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_002c7bb0. */
-
-
-unsigned int FUN_0049fbb8(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int uStack_20;
-  
-  uStack_20 = param_4;
-  if (((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-     (temp_v3 = param_2, FUN_002c7bb0(param_2,0xffffffff,param_3,&uStack_20), temp_v3 == 0)) {
-    return 1;
-  }
-  if (param_1 >= 2) {
-    if (param_1 != 2 && param_1 != 3) {
-      return 0;
-    }
-    temp_v3 = 3;
-    temp_v0 = gameGetSlotTable();
-    temp_v0 = temp_v0 + 0x1ca0;
-  }
-  else {
-    temp_v3 = gameSlotTableFindFree();
-    temp_v0 = gameGetSlotTable();
-    temp_v0 = temp_v0 + 0x1c88;
-  }
-  temp_v2 = 0;
-  if (temp_v2 < temp_v3) {
-    do {
-      if ((-1 < *(char *)(temp_v0 + temp_v2)) &&
-         (temp_v1 = param_2, FUN_002c7bb0(param_2,(int)*(char *)(temp_v0 + temp_v2),param_3,&uStack_20),
-         temp_v1 == 0)) {
-        return 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v3);
-  }
-  return 0;
+PartyStatusSlots *gameGetSlotTable(void);
+s32 gameSlotTableFindFree(void);
+s32 FUN_002c7bb0(s32, s32, u32, u32 *);
 }
 
-} /* extern "C" */
+/* Test the selected party set, including the protagonist for the applicable modes. */
+extern "C" u32 FUN_0049fbb8(u32 mode, s32 predicate, u32 argument, u32 initialResult)
+{
+    u32 result = initialResult;
+    if ((mode == 0 || mode == 2 || mode == 3) &&
+        FUN_002c7bb0(predicate, -1, argument, &result) == 0) {
+        return 1;
+    }
+    s32 count;
+    const s8 *slots;
+    switch (mode) {
+    case 0:
+    case 1:
+        count = gameSlotTableFindFree();
+        slots = gameGetSlotTable()->active.slots;
+        break;
+    case 2:
+    case 3:
+        count = 3;
+        slots = gameGetSlotTable()->reserve;
+        break;
+    default:
+        return 0;
+    }
+    for (s32 i = 0; i < count; ++i) {
+        if (slots[i] >= 0 && FUN_002c7bb0(predicate, slots[i], argument, &result) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}

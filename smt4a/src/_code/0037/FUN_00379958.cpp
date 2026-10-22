@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0046c35c(int, int, int);
-int FUN_0046e97c(int, unsigned int);
+int packageFindIndexedRecord(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: FUN_0046e97c. */
+/* Supplied declaration required: packageFindIndexedRecord. */
 
 
 int FUN_00379958(unsigned int param_1)
@@ -40,7 +40,7 @@ int FUN_00379958(unsigned int param_1)
     FUN_0046c35c(g_aocSystem,0x28,0);
     if (param_1 < temp_v1 + temp_v2) {
       temp_v1 = g_aocSystem;
-      FUN_0046e97c(g_aocSystem,param_1 - temp_v2);
+      packageFindIndexedRecord(g_aocSystem,param_1 - temp_v2);
       return temp_v1;
     }
     temp_v1 = 0;

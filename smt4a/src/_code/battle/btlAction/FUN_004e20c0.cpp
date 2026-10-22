@@ -13,7 +13,7 @@ int battleRecordUnitMaskHistoryEvents(void);
 int FUN_004c5848(void);
 int FUN_004c5ec0(void);
 int FUN_004d7a60(...);
-int FUN_004e62b4(...);
+int battleApplyInteractionSelection(...);
 
 int ARM_common_memcpy4_9(...);
 int FUN_001568f8(...);
@@ -280,7 +280,7 @@ extern int FUN_004c6b8c(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_004d7a60. */
 /* Supplied declaration required: FUN_004e5a40. */
 /* Supplied declaration required: FUN_004e5f2c. */
-/* Supplied declaration required: FUN_004e62b4. */
+/* Supplied declaration required: battleApplyInteractionSelection. */
 /* Supplied declaration required: FUN_004e699c. */
 extern int FUN_004e83ac(unsigned int *, unsigned int *, int);
 extern int btlUnitGet(unsigned int *);
@@ -1829,7 +1829,7 @@ LAB_004e4cac:
   if (temp_v6 == 1) {
     temp_v12 = g_btlAux;
     resolveBattleValue(g_btlAux,0);
-    FUN_004e62b4(param_1,param_2,param_8,temp_v12,0);
+    battleApplyInteractionSelection(param_1,param_2,param_8,temp_v12,0);
     temp_v6 = *param_1;
     temp_v12 = (int)*(short *)(*(int *)(temp_v6 + 0x1ed4) + param_8 * 0x1d0 + 0x68);
     puVar9 = (unsigned int *)(*(int *)(temp_v6 + 0x1ffc) + temp_v12 * 0x408);

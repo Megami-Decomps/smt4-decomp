@@ -1,74 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f3f08` (_code @ 0x3f3f08, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the zero marker mask is initialized after the visibility guard instead of before it. */
+#include "shard/Shard0034.h"
+#include "shard/W6_W6Match6_PartyPanel.h"
 
 extern "C" {
+PlayerData *gameGetPlayerData(void);
+PlayerData *gameGetSlotRecord(s32 slot);
+PlayerData *btlMainGetUnk14(void);
+u32 markerKindGetColor(u32 kind);
 
-typedef struct fn_003f3f08_arg0 fn_003f3f08_arg0;
-struct fn_003f3f08_arg0 {
-    unsigned char pad_0x0[0x1c];
-    int field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x3];
-    byte field_0x23; /* +0x23 */
-    unsigned char pad_0x24[0x10];
-    void *field_0x34; /* +0x34 */
-};
-
-extern int gameGetPlayerData(void);
-extern unsigned int markerKindGetColor(int);
-extern int gameGetSlotRecord(void);
-extern int btlMainGetUnk14(void);
-
-
-unsigned int FUN_003f3f08(fn_003f3f08_arg0 *param_1)
-
+// Return the color of the selected marker among the subject's enabled marker kinds.
+u32 FUN_003f3f08(const PartyPanelWidget *widget)
 {
-  void *pvVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = 0;
-  if (param_1->field_0x23 != 0) {
-    return 0xffffffff;
-  }
-  pvVar1 = param_1->field_0x34;
-  if (pvVar1 != (void *)0xffffffff) {
-    if (pvVar1 != (void *)0xfffffffe) {
-      if (-1 < (int)pvVar1) {
-        temp_v0 = gameGetSlotRecord();
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
-      }
+    // The subject selector is beyond the recovered PartyPanelWidget prefix.
+    struct MarkerWidgetView {
+        u8 unk00[0x1C];
+        s32 markerOrdinal;
+        u8 unk20[3];
+        u8 markerHidden;
+        u8 unk24[0x10];
+        s32 sourceSelector;
+    };
+    const MarkerWidgetView *entry = (const MarkerWidgetView *)widget;
+    u32 color = 0xFFFFFFFF;
+    if (entry->markerHidden) {
+        return color;
     }
-    else {
-      temp_v0 = btlMainGetUnk14();
-      if (temp_v0 != 0) {
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x60);
-      }
+    u32 markerMask = 0;
+    s32 selector = entry->sourceSelector;
+    if (selector == -1) {
+        markerMask = gameGetPlayerData()->unk5E;
+    } else if (selector == -2) {
+        const PlayerData *subject = btlMainGetUnk14();
+        if (subject != NULL) {
+            markerMask = (u16)subject->unk60;
+        }
+    } else if (selector >= 0) {
+        markerMask = (u16)gameGetSlotRecord(selector)->unk60;
     }
-  }
-  else {
-    temp_v0 = gameGetPlayerData();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x5e);
-  }
-  temp_v1 = 1;
-  temp_v0 = 0;
-  while( 1 ) {
-    if ((temp_v3 & (1 << (temp_v1 & 0xff))) != 0) {
-      if (param_1->field_0x1c == temp_v0) {
-        temp_v2 = markerKindGetColor((int)(short)temp_v1);
-        return temp_v2;
-      }
-      temp_v0 = temp_v0 + 1;
+    s32 ordinal = 0;
+    for (s32 kind = 1; kind < 14; ++kind) {
+        if (kind == 2) {
+            continue;
+        }
+        if ((markerMask & (1u << kind)) != 0) {
+            if (entry->markerOrdinal == ordinal) {
+                color = markerKindGetColor((s16)kind);
+                break;
+            }
+            ++ordinal;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-    if ((int)temp_v1 >= 0xe) break;
-    while (temp_v1 == 2) {
-      temp_v1 = 3;
-    }
-  }
-  return 0xffffffff;
+    return color;
 }
-
-} /* extern "C" */
+}

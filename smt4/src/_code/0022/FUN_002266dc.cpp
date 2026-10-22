@@ -1,66 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002266dc` (_code @ 0x2266dc, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: queue iteration prefetch and signed actor-argument extension differ from retail. */
+#include "battle/btlReflect.h"
+#include "battle/btlAction.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
+struct ReflectedMemberActions {
+    u8 unk00[0xc];
+    u32 ids[50]; // 0x0c in the roster's embedded action subrecord
+};
 extern "C" {
+ReflectAction *btlQueueReflectAction(ReflectContext *context, u16 actor, u16 secondary, u32 options);
+BtlMainState *btlGetMainState();
+ReflectedMemberActions *FUN_0027da30(BtlMainState *battle, s32 member);
+s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *member);
 
-int FUN_0022699c(int, int, int, unsigned int);
-int FUN_0027da30(int, int);
-int btlGetMainState(void);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(unsigned int, int);
-/* Supplied declaration required: btlGetMainState. */
-
-
-int FUN_002266dc(short param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
+// Queue a member reflection action only when an equivalent action is not already pending.
+ReflectAction *FUN_002266dc(s16 actor, u32 options, BtlActionRecord *target, u32 value)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  
-  if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0) {
-    temp_v0 = *(int *)(g_btlActionReflect + 8);
-    do {
-      if (temp_v0 == 0) {
-        temp_v0 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-        temp_v1 = btlGetMainState();
-        FUN_0027da30(temp_v1,(int)*(short *)(param_3 + 0x62));
-        temp_v2 = btlGetMainState();
-        temp_v3 = FUN_0027dab0(temp_v2,param_3);
-        if (temp_v3 < 0) {
-          temp_v3 = 0;
-        }
-        *(unsigned char *)(temp_v0 + 4) = 0x26;
-        *(int *)(temp_v0 + 0x14) = param_3;
-        *(unsigned int *)(temp_v0 + 0x28) = param_4;
-        *(short *)(temp_v0 + 0x24) = (short)*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0xc);
-        *(unsigned short *)(temp_v0 + 0x26) = *(unsigned short *)(param_3 + 0x62);
-        return temp_v0;
-      }
-      temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 4);
-      temp_v5 = temp_v4 == 0x26;
-      if (temp_v5) {
-        temp_v4 = *(unsigned int *)(temp_v0 + 8);
-      }
-      temp_v6 = temp_v5 && temp_v4 == param_2;
-      if (temp_v5 && temp_v4 == param_2) {
-        temp_v6 = *(int *)(temp_v0 + 0x14) == param_3;
-      }
-      temp_v0 = *(int *)(temp_v0 + 0xc);
-    } while (!temp_v6);
-  }
-  return 0;
+    if (!(target->status & 1))
+        return NULL;
+    for (ReflectAction *action = g_btlActionReflect->head; action; action = action->next)
+        if (action->kind == 38 && action->options == options && action->target == (u32)target)
+            return NULL;
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
+    ReflectedMemberActions *members = FUN_0027da30(btlGetMainState(), target->memberId);
+    s32 index = FUN_0027dab0(btlGetMainState(), target);
+    if (index < 0)
+        index = 0;
+    action->kind = 38;
+    action->target = (u32)target;
+    action->value = value;
+    action->first = (u16)members->ids[index];
+    action->second = (u16)target->memberId;
+    return action;
 }
-
-} /* extern "C" */
+}

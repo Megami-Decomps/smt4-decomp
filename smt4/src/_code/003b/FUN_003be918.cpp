@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, unsigned int);
 int FUN_0022a690(...);
-int FUN_0022ab08(...);
+int selectionCopySupportedValue(...);
 int FUN_0023ea94(...);
 int FUN_00247478(...);
 int FUN_0027da30(...);
@@ -47,7 +47,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0022a690. */
-/* Supplied declaration required: FUN_0022ab08. */
+/* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0023ea94. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
@@ -132,7 +132,7 @@ int FUN_003be918(fn_003be918_arg0 *param_1,unsigned int param_2,unsigned int par
   uStack_74 = uStack_50;
   temp_v11 = temp_v13;
   temp_v14[0] = 0;
-  FUN_0022ab08(uStack_6a,temp_v14);
+  selectionCopySupportedValue(uStack_6a,temp_v14);
   puVar5 = (unsigned int *)btlGetMainState();
   btlMainFindEntryByListedId(puVar5,param_2);
   pfVar10 = (fn_003be918_arg0 *)0x0;

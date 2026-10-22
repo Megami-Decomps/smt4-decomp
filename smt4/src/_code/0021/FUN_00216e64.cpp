@@ -18,7 +18,7 @@ int FUN_0028bf2c(void);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
-int FUN_00295660(int, unsigned char [32]);
+int textEncodeFontSlot(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int FUN_0029bd4c(void);
@@ -68,7 +68,7 @@ extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned ch
 /* Supplied declaration required: FUN_002954f4. */
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: FUN_00296774. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -89,7 +89,7 @@ extern int gameGetUnitRecord(int);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -245,10 +245,10 @@ void FUN_00216e64(int param_1)
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
       FUN_002bd06c(temp_v6);
       libc_strcpy(temp_v16,temp_v6);
-      FUN_00295660(8,temp_v16);
-      temp_v4 = FUN_002bce30(*(unsigned short *)(temp_v2 + 0x46),1);
+      textEncodeFontSlot(8,temp_v16);
+      temp_v4 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0x46),1);
       libc_strcpy(temp_v16,temp_v4);
-      FUN_00295660(0x10,temp_v16);
+      textEncodeFontSlot(0x10,temp_v16);
       scrScriptProcessDestroy(*puVar16);
       asdMemFree(*(unsigned int *)(param_1 + 0x3578));
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);

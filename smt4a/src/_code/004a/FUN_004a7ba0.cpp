@@ -1,73 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7ba0` (_code @ 0x4a7ba0, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Panel-context saved registers and alternate-style block placement differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+extern PanelTextDefaultsPrefixA DAT_0057f0ac;
+const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
+u32 FUN_002a4b28(u16 textId);
+u32 FUN_00180118(u16 textId);
+void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
+                                u32 color, u32 textValue,
+                                f32 x, f32 y, f32 opacity,
+                                f32 extraZero, f32 scale);
 
-int drawTextAtSnappedRectangle(int, unsigned int, unsigned int, unsigned int);
-int FUN_00180118(unsigned int);
-int FUN_0018349c(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
-
-extern unsigned int uRam0057f0b0; /* 0x57f0b0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: drawTextAtSnappedRectangle. */
-/* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_0018349c. */
-extern unsigned int FUN_002a4b28(unsigned short);
-
-
-void FUN_004a7ba0(int param_1,unsigned short param_2,int param_3,int param_4,int param_5)
-
+void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, u16 textId,
+                  s32 entryIndex, s32 alternateStyle, s32 fade, f32 scale)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  unsigned int in_fpscr;
-  
-  VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (param_4 != 0) {
-    temp_v2 = FUN_0018349c(param_1 + 200,param_3 + 0x42f);
-    temp_v5 = 0x499;
-    temp_v7 = 0x9fe7ffff;
-    temp_v6 = 3;
-  }
-  else {
-    temp_v2 = FUN_0018349c(param_1 + 200,param_3 + 0x40e);
-    temp_v5 = 0x48b;
-    temp_v6 = 2;
-    temp_v7 = 0xffffffff;
-  }
-  temp_v0 = *(short *)(temp_v2 + 8);
-  temp_v1 = *(short *)(temp_v2 + 10);
-  temp_v3 = FUN_002a4b28(param_2);
-  temp_v8 = temp_v3 == 0;
-  if (temp_v8) {
-    temp_v3 = (unsigned int)*(unsigned char *)(param_1 + 0x95);
-  }
-  temp_v4 = uRam0057f0b0;
-  if (!temp_v8 || temp_v3 != 0) {
-    temp_v4 = (unsigned int)param_2;
-    FUN_00180118(temp_v4);
-  }
-  temp_v2 = FUN_0018349c(param_1 + 200,temp_v5);
-  VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  drawTextAtSnappedRectangle(param_1 + 200,temp_v6,temp_v7,temp_v4);
-  return;
-}
+    const f32 opacity = static_cast<f32>(256 - fade) * (1.0f / 256.0f);
+    TextLayoutContextA *context = reinterpret_cast<TextLayoutContextA *>(
+        reinterpret_cast<u8 *>(panel) + 0xC8);
 
-} /* extern "C" */
+    const PanelTextLayoutEntryPrefixA *base;
+    s32 offsetEntry;
+    u32 style;
+    u32 color;
+    if (alternateStyle != 0) {
+        base = FUN_0018349c(context, entryIndex + 0x42F);
+        offsetEntry = 0x499;
+        style = 3;
+        color = 0x9FE7FFFFu;
+    } else {
+        base = FUN_0018349c(context, entryIndex + 0x40E);
+        offsetEntry = 0x48B;
+        style = 2;
+        color = 0xFFFFFFFFu;
+    }
+
+    const s16 baseX = base->x;
+    const s16 baseY = base->y;
+    u32 textValue;
+    if (FUN_002a4b28(textId) != 0 || panel->allowTextLookup != 0) {
+        textValue = FUN_00180118(textId);
+    } else {
+        textValue = DAT_0057f0ac.fallbackTextValue;
+    }
+
+    const PanelTextLayoutEntryPrefixA *offset = FUN_0018349c(context, offsetEntry);
+    drawTextAtSnappedRectangle(context, style, color, textValue,
+        static_cast<f32>(static_cast<s32>(offset->x) + baseX),
+        static_cast<f32>(static_cast<s32>(offset->y) + baseY),
+        opacity, 0.0f, scale);
+}
+}

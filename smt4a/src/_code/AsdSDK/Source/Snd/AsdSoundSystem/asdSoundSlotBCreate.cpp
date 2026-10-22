@@ -1,67 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdSoundSlotBCreate` (_code @ 0x1407ec, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: native's impossible inlined selector guards are omitted; live-slot search lowering differs. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern u8 g_asdSoundSystem[];
+void* asdMemoryAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 fromFront);
+u32 nw_snd_SoundHeap_Create(void* heap, void* memory, u32 size);
+u32 nw_snd_SoundHeap_SaveState(void* heap);
 
-int asdMemoryAlloc(int, int, int, unsigned int, int);
-int nw_snd_SoundHeap_Create(int, unsigned int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int DAT_0063e774; /* 0x63e774 */
-extern int DAT_0063f500; /* 0x63f500 */
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: nw_snd_SoundHeap_Create. */
-extern unsigned int nw_snd_SoundHeap_SaveState(int);
-
-
-unsigned int asdSoundSlotBCreate(unsigned int param_1,unsigned int param_2)
-
+u32 asdSoundSlotBCreate(u32 index, u32 heapSize)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (param_1 < 4) {
-    temp_v0 = param_1 * 0x70;
-    if (*(int *)(temp_v0 + 0x63e71c) == 0) {
-      temp_v1 = 0x10000;
-      asdMemoryAlloc(0x10000,0x100,0,param_2,1);
-      *(unsigned int *)(temp_v0 + 0x63e76c) = temp_v1;
-      nw_snd_SoundHeap_Create(temp_v0 + 0x63e70c,temp_v1,param_2);
-      (&DAT_0063e774)[param_1 * 0x1c] = 0x40;
-      temp_v1 = nw_snd_SoundHeap_SaveState(temp_v0 + 0x63e70c);
-      *(unsigned int *)(temp_v0 + 0x63e770) = temp_v1;
-      temp_v2 = 0;
-      while (*(int *)(temp_v2 * 0x70 + 0x63e71c) == 0) {
-        temp_v2 = temp_v2 + 1;
-        if ((int)temp_v2 >= 4) {
-          return 1;
-        }
-      }
-      if (temp_v2 == 0xffffffff) {
-        DAT_0063f500 = 0;
-        return 1;
-      }
-      if (temp_v2 >= 4) {
-        return 1;
-      }
-      temp_v0 = temp_v2 * 0x70;
-      if (*(int *)(temp_v0 + 0x63e71c) == 0) {
-        return 1;
-      }
-      DAT_0063f500 = temp_v0 + 0x63e70c;
-      *(char *)(temp_v0 + 0x63e778) = (char)temp_v2;
-      return 1;
+    // Apocalypse's slot stride/current-slot field extend beyond the shared IV sound layout.
+    struct SlotView {
+        u8 heap[0x10];
+        void* heapBase;
+        u8 unk14[0xC];
+        u8 unk20[0x40];
+        void* heapBuffer;
+        u32 savedState;
+        u32 volume;
+        s8 index;
+        u8 unk6D[3];
+    };
+    struct SoundSystemView {
+        u8 unk000[0x524];
+        SlotView slots[ASD_SND_SLOT_B_COUNT];
+        u8 unk6E4[0xC34];
+        SlotView* current;
+    };
+    typedef char SoundSlotStrideCheck[sizeof(SlotView) == 0x70 &&
+        offsetof(SlotView, heapBase) == 0x10 &&
+        offsetof(SoundSystemView, current) == 0x1318 ? 1 : -1];
+    SoundSystemView* sound = reinterpret_cast<SoundSystemView*>(g_asdSoundSystem);
+    if (index >= ASD_SND_SLOT_B_COUNT || sound->slots[index].heapBase) {
+        return 0;
     }
-  }
-  return 0;
+    SlotView* slot = &sound->slots[index];
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 1482);
+    slot->heapBuffer = asdMemoryAlloc(0x10000, 0x100, 0, heapSize, 1);
+    nw_snd_SoundHeap_Create(slot, slot->heapBuffer, heapSize);
+    slot->volume = ASD_SND_VOLUME_DEFAULT;
+    slot->savedState = nw_snd_SoundHeap_SaveState(slot);
+    s32 candidate = 0;
+    while (!sound->slots[candidate].heapBase) {
+        ++candidate;
+        if (candidate >= ASD_SND_SLOT_B_COUNT) {
+            return 1;
+        }
+    }
+    sound->current = &sound->slots[candidate];
+    sound->current->index = (s8)candidate;
+    return 1;
 }
-
-} /* extern "C" */
+}

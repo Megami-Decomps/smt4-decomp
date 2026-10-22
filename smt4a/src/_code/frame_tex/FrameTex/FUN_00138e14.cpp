@@ -63,7 +63,7 @@ extern int FUN_0013e848(...); /* 0x13e848 */
 extern int FUN_0013e8f8(...); /* 0x13e8f8 */
 extern int FUN_0013e9e4(...); /* 0x13e9e4 */
 extern int FUN_0013ee80(...); /* 0x13ee80 */
-extern int FUN_0013ef3c(...); /* 0x13ef3c */
+extern unsigned int FUN_0013ef3c(unsigned int process); /* 0x13ef3c */
 extern int FUN_0014055c(...); /* 0x14055c */
 extern int FUN_00140618(...); /* 0x140618 */
 extern unsigned char DAT_00530cfc; /* 0x530cfc */

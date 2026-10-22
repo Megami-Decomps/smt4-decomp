@@ -1,51 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6b48` (_code @ 0x2f6b48, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ARMCC merges flag tests and uses an immediate target limit with different saved registers. */
+#include "battle/btlUnit.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
+extern u32 g_btlScriptUnit;
+u32 scrGetArg(u32 index);
+BtlUnit* btlUnitGet(u32 id);
+BtlMainState* btlGetMainState(void);
 
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-extern int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_002f6b48(void)
-
+// Install two script action ids and select up to two eligible reserve entries.
+u32 FUN_002f6b48(void)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  char temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlUnitGet(g_btlScriptUnit);
-  *(unsigned short *)(*(int *)(temp_v2 + 0x28) + 0x14c) = 0xc;
-  temp_v2 = btlGetMainState();
-  *(int *)(temp_v2 + 0x1fd4) = (int)(temp_v0 | 0x10000) >> 0x1f;
-  *(unsigned int *)(temp_v2 + 0x1fd0) = temp_v0 | 0x10000;
-  temp_v2 = btlGetMainState();
-  *(int *)(temp_v2 + 0x1fdc) = (int)(temp_v1 | 0x10000) >> 0x1f;
-  temp_v4 = '\0';
-  temp_v3 = 4;
-  *(unsigned int *)(temp_v2 + 0x1fd8) = temp_v1 | 0x10000;
-  do {
-    temp_v2 = btlGetMainState();
-    temp_v0 = *(unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v3 * 0x288);
-    if ((temp_v0 & 1) == 0 && (temp_v0 & 0x40) == 0) {
-      temp_v2 = btlUnitGet(g_btlScriptUnit);
-      temp_v4 = temp_v4 + '\x01';
-      *(char *)(temp_v2 + temp_v3 + 0x38) = (char)temp_v3;
-      if ('\x01' < temp_v4) {
-        return 1;
-      }
+    // Pending actions lie beyond the shared battle prefix's recovered end.
+    struct PendingActionsView {
+        u8 unk00[0x1FD0];
+        s64 first;
+        s64 second;
+    };
+    typedef char PendingActionsOffsets[offsetof(PendingActionsView, first) == 0x1FD0 &&
+        offsetof(PendingActionsView, second) == 0x1FD8 ? 1 : -1];
+    u32 first = scrGetArg(0);
+    u32 second = scrGetArg(1);
+    btlUnitGet(g_btlScriptUnit)->data->unk14C = 12;
+    reinterpret_cast<PendingActionsView*>(btlGetMainState())->first = (s64)(s32)(first | 0x10000);
+    reinterpret_cast<PendingActionsView*>(btlGetMainState())->second = (s64)(s32)(second | 0x10000);
+    s8 found = 0;
+    for (s32 i = 4; i < 54; ++i) {
+        u32 flags = reinterpret_cast<BtlState*>(btlGetMainState())->units[i].flags;
+        if ((flags & 1) == 0 && (flags & 0x40) == 0) {
+            btlUnitGet(g_btlScriptUnit)->targets[i] = i;
+            if (++found >= 2) {
+                break;
+            }
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x36);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

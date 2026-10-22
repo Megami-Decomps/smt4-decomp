@@ -17,7 +17,7 @@ int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287a78(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int asdMdlManagerDestroy(void);
 int dataTable00FindById(void);
@@ -108,7 +108,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002879dc. */
 /* Supplied declaration required: FUN_00287a78. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -793,7 +793,7 @@ LAB_00209c48:
         temp_v18 = *(float *)(temp_v3 + 0x60);
         FUN_002535ec();
         *(float *)(temp_v3 + 0x60) = temp_v18;
-        FUN_00287b0c();
+        mathGetShortestAngleDelta();
         in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v18) << 0x1d);
         if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
           temp_v18 = -temp_v18;

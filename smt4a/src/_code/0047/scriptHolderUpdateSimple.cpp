@@ -1,79 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scriptHolderUpdateSimple` (_code @ 0x47e4e4, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: script-holder state dispatch saves extra registers and uses different branch sharing. */
+/* Loads the quest script and system images, runs its entry, and finalizes the screen on completion. */
+#include "shard/Shard0047.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
+ScriptRunState *FUN_00275bc8(void *script, void *images);
+void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
+void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
+s32 scrRunOpcodesStub(ScriptRunState *process);
+u32 FUN_004186e0(void);
+void FUN_00418070(u32 object, s32 value);
+void optionsClearFlag1(void);
+void FUN_003a36b4(void);
+void FUN_004731d8(void);
 
-int FUN_00275bc8(void);
-int scrScriptProcessStartEntry(int, int);
-int asdLoadFileAsyncSimple(unsigned char *, int *, int);
-int FUN_003a36b4(void);
-int FUN_00418070(unsigned int, int);
-int FUN_004731d8(void);
-int optionsClearFlag1(void);
-
-extern unsigned char LAB_0047e5dc; /* 0x47e5dc */
-extern unsigned char LAB_0047e5f4; /* 0x47e5f4 */
-
-extern int scrRunOpcodesStub(int);
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_003a36b4. */
-/* Supplied declaration required: FUN_00418070. */
-extern unsigned int FUN_004186e0(void);
-/* Supplied declaration required: FUN_004731d8. */
-/* Supplied declaration required: optionsClearFlag1. */
-
-
-unsigned int scriptHolderUpdateSimple(int *param_1)
-
+u32 scriptHolderUpdateSimple(ScriptHolder *holder)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *param_1;
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 == 2) {
-        temp_v0 = scrRunOpcodesStub(param_1[5]);
-        if (temp_v0 != 2) {
-          return 0;
+    switch (holder->phase.state) {
+    case 0:
+        asdLoadFileAsyncSimple("event/quest/QuestScr.bf", &holder->buf0C, 0);
+        asdLoadFileAsyncSimple("event/quest/QuestSys.mbm", &holder->buf10, 0);
+        holder->phase.state = 1;
+        break;
+    case 1:
+        if (holder->buf0C != NULL && holder->buf10 != NULL) {
+            holder->process = FUN_00275bc8(holder->buf0C, holder->buf10);
+            holder->process->mode = 2;
+            scrScriptProcessStartEntry(holder->process, holder->phase.entry);
+            holder->phase.state = 2;
         }
-        temp_v1 = FUN_004186e0();
-        FUN_00418070(temp_v1,0);
-        optionsClearFlag1();
-        FUN_003a36b4();
-        FUN_004731d8();
-        *param_1 = 4;
-        return 0;
-      }
-      if (temp_v0 != 4) {
-        return 0;
-      }
-      return 1;
+        break;
+    case 2:
+        if (scrRunOpcodesStub(holder->process) == 2) {
+            FUN_00418070(FUN_004186e0(), 0);
+            optionsClearFlag1();
+            FUN_003a36b4();
+            FUN_004731d8();
+            holder->phase.state = 4;
+        }
+        break;
+    case 4:
+        return 1;
     }
-    temp_v0 = param_1[3];
-    if (temp_v0 == 0) {
-      return 0;
-    }
-    if (param_1[4] == 0) {
-      return 0;
-    }
-    FUN_00275bc8();
-    param_1[5] = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x108) = 2;
-    scrScriptProcessStartEntry(param_1[5],param_1[1]);
-    temp_v0 = 2;
-  }
-  else {
-    asdLoadFileAsyncSimple(&LAB_0047e5dc,param_1 + 3,0);
-    asdLoadFileAsyncSimple(&LAB_0047e5f4,param_1 + 4,0);
-    temp_v0 = 1;
-  }
-  *param_1 = temp_v0;
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -11,7 +11,17 @@ struct PassiveSkillRecord {
     /* 0x24 */ u8 unk24[0x2];
     /* 0x26 */ u8 holdChance;    /* percent: chance the skill applies when held */
     /* 0x27 */ u8 triggerChance; /* percent */
-    /* 0x28 */ u8 unk28[0x10];
+    union {
+        /* 0x28 */ u8 unk28[0x10];
+        struct {
+            /* 0x28 */ u8 unk28[0xA];
+            /* 0x32 */ u8 category;
+        } classification;
+        struct {
+            u8 unk28[0xE];
+            /* 0x36 */ u16 percent;
+        } scaling;
+    };
     /* 0x38 */ u32 affinity;
 };
 
@@ -21,6 +31,10 @@ typedef char PassiveSkillRecordHoldChanceOffsetCheck[
     offsetof(PassiveSkillRecord, holdChance) == 0x26 ? 1 : -1];
 typedef char PassiveSkillRecordSortKeyOffsetCheck[
     offsetof(PassiveSkillRecord, sortKey) == 0x22 ? 1 : -1];
+typedef char PassiveSkillRecordCategoryOffsetCheck[
+    offsetof(PassiveSkillRecord, classification.category) == 0x32 && sizeof(PassiveSkillRecord) == 0x3C ? 1 : -1];
+typedef char PassiveSkillRecordScalingOffsetCheck[
+    offsetof(PassiveSkillRecord, scaling.percent) == 0x36 && sizeof(PassiveSkillRecord) == 0x3C ? 1 : -1];
 
 /* An active skill record (ids up to 400). */
 struct ActiveSkillRecord {

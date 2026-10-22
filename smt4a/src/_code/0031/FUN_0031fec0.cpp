@@ -10,7 +10,7 @@ int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_0017ffa8(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int renderCtxCallB(...);
 int FUN_003d4298(...);
 int VectorSignedToFloat(...);
@@ -38,7 +38,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: renderCtxCallB. */
 extern int FUN_00387580(unsigned int);
 /* Supplied declaration required: FUN_003d4298. */
@@ -72,7 +72,7 @@ unsigned int FUN_0031fec0(void)
   temp_v1 = jobGetWork();
   if (*(int *)(temp_v1 + 4) == 1 || *(int *)(temp_v1 + 4) == 2) {
     temp_v8 = 0.26f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v9 = (unsigned int)temp_v8;
     FUN_00183bb0();
     efctSetSpeed();

@@ -1,59 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003626bc` (_code @ 0x3626bc, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail places the vector before the matrix and retains its address in a saved register. */
+#include "shard/W5_W5Match2_PlainData.h"
+
+struct ModelTransformVector { f32 x, y, z; };
+struct ModelTransformTarget {
+    u8 unk00[0x18];
+    Matrix44 matrix; // 0x18
+};
 
 extern "C" {
+void FUN_002b4c30(Matrix44 *matrix, const f32 *rotation);
+void matrix44SetIdentity(Matrix44 *matrix);
+void mathMatrixApplyScale(Matrix44 *matrix, const ModelTransformVector *scale, u32 order);
+void FUN_002a2048(Matrix44 *matrix, const ModelTransformVector *translation, u32 order);
+void FUN_002a1fb4(Matrix44 *target, const Matrix44 *matrix, u32 flags);
 
-int mathMatrixApplyScale(unsigned char [72], int *, int);
-int FUN_002a1fb4(int, unsigned char [72], int);
-int FUN_002a2048(unsigned char [72], int *, int);
-int FUN_002b4c30(void);
-int matrix44SetIdentity(unsigned char [72]);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_3_stack;
-
-/* Supplied declaration required: mathMatrixApplyScale. */
-/* Supplied declaration required: FUN_002a1fb4. */
-/* Supplied declaration required: FUN_002a2048. */
-/* Supplied declaration required: FUN_002b4c30. */
-/* Supplied declaration required: matrix44SetIdentity. */
-
-
-void FUN_003626bc(int param_1,int *param_2,int param_3)
-
+// Build a target transform from optional rotation, uniform scale, and translation.
+void FUN_003626bc(ModelTransformTarget *target, const ModelTransformVector *translation, const f32 *rotation, f32 scale)
 {
-/* irregular: irregular input(s): in_s0; 5 native warning(s); review required */
-  int in_s0;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [72];
-  
-  if (param_3 != 0) {
-    FUN_002b4c30();
-  }
-  else {
-    matrix44SetIdentity(temp_v3);
-  }
-  if (in_s0 != 0x3f800000) {
-    temp_v0 = in_s0;
-    temp_v1 = in_s0;
-    temp_v2 = in_s0;
-    mathMatrixApplyScale(temp_v3,&temp_v0,2);
-  }
-  if (param_2 != (int *)0x0) {
-    temp_v0 = *param_2;
-    temp_v1 = param_2[1];
-    temp_v2 = param_2[2];
-    FUN_002a2048(temp_v3,&temp_v0,2);
-  }
-  FUN_002a1fb4(param_1 + 0x18,temp_v3,0);
-  return;
+    Matrix44 matrix;
+    ModelTransformVector vector;
+    if (rotation != NULL) {
+        FUN_002b4c30(&matrix, rotation);
+    } else {
+        matrix44SetIdentity(&matrix);
+    }
+    if (scale != 1.0f) {
+        vector.x = scale;
+        vector.y = scale;
+        vector.z = scale;
+        mathMatrixApplyScale(&matrix, &vector, 2);
+    }
+    if (translation != NULL) {
+        vector.x = translation->x;
+        vector.y = translation->y;
+        vector.z = translation->z;
+        FUN_002a2048(&matrix, &vector, 2);
+    }
+    FUN_002a1fb4(&target->matrix, &matrix, 0);
 }
-
-} /* extern "C" */
+}

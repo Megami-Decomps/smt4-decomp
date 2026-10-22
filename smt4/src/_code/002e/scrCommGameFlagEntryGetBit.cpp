@@ -4,14 +4,14 @@ extern "C" {
 
 int scrSetResult(void);
 int scrGetArg(...);
-int FUN_00298fa0(int a, u32 b);
+int questReadRuntimeFlag(int a, u32 b);
 
 u32 scrCommGameFlagEntryGetBit(void)
 {
     u16 a = scrGetArg();
     u32 b = scrGetArg(1);
 
-    FUN_00298fa0(a, b);
+    questReadRuntimeFlag(a, b);
     scrSetResult();
     return 1;
 }

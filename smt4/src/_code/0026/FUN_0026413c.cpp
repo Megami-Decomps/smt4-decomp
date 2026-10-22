@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0027eee0(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 
 extern int g_lmapMainState; /* 0x447060 */
 extern int DAT_004474f4; /* 0x4474f4 */
@@ -15,7 +15,7 @@ extern unsigned int *DAT_0049f938; /* 0x49f938 */
 
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_0027eee0. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 
@@ -94,7 +94,7 @@ void FUN_0026413c(void)
       *(float *)(temp_v2 + 0x210) = temp_v6;
       *(float *)(temp_v2 + 0xb8) = temp_v5;
       *(unsigned int *)(temp_v2 + 0xbc) = temp_v9;
-      FUN_00287b0c();
+      mathGetShortestAngleDelta();
       temp_v2 = DAT_004474f4;
       *(unsigned short *)(DAT_004474f4 + 0xb4) = 0;
       if (temp_v5 < temp_v6) {

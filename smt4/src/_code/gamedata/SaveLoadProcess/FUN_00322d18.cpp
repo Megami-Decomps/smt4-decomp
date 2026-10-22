@@ -1,78 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00322d18` (_code @ 0x322d18, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains removed debug-log filename/line setup and a NOP before allocation. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "gamedata/SaveLoadProcessState.h"
 
+struct SaveStartWork {
+    u32 process, state, result, unk0c, slot;
+    u8 option;
+    u8 unk15[0xeb];
+};
+struct SaveStartData { u8 unk00[3]; u8 mode; };
 extern "C" {
+extern SaveByteSettings g_byteSettings;
+void *asdMemAlloc(u32 size, u32 alignment, u32 pool, u32 flags, u32 clear);
+void gameDataBlocksAddFlags(u32 flags);
+void gameDataFlagsSetBits(u32 flags);
+void gameDataFlagsSet(u32 flags);
+SaveStartData *gameDataBlocksGetSaveData();
+s32 FUN_002efba0(u32 process);
+void jobTeardownFlagsAndWork(u32 process);
+u32 asdProcessCreateSimple(const char *name, s32 group, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work);
+void asdProcessClearSelectedFlags(u32 process, u32 mask, u32 flags);
 
-int asdProcessClearSelectedFlags(...);
-int gameDataFlagsSet(...);
-int gameDataFlagsSetBits(...);
-int gameDataBlocksAddFlags(...);
-int asdMemAlloc(...);
-int asdProcessCreateSimple(...);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int FUN_002efba0(...); /* 0x2efba0 */
-extern unsigned char LAB_00322e3c; /* 0x322e3c */
-extern int jobTeardownFlagsAndWork(...); /* 0x324b74 */
-extern unsigned char g_byteSettings; /* 0x43e2f0 */
-extern unsigned char DAT_0043e2f1; /* 0x43e2f1 */
-extern unsigned char DAT_0043e2f2; /* 0x43e2f2 */
-extern unsigned char DAT_0043e2f3; /* 0x43e2f3 */
-extern unsigned char DAT_0043e2f4; /* 0x43e2f4 */
-extern unsigned short DAT_0043e2f6; /* 0x43e2f6 */
-extern unsigned int DAT_0043e2f8; /* 0x43e2f8 */
-
-/* Supplied declaration required: asdProcessClearSelectedFlags. */
-/* Supplied declaration required: gameDataFlagsSet. */
-/* Supplied declaration required: gameDataFlagsSetBits. */
-/* Supplied declaration required: gameDataBlocksAddFlags. */
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-unsigned int FUN_00322d18(unsigned int param_1,unsigned char param_2)
-
+// Initialize save bookkeeping and launch the save process with its requested slot and option.
+u32 FUN_00322d18(u32 slot, u8 option)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned char *puVar4;
-  
-  puVar2 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x18,1);
-  gameDataBlocksAddFlags(1);
-  gameDataFlagsSetBits(1);
-  gameDataFlagsSet(1);
-  puVar2[2] = 0;
-  temp_v1 = gameDataBlocksGetSaveData();
-  temp_v0 = *(unsigned char *)(temp_v1 + 3);
-  puVar2[4] = (unsigned int)temp_v0;
-  if (temp_v0 == 0) {
-    puVar2[4] = 1;
-  }
-  DAT_0043e2f3 = 0;
-  DAT_0043e2f4 = 0;
-  DAT_0043e2f8 = 0;
-  DAT_0043e2f6 = 0;
-  g_byteSettings = 0;
-  DAT_0043e2f1 = 0;
-  DAT_0043e2f2 = 0;
-  puVar2[4] = param_1;
-  puVar4 = &LAB_00322e3c;
-  asdProcessCreateSimple(&LAB_00322e3c,2,0,0,FUN_002efba0,jobTeardownFlagsAndWork,puVar2);
-  *puVar2 = (unsigned int)puVar4;
-  asdProcessClearSelectedFlags();
-  puVar2[1] = 0;
-  *(unsigned char *)(puVar2 + 5) = param_2;
-  return *puVar2;
+    SaveStartWork *work = (SaveStartWork *)asdMemAlloc(0x100, 0x100, 0, 0x18, 1);
+    gameDataBlocksAddFlags(1);
+    gameDataFlagsSetBits(1);
+    gameDataFlagsSet(1);
+    work->result = 0;
+    work->slot = gameDataBlocksGetSaveData()->mode;
+    if (work->slot == 0)
+        work->slot = 1;
+    g_byteSettings.third = 0;
+    g_byteSettings.fourth = 0;
+    g_byteSettings.flags = 0;
+    g_byteSettings.value = 0;
+    g_byteSettings.selected = 0;
+    g_byteSettings.first = 0;
+    g_byteSettings.second = 0;
+    work->slot = slot;
+    work->process = asdProcessCreateSimple("Save", 2, 0, NULL, FUN_002efba0, jobTeardownFlagsAndWork, work);
+    asdProcessClearSelectedFlags(work->process, 0x80000, 0);
+    work->state = 0;
+    work->option = option;
+    return work->process;
 }
-
-} /* extern "C" */
+}

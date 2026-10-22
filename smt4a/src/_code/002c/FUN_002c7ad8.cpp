@@ -1,62 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7ad8` (_code @ 0x2c7ad8, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: record-loop pointer advancement and pending-field addressing differ. */
+#include "gamedata/GameData.h"
 
 extern "C" {
+extern GameDataBlocksA g_gameDataBlocks;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} void_stack;
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
+// Canonicalize saved record ids and clear each corresponding record's pending value.
 void FUN_002c7ad8(void)
-
 {
-/* irregular: 1 goto(s) */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  temp_v2 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x29500;
-  do {
-    temp_v0 = *(int *)(temp_v2 + temp_v3 * 0x28 + 0x10);
-    if (temp_v0 != 0) {
-      temp_v1 = (int)(short)temp_v0;
-      piVar3 = (int *)0x0;
-      temp_v0 = 0;
-      do {
-        piVar2 = (int *)(temp_v2 + temp_v0 * 0x28 + 0x10);
-        if (*piVar2 == 0 && piVar3 == (int *)0x0) {
-          piVar3 = piVar2;
+    // The shared byte-aligned save view cannot acquire aligned record fields.
+    struct SavedRecordView {
+        u8 unk00[0x10];
+        s32 id; // 0x10
+        u32 pending; // 0x14
+        u8 unk18[0x10];
+    };
+    struct SaveRecordsView {
+        u8 unk00000[0x29500];
+        SavedRecordView records[16];
+    };
+    SavedRecordView *records = reinterpret_cast<SaveRecordsView *>(g_gameDataBlocks.saveBlock)->records;
+    for (s32 source = 0; source < 16; ++source) {
+        if (records[source].id == 0)
+            continue;
+        s32 id = static_cast<s16>(records[source].id);
+        SavedRecordView *empty = NULL;
+        SavedRecordView *found = NULL;
+        for (s32 index = 0; index < 16; ++index) {
+            SavedRecordView *record = &records[index];
+            if (record->id == 0 && empty == NULL)
+                empty = record;
+            if (record->id == id) {
+                found = record;
+                break;
+            }
         }
-        if (*piVar2 == temp_v1) {
-          if (piVar2 != (int *)0x0) goto LAB_002c7b64;
-          break;
-        }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x10);
-      piVar2 = (int *)0x0;
-      if (piVar3 != (int *)0x0) {
-        piVar2 = piVar3;
-      }
-LAB_002c7b64:
-      if (*piVar2 == 0) {
-        *piVar2 = temp_v1;
-      }
-      piVar2[1] = 0;
+        if (found == NULL)
+            found = empty;
+        if (found->id == 0)
+            found->id = id;
+        found->pending = 0;
     }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x10) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

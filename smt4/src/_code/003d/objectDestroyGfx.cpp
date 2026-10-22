@@ -3,7 +3,7 @@
 extern "C" {
 
 int gfxObjectDestroy(u32 value);
-int FUN_0029c2cc(int value, int flag);
+void FUN_0029c2cc(int value, int flag);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x730];

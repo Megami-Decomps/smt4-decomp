@@ -37,12 +37,26 @@ struct UiSpriteState {
     /* 0x70 */ u32 unk70;
     /* 0x74 */ u8 unk74[4];
     /* 0x78 */ u32 unk78;
-    /* 0x7C */ u8 unk7C[0xA];
-    /* 0x86 */ u8 unk86[5];
+    /* 0x7C */ union {
+        u8 unk7C[0xA];
+        struct {
+            u8 unk7C[9];
+            /* 0x85 */ s8 active;
+        } visibility;
+    };
+    /* 0x86 */ union {
+        u8 unk86[5];
+        struct {
+            u8 unk86[4];
+            /* 0x8A */ s8 completed;
+        } animationFlags;
+    };
     /* 0x8B */ u8 unk8B;
 };
 
 typedef char UiSpriteStateSizeCheck[sizeof(UiSpriteState) == 0x8C ? 1 : -1];
 typedef char UiSpriteStateOffsetsCheck[offsetof(UiSpriteState, source) == 0x48 && offsetof(UiSpriteState, animation) == 0x50 && offsetof(UiSpriteState, mode) == 0x5C && offsetof(UiSpriteState, unk86) == 0x86 ? 1 : -1];
+typedef char UiSpriteStateActiveOffsetCheck[offsetof(UiSpriteState, visibility.active) == 0x85 ? 1 : -1];
+typedef char UiSpriteStateCompletionOffsetCheck[offsetof(UiSpriteState, animationFlags.completed) == 0x8A ? 1 : -1];
 
 #endif

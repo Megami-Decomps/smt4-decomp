@@ -1,94 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cef34` (_code @ 0x2cef34, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: redundant native sentinel/index guards are omitted; reverse-copy and address lowering differ. */
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
+void memCopy(const void* source, void* destination, s32 size);
 
-int memCopy(...);
-
-typedef struct fn_002cef34_arg0 fn_002cef34_arg0;
-struct fn_002cef34_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    undefined4 field_0x30; /* +0x30 */
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    byte field_0x3c; /* +0x3c */
-    byte field_0x3d; /* +0x3d */
-    byte field_0x3e; /* +0x3e */
-    unsigned char pad_0x3f[0xc];
-    byte field_0x4b; /* +0x4b */
-    byte field_0x4c; /* +0x4c */
-    byte field_0x4d; /* +0x4d */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int DAT_0043e2ac; /* 0x43e2ac */
-
-/* Supplied declaration required: memCopy. */
-
-
-void FUN_002cef34(fn_002cef34_arg0 *param_1)
-
+// Insert a record at the front of the save history, discarding the oldest when full.
+void FUN_002cef34(const void* source)
 {
-/* irregular: 2 goto(s); 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 0;
-  temp_v2 = DAT_0043e2ac + 0x88;
-  while( 1 ) {
-    temp_v0 = temp_v2 + temp_v3 * 0x4c;
-    temp_v1 = temp_v0 + 0x2478c;
-    temp_v4 = *(short *)(temp_v0 + 0x247c0) == 0;
-    if (temp_v4) {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0x247d4);
-    }
-    if (temp_v4 && temp_v1 == 0) break;
-    temp_v3 = temp_v3 + 1;
-    if ((int)temp_v3 >= 0xc) {
-      temp_v3 = 0xb;
-LAB_002cef94:
-      if (temp_v3 != 0) {
-LAB_002cefa0:
-        temp_v2 = 0;
-        temp_v1 = temp_v3;
-        while (temp_v1 = temp_v1 - 1, -1 < (int)temp_v1) {
-          temp_v0 = 0;
-          if (temp_v1 < 0xc) {
-            temp_v0 = DAT_0043e2ac + temp_v1 * 0x4c + 0x24814;
-          }
-          if (temp_v3 - temp_v2 < 0xc) {
-            memCopy(temp_v0,DAT_0043e2ac + (temp_v3 - temp_v2) * 0x4c + 0x24814,0x4c);
-          }
-          temp_v2 = temp_v2 + 1;
+    struct HistoryRecord {
+        u8 unk00[0x34];
+        u16 firstMarker;
+        u8 unk36[0x12];
+        u16 secondMarker;
+        u8 unk4A[2];
+    };
+    // The history spans several separately recovered save-data views.
+    struct HistoryView {
+        u8 unk00000[0x24814];
+        HistoryRecord records[12];
+    };
+    typedef char HistoryRecordSizeCheck[sizeof(HistoryRecord) == 0x4C ? 1 : -1];
+    HistoryView* history = reinterpret_cast<HistoryView*>(g_gameDataBlocks.saveBlock);
+    s32 count = 0;
+    for (; count < 12; ++count) {
+        if (!history->records[count].firstMarker && !history->records[count].secondMarker) {
+            break;
         }
-        temp_v2 = DAT_0043e2ac + 0x88;
-      }
-      memCopy(param_1,temp_v2 + 0x2478c,0x4c);
-      return;
     }
-  }
-  if (temp_v3 != 0xffffffff) goto LAB_002cef94;
-  temp_v3 = 0xb;
-  goto LAB_002cefa0;
+    if (count == 12) {
+        count = 11;
+    }
+    for (s32 index = count - 1; index >= 0; --index) {
+        memCopy(&history->records[index], &history->records[index + 1], sizeof(HistoryRecord));
+    }
+    memCopy(source, &history->records[0], sizeof(HistoryRecord));
 }
-
-} /* extern "C" */
+}

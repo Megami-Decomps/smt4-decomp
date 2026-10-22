@@ -1,74 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ConfirmAndApplySimple` (_code @ 0x31e4d8, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: early completion return layout and frame-counter temporaries differ from retail's shared return block. */
+#include "common.h"
 
 extern "C" {
+s32 scrGetCommandFrame();
+s32 FUN_004186a4();
+void scrWorkSetValue(u32 index, s32 value);
+s32 scrWorkGetValue(u32 index);
+s32 dataTableValueOrZero(u32 index);
+u32 FUN_004186e0();
+void FUN_003dea6c(u32 member, s32 mode, s32 enabled);
+void FUN_001695a0();
+s32 messageForwardDefaultMode(s32 message, s32 mode, u32 frame, s32 style, s32 flags);
+void FUN_00418070(u32 member, s32 mode);
+void partyEntryIsAvailable(u32 member);
+void optionsClearFlag1();
 
-int FUN_001695a0(void);
-int messageForwardDefaultMode(int, int, unsigned int, int, int);
-int scrWorkGetValue(int);
-int scrWorkSetValue(...);
-int FUN_003dea6c(unsigned int, int, int);
-int FUN_00418070(unsigned int, int);
-int partyEntryIsAvailable(unsigned int);
-int optionsClearFlag1(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: FUN_001695a0. */
-extern int dataTableValueOrZero(unsigned int);
-/* Supplied declaration required: messageForwardDefaultMode. */
-/* Supplied declaration required: scrWorkGetValue. */
-/* Supplied declaration required: scrWorkSetValue. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_003dea6c. */
-/* Supplied declaration required: FUN_00418070. */
-extern int FUN_004186a4(void);
-extern unsigned int FUN_004186e0(void);
-/* Supplied declaration required: partyEntryIsAvailable. */
-/* Supplied declaration required: optionsClearFlag1. */
-
-
-unsigned int scrComm_Message_ConfirmAndApplySimple(void)
-
+// Poll the confirmation message and apply the selected member once the message completes.
+u32 scrComm_Message_ConfirmAndApplySimple()
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 == 0) {
-    temp_v0 = FUN_004186a4();
-    if (temp_v0 == 0) {
-      return 1;
+    if (scrGetCommandFrame() == 0) {
+        if (!FUN_004186a4())
+            return 1;
+        scrWorkSetValue(0, 0);
+        scrWorkSetValue(1, 0);
     }
-    scrWorkSetValue(0,0);
-    scrWorkSetValue(1,0);
-  }
-  temp_v1 = dataTableValueOrZero(0x1e);
-  temp_v0 = scrWorkGetValue(0);
-  if (temp_v0 == 0) {
-    temp_v2 = FUN_004186e0();
-    FUN_003dea6c(temp_v2,0,1);
-    FUN_001695a0();
-    temp_v3 = scrWorkGetValue(1);
-    temp_v1 = messageForwardDefaultMode(temp_v1,2,temp_v3,6,0);
-    temp_v0 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v0 + 1);
-    if (temp_v1 == 1) {
-      scrWorkSetValue(1,0);
-      FUN_00418070(temp_v2,0);
-      partyEntryIsAvailable(temp_v2);
-      optionsClearFlag1();
-      return 1;
+    s32 message = dataTableValueOrZero(30);
+    if (scrWorkGetValue(0) == 0) {
+        u32 member = FUN_004186e0();
+        FUN_003dea6c(member, 0, 1);
+        FUN_001695a0();
+        u32 frame = scrWorkGetValue(1);
+        s32 result = messageForwardDefaultMode(message, 2, frame, 6, 0);
+        scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+        if (result == 1) {
+            scrWorkSetValue(1, 0);
+            FUN_00418070(member, 0);
+            partyEntryIsAvailable(member);
+            optionsClearFlag1();
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

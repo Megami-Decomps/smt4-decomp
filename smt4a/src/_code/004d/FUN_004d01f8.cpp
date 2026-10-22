@@ -1,77 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d01f8` (_code @ 0x4d01f8, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The embedded-entry pointer is retained rather than recomputed; getter/setter registers differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
+s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
+s32 flaggedEntryGetValueA(FlaggedEntry *entry);
+s32 flaggedEntryGetValueB(FlaggedEntry *entry);
+s32 FUN_002a48e0(FlaggedEntry *entry, s32 value);
+s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
+s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
+s32 flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
 
-int recordTrackDirtyValue(char *, int);
-int FUN_002a48e0(char *, int);
-int flaggedEntrySetValueB(char *, int);
-int flaggedEntrySetValueA(char *, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int resourceRunEmbeddedOperationIfUnblocked(char *);
-extern int resourceRunOperationIfUnblocked(void);
-/* Supplied declaration required: recordTrackDirtyValue. */
-/* Supplied declaration required: FUN_002a48e0. */
-extern int flaggedEntryGetValueB(char *);
-extern int flaggedEntryGetValueA(void);
-/* Supplied declaration required: flaggedEntrySetValueB. */
-/* Supplied declaration required: flaggedEntrySetValueA. */
-
-
-void FUN_004d01f8(char *param_1)
-
+void FUN_004d01f8(ResourceValueCyclePrefixA *state)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (*param_1 != '\x01') {
-    temp_v0 = resourceRunOperationIfUnblocked();
-  }
-  else {
-    temp_v0 = resourceRunEmbeddedOperationIfUnblocked(param_1 + 0x10);
-  }
-  if (*param_1 != '\x01') {
-    temp_v1 = flaggedEntryGetValueA();
-  }
-  else {
-    temp_v1 = flaggedEntryGetValueB(param_1 + 0x10);
-  }
-  if (temp_v0 >= 1) {
-    temp_v0 = temp_v0 - 1;
-  }
-  else if (temp_v1 >= 1) {
-    temp_v1 = temp_v1 - 1;
-  }
-  else {
-    temp_v2 = *(int *)(param_1 + 8);
-    temp_v0 = *(int *)(param_1 + 4);
-    if (temp_v0 < temp_v2) {
-      temp_v1 = temp_v0 - 1;
-      temp_v0 = temp_v2 - temp_v0;
-    }
-    else {
-      temp_v0 = 0;
-      temp_v1 = temp_v2 - 1;
-    }
-  }
-  if (*param_1 == '\0') {
-    FUN_002a48e0(param_1 + 0x10,temp_v0);
-    flaggedEntrySetValueA(param_1 + 0x10,temp_v1);
-  }
-  if (*param_1 != '\x01') {
-    return;
-  }
-  recordTrackDirtyValue(param_1 + 0x10,temp_v0);
-  flaggedEntrySetValueB(param_1 + 0x10,temp_v1);
-  return;
-}
+    FlaggedEntry *entry = reinterpret_cast<FlaggedEntry *>(
+        reinterpret_cast<u8 *>(state) + 0x10);
 
-} /* extern "C" */
+    s32 primary;
+    if (state->mode == 1)
+        primary = resourceRunEmbeddedOperationIfUnblocked(entry);
+    else
+        primary = resourceRunOperationIfUnblocked(entry);
+
+    s32 secondary;
+    if (state->mode == 1)
+        secondary = flaggedEntryGetValueB(entry);
+    else
+        secondary = flaggedEntryGetValueA(entry);
+
+    if (primary > 0) {
+        --primary;
+    } else if (secondary > 0) {
+        --secondary;
+    } else if (state->total > state->split) {
+        secondary = static_cast<s32>(static_cast<u32>(state->split) - 1u);
+        primary = static_cast<s32>(static_cast<u32>(state->total) -
+                                   static_cast<u32>(state->split));
+    } else {
+        primary = 0;
+        secondary = static_cast<s32>(static_cast<u32>(state->total) - 1u);
+    }
+
+    if (state->mode == 0) {
+        FUN_002a48e0(entry, primary);
+        flaggedEntrySetValueA(entry, secondary);
+    }
+    if (state->mode == 1) {
+        recordTrackDirtyValue(entry, primary);
+        flaggedEntrySetValueB(entry, secondary);
+    }
+}
+}

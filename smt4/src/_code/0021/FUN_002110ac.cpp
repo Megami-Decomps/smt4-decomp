@@ -6,7 +6,7 @@ extern "C" {
 
 int btlTalkBustUpReleaseAllSlots(void);
 int FUN_0028bf2c(void);
-int FUN_00295660(int, unsigned char [128]);
+int textEncodeFontSlot(int, unsigned char [128]);
 int FUN_00295a18(int, int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int messageMainSetEnabled(int);
@@ -25,7 +25,7 @@ extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
 extern int btlTalkBustUpGetValue(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageMainSetEnabled. */
@@ -76,7 +76,7 @@ unsigned int FUN_002110ac(int param_1)
       temp_v1 = (unsigned int)*(unsigned short *)((int)temp_v6 + *(int *)(param_1 + 0xd50) * 2);
       FUN_002be650(temp_v1,1);
       libc_strcpy(temp_v5,temp_v1);
-      FUN_00295660(0,temp_v5);
+      textEncodeFontSlot(0,temp_v5);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0xf);
       *(unsigned int *)(param_1 + 0xd38) = 3;
       FUN_00295a18(*(unsigned short *)((int)temp_v6 + *(int *)(param_1 + 0xd50) * 2),temp_v2);
@@ -117,7 +117,7 @@ joined_r0x00211274:
           temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0xd0c);
           FUN_002be650(temp_v1,1);
           libc_strcpy(temp_v5,temp_v1);
-          FUN_00295660(0,temp_v5);
+          textEncodeFontSlot(0,temp_v5);
           FUN_00295a18(*(unsigned short *)(temp_v2 + 0xd0c),1);
           *(unsigned short *)(temp_v2 + 0xd0c) = 0;
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0xe);

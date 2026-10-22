@@ -99,7 +99,14 @@ typedef struct GameState {
     };
     /* 0x026 */ s8 unk26;
     /* 0x027 */ s8 unk27;
-    /* 0x028 */ u8 unk028[0x2C];
+    union {
+        /* 0x028 */ u8 unk028[0x2C];
+        struct {
+            /* 0x028 */ u8 unk028BeforeGroups[0x14];
+            /* 0x03C */ s32 activeGroupId;
+            /* 0x040 */ s32 pendingGroupId;
+        } groupClear;
+    };
     /* 0x054 */ s32 unk54;
     /* 0x058 */ u8 unk058[0x38];
     union {
@@ -126,7 +133,13 @@ typedef struct GameState {
     /* 0x1A0 */ u8 unk1A0[0x18];
     /* 0x1B8 */ s32 encounterCount;
     /* 0x1BC */ u32 encounterValue;
-    /* 0x1C0 */ u8 unk1C0[0x91];
+    union {
+        /* 0x1C0 */ u8 unk1C0[0x91];
+        struct {
+            /* 0x1C0 */ u8 unk1C0BeforeGroupUpdate[0x6D];
+            /* 0x22D */ u8 updateFlag;
+        } groupClearFlags;
+    };
     /* 0x251 */ u8 bgResetPending; /* set when the common background must be rebuilt */
     /* 0x252 */ u8 unk252[0x32];
     /* 0x284 */ u8 unk284;
@@ -197,10 +210,16 @@ struct GameStateA {
     union {
         /* 0x034 */ u8 unk034[0x498];
         struct {
+            /* 0x034 */ u8 unk034BeforeReset[8];
+            /* 0x03C */ u32 value3C;
+        } entryPoolReset;
+        struct {
             /* 0x034 */ u8 unk034[0x36E];
             /* 0x3A2 */ s8 unk3A2;
             /* 0x3A3 */ s8 unk3A3;
+            /* 0x3A4 */ u32 resumeMovementState;
         } collision;
+
         struct {
             /* 0x034 */ u8 unk034BeforeFlags[0x229];
             /* 0x25D */ u8 unk25D;
@@ -227,13 +246,22 @@ struct GameStateA {
         struct {
             /* 0x034 */ u8 unk034BeforePoint[0x8C];
             /* 0x0C0 */ f32 scale;
-            /* 0x0C4 */ u8 unk0C4[0xC];
+            /* 0x0C4 */ union {
+                u8 unk0C4[0xC];
+                MapVector position;
+            };
             /* 0x0D0 */ f32 heading;
         } point;
         struct {
             /* 0x034 */ u8 unk034BeforeMapFlags[0x261];
             /* 0x295 */ u8 unk295;
-            /* 0x296 */ u8 unk296[0x33];
+            /* 0x296 */ union {
+                u8 unk296[0x33];
+                struct {
+                    u8 unk296BeforeSnapshot[0x32];
+                    /* 0x2C8 */ u8 skipTransitionSnapshot;
+                } snapshot;
+            };
             /* 0x2C9 */ u8 unk2C9;
             /* 0x2CA */ u8 unk2CA[0x3E];
             /* 0x308 */ u32 unk308;
@@ -297,6 +325,14 @@ struct GameStateA {
             /* 0x368 */ u32 unk368;
             s32 changeMapId; // 0x36c
         } encounter;
+        struct {
+            /* 0x034 */ u8 unk034BeforePopup[0x494];
+            /* 0x4C8 */ s32 countdown;
+        } popup;
+        struct {
+            /* 0x034 */ u8 unk034BeforeRandomPopup[0x490];
+            /* 0x4C4 */ s32 countdown;
+        } randomPopup;
     };
     /* 0x4cc */ u8 mapRequested;
     /* 0x4cd */ u8 unk4cd[3];
@@ -317,12 +353,18 @@ struct GameStateA {
     /* 0x580 */ u32 sourceObjectId;
     /* 0x584 */ MapVector sourcePosition;
     /* 0x590 */ f32 sourceHeading;
-    /* 0x594 */ u32 unk594;
+    union {
+        /* 0x594 */ u32 unk594;
+        /* 0x594 */ f32 sourceHeadingCopy;
+    };
     /* 0x598 */ u32 destinationMap;
     /* 0x59c */ u32 destinationArea;
     /* 0x5a0 */ MapVector destinationPosition;
     /* 0x5ac */ f32 destinationHeading;
-    /* 0x5B0 */ u8 unk5b0[0x18];
+    /* 0x5B0 */ union {
+        u8 unk5b0[0x18];
+        f32 destinationHeadingCopy;
+    };
     /* 0x5C8 */ u8 unk5C8;
     /* 0x5C9 */ u8 unk5C9[0xAD];
     /* 0x676 */ u8 scriptOverride;
@@ -339,5 +381,33 @@ typedef char GameStateBgResetPendingOffset[offsetof(GameState, bgResetPending) =
 typedef char GameStateDepartOffsets[offsetof(GameState, unk004Value) == 0x4 && offsetof(GameState, unkA8) == 0xA8 && offsetof(GameState, scriptPending) == 0x145 ? 1 : -1];
 typedef char GameStateATable2FOffsets[offsetof(GameStateA, table2F.type) == 0xD4 && offsetof(GameStateA, table2F.id) == 0xD8 ? 1 : -1];
 typedef char GameStateAPointOffsets[offsetof(GameStateA, point.scale) == 0xC0 && offsetof(GameStateA, point.heading) == 0xD0 ? 1 : -1];
+typedef char GameStateAResumeMovementOffset[offsetof(GameStateA, collision.resumeMovementState) == 0x3A4 ? 1 : -1];
+typedef char GameStateAPopupCountdownOffset[offsetof(GameStateA, popup.countdown) == 0x4C8 ? 1 : -1];
+typedef char GameStateATransitionSnapshotOffsets[offsetof(GameStateA, point.position) == 0xC4 &&
+    offsetof(GameStateA, mapFlags.snapshot.skipTransitionSnapshot) == 0x2C8 &&
+    offsetof(GameStateA, destinationHeadingCopy) == 0x5B0 ? 1 : -1];
+typedef char GameStateASourceHeadingCopyOffset[offsetof(GameStateA, sourceHeadingCopy) == 0x594 ? 1 : -1];
+
+typedef char GameStateGroupClearOffsetsCheck[
+    offsetof(GameState, groupClear.activeGroupId) == 0x3C &&
+    offsetof(GameState, groupClear.pendingGroupId) == 0x40 &&
+    offsetof(GameState, unk028) == 0x28 &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
+
+typedef char GameStateGroupClearUpdateOffsetCheck[
+    offsetof(GameState, groupClearFlags.updateFlag) == 0x22D &&
+    offsetof(GameState, unk1C0) == 0x1C0 &&
+    offsetof(GameState, bgResetPending) == 0x251 &&
+    sizeof(GameState) == 0x678 ? 1 : -1];
+
+typedef char GameStateARandomPopupCountdownOffsetCheck[
+    offsetof(GameStateA, randomPopup.countdown) == 0x4C4 &&
+    offsetof(GameStateA, popup.countdown) == 0x4C8 &&
+    sizeof(GameStateA) == 0x698 ? 1 : -1];
+
+typedef char GameStateAEntryPoolResetOffsetCheck[
+    offsetof(GameStateA, entryPoolReset.value3C) == 0x3C &&
+    offsetof(GameStateA, mapRequested) == 0x4CC &&
+    sizeof(GameStateA) == 0x698 ? 1 : -1];
 
 #endif

@@ -1,58 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026adb4` (_code @ 0x26adb4, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selection compaction recovered; retail uses unsigned halfword loads and countdown traversal with different register allocation. */
+#include "common.h"
+
+struct StatusSelectionWork {
+    /* 0x000 */ u8 unk000[0x4A2];
+    /* 0x4A2 */ s16 selected[8];
+    /* 0x4B2 */ s16 pending[8];
+};
 
 extern "C" {
+extern StatusSelectionWork* g_statusDown;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} void_stack;
-
-extern int g_statusDown; /* 0x44e190 */
-
-
+// Remove the first selected status and compact the remaining selection slots.
 void FUN_0026adb4(void)
-
 {
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = g_statusDown;
-  temp_v3 = 8;
-  temp_v2 = 0;
-  do {
-    temp_v5 = temp_v1 + temp_v2 * 2;
-    temp_v0 = *(short *)(temp_v5 + 0x4b2);
-    if ((temp_v0 != 0) && (temp_v0 == *(short *)(temp_v1 + 0x4a2))) {
-      *(unsigned short *)(temp_v5 + 0x4b2) = 0;
-    }
-    temp_v3 = temp_v3 - 1;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v3 != 0);
-  temp_v2 = 0;
-  *(unsigned short *)(temp_v1 + 0x4a2) = 0;
-  do {
-    if (0 < 7 - temp_v2) {
-      temp_v3 = 0;
-      temp_v5 = 7 - temp_v2;
-      do {
-        temp_v4 = temp_v1 + (temp_v2 + temp_v3) * 2;
-        if ((*(short *)(temp_v4 + 0x4a2) == 0) && (*(short *)(temp_v4 + 0x4a4) != 0)) {
-          *(short *)(temp_v4 + 0x4a2) = *(short *)(temp_v4 + 0x4a4);
-          *(unsigned short *)(temp_v4 + 0x4a4) = 0;
+    StatusSelectionWork* work = g_statusDown;
+    for (s32 i = 0; i < 8; ++i) {
+        if (work->pending[i] != 0 && work->pending[i] == work->selected[0]) {
+            work->pending[i] = 0;
         }
-        temp_v5 = temp_v5 - 1;
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v5 != 0);
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 7);
-  return;
+    work->selected[0] = 0;
+    for (s32 pass = 0; pass < 7; ++pass) {
+        for (s32 i = 0; i < 7 - pass; ++i) {
+            if (work->selected[pass + i] == 0 && work->selected[pass + i + 1] != 0) {
+                work->selected[pass + i] = work->selected[pass + i + 1];
+                work->selected[pass + i + 1] = 0;
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

@@ -6,11 +6,11 @@ extern "C" {
 extern RenderCtx *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
-f32 FUN_001879d0(RenderCtx *ctx, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtx *ctx, f32 scale);
 void FUN_001835b4(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 z);
 SpriteInfo *FUN_001834a4(s32 group, s32 id);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
-void FUN_00168770(void);
+void renderPopStateStacks(void);
 s32 objectApplyIfUnblocked(void *scrollBar);   /* total entries */
 s32 uiSearchPrimary(void *scrollBar);   /* visible entries */
 s32 resourceRunOperationIfUnblocked(void *scrollBar);   /* first visible entry */
@@ -21,7 +21,7 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
 {
     void *scrollBar = panel->scrollBar;
 
-    x += (s32)FUN_001879d0(g_renderCtx, 0.25f);
+    x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
     efctSetSpeed(speed);
     FUN_001835b4(2, 0x33, 7, x, y, 0xC9);
     FUN_001835b4(2, 0x33, 0x12, x, y, 0xC9);
@@ -53,7 +53,7 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     if (suspended) {
         renderCtxResumeScissor(g_renderCtx);
     }
-    FUN_00168770();
+    renderPopStateStacks();
     efctSetSpeed(speed);
 }
 

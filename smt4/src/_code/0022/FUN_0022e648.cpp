@@ -1,60 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022e648` (_code @ 0x22e648, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selection-roll result stores are combined and category address registers differ. */
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
+struct SelectionRollGroup {
+    u16 values[0x801];
+};
+struct SelectionRollWork {
+    u32 unk00;
+    u32 mode;
+    u32 state;
+    u8 unk0C[0x854];
+    s32 category;
+    u32 unk864;
+    u32 hasResult;
+    s32 result;
+    u32 frame;
+    s32 duration;
+    u8 unk878[8];
+    FlaggedValueHolder holders[9];
+    SelectionRollGroup groups[9];
+};
 extern "C" {
-
-extern int FUN_00230b90(int, unsigned short);
-extern int btlRollClamped(unsigned short, unsigned int);
-extern unsigned int FUN_00230e04(unsigned short *);
-extern int flaggedValueHolderGetTotal(int);
-extern int FUN_00240d5c(int);
-extern int FUN_0028fb3c(unsigned short);
-
-
-void FUN_0022e648(int param_1,unsigned int param_2)
-
-{
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned short *puVar5;
-  
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned int *)(param_1 + 4) = param_2;
-  temp_v0 = FUN_00240d5c(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x880);
-  temp_v1 = *(int *)(param_1 + 0x860);
-  if (temp_v1 == 7 || temp_v1 == 8) {
-    temp_v0 = temp_v0 + 1;
-  }
-  else {
-    temp_v0 = temp_v0 + 2;
-  }
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + temp_v1 * 0x74 + 0x880);
-  puVar5 = (unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xc94 + temp_v2 * 4);
-  if (*(int *)(param_1 + 0x860) != 8) {
-    temp_v3 = FUN_00230e04(puVar5);
-    temp_v1 = btlRollClamped(*puVar5,temp_v3);
-  }
-  else {
-    temp_v1 = FUN_0028fb3c(*puVar5);
-    if (temp_v1 < 0) {
-      temp_v1 = 0;
-    }
-    else if (temp_v1 >= 100) {
-      temp_v1 = 99;
-    }
-    temp_v2 = FUN_00230b90(param_1,*puVar5);
-    if (temp_v2 != 0) {
-      temp_v1 = temp_v1 - 1;
-    }
-  }
-  *(unsigned int *)(param_1 + 0x868) = (unsigned int)(temp_v1 != 0);
-  *(int *)(param_1 + 0x86c) = temp_v1;
-  *(unsigned int *)(param_1 + 0x870) = 0;
-  *(int *)(param_1 + 0x874) = temp_v0;
-  return;
+s32 FUN_00240d5c(FlaggedValueHolder *);
+s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
+u32 FUN_00230e04(u16 *);
+s32 btlRollClamped(u16, u32);
+s32 FUN_0028fb3c(u16);
+s32 FUN_00230b90(SelectionRollWork *, u16);
 }
 
-} /* extern "C" */
+extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
+{
+    work->state = 0;
+    work->mode = mode;
+    s32 duration = FUN_00240d5c(&work->holders[work->category]);
+    s32 category = work->category;
+    duration += (category == 7 || category == 8) ? 1 : 2;
+    s32 selected = flaggedValueHolderGetTotal(&work->holders[category]);
+    u16 *entry = &work->groups[category].values[selected * 2];
+    s32 result;
+    if (work->category != 8) {
+        result = btlRollClamped(*entry, FUN_00230e04(entry));
+    } else {
+        result = FUN_0028fb3c(*entry);
+        if (result < 0) {
+            result = 0;
+        } else if (result >= 100) {
+            result = 99;
+        }
+        if (FUN_00230b90(work, *entry)) {
+            --result;
+        }
+    }
+    work->hasResult = result != 0;
+    work->result = result;
+    work->frame = 0;
+    work->duration = duration;
+}

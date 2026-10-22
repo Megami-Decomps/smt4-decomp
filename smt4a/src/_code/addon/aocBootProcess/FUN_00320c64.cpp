@@ -1,55 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00320c64` (_code @ 0x320c64, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the addon-main global is loaded before the job assignment rather than after it. */
+#include "addon/aocBootProcess.h"
+#include "addon/aocMain.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern AocBootGlobals g_aocBoot;
+extern AocMain *g_aocMain;
+void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
+void FUN_0015f258(void *dialog);
+void FUN_0024b280(void);
+void aocBootRelease(void);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 argument, u32 owner,
+                          void (*update)(void), void (*release)(void), u32 flags);
 
-int asdProcessCreateSimple(...);
-int FUN_0015f258(...);
-int asdMemoryAllocTracked(...);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int FUN_0024b280(...); /* 0x24b280 */
-extern unsigned char LAB_002deb98; /* 0x2deb98 */
-extern unsigned char LAB_00320d64; /* 0x320d64 */
-extern int g_aocMain; /* 0x570260 */
-extern unsigned int *g_aocBoot; /* 0x570264 */
-extern unsigned int DAT_00570268; /* 0x570268 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_0015f258. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-
-
-unsigned int FUN_00320c64(void)
-
+/* Allocate the boot dialog if necessary and start its calculation process. */
+u32 FUN_00320c64(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  if (g_aocBoot == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x5f4,1);
-    g_aocBoot = puVar1;
-  }
-  puVar1 = g_aocBoot;
-  DAT_00570268 = 0;
-  *(unsigned char *)(g_aocBoot + 2) = 0;
-  *(unsigned char *)((int)puVar1 + 9) = 0;
-  FUN_0015f258(puVar1 + 3);
-  puVar1[0x17c] = 0;
-  puVar2 = &LAB_00320d64;
-  asdProcessCreateSimple(&LAB_00320d64,4,0,0,FUN_0024b280,&LAB_002deb98,0);
-  puVar1 = g_aocBoot;
-  *g_aocBoot = (unsigned int)puVar2;
-  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
-  return *puVar1;
+    if (!g_aocBoot.boot) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\aocBootProcess.cpp", 286);
+        g_aocBoot.boot = static_cast<AocBoot *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocBoot), 1));
+    }
+    AocBoot *boot = g_aocBoot.boot;
+    g_aocBoot.finished = 0;
+    boot->state = 0;
+    boot->dialogOpen = 0;
+    FUN_0015f258(boot->dialog);
+    boot->frames = 0;
+    u32 job = asdProcessCreateSimple("aocBoot CALC", 4, 0, 0, FUN_0024b280, aocBootRelease, 0);
+    boot = g_aocBoot.boot;
+    boot->job = job;
+    g_aocMain->flags &= ~0x70;
+    return boot->job;
 }
-
-} /* extern "C" */
+}

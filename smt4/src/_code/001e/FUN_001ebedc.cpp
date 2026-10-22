@@ -16,7 +16,7 @@ int btlTalkBustUpReleaseAllSlots(void);
 int FUN_0028bf2c(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0029bbc8(int);
 int FUN_0029bde4(...);
@@ -66,7 +66,7 @@ extern unsigned int aocEntryDataById(unsigned char, unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
 extern int btlTalkBustUpGetValue(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern int randBetween(unsigned int, int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029bbc8. */
@@ -147,11 +147,11 @@ unsigned int FUN_001ebedc(int param_1)
     temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
     FUN_002bd158(temp_v15,temp_v16);
-    FUN_00295660(0,temp_v16);
+    textEncodeFontSlot(0,temp_v16);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x126);
     FUN_002bd06c(temp_v6);
     libc_strcpy(temp_v15,temp_v6);
-    FUN_00295660(1,temp_v15);
+    textEncodeFontSlot(1,temp_v15);
     temp_v5 = *(unsigned int *)(param_1 + 0xd04);
     temp_v8 = 0x19;
     scrScriptProcessStartEntry(temp_v5,temp_v8);
@@ -364,12 +364,12 @@ LAB_001ec4d0:
     temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
     FUN_002bd158(temp_v15,temp_v16);
-    FUN_00295660(0,temp_v16);
+    textEncodeFontSlot(0,temp_v16);
     temp_v6 = FUN_00262f78();
     temp_v6 = temp_v6 & 0xffff;
     FUN_002bd06c(temp_v6);
     libc_strcpy(temp_v15,temp_v6);
-    FUN_00295660(1,temp_v15);
+    textEncodeFontSlot(1,temp_v15);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x1a);
     FUN_0026b9bc();
     temp_v5 = 0x1000115;

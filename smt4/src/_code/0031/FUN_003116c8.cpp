@@ -9,7 +9,7 @@ int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
 int gameFlagSetValue(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_0029f7d4(void);
 int FUN_0029fa0c(int, int *);
 int FUN_002bd06c(...);
@@ -31,12 +31,12 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern int FUN_0029b7b8(int, unsigned short, unsigned int *);
 /* Supplied declaration required: FUN_0029f7d4. */
 /* Supplied declaration required: FUN_0029fa0c. */
 extern int FUN_002a0d0c(void);
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -115,10 +115,10 @@ unsigned int FUN_003116c8(void)
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 0x1a);
         FUN_002bd06c(temp_v7);
         libc_strcpy(temp_v10,temp_v7);
-        FUN_00295660(8,temp_v10);
-        temp_v4 = FUN_002bce30(*(unsigned short *)(temp_v3 + 0x1a),1);
+        textEncodeFontSlot(8,temp_v10);
+        temp_v4 = demonGetRaceLabel(*(unsigned short *)(temp_v3 + 0x1a),1);
         libc_strcpy(temp_v10,temp_v4);
-        FUN_00295660(0x10,temp_v10);
+        textEncodeFontSlot(0x10,temp_v10);
         *piVar15 = *piVar15 + 1;
         return 0;
       }
@@ -196,10 +196,10 @@ unsigned int FUN_003116c8(void)
       temp_v3 = (unsigned int)*puVar7;
       FUN_002bd06c(temp_v3);
       libc_strcpy(temp_v10,temp_v3);
-      FUN_00295660(8,temp_v10);
-      temp_v4 = FUN_002bce30(*puVar7,1);
+      textEncodeFontSlot(8,temp_v10);
+      temp_v4 = demonGetRaceLabel(*puVar7,1);
       libc_strcpy(temp_v10,temp_v4);
-      FUN_00295660(0x10,temp_v10);
+      textEncodeFontSlot(0x10,temp_v10);
     }
     else {
       temp_v4 = scrWorkGetValue(1);

@@ -1,51 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c1cfc` (_code @ 0x3c1cfc, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-word loads, signed-growth arithmetic, and saved-register scheduling differ. */
+#include "shard/W6_W6Match5_DevilSort.h"
+#include <stddef.h>
 
-extern "C" {
+// A word-wide attribute view would change the shared record's byte-union alignment.
+struct DevilBattleRecordView {
+    DevilSortRecord header;
+    u8 unk04[0x10];
+    u16 baseHp;
+    u16 baseMp;
+    u8 hpGrowth;
+    u8 mpGrowth;
+    u8 unk1a[0xa];
+    struct {
+        u32 strength : 8;
+        u32 magic : 8;
+        u32 vitality : 8;
+        u32 agility : 8;
+    } attributes;
+    u8 luck;
+};
+union PackedDevilStatWord {
+    u32 value;
+    struct {
+        u32 strength : 8;
+        u32 magic : 8;
+        u32 vitality : 8;
+        u32 agility : 8;
+    } attributes;
+    struct {
+        u32 luck : 8;
+        u32 reserved : 8;
+        u32 baseHp : 16;
+    } vitals;
+    struct {
+        u32 baseMp : 16;
+        u32 hpGrowth : 8;
+        u32 mpGrowth : 8;
+    } growth;
+    struct {
+        u32 maxHp : 16;
+        u32 maxMp : 16;
+    } maximum;
+};
+typedef char DevilBattleSummaryLayoutCheck[offsetof(DevilBattleRecordView, baseHp) == 0x14 &&
+    offsetof(DevilBattleRecordView, baseMp) == 0x16 &&
+    offsetof(DevilBattleRecordView, hpGrowth) == 0x18 &&
+    offsetof(DevilBattleRecordView, mpGrowth) == 0x19 &&
+    offsetof(DevilBattleRecordView, attributes) == 0x24 &&
+    offsetof(DevilBattleRecordView, luck) == 0x28 && sizeof(PackedDevilStatWord) == 4 ? 1 : -1];
 
-int devilGetRecord(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-void FUN_003c1cfc(unsigned int *param_1,int param_2)
-
+extern "C" void FUN_003c1cfc(u32 *destination, u16 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned short temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  devilGetRecord();
-  temp_v1 = *(unsigned short *)(param_2 + 0x14);
-  temp_v0 = *(unsigned char *)(param_2 + 0x28);
-  temp_v2 = *(unsigned int *)(param_2 + 0x16);
-  temp_v4 = (int)(short)(unsigned short)*(unsigned char *)(param_2 + 3) * (int)(short)(unsigned short)*(unsigned char *)(param_2 + 0x18)
-          + (unsigned int)temp_v1;
-  temp_v3 = 9999;
-  temp_v5 = temp_v3;
-  if (temp_v4 < 10000) {
-    temp_v5 = temp_v4 & 0xffff;
-  }
-  temp_v4 = (((unsigned int)*(unsigned char *)(param_2 + 3) * (unsigned int)*(unsigned char *)(param_2 + 0x19) +
-           (unsigned int)*(unsigned short *)(param_2 + 0x16)) * 0x2d) / 100;
-  if (temp_v4 < 10000) {
-    temp_v3 = temp_v4;
-  }
-  *param_1 = *(unsigned int *)(param_2 + 0x24);
-  param_1[1] = ((unsigned int)temp_v1 << 0x10) | (unsigned int)temp_v0;
-  param_1[2] = temp_v2;
-  param_1[3] = temp_v5 | (temp_v3 << 0x10);
-  return;
+    const DevilBattleRecordView *record = (const DevilBattleRecordView *)devilGetRecord(id);
+    PackedDevilStatWord attributes = {0};
+    PackedDevilStatWord vitals = {0};
+    PackedDevilStatWord growth = {0};
+    PackedDevilStatWord maximum = {0};
+    attributes.attributes.strength = record->attributes.strength;
+    attributes.attributes.magic = record->attributes.magic;
+    attributes.attributes.vitality = record->attributes.vitality;
+    attributes.attributes.agility = record->attributes.agility;
+    vitals.vitals.luck = record->luck;
+    vitals.vitals.baseHp = record->baseHp;
+    growth.growth.baseMp = record->baseMp;
+    growth.growth.hpGrowth = record->hpGrowth;
+    growth.growth.mpGrowth = record->mpGrowth;
+    s32 hp = (s16)record->header.level * (s16)record->hpGrowth + record->baseHp;
+    s32 mp = (record->header.level * record->mpGrowth + record->baseMp) * 45 / 100;
+    maximum.maximum.maxHp = hp > 9999 ? 9999 : hp;
+    maximum.maximum.maxMp = mp > 9999 ? 9999 : mp;
+    destination[0] = attributes.value;
+    destination[1] = vitals.value;
+    destination[2] = growth.value;
+    destination[3] = maximum.value;
 }
-
-} /* extern "C" */

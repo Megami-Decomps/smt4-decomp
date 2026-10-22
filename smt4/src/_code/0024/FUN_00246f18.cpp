@@ -1,82 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246f18` (_code @ 0x246f18, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pending/ready branch outlining, return merging and compiler hints differ; 57 built versus 59 retail rows. */
+#include "gfx/VersionedTextureRequest.h"
 
 extern "C" {
+void *rt_memcpy_w(void *output, const void *input, u32 size);
+u32 keyedRecordRegisterName(const char *name);
+u32 FUN_00249e54(u32 id, const char *format);
+s32 FUN_0024679c(void);
+s32 FUN_00246708(void);
 
-int FUN_0024679c(void);
-int FUN_00249e54(unsigned int, char *);
-int rt_memcpy_w(unsigned char [4], unsigned char *, int);
-
-/* stack frame of param_1: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp18; /* 0x18: local_18 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-} param_1_stack;
-
-extern int FUN_00246708(void);
-/* Supplied declaration required: FUN_0024679c. */
-/* Supplied declaration required: FUN_00249e54. */
-extern unsigned int keyedRecordRegisterName(int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_00246f18(int param_1)
-
+u32 FUN_00246f18(VersionedTextureOwner *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  unsigned int temp_v3;
-  char *pcVar6;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6 [4];
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v3 = *(unsigned int *)(param_1 + 0x3028);
-  if ((temp_v3 & 0x10000) != 0) {
-    if ((temp_v3 & 0x20000) != 0) {
-      return 1;
+    u32 flags = owner->flags;
+    if (flags & 0x10000) {
+        if (flags & 0x20000) {
+            return 1;
+        }
+        if (FUN_00246708()) {
+            owner->flags |= 0x20000;
+        }
+    } else {
+        VersionedTextureRequest *request = &owner->request;
+        VersionedTextureRequest snapshot;
+        rt_memcpy_w(&snapshot, request, sizeof(snapshot));
+        if ((snapshot.flags & 1) && !snapshot.format) {
+            return 0;
+        }
+        owner->flags = flags | 0x10000;
+        const char *format = request->format;
+        if (format[0] == 'V' && format[1] == 'E' && format[2] == 'R') {
+            u32 id = keyedRecordRegisterName(request->name);
+            request->id = static_cast<u8>(id);
+            request->id = static_cast<u8>(FUN_00249e54(id, format));
+        }
+        FUN_0024679c();
     }
-    temp_v2 = FUN_00246708();
-    if (temp_v2 != 0) {
-      *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) | 0x20000;
+    if ((owner->flags & 0x10000) && (owner->flags & 0x20000)) {
+        return 1;
     }
-  }
-  else {
-    puVar4 = (unsigned char *)(param_1 + 0x3218);
-    rt_memcpy_w(temp_v6,puVar4,0x8c);
-    if (((temp_v8 & 1) != 0) && (temp_v7 == 0)) {
-      return 0;
-    }
-    *(unsigned int *)(param_1 + 0x3028) = temp_v3 | 0x10000;
-    pcVar6 = *(char **)(param_1 + 0x321c);
-    temp_v0 = *pcVar6;
-    temp_v4 = temp_v0 == 'V';
-    if (temp_v4) {
-      temp_v0 = pcVar6[1];
-    }
-    temp_v5 = temp_v4 && temp_v0 == 'E';
-    if (temp_v4 && temp_v0 == 'E') {
-      temp_v5 = pcVar6[2] == 'R';
-    }
-    if (temp_v5) {
-      temp_v1 = keyedRecordRegisterName(param_1 + 0x3220);
-      *puVar4 = (char)temp_v1;
-      FUN_00249e54(temp_v1,pcVar6);
-      *puVar4 = (char)temp_v1;
-    }
-    FUN_0024679c();
-  }
-  if ((*(unsigned int *)(param_1 + 0x3028) & 0x10000) != 0 && (*(unsigned int *)(param_1 + 0x3028) & 0x20000) != 0)
-  {
-    return 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

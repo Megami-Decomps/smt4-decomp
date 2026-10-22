@@ -1,81 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004019c0` (_code @ 0x4019c0, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP extent loads, conversions, and multiplication scheduling differ. */
+#include "common.h"
 
-extern "C" {
-
-int VectorSignedToFloat(unsigned int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-typedef struct fn_004019c0_arg0 fn_004019c0_arg0;
-struct fn_004019c0_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    void *field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x10];
-    unsigned char field_0x1c; /* +0x1c */
-    unsigned char pad_0x1d[0x3];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x7];
-    byte field_0x28; /* +0x28 */
+struct TextureExtent {
+    u8 unk00[0x24];
+    u16 width;
+    u16 height;
+};
+struct TextureExtentOwner {
+    u8 unk00[0x10];
+    TextureExtent *texture;
+};
+struct OverrideExtent {
+    u8 unk00[0x14];
+    s32 width;
+    s32 height;
+};
+struct OverrideExtentOwner {
+    u8 unk00[0xc];
+    OverrideExtent *extent;
+};
+struct ScaledTextureExtent {
+    u32 unk00;
+    TextureExtentOwner *source;
+    OverrideExtentOwner *overrideSource;
+    u8 unk0c[0x10];
+    f32 horizontalMargin;
+    f32 verticalMargin;
+    u32 unk24;
+    u8 useOverride;
 };
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+extern "C" {
+// Compute a square scaled bound and the texture's scaled half-width.
+void FUN_004019c0(const ScaledTextureExtent *source, f32 *bounds, f32 scale)
 {
-    return value < (float)0 ? -value : value;
+    const TextureExtent *texture = source->source->texture;
+    f32 width;
+    f32 height;
+    if (source->useOverride != 0) {
+        width = static_cast<f32>(source->overrideSource->extent->width);
+        height = static_cast<f32>(source->overrideSource->extent->height);
+    } else {
+        width = static_cast<f32>(texture->width) + __fabsf(source->horizontalMargin) * 2.0f;
+        height = static_cast<f32>(texture->height) + __fabsf(source->verticalMargin) * 2.0f;
+    }
+    if (width > height) {
+        bounds[0] = bounds[1] = width;
+    } else {
+        bounds[0] = bounds[1] = height;
+        width = height;
+    }
+    bounds[0] = width * scale;
+    bounds[1] = width * scale;
+    bounds[2] = static_cast<f32>(texture->width) * scale * 0.5f;
 }
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-
-
-void FUN_004019c0(fn_004019c0_arg0 *param_1,float *param_2)
-
-{
-/* irregular: irregular input(s): in_fpscr, in_s0; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v4;
-  float temp_v5;
-  
-  temp_v3 = *(int *)((int)param_1->field_0x4 + 0x10);
-  if (param_1->field_0x28 != 0) {
-    temp_v2 = *(int *)((int)param_1->field_0x8 + 0xc);
-    temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v2 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  else {
-    temp_v4 = (float)VectorUnsignedToFloat
-                             ((unsigned int)*(unsigned short *)(temp_v3 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = (float)VectorUnsignedToFloat
-                             ((unsigned int)*(unsigned short *)(temp_v3 + 0x26),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = temp_v4 + romwright_fabs_4(*(float *)&param_1->field_0x1c) * 2.0f;
-    temp_v5 = temp_v5 + romwright_fabs_4(*(float *)&param_1->field_0x20) * 2.0f;
-  }
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v4 < temp_v5) << 0x1f) |
-          ((unsigned int)(temp_v4 == temp_v5) << 0x1e);
-  temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-  if (!((unsigned char)((temp_v1 >> 6) & 1) || (unsigned char)(temp_v1 >> 7) != ((temp_v4 != temp_v4) || (temp_v5 != temp_v5)))) {
-    param_2[1] = temp_v4;
-    *param_2 = temp_v4;
-    temp_v5 = temp_v4;
-  }
-  else {
-    param_2[1] = temp_v5;
-    *param_2 = temp_v5;
-  }
-  *param_2 = temp_v5 * in_s0;
-  param_2[1] = temp_v5 * in_s0;
-  temp_v5 = (float)VectorUnsignedToFloat((unsigned int)*(unsigned short *)(temp_v3 + 0x24),(unsigned char)(temp_v0 >> 0x16) & 3);
-  param_2[2] = temp_v5 * in_s0 * 0.5f;
-  return;
 }
-
-} /* extern "C" */

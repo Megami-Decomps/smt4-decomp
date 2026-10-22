@@ -10,7 +10,7 @@ int renderCtxPopState(...);
 int renderStackPushIndexed(int, int, unsigned int);
 int FUN_00183bb0(void);
 int pairSetSecondResetFirst(byte *, int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
 
 typedef struct fn_001678a8_arg0 fn_001678a8_arg0;
@@ -33,7 +33,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: pairSetSecondResetFirst. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_001678a8(fn_001678a8_arg0 *param_1)
@@ -57,7 +57,7 @@ void FUN_001678a8(fn_001678a8_arg0 *param_1)
     efctSetSpeed();
     FUN_00183bb0();
     temp_v6 = 0.25f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = g_renderCtx;
     temp_v7 = (int)temp_v6;
     temp_v0 = param_1->field_0x9;

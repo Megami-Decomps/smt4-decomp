@@ -14,7 +14,7 @@ int messageForwardDefaultMode(...);
 int FUN_0028784c(...);
 int messageSlotSet(int);
 int scrCommMessageSetMode(...);
-int FUN_00295660(int, unsigned int [32]);
+int textEncodeFontSlot(int, unsigned int [32]);
 int FUN_0029cc3c(void);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int gameGetUnitRecord(...);
@@ -42,7 +42,7 @@ extern int FUN_002865f8(void);
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: scrCommMessageSetMode. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029cc3c. */
 extern int flagWordTestBit(unsigned int, unsigned int);
@@ -125,7 +125,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x16e);
           FUN_002bd06c(temp_v5);
           libc_strcpy(temp_v12,temp_v5);
-          FUN_00295660(8,temp_v12);
+          textEncodeFontSlot(8,temp_v12);
           FUN_0029ede8(0x18,*(unsigned int *)(temp_v9 + 0x170),0xffffffff,0);
           temp_v6 = gameGetSlotTable();
           temp_v10 = 0;
@@ -153,7 +153,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
         temp_v5 = temp_v14;
         FUN_002be650(temp_v14,1);
         libc_strcpy(temp_v12,temp_v5);
-        FUN_00295660(0,temp_v12);
+        textEncodeFontSlot(0,temp_v12);
         FUN_0029ede8(0x18,temp_v8,0xffffffff,0);
       }
     }

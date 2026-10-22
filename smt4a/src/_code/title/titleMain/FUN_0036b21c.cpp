@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_0034dc3c(int);
 
 typedef int romwright_code(...);
@@ -32,7 +32,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0034dc3c. */
 
 
@@ -66,13 +66,13 @@ unsigned int FUN_0036b21c(void)
     *(unsigned char *)(temp_v7 + 0x1270) = 0;
   }
   temp_v6 = 0.27f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   FUN_001835b4(2,0x2a,5000,(int)temp_v6,0,0xb);
   temp_v9 = 0.0f;
   temp_v6 = 0.26f;
   if (0.0f < *(float *)(temp_v2 + 0x1bc)) {
     temp_v8 = temp_v6;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v7 = (int)temp_v6;
     temp_v6 = temp_v8;
     efctSetSpeed();
@@ -82,7 +82,7 @@ unsigned int FUN_0036b21c(void)
   }
   if (temp_v9 < *(float *)(temp_v2 + 500)) {
     temp_v8 = temp_v6;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v7 = (int)temp_v6;
     temp_v6 = temp_v8;
     efctSetSpeed();
@@ -94,7 +94,7 @@ unsigned int FUN_0036b21c(void)
   FUN_0034dc3c(temp_v2 + 0xd4);
   if (temp_v9 < *(float *)(temp_v2 + 0x14c)) {
     temp_v8 = temp_v6;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v7 = (int)temp_v6;
     temp_v6 = temp_v8;
     efctSetSpeed();
@@ -104,7 +104,7 @@ unsigned int FUN_0036b21c(void)
   }
   if (temp_v9 < *(float *)(temp_v2 + 0x114)) {
     temp_v8 = temp_v6;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v7 = (int)temp_v6;
     temp_v6 = temp_v8;
     efctSetSpeed();
@@ -114,7 +114,7 @@ unsigned int FUN_0036b21c(void)
   }
   if (temp_v9 < *(float *)(temp_v2 + 0x184)) {
     temp_v8 = temp_v6;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v7 = (int)temp_v6;
     temp_v6 = temp_v8;
     efctSetSpeed();
@@ -126,7 +126,7 @@ unsigned int FUN_0036b21c(void)
   temp_v0 = **(short **)(temp_v7 + 0xc);
   temp_v1 = (*(short **)(temp_v7 + 0xc))[1];
   if (temp_v9 < *(float *)(temp_v2 + 0x22c)) {
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     efctSetSpeed();
     temp_v7 = g_renderCtx;
     temp_v3 = packNibblesAndByte(6,1,0);

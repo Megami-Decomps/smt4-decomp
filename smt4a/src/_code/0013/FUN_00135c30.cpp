@@ -31,7 +31,7 @@ int FUN_00138aa4(...);
 int gameDataBlocksMaskClearBits(...);
 int FUN_00139ab0(...);
 int FUN_00139b6c(...);
-int FUN_0013a078(...);
+int asdGxSubmitFrame(...);
 int FUN_0013a144(...);
 int asdGxResumeAndApplyPreset(...);
 int asdProcessSetGroupEnabled(...);
@@ -51,7 +51,7 @@ int VectorSignedToFloat(...);
 int software_interrupt(...);
 
 int FUN_00137144(...);
-int FUN_00137350(...);
+int ifTouchAcquireUser(...);
 int gameDataAllocBlocks(...);
 int FUN_0013778c(...);
 int asdSequenceRequest(...);
@@ -59,7 +59,7 @@ int FUN_00138114(...);
 int gameDataBlocksReleaseHold(...);
 int titleConfigApply(...);
 int FUN_001389ec(...);
-int FUN_00138b18(...);
+int modelStartWorkerProcesses(...);
 int FUN_00138e14(...);
 int FUN_001394ec(...);
 int FUN_00139508(...);
@@ -280,7 +280,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00136d24. */
 /* Supplied declaration required: FUN_00136df8. */
 /* Supplied declaration required: FUN_00137144. */
-/* Supplied declaration required: FUN_00137350. */
+/* Supplied declaration required: ifTouchAcquireUser. */
 /* Supplied declaration required: FUN_00137454. */
 /* Supplied declaration required: gameDataAllocBlocks. */
 /* Supplied declaration required: FUN_0013778c. */
@@ -312,7 +312,7 @@ extern int FUN_00138940(void);
 /* Supplied declaration required: FUN_00138a64. */
 /* Supplied declaration required: asdPrimSwapBuffers. */
 /* Supplied declaration required: FUN_00138aa4. */
-/* Supplied declaration required: FUN_00138b18. */
+/* Supplied declaration required: modelStartWorkerProcesses. */
 extern int FUN_00138ca4(void);
 extern int FUN_00138cb4(void);
 /* Supplied declaration required: FUN_00138cc4. */
@@ -335,7 +335,7 @@ extern unsigned long long appletProcessHomeButton(void);
 extern unsigned long long FUN_00139c4c(void);
 /* Supplied declaration required: gfxSetupResGraphicsFile. */
 /* Supplied declaration required: FUN_00139c90. */
-/* Supplied declaration required: FUN_0013a078. */
+/* Supplied declaration required: asdGxSubmitFrame. */
 /* Supplied declaration required: FUN_0013a11c. */
 /* Supplied declaration required: FUN_0013a144. */
 /* Supplied declaration required: FUN_0013a1e4. */
@@ -535,7 +535,7 @@ void FUN_00135c30(void)
   FUN_00138a64();
   asdTMTexTableLoadList(&LAB_00136078);
   FUN_00138764();
-  FUN_00137350();
+  ifTouchAcquireUser();
   FUN_00137144();
   FUN_0013a11c();
   FUN_0013ba70();
@@ -650,7 +650,7 @@ void FUN_00135c30(void)
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136620,0x160,0);
   FUN_0013a48c(6);
-  FUN_00138b18(0x67,0x6a,0xe6,0);
+  modelStartWorkerProcesses(0x67,0x6a,0xe6,0);
   FUN_0013b3d0(g_handleRegistry,0x67,0x69,0xe6);
   FUN_00138e14(1);
   FUN_0013778c(0);
@@ -725,7 +725,7 @@ LAB_00136430:
             temp_v4 = FUN_0013af10();
           }
           asdPrimSwapBuffers(temp_v4);
-          FUN_0013a078(iRam0057ffec >= 2);
+          asdGxSubmitFrame(iRam0057ffec >= 2);
           temp_v20 = jyoucyuGetTableEntry(1);
           temp_v4 = (unsigned int)temp_v20;
           temp_v15 = temp_v4 == 0;

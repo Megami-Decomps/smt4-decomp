@@ -40,7 +40,7 @@ unsigned int FUN_001c8e28(void)
       FUN_0029e874(1);
       FUN_002996d8(0);
       FUN_0029e788();
-      FUN_0026b60c(1);
+      saveStartLoadProcess(1);
       iVar8 = puVar2[4] + 1;
       puVar2[4] = iVar8;
       break;
@@ -62,7 +62,7 @@ unsigned int FUN_001c8e28(void)
       puVar2[4] = iVar8;
       break;
     case 2:
-      FUN_0026b60c(2);
+      saveStartLoadProcess(2);
       iVar8 = puVar2[4] + 1;
       puVar2[4] = iVar8;
       break;
@@ -513,7 +513,7 @@ code_r0x001c9900:
     }
     else if (*(char *)((int)DAT_0044de2c + 0x355) == '\0') {
       *(unsigned char *)((int)DAT_0044de2c + 0x73) = 1;
-      FUN_0026b60c(DAT_0044de30 + 1);
+      saveStartLoadProcess(DAT_0044de30 + 1);
       FUN_0019e0c0(puVar4[0x92]);
       puVar4[0x1e] = 0;
     }

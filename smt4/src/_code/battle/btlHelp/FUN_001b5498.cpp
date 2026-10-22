@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00212120(int);
 int dialogOpen(int, int);
 int infoWinSetMessage(unsigned int, unsigned int);
-int FUN_00295660(unsigned int, unsigned char [100]);
+int textEncodeFontSlot(unsigned int, unsigned char [100]);
 int FUN_002bd06c(unsigned int);
 int libc_strcpy(unsigned char [100], unsigned int);
 int jobGetWork(void);
@@ -19,7 +19,7 @@ extern unsigned int *DAT_00435d78; /* 0x435d78 */
 /* Supplied declaration required: FUN_00212120. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: infoWinSetMessage. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern int dialogIsActive(void);
 extern int FUN_002b6b04(void);
 /* Supplied declaration required: FUN_002bd06c. */
@@ -96,7 +96,7 @@ unsigned int FUN_001b5498(void)
               FUN_002bd06c(temp_v2);
               libc_strcpy(temp_v4,temp_v2);
             }
-            FUN_00295660(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
+            textEncodeFontSlot(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
           }
           infoWinSetMessage(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
           dialogOpen((int)(char)psVar2[0x14c],1);
@@ -118,7 +118,7 @@ unsigned int FUN_001b5498(void)
               FUN_002bd06c(temp_v2);
               libc_strcpy(temp_v4,temp_v2);
             }
-            FUN_00295660(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
+            textEncodeFontSlot(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
           }
           FUN_00212120(psVar2[2]);
         }

@@ -13,7 +13,7 @@ int FUN_003f14a0(...);
 int controllerGroupSetPosition(unsigned int);
 int FUN_004102d8(...);
 int FUN_004116a0(unsigned int *);
-int FUN_004118d0(unsigned int *);
+int btlSpawnStageHeightEffects(unsigned int *);
 int FUN_00411c04(unsigned int *, int);
 int FUN_00411cec(...);
 int FUN_00412488(...);
@@ -45,7 +45,7 @@ extern unsigned int partyFindActiveRecordById(unsigned int);
 /* Supplied declaration required: controllerGroupSetPosition. */
 /* Supplied declaration required: FUN_004102d8. */
 /* Supplied declaration required: FUN_004116a0. */
-/* Supplied declaration required: FUN_004118d0. */
+/* Supplied declaration required: btlSpawnStageHeightEffects. */
 extern int btlStageGetModeIndex(unsigned int *);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00411cec. */
@@ -79,7 +79,7 @@ void FUN_00410f84(unsigned int *param_1)
     FUN_004116a0(param_1);
     return;
   case 2:
-    FUN_004118d0(param_1);
+    btlSpawnStageHeightEffects(param_1);
     return;
   case 3:
     if (param_1[0x61] != 0) {

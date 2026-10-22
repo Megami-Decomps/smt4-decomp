@@ -1,54 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cb9d0` (_code @ 0x4cb9d0, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constant multiplications are reassociated and the result uses fewer saved VFP registers than retail. */
+#include "common.h"
 
+// Projection data lies beyond the shared ProjectionCamera prefix.
+struct CameraScaleView {
+    u8 unk000[0x588];
+    f32 height; // 0x588
+    u8 unk58c[0x24];
+    f32 distance; // 0x5b0
+    u8 unk5b4[0xc];
+    f32 fieldOfView; // 0x5c0
+};
+struct CameraScaledDisplay {
+    u8 unk00[0x3c];
+    s8 mode; // 0x3c
+    u8 unk3d[3];
+    f32 scale; // 0x40
+    u8 unk44[0xc];
+    u32 flags; // 0x50
+};
 extern "C" {
+extern CameraScaleView *g_btlCamera;
+f32 FUN_0050dda4(f32 angle);
 
-int FUN_0050dda4(void);
-
-extern int g_btlCamera; /* 0x571508 */
-
-/* Supplied declaration required: FUN_0050dda4. */
-
-
-void FUN_004cb9d0(int param_1)
-
+// Derive display scale from the battle camera's perspective, with optional distance compensation.
+void FUN_004cb9d0(CameraScaledDisplay *display)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  temp_v1 = g_btlCamera;
-  if ((*(unsigned int *)(param_1 + 0x50) & 0x200000) != 0) {
-    *(unsigned int *)(param_1 + 0x40) = 0x3f800000;
-  }
-  else {
-    temp_v0 = *(char *)(param_1 + 0x3c);
-    temp_v3 = 0.1f;
-    temp_v4 = *(float *)(g_btlCamera + 0x588);
-    temp_v2 = *(float *)(g_btlCamera + 0x5c0) * 0.5f * 0.0055555557f * 3.1415927f;
-    FUN_0050dda4();
-    temp_v4 = temp_v4 / (120.0f / temp_v2);
-    temp_v2 = temp_v4;
-    if (temp_v0 != '\0') {
-      if (temp_v0 != '\x01') {
-        temp_v2 = temp_v3;
-        if (temp_v0 == '\x02') {
-          temp_v2 = *(float *)(temp_v1 + 0x5b0);
-          temp_v2 = (temp_v4 / temp_v2) * (temp_v2 - -20.0f);
+    CameraScaleView *camera = g_btlCamera;
+    if (display->flags & 0x200000) {
+        display->scale = 1.0f;
+    } else {
+        s32 mode = display->mode;
+        f32 height = camera->height;
+        f32 angle = camera->fieldOfView * 0.5f * 0.0055555557f * 3.1415927f;
+        f32 projectedScale = height / (120.0f / FUN_0050dda4(angle));
+        f32 scale = projectedScale;
+        if (mode != 0) {
+            if (mode == 1)
+                scale = (projectedScale / camera->distance) * (camera->distance - 15.0f);
+            else if (mode == 2)
+                scale = (projectedScale / camera->distance) * (camera->distance - -20.0f);
+            else
+                scale = 0.1f;
         }
-      }
-      else {
-        temp_v2 = *(float *)(temp_v1 + 0x5b0);
-        temp_v2 = (temp_v4 / temp_v2) * (temp_v2 - 15.0f);
-      }
+        display->scale = scale;
     }
-    *(float *)(param_1 + 0x40) = temp_v2;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

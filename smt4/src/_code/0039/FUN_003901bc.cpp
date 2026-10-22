@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int textFormatBuffer(...);
 int memClear(...);
 
@@ -62,7 +62,7 @@ extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_00287328. */
 extern int bgmGetStateById(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
@@ -320,7 +320,7 @@ LAB_003906d4:
     temp_v3 = puVar1[0x19e];
     memClear(&temp_v7,0x80);
     textFormatBuffer(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
-    FUN_00295660(0,&temp_v7);
+    textEncodeFontSlot(0,&temp_v7);
     FUN_002b8244(1);
     temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v2 == 2) {

@@ -1,62 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f9d34` (_code @ 0x3f9d34, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains a frame and non-tail Hermite call; compiler emits a tail call. */
+#include "shard/W9_W9Match1_HermiteTrack.h"
 
 extern "C" {
+f32 nn_math_ARMv6_HermiteC_FAST(f32 firstValue, f32 firstTangent, f32 secondValue, f32 secondTangent, f32 elapsed, f32 duration);
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(unsigned int, int);
-int nn_math_ARMv6_HermiteC_FAST(void);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: nn_math_ARMv6_HermiteC_FAST. */
-
-
-void FUN_003f9d34(unsigned short *param_1)
-
+// Sample a Hermite animation track, correcting its estimated key interval.
+f32 FUN_003f9d34(const HermiteAnimationTrack *track, f32 frame)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  float *pfVar3;
-  float *pfVar4;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  float in_s0;
-  int temp_v3;
-  float temp_v4;
-  
-  temp_v2 = (unsigned int)*param_1;
-  pfVar4 = (float *)(param_1 + 4);
-  if (*(float *)(param_1 + 4) <= in_s0) {
-    pfVar4 = (float *)(param_1 + (temp_v2 * 8 - 4));
-    temp_v0 = (in_fpscr & 0xfffffff) |
-            ((unsigned int)(*(float *)(param_1 + (temp_v2 * 8 - 4)) == in_s0) << 0x1e) |
-            ((unsigned int)(in_s0 <= *(float *)(param_1 + (temp_v2 * 8 - 4))) << 0x1d);
-    temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-    if ((unsigned char)((temp_v1 >> 5) & 1) && !(unsigned char)(temp_v1 >> 6)) {
-      temp_v4 = (float)VectorSignedToFloat(temp_v2 - 1,(unsigned char)(temp_v0 >> 0x16) & 3);
-      temp_v3 = VectorFloatToUnsigned(*(float *)(param_1 + 2) * temp_v4 * in_s0,3);
-      pfVar4 = (float *)(param_1 + temp_v3 * 8 + 4);
-      pfVar3 = pfVar4;
-      if (*pfVar4 > in_s0) {
-        do {
-          pfVar4 = pfVar4 + -4;
-        } while (in_s0 < *pfVar4);
-      }
-      else {
-        do {
-          pfVar4 = pfVar3;
-          pfVar3 = pfVar4 + 4;
-        } while (pfVar4[4] <= in_s0);
-      }
+    const HermiteAnimationKey *last = track->keys + track->count - 1;
+    const HermiteAnimationKey *key = track->keys;
+    if (key->frame <= frame) {
+        key = last;
+        if (frame < key->frame) {
+            u32 estimate = (u32)((f32)(track->count - 1) * frame * track->inverseDuration);
+            key = track->keys + estimate;
+            if (key->frame > frame) {
+                do {
+                    --key;
+                } while (key->frame > frame);
+            } else {
+                do {
+                    ++key;
+                } while (key->frame <= frame);
+                --key;
+            }
+        }
     }
-  }
-  if (*pfVar4 != in_s0 && pfVar4 != (float *)(param_1 + (temp_v2 * 8 - 4))) {
-    nn_math_ARMv6_HermiteC_FAST();
-  }
-  return;
+    f32 value;
+    if (key->frame != frame && key != last) {
+        value = nn_math_ARMv6_HermiteC_FAST(key->value, key->outgoingTangent, key[1].value,
+                                           key[1].incomingTangent, frame - key->frame,
+                                           key[1].frame - key->frame);
+    } else {
+        value = key->value;
+    }
+    return value;
 }
-
-} /* extern "C" */
+}

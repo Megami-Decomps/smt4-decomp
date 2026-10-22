@@ -1,52 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `memAlloc` (_code @ 0x2c32a0, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation-tracker registers and header halfword-store scheduling differ. */
+#include "sys/AllocationTracking.h"
 
 extern "C" {
+extern AllocationTracking DAT_00465120;
+AllocationHeader *FUN_002b24d8(u32, u32, u32, u32, u32);
+void FUN_002b23f4(AllocationHeader *);
+void rt_memclr(void *, u32);
+void nn_os_CriticalSection_Enter(void *);
+void nn_os_CriticalSection_Leave(void *);
 
-int FUN_002b23f4(void);
-int FUN_002b24d8(unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int);
-int rt_memclr(int, int);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_6_stack;
-
-extern unsigned char DAT_00465120; /* 0x465120 */
-
-/* Supplied declaration required: FUN_002b23f4. */
-/* Supplied declaration required: FUN_002b24d8. */
-/* Supplied declaration required: rt_memclr. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-int memAlloc(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned int param_5,
-                unsigned int param_6)
-
+// Allocate an aligned, zero-filled payload and register its backing block.
+void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  nn_os_CriticalSection_Enter((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-  if (param_5 < 0x80) {
-    param_5 = 0x80;
-  }
-  temp_v1 = (param_4 + param_5 * 2 + 0x3b) & -param_5;
-  FUN_002b24d8(param_1,param_2,param_3,temp_v1,param_6);
-  *param_1 = temp_v1;
-  *(short *)(param_1 + 1) = (short)param_5;
-  *(unsigned short *)((int)param_1 + 6) = 0;
-  temp_v1 = (param_5 & 0xffff) - 1;
-  temp_v1 = ((param_5 & 0xffff) - ((unsigned int)(param_1 + 0xf) & temp_v1)) & temp_v1;
-  temp_v0 = (int)param_1 + temp_v1 + 0x3c;
-  *(unsigned int **)((int)param_1 + temp_v1 + 0x38) = param_1;
-  FUN_002b23f4();
-  rt_memclr(temp_v0,param_4);
-  nn_os_CriticalSection_Leave((*(unsigned int *)((unsigned char *)&DAT_00465120 + 0x4)));
-  return temp_v0;
+    nn_os_CriticalSection_Enter(DAT_00465120.lock);
+    if (alignment < 128)
+        alignment = 128;
+    u32 backingSize = (size + alignment + alignment + sizeof(AllocationHeader) - 1) & -alignment;
+    AllocationHeader *block = FUN_002b24d8(heap, alignmentClass, flags, backingSize, category);
+    block->size = backingSize;
+    block->alignment = static_cast<u16>(alignment);
+    block->flags = 0;
+    u32 mask = static_cast<u16>(alignment) - 1;
+    u32 padding = (static_cast<u16>(alignment) - (reinterpret_cast<u32>(block + 1) & mask)) & mask;
+    u8 *payload = reinterpret_cast<u8 *>(block + 1) + padding;
+    reinterpret_cast<AllocationHeader **>(payload)[-1] = block;
+    FUN_002b23f4(block);
+    rt_memclr(payload, size);
+    nn_os_CriticalSection_Leave(DAT_00465120.lock);
+    return payload;
 }
-
-} /* extern "C" */
+}

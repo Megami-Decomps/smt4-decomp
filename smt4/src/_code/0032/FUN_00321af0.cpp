@@ -1,49 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321af0` (_code @ 0x321af0, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler threads the complete flag test through the interpolation branch and reorders reset stores. */
+#include "common.h"
 
-extern "C" {
+struct PanelTransitionSlot {
+    u32 frame;
+    u8 active;
+    u8 unk05[0xF];
+};
+struct PanelSlideTransition {
+    u8 unk00[0x20];
+    PanelTransitionSlot slots[5];
+    u8 unk84[0xC];
+    s32 position[2]; /* 0x90 */
+    s32 frame; /* 0x98 */
+    u8 complete;
+    u8 unk9D[0x67];
+    u32 state; /* 0x104 */
+    u8 unk108[8];
+    u32 nextState; /* 0x110 */
+    u8 unk114[0x14];
+    u8 visible; /* 0x128 */
+    u8 unk129;
+    u8 pending;
+};
+extern "C" s32 FUN_0026f024(s32 *, s32, s32, s32, s32, s32);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_00321af0(int param_1)
-
+/* Finish sliding in, reset the panel animations, and enter the next state. */
+extern "C" u32 FUN_00321af0(PanelSlideTransition *work)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  temp_v0 = FUN_0026f024(param_1 + 0x90,0,0xfffffeb6,4,*(unsigned int *)(param_1 + 0x98),1);
-  if (temp_v0 != 0) {
-    *(unsigned char *)(param_1 + 0x9c) = 1;
-  }
-  else {
-    *(int *)(param_1 + 0x98) = *(int *)(param_1 + 0x98) + 1;
-  }
-  if (*(char *)(param_1 + 0x9c) == '\x01') {
-    *(unsigned int *)(param_1 + 0x104) = 3;
-    *(unsigned int *)(param_1 + 0x48) = 0;
-    *(unsigned int *)(param_1 + 0x110) = 4;
-    *(unsigned char *)(param_1 + 0x4c) = 0;
-    *(unsigned int *)(param_1 + 0x5c) = 0;
-    *(unsigned char *)(param_1 + 0x60) = 0;
-    *(unsigned int *)(param_1 + 0x70) = 0;
-    *(unsigned char *)(param_1 + 0x74) = 0;
-    *(unsigned int *)(param_1 + 0x20) = 0;
-    *(unsigned char *)(param_1 + 0x24) = 0;
-    *(unsigned int *)(param_1 + 0x34) = 0;
-    *(unsigned char *)(param_1 + 0x38) = 0;
-    *(unsigned char *)(param_1 + 0x128) = 1;
-    temp_v1 = 2;
-    *(unsigned char *)(param_1 + 0x12a) = 0;
-  }
-  return temp_v1;
+    u32 result = 0;
+    if (FUN_0026f024(work->position, 0, -330, 4, work->frame, 1) != 0) {
+        work->complete = 1;
+    } else {
+        ++work->frame;
+    }
+    if (work->complete == 1) {
+        work->state = 3;
+        work->slots[2].frame = 0;
+        work->nextState = 4;
+        work->slots[2].active = 0;
+        work->slots[3].frame = 0;
+        work->slots[3].active = 0;
+        work->slots[4].frame = 0;
+        work->slots[4].active = 0;
+        work->slots[0].frame = 0;
+        work->slots[0].active = 0;
+        work->slots[1].frame = 0;
+        work->slots[1].active = 0;
+        work->visible = 1;
+        result = 2;
+        work->pending = 0;
+    }
+    return result;
 }
-
-} /* extern "C" */

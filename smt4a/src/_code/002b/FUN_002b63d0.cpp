@@ -1,77 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b63d0` (_code @ 0x2b63d0, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 58 vs built 60 rows; warp-request global addressing and enemy-slot register allocation differ. */
+#include "common.h"
 
 extern "C" {
-
-int FUN_00377acc(char *, int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_mapEnemy; /* 0x5806d4 */
-extern unsigned char DAT_005f17fc; /* 0x5f17fc */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00377acc. */
-extern int FUN_003c316c(void);
-
+extern s16 DAT_005f1884;
+void *FUN_003c316c(void);
+void FUN_00377acc(void *, s32, s32);
 
 void FUN_002b63d0(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  
-  temp_v0 = g_mapEnemy;
-  if (((*(short *)((unsigned char *)&DAT_005f17fc + 0x88)) != 0) && (temp_v1 = FUN_003c316c(), temp_v1 != 0)) {
-    temp_v3 = 0;
-    do {
-      temp_v2 = temp_v0 + temp_v3 * 0x188;
-      temp_v6 = *(char *)(temp_v2 + 0x34) != '\0';
-      temp_v4 = 0;
-      if (temp_v6) {
-        temp_v4 = *(int *)(temp_v2 + 0x1b0);
-      }
-      if ((temp_v6 && temp_v4 != 0) && (temp_v4 < 0xb)) {
-        temp_v5 = (unsigned int)*(unsigned char *)(temp_v2 + 0xb1);
-        temp_v6 = temp_v5 == 0;
-        if (temp_v6) {
-          temp_v5 = *(unsigned int *)(temp_v2 + 0xb8);
+    struct EnemyWarpSlotA {
+        u8 active;
+        u8 unk001[7];
+        f32 position[3];
+        u8 unk014[0xC];
+        f32 snapshot[3];
+        f32 heading;
+        u8 unk030[0x4D];
+        u8 blocked;
+        u8 unk07E[6];
+        u32 state;
+        u32 elapsed;
+        u8 unk08C[0xF0];
+        s32 kind;
+        u8 unk180[8];
+    };
+    // Apocalypse's 0x188-byte slots exceed the shared IV enemy-slot layout.
+    struct EnemyWarpStateView {
+        u8 unk000[0x34];
+        EnemyWarpSlotA entries[40];
+    };
+    struct WarpPoint {
+        u16 unk00;
+        s16 x, y, z;
+        s16 heading;
+    };
+    extern EnemyWarpStateView *g_mapEnemy;
+    EnemyWarpStateView *state = g_mapEnemy;
+    if (DAT_005f1884 != 0) {
+        const WarpPoint *point = static_cast<const WarpPoint *>(FUN_003c316c());
+        if (point != NULL) {
+            for (s32 index = 0; index < 40; ++index) {
+                EnemyWarpSlotA *entry = &state->entries[index];
+                if (entry->active && entry->kind != 0 && entry->kind < 11 &&
+                    entry->blocked == 0 && entry->state == 2) {
+                    entry->position[0] = static_cast<f32>(point->x);
+                    entry->position[1] = static_cast<f32>(point->y);
+                    entry->position[2] = static_cast<f32>(point->z);
+                    entry->heading = static_cast<f32>(point->heading);
+                    entry->snapshot[0] = entry->position[0];
+                    entry->snapshot[1] = entry->position[1];
+                    entry->snapshot[2] = entry->position[2];
+                    entry->state = 28;
+                    entry->elapsed = 0;
+                    FUN_00377acc(entry, DAT_005f1884, 4);
+                    return;
+                }
+            }
         }
-        if (temp_v6 && temp_v5 == 2) {
-          temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x3c) = temp_v7;
-          temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x40) = temp_v7;
-          temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x44) = temp_v7;
-          temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x60) = temp_v7;
-          *(unsigned int *)(temp_v2 + 0x54) = *(unsigned int *)(temp_v2 + 0x3c);
-          *(unsigned int *)(temp_v2 + 0x58) = *(unsigned int *)(temp_v2 + 0x40);
-          *(unsigned int *)(temp_v2 + 0x5c) = *(unsigned int *)(temp_v2 + 0x44);
-          *(unsigned int *)(temp_v2 + 0xb8) = 0x1c;
-          *(unsigned int *)(temp_v2 + 0xbc) = 0;
-          FUN_00377acc((char *)(temp_v2 + 0x34),(int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x88)),4);
-          return;
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x28);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

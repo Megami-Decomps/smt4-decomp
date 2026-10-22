@@ -1,52 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b4dcc` (_code @ 0x2b4dcc, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask loads are hoisted out of the loop, increasing saved registers and spilling the fallback result. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
+u32 recordGetScaledMaximum(u32 sourceId);
 
-extern int g_btlMain; /* 0x573920 */
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573988; /* 0x573988 */
-extern unsigned int DAT_0057398c; /* 0x57398c */
-extern unsigned int DAT_005739a0; /* 0x5739a0 */
-extern unsigned int DAT_005739a4; /* 0x5739a4 */
-
-extern unsigned int recordGetScaledMaximum(void);
-
-
-unsigned int FUN_002b4dcc(unsigned int param_1)
-
+// Prefer a matching active battle participant's maximum HP over the record value.
+u32 FUN_002b4dcc(u32 sourceId)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  
-  temp_v0 = g_btlMain;
-  temp_v1 = recordGetScaledMaximum();
-  temp_v2 = temp_v1;
-  if (temp_v0 != 0) {
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x88);
-  }
-  if (temp_v0 != 0 && temp_v2 != 0x1d) {
-    temp_v4 = 0;
-    do {
-      puVar6 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + temp_v4 * 0x408);
-      temp_v2 = *puVar6;
-      temp_v3 = puVar6[1];
-      if (((((temp_v3 & DAT_0057397c) != 0 || (temp_v2 & DAT_00573978) != 0) &&
-           ((DAT_005739a0 & temp_v2) == 0 && (DAT_005739a4 & temp_v3) == 0)) &&
-          ((temp_v2 & DAT_00573988) != 0 || (temp_v3 & DAT_0057398c) != 0)) && (puVar6[0xff] == param_1)
-         ) {
-        return puVar6[0x97];
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x6d);
-  }
-  return temp_v1;
+    BtlMainStateA *state = g_btlMain.state;
+    u32 fallback = recordGetScaledMaximum(sourceId);
+    if (state != NULL && state->unk0088 != 29) {
+        for (s32 index = 0; index < 109; ++index) {
+            BtlCombatantEntryA *entry = &state->entries[index];
+            if ((entry->flags & g_btlMain.combatantMasks.required) &&
+                !(entry->flags & g_btlMain.exclusionMask) &&
+                (entry->flags & g_btlMain.actorCategories[1]) &&
+                entry->sourceId == sourceId) {
+                fallback = entry->maxHp;
+                break;
+            }
+        }
+    }
+    return fallback;
 }
-
-} /* extern "C" */
+}

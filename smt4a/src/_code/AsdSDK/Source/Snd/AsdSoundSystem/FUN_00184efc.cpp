@@ -8,7 +8,7 @@ int FUN_00167618(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(...);
 int quadSetOrderedVectors(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int camSetMatrixA(...);
 int FUN_0019ac70(unsigned char [92], unsigned int);
 int FUN_0019b770(...);
@@ -76,7 +76,7 @@ extern unsigned int DAT_0063098c; /* 0x63098c */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: quadSetOrderedVectors. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019b770. */
@@ -391,7 +391,7 @@ LAB_00185068:
             temp_v17 = (float)VectorSignedToFloat(0x100 - temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v17 = temp_v17 * temp_v16;
           }
-          FUN_001879d0(g_renderCtx);
+          renderCtxCalculateStereoParallax(g_renderCtx);
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 == temp_v11) << 0x1e);
           if (temp_v27[0x91] != '\0') {
             temp_v17 = (float)VectorSignedToFloat((int)temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);

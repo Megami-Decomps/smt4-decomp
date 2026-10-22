@@ -1,57 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043b6c0` (_code @ 0x43b6c0, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: projected-coordinate VFP allocation and input/output load scheduling differ. */
+#include "shard/S1Mover.h"
 
 extern "C" {
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_4_stack;
-
-
-void FUN_0043b6c0(float *param_1,float *param_2,float *param_3,unsigned int param_4)
-
+// Transform a sequence of three-component positions and divide by homogeneous W.
+void FUN_0043b6c0(Vec3f *output, const f32 matrix[4][4], const Vec3f *input, u32 count)
 {
-  unsigned int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  
-  temp_v0 = 0;
-  if (temp_v0 < param_4) {
-    do {
-      temp_v1 = param_3[1];
-      temp_v4 = *param_3;
-      temp_v7 = param_2[5];
-      temp_v10 = param_2[9];
-      temp_v3 = param_3[2];
-      temp_v8 = param_2[6];
-      temp_v5 = param_2[7];
-      temp_v9 = param_2[4];
-      temp_v11 = param_2[10];
-      temp_v6 = param_2[0xb];
-      temp_v12 = param_2[8];
-      temp_v0 = temp_v0 + 1;
-      param_3 = param_3 + 3;
-      temp_v2 = 1.0f / (param_2[0xd] * temp_v1 + param_2[0xe] * temp_v3 +
-                    param_2[0xf] + param_2[0xc] * temp_v4);
-      *param_1 = (param_2[1] * temp_v1 + param_2[2] * temp_v3 + param_2[3] + *param_2 * temp_v4) * temp_v2;
-      param_1[1] = (temp_v7 * temp_v1 + temp_v8 * temp_v3 + temp_v5 + temp_v9 * temp_v4) * temp_v2;
-      param_1[2] = (temp_v10 * temp_v1 + temp_v11 * temp_v3 + temp_v6 + temp_v12 * temp_v4) * temp_v2;
-      param_1 = param_1 + 3;
-    } while (temp_v0 < param_4);
-  }
-  return;
+    for (u32 index = 0; index < count; ++index) {
+        f32 x = input->x;
+        f32 y = input->y;
+        f32 z = input->z;
+        f32 inverseW = 1.0f / (matrix[3][1] * y + matrix[3][2] * z +
+                               matrix[3][3] + matrix[3][0] * x);
+        f32 projectedX = matrix[0][1] * y + matrix[0][2] * z + matrix[0][3] +
+                         matrix[0][0] * x;
+        f32 projectedY = matrix[1][1] * y + matrix[1][2] * z + matrix[1][3] +
+                         matrix[1][0] * x;
+        f32 projectedZ = matrix[2][1] * y + matrix[2][2] * z + matrix[2][3] +
+                         matrix[2][0] * x;
+        output->x = projectedX * inverseW;
+        output->y = projectedY * inverseW;
+        output->z = projectedZ * inverseW;
+        ++input;
+        ++output;
+    }
 }
-
-} /* extern "C" */
+}

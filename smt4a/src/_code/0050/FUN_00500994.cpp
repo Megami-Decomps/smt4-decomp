@@ -1,58 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00500994` (_code @ 0x500994, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command stores use STM/STR instead of retail STRD/STM combinations; saved registers and packet cursor scheduling differ. */
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
-extern "C" {
+struct GxMeshBinding {
+    AsdGxTexture *vertexBuffer;
+    u8 mode;
+    u8 padding05[0x1F];
+    AsdGxTexture *indexBuffer;
+    u8 indexType;
+    u8 padding29[0x17];
+    u32 attributes;
+    u32 attributeCount;
+};
+typedef char GxMeshBindingOffsetsCheck[
+    offsetof(GxMeshBinding, indexBuffer) == 0x24 &&
+    offsetof(GxMeshBinding, indexType) == 0x28 &&
+    offsetof(GxMeshBinding, attributes) == 0x40 &&
+    offsetof(GxMeshBinding, attributeCount) == 0x44 ? 1 : -1];
 
-extern unsigned int asdGxGetPhysicalAddress(unsigned int);
+extern "C" u32 asdGxGetPhysicalAddress(AsdGxTexture *buffer);
 
-
-unsigned int * FUN_00500994(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,int param_4)
-
+extern "C" u32 *FUN_00500994(const GxMeshBinding *binding, u32 *commands, u32 changed, s32 reset)
 {
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  
-  if (param_4 != 0) {
-    *param_2 = 1;
-    param_2[1] = 0xf0111;
-    param_2[2] = 1;
-    param_2[3] = 0xf0110;
-    param_2 = param_2 + 4;
-  }
-  if ((param_3 & 1) != 0) {
-    if (*(unsigned char *)(param_1 + 1) == 0) {
-      temp_v0 = 2;
+    if (reset) {
+        *commands++ = 1;
+        *commands++ = 0xF0111;
+        *commands++ = 1;
+        *commands++ = 0xF0110;
     }
-    else {
-      temp_v0 = 0;
+    if (changed & 1) {
+        u32 mode = binding->mode == 0 ? 2 : 0;
+        *commands++ = mode | (static_cast<u32>(binding->mode) << 16);
+        *commands++ = 0xF0117;
+        *commands++ = asdGxGetPhysicalAddress(binding->vertexBuffer) >> 3;
+        *commands++ = 0xF011D;
     }
-    *param_2 = temp_v0 | ((unsigned int)*(unsigned char *)(param_1 + 1) << 0x10);
-    param_2[1] = 0xf0117;
-    temp_v0 = asdGxGetPhysicalAddress(*param_1);
-    puVar2 = param_2 + 3;
-    param_2[2] = temp_v0 >> 3;
-    param_2 = param_2 + 4;
-    *puVar2 = 0xf011d;
-  }
-  if ((param_3 & 6) != 0) {
-    *param_2 = (unsigned int)*(unsigned char *)(param_1 + 10);
-    param_2[1] = 0xf0116;
-    temp_v0 = asdGxGetPhysicalAddress(param_1[9]);
-    puVar2 = param_2 + 3;
-    param_2[2] = temp_v0 >> 3;
-    param_2 = param_2 + 4;
-    *puVar2 = 0xf011c;
-  }
-  *param_2 = param_1[0x10] | (param_1[0x11] * 0x1000 - 0x1000U) | 0x1000000;
-  param_2[1] = 0xf011e;
-  param_2[2] = (param_1[0x11] * 0x1000 - 0x1000U) | 0x1000000 | param_1[0x10];
-  param_2[3] = 0xf006e;
-  param_2[4] = 1;
-  param_2[5] = 0xf0111;
-  param_2[6] = 1;
-  param_2[7] = 0xf0110;
-  return param_2 + 8;
+    if (changed & 6) {
+        *commands++ = binding->indexType;
+        *commands++ = 0xF0116;
+        *commands++ = asdGxGetPhysicalAddress(binding->indexBuffer) >> 3;
+        *commands++ = 0xF011C;
+    }
+    *commands++ = binding->attributes | (binding->attributeCount * 0x1000 - 0x1000u) | 0x1000000;
+    *commands++ = 0xF011E;
+    *commands++ = (binding->attributeCount * 0x1000 - 0x1000u) | 0x1000000 | binding->attributes;
+    *commands++ = 0xF006E;
+    *commands++ = 1;
+    *commands++ = 0xF0111;
+    *commands++ = 1;
+    *commands++ = 0xF0110;
+    return commands;
 }
-
-} /* extern "C" */

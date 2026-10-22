@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028850c(...);
+int uiFormatIndexedDisplayName(...);
 int FUN_002be5a4(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
@@ -19,7 +19,7 @@ typedef struct {
 } param_5_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0028850c. */
+/* Supplied declaration required: uiFormatIndexedDisplayName. */
 extern unsigned int dataTable24Sub0GetRecordS90(unsigned int);
 extern unsigned int dataTable24Sub0GetRecordS90X(unsigned int);
 extern int sceneSelectionGetSlotId(void);
@@ -77,7 +77,7 @@ void FUN_001a75d0(unsigned int param_1,unsigned int param_2,int param_3,int para
   VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be5a4(2,temp_v3,temp_v1);
   temp_v2 = FUN_002bf4f8(0x24,0xa6);
-  FUN_0028850c(param_1,temp_v6,temp_v0,temp_v5);
+  uiFormatIndexedDisplayName(param_1,temp_v6,temp_v0,temp_v5);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002be5a4(2,temp_v4,temp_v5);

@@ -8,7 +8,7 @@ int FUN_00157558(int);
 int efctSetSpeed(void);
 int FUN_0016c4b8(int);
 int FUN_001835b4(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_0019e3d0(unsigned int);
 int FUN_001a9698(void);
 int VectorSignedToFloat(...);
@@ -34,7 +34,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a9698. */
 
@@ -85,7 +85,7 @@ void FUN_0014aa9c(unsigned int param_1)
     }
     FUN_00157558(g_renderCtx);
     temp_v8 = *(float *)(temp_v2 + 0x28);
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = mapMainIsIdle();
     temp_v6 = g_frameTex;
     if (temp_v4 != 0) {
@@ -108,7 +108,7 @@ void FUN_0014aa9c(unsigned int param_1)
     FUN_001835b4(2,0x14,2000,(int)temp_v8,0,0xb);
     efctSetSpeed();
     temp_v8 = *(float *)(temp_v2 + 0x2c);
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = (int)temp_v8;
     efctSetSpeed();
     temp_v6 = 0;

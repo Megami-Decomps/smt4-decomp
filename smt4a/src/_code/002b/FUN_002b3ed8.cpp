@@ -1,66 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b3ed8` (_code @ 0x2b3ed8, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block-copy address temporaries use r5 instead of retail's lr. */
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void* memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, u32 mode);
+void effMenuListAppend(EffMenuNode* node, u32 list);
+u32 displayIsStereoActive(void);
+void rt_memcpy_w(void* destination, const void* source, u32 size);
 
-int memAlloc(int, int, int, int, int, int);
-int effMenuListAppend(...);
-int rt_memcpy_w(void);
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: effMenuListAppend. */
-extern int displayIsStereoActive(void);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_002b3ed8(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+// Append a vector payload to the first eye and duplicate it for stereo rendering.
+void FUN_002b3ed8(const Vector4* geometry, const Vector4* style, u32 resource, u32 options)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = 0x10000;
-  memAlloc(0x10000,0x100,0,0x68,0x10,1);
-  temp_v1 = param_1[1];
-  temp_v2 = param_1[2];
-  temp_v3 = param_1[3];
-  *(unsigned int *)(temp_v0 + 8) = *param_1;
-  *(unsigned int *)(temp_v0 + 0xc) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x10) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x14) = temp_v3;
-  temp_v1 = *param_2;
-  temp_v2 = param_2[1];
-  temp_v3 = param_2[2];
-  temp_v4 = param_2[3];
-  *(unsigned int *)(temp_v0 + 4) = 8;
-  *(unsigned int *)(temp_v0 + 0x18) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x1c) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x20) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x24) = temp_v4;
-  *(unsigned int *)(temp_v0 + 0x28) = param_3;
-  *(unsigned int *)(temp_v0 + 0x2c) = param_4;
-  effMenuListAppend(temp_v0,1);
-  temp_v0 = displayIsStereoActive();
-  if (temp_v0 != 0) {
-    temp_v1 = 0x10000;
-    memAlloc(0x10000,0x100,0,0x68,0x10,1);
-    rt_memcpy_w();
-    effMenuListAppend(temp_v1,2);
-    return;
-  }
-  return;
+    // The second vector spans base-node unions; a kind-specific view avoids reshaping them.
+    struct VectorNodeView {
+        EffMenuNode* next;
+        u32 kind;
+        Vector4 geometry;
+        Vector4 style;
+        u32 resource;
+        u32 options;
+        u8 unk30[0x38];
+    };
+    typedef char VectorNodeOffsets[sizeof(VectorNodeView) == 0x68 &&
+        offsetof(VectorNodeView, geometry) == 8 && offsetof(VectorNodeView, style) == 0x18 &&
+        offsetof(VectorNodeView, resource) == 0x28 ? 1 : -1];
+    asdDebugTrace("../Source/Gfx/Effect/effMenu.h", 712);
+    VectorNodeView* node = static_cast<VectorNodeView*>(memAlloc(0x10000, 0x100, 0, sizeof(VectorNodeView), 0x10, 1));
+    node->geometry = *geometry;
+    node->style = *style;
+    node->kind = 8;
+    node->resource = resource;
+    node->options = options;
+    effMenuListAppend(reinterpret_cast<EffMenuNode*>(node), 1);
+    if (displayIsStereoActive()) {
+        asdDebugTrace("../Source/Gfx/Effect/effMenu.h", 724);
+        VectorNodeView* copy = static_cast<VectorNodeView*>(memAlloc(0x10000, 0x100, 0, sizeof(VectorNodeView), 0x10, 1));
+        rt_memcpy_w(copy, node, sizeof(VectorNodeView));
+        effMenuListAppend(reinterpret_cast<EffMenuNode*>(copy), 2);
+    }
 }
-
-} /* extern "C" */
+}

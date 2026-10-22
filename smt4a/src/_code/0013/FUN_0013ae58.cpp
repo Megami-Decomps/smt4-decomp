@@ -1,67 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013ae58` (_code @ 0x13ae58, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: voice flag load scheduling and duck-parameter stores differ from retail. */
+/* Initializes voice playback defaults and loads the voice panning table. */
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
-
-int FUN_0013c174(unsigned char *, unsigned int [2], int);
-int asdSoundSetHasStream(int);
-int FUN_00143800(void);
-int asdSoundDuckSetup(int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned char LAB_0013aefc; /* 0x13aefc */
-extern unsigned char *DAT_0061996c; /* 0x61996c */
-extern unsigned char DAT_00619970; /* 0x619970 */
-extern unsigned char DAT_00619971; /* 0x619971 */
-extern unsigned char DAT_00619972; /* 0x619972 */
-extern unsigned int DAT_00619974; /* 0x619974 */
-extern unsigned int DAT_00619978; /* 0x619978 */
-extern unsigned int DAT_0061997c; /* 0x61997c */
-extern unsigned int DAT_00619980; /* 0x619980 */
-extern unsigned int DAT_00619984; /* 0x619984 */
-
-/* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: asdSoundSetHasStream. */
-/* Supplied declaration required: FUN_00143800. */
-/* Supplied declaration required: asdSoundDuckSetup. */
-extern int jyoucyuGetTableEntry(unsigned int);
-
+s32 jyoucyuGetTableEntry(u32 index);
+void FUN_00143800(void);
+void asdSoundSetHasStream(s32 enabled);
+void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames,
+                       u32 mode, u32 fadeInFrames, u32 fadeOutFrames);
+void *FUN_0013c174(const char *path, u32 *size, s32 flags);
 
 void FUN_0013ae58(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1 [2];
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    FUN_00143800();
-    DAT_00619971 = 0x60;
-    DAT_00619970 = DAT_00619970 | 3;
-    DAT_00619972 = 0;
-    asdSoundSetHasStream(1);
-    DAT_00619974 = 0x3f19999a;
-    DAT_00619978 = 5;
-    DAT_0061997c = 0x1e;
-    DAT_00619980 = 1;
-    DAT_00619984 = 0x14;
-    asdSoundDuckSetup(1);
-    temp_v1[0] = 0;
-    if (DAT_0061996c == (unsigned char *)0x0) {
-      puVar2 = &LAB_0013aefc;
-      FUN_0013c174(&LAB_0013aefc,temp_v1,0);
-      DAT_0061996c = puVar2;
+    /* The voice state extends beyond the currently shared Block61978c prefix. */
+    struct VoiceStateView {
+        u8 voices[0x1E0];
+        void *panTable;
+        u8 flags;
+        u8 volume;
+        u8 currentVoice;
+        u8 unk1E7;
+        f32 duckLevel;
+        u32 holdFrames;
+        u32 mode;
+        u32 fadeInFrames;
+        u32 fadeOutFrames;
+    };
+    VoiceStateView *state = (VoiceStateView *)&DAT_0061978c;
+    if (jyoucyuGetTableEntry(1) == 0) {
+        FUN_00143800();
+        state->volume = 0x60;
+        state->flags |= 3;
+        state->currentVoice = 0;
+        asdSoundSetHasStream(1);
+        state->duckLevel = 0.6f;
+        state->holdFrames = 5;
+        state->mode = 30;
+        state->fadeInFrames = 1;
+        state->fadeOutFrames = 20;
+        asdSoundDuckSetup(state->duckLevel, 1, state->holdFrames, state->mode,
+                          state->fadeInFrames, state->fadeOutFrames);
+        u32 size = 0;
+        if (state->panTable == NULL) {
+            state->panTable = FUN_0013c174("snd/voice_pan.tbl", &size, 0);
+        }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

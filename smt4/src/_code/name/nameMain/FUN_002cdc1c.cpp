@@ -6,7 +6,7 @@ extern "C" {
 
 int nameMainCreateJobs(unsigned int *, int);
 int scrCommMessageSetMode(...);
-int FUN_00295660(int, unsigned int);
+int textEncodeFontSlot(int, unsigned int);
 int buttonHelpSetPreset(int);
 int asdMemFree(void);
 int FUN_0033f7f4(void);
@@ -24,7 +24,7 @@ extern unsigned int *DAT_0044d184; /* 0x44d184 */
 extern unsigned int gameDataGetSecondName(void);
 extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: scrCommMessageSetMode. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 extern unsigned int scrGetArg(unsigned int);
 extern int jobFind(unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -70,12 +70,12 @@ unsigned int FUN_002cdc1c(void)
   if (temp_v2 != 1) {
     if (temp_v2 == 2) {
       temp_v1 = gameDataGetSecondName();
-      FUN_00295660(0x33,temp_v1);
+      textEncodeFontSlot(0x33,temp_v1);
     }
   }
   else {
     temp_v1 = gameDataGetPlayerName();
-    FUN_00295660(0x33,temp_v1);
+    textEncodeFontSlot(0x33,temp_v1);
   }
   g_name = 0;
   scrCommMessageSetMode(0xffffffff);

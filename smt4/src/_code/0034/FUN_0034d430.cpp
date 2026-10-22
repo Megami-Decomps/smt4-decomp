@@ -1,67 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034d430` (_code @ 0x34d430, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Scratch-buffer address calculations and loop load/store register allocation differ. */
+#include "common.h"
+#include <stddef.h>
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+void FUN_0023aa3c(u32 key, u32 *output);
+void FUN_003108b0(void *output, void *source);
+void FUN_0032360c(void *destination, u32 key, void *work);
 
-int FUN_0023aa3c(unsigned int, int *);
-int FUN_003108b0(unsigned char [520], unsigned char [8]);
-int FUN_0032360c(unsigned char [8], unsigned int, unsigned char [520]);
-
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spC4; /* 0xc4: local_c4 */
-    unsigned int sp14C; /* 0x14c: local_14c */
-    unsigned int sp170; /* 0x170: local_170 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0023aa3c. */
-/* Supplied declaration required: FUN_003108b0. */
-/* Supplied declaration required: FUN_0032360c. */
-
-
-void FUN_0034d430(int param_1,unsigned int param_2)
-
+void FUN_0034d430(ParameterUpdatePrefixIV *state, u32 key, f32 amount)
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_s0;
-  unsigned char temp_v2 [520];
-  unsigned char temp_v3 [8];
-  unsigned char *temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6 [4];
-  unsigned char temp_v7 [8];
-  unsigned char *temp_v8;
-  unsigned int temp_v9;
-  int temp_v10;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  
-  *(unsigned int *)(param_1 + 4) = param_2;
-  *(unsigned int *)(param_1 + 0x30) = in_s0;
-  FUN_0023aa3c(param_2,&temp_v10);
-  if (*(int *)(param_1 + 8) != 0) {
-    temp_v1 = 0;
-    do {
-      temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + temp_v1 * 4);
-      *(unsigned int *)(temp_v0 + 0x7c) = temp_v10;
-      *(unsigned int *)(temp_v0 + 0x80) = uStack_24;
-      *(unsigned int *)(temp_v0 + 0x84) = uStack_20;
-      *(unsigned int *)(temp_v0 + 0x88) = *(unsigned int *)(temp_v0 + 0x88) | 0x800;
-      temp_v9 = *(unsigned int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + temp_v1 * 4);
-      temp_v4 = temp_v6;
-      FUN_003108b0(temp_v2,temp_v3);
-      temp_v5 = *(unsigned int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + temp_v1 * 4);
-      temp_v8 = temp_v3;
-      FUN_0032360c(temp_v7,*(unsigned int *)(param_1 + 4),temp_v2);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 3);
-  }
-  return;
-}
+    struct SourceView {
+        u8 unk00[8];
+        u32 *auxiliary;
+        u8 unk0C[0x20];
+        ParameterTargetPrefixIV *target;
+    };
+    struct ApplyView {
+        u8 unk00[8];
+        SourceView *source;
+        u8 unk0C[0x1C];
+        ParameterTargetPrefixIV *target;
+    };
+    // These views identify observed accesses, not complete descriptor sizes.
+    struct ScratchView {
+        u32 words[0x358 / 4];
+        u32 parameters[3];
+    };
+    typedef char SourceOffsets[
+        offsetof(SourceView, auxiliary) == 8 &&
+        offsetof(SourceView, target) == 0x2C &&
+        sizeof(SourceView) == 0x30 ? 1 : -1];
+    typedef char ApplyOffsets[
+        offsetof(ApplyView, source) == 8 &&
+        offsetof(ApplyView, target) == 0x28 &&
+        sizeof(ApplyView) == 0x2C ? 1 : -1];
+    typedef char ScratchOffsets[
+        offsetof(ScratchView, parameters) == 0x358 &&
+        sizeof(ScratchView) == 0x364 ? 1 : -1];
 
-} /* extern "C" */
+    state->key = key;
+    state->amount = amount;
+
+    ScratchView scratch;
+    FUN_0023aa3c(key, scratch.parameters);
+    if (state->binding != 0) {
+        SourceView *source = reinterpret_cast<SourceView *>(
+            &scratch.words[0x208 / 4]);
+        ApplyView *destination = reinterpret_cast<ApplyView *>(
+            &scratch.words[0x2B4 / 4]);
+
+        for (s32 index = 0; index < 3; ++index) {
+            ParameterTargetPrefixIV *target =
+                state->binding->collection->targets[index];
+            target->parameters[0] = scratch.parameters[0];
+            target->parameters[1] = scratch.parameters[1];
+            target->parameters[2] = scratch.parameters[2];
+            target->flags |= 0x800;
+
+            source->auxiliary = &scratch.words[0x2B0 / 4];
+            destination->target = state->binding->collection->targets[index];
+            FUN_003108b0(scratch.words, source);
+
+            destination->source = source;
+            source->target = state->binding->collection->targets[index];
+            FUN_0032360c(destination, state->key, scratch.words);
+        }
+    }
+}
+}

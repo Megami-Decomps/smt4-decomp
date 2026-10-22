@@ -1,72 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027e5e4` (_code @ 0x27e5e4, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains an unused pure getter call; FSM and flag-register scheduling also differ. */
+#include "battle/btlUnit.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
+
+struct BattleUnitStateWork {
+    u8 unk00[0x48];
+    s32 state;
+    s32 timer;
+    u32 flags;
+    u8 unk54[0xC];
+    s16 actor;
+    s16 target;
+    u8 unk64[0x3C];
+    s32 step;
+};
+typedef char BattleUnitStateWorkOffsets[offsetof(BattleUnitStateWork, state) == 0x48 &&
+    offsetof(BattleUnitStateWork, actor) == 0x60 && offsetof(BattleUnitStateWork, step) == 0xA0 ? 1 : -1];
 
 extern "C" {
+BtlMainState* btlGetMainState(void);
+BtlUnitData* FUN_0027da30(BtlMainState* battle, s32 index);
 
-int FUN_0027da30(int, int);
-int btlGetMainState(void);
-
-typedef struct fn_0027e5e4_arg0 fn_0027e5e4_arg0;
-struct fn_0027e5e4_arg0 {
-    unsigned char pad_0x0[0x48];
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-    uint field_0x50; /* +0x50 */
-    unsigned char pad_0x54[0xc];
-    short field_0x60; /* +0x60 */
-    short field_0x62; /* +0x62 */
-    unsigned char pad_0x64[0x3c];
-    undefined4 field_0xa0; /* +0xa0 */
-};
-
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: btlGetMainState. */
-
-
-void FUN_0027e5e4(fn_0027e5e4_arg0 *param_1)
-
+// Refresh the unit state machine and mirror its status mask onto the actor entry.
+void FUN_0027e5e4(BattleUnitStateWork* work)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v0 = btlGetMainState();
-  FUN_0027da30(temp_v0,(int)param_1->field_0x62);
-  if (temp_v0 != 0) {
-    if ((*(unsigned short *)(temp_v0 + 0xfa) & 0x180) != 0) {
-      btlGetMainState();
-      param_1->field_0x48 = 3;
-      param_1->field_0x4c = 0;
-      param_1->field_0xa0 = 0;
+    BtlUnitData* data = FUN_0027da30(btlGetMainState(), work->target);
+    if (data == NULL) {
+        return;
     }
-    else if ((param_1->field_0x50 & 0x80) != 0) {
-      param_1->field_0x48 = 0;
-      param_1->field_0x4c = 0;
-      param_1->field_0xa0 = 0;
-      if (-1 < param_1->field_0x60) {
-        temp_v1 = btlGetMainState();
-        puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1->field_0x60 * 0x288);
-        *puVar3 = *puVar3 & 0xfff7ffff;
-      }
-    }
-    if (-1 < param_1->field_0x60) {
-      temp_v1 = btlGetMainState();
-      puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1->field_0x60 * 0x288);
-      if (puVar3 != (unsigned int *)0x0) {
-        if ((*(unsigned short *)(temp_v0 + 0xfa) & 1000) == 0) {
-          temp_v2 = *puVar3 & 0xfff7ffff;
+    if (data->unk0FA & 0x180) {
+        work->state = 3;
+        work->timer = 0;
+        work->step = 0;
+    } else if (work->flags & 0x80) {
+        work->state = 0;
+        work->timer = 0;
+        work->step = 0;
+        if (work->actor >= 0) {
+            reinterpret_cast<BtlState*>(btlGetMainState())->units[work->actor].flags &= ~0x80000;
         }
-        else {
-          temp_v2 = *puVar3 | 0x80000;
-        }
-        *puVar3 = temp_v2;
-      }
     }
-  }
-  return;
+    if (work->actor >= 0) {
+        BtlUnitEntry* entry = &reinterpret_cast<BtlState*>(btlGetMainState())->units[work->actor];
+        if (entry != NULL) {
+            if (data->unk0FA & 0x3E8) {
+                entry->flags |= 0x80000;
+            } else {
+                entry->flags &= ~0x80000;
+            }
+        }
+    }
 }
-
-} /* extern "C" */
+}

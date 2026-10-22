@@ -48,7 +48,7 @@ extern int *DAT_0057f0a0; /* 0x57f0a0 */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-extern int FUN_004082f8(int);
+extern int gameTestProgressFlag(int);
 /* Supplied declaration required: FUN_004930e4. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a4848. */
@@ -118,7 +118,7 @@ void Obj55c8d0::start()
     temp_v0 = 1;
     *(unsigned short *)((int)param_1 + 0xa97a) = 0;
     do {
-      temp_v1 = FUN_004082f8(temp_v0);
+      temp_v1 = gameTestProgressFlag(temp_v0);
       if (temp_v1 != 0) {
         *(short *)((int)param_1 + *(short *)((int)param_1 + 0xa97a) * 2 + 0xa87a) = (short)temp_v0;
         if (param_1[0x2a1d] == temp_v0) {

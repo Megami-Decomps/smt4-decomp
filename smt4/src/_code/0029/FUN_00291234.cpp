@@ -1,51 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00291234` (_code @ 0x291234, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: coin result uses TST rather than SXTB/CMP, and VFP conversion/division intermediates differ. */
+#include "common.h"
 
-extern "C" {
+extern "C" s32 randBetween(s32 lower, s32 upper);
 
-int randBetween(...);
-int VectorSignedToFloat(unsigned int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: randBetween. */
-
-
-void FUN_00291234(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Choose a scaled magnitude, optionally negating it or choosing its sign at random. */
+extern "C" f32 FUN_00291234(s32 mode, s32 lower, s32 upper, u32 divisor)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_fpscr;
-  
-  if (param_1 == 0) {
-    temp_v1 = randBetween(param_2,param_3);
-    VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorUnsignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    return;
-  }
-  if (param_1 != 1) {
-    if (param_1 == 2) {
-      temp_v0 = randBetween(0,1);
-      if (temp_v0 == '\0') {
-        temp_v1 = randBetween(param_2,param_3);
-        VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorUnsignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-        return;
-      }
-      temp_v1 = randBetween(param_2,param_3);
-      VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorUnsignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
+    f32 result = 0.0f;
+    if (mode == 0) {
+        return (f32)randBetween(lower, upper) / (f32)divisor;
     }
-    return;
-  }
-  temp_v1 = randBetween(param_2,param_3);
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return;
+    if (mode == 1) {
+        return -((f32)randBetween(lower, upper) / (f32)divisor);
+    }
+    if (mode == 2) {
+        if ((s8)randBetween(0, 1) == 0) {
+            return -((f32)randBetween(lower, upper) / (f32)divisor);
+        }
+        result = (f32)randBetween(lower, upper) / (f32)divisor;
+    }
+    return result;
 }
-
-} /* extern "C" */

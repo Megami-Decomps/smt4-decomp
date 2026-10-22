@@ -1,56 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a9cac` (_code @ 0x3a9cac, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the remaining count and category walker in different registers. */
+#include "common.h"
 
 extern "C" {
+s32 scrGetArg(u32 index);
+void *btlGetMainState();
+void *btlGetTable(void *state, u32 table);
+u16 *dataTableGetEntries(void *table);
+u32 dataTableGetCount(void *table);
+s32 randRange(u16 maximum);
+void scrSetResult(s32 result);
 
-int scrSetResult(int);
-
-extern unsigned int btlGetMainState(void);
-extern int randRange(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned short *dataTableGetEntries(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int btlGetTable(unsigned int, unsigned int);
-
-
-unsigned int FUN_003a9cac(void)
-
+// Pick a random table entry whose category matches the script argument.
+u32 FUN_003a9cac()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned short *puVar6;
-  unsigned short *puVar7;
-  unsigned short temp_v4 [12];
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlGetMainState();
-  temp_v1 = btlGetTable(temp_v1,8);
-  puVar3 = (unsigned short *)dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v1);
-  temp_v2 = temp_v2 >> 1;
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    puVar6 = puVar3 + 1;
-    do {
-      if (*puVar6 == temp_v0) {
-        puVar7 = temp_v4 + temp_v3;
-        temp_v3 = temp_v3 + 1;
-        *puVar7 = *puVar3;
-      }
-      temp_v2 = temp_v2 - 1;
-      puVar6 = puVar6 + 2;
-      puVar3 = puVar3 + 2;
-    } while (temp_v2 != 0);
-  }
-  temp_v3 = randRange((temp_v3 - 1U) & 0xffff);
-  scrSetResult(temp_v4[temp_v3]);
-  return 1;
+    u32 category = scrGetArg(0);
+    void *table = btlGetTable(btlGetMainState(), 8);
+    u16 *entry = dataTableGetEntries(table);
+    s32 remaining = dataTableGetCount(table) >> 1;
+    u16 matches[12];
+    s32 count = 0;
+    if (remaining > 0) {
+        for (u16 *entryCategory = entry + 1; remaining > 0; --remaining) {
+            if (*entryCategory == category) {
+                matches[count++] = *entry;
+            }
+            entryCategory += 2;
+            entry += 2;
+        }
+    }
+    s32 selected = randRange((u16)(count - 1));
+    scrSetResult(matches[selected]);
+    return 1;
 }
-
-} /* extern "C" */
+}

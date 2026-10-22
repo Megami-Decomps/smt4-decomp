@@ -1,58 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b838` (_code @ 0x33b838, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/UnitStats.h"
+#include "gamedata/DevilRecord.h"
+#include "gamedata/SkillFlags.h"
 
 extern "C" {
+SkillFlagsRecord* dataTable06Sub1GetRecord(u32 id);
+s32 saveIsRecordValueBounded(u16 id);
+s32 flagBitIsSet(u32 flag);
+s32 randNextInRange(u32 maximum);
 
-int dataTable06Sub1GetRecord(void);
-int devilGetRecord(void);
-
-extern int saveIsRecordValueBounded(unsigned short);
-extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: devilGetRecord. */
-extern int randNextInRange(unsigned int);
-
-
-unsigned int FUN_0033b838(int param_1,int param_2,int param_3)
-
+// Test repeated activation rolls for a unit carrying a skill with the trigger flag.
+u32 FUN_0033b838(const StatBlock* unit, s32 attempts, s32 forced)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (0 < param_2) {
-    temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x46);
-    devilGetRecord();
-    temp_v1 = saveIsRecordValueBounded(*(unsigned short *)(param_1 + 0x46));
-    temp_v3 = temp_v1 / 500 + (*(unsigned int *)(temp_v0 + 0x2c) & 0x7f);
-    temp_v1 = flagBitIsSet(5);
-    if (temp_v1 != 0) {
-      temp_v3 = temp_v3 + 0x1e;
+    if (attempts > 0) {
+        DevilRecord* record = reinterpret_cast<DevilRecord*>(devilGetRecord(unit->id));
+        s32 chance = saveIsRecordValueBounded(unit->id) / 500 + record->chance.unk00;
+        if (flagBitIsSet(5)) {
+            chance += 30;
+        }
+        for (s32 attempt = 0; attempt < attempts; ++attempt) {
+            s32 roll = randNextInRange(99);
+            if (forced) {
+                roll = -1;
+            }
+            if (roll < chance) {
+                const u16* skills = unit->resist;
+                for (s32 slot = 0; slot < 8; ++slot) {
+                    SkillFlagsRecord* skill = dataTable06Sub1GetRecord(skills[slot]);
+                    if (skill->flags & 0x40) {
+                        return 1;
+                    }
+                }
+            }
+        }
     }
-    temp_v1 = 0;
-    do {
-      temp_v2 = randNextInRange(99);
-      if (param_3 != 0) {
-        temp_v2 = -1;
-      }
-      if (temp_v2 < temp_v3) {
-        temp_v2 = 0;
-        do {
-          temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x34 + temp_v2 * 2);
-          dataTable06Sub1GetRecord();
-          if ((*(unsigned char *)(temp_v0 + 3) & 0x40) != 0) {
-            return 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 8);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < param_2);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

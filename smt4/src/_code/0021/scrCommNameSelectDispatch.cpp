@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern s32 FUN_00295660(u32 kind, char *name);
+extern s32 textEncodeFontSlot(u32 kind, char *name);
 extern s32 FUN_0029ede8(u32 kind, u32 arg, u32 a2, s32 a3);
 extern char *FUN_002bd06c(u32 id);
 extern char *FUN_002be650(u32 id, s32 flag);
@@ -35,7 +35,7 @@ u32 scrCommNameSelectDispatch(void)
     case 0x22:
     case 0x23:
         libc_strcpy(name, FUN_002be650(arg, 1));
-        FUN_00295660(kind, name);
+        textEncodeFontSlot(kind, name);
         break;
     case 8:
     case 9:
@@ -46,21 +46,21 @@ u32 scrCommNameSelectDispatch(void)
     case 14:
     case 15:
         libc_strcpy(name, FUN_002bd06c((u16)arg));
-        FUN_00295660(kind, name);
+        textEncodeFontSlot(kind, name);
         break;
     case 0x10:
     case 0x11:
     case 0x12:
     case 0x13:
         libc_strcpy(name, aocEntryDataById((s16)arg, 1));
-        FUN_00295660(kind, name);
+        textEncodeFontSlot(kind, name);
         break;
     case 0x14:
     case 0x15:
     case 0x16:
     case 0x17:
         libc_strcpy(name, aocIndexValueOrDefault(arg));
-        FUN_00295660(kind, name);
+        textEncodeFontSlot(kind, name);
         break;
     case 0x18:
     case 0x19:

@@ -1,60 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fe298` (_code @ 0x3fe298, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler recognizes REV instead of retail's expanded byte swap and shares dirty-flag stores differently. */
+#include "common.h"
 
-extern "C" {
+struct ShaderColorState {
+    u16 flags;
+    u8 unk02[0x22];
+    u32 material[6];
+    u32 lights[3];
+};
 
-
-void FUN_003fe298(unsigned short *param_1,unsigned int param_2,unsigned int param_3)
-
+// Store a byte-reversed color and mark the corresponding material or lighting block dirty.
+extern "C" void FUN_003fe298(ShaderColorState *state, u32 index, u32 color)
 {
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = (param_3 << 0x18) | (((param_3 & 0xffff) >> 8) << 0x10) |
-          (((param_3 & 0xffffff) >> 0x10) << 8) | (param_3 >> 0x18);
-  switch(param_2) {
-  case 0:
-    *(unsigned int *)(param_1 + 0x12) = temp_v1;
-    *param_1 = *param_1 | 0x400;
-    return;
-  case 1:
-    *(unsigned int *)(param_1 + 0x14) = temp_v1;
-    *param_1 = *param_1 | 0x400;
-    return;
-  case 2:
-    *(unsigned int *)(param_1 + 0x16) = temp_v1;
-    *param_1 = *param_1 | 0x400;
-    return;
-  case 3:
-    *(unsigned int *)(param_1 + 0x18) = temp_v1;
-    temp_v0 = *param_1 | 0x400;
-    break;
-  case 4:
-    *(unsigned int *)(param_1 + 0x1a) = temp_v1;
-    temp_v0 = *param_1 | 0x400;
-    break;
-  case 5:
-    *(unsigned int *)(param_1 + 0x1c) = temp_v1;
-    temp_v0 = *param_1 | 0x400;
-    break;
-  case 6:
-    *(unsigned int *)(param_1 + 0x1e) = temp_v1;
-    temp_v0 = *param_1 | 0x200;
-    break;
-  case 7:
-    *(unsigned int *)(param_1 + 0x20) = temp_v1;
-    temp_v0 = *param_1 | 0x200;
-    break;
-  case 8:
-    *(unsigned int *)(param_1 + 0x22) = temp_v1;
-    temp_v0 = *param_1 | 0x200;
-    break;
-  default:
-    return;
-  }
-  *param_1 = temp_v0;
-  return;
+    u32 value = (color << 24) | ((u32)(u8)(color >> 8) << 16) |
+        ((u32)(u8)(color >> 16) << 8) | (color >> 24);
+    switch (index) {
+    case 0: state->material[0] = value; state->flags |= 0x400; return;
+    case 1: state->material[1] = value; state->flags |= 0x400; return;
+    case 2: state->material[2] = value; state->flags |= 0x400; break;
+    case 3: state->material[3] = value; state->flags |= 0x400; break;
+    case 4: state->material[4] = value; state->flags |= 0x400; break;
+    case 5: state->material[5] = value; state->flags |= 0x400; break;
+    case 6: state->lights[0] = value; state->flags |= 0x200; break;
+    case 7: state->lights[1] = value; state->flags |= 0x200; break;
+    case 8: state->lights[2] = value; state->flags |= 0x200; break;
+    }
 }
-
-} /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0029212c(int);
 int btlGetMainState(void);
-int FUN_0029c94c(unsigned int);
+int buttonHelpShowSkillDetails(unsigned int);
 int FUN_0029da34(unsigned int, int, int, unsigned int);
 int FUN_0029ee6c(unsigned int, int);
 int FUN_00309bc8(unsigned int, int);
@@ -28,7 +28,7 @@ extern unsigned int listGetU16OrZero(unsigned int, unsigned int);
 extern int flagBitIsSet(int);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00297ca4(int, unsigned int);
-/* Supplied declaration required: FUN_0029c94c. */
+/* Supplied declaration required: buttonHelpShowSkillDetails. */
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(unsigned int);
@@ -102,7 +102,7 @@ void FUN_00292f4c(int param_1)
         temp_v3 = FUN_0028d24c();
       }
       if (temp_v3 != 0) {
-        FUN_0029c94c(temp_v3);
+        buttonHelpShowSkillDetails(temp_v3);
         return;
       }
     }
@@ -118,7 +118,7 @@ void FUN_00292f4c(int param_1)
     }
     temp_v0 = btlGetMainState();
     if ((*(unsigned int *)(temp_v0 + 0x44a8) & 0x40) != 0) {
-      FUN_0029c94c(temp_v3);
+      buttonHelpShowSkillDetails(temp_v3);
       return;
     }
     temp_v3 = (unsigned int)*(unsigned short *)(param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v3 * 2 + 0x341a);
@@ -166,7 +166,7 @@ void FUN_00292f4c(int param_1)
   if (temp_v3 == 0) {
     return;
   }
-  FUN_0029c94c(temp_v3);
+  buttonHelpShowSkillDetails(temp_v3);
   return;
 }
 

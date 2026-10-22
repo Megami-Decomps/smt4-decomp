@@ -31,7 +31,7 @@ int FUN_0017ffa8(int, int, int, int);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -84,7 +84,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 extern int asdTMTexTableGetNode(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 char FUN_0014f3f4(void)
@@ -140,7 +140,7 @@ char FUN_0014f3f4(void)
       temp_v7 = vec2GetXInt();
       temp_v6 = vec2GetYInt(temp_v6);
       temp_v18 = temp_v24;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v16 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00157558(g_renderCtx);
       temp_v7 = FUN_001692ac(1,0);
@@ -176,7 +176,7 @@ char FUN_0014f3f4(void)
       efctSetSpeed();
       temp_v24 = 0.35f;
       temp_v19 = CONCAT44(0x3eb33333,temp_v18);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v11 = 0;
       do {
         temp_v21 = 0x10;
@@ -185,18 +185,18 @@ char FUN_0014f3f4(void)
         temp_v11 = temp_v11 + 1;
       } while (temp_v11 < 9);
       temp_v24 = (float)((unsigned long long)temp_v19 >> 0x20);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v18 = (float)temp_v19;
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
       FUN_001835b4(2,4,temp_v6 + 0xabec,temp_v12 + (int)temp_v24);
       temp_v16 = 0.29f;
       temp_v24 = temp_v16;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
       FUN_001835b4(2,4,temp_v6 + 0xabee,temp_v12 + (int)temp_v16);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v15 = (int)temp_v24;
       temp_v21 = 0x15;
       temp_v20 = temp_v8;
@@ -264,7 +264,7 @@ char FUN_0014f3f4(void)
   case 0x12:
   case 0x13:
     temp_v24 = temp_v18;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v6 = (int)temp_v18;
     if (*(char *)(temp_v5 + 9) == '\a' || *(char *)(temp_v5 + 9) == '\t') {
       efctSetSpeed();
@@ -386,7 +386,7 @@ char FUN_0014f3f4(void)
     do {
       if (*(char *)(temp_v5 + temp_v6 + 0x37) != '\0') {
         temp_v16 = temp_v24;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         VectorSignedToFloat((int)temp_v24,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_001634b4(temp_v5 + temp_v6 * 0x8c + 0x588);
         temp_v24 = temp_v16;
@@ -401,7 +401,7 @@ char FUN_0014f3f4(void)
     FUN_00183bb0();
     if (*(char *)(temp_v5 + 0x5c) != '\0') {
       temp_v24 = 0.27f;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       VectorSignedToFloat((int)temp_v24,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001634b4(temp_v5 + *(short *)(temp_v5 + 0x56) * 0x8c + 0x844);
     }
@@ -508,7 +508,7 @@ LAB_0014fe60:
           temp_v24 = temp_v18;
           temp_v11 = FUN_001834a4(8,temp_v6 + temp_v12);
           temp_v18 = temp_v24;
-          FUN_001879d0(g_renderCtx);
+          renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v20 = 6;
           temp_v21 = temp_v12;
           FUN_00164168(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v11 + 8) + (int)temp_v24);
@@ -533,7 +533,7 @@ LAB_0014fe60:
         else {
           temp_v6 = FUN_001834a4(8,0x28);
         }
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         FUN_00163ec4(*(unsigned int *)(temp_v5 + 4),(int)*(short *)(temp_v6 + 8) + (int)temp_v18,
                      *(short *)(temp_v6 + 10) - 1,0x33);
       }
@@ -545,7 +545,7 @@ LAB_0014fe60:
     temp_v7 = FUN_001692ac(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v22 = FUN_001688c4(*(unsigned int *)(temp_v5 + 4));
     temp_v6 = FUN_001834a4(8,0x8e);
     temp_v2 = *(short *)(temp_v6 + 8);
@@ -578,7 +578,7 @@ LAB_0014fe60:
     temp_v7 = FUN_001692ac(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v6 = FUN_001834a4(8,0x8e);
     if ((*(char *)(temp_v5 + 0x5c) != '\0') &&
        (temp_v8 = temp_v5 + *(short *)(temp_v5 + 0x56) * 0x8c,

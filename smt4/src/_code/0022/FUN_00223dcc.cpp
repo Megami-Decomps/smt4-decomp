@@ -10,7 +10,7 @@ int statusCameraDestroy(void);
 int FUN_00294834(int, int, int, int, int, int);
 int FUN_002958f8(int, int);
 int gameCounterAddSaturating(int, int);
-int FUN_0029c2cc(int, int);
+void FUN_0029c2cc(int, int);
 int fileSlotFree(...);
 int scrScriptProcessDestroy(int);
 int asdModelSlotRelease(int);

@@ -8,7 +8,7 @@ int screenDrawShadedRect(...);
 int FUN_002996d8(int);
 int FUN_0029dfc0(int);
 int FUN_002ae038(int *);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002be5a4(int, unsigned int, int);
 int FUN_002bed3c(void);
 int FUN_002bf380(int, int, int, int, int, int);
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002996d8. */
 /* Supplied declaration required: FUN_0029dfc0. */
 /* Supplied declaration required: FUN_002ae038. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -97,7 +97,7 @@ unsigned char FUN_001ed9a0(void)
         FUN_002bf4f8(0x36,0x56);
         temp_v4 = FUN_002bf4f8(0x36,0x59);
         temp_v10 = 0.305f;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         FUN_002bf380(2,0x36,7,(int)temp_v10,0,0xf1);
         temp_v0 = *(char *)(temp_v5 + 0x49);
         temp_v1 = **(short **)(temp_v4 + 0xc);

@@ -1,101 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a40f4` (_code @ 0x4a40f4, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: variant-byte address formation and flag reloads differ. */
+#include "ui/ItemListSelection.h"
+
+// Adding word fields would raise the alignment and size of the shared halfword-ended owner.
+struct ItemListFlowView {
+    u8 unk00[0x14];
+    u32 state;
+    u32 step;
+};
+struct AnimatedPageSelectionView {
+    u32 unk00;
+    s32 selection;
+};
+struct ItemVariantStateView {
+    u8 unk00[0xf];
+    u8 variant;
+};
+typedef char ItemListFlowOffsetsCheck[offsetof(ItemListFlowView, state) == 0x14 &&
+    offsetof(ItemListFlowView, step) == 0x18 &&
+    offsetof(AnimatedPageSelectionView, selection) == 4 &&
+    offsetof(ItemVariantStateView, variant) == 0xf ? 1 : -1];
 
 extern "C" {
+extern AnimatedPageSelectionView g_animatedPageSelection;
+bool useCounterIsFinished();
+void useCounterRelease();
+void sysPlaySe(u32 sound);
+void FUN_003343f0(u32 mode);
+s32 FUN_002c7c54();
+ItemVariantStateView *FUN_0026140c();
+void FUN_004a84e8(ItemListSelectionEntry *selection, u8 animation);
+void FUN_004a3e04(ItemListSelectionOwner *owner);
 
-int sysPlaySe(...);
-int FUN_003343f0(...);
-int useCounterRelease(...);
-int FUN_004a3e04(...);
-int FUN_004a84e8(...);
-
-typedef struct fn_004a40f4_arg0 fn_004a40f4_arg0;
-struct fn_004a40f4_arg0 {
-    unsigned char pad_0x0[0x14];
-    unsigned char field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    unsigned char field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0xf];
-    undefined4 field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x68];
-    char field_0x94; /* +0x94 */
-    unsigned char pad_0x95[0x3b];
-    short field_0xd0; /* +0xd0 */
-    short field_0xd2; /* +0xd2 */
-    unsigned char pad_0xd4[0x78c];
-    byte field_0x860; /* +0x860 */
-    byte field_0x861; /* +0x861 */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
-
-/* Supplied declaration required: sysPlaySe. */
-extern int useCounterIsFinished(void);
-extern int FUN_0026140c(void);
-extern int FUN_002c7c54(void);
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: useCounterRelease. */
-/* Supplied declaration required: FUN_004a3e04. */
-/* Supplied declaration required: FUN_004a84e8. */
-
-
-void FUN_004a40f4(fn_004a40f4_arg0 *param_1)
-
+void FUN_004a40f4(ItemListSelectionOwner *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char temp_v2;
-  
-  temp_v1 = useCounterIsFinished();
-  if (temp_v1 != 0) {
-    useCounterRelease();
-    sysPlaySe(0x2f);
-    FUN_003343f0(0);
-    *(unsigned int *)&param_1->field_0x14 = 2;
-    *(unsigned int *)&param_1->field_0x18 = 0;
-  }
-  else {
-    temp_v1 = FUN_002c7c54();
-    if (temp_v1 != 0x69) {
-      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
-      if (*(short *)(param_1 + 1) != 0) {
-        temp_v1 = FUN_0026140c();
-        pbVar3 = (unsigned char *)(temp_v1 + 0xf);
-        temp_v2 = *pbVar3 & 0x7f;
-        if (temp_v2 == 1) {
-          temp_v0 = '\x06';
+    if (useCounterIsFinished()) {
+        useCounterRelease();
+        sysPlaySe(0x2f);
+        FUN_003343f0(0);
+        ItemListFlowView *flow = (ItemListFlowView *)owner;
+        flow->state = 2;
+        flow->step = 0;
+    } else if (FUN_002c7c54() != 0x69) {
+        g_animatedPageSelection.selection = -1;
+        if ((s16)owner->selection.value != 0) {
+            ItemVariantStateView *state = FUN_0026140c();
+            u8 animation;
+            switch (state->variant & 0x7f) {
+            case 1: animation = 6; break;
+            case 2: animation = 4; break;
+            case 3: animation = 0x16; break;
+            case 7: animation = 0x18; break;
+            default:
+                animation = 6;
+                state->variant = (state->variant & 0x80) | 1;
+                break;
+            }
+            if (state->variant & 0x80) {
+                ++animation;
+            }
+            FUN_004a84e8(&owner->selection, animation);
         }
-        else if (temp_v2 == 2) {
-          temp_v0 = '\x04';
-        }
-        else if (temp_v2 == 3) {
-          temp_v0 = '\x16';
-        }
-        else if (temp_v2 == 7) {
-          temp_v0 = '\x18';
-        }
-        else {
-          temp_v0 = '\x06';
-          *pbVar3 = (*pbVar3 & 0x80) | 1;
-        }
-        if ((*pbVar3 & 0x80) != 0) {
-          temp_v0 = temp_v0 + '\x01';
-        }
-        FUN_004a84e8(param_1 + 1,temp_v0);
-      }
-      FUN_004a3e04(param_1);
-      return;
+        FUN_004a3e04(owner);
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

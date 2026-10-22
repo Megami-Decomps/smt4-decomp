@@ -7,7 +7,7 @@ extern "C" {
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 
 /* stack frame of param_5: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_0049ec78(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -48,7 +48,7 @@ void FUN_0049ec78(int param_1,int param_2,int param_3,int param_4,int param_5)
      )) {
     temp_v7 = 0.25f;
     temp_v6 = temp_v7;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x84) + temp_v5 * 10 + 0x36);
     temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x84) + temp_v5 * 10 + 0x38);
     if (temp_v4 != 0) {
@@ -90,7 +90,7 @@ void FUN_0049ec78(int param_1,int param_2,int param_3,int param_4,int param_5)
     efctSetSpeed();
     temp_v1 = **(short **)(param_1 + 0x84);
     if ((temp_v1 != 3 && temp_v1 != 9) && (temp_v1 != 0xb)) {
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       efctSetSpeed();
       FUN_001835b4(2,0x33,0x29,param_3 + (int)temp_v6,param_4,param_5 + 10);
       efctSetSpeed();

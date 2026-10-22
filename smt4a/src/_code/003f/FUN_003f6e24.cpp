@@ -8,7 +8,7 @@ int vec2GetXInt(int);
 int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, unsigned int, int);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_003f54c4(...);
 int FUN_003f5b14(int, int, int, int, int);
 int FUN_003f61b4(...);
@@ -25,7 +25,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003f54c4. */
 /* Supplied declaration required: FUN_003f5b14. */
 /* Supplied declaration required: FUN_003f61b4. */
@@ -44,7 +44,7 @@ void FUN_003f6e24(int param_1,int param_2,unsigned int param_3)
   vec2GetXInt(param_1 + 0x540);
   vec2GetYInt(param_1 + 0x540);
   temp_v4 = 0.26f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   param_2 = param_2 + (int)temp_v4;
   efctSetSpeed();
   FUN_001835b4(2,0x31,0,param_2,param_3,0x8d);

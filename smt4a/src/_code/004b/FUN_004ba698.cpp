@@ -1,62 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ba698` (_code @ 0x4ba698, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Animation flag zero-tests use unsigned byte loads and different address grouping. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+s32 asdTMTexTableNodeIsLoaded(u32 tableId);
+s32 rangeGetMinimumLimit(SequentialAnimationPrefixA *state);
+void FUN_00163aa4(void *work, f32 step);
+void FUN_00167458(void *work, s32 mode);
 
-int FUN_00163aa4(int);
-int FUN_00167458(int, int);
-int SBORROW4(int, int);
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: FUN_00167458. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int);
-extern int rangeGetMinimumLimit(int);
-
-
-int FUN_004ba698(int param_1)
-
+s32 FUN_004ba698(SequentialAnimationPrefixA *state)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  if (*(int *)(param_1 + 8) == 0) {
-    temp_v0 = 1;
-  }
-  else {
-    if ((*(int *)(param_1 + 0x1020) != -1) && (temp_v0 = asdTMTexTableNodeIsLoaded(0x1f), temp_v0 == 0)) {
-      return 0;
-    }
-    temp_v0 = rangeGetMinimumLimit(param_1);
-    temp_v2 = 0;
-    if (temp_v2 < temp_v0) {
-      do {
-        if (temp_v2 <= *(int *)(param_1 + 0x1014)) {
-          FUN_00163aa4(param_1 + temp_v2 * 0x8c + 0xa10);
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < temp_v0);
-    }
-    *(int *)(param_1 + 0x1014) = *(int *)(param_1 + 0x1014) + 1;
-    FUN_00167458(param_1 + 200,0);
-    temp_v3 = *(char *)(param_1 + 0x152) != '\0';
-    temp_v2 = 0;
-    temp_v1 = 0;
-    if (temp_v3) {
-      temp_v1 = *(int *)(param_1 + 0x1014);
-      temp_v2 = temp_v1 - temp_v0;
-    }
-    if (((temp_v3 && temp_v1 != temp_v0) && temp_v2 < 0 == (temp_v3 && SBORROW4(temp_v1,temp_v0))) &&
-       (*(char *)(param_1 + temp_v0 * 0x8c + 0xa0e) != '\0')) {
-      *(unsigned char *)(param_1 + 0x9ed) = 1;
-    }
-    temp_v0 = (int)*(char *)(param_1 + 0x9ed);
-  }
-  return temp_v0;
-}
+    if (state->activeState == 0)
+        return 1;
 
-} /* extern "C" */
+    if (state->textureId != -1 && asdTMTexTableNodeIsLoaded(31) == 0)
+        return 0;
+
+    const s32 count = rangeGetMinimumLimit(state);
+    u8 *bytes = reinterpret_cast<u8 *>(state);
+    for (s32 i = 0; i < count; ++i) {
+        if (i <= state->progress) {
+            FUN_00163aa4(bytes + (0xA10u + static_cast<u32>(i) * 0x8Cu),
+                         1.0f);
+        }
+    }
+
+    state->progress = static_cast<s32>(static_cast<u32>(state->progress) + 1u);
+    FUN_00167458(state->introWork, 0);
+
+    if (state->introFinished != 0 && state->progress > count &&
+        *reinterpret_cast<s8 *>(bytes +
+            (0xA0Eu + static_cast<u32>(count) * 0x8Cu)) != 0) {
+        state->completion = 1;
+    }
+
+    return state->completion;
+}
+}

@@ -1,67 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ccdb8` (_code @ 0x4ccdb8, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: polynomial constant multiplication, base-table branch outlining and saved registers differ from retail. */
+#include "gamedata/DataTable.h"
 
-extern "C" {
+struct UnitGrowthCostRecord {
+    u8 prefix[6];
+    u16 level;
+};
 
-int FUN_00184310(void);
-int dataTableGet(int, int);
+extern "C" const UnitGrowthCostRecord *FUN_00184310(u32 unit);
+extern "C" s32 gameGetUnlockedCountLimit(void);
 
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-extern int gameGetUnlockedCountLimit(void);
-
-
-unsigned int FUN_004ccdb8(int param_1,int param_2,int param_3)
-
+static inline u32 unitBaseGrowthCost(s32 level)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = gameGetUnlockedCountLimit();
-  if (param_2 >= temp_v0) {
-    temp_v3 = 0;
-  }
-  else {
-    dataTableGet(9,1);
-    temp_v0 = dataTableGetEntries();
-    temp_v1 = gameGetUnlockedCountLimit();
-    if (param_2 >= temp_v1) {
-      temp_v3 = 0;
+    void *table = dataTableGet(9, 1);
+    const u32 *costs = static_cast<const u32 *>(dataTableGetEntries(table));
+    if (level >= gameGetUnlockedCountLimit()) {
+        return 0;
     }
-    else if (param_2 >= 99) {
-      temp_v3 = param_2 * param_2 * 3 + (unsigned int)(param_2 * param_2 * param_2) / 100 + param_2 * 0xdb8 +
-              0x184c6;
-      if (temp_v3 >= 1000000) {
-        temp_v3 = 999999;
-      }
+    if (level >= 99) {
+        u32 cost = level * level * 3 + static_cast<u32>(level * level * level) / 100 +
+            level * 0xDB8 + 0x184C6;
+        return cost > 999999 ? 999999 : cost;
     }
-    else {
-      temp_v3 = *(unsigned int *)((temp_v0 + param_2 * 4) - 4);
-    }
-    FUN_00184310();
-    temp_v0 = (param_3 - (unsigned int)*(unsigned short *)(param_1 + 6)) + 1;
-    if (temp_v0 < 1) {
-      temp_v2 = 100;
-    }
-    else {
-      if (temp_v0 >= 11) {
-        temp_v0 = 10;
-      }
-      dataTableGet(9,2);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = (unsigned int)*(unsigned short *)((temp_v1 + temp_v0 * 2) - 2);
-    }
-    temp_v3 = (temp_v3 * temp_v2) / 100;
-    if (temp_v3 >= 1000000) {
-      temp_v3 = 999999;
-    }
-  }
-  return temp_v3;
+    return costs[level - 1];
 }
 
-} /* extern "C" */
+extern "C" u32 FUN_004ccdb8(u32 unit, s32 level, s32 referenceLevel)
+{
+    if (gameGetUnlockedCountLimit() <= level) {
+        return 0;
+    }
+    u32 cost = unitBaseGrowthCost(level);
+    s32 difference = referenceLevel - FUN_00184310(unit)->level + 1;
+    u32 scale;
+    if (difference <= 0) {
+        scale = 100;
+    } else {
+        if (difference > 10) {
+            difference = 10;
+        }
+        void *table = dataTableGet(9, 2);
+        const u16 *scales = static_cast<const u16 *>(dataTableGetEntries(table));
+        scale = scales[difference - 1];
+    }
+    cost = cost * scale / 100;
+    return cost > 999999 ? 999999 : cost;
+}

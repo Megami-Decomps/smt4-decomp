@@ -9,7 +9,7 @@ int btlDrawFloatingNumbers(int, int);
 int pairSetHalves(int, int, int);
 int FUN_002b7638(...);
 int effectRenderTransformedInstance(int);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002bf288(...);
@@ -57,7 +57,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -128,7 +128,7 @@ unsigned int FUN_001b72e0(void)
       }
       btlDrawFloatingNumbers(temp_v1,1);
       temp_v6 = 0.8f;
-      FUN_002ba12c(g_titleScene);
+      renderCtxCalculateStereoParallax(g_titleScene);
       temp_v8 = (unsigned long long)(unsigned int)(int)temp_v6;
       temp_v5 = 0;
       do {
@@ -191,10 +191,10 @@ unsigned int FUN_001b72e0(void)
         FUN_002c1b64(g_titleScene,0);
         FUN_002b7638(&temp_v10);
         temp_v6 = DAT_00439c94;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         FUN_002bf288(2,0xf,(unsigned int)*(unsigned short *)(DAT_00439c90 * 2 + 0x439cc0) * 1000,(int)temp_v6,0,0x97);
         temp_v6 = DAT_00439c98;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         temp_v5 = (int)temp_v6;
         temp_v1 = FUN_002bf4f8(0xe,0x43);
         FUN_002bf288(2,0xe,0,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2

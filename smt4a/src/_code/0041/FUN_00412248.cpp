@@ -13,7 +13,7 @@ int FUN_004112c4(unsigned int *);
 int FUN_004119fc(unsigned int *);
 int FUN_004f8f08(int);
 int FUN_004f950c(int, int);
-int FUN_004f9b94(int, int);
+int resourceTestPendingRecordsReady(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -42,7 +42,7 @@ extern int FUN_004ab784(unsigned int);
 extern int FUN_004abb08(unsigned int);
 /* Supplied declaration required: FUN_004f8f08. */
 /* Supplied declaration required: FUN_004f950c. */
-/* Supplied declaration required: FUN_004f9b94. */
+/* Supplied declaration required: resourceTestPendingRecordsReady. */
 extern int FUN_004fa0d8(int);
 
 
@@ -79,7 +79,7 @@ void FUN_00412248(unsigned int *param_1)
     }
     else {
       temp_v1 = g_btlAux;
-      FUN_004f9b94(g_btlAux,1);
+      resourceTestPendingRecordsReady(g_btlAux,1);
       if (temp_v1 != 0) {
         FUN_004f950c(g_btlAux,1);
         param_1[4] = param_1[4] + 1;

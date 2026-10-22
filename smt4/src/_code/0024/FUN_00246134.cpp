@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022ab08(unsigned int, int *);
+int selectionCopySupportedValue(unsigned int, int *);
 int FUN_0022abe0(void);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_0022ab08. */
+/* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
@@ -97,7 +97,7 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
     }
   }
   temp_v9 = 0;
-  FUN_0022ab08(param_2,&temp_v9);
+  selectionCopySupportedValue(param_2,&temp_v9);
   temp_v8 = 0;
   temp_v0 = *(unsigned short *)(temp_v2 + temp_v9 * 2 + 0x1f2);
   temp_v7 = temp_v0 & 0xffff03ff;

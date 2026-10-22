@@ -1,59 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145e54` (_code @ 0x145e54, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 58 vs built 57 rows; vector loads and VFP normalization/cross-product scheduling differ. */
+#include "shard/W6_W6Match6_ProjectionCamera.h"
 
 extern "C" {
+void FUN_002ad314(f32 *, f32 *, f32);
 
-int FUN_002ad314(float *, float [7]);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+void FUN_00145e54(CameraLookAt *camera)
 {
-    return (float)sqrt((double)value);
+    f32 x = camera->eye[0] - camera->target[0];
+    f32 y = camera->eye[1] - camera->target[1];
+    f32 z = camera->eye[2] - camera->target[2];
+    f32 sideX = z;
+    f32 sideY = 0.0f;
+    f32 sideZ = -x;
+    f32 inverseLength = 1.0f / __sqrtf(x * x + y * y + z * z);
+    f32 inverseSideLength = 1.0f / __sqrtf(sideX * sideX + sideY * sideY + sideZ * sideZ);
+    x *= inverseLength;
+    y *= inverseLength;
+    z *= inverseLength;
+    sideX *= inverseSideLength;
+    sideY *= inverseSideLength;
+    sideZ *= inverseSideLength;
+    f32 upX = y * sideZ - z * sideY;
+    f32 upY = z * sideX - x * sideZ;
+    f32 upZ = x * sideY - y * sideX;
+    f32 sine, cosine;
+    FUN_002ad314(&sine, &cosine, camera->rollRadians * 40.743664f);
+    camera->up[0] = upX * cosine - sine * sideX;
+    camera->up[1] = upY * cosine;
+    camera->up[2] = upZ * cosine - sine * sideZ;
 }
-#endif
-/* Supplied declaration required: FUN_002ad314. */
-
-
-void FUN_00145e54(float *param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9 [7];
-  
-  temp_v1 = *param_1 - param_1[3];
-  temp_v3 = param_1[1] - param_1[4];
-  temp_v0 = param_1[2] - param_1[5];
-  temp_v2 = -temp_v1;
-  temp_v4 = 1.0f / romwright_sqrt_4(temp_v1 * temp_v1 + temp_v3 * temp_v3 + temp_v0 * temp_v0);
-  temp_v5 = 1.0f / romwright_sqrt_4(temp_v0 * temp_v0 + 0.0f + temp_v2 * temp_v2);
-  temp_v6 = temp_v0 * temp_v5;
-  temp_v2 = temp_v2 * temp_v5;
-  temp_v7 = temp_v0 * temp_v4 * temp_v6 - temp_v1 * temp_v4 * temp_v2;
-  temp_v0 = temp_v3 * temp_v4 * temp_v2 - temp_v0 * temp_v4 * temp_v5 * 0.0f;
-  temp_v1 = temp_v1 * temp_v4 * temp_v5 * 0.0f - temp_v3 * temp_v4 * temp_v6;
-  FUN_002ad314(&temp_v8,temp_v9);
-  param_1[6] = temp_v0 * temp_v9[0] - temp_v8 * temp_v6;
-  param_1[7] = temp_v7 * temp_v9[0];
-  param_1[8] = temp_v1 * temp_v9[0] - temp_v8 * temp_v2;
-  return;
 }
-
-} /* extern "C" */

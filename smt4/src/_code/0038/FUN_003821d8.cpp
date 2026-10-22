@@ -68,7 +68,7 @@ extern int FUN_00287894(unsigned short);
 /* Supplied declaration required: FUN_00296934. */
 extern int idIsAtLeast350(unsigned int);
 extern int questIsCompleted(unsigned int);
-extern int FUN_00298fa0(unsigned int, unsigned int);
+extern int questReadRuntimeFlag(unsigned int, unsigned int);
 /* Supplied declaration required: scrResultStopJobAndReleaseUi. */
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: FUN_0029bbc8. */
@@ -120,7 +120,7 @@ void FUN_003821d8(unsigned int *param_1)
       temp_v1 = temp_v4;
       dataTable1bOr1cGetRecord();
       if (((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\0')) &&
-         (temp_v2 = FUN_00298fa0(temp_v4,1), temp_v2 != 0)) {
+         (temp_v2 = questReadRuntimeFlag(temp_v4,1), temp_v2 != 0)) {
         temp_v0 = *(unsigned short *)(temp_v1 + 0x19c);
         temp_v2 = idIsAtLeast350(temp_v4);
         if (temp_v2 == 0) {

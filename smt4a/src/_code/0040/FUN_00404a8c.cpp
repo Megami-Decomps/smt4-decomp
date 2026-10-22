@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001835b4(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 
 /* stack frame of param_3: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_00404a8c(int param_1,int param_2,int param_3)
@@ -39,7 +39,7 @@ void FUN_00404a8c(int param_1,int param_2,int param_3)
   
   efctSetSpeed();
   temp_v4 = 0x3e851eb8;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v1 = (float)temp_v4;
   if (*(char *)(param_1 + 0x104) != '\0') {
     temp_v5[0] = 0x1a;
@@ -54,7 +54,7 @@ void FUN_00404a8c(int param_1,int param_2,int param_3)
       temp_v5[2] = 0x20;
       temp_v5[3] = 0x21;
     }
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = (int)temp_v1;
     temp_v0 = 0;
     do {
@@ -66,13 +66,13 @@ void FUN_00404a8c(int param_1,int param_2,int param_3)
   if (*(int *)(param_1 + 0x108) != 0) {
     temp_v0 = FUN_001834a4(0x32,0x28);
     temp_v3 = temp_v1;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = *(short *)(temp_v0 + 10) + param_3;
     temp_v0 = (int)*(short *)(temp_v0 + 8) + (int)temp_v1 + param_2;
     FUN_001835b4(2,0x32,0x22,temp_v0,temp_v2,0xbf);
     FUN_001835b4(2,0x32,0x23,temp_v0,temp_v2,0xbf);
     temp_v0 = FUN_001834a4(0x32,0x29);
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     param_3 = *(short *)(temp_v0 + 10) + param_3;
     temp_v0 = (int)*(short *)(temp_v0 + 8) + (int)temp_v3 + param_2;
     FUN_001835b4(2,0x32,0x25,temp_v0,param_3,0xbf);
@@ -81,14 +81,14 @@ void FUN_00404a8c(int param_1,int param_2,int param_3)
   else {
     temp_v0 = FUN_001834a4(0x32,0x28);
     temp_v3 = temp_v1;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = *(short *)(temp_v0 + 10) + param_3;
     temp_v0 = (int)*(short *)(temp_v0 + 8) + (int)temp_v1 + param_2;
     FUN_001835b4(2,0x32,0x25,temp_v0,temp_v2,0xbf);
     FUN_001835b4(2,0x32,0x26,temp_v0,temp_v2,0xbf);
     if (*(char *)(param_1 + 0x104) != '\0') {
       temp_v0 = FUN_001834a4(0x32,0x29);
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       param_3 = *(short *)(temp_v0 + 10) + param_3;
       temp_v0 = (int)*(short *)(temp_v0 + 8) + (int)temp_v3 + param_2;
       FUN_001835b4(2,0x32,0x22,temp_v0,param_3,0xbf);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022699c(...);
+int btlQueueReflectAction(...);
 int FUN_002505c0(unsigned int, unsigned int, int, int, int, int, int);
 int VectorSignedToFloat(...);
 
@@ -19,7 +19,7 @@ typedef struct {
 extern int g_btlActionReflect; /* 0x434290 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0022699c. */
+/* Supplied declaration required: btlQueueReflectAction. */
 /* Supplied declaration required: FUN_002505c0. */
 extern int FUN_00293230(int);
 extern int btlGetMainState(void);
@@ -188,7 +188,7 @@ joined_r0x0026c0e8:
   temp_v8 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v4 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)(short)param_1,0,param_2);
+  btlQueueReflectAction(g_btlActionReflect,(int)(short)param_1,0,param_2);
   *(unsigned char *)(temp_v4 + 4) = 0x1e;
   *(short *)(temp_v4 + 0x24) = (short)(int)temp_v8;
   *(short *)(temp_v4 + 0x26) = (short)(int)temp_v9;

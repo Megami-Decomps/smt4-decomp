@@ -1,20 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cb90c` (_code @ 0x4cb90c, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: projection arithmetic recovered; fast floating-point mode folds angle constants and VFP temporary allocation differs from retail. */
+#include "common.h"
+
+struct BattleCameraProjection {
+    /* 0x000 */ u8 unk000[0x588];
+    /* 0x588 */ float height;
+    /* 0x58C */ u8 unk58C[0x24];
+    /* 0x5B0 */ float distance;
+    /* 0x5B4 */ u8 unk5B4[0xC];
+    /* 0x5C0 */ float fieldOfView;
+};
 
 extern "C" {
+extern BattleCameraProjection* g_btlCamera;
+float FUN_0050dda4(float angle);
 
-int FUN_0050dda4(void);
-
-/* Supplied declaration required: FUN_0050dda4. */
-
-
-void FUN_004cb90c(void)
-
+// Compute a projection scale at the camera's current distance or either offset plane.
+float FUN_004cb90c(s32 plane)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0050dda4();
-  return;
+    BattleCameraProjection* camera = g_btlCamera;
+    float scale = 0.1f;
+    float height = camera->height;
+    float tangent = FUN_0050dda4(3.1415927f * ((1.0f / 180.0f) * (camera->fieldOfView * 0.5f)));
+    float projected = height / (120.0f / tangent);
+    switch (plane) {
+    case 0:
+        scale = projected;
+        break;
+    case 1:
+        scale = (projected / camera->distance) * (camera->distance - 15.0f);
+        break;
+    case 2:
+        scale = (projected / camera->distance) * (camera->distance - -20.0f);
+        break;
+    }
+    return scale;
 }
-
-} /* extern "C" */
+}

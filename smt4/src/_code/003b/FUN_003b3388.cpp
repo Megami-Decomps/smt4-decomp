@@ -16,7 +16,7 @@ int messageKindForward(...);
 int FUN_00288844(...);
 int gameGetUnitRecord(...);
 int FUN_002b6dd8(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
@@ -74,7 +74,7 @@ extern int categoryGetColor(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -147,7 +147,7 @@ void FUN_003b3388(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v30 = param_2;
   iStack_28 = param_3;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v21 = 0;
   temp_v15 = 0x3f800000;
   temp_v14 = (int)temp_v19 + temp_v30;
@@ -189,11 +189,11 @@ void FUN_003b3388(int param_1,int param_2,int param_3)
       temp_v13 = temp_v12;
 LAB_003b35ac:
       temp_v19 = (float)((unsigned long long)temp_v16 >> 0x20);
-      FUN_002ba12c(g_titleScene);
+      renderCtxCalculateStereoParallax(g_titleScene);
       temp_v6 = (int)temp_v19 + temp_v30;
       if ((0 < *(short *)(param_1 + 0xd49a)) || (*(char *)(temp_v14 + 0x30) < temp_v21)) {
         temp_v19 = (float)temp_v18;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         temp_v6 = (int)temp_v19 + temp_v30;
       }
       acStack_e8[temp_v5] = '\x01';
@@ -285,7 +285,7 @@ LAB_003b35ac:
       temp_v19 = (float)temp_v20;
       temp_v11 = temp_v25[temp_v14];
       param_3 = aiStack_d0[temp_v14];
-      FUN_002ba12c(g_titleScene);
+      renderCtxCalculateStereoParallax(g_titleScene);
       temp_v12 = 0;
       temp_v21 = aiStack_f8[temp_v14];
       temp_v13 = 1;
@@ -586,7 +586,7 @@ LAB_003b35ac:
         }
         efctSetSpeed();
         temp_v19 = (float)temp_v20;
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         temp_v5 = (int)temp_v19 + temp_v30;
         FUN_002bf288(2,0x28,0x1b,*(short *)(temp_v21 + 8) + temp_v5,
                      (int)*(short *)(temp_v21 + 10) + temp_v8 + param_3,0xce);
@@ -602,7 +602,7 @@ LAB_003b4444:
   } while (temp_v14 < 4);
   temp_v19 = (float)((unsigned long long)temp_v20 >> 0x20);
   temp_v21 = 0;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v17 = (unsigned long long)temp_v13;
   temp_v14 = 0;
   temp_v4 = (int)temp_v19 + temp_v30;

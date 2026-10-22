@@ -8,7 +8,7 @@ int FUN_00249b18(int, int);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
-int FUN_00295660(int, unsigned int);
+int textEncodeFontSlot(int, unsigned int);
 int gameGetUnitRecord(int);
 int FUN_002bd06c(unsigned int);
 int FUN_002bff50(void);
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
@@ -89,7 +89,7 @@ int FUN_002d8910(int param_1)
       temp_v6 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v6 + 0x90f0));
       temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
       FUN_002bd06c(temp_v4);
-      FUN_00295660(0x28,temp_v4);
+      textEncodeFontSlot(0x28,temp_v4);
       temp_v5 = scrWorkGetValue(1);
       messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
       temp_v6 = scrWorkGetValue(1);
@@ -104,7 +104,7 @@ int FUN_002d8910(int param_1)
     }
     else {
       temp_v5 = gameGetPlayerName();
-      FUN_00295660(0x28,temp_v5);
+      textEncodeFontSlot(0x28,temp_v5);
       temp_v5 = scrWorkGetValue(1);
       messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
       temp_v6 = scrWorkGetValue(1);

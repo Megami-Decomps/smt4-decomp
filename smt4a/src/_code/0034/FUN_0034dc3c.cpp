@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -18,11 +18,11 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001834a4(int, int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_0034dc3c(int *param_1)
@@ -39,7 +39,7 @@ void FUN_0034dc3c(int *param_1)
   
   temp_v2 = FUN_001834a4(param_1[0xb],param_1[0xc]);
   temp_v5 = 0.26f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v1 = g_renderCtx;
   temp_v0 = 0;
   if (*(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1318) * 4 + 0x1320) == 3) {
@@ -65,7 +65,7 @@ void FUN_0034dc3c(int *param_1)
       *(unsigned char *)(temp_v1 + 0x1330) = 0;
     }
   }
-  FUN_00168770();
+  renderPopStateStacks();
   return;
 }
 

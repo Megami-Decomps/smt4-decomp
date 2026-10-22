@@ -1,80 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fc1b0` (_code @ 0x3fc1b0, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loaded-flag constant uses R1 instead of retail's R2. */
+#include "addon/aocMain.h"
+
+struct DevilResourceHeader {
+    u32 magic;
+    u16 countA;
+    u16 countB;
+    u32 countC;
+    u16 countD;
+    u8 unk0e[0x1a];
+};
+struct DevilResourceWork {
+    u32 unk00;
+    s32 id;
+    u32 kind;
+    s32 index;
+    DevilResourceHeader *header;
+    u8 *tableA;
+    u8 *tableB;
+    u8 *tableC;
+    u8 *tableD;
+    u8 *end;
+    void *allocation;
+    u8 unk2c[0x10];
+    u8 loaded;
+};
+typedef char DevilResourceLayoutCheck[sizeof(DevilResourceHeader) == 0x28 &&
+    offsetof(DevilResourceHeader, countD) == 0xc &&
+    offsetof(DevilResourceWork, header) == 0x10 &&
+    offsetof(DevilResourceWork, allocation) == 0x28 &&
+    offsetof(DevilResourceWork, loaded) == 0x3c ? 1 : -1];
 
 extern "C" {
+extern AocSystem *g_aocSystem;
+extern const char DAT_0052726c[];
+void textFormatBuffer(char *buffer, const char *format, ...);
+void *asdLoadFileSyncDefault(const char *path);
+bool FUN_00470b18(AocSystem *system, s32 id, u32 kind);
+void *FUN_00470164(AocSystem *system, s32 id, const char *path);
 
-int textFormatBuffer(...);
-int asdLoadFileSyncDefault(...);
-int FUN_00470164(...);
-
-typedef struct fn_003fc1b0_arg0 fn_003fc1b0_arg0;
-struct fn_003fc1b0_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x3];
-    void *field_0x10; /* +0x10 */
-    void *field_0x14; /* +0x14 */
-    void *field_0x18; /* +0x18 */
-    void *field_0x1c; /* +0x1c */
-    void *field_0x20; /* +0x20 */
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x10];
-    undefined1 field_0x3c; /* +0x3c */
-};
-
-extern int *g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_00470164. */
-extern int FUN_00470b18(int *, int, unsigned int);
-
-
-void FUN_003fc1b0(fn_003fc1b0_arg0 *param_1,int param_2)
-
+void FUN_003fc1b0(DevilResourceWork *work, s32 id)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  int aiStack_50 [16];
-  
-  piVar3 = aiStack_50;
-  textFormatBuffer(aiStack_50,"battle/devil/en%03d.bin",param_2);
-  param_1->field_0x8 = 6;
-  *(int *)&param_1->field_0xc = param_2 - 1;
-  temp_v1 = FUN_00470b18(g_aocSystem,param_2,1);
-  if (temp_v1 != 0) {
-    piVar3 = g_aocSystem;
-    FUN_00470164(g_aocSystem,param_2,aiStack_50);
-  }
-  else {
-    asdLoadFileSyncDefault();
-  }
-  param_1->field_0x28 = piVar3;
-  param_1->field_0x4 = param_2;
-  param_1->field_0x3c = 1;
-  param_1->field_0x10 = piVar3;
-  if (*piVar3 != 0x57444b4e) {
-    param_1->field_0x10 = (void *)0x0;
-  }
-  else {
-    piVar4 = piVar3 + 10;
-    param_1->field_0x14 = piVar4;
-    piVar4 = piVar4 + (unsigned int)*(unsigned short *)(piVar3 + 1) * 8;
-    param_1->field_0x18 = piVar4;
-    piVar4 = piVar4 + piVar3[2] * 10;
-    param_1->field_0x1c = piVar4;
-    temp_v0 = *(unsigned short *)((int)piVar3 + 6);
-    param_1->field_0x20 = piVar4 + temp_v0;
-    param_1->field_0x24 = piVar4 + temp_v0 + (unsigned int)*(unsigned short *)(piVar3 + 3) * 6;
-  }
-  return;
+    char path[0x40];
+    textFormatBuffer(path, DAT_0052726c, id);
+    work->kind = 6;
+    work->index = id - 1;
+    DevilResourceHeader *file;
+    if (FUN_00470b18(g_aocSystem, id, 1)) {
+        file = (DevilResourceHeader *)FUN_00470164(g_aocSystem, id, path);
+    } else {
+        file = (DevilResourceHeader *)asdLoadFileSyncDefault(path);
+    }
+    work->allocation = file;
+    work->id = id;
+    work->loaded = 1;
+    work->header = file;
+    if (file->magic != 0x57444b4e) {
+        work->header = 0;
+    } else {
+        work->tableA = (u8 *)(file + 1);
+        work->tableB = work->tableA + file->countA * 0x20;
+        work->tableC = work->tableB + file->countC * 0x28;
+        work->tableD = work->tableC + file->countB * 4;
+        work->end = work->tableD + file->countD * 0x18;
+    }
 }
-
-} /* extern "C" */
+}

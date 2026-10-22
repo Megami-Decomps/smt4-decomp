@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0021e224(int);
 int FUN_002878e4(void);
 int mathDistanceBetweenPoints(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int);
@@ -36,7 +36,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: FUN_0021e224. */
 /* Supplied declaration required: FUN_002878e4. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
@@ -243,7 +243,7 @@ LAB_002748b4:
                     temp_v16 = (float)temp_v17;
                   }
                   temp_v14 = temp_v12;
-                  FUN_00287b0c();
+                  mathGetShortestAngleDelta();
                   if ((temp_v12 > -temp_v16) && (temp_v16 > temp_v12)) {
                     *(unsigned char *)(temp_v9 + 0xd) = 1;
                     temp_v12 = temp_v14;

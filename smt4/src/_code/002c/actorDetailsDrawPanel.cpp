@@ -11,7 +11,7 @@ void FUN_002bed3c(void);
 void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
-f32 FUN_002ba12c(RenderCtx *context, f32 value);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 const MessageDrawItem *FUN_002bf4f8(u32 group, u32 index);
@@ -41,10 +41,10 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     RenderCtx *context = g_titleScene;
     renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
     efctSetSpeed(transform->alpha);
-    s32 offset = (s32)FUN_002ba12c(g_titleScene, 0.3f);
+    s32 offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     FUN_002bf380(2, 0x39, 3, x + offset, y, 0x71);
     if (texts->portrait != 0) {
-        offset = (s32)FUN_002ba12c(g_titleScene, 0.3f);
+        offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         const MessageDrawItem *portrait = FUN_002bf4f8(0x39, 0x23);
         const MessageDrawItem *clip = FUN_002bf4f8(0x39, 0x22);
         FUN_002b659c(clip->position.x + offset + x, clip->position.y + y,
@@ -53,14 +53,14 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
                                       portrait->position.y + y, 0x72, 1);
         FUN_002b64b8();
     } else {
-        offset = (s32)FUN_002ba12c(g_titleScene, 0.29f);
+        offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
         FUN_002bf288(2, 0x39, 0x21, x + offset, y, 0x72);
     }
-    offset = (s32)FUN_002ba12c(g_titleScene, 0.3f);
+    offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     FUN_002bf380(2, 0x39, images[record->style], x + offset, y, 0x73);
-    offset = (s32)FUN_002ba12c(g_titleScene, 0.31f);
+    offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.31f);
     FUN_002bf380(2, 0x39, 6, x + offset, y, 0x71);
-    offset = (s32)FUN_002ba12c(g_titleScene, 0.3f);
+    offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     FUN_002bf288(2, 0x39, 0x0D, x + offset, y, 0x72);
     FUN_002bf288(2, 0x39, 0x0E, x + offset, y, 0x73);
     const MessageDrawItem *position = FUN_002bf4f8(0x39, 0x10);
@@ -73,7 +73,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     drawSetColorFromRGBA8(0);
     FUN_002bdf94(0, position->position.x + x + offset, position->position.y + y, 0, 5, 0x73, text);
     FUN_002bed3c();
-    offset = (s32)FUN_002ba12c(g_titleScene, 0.32f);
+    offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.32f);
     for (s32 index = 0; index < 8; ++index) {
         const MessageDrawItem *row = FUN_002bf4f8(0x39, index + 0x2F);
         FUN_002bf288(2, 0x39, 0x2D, row->position.x + offset + x, row->position.y + y, 0x71);
@@ -87,10 +87,10 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
                       row->position.y + y + cell->position.y, 0x72);
     }
     if (expanded != 0) {
-        offset = (s32)FUN_002ba12c(g_titleScene, 0.29f);
+        offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.29f);
         FUN_002bf380(2, 0x39, 0x0F, transform->x + x + offset, y, 0x71);
         FUN_002bf380(2, 0x39, 0x10, transform->x + x + offset, y, 0x71);
-        offset = (s32)FUN_002ba12c(g_titleScene, 0.3f);
+        offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
         for (s32 index = 0; index < 7; ++index) {
             if (texts->skillIds[index] == 0) {
                 continue;
@@ -117,7 +117,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         valueColor = 0xFFFFFF00;
         labelColor = 0;
     }
-    offset = (s32)FUN_002ba12c(g_titleScene, 0.32f);
+    offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.32f);
     u32 nameColor = labelColor;
     if ((record->flags & 2) != 0) {
         nameColor = record->style == 0 ? 0x00F33700 : 0x00840000;
@@ -131,7 +131,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     position = FUN_002bf4f8(0x39, 10);
     FUN_002bd82c(texts->thirdLabel, labelColor);
     FUN_002598f0(texts->thirdLabel, position->position.x + x + offset, position->position.y + y, 0x72);
-    offset = (s32)FUN_002ba12c(g_titleScene, 0.3f);
+    offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     position = FUN_002bf4f8(0x39, 0x24);
     FUN_002bd82c(texts->centeredValue, valueColor);
     FUN_002598f0(texts->centeredValue,

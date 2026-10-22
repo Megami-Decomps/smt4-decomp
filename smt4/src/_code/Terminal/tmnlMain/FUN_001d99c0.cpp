@@ -23,7 +23,7 @@ int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_0029ae60(...);
 int gameCounterAddSaturating(...);
-int FUN_0029c2cc(...);
+void FUN_0029c2cc(...);
 int soundChannelStopAll(...);
 int asdWorkAreaReset(void);
 int messageStatesSetFirst(...);
@@ -73,7 +73,7 @@ int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int playerModelLoadPart(unsigned int, unsigned int, int);
 int playerModelListCreate(void);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_00298d50(...);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int soundChannelRequestIfEnabled(...);
@@ -160,7 +160,7 @@ extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: playerModelListCreate. */
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297684. */
@@ -406,7 +406,7 @@ unsigned int FUN_001d99c0(void)
           *(unsigned char *)(puVar7 + 2) = 1;
         }
         temp_v3 = gameDataGetPlayerName();
-        FUN_00295660(0x33,temp_v3);
+        textEncodeFontSlot(0x33,temp_v3);
         temp_v6 = bgmGetStateById(0x1000058);
         if (temp_v6 != 1) {
           soundChannelRequestIfEnabled(0x1000058,0,0x3c);
@@ -470,7 +470,7 @@ unsigned int FUN_001d99c0(void)
           else {
             pcVar10 = (char *)gameDataGetPlayerName();
           }
-          FUN_00295660(0x28,pcVar10);
+          textEncodeFontSlot(0x28,pcVar10);
           temp_v3 = asdLoadFileSyncDefault(&LAB_001da2c8);
           puVar2[0xb] = temp_v3;
           temp_v6 = FUN_002c2a04(0);
@@ -642,10 +642,10 @@ LAB_001da638:
               puVar2[3] = (unsigned int)puVar7;
               if (*(short *)puVar2[(int)puVar7 + 0x165] >= 0xc9) {
                 temp_v3 = gameDataGetPlayerName();
-                FUN_00295660(0x28,temp_v3);
+                textEncodeFontSlot(0x28,temp_v3);
               }
               else {
-                FUN_00295660(0x28,(short *)puVar2[(int)puVar7 + 0x165] + 3);
+                textEncodeFontSlot(0x28,(short *)puVar2[(int)puVar7 + 0x165] + 3);
               }
               puVar2[5] = 1;
             }

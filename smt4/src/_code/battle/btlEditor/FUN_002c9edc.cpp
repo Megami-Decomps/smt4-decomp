@@ -1,76 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c9edc` (_code @ 0x2c9edc, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ARMCC merges the action-table null checks and hoists the table pointer. */
+#include "battle/btlAction.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
+struct BtlUi;
 extern "C" {
+extern void* DAT_00435ce8;
+extern BtlUi* g_btlUiBlock;
+BtlMainState* jobGetWork(void);
+void FUN_0025c2d0(BtlUi* ui, u32 enabled);
+void asdMemFree(void* memory);
+void jobStop(u32 job, u32 flags);
 
-int FUN_0025c2d0(int, int);
-int asdMemFree(int);
-int jobStop(unsigned int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int DAT_00435ce8; /* 0x435ce8 */
-extern int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_0025c2d0. */
-extern int jobGetWork(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-
-
+// Restore action state after closing the battle editor and stop its job.
 void FUN_002c9edc(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = jobGetWork();
-  if (g_btlUiBlock != 0) {
-    FUN_0025c2d0(g_btlUiBlock,0);
-  }
-  if (DAT_00435ce8 != 0) {
-    if (temp_v0 != 0) {
-      piVar2 = (int *)(temp_v0 + 0x1e98);
-      temp_v1 = 0;
-      if (*piVar2 != 0) {
-        temp_v2 = 4;
-        do {
-          temp_v1 = temp_v2 + 1;
-          temp_v2 = *piVar2 + temp_v2 * 0x114;
-          temp_v3 = *(unsigned int *)(temp_v2 + 0x50);
-          if ((temp_v3 & 1) != 0 && (temp_v3 & 0x80) != 0) {
-            *(unsigned int *)(temp_v2 + 0x50) = temp_v3 & 0xfffffff7;
-          }
-          temp_v2 = temp_v1;
-        } while (temp_v1 < 0x36);
-      }
-      if (temp_v0 != 0) {
-        temp_v1 = *piVar2;
-      }
-      if (temp_v0 != 0 && temp_v1 != 0) {
-        temp_v1 = 0;
-        do {
-          temp_v2 = temp_v1 + 1;
-          temp_v1 = *piVar2 + temp_v1 * 0x114;
-          *(unsigned int *)(temp_v1 + 100) = *(unsigned int *)(temp_v1 + 0x68);
-          temp_v1 = temp_v2;
-        } while (temp_v2 < 0x6d);
-      }
+    BtlMainState* battle = jobGetWork();
+    if (g_btlUiBlock != NULL) {
+        FUN_0025c2d0(g_btlUiBlock, 0);
     }
-    *(unsigned int *)(temp_v0 + 0x44a8) = *(unsigned int *)(temp_v0 + 0x44a8) & 0xfff7ffff;
-    asdMemFree(DAT_00435ce8);
-    DAT_00435ce8 = 0;
-  }
-  jobStop(*(unsigned int *)(temp_v0 + 0x58),0);
-  return;
+    if (DAT_00435ce8 != NULL) {
+        if (battle != NULL && battle->actions.records != NULL) {
+            for (s32 i = 4; i < 54; ++i) {
+                BtlActionRecord* action = &battle->actions.records[i];
+                if ((action->status & 1) != 0 && (action->status & 0x80) != 0) {
+                    action->status &= ~8;
+                }
+            }
+            for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
+                BtlActionRecord* action = &battle->actions.records[i];
+                action->editorRestore.current = action->editorRestore.saved;
+            }
+        }
+        battle->editorControl.flags &= ~0x80000;
+        asdMemFree(DAT_00435ce8);
+        DAT_00435ce8 = NULL;
+    }
+    jobStop(battle->editor.job, 0);
 }
-
-} /* extern "C" */
+}

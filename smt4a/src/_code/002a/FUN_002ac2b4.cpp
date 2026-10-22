@@ -1,50 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ac2b4` (_code @ 0x2ac2b4, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 55 vs built 51 rows; fusion-pair extraction and member-scan register allocation differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/Shard004B.h"
 
 extern "C" {
+extern UniteWork *g_unite;
+BitsAt60 *slotRecordFindById(u32);
 
-extern int g_unite; /* 0x57f290 */
-
-extern int slotRecordFindById(void);
-
-
-unsigned int FUN_002ac2b4(int param_1,int param_2)
-
+// Test whether a selected fusion pair or chain contains a unit with flag bit two.
+u32 FUN_002ac2b4(s32 selection, s32 chain)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  if (param_2 != 0) {
-    temp_v0 = g_unite + param_1 * 0x28;
-    while (((*(short *)(temp_v0 + temp_v3 * 2 + 0x523a) == 0 || (temp_v2 = slotRecordFindById(), temp_v2 == 0)) ||
-           ((*(unsigned short *)(temp_v2 + 0x60) & 4) == 0))) {
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 0xc) {
-        return 0;
-      }
+    struct ChainGroup {
+        s16 ids[12];
+        u8 unk18[0x10];
+    };
+    struct ChainSelectionView {
+        u8 unk0000[0x523a];
+        ChainGroup groups[1];
+    };
+    UniteWork *work = g_unite;
+    if (chain != 0) {
+        const ChainGroup *group = &reinterpret_cast<const ChainSelectionView *>(work)->groups[selection];
+        for (s32 index = 0; index < 12; ++index) {
+            if (group->ids[index] != 0) {
+                BitsAt60 *record = slotRecordFindById(group->ids[index]);
+                if (record != NULL && (record->bits & 4) != 0)
+                    return 1;
+            }
+        }
+    } else {
+        for (s32 component = 0; component < 2; ++component) {
+            u32 packed = work->pairList.pairs[selection].packedIds;
+            u32 id = component == 0 ? packed & 0x7fff : (packed >> 15) & 0x7fff;
+            if (id != 0) {
+                BitsAt60 *record = slotRecordFindById(id);
+                if (record != NULL && (record->bits & 4) != 0)
+                    return 1;
+            }
+        }
     }
-    return 1;
-  }
-  temp_v0 = g_unite + param_1 * 8;
-  do {
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x13b8) & 0x7fff;
-    while( 1 ) {
-      if (((temp_v1 != 0) && (temp_v2 = slotRecordFindById(), temp_v2 != 0)) &&
-         ((*(unsigned short *)(temp_v2 + 0x60) & 4) != 0)) {
-        return 1;
-      }
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 2) {
-        return 0;
-      }
-      if (temp_v3 == 0) break;
-      temp_v1 = (*(unsigned int *)(temp_v0 + 0x13b8) & 0x3fffffff) >> 0xf;
-    }
-  } while( 1 );
+    return 0;
 }
-
-} /* extern "C" */
+}

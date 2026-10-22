@@ -1,64 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00272584` (_code @ 0x272584, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: talk-session initialization caches the minus-one value in r1 rather than retail r0. */
+/* Allocates a battle-talk session, starts its owning job, and initializes its choice buffer. */
+#include "battle/btlTalk.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+u32 jobIsValid(u32 handle);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 front);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
+s32 btlTalkUpdateIfPresent(u32 process);
+void btlTalkJobRelease(u32 process);
+void __aeabi_memset4(void *destination, u32 bytes, u32 value);
+void btlUiPanelStart(void *ui);
+extern BtlTalkA *g_btlTalk;
+extern void *g_btlUiBlock;
 
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int jobIsValid(...);
-int __aeabi_memset4(...);
-int btlUiPanelStart(...);
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_4_stack;
-
-extern unsigned char LAB_0024e2f4; /* 0x24e2f4 */
-extern unsigned char LAB_002726a4; /* 0x2726a4 */
-extern int btlTalkJobRelease(...); /* 0x2df5c8 */
-extern int *g_btlTalk; /* 0x57a7b8 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: jobIsValid. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: btlUiPanelStart. */
-
-
-void FUN_00272584(unsigned int *param_1,int param_2,int param_3,int param_4)
-
+void FUN_00272584(void *object, void *actor, s32 first, s32 second)
 {
-/* irregular: 6 native warning(s); review required */
-  int *piVar1;
-  unsigned char *puVar2;
-  int *piVar3;
-  
-  jobIsValid(param_1[0x10]);
-  piVar1 = (int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x14c,1);
-  puVar2 = &LAB_002726a4;
-  g_btlTalk = piVar1;
-  taskCreateDraw(&LAB_002726a4,4,0,0,&LAB_0024e2f4,btlTalkJobRelease,param_1,*param_1);
-  param_1[0x10] = (unsigned int)puVar2;
-  piVar1 = g_btlTalk;
-  piVar3 = g_btlTalk + 7;
-  *g_btlTalk = (int)param_1;
-  piVar1[1] = param_2;
-  *piVar3 = param_3;
-  piVar1[8] = param_4;
-  *(unsigned char *)(piVar1 + 0x51) = 0;
-  *(unsigned char *)((int)piVar1 + 0x145) = 0;
-  piVar1[0x52] = -1;
-  piVar1[0xc] = (int)*(short *)(*(int *)(param_2 + 0x28) + 0x1c0);
-  __aeabi_memset4(piVar1 + 0xd,0x100,0xffffffff);
-  btlUiPanelStart(g_btlUiBlock);
-  piVar1[6] = 0;
-  return;
+    struct OwnerView {
+        u32 process;
+        u8 unk04[0x3C];
+        u32 talkJob;
+    };
+    struct ActorDataView {
+        u8 unk000[0x1C0];
+        s16 id;
+    };
+    struct ActorView {
+        u8 unk00[0x28];
+        ActorDataView *data;
+    };
+    /* The session's final status fields lie beyond the shared BtlTalkA prefix. */
+    struct TalkSessionView {
+        OwnerView *owner;
+        ActorView *actor;
+        u8 unk08[0x10];
+        u32 state;
+        s32 first;
+        s32 second;
+        u8 unk24[0xC];
+        s32 actorId;
+        u8 choices[0x100];
+        u8 unk134[0x10];
+        u8 active;
+        u8 pending;
+        u8 unk146[2];
+        s32 selection;
+    };
+    OwnerView *owner = (OwnerView *)object;
+    jobIsValid(owner->talkJob);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlTalk.cpp", 765);
+    g_btlTalk = (BtlTalkA *)asdMemoryAllocTracked(256, 256, 0, sizeof(TalkSessionView), 1);
+    owner->talkJob = taskCreateDraw((const s8 *)"btlTalk Calc", 4, 0, 0, btlTalkUpdateIfPresent, btlTalkJobRelease, (u32)owner, (void *)owner->process);
+    TalkSessionView *work = (TalkSessionView *)g_btlTalk;
+    work->owner = owner;
+    work->actor = (ActorView *)actor;
+    work->first = first;
+    work->second = second;
+    work->active = 0;
+    work->pending = 0;
+    work->selection = -1;
+    work->actorId = work->actor->data->id;
+    __aeabi_memset4(work->choices, sizeof(work->choices), -1);
+    btlUiPanelStart(g_btlUiBlock);
+    work->state = 0;
 }
-
-} /* extern "C" */
+}

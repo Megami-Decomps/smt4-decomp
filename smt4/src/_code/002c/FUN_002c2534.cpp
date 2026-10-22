@@ -1,70 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2534` (_code @ 0x2c2534, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture-format dispatch and allocation-callback registers differ. */
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
 
+struct BoundTextureStorage {
+    u32 flags;
+    void *allocation;
+    u32 format;
+    u32 width;
+    u32 height;
+    u32 heap;
+};
+/* The binding array follows the currently documented AsdGfxContext prefix. */
+struct TextureBindingContext {
+    u8 prefix[0x124];
+    u32 selected;
+    BoundTextureStorage *bindings[1];
+};
 extern "C" {
-
-typedef int romwright_code(...);
-extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
-extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
-extern int DAT_004c63b4; /* 0x4c63b4 */
-
-
-void FUN_002c2534(int param_1,int param_2,int param_3,int param_4)
-
-{
-/* irregular: irregular input(s): in_r12 */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  romwright_code *in_r12;
-  
-  puVar2 = *(unsigned int **)(DAT_004c63b4 * 4 + 0x4c63b8);
-  if (param_1 != 0x8057) {
-    if (param_1 < 0x8057) {
-      if (param_1 == 0x8051) {
-        temp_v1 = 3;
-      }
-      else {
-        if (param_1 != 0x8056) {
-          return;
-        }
-        temp_v1 = 2;
-      }
-    }
-    else if (param_1 == 0x8058) {
-      temp_v1 = 4;
-    }
-    else {
-      if (param_1 != 0x8d62) {
-        return;
-      }
-      temp_v1 = 2;
-    }
-  }
-  else {
-    temp_v1 = 2;
-  }
-  if ((param_4 == 0x10000 || param_4 == 0x20000) || param_4 == 0x30000) {
-    if (puVar2[1] != 0) {
-      in_r12 = g_gfxReleaseCallback;
-    }
-    if (puVar2[1] != 0 && in_r12 != (romwright_code *)0x0) {
-      (*in_r12)(puVar2[5],0x104,*puVar2);
-    }
-    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
-      temp_v0 = 0;
-    }
-    else {
-      temp_v0 = (*g_gfxAllocateCallback)(param_4,0x104,*puVar2,temp_v1 * param_2 * param_3);
-    }
-    puVar2[5] = param_4;
-    puVar2[1] = temp_v0;
-    puVar2[2] = param_1;
-    puVar2[3] = param_2;
-    puVar2[4] = param_3;
-  }
-  return;
+extern TextureBindingContext *g_asdGfxContext;
+extern DriverMemoryCallbacks g_gfxAllocateCallback;
 }
 
-} /* extern "C" */
+extern "C" void FUN_002c2534(u32 format, u32 width, u32 height, u32 heap)
+{
+    BoundTextureStorage *texture = g_asdGfxContext->bindings[g_asdGfxContext->selected];
+    u32 bytesPerPixel;
+    switch (format) {
+    case 0x8051:
+        bytesPerPixel = 3;
+        break;
+    case 0x8056:
+    case 0x8057:
+    case 0x8D62:
+        bytesPerPixel = 2;
+        break;
+    case 0x8058:
+        bytesPerPixel = 4;
+        break;
+    default:
+        return;
+    }
+    if (heap == 0x10000 || heap == 0x20000 || heap == 0x30000) {
+        if (texture->allocation != NULL && g_gfxAllocateCallback.release != NULL) {
+            g_gfxAllocateCallback.release(texture->heap, 0x104, texture->flags, texture->allocation);
+        }
+        void *allocation = NULL;
+        if (g_gfxAllocateCallback.allocate != NULL) {
+            allocation = g_gfxAllocateCallback.allocate(heap, 0x104, texture->flags,
+                                                        bytesPerPixel * width * height);
+        }
+        texture->heap = heap;
+        texture->allocation = allocation;
+        texture->format = format;
+        texture->width = width;
+        texture->height = height;
+    }
+}

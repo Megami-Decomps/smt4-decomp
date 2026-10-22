@@ -16,7 +16,7 @@ int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
-int FUN_002bce30(...);
+int demonGetRaceLabel(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -93,7 +93,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bce30. */
+/* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -229,7 +229,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
               }
             }
             temp_v13 = FUN_002bf4f8(0x24,0xf9);
-            temp_v9 = FUN_002bce30(*psVar8,0);
+            temp_v9 = demonGetRaceLabel(*psVar8,0);
             textFormatBuffer(temp_v20,&LAB_002da12c,temp_v9);
             puVar13 = temp_v20;
             FUN_002b6dd8(puVar13,2);
@@ -379,7 +379,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           }
         }
         temp_v4 = FUN_002bf4f8(0x24,0xff);
-        temp_v11 = FUN_002bce30(*psVar8,0);
+        temp_v11 = demonGetRaceLabel(*psVar8,0);
         textFormatBuffer(temp_v20,&LAB_002daba4,temp_v11);
         puVar13 = temp_v20;
         FUN_002b6dd8(puVar13,3);
@@ -576,7 +576,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002be5a4(1,temp_v5,temp_v20);
           temp_v4 = FUN_002bf4f8(0x24,0xdd);
-          temp_v5 = FUN_002bce30(*puVar10,0);
+          temp_v5 = demonGetRaceLabel(*puVar10,0);
           textFormatBuffer(temp_v20,&LAB_002da12c,temp_v5);
           puVar13 = temp_v20;
           FUN_002b6dd8(puVar13,2);

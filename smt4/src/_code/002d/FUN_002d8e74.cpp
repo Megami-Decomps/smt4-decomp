@@ -1,62 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d8e74` (_code @ 0x2d8e74, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains the filename/header pointers and error constants across helper calls, using more callee-saved registers. */
+#include "gamedata/SaveLoadThreadRequest.h"
+#include "shard/Sys43e310.h"
+#include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
 
 extern "C" {
+void textFormatBuffer(char *output, const char *format, ...);
+s32 FUN_002d5e44(u32 mode, const char *name);
+s32 asdSaveReadBlock(u32 file, const char *name, AsdSaveHeader *header, void *payload, u32 size);
+s32 FUN_00214950(u32 context, const char *name);
 
-int asdSaveReadBlock(int, unsigned char [128], unsigned char [140], unsigned int, unsigned int);
-int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int);
-int FUN_002d5e44(int, unsigned char [128]);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp138; /* 0x138: local_138 */
-} param_1_stack;
-
-extern unsigned char LAB_002d8f2c; /* 0x2d8f2c */
-extern unsigned char DAT_0043e311; /* 0x43e311 */
-extern int DAT_0043e314; /* 0x43e314 */
-extern unsigned int DAT_0043e31c; /* 0x43e31c */
-
-/* Supplied declaration required: asdSaveReadBlock. */
-extern int FUN_00214950(unsigned int, unsigned char *);
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002d5e44. */
-
-
-void FUN_002d8e74(unsigned int param_1)
-
+// Read the selected game save and advance the thread after validation succeeds.
+void FUN_002d8e74(u32 context)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [128];
-  unsigned char temp_v5 [140];
-  
-  DAT_0043e311 = 1;
-  temp_v1 = *(int *)(DAT_0043e314 + 4);
-  textFormatBuffer(temp_v4,&LAB_002d8f2c,*(unsigned int *)(DAT_0043e314 + 8));
-  temp_v2 = *(unsigned int *)(DAT_0043e314 + 0x14);
-  temp_v3 = *(unsigned int *)(DAT_0043e314 + 0x18);
-  temp_v0 = 0;
-  FUN_002d5e44(0,temp_v4);
-  if (temp_v0 != 0) {
-    asdSaveReadBlock(temp_v1,temp_v4,temp_v5,temp_v2,temp_v3);
-    if (temp_v1 != 0) {
-      return;
+    // The public thread prefix ends before its request pointer and result.
+    struct ThreadView {
+        u8 unk00;
+        s8 busy;
+        s8 unk02, unk03;
+        SaveLoadThreadRequest *request;
+        u32 unk08;
+        s32 result;
+    };
+    ThreadView *thread = (ThreadView *)&g_saveLoadThread;
+    char filename[128];
+    AsdSaveHeader header;
+    thread->busy = 1;
+    u32 file = thread->request->file;
+    textFormatBuffer(filename, "sdds4game%d.sav", thread->request->slot);
+    void *payload = thread->request->payload;
+    u32 size = thread->request->payloadSize;
+    s32 result = -1;
+    if (FUN_002d5e44(0, filename) != 0) {
+        if (asdSaveReadBlock(file, filename, &header, payload, size) != 0) {
+            return;
+        }
+        if (FUN_00214950(context, filename) == 1) {
+            result = 6;
+        }
     }
-    temp_v0 = FUN_00214950(param_1,temp_v4);
-    if (temp_v0 == 1) {
-      DAT_0043e311 = 0;
-      DAT_0043e31c = 6;
-      return;
-    }
-  }
-  DAT_0043e31c = 0xffffffff;
-  DAT_0043e311 = 0;
-  return;
+    thread->result = result;
+    thread->busy = 0;
 }
-
-} /* extern "C" */
+}

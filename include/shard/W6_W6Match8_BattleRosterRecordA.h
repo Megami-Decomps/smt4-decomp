@@ -10,6 +10,7 @@ struct BattleRosterRecordA {
         u8 data[0x1d0];
         BattleEffectSetup render;
         BattleRosterMotionA motion;
+        /* 0x000 */ f32 initialPositionX;
         struct {
             u8 unk00[0x3c];
             s8 group; // 0x3c
@@ -30,10 +31,25 @@ struct BattleRosterRecordA {
             /* 0x5C */ u8 unk5C[0xB0];
             /* 0x10C */ u32 unk10C;
         } liveFlags;
+        struct {
+            /* 0x000 */ u8 unk000[0x1BC];
+            /* 0x1BC */ u32 holder;
+        } script;
+        struct {
+            /* 0x000 */ u8 unk000[0x1C8];
+            /* 0x1C8 */ u16 category;
+        } classification;
     };
 };
 typedef char BattleRosterRecordASizeCheck[sizeof(BattleRosterRecordA) == 0x1D0 ? 1 : -1];
 typedef char BattleRosterRecordALiveFlagsCheck[offsetof(BattleRosterRecordA, liveFlags.unk58) == 0x58 ? 1 : -1];
 typedef char BattleRosterRecordALiveFlags10CCheck[offsetof(BattleRosterRecordA, liveFlags.unk10C) == 0x10C ? 1 : -1];
+typedef char BattleRosterRecordAHolderOffsetCheck[
+    offsetof(BattleRosterRecordA, script.holder) == 0x1BC ? 1 : -1];
+typedef char BattleRosterRecordACategoryOffsetCheck[
+    offsetof(BattleRosterRecordA, classification.category) == 0x1C8 ? 1 : -1];
+
+typedef char BattleRosterRecordAInitialPositionOffsetCheck[
+    offsetof(BattleRosterRecordA, initialPositionX) == 0 && sizeof(BattleRosterRecordA) == 0x1D0 ? 1 : -1];
 
 #endif

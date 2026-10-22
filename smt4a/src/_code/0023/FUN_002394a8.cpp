@@ -9,7 +9,7 @@ int efctSetSpeed(void);
 int FUN_0017ffa8(int, int, unsigned int, int);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002609d8(unsigned int, int);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
@@ -52,7 +52,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001801b8(unsigned short, unsigned char);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002609d8. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -95,7 +95,7 @@ unsigned int FUN_002394a8(void)
   
   temp_v14 = 0.33f;
   temp_v23[8] = g_npcRoom;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v12 = g_renderCtx;
   temp_v1 = FUN_001692ac(1,0);
   piVar12 = (int *)(temp_v12 + 0x1258);
@@ -197,7 +197,7 @@ unsigned int FUN_002394a8(void)
                 temp_v2 = (unsigned int)temp_v20;
                 FUN_00183bb0();
                 temp_v10 = temp_v2;
-                FUN_001879d0(g_renderCtx);
+                renderCtxCalculateStereoParallax(g_renderCtx);
                 temp_v1 = g_renderCtx;
                 temp_v16 = romwright_piece_4_4(temp_v19,temp_v2);
                 temp_v4 = FUN_001692ac(1,0);

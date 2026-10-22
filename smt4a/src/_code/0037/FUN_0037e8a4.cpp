@@ -8,7 +8,7 @@ int vec2GetXInt(...);
 int vec2GetYInt(int);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -27,7 +27,7 @@ extern int saveSlotFindSelected(void);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
 void FUN_0037e8a4(int param_1)
@@ -51,7 +51,7 @@ void FUN_0037e8a4(int param_1)
   temp_v3 = vec2GetYInt(param_1 + 0xe8c);
   temp_v10 = 0.26f;
   temp_v9 = 0x3e851eb800000000;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   efctSetSpeed();
   temp_v7 = 0;
   do {
@@ -59,7 +59,7 @@ void FUN_0037e8a4(int param_1)
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 3);
   temp_v10 = (float)((unsigned long long)temp_v9 >> 0x20);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   FUN_001835b4(2,0x14,0xbe1,temp_v2 + (int)temp_v10,temp_v3,0xc4);
   temp_v2 = param_1 + 0xf18;
   if ((*(char *)(param_1 + 0xfa2) != '\0') && (temp_v7 = saveSlotFindSelected(), temp_v7 != 0)) {
@@ -67,7 +67,7 @@ void FUN_0037e8a4(int param_1)
     temp_v4 = vec2GetYInt(temp_v2);
     temp_v5 = FUN_001834a4(0x14,0xbd9);
     temp_v10 = (float)((unsigned long long)temp_v9 >> 0x20);
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v2 = g_renderCtx;
     temp_v0 = *(short *)(temp_v5 + 8);
     temp_v1 = *(short *)(temp_v5 + 10);
@@ -86,7 +86,7 @@ void FUN_0037e8a4(int param_1)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 3);
     temp_v2 = FUN_001834a4(0x14,0xc16);
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v0 = *(short *)(temp_v2 + 8);
     temp_v1 = *(short *)(temp_v2 + 10);
     efctSetSpeed();

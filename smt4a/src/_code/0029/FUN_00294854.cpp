@@ -1,58 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00294854` (_code @ 0x294854, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: gimmick active-byte clearing is unrolled differently and the special-actor tail uses a different base register. */
+/* Releases all map-gimmick scene objects and their registered controller handles. */
+#include "map/mapGimic.h"
 
 extern "C" {
-
-int ptrListRemoveClearOwner(unsigned int, unsigned int);
-
-typedef int romwright_code(...);
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_mapGimic; /* 0x580ca0 */
-
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-
+void ptrListRemoveClearOwner(void *registry, void *controller);
+extern void *g_handleRegistry;
+extern MapGimic *g_mapGimic;
 
 void FUN_00294854(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0x22;
-  do {
-    piVar2 = *(int **)(g_mapGimic + temp_v3 * 0x3c + 0xa8);
-    if (piVar2 != (int *)0x0) {
-      (**(romwright_code **)(*piVar2 + 4))();
-      *(unsigned int *)(g_mapGimic + temp_v3 * 0x3c + 0xa8) = 0;
+    struct Releasable;
+    struct ReleaseMethods {
+        void *unk00;
+        void (*release)(Releasable *object);
+    };
+    struct Releasable {
+        ReleaseMethods *methods;
+    };
+    struct MapGimicCleanupView {
+        MapGimic base;
+        u8 specialActive;
+        u8 unk9B5;
+        u16 request;
+        u8 unk9B8[0x10];
+        MapGimicObj *special;
+    };
+    for (s32 i = MAP_GIMIC_ENTRIES - 1; i >= 0; --i) {
+        Releasable *object = (Releasable *)g_mapGimic->entries[i].obj;
+        if (object != NULL) {
+            object->methods->release(object);
+            g_mapGimic->entries[i].obj = NULL;
+        }
     }
-    temp_v0 = g_mapGimic;
-    temp_v3 = temp_v3 - 1;
-  } while (-1 < temp_v3);
-  temp_v3 = 1;
-  temp_v2 = 1;
-  *(unsigned char *)(g_mapGimic + 0x90) = 0;
-  do {
-    temp_v1 = temp_v3 + 1;
-    temp_v2 = temp_v2 + 2;
-    *(unsigned char *)(temp_v0 + temp_v3 * 0x3c + 0x90) = 0;
-    temp_v3 = temp_v3 + 2;
-    *(unsigned char *)(temp_v0 + temp_v1 * 0x3c + 0x90) = 0;
-  } while (temp_v2 < 0x23);
-  if (*(char *)(temp_v0 + 0x9b4) != '\0') {
-    ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v0 + 0x9c8) + 4));
-    if (*(int **)(temp_v0 + 0x9c8) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(temp_v0 + 0x9c8) + 4))();
-      *(unsigned int *)(temp_v0 + 0x9c8) = 0;
+    for (s32 i = 0; i < MAP_GIMIC_ENTRIES; ++i) {
+        g_mapGimic->entries[i].active = 0;
     }
-    *(char *)(temp_v0 + 0x9b4) = '\0';
-    *(unsigned short *)(temp_v0 + 0x9b6) = 0;
-  }
-  return;
+    MapGimicCleanupView *work = (MapGimicCleanupView *)g_mapGimic;
+    if (work->specialActive) {
+        ptrListRemoveClearOwner(g_handleRegistry, work->special->controller);
+        Releasable *object = (Releasable *)work->special;
+        if (object != NULL) {
+            object->methods->release(object);
+        }
+        work->special = NULL;
+        work->specialActive = 0;
+    }
+    work->request = 0;
 }
-
-} /* extern "C" */
+}

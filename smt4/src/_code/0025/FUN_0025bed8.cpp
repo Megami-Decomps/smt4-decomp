@@ -1,65 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025bed8` (_code @ 0x25bed8, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/GroupedFileTables.h"
 
 extern "C" {
+bool FUN_002ac12c(FileTableGroup *group);
+const FileTableKindRecord *FUN_002ac0f8(FileTableGroup *group);
+u32 FUN_002ac0c4(FileTableGroup *group);
+const void *dataTableFileGetTable(void *file, u32 tableIndex);
+u32 dataTableGetCount(const void *table);
 
-int dataTableFileGetTable(unsigned int, unsigned int);
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-/* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-extern int FUN_002ac12c(unsigned int);
-extern int dataTableGetCount(void);
-
-
-int FUN_0025bed8(int param_1,int param_2,unsigned int param_3)
-
+// Count records in enabled file tables whose resource kind matches the requested category.
+u32 FUN_0025bed8(GroupedFileTables *owner, s32 kind, u32 tableIndex)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v6 = 0;
-  temp_v5 = 0;
-  if (temp_v5 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v4 = *(int *)(param_1 + 0x318) + temp_v5 * 0x50;
-      temp_v0 = FUN_002ac12c(temp_v4);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v4;
-        FUN_002ac0f8();
-        temp_v2 = temp_v4;
-        FUN_002ac0c4();
-        temp_v3 = 0;
-        if (temp_v3 < temp_v2) {
-          do {
-            if ((*(char *)(temp_v1 + temp_v3 * 0x40) == param_2) &&
-               (*(char *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10 + 0xc) != '\0')) {
-              dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v4 + 0x4c) + temp_v3 * 0x10),param_3);
-              temp_v0 = dataTableGetCount();
-              temp_v6 = temp_v6 + temp_v0;
+    u32 total = 0;
+    for (s32 groupIndex = 0; groupIndex < owner->count; ++groupIndex) {
+        FileTableGroup *group = &owner->groups[groupIndex];
+        if (FUN_002ac12c(group)) {
+            const FileTableKindRecord *kinds = FUN_002ac0f8(group);
+            u32 count = FUN_002ac0c4(group);
+            for (u32 index = 0; index < count; ++index) {
+                if (kinds[index].kind == kind && group->slots[index].enabled) {
+                    const void *table = dataTableFileGetTable(group->slots[index].file, tableIndex);
+                    total += dataTableGetCount(table);
+                }
             }
-            temp_v3 = temp_v3 + 1;
-          } while (temp_v3 < temp_v2);
         }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(int *)(param_1 + 0x310));
-  }
-  return temp_v6;
+    }
+    return total;
 }
-
-} /* extern "C" */
+}

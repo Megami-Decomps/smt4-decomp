@@ -1,67 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cc8d8` (_code @ 0x4cc8d8, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves the original level in another saved register and schedules polynomial arithmetic differently. */
+#include "common.h"
 
+struct ExperienceDefinition { u8 unk00[6]; u16 level; };
 extern "C" {
+s32 gameGetUnlockedCountLimit();
+void *dataTableGet(u32 table, u32 subtable);
+const void *dataTableGetEntries(void *table);
+const ExperienceDefinition *FUN_00184310(u32 id);
 
-int FUN_00184310(void);
-int dataTableGet(int, int);
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-extern int gameGetUnlockedCountLimit(void);
-
-
-unsigned int FUN_004cc8d8(int param_1,int param_2)
-
+// Compute the capped level requirement, scaled by the distance from the definition's base level.
+u32 FUN_004cc8d8(u32 id, s32 level)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = gameGetUnlockedCountLimit();
-  if (param_2 >= temp_v0) {
-    temp_v2 = 0;
-  }
-  else {
-    dataTableGet(9,1);
-    temp_v0 = dataTableGetEntries();
-    temp_v1 = gameGetUnlockedCountLimit();
-    temp_v2 = 0;
-    if (param_2 < temp_v1) {
-      if (param_2 >= 99) {
-        temp_v2 = param_2 * param_2 * 3 + (unsigned int)(param_2 * param_2 * param_2) / 100 + param_2 * 0xdb8
-                + 0x184c6;
-        if (temp_v2 >= 1000000) {
-          temp_v2 = 999999;
+    if (level >= gameGetUnlockedCountLimit())
+        return 0;
+    const u32 *requirements = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
+    u32 base = 0;
+    if (level < gameGetUnlockedCountLimit()) {
+        if (level >= 99) {
+            base = level * level * 3 + (u32)(level * level * level) / 100 + level * 3512 + 99526;
+            if (base > 999999)
+                base = 999999;
+        } else {
+            base = requirements[level - 1];
         }
-      }
-      else {
-        temp_v2 = *(unsigned int *)((temp_v0 + param_2 * 4) - 4);
-      }
     }
-    FUN_00184310();
-    temp_v0 = (param_2 - (unsigned int)*(unsigned short *)(param_1 + 6)) + 1;
-    if (temp_v0 < 1) {
-      temp_v3 = 100;
+    s32 distance = level - FUN_00184310(id)->level + 1;
+    u32 percentage = 100;
+    if (distance > 0) {
+        if (distance > 10)
+            distance = 10;
+        const u16 *percentages = (const u16 *)dataTableGetEntries(dataTableGet(9, 2));
+        percentage = percentages[distance - 1];
     }
-    else {
-      if (temp_v0 >= 11) {
-        temp_v0 = 10;
-      }
-      dataTableGet(9,2);
-      temp_v1 = dataTableGetEntries();
-      temp_v3 = (unsigned int)*(unsigned short *)((temp_v1 + temp_v0 * 2) - 2);
-    }
-    temp_v2 = (temp_v2 * temp_v3) / 100;
-    if (temp_v2 >= 1000000) {
-      temp_v2 = 999999;
-    }
-  }
-  return temp_v2;
+    u32 amount = base * percentage / 100;
+    return amount > 999999 ? 999999 : amount;
 }
-
-} /* extern "C" */
+}

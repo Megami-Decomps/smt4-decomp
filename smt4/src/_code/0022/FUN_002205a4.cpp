@@ -9,7 +9,7 @@ int FUN_0024ecc0(...);
 int FUN_0024edd4(int, int);
 int FUN_0028703c(unsigned int);
 int FUN_0029bb14(unsigned int);
-int FUN_0029c2cc(unsigned int, int);
+void FUN_0029c2cc(unsigned int, int);
 int FUN_002adf00(int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int rt_memcpy_w(int, int, int);

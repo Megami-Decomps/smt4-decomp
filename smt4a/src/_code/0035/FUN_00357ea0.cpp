@@ -1,54 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00357ea0` (_code @ 0x357ea0, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Shared-enable materialization, the mode-zero fast branch, and float-bit comparison registers differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-
-int FUN_00163aa4(int *);
-int FUN_0040898c(int);
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern int *jobGetWork(void);
-/* Supplied declaration required: FUN_0040898c. */
-
-
-unsigned int FUN_00357ea0(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int *piVar2;
-  int temp_v1;
-  float temp_v2;
-  
-  piVar2 = (int *)jobGetWork();
-  temp_v2 = 1.0f;
-  FUN_00163aa4(piVar2 + 0xb);
-  temp_v1 = piVar2[0xc];
-  *(unsigned int *)(*piVar2 + 0xe0) = (unsigned int)(temp_v1 != 0x71);
-  *(unsigned int *)(piVar2[1] + 0x54) = (unsigned int)(temp_v1 != 0x71);
-  temp_v0 = (char)piVar2[2];
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 == '\x02') {
-        temp_v1 = piVar2[1];
-        temp_v2 = *(float *)(temp_v1 + 0x58) + temp_v2;
-        *(float *)(temp_v1 + 0x58) = temp_v2;
-        if ((int)temp_v2 >= 0x41f00000) {
-          *(float *)(temp_v1 + 0x58) = temp_v2 - 30.0f;
-        }
-        temp_v2 = *(float *)(temp_v1 + 0x5c) + 12.0f;
-        *(float *)(temp_v1 + 0x5c) = temp_v2;
-        if ((int)temp_v2 >= 0x43b40001) {
-          *(float *)(temp_v1 + 0x5c) = temp_v2 - 360.0f;
-        }
-      }
-    }
-    else {
-      FUN_0040898c(*piVar2);
-    }
-  }
-  return 0;
+JobAnimationWorkPrefixA *jobGetWork(u32 process);
+s32 FUN_00163aa4(void *state, f32 step);
+s32 FUN_0040898c(JobAnimationTargetPrefixA *target);
 }
 
-} /* extern "C" */
+// The retail code compares signed representations, not converted integers.
+static s32 floatRepresentation(f32 value)
+{
+    union {
+        f32 value;
+        s32 bits;
+    } representation;
+    representation.value = value;
+    return representation.bits;
+}
+
+extern "C" u32 FUN_00357ea0(u32 process)
+{
+    JobAnimationWorkPrefixA *work = jobGetWork(process);
+    FUN_00163aa4(work->unk2C, 1.0f);
+
+    const bool enabled = (work->code != 0x71);
+    work->target->enabled = enabled;
+    work->animation->enabled = enabled;
+
+    switch (work->mode) {
+    case 1:
+        FUN_0040898c(work->target);
+        break;
+    case 2: {
+        JobAnimationParametersPrefixA *animation = work->animation;
+        animation->phase += 1.0f;
+        if (floatRepresentation(animation->phase) >= 0x41f00000)
+            animation->phase -= 30.0f;
+
+        animation->angle += 12.0f;
+        if (floatRepresentation(animation->angle) > 0x43b40000)
+            animation->angle -= 360.0f;
+        break;
+    }
+    default:
+        break;
+    }
+    return 0;
+}

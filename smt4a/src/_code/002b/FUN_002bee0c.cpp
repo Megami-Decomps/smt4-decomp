@@ -1,48 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bee0c` (_code @ 0x2bee0c, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges the two access-mode branches; retail duplicates the bookkeeping reset and open call. */
+#include "common.h"
 
+struct ArchiveOpenWork {
+    u32 unk00;
+    u32 unk04;
+    u32 handle; // 0x08
+    u32 state; // 0x0c
+    u32 position; // 0x10
+    u32 sizeLow; // 0x14
+    u32 sizeHigh; // 0x18
+};
 extern "C" {
+void FUN_002e0e04(const char *path, void *convertedPath, u32 mode);
+s32 FUN_001883b0(void *archive, void *convertedPath, u32 mode);
+void FUN_0013ebd8(u32 result);
 
-int FUN_0013ebd8(void);
-int FUN_001883b0(int, unsigned char [500], int);
-int FUN_002e0e04(int, unsigned char [500], int);
-
-/* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: FUN_002e0e04. */
-
-
-int FUN_002bee0c(int param_1,int param_2,int param_3)
-
+// Convert a path, reset archive bookkeeping and open it using the requested access mode.
+s32 FUN_002bee0c(ArchiveOpenWork *work, const char *path, s32 mode)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [500];
-  
-  FUN_002e0e04(param_2,temp_v1,1);
-  if (param_2 != 0) {
-    if (param_3 != 1) {
-      *(unsigned int *)(param_1 + 0x14) = 0;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-      temp_v0 = param_1 + 8;
-      *(unsigned int *)(param_1 + 0x10) = 0;
-      FUN_001883b0(temp_v0,temp_v1,1);
+    u8 convertedPath[500];
+    FUN_002e0e04(path, convertedPath, 1);
+    if (path) {
+        work->sizeLow = 0;
+        work->sizeHigh = 0;
+        work->state = 0;
+        work->position = 0;
+        s32 result = FUN_001883b0(&work->handle, convertedPath, mode == 1 ? 2 : 1);
+        FUN_0013ebd8(result);
+        return result;
     }
-    else {
-      *(unsigned int *)(param_1 + 0x14) = 0;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-      temp_v0 = param_1 + 8;
-      *(unsigned int *)(param_1 + 0x10) = 0;
-      FUN_001883b0(temp_v0,temp_v1,2);
-    }
-    FUN_0013ebd8();
-    return temp_v0;
-  }
-  FUN_0013ebd8();
-  return -0x1f1fb944;
+    FUN_0013ebd8((u32)-0x1f1fb944);
+    return -0x1f1fb944;
 }
-
-} /* extern "C" */
+}

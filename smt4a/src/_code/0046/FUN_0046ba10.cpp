@@ -23,7 +23,7 @@ extern int scenePartAdvanceState(...); /* 0x469e1c */
 extern int questCenterUpdateTalkMasterScript(...); /* 0x469eb0 */
 extern int jobStateObjWaitDone2(...); /* 0x46a0b8 */
 extern int FUN_0046aab4(...); /* 0x46aab4 */
-extern int FUN_0046af60(...); /* 0x46af60 */
+extern int eventUpdatePickedObjectEndScript(...); /* 0x46af60 */
 extern int FUN_0046b18c(...); /* 0x46b18c */
 
 
@@ -77,7 +77,7 @@ void FUN_0046ba10(int param_1)
   *(unsigned int *)(param_1 + 0x32c) = 0;
   *(romwright_code **)(param_1 + 0x330) = scenePartAdvanceState;
   *(unsigned int *)(param_1 + 0x334) = 0;
-  *(romwright_code **)(param_1 + 0x340) = FUN_0046af60;
+  *(romwright_code **)(param_1 + 0x340) = eventUpdatePickedObjectEndScript;
   *(unsigned int *)(param_1 + 0x344) = 0;
   *(unsigned int *)(param_1 + 0x348) = 0x469d1c;
   *(unsigned int *)(param_1 + 0x34c) = 0;

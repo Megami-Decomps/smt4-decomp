@@ -1,67 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00334044` (_code @ 0x334044, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses different session-field base adjustments and shares its constant-return tails differently. */
+#include "shard/Shard0033.h"
 
 extern "C" {
+extern ObjBRef g_gameGlobals;
 
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-
-unsigned int FUN_00334044(void)
-
+// Classify the current session's interaction and display state.
+u32 FUN_00334044()
 {
-/* irregular: 1 unstructured edge(s) */
-  char temp_v0;
-  char temp_v1;
-  
-  temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018);
-  if (((temp_v0 == '\x03' || temp_v0 == '\x05') || (temp_v0 == '\x06' || temp_v0 == '\a')) ||
-     ((temp_v0 == '\t' || temp_v0 == '\n') || temp_v0 == '\f')) {
-    return 1;
-  }
-  if (temp_v0 == '\r') {
-    return 2;
-  }
-  temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2017);
-  if (temp_v0 == '\0') {
-    temp_v1 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1381);
-    if (temp_v1 == '\0') {
-      return 3;
+    u8 mode = g_gameGlobals.instance->unk2018;
+    if (mode == 3 || mode == 5 || mode == 6 || mode == 7
+        || mode == 9 || mode == 10 || mode == 12) {
+        return 1;
     }
-    return 2;
-  }
-  if (temp_v0 == '\x04') {
-    return 2;
-  }
-  if (temp_v0 != '\a') {
-    if (temp_v0 == '\t' || temp_v0 == '\n') {
-      return 2;
+    if (mode == 13) return 2;
+    mode = g_gameGlobals.instance->unk2017;
+    if (mode == 0) {
+        return g_gameGlobals.instance->unk1381 == 0 ? 3 : 2;
     }
-    if ((temp_v0 == '\v' || temp_v0 == '\f') || temp_v0 == '\b') {
-      return 2;
+    if (mode == 4) return 2;
+    if (mode != 7) {
+        if (mode == 9 || mode == 10) return 2;
+        if (mode == 11 || mode == 12 || mode == 8) return 2;
+        if (mode == 15) return 1;
+        if (mode == 14) {
+            return g_gameGlobals.instance->unk1381 == 0 ? 3 : 2;
+        }
+        if (g_gameGlobals.instance->unk1381 != 0) return 2;
     }
-    if (temp_v0 == '\x0f') {
-      return 1;
-    }
-    temp_v1 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1381);
-    if (temp_v0 == '\x0e') {
-      if (temp_v1 == '\0') {
-        return 3;
-      }
-      return 2;
-    }
-    if (temp_v1 != '\0') {
-      return 2;
-    }
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010);
-  }
-  else {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2010);
-  }
-  if (temp_v0 != '\0') {
-    return 3;
-  }
-  return 2;
+    return g_gameGlobals.instance->sessionDisplay.active != 0 ? 3 : 2;
 }
-
-} /* extern "C" */
+}

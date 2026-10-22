@@ -19,7 +19,7 @@ struct DigitRowOwner {
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-f32 FUN_001879d0(RenderCtxA *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 alpha);
 const DigitLayout *FUN_001834a4(u32 texture, u32 index);
 void FUN_00164168(u32 sprite, s32 x, s32 y, s32 texture, s32 layer, s32 frame, f32 alpha);
@@ -29,7 +29,7 @@ void FUN_003f7674(DigitRowOwner *owner, s32 x, s32 y, f32 alpha);
  * then the rest of the owner's display. */
 void FUN_003f54c4(DigitRowOwner *owner, s32 x, s32 y, f32 alpha)
 {
-    s32 offset = (s32)FUN_001879d0(g_renderCtx, 0.26f);
+    s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     s32 i;
 
     efctSetSpeed(alpha);

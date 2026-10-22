@@ -1,71 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246344` (_code @ 0x246344, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the readable level-limit test removes retail redundant lower-bound comparisons and changes register allocation. */
+/* Prepares an idle party popup from the selected slot when its unit meets the level limit. */
+#include "map/mapDepart.h"
 
+struct PopupState {
+    u32 state;
+    u32 timer;
+    u8 unk08[0xC];
+    union { u32 key; const char *text; } message;
+    u32 slotId;
+    u8 unk1C[9];
+    char text[72];
+};
 extern "C" {
-
-int textFormatBuffer(int, unsigned char [72], unsigned int);
-int FUN_00152f44(void);
-int FUN_00180118(unsigned int);
-int dataTable00FindById(void);
-int rt_memcpy(unsigned char [72], int, int);
-
-extern int *g_popupState; /* 0x58104c */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00152f44. */
-extern int saveSlotFindSelected(void);
-/* Supplied declaration required: FUN_00180118. */
-extern int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-extern int FUN_002d8b58(unsigned int, unsigned short);
-/* Supplied declaration required: rt_memcpy. */
-
+extern PopupState *g_popupState;
+extern GameStateA g_gameState;
+void FUN_00152f44(void);
+void *saveSlotFindSelected(void);
+s32 gameFlagIsSet(u32 flag);
+u32 randRange(u32 maximum);
+void *dataTable00FindById(u16 id);
+void *gameGetPlayerData(void);
+const char *FUN_002d8b58(u32 kind, u16 slot);
+void rt_memcpy(void *destination, const void *source, u32 bytes);
+u32 FUN_00180118(u32 value);
+void textFormatBuffer(char *destination, const char *format, u32 value);
 
 void FUN_00246344(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  unsigned int temp_v3;
-  unsigned short temp_v4;
-  unsigned char temp_v5 [72];
-  
-  FUN_00152f44();
-  if (((*g_popupState == 0) && (temp_v0 = saveSlotFindSelected(), temp_v0 != 0)) &&
-     ((temp_v1 = gameFlagIsSet(0x1a2), temp_v1 == 0 || (temp_v1 = randRange(99), temp_v1 + 1 >= 0x33)))) {
-    temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x308));
-    temp_v2 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x308));
-    dataTable00FindById();
-    temp_v4 = *(unsigned short *)(temp_v2 + 2) & 0x7fff;
-    temp_v1 = gameGetPlayerData();
-    piVar1 = g_popupState;
-    if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x308)) != 0) {
-      if (temp_v4 < *(unsigned short *)(temp_v1 + 0x62)) {
-        temp_v4 = temp_v4 + 5;
-      }
-      if (*(unsigned short *)(temp_v1 + 0x62) <= temp_v4) {
-        *g_popupState = 0xc;
-        piVar1[1] = 0;
-        temp_v1 = FUN_002d8b58(0xe,*(unsigned short *)(temp_v0 + 300));
-        piVar1 = g_popupState;
-        g_popupState[5] = temp_v1;
-        piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
-        rt_memcpy(temp_v5,temp_v1,0x48);
-        temp_v3 = temp_v3 & 0xffff;
-        FUN_00180118(temp_v3);
-        textFormatBuffer((int)g_popupState + 0x25,temp_v5,temp_v3);
-        g_popupState[5] = (int)g_popupState + 0x25;
-      }
+    struct SlotView {
+        u8 record[0x12C];
+        u16 id;
+    };
+    struct SelectedUnitView {
+        u8 unk000[0x308];
+        u32 unitId;
+    };
+    struct TableLevelView { u16 id; u16 level; };
+    FUN_00152f44();
+    if (g_popupState->state != 0) {
+        return;
     }
-  }
-  return;
+    SlotView *slot = (SlotView *)saveSlotFindSelected();
+    if (slot == NULL || (gameFlagIsSet(418) && randRange(99) + 1 < 51)) {
+        return;
+    }
+    SelectedUnitView *selection = (SelectedUnitView *)&g_gameState;
+    u32 unitId = selection->unitId;
+    u16 tableLevel = ((TableLevelView *)dataTable00FindById((u16)unitId))->level & 0x7FFF;
+    u16 playerLevel = *(u16 *)((u8 *)gameGetPlayerData() + 0x62);
+    if (selection->unitId == 0 || playerLevel > tableLevel + 5) {
+        return;
+    }
+    g_popupState->state = 12;
+    g_popupState->timer = 0;
+    const char *message = FUN_002d8b58(14, slot->id);
+    g_popupState->message.text = message;
+    g_popupState->slotId = slot->id;
+    char format[72];
+    rt_memcpy(format, message, sizeof(format));
+    u32 value = FUN_00180118((u16)unitId);
+    textFormatBuffer(g_popupState->text, format, value);
+    g_popupState->message.text = g_popupState->text;
 }
-
-} /* extern "C" */
+}

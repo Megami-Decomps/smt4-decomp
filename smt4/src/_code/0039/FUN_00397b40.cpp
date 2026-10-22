@@ -10,7 +10,7 @@ extern "C" {
 int logFormatBuffer(int *, int, int);
 void nameEntryCopyEditedName(NameTask*, NameBuffer*);
 int buttonHelpResetSlots(void);
-int FUN_00295660(int, int *);
+int textEncodeFontSlot(int, int *);
 int FUN_00296ee0(int, int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
@@ -24,7 +24,7 @@ typedef struct {
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: logFormatBuffer. */
 /* Supplied declaration required: buttonHelpResetSlots. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
@@ -118,7 +118,7 @@ LAB_00397cf4:
     temp_v1 = sys43e188GetState();
     if (temp_v1 != 0) {
       nameEntryCopyEditedName((NameTask*)param_1,(NameBuffer*)&uStack_30);
-      FUN_00295660(0x32,&uStack_30);
+      textEncodeFontSlot(0x32,&uStack_30);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x654),1);
       *(unsigned char *)(param_1 + 0x658) = 1;
       buttonHelpSetPreset(0x9a);

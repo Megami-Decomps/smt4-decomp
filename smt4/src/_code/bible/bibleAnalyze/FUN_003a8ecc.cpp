@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned int DAT_0043d998; /* 0x43d998 */
 
-extern int FUN_0022caa4(unsigned char *, unsigned int);
+extern int dataLookupDisplayName(unsigned char *, unsigned int);
 extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: pointConvertToFloat. */
 extern int flaggedValueHolderGetTotal(int);
@@ -56,7 +56,7 @@ void FUN_003a8ecc(int param_1)
       FUN_0029da34(0,1,*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
       return;
     }
-    temp_v2 = FUN_0022caa4(temp_v4,*(unsigned int *)(param_1 + 0xa5b4));
+    temp_v2 = dataLookupDisplayName(temp_v4,*(unsigned int *)(param_1 + 0xa5b4));
     if (temp_v2 == 0) {
       temp_v2 = 0x40226c;
     }

@@ -1,55 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a057c` (_code @ 0x1a057c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps one bottom-tested component-copy loop; the build peels its first iteration and schedules the command header differently. */
+#include "common.h"
 
-extern "C" {
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_4_stack;
-
-
-unsigned int * FUN_001a057c(unsigned int *param_1,unsigned int param_2,unsigned int *param_3,int param_4)
-
+// Append vertex-shader float uniforms in the GPU's reversed component order.
+extern "C" u32 *FUN_001a057c(u32 *commands, u32 firstUniform, const f32 (*vectors)[4], s32 count)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  
-  *param_1 = param_2 | 0x80000000;
-  param_1[1] = 0xf02c0;
-  param_1[2] = param_3[3];
-  param_1[3] = (param_4 * 0x400000 - 0x100000U) | 0xf02c1;
-  param_1[4] = param_3[2];
-  param_1[5] = param_3[1];
-  puVar1 = param_1 + 7;
-  param_1[6] = *param_3;
-  temp_v0 = param_4 - 1;
-  if (0 < temp_v0) {
-    puVar4 = param_3 + 7;
-    puVar5 = param_3 + 6;
-    puVar3 = param_3 + 5;
-    puVar6 = puVar1;
-    do {
-      param_3 = param_3 + 4;
-      temp_v0 = temp_v0 - 1;
-      *puVar6 = *puVar4;
-      puVar4 = puVar4 + 4;
-      puVar6[1] = *puVar5;
-      puVar5 = puVar5 + 4;
-      puVar6[2] = *puVar3;
-      puVar3 = puVar3 + 4;
-      puVar6[3] = *param_3;
-      puVar6 = puVar6 + 4;
-    } while (temp_v0 != 0);
-    puVar1 = puVar1 + (param_4 * 4 - 4);
-  }
-  *puVar1 = 0;
-  return puVar1 + 1;
+    const u32 *first = (const u32 *)vectors;
+    *commands++ = firstUniform | 0x80000000;
+    *commands++ = 0xf02c0;
+    *commands++ = first[3];
+    *commands++ = (((u32)count * 4 - 1) << 20) | 0xf02c1;
+    *commands++ = first[2];
+    *commands++ = first[1];
+    *commands++ = first[0];
+    s32 remaining = count - 1;
+    if (remaining > 0) {
+        const f32 *w = &vectors[1][3];
+        const f32 *z = &vectors[1][2];
+        const f32 *y = &vectors[1][1];
+        const f32 *x = &vectors[1][0];
+        f32 *output = (f32 *)commands;
+        do {
+            output[0] = *w;
+            --remaining;
+            w += 4;
+            output[1] = *z;
+            z += 4;
+            output[2] = *y;
+            y += 4;
+            output[3] = *x;
+            x += 4;
+            output += 4;
+        } while (remaining != 0);
+        commands += count * 4 - 4;
+    }
+    *commands++ = 0;
+    return commands;
 }
-
-} /* extern "C" */

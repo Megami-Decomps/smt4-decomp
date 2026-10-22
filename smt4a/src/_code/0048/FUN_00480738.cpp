@@ -1,64 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00480738` (_code @ 0x480738, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: switch default-result initialization and inlined roster-sum loop registers differ. */
+#include "common.h"
 
 extern "C" {
-
-extern int FUN_001ba3d4(unsigned int);
-
-
-int FUN_00480738(unsigned int param_1)
-
-{
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  switch(param_1) {
-  default:
-    return 0;
-  case 1:
-    temp_v2 = 0;
-    do {
-      temp_v0 = FUN_001ba3d4(*(unsigned int *)(temp_v2 * 4 + 0x57f6f8));
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = temp_v1 + temp_v0;
-    } while (temp_v2 < 0xb);
-    break;
-  case 2:
-    temp_v2 = 0;
-    do {
-      temp_v0 = FUN_001ba3d4(*(unsigned int *)(temp_v2 * 4 + 0x57f724));
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = temp_v1 + temp_v0;
-    } while (temp_v2 < 0xb);
-    break;
-  case 3:
-    temp_v2 = 0;
-    do {
-      temp_v0 = FUN_001ba3d4(*(unsigned int *)(temp_v2 * 4 + 0x57f750));
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = temp_v1 + temp_v0;
-    } while (temp_v2 < 0xb);
-    break;
-  case 4:
-    temp_v2 = 0;
-    do {
-      temp_v0 = FUN_001ba3d4(*(unsigned int *)(temp_v2 * 4 + 0x57f77c));
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = temp_v1 + temp_v0;
-    } while (temp_v2 < 0xb);
-    break;
-  case 5:
-    temp_v2 = 0;
-    do {
-      temp_v0 = FUN_001ba3d4(*(unsigned int *)(temp_v2 * 4 + 0x57f7a8));
-      temp_v2 = temp_v2 + 1;
-      temp_v1 = temp_v1 + temp_v0;
-    } while (temp_v2 < 0xb);
-  }
-  return temp_v1;
+extern u32 DAT_0057f6f8[11];
+extern u32 DAT_0057f724[11];
+extern u32 DAT_0057f750[11];
+extern u32 DAT_0057f77c[11];
+extern u32 DAT_0057f7a8[11];
+s32 FUN_001ba3d4(u32 id);
 }
 
-} /* extern "C" */
+static __inline s32 sumMemberValues(const u32 *members)
+{
+    s32 total = 0;
+    for (s32 i = 0; i < 11; ++i)
+        total += FUN_001ba3d4(members[i]);
+    return total;
+}
+
+// Sum the eleven member values in the requested roster category.
+extern "C" s32 FUN_00480738(s32 category)
+{
+    switch (category) {
+    case 1: return sumMemberValues(DAT_0057f6f8);
+    case 2: return sumMemberValues(DAT_0057f724);
+    case 3: return sumMemberValues(DAT_0057f750);
+    case 4: return sumMemberValues(DAT_0057f77c);
+    case 5: return sumMemberValues(DAT_0057f7a8);
+    default: return 0;
+    }
+}

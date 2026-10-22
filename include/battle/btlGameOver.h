@@ -3,6 +3,7 @@
 #define BATTLE_BTLGAMEOVER_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlGameOver {
@@ -16,11 +17,28 @@ typedef struct BtlGameOver {
 
 /* Apocalypse layout: the fields sit four bytes further on. */
 typedef struct BtlGameOverA {
-    /* 0x00 */ u8 unk00[0x10];
+    union {
+        /* 0x00 */ u8 unk00[0x10];
+        struct {
+            u8 unk00[8];
+            /* 0x08 */ u32 frameCounter;
+        } timing;
+    };
     /* 0x10 */ void *dataA;
     /* 0x14 */ void *process;
     /* 0x18 */ void *dataB;
 } BtlGameOverA;
+
+struct BtlGameOverGlobalsA {
+    BtlGameOverA *state; // 0x00
+    u32 unk04;
+    u32 blockedStates[2]; // 0x08
+    u32 blockedTransitions[2]; // 0x10
+    u32 forcedStates[2]; // 0x18
+};
+
+typedef char BtlGameOverFrameOffsetCheck[offsetof(BtlGameOverA, timing.frameCounter) == 8 ? 1 : -1];
+typedef char BtlGameOverGlobalsSizeCheck[sizeof(BtlGameOverGlobalsA) == 0x20 ? 1 : -1];
 
 /* Work area of the job that owns the game-over state. */
 typedef struct BtlGameOverOwner {

@@ -37,7 +37,7 @@ extern "C" {
 extern ReflectList *g_btlActionReflect;
 
 void *btlGetMainState(void);
-ReflectNode *FUN_0022699c(ReflectList *list, s16 id, s32 flags, u32 key);
+ReflectNode *btlQueueReflectAction(ReflectList *list, s16 id, s32 flags, u32 key);
 ReflectRecord *FUN_0027da30(void *battle, s16 id);
 s32 FUN_0027dab0(void *battle, ReflectUnit *unit);
 
@@ -57,7 +57,7 @@ ReflectNode *FUN_003dddd0(s32 id, u32 key, ReflectUnit *unit, u32 param)
                 return NULL;
             }
         }
-        node = FUN_0022699c(list, id, 0, key);
+        node = btlQueueReflectAction(list, id, 0, key);
         record = FUN_0027da30(btlGetMainState(), unit->id);
         index = FUN_0027dab0(btlGetMainState(), unit);
         if (index < 0) {

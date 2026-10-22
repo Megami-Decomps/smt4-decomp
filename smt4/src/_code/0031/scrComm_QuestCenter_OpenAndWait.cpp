@@ -6,7 +6,7 @@ int jyoucyuGetTableEntry(int index);
 int flagsSetBit0(void);
 int QuestCenter_GetActiveEntry(void);
 extern int scrGetCommandFrame(void);
-extern int QuestCenterMode_IsBusy(void);
+extern int questCenterPollShutdown(void);
 
 u8 scrComm_QuestCenter_OpenAndWait(void)
 {
@@ -15,7 +15,7 @@ u8 scrComm_QuestCenter_OpenAndWait(void)
         QuestCenter_GetActiveEntry();
         flagsSetBit0();
     }
-    return QuestCenterMode_IsBusy() == 0;
+    return questCenterPollShutdown() == 0;
 }
 
 } /* extern "C" */

@@ -1,56 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003caa2c` (_code @ 0x3caa2c, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask halves use different load and AND operand registers; the fallback-value test is if-converted differently. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
+// These word fields fall inside an unaligned padding union in the shared combatant layout.
+struct CandidateValueView {
+    u8 unk000[0xb0];
+    s32 primary; // 0xb0
+    u32 unkB4;
+    s32 secondary; // 0xb8
+};
 extern "C" {
+BtlMainStateA *btlGetMainState();
+void scrSetResult(s32 result);
 
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003caa2c(void)
-
+// Report whether any eligible combatant has a positive primary or fallback value.
+u32 FUN_003caa2c()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  do {
-    temp_v0 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + temp_v3 * 0x408);
-    temp_v1 = *puVar4;
-    temp_v2 = puVar4[1];
-    if ((((DAT_005702a4 & temp_v2) != 0 || (DAT_005702a0 & temp_v1) != 0) &&
-        ((DAT_0057028c & temp_v2) != 0 || (g_btlCandidateMasks & temp_v1) != 0)) &&
-       ((temp_v1 & DAT_005702b0) == 0 && (temp_v2 & DAT_005702b4) == 0)) {
-      temp_v1 = puVar4[0x2c];
-      if ((int)temp_v1 < 1) {
-        temp_v1 = puVar4[0x2e];
-      }
-      if (0 < (int)temp_v1) {
-        scrSetResult(1);
-        return 1;
-      }
+    for (s32 i = 0; i < 109; ++i) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        u64 flags = entry->flags;
+        if ((flags & g_btlCandidateMasks.unavailable) &&
+            (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded)) {
+            CandidateValueView *values = (CandidateValueView *)entry;
+            s32 value = values->primary;
+            if (value < 1)
+                value = values->secondary;
+            if (value > 0) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
     }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

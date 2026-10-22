@@ -1,70 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba1d8` (_code @ 0x3ba1d8, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default map destination is stored with words instead of three halfword stores. */
+#include "map/MapJumpTransition.h"
+#include "map/mapDepart.h"
 
 extern "C" {
-
-int gameJumpRequestClear(void);
-int FUN_00289574(...);
-int FUN_002bd808(int, unsigned short [6]);
-
-/* stack frame of param_1: 3 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp14; /* 0x14: local_14 */
-    unsigned short sp16; /* 0x16: local_16 */
-    unsigned short sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: gameJumpRequestClear. */
-/* Supplied declaration required: FUN_00289574. */
-extern char *gameJumpRequestGet(void);
-/* Supplied declaration required: FUN_002bd808. */
-
-
-void FUN_003ba1d8(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned short temp_v2 [6];
-  
-  pcVar2 = (char *)gameJumpRequestGet();
-  temp_v0 = *pcVar2;
-  if (temp_v0 != '\x01') {
-    if (temp_v0 == '\x02') {
-      FUN_00289574((unsigned char)pcVar2[1] + 100,pcVar2[2],0xffffffff);
-      (*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) = 0xffffffff;
-      *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x80010;
-      gameJumpRequestClear();
-      *(unsigned int *)(param_1 + 0x28) = 5;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      return;
-    }
-    if (temp_v0 != '\x03') {
-      gameJumpRequestClear();
-      *(unsigned int *)(param_1 + 0x28) = 5;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      return;
-    }
-    temp_v2[1] = 0;
-    temp_v2[2] = 0;
-    temp_v2[0] = (unsigned short)(unsigned char)pcVar2[1];
-    FUN_002bd808(param_1 + 0x42,temp_v2);
-    temp_v1 = *(unsigned int *)(param_1 + 0x20) | 0x10;
-  }
-  else {
-    FUN_00289574(pcVar2[1],pcVar2[2],pcVar2[3]);
-    temp_v1 = *(unsigned int *)(param_1 + 0x20) | 0x80010;
-  }
-  *(unsigned int *)(param_1 + 0x20) = temp_v1;
-  gameJumpRequestClear();
-  *(unsigned int *)(param_1 + 0x28) = 5;
-  *(unsigned int *)(param_1 + 0x2c) = 0;
-  return;
+MapJumpRequest *gameJumpRequestGet(void);
+void gameJumpRequestClear(void);
+void FUN_00289574(s32, s32, s32, f32, f32, f32, f32, f32);
+void FUN_002bd808(MapJumpDestination *, const MapJumpDestination *);
+extern GameState g_gameState;
 }
 
-} /* extern "C" */
+/* Dispatch a saved map jump, then return the transition to its waiting state. */
+extern "C" void FUN_003ba1d8(MapJumpTransition *work)
+{
+    const MapJumpRequest *request = gameJumpRequestGet();
+    switch (request->kind) {
+    case 1:
+        FUN_00289574(request->map, request->entrance, request->object,
+                     request->transform[0], request->transform[1], request->transform[2],
+                     request->transform[3], request->transform[4]);
+        work->flags |= 0x80010;
+        break;
+    case 2:
+        FUN_00289574(request->map + 100, request->entrance, -1,
+                     request->transform[0], request->transform[1], request->transform[2],
+                     request->transform[3], request->transform[4]);
+        g_gameState.currentObjectId = (u32)-1;
+        work->flags |= 0x80010;
+        break;
+    case 3:
+        MapJumpDestination destination = {0, 0, 0};
+        destination.map = request->map;
+        FUN_002bd808(&work->destination, &destination);
+        work->flags |= 0x10;
+        break;
+    }
+    gameJumpRequestClear();
+    work->state = 5;
+    work->substate = 0;
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
@@ -29,7 +29,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -64,7 +64,7 @@ void FUN_00398ba8(int param_1)
   
   efctSetSpeed();
   temp_v7 = 0.27f;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v8 = (int)temp_v7;
   FUN_002c39a4(g_titleScene);
   FUN_002bed3c();

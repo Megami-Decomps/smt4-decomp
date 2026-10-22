@@ -1,46 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b100` (_code @ 0x33b100, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pending-action resets use different saved registers, writeback, and branch layout. */
+#include "battle/btlAction.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
-extern "C" {
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-
-void FUN_0033b100(int param_1,int param_2)
-
+extern "C" void FUN_0033b100(BtlMainState *state, s32 mode)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = (int)*(short *)(*(int *)(param_1 + 0x1e98) + temp_v2 * 0x114 + 0x60);
-    if (-1 < temp_v0) {
-      temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288);
-      if ((((temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0)) &&
-         (temp_v0 = *(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288 + 0xcc, temp_v0 != 0)) {
-        if (param_2 != 0) {
-          if ((param_2 != 1) || ((temp_v1 & 0x10) != 0)) {
-            *(unsigned int *)(temp_v0 + 0x14c) = 0;
-            *(unsigned int *)(temp_v0 + 0x150) = 0;
-          }
+    struct UnitActionView {
+        u8 unk000[0x14c];
+        u32 pending[2];
+    };
+    struct EntryUnitView {
+        u8 unk000[0xcc];
+        UnitActionView unit;
+    };
+    typedef char EntryUnitLayoutCheck[offsetof(EntryUnitView, unit) == 0xcc &&
+        offsetof(UnitActionView, pending) == 0x14c ? 1 : -1];
+    for (s32 action = 0; action < BTL_ENTRY_COUNT; ++action) {
+        s32 index = state->actions.records[action].participant.combatantIndex;
+        if (index >= 0) {
+            BtlEntry *entry = &state->entries[index];
+            u32 flags = entry->flags;
+            if ((flags & BTL_ENTRY_FLAG_ACTIVE) != 0 && (flags & BTL_ENTRY_FLAG_BLOCKED) == 0) {
+                UnitActionView *unit = &((EntryUnitView *)entry)->unit;
+                if (unit != NULL) {
+                    if (mode != 0) {
+                        if (mode != 1 || (flags & BTL_ENTRY_FLAG_PRESENT) != 0) {
+                            unit->pending[0] = 0;
+                            unit->pending[1] = 0;
+                        }
+                    } else if ((flags & BTL_ENTRY_FLAG_PRESENT) == 0) {
+                        unit->pending[0] = 0;
+                        unit->pending[1] = 0;
+                    }
+                }
+            }
         }
-        else if ((temp_v1 & 0x10) == 0) {
-          *(unsigned int *)(temp_v0 + 0x14c) = 0;
-          *(unsigned int *)(temp_v0 + 0x150) = 0;
-        }
-      }
     }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */

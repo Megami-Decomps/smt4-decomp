@@ -1,75 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00313184` (_code @ 0x313184, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pair and category registers differ; the subtype comparison is compiled without retail signed halfword adjustment. */
+#include "common.h"
 
+struct CategorySourceRecord {
+    u8 unk00[0x26];
+    u16 entryId; // 0x26
+};
+struct CategoryEntryRecord {
+    u8 unk00[0x2c];
+    u16 subtype; // 0x2c
+};
+struct CategoryOperand {
+    u32 id;
+    u32 flags;
+};
 extern "C" {
+CategorySourceRecord *FUN_002498ec(u32 id);
+CategoryEntryRecord *FUN_002ae164(u32 id);
+s32 idIsAbove400(u32 id);
+s32 FUN_0024c52c(u32 id);
+void FUN_002497f8(CategoryOperand *first, CategoryOperand *second);
 
-int FUN_002497f8(unsigned int [3], unsigned int *);
-int FUN_002498ec(void);
-int FUN_002ae164(void);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002497f8. */
-/* Supplied declaration required: FUN_002498ec. */
-extern int FUN_0024c52c(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(unsigned int);
-
-
-void FUN_00313184(unsigned short *param_1,unsigned short *param_2)
-
+// Apply the pair operation only when both resolved entries have the same category and subtype.
+void FUN_00313184(const u16 *first, const u16 *second)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short temp_v4;
-  short temp_v5;
-  unsigned int temp_v6 [3];
-  unsigned int temp_v7;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_002498ec();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_002498ec();
-  temp_v6[0] = (unsigned int)*(unsigned short *)(temp_v0 + 0x26);
-  temp_v6[1] = 0;
-  temp_v6[2] = (unsigned int)*(unsigned short *)(temp_v1 + 0x26);
-  temp_v7 = 0;
-  temp_v2 = idIsAbove400(temp_v6[0]);
-  if (temp_v2 != 0) {
-    temp_v2 = 99;
-    temp_v5 = 0;
-  }
-  else {
-    temp_v2 = FUN_0024c52c(temp_v6[0]);
-    temp_v0 = temp_v6[0];
-    FUN_002ae164();
-    temp_v5 = *(short *)(temp_v0 + 0x2c);
-  }
-  temp_v3 = idIsAbove400(temp_v6[2]);
-  if (temp_v3 != 0) {
-    temp_v3 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v3 = FUN_0024c52c(temp_v6[2]);
-    temp_v0 = temp_v6[2];
-    FUN_002ae164();
-    temp_v4 = *(short *)(temp_v0 + 0x2c);
-  }
-  if (temp_v3 == temp_v2 && temp_v5 == temp_v4) {
-    FUN_002497f8(temp_v6,temp_v6 + 2);
-  }
-  return;
+    CategorySourceRecord *firstRecord = FUN_002498ec(*first);
+    CategorySourceRecord *secondRecord = FUN_002498ec(*second);
+    CategoryOperand operands[2] = {{firstRecord->entryId, 0}, {secondRecord->entryId, 0}};
+    s32 firstCategory;
+    u16 firstSubtype;
+    if (idIsAbove400(operands[0].id)) {
+        firstCategory = 99;
+        firstSubtype = 0;
+    } else {
+        firstCategory = FUN_0024c52c(operands[0].id);
+        firstSubtype = FUN_002ae164(operands[0].id)->subtype;
+    }
+    s32 secondCategory;
+    u16 secondSubtype;
+    if (idIsAbove400(operands[1].id)) {
+        secondCategory = 99;
+        secondSubtype = 0;
+    } else {
+        secondCategory = FUN_0024c52c(operands[1].id);
+        secondSubtype = FUN_002ae164(operands[1].id)->subtype;
+    }
+    if (firstCategory == secondCategory && firstSubtype == secondSubtype)
+        FUN_002497f8(&operands[0], &operands[1]);
 }
-
-} /* extern "C" */
+}

@@ -9,7 +9,7 @@ int FUN_002a8a58(...);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int cameraSetViewMatrix(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002c1ac8(...);
 int FUN_002c1b64(...);
 int VectorSignedToFloat(...);
@@ -49,7 +49,7 @@ extern float DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: cameraSetViewMatrix. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_002c15ac(unsigned int);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
@@ -328,7 +328,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
       temp_v17 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v17 = temp_v17 * temp_v21;
     }
-    FUN_002ba12c(g_titleScene,temp_v7);
+    renderCtxCalculateStereoParallax(g_titleScene,temp_v7);
     temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 == (float)temp_v20) << 0x1e);
     if (DAT_004d4911 != '\0') {
       VectorSignedToFloat((int)temp_v17,(unsigned char)(temp_v7 >> 0x16) & 3);

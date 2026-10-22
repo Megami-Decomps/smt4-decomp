@@ -79,7 +79,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int aocIndexValueOrDefault(unsigned short);
-extern unsigned int FUN_002bce30(short, unsigned int);
+extern unsigned int demonGetRaceLabel(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -186,7 +186,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,0xffffffff,temp_v18);
     temp_v2 = FUN_002bf4f8(0x24,0x4e);
-    temp_v3 = FUN_002bce30(*psVar4,0);
+    temp_v3 = demonGetRaceLabel(*psVar4,0);
     textFormatBuffer(temp_v18,&LAB_001f0940,temp_v3);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

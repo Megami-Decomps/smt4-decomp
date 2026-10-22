@@ -8,7 +8,7 @@ int FUN_001634b4(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int pairSetHalves(int, int, int);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_001a1ee0(int);
 int FUN_00387240(...);
 int VectorSignedToFloat(...);
@@ -30,7 +30,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: pairSetHalves. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_00387240. */
 
@@ -54,8 +54,8 @@ void FUN_003b21a4(int param_1)
   float temp_v10;
   
   temp_v7 = 0.29f;
-  FUN_001879d0(g_renderCtx);
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v10 = 1.0f;
   if (*(char *)(param_1 + 0x400) != '\0') {
     temp_v8 = 0.0f;
@@ -97,7 +97,7 @@ void FUN_003b21a4(int param_1)
     }
   }
   temp_v7 = 0.8f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v9 = (int)temp_v7;
   if (*(char *)(param_1 + 0x401) == '\0') {
     return;

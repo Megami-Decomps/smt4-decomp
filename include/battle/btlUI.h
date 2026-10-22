@@ -7,6 +7,7 @@
 #define BATTLE_BTLUI_H
 
 #include "common.h"
+#include "battle/BattleUiRequests.h"
 #include <stddef.h>
 
 /* Only the byte column is recovered, not the true boundaries of the underlying records. */
@@ -27,7 +28,78 @@ typedef struct BtlUiObjC {
     /* 0x5778 */ BtlUiColumnRecord columns[1];
     /* 0x57a4 */ u8 unk57A4[0x1fc];
 } BtlUiObjC;
-typedef struct BtlUiObjD { /* 0x0000 */ u8 unk[0x7180]; } BtlUiObjD;
+typedef struct BtlUiAvailabilityRow {
+    u8 active;
+    u8 padding01[0x9F];
+} BtlUiAvailabilityRow;
+typedef struct BtlUiAvailabilityCell {
+    u8 active;
+    u8 padding01[0x13];
+} BtlUiAvailabilityCell;
+typedef struct BtlUiAvailabilityCellRow {
+    BtlUiAvailabilityCell cells[8];
+} BtlUiAvailabilityCellRow;
+typedef struct BtlUiAnimationGroup {
+    s8 active;
+    u8 unk01[0x1B];
+    s8 disabled;
+    u8 unk1D[0x3E3];
+} BtlUiAnimationGroup;
+typedef struct BtlUiAnimationMarker {
+    s8 active;
+    u8 unk01[0x17];
+} BtlUiAnimationMarker;
+typedef struct BtlUiAnimationMarkerRow {
+    BtlUiAnimationMarker entries[8];
+} BtlUiAnimationMarkerRow;
+typedef struct BtlUiObjD {
+    union {
+        /* 0x0000 */ u8 unk[0x7180];
+        struct {
+            u8 prefix[0x4124];
+            BtlUiAvailabilityRow rows[1];
+        } availability;
+        struct {
+            u8 prefix[0x5758];
+            union {
+                BtlUiAvailabilityCell cells[1];
+                BtlUiAvailabilityCellRow rows[1];
+            };
+        } availabilityCells;
+        struct {
+            u8 prefix[0x615C];
+            s8 counts[1];
+        } availabilityCounts;
+        struct {
+            u8 prefix[0x46C];
+            BtlUiAnimationGroup groups[1];
+        } animationGroups;
+        struct {
+            u8 prefix[0x4B38];
+            BtlUiAnimationMarkerRow rows[1];
+        } animationMarkers;
+        struct {
+            u8 prefix[0x573C];
+            s8 counts[1];
+        } animationCounts;
+    };
+} BtlUiObjD;
+typedef char BtlUiObjDAvailabilityOffsetsCheck[
+    offsetof(BtlUiObjD, availability.rows) == 0x4124 &&
+    offsetof(BtlUiObjD, availabilityCells.cells) == 0x5758 &&
+    offsetof(BtlUiObjD, availabilityCounts.counts) == 0x615C &&
+    offsetof(BtlUiObjD, availabilityCells.rows) == 0x5758 &&
+    sizeof(BtlUiAvailabilityCellRow) == 0xA0 &&
+    sizeof(BtlUiObjD) == 0x7180 &&
+    sizeof(BtlUiAvailabilityRow) == 0xA0 &&
+    sizeof(BtlUiAvailabilityCell) == 0x14 ? 1 : -1];
+typedef char BtlUiObjDAnimationOffsetsCheck[
+    offsetof(BtlUiObjD, animationGroups.groups) == 0x46C &&
+    offsetof(BtlUiObjD, animationMarkers.rows) == 0x4B38 &&
+    offsetof(BtlUiObjD, animationCounts.counts) == 0x573C &&
+    offsetof(BtlUiAnimationGroup, disabled) == 0x1C &&
+    sizeof(BtlUiAnimationGroup) == 0x400 && sizeof(BtlUiAnimationMarker) == 0x18 &&
+    sizeof(BtlUiAnimationMarkerRow) == 0xC0 && sizeof(BtlUiObjD) == 0x7180 ? 1 : -1];
 
 /* Panel status is embedded at 0x7e00; its active flag belongs to the sprite animation. */
 typedef struct BtlUiPanelState {
@@ -74,7 +146,20 @@ typedef struct BtlUiGlobals {
 typedef struct BtlUiObjAA { /* 0x0000 */ u8 unk[0x24B4]; } BtlUiObjAA;
 typedef struct BtlUiObjBA { /* 0x0000 */ u8 unk[0x408]; } BtlUiObjBA;
 typedef struct BtlUiObjCA { /* 0x0000 */ u8 unk[0x38B0]; } BtlUiObjCA;
-typedef struct BtlUiObjDA { /* 0x0000 */ u8 unk[0x5AA4]; } BtlUiObjDA;
+typedef struct BtlUiObjDA {
+    union {
+        /* 0x0000 */ u8 unk[0x5AA4];
+        struct {
+            u8 unk0000[0x3D8];
+            BattleUiBankStatus banks[16];
+        } requests;
+        /* Strided byte view, not recovered underlying record boundaries. */
+        struct {
+            u8 prefix[0x4124];
+            BtlUiAvailabilityRow rows[1];
+        } availability;
+    };
+} BtlUiObjDA;
 
 typedef struct BtlUiA {
     /* 0x0000 */ u32 owner;
@@ -96,7 +181,22 @@ typedef struct BtlUiA {
     /* 0x74FC */ u16 ids[4];
     /* 0x7504 */ u8 unk7504[0x24];
     /* 0x7528 */ BtlUiObjDA objD;
-    /* 0xCFCC */ u8 unkCFCC[0x6000];
+    /* 0xCFCC */ union {
+        u8 unkCFCC[0x6000];
+        struct {
+            u8 unkCFCC[0x2098];
+            /* 0xF064 */ s8 counts[16];
+        } requestCounts;
+        /* Strided byte view; slots start 32 cell strides apart. */
+        struct {
+            u8 prefix[0x20B4];
+            /* 0xF080 */ BtlUiAvailabilityCell cells[1];
+        } availabilityCells;
+        struct {
+            u8 prefix[0x48B8];
+            /* 0x11884 */ s8 counts[1];
+        } availabilityCounts;
+    };
     /* 0x12FCC */ u32 unk12FCC;
 } BtlUiA;
 
@@ -118,5 +218,20 @@ typedef char BtlUiLayoutCheck[sizeof(BtlUi) == 0xf040 &&
     offsetof(BtlUi, listedIds) == 0x7e54 &&
     offsetof(BtlUi, listedIdCount) == 0x7e9c &&
     offsetof(BtlUi, objD) == 0x7ec0 ? 1 : -1];
+typedef char BtlUiARequestOffsetsCheck[sizeof(BtlUiObjDA) == 0x5AA4 &&
+    sizeof(BtlUiA) == 0x12FD0 && offsetof(BtlUiA, objD.requests.banks) == 0x7900 &&
+    offsetof(BtlUiA, requestCounts.counts) == 0xF064 ? 1 : -1];
+
+typedef char BtlUiObjDAAvailabilityOffsetsCheck[
+    offsetof(BtlUiObjDA, availability.rows) == 0x4124 &&
+    offsetof(BtlUiA, objD.availability.rows) == 0xB64C &&
+    sizeof(BtlUiObjDA) == 0x5AA4 ? 1 : -1];
+
+typedef char BtlUiAAvailabilityOffsetsCheck[
+    offsetof(BtlUiA, availabilityCells.cells) == 0xF080 &&
+    offsetof(BtlUiA, availabilityCounts.counts) == 0x11884 &&
+    sizeof(BtlUiAvailabilityRow) == 0xA0 &&
+    sizeof(BtlUiAvailabilityCell) == 0x14 &&
+    sizeof(BtlUiA) == 0x12FD0 ? 1 : -1];
 
 #endif

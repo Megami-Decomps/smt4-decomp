@@ -1,65 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00324d70` (_code @ 0x324d70, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stat-index and found-flag saved registers are exchanged. */
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+BtlMainState *btlGetMainState();
 
-int scrSetResult(int);
-int scrGetArg(int);
-
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_00324d70(void)
-
+u32 FUN_00324d70()
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v5 = 0;
-  if (temp_v2 == 0) {
-    temp_v5 = 7;
-  }
-  else if (temp_v2 == 1) {
-    temp_v5 = 10;
-  }
-  else if (temp_v2 == 2) {
-    temp_v5 = 0xb;
-  }
-  temp_v0 = 0;
-  temp_v2 = 0;
-  do {
-    temp_v3 = btlGetMainState();
-    puVar5 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + temp_v2 * 0x288);
-    temp_v4 = *puVar5;
-    if ((temp_v4 & 0x10) != 0 && (temp_v4 & 1) != 0) {
-      temp_v6 = (temp_v4 & 0x40) == 0;
-      if (temp_v6) {
-        temp_v4 = (unsigned int)*(unsigned short *)((int)puVar5 + 0xce);
-      }
-      if ((temp_v6 && temp_v4 == temp_v1) && (temp_v0 = 1, *(short *)((int)puVar5 + temp_v5 * 2 + 0x72) < 1))
-      {
-        scrSetResult(0);
-        return 1;
-      }
+    u32 id = scrGetArg(0);
+    s32 kind = scrGetArg(1);
+    s32 stat = 0;
+    if (kind == 0) {
+        stat = 7;
+    } else if (kind == 1) {
+        stat = 10;
+    } else if (kind == 2) {
+        stat = 11;
     }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      scrSetResult(temp_v0);
-      return 1;
+    u8 found = 0;
+    for (s32 index = 0; index < BTL_ENTRY_COUNT; ++index) {
+        BtlEntry *entry = &btlGetMainState()->entries[index];
+        u32 flags = entry->flags;
+        if ((flags & BTL_ENTRY_FLAG_PRESENT) != 0 && (flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
+            (flags & BTL_ENTRY_FLAG_BLOCKED) == 0 && entry->id == id) {
+            found = 1;
+            if (entry->stat[stat] < 1) {
+                scrSetResult(0);
+                return 1;
+            }
+        }
     }
-  } while( 1 );
+    scrSetResult(found != 0);
+    return 1;
 }
-
-} /* extern "C" */
+}

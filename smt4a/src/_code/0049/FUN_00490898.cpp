@@ -8,7 +8,7 @@ int FUN_00163aa4(int);
 int dialogClose(int);
 int FUN_002d22c0(int);
 int lmapEnableSceneState(void);
-int FUN_003adc58(void);
+int uiPlayGatedActionFeedback(void);
 int sub68OwnerGetBlock60(void);
 int naviMainSetValuePair(int, int *);
 
@@ -25,7 +25,7 @@ extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002d22c0. */
 /* Supplied declaration required: lmapEnableSceneState. */
-/* Supplied declaration required: FUN_003adc58. */
+/* Supplied declaration required: uiPlayGatedActionFeedback. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: naviMainSetValuePair. */
 
@@ -39,7 +39,7 @@ void FUN_00490898(int param_1)
   unsigned int temp_v2;
   
   if (*(int *)(param_1 + 8) == 0) {
-    FUN_003adc58();
+    uiPlayGatedActionFeedback();
     *(unsigned int *)(param_1 + 8) = 1;
     return;
   }

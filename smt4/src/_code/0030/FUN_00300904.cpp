@@ -1,48 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00300904` (_code @ 0x300904, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected-column address formation and unrolled search exits differ. */
+#include "battle/btlUI.h"
 
-extern "C" {
-
-
-unsigned int FUN_00300904(int param_1)
-
+extern "C" u32 FUN_00300904(const BtlUiObjC *panel)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if (*(char *)(param_1 + 0x575d) != '\0') {
-    temp_v2 = *(unsigned int *)(param_1 + 0x5758);
-    if ((int)temp_v2 < 1) {
-      temp_v0 = 0;
+    /* The recovered byte-only column type does not yet describe its word value. */
+    struct Column {
+        u32 unk00;
+        u32 value;
+        u8 unk08[8];
+        u8 selected;
+        u8 unk11[0x1B];
+    };
+    struct SelectionView {
+        u8 prefix[0x5758];
+        s32 count;
+        u8 unk575C;
+        s8 enabled;
+        u8 unk575E[0x1A];
+        Column columns[1];
+    };
+    typedef char SelectionLayoutCheck[sizeof(Column) == 0x2C &&
+        offsetof(SelectionView, enabled) == 0x575D &&
+        offsetof(SelectionView, columns) == 0x5778 ? 1 : -1];
+    const SelectionView *selection = reinterpret_cast<const SelectionView *>(panel);
+    if (selection->enabled) {
+        for (s32 i = 0; i < selection->count; ++i) {
+            if (selection->columns[i].selected) {
+                return selection->columns[i].value;
+            }
+        }
     }
-    else {
-      temp_v0 = temp_v2 & 1;
-      temp_v1 = 0;
-      if (temp_v0 != 0) {
-        do {
-          if (*(char *)(param_1 + temp_v1 * 0x2c + 0x5788) != '\0') {
-            return *(unsigned int *)(param_1 + temp_v1 * 0x2c + 0x577c);
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < (int)temp_v0);
-      }
-    }
-    for (; (int)temp_v0 < (int)temp_v2; temp_v0 = temp_v0 + 2) {
-      temp_v1 = param_1 + temp_v0 * 0x2c;
-      if (*(char *)(temp_v1 + 0x5788) != '\0') {
-        puVar1 = (unsigned int *)(param_1 + temp_v0 * 0x2c + 0x577c);
-        return *puVar1;
-      }
-      if (*(char *)(temp_v1 + 0x57b4) != '\0') {
-        puVar1 = (unsigned int *)(param_1 + temp_v0 * 0x2c + 0x57a8);
-        return *puVar1;
-      }
-    }
-  }
-  return 0xffffffff;
+    return 0xFFFFFFFF;
 }
-
-} /* extern "C" */

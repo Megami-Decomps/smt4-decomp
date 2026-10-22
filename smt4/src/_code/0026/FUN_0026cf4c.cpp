@@ -15,7 +15,7 @@ int FUN_0024bda8(unsigned char [128], unsigned int);
 int FUN_0026c214(void);
 int FUN_00282e70(void);
 int FUN_002907c4(...);
-int FUN_00295660(int, unsigned char [128]);
+int textEncodeFontSlot(int, unsigned char [128]);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_0029acb0(void);
 int FUN_0029ede8(int, int, unsigned int, int);
@@ -49,7 +49,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 extern unsigned int FUN_00282ccc(void);
 /* Supplied declaration required: FUN_00282e70. */
 /* Supplied declaration required: FUN_002907c4. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029acb0. */
 /* Supplied declaration required: FUN_0029da34. */
@@ -159,12 +159,12 @@ void FUN_0026cf4c(void)
             FUN_002907c4(&uStack_a8,temp_v2 & 0xf);
             FUN_002907c4(temp_v14,*(unsigned char *)(temp_v7 + 0x58) >> 4);
             textFormatBuffer(temp_v15,&LAB_00317284,&uStack_a8,temp_v14);
-            FUN_00295660(0x25,temp_v15);
+            textEncodeFontSlot(0x25,temp_v15);
           }
           FUN_0024bda8(temp_v15,*(unsigned int *)(temp_v7 + 0x54) >> 0x14);
-          FUN_00295660(0x26,temp_v15);
+          textEncodeFontSlot(0x26,temp_v15);
           skillFormatTargetLabel(temp_v15,*(unsigned char *)(temp_v7 + 0x59));
-          FUN_00295660(0x27,temp_v15);
+          textEncodeFontSlot(0x27,temp_v15);
           if (*(char *)(temp_v7 + 0x5b) == '\0') {
             textFormatBuffer(temp_v15,&LAB_0031728c);
           }
@@ -186,9 +186,9 @@ void FUN_0026cf4c(void)
           if (*(char *)(temp_v7 + 0x5b) == '\t') {
             textFormatBuffer(temp_v15,&LAB_003172d4);
           }
-          FUN_00295660(0x28,temp_v15);
+          textEncodeFontSlot(0x28,temp_v15);
           FUN_001f4568(1,0,0,temp_v15);
-          FUN_00295660(0x29,temp_v15);
+          textEncodeFontSlot(0x29,temp_v15);
           uStack_a4 = DAT_0043da30;
           uStack_a8 = 3;
           temp_v14[0] = 0;

@@ -1,46 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004eb838` (_code @ 0x4eb838, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: script-state stores are not tail-shared; table indexing and saved registers differ. */
+#include "battle/btlUnit.h"
+#include "battle/btlEvent.h"
+#include "battle/btlAction.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+struct ScriptStateOwnerView {
+    u8 unk00[0xa4];
+    s32 index;
+};
+struct ScriptUnitStateView {
+    u32 unk0000[2];
+    u8 unk0008;
+    u8 state;
+    u8 unk000a[0x124a];
+};
+typedef char ScriptStateViewsCheck[offsetof(ScriptStateOwnerView, index) == 0xa4 &&
+    offsetof(ScriptUnitStateView, state) == 9 && sizeof(ScriptUnitStateView) == 0x1254 &&
+    offsetof(BtlActionGlobals, data) == 4 ? 1 : -1];
 
 extern "C" {
+extern BtlEvent *g_btlEvent;
+extern BtlActionGlobals g_btlAction;
+bool isEntryUsable(BtlEvent *event);
+void *FUN_004d7a70(BtlEvent *event, s32 kind, s32 selectionIndex, u32 flags);
 
-int FUN_004d7a70(int, int, int, int);
-
-extern int g_btlScriptUnit; /* 0x57113c */
-extern int g_btlEvent; /* 0x573898 */
-
-/* Supplied declaration required: FUN_004d7a70. */
-extern int isEntryUsable(int);
-
-
-void FUN_004eb838(int *param_1,int param_2)
-
+void FUN_004eb838(ScriptStateOwnerView **owner, BtlUnitA *unit)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = isEntryUsable(g_btlEvent);
-  if (temp_v0 == 0) {
-    temp_v1 = (int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
-    temp_v0 = g_btlEvent;
-    if (*(short *)(*(int *)(param_2 + 0x28) + 0x1be) != 0xb) {
-      FUN_004d7a70(g_btlEvent,3,temp_v1,0);
+    if (!isEntryUsable(g_btlEvent)) {
+        s32 selection = ((BtlCombatantEntryA *)unit->params)->indexView.selectionIndex;
+        if ((s16)unit->data->unk1BE != 11) {
+            if (FUN_004d7a70(g_btlEvent, 3, selection, 0) != 0) {
+                ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 0x1a;
+                return;
+            }
+        } else if (FUN_004d7a70(g_btlEvent, 7, selection, 0) != 0) {
+            ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 0x1a;
+            return;
+        }
     }
-    else {
-      FUN_004d7a70(g_btlEvent,7,temp_v1,0);
+    if ((s16)unit->data->unk1BE == 13) {
+        ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 9;
+        return;
     }
-    if (temp_v0 != 0) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1a;
-      return;
-    }
-  }
-  if (*(short *)(*(int *)(param_2 + 0x28) + 0x1be) == 0xd) {
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 9;
-    return;
-  }
-  *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
-  return;
+    ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 11;
 }
-
-} /* extern "C" */
+}

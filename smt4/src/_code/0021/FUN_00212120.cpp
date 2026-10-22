@@ -1,72 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00212120` (_code @ 0x212120, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: popup setup uses different argument scheduling around the text-directory call. */
+#include "shard/X14_InfoWindowSmt4.h"
 
+struct InfoWindowAnimationView {
+    u8 prefix[0x44];
+    u8 timer[1];
+};
 extern "C" {
-
-int effectSpawnDefaultArguments(unsigned int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, int, unsigned int);
-int timerStart(...);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int g_infoWin; /* 0x43e128 */
-
-/* Supplied declaration required: effectSpawnDefaultArguments. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-extern int fileSectionGetData(int, unsigned int, unsigned int);
-/* Supplied declaration required: timerStart. */
-extern int vec2GetXInt(int);
-extern int FUN_002cf11c(void);
-
-
-void FUN_00212120(unsigned int param_1)
-
-{
-/* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float in_s0;
-  
-  temp_v1 = FUN_002cf11c();
-  temp_v2 = fileSectionGetData(temp_v1,param_1,0);
-  temp_v0 = g_infoWin;
-  if (temp_v2 != 0) {
-    *(unsigned char *)(g_infoWin + 0x21) = 0;
-    if (temp_v1 != 0) {
-      *(unsigned char *)(temp_v0 + 0x21) = 1;
-      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x1b8),3,0xffffffff,0,3,temp_v1,param_1);
-      effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x1b8));
-      if ((int)in_s0 >= 0x441d8001) {
-        *(unsigned char *)(temp_v0 + 0x22) = 1;
-        *(int *)(temp_v0 + 0x14) = (int)in_s0;
-      }
-      else {
-        *(unsigned char *)(temp_v0 + 0x22) = 0;
-      }
-      timerStart(temp_v0 + 0xd0,2,0);
-      temp_v1 = vec2GetXInt(temp_v0 + 0xd0);
-      *(int *)(temp_v0 + 0x18) = temp_v1;
-      *(int *)(temp_v0 + 0x1c) = temp_v1 + *(int *)(temp_v0 + 0x14) + 0x2a;
-      if (*(int *)(temp_v0 + 8) == 3) {
-        *(unsigned int *)(temp_v0 + 8) = 2;
-      }
-      *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-    }
-    temp_v0 = g_infoWin;
-    temp_v1 = g_infoWin + 0x44;
-    *(unsigned int *)(g_infoWin + 8) = 1;
-    timerStart(temp_v1,0);
-    *(unsigned char *)(temp_v0 + 0x23) = 1;
-    *(unsigned char *)(temp_v0 + 0x20) = 1;
-    *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  }
-  return;
+void *FUN_002cf11c(void);
+void *fileSectionGetData(void *, u32, u32);
+void asdTextDrawDirectoryEntry(void *, u32, s32, u32, u32, void *, u32);
+f32 effectSpawnDefaultArguments(void *);
+void timerStart(void *, u32, u32);
+s32 vec2GetXInt(void *);
 }
 
-} /* extern "C" */
+extern "C" void FUN_00212120(u32 message)
+{
+    void *directory = FUN_002cf11c();
+    if (fileSectionGetData(directory, message, 0) == NULL) {
+        return;
+    }
+    InfoWindowSmt4 *window = g_infoWin;
+    window->hasText = 0;
+    if (directory != NULL) {
+        window->hasText = 1;
+        asdTextDrawDirectoryEntry(window->text, 3, -1, 0, 3, directory, message);
+        f32 width = effectSpawnDefaultArguments(window->text);
+        if (width > 630.0f) {
+            window->wideText = 1;
+            window->textWidth = s32(width);
+        } else {
+            window->wideText = 0;
+        }
+        timerStart(window->slideTimer, 2, 0);
+        window->labelX = vec2GetXInt(window->slideTimer);
+        window->textRight = window->labelX + window->textWidth + 42;
+        if (window->state == 3) {
+            window->state = 2;
+        }
+        window->timer = 30;
+    }
+    window = g_infoWin;
+    window->state = 1;
+    timerStart(reinterpret_cast<InfoWindowAnimationView *>(window)->timer, 0, 0);
+    window->unk023[0] = 1;
+    window->unk020 = 1;
+    window->timer = 30;
+}

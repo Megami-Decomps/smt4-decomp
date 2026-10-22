@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00281e34(void);
 int mathDistanceBetweenPoints(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 
 extern int g_vectorQueueWork; /* 0x447e40 */
 
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 
 
 void FUN_0021e224(char *param_1)
@@ -51,7 +51,7 @@ void FUN_0021e224(char *param_1)
         FUN_00281e34();
         temp_v12 = temp_v5 * 57.32484f;
         temp_v6 = *(float *)(param_1 + 0x28);
-        FUN_00287b0c();
+        mathGetShortestAngleDelta();
         temp_v5 = temp_v6;
         if (temp_v6 < temp_v14) {
           temp_v5 = -temp_v6;

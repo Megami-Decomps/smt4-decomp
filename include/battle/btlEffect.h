@@ -54,11 +54,19 @@ typedef struct BtlEffectJob {
 
 /* The same work area in Apocalypse. */
 typedef struct BtlEffectJobA {
-    /* 0x00 */ u8 unk00[0x5C];
+    union {
+        /* 0x00 */ u8 unk00[0x5C];
+        struct {
+            /* 0x00 */ u32 parentJob;
+            /* 0x04 */ u8 unk04[0x58];
+        } owner;
+    };
     /* 0x5C */ u32 jobA;
     /* 0x60 */ u32 jobB;
     /* 0x64 */ u32 jobC;
 } BtlEffectJobA;
+
+typedef char BtlEffectJobAParentOffsetCheck[sizeof(BtlEffectJobA) == 0x68 && offsetof(BtlEffectJobA, owner.parentJob) == 0 && offsetof(BtlEffectJobA, jobA) == 0x5c ? 1 : -1];
 
 /* The block that owns the slot table (Apocalypse). */
 typedef struct BtlEffectOwnerA {

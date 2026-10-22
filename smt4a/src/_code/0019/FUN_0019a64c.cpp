@@ -1,51 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019a64c` (_code @ 0x19a64c, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation-category array indexing and saved registers differ. */
+#include "common.h"
+#include <stddef.h>
+
+struct TrackedAllocationLink {
+    TrackedAllocationLink *previous;
+    TrackedAllocationLink *next;
+};
+struct TrackedAllocationHeader {
+    u32 bytes;
+    u16 padding;
+    u16 flags;
+    u16 group;
+    u8 unk0a[0xa];
+    TrackedAllocationLink link;
+    u8 unk1c[0x24];
+};
+struct AllocationTrackingState {
+    TrackedAllocationLink *head;
+    TrackedAllocationLink *tail;
+    u8 unk08[0x10];
+    u32 count;
+    u32 bytes;
+    u8 unk20[0x18];
+    u16 group;
+    u16 unk3a;
+    u32 categoryBytes[8];
+    u32 categoryPayloadBytes[8];
+};
+typedef char TrackedAllocationLayoutCheck[sizeof(TrackedAllocationHeader) == 0x40 &&
+    offsetof(TrackedAllocationHeader, padding) == 4 && offsetof(TrackedAllocationHeader, group) == 8 &&
+    offsetof(TrackedAllocationHeader, link) == 0x14 &&
+    offsetof(AllocationTrackingState, count) == 0x18 && offsetof(AllocationTrackingState, bytes) == 0x1c &&
+    offsetof(AllocationTrackingState, group) == 0x38 && offsetof(AllocationTrackingState, categoryBytes) == 0x3c &&
+    offsetof(AllocationTrackingState, categoryPayloadBytes) == 0x5c ? 1 : -1];
+struct AllocationTrackingGlobals {
+    u8 unk00[8];
+    AllocationTrackingState *state;
+};
+typedef char AllocationTrackingGlobalsOffsetCheck[offsetof(AllocationTrackingGlobals, state) == 8 ? 1 : -1];
 
 extern "C" {
+extern AllocationTrackingGlobals g_allocationAddressRanges;
+u32 FUN_0019c40c(TrackedAllocationHeader *allocation);
 
-int FUN_0019c40c(void);
-
-extern int *DAT_005b4030; /* 0x5b4030 */
-
-/* Supplied declaration required: FUN_0019c40c. */
-
-
-void FUN_0019a64c(int *param_1)
-
+void FUN_0019a64c(TrackedAllocationHeader *allocation)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  
-  piVar1 = DAT_005b4030;
-  DAT_005b4030[6] = DAT_005b4030[6] + 1;
-  piVar1[7] = piVar1[7] + *param_1;
-  if ((*(unsigned short *)(piVar1 + 0xe) & 0xff) < 8) {
-    piVar1 = param_1;
-    FUN_0019c40c();
-    DAT_005b4030[(int)piVar1 + 0xf] = *param_1 + DAT_005b4030[(int)piVar1 + 0xf];
-    piVar1 = param_1;
-    FUN_0019c40c();
-    DAT_005b4030[(int)piVar1 + 0x17] =
-         ((*param_1 - (unsigned int)*(unsigned short *)(param_1 + 1)) - 0x40) + DAT_005b4030[(int)piVar1 + 0x17];
-  }
-  piVar1 = DAT_005b4030;
-  piVar2 = param_1 + 5;
-  if (*DAT_005b4030 != 0) {
-    *piVar2 = DAT_005b4030[1];
-    DAT_005b4030[1] = (int)piVar2;
-    *(int **)(*piVar2 + 4) = piVar2;
-    param_1[6] = 0;
-  }
-  else {
-    DAT_005b4030[1] = (int)piVar2;
-    *piVar1 = (int)piVar2;
-    param_1[6] = 0;
-    *piVar2 = 0;
-  }
-  *(short *)(param_1 + 2) = (short)DAT_005b4030[0xe];
-  return;
+    AllocationTrackingState *state = g_allocationAddressRanges.state;
+    ++state->count;
+    state->bytes += allocation->bytes;
+    if ((state->group & 0xff) < 8) {
+        u32 category = FUN_0019c40c(allocation);
+        g_allocationAddressRanges.state->categoryBytes[category] += allocation->bytes;
+        category = FUN_0019c40c(allocation);
+        g_allocationAddressRanges.state->categoryPayloadBytes[category] += allocation->bytes - allocation->padding - sizeof(TrackedAllocationHeader);
+    }
+    state = g_allocationAddressRanges.state;
+    TrackedAllocationLink *link = &allocation->link;
+    if (state->head == NULL) {
+        state->tail = link;
+        state->head = link;
+        link->next = NULL;
+        link->previous = NULL;
+    } else {
+        link->previous = state->tail;
+        g_allocationAddressRanges.state->tail = link;
+        link->previous->next = link;
+        link->next = NULL;
+    }
+    allocation->group = g_allocationAddressRanges.state->group;
 }
-
-} /* extern "C" */
+}

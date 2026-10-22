@@ -23,7 +23,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int FUN_0018408c(...);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int gameGetSlotRecord(...);
 int efctCallRoutineWithSpeedOverride(...);
 int FUN_003bb50c(...);
@@ -86,7 +86,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int markerKindGetColor(int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
@@ -158,7 +158,7 @@ void FUN_004b0164(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   temp_v36 = param_2;
   temp_v37 = param_3;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v13 = temp_v37;
   temp_v29 = 0;
   temp_v18 = 0x3f800000;
@@ -192,11 +192,11 @@ void FUN_004b0164(int param_1,int param_2,int param_3)
       temp_v16 = temp_v14;
 LAB_004b0384:
       temp_v19 = (float)temp_v38;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v6 = (int)temp_v19 + temp_v36;
       if ((0 < *(short *)(param_1 + 0x788a)) || (*(short *)(param_1 + 0x7890) < temp_v29)) {
         temp_v19 = (float)temp_v38;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         temp_v6 = (int)temp_v19 + temp_v36;
       }
       acStack_fc[temp_v15] = '\x01';
@@ -283,7 +283,7 @@ LAB_004b0658:
     temp_v19 = (float)temp_v38;
     temp_v6 = temp_v27[temp_v15 + 6];
     temp_v13 = aiStack_110[temp_v15];
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v14 = 0;
     temp_v4 = aiStack_120[temp_v15];
     temp_v16 = 1;
@@ -560,7 +560,7 @@ LAB_004b0b54:
         temp_v4 = *(char *)(temp_v3 + temp_v15 + 0x1c9f) + 1;
       }
       temp_v21 = temp_v19;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v5 = (int)temp_v19;
       temp_v7 = 0;
       temp_v16 = 1;
@@ -661,7 +661,7 @@ LAB_004b0b54:
         }
         efctSetSpeed();
         temp_v19 = (float)temp_v22;
-        FUN_001879d0(g_renderCtx);
+        renderCtxCalculateStereoParallax(g_renderCtx);
         temp_v5 = (int)temp_v19 + temp_v36;
         FUN_001835b4(2,temp_v25,0x1b,*(short *)(temp_v4 + 8) + temp_v5,
                      (int)*(short *)(temp_v4 + 10) + temp_v13 + temp_v7,0xce);
@@ -676,7 +676,7 @@ LAB_004b13b4:
   } while (temp_v15 < 4);
   temp_v19 = (float)temp_v20;
   temp_v4 = 0;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v20 = temp_v20 >> 0x20;
   temp_v15 = 0;
   temp_v3 = (int)temp_v19 + temp_v36;

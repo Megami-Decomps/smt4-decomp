@@ -1,72 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00324e34` (_code @ 0x324e34, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: group-range output stack slots and loop-bound loads differ from retail. */
+#include "shard/W4_Match6_BtlEntry.h"
 
+// This query's signed counter is within the entry's still-unnamed status padding.
+struct GroupTurnEntryView { u8 unk000[0x96]; s16 remaining; };
 extern "C" {
+BtlMainState *btlGetMainState();
+u32 scrGetArg(u32 index);
+u32 btlScriptResolveGroupArg(u32 group);
+void FUN_002499fc(u32 group, s32 *range, s32 *count);
+BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
+void scrSetResult(s32 result);
 
-int FUN_002499fc(unsigned int, int [3], int *);
-int scrSetResult(int);
-int btlGetMainState(void);
-int scrGetArg(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int btlScriptResolveGroupArg(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_00324e34(void)
-
+// Report whether the group or its active entry has a positive remaining turn counter.
+u32 FUN_00324e34()
 {
-/* irregular: 4 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int aiStack_14 [3];
-  
-  scrGetArg(0);
-  temp_v1 = btlScriptResolveGroupArg();
-  FUN_002499fc(temp_v1,aiStack_14,&temp_v5);
-  temp_v4 = aiStack_14[0];
-  if (aiStack_14[0] < temp_v5 + aiStack_14[0]) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-      temp_v3 = *puVar4;
-      if (((((temp_v3 & 0x10) == 0) && ((temp_v3 & 1) != 0)) && ((temp_v3 & 0x40) == 0)) &&
-         (0 < *(short *)((int)puVar4 + 0x96))) {
-        scrSetResult(1);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v5 + aiStack_14[0]);
-  }
-  temp_v4 = btlGetMainState();
-  if (*(char *)(temp_v4 + 0x49c5) != '\0') {
-    btlGetMainState();
-    temp_v4 = btlMainFindActiveEntry();
-    temp_v0 = 0;
-    if (temp_v4 != 0) {
-      temp_v0 = *(short *)(temp_v4 + 0x96);
+    u32 group = btlScriptResolveGroupArg(scrGetArg(0));
+    s32 range[3], count;
+    FUN_002499fc(group, range, &count);
+    for (s32 i = range[0]; i < range[0] + count; ++i) {
+        BtlEntry *entry = &btlGetMainState()->entries[i];
+        if (!(entry->flags & 0x10) && (entry->flags & 1) && !(entry->flags & 0x40) &&
+            ((GroupTurnEntryView *)entry)->remaining > 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-    if ((temp_v4 != 0 && temp_v0 != 0) && -1 < temp_v0) {
-      scrSetResult(1);
-      return 1;
+    if (btlGetMainState()->hasActiveEntry) {
+        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
+        s16 remaining = entry ? ((GroupTurnEntryView *)entry)->remaining : 0;
+        if (entry && remaining != 0 && remaining >= 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-  }
-  scrSetResult(0);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

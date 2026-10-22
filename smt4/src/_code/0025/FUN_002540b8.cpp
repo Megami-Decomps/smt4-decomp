@@ -11,7 +11,7 @@ struct Unk2540b8Owner {
 
 extern "C" {
 
-s32 FUN_00298fa0(u16 id, u32 arg);
+s32 questReadRuntimeFlag(u16 id, u32 arg);
 s32 FUN_00298f88(u16 id);
 s32 FUN_002886c8(u16 id);
 s32 FUN_002886b0(u16 id);
@@ -22,7 +22,7 @@ void gameFlagClearModeBits(u16 id);
 void FUN_002540b8(Unk2540b8Owner *owner)
 {
     if (owner->checkFirst != 0) {
-        if (FUN_00298fa0(owner->id, 0) && FUN_00298f88(owner->id) &&
+        if (questReadRuntimeFlag(owner->id, 0) && FUN_00298f88(owner->id) &&
             (FUN_002886c8(owner->id) || FUN_002886b0(owner->id))) {
             gameFlagClearModeBits(owner->id);
         }
@@ -30,7 +30,7 @@ void FUN_002540b8(Unk2540b8Owner *owner)
         if (FUN_002886c8(owner->id)) {
             gameFlagClearModeBits(owner->id);
         }
-    } else if (FUN_00298fa0(owner->id, 0) && !FUN_00298f88(owner->id) &&
+    } else if (questReadRuntimeFlag(owner->id, 0) && !FUN_00298f88(owner->id) &&
                (FUN_002886c8(owner->id) || FUN_002886b0(owner->id))) {
         gameFlagClearModeBits(owner->id);
     }

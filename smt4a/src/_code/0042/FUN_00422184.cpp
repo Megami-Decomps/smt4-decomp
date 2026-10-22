@@ -1,63 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00422184` (_code @ 0x422184, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 62 vs built 62 rows; texture-field store ordering and saved integer/VFP register allocation differ. */
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
+AsdTexture *asdTextureCreate(s32);
+f32 FUN_00168fbc(u32, u32, u32 *);
+void nn_gxlow_CTR_FlushDataCacheForward(const void *, u32);
+u32 asdGxGetPhysicalAddress(const void *);
 
-int FUN_00168fbc(double, double, int);
-int nn_gxlow_CTR_FlushDataCacheForward(unsigned int, unsigned int);
-int asdTextureCreate(void);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00168fbc. */
-/* Supplied declaration required: nn_gxlow_CTR_FlushDataCacheForward. */
-/* Supplied declaration required: asdTextureCreate. */
-extern unsigned int asdGxGetPhysicalAddress(unsigned int);
-
-
-void FUN_00422184(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned long long param_6,float param_7,float param_8,
-                 unsigned int param_9)
-
+__softfp void FUN_00422184(AsdTextureRegion *region, s32 textureWidth, s32 textureHeight,
+                          u32 format, u32 type, s32 x, s32 y, f32 width, f32 height,
+                          void *pixels)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  float temp_v0;
-  unsigned int in_fpscr;
-  float temp_v1;
-  unsigned int temp_v2;
-  float temp_v3;
-  
-  temp_v0 = 0.0f;
-  asdTextureCreate();
-  param_1[4] = temp_v0;
-  *(unsigned int *)((int)temp_v0 + 0x14) = param_2;
-  temp_v0 = (float)VectorSignedToFloat((int)((unsigned long long)param_6 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3)
-  ;
-  *(unsigned int *)((int)param_1[4] + 0x18) = param_3;
-  temp_v1 = (float)VectorSignedToFloat((int)param_6,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)((int)param_1[4] + 4) = 0xde1;
-  *(unsigned int *)((int)param_1[4] + 8) = 0x10000;
-  *(unsigned int *)((int)param_1[4] + 0xc) = 0x2000000;
-  *(unsigned int *)((int)param_1[4] + 0x24) = param_9;
-  *param_1 = temp_v1;
-  param_1[1] = temp_v0;
-  param_1[2] = param_7;
-  param_1[3] = param_8;
-  FUN_00168fbc(param_7,param_8,(int)param_1[4] + 0x34);
-  temp_v0 = param_1[4];
-  temp_v3 = (float)VectorSignedToFloat(*(int *)((int)temp_v0 + 0x14) * *(int *)((int)temp_v0 + 0x18),
-                                     (unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = VectorFloatToUnsigned(temp_v3 * temp_v1,3);
-  nn_gxlow_CTR_FlushDataCacheForward(*(unsigned int *)((int)temp_v0 + 0x24),temp_v2);
-  temp_v2 = asdGxGetPhysicalAddress(*(unsigned int *)((int)param_1[4] + 0x24));
-  *(unsigned int *)((int)param_1[4] + 0x30) = temp_v2;
-  param_1[6] = 1.0f;
-  *(unsigned char *)(param_1 + 7) = 0;
-  *(unsigned char *)((int)param_1 + 0x1d) = 0;
-  return;
+    region->texture = asdTextureCreate(0);
+    region->texture->dimensions.width = textureWidth;
+    region->texture->dimensions.height = textureHeight;
+    region->texture->target = ASDTEXTURE_TARGET_2D;
+    region->texture->unk08 = 0x10000;
+    region->texture->image.flags = 0x2000000;
+    region->texture->storage.pixels = pixels;
+    region->x = static_cast<f32>(x);
+    region->y = static_cast<f32>(y);
+    region->width = width;
+    region->height = height;
+    f32 bytesPerPixel = FUN_00168fbc(format, type, &region->texture->image.hardwareFormat);
+    u32 bytes = static_cast<u32>(static_cast<f32>(region->texture->dimensions.width *
+                                               region->texture->dimensions.height) * bytesPerPixel);
+    nn_gxlow_CTR_FlushDataCacheForward(region->texture->storage.pixels, bytes);
+    region->texture->image.physicalAddress = asdGxGetPhysicalAddress(region->texture->storage.pixels);
+    region->scale = 1.0f;
+    region->flags[0] = 0;
+    region->flags[1] = 0;
 }
-
-} /* extern "C" */
+}

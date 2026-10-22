@@ -1,51 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a5d8` (_code @ 0x22a5d8, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ARMCC combines the two flag tests and shares argument setup differently. */
+/* Submits a battle action, selecting the alternate route when a mode is supplied. */
+#include "battle/btlMain.h"
 
 extern "C" {
+BtlMainState *btlGetMainState(void);
+u32 FUN_0022a4ac(u32 alternate, s32 zero, u32 owner, u32 command, s32 mode, u32 value, u32 route);
 
-int FUN_0022a4ac(unsigned int, int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_0022a4ac. */
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
-
+u32 FUN_0022a5d8(u32 owner, s32 mode, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) == 0 && (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) == 0) {
-    if (param_2 != 0) {
-      temp_v2 = *(unsigned int *)(temp_v0 + 0x2230);
-      temp_v3 = 0xd;
-      temp_v1 = 1;
+    /* These fields extend beyond the shared IV battle-state prefix. */
+    struct ActionStateView {
+        u8 unk0000[0x2230];
+        u32 command;
+        u8 unk2234[0x226C];
+        u64 flags;
+    };
+    ActionStateView *state = (ActionStateView *)btlGetMainState();
+    if ((state->flags & 0x40) == 0 && (state->flags & 0x100) == 0) {
+        u32 command;
+        u32 route;
+        u32 alternate;
+        if (mode != 0) {
+            command = state->command;
+            route = 13;
+            alternate = 1;
+        } else {
+            state = (ActionStateView *)btlGetMainState();
+            if ((state->flags & 0x40) != 0 || (state->flags & 0x100) != 0) {
+                return 0;
+            }
+            command = state->command;
+            route = ~0u;
+            mode = 0;
+            alternate = 0;
+        }
+        return FUN_0022a4ac(alternate, 0, owner, command, mode, value, route);
     }
-    else {
-      temp_v0 = btlGetMainState();
-      if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) != 0 || (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) != 0) {
-        return 0;
-      }
-      temp_v2 = *(unsigned int *)(temp_v0 + 0x2230);
-      temp_v3 = 0xffffffff;
-      param_2 = 0;
-      temp_v1 = 0;
-    }
-    return FUN_0022a4ac(temp_v1,0,param_1,temp_v2,param_2,param_3,temp_v3);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

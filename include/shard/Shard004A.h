@@ -3,6 +3,7 @@
 #define SHARD_SHARD004A_H
 
 #include "common.h"
+#include <stddef.h>
 
 #include "shard/Shard0049.h"
 
@@ -10,9 +11,22 @@ typedef struct Screen4A {
     /* 0x0000 */ u8 unk0000[0x14];
     /* 0x0014 */ s32 state;
     /* 0x0018 */ u32 unk18;
-    /* 0x001C */ u8 unk001C[0xC0];
+    union {
+        /* 0x001C */ u8 unk001C[0xC0];
+        struct {
+            /* 0x001C */ u8 unk001C[0xAC];
+            /* 0x00C8 */ f32 position[2];
+        } cursor;
+    };
     /* 0x00DC */ u8 block0DC[4];
-    /* 0x00E0 */ u8 unk00E0[0x77C];
+    union {
+        /* 0x00E0 */ u8 unk00E0[0x77C];
+        struct {
+            /* 0x00E0 */ u8 unk00E0[0x47C];
+            /* 0x055C */ u8 selection[0x8A];
+            /* 0x05E6 */ s8 confirmed;
+        } input;
+    };
     /* 0x085C */ u32 job;
     /* 0x0860 */ u8 unk0860;
     /* 0x0861 */ u8 unk0861[0xA00F];
@@ -21,6 +35,10 @@ typedef struct Screen4A {
     /* 0xA872 */ s16 unkA872;
     /* 0xA874 */ u16 unkA874;
 } Screen4A;
+typedef char Screen4ASizeCheck[sizeof(Screen4A) == 0xA878 ? 1 : -1];
+typedef char Screen4ACursorOffsetCheck[offsetof(Screen4A, cursor.position) == 0xC8 ? 1 : -1];
+typedef char Screen4AInputOffsetCheck[offsetof(Screen4A, input.selection) == 0x55C &&
+    offsetof(Screen4A, input.confirmed) == 0x5E6 ? 1 : -1];
 
 struct PackedDimensionDecoder {
     /* 0x00 */ u8 unk00[0x14];

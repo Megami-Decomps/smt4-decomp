@@ -1,64 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e7d20` (_code @ 0x4e7d20, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ranked target collection uses different saved registers and stack-array addressing. */
+/* Marks the requested descending-HP rank among eligible combatants as a target. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "battle/btlUnit.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/RankedSelection.h"
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+s32 callbackCompareDescendingState(const void *left, const void *right);
+void qsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+BtlUnitA *btlUnitGet(BtlMainStateA **owner);
 
-int qsort(unsigned int *, int, int, unsigned char *);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp388; /* 0x388: local_388 */
-} param_2_stack;
-
-extern unsigned char LAB_003d213c; /* 0x3d213c */
-extern unsigned int DAT_00571190; /* 0x571190 */
-extern unsigned int DAT_00571194; /* 0x571194 */
-
-/* Supplied declaration required: qsort. */
-extern int btlUnitGet(int *);
-
-
-void FUN_004e7d20(int *param_1,int param_2)
-
+void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  short *psVar4;
-  unsigned int *puVar5;
-  int temp_v2;
-  unsigned int temp_v3 [220];
-  
-  puVar1 = *(unsigned int **)(*param_1 + 0x1ffc);
-  temp_v2 = 0x6d;
-  psVar4 = (short *)((int)puVar1 + 0x6e);
-  puVar5 = puVar1 + 0x96;
-  temp_v0 = 0;
-  do {
-    temp_v1 = temp_v0;
-    if ((*puVar1 & DAT_00571190) != 0 || (puVar1[1] & DAT_00571194) != 0) {
-      temp_v1 = temp_v0 + 1;
-      temp_v3[temp_v0 * 2 + 2] = (int)*psVar4;
-      temp_v3[temp_v0 * 2 + 3] = *puVar5;
+    /* The eligibility mask and target flags extend beyond their shared prefixes. */
+    struct TargetView { u8 unk00[0x38]; u8 targets[109]; };
+    RankedSelection entries[109];
+    s32 count = 0;
+    BtlCombatantEntryA *combatants = (*owner)->entries;
+    for (s32 i = 0; i < 109; ++i) {
+        if ((combatants[i].flags & g_btlAction.clearedFlags.mask) != 0) {
+            entries[count].index = combatants[i].indexView.selectionIndex;
+            entries[count].score = combatants[i].hp;
+            ++count;
+        }
     }
-    temp_v2 = temp_v2 - 1;
-    puVar1 = puVar1 + 0x102;
-    psVar4 = psVar4 + 0x204;
-    puVar5 = puVar5 + 0x102;
-    temp_v0 = temp_v1;
-  } while (temp_v2 != 0);
-  if (temp_v1 >= param_2) {
-    qsort(temp_v3 + 2,temp_v1,8,&LAB_003d213c);
-    temp_v0 = btlUnitGet(param_1);
-    temp_v3[2] = temp_v3[param_2 * 2];
-  }
-  else {
-    temp_v0 = btlUnitGet(param_1);
-  }
-  *(unsigned char *)(temp_v3[2] + temp_v0 + 0x38) = 1;
-  return;
+    if (count >= rank) {
+        qsort(entries, count, sizeof(*entries), callbackCompareDescendingState);
+        TargetView *target = (TargetView *)btlUnitGet(owner);
+        target->targets[entries[rank - 1].index] = 1;
+    } else {
+        TargetView *target = (TargetView *)btlUnitGet(owner);
+        target->targets[entries[0].index] = 1;
+    }
 }
-
-} /* extern "C" */
+}

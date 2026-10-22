@@ -1,71 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348e88` (_code @ 0x348e88, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: quest item comparisons and completion-count updates retain a different conditional sequence. */
+/* Marks active item-count quest goals and records whether this gain reaches their target. */
+#include "shard/SaveWork.h"
 
+struct QuestItemGoal {
+    s16 kind;
+    u16 item;
+    u32 required;
+};
+struct QuestItemGoalRecord {
+    u8 unk000[6];
+    u8 disabled;
+    u8 unk007[0x165];
+    QuestItemGoal goals[6];
+};
+struct QuestItemFlags {
+    u8 active;
+    u8 unk01;
+    u8 changed;
+    u8 unk03;
+};
+struct QuestItemFlagBanks {
+    u8 unk000[0x200];
+    QuestItemFlags quests[400];
+};
 extern "C" {
+u32 FUN_0028fb40(u32 item);
+QuestItemFlagBanks *gameGetFlagBlock(void);
+QuestItemGoalRecord *dataTable1bOr1cGetRecord(u16 quest);
+SaveWork *gameGetMapBlock(void);
 
-int dataTable1bOr1cGetRecord(void);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned int FUN_0028fb40(unsigned int);
-extern int gameGetFlagBlock(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int gameGetMapBlock(void);
-
-
-void FUN_00348e88(unsigned int param_1,int param_2)
-
+void FUN_00348e88(u32 item, u32 amount)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = gameGetMapBlock();
-  temp_v6 = 0;
-  do {
-    temp_v1 = gameGetFlagBlock();
-    if ((*(unsigned char *)(temp_v1 + (temp_v6 & 0xffff) * 4 + 0x200) & 2) != 0) {
-      temp_v2 = temp_v6;
-      dataTable1bOr1cGetRecord();
-      if ((temp_v2 != 0) && (*(char *)(temp_v2 + 6) == '\0')) {
-        temp_v1 = 0;
-        do {
-          temp_v5 = temp_v2 + temp_v1 * 8;
-          temp_v3 = temp_v5 + 0x100;
-          temp_v7 = *(short *)(temp_v5 + 0x16c) == 1;
-          if (temp_v7) {
-            temp_v3 = (unsigned int)*(unsigned short *)(temp_v5 + 0x16e);
-          }
-          if ((temp_v7 && temp_v3 == param_1) &&
-             (temp_v3 = FUN_0028fb40(param_1), temp_v3 < *(unsigned int *)(temp_v5 + 0x170))) {
-            temp_v4 = gameGetFlagBlock();
-            temp_v4 = temp_v4 + (temp_v6 & 0xffff) * 4;
-            *(unsigned char *)(temp_v4 + 0x202) = *(unsigned char *)(temp_v4 + 0x202) | 2;
-            if (param_2 + temp_v3 >= *(unsigned int *)(temp_v5 + 0x170)) {
-              *(short *)(temp_v0 + 0x1062) = (short)param_1;
+    /* Quest notification ids lie beyond the shared map-save prefix. */
+    struct QuestNoticeView {
+        u8 unk0000[0x1060];
+        s16 progressingItem;
+        s16 completedItem;
+    };
+    QuestNoticeView *notice = (QuestNoticeView *)gameGetMapBlock();
+    for (u32 i = 0; i < 400; ++i) {
+        if (gameGetFlagBlock()->quests[(u16)i].active & 2) {
+            QuestItemGoalRecord *record = dataTable1bOr1cGetRecord((u16)i);
+            if (record != NULL && record->disabled == 0) {
+                for (u32 j = 0; j < 6; ++j) {
+                    QuestItemGoal *goal = &record->goals[j];
+                    if (goal->kind == 1 && goal->item == item) {
+                        u32 current = FUN_0028fb40(item);
+                        if (current < goal->required) {
+                            gameGetFlagBlock()->quests[(u16)i].changed |= 2;
+                            if (current + amount >= goal->required) {
+                                notice->completedItem = (s16)item;
+                            } else {
+                                notice->progressingItem = (s16)item;
+                            }
+                        }
+                    }
+                }
             }
-            else {
-              *(short *)(temp_v0 + 0x1060) = (short)param_1;
-            }
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 6);
-      }
+        }
     }
-    temp_v6 = temp_v6 + 1;
-  } while ((int)temp_v6 < 400);
-  return;
 }
-
-} /* extern "C" */
+}

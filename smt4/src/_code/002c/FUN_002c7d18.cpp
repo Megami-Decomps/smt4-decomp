@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
-int FUN_00256cd8(unsigned int, double, unsigned char [16]);
+int gfxResolveTimedTextureFrame(unsigned int, double, unsigned char [16]);
 int forwardRecoveredCallback(...);
 int FUN_0028c92c(...);
 int FUN_002a2c7c(...);
@@ -114,7 +114,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
-/* Supplied declaration required: FUN_00256cd8. */
+/* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_0028c92c. */
 /* Supplied declaration required: FUN_002a2c7c. */
@@ -311,7 +311,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             DAT_004ea96c = temp_v19;
             DAT_004ea974 = temp_v1;
             if ((temp_v0 & 0xff) != 0) {
-              FUN_00256cd8(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
+              gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               FUN_002c1b64(g_titleScene,temp_v29);
               phaseCosInterpolate();
               FUN_002b70cc();
@@ -358,7 +358,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             DAT_004ea92c = temp_v19;
             DAT_004ea938 = temp_v4;
             if ((temp_v0 & 0xff) != 0) {
-              FUN_00256cd8(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
+              gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               FUN_002c1b64(g_titleScene,temp_v29);
               phaseCosInterpolate();
               FUN_002b70cc();

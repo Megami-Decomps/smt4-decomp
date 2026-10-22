@@ -1,42 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a5094` (_code @ 0x3a5094, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: profile comparisons load halfwords individually instead of retail's packed-word snapshot. */
+#include "camp/CampCec/CecProfile.h"
+#include "camp/CampCec/CampCecEdit.h"
 
 extern "C" {
+extern CampCecEdit *g_campCecEdit;
+const CecProfile *gameGetPlayerData(void);
 
-/* stack frame of void: 4 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned short spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_campCecEdit; /* 0x57f118 */
-
-extern unsigned int *gameGetPlayerData(void);
-
-
-unsigned int FUN_003a5094(void)
-
+// Detect player identity changes since the StreetPass edit screen was opened.
+u32 FUN_003a5094(void)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = g_campCecEdit;
-  if (g_campCecEdit != 0) {
-    puVar2 = (unsigned int *)gameGetPlayerData();
-    if (((((*puVar2 & 0xffff) != (*(unsigned int *)(temp_v0 + 0x17a) & 0xffff)) ||
-         (*puVar2 >> 0x10 != *(unsigned int *)(temp_v0 + 0x17a) >> 0x10)) ||
-        ((puVar2[1] & 0xffff) != (*(unsigned int *)(temp_v0 + 0x17e) & 0xffff))) ||
-       (((puVar2[1] >> 0x10 != *(unsigned int *)(temp_v0 + 0x17e) >> 0x10 ||
-         ((puVar2[2] & 0xffff) != (*(unsigned int *)(temp_v0 + 0x182) & 0xffff))) ||
-        ((puVar2[2] >> 0x10 != *(unsigned int *)(temp_v0 + 0x182) >> 0x10 ||
-         ((puVar2[3] & 0xffff) != (unsigned int)*(unsigned short *)(temp_v0 + 0x186))))))) {
-      return 1;
+    // Apocalypse's saved profile lies beyond the recovered IV work prefix.
+    struct EditProfileView {
+        u8 unk000[0x17A];
+        CecProfile saved;
+    };
+    EditProfileView *edit = (EditProfileView *)g_campCecEdit;
+    if (edit != NULL) {
+        const CecProfile *current = gameGetPlayerData();
+        CecProfile saved = edit->saved;
+        return current->values[0] != saved.values[0] ||
+               current->values[1] != saved.values[1] ||
+               current->values[2] != saved.values[2] ||
+               current->values[3] != saved.values[3] ||
+               current->values[4] != saved.values[4] ||
+               current->values[5] != saved.values[5] ||
+               current->values[6] != saved.values[6];
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

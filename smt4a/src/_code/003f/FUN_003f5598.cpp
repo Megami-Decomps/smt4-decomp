@@ -1,70 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5598` (_code @ 0x3f5598, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: file-load argument scheduling and sprite-handle address reuse differ. */
+#include "common.h"
 
+struct PartnerTopicDialog {
+    u8 unk00[0x28];
+    void *message;
+    void *commonMessage;
+    void *script;
+    u8 unk34[0x10];
+    u32 index;
+    u32 count;
+    u32 unk4C;
+    u32 selection;
+    u32 frame;
+    u8 unk58[0x580];
+    u32 sprite;
+    u32 value;
+    u8 unk5E0[4];
+    u8 active;
+    u8 pending;
+    u16 entries[100];
+    u8 unk6AE[2];
+    u32 state;
+    s32 slots[5];
+    s32 handles[4];
+};
 extern "C" {
-
-int asdTMTexTableLoadTmx(int, int);
-int positionStateSet(unsigned int, int, int);
-int FUN_001527d8(unsigned int, unsigned int);
-int asdTMTexLoadMainHeap(int, int);
-int __aeabi_memset4(int, int, unsigned int);
-int asdLoadFileAsyncSimple(...);
-int rt_memclr(int, int);
-int dialogEnterState(int, int, int);
-int FUN_003f84e8(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: dialogEnterState. */
-/* Supplied declaration required: FUN_003f84e8. */
-
-
-void FUN_003f5598(int param_1)
-
-{
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0x6b0) = 0;
-  rt_memclr(param_1 + 0x5e6,200);
-  *(unsigned int *)(param_1 + 0x44) = 0;
-  *(unsigned int *)(param_1 + 0x48) = 0;
-  *(unsigned int *)(param_1 + 0x50) = 0;
-  *(unsigned int *)(param_1 + 0x5dc) = 0;
-  *(unsigned int *)(param_1 + 0x54) = 0;
-  *(unsigned char *)(param_1 + 0x5e4) = 0;
-  *(unsigned char *)(param_1 + 0x5e5) = 0;
-  asdLoadFileAsyncSimple("event/PartnerTopic/PartnerTopic.mbm",param_1 + 0x28,0);
-  asdLoadFileAsyncSimple("event/PartnerTopic/PartnerTopicCommon.mbm",param_1 + 0x2c,0);
-  asdLoadFileAsyncSimple("event/PartnerTopic/PartnerTopicCommon.bf",param_1 + 0x30,0);
-  __aeabi_memset4(param_1 + 0x6b4,0x14,0xffffffff);
-  __aeabi_memset4(param_1 + 0x6c8,0x10,0xffffffff);
-  asdTMTexTableLoadTmx(0x31,0);
-  do {
-    asdTMTexLoadMainHeap(0x31,temp_v1);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 2);
-  temp_v0 = spriteHandleCreate(0);
-  *(unsigned int *)(param_1 + 0x5d8) = temp_v0;
-  FUN_001527d8(temp_v0,0xffffffff);
-  positionStateSet(*(unsigned int *)(param_1 + 0x5d8),0,0x646464ff);
-  FUN_003f84e8(param_1);
-  dialogEnterState(param_1,1,0);
-  return;
+void rt_memclr(void *, u32);
+void __aeabi_memset4(void *, u32, s32);
+void asdLoadFileAsyncSimple(const char *, void **, u32);
+void asdTMTexTableLoadTmx(u32, u32);
+void asdTMTexLoadMainHeap(u32, s32);
+u32 spriteHandleCreate(u32);
+void FUN_001527d8(u32, s32);
+void positionStateSet(u32, u32, u32, f32);
+void FUN_003f84e8(PartnerTopicDialog *);
+void dialogEnterState(PartnerTopicDialog *, s32, s32);
+extern const char DAT_0052d3c4[]; // event/PartnerTopic/PartnerTopic.mbm
+extern const char DAT_0052d398[]; // event/PartnerTopic/PartnerTopicCommon.mbm
+extern const char DAT_0052d36c[]; // event/PartnerTopic/PartnerTopicCommon.bf
 }
 
-} /* extern "C" */
+extern "C" void FUN_003f5598(PartnerTopicDialog *dialog)
+{
+    dialog->state = 0;
+    rt_memclr(dialog->entries, sizeof(dialog->entries));
+    dialog->index = 0;
+    dialog->count = 0;
+    dialog->selection = 0;
+    dialog->value = 0;
+    dialog->frame = 0;
+    dialog->active = 0;
+    dialog->pending = 0;
+    asdLoadFileAsyncSimple(DAT_0052d3c4, &dialog->message, 0);
+    asdLoadFileAsyncSimple(DAT_0052d398, &dialog->commonMessage, 0);
+    asdLoadFileAsyncSimple(DAT_0052d36c, &dialog->script, 0);
+    __aeabi_memset4(dialog->slots, sizeof(dialog->slots), -1);
+    __aeabi_memset4(dialog->handles, sizeof(dialog->handles), -1);
+    asdTMTexTableLoadTmx(49, 0);
+    for (s32 i = 0; i < 2; ++i) {
+        asdTMTexLoadMainHeap(49, i);
+    }
+    dialog->sprite = spriteHandleCreate(0);
+    FUN_001527d8(dialog->sprite, -1);
+    positionStateSet(dialog->sprite, 0, 0x646464FF, 1.0f);
+    FUN_003f84e8(dialog);
+    dialogEnterState(dialog, 1, 0);
+}

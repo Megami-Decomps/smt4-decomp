@@ -47,7 +47,7 @@ extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -178,7 +178,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               FUN_002be5a4(2,0xff,temp_v9);
               temp_v6 = FUN_002bf4f8(0x24,0x6f);
-              temp_v3 = FUN_002bce30(*temp_v10,0);
+              temp_v3 = demonGetRaceLabel(*temp_v10,0);
               textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
               puVar7 = temp_v9;
               FUN_002b6dd8(puVar7,2);
@@ -302,7 +302,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002be5a4(3,0xffffffff,temp_v9);
           temp_v1 = FUN_002bf4f8(0x24,0x84);
-          temp_v3 = FUN_002bce30(*puVar5,0);
+          temp_v3 = demonGetRaceLabel(*puVar5,0);
           textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
           puVar7 = temp_v9;
           FUN_002b6dd8(puVar7,3);

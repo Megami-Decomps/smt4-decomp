@@ -7,7 +7,7 @@ extern "C" {
 int renderCtxCallB(...);
 int FUN_002a34e8(...);
 int mathMatrixTranslateLocal(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf4f8(...);
@@ -48,7 +48,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a34e8. */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
@@ -108,7 +108,7 @@ unsigned int FUN_00335b80(int *param_1)
     FUN_002bed3c();
     FUN_002bf4f8(0x2d,3000);
     temp_v4 = 0.35f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,3000,(int)temp_v4,0,2);
     temp_v1 = g_titleScene;
@@ -163,7 +163,7 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v1 = FUN_002bf4f8(0x2d,2000);
     temp_v8 = 0.3f;
     temp_v4 = temp_v8;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v7 = 0.5f;
     temp_v5 = (float)VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -191,7 +191,7 @@ unsigned int FUN_00335b80(int *param_1)
     FUN_002a34e8(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
     temp_v1 = FUN_002bf4f8(0x2d,0x7d1);
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v8 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,0x7d1,(int)(temp_v8 + temp_v4 * temp_v7),-(int)*(short *)(temp_v1 + 10),6);
@@ -222,7 +222,7 @@ unsigned int FUN_00335b80(int *param_1)
     FUN_002bed3c();
     FUN_002bf4f8(0x2d,1000);
     temp_v4 = 0.28f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,1000,(int)temp_v4,0,6);
     temp_v1 = g_titleScene;

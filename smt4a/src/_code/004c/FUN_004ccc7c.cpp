@@ -1,45 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ccc7c` (_code @ 0x4ccc7c, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: level-polynomial arithmetic and experience-loop register allocation differ from retail. */
+#include "common.h"
 
 extern "C" {
+void *dataTableGet(u32 table, u32 subtable);
+const u32 *dataTableGetEntries(void *table);
+s32 gameGetUnlockedCountLimit();
 
-int dataTableGet(int, int);
-
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-extern int gameGetUnlockedCountLimit(void);
-
-
-int FUN_004ccc7c(int param_1,unsigned int *param_2)
-
+// Consume experience thresholds until the next level is unaffordable or the unlocked limit is reached.
+s32 FUN_004ccc7c(s32 startingLevel, u32 *experience)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  for (temp_v3 = param_1; temp_v0 = gameGetUnlockedCountLimit(), temp_v3 < temp_v0; temp_v3 = temp_v3 + 1) {
-    dataTableGet(9,1);
-    temp_v0 = dataTableGetEntries();
-    temp_v1 = gameGetUnlockedCountLimit();
-    if (temp_v3 >= temp_v1) {
-      temp_v2 = 0;
+    s32 level = startingLevel;
+    for (; level < gameGetUnlockedCountLimit(); ++level) {
+        const u32 *thresholds = dataTableGetEntries(dataTableGet(9, 1));
+        u32 required;
+        if (level >= gameGetUnlockedCountLimit()) {
+            required = 0;
+        } else if (level >= 99) {
+            required = level * level * 3 + (u32)(level * level * level) / 100 + level * 3512 + 99526;
+            if (required >= 1000000)
+                required = 999999;
+        } else {
+            required = thresholds[level - 1];
+        }
+        if (*experience < required)
+            break;
+        *experience -= required;
     }
-    else if (temp_v3 >= 99) {
-      temp_v2 = temp_v3 * temp_v3 * 3 + (unsigned int)(temp_v3 * temp_v3 * temp_v3) / 100 + temp_v3 * 0xdb8 + 0x184c6;
-      if (temp_v2 >= 1000000) {
-        temp_v2 = 999999;
-      }
-    }
-    else {
-      temp_v2 = *(unsigned int *)((temp_v0 + temp_v3 * 4) - 4);
-    }
-    if (*param_2 < temp_v2) break;
-    *param_2 = *param_2 - temp_v2;
-  }
-  return temp_v3 - param_1;
+    return level - startingLevel;
 }
-
-} /* extern "C" */
+}

@@ -1,60 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cc4e4` (_code @ 0x3cc4e4, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 61 vs built 60 rows; paired eligibility-mask loads and selected-holder branch layout differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
+u32 scrGetArg(u32);
+void targetStartIndexWithFlag2(u32, u32);
 
-int targetStartIndexWithFlag2(unsigned int, unsigned int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned int g_battleMaskPresets; /* 0x570d78 */
-extern unsigned int DAT_00570d7c; /* 0x570d7c */
-extern unsigned int DAT_00570d80; /* 0x570d80 */
-extern unsigned int DAT_00570d84; /* 0x570d84 */
-extern unsigned int DAT_00570d90; /* 0x570d90 */
-extern unsigned int DAT_00570d94; /* 0x570d94 */
-
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: targetStartIndexWithFlag2. */
-
-
-unsigned int FUN_003cc4e4(void)
-
+u32 FUN_003cc4e4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  temp_v5 = 4;
-  while( 1 ) {
-    puVar7 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408);
-    temp_v3 = *puVar7;
-    temp_v4 = puVar7[1];
-    if (((((temp_v4 & DAT_00570d7c) != 0 || (temp_v3 & g_battleMaskPresets) != 0) &&
-         ((temp_v4 & DAT_00570d94) == 0 && (DAT_00570d90 & temp_v3) == 0)) &&
-        ((temp_v4 & DAT_00570d84) != 0 || (DAT_00570d80 & temp_v3) != 0)) &&
-       ((*(char *)((int)puVar7 + 0x23a) != '\0' && (*(unsigned short *)((int)puVar7 + 0x166) == temp_v0))))
-    break;
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x36) {
-      return 1;
+    u32 id = scrGetArg(0);
+    u32 argument = scrGetArg(1);
+    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(btlGetMainState());
+    for (s32 index = 4; index < 54; ++index) {
+        BtlCombatantEntryA *entry = &state->entries[index];
+        u64 flags = entry->flags;
+        if ((flags & g_battleMaskPresets.eligibility.active) != 0 &&
+            (flags & g_battleMaskPresets.eligibility.excluded) == 0 &&
+            (flags & g_battleMaskPresets.eligibility.required) != 0 &&
+            entry->selection.marked != 0 && entry->id == id) {
+            targetStartIndexWithFlag2(state->roster[index].script.holder, argument);
+            break;
+        }
     }
-  }
-  targetStartIndexWithFlag2(*(unsigned int *)(*(int *)(temp_v2 + 0x1ed4) + temp_v5 * 0x1d0 + 0x1bc),temp_v1);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

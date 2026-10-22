@@ -1,48 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001523b8` (_code @ 0x1523b8, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler groups the saved lens fields into three stores rather than retail's two pairs; VFP move scheduling differs. */
+#include "shard/W5_W5Match2_PlainData.h"
 
+// View of the projection matrices and embedded stereo camera beyond ProjectionCamera's known prefix.
+struct CameraProjectionWork {
+    u8 stereoEnabled; // 0x000
+    u8 unk001[0x27];
+    f32 fov; // 0x028
+    f32 aspect; // 0x02c
+    f32 nearClip; // 0x030
+    f32 farClip; // 0x034
+    u8 unk038[0x70];
+    Matrix44 projection; // 0x0a8
+    Matrix44 stereoProjection; // 0x0e8
+    u8 unk128[0x30];
+    Matrix44 transposed; // 0x158
+    u8 unk198[0x308];
+    u8 stereoCamera[1]; // 0x4a0
+};
 extern "C" {
+Matrix44 *FUN_0016fba0(Matrix44 *, f32 fov, f32 farClip, f32 aspect, f32 nearClip);
+void nn_math_ARMv6_MTX44PivotC_FAST(Matrix44 *, u32 pivot);
+void nn_math_ARMv6_MTX44TransposeAsm(Matrix44 *, const Matrix44 *);
+void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void *, const Matrix44 *);
 
-int FUN_0016fba0(char *);
-int nn_math_ARMv6_MTX44PivotC_FAST(...);
-int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
-int nn_ulcd_CTR_StereoCamera_SetBaseFrustum(char *, char *);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0016fba0. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
-/* Supplied declaration required: nn_ulcd_CTR_StereoCamera_SetBaseFrustum. */
-
-
-void FUN_001523b8(char *param_1,unsigned int param_2)
-
+// Rebuild the display and stereo perspective projections after a lens change.
+void FUN_001523b8(CameraProjectionWork *camera, u32 pivot, f32 fov, f32 aspect, f32 nearClip, f32 farClip)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 8 native warning(s); review required */
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  
-  *(unsigned int *)(param_1 + 0x28) = in_s0;
-  *(unsigned int *)(param_1 + 0x2c) = in_s1;
-  *(unsigned int *)(param_1 + 0x30) = in_s2;
-  *(unsigned int *)(param_1 + 0x34) = in_s3;
-  FUN_0016fba0(param_1 + 0xa8);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0xa8,param_2);
-  nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x158,param_1 + 0xa8);
-  FUN_0016fba0(param_1 + 0xe8);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0xe8,0);
-  if (*param_1 != '\0') {
-    nn_ulcd_CTR_StereoCamera_SetBaseFrustum(param_1 + 0x4a0,param_1 + 0xe8);
-    return;
-  }
-  return;
+    camera->fov = fov;
+    camera->aspect = aspect;
+    camera->nearClip = nearClip;
+    camera->farClip = farClip;
+    FUN_0016fba0(&camera->projection, fov * 0.017453292f, farClip, aspect, nearClip);
+    nn_math_ARMv6_MTX44PivotC_FAST(&camera->projection, pivot);
+    nn_math_ARMv6_MTX44TransposeAsm(&camera->transposed, &camera->projection);
+    FUN_0016fba0(&camera->stereoProjection, camera->fov * 0.017453292f, camera->farClip, camera->aspect, camera->nearClip);
+    nn_math_ARMv6_MTX44PivotC_FAST(&camera->stereoProjection, 0);
+    if (camera->stereoEnabled)
+        nn_ulcd_CTR_StereoCamera_SetBaseFrustum(camera->stereoCamera, &camera->stereoProjection);
 }
-
-} /* extern "C" */
+}

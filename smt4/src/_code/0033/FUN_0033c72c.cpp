@@ -7,7 +7,7 @@ extern "C" {
 int messageKindForward(...);
 int categoryGetColor(int);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int drawSetColorFromRGBA8(void);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -38,7 +38,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: categoryGetColor. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -84,12 +84,12 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   efctSetSpeed();
   temp_v13 = 0.29f;
   temp_v10 = temp_v13;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v9 = (int)temp_v13;
   temp_v13 = temp_v10;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v16 = (int)temp_v10;
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   temp_v15 = g_titleScene;
   temp_v14 = romwright_piece_4_4(in_s2,(int)temp_v13);
   temp_v1 = packNibblesAndByte(6,1,0);

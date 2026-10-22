@@ -6,7 +6,7 @@ extern "C" {
 
 int sysFatalBreak(void);
 int _ZN18WindowStatusResultC1Ej(...);
-int FUN_00427a10(unsigned int, unsigned char *);
+int nnAsyncMapOperationResult(unsigned int, unsigned char *);
 int FUN_00427e68(int, int);
 int rt_memcpy(unsigned char *, unsigned int, unsigned int);
 int rt_memcpy_w(unsigned char *, int, int);
@@ -28,7 +28,7 @@ extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: FUN_00427a10. */
+/* Supplied declaration required: nnAsyncMapOperationResult. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00427e68. */
 extern int tokenResolveAddress(unsigned int, int *, int);
@@ -96,7 +96,7 @@ void FUN_00429210(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
       if (-1 < temp_v1) {
         temp_v1 = appletIsExitRequested();
         if ((temp_v1 == 0) && (temp_v1 = FUN_0015a410(), temp_v1 == 0)) {
-          FUN_00427a10(param_1,&DAT_0061b000);
+          nnAsyncMapOperationResult(param_1,&DAT_0061b000);
           return;
         }
         temp_v4 = 0xc9413891;

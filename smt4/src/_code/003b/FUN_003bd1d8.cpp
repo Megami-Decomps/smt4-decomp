@@ -1,73 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bd1d8` (_code @ 0x3bd1d8, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Battle-entry ID reloads, pointer registers, and multiplier-load scheduling differ. */
+#include "common.h"
+#include "battle/btlMain.h"
+#include <stddef.h>
+
+/* No canonical IV listed-entry layout is identified by this caller. */
+struct BattleEntry;
 
 extern "C" {
+BtlMainState *btlGetMainState(void);
+BattleEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
+void FUN_00247478(void *, BtlMainState *, BattleEntry *);
+u32 FUN_00246134(u32, u32, s32, u32);
+void selectionCopySupportedValue(u32, u32 *);
+s32 FUN_0022aa38(BattleEntry *, u32);
+f32 battleGetPassiveAffinityMultiplier(u32, u32);
 
-int FUN_0022aa38(int, unsigned int);
-int FUN_0022ab08(int, unsigned int *);
-int FUN_00246134(unsigned int, int, int, unsigned int);
-int FUN_00247478(unsigned char [2], unsigned int, unsigned int);
-int btlMainFindEntryByListedId(...);
-int btlGetMainState(void);
-int FUN_003bd9e8(unsigned int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 3 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned short sp40; /* 0x40: local_40 */
-    unsigned short sp42; /* 0x42: local_42 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0022aa38. */
-/* Supplied declaration required: FUN_0022ab08. */
-/* Supplied declaration required: FUN_00246134. */
-/* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003bd9e8. */
-
-
-void FUN_003bd1d8(unsigned int param_1,unsigned int param_2)
-
+f32 FUN_003bd1d8(u32 listedId, u32 request)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned short temp_v4;
-  unsigned int in_fpscr;
-  unsigned int temp_v5;
-  unsigned char temp_v6 [2];
-  unsigned short temp_v7;
-  short temp_v8;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v1,param_1);
-  temp_v2 = btlGetMainState();
-  FUN_00247478(temp_v6,temp_v2,temp_v1);
-  if ((int)temp_v8 - 3U >= 8) {
-    FUN_00246134(param_2,temp_v7,(int)temp_v8,0xffffffff);
-    temp_v4 = param_2;
-    if (((param_2 & 0x60000) != 0) && (temp_v4 == 0)) {
-      temp_v4 = 100;
-    }
-    temp_v3 = temp_v0;
-    btlMainFindEntryByListedId(temp_v0,param_1);
-    FUN_0022ab08(temp_v7,&temp_v5);
-    FUN_0022aa38(temp_v3,temp_v5 & 0xff);
-    if ((temp_v3 != 0) && (temp_v4 < 100)) {
-      temp_v4 = 100;
-      *(unsigned int *)(temp_v0 + 0x48b8) = 1;
-    }
-    VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_003bd9e8(param_1,temp_v7);
-  }
-  return;
-}
+    /* Caller-owned output capacity, not a recovered record boundary.
+     * Retail reserves 36 bytes starting at sp+4. */
+    struct QueryStorageIV {
+        u16 unknown00;
+        u16 entryId;
+        s16 category;
+        u8 remainingCapacity[30];
+    };
+    typedef char QueryStorageIVCheck[
+        sizeof(QueryStorageIV) == 36 &&
+        offsetof(QueryStorageIV, entryId) == 2 &&
+        offsetof(QueryStorageIV, category) == 4 &&
+        offsetof(QueryStorageIV, remainingCapacity) == 6 ? 1 : -1];
 
-} /* extern "C" */
+    /* The accessed word is beyond canonical BtlMainState's recovered end
+     * (0x1E9C). This local view does not extend the canonical type. */
+    struct MinimumPercentViewIV {
+        u8 prefix[0x48B8];
+        u32 minimumPercentApplied;
+    };
+    typedef char MinimumPercentViewIVCheck[
+        offsetof(MinimumPercentViewIV, minimumPercentApplied) == 0x48B8 &&
+        sizeof(MinimumPercentViewIV) == 0x48BC ? 1 : -1];
+
+    BtlMainState *mainState = btlGetMainState();
+    BattleEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
+    QueryStorageIV query;
+    FUN_00247478(&query, btlGetMainState(), entry);
+
+    if (static_cast<u32>(static_cast<s32>(query.category) - 3) <= 7u)
+        return 1.0f;
+
+    const u32 result = FUN_00246134(request, query.entryId,
+                                  static_cast<s32>(query.category), 0xFFFFFFFFu);
+    u16 percent = static_cast<u16>(result);
+    if ((result & 0x60000u) != 0 && percent == 0)
+        percent = 100;
+
+    entry = btlMainFindEntryByListedId(mainState, listedId);
+    u32 attributes;
+    selectionCopySupportedValue(query.entryId, &attributes);
+    if (FUN_0022aa38(entry, attributes & 0xFFu) != 0 && percent < 100) {
+        percent = 100;
+        reinterpret_cast<MinimumPercentViewIV *>(mainState)->minimumPercentApplied = 1;
+    }
+
+    const f32 scale = static_cast<f32>(static_cast<s32>(percent)) * 0.01f;
+    return battleGetPassiveAffinityMultiplier(listedId, query.entryId) * scale;
+}
+}

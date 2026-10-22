@@ -1,94 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ef94` (_code @ 0x20ef94, 0xc0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the first flag-byte store is moved after record initialization. */
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include <stddef.h>
 
 extern "C" {
+extern MapWorkEntries *DAT_00581280;
+void FUN_002241d0();
 
-#ifndef ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__________0058127c_17_1 {
-    char whole[17];
-    unsigned char u1[17];
-    signed char s1[17];
-};
-typedef char romwright_storage_s__________0058127c_17_1_size_check[(sizeof(union romwright_storage_s__________0058127c_17_1) == 17) ? 1 : -1];
-typedef char romwright_storage_s__________0058127c_17_1_u1_width_check[(sizeof(((union romwright_storage_s__________0058127c_17_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__________0058127c_17_1_s1_width_check[(sizeof(((union romwright_storage_s__________0058127c_17_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__________0058127c_17_1 s__________0058127c; /* 0x58127c */
-extern unsigned int *DAT_00581280; /* 0x581280 */
-
-
-void FUN_0020ef94(void)
-
+void FUN_0020ef94()
 {
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  puVar2 = DAT_00581280;
-  DAT_00581280[2] = 0;
-  *puVar2 = 0;
-  puVar2[1] = 0;
-  *(unsigned char *)(puVar2 + 0x3c3) = 0;
-  *(unsigned char *)(puVar2 + 0x3d0) = 0;
-  puVar2[0x3c4] = 0;
-  puVar2[0x3d3] = 0;
-  puVar2[0x3d4] = 0xffffffff;
-  temp_v4 = 0;
-  do {
-    temp_v2 = temp_v4 + 1;
-    *(unsigned char *)((int)puVar2 + temp_v4 * 0x3c + 0xd) = 0;
-    *(unsigned char *)((int)puVar2 + temp_v4 * 0x3c + 0xe) = 0;
-    *(unsigned short *)(puVar2 + temp_v4 * 0xf + 5) = 0xffff;
-    *(unsigned short *)((int)puVar2 + temp_v4 * 0x3c + 0x16) = 0;
-    puVar2[temp_v4 * 0xf + 6] = 0x40800000;
-    puVar2[temp_v4 * 0xf + 7] = 0xc1100000;
-    puVar2[temp_v4 * 0xf + 8] = 0;
-    puVar2[temp_v4 * 0xf + 9] = 0;
-    puVar2[temp_v4 * 0xf + 10] = 0x42b40000;
-    puVar2[temp_v4 * 0xf + 0xb] = 0;
-    puVar2[temp_v4 * 0xf + 0xc] = 0;
-    puVar2[temp_v4 * 0xf + 0xf] = 0;
-    *(unsigned short *)((int)puVar2 + temp_v4 * 0x3c + 0x12) = 0xffff;
-    puVar2[temp_v4 * 0xf + 0x10] = 0;
-    *(unsigned short *)(puVar2 + temp_v4 * 0xf + 0xd) = 0;
-    *(unsigned short *)((int)puVar2 + temp_v4 * 0x3c + 0x36) = 0;
-    puVar2[temp_v4 * 0xf + 0x11] = 0;
-    *(unsigned char *)(puVar2 + temp_v4 * 0xf + 0xe) = 0;
-    *(unsigned char *)(puVar2 + temp_v4 * 0xf + 3) = 0;
-    temp_v0 = (*(unsigned int *)&s__________0058127c.u1[0]);
-    temp_v4 = temp_v2;
-  } while (temp_v2 < 0x40);
-  temp_v4 = 0;
-  do {
-    temp_v3 = 0;
-    temp_v2 = 0;
-    temp_v1 = temp_v0 + temp_v4 * 0x284;
-    do {
-      *(unsigned int *)(temp_v1 + temp_v3 * 0x28) = 0;
-      temp_v2 = temp_v2 + 2;
-      *(unsigned int *)(temp_v1 + (temp_v3 + 1) * 0x28) = 0;
-      temp_v3 = temp_v3 + 2;
-    } while (temp_v2 < 0x10);
-    temp_v4 = temp_v4 + 1;
-    *(unsigned int *)(temp_v1 + 0x280) = 0;
-  } while (temp_v4 < 0x10);
-  temp_v4 = 0;
-  *(unsigned int *)(temp_v0 + 0x2840) = 0;
-  temp_v2 = 0x20;
-  do {
-    temp_v2 = temp_v2 - 1;
-    temp_v1 = temp_v0 + temp_v4 * 0x30;
-    *(unsigned char *)(temp_v1 + 0x2844) = 0;
-    temp_v4 = temp_v4 + 1;
-    *(unsigned int *)(temp_v1 + 0x2870) = 0xffffffff;
-  } while (temp_v2 != 0);
-  return;
+    // This controller variant has larger records and more entries than the shared prefix.
+    struct ControllerRecord {
+        u8 active, firstFlag, secondFlag, unk03;
+        u16 unk04;
+        s16 firstId, secondId;
+        u16 state;
+        f32 x, y, z;
+        f32 scalar18;
+        f32 angle;
+        u32 unk20;
+        f32 scalar24;
+        u16 unk28, unk2a;
+        u8 ready;
+        u8 unk2d[3];
+        u32 unk30, unk34, unk38;
+    };
+    struct ControllerWorkView {
+        u32 first, second, third;
+        ControllerRecord records[64];
+        u8 active;
+        u8 unkf0d[3];
+        u32 count;
+        u8 unkf14[0x2c];
+        u8 ready;
+        u8 unkf41[0xb];
+        u32 unkf4c;
+        s32 selected;
+    };
+    typedef char ControllerLayoutCheck[sizeof(ControllerRecord) == 0x3c &&
+        offsetof(ControllerWorkView, records) == 0xc &&
+        offsetof(ControllerWorkView, active) == 0xf0c &&
+        offsetof(ControllerWorkView, selected) == 0xf50 ? 1 : -1];
+    ControllerWorkView *work = (ControllerWorkView *)DAT_00581280;
+    work->third = 0;
+    work->first = 0;
+    work->second = 0;
+    work->active = 0;
+    work->ready = 0;
+    work->count = 0;
+    work->unkf4c = 0;
+    work->selected = -1;
+    for (s32 index = 0; index < 64; ++index) {
+        work->records[index].firstFlag = 0;
+        work->records[index].secondFlag = 0;
+        work->records[index].secondId = -1;
+        work->records[index].state = 0;
+        work->records[index].x = 4.0f;
+        work->records[index].y = -9.0f;
+        work->records[index].z = 0.0f;
+        work->records[index].scalar18 = 0.0f;
+        work->records[index].angle = 90.0f;
+        work->records[index].unk20 = 0;
+        work->records[index].scalar24 = 0.0f;
+        work->records[index].unk30 = 0;
+        work->records[index].firstId = -1;
+        work->records[index].unk34 = 0;
+        work->records[index].unk28 = 0;
+        work->records[index].unk2a = 0;
+        work->records[index].unk38 = 0;
+        work->records[index].ready = 0;
+        work->records[index].active = 0;
+    }
+    FUN_002241d0();
 }
-
-} /* extern "C" */
+}

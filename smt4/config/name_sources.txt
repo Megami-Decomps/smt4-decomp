@@ -3437,3 +3437,48 @@
 0038acd4 _ZN9Obj4221a410initializeEPKv inferred Obj422594 +08 override forwards source to base initialize
 003a030c _ZN9Obj4223ac10initializeEPKv inferred Obj422594 +08 override; reads the source type at +04
 00395e70 _ZN9Obj42231812updateMotionEv inferred base +18 slot (empty default); Obj4222ac overrides it as updateMotion
+002229e4 npcRoomDebugCreateTask inferred [high] Allocates the NPC-room debug work and creates its calculation and UI-draw jobs.
+003059dc motionPlayerUpdateAndApply inferred [high] Updates playback, applies source and holder transforms, updates sound speed, and synchronizes the frame.
+00125e30 ifTouchIsActive inferred [high] Port of the matching Apocalypse touch-active query.
+0032866c effectEditorEditSelectedRecord inferred [high] Edits the selected indexed record through scratch storage and propagates its changed flag.
+0022caa4 dataLookupDisplayName inferred [high] Looks up a display name with overrides, sentinel records and fallback text.
+003bd9e8 battleGetPassiveAffinityMultiplier inferred [high] Multiplies matching affinity bonuses from the combatant passive-skill list.
+00287b0c mathGetShortestAngleDelta inferred [high] Returns the signed shortest angular difference between two angles.
+00387934 dataFindGroupedRecord inferred [high] Finds a record by flat index across eligible grouped data tables.
+0020713c itemCompareCategoryPriorityDescending inferred [high] Sorts item records by category priority and descending secondary value.
+00387de0 packageFindIndexedRecord inferred [high] Resolves an indexed record across loaded type-40 package tables.
+002bce30 demonGetRaceLabel inferred [high] Selects the demon's race label, preferring add-on text over the built-in table.
+002cf034 shopRequestSequence inferred [high] Requests the shop sequence using script arguments or a queued shop selection.
+0029c94c buttonHelpShowSkillDetails inferred [high] Shows a skill's category, target, and description in the button-help panel.
+0021768c partyCompareSlotOrder inferred [high] Compares signed party-slot IDs in active-party then stock order.
+002b86bc questCenterPollShutdown inferred [high] Polls quest-center shutdown and releases the completed work; matched port source for the Apocalypse twin.
+003932a4 aocUpdateRequestTransition inferred [high] Submits a request and completes after AOC operation flags clear
+001058a4 asdGxSubmitFrame inferred [high] Flushes and submits GPU command lists then flips frame buffers
+003d700c cameraTestDefaultPose inferred [high] Checks the default camera pose and zero interpolation progress
+003c017c channelRunMagnitudeQueries inferred [med] Runs selected channel query commands and sums absolute results.
+0022699c btlQueueReflectAction inferred [high] Allocates a reflect action, initializes actor and option fields, and appends it to the context queue.
+003abe00 menuUpdateCollectionSort inferred [high] Handles collection counter-menu completion and applies saved ordering and descending mode.
+0021e074 gfxDestroyModelGroups inferred [high] Destroys both model groups in reverse order and clears all sixty-four entry activation bytes.
+00256cd8 gfxResolveTimedTextureFrame inferred [high] Selects the resource and frame from a timed texture-frame sequence.
+0031cd5c btlChooseRandomRecordCandidate inferred [high] Builds candidates from record choices and the battle table, then selects one randomly.
+002305fc buttonHelpSelectMenuPreset inferred [high] Chooses the menu help preset from the page, selection and availability flags.
+00104074 modelStartProcessGroup inferred [high] Creates calculation and dual-screen model processes, installs the auxiliary callback and starts the manager.
+002f7acc btlScriptCreateSelectedAction inferred [high] Creates the current script actor action from the selected skill and queues its follow-up value.
+00327ed4 geometryOwnerDestroyEntries inferred [high] Destroy every owned geometry entry and release its allocation.
+00280988 mapEaseSceneHeading inferred [high] Ease the scene heading toward the requested direction.
+002d670c uiDrawDirectoryRows inferred [high] Draw up to eleven directory entries with their per-row sprite metrics.
+002e0bc4 titleSynchronizeSavedConfig inferred [high] Push edited settings, load saved settings or persist the defaults when uninitialized.
+00266584 mapInitializeStoryMarkerEffects inferred [high] Initialize active map effects and spawn the story-gated marker set.
+003380f8 btlQueryMatchingFlagColumn inferred [high] Query the selected flag column for a matching combatant category and identifier.
+00298fa0 questReadRuntimeFlag inferred [high] Reads one quest runtime-status bit or delegates the completion-state selector.
+0022ab08 selectionCopySupportedValue inferred [med] Writes the selected value only for the supported selector cases.
+001a80b4 itemCompareCategoryPriorityValue inferred [high] Compares remapped item category priority and then the unsigned value field.
+0026b60c saveStartLoadProcess inferred [high] Initialize save-load flags and work, then start the Load process.
+002e31d0 uniteStartEffectProcesses inferred [high] Allocate Unite effect work and create its calculation and two draw processes.
+0028850c uiFormatIndexedDisplayName inferred [high] Format an indexed item/add-on/category name or the fullwidth unspecified label.
+002e1574 asdTMTexTableActivateImage inferred [high] Port of the matched Apocalypse texture-node activation helper.
+0026c57c uniteLoadPreviewRoomModel inferred [high] Loads camp/jakyou_all_mido.bam once and synchronizes preview animation with sound.
+002ba12c renderCtxCalculateStereoParallax inferred [high] Transforms and clamps depth, computes stereo parallax and applies eye direction and scale.
+00295660 textEncodeFontSlot inferred [high] Expands ASCII through font-code lookup, preserves multibyte glyphs, and encodes newlines.
+00102a10 ifTouchAcquire inferred [high] Reference-counted creation of shared touch state and TOUCH CALC process.
+00116968 gfxDrawSolidRectangle inferred [high] Normalizes packed ARGB channels and draws a rectangle with identical corner colors.

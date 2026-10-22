@@ -1,54 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f534` (_code @ 0x34f534, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ring-buffer cursor and resource-size calculations use different saved registers. */
+/* Submits a contiguous block to the frame stream's ring buffer, wrapping when necessary. */
+#include "classes/Obj557f00.h"
 
 extern "C" {
+u64 resourceGetWideHandle(u32 index);
+u64 runtimeShiftLeftWide(u64 value, u32 shift);
+s32 FUN_0034e618(u32 handle, const void *buffer, u32 size);
+void rt_memcpy(void *destination, const void *source, u32 size);
 
-int rt_memcpy(int, unsigned int, unsigned int);
-
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
-#endif
-extern unsigned long long resourceGetWideHandle(unsigned int);
-extern int runtimeShiftLeftWide(unsigned int, unsigned int, unsigned int);
-extern int FUN_0034e618(unsigned int, int, unsigned int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned char FUN_0034f534(int param_1,unsigned int param_2,unsigned int param_3)
-
+u8 FUN_0034f534(Obj557f00 *stream, const void *source, u32 size)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned long long temp_v4;
-  
-  temp_v3 = *(int *)(param_1 + 0x18);
-  temp_v4 = resourceGetWideHandle(*(unsigned int *)(param_1 + 0xc));
-  temp_v0 = runtimeShiftLeftWide((int)temp_v4,(int)((unsigned long long)temp_v4 >> 0x20),
-                       *(unsigned int *)(*(int *)(param_1 + 8) + 0xc));
-  temp_v1 = *(int *)(param_1 + 0x14) - (temp_v3 - temp_v0);
-  temp_v0 = *(int *)(param_1 + 0x20);
-  temp_v2 = *(int *)(param_1 + 0x14) - temp_v0;
-  if (temp_v2 < param_3) {
-    temp_v1 = temp_v1 - temp_v2;
-    temp_v0 = 0;
-  }
-  if ((param_3 <= temp_v1) && (temp_v0 = *(int *)(param_1 + 0x10) + temp_v0, temp_v0 != 0)) {
-    rt_memcpy(temp_v0,param_2,param_3);
-    temp_v3 = FUN_0034e618(*(unsigned int *)(param_1 + 0xc),temp_v0,param_3);
-    if (temp_v3 != 0) {
-      temp_v1 = *(unsigned int *)(param_1 + 0x18);
-      *(unsigned int *)(param_1 + 0x18) = temp_v1 + param_3;
-      *(unsigned int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + (unsigned int)romwright_carry_4(temp_v1,param_3);
-      *(unsigned int *)(param_1 + 0x20) = (temp_v0 - *(int *)(param_1 + 0x10)) + param_3;
+    u32 submitted = (u32)stream->submitted;
+    u64 consumed = runtimeShiftLeftWide(resourceGetWideHandle(stream->handle), stream->description->height);
+    u32 available = stream->capacity - (submitted - (u32)consumed);
+    u32 offset = stream->cursor;
+    u32 tailSpace = stream->capacity - offset;
+    if (tailSpace < size) {
+        available -= tailSpace;
+        offset = 0;
     }
-    return temp_v3 != 0;
-  }
-  return 0;
+    if (size <= available) {
+        u8 *destination = stream->pixels + offset;
+        if (destination != NULL) {
+            rt_memcpy(destination, source, size);
+            s32 result = FUN_0034e618(stream->handle, destination, size);
+            if (result != 0) {
+                stream->submitted += size;
+                stream->cursor = (destination - stream->pixels) + size;
+            }
+            return result != 0;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

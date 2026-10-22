@@ -1,64 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010b91c` (_code @ 0x10b91c, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: list/critical-section register allocation, fade flag materialization, and VFP minimum registers differ. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
+extern AsdSndStatus g_asdSoundStatus;
+void nn_os_CriticalSection_Enter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
+void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int g_asdSoundStatus; /* 0x4e3154 */
-extern unsigned char DAT_004e315c; /* 0x4e315c */
-
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
-
-
-void FUN_0010b91c(int param_1,int param_2)
-
+void FUN_0010b91c(AsdSndWaveVoice *voice, s32 frames)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  float temp_v2;
-  
-  temp_v0 = g_asdSoundStatus;
-  if (param_1 == 0) {
-    return;
-  }
-  while( 1 ) {
-    if (temp_v0 == 0) {
-      return;
+    struct VoiceVolumeView {
+        u8 unk00[0x64];
+        f32 volume;
+    };
+    if (voice == NULL) {
+        return;
     }
-    if (temp_v0 == param_1) break;
-    temp_v0 = *(int *)(temp_v0 + 0x70);
-  }
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e315c);
-  temp_v1 = *(unsigned int *)(param_1 + 0x90);
-  if ((temp_v1 & 2) != 0) {
-    if (param_2 >= 1) {
-      if ((temp_v1 & 0x20) != 0) {
-        temp_v1 = temp_v1 & 0xffffffdf;
-        *(unsigned int *)(param_1 + 0x90) = temp_v1;
-      }
-      *(unsigned int *)(param_1 + 0x90) = temp_v1 | 0x10;
-      *(unsigned int *)(param_1 + 0x84) = 0;
-      *(int *)(param_1 + 0x78) = param_2;
-      temp_v2 = *(float *)(*(int *)(param_1 + 0x38) + 100);
-      if (*(float *)(param_1 + 0x94) <= temp_v2) {
-        temp_v2 = *(float *)(param_1 + 0x94);
-      }
-      *(float *)(param_1 + 0x94) = temp_v2;
-      *(unsigned int *)(param_1 + 0x90) = temp_v1 | 0x110;
+    for (AsdSndWaveVoice *current = (AsdSndWaveVoice *)g_asdSoundStatus.objects; current != NULL; current = current->link.next) {
+        if (current != voice) {
+            continue;
+        }
+        nn_os_CriticalSection_Enter(g_asdSoundStatus.unk08);
+        u32 flags = voice->unk90;
+        if ((flags & 2) != 0) {
+            if (frames > 0) {
+                if ((flags & 0x20) != 0) {
+                    flags &= ~0x20;
+                    voice->unk90 = flags;
+                }
+                flags |= 0x10;
+                voice->unk90 = flags;
+                voice->unk84 = 0;
+                voice->fadeFrames = frames;
+                f32 volume = ((VoiceVolumeView *)voice->voice)->volume;
+                voice->targetVolume = volume < voice->targetVolume ? volume : voice->targetVolume;
+                voice->unk90 = flags | 0x100;
+            } else {
+                nn_snd_CTR_Voice_SetState(voice->voice, 1);
+            }
+        }
+        nn_os_CriticalSection_Leave(g_asdSoundStatus.unk08);
+        return;
     }
-    else {
-      nn_snd_CTR_Voice_SetState(*(unsigned int *)(param_1 + 0x38),1);
-    }
-  }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e315c);
-  return;
 }
-
-} /* extern "C" */
+}

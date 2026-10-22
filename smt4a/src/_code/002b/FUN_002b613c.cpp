@@ -1,79 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b613c` (_code @ 0x2b613c, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: actor kind/identifier tests are ordered differently and transform copies use different load/store grouping. */
+/* Updates matching map actors from a record's integer position and movement settings. */
+#include "shard/W5_W5Match7_SceneSlots.h"
 
 extern "C" {
+const void *FUN_003a30e8(const void *record);
+void FUN_00377acc(SceneSlot *slot, const void *record, s32 mode);
 
-int FUN_00377acc(char *, int, int);
-int FUN_003a30e8(void);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_mapEnemy; /* 0x5806d4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00377acc. */
-/* Supplied declaration required: FUN_003a30e8. */
-
-
-void FUN_002b613c(int param_1)
-
+void FUN_002b613c(const void *record)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  
-  temp_v0 = g_mapEnemy;
-  temp_v1 = param_1;
-  FUN_003a30e8();
-  temp_v3 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v3 * 0x188;
-    temp_v6 = *(char *)(temp_v2 + 0x34) != '\0';
-    temp_v4 = 0;
-    if (temp_v6) {
-      temp_v4 = *(int *)(temp_v2 + 0x1b0);
+    struct PositionRecordView {
+        u8 unk00[0x18];
+        s16 position[4];
+        u8 unk20[0x98];
+        u8 actorId;
+    };
+    SceneSlotList *owner = g_mapEnemy;
+    const PositionRecordView *source = (const PositionRecordView *)FUN_003a30e8(record);
+    for (s32 i = 0; i < 40; ++i) {
+        SceneSlot *slot = &owner->slots[i];
+        if (slot->active && slot->kind != 0 && (u32)slot->kind < 11) {
+            if (source->actorId != 0 && source->actorId != slot->locked) {
+                continue;
+            }
+            if (slot->kind == 1 || slot->kind == 2) {
+                slot->position.x = (f32)source->position[0];
+                slot->position.y = (f32)source->position[1];
+                slot->position.z = (f32)source->position[2];
+                slot->value = (f32)source->position[3];
+                slot->previousPosition = slot->position;
+                FUN_00377acc(slot, record, 2);
+                return;
+            }
+        }
     }
-    if ((temp_v6 && temp_v4 != 0) && (temp_v4 < 0xb)) {
-      temp_v5 = (unsigned int)*(unsigned char *)(temp_v2 + 0xb1);
-      temp_v6 = temp_v5 == 0;
-      if (temp_v6) {
-        temp_v5 = *(unsigned int *)(temp_v2 + 0xb8);
-      }
-      if (temp_v6 && temp_v5 == 2) {
-        temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x3c) = temp_v7;
-        temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x1a),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x40) = temp_v7;
-        temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x44) = temp_v7;
-        temp_v7 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0x1e),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x60) = temp_v7;
-        *(unsigned int *)(temp_v2 + 0x54) = *(unsigned int *)(temp_v2 + 0x3c);
-        *(unsigned int *)(temp_v2 + 0x58) = *(unsigned int *)(temp_v2 + 0x40);
-        *(unsigned int *)(temp_v2 + 0x5c) = *(unsigned int *)(temp_v2 + 0x44);
-        *(unsigned int *)(temp_v2 + 0xb8) = 0x18;
-        *(unsigned int *)(temp_v2 + 0xbc) = 0;
-        FUN_00377acc((char *)(temp_v2 + 0x34),param_1,2);
-        return;
-      }
-    }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 0x28) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

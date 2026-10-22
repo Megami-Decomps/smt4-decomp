@@ -39,7 +39,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce30(short, unsigned int);
+extern unsigned int demonGetRaceLabel(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -171,7 +171,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(1,temp_v11,temp_v12);
     temp_v5 = FUN_002bf4f8(0x24,0xdd);
-    temp_v11 = FUN_002bce30(*psVar7,0);
+    temp_v11 = demonGetRaceLabel(*psVar7,0);
     textFormatBuffer(temp_v12,&LAB_00241174,temp_v11);
     puVar9 = temp_v12;
     FUN_002b6dd8(puVar9,2);

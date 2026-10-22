@@ -14,7 +14,7 @@ void FUN_0029dc74(u32 id, void *member);
 void FUN_0029d770(u32 id, void *member);
 const void *partyMemberFindById(u32 id);
 void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
-void FUN_0029c94c(u32 id);
+void buttonHelpShowSkillDetails(u32 id);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_002b8454(s32 first, s32 second, s32 third, s32 enabled);
 void FUN_002a0cc8(s32 enabled);
@@ -71,7 +71,7 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
             buttonHelpSetPreset(0x55);
             s32 selected = FUN_0029efc0(work->secondListIV.cursor);
             selected += FUN_0029efa8(work->secondListIV.cursor);
-            FUN_0029c94c(work->secondListIV.indices[selected]);
+            buttonHelpShowSkillDetails(work->secondListIV.indices[selected]);
             menuSetModeAndResetTransitions(0x0E);
         }
         break;

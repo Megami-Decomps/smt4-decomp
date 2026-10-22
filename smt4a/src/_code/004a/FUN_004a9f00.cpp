@@ -1,60 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a9f00` (_code @ 0x4a9f00, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the zero-depth VFP constant is loaded two instructions earlier than retail. */
+#include "battle/btlUI.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
-
-int FUN_00336aec(int, unsigned int, int, unsigned int, unsigned int, int);
-int FUN_004a9588(int, unsigned int, unsigned int, unsigned int, unsigned int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_8: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_8_stack;
-
-extern unsigned char g_btlUi; /* 0x57a9b8 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00336aec. */
-/* Supplied declaration required: FUN_004a9588. */
-
-
-void FUN_004a9f00(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,int param_7,int param_8)
-
-{
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  FUN_00336aec((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x28c4,param_3,param_2,param_4,param_5,1);
-  temp_v2 = 0;
-  if (param_2 == 0) {
-    temp_v2 = 0x3fa;
-  }
-  else if (param_2 == 1) {
-    temp_v2 = 0x403;
-  }
-  else if (param_2 == 2) {
-    temp_v2 = 0x40c;
-  }
-  else if (param_2 == 3) {
-    temp_v2 = 0x415;
-  }
-  else if (param_2 == 4) {
-    temp_v2 = 0x41f;
-  }
-  temp_v1 = FUN_001834a4(0xd,temp_v2);
-  VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + param_8 + 0x11,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + param_7 + 0x27,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_004a9588(temp_v0,param_3,param_4,param_5,param_6,0);
-  return;
+extern BtlUiGlobalsA g_btlUi;
+SpriteInfo *FUN_001834a4(u32, u32);
+void FUN_00336aec(BtlUiObjCA *, u32, s32, u32, u32, s32);
+void FUN_004a9588(BtlUiA *, u32, u32, u32, u32, s32, f32, f32, f32);
 }
 
-} /* extern "C" */
+extern "C" void FUN_004a9f00(u32, s32 category, u32 text, u32 color,
+                             u32 style, u32 value, s32 x, s32 y)
+{
+    BtlUiA *ui = g_btlUi.ui;
+    FUN_00336aec(&ui->objC, text, category, color, style, 1);
+    u32 frame = 0;
+    if (category == 0) frame = 0x3FA;
+    else if (category == 1) frame = 0x403;
+    else if (category == 2) frame = 0x40C;
+    else if (category == 3) frame = 0x415;
+    else if (category == 4) frame = 0x41F;
+    const SpriteInfo *sprite = FUN_001834a4(13, frame);
+    FUN_004a9588(ui, text, color, style, value, 0,
+                 f32(sprite->x + x + 39), f32(sprite->y + y + 17), 0.0f);
+}

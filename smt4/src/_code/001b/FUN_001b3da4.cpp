@@ -1,68 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b3da4` (_code @ 0x1b3da4, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: camera reset constant loads and grouped floating-point stores are scheduled differently. */
+/* Resets map camera controls, scalar tracks, and transition defaults. */
+#include "map/MapCameraWork.h"
 
 extern "C" {
-
-int FUN_002df5f8(void);
-
-extern unsigned char DAT_004474f0; /* 0x4474f0 */
-
-/* Supplied declaration required: FUN_002df5f8. */
-
+extern MapCameraGlobals DAT_004474f0;
+void FUN_002df5f8(void);
 
 void FUN_001b3da4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_004474f0 + 0x4));
-  *(*(unsigned int * *)((unsigned char *)&DAT_004474f0 + 0x4)) = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[0x31] = 0;
-  puVar1[0x82] = 0xffffffff;
-  puVar1[0x32] = 0x42c80000;
-  puVar1[0x42] = 0x435c0000;
-  puVar1[0x52] = 0;
-  puVar1[0x62] = 0x442f0000;
-  puVar1[0x72] = 0x42280000;
-  puVar1[0x2b] = 0;
-  puVar1[5] = 0;
-  puVar1[0x26] = 0x3f800000;
-  puVar1[0x83] = 0;
-  puVar1[0x84] = 0;
-  puVar1[0x85] = 0;
-  puVar1[0x86] = 0;
-  *(unsigned char *)(puVar1 + 0x87) = 0;
-  *(unsigned char *)(puVar1 + 0xac) = 0;
-  puVar1[0xa5] = 0;
-  puVar1[0xa6] = 0;
-  puVar1[0xa7] = 0;
-  puVar1[0xa8] = 0;
-  puVar1[0xa9] = 0;
-  *(unsigned short *)(puVar1 + 0xaa) = 0;
-  *(unsigned short *)((int)puVar1 + 0x2aa) = 0;
-  *(unsigned short *)(puVar1 + 0xab) = 0;
-  *(unsigned short *)((int)puVar1 + 0x2ae) = 0;
-  puVar1[0x1c] = 0;
-  puVar1[0x1d] = 0x42480000;
-  puVar1[0x1e] = 0;
-  puVar1[0x19] = 0;
-  puVar1[0x1f] = 0x42200000;
-  puVar1[0xaf] = 0;
-  puVar1[0x1a] = 0x42480000;
-  puVar1[0x1b] = 0x42c80000;
-  *(unsigned char *)(puVar1 + 0x2c) = 0;
-  *(unsigned char *)((int)puVar1 + 0xb1) = 0;
-  *(unsigned short *)((int)puVar1 + 0xb2) = 0;
-  *(unsigned short *)(puVar1 + 0x2d) = 0;
-  puVar1[0x2e] = 0;
-  puVar1[0x2f] = 0;
-  puVar1[0x30] = 0x3f800000;
-  FUN_002df5f8();
-  return;
+    MapCameraWork *work = DAT_004474f0.work;
+    work->states[0] = 0;
+    work->states[1] = 0;
+    work->states[2] = 0;
+    work->tracks[0].state = 0;
+    work->target = -1;
+    work->tracks[0].value = 100.0f;
+    work->tracks[1].value = 220.0f;
+    work->tracks[2].value = 0.0f;
+    work->tracks[3].value = 700.0f;
+    work->tracks[4].value = 42.0f;
+    work->updateFlags = 0;
+    work->active = 0;
+    work->scale = 1.0f;
+    work->values[0] = 0.0f;
+    work->values[1] = 0.0f;
+    work->values[2] = 0.0f;
+    work->values[3] = 0.0f;
+    work->tracking = 0;
+    work->moving = 0;
+    work->offset[0] = 0.0f;
+    work->offset[1] = 0.0f;
+    work->offset[2] = 0.0f;
+    work->counters[0] = 0;
+    work->counters[1] = 0;
+    work->range[0] = 0;
+    work->range[1] = 0;
+    work->range[2] = 0;
+    work->range[3] = 0;
+    work->parameters[3] = 0.0f;
+    work->parameters[4] = 50.0f;
+    work->parameters[5] = 0.0f;
+    work->parameters[0] = 0.0f;
+    work->parameters[6] = 40.0f;
+    work->weight = 0.0f;
+    work->parameters[1] = 50.0f;
+    work->parameters[2] = 100.0f;
+    work->enabled = 0;
+    work->pending = 0;
+    work->duration = 0;
+    work->elapsed = 0;
+    work->transition[0] = 0.0f;
+    work->transition[1] = 0.0f;
+    work->transition[2] = 1.0f;
+    FUN_002df5f8();
 }
-
-} /* extern "C" */
+}

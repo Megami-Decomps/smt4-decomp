@@ -13,7 +13,7 @@ int quadSetOrderedVectors(...);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_002b76d0(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int efctSetSpeed(void);
 int FUN_002c1b64(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
@@ -79,7 +79,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b76d0. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -376,7 +376,7 @@ LAB_00393954:
             temp_v12 = (float)VectorSignedToFloat(0x100 - temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v12 = temp_v12 * temp_v13;
           }
-          FUN_002ba12c(g_titleScene);
+          renderCtxCalculateStereoParallax(g_titleScene);
           temp_v15 = temp_v12;
           temp_v4 = asdSoundGetOption1();
           if (temp_v4 != 0) {

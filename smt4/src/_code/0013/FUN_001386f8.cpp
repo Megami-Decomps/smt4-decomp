@@ -1,75 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001386f8` (_code @ 0x1386f8, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The eight texture-slot checks are fully unrolled rather than using the retail signed loop. */
+#include "common.h"
+#include "addon/aocMain.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
+
+struct DataTable;
 
 extern "C" {
-
-int recordTableFindById(unsigned char *, unsigned int);
-int FUN_002ae164(void);
-int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
-
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern unsigned char LAB_00145a98; /* 0x145a98 */
-extern unsigned char *g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: recordTableFindById. */
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-unsigned int FUN_001386f8(unsigned int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4 [32];
-  unsigned short temp_v5;
-  
-  if (param_1 >= 0x191) {
-    puVar1 = g_aocSystem;
-    recordTableFindById(g_aocSystem,param_1);
-    if (puVar1 == (unsigned char *)0x0) {
-      temp_v0 = dataTableGet(4,1);
-      temp_v1 = dataTableGetEntries();
-      temp_v0 = dataTableGetCount(temp_v0);
-      puVar1 = temp_v4;
-      temp_v5 = (unsigned short)param_1;
-      libc_bsearch(puVar1,temp_v1,temp_v0,0x3c,&LAB_00145a98);
-    }
-    if (puVar1 != (unsigned char *)0x0) {
-      return (*(unsigned int *)(puVar1 + 0x38) & 0x40000000) >> 0x1e;
-    }
-  }
-  else {
-    FUN_002ae164();
-    if ((param_1 != 0) && (temp_v2 = 0, (*(unsigned int *)(param_1 + 0x38) & 0x80000000) == 0)) {
-      while( 1 ) {
-        temp_v3 = param_1 + temp_v2 * 2;
-        if (*(char *)(temp_v3 + 0x58) == '\0') {
-          return temp_v2 + 1;
-        }
-        if (*(char *)(temp_v3 + 0x5a) == '\0') break;
-        temp_v2 = temp_v2 + 2;
-        if (temp_v2 >= 8) {
-          return 9;
-        }
-      }
-      return temp_v2 + 2;
-    }
-  }
-  return 0;
+extern AocSystem *g_aocSystem;
+Table4SearchRecordIV *recordTableFindById(AocSystem *system, u32 id);
+DataTable *dataTableGet(u32 category, u32 index);
+const void *dataTableGetEntries(DataTable *table);
+u32 dataTableGetCount(DataTable *table);
+RecordSlotQueryPrefixIV *FUN_002ae164(u32 id);
+s32 LAB_00145a98(const void *key, const void *entry);
+void *libc_bsearch(const void *key, const void *entries, u32 count,
+                   u32 entrySize, s32 (*compare)(const void *, const void *));
 }
 
-} /* extern "C" */
+extern "C" u32 FUN_001386f8(u32 id)
+{
+    if (id > 400) {
+        Table4SearchRecordIV *record = recordTableFindById(g_aocSystem, id);
+        if (record == 0) {
+            DataTable *table = dataTableGet(4, 1);
+            const void *entries = dataTableGetEntries(table);
+            u32 count = dataTableGetCount(table);
+            Table4SearchRecordIV key;
+            // The comparator key's only initialized member in retail.
+            key.id = static_cast<u16>(id);
+            record = static_cast<Table4SearchRecordIV *>(
+                libc_bsearch(&key, entries, count, 0x3C, LAB_00145a98));
+        }
+        if (record != 0)
+            return (record->flags & 0x40000000u) >> 30;
+        return 0;
+    }
+
+    RecordSlotQueryPrefixIV *record = FUN_002ae164(id);
+    if (record == 0 || (record->flags & 0x80000000u) != 0)
+        return 0;
+
+    for (s32 slot = 0; slot < 8; slot += 2) {
+        if (record->slotBytes[slot * 2] == 0)
+            return slot + 1;
+        if (record->slotBytes[(slot + 1) * 2] == 0)
+            return slot + 2;
+    }
+    return 9;
+}

@@ -12,7 +12,7 @@ int mtx44TransformPosition(...);
 int refCountIncrement(...);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
-int FUN_00291644(...);
+int gfxResolveTimedTextureFrame(...);
 int FUN_002b3c9c(...);
 int FUN_002ff7ac(unsigned short *, int, int);
 int FUN_0034f8b4(...);
@@ -130,7 +130,7 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
-/* Supplied declaration required: FUN_00291644. */
+/* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: FUN_002b3c9c. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002ff7ac. */
@@ -312,7 +312,7 @@ void FUN_002b437c(int param_1)
   else {
     temp_v36 = temp_v7;
     if (*(int *)(param_1 + 0xcc) != 0) {
-      FUN_00291644(*(int *)(param_1 + 0xcc),temp_v5,&temp_v76);
+      gfxResolveTimedTextureFrame(*(int *)(param_1 + 0xcc),temp_v5,&temp_v76);
       temp_v71 = VectorFloatToUnsigned(temp_v77,3);
       temp_v68 = VectorFloatToUnsigned(temp_v78,3);
       temp_v53 = 0;

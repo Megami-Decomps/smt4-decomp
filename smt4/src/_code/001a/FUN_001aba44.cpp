@@ -5,7 +5,7 @@ extern "C" {
 
 void FUN_00285584(u32 job, s32 a, s32 b);
 void FUN_002ae9ec(s32 a, s32 b, u32 c, s32 d, s32 e, s32 f);
-void FUN_002ba12c(u32 scene);
+void renderCtxCalculateStereoParallax(u32 scene);
 
 extern NpcRoom *g_npcRoom;
 extern u32 g_titleScene;
@@ -15,7 +15,7 @@ u32 FUN_001aba44(void)
 {
     NpcRoom *room = g_npcRoom;
 
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     FUN_002ae9ec(2, 2, room->unk102 * 1000, (s32)0.33f - 56, -8, 1);
     for (s32 row = 0; row < room->displayCount; row++) {
         for (s32 column = 0; column < NPC_ROOM_JOBS; column++) {

@@ -1,55 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e5f2c` (_code @ 0x4e5f2c, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 59 vs built 61 rows; action-mask loads, protected-value branches, and saved registers differ. */
+#include "battle/btlMain.h"
 
 extern "C" {
+void *FUN_003f0e20(BtlMainStateA *, s32);
+s32 gameFlagIsSet(u32);
 
-int FUN_003f0e20(void);
-
-extern unsigned int DAT_00571168; /* 0x571168 */
-extern unsigned int DAT_0057116c; /* 0x57116c */
-extern unsigned int DAT_005712c8; /* 0x5712c8 */
-extern unsigned int DAT_005712cc; /* 0x5712cc */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_003f0e20. */
-
-
-unsigned char FUN_004e5f2c(int *param_1,int param_2,int param_3,int param_4)
-
+u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = (unsigned int *)*param_1;
-  if ((DAT_005712cc & puVar1[0x116b]) == 0 && (DAT_005712c8 & puVar1[0x116a]) == 0) {
-    param_2 = param_2 + param_3 * 0x10;
-    temp_v1 = *(int *)(param_2 + 0x9e4) + param_4;
-    FUN_003f0e20();
-    if ((puVar1 != (unsigned int *)0x0) && (0 < (int)puVar1[0x57])) {
-      temp_v0 = (int)(puVar1[0x97] * puVar1[0x57]) / 100;
-      if (temp_v0 < 1) {
-        temp_v0 = 1;
-      }
-      if (temp_v1 < temp_v0) {
-        temp_v1 = temp_v0;
-      }
+    // The mask at 0x190 extends beyond the shared action-global prefix.
+    struct ActionValueMasksView {
+        u8 unk000[0x30];
+        u64 protectedUnit;
+        u8 unk038[0x158];
+        u64 disabledState;
+    };
+    // A word at 0x15c cannot be added to the shared combatant's halfword-aligned union.
+    struct MinimumValueEntryView {
+        u64 flags;
+        u8 unk008[0x154];
+        s32 minimumPercent;
+        u8 unk160[0xFC];
+        s32 maximum;
+    };
+    struct ValueSlot {
+        u32 unk00;
+        s32 value;
+        u32 unk08[2];
+    };
+    extern ActionValueMasksView g_btlAction;
+    BtlMainStateA *state = *owner;
+    if ((state->markerMasks.bits & g_btlAction.disabledState) != 0)
+        return 0;
+    ValueSlot *slots = reinterpret_cast<ValueSlot *>(static_cast<u8 *>(values) + 0x9E0);
+    ValueSlot *slot = &slots[index];
+    s32 value = slot->value + change;
+    MinimumValueEntryView *entry = static_cast<MinimumValueEntryView *>(FUN_003f0e20(state, index));
+    if (entry != NULL && entry->minimumPercent > 0) {
+        s32 minimum = (entry->maximum * entry->minimumPercent) / 100;
+        if (minimum < 1)
+            minimum = 1;
+        if (value < minimum)
+            value = minimum;
     }
-    temp_v0 = gameFlagIsSet(0x591);
-    if (((temp_v0 == 0 || puVar1 == (unsigned int *)0x0) ||
-        ((puVar1[1] & DAT_0057116c) != 0 || (*puVar1 & DAT_00571168) != 0)) || (-1 < param_4)) {
-      if (-1 < temp_v1) {
-        *(int *)(param_2 + 0x9e4) = temp_v1;
-      }
-      else {
-        *(unsigned int *)(param_2 + 0x9e4) = 0;
-      }
-      return -1 >= temp_v1;
-    }
-  }
-  return 0;
+    if (gameFlagIsSet(0x591) && entry != NULL &&
+        (entry->flags & g_btlAction.protectedUnit) == 0 && change < 0)
+        return 0;
+    slot->value = value >= 0 ? value : 0;
+    return value < 0;
 }
-
-} /* extern "C" */
+}

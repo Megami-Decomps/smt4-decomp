@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00231464(...);
-int FUN_00301ed4(...);
+int btlCreateGameOverJobs(...);
 int gameFlagSetValue(...);
 
 typedef struct fn_0031cd00_arg0 fn_0031cd00_arg0;
@@ -31,7 +31,7 @@ extern unsigned int DAT_0057f694; /* 0x57f694 */
 
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00231464. */
-/* Supplied declaration required: FUN_00301ed4. */
+/* Supplied declaration required: btlCreateGameOverJobs. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
 
@@ -82,7 +82,7 @@ joined_r0x0031ce38:
       *(unsigned char *)(puVar1 + 2) = 1;
     }
     if (param_1 != (fn_0031cd00_arg0 *)0x0) {
-      FUN_00301ed4(param_1);
+      btlCreateGameOverJobs(param_1);
       puVar1[1] = param_1->field_0x4c;
       puVar1[3] = 0;
       puVar1[4] = 0;

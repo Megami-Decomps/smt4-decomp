@@ -39,7 +39,7 @@ int statusDownEnterRefreshState(void);
 
 int scrRunOpcodesStub(...);
 int FUN_00204358(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int btlTalkBustUpCreate(void);
 int FUN_002958f8(...);
 int scrScriptProcessStartEntry(...);
@@ -132,7 +132,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0018dd60; /* 0x18dd60 */
-extern int FUN_0021768c(...); /* 0x21768c */
+extern int partyCompareSlotOrder(...); /* 0x21768c */
 extern int g_result; /* 0x44dc20 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -158,7 +158,7 @@ extern int FUN_00295408(void);
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: FUN_00295a18. */
@@ -228,7 +228,7 @@ extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned int FUN_002bce30(unsigned short, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -930,7 +930,7 @@ LAB_0018d058:
           piVar17 = (int *)(temp_v2 + 0xcf74);
           *piVar17 = 0;
           *(unsigned int *)(temp_v2 + 0xcf78) = 0;
-          FUN_002b7bca(temp_v29,0x19,0x620,FUN_0021768c);
+          FUN_002b7bca(temp_v29,0x19,0x620,partyCompareSlotOrder);
           temp_v4 = 0;
           do {
             if (*(char *)(temp_v2 + temp_v4 * 0x620 + 0x3654) == '\x7f') break;
@@ -1055,10 +1055,10 @@ LAB_0018d058:
       temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
       FUN_002bd06c(temp_v16);
       libc_strcpy(temp_v26,temp_v16);
-      FUN_00295660(8,temp_v26);
-      temp_v9 = FUN_002bce30(*(unsigned short *)(temp_v4 + 0x46),1);
+      textEncodeFontSlot(8,temp_v26);
+      temp_v9 = demonGetRaceLabel(*(unsigned short *)(temp_v4 + 0x46),1);
       libc_strcpy(temp_v26,temp_v9);
-      FUN_00295660(0x10,temp_v26);
+      textEncodeFontSlot(0x10,temp_v26);
       temp_v16 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
       devilGetRecord();
       temp_v0 = *(char *)(temp_v16 + 0x30);

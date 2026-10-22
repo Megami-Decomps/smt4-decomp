@@ -226,7 +226,6 @@
 0x001230b8 blockOpen between
 0x0012312c vldtr_initializeStateValidator name
 0x00123750 FUN_00123750 callers
-0x00123934 FUN_00123934 between
 0x00123938 FUN_00123938 between
 0x001239d4 nnosAddressSpaceManagerInitialize name
 0x00123a38 addressBlockInit callers
@@ -1613,13 +1612,11 @@
 0x002bd440 nw_snd_internal_driver_SoundThread_GetInstance name
 0x002bd9ec FUN_002bd9ec callers
 0x002bd9f4 nw_snd_SoundHandle_DetachSound name
-0x002bdb44 FUN_002bdb44 between
 0x002bdce0 FUN_002bdce0 between
 0x002bdf94 FUN_002bdf94 between
 0x002be61c libc_sprintf name
 0x002bedb0 FUN_002bedb0 between
 0x002bee04 FUN_002bee04 between
-0x002bef68 FUN_002bef68 between
 0x002bef70 nngxBindCmdlist name
 0x002bf0dc nngxGetError name
 0x002bf584 FUN_002bf584 callers

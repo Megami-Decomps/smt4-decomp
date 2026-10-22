@@ -1,74 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00334058` (_code @ 0x334058, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 58 vs built 58 rows; inventory capacity conditions and slot-loop register allocation differ. */
+#include "shard/PadState.h"
 
 extern "C" {
+PadState *gameGetPlayerData(void);
+s32 flagBitIsSet(u32);
+s32 FUN_001386f8(u32);
 
-int FUN_001386f8(void);
-
-/* Supplied declaration required: FUN_001386f8. */
-extern int flagBitIsSet(unsigned int);
-extern int gameGetPlayerData(void);
-
-
-void FUN_00334058(unsigned int param_1)
-
+// Add one item to the unlocked inventory slots without exceeding its stack limit.
+void FUN_00334058(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v1 = gameGetPlayerData();
-  temp_v3 = 4;
-  temp_v2 = flagBitIsSet(0x77);
-  if (temp_v2 != 0) {
-    temp_v3 = 5;
-  }
-  temp_v2 = flagBitIsSet(0x78);
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v3 + 1;
-  }
-  temp_v2 = flagBitIsSet(0x79);
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v3 + 1;
-  }
-  temp_v2 = flagBitIsSet(0x7a);
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v3 + 1;
-  }
-  if (temp_v3 >= 9) {
-    temp_v3 = 8;
-  }
-  temp_v2 = 0;
-  if (temp_v3 != 0) {
-    do {
-      if (*(unsigned short *)(temp_v1 + temp_v2 * 2 + 0x34) == param_1) {
-        FUN_001386f8();
-        temp_v0 = *(unsigned char *)(temp_v1 + temp_v2 + 0x44);
-        if ((int)param_1 <= (int)(unsigned int)temp_v0) {
-          return;
+    PadState *player = gameGetPlayerData();
+    s32 capacity = 4;
+    if (flagBitIsSet(0x77)) capacity = 5;
+    if (flagBitIsSet(0x78)) ++capacity;
+    if (flagBitIsSet(0x79)) ++capacity;
+    if (flagBitIsSet(0x7a)) ++capacity;
+    if (capacity > 8) capacity = 8;
+    for (s32 index = 0; index < capacity; ++index) {
+        if (padStateInventoryIds(player)[index] == id) {
+            s32 limit = FUN_001386f8(id);
+            if (player->inventoryCounts[index] < limit)
+                ++player->inventoryCounts[index];
+            return;
         }
-        *(unsigned char *)(temp_v1 + temp_v2 + 0x44) = temp_v0 + 1;
-        return;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < (int)temp_v3);
-  }
-  temp_v2 = 0;
-  if (temp_v3 == 0) {
-    return;
-  }
-  do {
-    if (*(short *)(temp_v1 + temp_v2 * 2 + 0x34) == 0) {
-      *(short *)(temp_v1 + temp_v2 * 2 + 0x34) = (short)param_1;
-      *(unsigned char *)(temp_v2 + temp_v1 + 0x44) = 1;
-      return;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < (int)temp_v3);
-  return;
+    for (s32 index = 0; index < capacity; ++index) {
+        if (padStateInventoryIds(player)[index] == 0) {
+            padStateInventoryIds(player)[index] = static_cast<u16>(id);
+            player->inventoryCounts[index] = 1;
+            return;
+        }
+    }
 }
-
-} /* extern "C" */
+}

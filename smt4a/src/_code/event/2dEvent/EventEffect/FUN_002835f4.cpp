@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_0016c4b8(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int screenDrawShadedRect(...);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int VectorSignedToFloat(...);
@@ -53,7 +53,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
@@ -218,7 +218,7 @@ unsigned int FUN_002835f4(void)
     VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorUnsignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   }
-  FUN_001879d0(g_renderCtx,temp_v8,temp_v9,temp_v10);
+  renderCtxCalculateStereoParallax(g_renderCtx,temp_v8,temp_v9,temp_v10);
   temp_v3 = *(int *)(temp_v0 + 0x24) * 0x10;
   temp_v4 = asdTMTexTableGetHeaderValue(*(unsigned int *)(temp_v3 + 0x57f43c),*(unsigned int *)(temp_v3 + 0x57f440));
   FUN_0016c4b8(g_renderCtx,temp_v4);

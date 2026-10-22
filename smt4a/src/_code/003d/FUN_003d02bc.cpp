@@ -8,7 +8,7 @@ int libc_bsearch(unsigned int *, unsigned int, unsigned int, int, unsigned char 
 int efctSetSpeed(...);
 int FUN_001834a4(int, int);
 int FUN_00185dd4(...);
-int FUN_001879d0(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_0028520c(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
@@ -40,7 +40,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00185dd4. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0028520c. */
@@ -108,7 +108,7 @@ unsigned int FUN_003d02bc(void)
     temp_v12 = VectorFloatToUnsigned(temp_v13 * *(float *)(temp_v8 + 0x74),3);
     temp_v5 = FUN_001834a4(0x27,0xd);
     temp_v11 = 0.25f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v3 = (int)*(short *)(temp_v5 + 10) - (temp_v12 >> 1);
     temp_v16[2] = (int)temp_v11 + ((int)*(short *)(temp_v5 + 8) - (temp_v14 >> 1)) +
                   *(int *)(temp_v8 + 0x24);

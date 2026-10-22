@@ -91,7 +91,7 @@ extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int mapMainIsBusy(void);
-extern int QuestCenterMode_IsBusy(void);
+extern int questCenterPollShutdown(void);
 
 
 unsigned int FUN_00114474(void)
@@ -659,7 +659,7 @@ LAB_001151e4:
                     temp_v6 = aocJobIsValid();
                     if ((((temp_v6 == 0) && (temp_v6 = lmapMainIsRunning(), temp_v6 == 0)) &&
                         ((temp_v6 = mapMainIsBusy(), temp_v6 == 0 &&
-                         (temp_v6 = QuestCenterMode_IsBusy(), temp_v6 == 0)))) ||
+                         (temp_v6 = questCenterPollShutdown(), temp_v6 == 0)))) ||
                        ((temp_v6 = FUN_002b8694(), temp_v6 != 0 || (temp_v6 = FUN_002b8660(), temp_v6 == 0))
                        )) {
                       temp_v14 = 0x9b;

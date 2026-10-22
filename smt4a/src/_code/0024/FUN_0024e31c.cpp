@@ -10,14 +10,14 @@ int FUN_001634b4(int);
 int FUN_00164034(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(...);
 int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int pairSetHalves(int, int, int);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int jobGetScalarValue(void);
 int FUN_002a6c3c(...);
 int FUN_002fb5c4(int);
@@ -53,7 +53,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164034. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -64,7 +64,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: pairSetHalves. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002a6c3c. */
 /* Supplied declaration required: FUN_002fb5c4. */
@@ -131,7 +131,7 @@ unsigned int FUN_0024e31c(void)
       }
       FUN_003210bc(temp_v1,1);
       temp_v7 = 0.8f;
-      FUN_001879d0(g_renderCtx);
+      renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v8 = (unsigned long long)(unsigned int)(int)temp_v7;
       temp_v6 = 0;
       do {
@@ -209,7 +209,7 @@ unsigned int FUN_0024e31c(void)
           }
           jobGetScalarValue();
           temp_v7 = 0.29f;
-          FUN_001879d0(g_renderCtx);
+          renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v4 = (int)temp_v7;
           temp_v6 = FUN_001834a4(0xd,0xbd0);
           FUN_00164b5c(2,0xd,0x10,temp_v4,*(unsigned int *)(temp_v1 + 0x12fdc),0x15);
@@ -219,7 +219,7 @@ unsigned int FUN_0024e31c(void)
           FUN_00168e00(*(short *)(temp_v6 + 8) + temp_v4,(int)*(short *)(temp_v6 + 10),
                        *(unsigned short *)(temp_v6 + 4) & 0x7fff,*(unsigned short *)(temp_v6 + 6) & 0x7fff);
           FUN_002a6c3c(0xffffffff,temp_v3 + temp_v5 + temp_v4,temp_v2,0x18,1);
-          FUN_00168770();
+          renderPopStateStacks();
           temp_v9 = *(unsigned int *)(temp_v1 + 0x12fdc);
           efctSetSpeed();
           temp_v6 = g_renderCtx;
@@ -249,7 +249,7 @@ unsigned int FUN_0024e31c(void)
           FUN_00168e00(*(short *)(temp_v6 + 8) + temp_v4,(int)*(short *)(temp_v6 + 10),
                        *(unsigned short *)(temp_v6 + 4) & 0x7fff,*(unsigned short *)(temp_v6 + 6) & 0x7fff);
           FUN_002a6c3c(0x29d,temp_v5,temp_v14,0x18,1);
-          FUN_00168770();
+          renderPopStateStacks();
           temp_v9 = *(unsigned int *)(temp_v1 + 0x12ff8);
           efctSetSpeed();
           temp_v1 = g_renderCtx;

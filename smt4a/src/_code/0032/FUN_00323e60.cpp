@@ -1,59 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00323e60` (_code @ 0x323e60, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: emitter count loads and parameter-pointer caching are scheduled differently. */
+/* Creates a particle emitter, its backing buffer and an independent copy of auxiliary data. */
+#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/Source/Gfx/Effect/effParticle.h"
+#include "shard/W6_W6Match2_EmitterResources.h"
 
 extern "C" {
+EffEmitter *FUN_003a1ef4(EffEmitterDesc *descriptor);
+EffEmitter *effEmitterAllocate(u32 count);
+void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
+void objectBufferFree(void *buffer);
+void *FUN_002b2d74(u16 kind, u32 count, EffEmitterDesc *descriptor);
+void *FUN_00271d28(void *auxiliary);
+void effParticleParamCopy(EffParticleParam *destination, const EffParticleParam *source);
 
-int FUN_00271d28(void);
-int FUN_002b2d74(unsigned int, int, int *);
-int objectBufferFree(void);
-int effEmitterAllocate(void);
-int effParticleParamCopy(int, unsigned int);
-int polygonTrackRebuildResources(int *, int, int);
-int FUN_003a1ef4(void);
-
-/* Supplied declaration required: FUN_00271d28. */
-/* Supplied declaration required: FUN_002b2d74. */
-/* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: effEmitterAllocate. */
-/* Supplied declaration required: effParticleParamCopy. */
-/* Supplied declaration required: polygonTrackRebuildResources. */
-/* Supplied declaration required: FUN_003a1ef4. */
-
-
-int * FUN_00323e60(int param_1)
-
+EffEmitter *FUN_00323e60(EmitterResourceRequest *request)
 {
-/* irregular: 7 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  unsigned int temp_v1;
-  
-  piVar3 = *(int **)(*(int *)(param_1 + 0x30) + 0x24);
-  piVar1 = piVar3;
-  FUN_003a1ef4();
-  polygonTrackRebuildResources(piVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
-  temp_v1 = (unsigned int)**(unsigned short **)(param_1 + 0x30);
-  if (piVar1[0xc] != 0) {
-    objectBufferFree();
-  }
-  FUN_002b2d74(temp_v1,*piVar1,piVar3);
-  piVar1[0xc] = temp_v1;
-  if (piVar1[0xb] == 0) {
-    temp_v0 = *piVar1;
-    effEmitterAllocate();
-    piVar1[0xb] = temp_v0;
-    *(int *)(temp_v0 + 0x4c) = piVar1[0xc];
-  }
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x2c) + 0x50);
-  if (temp_v0 != 0) {
-    FUN_00271d28();
-    *(int *)(piVar1[0xb] + 0x50) = temp_v0;
-  }
-  effParticleParamCopy(piVar1[0xb],*(unsigned int *)(param_1 + 0x2c));
-  *(unsigned short *)(piVar1[0xb] + 0xc) = *(unsigned short *)(*(int *)(param_1 + 0x2c) + 0xc);
-  return piVar1;
+    /* A pointer at the end of byte-aligned EmitterArguments cannot be added to its shared type. */
+    struct ParticleArguments {
+        u8 placement[0x20];
+        EffParticleParam *parameter;
+    };
+    ParticleArguments *arguments = (ParticleArguments *)&request->arguments;
+    EffEmitterDesc *descriptor = (EffEmitterDesc *)request->source->data;
+    EffEmitter *emitter = FUN_003a1ef4(descriptor);
+    polygonTrackRebuildResources((ResourceEmitter *)emitter, request->source->id, &request->arguments);
+    u16 kind = request->source->id;
+    if (emitter->particle.buffer != NULL) {
+        objectBufferFree(emitter->particle.buffer);
+    }
+    emitter->particle.buffer = FUN_002b2d74(kind, emitter->maxCount, descriptor);
+    if (emitter->particle.parameter == NULL) {
+        emitter->particle.parameter = (EffParticleParam *)effEmitterAllocate(emitter->maxCount);
+        emitter->particle.parameter->source = (EffParticleSource *)emitter->particle.buffer;
+    }
+    if (arguments->parameter->auxiliary != NULL) {
+        emitter->particle.parameter->auxiliary = FUN_00271d28(arguments->parameter->auxiliary);
+    }
+    effParticleParamCopy(emitter->particle.parameter, arguments->parameter);
+    emitter->particle.parameter->type = arguments->parameter->type;
+    return emitter;
 }
-
-} /* extern "C" */
+}

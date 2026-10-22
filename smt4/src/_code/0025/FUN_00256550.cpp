@@ -1,62 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00256550` (_code @ 0x256550, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: enemy-model slot base addressing and model-setup register scheduling differ from retail. */
+#include "map/mapEnemy.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "shard/W9_W9Match7_EnemyModelSources.h"
 
 extern "C" {
+extern MapEnemy *g_mapEnemy;
+extern EnemyExtraModelLimits DAT_0049fb1c;
+extern EnemyExtraModelSource DAT_00448ca8[];
+void textFormatBuffer(char *buffer, const char *format, ...);
+AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
+void FUN_002a0428(AsdMdlObject *model, s32 enabled);
 
-int asdMdlManagerCreateLoaded(unsigned char [36], int);
-int FUN_002a0428(void);
-int textFormatBuffer(unsigned char [36], unsigned char *, int);
-
-extern unsigned char LAB_00256628; /* 0x256628 */
-extern int g_mapEnemy; /* 0x447600 */
-extern short DAT_0049fb9a; /* 0x49fb9a */
-
-/* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: textFormatBuffer. */
-
-
-void FUN_00256550(int param_1)
-
+/* Lazily create an extra enemy model, respecting the configured live-model limit. */
+s32 FUN_00256550(u32 index)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5 [36];
-  
-  puVar2 = temp_v5;
-  temp_v3 = 0;
-  temp_v1 = g_mapEnemy + param_1 * 8;
-  if (*(int *)(temp_v1 + 0x304c) == 0) {
-    temp_v2 = 0;
-    temp_v4 = 0x15;
-    do {
-      temp_v0 = temp_v2 * 8;
-      temp_v2 = temp_v2 + 1;
-      if (*(int *)(g_mapEnemy + temp_v0 + 0x304c) != 0) {
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v4 = temp_v4 - 1;
-    } while (temp_v4 != 0);
-    if (temp_v3 < DAT_0049fb9a) {
-      textFormatBuffer(temp_v5,&LAB_00256628,(int)*(short *)(param_1 * 0x10 + 0x448ca8));
-      asdMdlManagerCreateLoaded(temp_v5,0x1c0);
-      *(unsigned char **)(temp_v1 + 0x304c) = puVar2;
-      FUN_002a0428();
-      puVar3 = *(unsigned int **)(temp_v1 + 0x304c);
-      *puVar3 = *puVar3 | 2;
-      *(unsigned char *)(*(int *)(puVar3[2] + 0x2c) + 0x1f6) = 0;
-      *(unsigned char *)(temp_v1 + 0x3050) = 1;
-      *(unsigned char *)(temp_v1 + 0x3051) = 0;
+    struct ModelStateView { u8 unk000[0x1F6]; u8 enabled; };
+    struct ModelNodeView { u8 unk00[0x2C]; ModelStateView *state; };
+    MapEnemyExtraModel *entry = &g_mapEnemy->extraModels[index];
+    if (entry->model) {
+        return 1;
     }
-  }
-  return;
+    s32 count = 0;
+    for (s32 slot = 0; slot < 21; ++slot) {
+        if (g_mapEnemy->extraModels[slot].model) {
+            ++count;
+        }
+    }
+    if (count >= DAT_0049fb1c.capacity) {
+        return 0;
+    }
+    char path[36];
+    textFormatBuffer(path, "map/all/sym%03d.bam", DAT_00448ca8[index].modelId);
+    entry->model = asdMdlManagerCreateLoaded(path, 0x1C0);
+    FUN_002a0428(entry->model, 1);
+    AsdMdlObject *model = entry->model;
+    model->flags |= 2;
+    reinterpret_cast<ModelNodeView *>(model->node)->state->enabled = 0;
+    entry->registered = 1;
+    entry->active = 0;
+    return 1;
 }
-
-} /* extern "C" */
+}

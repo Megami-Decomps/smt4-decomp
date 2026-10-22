@@ -2,6 +2,7 @@
 #define SHARD_W5_W5MATCH5_TWIN_RECORDS_H
 
 #include "common.h"
+#include <stddef.h>
 
 namespace ResourceIdentity {
 
@@ -82,13 +83,37 @@ struct ResourceRecord {
     u8 unk04[0x14];
 };
 
+struct ResourceAttribute {
+    const char *name;  // 0x00
+    const char *value; // 0x04
+};
+
+struct ResourceItemIdentity {
+    u32 id;        // 0x00
+    char code[32]; // 0x04
+};
+
 struct ResourceTable {
     u8 unk00[0x10];
     ResourceHeader* header; // 0x10
-    u8 unk14[0x0C];
+    union {
+        u8 unk14[0x0C];
+        struct {
+            u32 unk14;
+            ResourceAttribute *entries; // 0x18
+            u32 count;                 // 0x1C
+        } attributes;
+    };
     ResourceRecord* records; // 0x20
     ResourceIndex* indices; // 0x24
 };
+
+typedef char ResourceTableAttributeOffsetsCheck[
+    offsetof(ResourceTable, attributes.entries) == 0x18 &&
+    offsetof(ResourceTable, attributes.count) == 0x1C &&
+    sizeof(ResourceTable) == 0x28 ? 1 : -1];
+typedef char ResourceItemIdentityLayoutCheck[
+    offsetof(ResourceItemIdentity, code) == 4 && sizeof(ResourceItemIdentity) == 36 ? 1 : -1];
 
 } // namespace ResourceTableLookup
 

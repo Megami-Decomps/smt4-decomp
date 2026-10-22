@@ -1,59 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030f3e8` (_code @ 0x30f3e8, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: axis products and diagonal expressions use different VFP registers and store scheduling. */
+/* Builds the global axis-angle rotation matrix from the configured axis and an angle in radians. */
+#include "shard/W8Match1_MatrixRotation.h"
 
 extern "C" {
+extern MatrixRotationWork DAT_004ea81c;
+f32 phaseCosInterpolate(f32 phase);
+f32 FUN_002b70cc(f32 phase);
 
-int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
-
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea95c; /* 0x4ea95c */
-extern float DAT_004ea960; /* 0x4ea960 */
-extern float DAT_004ea964; /* 0x4ea964 */
-extern unsigned int DAT_004ea968; /* 0x4ea968 */
-extern float DAT_004ea96c; /* 0x4ea96c */
-extern float DAT_004ea970; /* 0x4ea970 */
-extern float DAT_004ea974; /* 0x4ea974 */
-extern unsigned int DAT_004ea978; /* 0x4ea978 */
-extern float DAT_004ea97c; /* 0x4ea97c */
-extern float DAT_004ea980; /* 0x4ea980 */
-extern float DAT_004ea984; /* 0x4ea984 */
-extern unsigned int DAT_004ea988; /* 0x4ea988 */
-
-/* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
-
-
-void FUN_0030f3e8(void)
-
+void FUN_0030f3e8(f32 angle)
 {
-/* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
-  float in_s0;
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  
-  temp_v2 = in_s0 * 40.743664f;
-  temp_v0 = temp_v2;
-  phaseCosInterpolate();
-  FUN_002b70cc();
-  temp_v1 = 1.0f - temp_v2;
-  DAT_004ea95c = DAT_004ea91c * DAT_004ea91c + (1.0f - DAT_004ea91c * DAT_004ea91c) * temp_v2;
-  DAT_004ea960 = DAT_004ea924 * temp_v0 + DAT_004ea91c * DAT_004ea920 * temp_v1;
-  DAT_004ea964 = DAT_004ea91c * DAT_004ea924 * temp_v1 - DAT_004ea920 * temp_v0;
-  DAT_004ea968 = 0;
-  DAT_004ea96c = DAT_004ea91c * DAT_004ea920 * temp_v1 - DAT_004ea924 * temp_v0;
-  DAT_004ea970 = DAT_004ea920 * DAT_004ea920 + (1.0f - DAT_004ea920 * DAT_004ea920) * temp_v2;
-  DAT_004ea974 = DAT_004ea91c * temp_v0 + DAT_004ea920 * DAT_004ea924 * temp_v1;
-  DAT_004ea978 = 0;
-  DAT_004ea97c = DAT_004ea920 * temp_v0 + DAT_004ea91c * DAT_004ea924 * temp_v1;
-  DAT_004ea980 = DAT_004ea920 * DAT_004ea924 * temp_v1 - DAT_004ea91c * temp_v0;
-  DAT_004ea984 = DAT_004ea924 * DAT_004ea924 + (1.0f - DAT_004ea924 * DAT_004ea924) * temp_v2;
-  DAT_004ea988 = 0;
-  return;
+    f32 phase = angle * 40.743664f;
+    f32 cosine = phaseCosInterpolate(phase);
+    f32 sine = FUN_002b70cc(phase);
+    f32 complement = 1.0f - cosine;
+    f32 x = DAT_004ea81c.axisInput.values[0];
+    f32 y = DAT_004ea81c.axisInput.values[1];
+    f32 z = DAT_004ea81c.axisInput.values[2];
+    f32 *matrix = DAT_004ea81c.rotation.values;
+    matrix[0] = x * x + (1.0f - x * x) * cosine;
+    matrix[1] = z * sine + x * y * complement;
+    matrix[2] = x * z * complement - y * sine;
+    matrix[3] = 0.0f;
+    matrix[4] = x * y * complement - z * sine;
+    matrix[5] = y * y + (1.0f - y * y) * cosine;
+    matrix[6] = x * sine + y * z * complement;
+    matrix[7] = 0.0f;
+    matrix[8] = y * sine + x * z * complement;
+    matrix[9] = y * z * complement - x * sine;
+    matrix[10] = z * z + (1.0f - z * z) * cosine;
+    matrix[11] = 0.0f;
 }
-
-} /* extern "C" */
+}

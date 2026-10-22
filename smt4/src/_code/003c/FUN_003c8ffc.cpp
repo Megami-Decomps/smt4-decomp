@@ -1,56 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c8ffc` (_code @ 0x3c8ffc, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Average-level testing, parent/result bitfield masks, and value registers differ. */
+#include "common.h"
+#include "shard/W6_W6Match5_DevilSort.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+
+struct LeveledLists;
 
 extern "C" {
+const u8 *dataFindSymmetricPair(u32 firstRace, u32 secondRace);
+const u8 *dataTable05Sub0GetEntries();
+u16 FUN_003c9948(LeveledLists *owner, s32 race, u8 level);
 
-int dataTable05Sub0GetEntries(void);
-int devilGetRecord(void);
-int dataFindSymmetricPair(unsigned char *, int);
-int FUN_003c9948(unsigned int, int, unsigned int);
-
-/* Supplied declaration required: dataTable05Sub0GetEntries. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: dataFindSymmetricPair. */
-/* Supplied declaration required: FUN_003c9948. */
-
-
-unsigned int FUN_003c8ffc(unsigned int param_1,unsigned short *param_2,unsigned short *param_3,unsigned int *param_4)
-
+u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
+                 UnitePairEntryIV *output)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  unsigned char *pbVar3;
-  unsigned char *pbVar4;
-  unsigned int temp_v0;
-  
-  puVar1 = param_2;
-  devilGetRecord();
-  puVar2 = param_3;
-  devilGetRecord();
-  pbVar3 = (unsigned char *)(unsigned int)(unsigned char)puVar1[1];
-  dataFindSymmetricPair(pbVar3,(char)puVar2[1]);
-  pbVar4 = pbVar3;
-  dataTable05Sub0GetEntries();
-  if (*puVar1 != *puVar2 && pbVar3 != (unsigned char *)0x0) {
-    temp_v0 = (unsigned int)*(unsigned char *)((int)puVar1 + 3) + (unsigned int)*(unsigned char *)((int)puVar2 + 3);
-    if ((temp_v0 & 0x80000001) != 0) {
-      temp_v0 = temp_v0 + 1;
-    }
-    FUN_003c9948(param_1,pbVar3[2],((unsigned int)*pbVar4 + (temp_v0 >> 1)) & 0xff);
-    temp_v0 = param_1;
-    if (*puVar1 != param_1) {
-      temp_v0 = (unsigned int)*puVar2;
-    }
-    if ((*puVar1 != param_1 && temp_v0 != param_1) && param_1 != 0) {
-      *param_4 = (((*param_4 & 0xffff8000) | ((unsigned int)param_2 & 0xffff7fff)) & 0xc0007fff) |
-                 (((unsigned int)param_3 & 0x7fff) << 0xf);
-      param_4[1] = ((param_1 & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
-      return 1;
-    }
-  }
-  return 0;
-}
+    DevilSortRecord *first = devilGetRecord(firstId);
+    DevilSortRecord *second = devilGetRecord(secondId);
+    const u8 *pair = dataFindSymmetricPair(first->race, second->race);
+    const u8 *table = dataTable05Sub0GetEntries();
+    if (first->id == second->id || pair == NULL)
+        return 0;
 
-} /* extern "C" */
+    s32 level = first->level + second->level;
+    if (level % 2 != 0)
+        ++level;
+    u16 result = FUN_003c9948(owner, pair[2], table[0] + level / 2);
+    if (first->id == result || second->id == result || result == 0)
+        return 0;
+
+    output->firstId = firstId;
+    output->secondId = secondId;
+    output->resultId = result;
+    return 1;
+}
+}

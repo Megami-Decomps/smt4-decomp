@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001835b4(...);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_003d3020(int, int, int);
 int VectorSignedToFloat(...);
 
@@ -19,7 +19,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003d3020. */
 
 
@@ -37,7 +37,7 @@ void FUN_00418960(int param_1)
   unsigned long long temp_v6;
   
   temp_v5 = 0.7f;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v6 = (unsigned long long)(unsigned int)(int)temp_v5;
   temp_v4 = 0;
   do {

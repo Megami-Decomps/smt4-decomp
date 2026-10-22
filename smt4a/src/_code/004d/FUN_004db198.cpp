@@ -1,56 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004db198` (_code @ 0x4db198, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 60 vs built 60 rows; rounded-level calculation and result-id bitfield store scheduling differ. */
+#include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "gamedata/Table05Pair.h"
 
 extern "C" {
+const Table05Pair *dataFindSymmetricPair(s8, s8);
+const u8 *dataTable5GetEntries(void);
+u32 FUN_004dc154(void *, u8, u16);
 
-int FUN_00184310(void);
-int dataTable5GetEntries(void);
-int dataFindSymmetricPair(unsigned char *, int);
-int FUN_004dc154(unsigned int, int, unsigned int);
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTable5GetEntries. */
-/* Supplied declaration required: dataFindSymmetricPair. */
-/* Supplied declaration required: FUN_004dc154. */
-
-
-unsigned int FUN_004db198(unsigned int param_1,unsigned short *param_2,unsigned short *param_3,unsigned int *param_4)
-
+u32 FUN_004db198(void *context, u32 firstId, u32 secondId, UnitePairEntryIV *output)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  unsigned char *pbVar3;
-  unsigned char *pbVar4;
-  unsigned int temp_v0;
-  
-  puVar1 = param_2;
-  FUN_00184310();
-  puVar2 = param_3;
-  FUN_00184310();
-  pbVar3 = (unsigned char *)(unsigned int)(unsigned char)puVar1[1];
-  dataFindSymmetricPair(pbVar3,(char)puVar2[1]);
-  pbVar4 = pbVar3;
-  dataTable5GetEntries();
-  if (*puVar1 != *puVar2 && pbVar3 != (unsigned char *)0x0) {
-    temp_v0 = (unsigned int)puVar1[3] + (unsigned int)puVar2[3];
-    if ((temp_v0 & 0x80000001) != 0) {
-      temp_v0 = temp_v0 + 1;
+    const DevilRecordA *first = FUN_00184310(firstId);
+    const DevilRecordA *second = FUN_00184310(secondId);
+    const Table05Pair *recipe = dataFindSymmetricPair(static_cast<s8>(first->race),
+                                                    static_cast<s8>(second->race));
+    const u8 *levelBias = dataTable5GetEntries();
+    if (first->id != second->id && recipe != NULL) {
+        u32 level = (static_cast<u32>(first->level) + second->level + 1) / 2;
+        u32 result = FUN_004dc154(context, static_cast<u8>(recipe->unk02),
+                                static_cast<u16>(*levelBias + level));
+        if (result != first->id && result != second->id && result != 0) {
+            // Both games use the same two packed operand ids and result id.
+            output->firstId = firstId;
+            output->secondId = secondId;
+            output->resultId = result;
+            return 1;
+        }
     }
-    FUN_004dc154(param_1,pbVar3[2],((unsigned int)*pbVar4 + (temp_v0 >> 1)) & 0xffff);
-    temp_v0 = param_1;
-    if (*puVar1 != param_1) {
-      temp_v0 = (unsigned int)*puVar2;
-    }
-    if ((*puVar1 != param_1 && temp_v0 != param_1) && param_1 != 0) {
-      *param_4 = (((*param_4 & 0xffff8000) | ((unsigned int)param_2 & 0xffff7fff)) & 0xc0007fff) |
-                 (((unsigned int)param_3 & 0x7fff) << 0xf);
-      param_4[1] = ((param_1 & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

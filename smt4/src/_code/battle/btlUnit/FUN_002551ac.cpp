@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002266dc(int, unsigned int, int, int);
 int FUN_002267b8(int, unsigned int, int);
 int FUN_002268d0(...);
-int FUN_0022699c(...);
+int btlQueueReflectAction(...);
 int FUN_002505c0(...);
 int FUN_002550d8(...);
 int FUN_0027da30(int, int);
@@ -46,7 +46,7 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 /* Supplied declaration required: FUN_002266dc. */
 /* Supplied declaration required: FUN_002267b8. */
 /* Supplied declaration required: FUN_002268d0. */
-/* Supplied declaration required: FUN_0022699c. */
+/* Supplied declaration required: btlQueueReflectAction. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002550d8. */
 extern short battleGetEntryHalfword(int, unsigned int);
@@ -131,18 +131,18 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
       if (param_10 != 0) {
         temp_v14[0] = (int)(short)(temp_v2 + param_21 + 1);
         temp_v3 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,temp_v14[0],0,param_2);
+        btlQueueReflectAction(g_btlActionReflect,temp_v14[0],0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 0x13;
         *(int *)(temp_v3 + 0x14) = param_3;
         *(int *)(temp_v3 + 0x4c) = param_10;
         temp_v3 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,temp_v14[0],0,param_2);
+        btlQueueReflectAction(g_btlActionReflect,temp_v14[0],0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 8;
         *(int *)(temp_v3 + 0x14) = param_3;
         *(int *)(temp_v3 + 0x28) = param_10;
         temp_v14[0] = 1;
         temp_v3 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,(int)(short)(temp_v2 + param_21),0,param_2);
+        btlQueueReflectAction(g_btlActionReflect,(int)(short)(temp_v2 + param_21),0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 0x1d;
         *(int *)(temp_v3 + 0x14) = param_3;
         *(int *)(temp_v3 + 0x28) = temp_v14[0];
@@ -237,7 +237,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
               *(unsigned int *)(temp_v4 + 0xf8) = *(unsigned int *)(temp_v4 + 0xf8) | 2;
               temp_v14[0] = 0;
               temp_v6 = g_btlActionReflect;
-              FUN_0022699c(g_btlActionReflect,
+              btlQueueReflectAction(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(temp_v4 + 0x5c) + (short)temp_v20),0,
                            param_2);
               *(unsigned char *)(temp_v6 + 4) = 0x13;
@@ -245,7 +245,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
               *(int *)(temp_v6 + 0x4c) = temp_v14[0];
               FUN_002267b8(*(int *)(temp_v4 + 0x5c) + temp_v20,param_2,temp_v4);
               temp_v4 = g_btlActionReflect;
-              FUN_0022699c(g_btlActionReflect,
+              btlQueueReflectAction(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(param_3 + 0x5c) + temp_v2 + 5),0,
                            param_2);
               *(unsigned char *)(temp_v4 + 4) = 0x1b;
@@ -266,7 +266,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
               *(unsigned int *)(temp_v4 + 0xf8) = *(unsigned int *)(temp_v4 + 0xf8) | 2;
               temp_v14[0] = 0;
               temp_v6 = g_btlActionReflect;
-              FUN_0022699c(g_btlActionReflect,
+              btlQueueReflectAction(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(temp_v4 + 0x5c) + (short)temp_v20),0,
                            param_2);
               *(unsigned char *)(temp_v6 + 4) = 0x13;
@@ -279,7 +279,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                   do {
                     if (temp_v6 == 0) {
                       temp_v6 = g_btlActionReflect;
-                      FUN_0022699c(g_btlActionReflect,
+                      btlQueueReflectAction(g_btlActionReflect,
                                    (int)(short)((short)*(unsigned int *)(temp_v4 + 0x5c) +
                                                (short)temp_v20),0);
                       temp_v14[0] = temp_v6;
@@ -315,7 +315,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                 FUN_002266dc(*(int *)(temp_v4 + 0x5c) + temp_v20,param_2,temp_v4,9);
               }
               temp_v6 = g_btlActionReflect;
-              FUN_0022699c(g_btlActionReflect,
+              btlQueueReflectAction(g_btlActionReflect,
                            (int)(short)((short)temp_v20 +
                                        (short)*(unsigned int *)(temp_v4 + 0x5c) +
                                        *(short *)(temp_v23 + 10)),0,param_2);
@@ -338,7 +338,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
       temp_v14[0] = (int)(short)((short)param_17 + temp_v2);
       temp_v5 = 0x3f800000;
       temp_v4 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v14[0],0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v14[0],0,param_2);
       *(unsigned char *)(temp_v4 + 4) = 0x12;
       *(int *)(temp_v4 + 0x14) = param_3;
       *(unsigned int *)(temp_v4 + 0x30) = temp_v5;
@@ -355,7 +355,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
             temp_v14[1] = temp_v24;
             temp_v15 = param_23;
             temp_v6 = g_btlActionReflect;
-            FUN_0022699c(g_btlActionReflect,temp_v14[0],0,param_2);
+            btlQueueReflectAction(g_btlActionReflect,temp_v14[0],0,param_2);
             *(unsigned char *)(temp_v6 + 4) = 0x12;
             *(int *)(temp_v6 + 0x14) = temp_v4;
             *(unsigned int *)(temp_v6 + 0x30) = temp_v5;
@@ -376,7 +376,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
     puVar5 = temp_v18;
     if (((-1 < param_18) && (temp_v18 != (unsigned int *)0x0)) && (-1 < param_20)) {
       temp_v3 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)(short)((short)param_18 + temp_v2),0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_18 + temp_v2),0,param_2);
       *(unsigned char *)(temp_v3 + 4) = 6;
       *(unsigned int **)(temp_v3 + 0x18) = puVar5;
       *(int *)(temp_v3 + 0x28) = param_20;
@@ -397,18 +397,18 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
         temp_v16 = param_24;
         FUN_002268d0(temp_v4,0,param_2,param_3);
         temp_v6 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+        btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
         *(unsigned char *)(temp_v6 + 4) = 0x32;
       }
       temp_v14[0] = 0;
       temp_v6 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
       *(unsigned char *)(temp_v6 + 4) = 0x1c;
       *(int *)(temp_v6 + 0x14) = param_3;
       *(int *)(temp_v6 + 0x28) = temp_v14[0];
       *(int *)(temp_v6 + 0x4c) = -param_5;
       temp_v6 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
       *(unsigned char *)(temp_v6 + 4) = 0x1c;
       *(int *)(temp_v6 + 0x14) = param_3;
       *(unsigned int *)(temp_v6 + 0x28) = 1;
@@ -427,11 +427,11 @@ LAB_00255b74:
         temp_v16 = param_24;
         FUN_002268d0(temp_v4,0,param_2,param_3);
         temp_v6 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+        btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
         *(unsigned char *)(temp_v6 + 4) = 0x32;
       }
       temp_v6 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
       *(unsigned char *)(temp_v6 + 4) = 0x1c;
       *(int *)(temp_v6 + 0x14) = param_3;
       *(unsigned int *)(temp_v6 + 0x28) = 0;
@@ -454,11 +454,11 @@ LAB_00255b74:
       temp_v16 = param_24;
       FUN_002268d0(temp_v4,0,param_2,param_3);
       temp_v6 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
       *(unsigned char *)(temp_v6 + 4) = 0x32;
     }
     temp_v6 = g_btlActionReflect;
-    FUN_0022699c(g_btlActionReflect,temp_v3,0,param_2);
+    btlQueueReflectAction(g_btlActionReflect,temp_v3,0,param_2);
     *(unsigned char *)(temp_v6 + 4) = 0x1c;
     *(int *)(temp_v6 + 0x14) = param_3;
     *(unsigned int *)(temp_v6 + 0x28) = 1;
@@ -471,7 +471,7 @@ LAB_00255c1c:
         for (temp_v3 = *(int *)(g_btlActionReflect + 8); temp_v3 != 0; temp_v3 = *(int *)(temp_v3 + 0xc)) {
         }
         temp_v3 = g_btlActionReflect;
-        FUN_0022699c(g_btlActionReflect,(int)(short)temp_v4,0,param_2);
+        btlQueueReflectAction(g_btlActionReflect,(int)(short)temp_v4,0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 7;
         *(int *)(temp_v3 + 0x14) = param_3;
         *(unsigned int *)(temp_v3 + 0x28) = 1;
@@ -484,7 +484,7 @@ LAB_00255c1c:
       for (temp_v3 = *(int *)(g_btlActionReflect + 8); temp_v3 != 0; temp_v3 = *(int *)(temp_v3 + 0xc)) {
       }
       temp_v3 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)(short)temp_v4,0,param_2);
+      btlQueueReflectAction(g_btlActionReflect,(int)(short)temp_v4,0,param_2);
       *(unsigned char *)(temp_v3 + 4) = 7;
       *(int *)(temp_v3 + 0x14) = param_3;
       *(unsigned int *)(temp_v3 + 0x28) = 2;

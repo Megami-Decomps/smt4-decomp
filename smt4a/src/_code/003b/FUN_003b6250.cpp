@@ -1,55 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6250` (_code @ 0x3b6250, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Selection-ID table addressing groups its base offset differently. */
+#include "common.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+UniteWork *uniteGetWork();
+void efctSetSpeed(f32 speed);
+s32 recordGetModeForId(s32 recordId);
+const UniteSelectionLayoutPrefixA *FUN_001834a4(u32 group, u32 entry);
+void largeGridDrawButtonStrip(UniteWork *work, s32 x, s32 y,
+                              s32 selectedIndex, f32 speed);
+extern u8 g_layeredSpriteEffectResource[];
+s32 FUN_00162790(s32 layer, u32 color, const void *resource,
+                 f32 x, f32 y, f32 offsetX, f32 offsetY, f32 speed);
 
-int FUN_00162790(int, unsigned int, int, int);
-int efctSetSpeed(void);
-int largeGridDrawButtonStrip(int, int, int, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-extern int uniteGetWork(void);
-extern int recordGetModeForId(int);
-/* Supplied declaration required: largeGridDrawButtonStrip. */
-
-
-void FUN_003b6250(int param_1,int param_2)
-
+s32 FUN_003b6250(s32 x, s32 y, f32 speed)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  
-  temp_v0 = uniteGetWork();
-  temp_v2 = 0x9fe7ffff;
-  efctSetSpeed();
-  temp_v1 = recordGetModeForId((int)*(short *)(temp_v0 + *(short *)(temp_v0 + 0x8e88) * 2 + 0x438));
-  if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
-    temp_v2 = 0xf5ff9fff;
-  }
-  temp_v1 = FUN_001834a4(0x1a,0x1af);
-  largeGridDrawButtonStrip(temp_v0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
-               (int)*(short *)(temp_v0 + 0x8e88));
-  efctSetSpeed();
-  temp_v0 = FUN_001834a4(0x1a,0x1a2);
-  VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v0 + 10) + param_2,
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,temp_v2,0x52f328,(int)*(short *)(temp_v0 + 10));
-  return;
-}
+    UniteWork *work = uniteGetWork();
+    u32 color = 0x9fe7ffffU;
+    efctSetSpeed(speed);
 
-} /* extern "C" */
+    // The logical extent of the ID table is not recovered.
+    const s16 *recordIds = reinterpret_cast<const s16 *>(work->unk0438);
+    s32 mode = recordGetModeForId(recordIds[work->selectionA.selectedIndex]);
+    if (mode == 1 || mode == 2 || mode == 6)
+        color = 0xf5ff9fffU;
+
+    const UniteSelectionLayoutPrefixA *strip = FUN_001834a4(0x1a, 0x1af);
+    largeGridDrawButtonStrip(work, strip->x + x, strip->y + y,
+                            work->selectionA.selectedIndex, speed);
+    efctSetSpeed(speed);
+    const UniteSelectionLayoutPrefixA *effect = FUN_001834a4(0x1a, 0x1a2);
+
+    return FUN_00162790(3, color, g_layeredSpriteEffectResource,
+                       static_cast<f32>(effect->x + strip->x + x),
+                       static_cast<f32>(strip->y + effect->y + y),
+                       0.0f, 0.0f, speed);
+}
+}

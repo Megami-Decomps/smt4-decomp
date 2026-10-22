@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
@@ -27,7 +27,7 @@ extern int g_runWin; /* 0x43e158 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
@@ -71,7 +71,7 @@ char FUN_0018f278(void)
     FUN_002bf288(2,0xe,0x14f,0,0,0x6d);
     temp_v2 = vec2GetXInt(temp_v10 + 0x38);
     temp_v12 = 0.27f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v2 = temp_v2 + (int)temp_v12;
     temp_v3 = vec2GetYInt(temp_v10 + 0x38);
     efctSetSpeed();

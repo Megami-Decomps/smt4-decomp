@@ -8,7 +8,7 @@ int FUN_001568f8(...);
 int uiInsertIdInFirstFreeSlot(...);
 int valueSlotsInsert(...);
 int aocHandleButtons(...);
-int FUN_003fce8c(...);
+int btlEnsureEnemyDrawResources(...);
 int btlUiAddRequest(...);
 int battleEffectInitializeVariant(...);
 int FUN_004f7924(...);
@@ -36,7 +36,7 @@ extern int uiHasEntryId(int, unsigned int);
 /* Supplied declaration required: valueSlotsInsert. */
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003fce8c. */
+/* Supplied declaration required: btlEnsureEnemyDrawResources. */
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 /* Supplied declaration required: btlUiAddRequest. */
@@ -112,7 +112,7 @@ void FUN_004cb64c(int param_1,fn_004cb64c_arg1 *param_2)
     if (((unsigned int)param_2->field_0x58 & 0x200) == 0) {
       temp_v2 = FUN_003fce08(temp_v1,1);
       if (temp_v2 != 0) {
-        FUN_003fce8c(temp_v1,1);
+        btlEnsureEnemyDrawResources(temp_v1,1);
         param_2->field_0x5c = param_2->field_0x5c;
         param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x200);
         btlUiAddRequest(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));

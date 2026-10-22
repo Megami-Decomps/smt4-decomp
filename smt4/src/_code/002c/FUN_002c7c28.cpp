@@ -1,59 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7c28` (_code @ 0x2c7c28, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: emitter count loads and parameter-pointer caching are scheduled differently. */
+/* Creates a particle emitter, its backing buffer and an independent copy of auxiliary data. */
+#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/Source/Gfx/Effect/effParticle.h"
+#include "shard/W6_W6Match2_EmitterResources.h"
 
 extern "C" {
+EffEmitter *effEmitterCreateSmall(EffEmitterDesc *descriptor);
+EffEmitter *effEmitterCreate(u32 count);
+void FUN_0024f8a4(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
+void objectBufferFree(void *buffer);
+void *FUN_002691d8(u16 kind, u32 count, EffEmitterDesc *descriptor);
+void *FUN_00268fc4(void *auxiliary);
+void effParticleParamCopy(EffParticleParam *destination, const EffParticleParam *source);
 
-int effEmitterCreate(void);
-int FUN_0024f8a4(int *, int, int);
-int effEmitterCreateSmall(void);
-int FUN_00268fc4(void);
-int FUN_002691d8(unsigned int, int, int *);
-int objectBufferFree(void);
-int effParticleParamCopy(int, unsigned int);
-
-/* Supplied declaration required: effEmitterCreate. */
-/* Supplied declaration required: FUN_0024f8a4. */
-/* Supplied declaration required: effEmitterCreateSmall. */
-/* Supplied declaration required: FUN_00268fc4. */
-/* Supplied declaration required: FUN_002691d8. */
-/* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: effParticleParamCopy. */
-
-
-int * FUN_002c7c28(int param_1)
-
+EffEmitter *FUN_002c7c28(EmitterResourceRequest *request)
 {
-/* irregular: 7 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  unsigned int temp_v1;
-  
-  piVar3 = *(int **)(*(int *)(param_1 + 0x30) + 0x24);
-  piVar1 = piVar3;
-  effEmitterCreateSmall();
-  FUN_0024f8a4(piVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
-  temp_v1 = (unsigned int)**(unsigned short **)(param_1 + 0x30);
-  if (piVar1[0xc] != 0) {
-    objectBufferFree();
-  }
-  FUN_002691d8(temp_v1,*piVar1,piVar3);
-  piVar1[0xc] = temp_v1;
-  if (piVar1[0xb] == 0) {
-    temp_v0 = *piVar1;
-    effEmitterCreate();
-    piVar1[0xb] = temp_v0;
-    *(int *)(temp_v0 + 0x4c) = piVar1[0xc];
-  }
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x2c) + 0x50);
-  if (temp_v0 != 0) {
-    FUN_00268fc4();
-    *(int *)(piVar1[0xb] + 0x50) = temp_v0;
-  }
-  effParticleParamCopy(piVar1[0xb],*(unsigned int *)(param_1 + 0x2c));
-  *(unsigned short *)(piVar1[0xb] + 0xc) = *(unsigned short *)(*(int *)(param_1 + 0x2c) + 0xc);
-  return piVar1;
+    /* A pointer at the end of byte-aligned EmitterArguments cannot be added to its shared type. */
+    struct ParticleArguments {
+        u8 placement[0x20];
+        EffParticleParam *parameter;
+    };
+    ParticleArguments *arguments = (ParticleArguments *)&request->arguments;
+    EffEmitterDesc *descriptor = (EffEmitterDesc *)request->source->data;
+    EffEmitter *emitter = effEmitterCreateSmall(descriptor);
+    FUN_0024f8a4((ResourceEmitter *)emitter, request->source->id, &request->arguments);
+    u16 kind = request->source->id;
+    if (emitter->particle.buffer != NULL) {
+        objectBufferFree(emitter->particle.buffer);
+    }
+    emitter->particle.buffer = FUN_002691d8(kind, emitter->maxCount, descriptor);
+    if (emitter->particle.parameter == NULL) {
+        emitter->particle.parameter = (EffParticleParam *)effEmitterCreate(emitter->maxCount);
+        emitter->particle.parameter->source = (EffParticleSource *)emitter->particle.buffer;
+    }
+    if (arguments->parameter->auxiliary != NULL) {
+        emitter->particle.parameter->auxiliary = FUN_00268fc4(arguments->parameter->auxiliary);
+    }
+    effParticleParamCopy(emitter->particle.parameter, arguments->parameter);
+    emitter->particle.parameter->type = arguments->parameter->type;
+    return emitter;
 }
-
-} /* extern "C" */
+}

@@ -1,61 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00106c28` (_code @ 0x106c28, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: lock and archive-state saved registers differ and retail's removed-hook NOPs are absent. */
+#include "common.h"
 
+struct ArchiveReferenceState { u32 unk00; u32 references; };
 extern "C" {
+extern u8 DAT_004c6410[];
+extern ArchiveReferenceState DAT_0044e348;
+extern const char DAT_00407e1a[];
+extern u8 DAT_004655f8[];
+void nn_os_CriticalSection_Enter(void *lock);
+void nn_os_CriticalSection_Leave(void *lock);
+u32 FUN_0010f50c();
+u32 FUN_002c1398();
+u32 libc_strlen(const char *text);
+u32 asdModelForwardChecked(void *archive, const char *name, u32 length, u32 flags);
+void FUN_0010f548(u32 flags);
 
-int FUN_0010f548(int);
-
-extern unsigned char LAB_00209ff9; /* 0x209ff9 */
-extern int DAT_0044e34c; /* 0x44e34c */
-extern unsigned int DAT_004655f8; /* 0x4655f8 */
-extern unsigned int DAT_004c6410; /* 0x4c6410 */
-
-extern int FUN_0010f50c(void);
-/* Supplied declaration required: FUN_0010f548. */
-extern unsigned char *asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
-extern unsigned char *FUN_002c1398(void);
-extern unsigned int libc_strlen(char *);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned char * FUN_00106c28(void)
-
+// Acquire the shared archive mount, mounting it on the first reference under the module lock.
+u32 FUN_00106c28()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c6410);
-  temp_v0 = FUN_0010f50c();
-  if (temp_v0 != 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6410);
-    return (unsigned char *)0xd8a09ff9;
-  }
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004c6410);
-  temp_v2 = DAT_0044e34c == 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6410);
-  if (temp_v2) {
-    puVar2 = (unsigned char *)FUN_002c1398();
-    if (-1 < (int)puVar2) {
-      temp_v1 = libc_strlen("ac:u");
-      puVar2 = (unsigned char *)asdModelForwardChecked(&DAT_004655f8,"ac:u",temp_v1,0);
-      if (-1 < (int)puVar2) {
-        DAT_0044e34c = DAT_0044e34c + 1;
-        FUN_0010f548(0x40201c8);
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6410);
-        return (unsigned char *)0x0;
-      }
+    nn_os_CriticalSection_Enter(DAT_004c6410);
+    if (FUN_0010f50c()) {
+        nn_os_CriticalSection_Leave(DAT_004c6410);
+        return 0xd8a09ff9;
     }
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6410);
-    return puVar2;
-  }
-  DAT_0044e34c = DAT_0044e34c + 1;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004c6410);
-  return &LAB_00209ff9;
+    nn_os_CriticalSection_Enter(DAT_004c6410);
+    bool mounted = DAT_0044e348.references != 0;
+    nn_os_CriticalSection_Leave(DAT_004c6410);
+    if (mounted) {
+        ++DAT_0044e348.references;
+        nn_os_CriticalSection_Leave(DAT_004c6410);
+        return 0x00209ff9;
+    }
+    u32 result = FUN_002c1398();
+    if ((s32)result >= 0)
+        result = asdModelForwardChecked(DAT_004655f8, DAT_00407e1a, libc_strlen(DAT_00407e1a), 0);
+    if ((s32)result < 0) {
+        nn_os_CriticalSection_Leave(DAT_004c6410);
+        return result;
+    }
+    ++DAT_0044e348.references;
+    FUN_0010f548(0x040201c8);
+    nn_os_CriticalSection_Leave(DAT_004c6410);
+    return 0;
 }
-
-} /* extern "C" */
+}

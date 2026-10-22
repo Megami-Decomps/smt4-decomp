@@ -13,7 +13,7 @@ int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(...);
-int FUN_002bce30(...);
+int demonGetRaceLabel(...);
 int FUN_002bd068(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -75,7 +75,7 @@ extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bce30. */
+/* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -182,7 +182,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,temp_v9,temp_v15);
     temp_v8 = FUN_002bf4f8(0x24,0x4e);
-    temp_v9 = FUN_002bce30(*puVar6,0);
+    temp_v9 = demonGetRaceLabel(*puVar6,0);
     textFormatBuffer(temp_v15,&LAB_002162d4,temp_v9);
     VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v8 + 8),
@@ -312,7 +312,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002be5a4(2,temp_v11,temp_v15,(int)*(short *)(temp_v2 + 8));
         temp_v2 = FUN_002bf4f8(0x24,0x13a);
-        temp_v11 = FUN_002bce30(*psVar10,0);
+        temp_v11 = demonGetRaceLabel(*psVar10,0);
         textFormatBuffer(temp_v15,&LAB_002162d4,temp_v11);
         puVar11 = temp_v15;
         FUN_002b6dd8(puVar11,2);

@@ -18,7 +18,7 @@ int FUN_00164168(...);
 int FUN_00180310(...);
 int FUN_00183788(...);
 int FUN_00185e84(...);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int FUN_0019acdc(...);
 int jobGetScalarValue(void);
 int FUN_0022e9c8(void);
@@ -135,7 +135,7 @@ extern int FUN_0018416c(short);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019acdc. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_0022e9c8. */
@@ -1517,7 +1517,7 @@ LAB_0022e040:
   }
 LAB_0022e46c:
   if (*(char *)(temp_v2 + 0x20ad) != '\0') {
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v27[5] = (unsigned char *)(int)temp_v20;
     if (temp_v21 < *(float *)(temp_v28 + 0x294)) {
       efctSetSpeed();

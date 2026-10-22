@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019a46c(unsigned int *, int, int);
 int _ZN18WindowStatusResultC1Ej(...);
 int sysMemClear(unsigned int *, int);
-int FUN_00427a10(unsigned int, unsigned char *);
+int nnAsyncMapOperationResult(unsigned int, unsigned char *);
 int FUN_00427e68(int, int);
 int rt_memcpy_w(unsigned char *, int, int);
 
@@ -49,7 +49,7 @@ extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00427a10. */
+/* Supplied declaration required: nnAsyncMapOperationResult. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00427e68. */
 extern int tokenResolveAddress(unsigned int, int *, int);
@@ -88,7 +88,7 @@ void FUN_00429048(unsigned int param_1,int *param_2,int param_3)
           if ((*(char *)(temp_v3 + 0x98) == '\0') && ((char)DAT_0061b074.whole != '\0')) {
             *(unsigned char *)(temp_v3 + 0x98) = 1;
           }
-          FUN_00427a10(param_1,&DAT_0061b000);
+          nnAsyncMapOperationResult(param_1,&DAT_0061b000);
           return;
         }
         _ZN18WindowStatusResultC1Ej(param_1,0xc9413891);

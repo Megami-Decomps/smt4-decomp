@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, int);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002c18e4(int);
 int FUN_002c198c(int);
 int FUN_002c39a4(int);
@@ -19,7 +19,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int aocJobIsValid(void);
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
@@ -60,12 +60,12 @@ unsigned int FUN_0022535c(void)
     if ((*(char *)(temp_v0 + 0x2f4) != '\0') && (*(int *)(temp_v0 + 0x2e8) == 2)) {
       temp_v6 = 0.3f;
       temp_v5 = temp_v6;
-      FUN_002ba12c(g_titleScene);
+      renderCtxCalculateStereoParallax(g_titleScene);
       temp_v7 = CONCAT44(temp_v5,(int)temp_v6);
       temp_v2 = aocJobIsValid();
       if ((temp_v2 != 0) || (temp_v2 = btlMainIsSecondJobValid(), temp_v2 != 0)) {
         temp_v5 = (float)(temp_v7 >> 0x20);
-        FUN_002ba12c(g_titleScene);
+        renderCtxCalculateStereoParallax(g_titleScene);
         temp_v7 = (unsigned long long)(unsigned int)(int)temp_v5;
       }
       VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);

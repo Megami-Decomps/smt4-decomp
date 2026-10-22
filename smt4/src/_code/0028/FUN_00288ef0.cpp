@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002ba12c(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 
 extern unsigned char g_gameGlobals; /* 0x44e140 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 
@@ -25,7 +25,7 @@ void FUN_00288ef0(int *param_1,unsigned int *param_2,int param_3)
   
   temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + param_3 * 0x8c;
   temp_v0 = vec2GetXInt(temp_v2 + 0x44);
-  FUN_002ba12c(g_titleScene);
+  renderCtxCalculateStereoParallax(g_titleScene);
   *param_1 = (int)in_s0 + temp_v0;
   temp_v1 = vec2GetYInt(temp_v2 + 0x44);
   *param_2 = temp_v1;

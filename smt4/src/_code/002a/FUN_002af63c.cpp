@@ -11,7 +11,7 @@ int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_002b76d0(...);
 int cameraSetViewMatrix(...);
-int FUN_002ba12c(...);
+int renderCtxCalculateStereoParallax(...);
 int efctSetSpeed(void);
 int FUN_002c1b64(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
@@ -81,7 +81,7 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: cameraSetViewMatrix. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -387,7 +387,7 @@ LAB_002af7a0:
             temp_v15 = (float)VectorSignedToFloat(0x100 - temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v15 = temp_v15 * temp_v17;
           }
-          FUN_002ba12c(g_titleScene);
+          renderCtxCalculateStereoParallax(g_titleScene);
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 == temp_v18) << 0x1e);
           if (temp_v28[0x91] != '\0') {
             temp_v15 = (float)VectorSignedToFloat((int)temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);

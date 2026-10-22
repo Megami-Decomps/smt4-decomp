@@ -1,79 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fcd20` (_code @ 0x3fcd20, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: loaded-flag store scheduling and magic-comparison registers differ from retail. */
+#include "gamedata/NpcPackage.h"
+#include "addon/aocMain.h"
 
 extern "C" {
+extern const char DAT_00527250[];
+extern AocSystemA* g_aocSystem;
+s32 textFormatBuffer(char* buffer, const char* format, ...);
+u32 FUN_004705ec(AocSystemA* system, s32 id, u32 kind);
+void* FUN_0046e150(AocSystemA* system, s32 id, const char* path);
+void* asdLoadFileSyncDefault(const char* path);
 
-int textFormatBuffer(...);
-int asdLoadFileSyncDefault(...);
-int FUN_0046e150(...);
-
-typedef struct fn_003fcd20_arg0 fn_003fcd20_arg0;
-struct fn_003fcd20_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    int field_0xc; /* +0xc */
-    void *field_0x10; /* +0x10 */
-    void *field_0x14; /* +0x14 */
-    void *field_0x18; /* +0x18 */
-    void *field_0x1c; /* +0x1c */
-    void *field_0x20; /* +0x20 */
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x10];
-    undefined1 field_0x3c; /* +0x3c */
-};
-
-extern int *g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_0046e150. */
-extern int FUN_004705ec(int *, int, unsigned int);
-
-
-void FUN_003fcd20(fn_003fcd20_arg0 *param_1,int param_2)
-
+// Load an NPC package from add-on content or the base filesystem and slice its sections.
+void FUN_003fcd20(NpcPackageWork* work, s32 id)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  int aiStack_50 [16];
-  
-  piVar3 = aiStack_50;
-  textFormatBuffer(aiStack_50,"event/npcgtix/npc%03d.bin",param_2);
-  param_1->field_0x8 = 2;
-  param_1->field_0xc = param_2;
-  temp_v1 = FUN_004705ec(g_aocSystem,param_2,1);
-  if (temp_v1 != 0) {
-    piVar3 = g_aocSystem;
-    FUN_0046e150(g_aocSystem,param_2,aiStack_50);
-  }
-  else {
-    asdLoadFileSyncDefault();
-  }
-  param_1->field_0x28 = piVar3;
-  param_1->field_0x4 = -param_2;
-  param_1->field_0x3c = 1;
-  param_1->field_0x10 = piVar3;
-  if (*piVar3 != 0x57444b4e) {
-    param_1->field_0x10 = (void *)0x0;
-  }
-  else {
-    piVar4 = piVar3 + 10;
-    param_1->field_0x14 = piVar4;
-    piVar4 = piVar4 + (unsigned int)*(unsigned short *)(piVar3 + 1) * 8;
-    param_1->field_0x18 = piVar4;
-    piVar4 = piVar4 + piVar3[2] * 10;
-    param_1->field_0x1c = piVar4;
-    temp_v0 = *(unsigned short *)((int)piVar3 + 6);
-    param_1->field_0x20 = piVar4 + temp_v0;
-    param_1->field_0x24 = piVar4 + temp_v0 + (unsigned int)*(unsigned short *)(piVar3 + 3) * 6;
-  }
-  return;
+    char path[64];
+    textFormatBuffer(path, DAT_00527250, id);
+    work->kind = 2;
+    work->sourceId = id;
+    NpcPackageHeader* file;
+    if (FUN_004705ec(g_aocSystem, id, 1)) {
+        file = static_cast<NpcPackageHeader*>(FUN_0046e150(g_aocSystem, id, path));
+    } else {
+        file = static_cast<NpcPackageHeader*>(asdLoadFileSyncDefault(path));
+    }
+    work->fileData = file;
+    work->id = -id;
+    work->loaded = 1;
+    work->header = file;
+    if (file->magic == 0x57444B4E) {
+        work->primary = reinterpret_cast<NpcPackagePrimaryRecord*>(file + 1);
+        work->secondary = reinterpret_cast<NpcPackageSecondaryRecord*>(work->primary + file->primaryCount);
+        work->indices = reinterpret_cast<u32*>(work->secondary + file->secondaryCount);
+        work->extra = reinterpret_cast<NpcPackageExtraRecord*>(work->indices + file->indexCount);
+        work->payload = work->extra + file->extraCount;
+    } else {
+        work->header = NULL;
+    }
 }
-
-} /* extern "C" */
+}

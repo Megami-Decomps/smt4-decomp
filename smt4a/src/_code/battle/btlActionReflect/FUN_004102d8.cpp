@@ -1,71 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004102d8` (_code @ 0x4102d8, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the tail pointer reload uses r1 instead of retail's r2; all other instructions match. */
+#include "battle/btlReflect.h"
+#include "AsdSDK/AsdDebug.h"
+#include <string.h>
 
-extern "C" {
+extern "C" void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 
-int asdMemoryAllocTracked(int, int, int, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: asdMemoryAllocTracked. */
-
-
-void FUN_004102d8(int param_1,unsigned short param_2,unsigned short param_3,unsigned int param_4)
-
+extern "C" ReflectAction *FUN_004102d8(ReflectContext *context, u16 actor, u16 secondary, u32 options)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  
-  puVar1 = (unsigned short *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xa8,1);
-  *puVar1 = param_2;
-  puVar1[1] = param_3;
-  *(unsigned char *)(puVar1 + 2) = 0;
-  *(unsigned char *)((int)puVar1 + 5) = 0;
-  puVar1[3] = 0;
-  *(unsigned int *)(puVar1 + 6) = 0;
-  *(unsigned int *)(puVar1 + 4) = param_4;
-  *(unsigned int *)(puVar1 + 8) = 0;
-  *(unsigned int *)(puVar1 + 10) = 0;
-  *(unsigned int *)(puVar1 + 0xc) = 0;
-  *(unsigned int *)(puVar1 + 0xe) = 0xffffffff;
-  *(unsigned int *)(puVar1 + 0x14) = 0;
-  *(unsigned int *)(puVar1 + 0x16) = 0;
-  *(unsigned int *)(puVar1 + 0x26) = 0;
-  *(unsigned int *)(puVar1 + 0x28) = 0;
-  *(unsigned int *)(puVar1 + 0x34) = 0;
-  *(unsigned int *)(puVar1 + 0x36) = 0;
-  *(unsigned int *)(puVar1 + 0x38) = 0;
-  *(unsigned int *)(puVar1 + 0x3a) = 0;
-  *(unsigned int *)(puVar1 + 0x3c) = 0;
-  *(unsigned int *)(puVar1 + 0x3e) = 0;
-  *(unsigned int *)(puVar1 + 0x40) = 0;
-  *(unsigned int *)(puVar1 + 0x42) = 0;
-  *(unsigned int *)(puVar1 + 0x44) = 0;
-  *(unsigned int *)(puVar1 + 0x46) = 0;
-  *(unsigned int *)(puVar1 + 0x48) = 0;
-  *(unsigned int *)(puVar1 + 0x4a) = 0;
-  *(unsigned int *)(puVar1 + 0x4c) = 0;
-  *(unsigned int *)(puVar1 + 0x4e) = 0;
-  *(unsigned int *)(puVar1 + 0x50) = 0;
-  *(unsigned int *)(puVar1 + 0x52) = 0;
-  if (*(int *)(param_1 + 8) == 0) {
-    *(unsigned short **)(param_1 + 8) = puVar1;
-  }
-  if (*(int *)(param_1 + 0xc) == 0) {
-    *(unsigned short **)(param_1 + 0xc) = puVar1;
-  }
-  else {
-    *(unsigned short **)(*(int *)(param_1 + 0xc) + 0xc) = puVar1;
-    *(unsigned int *)(puVar1 + 8) = *(unsigned int *)(param_1 + 0xc);
-    *(unsigned short **)(param_1 + 0xc) = puVar1;
-  }
-  *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + 1;
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlActionReflect.cpp", 508);
+    ReflectAction *action = static_cast<ReflectAction *>(
+        asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(ReflectAction), 1));
+    action->actorId = actor;
+    action->secondaryId = secondary;
+    action->kind = 0;
+    action->flagView.flags = 0;
+    memset(action->unk05 + 1, 0, 2);
+    action->next = NULL;
+    action->options = options;
+    action->previous = NULL;
+    action->target = 0;
+    action->wordValues.unk18 = 0;
+    action->wordValues.second = 0xFFFFFFFFu;
+    action->value = 0;
+    action->payload = 0;
+    action->parameter = 0;
+    action->word50 = 0;
+    for (u32 index = 0; index < 16; ++index) {
+        action->textWords[index] = 0;
+    }
+    if (!context->head) {
+        context->head = action;
+    }
+    if (!context->tail) {
+        context->tail = action;
+    } else {
+        context->tail->next = action;
+        action->previous = context->tail;
+        context->tail = action;
+    }
+    ++context->count;
+    return action;
 }
-
-} /* extern "C" */

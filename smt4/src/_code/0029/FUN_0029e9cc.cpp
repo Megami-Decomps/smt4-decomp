@@ -1,47 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029e9cc` (_code @ 0x29e9cc, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses a separate saved-entry base adjustment and places the linked-entry loop tail after its success return. */
+#include "gamedata/DevilRecord.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
+DevilRecord *dataTable00FindById(u32 id);
 
-int dataTable00FindById(void);
-
-extern int DAT_0043e2ac; /* 0x43e2ac */
-
-/* Supplied declaration required: dataTable00FindById. */
-
-
-unsigned short FUN_0029e9cc(unsigned int param_1)
-
+// Check whether this linked demon or any of its requirements is registered.
+u16 FUN_0029e9cc(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  if (param_1 >= 0x501) {
-    return 0;
-  }
-  temp_v2 = param_1;
-  dataTable00FindById();
-  temp_v1 = *(unsigned short *)(temp_v2 + 0x16) & 1;
-  if ((*(unsigned short *)(temp_v2 + 0x16) & 1) != 0) {
-    temp_v0 = *(unsigned char *)(DAT_0043e2ac + param_1 * 0x34 + 0xc20e);
-    temp_v3 = temp_v0 & 2;
-    if ((temp_v0 & 2) == 0) {
-      while ((temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v3 * 2 + 0x7c), temp_v4 == 0 ||
-             ((*(unsigned char *)(DAT_0043e2ac + temp_v4 * 0x34 + 0xc20e) & 2) == 0))) {
-        temp_v3 = temp_v3 + 1;
-        if (temp_v3 >= 3) {
-          return 0;
-        }
-      }
+    if (id > 0x500) {
+        return 0;
     }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    const DevilRecord *record = dataTable00FindById(id);
+    u16 available = record->links.linkFlags & 1;
+    if (available) {
+        GameSaveData *save = g_gameDataBlocks.saveBlock;
+        u32 index = save->items[id].registration.registrationFlags & 2;
+        if (index == 0) {
+            u32 linkedId;
+            while ((linkedId = record->requirements.linkedIds[index]) == 0
+                   || !(save->items[linkedId].registration.registrationFlags & 2)) {
+                if (++index >= 3) {
+                    return 0;
+                }
+            }
+        }
+        available = 1;
+    }
+    return available;
 }
-
-} /* extern "C" */
+}

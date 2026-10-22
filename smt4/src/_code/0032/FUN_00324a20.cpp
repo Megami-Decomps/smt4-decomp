@@ -1,68 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00324a20` (_code @ 0x324a20, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+/* NON_MATCHING: the global texture-slot base load is scheduled three instructions later than retail. */
+#include "battle/BattleEffectTextureCache.h"
 
 extern "C" {
-
-int FUN_002522f8(unsigned char [132], int, unsigned char *, unsigned char *, char *);
-int asdTexTgaLoadNw4c(int, unsigned int, int, int);
-int asdTextureCreate(void);
-int asdMemFree(unsigned int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} void_stack;
-
-extern unsigned char LAB_00324b04; /* 0x324b04 */
-extern unsigned char LAB_00324b18; /* 0x324b18 */
-extern char s_flar02_02_004332a4[10]; /* 0x4332a4 */
-
-/* Supplied declaration required: FUN_002522f8. */
-/* Supplied declaration required: asdTexTgaLoadNw4c. */
-/* Supplied declaration required: asdTextureCreate. */
-extern unsigned int fileLoadSync(unsigned char *, unsigned int *, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-
+extern BattleEffectTextureSlot DAT_004332a0[26];
+AsdTexture *asdTextureCreate(u32 flags);
+void FUN_002522f8(char *output, u32 capacity, const char *format, const char *directory, const char *name);
+void *fileLoadSync(const char *path, u32 *size, u32 flags);
+void asdTexTgaLoadNw4c(AsdTexture *texture, void *file, u32 size, u32 flags);
+void asdMemFree(void *memory);
 
 void FUN_00324a20(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int *piVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5 [132];
-  
-  temp_v3 = 0;
-  do {
-    temp_v0 = temp_v3 * 0x4c;
-    piVar4 = (int *)(temp_v0 + 0x4332a0);
-    if ((*(char *)(temp_v0 + 0x4332ea) != '\0') && (*piVar4 == 0)) {
-      temp_v1 = 0;
-      asdTextureCreate();
-      *piVar4 = temp_v1;
-      FUN_002522f8(temp_v5,0x80,&LAB_00324b18,&LAB_00324b04,s_flar02_02_004332a4 + temp_v0);
-      temp_v2 = fileLoadSync(temp_v5,(unsigned int *)&temp_v4,0);
-      *(unsigned int *)(temp_v0 + 0x4332e4) = temp_v2;
-      asdTexTgaLoadNw4c(*piVar4,temp_v2,temp_v4,0x10000);
-      *(unsigned int *)(*piVar4 + 0xc) = 0x2000000;
-      *(unsigned int *)(*piVar4 + 0x3c) = 1;
-      *(unsigned int *)(*piVar4 + 0x40) = 1;
-      *(unsigned int *)(*piVar4 + 0x38) = 0;
-      asdTextureSetImage((AsdTexture*)*piVar4);
-      *(unsigned char *)(temp_v0 + 0x4332e8) = 1;
-      asdMemFree(*(unsigned int *)(temp_v0 + 0x4332e4));
-      *(unsigned int *)(temp_v0 + 0x4332e4) = 0;
+    for (u32 index = 0; index < 26; ++index) {
+        BattleEffectTextureSlot *slot = &DAT_004332a0[index];
+        if (slot->requested && !slot->texture) {
+            slot->texture = asdTextureCreate(0);
+            char path[128];
+            FUN_002522f8(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", slot->name);
+            u32 size;
+            slot->file = fileLoadSync(path, &size, 0);
+            asdTexTgaLoadNw4c(slot->texture, slot->file, size, 0x10000);
+            slot->texture->image.flags = 0x2000000;
+            slot->texture->unk3c = 1;
+            slot->texture->unk40 = 1;
+            slot->texture->unk38 = 0;
+            asdTextureSetImage(slot->texture);
+            slot->loaded = 1;
+            asdMemFree(slot->file);
+            slot->file = NULL;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x1a);
-  return;
 }
-
-} /* extern "C" */
+}

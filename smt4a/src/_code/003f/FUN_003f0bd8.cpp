@@ -1,42 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0bd8` (_code @ 0x3f0bd8, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zero-result exits and queued-skill mask scratch-register allocation differ. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+u32 FUN_004c5da4(s32 unitIndex, s32 markQueued);
+const void *dataTable04FindById(u32 skill);
 
-int dataTable04FindById(void);
-int FUN_003eaf20(void);
-int FUN_004c5da4(int, int);
-
-extern unsigned int DAT_00573ad8; /* 0x573ad8 */
-extern unsigned int DAT_00573adc; /* 0x573adc */
-
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_004c5da4. */
-
-
-void FUN_003f0bd8(int param_1,int param_2)
-
+// Resolve the active actor's queued skill and optionally mark this queue as consumed.
+u32 FUN_003f0bd8(BtlMainStateA *state, s32 markQueued)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  puVar3 = (unsigned int *)(param_1 + 0x45a0);
-  if (((param_2 == 0) ||
-      ((*puVar3 & DAT_00573ad8) == 0 && (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573adc) == 0)) &&
-     (temp_v0 = param_1, FUN_003eaf20(), temp_v0 != 0)) {
-    temp_v0 = (int)*(short *)(temp_v0 + 8);
-    FUN_004c5da4(temp_v0,param_2);
-    if (((temp_v0 != 0) && (dataTable04FindById(), temp_v0 != 0)) && (param_2 != 0)) {
-      temp_v1 = DAT_00573adc | *(unsigned int *)(param_1 + 0x45a4);
-      *puVar3 = DAT_00573ad8 | *puVar3;
-      *(unsigned int *)(param_1 + 0x45a4) = temp_v1;
+    u64 *flags = &state->stateFlags64.bits;
+    if (markQueued && (*flags & g_btlMain.skillQueue.queuedSkillMask)) {
+        return 0;
     }
-  }
-  return;
+    BtlCombatantEntryA *actor = FUN_003eaf20(state);
+    if (actor == NULL) {
+        return 0;
+    }
+    u32 skill = FUN_004c5da4(actor->unitIndex, markQueued);
+    if (skill == 0 || dataTable04FindById(skill) == NULL) {
+        return 0;
+    }
+    if (markQueued) {
+        *flags |= g_btlMain.skillQueue.queuedSkillMask;
+    }
+    return skill;
 }
-
-} /* extern "C" */
+}

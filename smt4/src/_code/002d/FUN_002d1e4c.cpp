@@ -8,7 +8,7 @@ int FUN_0021b0f0(void);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -44,7 +44,7 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c15fc(unsigned int);
 extern int gameGetMapBlock(void);
@@ -195,7 +195,7 @@ void FUN_002d1e4c(void)
       *(unsigned int *)(temp_v2 + 0xbc) = *(unsigned int *)(g_lmapScene + 0x50);
       *(float *)(temp_v2 + 0x20c) = temp_v20;
       *(float *)(temp_v2 + 0x210) = temp_v20;
-      FUN_00287b0c();
+      mathGetShortestAngleDelta();
       temp_v2 = DAT_004474f4;
       temp_v14 = temp_v13;
       if (temp_v13 < temp_v20) {
@@ -357,7 +357,7 @@ LAB_002d21d0:
   }
   if ((*(char *)(temp_v2 + 0xb0) == '\0') && (*(char *)(g_lmapScene + 0x6c) != '\0')) {
     temp_v16 = *(float *)(temp_v2 + 0x18);
-    FUN_00287b0c();
+    mathGetShortestAngleDelta();
     if (temp_v16 < temp_v20) {
       temp_v16 = -temp_v16;
     }
@@ -378,7 +378,7 @@ LAB_002d21d0:
   }
   DAT_004474fc = *(float *)(g_lmapScene + 0x50);
   temp_v15 = *(float *)(DAT_004474f4 + 0x18);
-  FUN_00287b0c();
+  mathGetShortestAngleDelta();
   temp_v22 = *(float *)(g_lmapScene + 0x1c);
   temp_v23 = *(float *)(g_lmapScene + 0x20);
   temp_v24 = *(float *)(g_lmapScene + 0x24);

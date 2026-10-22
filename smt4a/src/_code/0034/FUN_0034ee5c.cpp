@@ -1,55 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034ee5c` (_code @ 0x34ee5c, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Save eligibility-flag materialization and shared-global address formation differ. */
+#include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
+SaveSlotSelectionPrefixA *saveSlotFindSelected(void);
+s32 FUN_0019acdc(u16 selectionId, u32 mode);
+s32 uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
+s32 FUN_0020ad6c(SaveSlotTransitionPrefixA *ui, s32 state, s32 immediate);
 
-int uiSpriteSelectAnim(int, int);
-int FUN_0020ad6c(int, int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int saveSlotFindSelected(void);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-extern int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0020ad6c. */
-
-
-void FUN_0034ee5c(int param_1,int param_2,unsigned char param_3)
-
+void FUN_0034ee5c(SaveSlotTransitionPrefixA *ui, s32 inputCase, u8 option)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (param_2 == 0) {
-    *(unsigned char *)(param_1 + 0x38b5) = 1;
-  }
-  else {
-    *(unsigned char *)(param_1 + 0x38b5) = 0;
-  }
-  *(unsigned char *)(param_1 + 0x38b3) = 0;
-  *(unsigned int *)(param_1 + 0x3890) = 4;
-  *(unsigned char *)(param_1 + 0x4ba8) = 0;
-  temp_v0 = saveSlotFindSelected();
-  if ((temp_v0 != 0) &&
-     ((temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),1), temp_v1 == 1 ||
-      (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),1), temp_v0 == 4)))) {
-    *(unsigned char *)(param_1 + 0x4ba8) = 1;
-  }
-  uiSpriteSelectAnim(param_1 + 0x1344,0x1a);
-  uiSpriteSelectAnim(param_1 + 0x13d0,0x1a);
-  *(unsigned char *)(param_1 + 0x38b6) = param_3;
-  if (*(int *)(param_1 + 0x387c) == 0x17) {
-    *(unsigned int *)(param_1 + 0x3888) = 0x1f;
-    FUN_0020ad6c(param_1,0x18,1);
-    return;
-  }
-  FUN_0020ad6c(param_1,0x1f,1);
-  return;
-}
+    ui->zeroInputCase = inputCase == 0 ? 1 : 0;
+    ui->transitionFlag = 0;
+    ui->transitionMode = 4;
+    ui->selectedSlotEligible = 0;
 
-} /* extern "C" */
+    SaveSlotSelectionPrefixA *selected = saveSlotFindSelected();
+    if (selected != 0 &&
+        (FUN_0019acdc(selected->selectionId, 1) == 1 ||
+         FUN_0019acdc(selected->selectionId, 1) == 4)) {
+        ui->selectedSlotEligible = 1;
+    }
+
+    uiSpriteSelectAnim(&ui->firstSprite, 0x1a);
+    uiSpriteSelectAnim(&ui->secondSprite, 0x1a);
+    ui->option = option;
+    if (ui->currentState == 0x17) {
+        ui->pendingState = 0x1f;
+        FUN_0020ad6c(ui, 0x18, 1);
+        return;
+    }
+    FUN_0020ad6c(ui, 0x1f, 1);
+}
+}

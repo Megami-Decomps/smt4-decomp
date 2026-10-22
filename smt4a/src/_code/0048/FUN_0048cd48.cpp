@@ -1,46 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048cd48` (_code @ 0x48cd48, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sprite completion test uses an unsigned byte load instead of retail's signed-load address sequence and branch hint; 57 built versus 60 retail rows. */
+#include "ui/SelectionNotification.h"
 
-extern "C" {
+extern "C" void FUN_00163aa4(UiSpriteState *sprite, f32 delta);
+extern "C" void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 frame);
+extern "C" void FUN_0048a378(SelectionNotificationState *work);
+extern "C" s32 buttonHelpIsNotActive(void);
 
-int FUN_00163aa4(int);
-int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_0048a378(int);
-
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int buttonHelpIsNotActive(void);
-/* Supplied declaration required: FUN_0048a378. */
-
-
-void FUN_0048cd48(int param_1)
-
+extern "C" void FUN_0048cd48(SelectionNotificationState *work)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  if (*(int *)(param_1 + 8) == 0) {
-    uiSpriteSetImageKeyframe(param_1 + 0x11b8,3,0);
-    uiSpriteSetImageKeyframe(param_1 + 0x1244,5,0);
-    FUN_0048a378(param_1);
-    *(unsigned int *)(param_1 + 8) = 1;
-    return;
-  }
-  if (*(int *)(param_1 + 8) == 1) {
-    temp_v0 = 0;
-    do {
-      FUN_00163aa4(param_1 + temp_v0 * 0x8c + 0xc40);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 6);
-    FUN_00163aa4(param_1 + 0x112c);
-    FUN_00163aa4(param_1 + 0x10a0);
-    if ((*(char *)(param_1 + 0xf86) != '\0') && (temp_v0 = buttonHelpIsNotActive(), temp_v0 != 0)) {
-      *(unsigned int *)(param_1 + 4) = 2;
-      *(unsigned int *)(param_1 + 8) = 0;
+    if (work->phase == 0) {
+        uiSpriteSetImageKeyframe(&work->headings[0], 3, 0);
+        uiSpriteSetImageKeyframe(&work->headings[1], 5, 0);
+        FUN_0048a378(work);
+        work->phase = 1;
+        return;
     }
-  }
-  return;
+    if (work->phase == 1) {
+        for (s32 index = 0; index < 6; ++index) {
+            FUN_00163aa4(&work->entries[index], 1.0f);
+        }
+        FUN_00163aa4(&work->auxiliary[1], 1.0f);
+        FUN_00163aa4(&work->auxiliary[0], 1.0f);
+        if (work->entries[5].animationFlags.completed && buttonHelpIsNotActive()) {
+            work->state = 2;
+            work->phase = 0;
+        }
+    }
 }
-
-} /* extern "C" */

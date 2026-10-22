@@ -1,82 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002497f8` (_code @ 0x2497f8, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: category/rank keys are assigned to different callee-saved registers. */
+#include "gamedata/ItemSortRecord.h"
+#include "shard/PassiveSkill.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
+u32 idIsAbove400(u32 id);
+u32 FUN_0024c5a0(u32 id);
+u32 recordKindRank(u32 id);
+const ItemSortRecord* FUN_002ae164(u32 id);
+const GameUnitSortRecord* gameGetUnitRecord(u32 index);
 
-int FUN_002ae164(void);
-
-extern int FUN_0024c5a0(int);
-extern int recordKindRank(int);
-extern int gameGetUnitRecord(void);
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(int);
-
-
-int FUN_002497f8(int *param_1,int *param_2)
-
+// Order by descending category/rank, ascending secondary key, then descending skill/owner ids.
+s32 FUN_002497f8(const SkillListEntry* left, const SkillListEntry* right)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = 99;
-    temp_v6 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v0 = FUN_0024c5a0(*param_1);
-    temp_v6 = recordKindRank(*param_1);
-    temp_v1 = *param_1;
-    FUN_002ae164();
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x2c);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v5 = 99;
-    temp_v1 = 99;
-    temp_v3 = 0;
-  }
-  else {
-    temp_v5 = FUN_0024c5a0(*param_2);
-    temp_v1 = recordKindRank(*param_2);
-    temp_v2 = *param_2;
-    FUN_002ae164();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x2c);
-  }
-  temp_v5 = temp_v5 - temp_v0;
-  temp_v7 = 0;
-  if (temp_v5 == 0) {
-    temp_v5 = temp_v1 - temp_v6;
-    temp_v7 = temp_v5 == 0;
-  }
-  if (((temp_v7) && (temp_v5 = temp_v4 - temp_v3, temp_v5 == 0)) && (temp_v5 = *param_2 - *param_1, temp_v5 == 0))
-  {
-    if (param_1[1] < 0) {
-      temp_v4 = 0;
+    s32 leftCategory;
+    s32 leftRank;
+    u16 leftKey;
+    if (idIsAbove400(left->skillId) != 0) {
+        leftCategory = 99;
+        leftRank = 99;
+        leftKey = 0;
+    } else {
+        leftCategory = FUN_0024c5a0(left->skillId);
+        leftRank = recordKindRank(left->skillId);
+        leftKey = FUN_002ae164(left->skillId)->secondaryKey;
     }
-    else {
-      temp_v0 = gameGetUnitRecord();
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
+    s32 rightCategory;
+    s32 rightRank;
+    u16 rightKey;
+    if (idIsAbove400(right->skillId) != 0) {
+        rightCategory = 99;
+        rightRank = 99;
+        rightKey = 0;
+    } else {
+        rightCategory = FUN_0024c5a0(right->skillId);
+        rightRank = recordKindRank(right->skillId);
+        rightKey = FUN_002ae164(right->skillId)->secondaryKey;
     }
-    if (param_2[1] < 0) {
-      temp_v3 = 0;
+    s32 difference = rightCategory - leftCategory;
+    if (difference == 0) {
+        difference = rightRank - leftRank;
     }
-    else {
-      temp_v0 = gameGetUnitRecord();
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
+    if (difference != 0) {
+        return difference;
     }
-    temp_v5 = temp_v3 - temp_v4;
-  }
-  return temp_v5;
+    difference = leftKey - rightKey;
+    if (difference != 0) {
+        return difference;
+    }
+    difference = (s32)(right->skillId - left->skillId);
+    if (difference != 0) {
+        return difference;
+    }
+    u16 leftOwner = left->unit < 0 ? 0 : gameGetUnitRecord(left->unit)->id;
+    u16 rightOwner = right->unit < 0 ? 0 : gameGetUnitRecord(right->unit)->id;
+    return rightOwner - leftOwner;
 }
-
-} /* extern "C" */
+}

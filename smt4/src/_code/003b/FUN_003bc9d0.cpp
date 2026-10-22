@@ -9,7 +9,7 @@ int gfxObjectDestroy(...);
 int FUN_00298d50(...);
 int FUN_0029bb14(...);
 int asdMdlManagerCreateLoaded(...);
-int FUN_0029c2cc(...);
+void FUN_0029c2cc(...);
 int slotSetRequest(...);
 int FUN_002a0428(...);
 int modelSlotAttachChild(...);

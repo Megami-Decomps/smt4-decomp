@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00168770(void);
+int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_001835b4(int, int, unsigned int, int, int, int);
 
@@ -21,7 +21,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00168770. */
+/* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -86,7 +86,7 @@ void FUN_003b7960(int param_1,int param_2,int param_3,unsigned int param_4,unsig
       *(unsigned char *)(temp_v2 + 0x1330) = 0;
     }
   }
-  FUN_00168770();
+  renderPopStateStacks();
   return;
 }
 

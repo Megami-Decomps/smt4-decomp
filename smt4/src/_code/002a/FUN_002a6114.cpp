@@ -1,4 +1,3 @@
-/* NON_MATCHING: instructions match, but the final string-literal pool padding differs from the retail object. */
 #include "shard/S1AsdTexTable.h"
 
 extern "C" {
@@ -8,6 +7,7 @@ char *libc_strcat(char *dst, const char *src);
 u32 libc_strlen(const char *s);
 typedef void (*AsdLoadCallback)(void *userData);
 s32 asdLoadFileAsync(const char *path, s32 offset, u32 loadFlags, AsdLoadCallback callback, void *userData, s32 size);
+void FUN_00153068(void *userData);
 
 /* Build the entry's file path (directory + name + extension) and start its asynchronous load. */
 TexTableEntry *FUN_002a6114(TexTableEntry *entry, u32 mode)
@@ -55,7 +55,7 @@ TexTableEntry *FUN_002a6114(TexTableEntry *entry, u32 mode)
                 loadFlags |= 2;
             }
         }
-        asdLoadFileAsync(path, 0, loadFlags, (AsdLoadCallback)0x00153068, entry, 0x80);
+        asdLoadFileAsync(path, 0, loadFlags, FUN_00153068, entry, 0x80);
     }
     return entry;
 }

@@ -1,64 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005132e4` (_code @ 0x5132e4, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: audio decoder growth and interleaved output traversal use different pointer registers. */
+/* Expands compressed frames into an interleaved sample buffer, growing it when needed. */
+#include "common.h"
+
+struct AudioDecoderChannel {
+    const u8 *input;
+    s16 *output;
+    u8 unk008[0x1C8];
+};
+struct AudioFrameDecoder {
+    AudioDecoderChannel *channels;
+    s16 *buffer;
+    s32 capacity;
+    s32 byteCount;
+    u32 unk10;
+    s32 channelCount;
+};
+struct AudioAllocationHooks {
+    void *(*allocate)(u32 size);
+    void (*release)(void *memory);
+};
 
 extern "C" {
+extern AudioAllocationHooks DAT_00589510;
+void FUN_001df7a8(AudioDecoderChannel *channel);
 
-int FUN_001df7a8(int);
-
-typedef int romwright_code(...);
-extern romwright_code *DAT_00589510; /* 0x589510 */
-extern romwright_code *DAT_00589514; /* 0x589514 */
-
-/* Supplied declaration required: FUN_001df7a8. */
-
-
-unsigned int FUN_005132e4(int *param_1,int param_2,int param_3)
-
+u32 FUN_005132e4(AudioFrameDecoder *decoder, const u8 *input, s32 inputSize)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = (param_3 / 0x28) * 0x200;
-  param_1[3] = temp_v0;
-  if (temp_v0 - param_1[2] != 0 && param_1[2] <= temp_v0) {
-    param_1[2] = temp_v0;
-    if (param_1[1] != 0) {
-      (*DAT_00589514)();
+    s32 required = inputSize / 0x28 * 0x200;
+    decoder->byteCount = required;
+    if (required > decoder->capacity) {
+        decoder->capacity = required;
+        if (decoder->buffer != NULL) {
+            DAT_00589510.release(decoder->buffer);
+        }
+        decoder->buffer = (s16 *)DAT_00589510.allocate(decoder->capacity);
+        if (decoder->buffer == NULL) {
+            return 0;
+        }
     }
-    temp_v0 = (*DAT_00589510)(param_1[2]);
-    param_1[1] = temp_v0;
-    if (temp_v0 == 0) {
-      return 0;
+    s16 *output = decoder->buffer;
+    s32 frameCount = (decoder->byteCount >> decoder->channelCount) / 0x100;
+    for (s32 frame = 0; frame < frameCount; ++frame) {
+        for (s32 channel = 0; channel < decoder->channelCount; ++channel) {
+            decoder->channels[channel].input = input;
+            decoder->channels[channel].output = output + channel;
+            FUN_001df7a8(&decoder->channels[channel]);
+            input += 0x28;
+        }
+        output += decoder->channelCount * 0x100;
     }
-  }
-  temp_v3 = param_1[1];
-  temp_v4 = 0;
-  temp_v0 = param_1[3] >> (param_1[5] & 0xffU);
-  temp_v0 = (int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x18)) >> 8;
-  if (0 < temp_v0) {
-    do {
-      temp_v1 = param_1[5];
-      temp_v2 = 0;
-      if (temp_v2 < temp_v1) {
-        do {
-          *(int *)(*param_1 + temp_v2 * 0x1d0) = param_2;
-          *(int *)(*param_1 + temp_v2 * 0x1d0 + 4) = temp_v3 + temp_v2 * 2;
-          FUN_001df7a8(*param_1 + temp_v2 * 0x1d0);
-          temp_v1 = param_1[5];
-          temp_v2 = temp_v2 + 1;
-          param_2 = param_2 + 0x28;
-        } while (temp_v2 < temp_v1);
-      }
-      temp_v4 = temp_v4 + 1;
-      temp_v3 = temp_v3 + temp_v1 * 0x200;
-    } while (temp_v4 < temp_v0);
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

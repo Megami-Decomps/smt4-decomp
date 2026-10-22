@@ -1,51 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a2404` (_code @ 0x4a2404, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: confirmed-byte access does not reuse retail's selection pointer. */
+/* Updates the screen cursor, then finishes a confirmed selection once help is idle. */
+#include "shard/Shard004A.h"
 
 extern "C" {
+void FUN_00163aa4(void *selection, f32 scale);
+s32 vec2GetXInt(const void *selection);
+s32 vec2GetYInt(const void *selection);
+void pointConvertToFloat(f32 *position, s32 x, s32 y);
+s32 buttonHelpIsNotActive(void);
+void FUN_003343f0(s32 value);
+void FUN_0032cfe0(Screen4A *screen);
 
-int FUN_00163aa4(int);
-int FUN_0032cfe0(int);
-int FUN_003343f0(int);
-int pointConvertToFloat(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-extern int buttonHelpIsNotActive(void);
-/* Supplied declaration required: FUN_0032cfe0. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_004a2404(int param_1)
-
+void FUN_004a2404(Screen4A *screen)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0x55c;
-  *(unsigned short *)(param_1 + 0xa874) = 8;
-  FUN_00163aa4(temp_v2);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
-  if ((*(char *)(param_1 + 0x5e6) != '\0') && (temp_v2 = buttonHelpIsNotActive(), temp_v2 != 0)) {
-    FUN_003343f0(0);
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    pointConvertToFloat(param_1 + 200,0,0);
-    FUN_0032cfe0(param_1);
-    return;
-  }
-  return;
+    void *selection = screen->input.selection;
+    screen->unkA874 = 8;
+    FUN_00163aa4(selection, 1.0f);
+    s32 y = vec2GetYInt(selection);
+    s32 x = vec2GetXInt(selection);
+    pointConvertToFloat(screen->cursor.position, x, y);
+    if (screen->input.confirmed && buttonHelpIsNotActive()) {
+        FUN_003343f0(0);
+        screen->state = 2;
+        screen->unk18 = 0;
+        pointConvertToFloat(screen->cursor.position, 0, 0);
+        FUN_0032cfe0(screen);
+    }
 }
-
-} /* extern "C" */
+}

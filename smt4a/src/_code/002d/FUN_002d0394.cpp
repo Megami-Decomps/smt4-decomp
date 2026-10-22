@@ -1,56 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d0394` (_code @ 0x2d0394, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler saves input floats as paired doubles and hoists fewer proximity constants than retail. */
+#include "battle/btlView.h"
+#include "map/mapDepart.h"
 
 extern "C" {
+extern BattleViewState g_battleViewState;
+extern GameStateA g_gameState;
+f32 distSpatial(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
+f32 FUN_00384830(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
+void FUN_002d8614(s32 enabled, f32 x, f32 y, f32 z);
 
-int distSpatial(void);
-int FUN_002d8614(...);
-int FUN_00384830(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int DAT_005f0ca4; /* 0x5f0ca4 */
-extern unsigned int DAT_005f0ca8; /* 0x5f0ca8 */
-extern signed char DAT_005f0cc0; /* 0x5f0cc0 */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-
-/* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002d8614. */
-/* Supplied declaration required: FUN_00384830. */
-
-
-void FUN_002d0394(void)
-
+// Activate the camera navigation point while the player is close and facing it.
+void FUN_002d0394(f32 x, f32 y, f32 z, f32 heading)
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  float in_s0;
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  
-  temp_v2 = 90.0f;
-  temp_v1 = 80.0f;
-  if ((DAT_005f0ca4 == 0) && (DAT_005f0cc0 = '\0', DAT_005f1614 == '\0')) {
-    temp_v0 = in_s0;
-    distSpatial();
-    if ((in_s0 < temp_v2) && (FUN_00384830(), temp_v0 < temp_v1)) {
-      if (DAT_005f0cc0 != '\0') {
-        return;
-      }
-      DAT_005f0ca8 = 7;
-      DAT_005f0cc0 = '\x01';
-      FUN_002d8614();
+    if (g_battleViewState.unk28 == 0) {
+        g_battleViewState.navigationSetting = 0;
+        if (!g_gameState.inputBlocked) {
+            const BattleViewVec3 &point = g_battleViewState.camera.position;
+            if (distSpatial(x, y, z, point.x, point.y, point.z) < 90.0f &&
+                FUN_00384830(x, y, z, heading, point.x, point.y, point.z) < 80.0f) {
+                if (g_battleViewState.navigationSetting)
+                    return;
+                g_battleViewState.unk2c = 7;
+                g_battleViewState.navigationSetting = 1;
+                FUN_002d8614(1, point.x, point.y, point.z);
+            }
+            if (!g_battleViewState.navigationSetting)
+                FUN_002d8614(0, point.x, point.y, point.z);
+        }
     }
-    if (DAT_005f0cc0 == '\0') {
-      FUN_002d8614(0);
-      return;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

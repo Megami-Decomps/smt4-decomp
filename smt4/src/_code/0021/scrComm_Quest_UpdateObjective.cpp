@@ -9,7 +9,7 @@ int asdMemFreeIfNotNull(...);
 int FUN_00250d84(...);
 int messageForwardDefaultMode(...);
 int uiBindRecordRewardText(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_0029bbc8(void);
 int partyFindActiveSlotById(...);
 int FUN_0029ede8(...);
@@ -79,7 +79,7 @@ extern int FUN_0029022c(void);
 extern unsigned int FUN_002903f0(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern unsigned int scrGetArg(unsigned int);
 extern int messageMainGetChoiceResult(void);
@@ -269,7 +269,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
           temp_v2 = 10;
           FUN_002bd06c(temp_v0);
           libc_strcpy(&temp_v12,temp_v0);
-          FUN_00295660(8,&temp_v12);
+          textEncodeFontSlot(8,&temp_v12);
           FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
         }
       }
@@ -280,7 +280,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
         }
         FUN_002be650(temp_v0,1);
         libc_strcpy(&temp_v12,temp_v0);
-        FUN_00295660(0,&temp_v12);
+        textEncodeFontSlot(0,&temp_v12);
         FUN_0029ede8(0x18,*(unsigned int *)(temp_v6 + 0x170),0xffffffff,0);
       }
     }
@@ -290,7 +290,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       temp_v0 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
       FUN_002bd06c(temp_v0);
       libc_strcpy(&temp_v12,temp_v0);
-      FUN_00295660(0,&temp_v12);
+      textEncodeFontSlot(0,&temp_v12);
       FUN_0029ede8(0x18,*(unsigned int *)(temp_v3 + temp_v6 * 8 + 0x170),0xffffffff,0);
     }
     FUN_002bff50();
@@ -366,7 +366,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     temp_v6 = scrWorkGetValue(2);
     temp_v2 = gameGetPlayerName();
     libc_strcpy(&temp_v12,temp_v2);
-    FUN_00295660(0,&temp_v12);
+    textEncodeFontSlot(0,&temp_v12);
     if (temp_v6 >= 2) {
       temp_v5 = 0x3b;
     }

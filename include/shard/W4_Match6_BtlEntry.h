@@ -4,6 +4,8 @@
 
 #include "common.h"
 
+struct BtlActionRecord;
+
 #define BTL_ENTRY_COUNT 0x6D
 
 #define BTL_ENTRY_FLAG_ACTIVE   0x01
@@ -64,13 +66,42 @@ typedef struct BtlEntry {
 typedef char BtlEntryMaxHpOffsetCheck[__INTADDR__(&((BtlEntry *)0)->maxHp) == 0x1B6 ? 1 : -1];
 
 typedef struct BtlMainState {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
+    union {
+        /* 0x0000 */ u8 unk0000[0x1FC0];
+        struct {
+            u8 prefix[0x58];
+            /* 0x58 */ u32 job;
+        } editor;
+        struct {
+            u8 prefix[0x760];
+            /* 0x760 */ s32 unitIndex;
+        } talk;
+        struct {
+            u8 prefix[0x1E88];
+            /* 0x1E88 */ void *file;
+        } arrangement;
+        struct {
+            u8 unk0000[0x1E98];
+            /* 0x1E98 */ struct BtlActionRecord *records;
+            /* 0x1E9C */ u8 padding1E9C;
+            /* 0x1E9D */ u8 completedCount;
+        } actions;
+    };
     /* 0x1FC0 */ BtlEntry *entries; /* BTL_ENTRY_COUNT entries */
     /* 0x1FC4 */ u8 unk1fc4[0xC];
     /* 0x1FD0 */ s64 pendingAction;
-    /* 0x1FD8 */ u8 unk1fd8[0x44A0 - 0x1FD8];
+    union {
+        /* 0x1FD8 */ u8 unk1fd8[0x44A0 - 0x1FD8];
+        /* 0x1FD8 */ s64 secondaryPendingAction;
+    };
     /* 0x44A0 */ u32 battleFlags;
-    /* 0x44A4 */ u8 unk44a4[0x49C0 - 0x44A4];
+    union {
+        /* 0x44A4 */ u8 unk44a4[0x49C0 - 0x44A4];
+        struct {
+            u8 unk44a4[4];
+            /* 0x44A8 */ u32 flags;
+        } editorControl;
+    };
     /* 0x49C0 */ s32 selectedGroup;  /* 0xff when no group is selected */
     /* 0x49C4 */ u8 unk49c4;
     /* 0x49C5 */ s8 hasActiveEntry;
@@ -84,5 +115,19 @@ typedef char BtlMainStateBattleFlagsOffsetCheck[
     __INTADDR__(&((BtlMainState *)0)->battleFlags) == 0x44A0 ? 1 : -1];
 typedef char BtlMainStateSelectedGroupOffsetCheck[
     __INTADDR__(&((BtlMainState *)0)->selectedGroup) == 0x49C0 ? 1 : -1];
+typedef char BtlMainStateSecondaryPendingActionOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->secondaryPendingAction) == 0x1FD8 &&
+    sizeof(BtlMainState) == 0x49C8 ? 1 : -1];
+typedef char BtlMainStateActionRecordsOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->actions.records) == 0x1E98 ? 1 : -1];
+typedef char BtlMainStateArrangementFileOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->arrangement.file) == 0x1E88 ? 1 : -1];
+typedef char BtlMainStateTalkUnitOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->talk.unitIndex) == 0x760 ? 1 : -1];
+typedef char BtlMainStateCompletedCountOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->actions.completedCount) == 0x1E9D ? 1 : -1];
+typedef char BtlMainStateEditorOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->editor.job) == 0x58 &&
+    __INTADDR__(&((BtlMainState *)0)->editorControl.flags) == 0x44A8 ? 1 : -1];
 
 #endif

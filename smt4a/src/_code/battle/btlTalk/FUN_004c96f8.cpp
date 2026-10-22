@@ -1,46 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c96f8` (_code @ 0x4c96f8, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pending-byte and loader-state constant stores are scheduled differently. */
+#include "battle/btlTalk.h"
+#include <stddef.h>
 
 extern "C" {
+void asdMemFree(void *data);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+void asdLoadFileAsyncSimple(const char *name, void **output, s32 flags);
+extern const char *DAT_0057a7d8[];
+extern const char DAT_0052a9d8[]; // "battle/talk/TalkTone%s.mbm"
 
-int textFormatBuffer(...);
-int asdMemFree(...);
-int asdLoadFileAsyncSimple(...);
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-
-
-unsigned int FUN_004c96f8(int param_1,int param_2)
-
+bool FUN_004c96f8(BtlTalkA *work, s32 tone)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [128];
-  
-  if (*(char *)(param_1 + 0x145) != '\0') {
-    if (*(int *)(param_1 + 0x18) == 2) {
-      *(unsigned char *)(param_1 + 0x145) = 0;
-      return 1;
+    // The public Apocalypse prefix ends before the tone-loader fields.
+    struct ToneLoaderView {
+        u8 unk00[0x14];
+        void *data;
+        u32 state;
+        u8 unk1c[0x129];
+        u8 pending;
+        u8 unk146[2];
+        s32 tone;
+    };
+    typedef char ToneLoaderLayoutCheck[offsetof(ToneLoaderView, pending) == 0x145 && offsetof(ToneLoaderView, tone) == 0x148 ? 1 : -1];
+    ToneLoaderView *loader = (ToneLoaderView *)work;
+    char path[128];
+    if (loader->pending != 0) {
+        if (loader->state == 2) {
+            loader->pending = 0;
+            return 1;
+        }
+    } else if (loader->state == 2) {
+        if (loader->tone == tone) {
+            return 1;
+        }
+        if (loader->data != NULL) {
+            asdMemFree(loader->data);
+            loader->data = NULL;
+        }
+        loader->tone = tone;
+        textFormatBuffer(path, DAT_0052a9d8, DAT_0057a7d8[tone]);
+        asdLoadFileAsyncSimple(path, &loader->data, 1);
+        loader->pending = 1;
+        loader->state = 3;
+        return 0;
     }
-  }
-  else if (*(int *)(param_1 + 0x18) == 2) {
-    if (*(int *)(param_1 + 0x148) == param_2) {
-      return 1;
-    }
-    if (*(int *)(param_1 + 0x14) != 0) {
-      asdMemFree();
-      *(unsigned int *)(param_1 + 0x14) = 0;
-    }
-    *(int *)(param_1 + 0x148) = param_2;
-    textFormatBuffer(temp_v0,"battle/talk/TalkTone%s.mbm",*(unsigned int *)(param_2 * 4 + 0x57a7d8));
-    asdLoadFileAsyncSimple(temp_v0,param_1 + 0x14,1);
-    *(unsigned char *)(param_1 + 0x145) = 1;
-    *(unsigned int *)(param_1 + 0x18) = 3;
     return 0;
-  }
-  return 0;
 }
-
-} /* extern "C" */
+}

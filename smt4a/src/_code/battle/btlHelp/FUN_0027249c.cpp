@@ -1,50 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027249c` (_code @ 0x27249c, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation result initialization uses r2 for the global store instead of retail r1. */
+#include "battle/btlHelp.h"
+#include "AsdSDK/AsdDebug.h"
 
+// This view includes the parent handle used by task creation.
+struct BtlHelpOwnerA {
+    u32 parent; // 0x00
+    u8 unk04[0x6c];
+    u32 helpJob; // 0x70
+};
 extern "C" {
+s32 jobIsValid(u32 job);
+u32 taskCreateDraw(const char *name, s32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), void *owner, u32 parent);
+void FUN_0024bcac();
+void btlHelpRelease();
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 track);
+extern BtlHelpListA *g_btlHelp;
 
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char LAB_0024bcac; /* 0x24bcac */
-extern unsigned char LAB_0027253c; /* 0x27253c */
-extern int btlHelpRelease(...); /* 0x2deeb8 */
-extern unsigned int *g_btlHelp; /* 0x5738e8 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern int jobIsValid(unsigned int);
-
-
-void FUN_0027249c(unsigned int *param_1)
-
+// Start the help calculation job and initialize its entry list if it is not running.
+void FUN_0027249c(BtlHelpOwnerA *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int *puVar3;
-  
-  temp_v0 = jobIsValid(param_1[0x1c]);
-  if (temp_v0 == 0) {
-    puVar2 = &LAB_0027253c;
-    taskCreateDraw(&LAB_0027253c,4,0,0,&LAB_0024bcac,btlHelpRelease,param_1,*param_1);
-    param_1[0x1c] = (unsigned int)puVar2;
-    puVar3 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0xc,1);
-    g_btlHelp = puVar3;
-    *puVar3 = 0;
-    puVar3[1] = 0;
-    puVar3[2] = 0;
-  }
-  return;
+    if (!jobIsValid(owner->helpJob)) {
+        owner->helpJob = taskCreateDraw("btlHelp Calc", 4, 0, 0, FUN_0024bcac, btlHelpRelease, owner, owner->parent);
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlHelp.cpp", 1195);
+        g_btlHelp = (BtlHelpListA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(BtlHelpListA), 1);
+        g_btlHelp->head = NULL;
+        g_btlHelp->tail = NULL;
+        g_btlHelp->count = 0;
+    }
 }
-
-} /* extern "C" */
+}

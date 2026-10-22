@@ -10,7 +10,7 @@ int FUN_002328b4(void);
 int uiOwnerUpdateAnimationChannels(void);
 int messageMainSetTargetFlags(int);
 int FUN_00288e68(int);
-int FUN_00295660(int, unsigned char [36]);
+int textEncodeFontSlot(int, unsigned char [36]);
 int scrScriptProcessStartEntry(unsigned int, int);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
@@ -46,7 +46,7 @@ extern int FUN_00262cb0(unsigned short);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00288e68. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -116,7 +116,7 @@ void FUN_003abed8(int param_1)
       FUN_00288e68(*(unsigned short *)(temp_v5 + temp_v1 * 0x20 + 4));
       temp_v2 = aocIndexValueOrDefault();
       libc_strcpy(temp_v9,temp_v2);
-      FUN_00295660(0x14,temp_v9);
+      textEncodeFontSlot(0x14,temp_v9);
       FUN_0029ede8(0x18,temp_v6,0xffffffff,0);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),8);
       messageMainSetTargetFlags(1);

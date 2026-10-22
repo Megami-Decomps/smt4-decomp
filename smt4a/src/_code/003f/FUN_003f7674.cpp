@@ -8,7 +8,7 @@ int textFormatBuffer(unsigned char [76], unsigned char *, int);
 int FUN_00162790(int, int, int, int);
 int efctSetSpeed(void);
 int FUN_0018408c(int, int);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_0019e52c(unsigned int);
 int FUN_003f533c(...);
 int FUN_003f6cc0(...);
@@ -35,7 +35,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019e52c. */
 /* Supplied declaration required: FUN_003f533c. */
 /* Supplied declaration required: FUN_003f6cc0. */
@@ -98,7 +98,7 @@ void FUN_003f7674(int param_1,int param_2,int param_3)
   FUN_003f707c(param_1,param_2,param_3,0xd3,0x3e,0x47,0x4c,0x4f);
   temp_v5 = 0.26f;
   temp_v4 = *(int *)(param_1 + 0x5e0) + 4;
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   efctSetSpeed();
   temp_v2 = FUN_001834a4(0x31,0x46);
   FUN_0018408c(temp_v4,3);

@@ -1,63 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002319e0` (_code @ 0x2319e0, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: exploration bounds merging and bit-test shift registers differ. */
+#include "shard/SaveWork.h"
 
-extern "C" {
+extern "C" SaveWork *gameGetMapBlock(void);
 
-extern int gameGetMapBlock(void);
-
-
-unsigned char FUN_002319e0(int param_1,int param_2,int param_3)
-
+/* Test one cell of the selected five-by-seven exploration grid. */
+extern "C" bool FUN_002319e0(s32 region, s32 x, s32 y)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = gameGetMapBlock();
-  temp_v1 = param_3 * 5 + param_2;
-  temp_v2 = temp_v1 % 8;
-  temp_v1 = (int)(temp_v1 + ((unsigned int)(temp_v1 >> 0x1f) >> 0x1d)) >> 3;
-  if (param_1 != 0x65) {
-    if (param_1 != 0x66) {
-      if ((((param_1 != 0x67) || (param_2 < 0)) || (param_2 >= 5)) ||
-         ((param_3 < 0 || (param_3 >= 7)))) {
-        return 0;
-      }
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + temp_v1 + 0xd8c) & (1 << (temp_v2 & 0xff));
+    /* The exploration masks lie beyond the recovered SaveWork prefix. */
+    struct MapExplorationFlags {
+        u8 prefix[0xD7C];
+        u8 regions[3][8];
+    };
+    typedef char RegionOffsetCheck[offsetof(MapExplorationFlags, regions) == 0xD7C ? 1 : -1];
+    MapExplorationFlags *flags = reinterpret_cast<MapExplorationFlags *>(gameGetMapBlock());
+    s32 cell = y * 5 + x;
+    s32 byte = cell / 8;
+    s32 bit = cell % 8;
+    switch (region) {
+    case 101:
+        if (x < 0 || x >= 5 || y < 0 || y >= 7) {
+            return false;
+        }
+        return (flags->regions[0][byte] & (1 << (u8)bit)) != 0;
+    case 102:
+        if (x < 0 || x >= 5 || y < 0 || y >= 7) {
+            return false;
+        }
+        return (flags->regions[1][byte] & (1 << (u8)bit)) != 0;
+    case 103:
+        if (x < 0 || x >= 5 || y < 0 || y >= 7) {
+            return false;
+        }
+        return (flags->regions[2][byte] & (1 << (u8)bit)) != 0;
     }
-    else {
-      if (param_2 < 0) {
-        return 0;
-      }
-      if (param_2 >= 5) {
-        return 0;
-      }
-      if (param_3 < 0) {
-        return 0;
-      }
-      if (param_3 >= 7) {
-        return 0;
-      }
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + temp_v1 + 0xd84) & (1 << (temp_v2 & 0xff));
-    }
-  }
-  else {
-    if (param_2 < 0) {
-      return 0;
-    }
-    if (param_2 >= 5) {
-      return 0;
-    }
-    if (param_3 < 0) {
-      return 0;
-    }
-    if (param_3 >= 7) {
-      return 0;
-    }
-    temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + temp_v1 + 0xd7c) & (1 << (temp_v2 & 0xff));
-  }
-  return temp_v2 != 0;
+    return false;
 }
-
-} /* extern "C" */

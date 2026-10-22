@@ -112,7 +112,7 @@ extern int s4LoadIsActive(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00283d74. */
 extern int recordGetModeForId(int);
-extern int FUN_0028a230(unsigned int *);
+extern int menuAreModeTexturesLoaded(unsigned int *);
 /* Supplied declaration required: FUN_002c7150. */
 extern int jyoucyuGetLevel(void);
 extern int FUN_002e07f4(void);
@@ -259,7 +259,7 @@ unsigned int FUN_0029f2fc(void)
 LAB_0029f580:
     switch(puVar4[0x1f]) {
     case 0:
-      temp_v5 = FUN_0028a230(puVar4);
+      temp_v5 = menuAreModeTexturesLoaded(puVar4);
       if (temp_v5 == 0) break;
       *(unsigned char *)(puVar4 + 0x18) = 1;
       FUN_0022677c(0,0xff);
@@ -375,7 +375,7 @@ LAB_0029f9fc:
 LAB_0029f848:
       switch(puVar4[0x1f]) {
       case 0:
-        temp_v5 = FUN_0028a230(puVar4);
+        temp_v5 = menuAreModeTexturesLoaded(puVar4);
         if (temp_v5 == 0) goto LAB_002a0858;
         *(unsigned char *)(puVar4 + 0x18) = 1;
         FUN_003d54f8(0,0xf);
@@ -500,7 +500,7 @@ LAB_0029fb00:
     FUN_003c4f28(DAT_00589170);
     break;
   case 8:
-    temp_v5 = FUN_0028a230(DAT_00589170);
+    temp_v5 = menuAreModeTexturesLoaded(DAT_00589170);
     if (temp_v5 != 0) {
       temp_v5 = FUN_001834a4(0x2a,4);
       puVar4[0x41] = 4;

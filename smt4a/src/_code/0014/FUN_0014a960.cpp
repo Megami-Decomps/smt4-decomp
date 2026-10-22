@@ -1,51 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014a960` (_code @ 0x14a960, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: viewport constants, target selection and UV-ratio VFP save grouping differ from retail. */
+#include "camp/RenderCtx.h"
 
+struct FrameDrawTarget {
+    u8 unk00[0x14];
+    s32 width, height;
+    u8 unk1c[0x20];
+    u32 enabled, active;
+};
+// This draw view reaches beyond the shared frame-texture work prefix.
+struct FrameDrawWork {
+    u32 unk0000;
+    FrameDrawTarget *primary, *secondary;
+    u8 unk000c[0x1443];
+    u8 halfHeight;
+    u8 unk1450;
+    u8 useSecondary;
+    u8 unk1452[0x2a];
+    u32 color;
+};
 extern "C" {
+extern FrameDrawWork *g_frameTex;
+extern RenderCtxA *g_renderCtx;
+void FUN_0016c4b8(RenderCtxA *context, f32 logicalWidth, f32 width, f32 height);
+void FUN_0019e3d0(u32 color0, u32 color1, u32 color2, u32 color3,
+    f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+    f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
+    f32 u0, f32 v0, f32 u1, f32 v1, f32 u2, f32 v2, f32 u3, f32 v3);
 
-int FUN_0016c4b8(unsigned int);
-int FUN_0019e3d0(unsigned int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int g_frameTex; /* 0x57f65c */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0019e3d0. */
-
-
-void FUN_0014a960(int param_1)
-
+// Draw the selected frame target as a screen-sized quad with dimensions-derived texture coordinates.
+void FUN_0014a960(s32 mode)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_fpscr;
-  
-  temp_v1 = *(unsigned int *)(g_frameTex + 0x147c);
-  if ((param_1 == 0) && (*(char *)(g_frameTex + 0x1451) != '\0')) {
-    temp_v0 = *(int *)(g_frameTex + 8);
-  }
-  else {
-    temp_v0 = *(int *)(g_frameTex + 4);
-  }
-  *(unsigned int *)(temp_v0 + 0x3c) = 1;
-  *(unsigned int *)(temp_v0 + 0x40) = 1;
-  VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0016c4b8(g_renderCtx);
-  FUN_0019e3d0(temp_v1);
-  return;
+    FrameDrawWork *work = g_frameTex;
+    f32 logicalWidth = work->halfHeight ? 240.0f : 480.0f;
+    u32 color = work->color;
+    FrameDrawTarget *target = mode == 0 && work->useSecondary ? work->secondary : work->primary;
+    target->enabled = 1;
+    target->active = 1;
+    f32 width = (f32)target->width, height = (f32)target->height;
+    f32 u = logicalWidth / width, v = 400.0f / height;
+    FUN_0016c4b8(g_renderCtx, logicalWidth, width, height);
+    FUN_0019e3d0(color, color, color, color,
+        0.0f, 0.0f, 0.0f, 400.0f, 0.0f, 0.0f,
+        0.0f, 240.0f, 0.0f, 400.0f, 240.0f, 0.0f,
+        u, 0.0f, u, v, 0.0f, 0.0f, 0.0f, v);
 }
-
-} /* extern "C" */
+}

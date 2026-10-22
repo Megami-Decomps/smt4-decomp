@@ -1,60 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a9008` (_code @ 0x1a9008, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial map-global load/prologue ordering differs; the model-creation body matches. */
+#include "map/mapIf.h"
+#include "map/mapDepart.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
+extern MapIfGlobals g_mapIf;
+extern GameState g_gameState;
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
+void FUN_002a0428(AsdMdlObject *model, u32 enabled);
+void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
+void FUN_0028c618(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, int);
-int asdMdlManagerCreateLoaded(unsigned char [128], int);
-int FUN_002a0428(void);
-int textFormatBuffer(...);
-
-extern unsigned char LAB_001a90cc; /* 0x1a90cc */
-extern unsigned char LAB_001a90ec; /* 0x1a90ec */
-extern int g_mapIf; /* 0x447a78 */
-extern int g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: textFormatBuffer. */
-
-
-void FUN_001a9008(void)
-
+void FUN_001a9008(f32 x, f32 y, f32 z, f32 heading)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 9 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned char temp_v1 [128];
-  
-  temp_v0 = g_mapIf;
-  puVar2 = temp_v1;
-  *(unsigned char *)(g_mapIf + 0xcbd0) = 1;
-  *(unsigned int *)(temp_v0 + 0xcbd4) = 0;
-  *(unsigned int *)(temp_v0 + 0xcbd8) = 0;
-  *(unsigned int *)(temp_v0 + 0xcbdc) = in_s0;
-  *(unsigned int *)(temp_v0 + 0xcbe0) = in_s1;
-  *(unsigned int *)(temp_v0 + 0xcbe4) = in_s2;
-  *(unsigned int *)(temp_v0 + 0xcbe8) = in_s3;
-  if (g_gameState != 0x18) {
-    textFormatBuffer(temp_v1,&LAB_001a90cc,g_gameState,g_gameState);
-  }
-  else {
-    textFormatBuffer(temp_v1,&LAB_001a90ec);
-  }
-  asdMdlManagerCreateLoaded(temp_v1,7);
-  *(unsigned char **)(temp_v0 + 0xcbec) = puVar2;
-  FUN_002a0428();
-  nodeSetTranslation(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0,temp_v0 + 0xcbdc);
-  FUN_0028c618(*(unsigned int *)(*(int *)(temp_v0 + 0xcbec) + 8),0);
-  return;
+    // The model pointer follows the shared fast-model state, without growing it.
+    struct FastModelWorkView {
+        MapIfFastModelState state;
+        AsdMdlObject *model;
+    };
+    typedef char FastModelWorkLayoutCheck[offsetof(FastModelWorkView, model) == 0x1c ? 1 : -1];
+    FastModelWorkView *work = (FastModelWorkView *)&g_mapIf.state->fastModel;
+    char path[128];
+    work->state.active = 1;
+    work->state.first = 0;
+    work->state.second = 0;
+    work->state.position[0] = x;
+    work->state.position[1] = y;
+    work->state.position[2] = z;
+    work->state.heading = heading;
+    if (g_gameState.unk000 == 24) {
+        textFormatBuffer(path, "map/all/m099_fast.bam");
+    } else {
+        textFormatBuffer(path, "map/m%03d/m%03d_fast.bam", g_gameState.unk000, g_gameState.unk000);
+    }
+    work->model = asdMdlManagerCreateLoaded(path, 7);
+    FUN_002a0428(work->model, 1);
+    nodeSetTranslation(work->model->node, 0, work->state.position);
+    FUN_0028c618(work->model->node, 0, 0.0f, work->state.heading, 0.0f);
 }
-
-} /* extern "C" */
+}

@@ -12,7 +12,7 @@ int mtx44TransformPosition(...);
 int refCountIncrement(...);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
-int FUN_00291644(...);
+int gfxResolveTimedTextureFrame(...);
 int FUN_002b3c9c(...);
 int FUN_002ff7ac(unsigned short *, int, int);
 int FUN_0034f8b4(...);
@@ -142,7 +142,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
-/* Supplied declaration required: FUN_00291644. */
+/* Supplied declaration required: gfxResolveTimedTextureFrame. */
 /* Supplied declaration required: FUN_002b3c9c. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002ff7ac. */
@@ -333,7 +333,7 @@ void FUN_003516e4(int param_1)
     refCountIncrement(temp_v77);
   }
   else if (*(int *)(param_1 + 0x140) != 0) {
-    FUN_00291644(*(int *)(param_1 + 0x140),temp_v4,&temp_v82);
+    gfxResolveTimedTextureFrame(*(int *)(param_1 + 0x140),temp_v4,&temp_v82);
     temp_v68 = VectorFloatToUnsigned(temp_v83,3);
     temp_v89 = VectorFloatToUnsigned(temp_v84,3);
     temp_v29 = 0;

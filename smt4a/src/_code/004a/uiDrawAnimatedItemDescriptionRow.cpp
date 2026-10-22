@@ -24,7 +24,7 @@ extern RenderCtx *g_renderCtx;
 extern const char DAT_0052b4b4[];
 extern const char DAT_0052b4c4[];
 SpriteInfo *FUN_001834a4(s32 group, s32 index);
-f32 FUN_001879d0(RenderCtx *context, f32 value);
+f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 void FUN_004abc68(ItemRowContext *context, s32 x, s32 y, s32 label);
@@ -45,7 +45,7 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
         return;
     s32 spacing = FUN_001834a4(12, 130)->bounds.height & 0x7fff;
     SpriteInfo *placement = FUN_001834a4(12, placementIndex + 135);
-    s32 horizontalOffset = static_cast<s32>(FUN_001879d0(g_renderCtx, 0.26f));
+    s32 horizontalOffset = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
     ItemRowAnimation *row = &context->rows[rowIndex];
     s32 rowX = vec2GetXInt(row->position);
     s32 rowY = vec2GetYInt(row->position);

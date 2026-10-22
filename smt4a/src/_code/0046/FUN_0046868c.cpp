@@ -6,7 +6,7 @@ extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001835b4(...);
-int FUN_001879d0(unsigned int);
+int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002a1850(float *, int, unsigned int, float *);
 int messageGetActiveValue(int);
 int VectorSignedToFloat(...);
@@ -35,7 +35,7 @@ extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(void);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: messageGetActiveValue. */
 
@@ -72,7 +72,7 @@ void FUN_0046868c(int param_1,unsigned int param_2,int param_3)
   temp_v7 = 0.31f;
   temp_v5 = (int)**(short **)(temp_v1 + 0xc);
   temp_v0 = (*(short **)(temp_v1 + 0xc))[1];
-  FUN_001879d0(g_renderCtx);
+  renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v12 = (unsigned long long)(unsigned int)(int)temp_v7 << 0x20;
   temp_v4 = 0;
   do {

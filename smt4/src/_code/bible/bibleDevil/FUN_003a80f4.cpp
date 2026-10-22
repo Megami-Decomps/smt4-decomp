@@ -8,7 +8,7 @@ int FUN_0022d434(int);
 int panelSetScrollPosition(int, int, int);
 int FUN_00232848(void);
 int FUN_00233240(int, int);
-int FUN_0026c57c(void);
+int uniteLoadPreviewRoomModel(void);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
 int FUN_0029ee6c(int, int);
@@ -31,7 +31,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
 extern int flaggedValueHolderGetTotal(int);
 extern int FUN_00240d5c(int);
-/* Supplied declaration required: FUN_0026c57c. */
+/* Supplied declaration required: uniteLoadPreviewRoomModel. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -82,7 +82,7 @@ void FUN_003a80f4(int param_1)
       *(unsigned int *)(param_1 + 0x14) = 0xb;
       *(unsigned int *)(param_1 + 0x18) = 0;
       FUN_00232848();
-      FUN_0026c57c();
+      uniteLoadPreviewRoomModel();
       return;
     }
     *(unsigned int *)(param_1 + 0x14) = 2;

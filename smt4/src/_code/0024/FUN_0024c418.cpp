@@ -1,47 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024c418` (_code @ 0x24c418, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: octant block layout, phase-constant materialization, and VFP allocation differ. */
+#include "common.h"
 
-extern "C" {
+extern "C" f32 FUN_002378fc(f32 ratio);
 
-int FUN_002378fc(void);
-
-/* Supplied declaration required: FUN_002378fc. */
-
-
-void FUN_0024c418(void)
-
+// Signed planar heading, with 256 angle units per turn.
+extern "C" f32 FUN_0024c418(f32 y, f32 x)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  float in_s0;
-  float in_s1;
-  
-  if (in_s1 != 0.0f || in_s0 != 0.0f) {
-    if (in_s1 >= 0.0f) {
-      if (in_s0 >= 0.0f) {
-        if (in_s0 <= in_s1) {
-          FUN_002378fc();
-          return;
+    if (x == 0.0f && y == 0.0f) {
+        return 0.0f;
+    }
+    const f32 quarterTurn = 64.0f;
+    const f32 halfTurn = 128.0f;
+    f32 denominator;
+    f32 offset = 0.0f;
+    bool reflected;
+    f32 oppositeY = -y;
+    // Fold the point into its principal octant; x becomes the minor-axis coordinate.
+    if (x >= 0.0f) {
+        if (y >= 0.0f) {
+            if (x >= y) {
+                denominator = x;
+                x = y;
+                reflected = false;
+            } else {
+                denominator = y;
+                offset = quarterTurn;
+                reflected = true;
+            }
+        } else {
+            if (x >= oppositeY) {
+                denominator = x;
+                x = oppositeY;
+                reflected = true;
+            } else {
+                denominator = oppositeY;
+                offset = -quarterTurn;
+                reflected = false;
+            }
         }
-      }
-      else if (in_s1 < -in_s0) {
-        FUN_002378fc();
-        return;
-      }
+    } else {
+        x = -x;
+        if (y >= 0.0f) {
+            if (x >= y) {
+                denominator = x;
+                x = y;
+                offset = halfTurn;
+                reflected = true;
+            } else {
+                denominator = y;
+                offset = quarterTurn;
+                reflected = false;
+            }
+        } else {
+            if (x >= oppositeY) {
+                denominator = x;
+                x = oppositeY;
+                offset = -halfTurn;
+                reflected = false;
+            } else {
+                denominator = oppositeY;
+                offset = -quarterTurn;
+                reflected = true;
+            }
+        }
     }
-    else if (in_s0 >= 0.0f) {
-      if (-in_s1 < in_s0) {
-        FUN_002378fc();
-        return;
-      }
+    if (reflected) {
+        return offset - FUN_002378fc(x / denominator);
     }
-    else if (-in_s0 <= -in_s1) {
-      FUN_002378fc();
-      return;
-    }
-    FUN_002378fc();
-  }
-  return;
+    return FUN_002378fc(x / denominator) + offset;
 }
-
-} /* extern "C" */

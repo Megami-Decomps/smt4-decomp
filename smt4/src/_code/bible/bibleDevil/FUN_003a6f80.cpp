@@ -9,8 +9,8 @@ int FUN_002328b4(void);
 int FUN_00233240(int, int);
 int FUN_00233818(int);
 int ifTouchRegionClearAll(unsigned int);
-int FUN_0026c57c(void);
-int FUN_00295660(int, int [388]);
+int uniteLoadPreviewRoomModel(void);
+int textEncodeFontSlot(int, int [388]);
 int scrScriptProcessStartEntry(...);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
@@ -38,11 +38,11 @@ extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: ifTouchRegionClearAll. */
 extern int inputIsQuestConfirmPressed(void);
 extern int inputIsQuestCancelPressed(void);
-/* Supplied declaration required: FUN_0026c57c. */
+/* Supplied declaration required: uniteLoadPreviewRoomModel. */
 extern int gameGetNavigationState(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -53,7 +53,7 @@ extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_002a0cc8. */
 extern unsigned int partyMemberFindById(unsigned short);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned int FUN_002bce30(unsigned int, unsigned int);
+extern unsigned int demonGetRaceLabel(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: libc_strcpy. */
 
@@ -112,10 +112,10 @@ void FUN_003a6f80(int param_1)
     temp_v4 = temp_v6;
     FUN_002bd06c(temp_v6);
     libc_strcpy(temp_v10,temp_v4);
-    FUN_00295660(8,temp_v10);
-    temp_v5 = FUN_002bce30(temp_v6,1);
+    textEncodeFontSlot(8,temp_v10);
+    temp_v5 = demonGetRaceLabel(temp_v6,1);
     libc_strcpy(temp_v10,temp_v5);
-    FUN_00295660(0x10,temp_v10);
+    textEncodeFontSlot(0x10,temp_v10);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),6);
     FUN_002a0cc8(1);
     *(unsigned int *)(param_1 + 0x14) = 7;
@@ -134,7 +134,7 @@ void FUN_003a6f80(int param_1)
       *(unsigned int *)(param_1 + 0x14) = 0xb;
       *(unsigned int *)(param_1 + 0x18) = 0;
       FUN_00232848();
-      FUN_0026c57c();
+      uniteLoadPreviewRoomModel();
       return;
     }
     if (temp_v9 != 0) {

@@ -1,47 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00266fac` (_code @ 0x266fac, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: spatial-sound VFP allocation and position-to-target copy loads differ from retail. */
+#include "common.h"
 
+struct MapHudAnimation {
+    u8 unk00[0x30];
+    f32 frame;
+    u8 unk34[0x28];
+    f32 position[3]; /* 0x5C */
+    f32 target[3]; /* 0x68 */
+    f32 targetFrame;
+    u8 unk78[0x118];
+    s32 id; /* 0x190 */
+};
+struct MapHudSelection {
+    u8 unk000[0x16];
+    s8 mode;
+    u8 unk017[0x25];
+    MapHudAnimation animation; /* 0x3C */
+};
+struct DeferredMapModelPosition {
+    u8 unk00[0x1C];
+    f32 position[3];
+    u8 unk28[0x10];
+};
 extern "C" {
-
-int FUN_00291e40(int);
-
-extern int g_mapIf; /* 0x447a78 */
-extern int g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: FUN_00291e40. */
-
-
-void FUN_00266fac(int param_1,int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = g_mapIf;
-  temp_v1 = (int)*(char *)(g_mapIf + 0x16);
-  temp_v2 = temp_v1 == param_1;
-  if (temp_v2) {
-    temp_v1 = *(int *)(g_mapIf + 0x1cc);
-  }
-  if ((!temp_v2 || temp_v1 != param_2) && (*(char *)(g_mapIf + 0x16) = (char)param_1, param_1 != 0)
-     ) {
-    *(int *)(temp_v0 + 0x1cc) = param_2;
-    if (g_gameState >= 101) {
-      FUN_00291e40(0x10001fd);
-    }
-    *(unsigned int *)(temp_v0 + 0x98) = 0;
-    *(unsigned int *)(temp_v0 + 0x9c) = 0x41a00000;
-    *(unsigned int *)(temp_v0 + 0xa0) = 0;
-    *(unsigned int *)(temp_v0 + 0x6c) = 0;
-    *(unsigned int *)(temp_v0 + 0xb0) = 0;
-    *(unsigned int *)(temp_v0 + 0xa4) = *(unsigned int *)(temp_v0 + 0x98);
-    *(unsigned int *)(temp_v0 + 0xa8) = 0x41a00000;
-    *(unsigned int *)(temp_v0 + 0xac) = *(unsigned int *)(temp_v0 + 0xa0);
-  }
-  return;
+extern MapHudSelection *g_mapIf;
+extern s32 g_gameState;
+extern DeferredMapModelPosition *g_deferredMapModels;
+void FUN_00291e40(u32, f32, f32, f32);
 }
 
-} /* extern "C" */
+/* Restart the HUD's selection animation and sound at the selected map model. */
+extern "C" void FUN_00266fac(s32 mode, s32 id)
+{
+    MapHudSelection *hud = g_mapIf;
+    MapHudAnimation *animation = &hud->animation;
+    if (hud->mode == mode && animation->id == id) {
+        return;
+    }
+    hud->mode = (s8)mode;
+    if (mode != 0) {
+        animation->id = id;
+        if (g_gameState > 100) {
+            const f32 *position = g_deferredMapModels[id].position;
+            FUN_00291e40(0x10001FD, position[0] / 3.0f,
+                         position[1] / 3.0f, position[2] / 3.0f);
+        }
+        animation->position[0] = 0.0f;
+        animation->position[1] = 20.0f;
+        animation->position[2] = 0.0f;
+        animation->frame = 0.0f;
+        animation->targetFrame = 0.0f;
+        animation->target[0] = animation->position[0];
+        animation->target[1] = 20.0f;
+        animation->target[2] = animation->position[2];
+    }
+}

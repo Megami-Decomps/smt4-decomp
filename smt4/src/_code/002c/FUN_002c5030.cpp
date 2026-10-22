@@ -1,73 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c5030` (_code @ 0x2c5030, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: preset selection and command-argument setup use different saved registers. */
+/* Binds the requested render preset and its active color buffer unless rendering is suspended. */
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
+extern u8 g_asdGxPresets;
+void FUN_002bc1e4(void);
+void FUN_0013727c(u32 location, u32 handle, u32 auxiliary, u32 target, u32 address,
+    u32 width, u32 height, u32 parameter, u32 memoryMode, u32 zero, u32 alignment);
 
-int FUN_0013727c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int);
-int FUN_002bc1e4(void);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned int g_asdGxPresets; /* 0x4e39e0 */
-extern unsigned int DAT_004e3a0c; /* 0x4e3a0c */
-extern unsigned int DAT_004e3a38; /* 0x4e3a38 */
-extern unsigned char DAT_004e3a68; /* 0x4e3a68 */
-extern unsigned char DAT_004e3aa4; /* 0x4e3aa4 */
-extern unsigned char DAT_004e3ae0; /* 0x4e3ae0 */
-extern int DAT_004e3bd4; /* 0x4e3bd4 */
-extern unsigned int DAT_004e3bdc; /* 0x4e3bdc */
-extern unsigned char DAT_004e3be0; /* 0x4e3be0 */
-
-/* Supplied declaration required: FUN_0013727c. */
-/* Supplied declaration required: FUN_002bc1e4. */
-
-
-void FUN_002c5030(int param_1)
-
+void FUN_002c5030(u32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  puVar2 = (unsigned int *)0x0;
-  puVar3 = (unsigned int *)0x0;
-  temp_v0 = 0;
-  if (DAT_004e3bd4 != 1) {
-    if (param_1 == 0x400) {
-      puVar2 = (unsigned int *)&DAT_004e3a68;
-      puVar3 = &g_asdGxPresets;
+    struct Surface {
+        u32 unk00[5];
+        u32 selected;
+        u32 width;
+        u32 height;
+        u32 addresses[3];
+    };
+    /* The memory mode trails the shared texture prefix; do not enlarge that type. */
+    struct TextureRecord {
+        AsdGxTexture texture;
+        u32 memoryMode;
+    };
+    struct RenderPresetView {
+        Surface surfaces[3];
+        u8 unk084[4];
+        TextureRecord textures[3];
+        u8 unk13C[0xB8];
+        u32 suspended;
+        u32 unk1F8;
+        u32 parameter;
+        u8 active[2];
+    };
+    RenderPresetView *presets = (RenderPresetView *)&g_asdGxPresets;
+    if (presets->suspended != 1) {
+        TextureRecord *texture = NULL;
+        Surface *surface = NULL;
+        u32 activeIndex = 0;
+        if (kind == 0x400) {
+            texture = &presets->textures[0];
+            surface = &presets->surfaces[0];
+        } else if (kind == 0x401) {
+            activeIndex = 1;
+            texture = &presets->textures[2];
+            surface = &presets->surfaces[2];
+        } else if (kind == 0x410) {
+            texture = &presets->textures[1];
+            surface = &presets->surfaces[1];
+        }
+        u32 memoryMode = texture->memoryMode;
+        u32 selected = surface->selected;
+        if (!presets->active[activeIndex]) {
+            memoryMode = 0x500;
+        }
+        FUN_002bc1e4();
+        FUN_0013727c(texture->texture.location, texture->texture.handle,
+            texture->texture.unk34, texture->texture.target, surface->addresses[selected],
+            surface->width, surface->height, presets->parameter, memoryMode, 0, 8);
     }
-    else if (param_1 != 0x401) {
-      if (param_1 == 0x410) {
-        puVar3 = &DAT_004e3a0c;
-        puVar2 = (unsigned int *)&DAT_004e3aa4;
-      }
-    }
-    else {
-      temp_v0 = 1;
-      puVar3 = &DAT_004e3a38;
-      puVar2 = (unsigned int *)&DAT_004e3ae0;
-    }
-    temp_v1 = puVar2[0xe];
-    temp_v2 = puVar3[5];
-    if ((&DAT_004e3be0)[temp_v0] == '\0') {
-      temp_v1 = 0x500;
-    }
-    FUN_002bc1e4();
-    FUN_0013727c(puVar2[2],puVar2[0xc],puVar2[0xd],*puVar2,puVar3[temp_v2 + 8],puVar3[6],puVar3[7],
-                 DAT_004e3bdc,temp_v1,0,8);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

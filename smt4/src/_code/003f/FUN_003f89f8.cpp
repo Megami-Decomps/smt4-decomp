@@ -1,53 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f89f8` (_code @ 0x3f89f8, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the initial half-frame constant load and VFP divide/add registers differ from retail. */
+#include "shard/AnimCurve.h"
 
-extern "C" {
+extern "C" f32 hardfp_floorf(f32 value);
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int hardfp_floorf(void);
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: hardfp_floorf. */
-
-
-unsigned int * FUN_003f89f8(unsigned short *param_1)
-
+/* Find the packed twelve-bit frame key at or immediately before playback time. */
+extern "C" const PackedAnimKeyWide *FUN_003f89f8(const QuantizedAnimCurve *curve, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = in_s0 / *(float *)(param_1 + 8) + 0.5f;
-  hardfp_floorf();
-  temp_v1 = VectorFloatToUnsigned(temp_v0,3);
-  puVar1 = (unsigned int *)(param_1 + 10);
-  if ((*(unsigned int *)(param_1 + 10) & 0xfff) <= temp_v1) {
-    puVar1 = (unsigned int *)(param_1 + (unsigned int)*param_1 * 4 + 6);
-    if (temp_v1 < (*puVar1 & 0xfff)) {
-      temp_v0 = (float)VectorSignedToFloat(*param_1 - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = VectorFloatToUnsigned(*(float *)(param_1 + 2) * temp_v0 * in_s0,3);
-      puVar1 = (unsigned int *)(param_1 + temp_v2 * 4 + 10);
-      if ((*puVar1 & 0xfff) <= temp_v1) {
-        do {
-          puVar2 = puVar1;
-          puVar1 = puVar2 + 2;
-        } while ((*puVar1 & 0xfff) <= temp_v1);
-        return puVar2;
-      }
-      do {
-        puVar1 = puVar1 + -2;
-      } while (temp_v1 < (*puVar1 & 0xfff));
+    /* Adding this word to the shared header's odd-aligned prefix would shift its fields. */
+    struct WideCurveView {
+        u16 keyCount;
+        u16 unk02;
+        f32 keyRate;
+        f32 valueScale;
+        f32 valueBase;
+        f32 timeScale;
+        PackedAnimKeyWide keys[1];
+    };
+    const WideCurveView *view = reinterpret_cast<const WideCurveView *>(curve);
+    u32 frame = (u32)hardfp_floorf(time / view->timeScale + 0.5f);
+    const PackedAnimKeyWide *key = view->keys;
+    if (key->frame <= frame) {
+        key = &view->keys[view->keyCount - 1];
+        if (frame < key->frame) {
+            u32 estimate = (u32)(view->keyRate * ((f32)(view->keyCount - 1) * time));
+            key = &view->keys[estimate];
+            if (frame < key->frame) {
+                do {
+                    --key;
+                } while (frame < key->frame);
+            } else {
+                do {
+                    ++key;
+                } while (key->frame <= frame);
+                return key - 1;
+            }
+        }
     }
-  }
-  return puVar1;
+    return key;
 }
-
-} /* extern "C" */

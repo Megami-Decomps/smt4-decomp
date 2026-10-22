@@ -1,48 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fda78` (_code @ 0x4fda78, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reflection flag branch layout omits retail's five compiler NOP hints. */
+/* Queues a reflection action for a battle actor and its entry group. */
+#include "battle/btlReflect.h"
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match7_BattleEffects.h"
 
 extern "C" {
+ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+BtlMainStateA *btlGetMainState(void);
+s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
+s16 btlFindEntryValue(s32 group, u32 kind);
 
-int btlGetMainState(void);
-int FUN_004102d8(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: btlGetMainState. */
-extern int btlScriptUnitHasFlags(void);
-/* Supplied declaration required: FUN_004102d8. */
-extern short btlFindEntryValue(int, unsigned int);
-
-
-int FUN_004fda78(short param_1,short param_2,unsigned int param_3,int param_4,int param_5,
-                unsigned short param_6)
-
+ReflectAction *FUN_004fda78(s32 actor, s32 secondary, u32 options,
+                          BattleRosterMotionA *target, s32 value, u16 extraId)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)param_1,(int)param_2,param_3);
-  *(unsigned char *)(temp_v1 + 4) = 8;
-  *(int *)(temp_v1 + 0x28) = param_5;
-  *(int *)(temp_v1 + 0x14) = param_4;
-  temp_v0 = btlFindEntryValue((int)*(short *)(param_4 + 0x6a),1);
-  *(short *)(temp_v1 + 0x24) = temp_v0 - 1;
-  *(unsigned short *)(temp_v1 + 0x48) = param_6;
-  if (param_5 != 4) {
-    if (param_5 == 3) {
-      btlGetMainState();
-      temp_v2 = btlScriptUnitHasFlags();
-      if (temp_v2 == 0) {
-        return temp_v1;
-      }
+    ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actor, (s16)secondary, options);
+    action->kind = 8;
+    action->value = value;
+    action->target = (u32)target;
+    action->first = btlFindEntryValue(target->group, 1) - 1;
+    action->extraIds.third = extraId;
+    if (value != 4) {
+        if (value == 3) {
+            if (btlScriptUnitHasFlags(btlGetMainState()) == 0) {
+                return action;
+            }
+        }
+        action->flagView.flags |= 4;
     }
-    *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
-  }
-  return temp_v1;
+    return action;
 }
-
-} /* extern "C" */
+}

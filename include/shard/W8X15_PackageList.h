@@ -1,12 +1,22 @@
 #ifndef SHARD_W8X15_PACKAGELIST_H
 #define SHARD_W8X15_PACKAGELIST_H
 #include "common.h"
+#include <stddef.h>
 
 /* One table file reference in a loaded package. */
 struct PackageFileRef {
     /* 0x00 */ u32 fileId;
-    /* 0x04 */ u8 unk04[0xc];
+    union {
+        /* 0x04 */ u8 unk04[0xc];
+        struct {
+            u8 unk04[8];
+            u8 loaded; /* 0x0C */
+            u8 unk0D[3];
+        } state;
+    };
 };
+typedef char PackageFileRefLayoutCheck[sizeof(PackageFileRef) == 0x10 &&
+    offsetof(PackageFileRef, state.loaded) == 0x0C ? 1 : -1];
 
 /* One 0x40-byte record of a package's record table (FUN_002ac0f8). */
 struct PackageRecord {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b64b8(void);
 int FUN_002b659c(int, int, int, int);
 int FUN_002b75ec(...);
-int FUN_002ba12c(int);
+int renderCtxCalculateStereoParallax(int);
 int FUN_002bf288(...);
 int FUN_002c39a4(int);
 
@@ -24,7 +24,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: FUN_002ba12c. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
@@ -68,7 +68,7 @@ char FUN_0011aef0(void)
     }
     temp_v3 = vec2GetXInt(temp_v0 + 0x44);
     temp_v7 = 0.27f;
-    FUN_002ba12c(g_titleScene);
+    renderCtxCalculateStereoParallax(g_titleScene);
     temp_v3 = temp_v3 + (int)temp_v7;
     temp_v2 = vec2GetYInt(temp_v0 + 0x44);
     FUN_002bf288(2,0xe,0x87,temp_v3,temp_v2,0x15);

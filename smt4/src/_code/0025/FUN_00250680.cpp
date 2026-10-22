@@ -30,7 +30,7 @@ extern "C" {
 BattleMainState* btlGetMainState(void);
 ListedBattleEntryView* btlMainFindEntryByListedId(BattleMainState* state, s32 listedId);
 s32 FUN_0027e3e8(BattleEvent* event, ReflectSourceView* source, u32 mode);
-ReflectActionView* FUN_0022699c(ActionReflectState* state, s32 actionId, s32 mode, u32 argument);
+ReflectActionView* btlQueueReflectAction(ActionReflectState* state, s32 actionId, s32 mode, u32 argument);
 
 extern BattleEvent* g_btlEvent;
 extern ActionReflectState* g_btlActionReflect;
@@ -46,7 +46,7 @@ u32 FUN_00250680(s32 actionId, u32 argument, ReflectSourceView* source)
         if (FUN_0027e3e8(g_btlEvent, source, 1) == 0 ||
             (entry->flags & 0x10) == 0) {
             ReflectActionView* action =
-                FUN_0022699c(g_btlActionReflect, (s16)actionId, 0, argument);
+                btlQueueReflectAction(g_btlActionReflect, (s16)actionId, 0, argument);
             action->unk04 = 0x24;
             action->entry = entry;
             action->unk28 = 1;

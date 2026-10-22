@@ -1,79 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dbdf8` (_code @ 0x4dbdf8, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-demon iteration and unlock checks use different loop exits and conditional sharing. */
+/* Counts unlocked content demons that meet their save requirement and availability test. */
+#include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/W6_W6Match3_ContentWordList.h"
 
 extern "C" {
+void *gameGetSlotTable(void);
+u32 dataTable5Count(void);
+Entry0035dd74 *contentEntryFindById(u32 id);
+u32 gameFlagIsSet(u32 flag);
+u32 gameDataCopySaveEntry(u32 id, void *output);
+u32 FUN_002a4b28(u16 id);
 
-int FUN_00184310(void);
-int contentEntryFindById(void);
-int dataTable5Count(void);
-
-/* stack frame of void: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp32; /* 0x32: local_32 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(void);
-extern int gameGetSlotTable(void);
-extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
-extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: contentEntryFindById. */
-/* Supplied declaration required: dataTable5Count. */
-
-
-short FUN_004dbdf8(void)
-
+u16 FUN_004dbdf8(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  unsigned int temp_v3;
-  unsigned short temp_v4;
-  unsigned char temp_v5 [54];
-  unsigned short temp_v6;
-  
-  temp_v1 = 0;
-  temp_v2 = gameGetSlotTable();
-  temp_v4 = 0;
-  dataTable5Count();
-  if (temp_v2 != 0) {
-    do {
-      temp_v3 = temp_v4;
-      contentEntryFindById();
-      if (temp_v3 != 0) {
-        puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v3 + 0x1a);
-        FUN_00184310();
-        if ((puVar4[0x1f] == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) {
-          temp_v0 = puVar4[0x1e];
-          if ((temp_v0 & 1) != 0) {
-            if ((temp_v0 & 0xfffe) != 0) {
-              temp_v2 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v5);
-            }
-            else {
-              temp_v2 = gameDataCopySaveEntry(*puVar4,temp_v5);
-            }
-            if ((temp_v2 != 0) && ((temp_v6 & 0xfc) != 0)) {
-              if (((puVar4[5] & 1) != 0) &&
-                 (temp_v2 = FUN_002a4b28(*(unsigned short *)(temp_v3 + 0x1a)), temp_v2 != 0)) {
-                temp_v1 = temp_v1 + 1;
-              }
-            }
-          }
-          else if (((puVar4[5] & 1) != 0) &&
-                  (temp_v2 = FUN_002a4b28(*(unsigned short *)(temp_v3 + 0x1a)), temp_v2 != 0)) {
-            temp_v1 = temp_v1 + 1;
-          }
+    struct SaveEntryView {
+        u8 unk00[0x36];
+        u16 flags;
+        u8 unk38[0x18];
+    } saved;
+    u16 count = 0;
+    gameGetSlotTable();
+    for (u16 index = 0; dataTable5Count() > index; ++index) {
+        Entry0035dd74 *entry = contentEntryFindById(index);
+        if (entry == NULL) {
+            continue;
         }
-      }
-      temp_v3 = temp_v4 + 1;
-      temp_v4 = temp_v3;
-      dataTable5Count();
-    } while (temp_v4 < temp_v3);
-  }
-  return temp_v1;
+        DevilRecordA *demon = FUN_00184310(entry->value);
+        if (demon->unlockFlag != 0 && !gameFlagIsSet(demon->unlockFlag)) {
+            continue;
+        }
+        if (demon->saveRequirement & 1) {
+            u16 saveId = demon->saveRequirement & 0xFFFE ?
+                demon->saveRequirement >> 1 : demon->id;
+            if (!gameDataCopySaveEntry(saveId, &saved) || !(saved.flags & 0xFC)) {
+                continue;
+            }
+        }
+        if ((demon->flags & 1) && FUN_002a4b28(entry->value)) {
+            ++count;
+        }
+    }
+    return count;
 }
-
-} /* extern "C" */
+}

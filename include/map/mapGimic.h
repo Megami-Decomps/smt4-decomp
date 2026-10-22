@@ -25,7 +25,14 @@ typedef struct MapGimicEntry {
     /* 0x14 */ u16 requestState;
     /* 0x16 */ s16 id;
     /* 0x18 */ MapGimicObj *obj;
-    /* 0x1C */ u8 unk1C[0x20];
+    union {
+        /* 0x1C */ u8 unk1C[0x20];
+        struct {
+            u32 entryId;
+            s16 required;
+            s16 excluded;
+        } gates;
+    };
 } MapGimicEntry;
 
 typedef struct MapGimicSlot {
@@ -60,6 +67,10 @@ typedef struct MapGimic {
 /* Retail 32-bit layout invariants. */
 typedef char MapGimicObjSizeCheck[sizeof(MapGimicObj) == 0x8 ? 1 : -1];
 typedef char MapGimicEntrySizeCheck[sizeof(MapGimicEntry) == 0x3C ? 1 : -1];
+typedef char MapGimicEntryGatesOffsetCheck[
+    offsetof(MapGimicEntry, gates.entryId) == 0x1C &&
+    offsetof(MapGimicEntry, gates.required) == 0x20 &&
+    offsetof(MapGimicEntry, gates.excluded) == 0x22 ? 1 : -1];
 typedef char MapGimicSlotSizeCheck[sizeof(MapGimicSlot) == 0x18 ? 1 : -1];
 typedef char MapGimicSlotOffsetsCheck[
     offsetof(MapGimicSlot, animationId) == 2 && offsetof(MapGimicSlot, unk0C) == 0xc &&

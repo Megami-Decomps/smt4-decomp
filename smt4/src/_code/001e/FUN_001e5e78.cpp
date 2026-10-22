@@ -12,7 +12,7 @@ int mapFlagIsSet(...);
 int randomGetNormalizedFloat(void);
 int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
-int FUN_00287b0c(void);
+int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00291e40(int);
 int infoWinStartTimer(...);
@@ -74,7 +74,7 @@ extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: randomGetNormalizedFloat. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00287b0c. */
+/* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: infoWinStartTimer. */
@@ -269,7 +269,7 @@ LAB_001e6120:
               temp_v15 = temp_v17 * temp_v15 * temp_v20 +
                        (float)((unsigned long long)temp_v21 >> 0x20) * temp_v19 * temp_v20 +
                        (float)temp_v21 * temp_v18 * temp_v20;
-              FUN_00287b0c();
+              mathGetShortestAngleDelta();
               if ((temp_v8 < 0xc2200000) && ((int)temp_v8 < 0x42200000)) {
                 *(unsigned char *)(temp_v12 + 0x212) = 1;
               }

@@ -22,7 +22,7 @@ int FUN_00242000(...);
 int FUN_00248738(...);
 unsigned int appTryPurchase(unsigned int, int, int);
 int appCheckPurchaseRequirements(void);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int FUN_0029eb5c(int, int);
 int FUN_0029efc0(...);
 int FUN_0029efd8(...);
@@ -53,7 +53,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: appTryPurchase. */
 /* Supplied declaration required: appCheckPurchaseRequirements. */
 extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_00298d64. */
@@ -305,7 +305,7 @@ unsigned int FUN_003291e0(int *param_1)
       }
       temp_v6 = temp_v4;
       dataTable0BFindById(temp_v4);
-      FUN_00295660(0,temp_v6);
+      textEncodeFontSlot(0,temp_v6);
       FUN_00241f2c(temp_v4);
       FUN_0029ede8(0x18,temp_v4,0xffffffff,0);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v7 + 0x530),0);

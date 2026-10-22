@@ -1,48 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00518f04` (_code @ 0x518f04, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final-key branch placement and VFP instruction scheduling differ. */
+#include "shard/AnimCurve.h"
 
-extern "C" {
+extern "C" const AnimKey *FUN_0051b830(const AnimCurve *, f32);
 
-int FUN_0051b830(void);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: FUN_0051b830. */
-
-
-unsigned int FUN_00518f04(unsigned short *param_1)
-
+/* Linearly interpolate scaled unsigned key values at the requested time. */
+extern "C" f32 FUN_00518f04(const AnimCurve *curve, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short *puVar2;
-  unsigned char temp_v1;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v2;
-  
-  puVar2 = param_1;
-  FUN_0051b830();
-  temp_v2 = (float)VectorUnsignedToFloat((unsigned int)*puVar2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = (in_fpscr & 0xfffffff) |
-          ((unsigned int)(temp_v2 * 0.03125f * *(float *)(param_1 + 0xc) == in_s0) << 0x1e);
-  temp_v1 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-  if (!temp_v1) {
-    temp_v1 = puVar2 == (unsigned short *)(((unsigned int)param_1[7] * 6 - 6) + *(int *)(param_1 + 0x10));
-  }
-  if (temp_v1) {
-    VectorUnsignedToFloat((unsigned int)puVar2[1],(unsigned char)(temp_v0 >> 0x16) & 3);
-    return (unsigned int)puVar2[1];
-  }
-  VectorUnsignedToFloat((unsigned int)puVar2[3],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)puVar2[1],(unsigned char)(temp_v0 >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)puVar2[4],(unsigned char)(temp_v0 >> 0x16) & 3);
-  return (unsigned int)puVar2[4];
+    const AnimKey *key = FUN_0051b830(curve, time);
+    f32 keyTime = (f32)(u32)key->frame * 0.03125f * curve->duration;
+    if (keyTime == time || key == curve->keys + curve->keyCount - 1) {
+        return curve->values.base + (f32)(u32)key->data.value * curve->values.scale;
+    }
+    f32 nextTime = (f32)(u32)key[1].frame * 0.03125f * curve->duration;
+    f32 weight = (time - keyTime) / (nextTime - keyTime);
+    return (curve->values.base + (f32)(u32)key->data.value * curve->values.scale) * (1.0f - weight) +
+           (curve->values.base + (f32)(u32)key[1].data.value * curve->values.scale) * weight;
 }
-
-} /* extern "C" */

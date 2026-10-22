@@ -1,61 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013b5c8` (_code @ 0x13b5c8, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: connectivity initialization has different critical-section exit paths and register allocation. */
+#include "common.h"
 
+struct ConnectivityInitState {
+    u32 unk00;
+    s32 references;
+};
 extern "C" {
-
-int FUN_0014668c(int);
-
-extern unsigned char LAB_00209ff9; /* 0x209ff9 */
-extern int DAT_005891a8; /* 0x5891a8 */
-extern unsigned int DAT_005b4438; /* 0x5b4438 */
-extern unsigned int DAT_0061a5f0; /* 0x61a5f0 */
-
-extern int FUN_00146650(void);
-/* Supplied declaration required: FUN_0014668c. */
-extern unsigned char *FUN_0016f864(void);
-extern unsigned char *FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
-extern unsigned int wstrlen(char *);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned char * FUN_0013b5c8(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a5f0);
-  temp_v0 = FUN_00146650();
-  if (temp_v0 != 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a5f0);
-    return (unsigned char *)0xd8a09ff9;
-  }
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a5f0);
-  temp_v2 = DAT_005891a8 == 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a5f0);
-  if (temp_v2) {
-    puVar2 = (unsigned char *)FUN_0016f864();
-    if (-1 < (int)puVar2) {
-      temp_v1 = wstrlen("ac:u");
-      puVar2 = (unsigned char *)FUN_0016f988(&DAT_005b4438,"ac:u",temp_v1,0);
-      if (-1 < (int)puVar2) {
-        DAT_005891a8 = DAT_005891a8 + 1;
-        FUN_0014668c(0xb0101c8);
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a5f0);
-        return (unsigned char *)0x0;
-      }
-    }
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a5f0);
-    return puVar2;
-  }
-  DAT_005891a8 = DAT_005891a8 + 1;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a5f0);
-  return &LAB_00209ff9;
+extern ConnectivityInitState DAT_005891a4;
+extern u32 DAT_005b4438;
+extern u32 DAT_0061a5f0;
+extern const char DAT_00536c61[]; /* ac:u */
+void nn_os_CriticalSection_Enter(void *);
+void nn_os_CriticalSection_Leave(void *);
+s32 FUN_00146650(void);
+void FUN_0014668c(u32);
+s32 FUN_0016f864(void);
+s32 FUN_0016f988(u32 *, const char *, u32, u32);
+u32 wstrlen(const char *);
 }
 
-} /* extern "C" */
+/* Reference-count the ac:u service connection while holding the initialization lock. */
+extern "C" s32 FUN_0013b5c8(void)
+{
+    nn_os_CriticalSection_Enter(&DAT_0061a5f0);
+    if (FUN_00146650() != 0) {
+        nn_os_CriticalSection_Leave(&DAT_0061a5f0);
+        return (s32)0xD8A09FF9;
+    }
+    nn_os_CriticalSection_Enter(&DAT_0061a5f0);
+    bool first = DAT_005891a4.references == 0;
+    nn_os_CriticalSection_Leave(&DAT_0061a5f0);
+    if (!first) {
+        ++DAT_005891a4.references;
+        nn_os_CriticalSection_Leave(&DAT_0061a5f0);
+        return 0x00209FF9;
+    }
+    s32 result = FUN_0016f864();
+    if (result >= 0) {
+        u32 length = wstrlen(DAT_00536c61);
+        result = FUN_0016f988(&DAT_005b4438, DAT_00536c61, length, 0);
+        if (result >= 0) {
+            ++DAT_005891a4.references;
+            FUN_0014668c(0x0B0101C8);
+            nn_os_CriticalSection_Leave(&DAT_0061a5f0);
+            return 0;
+        }
+    }
+    nn_os_CriticalSection_Leave(&DAT_0061a5f0);
+    return result;
+}

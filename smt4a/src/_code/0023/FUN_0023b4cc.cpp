@@ -12,7 +12,7 @@ int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_001879d0(...);
+int renderCtxCalculateStereoParallax(...);
 int uiFadeDraw(int);
 int FUN_00218640(void);
 int FUN_002f6048(int);
@@ -46,7 +46,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_001879d0. */
+/* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: uiFadeDraw. */
 /* Supplied declaration required: FUN_00218640. */
 /* Supplied declaration required: FUN_002f6048. */
@@ -123,7 +123,7 @@ unsigned int FUN_0023b4cc(void)
     }
     temp_v2 = g_uiQuest;
     temp_v7 = 0.3f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v9 = temp_v2 + 0x408;
     temp_v4 = vec2GetXInt();
     temp_v1 = vec2GetYInt(temp_v2 + 0x408);
@@ -147,7 +147,7 @@ unsigned int FUN_0023b4cc(void)
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,0xffffffff,temp_v8);
     temp_v7 = 0.28f;
-    FUN_001879d0(g_renderCtx);
+    renderCtxCalculateStereoParallax(g_renderCtx);
     VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001634b4(temp_v9);
     efctSetSpeed();

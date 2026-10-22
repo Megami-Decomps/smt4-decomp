@@ -1,61 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023723c` (_code @ 0x23723c, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: variadic argument-pointer lifetime and terminator-byte register allocation differ. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include <stdarg.h>
 
 extern "C" {
+void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
+void asdMemFree(void *);
+u32 wstrlen(const char *);
+s32 FUN_00100348(char *, u32, const char *, va_list);
+void FUN_0036bea0(u32, u32, u32, u32, u32, const char *);
 
-int FUN_00100348(int, int, unsigned int, unsigned char *);
-int asdMemoryAllocTracked(int, int, int, int, int);
-int asdMemFree(int);
-int wstrlen(...);
-int FUN_0036bea0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
-
-/* stack frame of param_6: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_00100348. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: FUN_0036bea0. */
-
-
-void FUN_0023723c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+// Format a bounded string, terminate its text stream, and submit it to the renderer.
+void FUN_0023723c(u32 first, u32 second, u32 third, u32 fourth, u32 fifth,
+                  const char *format, ...)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char uStack00000008;
-  
-  temp_v0 = 0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x1000,0);
-  wstrlen(param_6);
-  FUN_00100348(temp_v0,0x1000,param_6,&uStack00000008);
-  *(unsigned char *)(temp_v0 + 0xfff) = 0;
-  temp_v1 = wstrlen(temp_v0);
-  if (temp_v1 >= 0xffd) {
-    *(unsigned char *)(temp_v0 + 0xffc) = 0xff;
-    *(unsigned char *)(temp_v0 + 0xffd) = 0xff;
-    *(unsigned char *)(temp_v0 + 0xffe) = 0xff;
-    *(unsigned char *)(temp_v0 + 0xfff) = 0;
-  }
-  else {
-    temp_v2 = temp_v0 + temp_v1;
-    *(unsigned char *)(temp_v0 + temp_v1) = 0xff;
-    *(unsigned char *)(temp_v2 + 1) = 0xff;
-    *(unsigned char *)(temp_v2 + 2) = 0xff;
-    *(unsigned char *)(temp_v2 + 3) = 0;
-  }
-  FUN_0036bea0(param_1,param_2,param_3,param_4,param_5,temp_v0);
-  asdMemFree(temp_v0);
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Text\\AsdText.cpp", 220);
+    char *buffer = static_cast<char *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1000, 0));
+    va_list arguments;
+    va_start(arguments, format);
+    wstrlen(format);
+    FUN_00100348(buffer, 0x1000, format, arguments);
+    va_end(arguments);
+    buffer[0xfff] = 0;
+    u32 length = wstrlen(buffer);
+    if (length >= 0xffd) {
+        buffer[0xffc] = -1;
+        buffer[0xffd] = -1;
+        buffer[0xffe] = -1;
+        buffer[0xfff] = 0;
+    } else {
+        buffer[length] = -1;
+        buffer[length + 1] = -1;
+        buffer[length + 2] = -1;
+        buffer[length + 3] = 0;
+    }
+    FUN_0036bea0(first, second, third, fourth, fifth, buffer);
+    asdMemFree(buffer);
 }
-
-} /* extern "C" */
+}

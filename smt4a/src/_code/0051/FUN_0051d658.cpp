@@ -1,53 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0051d658` (_code @ 0x51d658, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rounding constant load placement and initial VFP division registers differ. */
+#include "shard/AnimCurve.h"
 
-extern "C" {
+extern "C" f32 hardfp_floorf(f32 value);
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int hardfp_floorf(void);
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: hardfp_floorf. */
-
-
-unsigned int * FUN_0051d658(unsigned short *param_1)
-
+// Find the packed key immediately preceding a rounded sample frame.
+extern "C" const PackedScalarAnimKey *FUN_0051d658(const PackedScalarAnimCurve *curve, f32 frame)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = in_s0 / *(float *)(param_1 + 8) + 0.5f;
-  hardfp_floorf();
-  temp_v1 = VectorFloatToUnsigned(temp_v0,3);
-  puVar1 = (unsigned int *)(param_1 + 10);
-  if ((*(unsigned int *)(param_1 + 10) & 0xfff) <= temp_v1) {
-    puVar1 = (unsigned int *)(param_1 + (unsigned int)*param_1 * 2 + 8);
-    if (temp_v1 < (*puVar1 & 0xfff)) {
-      temp_v0 = (float)VectorSignedToFloat(*param_1 - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = VectorFloatToUnsigned(*(float *)(param_1 + 2) * temp_v0 * in_s0,3);
-      puVar1 = (unsigned int *)(param_1 + temp_v2 * 2 + 10);
-      if ((*puVar1 & 0xfff) <= temp_v1) {
-        do {
-          puVar2 = puVar1;
-          puVar1 = puVar2 + 1;
-        } while ((*puVar1 & 0xfff) <= temp_v1);
-        return puVar2;
-      }
-      do {
-        puVar1 = puVar1 + -1;
-      } while (temp_v1 < (*puVar1 & 0xfff));
+    // A float at offset four cannot be added inside the halfword-aligned unk02 padding.
+    struct SampledCurveView {
+        u16 keyCount;
+        u16 unk02;
+        f32 inverseDuration;
+        f32 valueScale;
+        f32 valueBase;
+        f32 timeScale;
+        PackedScalarAnimKey keys[1];
+    };
+    typedef char SampledCurveLayoutCheck[
+        offsetof(SampledCurveView, inverseDuration) == 4 &&
+        offsetof(SampledCurveView, keys) == 0x14 ? 1 : -1];
+    const SampledCurveView *source = (const SampledCurveView *)curve;
+    u32 roundedFrame = (u32)hardfp_floorf(frame / source->timeScale + 0.5f);
+    const PackedScalarAnimKey *key = source->keys;
+    if (key->frame <= roundedFrame) {
+        key = source->keys + source->keyCount - 1;
+        if (roundedFrame < key->frame) {
+            u32 estimate = (u32)(source->inverseDuration * ((f32)(source->keyCount - 1) * frame));
+            key = source->keys + estimate;
+            if (roundedFrame < key->frame) {
+                do {
+                    --key;
+                } while (roundedFrame < key->frame);
+            } else {
+                do {
+                    ++key;
+                } while (key->frame <= roundedFrame);
+                --key;
+            }
+        }
     }
-  }
-  return puVar1;
+    return key;
 }
-
-} /* extern "C" */

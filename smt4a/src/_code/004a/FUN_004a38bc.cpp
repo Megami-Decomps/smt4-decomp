@@ -1,77 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a38bc` (_code @ 0x4a38bc, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: entry-table address setup is not preserved across the first helper and removed-hook NOPs are absent. */
+#include "shard/Shard0031.h"
 
+struct PreviewMenuWindow { u8 kind; u8 unk01[3]; s32 minimum, maximum; u32 unk0c; FlaggedEntry entry; };
+struct PreviewMenuEntry { s16 previewState; u16 unk02, option; u8 unk06[0x1a]; };
+struct PreviewMenuWork {
+    u8 unk000[0x14];
+    u32 state, phase, unk01c;
+    PreviewMenuWindow window;
+    u8 unk094[0x7c8];
+    u32 script;
+    u8 unk860[4];
+    PreviewMenuEntry entries[1];
+};
+struct AnimatedPreviewSelection { u32 unk00, selected; };
 extern "C" {
+extern AnimatedPreviewSelection g_animatedPageSelection;
+s32 scrRunOpcodesStub(u32 script);
+s32 messageGetChoiceResult();
+u32 flaggedValueHolderGetTotal(const PreviewMenuWindow *window);
+void FUN_004a37a0(PreviewMenuWork *work, u16 option);
+s32 FUN_0031d174(PreviewMenuWindow *window);
+s32 FUN_002a482c(PreviewMenuWindow *window);
+void FUN_004a1958(PreviewMenuWork *work);
+void setListWindow(PreviewMenuWindow *window, s32 first, s32 second);
+u32 buttonHelpGetValue();
+void sysPlaySe(u32 id);
+void FUN_003343f0(s32 mode);
+void screen4AEnter(PreviewMenuWork *work);
+void uniteCreatePreviewModel();
 
-int sysPlaySe(void);
-int FUN_003343f0(int);
-int buttonHelpGetValue(void);
-int uniteCreatePreviewModel(void);
-int FUN_004a1958(int);
-int screen4AEnter(int);
-int FUN_004a37a0(int, int);
-int setListWindow(int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
-
-/* Supplied declaration required: sysPlaySe. */
-extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_002a482c(int);
-extern int messageGetChoiceResult(void);
-extern int FUN_0031d174(int);
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: buttonHelpGetValue. */
-/* Supplied declaration required: uniteCreatePreviewModel. */
-/* Supplied declaration required: FUN_004a1958. */
-/* Supplied declaration required: screen4AEnter. */
-/* Supplied declaration required: FUN_004a37a0. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: setListWindow. */
-
-
-void FUN_004a38bc(int param_1)
-
+// Apply a confirmed preview option, repair the list window and return to the appropriate menu phase.
+void FUN_004a38bc(PreviewMenuWork *work)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x85c));
-  if (temp_v0 == 2) {
-    temp_v0 = messageGetChoiceResult();
-    if (temp_v0 == 0) {
-      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
-      FUN_004a37a0(param_1,*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868));
-      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
-      temp_v1 = FUN_0031d174(param_1 + 0x20);
-      temp_v0 = FUN_002a482c(param_1 + 0x20);
-      FUN_004a1958(param_1);
-      if (temp_v0 >= 1) {
-        temp_v0 = temp_v0 - 1;
-      }
-      else if ((temp_v1 != 0) && (*(int *)(param_1 + 0x28) <= temp_v1 + temp_v0)) {
-        temp_v1 = temp_v1 - 1;
-      }
-      setListWindow(param_1 + 0x20,temp_v0,temp_v1);
+    if (scrRunOpcodesStub(work->script) != 2)
+        return;
+    if (messageGetChoiceResult() == 0) {
+        u32 index = flaggedValueHolderGetTotal(&work->window);
+        FUN_004a37a0(work, work->entries[index].option);
+        g_animatedPageSelection.selected = 0xffffffff;
+        s32 count = FUN_0031d174(&work->window);
+        s32 first = FUN_002a482c(&work->window);
+        FUN_004a1958(work);
+        if (first > 0)
+            --first;
+        else if (count != 0 && work->window.maximum <= count + first)
+            --count;
+        setListWindow(&work->window, first, count);
     }
-    buttonHelpGetValue();
-    sysPlaySe();
+    sysPlaySe(buttonHelpGetValue());
     FUN_003343f0(0);
-    if (*(short *)(param_1 + 0x864) < 1) {
-      screen4AEnter(param_1);
-      uniteCreatePreviewModel();
-      return;
+    if (work->entries[0].previewState <= 0) {
+        screen4AEnter(work);
+        uniteCreatePreviewModel();
+    } else {
+        work->state = 2;
+        work->phase = 0;
     }
-    *(unsigned int *)(param_1 + 0x14) = 2;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,49 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0c78` (_code @ 0x3f0c78, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Roster/cache loop registers and identity-load scheduling differ. */
+#include "battle/btlMain.h"
+#include "battle/BattleRosterCache.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
-extern "C" {
+extern "C" BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
 
-int FUN_003f0e20(int, int);
-
-/* Supplied declaration required: FUN_003f0e20. */
-
-
-void FUN_003f0c78(int param_1)
-
+// Restore the cached horizontal position of each matching active roster entry.
+extern "C" void FUN_003f0c78(BtlMainStateA *state)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  unsigned int *puVar4;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 0x1ff8) != 0) {
-    temp_v2 = 4;
-    do {
-      puVar4 = (unsigned int *)(*(int *)(param_1 + 0x1ed4) + temp_v2 * 0x1d0);
-      if ((puVar4[0x14] & 1) != 0 && (puVar4[0x14] & 0x80) != 0) {
-        temp_v0 = param_1;
-        FUN_003f0e20(param_1,(int)*(short *)((int)puVar4 + 0x6a));
-        temp_v1 = 0;
-        do {
-          psVar2 = (short *)(*(int *)(param_1 + 0x1ff8) + temp_v1 * 0x18);
-          if ((((*psVar2 == *(short *)(temp_v0 + 0x6e)) &&
-               (psVar2[1] == *(short *)((int)puVar4 + 0x6a))) &&
-              (psVar2[2] == *(short *)(temp_v0 + 0x166))) &&
-             (*(int *)(psVar2 + 4) == *(int *)(temp_v0 + 0x170))) {
-            *puVar4 = *(unsigned int *)(psVar2 + 6);
-            puVar4[3] = *(unsigned int *)(psVar2 + 6);
-            break;
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 0x32);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x36);
-  }
-  return;
+    // The identity spans the halfword-aligned union beginning at 0x0A.
+    struct RosterIdentityView {
+        u8 unk000[0x164];
+        BattleCombatantStatusKey identity;
+    };
+    typedef char RosterIdentityViewOffsetCheck[
+        offsetof(RosterIdentityView, identity) == 0x164 ? 1 : -1];
+    if (state->rosterCache.entries == NULL) {
+        return;
+    }
+    for (s32 index = 4; index < 54; ++index) {
+        BattleRosterRecordA *entry = &state->roster[index];
+        if ((entry->liveFlags.unk50 & 1) == 0 || (entry->liveFlags.unk50 & 0x80) == 0) {
+            continue;
+        }
+        BtlCombatantEntryA *descriptor = FUN_003f0e20(state, entry->motion.group);
+        const BattleCombatantStatusKey *identity = &((const RosterIdentityView *)descriptor)->identity;
+        BattleRosterCacheEntry *cache = state->rosterCache.entries;
+        s16 selectionIndex = descriptor->indexView.selectionIndex;
+        for (s32 cacheIndex = 0; cacheIndex < 50; ++cacheIndex) {
+            const BattleRosterCacheEntry *saved = &cache[cacheIndex];
+            if (saved->selectionIndex == selectionIndex && saved->group == entry->motion.group &&
+                saved->id == identity->id && saved->key == identity->key) {
+                entry->initialPositionX = saved->positionX;
+                entry->motion.position[0] = saved->positionX;
+                break;
+            }
+        }
+    }
 }
-
-} /* extern "C" */

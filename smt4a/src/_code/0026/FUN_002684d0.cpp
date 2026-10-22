@@ -1,83 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002684d0` (_code @ 0x2684d0, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: skill targeting-mode tests and occupied-slot traversal branches are grouped differently. */
+/* Tests the selected skill target or each occupied party slot according to its targeting mode. */
+#include "gamedata/Table04Record.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
+Table04Record *dataTable04FindById(u32 id);
+s32 FUN_002a690c(s32 target, s32 skill, s32 query);
+s32 FUN_00333694(s32 target, s32 slot, s32 skill, s32 query);
+SlotTable *gameGetSlotTable(void);
 
-int dataTable04FindById(void);
-int FUN_002a690c(int, int, int);
-int FUN_00333694(...);
-
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_002a690c. */
-/* Supplied declaration required: FUN_00333694. */
-
-
-unsigned int FUN_002684d0(int param_1,int param_2)
-
+u32 FUN_002684d0(s32 skillId, s32 target)
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v0 = param_1;
-  dataTable04FindById();
-  if (temp_v0 != 0) {
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x28);
-    temp_v6 = (temp_v2 & 0x7ff) >> 9 == 1;
-    temp_v7 = (temp_v2 & 0x7ff) >> 9 == 3;
-    temp_v8 = temp_v6 || temp_v7;
-    if (temp_v6 || temp_v7) {
-      temp_v8 = *(char *)(temp_v0 + 0x23) == '\x03';
+    Table04Record *skill = dataTable04FindById(skillId);
+    if (skill == NULL) {
+        return 0;
     }
-    if (temp_v8) {
-      temp_v8 = (temp_v2 & 0x1ff) >> 5 != 3;
-      temp_v3 = temp_v2;
-      if (temp_v8) {
-        temp_v3 = 8;
-      }
-      if (temp_v8 && temp_v3 != (temp_v2 & 0x1ff) >> 5) {
-        temp_v0 = gameGetSlotTable();
-        temp_v5 = -1;
-        do {
-          temp_v1 = param_2;
-          FUN_00333694(param_2,0xffffffff,param_1,1);
-          while( 1 ) {
-            if (temp_v1 == 0) {
-              return 1;
+    u32 mode = (skill->properties >> 9) & 3;
+    if ((mode == 1 || mode == 3) && skill->sort.category == 3) {
+        u32 scope = (skill->properties >> 5) & 15;
+        if (scope == 3 || scope == 8) {
+            return FUN_002a690c(target, skillId, 1) == 0;
+        }
+        SlotTable *party = gameGetSlotTable();
+        for (s32 i = -1; i < 24; ++i) {
+            s32 result;
+            if (i < 0) {
+                result = FUN_00333694(target, -1, skillId, 1);
+            } else {
+                s32 slot = party->slots[i];
+                if (slot < 0) {
+                    continue;
+                }
+                result = FUN_00333694(target, slot, skillId, 1);
             }
-            temp_v5 = temp_v5 + 1;
-            if (temp_v5 >= 0x18) goto LAB_002685bc;
-            if (temp_v5 < 0) break;
-            temp_v4 = (int)*(char *)(temp_v0 + temp_v5 + 0x1c88);
-            if (-1 < temp_v4) {
-              temp_v1 = param_2;
-              FUN_00333694(param_2,temp_v4,param_1,1);
+            if (result == 0) {
+                return 1;
             }
-          }
-        } while( 1 );
-      }
-      FUN_002a690c(param_2,param_1,1);
-      if (param_2 == 0) {
-        return 1;
-      }
+        }
     }
-    else {
-LAB_002685bc:
-      if (param_1 == 0x8c || param_1 == 0x93) {
-        return 1;
-      }
-    }
-  }
-  return 0;
+    return skillId == 140 || skillId == 147;
 }
-
-} /* extern "C" */
+}

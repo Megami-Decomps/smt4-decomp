@@ -1,49 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00500d38` (_code @ 0x500d38, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 48 vs built 49 rows; blend-state loads/stores and output-cursor registers differ. */
+#include "common.h"
 
 extern "C" {
+u32 *gxEmitFramebufferAccessMasks(const void *, u32 *, s32);
 
-int gxEmitFramebufferAccessMasks(int, unsigned int *, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-/* Supplied declaration required: gxEmitFramebufferAccessMasks. */
-
-
-void FUN_00500d38(char *param_1,unsigned int *param_2,int param_3)
-
+u32 *FUN_00500d38(const void *blendState, u32 *commands, s32 appendAccess)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  
-  temp_v0 = *param_1;
-  *param_2 = 0xe40100;
-  if (temp_v0 != '\0') {
-    param_2[1] = 0x30100;
-    param_2[2] = (unsigned int)*(unsigned int *)(param_1 + 1) | ((unsigned int)(unsigned char)param_1[5] << 0x14) |
-                 ((unsigned int)(unsigned char)param_1[4] << 0x18) | ((unsigned int)(unsigned char)param_1[6] << 0x1c);
-    param_2[3] = 0xf0101;
-    param_2[4] = 6;
-    param_2[5] = 0xf0102;
-    param_2[6] = (*(unsigned int *)(param_1 + 7) & 0xffffff) | ((unsigned int)(unsigned char)param_1[10] << 0x18);
-    param_2[7] = 0xf0103;
-    param_2 = param_2 + 7;
-  }
-  else {
-    param_2[1] = 0x30100;
-    param_2[2] = 0x1010000;
-    param_2 = param_2 + 3;
-    *param_2 = 0xf0101;
-  }
-  if (param_3 != 0) {
-    gxEmitFramebufferAccessMasks(*(int *)(param_1 + 0xc) + 0x7c,param_2 + 1,1);
-    return;
-  }
-  return;
+    struct FramebufferMasksView {
+        u8 unk00[0x7C];
+        u8 access[1];
+    };
+    struct BlendCommandStateView {
+        u8 enabled;
+        u8 equation[3];
+        u8 source;
+        u8 destination;
+        u8 alpha;
+        u8 color[3];
+        u8 colorAlpha;
+        u8 unk0B;
+        FramebufferMasksView *owner;
+    };
+    const BlendCommandStateView *state = static_cast<const BlendCommandStateView *>(blendState);
+    commands[0] = 0xE40100;
+    commands[1] = 0x30100;
+    u32 *end;
+    if (state->enabled) {
+        commands[2] = state->equation[0] | (state->equation[1] << 8) |
+                      (state->equation[2] << 16) | (state->destination << 20) |
+                      (static_cast<u32>(state->source) << 24) | (static_cast<u32>(state->alpha) << 28);
+        commands[3] = 0xF0101;
+        commands[4] = 6;
+        commands[5] = 0xF0102;
+        commands[6] = state->color[0] | (state->color[1] << 8) |
+                      (state->color[2] << 16) | (static_cast<u32>(state->colorAlpha) << 24);
+        commands[7] = 0xF0103;
+        end = commands + 8;
+    } else {
+        commands[2] = 0x1010000;
+        commands[3] = 0xF0101;
+        end = commands + 4;
+    }
+    if (appendAccess)
+        return gxEmitFramebufferAccessMasks(state->owner->access, end, 1);
+    return end;
 }
-
-} /* extern "C" */
+}

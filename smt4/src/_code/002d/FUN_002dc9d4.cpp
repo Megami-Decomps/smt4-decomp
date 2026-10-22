@@ -1,49 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002dc9d4` (_code @ 0x2dc9d4, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/PassiveSkill.h"
+#include "shard/W6_W6Match5_DevilSort.h"
+
+struct DevilSkillEntry {
+    u16 devilId;
+    u16 skillId;
+};
 
 extern "C" {
+const PassiveSkillRecord *dataTable12FindBySortKey(u16);
+s32 FUN_00257444(s32);
 
-int dataTable12FindBySortKey(void);
-int devilGetRecord(...);
-
-extern int FUN_00257444(int);
-/* Supplied declaration required: dataTable12FindBySortKey. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_002dc9d4(unsigned short *param_1,unsigned short *param_2)
-
+// Order demon skills by descending category, race and level, then ascending id.
+s32 FUN_002dc9d4(const DevilSkillEntry *left, const DevilSkillEntry *right)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  temp_v0 = (unsigned int)param_1[1];
-  dataTable12FindBySortKey();
-  temp_v1 = (unsigned int)param_2[1];
-  dataTable12FindBySortKey();
-  devilGetRecord(*param_1);
-  devilGetRecord(*param_2);
-  temp_v2 = FUN_00257444((int)*(short *)(temp_v1 + 0x22));
-  temp_v3 = FUN_00257444((int)*(short *)(temp_v0 + 0x22));
-  temp_v2 = temp_v2 - temp_v3;
-  if (temp_v2 == 0) {
-    puVar5 = (unsigned short *)(unsigned int)*param_1;
-    devilGetRecord();
-    puVar6 = (unsigned short *)(unsigned int)*param_2;
-    devilGetRecord();
-    temp_v2 = (unsigned int)(unsigned char)puVar6[1] - (unsigned int)(unsigned char)puVar5[1];
-    if ((temp_v2 == 0) &&
-       (temp_v2 = (unsigned int)*(unsigned char *)((int)puVar6 + 3) - (unsigned int)*(unsigned char *)((int)puVar5 + 3), temp_v2 == 0)) {
-      temp_v2 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
+    const PassiveSkillRecord *leftSkill = dataTable12FindBySortKey(left->skillId);
+    const PassiveSkillRecord *rightSkill = dataTable12FindBySortKey(right->skillId);
+    devilGetRecord(left->devilId);
+    devilGetRecord(right->devilId);
+    s32 rightCategory = FUN_00257444(static_cast<s16>(rightSkill->sortKey));
+    s32 difference = rightCategory - FUN_00257444(static_cast<s16>(leftSkill->sortKey));
+    if (difference == 0) {
+        const DevilSortRecord *leftDevil = devilGetRecord(left->devilId);
+        const DevilSortRecord *rightDevil = devilGetRecord(right->devilId);
+        difference = rightDevil->race - leftDevil->race;
+        if (difference == 0) {
+            difference = rightDevil->level - leftDevil->level;
+            if (difference == 0)
+                difference = leftDevil->id - rightDevil->id;
+        }
     }
-  }
-  return temp_v2;
+    return difference;
 }
-
-} /* extern "C" */
+}

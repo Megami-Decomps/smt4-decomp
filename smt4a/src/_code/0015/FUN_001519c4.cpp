@@ -1,35 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001519c4` (_code @ 0x1519c4, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves sprite getter return values and a unity VFP constant; direct field loads optimize those moves away. */
+#include "ui/MessageMain.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
-
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, unsigned int, int, int, int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_4_stack;
-
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001835b4. */
-
-
-void FUN_001519c4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 2 native warning(s); review required */
-  efctSetSpeed();
-  FUN_001835b4(2,4,param_1,0,0,0xf1);
-  FUN_001835b4(2,4,param_2,0,0,0xf1);
-  efctSetSpeed();
-  FUN_001835b4(2,4,param_3,0,0,0xf1);
-  efctSetSpeed();
-  FUN_001835b4(2,4,param_4,0,0,0xf1);
-  efctSetSpeed();
-  return;
+extern MessageGlobalsA g_messageMain;
+void efctSetSpeed(f32);
+void FUN_001835b4(s32, s32, u32, s32, s32, s32);
 }
 
-} /* extern "C" */
+/* Create four message effects using the panel's base and accent speed multipliers. */
+extern "C" void FUN_001519c4(u32 first, u32 second, u32 accent, u32 last)
+{
+    MessagePanelA *panel = g_messageMain.panel;
+    f32 speed = ((const UiSpriteState *)panel->spritesCA4[20])->unk20;
+    efctSetSpeed(speed);
+    FUN_001835b4(2, 4, first, 0, 0, 241);
+    FUN_001835b4(2, 4, second, 0, 0, 241);
+    efctSetSpeed(((const UiSpriteState *)panel->spritesCA4[16])->unk20 * speed);
+    FUN_001835b4(2, 4, accent, 0, 0, 241);
+    efctSetSpeed(speed);
+    FUN_001835b4(2, 4, last, 0, 0, 241);
+    efctSetSpeed(1.0f);
+}

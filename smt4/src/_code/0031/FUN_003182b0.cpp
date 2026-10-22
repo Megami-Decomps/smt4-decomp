@@ -1,52 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003182b0` (_code @ 0x3182b0, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Reports whether a present battle entry in the requested group owns the slot. */
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
+s32 scrSetResult(s32 result);
+s32 btlCommandOwnerHasSlotId(BtlUnitEntry *entry, u32 slot);
+BtlState *btlGetMainState(void);
+u32 scrGetArg(u32 index);
 
-int scrSetResult(int);
-
-extern int btlCommandOwnerHasSlotId(unsigned int *, unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_003182b0(void)
-
+u32 FUN_003182b0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v4 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v5 = (temp_v3 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if ((temp_v5 && temp_v3 == temp_v0) && (temp_v2 = btlCommandOwnerHasSlotId(puVar4,temp_v1), temp_v2 != 0)) {
-        scrSetResult(1);
-        return 1;
-      }
+    u32 group = scrGetArg(0);
+    u32 slot = scrGetArg(1);
+    for (s32 i = 0; i < 109; ++i) {
+        BtlUnitEntry *entry = &btlGetMainState()->units[i];
+        if ((entry->flags & 0x10) && (entry->flags & 1) &&
+            !(entry->flags & 0x40) && entry->groupId == group &&
+            btlCommandOwnerHasSlotId(entry, slot)) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

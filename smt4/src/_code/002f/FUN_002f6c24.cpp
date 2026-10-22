@@ -1,51 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6c24` (_code @ 0x2f6c24, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges pending-action flag tests and uses different saved registers. */
+#include "shard/W4_Match6_BtlEntry.h"
 
+// Keep the unit prefix local: btlUnit.h imports a conflicting, shorter BtlMainState definition.
+struct ScriptCommandDataView {
+    u8 unk000[0x14c];
+    u16 command; // 0x14c
+};
+struct ScriptCommandUnitView {
+    u8 unk00[0x28];
+    ScriptCommandDataView *data; // 0x28
+    u8 unk2c[0xc];
+    s8 targets[109]; // 0x38
+};
 extern "C" {
+extern u32 g_btlScriptUnit;
+u32 scrGetArg(u32 argument);
+ScriptCommandUnitView *btlUnitGet(u32 id);
+BtlMainState *btlGetMainState();
 
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-extern int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_002f6c24(void)
-
+// Install the two scripted actions and mark up to two available enemy entries as targets.
+u32 FUN_002f6c24()
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  char temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlUnitGet(g_btlScriptUnit);
-  *(unsigned short *)(*(int *)(temp_v2 + 0x28) + 0x14c) = 0xc;
-  temp_v2 = btlGetMainState();
-  *(int *)(temp_v2 + 0x1fd4) = (int)(temp_v0 | 0x20000) >> 0x1f;
-  *(unsigned int *)(temp_v2 + 0x1fd0) = temp_v0 | 0x20000;
-  temp_v2 = btlGetMainState();
-  *(int *)(temp_v2 + 0x1fdc) = (int)(temp_v1 | 0x40000) >> 0x1f;
-  temp_v4 = '\0';
-  temp_v3 = 4;
-  *(unsigned int *)(temp_v2 + 0x1fd8) = temp_v1 | 0x40000;
-  do {
-    temp_v2 = btlGetMainState();
-    temp_v0 = *(unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v3 * 0x288);
-    if ((temp_v0 & 1) == 0 && (temp_v0 & 0x40) == 0) {
-      temp_v2 = btlUnitGet(g_btlScriptUnit);
-      temp_v4 = temp_v4 + '\x01';
-      *(char *)(temp_v2 + temp_v3 + 0x38) = (char)temp_v3;
-      if ('\x01' < temp_v4) {
-        return 1;
-      }
+    u32 first = scrGetArg(0);
+    u32 second = scrGetArg(1);
+    btlUnitGet(g_btlScriptUnit)->data->command = 12;
+    btlGetMainState()->pendingAction = (s32)(first | 0x20000);
+    btlGetMainState()->secondaryPendingAction = (s32)(second | 0x40000);
+    s8 count = 0;
+    for (s32 i = 4; i < 54; ++i) {
+        u32 flags = btlGetMainState()->entries[i].flags;
+        if (!(flags & 1) && !(flags & 0x40)) {
+            btlUnitGet(g_btlScriptUnit)->targets[i] = (s8)i;
+            if (++count > 1)
+                return 1;
+        }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x36);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

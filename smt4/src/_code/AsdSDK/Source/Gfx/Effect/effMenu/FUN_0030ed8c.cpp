@@ -1,49 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030ed8c` (_code @ 0x30ed8c, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: effect-entry store scheduling differs despite the matching debug file and line. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct MenuEffectOwnerView {
+    u32 id;
+    u32 unk04;
+    u32 value;
+};
 
 extern "C" {
+void *memAlloc(u32, u32, u32, u32, u32, u32);
 
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: memAlloc. */
-
-
-void FUN_0030ed8c(unsigned int *param_1)
-
+// Build the menu effect record belonging to an owner.
+void *FUN_0030ed8c(MenuEffectOwnerView *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x4c,0x10,1);
-  *puVar1 = 8;
-  puVar1[2] = 0;
-  puVar1[1] = 8;
-  temp_v0 = *param_1;
-  puVar1[4] = 0;
-  puVar1[3] = temp_v0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0xffffc040;
-  puVar1[10] = 0xc0000000;
-  puVar1[0xb] = param_1[2];
-  temp_v0 = param_1[2];
-  puVar1[0xd] = 0;
-  puVar1[0xc] = temp_v0;
-  puVar1[0xe] = 0;
-  puVar1[0x10] = 0;
-  puVar1[0xf] = 0;
-  puVar1[0x12] = (unsigned int)param_1;
-  return;
+    // This 0x4c-byte variant has fields beyond the shared 0x38-byte menu node.
+    struct MenuEffectView {
+        u32 kind;
+        u32 state;
+        u32 unk08;
+        u32 ownerId;
+        u32 unk10;
+        u32 unk14;
+        u32 unk18;
+        u32 unk1c;
+        u32 unk20;
+        u32 defaultWords[2];
+        u32 value;
+        u32 previousValue;
+        u32 unk34;
+        u32 unk38;
+        u32 unk3c;
+        u32 unk40;
+        u32 unk44;
+        MenuEffectOwnerView *owner;
+    };
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effMenu.cpp", 2816);
+    MenuEffectView *effect = static_cast<MenuEffectView *>(memAlloc(0x10000, 0x100, 0, sizeof(MenuEffectView), 0x10, 1));
+    effect->kind = 8;
+    effect->unk08 = 0;
+    effect->state = 8;
+    effect->ownerId = owner->id;
+    effect->unk10 = 0;
+    effect->unk14 = 0;
+    effect->unk18 = 0;
+    effect->unk1c = 0;
+    effect->unk20 = 0;
+    effect->defaultWords[0] = 0xFFFFC040;
+    effect->defaultWords[1] = 0xC0000000;
+    effect->value = owner->value;
+    effect->unk34 = 0;
+    effect->previousValue = owner->value;
+    effect->unk38 = 0;
+    effect->unk40 = 0;
+    effect->unk3c = 0;
+    effect->owner = owner;
+    return effect;
 }
-
-} /* extern "C" */
+}

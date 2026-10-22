@@ -1,74 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026e324` (_code @ 0x26e324, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail 63 vs built 64 rows; group/record loop lowering and flag-call argument scheduling differ. */
+#include "gamedata/GroupedFileTables.h"
 
 extern "C" {
+s32 FUN_002ac12c(FileTableGroup *);
+FileTableKindRecord *FUN_002ac0f8(FileTableGroup *);
+u32 FUN_002ac0c4(FileTableGroup *);
+s32 gameFlagIsSet(u32);
+void gameFlagSetValue(u32, s32, s32);
+s32 flagValueIsPositive(u32);
+void FUN_00295a18(u32, s32);
+void *jyoucyuGetTableEntry(u32);
 
-int gameFlagSetValue(unsigned int, int);
-int FUN_00295a18(unsigned int, int);
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
-int jyoucyuGetTableEntry(int);
-
-/* Supplied declaration required: gameFlagSetValue. */
-extern int flagValueIsPositive(unsigned int);
-/* Supplied declaration required: FUN_00295a18. */
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-extern int FUN_002ac12c(unsigned int);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-
-
-void FUN_0026e324(int param_1)
-
+// Activate flag requests attached to loaded file groups.
+void FUN_0026e324(GroupedFileTables *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  char *pcVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = 0;
-  if (temp_v5 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v2 = *(int *)(param_1 + 0x318) + temp_v5 * 0x50;
-      temp_v0 = FUN_002ac12c(temp_v2);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v2;
-        FUN_002ac0f8();
-        FUN_002ac0c4();
-        temp_v3 = 0;
-        if (temp_v3 < temp_v2) {
-          do {
-            pcVar5 = (char *)(temp_v1 + temp_v3 * 0x40);
-            if (*pcVar5 != '0') {
-              if (*pcVar5 == '1') {
-                temp_v0 = gameFlagIsSet(*(unsigned int *)(pcVar5 + 0x3c));
-                if (temp_v0 != 0) break;
-                gameFlagSetValue(*(unsigned int *)(pcVar5 + 0x3c),1);
+    // The flag word cannot be added to the shared record's byte-aligned padding.
+    struct FileFlagView {
+        s8 kind;
+        u8 unk01[0x3b];
+        u32 flag;
+    };
+    for (s32 groupIndex = 0; groupIndex < owner->count; ++groupIndex) {
+        FileTableGroup *group = &owner->groups[groupIndex];
+        if (FUN_002ac12c(group) == 0)
+            continue;
+        FileFlagView *records = reinterpret_cast<FileFlagView *>(FUN_002ac0f8(group));
+        u32 count = FUN_002ac0c4(group);
+        for (u32 index = 0; index < count; ++index) {
+            FileFlagView *record = &records[index];
+            if (record->kind == '1') {
+                if (gameFlagIsSet(record->flag))
+                    break;
+                gameFlagSetValue(record->flag, 1, 1);
                 jyoucyuGetTableEntry(0);
-              }
+            } else if (record->kind == '0') {
+                u32 flag = record->flag;
+                if (!flagValueIsPositive(flag)) {
+                    FUN_00295a18(flag, 1);
+                    jyoucyuGetTableEntry(0);
+                }
             }
-            else {
-              temp_v4 = *(unsigned int *)(pcVar5 + 0x3c);
-              temp_v0 = flagValueIsPositive(temp_v4);
-              if (temp_v0 == 0) {
-                FUN_00295a18(temp_v4,1);
-                jyoucyuGetTableEntry(0);
-              }
-            }
-            temp_v3 = temp_v3 + 1;
-          } while (temp_v3 < temp_v2);
         }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(int *)(param_1 + 0x310));
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

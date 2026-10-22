@@ -25,7 +25,9 @@ extern int partyMemberFindById(unsigned int);
 extern unsigned int randNextInRange(unsigned int);
 extern int FUN_00311be4(void);
 /* Supplied declaration required: demonFindClosestEligibleLevel. */
-extern int FUN_003c9b94(unsigned short *, unsigned short *, unsigned short *, unsigned int *);
+struct LeveledLists;
+struct UnitePairEntryIV;
+extern u32 FUN_003c9b94(LeveledLists *, u16, u16, UnitePairEntryIV *);
 
 
 unsigned int FUN_003c92b8(unsigned short *param_1,unsigned short *param_2,unsigned short *param_3,unsigned int *param_4)
@@ -45,7 +47,10 @@ unsigned int FUN_003c92b8(unsigned short *param_1,unsigned short *param_2,unsign
   unsigned char temp_v7;
   
   levelBounds = dataTable05Sub0GetEntries();
-  temp_v1 = FUN_003c9b94(param_1,param_2,param_3,param_4);
+  temp_v1 = FUN_003c9b94(reinterpret_cast<LeveledLists *>(param_1),
+      static_cast<u16>(reinterpret_cast<u32>(param_2)),
+      static_cast<u16>(reinterpret_cast<u32>(param_3)),
+      reinterpret_cast<UnitePairEntryIV *>(param_4));
   if (temp_v1 == 0) {
     return 0;
   }

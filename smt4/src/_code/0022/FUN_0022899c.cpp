@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022a918(...);
 int FUN_0022aa38(unsigned int *, unsigned int);
-int FUN_0022ab08(unsigned int, unsigned int *);
+int selectionCopySupportedValue(unsigned int, unsigned int *);
 int FUN_0022abe0(...);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_002463e8(...);
@@ -57,7 +57,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0022a918. */
 /* Supplied declaration required: FUN_0022aa38. */
-/* Supplied declaration required: FUN_0022ab08. */
+/* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0022abe0. */
 extern int randRange(unsigned int);
 extern unsigned short FUN_00245cc0(unsigned int);
@@ -205,7 +205,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
           if (*(short *)((int)puVar7 + 0x1c6) != 0) {
             return 2;
           }
-          FUN_0022ab08(temp_v9,&temp_v16);
+          selectionCopySupportedValue(temp_v9,&temp_v16);
           puVar5 = temp_v26;
           FUN_0022aa38(temp_v26,temp_v16 & 0xff);
           if (puVar5 != (unsigned int *)0x0) {

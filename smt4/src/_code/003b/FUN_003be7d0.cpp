@@ -1,71 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003be7d0` (_code @ 0x3be7d0, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reward-array pointer formation and item-slot search scheduling differ. */
+#include "shard/W4_Match6_BtlEntry.h"
 
+struct BattleDrop {
+    u16 item;
+    u16 chance;
+    u16 unk04;
+};
+struct BattleRewardRecord {
+    u16 id;
+    u8 level;
+    u8 unk03[0x55];
+    BattleDrop drops[3];
+    u16 unk6A;
+    u32 experience;
+    u8 unk70[8];
+    u32 money;
+};
+struct BattleRewardView {
+    u8 prefix[0x174];
+    u32 items[6];
+    u32 counts[6];
+    u32 money;
+    u32 experience;
+    u32 highestLevel;
+    u8 unk1B0[0x4307];
+    u8 bonusDrops;
+};
 extern "C" {
-
-int dataTable00FindById(void);
-
-extern int randRange(unsigned int);
-extern int btlGetMainState(void);
-/* Supplied declaration required: dataTable00FindById. */
-
-
-void FUN_003be7d0(unsigned int *param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned short *puVar8;
-  int temp_v7;
-  
-  temp_v0 = btlGetMainState();
-  temp_v5 = temp_v0 + 0x174;
-  temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + 0xce);
-  dataTable00FindById();
-  if (temp_v1 != 0) {
-    temp_v7 = 0;
-    *(int *)(temp_v0 + 0x1a8) = *(int *)(temp_v0 + 0x1a8) + *(int *)(temp_v1 + 0x6c);
-    *(int *)(temp_v0 + 0x1a4) = *(int *)(temp_v0 + 0x1a4) + *(int *)(temp_v1 + 0x78);
-    temp_v3 = *(unsigned int *)(temp_v0 + 0x1ac);
-    if (*(unsigned int *)(temp_v0 + 0x1ac) <= (unsigned int)*(unsigned char *)(temp_v1 + 2)) {
-      temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 2);
-    }
-    *(unsigned int *)(temp_v0 + 0x1ac) = temp_v3;
-    temp_v0 = btlGetMainState();
-    temp_v6 = 0;
-    if (*(char *)(temp_v0 + 0x44b7) != '\0') {
-      temp_v7 = 0x32;
-    }
-    do {
-      temp_v0 = temp_v1 + temp_v6 * 6;
-      puVar8 = (unsigned short *)(temp_v0 + 0x58);
-      if ((*puVar8 != 0) &&
-         ((temp_v2 = randRange(99), temp_v2 < (int)((unsigned int)*(unsigned short *)(temp_v0 + 0x5a) + temp_v7) ||
-          ((*param_1 & 0x4000000) != 0)))) {
-        temp_v3 = (unsigned int)*puVar8;
-        temp_v0 = 0;
-        do {
-          temp_v4 = *(unsigned int *)(temp_v5 + temp_v0 * 4);
-          if (temp_v4 == 0 || temp_v4 == temp_v3) {
-            *(unsigned int *)(temp_v5 + temp_v0 * 4) = temp_v3;
-            temp_v0 = temp_v5 + temp_v0 * 4;
-            *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
-            break;
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 6);
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 3);
-  }
-  return;
+BtlMainState *btlGetMainState(void);
+BattleRewardRecord *dataTable00FindById(u32);
+s32 randRange(u32);
 }
 
-} /* extern "C" */
+extern "C" void FUN_003be7d0(const BtlEntry *entry)
+{
+    BattleRewardView *rewards = reinterpret_cast<BattleRewardView *>(btlGetMainState());
+    const BattleRewardRecord *record = dataTable00FindById(entry->id);
+    if (record != NULL) {
+        rewards->experience += record->experience;
+        rewards->money += record->money;
+        if (rewards->highestLevel <= record->level) {
+            rewards->highestLevel = record->level;
+        }
+        s32 bonus = reinterpret_cast<BattleRewardView *>(btlGetMainState())->bonusDrops ? 50 : 0;
+        for (s32 i = 0; i < 3; ++i) {
+            const BattleDrop *drop = &record->drops[i];
+            if (drop->item != 0 &&
+                (randRange(99) < drop->chance + bonus || (entry->flags & 0x4000000))) {
+                for (s32 j = 0; j < 6; ++j) {
+                    if (rewards->items[j] == 0 || rewards->items[j] == drop->item) {
+                        rewards->items[j] = drop->item;
+                        ++rewards->counts[j];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}

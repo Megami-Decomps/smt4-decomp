@@ -1,56 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021f354` (_code @ 0x21f358, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: terminal-name VFP literal loads and scoped-state pointer calculations are scheduled differently. */
+#include "camp/RenderCtx.h"
 
+struct TerminalDrawWork { u8 unk00[9]; u8 nameIndex; u8 unk0a[6]; s32 state; };
+struct TerminalDrawName { u8 unk00[6]; char text[30]; };
 extern "C" {
+extern TerminalDrawWork *g_tmnl;
+extern TerminalDrawName DAT_00432cf8[];
+extern RenderCtx *g_titleScene;
+void FUN_002be5a4(u32 layer, s32 color, const char *text, f32 x, f32 y, f32 z, f32 scaleX, f32 scaleY);
+s32 FUN_002c5d80(u32 group, u32 index);
 
-int FUN_002be5a4(int, unsigned int, char *);
-
-typedef int romwright_code(...);
-extern char s_Mikado_00432cfe[7]; /* 0x432cfe */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002be5a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-
-
-unsigned int FUN_0021f354(int *param_1)
-
+// Draw the terminal name during the active sequence and refresh the scene's scoped render state.
+u32 FUN_0021f354()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  temp_v1 = *(int *)(*param_1 + 0x10);
-  if (temp_v1 - 1U < 0x62) {
-    if (temp_v1 == 1) {
-      FUN_002be5a4(3,0xffffffff,s_Mikado_00432cfe + (unsigned int)*(unsigned char *)(*param_1 + 9) * 0x24);
+    TerminalDrawWork *work = g_tmnl;
+    if ((u32)(work->state - 1) < 98) {
+        if (work->state == 1)
+            FUN_002be5a4(3, -1, DAT_00432cf8[work->nameIndex].text, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+        RenderCtx *scene = g_titleScene;
+        s32 state = FUN_002c5d80(1, 0);
+        RenderStateStack *stack = &scene->stackA;
+        s32 previous = stack->entries[stack->count];
+        stack->entries[++stack->count] = state;
+        if (stack->dirty || previous != state) {
+            stack->apply(state);
+            stack->dirty = 0;
+        }
+        stack = &g_titleScene->stackA;
+        previous = stack->entries[stack->count--];
+        state = stack->entries[stack->count];
+        if (stack->dirty || previous != state) {
+            stack->apply(state);
+            stack->dirty = 0;
+        }
     }
-    temp_v1 = g_titleScene;
-    temp_v0 = FUN_002c5d80(1,0);
-    piVar5 = (int *)(temp_v1 + 0x124c);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v3 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1268))();
-      *(unsigned char *)(temp_v1 + 0x1264) = 0;
-    }
-    temp_v1 = g_titleScene;
-    piVar5 = (int *)(g_titleScene + 0x124c);
-    temp_v0 = *piVar5;
-    temp_v2 = piVar5[temp_v0 + 2];
-    *piVar5 = temp_v0 - 1;
-    if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v2 != piVar5[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1268))();
-      *(unsigned char *)(temp_v1 + 0x1264) = 0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -3,6 +3,7 @@
 #define ASDSDK_SOURCE_GFX_TEX_ASDTEXTURE_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define ASDTEXTURE_TARGET_2D 0xde1  /* GL_TEXTURE_2D */
 
@@ -42,6 +43,24 @@ typedef struct AsdTexture {
         void *auxiliaryData;
     };
 } AsdTexture;
+
+/* A positioned rectangle backed by a texture; both games use this wrapper. */
+struct AsdTextureRegion {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 width;
+    /* 0x0C */ f32 height;
+    /* 0x10 */ AsdTexture *texture;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ f32 scale;
+    /* 0x1C */ u8 flags[2];
+    /* 0x1E */ u8 unk1E[2];
+};
+typedef char AsdTextureRegionLayoutCheck[sizeof(AsdTextureRegion) == 0x20 &&
+    offsetof(AsdTextureRegion, y) == 4 && offsetof(AsdTextureRegion, width) == 8 &&
+    offsetof(AsdTextureRegion, height) == 0xC && offsetof(AsdTextureRegion, texture) == 0x10 &&
+    offsetof(AsdTextureRegion, scale) == 0x18 && offsetof(AsdTextureRegion, flags) == 0x1C ? 1 : -1];
+
 
 /* Buffer-handle entry: texture and backing allocation are independently owned. */
 typedef struct AsdBufferHandle {

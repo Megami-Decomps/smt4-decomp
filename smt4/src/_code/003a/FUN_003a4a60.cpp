@@ -12,7 +12,7 @@ int FUN_0022e500(...);
 int FUN_0022fcb8(...);
 int FUN_002306f8(...);
 int messageMainSetTargetFlags(...);
-int FUN_00295660(...);
+int textEncodeFontSlot(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00299370(...);
 int FUN_002996d8(...);
@@ -24,7 +24,7 @@ int FUN_002bf810(...);
 
 int FUN_0022e538(...);
 int equipmentPreviewUpdateSelection(...);
-int FUN_002305fc(...);
+int buttonHelpSelectMenuPreset(...);
 int FUN_00230e04(...);
 int pointConvertToFloat(...);
 int rectangleInitializeSelection(unsigned int *, int, int, int);
@@ -56,7 +56,7 @@ extern int gameGlobalsDataExists(void);
 /* Supplied declaration required: FUN_0022e538. */
 /* Supplied declaration required: equipmentPreviewUpdateSelection. */
 /* Supplied declaration required: FUN_0022fcb8. */
-/* Supplied declaration required: FUN_002305fc. */
+/* Supplied declaration required: buttonHelpSelectMenuPreset. */
 /* Supplied declaration required: FUN_002306f8. */
 extern int FUN_00230b90(unsigned int *, unsigned short);
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
@@ -79,7 +79,7 @@ extern unsigned int FUN_0028fb3c(unsigned short);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0029212c. */
 /* Supplied declaration required: FUN_002937c8. */
-/* Supplied declaration required: FUN_00295660. */
+/* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageMainSetEnabled. */
@@ -275,7 +275,7 @@ void FUN_003a4a60(unsigned int *param_1)
       if (*(char *)((int)param_1 + 0x826) == '\0') break;
     }
     param_1[0x575a] = 0xffffffff;
-    FUN_002305fc(param_1);
+    buttonHelpSelectMenuPreset(param_1);
     if (param_1[1] == 0xb) {
       messageMainSetEnabled(0);
     }
@@ -316,7 +316,7 @@ void FUN_003a4a60(unsigned int *param_1)
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     temp_v4 = itemGetNameOrFallback(temp_v0,1);
-    FUN_00295660(0,temp_v4);
+    textEncodeFontSlot(0,temp_v4);
     FUN_0029ede8(0x18,param_1[0x21a],0xffffffff,0);
     FUN_0029ede8(0x19,temp_v5,0xffffffff,0);
     if (param_1[0x218] != 8) {

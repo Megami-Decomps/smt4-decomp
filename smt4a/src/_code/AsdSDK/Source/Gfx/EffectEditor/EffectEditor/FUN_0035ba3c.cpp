@@ -1,75 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035ba3c` (_code @ 0x35ba3c, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: two native MOV-r0-r0 words and coordinate-vector register grouping differ. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern Point2 DAT_0059dc7c;
+void FUN_002e59f8(void* destination, const void* source, u32 size);
+void FUN_00200bcc(EffectEditorMenuState* state);
+void effEditorNodeChainApply(EffectEditorMenuState* state);
+void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);
+void effMenuListAppend(EffMenuNode* node, u32 list);
+u32 padButtonIsPressed(u32 buttons);
+u32 FUN_00202178(u32 mapping);
 
-int padButtonIsPressed(...);
-int memAlloc(int, int, int, int, int, int);
-int FUN_00200bcc(int);
-int FUN_00202178(int);
-int effEditorNodeChainApply(int);
-int FUN_002e59f8(...);
-int effMenuListAppend(void);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern unsigned char LAB_00400001; /* 0x400001 */
-extern unsigned char LAB_00400003; /* 0x400003 */
-extern unsigned char g_effectEditor; /* 0x59dbe0 */
-extern unsigned char DAT_0059dc7c; /* 0x59dc7c */
-
-/* Supplied declaration required: padButtonIsPressed. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00200bcc. */
-/* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_002e59f8. */
-/* Supplied declaration required: effMenuListAppend. */
-
-
-unsigned char * FUN_0035ba3c(unsigned long long *param_1,unsigned int param_2,int param_3)
-
+u32 FUN_0035ba3c(Point2* coordinates, u32 value, EffectEditorMenuState* state)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned long long temp_v3;
-  
-  FUN_002e59f8(param_1,&DAT_0059dc7c,8);
-  if ((*(signed char *)((unsigned char *)&g_effectEditor + 0x9)) == '\0') {
-    FUN_00200bcc(param_3);
-  }
-  FUN_002e59f8(&DAT_0059dc7c,param_1,8);
-  effEditorNodeChainApply(param_3);
-  temp_v3 = *param_1;
-  temp_v1 = 0x43360000;
-  temp_v2 = 0x42200000;
-  temp_v0 = 0x10000;
-  memAlloc(0x10000,0x100,0,0x68,0x10,1);
-  *(unsigned int *)(temp_v0 + 8) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
-  *(int *)(temp_v0 + 0x10) = (int)temp_v3;
-  *(int *)(temp_v0 + 0x14) = (int)((unsigned long long)temp_v3 >> 0x20);
-  *(unsigned int *)(temp_v0 + 4) = 0xc;
-  *(unsigned int *)(temp_v0 + 0x18) = param_2;
-  effMenuListAppend();
-  temp_v0 = padButtonIsPressed(1);
-  if (temp_v0 == 0) {
-    FUN_00202178(1);
-    temp_v0 = padButtonIsPressed();
-    if (temp_v0 == 0) {
-      if ((*(unsigned int *)(param_3 + 0x10) & 8) == 0) {
-        return &LAB_00400001;
-      }
-      return &LAB_00400003;
+    // This coordinate vector spans the base node's layout/selection unions.
+    struct CoordinateNodeView {
+        EffMenuNode* next;
+        u32 kind;
+        Vector4 coordinates;
+        u32 value;
+        u8 unk1C[0x4C];
+    };
+    typedef char CoordinateNodeSizeCheck[sizeof(CoordinateNodeView) == 0x68 ? 1 : -1];
+    u32 result = 0x400001;
+    FUN_002e59f8(coordinates, &DAT_0059dc7c, sizeof(Point2));
+    if (!g_effectEditor.dispatch.mode) {
+        FUN_00200bcc(state);
     }
-  }
-  return (unsigned char *)0x400000;
+    FUN_002e59f8(&DAT_0059dc7c, coordinates, sizeof(Point2));
+    effEditorNodeChainApply(state);
+    Vector4 geometry = {182.0f, 40.0f, coordinates->x, coordinates->y};
+    asdDebugTrace("../Source/Gfx/Effect/effMenu.h", 803);
+    CoordinateNodeView* node = static_cast<CoordinateNodeView*>(
+        memAlloc(0x10000, 0x100, 0, sizeof(CoordinateNodeView), 0x10, 1));
+    node->coordinates = geometry;
+    node->kind = 12;
+    node->value = value;
+    effMenuListAppend(reinterpret_cast<EffMenuNode*>(node), 3);
+    if (padButtonIsPressed(1) || padButtonIsPressed(FUN_00202178(1))) {
+        result = 0x400000;
+    } else if (state->dispatch.blocked & 8) {
+        result = 0x400003;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}
