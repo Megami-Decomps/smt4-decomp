@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011c03c` (_code @ 0x11c03c, 0x7a bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj559edc.h"
 
 extern "C" {
 
-int _ZN9Obj559edcD1Ev(unsigned char [188]);
 int FUN_00311458(int *, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -17,7 +17,6 @@ typedef struct {
 extern unsigned char DAT_0055a808; /* 0x55a808 */
 
 extern int *wordRefMax(int *, unsigned int *);
-/* Supplied declaration required: _ZN9Obj559edcD1Ev. */
 /* Supplied declaration required: FUN_00311458. */
 extern int allocElements184(int *, int, unsigned int);
 extern unsigned int bufGrowCapacity3(unsigned int, int *);
@@ -59,7 +58,7 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   }
   param_1[5] = *piVar4 + temp_v3 * 0xb8;
   param_1[4] = *piVar4 + temp_v4 * 0xb8;
-  _ZN9Obj559edcD1Ev(temp_v7);
+  ((Obj559edc *)temp_v7)->Obj559edc::~Obj559edc();
   return param_1;
 }
 

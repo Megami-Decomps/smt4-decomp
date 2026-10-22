@@ -1,22 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj559010D1Ev` (_code @ 0x10ccb0, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Native destruction saves this in r4; retail recovers it by subtracting 0x1c from the embedded teardown result. */
+#include "classes/Obj559010.h"
 
-extern "C" {
+extern "C" void FUN_002eb624(u32 *value);
 
-extern unsigned char DAT_00559018; /* 0x559018 */
-
-extern int FUN_002eb624(unsigned int *);
-
-
-int _ZN9Obj559010D1Ev(unsigned int *param_1)
-
+Obj559010::~Obj559010()
 {
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_00559018;
-  temp_v0 = FUN_002eb624(param_1 + 7);
-  return temp_v0 - 0x1c;
+    FUN_002eb624(unk1c);
 }
-
-} /* extern "C" */

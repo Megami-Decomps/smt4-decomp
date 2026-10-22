@@ -1,4 +1,4 @@
-/* NON_MATCHING: C-form destructor preserves the owner in r4; retail recovers it from the member destructor's returned this. */
+/* NON_MATCHING: Native member destruction preserves the owner instead of recovering it from the embedded destructor result. */
 #include "classes/Obj4223c4.h"
 
 extern "C" {

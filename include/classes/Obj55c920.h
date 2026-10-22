@@ -17,11 +17,11 @@ public:
     virtual void unk0c() = 0;
     virtual void stop() = 0;
     virtual void unk14() = 0;
-    virtual void unk18() = 0;
+    virtual void render() = 0;
     virtual s32 isReady();
-    virtual void unk20();
-    virtual void unk24();
-    virtual void unk28();
+    virtual void openScreen();
+    virtual s32 isScreenReady() const;
+    virtual void closeScreen();
 
     /* 0x004 */ u8 unk004[0x18];
     /* 0x01C */ u8 active;

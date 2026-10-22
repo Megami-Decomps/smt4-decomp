@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229104` (_code @ 0x229108, 0xf8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj420a2c.h"
+#include "classes/Obj557f00.h"
 
 extern "C" {
 
-int _ZN9Obj420a2c12buildEntriesEv(unsigned char *, unsigned int *, int, int);
-int FUN_00423a8c(unsigned int *, unsigned int *, unsigned int, int);
 int FUN_004241e0(unsigned char *, int, unsigned int, unsigned int);
 int FUN_004250dc(unsigned char *, int);
 int FUN_004251e8(unsigned char *, unsigned int);
@@ -25,7 +25,6 @@ extern unsigned char DAT_00617f40; /* 0x617f40 */
 extern int DAT_00618488; /* 0x618488 */
 
 /* Supplied declaration required: _ZN9Obj420a2c12buildEntriesEv. */
-/* Supplied declaration required: FUN_00423a8c. */
 /* Supplied declaration required: FUN_004241e0. */
 extern unsigned int stateObjectClassify(unsigned char *, int);
 extern unsigned int tableRecordGetChecked(unsigned char *, int);
@@ -56,7 +55,7 @@ void FUN_00229104(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = table46COwnerGet(&DAT_00617f40,0);
   temp_v3 = FUN_00424c2c(&DAT_00617f40,temp_v2);
   puVar5 = &DAT_00617e70;
-  _ZN9Obj420a2c12buildEntriesEv(&DAT_00617e70,&DAT_00617e64,temp_v3,0);
+  ((Obj420a2c *)(&DAT_00617e70))->Obj420a2c::buildEntries();
   if (puVar5 == (unsigned char *)0x0) {
     FUN_0043128c();
   }
@@ -65,7 +64,7 @@ void FUN_00229104(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v2 = tableRecordGetChecked(&DAT_00617f40,DAT_00618488);
     temp_v6 = 0x10;
     puVar6 = &DAT_00617f18;
-    FUN_00423a8c(&DAT_00617f18,&DAT_00617e64,temp_v2,1);
+    ((Obj557f00 *)&DAT_00617f18)->Obj557f00::open((u32)&DAT_00617e64, (const void *)temp_v2, 1, temp_v6);
     if (puVar6 == (unsigned int *)0x0) {
       FUN_0043128c();
     }

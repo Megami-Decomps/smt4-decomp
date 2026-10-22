@@ -1,3 +1,4 @@
+#include "classes/Obj558b24.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001148a8` (_code @ 0x1148a8, 0xf4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -7,7 +8,6 @@ extern "C" {
 int FUN_00114504(void);
 int FUN_002ea704(void);
 int onlineTimeGetNow(int *);
-int _ZN9Obj558b24D1Ev(...);
 int FUN_002fa434(...);
 int watcherRefreshEnabledState(void);
 
@@ -24,7 +24,6 @@ typedef struct {
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002eb5f4(void);
 extern unsigned long long FUN_002ecfe4(int);
-/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa434. */
 extern int FUN_002fdb0c(unsigned char *);
 /* Supplied declaration required: watcherRefreshEnabledState. */
@@ -80,7 +79,7 @@ void FUN_001148a8(int param_1)
       temp_v2 = FUN_002ea704();
       FUN_002fa434(temp_v6,temp_v2);
       temp_v1 = FUN_002fdb0c(temp_v6);
-      _ZN9Obj558b24D1Ev(temp_v6);
+      (((Obj558b24 *)(temp_v6))->Obj558b24::~Obj558b24(), (int)(temp_v6));
       if (temp_v1 != 2) {
         temp_v1 = FUN_002eb5f4();
         *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
@@ -111,7 +110,7 @@ void FUN_001148a8(int param_1)
     *(unsigned char *)(*(int *)(temp_v1 + 0xd0) + 0x11a) = 1;
   }
   FUN_00114504();
-  _ZN9Obj558b24D1Ev(temp_v4);
+  (((Obj558b24 *)(temp_v4))->Obj558b24::~Obj558b24(), (int)(temp_v4));
   return;
 }
 

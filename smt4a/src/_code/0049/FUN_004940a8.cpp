@@ -1,8 +1,8 @@
 #include "romwright_types.h"
+#include "classes/Obj422594.h"
 
 extern "C" {
 
-int FUN_001b3f7c(void);
 int rectRecRead(...);
 int FUN_004d091c(...);
 int touchRegisterFirstRegion(...);
@@ -16,7 +16,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001b3f7c. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: FUN_004d091c. */
 /* Supplied declaration required: touchRegisterFirstRegion. */
@@ -34,7 +33,7 @@ void FUN_004940a8(unsigned int param_1,int param_2)
   unsigned int temp_v3 [1];
   
   temp_v0 = *(int *)(param_2 + 4);
-  FUN_001b3f7c();
+  ((Obj422594 *)param_1)->Obj422594::initialize((const void *)param_2);
   if (temp_v0 != 9) {
     rectRecRead(0x20,0xfa,&temp_v2,&uStack_20,&temp_v1,temp_v3);
     touchRegisterFirstRegion(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);

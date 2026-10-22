@@ -1,3 +1,4 @@
+#include "classes/Obj420a2c.h"
 /* Shuts down the Mobiclip player: stops and finalizes its objects, closes the movie file. */
 #include "common.h"
 #include "mobiclip_ctrl/MobiclipCtrl.h"
@@ -8,7 +9,6 @@ int asdFatalError(void);
 int mobiclipS4FsReaderDestroy(S4FsReader *reader);
 int FUN_0034f5f8(void *obj);
 int FUN_0034f6e8(void *obj);
-int FUN_0034f780(void *obj);
 int movieSyncDrainSourcePositions(S4Player *player);
 int mobiclipS4PlayerDestroy(S4Player *player);
 int FUN_003f6b28(u32 handle);
@@ -28,7 +28,7 @@ void mobiclipCtrlShutdown(void)
     FUN_0034f5f8(DAT_004c3af8);
     movieSyncDrainSourcePositions(&DAT_004c3b20);
     mobiclipS4PlayerDestroy(&DAT_004c3b20);
-    FUN_0034f780(DAT_004c3a50);
+    ((Obj420a2c *)DAT_004c3a50)->Obj420a2c::releaseSources();
     FUN_0034f6e8(DAT_004c3af8);
     FUN_003f6b28(DAT_0044d024);
     DAT_0044d024 = 0;

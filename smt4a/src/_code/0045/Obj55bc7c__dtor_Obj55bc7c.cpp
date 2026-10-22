@@ -1,20 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj55bc7cD1Ev` (_code @ 0x456f60, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: The decompiled container-cleanup arithmetic folds away retail iterator-distance logic and uses different material iteration offsets. */
 #include "romwright_types.h"
+#include "classes/Obj55bc7c.h"
 
 extern "C" {
 
 int nw_gfx_Material_DestroyResMaterial(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
-extern unsigned char DAT_0055bc84; /* 0x55bc84 */
 
 /* Supplied declaration required: nw_gfx_Material_DestroyResMaterial. */
 
 
-unsigned int * _ZN9Obj55bc7cD1Ev(unsigned int *param_1)
+} /* extern "C" */
+
+Obj55bc7c::~Obj55bc7c()
 
 {
+    unsigned int *param_1 = (unsigned int *)this;
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   unsigned int temp_v1;
@@ -25,7 +27,6 @@ unsigned int * _ZN9Obj55bc7cD1Ev(unsigned int *param_1)
   unsigned int *puVar7;
   unsigned int temp_v5;
   
-  *param_1 = (unsigned int)&DAT_0055bc84;
   temp_v5 = param_1[1];
   puVar7 = (unsigned int *)param_1[5];
   for (puVar6 = (unsigned int *)param_1[4]; puVar6 != puVar7; puVar6 = puVar6 + 1) {
@@ -50,7 +51,6 @@ unsigned int * _ZN9Obj55bc7cD1Ev(unsigned int *param_1)
   if ((int *)param_1[3] != (int *)0x0 && temp_v3 != 0) {
     (**(romwright_code **)(*(int *)param_1[3] + 0xc))();
   }
-  return param_1;
+  return;
 }
 
-} /* extern "C" */

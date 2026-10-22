@@ -1,3 +1,4 @@
+#include "classes/Obj5586e0.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f8d10` (_code @ 0x2f8d10, 0x5c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -6,7 +7,6 @@ extern "C" {
 
 int FUN_001176c8(int, int);
 int FUN_002eab08(int *);
-int FUN_002f87e8(int [2], int, int *);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -21,7 +21,6 @@ typedef struct {
 /* Supplied declaration required: FUN_001176c8. */
 /* Supplied declaration required: FUN_002eab08. */
 extern int wordRefsDiffer_002eb690(int *, unsigned int *);
-/* Supplied declaration required: FUN_002f87e8. */
 
 
 void FUN_002f8d10(int param_1)
@@ -48,7 +47,7 @@ void FUN_002f8d10(int param_1)
     *(unsigned int *)(temp_v0 + 0x104) = temp_v4;
     FUN_001176c8(param_1 + 0xa4,temp_v0);
     temp_v2 = temp_v5[0];
-    FUN_002f87e8(temp_v6,param_1 + 0x1d4,&temp_v2);
+    *(SharedQueueIterator *)(temp_v6) = ((Obj5586e0 *)(param_1 + 0x1d4))->erase(*(SharedQueueIterator *)(&temp_v2));
     temp_v5[0] = temp_v6[0];
   }
   return;

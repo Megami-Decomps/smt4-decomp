@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010b5e8` (_code @ 0x10b5e8, 0x234 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/AccelerometerReader.h"
+#include <new>
 
 extern "C" {
 
 int FUN_00107934(void);
 int FUN_00108b6c(void);
-int _ZN2nn3hid3CTR19AccelerometerReaderC1EPv(unsigned char *, unsigned int);
 int FUN_002bd808(unsigned char *);
 int SUB42(double, int);
 int VectorSignedToFloat(int, int);
@@ -87,7 +88,7 @@ unsigned int FUN_0010b5e8(void)
   FUN_00108b6c();
   if (((_ZGVreader & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVreader), temp_v0 != 0)) {
     temp_v1 = FUN_0011c454();
-    _ZN2nn3hid3CTR19AccelerometerReaderC1EPv(&reader,temp_v1);
+    (int)(new ((void *)(&reader)) nn::hid::CTR::AccelerometerReader((void *)temp_v1));
   }
   if (DAT_004eaae8 != 0) {
     DAT_004eaa8c = g_accelerometerState;

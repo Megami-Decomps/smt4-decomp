@@ -44,8 +44,11 @@ public:
 class Obj420a2c : public Obj420a2cBase {
 public:
     Obj420a2c();
-    virtual int buildEntries();   /* +0x00: builds the entry of each present source */
-    virtual Obj420a2c *vfunc04();
+    ~Obj420a2c();
+    virtual int buildEntries(); /* +0x00 */
+    virtual void releaseSources(); /* +0x04 */
+    virtual s32 getValue(u32) const; /* +0x08 */
+    virtual u32 getOutput(u32) const; /* +0x0c */
 
     /* 0x00: vtable pointer */
     /* 0x0C */ Obj420a2cSource *sourceB;

@@ -1,15 +1,5 @@
-#include "romwright_types.h"
+#include "classes/Obj559720.h"
 
-extern "C" {
-
-extern unsigned char DAT_0055b31c; /* 0x55b31c */
-
-
-void _ZN9Obj559720D1Ev(unsigned int *param_1)
-
+Obj559720::~Obj559720()
 {
-  *param_1 = (unsigned int)&DAT_0055b31c;
-  return;
 }
-
-} /* extern "C" */

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010d798` (_code @ 0x10d798, 0x252 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj559ecc.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ int FUN_002f7ac4(unsigned char [176], unsigned int);
 int FUN_002f7af2(...);
 int FUN_002f7b34(...);
 int FUN_002f7b60(...);
-int FUN_002f7b80(...);
 int FUN_002f7b9c(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -64,7 +64,7 @@ extern unsigned int FUN_002eea7c(unsigned char *);
 /* Supplied declaration required: FUN_002f7af2. */
 /* Supplied declaration required: FUN_002f7b34. */
 /* Supplied declaration required: FUN_002f7b60. */
-/* Supplied declaration required: FUN_002f7b80. */
+/* Supplied declaration required: _ZN9Obj559eccD1Ev. */
 /* Supplied declaration required: FUN_002f7b9c. */
 
 
@@ -129,32 +129,32 @@ void FUN_0010d798(int param_1)
   temp_v2 = FUN_002ea100(temp_v16,&LAB_0010d9f8);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v17);
   FUN_002f7b60(temp_v0,temp_v2);
-  FUN_002f7b80(temp_v13);
+  (((Obj559ecc *)(temp_v13))->Obj559ecc::~Obj559ecc(), (int)(temp_v13));
   _ZN9Obj55aff4D1Ev(temp_v16);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010d9fc);
   temp_v3 = FUN_002ea100(temp_v16,&LAB_0010da08);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v3,temp_v2);
   FUN_002f7b60(temp_v0,temp_v2);
-  FUN_002f7b80(temp_v13);
+  (((Obj559ecc *)(temp_v13))->Obj559ecc::~Obj559ecc(), (int)(temp_v13));
   _ZN9Obj55aff4D1Ev(temp_v16);
   _ZN9Obj55aff4D1Ev(temp_v14);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010da10);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,param_1 + 0x144);
   FUN_002f7b60(temp_v0,temp_v2);
-  FUN_002f7b80(temp_v13);
+  (((Obj559ecc *)(temp_v13))->Obj559ecc::~Obj559ecc(), (int)(temp_v13));
   _ZN9Obj55aff4D1Ev(temp_v14);
   FUN_002f7b9c(temp_v15,temp_v11);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010da18);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v15);
   FUN_002f7b60(temp_v0,temp_v2);
-  FUN_002f7b80(temp_v13);
+  (((Obj559ecc *)(temp_v13))->Obj559ecc::~Obj559ecc(), (int)(temp_v13));
   _ZN9Obj55aff4D1Ev(temp_v14);
   _ZN9Obj55aff4D1Ev(temp_v15);
   FUN_002f7b9c(temp_v15,temp_v12);
   temp_v2 = FUN_002ea100(temp_v14,&LAB_0010da24);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v15);
   FUN_002f7b60(temp_v0,temp_v2);
-  FUN_002f7b80(temp_v13);
+  (((Obj559ecc *)(temp_v13))->Obj559ecc::~Obj559ecc(), (int)(temp_v13));
   _ZN9Obj55aff4D1Ev(temp_v14);
   _ZN9Obj55aff4D1Ev(temp_v15);
   if (*(char *)(param_1 + 0x17c) != '\0') {
@@ -164,7 +164,7 @@ void FUN_0010d798(int param_1)
     temp_v3 = FUN_002ea100(temp_v19,&LAB_0010da30);
     temp_v2 = FUN_002f7b34(temp_v18,temp_v3,temp_v2);
     FUN_002f7b60(temp_v0,temp_v2);
-    FUN_002f7b80(temp_v18);
+    (((Obj559ecc *)(temp_v18))->Obj559ecc::~Obj559ecc(), (int)(temp_v18));
     _ZN9Obj55aff4D1Ev(temp_v19);
     _ZN9Obj55aff4D1Ev(temp_v20);
     FUN_002ea3a8(temp_v4);

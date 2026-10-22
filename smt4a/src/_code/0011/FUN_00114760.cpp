@@ -1,3 +1,4 @@
+#include "classes/Obj558b24.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114760` (_code @ 0x114760, 0x138 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -12,7 +13,6 @@ int onlineUrlDestroy(...);
 int FUN_002eb858(unsigned char [32], unsigned int, int);
 int onlineSockAddrConstruct2(...);
 int FUN_002ee568(...);
-int _ZN9Obj558b24D1Ev(unsigned char [36]);
 int FUN_002fa434(unsigned char [36], unsigned int);
 int FUN_002fff82(int, unsigned int);
 int FUN_002fffbe(unsigned char [48]);
@@ -36,7 +36,6 @@ extern unsigned int FUN_002ea3c0(int *, unsigned char *, unsigned int, unsigned 
 /* Supplied declaration required: FUN_002eb858. */
 /* Supplied declaration required: onlineSockAddrConstruct2. */
 /* Supplied declaration required: FUN_002ee568. */
-/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002fa434. */
 extern int FUN_002fdb0c(unsigned char *);
 extern unsigned int FUN_002fff64(unsigned char *, unsigned int, unsigned int);
@@ -99,7 +98,7 @@ void FUN_00114760(int param_1)
         else {
           temp_v0 = 0;
         }
-        _ZN9Obj558b24D1Ev(temp_v8);
+        (((Obj558b24 *)(temp_v8))->Obj558b24::~Obj558b24(), (int)(temp_v8));
         if (temp_v0) {
           temp_v2 = ((int *)*piVar3)[1];
         }

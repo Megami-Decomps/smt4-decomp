@@ -8,7 +8,7 @@
  * window's rectangle. The other methods are the windows' own. */
 class ObjBase3c2ef0 : public Obj422594 {
 public:
-    virtual void vfunc08(void *param) = 0;
+    virtual void initialize(const void *source) = 0;
     virtual bool vfunc0c();
     virtual void vfunc10(u32 arg) = 0;
     virtual void vfunc14() = 0;

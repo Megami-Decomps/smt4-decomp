@@ -1,3 +1,5 @@
+#include "classes/Texture.h"
+#include <new>
 /* NON_MATCHING: Retail ldr r0, [r4, #48] differs from recovered ldr r1, [r4, #48]. */
 #include "common.h"
 
@@ -37,14 +39,13 @@ struct TextureView {
 
 } // namespace
 
-extern "C" void _ZN2nn2gr3CTR7TextureC1Ev(TextureView* texture);
 extern "C" void texCommandListBuild(TextureView* texture, u32 commandList, u32 mode);
 
 // Populate a temporary texture description and build its texture commands.
 extern "C" void FUN_00421e9c(u32 commandList, const TextureSourceView* source)
 {
     TextureView texture;
-    _ZN2nn2gr3CTR7TextureC1Ev(&texture);
+    new ((void *)(&texture)) nn::gr::CTR::Texture();
     texture.unk1C = 0;
     texture.unk00 = source->unk30;
     texture.unk04 = static_cast<u16>(source->unk14);

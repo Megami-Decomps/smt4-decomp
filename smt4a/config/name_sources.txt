@@ -5176,3 +5176,165 @@
 003b0310 scrCommEnterPlaceAndSavePoint inferred [med] script command: place 0x18 with table 0x4C entry 1, then records the current map/area/position as the flag block save point
 0039cefc scrCommBtlHasCandidateWithId inferred [med] script command: result 1 when a battle combatant matching candidate masks 3/0, not mask 5, has the argument id and passes FUN_003248e4
 0033a988 mapRecordResumePoint inferred [med] records the resume point (mode 1-3: map/area/object, position, heading, view value) into the flag block
+0055b8d0 DAT_0055b8d0 inferred unname before canonical twin name
+0055ba10 DAT_0055ba10 inferred unname before canonical twin name
+0055c9e4 DAT_0055c9e4 inferred unname before canonical twin name
+004062a0 _ZN9Obj557b58D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00409f70 _ZN9Obj42079421dispatchChildCallbackEv inferred Invokes the child/owner virtual callback; base implementation is reused by all listed filter subclasses.
+00414e28 _ZN9Obj42080c15prepareGeometryEv inferred Refreshes the source rectangle and computes screen-quad corner transforms.
+00414bb0 _ZN9Obj42080c4drawEv inferred Builds screen-filter vertices and submits the polygon(s) for drawing.
+00415918 _ZN9Obj42083c15prepareGeometryEv inferred Refreshes the source rectangle and computes screen-quad corner transforms.
+00415504 _ZN9Obj42083c4drawEv inferred Builds screen-filter vertices and submits the polygon(s) for drawing.
+0041c62c _ZN9Obj557dccD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0041ca28 _ZN9Obj42094c19initializeParticlesEv inferred Refreshes child rectangles and initializes per-particle phase, velocity and transform state.
+0041c6e0 _ZN9Obj42094c4drawEv inferred Builds transformed filter quads and submits each polygon to the GPU.
+0041cde8 _ZN9Obj42094c25refreshTextureCoordinatesEv inferred Refreshes child rectangles and copies UV bounds before initializing particle motion.
+0041d164 _ZN9Obj4209904drawEv inferred Transforms and submits the two filter quads.
+0041d0e4 _ZN9Obj4209907isReadyEv inferred Returns whether every present child handle is ready, refreshing cached child data as required.
+00423d94 _ZN9Obj420a2c14releaseSourcesEv inferred Releases each of three source handles/entries and clears the owner and source pointers; this slot is NOT D0.
+00423a8c _ZN9Obj557f004openEjPKvij inferred Opens resource-backed input, allocates staging storage when necessary, and initializes stream positions; slot 0 is NOT a destructor.
+00423cfc _ZN9Obj557f005closeEv inferred Releases resource/staging handles and resets stream owner and cursor state; slot 1 is NOT D0.
+00423b48 _ZN9Obj557f004readEPvj inferred Copies/reads the requested bytes and advances the 64-bit resource cursor.
+00109e7a _ZN9Obj558be07vfunc0cEj inferred Allocates an online request node and dispatches work for the supplied argument.
+001239ee _ZN9Obj558be07vfunc10Ev inferred Always reports success for this online operation.
+0010974e _ZN9Obj558be07vfunc14EPvj inferred Retains a nonempty source, starts its asynchronous operation, and records the pending flag.
+0010a530 _ZN9Obj558c28D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0010a044 _ZN9Obj558c287vfunc08Ev inferred Enters object mode 0x1001 through the common transition helper.
+0010ab42 _ZN9Obj558c907vfunc0cEjjj inferred Creates a temporary context reference for the three callback arguments and returns a success status; the draft long-long return is not a genuine 64-bit value.
+0010ab7e _ZN9Obj558c907vfunc10Ejjj inferred Creates a temporary context reference for the three callback arguments and returns a success status; the draft long-long return is not a genuine 64-bit value.
+001239f2 _ZN9Obj558c907vfunc14Ejjj inferred Creates a temporary context reference for the three callback arguments and returns a success status; the draft long-long return is not a genuine 64-bit value.
+0010ab40 _ZN9Obj558c907vfunc1cEv inferred Empty optional hook.
+001146ac _ZN9Obj5596dcD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00114658 _ZN9Obj5596dc7vfunc0cEj inferred Looks up the key through the embedded object, then releases temporary string state.
+0011461e _ZN9Obj5596dc7vfunc14Ej inferred Builds key string state, dispatches the lookup hook and releases temporary data.
+0011461c _ZN9Obj5596dc7vfunc1cEv inferred Empty optional online-object hook.
+001157f6 _ZN9Obj55984c7vfunc08EPKvjjjjjj inferred Routes a packet to its indexed child; assembly explicitly saves/replays r1-r3 and four stack words (seven explicit arguments).
+001157d0 _ZN9Obj55984c7vfunc0cEPKvjjjjjj inferred Routes a packet to its indexed child; assembly explicitly saves/replays r1-r3 and four stack words (seven explicit arguments).
+0011583a _ZN9Obj55984c7vfunc10EPKvjj inferred Routes a packet to its indexed child; assembly preserves r1-r3 across tail/call dispatch (three explicit arguments).
+0011581c _ZN9Obj55984c7vfunc14EPKvjj inferred Routes a packet to its indexed child; assembly preserves r1-r3 across tail/call dispatch (three explicit arguments).
+0011587c _ZN9Obj55984c7vfunc18EPKvjj inferred Checks packet format, selects the matching child and returns that child hook status.
+00115788 _ZN9Obj55984c6handleEPKvjj inferred Validates packet bytes and routes the handle callback to the selected/extra child.
+00115852 _ZN9Obj55984c6notifyEPKvj inferred Routes packet notification to the extra child for kind B, otherwise to the indexed child.
+003054b8 _ZN9Obj55a178D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0010edd2 _ZN9Obj55a1787vfunc14Ev inferred Empty state-machine hook.
+0010edb6 _ZN9Obj55a1787vfunc18Ev inferred Forwards to the virtual state accessor at +0x38.
+0010edb0 _ZN9Obj55a1787vfunc1cEv inferred Forwards to the virtual state accessor at +0x38.
+0012246c _ZN9Obj55a1787vfunc20Ev inferred Invokes the retained target when the active flag is set, then reports success.
+0010ee50 _ZN9Obj55a1787vfunc24Ev inferred Always accepts this state-machine operation.
+00122452 _ZN9Obj55a1787vfunc28Ev inferred Invokes the retained target when the active flag is set, then reports success.
+0010edce _ZN9Obj55a1787vfunc2cEv inferred Always accepts this state-machine operation.
+0010edd4 _ZNK9Obj55a17812acceptsEventEj inferred Recognizes event/state combinations using the object state and event flags.
+0010edbc _ZNK9Obj55a1788isActiveEv inferred Reports whether the state is one of the two active states.
+0010eee4 _ZNK9Obj55a1788getStateEv inferred Returns the state halfword.
+0012411a _ZN9Obj55a1786createEv inferred Allocates 0x44 bytes and constructs another Obj55a178 object with the default mode.
+002f4fac _ZN9Obj55a1789setTargetEPv inferred Releases the current shared target and retains the replacement in the shared slot.
+00119d68 _ZN9Obj55a218D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00310698 _ZN9Obj55a2187vfunc1cEv inferred Wrapper sets state 5 and tail-enters handleSetState through an inline interworking veneer; split veneer bytes before phase B.
+001208e4 _ZN9Obj55a2187vfunc24Ev inferred Empty optional handle-holder hook.
+001241e8 _ZN9Obj55a2545cloneEv inferred Allocates and copies an authentication object; final constructed type is the separate Obj55952c derived table.
+001241b4 _ZN9Obj55a25411getTypeNameEv inferred Returns nontrivial Obj55aff4 by value: r0 is hidden result storage, not this; constructs the AuthenticationInfo label.
+00119ecc _ZNK9Obj55a2546copyToEPS_ inferred Copies this authentication value into the supplied destination using its copy constructor; inherited by Obj55952c.
+0030cbb8 _ZN9Obj55a314D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cbb0 _ZN9Obj55a918D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030ca92 _ZN9Obj55a9e0D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cba8 _ZN9Obj55ad40D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cba0 _ZN9Obj55ada4D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cb98 _ZN9Obj55add8D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cb90 _ZN9Obj55adecD1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cb88 _ZN9Obj55ae00D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+0030cb80 _ZN9Obj55aea8D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+00504910 _ZNK9Obj4214b417getTypeDescriptorEv inferred Returns the static implementation/type descriptor.
+0044ab30 _ZN9Obj4214b415buildViewMatrixEPfjPKf inferred Builds a view matrix from resource transformation, mode flags and an input position/vector.
+0044ab28 _ZNK9Obj4214b49getHandleEv inferred Returns the registered resource handle.
+0044e7a0 _ZN9Obj4215f423buildProjectionMatricesEPfS0_ inferred Exact cross-game twin of Obj4215f4::buildProjectionMatrices; outputs oriented projection and texture-correction float matrices.
+0044e798 _ZNK9Obj4215f48getValueEv inferred Returns the stored scalar property.
+00506204 _ZNK9Obj4215f411getCategoryEv inferred Reports the fixed implementation category (2).
+0050626c _ZNK9Obj42165417getTypeDescriptorEv inferred Returns the static implementation/type descriptor.
+0044336c _ZN9Obj4216548setStateEj inferred Stores the new state word and reports success.
+00506278 _ZN9Obj4216547vfunc18EPvj inferred Walks animation/member state and applies updates to the supplied target collection.
+00506f1c _ZNK9Obj55bad08getValueEv inferred Returns the stored scalar property.
+00506f24 _ZN9Obj55bad07vfunc18Ev inferred Always returns zero for this optional resource hook.
+00507164 _ZNK9Obj55bc7c17getTypeDescriptorEv inferred Returns the static implementation/type descriptor.
+00473270 _ZN9Obj4221a45startEv inferred Places the three table-58 window parts and sets the ready flag; draft does not use the old header extra argument.
+0047330c _ZN9Obj4221a44drawEj inferred Draws the window parts with the supplied render argument.
+00474b70 _ZN9Obj4222248completeEv inferred Clears the pending byte; belongs to separately referenced callback vtable at 0x55c72c, not Obj422214.
+004826b0 _ZN9Obj55c81c6updateEv inferred Dispatches the indexed state handler and the trailing virtual update hook.
+0048260c _ZN9Obj55c81c7vfunc18Ev inferred Empty optional update hook.
+004afe50 _ZN9Obj422540D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+004afe34 _ZN9Obj4225406decodeEPKhj inferred Consumes a single record byte, returns -1 when the input count is zero; exact cross-game twin in the canonical Obj422540 class.
+0050d374 _ZNK9Obj4225406equalsEPK20SelectionValueRecord inferred Compares the two common state words of the supplied value record.
+004d0b54 _ZN9Obj422594D0Ev inferred Deleting destructor restores the owner vptr, removes all registered touch regions, and frees the owner.
+001b3f7c _ZN9Obj42259410initializeEPKv inferred Clears window slots/regions, copies source words/data, initializes mode and invalid handle values.
+002f7b80 _ZN9Obj559eccD1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+00146f68 _ZN9Obj420fa47vfunc08Ev inferred Text scanner hook allocates and initializes parsing state; signature has implicit this even though the draft omits unused input.
+004a76a8 _ZN9Obj55c92010openScreenEv inferred Schedules asynchronous loads for both Bible screen resources; inherited by both menu subclasses.
+004a7a30 _ZNK9Obj55c92013isScreenReadyEv inferred Reports whether both asynchronously loaded screen-resource handles are present.
+0035b21c _ZN9Obj55c92011closeScreenEv inferred Destroys the script process, releases both loaded screen resources, text tables/textures and menu button state; retail overwrites r1-r3 before use, so no explicit arguments.
+004a45b4 _ZN9Obj55c89cD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+004a2c00 _ZN9Obj55c89c5startEv inferred Initializes the Bible menu/window and its state machine.
+004a4530 _ZN9Obj55c89c6updateEv inferred Dispatches the selected menu state handler.
+004a1510 _ZN9Obj55c89c6renderEv inferred Renders the Bible menu and restores the common render-state matrices.
+004a4e9c _ZN9Obj55c8d05startEv inferred Initializes the Bible menu/window and its state machine.
+004a45e8 _ZN9Obj55c8d06renderEv inferred Renders the lookup-book window using its current state.
+001293ac _ZN9Obj55933c7vfunc00Ev inferred Empty single-slot polymorphic hook; table has no virtual destructor pair.
+00421944 _ZN9Obj4209ccD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0047326c _ZN9Obj42217cD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00474730 _ZN9Obj4221e4D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00474624 _ZN9Obj4221e47vfunc0cEv inferred Updates window result/status and remaps the recorded resource identifier.
+0047484c _ZN9Obj4221fc7vfunc0cEPKv inferred Updates window result/status from the supplied request; draft pointer return is incidental register state, not a proven public result.
+00475d14 _ZN9Obj422248D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00475b78 _ZN9Obj4222487vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+00475ea4 _ZN9Obj422260D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00475d48 _ZN9Obj4222607vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+00476dc8 _ZN9Obj422290D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00476c2c _ZN9Obj4222907vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+004736c0 _ZN9Obj4221bcD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00473538 _ZN9Obj4221bc7vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+00474b7c _ZN9Obj4222307vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+004afe4c _ZN9Obj55c954D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+004ace74 _ZN9Obj55c95414copyParametersEPK20SelectionValueRecord inferred Copies the scalar/enable fields for the integer-selection record.
+004acf74 _ZN9Obj55c978D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+00115554 _ZN9Obj55980cD0Ev inferred Deleting destructor of the separately constructed vtable at 0x55980c (address point 0x559814); calls Obj5593b8 D1 then delete.
+002eb728 _ZN9Obj5586e0D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+002eb744 _ZN9Obj5586e05clearEv inferred Removes each queued node via the virtual erase operation; no explicit arguments and no 64-bit result (push/pop r0-r3 preserves incoming registers).
+002f2b5c _ZN9Obj5586e06appendEP15SharedQueueNodeb inferred Adds the retained node to the queue and advances processing until a terminal node state; optional boolean controls timestamping.
+001051f4 _ZN9Obj5586e08linkNodeEP15SharedQueueNodeb inferred Retains and links an unlinked queue node, increments the count, and optionally timestamps it.
+002f87e8 _ZN9Obj5586e05eraseE19SharedQueueIterator inferred Returns a one-word nontrivially copied iterator through hidden result storage; unlinks/releases the selected node. Not u64.
+001052ea _ZN9Obj5586e07vfunc18Ev inferred Always reports zero for the optional queue hook.
+0012cf5c _ZN9Obj55b074D1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+001117cc _ZN9Obj55951cD1Ev inferred Complete-object destructor in slot zero; forwards base/member teardown, which may be a weak hook removed from retail.
+001117f6 _ZN9Obj55952cD1Ev inferred Complete-object destructor of the separate derived authentication object; forwards to Obj55a254 D1.
+00122064 _ZN9Obj55b104D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00557c18 _ZTV9Obj4207c0 inferred size:0x10 Independently constructed tables at 0x557c28 and 0x557c38 are not slots of this primary destructor table.
+0055b8f4 _ZTV9Obj4214d8 inferred size:0x14 Counterpart independent single-hook table starts at 0x55b908, address point 0x55b910 installed from 0x1723e4.
+0055aea8 _ZTV9Obj55aea8 inferred size:0x14 Separately installed address point 0x55aec4 belongs to a new table at 0x55aebc, not this destructor table.
+0055c71c _ZTV9Obj422214 inferred size:0x10 Separate completion-callback table follows the two destructor slots; the old +0x10 hook belongs to that other object.
+005597fc _ZTV9Obj5597fc inferred size:0x10 Separate Obj5593b8-derived type starts at 0x55980c; initVtable00559814 installs its address point 0x559814.
+0055951c _ZTV9Obj55951c inferred size:0x10 Separate authentication subtype vtable starts at 0x55952c; its address point 0x559534 is installed by the clone factory and constructor.
+0055b8d0 _ZTV9Obj4214b4 inferred size:0x24 Exact masked retail method twins establish the same class as SMT IV; canonicalize the class rather than naming twins differently.
+0055ba10 _ZTV9Obj4215f4 inferred size:0x24 Exact masked retail method twins establish the same class as SMT IV; canonicalize the class rather than naming twins differently.
+0055c9e4 _ZTV9Obj422540 inferred size:0x24 Exact masked retail method twins establish the same class as SMT IV; canonicalize the class rather than naming twins differently.
+0044b310 _ZN9Obj4214b4D1Ev inferred Supporting complete-object destructor reowner for the canonical cross-game class identity.
+0044e990 _ZN9Obj4215f4D1Ev inferred Supporting complete-object destructor reowner for the canonical cross-game class identity.
+0050491c _ZNK9Obj4214b416implementationIdEv inferred Supporting const descriptor-id member reowner for the canonical cross-game class identity.
+004b0150 _ZN9Obj4225409copyFlagsEPK20SelectionValueRecord inferred Supporting copy member reowner for the canonical cross-game byte-record class.
+00557c28 _ZTV9Obj557c28 inferred size:0x10 Independent all-stripped destructor table; factory at 0x157fac installs address point 0x557c30.
+00557c38 _ZTV9Obj4207d0 inferred size:0x10 Counterpart resource-holder table; address point 0x557c40, deleting callback at 0x40ac3c.
+00557e7c _ZTV9Obj4209d8 inferred size:0x34 Counterpart independent battle model callback table; primary Obj4209cc already ends at 0x557e7c.
+0055b908 _ZTV9Obj4214ec inferred size:0xc Counterpart single-hook allocator-owned object vtable; hook is at 0x44b3c4, beyond the old truncated symbol.
+0055aebc _ZTV9Obj55aebc inferred size:0xc Independent single-hook table; its address point 0x55aec4 is installed from 0x12bdde.
+0055c72c _ZTV9Obj422224 inferred size:0xc Independent single-slot completion callback; clears the pending byte (windowClearCallbackState in SMT IV).
+0055980c _ZTV9Obj55980c inferred size:0x1c Independent Obj5593b8-derived table with deleting destructor FUN_00115554 in slot +4; not part of Obj5597fc.
+0055952c _ZTV9Obj55952c inferred size:0x28 Independent Obj55a254-derived authentication type; destructor at +0 forwards Obj55a254 D1, inherited clone/type-name/copy hooks follow.
+0055b8d8 DAT_0055b8d8 inferred address point of _ZTV9Obj4214b4, not a separate global
+0047330c _ZN9Obj4221a48vfunc10Ej inferred overrides ObjBase3c2ef0::vfunc10(u32), as its IV twin does
+00557de4 DAT_00557de4 inferred address point of _ZTV9Obj42094c
+00557bf0 DAT_00557bf0 inferred address point of _ZTV9Obj420794
+0047330c _ZN9Obj4221a47vfunc10Ej inferred fix mangled length
+0039988c _ZN9Obj464cb016postSelectedWordEv inferred posts the object combined with the selected word; old name was malformed and held a constant
+00473270 _ZN9Obj4221a45startEPKv inferred forwards its incoming source (r1) to Obj422594::initialize(const void*)
+0041ca28 _ZN9Obj42094c15prepareGeometryEv inferred Override of Obj420794 slot +08 prepares particle geometry.
+0041d520 _ZN9Obj42099015prepareGeometryEv inferred Override of Obj420794 slot +08 updates quad geometry UVs.
+0041539c _ZN9Obj42080c25refreshTextureCoordinatesEv inferred Override of Obj420794 slot +10 refreshes the quad texture-coordinate rectangle.
+0041da04 _ZN9Obj42099025refreshTextureCoordinatesEv inferred Override of Obj420794 slot +10 refreshes quad texture-coordinate rectangles.
+00473270 _ZN9Obj4221a410initializeEPKv inferred same table +08 override as smt4

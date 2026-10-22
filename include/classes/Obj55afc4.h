@@ -15,9 +15,9 @@ public:
 class Obj55afc4 {
 public:
     virtual ~Obj55afc4();
-    virtual void pure0() = 0;
-    virtual void pure1() = 0;
-    virtual void pure2() = 0;
+    virtual void vfunc08() = 0;
+    virtual void vfunc0c(u32) = 0;
+    virtual s32 vfunc10() = 0;
     void stop();
 
 protected:

@@ -1,15 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb620` (_code @ 0x3bb620, 0x140 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj55ca08.h"
 
 extern "C" {
 
-int FUN_00230954(int, int);
 int FUN_00233410(int);
 int flaggedValueHolderGetTotal(...);
 int asdTMTexTableLoadEntryAsync(int, unsigned int);
 
-/* Supplied declaration required: FUN_00230954. */
 extern int stateCounterBelowLimit(int, unsigned int);
 extern unsigned int FUN_002333f0(int);
 /* Supplied declaration required: FUN_00233410. */
@@ -32,7 +31,7 @@ unsigned int FUN_003bb620(int param_1)
   temp_v4 = 0;
   temp_v0 = flaggedValueHolderGetTotal();
   if (*(char *)(param_1 + 0x632) == '\0') {
-    FUN_00230954(param_1 + 0x74,param_1);
+    ((Obj55ca08 *)(param_1 + 0x74))->Obj55ca08::synchronize((const u8 *)param_1);
     FUN_00233410(param_1);
   }
   temp_v1 = flaggedValueHolderGetTotal(param_1);

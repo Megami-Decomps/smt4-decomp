@@ -1,4 +1,5 @@
-/* NON_MATCHING: honest C++ iterator-value destructor hits armcc O3 Internal fault [0x44288b:410713]; O2 compiles but differs in frame/registry grouping and member return-this reuse. Draft restored per integrator; readable C++ is in notes_W6Match3.txt. */
+/* NON_MATCHING: Retail instruction scheduling/register allocation differs (43 retail versus 40 compiled rows). */
+#include "classes/Obj5592ac.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -21,14 +22,16 @@ extern unsigned char DAT_0062e59c; /* 0x62e59c */
 
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int _ZN9Obj55aff4D1Ev(unsigned int *);
 extern int wordRefsDiffer_002fa114(unsigned int **);
 /* Supplied declaration required: FUN_002fa124. */
 
 
-int _ZN9Obj5592acD1Ev(unsigned int *param_1)
+} /* extern "C" */
+
+Obj5592ac::~Obj5592ac()
 
 {
+    unsigned int *param_1 = (unsigned int *)this;
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   unsigned int *temp_v1;
@@ -36,7 +39,6 @@ int _ZN9Obj5592acD1Ev(unsigned int *param_1)
   unsigned char temp_v3 [12];
   unsigned int *temp_v4 [3];
   
-  *param_1 = (unsigned int)&DAT_005592b4;
   _ZN9Obj55b28cC1EPv(temp_v3,&DAT_0062e59c);
   for (temp_v4[0] = g_onlineTrackedStrings; (temp_v4[0] != DAT_0062e594 && (temp_v4[0] != param_1));
       temp_v4[0] = (unsigned int *)temp_v4[0][1]) {
@@ -47,8 +49,6 @@ int _ZN9Obj5592acD1Ev(unsigned int *param_1)
     FUN_002fa124(temp_v2,&DAT_0062e588,&temp_v1);
   }
   _ZN9Obj55b28cD1Ev(temp_v3);
-  temp_v0 = _ZN9Obj55aff4D1Ev(param_1 + 3);
-  return temp_v0 - 0xc;
+  return;
 }
 
-} /* extern "C" */

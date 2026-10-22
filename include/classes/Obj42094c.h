@@ -8,18 +8,21 @@
 class Obj42094c : public Obj420794 {
 public:
     virtual ~Obj42094c();
+    virtual void prepareGeometry(); /* +0x08 */
+    virtual void draw(); /* +0x0C */
+    virtual void refreshTextureCoordinates(); /* +0x10 */
 
 protected:
     /* 0x18 */ void *dataB;     /* heap block */
 };
 
 struct Filter4PolyVertex {
-    /* 0x00 */ u8 unk00[0xC];
+    /* 0x00 */ f32 position[3];
     /* 0x0C */ f32 u;
     /* 0x10 */ f32 v;
 };
 struct Filter4PolyMotion {
-    /* 0x00 */ u8 unk00[0x40];
+    /* 0x00 */ f32 matrix[16];
     /* 0x40 */ f32 x;
     /* 0x44 */ f32 y;
     /* 0x48 */ f32 z;
@@ -30,7 +33,10 @@ struct Filter4PolyConfig {
     /* 0x04 */ f32 top;
     /* 0x08 */ f32 right;
     /* 0x0C */ f32 bottom;
-    /* 0x10 */ u8 unk10[0x14];
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ u32 blendMode;
+    /* 0x1C */ u32 unk1c;
+    /* 0x20 */ s32 period;
     /* 0x24 */ f32 minimumSpeed;
     /* 0x28 */ f32 maximumSpeed;
     /* 0x2C */ s32 count;

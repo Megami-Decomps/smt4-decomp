@@ -1,13 +1,8 @@
-#include "common.h"
+#include "classes/AccelerometerReader.h"
 
-extern "C" {
+extern "C" int FUN_00128cd8(void *);
 
-int FUN_00128cd8(void *obj);
-
-void *_ZN2nn3hid3CTR19AccelerometerReaderD1Ev(void *obj)
+nn::hid::CTR::AccelerometerReader::~AccelerometerReader()
 {
-    FUN_00128cd8(obj);
-    return obj;
+    FUN_00128cd8(this);
 }
-
-} /* extern "C" */

@@ -1,10 +1,10 @@
+#include "classes/Obj420794.h"
 #include "common.h"
 
 extern "C" {
 
 int bufferHandleRelease(u32 texture);
 int asdMemFreeNonNull(void *object);
-int asdMemFree(u32 ptr);
 
 typedef struct ObjectVtbl {
     /* 0x0 */ void *unk0;
@@ -25,18 +25,18 @@ typedef struct Filter4Poly {
     /* 0x60 */ u32 extra;
 } Filter4Poly;
 
-extern u8 g_filter4PolyBaseVtable; /* 0x420798 */
+extern u8 _ZTV9Obj420794[];
 
 /* Destructor: restores the base vtable and releases the texture, buffer and child. */
 void _ZN9Obj420794D0Ev(Filter4Poly *filter)
 {
-    filter->vtbl = &g_filter4PolyBaseVtable;
+    filter->vtbl = _ZTV9Obj420794 + 8;
     if (filter->texture != 0) {
         bufferHandleRelease(filter->texture);
         filter->texture = 0;
     }
     if (filter->buffer != 0) {
-        asdMemFree(filter->buffer);
+        asdMemFree((void *)filter->buffer);
         filter->buffer = 0;
     }
     if (filter->child != NULL) {

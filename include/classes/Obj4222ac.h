@@ -8,8 +8,9 @@
 class Obj4222ac : public Obj422318 {
 public:
     virtual ~Obj4222ac();
+    virtual void start(); /* +0x08 */
+    virtual void updateMotion(); /* +0x18 */
 
-    /* 0x70 */ u32 flags;
     /* 0x74 */ f32 position[3];
 };
 

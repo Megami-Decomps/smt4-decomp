@@ -10,6 +10,9 @@ extern "C" int asdOperatorDelete(void *block);
 class Obj42083c : public Obj420794 {
 public:
     virtual ~Obj42083c();
+    virtual void prepareGeometry(); /* +0x08 */
+    virtual void draw();            /* +0x0c */
+    virtual void refreshTextureCoordinates(); /* +0x10: stripped implementation */
 
 protected:
     /* 0x18 */ u8 unk18[0x4C];

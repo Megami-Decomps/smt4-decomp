@@ -1,57 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj558cbcD1Ev` (_code @ 0x2f42ec, 0x72 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail instruction scheduling/register allocation differs (57 retail versus 59 compiled rows). */
+#include "classes/Obj558cbc.h"
 
-extern "C" {
+extern "C" void FUN_002f4364();
 
-int _ZN9Obj5593b8D1Ev(unsigned int *);
-int FUN_002f4364(void);
-
-typedef int romwright_code(...);
-extern unsigned char DAT_00558cc4; /* 0x558cc4 */
-
-/* Supplied declaration required: _ZN9Obj5593b8D1Ev. */
-/* Supplied declaration required: FUN_002f4364. */
-
-
-void _ZN9Obj558cbcD1Ev(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Close the active session, release its children, then destroy the common base. */
+Obj558cbc::~Obj558cbc()
 {
-/* irregular: 2 native warning(s); review required */
-  int uStack_18;
-  unsigned int uStack_14;
-  unsigned int uStack_10;
-  
-  *param_1 = (unsigned int)&DAT_00558cc4;
-  uStack_18 = param_2;
-  uStack_14 = param_3;
-  uStack_10 = param_4;
-  if ((int *)param_1[4] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[4] + 4))();
-    param_1[4] = 0;
-  }
-  if (*(char *)(param_1 + 7) != '\0') {
-    (**(romwright_code **)(*(int *)param_1[3] + 0x18))();
-    (**(romwright_code **)(*(int *)param_1[8] + 0x14))((int *)param_1[8],*(unsigned short *)((int)param_1 + 0x26))
-    ;
-    *(unsigned char *)(param_1 + 7) = 0;
-  }
-  if ((int *)param_1[3] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[3] + 0x60))(&uStack_18);
-    if ((int *)param_1[3] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[3] + 4))();
+    if (child10 != NULL) {
+        delete child10;
+        child10 = NULL;
     }
-    param_1[3] = 0;
-  }
-  if ((int *)param_1[6] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[6] + 4))();
-  }
-  if ((int *)param_1[5] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[5] + 4))();
-  }
-  FUN_002f4364();
-  _ZN9Obj5593b8D1Ev(param_1);
-  return;
+    if (active) {
+        session->finish();
+        listener->notify(token);
+        active = 0;
+    }
+    if (session != NULL) {
+        session->close();
+        if (session != NULL) {
+            delete session;
+        }
+        session = NULL;
+    }
+    if (child18 != NULL) {
+        delete child18;
+    }
+    if (child14 != NULL) {
+        delete child14;
+    }
+    FUN_002f4364();
 }
-
-} /* extern "C" */

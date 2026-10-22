@@ -9,11 +9,11 @@ extern "C" void asdOperatorDeleteArray(void *block);
 class Obj55984cChild {
 public:
     virtual ~Obj55984cChild();
-    virtual void vfunc08();
-    virtual void vfunc0c();
-    virtual void vfunc10();
-    virtual void vfunc14();
-    virtual void vfunc18();
+    virtual void vfunc08(const void *, u32, u32, u32, u32, u32, u32);
+    virtual void vfunc0c(const void *, u32, u32, u32, u32, u32, u32);
+    virtual void vfunc10(const void *, u32, u32);
+    virtual void vfunc14(const void *, u32, u32);
+    virtual u32 vfunc18(const void *, u32, u32);
     virtual s32 handle(const void *buffer, u32 argument, u32 size); /* +0x1C */
     virtual void notify(const void *buffer, u32 argument);         /* +0x20 */
 };
@@ -51,6 +51,13 @@ class Obj55984c {
 public:
     Obj55984c();
     virtual ~Obj55984c();
+    virtual void vfunc08(const void *, u32, u32, u32, u32, u32, u32);
+    virtual void vfunc0c(const void *, u32, u32, u32, u32, u32, u32);
+    virtual void vfunc10(const void *, u32, u32);
+    virtual void vfunc14(const void *, u32, u32);
+    virtual u32 vfunc18(const void *, u32, u32);
+    virtual s32 handle(const void *, u32, u32);
+    virtual void notify(const void *, u32);
     Obj55984cChild *childAt(u32 index) const { return children.begin[index].child; }
     Obj55984cChild *extraChild() const { return extra; }
 

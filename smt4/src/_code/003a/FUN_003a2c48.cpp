@@ -1,3 +1,4 @@
+#include "classes/Obj55ca08.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a2c48` (_code @ 0x3a2c48, 0x31c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -5,7 +6,6 @@
 extern "C" {
 
 int scrRunOpcodesStub(unsigned int);
-int FUN_00230954(int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_002328b4(void);
 int FUN_00233240(int, int);
@@ -33,7 +33,6 @@ extern unsigned char LAB_003a2f64; /* 0x3a2f64 */
 extern unsigned char LAB_003a2f78; /* 0x3a2f78 */
 
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_00230954. */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
@@ -123,7 +122,7 @@ void FUN_003a2c48(int param_1)
   case 4:
     scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
     temp_v2 = param_1 + 0x9ca8;
-    FUN_00230954(param_1 + 0x828);
+    ((Obj55ca08 *)(param_1 + 0x828))->Obj55ca08::synchronize((const u8 *)temp_v2);
     (**(romwright_code **)(**(int **)(param_1 + 0x85c) + 0xc))(*(int **)(param_1 + 0x85c),temp_v2);
     FUN_00233410(temp_v2);
     uiAnimationAdvanceChannel(param_1 + 0x3a8,2);

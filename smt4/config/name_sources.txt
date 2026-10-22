@@ -3344,3 +3344,96 @@
 001c0efc campCecEditRunState inferred [high] runs g_campCecEdit state handler; result 2 switches to queued state, 1 closes
 0020ef98 btlHelpFreeNodeListAndStopJob inferred [high] unlinks and frees every node of the btlHelp list, frees the list, stops the work job
 001fa800 mapSelectNearbyDeferredModel inferred [med] records the first active deferred map model within 200 units of the point (index, kind, name) or clears the selection
+003421f4 _ZN9Obj4207387vfunc04Ev inferred Returns zero; callback interface purpose beyond the slot is not established.
+003421e4 _ZN9Obj42073814invokeCallbackEj inferred Dereferences the saved callback pointer and invokes it with the saved context and supplied argument.
+003421fc _ZN9Obj4207387vfunc0cEv inferred Always accepts the callback-interface operation.
+0033f6b4 _ZN9Obj4206f8D0Ev inferred Deleting destructor restores address point 0x420700, releases texture content, and frees the allocation.
+00343e4c _ZN9Obj4207d0D0Ev inferred Deleting destructor calls Obj4206e8 complete-object destruction then frees the returned allocation.
+0034b550 _ZN9Obj42094c19initializeParticlesEv inferred Refreshes child rectangles and initializes per-particle phase, velocity and transform state.
+0034b208 _ZN9Obj42094c4drawEv inferred Builds transformed filter quads and submits each polygon to the GPU.
+0034b910 _ZN9Obj42094c25refreshTextureCoordinatesEv inferred Refreshes child rectangles and copies UV bounds before initializing particle motion.
+0034bcf4 _ZN9Obj4209904drawEv inferred Transforms and submits the two filter quads.
+0034bc74 _ZN9Obj4209907isReadyEv inferred Returns whether every present child handle is ready, refreshing cached child data as required.
+0034db4c _ZNK9Obj4209d816implementationIdEv inferred Reports the fixed callback implementation identifier (109).
+0034d978 _ZNK9Obj4209d811isCellReadyEi inferred Tests the selected grid cell flags and state to report readiness.
+0034d8d0 _ZN9Obj4209d815getCellPositionEi inferred Copies the selected cell position into the embedded result and applies optional quarter-scale transformation.
+0034d9d0 _ZNK9Obj4209d87getTintEj inferred Multiplies per-entry RGB by object tint and packs the resulting color.
+0034d6c8 _ZNK9Obj4209d812getCellColorEi inferred Computes packed color for the selected cell/model state; retail overwrites incoming r2/r3 before use, so the draft trailing arguments are not parameters.
+0034f780 _ZN9Obj420a2c14releaseSourcesEv inferred Releases each of three source handles/entries and clears the owner and source pointers; this slot is NOT D0.
+0034f40c _ZNK9Obj420a2c8getValueEj inferred Reads the selected entry from the indexed scalar-value array.
+0034f400 _ZNK9Obj420a2c9getOutputEj inferred Reads the selected first output-array entry.
+003e3724 _ZNK9Obj4214b417getTypeDescriptorEv inferred Returns the static implementation/type descriptor.
+0036986c _ZN9Obj4214b415buildViewMatrixEPfjPKf inferred Builds a view matrix from resource transformation, mode flags and an input position/vector.
+003e3730 _ZNK9Obj4214b411getCategoryEv inferred Reports the fixed implementation category (2).
+0036cc3c _ZN9Obj4215f423buildProjectionMatricesEPfS0_ inferred Builds the off-center oriented projection and texture-correction matrices.
+0036cc34 _ZNK9Obj4215f411getResourceEv inferred Returns the owned allocator-backed resource pointer.
+0036a100 _ZN9Obj4214ec7vfunc00Ev inferred Empty virtual hook of the separately allocated eight-byte allocator-owned object at address point 0x4214f4; not a member of Obj4214d8.
+003e4ff8 _ZNK9Obj42165417getTypeDescriptorEv inferred Returns the static implementation/type descriptor.
+003c2f3c _ZN9Obj422594D0Ev inferred Deleting destructor restores the owner vptr, removes all registered touch regions, and frees the owner.
+00152530 _ZN9Obj42259410initializeEPKv inferred Clears window slots/regions, copies source words/data, initializes mode and invalid handle values.
+003b0138 _ZN9Obj4224f86decodeEPKhj inferred Consumes the two-byte record, returning -1 for incomplete input.
+003eaa88 _ZNK9Obj42251c6equalsEPK13Obj42251cData inferred Compares the scalar fields used by this decoded record kind.
+003b0350 _ZN9Obj42251c14copyParametersEPKv inferred Copies scalar and packed render parameters from the supplied record.
+003b32d8 _ZN9Obj4225406decodeEPKhj inferred Consumes a single record byte, returns -1 when the input count is zero; exact cross-game twin in the canonical Obj422540 class.
+00395f00 _ZN9Obj4223186updateEv inferred Advances the frame timer, updates a present child and dispatches the owner update hook; inherited by Obj4222ac and Obj42233c.
+00395e6c _ZN9Obj4223187vfunc14Ev inferred Empty base virtual hook, inherited by Obj42233c.
+00395e70 _ZN9Obj4223187vfunc18Ev inferred Empty base virtual hook, inherited by Obj42233c.
+003952b0 _ZN9Obj4222ac5startEv inferred Sets the active flag and resets the model translation unless the game is paused.
+0039532c _ZN9Obj4222ac12updateMotionEv inferred Advances vertical position and updates node translation/scale and model visibility state.
+00396270 _ZN9Obj42233c5startEv inferred This derived start hook is empty; slot agrees with Obj4222ac start.
+0039609c _ZN9Obj42233c4stopEv inferred Updates model transform and clears model-state flags using position and game-state conditions.
+00347594 _ZN9Obj42080c15prepareGeometryEv inferred Refreshes the source rectangle and computes screen-quad corner transforms.
+0034731c _ZN9Obj42080c4drawEv inferred Builds screen-filter vertices and submits the polygon(s) for drawing.
+00347f24 _ZN9Obj42083c15prepareGeometryEv inferred Refreshes the source rectangle and computes screen-quad corner transforms.
+00347b10 _ZN9Obj42083c4drawEv inferred Builds screen-filter vertices and submits the polygon(s) for drawing.
+00379a14 _ZN9Obj421aa48shutdownEv inferred Detaches sounds, removes player registrations and posts stop/remove requests; NOT a deleting destructor.
+003799b8 _ZN9Obj421aa47vfunc18Ev inferred Optional sound-object hook has no body.
+00379618 _ZN9Obj421aa416updateParametersEv inferred Posts changed sound parameter requests and caches the current values.
+003630b0 _ZN9Obj4210d05resetEv inferred Empty reset hook; existing local constructor declares this method as reset, not a destructor.
+0010fd94 _ZN9Obj420fa47vfunc08Ev inferred Text scanner hook allocates and initializes parsing state; signature has implicit this even though the draft omits unused input.
+00230954 _ZN9Obj55ca0811synchronizeEPKh inferred Synchronizes the embedded selection/dirty state with the supplied state-byte pair.
+003ad5e4 _ZN9Obj42247cD0Ev inferred Deleting destructor restores the base view vptr, destroys embedded touchSelection and frees the view.
+003ad5bc _ZNK9Obj42247c13getSignedFlagEv inferred Returns either of the two signed status bytes; shared by the Bible-view subclass.
+0038bd8c _ZN9Obj4221e4D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038bc80 _ZN9Obj4221e47vfunc0cEv inferred Updates window result/status and remaps the recorded resource identifier.
+0038bee0 _ZN9Obj4221fcD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038bd90 _ZN9Obj4221fc7vfunc0cEPKv inferred Updates window result/status from the supplied request; draft pointer return is incidental register state, not a proven public result.
+0038d1f0 _ZN9Obj422248D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038d054 _ZN9Obj4222487vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+0038d380 _ZN9Obj422260D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038d224 _ZN9Obj4222607vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+0038d578 _ZN9Obj422278D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038e268 _ZN9Obj422290D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038e0cc _ZN9Obj4222907vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+0038b124 _ZN9Obj4221bcD0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038af9c _ZN9Obj4221bc7vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+0038c220 _ZN9Obj422230D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+0038c094 _ZN9Obj4222307vfunc0cEPKv inferred Consumes the supplied window/request state and updates result data; exact product-specific operation name is not proved.
+0037b7c4 _ZN9Obj421c90D1Ev inferred Complete-object destructor deletes child objects and releases its owned resource.
+003a7254 _ZN9Obj4223c44stopEv inferred Releases child state and stops the owner/job.
+003a6dd8 _ZN9Obj4223c46renderEv inferred Runs the Bible-view drawing path and scene/render-state restoration.
+00349f98 _ZN9Obj4208c4D0Ev inferred Deleting destructor in vtable slot +0x04: destroys the object/base and releases its allocation; ignore draft return types and spurious vtable arguments.
+00420728 _ZTV9Obj42072c inferred size:0x10 Primary destructor table ends before independently referenced callback table 0x420738 (vptr 0x420740 stored at object +0x148c).
+004206e8 _ZTV9Obj4206e8 inferred size:0x10 Separate texture-content table begins at 0x4206f8; allocation factory stores its address point 0x420700.
+004207c0 _ZTV9Obj4207c0 inferred size:0x10 Separate resource-holder vtable begins at 0x4207d0, referenced through address point 0x4207d8.
+004209c8 _ZTV9Obj4209cc inferred size:0x10 Battle model callback vtable at 0x4209d8 has a separately installed address point 0x4209e0; existing oversized symbol incorrectly swallowed it.
+004214d8 _ZTV9Obj4214d8 inferred size:0x14 Separate allocator-owned object table starts at 0x4214ec; its address point 0x4214f4 is installed by FUN_0012d1c4.
+00422214 _ZTV9Obj422214 inferred size:0x10 Separate completion-callback table follows the two destructor slots; the old +0x10 hook belongs to that other object.
+00420738 _ZTV9Obj420738 inferred size:0x18 Independent callback vtable; address point 0x420740 is installed by FUN_003f66f0; no virtual destructor pair.
+004206f8 _ZTV9Obj4206f8 inferred size:0x10 Texture-content vtable; address point 0x420700 is installed by FUN_00294090 and deleting teardown.
+004207d0 _ZTV9Obj4207d0 inferred size:0x10 Independent resource-holder vtable; slot +4 deletes through Obj4206e8 destruction.
+004209d8 _ZTV9Obj4209d8 inferred size:0x34 Independent battle model callback table, installed by btlUnitInitializeDrawJobs; slots +08 through +24 contain the listed model/grid queries.
+004214ec _ZTV9Obj4214ec inferred size:0xc Single-hook allocator-owned object vtable, address point 0x4214f4; not a virtual destructor table.
+00422224 _ZTV9Obj422224 inferred size:0xc Independent single-slot completion callback; clears the pending byte (windowClearCallbackState in SMT IV).
+00395f5c _ZN9Obj422318C1Ei inferred constructor stores _ZTV9Obj422318+8; same class as its other members
+00420950 DAT_00420950 inferred address point of _ZTV9Obj42094c
+00420798 DAT_00420798 inferred address point of _ZTV9Obj420794
+0038acd4 _ZN9Obj4221a47vfunc08EPv inferred fix mangled length
+0038ad70 _ZN9Obj4221a47vfunc10Ej inferred fix mangled length
+0034b550 _ZN9Obj42094c15prepareGeometryEv inferred Override of Obj420794 slot +08 prepares particle geometry.
+0034c0b0 _ZN9Obj42099015prepareGeometryEv inferred Override of Obj420794 slot +08 updates quad geometry UVs.
+003479a8 _ZN9Obj42080c25refreshTextureCoordinatesEv inferred Override of Obj420794 slot +10 refreshes the quad texture-coordinate rectangle.
+0034c594 _ZN9Obj42099025refreshTextureCoordinatesEv inferred Override of Obj420794 slot +10 refreshes quad texture-coordinate rectangles.
+0038acd4 _ZN9Obj4221a410initializeEPKv inferred Obj422594 +08 override forwards source to base initialize
+003a030c _ZN9Obj4223ac10initializeEPKv inferred Obj422594 +08 override; reads the source type at +04
+00395e70 _ZN9Obj42231812updateMotionEv inferred base +18 slot (empty default); Obj4222ac overrides it as updateMotion

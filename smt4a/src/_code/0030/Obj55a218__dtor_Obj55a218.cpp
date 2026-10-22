@@ -1,28 +1,14 @@
-/* Destructor: restores the vtable, releases the handle unless the global flag says it is shared, then runs the base destructor. */
-#include "common.h"
+/* C ABI retained: the unmangled base destructor FUN_002eb7c0 has no native Obj55ae24 D1 unit. */
+#include "classes/Obj55a218.h"
 
 extern "C" {
-
-typedef struct {
-    const void *vtbl; /* 0x00 */
-    u8 unk04[0x3c];   /* 0x04 */
-    u32 handle;       /* 0x40 */
-} HandleOwner;
-
-typedef struct {
-    u8 unk00;          /* 0x00 */
-    s8 handlesShared;  /* 0x01 */
-} SystemFlags;
-
-extern u8 DAT_0055a220;
-extern SystemFlags g_systemTable;
-
-void FUN_002eb7c0(HandleOwner *self);
+extern const u8 _ZTV9Obj55a218[];
+void FUN_002eb7c0(Obj55a218 *self);
 void FUN_002f674e(u32 handle);
 
-void _ZN9Obj55a218D1Ev(HandleOwner *self)
+void _ZN9Obj55a218D1Ev(Obj55a218 *self)
 {
-    self->vtbl = &DAT_0055a220;
+    *(const void **)self = _ZTV9Obj55a218 + 8;
     if (g_systemTable.handlesShared == 0) {
         FUN_002f674e(self->handle);
     }

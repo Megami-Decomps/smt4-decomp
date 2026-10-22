@@ -10,6 +10,11 @@ class Obj4215f4 {
 public:
     virtual ~Obj4215f4();
     virtual void vfunc08() = 0;
+    virtual void buildProjectionMatrices(f32 *, f32 *);
+    virtual void *getResource() const;
+    virtual void vfunc14();
+    virtual s32 getCategory() const;
+    s32 getValue() const;
 
     /* 0x00: vtable pointer */
     /* 0x04 */ AsdAllocatorObject *owner;

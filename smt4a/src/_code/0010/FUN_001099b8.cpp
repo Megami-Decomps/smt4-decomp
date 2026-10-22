@@ -1,3 +1,4 @@
+#include "classes/Obj5586e0.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001099b8` (_code @ 0x1099b8, 0x4a2 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -11,12 +12,10 @@ int strAssign(...);
 int sharedRefAddRef(...);
 int onlineTimeGetNow(unsigned int *);
 int listIteratorNext(unsigned int *);
-int FUN_002eb744(int);
 int streamReset(int *);
 int strHolderAssignOneWide(...);
 int FUN_002f2aa0(void);
 int strHolderAssignHolderValue(...);
-int FUN_002f2b5c(int, unsigned int, int);
 int FUN_002f2c0a(void);
 int FUN_002f2cb2(int *, unsigned int, int);
 int refCountIncrementIndex(...);
@@ -87,7 +86,6 @@ extern int FUN_002eb5f4(void);
 extern int wordRefsDiffer_002eb690(unsigned int *, int *);
 extern int FUN_002eb6ae(unsigned int, unsigned int);
 /* Supplied declaration required: listIteratorNext. */
-/* Supplied declaration required: FUN_002eb744. */
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int FUN_002eba9c(unsigned int *, unsigned int *);
 extern int *FUN_002ed258(int, int *);
@@ -100,7 +98,6 @@ extern int FUN_002f14a8(int, unsigned int);
 extern int *FUN_002f2afc(void);
 /* Supplied declaration required: strHolderAssignHolderValue. */
 extern int FUN_002f2b30(unsigned int);
-/* Supplied declaration required: FUN_002f2b5c. */
 /* Supplied declaration required: FUN_002f2c0a. */
 extern int FUN_002f2c38(unsigned int, unsigned int);
 extern int FUN_002f2c94(unsigned int);
@@ -278,7 +275,7 @@ LAB_00109b02:
         (**(romwright_code **)(*temp_v26 + 0x14))(&temp_v22,temp_v26,&temp_v16);
         temp_v10 = temp_v22;
         if ((*(int *)(temp_v3 + 0x134) != 0) && (temp_v1 = FUN_002f2b30(temp_v3), temp_v1 != 0)) {
-          FUN_002f2b5c(temp_v13,temp_v3,0);
+          ((Obj5586e0 *)(temp_v13))->append((SharedQueueNode *)(temp_v3), (bool)( 0));
           temp_v19 = temp_v3;
         }
         temp_v6 = temp_v6 + 1;
@@ -375,7 +372,7 @@ LAB_00109b02:
         (FUN_002f2aa0(), temp_v4 == 0)))) {
       FUN_002f2cb2(temp_v26,temp_v27,*(unsigned short *)(temp_v19 + 0x86));
     }
-    FUN_002eb744(temp_v13);
+    ((Obj5586e0 *)(temp_v13))->clear();
     if (temp_v3 == 0) {
       temp_v2 = 1;
     }

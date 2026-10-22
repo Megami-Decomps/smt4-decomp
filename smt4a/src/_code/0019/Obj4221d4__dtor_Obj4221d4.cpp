@@ -1,39 +1,22 @@
-#include "common.h"
+#include "classes/Obj4221d4.h"
 
-extern "C" {
+extern "C" void FUN_001a6928(Obj4221d4 *, s32);
+extern "C" void asdMemFree(void *);
+extern "C" void asdOperatorDeleteB(void *);
 
-extern const u8 DAT_0055c6e4[];  /* vtable */
-void asdMemFree(void *memory);
-void FUN_001a6928(void *self, s32 flag);
-void asdOperatorDeleteB(void *memory);
-
-typedef struct Object55c6e4 {
-    /* 0x00 */ const void *vtbl;
-    /* 0x04 */ u8 unk04[0x1C];
-    /* 0x20 */ void *bufferA;
-    /* 0x24 */ u8 unk24[0x24];
-    /* 0x48 */ void *bufferB;
-    /* 0x4C */ void *bufferC;
-} Object55c6e4;
-
-/* Destructor: restores the vtable, runs FUN_001a6928, then frees the three buffers; returns `self`. */
-Object55c6e4 *_ZN9Obj4221d4D1Ev(Object55c6e4 *self)
+Obj4221d4::~Obj4221d4()
 {
-    self->vtbl = DAT_0055c6e4;
-    FUN_001a6928(self, 1);
-    if (self->bufferC != NULL) {
-        asdOperatorDeleteB(self->bufferC);
-        self->bufferC = NULL;
+    FUN_001a6928(this, 1);
+    if (bufferC != NULL) {
+        asdOperatorDeleteB(bufferC);
+        bufferC = NULL;
     }
-    if (self->bufferB != NULL) {
-        asdMemFree(self->bufferB);
-        self->bufferB = NULL;
+    if (bufferB != NULL) {
+        asdMemFree(bufferB);
+        bufferB = NULL;
     }
-    if (self->bufferA != NULL) {
-        asdMemFree(self->bufferA);
-        self->bufferA = NULL;
+    if (bufferA != NULL) {
+        asdMemFree(bufferA);
+        bufferA = NULL;
     }
-    return self;
 }
-
-} /* extern "C" */

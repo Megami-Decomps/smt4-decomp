@@ -3,7 +3,7 @@
 
 #include "classes/ObjBase3c2ef0.h"
 
-/* The parameter block handed to Obj4223ac::vfunc08. */
+/* The parameter block handed to Obj4223ac::initialize. */
 struct Obj4223acParam {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ s32 type;   /* 9 selects the second set of table entries */
@@ -15,7 +15,7 @@ struct Obj4223acParam {
 class Obj4223ac : public ObjBase3c2ef0 {
 public:
     virtual ~Obj4223ac();
-    virtual void vfunc08(void *param);   /* an Obj4223acParam * */
+    virtual void initialize(const void *source); /* +0x08: an Obj4223acParam */
     virtual void vfunc10(u32 arg);
     virtual void vfunc14();
     virtual void vfunc18();

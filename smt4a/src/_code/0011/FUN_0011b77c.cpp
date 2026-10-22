@@ -1,20 +1,19 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011b77c` (_code @ 0x11b77c, 0x2c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj55a178.h"
+#include "classes/Obj558c90.h"
 
 extern "C" {
 
 int FUN_0011b6e2(unsigned int *);
 int FUN_001a0eb0(void);
-int _ZN9Obj558c90D1Ev(int);
 
 extern unsigned char DAT_0055a5d0; /* 0x55a5d0 */
 extern unsigned char DAT_0055a6d8; /* 0x55a6d8 */
 
 /* Supplied declaration required: FUN_0011b6e2. */
 /* Supplied declaration required: FUN_001a0eb0. */
-/* Supplied declaration required: _ZN9Obj558c90D1Ev. */
-extern int FUN_003054b8(unsigned int *);
 
 
 void FUN_0011b77c(unsigned int *param_1)
@@ -29,8 +28,8 @@ void FUN_0011b77c(unsigned int *param_1)
     FUN_0011b6e2(param_1);
   }
   FUN_001a0eb0();
-  temp_v0 = FUN_003054b8(param_1 + 6);
-  _ZN9Obj558c90D1Ev(temp_v0 - 0x18);
+  temp_v0 = (((Obj55a178 *)(param_1 + 6))->Obj55a178::~Obj55a178(), (int)(param_1 + 6));
+  ((Obj558c90 *)(temp_v0 - 0x18))->Obj558c90::~Obj558c90();
   return;
 }
 

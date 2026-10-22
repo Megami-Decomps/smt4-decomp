@@ -3,6 +3,34 @@
 
 #include "common.h"
 
+struct QueueTimestamp {
+    u32 low;
+    u32 high;
+};
+
+struct SharedQueueNode {
+    /* 0x000 */ u8 unk000[0xc];
+    /* 0x00C */ SharedQueueNode *next;
+    /* 0x010 */ SharedQueueNode *previous;
+    /* 0x014 */ u8 unk014[0xf4];
+    /* 0x108 */ QueueTimestamp timestamp;
+};
+
+class SharedQueueIterator {
+public:
+    SharedQueueIterator(SharedQueueNode *value = NULL) : node(value) {}
+    SharedQueueIterator(const SharedQueueIterator &other) : node(other.node) {}
+    /* 0x00 */ SharedQueueNode *node;
+};
+
+struct SharedQueueState {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ SharedQueueNode *head;
+    /* 0x08 */ SharedQueueNode *tail;
+    /* 0x0C */ SharedQueueNode *end;
+    /* 0x10 */ u32 count;
+};
+
 /* Embedded state object with six cleared work words. */
 class Obj55b074 {
 public:
@@ -21,11 +49,11 @@ class Obj5586e0 {
 public:
     Obj5586e0();
     virtual ~Obj5586e0();
-    virtual void unk08();
-    virtual void unk0c();
-    virtual void unk10();
-    virtual void unk14();
-    virtual void unk18();
+    virtual void clear();
+    virtual void append(SharedQueueNode *, bool);
+    virtual void linkNode(SharedQueueNode *, bool);
+    virtual SharedQueueIterator erase(SharedQueueIterator);
+    virtual s32 vfunc18();
     /* 0x04 */ Obj55b074 state;
 };
 

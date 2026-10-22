@@ -6,8 +6,11 @@ int FUN_00423700(Obj420a2c *self, Obj420a2cSource *source, u32 *handle,
                  Obj420a2cEntry *entry, u32 *out);
 
 /* Builds each present source's entry, stopping at the first failure. */
-int _ZN9Obj420a2c12buildEntriesEv(Obj420a2c *self)
+} /* extern "C" */
+
+int Obj420a2c::buildEntries()
 {
+    Obj420a2c *self = this;
     if (!FUN_00423d7c(self)) {
         return 0;
     }
@@ -29,4 +32,3 @@ int _ZN9Obj420a2c12buildEntriesEv(Obj420a2c *self)
     return 1;
 }
 
-} /* extern "C" */

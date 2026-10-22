@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00477894` (_code @ 0x477894, 0x3d0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj422594.h"
 
 extern "C" {
 
-int FUN_001b3f7c(unsigned int *, unsigned int *);
 int FUN_00474734(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(...);
@@ -33,7 +33,6 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001b3f7c. */
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_00474734. */
@@ -172,7 +171,7 @@ void FUN_00477894(unsigned int *param_1)
         FUN_004cfeb0(param_1 + 0x90,3,*(int *)(temp_v1 + 0x67c),0,1,1);
         puVar4 = param_1 + 0xba;
         *(unsigned char *)((int)param_1 + 0x24d) = 1;
-        FUN_001b3f7c(puVar4,param_1 + 0x90);
+        ((Obj422594 *)puVar4)->Obj422594::initialize(param_1 + 0x90);
         temp_v1 = FUN_001834a4(0x2f,0x4f);
         touchRegisterFirstRegion(puVar4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),
                      (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1]);

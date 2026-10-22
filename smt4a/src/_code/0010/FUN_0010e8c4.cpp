@@ -1,3 +1,4 @@
+#include "classes/Obj5586e0.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010e8c4` (_code @ 0x10e8c4, 0x11c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -7,7 +8,6 @@ extern "C" {
 int sharedRefRelease(...);
 int listIteratorNext(int [2]);
 int listIteratorNext2(int [2]);
-int FUN_002f87e8(int *, int, int *);
 int FUN_002f9cc8(void);
 int FUN_002f9d6a(int *, int, int *);
 
@@ -26,7 +26,6 @@ extern int wordRefsDiffer_002eb690(int *, int *);
 /* Supplied declaration required: listIteratorNext. */
 /* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int);
-/* Supplied declaration required: FUN_002f87e8. */
 /* Supplied declaration required: FUN_002f9cc8. */
 /* Supplied declaration required: FUN_002f9d6a. */
 
@@ -79,7 +78,7 @@ void FUN_0010e8c4(int param_1)
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {
       sharedRefRelease();
       temp_v1 = temp_v2[0];
-      FUN_002f87e8(&temp_v4,param_1 + 0x1d4,&temp_v1);
+      *(SharedQueueIterator *)(&temp_v4) = ((Obj5586e0 *)(param_1 + 0x1d4))->erase(*(SharedQueueIterator *)(&temp_v1));
       temp_v2[0] = temp_v4;
     }
     else {

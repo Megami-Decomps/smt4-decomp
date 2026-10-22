@@ -14,14 +14,14 @@ extern "C" {
  * destructor, so it stays in C form. */
 void _ZN9Obj422318D0Ev(Obj422318 *self);
 
-extern u8 DAT_0042231c;   /* the vtable's address point */
+extern u8 _ZTV9Obj422318[];
 
 }
 
 /* Deletes the child, releases the model-manager handle and frees the object. */
 void _ZN9Obj422318D0Ev(Obj422318 *self)
 {
-    *(const void **)self = &DAT_0042231c;
+    *(const void **)self = _ZTV9Obj422318 + 8;
     if (self->child != NULL) {
         ((Obj422318ChildCall *)self->child)->destroy();
         self->child = NULL;

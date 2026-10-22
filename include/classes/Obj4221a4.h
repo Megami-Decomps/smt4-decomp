@@ -22,8 +22,8 @@ struct Obj4221a4Entry {
 class Obj4221a4 : public ObjBase3c2ef0 {
 public:
     virtual ~Obj4221a4();
-    virtual void vfunc08(void *param);   /* places the three table-58 parts */
-    virtual void vfunc10(u32 arg);       /* draws the parts */
+    virtual void initialize(const void *source); /* +0x08: places the three table parts */
+    virtual void vfunc10(u32 alpha); /* +0x10 */
     virtual void vfunc14();
     virtual void vfunc18();
     virtual void vfunc1c();

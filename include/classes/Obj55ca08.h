@@ -8,9 +8,18 @@ class Obj55ca08 {
 public:
     Obj55ca08() {}
     ~Obj55ca08();
-    virtual void synchronize();
+    virtual void synchronize(const u8 *selection);
 
-    /* 0x04 */ u8 unk04[0x2c];
+    /* 0x04 */ s32 firstRegion;
+    /* 0x08 */ s32 secondRegion;
+    /* 0x0C */ s32 regionCount;
+    /* 0x10 */ u8 soundEnabled;
+    /* 0x11 */ u8 selected;
+    /* 0x12 */ u8 released;
+    /* 0x13 */ u8 unk13;
+    /* 0x14 */ s16 selectedIndex;
+    /* 0x16 */ u8 unk16[2];
+    /* 0x18 */ s16 regions[12];
     /* 0x30 */ s16 touchCount;
     /* 0x32 */ u8 unk32[2];
     /* 0x34 */ u32 unk34;

@@ -1,94 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj558c28D1Ev` (_code @ 0x2f33b4, 0xba bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/W6_W6Match3_PooledNodeList.h"
-
+/* NON_MATCHING: recovered map cleanup and implicit embedded-member teardown use different register allocation. */
+#include "classes/Obj558c28.h"
 extern "C" {
-
-int FUN_00117828(int);
-int FUN_0012d86c(int *, unsigned int *, int *, int *);
-PooledNodeList* nodeListReleaseStorage(PooledNodeList*);
-int asdOperatorDeleteArray(...);
-int FUN_002f3474(unsigned int *, unsigned int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern unsigned char DAT_00558c30; /* 0x558c30 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_00117828. */
-/* Supplied declaration required: FUN_0012d86c. */
-/* Supplied declaration required: nodeListReleaseStorage. */
-/* Supplied declaration required: asdOperatorDeleteArray. */
-extern int _ZN9Obj55aff4D1Ev(unsigned int *);
-extern int FUN_002eb624(int);
-extern int *arrayElementAddress_002f32d4(unsigned int *, int);
-/* Supplied declaration required: FUN_002f3474. */
-extern int _ZN9Obj558b24D1Ev(int);
-
-
-unsigned long long _ZN9Obj558c28D1Ev(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  int temp_v2;
-  int temp_v3;
-  int uStack_18;
-  
-  temp_v1 = 0;
-  *param_1 = (unsigned int)&DAT_00558c30;
-  temp_v2 = param_2;
-  temp_v3 = param_3;
-  uStack_18 = param_4;
-  do {
-    piVar1 = (int *)arrayElementAddress_002f32d4(param_1 + 0x45,temp_v1);
-    if ((int *)*piVar1 != (int *)0x0) {
-      (**(romwright_code **)(*(int *)*piVar1 + 4))();
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  temp_v1 = param_1[0x44];
-  if (temp_v1 != 0) {
-    puVar4 = (unsigned int *)(temp_v1 + 4);
-    temp_v0 = *(int *)(temp_v1 + 0x14);
-    if (temp_v0 != 0) {
-      temp_v2 = *(unsigned int *)(temp_v0 + 8);
-      temp_v3 = temp_v0;
-      FUN_0012d86c(&uStack_18,puVar4,&temp_v2,&temp_v3);
-      FUN_002f3474(puVar4,*(unsigned int *)(temp_v1 + 0x14),0);
-      while (puVar5 = (unsigned int *)*puVar4, puVar5 != (unsigned int *)0x0) {
-        *puVar4 = *puVar5;
-        asdOperatorDeleteArray(puVar5[2]);
-        asdOperatorDeleteArray(puVar5);
-      }
-    }
-    asdOperatorDeleteArray(temp_v1);
-  }
-  temp_v1 = _ZN9Obj55aff4D1Ev(param_1 + 0x50);
-  for (temp_v0 = *(int *)(temp_v1 - 0x2c); temp_v0 != *(int *)(temp_v1 - 0x28); temp_v0 = temp_v0 + 4) {
-  }
-  asdOperatorDeleteArray();
-  temp_v1 = _ZN9Obj558b24D1Ev(temp_v1 - 100);
-  temp_v1 = temp_v1 - 0x18;
-  nodeListReleaseStorage((PooledNodeList*)temp_v1);
-  temp_v1 = temp_v1 - 0x20;
-  FUN_00117828(temp_v1);
-  temp_v1 = FUN_002eb624(temp_v1 - 0x70);
-  temp_v1 = FUN_002eb624(temp_v1 - 0x30);
-  return romwright_piece_4_4(temp_v2,temp_v1 - 4);
+void asdOperatorDeleteArray(void *memory);
+void FUN_002eb624(void *object);
+void FUN_00117828(void *object);
+PooledNodeList *nodeListReleaseStorage(PooledNodeList *list);
+Obj558c28Child **arrayElementAddress_002f32d4(Obj558c28Children *array, s32 index);
+void FUN_0012d86c(Obj558c28MapNode **result, Obj558c28MapList *list, Obj558c28MapNode **begin, Obj558c28MapNode **end);
+void FUN_002f3474(Obj558c28MapList *list, Obj558c28MapNode *replacement, u32 invoke);
 }
 
-} /* extern "C" */
+inline Obj558c28Resource30::~Obj558c28Resource30() { FUN_002eb624(this); }
+inline Obj558c28Resource70::~Obj558c28Resource70() { FUN_002eb624(this); }
+inline Obj558c28Resource20::~Obj558c28Resource20() { FUN_00117828(this); }
+inline Obj558c28Pool::~Obj558c28Pool() { nodeListReleaseStorage(this); }
+inline Obj558c28Children::~Obj558c28Children() { asdOperatorDeleteArray(begin); }
+
+Obj558c28::~Obj558c28()
+{
+    for (s32 i = 0; i < 4; ++i) {
+        Obj558c28Child **entry = arrayElementAddress_002f32d4(&children, i);
+        if (*entry != NULL) {
+            delete *entry;
+        }
+    }
+    if (map != NULL) {
+        Obj558c28MapList *list = &map->list;
+        Obj558c28MapNode *end = list->end;
+        if (end != NULL) {
+            Obj558c28MapNode *begin = (Obj558c28MapNode *)end->payload;
+            Obj558c28MapNode *result;
+            FUN_0012d86c(&result, list, &begin, &end);
+            FUN_002f3474(list, map->list.end, 0);
+            while (list->head != NULL) {
+                Obj558c28MapNode *node = list->head;
+                list->head = node->next;
+                asdOperatorDeleteArray(node->payload);
+                asdOperatorDeleteArray(node);
+            }
+        }
+        asdOperatorDeleteArray(map);
+    }
+}

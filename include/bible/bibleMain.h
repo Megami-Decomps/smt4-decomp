@@ -12,11 +12,11 @@ public:
     virtual void unk0c() = 0;
     virtual void stop() = 0;
     virtual void unk14() = 0;
-    virtual void unk18() = 0;
+    virtual void render() = 0;
     virtual s32 isReady() = 0;
-    virtual void unk20() = 0;
-    virtual void unk24() = 0;
-    virtual void unk28() = 0;
+    virtual void openScreen() = 0;
+    virtual s32 isScreenReady() const = 0;
+    virtual void closeScreen() = 0;
 };
 
 /* The bible (demon compendium) screen's work area. */

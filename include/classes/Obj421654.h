@@ -45,6 +45,11 @@ protected:
 class Obj421654 : public Obj420ffc {
 public:
     virtual ~Obj421654();
+    virtual const void *getTypeDescriptor() const; /* +0x08 */
+    virtual s32 setState(u32); /* +0x0c */
+    virtual void vfunc10();
+    virtual void vfunc14();
+    virtual s32 vfunc18(void *, u32); /* +0x18 */
 
 private:
     /* 0x20 */ Obj421654Holder holderB;

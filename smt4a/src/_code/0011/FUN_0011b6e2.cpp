@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_0010ab7e(void);
+extern int _ZN9Obj558c907vfunc10Ejjj(void);
 
 
 unsigned char FUN_0011b6e2(int param_1)
@@ -12,7 +12,7 @@ unsigned char FUN_0011b6e2(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_0010ab7e();
+  temp_v0 = _ZN9Obj558c907vfunc10Ejjj();
   if (temp_v0 != 0) {
     *(unsigned char *)(param_1 + 0x14) = 0;
   }

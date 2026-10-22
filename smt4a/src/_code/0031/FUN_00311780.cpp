@@ -1,3 +1,4 @@
+#include "classes/Obj55a178.h"
 /* NON_MATCHING: retail constructor has an alignment NOP before its payload accessor call. */
 #include "common.h"
 
@@ -20,7 +21,6 @@ struct BindingLookup {
 extern "C" {
 extern const u32 _ZTV9Obj55a178[];
 BoundObject* FUN_003054a4(BoundObject* object, s32 mode);
-void* FUN_0012411a(BoundObject* object);
 void* FUN_002eb56c();
 BindingLookup* FUN_002ecedc(s32 kind, void* context);
 void FUN_002f3b58(void* bindings, s32 id, void* payload);
@@ -32,7 +32,7 @@ BoundObject* FUN_00311780(BoundObject* object, s32 bindingId)
     object->vtable = _ZTV9Obj55a178 + 2;
     if (bindingId != 0) {
         object->bindingId = bindingId;
-        void* payload = FUN_0012411a(object);
+        void* payload = ((Obj55a178 *)(object))->Obj55a178::create();
         BindingLookup* lookup = FUN_002ecedc(12, FUN_002eb56c());
         BindingOwner* owner = lookup ? lookup->owner : NULL;
         FUN_002f3b58(owner->bindings, bindingId, payload);

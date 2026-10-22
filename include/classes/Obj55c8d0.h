@@ -12,7 +12,7 @@ public:
     virtual void unk0c();
     virtual void stop();
     virtual void unk14();
-    virtual void unk18();
+    virtual void render(); /* +0x18 */
     void resetHandlers();
 
     /* 0x0860 */ u8 hasValue;

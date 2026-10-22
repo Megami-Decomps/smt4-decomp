@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ffa20` (_code @ 0x2ffa20, 0x72 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj559ecc.h"
 
 extern "C" {
 
-int FUN_002f7b80(unsigned char [28]);
 int FUN_0030c5d8(int *, int, unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 } param_2_stack;
 
 extern int *wordRefMax(int *, unsigned int *);
-/* Supplied declaration required: FUN_002f7b80. */
+/* Supplied declaration required: _ZN9Obj559eccD1Ev. */
 /* Supplied declaration required: FUN_0030c5d8. */
 extern int allocArrayElem24(int *, int, unsigned int);
 extern unsigned int vectorGrowCapacity_0030c61a(unsigned int, int *);
@@ -51,7 +51,7 @@ int * FUN_002ffa20(int *param_1,int param_2)
   }
   param_1[2] = *param_1 + temp_v3 * 0x18;
   param_1[1] = *param_1 + temp_v5 * 0x18;
-  FUN_002f7b80(temp_v4);
+  (((Obj559ecc *)(temp_v4))->Obj559ecc::~Obj559ecc(), (int)(temp_v4));
   return param_1;
 }
 

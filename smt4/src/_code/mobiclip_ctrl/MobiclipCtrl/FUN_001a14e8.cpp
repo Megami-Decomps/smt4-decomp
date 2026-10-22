@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a14e8` (_code @ 0x1a14ec, 0xf8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj420a2c.h"
 
 extern "C" {
 
 int FUN_002ad61c(...);
-int _ZN9Obj420a2c12buildEntriesEv(unsigned char *, unsigned int *, int, int);
 int FUN_0034fbc8(unsigned char *, int, unsigned int, unsigned int);
 int FUN_00350ac4(unsigned char *, int);
 int FUN_00350bd0(unsigned char *, unsigned int);
@@ -55,7 +55,7 @@ void FUN_001a14e8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = FUN_00350ab8(&DAT_004c3b20,0);
   temp_v3 = movieRecordTableGetEntry(&DAT_004c3b20,temp_v2);
   puVar5 = &DAT_004c3a50;
-  _ZN9Obj420a2c12buildEntriesEv(&DAT_004c3a50,&DAT_004c3a44,temp_v3,0);
+  ((Obj420a2c *)(&DAT_004c3a50))->Obj420a2c::buildEntries();
   if (puVar5 == (unsigned char *)0x0) {
     FUN_002ad61c();
   }

@@ -13,7 +13,7 @@ public:
     virtual void post010040() = 0;  /* +0x00: _ZN9Obj464cb010post010040Ev */
     virtual void post0f0105() = 0;  /* +0x04 */
     virtual void post0f0106() = 0;  /* +0x08 */
-    virtual void post0f0107Header() = 0;  /* +0x0C: FUN_0030968c */
+    virtual void postSelectedWord() = 0;  /* +0x0C: _ZN9Obj464cb016postSelectedWordEv */
     virtual void post0f0104() = 0;  /* +0x10 */
     virtual void post0f0107() = 0;  /* +0x14: _ZN9Obj464cb010post0f0107Ev */
     virtual void post0f0101() = 0;  /* +0x18: _ZN9Obj464cb010post0f0101Ev */

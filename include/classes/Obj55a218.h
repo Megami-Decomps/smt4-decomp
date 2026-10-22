@@ -29,8 +29,16 @@ extern "C" void FUN_002f674e(u32 handle);
 class Obj55a218 : public Obj55ae24 {
 public:
     virtual ~Obj55a218();
+    virtual void vfunc08();
+    virtual void vfunc0c();
+    virtual void vfunc10();
+    virtual void vfunc14();
+    virtual void vfunc18();
+    virtual void vfunc1c();
+    virtual void vfunc20();
+    virtual void vfunc24();
 
-protected:
+    /* Public for the retained complete-object ABI wrapper. */
     /* 0x40 */ u32 handle;
 };
 

@@ -18,7 +18,7 @@ typedef struct {
 
 extern unsigned char DAT_00420710; /* 0x420710 */
 extern unsigned char DAT_00420888; /* 0x420888 */
-extern unsigned char g_filter4PolyVtable; /* 0x420950 */
+extern unsigned char _ZTV9Obj42094c[];
 
 /* Supplied declaration required: FUN_0023b49c. */
 extern unsigned int FUN_002a7bc0(void);
@@ -66,7 +66,7 @@ int * FUN_0034b6d4(int param_1,unsigned int param_2,int param_3)
     piVar2[2] = 0;
     piVar2[3] = 0;
     piVar2[4] = 0x3c23d70a;
-    *piVar2 = (int)&g_filter4PolyVtable;
+    *piVar2 = (int)(_ZTV9Obj42094c + 8);
     piVar2[7] = 0;
     piVar2[5] = (int)piVar1;
   }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00114efc` (_code @ 0x114efc, 0x3c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj558c90.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_0010b410(void);
 int FUN_001136a2(void);
 int operatorDelete(void);
 int FUN_00300bb0(void);
-int _ZN9Obj558c90D1Ev(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00559758; /* 0x559758 */
@@ -17,7 +17,6 @@ extern unsigned char DAT_00559758; /* 0x559758 */
 /* Supplied declaration required: FUN_001136a2. */
 /* Supplied declaration required: operatorDelete. */
 /* Supplied declaration required: FUN_00300bb0. */
-/* Supplied declaration required: _ZN9Obj558c90D1Ev. */
 
 
 void FUN_00114efc(unsigned int *param_1)
@@ -37,7 +36,7 @@ void FUN_00114efc(unsigned int *param_1)
     (**(romwright_code **)(*(int *)param_1[4] + 4))();
   }
   FUN_00300bb0();
-  _ZN9Obj558c90D1Ev(param_1);
+  ((Obj558c90 *)param_1)->Obj558c90::~Obj558c90();
   return;
 }
 

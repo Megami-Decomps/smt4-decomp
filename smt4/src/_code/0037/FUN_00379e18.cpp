@@ -1,19 +1,19 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00379e18` (_code @ 0x379e18, 0xc4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj421aa4.h"
 
 extern "C" {
 
 int listAppendNode(int);
 int FUN_002b4f64(int, int);
-int FUN_00379618(void);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
-/* Supplied declaration required: FUN_00379618. */
+/* Supplied declaration required: _ZN9Obj421aa416updateParametersEv. */
 
 
 void FUN_00379e18(int param_1)
@@ -29,7 +29,7 @@ void FUN_00379e18(int param_1)
   float temp_v5;
   float temp_v6;
   
-  FUN_00379618();
+  ((Obj421aa4 *)(param_1))->Obj421aa4::updateParameters();
   temp_v0 = FUN_002baed8();
   temp_v3 = 0;
   temp_v4 = (unsigned int)*(unsigned short *)(param_1 + 0x2bc8);

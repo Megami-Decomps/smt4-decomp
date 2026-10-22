@@ -1,3 +1,4 @@
+#include "classes/Obj5586e0.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00115a9a` (_code @ 0x115a9a, 0x26 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -6,7 +7,6 @@ extern "C" {
 
 int _ZN9Obj55b28cC1EPv(int *, unsigned int);
 int _ZN9Obj55b28cD1Ev(int *);
-int FUN_002f87e8(unsigned int, int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,6 @@ typedef struct {
 #endif
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_002f87e8. */
 
 
 unsigned long long FUN_00115a9a(unsigned int param_1,int param_2,unsigned int *param_3,unsigned int param_4)
@@ -37,7 +36,7 @@ unsigned long long FUN_00115a9a(unsigned int param_1,int param_2,unsigned int *p
   temp_v0 = param_4;
   _ZN9Obj55b28cC1EPv(&uStack_20,*(unsigned int *)(param_2 + 0x20));
   temp_v0 = *param_3;
-  FUN_002f87e8(param_1,param_2,&temp_v0);
+  *(SharedQueueIterator *)(param_1) = ((Obj5586e0 *)(param_2))->erase(*(SharedQueueIterator *)(&temp_v0));
   _ZN9Obj55b28cD1Ev(&uStack_20);
   return romwright_piece_4_4(iStack_1c,uStack_20);
 }

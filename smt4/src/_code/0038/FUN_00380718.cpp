@@ -1,3 +1,4 @@
+#include "classes/Obj421aa4.h"
 /* NON_MATCHING: adjacent flag addressing and the final list-insertion argument setup differ. */
 #include "common.h"
 
@@ -43,7 +44,6 @@ extern "C" {
 SoundTaskManager *FUN_002bb020();
 void nw_snd_internal_TaskManager_CancelTask(SoundTaskManager *manager, void *task);
 void nn_os_LightEvent_Wait(void *event);
-void FUN_00379a14(SoundLoadSlot *slot);
 void nw_snd_internal_PlayerHeapDataManager_Finalize(void *manager);
 void nw_ut_internal_LinkListImpl_erase_2B743C(SoundPlayerList *list, SoundListLink *node);
 void nw_ut_internal_LinkListImpl_insert(SoundPlayerList *list,
@@ -62,7 +62,7 @@ void FUN_00380718(SoundLoadSlot *slot)
     slot->unk450 = 0;
     slot->unk454 = 0;
     slot->unk45e = 0;
-    FUN_00379a14(slot);
+    ((Obj421aa4 *)(slot))->Obj421aa4::shutdown();
     nw_snd_internal_PlayerHeapDataManager_Finalize(slot->heapDataManager);
     SoundLoadManager *manager = slot->manager;
     nw_ut_internal_LinkListImpl_erase_2B743C(&manager->active, &slot->link);

@@ -1,25 +1,5 @@
-/* Destructor: restores the vtable, destroys the member at 0x10 and then the sub-object at 0x4 that holds it; returns this. */
-#include "common.h"
+#include "classes/Obj558b24.h"
 
-extern "C" {
-
-typedef struct {
-    const void *vtbl; /* 0x00 */
-    u8 unk04[0xc];    /* 0x04 */
-    u8 member[1];     /* 0x10 */
-} MemberOwner;
-
-extern u8 DAT_00558b2c;
-
-u8 *_ZN9Obj55aff4D1Ev(u8 *self);
-
-MemberOwner *_ZN9Obj558b24D1Ev(MemberOwner *self)
+Obj558b24::~Obj558b24()
 {
-    u8 *subObject;
-
-    self->vtbl = &DAT_00558b2c;
-    subObject = _ZN9Obj55aff4D1Ev(self->member) - 0xc;
-    return (MemberOwner *)(_ZN9Obj55aff4D1Ev(subObject) - 4);
 }
-
-} /* extern "C" */

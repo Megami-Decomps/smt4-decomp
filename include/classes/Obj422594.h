@@ -47,11 +47,18 @@ class Obj422594 {
 public:
     Obj422594();
     virtual ~Obj422594();
+    virtual void initialize(const void *source); /* +0x08 */
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
 
     /* 0x00: vtable pointer */
     /* 0x04 */ u16 state;
-    /* 0x06 */ u8 unk06[0x4A];
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u32 slots[12];
+    /* 0x38 */ u32 sourceWord1;
+    /* 0x3C */ u32 sourceWord2;
+    /* 0x40 */ u8 unk40[0xC];
+    /* 0x4C */ u8 mode;
+    /* 0x4D */ u8 unk4d[3];
     /* 0x50 */ Obj422594Region region;
     /* 0x64 */ u8 ready;
 };

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same code as retail with the callee-saved registers permuted (this, the slot pointer and the part are r8, r7, r6 here; r7, r6, r8 in retail). */
+/* NON_MATCHING: Retail uses r7/r8/r6 for owner/part/slot; the compiled C entry uses r8/r6/r7. */
 #include "classes/Obj4209cc.h"
 
 extern "C" {

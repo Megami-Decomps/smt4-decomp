@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the final `ready` load differs: retail reads the flag with `mov r0,r6; ldrsb r0,[r0,#18]`, built folds it into `ldrb r0,[r4,#2106]` */
 /* Applies the current entry to the sub-state and its handler, refreshes the display and reports whether the sub-state is ready and accepted. */
 #include "common.h"
+#include "classes/Obj55ca08.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ typedef struct Screen {
     /* 0x880 */ Entry entries[1];
 } Screen;
 
-extern void FUN_00230954(SubState *subState, Entry *entry);
 extern void uiAnimationAdvanceChannel(void *display, s32 id);
 extern void FUN_00233410(Entry *entry);
 extern s32 stateCounterBelowLimit(Entry *entry, u32 value);
@@ -47,7 +47,7 @@ u32 FUN_0022fbc0(Screen *screen)
     Entry *entry = &screen->entries[screen->entryIndex];
     u32 accepted;
 
-    FUN_00230954(&screen->subState, entry);
+    ((Obj55ca08 *)&screen->subState)->Obj55ca08::synchronize((const u8 *)entry);
     screen->handler->vtbl->apply(screen->handler, entry);
     FUN_00233410(entry);
     uiAnimationAdvanceChannel(screen->display, 2);

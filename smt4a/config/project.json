@@ -2336,12 +2336,12 @@
     },
     {
       "address": "0x1051f4",
-      "function": "FUN_001051f4",
+      "function": "_ZN9Obj5586e08linkNodeEP15SharedQueueNodeb",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_001051f4.o",
+      "object": "build/obj/_code/0010/Obj5586e0__linkNode.o",
       "size": 122,
-      "source": "src/_code/0010/FUN_001051f4.cpp",
-      "target": "orig/target/_code/0010/FUN_001051f4.o",
+      "source": "src/_code/0010/Obj5586e0__linkNode.cpp",
+      "target": "orig/target/_code/0010/Obj5586e0__linkNode.o",
       "thumb": true
     },
     {
@@ -2356,12 +2356,12 @@
     },
     {
       "address": "0x1052ea",
-      "function": "FUN_001052ea",
+      "function": "_ZN9Obj5586e07vfunc18Ev",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_001052ea.o",
+      "object": "build/obj/_code/0010/Obj5586e0__vfunc18.o",
       "size": 4,
-      "source": "src/_code/0010/FUN_001052ea.cpp",
-      "target": "orig/target/_code/0010/FUN_001052ea.o",
+      "source": "src/_code/0010/Obj5586e0__vfunc18.cpp",
+      "target": "orig/target/_code/0010/Obj5586e0__vfunc18.o",
       "thumb": true
     },
     {
@@ -3516,12 +3516,12 @@
     },
     {
       "address": "0x10974e",
-      "function": "FUN_0010974e",
+      "function": "_ZN9Obj558be07vfunc14EPvj",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010974e.o",
+      "object": "build/obj/_code/0010/Obj558be0__vfunc14.o",
       "size": 80,
-      "source": "src/_code/0010/FUN_0010974e.cpp",
-      "target": "orig/target/_code/0010/FUN_0010974e.o",
+      "source": "src/_code/0010/Obj558be0__vfunc14.cpp",
+      "target": "orig/target/_code/0010/Obj558be0__vfunc14.o",
       "thumb": true
     },
     {
@@ -3576,12 +3576,12 @@
     },
     {
       "address": "0x109e7a",
-      "function": "FUN_00109e7a",
+      "function": "_ZN9Obj558be07vfunc0cEj",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_00109e7a.o",
+      "object": "build/obj/_code/0010/Obj558be0__vfunc0c.o",
       "size": 74,
-      "source": "src/_code/0010/FUN_00109e7a.cpp",
-      "target": "orig/target/_code/0010/FUN_00109e7a.o",
+      "source": "src/_code/0010/Obj558be0__vfunc0c.cpp",
+      "target": "orig/target/_code/0010/Obj558be0__vfunc0c.o",
       "thumb": true
     },
     {
@@ -3716,12 +3716,12 @@
     },
     {
       "address": "0x10a044",
-      "function": "FUN_0010a044",
+      "function": "_ZN9Obj558c287vfunc08Ev",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010a044.o",
+      "object": "build/obj/_code/0010/Obj558c28__vfunc08.o",
       "size": 14,
-      "source": "src/_code/0010/FUN_0010a044.cpp",
-      "target": "orig/target/_code/0010/FUN_0010a044.o",
+      "source": "src/_code/0010/Obj558c28__vfunc08.cpp",
+      "target": "orig/target/_code/0010/Obj558c28__vfunc08.o",
       "thumb": true
     },
     {
@@ -3856,12 +3856,12 @@
     },
     {
       "address": "0x10a530",
-      "function": "FUN_0010a530",
+      "function": "_ZN9Obj558c28D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010a530.o",
+      "object": "build/obj/_code/0010/Obj558c28__deleting_dtor_Obj558c28.o",
       "size": 12,
-      "source": "src/_code/0010/FUN_0010a530.cpp",
-      "target": "orig/target/_code/0010/FUN_0010a530.o",
+      "source": "src/_code/0010/Obj558c28__deleting_dtor_Obj558c28.cpp",
+      "target": "orig/target/_code/0010/Obj558c28__deleting_dtor_Obj558c28.o",
       "thumb": true
     },
     {
@@ -3946,32 +3946,32 @@
     },
     {
       "address": "0x10ab40",
-      "function": "FUN_0010ab40",
+      "function": "_ZN9Obj558c907vfunc1cEv",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010ab40.o",
+      "object": "build/obj/_code/0010/Obj558c90__vfunc1c.o",
       "size": 2,
-      "source": "src/_code/0010/FUN_0010ab40.cpp",
-      "target": "orig/target/_code/0010/FUN_0010ab40.o",
+      "source": "src/_code/0010/Obj558c90__vfunc1c.cpp",
+      "target": "orig/target/_code/0010/Obj558c90__vfunc1c.o",
       "thumb": true
     },
     {
       "address": "0x10ab42",
-      "function": "FUN_0010ab42",
+      "function": "_ZN9Obj558c907vfunc0cEjjj",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010ab42.o",
+      "object": "build/obj/_code/0010/Obj558c90__vfunc0c.o",
       "size": 60,
-      "source": "src/_code/0010/FUN_0010ab42.cpp",
-      "target": "orig/target/_code/0010/FUN_0010ab42.o",
+      "source": "src/_code/0010/Obj558c90__vfunc0c.cpp",
+      "target": "orig/target/_code/0010/Obj558c90__vfunc0c.o",
       "thumb": true
     },
     {
       "address": "0x10ab7e",
-      "function": "FUN_0010ab7e",
+      "function": "_ZN9Obj558c907vfunc10Ejjj",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010ab7e.o",
+      "object": "build/obj/_code/0010/Obj558c90__vfunc10.o",
       "size": 44,
-      "source": "src/_code/0010/FUN_0010ab7e.cpp",
-      "target": "orig/target/_code/0010/FUN_0010ab7e.o",
+      "source": "src/_code/0010/Obj558c90__vfunc10.cpp",
+      "target": "orig/target/_code/0010/Obj558c90__vfunc10.o",
       "thumb": true
     },
     {
@@ -5416,72 +5416,72 @@
     },
     {
       "address": "0x10edb0",
-      "function": "FUN_0010edb0",
+      "function": "_ZN9Obj55a1787vfunc1cEv",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010edb0.o",
+      "object": "build/obj/_code/0010/Obj55a178__vfunc1c.o",
       "size": 6,
-      "source": "src/_code/0010/FUN_0010edb0.cpp",
-      "target": "orig/target/_code/0010/FUN_0010edb0.o",
+      "source": "src/_code/0010/Obj55a178__vfunc1c.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__vfunc1c.o",
       "thumb": true
     },
     {
       "address": "0x10edb6",
-      "function": "FUN_0010edb6",
+      "function": "_ZN9Obj55a1787vfunc18Ev",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010edb6.o",
+      "object": "build/obj/_code/0010/Obj55a178__vfunc18.o",
       "size": 6,
-      "source": "src/_code/0010/FUN_0010edb6.cpp",
-      "target": "orig/target/_code/0010/FUN_0010edb6.o",
+      "source": "src/_code/0010/Obj55a178__vfunc18.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__vfunc18.o",
       "thumb": true
     },
     {
       "address": "0x10edbc",
-      "function": "FUN_0010edbc",
+      "function": "_ZNK9Obj55a1788isActiveEv",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010edbc.o",
+      "object": "build/obj/_code/0010/Obj55a178__isActive.o",
       "size": 18,
-      "source": "src/_code/0010/FUN_0010edbc.cpp",
-      "target": "orig/target/_code/0010/FUN_0010edbc.o",
+      "source": "src/_code/0010/Obj55a178__isActive.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__isActive.o",
       "thumb": true
     },
     {
       "address": "0x10edce",
-      "function": "FUN_0010edce",
+      "function": "_ZN9Obj55a1787vfunc2cEv",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010edce.o",
+      "object": "build/obj/_code/0010/Obj55a178__vfunc2c.o",
       "size": 4,
-      "source": "src/_code/0010/FUN_0010edce.cpp",
-      "target": "orig/target/_code/0010/FUN_0010edce.o",
+      "source": "src/_code/0010/Obj55a178__vfunc2c.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__vfunc2c.o",
       "thumb": true
     },
     {
       "address": "0x10edd2",
-      "function": "FUN_0010edd2",
+      "function": "_ZN9Obj55a1787vfunc14Ev",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010edd2.o",
+      "object": "build/obj/_code/0010/Obj55a178__vfunc14.o",
       "size": 2,
-      "source": "src/_code/0010/FUN_0010edd2.cpp",
-      "target": "orig/target/_code/0010/FUN_0010edd2.o",
+      "source": "src/_code/0010/Obj55a178__vfunc14.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__vfunc14.o",
       "thumb": true
     },
     {
       "address": "0x10edd4",
-      "function": "FUN_0010edd4",
+      "function": "_ZNK9Obj55a17812acceptsEventEj",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010edd4.o",
+      "object": "build/obj/_code/0010/Obj55a178__acceptsEvent.o",
       "size": 120,
-      "source": "src/_code/0010/FUN_0010edd4.cpp",
-      "target": "orig/target/_code/0010/FUN_0010edd4.o",
+      "source": "src/_code/0010/Obj55a178__acceptsEvent.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__acceptsEvent.o",
       "thumb": true
     },
     {
       "address": "0x10ee50",
-      "function": "FUN_0010ee50",
+      "function": "_ZN9Obj55a1787vfunc24Ev",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010ee50.o",
+      "object": "build/obj/_code/0010/Obj55a178__vfunc24.o",
       "size": 4,
-      "source": "src/_code/0010/FUN_0010ee50.cpp",
-      "target": "orig/target/_code/0010/FUN_0010ee50.o",
+      "source": "src/_code/0010/Obj55a178__vfunc24.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__vfunc24.o",
       "thumb": true
     },
     {
@@ -5526,12 +5526,12 @@
     },
     {
       "address": "0x10eee4",
-      "function": "FUN_0010eee4",
+      "function": "_ZNK9Obj55a1788getStateEv",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010eee4.o",
+      "object": "build/obj/_code/0010/Obj55a178__getState.o",
       "size": 4,
-      "source": "src/_code/0010/FUN_0010eee4.cpp",
-      "target": "orig/target/_code/0010/FUN_0010eee4.o",
+      "source": "src/_code/0010/Obj55a178__getState.cpp",
+      "target": "orig/target/_code/0010/Obj55a178__getState.o",
       "thumb": true
     },
     {
@@ -6546,12 +6546,12 @@
     },
     {
       "address": "0x1117cc",
-      "function": "FUN_001117cc",
+      "function": "_ZN9Obj55951cD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_001117cc.o",
+      "object": "build/obj/_code/0011/Obj55951c__dtor_Obj55951c.o",
       "size": 8,
-      "source": "src/_code/0011/FUN_001117cc.cpp",
-      "target": "orig/target/_code/0011/FUN_001117cc.o",
+      "source": "src/_code/0011/Obj55951c__dtor_Obj55951c.cpp",
+      "target": "orig/target/_code/0011/Obj55951c__dtor_Obj55951c.o",
       "thumb": true
     },
     {
@@ -6576,12 +6576,12 @@
     },
     {
       "address": "0x1117f6",
-      "function": "FUN_001117f6",
+      "function": "_ZN9Obj55952cD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_001117f6.o",
+      "object": "build/obj/_code/0011/Obj55952c__dtor_Obj55952c.o",
       "size": 8,
-      "source": "src/_code/0011/FUN_001117f6.cpp",
-      "target": "orig/target/_code/0011/FUN_001117f6.o",
+      "source": "src/_code/0011/Obj55952c__dtor_Obj55952c.cpp",
+      "target": "orig/target/_code/0011/Obj55952c__dtor_Obj55952c.o",
       "thumb": true
     },
     {
@@ -7416,32 +7416,32 @@
     },
     {
       "address": "0x11461c",
-      "function": "FUN_0011461c",
+      "function": "_ZN9Obj5596dc7vfunc1cEv",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011461c.o",
+      "object": "build/obj/_code/0011/Obj5596dc__vfunc1c.o",
       "size": 2,
-      "source": "src/_code/0011/FUN_0011461c.cpp",
-      "target": "orig/target/_code/0011/FUN_0011461c.o",
+      "source": "src/_code/0011/Obj5596dc__vfunc1c.cpp",
+      "target": "orig/target/_code/0011/Obj5596dc__vfunc1c.o",
       "thumb": true
     },
     {
       "address": "0x11461e",
-      "function": "FUN_0011461e",
+      "function": "_ZN9Obj5596dc7vfunc14Ej",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011461e.o",
+      "object": "build/obj/_code/0011/Obj5596dc__vfunc14.o",
       "size": 58,
-      "source": "src/_code/0011/FUN_0011461e.cpp",
-      "target": "orig/target/_code/0011/FUN_0011461e.o",
+      "source": "src/_code/0011/Obj5596dc__vfunc14.cpp",
+      "target": "orig/target/_code/0011/Obj5596dc__vfunc14.o",
       "thumb": true
     },
     {
       "address": "0x114658",
-      "function": "FUN_00114658",
+      "function": "_ZN9Obj5596dc7vfunc0cEj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00114658.o",
+      "object": "build/obj/_code/0011/Obj5596dc__vfunc0c.o",
       "size": 50,
-      "source": "src/_code/0011/FUN_00114658.cpp",
-      "target": "orig/target/_code/0011/FUN_00114658.o",
+      "source": "src/_code/0011/Obj5596dc__vfunc0c.cpp",
+      "target": "orig/target/_code/0011/Obj5596dc__vfunc0c.o",
       "thumb": true
     },
     {
@@ -7456,12 +7456,12 @@
     },
     {
       "address": "0x1146ac",
-      "function": "FUN_001146ac",
+      "function": "_ZN9Obj5596dcD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_001146ac.o",
+      "object": "build/obj/_code/0011/Obj5596dc__deleting_dtor_Obj5596dc.o",
       "size": 12,
-      "source": "src/_code/0011/FUN_001146ac.cpp",
-      "target": "orig/target/_code/0011/FUN_001146ac.o",
+      "source": "src/_code/0011/Obj5596dc__deleting_dtor_Obj5596dc.cpp",
+      "target": "orig/target/_code/0011/Obj5596dc__deleting_dtor_Obj5596dc.o",
       "thumb": true
     },
     {
@@ -7866,12 +7866,12 @@
     },
     {
       "address": "0x115554",
-      "function": "FUN_00115554",
+      "function": "_ZN9Obj55980cD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00115554.o",
+      "object": "build/obj/_code/0011/Obj55980c__deleting_dtor_Obj55980c.o",
       "size": 12,
-      "source": "src/_code/0011/FUN_00115554.cpp",
-      "target": "orig/target/_code/0011/FUN_00115554.o",
+      "source": "src/_code/0011/Obj55980c__deleting_dtor_Obj55980c.cpp",
+      "target": "orig/target/_code/0011/Obj55980c__deleting_dtor_Obj55980c.o",
       "thumb": true
     },
     {
@@ -7946,72 +7946,72 @@
     },
     {
       "address": "0x115788",
-      "function": "FUN_00115788",
+      "function": "_ZN9Obj55984c6handleEPKvjj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00115788.o",
+      "object": "build/obj/_code/0011/Obj55984c__handle.o",
       "size": 72,
-      "source": "src/_code/0011/FUN_00115788.cpp",
-      "target": "orig/target/_code/0011/FUN_00115788.o",
+      "source": "src/_code/0011/Obj55984c__handle.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__handle.o",
       "thumb": true
     },
     {
       "address": "0x1157d0",
-      "function": "FUN_001157d0",
+      "function": "_ZN9Obj55984c7vfunc0cEPKvjjjjjj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_001157d0.o",
+      "object": "build/obj/_code/0011/Obj55984c__vfunc0c.o",
       "size": 38,
-      "source": "src/_code/0011/FUN_001157d0.cpp",
-      "target": "orig/target/_code/0011/FUN_001157d0.o",
+      "source": "src/_code/0011/Obj55984c__vfunc0c.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__vfunc0c.o",
       "thumb": true
     },
     {
       "address": "0x1157f6",
-      "function": "FUN_001157f6",
+      "function": "_ZN9Obj55984c7vfunc08EPKvjjjjjj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_001157f6.o",
+      "object": "build/obj/_code/0011/Obj55984c__vfunc08.o",
       "size": 38,
-      "source": "src/_code/0011/FUN_001157f6.cpp",
-      "target": "orig/target/_code/0011/FUN_001157f6.o",
+      "source": "src/_code/0011/Obj55984c__vfunc08.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__vfunc08.o",
       "thumb": true
     },
     {
       "address": "0x11581c",
-      "function": "FUN_0011581c",
+      "function": "_ZN9Obj55984c7vfunc14EPKvjj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011581c.o",
+      "object": "build/obj/_code/0011/Obj55984c__vfunc14.o",
       "size": 30,
-      "source": "src/_code/0011/FUN_0011581c.cpp",
-      "target": "orig/target/_code/0011/FUN_0011581c.o",
+      "source": "src/_code/0011/Obj55984c__vfunc14.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__vfunc14.o",
       "thumb": true
     },
     {
       "address": "0x11583a",
-      "function": "FUN_0011583a",
+      "function": "_ZN9Obj55984c7vfunc10EPKvjj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011583a.o",
+      "object": "build/obj/_code/0011/Obj55984c__vfunc10.o",
       "size": 24,
-      "source": "src/_code/0011/FUN_0011583a.cpp",
-      "target": "orig/target/_code/0011/FUN_0011583a.o",
+      "source": "src/_code/0011/Obj55984c__vfunc10.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__vfunc10.o",
       "thumb": true
     },
     {
       "address": "0x115852",
-      "function": "FUN_00115852",
+      "function": "_ZN9Obj55984c6notifyEPKvj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00115852.o",
+      "object": "build/obj/_code/0011/Obj55984c__notify.o",
       "size": 42,
-      "source": "src/_code/0011/FUN_00115852.cpp",
-      "target": "orig/target/_code/0011/FUN_00115852.o",
+      "source": "src/_code/0011/Obj55984c__notify.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__notify.o",
       "thumb": true
     },
     {
       "address": "0x11587c",
-      "function": "FUN_0011587c",
+      "function": "_ZN9Obj55984c7vfunc18EPKvjj",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011587c.o",
+      "object": "build/obj/_code/0011/Obj55984c__vfunc18.o",
       "size": 72,
-      "source": "src/_code/0011/FUN_0011587c.cpp",
-      "target": "orig/target/_code/0011/FUN_0011587c.o",
+      "source": "src/_code/0011/Obj55984c__vfunc18.cpp",
+      "target": "orig/target/_code/0011/Obj55984c__vfunc18.o",
       "thumb": true
     },
     {
@@ -9396,12 +9396,12 @@
     },
     {
       "address": "0x119d68",
-      "function": "FUN_00119d68",
+      "function": "_ZN9Obj55a218D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00119d68.o",
+      "object": "build/obj/_code/0011/Obj55a218__deleting_dtor_Obj55a218.o",
       "size": 12,
-      "source": "src/_code/0011/FUN_00119d68.cpp",
-      "target": "orig/target/_code/0011/FUN_00119d68.o",
+      "source": "src/_code/0011/Obj55a218__deleting_dtor_Obj55a218.cpp",
+      "target": "orig/target/_code/0011/Obj55a218__deleting_dtor_Obj55a218.o",
       "thumb": true
     },
     {
@@ -9436,12 +9436,12 @@
     },
     {
       "address": "0x119ecc",
-      "function": "FUN_00119ecc",
+      "function": "_ZNK9Obj55a2546copyToEPS_",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00119ecc.o",
+      "object": "build/obj/_code/0011/Obj55a254__copyTo.o",
       "size": 14,
-      "source": "src/_code/0011/FUN_00119ecc.cpp",
-      "target": "orig/target/_code/0011/FUN_00119ecc.o",
+      "source": "src/_code/0011/Obj55a254__copyTo.cpp",
+      "target": "orig/target/_code/0011/Obj55a254__copyTo.o",
       "thumb": true
     },
     {
@@ -11626,12 +11626,12 @@
     },
     {
       "address": "0x1208e4",
-      "function": "FUN_001208e4",
+      "function": "_ZN9Obj55a2187vfunc24Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_001208e4.o",
+      "object": "build/obj/_code/0012/Obj55a218__vfunc24.o",
       "size": 2,
-      "source": "src/_code/0012/FUN_001208e4.cpp",
-      "target": "orig/target/_code/0012/FUN_001208e4.o",
+      "source": "src/_code/0012/Obj55a218__vfunc24.cpp",
+      "target": "orig/target/_code/0012/Obj55a218__vfunc24.o",
       "thumb": true
     },
     {
@@ -12376,12 +12376,12 @@
     },
     {
       "address": "0x122064",
-      "function": "FUN_00122064",
+      "function": "_ZN9Obj55b104D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_00122064.o",
+      "object": "build/obj/_code/0012/Obj55b104__deleting_dtor_Obj55b104.o",
       "size": 12,
-      "source": "src/_code/0012/FUN_00122064.cpp",
-      "target": "orig/target/_code/0012/FUN_00122064.o",
+      "source": "src/_code/0012/Obj55b104__deleting_dtor_Obj55b104.cpp",
+      "target": "orig/target/_code/0012/Obj55b104__deleting_dtor_Obj55b104.o",
       "thumb": true
     },
     {
@@ -12656,22 +12656,22 @@
     },
     {
       "address": "0x122452",
-      "function": "FUN_00122452",
+      "function": "_ZN9Obj55a1787vfunc28Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_00122452.o",
+      "object": "build/obj/_code/0012/Obj55a178__vfunc28.o",
       "size": 26,
-      "source": "src/_code/0012/FUN_00122452.cpp",
-      "target": "orig/target/_code/0012/FUN_00122452.o",
+      "source": "src/_code/0012/Obj55a178__vfunc28.cpp",
+      "target": "orig/target/_code/0012/Obj55a178__vfunc28.o",
       "thumb": true
     },
     {
       "address": "0x12246c",
-      "function": "FUN_0012246c",
+      "function": "_ZN9Obj55a1787vfunc20Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_0012246c.o",
+      "object": "build/obj/_code/0012/Obj55a178__vfunc20.o",
       "size": 26,
-      "source": "src/_code/0012/FUN_0012246c.cpp",
-      "target": "orig/target/_code/0012/FUN_0012246c.o",
+      "source": "src/_code/0012/Obj55a178__vfunc20.cpp",
+      "target": "orig/target/_code/0012/Obj55a178__vfunc20.o",
       "thumb": true
     },
     {
@@ -13386,22 +13386,22 @@
     },
     {
       "address": "0x1239ee",
-      "function": "FUN_001239ee",
+      "function": "_ZN9Obj558be07vfunc10Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_001239ee.o",
+      "object": "build/obj/_code/0012/Obj558be0__vfunc10.o",
       "size": 4,
-      "source": "src/_code/0012/FUN_001239ee.cpp",
-      "target": "orig/target/_code/0012/FUN_001239ee.o",
+      "source": "src/_code/0012/Obj558be0__vfunc10.cpp",
+      "target": "orig/target/_code/0012/Obj558be0__vfunc10.o",
       "thumb": true
     },
     {
       "address": "0x1239f2",
-      "function": "FUN_001239f2",
+      "function": "_ZN9Obj558c907vfunc14Ejjj",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_001239f2.o",
+      "object": "build/obj/_code/0012/Obj558c90__vfunc14.o",
       "size": 72,
-      "source": "src/_code/0012/FUN_001239f2.cpp",
-      "target": "orig/target/_code/0012/FUN_001239f2.o",
+      "source": "src/_code/0012/Obj558c90__vfunc14.cpp",
+      "target": "orig/target/_code/0012/Obj558c90__vfunc14.o",
       "thumb": true
     },
     {
@@ -13656,12 +13656,12 @@
     },
     {
       "address": "0x12411a",
-      "function": "FUN_0012411a",
+      "function": "_ZN9Obj55a1786createEv",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_0012411a.o",
+      "object": "build/obj/_code/0012/Obj55a178__create.o",
       "size": 20,
-      "source": "src/_code/0012/FUN_0012411a.cpp",
-      "target": "orig/target/_code/0012/FUN_0012411a.o",
+      "source": "src/_code/0012/Obj55a178__create.cpp",
+      "target": "orig/target/_code/0012/Obj55a178__create.o",
       "thumb": true
     },
     {
@@ -13676,22 +13676,22 @@
     },
     {
       "address": "0x1241b4",
-      "function": "FUN_001241b4",
+      "function": "_ZN9Obj55a25411getTypeNameEv",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_001241b4.o",
+      "object": "build/obj/_code/0012/Obj55a254__getTypeName.o",
       "size": 10,
-      "source": "src/_code/0012/FUN_001241b4.cpp",
-      "target": "orig/target/_code/0012/FUN_001241b4.o",
+      "source": "src/_code/0012/Obj55a254__getTypeName.cpp",
+      "target": "orig/target/_code/0012/Obj55a254__getTypeName.o",
       "thumb": true
     },
     {
       "address": "0x1241e8",
-      "function": "FUN_001241e8",
+      "function": "_ZN9Obj55a2545cloneEv",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_001241e8.o",
+      "object": "build/obj/_code/0012/Obj55a254__clone.o",
       "size": 72,
-      "source": "src/_code/0012/FUN_001241e8.cpp",
-      "target": "orig/target/_code/0012/FUN_001241e8.o",
+      "source": "src/_code/0012/Obj55a254__clone.cpp",
+      "target": "orig/target/_code/0012/Obj55a254__clone.o",
       "thumb": true
     },
     {
@@ -14856,12 +14856,12 @@
     },
     {
       "address": "0x1293ac",
-      "function": "FUN_001293ac",
+      "function": "_ZN9Obj55933c7vfunc00Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_001293ac.o",
+      "object": "build/obj/_code/0012/Obj55933c__vfunc00.o",
       "size": 2,
-      "source": "src/_code/0012/FUN_001293ac.cpp",
-      "target": "orig/target/_code/0012/FUN_001293ac.o",
+      "source": "src/_code/0012/Obj55933c__vfunc00.cpp",
+      "target": "orig/target/_code/0012/Obj55933c__vfunc00.o",
       "thumb": true
     },
     {
@@ -15896,12 +15896,12 @@
     },
     {
       "address": "0x12cf5c",
-      "function": "FUN_0012cf5c",
+      "function": "_ZN9Obj55b074D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_0012cf5c.o",
+      "object": "build/obj/_code/0012/Obj55b074__dtor_Obj55b074.o",
       "size": 36,
-      "source": "src/_code/0012/FUN_0012cf5c.cpp",
-      "target": "orig/target/_code/0012/FUN_0012cf5c.o",
+      "source": "src/_code/0012/Obj55b074__dtor_Obj55b074.cpp",
+      "target": "orig/target/_code/0012/Obj55b074__dtor_Obj55b074.o",
       "thumb": true
     },
     {
@@ -22516,12 +22516,12 @@
     },
     {
       "address": "0x146f68",
-      "function": "FUN_00146f68",
+      "function": "_ZN9Obj420fa47vfunc08Ev",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00146f68.o",
+      "object": "build/obj/_code/0014/Obj420fa4__vfunc08.o",
       "size": 244,
-      "source": "src/_code/0014/FUN_00146f68.cpp",
-      "target": "orig/target/_code/0014/FUN_00146f68.o",
+      "source": "src/_code/0014/Obj420fa4__vfunc08.cpp",
+      "target": "orig/target/_code/0014/Obj420fa4__vfunc08.o",
       "thumb": false
     },
     {
@@ -42493,12 +42493,12 @@
     },
     {
       "address": "0x1b3f7c",
-      "function": "FUN_001b3f7c",
+      "function": "_ZN9Obj42259410initializeEPKv",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b3f7c.o",
+      "object": "build/obj/_code/001b/Obj422594__initialize.o",
       "size": 156,
-      "source": "src/_code/001b/FUN_001b3f7c.cpp",
-      "target": "orig/target/_code/001b/FUN_001b3f7c.o",
+      "source": "src/_code/001b/Obj422594__initialize.cpp",
+      "target": "orig/target/_code/001b/Obj422594__initialize.o",
       "thumb": false
     },
     {
@@ -70504,22 +70504,22 @@
     },
     {
       "address": "0x2eb728",
-      "function": "FUN_002eb728",
+      "function": "_ZN9Obj5586e0D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002eb728.o",
+      "object": "build/obj/_code/002e/Obj5586e0__dtor_Obj5586e0.o",
       "size": 24,
-      "source": "src/_code/002e/FUN_002eb728.cpp",
-      "target": "orig/target/_code/002e/FUN_002eb728.o",
+      "source": "src/_code/002e/Obj5586e0__dtor_Obj5586e0.cpp",
+      "target": "orig/target/_code/002e/Obj5586e0__dtor_Obj5586e0.o",
       "thumb": true
     },
     {
       "address": "0x2eb744",
-      "function": "FUN_002eb744",
+      "function": "_ZN9Obj5586e05clearEv",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002eb744.o",
+      "object": "build/obj/_code/002e/Obj5586e0__clear.o",
       "size": 56,
-      "source": "src/_code/002e/FUN_002eb744.cpp",
-      "target": "orig/target/_code/002e/FUN_002eb744.o",
+      "source": "src/_code/002e/Obj5586e0__clear.cpp",
+      "target": "orig/target/_code/002e/Obj5586e0__clear.o",
       "thumb": true
     },
     {
@@ -73559,12 +73559,12 @@
     },
     {
       "address": "0x2f2b5c",
-      "function": "FUN_002f2b5c",
+      "function": "_ZN9Obj5586e06appendEP15SharedQueueNodeb",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f2b5c.o",
+      "object": "build/obj/_code/002f/Obj5586e0__append.o",
       "size": 174,
-      "source": "src/_code/002f/FUN_002f2b5c.cpp",
-      "target": "orig/target/_code/002f/FUN_002f2b5c.o",
+      "source": "src/_code/002f/Obj5586e0__append.cpp",
+      "target": "orig/target/_code/002f/Obj5586e0__append.o",
       "thumb": true
     },
     {
@@ -74770,12 +74770,12 @@
     },
     {
       "address": "0x2f4fac",
-      "function": "FUN_002f4fac",
+      "function": "_ZN9Obj55a1789setTargetEPv",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f4fac.o",
+      "object": "build/obj/_code/002f/Obj55a178__setTarget.o",
       "size": 36,
-      "source": "src/_code/002f/FUN_002f4fac.cpp",
-      "target": "orig/target/_code/002f/FUN_002f4fac.o",
+      "source": "src/_code/002f/Obj55a178__setTarget.cpp",
+      "target": "orig/target/_code/002f/Obj55a178__setTarget.o",
       "thumb": true
     },
     {
@@ -75790,12 +75790,12 @@
     },
     {
       "address": "0x2f7b80",
-      "function": "FUN_002f7b80",
+      "function": "_ZN9Obj559eccD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f7b80.o",
+      "object": "build/obj/_code/002f/Obj559ecc__dtor_Obj559ecc.o",
       "size": 22,
-      "source": "src/_code/002f/FUN_002f7b80.cpp",
-      "target": "orig/target/_code/002f/FUN_002f7b80.o",
+      "source": "src/_code/002f/Obj559ecc__dtor_Obj559ecc.cpp",
+      "target": "orig/target/_code/002f/Obj559ecc__dtor_Obj559ecc.o",
       "thumb": true
     },
     {
@@ -76180,12 +76180,12 @@
     },
     {
       "address": "0x2f87e8",
-      "function": "FUN_002f87e8",
+      "function": "_ZN9Obj5586e05eraseE19SharedQueueIterator",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f87e8.o",
+      "object": "build/obj/_code/002f/Obj5586e0__erase.o",
       "size": 56,
-      "source": "src/_code/002f/FUN_002f87e8.cpp",
-      "target": "orig/target/_code/002f/FUN_002f87e8.o",
+      "source": "src/_code/002f/Obj5586e0__erase.cpp",
+      "target": "orig/target/_code/002f/Obj5586e0__erase.o",
       "thumb": true
     },
     {
@@ -80924,12 +80924,12 @@
     },
     {
       "address": "0x3054b8",
-      "function": "FUN_003054b8",
+      "function": "_ZN9Obj55a178D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_003054b8.o",
+      "object": "build/obj/_code/0030/Obj55a178__dtor_Obj55a178.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_003054b8.cpp",
-      "target": "orig/target/_code/0030/FUN_003054b8.o",
+      "source": "src/_code/0030/Obj55a178__dtor_Obj55a178.cpp",
+      "target": "orig/target/_code/0030/Obj55a178__dtor_Obj55a178.o",
       "thumb": true
     },
     {
@@ -84834,12 +84834,12 @@
     },
     {
       "address": "0x30ca92",
-      "function": "FUN_0030ca92",
+      "function": "_ZN9Obj55a9e0D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030ca92.o",
+      "object": "build/obj/_code/0030/Obj55a9e0__dtor_Obj55a9e0.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030ca92.cpp",
-      "target": "orig/target/_code/0030/FUN_0030ca92.o",
+      "source": "src/_code/0030/Obj55a9e0__dtor_Obj55a9e0.cpp",
+      "target": "orig/target/_code/0030/Obj55a9e0__dtor_Obj55a9e0.o",
       "thumb": true
     },
     {
@@ -84905,82 +84905,82 @@
     },
     {
       "address": "0x30cb80",
-      "function": "FUN_0030cb80",
+      "function": "_ZN9Obj55aea8D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cb80.o",
+      "object": "build/obj/_code/0030/Obj55aea8__dtor_Obj55aea8.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cb80.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cb80.o",
+      "source": "src/_code/0030/Obj55aea8__dtor_Obj55aea8.cpp",
+      "target": "orig/target/_code/0030/Obj55aea8__dtor_Obj55aea8.o",
       "thumb": true
     },
     {
       "address": "0x30cb88",
-      "function": "FUN_0030cb88",
+      "function": "_ZN9Obj55ae00D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cb88.o",
+      "object": "build/obj/_code/0030/Obj55ae00__dtor_Obj55ae00.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cb88.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cb88.o",
+      "source": "src/_code/0030/Obj55ae00__dtor_Obj55ae00.cpp",
+      "target": "orig/target/_code/0030/Obj55ae00__dtor_Obj55ae00.o",
       "thumb": true
     },
     {
       "address": "0x30cb90",
-      "function": "FUN_0030cb90",
+      "function": "_ZN9Obj55adecD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cb90.o",
+      "object": "build/obj/_code/0030/Obj55adec__dtor_Obj55adec.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cb90.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cb90.o",
+      "source": "src/_code/0030/Obj55adec__dtor_Obj55adec.cpp",
+      "target": "orig/target/_code/0030/Obj55adec__dtor_Obj55adec.o",
       "thumb": true
     },
     {
       "address": "0x30cb98",
-      "function": "FUN_0030cb98",
+      "function": "_ZN9Obj55add8D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cb98.o",
+      "object": "build/obj/_code/0030/Obj55add8__dtor_Obj55add8.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cb98.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cb98.o",
+      "source": "src/_code/0030/Obj55add8__dtor_Obj55add8.cpp",
+      "target": "orig/target/_code/0030/Obj55add8__dtor_Obj55add8.o",
       "thumb": true
     },
     {
       "address": "0x30cba0",
-      "function": "FUN_0030cba0",
+      "function": "_ZN9Obj55ada4D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cba0.o",
+      "object": "build/obj/_code/0030/Obj55ada4__dtor_Obj55ada4.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cba0.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cba0.o",
+      "source": "src/_code/0030/Obj55ada4__dtor_Obj55ada4.cpp",
+      "target": "orig/target/_code/0030/Obj55ada4__dtor_Obj55ada4.o",
       "thumb": true
     },
     {
       "address": "0x30cba8",
-      "function": "FUN_0030cba8",
+      "function": "_ZN9Obj55ad40D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cba8.o",
+      "object": "build/obj/_code/0030/Obj55ad40__dtor_Obj55ad40.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cba8.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cba8.o",
+      "source": "src/_code/0030/Obj55ad40__dtor_Obj55ad40.cpp",
+      "target": "orig/target/_code/0030/Obj55ad40__dtor_Obj55ad40.o",
       "thumb": true
     },
     {
       "address": "0x30cbb0",
-      "function": "FUN_0030cbb0",
+      "function": "_ZN9Obj55a918D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cbb0.o",
+      "object": "build/obj/_code/0030/Obj55a918__dtor_Obj55a918.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cbb0.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cbb0.o",
+      "source": "src/_code/0030/Obj55a918__dtor_Obj55a918.cpp",
+      "target": "orig/target/_code/0030/Obj55a918__dtor_Obj55a918.o",
       "thumb": true
     },
     {
       "address": "0x30cbb8",
-      "function": "FUN_0030cbb8",
+      "function": "_ZN9Obj55a314D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030cbb8.o",
+      "object": "build/obj/_code/0030/Obj55a314__dtor_Obj55a314.o",
       "size": 8,
-      "source": "src/_code/0030/FUN_0030cbb8.cpp",
-      "target": "orig/target/_code/0030/FUN_0030cbb8.o",
+      "source": "src/_code/0030/Obj55a314__dtor_Obj55a314.cpp",
+      "target": "orig/target/_code/0030/Obj55a314__dtor_Obj55a314.o",
       "thumb": true
     },
     {
@@ -87275,12 +87275,12 @@
     },
     {
       "address": "0x310698",
-      "function": "FUN_00310698",
+      "function": "_ZN9Obj55a2187vfunc1cEv",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_00310698.o",
+      "object": "build/obj/_code/0031/Obj55a218__vfunc1c.o",
       "size": 16,
-      "source": "src/_code/0031/FUN_00310698.cpp",
-      "target": "orig/target/_code/0031/FUN_00310698.o",
+      "source": "src/_code/0031/Obj55a218__vfunc1c.cpp",
+      "target": "orig/target/_code/0031/Obj55a218__vfunc1c.o",
       "thumb": false
     },
     {
@@ -98435,12 +98435,12 @@
     },
     {
       "address": "0x35b21c",
-      "function": "campCommonRelease",
+      "function": "_ZN9Obj55c92011closeScreenEv",
       "module": "_code",
-      "object": "build/obj/_code/0035/campCommonRelease.o",
+      "object": "build/obj/_code/0035/Obj55c920__closeScreen.o",
       "size": 232,
-      "source": "src/_code/0035/campCommonRelease.cpp",
-      "target": "orig/target/_code/0035/campCommonRelease.o",
+      "source": "src/_code/0035/Obj55c920__closeScreen.cpp",
+      "target": "orig/target/_code/0035/Obj55c920__closeScreen.o",
       "thumb": false
     },
     {
@@ -107749,12 +107749,12 @@
     },
     {
       "address": "0x39988c",
-      "function": "_ZN9Obj464cb014post0f0107HeaderEv",
+      "function": "_ZN9Obj464cb016postSelectedWordEv",
       "module": "_code",
-      "object": "build/obj/_code/0039/_ZN9Obj464cb014post0f0107HeaderEv.o",
+      "object": "build/obj/_code/0039/Obj464cb0__postSelectedWord.o",
       "size": 184,
-      "source": "src/_code/0039/_ZN9Obj464cb014post0f0107HeaderEv.cpp",
-      "target": "orig/target/_code/0039/_ZN9Obj464cb014post0f0107HeaderEv.o",
+      "source": "src/_code/0039/Obj464cb0__postSelectedWord.cpp",
+      "target": "orig/target/_code/0039/Obj464cb0__postSelectedWord.o",
       "thumb": false
     },
     {
@@ -122978,12 +122978,12 @@
     },
     {
       "address": "0x4062a0",
-      "function": "FUN_004062a0",
+      "function": "_ZN9Obj557b58D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_004062a0.o",
+      "object": "build/obj/_code/0040/Obj557b58__deleting_dtor_Obj557b58.o",
       "size": 16,
-      "source": "src/_code/0040/FUN_004062a0.cpp",
-      "target": "orig/target/_code/0040/FUN_004062a0.o",
+      "source": "src/_code/0040/Obj557b58__deleting_dtor_Obj557b58.cpp",
+      "target": "orig/target/_code/0040/Obj557b58__deleting_dtor_Obj557b58.o",
       "thumb": false
     },
     {
@@ -123593,12 +123593,12 @@
     },
     {
       "address": "0x409f70",
-      "function": "FUN_00409f70",
+      "function": "_ZN9Obj42079421dispatchChildCallbackEv",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_00409f70.o",
+      "object": "build/obj/_code/0040/Obj420794__dispatchChildCallback.o",
       "size": 16,
-      "source": "src/_code/0040/FUN_00409f70.cpp",
-      "target": "orig/target/_code/0040/FUN_00409f70.o",
+      "source": "src/_code/0040/Obj420794__dispatchChildCallback.cpp",
+      "target": "orig/target/_code/0040/Obj420794__dispatchChildCallback.o",
       "thumb": false
     },
     {
@@ -124848,22 +124848,22 @@
     },
     {
       "address": "0x414bb0",
-      "function": "FUN_00414bb0",
+      "function": "_ZN9Obj42080c4drawEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_00414bb0.o",
+      "object": "build/obj/_code/0041/Obj42080c__draw.o",
       "size": 620,
-      "source": "src/_code/0041/FUN_00414bb0.cpp",
-      "target": "orig/target/_code/0041/FUN_00414bb0.o",
+      "source": "src/_code/0041/Obj42080c__draw.cpp",
+      "target": "orig/target/_code/0041/Obj42080c__draw.o",
       "thumb": false
     },
     {
       "address": "0x414e28",
-      "function": "FUN_00414e28",
+      "function": "_ZN9Obj42080c15prepareGeometryEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_00414e28.o",
+      "object": "build/obj/_code/0041/Obj42080c__prepareGeometry.o",
       "size": 872,
-      "source": "src/_code/0041/FUN_00414e28.cpp",
-      "target": "orig/target/_code/0041/FUN_00414e28.o",
+      "source": "src/_code/0041/Obj42080c__prepareGeometry.cpp",
+      "target": "orig/target/_code/0041/Obj42080c__prepareGeometry.o",
       "thumb": false
     },
     {
@@ -124889,12 +124889,12 @@
     },
     {
       "address": "0x41539c",
-      "function": "_ZN9Obj42080c7vfunc10Ev",
+      "function": "_ZN9Obj42080c25refreshTextureCoordinatesEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/Obj42080c__vfunc10.o",
+      "object": "build/obj/_code/0041/Obj42080c__refreshTextureCoordinates.o",
       "size": 172,
-      "source": "src/_code/0041/Obj42080c__vfunc10.cpp",
-      "target": "orig/target/_code/0041/Obj42080c__vfunc10.o",
+      "source": "src/_code/0041/Obj42080c__refreshTextureCoordinates.cpp",
+      "target": "orig/target/_code/0041/Obj42080c__refreshTextureCoordinates.o",
       "thumb": false
     },
     {
@@ -124919,22 +124919,22 @@
     },
     {
       "address": "0x415504",
-      "function": "FUN_00415504",
+      "function": "_ZN9Obj42083c4drawEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_00415504.o",
+      "object": "build/obj/_code/0041/Obj42083c__draw.o",
       "size": 1044,
-      "source": "src/_code/0041/FUN_00415504.cpp",
-      "target": "orig/target/_code/0041/FUN_00415504.o",
+      "source": "src/_code/0041/Obj42083c__draw.cpp",
+      "target": "orig/target/_code/0041/Obj42083c__draw.o",
       "thumb": false
     },
     {
       "address": "0x415918",
-      "function": "FUN_00415918",
+      "function": "_ZN9Obj42083c15prepareGeometryEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_00415918.o",
+      "object": "build/obj/_code/0041/Obj42083c__prepareGeometry.o",
       "size": 680,
-      "source": "src/_code/0041/FUN_00415918.cpp",
-      "target": "orig/target/_code/0041/FUN_00415918.o",
+      "source": "src/_code/0041/Obj42083c__prepareGeometry.cpp",
+      "target": "orig/target/_code/0041/Obj42083c__prepareGeometry.o",
       "thumb": false
     },
     {
@@ -125936,12 +125936,12 @@
     },
     {
       "address": "0x41c62c",
-      "function": "FUN_0041c62c",
+      "function": "_ZN9Obj557dccD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041c62c.o",
+      "object": "build/obj/_code/0041/Obj557dcc__deleting_dtor_Obj557dcc.o",
       "size": 16,
-      "source": "src/_code/0041/FUN_0041c62c.cpp",
-      "target": "orig/target/_code/0041/FUN_0041c62c.o",
+      "source": "src/_code/0041/Obj557dcc__deleting_dtor_Obj557dcc.cpp",
+      "target": "orig/target/_code/0041/Obj557dcc__deleting_dtor_Obj557dcc.o",
       "thumb": false
     },
     {
@@ -125956,22 +125956,22 @@
     },
     {
       "address": "0x41c6e0",
-      "function": "FUN_0041c6e0",
+      "function": "_ZN9Obj42094c4drawEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041c6e0.o",
+      "object": "build/obj/_code/0041/Obj42094c__draw.o",
       "size": 828,
-      "source": "src/_code/0041/FUN_0041c6e0.cpp",
-      "target": "orig/target/_code/0041/FUN_0041c6e0.o",
+      "source": "src/_code/0041/Obj42094c__draw.cpp",
+      "target": "orig/target/_code/0041/Obj42094c__draw.o",
       "thumb": false
     },
     {
       "address": "0x41ca28",
-      "function": "FUN_0041ca28",
+      "function": "_ZN9Obj42094c15prepareGeometryEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041ca28.o",
+      "object": "build/obj/_code/0041/Obj42094c__prepareGeometry.o",
       "size": 368,
-      "source": "src/_code/0041/FUN_0041ca28.cpp",
-      "target": "orig/target/_code/0041/FUN_0041ca28.o",
+      "source": "src/_code/0041/Obj42094c__prepareGeometry.cpp",
+      "target": "orig/target/_code/0041/Obj42094c__prepareGeometry.o",
       "thumb": false
     },
     {
@@ -125997,12 +125997,12 @@
     },
     {
       "address": "0x41cde8",
-      "function": "FUN_0041cde8",
+      "function": "_ZN9Obj42094c25refreshTextureCoordinatesEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041cde8.o",
+      "object": "build/obj/_code/0041/Obj42094c__refreshTextureCoordinates.o",
       "size": 424,
-      "source": "src/_code/0041/FUN_0041cde8.cpp",
-      "target": "orig/target/_code/0041/FUN_0041cde8.o",
+      "source": "src/_code/0041/Obj42094c__refreshTextureCoordinates.cpp",
+      "target": "orig/target/_code/0041/Obj42094c__refreshTextureCoordinates.o",
       "thumb": false
     },
     {
@@ -126037,32 +126037,32 @@
     },
     {
       "address": "0x41d0e4",
-      "function": "FUN_0041d0e4",
+      "function": "_ZN9Obj4209907isReadyEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041d0e4.o",
+      "object": "build/obj/_code/0041/Obj420990__isReady.o",
       "size": 128,
-      "source": "src/_code/0041/FUN_0041d0e4.cpp",
-      "target": "orig/target/_code/0041/FUN_0041d0e4.o",
+      "source": "src/_code/0041/Obj420990__isReady.cpp",
+      "target": "orig/target/_code/0041/Obj420990__isReady.o",
       "thumb": false
     },
     {
       "address": "0x41d164",
-      "function": "FUN_0041d164",
+      "function": "_ZN9Obj4209904drawEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/FUN_0041d164.o",
+      "object": "build/obj/_code/0041/Obj420990__draw.o",
       "size": 944,
-      "source": "src/_code/0041/FUN_0041d164.cpp",
-      "target": "orig/target/_code/0041/FUN_0041d164.o",
+      "source": "src/_code/0041/Obj420990__draw.cpp",
+      "target": "orig/target/_code/0041/Obj420990__draw.o",
       "thumb": false
     },
     {
       "address": "0x41d520",
-      "function": "_ZN9Obj42099012addUvOffsetsEv",
+      "function": "_ZN9Obj42099015prepareGeometryEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/Obj420990__addUvOffsets.o",
+      "object": "build/obj/_code/0041/Obj420990__prepareGeometry.o",
       "size": 412,
-      "source": "src/_code/0041/Obj420990__addUvOffsets.cpp",
-      "target": "orig/target/_code/0041/Obj420990__addUvOffsets.o",
+      "source": "src/_code/0041/Obj420990__prepareGeometry.cpp",
+      "target": "orig/target/_code/0041/Obj420990__prepareGeometry.o",
       "thumb": false
     },
     {
@@ -126098,12 +126098,12 @@
     },
     {
       "address": "0x41da04",
-      "function": "_ZN9Obj42099010setUvRectsEv",
+      "function": "_ZN9Obj42099025refreshTextureCoordinatesEv",
       "module": "_code",
-      "object": "build/obj/_code/0041/Obj420990__setUvRects.o",
+      "object": "build/obj/_code/0041/Obj420990__refreshTextureCoordinates.o",
       "size": 284,
-      "source": "src/_code/0041/Obj420990__setUvRects.cpp",
-      "target": "orig/target/_code/0041/Obj420990__setUvRects.o",
+      "source": "src/_code/0041/Obj420990__refreshTextureCoordinates.cpp",
+      "target": "orig/target/_code/0041/Obj420990__refreshTextureCoordinates.o",
       "thumb": false
     },
     {
@@ -126550,12 +126550,12 @@
     },
     {
       "address": "0x421944",
-      "function": "FUN_00421944",
+      "function": "_ZN9Obj4209ccD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00421944.o",
+      "object": "build/obj/_code/0042/Obj4209cc__deleting_dtor_Obj4209cc.o",
       "size": 32,
-      "source": "src/_code/0042/FUN_00421944.cpp",
-      "target": "orig/target/_code/0042/FUN_00421944.o",
+      "source": "src/_code/0042/Obj4209cc__deleting_dtor_Obj4209cc.cpp",
+      "target": "orig/target/_code/0042/Obj4209cc__deleting_dtor_Obj4209cc.o",
       "thumb": false
     },
     {
@@ -127014,22 +127014,22 @@
     },
     {
       "address": "0x423a8c",
-      "function": "FUN_00423a8c",
+      "function": "_ZN9Obj557f004openEjPKvij",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00423a8c.o",
+      "object": "build/obj/_code/0042/Obj557f00__open.o",
       "size": 188,
-      "source": "src/_code/0042/FUN_00423a8c.cpp",
-      "target": "orig/target/_code/0042/FUN_00423a8c.o",
+      "source": "src/_code/0042/Obj557f00__open.cpp",
+      "target": "orig/target/_code/0042/Obj557f00__open.o",
       "thumb": false
     },
     {
       "address": "0x423b48",
-      "function": "FUN_00423b48",
+      "function": "_ZN9Obj557f004readEPvj",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00423b48.o",
+      "object": "build/obj/_code/0042/Obj557f00__read.o",
       "size": 196,
-      "source": "src/_code/0042/FUN_00423b48.cpp",
-      "target": "orig/target/_code/0042/FUN_00423b48.o",
+      "source": "src/_code/0042/Obj557f00__read.cpp",
+      "target": "orig/target/_code/0042/Obj557f00__read.o",
       "thumb": false
     },
     {
@@ -127084,12 +127084,12 @@
     },
     {
       "address": "0x423cfc",
-      "function": "FUN_00423cfc",
+      "function": "_ZN9Obj557f005closeEv",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00423cfc.o",
+      "object": "build/obj/_code/0042/Obj557f00__close.o",
       "size": 112,
-      "source": "src/_code/0042/FUN_00423cfc.cpp",
-      "target": "orig/target/_code/0042/FUN_00423cfc.o",
+      "source": "src/_code/0042/Obj557f00__close.cpp",
+      "target": "orig/target/_code/0042/Obj557f00__close.o",
       "thumb": false
     },
     {
@@ -127114,12 +127114,12 @@
     },
     {
       "address": "0x423d94",
-      "function": "FUN_00423d94",
+      "function": "_ZN9Obj420a2c14releaseSourcesEv",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00423d94.o",
+      "object": "build/obj/_code/0042/Obj420a2c__releaseSources.o",
       "size": 108,
-      "source": "src/_code/0042/FUN_00423d94.cpp",
-      "target": "orig/target/_code/0042/FUN_00423d94.o",
+      "source": "src/_code/0042/Obj420a2c__releaseSources.cpp",
+      "target": "orig/target/_code/0042/Obj420a2c__releaseSources.o",
       "thumb": false
     },
     {
@@ -134463,12 +134463,12 @@
     },
     {
       "address": "0x44336c",
-      "function": "FUN_0044336c",
+      "function": "_ZN9Obj4216548setStateEj",
       "module": "_code",
-      "object": "build/obj/_code/0044/FUN_0044336c.o",
+      "object": "build/obj/_code/0044/Obj421654__setState.o",
       "size": 12,
-      "source": "src/_code/0044/FUN_0044336c.cpp",
-      "target": "orig/target/_code/0044/FUN_0044336c.o",
+      "source": "src/_code/0044/Obj421654__setState.cpp",
+      "target": "orig/target/_code/0044/Obj421654__setState.o",
       "thumb": false
     },
     {
@@ -135264,32 +135264,32 @@
     },
     {
       "address": "0x44ab28",
-      "function": "FUN_0044ab28",
+      "function": "_ZNK9Obj4214b49getHandleEv",
       "module": "_code",
-      "object": "build/obj/_code/0044/FUN_0044ab28.o",
+      "object": "build/obj/_code/0044/Obj4214b4__getHandle.o",
       "size": 8,
-      "source": "src/_code/0044/FUN_0044ab28.cpp",
-      "target": "orig/target/_code/0044/FUN_0044ab28.o",
+      "source": "src/_code/0044/Obj4214b4__getHandle.cpp",
+      "target": "orig/target/_code/0044/Obj4214b4__getHandle.o",
       "thumb": false
     },
     {
       "address": "0x44ab30",
-      "function": "FUN_0044ab30",
+      "function": "_ZN9Obj4214b415buildViewMatrixEPfjPKf",
       "module": "_code",
-      "object": "build/obj/_code/0044/FUN_0044ab30.o",
+      "object": "build/obj/_code/0044/Obj4214b4__buildViewMatrix.o",
       "size": 2016,
-      "source": "src/_code/0044/FUN_0044ab30.cpp",
-      "target": "orig/target/_code/0044/FUN_0044ab30.o",
+      "source": "src/_code/0044/Obj4214b4__buildViewMatrix.cpp",
+      "target": "orig/target/_code/0044/Obj4214b4__buildViewMatrix.o",
       "thumb": false
     },
     {
       "address": "0x44b310",
-      "function": "_ZN9Obj55b8d0D1Ev",
+      "function": "_ZN9Obj4214b4D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0044/Obj55b8d0__dtor_Obj55b8d0.o",
+      "object": "build/obj/_code/0044/Obj4214b4__dtor_Obj4214b4.o",
       "size": 60,
-      "source": "src/_code/0044/Obj55b8d0__dtor_Obj55b8d0.cpp",
-      "target": "orig/target/_code/0044/Obj55b8d0__dtor_Obj55b8d0.o",
+      "source": "src/_code/0044/Obj4214b4__dtor_Obj4214b4.cpp",
+      "target": "orig/target/_code/0044/Obj4214b4__dtor_Obj4214b4.o",
       "thumb": false
     },
     {
@@ -135585,32 +135585,32 @@
     },
     {
       "address": "0x44e798",
-      "function": "FUN_0044e798",
+      "function": "_ZNK9Obj4215f48getValueEv",
       "module": "_code",
-      "object": "build/obj/_code/0044/FUN_0044e798.o",
+      "object": "build/obj/_code/0044/Obj4215f4__getValue.o",
       "size": 8,
-      "source": "src/_code/0044/FUN_0044e798.cpp",
-      "target": "orig/target/_code/0044/FUN_0044e798.o",
+      "source": "src/_code/0044/Obj4215f4__getValue.cpp",
+      "target": "orig/target/_code/0044/Obj4215f4__getValue.o",
       "thumb": false
     },
     {
       "address": "0x44e7a0",
-      "function": "FUN_0044e7a0",
+      "function": "_ZN9Obj4215f423buildProjectionMatricesEPfS0_",
       "module": "_code",
-      "object": "build/obj/_code/0044/FUN_0044e7a0.o",
+      "object": "build/obj/_code/0044/Obj4215f4__buildProjectionMatrices.o",
       "size": 472,
-      "source": "src/_code/0044/FUN_0044e7a0.cpp",
-      "target": "orig/target/_code/0044/FUN_0044e7a0.o",
+      "source": "src/_code/0044/Obj4215f4__buildProjectionMatrices.cpp",
+      "target": "orig/target/_code/0044/Obj4215f4__buildProjectionMatrices.o",
       "thumb": false
     },
     {
       "address": "0x44e990",
-      "function": "_ZN9Obj55ba10D1Ev",
+      "function": "_ZN9Obj4215f4D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0044/Obj55ba10__dtor_Obj55ba10.o",
+      "object": "build/obj/_code/0044/Obj4215f4__dtor_Obj4215f4.o",
       "size": 60,
-      "source": "src/_code/0044/Obj55ba10__dtor_Obj55ba10.cpp",
-      "target": "orig/target/_code/0044/Obj55ba10__dtor_Obj55ba10.o",
+      "source": "src/_code/0044/Obj4215f4__dtor_Obj4215f4.cpp",
+      "target": "orig/target/_code/0044/Obj4215f4__dtor_Obj4215f4.o",
       "thumb": false
     },
     {
@@ -141291,32 +141291,32 @@
     },
     {
       "address": "0x47326c",
-      "function": "FUN_0047326c",
+      "function": "_ZN9Obj42217cD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_0047326c.o",
+      "object": "build/obj/_code/0047/Obj42217c__deleting_dtor_Obj42217c.o",
       "size": 4,
-      "source": "src/_code/0047/FUN_0047326c.cpp",
-      "target": "orig/target/_code/0047/FUN_0047326c.o",
+      "source": "src/_code/0047/Obj42217c__deleting_dtor_Obj42217c.cpp",
+      "target": "orig/target/_code/0047/Obj42217c__deleting_dtor_Obj42217c.o",
       "thumb": false
     },
     {
       "address": "0x473270",
-      "function": "FUN_00473270",
+      "function": "_ZN9Obj4221a410initializeEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00473270.o",
+      "object": "build/obj/_code/0047/Obj4221a4__initialize.o",
       "size": 156,
-      "source": "src/_code/0047/FUN_00473270.cpp",
-      "target": "orig/target/_code/0047/FUN_00473270.o",
+      "source": "src/_code/0047/Obj4221a4__initialize.cpp",
+      "target": "orig/target/_code/0047/Obj4221a4__initialize.o",
       "thumb": false
     },
     {
       "address": "0x47330c",
-      "function": "FUN_0047330c",
+      "function": "_ZN9Obj4221a47vfunc10Ej",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_0047330c.o",
+      "object": "build/obj/_code/0047/Obj4221a4__vfunc10.o",
       "size": 176,
-      "source": "src/_code/0047/FUN_0047330c.cpp",
-      "target": "orig/target/_code/0047/FUN_0047330c.o",
+      "source": "src/_code/0047/Obj4221a4__vfunc10.cpp",
+      "target": "orig/target/_code/0047/Obj4221a4__vfunc10.o",
       "thumb": false
     },
     {
@@ -141341,12 +141341,12 @@
     },
     {
       "address": "0x473538",
-      "function": "FUN_00473538",
+      "function": "_ZN9Obj4221bc7vfunc0cEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00473538.o",
+      "object": "build/obj/_code/0047/Obj4221bc__vfunc0c.o",
       "size": 272,
-      "source": "src/_code/0047/FUN_00473538.cpp",
-      "target": "orig/target/_code/0047/FUN_00473538.o",
+      "source": "src/_code/0047/Obj4221bc__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj4221bc__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141361,12 +141361,12 @@
     },
     {
       "address": "0x4736c0",
-      "function": "FUN_004736c0",
+      "function": "_ZN9Obj4221bcD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_004736c0.o",
+      "object": "build/obj/_code/0047/Obj4221bc__deleting_dtor_Obj4221bc.o",
       "size": 44,
-      "source": "src/_code/0047/FUN_004736c0.cpp",
-      "target": "orig/target/_code/0047/FUN_004736c0.o",
+      "source": "src/_code/0047/Obj4221bc__deleting_dtor_Obj4221bc.cpp",
+      "target": "orig/target/_code/0047/Obj4221bc__deleting_dtor_Obj4221bc.o",
       "thumb": false
     },
     {
@@ -141624,12 +141624,12 @@
     },
     {
       "address": "0x474624",
-      "function": "FUN_00474624",
+      "function": "_ZN9Obj4221e47vfunc0cEv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00474624.o",
+      "object": "build/obj/_code/0047/Obj4221e4__vfunc0c.o",
       "size": 160,
-      "source": "src/_code/0047/FUN_00474624.cpp",
-      "target": "orig/target/_code/0047/FUN_00474624.o",
+      "source": "src/_code/0047/Obj4221e4__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj4221e4__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141644,12 +141644,12 @@
     },
     {
       "address": "0x474730",
-      "function": "FUN_00474730",
+      "function": "_ZN9Obj4221e4D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00474730.o",
+      "object": "build/obj/_code/0047/Obj4221e4__deleting_dtor_Obj4221e4.o",
       "size": 4,
-      "source": "src/_code/0047/FUN_00474730.cpp",
-      "target": "orig/target/_code/0047/FUN_00474730.o",
+      "source": "src/_code/0047/Obj4221e4__deleting_dtor_Obj4221e4.cpp",
+      "target": "orig/target/_code/0047/Obj4221e4__deleting_dtor_Obj4221e4.o",
       "thumb": false
     },
     {
@@ -141664,12 +141664,12 @@
     },
     {
       "address": "0x47484c",
-      "function": "FUN_0047484c",
+      "function": "_ZN9Obj4221fc7vfunc0cEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_0047484c.o",
+      "object": "build/obj/_code/0047/Obj4221fc__vfunc0c.o",
       "size": 228,
-      "source": "src/_code/0047/FUN_0047484c.cpp",
-      "target": "orig/target/_code/0047/FUN_0047484c.o",
+      "source": "src/_code/0047/Obj4221fc__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj4221fc__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141745,22 +141745,22 @@
     },
     {
       "address": "0x474b70",
-      "function": "FUN_00474b70",
+      "function": "_ZN9Obj4222248completeEv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00474b70.o",
+      "object": "build/obj/_code/0047/Obj422224__complete.o",
       "size": 12,
-      "source": "src/_code/0047/FUN_00474b70.cpp",
-      "target": "orig/target/_code/0047/FUN_00474b70.o",
+      "source": "src/_code/0047/Obj422224__complete.cpp",
+      "target": "orig/target/_code/0047/Obj422224__complete.o",
       "thumb": false
     },
     {
       "address": "0x474b7c",
-      "function": "FUN_00474b7c",
+      "function": "_ZN9Obj4222307vfunc0cEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00474b7c.o",
+      "object": "build/obj/_code/0047/Obj422230__vfunc0c.o",
       "size": 288,
-      "source": "src/_code/0047/FUN_00474b7c.cpp",
-      "target": "orig/target/_code/0047/FUN_00474b7c.o",
+      "source": "src/_code/0047/Obj422230__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj422230__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141805,12 +141805,12 @@
     },
     {
       "address": "0x475b78",
-      "function": "FUN_00475b78",
+      "function": "_ZN9Obj4222487vfunc0cEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00475b78.o",
+      "object": "build/obj/_code/0047/Obj422248__vfunc0c.o",
       "size": 292,
-      "source": "src/_code/0047/FUN_00475b78.cpp",
-      "target": "orig/target/_code/0047/FUN_00475b78.o",
+      "source": "src/_code/0047/Obj422248__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj422248__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141825,22 +141825,22 @@
     },
     {
       "address": "0x475d14",
-      "function": "FUN_00475d14",
+      "function": "_ZN9Obj422248D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00475d14.o",
+      "object": "build/obj/_code/0047/Obj422248__deleting_dtor_Obj422248.o",
       "size": 44,
-      "source": "src/_code/0047/FUN_00475d14.cpp",
-      "target": "orig/target/_code/0047/FUN_00475d14.o",
+      "source": "src/_code/0047/Obj422248__deleting_dtor_Obj422248.cpp",
+      "target": "orig/target/_code/0047/Obj422248__deleting_dtor_Obj422248.o",
       "thumb": false
     },
     {
       "address": "0x475d48",
-      "function": "FUN_00475d48",
+      "function": "_ZN9Obj4222607vfunc0cEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00475d48.o",
+      "object": "build/obj/_code/0047/Obj422260__vfunc0c.o",
       "size": 240,
-      "source": "src/_code/0047/FUN_00475d48.cpp",
-      "target": "orig/target/_code/0047/FUN_00475d48.o",
+      "source": "src/_code/0047/Obj422260__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj422260__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141855,12 +141855,12 @@
     },
     {
       "address": "0x475ea4",
-      "function": "FUN_00475ea4",
+      "function": "_ZN9Obj422260D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00475ea4.o",
+      "object": "build/obj/_code/0047/Obj422260__deleting_dtor_Obj422260.o",
       "size": 4,
-      "source": "src/_code/0047/FUN_00475ea4.cpp",
-      "target": "orig/target/_code/0047/FUN_00475ea4.o",
+      "source": "src/_code/0047/Obj422260__deleting_dtor_Obj422260.cpp",
+      "target": "orig/target/_code/0047/Obj422260__deleting_dtor_Obj422260.o",
       "thumb": false
     },
     {
@@ -141915,12 +141915,12 @@
     },
     {
       "address": "0x476c2c",
-      "function": "FUN_00476c2c",
+      "function": "_ZN9Obj4222907vfunc0cEPKv",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00476c2c.o",
+      "object": "build/obj/_code/0047/Obj422290__vfunc0c.o",
       "size": 292,
-      "source": "src/_code/0047/FUN_00476c2c.cpp",
-      "target": "orig/target/_code/0047/FUN_00476c2c.o",
+      "source": "src/_code/0047/Obj422290__vfunc0c.cpp",
+      "target": "orig/target/_code/0047/Obj422290__vfunc0c.o",
       "thumb": false
     },
     {
@@ -141935,12 +141935,12 @@
     },
     {
       "address": "0x476dc8",
-      "function": "FUN_00476dc8",
+      "function": "_ZN9Obj422290D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_00476dc8.o",
+      "object": "build/obj/_code/0047/Obj422290__deleting_dtor_Obj422290.o",
       "size": 44,
-      "source": "src/_code/0047/FUN_00476dc8.cpp",
-      "target": "orig/target/_code/0047/FUN_00476dc8.o",
+      "source": "src/_code/0047/Obj422290__deleting_dtor_Obj422290.cpp",
+      "target": "orig/target/_code/0047/Obj422290__deleting_dtor_Obj422290.o",
       "thumb": false
     },
     {
@@ -143489,12 +143489,12 @@
     },
     {
       "address": "0x48260c",
-      "function": "FUN_0048260c",
+      "function": "_ZN9Obj55c81c7vfunc18Ev",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_0048260c.o",
+      "object": "build/obj/_code/0048/Obj55c81c__vfunc18.o",
       "size": 4,
-      "source": "src/_code/0048/FUN_0048260c.cpp",
-      "target": "orig/target/_code/0048/FUN_0048260c.o",
+      "source": "src/_code/0048/Obj55c81c__vfunc18.cpp",
+      "target": "orig/target/_code/0048/Obj55c81c__vfunc18.o",
       "thumb": false
     },
     {
@@ -143519,12 +143519,12 @@
     },
     {
       "address": "0x4826b0",
-      "function": "FUN_004826b0",
+      "function": "_ZN9Obj55c81c6updateEv",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_004826b0.o",
+      "object": "build/obj/_code/0048/Obj55c81c__update.o",
       "size": 164,
-      "source": "src/_code/0048/FUN_004826b0.cpp",
-      "target": "orig/target/_code/0048/FUN_004826b0.o",
+      "source": "src/_code/0048/Obj55c81c__update.cpp",
+      "target": "orig/target/_code/0048/Obj55c81c__update.o",
       "thumb": false
     },
     {
@@ -146608,12 +146608,12 @@
     },
     {
       "address": "0x4a1510",
-      "function": "FUN_004a1510",
+      "function": "_ZN9Obj55c89c6renderEv",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a1510.o",
+      "object": "build/obj/_code/004a/Obj55c89c__render.o",
       "size": 132,
-      "source": "src/_code/004a/FUN_004a1510.cpp",
-      "target": "orig/target/_code/004a/FUN_004a1510.o",
+      "source": "src/_code/004a/Obj55c89c__render.cpp",
+      "target": "orig/target/_code/004a/Obj55c89c__render.o",
       "thumb": false
     },
     {
@@ -146739,12 +146739,12 @@
     {
       "address": "0x4a2c00",
       "file": "bible/bibleDevil",
-      "function": "FUN_004a2c00",
+      "function": "_ZN9Obj55c89c5startEv",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleDevil/FUN_004a2c00.o",
+      "object": "build/obj/_code/bible/bibleDevil/Obj55c89c__start.o",
       "size": 592,
-      "source": "src/_code/bible/bibleDevil/FUN_004a2c00.cpp",
-      "target": "orig/target/_code/bible/bibleDevil/FUN_004a2c00.o",
+      "source": "src/_code/bible/bibleDevil/Obj55c89c__start.cpp",
+      "target": "orig/target/_code/bible/bibleDevil/Obj55c89c__start.o",
       "thumb": false
     },
     {
@@ -146899,12 +146899,12 @@
     },
     {
       "address": "0x4a4530",
-      "function": "FUN_004a4530",
+      "function": "_ZN9Obj55c89c6updateEv",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a4530.o",
+      "object": "build/obj/_code/004a/Obj55c89c__update.o",
       "size": 88,
-      "source": "src/_code/004a/FUN_004a4530.cpp",
-      "target": "orig/target/_code/004a/FUN_004a4530.o",
+      "source": "src/_code/004a/Obj55c89c__update.cpp",
+      "target": "orig/target/_code/004a/Obj55c89c__update.o",
       "thumb": false
     },
     {
@@ -146919,22 +146919,22 @@
     },
     {
       "address": "0x4a45b4",
-      "function": "FUN_004a45b4",
+      "function": "_ZN9Obj55c89cD0Ev",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a45b4.o",
+      "object": "build/obj/_code/004a/Obj55c89c__deleting_dtor_Obj55c89c.o",
       "size": 32,
-      "source": "src/_code/004a/FUN_004a45b4.cpp",
-      "target": "orig/target/_code/004a/FUN_004a45b4.o",
+      "source": "src/_code/004a/Obj55c89c__deleting_dtor_Obj55c89c.cpp",
+      "target": "orig/target/_code/004a/Obj55c89c__deleting_dtor_Obj55c89c.o",
       "thumb": false
     },
     {
       "address": "0x4a45e8",
-      "function": "FUN_004a45e8",
+      "function": "_ZN9Obj55c8d06renderEv",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a45e8.o",
+      "object": "build/obj/_code/004a/Obj55c8d0__render.o",
       "size": 108,
-      "source": "src/_code/004a/FUN_004a45e8.cpp",
-      "target": "orig/target/_code/004a/FUN_004a45e8.o",
+      "source": "src/_code/004a/Obj55c8d0__render.cpp",
+      "target": "orig/target/_code/004a/Obj55c8d0__render.o",
       "thumb": false
     },
     {
@@ -147022,12 +147022,12 @@
     {
       "address": "0x4a4e9c",
       "file": "bible/bibleAnalyze",
-      "function": "FUN_004a4e9c",
+      "function": "_ZN9Obj55c8d05startEv",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleAnalyze/FUN_004a4e9c.o",
+      "object": "build/obj/_code/bible/bibleAnalyze/Obj55c8d0__start.o",
       "size": 840,
-      "source": "src/_code/bible/bibleAnalyze/FUN_004a4e9c.cpp",
-      "target": "orig/target/_code/bible/bibleAnalyze/FUN_004a4e9c.o",
+      "source": "src/_code/bible/bibleAnalyze/Obj55c8d0__start.cpp",
+      "target": "orig/target/_code/bible/bibleAnalyze/Obj55c8d0__start.o",
       "thumb": false
     },
     {
@@ -147553,12 +147553,12 @@
     },
     {
       "address": "0x4a76a8",
-      "function": "bibleScreenSetup",
+      "function": "_ZN9Obj55c92010openScreenEv",
       "module": "_code",
-      "object": "build/obj/_code/004a/bibleScreenSetup.o",
+      "object": "build/obj/_code/004a/Obj55c920__openScreen.o",
       "size": 248,
-      "source": "src/_code/004a/bibleScreenSetup.cpp",
-      "target": "orig/target/_code/004a/bibleScreenSetup.o",
+      "source": "src/_code/004a/Obj55c920__openScreen.cpp",
+      "target": "orig/target/_code/004a/Obj55c920__openScreen.o",
       "thumb": false
     },
     {
@@ -147593,12 +147593,12 @@
     },
     {
       "address": "0x4a7a30",
-      "function": "FUN_004a7a30",
+      "function": "_ZNK9Obj55c92013isScreenReadyEv",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a7a30.o",
+      "object": "build/obj/_code/004a/Obj55c920__isScreenReady.o",
       "size": 32,
-      "source": "src/_code/004a/FUN_004a7a30.cpp",
-      "target": "orig/target/_code/004a/FUN_004a7a30.o",
+      "source": "src/_code/004a/Obj55c920__isScreenReady.cpp",
+      "target": "orig/target/_code/004a/Obj55c920__isScreenReady.o",
       "thumb": false
     },
     {
@@ -148803,12 +148803,12 @@
     },
     {
       "address": "0x4ace74",
-      "function": "FUN_004ace74",
+      "function": "_ZN9Obj55c95414copyParametersEPK20SelectionValueRecord",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004ace74.o",
+      "object": "build/obj/_code/004a/Obj55c954__copyParameters.o",
       "size": 44,
-      "source": "src/_code/004a/FUN_004ace74.cpp",
-      "target": "orig/target/_code/004a/FUN_004ace74.o",
+      "source": "src/_code/004a/Obj55c954__copyParameters.cpp",
+      "target": "orig/target/_code/004a/Obj55c954__copyParameters.o",
       "thumb": false
     },
     {
@@ -148833,12 +148833,12 @@
     },
     {
       "address": "0x4acf74",
-      "function": "FUN_004acf74",
+      "function": "_ZN9Obj55c978D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004acf74.o",
+      "object": "build/obj/_code/004a/Obj55c978__dtor_Obj55c978.o",
       "size": 4,
-      "source": "src/_code/004a/FUN_004acf74.cpp",
-      "target": "orig/target/_code/004a/FUN_004acf74.o",
+      "source": "src/_code/004a/Obj55c978__dtor_Obj55c978.cpp",
+      "target": "orig/target/_code/004a/Obj55c978__dtor_Obj55c978.o",
       "thumb": false
     },
     {
@@ -149053,42 +149053,42 @@
     },
     {
       "address": "0x4afe34",
-      "function": "FUN_004afe34",
+      "function": "_ZN9Obj4225406decodeEPKhj",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004afe34.o",
+      "object": "build/obj/_code/004a/Obj422540__decode.o",
       "size": 24,
-      "source": "src/_code/004a/FUN_004afe34.cpp",
-      "target": "orig/target/_code/004a/FUN_004afe34.o",
+      "source": "src/_code/004a/Obj422540__decode.cpp",
+      "target": "orig/target/_code/004a/Obj422540__decode.o",
       "thumb": false
     },
     {
       "address": "0x4afe4c",
-      "function": "FUN_004afe4c",
+      "function": "_ZN9Obj55c954D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004afe4c.o",
+      "object": "build/obj/_code/004a/Obj55c954__dtor_Obj55c954.o",
       "size": 4,
-      "source": "src/_code/004a/FUN_004afe4c.cpp",
-      "target": "orig/target/_code/004a/FUN_004afe4c.o",
+      "source": "src/_code/004a/Obj55c954__dtor_Obj55c954.cpp",
+      "target": "orig/target/_code/004a/Obj55c954__dtor_Obj55c954.o",
       "thumb": false
     },
     {
       "address": "0x4afe50",
-      "function": "FUN_004afe50",
+      "function": "_ZN9Obj422540D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004afe50.o",
+      "object": "build/obj/_code/004a/Obj422540__dtor_Obj422540.o",
       "size": 764,
-      "source": "src/_code/004a/FUN_004afe50.cpp",
-      "target": "orig/target/_code/004a/FUN_004afe50.o",
+      "source": "src/_code/004a/Obj422540__dtor_Obj422540.cpp",
+      "target": "orig/target/_code/004a/Obj422540__dtor_Obj422540.o",
       "thumb": false
     },
     {
       "address": "0x4b0150",
-      "function": "_ZN9Obj55c9e49copyFlagsEPK20SelectionValueRecord",
+      "function": "_ZN9Obj4225409copyFlagsEPK20SelectionValueRecord",
       "module": "_code",
-      "object": "build/obj/_code/004b/Obj55c9e4__copyFlags.o",
+      "object": "build/obj/_code/004b/Obj422540__copyFlags.o",
       "size": 20,
-      "source": "src/_code/004b/Obj55c9e4__copyFlags.cpp",
-      "target": "orig/target/_code/004b/Obj55c9e4__copyFlags.o",
+      "source": "src/_code/004b/Obj422540__copyFlags.cpp",
+      "target": "orig/target/_code/004b/Obj422540__copyFlags.o",
       "thumb": false
     },
     {
@@ -152671,12 +152671,12 @@
     },
     {
       "address": "0x4d0b54",
-      "function": "FUN_004d0b54",
+      "function": "_ZN9Obj422594D0Ev",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004d0b54.o",
+      "object": "build/obj/_code/004d/Obj422594__deleting_dtor_Obj422594.o",
       "size": 76,
-      "source": "src/_code/004d/FUN_004d0b54.cpp",
-      "target": "orig/target/_code/004d/FUN_004d0b54.o",
+      "source": "src/_code/004d/Obj422594__deleting_dtor_Obj422594.cpp",
+      "target": "orig/target/_code/004d/Obj422594__deleting_dtor_Obj422594.o",
       "thumb": false
     },
     {
@@ -158232,22 +158232,22 @@
     },
     {
       "address": "0x504910",
-      "function": "FUN_00504910",
+      "function": "_ZNK9Obj4214b417getTypeDescriptorEv",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00504910.o",
+      "object": "build/obj/_code/0050/Obj4214b4__getTypeDescriptor.o",
       "size": 8,
-      "source": "src/_code/0050/FUN_00504910.cpp",
-      "target": "orig/target/_code/0050/FUN_00504910.o",
+      "source": "src/_code/0050/Obj4214b4__getTypeDescriptor.cpp",
+      "target": "orig/target/_code/0050/Obj4214b4__getTypeDescriptor.o",
       "thumb": false
     },
     {
       "address": "0x50491c",
-      "function": "_ZNK9Obj55b8d016implementationIdEv",
+      "function": "_ZNK9Obj4214b416implementationIdEv",
       "module": "_code",
-      "object": "build/obj/_code/0050/Obj55b8d0__implementationId.o",
+      "object": "build/obj/_code/0050/Obj4214b4__implementationId.o",
       "size": 8,
-      "source": "src/_code/0050/Obj55b8d0__implementationId.cpp",
-      "target": "orig/target/_code/0050/Obj55b8d0__implementationId.o",
+      "source": "src/_code/0050/Obj4214b4__implementationId.cpp",
+      "target": "orig/target/_code/0050/Obj4214b4__implementationId.o",
       "thumb": false
     },
     {
@@ -158402,12 +158402,12 @@
     },
     {
       "address": "0x506204",
-      "function": "FUN_00506204",
+      "function": "_ZNK9Obj4215f411getCategoryEv",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00506204.o",
+      "object": "build/obj/_code/0050/Obj4215f4__getCategory.o",
       "size": 8,
-      "source": "src/_code/0050/FUN_00506204.cpp",
-      "target": "orig/target/_code/0050/FUN_00506204.o",
+      "source": "src/_code/0050/Obj4215f4__getCategory.cpp",
+      "target": "orig/target/_code/0050/Obj4215f4__getCategory.o",
       "thumb": false
     },
     {
@@ -158422,42 +158422,42 @@
     },
     {
       "address": "0x50626c",
-      "function": "FUN_0050626c",
+      "function": "_ZNK9Obj42165417getTypeDescriptorEv",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_0050626c.o",
+      "object": "build/obj/_code/0050/Obj421654__getTypeDescriptor.o",
       "size": 8,
-      "source": "src/_code/0050/FUN_0050626c.cpp",
-      "target": "orig/target/_code/0050/FUN_0050626c.o",
+      "source": "src/_code/0050/Obj421654__getTypeDescriptor.cpp",
+      "target": "orig/target/_code/0050/Obj421654__getTypeDescriptor.o",
       "thumb": false
     },
     {
       "address": "0x506278",
-      "function": "FUN_00506278",
+      "function": "_ZN9Obj4216547vfunc18EPvj",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00506278.o",
+      "object": "build/obj/_code/0050/Obj421654__vfunc18.o",
       "size": 3236,
-      "source": "src/_code/0050/FUN_00506278.cpp",
-      "target": "orig/target/_code/0050/FUN_00506278.o",
+      "source": "src/_code/0050/Obj421654__vfunc18.cpp",
+      "target": "orig/target/_code/0050/Obj421654__vfunc18.o",
       "thumb": false
     },
     {
       "address": "0x506f1c",
-      "function": "FUN_00506f1c",
+      "function": "_ZNK9Obj55bad08getValueEv",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00506f1c.o",
+      "object": "build/obj/_code/0050/Obj55bad0__getValue.o",
       "size": 8,
-      "source": "src/_code/0050/FUN_00506f1c.cpp",
-      "target": "orig/target/_code/0050/FUN_00506f1c.o",
+      "source": "src/_code/0050/Obj55bad0__getValue.cpp",
+      "target": "orig/target/_code/0050/Obj55bad0__getValue.o",
       "thumb": false
     },
     {
       "address": "0x506f24",
-      "function": "FUN_00506f24",
+      "function": "_ZN9Obj55bad07vfunc18Ev",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00506f24.o",
+      "object": "build/obj/_code/0050/Obj55bad0__vfunc18.o",
       "size": 8,
-      "source": "src/_code/0050/FUN_00506f24.cpp",
-      "target": "orig/target/_code/0050/FUN_00506f24.o",
+      "source": "src/_code/0050/Obj55bad0__vfunc18.cpp",
+      "target": "orig/target/_code/0050/Obj55bad0__vfunc18.o",
       "thumb": false
     },
     {
@@ -158542,12 +158542,12 @@
     },
     {
       "address": "0x507164",
-      "function": "FUN_00507164",
+      "function": "_ZNK9Obj55bc7c17getTypeDescriptorEv",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_00507164.o",
+      "object": "build/obj/_code/0050/Obj55bc7c__getTypeDescriptor.o",
       "size": 8,
-      "source": "src/_code/0050/FUN_00507164.cpp",
-      "target": "orig/target/_code/0050/FUN_00507164.o",
+      "source": "src/_code/0050/Obj55bc7c__getTypeDescriptor.cpp",
+      "target": "orig/target/_code/0050/Obj55bc7c__getTypeDescriptor.o",
       "thumb": false
     },
     {
@@ -159802,12 +159802,12 @@
     },
     {
       "address": "0x50d374",
-      "function": "FUN_0050d374",
+      "function": "_ZNK9Obj4225406equalsEPK20SelectionValueRecord",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_0050d374.o",
+      "object": "build/obj/_code/0050/Obj422540__equals.o",
       "size": 44,
-      "source": "src/_code/0050/FUN_0050d374.cpp",
-      "target": "orig/target/_code/0050/FUN_0050d374.o",
+      "source": "src/_code/0050/Obj422540__equals.cpp",
+      "target": "orig/target/_code/0050/Obj422540__equals.o",
       "thumb": false
     },
     {

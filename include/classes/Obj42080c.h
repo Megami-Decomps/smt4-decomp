@@ -23,9 +23,9 @@ struct Obj42080cRect {
 class Obj42080c : public Obj420794 {
 public:
     virtual ~Obj42080c();
-    virtual void vfunc08();
-    virtual void vfunc0c();
-    virtual void vfunc10();   /* refreshes the child and places the quad over rect */
+    virtual void prepareGeometry();
+    virtual void draw();
+    virtual void refreshTextureCoordinates();   /* refreshes the child and places the quad over rect */
 
     /* The four vertices (the base's heap block). */
     Obj42080cVertex *vertices() { return (Obj42080cVertex *)buffer; }

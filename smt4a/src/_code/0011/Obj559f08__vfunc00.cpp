@@ -1,7 +1,7 @@
 #include "classes/Obj558c9c.h"
 
 extern "C" {
-s32 FUN_0010ab42(Obj559f08 *object);   /* the base class's vfunc00 */
+s32 _ZN9Obj558c907vfunc0cEjjj(Obj559f08 *object);   /* the base class's vfunc00 */
 s32 FUN_0010aaf0(Obj559f08 *object, u8 *entry);
 }
 
@@ -9,7 +9,7 @@ s32 FUN_0010aaf0(Obj559f08 *object, u8 *entry);
  * loaded. Returns whether it did. */
 s32 Obj559f08::vfunc00()
 {
-    s32 ok = FUN_0010ab42(this) != 0 && FUN_0010aaf0(this, entry) != 0;
+    s32 ok = _ZN9Obj558c907vfunc0cEjjj(this) != 0 && FUN_0010aaf0(this, entry) != 0;
 
     if (ok) {
         loaded = 1;

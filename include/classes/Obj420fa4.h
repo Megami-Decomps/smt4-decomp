@@ -9,7 +9,7 @@ public:
     Obj420fa4();
     virtual void unk00();
     virtual void unk04();
-    virtual void unk08();
+    virtual u32 vfunc08();
 
     /* 0x04 */ u32 unk04Value;
     /* 0x08 */ u32 unk08Value;

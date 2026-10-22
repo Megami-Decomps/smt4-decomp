@@ -1,3 +1,4 @@
+#include "classes/Obj55ca08.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a4a60` (_code @ 0x3a4a60, 0xce4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -24,7 +25,6 @@ int FUN_002bf810(...);
 int FUN_0022e538(...);
 int equipmentPreviewUpdateSelection(...);
 int FUN_002305fc(...);
-int FUN_00230954(unsigned int *, unsigned int *);
 int FUN_00230e04(...);
 int pointConvertToFloat(...);
 int rectangleInitializeSelection(unsigned int *, int, int, int);
@@ -58,7 +58,6 @@ extern int gameGlobalsDataExists(void);
 /* Supplied declaration required: FUN_0022fcb8. */
 /* Supplied declaration required: FUN_002305fc. */
 /* Supplied declaration required: FUN_002306f8. */
-/* Supplied declaration required: FUN_00230954. */
 extern int FUN_00230b90(unsigned int *, unsigned short);
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
@@ -165,7 +164,7 @@ void FUN_003a4a60(unsigned int *param_1)
     puVar9 = param_1 + 0x218;
     puVar10 = param_1 + param_1[0x218] * 0x1d + 0x220;
     temp_v6 = flaggedValueHolderGetTotal(puVar10);
-    FUN_00230954(param_1 + 0x20a,puVar10);
+    ((Obj55ca08 *)(param_1 + 0x20a))->Obj55ca08::synchronize((const u8 *)puVar10);
     (**(romwright_code **)(*(int *)param_1[0x217] + 0xc))((int *)param_1[0x217],puVar10);
     uiAnimationAdvanceChannel(param_1 + 0xea,2);
     uiAnimationAdvanceChannel(param_1 + 0xea,3);

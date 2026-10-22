@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00514d48` (_code @ 0x514d48, 0x5c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj559edc.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int asdOperatorDeleteArray(unsigned int);
 int _ZN9Obj55aff4D1Ev(unsigned char *[2]);
 int FUN_002e9518(int, int);
 int _ZN9Obj55aff4C1Ev(...);
-int _ZN9Obj559edcD1Ev(unsigned char **);
 
 /* stack frame of param_2: 16 slot(s), 61 byte(s) */
 typedef struct {
@@ -48,7 +48,6 @@ extern unsigned char DAT_0055ad28; /* 0x55ad28 */
 /* Supplied declaration required: FUN_002e9518. */
 extern int _ZN9Obj55aff4C1ERKS_(unsigned int *, unsigned int *);
 /* Supplied declaration required: _ZN9Obj55aff4C1Ev. */
-/* Supplied declaration required: _ZN9Obj559edcD1Ev. */
 extern int _ZN12ZeroWordPairC1Ev(int);
 extern int FUN_00303146(int, unsigned int *);
 extern int _ZN9Obj55b104C1Ejj(int, unsigned int);
@@ -283,7 +282,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   piVar9 = temp_v13;
   temp_v13[1] = *temp_v13 + temp_v17 * 0xb8;
   temp_v13[2] = *temp_v13 + temp_v20 * 0xb8;
-  _ZN9Obj559edcD1Ev(&temp_v14);
+  ((Obj559edc *)&temp_v14)->Obj559edc::~Obj559edc();
   return piVar9;
 }
 

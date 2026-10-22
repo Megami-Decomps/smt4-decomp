@@ -870,7 +870,7 @@
 0x001523d8 FUN_001523d8 between
 0x001523e0 FUN_001523e0 between
 0x001524d4 nw_snd_internal_driver_VoiceManager_GetVoiceCount name
-0x00152530 FUN_00152530 between
+0x00152530 _ZN9Obj42259410initializeEPKv between
 0x001525e4 FUN_001525e4 between
 0x001525e8 FUN_001525e8 callers
 0x001525f8 FUN_001525f8 between
@@ -1724,7 +1724,7 @@
 0x0034f6e8 FUN_0034f6e8 callers
 0x0034f758 soundResetPairState between
 0x0034f768 FUN_0034f768 between
-0x0034f780 FUN_0034f780 callers
+0x0034f780 _ZN9Obj420a2c14releaseSourcesEv callers
 0x0034f7ec FUN_0034f7ec between
 0x0034f800 FUN_0034f800 between
 0x0034f8e8 FUN_0034f8e8 between
@@ -2143,7 +2143,7 @@
 0x00362c28 nw_gfx_AmbientLight_CreateOriginalValue name
 0x00362d10 nw_gfx_HemiSphereLight_Accept name
 0x00362d64 FUN_00362d64 between
-0x003630b0 FUN_003630b0 between
+0x003630b0 _ZN9Obj4210d05resetEv between
 0x003630b4 FUN_003630b4 between
 0x0036333c FUN_0036333c between
 0x00363390 FUN_00363390 between
@@ -2328,7 +2328,7 @@
 0x00378e98 nw_snd_FxReverb_Initialize name
 0x003795b0 FUN_003795b0 callers
 0x0037960c FUN_0037960c callers
-0x00379618 FUN_00379618 between
+0x00379618 _ZN9Obj421aa416updateParametersEv between
 0x00379818 nw_snd_internal_BasicSound_SetAmbientInfo name
 0x00379864 FUN_00379864 callers
 0x003798c0 nw_snd_internal_BasicSound_UpdateMoveValue name
@@ -2339,13 +2339,13 @@
 0x00379954 soundResetStateWord between
 0x00379960 nw_snd_internal_BasicSound_SetPlayerPriority name
 0x00379990 nw_snd_internal_BasicSound_GetAmbientPriority name
-0x003799b8 FUN_003799b8 between
+0x003799b8 _ZN9Obj421aa47vfunc18Ev between
 0x003799bc FUN_003799bc callers
 0x003799c4 FUN_003799c4 callers
 0x003799d4 nw_snd_internal_ExternalSoundPlayer_RemoveSound name
 0x003799f8 FUN_003799f8 callers
 0x00379a04 FUN_00379a04 callers
-0x00379a14 FUN_00379a14 between
+0x00379a14 _ZN9Obj421aa48shutdownEv between
 0x00379b90 _ZN9Obj421aa49emptyHookEv between
 0x00379b94 FUN_00379b94 between
 0x00379bdc nw_snd_internal_CurveAdshr_Reset name
@@ -2402,7 +2402,7 @@
 0x0037b614 FUN_0037b614 callers
 0x0037b61c FUN_0037b61c between
 0x0037b73c nw_snd_internal_SoundArchiveLoader_detail_LoadWaveArchiveByWaveSoundFile name
-0x0037b7c4 FUN_0037b7c4 between
+0x0037b7c4 _ZN9Obj421c90D1Ev between
 0x0037b7d8 FUN_0037b7d8 between
 0x0037b7dc FUN_0037b7dc between
 0x0037b7e0 nw_snd_internal_ExternalSoundPlayer_AppendSound name
@@ -2563,8 +2563,8 @@
 0x003e2cc0 nw_gfx_ShaderBinaryInfo_GetShaderProgramCommandSize name
 0x003e2e10 FUN_003e2e10 between
 0x003e371c allocatorObjectGetResource between
-0x003e3724 FUN_003e3724 between
-0x003e3730 FUN_003e3730 between
+0x003e3724 _ZNK9Obj4214b417getTypeDescriptorEv between
+0x003e3730 _ZNK9Obj4214b411getCategoryEv between
 0x003e3738 nw_gfx_WorldMatrixUpdater_CalculateWorldXsi name
 0x003e38d0 nw_gfx_WorldMatrixUpdater_CalculateWorldBasic name
 0x003e3c4c nw_gfx_WorldMatrixUpdater_CalculateWorldMayaSsc name
@@ -2581,7 +2581,7 @@
 0x003e4c90 nw_gfx_TransformAnimEvaluator_EvaluateMemberBakedAnim name
 0x003e4f90 resourceHolderGetCategory between
 0x003e4f98 FUN_003e4f98 between
-0x003e4ff8 FUN_003e4ff8 between
+0x003e4ff8 _ZNK9Obj42165417getTypeDescriptorEv between
 0x003e5004 FUN_003e5004 between
 0x003e5cb8 FUN_003e5cb8 between
 0x003e5d08 FUN_003e5d08 between
@@ -2697,7 +2697,7 @@
 0x003ea954 _ZNK9Obj4224b011equalsValueEPK20SelectionValueRecord between
 0x003ea9b0 _ZNK9Obj4224d411equalsValueEPK28ExtendedSelectionValueRecord between
 0x003eaa4c _ZNK9Obj4224f811equalsValueEPK20SelectionValueRecord between
-0x003eaa88 FUN_003eaa88 between
+0x003eaa88 _ZNK9Obj42251c6equalsEPK13Obj42251cData between
 0x003eab3c _ZNK9Obj4224b016implementationIdEv between
 0x003eab44 selectionEqualIdentity between
 0x003eac84 soundArchiveLoaderGetFileAddress between

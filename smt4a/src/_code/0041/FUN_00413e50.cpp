@@ -1,3 +1,4 @@
+#include "classes/Obj55ac38.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00413e50` (_code @ 0x413e50, 0x37c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -21,7 +22,6 @@ int _ZN9Obj5596acC1EhRK10WordVector(...);
 int saveBuildSummary(unsigned char [104]);
 int FUN_004311c0(void);
 int FUN_00432dd8(void);
-int _ZN9Obj55ac38D1Ev(...);
 int FUN_00522a48(...);
 int _ZN15Obj55aff4VectoraSERKS_(...);
 int rt_memcpy_w(unsigned char [104], unsigned int, int);
@@ -94,7 +94,6 @@ extern int _ZN15Obj55aff4VectorC1Ej(int, unsigned int);
 /* Supplied declaration required: saveBuildSummary. */
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: FUN_00432dd8. */
-/* Supplied declaration required: _ZN9Obj55ac38D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
 /* Supplied declaration required: _ZN15Obj55aff4VectoraSERKS_. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -253,7 +252,7 @@ void FUN_00413e50(int param_1)
     (**(romwright_code **)*puVar5)(puVar5);
   }
   asdOperatorDeleteArray(temp_v24);
-  _ZN9Obj55ac38D1Ev(&temp_v8);
+  (((Obj55ac38 *)(&temp_v8))->Obj55ac38::~Obj55ac38(), (int)(&temp_v8));
   return;
 }
 

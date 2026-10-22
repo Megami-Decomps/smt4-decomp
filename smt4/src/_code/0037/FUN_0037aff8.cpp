@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037aff8` (_code @ 0x37aff8, 0xc0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj421aa4.h"
 
 extern "C" {
 
 int nn_os_LightEvent_Wait(int *);
-int FUN_00379a14(int *);
 int nw_snd_internal_PlayerHeapDataManager_Finalize(int *);
 int nw_snd_internal_TaskManager_CancelTask(unsigned int, int *);
 int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned int FUN_002bb020(void);
 /* Supplied declaration required: nn_os_LightEvent_Wait. */
-/* Supplied declaration required: FUN_00379a14. */
+/* Supplied declaration required: _ZN9Obj421aa48shutdownEv. */
 /* Supplied declaration required: nw_snd_internal_PlayerHeapDataManager_Finalize. */
 /* Supplied declaration required: nw_snd_internal_TaskManager_CancelTask. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
@@ -53,7 +53,7 @@ void FUN_0037aff8(int *param_1)
     param_1[0x14f] = 0;
     param_1[0x153] = 0;
     *(unsigned char *)((int)param_1 + 0x553) = 0;
-    FUN_00379a14(param_1);
+    ((Obj421aa4 *)(param_1))->Obj421aa4::shutdown();
     nw_snd_internal_PlayerHeapDataManager_Finalize(param_1 + 0xb1);
     temp_v1 = param_1[0x96];
     nw_ut_internal_LinkListImpl_erase_2B743C(temp_v1 + 8,param_1 + 0x35);

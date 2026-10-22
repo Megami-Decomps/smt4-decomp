@@ -1,4 +1,5 @@
 #include "common.h"
+#include "classes/Obj55ca08.h"
 
 struct OwnerValues {
     u32 storage[0xbc / 4];
@@ -25,14 +26,13 @@ struct UiOwner {
 };
 
 extern "C" {
-void FUN_00230954(OwnerUpdater* updater, OwnerValues* values);
 void FUN_00233410(OwnerValues* values);
 u32 uiAnimationAdvanceChannel(OwnerAnimation* animation, s32 channel);
 
 // Updates the owner's values and renderer, then advances animation channels two and three.
 u32 uiOwnerUpdateAnimationChannels(UiOwner* owner)
 {
-    FUN_00230954(&owner->updater, &owner->values);
+    ((Obj55ca08 *)&owner->updater)->Obj55ca08::synchronize((const u8 *)&owner->values);
     owner->renderer->apply(&owner->values);
     FUN_00233410(&owner->values);
     uiAnimationAdvanceChannel(&owner->animation, 2);

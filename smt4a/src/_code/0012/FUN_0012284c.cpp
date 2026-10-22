@@ -1,3 +1,4 @@
+#include "classes/Obj558b24.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012284c` (_code @ 0x12284c, 0x192 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -16,7 +17,6 @@ int vectorCopyHeader(int, unsigned int);
 int FUN_002ea12c(void);
 int FUN_002ea704(void);
 int FUN_002f3378(unsigned char [36]);
-int _ZN9Obj558b24D1Ev(unsigned char [36]);
 int FUN_002f4f20(int, int);
 int FUN_002fd784(unsigned int, unsigned char [36]);
 int FUN_00442100(void);
@@ -48,7 +48,6 @@ extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002ea12c. */
 /* Supplied declaration required: FUN_002ea704. */
 /* Supplied declaration required: FUN_002f3378. */
-/* Supplied declaration required: _ZN9Obj558b24D1Ev. */
 /* Supplied declaration required: FUN_002f4f20. */
 extern int onlineOwnerHasPendingJob(int);
 extern unsigned int FUN_002f815c(void);
@@ -157,7 +156,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
                 temp_v3 = -0x7ffefff3;
               }
               FUN_002e7908(temp_v8,piVar5);
-              _ZN9Obj558b24D1Ev(temp_v4);
+              (((Obj558b24 *)(temp_v4))->Obj558b24::~Obj558b24(), (int)(temp_v4));
               return;
             }
             temp_v3 = -0x7ffefffc;

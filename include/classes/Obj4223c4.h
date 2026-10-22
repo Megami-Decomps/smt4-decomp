@@ -12,7 +12,7 @@ public:
     virtual void unk0c();
     virtual void stop();
     virtual void unk14();
-    virtual void unk18();
+    virtual void render();
     void resetHandlers();
     /* 0x5A4 */ u8 mode;
 };

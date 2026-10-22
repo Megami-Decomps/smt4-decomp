@@ -1,3 +1,4 @@
+#include "classes/Obj421aa4.h"
 /* NON_MATCHING: the active flag is read through base+0xca and written through the shared base; retail writes it with a literal register offset (ldr r0, =0x2bca; strb r1, [r0, r4]). */
 #include "common.h"
 
@@ -45,7 +46,6 @@ struct Actor {
     /* 0x2BCA */ u8 active;
 };
 
-int FUN_00379a14(Actor *actor);
 int FUN_0037c9e8(void *subObject);
 int nw_ut_internal_LinkListImpl_erase_2B743C(void *list, ListNode *node);
 int nw_ut_internal_LinkListImpl_insert(ListEnd head, ListEnd tail, ListNode *node);
@@ -62,7 +62,7 @@ void FUN_0037a144(Actor *actor)
     }
     actor->active = 0;
     FUN_0037c9e8(actor->subObject);
-    FUN_00379a14(actor);
+    ((Obj421aa4 *)(actor))->Obj421aa4::shutdown();
     manager = actor->manager;
     nw_ut_internal_LinkListImpl_erase_2B743C(manager->activeList, &actor->node);
     actor->vtbl->onDeactivate(actor);

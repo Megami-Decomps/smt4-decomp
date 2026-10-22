@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018f69c` (_code @ 0x18f69c, 0x324 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Texture.h"
+#include <new>
 
 extern "C" {
 
-int _ZN2nn2gr3CTR7TextureC1Ev(unsigned char [60]);
 int gfxModelRebuildTextureCommands(int, int *, unsigned char [60], int, int, int, unsigned int, unsigned int);
 int FUN_001a7a20(...);
 int wstrlen(...);
@@ -126,7 +127,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < 6);
       }
-      _ZN2nn2gr3CTR7TextureC1Ev(temp_v11);
+      (int)(new ((void *)(temp_v11)) nn::gr::CTR::Texture());
       temp_v16[0] = temp_v11;
       temp_v16[1] = temp_v16[3];
       temp_v9 = 0;

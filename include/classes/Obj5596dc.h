@@ -11,7 +11,7 @@ public:
     Obj5596dc();
     virtual ~Obj5596dc();
 
-protected:
+    /* Public for the retained complete-object ABI wrapper. */
     /* 0x00: vtable pointer */
     /* 0x04 */ u8 unk04[4];
     /* 0x08 */ u8 member08[0x224];

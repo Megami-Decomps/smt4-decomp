@@ -1,5 +1,5 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj4223c413resetHandlersEv` (_code @ 0x3a6c4c, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: Retail instruction scheduling/register allocation differs (99 retail versus 181 compiled rows). */
+#include "classes/Obj4223c4.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -24,9 +24,12 @@ extern int FUN_003a8240(...); /* 0x3a8240 */
 extern int FUN_003a836c(...); /* 0x3a836c */
 
 
-void _ZN9Obj4223c413resetHandlersEv(int param_1)
+} /* extern "C" */
+
+void Obj4223c4::resetHandlers()
 
 {
+    int param_1 = (int)this;
 /* irregular: 12 native warning(s); review required */
   int temp_v0;
   int temp_v1;
@@ -96,4 +99,3 @@ void _ZN9Obj4223c413resetHandlersEv(int param_1)
   return;
 }
 
-} /* extern "C" */

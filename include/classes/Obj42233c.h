@@ -8,6 +8,7 @@
 class Obj42233c : public Obj422318 {
 public:
     virtual ~Obj42233c();
+    virtual void stop(); /* +0x10 */
 };
 
 #endif

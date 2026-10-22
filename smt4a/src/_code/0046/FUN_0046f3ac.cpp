@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046f3ac` (_code @ 0x46f3ac, 0x6c4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj4221d4.h"
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
 #include "shard/W4_Match6_DataSet.h"
 

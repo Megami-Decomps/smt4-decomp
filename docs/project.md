@@ -25,8 +25,17 @@ tools/progress_site.py  renders both games' proven progress as a static site (bu
 ```
 
 Every function is its own `.cpp`, compiled by armcc 4.1 (`--cpp --no_rtti -O3 -Otime`). The games are
-C++ (their asserts name 168 `.cpp` source files and 4 `.c`); each body sits inside `extern "C"` so its
-symbol keeps the name objdiff and relink pair it by.
+C++ (their asserts name 168 `.cpp` source files and 4 `.c`). Recovered classes have shared declarations
+in `include/classes/` and native member definitions outside `extern "C"`; functions not established
+as members retain C linkage so their symbols keep the names objdiff and relink pair them by.
+
+Member signatures must account for ARM's hidden result storage. The window-status operations return
+`WindowStatusOperationResult` by value, and queue erasure returns a `SharedQueueIterator` with a
+nontrivial copy constructor; the first decompiled pointer can therefore be the output, not `this`.
+Some proven deleting wrappers and owner-destruction chains still use C declarations of destructor
+entry points: retail consumes the ABI's returned `this` directly, while a native explicit destructor
+call makes armcc save and restore the owner. Keep these documented exceptions when `fdiff` proves
+that the native call changes the retail instructions.
 
 ## Shared code
 

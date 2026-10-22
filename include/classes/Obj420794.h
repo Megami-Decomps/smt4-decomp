@@ -16,6 +16,7 @@ public:
     virtual ~Obj420794Child();
     virtual void refreshOffsets();   /* +0x08 */
     virtual void refreshRects();     /* +0x0C */
+    virtual void callback();         /* +0x10 */
 };
 
 /* The base of the screen filters (vtable at 0x420794, named after it until its real name is
@@ -40,6 +41,11 @@ public:
         }
     }
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
+    virtual void prepareGeometry() = 0; /* +0x08 */
+    virtual void draw() = 0;            /* +0x0C */
+    virtual void refreshTextureCoordinates() = 0; /* +0x10 */
+    virtual void dispatchChildCallback(); /* +0x14 */
+    virtual u32 isReady();             /* +0x18 */
 
 protected:
     /* 0x00: vtable pointer */

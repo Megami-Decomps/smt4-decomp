@@ -1,3 +1,5 @@
+#include "classes/Obj5586e0.h"
+#include "classes/Obj558c28.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ee878` (_code @ 0x2ee878, 0xba bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -10,10 +12,8 @@ int FUN_0010e6a4(unsigned int *);
 int FUN_00119d74(unsigned int *);
 int FUN_0012cf84(int);
 int asdOperatorDeleteArray(void);
-int FUN_002eb744(unsigned int *);
 int FUN_002ecf40(void);
 int _ZN9Obj558bd0D1Ev(int);
-int _ZN9Obj558c28D1Ev(int);
 int FUN_002f8da8(void);
 
 typedef int romwright_code(...);
@@ -29,11 +29,8 @@ extern int FUN_001210e0(unsigned int *);
 extern int destroyObj0055afbc(int);
 /* Supplied declaration required: FUN_0012cf84. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002eb728(int);
-/* Supplied declaration required: FUN_002eb744. */
 /* Supplied declaration required: FUN_002ecf40. */
 /* Supplied declaration required: _ZN9Obj558bd0D1Ev. */
-/* Supplied declaration required: _ZN9Obj558c28D1Ev. */
 /* Supplied declaration required: FUN_002f8da8. */
 extern int FUN_002f9ef8(int);
 
@@ -60,7 +57,7 @@ void FUN_002ee878(unsigned int *param_1)
     (**(romwright_code **)(*(int *)param_1[0x7d] + 4))();
   }
   FUN_00119d74(param_1 + 0x7e);
-  FUN_002eb744(param_1 + 0x75);
+  ((Obj5586e0 *)(param_1 + 0x75))->clear();
   FUN_002ecf40();
   temp_v0 = FUN_001210e0(param_1 + 0xa5);
   temp_v0 = destroyObj0055afbc(temp_v0 - 0x10);
@@ -68,11 +65,11 @@ void FUN_002ee878(unsigned int *param_1)
   _ZN9Obj558bd0D1Ev(temp_v0);
   temp_v0 = temp_v0 - 0x18;
   FUN_0012cf84(temp_v0);
-  temp_v0 = FUN_002eb728(temp_v0 - 0x24);
+  temp_v0 = (((Obj5586e0 *)(temp_v0 - 0x24))->Obj5586e0::~Obj5586e0(), (int)(temp_v0 - 0x24));
   temp_v0 = FUN_0010b89c(temp_v0 - 8);
   temp_v0 = FUN_0011571c(temp_v0 - 0x5c);
   temp_v0 = FUN_002f9ef8(temp_v0 - 0xc);
-  _ZN9Obj558c28D1Ev(temp_v0 - 0x164);
+  ((Obj558c28 *)(temp_v0 - 0x164))->Obj558c28::~Obj558c28();
   return;
 }
 

@@ -33,6 +33,7 @@ public:
     virtual bool vfunc18();
     virtual void vfunc1c();
     virtual u32 vfunc20();     /* the id the manager is told about */
+    virtual void updateParameters(); /* +0x24 */
 
     /* 0x00: vtable pointer */
     /* 0x04 */ u32 unk04[6];

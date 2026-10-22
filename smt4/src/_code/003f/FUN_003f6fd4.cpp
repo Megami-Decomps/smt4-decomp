@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0038e0cc's literal pool; not written yet. */
+/* NON_MATCHING: found outside every function: its address is in _ZN9Obj4222907vfunc0cEPKv's literal pool; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_003f6fd4 for reference (not compiled; its own view of the boundaries):
 
 void FUN_003f6fd4(code *UNRECOVERED_JUMPTABLE,unsigned int *param_2)

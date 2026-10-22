@@ -1,6 +1,8 @@
 /* NON_MATCHING: 236-vs244-byte frame, bound/scratch r5-lr roles and integer-vs-VFP LOD copying differ; complete110-row control flow agrees. */
 #include "shard/W6_W6Match7_MaterialTextures.h"
 #include "shard/S2GrTexture.h"
+#include "classes/Texture.h"
+#include <new>
 
 struct NamedModelTexture {
     /* 0x00 */ u8 unk00[0x18];
@@ -83,7 +85,6 @@ inline void applyTextureSampler(GrTextureUnit* unit, const NamedModelTexture* bo
 }
 
 extern "C" {
-MaterialTextureState* _ZN2nn2gr3CTR7TextureC1Ev(MaterialTextureState* state);
 void gfxModelRebuildTextureCommands(ModelTextureBindings* model, MaterialTextureCommands* commands,
                  MaterialTextureState* state, const MaterialTextureSampler* first,
                  const MaterialTextureSampler* second, const MaterialTextureSampler* third,
@@ -99,7 +100,7 @@ u32 gfxModelBindTextureByName(ModelTextureBindings* model, const char* name,
     MaterialTextureBinding* end = model->bindings + model->bindingCount;
     for (MaterialTextureBinding* binding = model->bindings; binding != end; ++binding) {
         MaterialTextureState state;
-        _ZN2nn2gr3CTR7TextureC1Ev(&state);
+        (MaterialTextureState*)(new ((void *)(&state)) nn::gr::CTR::Texture());
         GrTextureUnit* units[3] = {
             reinterpret_cast<GrTextureUnit*>(state.texture.unk00),
             reinterpret_cast<GrTextureUnit*>(state.texture.unit3c),

@@ -68,8 +68,9 @@ Every match must be one a programmer could have written for a reason.
   before it runs straight into it) is a piece of a function the analysis cut up, often at the `push`
   after an early-exit guard (`cmp r0, #0; bxeq lr`). `python -B tools/units.py missing > rows.tsv`
   lists both kinds; check the rows, then `python -B tools/units.py add rows.tsv` adds, extends, moves
-  and joins the units. Never call a `func_0x<address>` placeholder: the target has a symbol once its
-  unit exists.
+  and joins the units. A moved start (armcc loaded a global or constant before the `push`) leaves
+  the old source taking an invented parameter for that register: rewrite it to load the value itself.
+  Never call a `func_0x<address>` placeholder: the target has a symbol once its unit exists.
 
 ## Readability standard
 

@@ -1,23 +1,23 @@
 #include "battle/Filter/Filter4Poly.h"
+#include "classes/Obj42094c.h"
 
 extern "C" {
 
 void textureOwnerReset(void *object);
 void asdOperatorDelete(Filter4Poly *filter);
-void asdMemFree(void *block);
 
-extern const u8 g_filter4PolyBaseVtable[];
-extern const u8 g_filter4PolyVtable[];
+extern const u8 _ZTV9Obj420794[];
+extern const u8 _ZTV9Obj42094c[];
 
-/* Destructor of Filter4Poly. */
+/* C ABI retained: this game's base resets a texture owner, unlike the shared handle-release base. */
 void _ZN9Obj42094cD0Ev(Filter4Poly *filter)
 {
-    filter->vtable = g_filter4PolyVtable;
+    filter->vtable = _ZTV9Obj42094c + 8;
     if (filter->dataB != NULL) {
         asdMemFree(filter->dataB);
         filter->dataB = NULL;
     }
-    filter->vtable = g_filter4PolyBaseVtable;
+    filter->vtable = _ZTV9Obj420794 + 8;
     if (filter->object != NULL) {
         textureOwnerReset(filter->object);
         filter->object = NULL;
