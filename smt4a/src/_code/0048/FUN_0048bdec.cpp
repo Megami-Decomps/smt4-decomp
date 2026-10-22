@@ -12,7 +12,7 @@ int FUN_002d22c0(int);
 int FUN_0048821c(int, unsigned int);
 int FUN_0048a378(int);
 int FUN_0048d248(int, unsigned int);
-int FUN_00492aa0(int, unsigned int);
+int naviMainSetCurrentMap(int, unsigned int);
 int FUN_00492ac8(int, int);
 int pointConvertToFloat(...);
 
@@ -29,7 +29,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0048821c. */
 /* Supplied declaration required: FUN_0048a378. */
 /* Supplied declaration required: FUN_0048d248. */
-/* Supplied declaration required: FUN_00492aa0. */
+/* Supplied declaration required: naviMainSetCurrentMap. */
 /* Supplied declaration required: FUN_00492ac8. */
 extern unsigned int FUN_00492c84(int);
 /* Supplied declaration required: pointConvertToFloat. */
@@ -55,7 +55,7 @@ void FUN_0048bdec(int param_1)
     if (temp_v0 != '\0') {
       if (temp_v0 == '\x01') {
         temp_v1 = param_1 + 0x4cc;
-        FUN_00492aa0(temp_v1,*(unsigned int *)(param_1 + 0x60));
+        naviMainSetCurrentMap(temp_v1,*(unsigned int *)(param_1 + 0x60));
         FUN_00492ac8(temp_v1,0);
         FUN_0048821c(param_1,*(unsigned int *)(param_1 + 0x60));
         uiSpriteSetImageKeyframe(temp_v4,2,0);

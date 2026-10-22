@@ -9,14 +9,15 @@ typedef struct Job {
 } Job;
 
 s32 jobFind(u32 id);
+extern Job *g_requestWork;
 
-/* Returns 1 when the job record `*ref` exists and its job is found or it has not started. */
-u32 jobRefIsRunning(Job **ref)
+/* Returns 1 when the sound-test job is found or has not started. */
+u32 jobRefIsRunning(void)
 {
     s32 found;
     Job *job;
 
-    job = *ref;
+    job = g_requestWork;
     if ((job != NULL) && ((found = jobFind(job->id), found != 0 || (job->unk04 == 0)))) {
         return 1;
     }

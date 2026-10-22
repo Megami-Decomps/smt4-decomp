@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00121ee8(...);
+int aocThreadAllocateStorage(...);
 int FUN_00126fb8(...);
 int FUN_001270f8(...);
 int FUN_002ba78c(...);
@@ -26,7 +26,7 @@ extern int FUN_00121e5c(...); /* 0x121e5c */
 
 extern int FUN_0011b918(int);
 extern int FUN_0011b930(int);
-/* Supplied declaration required: FUN_00121ee8. */
+/* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_00121fa0(int);
 extern int FUN_00121fb4(int);
 /* Supplied declaration required: FUN_00126fb8. */
@@ -119,7 +119,7 @@ unsigned int * FUN_00111184(int param_1)
   puVar2[-0x24] = 0;
   puVar2[-0x23] = 0;
   memClear(puVar2 + -0x22,0x80);
-  FUN_00121ee8(puVar2 + -0x1b5,0x8000);
+  aocThreadAllocateStorage(puVar2 + -0x1b5,0x8000);
   FUN_001270f8(puVar2 + -0x1b1);
   FUN_002ba78c(puVar2 + 4);
   temp_v3 = FUN_00121e5c;

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdProcessCreateSimple(...);
 int FUN_0015f258(...);
-int FUN_0015f378(...);
+int aocThreadAllocateStorage(...);
 int FUN_0016ccb4(...);
 int FUN_0016ce28(...);
 int FUN_0019a46c(...);
@@ -29,7 +29,7 @@ extern int FUN_0015f2ec(...); /* 0x15f2ec */
 extern int FUN_001585bc(int);
 extern int FUN_001585d4(int);
 /* Supplied declaration required: FUN_0015f258. */
-/* Supplied declaration required: FUN_0015f378. */
+/* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_0015f434(int);
 extern int FUN_0015f448(int);
 /* Supplied declaration required: FUN_0016ccb4. */
@@ -120,7 +120,7 @@ unsigned int * FUN_001482c0(int param_1)
   puVar2[-0x24] = 0;
   puVar2[-0x23] = 0;
   sysMemClear(puVar2 + -0x22,0x80);
-  FUN_0015f378(puVar2 + -0x1b5,0x8000);
+  aocThreadAllocateStorage(puVar2 + -0x1b5,0x8000);
   FUN_0016ce28(puVar2 + -0x1b1);
   FUN_0015f258(puVar2 + 4);
   temp_v3 = FUN_0015f2ec;

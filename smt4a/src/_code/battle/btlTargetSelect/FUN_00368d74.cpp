@@ -1,56 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00368d74` (_code @ 0x368d74, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail cmp r0, #5 differs from recovered cmp r0, #5. */
+#include "common.h"
+
+struct TargetWordsView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+};
+
+struct TargetValueView {
+    TargetWordsView unk00; // 0x00
+    u32 unk08; // 0x08
+};
+
+struct TargetEntryView {
+    TargetWordsView unk00; // 0x00
+    u8 unk08; // 0x08
+    u8 unk09; // 0x09
+    u8 unk0A; // 0x0A
+    u8 unk0B; // 0x0B
+    u8 unk0C; // 0x0C
+    u8 unk0D; // 0x0D
+    u8 unk0E; // 0x0E
+    u8 unk0F; // 0x0F
+};
+
+struct TargetEntryStorageView {
+    u32 unk00; // 0x00
+    TargetEntryView entries[5]; // 0x04
+};
+
+struct TargetSelectView {
+    u32 unk00; // 0x00
+    TargetEntryStorageView* unk04; // 0x04
+};
 
 extern "C" {
+extern TargetSelectView* g_btlTargetSelect;
+u8 FUN_0026264c(u32 value);
+u32 obj80Select(u32 index);
+s32 FUN_002a1850(TargetValueView* value, s32 mode, u32 context);
 
-int FUN_002a1850(int *, int, unsigned int);
-
-/* stack frame of param_9: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_9_stack;
-
-extern int g_btlTargetSelect; /* 0x57a9a8 */
-
-extern unsigned char FUN_0026264c(unsigned int);
-/* Supplied declaration required: FUN_002a1850. */
-extern unsigned int obj80Select(unsigned int);
-
-
-void FUN_00368d74(int param_1,unsigned int *param_2,unsigned int param_3,unsigned char param_4,
-                 unsigned char param_5,unsigned char param_6,unsigned char param_7,unsigned char param_8,
-                 unsigned char param_9)
-
+// Populate a target entry and copy the leading record of its transformed value.
+void FUN_00368d74(s32 entryIndex, const TargetValueView* source, u32 target,
+                  u8 field09, u8 field0A, u8 field0B, u8 field0C,
+                  u8 field0D, u8 field0E)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  
-  if (param_1 < 5) {
-    puVar3 = (unsigned int *)(*(int *)(g_btlTargetSelect + 4) + param_1 * 0x10 + 4);
-    *(unsigned char *)((int)puVar3 + 0xf) = 1;
-    temp_v0 = FUN_0026264c(param_3);
-    *(unsigned char *)(puVar3 + 2) = temp_v0;
-    *(unsigned char *)((int)puVar3 + 9) = param_4;
-    *(unsigned char *)((int)puVar3 + 10) = param_5;
-    *(unsigned char *)((int)puVar3 + 0xb) = param_6;
-    *(unsigned char *)(puVar3 + 3) = param_7;
-    *(unsigned char *)((int)puVar3 + 0xd) = param_8;
-    *(unsigned char *)((int)puVar3 + 0xe) = param_9;
-    temp_v1 = obj80Select(0);
-    temp_v2 = *param_2;
-    uStack_2c = param_2[1];
-    uStack_28 = param_2[2];
-    FUN_002a1850(&temp_v2,0,temp_v1);
-    *puVar3 = temp_v2;
-    puVar3[1] = uStack_2c;
-  }
-  return;
-}
+    if (entryIndex < 5) {
+        TargetEntryView* entry = &g_btlTargetSelect->unk04->entries[entryIndex];
+        entry->unk0F = 1;
+        entry->unk08 = FUN_0026264c(target);
+        entry->unk09 = field09;
+        entry->unk0A = field0A;
+        entry->unk0B = field0B;
+        entry->unk0C = field0C;
+        entry->unk0D = field0D;
+        entry->unk0E = field0E;
 
-} /* extern "C" */
+        u32 context = obj80Select(0);
+        TargetValueView value = *source;
+        FUN_002a1850(&value, 0, context);
+        entry->unk00 = value.unk00;
+    }
+}
+}

@@ -1,56 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041e2d8` (_code @ 0x41e2d8, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads index before shownIndex and indexes selectable as [index, menu+0x2ec]; ours loads shownIndex first and adds menu+index. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023b45c(int);
-int FUN_002c8538(int);
-int FUN_002f0384(int);
-int FUN_0038b5fc(int, int);
-int rt_memcpy_w(unsigned int, unsigned int, int);
+/* The player data record copied from the selected save entry (0x0E bytes). */
+typedef struct SelectRecord {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u16 value0;
+    /* 0x08 */ u16 value1;
+    /* 0x0A */ u16 value2;
+    /* 0x0C */ u8 unk0C[2];
+} SelectRecord;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+/* A selection menu: only the fields this unit touches are named. */
+typedef struct SelectMenu {
+    /* 0x000 */ u8 unk000[0x54];
+    /* 0x054 */ SelectRecord *record;
+    /* 0x058 */ u8 unk058[4];
+    /* 0x05C */ u8 applied;
+    /* 0x05D */ u8 unk05D[3];
+    /* 0x060 */ s32 shownIndex;
+    /* 0x064 */ u8 unk064[4];
+    /* 0x068 */ u8 unk068;
+    /* 0x069 */ u8 unk069[0x283];
+    /* 0x2EC */ u8 selectable[0xC];
+    /* 0x2F8 */ s32 index;
+    /* 0x2FC */ u8 unk2FC[0x10];
+    /* 0x30C */ u8 locked;
+} SelectMenu;
 
-extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_002f0384. */
-/* Supplied declaration required: FUN_0038b5fc. */
-/* Supplied declaration required: rt_memcpy_w. */
+void FUN_002f0384(s32 arg);
+void *gameGetPlayerData(void);
+void rt_memcpy_w(void *dest, const void *src, u32 size);
+void FUN_0038b5fc(s32 slot, u16 value);
+void FUN_0023b45c(s32 arg);
+void FUN_002c8538(s32 arg);
 
-
-void FUN_0041e2d8(int param_1)
-
+/* When the cursor moves to a new entry, applies it to the player data if it is selectable. */
+void FUN_0041e2d8(SelectMenu *menu)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x2f8);
-  if (((*(int *)(param_1 + 0x60) != temp_v0) && (*(char *)(param_1 + 0x30c) == '\0')) &&
-     (*(char *)(param_1 + 0x5c) == '\0')) {
-    *(int *)(param_1 + 0x60) = temp_v0;
-    if (*(char *)(temp_v0 + param_1 + 0x2ec) != '\0') {
-      *(unsigned char *)(param_1 + 0x5c) = 1;
-      FUN_002f0384(0);
-      *(unsigned char *)(param_1 + 0x68) = 0;
-      temp_v1 = gameGetPlayerData();
-      rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x54),0xe);
-      FUN_0038b5fc(1,*(unsigned short *)(*(int *)(param_1 + 0x54) + 8));
-      FUN_0038b5fc(2,*(unsigned short *)(*(int *)(param_1 + 0x54) + 10));
-      FUN_0038b5fc(0,*(unsigned short *)(*(int *)(param_1 + 0x54) + 6));
-      return;
+    s32 index = menu->index;
+
+    if (index == menu->shownIndex || menu->locked || menu->applied) {
+        return;
+    }
+    menu->shownIndex = index;
+    if (menu->selectable[index]) {
+        menu->applied = 1;
+        FUN_002f0384(0);
+        menu->unk068 = 0;
+        rt_memcpy_w(gameGetPlayerData(), menu->record, sizeof(SelectRecord));
+        FUN_0038b5fc(1, menu->record->value1);
+        FUN_0038b5fc(2, menu->record->value2);
+        FUN_0038b5fc(0, menu->record->value0);
+        return;
     }
     FUN_0023b45c(0);
     FUN_002c8538(1);
     FUN_002f0384(0);
-    *(unsigned char *)(param_1 + 0x68) = 0;
-  }
-  return;
+    menu->unk068 = 0;
 }
 
 } /* extern "C" */

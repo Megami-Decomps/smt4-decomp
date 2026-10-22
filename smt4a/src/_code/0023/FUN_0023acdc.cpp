@@ -5,7 +5,7 @@
 extern "C" void FUN_0023acdc(u32 id)
 {
     if (id != 0 && id < 501) {
-        u8* flags = g_gameDataBlocks.block->sub.entryFlags;
+        u8* flags = g_gameDataBlocks.saveBlock->save.sub.entryFlags;
         flags[(s32)id / 8] |= (u8)(1u << ((s32)id % 8));
     }
 }

@@ -1,53 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031bf80` (_code @ 0x31bf80, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps `first` in r4 and `firstSlot` in r6 (swapped here). */
+#include "common.h"
 
 extern "C" {
+u32 scrGetArg(u32 index);
+s32 bustupCutAnimFindSlot(u32 id);
+void FUN_00249c4c(u32 id, s32 layer, s32 front);
 
-int FUN_00249c4c(...);
-
-extern int bustupCutAnimFindSlot(unsigned int);
-/* Supplied declaration required: FUN_00249c4c. */
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_0031bf80(void)
-
+/* Script command: layers bust-ups `first` (layer 2) and `second` (layer 1); when only one of them
+ * is already placed, the other one is brought to the front. */
+u32 FUN_0031bf80(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = bustupCutAnimFindSlot(temp_v0);
-  temp_v3 = bustupCutAnimFindSlot(temp_v1);
-  if (temp_v2 < 0) {
-    if (temp_v3 < 0) {
-      FUN_00249c4c(temp_v0,2,0);
-      FUN_00249c4c(temp_v1,1,0);
-      return 1;
+    u32 first = scrGetArg(0);
+    u32 second = scrGetArg(1);
+    s32 firstSlot = bustupCutAnimFindSlot(first);
+    s32 secondSlot = bustupCutAnimFindSlot(second);
+
+    if ((firstSlot < 0 && secondSlot < 0) || (firstSlot > 0 && secondSlot > 0)) {
+        FUN_00249c4c(first, 2, 0);
+        FUN_00249c4c(second, 1, 0);
+    } else if (firstSlot > 0) {
+        FUN_00249c4c(first, 2, 0);
+        FUN_00249c4c(second, 1, 1);
+    } else {
+        FUN_00249c4c(second, 1, 0);
+        FUN_00249c4c(first, 2, 1);
     }
-  }
-  else if (0 < temp_v2) {
-    if (0 < temp_v3) {
-      FUN_00249c4c(temp_v0,2,0);
-      FUN_00249c4c(temp_v1,1,0);
-      return 1;
-    }
-    FUN_00249c4c(temp_v0,2,0);
-    temp_v4 = 1;
-    FUN_00249c4c(temp_v1,temp_v4,1);
     return 1;
-  }
-  FUN_00249c4c(temp_v1,1,0);
-  temp_v4 = 2;
-  temp_v1 = temp_v0;
-  FUN_00249c4c(temp_v1,temp_v4,1);
-  return 1;
 }
 
 } /* extern "C" */

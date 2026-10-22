@@ -1,43 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df390` (_code @ 0x3df390, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail looks the record up once more at the end and reads flag bit 1 ((flags & 2) >> 1) before returning 1 regardless; the original use of that bit is unknown. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001ad9b4(void);
+typedef struct UnlockRecord {
+    /* 0x000 */ u8 unk000[7];
+    /* 0x007 */ u8 flags;
+    /* 0x008 */ u8 unk008[0x11A];
+    /* 0x122 */ u16 requiredFlag;
+    /* 0x124 */ u8 unk124[2];
+    /* 0x126 */ u16 requiredMembers[3];
+} UnlockRecord;
 
-typedef struct fn_003df390_arg0 fn_003df390_arg0;
-struct fn_003df390_arg0 {
-    unsigned char pad_0x0[0x7];
-    byte field_0x7; /* +0x7 */
-    unsigned char pad_0x8[0x11a];
-    ushort field_0x122; /* +0x122 */
-    unsigned char pad_0x124[0x2];
-    ushort field_0x126; /* +0x126 */
-    ushort field_0x128; /* +0x128 */
-    ushort field_0x12a; /* +0x12a */
-};
+UnlockRecord *FUN_001ad9b4(u32 id);
+s32 gameFlagIsSet(u32 flag);
+s32 partyEntryFlagsBit3(u32 member);
 
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int partyEntryFlagsBit3(void);
-
-
-void FUN_003df390(fn_003df390_arg0 *param_1)
-
+/* Return 1 when the record's required game flag and party members are all satisfied. */
+s32 FUN_003df390(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_001ad9b4();
-  if ((((param_1 != (fn_003df390_arg0 *)0x0) &&
-       ((param_1->field_0x122 == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) &&
-      ((param_1->field_0x126 == 0 || (temp_v0 = partyEntryFlagsBit3(), temp_v0 != 0)))) &&
-     (((param_1->field_0x128 == 0 || (temp_v0 = partyEntryFlagsBit3(), temp_v0 != 0)) &&
-      ((param_1->field_0x12a == 0 || (temp_v0 = partyEntryFlagsBit3(), temp_v0 != 0)))))) {
-    FUN_001ad9b4();
-  }
-  return;
+    UnlockRecord *record = FUN_001ad9b4(id);
+
+    if (record == NULL) {
+        return 0;
+    }
+    if (record->requiredFlag != 0 && !gameFlagIsSet(record->requiredFlag)) {
+        return 0;
+    }
+    if (record->requiredMembers[0] != 0 && !partyEntryFlagsBit3(record->requiredMembers[0])) {
+        return 0;
+    }
+    if (record->requiredMembers[1] != 0 && !partyEntryFlagsBit3(record->requiredMembers[1])) {
+        return 0;
+    }
+    if (record->requiredMembers[2] != 0 && !partyEntryFlagsBit3(record->requiredMembers[2])) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

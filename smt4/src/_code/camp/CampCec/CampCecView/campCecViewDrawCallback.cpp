@@ -36,7 +36,7 @@ void FUN_002c198c(RenderCtx *);
 u32 FUN_0025981c();
 CecViewSavedRecord *saveGetIndexedMapValue(u32);
 u16 *FUN_002bf4f8(u32, s32);
-void FUN_002ec210(CecViewWidget *, s32, s32, u32, s32);
+void uiDrawPanelWithValue(CecViewWidget *, s32, s32, u32, s32);
 void FUN_001eb874(u32, CecViewSavedRecord *, CecViewWidget *, s32, s32, bool);
 void FUN_002e15f8(CecViewWidget *, s32, s32);
 void FUN_002ec0b4(s32, s32);
@@ -51,7 +51,7 @@ u32 campCecViewDrawCallback()
     s32 mode = FUN_002c5d80(1, 0);
     renderStackPush(&context->stackA, mode);
     u32 headerValue = FUN_0025981c();
-    FUN_002ec210(&fields->widgets[0], 0, 0, headerValue, 0);
+    uiDrawPanelWithValue(&fields->widgets[0], 0, 0, headerValue, 0);
     for (s32 row = 0; row < 3; ++row) {
         CecViewSavedRecord *record = saveGetIndexedMapValue(fields->first + row);
         bool empty = record->value48 == 0;

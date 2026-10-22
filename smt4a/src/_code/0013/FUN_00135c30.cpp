@@ -68,8 +68,8 @@ int FUN_0013a11c(...);
 int titleConfigSetDefaults(...);
 int FUN_0013a48c(...);
 int FUN_0013a630(...);
-int FUN_0013a700(...);
-int FUN_0013a894(...);
+int soundInitializePersistentSlots(...);
+int soundSetupArchiveAndSlots(...);
 int FUN_0013ae58(...);
 int FUN_0013b244(...);
 int FUN_0013b3d0(...);
@@ -173,7 +173,7 @@ extern int titlePrepareDrawFrame(...); /* 0x136fc0 */
 extern int titleBeginCommandList(...); /* 0x137020 */
 extern int titleSceneStep(...); /* 0x13705c */
 extern int titleSubmitCommandAndUpdateMode(...); /* 0x1370bc */
-extern int FUN_0013710c(...); /* 0x13710c */
+extern int titleRunActiveCommand(...); /* 0x13710c */
 extern unsigned char LAB_00137668; /* 0x137668 */
 extern unsigned char LAB_0013767c; /* 0x13767c */
 extern int FUN_00138068(...); /* 0x138068 */
@@ -353,9 +353,9 @@ extern unsigned int FUN_0013a608(unsigned int);
 /* Supplied declaration required: titleCloseMoviePlayer. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: asdGxSetChannelFlags. */
-/* Supplied declaration required: FUN_0013a700. */
+/* Supplied declaration required: soundInitializePersistentSlots. */
 /* Supplied declaration required: FUN_0013a7a0. */
-/* Supplied declaration required: FUN_0013a894. */
+/* Supplied declaration required: soundSetupArchiveAndSlots. */
 /* Supplied declaration required: FUN_0013ab18. */
 /* Supplied declaration required: FUN_0013ae58. */
 extern unsigned int FUN_0013af10(void);
@@ -549,8 +549,8 @@ void FUN_00135c30(void)
   gameDataAllocBlocks();
   FUN_00139508(0);
   FUN_0013a630(1);
-  FUN_0013a894();
-  FUN_0013a700();
+  soundSetupArchiveAndSlots();
+  soundInitializePersistentSlots();
   FUN_0013ae58();
   FUN_00138114();
   titleConfigSetDefaults();
@@ -597,7 +597,7 @@ void FUN_00135c30(void)
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136524,0xcc,0);
-  temp_v22 = FUN_0013710c;
+  temp_v22 = titleRunActiveCommand;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136538,0xcd,0);

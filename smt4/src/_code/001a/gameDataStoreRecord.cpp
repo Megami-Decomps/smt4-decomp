@@ -20,7 +20,7 @@ s32 gameDataStoreRecord(u32 index, const StoredGameRecord *record)
     if (index > 1280) {
         return 0;
     }
-    StoredGameRecords *data = (StoredGameRecords *)g_gameDataBlocks.unk04;
+    StoredGameRecords *data = (StoredGameRecords *)g_gameDataBlocks.saveBlock;
     StoredGameRecord *destination = &data->entries[index];
     *destination = *record;
     destination->flags |= 1;

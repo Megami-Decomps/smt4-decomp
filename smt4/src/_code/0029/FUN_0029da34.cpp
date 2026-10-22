@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f4568(...);
-int FUN_0024bc98(...);
+int skillFormatTargetLabel(...);
 int FUN_0024bda8(...);
 int FUN_002907c4(...);
 int FUN_00295660(...);
@@ -40,7 +40,7 @@ extern int DAT_0043da2c; /* 0x43da2c */
 extern int DAT_0043da30; /* 0x43da30 */
 
 /* Supplied declaration required: FUN_001f4568. */
-/* Supplied declaration required: FUN_0024bc98. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
@@ -83,7 +83,7 @@ void FUN_0029da34(int param_1,unsigned int param_2,fn_0029da34_arg2 *param_3,uns
     }
     FUN_0024bda8(temp_v4,pfVar3->field_0xa);
     FUN_00295660(0x26,temp_v4);
-    FUN_0024bc98(temp_v4,(pfVar3->field_0x8 & 0x1f) >> 1);
+    skillFormatTargetLabel(temp_v4,(pfVar3->field_0x8 & 0x1f) >> 1);
     FUN_00295660(0x27,temp_v4);
     if (pfVar3->field_0xc == 0) {
       textFormatBuffer(temp_v4,&LAB_0029dc20);

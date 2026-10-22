@@ -1,3 +1,4 @@
+#include "battle/btlScript.h"
 #include "common.h"
 
 extern "C" {
@@ -17,8 +18,6 @@ typedef struct Unit {
     /* 0x00 */ u8 unk00[0x28];
     /* 0x28 */ UnitData *data;
 } Unit;
-
-extern u32 g_btlScriptUnit;
 
 s32 scrGetArg(void);
 Unit *btlUnitGet(u32 unit);

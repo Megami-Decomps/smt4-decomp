@@ -1,13 +1,7 @@
-#include "common.h"
+#include "status/StatusDown.h"
 
 extern "C" {
-
-typedef struct Obj {
-    /* 0x000 */ u8 unk000[0x47E];
-    /* 0x47E */ u16 unk47E;
-} Obj;
-
-extern Obj *g_statusDown;
+extern StatusDownState *g_statusDown;
 
 void FUN_00215b40(u16 value)
 {

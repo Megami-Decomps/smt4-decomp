@@ -28,7 +28,7 @@ struct BattleUiSkill {
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 extern void *g_btlAux;
-const BattleUiItem *FUN_00192550(s32);
+const BattleUiItem *dataTable8FindRecord(s32);
 const BattleUiSkill *dataTable04FindById(u32);
 void FUN_003e8bb0(BattleUiQueryResult *, BattleMaskState *, BtlCombatantEntryA *);
 void FUN_004f7724(void *, s32, u32, s32);
@@ -59,7 +59,7 @@ void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BattleUiContext *conte
     if (command != 2 && command != 3 && command != 8)
         return;
     if (command == 8) {
-        u16 skill = FUN_00192550(id)->skill;
+        u16 skill = dataTable8FindRecord(id)->skill;
         if (!skill) {
             FUN_004f7724(g_btlAux, id, !(context->entry->flags & masks->alternate), mode);
             return;

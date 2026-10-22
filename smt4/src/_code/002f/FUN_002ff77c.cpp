@@ -25,7 +25,7 @@ typedef struct EntrySpan {
 
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern int FUN_002499fc(u32 handle, s32 *first, s32 *count);
 extern ItemRecord *FUN_002ae164(u16 id);
 extern DevilRecord *devilGetRecord(u16 id);
@@ -44,7 +44,7 @@ u32 FUN_002ff77c(void)
     ItemRecord *item;
 
     scrGetArg(1);
-    FUN_002499fc(FUN_00249a54(), &span.first, &span.count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &span.first, &span.count);
     for (i = span.first; i < span.first + span.count; i++) {
         entry = &btlGetMainState()->entries[i];
 

@@ -1,53 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f887c` (_code @ 0x3f887c, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads 0.5f before the divide and multiplies in s1/s0; the single-expression form fuses into vmla under --fpmode=fast. */
+#include "common.h"
 
 extern "C" {
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int hardfp_floorf(void);
+/* One key of a sampled curve. */
+typedef struct CurveKey {
+    /* 0x00 */ u16 frame;
+    /* 0x02 */ u8 unk02[4];
+} CurveKey;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: hardfp_floorf. */
+typedef struct Curve {
+    /* 0x00 */ u16 keyCount;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ f32 keysPerSecond;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ f32 duration;
+    /* 0x14 */ CurveKey keys[1];
+} Curve;
 
+f32 hardfp_floorf(f32 value);
 
-unsigned short * FUN_003f887c(unsigned short *param_1)
-
+/* Returns the last key at or before `time`, starting the search from the key the time is expected at. */
+CurveKey *FUN_003f887c(Curve *curve, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (in_s0 / *(float *)(param_1 + 8)) * 32.0f + 0.5f;
-  hardfp_floorf();
-  temp_v1 = (unsigned int)temp_v0;
-  puVar1 = param_1 + 10;
-  if (param_1[10] <= temp_v1) {
-    puVar1 = param_1 + (unsigned int)*param_1 * 3 + 7;
-    if (temp_v1 < *puVar1) {
-      temp_v0 = (float)VectorSignedToFloat(*param_1 - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = VectorFloatToUnsigned(*(float *)(param_1 + 2) * temp_v0 * in_s0,3);
-      puVar1 = param_1 + temp_v2 * 3 + 10;
-      if (*puVar1 <= temp_v1) {
-        do {
-          puVar2 = puVar1;
-          puVar1 = puVar2 + 3;
-        } while (*puVar1 <= temp_v1);
-        return puVar2;
-      }
-      do {
-        puVar1 = puVar1 + -3;
-      } while (temp_v1 < *puVar1);
+    f32 position = time / curve->duration * 32.0f;
+    u32 frame = (s32)hardfp_floorf(position + 0.5f);
+    CurveKey *key = &curve->keys[0];
+    if (frame < key->frame) {
+        return key;
     }
-  }
-  return puVar1;
+    key = &curve->keys[curve->keyCount - 1];
+    if (frame >= key->frame) {
+        return key;
+    }
+    key = &curve->keys[(u32)(curve->keysPerSecond * ((f32)(curve->keyCount - 1) * time))];
+    if (frame < key->frame) {
+        do {
+            key--;
+        } while (key->frame > frame);
+        return key;
+    }
+    do {
+        key++;
+    } while (frame >= key->frame);
+    return key - 1;
 }
 
 } /* extern "C" */

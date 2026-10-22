@@ -1,51 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c2b4` (_code @ 0x31c2b4, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The three-float amplitude copy is split into scalar and two-word copies. */
+#include "event/bustupEvent/BustupCutAnim.h"
 extern "C" {
+s32 scrGetArg(s32);
+void scrSetResult(u32);
+void jobSetParent(u32, u32);
+u32 FUN_0036c580(f32*, f32*, f32, f32);
+s32 jobIsValid(u32);
+extern const ShakeAmplitudes DAT_0052f6b4;
+extern BustupCutAnimA* g_bustupCutAnim;
 
-int jobSetParent(unsigned int, unsigned int *);
-int scrGetArg(int);
-int scrSetResult(unsigned int *);
-int FUN_0036c580(unsigned int *, unsigned int *, int, unsigned int, int, int, int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int *g_bustupCutAnim; /* 0x57f4c4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: jobSetParent. */
-extern int jobIsValid(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_0036c580. */
-
-
-unsigned int FUN_0031c2b4(void)
-
+// Starts a bust-up shake, parents its job, and publishes the job handle to the script.
+u32 FUN_0031c2b4(void)
 {
-/* irregular: irregular input(s): in_fpscr, in_r3; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned int in_r3;
-  unsigned int in_fpscr;
-  
-  scrGetArg(0);
-  temp_v0 = scrGetArg(1);
-  VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  puVar2 = g_bustupCutAnim + 0x1cf;
-  FUN_0036c580(puVar2,g_bustupCutAnim + 0x1d0,0x40400000,in_r3,0x3f000000,0x3f800000,0x40400000);
-  temp_v1 = jobIsValid();
-  if (temp_v1 != 0) {
-    jobSetParent(*g_bustupCutAnim,puVar2);
-  }
-  scrSetResult(puVar2);
-  return 1;
+    s32 strength = scrGetArg(0);
+    f32 duration = (f32)scrGetArg(1);
+    ShakeAmplitudes amplitudes = DAT_0052f6b4;
+    u32 job = FUN_0036c580(&g_bustupCutAnim->shakeX, &g_bustupCutAnim->shakeY,
+                         amplitudes.values[strength], duration);
+    if (jobIsValid(job)) {
+        jobSetParent(g_bustupCutAnim->job, job);
+    }
+    scrSetResult(job);
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,78 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ae720` (_code @ 0x3ae720, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The widget pointer is retained across configuration instead of recomputed for the final call. */
+#include "battle/btlUI.h"
 
 extern "C" {
+extern BtlUiGlobals g_btlUi;
+void memFill8(void *destination, u32 value);
+u16 slotFindNonnegativeRank(void *owner, u32 index);
+void FUN_002ad8a8(BtlUiObjC *window, BtlUiSettings *settings);
+void FUN_002dc464(BtlUiObjC *window);
+void FUN_002e439c(BtlUiObjC *window);
 
-int memFill8(unsigned int *, unsigned int);
-int FUN_002ad8a8(unsigned int *, unsigned int *);
-int FUN_002dc464(void);
-int FUN_002e439c(unsigned int *);
-
-typedef struct fn_003ae720_arg0 fn_003ae720_arg0;
-struct fn_003ae720_arg0 {
-    unsigned char pad_0x0[0x3044];
-    undefined4 field_0x3044; /* +0x3044 */
-    undefined4 field_0x3048; /* +0x3048 */
-    undefined4 field_0x304c; /* +0x304c */
-    unsigned char pad_0x3050[0xc];
-    undefined4 field_0x305c; /* +0x305c */
-    unsigned char pad_0x3060[0x3ac];
-    undefined4 field_0x340c; /* +0x340c */
-    unsigned char pad_0x3410[0x2304];
-    undefined2 field_0x5714; /* +0x5714 */
-    unsigned char pad_0x5716[0x10];
-    undefined2 field_0x5726; /* +0x5726 */
-    undefined2 field_0x5728; /* +0x5728 */
-    undefined2 field_0x572a; /* +0x572a */
-    unsigned char pad_0x572c[0xc];
-    undefined2 field_0x5738; /* +0x5738 */
-    unsigned char pad_0x573a[0x1e];
-    undefined4 field_0x5758; /* +0x5758 */
-    unsigned char pad_0x575c[0x3];
-    byte field_0x575f; /* +0x575f */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-extern unsigned short slotFindNonnegativeRank(unsigned int, unsigned int);
-/* Supplied declaration required: memFill8. */
-/* Supplied declaration required: FUN_002ad8a8. */
-/* Supplied declaration required: FUN_002dc464. */
-/* Supplied declaration required: FUN_002e439c. */
-
-
-void FUN_003ae720(fn_003ae720_arg0 *param_1,int param_2)
-
+/* Initializes all four slot ranks, applies them to the window, and selects its opening operation. */
+void FUN_003ae720(void *unused, s32 immediate)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned short temp_v0;
-  unsigned int *puVar3;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20));
-  puVar3 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x20)) + 0x1fa5;
-  memFill8(puVar3,0xffffffff);
-  temp_v0 = slotFindNonnegativeRank(*puVar1,0);
-  *(unsigned short *)(puVar1 + 0x1fa5) = temp_v0;
-  temp_v0 = slotFindNonnegativeRank(*puVar1,1);
-  *(unsigned short *)((int)puVar1 + 0x7e96) = temp_v0;
-  temp_v0 = slotFindNonnegativeRank(*puVar1,2);
-  *(unsigned short *)(puVar1 + 0x1fa6) = temp_v0;
-  temp_v0 = slotFindNonnegativeRank(*puVar1,3);
-  *(unsigned short *)((int)puVar1 + 0x7e9a) = temp_v0;
-  FUN_002ad8a8(puVar1 + 0x918,puVar3);
-  if (param_2 != 0) {
-    FUN_002dc464();
-    return;
-  }
-  FUN_002e439c(puVar1 + 0x918);
-  return;
+    BtlUi *ui = g_btlUi.ui;
+    memFill8(&ui->settings, 0xFFFFFFFF);
+    ui->settings.slotRanks[0] = slotFindNonnegativeRank(ui->owner, 0);
+    ui->settings.slotRanks[1] = slotFindNonnegativeRank(ui->owner, 1);
+    ui->settings.slotRanks[2] = slotFindNonnegativeRank(ui->owner, 2);
+    ui->settings.slotRanks[3] = slotFindNonnegativeRank(ui->owner, 3);
+    FUN_002ad8a8(&ui->objC, &ui->settings);
+    if (immediate != 0) {
+        FUN_002dc464(&ui->objC);
+    } else {
+        FUN_002e439c(&ui->objC);
+    }
 }
-
-} /* extern "C" */
+}

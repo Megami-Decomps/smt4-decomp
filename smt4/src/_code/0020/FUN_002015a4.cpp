@@ -1,20 +1,10 @@
-#include "common.h"
+#include "ui/IfTouch.h"
 
 extern "C" {
 
-typedef struct Counters {
-    /* 0x000 */ u8 unk000[0x670];
-    /* 0x670 */ u32 unk670;
-} Counters;
-
-extern struct {
-    u8 unk0[4];
-    Counters *counters;
-} g_ifTouch;
-
 s32 FUN_002015a4(void)
 {
-    return (s16)g_ifTouch.counters->unk670;
+    return (s16)g_ifTouch.state->unk670;
 }
 
 } /* extern "C" */

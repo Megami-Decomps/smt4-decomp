@@ -40,7 +40,7 @@ extern "C" void aocResetOperationState(AocSystemA* system)
     work->unk350 = 0;
     work->unk464 = 0;
     work->unk468 = 0;
-    g_aocDisplay->unk450C = 1;
+    g_aocDisplay->operationActive = 1;
     AocOperationStatus* status = &work->status;
     status->active = true;
     status->state = 0;

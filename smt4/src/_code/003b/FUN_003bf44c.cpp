@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025bfa4(void);
+int clockGetSecondsSinceStart(void);
 int FUN_002b99b8(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -16,7 +16,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 extern int FUN_0023ea94(void);
-/* Supplied declaration required: FUN_0025bfa4. */
+/* Supplied declaration required: clockGetSecondsSinceStart. */
 extern unsigned int FUN_002907a8(void);
 extern int btlGetMainState(void);
 extern unsigned int gameGetSlotTable(void);
@@ -39,7 +39,7 @@ int FUN_003bf44c(void)
   temp_v0 = btlGetMainState();
   temp_v1 = gameGetSlotTable();
   temp_v5 = 0.0f;
-  FUN_0025bfa4();
+  clockGetSecondsSinceStart();
   if (temp_v1 == 0xffffffff) {
     temp_v1 = FUN_002907a8();
   }

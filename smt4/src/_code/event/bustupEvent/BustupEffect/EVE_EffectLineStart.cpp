@@ -1,67 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `EVE_EffectLineStart` (_code @ 0x2fe1f0, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/AsdDebug.h"
+
+/* The speed-line effect job's work. */
+struct EffectLineWork {
+    /* 0x00 */ u32 effect;
+    /* 0x04 */ f32 frame;
+    /* 0x08 */ f32 duration;
+};
 
 extern "C" {
+extern const char DAT_00403754[];
+extern const char DAT_00403748[];
+extern const char DAT_00403738[];
+s32 scrGetArg(s32 index);
+s32 FUN_002c1d5c(void);
+void *asdMemAlloc(u32 size, u32 alignment, u32 heap, u32 tag, u32 flags);
+u32 FUN_00246644(u32 effect, u32 layer, u32 mode);
+void effLineJobUpdate(void *work);
+void jobWorkFreeWork(void *work);
+void effectLineUpdateCallback(void *work);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u16 arg2, u16 arg3,
+                           void (*update)(void *), void (*destroy)(void *), void *work);
+void taskCreateDraw(const char *name, s32 priority, u32 arg2, u32 arg3, void (*draw)(void *),
+                    u32 arg5, void *work, u32 job);
+void bustupCutAnimSetJobParam(u32 job);
 
-int bustupCutAnimSetJobParam(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern int effLineJobUpdate(...); /* 0x1dfbe0 */
-extern unsigned char LAB_001dfc44; /* 0x1dfc44 */
-extern int jobWorkFreeWork(...); /* 0x2db900 */
-extern unsigned char DAT_00403738; /* 0x403738 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00246644(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: bustupCutAnimSetJobParam. */
-extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-unsigned int EVE_EffectLineStart(void)
-
+/* Script command: starts the speed-line effect for the given number of frames. */
+s32 EVE_EffectLineStart(void)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  char *pcVar5;
-  unsigned int in_fpscr;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_002c1d5c();
-  if (temp_v1 == 0) {
-    puVar3 = (unsigned int *)0x100;
-    asdMemAlloc(0x100,0x100,0,0xc,1);
-    *puVar3 = 0;
-    puVar3[1] = 0;
-    puVar3[2] = 0;
-    temp_v2 = FUN_00246644(10,7,0);
-    temp_v0 = VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *puVar3 = temp_v2;
-    puVar3[1] = 0;
-    puVar3[2] = temp_v0;
-    pcVar5 = "EffectLine";
-    asdProcessCreateSimple("EffectLine",2,0,0,effLineJobUpdate,jobWorkFreeWork,puVar3);
-    taskCreateDraw(&DAT_00403738,0x71,0,0,&LAB_001dfc44,0,puVar3,pcVar5);
-    bustupCutAnimSetJobParam(pcVar5);
-  }
-  return 1;
+    s32 duration = scrGetArg(0);
+    if (FUN_002c1d5c() == 0) {
+        asdDebugTrace(DAT_00403754, 199);
+        EffectLineWork *work = (EffectLineWork *)asdMemAlloc(0x100, 0x100, 0, 12, 1);
+        *work = EffectLineWork();
+        work->effect = FUN_00246644(10, 7, 0);
+        work->frame = 0.0f;
+        work->duration = duration;
+        u32 job = asdProcessCreateSimple(DAT_00403748, 2, 0, 0, effLineJobUpdate, jobWorkFreeWork,
+                                         work);
+        taskCreateDraw(DAT_00403738, 0x71, 0, 0, effectLineUpdateCallback, 0, work, job);
+        bustupCutAnimSetJobParam(job);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

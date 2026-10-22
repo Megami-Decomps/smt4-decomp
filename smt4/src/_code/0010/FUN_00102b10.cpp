@@ -14,7 +14,7 @@ int asdTextRegisterSlot(...);
 int FUN_0010bedc(int);
 int callbackBindingInstall(...);
 int FUN_0010e594(unsigned char *);
-int FUN_0010e5f0(unsigned int);
+int asdTextSetDefaultColor(unsigned int);
 int FUN_002c44dc(int);
 int FUN_002c450c(int, unsigned char *);
 int FUN_002c4904(unsigned char *);
@@ -51,7 +51,7 @@ extern unsigned int uRam004729cc; /* 0x4729cc */
 /* Supplied declaration required: FUN_0010bedc. */
 /* Supplied declaration required: callbackBindingInstall. */
 /* Supplied declaration required: FUN_0010e594. */
-/* Supplied declaration required: FUN_0010e5f0. */
+/* Supplied declaration required: asdTextSetDefaultColor. */
 /* Supplied declaration required: FUN_002c44dc. */
 /* Supplied declaration required: FUN_002c450c. */
 /* Supplied declaration required: FUN_002c4904. */
@@ -91,7 +91,7 @@ void FUN_00102b10(void)
   FUN_0010b390(5);
   FUN_0010b3b0(&DAT_0043e1b8);
   FUN_0010e594(&DAT_0043e1f8);
-  FUN_0010e5f0(0xffffff00);
+  asdTextSetDefaultColor(0xffffff00);
   callbackBindingInstall(&LAB_0010a2f8,FUN_0010c83c);
   FUN_0010a694(0xf87a,1,0);
   FUN_0010a694(0xf87b,4,0);

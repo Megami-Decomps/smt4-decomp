@@ -8,7 +8,7 @@ extern "C" {
 int FUN_004e76cc(...);
 int FUN_004fcde0(...);
 
-int FUN_002a49e4(unsigned int, unsigned int);
+int infoWinSetText(unsigned int, unsigned int);
 int uiNavigatorStart(int, int, int, int, int);
 int stateFinishIfPresent(int);
 int FUN_003ee0c0(int);
@@ -67,7 +67,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 extern int lcgRandomRange(unsigned int);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: uiNavigatorStart. */
 /* Supplied declaration required: stateFinishIfPresent. */
 extern int FUN_003eb1cc(int);
@@ -162,7 +162,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
         }
         FUN_003f1b3c(temp_v2,temp_v5,temp_v8,&temp_v10,&temp_v11);
         FUN_0047f4cc(temp_v11);
-        FUN_002a49e4(*(unsigned int *)(*param_1 + 0x4d64),temp_v10 & 0xffff);
+        infoWinSetText(*(unsigned int *)(*param_1 + 0x4d64),temp_v10 & 0xffff);
         uiNavigatorStart(temp_v0,1,1,0,0);
         temp_v2 = *param_1;
         temp_v7 = DAT_005712b0 | *(unsigned int *)(temp_v2 + 0x45a0);

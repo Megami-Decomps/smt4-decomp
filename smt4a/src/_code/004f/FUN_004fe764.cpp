@@ -1,5 +1,4 @@
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 extern "C" ReflectAction *FUN_004102d8(ReflectContext *, s16, s32, u32);
 
 // Set up a kind-ten reflection action with its target, value, and integer parameter.

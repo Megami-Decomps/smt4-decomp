@@ -4,7 +4,7 @@ extern "C" {
 
 u8 *gameGetSlotTable(void)
 {
-    return g_gameDataBlocks.unk04 + 0x8c;
+    return (u8 *)g_gameDataBlocks.saveBlock + 0x8c;
 }
 
 } /* extern "C" */

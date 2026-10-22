@@ -13,7 +13,7 @@ int aocClearDisplayFlag(unsigned int);
 int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_002a126c(int *, unsigned int);
 int FUN_002b8244(int);
-int FUN_002ba9ac(unsigned int);
+int aocReleasePackageOwner(unsigned int);
 int aocResetOperationState(unsigned int);
 int FUN_003887cc(int *, unsigned int);
 
@@ -40,7 +40,7 @@ extern int strIsEmpty(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b8244. */
-/* Supplied declaration required: FUN_002ba9ac. */
+/* Supplied declaration required: aocReleasePackageOwner. */
 /* Supplied declaration required: aocResetOperationState. */
 /* Supplied declaration required: FUN_003887cc. */
 
@@ -79,7 +79,7 @@ void FUN_0038f148(unsigned int *param_1)
     }
     FUN_00126fb8(g_aocMain + 0x80);
     aocClearDisplayFlag(g_aocSystem);
-    FUN_002ba9ac(g_aocSystem);
+    aocReleasePackageOwner(g_aocSystem);
     temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
     if (temp_v1 != 0) {
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
@@ -112,7 +112,7 @@ void FUN_0038f148(unsigned int *param_1)
       if (temp_v2 != 3) {
         if ((temp_v2 == 9999 && (temp_v0 & 4) == 0) && ((temp_v0 & 8) == 0)) {
           aocClearDisplayFlag(g_aocSystem);
-          FUN_002ba9ac(g_aocSystem);
+          aocReleasePackageOwner(g_aocSystem);
           temp_v1 = FUN_002ad1e0(g_aocMain + 0x98);
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;

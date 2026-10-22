@@ -13,7 +13,7 @@ struct QuestConfirmWork {
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 void FUN_002355ac(s32 enabled);
-void FUN_00259258(void);
+void messageMainRequestBanner(void);
 void scrScriptProcessStartMappedEntry(QuestConfirmWork* work, const char* name);
 void* dataTable28Sub0GetRecord(void* output, s32 kind);
 void placeWinStartText(void);
@@ -23,7 +23,7 @@ void questConfirmSetup(QuestConfirmWork* work)
 {
     if (gameFlagIsSet(0x24) != 0)
         FUN_002355ac(1);
-    FUN_00259258();
+    messageMainRequestBanner();
     scrScriptProcessStartMappedEntry(work, "qc_confirm");
     dataTable28Sub0GetRecord(work->table, work->kind);
     placeWinStartText();

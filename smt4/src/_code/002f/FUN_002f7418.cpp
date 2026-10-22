@@ -6,7 +6,7 @@ extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
 extern s32 scrGetArg(s32 index);
 extern void scrSetResult(s32 value);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
 
 /* Script command: pushes 1 when a live unit of the current group (or the active entry) has kind
@@ -19,7 +19,7 @@ s32 FUN_002f7418(void)
     s32 i;
 
     scrGetArg(1);
-    FUN_002499fc(FUN_00249a54(), &first, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &first, &count);
     for (i = first; i < first + count; i++) {
         BtlUnitEntry *unit = &btlGetMainState()->units[i];
 

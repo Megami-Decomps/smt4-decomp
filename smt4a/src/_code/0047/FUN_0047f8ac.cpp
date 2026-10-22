@@ -1,74 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047f8ac` (_code @ 0x47f8ac, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-int saveSlotFindById(unsigned int);
-int FUN_0047f7c0(int);
+struct Slot;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+typedef struct LinkEntry {
+    u16 type;      /* 0x00: 11 links to a target */
+    u8 unk02[2];
+    void *target;  /* 0x04 */
+    u8 unk08[8];
+} LinkEntry;       /* 0x10 */
 
-extern int DAT_00573cd8; /* 0x573cd8 */
-extern int DAT_00573cdc; /* 0x573cdc */
+extern u32 DAT_00573cd8[];
 
-/* Supplied declaration required: saveSlotFindById. */
-extern int FUN_00187168(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern int FUN_0019acdc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0047f7c0. */
+struct Slot *saveSlotFindById(u32 id);
+u32 FUN_00187168(const struct Slot *slot);
+s32 FUN_0019acdc(u32 id, s32 arg);
+void FUN_0047f7c0(s32 index);
 
-
-void FUN_0047f8ac(unsigned int param_1,short *param_2)
-
+/* Triggers the two hooks for the slot with this id: hook 0 when its table 10 links point at target. */
+void FUN_0047f8ac(u32 id, void *target)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  short *psVar7;
-  
-  saveSlotFindById(param_1 & 0xffff);
-  temp_v1 = FUN_00187168();
-  if (((temp_v1 != 0) && (temp_v1 = FUN_0019acdc(param_1,1), temp_v1 == 4)) && (DAT_00573cd8 != 0)) {
-    temp_v2 = dataTableGet(10,4);
-    temp_v1 = dataTableGetEntries();
-    temp_v3 = dataTableGetCount(temp_v2);
-    temp_v4 = 0;
-    if (temp_v4 < temp_v3) {
-      do {
-        psVar7 = (short *)(temp_v1 + temp_v4 * 0x10);
-        temp_v0 = *psVar7;
-        if (temp_v0 == 0xb) {
-          psVar7 = *(short **)(psVar7 + 2);
+    if (FUN_00187168(saveSlotFindById((u16)id))) {
+        s32 section = FUN_0019acdc(id, 1);
+
+        if (section == 4 && DAT_00573cd8[0] != 0) {
+            void *resource = dataTableGet(10, section);
+            LinkEntry *entries = (LinkEntry *)dataTableGetEntries(resource);
+            u32 count = dataTableGetCount(resource);
+            u32 i;
+
+            for (i = 0; i < count; i++) {
+                if (entries[i].type == 11 && entries[i].target == target) {
+                    FUN_0047f7c0(0);
+                    break;
+                }
+            }
         }
-        if (temp_v0 == 0xb && psVar7 == param_2) {
-          FUN_0047f7c0(0);
-          break;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < temp_v3);
     }
-  }
-  saveSlotFindById(param_1 & 0xffff);
-  temp_v5 = FUN_00187168();
-  temp_v1 = 0;
-  if (temp_v5 != 0) {
-    temp_v1 = DAT_00573cdc;
-  }
-  if (temp_v5 == 0 || temp_v1 == 0) {
-    return;
-  }
-  FUN_0047f7c0(1);
-  return;
+    if (FUN_00187168(saveSlotFindById((u16)id)) && DAT_00573cd8[1] != 0) {
+        FUN_0047f7c0(1);
+    }
 }
 
 } /* extern "C" */

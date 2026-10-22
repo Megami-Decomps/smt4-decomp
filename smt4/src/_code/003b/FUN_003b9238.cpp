@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0022b064(...);
+int buttonHelpSelectByProgress(...);
 int FUN_002305e8(...);
 int placeWinStartText(...);
 int FUN_0027db24(...);
 int dialogOpen(...);
-int FUN_0027e7b4(...);
+int infoWinSetMessage(...);
 
 typedef struct fn_003b9238_arg0 fn_003b9238_arg0;
 struct fn_003b9238_arg0 {
@@ -32,12 +32,12 @@ typedef struct {
 } param_1_stack;
 
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022b064. */
+/* Supplied declaration required: buttonHelpSelectByProgress. */
 /* Supplied declaration required: FUN_002305e8. */
 /* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_0027db24. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 
 
 void FUN_003b9238(fn_003b9238_arg0 *param_1)
@@ -48,10 +48,10 @@ void FUN_003b9238(fn_003b9238_arg0 *param_1)
   
   temp_v0 = scrRunOpcodesStub(param_1->field_0xd9c);
   if (temp_v0 == 2) {
-    FUN_0022b064(param_1);
+    buttonHelpSelectByProgress(param_1);
     FUN_0027db24(0);
     dialogOpen(0);
-    FUN_0027e7b4(*(unsigned int *)&param_1->field_0xd80,
+    infoWinSetMessage(*(unsigned int *)&param_1->field_0xd80,
                  *(unsigned char *)((int)param_1->field_0xd5c + 0x3f));
     param_1->field_0x2c = 0;
     param_1->field_0x28 = 5;

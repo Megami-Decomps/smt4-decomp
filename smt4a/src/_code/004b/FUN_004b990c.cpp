@@ -9,7 +9,7 @@ int asdOperatorNew(void);
 int eventQueueAddUnique(...);
 int dialogOpen(...);
 int placeWinStartText(...);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int FUN_002e5924(...);
 int frameTexInitActive(void);
 int moveCameraCtrlCreateEntry(...);
@@ -90,7 +90,7 @@ extern int campIsState51(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: campGetState. */
 /* Supplied declaration required: placeWinSetValue. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: FUN_002c3398. */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: libc_strcpy. */
@@ -357,7 +357,7 @@ void FUN_004b990c(int param_1)
     }
     if (*(char *)(param_1 + 0x1168) == '\0') {
       dialogOpen(0);
-      FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),
+      infoWinSetText(*(unsigned int *)(param_1 + 0x113c),
                    *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       placeWinStartText(*(int *)(param_1 + 0x1118) + 2);
       placeWinSetValue(1);

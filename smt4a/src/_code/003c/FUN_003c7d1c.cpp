@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_002a1fb4(...);
 int FUN_002b3c9c(...);
-int FUN_002ff6f8(...);
+int matrixInitializeWithScaleAndOffset(...);
 int FUN_0038136c(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
@@ -54,7 +54,7 @@ extern float DAT_006472f8; /* 0x6472f8 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002a1fb4. */
 /* Supplied declaration required: FUN_002b3c9c. */
-/* Supplied declaration required: FUN_002ff6f8. */
+/* Supplied declaration required: matrixInitializeWithScaleAndOffset. */
 /* Supplied declaration required: FUN_0038136c. */
 
 
@@ -115,7 +115,7 @@ void FUN_003c7d1c(fn_003c7d1c_arg0 *param_1)
     temp_v12 = CONCAT44(DAT_006472dc,0x3b808081);
     temp_v13 = CONCAT44(DAT_006472e4,DAT_006472e0);
     temp_v15 = CONCAT44(temp_v14,DAT_006472e8);
-    FUN_002ff6f8(temp_v16,param_1,0);
+    matrixInitializeWithScaleAndOffset(temp_v16,param_1,0);
     if (0 < temp_v3) {
       temp_v15 = romwright_piece_4_4(0x437f0000,(int)temp_v15);
     }

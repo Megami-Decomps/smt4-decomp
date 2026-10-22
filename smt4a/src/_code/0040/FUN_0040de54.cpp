@@ -46,7 +46,7 @@ int FUN_004cae0c(...);
 int FUN_004cb348(...);
 int asdModelActivateOwnedSlots(...);
 int FUN_004f5fb8(...);
-int FUN_004f63dc(...);
+int resourceEnsureCachedObject(...);
 int FUN_004f7628(...);
 int keyedValueFindPair(...);
 int FUN_004fb43c(...);
@@ -92,7 +92,7 @@ int FUN_003f2280(...);
 int FUN_0040cd6c(int *, short *);
 int FUN_0040d97c(...);
 int FUN_0040dcdc(int *, short *);
-int FUN_0047f394(unsigned int, unsigned int);
+int resourcePairApply(unsigned int, unsigned int);
 int FUN_004a96fc(int, int, unsigned int, unsigned int, int);
 int FUN_004ab6f4(...);
 int btlUnitGet(...);
@@ -221,7 +221,7 @@ extern int controllerGetRecordValue(void);
 extern unsigned int FUN_0047ecc8(void);
 /* Supplied declaration required: FUN_0047effc. */
 /* Supplied declaration required: FUN_0047f314. */
-/* Supplied declaration required: FUN_0047f394. */
+/* Supplied declaration required: resourcePairApply. */
 extern int FUN_0047f5b8(void);
 extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: partyAddMoneyClamped. */
@@ -268,7 +268,7 @@ extern int FUN_004f283c(int);
 extern int FUN_004f5c84(int, int);
 /* Supplied declaration required: asdModelActivateOwnedSlots. */
 /* Supplied declaration required: FUN_004f5fb8. */
-/* Supplied declaration required: FUN_004f63dc. */
+/* Supplied declaration required: resourceEnsureCachedObject. */
 /* Supplied declaration required: FUN_004f741c. */
 /* Supplied declaration required: FUN_004f7628. */
 /* Supplied declaration required: FUN_004f85c8. */
@@ -434,7 +434,7 @@ LAB_0040deb4:
       *(unsigned int *)(g_btlAux + 0x339c) = temp_v5 | 2;
       temp_v3 = btlUnitGet(g_btlScriptUnit);
       if (*(char *)(temp_v3 + 0x59c) != '\0') {
-        FUN_0047f394(*(unsigned int *)(temp_v3 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
+        resourcePairApply(*(unsigned int *)(temp_v3 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
       }
     }
     break;
@@ -1161,7 +1161,7 @@ LAB_0040f684:
     temp_v6 = (int)*(short *)(*(int *)(psVar2 + 10) + 0x6a);
     if (temp_v3 == 0) {
       FUN_004f5fb8(g_btlAux,temp_v6);
-      FUN_004f63dc(g_btlAux,temp_v6);
+      resourceEnsureCachedObject(g_btlAux,temp_v6);
       *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
       goto LAB_0040f684;
     }

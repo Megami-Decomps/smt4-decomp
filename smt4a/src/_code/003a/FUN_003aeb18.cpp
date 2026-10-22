@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00192608(void);
 int battleAttributeFormatName(unsigned char [128], unsigned int);
-int FUN_00230c1c(unsigned char [128], int);
+int skillFormatTargetLabel(unsigned char [128], int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_002ad414(int, int, int, unsigned char [128]);
 int FUN_002c0940(...);
@@ -37,7 +37,7 @@ extern int DAT_0057f0cc; /* 0x57f0cc */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: FUN_00230c1c. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002ad414. */
 /* Supplied declaration required: FUN_002c0940. */
@@ -80,7 +80,7 @@ void FUN_003aeb18(int param_1,unsigned int param_2)
     }
     battleAttributeFormatName(temp_v5,*(unsigned int *)(temp_v2 + 0x24) >> 0x14);
     FUN_003180c4(0x26,temp_v5);
-    FUN_00230c1c(temp_v5,*(unsigned char *)(temp_v2 + 0x29));
+    skillFormatTargetLabel(temp_v5,*(unsigned char *)(temp_v2 + 0x29));
     FUN_003180c4(0x27,temp_v5);
     if (*(char *)(temp_v2 + 0x2b) == '\0') {
       textFormatBuffer(temp_v5,&LAB_003aed3c);

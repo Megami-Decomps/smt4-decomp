@@ -1,61 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00411c04` (_code @ 0x411c04, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: in the custom-layout branch retail adds the slot part and the party-size part into r0 before two plain loads; this build folds them into a writeback load. */
+#include "common.h"
+
+/* The battle state's twelve party-panel slots. */
+struct BtlPanelSlot411c04 {
+    /* 0x0 */ u32 active;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 unk8;
+    /* 0xC */ u8 unkC[0x4];
+};
+
+struct BtlPanelState411c04 {
+    /* 0x0000 */ u8 unk0000[0x4D78];
+    /* 0x4D78 */ BtlPanelSlot411c04 slots[12];
+};
+
+/* Where a panel goes for a given number of active party slots. */
+struct PanelLayout411c04 {
+    /* 0x0 */ s32 x;
+    /* 0x4 */ s32 unk4;
+    /* 0x8 */ s32 y;
+};
+
+struct PanelItem411c04 {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 x;
+    /* 0x18 */ s32 y;
+};
+
+struct PanelMenu411c04 {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ PanelItem411c04 items[12];
+    /* 0x184 */ u32 useCustomLayouts;
+    /* 0x188 */ PanelLayout411c04 (*customLayouts)[12];
+};
 
 extern "C" {
 
-int FUN_00411e8c(int, int);
+extern PanelLayout411c04 DAT_005e156c[][12];
+BtlPanelState411c04 *btlGetMainState(void);
+s32 partyCountActiveSlots(void);
+void FUN_00411e8c(PanelMenu411c04 *menu, PanelItem411c04 *item);
 
-extern int btlGetMainState(void);
-extern int partyCountActiveSlots(void);
-/* Supplied declaration required: FUN_00411e8c. */
-
-
-void FUN_00411c04(int param_1,int param_2)
-
+// Place one panel per active battle slot using the layout for the current party size; `reset` also
+// clears the slots' two values.
+void FUN_00411c04(PanelMenu411c04 *menu, s32 reset)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = btlGetMainState();
-  if (temp_v0 != 0) {
-    temp_v6 = 0;
-    temp_v5 = 0;
-    do {
-      temp_v1 = temp_v0 + temp_v5 * 0x10;
-      if (*(int *)(temp_v1 + 0x4d78) != 0) {
-        if (param_2 != 0) {
-          *(unsigned int *)(temp_v1 + 0x4d7c) = 0;
-          *(unsigned int *)(temp_v1 + 0x4d80) = 0;
+    BtlPanelState411c04 *state = btlGetMainState();
+    if (state == NULL) {
+        return;
+    }
+    s32 n = 0;
+    for (s32 i = 0; i < 12; i++) {
+        if (state->slots[i].active != 0) {
+            if (reset) {
+                state->slots[i].unk4 = 0;
+                state->slots[i].unk8 = 0;
+            }
+            PanelItem411c04 *item = &menu->items[n];
+            s32 count = partyCountActiveSlots();
+            s32 x;
+            s32 y;
+            if (menu->useCustomLayouts) {
+                PanelLayout411c04 *layout = &menu->customLayouts[count - 1][n];
+                x = layout->x;
+                y = layout->y;
+            } else {
+                PanelLayout411c04 *layout = &DAT_005e156c[count - 1][n];
+                x = layout->x;
+                y = layout->y;
+            }
+            item->y = y;
+            item->x = x;
+            FUN_00411e8c(menu, item);
+            n++;
         }
-        temp_v1 = param_1 + temp_v6 * 0x1c;
-        temp_v2 = partyCountActiveSlots();
-        if (*(int *)(param_1 + 0x184) != 0) {
-          puVar4 = (unsigned int *)((temp_v6 * 0xc - 0x90) + *(int *)(param_1 + 0x188) + temp_v2 * 0x90);
-          temp_v4 = *puVar4;
-          temp_v3 = puVar4[2];
-        }
-        else {
-          temp_v2 = temp_v2 * 0x90 + 0x5e156c + temp_v6 * 0xc;
-          temp_v4 = *(unsigned int *)(temp_v2 - 0x90);
-          temp_v3 = *(unsigned int *)(temp_v2 - 0x88);
-        }
-        *(unsigned int *)(temp_v1 + 0x4c) = temp_v3;
-        *(unsigned int *)(temp_v1 + 0x48) = temp_v4;
-        FUN_00411e8c(param_1,temp_v1 + 0x34);
-        temp_v6 = temp_v6 + 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 0xc);
-  }
-  return;
+    }
 }
 
 } /* extern "C" */

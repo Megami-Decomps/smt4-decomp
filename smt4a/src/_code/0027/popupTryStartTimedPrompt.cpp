@@ -15,12 +15,12 @@ s32 FUN_002d8b58(s32 kind, s32 eventId);
 
 void popupTryStartTimedPrompt(void)
 {
-    if (g_gameState.popupElapsedFrames >= 18000 && g_popupState->event.state == 0) {
+    if (g_gameState.mapFlags.popupElapsedFrames >= 18000 && g_popupState->event.state == 0) {
         g_popupState->eventId = 0xad;
         g_popupState->event.state = 11;
         g_popupState->event.unk04 = 0;
         g_popupState->event.unk14 = FUN_002d8b58(2, g_popupState->eventId);
-        g_gameState.popupElapsedFrames = 0;
+        g_gameState.mapFlags.popupElapsedFrames = 0;
     }
 }
 

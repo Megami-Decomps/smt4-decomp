@@ -1,43 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233db8` (_code @ 0x233db8, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the calculation callback literal is loaded before the flag store and uses r1 instead of r0; all other instructions agree. */
+#include "addon/LoadingTask.h"
 
 extern "C" {
+void FUN_0038f8d0(void *task);
+void FUN_0038f924(void *task);
+u32 asdProcessCreateSimple(const char *name, s32 priority, s32 mode, s32 flags,
+                           void (*callback)(void *), s32 work, void *argument);
+void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags,
+                    void (*callback)(void *), s32 work, void *argument, u32 parent);
 
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_00233e40; /* 0x233e40 */
-extern unsigned char LAB_00233e5c; /* 0x233e5c */
-extern int FUN_0038f8d0(...); /* 0x38f8d0 */
-extern int FUN_0038f924(...); /* 0x38f924 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_00233db8(unsigned int *param_1,unsigned int param_2)
-
+// Start the calculation and drawing tasks for the add-on loading indicator.
+void FUN_00233db8(AocLoadingTask *loading, u32 request)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  param_1[0x5e7] = param_2;
-  if ((*param_1 & 0x100) == 0) {
-    *param_1 = *param_1 | 0x100;
-    puVar1 = &LAB_00233e40;
-    asdProcessCreateSimple(&LAB_00233e40,2,0,0,FUN_0038f8d0,0,param_1);
-    param_1[0x5e5] = (unsigned int)puVar1;
-    taskCreateDraw(&LAB_00233e5c,0xe8,1,0,FUN_0038f924,0,param_1,puVar1);
-  }
-  return;
+    loading->request = request;
+    if (!(loading->flags & 0x100)) {
+        loading->flags |= 0x100;
+        u32 process = asdProcessCreateSimple("Aoc loading CALC", 2, 0, 0,
+                                             FUN_0038f8d0, 0, loading);
+        loading->process = process;
+        taskCreateDraw("Aoc loading DOWN", 0xE8, 1, 0,
+                       FUN_0038f924, 0, loading, process);
+    }
 }
-
-} /* extern "C" */
+}

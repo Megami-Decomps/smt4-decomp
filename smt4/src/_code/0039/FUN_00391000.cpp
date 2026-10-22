@@ -1,55 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00391000` (_code @ 0x391000, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail places case 3's flag clear out of line after the epilogue; armcc folds it into the compare chain here. */
+#include "common.h"
+
+struct IntroWork {
+    /* 0x0000 */ u32 flags;
+    /* 0x0004 */ u8 unk0004[0x17A0];
+    /* 0x17A4 */ s32 state;
+    /* 0x17A8 */ u8 unk17A8[4];
+    /* 0x17AC */ u32 sound;
+    /* 0x17B0 */ u8 animation[0x20];
+    /* 0x17D0 */ u8 loader[4];
+};
 
 extern "C" {
 
-extern int uiAnimationAdvanceChannel(unsigned int *, unsigned int);
-extern unsigned int FUN_002aa024(unsigned int, unsigned int);
-extern int FUN_002b8ee0(unsigned int *, unsigned int);
-extern unsigned int *jobGetWork(void);
+IntroWork *jobGetWork(void);
+s32 FUN_002b8ee0(u8 *loader, s32 mode);
+u32 FUN_002aa024(s32 group, s32 id);
+s32 uiAnimationAdvanceChannel(u8 *animation, s32 channel);
 
-
-unsigned int FUN_00391000(void)
-
+/* Steps the job: waits for its load, starts the sound, then runs the animation channel and
+ * finally clears the busy flags. */
+u32 FUN_00391000(void)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  
-  puVar1 = (unsigned int *)jobGetWork();
-  puVar4 = puVar1 + 0x5e9;
-  temp_v0 = *puVar4;
-  if (temp_v0 != 0) {
-    if (temp_v0 == 1) {
-      return 0;
-    }
-    if (temp_v0 == 2) {
-      temp_v1 = uiAnimationAdvanceChannel(puVar1 + 0x5ec,1);
-      if (temp_v1 == 0) {
+    IntroWork *work = jobGetWork();
+
+    switch (work->state) {
+    case 0:
+        if (FUN_002b8ee0(work->loader, 0) != 0) {
+            work->state = 1;
+            work->flags |= 0x2000;
+            work->sound = FUN_002aa024(0x3a, 0x45);
+        }
+        break;
+    case 1:
         return 0;
-      }
-      *puVar4 = 3;
-      return 0;
+    case 2:
+        if (uiAnimationAdvanceChannel(work->animation, 1) != 0) {
+            work->state = 3;
+        }
+        break;
+    case 3:
+        work->flags &= ~0x3000;
+        break;
     }
-    if (temp_v0 != 3) {
-      return 0;
-    }
-    temp_v0 = *puVar1 & 0xffffcfff;
-  }
-  else {
-    temp_v1 = FUN_002b8ee0(puVar1 + 0x5f4,0);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    *puVar4 = 1;
-    *puVar1 = *puVar1 | 0x2000;
-    temp_v0 = FUN_002aa024(0x3a,0x45);
-    puVar1 = puVar1 + 0x5eb;
-  }
-  *puVar1 = temp_v0;
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -17,7 +17,7 @@ int FUN_002c2534(unsigned int, int, int, unsigned int);
 int FUN_002c2620(unsigned int);
 int FUN_002c2728(unsigned int, unsigned char *);
 int asdGfxSetMode(...);
-int FUN_002c2890(...);
+int gfxCmdListSetInit(...);
 int nngxDisplayEnv(...);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
@@ -99,7 +99,7 @@ extern unsigned char DAT_004e3be1; /* 0x4e3be1 */
 /* Supplied declaration required: FUN_002c2620. */
 /* Supplied declaration required: FUN_002c2728. */
 /* Supplied declaration required: asdGfxSetMode. */
-/* Supplied declaration required: FUN_002c2890. */
+/* Supplied declaration required: gfxCmdListSetInit. */
 /* Supplied declaration required: nngxDisplayEnv. */
 
 
@@ -142,7 +142,7 @@ void FUN_001054bc(unsigned int *param_1)
     DAT_004e3bd4 = 0;
   }
   FUN_001124ac(&LAB_0010a9b4,&LAB_002c4154);
-  FUN_002c2890(&DAT_004e3b1c,2,*param_1);
+  gfxCmdListSetInit(&DAT_004e3b1c,2,*param_1);
   temp_v1 = DAT_004e3bdc;
   temp_v5[0] = 0x401;
   if (param_1[8] == 1) {
@@ -214,9 +214,9 @@ void FUN_001054bc(unsigned int *param_1)
   }
   nngxDisplayEnv(0);
   FUN_0010ea10(0,param_1[6],param_1[7]);
-  FUN_002c2890(&DAT_004e3b34,2,param_1[4],param_1[5]);
+  gfxCmdListSetInit(&DAT_004e3b34,2,param_1[4],param_1[5]);
   asdGxCommandListSetLists(&DAT_004e3b34);
-  FUN_002c2890(&temp_v3,1,param_1[2],param_1[3]);
+  gfxCmdListSetInit(&temp_v3,1,param_1[2],param_1[3]);
   asdGxCommandListSetNewListId(temp_v3);
   FUN_002bef68(&DAT_004e3b1c,0);
   DAT_004e3b54 = 0x3e800000;

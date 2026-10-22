@@ -1,8 +1,8 @@
+#include "shard/NaviMain.h"
 #include "shard/Shard003B.h"
 
 extern "C" {
-
-extern Sub68Owner *g_naviMain;
+extern NaviMainA *g_naviMain;
 
 u8 naviMainIsActive(void)
 {

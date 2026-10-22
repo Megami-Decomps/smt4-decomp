@@ -26,7 +26,7 @@ extern unsigned char LAB_003e644c; /* 0x3e644c */
 extern unsigned char LAB_003e645c; /* 0x3e645c */
 
 /* Supplied declaration required: FUN_0015f858. */
-extern int FUN_001774d8(unsigned int);
+extern int itemGetStackLimit(unsigned int);
 /* Supplied declaration required: FUN_001ba3d4. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -60,7 +60,7 @@ void FUN_003e618c(int param_1)
     temp_v6 = *(unsigned int *)(temp_v0 + 0x28);
     temp_v1 = *(unsigned int *)(temp_v0 + 0x24) >> 0x10;
     temp_v0 = FUN_001ba3d4(temp_v1);
-    temp_v2 = FUN_001774d8(temp_v1);
+    temp_v2 = itemGetStackLimit(temp_v1);
     if (temp_v0 >= temp_v2) {
       temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e644c);
     }

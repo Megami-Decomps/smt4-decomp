@@ -1,55 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dc154` (_code @ 0x4dc154, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register swap only: retail loads the group count into r1 and the zero bestId into r0 (ours r0/r1) in the prologue and first-level clamp. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_004daf18(int, int);
+/* An id unlocked at a level. */
+typedef struct LevelEntry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 level;
+} LevelEntry;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
+/* Per-group level tables: entry counts, then the tables. */
+typedef struct LevelTableSet {
+    /* 0x00 */ u8 counts[0x44];
+    /* 0x44 */ LevelEntry *tables[1];
+} LevelTableSet;
 
-/* Supplied declaration required: FUN_004daf18. */
+s32 entryDefIsAvailable(LevelTableSet *set, u16 id);
 
-
-unsigned short FUN_004dc154(int param_1,int param_2,unsigned int param_3)
-
+/* Returns the usable id of `group` whose level is closest at or above `level` (clamped to the
+ * group's first level), or 0 when there is none. */
+u16 FUN_004dc154(LevelTableSet *set, s32 group, u32 level)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned short temp_v6;
-  
-  temp_v6 = 999;
-  temp_v0 = 0;
-  if (*(char *)(param_1 + param_2) != '\0') {
-    temp_v4 = param_1 + param_2 * 4;
-    temp_v3 = 0;
-    temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 0x44) + 2);
-    if (temp_v1 < param_3) {
-      param_3 = temp_v1;
-    }
-    if (*(char *)(param_1 + param_2) != '\0') {
-      do {
-        temp_v5 = temp_v3 * 4 + 2;
-        temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v5);
-        if (((param_3 <= temp_v1) && ((int)(temp_v1 - param_3) < (int)temp_v6)) &&
-           (temp_v2 = param_1,
-           FUN_004daf18(param_1,*(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v3 * 4)), temp_v2 != 0)) {
-          temp_v0 = *(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v3 * 4);
-          temp_v6 = *(unsigned short *)(*(int *)(temp_v4 + 0x44) + temp_v5) - param_3;
+    u16 bestDiff = 999;
+    u16 bestId = 0;
+    s32 i;
+
+    if (set->counts[group] != 0) {
+        if (set->tables[group][0].level < level) {
+            level = set->tables[group][0].level;
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < (int)(unsigned int)*(unsigned char *)(param_1 + param_2));
+        for (i = 0; i < set->counts[group]; i++) {
+            if (set->tables[group][i].level >= level
+                && (s32)(set->tables[group][i].level - level) < bestDiff
+                && entryDefIsAvailable(set, set->tables[group][i].id)) {
+                bestId = set->tables[group][i].id;
+                bestDiff = set->tables[group][i].level - level;
+            }
+        }
     }
-  }
-  return temp_v0;
+    return bestId;
 }
 
 } /* extern "C" */

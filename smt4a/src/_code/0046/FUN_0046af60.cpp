@@ -24,7 +24,7 @@ extern unsigned char LAB_0046b060; /* 0x46b060 */
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: slotSetRequest. */
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_00239480(void);
+extern int messageMainIsWindowActive(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002bf4f4. */
@@ -64,7 +64,7 @@ void FUN_0046af60(int param_1)
     }
     temp_v0 = 1;
     FUN_001517b4();
-    if ((temp_v0 != 0) && (temp_v0 = FUN_00239480(), temp_v0 != 0)) {
+    if ((temp_v0 != 0) && (temp_v0 = messageMainIsWindowActive(), temp_v0 != 0)) {
       msgWindowReset();
       return;
     }

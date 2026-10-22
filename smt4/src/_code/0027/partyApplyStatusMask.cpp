@@ -34,7 +34,7 @@ StatusUnit *gameGetUnitRecord(s32 slot);
 s32 gameCountUnits();
 s32 randNextInRange(s32 maximum);
 void FUN_00253d60(PlayerStatusResult *output, StatusPlayer *player);
-void FUN_0022e354(UnitStatusResult *output, StatusUnit *unit, s32 selector);
+void affinityResolveUnitSlot(UnitStatusResult *output, StatusUnit *unit, s32 selector);
 }
 
 // Apply the selected status to eligible party or reserve members at the supplied probability.
@@ -81,7 +81,7 @@ extern "C" void partyApplyStatusMask(s32 group, s32 bit, s32 probability)
         if (randNextInRange(99) >= probability)
             continue;
         if (bit == 5) {
-            FUN_0022e354(&result.unit, unit, 11);
+            affinityResolveUnitSlot(&result.unit, unit, 11);
             u32 category = result.unit.category >> 10;
             if (category == 1 || category == 3 || category == 4)
                 continue;

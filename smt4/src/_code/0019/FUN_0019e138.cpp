@@ -20,7 +20,7 @@ int FUN_0028a0d0(...);
 int FUN_0028a22c(void);
 int playSceneTimerSubStart(...);
 int uiFadeRelease(void);
-int FUN_00292c0c(void);
+int gameReleaseDataReference(void);
 int FUN_002a0cc8(...);
 int asdTMTexTableLoadEntryAsync(...);
 int asdTMTexTableReleaseNode(...);
@@ -131,7 +131,7 @@ extern int playSceneIsFadeInDone(int);
 extern int FUN_0028c600(int);
 /* Supplied declaration required: FUN_0028cb40. */
 /* Supplied declaration required: uiFadeRelease. */
-/* Supplied declaration required: FUN_00292c0c. */
+/* Supplied declaration required: gameReleaseDataReference. */
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -158,7 +158,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
-extern unsigned int FUN_002cdd74(void);
+extern unsigned int partyPanelGetStatusValue(void);
 extern int FUN_002d0080(int);
 extern int FUN_002d0298(int);
 extern int partyPanelGetState(void);
@@ -532,7 +532,7 @@ LAB_0019e7b8:
   case 0xb:
     temp_v4 = FUN_00295618();
     if (temp_v4 != 0) {
-      FUN_00292c0c();
+      gameReleaseDataReference();
       FUN_002a0cc8(0);
       *(unsigned int *)(temp_v0 + 0x7e38) = 7;
     }
@@ -566,7 +566,7 @@ LAB_0019e7b8:
           temp_v12 = partyPanelGetState();
           if (temp_v12 == 0xb) {
             temp_v7 = partyPanelGetValue();
-            temp_v6 = FUN_002cdd74();
+            temp_v6 = partyPanelGetStatusValue();
             objectEntryAppend(temp_v4,temp_v6,temp_v7);
           }
         }

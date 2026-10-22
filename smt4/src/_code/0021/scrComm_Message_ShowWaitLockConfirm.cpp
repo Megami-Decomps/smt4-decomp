@@ -1,57 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowWaitLockConfirm` (_code @ 0x21199c, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the constant-one lifetime and mode-result register allocation differ. */
+#include "ui/MessageMain.h"
 
 extern "C" {
+void scrCommMessageSetMode(u32 mode);
+s32 scrGetCommandFrame();
+u32 scrGetArg(u32 index);
+s32 FUN_0028660c();
+u32 FUN_002865f8();
+void FUN_002866b4(u32 context, u32 message, s32 frame, s32 mode, bool wait, u32 flags);
+extern MessageGlobals g_messageMain;
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
-int scrGetCommandFrame(void);
-int scrCommMessageSetMode(int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char g_messageMain; /* 0x43e188 */
-
-extern unsigned int FUN_002865f8(void);
-extern int FUN_0028660c(void);
-/* Supplied declaration required: FUN_002866b4. */
-/* Supplied declaration required: scrGetCommandFrame. */
-/* Supplied declaration required: scrCommMessageSetMode. */
-extern unsigned int scrGetArg(unsigned int);
-
-
-void scrComm_Message_ShowWaitLockConfirm(void)
-
+void scrComm_Message_ShowWaitLockConfirm()
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  scrCommMessageSetMode(0);
-  temp_v0 = scrGetCommandFrame();
-  temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  if (temp_v0 == 0) {
-    if ((*(int *)((unsigned char *)&g_messageMain + 0x8)) != 0) {
-      *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x30) = 1;
+    scrCommMessageSetMode(0);
+    if (scrGetCommandFrame() == 0) {
+        MessagePanel *panel = g_messageMain.banner;
+        if (panel != 0) {
+            panel->unk30 = 1;
+        }
+        panel->unk31 = 1;
     }
-    *(unsigned char *)(temp_v1 + 0x31) = 1;
-  }
-  temp_v1 = FUN_0028660c();
-  if (temp_v1 == 0x14) {
-    temp_v1 = 5;
-  }
-  temp_v2 = FUN_002865f8();
-  temp_v3 = scrGetArg(0);
-  temp_v4 = scrGetCommandFrame();
-  FUN_002866b4(temp_v2,temp_v3,temp_v4,temp_v1,1,0);
-  return;
+    s32 mode = FUN_0028660c();
+    if (mode == 20) {
+        mode = 5;
+    }
+    u32 context = FUN_002865f8();
+    u32 message = scrGetArg(0);
+    s32 frame = scrGetCommandFrame();
+    FUN_002866b4(context, message, frame, mode, true, 0);
 }
-
-} /* extern "C" */
+}

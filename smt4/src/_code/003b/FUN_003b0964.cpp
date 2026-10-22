@@ -1,54 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b0964` (_code @ 0x3b0964, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail looks like an inlined std::map iterator (operand order of the node compares, r2 in the
+ * parent walk, and a branch instead of conditional stores around the ready flag); the plain C walk differs there. */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_003af8d0(int);
+typedef struct ModelResource {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u8 ready;
+} ModelResource;
 
+typedef struct ModelEntry {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ ModelResource *resource;
+} ModelEntry;
 
-unsigned int FUN_003b0964(int param_1)
+typedef struct ModelSlot {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ ModelEntry *entry;
+} ModelSlot;
 
+/* Red-black tree node of the model map. */
+typedef struct ModelMapNode ModelMapNode;
+struct ModelMapNode {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ModelMapNode *parent;
+    /* 0x08 */ ModelMapNode *left;
+    /* 0x0C */ ModelMapNode *right;
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ ModelSlot *slot;
+};
+
+typedef struct ModelMap {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ ModelMapNode *header;
+} ModelMap;
+
+typedef struct ModelLoader {
+    /* 0x0000 */ u8 unk0000[0x1414];
+    /* 0x1414 */ ModelMap models;
+} ModelLoader;
+
+s32 FUN_003af8d0(ModelEntry *entry);
+
+/* Checks every model in the loader's map, marking the loaded ones ready; returns whether all have loaded. */
+u32 FUN_003b0964(ModelLoader *loader)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = 1;
-  temp_v1 = *(int *)(*(int *)(param_1 + 0x1428) + 8);
-  if (temp_v1 != *(int *)(param_1 + 0x1428)) {
-    do {
-      temp_v2 = *(int *)(*(int *)(temp_v1 + 0x18) + 0x10);
-      temp_v0 = FUN_003af8d0(temp_v2);
-      if (temp_v0 == 0) {
-        temp_v3 = 0;
-      }
-      else {
-        *(unsigned char *)(*(int *)(temp_v2 + 0x50) + 0x14) = 1;
-      }
-      temp_v0 = *(int *)(temp_v1 + 0xc);
-      if (*(int *)(temp_v1 + 0xc) != 0) {
-        do {
-          temp_v1 = temp_v0;
-          temp_v0 = *(int *)(temp_v1 + 8);
-        } while (*(int *)(temp_v1 + 8) != 0);
-      }
-      else {
-        temp_v0 = *(int *)(temp_v1 + 4);
-        if (temp_v1 == *(int *)(temp_v0 + 0xc)) {
-          do {
-            temp_v1 = temp_v0;
-            temp_v0 = *(int *)(temp_v1 + 4);
-          } while (temp_v1 == *(int *)(temp_v0 + 0xc));
+    ModelMap *models = &loader->models;
+    u32 allLoaded = 1;
+
+    for (ModelMapNode *node = models->header->left; models->header != node;) {
+        ModelEntry *entry = node->slot->entry;
+        if (FUN_003af8d0(entry) == 0) {
+            allLoaded = 0;
+        } else {
+            entry->resource->ready = 1;
         }
-        if (*(int *)(temp_v1 + 0xc) != temp_v0) {
-          temp_v1 = temp_v0;
+        ModelMapNode *next = node->right;
+        if (next != NULL) {
+            do {
+                node = next;
+                next = node->left;
+            } while (next != NULL);
+        } else {
+            ModelMapNode *parent = node->parent;
+            while (parent->right == node) {
+                node = parent;
+                parent = parent->parent;
+            }
+            if (node->right != parent) {
+                node = parent;
+            }
         }
-      }
-    } while (temp_v1 != *(int *)(param_1 + 0x1428));
-  }
-  return temp_v3;
+    }
+    return allLoaded;
 }
 
 } /* extern "C" */

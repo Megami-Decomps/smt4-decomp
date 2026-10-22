@@ -3,7 +3,7 @@
 
 struct GpuFloatVector4 { f32 x, y, z, w; };
 
-extern "C" const u32 DAT_004e31a0[256];
+extern "C" u32 DAT_004e31a0[256];
 extern "C" void FUN_002a9170(const u32 *first, const u32 *second, const u32 *coordinates);
 
 static __forceinline u32 encodeGpuFloat24(f32 value)

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_003bb088(u32 job);
+void eventTexRemoveHandle(u32 job);
 s32 jobIsValid(u32 job);
 s32 jobStop(u32 job, s32 flag);
 u32 scrGetArg(...);
@@ -16,7 +16,7 @@ u32 scrJobStop(void)
     job = scrGetArg();
     valid = jobIsValid(job);
     if (valid != 0) {
-        FUN_003bb088(job);
+        eventTexRemoveHandle(job);
         jobStop(job, 0);
     }
     return 1;

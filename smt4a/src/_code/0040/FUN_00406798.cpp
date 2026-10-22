@@ -1,53 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00406798` (_code @ 0x406798, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the resource-body adjustment folds into a single load at the combined offset. */
+#include "common.h"
+
+struct ResourceNameGroup {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ const char **names;
+    /* 0x08 */ u32 count;
+};
+struct ResourceNameGroupTable {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ ResourceNameGroup *groups;
+    /* 0x10 */ u32 count;
+};
+struct ResourceNameTableRef {
+    /* 0x00 */ ResourceNameGroupTable *table;
+};
+struct ResourceNameData {
+    /* 0x00 */ u8 unk00[0xa8];
+    /* 0xa8 */ ResourceNameTableRef *tableRef;
+};
+struct ResourceNameBody {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ ResourceNameData *data;
+};
+struct NamedResource {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ ResourceNameBody body;
+};
+struct NamedResourceOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ NamedResource *resource;
+};
 
 extern "C" {
+s32 libc_strcmp(const char *first, const char *second);
 
-int libc_strcmp(int, unsigned int);
-
-/* Supplied declaration required: libc_strcmp. */
-
-
-unsigned int FUN_00406798(int param_1,unsigned int param_2)
-
+s32 FUN_00406798(const NamedResourceOwner *owner, const char *name)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  temp_v5 = temp_v0 == 0;
-  if (!temp_v5) {
-    temp_v0 = temp_v0 + 0xc;
-    temp_v5 = temp_v0 == 0;
-  }
-  if (!temp_v5) {
-    temp_v4 = 0;
-    temp_v0 = **(int **)(*(int *)(temp_v0 + 0x30) + 0xa8);
-    if (*(int *)(temp_v0 + 0x10) != 0) {
-      do {
-        temp_v2 = 0;
-        temp_v3 = *(int *)(temp_v0 + 0xc) + temp_v4 * 0xc;
-        if (*(int *)(temp_v3 + 8) != 0) {
-          do {
-            temp_v1 = *(int *)(*(int *)(temp_v3 + 4) + temp_v2 * 4);
-            libc_strcmp(temp_v1,param_2);
-            if (temp_v1 == 0) {
-              return temp_v4;
-            }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < *(unsigned int *)(temp_v3 + 8));
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < *(unsigned int *)(temp_v0 + 0x10));
+    if (!owner->resource) {
+        return -1;
     }
-  }
-  return 0xffffffff;
+    ResourceNameGroupTable *table = owner->resource->body.data->tableRef->table;
+    for (u32 groupIndex = 0; groupIndex < table->count; ++groupIndex) {
+        const ResourceNameGroup *group = &table->groups[groupIndex];
+        for (u32 index = 0; index < group->count; ++index) {
+            if (libc_strcmp(group->names[index], name) == 0) {
+                return groupIndex;
+            }
+        }
+    }
+    return -1;
 }
-
-} /* extern "C" */
+}

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00275b10(int);
+int scriptReadStackValueAsFloat(int);
 int lmapSetSecondTransform(void);
 
-/* Supplied declaration required: FUN_00275b10. */
+/* Supplied declaration required: scriptReadStackValueAsFloat. */
 /* Supplied declaration required: lmapSetSecondTransform. */
 
 
@@ -15,12 +15,12 @@ unsigned int FUN_003cd974(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_00275b10(0);
-  FUN_00275b10(1);
-  FUN_00275b10(2);
-  FUN_00275b10(3);
-  FUN_00275b10(4);
-  FUN_00275b10(5);
+  scriptReadStackValueAsFloat(0);
+  scriptReadStackValueAsFloat(1);
+  scriptReadStackValueAsFloat(2);
+  scriptReadStackValueAsFloat(3);
+  scriptReadStackValueAsFloat(4);
+  scriptReadStackValueAsFloat(5);
   lmapSetSecondTransform();
   return 1;
 }

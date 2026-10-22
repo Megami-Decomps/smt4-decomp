@@ -11,7 +11,7 @@ int FUN_0034aae4(...);
 int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int FUN_003a7630(int);
-int FUN_003c5fc4(int);
+int messageMainSetTargetFlags(int);
 
 typedef struct fn_00468e98_arg0 fn_00468e98_arg0;
 struct fn_00468e98_arg0 {
@@ -51,7 +51,7 @@ extern unsigned short FUN_00372140(void);
 /* Supplied declaration required: FUN_0037c8e4. */
 extern unsigned short uiQuestRunEnabledAction(void);
 /* Supplied declaration required: FUN_003a7630. */
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_00467df8(void);
 
 
@@ -109,7 +109,7 @@ void FUN_00468e98(fn_00468e98_arg0 *param_1)
       FUN_0037c8e4(1,0);
       temp_v3 = FUN_00467df8();
       panelSetTarget(-temp_v3,0);
-      FUN_003c5fc4(1);
+      messageMainSetTargetFlags(1);
       *(unsigned char *)(param_1 + 1) = 0;
     }
     FUN_0034aae4();

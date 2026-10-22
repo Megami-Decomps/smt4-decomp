@@ -1,58 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003803b0` (_code @ 0x3803b0, 0xec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the 0x3BE0 effect constant into r5 before the first btlGetMainState call (one more saved register, 48-byte frame); call arguments match. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
 
-int FUN_003f0e20(int, int);
-int FUN_004fb43c(int, unsigned int, int, int, int, int, int);
-int FUN_004fb798(int, unsigned int, int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int, int);
+extern u32 g_btlScriptUnit;
 
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
+s32 scrGetArg(u32 index);
+u32 btlUnitGet(u32 unit);
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 index);
+void FUN_004fb798(s32 a, u32 unit, s32 b, BattleRosterRecordA *target, s32 c, s32 damage, s32 d, s32 e,
+                  s32 effect, s32 f, s32 g, s32 kind, s32 h, s32 i, s32 j);
+void FUN_004fb43c(s32 a, u32 unit, u32 message, s32 b, s32 c, s32 d, s32 e);
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004fb798. */
-
-
-unsigned int FUN_003803b0(void)
-
+/* Script command: damage target argument 0 by argument 1 percent of its max HP (at least 1). */
+u32 FUN_003803b0(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlUnitGet(g_btlScriptUnit);
-  temp_v3 = btlGetMainState();
-  FUN_003f0e20(temp_v3,temp_v0);
-  temp_v1 = (*(int *)(temp_v3 + 0x25c) * temp_v1) / 100;
-  if (temp_v1 == 0) {
-    temp_v1 = -1;
-  }
-  temp_v3 = btlGetMainState();
-  FUN_004fb798(0,temp_v2,0,*(int *)(temp_v3 + 0x1ed4) + temp_v0 * 0x1d0,0,temp_v1,0xffffffff,0xffffffff,
-               0x3be0,0,0,9,0,0,1);
-  FUN_004fb43c(0,temp_v2,0x1000263,0,0,0,0);
-  return 1;
+    s32 target = scrGetArg(0);
+    s32 percent = scrGetArg(1);
+    u32 unit = btlUnitGet(g_btlScriptUnit);
+    s32 damage = FUN_003f0e20(btlGetMainState(), target)->maxHp * percent / 100;
+
+    if (damage == 0) {
+        damage = -1;
+    }
+    FUN_004fb798(0, unit, 0, &btlGetMainState()->roster[target], 0, damage, -1, -1, 0x3be0, 0, 0, 9, 0, 0, 1);
+    FUN_004fb43c(0, unit, 0x1000263, 0, 0, 0, 0);
+    return 1;
 }
 
 } /* extern "C" */

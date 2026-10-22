@@ -1,65 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352388` (_code @ 0x352388, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the home vectors through VFP registers component by component (x apart from y/z); struct assignment here copies them with ldm/stm */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00292b84(void);
-int settings5BSetValue(int);
+typedef struct MapViewVec {
+    f32 x;
+    f32 y;
+    f32 z;
+} MapViewVec;
 
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+struct MapViewOwned;
 
-extern unsigned char DAT_005806a0; /* 0x5806a0 */
+typedef struct MapViewOwnedVtbl {
+    void *unk00;
+    void (*destroy)(struct MapViewOwned *self); /* 0x04 */
+} MapViewOwnedVtbl;
 
-/* Supplied declaration required: FUN_00292b84. */
-extern int mapStateGet(void);
-/* Supplied declaration required: settings5BSetValue. */
+typedef struct MapViewOwned {
+    MapViewOwnedVtbl *vtbl;
+} MapViewOwned;
 
+typedef struct MapView {
+    u8 unk000[0x38];
+    MapViewVec eye;          /* 0x038 */
+    MapViewVec target;       /* 0x044 */
+    MapViewVec prevEye;      /* 0x050 */
+    MapViewVec prevTarget;   /* 0x05C */
+    u8 unk068[0x250];
+    u8 unk2B8;               /* 0x2B8 */
+    u8 unk2B9[3];
+    MapViewOwned *owned;     /* 0x2BC */
+    MapViewVec homeEye;      /* 0x2C0 */
+    MapViewVec homeTarget;   /* 0x2CC */
+    u8 unk2D8[0x2C];
+    u8 unk304;               /* 0x304 */
+} MapView;
 
+typedef struct MapViewHolder {
+    u32 unk00;
+    MapView *view; /* 0x04 */
+} MapViewHolder;
+
+extern MapViewHolder DAT_005806a0;
+
+void FUN_00292b84(void);
+s32 mapStateGet(void);
+void settings5BSetValue(s32 value);
+
+/* Destroys the view's owned object and resets its eye and target (current and previous) to the home pose. */
 void FUN_00352388(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if (*(int **)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 700) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 700) + 4))();
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 700) = 0;
-  }
-  temp_v0 = (*(int *)((unsigned char *)&DAT_005806a0 + 0x4));
-  temp_v1 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x2cc);
-  temp_v2 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x2d0);
-  temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x2d4);
-  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x48);
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_005806a0 + 0x4)) + 0x44) = temp_v1;
-  *puVar2 = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x4c) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x38) = *(unsigned int *)(temp_v0 + 0x2c0);
-  *(unsigned int *)(temp_v0 + 0x5c) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(temp_v0 + 0x2c0);
-  *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(temp_v0 + 0x2c4);
-  *(unsigned int *)(temp_v0 + 0x40) = *(unsigned int *)(temp_v0 + 0x2c8);
-  *(unsigned int *)(temp_v0 + 0x60) = temp_v2;
-  *(unsigned int *)(temp_v0 + 100) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x54) = *(unsigned int *)(temp_v0 + 0x2c4);
-  *(unsigned int *)(temp_v0 + 0x58) = *(unsigned int *)(temp_v0 + 0x2c8);
-  *(unsigned char *)(temp_v0 + 0x2b8) = 0;
-  *(unsigned char *)(temp_v0 + 0x304) = 0;
-  FUN_00292b84();
-  temp_v0 = mapStateGet();
-  if (temp_v0 != 0) {
-    settings5BSetValue(1);
-    return;
-  }
-  return;
+    MapView *view;
+
+    if (DAT_005806a0.view->owned != NULL) {
+        DAT_005806a0.view->owned->vtbl->destroy(DAT_005806a0.view->owned);
+        DAT_005806a0.view->owned = NULL;
+    }
+    view = DAT_005806a0.view;
+    view->target = view->homeTarget;
+    view->eye = view->homeEye;
+    view->prevTarget = view->homeTarget;
+    view->prevEye = view->homeEye;
+    view->unk2B8 = 0;
+    view->unk304 = 0;
+    FUN_00292b84();
+    if (mapStateGet()) {
+        settings5BSetValue(1);
+    }
 }
 
 } /* extern "C" */

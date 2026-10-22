@@ -15,10 +15,10 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_00247004(void);
+extern int btlSlotsHaveReadyUnit(void);
 extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
+extern unsigned int btlScriptResolveGroupArg(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: scrGetArg. */
@@ -40,7 +40,7 @@ unsigned int FUN_00323044(void)
   
   temp_v0 = scrGetArg(0);
   scrGetArg(1);
-  temp_v1 = FUN_00249a54();
+  temp_v1 = btlScriptResolveGroupArg();
   FUN_002499fc(temp_v1,temp_v7,&temp_v6);
   temp_v4 = temp_v7[0];
   if (temp_v7[0] < temp_v6 + temp_v7[0]) {
@@ -53,7 +53,7 @@ unsigned int FUN_00323044(void)
         if (temp_v5) {
           temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
         }
-        if ((temp_v5 && temp_v3 == temp_v0) && (temp_v2 = FUN_00247004(), temp_v2 != 0)) {
+        if ((temp_v5 && temp_v3 == temp_v0) && (temp_v2 = btlSlotsHaveReadyUnit(), temp_v2 != 0)) {
           scrSetResult(1);
           return 1;
         }
@@ -66,7 +66,7 @@ unsigned int FUN_00323044(void)
     btlGetMainState();
     temp_v4 = btlMainFindActiveEntry();
     if (((temp_v4 != 0) && (*(unsigned short *)(temp_v4 + 0xce) == temp_v0)) &&
-       (temp_v4 = FUN_00247004(), temp_v4 != 0)) {
+       (temp_v4 = btlSlotsHaveReadyUnit(), temp_v4 != 0)) {
       scrSetResult(1);
       return 1;
     }

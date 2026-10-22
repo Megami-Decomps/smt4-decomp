@@ -1,19 +1,20 @@
-#include "shard/Block57f0c4.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
 
-void uiSpriteSelectAnim(Unit *unit, s32 flag);
+void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 flag);
 void ifTouchDecrementTimer(void);
 
 /* Tears down the six units: resets each, releases the entries their kinds hold (one for kinds 7, 9, 0x13, 0x14 and 0x15, two for kind 8, and one more for any non-zero kind), then releases the remaining `count` entries and moves the record to state 3. */
 void FUN_00183e58(void)
 {
-    Record57f0c4 *record;
+    ButtonHelpWorkA *record;
     s32 i;
     u8 kind;
     s32 *count;
 
-    record = g_buttonHelp.record;
+    record = g_buttonHelp.work;
     i = 0;
     count = &record->count;
     do {
@@ -43,9 +44,9 @@ void FUN_00183e58(void)
         } while (i < record->count);
         record->count = 0;
     }
-    record = g_buttonHelp.record;
-    g_buttonHelp.record->unk00C = 0;
-    record->unk010 = 3;
+    record = g_buttonHelp.work;
+    g_buttonHelp.work->unk0C = 0;
+    record->state = 3;
 }
 
 } /* extern "C" */

@@ -1,46 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlTalkBustUpDestroy` (_code @ 0x2523f0, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture release ABI and state offsets are recovered, but the inlined cleanup retains an extra owner register in retail and uses different store scheduling. */
+#include "battle/Talk/btlTalkBustUp.h"
 
 extern "C" {
+extern BtlTalkBustUp *g_btlTalkBustUp;
+extern void *g_aocSystem;
+void asdTMTexTableReleaseNode(s32 table, s32 node);
+void FUN_002a60cc(void *system, s32 table, u32 node);
+void jobStop(u32 job, s32 mode);
+void asdMemFree(void *allocation);
 
-int FUN_002a60cc(unsigned int, int, unsigned int);
-int asdTMTexTableReleaseNode(int);
-int asdMemFree(int);
-int jobStop(unsigned int, int);
-
-extern unsigned int g_aocSystem; /* 0x433158 */
-extern int g_btlTalkBustUp; /* 0x434210 */
-
-/* Supplied declaration required: FUN_002a60cc. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-
-
+// Release the talk portrait's texture, job and state allocation.
 void btlTalkBustUpDestroy(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlTalkBustUp;
-  if (g_btlTalkBustUp != 0) {
-    if (-1 < *(int *)(g_btlTalkBustUp + 0x2f8)) {
-      asdTMTexTableReleaseNode(0x18);
-      if (g_btlTalkBustUp != 0) {
-        *(unsigned char *)(g_btlTalkBustUp + 0x2f4) = 0;
-      }
-      FUN_002a60cc(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8));
-      *(unsigned int *)(temp_v0 + 0x2f8) = 0xffffffff;
-      *(unsigned int *)(temp_v0 + 0x2e8) = 3;
-      *(unsigned int *)(temp_v0 + 0x2ec) = 0;
+    BtlTalkBustUp *portrait = g_btlTalkBustUp;
+    if (portrait != NULL) {
+        if (portrait->textureNode >= 0) {
+            asdTMTexTableReleaseNode(24, portrait->textureNode);
+            if (g_btlTalkBustUp != NULL)
+                g_btlTalkBustUp->unk2F4 = 0;
+            FUN_002a60cc(g_aocSystem, 24, portrait->textureNode);
+            portrait->textureNode = -1;
+        }
+        portrait->state = 3;
+        portrait->unk2EC = 0;
+        jobStop(portrait->job, 0);
+        asdMemFree(portrait);
+        g_btlTalkBustUp = NULL;
     }
-    jobStop(*(unsigned int *)(temp_v0 + 0x2e4),0);
-    asdMemFree(temp_v0);
-    g_btlTalkBustUp = 0;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

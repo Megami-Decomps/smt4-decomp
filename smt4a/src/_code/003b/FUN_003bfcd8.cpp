@@ -1,58 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bfcd8` (_code @ 0x3bfcd8, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads the 1.0f scale before the panel stores and keeps the panel in r0 before `return 1`. */
+#include "ui/MessageMain.h"
 
 extern "C" {
 
-int FUN_0014e188(int, int, unsigned int, int, int);
-int uiSpriteSelectAnim(int, int);
-int pairSetFirstResetSecond(int, int);
+extern MessageGlobalsA g_messageMain;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+u32 scrGetArg(u32 index);
+u32 *gameGetSlotTable(void);
+void FUN_0014e188(u8 *sprite, s32 anim, s32 frame, u8 *source, f32 scale, s32 layer);
+void pairSetFirstResetSecond(u8 *pair, s32 first);
+void uiSpriteSelectAnim(u8 *sprite, s32 anim);
 
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-extern unsigned int *gameGetSlotTable(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_003bfcd8(void)
-
+/* Opens the message panel and starts its sprite; `mode` selects the panel variant. */
+static __inline void messagePanelOpen(u8 mode)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8e) = 1;
-  *(unsigned char *)(temp_v0 + 0x8d) = 1;
-  puVar3 = (unsigned int *)gameGetSlotTable();
-  temp_v2 = *puVar3;
-  *(unsigned int *)(temp_v0 + 0x7c) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x88) = temp_v2;
-  *(unsigned char *)(temp_v0 + 0x91) = 0;
-  *(unsigned char *)(temp_v0 + 0x92) = 0;
-  *(unsigned char *)(temp_v0 + 0x17d) = 0;
-  *(unsigned char *)(temp_v0 + 0x16d) = 0;
-  FUN_0014e188(temp_v0 + 0xb00,8,0xffffffff,temp_v0 + 0x194,0xb);
-  pairSetFirstResetSecond(temp_v0 + 0xb00,0);
-  uiSpriteSelectAnim(temp_v0 + 0xb00,6);
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x93) = 0;
-  *(unsigned int *)(temp_v0 + 0x80) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x84) = temp_v1;
-  *(unsigned char *)(temp_v0 + 0x92) = 1;
-  *(unsigned char *)(temp_v0 + 0x8c) = 0;
-  return 1;
+    MessagePanelA *panel = g_messageMain.panel;
+    u32 slot;
+
+    panel->unk8E = 1;
+    panel->state = 1;
+    slot = *gameGetSlotTable();
+    panel->unk7C = slot;
+    panel->unk88 = slot;
+    panel->unk91 = mode;
+    panel->unk92 = 0;
+    panel->unk17D = 0;
+    panel->unk16D = 0;
+    FUN_0014e188(panel->blockB00, 8, -1, panel->block194, 1.0f, 11);
+    pairSetFirstResetSecond(panel->blockB00, 0);
+    uiSpriteSelectAnim(panel->blockB00, 6);
+}
+
+/* Sets the panel's current and target value and marks it ready. */
+static __inline void messagePanelSetValue(u32 value)
+{
+    MessagePanelA *panel = g_messageMain.panel;
+
+    panel->unk93 = 0;
+    panel->unk80 = value;
+    panel->unk84 = value;
+    panel->unk92 = 1;
+    panel->unk8C = 0;
+}
+
+/* Script command: opens the message panel in its argument-driven mode. */
+u32 FUN_003bfcd8(void)
+{
+    u32 value = scrGetArg(0);
+
+    messagePanelOpen(0);
+    messagePanelSetValue(value);
+    return 1;
 }
 
 } /* extern "C" */

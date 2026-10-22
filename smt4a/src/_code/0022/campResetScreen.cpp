@@ -6,7 +6,7 @@ void uiSpriteSelectAnim(u8 *member, s32 flag);
 void uiSpriteSetKeyframe(u8 *unit, s32 a, s32 b);
 void uiSpriteSetImageKeyframe(u8 *unit, s32 a, s32 b);
 void FUN_0037c8e4(s32 a, s32 b);
-void FUN_0038843c(void);
+void messageRestoreBanner(void);
 
 typedef struct Unit {
     /* 0x00 */ u8 data[0x8C];
@@ -30,7 +30,7 @@ void campResetScreen(void)
     s32 i;
 
     FUN_0037c8e4(1, 0);
-    FUN_0038843c();
+    messageRestoreBanner();
     game = g_camp;
     i = 0;
     do {

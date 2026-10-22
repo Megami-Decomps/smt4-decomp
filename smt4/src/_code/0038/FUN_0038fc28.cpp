@@ -14,7 +14,7 @@ int eventQueueAddUniqueIfValid(int);
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: timeInitializeActiveState. */
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_0027e9c0. */
 /* Supplied declaration required: FUN_0027ea28. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
@@ -51,7 +51,7 @@ void FUN_0038fc28(int param_1)
       }
     }
   }
-  else if ((*(char *)(param_1 + 0x167a) != '\0') && (temp_v1 = FUN_0026ee68(0x10), temp_v1 != 0)) {
+  else if ((*(char *)(param_1 + 0x167a) != '\0') && (temp_v1 = buttonHelpHasEnabledEntryForId(0x10), temp_v1 != 0)) {
     eventQueueAddUniqueIfValid(0x100016d);
     FUN_0027e9c0(temp_v2);
     FUN_0023392c(param_1,0xffffffff,0);

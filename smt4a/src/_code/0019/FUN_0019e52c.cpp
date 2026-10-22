@@ -1,53 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019e52c` (_code @ 0x19e52c, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* One row of data table 10: a key and the value it maps to. */
+struct DataTable10Entry {
+    /* 0x00 */ u16 key;
+    /* 0x02 */ u16 value;
+    /* 0x04 */ u8 unk04[4];
+};
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+u32 dataTableGet(u32 table, u32 sub);
+DataTable10Entry *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
 
-
-unsigned short FUN_0019e52c(unsigned int param_1)
-
+/* Returns the value data table 10 maps `key` to, or 0 when the key is absent. */
+u16 FUN_0019e52c(u32 key)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned short *puVar6;
-  
-  temp_v0 = dataTableGet(10,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v1 + temp_v4 * 8) == param_1) {
-          return *(unsigned short *)(temp_v1 + temp_v4 * 8 + 2);
+    u32 table = dataTableGet(10, 0);
+    DataTable10Entry *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        if (entries[i].key == key) {
+            return entries[i].value;
         }
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < (int)temp_v3);
     }
-  }
-  while( 1 ) {
-    temp_v4 = temp_v3;
-    if (temp_v2 <= temp_v4) {
-      return 0;
-    }
-    puVar6 = (unsigned short *)(temp_v1 + temp_v4 * 8);
-    if (*puVar6 == param_1) break;
-    if (puVar6[4] == param_1) {
-      return *(unsigned short *)(temp_v1 + temp_v4 * 8 + 10);
-    }
-    temp_v3 = temp_v4 + 2;
-  }
-  return *(unsigned short *)(temp_v1 + temp_v4 * 8 + 2);
+    return 0;
 }
 
 } /* extern "C" */

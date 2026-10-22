@@ -1,5 +1,4 @@
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 extern "C" ReflectAction* FUN_004102d8(ReflectContext* context, s32 id, s32 target, u32 flags);
 
 // Create a type-0x43 reflected action with an index, value and extra parameter.

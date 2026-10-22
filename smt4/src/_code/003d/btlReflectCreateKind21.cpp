@@ -1,5 +1,4 @@
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 extern "C" ReflectAction* FUN_0022699c(ReflectContext*, s32, s32, u32);
 
 // Queue a word-valued command, optionally marking it as an immediate action.

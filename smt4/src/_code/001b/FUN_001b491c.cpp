@@ -1,41 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b491c` (_code @ 0x1b491c, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail retains redundant per-index selector dispatch in both three-channel loops; valid-domain calls use the common selector directly. */
+#include "map/lmapMain.h"
 
 extern "C" {
+extern LmapScene *g_lmapScene;
+void playerModelListCreate(LmapScript *owner, u32 selector);
+void playerModelLoadPart(LmapScript *owner, u8 channel, u32 selector);
+void FUN_00343c58(LmapScript *owner, u8 channel, u32 value, u32 selector);
 
-int FUN_00294450(unsigned int, unsigned int);
-int playerModelListCreate(unsigned int, int);
-int FUN_00343c58(unsigned int, unsigned int, unsigned int);
-
-extern int g_lmapScene; /* 0x447e88 */
-
-/* Supplied declaration required: FUN_00294450. */
-/* Supplied declaration required: playerModelListCreate. */
-/* Supplied declaration required: FUN_00343c58. */
-
-
+/* Initializes the three model channels, restoring their saved values when requested. */
 void FUN_001b491c(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  playerModelListCreate(*(unsigned int *)(g_lmapScene + 0x194),0x1c0);
-  temp_v0 = 0;
-  if (*(char *)(g_lmapScene + 0x198) == '\0') {
-    do {
-      FUN_00294450(*(unsigned int *)(g_lmapScene + 0x194),temp_v0 & 0xff);
-      temp_v0 = temp_v0 + 1;
-    } while ((int)temp_v0 < 3);
-    return;
-  }
-  do {
-    FUN_00343c58(*(unsigned int *)(g_lmapScene + 0x194),temp_v0 & 0xff,
-                 *(unsigned int *)(g_lmapScene + temp_v0 * 4 + 0x19c));
-    temp_v0 = temp_v0 + 1;
-  } while ((int)temp_v0 < 3);
-  return;
+    playerModelListCreate(g_lmapScene->script, 448);
+    if (g_lmapScene->restoreChannelValues == 0) {
+        for (s32 i = 0; i < 3; ++i) {
+            playerModelLoadPart(g_lmapScene->script, static_cast<u8>(i), 448);
+        }
+    } else {
+        for (s32 i = 0; i < 3; ++i) {
+            FUN_00343c58(g_lmapScene->script, static_cast<u8>(i), g_lmapScene->channelValues[i], 448);
+        }
+    }
 }
-
-} /* extern "C" */
+}

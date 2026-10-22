@@ -1,69 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba2bc` (_code @ 0x3ba2bc, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc keeps the constant 2 in a saved r5 (push r4-r6), loads the second resource
+ * pair with ldm and stores step/stepTimer separately; retail rematerializes 2 and uses strd */
+#include "common.h"
+
+#define UNK3BA2BC_FLAG_PENDING 0x10
+
+/* An object FUN_00297060 builds from a resource pair. */
+struct Unk3ba2bcPart {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ s32 mode;
+};
+
+struct Unk3ba2bcOwner {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u32 flags;
+    /* 0x024 */ u8 unk024[4];
+    /* 0x028 */ s32 step;
+    /* 0x02C */ s32 stepTimer;
+    /* 0x030 */ u8 unk030[0xC];
+    /* 0x03C */ u8 unk03C[6];
+    /* 0x042 */ u8 unk042[0x5A];
+    /* 0x09C */ u8 sprites[0xCBC];
+    /* 0xD58 */ u8 loader[0x24];
+    /* 0xD7C */ void *firstResourceA;
+    /* 0xD80 */ void *firstResourceB;
+    /* 0xD84 */ Unk3ba2bcPart *firstPart;
+    /* 0xD88 */ void *secondResourceA;
+    /* 0xD8C */ void *secondResourceB;
+    /* 0xD90 */ Unk3ba2bcPart *secondPart;
+};
 
 extern "C" {
 
-int FUN_0022b064(int);
-int FUN_00297060(...);
-int FUN_002bd808(int, int);
-int FUN_003b82c4(int);
+s32 FUN_003bbaa8(void *loader);
+s32 stageAssetsLoaded(void);
+s32 spriteTable2aIsLoaded(void *sprites);
+Unk3ba2bcPart *FUN_00297060(void *resourceA, void *resourceB);
+void FUN_002bd808(void *a, void *b);
+void FUN_003b82c4(Unk3ba2bcOwner *owner);
+void buttonHelpSelectByProgress(Unk3ba2bcOwner *owner);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_0022b064. */
-extern int stageAssetsLoaded(void);
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002bd808. */
-/* Supplied declaration required: FUN_003b82c4. */
-extern int spriteTable2aIsLoaded(int);
-extern int FUN_003bbaa8(int);
-
-
-void FUN_003ba2bc(int param_1,unsigned int param_2,int param_3)
-
+/* Once everything is loaded, builds both parts and, if a start is pending, starts the owner. */
+void FUN_003ba2bc(Unk3ba2bcOwner *owner)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = FUN_003bbaa8(param_1 + 0xd58);
-  if ((temp_v0 != 0) && (temp_v0 = stageAssetsLoaded(), temp_v0 != 0)) {
-    temp_v1 = spriteTable2aIsLoaded(param_1 + 0x9c);
-    temp_v0 = 0;
-    if (temp_v1 != 0) {
-      temp_v0 = *(int *)(param_1 + 0xd7c);
+    if (!FUN_003bbaa8(owner->loader) || !stageAssetsLoaded() ||
+        !spriteTable2aIsLoaded(owner->sprites) || owner->firstResourceA == NULL ||
+        owner->firstResourceB == NULL || owner->secondResourceA == NULL ||
+        owner->secondResourceB == NULL) {
+        return;
     }
-    if (temp_v1 != 0 && temp_v0 != 0) {
-      temp_v2 = *(int *)(param_1 + 0xd80) != 0;
-      if (temp_v2) {
-        param_3 = *(int *)(param_1 + 0xd88);
-      }
-      if ((temp_v2 && param_3 != 0) && (*(int *)(param_1 + 0xd8c) != 0)) {
-        FUN_00297060();
-        *(int *)(param_1 + 0xd84) = temp_v0;
-        *(unsigned int *)(temp_v0 + 0x108) = 2;
-        temp_v0 = *(int *)(param_1 + 0xd88);
-        FUN_00297060(temp_v0,*(unsigned int *)(param_1 + 0xd8c));
-        *(int *)(param_1 + 0xd90) = temp_v0;
-        *(unsigned int *)(temp_v0 + 0x108) = 2;
-        if ((*(unsigned int *)(param_1 + 0x20) & 0x10) != 0) {
-          FUN_002bd808(param_1 + 0x3c,param_1 + 0x42);
-          FUN_003b82c4(param_1);
-          *(unsigned int *)(param_1 + 0x28) = 2;
-          *(unsigned int *)(param_1 + 0x2c) = 0;
-          *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffef;
-          FUN_0022b064(param_1);
-          return;
-        }
-      }
+    owner->firstPart = FUN_00297060(owner->firstResourceA, owner->firstResourceB);
+    owner->firstPart->mode = 2;
+    owner->secondPart = FUN_00297060(owner->secondResourceA, owner->secondResourceB);
+    owner->secondPart->mode = 2;
+    if (owner->flags & UNK3BA2BC_FLAG_PENDING) {
+        FUN_002bd808(owner->unk03C, owner->unk042);
+        FUN_003b82c4(owner);
+        owner->step = 2;
+        owner->stepTimer = 0;
+        owner->flags &= ~UNK3BA2BC_FLAG_PENDING;
+        buttonHelpSelectByProgress(owner);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

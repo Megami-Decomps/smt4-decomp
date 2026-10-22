@@ -1,48 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2fb0` (_code @ 0x3f2fb0, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: signed division uses a swapped multiplier operand and omits retail's extra register copy. */
+#include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
+s32 FUN_0031cfd0(u32 id);
+bool gameDataFlagTestBit(u32 bit);
+s32 randRange(u32 limit);
 
-int FUN_00184310(void);
-
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_0031cfd0(unsigned short);
-extern int gameDataFlagTestBit(unsigned int);
-
-
-unsigned int FUN_003f2fb0(int param_1,int param_2,int param_3)
-
+bool FUN_003f2fb0(PartySlotA *unit, s32 attempts, s32 force)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x62);
-  FUN_00184310();
-  temp_v1 = FUN_0031cfd0(*(unsigned short *)(param_1 + 0x62));
-  temp_v3 = temp_v1 / 400 + ((*(unsigned int *)(temp_v0 + 0x34) & 0x3fff) >> 7);
-  temp_v1 = gameDataFlagTestBit(6);
-  if (temp_v1 != 0) {
-    temp_v3 = temp_v3 + 0x28;
-  }
-  temp_v1 = 0;
-  if (temp_v1 < param_2) {
-    do {
-      temp_v2 = randRange(99);
-      if (param_3 != 0) {
-        temp_v2 = -1;
-      }
-      if (temp_v2 < temp_v3) {
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < param_2);
-  }
-  return 0;
+    DevilRecordA *record = FUN_00184310(unit->unk62);
+    s32 chance = FUN_0031cfd0(unit->unk62) / 400 +
+        ((record->fusionRestrictions >> 7) & 0x7f);
+    if (gameDataFlagTestBit(6)) {
+        chance += 40;
+    }
+    for (s32 attempt = 0; attempt < attempts; ++attempt) {
+        s32 roll = randRange(99);
+        if (force) {
+            roll = -1;
+        }
+        if (roll < chance) {
+            return true;
+        }
+    }
+    return false;
 }
-
-} /* extern "C" */
+}

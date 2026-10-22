@@ -1,61 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00471244` (_code @ 0x471244, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the callee-saved registers for `target` and `key` are swapped (retail: key in sl, target in fp) */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0047ca10(unsigned int, unsigned int, int, unsigned int, int, int, int, int);
+/* One placement of a group: an id (major * 1000 + minor) and an offset. */
+typedef struct PlacementEntry {
+    /* 0x00 */ s32 major;
+    /* 0x04 */ s32 minor;
+    /* 0x08 */ s32 x;
+    /* 0x0C */ s32 y;
+    /* 0x10 */ s32 z;
+} PlacementEntry;
 
-/* stack frame of param_8: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_8_stack;
+typedef struct PlacementGroup PlacementGroup;
 
-extern int FUN_001b2ca4(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0047ca10. */
+struct PlacementGroup {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ s32 count;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ PlacementEntry *entries;
+    /* 0x10 */ PlacementGroup *next;
+};
 
+typedef struct PlacementList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ PlacementGroup *first;
+} PlacementList;
 
-unsigned int
-FUN_00471244(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5
-            ,int param_6,int param_7,int param_8)
+typedef struct PlacementOwner {
+    /* 0x00 */ u32 handle;
+    /* 0x04 */ PlacementList *groups;
+} PlacementOwner;
 
+typedef struct PlacementRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ PlacementOwner *owner;
+} PlacementRecord;
+
+PlacementRecord *FUN_001b2ca4(u32 a, s32 kind, u32 key);
+void FUN_0047ca10(u32 handle, u32 target, s32 mode, u32 key, s32 id, s32 x, s32 y, s32 z);
+
+/* Returns the list's group with the id, or NULL. */
+static PlacementGroup *placementFindGroup(PlacementList *list, s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  unsigned int *unaff_r6;
-  
-  temp_v0 = FUN_001b2ca4(param_1,0x17,param_4);
-  if (temp_v0 != 0) {
-    unaff_r6 = *(unsigned int **)(temp_v0 + 4);
-  }
-  if (temp_v0 != 0 && unaff_r6 != (unsigned int *)0x0) {
-    if (unaff_r6[1] == 0) {
-      return 0;
-    }
-    for (piVar3 = *(int **)(unaff_r6[1] + 4); piVar3 != (int *)0x0; piVar3 = (int *)piVar3[4]) {
-      if (*piVar3 == param_5) {
-        if (piVar3 == (int *)0x0) {
-          return 0;
+    PlacementGroup *group;
+
+    for (group = list->first; group != NULL; group = group->next) {
+        if (group->id == id) {
+            return group;
         }
-        temp_v0 = 0;
-        if (temp_v0 < piVar3[1]) {
-          do {
-            piVar2 = (int *)(piVar3[3] + temp_v0 * 0x14);
-            FUN_0047ca10(*unaff_r6,param_3,0xf,param_4,piVar2[1] + *piVar2 * 1000,
-                         piVar2[2] + param_6,piVar2[3] + param_7,piVar2[4] + param_8);
-            temp_v0 = temp_v0 + 1;
-          } while (temp_v0 < piVar3[1]);
-        }
-        return 1;
-      }
     }
-  }
-  return 0;
+    return NULL;
+}
+
+/* Places every entry of the group `id`, offset by (x, y, z); returns 0 when the record or group is missing. */
+u32 FUN_00471244(u32 a, u32 unused, u32 target, u32 key, s32 id, s32 x, s32 y, s32 z)
+{
+    PlacementRecord *record = FUN_001b2ca4(a, 0x17, key);
+    PlacementOwner *owner;
+    PlacementGroup *group;
+    s32 i;
+
+    if (record == NULL || (owner = record->owner) == NULL) {
+        return 0;
+    }
+    if (owner->groups == NULL) {
+        return 0;
+    }
+    group = placementFindGroup(owner->groups, id);
+    if (group == NULL) {
+        return 0;
+    }
+    for (i = 0; i < group->count; i++) {
+        PlacementEntry *entry = &group->entries[i];
+        FUN_0047ca10(owner->handle, target, 0xf, key, entry->major * 1000 + entry->minor, entry->x + x, entry->y + y,
+                     entry->z + z);
+    }
+    return 1;
 }
 
 } /* extern "C" */

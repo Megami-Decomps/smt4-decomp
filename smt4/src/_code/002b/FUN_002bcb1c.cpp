@@ -1,54 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bcb1c` (_code @ 0x2bcb1c, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #136] differs from recovered ldr r0, [pc, #128]. */
+#include "common.h"
+
+struct SoundStatusNodeView {
+    u8 unk00[0x70];              // 0x00
+    SoundStatusNodeView* next;   // 0x70
+    u8 unk74[0x1C];              // 0x74
+    u32 unk90;                  // 0x90
+};
+
+struct SoundStatusView {
+    SoundStatusNodeView* head;   // 0x00
+    s32 count;                  // 0x04
+};
 
 extern "C" {
+extern SoundStatusView g_asdSoundStatus;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
-
-extern int g_asdSoundStatus; /* 0x4e3154 */
-extern unsigned int DAT_004e3158; /* 0x4e3158 */
-
-
-unsigned int FUN_002bcb1c(void)
-
+// Returns whether any indexed sound-status node has bit 1 set at offset 0x90.
+u32 FUN_002bcb1c(void)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = 0;
-  if ((int)DAT_004e3158 < 1) {
-    return 0;
-  }
-  do {
-    temp_v3 = temp_v2 == 0;
-    if (-1 < (int)temp_v2) {
-      temp_v3 = DAT_004e3158 == temp_v2;
+    const s32 count = g_asdSoundStatus.count;
+    if (count <= 0) {
+        return 0;
     }
-    if (!temp_v3 && (-1 < (int)temp_v2 && (int)temp_v2 <= (int)DAT_004e3158)) {
-      temp_v0 = g_asdSoundStatus;
-      if (0 < (int)temp_v2) {
-        if ((temp_v2 & 1) != 0) {
-          temp_v0 = *(int *)(g_asdSoundStatus + 0x70);
-        }
-        for (temp_v1 = (int)temp_v2 >> 1; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
-          temp_v0 = *(int *)(*(int *)(temp_v0 + 0x70) + 0x70);
-        }
-      }
-      if ((temp_v0 != 0) && ((*(unsigned int *)(temp_v0 + 0x90) & 2) != 0)) {
-        return 1;
-      }
-    }
-    temp_v2 = temp_v2 + 1;
-    if ((int)DAT_004e3158 <= (int)temp_v2) {
-      return 0;
-    }
-  } while( 1 );
-}
 
-} /* extern "C" */
+    SoundStatusNodeView* const head = g_asdSoundStatus.head;
+    for (s32 index = 0; index < count; ++index) {
+        if (index < 0 || index >= count) {
+            continue;
+        }
+
+        SoundStatusNodeView* node = head;
+        for (s32 step = 0; step < index; ++step) {
+            node = node->next;
+        }
+
+        if (node != 0 && ((node->unk90 & 2u) >> 1) != 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+}

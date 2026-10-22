@@ -16,7 +16,7 @@ int FUN_002dae68(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
 int mapIfReleaseSlot2(void);
-int FUN_00313648(unsigned int);
+int mapSetSceneState(unsigned int);
 int FUN_00324e38(int);
 int FUN_00327ee8(void);
 
@@ -49,7 +49,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 extern int inputIsQuestMenuPressed(void);
@@ -191,7 +191,7 @@ void FUN_00365dcc(void)
         mapIfReleasePanel();
         mapIfSetMode1();
         temp_v4 = 10;
-        FUN_00313648(temp_v4);
+        mapSetSceneState(temp_v4);
         FUN_002e364c(g_lmapScene + 0x28);
         FUN_00327ee8();
         return;
@@ -205,7 +205,7 @@ void FUN_00365dcc(void)
             return;
           }
           temp_v4 = 1;
-          FUN_00313648(temp_v4);
+          mapSetSceneState(temp_v4);
           FUN_002e364c(g_lmapScene + 0x28);
           FUN_00327ee8();
           return;

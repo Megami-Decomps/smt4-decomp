@@ -11,7 +11,7 @@ int FUN_002ad8b4(...);
 int buttonHelpSetPreset(...);
 int timerStart(...);
 int FUN_002bd954(...);
-int FUN_002beed0(...);
+int uiSpriteInitializeState(...);
 int gameDataBlocksGetSaveData(void);
 int paramsInit(...);
 int memClear(...);
@@ -63,7 +63,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002beed0. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
@@ -158,8 +158,8 @@ void FUN_00202ab4(void)
   drawParameterBlockClear(puVar1 + 0x1f);
   paramsInit(puVar1 + 0x1f,&DAT_00405e2c,0x3c,0,0,0,0,0,0,&DAT_00405e68,0xe0);
   FUN_002bd954(puVar1 + 0x27,0x36,1,puVar1 + 0x1f,0xc9);
-  FUN_002beed0(puVar1 + 0x4a,0x36,0x51,2,puVar1 + 0x1f,2);
-  FUN_002beed0(puVar1 + 0x6d,0x36,0x52,2,puVar1 + 0x1f,2);
+  uiSpriteInitializeState(puVar1 + 0x4a,0x36,0x51,2,puVar1 + 0x1f,2);
+  uiSpriteInitializeState(puVar1 + 0x6d,0x36,0x52,2,puVar1 + 0x1f,2);
   timerStart(puVar1 + 0x27,1,0);
   timerStart(puVar1 + 0x4a,3,0);
   timerStart(puVar1 + 0x6d,4,0);

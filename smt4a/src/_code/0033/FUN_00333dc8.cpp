@@ -1,13 +1,13 @@
+#include "status/StatusDown.h"
 #include "shard/Shard0033.h"
 
 extern "C" {
-
-extern StateHolder518 *g_statusDown;
+extern StatusDownStateA *g_statusDown;
 
 void FUN_00333dc8(u8 value)
 {
     if (g_statusDown != NULL) {
-        g_statusDown->unk52A = value;
+        g_statusDown->active = value;
     }
 }
 

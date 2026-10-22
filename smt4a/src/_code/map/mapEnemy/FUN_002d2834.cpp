@@ -15,7 +15,7 @@ int FUN_00353200(void);
 int dataTable00FindById(void);
 int ptrListRemoveClearOwner(...);
 int vec4Forward(...);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_00303a5c(void);
 int effectSpawnTypeTen(void);
 int FUN_0033abb4(void);
@@ -128,7 +128,7 @@ extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: FUN_00292200. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: gameDataBlocksAddFloat. */
 /* Supplied declaration required: FUN_002d1f40. */
 extern int FUN_002d7c88(unsigned int);
@@ -138,7 +138,7 @@ extern int mapCollisionExists(void);
 extern int byte76Get(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_0033b100(char *);
-extern int FUN_0033be00(char *);
+extern int mapEnemyIsNearestLocked(char *);
 /* Supplied declaration required: byte76Set. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00352ff8. */
@@ -155,7 +155,7 @@ extern int lookupConditionalSixBitValue(unsigned int);
 extern int FUN_004bb870(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
 extern int FUN_004bc5a4(unsigned int);
-extern int FUN_004bc850(int index);
+extern int dataSelectPrioritizedCandidate(int index);
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -249,7 +249,7 @@ void FUN_002d2834(void)
         if (*(short *)(temp_v10 + 0x16e) != -1) {
           FUN_00353c20(pcVar15);
         }
-        if ((*(char *)(temp_v10 + 0xb1) == '\0') || (temp_v3 = FUN_0033be00(pcVar15), temp_v3 != 0)) {
+        if ((*(char *)(temp_v10 + 0xb1) == '\0') || (temp_v3 = mapEnemyIsNearestLocked(pcVar15), temp_v3 != 0)) {
           temp_v30 = *(float *)(temp_v10 + 0x54);
           temp_v31 = *(float *)(temp_v10 + 0x58);
           temp_v32 = *(float *)(temp_v10 + 0x5c);
@@ -588,7 +588,7 @@ LAB_002d3354:
               if ((temp_v15 && temp_v7 != '\0') && pcVar8 != (char *)0x2) goto LAB_002d7c04;
               temp_v3 = temp_v3 + 1;
             } while (temp_v3 < 0x28);
-            temp_v3 = FUN_0033be00(pcVar15);
+            temp_v3 = mapEnemyIsNearestLocked(pcVar15);
             if (temp_v3 != 0) {
               *(unsigned int *)(temp_v10 + 0xd8) = 0;
 LAB_002d3484:
@@ -777,7 +777,7 @@ LAB_002d33dc:
         if (*(short *)(temp_v10 + 0x16e) != -1) {
           FUN_00353c20(pcVar15);
         }
-        if ((*(char *)(temp_v10 + 0xb1) == '\0') || (temp_v3 = FUN_0033be00(pcVar15), temp_v3 != 0)) {
+        if ((*(char *)(temp_v10 + 0xb1) == '\0') || (temp_v3 = mapEnemyIsNearestLocked(pcVar15), temp_v3 != 0)) {
           if (*(int *)(temp_v50 + 0x14e8) != 0) {
             temp_v8 = *(float *)(temp_v4 + 0x14);
             distSpatial();
@@ -865,7 +865,7 @@ LAB_002d33dc:
         if (*(short *)(temp_v10 + 0x16e) != -1) {
           FUN_00353c20(pcVar15);
         }
-        if ((*(char *)(temp_v10 + 0xb1) != '\0') && (temp_v3 = FUN_0033be00(pcVar15), temp_v3 == 0)) {
+        if ((*(char *)(temp_v10 + 0xb1) != '\0') && (temp_v3 = mapEnemyIsNearestLocked(pcVar15), temp_v3 == 0)) {
           *(unsigned int *)(temp_v10 + 0xb8) = 0;
           *(unsigned int *)(temp_v10 + 0xbc) = 0;
           temp_v3 = randRange(0x1e);
@@ -1002,7 +1002,7 @@ LAB_002d3c7c:
           temp_v8 = *(float *)(temp_v10 + 0x60);
           FUN_00303a5c();
           *(float *)(temp_v10 + 0x60) = temp_v8;
-          FUN_002b5cd4();
+          mathAngleDeltaDegrees();
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v8) << 0x1d);
           if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
             temp_v8 = -temp_v8;
@@ -1139,7 +1139,7 @@ LAB_002d3c7c:
         }
         else {
           *(int *)(temp_v10 + 0xbc) = *(int *)(temp_v10 + 0xbc) + 1;
-          if ((*(char *)(temp_v10 + 0xb1) == '\0') || (temp_v3 = FUN_0033be00(pcVar15), temp_v3 != 0)) {
+          if ((*(char *)(temp_v10 + 0xb1) == '\0') || (temp_v3 = mapEnemyIsNearestLocked(pcVar15), temp_v3 != 0)) {
             temp_v3 = FUN_0033b100(pcVar15);
             if (temp_v3 != 0) {
               *(int *)(temp_v4 + 0x3d7c) = *(int *)(temp_v4 + 0x3d7c) - 1;
@@ -1348,7 +1348,7 @@ LAB_002d4824:
         }
         else {
           *(int *)(temp_v10 + 0xbc) = *(int *)(temp_v10 + 0xbc) + 1;
-          if ((*(char *)(temp_v10 + 0xb1) != '\0') && (temp_v3 = FUN_0033be00(pcVar15), temp_v3 == 0)) {
+          if ((*(char *)(temp_v10 + 0xb1) != '\0') && (temp_v3 = mapEnemyIsNearestLocked(pcVar15), temp_v3 == 0)) {
             *(int *)(temp_v4 + 0x3d7c) = *(int *)(temp_v4 + 0x3d7c) - 1;
             *(unsigned int *)(temp_v10 + 0xb8) = 9;
             *(unsigned int *)(temp_v10 + 0xbc) = 0;
@@ -1747,7 +1747,7 @@ LAB_002d54c4:
             *(unsigned char *)(temp_v10 + 0x1ae) = 0;
             do {
               *(unsigned int *)(temp_v10 + 0xa4) = FUN_004bc420(groupId,temp_v33,0);
-              temp_v3 = FUN_004bc850(*(unsigned int *)(temp_v10 + 0xa4));
+              temp_v3 = dataSelectPrioritizedCandidate(*(unsigned int *)(temp_v10 + 0xa4));
               *(int *)(temp_v10 + 0xa8) = temp_v3;
               dataTable00FindById();
               *(unsigned short *)(temp_v10 + 0x1a8) = *(unsigned short *)(temp_v3 + 2) & 0x7fff;

@@ -1,58 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004da520` (_code @ 0x4da520, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "shard/Shard0034.h"
+#include "shard/Shard004B.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
 
 extern "C" {
 
-int FUN_00184310(void);
+u32 randRange(u32 range);
+PlayerData *gameGetPlayerData(void);
 
-extern unsigned int randRange(unsigned int);
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00184310. */
-
-
-unsigned char FUN_004da520(unsigned int param_1,int param_2,int param_3)
-
+/* Rolls whether two demons trigger an event: the chance grows with the player flag, each demon's
+ * flags, and doubles when either demon belongs to race 35. */
+bool FUN_004da520(u32 unused, ScaledRecordValues *first, ScaledRecordValues *second)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v1 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
-  FUN_00184310();
-  temp_v2 = (unsigned int)*(unsigned short *)(param_3 + 0x62);
-  FUN_00184310();
-  temp_v4 = 1;
-  temp_v3 = gameGetPlayerData();
-  if ((*(unsigned short *)(temp_v3 + 0x5e) & 0x200) != 0) {
-    temp_v4 = 7;
-  }
-  if ((*(unsigned short *)(param_2 + 0x60) & 2) != 0) {
-    temp_v4 = temp_v4 + 1;
-  }
-  if ((*(unsigned short *)(param_3 + 0x60) & 2) != 0) {
-    temp_v4 = temp_v4 + 1;
-  }
-  if ((*(unsigned short *)(param_2 + 0x60) & 0x200) != 0) {
-    temp_v4 = temp_v4 + 3;
-  }
-  if ((*(unsigned short *)(param_3 + 0x60) & 0x200) != 0) {
-    temp_v4 = temp_v4 + 3;
-  }
-  temp_v0 = *(char *)(temp_v1 + 2);
-  temp_v5 = temp_v0 != '#';
-  if (temp_v5) {
-    temp_v0 = *(char *)(temp_v2 + 2);
-  }
-  if (!temp_v5 || temp_v0 == '#') {
-    temp_v4 = temp_v4 << 1;
-  }
-  temp_v1 = randRange(0x3f);
-  return temp_v1 < temp_v4;
+    DevilRecordA *firstRecord = FUN_00184310(first->id);
+    DevilRecordA *secondRecord = FUN_00184310(second->id);
+    u16 chance = 1;
+
+    if (gameGetPlayerData()->unk5E & 0x200) {
+        chance = 7;
+    }
+    if (first->flags & 2) {
+        chance++;
+    }
+    if (second->flags & 2) {
+        chance++;
+    }
+    if (first->flags & 0x200) {
+        chance += 3;
+    }
+    if (second->flags & 0x200) {
+        chance += 3;
+    }
+    if (firstRecord->race == 35 || secondRecord->race == 35) {
+        chance *= 2;
+    }
+    return randRange(63) < chance;
 }
 
 } /* extern "C" */

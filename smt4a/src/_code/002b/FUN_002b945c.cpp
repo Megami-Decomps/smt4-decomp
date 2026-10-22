@@ -1,72 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b945c` (_code @ 0x2b945c, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 
-int VectorSignedToFloat(...);
+/* A table 0x4C entry. */
+typedef struct Table4cEntry {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 level;
+    /* 0x04 */ u16 unk04;
+    /* 0x06 */ u16 unk06;
+} Table4cEntry;
 
-typedef struct fn_002b945c_arg0 fn_002b945c_arg0;
-struct fn_002b945c_arg0 {
-    unsigned char pad_0x0[0x2];
-    ushort field_0x2; /* +0x2 */
-    ushort field_0x4; /* +0x4 */
-    ushort field_0x6; /* +0x6 */
-    unsigned char pad_0x8[0x32];
-    undefined1 field_0x3a; /* +0x3a */
-    undefined1 field_0x3b; /* +0x3b */
-    unsigned char pad_0x3c[0x789];
-    undefined1 field_0x7c5; /* +0x7c5 */
-    undefined1 field_0x7c6; /* +0x7c6 */
-    unsigned char pad_0x7c7[0xdfd];
-    undefined4 field_0x15c4; /* +0x15c4 */
-    unsigned char pad_0x15c8[0xa0];
-    undefined2 field_0x1668; /* +0x1668 */
-    undefined2 field_0x166a; /* +0x166a */
-};
+Table4cEntry *dataTable4CGetEntry(s32 id);
+u32 randRange(s32 max);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned short randRange(unsigned int);
-extern int gameFlagsGetBlock(void);
-extern int dataTable4CGetEntry(fn_002b945c_arg0 *);
-
-
-void FUN_002b945c(fn_002b945c_arg0 *param_1)
-
+/* Loads table 0x4C entry `id` into the flag block, with a level of -1 when it has none and at most 15. */
+void FUN_002b945c(s32 id)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  unsigned int temp_v4;
-  
-  temp_v2 = gameFlagsGetBlock();
-  temp_v3 = dataTable4CGetEntry(param_1);
-  *(unsigned char *)(temp_v2 + 0x7c6) = 1;
-  *(char *)(temp_v2 + 0x3a) = (char)*(unsigned short *)(temp_v3 + 4);
-  temp_v4 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(char *)(temp_v2 + 0x3b) = (char)*(unsigned short *)(temp_v3 + 6);
-  *(char *)(temp_v2 + 0x7c5) = (char)*(unsigned short *)(temp_v3 + 2);
-  *(unsigned char *)(temp_v2 + 0x7c6) = 100;
-  *(unsigned int *)(temp_v2 + 0x1520) = 0;
-  *(unsigned int *)(temp_v2 + 0x15c4) = temp_v4;
-  temp_v1 = randRange(4);
-  *(unsigned short *)(temp_v2 + 0x1668) = temp_v1;
-  temp_v1 = randRange(100);
-  *(unsigned short *)(temp_v2 + 0x166a) = temp_v1;
-  if (*(char *)(temp_v2 + 0x7c5) == '\0') {
-    temp_v0 = 0xff;
-  }
-  else {
-    if (*(char *)(temp_v2 + 0x7c5) < '\x10') {
-      return;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    Table4cEntry *entry = dataTable4CGetEntry(id);
+    flags->table4c.rate = 1;
+    flags->table4cHead.unk3a = entry->unk04;
+    flags->table4cHead.unk3b = entry->unk06;
+    flags->table4c.level = entry->level;
+    flags->table4c.rate = 100;
+    flags->table4c.unk1520 = 0;
+    flags->table4c.id = id;
+    flags->table4c.random4 = randRange(4);
+    flags->table4c.random100 = randRange(100);
+    if (flags->table4c.level == 0) {
+        flags->table4c.level = -1;
+    } else if (flags->table4c.level > 15) {
+        flags->table4c.level = 15;
     }
-    temp_v0 = 0xf;
-  }
-  *(unsigned char *)(temp_v2 + 0x7c5) = temp_v0;
-  return;
 }
 
 } /* extern "C" */

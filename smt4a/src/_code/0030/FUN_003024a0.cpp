@@ -1,12 +1,8 @@
-#include "common.h"
+#include "battle/btlView.h"
 
 extern "C" {
 
-typedef struct Global5f0c7c {
-    /* 0x00 */ u8 unk00[0xA0];
-    /* 0xA0 */ u8 value;
-} Global5f0c7c;
-extern Global5f0c7c g_battleViewState;
+extern BattleViewState g_battleViewState;
 
 s32 gameFlagIsSet(u32 flag);
 
@@ -17,7 +13,7 @@ void FUN_003024a0(u8 value)
 
     flag = gameFlagIsSet(0x4D0);
     if (flag != 0) {
-        g_battleViewState.value = value;
+        g_battleViewState.unkA0 = value;
     }
 }
 

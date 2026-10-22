@@ -1,52 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00394a80` (_code @ 0x394a80, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldreq r2, [pc, #96] differs from recovered ldreq r2, [pc, #108]. */
+#include "common.h"
+
+// Private view of the fallback table's 16-byte records.
+struct TableEntryView {
+    u16 id;             // 0x00
+    u8 unk02[6];        // 0x02
+    u32 unk08;          // 0x08
+    u16 unk0C;          // 0x0C
+    u8 unk0E[2];        // 0x0E
+};
 
 extern "C" {
+extern const TableEntryView DAT_0043988c[3];
+s32 jyoucyuGetTableEntry(u32 tableId);
+s32 FUN_002505c0(u32 index, u32 argument, u32 entryValue, u32 flag,
+                 u32 unkStack0, u32 unkStack4, u32 unkStack8);
 
-int FUN_002505c0(unsigned int, unsigned int);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_002505c0. */
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-unsigned int FUN_00394a80(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Dispatches at most the first matching fallback record when table 1 is unavailable.
+u32 FUN_00394a80(u32 id, u32 argument, s32 indexOffset)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  
-  temp_v1 = jyoucyuGetTableEntry(1);
-  if (temp_v1 == 0) {
-    temp_v1 = 0x43988c;
-    temp_v2 = 0;
-    do {
-      temp_v0 = temp_v2 * 0x10;
-      puVar4 = (unsigned short *)(temp_v0 + 0x43988c);
-      if (*puVar4 == param_1) {
-        if (puVar4 != (unsigned short *)0x0) {
-          temp_v1 = *(int *)(temp_v0 + 0x439894);
-        }
-        if (puVar4 == (unsigned short *)0x0 || temp_v1 == 0) {
-          return 0;
-        }
-        FUN_002505c0((unsigned int)*(unsigned short *)(temp_v0 + 0x439898) + param_3,param_2);
-        return 0;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 3);
-  }
-  return 0;
-}
+    if (jyoucyuGetTableEntry(1) == 0) {
+        for (s32 index = 0; index < 3; ++index) {
+            const TableEntryView* entry = &DAT_0043988c[index];
+            if (entry->id != id)
+                continue;
 
-} /* extern "C" */
+            if (entry != 0 && entry->unk08 != 0) {
+                FUN_002505c0(entry->unk0C + indexOffset, argument,
+                             entry->unk08, 1, 0, 0, 0);
+            }
+            break;
+        }
+    }
+    return 0;
+}
+}

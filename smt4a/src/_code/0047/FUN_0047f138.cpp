@@ -1,52 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047f138` (_code @ 0x47f138, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldreq r2, [pc, #96] differs from recovered ldreq r2, [pc, #104]. */
+#include "common.h"
 
-extern "C" {
+// Private view of the 16-byte records referenced by this function.
+namespace {
 
-int FUN_004fb43c(unsigned int, unsigned int);
+struct TableEntryView {
+    u16 id;             // 0x00
+    u8 unk02[6];        // 0x02
+    u32 unk08;          // 0x08
+    u16 unk0C;          // 0x0C
+    u8 unk0E[2];        // 0x0E
+};
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_004fb43c. */
-
-
-unsigned int FUN_0047f138(unsigned int param_1,unsigned int param_2,int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  
-  temp_v1 = jyoucyuGetTableEntry(1);
-  if (temp_v1 == 0) {
-    temp_v1 = 0x57a4c4;
-    temp_v2 = 0;
-    do {
-      temp_v0 = temp_v2 * 0x10;
-      puVar4 = (unsigned short *)(temp_v0 + 0x57a4c4);
-      if (*puVar4 == param_1) {
-        if (puVar4 != (unsigned short *)0x0) {
-          temp_v1 = *(int *)(temp_v0 + 0x57a4cc);
-        }
-        if (puVar4 == (unsigned short *)0x0 || temp_v1 == 0) {
-          return 0;
-        }
-        FUN_004fb43c((unsigned int)*(unsigned short *)(temp_v0 + 0x57a4d0) + param_3,param_2);
-        return 0;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 3);
-  }
-  return 0;
 }
 
-} /* extern "C" */
+extern "C" {
+extern const TableEntryView DAT_0057a4c4[3];
+s32 jyoucyuGetTableEntry(u32 tableId);
+s32 FUN_004fb43c(u32 index, u32 argument, u32 entryValue, u32 flag,
+                 u32 unkStack0, u32 unkStack4, u32 unkStack8);
+
+// Dispatches the first matching fallback entry when table 1 is unavailable.
+u32 FUN_0047f138(u32 id, u32 argument, s32 indexOffset)
+{
+    if (jyoucyuGetTableEntry(1) == 0) {
+        for (s32 index = 0; index < 3; ++index) {
+            const TableEntryView* entry = &DAT_0057a4c4[index];
+            if (entry->id == id) {
+                if (entry != 0 && entry->unk08 != 0) {
+                    FUN_004fb43c(entry->unk0C + indexOffset, argument,
+                                 entry->unk08, 1, 0, 0, 0);
+                }
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+}

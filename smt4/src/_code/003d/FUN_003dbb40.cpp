@@ -1,51 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dbb40` (_code @ 0x3dbb40, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materializes the path-string table address and the path buffer pointer in r5 around the formatting calls; armcc here loads them at each use. */
+#include "common.h"
+
+namespace {
+struct LoadedFile {
+    /* 0x00 */ u8 index;    /* 0xff: not registered */
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ void *data;
+    /* 0x08 */ char name[0x80];
+    /* 0x88 */ u8 flags;    /* bit 0: a load is pending */
+};
+
+struct LoadedFileOwner {
+    /* 0x0000 */ u8 unk0000[0x2f9c];
+    /* 0x2F9C */ LoadedFile file;
+};
+
+struct FilePathStrings {
+    /* 0x00 */ char base[0x20];
+    /* 0x20 */ char format[1];
+};
+}
 
 extern "C" {
 
-int asdLoadFileAsyncSimple(...);
-int textFormatBuffer(...);
-int libc_strcpy(...);
-int asdMemFree(...);
-int memClear(...);
+extern FilePathStrings DAT_004008a4;
+void memClear(void *block, u32 size);
+void asdMemFree(void *block);
+void textFormatBuffer(char *buffer, const char *format, const char *arg);
+char *libc_strcpy(char *dst, const char *src);
+char *FUN_002522e0(const char *string, s32 character);
+s32 keyedRecordFindByName(const char *name);
+void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
 
-extern int keyedRecordFindByName(int);
-extern int FUN_002522e0(unsigned char *, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: memClear. */
-
-
-unsigned int FUN_003dbb40(int param_1)
-
+/* Reset the owner's file slot to the formatted path and start loading it unless it is already registered. */
+s32 FUN_003dbb40(LoadedFileOwner *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  unsigned char temp_v2 [132];
-  
-  *(unsigned char *)(param_1 + 0x2f9c) = 0xff;
-  memClear(param_1 + 0x2fa4,0x80);
-  if (*(int *)(param_1 + 0x2fa0) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0x2fa0) = 0;
-  }
-  *(unsigned char *)(param_1 + 0x3024) = 0;
-  memClear(temp_v1,0x80);
-  memClear(temp_v2,0x80);
-  textFormatBuffer(temp_v2,"battle/effect/%s.eft","ef_d_niyari");
-  libc_strcpy(temp_v1,temp_v2);
-  temp_v0 = FUN_002522e0(temp_v1,0x2f);
-  libc_strcpy(param_1 + 0x2fa4,temp_v0 + 1);
-  temp_v0 = keyedRecordFindByName(param_1 + 0x2fa4);
-  if (temp_v0 == 0xff) {
-    asdLoadFileAsyncSimple(temp_v1,param_1 + 0x2fa0,0);
-    *(unsigned char *)(param_1 + 0x3024) = *(unsigned char *)(param_1 + 0x3024) | 1;
-  }
-  return 1;
+    LoadedFile *file = &owner->file;
+    char path[0x80];
+    char formatted[0x80];
+
+    file->index = 0xff;
+    memClear(owner->file.name, sizeof(owner->file.name));
+    if (file->data != NULL) {
+        asdMemFree(file->data);
+        file->data = NULL;
+    }
+    file->flags = 0;
+    memClear(path, sizeof(path));
+    memClear(formatted, sizeof(formatted));
+    textFormatBuffer(formatted, DAT_004008a4.format, DAT_004008a4.base);
+    libc_strcpy(path, formatted);
+    libc_strcpy(file->name, FUN_002522e0(path, '/') + 1);
+    if (keyedRecordFindByName(file->name) == 0xff) {
+        asdLoadFileAsyncSimple(path, &file->data, 0);
+        file->flags |= 1;
+    }
+    return 1;
 }
 
 } /* extern "C" */

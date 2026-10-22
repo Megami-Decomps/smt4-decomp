@@ -22,7 +22,7 @@ struct IconEquipment {
 extern "C" {
 u32 aocEntryGetKind(u32 id);
 Entry00192690 *contentEntryFindById2(u32 id);
-u8 *FUN_00192550(s32 id);
+u8 *dataTable8FindRecord(s32 id);
 u32 requestKindToId(u32 kind);
 u8 *gameGetPlayerData();
 void FUN_0017ffa8(u32, u32, s32, u32, u32, u32);
@@ -35,7 +35,7 @@ void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
     switch (aocEntryGetKind(id)) {
     case 1:
     case 12:
-        frame = requestKindToId(((WeaponIconEntry *)FUN_00192550(id))->kind);
+        frame = requestKindToId(((WeaponIconEntry *)dataTable8FindRecord(id))->kind);
         break;
     case 0: {
         u8 kind = ((ContentIconEntry *)contentEntryFindById2(id))->kind;

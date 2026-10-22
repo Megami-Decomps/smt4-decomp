@@ -24,7 +24,7 @@ int gameFlagSetValue(...);
 int FUN_00417a60(...);
 int FUN_00418070(...);
 int FUN_004186e0(void);
-int FUN_0047dd18(...);
+int gameStateResetRecord(...);
 int flagValueAdd(int, unsigned int);
 int FUN_004d9de0(void);
 int optionsClearFlag1(void);
@@ -39,7 +39,7 @@ int asdMemFree(...);
 int asdMemFreeSlot(unsigned int);
 int FUN_0023eaf8(void);
 int FUN_0023ff10(void);
-int FUN_002ae320(void);
+int questMarkSelectedSpecialDetail(void);
 int FUN_00320834(void);
 int buttonHelpGetValue(void);
 int FUN_003d474c(void);
@@ -72,7 +72,7 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4894. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002ae320. */
+/* Supplied declaration required: questMarkSelectedSpecialDetail. */
 extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -92,7 +92,7 @@ extern int FUN_004186a4(void);
 /* Supplied declaration required: FUN_004186e0. */
 extern unsigned char partyEntryIsAvailable(unsigned short);
 extern int gameBlockByte27E98Is1To3(void);
-/* Supplied declaration required: FUN_0047dd18. */
+/* Supplied declaration required: gameStateResetRecord. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: FUN_004d9de0. */
 /* Supplied declaration required: optionsClearFlag1. */
@@ -253,7 +253,7 @@ unsigned int FUN_00215cb8(void)
       *(unsigned int *)(temp_v9 + 8) = *(unsigned int *)(temp_v9 + 4);
       *(unsigned int *)(temp_v9 + 4) = temp_v7;
       *(unsigned int *)(temp_v9 + 0x10) = 0;
-      FUN_002ae320();
+      questMarkSelectedSpecialDetail();
     }
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
@@ -546,7 +546,7 @@ unsigned int FUN_00215cb8(void)
       temp_v9 = gameDataBlocksGetSaveData();
       rt_aeabi_memclr(temp_v9 + 0x29814,0x18);
       *(unsigned char *)(temp_v1 + 0x90e) = 1;
-      FUN_0047dd18(g_aocMain + 0xa8);
+      gameStateResetRecord(g_aocMain + 0xa8);
     }
     else {
       *(unsigned char *)(temp_v1 + 0x90d) = 1;

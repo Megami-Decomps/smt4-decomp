@@ -1,54 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00234330` (_code @ 0x234330, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: dest and the first ID trade callee-saved registers with the second name (r5/r7 vs r6/r5). */
+#include "common.h"
 
 extern "C" {
 
-int stringFormatUnbounded(unsigned char [68], unsigned int, unsigned int, unsigned int);
-int rt_memcpy(unsigned int, unsigned char [68], int);
+const char *FUN_0035a010(u32 value);
+const char *FUN_0035a060(u32 value);
+s32 stringFormatUnbounded(char *dest, const char *format, ...);
+void rt_memcpy(void *dest, const void *src, u32 size);
 
-/* Supplied declaration required: stringFormatUnbounded. */
-extern unsigned int FUN_0035a010(unsigned int);
-extern unsigned int FUN_0035a060(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_00234330(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+static inline const char *naKeyFormat(u32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [68];
-  
-  temp_v0 = FUN_0035a060(param_4);
-  temp_v1 = FUN_0035a010(param_3);
-  switch(param_2) {
-  case 0:
-    temp_v2 = 0x2343d8;
-    break;
-  case 1:
-    temp_v2 = 0x2343e8;
-    break;
-  case 2:
-    temp_v2 = 0x2343fc;
-    break;
-  case 3:
-    temp_v2 = 0x234418;
-    break;
-  case 4:
-    temp_v2 = 0x234434;
-    break;
-  case 5:
-    temp_v2 = 0x234448;
-    break;
-  default:
-    temp_v2 = 0;
-  }
-  stringFormatUnbounded(temp_v3,temp_v2,temp_v1,temp_v0);
-  rt_memcpy(param_1,temp_v3,0x40);
-  return;
+    switch (kind) {
+    case 0:
+        return "NA_NAME_%s_%s";
+    case 1:
+        return "NA_SORT_NAME_%s_%s";
+    case 2:
+        return "NA_DESCRIPTION_SHORT_%s_%s";
+    case 3:
+        return "NA_DESCRIPTION_LONG_%s_%s";
+    case 4:
+        return "NA_DISCLAIMER_%s_%s";
+    case 5:
+        return "NA_ICON_INDEX_%s_%s";
+    default:
+        return NULL;
+    }
+}
+
+// Build the NA_* text key of the given kind (name, sort name, descriptions, disclaimer, icon) for two IDs.
+void FUN_00234330(char *dest, u32 kind, u32 first, u32 second)
+{
+    char key[68];
+    stringFormatUnbounded(key, naKeyFormat(kind), FUN_0035a010(first), FUN_0035a060(second));
+    rt_memcpy(dest, key, 0x40);
 }
 
 } /* extern "C" */

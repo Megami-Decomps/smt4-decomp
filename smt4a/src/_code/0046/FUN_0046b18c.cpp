@@ -18,7 +18,7 @@ int asdLoadFileAsyncSimple(...);
 int messageGetChoiceResult(void);
 int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
-int FUN_003423cc(int);
+int buttonHelpSetSelectedId(int);
 int messageSetIndexedFlag(unsigned int, unsigned int);
 int FUN_003c1060(void);
 int FUN_003fe86c(...);
@@ -53,7 +53,7 @@ extern unsigned int messageMainGetValue(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int messageWindowIsState1(void);
-/* Supplied declaration required: FUN_003423cc. */
+/* Supplied declaration required: buttonHelpSetSelectedId. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: messageSetIndexedFlag. */
 /* Supplied declaration required: FUN_003c1060. */
@@ -117,7 +117,7 @@ void FUN_0046b18c(unsigned int *param_1)
       } while ((int)temp_v2 < (int)param_1[0x2ae]);
       if (0 < (int)param_1[0x2b4]) {
         if (param_1[0x2b4] != 1) {
-          FUN_003423cc(0xa2);
+          buttonHelpSetSelectedId(0xa2);
           pickObjStart(param_1,&LAB_0046b4e0);
           FUN_003c1060();
           if ((char)param_1[6] != '\0') {

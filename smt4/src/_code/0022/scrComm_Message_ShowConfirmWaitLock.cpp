@@ -1,56 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowConfirmWaitLock` (_code @ 0x221264, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, r6, lr}. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
-int scrGetCommandFrame(void);
-int scrCommMessageSetMode(int);
+struct MessageLockView {
+    u8 unk00[0x30]; // 0x00
+    u8 unk30;       // 0x30
+    u8 unk31;       // 0x31
+};
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+struct MessageStateView {
+    u8 unk00[0xA11]; // 0x00
+    u8 unkA11;       // 0xA11
+};
 
-extern int DAT_0043e18c; /* 0x43e18c */
-extern int DAT_0043e190; /* 0x43e190 */
+struct MessageMainView {
+    u32 unk00;                  // 0x00
+    MessageStateView* unk04;    // 0x04
+    MessageLockView* unk08;     // 0x08
+};
 
-extern unsigned int FUN_002865f8(void);
-/* Supplied declaration required: FUN_002866b4. */
-/* Supplied declaration required: scrGetCommandFrame. */
-/* Supplied declaration required: scrCommMessageSetMode. */
-extern unsigned int scrGetArg(unsigned int);
-
-
-void scrComm_Message_ShowConfirmWaitLock(void)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  scrCommMessageSetMode(0);
-  temp_v1 = scrGetCommandFrame();
-  temp_v0 = DAT_0043e190;
-  if (temp_v1 == 0) {
-    if (DAT_0043e190 != 0) {
-      *(unsigned char *)(DAT_0043e190 + 0x30) = 1;
-    }
-    *(unsigned char *)(temp_v0 + 0x31) = 1;
-  }
-  if (DAT_0043e18c != 0) {
-    *(unsigned char *)(DAT_0043e18c + 0xa11) = 0x14;
-  }
-  temp_v2 = FUN_002865f8();
-  temp_v3 = scrGetArg(0);
-  temp_v4 = scrGetCommandFrame();
-  FUN_002866b4(temp_v2,temp_v3,temp_v4,6,1,0);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern MessageMainView g_messageMain;
+void scrCommMessageSetMode(s32 mode);
+s32 scrGetCommandFrame(void);
+u32 FUN_002865f8(void);
+u32 scrGetArg(u32 index);
+void FUN_002866b4(u32 message, u32 argument, s32 frame, s32 mode,
+                  s32 wait, s32 unused);
+}
+
+// Set the confirmation locks on the first frame and advance the waiting message.
+extern "C" void scrComm_Message_ShowConfirmWaitLock(void)
+{
+    scrCommMessageSetMode(0);
+    if (scrGetCommandFrame() == 0) {
+        MessageLockView* lock = g_messageMain.unk08;
+        if (lock != 0) {
+            lock->unk30 = 1;
+        }
+        lock->unk31 = 1;
+    }
+
+    if (g_messageMain.unk04 != 0) {
+        g_messageMain.unk04->unkA11 = 0x14;
+    }
+
+    u32 message = FUN_002865f8();
+    u32 argument = scrGetArg(0);
+    s32 frame = scrGetCommandFrame();
+    FUN_002866b4(message, argument, frame, 6, 1, 0);
+}

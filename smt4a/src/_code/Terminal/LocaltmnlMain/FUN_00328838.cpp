@@ -26,7 +26,7 @@ int mapPlaceSet(...);
 int FUN_00324c48(...);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
-int FUN_00387ac4(...);
+int buttonHelpSetMode(...);
 int sysPlayVoice(...);
 int FUN_003d2158(...);
 int soundChannelStopAll(...);
@@ -172,7 +172,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: FUN_0036b824. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_00387ac4. */
+/* Supplied declaration required: buttonHelpSetMode. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -640,9 +640,9 @@ unsigned int FUN_00328838(void)
     if (temp_v4 != 2) break;
     *(unsigned char *)(temp_v0 + 0x558) = 0;
     sysPlayVoice(0x10000b2);
-    FUN_00387ac4(0);
+    buttonHelpSetMode(0);
     sysPlaySe(0x59);
-    FUN_00387ac4(0);
+    buttonHelpSetMode(0);
     *(unsigned int *)(temp_v0 + 8) = 5;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     FUN_00214da4();

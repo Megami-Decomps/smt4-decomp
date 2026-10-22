@@ -1,6 +1,5 @@
 /* NON_MATCHING: unit and four identifier arguments are assigned different saved registers from retail. */
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 struct BattleMainState;
 
 extern "C" {

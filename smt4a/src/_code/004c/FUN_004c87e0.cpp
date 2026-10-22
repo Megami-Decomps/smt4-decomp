@@ -6,7 +6,7 @@ extern BtlHelpA *g_btlHelp;
 
 bool FUN_004c87e0(void)
 {
-    return g_btlHelp->unk08 >= 2;
+    return g_btlHelp->state >= 2;
 }
 
 } /* extern "C" */

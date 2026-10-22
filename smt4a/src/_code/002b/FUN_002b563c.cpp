@@ -1,41 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b563c` (_code @ 0x2b563c, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: point preservation uses a different VFP register pair and the state checks share an epilogue. */
+#include "battle/btlView.h"
+#include "shard/W6_W6Match6_CollisionQuad.h"
+
+struct BattleViewCollisionPosition {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ CollisionVector position;
+};
 
 extern "C" {
+extern BattleViewState g_battleViewState;
+bool gameFlagIsSet(u32 flag);
+bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first,
+                               f32 firstRadius, CollisionVector second, f32 secondRadius);
 
-int mapResolveCircleOverlapXZ(int *);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int DAT_005f0c84; /* 0x5f0c84 */
-extern signed char DAT_005f0cf9; /* 0x5f0cf9 */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: mapResolveCircleOverlapXZ. */
-
-
-unsigned int FUN_002b563c(unsigned int *param_1)
-
+bool FUN_002b563c(CollisionVector *result, CollisionVector point)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  
-  temp_v0 = gameFlagIsSet(0x4d0);
-  if (((temp_v0 != 0) && (DAT_005f0c84 == 1)) && (DAT_005f0cf9 == '\0')) {
-    mapResolveCircleOverlapXZ(&temp_v1);
-    *param_1 = temp_v1;
-    param_1[1] = uStack_24;
-    param_1[2] = uStack_20;
-    return 1;
-  }
-  return 0;
+    if (!gameFlagIsSet(0x4d0) || g_battleViewState.attachments.state != 1 ||
+        g_battleViewState.unk7d[0] != 0) {
+        return false;
+    }
+    CollisionVector resolved;
+    const BattleViewCollisionPosition *view =
+        (const BattleViewCollisionPosition *)&g_battleViewState;
+    mapResolveCircleOverlapXZ(&resolved, point, 50.0f, view->position, 0.0f);
+    *result = resolved;
+    return true;
 }
-
-} /* extern "C" */
+}

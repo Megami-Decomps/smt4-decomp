@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int FUN_001e4a84(...); /* 0x1e4a84 */
+extern int btlEffectDispatchCurrentJob(...); /* 0x1e4a84 */
 extern unsigned char LAB_001f8230; /* 0x1f8230 */
 extern unsigned char LAB_001f8244; /* 0x1f8244 */
 extern int FUN_0020ee0c(...); /* 0x20ee0c */
@@ -40,7 +40,7 @@ void FUN_001f8158(unsigned int *param_1)
   unsigned int temp_v0;
   
   puVar1 = &LAB_001f8230;
-  taskCreateDraw(&LAB_001f8230,2,0,0,FUN_001e4a84,btlEffectDestroy,param_1,*param_1);
+  taskCreateDraw(&LAB_001f8230,2,0,0,btlEffectDispatchCurrentJob,btlEffectDestroy,param_1,*param_1);
   param_1[0xe] = (unsigned int)puVar1;
   temp_v0 = 0;
   effectProcessCreate();

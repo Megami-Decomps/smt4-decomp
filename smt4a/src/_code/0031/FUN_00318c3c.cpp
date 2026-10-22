@@ -13,7 +13,7 @@ int asdTMTexTableFreeEntry(int);
 int helpReleaseDataTable(void);
 int campButtonHelpRelease(void);
 int FUN_0038b3f8(int, int);
-int FUN_003a7a88(int, int);
+int devilIsTextureLoaded(int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern int FUN_00187168(void);
 /* Supplied declaration required: helpReleaseDataTable. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 extern int FUN_003e4d68(unsigned int);
 
 
@@ -77,7 +77,7 @@ void FUN_00318c3c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     temp_v3 = temp_v3 + 1;
   } while ((int)temp_v3 < 0xc);
   temp_v2 = (int)*(short *)(param_1 + 0x4b14);
-  if (((temp_v2 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) && (FUN_003a7a88(temp_v2,1), temp_v2 != 0)
+  if (((temp_v2 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) && (devilIsTextureLoaded(temp_v2,1), temp_v2 != 0)
      ) {
     FUN_0038b3f8((int)*(short *)(param_1 + 0x4b14),1);
   }

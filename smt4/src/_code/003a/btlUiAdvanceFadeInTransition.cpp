@@ -14,10 +14,10 @@ extern BtlUiGlobals g_btlUi;
 void btlUiAdvanceFadeInTransition(void)
 {
     BtlUi *ui = g_btlUi.ui;
-    s32 *state = &ui->state;
+    s32 *state = &ui->panelState.state;
 
     if (*state == 9) {
-        FUN_0033c6f8(ui->unk7E20);
+        FUN_0033c6f8(ui->panelState.unk20);
         FUN_002251d4(&ui->objC);
         *state = 7;
         ui = g_btlUi.ui;

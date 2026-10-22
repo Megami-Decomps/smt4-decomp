@@ -31,7 +31,7 @@ int memCopy(void);
 int libc_strcpy(unsigned int [60], int);
 int __aeabi_memset4(unsigned int [60], int, unsigned int);
 int gameDataFlagsClearAndRefresh(int);
-int FUN_002c5758(int);
+int gameDataRemoveHomeButtonHold(int);
 int FUN_002cd680(void);
 int FUN_002cef34(int);
 int FUN_002e1b20(void);
@@ -89,7 +89,7 @@ extern int recordPackedValue(unsigned short);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: gameDataFlagsClearAndRefresh. */
-/* Supplied declaration required: FUN_002c5758. */
+/* Supplied declaration required: gameDataRemoveHomeButtonHold. */
 extern int cecSlotGet(int);
 /* Supplied declaration required: FUN_002cd680. */
 extern int FUN_002cdecc(int);
@@ -169,7 +169,7 @@ unsigned int FUN_002ec588(int param_1)
     *(int *)(temp_v13 + 0x4c) = temp_v8;
     if (temp_v8 < 1) {
       FUN_002ecfe4();
-      FUN_002c5758(2);
+      gameDataRemoveHomeButtonHold(2);
       gameDataFlagsClearAndRefresh(2);
       runWinClose();
       *(unsigned int *)(param_1 + 0xd2c) = 6;
@@ -181,7 +181,7 @@ unsigned int FUN_002ec588(int param_1)
     if (temp_v2 != 0) {
       FUN_002ecfe4();
       FUN_00220ffc();
-      FUN_002c5758(2);
+      gameDataRemoveHomeButtonHold(2);
       gameDataFlagsClearAndRefresh(2);
       break;
     }

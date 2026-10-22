@@ -1,55 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021be00` (_code @ 0x21be00, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The enemy-filter owner address is loaded after the table count instead of before the initial lookup. */
+#include "map/EnemyTableFilter.h"
+#include "map/mapDepart.h"
 
 extern "C" {
+extern EnemyTableFilterState g_mapEnemy;
+extern GameState g_gameState;
+extern u32 DAT_004a0be4[256];
+EnemyTableLocation *dataTable29Sub0GetEntryWithAoc(s32 index);
+s32 dataTableGetRecordFortyOne(void);
+void memClear(void *memory, u32 size);
 
-int dataTable29Sub0GetEntryWithAoc(void);
-int memClear(unsigned char *, int);
-
-extern int DAT_00447604; /* 0x447604 */
-extern unsigned int g_gameState; /* 0x49f91c */
-extern unsigned char DAT_004a0be4; /* 0x4a0be4 */
-
-extern int dataTableGetRecordFortyOne(void);
-/* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
-/* Supplied declaration required: memClear. */
-
-
+/* Rebuilds the field-enemy entry index for the current map and area. */
 void FUN_0021be00(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  char *pcVar3;
-  int *unaff_r6;
-  unsigned char *unaff_r8;
-  
-  temp_v0 = 0;
-  dataTable29Sub0GetEntryWithAoc();
-  if (temp_v0 != 0) {
-    memClear(&DAT_004a0be4,0x400);
-    temp_v0 = dataTableGetRecordFortyOne();
-    if (0 < temp_v0) {
-      unaff_r6 = (int *)&g_gameState;
-      unaff_r8 = &DAT_004a0be4;
-    }
-    pcVar3 = (char *)0x0;
-    DAT_00447604 = 0;
-    if (0 < temp_v0) {
-      do {
-        pcVar2 = pcVar3;
-        dataTable29Sub0GetEntryWithAoc();
-        if (((*pcVar2 != -1) && ((int)*pcVar2 == *unaff_r6)) && ((int)pcVar2[1] == unaff_r6[1])) {
-          *(char **)(unaff_r8 + DAT_00447604 * 4) = pcVar3;
-          DAT_00447604 = DAT_00447604 + 1;
+    if (dataTable29Sub0GetEntryWithAoc(0) != NULL) {
+        memClear(DAT_004a0be4, 0x400);
+        s32 total = dataTableGetRecordFortyOne();
+        g_mapEnemy.count = 0;
+        for (s32 index = 0; index < total; ++index) {
+            EnemyTableLocation *location = dataTable29Sub0GetEntryWithAoc(index);
+            if (location->mapId != -1 && location->mapId == g_gameState.unk000 &&
+                location->areaId == *reinterpret_cast<const s32 *>(g_gameState.unk004)) {
+                DAT_004a0be4[g_mapEnemy.count++] = index;
+            }
         }
-        pcVar3 = pcVar3 + 1;
-      } while ((int)pcVar3 < temp_v0);
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

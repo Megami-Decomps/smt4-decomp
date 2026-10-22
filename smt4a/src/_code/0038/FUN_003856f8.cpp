@@ -1,39 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003856f8` (_code @ 0x3856f8, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r5, [pc, #128] differs from recovered ldr r5, [pc, #96]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int FUN_003fd7c0(...);
+struct LmapSceneEntryView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+struct LmapSceneView {
+    u8 unk00[0x18c]; // 0x00
+    LmapSceneEntryView* unk18C; // 0x18c
+};
 
-extern int g_lmapScene; /* 0x581288 */
-
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_002e5db4(void);
-/* Supplied declaration required: FUN_003fd7c0. */
-
-
-void FUN_003856f8(unsigned int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (*(int *)(g_lmapScene + 0x18c) == 0) {
-    return;
-  }
-  temp_v0 = gameFlagIsSet(0x4c9);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002e5db4(), temp_v0 == 0)) {
-    FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),3,2);
-    return;
-  }
-  FUN_003fd7c0(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4),param_1,2);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern LmapSceneView* g_lmapScene;
+extern s32 gameFlagIsSet(u32 flag);
+extern s32 FUN_002e5db4(void);
+extern void FUN_003fd7c0(u32 target, u32 mode, u32 option, f32 amount);
+}
+
+// Apply the requested mode, with a mode-3, amount-10 override when required by game state.
+extern "C" void FUN_003856f8(u32 mode)
+{
+    if (g_lmapScene->unk18C == 0) {
+        return;
+    }
+
+    f32 amount = 0.0f;
+    if (gameFlagIsSet(0x4c9) != 0 && FUN_002e5db4() == 0) {
+        mode = 3;
+        amount = 10.0f;
+    }
+
+    FUN_003fd7c0(g_lmapScene->unk18C->unk04, mode, 2, amount);
+}

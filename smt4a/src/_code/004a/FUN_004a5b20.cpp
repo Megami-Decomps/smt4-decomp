@@ -34,7 +34,7 @@ extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_004a833c. */
 /* Supplied declaration required: FUN_004a8584. */
 extern int FUN_004bb80c(int index);
-extern int FUN_004bbae0(unsigned int, int, int);
+extern int dataTableFindEntryOccurrenceByBytePair(unsigned int, int, int);
 extern int dataTableGetRecord02(void);
 /* Supplied declaration required: FUN_004cfeb0. */
 
@@ -71,7 +71,7 @@ void FUN_004a5b20(int param_1)
   do {
     temp_v9 = 0;
 LAB_004a5b5c:
-    temp_v14 = FUN_004bbae0(*temp_v15,temp_v8,temp_v9);
+    temp_v14 = dataTableFindEntryOccurrenceByBytePair(*temp_v15,temp_v8,temp_v9);
     if (temp_v14 != 0) {
       temp_v10 = 0;
       temp_v0 = *(short *)(temp_v14 + 0x12);

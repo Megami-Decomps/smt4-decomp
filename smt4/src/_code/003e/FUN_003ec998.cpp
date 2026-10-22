@@ -1,46 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ec998` (_code @ 0x3ec998, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vector initialization is an explicit loop rather than retail's C++ array-construction helper. */
+#include "common.h"
+
+struct DefaultVector4 {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+    /* 0x0c */ f32 w;
+};
+struct GraphicsVectorDefaults {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ f32 unk1c[4];
+    /* 0x2c */ DefaultVector4 vectors[4];
+};
 
 extern "C" {
+extern u32 DAT_0044ea20[2];
+extern GraphicsVectorDefaults DAT_004d4680;
+extern u32 DAT_004d4914[4];
+void vectorSetAllOne(DefaultVector4 *vector);
+u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
-int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
-
-extern unsigned char LAB_00141adc; /* 0x141adc */
-extern unsigned int DAT_0044ea20; /* 0x44ea20 */
-extern unsigned int DAT_0044ea24; /* 0x44ea24 */
-extern unsigned int DAT_004d469c; /* 0x4d469c */
-extern unsigned int DAT_004d46a0; /* 0x4d46a0 */
-extern unsigned int DAT_004d46a4; /* 0x4d46a4 */
-extern unsigned int DAT_004d46a8; /* 0x4d46a8 */
-extern unsigned int DAT_004d46ac; /* 0x4d46ac */
-extern unsigned int DAT_004d4914; /* 0x4d4914 */
-extern unsigned int DAT_004d4918; /* 0x4d4918 */
-extern unsigned int DAT_004d491c; /* 0x4d491c */
-extern unsigned int DAT_004d4920; /* 0x4d4920 */
-
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_003ec998(unsigned int param_1,unsigned int param_2,unsigned int *param_3)
-
+void FUN_003ec998(u32 first, u32 second, u32 *output)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_3 = param_1;
-  param_3[1] = param_2;
-  DAT_0044ea20 = 0;
-  DAT_0044ea24 = 0;
-  DAT_004d469c = 0x3f800000;
-  DAT_004d46a0 = 0x3f800000;
-  DAT_004d46a4 = 0x3f800000;
-  DAT_004d46a8 = 0x3f800000;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004d46ac,&LAB_00141adc,0x10,4);
-  DAT_004d4914 = packNibblesAndByte(6,7,0);
-  DAT_004d4918 = packNibblesAndByte(6,1,0);
-  DAT_004d491c = packNibblesAndByte(6,1,2);
-  DAT_004d4920 = packNibblesAndByte(5,0,1);
-  return;
+    output[0] = first;
+    output[1] = second;
+    DAT_0044ea20[0] = 0;
+    DAT_0044ea20[1] = 0;
+    DAT_004d4680.unk1c[0] = 1.0f;
+    DAT_004d4680.unk1c[1] = 1.0f;
+    DAT_004d4680.unk1c[2] = 1.0f;
+    DAT_004d4680.unk1c[3] = 1.0f;
+    for (u32 index = 0; index < 4; ++index) {
+        vectorSetAllOne(&DAT_004d4680.vectors[index]);
+    }
+    DAT_004d4914[0] = packNibblesAndByte(6, 7, 0);
+    DAT_004d4914[1] = packNibblesAndByte(6, 1, 0);
+    DAT_004d4914[2] = packNibblesAndByte(6, 1, 2);
+    DAT_004d4914[3] = packNibblesAndByte(5, 0, 1);
 }
-
-} /* extern "C" */
+}

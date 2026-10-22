@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00230434(int, int);
+int listCursorSetPage(int, int);
 int FUN_002306f8(unsigned int *, int, int);
 int FUN_00233670(int, int, int, int);
 int FUN_00233730(int, int, int, int);
@@ -29,11 +29,11 @@ extern unsigned char LAB_003a05c4; /* 0x3a05c4 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int FUN_0022f1b8(unsigned int);
-/* Supplied declaration required: FUN_00230434. */
+/* Supplied declaration required: listCursorSetPage. */
 /* Supplied declaration required: FUN_002306f8. */
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_00233730. */
-extern int FUN_00246570(unsigned int *);
+extern int aocItemGetPrice(unsigned int *);
 /* Supplied declaration required: aocRecordLookup83. */
 extern int FUN_0028e9d0(unsigned int);
 extern int FUN_0028fb3c(unsigned int);
@@ -122,7 +122,7 @@ LAB_003a4374:
               if (*temp_v14 != 0) {
                 temp_v12 = romwright_piece_2_2(temp_v0 | 2 | ((*temp_v14 & 0xff) << 2),temp_v2);
               }
-              temp_v5 = FUN_00246570(&temp_v12);
+              temp_v5 = aocItemGetPrice(&temp_v12);
               *temp_v15 = *temp_v15 + temp_v5;
             }
           }
@@ -141,7 +141,7 @@ LAB_003a4374:
       temp_v13 = 1;
       FUN_00233730(temp_v9,10,*(unsigned short *)(temp_v3 + 0x15d1c),0);
       *(unsigned char *)(temp_v16 + 0x9cb5) = 1;
-      FUN_00230434(temp_v9,1);
+      listCursorSetPage(temp_v9,1);
       piVar10 = (int *)(temp_v16 + 0x85c);
       (**(romwright_code **)(**(int **)(temp_v16 + 0x85c) + 8))(*(int **)(temp_v16 + 0x85c),temp_v9);
       puVar13 = (unsigned short *)(*piVar10 + 4);

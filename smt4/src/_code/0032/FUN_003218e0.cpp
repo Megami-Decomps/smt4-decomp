@@ -1,51 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003218e0` (_code @ 0x3218e0, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
+
+/* A table 0x2F section 1 entry, keyed by its first word. */
+struct Table2fSub1Entry {
+    /* 0x00 */ s32 id;        /* -1 ends the list */
+    /* 0x04 */ u8 unk04[0x14];
+};
 
 extern "C" {
 
-int dataTableGetCount(...);
-int dataTableGet(int, int);
-
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
-
-
-unsigned int FUN_003218e0(int param_1)
-
+/* Entry `index` of the section, or NULL past its end. */
+static Table2fSub1Entry *tableEntry(void *section, u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int *piVar4;
-  unsigned int temp_v3;
-  
-  temp_v3 = 0;
-  dataTableGet(0x2f,1);
-  temp_v0 = dataTableGetCount();
-  if (0 < temp_v0) {
-    do {
-      temp_v1 = dataTableGet(0x2f,1);
-      temp_v0 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v1);
-      piVar4 = (int *)0x0;
-      if (temp_v3 < temp_v2) {
-        piVar4 = (int *)(temp_v0 + temp_v3 * 0x18);
-      }
-      if (*piVar4 == -1) {
-        return 0xffffffff;
-      }
-      if (*piVar4 == param_1) {
-        return temp_v3;
-      }
-      temp_v3 = temp_v3 + 1;
-      dataTableGet(0x2f,1);
-      temp_v0 = dataTableGetCount();
-    } while ((int)temp_v3 < temp_v0);
-  }
-  return 0xffffffff;
+    Table2fSub1Entry *entries = static_cast<Table2fSub1Entry *>(dataTableGetEntries(section));
+    u32 count = dataTableGetCount(section);
+
+    if (index >= count) {
+        return NULL;
+    }
+    return &entries[index];
+}
+
+/* The index of the table 0x2F section 1 entry whose id is `id`; -1 when the -1 terminator or the end comes first. */
+s32 FUN_003218e0(s32 id)
+{
+    s32 index;
+
+    for (index = 0; index < (s32)dataTableGetCount(dataTableGet(0x2f, 1)); index++) {
+        Table2fSub1Entry *entry = tableEntry(dataTableGet(0x2f, 1), index);
+
+        if (entry->id == -1) {
+            break;
+        }
+        if (entry->id == id) {
+            return index;
+        }
+    }
+    return -1;
 }
 
 } /* extern "C" */

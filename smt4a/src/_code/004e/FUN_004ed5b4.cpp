@@ -106,7 +106,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: btlUIClearWorkTables. */
 extern int FUN_004abac8(int);
 /* Supplied declaration required: FUN_004abfd0. */
-extern int FUN_004abfec(int);
+extern int btlUiIsMenuSceneActive(int);
 /* Supplied declaration required: FUN_004c1114. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
@@ -264,7 +264,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
     *param_2 = temp_v20;
   }
   temp_v19 = btlScriptUnitHasFlags(*param_1);
-  if ((temp_v19 != 0) && (temp_v19 = FUN_004abfec(g_btlUiBlock), temp_v19 == 0)) {
+  if ((temp_v19 != 0) && (temp_v19 = btlUiIsMenuSceneActive(g_btlUiBlock), temp_v19 == 0)) {
     return 0;
   }
   temp_v19 = *param_1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdDeallocateArrayStorage(int, int, int);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(int [21], int);
 
@@ -19,7 +19,7 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 extern unsigned short *FUN_001006c2(int, unsigned int);
 /* Supplied declaration required: asdDeallocateArrayStorage. */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
 extern int flagValueIsPositive(int);
@@ -243,7 +243,7 @@ void FUN_00335c6c(void)
       do {
         temp_v8 = (unsigned int)*puVar23;
         temp_v5 = 0;
-        FUN_00192550();
+        dataTable8FindRecord();
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 0x32);
         dataTable04FindById();
         if ((temp_v2 && temp_v8 != 0) && (*(char *)(temp_v8 + 0x23) == '\0')) {
@@ -322,7 +322,7 @@ LAB_00336174:
       if ((unsigned short *)*piVar24 != puVar23) {
         do {
           temp_v8 = (unsigned int)*puVar23;
-          FUN_00192550();
+          dataTable8FindRecord();
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 0x32);
           dataTable04FindById();
           if (temp_v8 != 0) {

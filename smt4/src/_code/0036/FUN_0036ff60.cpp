@@ -1,61 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036ff60` (_code @ 0x36ff60, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail resolves the offsets with pre-indexed loads into separate registers, tests the result with ands/bmi, and orders the case blocks differently. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0015b6ac(int);
-int FUN_0015b890(int);
-int FUN_0015b9ec(int);
-int FUN_0036eaf0(void);
+/* A resource block that refers to its data through a self-relative offset. */
+typedef struct BinaryResource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 dataOffset;
+} BinaryResource;
 
-/* Supplied declaration required: FUN_0015b6ac. */
-/* Supplied declaration required: FUN_0015b890. */
-/* Supplied declaration required: FUN_0015b9ec. */
-/* Supplied declaration required: FUN_0036eaf0. */
+/* The data a resource refers to: a type signature, and for wrappers a nested offset at 0x1C. */
+typedef struct BinaryResourceData {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ s32 innerOffset;
+} BinaryResourceData;
 
+u32 FUN_0036eaf0(u32 arg);
+void FUN_0015b6ac(BinaryResource *resource);
+void FUN_0015b890(BinaryResource *resource);
+void FUN_0015b9ec(BinaryResource *resource);
 
-int FUN_0036ff60(int param_1,int param_2)
-
+/* The address a self-relative offset points to, or NULL for a zero offset. */
+static __inline BinaryResourceData *binaryResolveOffset(s32 *offset)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 0) {
-    piVar2 = (int *)(temp_v0 + param_1 + 8);
-  }
-  else {
-    piVar2 = (int *)0x0;
-  }
-  FUN_0036eaf0();
-  if (-1 < param_2) {
-    piVar3 = piVar2;
-    if (*piVar2 == 0x20000004) {
-      temp_v0 = piVar2[7];
-      piVar3 = (int *)0x0;
-      if (temp_v0 != 0) {
-        piVar3 = (int *)(temp_v0 + (int)(piVar2 + 7));
-      }
+    return *offset != 0 ? (BinaryResourceData *)((u8 *)offset + *offset) : NULL;
+}
+
+/* Runs FUN_0036eaf0 and, when it succeeds, finishes setting up the resource by its data type. */
+u32 FUN_0036ff60(BinaryResource *resource, u32 arg)
+{
+    BinaryResourceData *data = binaryResolveOffset(&resource->dataOffset);
+    u32 result = FUN_0036eaf0(arg);
+
+    if (result & 0x80000000) {
+        return result;
     }
-    temp_v0 = *piVar3;
-    if (temp_v0 != 0x20000009) {
-      if (temp_v0 != 0x20000011) {
-        if (temp_v0 == 0x20000021) {
-          FUN_0015b9ec(param_1);
-        }
-      }
-      else {
-        FUN_0015b890(param_1);
-      }
+    if (data->type == 0x20000004) {
+        data = binaryResolveOffset(&data->innerOffset);
     }
-    else {
-      FUN_0015b6ac(param_1);
+    switch (data->type) {
+    case 0x20000009:
+        FUN_0015b6ac(resource);
+        break;
+    case 0x20000011:
+        FUN_0015b890(resource);
+        break;
+    case 0x20000021:
+        FUN_0015b9ec(resource);
+        break;
     }
-  }
-  return param_2;
+    return result;
 }
 
 } /* extern "C" */

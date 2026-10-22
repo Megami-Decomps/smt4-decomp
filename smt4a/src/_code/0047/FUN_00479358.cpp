@@ -48,7 +48,7 @@ extern unsigned int *g_aocMain; /* 0x570260 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00169548. */
-extern int FUN_001802d4(int);
+extern int ifTouchIsInitialSelection(int);
 extern int legacyResourceIdRemap(unsigned int *);
 extern int bgmGetStateById(unsigned int);
 extern int scrRunOpcodesStub(unsigned int);
@@ -168,7 +168,7 @@ void FUN_00479358(unsigned int *param_1)
       if (temp_v4 < (int)param_1[0xb0]) {
         do {
           temp_v5 = 0;
-          temp_v0 = FUN_001802d4((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
+          temp_v0 = ifTouchIsInitialSelection((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
           if (temp_v0 != 0) {
             if (temp_v4 != temp_v2) {
               *(unsigned char *)((int)param_1 + 0x2e6) = 1;

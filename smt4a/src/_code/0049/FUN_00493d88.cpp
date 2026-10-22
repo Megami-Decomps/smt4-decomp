@@ -1,42 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00493d88` (_code @ 0x493d88, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Comparator values use different saved registers and omit retail's extra pointer copy for the tie break. */
+#include "common.h"
 
 extern "C" {
+s32 contentGetUpgradedKindValue(u16 id);
+s32 FUN_0049c9a0(const u16 *entry);
+s32 FUN_00192718(u16 id);
 
-extern int FUN_00192718(unsigned short);
-extern int contentGetUpgradedKindValue(unsigned short);
-extern int FUN_0049c9a0(unsigned short *);
-
-
-int FUN_00493d88(unsigned short *param_1,unsigned short *param_2)
-
+/* Sorts selected content kinds by ascending kind value, then by the entry's secondary key. */
+s32 FUN_00493d88(const u16 *left, const u16 *right)
 {
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v3 = 0;
-  temp_v0 = *param_1;
-  temp_v1 = *param_2;
-  temp_v4 = 0;
-  temp_v2 = FUN_00192718(temp_v0);
-  if ((temp_v2 == 2 || temp_v2 == 3) || temp_v2 == 8) {
-    temp_v3 = contentGetUpgradedKindValue(temp_v0);
-  }
-  temp_v2 = FUN_00192718(temp_v1);
-  if ((temp_v2 == 2 || temp_v2 == 3) || temp_v2 == 8) {
-    temp_v4 = contentGetUpgradedKindValue(temp_v1);
-  }
-  temp_v3 = temp_v3 - temp_v4;
-  if (temp_v3 == 0) {
-    temp_v3 = FUN_0049c9a0(param_1);
-    temp_v2 = FUN_0049c9a0(param_2);
-    temp_v3 = temp_v3 - temp_v2;
-  }
-  return temp_v3;
+    s32 leftValue = 0;
+    u16 leftId = *left;
+    u16 rightId = *right;
+    s32 rightValue = 0;
+    s32 kind = FUN_00192718(leftId);
+    if (kind == 2 || kind == 3 || kind == 8) {
+        leftValue = contentGetUpgradedKindValue(leftId);
+    }
+    kind = FUN_00192718(rightId);
+    if (kind == 2 || kind == 3 || kind == 8) {
+        rightValue = contentGetUpgradedKindValue(rightId);
+    }
+    s32 order = leftValue - rightValue;
+    if (order == 0) {
+        order = FUN_0049c9a0(left) - FUN_0049c9a0(right);
+    }
+    return order;
 }
-
-} /* extern "C" */
+}

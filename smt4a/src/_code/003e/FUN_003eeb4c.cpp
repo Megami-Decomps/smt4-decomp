@@ -1,49 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eeb4c` (_code @ 0x3eeb4c, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: call argument scheduling: retail computes the model pointer before storing the stacked 5. */
+#include "common.h"
+
+/* Battle unit as seen by this check: four slot indices, -1 when empty. */
+struct BtlSlotUnit {
+    /* 0x000 */ u8 unk000[0x5b0];
+    /* 0x5b0 */ s16 slots[4];
+};
+
+struct BtlSlotEntry {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s16 modelIndex;
+    /* 0x00a */ u8 unk00a[0x3fe];
+};
+
+struct BtlSlotModel {
+    /* 0x000 */ u8 unk000[0x1d0];
+};
+
+struct BtlSlotContext {
+    /* 0x0000 */ u8 unk0000[0x1ed4];
+    /* 0x1ed4 */ BtlSlotModel *models;
+    /* 0x1ed8 */ u8 unk1ed8[0x124];
+    /* 0x1ffc */ BtlSlotEntry *entries;
+};
 
 extern "C" {
 
-int FUN_004fe764(int, int, int, int, int);
+extern u32 g_btlScriptUnit;
+BtlSlotUnit *btlUnitGet(u32 id);
+void FUN_004fe764(s32, s32, BtlSlotModel *model, s32, s32);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fe764. */
-
-
-void FUN_003eeb4c(int param_1,int param_2)
-
+/* When the script unit has no filled slot, plays effect 8/5 on the entry's model. */
+void FUN_003eeb4c(BtlSlotContext *ctx, s32 entry)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  temp_v2 = temp_v1 + 0x500;
-  temp_v0 = *(short *)(temp_v1 + 0x5b0);
-  temp_v3 = temp_v0 < 0;
-  if (temp_v3) {
-    temp_v0 = *(short *)(temp_v1 + 0x5b2);
-  }
-  if (temp_v3 && temp_v0 < 0) {
-    temp_v3 = *(short *)(temp_v1 + 0x5b4) < 0;
-    if (temp_v3) {
-      temp_v2 = (int)*(short *)(temp_v1 + 0x5b6);
+    BtlSlotUnit *unit = btlUnitGet(g_btlScriptUnit);
+    s32 model;
+
+    if (unit->slots[0] < 0 && unit->slots[1] < 0 && unit->slots[2] < 0 && unit->slots[3] < 0 && entry >= 0) {
+        model = ctx->entries[entry].modelIndex;
+        if (model >= 0) {
+            FUN_004fe764(0, 0, ctx->models + model, 8, 5);
+        }
     }
-    if (((temp_v3 && temp_v2 < 0) && (-1 < param_2)) &&
-       (temp_v2 = (int)*(short *)(*(int *)(param_1 + 0x1ffc) + param_2 * 0x408 + 8), -1 < temp_v2)) {
-      FUN_004fe764(0,0,*(int *)(param_1 + 0x1ed4) + temp_v2 * 0x1d0,8,5);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

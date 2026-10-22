@@ -1,67 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00455698` (_code @ 0x455698, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail resolves each relative pointer from &field (tests the resolved address, rebuilds it for the call with moveq NULL) and pushes before the NULL check; armcc here folds the offset tests. */
+#include "shard/S1NwGfx.h"
+
+/* nw::os::IAllocator as far as this file uses it. */
+class NwAllocator {
+public:
+    virtual void vfunc00();
+    virtual void vfunc04();
+    virtual void *alloc(u32 size, s32 alignment);
+    virtual void free(void *block); /* +0x0C */
+};
+
+namespace {
+struct AllocatedResource {
+    /* 0x00 */ u8 unk00[0xbc];
+    /* 0xBC */ RelativePointer second;
+    /* 0xC0 */ RelativePointer first;
+};
+}
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-
-void FUN_00455698(int *param_1,int param_2)
-
+/* Free a resource's two relatively-addressed buffers, then the resource itself. */
+void FUN_00455698(NwAllocator *allocator, AllocatedResource *resource)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  if (param_2 == 0) {
-    return;
-  }
-  temp_v1 = *(int *)(param_2 + 0xc0);
-  if (temp_v1 != 0) {
-    temp_v0 = param_2 + 0xc0 + temp_v1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  if (temp_v0 != 0) {
-    temp_v2 = temp_v1 != 0;
-    if (temp_v2) {
-      temp_v1 = temp_v1 + param_2 + 0xc0;
+    if (resource != NULL) {
+        if (resource->first.get() != NULL) {
+            allocator->free(resource->first.get());
+            resource->first.offset = 0;
+        }
+        if (resource->second.get() != NULL) {
+            allocator->free(resource->second.get());
+            resource->second.offset = 0;
+        }
+        allocator->free(resource);
     }
-    if (!temp_v2) {
-      temp_v1 = 0;
-    }
-    (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v1);
-    *(unsigned int *)(param_2 + 0xc0) = 0;
-  }
-  temp_v1 = *(int *)(param_2 + 0xbc);
-  if (temp_v1 != 0) {
-    temp_v0 = param_2 + 0xbc + temp_v1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  if (temp_v0 != 0) {
-    temp_v2 = temp_v1 != 0;
-    if (temp_v2) {
-      temp_v1 = temp_v1 + param_2 + 0xbc;
-    }
-    if (!temp_v2) {
-      temp_v1 = 0;
-    }
-    (**(romwright_code **)(*param_1 + 0xc))(param_1,temp_v1);
-    *(unsigned int *)(param_2 + 0xbc) = 0;
-  }
-                    /* WARNING: Could not recover jumptable at 0x00455740. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*param_1 + 0xc))(param_1,param_2);
-  return;
 }
 
 } /* extern "C" */

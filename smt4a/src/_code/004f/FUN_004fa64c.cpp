@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(void);
 int FUN_003f0e20(int, int);
-int FUN_00420e4c(unsigned int, int);
+int attachmentsSetOffset(unsigned int, int);
 int FUN_00421078(unsigned int);
 int FUN_00421514(unsigned int, int);
 int FUN_00421858(unsigned int);
@@ -23,7 +23,7 @@ typedef struct {
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_00420e4c. */
+/* Supplied declaration required: attachmentsSetOffset. */
 /* Supplied declaration required: FUN_00421078. */
 extern int state2CIsNot1(unsigned int);
 /* Supplied declaration required: FUN_00421514. */
@@ -56,7 +56,7 @@ LAB_004fa6d8:
         temp_v3 = btlGetMainState();
         if (temp_v1 != 0) {
           FUN_00421514(*(unsigned int *)(param_1 + 0x33c0),temp_v1 + 8);
-          FUN_00420e4c(*(unsigned int *)(param_1 + 0x33c0),*(int *)(param_1 + 0x33bc) + 0xc);
+          attachmentsSetOffset(*(unsigned int *)(param_1 + 0x33c0),*(int *)(param_1 + 0x33bc) + 0xc);
           FUN_00421858(*(unsigned int *)(param_1 + 0x33c0));
           FUN_004cae0c(temp_v3,*(unsigned int *)(param_1 + 0x33bc),0);
         }

@@ -1,25 +1,20 @@
-#include "common.h"
+#include "title/titleMain.h"
+#include "shard/W6_W6Match2_TitleCommand.h"
 
 extern "C" {
 
-typedef struct TitleFlags {
-    /* 0 */ s8 first;
-    /* 1 */ s8 second;
-} TitleFlags;
-
-extern TitleFlags g_titleFlags;
-extern u32 g_titleScene;
+extern TitleScene *g_titleScene;
 
 extern s32 FUN_002c5210(void);
 extern s32 asdProcessSetCommandListRecording(s32 arg);
-extern s32 FUN_002c3a14(u32 scene);
+extern s32 FUN_002c3a14(TitleScene *scene);
 extern u32 FUN_002c501c(void);
-extern s32 effectRestoreSavedRenderPairs(u32 scene, u32 value);
+extern s32 effectRestoreSavedRenderPairs(TitleScene *scene, u32 value);
 
 /* Per-frame hook: opens the pending screen once both flags allow it, then passes the scene the pending value, if any; always returns 0. */
 u32 FUN_00103650(void)
 {
-    if (g_titleFlags.first == 0 && FUN_002c5210() == 1 && g_titleFlags.second != 0) {
+    if (g_titleFlags.disabled == 0 && FUN_002c5210() == 1 && g_titleFlags.commandActive != 0) {
         asdProcessSetCommandListRecording(0);
     }
     FUN_002c3a14(g_titleScene);

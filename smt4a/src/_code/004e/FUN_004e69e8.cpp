@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 
 extern unsigned int DAT_00571148; /* 0x571148 */
@@ -20,7 +20,7 @@ extern unsigned int DAT_0057122c; /* 0x57122c */
 extern unsigned int DAT_005712c0; /* 0x5712c0 */
 extern unsigned int DAT_005712c4; /* 0x5712c4 */
 
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 
 
@@ -82,7 +82,7 @@ void FUN_004e69e8(int *param_1,int param_2,int param_3)
               return;
             }
             temp_v6 = (int)*(short *)(temp_v6 + 0x1c0);
-            FUN_00192550();
+            dataTable8FindRecord();
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
             if (temp_v3 == 0) {
               return;

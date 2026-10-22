@@ -10,7 +10,7 @@ int FUN_00258a24(unsigned int);
 int FUN_0029c4c8(int);
 int FUN_0029c4e4(unsigned char [14], int);
 int unitRecalculateEffectiveStats(unsigned char [14]);
-int FUN_0029d684(int);
+int statusPanelSetOpen(int);
 int FUN_0029d8a0(unsigned int);
 int FUN_0029dfc0(int);
 int devilGetRecord(void);
@@ -50,7 +50,7 @@ extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029d8a0. */
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
@@ -112,7 +112,7 @@ void FUN_0022de74(int param_1)
       return;
     }
     FUN_0029d8a0(temp_v6);
-    FUN_0029d684(1);
+    statusPanelSetOpen(1);
     FUN_0022d1a8(param_1);
   }
   else {
@@ -135,7 +135,7 @@ void FUN_0022de74(int param_1)
         *(unsigned short *)(param_1 + 0xa5b2) = temp_v0;
         return;
       }
-      FUN_0029d684(1);
+      statusPanelSetOpen(1);
     }
     else {
       temp_v1 = gameGetSlotTable();
@@ -178,7 +178,7 @@ void FUN_0022de74(int param_1)
       FUN_0029c4e4(temp_v8,0);
       FUN_0029c4c8(1);
       if (*(char *)(param_1 + 0x5a7) == '\0') {
-        FUN_0029d684(1);
+        statusPanelSetOpen(1);
         *(unsigned char *)(param_1 + 0x5a7) = 0;
         FUN_0022d1a8(param_1);
         *(unsigned short *)(param_1 + 0xa5b2) = temp_v0;

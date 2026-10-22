@@ -6,7 +6,7 @@ extern "C" {
 
 int infoWinSetTimer(...);
 int dialogOpen(int);
-int FUN_0027e7b4(unsigned int, unsigned int);
+int infoWinSetMessage(unsigned int, unsigned int);
 int FUN_00295660(int, int *);
 int infoWinStartTimer(int);
 int FUN_002bd06c(unsigned int);
@@ -31,7 +31,7 @@ extern int FUN_001ab9dc(void);
 extern int dialogGetTimer(void);
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
@@ -100,7 +100,7 @@ void FUN_00295f54(int param_1,int param_2)
       temp_v1 = *(unsigned int *)(param_1 + 0x356c);
       temp_v4 = 0xc9;
 LAB_00296090:
-      FUN_0027e7b4(temp_v1,temp_v4);
+      infoWinSetMessage(temp_v1,temp_v4);
       *(short *)(param_1 + 0xcfc8) = *(short *)(param_1 + 0xcfc8) + 1;
       dialogOpen(1);
       if (*(short *)(param_1 + 0xcfca) == *(short *)(param_1 + 0xcfc8)) {

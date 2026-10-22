@@ -6,7 +6,7 @@ extern "C" {
 extern int buttonHelpTexturesUnref(void);
 extern int buttonHelpRelease(void);
 extern int uiFadeRelease(void);
-extern int FUN_00292c0c(void);
+extern int gameReleaseDataReference(void);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_002a0cc8(int);
 extern int scrScriptProcessDestroy(BibleScript *script);
@@ -33,7 +33,7 @@ void bibleScreenClose(BibleScreen *screen)
     }
     gameGlobalsSetSelected(0);
     FUN_002a0cc8(0);
-    FUN_00292c0c();
+    gameReleaseDataReference();
     if (screen->sprites1dLoaded != 0) {
         for (i = 0; i < 3; i++) {
             asdTMTexTableReleaseNode(0x1D, i);

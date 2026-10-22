@@ -10,8 +10,8 @@ int __aeabi_memset4(int, int, unsigned int);
 int dialogOpen(int, int);
 int FUN_00275bc8(int, unsigned int);
 int ifTouchResetRecord(void);
-int FUN_002a49e4(unsigned int, int);
-int FUN_002a7324(int);
+int infoWinSetText(unsigned int, int);
+int statusPanelSetOpen(int);
 int FUN_003e4d68(unsigned int);
 
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -22,8 +22,8 @@ extern int FUN_00187168(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: ifTouchResetRecord. */
-/* Supplied declaration required: FUN_002a49e4. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: infoWinSetText. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_003e4d68. */
 
 
@@ -51,7 +51,7 @@ void FUN_004be1c8(int param_1)
     *(int *)(param_1 + 800) = temp_v1;
     *(unsigned int *)(temp_v1 + 0x108) = 2;
     if (*(char *)(param_1 + 4) == '\x01') {
-      FUN_002a49e4(*(unsigned int *)(param_1 + 0x318),4);
+      infoWinSetText(*(unsigned int *)(param_1 + 0x318),4);
       dialogOpen(0,1);
       *(unsigned int *)(param_1 + 8) = 9;
       return;
@@ -90,7 +90,7 @@ void FUN_004be1c8(int param_1)
     if (0 < *(int *)(param_1 + 0x324)) {
       temp_v2 = FUN_003e4d68(*(unsigned int *)(param_1 + 0x2c4) & 0xffff);
       statusRequestUnitDetails((const UnitCategoryRecord*)temp_v2,0,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
     }
     *(unsigned int *)(param_1 + 8) = 2;
     *(unsigned int *)(param_1 + 0xc) = 3;

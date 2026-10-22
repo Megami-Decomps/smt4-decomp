@@ -1,46 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f678` (_code @ 0x34f678, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+// Private views of the records used by this comparator.
+struct EquipmentCompareRecordView {
+    u8 unk00[0x36]; // 0x00
+    s16 unk36;      // 0x36
+    u8 unk38[0x38]; // 0x38
+    u16 unk70;      // 0x70
+};
 
-int FUN_00192608(void);
-int equipmentGetCappedUpgradeBonuses(...);
+struct EquipmentUpgradeBonusesView {
+    s16 unk00;     // 0x00
+    u8 unk02[14];  // 0x02
+};
 
-/* stack frame of param_2: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp38; /* 0x38: local_38 */
-} param_2_stack;
+extern "C" EquipmentCompareRecordView* FUN_00192608(u16 equipmentId);
+extern "C" void equipmentGetCappedUpgradeBonuses(
+    u16 equipmentId, EquipmentUpgradeBonusesView* bonuses);
 
-/* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
-
-
-int FUN_0034f678(unsigned short *param_1,unsigned short *param_2)
-
+// Compare equipment by unk36, breaking ties by descending unk70.
+extern "C" s32 FUN_0034f678(u16* firstId, u16* secondId)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [16];
-  unsigned char temp_v4 [20];
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192608();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192608();
-  equipmentGetCappedUpgradeBonuses(*param_1,temp_v3);
-  equipmentGetCappedUpgradeBonuses(*param_2,temp_v4);
-  temp_v2 = (int)*(short *)(temp_v0 + 0x36) - (int)*(short *)(temp_v1 + 0x36);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00192608();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00192608();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x70) - (unsigned int)*(unsigned short *)(temp_v0 + 0x70);
-  }
-  return temp_v2;
-}
+    EquipmentCompareRecordView* first = FUN_00192608(*firstId);
+    EquipmentCompareRecordView* second = FUN_00192608(*secondId);
+    EquipmentUpgradeBonusesView firstBonuses;
+    EquipmentUpgradeBonusesView secondBonuses;
 
-} /* extern "C" */
+    equipmentGetCappedUpgradeBonuses(*firstId, &firstBonuses);
+    equipmentGetCappedUpgradeBonuses(*secondId, &secondBonuses);
+
+    s32 difference = (first->unk36 + firstBonuses.unk00)
+                   - (second->unk36 + firstBonuses.unk00);
+    if (difference == 0) {
+        first = FUN_00192608(*firstId);
+        second = FUN_00192608(*secondId);
+        difference = second->unk70 - first->unk70;
+    }
+    return difference;
+}

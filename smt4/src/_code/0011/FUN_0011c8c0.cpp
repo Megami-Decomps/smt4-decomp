@@ -1,39 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011c8c0` (_code @ 0x11c8c0, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Owner/one/zero registers r4-r6 are rotated and two argument stores exchange order; all operations and constants match. */
+#include "sys/NgWord.h"
+#include "nn/Result.h"
 
 extern "C" {
+s32 FUN_00127188(u32 mode, const char *file, u64 titleId, u32 option, u32 type, u32 access);
+s32 FUN_00127000(const char *archive, u32 mode, u64 titleId, u32 option,
+                  u32 type, u32 access, void *buffer, u32 size, u32 offset);
+extern const char DAT_0040b770[];
 
-int FUN_00127000(...);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00127000. */
-extern int FUN_00127188(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_0011c8c0(int param_1,unsigned int param_2)
-
+/* Loads the banned-word data only when it fits the fixed two-kilobyte buffer. */
+s32 FUN_0011c8c0(NgWordState *state, const char *file)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00127188(0,param_2,0x10302,0x400db,0,1,1);
-  if (temp_v0 < 0x801) {
-    temp_v1 = 0;
-    FUN_00127000("ngword:",0,0x10302,0x400db,0,1,1,*(unsigned int *)(param_1 + 0x28),0x800,0);
-    if ((temp_v1 & 0x80000000) == 0) {
-      *(unsigned char *)(param_1 + 0x19) = 1;
+    const u64 titleId = 0x000400db00010302ULL;
+    if (FUN_00127188(0, file, titleId, 0, 1, 1) > 0x800) {
+        return (s32)0xd820ebec;
     }
-  }
-  return;
+    s32 result = FUN_00127000(DAT_0040b770, 0, titleId, 0, 1, 1, state->buffer, 0x800, 0);
+    if (nnResultIsSuccess(result)) {
+        state->loaded = 1;
+        result = 0;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

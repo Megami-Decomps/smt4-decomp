@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern int FUN_00224820(...); /* 0x224820 */
+extern int effectJobUpdateSpawn(...); /* 0x224820 */
 extern int FUN_002248b8(...); /* 0x2248b8 */
 extern unsigned char LAB_002fed38; /* 0x2fed38 */
 
@@ -54,7 +54,7 @@ unsigned int FUN_0030a2c0(unsigned int param_1,unsigned int param_2,unsigned int
   puVar1[9] = 0;
   puVar1[10] = 0;
   pcVar2 = "EventEplEffect";
-  asdProcessCreateSimple("EventEplEffect",2,0,0,FUN_00224820,&LAB_002fed38,puVar1);
+  asdProcessCreateSimple("EventEplEffect",2,0,0,effectJobUpdateSpawn,&LAB_002fed38,puVar1);
   *puVar1 = (unsigned int)pcVar2;
   taskCreateDraw("EventEplEffect_Draw",0x75,0,0,FUN_002248b8,0,puVar1,pcVar2);
   taskCreateDraw("EventEplEffect_Draw",0xd3,0,0,FUN_002248b8,0,puVar1,*puVar1);

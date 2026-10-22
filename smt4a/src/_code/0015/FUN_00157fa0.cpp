@@ -1,46 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00157fa0` (_code @ 0x157fa0, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #136] differs from recovered ldr ip, [pc, #136]. */
+#include "common.h"
+
+// Private layout view for the fields initialized here.
+struct Obj4207c0View {
+    const void* unk00; // 0x00
+    u8 unk04[0x98];    // 0x04
+    u32 unk9C;        // 0x9C
+    u32 unkA0;        // 0xA0
+    u32 unkA4;        // 0xA4
+    u32 unkA8;        // 0xA8
+    u32 unkAC;        // 0xAC
+    u8 unkB0;         // 0xB0
+    u8 unkB1;         // 0xB1
+    u8 unkB2;         // 0xB2
+    u8 unkB3;         // 0xB3
+    u32 unkB4;        // 0xB4
+    u8 unkB8;         // 0xB8
+    u8 unkB9;         // 0xB9
+    u8 unkBA;         // 0xBA
+    u8 unkBB;         // 0xBB
+    u32 unkBC;        // 0xBC
+};
 
 extern "C" {
+extern u8 _ZTV9Obj4207c0[];
+extern Obj4207c0View* DAT_0056fcbc;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-extern unsigned char DAT_00557c30; /* 0x557c30 */
-extern unsigned int *DAT_0056fcbc; /* 0x56fcbc */
-
-
-void FUN_00157fa0(unsigned int *param_1)
-
+// Initializes the object and assigns special byte values to the first registered instance.
+void FUN_00157fa0(Obj4207c0View* object)
 {
-  *param_1 = (unsigned int)&DAT_00557c30;
-  param_1[0x27] = 0;
-  param_1[0x28] = 0;
-  param_1[0x29] = 0;
-  param_1[0x2a] = 0;
-  param_1[0x2b] = 0;
-  *(unsigned char *)(param_1 + 0x2c) = 0;
-  *(unsigned char *)((int)param_1 + 0xb1) = 2;
-  *(unsigned char *)((int)param_1 + 0xb2) = 0xff;
-  *(unsigned char *)((int)param_1 + 0xb3) = 0xff;
-  param_1[0x2d] = 0;
-  *(unsigned char *)(param_1 + 0x2e) = 0;
-  *(unsigned char *)((int)param_1 + 0xb9) = 2;
-  *(unsigned char *)((int)param_1 + 0xba) = 0xff;
-  *(unsigned char *)((int)param_1 + 0xbb) = 0xff;
-  param_1[0x2f] = 0;
-  if (DAT_0056fcbc != (unsigned int *)0x0) {
-    return;
-  }
-  *(unsigned char *)((int)param_1 + 0xb2) = 0x56;
-  *(unsigned char *)((int)param_1 + 0xb3) = 0x59;
-  *(unsigned char *)((int)param_1 + 0xba) = 0x5a;
-  *(unsigned char *)((int)param_1 + 0xbb) = 0x5c;
-  DAT_0056fcbc = param_1;
-  return;
-}
+    object->unk00 = _ZTV9Obj4207c0 + 0x18;
+    object->unk9C = 0;
+    object->unkA0 = 0;
+    object->unkA4 = 0;
+    object->unkA8 = 0;
+    object->unkAC = 0;
+    object->unkB0 = 0;
+    object->unkB1 = 2;
+    object->unkB2 = 0xFF;
+    object->unkB3 = 0xFF;
+    object->unkB4 = 0;
+    object->unkB8 = 0;
+    object->unkB9 = 2;
+    object->unkBA = 0xFF;
+    object->unkBB = 0xFF;
+    object->unkBC = 0;
 
-} /* extern "C" */
+    if (DAT_0056fcbc != 0) {
+        return;
+    }
+
+    object->unkB2 = 0x56;
+    object->unkB3 = 0x59;
+    object->unkBA = 0x5A;
+    object->unkBB = 0x5C;
+    DAT_0056fcbc = object;
+}
+}

@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045ab0c` (_code @ 0x45ab0c, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: extended-block constant multiplication uses MUL rather than the retail shift/MLA chain. */
+#include "shard/ModelWorkSize.h"
 
-extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-
-int FUN_0045ab0c(int *param_1)
-
+// Calculate the variable work allocation, including optional extended and extra blocks.
+extern "C" u32 FUN_0045ab0c(const ModelWorkSize *settings)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((char)param_1[3] != '\0') {
-    temp_v0 = (unsigned int)*(unsigned short *)((int)param_1 + 6) * 0x448 + ((*param_1 + 0xfU) & 0xfffffff0) * 4 + 100
-    ;
-  }
-  temp_v0 = (*(unsigned short *)(param_1 + 1) + 1) * 0x6c + (unsigned int)*(unsigned short *)((int)param_1 + 6) * 0x278 +
-          (unsigned int)*(unsigned short *)(param_1 + 2) * 0x218 + temp_v0;
-  if (*(char *)((int)param_1 + 10) != '\0') {
-    temp_v0 = temp_v0 + 0x1d0;
-  }
-  return temp_v0;
+    u32 extended = 0;
+    if (settings->extendedEnabled)
+        extended = settings->countB * 0x448 +
+                   ((settings->entryCount + 15) & ~15u) * 4 + 100;
+    u32 bytes = (settings->countA + 1) * 0x6c +
+                settings->countB * 0x278 + settings->countC * 0x218 + extended;
+    if (settings->extraEnabled)
+        bytes += 0x1d0;
+    return bytes;
 }
-
-} /* extern "C" */

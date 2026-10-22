@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_0031f718(...);
 int FUN_0032d0c8(...);
 int statusDisplayBindUnitRecord(...);
@@ -60,7 +60,7 @@ int campCecDestroyOverlay(...);
 int dataTable15Sub0FindEntry(...);
 int FUN_0037c8e4(...);
 int FUN_0037e1b0(...);
-int FUN_0038843c(void);
+int messageRestoreBanner(void);
 int FUN_003da8f4(...);
 int gameFlagSetValue(int, int);
 
@@ -82,8 +82,8 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_001643a0(void);
-extern int FUN_00165070(void);
+extern int ifTouchGetSelectionMode(void);
+extern int ifTouchGetSelectedRegion(void);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameFlagIsSet. */
@@ -112,7 +112,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4cfc. */
 /* Supplied declaration required: FUN_002a5cf4. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a73f8(void);
 extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_002a7b74. */
@@ -151,7 +151,7 @@ extern int uniteIsPhase26Active(void);
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037e1b0. */
 /* Supplied declaration required: FUN_0038800c. */
-/* Supplied declaration required: FUN_0038843c. */
+/* Supplied declaration required: messageRestoreBanner. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003a5094. */
 /* Supplied declaration required: partyPanelSetHidden. */
@@ -283,8 +283,8 @@ void FUN_003dc628(void)
   }
   temp_v15 = 0;
   temp_v13 = 0;
-  temp_v5 = FUN_001643a0();
-  temp_v7 = FUN_00165070();
+  temp_v5 = ifTouchGetSelectionMode();
+  temp_v7 = ifTouchGetSelectedRegion();
   temp_v17 = temp_v9 + 0x1b00;
   recordGetModeForId((int)*(short *)(temp_v9 + 0x1b36));
   recordGetModeForId((int)*(short *)(temp_v9 + 0x1b38));
@@ -383,7 +383,7 @@ void FUN_003dc628(void)
         temp_v7 = FUN_0034919c();
         if (temp_v7 == 0) {
           FUN_0037c8e4(1,0);
-          FUN_0038843c();
+          messageRestoreBanner();
           FUN_002f78a0(temp_v9);
         }
       }
@@ -391,7 +391,7 @@ void FUN_003dc628(void)
           ((temp_v5 == 0x3e || temp_v5 == 0x3f) || temp_v5 == 0x40)) &&
          (temp_v5 = FUN_0034919c(), temp_v5 == 0)) {
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(temp_v9);
       }
       *(unsigned char *)(temp_v9 + 0xa5) = *(unsigned char *)(temp_v9 + 0xa4);
@@ -728,7 +728,7 @@ LAB_003dcd84:
                   temp_v8 = FUN_0034919c();
                   if (temp_v8 == 0) {
                     FUN_0037c8e4(1,0);
-                    FUN_0038843c();
+                    messageRestoreBanner();
                     FUN_002f78a0(temp_v9);
                   }
                 }
@@ -740,7 +740,7 @@ LAB_003dcd84:
                   temp_v8 = FUN_0034919c();
                   if (temp_v8 == 0) {
                     FUN_0037c8e4(1,0);
-                    FUN_0038843c();
+                    messageRestoreBanner();
                     FUN_002f78a0(temp_v9);
                   }
                   FUN_002c39dc(1,0,0xffffffff);
@@ -1031,7 +1031,7 @@ LAB_003ddd08:
       }
       FUN_0032d0c8(0,1,temp_v19,&temp_v16);
       FUN_0037e1b0((int)*(char *)(temp_v9 + 0xb8),1);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       return;
     }
     temp_v9 = uniteRequestGet();

@@ -24,11 +24,11 @@ extern s32 scrGetArg(s32 index);
 extern void scrSetResult(s32 value);
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(void);
-extern u32 FUN_00249a54(void);
-extern s32 FUN_0024579c(BtlEntry *entry, s32 slot);
+extern u32 btlScriptResolveGroupArg(void);
+extern s32 btlCommandOwnerHasSlotId(BtlEntry *entry, s32 slot);
 extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
 
-/* Script command: sets the result to 1 when FUN_0024579c accepts a live entry (or the active one) for the argument's slot. */
+/* Script command: sets the result to 1 when btlCommandOwnerHasSlotId accepts a live entry (or the active one) for the argument's slot. */
 s32 FUN_00323268(void)
 {
     s32 slot = scrGetArg(0);
@@ -36,11 +36,11 @@ s32 FUN_00323268(void)
     s32 count;
 
     scrGetArg(1);
-    FUN_002499fc(FUN_00249a54(), &first, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &first, &count);
     for (s32 i = first; i < first + count; i++) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0
-            && FUN_0024579c(entry, slot) != 0) {
+            && btlCommandOwnerHasSlotId(entry, slot) != 0) {
             scrSetResult(1);
             return 1;
         }
@@ -50,7 +50,7 @@ s32 FUN_00323268(void)
     if (sub->flag != 0) {
         btlGetMainState();
         BtlEntry *entry = btlMainFindActiveEntry();
-        if (entry != NULL && FUN_0024579c(entry, slot) != 0) {
+        if (entry != NULL && btlCommandOwnerHasSlotId(entry, slot) != 0) {
             scrSetResult(1);
             return 1;
         }

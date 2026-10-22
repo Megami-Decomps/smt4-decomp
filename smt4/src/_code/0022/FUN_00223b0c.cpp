@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_00223b0c(u32 value)
 {
-    *(u32 *)(g_gameDataBlocks.unk04 + 0x1f4dc) = value;
+    g_gameDataBlocks.saveBlock->unk1F4DC = value;
 }
 
 } /* extern "C" */

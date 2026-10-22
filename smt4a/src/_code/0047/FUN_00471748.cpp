@@ -1,47 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00471748` (_code @ 0x471748, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-int asdMemFree(void);
-int asdOperatorDeleteB(void);
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdOperatorDeleteB. */
-extern int FUN_0046bc7c(int, unsigned int);
-
-
-void FUN_00471748(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(int *)(param_1 + 0x458) != 0) {
-    asdOperatorDeleteB();
-    *(unsigned int *)(param_1 + 0x458) = 0;
-  }
-  if (*(int *)(param_1 + 0x454) != 0) {
-    temp_v0 = FUN_0046bc7c(param_1,0x37);
-    temp_v1 = 0;
-    if (temp_v1 < temp_v0) {
-      do {
-        if (*(int *)(*(int *)(param_1 + 0x454) + temp_v1 * 0x10) != 0) {
-          asdMemFree();
-          *(unsigned int *)(*(int *)(param_1 + 0x454) + temp_v1 * 0x10) = 0;
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < temp_v0);
-    }
-    if (*(int *)(param_1 + 0x454) != 0) {
-      asdOperatorDeleteB();
-      *(int *)(param_1 + 0x454) = 0;
-    }
-  }
-  *(unsigned int *)(param_1 + 0x45c) = 0;
-  return;
+namespace {
+struct ResourceAllocationEntry {
+    /* 0x00 */ void *data;
+    /* 0x04 */ u8 unk04[0xC];
+};
+struct ResourceAllocationOwner {
+    /* 0x000 */ u8 unk000[0x454];
+    /* 0x454 */ ResourceAllocationEntry *entries;
+    /* 0x458 */ void *allocation;
+    /* 0x45C */ u32 unk45C;
+};
 }
+extern "C" {
+void asdOperatorDeleteB(void *memory);
+void asdMemFree(void *memory);
+s32 aocCountPackageItemsOfType(ResourceAllocationOwner *owner, u32 kind);
 
-} /* extern "C" */
+/* Releases the auxiliary allocation and every populated entry, then clears the table owner. */
+void FUN_00471748(ResourceAllocationOwner *owner)
+{
+    if (owner->allocation != NULL) {
+        asdOperatorDeleteB(owner->allocation);
+        owner->allocation = NULL;
+    }
+    if (owner->entries != NULL) {
+        s32 count = aocCountPackageItemsOfType(owner, 0x37);
+        for (s32 i = 0; i < count; ++i) {
+            if (owner->entries[i].data != NULL) {
+                asdMemFree(owner->entries[i].data);
+                owner->entries[i].data = NULL;
+            }
+        }
+        if (owner->entries != NULL) {
+            asdOperatorDeleteB(owner->entries);
+            owner->entries = NULL;
+        }
+    }
+    owner->unk45C = 0;
+}
+}

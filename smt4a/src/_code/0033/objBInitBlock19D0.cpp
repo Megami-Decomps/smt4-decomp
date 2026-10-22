@@ -9,10 +9,10 @@ void objBInitBlock19D0(u32 a, s32 copyPair, u32 c)
 {
     ObjB *obj = g_gameGlobals.instance;
 
-    FUN_0026fd50(obj->block19D0, a, 0, c);
+    FUN_0026fd50(obj->snapshotSlot, a, 0, c);
     if (copyPair != 0) {
-        obj->unk19D8 = obj->unk19E0;
-        obj->unk19DC = obj->unk19E4;
+        obj->previousPositionX = obj->positionX;
+        obj->previousPositionY = obj->positionY;
     }
 }
 

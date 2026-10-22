@@ -114,7 +114,7 @@ void FUN_004d0f48(unsigned int param_1,int param_2)
       uStack_4c = 0;
       iVar4 = FUN_004bbbd8(param_2);
       FUN_00212234(acStack_88 + iVar4 * 0x20);
-      uVar2 = FUN_004bc850(param_2);
+      uVar2 = dataSelectPrioritizedCandidate(param_2);
       FUN_00180118();
       uStack_48 = 0;
       uStack_44 = 0;

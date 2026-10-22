@@ -7,7 +7,7 @@ extern "C" {
 int partyCaptureEligibleSkills(...);
 int FUN_001e0698(void);
 int buttonHelpCreate(void);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 void partyStatusRefreshSlot(void*, int, int);
 int FUN_0028e9ec(...);
 int FUN_002942c4(...);
@@ -43,7 +43,7 @@ extern unsigned char DAT_00400d84; /* 0x400d84 */
 /* Supplied declaration required: partyCaptureEligibleSkills. */
 /* Supplied declaration required: FUN_001e0698. */
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028d9b0. */
+/* Supplied declaration required: buttonHelpAcquireResources. */
 /* Supplied declaration required: partyStatusRefreshSlot. */
 extern int btlActorIsDown(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
@@ -269,7 +269,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);
   FUN_0029f848(param_1 + 0x3344,temp_v5,6,1,0,1);
-  FUN_0028d9b0();
+  buttonHelpAcquireResources();
   buttonHelpCreate();
   asdLoadFileAsyncSimple(0x19a4e0,param_1 + 0x59bc,0);
   return;

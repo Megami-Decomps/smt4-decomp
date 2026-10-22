@@ -38,11 +38,15 @@ typedef struct BtlEntry {
             u8 unk08a[0x24];
             u16 values[9];       /* 0x0AE */
         } modifiers;
+        struct {
+            u8 unk08a[0xE];
+            s16 unk098;          /* 0x098: positive while the entry can still act */
+        } turn;
     };
     /* 0x0CE */ u16 id;             /* the id scripts refer to the entry by */
     /* 0x0D0 */ u8 unk0d0[0x1B4 - 0xD0];
     /* 0x1B4 */ s16 value;          /* returned by the script command that looks an entry up by listed id */
-    /* 0x1B6 */ u8 unk1b6[2];
+    /* 0x1B6 */ s16 maxHp;
     /* 0x1B8 */ s16 mp;
     /* 0x1BA */ s16 maxMp;
     /* 0x1BC */ u8 unk1bc[0xa];
@@ -57,11 +61,28 @@ typedef struct BtlEntry {
     /* 0x284 */ void *devil;        /* non-NULL when the entry is a demon */
 } BtlEntry; /* 0x288 bytes */
 
+typedef char BtlEntryMaxHpOffsetCheck[__INTADDR__(&((BtlEntry *)0)->maxHp) == 0x1B6 ? 1 : -1];
+
 typedef struct BtlMainState {
     /* 0x0000 */ u8 unk0000[0x1FC0];
     /* 0x1FC0 */ BtlEntry *entries; /* BTL_ENTRY_COUNT entries */
-    /* 0x1FC4 */ u8 unk1fc4[0x49C5 - 0x1FC4];
+    /* 0x1FC4 */ u8 unk1fc4[0xC];
+    /* 0x1FD0 */ s64 pendingAction;
+    /* 0x1FD8 */ u8 unk1fd8[0x44A0 - 0x1FD8];
+    /* 0x44A0 */ u32 battleFlags;
+    /* 0x44A4 */ u8 unk44a4[0x49C0 - 0x44A4];
+    /* 0x49C0 */ s32 selectedGroup;  /* 0xff when no group is selected */
+    /* 0x49C4 */ u8 unk49c4;
     /* 0x49C5 */ s8 hasActiveEntry;
 } BtlMainState;
+
+typedef char BtlMainStatePendingActionOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->pendingAction) == 0x1FD0 ? 1 : -1];
+typedef char BtlMainStateHasActiveEntryOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->hasActiveEntry) == 0x49C5 ? 1 : -1];
+typedef char BtlMainStateBattleFlagsOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->battleFlags) == 0x44A0 ? 1 : -1];
+typedef char BtlMainStateSelectedGroupOffsetCheck[
+    __INTADDR__(&((BtlMainState *)0)->selectedGroup) == 0x49C0 ? 1 : -1];
 
 #endif

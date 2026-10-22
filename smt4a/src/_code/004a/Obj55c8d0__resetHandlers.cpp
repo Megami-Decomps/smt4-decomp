@@ -14,7 +14,7 @@ extern int FUN_004a4658(...); /* 0x4a4658 */
 extern int FUN_004a4c74(...); /* 0x4a4c74 */
 extern int FUN_004a4d70(...); /* 0x4a4d70 */
 extern int FUN_004a527c(...); /* 0x4a527c */
-extern int FUN_004a66c4(...); /* 0x4a66c4 */
+extern int itemListMenuWaitUseCounter(...); /* 0x4a66c4 */
 extern int FUN_004a677c(...); /* 0x4a677c */
 
 
@@ -45,7 +45,7 @@ void _ZN9Obj55c8d013resetHandlersEv(int param_1)
   *(unsigned int *)(param_1 + 0xa98c) = 0;
   *(romwright_code **)(param_1 + 0xa990) = FUN_004a677c;
   *(unsigned int *)(param_1 + 0xa994) = 0;
-  *(romwright_code **)(param_1 + 0xa998) = FUN_004a66c4;
+  *(romwright_code **)(param_1 + 0xa998) = itemListMenuWaitUseCounter;
   *(unsigned int *)(param_1 + 0xa99c) = 0;
   *(romwright_code **)(param_1 + 0xa9a0) = FUN_004a677c;
   *(unsigned int *)(param_1 + 0xa9a4) = 0;

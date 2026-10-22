@@ -1,46 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f14a0` (_code @ 0x3f14a0, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r4, r5, r6, r7, r8, r9, sl} differs from recovered ldr r1, [pc, #120]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_1_stack;
+struct BattleMaskView {
+    u8 unk00[0x70];
+    u32 unk70; // 0x70
+    u32 unk74; // 0x74
+};
 
-extern unsigned int DAT_00573990; /* 0x573990 */
-extern unsigned int DAT_00573994; /* 0x573994 */
+struct BattleEntryView {
+    u8 unk00[0x50];
+    u32 unk50; // 0x50
+    u8 unk54[0x14];
+    s16 unk68; // 0x68
+    u8 unk6A[0x166];
+};
 
+struct BattleTargetView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+    u8 unk08[0x400];
+};
 
-void FUN_003f14a0(int param_1)
+struct BattleContextView {
+    u8 unk00[0x1ED4];
+    BattleEntryView* unk1ED4; // 0x1ED4
+    u8 unk1ED8[0x124];
+    BattleTargetView* unk1FFC; // 0x1FFC
+};
 
-{
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  
-  temp_v1 = DAT_00573994;
-  temp_v0 = DAT_00573990;
-  temp_v3 = 0;
-  temp_v5 = 0x6d;
-  do {
-    temp_v2 = *(int *)(param_1 + 0x1ed4);
-    temp_v4 = (int)*(short *)(temp_v2 + temp_v3 * 0x1d0 + 0x68);
-    if ((-1 < temp_v4) &&
-       (puVar6 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + temp_v4 * 0x408),
-       (puVar6[1] & temp_v1) != 0 || (*puVar6 & temp_v0) != 0)) {
-      temp_v4 = temp_v3 * 0x1d0 + 0x50;
-      *(unsigned int *)(temp_v2 + temp_v4) = *(unsigned int *)(temp_v2 + temp_v4) | 0x4000;
-    }
-    temp_v5 = temp_v5 - 1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v5 != 0);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern BattleMaskView g_btlMain;
+
+// Mark entries whose nonnegative target index selects flags matching the global masks.
+void FUN_003f14a0(BattleContextView* context)
+{
+    const u32 lowMask = g_btlMain.unk70;
+    const u32 highMask = g_btlMain.unk74;
+
+    for (s32 index = 0, remaining = 109; remaining != 0; ++index, --remaining) {
+        BattleEntryView* entries = context->unk1ED4;
+        const s32 targetIndex = entries[index].unk68;
+        if (targetIndex >= 0) {
+            const BattleTargetView& target = context->unk1FFC[targetIndex];
+            if (((target.unk00 & lowMask) | (target.unk04 & highMask)) != 0) {
+                entries[index].unk50 |= 0x4000;
+            }
+        }
+    }
+}
+}

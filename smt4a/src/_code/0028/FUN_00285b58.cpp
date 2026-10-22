@@ -41,7 +41,7 @@ extern unsigned char LAB_00285f24; /* 0x285f24 */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0022e9b8(void);
+extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_0022f770. */
 /* Supplied declaration required: FUN_0022f9c8. */
 /* Supplied declaration required: FUN_0023dcec. */
@@ -81,7 +81,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   iStack_2c = param_2;
   temp_v15 = param_3;
-  temp_v0 = FUN_0022e9b8();
+  temp_v0 = uniteGetWork();
   temp_v13 = FUN_0026140c();
   temp_v13 = temp_v13 + 0x20;
   if (temp_v0 != 0) {

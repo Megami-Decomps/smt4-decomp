@@ -1,69 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352eec` (_code @ 0x352eec, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "map/mapDepart.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+
+/* Data table 0x2F entries of the three types, as this loader reads them. */
+struct Table2FType0Entry {
+    /* 0x00 */ u8 unk00[0xA];
+    /* 0x0A */ u16 level;
+    /* 0x0C */ u16 unk0C;
+    /* 0x0E */ u16 unk0E;
+    /* 0x10 */ u16 rate;
+};
+
+struct Table2FType1Entry {
+    /* 0x00 */ u8 unk00[0xA];
+    /* 0x0A */ u16 level;
+    /* 0x0C */ u16 unk0C;
+    /* 0x0E */ u16 unk0E;
+    /* 0x10 */ u8 unk10[0x6];
+    /* 0x16 */ u16 rate;
+    /* 0x18 */ u32 unk18;
+};
+
+struct Table2FType2Entry {
+    /* 0x00 */ u8 unk00[0x8];
+    /* 0x08 */ u16 level;
+    /* 0x0A */ u8 unk0A[0x2];
+    /* 0x0C */ u16 unk0C;
+    /* 0x0E */ u16 unk0E;
+};
 
 extern "C" {
 
-extern int DAT_005f16d0; /* 0x5f16d0 */
-extern unsigned int DAT_005f16d4; /* 0x5f16d4 */
+extern GameStateA g_gameState;
+s32 lmapGetSpawnIndex(void);
+Table2FType0Entry *dataTable2FType0GetEntry(u32 id);
+Table2FType1Entry *dataTable2FType1GetEntry(u32 id);
+Table2FType2Entry *dataTable2FType2GetEntry(u32 id);
 
-extern int gameFlagsGetBlock(void);
-extern int lmapGetSpawnIndex(void);
-extern int dataTable2FType0GetEntry(unsigned int);
-extern int dataTable2FType1GetEntry(unsigned int);
-extern int dataTable2FType2GetEntry(unsigned int);
-
-
+// Load the selected table 0x2F entry into the flag block; the level becomes -1 when it has none
+// and is capped at 15.
 void FUN_00352eec(void)
-
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = gameFlagsGetBlock();
-  temp_v2 = lmapGetSpawnIndex();
-  if (temp_v2 < 100) {
-    *(unsigned char *)(temp_v1 + 0x7c6) = 0;
-  }
-  if (DAT_005f16d0 != 1) {
-    if (DAT_005f16d0 != 2) {
-      if (DAT_005f16d0 == 3) {
-        temp_v2 = dataTable2FType2GetEntry(DAT_005f16d4);
-        *(char *)(temp_v1 + 0x3a) = (char)*(unsigned short *)(temp_v2 + 0xc);
-        *(char *)(temp_v1 + 0x3b) = (char)*(unsigned short *)(temp_v2 + 0xe);
-        *(char *)(temp_v1 + 0x7c5) = (char)*(unsigned short *)(temp_v2 + 8);
-        *(unsigned int *)(temp_v1 + 0x1520) = 0;
-      }
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    if (lmapGetSpawnIndex() < 100) {
+        flags->table4c.rate = 0;
     }
-    else {
-      temp_v2 = dataTable2FType1GetEntry(DAT_005f16d4);
-      *(char *)(temp_v1 + 0x3a) = (char)*(unsigned short *)(temp_v2 + 0xc);
-      *(char *)(temp_v1 + 0x3b) = (char)*(unsigned short *)(temp_v2 + 0xe);
-      *(char *)(temp_v1 + 0x7c5) = (char)*(unsigned short *)(temp_v2 + 10);
-      *(char *)(temp_v1 + 0x7c6) = (char)*(unsigned short *)(temp_v2 + 0x16);
-      *(unsigned int *)(temp_v1 + 0x1520) = *(unsigned int *)(temp_v2 + 0x18);
+    switch (g_gameState.table2F.type) {
+    case 1: {
+        Table2FType0Entry *entry = dataTable2FType0GetEntry(g_gameState.table2F.id);
+        flags->table4cHead.unk3a = entry->unk0C;
+        flags->table4cHead.unk3b = entry->unk0E;
+        flags->table4c.level = entry->level;
+        flags->table4c.rate = entry->rate;
+        flags->table4c.unk1520 = 0;
+        break;
     }
-  }
-  else {
-    temp_v2 = dataTable2FType0GetEntry(DAT_005f16d4);
-    *(char *)(temp_v1 + 0x3a) = (char)*(unsigned short *)(temp_v2 + 0xc);
-    *(char *)(temp_v1 + 0x3b) = (char)*(unsigned short *)(temp_v2 + 0xe);
-    *(char *)(temp_v1 + 0x7c5) = (char)*(unsigned short *)(temp_v2 + 10);
-    *(char *)(temp_v1 + 0x7c6) = (char)*(unsigned short *)(temp_v2 + 0x10);
-    *(unsigned int *)(temp_v1 + 0x1520) = 0;
-  }
-  if (*(char *)(temp_v1 + 0x7c5) == '\0') {
-    temp_v0 = 0xff;
-  }
-  else {
-    if (*(char *)(temp_v1 + 0x7c5) < '\x10') {
-      return;
+    case 2: {
+        Table2FType1Entry *entry = dataTable2FType1GetEntry(g_gameState.table2F.id);
+        flags->table4cHead.unk3a = entry->unk0C;
+        flags->table4cHead.unk3b = entry->unk0E;
+        flags->table4c.level = entry->level;
+        flags->table4c.rate = entry->rate;
+        flags->table4c.unk1520 = entry->unk18;
+        break;
     }
-    temp_v0 = 0xf;
-  }
-  *(unsigned char *)(temp_v1 + 0x7c5) = temp_v0;
-  return;
+    case 3: {
+        Table2FType2Entry *entry = dataTable2FType2GetEntry(g_gameState.table2F.id);
+        flags->table4cHead.unk3a = entry->unk0C;
+        flags->table4cHead.unk3b = entry->unk0E;
+        flags->table4c.level = entry->level;
+        flags->table4c.unk1520 = 0;
+        break;
+    }
+    }
+    if (flags->table4c.level == 0) {
+        flags->table4c.level = -1;
+    } else if (flags->table4c.level > 15) {
+        flags->table4c.level = 15;
+    }
 }
 
 } /* extern "C" */

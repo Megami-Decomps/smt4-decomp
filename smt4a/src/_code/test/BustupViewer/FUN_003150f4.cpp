@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable00FindById(void);
-int FUN_003d209c(void);
+int bustupViewerResetState(void);
 
 int textFormatBuffer(...);
 int jobStop(unsigned int, int);
@@ -58,7 +58,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: FUN_0037d038. */
-/* Supplied declaration required: FUN_003d209c. */
+/* Supplied declaration required: bustupViewerResetState. */
 
 
 unsigned int FUN_003150f4(void)
@@ -646,7 +646,7 @@ LAB_00315308:
         }
         return 0;
       }
-      FUN_003d209c();
+      bustupViewerResetState();
       FUN_0028c258();
     }
   }

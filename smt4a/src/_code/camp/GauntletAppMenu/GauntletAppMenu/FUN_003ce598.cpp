@@ -30,7 +30,7 @@ int sysPlaySe(...);
 int FUN_00203b40(...);
 int FUN_0021b1a8(...);
 int FUN_00228b04(...);
-int FUN_00237650(void);
+int campHideNumericBanner(void);
 int scrScriptProcessStartEntry(...);
 int resourceRunOperationIfUnblocked(...);
 int FUN_002a4964(...);
@@ -65,7 +65,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_00237650. */
+/* Supplied declaration required: campHideNumericBanner. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -132,7 +132,7 @@ unsigned int FUN_003ce598(void)
       else {
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x530),1);
         FUN_003dc0c0(temp_v6,8);
-        FUN_00237650();
+        campHideNumericBanner();
       }
       temp_v7 = 0;
       do {

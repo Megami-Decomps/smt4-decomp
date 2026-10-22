@@ -1,41 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00387ad8` (_code @ 0x387ad8, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests faded & slid inside each branch, hoists the constant 1 into r7 and re-reads done before returning; ours tests once after the branches (8-byte frame vs 4). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+/* A window that slides and fades in or out over several frames. */
+typedef struct SlideFadeWindow {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u8 fade[4];
+    /* 0x3C */ u8 slide[8];
+    /* 0x44 */ s32 frame;
+    /* 0x48 */ u8 done;
+} SlideFadeWindow;
 
-extern unsigned int FUN_002e1c94(int, unsigned int, unsigned int);
-extern unsigned int FUN_00318e08(int, unsigned int, unsigned int, unsigned int, unsigned int);
+u32 FUN_00318e08(void *slide, s32 mode, s32 offsetX, s32 offsetY, s32 frame);
+u32 FUN_002e1c94(void *fade, s32 mode, s32 frame, f32 from, f32 to);
 
-
-unsigned char FUN_00387ad8(int param_1,int param_2)
-
+/* Steps the window's slide and fade in (`opening`) or out; returns whether the animation is done. */
+bool FUN_00387ad8(SlideFadeWindow *window, s32 opening)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_2 != 0) {
-    temp_v0 = FUN_00318e08(param_1 + 0x3c,4,0x1e,0,*(unsigned int *)(param_1 + 0x44));
-    temp_v1 = FUN_002e1c94(param_1 + 0x38,4,*(unsigned int *)(param_1 + 0x44));
-    temp_v1 = temp_v1 & temp_v0;
-  }
-  else {
-    temp_v0 = FUN_00318e08(param_1 + 0x3c,3,0,0xffffffe2,*(unsigned int *)(param_1 + 0x44));
-    temp_v1 = FUN_002e1c94(param_1 + 0x38,3,*(unsigned int *)(param_1 + 0x44));
-    temp_v1 = temp_v1 & temp_v0;
-  }
-  if (temp_v1 != 0) {
-    *(unsigned char *)(param_1 + 0x48) = 1;
-  }
-  else {
-    *(int *)(param_1 + 0x44) = *(int *)(param_1 + 0x44) + 1;
-  }
-  return *(char *)(param_1 + 0x48) == '\x01';
+    u32 slid;
+    u32 faded;
+    bool finished = false;
+
+    if (opening) {
+        slid = FUN_00318e08(window->slide, 4, 30, 0, window->frame);
+        faded = FUN_002e1c94(window->fade, 4, window->frame, 0.0f, 1.0f);
+    } else {
+        slid = FUN_00318e08(window->slide, 3, 0, -30, window->frame);
+        faded = FUN_002e1c94(window->fade, 3, window->frame, 1.0f, 0.0f);
+    }
+    if (faded & slid) {
+        window->done = 1;
+    } else {
+        window->frame++;
+    }
+    if (window->done == 1) {
+        finished = true;
+    }
+    return finished;
 }
 
 } /* extern "C" */

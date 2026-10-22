@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int slotSetRequest(...);
 int FUN_00246014(void);
 int mapIfOverlayRelease(void);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
@@ -60,7 +60,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
@@ -312,7 +312,7 @@ LAB_00367d2c:
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
           mapIfOverlayRelease();
           temp_v0 = 0x12;
-          FUN_00313648(temp_v0);
+          mapSetSceneState(temp_v0);
           FUN_002e364c(g_lmapScene + 0x28);
           FUN_00327ee8();
           return;
@@ -336,7 +336,7 @@ LAB_00367d2c:
             return;
           }
           temp_v0 = 1;
-          FUN_00313648(temp_v0);
+          mapSetSceneState(temp_v0);
           FUN_002e364c(g_lmapScene + 0x28);
           FUN_00327ee8();
           return;

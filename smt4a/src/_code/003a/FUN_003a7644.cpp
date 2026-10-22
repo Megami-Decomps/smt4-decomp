@@ -21,7 +21,7 @@ struct MessageCloseWork {
 };
 
 extern "C" {
-void FUN_002c76d8(u32 flags);
+void gameDataAddHomeButtonHold(u32 flags);
 void gameDataBlocksAddFlags(u32 flags);
 void messageMainSetFlag(u8 enabled);
 
@@ -36,7 +36,7 @@ void FUN_003a7644(MessageCloseWork *work)
     work->flags = 0;
     work->phase = 0;
     work->timeout = 50;
-    FUN_002c76d8(4);
+    gameDataAddHomeButtonHold(4);
     gameDataBlocksAddFlags(4);
     messageMainSetFlag(0);
 }

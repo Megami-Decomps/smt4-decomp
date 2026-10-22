@@ -1,14 +1,8 @@
 /* NON_MATCHING: initial animation phases are outlined after the shared return rather than before the timeline; -O2 candidate. */
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
+#include "battle/btlGameOver.h"
 
-struct GameOverEyeSequence {
-    u8 unk00[8];
-    u8 mode;
-    u8 unk09[3];
-    u32 state;
-    s32 phase, frame;
-};
 struct GameOverEyeTimeline {
     s32 panelFrame, fade0Frame;
     u32 fade0;
@@ -40,7 +34,7 @@ void objectJobStop(BtlMainStateA *);
 void FUN_00290ba4(BtlMainStateA *);
 void eventCommandClearPending(void *);
 
-u32 btlGameOverRunEyeSequence(GameOverEyeSequence *sequence)
+u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence)
 {
     switch (sequence->phase) {
     case 0:

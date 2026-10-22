@@ -1,8 +1,8 @@
+#include "ui/PartyPanelState.h"
 #include "shard/Shard0031.h"
 
 extern "C" {
-
-extern StateHolder1C *g_partyPanel;
+extern PartyPanelStateA *g_partyPanel;
 
 /* True unless the global object exists and is in state 0xF. */
 u32 objIsNotInState0xF(void)

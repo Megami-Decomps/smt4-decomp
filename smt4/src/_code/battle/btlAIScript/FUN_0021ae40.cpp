@@ -1,56 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021ae40` (_code @ 0x21ae40, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail builds the stacked task arguments through ip and keeps g_btlAiScript's address in r5 (20-byte frame); this allocates r5/r6 with a 16-byte frame */
+#include "battle/btlAIScript.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int scrScriptProcessDestroy(...);
-int asdMemFree(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
+void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
+void asdMemFree(void *block);
+void scrScriptProcessDestroy(void *process);
+u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(u32), void (*draw)(u32), void *owner, u32 id);
+void btlAiScriptUpdate(u32 job);
+void btlAiScriptDestroy(u32 job);
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+extern BtlAiScript *g_btlAiScript;
 
-extern int btlAiScriptUpdate(...); /* 0x20ed70 */
-extern unsigned char LAB_0021af30; /* 0x21af30 */
-extern int btlAiScriptDestroy(...); /* 0x2e064c */
-extern int *g_btlAiScript; /* 0x434260 */
-
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-void FUN_0021ae40(unsigned int *param_1)
-
+/* Releases the runner's process and data and clears its state. */
+static void btlAiScriptReset(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int *piVar1;
-  unsigned char *puVar2;
-  
-  piVar1 = (int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x90,1);
-  puVar2 = &LAB_0021af30;
-  g_btlAiScript = piVar1;
-  taskCreateDraw(&LAB_0021af30,2,0,0,btlAiScriptUpdate,btlAiScriptDestroy,param_1,*param_1);
-  param_1[0x12] = (unsigned int)puVar2;
-  piVar1 = g_btlAiScript;
-  if (g_btlAiScript[1] != 0) {
-    scrScriptProcessDestroy();
-    piVar1[1] = 0;
-  }
-  if (*piVar1 != 0) {
-    asdMemFree();
-    *piVar1 = 0;
-  }
-  piVar1[3] = 0;
-  return;
+    BtlAiScript *script = g_btlAiScript;
+
+    if (script->process != NULL) {
+        scrScriptProcessDestroy(script->process);
+        script->process = NULL;
+    }
+    if (script->data != NULL) {
+        asdMemFree(script->data);
+        script->data = NULL;
+    }
+    script->unk0C = 0;
+}
+
+/* Allocates the battle AI script runner, starts its job and resets the runner. */
+void FUN_0021ae40(BtlAiScriptOwner *owner)
+{
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlAIScript.cpp", 337);
+    g_btlAiScript = (BtlAiScript *)asdMemAlloc(0x100, 0x100, 0, 0x90, 1);
+    owner->job = taskCreateDraw("btlAIScript Calc", 2, 0, 0, btlAiScriptUpdate, btlAiScriptDestroy, owner, owner->id);
+    btlAiScriptReset();
 }
 
 } /* extern "C" */

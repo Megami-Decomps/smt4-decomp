@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0020ad6c(int, int, int);
 int FUN_00371c3c(int, int);
 int FUN_0038b3f8(int, int);
-int FUN_0038e4cc(int, int);
+int statusIconSetKind(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int gameGetSlotTable(void);
 extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: FUN_0038e4cc. */
+/* Supplied declaration required: statusIconSetKind. */
 
 
 void FUN_0039eaa8(int param_1,int param_2)
@@ -39,7 +39,7 @@ void FUN_0039eaa8(int param_1,int param_2)
   }
   *(int *)(param_1 + 0x4bac) = param_2;
   *(unsigned int *)(param_1 + 0x4bc0) = 0xffffffff;
-  FUN_0038e4cc(param_1,9);
+  statusIconSetKind(param_1,9);
   temp_v2 = 0;
   do {
     temp_v3 = 0;

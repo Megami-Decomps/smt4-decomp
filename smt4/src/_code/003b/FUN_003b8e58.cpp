@@ -8,14 +8,14 @@ extern "C" {
 
 int FUN_0022afc4(...);
 int objBlockInitAndMark(int);
-int FUN_0022b064(int);
+int buttonHelpSelectByProgress(int);
 int modelSetVisible(unsigned int, int);
 int FUN_0022b6c4(...);
 void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_0023d344(unsigned int);
 int FUN_002636d0(...);
 int dialogOpen(...);
-int FUN_0027e7b4(...);
+int infoWinSetMessage(...);
 int infoWinStartTimer(int);
 int scrScriptProcessStartEntry(...);
 int FUN_0029ee6c(int, int);
@@ -32,7 +32,7 @@ extern int DAT_0044cfb8; /* 0x44cfb8 */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022afc4. */
 /* Supplied declaration required: objBlockInitAndMark. */
-/* Supplied declaration required: FUN_0022b064. */
+/* Supplied declaration required: buttonHelpSelectByProgress. */
 extern int FUN_0022b14c(int);
 extern int FUN_0022b238(int, int);
 /* Supplied declaration required: modelSetVisible. */
@@ -41,7 +41,7 @@ extern int FUN_0022b238(int, int);
 /* Supplied declaration required: FUN_0023d344. */
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 extern int FUN_002903f0(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: infoWinStartTimer. */
@@ -79,7 +79,7 @@ void FUN_003b8e58(int param_1)
           if (temp_v1 == 0x14) {
             if (DAT_0044cfb8 != 0) {
               messageStatesSetFirst(1);
-              FUN_0022b064(param_1);
+              buttonHelpSelectByProgress(param_1);
               objBlockInitAndMark(param_1 + 0x9c);
               FUN_0022b6c4(param_1 + 0x9c);
               *(unsigned char *)(param_1 + 0x6cc) = 0;
@@ -179,14 +179,14 @@ void FUN_003b8e58(int param_1)
         return;
       }
       *(unsigned int *)(param_1 + 0x2c) = 0x1f;
-      FUN_0022b064(param_1);
+      buttonHelpSelectByProgress(param_1);
       objBlockInitAndMark(param_1 + 0x9c);
       FUN_0022b6c4(param_1 + 0x9c);
       *(unsigned char *)(param_1 + 0x6cc) = 0;
       DAT_0044cfb8 = 0;
       FUN_002636d0(1);
       dialogOpen(0);
-      FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
+      infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
                    *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
       return;
     }
@@ -217,7 +217,7 @@ void FUN_003b8e58(int param_1)
   *(unsigned int *)(param_1 + 0x28) = 5;
   *(unsigned int *)(param_1 + 0x2c) = 0;
   dialogOpen(0);
-  FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),*(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
+  infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),*(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
   DAT_0044cfb8 = 0;
   *(unsigned char *)(param_1 + 0x6ce) = 0;
   return;

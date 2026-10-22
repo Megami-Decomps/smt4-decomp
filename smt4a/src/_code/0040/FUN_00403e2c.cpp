@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -72,7 +72,7 @@ void FUN_00403e2c(int param_1)
   FUN_0039b984();
   *(unsigned int *)(param_1 + 0x664) = temp_v2;
   temp_v4[0] = 0;
-  temp_v1 = FUN_001643a0();
+  temp_v1 = ifTouchGetSelectionMode();
   temp_v0 = FUN_001834a4(0x32,0x8b);
   temp_v3 = param_1 + 0x90;
   FUN_003450d4(temp_v3,temp_v0,param_1 + 0x10c,(int)*(short *)(param_1 + 0x126),

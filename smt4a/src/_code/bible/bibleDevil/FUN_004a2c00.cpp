@@ -16,7 +16,7 @@ int rectangleInitializeSelection(...);
 int FUN_004a1958(...);
 int FUN_004a3e04(...);
 int partyIdsReset(...);
-int FUN_004a6c50(...);
+int partyIdsActivateEntry(...);
 int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
 int FUN_004d05c4(...);
@@ -54,7 +54,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: FUN_004a3e04. */
 /* Supplied declaration required: partyIdsReset. */
-/* Supplied declaration required: FUN_004a6c50. */
+/* Supplied declaration required: partyIdsActivateEntry. */
 /* Supplied declaration required: slotPoolResetTrackedState. */
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int flaggedValueHolderGetTotal(int *);
@@ -108,13 +108,13 @@ void FUN_004a2c00(int *param_1)
   puVar5[0x19] = (unsigned int)(param_1 + 0x32);
   FUN_004a1958(param_1);
   partyIdsReset((int)param_1 + 0x96);
-  FUN_004a6c50((int)param_1 + 0x96,0);
+  partyIdsActivateEntry((int)param_1 + 0x96,0);
   temp_v0 = rangeGetMinimumLimit(param_1 + 8);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {
       if ((short)param_1[temp_v1 * 8 + 0x21a] != 0) {
-        FUN_004a6c50((int)param_1 + 0x96,(short)param_1[temp_v1 * 8 + 0x21a]);
+        partyIdsActivateEntry((int)param_1 + 0x96,(short)param_1[temp_v1 * 8 + 0x21a]);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);

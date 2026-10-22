@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
+extern MessageGlobalsA g_messageMain;
 extern s32 vec2GetXInt(u8 *block);
 
 void panelInitBlockB00(void)

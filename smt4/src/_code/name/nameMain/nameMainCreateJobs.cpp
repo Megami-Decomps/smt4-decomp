@@ -21,7 +21,7 @@ u32 asdProcessCreateSimple(const char *name, s32 group, s32 first, s32 second,
                            s32 (*update)(void *), void (*end)(void *), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
                     s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
-s32 FUN_001d9578(void *process);
+s32 nameEntryUpdateTask(void *process);
 void nameWorkMarkDone(void *process);
 s32 nameDrawIfVisible(void);
 s32 nameDrawLowerCallback(void);
@@ -39,7 +39,7 @@ extern "C" void nameMainCreateJobs(const s32 *mode)
         FUN_003984a4(work->drawing);
     else
         FUN_003984ac(work->drawing, (s8)*mode);
-    work->process = asdProcessCreateSimple(DAT_004056ac, 2, 0, 0, FUN_001d9578,
+    work->process = asdProcessCreateSimple(DAT_004056ac, 2, 0, 0, nameEntryUpdateTask,
                                            nameWorkMarkDone, g_name.work);
     if (*mode != 1) {
         taskCreateDraw(DAT_004056bc, 0x7a, 1, 0, nameDrawIfVisible, NULL, g_name.work, work->process);

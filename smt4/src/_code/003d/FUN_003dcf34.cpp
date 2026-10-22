@@ -1,44 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dcf34` (_code @ 0x3dcf34, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [r5] differs from recovered ldr r0, [r5]. */
+#include "common.h"
+
+struct EffectNameEntryView {
+    char name[0x10];
+    s16 unk10;             // 0x10
+    u8 unk12[0x04];        // 0x12
+};
+
+struct EffectNameTableView {
+    u8 unk00[0x1cfc];      // 0x0000
+    EffectNameEntryView* entries; // 0x1cfc
+};
+
+struct BattleEffectView {
+    u8 unk00[0x14];        // 0x00
+    const char* name;      // 0x14
+};
 
 extern "C" {
-
-int btlGetMainState(void);
-int libc_strcmp(int, unsigned int);
-
-extern unsigned char g_btlEffect; /* 0x435d00 */
-
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: libc_strcmp. */
-
-
-int FUN_003dcf34(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  btlGetMainState();
-  temp_v0 = FUN_00293230();
-  if ((temp_v0 == 0) && (piVar3 = (int *)(param_1 + 0x1cfc), *piVar3 != 0)) {
-    temp_v0 = 0;
-    do {
-      temp_v1 = *piVar3 + temp_v0 * 0x16;
-      if ((temp_v1 != 0) && (libc_strcmp(temp_v1,(*(unsigned int *)((unsigned char *)&g_btlEffect + 0x14))), temp_v1 == 0)) {
-        temp_v0 = *piVar3 + temp_v0 * 0x16;
-        if (temp_v0 != 0) {
-          return (int)*(short *)(temp_v0 + 0x10);
-        }
-        return -1;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-  }
-  return -1;
+s32 btlGetMainState(void);
+s32 FUN_00293230(s32 mainState);
+s32 libc_strcmp(const char* left, const char* right);
+extern BattleEffectView g_btlEffect;
 }
 
-} /* extern "C" */
+// Find the current battle effect's name among four entries and return its signed value.
+extern "C" s32 FUN_003dcf34(EffectNameTableView* table)
+{
+    if (FUN_00293230(btlGetMainState()) != 0) {
+        return -1;
+    }
+
+    s32 result = -1;
+    if (table->entries != 0) {
+        for (s32 index = 0; index < 4; ++index) {
+            EffectNameEntryView* entry = table->entries + index;
+            if (entry != 0 && libc_strcmp(entry->name, g_btlEffect.name) == 0) {
+                entry = table->entries + index;
+                if (entry != 0) {
+                    result = entry->unk10;
+                }
+                break;
+            }
+        }
+    }
+    return result;
+}

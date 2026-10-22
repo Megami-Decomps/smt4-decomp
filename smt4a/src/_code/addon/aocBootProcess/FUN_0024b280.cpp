@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_001760cc(int);
+int aocReleasePackageOwner(int);
 int jyoucyuGetTableEntry(int);
 int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_001d0fcc(int *, int);
@@ -32,7 +32,7 @@ extern int g_aocSystem; /* 0x570280 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_001760cc. */
+/* Supplied declaration required: aocReleasePackageOwner. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
@@ -90,7 +90,7 @@ unsigned int FUN_0024b280(void)
   *(unsigned int *)(g_aocMain + 0x754) = temp_v5 & 0xffffff8f;
   if ((temp_v5 & 0x10) != 0) {
     *(unsigned char *)(temp_v0 + 8) = 4;
-    FUN_001760cc(g_aocSystem);
+    aocReleasePackageOwner(g_aocSystem);
     jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
     *(unsigned char *)(temp_v0 + 9) = 0;
     temp_v0 = sysLightEventTryWait(g_aocMain + 0x98);
@@ -149,7 +149,7 @@ unsigned int FUN_0024b280(void)
         return 0;
       }
       *(unsigned char *)(temp_v0 + 8) = 4;
-      FUN_001760cc(g_aocSystem);
+      aocReleasePackageOwner(g_aocSystem);
       jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       *(unsigned char *)(temp_v0 + 9) = 0;
       temp_v0 = sysLightEventTryWait(g_aocMain + 0x98);

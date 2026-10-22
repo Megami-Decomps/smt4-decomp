@@ -12,7 +12,7 @@ void mapIfClearGroupState(s32 group)
         return;
     }
     for (s32 index = 0; index < 128; ++index) {
-        Rec194 *record = mapIfGetRecords(interface) + index;
+        MapIfRecord *record = interface->records + index;
         if (record->active != 0 && record->groupView.id == group) {
             record->state = 0;
         }

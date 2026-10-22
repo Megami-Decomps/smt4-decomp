@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024bc98(...);
+int skillFormatTargetLabel(...);
 int FUN_0024bda8(...);
 int FUN_002907c4(...);
 int FUN_00295660(...);
@@ -49,7 +49,7 @@ extern unsigned char LAB_00292828; /* 0x292828 */
 extern unsigned char LAB_00292838; /* 0x292838 */
 extern int DAT_0043da2c; /* 0x43da2c */
 
-/* Supplied declaration required: FUN_0024bc98. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
@@ -134,7 +134,7 @@ void FUN_0029212c(int param_1)
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v8 + 0x62);
       if (temp_v6 != 0) {
         FUN_002ae164();
-        FUN_0024bc98(&temp_v12,(*(unsigned int *)(temp_v6 + 0x28) & 0x1ff) >> 5);
+        skillFormatTargetLabel(&temp_v12,(*(unsigned int *)(temp_v6 + 0x28) & 0x1ff) >> 5);
       }
       else if ((*(unsigned char *)(temp_v8 + 0x6a) & 0x80) != 0) {
         textFormatBuffer(&temp_v12,&LAB_00292624);
@@ -168,7 +168,7 @@ void FUN_0029212c(int param_1)
     }
     FUN_0024bda8(&temp_v12,*(unsigned int *)(temp_v5 + 0x54) >> 0x14);
     FUN_00295660(0x26,&temp_v12);
-    FUN_0024bc98(&temp_v12,*(unsigned char *)(temp_v5 + 0x59));
+    skillFormatTargetLabel(&temp_v12,*(unsigned char *)(temp_v5 + 0x59));
     FUN_00295660(0x27,&temp_v12);
     if (*(char *)(temp_v5 + 0x5b) == '\0') {
       textFormatBuffer(&temp_v12,&LAB_00292654);

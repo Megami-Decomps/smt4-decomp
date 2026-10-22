@@ -1,16 +1,16 @@
-#include "romwright_types.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
+#include <stddef.h>
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks;
 
 
-int FUN_002613f0(int param_1)
+int FUN_002613f0(int index)
 
 {
-  int *p = (int *)(*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
-  p = p + param_1 * 2;
-  return (int)p + 0x2714c;
+  u32 *words = (u32 *)g_gameDataBlocks.saveBlock;
+  words += index * (s32)(sizeof(GameSavedPairA) / sizeof(u32));
+  return (s32)words + (s32)offsetof(GameSavedPairTableA, entries);
 }
 
 } /* extern "C" */

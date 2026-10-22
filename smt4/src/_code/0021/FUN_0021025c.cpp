@@ -1,45 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021025c` (_code @ 0x21025c, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The rectangle arrays use different stack placement and saved-register allocation in the edge loop. */
+#include "common.h"
 
+namespace { struct Point2 { f32 x, y; }; }
 extern "C" {
+void FUN_00263028(u32 first, u32 second, f32 x0, f32 y0, f32 x1, f32 y1, f32 value0, f32 value1);
 
-int FUN_00263028(unsigned int, unsigned int);
-
-/* stack frame of param_4: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00263028. */
-
-
-void FUN_0021025c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Emits the four edges of a rectangle, closing both its positions and endpoint values. */
+void FUN_0021025c(u32 first, u32 second, u32 third, u32 fourth, f32 x, f32 y, f32 width, f32 height, f32 value0, f32 value1)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1 [7];
-  
-  temp_v1[0] = param_1;
-  temp_v1[1] = param_2;
-  temp_v1[2] = param_3;
-  temp_v1[3] = param_4;
-  temp_v1[4] = param_1;
-  temp_v0 = 0;
-  do {
-    FUN_00263028(temp_v1[temp_v0],temp_v1[temp_v0 + 1]);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 4);
-  return;
+    u32 values[5] = {first, second, third, fourth, first};
+    Point2 points[5] = {{x, y}, {x, y + height}, {x + width, y + height}, {x + width, y}, {x, y}};
+    for (s32 i = 0; i < 4; ++i) {
+        FUN_00263028(values[i], values[i + 1], points[i].x, points[i].y, points[i + 1].x, points[i + 1].y, value0, value1);
+    }
 }
-
-} /* extern "C" */
+}

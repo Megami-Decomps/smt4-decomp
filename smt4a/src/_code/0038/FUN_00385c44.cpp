@@ -9,7 +9,7 @@ int FUN_003f0070(...);
 int FUN_003f0e20(...);
 int FUN_003f26d4(...);
 int gameFlagSetValue(int, int, int);
-int FUN_0047f1c4(...);
+int itemEffectPlay(...);
 void btlUiStartCommandSelection(unsigned int, int, signed char, signed char, bool, bool);
 int FUN_004a9c84(...);
 int btlFindEntryValue(...);
@@ -84,7 +84,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0047f1c4. */
+/* Supplied declaration required: itemEffectPlay. */
 /* Supplied declaration required: FUN_004a9c84. */
 /* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
@@ -364,7 +364,7 @@ LAB_003861d0:
             temp_v8 = randRange(1);
             temp_v7 = temp_v20[temp_v8];
             FUN_004fdc9c(0,0,0xbb,temp_v7);
-            FUN_0047f1c4(temp_v7);
+            itemEffectPlay(temp_v7);
             param_1[0x2b] = 1;
             param_1[0x2d] = 0;
           }

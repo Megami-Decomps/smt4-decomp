@@ -1,35 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d2350` (_code @ 0x2d2350, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Signed division and glyph pointers use different registers and load scheduling. */
+#include "common.h"
 
 extern "C" {
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-void FUN_002d2350(int param_1,unsigned char *param_2)
-
+// Writes one or two Shift-JIS full-width decimal digits and a terminator.
+void FUN_002d2350(s32 value, u8* output)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  if (param_1 >= 10) {
-    temp_v0 = (param_1 / 10) * 2;
-    *param_2 = *(unsigned char *)(temp_v0 + 0x2d23d4);
-    temp_v1 = (param_1 % 10) * 2;
-    param_2[1] = *(unsigned char *)(temp_v0 + 0x2d23d5);
-    param_2[2] = *(unsigned char *)(temp_v1 + 0x2d23d4);
-    param_2[3] = *(unsigned char *)(temp_v1 + 0x2d23d5);
-    param_2[4] = 0;
-    return;
-  }
-  *param_2 = *(unsigned char *)(param_1 * 2 + 0x2d23d4);
-  param_2[1] = *(unsigned char *)(param_1 * 2 + 0x2d23d5);
-  param_2[2] = 0;
-  return;
+    const u8* digits = (const u8*)"\x82\x4F\x82\x50\x82\x51\x82\x52\x82\x53\x82\x54\x82\x55\x82\x56\x82\x57\x82\x58";
+    if (value >= 10) {
+        const u8* tens = &digits[(value / 10) * 2];
+        output[0] = tens[0];
+        const u8* ones = &digits[(value % 10) * 2];
+        output[1] = tens[1];
+        output[2] = ones[0];
+        output[3] = ones[1];
+        output[4] = 0;
+    } else {
+        output[0] = digits[value * 2];
+        output[1] = digits[value * 2 + 1];
+        output[2] = 0;
+    }
 }
-
-} /* extern "C" */
+}

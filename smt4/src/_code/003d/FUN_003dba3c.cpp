@@ -1,58 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dba3c` (_code @ 0x3dba3c, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the name address above the second memClear and keeps sp+0x80 and the path address in fp/r6 (as in smt4a FUN_004f84ec); built recomputes them */
+#include "common.h"
 
 extern "C" {
 
-int asdLoadFileAsyncSimple(...);
-int textFormatBuffer(...);
-int libc_strcpy(...);
-int asdMemFree(...);
-int memClear(...);
+/* An effect file slot: its record id, loaded data, file name and load flags. */
+typedef struct EffectFileSlot {
+    /* 0x00 */ u8 record;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ void *data;
+    /* 0x08 */ char name[0x80];
+    /* 0x88 */ u8 flags;
+    /* 0x89 */ u8 unk89[3];
+} EffectFileSlot;
 
-extern int keyedRecordFindByName(int);
-extern int FUN_002522e0(unsigned char *, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: memClear. */
+typedef struct FlashEffects {
+    /* 0x0000 */ u8 unk0000[0x2bc4];
+    /* 0x2BC4 */ EffectFileSlot slots[2];
+} FlashEffects;
 
+extern const char DAT_004007c4[][0x20]; /* effect names, "G_flash" first */
+extern const char DAT_004008c4[];       /* "battle/effect/%s.eft" */
 
-unsigned int FUN_003dba3c(int param_1)
+void memClear(void *dest, u32 size);
+void asdMemFree(void *block);
+s32 textFormatBuffer(char *output, const char *format, ...);
+char *libc_strcpy(char *dest, const char *src);
+char *FUN_002522e0(const char *string, s32 c);
+s32 keyedRecordFindByName(const char *name);
+void asdLoadFileAsyncSimple(const char *path, void **data, s32 a);
 
+/* Resets both flash effect slots and starts loading each effect file that no record provides yet. */
+u32 FUN_003dba3c(FlashEffects *effects)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [128];
-  unsigned char temp_v4 [132];
-  
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x2bc4) = 0xff;
-    memClear(temp_v1 + 0x2bcc,0x80);
-    if (*(int *)(temp_v1 + 0x2bc8) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2bc8) = 0;
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        EffectFileSlot *slot = &effects->slots[i];
+        char path[0x80];
+        char formatted[0x80];
+
+        slot->record = 0xff;
+        memClear(slot->name, sizeof(slot->name));
+        if (slot->data != NULL) {
+            asdMemFree(slot->data);
+            slot->data = NULL;
+        }
+        slot->flags = 0;
+        memClear(path, sizeof(path));
+        memClear(formatted, sizeof(formatted));
+        textFormatBuffer(formatted, DAT_004008c4, DAT_004007c4[i]);
+        libc_strcpy(path, formatted);
+        libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+        if (keyedRecordFindByName(slot->name) == 0xff) {
+            asdLoadFileAsyncSimple(path, &slot->data, 0);
+            slot->flags |= 1;
+        }
     }
-    *(unsigned char *)(temp_v1 + 0x2c4c) = 0;
-    memClear(temp_v3,0x80);
-    memClear(temp_v4,0x80);
-    textFormatBuffer(temp_v4,"battle/effect/%s.eft","G_flash" + temp_v2 * 0x20);
-    libc_strcpy(temp_v3,temp_v4);
-    temp_v0 = FUN_002522e0(temp_v3,0x2f);
-    libc_strcpy(temp_v1 + 0x2bcc,temp_v0 + 1);
-    temp_v0 = keyedRecordFindByName(temp_v1 + 0x2bcc);
-    if (temp_v0 == 0xff) {
-      asdLoadFileAsyncSimple(temp_v3,temp_v1 + 0x2bc8,0);
-      *(unsigned char *)(temp_v1 + 0x2c4c) = *(unsigned char *)(temp_v1 + 0x2c4c) | 1;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

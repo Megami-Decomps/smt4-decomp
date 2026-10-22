@@ -9,7 +9,7 @@ extern GameStateA g_gameState;
 void FUN_002d8b34(u32 value)
 {
     if (FUN_002a4b28(value & 0xFFFF) == 0) {
-        g_gameState.unk308 = value;
+        g_gameState.mapFlags.unk308 = value;
     }
 }
 

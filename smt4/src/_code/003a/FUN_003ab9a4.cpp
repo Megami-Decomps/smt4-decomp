@@ -14,7 +14,7 @@ extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_00262cb0(unsigned short);
 extern int statusGetAvailableChoiceCount(void);
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029c43c. */
 
 
@@ -31,7 +31,7 @@ void FUN_003ab9a4(int param_1)
   
   temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x5a0));
   if (temp_v1 == 2) {
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 == 0) {
       pcVar5 = (char *)(param_1 + 0xa5b0);
       *pcVar5 = '\0';

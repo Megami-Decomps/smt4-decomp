@@ -21,7 +21,7 @@ int FUN_0026beb4(...);
 int gameSavedFlagSet(void);
 int dataTable08Sub1GetRecord(void);
 int FUN_0033b33c(...);
-int FUN_003dcc48(...);
+int btlLookupEffectValue(...);
 int FUN_003ddae8(...);
 int FUN_003ddd30(...);
 int FUN_003de60c(...);
@@ -164,7 +164,7 @@ extern int slotTableValueReducedByRecord(unsigned int);
 /* Supplied declaration required: FUN_003d13d4. */
 extern int FUN_003d98a0(int, int);
 extern int btlGetMaximumNamedValue(int);
-/* Supplied declaration required: FUN_003dcc48. */
+/* Supplied declaration required: btlLookupEffectValue. */
 extern unsigned int FUN_003dcf34(int);
 /* Supplied declaration required: btlReflectCreateKind1c. */
 /* Supplied declaration required: FUN_003dda20. */
@@ -688,12 +688,12 @@ LAB_003d444c:
   if (((char)param_2[0x167] == '\x01') && (temp_v13 != 0)) {
     temp_v14 = 0;
     do {
-      temp_v4 = FUN_003dcc48(DAT_00435d18);
+      temp_v4 = btlLookupEffectValue(DAT_00435d18);
       if (-1 < temp_v4) {
         temp_v5 = temp_v13 + temp_v14 * 0x16;
         temp_v4 = FUN_003d98a0(DAT_00435d18,temp_v5 + 0x108);
         if (temp_v4 != 0) {
-          temp_v8 = FUN_003dcc48(DAT_00435d18);
+          temp_v8 = btlLookupEffectValue(DAT_00435d18);
           FUN_003ddae8(temp_v8,param_2);
         }
         else if (param_2[0x165] != 0) {

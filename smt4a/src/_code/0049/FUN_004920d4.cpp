@@ -13,7 +13,7 @@ int FUN_00487470(...);
 int uiDrawAnimatedMessage(...);
 int FUN_0048b260(...);
 int FUN_0048b514(...);
-int FUN_00492c5c(int);
+int naviMainGetRequestedMap(int);
 int FUN_00492c84(...);
 int words2Copy(...);
 int MapNaviTable_GetAreaCount(void);
@@ -64,7 +64,7 @@ extern int FUN_004083a8(int);
 extern int FUN_0048e40c(int);
 extern unsigned int lmapSceneGetObj(void);
 extern int naviMainSelectPair(int);
-/* Supplied declaration required: FUN_00492c5c. */
+/* Supplied declaration required: naviMainGetRequestedMap. */
 extern int FUN_00492c70(int);
 /* Supplied declaration required: FUN_00492c84. */
 /* Supplied declaration required: words2Copy. */
@@ -142,7 +142,7 @@ void FUN_004920d4(int param_1)
     NaviMain_GetCurrentMap(temp_v3);
     temp_v27 = DAT_005f1604;
     if (DAT_005f1a5e != '\0') {
-      FUN_00492c5c(temp_v3);
+      naviMainGetRequestedMap(temp_v3);
       temp_v4 = FUN_00492c70(temp_v3);
       temp_v27 = DAT_005f1604;
       if (DAT_005f1a5e != '\0') {

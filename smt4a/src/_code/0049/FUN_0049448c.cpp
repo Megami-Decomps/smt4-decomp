@@ -3,13 +3,13 @@
 
 extern "C" {
 
-extern int FUN_0049cc10(u32 handle);
+extern int aocItemGetPrice(u32 handle);
 extern int FUN_0049c9a0(u32 handle);
 
-/* Comparison of two handles: by FUN_0049cc10, then by FUN_0049c9a0. */
+/* Comparison of two handles: by aocItemGetPrice, then by FUN_0049c9a0. */
 int FUN_0049448c(u32 a, u32 b)
 {
-    int diff = FUN_0049cc10(a) - FUN_0049cc10(b);
+    int diff = aocItemGetPrice(a) - aocItemGetPrice(b);
 
     if (diff == 0) {
         diff = FUN_0049c9a0(a) - FUN_0049c9a0(b);

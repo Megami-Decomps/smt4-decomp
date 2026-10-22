@@ -28,7 +28,7 @@ AreaTimerRecord *dataTable2EGetEntry(s32 index);
 s32 dataTableGetRecordFortyEight();
 AreaFlagRecord *FUN_003799d0(s32 index);
 void FUN_003b9720(s32 area, s32 index);
-void FUN_00368aa0(s32 area);
+void gameClearMapGroupFlags(s32 area);
 void FUN_002ba544(s32 area);
 extern CurrentAreaState g_gameState;
 }
@@ -76,7 +76,7 @@ extern "C" void FUN_0037723c(s32 immediate)
             FUN_003b9720(area, j);
         }
         if (immediate != 0) {
-            FUN_00368aa0(area);
+            gameClearMapGroupFlags(area);
         } else {
             FUN_002ba544(area);
         }

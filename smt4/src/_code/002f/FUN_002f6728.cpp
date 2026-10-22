@@ -1,15 +1,14 @@
-#include "common.h"
-
-namespace { struct Status { u8 padding[0x400]; u32 state; u32 previous; u32 unknown; u32 next; }; }
+#include "status/StatusDown.h"
 
 extern "C" {
+extern StatusDownState *g_statusDown;
 /* Reads or updates the requested object state. */
-extern Status *g_statusDown;
+
 void FUN_002f6728(void)
 {
-    Status *status = g_statusDown;
-    status->next = 0;
-    status->previous = status->state;
+    StatusDownState *status = g_statusDown;
+    status->unk40C = 0;
+    status->previousState = status->state;
     status->state = 3;
 }
 }

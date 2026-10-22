@@ -18,7 +18,7 @@ int FUN_002b7f58(void);
 int FUN_002dae68(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
-int FUN_00313648(unsigned int);
+int mapSetSceneState(unsigned int);
 int FUN_003250ac(...);
 int mapIfReleaseRequestObject(void);
 int mathPositionHeadingDegrees(void);
@@ -58,7 +58,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mathVec3Dot. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mapIfReleaseRequestObject. */
@@ -261,7 +261,7 @@ void FUN_00327964(void)
              (temp_v4 = *(int *)(temp_v3 + 8) + 1, *(int *)(temp_v3 + 8) = temp_v4, temp_v4 < 4))
           goto LAB_00327dc8;
           temp_v12 = 1;
-          FUN_00313648(temp_v12);
+          mapSetSceneState(temp_v12);
         }
         else {
           mapIfReleaseRequestObject();
@@ -283,7 +283,7 @@ void FUN_00327964(void)
         mapIfReleaseRequestObject();
         mapIfSetMode1();
         temp_v12 = 8;
-        FUN_00313648(temp_v12);
+        mapSetSceneState(temp_v12);
       }
     }
   }

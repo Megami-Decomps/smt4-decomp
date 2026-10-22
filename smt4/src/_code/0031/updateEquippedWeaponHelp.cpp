@@ -1,28 +1,29 @@
 /* NON_MATCHING: only the initial global-address load is scheduled two instructions later; -O2 candidate. */
-#include "shard/Obj43da28.h"
+#include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 struct EquipmentHelpPlayer { u16 equippedId; };
 struct EquipmentHelpHolder {
-    Holder43da28 prefix;
+    ButtonHelpGlobals prefix;
     RelativeDirectory *defaultDirectory;
 };
 extern "C" {
+extern ButtonHelpGlobals g_buttonHelp;
 const EquipmentHelpPlayer *gameGetPlayerData();
 void FUN_0029ede8(u32, u32, s32, s32);
 void FUN_002907c4(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 void FUN_00295660(u32, const char *);
 void FUN_0024bda8(char *, u32);
-void FUN_0024bc98(char *, s32);
+void skillFormatTargetLabel(char *, s32);
 void FUN_001f4568(u32, u32, u32, char *);
 void asdTextDrawDirectoryEntry(AsdText *, u32, s32, s32, s32, RelativeDirectory *, u32);
 
 void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
 {
-    Obj43da28 *help = g_buttonHelp.obj;
+    ButtonHelpWork *help = g_buttonHelp.work;
     RankedTableRecord *entry = dataTable08Sub2GetRecord(gameGetPlayerData()->equippedId);
     if (!entry) {
         help->unk4CB = 0;
@@ -43,7 +44,7 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
     }
     FUN_0024bda8(text, rankedTableRecordGetSortFlags(entry) >> 20);
     FUN_00295660(0x26, text);
-    FUN_0024bc98(text, entry->category);
+    skillFormatTargetLabel(text, entry->category);
     FUN_00295660(0x27, text);
     // The original labels are full-width Latin characters encoded in CP932.
     if ((s8)entry->rank == 0)

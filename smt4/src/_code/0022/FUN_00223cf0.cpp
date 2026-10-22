@@ -1,61 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00223cf0` (_code @ 0x223cf0, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the state change stores as add+stm with the timer first; retail writes stmib with writeback and the timer through it. */
+#include "shard/W4_W4Match2_UiQuest.h"
 
 extern "C" {
 
-int FUN_00250798(void);
-int FUN_0028fe0c(int, int);
-int FUN_00290d5c(int);
-int timerStart(...);
+void uiQuestLoadResources(void);
+void FUN_0028fe0c(u16 id, s32 mode);
+void FUN_00290d5c(s32 sound);
+s32 FUN_0029efa8(void *cursor);
+s32 FUN_0029efc0(void *cursor);
+void timerStart(void *timer, s32 a, s32 b);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_uiQuest; /* 0x43dd50 */
-
-/* Supplied declaration required: FUN_00250798. */
-/* Supplied declaration required: FUN_0028fe0c. */
-/* Supplied declaration required: FUN_00290d5c. */
-extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
-/* Supplied declaration required: timerStart. */
-
-
-void FUN_00223cf0(void)
-
+/* Switch the quest menu to a new state, remembering the old one and restarting its timer. */
+static void uiQuestChangeState(s32 state)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = g_uiQuest;
-  *(unsigned char *)(g_uiQuest + 0x5c4) = 0;
-  if (*(int *)(temp_v0 + 4) != 0xd) {
-    FUN_00250798();
-    temp_v1 = FUN_0029efc0(temp_v0 + 0x660);
-    temp_v2 = FUN_0029efa8(temp_v0 + 0x660);
-    FUN_0028fe0c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x78a),1);
-    timerStart(temp_v0 + 0x34,0);
-    temp_v0 = g_uiQuest;
-    temp_v3 = *(unsigned int *)(g_uiQuest + 4);
-    *(unsigned int *)(g_uiQuest + 4) = 1;
-    *(unsigned int *)(temp_v0 + 8) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x10) = 0;
-    return;
-  }
-  timerStart(temp_v0 + 0x34,2,0);
-  temp_v0 = g_uiQuest;
-  temp_v3 = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(g_uiQuest + 4) = 3;
-  *(unsigned int *)(temp_v0 + 8) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  FUN_00290d5c(0xa0);
-  return;
+    UiQuest *quest = g_uiQuest;
+    s32 previous = quest->state;
+
+    quest->state = state;
+    quest->previousState = previous;
+    quest->timer = 0;
+}
+
+/* Leave the quest detail view: open the selected quest, or go back from state 13 with a cancel sound. */
+void FUN_00223cf0(void)
+{
+    UiQuest *quest = g_uiQuest;
+
+    quest->panel.detailMode = 0;
+    if (quest->state != 13) {
+        uiQuestLoadResources();
+        FUN_0028fe0c(quest->list[FUN_0029efc0(quest->cursor.data) + FUN_0029efa8(quest->cursor.data)], 1);
+        timerStart(quest->mainSprite, 0, 0);
+        uiQuestChangeState(1);
+        return;
+    }
+    timerStart(quest->mainSprite, 2, 0);
+    uiQuestChangeState(3);
+    FUN_00290d5c(0xa0);
 }
 
 } /* extern "C" */

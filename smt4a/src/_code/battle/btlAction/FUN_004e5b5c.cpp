@@ -1,45 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e5b5c` (_code @ 0x4e5b5c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the random pick in r3 across btlUnitGet (same-file callee register knowledge) and holds context/count in r4/r5 the other way round. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+struct BtlActionContext {
+    /* 0x00 */ BtlMainStateA *battle;
+};
 
 extern "C" {
+extern u64 DAT_00571190;
 
-extern unsigned int DAT_00571190; /* 0x571190 */
-extern unsigned int DAT_00571194; /* 0x571194 */
+s16 FUN_004e9ae8(BtlActionContext *context, s32 *candidates, s32 count, u32 mode);
+s32 lcgRandomRange(u16 limit);
+u8 *btlUnitGet(BtlActionContext *context);
 
-extern int lcgRandomRange(short);
-extern short FUN_004e9ae8(int *, int *, int, unsigned int);
-extern int btlUnitGet(int *);
-
-
-void FUN_004e5b5c(int *param_1)
-
+/* Marks one random combatant among those matching the mask as chosen in the acting unit's selection flags. */
+void FUN_004e5b5c(BtlActionContext *context)
 {
-  short temp_v0;
-  unsigned int *puVar2;
-  short *psVar3;
-  int temp_v1;
-  int temp_v2;
-  int aiStack_1d0 [110];
-  
-  temp_v1 = 0;
-  temp_v2 = 0x6d;
-  puVar2 = *(unsigned int **)(*param_1 + 0x1ffc);
-  psVar3 = (short *)((int)puVar2 + 0x6e);
-  do {
-    if ((puVar2[1] & DAT_00571194) != 0 || (*puVar2 & DAT_00571190) != 0) {
-      aiStack_1d0[temp_v1] = (int)*psVar3;
-      temp_v1 = temp_v1 + 1;
+    s32 candidates[110];
+    s32 count = 0;
+    BtlMainStateA *battle = context->battle;
+
+    for (s32 i = 0; i < 109; i++) {
+        if ((battle->entries[i].flags & DAT_00571190) != 0) {
+            candidates[count++] = battle->entries[i].indexView.selectionIndex;
+        }
     }
-    temp_v2 = temp_v2 - 1;
-    puVar2 = puVar2 + 0x102;
-    psVar3 = psVar3 + 0x204;
-  } while (temp_v2 != 0);
-  temp_v0 = FUN_004e9ae8(param_1,aiStack_1d0,temp_v1,0);
-  temp_v1 = lcgRandomRange(temp_v0 - 1);
-  temp_v2 = btlUnitGet(param_1);
-  *(unsigned char *)(aiStack_1d0[temp_v1] + temp_v2 + 0x38) = 1;
-  return;
+    s32 pick = lcgRandomRange(FUN_004e9ae8(context, candidates, count, 0) - 1);
+    btlUnitGet(context)[candidates[pick] + 0x38] = 1;
 }
 
 } /* extern "C" */

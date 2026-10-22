@@ -1,26 +1,16 @@
-#include "common.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-typedef struct GameState {
-    /* 0x0000 */ u8 unk0000[0x1374];
-    /* 0x1374 */ s32 flag;
-} GameState;
-
-typedef struct GameGlobalsView {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ GameState *state;
-} GameGlobalsView;
-
-extern GameGlobalsView g_gameGlobals;
+extern ObjBRef g_gameGlobals;
 
 /* Returns whether the game state exists and has its 0x1374 flag set. */
 u32 FUN_002a7410(void)
 {
-    GameState *state = g_gameGlobals.state;
+    ObjB *state = g_gameGlobals.instance;
 
     if (state != NULL) {
-        return state->flag != 0;
+        return state->unk1374 != 0;
     }
     return 0;
 }

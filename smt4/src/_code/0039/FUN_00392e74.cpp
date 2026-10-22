@@ -10,7 +10,7 @@ int jobStopAndClearFlags(unsigned int *);
 int aocClearDisplayFlag(unsigned int);
 int jobOwnerFreeSlotAndStop(unsigned int *);
 int ifTouchRegionRemove(void);
-int FUN_002ba9ac(unsigned int);
+int aocReleasePackageOwner(unsigned int);
 int _ZN18WindowStatusResultC1Ej(unsigned int [3], int);
 int FUN_002bf818(unsigned int *);
 int jobStop(unsigned int, int);
@@ -31,7 +31,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_002ba9ac. */
+/* Supplied declaration required: aocReleasePackageOwner. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
@@ -99,7 +99,7 @@ void FUN_00392e74(unsigned int *param_1)
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   if (param_1[1] == 10) {
     aocClearDisplayFlag(g_aocSystem);
-    FUN_002ba9ac(g_aocSystem);
+    aocReleasePackageOwner(g_aocSystem);
   }
   piVar4 = (int *)param_1[0x82];
   param_1[1] = 0x11;

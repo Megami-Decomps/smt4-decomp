@@ -9,7 +9,7 @@ int FUN_0028bf2c(void);
 int FUN_00295660(int, unsigned char [128]);
 int FUN_00295a18(int, int);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_00297050(int);
+int messageMainSetEnabled(int);
 int FUN_0029ede8(int, int, unsigned int, int);
 int FUN_002be650(unsigned int, int);
 int libc_strcpy(unsigned char [128], unsigned int);
@@ -28,7 +28,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297050. */
+/* Supplied declaration required: messageMainSetEnabled. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: libc_strcpy. */
@@ -80,7 +80,7 @@ unsigned int FUN_002110ac(int param_1)
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0xf);
       *(unsigned int *)(param_1 + 0xd38) = 3;
       FUN_00295a18(*(unsigned short *)((int)temp_v6 + *(int *)(param_1 + 0xd50) * 2),temp_v2);
-      FUN_00297050(1);
+      messageMainSetEnabled(1);
       return 0;
     }
     temp_v2 = gameDataBlocksGetFlagByteA();

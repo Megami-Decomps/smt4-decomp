@@ -1,5 +1,6 @@
 /* NON_MATCHING: initial registration branch layout and zero/one constant registers differ; -O2 candidate. */
-#include "shard/W4_W4Match5b_MessageMain.h"
+#include "ui/MessageMain.h"
+extern "C" MessageGlobalsA g_messageMain;
 
 struct DemonBannerSprite { u8 data[0x8c]; };
 struct DemonBannerQueue { u8 status[12]; u32 ids[12]; };
@@ -35,14 +36,14 @@ void sysPlayVoice(u32);
 
 u32 scrShowDemonNotification()
 {
-    DemonBanner *banner = (DemonBanner *)g_messageMain.banner;
+    DemonBanner *banner = (DemonBanner *)g_messageMain.panel;
     u32 id = scrGetArg(0);
     if (scrGetCommandFrame() == 0) {
         if (banner->active) {
             ++banner->index;
             banner->timer = 20;
         } else {
-            DemonBanner *current = (DemonBanner *)g_messageMain.banner;
+            DemonBanner *current = (DemonBanner *)g_messageMain.panel;
             current->active = 1;
             current->phase = 1;
             FUN_0014e188(&current->background, 20, 3001, current->owner, 11, 1.0f);

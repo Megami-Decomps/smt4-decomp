@@ -4947,3 +4947,232 @@
 0023c08c uniteStartOrQueueRequest inferred Starts an accepted unite script request immediately or saves it as pending while the system is busy.
 004989f0 shopStartSelectionScript inferred Builds the shop item text and starts the selection script with the appropriate entry and message type.
 00387edc saveBuildSummary inferred Builds the save summary from the slot table, save data, selected slot, party slots, and summary record.
+002921d8 btlViewGetEnabledValue inferred [med] Returns the battle-view float when the feature flag is set, otherwise zero.
+002984a0 btlCameraDispatchCurrentJob inferred [high] Dispatches current job work to the allocated battle-camera object.
+00298508 btlEffectDispatchCurrentJob inferred [high] Apocalypse twin dispatches current job work to the battle-effect block.
+00328740 btlGameOverDispatchCurrentJob inferred [high] Dispatches current job work to the allocated game-over object.
+0034e00c scrBattleIsUnitHpPercentAtMost inferred [high] Compares current/max HP percentage against the script threshold, with the form-specific counter gate.
+003c1ffc scrBattleGetPartnerAttackState inferred [high] Returns partner-attack state when the battle-state predicate accepts, otherwise the default state.
+004abdfc btlUiQueueMenuAction inferred [high] Forwards to menu32QueueAction for the UI panel.
+004abfec btlUiIsMenuSceneActive inferred [med] Requires both the menu-mode predicate and the active UI-scene predicate.
+004f5710 btlEffectNameHasPrefix inferred [high] Compares a supplied string against the configured effect prefix, using that prefix length.
+0022e9b8 uniteGetWork inferred [high] Twin fusion work singleton accessor.
+001760cc aocReleasePackageOwner inferred [med] Twin owner teardown with the Apocalypse destructor callback.
+002c76d8 gameDataAddHomeButtonHold inferred [high] Adds hold-reason bits, clears the idle marker, and holds the HOME button.
+0047dd18 gameStateResetRecord inferred [med] Twin record reset and game-state flag clear.
+00237620 campCecIsScriptRunning inferred [high] Checks for the communication script object and rejects its completed opcode state.
+00237650 campHideNumericBanner inferred [high] Dismisses the numeric banner and sets its sprite keyframe.
+0023b410 gameSessionAcquireSpriteTable inferred [high] Loads the sprite table for its first user and increments its reference depth.
+002a27e4 campCecEditDraw inferred [high] Submits the edit screen image for drawing only while the image is active.
+002bf508 campCecEditIsOpen inferred [high] Reports whether the edit screen singleton exists.
+002e2aac campShutdown inferred [high] Releases camp resources, stops its job, frees its work, and clears the singleton.
+00325aa0 gameStateAdvanceModeCounter inferred [high] Advances the counter in the four supported game modes, saturating at six.
+003490b4 scrCommFinishBattleTalk inferred [high] Marks the battle-talk flag, destroys battle-talk work, and conditionally requests the sequence.
+0037025c scrCommPollRequest inferred [med] Advances or acknowledges the script request state and its option flag.
+0038b330 saveLoadProcessUpdateSdCardDetection inferred [high] Stores the current SD-card detection result in save/load process state.
+0037e0b8 gameSetStatusCameraHeightMode inferred [high] Twin status-camera height mode setter, guarded by session presence.
+00239294 gameDataGetExtraBlock inferred [high] Returns the Apocalypse-only allocated extra-block pointer.
+002a46f8 gameDataGetSmallBlock inferred [high] Returns the allocated small work-block pointer.
+0013710c titleRunActiveCommand inferred [med] Runs the active title command when command recording is enabled and the title command predicate succeeds.
+0013c1a0 frameTexReleaseWork inferred [high] Releases the four frame-work resources, frees the job work and clears the frame-work global.
+001445b0 asdTextSetDefaultColor inferred [high] Sets the default text color, clearing the low byte as text creation also does.
+001802d4 ifTouchIsInitialSelection inferred [high] Tests the selected region and initial selection mode before the repeat counter advances.
+001643a0 ifTouchGetSelectionMode inferred [high] Reads the touch selection mode byte.
+00165070 ifTouchGetSelectedRegion inferred [high] Reads the signed selected touch-region index.
+003aeaf0 buttonHelpGetEntryValue inferred [high] Returns the halfword payload of one of six button-help entries; the IV version also guards a missing work pointer.
+00318df4 buttonHelpSetHelpState inferred [high] Sets the embedded help-state byte.
+003423cc buttonHelpSetSelectedId inferred [high] Sets the selected entry ID when button-help work exists.
+00387ac4 buttonHelpSetMode inferred [high] Sets the button-help mode byte.
+0027db84 qcMainRunEntryIfLoaded inferred [med] Calls the quest-entry handler only when both quest-center work and its entry exist.
+002bd4bc shopMainUpdateChild inferred [med] Invokes the shop child handler in the supported shop screen modes when its child/result handle exists.
+00239480 messageMainIsWindowActive inferred [high] Tests whether the message window exists and its state is active.
+002e48c4 scrCommShowMessage inferred [high] Sets the message display mode and dispatches the owner/kind using the current script argument and command frame.
+0039a638 messageMainStartMenuAnimationIfEnabled inferred [high] Starts the embedded menu animation only when the saved menu-enable flag is set.
+003c5fc4 messageMainSetTargetFlags inferred [high] Sets the banner target-flags byte when its pointer exists; the IV twin already has this name.
+002a7288 statusDownRestartTransition inferred [high] Restarts the status transition, records the prior state, removes touch registrations and clears its slot buffer.
+002d7f08 mapIfLoadWidgets inferred [high] Loads the interface texture table and stores each sprite, enabling the interface widget flags.
+00353a88 mapIfReleaseFirstOverlay inferred [high] Releases the first overlay resource through its vtable, clears the slot and releases its texture node.
+00398258 mapIfStartNavigation inferred [high] Configures the navigation start flags, starts navigation, and arms the info-window timer for the ordinary start path.
+002758b0 naviMainUpdateSlider inferred [high] Applies the signed low input byte to the navigation slider and updates the panel, optionally running its extra update.
+002ba754 naviMainPollResourcesAndUpdatePanel inferred [high] Updates the embedded navigation panel only after textures are loaded and the navigation owner is not busy.
+002de9b8 naviMainUpdateWidget inferred [med] Updates the embedded menu/navigation widget when its owner exists.
+00492aa0 naviMainSetCurrentMap inferred [high] Sets the current navigation map ID.
+00492c18 naviMainSetValuePair inferred [high] Copies both navigation value-pair words.
+003b0410 scrCommTriggerMapEvent inferred [high] Dispatches the script-selected map event, resetting scene state and time for the alternate event.
+00312870 mapGimicPlayEntryAnimation inferred [high] Finds the active gimmick by ID and starts the requested animation on its object handle.
+0033bed4 mapGimicIsEntryAnimationComplete inferred [high] Tests whether the active gimmick entry with the requested ID has completed its animation.
+00492c5c naviMainGetRequestedMap inferred [high] Returns the map ID from the pending navigation map request, distinct from currentMap.
+004a76a8 bibleScreenSetup inferred [high] acquires camp background/button help and texture tables, then async-loads bible/bible.bf and bible/bible.mbm
+0035b21c campCommonRelease inferred [med] releases the camp script, buffers, texture table 20 and button help, then tail-calls campCommonBgRelease
+0035ceb0 scrCommStartMapTransition inferred [high] Starts the requested map entry and marks the transition pending before the sequence request.
+00284120 ifTouchGetRegionX inferred [high] Returns the indexed touch rectangle x coordinate as signed 16-bit, or zero when touch state is absent.
+00351638 effectCloneTexturePivot inferred [high] Creates a copy of the effect texture-pivot parameters and owned block.
+002b5000 btlCameraCreate inferred [high] Allocates and initializes the battle-camera work and its jobs.
+00482610 callbackCreateControllerForKind inferred [med] Selects the kind-specific controller initializer and binds the controller to its owner.
+003c58c4 effectPollResourceFileDialog inferred [high] Polls the effect editor file chooser and loads the selected resource while resetting editor state.
+0018a9bc mathCopyIdentityMatrix inferred [high] Initializes a cached identity matrix once and copies it to the destination.
+004a6c50 partyIdsActivateEntry inferred [high] Marks an existing party ID active or inserts it into the first free slot after record validation.
+003a3a48 btlReflectReleaseContextAndStop inferred [high] Unlinks and frees all reflection actions, frees the context and stops its owning job.
+0019dbb8 asdLoadFileHasDevice inferred [high] Twin colon scan in the first eight path characters; retail wstrlen helper is byte-oriented.
+00359008 cecWriteMessageBoxNameAndData inferred [high] Opens the CEC message box, writes the UTF-16 name and supplied data under separate tags, then closes it; returns 0 on open success or 5 on failure.
+001bcd8c asdFileFinalizeCompletion inferred [high] Delivers data or null through the output pointer and callback, clears successful request data to transfer ownership, then releases the request and frees the completion record.
+00224404 mapTrapClearState inferred [high] Zeros the listed integer, byte, and floating-point fields of g_mapTrap while leaving padding bytes untouched.
+004f8054 btlFindEffectValueByNamePrefix inferred [high] When the owner has a table and the battle flag check returns zero, returns the signed value of the first entry whose name starts with the current effect name; otherwise returns -1.
+0019e1fc dataSubmitSelectedPresetBlock inferred [med] Copies three constant data blocks to locals and submits the block selected by mode through FUN_001b4120, passing its byte size.
+00275b10 scriptReadStackValueAsFloat inferred [high] Reads a depth-relative script stack entry and returns a float using its type tag, including integer conversion and indexed table reads; unsupported tags return zero.
+004bc850 dataSelectPrioritizedCandidate inferred [med] Scans six candidate IDs, skips zero or missing entries, returns the first with the high-bit flag, otherwise selects the highest low-15-bit rank; returns zero if none qualify.
+003de898 gameFlagSetEligibleEntryFlagsAtThreshold inferred [high] Scans entries, skips flagged or ineligible ones, and sets each associated nonzero flag when the record's nonzero threshold is at most the supplied threshold.
+004bbae0 dataTableFindEntryOccurrenceByBytePair inferred [high] Scans table entries for matching first and second bytes, returning the requested zero-based matching occurrence or null.
+002ff6f8 matrixInitializeWithScaleAndOffset inferred [high] Initializes from a source matrix or identity, then applies optional uniform scaling and a three-component offset.
+003a2784 dataTableFindFirstPermittedRecordIndex inferred [high] Returns the first identifier-matching record index whose required flag is set or absent and excluded flag is unset or absent, stopping at the sentinel; returns -1 if none qualifies.
+0046e238 gameFlagsSetFlagsFromTaggedGroupEntries inferred [high] Iterates groups passing the group predicate and calls gameFlagSetValue(entry->unk3C, 1, 1) for entries tagged '6'.
+003bcd44 scriptComparePlayerStatThreshold inferred [high] Selects a halfword threshold from the table and sets the script result from the signed player-stat comparison.
+00493408 drawTextAtRelativePosition inferred [high] Twin relative-position formatted text draw.
+00184ae0 fontMeasureFormattedText inferred [med] Formats variadic text into a 32-byte buffer and multiplies the reported length by a category-specific character width.
+0013a700 soundInitializePersistentSlots inferred [high] Twin of IV persistent sound initialization.
+0015f378 aocThreadAllocateStorage inferred [high] Twin of IV addon thread storage allocation.
+00379434 mapEnvironmentApplySelectedEntry inferred [high] Twin of IV selected map environment application.
+002a283c campRunScriptEntry inferred [high] Starts camp script entry sixteen, runs it until completion, and restores the camp screen.
+0014e3bc asdMemoryAllocWithFlags inferred [high] Twin of IV flag-controlled memory allocation.
+002b42d0 effPolyTexClone inferred [high] Twin of IV polygon texture effect cloning.
+0048b1bc mathHeadingToDirectionCode inferred [high] Twin of IV heading-to-direction-code conversion.
+0039c64c dataFindSymmetricPair inferred [high] Twin of IV symmetric table-five pair lookup.
+00368aa0 gameClearMapGroupFlags inferred [med] Clears active type-two flags from table2C entries belonging to the requested group and notifies their owner.
+003bb088 eventTexRemoveHandle inferred [high] Removes the first matching texture handle and compacts the sixteen-slot event texture queue.
+002e5ba0 btlGameOverPollSequence inferred [high] Dispatches the game-over sequence state, waits for its job and reports completion.
+003f3a04 slotPlacementStartTransition inferred [high] Twin of IV slot placement transition initialization.
+002418f8 appComparePurchaseOrder inferred [high] Twin of IV application purchase ordering.
+00409d00 countersRecordPlayerMaxima inferred [high] Raises five persistent maxima to include current player statistics.
+003f391c skillChooseRandomFlaggedSlot inferred [high] Twin of IV random eligible skill-slot selection.
+004808c0 gameScaleCategoryAmount inferred [high] Converts an amount using the floating factor selected by category.
+0038843c messageRestoreBanner inferred [high] Restores the saved message value and reopens the banner resume animation.
+00313648 mapSetSceneState inferred [high] Changes scene main state, resets state-specific words and clears map flag work.
+0014e220 uiSpriteInitializeState inferred [high] Twin of IV sprite state initialization.
+003e52bc partyRefreshSlotValues inferred [high] Refreshes active party slot values, conditionally boosting the first by a quarter.
+003d209c bustupViewerResetState inferred [high] Resets viewer controls, four portrait slots, cached words and default scalar state.
+002f4374 gameApplyFlagTriggers inferred [high] Applies pending root and dependent game flags selected by trigger bytes.
+004c8b10 btlHelpFreeEntries inferred [high] unlinks and frees every battle help entry, closing the dialog a message entry still shows
+00230c1c skillFormatTargetLabel inferred [high] Twin of IV skill target-label formatter.
+00203a7c scrCommStartEventTextureEffect inferred [high] Script command starts an event texture effect.
+002ae320 questMarkSelectedSpecialDetail inferred [med] Marks the selected special-quest detail.
+00494020 questEvaluateUnlockConditions inferred [high] Twin quest unlock-condition evaluator.
+003d08c8 placeWindowUpdateAnimation inferred [high] Advances the place window animation.
+003812e0 itemCompareCategoryDescendingValueAscending inferred [med] Twin descending-category and ascending-value comparator.
+00471fec aocQueueFileLoad inferred [high] Twin add-on content file-load queuer.
+004c8754 flagsCountSelectedBits inferred [med] Counts set bits selected by a mask.
+0027daf0 nameEntryUpdateTask inferred [high] Twin name-entry task lifecycle callback.
+003205a4 effectJobUpdateSpawn inferred [high] Twin effect spawn/update job callback.
+00342628 uiSetEntrySlotText inferred [high] Looks up an entry and refreshes its slot text and pending state.
+0038b12c npcRoomUpdateMatchingOccupantStatus inferred [med] Updates matching room occupants to the helper-selected status.
+00328794 lmapInitializeActorHandles inferred [high] Initializes, registers and resets the 32 field-map actor handles.
+003a7a88 devilIsTextureLoaded inferred [high] Resolves alternate/default devil texture indices and tests texture residency.
+004f63dc resourceEnsureCachedObject inferred [high] Lazily creates the first matching ID's cached object in either record array.
+00272204 effBlockCopyDataB inferred [high] Releases the previous owned block and copies the new second payload.
+00186f58 dataFindKeyedRecordWithOverrides inferred [high] Resolves built-in override records or binary-searches a keyed 64-byte record table.
+0039a598 dataTable04GetCategoryOrder inferred [med] maps a table-04 record's 4-bit category (bits 5..8 at 0x28) to a display order, 99 for id 0
+003ae314 lmapActorRestoreTransform inferred [med] once the scene actor is ready, re-registers its controller and moves it to the stored destination and yaw
+00192d3c acmpUnpackInPlace inferred [high] validates an "ACMP" header, strips it and decompresses the blob in place
+004c89e8 btlHelpFreeAll inferred [high] unlinks and frees every battle help window, closing an open dialog
+00420e4c attachmentsSetOffset inferred [med] stores the attachment offset and moves every attached controller to the model position plus it
+004ac0d4 btlUiAddRequest inferred [med] appends an id to the battle UI request list unless already present, then clears the request state
+00232388 btlResolveEntryChoice inferred [med] resolves a menu choice: 1-4 directly, 0/-1 set the active-entry flag and return the selected entry (1 when none)
+0046fedc dataArchiveGetMergedRecord inferred [med] twin of smt4 FUN_003892a0
+00201e38 soundPlayAtPosition inferred [med] plays a voice (handle + 100000) or a sound effect panned by screen position 1-5, -1 when sound is blocked
+003a7480 mapDepartStepTeardown inferred [high] twin of smt4 FUN_00311048: departure teardown state machine
+003f8898 dataTableReloadLocked inferred [high] reloads every locked data table slot whose table is unloaded
+00290af8 btlSkillCompareBySortKey inferred [med] sort comparator for two skill ids by the acting unit sort key
+004a0e38 partyAnyMemberHasFlagBit inferred [med] tests a bit in the player record (modes 0/2/3) and in each party or reserve slot record
+0025ff44 searchWinScriptShowMessage inferred [med] SearchWin script command: formats the message picked by arg 0 into the window, marks it dirty and plays the open voice
+0035eae8 btlScriptAnyEntryHasStatusBit inferred [high] script query: result 1 when an eligible battle entry has status bit arg 0 set (sibling of btlScriptAnyEntryHpAtMost)
+004c579c battleRecordUnitMaskHistoryEvents inferred [med] records combatant history events 1-3 for each event mask the unit's flags hit
+001429b8 gxCmdListSetCreate inferred [high] stores the list config, generates the command lists, allocates and resets each, then binds the first
+001774d8 itemGetStackLimit inferred [med] returns 1 for unlimited-storage items, else the per-type record limit bitfield or 999, 0 for unknown ids
+004b92d4 aocBootStepLoadQuestScript inferred [med] twin of smt4 FUN_003ba38c
+0036ca3c uiDrawNumberFrame inferred [med] draws a selected/unselected frame image with a number on it, faded by the placement alpha
+0047ff00 playerEquipItemIfAligned inferred [high] stores the item id in its equipment slot when the item's alignment bits allow the player's alignment class
+003cadb0 scrCmdTransitionFinish inferred [med] script command: waits for the running transition (state 0/7) and tears it down
+003a77d4 gameUnlockEntriesByLevel inferred [med] unlocks entries 100..399 whose required level the player has reached
+003eb26c partyModelSlotsLoad inferred [med] clears the 42 model slots and loads the model of each present party member
+0039d23c btlScriptAnyEntryPassesCheck inferred [med] script: sets result 1 when an eligible battle entry passes FUN_002b54a0 with the script argument
+0046e08c aocPackageGrantsItem inferred [high] whether a mounted content package has an item row (kind 7/8) for the item id
+0049f628 itemGroupHasIneffectiveTarget inferred [med] whether btlItemComputeValues fails for the user or any unit of the target group (0/1 party, 2/3 reserve)
+00249ce4 mapLoadSkyTable inferred [high] loads the map's SKY*.TBL (Tokyo 300, fountain 200, L maps 100+, m maps) into g_mapTable
+001add78 pathSetWithRomPrefix inferred [high] copies a path into the owner, prefixing rom:/ unless a device colon appears in its first 8 chars
+0049706c menuOpenCommandList inferred [med] adds the menu's command entries (short list in mode 8), plays open SE and moves to step 10
+00328278 scrSlotRequestByArg inferred [med] script command: requests slot 0 with the argument count (capped at 4) and fill 0xff/-1 chosen by arg 0, then waits on later frames
+002b5540 gameStatePickAvoidingRecent inferred [med] picks one of four choices at random excluding the last two picks stored in g_gameState, then records the pick
+002b53e0 btlResultTaskStart inferred [high] creates the "btlResult Calc" job, resets the result panel, list and items, then starts the battle UI panel
+0039817c mapGimicStartById inferred [med] finds the active gimmick slot with the id, plays its first clip (and clip 1 for id 42) and registers its model
+002a3b10 scrCommEventTexCreateWait inferred [med] script command: creates the event texture job from args 0/1 on its first frame, then waits until the current job's texture is loaded
+0025cba0 screenDrawShadedRect inferred [med] twin of smt4 FUN_001c0b88
+004b6b1c scriptProcessCreateWhenReady inferred [med] waits for heaps, load slots 0x14/0x25 and three table-0x1d textures, then creates the script process once
+0047f394 resourcePairApply inferred [med] twin of smt4 FUN_00394bbc
+001457b0 msgIsSkipInputActive inferred [med] whether a skip/cancel input is active, including input 1 while the given message box accepts it
+002c2658 clockGetSecondsSinceStart inferred [high] twin of smt4 FUN_0025bfa4
+00368cac btlTargetSelectSetMode inferred [high] sets the target selection mode, resetting the cursor when entering mode 1 and the panel when leaving mode 2
+00418c3c gfxTexFormatGetBitsPerPixel inferred [high] twin of smt4 FUN_0023b3dc: bits per pixel of a PICA texture format/type pair
+003df6f4 playerStockHasFreeSlot inferred [med] checks the first 4+N (flags 0x77-0x7A, max 8) u16 stock slots of the player data for an empty one
+003a93bc scrCommBattleQueueActiveUnitsReflect inferred [med] script command: queues reflect action 44 for every active roster unit, parameter 0xFF when arg 0 set
+0038c198 scrCommBattleAnyEntryLacksStatus inferred [med] script command: result 1 if any eligible battle entry (candidate masks) has status bit arg0 clear
+003cacf0 scrBtlResetEligibleEntryById inferred [med] script command: clears a field of every eligible combatant whose id matches arg 0
+001a2638 osConvertToPhysicalAddress inferred [high] virtual->physical: mapped lookup, VRAM 0x1F000000 window, then device memory range
+00294970 mapHakaiDeleteObjects inferred [med] deletes the loaded part objects and both object rows of g_mapHakai via virtual dtor
+00192550 dataTable8FindRecord inferred [med] finds a table-8 record by id: AOC records first, then bsearch section 1 or 6
+00244bb4 nameTableFind inferred [med] returns the name for (kind,index): fixed list for kind 24, else scans the -1 terminated name table
+001abae0 asdFileAddEntry inferred [high] under the file mutex allocates a 0x154-byte entry, appends it to g_asdFile's entry list and copies the record in
+002deeb8 btlHelpRelease inferred [high] frees every help entry and the help list (g_btlHelp), then stops the job's sub-job
+00434dd0 idChainMatchSequence inferred [med] walks count ids from start against a node chain (id or idListFind aliases), advancing the cursor
+0022368c mapIfShowActionMarker inferred [high] creates the action marker model (map/all/action_up.bam) and places it at the given position and yaw
+0048243c table29ApplyEntry inferred [med] copies data table 29 entry into the target with two randomized values; returns 1 when its flag is set or a chance roll hits
+002b5cd4 mathAngleDeltaDegrees inferred [high] returns to - from for two angles in degrees, wrapped mod 360 the short way round
+0046bf40 dataFileSetGetTableEntry inferred [med] returns entry index counted across the kind-37 data table chunks of every loaded file, or NULL
+0049cc10 aocItemGetPrice inferred [med] looks up the item price in the record its kind keeps (99999999 when missing), scaled by its discount percentage
+00319e78 mapCollisionAllocBuffers inferred [high] allocates the four collision quad buffers of g_mapCollision (collision.cpp lines 987-990)
+003bc278 btlScriptCountEntriesMissingHp inferred [high] script command: counts candidate battle entries whose maxHp - hp is at least arg 0
+00153630 bustupCutStartSlotTransition inferred [med] forwards a texture transition to the first bust-up slot whose job work id matches
+0030163c motionPlayerApplyToTargets inferred [med] twin of smt4 FUN_0021ad40
+002a49e4 infoWinSetText inferred [med] draws the message entry into the info window text and lays out its label width/position
+002a7324 statusPanelSetOpen inferred [med] smt4a twin of smt4 FUN_0029d684: same open/close status panel logic
+004e8300 btlAiBestTargetScore inferred [med] max score over the unit's 133 entries whose combatant matches g_btlAction target flags
+0046bc7c aocCountPackageItemsOfType inferred [med] counts items of a type across valid AOC packages; clears AOC flag 0x10000 without an SD card
+0037f14c btlScrCheckStatusCount inferred [med] script command: sets result to whether at least arg1 eligible combatants have status bit arg0
+0038c25c btlScrAnyStatLevelFive inferred [med] script command: sets result to whether any eligible combatant has encoded stat arg0 at level 5
+00153588 bustupCutAnimSelectSlotsByWorkId inferred [high] flags bust-up slots 1-3 whose job work id matches, sets message mode from the matching job's record; returns 1 if any matched
+0013a894 soundSetupArchiveAndSlots inferred [high] opens rom:/snd/sdds4.bcsar, adds handle lists, creates sound slots and resets both stream records
+0037de7c statusDownDestroy inferred [high] removes touch regions, resets ids, frees slot/script process/data blocks, stops the job and frees g_statusDown
+003b0f54 scrBtlAnyCombatantHasFlag inferred [med] script command: result 1 when some available, required, non-excluded combatant has per-index flag arg (arg < 21) set
+0047fa90 itemApplyToParty inferred [med] applies an item to the player and each filled party slot; consumes it outside preview mode when it took effect
+0035cdac animSlotsSetStartFrames inferred [med] twin of smt4 FUN_002e27c4
+00287598 uniteResetPreview inferred [med] restarts both fusion preview model motions and the camera pose and sets the 480-frame timer
+004717e0 aocCountTableRecords inferred [med] sums the record counts of the downloadable-content table files; clears the content-ready flag without an SD card
+004a00f4 partyGetAverageLevel inferred [med] average level of the player and active or reserve demons depending on the group
+0031fe14 saveOptionIsEnabled inferred [med] returns whether saved option 7/8/9/10/15 is on from the save option block
+003f876c dataTableReload inferred [high] reloads a loaded data table slot from its file, copying in place when the size is unchanged
+00421b7c fieldUnitGetMarkerPosition inferred [med] computes a unit's marker position from its position, kind-1 offset and height
+0038da74 scrBtlSetEntryMark inferred [med] script command: ORs mark mask 1 or 2 into an entry's flags and records it in the slot store
+003577dc mapRegionLookupValue inferred [med] finds the area region containing (x, y), remembers its index and returns its value
+002818a0 entrySlotStoreRecordValue inferred [med] stores a record's computed value in the slot for its entry id, taking and clearing a free slot when needed
+002946a0 messageShowForKindVariant inferred [med] maps a kind (pairs share message groups) and variant index to a message id and shows it
+003bc1b0 btlScriptCountMatchingCandidates inferred [med] script command: counts eligible battle entries for which FUN_00221754(entry, arg0, arg1) is true
+003b0ca0 btlScriptAllEntriesHaveStatusBit inferred [med] script command: every eligible entry with the given id has the given status flag bit
+00471340 loadedRecordTableClear inferred [med] frees each record's two buffers, the record array, and zeroes the count
+002b95b4 mapTableStepWave inferred [med] advances g_mapTable phase by the mode's step and derives the offset at amplitude 32/48
+0033be00 mapEnemyIsNearestLocked inferred [med] true when the locked slot is no farther from the field position than any other active locked enemy slot
+001a72b0 pathStripScheme inferred [high] removes a leading "<scheme>:/" from a fixed-size path buffer in place and zero-fills the tail
+001fef70 affinityResolveUnitSlot inferred [med] Fills a unit affinity slot from its devil record, then lets passive skills override the state (twin of smt4 FUN_0022e354)
+004f7f08 panelReset inferred [med] Clears panel counters and offsets, releases its object through its vtable and frees both UI callbacks
+003e4cb4 partySlotMatchesSelected inferred [med] True when the record and the in-use slot record holding the table selected key are both in use with the same key
+0034df48 scrCommBattleHasCandidateId inferred [med] Script command: result 1 when a combatant with the given id passes the battle candidate masks, else 0
+0031d680 npcRoomDebugCreate inferred [high] Allocates the NPC room debug block and starts its "NpcRoomDebug Calc" process and draw task
+004a66c4 itemListMenuWaitUseCounter inferred [med] Waits for the use counter, then plays the confirm sound and enters state 2
+004cff88 listCursorSetPage inferred [high] Sets the cursor page and re-applies its scroll top/position through the kind-specific accessors
+0047f1c4 itemEffectPlay inferred [med] Formats the I009017/I009018 effect name for item 0x124/0x125 and plays it
+0038e4cc statusIconSetKind inferred [med] Sets the status icon sprite keyframe and image frame for a kind id
+003315c4 uniteReleaseExit inferred [med] Stops the unite job, settling BGM or the exit SE by exit mode, then releases the camp background and button help
+0031a0ec scrCommPartyReserveDemon inferred [med] script command: puts the argument demon into the first free reserve slot, result 0 if ineligible or already reserved
+004cb2a4 btlRosterGroupAllInactive inferred [med] returns 1 when no roster record in group 0-3 is active and eligible
+004daf18 entryDefIsAvailable inferred [med] entry by id: not excluded, required flag set, linked save entry active, available bit set
+0048816c listGetAdjacentEntryId inferred [med] returns the id of the enabled list entry before (1) or after (-1) the current one, or 0
+003b0310 scrCommEnterPlaceAndSavePoint inferred [med] script command: place 0x18 with table 0x4C entry 1, then records the current map/area/position as the flag block save point
+0039cefc scrCommBtlHasCandidateWithId inferred [med] script command: result 1 when a battle combatant matching candidate masks 3/0, not mask 5, has the argument id and passes FUN_003248e4
+0033a988 mapRecordResumePoint inferred [med] records the resume point (mode 1-3: map/area/object, position, heading, view value) into the flag block

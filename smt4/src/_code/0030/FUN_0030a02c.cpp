@@ -1,7 +1,8 @@
 /* NON_MATCHING: armcc hoists the constant 1 above the branch (mov r7, #1) where retail loads it separately in the lock block (r1) and after it (r4), so registers and one nop differ */
-#include "shard/Sys43e188.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
 void scrCommMessageSetMode(int arg);
 int scrGetCommandFrame(void);
@@ -14,7 +15,7 @@ void FUN_0030a02c(u8 state)
 {
     scrCommMessageSetMode(0);
     if (scrGetCommandFrame() == 0) {
-        Target43e188 *target = g_messageMain.target;
+        MessagePanel *target = g_messageMain.banner;
         if (target != NULL) {
             target->unk30 = 1;
         }

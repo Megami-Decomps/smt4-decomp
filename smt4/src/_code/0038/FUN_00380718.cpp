@@ -1,57 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00380718` (_code @ 0x380718, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent flag addressing and the final list-insertion argument setup differ. */
+#include "common.h"
+
+struct SoundLoadSlot;
+struct SoundListLink {
+    SoundListLink *next;
+    SoundListLink *previous;
+};
+struct SoundPlayerList {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ SoundListLink root;
+};
+struct SoundLoadManager {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ SoundPlayerList active;
+    /* 0x14 */ SoundPlayerList free;
+};
+struct SoundLoadVtable {
+    /* 0x00 */ void *unk00[4];
+    /* 0x10 */ void (*vfunc10)(SoundLoadSlot *slot);
+};
+struct SoundLoadSlot {
+    /* 0x000 */ SoundLoadVtable *vtable;
+    /* 0x004 */ u8 unk004[0xd0];
+    /* 0x0d4 */ SoundListLink link;
+    /* 0x0dc */ u8 unk0dc[0xb8];
+    /* 0x194 */ SoundLoadManager *manager;
+    /* 0x198 */ u8 task[0xc];
+    /* 0x1a4 */ u8 event[8];
+    /* 0x1ac */ u8 unk1ac[0x2c];
+    /* 0x1d8 */ u8 heapDataManager[1];
+    /* 0x1d9 */ u8 unk1d9[0x277];
+    /* 0x450 */ u32 unk450;
+    /* 0x454 */ u32 unk454;
+    /* 0x458 */ u8 unk458[4];
+    /* 0x45c */ u8 state;
+    /* 0x45d */ u8 active;
+    /* 0x45e */ u8 unk45e;
+};
+struct SoundTaskManager;
 
 extern "C" {
+SoundTaskManager *FUN_002bb020();
+void nw_snd_internal_TaskManager_CancelTask(SoundTaskManager *manager, void *task);
+void nn_os_LightEvent_Wait(void *event);
+void FUN_00379a14(SoundLoadSlot *slot);
+void nw_snd_internal_PlayerHeapDataManager_Finalize(void *manager);
+void nw_ut_internal_LinkListImpl_erase_2B743C(SoundPlayerList *list, SoundListLink *node);
+void nw_ut_internal_LinkListImpl_insert(SoundPlayerList *list,
+                                       SoundListLink *position, SoundListLink *node);
 
-int nn_os_LightEvent_Wait(int *);
-int FUN_00379a14(int *);
-int nw_snd_internal_PlayerHeapDataManager_Finalize(int *);
-int nw_snd_internal_TaskManager_CancelTask(unsigned int, int *);
-int nw_ut_internal_LinkListImpl_erase_2B743C(int, int *);
-int nw_ut_internal_LinkListImpl_insert(int, int, int *);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int FUN_002bb020(void);
-/* Supplied declaration required: nn_os_LightEvent_Wait. */
-/* Supplied declaration required: FUN_00379a14. */
-/* Supplied declaration required: nw_snd_internal_PlayerHeapDataManager_Finalize. */
-/* Supplied declaration required: nw_snd_internal_TaskManager_CancelTask. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
-
-
-void FUN_00380718(int *param_1)
-
+void FUN_00380718(SoundLoadSlot *slot)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (*(char *)((int)param_1 + 0x45d) != '\0') {
-    *(unsigned char *)((int)param_1 + 0x45d) = 0;
-    if ((char)param_1[0x117] == '\x01') {
-      temp_v0 = FUN_002bb020();
-      nw_snd_internal_TaskManager_CancelTask(temp_v0,param_1 + 0x66);
-      nn_os_LightEvent_Wait(param_1 + 0x69);
+    if (!slot->active) {
+        return;
     }
-    param_1[0x114] = 0;
-    param_1[0x115] = 0;
-    *(unsigned char *)((int)param_1 + 0x45e) = 0;
-    FUN_00379a14(param_1);
-    nw_snd_internal_PlayerHeapDataManager_Finalize(param_1 + 0x76);
-    temp_v1 = param_1[0x65];
-    nw_ut_internal_LinkListImpl_erase_2B743C(temp_v1 + 8,param_1 + 0x35);
-    (**(romwright_code **)(*param_1 + 0x10))(param_1);
-    nw_ut_internal_LinkListImpl_insert(temp_v1 + 0x14,temp_v1 + 0x18,param_1 + 0x35);
-    return;
-  }
-  return;
+    slot->active = 0;
+    if (slot->state == 1) {
+        nw_snd_internal_TaskManager_CancelTask(FUN_002bb020(), slot->task);
+        nn_os_LightEvent_Wait(slot->event);
+    }
+    slot->unk450 = 0;
+    slot->unk454 = 0;
+    slot->unk45e = 0;
+    FUN_00379a14(slot);
+    nw_snd_internal_PlayerHeapDataManager_Finalize(slot->heapDataManager);
+    SoundLoadManager *manager = slot->manager;
+    nw_ut_internal_LinkListImpl_erase_2B743C(&manager->active, &slot->link);
+    slot->vtable->vfunc10(slot);
+    nw_ut_internal_LinkListImpl_insert(&manager->free, &manager->free.root, &slot->link);
 }
-
-} /* extern "C" */
+}

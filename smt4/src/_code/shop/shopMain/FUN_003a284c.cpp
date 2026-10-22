@@ -30,7 +30,7 @@ extern int inputIsQuestRepeatRight(void);
 /* Supplied declaration required: FUN_00233240. */
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 
 
 void FUN_003a284c(int param_1)
@@ -42,14 +42,14 @@ void FUN_003a284c(int param_1)
   FUN_0022fbc0();
   FUN_0022fb64(param_1);
   temp_v0 = inputIsQuestRepeatRight();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4c)), temp_v0 == 6)) {
+  if ((temp_v0 != 0) || (temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4c)), temp_v0 == 6)) {
     *(unsigned int *)(param_1 + 0x864) = *(unsigned int *)(*(int *)(param_1 + 0x864) * 8 + 0x44e020);
     FUN_0022fcb8(param_1,1);
     FUN_0022faf8();
     return;
   }
   temp_v0 = inputIsQuestRepeatLeft();
-  if ((temp_v0 == 0) && (temp_v0 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4e)), temp_v0 != 6)) {
+  if ((temp_v0 == 0) && (temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4e)), temp_v0 != 6)) {
     temp_v0 = inputIsQuestMenuPressed();
     if (temp_v0 != 0) {
       FUN_00233240(param_1 + 0x3a8,1);

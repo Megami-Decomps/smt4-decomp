@@ -1,4 +1,4 @@
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 struct SavedRecord {
     /* 0x00 */ u8 unk00[0x16];
@@ -17,7 +17,7 @@ extern "C" s32 gameDataStoreSavedRecord(u32 index, const SavedRecord *source)
     if (index > 0x500) {
         return 0;
     }
-    SavedRecordBlock *block = reinterpret_cast<SavedRecordBlock *>(g_gameDataBlocks.unk04);
+    SavedRecordBlock *block = reinterpret_cast<SavedRecordBlock *>(g_gameDataBlocks.saveBlock);
     SavedRecord *destination = &block->records[index];
     rt_memcpy_w(destination, source, sizeof(*destination));
     destination->flags |= 1;

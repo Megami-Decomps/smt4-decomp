@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
 int FUN_00285800(void);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int campCecSetObjectValue(...);
 int FUN_00319aec(...);
 int statusDisplayBindUnitRecord(...);
@@ -37,7 +37,7 @@ int FUN_00359974(...);
 int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371c3c(unsigned int, int);
-int FUN_003a7a88(...);
+int devilIsTextureLoaded(...);
 int FUN_004bcd90(...);
 int rt_memcpy_w(int, int, int);
 
@@ -57,7 +57,7 @@ extern int FUN_002857b8(void);
 /* Supplied declaration required: FUN_00285800. */
 /* Supplied declaration required: gameDataGetRecordValue. */
 /* Supplied declaration required: FUN_002a5e7c. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int statusDownGetFlag(void);
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -89,7 +89,7 @@ extern int FUN_0035db94(void);
 extern int maskToCode(void);
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_0038b548. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -297,7 +297,7 @@ unsigned int FUN_003193a8(int param_1)
       return 0;
     }
     temp_v3 = gameDataGetRecordValue();
-    FUN_003a7a88(temp_v3,1);
+    devilIsTextureLoaded(temp_v3,1);
     if (temp_v3 == 0) {
       return 0;
     }
@@ -328,7 +328,7 @@ unsigned int FUN_003193a8(int param_1)
     FUN_0031cf00();
     objBInitBlock19D0();
     FUN_003343c0(0);
-    FUN_002a7324(1);
+    statusPanelSetOpen(1);
     FUN_0038b548(0);
     temp_v6 = *(int *)(param_1 + 0x3bc) + 1;
     *(int *)(param_1 + 0x3bc) = temp_v6;

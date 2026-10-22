@@ -1,6 +1,7 @@
-#include "shard/Sys43e188.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
 void FUN_002e2948(u8 value)
 {

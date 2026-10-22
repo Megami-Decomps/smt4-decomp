@@ -1,8 +1,9 @@
+#include "ui/ButtonHelp.h"
 #include "shard/Shard0034.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
 
-extern ScreenRef g_buttonHelp;
 extern u32 g_aocSystem;
 extern s32 FUN_0046e458(u32 system, s32 id);
 extern s32 dataTableValue0f(void);
@@ -11,14 +12,14 @@ extern void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, 
 
 void screenShowMessage(s32 id)
 {
-    ScreenObj *screen = g_buttonHelp.instance;
+    ButtonHelpWorkA *screen = g_buttonHelp.work;
     s32 value;
 
     if (id == 0) {
-        screen->unk5EA = 0;
+        screen->mode = 0;
     } else {
-        screen->unk67C = 1;
-        screen->unk5EA = 1;
+        screen->helpState = 1;
+        screen->mode = 1;
         value = FUN_0046e458(g_aocSystem, id);
         if (value == 0) {
             value = dataTableValue0f();

@@ -8,14 +8,14 @@ int dataTable5Sub3Lookup(unsigned int *, int);
 int dataTable05Sub4GetCount(void);
 int FUN_0029f7d4(void);
 int devilGetRecord(void);
-int FUN_0030abc8(unsigned int, int);
+int dataFindSymmetricPair(unsigned int, int);
 int dataTable05FindByPriorityAndKey(unsigned int, int);
 
 /* Supplied declaration required: dataTable5Sub3Lookup. */
 /* Supplied declaration required: dataTable05Sub4GetCount. */
 /* Supplied declaration required: FUN_0029f7d4. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_0030abc8. */
+/* Supplied declaration required: dataFindSymmetricPair. */
 /* Supplied declaration required: dataTable05FindByPriorityAndKey. */
 
 
@@ -93,7 +93,7 @@ unsigned char FUN_003c8c2c(unsigned int param_1,unsigned short *param_2,unsigned
   else {
     if (puVar6 == (unsigned int *)0x0) {
       temp_v1 = (unsigned int)(unsigned char)param_2[1];
-      FUN_0030abc8(temp_v1,(char)param_3[1]);
+      dataFindSymmetricPair(temp_v1,(char)param_3[1]);
       return temp_v1 != 0;
     }
     temp_v1 = *puVar6;
@@ -105,7 +105,7 @@ unsigned char FUN_003c8c2c(unsigned int param_1,unsigned short *param_2,unsigned
     return (unsigned char)3;
   }
   temp_v1 = (unsigned int)(unsigned char)param_2[1];
-  FUN_0030abc8(temp_v1,(char)param_3[1]);
+  dataFindSymmetricPair(temp_v1,(char)param_3[1]);
   return temp_v1 != 0;
 }
 

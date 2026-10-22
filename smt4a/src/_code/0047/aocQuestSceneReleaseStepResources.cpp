@@ -60,7 +60,7 @@ void aocQuestSceneReleaseStepResources(Obj526238 *object)
     refresh->refreshD50 = 1;
     refresh->refreshB81 = 1;
     g_aocMain->flags &= ~0x70;
-    g_aocDisplay->unk450C = 0;
+    g_aocDisplay->operationActive = 0;
     releaseEntriesB((CountAt5A *)work->entriesB);
     releaseEntriesA((CountAt30 *)work->entriesA);
     jobOwnerFreeSlotAndStop((JobOwner *)work->owner);

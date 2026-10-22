@@ -10,7 +10,7 @@ BitsAt60 *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
 s32 randRange(s32 maximum);
 void FUN_003dfad4(u16 *affinities, const PlayerData *player);
-void FUN_001fef70(u16 *affinity, const BitsAt60 *unit, u32 element);
+void affinityResolveUnitSlot(u16 *affinity, const BitsAt60 *unit, u32 element);
 
 /* Apply a probabilistic status to the selected player and party groups. */
 void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
@@ -56,7 +56,7 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
             if (condition != 5) {
                 unit->bits |= mask;
             } else {
-                FUN_001fef70(affinities, unit, 11);
+                affinityResolveUnitSlot(affinities, unit, 11);
                 u16 response = affinities[0] >> 10;
                 if (response != 1 && response != 3 && response != 4) {
                     unit->bits |= mask;

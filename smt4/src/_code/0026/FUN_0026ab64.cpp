@@ -16,7 +16,7 @@ typedef struct {
 
 extern short FUN_001c3688(void);
 extern short FUN_001c36a0(void);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029e8b8. */
 extern int objectPartRunUnlessLocked(unsigned int);
 /* Supplied declaration required: FUN_0029e93c. */
@@ -43,9 +43,9 @@ FUN_0026ab64(unsigned int param_1,unsigned int param_2,int param_3,short param_4
   int temp_v5;
   unsigned char temp_v6;
   
-  temp_v1 = FUN_0029d65c((int)param_5);
-  temp_v2 = FUN_0029d65c((int)param_6);
-  temp_v3 = FUN_0029d65c((int)param_4);
+  temp_v1 = ifTouchGetSelectionModeForRegion((int)param_5);
+  temp_v2 = ifTouchGetSelectionModeForRegion((int)param_6);
+  temp_v3 = ifTouchGetSelectionModeForRegion((int)param_4);
   if (!(temp_v1 == 6 || temp_v1 == 2)) {
     if (temp_v2 != 6 && temp_v2 != 2) {
       if (temp_v3 == 0) {

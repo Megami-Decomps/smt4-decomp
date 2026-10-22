@@ -1,67 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039e21c` (_code @ 0x39e21c, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the scratch register for the hp/maxHp stack store differs (retail add ip, sp, #16; armcc reuses r4). */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
 
-int FUN_003eaf20(void);
-int FUN_003ee0c0(int);
-int FUN_004fbc30(...);
-int FUN_004fc094(int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
+extern u32 g_btlScriptUnit;
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+u32 btlUnitGet(u32 unit);
+void FUN_003ee0c0(BtlMainStateA *state);
+void FUN_004fc094(s32 a0, u32 unit, s32 a2, BattleRosterRecordA *record, s32 a4, s32 maxHp, s32 a6, s32 a7,
+                  s32 hp, s32 maxHp2, s32 a10, s32 a11, s32 a12, s32 a13, s32 a14, s32 a15, s32 a16, s32 a17,
+                  s32 a18, s32 a19, s32 a20, s32 a21, s32 a22, s32 a23, s32 a24, s32 a25);
+void FUN_004fbc30(s32 kind, u32 unit, BattleRosterRecordA *record, s32 value);
 
-/* stack frame of void: 17 slot(s), 68 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp70; /* 0x70: local_70 */
-} void_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_003ee0c0. */
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fbc30. */
-/* Supplied declaration required: FUN_004fc094. */
-
-
-void FUN_0039e21c(void)
-
+/* Script: shows the HP gauge effect for the script unit's current battle entry. */
+u32 FUN_0039e21c(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = temp_v0;
-  FUN_003eaf20();
-  if (temp_v1 != 0) {
-    temp_v3 = *(int *)(temp_v0 + 0x1ed4) + *(short *)(temp_v1 + 8) * 0x1d0;
-    temp_v2 = btlUnitGet(g_btlScriptUnit);
-    FUN_003ee0c0(temp_v0);
-    FUN_004fc094(0,temp_v2,0,temp_v3,0,*(unsigned int *)(temp_v1 + 0x25c),0xffffffff,0xffffffff,
-                 *(unsigned int *)(temp_v1 + 600),*(unsigned int *)(temp_v1 + 0x25c),0,0,1,0,0,0,0,0,0,0,1,0
-                 ,1,1,0,1);
-    FUN_004fbc30(0x19,temp_v2,temp_v3,0);
-  }
-  return;
+    BtlMainStateA *state = btlGetMainState();
+    BtlCombatantEntryA *entry = FUN_003eaf20(state);
+    if (entry == NULL) {
+        return 1;
+    }
+    BattleRosterRecordA *record = &state->roster[entry->unitIndex];
+    u32 unit = btlUnitGet(g_btlScriptUnit);
+    FUN_003ee0c0(state);
+    FUN_004fc094(0, unit, 0, record, 0, entry->maxHp, -1, -1, entry->hp, entry->maxHp, 0, 0, 1, 0, 0, 0, 0,
+                 0, 0, 0, 1, 0, 1, 1, 0, 1);
+    FUN_004fbc30(0x19, unit, record, 0);
+    return 1;
 }
 
 } /* extern "C" */

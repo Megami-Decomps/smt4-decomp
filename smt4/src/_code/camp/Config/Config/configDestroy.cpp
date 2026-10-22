@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 resource);
 int asdTMTexTableReleaseNode(int type, int index);
@@ -26,7 +26,7 @@ void configDestroy(void)
     for (i = 0; i < config->countB; i++) {
         ifTouchRegionRemove();
     }
-    FUN_00296e90();
+    messageMainFinishWindow();
     if (config->resource != 0) {
         scrScriptProcessDestroy(config->resource);
         config->resource = 0;

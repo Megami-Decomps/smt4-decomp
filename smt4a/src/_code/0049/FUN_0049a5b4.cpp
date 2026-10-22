@@ -9,7 +9,7 @@ int sysMemClear(int, int);
 int aocRecordLookup83(unsigned int);
 int FUN_0049cd18(unsigned int *, int, int);
 int FUN_004cfeb0(int, int, int, int);
-int FUN_004cff88(int, int);
+int listCursorSetPage(int, int);
 int FUN_004d05c4(int, int, int, int);
 
 typedef int romwright_code(...);
@@ -36,10 +36,10 @@ extern int FUN_001ba3d0(unsigned int);
 extern int FUN_00481100(unsigned int);
 extern unsigned int resolveWeightedItemChoice(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_0049cab8(unsigned int);
-extern int FUN_0049cc10(unsigned int *);
+extern int aocItemGetPrice(unsigned int *);
 /* Supplied declaration required: FUN_0049cd18. */
 /* Supplied declaration required: FUN_004cfeb0. */
-/* Supplied declaration required: FUN_004cff88. */
+/* Supplied declaration required: listCursorSetPage. */
 /* Supplied declaration required: FUN_004d05c4. */
 
 
@@ -122,7 +122,7 @@ LAB_0049a714:
               if (*temp_v14 != 0) {
                 temp_v12 = romwright_piece_2_2(temp_v0 | 2 | ((*temp_v14 & 0xff) << 2),temp_v2);
               }
-              temp_v5 = FUN_0049cc10(&temp_v12);
+              temp_v5 = aocItemGetPrice(&temp_v12);
               *temp_v15 = *temp_v15 + temp_v5;
             }
           }
@@ -141,7 +141,7 @@ LAB_0049a714:
       temp_v13 = 1;
       FUN_004cfeb0(temp_v9,10,*(unsigned short *)(temp_v3 + 0x15ffc),0);
       *(unsigned char *)(temp_v16 + 0x9f95) = 1;
-      FUN_004cff88(temp_v9,1);
+      listCursorSetPage(temp_v9,1);
       piVar10 = (int *)(temp_v16 + 0xb3c);
       (**(romwright_code **)(**(int **)(temp_v16 + 0xb3c) + 8))(*(int **)(temp_v16 + 0xb3c),temp_v9);
       puVar13 = (unsigned short *)(*piVar10 + 4);

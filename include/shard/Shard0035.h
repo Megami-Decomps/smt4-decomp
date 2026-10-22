@@ -3,6 +3,7 @@
 #define SHARD_SHARD0035_H
 
 #include "common.h"
+#include "shard/W5_W5Match7_UiQuest.h"
 
 #include "shard/Shard0034.h"
 
@@ -46,16 +47,7 @@ typedef struct Work2C {
     /* 0x2C */ s32 unk2C;
 } Work2C;
 
-typedef struct StateHolder4 {
-    /* 0x00 */ u8 unk00[0x4];
-    /* 0x04 */ s32 state;
-    /* 0x08 */ u8 unk08[0x935];
-    /* 0x93D */ u8 unk93D;
-    /* 0x93E */ u8 unk93E[0x7];
-    /* 0x945 */ u8 unk945;
-    /* 0x946 */ u8 unk946[0x386];
-    /* 0xCCC */ u16 unkCCC;
-} StateHolder4;
+
 
 typedef struct Unit66 {
     /* 0x00 */ u8 unk00[0x66];

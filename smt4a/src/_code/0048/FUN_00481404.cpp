@@ -13,7 +13,7 @@ struct FlaggedTableEntry {
 
 extern "C" {
 EntryCategory *FUN_0019c06c(u32);
-FlaggedTableEntry *FUN_00192550(u16);
+FlaggedTableEntry *dataTable8FindRecord(u16);
 
 // Test the first entry flag only for the two supported entry categories.
 bool FUN_00481404(u16 id)
@@ -21,7 +21,7 @@ bool FUN_00481404(u16 id)
     EntryCategory *category = FUN_0019c06c(id);
     if (category == NULL || (category->type != 1 && category->type != 12))
         return 0;
-    FlaggedTableEntry *entry = FUN_00192550(id);
+    FlaggedTableEntry *entry = dataTable8FindRecord(id);
     if (entry == NULL)
         return 0;
     return (entry->flags & 1) != 0;

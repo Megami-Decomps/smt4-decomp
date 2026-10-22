@@ -35,8 +35,8 @@ int uiAnimationAdvanceChannel(...);
 int flaggedValueHolderGetTotal(...);
 int FUN_0029212c(...);
 int FUN_002937c8(...);
-int FUN_00296e90(void);
-int FUN_00297050(...);
+int messageMainFinishWindow(void);
+int messageMainSetEnabled(...);
 int messageTargetSetValue(...);
 int buttonHelpSetPreset(...);
 int ifTouchRegionRemove(void);
@@ -72,7 +72,7 @@ extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_00240d5c(unsigned int *);
-extern int FUN_00246570(int);
+extern int aocItemGetPrice(int);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 extern int FUN_0028e9d0(unsigned short);
@@ -81,10 +81,10 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0029212c. */
 /* Supplied declaration required: FUN_002937c8. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297050. */
-extern int FUN_002973d8(void);
+/* Supplied declaration required: messageMainSetEnabled. */
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_002996d8. */
 extern int FUN_00299fc0(void);
@@ -151,7 +151,7 @@ void FUN_003a4a60(unsigned int *param_1)
         temp_v5 = temp_v5 * param_1[0x21a];
       }
       else {
-        temp_v5 = FUN_00246570((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
+        temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
         temp_v5 = temp_v5 * param_1[0x21a];
       }
       if (param_1[0x218] != 8) {
@@ -183,7 +183,7 @@ void FUN_003a4a60(unsigned int *param_1)
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     else {
-      temp_v5 = FUN_00246570((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
+      temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     if (param_1[0x218] != 8) {
@@ -199,9 +199,9 @@ void FUN_003a4a60(unsigned int *param_1)
           temp_v6 = 5;
         }
         else {
-          FUN_00296e90();
+          messageMainFinishWindow();
           if (param_1[1] == 0xb) {
-            FUN_00297050(1);
+            messageMainSetEnabled(1);
           }
           ifTouchRegionRemove();
           ifTouchRegionRemove();
@@ -278,7 +278,7 @@ void FUN_003a4a60(unsigned int *param_1)
     param_1[0x575a] = 0xffffffff;
     FUN_002305fc(param_1);
     if (param_1[1] == 0xb) {
-      FUN_00297050(0);
+      messageMainSetEnabled(0);
     }
     *param_1 = *param_1 & 0xffffefff;
     if (param_1[0x218] != 8) {
@@ -313,7 +313,7 @@ void FUN_003a4a60(unsigned int *param_1)
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     else {
-      temp_v5 = FUN_00246570((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
+      temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     temp_v4 = itemGetNameOrFallback(temp_v0,1);
@@ -339,7 +339,7 @@ void FUN_003a4a60(unsigned int *param_1)
   case 6:
     temp_v5 = scrRunOpcodesStub(param_1[0x5a]);
     if (temp_v5 != 2) break;
-    temp_v5 = FUN_002973d8();
+    temp_v5 = messageMainGetChoiceResult();
     if (temp_v5 == 0) {
       param_1[2] = 7;
       buttonHelpSetPreset(0x76);
@@ -354,7 +354,7 @@ void FUN_003a4a60(unsigned int *param_1)
     buttonHelpSetPreset(0x85);
     temp_v6 = param_1[0x218];
     if (temp_v6 == 8) {
-      FUN_00297050(0);
+      messageMainSetEnabled(0);
       temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a5754);
       scrScriptProcessStartEntry(param_1[0x5a],temp_v4);
       scrRunOpcodesStub(param_1[0x5a]);
@@ -374,7 +374,7 @@ joined_r0x003a5580:
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     else {
-      temp_v5 = FUN_00246570((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
+      temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
       temp_v5 = temp_v5 * param_1[0x21a];
     }
     temp_v3 = -temp_v5;
@@ -454,7 +454,7 @@ joined_r0x003a5580:
   case 10:
     temp_v5 = scrRunOpcodesStub(param_1[0x5a]);
     if (temp_v5 != 2) break;
-    temp_v5 = FUN_002973d8();
+    temp_v5 = messageMainGetChoiceResult();
     if (temp_v5 == 0) {
       temp_v6 = param_1[0x218];
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x220);

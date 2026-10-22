@@ -1,69 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333f6c` (_code @ 0x333f6c, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail recomputes the work + 0x2000 base after asdMemFreeSlot; here it is reused. */
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(...);
-int asdMemFreeSlot(unsigned int);
-int FUN_0037de7c(void);
-int FUN_0038b3f8(int, int);
-int FUN_0040a244(void);
+typedef struct SharedResourceWork {
+    /* 0x0000 */ u32 job;
+    /* 0x0004 */ u8 unk0004[0x1388];
+    /* 0x138C */ s16 effectId;
+    /* 0x138E */ s16 modelCount;
+    /* 0x1390 */ u8 unk1390[0xC98];
+    /* 0x2028 */ void *model;
+    /* 0x202C */ u8 unk202C[0x88];
+    /* 0x20B4 */ u32 slot;
+    /* 0x20B8 */ void *bufferB8;
+    /* 0x20BC */ void *bufferBC;
+    /* 0x20C0 */ u8 unk20C0[0xC];
+    /* 0x20CC */ void *bufferCC;
+} SharedResourceWork;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct SharedResource {
+    /* 0x00 */ s8 refCount;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ SharedResourceWork *work;
+} SharedResource;
 
-extern signed char g_gameGlobals; /* 0x588fd0 */
-extern unsigned int *DAT_00588fd4; /* 0x588fd4 */
+extern SharedResource g_gameGlobals;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_0037de7c. */
-/* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: FUN_0040a244. */
+void asdMemFree(void *block);
+void asdMemFreeSlot(u32 slot);
+void FUN_0038b3f8(s32 effectId, s32 arg);
+void FUN_0040a244(void *model);
+void jobStop(u32 job, s32 arg);
+void statusDownDestroy(void);
 
-
-void FUN_00333f6c(void)
-
+static __inline void sharedResourceFreeBuffers(SharedResourceWork *work)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = DAT_00588fd4;
-  g_gameGlobals = g_gameGlobals - '\x01';
-  if ('\0' < g_gameGlobals) {
-    return;
-  }
-  if (DAT_00588fd4[0x82e] != 0) {
-    asdMemFree();
-    puVar1[0x82e] = 0;
-  }
-  if (puVar1[0x82f] != 0) {
-    asdMemFree();
-    puVar1[0x82f] = 0;
-  }
-  asdMemFreeSlot(puVar1[0x82d]);
-  if (puVar1[0x833] != 0) {
-    asdMemFree();
-    puVar1[0x833] = 0;
-  }
-  if (*(short *)(puVar1 + 0x4e3) != 0) {
-    FUN_0038b3f8((int)*(short *)(puVar1 + 0x4e3),1);
-  }
-  if ((0 < *(short *)((int)puVar1 + 0x138e)) && (puVar1[0x80a] != 0)) {
-    FUN_0040a244();
-    puVar1[0x80a] = 0;
-  }
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_00588fd4 = (unsigned int *)0x0;
-  g_gameGlobals = 0;
-  FUN_0037de7c();
-  return;
+    if (work->bufferB8 != NULL) {
+        asdMemFree(work->bufferB8);
+        work->bufferB8 = NULL;
+    }
+    if (work->bufferBC != NULL) {
+        asdMemFree(work->bufferBC);
+        work->bufferBC = NULL;
+    }
+    asdMemFreeSlot(work->slot);
+}
+
+/* Drops a reference to the shared resources and frees them with the last one. */
+void FUN_00333f6c(void)
+{
+    SharedResourceWork *work;
+
+    if (--g_gameGlobals.refCount > 0) {
+        return;
+    }
+    work = g_gameGlobals.work;
+    sharedResourceFreeBuffers(work);
+    if (work->bufferCC != NULL) {
+        asdMemFree(work->bufferCC);
+        work->bufferCC = NULL;
+    }
+    if (work->effectId != 0) {
+        FUN_0038b3f8(work->effectId, 1);
+    }
+    if (work->modelCount > 0 && work->model != NULL) {
+        FUN_0040a244(work->model);
+        work->model = NULL;
+    }
+    jobStop(work->job, 0);
+    asdMemFree(work);
+    g_gameGlobals.work = NULL;
+    g_gameGlobals.refCount = 0;
+    statusDownDestroy();
 }
 
 } /* extern "C" */

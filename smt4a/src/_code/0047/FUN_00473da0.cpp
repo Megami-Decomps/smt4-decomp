@@ -1,66 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00473da0` (_code @ 0x473da0, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The argument descriptor and copied work pointer occupy different stack slots, changing register allocation and stack-argument stores. */
+#include "nn/os/ThreadLaunch.h"
+#include "nn/Result.h"
 
 extern "C" {
+s32 FUN_0043c2b4(void);
+void FUN_00473d54(void *argument);
+void FUN_00514ab4(void);
+void FUN_00514b98(void);
+void FUN_00514b50(void);
+s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), const void *argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
+void FUN_002e3140(s32 result);
 
-int FUN_002e3140(...);
-int FUN_002fb0d4(...);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int FUN_00473d54(...); /* 0x473d54 */
-extern unsigned char LAB_00514ab4; /* 0x514ab4 */
-extern unsigned char LAB_00514b50; /* 0x514b50 */
-extern unsigned char LAB_00514b98; /* 0x514b98 */
-
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002fb0d4. */
-extern int FUN_0043c2b4(void);
-
-
-unsigned int FUN_00473da0(int param_1)
-
+/* Launches the worker on its allocated stack unless the subsystem is busy. */
+u32 FUN_00473da0(ThreadLaunchWork *work)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char *temp_v4;
-  unsigned char *temp_v5;
-  unsigned char *temp_v6;
-  int temp_v7;
-  
-  temp_v0 = FUN_0043c2b4();
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v2 = param_1 + 0x88;
-    temp_v3 = 4;
-    temp_v4 = &LAB_00514ab4;
-    temp_v5 = &LAB_00514b98;
-    temp_v6 = &LAB_00514b50;
-    temp_v7 = param_1;
-    FUN_002fb0d4(temp_v2,&temp_v3,FUN_00473d54,&temp_v7,
-                 *(int *)(*(int *)(param_1 + 0x94) + 0xc) + *(int *)(*(int *)(param_1 + 0x94) + 8),
-                 0x11,0xfffffffe,0);
-    if ((temp_v2 & 0x7e00000) != 0x600000 && (int)temp_v2 < 0) {
-      FUN_002e3140();
+    if (FUN_0043c2b4()) {
+        return 0;
     }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(work);
+    descriptor.callbacks[0] = FUN_00514ab4;
+    descriptor.callbacks[1] = FUN_00514b98;
+    descriptor.callbacks[2] = FUN_00514b50;
+    ThreadLaunchWork *argument = work;
+    s32 result = FUN_002fb0d4(work->thread, &descriptor, FUN_00473d54, &argument,
+        work->stack->address + work->stack->size, 0x11, -2, 0);
+    if ((static_cast<u32>(result) & 0x7E00000) != 0x600000 && nnResultIsFailure(result)) {
+        FUN_002e3140(result);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

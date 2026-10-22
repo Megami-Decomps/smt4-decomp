@@ -1,48 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029d760` (_code @ 0x29d760, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the gated return and float-to-integer coordinate load schedule differ. */
+#include "map/mapIf.h"
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
+void FUN_002342d0(s32 first, s32 second);
+void FUN_002b6cb0();
+void FUN_002b968c(MapIfGlobalsA *globals);
+void FUN_002cf8e4();
+void transitionDrawExpandingImages(u32 frame);
+extern MapIfGlobalsA g_mapIf;
 
-int FUN_002342d0(int, int);
-int FUN_002b6cb0(void);
-int FUN_002b968c(int *);
-int FUN_002cf8e4(void);
-int transitionDrawExpandingImages(int);
-
-extern int g_mapIf; /* 0x58103c */
-extern int g_gameState; /* 0x5f15fc */
-extern signed char DAT_005f161f; /* 0x5f161f */
-
-/* Supplied declaration required: FUN_002342d0. */
-/* Supplied declaration required: FUN_002b6cb0. */
-/* Supplied declaration required: FUN_002b968c. */
-/* Supplied declaration required: FUN_002cf8e4. */
-/* Supplied declaration required: transitionDrawExpandingImages. */
-
-
-unsigned int FUN_0029d760(void)
-
+u32 FUN_0029d760()
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  
-  temp_v0 = g_mapIf;
-  if (DAT_005f161f == '\0') {
-    FUN_002b968c(&g_mapIf);
-    if (g_gameState < 100) {
-      FUN_002b6cb0();
-      FUN_002cf8e4();
+    MapIfStateA *state = g_mapIf.state;
+    if (g_gameState.controllerFlags.secondary == 0) {
+        FUN_002b968c(&g_mapIf);
+        if (g_gameState.mode < 100) {
+            FUN_002b6cb0();
+            FUN_002cf8e4();
+        }
+        if (state->unkCD08) {
+            transitionDrawExpandingImages(state->unkCD0C);
+            ++state->unkCD0C;
+        }
+        FUN_002342d0((s32)state->unkCD20, (s32)state->unkCD24);
     }
-    if (*(char *)(temp_v0 + 0xcd08) != '\0') {
-      piVar2 = (int *)(temp_v0 + 0xcd0c);
-      transitionDrawExpandingImages(*piVar2);
-      *piVar2 = *piVar2 + 1;
-    }
-    FUN_002342d0((int)*(float *)(temp_v0 + 0xcd20),(int)*(float *)(temp_v0 + 0xcd24));
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

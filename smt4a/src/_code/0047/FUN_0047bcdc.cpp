@@ -1,43 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047bcdc` (_code @ 0x47bcdc, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r0, [pc, #80] differs from recovered ldr r1, [pc, #84]. */
+#include "common.h"
 
-extern "C" {
-
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int cycleWorkStep(...); /* 0x478a70 */
-extern int FUN_00478ac4(...); /* 0x478ac4 */
-extern unsigned char LAB_0047bd64; /* 0x47bd64 */
-extern unsigned char LAB_0047bd80; /* 0x47bd80 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-void FUN_0047bcdc(unsigned int *param_1,unsigned int param_2)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  param_1[0x5e7] = param_2;
-  if ((*param_1 & 0x100) == 0) {
-    *param_1 = *param_1 | 0x100;
-    puVar1 = &LAB_0047bd64;
-    asdProcessCreateSimple(&LAB_0047bd64,4,0,0,cycleWorkStep,0,param_1);
-    param_1[0x5e5] = (unsigned int)puVar1;
-    taskCreateDraw(&LAB_0047bd80,0xec,1,0,FUN_00478ac4,0,param_1,puVar1);
-  }
-  return;
+namespace {
+struct LoadingWorkView {
+    u32 unk00;                 // 0x0000
+    u8 unk04[0x1790];          // 0x0004
+    void* unk1794;             // 0x1794
+    u8 unk1798[4];             // 0x1798
+    u32 unk179C;               // 0x179C
+};
 }
 
-} /* extern "C" */
+extern "C" {
+// These callback declarations identify symbols; their argument lists are unknown.
+s32 cycleWorkStep(...);
+s32 FUN_00478ac4(...);
+
+void* asdProcessCreateSimple(const char* name, u32 priority, u32 option,
+                             u32 flags, s32 (*callback)(...),
+                             u32 callbackOption, void* work);
+void taskCreateDraw(const char* name, u32 priority, u32 option,
+                    u32 flags, s32 (*callback)(...),
+                    u32 callbackOption, void* work, void* process);
+
+// Store the request value and create the loading calculation and draw tasks once.
+void FUN_0047bcdc(LoadingWorkView* work, u32 requestValue)
+{
+    work->unk179C = requestValue;
+    if ((work->unk00 & 0x100) == 0) {
+        work->unk00 |= 0x100;
+        void* process = asdProcessCreateSimple("Aoc loading CALC", 4, 0, 0,
+                                               cycleWorkStep, 0, work);
+        work->unk1794 = process;
+        taskCreateDraw("Aoc loading DOWN", 0xEC, 1, 0,
+                       FUN_00478ac4, 0, work, process);
+    }
+}
+}

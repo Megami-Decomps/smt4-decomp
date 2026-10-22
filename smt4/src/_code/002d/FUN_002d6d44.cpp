@@ -17,7 +17,7 @@ int FUN_0028a924(int, int, unsigned int);
 int FUN_00295214(...);
 int devilCreateRaceEffect(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002973d8(void);
+int messageMainGetChoiceResult(void);
 int FUN_0029e774(void);
 int buttonHelpSetPreset(...);
 int FUN_002bd2b4(...);
@@ -41,7 +41,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00295214. */
 /* Supplied declaration required: devilCreateRaceEffect. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002973d8. */
+/* Supplied declaration required: messageMainGetChoiceResult. */
 /* Supplied declaration required: FUN_0029e774. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bd2b4. */
@@ -85,7 +85,7 @@ unsigned int FUN_002d6d44(int param_1)
       FUN_0026f188(temp_v3,temp_v2);
       return 0;
     }
-    temp_v0 = FUN_002973d8();
+    temp_v0 = messageMainGetChoiceResult();
     if (temp_v0 < 2) {
       *(char *)(param_1 + 0x123) = (char)temp_v0;
     }
@@ -121,7 +121,7 @@ unsigned int FUN_002d6d44(int param_1)
     if (temp_v1 != 2) {
       return 0;
     }
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 == 0) {
       *(unsigned int *)(param_1 + 0x110) = 5;
       *(unsigned int *)(param_1 + 0x114) = 3;
@@ -201,7 +201,7 @@ unsigned int FUN_002d6d44(int param_1)
     if (temp_v1 != 2) {
       return 0;
     }
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
         return 0;
@@ -286,7 +286,7 @@ unsigned int FUN_002d6d44(int param_1)
     if (temp_v1 != 2) {
       return 0;
     }
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
         return 0;

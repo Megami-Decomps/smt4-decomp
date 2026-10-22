@@ -1,48 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a527c` (_code @ 0x4a527c, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the motion's active flag through R0 with a signed-byte load in its own branch; armcc folds it into a conditional unsigned-byte load from R5. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00163aa4(int);
-int FUN_002c8538(int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
+typedef struct UiMotionSprite {
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 active;
+} UiMotionSprite;
+typedef struct MotionScreenWork {
+    /* 0x0000 */ u8 unk0000[0x14];
+    /* 0x0014 */ u32 state;
+    /* 0x0018 */ u32 substate;
+    /* 0x001C */ u8 unk001C[0x7A];
+    /* 0x0096 */ u8 unk0096[0x32];
+    /* 0x00C8 */ u8 position[0x520];
+    /* 0x05E8 */ UiMotionSprite motion;
+    /* 0x0673 */ u8 unk0673[0xA1FF];
+    /* 0xA872 */ u16 mode;
+} MotionScreenWork;
 
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_002c8538. */
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: pointConvertToFloat. */
-extern int utilityReturnSuccess(int);
+s32 FUN_0026c3a0(void);
+void FUN_002c8538(s32 enabled);
+s32 FUN_00163aa4(void *motion, f32 step);
+s32 FUN_002e19f8(void);
+s32 vec2GetXInt(void *vec);
+s32 vec2GetYInt(void *vec);
+void pointConvertToFloat(void *point, s32 x, s32 y);
+s32 utilityReturnSuccess(void *value);
 
-
-void FUN_004a527c(int param_1)
-
+/* Advances the screen's motion and follows its position; once the active motion finishes, moves to state 7. */
+void FUN_004a527c(MotionScreenWork *work)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_0026c3a0();
-  if (temp_v0 != 0) {
-    FUN_002c8538(0);
-  }
-  temp_v0 = param_1 + 0x5e8;
-  *(unsigned short *)(param_1 + 0xa872) = 9;
-  FUN_00163aa4(temp_v0);
-  temp_v1 = vec2GetYInt(temp_v0);
-  temp_v2 = vec2GetXInt(temp_v0);
-  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
-  temp_v0 = FUN_0026c3a0();
-  if ((((temp_v0 != 0) && (*(char *)(param_1 + 0x672) != '\0')) &&
-      (temp_v0 = FUN_002e19f8(), temp_v0 != 0)) && (temp_v0 = utilityReturnSuccess(param_1 + 0x96), temp_v0 == 0)) {
-    *(unsigned int *)(param_1 + 0x14) = 7;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
+    if (FUN_0026c3a0()) {
+        FUN_002c8538(0);
+    }
+    UiMotionSprite *motion = &work->motion;
+    work->mode = 9;
+    FUN_00163aa4(motion, 1.0f);
+    pointConvertToFloat(work->position, vec2GetXInt(motion), vec2GetYInt(motion));
+    if (FUN_0026c3a0() && motion->active != 0 && FUN_002e19f8() && !utilityReturnSuccess(work->unk0096)) {
+        work->state = 7;
+        work->substate = 0;
+    }
 }
 
 } /* extern "C" */

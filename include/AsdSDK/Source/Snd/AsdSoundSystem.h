@@ -51,6 +51,20 @@ typedef struct AsdSndSlotC {
     /* 0x0e */ u8 pad0e[2];
 } AsdSndSlotC;
 
+/* An auxiliary slot (0x3c bytes, two of them): a heap restored to its saved state when selected. */
+typedef struct AsdSndAuxSlot {
+    /* 0x00 */ u8 heap[0x10];         /* nw::snd::SoundHeap */
+    /* 0x10 */ void *heapBase;        /* the heap's buffer, NULL until it is created */
+    /* 0x14 */ u8 unk14[0x18];
+    /* 0x2c */ s32 savedState;        /* SoundHeap::SaveState result */
+    /* 0x30 */ u8 unk30[4];
+    /* 0x34 */ u32 unk34;
+    /* 0x38 */ u8 unk38;
+    /* 0x39 */ u8 volume;
+    /* 0x3a */ u8 pad3a[2];
+} AsdSndAuxSlot;
+typedef char AsdSndAuxSlotSizeCheck[sizeof(AsdSndAuxSlot) == 0x3c ? 1 : -1];
+
 /* A sound played from memory through an nn::snd voice, fed by two wave buffers in turn (0x98 bytes). */
 typedef struct AsdSndWaveVoice {
     /* 0x00 */ u32 format;
@@ -112,7 +126,10 @@ typedef struct AsdSoundSystem {
     /* 0x478 */ void *stringBlock;
     /* 0x47c */ char path[0x40];            /* the archive's file name */
     /* 0x4bc */ AsdSndSlotB slotsB[ASD_SND_SLOT_B_COUNT];
-    /* 0x5fc */ u8 unk5fc[0x78];
+    union {
+        /* 0x5fc */ u8 unk5fc[0x78];
+        /* 0x5fc */ AsdSndAuxSlot auxSlots[2];
+    };
     /* 0x674 */ AsdSndSlotC slotsC[ASD_SND_SLOT_C_COUNT];
     /* 0x694 */ AsdSndSlotA slotsA[ASD_SND_SLOT_A_COUNT];
     /* 0x784 */ u8 unk784[0xa4c];           /* the 3D sound manager, its actors and the listener state */
@@ -124,8 +141,8 @@ typedef struct AsdSoundSystem {
     /* 0x1202 */ u8 pad1202;
     /* 0x1203 */ s8 hasStream;              /* a sound stream is loaded */
     /* 0x1204 */ AsdSndSlotB *currentSlotB;
-    /* 0x1208 */ s32 unk1208;
-    /* 0x120c */ s32 unk120c;
+    /* 0x1208 */ AsdSndAuxSlot *currentAux0;
+    /* 0x120c */ AsdSndAuxSlot *currentAux1;
     /* 0x1210 */ AsdSndSlotC *outputC0;
     /* 0x1214 */ AsdSndSlotC *outputC1;
     /* 0x1218 */ AsdSndSlotA *currentSlotA;

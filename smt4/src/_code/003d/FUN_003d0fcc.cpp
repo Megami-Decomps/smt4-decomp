@@ -1,65 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d0fcc` (_code @ 0x3d0fcc, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps context in caller-saved r3 across btlUnitGet (same-unit knowledge of the callee's register use), which a separate unit cannot reproduce; the rest is the resulting allocation. */
+#include "common.h"
 
 extern "C" {
 
-extern int btlUnitGet(void);
+#define BTL_MARK_UNIT_PRESENT 0x001
+#define BTL_MARK_UNIT_HIDDEN 0x020
+#define BTL_MARK_UNIT_EXCLUDED 0x040
+#define BTL_MARK_UNIT_TARGETABLE 0x400
 
+/* A battle unit slot (0x288 bytes): only its flags are read here. */
+typedef struct BtlMarkUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x284];
+} BtlMarkUnit;
 
-void FUN_003d0fcc(int *param_1,int param_2,int param_3)
+typedef struct BtlMarkState {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlMarkUnit *units;
+} BtlMarkState;
 
+typedef struct BtlMarkContext {
+    /* 0x00 */ BtlMarkState *state;
+} BtlMarkContext;
+
+/* The unit record whose per-slot marks this unit sets. */
+typedef struct BtlMarkTarget {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u8 marks[109];
+} BtlMarkTarget;
+
+BtlMarkTarget *btlUnitGet(void);
+
+/* Marks the unit slots a command may target: present units in mode 2, the enemy side's
+ * targetable units (4..53) for side 1, otherwise every targetable visible unit. */
+void FUN_003d0fcc(BtlMarkContext *context, s32 side, s32 mode)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = btlUnitGet();
-  if (param_3 == 2) {
-    temp_v2 = 0;
-    temp_v1 = 0x6d;
-    puVar3 = *(unsigned int **)(*param_1 + 0x1fc0);
-    do {
-      if (((*puVar3 & 1) != 0) && ((*puVar3 & 0x40) == 0)) {
-        *(unsigned char *)(temp_v0 + temp_v2 + 0x38) = 1;
-      }
-      temp_v1 = temp_v1 - 1;
-      puVar3 = puVar3 + 0xa2;
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v1 != 0);
-    return;
-  }
-  temp_v1 = *param_1;
-  temp_v2 = 0;
-  if (param_2 == 1) {
-    param_1 = (int *)0x32;
-  }
-  puVar3 = *(unsigned int **)(temp_v1 + 0x1fc0);
-  if (param_2 == 1) {
-    puVar3 = puVar3 + 0x288;
-    do {
-      temp_v3 = *puVar3;
-      puVar3 = puVar3 + 0xa2;
-      if ((temp_v3 & 0x400) != 0) {
-        *(unsigned char *)(temp_v0 + temp_v2 + 0x3c) = 1;
-      }
-      temp_v2 = temp_v2 + 1;
-      param_1 = (int *)((int)param_1 - 1);
-    } while (param_1 != (int *)0x0);
-    return;
-  }
-  temp_v1 = 0x6d;
-  do {
-    if (((*puVar3 & 0x400) != 0) && ((*puVar3 & 0x20) == 0)) {
-      *(unsigned char *)(temp_v0 + temp_v2 + 0x38) = 1;
+    BtlMarkTarget *target = btlUnitGet();
+    BtlMarkUnit *units;
+    s32 i;
+
+    if (mode == 2) {
+        units = context->state->units;
+        for (i = 0; i < 109; i++) {
+            if ((units[i].flags & BTL_MARK_UNIT_PRESENT) && !(units[i].flags & BTL_MARK_UNIT_EXCLUDED)) {
+                target->marks[i] = 1;
+            }
+        }
+        return;
     }
-    temp_v1 = temp_v1 - 1;
-    puVar3 = puVar3 + 0xa2;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v1 != 0);
-  return;
+    units = context->state->units;
+    if (side == 1) {
+        for (i = 4; i < 54; i++) {
+            if (units[i].flags & BTL_MARK_UNIT_TARGETABLE) {
+                target->marks[i] = 1;
+            }
+        }
+        return;
+    }
+    for (i = 0; i < 109; i++) {
+        if ((units[i].flags & BTL_MARK_UNIT_TARGETABLE) && !(units[i].flags & BTL_MARK_UNIT_HIDDEN)) {
+            target->marks[i] = 1;
+        }
+    }
 }
 
 } /* extern "C" */

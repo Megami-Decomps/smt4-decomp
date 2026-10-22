@@ -17,7 +17,7 @@ typedef struct {
 
 extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
+extern unsigned int btlScriptResolveGroupArg(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: scrGetArg. */
@@ -48,7 +48,7 @@ unsigned int FUN_003183ac(void)
     temp_v4 = 0xb;
   }
   scrGetArg(1);
-  temp_v1 = FUN_00249a54();
+  temp_v1 = btlScriptResolveGroupArg();
   FUN_002499fc(temp_v1,&temp_v5,temp_v6);
   temp_v0 = temp_v5;
   if (temp_v5 < temp_v6[0] + temp_v5) {

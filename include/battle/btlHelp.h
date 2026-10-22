@@ -8,7 +8,24 @@
 typedef struct BtlHelpA {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ s32 unk08;
+    /* 0x08 */ s32 state;
 } BtlHelpA;
+
+/* One help entry, linked into the help list (Apocalypse). */
+typedef struct BtlHelpEntryA {
+    /* 0x000 */ u16 unk00;
+    /* 0x002 */ s16 kind;
+    /* 0x004 */ u8 unk04[0x86e];
+    /* 0x872 */ s16 dialogIndex;
+    /* 0x874 */ struct BtlHelpEntryA *next;
+    /* 0x878 */ struct BtlHelpEntryA *prev;
+} BtlHelpEntryA;
+
+/* The help block viewed as the entry list it heads. */
+typedef struct BtlHelpListA {
+    /* 0x00 */ BtlHelpEntryA *head;
+    /* 0x04 */ BtlHelpEntryA *tail;
+    /* 0x08 */ s32 count;
+} BtlHelpListA;
 
 #endif

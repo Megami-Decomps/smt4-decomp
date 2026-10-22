@@ -11,7 +11,7 @@ int FUN_00295108(void);
 int mapIfStart(void);
 int popupQueueInsertUnique(...);
 int FUN_00312af0(void);
-int FUN_00398258(...);
+int mapIfStartNavigation(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern int saveSlotFindSelected(void);
 extern int lmapSceneGetUnk0(void);
 extern int popupHasActiveValue(void);
 extern int countNonZeroRecords24(void);
-/* Supplied declaration required: FUN_00398258. */
+/* Supplied declaration required: mapIfStartNavigation. */
 
 
 void FUN_002237a0(void)
@@ -72,7 +72,7 @@ void FUN_002237a0(void)
         if (g_popupState[6] == 0) {
           g_popupState[6] = 0xae;
         }
-        FUN_00398258(piVar2[6],*piVar1,1,0,0);
+        mapIfStartNavigation(piVar2[6],*piVar1,1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
         DAT_005f19ee = 1;
@@ -102,7 +102,7 @@ LAB_002238e8:
         if (piVar2[6] == 0) {
           piVar2[6] = 0xae;
         }
-        FUN_00398258(piVar2[6],piVar2[5],1,0,0);
+        mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
         DAT_005f19ee = 1;
@@ -132,7 +132,7 @@ LAB_002239b8:
         if (piVar2[6] == 0) {
           piVar2[6] = 0xae;
         }
-        FUN_00398258(piVar2[6],piVar2[5],1,0,0);
+        mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
         DAT_005f19ee = 1;
@@ -170,7 +170,7 @@ LAB_00223a7c:
         if (piVar2[6] == 0) {
           piVar2[6] = 0xae;
         }
-        FUN_00398258(piVar2[6],piVar2[5],1,0,0);
+        mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
         DAT_005f19ee = 1;
@@ -200,7 +200,7 @@ LAB_00223b4c:
         if (piVar2[6] == 0) {
           piVar2[6] = 0xae;
         }
-        FUN_00398258(piVar2[6],piVar2[5],0,0,1);
+        mapIfStartNavigation(piVar2[6],piVar2[5],0,0,1);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
         DAT_005f19ee = 1;
@@ -272,7 +272,7 @@ LAB_00223df0:
         if (piVar2[6] == 0) {
           piVar2[6] = 0xae;
         }
-        FUN_00398258(piVar2[6],piVar2[5],1,1,0);
+        mapIfStartNavigation(piVar2[6],piVar2[5],1,1,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
         DAT_005f19ee = 1;
@@ -303,7 +303,7 @@ LAB_00223c28:
       if (piVar2[6] == 0) {
         piVar2[6] = 0xae;
       }
-      FUN_00398258(piVar2[6],piVar2[5],1,0,0);
+      mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
       temp_v1 = FUN_0014af98();
       FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
     }
@@ -316,7 +316,7 @@ LAB_00223c28:
     temp_v3 = g_popupState[1];
     g_popupState[1] = temp_v3 + 1;
     if ((temp_v3 + 1 == 2) && (piVar2[5] != 0)) {
-      FUN_00398258(piVar2[6],piVar2[5],0,0,0);
+      mapIfStartNavigation(piVar2[6],piVar2[5],0,0,0);
       temp_v1 = FUN_0014af98();
       FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
     }

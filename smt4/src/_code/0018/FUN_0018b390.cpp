@@ -1,46 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018b390` (_code @ 0x18b390, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail add r1, r4, #31 differs from recovered add r0, r0, r4. */
+#include "common.h"
 
-extern "C" {
+struct ScriptBranchRecordView {
+    u8 unk00[0x18];
+    u32 instructionIndex; // 0x18
+    u8 unk1C[4]; // 0x1C
+};
 
-int scrPopFloat(int);
+struct ScriptInstructionView {
+    u16 unk00; // 0x00
+    u16 branchIndex; // 0x02
+};
 
-/* Supplied declaration required: scrPopFloat. */
-extern int scrPopInt(int);
+struct ScriptOperandView {
+    u8 unk00[0x1F];
+    u8 type; // 0x1F
+};
 
+struct ScriptStateView {
+    u8 unk00[0x18];
+    u32 instructionIndex; // 0x18
+    u32 unk1C; // 0x1C: offset relative to this state
+    u8 unk20[0x98];
+    ScriptBranchRecordView* branches; // 0xB8
+    ScriptInstructionView* instructions; // 0xBC
+};
 
-unsigned int FUN_0018b390(int param_1)
+extern "C" s32 scrPopInt(ScriptStateView* state);
+extern "C" f32 scrPopFloat(ScriptStateView* state);
 
+// Advance for a nonzero operand; otherwise select the current instruction's branch target.
+extern "C" u32 FUN_0018b390(ScriptStateView* state)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  float in_s0;
-  
-  switch(*(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x1f)) {
-  case 0:
-  case 2:
-    temp_v0 = scrPopInt(param_1);
-    if (temp_v0 != 0) {
-      temp_v0 = *(int *)(param_1 + 0x18) + 1;
-      *(int *)(param_1 + 0x18) = temp_v0;
-      return 1;
-    }
-    break;
-  case 1:
-  case 3:
-    scrPopFloat(param_1);
-    if (in_s0 != 0.0f) {
-      temp_v0 = *(int *)(param_1 + 0x18) + 1;
-      *(int *)(param_1 + 0x18) = temp_v0;
-      return 1;
-    }
-  }
-  temp_v0 = *(int *)(*(int *)(param_1 + 0xb8) +
-                  (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xbc) + *(int *)(param_1 + 0x18) * 4 + 2) *
-                  0x20 + 0x18);
-  *(int *)(param_1 + 0x18) = temp_v0;
-  return 1;
-}
+    const ScriptOperandView* operand = reinterpret_cast<const ScriptOperandView*>(
+        reinterpret_cast<const u8*>(state) + state->unk1C);
 
-} /* extern "C" */
+    bool advance;
+    switch (operand->type) {
+    case 0:
+    case 2:
+        advance = scrPopInt(state) != 0;
+        break;
+    case 1:
+    case 3:
+        advance = scrPopFloat(state) != 0.0f;
+        break;
+    default:
+        advance = false;
+        break;
+    }
+
+    if (advance) {
+        ++state->instructionIndex;
+    } else {
+        state->instructionIndex = state->branches[
+            state->instructions[state->instructionIndex].branchIndex].instructionIndex;
+    }
+    return 1;
+}

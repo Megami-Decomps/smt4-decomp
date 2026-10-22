@@ -1,6 +1,7 @@
 #include "shard/NaviMain.h"
 
 extern "C" {
+extern NaviMainA *g_naviMain;
 void flagsSetIfUnset3(s32, s32, s32, s32, s32, s32);
 s32 FUN_0048e40c(NaviTransitionState *);
 void menuMarkActive(NaviTransitionState *);
@@ -9,9 +10,9 @@ void menuMarkActive(NaviTransitionState *);
 void naviMainSetFlagsAndActivate(s32 firstGroup, s32 firstBit, s32 secondGroup, s32 secondBit,
                   s32 thirdGroup, s32 thirdBit)
 {
-    NaviMain *navigation = g_naviMain;
+    NaviMainA *navigation = g_naviMain;
     flagsSetIfUnset3(firstGroup, firstBit, secondGroup, secondBit, thirdGroup, thirdBit);
-    if (navigation != NULL && FUN_0048e40c(&navigation->stateView.transition))
-        menuMarkActive(&navigation->stateView.transition);
+    if (navigation != NULL && FUN_0048e40c(&navigation->transition))
+        menuMarkActive(&navigation->transition);
 }
 }

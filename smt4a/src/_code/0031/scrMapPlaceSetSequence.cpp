@@ -16,7 +16,7 @@ s32 scrMapPlaceSetSequence(void)
     u32 c = scrGetArg(2);
 
     mapPlaceSet(a, b, c);
-    g_gameState.unk574 = 0;
+    g_gameState.transitionActive = 0;
     asdSequenceRequest(8, 0, 0);
     return 1;
 }

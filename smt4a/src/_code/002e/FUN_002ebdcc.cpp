@@ -30,7 +30,7 @@ int scrCommMessageSetMode(...);
 int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
 int scrSetResult(...);
-int FUN_003315c4(void);
+int uniteReleaseExit(void);
 int FUN_00331714(int *);
 int FUN_00336de4(unsigned int, int);
 int bustupCutAnimSetFlag(int);
@@ -90,7 +90,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: eventTexSetFlag. */
 extern int btlTalkBustUpExists(void);
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003315c4. */
+/* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00331714. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: bustupCutAnimSetFlag. */
@@ -235,7 +235,7 @@ unsigned int FUN_002ebdcc(void)
   case 1:
     temp_v2 = engineCleanupIsDone();
     if (temp_v2 != 0) {
-      FUN_003315c4();
+      uniteReleaseExit();
       scrCommMessageSetMode(0xffffffff);
       messageSlotSet(0);
       sysPlaySe(0x92);

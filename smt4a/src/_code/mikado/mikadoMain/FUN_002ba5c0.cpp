@@ -1,62 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba5c0` (_code @ 0x2ba5c0, 0xdc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail uses r1/r2 (not r0/r1) for the start-position copies and the stacked callback arguments. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+typedef void (*MikadoProcFunc)(void);
+
+struct MikadoWork {
+    /* 0x00 */ u32 process;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u32 unk08;
+};
+
+struct MikadoModule {
+    /* 0x00 */ u8 flag;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ MikadoWork *work;
+    /* 0x08 */ s32 startX;
+    /* 0x0c */ s32 startY;
+};
 
 extern "C" {
+extern MikadoModule g_mikado;
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int jyoucyuGetTableEntry(...);
+void *jyoucyuGetTableEntry(u32 index);
+MikadoWork *asdMemoryAllocTracked(s32 heap, s32 align, s32 arg2, s32 size, s32 fromFront);
+u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay, MikadoProcFunc onUpdate,
+                           MikadoProcFunc onEnd, MikadoWork *work);
+u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, MikadoProcFunc onUpdate,
+                   MikadoProcFunc onEnd, MikadoWork *work, u32 owner);
+void FUN_002bd1f4(void);
+void FUN_003409bc(void);
+void childOwnerUpdateKind123(void);
 
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned char LAB_002ba6dc; /* 0x2ba6dc */
-extern unsigned char LAB_002ba6f0; /* 0x2ba6f0 */
-extern int FUN_002bd1f4(...); /* 0x2bd1f4 */
-extern unsigned char LAB_003409bc; /* 0x3409bc */
-extern unsigned char LAB_00340a14; /* 0x340a14 */
-extern unsigned char g_mikado; /* 0x588010 */
-extern unsigned int *DAT_00588014; /* 0x588014 */
-extern int DAT_00588018; /* 0x588018 */
-extern int DAT_0058801c; /* 0x58801c */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-
-
-void FUN_002ba5c0(short *param_1,int param_2)
-
+/* Allocates the mikado work, takes the optional start position and creates its main process and draw task. */
+void FUN_002ba5c0(const s16 *args, s32 argSize)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  jyoucyuGetTableEntry(0);
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0xc,1);
-  DAT_00588014 = puVar1;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  puVar1[2] = 0;
-  g_mikado = 0;
-  *(unsigned char *)((int)puVar1 + 5) = 0;
-  if ((param_1 != (short *)0x0) && (param_2 == 4)) {
-    DAT_00588018 = (int)*param_1;
-    DAT_0058801c = (int)param_1[1];
-  }
-  puVar2 = &LAB_002ba6dc;
-  asdProcessCreateSimple(&LAB_002ba6dc,4,0,0,FUN_002bd1f4,&LAB_003409bc,puVar1);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002ba6f0,0xeb,1,0,&LAB_00340a14,0,DAT_00588014,puVar2);
-  return;
+    MikadoWork *work;
+
+    jyoucyuGetTableEntry(0);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\mikadoMain.cpp", 125);
+    work = asdMemoryAllocTracked(0x100, 0x100, 0, 12, 1);
+    g_mikado.work = work;
+    work->unk04 = 0;
+    work->unk08 = 0;
+    g_mikado.flag = 0;
+    work->unk05 = 0;
+    if (args != NULL && argSize == 4) {
+        g_mikado.startX = args[0];
+        g_mikado.startY = args[1];
+    }
+    work->process = asdProcessCreateSimple("MikadoMainProc", 4, 0, 0, FUN_002bd1f4, FUN_003409bc, work);
+    taskCreateDraw("MikadoDrawDown", 235, 1, 0, childOwnerUpdateKind123, NULL, g_mikado.work, work->process);
 }
 
 } /* extern "C" */

@@ -61,7 +61,7 @@ extern int FUN_002f2740(...); /* 0x2f2740 */
 extern int dataTable08CompareSecondaryKeyDescending(...); /* 0x2f27ec */
 extern int dataTable08Sub2ComparePackedKeyDescending(...); /* 0x2f2840 */
 extern int FUN_002f2898(...); /* 0x2f2898 */
-extern int FUN_002f8120(...); /* 0x2f8120 */
+extern int itemCompareCategoryDescendingValueAscending(...); /* 0x2f8120 */
 extern int FUN_0030bce8(...); /* 0x30bce8 */
 extern int FUN_0030bd88(...); /* 0x30bd88 */
 extern int FUN_0030be80(...); /* 0x30be80 */
@@ -137,7 +137,7 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0xf) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_002f8120);
+        FUN_002b7bca(temp_v1,temp_v2,8,itemCompareCategoryDescendingValueAscending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);

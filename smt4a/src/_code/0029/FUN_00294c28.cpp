@@ -1,4 +1,4 @@
-#include "common.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
@@ -15,11 +15,7 @@ typedef struct Candidate {
     /* 0x12C */ u16 id;
 } Candidate;
 
-typedef struct GameState {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ s8 busy;
-} GameState;
-extern GameState g_gameState;
+extern GameStateA g_gameState;
 
 void FUN_00152f44(void);
 void gameFlagsGetBlock(void);
@@ -38,7 +34,7 @@ void FUN_00294c28(void)
 
     gameFlagsGetBlock();
     FUN_00152f44();
-    if (((((g_gameState.busy == 0) && (g_popupState->mode == 0)) && (value = gameFlagIsSet(0x49A), value != 0)) &&
+    if (((((g_gameState.inputBlocked == 0) && (g_popupState->mode == 0)) && (value = gameFlagIsSet(0x49A), value != 0)) &&
          ((candidate = saveSlotFindSelected(), candidate != NULL) &&
           ((value = gameFlagIsSet(0x1A2), value == 0 || (value = randRange(99), value + 1 > 0x32)))))) {
         value = randRange(99);

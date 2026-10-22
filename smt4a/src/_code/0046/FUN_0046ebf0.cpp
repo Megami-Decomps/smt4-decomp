@@ -1,10 +1,10 @@
-#include "common.h"
+#include "shard/W4_Match3_AocMainA.h"
 
 extern "C" {
 
-extern u32 g_aocMain;
+extern AocMainA *g_aocMain;
 
-s32 FUN_001b3148(u32 main);
+s32 FUN_001b3148(AocMainA * main);
 s32 FUN_001b2d88(u32 arg0, u32 arg1, u32 arg2);
 
 /* Returns 1 when FUN_001b3148 succeeds on the add-on main object and FUN_001b2d88(arg0, 0x39, arg1) succeeds too. */

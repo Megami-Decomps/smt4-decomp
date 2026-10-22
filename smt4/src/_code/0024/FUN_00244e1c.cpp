@@ -1,70 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00244e1c` (_code @ 0x244e1c, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail moves r3 after the float argument copies and stores the
+ * two -1 fields last; this build hoists both. */
+#include "shard/S1Mover.h"
+
+/* The work area of the task FUN_00244e1c starts (0x168 bytes). */
+struct ModelEffectTask {
+    /* 0x000 */ u32 *doneFlag; /* set to 1 at start, cleared by the task */
+    /* 0x004 */ u8 unk004[4];
+    /* 0x008 */ u32 resource;
+    /* 0x00c */ u8 unk00c[0x14];
+    /* 0x020 */ Vec3f position;
+    /* 0x02c */ f32 scale;
+    /* 0x030 */ u8 id;
+    /* 0x031 */ u8 unk031[0x14];
+    /* 0x045 */ u8 option;
+    /* 0x046 */ u8 unk046[2];
+    /* 0x048 */ f32 baseScale;
+    /* 0x04c */ u8 unk04c[0x104];
+    /* 0x150 */ u8 mode;
+    /* 0x151 */ u8 unk151[0xb];
+    /* 0x15c */ s32 unk15c;
+    /* 0x160 */ u8 unk160[4];
+    /* 0x164 */ s32 unk164;
+};
 
 extern "C" {
+ModelEffectTask *taskCreate(void (*update)(ModelEffectTask *), u32 a, u32 b, u32 c, u32 d,
+                            u32 size, u32 list, u32 e, u32 f);
+void memClear(void *block, s32 size);
+u32 FUN_002fdd9c(u32 id);
+void FUN_00200c9c(ModelEffectTask *task);
 
-int taskCreate(...);
-int memClear(...);
-int FUN_002fdd9c(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_4_stack;
-
-extern int FUN_00200c9c(...); /* 0x200c9c */
-
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002fdd9c. */
-
-
-romwright_code * FUN_00244e1c(unsigned int param_1,unsigned int *param_2,unsigned char param_3,unsigned char param_4)
-
+/* Starts the task that plays effect `id` at a position and scale; `doneFlag` (optional) reads 1
+ * while it runs. */
+ModelEffectTask *FUN_00244e1c(u32 id, u32 *doneFlag, u8 mode, u8 option, Vec3f position,
+                              f32 scale)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 4 native warning(s); review required */
-  romwright_code *pcVar1;
-  unsigned int temp_v0;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  
-  pcVar1 = FUN_00200c9c;
-  taskCreate(FUN_00200c9c,0,0,0,0,0x168,3,0,0);
-  if (pcVar1 != (romwright_code *)0x0) {
-    memClear();
-    temp_v0 = param_1;
-    FUN_002fdd9c();
-    *(unsigned int *)((unsigned char *)pcVar1 + 8) = temp_v0;
-    if (param_2 != (unsigned int *)0x0) {
-      temp_v0 = 1;
+    ModelEffectTask *task = taskCreate(FUN_00200c9c, 0, 0, 0, 0, sizeof(ModelEffectTask), 3, 0, 0);
+    if (task != NULL) {
+        memClear(task, sizeof(ModelEffectTask));
+        task->resource = FUN_002fdd9c(id);
+        task->doneFlag = doneFlag;
+        if (doneFlag != NULL) {
+            *doneFlag = 1;
+        }
+        task->position = position;
+        task->id = id;
+        task->mode = mode;
+        task->option = option;
+        task->scale = scale;
+        task->baseScale = scale;
+        task->unk15c = -1;
+        task->unk164 = -1;
     }
-    *(unsigned int **)pcVar1 = param_2;
-    if (param_2 != (unsigned int *)0x0) {
-      *param_2 = temp_v0;
-    }
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x20) = in_s0;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x24) = in_s1;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x28) = in_s2;
-    ((unsigned char *)pcVar1)[0x30] = romwright_subpiece_4_1_0(param_1,0);
-    ((unsigned char *)pcVar1)[0x150] = (unsigned char)param_3;
-    ((unsigned char *)pcVar1)[0x45] = (unsigned char)param_4;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x2c) = in_s3;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x48) = in_s3;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x15c) = 0xffffffff;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x164) = 0xffffffff;
-  }
-  return pcVar1;
+    return task;
 }
-
-} /* extern "C" */
+}

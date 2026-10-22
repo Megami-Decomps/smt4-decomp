@@ -1,39 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b30fc` (_code @ 0x2b30fc, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail loads all region bases up front into saved registers; this build loads each base only when its check is reached. */
+#include "gfx/MemoryRanges.h"
 
 extern "C" {
+extern GfxMemoryRanges DAT_00465120;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned int DAT_0046513c; /* 0x46513c */
-extern unsigned int DAT_00465140; /* 0x465140 */
-extern unsigned int DAT_00465144; /* 0x465144 */
-extern unsigned int DAT_00465148; /* 0x465148 */
-extern int DAT_0046514c; /* 0x46514c */
-extern int DAT_00465150; /* 0x465150 */
-extern int DAT_00465154; /* 0x465154 */
-extern int DAT_00465158; /* 0x465158 */
-
-
-unsigned int FUN_002b30fc(unsigned int param_1)
-
+/* Classifies an address in one of four registered graphics memory regions. */
+u32 FUN_002b30fc(u32 address)
 {
-  if ((param_1 < DAT_0046513c) || (DAT_0046513c + DAT_0046514c < param_1)) {
-    if ((DAT_00465140 <= param_1) && (param_1 <= DAT_00465150 + DAT_00465140)) {
-      return 1;
+    const GfxMemoryRanges *ranges = &DAT_00465120;
+    if (address < ranges->bases[0] || ranges->bases[0] + ranges->sizes[0] < address) {
+        if (ranges->bases[1] <= address && address <= ranges->sizes[1] + ranges->bases[1]) {
+            return 1;
+        }
+        if (ranges->bases[2] <= address && address <= ranges->sizes[2] + ranges->bases[2]) {
+            return 2;
+        }
+        if (ranges->bases[3] <= address && address <= ranges->sizes[3] + ranges->bases[3]) {
+            return 3;
+        }
     }
-    if ((DAT_00465144 <= param_1) && (param_1 <= DAT_00465154 + DAT_00465144)) {
-      return 2;
-    }
-    if ((DAT_00465148 <= param_1) && (param_1 <= DAT_00465158 + DAT_00465148)) {
-      return 3;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00233240(...);
-int FUN_0029d684(int);
+int statusPanelSetOpen(int);
 int FUN_0029defc(int, int);
 int FUN_0029dfc0(int);
 int buttonHelpSetPreset(unsigned int);
@@ -20,7 +20,7 @@ extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_00233240. */
 extern int flaggedValueHolderGetTotal(int *);
 extern int stageAssetsLoaded(void);
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029defc. */
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
@@ -72,7 +72,7 @@ void FUN_003a8dac(int *param_1)
     *(short *)(param_1 + 0x296c) = temp_v2;
     if (temp_v2 != 0) {
       FUN_0029defc((int)temp_v2,1);
-      FUN_0029d684(1);
+      statusPanelSetOpen(1);
       return;
     }
   }

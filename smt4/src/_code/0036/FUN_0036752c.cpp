@@ -1,48 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036752c` (_code @ 0x36752c, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation-result lifetime and descriptor-copy scheduling differ. */
+#include "classes/AsdAllocatorObject.h"
+
+struct DescriptorRequest {
+    /* 0x00 */ u32 unk00[4];
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 unk11;
+    /* 0x12 */ u8 unk12;
+    /* 0x13 */ u8 unk13;
+    /* 0x14 */ u32 unk14;
+};
+
+struct DescriptorObject;
+struct DescriptorObjectVtable {
+    /* 0x00 */ void (*unk00[9])();
+    /* 0x24 */ void (*vfunc24)(DescriptorObject *object, AsdAllocatorObject *allocator);
+};
+
+struct DescriptorObject {
+    /* 0x000 */ const DescriptorObjectVtable *vtable;
+    /* 0x004 */ u8 unk004[0x144];
+    /* 0x148 */ u8 unk148;
+    /* 0x149 */ u8 unk149;
+    /* 0x14a */ u8 unk14a;
+    /* 0x14b */ u8 unk14b;
+    /* 0x14c */ u32 unk14c;
+    /* 0x150 */ DescriptorRequest request;
+};
+
+typedef char DescriptorRequestSizeCheck[sizeof(DescriptorRequest) == 24 ? 1 : -1];
+typedef char DescriptorObjectSizeCheck[sizeof(DescriptorObject) == 0x168 ? 1 : -1];
 
 extern "C" {
+extern const DescriptorObjectVtable DAT_004212bc;
+DescriptorObject *FUN_002b52b4(void *storage, AsdAllocatorObject *allocator,
+                              u32 options, const DescriptorRequest *request);
 
-typedef int romwright_code(...);
-extern unsigned char DAT_004212bc; /* 0x4212bc */
-
-extern int *FUN_002b52b4(int, int *, unsigned int, int *);
-
-
-int * FUN_0036752c(int *param_1,int *param_2)
-
+DescriptorObject *FUN_0036752c(const DescriptorRequest *request, AsdAllocatorObject *allocator)
 {
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = (**(romwright_code **)(*param_2 + 8))(param_2,0x168,4);
-  piVar2 = (int *)0x0;
-  if (temp_v0 != 0) {
-    piVar2 = (int *)FUN_002b52b4(temp_v0,param_2,0,param_1);
-    *piVar2 = (int)&DAT_004212bc;
-    *(char *)(piVar2 + 0x52) = (char)param_1[4];
-    *(unsigned char *)((int)piVar2 + 0x149) = *(unsigned char *)((int)param_1 + 0x11);
-    *(unsigned char *)((int)piVar2 + 0x14a) = *(unsigned char *)((int)param_1 + 0x12);
-    piVar2[0x53] = param_1[5];
-    temp_v0 = param_1[1];
-    temp_v1 = param_1[2];
-    temp_v2 = param_1[3];
-    temp_v3 = param_1[4];
-    temp_v4 = param_1[5];
-    piVar2[0x54] = *param_1;
-    piVar2[0x55] = temp_v0;
-    piVar2[0x56] = temp_v1;
-    piVar2[0x57] = temp_v2;
-    piVar2[0x58] = temp_v3;
-    piVar2[0x59] = temp_v4;
-  }
-  (**(romwright_code **)(*piVar2 + 0x24))(piVar2,param_2);
-  return piVar2;
+    void *storage = allocator->allocate(sizeof(DescriptorObject), 4);
+    DescriptorObject *object = 0;
+    if (storage != 0) {
+        object = FUN_002b52b4(storage, allocator, 0, request);
+        object->vtable = &DAT_004212bc;
+        object->unk148 = request->unk10;
+        object->unk149 = request->unk11;
+        object->unk14a = request->unk12;
+        object->unk14c = request->unk14;
+        object->request = *request;
+    }
+    object->vtable->vfunc24(object, allocator);
+    return object;
 }
-
-} /* extern "C" */
+}

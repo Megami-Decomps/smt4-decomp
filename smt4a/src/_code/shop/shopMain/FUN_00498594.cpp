@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteBankApplyPreset(int, int);
 int FUN_004954e8(void);
 int FUN_00496a0c(int, int);
-int FUN_0049706c(int);
+int menuOpenCommandList(int);
 int messageChoiceShowCurrent(int);
 int sendEvent100020F(void);
 int sendEvent100020E(void);
@@ -22,7 +22,7 @@ typedef struct {
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_00496a0c. */
-/* Supplied declaration required: FUN_0049706c. */
+/* Supplied declaration required: menuOpenCommandList. */
 /* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
@@ -62,7 +62,7 @@ void FUN_00498594(int param_1)
       temp_v0 = inputIsQuestCancelPressed();
       if (temp_v0 != 0) {
         sendEvent100020E();
-        FUN_0049706c(param_1);
+        menuOpenCommandList(param_1);
         return;
       }
     }

@@ -1,60 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033a360` (_code @ 0x33a360, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "battle/btlUnit.h"
+#include "shard/BattleSceneSlots.h"
 
 extern "C" {
 
-int FUN_0023e52c(unsigned int, int, int, int);
-int FUN_0027dd9c(unsigned int);
-int FUN_003cc944(unsigned int, int, int);
-int FUN_003cf438(unsigned int, int, int);
-int entryTableInvalidate(unsigned int);
-int battleCreateSecondaryModels(unsigned int, unsigned int);
+extern u32 g_btlScriptUnit;
+extern u32 DAT_00435d18;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+BtlUnit *btlUnitGet(u32 id);
+void FUN_003cf438(u32 scriptUnit, BtlUnit *unit, s32 mode);
+void entryTableInvalidate(u32 table);
+void FUN_0023e52c(u32 scriptUnit, BtlUnit *unit, s32 kind, s32 arg3, s32 arg4);
+void FUN_003cc944(u32 scriptUnit, BtlUnit *unit, s32 mode);
+void FUN_0027dd9c(u32 table);
+void battleCreateSecondaryModels(u32 table, u32 models);
 
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int DAT_00435d18; /* 0x435d18 */
-
-/* Supplied declaration required: FUN_0023e52c. */
-/* Supplied declaration required: FUN_0027dd9c. */
-extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_003cc944. */
-/* Supplied declaration required: FUN_003cf438. */
-/* Supplied declaration required: entryTableInvalidate. */
-/* Supplied declaration required: battleCreateSecondaryModels. */
-
-
-void FUN_0033a360(int param_1)
-
+/* Resets the scene's target slots for the script unit and rebuilds its secondary models. */
+void FUN_0033a360(BattleSceneSlots *scene)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = btlUnitGet(g_btlScriptUnit);
-  FUN_003cf438(g_btlScriptUnit,temp_v0,1);
-  temp_v1 = 0;
-  temp_v2 = 0x6d;
-  do {
-    temp_v2 = temp_v2 - 1;
-    temp_v3 = param_1 + temp_v1 * 0x1c;
-    temp_v1 = temp_v1 + 1;
-    *(unsigned int *)(temp_v3 + 0x2318) = 0xffffffff;
-    *(unsigned int *)(temp_v3 + 0x231c) = 0xffffffff;
-    *(unsigned int *)(temp_v3 + 0x2330) = 0xffffffff;
-  } while (temp_v2 != 0);
-  entryTableInvalidate(DAT_00435d18);
-  FUN_0023e52c(g_btlScriptUnit,temp_v0,5,0);
-  FUN_003cc944(g_btlScriptUnit,temp_v0,1);
-  FUN_0027dd9c(DAT_00435d18);
-  battleCreateSecondaryModels(DAT_00435d18,*(unsigned int *)(temp_v0 + 0x594));
-  return;
+    BtlUnit *unit = btlUnitGet(g_btlScriptUnit);
+    s32 i;
+
+    FUN_003cf438(g_btlScriptUnit, unit, 1);
+    for (i = 0; i < 109; i++) {
+        scene->slots[i].primaryId = -1;
+        scene->slots[i].secondaryId = -1;
+        scene->slots[i].effectId = -1;
+    }
+    entryTableInvalidate(DAT_00435d18);
+    FUN_0023e52c(g_btlScriptUnit, unit, 5, 0, 1);
+    FUN_003cc944(g_btlScriptUnit, unit, 1);
+    FUN_0027dd9c(DAT_00435d18);
+    battleCreateSecondaryModels(DAT_00435d18, unit->unk594);
 }
 
 } /* extern "C" */

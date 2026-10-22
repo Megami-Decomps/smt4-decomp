@@ -1,58 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034f488` (_code @ 0x34f488, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail clears the cursor with `str r1, [r4, #24]!` + `stm {r0, r5}` (a 64-bit zero at 0x1C?); armcc emits three plain stores of r5. */
+#include "common.h"
+
+/* The heap interface the buffer owner allocates through (nw::os::IAllocator layout). */
+class FrameBufferAllocator {
+public:
+    virtual void *alloc(u32 size, u32 alignment) = 0;
+    virtual void free(void *block) = 0;
+};
+
+struct FrameBufferSize {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 width;
+    /* 0x0C */ s32 height;
+};
+
+/* Playback position within the frame buffer. */
+struct FrameBufferCursor {
+    /* 0x00 */ u32 frame;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+};
+
+struct FrameBufferOwner {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ FrameBufferAllocator *allocator;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ s32 handle;     /* -1 when creation failed */
+    /* 0x10 */ void *buffer;
+    /* 0x14 */ u32 bufferSize;
+    /* 0x18 */ FrameBufferCursor cursor;
+};
 
 extern "C" {
 
-typedef struct fn_0034f488_arg0 fn_0034f488_arg0;
-struct fn_0034f488_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x4];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-};
+s32 FUN_0034f6cc(void);
+s32 FUN_0034e310(s32 width, s32 height, u32 format);
 
-typedef int romwright_code(...);
-extern int FUN_0034e310(unsigned int, unsigned int, unsigned int);
-extern int FUN_0034f6cc(void);
-
-
-unsigned int
-FUN_0034f488(fn_0034f488_arg0 *param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5
-            )
-
+/* Allocate count 16-bit frames of the given size and create their handle; 1 on success. */
+s32 FUN_0034f488(FrameBufferOwner *owner, u32 unused, const FrameBufferSize *size, s32 count, u32 format)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_0034f6cc();
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v0 = *(int *)(param_3 + 8) * *(int *)(param_3 + 0xc) * param_4 * 2;
-    param_1->field_0x14 = temp_v0;
-    temp_v0 = (*(romwright_code *)**(unsigned int **)param_1->field_0x4)(param_1->field_0x4,temp_v0,0x20);
-    param_1->field_0x10 = temp_v0;
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v0 = FUN_0034e310(*(unsigned int *)(param_3 + 8),*(unsigned int *)(param_3 + 0xc),param_5);
-      param_1->field_0xc = temp_v0;
-      if (temp_v0 == -1) {
-        (**(romwright_code **)(*(int *)param_1->field_0x4 + 4))(param_1->field_0x4,param_1->field_0x10);
-        param_1->field_0x10 = 0;
+    if (!FUN_0034f6cc()) {
         return 0;
-      }
-      param_1->field_0x18 = 0;
-      param_1->field_0x1c = 0;
-      param_1->field_0x20 = 0;
-      temp_v1 = 1;
     }
-  }
-  return temp_v1;
+    owner->bufferSize = size->width * size->height * count * 2;
+    owner->buffer = owner->allocator->alloc(owner->bufferSize, 32);
+    if (owner->buffer == NULL) {
+        return 0;
+    }
+    owner->handle = FUN_0034e310(size->width, size->height, format);
+    if (owner->handle == -1) {
+        owner->allocator->free(owner->buffer);
+        owner->buffer = NULL;
+        return 0;
+    }
+    owner->cursor.frame = 0;
+    owner->cursor.unk04 = 0;
+    owner->cursor.unk08 = 0;
+    return 1;
 }
 
 } /* extern "C" */

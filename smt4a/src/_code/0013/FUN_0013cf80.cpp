@@ -1,49 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013cf80` (_code @ 0x13cf80, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses captureRequested via a 0xf00 base and returns the zero flag/pointer it tested instead of a separate mov r0, #0. */
+#include "shard/JobWork.h"
 
 extern "C" {
 
-int FUN_00154edc(int, unsigned int);
-int FUN_00157558(unsigned int);
+void FUN_00157558(u32 renderCtx);
+u8 FUN_00154edc(u32 mode, JobSurface *surface);
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern u32 g_renderCtx;
 
-/* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
-
-
-char FUN_0013cf80(void)
-
+/* Starts a 512x512 capture into the job's surface once one is requested and nothing blocks it. */
+s32 FUN_0013cf80(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = jobGetWork();
-  *(unsigned char *)(temp_v2 + 0xffd) = 0;
-  temp_v3 = *(char *)(temp_v2 + 0xff4) != '\0';
-  temp_v0 = '\0';
-  if (temp_v3) {
-    temp_v0 = *(char *)(temp_v2 + 0xff5);
-  }
-  if ((temp_v3 && temp_v0 != '\0') && (temp_v0 = '\0', *(int *)(temp_v2 + 0x1490) != 0)) {
-    if ((*(char *)(temp_v2 + 0x148c) == '\0') && (*(char *)(temp_v2 + 0x1040) == '\0')) {
-      FUN_00157558(g_renderCtx);
-      *(unsigned int *)(*(int *)(temp_v2 + 0x1038) + 0x14) = 0x200;
-      *(unsigned int *)(*(int *)(temp_v2 + 0x1038) + 0x18) = 0x200;
-      temp_v1 = 0;
-      FUN_00154edc(0,*(unsigned int *)(temp_v2 + 0x1038));
-      *(unsigned char *)(temp_v2 + 0xffc) = temp_v1;
-      *(unsigned char *)(temp_v2 + 0xffd) = 1;
-      return '\0';
+    JobWork *work = jobGetWork();
+
+    work->captured = 0;
+    if (!work->captureEnabled || !work->captureRequested) {
+        return 0;
     }
-    temp_v0 = '\0';
-  }
-  return temp_v0;
+    if (work->captureTarget == NULL) {
+        return 0;
+    }
+    if (work->captureBlocked || work->enabled) {
+        return 0;
+    }
+    FUN_00157558(g_renderCtx);
+    ((JobSurface *)work->bufferB)->width = 512;
+    ((JobSurface *)work->bufferB)->height = 512;
+    work->captureResult = FUN_00154edc(0, (JobSurface *)work->bufferB);
+    work->captured = 1;
+    return 0;
 }
 
 } /* extern "C" */

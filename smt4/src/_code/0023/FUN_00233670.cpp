@@ -1,55 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233670` (_code @ 0x233670, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail clears ids with __aeabi_memset4 (4-aligned) and stores group/firstItem/itemCount with one stmib before the other fields. */
+#include "shard/MessageIdList.h"
+#include <string.h>
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-int __aeabi_memset4(int, int, unsigned int);
+void ifTouchRegionRemove(void);
+u16 FUN_002b8584(u32 group, u32 item);
 
-extern unsigned short FUN_002b8584(unsigned int, int);
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: __aeabi_memset4. */
-
-
-void FUN_00233670(int param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Resets the list and fills it with `itemCount` message ids from `group` starting at `firstItem`. */
+void FUN_00233670(MessageIdList *list, u32 group, s32 firstItem, s32 itemCount)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int unaff_r5;
-  int temp_v2;
-  
-  *(unsigned int *)(param_1 + 4) = param_2;
-  *(int *)(param_1 + 8) = param_3;
-  *(int *)(param_1 + 0xc) = param_4;
-  *(unsigned short *)(param_1 + 0x14) = 0xffff;
-  *(unsigned char *)(param_1 + 0x11) = 0;
-  *(unsigned char *)(param_1 + 0x12) = 0;
-  if (0 < *(short *)(param_1 + 0x30)) {
-    unaff_r5 = 0;
-  }
-  *(unsigned short *)(param_1 + 0x16) = 0;
-  if (0 < *(short *)(param_1 + 0x30)) {
-    do {
-      ifTouchRegionRemove();
-      unaff_r5 = unaff_r5 + 1;
-    } while (unaff_r5 < *(short *)(param_1 + 0x30));
-    *(unsigned short *)(param_1 + 0x30) = 0;
-    __aeabi_memset4(param_1 + 0x18,0x18,0xffffffff);
-  }
-  temp_v2 = 0;
-  if (temp_v2 < param_4) {
-    do {
-      temp_v1 = FUN_002b8584(param_2,param_3 + temp_v2);
-      temp_v0 = temp_v2 * 2;
-      temp_v2 = temp_v2 + 1;
-      *(unsigned short *)(param_1 + temp_v0 + 0x18) = temp_v1;
-      *(short *)(param_1 + 0x30) = *(short *)(param_1 + 0x30) + 1;
-    } while (temp_v2 < param_4);
-  }
-  return;
+    list->group = group;
+    list->firstItem = firstItem;
+    list->itemCount = itemCount;
+    list->selected = 0xffff;
+    list->unk11 = 0;
+    list->unk12 = 0;
+    list->unk16 = 0;
+    if (list->idCount > 0) {
+        s32 i;
+        for (i = 0; i < list->idCount; i++) {
+            ifTouchRegionRemove();
+        }
+        list->idCount = 0;
+        memset(list->ids, 0xff, sizeof(list->ids));
+    }
+    s32 item;
+    for (item = 0; item < itemCount; item++) {
+        list->ids[item] = FUN_002b8584(group, firstItem + item);
+        list->idCount++;
+    }
 }
 
 } /* extern "C" */

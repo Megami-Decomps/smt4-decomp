@@ -1,5 +1,5 @@
 /* NON_MATCHING: count-address hoisting and short-page branch placement differ; -O2 candidate. */
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
 
 struct PartyTouchState {
     u16 characters[4]; // panel 0x67c
@@ -21,6 +21,7 @@ struct PartyTouchRoster {
     u8 count; // 0x910b
 };
 extern "C" {
+extern PartyPanelState *g_partyPanel;
 void ifTouchRegionRemove();
 void __aeabi_memset4(void *, u32, u32);
 u16 FUN_002b8584(s32, s32);

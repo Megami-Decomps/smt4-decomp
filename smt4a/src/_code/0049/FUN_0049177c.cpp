@@ -37,7 +37,7 @@ extern int FUN_004083a8(unsigned char, unsigned char);
 extern float *sub68OwnerGetBlock60(int);
 extern int naviGetActiveStateValue(void);
 extern float *lmapSceneGetObj(int);
-extern int FUN_00492c5c(int);
+extern int naviMainGetRequestedMap(int);
 /* Supplied declaration required: words2Copy. */
 
 
@@ -81,7 +81,7 @@ void FUN_0049177c(int param_1)
   temp_v9 = temp_v15;
   words2Copy(param_1 + 0x4d0,&temp_v16);
   if (DAT_005f1a5e != '\0') {
-    temp_v3 = FUN_00492c5c(temp_v2);
+    temp_v3 = naviMainGetRequestedMap(temp_v2);
     temp_v14 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20638),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v11 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2063c),

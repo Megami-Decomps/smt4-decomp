@@ -1,67 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399b44` (_code @ 0x399b44, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00220984(void);
-int FUN_0039ad14(void);
-int FUN_0039b370(void);
-int FUN_0039c728(int);
+typedef struct StepObject {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0C */ s8 state;          /* -1 = inactive */
+    /* 0x0D */ u8 unk0D[3];
+    /* 0x10 */ u32 flags;         /* STEP_FINISHED, STEP_LOCKED */
+} StepObject;
 
-/* Supplied declaration required: FUN_00220984. */
-extern int flagBitIsSet(unsigned int);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0039ad14. */
-/* Supplied declaration required: FUN_0039b370. */
-/* Supplied declaration required: FUN_0039c728. */
+#define STEP_FINISHED 0x1
+#define STEP_LOCKED 0x1000 /* no stepping */
 
+void FUN_00220984(void);
+s32 FUN_0039ad14(StepObject *object);
+s32 FUN_0039b370(StepObject *object);
+void FUN_0039c728(StepObject *object);
+s32 flagBitIsSet(u32 bit);
+s32 gameFlagIsSet(u32 flag);
 
-void FUN_00399b44(int param_1)
-
+/* Steps the object; when flag 0x400 and bit 118 are set it runs the state-specific extra first.
+ * Marks it finished once the step reports done. */
+void FUN_00399b44(StepObject *object)
 {
-/* irregular: 4 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (*(unsigned char *)(param_1 + 0xc) != 0xff) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x10);
-    temp_v2 = gameFlagIsSet(0x400);
-    if (temp_v2 != 0) {
-      temp_v2 = flagBitIsSet(0x76);
-      temp_v0 = '\0';
-      if (temp_v2 != 0) {
-        temp_v0 = *(char *)(param_1 + 0xc);
-      }
-      if (temp_v2 != 0 && temp_v0 != '\0') {
-        FUN_0039c728(param_1);
-      }
+    if (object->state == -1) {
+        return;
     }
-    if ((temp_v1 & 0x1000) == 0) {
-      FUN_00220984();
-      temp_v2 = param_1;
-      if (*(char *)(param_1 + 0xc) != '\0') {
-        FUN_0039ad14();
-      }
-      else {
-        temp_v3 = gameFlagIsSet(0x400);
-        if (temp_v3 == 0) {
-          return;
-        }
-        temp_v3 = flagBitIsSet(0x76);
-        if (temp_v3 == 0) {
-          return;
-        }
-        FUN_0039b370();
-      }
-      if (temp_v2 != 0) {
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 1;
-      }
+    u32 locked = (object->flags & STEP_LOCKED) >> 12;
+    if (gameFlagIsSet(0x400) && flagBitIsSet(118) && object->state != 0) {
+        FUN_0039c728(object);
     }
-  }
-  return;
+    if (locked) {
+        return;
+    }
+    FUN_00220984();
+    s32 done;
+    if (object->state == 0) {
+        if (!gameFlagIsSet(0x400) || !flagBitIsSet(118)) {
+            return;
+        }
+        done = FUN_0039b370(object);
+    } else {
+        done = FUN_0039ad14(object);
+    }
+    if (done) {
+        object->flags |= STEP_FINISHED;
+    }
 }
 
 } /* extern "C" */

@@ -1,43 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrScriptProcessStartEntry` (_code @ 0x275f44, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct ScriptEntryLocal {
+    s8 name[0x18];               // 0x00
+    u32 unk18;                   // 0x18
+    u32 unk1C;                   // 0x1c
+};
 
-int sysMemClear(int, int);
+struct ScriptHeaderLocal {
+    u8 unk00[8];                 // 0x00
+    s32 entryCount;              // 0x08
+};
 
-/* Supplied declaration required: sysMemClear. */
+struct ScriptProcessLocal {
+    s8 name[0x18];               // 0x00
+    u32 unk18;                   // 0x18
+    u32 unk1C;                   // 0x1c
+    u32 unk20;                   // 0x20
+    u32 unk24;                   // 0x24
+    u32 unk28;                   // 0x28
+    u32 unk2C;                   // 0x2c
+    u32 unk30;                   // 0x30
+    u32 unk34;                   // 0x34
+    u32 unk38;                   // 0x38
+    u8 unk3C[0x70];              // 0x3c
+    u8 unkAC[4];                 // 0xac
+    ScriptHeaderLocal* header;   // 0xb0
+    ScriptEntryLocal* entries;   // 0xb4
+    u8 unkB8[0x10];              // 0xb8
+    s32 entryIndex;              // 0xc8
+    u32 unkCC;                   // 0xcc
+    u32 unkD0;                   // 0xd0
+};
 
+extern "C" void sysMemClear(void* destination, u32 size);
 
-unsigned int scrScriptProcessStartEntry(int param_1,int param_2)
-
+// Select a valid script entry, copy its name, and reset the process state.
+extern "C" u32 scrScriptProcessStartEntry(ScriptProcessLocal* process, s32 entryIndex)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if ((-1 < param_2) && (param_2 < *(int *)(*(int *)(param_1 + 0xb0) + 8))) {
-    for (temp_v1 = 0; temp_v0 = *(char *)(*(int *)(param_1 + 0xb4) + temp_v1 + param_2 * 0x20),
-        *(char *)(param_1 + temp_v1) = temp_v0, temp_v0 != '\0'; temp_v1 = temp_v1 + 1) {
-    }
-    temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0xb4) + param_2 * 0x20 + 0x18);
-    *(unsigned int *)(param_1 + 0x1c) = 0;
-    *(unsigned int *)(param_1 + 0x20) = 0;
-    *(unsigned int *)(param_1 + 0x24) = 0;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    *(unsigned int *)(param_1 + 0x30) = 0;
-    *(unsigned int *)(param_1 + 0x34) = 0;
-    *(unsigned int *)(param_1 + 0x18) = temp_v2;
-    *(unsigned int *)(param_1 + 0x38) = 0;
-    sysMemClear(param_1 + 0x3c,0x70);
-    *(int *)(param_1 + 200) = param_2;
-    *(unsigned int *)(param_1 + 0xcc) = 0;
-    *(unsigned int *)(param_1 + 0xd0) = 0;
-    return 1;
-  }
-  return 0;
-}
+    if (entryIndex < 0 || entryIndex >= process->header->entryCount)
+        return 0;
 
-} /* extern "C" */
+    for (u32 nameOffset = 0; ; ++nameOffset) {
+        s8 character = process->entries[entryIndex].name[nameOffset];
+        process->name[nameOffset] = character;
+        if (character == 0)
+            break;
+    }
+
+    u32 entryValue = process->entries[entryIndex].unk18;
+    process->unk1C = 0;
+    process->unk20 = 0;
+    process->unk24 = 0;
+    process->unk28 = 0;
+    process->unk2C = 0;
+    process->unk30 = 0;
+    process->unk34 = 0;
+    process->unk18 = entryValue;
+    process->unk38 = 0;
+    sysMemClear(process->unk3C, 0x70);
+    process->entryIndex = entryIndex;
+    process->unkCC = 0;
+    process->unkD0 = 0;
+    return 1;
+}

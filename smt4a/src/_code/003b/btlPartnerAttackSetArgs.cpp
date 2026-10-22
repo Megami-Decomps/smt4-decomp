@@ -1,14 +1,8 @@
-#include "common.h"
+#include "battle/btlPartnerAttack.h"
 
 extern "C" {
 
-typedef struct PartnerAttack {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ s32 arg0;
-    /* 0x20 */ s32 arg1;
-} PartnerAttack;
-
-extern PartnerAttack *g_btlPartnerAttack;
+extern BtlPartnerAttackA *g_btlPartnerAttack;
 
 s32 scrGetArg(...);
 
@@ -18,8 +12,8 @@ u32 btlPartnerAttackSetArgs(void)
     s32 arg0 = scrGetArg();
     s32 arg1 = scrGetArg(1);
 
-    g_btlPartnerAttack->arg0 = arg0;
-    g_btlPartnerAttack->arg1 = arg1;
+    g_btlPartnerAttack->argument = arg0;
+    g_btlPartnerAttack->selected = arg1;
     return 1;
 }
 

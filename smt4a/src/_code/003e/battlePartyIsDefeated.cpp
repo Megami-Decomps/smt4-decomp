@@ -2,15 +2,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
-struct BattleSurvivalGlobals {
-    BtlMainGlobalsA prefix;
-    /* 0x080 */ u64 excludedCombatants;
-    /* 0x088 */ u8 unk088[0x140];
-    /* 0x1C8 */ u64 suppressDefeat;
-};
+typedef char BattleSurvivalSuppressOffsetCheck[
+    offsetof(BtlMainGlobalsA, suppressDefeat) == 0x1C8 ? 1 : -1];
 
 extern "C" {
-extern BattleSurvivalGlobals g_btlMain;
+extern BtlMainGlobalsA g_btlMain;
 u8 gameDataBlocksGetTableFlag();
 u8 gameDataFlagTestBit(u32 flag);
 }
@@ -25,8 +21,8 @@ extern "C" bool battlePartyIsDefeated(const BtlMainStateA *state)
     bool defeated = true;
     for (s32 i = 0; i < 4; ++i) {
         const BtlCombatantEntryA &entry = state->entries[i];
-        if ((entry.flags & g_btlMain.prefix.combatantMasks.required) != 0 &&
-            (entry.flags & g_btlMain.excludedCombatants) == 0 && entry.hp > 0) {
+        if ((entry.flags & g_btlMain.combatantMasks.required) != 0 &&
+            (entry.flags & g_btlMain.exclusionMask) == 0 && entry.hp > 0) {
             defeated = false;
             break;
         }
@@ -34,9 +30,9 @@ extern "C" bool battlePartyIsDefeated(const BtlMainStateA *state)
 
     if (gameDataBlocksGetTableFlag() == 4 || gameDataFlagTestBit(0x80) != 0) {
         u64 leaderFlags = state->entries[0].flags;
-        if ((leaderFlags & g_btlMain.prefix.combatantMasks.required) == 0)
+        if ((leaderFlags & g_btlMain.combatantMasks.required) == 0)
             defeated = true;
-        if ((leaderFlags & g_btlMain.excludedCombatants) != 0)
+        if ((leaderFlags & g_btlMain.exclusionMask) != 0)
             defeated = true;
     }
     return defeated;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [212], unsigned char *, int, int);
-int FUN_002e27c4(unsigned int, unsigned int, unsigned int, int, int);
+int animSlotsSetStartFrames(unsigned int, unsigned int, unsigned int, int, int);
 int FUN_002fe63c(...);
 int rt_memcpy_w(...);
 
@@ -26,7 +26,7 @@ typedef struct {
 extern unsigned char LAB_00333db8; /* 0x333db8 */
 
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_002e27c4. */
+/* Supplied declaration required: animSlotsSetStartFrames. */
 /* Supplied declaration required: FUN_002fe63c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -130,7 +130,7 @@ unsigned int FUN_002fe394(unsigned int param_1,unsigned int param_2,int param_3,
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < (int)temp_v2);
       }
-      FUN_002e27c4(param_1,temp_v2,temp_v4,param_4,param_5);
+      animSlotsSetStartFrames(param_1,temp_v2,temp_v4,param_4,param_5);
       return temp_v2;
     }
     param_1 = 0;

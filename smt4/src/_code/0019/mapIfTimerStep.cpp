@@ -1,17 +1,8 @@
-#include "common.h"
+#include "map/MapIfTimer.h"
 
 extern "C" {
 
 int mapIfStart(void);
-
-typedef struct MapIfTimer {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ s32 frames;
-    /* 0x08 */ u8 unk08[0xC];
-    /* 0x14 */ s32 unk14;
-} MapIfTimer;
-
-extern MapIfTimer *g_mapIfTimer;
 
 /* Counts frames while the timer is in state 1-3; starts the map interface at frame 8 and resets after 60. */
 void mapIfTimerStep(void)

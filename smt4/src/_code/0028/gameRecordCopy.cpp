@@ -6,7 +6,7 @@ extern "C" bool gameRecordCopy(u32 recordIndex, RecordValue* destination)
     if (recordIndex > 0x500) {
         return false;
     }
-    RecordValueBlock* block = (RecordValueBlock*)g_gameDataBlocks.unk04;
+    RecordValueBlock* block = (RecordValueBlock*)g_gameDataBlocks.saveBlock;
     const RecordValue* record = &block->records[recordIndex];
     *destination = *record;
     return true;

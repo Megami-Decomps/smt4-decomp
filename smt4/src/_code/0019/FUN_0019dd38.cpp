@@ -1,56 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019dd38` (_code @ 0x19dd38, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the zero return into r0 first, so the work pointer and constants land one register higher (r1/r2/r4/r5) and each case returns on its own. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+struct Vector3 { f32 x, y, z; };
+struct ModelPlacement {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ Vector3 position;
+    /* 0x10 */ u32 model;
+    /* 0x14 */ u32 counter;
+    /* 0x18 */ u8 enabled;
+};
+struct ModelPlacementWork {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ s32 counter;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0c */ u8 requested;
+    /* 0x0d */ u8 unk0D[3];
+    /* 0x10 */ ModelPlacement placement;
+};
 
-extern unsigned int *g_mapModelWork; /* 0x44cda0 */
+extern ModelPlacementWork *g_mapModelWork;
 
-
-unsigned int FUN_0019dd38(void)
-
+/* Steps the model placement: after 40 frames (or on request) it advances, and 30 frames later it is removed. */
+s32 FUN_0019dd38(void)
 {
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  
-  puVar2 = g_mapModelWork;
-  temp_v0 = *g_mapModelWork;
-  if (temp_v0 >= 2) {
-    if (temp_v0 != 2) {
-      if (temp_v0 == 3) {
-        temp_v0 = g_mapModelWork[1];
-        puVar2 = g_mapModelWork + 4;
-        g_mapModelWork[1] = temp_v0 + 1;
-        if ((int)(temp_v0 + 1) >= 0x1f) {
-          *(unsigned char *)puVar2 = 0;
-          puVar2 = g_mapModelWork;
-          *g_mapModelWork = 1;
-          puVar2[1] = 0;
+    ModelPlacement *placement;
+
+    switch (g_mapModelWork->state) {
+    case 0:
+    case 1:
+        break;
+    case 3:
+        placement = &g_mapModelWork->placement;
+        if (++g_mapModelWork->counter > 30) {
+            placement->active = 0;
+            g_mapModelWork->state = 1;
+            g_mapModelWork->counter = 0;
         }
-      }
+        break;
+    case 2:
+        placement = &g_mapModelWork->placement;
+        if (++g_mapModelWork->counter == 40) {
+            placement->counter = 1;
+            placement->enabled = 1;
+        }
+        if (g_mapModelWork->requested) {
+            placement->counter = 2;
+            placement->enabled = 1;
+            g_mapModelWork->state = 3;
+            g_mapModelWork->counter = 0;
+        }
+        break;
     }
-    else {
-      temp_v0 = g_mapModelWork[1];
-      g_mapModelWork[1] = temp_v0 + 1;
-      if (temp_v0 + 1 == 0x28) {
-        puVar2[9] = 1;
-        *(unsigned char *)(puVar2 + 10) = 1;
-      }
-      if ((char)puVar2[3] != '\0') {
-        puVar2[9] = 2;
-        *(unsigned char *)(puVar2 + 10) = 1;
-        *puVar2 = 3;
-        puVar2[1] = 0;
-        return 0;
-      }
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

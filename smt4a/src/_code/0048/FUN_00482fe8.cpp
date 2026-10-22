@@ -10,7 +10,7 @@ int FUN_00379958(void);
 int FUN_00482414(int, float *);
 int FUN_00482428(int, int *);
 int FUN_004824fc(int, int);
-int FUN_00482610(void);
+int callbackCreateControllerForKind(void);
 int FUN_0048269c(int, int *);
 int stateSetterSetFlag8(int);
 int FUN_0048286c(int);
@@ -63,7 +63,7 @@ extern int FUN_003ded68(unsigned short);
 /* Supplied declaration required: FUN_00482414. */
 /* Supplied declaration required: FUN_00482428. */
 /* Supplied declaration required: FUN_004824fc. */
-/* Supplied declaration required: FUN_00482610. */
+/* Supplied declaration required: callbackCreateControllerForKind. */
 /* Supplied declaration required: FUN_0048269c. */
 /* Supplied declaration required: stateSetterSetFlag8. */
 /* Supplied declaration required: FUN_0048286c. */
@@ -125,7 +125,7 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
           FUN_00482a5c();
         }
         (&param_1[1].field_0x4)[temp_v1] = temp_v2;
-        FUN_00482610();
+        callbackCreateControllerForKind();
         (**(romwright_code **)(*(int *)(&param_1[1].field_0x4)[temp_v1] + 8))();
         (**(romwright_code **)(**(int **)((&param_1[1].field_0x4)[temp_v1] + 0x74) + 8))();
         param_1->field_0x10 = param_1->field_0x10 + 1;

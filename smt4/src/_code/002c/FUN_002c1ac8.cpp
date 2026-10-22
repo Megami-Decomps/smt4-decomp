@@ -1,49 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c1ac8` (_code @ 0x2c1ac8, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The fourth integer argument is saved before the VFP argument copies instead of after them. */
+#include "common.h"
 
 extern "C" {
+extern u32 DAT_00464c40;
+void gpuSubmitDefaultPacket(void);
+void FUN_002b13d8(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
+void submitDefaultFloatParameters(void);
 
-int FUN_002adba8(unsigned long long *, int, int);
-int FUN_002b13d8(int, int, int, int);
-int gpuSubmitDefaultPacket(void);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern int DAT_00464c40; /* 0x464c40 */
-
-/* Supplied declaration required: FUN_002adba8. */
-/* Supplied declaration required: FUN_002b13d8. */
-/* Supplied declaration required: gpuSubmitDefaultPacket. */
-
-
-void FUN_002c1ac8(int param_1,int param_2,int param_3,int param_4)
-
+/* Substitutes shared defaults for the integer parameters and forwards the complete scalar block. */
+void FUN_002c1ac8(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned long long uStack_20;
-  
-  if (param_1 == 0) {
-    param_1 = DAT_00464c40;
-  }
-  if (param_2 == 0) {
-    param_2 = DAT_00464c40;
-  }
-  if (param_3 == 0) {
-    param_3 = DAT_00464c40;
-  }
-  if (param_4 == 0) {
-    param_4 = DAT_00464c40;
-  }
-  gpuSubmitDefaultPacket();
-  FUN_002b13d8(param_1,param_2,param_3,param_4);
-  uStack_20 = 0x1024500000001;
-  FUN_002adba8(&uStack_20,0x18,1);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    if (first == 0) first = DAT_00464c40;
+    if (second == 0) second = DAT_00464c40;
+    if (third == 0) third = DAT_00464c40;
+    if (fourth == 0) fourth = DAT_00464c40;
+    gpuSubmitDefaultPacket();
+    FUN_002b13d8(first, second, third, fourth, value0, value1, value2, value3, value4, value5, value6, value7, value8);
+    submitDefaultFloatParameters();
 }
-
-} /* extern "C" */
+}

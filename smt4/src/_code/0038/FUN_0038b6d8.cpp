@@ -1,74 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b6d8` (_code @ 0x38b6d8, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: default-result construction retains a zero register instead of recovering the owner from its member constructor. */
+#include "classes/WindowOperation.h"
 
 extern "C" {
+s32 objGetFlagBit0(const WindowOperationRequest *request);
+WindowOperationResult FUN_0038bae8(WindowOperationState *state, u32 id);
 
-int _ZN18WindowStatusResultC1Ej(void);
-int FUN_0038bae8(unsigned int *, int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} param_3_stack;
-
-extern int objGetFlagBit0(int);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
-/* Supplied declaration required: FUN_0038bae8. */
-
-
-void FUN_0038b6d8(unsigned int *param_1,int param_2,unsigned int *param_3)
-
+// Store a window request and dispatch it only when its active flag is set.
+WindowOperationResult FUN_0038b6d8(WindowOperationState *state,
+                                  const WindowOperationRequest *request)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  unsigned int temp_v7 [3];
-  
-  temp_v6 = temp_v6 & 0xffffff00;
-  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(&uStack_34);
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar2 = temp_v7;
-  _ZN18WindowStatusResultC1Ej();
-  temp_v1 = puVar2[1];
-  *puVar1 = *puVar2;
-  puVar1[1] = temp_v1;
-  temp_v1 = param_3[1];
-  temp_v2 = param_3[2];
-  temp_v3 = param_3[3];
-  temp_v4 = param_3[4];
-  temp_v5 = param_3[5];
-  *(unsigned int *)(param_2 + 8) = *param_3;
-  *(unsigned int *)(param_2 + 0xc) = temp_v1;
-  *(unsigned int *)(param_2 + 0x10) = temp_v2;
-  *(unsigned int *)(param_2 + 0x14) = temp_v3;
-  *(unsigned int *)(param_2 + 0x18) = temp_v4;
-  *(unsigned int *)(param_2 + 0x1c) = temp_v5;
-  temp_v0 = objGetFlagBit0(param_2 + 8);
-  if (temp_v0 == 0) {
-    *param_1 = temp_v6;
-    param_1[1] = uStack_34;
-    param_1[2] = uStack_30;
-    param_1[3] = uStack_2c;
-    param_1[4] = uStack_28;
-  }
-  else {
-    FUN_0038bae8(param_1,param_2,*(unsigned short *)param_3);
-  }
-  return;
+    WindowOperationResult result;
+    result.result = WindowStatusResult(0);
+    state->request = *request;
+    if (!objGetFlagBit0(&state->request))
+        return result;
+    return FUN_0038bae8(state, request->id);
 }
-
-} /* extern "C" */
+}

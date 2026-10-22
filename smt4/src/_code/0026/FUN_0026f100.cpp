@@ -1,40 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026f100` (_code @ 0x26f100, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The output pointer and completion flag use different saved registers. */
+#include "common.h"
 extern "C" {
+f32 mathInterpolateTimed(s32 elapsed, s32 duration, f32 start, f32 target);
 
-int mathInterpolateTimed(int, int);
-
-/* Supplied declaration required: mathInterpolateTimed. */
-
-
-unsigned int FUN_0026f100(float *param_1,int param_2,int param_3)
-
+// Interpolates toward the target, clamps overshoot, and reports completion.
+u32 FUN_0026f100(f32* value, s32 elapsed, s32 duration, f32 start, f32 target)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */
-  float in_s0;
-  float in_s1;
-  float temp_v0;
-  
-  temp_v0 = in_s0;
-  mathInterpolateTimed(param_2,param_3);
-  *param_1 = in_s0;
-  if (in_s1 - temp_v0 > 0.0f) {
-    if (in_s1 <= in_s0) {
-      *param_1 = in_s1;
-      return 1;
+    s32 complete = 0;
+    f32 interpolated = mathInterpolateTimed(elapsed, duration, start, target);
+    *value = interpolated;
+    if (duration == elapsed) {
+        complete = 1;
     }
-  }
-  else if (in_s0 <= in_s1) {
-    *param_1 = in_s1;
+    if (target - start > 0.0f) {
+        if (interpolated >= target) {
+            *value = target;
+            return 1;
+        }
+    } else if (interpolated <= target) {
+        *value = target;
+        return 1;
+    }
+    if (!complete) {
+        return 0;
+    }
+    *value = target;
     return 1;
-  }
-  if (param_3 != param_2) {
-    return 0;
-  }
-  *param_1 = in_s1;
-  return 1;
 }
-
-} /* extern "C" */
+}

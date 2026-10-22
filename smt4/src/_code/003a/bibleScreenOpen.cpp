@@ -6,7 +6,7 @@ extern "C" {
 extern int FUN_002898e4(void);
 extern int FUN_0028c040(void);
 extern int buttonHelpCreate(void);
-extern int FUN_0028d9b0(void);
+extern int buttonHelpAcquireResources(void);
 extern int asdLoadFileAsyncSimple(const char *path, void **buffer, int flags);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_0029e788(void);
@@ -25,7 +25,7 @@ void bibleScreenOpen(BibleScreen *screen)
     FUN_002898e4();
     if (campButtonHelpIsActive() == 0) {
         screen->helpCreated = 1;
-        FUN_0028d9b0();
+        buttonHelpAcquireResources();
         buttonHelpCreate();
     }
     if (*asdTMTexTableGetEntry(0xD) == 0) {

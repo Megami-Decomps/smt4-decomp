@@ -11,7 +11,7 @@ int FUN_00282bfc(int, int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 int asdLoadFileAsyncSimple(...);
 int asdOperatorNew(void);
 int asdTMTexTableLoadTmx(int, int);
@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028d9b0. */
+/* Supplied declaration required: buttonHelpAcquireResources. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int FUN_002c2218(int);
 /* Supplied declaration required: asdOperatorNew. */
@@ -58,7 +58,7 @@ void FUN_003b8158(int param_1)
   asdTMTexTableLoadTmx(0x21,0);
   FUN_002898e4();
   FUN_00289880();
-  FUN_0028d9b0();
+  buttonHelpAcquireResources();
   buttonHelpCreate();
   FUN_00240cec(0);
   FUN_003bbaf4(param_1 + 0xd58);

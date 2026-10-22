@@ -1,55 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c9104` (_code @ 0x2c9104, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail bl 0 [R_ARM_CALL FUN_0030fc80] differs from recovered add r0, sp, #8. */
+#include "common.h"
 
-extern "C" {
+// Private views of the date-time value and the referenced game-data records.
+namespace {
 
-int FUN_001a1564(int, int, int);
-int FUN_0030fc80(int *);
+struct DateTimeView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+};
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+struct TimeRecordView {
+    u8 unk00[4]; // 0x00
+    s32 unk04;   // 0x04
+};
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+struct GameDataBlocksView {
+    u8 unk00[12];         // 0x00
+    TimeRecordView* unk0C; // 0x0C
+};
 
-/* Supplied declaration required: FUN_001a1564. */
-/* Supplied declaration required: FUN_0030fc80. */
-extern int FUN_005020c0(unsigned int *);
-extern int FUN_005021d8(unsigned int *);
-extern int FUN_00502244(unsigned int *);
-extern int nn_fnd_DateTime_GetDay(unsigned int);
-extern int nn_fnd_DateTime_GetMonth(unsigned int);
-extern int nn_fnd_DateTime_GetYear(unsigned int);
-
-
-void FUN_002c9104(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int uStack_1c;
-  int temp_v5;
-  unsigned int uStack_14;
-  
-  FUN_0030fc80(&temp_v4);
-  temp_v5 = temp_v4;
-  uStack_14 = uStack_1c;
-  temp_v0 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v5);
-  temp_v1 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v5);
-  temp_v2 = nn_fnd_DateTime_GetYear((unsigned int)&temp_v5);
-  FUN_001a1564(temp_v2,temp_v1,temp_v0);
-  temp_v0 = FUN_005020c0((unsigned int *)&temp_v5);
-  temp_v1 = FUN_005021d8((unsigned int *)&temp_v5);
-  temp_v3 = FUN_00502244((unsigned int *)&temp_v5);
-  *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0xc)) + 4) = temp_v3 + (temp_v1 + (temp_v0 + temp_v2 * 0x18) * 0x3c) * 0x3c;
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern GameDataBlocksView g_gameDataBlocks;
+
+void FUN_0030fc80(DateTimeView* result);
+s32 nn_fnd_DateTime_GetDay(const DateTimeView* dateTime);
+s32 nn_fnd_DateTime_GetMonth(const DateTimeView* dateTime);
+s32 nn_fnd_DateTime_GetYear(const DateTimeView* dateTime);
+s32 FUN_001a1564(s32 year, s32 month, s32 day);
+s32 FUN_005020c0(const DateTimeView* dateTime);
+s32 FUN_005021d8(const DateTimeView* dateTime);
+s32 FUN_00502244(const DateTimeView* dateTime);
+
+// Convert the retrieved date-time to seconds and store it in the game-data record.
+void FUN_002c9104(void)
+{
+    DateTimeView retrieved;
+    FUN_0030fc80(&retrieved);
+    DateTimeView dateTime = retrieved;
+
+    s32 day = nn_fnd_DateTime_GetDay(&dateTime);
+    s32 month = nn_fnd_DateTime_GetMonth(&dateTime);
+    s32 year = nn_fnd_DateTime_GetYear(&dateTime);
+    s32 hours = FUN_001a1564(year, month, day) * 24;
+    hours += FUN_005020c0(&dateTime);
+    s32 minutes = hours * 60;
+    minutes += FUN_005021d8(&dateTime);
+    s32 seconds = minutes * 60;
+    seconds += FUN_00502244(&dateTime);
+
+    g_gameDataBlocks.unk0C->unk04 = seconds;
+}
+}

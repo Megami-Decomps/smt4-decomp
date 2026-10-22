@@ -1,66 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f6bc0` (_code @ 0x3f6bc0, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: index load scheduled between the two opening stores (retail after both); first text width call reuses the &text register instead of reloading [r4, #0x5d8] */
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-int fileSectionGetData(unsigned int, unsigned int, int);
-int FUN_001688c4(unsigned int);
-int FUN_00203b40(int, int, int, int, int, int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
-int flagsSetOrClearBit(int, int);
+typedef struct MessageEntry {
+    u16 message;   /* 0x00 */
+    u16 flags;     /* 0x02: bit 0 marks the message */
+} MessageEntry;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
+typedef struct MessageWindow {
+    u8 unk000[4];
+    s32 index;          /* 0x004 */
+    u32 message;        /* 0x008 */
+    u8 marked;          /* 0x00C */
+    u8 unk00D[3];
+    void *tableFile;    /* 0x010 */
+    u8 unk014[0x14];
+    void *messageFile;  /* 0x028 */
+    u8 unk02C[0x24];
+    u32 unk050;         /* 0x050 */
+    u8 unk054[0x68];
+    u8 cursor[0x64];    /* 0x0BC */
+    u8 unk120;          /* 0x120 */
+    u8 unk121[7];
+    s32 offsetX;        /* 0x128 */
+    u8 unk12C[0x4AC];
+    void *text;         /* 0x5D8 */
+    s32 textWidth;      /* 0x5DC */
+} MessageWindow;
 
-/* Supplied declaration required: fileSectionGetData. */
-/* Supplied declaration required: FUN_001688c4. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: flagsSetOrClearBit. */
+void *dataTableFileGetTable(void *file, s32 section);
+void fileSectionGetData(void *file, u32 index, s32 arg);
+void asdTextDrawDirectoryEntry(void *text, s32 a1, s32 color, s32 a3, s32 a4, void *file, u32 index);
+s32 FUN_001688c4(void *text);
+void FUN_00203b40(void *cursor, s32 x, s32 a2, s32 a3, s32 a4, s32 a5);
+void flagsSetOrClearBit(void *flags, s32 set);
 
-
-void FUN_003f6bc0(int param_1)
-
+/* Loads the window's message for its current index and lays the text and cursor out. */
+void FUN_003f6bc0(MessageWindow *window)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  
-  *(unsigned char *)(param_1 + 0x120) = 0;
-  *(unsigned int *)(param_1 + 0x128) = 0;
-  temp_v3 = *(int *)(param_1 + 4);
-  temp_v0 = dataTableFileGetTable(*(unsigned int *)(param_1 + 0x10),0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if ((temp_v3 < temp_v2) && (puVar4 = (unsigned short *)(temp_v1 + temp_v3 * 4), puVar4 != (unsigned short *)0x0)) {
-    *(unsigned int *)(param_1 + 8) = (unsigned int)*puVar4;
-    *(unsigned char *)(param_1 + 0xc) = (unsigned char)puVar4[1] & 1;
-  }
-  else {
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned char *)(param_1 + 0xc) = 0;
-  }
-  temp_v0 = *(unsigned int *)(param_1 + 8);
-  fileSectionGetData(*(unsigned int *)(param_1 + 0x28),temp_v0,0);
-  asdTextDrawDirectoryEntry(*(unsigned int *)(param_1 + 0x5d8),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 0x28),
-               temp_v0);
-  temp_v0 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));
-  *(unsigned int *)(param_1 + 0x5dc) = temp_v0;
-  temp_v1 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));
-  FUN_00203b40(param_1 + 0xbc,*(int *)(param_1 + 0x128) + temp_v1,8,1,0,1);
-  flagsSetOrClearBit(param_1 + 0xbc,0);
-  *(unsigned int *)(param_1 + 0x50) = 0;
-  return;
+    s32 index;
+    void *table;
+    MessageEntry *entries;
+    MessageEntry *entry;
+    s32 count;
+    u32 message;
+
+    window->unk120 = 0;
+    window->offsetX = 0;
+    index = window->index;
+    table = dataTableFileGetTable(window->tableFile, 0);
+    entries = (MessageEntry *)dataTableGetEntries(table);
+    count = dataTableGetCount(table);
+    entry = index < count ? &entries[index] : NULL;
+    if (entry == NULL) {
+        window->message = 0;
+        window->marked = 0;
+    } else {
+        window->message = entry->message;
+        window->marked = entry->flags & 1;
+    }
+    message = window->message;
+    fileSectionGetData(window->messageFile, message, 0);
+    asdTextDrawDirectoryEntry(window->text, 3, -1, 0, 3, window->messageFile, message);
+    window->textWidth = FUN_001688c4(window->text);
+    FUN_00203b40(window->cursor, window->offsetX + FUN_001688c4(window->text), 8, 1, 0, 1);
+    flagsSetOrClearBit(window->cursor, 0);
+    window->unk050 = 0;
 }
 
 } /* extern "C" */

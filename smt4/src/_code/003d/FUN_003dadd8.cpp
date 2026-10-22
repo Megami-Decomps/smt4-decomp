@@ -1,58 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dadd8` (_code @ 0x3dadd8, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation differs: retail keeps the name table in sl and the formatted buffer address in fp (saving r4-fp). */
+#include "common.h"
 
 extern "C" {
 
-int asdLoadFileAsyncSimple(...);
-int textFormatBuffer(...);
-int libc_strcpy(...);
-int asdMemFree(...);
-int memClear(...);
+/* One preloaded battle effect. */
+typedef struct BattleEffectSlot {
+    /* 0x00 */ u8 index;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ void *data;
+    /* 0x08 */ char name[0x80];
+    /* 0x88 */ u8 flags;
+    /* 0x89 */ u8 unk89[3];
+} BattleEffectSlot;
 
-extern int keyedRecordFindByName(int);
-extern int FUN_002522e0(unsigned char *, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: memClear. */
+typedef struct BattleEffectOwner {
+    /* 0x0000 */ u8 unk0000[0x2CDC];
+    /* 0x2CDC */ BattleEffectSlot slots[5];
+} BattleEffectOwner;
 
+extern const char DAT_00400804[5][0x20];
+extern const char DAT_004008c4[];
+void memClear(void *dest, u32 size);
+void asdMemFree(void *ptr);
+s32 textFormatBuffer(char *output, const char *format, ...);
+char *libc_strcpy(char *dest, const char *src);
+char *FUN_002522e0(const char *text, s32 character);
+s32 keyedRecordFindByName(const char *name);
+void asdLoadFileAsyncSimple(const char *path, void **data, u32 flags);
 
-unsigned int FUN_003dadd8(int param_1)
-
+/* Resets the five battle effect slots and starts loading each effect file not already registered. */
+u32 FUN_003dadd8(BattleEffectOwner *owner)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [128];
-  unsigned char temp_v4 [132];
-  
-  temp_v2 = 0;
-  do {
-    temp_v1 = param_1 + temp_v2 * 0x8c;
-    *(unsigned char *)(temp_v1 + 0x2cdc) = 0xff;
-    memClear(temp_v1 + 0x2ce4,0x80);
-    if (*(int *)(temp_v1 + 0x2ce0) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v1 + 0x2ce0) = 0;
+    char path[128];
+    char formatted[128];
+
+    for (s32 i = 0; i < 5; i++) {
+        BattleEffectSlot *slot = &owner->slots[i];
+        slot->index = 0xff;
+        memClear(slot->name, sizeof(slot->name));
+        if (slot->data != NULL) {
+            asdMemFree(slot->data);
+            slot->data = NULL;
+        }
+        slot->flags = 0;
+        memClear(path, sizeof(path));
+        memClear(formatted, sizeof(formatted));
+        textFormatBuffer(formatted, DAT_004008c4, DAT_00400804[i]);
+        libc_strcpy(path, formatted);
+        libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+        if (keyedRecordFindByName(slot->name) == 0xff) {
+            asdLoadFileAsyncSimple(path, &slot->data, 0);
+            slot->flags |= 1;
+        }
     }
-    *(unsigned char *)(temp_v1 + 0x2d64) = 0;
-    memClear(temp_v3,0x80);
-    memClear(temp_v4,0x80);
-    textFormatBuffer(temp_v4,"battle/effect/%s.eft","Move_out_c" + temp_v2 * 0x20);
-    libc_strcpy(temp_v3,temp_v4);
-    temp_v0 = FUN_002522e0(temp_v3,0x2f);
-    libc_strcpy(temp_v1 + 0x2ce4,temp_v0 + 1);
-    temp_v0 = keyedRecordFindByName(temp_v1 + 0x2ce4);
-    if (temp_v0 == 0xff) {
-      asdLoadFileAsyncSimple(temp_v3,temp_v1 + 0x2ce0,0);
-      *(unsigned char *)(temp_v1 + 0x2d64) = *(unsigned char *)(temp_v1 + 0x2d64) | 1;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 5);
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

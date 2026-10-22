@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00121ee8(...);
+int aocThreadAllocateStorage(...);
 int asdOperatorNew(...);
 int FUN_002c526c(...);
 int FUN_002c52dc(...);
@@ -22,7 +22,7 @@ extern int FUN_00111004(...); /* 0x111004 */
 extern int FUN_002a301c(...); /* 0x2a301c */
 extern int g_aocDisplay; /* 0x433130 */
 
-/* Supplied declaration required: FUN_00121ee8. */
+/* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_00121fa0(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -58,7 +58,7 @@ void FUN_001070ac(void)
       temp_v1 = FUN_00121fa0(temp_v0 + 0x4504);
       temp_v0 = temp_v1 - 0x4510;
       *(unsigned int *)(temp_v1 + 0x10) = 0;
-      FUN_00121ee8(temp_v1,0x4000);
+      aocThreadAllocateStorage(temp_v1,0x4000);
       temp_v2 = FUN_00111004;
       uStack_1c = 0;
       pcVar3 = "Aoc fileload Calc";

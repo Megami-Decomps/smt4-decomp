@@ -13,7 +13,7 @@ int FUN_0037c8e4(int, int);
 int FUN_0037d6e4(int);
 int messageDismissNumericBanner(int);
 int FUN_003a7630(int);
-int FUN_003c5fc4(int);
+int messageMainSetTargetFlags(int);
 int FUN_003fe86c(int, int);
 
 extern unsigned char DAT_005333bb; /* 0x5333bb */
@@ -34,7 +34,7 @@ extern int panelIsActiveState2(void);
 /* Supplied declaration required: FUN_0037d6e4. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003a7630. */
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int FUN_00467df8(void);
 extern unsigned int dataTable28Type1GetEntry(int, unsigned char);
@@ -84,7 +84,7 @@ void FUN_00468fec(unsigned int *param_1)
             if (temp_v1 != 0) {
               panelSetTarget(-temp_v1,0);
             }
-            FUN_003c5fc4(1);
+            messageMainSetTargetFlags(1);
           }
         }
         if (((char)param_1[4] == '\x0e') && (temp_v1 = gameFlagIsSet(0x491), temp_v1 == 0)) {

@@ -82,7 +82,7 @@ extern int flagBrowserStep(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
-extern int FUN_0046e08c(int, unsigned int, unsigned int);
+extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 
 
 unsigned int FUN_00298978(void)
@@ -220,7 +220,7 @@ unsigned int FUN_00298978(void)
     }
     textFormatBuffer(temp_v4,&LAB_00299154,puVar2[5],puVar2[5]);
     textFormatBuffer(temp_v5,&LAB_0029916c,puVar2[5],puVar2[5]);
-    temp_v1 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
+    temp_v1 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;
       aocDrawText7(g_aocSystem,puVar2[5],0);

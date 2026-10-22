@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00230aec(...);
+int drawTextAtRelativePosition(...);
 int FUN_00230d84(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
@@ -33,7 +33,7 @@ extern unsigned char LAB_003aa480; /* 0x3aa480 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00230aec. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
@@ -173,7 +173,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v14 = 0xffffffff;
     temp_v16 = *(short *)(temp_v4 + 10) + temp_v3;
     textFormatBuffer(temp_v15,&LAB_003aa478,temp_v13);
-    FUN_00230aec(param_1 + 200,0,temp_v1 + temp_v11,temp_v16,0,7,0xffffffff,temp_v10,temp_v15);
+    drawTextAtRelativePosition(param_1 + 200,0,temp_v1 + temp_v11,temp_v16,0,7,0xffffffff,temp_v10,temp_v15);
     param_4 = param_4 & 0xffff;
     temp_v7 = 0;
     dataTable00FindById();
@@ -190,7 +190,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v1 = *(short *)(temp_v4 + 8);
     temp_v2 = *(short *)(temp_v4 + 10);
     textFormatBuffer(temp_v15,&LAB_003aa480,temp_v7);
-    FUN_00230aec(param_1 + 200,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v14,temp_v10,temp_v15);
+    drawTextAtRelativePosition(param_1 + 200,0,temp_v11 + temp_v1,temp_v2 + temp_v3,0,7,temp_v14,temp_v10,temp_v15);
   }
   return;
 }

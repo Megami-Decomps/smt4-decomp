@@ -22,7 +22,7 @@ int FUN_001f3e80(...);
 int fadeObjectResetIfActive(...);
 int efctCallRoutineWithSpeedOverride(...);
 int FUN_0035d8f0(...);
-int FUN_003a7a88(...);
+int devilIsTextureLoaded(...);
 int FUN_003c2690(...);
 int FUN_003eb200(void);
 int VectorFloatToUnsigned(double, int);
@@ -145,10 +145,10 @@ extern int valueAtMostFifthOfTotal(int, int);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: FUN_0035d8f0. */
 /* Supplied declaration required: FUN_003a6404. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: FUN_003c2690. */
 extern int FUN_003e4978(void);
-extern int FUN_003e4cb4(int);
+extern int partySlotMatchesSelected(int);
 extern int uiEntryGetState(int, int);
 /* Supplied declaration required: FUN_003eb200. */
 
@@ -714,7 +714,7 @@ LAB_002afaf4:
 LAB_002afb00:
       temp_v9 = FUN_001834a4(0xd,0x44);
       temp_v14 = (int)(short)*(unsigned int *)(temp_v7 + 0x4bb0);
-      FUN_003a7a88(temp_v14,1);
+      devilIsTextureLoaded(temp_v14,1);
       if (temp_v14 != 0) {
         FUN_0035d8f0((int)(short)*(unsigned int *)(temp_v7 + 0x4bb0),
                      temp_v8 + temp_v6 + (int)*(short *)(temp_v9 + 8),
@@ -1211,7 +1211,7 @@ LAB_002afb00:
               (**(romwright_code **)(temp_v3 + 0x12d4))();
               *(unsigned char *)(temp_v3 + 0x12d0) = 0;
             }
-            temp_v3 = FUN_003e4cb4(temp_v4);
+            temp_v3 = partySlotMatchesSelected(temp_v4);
             if (temp_v3 != 0) {
               FUN_00164b5c(2,0xd,0xc,0,0,0x5b);
             }

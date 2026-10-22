@@ -1,43 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fe90c` (_code @ 0x3fe90c, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocation-byte calculation omits the retail's two core-register moves. */
+#include "Model/MoriModelUnit.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00526108[];
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 kind, u32 bytes, u32 flags);
+void FUN_0045aee0(IdArray *array, u16 *values, u32 count);
 
-int asdMemoryAlloc(int, int, int, int);
-int FUN_0045aee0(unsigned int *, unsigned int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_0045aee0. */
-
-
-void FUN_003fe90c(unsigned int *param_1,int param_2)
-
+// Initialize a model unit and allocate its optional invalid-ID array.
+void FUN_003fe90c(MoriModelUnit *unit, s32 count)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[0xb] = 0;
-  *(unsigned char *)(param_1 + 8) = 1;
-  param_1[7] = param_2;
-  if (0 < param_2) {
-    temp_v0 = 0x10000;
-    asdMemoryAlloc(0x10000,0x100,0,param_2 << 1);
-    param_1[4] = temp_v0;
-    FUN_0045aee0(param_1 + 5,temp_v0,param_2,1);
-    return;
-  }
-  return;
+    unit->unk00 = 0;
+    unit->unk04 = 0.0f;
+    unit->unk08 = 0.0f;
+    unit->unk0c = 0;
+    unit->indexStorage = NULL;
+    unit->unk2c = 0;
+    unit->enabled = 1;
+    unit->count = count;
+    if (count > 0) {
+        u32 bytes = count * sizeof(u16);
+        asdDebugTrace(DAT_00526108, 424);
+        unit->indexStorage = static_cast<u16 *>(asdMemoryAlloc(0x10000, 0x100, 0, bytes, 1));
+        FUN_0045aee0(&unit->indices, unit->indexStorage, count);
+    }
 }
-
-} /* extern "C" */
+}

@@ -2,8 +2,6 @@
 
 extern "C" {
 
-
-
 s32 uiQuestGetStep(void)
 {
     return g_uiQuest->step;

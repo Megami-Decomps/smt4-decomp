@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025765c(...);
-int FUN_0026242c(int);
+int btlSourceGetMaxHp(int);
 int FUN_00269bf0(int);
 int FUN_002888a8(...);
 int FUN_00288ddc(...);
@@ -71,7 +71,7 @@ extern unsigned char LAB_00251c04; /* 0x251c04 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0025765c. */
-/* Supplied declaration required: FUN_0026242c. */
+/* Supplied declaration required: btlSourceGetMaxHp. */
 /* Supplied declaration required: FUN_00269bf0. */
 /* Supplied declaration required: FUN_002888a8. */
 extern int isLowThreshold(int, int);
@@ -134,7 +134,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     temp_v9 = -1;
     temp_v13 = (int)*(short *)(temp_v7 + 0x2c);
     temp_v8 = (int)*(short *)(temp_v7 + 0x2a);
-    FUN_0026242c(temp_v7);
+    btlSourceGetMaxHp(temp_v7);
     temp_v3 = gameGetPlayerData();
     temp_v14 = (int)*(short *)(temp_v3 + 0x1e);
     temp_v15 = FUN_00288ddc((int)(short)temp_v7,0xffffffff);

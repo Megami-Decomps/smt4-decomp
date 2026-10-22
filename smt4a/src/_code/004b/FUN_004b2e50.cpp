@@ -47,7 +47,7 @@ extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0035ae58. */
 extern int actorIsActive(void);
-extern int FUN_003e4cb4(void);
+extern int partySlotMatchesSelected(void);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_004b3a4c. */
 /* Supplied declaration required: FUN_004b5db8. */
@@ -206,7 +206,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
     do {
       if (acStack_58[temp_v9] != '\0') {
         FUN_003e503c(temp_v9 & 0xffff);
-        temp_v13 = FUN_003e4cb4();
+        temp_v13 = partySlotMatchesSelected();
         if (temp_v13 == 0) {
           temp_v2 = param_1 + ((int)(temp_v7 + ((unsigned int)(temp_v7 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
           temp_v13 = vec2GetXInt(temp_v2 + 0x3f4);
@@ -324,7 +324,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
     if (acStack_58[temp_v9] != '\0') {
       temp_v5 = temp_v9;
       FUN_003e503c();
-      temp_v11 = FUN_003e4cb4();
+      temp_v11 = partySlotMatchesSelected();
       if (temp_v11 == 0) {
         temp_v13 = param_1 + ((int)(temp_v12 + ((unsigned int)(temp_v12 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
         temp_v11 = vec2GetXInt(temp_v13 + 0x3f4);

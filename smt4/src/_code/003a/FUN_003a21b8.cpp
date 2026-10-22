@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00230aec(...);
+int drawTextAtRelativePosition(...);
 void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int FUN_00230d84(int, int, int, int, int);
 void gxSetClippedBottomScreenScissor(int, int, int, int);
@@ -41,12 +41,12 @@ extern int g_titleScene; /* 0x44ea00 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int FUN_0022f1b8(short);
-/* Supplied declaration required: FUN_00230aec. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 extern unsigned int itemGetNameOrFallback(short, unsigned int);
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern unsigned int FUN_00246570(unsigned int *);
+extern unsigned int aocItemGetPrice(unsigned int *);
 /* Supplied declaration required: FUN_002be56c. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
@@ -165,7 +165,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     temp_v4 = FUN_0022f1b8(temp_v1);
     if (temp_v4 != 0) {
       temp_v12 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v12 + 2)),temp_v1) & 0xfc00ffff;
-      temp_v7 = FUN_00246570(&temp_v12);
+      temp_v7 = aocItemGetPrice(&temp_v12);
       if (param_3 == 0) {
         temp_v8 = 0xd1;
       }
@@ -184,7 +184,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v10 = *(short *)(temp_v4 + 10);
       textFormatBuffer(temp_v13,&LAB_003a25c0,temp_v7);
-      FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v8,temp_v2,temp_v13);
+      drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v8,temp_v2,temp_v13);
     }
     else {
       if (param_3 != 0) {
@@ -224,7 +224,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     temp_v0 = *(short *)(temp_v4 + 8);
     temp_v10 = *(short *)(temp_v4 + 10);
     textFormatBuffer(temp_v13,&LAB_003a2838,temp_v14);
-    FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v7,temp_v2,temp_v13);
+    drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v7,temp_v2,temp_v13);
     if (param_3 == 0) {
       temp_v8 = 0x100;
     }
@@ -232,7 +232,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       temp_v8 = 0x101;
     }
     temp_v4 = FUN_002bf4f0(param_1 + 0x380,temp_v8);
-    FUN_00230aec(param_1 + 0x380,0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v3,0,7
+    drawTextAtRelativePosition(param_1 + 0x380,0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v3,0,7
                  ,temp_v7,temp_v2,&LAB_003a283c);
     if ((*(char *)(param_1 + 0x1c) != '\0') && (temp_v4 = FUN_0022f1b8(temp_v1), temp_v4 != 0)) {
       if (param_3 == 0) {

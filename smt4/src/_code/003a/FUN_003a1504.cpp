@@ -6,13 +6,13 @@ extern "C" {
 
 extern s32 FUN_0029e0f8(void);
 extern void FUN_0029defc(u32 a, s32 b);
-extern void FUN_0029d684(s32 a);
+extern void statusPanelSetOpen(s32 a);
 extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
 extern s32 FUN_002ae3c0(u32 id);
 extern void FUN_0029a084(s32 kind, u16 id);
 extern s32 FUN_00295618(void);
 extern void gameGlobalsSetSelected(s32 a);
-extern void FUN_00292c0c(void);
+extern void gameReleaseDataReference(void);
 extern void FUN_002305e8(s32 a);
 extern void beginStatusPanelClose(void);
 extern void messageWindowStartTimer(s32 a);
@@ -31,7 +31,7 @@ void FUN_003a1504(Scene3a *scene)
     case SCENE3A_STATE_START:
         if (FUN_0029e0f8() != 0) {
             FUN_0029defc(0xffffffff, 0);
-            FUN_0029d684(1);
+            statusPanelSetOpen(1);
             list = &scene->lists[scene->slot];
             id = list->entries[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
             if (id != 0) {
@@ -54,7 +54,7 @@ void FUN_003a1504(Scene3a *scene)
         if (FUN_00295618() != 0) {
             *state = SCENE3A_STATE_IDLE;
             gameGlobalsSetSelected(0);
-            FUN_00292c0c();
+            gameReleaseDataReference();
             FUN_002305e8(1);
         }
         break;

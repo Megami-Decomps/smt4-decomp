@@ -2,6 +2,20 @@
 #define SHARD_W5_W5MATCH7_BATTLEMASK_H
 #include "common.h"
 #include "shard/W6_W6Match1_BattleCountSlot.h"
+#include <stddef.h>
+/* One 0x408-byte battle entry: its mask and id. */
+struct BattleMaskEntry {
+    /* 0x000 */ u64 mask;
+    /* 0x008 */ s16 id;
+    /* 0x00a */ u8 unk00a[0x15c];
+    /* 0x166 */ u16 unitId;
+    /* 0x168 */ u8 unk168[0xf0];
+    /* 0x258 */ s32 hp;
+    /* 0x25c */ s32 maxHp;
+    /* 0x260 */ u8 unk260[0x1a8];
+};
+typedef char BattleMaskEntrySizeCheck[sizeof(BattleMaskEntry) == 0x408 &&
+    offsetof(BattleMaskEntry, unitId) == 0x166 && offsetof(BattleMaskEntry, maxHp) == 0x25c ? 1 : -1];
 struct BattleMaskState {
     union {
         /* 0x0000 */ u8 unk0000[0x4554];
@@ -9,6 +23,10 @@ struct BattleMaskState {
             /* 0x0000 */ u8 unk0000BeforeEntryMask[0x1ffc];
             /* 0x1ffc */ u64* mask;
         } entryMaskView;
+        struct {
+            /* 0x0000 */ u8 unk0000BeforeEntries[0x1ffc];
+            /* 0x1ffc */ BattleMaskEntry *entries;
+        } entryView;
         struct {
             /* 0x0000 */ u8 unk0000BeforeActivity[0xec];
             /* 0x00ec */ s32 first;
@@ -32,6 +50,10 @@ struct BattleMaskState {
             /* 0x4cd1 */ u8 present;
         } activeEntry;
         struct {
+            /* 0x45a8 */ u8 unk45a8BeforeSelected[0x724];
+            /* 0x4ccc */ s32 index;    /* 0xff when none */
+        } selectedEntry;
+        struct {
             u8 unk45a8BeforeHistory[0x18];
             u8 records[0x600]; /* 0x45c0, 128 records of 0xc bytes */
         } history;
@@ -50,12 +72,15 @@ struct BattleMaskPresets {
             u64 required;
             u64 unk10;
             u64 excluded;
+            /* 0x20 */ u64 downed; /* bits a revive clears */
         } eligibility;
     };
     /* 0x40 */ u64 first;
     /* 0x48 */ u8 unk48[0x20];
     /* 0x68 */ u64 second;
 };
+typedef char BattleMaskPresetsDownedOffsetCheck[
+    offsetof(BattleMaskPresets, eligibility.downed) == 0x20 ? 1 : -1];
 extern "C" {
 BattleMaskState *btlGetMainState(void);
 extern BattleMaskPresets g_battleMaskPresets;

@@ -3,7 +3,7 @@
 extern "C" {
 
 u32 scrGetArg(s32 index);
-f32 FUN_00275b10(s32 index);
+f32 scriptReadStackValueAsFloat(s32 index);
 void scrSetResult(u32 value);
 s32 FUN_0039af04(void);
 u32 FUN_0039af48(u32 id, u32 arg4, u32 arg1, u32 arg2, f32 arg3);
@@ -16,7 +16,7 @@ s32 scrCommJobStartWithFloat(void)
     u32 id = scrGetArg(0);
     u32 arg1 = scrGetArg(1);
     u32 arg2 = scrGetArg(2);
-    f32 arg3 = FUN_00275b10(3);
+    f32 arg3 = scriptReadStackValueAsFloat(3);
     u32 arg4 = scrGetArg(4);
     u32 handle = 0;
 

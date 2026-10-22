@@ -11,7 +11,7 @@ typedef struct EntryRange {
 
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern int FUN_002499fc(u32 handle, s32 *first, s32 *count);
 extern s32 scrGetArg(s32 index);
 extern int scrSetResult(s32 value);
@@ -33,7 +33,7 @@ u32 FUN_00312148(void)
         kind = 11;
     }
     scrGetArg(1);
-    FUN_002499fc(FUN_00249a54(), &range.first, &range.count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &range.first, &range.count);
     for (i = range.first; i < range.first + range.count; i++) {
         entry = &btlGetMainState()->entries[i];
 

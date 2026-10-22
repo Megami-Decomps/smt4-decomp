@@ -6,11 +6,11 @@ extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
-extern s32 FUN_00247004(BtlUnitEntry *unit);
+extern s32 btlSlotsHaveReadyUnit(BtlUnitEntry *unit);
 
-/* Script command: pushes whether FUN_00247004 accepts a present, non-excluded unit of the current group or the active entry. */
+/* Script command: pushes whether btlSlotsHaveReadyUnit accepts a present, non-excluded unit of the current group or the active entry. */
 u32 scrCommBtlGroupUnitCheckB(void)
 {
     s32 start;
@@ -18,11 +18,11 @@ u32 scrCommBtlGroupUnitCheckB(void)
     s32 index;
 
     scrGetArg(0);
-    FUN_002499fc(FUN_00249a54(), &start, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < start + count; index++) {
         BtlUnitEntry *unit = &btlGetMainState()->units[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && FUN_00247004(unit) != 0) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && btlSlotsHaveReadyUnit(unit) != 0) {
             scrSetResult(1);
             return 1;
         }
@@ -32,7 +32,7 @@ u32 scrCommBtlGroupUnitCheckB(void)
 
         btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && FUN_00247004(active) != 0) {
+        if (active != NULL && btlSlotsHaveReadyUnit(active) != 0) {
             scrSetResult(1);
             return 1;
         }

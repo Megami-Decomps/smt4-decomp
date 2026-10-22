@@ -4,7 +4,7 @@ extern "C" {
 
 u8 *configGetSettings(void)
 {
-    return g_gameDataBlocks.unk04 + 0x80;
+    return (u8 *)g_gameDataBlocks.saveBlock + 0x80;
 }
 
 } /* extern "C" */

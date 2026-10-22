@@ -1,50 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00305020` (_code @ 0x305020, 0x96 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The final size guard loads the declared size into r0 before computing the end, rather than using r1 after the position load. */
+#include "shard/Reader.h"
 
-extern "C" {
-
-int FUN_002fbc1a(int, int);
-int streamExtractU8(int, int);
-int streamReadWord(int, int *);
-int FUN_00307316(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int streamSeek(int);
-/* Supplied declaration required: FUN_002fbc1a. */
-/* Supplied declaration required: streamExtractU8. */
-/* Supplied declaration required: streamReadWord. */
-/* Supplied declaration required: FUN_00307316. */
-
-
-void FUN_00305020(int param_1,int param_2)
-
-{
-/* irregular: 4 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  *(unsigned char *)(param_2 + 4) = 0;
-  temp_v0 = *(char *)(param_1 + 0x3b);
-  temp_v2 = 0;
-  if ((((temp_v0 != '\0') ||
-       ((streamExtractU8(param_1,param_2 + 4), *(char *)(param_1 + 4) == '\0' &&
-        (streamReadWord(param_1,&temp_v2), *(char *)(param_1 + 4) == '\0')))) &&
-      (temp_v1 = *(int *)(param_1 + 0xc), *(char *)(param_1 + 4) == '\0')) &&
-     ((((FUN_002fbc1a(param_1,param_2 + 8), *(char *)(param_1 + 4) == '\0' &&
-        (FUN_002fbc1a(param_1,param_2 + 0x10), *(char *)(param_1 + 4) == '\0')) &&
-       (FUN_002fbc1a(param_1,param_2 + 0x18), *(char *)(param_1 + 4) == '\0')) &&
-      (((FUN_00307316(param_1,param_2 + 0x20), *(char *)(param_1 + 4) == '\0' && (temp_v0 == '\0')) &&
-       (((unsigned int)(temp_v1 + temp_v2) < *(unsigned int *)(param_1 + 0xc) ||
-        (temp_v1 = streamSeek(param_1), temp_v1 == 0)))))))) {
-    *(unsigned char *)(param_1 + 4) = 1;
-  }
-  return;
+namespace {
+struct SerializedTripleRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 flag;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u8 first[8];
+    /* 0x10 */ u8 second[8];
+    /* 0x18 */ u8 third[8];
+    /* 0x20 */ u8 final[12];
+};
 }
+extern "C" {
+void streamExtractU8(Reader *reader, void *output);
+void streamReadWord(Reader *reader, void *output);
+void FUN_002fbc1a(Reader *reader, void *output);
+void FUN_00307316(Reader *reader, void *output);
+s32 streamSeek(Reader *reader, u32 position);
 
-} /* extern "C" */
+/* Reads the record fields and seeks to its declared end, retaining the reader's sticky error state. */
+void FUN_00305020(Reader *reader, SerializedTripleRecord *record)
+{
+    record->flag = 0;
+    s8 headerless = reader->headerless;
+    u32 size = 0;
+    if (headerless == 0) {
+        streamExtractU8(reader, &record->flag);
+        if (reader->error) return;
+        streamReadWord(reader, &size);
+        if (reader->error) return;
+    }
+    u32 start = reader->pos;
+    if (reader->error) return;
+    FUN_002fbc1a(reader, record->first);
+    if (reader->error) return;
+    FUN_002fbc1a(reader, record->second);
+    if (reader->error) return;
+    FUN_002fbc1a(reader, record->third);
+    if (reader->error) return;
+    FUN_00307316(reader, record->final);
+    if (reader->error) return;
+    if (headerless != 0) return;
+    if (reader->pos > start + size || streamSeek(reader, start + size) == 0) {
+        reader->error = 1;
+    }
+}
+}

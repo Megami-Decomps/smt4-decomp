@@ -1,62 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013e8f8` (_code @ 0x13e8f8, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: addressing of the 0x14xx flag bytes: retail uses base+0x1400 loads and a pooled 0x1414 register offset for the clears; this source gets add/add pairs. */
+#include "common.h"
+
+/* Frame texture fade state (Apocalypse layout). */
+struct FrameTexFade {
+    /* 0x0000 */ u8 unk0000[0xc];
+    /* 0x000c */ u8 enabled;
+    /* 0x000d */ u8 unk000d[3];
+    /* 0x0010 */ s32 fadeInFrames;
+    /* 0x0014 */ s32 fadeOutFrames;
+    /* 0x0018 */ s32 frame;
+    /* 0x001c */ u8 unk001c[0x13f8];
+    /* 0x1414 */ u8 captured;
+    /* 0x1415 */ u8 unk1415[2];
+    /* 0x1417 */ u8 shown;
+    /* 0x1418 */ u8 unk1418;
+    /* 0x1419 */ u8 unk1419;
+    /* 0x141a */ u8 unk141a[0x32];
+    /* 0x144c */ u8 unk144c;
+};
+
+/* Frames a fade-out lasts before the frame texture is released. */
+#define FRAME_TEX_FADE_OUT_FRAMES 30
 
 extern "C" {
+extern FrameTexFade *g_frameTex;
+extern u32 g_renderCtx;
 
-int FUN_0014b01c(int);
-int FUN_00157558(unsigned int);
+FrameTexFade *jobGetWork(void);
+void FUN_00157558(u32 renderCtx);
+void FUN_0014b01c(s32 value);
 
-extern int g_frameTex; /* 0x57f65c */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_0014b01c. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
-
-
-unsigned char FUN_0013e8f8(void)
-
+/* Job update: advances the frame texture's fade in or out, clearing it once a fade-out ends. */
+u8 FUN_0013e8f8(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  if (((*(char *)(temp_v0 + 0x1414) != '\0') && (*(char *)(temp_v0 + 0x1417) != '\0')) &&
-     (*(char *)(temp_v0 + 0xc) != '\0')) {
-    FUN_00157558(g_renderCtx);
-    temp_v1 = *(int *)(temp_v0 + 0x10);
-    if ((0 < temp_v1) || (0 < *(int *)(temp_v0 + 0x14))) {
-      temp_v2 = *(int *)(temp_v0 + 0x14);
-      if (temp_v2 < 1) {
-        temp_v1 = temp_v1 + 1;
-      }
-      *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
-      if (temp_v2 < 1) {
-        *(int *)(temp_v0 + 0x10) = temp_v1;
-      }
-      else {
-        *(int *)(temp_v0 + 0x14) = temp_v2 + 1;
-        temp_v0 = g_frameTex;
-        if (temp_v2 + 1 >= 0x1f) {
-          *(unsigned char *)(g_frameTex + 0xc) = 0;
-          *(unsigned int *)(temp_v0 + 0x10) = 0;
-          *(unsigned int *)(temp_v0 + 0x14) = 0;
-          *(unsigned int *)(temp_v0 + 0x18) = 0;
-          *(unsigned char *)(temp_v0 + 0x1414) = 0;
-          *(unsigned char *)(temp_v0 + 0x1417) = 0;
-          *(unsigned char *)(temp_v0 + 0x1418) = 0;
-          *(unsigned char *)(temp_v0 + 0x1419) = 0;
-          *(unsigned char *)(temp_v0 + 0x144c) = 0;
-          return 0;
+    FrameTexFade *work = jobGetWork();
+
+    if (work->captured && work->shown && work->enabled) {
+        FUN_00157558(g_renderCtx);
+        if (work->fadeInFrames > 0 || work->fadeOutFrames > 0) {
+            work->frame++;
+            if (work->fadeOutFrames <= 0) {
+                work->fadeInFrames++;
+            } else {
+                work->fadeOutFrames++;
+                if (work->fadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
+                    FrameTexFade *tex = g_frameTex;
+                    tex->enabled = 0;
+                    tex->fadeInFrames = 0;
+                    tex->fadeOutFrames = 0;
+                    tex->frame = 0;
+                    tex->captured = 0;
+                    tex->shown = 0;
+                    tex->unk1418 = 0;
+                    tex->unk1419 = 0;
+                    tex->unk144c = 0;
+                    return 0;
+                }
+            }
+            FUN_0014b01c(1);
         }
-      }
-      FUN_0014b01c(1);
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

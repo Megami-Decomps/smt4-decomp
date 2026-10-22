@@ -1,63 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `bgmPlay` (_code @ 0x18af60, 0xf0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: parameter registers are allocated differently (retail: id in r7, param in r5, frames in r6) and the channel selection branches are laid out differently. */
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 
-extern int DAT_0044e09c; /* 0x44e09c */
-extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
-extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
+extern BgmChannelSelection g_titleConfigModeFlag;
+extern BgmRequestChannel DAT_004c53c4[2];
+int jyoucyuGetTableEntry(u32 index);
 
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-void bgmPlay(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Requests track `id` on a channel: queued behind a fade when one is running, else started directly. */
+static __inline void bgmChannelRequest(BgmRequestChannel *channel, s32 id, u32 param, u32 frames)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    puVar4 = &DAT_004c53c4;
-    if ((DAT_0044e09c != 0) &&
-       (puVar2 = &DAT_004c53c4, puVar4 = (unsigned int *)0x0, DAT_0044e09c == 1)) {
-      puVar4 = &DAT_004c53e4;
+    u32 flags = channel->flags;
+    if (flags & 0x22) {
+        channel->fadeFrames = frames;
+        channel->track.nextId = id;
+        channel->track.nextParam = param;
+        channel->flags = (flags & ~0x30) | 0x508;
+    } else {
+        channel->play.param = param;
+        channel->track.currentId = id;
+        channel->flags = flags | 0x405;
     }
-    else {
-      puVar2 = &DAT_004c53e4;
-    }
-    if (puVar2[4] != 0) {
-      temp_v1 = puVar4[7];
-      if ((temp_v1 & 0x22) == 0) {
-        puVar4[1] = param_2;
-        puVar4[3] = param_1;
-        puVar4[7] = temp_v1 | 0x405;
+}
+
+/* Plays BGM `id`: on the selected channel while the other one is busy, else on the other one unless it already plays `id`. */
+void bgmPlay(s32 id, u32 param, u32 frames)
+{
+    BgmRequestChannel *selected = NULL;
+    BgmRequestChannel *other;
+
+    if (jyoucyuGetTableEntry(1) != 0) {
         return;
-      }
-      puVar4[2] = param_3;
-      puVar4[4] = param_1;
-      puVar4[6] = param_2;
-      puVar4[7] = (temp_v1 & 0xffffffcf) | 0x508;
     }
-    else if (puVar2[3] != param_1) {
-      temp_v1 = puVar2[7];
-      if ((temp_v1 & 0x22) != 0) {
-        puVar2[2] = param_3;
-        puVar2[4] = param_1;
-        puVar2[6] = param_2;
-        puVar2[7] = (temp_v1 & 0xffffffcf) | 0x508;
-        return;
-      }
-      puVar2[1] = param_2;
-      puVar2[3] = param_1;
-      puVar2[7] = temp_v1 | 0x405;
-      return;
+    if (g_titleConfigModeFlag.selected == 0) {
+        selected = &DAT_004c53c4[0];
+        other = &DAT_004c53c4[1];
+    } else if (g_titleConfigModeFlag.selected == 1) {
+        selected = &DAT_004c53c4[1];
+        other = &DAT_004c53c4[0];
+    } else {
+        other = &DAT_004c53c4[1];
     }
-  }
-  return;
+    if (other->track.nextId != 0) {
+        bgmChannelRequest(selected, id, param, frames);
+    } else if (other->track.currentId != id) {
+        bgmChannelRequest(other, id, param, frames);
+    }
 }
 
 } /* extern "C" */

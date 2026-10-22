@@ -30,7 +30,7 @@ void FUN_004cbb38(CallbackWorkflow *work);
 void FUN_004cbd70(CallbackWorkflow *work);
 u16 *FUN_002613f0(u32 region);
 void FUN_0022e774();
-void FUN_002a7288();
+void statusDownRestartTransition();
 void countersAddSaturating(u32 index, s32 value);
 s32 FUN_0026c3a0();
 s32 FUN_002effbc();
@@ -89,7 +89,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
         switch (work->step) {
         case 0:
             FUN_0022e774();
-            FUN_002a7288();
+            statusDownRestartTransition();
             countersAddSaturating(6, 1);
             ++work->step;
             break;
@@ -109,7 +109,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
             break;
         case 3:
             if (scrRunOpcodesStub(work->process) == 2) {
-                FUN_002a7288();
+                statusDownRestartTransition();
                 work->step = 0;
                 work->state = 7;
             }

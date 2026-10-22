@@ -1,41 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ae110` (_code @ 0x3ae110, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the animation narrowing is scheduled after the initial global load rather than before it. */
+#include "map/mapGimic.h"
 
 extern "C" {
+extern MapGimic *g_mapGimic;
+void FUN_003fd7c0(u32 handle, u32 animation, u32 mode, f32 time);
 
-int FUN_003fd7c0(unsigned int, unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-} param_4_stack;
-
-extern int g_mapGimic; /* 0x580ca0 */
-
-/* Supplied declaration required: FUN_003fd7c0. */
-
-
-void FUN_003ae110(int param_1,unsigned int param_2,unsigned int param_3,unsigned short param_4)
-
+void FUN_003ae110(s32 id, u32 animation, u32 value, s32 delay)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = g_mapGimic + temp_v0 * 0x18;
-    if ((*(char *)(temp_v1 + 0x8c4) != '\0') && (*(short *)(temp_v1 + 0x8c8) == param_1)) {
-      FUN_003fd7c0(*(unsigned int *)(*(int *)(temp_v1 + 0x8cc) + 4),param_2,2);
-      *(unsigned int *)(temp_v1 + 0x8d0) = param_3;
-      *(short *)(temp_v1 + 0x8c6) = (short)param_2;
-      *(unsigned char *)(temp_v1 + 0x8d4) = 1;
-      *(unsigned short *)(temp_v1 + 0x8d6) = param_4;
+    for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
+        MapGimicSlot *slot = &g_mapGimic->slots[index];
+        if (slot->active && slot->id == id) {
+            FUN_003fd7c0(slot->obj->handle, animation, 2, 0.0f);
+            slot->unk0C = value;
+            slot->animationId = (s16)animation;
+            slot->requested = 1;
+            slot->delay = (s16)delay;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 10);
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,53 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035d0e4` (_code @ 0x35d0e4, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r5, r0 differs from recovered ldr r1, [pc, #132]. */
+#include "common.h"
+
+struct PartyPanelControlView {
+    u8 unk00[0x34];                 // 0x00
+    s32 unk34;                      // 0x34
+};
+
+struct PartyPanelView {
+    u8 unk0000[0xA10];              // 0x0000
+    PartyPanelControlView* unk0A10;  // 0x0A10
+    u8 unk0A14[0x210];              // 0x0A14
+    u32 unk0C24[25];                // 0x0C24
+    u8 unk0C88[0xC8];               // 0x0C88
+    u32 unk0D50[25];                // 0x0D50
+    u32 unk0DB4[25];                // 0x0DB4
+    u8 unk0E18[0x400];              // 0x0E18
+    s32 unk1218;                    // 0x1218
+};
 
 extern "C" {
+extern PartyPanelView* g_partyPanel;
+void rt_memcpy_w(void* destination, const void* source, u32 size);
+void FUN_0031d890(void);
+void FUN_0023f900(void);
 
-int FUN_0023f900(void);
-int FUN_0031d890(void);
-int rt_memcpy_w(int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_partyPanel; /* 0x57f268 */
-
-/* Supplied declaration required: FUN_0023f900. */
-/* Supplied declaration required: FUN_0031d890. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0035d0e4(int param_1)
-
+// Update the panel mode, copying its saved data when enabled or resetting it when disabled.
+void FUN_0035d0e4(s32 mode)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = g_partyPanel;
-  if ((g_partyPanel != 0) && (*(int *)(g_partyPanel + 0x1218) != param_1)) {
-    *(int *)(g_partyPanel + 0x1218) = param_1;
-    if (param_1 == 0) {
-      temp_v1 = 0xffffffff;
+    PartyPanelView* panel = g_partyPanel;
+    if (panel == 0 || panel->unk1218 == mode) {
+        return;
     }
-    else {
-      temp_v1 = 0xfffffffe;
-    }
-    *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x34) = temp_v1;
-    if (param_1 != 0) {
-      rt_memcpy_w(temp_v0 + 0xd50,temp_v0 + 0xc24,100);
-      rt_memcpy_w(temp_v0 + 0xdb4,temp_v0 + 0xc24,100);
-    }
-    else {
-      FUN_0031d890();
+
+    panel->unk1218 = mode;
+    panel->unk0A10->unk34 = mode == 0 ? -1 : -2;
+
+    if (mode != 0) {
+        rt_memcpy_w(panel->unk0D50, panel->unk0C24, 100);
+        rt_memcpy_w(panel->unk0DB4, panel->unk0C24, 100);
+    } else {
+        FUN_0031d890();
     }
     FUN_0023f900();
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

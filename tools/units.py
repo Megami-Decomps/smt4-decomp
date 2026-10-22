@@ -352,6 +352,36 @@ def missing(game):
                 rows.append((address, whole, "move", f"{names[after]} starts here: {note}"))
                 continue
         rows.append((address, size, "thumb" if thumb else "arm", note))
+    # A start armcc scheduled before the push that the first rule misses because nothing reaches the
+    # lead instructions directly: up to eight unconditional instructions just before a function, after
+    # its neighbour's end, pool and padding, one of which loads from the function's own pool, while
+    # nothing calls the function at its recorded start.
+    claimed = [(row[0], row[0] + row[1]) for row in rows]
+    for after in known:
+        name, size, thumb = functions[after]
+        at = bisect.bisect_left(known, after)
+        if thumb or after in referenced or at == 0 or any(lo <= after < hi or lo == after for lo, hi in claimed):
+            continue
+        before = known[at - 1]
+        start = before + sizes[before]
+        while start < after and (start in pool_data or start + 2 in pool_data
+                                 or code[start - base:start - base + 4] == b"\0\0\0\0" or start % 4):
+            start += 2 if start % 4 else 4
+        if not 4 <= after - start <= 32 or any(lo < after and start < hi for lo, hi in claimed):
+            continue
+        lead = body(start, after - start, False)
+        words = struct.unpack_from(f"<{len(lead) // 4}I", lead)
+        if any(word >> 28 != 0xE or returns(word, False) or word >> 24 in (0xEA, 0xEB) for word in words):
+            continue
+        # The tell: a pc-relative LDR/VLDR that reads the function's own pool, past its push.
+        reads_own_pool = any(
+            (word & 0x0F7F0000 == 0x051F0000 and start + 4 * i + 8 + (word & 0xFFF if word >> 23 & 1 else -(word & 0xFFF)) >= after)
+            or (word & 0x0F3F0E00 == 0x0D1F0A00 and start + 4 * i + 8 + ((word & 0xFF) * 4 if word >> 23 & 1 else -(word & 0xFF) * 4) >= after)
+            for i, word in enumerate(words))
+        if not reads_own_pool:
+            continue
+        if function_end(split, start, body(start, after + size - start, False), False) > after - start:
+            rows.append((start, after + size - start, "move", f"{name} starts here: its first instructions precede the push, and nothing calls it"))
     # Fragments: a function that runs on into the next one (no return, jump or linker NOP at the seam),
     # or whose switch table jumps into it, which nothing calls or takes the address of and only the run
     # itself branches to, is one function. Each joined piece grows the run before the next seam is

@@ -9,7 +9,10 @@ typedef struct MapMain {
     /* 0x00 */ u32 job;           /* job that runs the map mode */
     /* 0x04 */ u8 unk04[8];
     /* 0x0C */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
-    /* 0x0D */ u8 unk0D[0x2F];
+    /* 0x0D */ u8 unk0D[0x1F];
+    /* 0x2C */ u32 mapId;
+    /* 0x30 */ u32 areaId;
+    /* 0x34 */ u8 unk34[8];
     /* 0x3C */ u8 unk3C;
     /* 0x3D */ u8 unk3D[0x4f];
     /* 0x8C */ void *scriptData;
@@ -40,6 +43,11 @@ typedef struct MapMainA {
     /* 0x40 */ u8 unk40;
     /* 0x41 */ u8 unk41[0x17];
     /* 0x58 */ u32 job;
+    /* 0x5C */ u8 unk5C[0x60];
+    /* 0xBC */ u8 unkBC;
 } MapMainA;
+
+typedef char MapMainASizeCheck[sizeof(MapMainA) == 0xC0 ? 1 : -1];
+typedef char MapMainSizeCheck[sizeof(MapMain) == 0xC8 ? 1 : -1];
 
 #endif

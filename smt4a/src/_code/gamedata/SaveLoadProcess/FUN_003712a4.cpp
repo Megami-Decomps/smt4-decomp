@@ -10,10 +10,10 @@ int asdMemFree(unsigned int);
 int wordPairCopy(unsigned int, int);
 int FUN_00268250(...);
 int FUN_002c9104(void);
-int FUN_002f4374(void);
+int gameApplyFlagTriggers(void);
 int FUN_00388068(void);
 int gameFlagSetValue(int, int);
-int FUN_0046e238(unsigned int);
+int gameFlagsSetFlagsFromTaggedGroupEntries(unsigned int);
 int bitsAt60Clear(int, int);
 int FUN_004d0c4c(void);
 int FUN_004d0d70(void);
@@ -41,15 +41,15 @@ extern int gameGetSlotTable(void);
 extern int partyFindSlotById(unsigned int);
 extern unsigned int configGetSettings(void);
 extern int FUN_00229c9c(void);
-extern unsigned int *FUN_00239294(void);
+extern unsigned int *gameDataGetExtraBlock(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
-/* Supplied declaration required: FUN_002f4374. */
+/* Supplied declaration required: gameApplyFlagTriggers. */
 extern int byte1IsZero(void);
 /* Supplied declaration required: FUN_00388068. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0046e238. */
+/* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: FUN_004d0c4c. */
@@ -103,7 +103,7 @@ unsigned int FUN_003712a4(void)
       wordPairCopy(temp_v6,temp_v4 + 0x80);
       temp_v6 = gameDataBlocksGetSaveData();
       rt_memcpy_w(temp_v6,temp_v4 + 0x88,0x2a71c);
-      FUN_002f4374();
+      gameApplyFlagTriggers();
       if (*(char *)(temp_v1 + 0x18) == '\0') {
         temp_v4 = gameFlagIsSet(0x595);
         if (temp_v4 == 0) {
@@ -157,7 +157,7 @@ unsigned int FUN_003712a4(void)
 LAB_0037156c:
         if (*(char *)(temp_v1 + 0x18) == '\0') {
           FUN_00388068();
-          FUN_0046e238(g_aocSystem);
+          gameFlagsSetFlagsFromTaggedGroupEntries(g_aocSystem);
         }
       }
       temp_v0 = (char)*(unsigned int *)(temp_v1 + 0x10);
@@ -198,7 +198,7 @@ LAB_0037156c:
       temp_v4 = byte1IsZero();
       if (temp_v4 == 0) {
         puVar13 = *(unsigned int **)(temp_v1 + 8);
-        puVar6 = (unsigned int *)FUN_00239294();
+        puVar6 = (unsigned int *)gameDataGetExtraBlock();
         temp_v6 = *puVar13;
         temp_v7 = puVar13[1];
         temp_v9 = puVar13[2];

@@ -18,7 +18,7 @@ int FUN_00275bc8(...);
 int sysMemClear(...);
 int campCommonBgAcquire(...);
 int campButtonHelpAcquire(...);
-int FUN_003423cc(...);
+int buttonHelpSetSelectedId(...);
 int jobSetWork3C(...);
 unsigned int FUN_0039af48(unsigned int, unsigned int, int, int, float);
 unsigned int npc2dCreateDemonPortrait(unsigned int, unsigned int, int, int, float);
@@ -62,7 +62,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_003423cc. */
+/* Supplied declaration required: buttonHelpSetSelectedId. */
 /* Supplied declaration required: jobSetWork3C. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
@@ -281,7 +281,7 @@ LAB_002e6874:
       campCommonBgAcquire();
       FUN_003b61ec();
       campButtonHelpAcquire();
-      FUN_003423cc(0xa2);
+      buttonHelpSetSelectedId(0xa2);
       return;
     }
     if (temp_v1 == 0x41 || temp_v1 == 0x42) goto LAB_002e6b3c;
@@ -302,7 +302,7 @@ LAB_002e6af4:
   campCommonBgAcquire();
   FUN_003b61ec();
   campButtonHelpAcquire();
-  FUN_003423cc(0xa2);
+  buttonHelpSetSelectedId(0xa2);
   return;
 }
 

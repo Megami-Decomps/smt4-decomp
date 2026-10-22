@@ -80,7 +80,7 @@ int FUN_00344158(...);
 int FUN_00344cf4(...);
 int FUN_00394bbc(...);
 int FUN_003adc64(...);
-int FUN_003aef64(...);
+int btlUiInitializeIndexedSlots(...);
 int FUN_003c0390(...);
 int btlMessageStartUnlessFlagged(...);
 int FUN_003d1388(...);
@@ -172,7 +172,7 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: btlUiInitializeDisplayChannel. */
 /* Supplied declaration required: FUN_003ae418. */
 /* Supplied declaration required: FUN_003ae574. */
-/* Supplied declaration required: FUN_003aef64. */
+/* Supplied declaration required: btlUiInitializeIndexedSlots. */
 /* Supplied declaration required: FUN_003bcdb0. */
 /* Supplied declaration required: FUN_003bf5a8. */
 /* Supplied declaration required: btlAddClampedVital. */
@@ -361,7 +361,7 @@ LAB_00344fc0:
     if ((temp_v7 & 0x20) != 0) {
       temp_v5 = 4;
     }
-    FUN_003aef64(g_btlUiBlock,temp_v5);
+    btlUiInitializeIndexedSlots(g_btlUiBlock,temp_v5);
     break;
   case '\a':
     FUN_00344cf4(param_1,psVar2);
@@ -379,7 +379,7 @@ LAB_00344fc0:
     if (((((temp_v2 & 0x20) == 0) && ((temp_v2 & 0x40) == 0)) &&
         (((temp_v2 & 0x80) == 0 && (((temp_v2 & 0x100) == 0 && ((temp_v2 & 0x200) == 0)))))) &&
        ((temp_v2 & 8) == 0)) break;
-    FUN_003aef64(g_btlUiBlock,temp_v5);
+    btlUiInitializeIndexedSlots(g_btlUiBlock,temp_v5);
     break;
   case '\t':
     temp_v5 = *(int *)(psVar2 + 10);

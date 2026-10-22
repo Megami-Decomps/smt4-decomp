@@ -1,57 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b3c4` (_code @ 0x33b3c4, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail places the "return 0" exit after the copy and assigns r4-r6 in a different
+ * order; the loop body otherwise matches. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_0033b3c4_arg0 fn_0033b3c4_arg0;
-struct fn_0033b3c4_arg0 {
-    unsigned char pad_0x0[0x88];
-    int field_0x88; /* +0x88 */
-    unsigned char pad_0x8c[0x1f34];
-    int field_0x1fc0; /* +0x1fc0 */
-    unsigned char pad_0x1fc4[0x34c];
-    int field_0x2310; /* +0x2310 */
-    int field_0x2314; /* +0x2314 */
+/* One recorded move (0x10 bytes). */
+struct BoardHistoryEntry {
+    /* 0x00 */ s32 kind;
+    /* 0x04 */ s32 unit;
+    /* 0x08 */ s32 first;
+    /* 0x0c */ s32 second;
 };
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+/* A unit definition (0x288 bytes). */
+struct BoardUnitDef {
+    /* 0x000 */ u8 unk000[0x1c6];
+    /* 0x1c6 */ u16 flags; /* 0x1c0: not undoable */
+    /* 0x1c8 */ u8 unk1c8[0xc0];
+};
 
+struct BoardState {
+    /* 0x0000 */ u8 unk0000[0x88];
+    /* 0x0088 */ s32 replay;
+    /* 0x008c */ u8 unk008c[0x1f34];
+    /* 0x1fc0 */ BoardUnitDef *units;
+    /* 0x1fc4 */ u8 unk1fc4[0x34c];
+    /* 0x2310 */ BoardHistoryEntry *history;
+    /* 0x2314 */ s32 historyCount;
+};
 
-unsigned int FUN_0033b3c4(fn_0033b3c4_arg0 *param_1,unsigned int *param_2)
-
+extern "C" {
+/* Pops recorded moves until one can be taken back (kind 5 when replaying; otherwise anything but
+ * a kind-4 move of a unit flagged 0x1c0) and copies it out; 0 when the history runs out. */
+s32 FUN_0033b3c4(BoardState *board, BoardHistoryEntry *out)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  do {
-    while( 1 ) {
-      if (param_1->field_0x2314 < 1) {
-        return 0;
-      }
-      temp_v0 = param_1->field_0x2314 - 1;
-      param_1->field_0x2314 = temp_v0;
-      temp_v1 = param_1->field_0x2310;
-      if (param_1->field_0x88 != 0) break;
-      if ((*(int *)(temp_v1 + temp_v0 * 0x10) != 4) ||
-         ((*(unsigned short *)(param_1->field_0x1fc0 + *(int *)(temp_v1 + temp_v0 * 0x10 + 4) * 0x288 + 0x1c6) &
-          0x1c0) == 0)) {
-        *param_2 = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10);
-        param_2[1] = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10 + 4);
-        param_2[2] = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10 + 8);
-        param_2[3] = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10 + 0xc);
-        return 1;
-      }
+    for (;;) {
+        if (board->historyCount <= 0) {
+            return 0;
+        }
+        board->historyCount--;
+        if (board->replay != 0) {
+            if (board->history[board->historyCount].kind == 5) {
+                break;
+            }
+        } else if (board->history[board->historyCount].kind != 4 ||
+                   !(board->units[board->history[board->historyCount].unit].flags & 0x1c0)) {
+            break;
+        }
     }
-  } while (*(int *)(temp_v1 + temp_v0 * 0x10) != 5);
-  *param_2 = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10);
-  param_2[1] = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10 + 4);
-  param_2[2] = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10 + 8);
-  param_2[3] = *(unsigned int *)(param_1->field_0x2310 + param_1->field_0x2314 * 0x10 + 0xc);
-  return 1;
+    out->kind = board->history[board->historyCount].kind;
+    out->unit = board->history[board->historyCount].unit;
+    out->first = board->history[board->historyCount].first;
+    out->second = board->history[board->historyCount].second;
+    return 1;
 }
-
-} /* extern "C" */
+}

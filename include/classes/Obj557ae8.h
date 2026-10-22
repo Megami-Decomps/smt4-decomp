@@ -21,6 +21,7 @@ struct Obj557ae8Slot {
  * Slot 0 is the destructor. */
 class Obj557ae8 {
 public:
+    Obj557ae8();
     virtual ~Obj557ae8();
     virtual void vfunc08();
     virtual void vfunc0c();
@@ -28,10 +29,14 @@ public:
 
 protected:
     /* 0x00: vtable pointer */
-    /* 0x04 */ u8 unk04[4];
+    /* 0x04 */ u32 unk04;
     /* 0x08 */ Obj557ae8Child *owned;
-    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x0C */ u8 unk0C[0x0C];
+    /* 0x18 */ u32 unk18;
     /* 0x1C */ Obj557ae8Slot slots[3];
 };
+
+typedef char Obj557ae8LayoutCheck[sizeof(Obj557ae8) == 0x130 &&
+    sizeof(Obj557ae8Slot) == 0x5C ? 1 : -1];
 
 #endif

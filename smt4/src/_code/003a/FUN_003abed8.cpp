@@ -14,7 +14,7 @@ int FUN_00295660(int, unsigned char [36]);
 int scrScriptProcessStartEntry(unsigned int, int);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
-int FUN_0029d684(...);
+int statusPanelSetOpen(...);
 int FUN_0029defc(...);
 int FUN_0029dfc0(int);
 int useCounterStart(void);
@@ -50,7 +50,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029dfa8(void);
 /* Supplied declaration required: FUN_0029dfc0. */
@@ -173,7 +173,7 @@ void FUN_003abed8(int param_1)
             }
             FUN_0029defc((int)*psVar6,0);
             FUN_0020349c(*(unsigned short *)(param_1 + 0x5a4));
-            FUN_0029d684(1);
+            statusPanelSetOpen(1);
             return;
           }
           temp_v1 = temp_v1 + 1;

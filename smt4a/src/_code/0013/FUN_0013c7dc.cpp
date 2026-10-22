@@ -1,37 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013c7dc` (_code @ 0x13c7dc, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flag-group address reuse, gate branches and the service-call NOP differ. */
+#include "shard/FrameWork.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+void FUN_00150d38(u32 value);
+void FUN_00157558(RenderCtxA *context);
+u32 stateValuesGetBySelector(u32 selector);
+extern RenderCtxA *g_renderCtx;
 
-int FUN_00150d38(int);
-int FUN_00157558(unsigned int);
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00150d38. */
-extern int stateValuesGetBySelector(unsigned int);
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
-
-
-unsigned int FUN_0013c7dc(void)
-
+u32 FUN_0013c7dc()
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = stateValuesGetBySelector(0);
-  if ((((temp_v1 == 0) && (*(char *)(temp_v0 + 0xff4) != '\0')) && (*(char *)(temp_v0 + 0xff5) != '\0'))
-     && (((*(char *)(temp_v0 + 0xffe) != '\0' && (*(int *)(temp_v0 + 0x1490) != 0)) &&
-         (*(char *)(temp_v0 + 0x148c) == '\0')))) {
-    FUN_00157558(g_renderCtx);
-    FUN_00150d38(0);
+    FrameWorkA *work = reinterpret_cast<FrameWorkA *>(jobGetWork());
+    if (stateValuesGetBySelector(0) == 0 && work->flags.active &&
+        work->flags.ready && work->flags.surfaceReady && work->frame.surface != 0 &&
+        !work->frame.blocked) {
+        FUN_00157558(g_renderCtx);
+        FUN_00150d38(0);
+    }
     return 0;
-  }
-  return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,61 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048bd2c` (_code @ 0x48bd2c, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the state and flag stores are scheduled in the opposite order (retail stores state before loading flags in case 1, flags before state in case 0). */
+#include "map/mapDepart.h"
+
+struct EnemyPopup {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s32 state;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u32 flags;
+    /* 0x014 */ u8 unk014[0x4BC];
+    /* 0x4D0 */ u8 position[0x14];
+    /* 0x4E4 */ u8 spriteBank[0xAC];
+    /* 0x590 */ u8 sprite[0x8C];
+};
 
 extern "C" {
 
-int FUN_00168980(int);
-int uiSpriteBankApplyPreset(int, int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
+extern GameStateA g_gameState;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+s32 FUN_00163aa4(u8 *sprite, f32 speed);
+s32 FUN_002e19f8(void);
+s32 vec2GetXInt(u8 *sprite);
+s32 vec2GetYInt(u8 *sprite);
+void pointConvertToFloat(u8 *point, s32 x, s32 y);
+void uiSpriteBankApplyPreset(u8 *bank, s32 preset);
+void FUN_00168980(s32 sound);
 
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-extern int FUN_00163aa4(int);
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_0048bd2c(int param_1)
-
+/* Opens the popup on its first update, then plays its sprite animation and follows the sprite's
+ * position until the animation ends. */
+void FUN_0048bd2c(EnemyPopup *popup)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if (*(int *)(param_1 + 8) == 1) {
-      temp_v3 = param_1 + 0x590;
-      temp_v0 = FUN_00163aa4(temp_v3);
-      if ((temp_v0 != 0) && (temp_v0 = FUN_002e19f8(), temp_v0 != 0)) {
-        *(unsigned int *)(param_1 + 8) = 2;
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 2;
-      }
-      temp_v1 = vec2GetYInt(temp_v3);
-      temp_v2 = vec2GetXInt(temp_v3);
-      pointConvertToFloat(param_1 + 0x4d0,temp_v2,temp_v1);
-      return;
+    u8 *sprite;
+
+    switch (popup->state) {
+    case 0:
+        uiSpriteBankApplyPreset(popup->spriteBank, 1);
+        if (g_gameState.mapFlags.unk295 == 0) {
+            FUN_00168980(0x1b);
+        }
+        popup->flags |= 0x1000000;
+        popup->state = 1;
+        break;
+    case 1:
+        sprite = popup->sprite;
+        if (FUN_00163aa4(sprite, 1.0f) != 0 && FUN_002e19f8() != 0) {
+            popup->state = 2;
+            popup->flags |= 2;
+        }
+        pointConvertToFloat(popup->position, vec2GetXInt(sprite), vec2GetYInt(sprite));
+        break;
     }
-  }
-  else {
-    uiSpriteBankApplyPreset(param_1 + 0x4e4,1);
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) == '\0') {
-      FUN_00168980(0x1b);
-    }
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x1000000;
-    *(unsigned int *)(param_1 + 8) = 1;
-  }
-  return;
 }
 
 } /* extern "C" */

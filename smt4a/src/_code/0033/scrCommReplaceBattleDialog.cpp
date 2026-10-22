@@ -8,7 +8,7 @@ struct BattleDialogFlagsView {
 extern "C" {
 extern u64 DAT_00570de8;
 BtlMainStateA* btlGetMainState();
-void FUN_004c8b10();
+void btlHelpFreeEntries();
 s32 dialogIsActive();
 void dialogClose(s32 immediate);
 const char* scrGetArgString(u32 index);
@@ -19,7 +19,7 @@ u32 scrCommReplaceBattleDialog()
 {
     BattleDialogFlagsView* state = (BattleDialogFlagsView*)btlGetMainState();
     state->flags |= DAT_00570de8;
-    FUN_004c8b10();
+    btlHelpFreeEntries();
     if (dialogIsActive()) {
         dialogClose(1);
     }

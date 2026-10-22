@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023dc38(...);
-int FUN_0026242c(void);
+int btlSourceGetMaxHp(void);
 int FUN_00269bf0(void);
 
 typedef struct fn_0023d9b8_arg2 fn_0023d9b8_arg2;
@@ -28,7 +28,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0023dc38. */
 extern int saveResolvePartySlot(void);
-/* Supplied declaration required: FUN_0026242c. */
+/* Supplied declaration required: btlSourceGetMaxHp. */
 /* Supplied declaration required: FUN_00269bf0. */
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
@@ -69,7 +69,7 @@ unsigned int FUN_0023d9b8(int param_1,int param_2,fn_0023d9b8_arg2 *param_3)
   if (param_1 < 0) {
     temp_v2 = gameGetPlayerData();
     if ((((temp_v6 & 1) != 0) && ((*(unsigned short *)(temp_v2 + 0x72) & 2) == 0)) &&
-       (temp_v3 = temp_v2, FUN_0026242c(), temp_v3 != *(short *)(temp_v2 + 0x2a))) {
+       (temp_v3 = temp_v2, btlSourceGetMaxHp(), temp_v3 != *(short *)(temp_v2 + 0x2a))) {
       temp_v4 = 1;
     }
     if ((temp_v6 & 4) != 0) {

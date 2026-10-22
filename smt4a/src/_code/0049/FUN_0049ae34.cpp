@@ -4,7 +4,7 @@
 extern "C" {
 s32 FUN_0023b3d0(void);
 void FUN_0031f718(s32 item, u32 mode);
-void FUN_002a7324(u32 mode);
+void statusPanelSetOpen(u32 mode);
 s32 FUN_004cfe4c(EquipmentMenuCursor *cursor);
 s32 FUN_00192718(s32 item);
 void FUN_0034aa94(u32 slot, s32 item);
@@ -25,7 +25,7 @@ extern "C" void FUN_0049ae34(EquipmentMenuState *menu)
     case 1:
         if (FUN_0023b3d0()) {
             FUN_0031f718(-1, 0);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
             s32 page = menu->page;
             s32 index = FUN_004cfe4c(&menu->cursors[page]);
             s16 item = menu->pages[page].items[index].id;

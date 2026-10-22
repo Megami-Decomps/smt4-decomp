@@ -21,14 +21,14 @@ extern u32 g_asdModelTransformBuilder;
 
 extern void sceneTraverserVisit(u32 a, u32 b);
 extern void asdMemFree(Object *obj);
-extern void FUN_002d5604(void *resource);
+extern void asdModelGroupLinkDestroy(void *resource);
 
 void asdModelReleaseSceneObject(Object *obj)
 {
     SubState *sub = &obj->sub;
 
     if (sub->state == 1 && sub->value == 0 && obj->resource != NULL) {
-        FUN_002d5604(obj->resource);
+        asdModelGroupLinkDestroy(obj->resource);
     }
     asdMemFree(obj);
     sceneTraverserVisit(DAT_00464b7c, g_asdModelTransformBuilder);

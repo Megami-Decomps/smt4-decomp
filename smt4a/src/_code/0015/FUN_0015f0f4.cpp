@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001760cc(unsigned int);
+int aocReleasePackageOwner(unsigned int);
 int FUN_001b3428(unsigned int *);
 int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_001ba1c0(int, int *, int, int);
@@ -29,7 +29,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 #endif
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned long long jobGetWork(void);
-/* Supplied declaration required: FUN_001760cc. */
+/* Supplied declaration required: aocReleasePackageOwner. */
 extern int FUN_00176474(unsigned int);
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: FUN_001b3428. */
@@ -76,7 +76,7 @@ unsigned int FUN_0015f0f4(void)
   if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00176474(g_aocSystem), temp_v1 != 0)) &&
      (temp_v1 = sysLightEventTryWait(g_aocMain + 0x98), temp_v1 != 0)) {
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-    FUN_001760cc(g_aocSystem);
+    aocReleasePackageOwner(g_aocSystem);
     puVar4 = (unsigned int *)_ZN18WindowStatusResultC1Ev((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;

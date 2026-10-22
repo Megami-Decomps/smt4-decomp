@@ -1,84 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a833c` (_code @ 0x4a833c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the registry in r0 through the search and copies it to r4 only before the append; built moves it up front */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002a4b28(unsigned short);
+typedef struct {
+    u16 id;       /* 0x00 */
+    u16 unk2;
+    u32 data[7];  /* 0x04 */
+} RegistryEntry; /* size 0x20 */
 
+typedef struct {
+    s16 count;                    /* 0x0000 */
+    u16 unk2;
+    RegistryEntry entries[0x500]; /* 0x0004 */
+    u16 specialCount;             /* 0xa004 */
+    u16 unkA006;
+    u16 specialHits;              /* 0xa008 */
+} Registry;
 
-void FUN_004a833c(short *param_1,unsigned short *param_2)
+s32 FUN_002a4b28(u32 id);
 
+/* Appends `entry` unless its id is already registered; counts ids that FUN_002a4b28 accepts. */
+void FUN_004a833c(Registry *registry, RegistryEntry *entry)
 {
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int unaff_r4;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  
-  temp_v3 = (unsigned int)*param_1;
-  if ((int)temp_v3 < 1) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = temp_v3 & 1;
-    if (temp_v2 != 0) {
-      unaff_r4 = (unsigned int)*param_2;
-    }
-    temp_v4 = 0;
-    if (temp_v2 != 0) {
-      do {
-        if ((unsigned short)param_1[temp_v4 * 0x10 + 2] == unaff_r4) {
-          return;
+    s32 i;
+
+    for (i = 0; i < registry->count; i++) {
+        if (registry->entries[i].id == entry->id) {
+            return;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < (int)temp_v2);
     }
-  }
-  if ((int)temp_v2 < (int)temp_v3) {
-    temp_v0 = *param_2;
-    do {
-      temp_v1 = param_1[temp_v2 * 0x10 + 2];
-      temp_v5 = temp_v1 == temp_v0;
-      if (!temp_v5) {
-        temp_v1 = param_1[temp_v2 * 0x10 + 0x12];
-      }
-      if (temp_v5 || temp_v1 == temp_v0) {
-        return;
-      }
-      temp_v2 = temp_v2 + 2;
-    } while ((int)temp_v2 < (int)temp_v3);
-  }
-  temp_v6 = *(unsigned int *)(param_2 + 2);
-  temp_v7 = *(unsigned int *)(param_2 + 4);
-  temp_v8 = *(unsigned int *)(param_2 + 6);
-  temp_v9 = *(unsigned int *)(param_2 + 8);
-  temp_v10 = *(unsigned int *)(param_2 + 10);
-  temp_v11 = *(unsigned int *)(param_2 + 0xc);
-  temp_v12 = *(unsigned int *)(param_2 + 0xe);
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 2) = *(unsigned int *)param_2;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 4) = temp_v6;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 6) = temp_v7;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 8) = temp_v8;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 10) = temp_v9;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 0xc) = temp_v10;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 0xe) = temp_v11;
-  *(unsigned int *)(param_1 + temp_v3 * 0x10 + 0x10) = temp_v12;
-  *param_1 = *param_1 + 1;
-  temp_v4 = FUN_002a4b28(*param_2);
-  if (temp_v4 != 0) {
-    param_1[0x5004] = param_1[0x5004] + 1;
-  }
-  return;
+    registry->entries[registry->count] = *entry;
+    registry->count++;
+    if (FUN_002a4b28(entry->id) != 0) {
+        registry->specialHits++;
+    }
 }
 
 } /* extern "C" */

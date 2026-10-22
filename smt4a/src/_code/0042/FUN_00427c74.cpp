@@ -1,29 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00427c74` (_code @ 0x427c74, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the row-list base in r4, the table in r5 and the string arguments in r9/r8/r7/r6. */
+#include "common.h"
+
+namespace {
+struct TextRowList {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 count;
+};
+
+// One row of five 64-byte strings.
+struct TextRow {
+    /* 0x000 */ char columns[5][0x40];
+};
+}
 
 extern "C" {
 
-int FUN_0019a46c(...);
+extern TextRowList DAT_005c0a8c;
+extern TextRow DAT_00642b80[];
+void FUN_0019a46c(char *dst, const char *src, u32 size);
 
-extern int DAT_005c0a90; /* 0x5c0a90 */
-extern unsigned char DAT_00642b80; /* 0x642b80 */
-
-/* Supplied declaration required: FUN_0019a46c. */
-
-
-void FUN_00427c74(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Append a row of five strings to the text table. */
+void FUN_00427c74(const char *first, const char *second, const char *third, const char *fourth, const char *fifth)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0019a46c(&DAT_00642b80 + DAT_005c0a90 * 0x140,param_1,0x40);
-  FUN_0019a46c(DAT_005c0a90 * 0x140 + 0x642bc0,param_2,0x40);
-  FUN_0019a46c(DAT_005c0a90 * 0x140 + 0x642c00,param_3,0x40);
-  FUN_0019a46c(DAT_005c0a90 * 0x140 + 0x642c40,param_4,0x40);
-  FUN_0019a46c(DAT_005c0a90 * 0x140 + 0x642c80,param_5,0x40);
-  DAT_005c0a90 = DAT_005c0a90 + 1;
-  return;
+    FUN_0019a46c(DAT_00642b80[DAT_005c0a8c.count].columns[0], first, 0x40);
+    FUN_0019a46c(DAT_00642b80[DAT_005c0a8c.count].columns[1], second, 0x40);
+    FUN_0019a46c(DAT_00642b80[DAT_005c0a8c.count].columns[2], third, 0x40);
+    FUN_0019a46c(DAT_00642b80[DAT_005c0a8c.count].columns[3], fourth, 0x40);
+    FUN_0019a46c(DAT_00642b80[DAT_005c0a8c.count].columns[4], fifth, 0x40);
+    DAT_005c0a8c.count++;
 }
 
 } /* extern "C" */

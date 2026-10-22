@@ -1,48 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cf28c` (_code @ 0x2cf28c, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r7, r0 differs from recovered mov r4, r0. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct MenuCommandValuesView {
+    u32 unk00;                        // 0x00
+    u32 unk04;                        // 0x04
+    u32 unk08;                        // 0x08
+};
+
+struct MenuCommandView {
+    MenuCommandView* next;             // 0x00
+    u32 type;                          // 0x04
+    u32 unk08;                         // 0x08
+    MenuCommandValuesView unk0C;       // 0x0C
+    unsigned long long unk18;          // 0x18
+    u8 unk20[0x48];                    // 0x20
+};
+
+struct MenuHandlesView {
+    u8 unk00[0x0C];                    // 0x00
+    MenuCommandView* head;             // 0x0C
+    u8 unk10[0x10];                    // 0x10
+    MenuCommandView* tail;             // 0x20
+};
 
 extern "C" {
+void* memAlloc(u32 size, u32 flags, u32 unkArg2, u32 unkArg3,
+               u32 alignment, u32 unkArg5);
+extern const char DAT_00544a98[];
+extern MenuHandlesView g_effMenuHandles;
 
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern unsigned int *DAT_006471a0; /* 0x6471a0 */
-extern unsigned int *DAT_006471b4; /* 0x6471b4 */
-
-/* Supplied declaration required: memAlloc. */
-
-
-void FUN_002cf28c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned long long param_5)
-
+// Allocate a type-5 command, copy its payload, and append it to the menu queue.
+void FUN_002cf28c(u32 value08, MenuCommandValuesView values,
+                  unsigned long long value18)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  puVar2 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x68,0x10,1);
-  puVar2[2] = param_1;
-  puVar2[3] = param_2;
-  puVar2[4] = param_3;
-  puVar2[5] = param_4;
-  puVar2[6] = (int)param_5;
-  puVar2[7] = (int)((unsigned long long)param_5 >> 0x20);
-  puVar2[1] = 5;
-  puVar1 = puVar2;
-  if (DAT_006471a0 != (unsigned int *)0x0) {
-    *DAT_006471b4 = (unsigned int)puVar2;
-    puVar1 = DAT_006471a0;
-  }
-  DAT_006471a0 = puVar1;
-  DAT_006471b4 = puVar2;
-  *puVar2 = 0;
-  return;
-}
+    asdDebugTrace(DAT_00544a98, 0x283);
 
-} /* extern "C" */
+    MenuCommandView* command = static_cast<MenuCommandView*>(
+        memAlloc(0x10000, 0x100, 0, 0x68, 0x10, 1));
+    command->unk08 = value08;
+    command->unk0C = values;
+    command->unk18 = value18;
+    command->type = 5;
+
+    if (g_effMenuHandles.head == 0) {
+        g_effMenuHandles.head = command;
+    } else {
+        g_effMenuHandles.tail->next = command;
+    }
+    g_effMenuHandles.tail = command;
+    command->next = 0;
+}
+}

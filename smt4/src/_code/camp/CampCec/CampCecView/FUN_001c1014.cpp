@@ -37,7 +37,7 @@ extern int g_campCecView; /* 0x43db10 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: campCecResetScalarEffect. */
 /* Supplied declaration required: campCecDisplaySetRecord. */
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: uiDrawRecordNameLabels. */
 /* Supplied declaration required: saveGetIndexedMapValue. */
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
@@ -428,7 +428,7 @@ LAB_001c1220:
     }
     temp_v7 = padIsButtonRepeat(0);
     if (temp_v7 == 0) {
-      temp_v7 = FUN_0026ee68(2);
+      temp_v7 = buttonHelpHasEnabledEntryForId(2);
       if (temp_v7 != 0) {
         *(unsigned int *)(temp_v0 + 0xd4) = 0;
         *(unsigned char *)(temp_v0 + 0xd8) = 0;
@@ -458,7 +458,7 @@ LAB_001c1220:
                ((temp_v7 = FUN_002c15fc(5), temp_v7 != 0 ||
                 ((temp_v7 = FUN_002c15fc(3), temp_v7 != 0 || (temp_v7 = FUN_002c15fc(4), temp_v7 != 0))))))
             {
-              temp_v1 = FUN_0026ee68(4);
+              temp_v1 = buttonHelpHasEnabledEntryForId(4);
               if (temp_v1 != 0) {
                 if (*(char *)(temp_v0 + 0x15d) != '\0') {
                   *(unsigned char *)(temp_v0 + 0x15d) = 0;

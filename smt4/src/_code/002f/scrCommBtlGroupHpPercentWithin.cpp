@@ -7,7 +7,7 @@ extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(void);
 extern s32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
 
 /* Script command: pushes whether the HP percentage of the present, non-excluded units of the current group (and the
@@ -23,7 +23,7 @@ u32 scrCommBtlGroupHpPercentWithin(void)
     s32 index;
 
     scrGetArg(1);
-    group = FUN_00249a54();
+    group = btlScriptResolveGroupArg();
     maxSum = 0;
     curSum = 0;
     FUN_002499fc(group, &start, &count);

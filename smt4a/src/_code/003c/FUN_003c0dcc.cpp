@@ -29,7 +29,7 @@ extern int tableFlagBit0(unsigned int);
 extern int tableFlagBit1(unsigned int);
 /* Supplied declaration required: FUN_0040a844. */
 /* Supplied declaration required: gameDataSetEnabledBit. */
-extern int FUN_004717e0(unsigned int);
+extern int aocCountTableRecords(unsigned int);
 
 
 unsigned int FUN_003c0dcc(void)
@@ -52,7 +52,7 @@ unsigned int FUN_003c0dcc(void)
     temp_v1 = dataTableGet(0x45,0);
     dataTableGetEntries();
     temp_v0 = dataTableGetCount(temp_v1);
-    temp_v2 = FUN_004717e0(g_aocSystem);
+    temp_v2 = aocCountTableRecords(g_aocSystem);
     temp_v8 = 0;
     temp_v7 = 0;
     do {

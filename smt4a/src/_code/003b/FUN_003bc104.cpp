@@ -1,54 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc104` (_code @ 0x3bc104, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the entry flags as two words (ldr with writeback) into r1/r0; this source gets one ldrd. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+void scrSetResult(s32 result);
+BtlMainStateA *btlGetMainState(void);
 
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-extern unsigned int DAT_005702b8; /* 0x5702b8 */
-extern unsigned int DAT_005702bc; /* 0x5702bc */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003bc104(void)
-
+// Script result: 1 when any battle entry passes all four candidate masks.
+u32 FUN_003bc104(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  do {
-    temp_v0 = btlGetMainState();
-    puVar2 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + temp_v3 * 0x408);
-    temp_v2 = *puVar2;
-    temp_v1 = puVar2[1];
-    if ((DAT_005702a0 & temp_v2) != 0 || (DAT_005702a4 & temp_v1) != 0) {
-      if ((temp_v1 & DAT_0057028c) != 0 || (temp_v2 & g_btlCandidateMasks) != 0) {
-        if ((DAT_005702b0 & temp_v2) == 0 && (DAT_005702b4 & temp_v1) == 0) {
-          if ((temp_v1 & DAT_005702bc) != 0 || (temp_v2 & DAT_005702b8) != 0) {
+    for (s32 i = 0; i < 109; ++i) {
+        u64 flags = btlGetMainState()->entries[i].flags;
+        if ((g_btlCandidateMasks.unavailable & flags) && (flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & flags) && (flags & g_btlCandidateMasks.unk30)) {
             scrSetResult(1);
             return 1;
-          }
         }
-      }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x6d);
-  scrSetResult(0);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

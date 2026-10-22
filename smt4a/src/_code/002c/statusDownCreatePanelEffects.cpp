@@ -1,14 +1,15 @@
 /* NON_MATCHING: direct speed-field loads replace retail's subobject base additions, changing register allocation and alignment NOPs. */
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
 
 extern "C" {
+extern StatusDownStateA *g_statusDown;
 void efctSetSpeed(f32 speed);
 void FUN_001835b4(s32 group, s32 category, u32 effect, u32 target, u32 flags, s32 layer);
 
 // Build the status-down panel and its mode-specific accents.
 void statusDownCreatePanelEffects(u32 target, u32 flags, s32 alternate)
 {
-    StatusDown *status = g_statusDown;
+    StatusDownStateA *status = g_statusDown;
     efctSetSpeed(status->panelEffectSpeed);
     for (s32 i = 0; i < 3; ++i)
         FUN_001835b4(2, 0x12, 0x56f + i, target, flags, 0xbf);

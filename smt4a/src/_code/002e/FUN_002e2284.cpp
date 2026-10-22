@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00237650(void);
+int campHideNumericBanner(void);
 int FUN_00275bc8(void *, unsigned int);
 int scrScriptProcessStartEntry(int, int);
 int linkHolderApplyFlag(int, int);
@@ -30,7 +30,7 @@ extern unsigned char g_campCec; /* 0x57f110 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_00237650. */
+/* Supplied declaration required: campHideNumericBanner. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: linkHolderApplyFlag. */
@@ -71,7 +71,7 @@ unsigned int FUN_002e2284(fn_002e2284_arg0 *param_1)
       else {
         param_1->field_0x144 = 0xd;
         scrScriptProcessStartEntry(param_1->field_0xf4,0x1f);
-        FUN_00237650();
+        campHideNumericBanner();
       }
       temp_v1 = 3;
     }

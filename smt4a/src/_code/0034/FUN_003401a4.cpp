@@ -14,7 +14,7 @@ int FUN_0031297c(void);
 int mapPlaceSet(unsigned int, unsigned int);
 int FUN_003254a0(void);
 int FUN_0033e014(unsigned int, unsigned int);
-int FUN_00353a88(void);
+int mapIfReleaseFirstOverlay(void);
 int mapIfClose(void);
 int mapIfReleaseSlot0AndReset(void);
 int sub68OwnerCall7(void);
@@ -66,7 +66,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003254a0. */
 /* Supplied declaration required: FUN_0033e014. */
-/* Supplied declaration required: FUN_00353a88. */
+/* Supplied declaration required: mapIfReleaseFirstOverlay. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfReleaseSlot0AndReset. */
@@ -387,7 +387,7 @@ void FUN_003401a4(int param_1)
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;
     case 5:
-      FUN_00353a88();
+      mapIfReleaseFirstOverlay();
       sub68OwnerCall7();
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;

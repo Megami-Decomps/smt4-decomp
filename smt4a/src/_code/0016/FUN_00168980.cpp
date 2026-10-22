@@ -1,17 +1,7 @@
-#include "common.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
-
-typedef struct Record {
-    /* 0x000 */ u8 unk000[0x5E6];
-    /* 0x5E6 */ u16 id;
-} Record;
-
-typedef struct Global57f0c4 {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Record *record;
-} Global57f0c4;
-extern Global57f0c4 g_buttonHelp;
+extern ButtonHelpGlobalsA g_buttonHelp;
 
 typedef struct Entry {
     /* 0x00 */ u8 unk00[0x0C];
@@ -28,7 +18,7 @@ void FUN_00168980(u32 id)
     Entry *current;
     Entry *other;
 
-    current = dataTableGetEntry0e(g_buttonHelp.record->id);
+    current = dataTableGetEntry0e(g_buttonHelp.work->selectedId);
     other = dataTableGetEntry0e(id);
     if (current == NULL || other == NULL) {
         return;

@@ -40,7 +40,7 @@ int FUN_003ee734(...);
 int FUN_003ef1e4(...);
 int gameFlagSetValue(...);
 int FUN_0040a244(void);
-int FUN_004c8b10(void);
+int btlHelpFreeEntries(void);
 int FUN_004c8e30(...);
 int mathVectorClear(...);
 int motionClearVectors(...);
@@ -249,7 +249,7 @@ extern int btlUiIsMenuReady(unsigned int);
 extern int flagGroupsCDAtLeast11(void);
 /* Supplied declaration required: FUN_004c5da4. */
 extern int FUN_004c662c(void);
-/* Supplied declaration required: FUN_004c8b10. */
+/* Supplied declaration required: btlHelpFreeEntries. */
 /* Supplied declaration required: FUN_004c8bb8. */
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004d7a70. */
@@ -825,7 +825,7 @@ joined_r0x0024cba8:
            temp_v20 & *(unsigned int *)(temp_v2 + 0x45a4) & ~DAT_00573a04 & ~DAT_00573a2c & ~DAT_00573a0c &
            ~uRam00573a84 & ~DAT_00573adc & ~DAT_00573ae4;
       *puVar16 = temp_v19 & temp_v18 & temp_v4 & *puVar16 & temp_v5 & temp_v7 & temp_v12 & temp_v11 & temp_v8;
-      FUN_004c8b10();
+      btlHelpFreeEntries();
       temp_v3 = dialogIsActive();
       if (temp_v3 != 0) {
         dialogClose(1);

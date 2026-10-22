@@ -28,10 +28,10 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001b079c. */
-extern int FUN_0026280c(void);
+extern int uniteGetWork(void);
 extern unsigned int dataTable24Sub0GetRecordS90X(int);
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
@@ -64,7 +64,7 @@ void FUN_001f1bc4(int param_1,int param_2)
   unsigned char temp_v12 [68];
   int temp_v13;
   
-  temp_v0 = FUN_0026280c();
+  temp_v0 = uniteGetWork();
   if (temp_v0 != 0) {
     temp_v1 = temp_v0 + 0x4e8;
     temp_v2 = FUN_0029efc0();
@@ -142,7 +142,7 @@ void FUN_001f1bc4(int param_1,int param_2)
     efctSetSpeed();
     FUN_002bf288(2,0x24,0xc1,param_1,temp_v1,0xb5);
     temp_v11 = FUN_0029efa8(temp_v13);
-    temp_v11 = FUN_0029d65c((int)*(short *)(temp_v0 + temp_v11 * 2 + 0x44c));
+    temp_v11 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v0 + temp_v11 * 2 + 0x44c));
     if (!((temp_v11 == 1 || temp_v11 == 2) || temp_v11 == 6)) {
       FUN_002bf288(2,0x24,0xc2,param_1,temp_v1,0xba);
     }

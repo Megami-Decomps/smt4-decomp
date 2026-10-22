@@ -75,7 +75,7 @@ extern int FUN_004c86ec(fn_0040ca18_arg1_p28 *);
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004e699c. */
-extern int FUN_004e8300(int);
+extern int btlAiBestTargetScore(int);
 /* Supplied declaration required: FUN_004ea5e8. */
 extern int btlUnitGet(int);
 
@@ -112,7 +112,7 @@ void FUN_0040ca18(fn_0040ca18_arg0 *param_1,fn_0040ca18_arg1 *param_2)
   else {
     temp_v7 = 0;
     temp_v0 = 0;
-    temp_v3 = FUN_004e8300(g_btlScriptUnit);
+    temp_v3 = btlAiBestTargetScore(g_btlScriptUnit);
     temp_v10 = (void *)0x0;
     temp_v1 = 1;
     temp_v8 = 0;

@@ -1,11 +1,12 @@
+#include "battle/btlUI.h"
 #include "common.h"
 
 extern "C" {
 
 void sysPlayVoice(u32 id);
-void FUN_004a99bc(u32 arg);
+void FUN_004a99bc(BtlUiA *arg);
 
-extern u32 g_btlUiBlock;
+extern BtlUiA *g_btlUiBlock;
 
 void FUN_003f220c(void)
 {

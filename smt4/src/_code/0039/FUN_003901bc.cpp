@@ -57,7 +57,7 @@ extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: archiveFileReplaceHandle. */
 extern int FUN_00240d5c(unsigned int *);
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_002869e8. */
 /* Supplied declaration required: FUN_00287328. */
 extern int bgmGetStateById(unsigned int);
@@ -65,10 +65,10 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
-extern int FUN_0029d65c(int);
+extern int messageMainGetChoiceResult(void);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int legacyResourceIdRemap(unsigned int *);
-extern int FUN_002af600(int);
+extern int ifTouchIsInitialSelection(int);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -168,7 +168,7 @@ void FUN_003901bc(unsigned int *param_1)
       if (temp_v4 < (int)param_1[0xb0]) {
         do {
           temp_v5 = 0;
-          temp_v0 = FUN_002af600((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
+          temp_v0 = ifTouchIsInitialSelection((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
           if (temp_v0 != 0) {
             if (temp_v4 != temp_v2) {
               *(unsigned char *)((int)param_1 + 0x2e6) = 1;
@@ -181,7 +181,7 @@ void FUN_003901bc(unsigned int *param_1)
             *(unsigned char *)((int)param_1 + 0x2e6) = 0;
           }
           else {
-            temp_v0 = FUN_0029d65c((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
+            temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)((int)puVar3 + temp_v4 * 2 + 0x18));
             if (((temp_v0 == 1) || (temp_v0 == 2)) && (temp_v4 != temp_v2)) {
               temp_v5 = 1;
             }
@@ -255,7 +255,7 @@ LAB_003907d0:
       }
     }
     else {
-      temp_v2 = FUN_0026ee68(0xc);
+      temp_v2 = buttonHelpHasEnabledEntryForId(0xc);
       if (temp_v2 != 0) {
 LAB_00390634:
         param_1[2] = 2;
@@ -265,7 +265,7 @@ LAB_00390634:
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
-      temp_v2 = FUN_0026ee68(0xd);
+      temp_v2 = buttonHelpHasEnabledEntryForId(0xd);
       if (temp_v2 != 0) {
 LAB_00390684:
         param_1[2] = 3;
@@ -275,7 +275,7 @@ LAB_00390684:
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
-      temp_v2 = FUN_0026ee68(0xe);
+      temp_v2 = buttonHelpHasEnabledEntryForId(0xe);
       if (temp_v2 != 0) {
 LAB_003906d4:
         param_1[2] = 4;
@@ -285,7 +285,7 @@ LAB_003906d4:
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
-      temp_v2 = FUN_0026ee68(0xb);
+      temp_v2 = buttonHelpHasEnabledEntryForId(0xb);
       if (temp_v2 != 0) {
         param_1[2] = 5;
         temp_v1 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_00390950);
@@ -294,7 +294,7 @@ LAB_003906d4:
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
-      temp_v2 = FUN_0026ee68(10);
+      temp_v2 = buttonHelpHasEnabledEntryForId(10);
       if (temp_v2 != 0) {
         param_1[1] = 0xc;
         param_1[2] = 0;
@@ -307,7 +307,7 @@ LAB_003906d4:
         *(unsigned char *)(param_1 + 0xd3) = 0;
         return;
       }
-      temp_v2 = FUN_0026ee68(0xf);
+      temp_v2 = buttonHelpHasEnabledEntryForId(0xf);
       if (temp_v2 != 0) goto LAB_003907d0;
     }
     break;
@@ -324,7 +324,7 @@ LAB_003906d4:
     FUN_002b8244(1);
     temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v2 == 2) {
-      temp_v2 = FUN_002973d8();
+      temp_v2 = messageMainGetChoiceResult();
       if (temp_v2 != 0) {
         if (temp_v2 == 1) {
           param_1[2] = 0;

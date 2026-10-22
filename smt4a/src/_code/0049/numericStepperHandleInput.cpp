@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
-s32 FUN_001802d4(s32 key);
+s32 ifTouchIsInitialSelection(s32 key);
 s32 recordGetModeForId(s32 key);
 s32 getMaskB5(u32 mode);
 s32 getMaskB6(u32 mode);
@@ -27,7 +27,7 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
         stepper->decrementActive = 1;
     }
 
-    if (FUN_001802d4(stepper->incrementKey) != 0) {
+    if (ifTouchIsInitialSelection(stepper->incrementKey) != 0) {
         if (stepper->value != stepper->maximum) {
             ++stepper->value;
         } else {
@@ -35,7 +35,7 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
         }
     } else if (incrementState == 2 && stepper->value < stepper->maximum) {
         ++stepper->value;
-    } else if (FUN_001802d4(stepper->decrementKey) != 0) {
+    } else if (ifTouchIsInitialSelection(stepper->decrementKey) != 0) {
         if (stepper->value == stepper->minimum) {
             stepper->value = stepper->maximum;
         } else {

@@ -2,6 +2,7 @@
 #include "shard/NaviMain.h"
 
 extern "C" {
+extern NaviMainA *g_naviMain;
 void FUN_004883c8(NaviTransitionState *navigation, s32 slot, s32 active,
                   s32 category, s32 entry, s32 x, s32 y, s32 z, s32 highlighted);
 
@@ -12,7 +13,7 @@ void naviConfigureEntry(s32 slot, s32 category, s32 entry, s32 x, s32 y, s32 z,
     if (g_naviMain == NULL) {
         return;
     }
-    FUN_004883c8(&g_naviMain->stateView.transition, slot, 1, category, entry,
+    FUN_004883c8(&g_naviMain->transition, slot, 1, category, entry,
                  x, y, z, highlighted);
 }
 }

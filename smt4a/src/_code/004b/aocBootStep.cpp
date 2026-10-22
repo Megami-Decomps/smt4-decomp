@@ -17,12 +17,12 @@ void aocBootStep(AocStep *step)
 {
     if (step->substate == 0) {
         infoWinSetValue(0);
-        scriptHolderBReset(&g_aocMain->objC, 1);
+        scriptHolderBReset(&g_aocMain->scriptHolder, 1);
         step->substate = 1;
         return;
     }
-    if (step->substate == 1 && scriptHolderUpdate((ScriptHolder *)&g_aocMain->objC) != 0) {
-        scriptHolderFree1(&g_aocMain->objC);
+    if (step->substate == 1 && scriptHolderUpdate((ScriptHolder *)&g_aocMain->scriptHolder) != 0) {
+        scriptHolderFree1(&g_aocMain->scriptHolder);
         if (gameBlockByte27E98Is1To3() == 0) {
             FUN_004731d8();
             infoWinSetValue(1);

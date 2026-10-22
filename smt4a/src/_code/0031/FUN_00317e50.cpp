@@ -1,52 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00317e50` (_code @ 0x317e50, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: path-operation return paths share cleanup instead of retaining retail's duplicated epilogues. */
+#include "common.h"
 
 extern "C" {
+bool FUN_002e0e04(const char *path, u16 *resolved, u32 mode);
+u32 wstrlen(const char *text);
+void FUN_001886bc();
+s32 FUN_00188444(const u16 *path);
+s32 FUN_0042b32c(const u16 *path);
+void FUN_0013ebd8();
 
-int FUN_0013ebd8(void);
-int FUN_00188444(unsigned char [496]);
-int FUN_001886bc(void);
-int FUN_002e0e04(int, unsigned char [496], int);
-int FUN_0042b32c(unsigned char [496]);
-
-/* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: FUN_00188444. */
-/* Supplied declaration required: FUN_001886bc. */
-/* Supplied declaration required: FUN_002e0e04. */
-extern int wstrlen(int);
-/* Supplied declaration required: FUN_0042b32c. */
-
-
-unsigned char * FUN_00317e50(int param_1)
-
+s32 FUN_00317e50(const char *path)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned char temp_v1 [496];
-  
-  puVar2 = temp_v1;
-  puVar3 = temp_v1;
-  temp_v0 = param_1;
-  FUN_002e0e04(param_1,temp_v1,1);
-  if (temp_v0 != 0) {
-    temp_v0 = wstrlen(param_1);
-    if ((temp_v0 == 0) || (*(char *)((temp_v0 + param_1) - 1) != '/')) {
-      FUN_001886bc();
-      FUN_00188444(temp_v1);
-      puVar3 = puVar2;
-    }
-    else {
-      FUN_001886bc();
-      FUN_0042b32c(temp_v1);
+    u16 resolved[248];
+    s32 result;
+    if (FUN_002e0e04(path, resolved, 1)) {
+        u32 length = wstrlen(path);
+        if (length && path[length - 1] == '/') {
+            FUN_001886bc();
+            result = FUN_0042b32c(resolved);
+        } else {
+            FUN_001886bc();
+            result = FUN_00188444(resolved);
+        }
+    } else {
+        result = 0xe0e046bc;
     }
     FUN_0013ebd8();
-    return puVar3;
-  }
-  FUN_0013ebd8();
-  return (unsigned char *)0xe0e046bc;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -16,7 +16,7 @@ struct DepartureSource {
 // Seed both ends of a map transition from the selected departure source.
 extern "C" void FUN_004b7a08(const DepartureSource* source)
 {
-    GameState* state = &g_gameState;
+    GameStateA* state = &g_gameState;
     state->transitionActive = 1;
     state->sourceMap = source->map + 200;
     state->destinationMap = state->sourceMap;

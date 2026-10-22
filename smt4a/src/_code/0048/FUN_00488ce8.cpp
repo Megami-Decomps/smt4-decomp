@@ -19,7 +19,7 @@ int rectRecRead(int, int, int *, unsigned int **);
 int naviMainGetValue(...);
 int sub68OwnerGetBlock60(...);
 int naviGetActiveStateValue(...);
-int FUN_00492c18(...);
+int naviMainSetValuePair(...);
 int FUN_004d03c8(float **, unsigned int **);
 int FUN_004d040c(int, unsigned int *, double, int);
 int NaviMain_GetCurrentMap(...);
@@ -89,8 +89,8 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: naviMainGetValue. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: naviGetActiveStateValue. */
-/* Supplied declaration required: FUN_00492c18. */
-extern int FUN_00492c5c(int);
+/* Supplied declaration required: naviMainSetValuePair. */
+extern int naviMainGetRequestedMap(int);
 extern unsigned int FUN_00492c84(int);
 /* Supplied declaration required: FUN_004d03c8. */
 extern unsigned int FUN_004d03d0(unsigned int **, int *);
@@ -170,7 +170,7 @@ unsigned int FUN_00488ce8(int param_1)
       temp_v8 = (float *)romwright_f2u((float)((*(float *)(param_1 + 0x34) + (temp_v5 - *(float *)(param_1 + 0x2c)))));
       temp_v5 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x38) + (temp_v5 - *(float *)(param_1 + 0x30)))));
-      FUN_00492c18(temp_v14,&temp_v8);
+      naviMainSetValuePair(temp_v14,&temp_v8);
       temp_v5 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 0x44) == temp_v5) << 0x1e);
       if (romwright_subpiece_4_1_0(temp_v2 >> 0x1e,0)) {
@@ -243,7 +243,7 @@ unsigned int FUN_00488ce8(int param_1)
       temp_v8 = (float *)romwright_f2u((float)((*pfVar4 + *(float *)(param_1 + 0x3c))));
       in_s0 = (unsigned int *)romwright_f2u((float)((pfVar4[1] + *(float *)(param_1 + 0x40))));
       temp_v9 = in_s0;
-      FUN_00492c18(temp_v14,&temp_v8);
+      naviMainSetValuePair(temp_v14,&temp_v8);
     }
   }
   if ((DAT_005f161d != '\0') && ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0)) {
@@ -254,7 +254,7 @@ unsigned int FUN_00488ce8(int param_1)
     temp_v15[0] = -(temp_v15[0] * 13.0f);
     temp_v12 = (unsigned int *)romwright_f2u((float)((temp_v10 / romwright_u2f((unsigned int)(in_s0)) + *pfVar4)));
     temp_v13 = pfVar4[1] - temp_v15[0] / romwright_u2f((unsigned int)(in_s0));
-    FUN_00492c18(temp_v14,&temp_v12);
+    naviMainSetValuePair(temp_v14,&temp_v12);
     puVar7 = (unsigned char *)(param_1 + 0x7b91);
     *puVar7 = 1;
     temp_v1 = inputIsQuestConfirmPressed();
@@ -263,14 +263,14 @@ unsigned int FUN_00488ce8(int param_1)
     if (temp_v1 != 0) {
       sysPlayVoice(0x1000229);
       if (DAT_005f1a5e != '\0') {
-        temp_v1 = FUN_00492c5c(temp_v14);
+        temp_v1 = naviMainGetRequestedMap(temp_v14);
         temp_v0 = naviGetActiveStateValue(temp_v14);
         if (temp_v1 == temp_v0) {
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
           sub68OwnerGetBlock60(temp_v14);
           temp_v16 = temp_v7;
           temp_v17 = temp_v7;
-          FUN_00492c18(temp_v14,&temp_v16);
+          naviMainSetValuePair(temp_v14,&temp_v16);
           *(char *)(param_1 + 100) = (char)*puVar10;
           *puVar8 = 1;
           *puVar7 = 1;
@@ -282,7 +282,7 @@ unsigned int FUN_00488ce8(int param_1)
         sub68OwnerGetBlock60(temp_v14);
         temp_v16 = temp_v7;
         temp_v17 = temp_v7;
-        FUN_00492c18(temp_v14,&temp_v16);
+        naviMainSetValuePair(temp_v14,&temp_v16);
         *(char *)(param_1 + 100) = (char)*puVar10;
         *puVar8 = 1;
         *puVar7 = 1;
@@ -301,7 +301,7 @@ unsigned int FUN_00488ce8(int param_1)
           sub68OwnerGetBlock60(temp_v14);
           temp_v16 = temp_v7;
           temp_v17 = temp_v7;
-          FUN_00492c18(temp_v14,&temp_v16);
+          naviMainSetValuePair(temp_v14,&temp_v16);
         }
         else {
           if (*(int *)(temp_v0 + 0x15b8) != 0) {
@@ -371,13 +371,13 @@ unsigned int FUN_00488ce8(int param_1)
                   return 0;
                 }
               }
-              temp_v1 = FUN_00492c5c(temp_v14);
+              temp_v1 = naviMainGetRequestedMap(temp_v14);
               temp_v0 = naviGetActiveStateValue(temp_v14);
               if (temp_v1 == temp_v0) {
                 sub68OwnerGetBlock60(temp_v14);
                 temp_v16 = temp_v7;
                 temp_v17 = temp_v7;
-                FUN_00492c18(temp_v14,&temp_v16);
+                naviMainSetValuePair(temp_v14,&temp_v16);
                 *(char *)(param_1 + 100) = (char)*puVar10;
                 *puVar8 = 1;
                 *puVar7 = 1;

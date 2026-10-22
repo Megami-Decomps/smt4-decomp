@@ -1,4 +1,4 @@
-#include "shard/Block57f248.h"
+#include "ui/IfTouch.h"
 
 extern "C" {
 
@@ -7,9 +7,9 @@ u32 ifTouchIsRepeatingSelection(s32 id)
 {
     s32 counter;
 
-    if (((g_ifTouch.record->unk64E == id) &&
-         (g_ifTouch.record->unk008 == 1 || g_ifTouch.record->unk008 == 2)) &&
-        ((counter = g_ifTouch.record->unk650, counter < 1) ||
+    if (((g_ifTouch.state->selectedRegion == id) &&
+         (g_ifTouch.state->selectionMode == 1 || g_ifTouch.state->selectionMode == 2)) &&
+        ((counter = g_ifTouch.state->repeatCounter, counter < 1) ||
          ((counter >= 0xF && (((counter - 0xFU) & 3) == 0))))) {
         return 1;
     }

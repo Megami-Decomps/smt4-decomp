@@ -10,7 +10,7 @@ int FUN_00247240(unsigned int *);
 int FUN_0025c650(unsigned int, int, int);
 int effBlockSetBlobB(unsigned int, int *, int);
 int textFormatBuffer(unsigned char [104], unsigned char *, unsigned int);
-int FUN_002de30c(unsigned int *, unsigned char [104], int, unsigned int, int);
+int effMenuAddEntry(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_002f82ac(unsigned int *);
 int FUN_0030ed8c(unsigned int *, unsigned int);
 
@@ -37,7 +37,7 @@ extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: effBlockSetBlobB. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002de30c. */
+/* Supplied declaration required: effMenuAddEntry. */
 /* Supplied declaration required: FUN_002f82ac. */
 /* Supplied declaration required: FUN_0030ed8c. */
 extern int FUN_00318cac(unsigned int *);
@@ -79,7 +79,7 @@ unsigned char * FUN_00242080(unsigned int param_1)
       temp_v2 = 0;
       do {
         textFormatBuffer(temp_v7,&LAB_00242224,temp_v2);
-        FUN_002de30c(DAT_0044eabc,temp_v7,8,temp_v2,0);
+        effMenuAddEntry(DAT_0044eabc,temp_v7,8,temp_v2,0);
         temp_v2 = temp_v2 + 1;
         param_1 = temp_v1;
       } while (temp_v2 < 0x16);

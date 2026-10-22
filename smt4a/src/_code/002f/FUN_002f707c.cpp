@@ -7,7 +7,7 @@ extern "C" {
 int eventQueueAddUniqueIfValid(int);
 int sysPlaySe(int);
 int FUN_0020b718(int, int);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int FUN_0031f718(int, int);
 int unitRecordBuild(int, unsigned char [300]);
 int FUN_0033449c(int);
@@ -24,7 +24,7 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0020b718. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0033449c. */
@@ -75,7 +75,7 @@ void FUN_002f707c(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_0037e1b0(0);
       FUN_0031f718((int)(short)param_3,0);
       FUN_0033449c(0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
     }
   }
   eventQueueAddUniqueIfValid(0x100020f);

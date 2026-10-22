@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail hoists nested timer-base addresses and derives contiguous asset pointers; flat timer layout gives different switch/register scheduling. */
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct UiEightTimerSet {
@@ -8,6 +8,7 @@ struct UiEightTimerSet {
 };
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
 void drawParameterBlockClear(UiResourceParameters *resources);
 void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
     const void *chunk1, u16 count1, const void *chunk2, u16 count2,

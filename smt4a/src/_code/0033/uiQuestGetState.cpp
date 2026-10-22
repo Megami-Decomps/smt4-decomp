@@ -2,8 +2,6 @@
 
 extern "C" {
 
-
-
 s32 uiQuestGetState(void)
 {
     return g_uiQuest->state;

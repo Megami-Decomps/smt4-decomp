@@ -5,24 +5,6 @@
 
 #include "common.h"
 
-/* Global at 0x5B3D54. */
-typedef struct Block5b3d54 {
-    /* 0x00 */ u8 unk00[0x8];
-    /* 0x08 */ u32 unk08;
-    /* 0x0C */ u8 unk0C[0x4];
-    /* 0x10 */ u32 unk10;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u8 unk1C[0x4];
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 unk24[0x4];
-    /* 0x28 */ u32 unk28;
-    /* 0x2C */ u32 unk2C;
-    /* 0x30 */ u8 unk30[0x4];
-    /* 0x34 */ u32 unk34;
-} Block5b3d54;
-extern Block5b3d54 g_asdTextDefaults;
-
 /* Global at 0x5B4000. */
 typedef struct Block5b4000 {
     /* 0x00 */ u8 unk00[0x8];

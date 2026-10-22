@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail uses `push {r4, r5, r6, lr}` where armcc emits `push {r4, lr}`. */
-#include "common.h"
+#include "battle/btlPartnerAttack.h"
 
 extern "C" {
 
 void *jobGetWork(void *job);
-extern void *g_btlPartnerAttack;
+extern BtlPartnerAttackA *g_btlPartnerAttack;
 void *btlGetMainState(void);
 void FUN_00411458(void *attack, void *state);
 

@@ -1,46 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c07ac` (_code @ 0x3c07ac, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the loading flag and state together before the first test and sets loading before the state constant; scheduling only. */
+#include "common.h"
 
 extern "C" {
 
-int asdLoadFileAsyncSimple(...);
-int textFormatBuffer(...);
-int asdMemFree(...);
+typedef struct TalkTone {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ void *file;
+    /* 0x18 */ s32 state;
+    /* 0x1C */ u8 unk1C[0xA9];
+    /* 0xC5 */ u8 loading;
+    /* 0xC6 */ u8 unkC6[2];
+    /* 0xC8 */ s32 tone;
+} TalkTone;
 
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdMemFree. */
+extern const char DAT_004017c0[]; /* "battle/talk/TalkTone%s.mbm" */
+extern const char *DAT_00439b70[]; /* tone file name suffixes */
 
+void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void asdMemFree(void *memory);
 
-unsigned int FUN_003c07ac(int param_1,int param_2)
-
+/* Load the talk tone file for `tone`; returns 1 once it is loaded. */
+s32 FUN_003c07ac(TalkTone *talk, s32 tone)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [128];
-  
-  if (*(char *)(param_1 + 0xc5) != '\0') {
-    if (*(int *)(param_1 + 0x18) == 2) {
-      *(unsigned char *)(param_1 + 0xc5) = 0;
-      return 1;
+    char path[128];
+
+    if (talk->loading) {
+        if (talk->state == 2) {
+            talk->loading = 0;
+            return 1;
+        }
+        return 0;
     }
-  }
-  else if (*(int *)(param_1 + 0x18) == 2) {
-    if (*(int *)(param_1 + 200) == param_2) {
-      return 1;
+    if (talk->state != 2) {
+        return 0;
     }
-    if (*(int *)(param_1 + 0x14) != 0) {
-      asdMemFree();
-      *(unsigned int *)(param_1 + 0x14) = 0;
+    if (talk->tone == tone) {
+        return 1;
     }
-    *(int *)(param_1 + 200) = param_2;
-    textFormatBuffer(temp_v0,"battle/talk/TalkTone%s.mbm",*(unsigned int *)(param_2 * 4 + 0x439b70));
-    asdLoadFileAsyncSimple(temp_v0,param_1 + 0x14,0);
-    *(unsigned char *)(param_1 + 0xc5) = 1;
-    *(unsigned int *)(param_1 + 0x18) = 3;
+    if (talk->file != NULL) {
+        asdMemFree(talk->file);
+        talk->file = NULL;
+    }
+    talk->tone = tone;
+    textFormatBuffer(path, DAT_004017c0, DAT_00439b70[tone]);
+    asdLoadFileAsyncSimple(path, &talk->file, 0);
+    talk->loading = 1;
+    talk->state = 3;
     return 0;
-  }
-  return 0;
 }
 
 } /* extern "C" */

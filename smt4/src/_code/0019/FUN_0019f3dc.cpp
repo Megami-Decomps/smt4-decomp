@@ -86,7 +86,7 @@ extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
-extern int FUN_00289e54(int, unsigned int, unsigned int);
+extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: messageSlotSet. */
 extern int gameJumpRequestIsPending(void);
@@ -156,7 +156,7 @@ unsigned int FUN_0019f3dc(void)
       puVar2[6] = DAT_004937c8;
       textFormatBuffer(temp_v7,&LAB_0019f7d0,temp_v1,temp_v1);
       textFormatBuffer(temp_v8,&LAB_0019f7e8,puVar2[5],puVar2[5]);
-      temp_v3 = FUN_00289e54(g_aocSystem,puVar2[5],0);
+      temp_v3 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;
         FUN_00289de4(g_aocSystem,puVar2[5],0);

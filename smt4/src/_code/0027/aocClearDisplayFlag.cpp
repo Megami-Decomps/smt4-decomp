@@ -9,7 +9,7 @@ extern AocDisplay *g_aocDisplay;
 
 void aocClearDisplayFlag(void)
 {
-    g_aocDisplay->unk450C = 0;
+    g_aocDisplay->operationActive = 0;
     FUN_002ba8f4(&g_aocMain->objA);
 }
 

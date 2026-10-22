@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int FUN_0029efd8(...);
 int eventQueueAddUnique(...);
 int eventQueueAddUniqueIfValid(...);
@@ -13,7 +13,7 @@ int FUN_00195510(...);
 int scrRunOpcodesStub(unsigned int);
 int FUN_001d15fc(void);
 int scrScriptProcessStartEntry(...);
-int FUN_00297050(...);
+int messageMainSetEnabled(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973ec(void);
 int gameCounterAddSaturating(int, int);
@@ -36,14 +36,14 @@ extern int g_config; /* 0x43dc58 */
 /* Supplied declaration required: FUN_00195510. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_001d15fc. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297050. */
+/* Supplied declaration required: messageMainSetEnabled. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_002973ec. */
 /* Supplied declaration required: gameCounterAddSaturating. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
@@ -92,7 +92,7 @@ void FUN_0018b978(void)
     temp_v9 = *(unsigned int *)(temp_v8 + 0xac);
     FUN_00297060(temp_v9,*(unsigned int *)(temp_v8 + 0xb0));
     *(unsigned int *)(temp_v8 + 0xb4) = temp_v9;
-    FUN_00297050(0);
+    messageMainSetEnabled(0);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v8 + 0xb4),0);
     temp_v2 = FUN_002973ec();
     temp_v5 = 1;
@@ -151,7 +151,7 @@ void FUN_0018b978(void)
     if (temp_v2 != 2) {
       return;
     }
-    temp_v10 = FUN_002973d8();
+    temp_v10 = messageMainGetChoiceResult();
     temp_v2 = g_config;
     if (temp_v10 == 0) {
       temp_v10 = gameFlagIsSet(0x555);
@@ -174,7 +174,7 @@ LAB_0018bf50:
           FUN_00195510(1);
           if (temp_v2 == 1) {
             scrScriptProcessStartEntry(*(unsigned int *)(temp_v8 + 0xb4),0);
-            FUN_00297050(0);
+            messageMainSetEnabled(0);
             *(unsigned int *)(temp_v8 + 100) = 1;
             return;
           }
@@ -194,7 +194,7 @@ LAB_0018bf50:
               temp_v9 = 2;
               FUN_00195510(temp_v9);
               scrScriptProcessStartEntry(*(unsigned int *)(temp_v8 + 0xb4),0);
-              FUN_00297050(0);
+              messageMainSetEnabled(0);
               *(unsigned int *)(temp_v8 + 100) = 1;
               return;
             }
@@ -206,7 +206,7 @@ LAB_0018bf50:
       }
     }
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v8 + 0xb4),0);
-    FUN_00297050(0);
+    messageMainSetEnabled(0);
     *(unsigned int *)(temp_v8 + 100) = 1;
     return;
   }
@@ -222,9 +222,9 @@ LAB_0018bf50:
   temp_v0 = 0;
   temp_v5 = *(unsigned int *)(temp_v3 + 0x80);
   if (*(char *)(temp_v2 + 0xa8) != '\0') {
-    temp_v4 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x78));
-    temp_v6 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x7a));
-    temp_v2 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x7c));
+    temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x78));
+    temp_v6 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x7a));
+    temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x7c));
     if (!(temp_v4 == 1 || temp_v4 == 2)) {
       if (!(temp_v6 == 1 || temp_v6 == 2)) {
         if (temp_v2 == 1 || temp_v2 == 2) {
@@ -265,8 +265,8 @@ LAB_0018bf50:
     }
   }
   else {
-    temp_v4 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x78));
-    temp_v2 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x7a));
+    temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x78));
+    temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x7a));
     if (!(temp_v4 == 1 || temp_v4 == 2)) {
       if (!(temp_v2 == 1 || temp_v2 == 2)) {
         temp_v2 = 4;
@@ -334,9 +334,9 @@ LAB_0018bf50:
   temp_v2 = g_config;
   if (temp_v10 == 0) {
     if (*(char *)(g_config + 0xa8) != '\x01') {
-      temp_v10 = FUN_0029d65c((int)*(short *)(g_config + 0x78));
+      temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(g_config + 0x78));
       if (temp_v10 != 6) {
-        temp_v2 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x7a));
+        temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x7a));
         if (temp_v2 != 6) {
           temp_v2 = 1;
           FUN_002c1658();
@@ -344,7 +344,7 @@ LAB_0018bf50:
             return;
           }
           eventQueueAddUniqueIfValid(0x100016e);
-          FUN_00297050(1);
+          messageMainSetEnabled(1);
           temp_v9 = 3;
           *(unsigned int *)(temp_v8 + 100) = temp_v9;
           return;
@@ -352,11 +352,11 @@ LAB_0018bf50:
       }
     }
     else {
-      temp_v10 = FUN_0029d65c((int)*(short *)(g_config + 0x78));
+      temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(g_config + 0x78));
       if (temp_v10 != 6) {
-        temp_v10 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x7a));
+        temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x7a));
         if (temp_v10 != 6) {
-          temp_v2 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x7c));
+          temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x7c));
           if (temp_v2 != 6) {
             temp_v2 = 1;
             FUN_002c1658();
@@ -364,7 +364,7 @@ LAB_0018bf50:
               return;
             }
             eventQueueAddUniqueIfValid(0x100016e);
-            FUN_00297050(1);
+            messageMainSetEnabled(1);
             temp_v9 = 3;
             *(unsigned int *)(temp_v8 + 100) = temp_v9;
             return;
@@ -375,8 +375,8 @@ LAB_0018bf50:
   }
   temp_v8 = g_config;
   eventQueueAddUnique(0x100016d);
-  FUN_00296e90();
-  FUN_00297050(1);
+  messageMainFinishWindow();
+  messageMainSetEnabled(1);
   scrScriptProcessStartEntry(*(unsigned int *)(temp_v8 + 0xb4),1);
   temp_v9 = 2;
   *(unsigned int *)(temp_v8 + 0xb8) = 0;

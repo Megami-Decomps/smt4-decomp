@@ -1,70 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039cb34` (_code @ 0x39cb34, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int pointConvertToFloat(uint *, unsigned int, unsigned int);
-int FUN_00233240(uint *, int);
-int FUN_002b827c(int);
+typedef struct Vec2Point {
+    /* 0x00 */ u8 unk00[8];
+} Vec2Point;
 
-typedef struct fn_0039cb34_arg0 fn_0039cb34_arg0;
-struct fn_0039cb34_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    uint field_0x10; /* +0x10 */
-};
+/* A cursor-driven panel: opens on state 0, then tracks its pointer until it is confirmed. */
+typedef struct CursorPanel {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s32 state;
+    /* 0x00C */ u8 unk00c[4];
+    /* 0x010 */ u32 flags;
+    /* 0x014 */ u8 unk014[0x164 - 0x14];
+    /* 0x164 */ u8 position[0x178 - 0x164];
+    /* 0x178 */ u8 animation[0x224 - 0x178];
+    /* 0x224 */ Vec2Point pointer;
+} CursorPanel;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct GameState {
+    /* 0x000 */ u8 unk000[0x251];
+    /* 0x251 */ s8 muted;
+} GameState;
 
-extern unsigned char g_gameState; /* 0x49f91c */
+extern GameState g_gameState;
 
-/* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_00233240. */
-extern int FUN_0026b564(void);
-/* Supplied declaration required: FUN_002b827c. */
-extern unsigned int vec2GetYInt(int *);
-extern unsigned int vec2GetXInt(int *);
-extern int FUN_002bf818(int *);
+void pointConvertToFloat(void *out, s32 x, s32 y);
+void FUN_00233240(void *animation, s32 mode);
+void FUN_002b827c(s32 sound);
+s32 FUN_0026b564(void);
+s32 vec2GetYInt(Vec2Point *point);
+s32 vec2GetXInt(Vec2Point *point);
+s32 FUN_002bf818(Vec2Point *point);
 
-
-void FUN_0039cb34(fn_0039cb34_arg0 *param_1)
-
+/* Opens the panel (playing sound 0x1b unless muted), then follows its pointer until a confirmed press closes it. */
+void FUN_0039cb34(CursorPanel *panel)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int *piVar4;
-  
-  if (param_1->field_0x8 != 0) {
-    if (param_1->field_0x8 == 1) {
-      piVar4 = &param_1[0x1b].field_0x8;
-      temp_v0 = FUN_002bf818(piVar4);
-      if ((temp_v0 != 0) && (temp_v0 = FUN_0026b564(), temp_v0 != 0)) {
-        param_1->field_0x8 = 2;
-        param_1->field_0x10 = param_1->field_0x10 | 2;
-      }
-      temp_v1 = vec2GetYInt(piVar4);
-      temp_v2 = vec2GetXInt(piVar4);
-      pointConvertToFloat(&param_1[0x11].field_0x10,temp_v2,temp_v1);
-      return;
+    if (panel->state == 0) {
+        FUN_00233240(panel->animation, 1);
+        if (g_gameState.muted == 0) {
+            FUN_002b827c(0x1b);
+        }
+        panel->flags |= 0x1000000;
+        panel->state = 1;
+    } else if (panel->state == 1) {
+        Vec2Point *pointer = &panel->pointer;
+
+        if (FUN_002bf818(pointer) != 0 && FUN_0026b564() != 0) {
+            panel->state = 2;
+            panel->flags |= 2;
+        }
+        pointConvertToFloat(panel->position, vec2GetXInt(pointer), vec2GetYInt(pointer));
     }
-  }
-  else {
-    FUN_00233240(&param_1[0x12].field_0x10,1);
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) == '\0') {
-      FUN_002b827c(0x1b);
-    }
-    param_1->field_0x10 = param_1->field_0x10 | 0x1000000;
-    param_1->field_0x8 = 1;
-  }
-  return;
 }
 
 } /* extern "C" */

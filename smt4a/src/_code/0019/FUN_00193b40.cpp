@@ -1,68 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00193b40` (_code @ 0x193b40, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests each enable bit as `bics` (bit & ~flags) == 0 with a 0/1 select; this source yields `and`/`lsr`. */
+#include "common.h"
+
+struct StageSource {
+    /* 0x00 */ u8 unk00[0x19];
+    /* 0x19 */ u8 count;
+};
+
+struct StageNode {
+    /* 0x00 */ u8 unk00[0x10];
+};
+
+struct StageChain {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ StageSource *sources[3];
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ StageNode *nodes;
+};
+
+struct StageOptions {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 enabled; /* bit n enables stage n */
+};
 
 extern "C" {
 
-int FUN_001a83f4(int, int, int, int);
-int FUN_001a8558(int, int, int, int);
-int FUN_001a86b4(int, int, int, int);
+void *FUN_001a83f4(StageNode *node, void *input, bool enabled, u8 last);
+void *FUN_001a8558(StageNode *node, void *input, bool enabled, u8 last);
+void *FUN_001a86b4(StageNode *node, void *input, bool enabled, u8 last);
 
-typedef struct fn_00193b40_arg0 fn_00193b40_arg0;
-struct fn_00193b40_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    void *field_0x8; /* +0x8 */
-    void *field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x8];
-    int field_0x18; /* +0x18 */
-};
-
-/* Supplied declaration required: FUN_001a83f4. */
-/* Supplied declaration required: FUN_001a8558. */
-/* Supplied declaration required: FUN_001a86b4. */
-
-
-void FUN_00193b40(fn_00193b40_arg0 *param_1,int *param_2,int param_3)
-
+/* Returns the last index of a stage's source (its count minus one), or 1 without a source. */
+static __inline u8 stageLastIndex(const StageSource *source)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  void *pvVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  pvVar2 = param_1->field_0x4;
-  temp_v0 = '\0';
-  if (pvVar2 != (void *)0x0) {
-    temp_v0 = *(char *)((int)pvVar2 + 0x19);
-  }
-  if (pvVar2 != (void *)0x0) {
-    temp_v0 = temp_v0 - '\x01';
-  }
-  else {
-    temp_v0 = '\x01';
-  }
-  temp_v1 = param_1->field_0x18;
-  FUN_001a83f4(temp_v1,*param_2,(~*(unsigned char *)(param_3 + 2) & 1) == 0,temp_v0);
-  if (param_1->field_0x8 != (void *)0x0) {
-    temp_v0 = *(char *)((int)param_1->field_0x8 + 0x19) - '\x01';
-  }
-  else {
-    temp_v0 = '\x01';
-  }
-  temp_v2 = param_1->field_0x18 + 0x10;
-  FUN_001a8558(temp_v2,temp_v1,(~*(unsigned char *)(param_3 + 2) & 2) == 0,temp_v0);
-  if (param_1->field_0xc != (void *)0x0) {
-    temp_v0 = *(char *)((int)param_1->field_0xc + 0x19) - '\x01';
-  }
-  else {
-    temp_v0 = '\x01';
-  }
-  temp_v1 = param_1->field_0x18 + 0x20;
-  FUN_001a86b4(temp_v1,temp_v2,(~*(unsigned char *)(param_3 + 2) & 4) == 0,temp_v0);
-  *param_2 = temp_v1;
-  return;
+    return source != NULL ? source->count - 1 : 1;
+}
+
+/* Links the three stage nodes in sequence, feeding `*io` into the first and storing the last
+ * stage's output back into it. */
+void FUN_00193b40(StageChain *chain, void **io, const StageOptions *options)
+{
+    void *output;
+
+    output = FUN_001a83f4(&chain->nodes[0], *io, (options->enabled & 1) != 0,
+                          stageLastIndex(chain->sources[0]));
+    output = FUN_001a8558(&chain->nodes[1], output, (options->enabled & 2) != 0,
+                          stageLastIndex(chain->sources[1]));
+    *io = FUN_001a86b4(&chain->nodes[2], output, (options->enabled & 4) != 0,
+                       stageLastIndex(chain->sources[2]));
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(int);
 int FUN_0023b45c(int);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int FUN_002c8550(int);
 int FUN_002f0420(unsigned int);
 int objBInitBlock19D0(unsigned char [16], int);
@@ -49,7 +49,7 @@ extern int gameGetSlotTable(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_002f0420. */
@@ -128,7 +128,7 @@ void FUN_004a3b48(int param_1)
     else if (temp_v2 == 0xe) {
       objBInitBlock12DC();
     }
-    FUN_002a7324(1);
+    statusPanelSetOpen(1);
     FUN_004a3e04(param_1);
   }
   else {
@@ -148,7 +148,7 @@ void FUN_004a3b48(int param_1)
         objBInitBlock12DC();
       }
       if (*(char *)(param_1 + 0x863) == '\0') {
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         *(unsigned char *)(param_1 + 0x863) = 0;
         FUN_004a3e04(param_1);
         *(unsigned short *)(param_1 + 0xa872) = temp_v0;
@@ -208,7 +208,7 @@ void FUN_004a3b48(int param_1)
         *(unsigned short *)(param_1 + 0xa872) = temp_v0;
         return;
       }
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
     }
     *(unsigned char *)(param_1 + 0x863) = 0;
     FUN_004a3e04(param_1);

@@ -1,55 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00146314` (_code @ 0x146314, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the target is loaded after selecting parameters instead of being captured before the branch. */
+#include "shard/W4_Match1b_RegisteredHandle.h"
+
+struct HandleRegistryView {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ void *defaultParameters;
+    /* 0x10 */ void *target;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ RegisteredHandle **begin;
+    /* 0x1c */ RegisteredHandle **end;
+};
+struct RenderParameterOverride {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ u8 parameters[1];
+};
+struct RenderCtx;
 
 extern "C" {
+extern HandleRegistryView *g_handleRegistry;
+extern RenderParameterOverride *DAT_0056fcb8;
+extern RenderCtx *g_renderCtx;
+s32 FUN_00158124(HandleRegistryView *registry);
+void FUN_00157e98(void *target, const void *parameters);
+u32 FUN_00152f54();
+void FUN_00145e24(RenderCtx *context, u32 value);
+void holderFlushPending(RegisteredHandle *holder);
 
-int FUN_00145e24(unsigned int, unsigned int);
-int holderFlushPending(unsigned int);
-int FUN_00157e98(unsigned int, int);
-int FUN_00158124(void);
-
-extern int DAT_0056fcb8; /* 0x56fcb8 */
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00145e24. */
-extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: holderFlushPending. */
-/* Supplied declaration required: FUN_00157e98. */
-/* Supplied declaration required: FUN_00158124. */
-
-
-unsigned int FUN_00146314(void)
-
+u32 FUN_00146314()
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  
-  temp_v0 = g_handleRegistry;
-  temp_v2 = g_handleRegistry;
-  FUN_00158124();
-  if (temp_v2 != 0) {
-    if ((DAT_0056fcb8 != 0) &&
-       (!((*(unsigned int *)(DAT_0056fcb8 + 4) & 1) == 0 || (*(unsigned int *)(DAT_0056fcb8 + 4) & 2) == 0))) {
-      temp_v2 = DAT_0056fcb8 + 0x10;
+    HandleRegistryView *registry = g_handleRegistry;
+    if (FUN_00158124(registry)) {
+        const void *parameters;
+        RenderParameterOverride *override = DAT_0056fcb8;
+        if (override && (override->flags & 1) && (override->flags & 2)) {
+            parameters = override->parameters;
+        } else {
+            parameters = registry->defaultParameters;
+        }
+        FUN_00157e98(registry->target, parameters);
     }
-    else {
-      temp_v2 = *(int *)(temp_v0 + 0xc);
+    FUN_00145e24(g_renderCtx, FUN_00152f54());
+    RegisteredHandle **end = g_handleRegistry->end;
+    for (RegisteredHandle **holder = g_handleRegistry->begin; holder != end; ++holder) {
+        holderFlushPending(*holder);
     }
-    FUN_00157e98(*(unsigned int *)(temp_v0 + 0x10),temp_v2);
-  }
-  temp_v1 = FUN_00152f54();
-  FUN_00145e24(g_renderCtx,temp_v1);
-  puVar5 = *(unsigned int **)(g_handleRegistry + 0x1c);
-  for (puVar4 = *(unsigned int **)(g_handleRegistry + 0x18); puVar4 != puVar5; puVar4 = puVar4 + 1) {
-    holderFlushPending(*puVar4);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

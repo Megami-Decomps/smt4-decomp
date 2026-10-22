@@ -11,7 +11,7 @@ int FUN_002355ac(int);
 int FUN_002636b0(void);
 int FUN_00269dc8(void);
 int messageTargetGetValue(void);
-int FUN_002973d8(void);
+int messageMainGetChoiceResult(void);
 int FUN_0029cc44(int);
 int messageTargetSetValue(unsigned int, int);
 int FUN_0029e648(int, int);
@@ -30,7 +30,7 @@ extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: messageTargetGetValue. */
 extern int messageWindowIsState1(void);
-/* Supplied declaration required: FUN_002973d8. */
+/* Supplied declaration required: messageMainGetChoiceResult. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
@@ -105,7 +105,7 @@ void FUN_00382f4c(int param_1)
   }
   if (*(char *)(param_1 + 0x18) != '\0') {
     FUN_002355ac(0);
-    temp_v2 = FUN_002973d8();
+    temp_v2 = messageMainGetChoiceResult();
     switch(temp_v2) {
     case 0:
       FUN_002636b0();
@@ -149,11 +149,11 @@ void FUN_00382f4c(int param_1)
       *(unsigned int *)(param_1 + 4) = 0xf;
       *(unsigned int *)(param_1 + 8) = 0;
     }
-    temp_v0 = FUN_002973d8();
+    temp_v0 = messageMainGetChoiceResult();
   }
   else {
     FUN_002355ac(0);
-    temp_v0 = FUN_002973d8();
+    temp_v0 = messageMainGetChoiceResult();
     if (temp_v0 != -1) {
       if (temp_v0 != 0) {
         if (temp_v0 != 1) {
@@ -180,10 +180,10 @@ void FUN_00382f4c(int param_1)
       *(unsigned int *)(param_1 + 4) = 0xf;
       messageBannerBeginClose();
     }
-    temp_v0 = FUN_002973d8();
+    temp_v0 = messageMainGetChoiceResult();
   }
   if (temp_v0 != -1) {
-    temp_v2 = FUN_002973d8();
+    temp_v2 = messageMainGetChoiceResult();
     *(unsigned int *)(param_1 + 0xfbc) = temp_v2;
     return;
   }

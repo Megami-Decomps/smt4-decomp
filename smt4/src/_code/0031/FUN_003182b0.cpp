@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern int FUN_0024579c(unsigned int *, unsigned int);
+extern int btlCommandOwnerHasSlotId(unsigned int *, unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
@@ -36,7 +36,7 @@ unsigned int FUN_003182b0(void)
       if (temp_v5) {
         temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
       }
-      if ((temp_v5 && temp_v3 == temp_v0) && (temp_v2 = FUN_0024579c(puVar4,temp_v1), temp_v2 != 0)) {
+      if ((temp_v5 && temp_v3 == temp_v0) && (temp_v2 = btlCommandOwnerHasSlotId(puVar4,temp_v1), temp_v2 != 0)) {
         scrSetResult(1);
         return 1;
       }

@@ -1,49 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015f258` (_code @ 0x15f258, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent program arrays need separate literal loads with the current declarations. */
+#include "shard/DrawPacketPreset.h"
 
 extern "C" {
+void paramsClearPacket(Params002c312c *packet);
+void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
+                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
+                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+extern const u8 DAT_005265b4[];
+extern const u8 DAT_005266c8[];
+extern const u8 DAT_00526794[];
+extern const u8 DAT_005267e8[];
 
-int paramsInit(unsigned int *, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int paramsClearPacket(unsigned int *);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char DAT_005265b4; /* 0x5265b4 */
-extern unsigned char DAT_005266c8; /* 0x5266c8 */
-extern unsigned char DAT_00526794; /* 0x526794 */
-extern unsigned char DAT_005267e8; /* 0x5267e8 */
-
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_0015f258(unsigned int *param_1)
-
+void FUN_0015f258(DrawPacketPreset *preset)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  *(unsigned char *)(param_1 + 0x105) = 1;
-  *(unsigned char *)((int)param_1 + 0x415) = 1;
-  param_1[0x107] = 0;
-  param_1[0x106] = 0;
-  paramsClearPacket(param_1 + 0x108);
-  paramsInit(param_1 + 0x108,&DAT_005265b4,0x114,&DAT_005266c8,0xcc,&DAT_00526794,0x54,0,0,
-               &DAT_005267e8,0x94c);
-  return;
+    preset->unk000[0] = 0;
+    preset->unk000[1] = 0;
+    preset->unk000[2] = 0;
+    preset->unk000[3] = 0;
+    preset->unk000[4] = 0;
+    preset->unk414 = 1;
+    preset->unk415 = 1;
+    preset->unk41c = 0;
+    preset->unk418 = 0;
+    paramsClearPacket(&preset->packet);
+    paramsInit(&preset->packet, DAT_005265b4, 0x114, DAT_005266c8, 0xcc,
+               DAT_00526794, 0x54, 0, 0, DAT_005267e8, 0x94c);
 }
-
-} /* extern "C" */
+}

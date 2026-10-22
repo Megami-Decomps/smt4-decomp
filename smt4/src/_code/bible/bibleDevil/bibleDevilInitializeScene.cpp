@@ -56,7 +56,7 @@ void *asdOperatorNew(u32);
 void _ZN9Obj422594C1Ev(FlaggedEntry *);
 void FUN_0022d434(BibleScreen *);
 void partyIdsReset(u16 *);
-void FUN_0022dde8(u16 *, u16);
+void devilListMarkOrInsertQualifiedEntry(u16 *, u16);
 s32 rangeLimitMin(FlaggedEntry *);
 void uiInitializeEightTimerSet(void *);
 void FUN_00233670(void *, u32, u32, s32);
@@ -91,11 +91,11 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     controller->rectangle = fields->rectangle;
     FUN_0022d434(screen);
     partyIdsReset(fields->pending);
-    FUN_0022dde8(fields->pending, 0);
+    devilListMarkOrInsertQualifiedEntry(fields->pending, 0);
     s32 count = rangeLimitMin(&fields->selection.cursor);
     for (s32 i = 0; i < count; ++i) {
         if (fields->rows[i].id)
-            FUN_0022dde8(fields->pending, (u16)fields->rows[i].id);
+            devilListMarkOrInsertQualifiedEntry(fields->pending, (u16)fields->rows[i].id);
     }
     uiInitializeEightTimerSet(fields->widget);
     s32 visible = fields->selection.list.count;

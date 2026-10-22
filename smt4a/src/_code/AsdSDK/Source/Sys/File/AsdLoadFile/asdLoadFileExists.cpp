@@ -8,7 +8,7 @@ extern "C" {
 extern u8 g_asdLoadFileUseRawPaths;
 void rt_aeabi_memclr(void *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
-s32 FUN_0019dbb8(const char *);
+s32 asdLoadFileHasDevice(const char *);
 u32 asdFileHashPackIsOpen();
 u32 FUN_001860e4(const char *);
 s32 refIsNullOrZero(FileProbeConversionState *);
@@ -50,7 +50,7 @@ extern "C" u32 asdLoadFileExists(const char *path)
     u16 widePath[264];
     char fullPath[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(fullPath, sizeof(fullPath));
-    if (g_asdLoadFileUseRawPaths || FUN_0019dbb8(path)) {
+    if (g_asdLoadFileUseRawPaths || asdLoadFileHasDevice(path)) {
         textFormatBuffer(fullPath, path);
     } else {
         textFormatBuffer(fullPath, "rom:/%s", path);

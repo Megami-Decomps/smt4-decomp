@@ -7,7 +7,7 @@ extern "C" {
 int effectForwardModeOne(int, unsigned int, int, int);
 int FUN_00231434(int, int, int [4], unsigned int [2]);
 int FUN_002319c0(void);
-int FUN_0039ac64(...);
+int keyListFindAdjacentKey(...);
 int NaviMain_GetCursorPos(int);
 int NaviMain_SetCursorPos(int, unsigned int **);
 
@@ -43,7 +43,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00231434. */
 /* Supplied declaration required: FUN_002319c0. */
 extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_0039ac64. */
+/* Supplied declaration required: keyListFindAdjacentKey. */
 /* Supplied declaration required: NaviMain_GetCursorPos. */
 /* Supplied declaration required: NaviMain_SetCursorPos. */
 
@@ -114,7 +114,7 @@ unsigned int FUN_0039b648(int param_1)
         return 1;
       }
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
-      FUN_0039ac64(param_1,1);
+      keyListFindAdjacentKey(param_1,1);
       if (temp_v2 != 0) {
         *(char *)(param_1 + 0x60) = (char)temp_v2;
       }
@@ -187,7 +187,7 @@ unsigned int FUN_0039b648(int param_1)
         return 1;
       }
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
-      FUN_0039ac64(param_1,0xffffffff);
+      keyListFindAdjacentKey(param_1,0xffffffff);
       if (temp_v2 != 0) {
         *(char *)(param_1 + 0x60) = (char)temp_v2;
       }

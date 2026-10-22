@@ -1,73 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00281788` (_code @ 0x281788, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: literal pool order (retail places the 0.0f before the table address) swaps r5/r6
+ * and moves two scheduled instructions; the stores otherwise match. */
+#include "shard/S1Mover.h"
+
+/* One culling volume (0x178 bytes): eight corners, a center and six bounding planes. */
+struct CullVolume {
+    /* 0x000 */ Vec3f corners[8];
+    /* 0x060 */ u8 unk060[0xc];
+    /* 0x06c */ Vec3f center;
+    /* 0x078 */ u8 unk078[4];
+    /* 0x07c */ Vec3f planeNormals[6];
+    /* 0x0c4 */ f32 planeDistances[6];
+    /* 0x0dc */ u8 unk0dc[0x80];
+    /* 0x15c */ u16 unk15c;
+    /* 0x15e */ u8 unk15e[8];
+    /* 0x166 */ u16 unk166;
+    /* 0x168 */ u16 unk168;
+    /* 0x16a */ u16 unk16a;
+    /* 0x16c */ u8 unk16c;
+    /* 0x16d */ u8 unk16d;
+    /* 0x16e */ u8 unk16e[6];
+    /* 0x174 */ u16 unk174;
+    /* 0x176 */ u16 unk176;
+};
+
+struct CullVolumeCounts {
+    /* 0x00 */ s32 count;
+    /* 0x04 */ s32 unk04;
+};
+
+struct GameStateCullView {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ s32 cullVolume; /* -1: none */
+};
 
 extern "C" {
+extern CullVolumeCounts DAT_00447a28;
+extern CullVolume DAT_004a1264[160];
+extern GameStateCullView g_gameState;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned int DAT_00447a28; /* 0x447a28 */
-extern unsigned int DAT_00447a2c; /* 0x447a2c */
-extern unsigned int DAT_0049f954; /* 0x49f954 */
-extern unsigned char DAT_004a1264; /* 0x4a1264 */
-
-
+/* Clears every culling volume and the volume counts. */
 void FUN_00281788(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  
-  temp_v5 = 0;
-  DAT_00447a28 = 0;
-  do {
-    temp_v3 = 0;
-    temp_v4 = 8;
-    temp_v0 = temp_v5 * 0x178;
-    do {
-      temp_v4 = temp_v4 - 1;
-      puVar6 = (unsigned int *)(&DAT_004a1264 + temp_v3 * 0xc + temp_v0);
-      temp_v3 = temp_v3 + 1;
-      *puVar6 = 0;
-      puVar6[1] = 0;
-      puVar6[2] = 0;
-    } while (temp_v4 != 0);
-    *(unsigned int *)(temp_v0 + 0x4a12d0) = 0;
-    *(unsigned int *)(temp_v0 + 0x4a12d4) = 0;
-    temp_v3 = 0;
-    temp_v4 = 6;
-    *(unsigned int *)(temp_v0 + 0x4a12d8) = 0;
-    do {
-      temp_v1 = temp_v3 * 4;
-      temp_v2 = temp_v3 * 0xc + temp_v0;
-      temp_v4 = temp_v4 - 1;
-      *(unsigned int *)(&DAT_004a1264 + temp_v2 + 0x7c) = 0;
-      *(unsigned int *)(&DAT_004a1264 + temp_v2 + 0x80) = 0;
-      *(unsigned int *)(&DAT_004a1264 + temp_v2 + 0x84) = 0;
-      temp_v3 = temp_v3 + 1;
-      *(unsigned int *)(&DAT_004a1264 + temp_v1 + temp_v0 + 0xc4) = 0;
-    } while (temp_v4 != 0);
-    temp_v5 = temp_v5 + 1;
-    *(unsigned short *)(temp_v0 + 0x4a13d8) = 0;
-    *(unsigned short *)(temp_v0 + 0x4a13da) = 0;
-    *(unsigned short *)(temp_v0 + 0x4a13c0) = 0;
-    *(unsigned short *)(temp_v0 + 0x4a13ca) = 0;
-    *(unsigned short *)(temp_v0 + 0x4a13cc) = 0;
-    *(unsigned short *)(temp_v0 + 0x4a13ce) = 0;
-    *(unsigned char *)(temp_v0 + 0x4a13d0) = 0;
-    *(unsigned char *)(temp_v0 + 0x4a13d1) = 0;
-  } while (temp_v5 < 0xa0);
-  DAT_00447a2c = 0;
-  DAT_0049f954 = 0xffffffff;
-  return;
+    DAT_00447a28.count = 0;
+    for (s32 i = 0; i < 160; i++) {
+        CullVolume *volume = &DAT_004a1264[i];
+        for (s32 j = 0; j < 8; j++) {
+            volume->corners[j].x = 0.0f;
+            volume->corners[j].y = 0.0f;
+            volume->corners[j].z = 0.0f;
+        }
+        volume->center.x = 0.0f;
+        volume->center.y = 0.0f;
+        volume->center.z = 0.0f;
+        for (s32 j = 0; j < 6; j++) {
+            volume->planeNormals[j].x = 0.0f;
+            volume->planeNormals[j].y = 0.0f;
+            volume->planeNormals[j].z = 0.0f;
+            volume->planeDistances[j] = 0.0f;
+        }
+        volume->unk174 = 0;
+        volume->unk176 = 0;
+        volume->unk15c = 0;
+        volume->unk166 = 0;
+        volume->unk168 = 0;
+        volume->unk16a = 0;
+        volume->unk16c = 0;
+        volume->unk16d = 0;
+    }
+    DAT_00447a28.unk04 = 0;
+    g_gameState.cullVolume = -1;
 }
-
-} /* extern "C" */
+}

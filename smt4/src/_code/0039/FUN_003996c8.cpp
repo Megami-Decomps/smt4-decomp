@@ -33,7 +33,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00231bcc. */
-extern unsigned char FUN_00231ca4(int context, float angle);
+extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: FUN_00232554. */
 extern float *lmapSceneGetObj(void);
@@ -199,14 +199,14 @@ LAB_003998fc:
       temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x121c8),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
     }
-    temp_v3 = FUN_00231ca4(param_1,*(float*)(param_1 + 0x121d4));
+    temp_v3 = mathHeadingToDirectionCode(param_1,*(float*)(param_1 + 0x121d4));
     if (*(char *)(temp_v2 + 0xd5a) != '\f') {
       FUN_00231bcc(param_1 + 0x164,temp_v3 + 0xbd5,(int)temp_v8,(int)temp_v9,0xb,1);
     }
     else {
       FUN_00231bcc(param_1 + 0x164,temp_v3 + 0xbc1,(int)temp_v8,(int)temp_v9,0xb,1);
     }
-    temp_v3 = FUN_00231ca4(param_1,*(float*)(param_1 + 0x121d0));
+    temp_v3 = mathHeadingToDirectionCode(param_1,*(float*)(param_1 + 0x121d0));
     if (*(char *)(temp_v2 + 0xd5a) != '\f') {
       FUN_00231bcc(param_1 + 0x164,temp_v3 + 0xbcd,(int)temp_v8,(int)temp_v9,0xb,1);
     }

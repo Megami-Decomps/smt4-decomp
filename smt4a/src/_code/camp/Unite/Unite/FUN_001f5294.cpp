@@ -10,12 +10,12 @@ u32 contentBuildWordList(u32 unused, u32 id, ContentWordList* output);
 int FUN_00178b04(...);
 int slotSetRequest(...);
 int FUN_001ff014(...);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int FUN_002a74ac(void);
 int sysMemClear(...);
 int FUN_0031db84(...);
 int FUN_0032fea0(...);
-int FUN_003315c4(void);
+int uniteReleaseExit(void);
 int FUN_0034c340(...);
 int FUN_003857b4(...);
 int pairLogDestroy(void);
@@ -55,7 +55,7 @@ int uiSpriteSelectAnim(...);
 int FUN_0022e774(void);
 int recordGetModeForId(...);
 int FUN_0028a538(...);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int flaggedEntrySetValueA(...);
 int FUN_003343c0(...);
 int objBInitBlock19D0(...);
@@ -112,7 +112,7 @@ int FUN_0031fd08(...);
 int findSkillMetadataById(void);
 int bitsAt60Test(...);
 int FUN_004da77c(...);
-int FUN_004daf18(...);
+int entryDefIsAvailable(...);
 
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
@@ -249,7 +249,7 @@ extern unsigned long long FUN_00229210(int);
 extern int FUN_0022e714(void);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_00231574. */
-extern int FUN_00239480(void);
+extern int messageMainIsWindowActive(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern int FUN_0023b3b8(void);
@@ -278,8 +278,8 @@ extern int FUN_002a4878(int *);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
-/* Supplied declaration required: FUN_002a7288. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusDownRestartTransition. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 extern int FUN_002a748c(void);
 /* Supplied declaration required: FUN_002a74ac. */
@@ -315,7 +315,7 @@ extern int flaggedEntryGetValueA(int *);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_003315c4. */
+/* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00333dc8. */
 extern int gameGlobalsGetState(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
@@ -397,7 +397,7 @@ extern unsigned int FUN_004d0cd4(void);
 /* Supplied declaration required: FUN_004da6e0. */
 /* Supplied declaration required: FUN_004da77c. */
 extern int FUN_004dad8c(int);
-/* Supplied declaration required: FUN_004daf18. */
+/* Supplied declaration required: entryDefIsAvailable. */
 /* Supplied declaration required: FUN_004db07c. */
 /* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 extern int FUN_004db65c(int, unsigned short, unsigned short, int *);
@@ -945,7 +945,7 @@ unsigned int FUN_001f5294(void)
         FUN_00183f58(2,0,0,1);
       }
     }
-    if (((char)piVar3[0x2424] != '\0') || (temp_v5 = FUN_00239480(), temp_v5 == 0)) {
+    if (((char)piVar3[0x2424] != '\0') || (temp_v5 = messageMainIsWindowActive(), temp_v5 == 0)) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
     }
@@ -1424,7 +1424,7 @@ LAB_001f6b9c:
             *(char *)(temp_v4 + 0x43) = (char)temp_v6;
             do {
               temp_v5 = *piVar3;
-              FUN_004daf18(temp_v5,puVar15);
+              entryDefIsAvailable(temp_v5,puVar15);
               if (temp_v5 != 0) {
                 puVar12 = puVar15;
                 FUN_00184310();
@@ -1490,7 +1490,7 @@ LAB_001f707c:
             puVar15 = (unsigned short *)0x0;
             do {
               temp_v5 = *piVar3;
-              FUN_004daf18(temp_v5,puVar15);
+              entryDefIsAvailable(temp_v5,puVar15);
               if (temp_v5 != 0) {
                 puVar12 = puVar15;
                 FUN_00184310();
@@ -1804,7 +1804,7 @@ LAB_001f732c:
     if (*(char *)(temp_v4 + 0x38) == '\0') {
       FUN_00231574();
     }
-    temp_v5 = FUN_00239480();
+    temp_v5 = messageMainIsWindowActive();
     if (temp_v5 == 0) {
       piVar3[0xff] = piVar3[0xff] + 1;
       return 0;
@@ -2140,7 +2140,7 @@ LAB_001f77ec:
           FUN_0032d0c8(0,1,(piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf,ppiVar16);
         }
         FUN_0037e1b0((int)(char)piVar3[0x1a0c],1);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
       }
     }
     temp_v28 = (int *)recordGetModeForId((int)(short)piVar3[0x117]);
@@ -2377,7 +2377,7 @@ LAB_001f77ec:
                       if ((char)piVar3[0x1a0c] != '\0') {
                         *(unsigned char *)(piVar3 + 0x1a0c) = 0;
                         FUN_0031f718((piVar3[temp_v47[0] * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
-                        FUN_002a7324(1);
+                        statusPanelSetOpen(1);
                       }
                       FUN_0037e1b0(0xffffffff,1);
                       temp_v15 = 0x100020e;
@@ -2614,7 +2614,7 @@ LAB_001f8d58:
     FUN_0033449c(1);
     FUN_003343c0(0);
     FUN_002c8550(9);
-    FUN_002a7324(0);
+    statusPanelSetOpen(0);
     FUN_0019de98(0,0xf4f4f4ff);
     piVar3[0x103] = 0x13;
     FUN_0020b908(0x24,0);
@@ -2831,7 +2831,7 @@ LAB_001f9868:
           FUN_002c8550(2);
           FUN_0033449c(0);
           statusDisplayBindUnitRecord(piVar3 + 0x19a7,0,0);
-          FUN_002a7324(0);
+          statusPanelSetOpen(0);
           piVar3[0x103] = 0xf;
           FUN_0020b908(0x24,0);
         }
@@ -3119,7 +3119,7 @@ LAB_001f9868:
     }
     FUN_002c8550(2);
     FUN_0022e774();
-    FUN_002a7288();
+    statusDownRestartTransition();
     FUN_003343f0(0);
     FUN_00333dc8(0);
     FUN_002a74ac();
@@ -3648,7 +3648,7 @@ LAB_001fac1c:
           temp_v4 = FUN_0022e714();
           if (temp_v4 == 0) {
             FUN_0037e1b0((int)(char)piVar3[0x1a0c],1);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
           }
         }
       }
@@ -3868,7 +3868,7 @@ LAB_001fb9c4:
                   if ((char)temp_v33[0xc] != '\0') {
                     *(unsigned char *)(piVar3 + 0x1a0c) = 0;
                     FUN_0031f718((int)(short)temp_v46[0xe],0,0);
-                    FUN_002a7324(1);
+                    statusPanelSetOpen(1);
                   }
                   FUN_0037e1b0(0xffffffff,1);
                   temp_v15 = 0x100020e;
@@ -3959,7 +3959,7 @@ joined_r0x001fbbe8:
                              piVar3 + 0x4ee);
         if (temp_v6 != 0) {
           FUN_0031f718((piVar3[0x4ef] & 0x1ffffU) >> 2,0);
-          FUN_002a7324(1);
+          statusPanelSetOpen(1);
           temp_v10 = (piVar3[0x4ef] & 0x1ffffU) >> 2;
           temp_v7 = temp_v10 << 2;
           piVar3[0x4f1] = (piVar3[0x4f1] & 0xfffe0003U) | temp_v7;
@@ -3983,7 +3983,7 @@ joined_r0x001fbbe8:
   case 0x20:
     temp_v4 = engineCleanupIsDone();
     if (temp_v4 != 0) {
-      FUN_003315c4();
+      uniteReleaseExit();
       FUN_0039c744();
     }
     piVar3[0xff] = piVar3[0xff] + 1;
@@ -3991,7 +3991,7 @@ joined_r0x001fbbe8:
   case 0x21:
     temp_v4 = engineCleanupIsDone();
     if (temp_v4 != 0) {
-      FUN_003315c4();
+      uniteReleaseExit();
       fusionPrepareSpecialRecipeList();
     }
     piVar3[0xff] = piVar3[0xff] + 1;
@@ -4059,7 +4059,7 @@ joined_r0x001fbbe8:
           }
         }
         FUN_0037e1b0((int)(char)piVar3[0x1a0c],1);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
       }
       if (piVar3[0x102] == 0x1c) {
         temp_v29 = piVar3 + 0x1480;
@@ -4127,7 +4127,7 @@ LAB_001fc128:
           }
         }
         FUN_0037e1b0((int)(char)piVar3[0x1a0c],1);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
       }
     }
     temp_v4 = FUN_002a7410();

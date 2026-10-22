@@ -1,66 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004feb50` (_code @ 0x4feb50, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int FUN_001568f8(int, int);
-int FUN_004102d8(int, int, int, unsigned int);
+/* The record an action is raised for (Apocalypse layout). */
+struct BtlActionSourceA {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 status;
+    /* 0x54 */ u8 unk54[0x16];
+    /* 0x6A */ s16 memberId;
+};
 
-extern int g_btlActionReflect; /* 0x5712f0 */
+/* A queued battle action (kind 0x30 is bound to a source record). */
+struct BattleActionA {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 argument;
+    /* 0x0C */ BattleActionA *next;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ BtlActionSourceA *source;
+    /* 0x18 */ u8 unk18[0xc];
+    /* 0x24 */ s16 member;
+    /* 0x26 */ s16 memberId;
+    /* 0x28 */ u32 value;
+};
 
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
-extern int idSetFindSubjectIndex(unsigned int, int);
-/* Supplied declaration required: FUN_004102d8. */
+struct BattleActionQueueA {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ BattleActionA *head;
+};
 
+struct BattleParty {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0C */ u32 ids[1];
+};
 
-int FUN_004feb50(short param_1,unsigned int param_2,int param_3,unsigned int param_4)
+extern BattleActionQueueA *g_btlActionReflect;
+void *btlGetMainState(void);
+BattleActionA *FUN_004102d8(BattleActionQueueA *queue, s16 id, u32 mode, u32 argument);
+BattleParty *FUN_001568f8(void *state, s32 memberId);
+s32 idSetFindSubjectIndex(void *state, BtlActionSourceA *source);
 
+/* Queues a kind-0x30 action for an active source record unless one with the same argument is already queued. */
+BattleActionA *FUN_004feb50(s32 id, u32 argument, BtlActionSourceA *source, u32 value)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  
-  if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0) {
-    temp_v0 = *(int *)(g_btlActionReflect + 8);
-    do {
-      if (temp_v0 == 0) {
-        temp_v0 = g_btlActionReflect;
-        FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-        temp_v1 = btlGetMainState();
-        FUN_001568f8(temp_v1,(int)*(short *)(param_3 + 0x6a));
-        temp_v2 = btlGetMainState();
-        temp_v3 = idSetFindSubjectIndex(temp_v2,param_3);
-        if (temp_v3 < 0) {
-          temp_v3 = 0;
+    BattleActionA *action;
+    BattleActionA *next;
+    BattleParty *party;
+    s32 index;
+
+    if (!(source->status & 1)) {
+        return NULL;
+    }
+    for (action = g_btlActionReflect->head; action != NULL; action = next) {
+        next = action->next;
+        if (action->kind == 0x30 && action->argument == argument && action->source == source) {
+            return NULL;
         }
-        *(unsigned char *)(temp_v0 + 4) = 0x30;
-        *(int *)(temp_v0 + 0x14) = param_3;
-        *(unsigned int *)(temp_v0 + 0x28) = param_4;
-        *(short *)(temp_v0 + 0x24) = (short)*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0xc);
-        *(unsigned short *)(temp_v0 + 0x26) = *(unsigned short *)(param_3 + 0x6a);
-        return temp_v0;
-      }
-      temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 4);
-      temp_v5 = temp_v4 == 0x30;
-      if (temp_v5) {
-        temp_v4 = *(unsigned int *)(temp_v0 + 8);
-      }
-      temp_v6 = temp_v5 && temp_v4 == param_2;
-      if (temp_v5 && temp_v4 == param_2) {
-        temp_v6 = *(int *)(temp_v0 + 0x14) == param_3;
-      }
-      temp_v0 = *(int *)(temp_v0 + 0xc);
-    } while (!temp_v6);
-  }
-  return 0;
+    }
+    action = FUN_004102d8(g_btlActionReflect, (s16)id, 0, argument);
+    party = FUN_001568f8(btlGetMainState(), source->memberId);
+    index = idSetFindSubjectIndex(btlGetMainState(), source);
+    if (index < 0) {
+        index = 0;
+    }
+    action->kind = 0x30;
+    action->source = source;
+    action->value = value;
+    action->member = party->ids[index];
+    action->memberId = source->memberId;
+    return action;
 }
 
 } /* extern "C" */

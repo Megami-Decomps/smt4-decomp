@@ -1,73 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c49bc` (_code @ 0x3c49bc, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the byte value in r0 and the setting address in r1 (built swaps them) and shares the word store of cases 4 and 5 */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00435e00; /* 0x435e00 */
-extern unsigned char DAT_00435e01; /* 0x435e01 */
-extern unsigned char DAT_00435e02; /* 0x435e02 */
-extern unsigned char DAT_00435e03; /* 0x435e03 */
-extern unsigned int DAT_00435e04; /* 0x435e04 */
-extern unsigned int DAT_00435e08; /* 0x435e08 */
-extern unsigned int DAT_00435e20; /* 0x435e20 */
+extern u8 DAT_00435e00;
+extern u8 DAT_00435e01;
+extern u8 DAT_00435e02;
+extern u8 DAT_00435e03;
+extern u32 DAT_00435e04;
+extern u32 DAT_00435e08;
+extern u32 DAT_00435e20;
 
-extern unsigned int *asdListBoxGetItemText(unsigned int, unsigned int);
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
+u32 asdListBoxGetSelectedItemId(void *listBox);
+u32 *asdListBoxGetItemValuePtr(void *listBox, u32 itemId);
+u32 *asdListBoxGetItemText(void *listBox, u32 itemId);
 
+typedef struct {
+    u8 unk0[0x10];
+    void *listBox;  /* 0x10 */
+} DebugSettingsMenu;
 
-void FUN_003c49bc(int param_1)
-
+/* Stores the selected list box item's value into the debug setting it edits. */
+void FUN_003c49bc(DebugSettingsMenu *menu)
 {
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
-  
-  temp_v1 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
-  switch(temp_v1) {
-  case 0:
-    puVar3 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),0);
-    temp_v0 = (unsigned char)*puVar3;
-    puVar4 = &DAT_00435e00;
-    break;
-  case 1:
-    puVar3 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),1);
-    temp_v0 = (unsigned char)*puVar3;
-    puVar4 = &DAT_00435e01;
-    break;
-  case 2:
-    puVar3 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),2);
-    temp_v0 = (unsigned char)*puVar3;
-    puVar4 = &DAT_00435e02;
-    break;
-  case 3:
-    puVar3 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),3);
-    temp_v0 = (unsigned char)*puVar3;
-    puVar4 = &DAT_00435e03;
-    break;
-  case 4:
-    puVar3 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),4);
-    temp_v1 = *puVar3;
-    puVar3 = &DAT_00435e04;
-    *puVar3 = temp_v1;
-    return;
-  case 5:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),5);
-    temp_v1 = *puVar3;
-    puVar3 = &DAT_00435e08;
-    *puVar3 = temp_v1;
-    return;
-  case 6:
-    puVar3 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10),6);
-    DAT_00435e20 = *puVar3;
-    return;
-  default:
-    return;
-  }
-  *puVar4 = temp_v0;
-  return;
+    u8 *flag;
+    u8 value;
+
+    switch (asdListBoxGetSelectedItemId(menu->listBox)) {
+    case 0:
+        value = *asdListBoxGetItemValuePtr(menu->listBox, 0);
+        flag = &DAT_00435e00;
+        break;
+    case 1:
+        value = *asdListBoxGetItemValuePtr(menu->listBox, 1);
+        flag = &DAT_00435e01;
+        break;
+    case 2:
+        value = *asdListBoxGetItemValuePtr(menu->listBox, 2);
+        flag = &DAT_00435e02;
+        break;
+    case 3:
+        value = *asdListBoxGetItemValuePtr(menu->listBox, 3);
+        flag = &DAT_00435e03;
+        break;
+    case 4:
+        DAT_00435e04 = *asdListBoxGetItemValuePtr(menu->listBox, 4);
+        return;
+    case 5:
+        DAT_00435e08 = *asdListBoxGetItemText(menu->listBox, 5);
+        return;
+    case 6:
+        DAT_00435e20 = *asdListBoxGetItemText(menu->listBox, 6);
+        return;
+    default:
+        return;
+    }
+    *flag = value;
 }
 
 } /* extern "C" */

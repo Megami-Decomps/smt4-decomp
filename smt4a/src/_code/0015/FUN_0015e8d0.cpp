@@ -1,56 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015e8d0` (_code @ 0x15e8d0, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the stream base (loader + 0x100) is computed before the size check branch instead of after the seek. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00174a00(int, unsigned int, unsigned int, unsigned int *);
-int FUN_00174a64(int, unsigned int, int);
-int FUN_001757b8(int, unsigned int);
+typedef struct SoundArchiveStream {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u8 file[0x18];
+    /* 0x34 */ s32 result;
+    /* 0x38 */ u8 unk38[4];
+} SoundArchiveStream;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+typedef struct SoundArchiveLoader {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ SoundArchiveStream stream;
+    /* 0x13C */ u8 header[0x44];
+    /* 0x180 */ s32 lastResult;
+} SoundArchiveLoader;
 
-/* Supplied declaration required: FUN_00174a00. */
-/* Supplied declaration required: FUN_00174a64. */
-/* Supplied declaration required: FUN_001757b8. */
-extern unsigned int FUN_00178540(int);
-extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(int);
+u32 FUN_00178540(void *header);
+u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(void *header);
+bool FUN_00174a64(void *file, u32 offset, s32 origin);
+bool FUN_00174a00(void *file, void *buffer, u32 size, u32 *readSize);
+void FUN_001757b8(void *header, void *infoBlock);
 
-
-unsigned int FUN_0015e8d0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Reads the sound archive's info block into the buffer and attaches it to the header. */
+bool FUN_0015e8d0(SoundArchiveLoader *loader, void *buffer, u32 bufferSize)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = param_4;
-  temp_v0 = FUN_00178540(param_1 + 0x13c);
-  temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(param_1 + 0x13c);
-  if (param_3 < temp_v1) {
-    return 0;
-  }
-  temp_v2 = param_1 + 0x11c;
-  FUN_00174a64(temp_v2,temp_v0,0);
-  if (temp_v2 != 0) {
-    temp_v3 = 0;
-    temp_v2 = param_1 + 0x11c;
-    FUN_00174a00(temp_v2,param_2,temp_v1,&temp_v3);
-    if (temp_v2 != 0) {
-      if (temp_v3 != temp_v1) {
-        return 0;
-      }
-      FUN_001757b8(param_1 + 0x13c,param_2);
-      return 1;
+    u32 offset = FUN_00178540(loader->header);
+    u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(loader->header);
+    SoundArchiveStream *stream = &loader->stream;
+    u32 readSize;
+
+    if (size > bufferSize) {
+        return false;
     }
-  }
-  *(unsigned int *)(param_1 + 0x180) = *(unsigned int *)(param_1 + 0x134);
-  return 0;
+    if (!FUN_00174a64(loader->stream.file, offset, 0)) {
+        loader->lastResult = stream->result;
+        return false;
+    }
+    readSize = 0;
+    if (!FUN_00174a00(loader->stream.file, buffer, size, &readSize)) {
+        loader->lastResult = stream->result;
+        return false;
+    }
+    if (readSize != size) {
+        return false;
+    }
+    FUN_001757b8(loader->header, buffer);
+    return true;
 }
 
 } /* extern "C" */

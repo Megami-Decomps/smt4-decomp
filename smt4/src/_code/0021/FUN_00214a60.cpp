@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001c0b88(...);
+int screenDrawShadedRect(...);
 int FUN_0025086c(...);
 int FUN_0025090c(...);
 int FUN_0028f4b4(...);
@@ -69,7 +69,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define ROMWRIGHT_PIECE_1_3_DEFINED
 #define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
 #endif
-/* Supplied declaration required: FUN_001c0b88. */
+/* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: FUN_0025086c. */
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_0028f4b4. */
@@ -430,7 +430,7 @@ unsigned int FUN_00214a60(void)
       temp_v23 = (int)afStack_11c[1];
       temp_v24 = afStack_11c[1];
       FUN_002ae038(afStack_11c + 1);
-      FUN_001c0b88(0,0,0x140,0xf0,0xd3);
+      screenDrawShadedRect(0,0,0x140,0xf0,0xd3);
       temp_v4 = g_titleScene;
       piVar14 = (int *)(g_titleScene + 0x124c);
       temp_v17 = *piVar14;

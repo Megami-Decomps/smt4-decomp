@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001a72b0(int *, char [256], unsigned int);
+int pathStripScheme(int *, char [256], unsigned int);
 int wstrlen(...);
 int FUN_002e59f8(char *, char [256], unsigned int);
 int rt_aeabi_memclr(char [256], int);
@@ -18,7 +18,7 @@ typedef struct {
 
 extern char libc_toupper(int);
 extern int libc_strncmp(int, char *, unsigned int);
-/* Supplied declaration required: FUN_001a72b0. */
+/* Supplied declaration required: pathStripScheme. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -63,7 +63,7 @@ int * FUN_001a70dc(int *param_1,char *param_2)
         temp_v2 = wstrlen(param_2);
         FUN_002e59f8(param_2,temp_v10,temp_v2);
         temp_v2 = wstrlen(temp_v10);
-        FUN_001a72b0(param_1,temp_v10,temp_v2);
+        pathStripScheme(param_1,temp_v10,temp_v2);
         temp_v3 = wstrlen(temp_v10);
         if ((int)temp_v3 < 1) {
           temp_v7 = 0;

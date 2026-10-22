@@ -24,7 +24,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00241988; /* 0x241988 */
-extern int FUN_00290af8(...); /* 0x290af8 */
+extern int btlSkillCompareBySortKey(...); /* 0x290af8 */
 extern int FUN_002fe144(...); /* 0x2fe144 */
 extern unsigned int DAT_00571150; /* 0x571150 */
 extern unsigned int DAT_00571154; /* 0x571154 */
@@ -92,7 +92,7 @@ void FUN_004e8668(int *param_1,int param_2)
       qsort(temp_v5,9,2,FUN_002fe144);
     }
     else {
-      qsort(temp_v5,9,2,FUN_00290af8);
+      qsort(temp_v5,9,2,btlSkillCompareBySortKey);
     }
     temp_v2 = 0;
     do {

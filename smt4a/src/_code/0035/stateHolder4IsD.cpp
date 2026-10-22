@@ -1,12 +1,11 @@
-#include "shard/Shard0035.h"
+#include "shard/W5_W5Match7_UiQuest.h"
 
 extern "C" {
 
-extern StateHolder4 *g_uiQuest;
 
 u8 stateHolder4IsD(void)
 {
-    return g_uiQuest->state == 0xD;
+    return g_uiQuest->menuState == 0xD;
 }
 
 } /* extern "C" */

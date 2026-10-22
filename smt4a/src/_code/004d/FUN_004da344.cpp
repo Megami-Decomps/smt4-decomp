@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_004daf18(int, unsigned int);
+int entryDefIsAvailable(int, unsigned int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern unsigned int computeCountLimit(void);
 extern int FUN_004da980(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004daf18. */
+/* Supplied declaration required: entryDefIsAvailable. */
 extern int FUN_004db65c(int, unsigned int, unsigned int, unsigned char *);
 extern int FUN_004dc3b4(int, unsigned int, unsigned int, unsigned char *);
 
@@ -88,7 +88,7 @@ joined_r0x004da498:
       if (param_5 != (unsigned char *)0x0) {
 LAB_004da4c8:
         temp_v0 = FUN_004da980(param_1,param_2,param_3);
-        if ((temp_v0 == 5) || (FUN_004daf18(param_1,(temp_v8 & 0x1ffff) >> 2), param_1 == 0)) {
+        if ((temp_v0 == 5) || (entryDefIsAvailable(param_1,(temp_v8 & 0x1ffff) >> 2), param_1 == 0)) {
           *(unsigned int *)(param_5 + 4) = 1;
         }
         *param_5 = temp_v6;
@@ -110,7 +110,7 @@ LAB_004da4c8:
   }
   if (param_5 != (unsigned char *)0x0) {
     temp_v0 = FUN_004da980(param_1,param_2,param_3);
-    if ((temp_v0 == 5) || (FUN_004daf18(param_1,(temp_v8 & 0x1ffff) >> 2), param_1 == 0)) {
+    if ((temp_v0 == 5) || (entryDefIsAvailable(param_1,(temp_v8 & 0x1ffff) >> 2), param_1 == 0)) {
       *(unsigned int *)(param_5 + 4) = 1;
     }
     *param_5 = temp_v6;

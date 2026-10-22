@@ -11,7 +11,7 @@ int eventQueueAddUnique(int);
 
 extern int FUN_002896bc(void);
 /* Supplied declaration required: slotSetRequest. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -58,7 +58,7 @@ unsigned int FUN_00221310(void)
     }
     break;
   case 1:
-    temp_v2 = FUN_0029d65c((int)*(short *)(temp_v0 + 0x14));
+    temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v0 + 0x14));
     temp_v1 = *(int *)(temp_v0 + 0x18) + 1;
     temp_v3 = (int)(((long long)(int)temp_v1 * -0x77777777 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
     *(unsigned int *)(temp_v0 + 0x18) = temp_v1 + ((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xf;

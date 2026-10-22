@@ -12,7 +12,7 @@ int FUN_001ad9b4(void);
 int partyFindSlotById(int);
 int resultCreate(int);
 int FUN_002f0c18(void);
-int FUN_003315c4(void);
+int uniteReleaseExit(void);
 int FUN_00331714(int *);
 int FUN_0034aae4(void);
 int stateHolder4Request(int);
@@ -67,7 +67,7 @@ extern int FUN_002a746c(void);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_002f0c18. */
 extern unsigned int FUN_0031f8cc(void);
-/* Supplied declaration required: FUN_003315c4. */
+/* Supplied declaration required: uniteReleaseExit. */
 /* Supplied declaration required: FUN_00331714. */
 /* Supplied declaration required: FUN_0034aae4. */
 extern int stateHolder4IsD(void);
@@ -294,7 +294,7 @@ LAB_004689f8:
     if (temp_v2 == 0) {
       return;
     }
-    FUN_003315c4();
+    uniteReleaseExit();
     FUN_001695a0();
     puVar5 = (unsigned short *)(param_1[0x283] & 0xffff);
     FUN_001ad9b4();

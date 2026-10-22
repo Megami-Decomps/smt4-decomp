@@ -56,7 +56,7 @@ extern unsigned int FUN_002319e0(unsigned int, int, int);
 /* Supplied declaration required: FUN_00231ad4. */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern unsigned char FUN_00231ca4(int context, float angle);
+extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: FUN_00232554. */
 extern float *lmapSceneGetObj(int);
@@ -867,11 +867,11 @@ LAB_0039aba4:
   temp_v23 = temp_v23 + 120.0f;
   temp_v15 = temp_v15 + temp_v13;
   if (temp_v12 == 0) {
-    temp_v3 = FUN_00231ca4(temp_v44,FUN_00231d2c(temp_v37));
+    temp_v3 = mathHeadingToDirectionCode(temp_v44,FUN_00231d2c(temp_v37));
     temp_v18 = (int)temp_v23;
     temp_v4 = (int)temp_v15;
     FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbc1,temp_v4,temp_v18,0xb,1);
-    temp_v3 = FUN_00231ca4(temp_v44,NaviMain_GetState());
+    temp_v3 = mathHeadingToDirectionCode(temp_v44,NaviMain_GetState());
     FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbb9,temp_v4,temp_v18,0xb,1);
   }
   FUN_00232554(temp_v44,0);

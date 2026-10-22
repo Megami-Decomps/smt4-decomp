@@ -19,7 +19,7 @@ int FUN_00359974(int, unsigned int, unsigned int, int);
 int uniteCreatePreviewModel(void);
 int panelSetTarget(unsigned int, int);
 int messageSetActiveMode(int);
-int FUN_003c5fc4(...);
+int messageMainSetTargetFlags(...);
 int screen4AEnter(...);
 int FUN_004a34a0(int, int);
 int FUN_004a8750(unsigned int, int, int);
@@ -52,7 +52,7 @@ extern int gameGetMode(void);
 /* Supplied declaration required: uniteCreatePreviewModel. */
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: messageSetActiveMode. */
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: screen4AEnter. */
 /* Supplied declaration required: FUN_004a34a0. */
 /* Supplied declaration required: FUN_004a8750. */
@@ -158,7 +158,7 @@ void FUN_004a41d8(int param_1)
       *(unsigned int *)(param_1 + 0x18) = 0;
       sysPlaySe(0xa0);
     }
-    FUN_003c5fc4(1);
+    messageMainSetTargetFlags(1);
     FUN_003343f0(1);
     sendEvent100020E();
     return;

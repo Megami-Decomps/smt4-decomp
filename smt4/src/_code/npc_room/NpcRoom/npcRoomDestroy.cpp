@@ -11,7 +11,7 @@ void scrScriptProcessDestroy(void *process);
 void asdTMTexTableReleaseNode(s32 arg, u32 value);
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
-void FUN_00323f40(void);
+void messageMainClearBannerRequest(void);
 
 extern NpcRoom *g_npcRoom;
 
@@ -22,7 +22,7 @@ void npcRoomDestroy(void)
     s32 i;
 
     if (g_npcRoom != NULL) {
-        FUN_00323f40();
+        messageMainClearBannerRequest();
         if (room->mode == NPC_ROOM_MODE_SPECIAL) {
             soundChannelStopAll(0xF);
             bgmFadeOut(0x3C);

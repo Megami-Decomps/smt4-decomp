@@ -3,6 +3,7 @@
 #define SHARD_S1NWGFX_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* nw::ut::RelativePointer */
 typedef struct RelativePointer {
@@ -52,7 +53,8 @@ struct VertexBufferResource {
     /* 0x00 */ u32 flags;
     /* 0x04 */ u8 unk04[0x28];
     /* 0x2C */ u32 count;
-    /* 0x30 */ u8 unk30[8];
+    /* 0x30 */ u32 unk30;
+    /* 0x34 */ u8 unk34[4];
     /* 0x38 */ RelativePointer streams[6];
 
     static VertexBufferResource *cast(void *object)
@@ -66,5 +68,8 @@ struct VertexBufferResource {
         return (VertexBufferStorage *)streams[index].get();
     }
 };
+typedef char VertexBufferResourceLayoutCheck[sizeof(VertexBufferResource) == 0x50 &&
+    offsetof(VertexBufferResource, unk30) == 0x30 &&
+    offsetof(VertexBufferResource, streams) == 0x38 ? 1 : -1];
 
 #endif

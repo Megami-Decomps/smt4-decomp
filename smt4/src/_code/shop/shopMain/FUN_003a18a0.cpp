@@ -17,7 +17,7 @@ int FUN_00232848(void);
 int FUN_00233240(int, int);
 int FUN_002992e0(int);
 int FUN_002996d8(int);
-int FUN_00299d84(...);
+int gameSetStatusCameraHeightMode(...);
 int nodeSetTranslation3f(unsigned int, int);
 int beginStatusPanelClose(void);
 int FUN_002a0428(int, int);
@@ -49,11 +49,11 @@ extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_002992e0. */
 /* Supplied declaration required: FUN_002996d8. */
-/* Supplied declaration required: FUN_00299d84. */
+/* Supplied declaration required: gameSetStatusCameraHeightMode. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: beginStatusPanelClose. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
@@ -92,18 +92,18 @@ void FUN_003a18a0(int param_1)
       else {
         temp_v1 = 0;
       }
-      FUN_00299d84(temp_v1);
+      gameSetStatusCameraHeightMode(temp_v1);
     }
     else {
-      FUN_00299d84(1);
+      gameSetStatusCameraHeightMode(1);
     }
   }
   FUN_0022fbc0(param_1);
   FUN_0022fb64(param_1);
   temp_v0 = inputIsQuestRepeatRight();
-  if ((temp_v0 == 0) && (temp_v0 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4c)), temp_v0 != 6)) {
+  if ((temp_v0 == 0) && (temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4c)), temp_v0 != 6)) {
     temp_v0 = inputIsQuestRepeatLeft();
-    if (((temp_v0 != 0) || (temp_v0 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4e)), temp_v0 == 6)) &&
+    if (((temp_v0 != 0) || (temp_v0 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4e)), temp_v0 == 6)) &&
        (*(int *)(param_1 + 0x860) != 7)) {
       if (*(int *)(param_1 + 0x860) == 3) {
         FUN_002992e0(0);
@@ -143,7 +143,7 @@ void FUN_003a18a0(int param_1)
       else {
         temp_v1 = 1;
       }
-      FUN_00299d84(temp_v1);
+      gameSetStatusCameraHeightMode(temp_v1);
     }
   }
   else if (*(int *)(param_1 + 0x860) != 7) {
@@ -184,7 +184,7 @@ void FUN_003a18a0(int param_1)
     else {
       temp_v1 = 1;
     }
-    FUN_00299d84(temp_v1);
+    gameSetStatusCameraHeightMode(temp_v1);
   }
   temp_v0 = inputIsQuestMenuPressed();
   if (temp_v0 != 0) {

@@ -20,7 +20,7 @@ s32 scrCommMapPlace(void)
         gameFlagSetValue(0x11F9, 0, 1);
     }
     mapPlaceSet(a, b, c);
-    g_gameState.unk574 = 0;
+    g_gameState.transitionActive = 0;
     return 1;
 }
 

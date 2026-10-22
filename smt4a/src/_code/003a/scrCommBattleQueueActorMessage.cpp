@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail duplicates return epilogues and schedules outgoing stack stores later; alternate optimization may fix these differences. */
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
-#include "shard/W6_W6Match2_ReflectAction.h"
+#include "battle/btlReflect.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 struct BattleMessageTable;

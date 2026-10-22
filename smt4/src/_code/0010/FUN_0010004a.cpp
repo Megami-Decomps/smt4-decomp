@@ -1,54 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010004a` (_code @ 0x10004a, 0x9e bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail movs r4, r0 differs from recovered mov r4, r0. */
+#include "common.h"
+
+struct InputStateView {
+    u8 unk00[0x100]; // 0x000
+    u8 unk100;      // 0x100
+};
+
+struct InputStateHandleView {
+    InputStateView* state; // 0x00
+};
+
+struct KeyRangeView {
+    u16 firstKey;        // 0x00
+    u16 lengthAndBits;   // 0x02: low 14 bits are length
+    u16 packedSelectors; // 0x04
+};
 
 extern "C" {
-
-extern unsigned int inputGetKeyFlags(unsigned int);
-extern int *FUN_002c6a50(void);
-
-
-unsigned int FUN_0010004a(unsigned int param_1)
-
-{
-  int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  piVar2 = (int *)FUN_002c6a50();
-  if (*(char *)(*piVar2 + 0x100) == '\0') {
-    temp_v1 = inputGetKeyFlags(param_1);
-    return temp_v1;
-  }
-  if (param_1 < 0x10000) {
-    temp_v0 = -1;
-    temp_v4 = 0x2e3;
-    while (temp_v3 = temp_v0, temp_v4 - temp_v3 >= 2) {
-      temp_v2 = (temp_v3 + temp_v4) / 2;
-      temp_v5 = temp_v2 * 6;
-      if (((param_1 - *(unsigned short *)(temp_v5 + 0x41801c)) & 0xffff) <
-          (*(unsigned short *)(temp_v5 + 0x41801e) & 0x3fff)) {
-        if (temp_v4 - temp_v3 < 2) {
-          return 0;
-        }
-        return *(unsigned int *)
-                ((*(unsigned short *)(temp_v5 + 0x418020) >>
-                  (((param_1 - *(unsigned short *)(temp_v2 * 6 + 0x41801c)) &
-                    ~(-1 << (unsigned int)(*(unsigned short *)(temp_v5 + 0x41801e) >> 0xe)) & 0x3f) << 2) & 0xf) * 4 +
-                0x417fe4);
-      }
-      temp_v0 = temp_v2;
-      if ((int)param_1 < (int)(unsigned int)*(unsigned short *)(temp_v5 + 0x41801c)) {
-        temp_v0 = temp_v3;
-        temp_v4 = temp_v2;
-      }
-    }
-  }
-  return 0;
+extern InputStateHandleView* FUN_002c6a50(void);
+extern u32 inputGetKeyFlags(u32 keyCode);
 }
 
-} /* extern "C" */
+// Resolve alternate-state key flags with a binary search of packed key ranges.
+extern "C" u32 FUN_0010004a(u32 keyCode)
+{
+    InputStateHandleView* handle = FUN_002c6a50();
+    if (handle->state->unk100 == 0) {
+        return inputGetKeyFlags(keyCode);
+    }
+
+    if (keyCode >= 0x10000) {
+        return 0;
+    }
+
+    const KeyRangeView* ranges =
+        reinterpret_cast<const KeyRangeView*>(0x41801c);
+    s32 lower = -1;
+    s32 upper = 0x2e3;
+    s32 middle;
+
+    while (upper - lower > 1) {
+        middle = (lower + upper) / 2;
+        const KeyRangeView& range = ranges[middle];
+        if (static_cast<u16>(keyCode - range.firstKey) <
+            (range.lengthAndBits & 0x3fff)) {
+            break;
+        }
+
+        if (range.firstKey > static_cast<s32>(keyCode)) {
+            upper = middle;
+        } else {
+            lower = middle;
+        }
+    }
+
+    if (upper - lower <= 1) {
+        return 0;
+    }
+
+    const KeyRangeView& range = ranges[middle];
+    u32 selectorBits = range.lengthAndBits >> 14;
+    u32 selectorIndex = (keyCode - range.firstKey) &
+                        ~(~0u << selectorBits);
+    const u32* flagValues = reinterpret_cast<const u32*>(0x417fe4);
+    return flagValues[(range.packedSelectors >> (selectorIndex * 4)) & 0xf];
+}

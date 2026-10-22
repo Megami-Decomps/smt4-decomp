@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0018349c(...);
 int FUN_0049339c(int, int, int, int, int);
-int FUN_00493408(...);
+int drawTextAtRelativePosition(...);
 int FUN_0049368c(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0018349c. */
 extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_0049339c. */
-/* Supplied declaration required: FUN_00493408. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_0049368c. */
 
 
@@ -78,7 +78,7 @@ void FUN_004957b4(int param_1)
   }
   textFormatBuffer(temp_v8,
                "㈥d㩣卜呍䘴卜呍䘴獜摤㑳灜潲牧浡獜潨屰桳灯慍湩挮灰",temp_v7);
-  FUN_00493408(param_1 + 0x3b8,0,temp_v0 + temp_v5,temp_v1 + temp_v2,0,7,temp_v6,temp_v4,temp_v8);
+  drawTextAtRelativePosition(param_1 + 0x3b8,0,temp_v0 + temp_v5,temp_v1 + temp_v2,0,7,temp_v6,temp_v4,temp_v8);
   return;
 }
 

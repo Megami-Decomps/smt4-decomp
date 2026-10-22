@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int dataTable04FindById(void);
 
@@ -48,7 +48,7 @@ extern unsigned int DAT_0057399c; /* 0x57399c */
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: dataTable04FindById. */
 
@@ -240,7 +240,7 @@ LAB_003e9384:
   case 8:
     temp_v4 = (int)(short)param_3[0xc9];
     temp_v18 = temp_v4 << 0x10;
-    FUN_00192550();
+    dataTable8FindRecord();
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0x32);
     if (temp_v5 != 0) goto LAB_003e9384;
     if ((*(unsigned char *)(temp_v4 + 0x3a) & 0x80) == 0) {

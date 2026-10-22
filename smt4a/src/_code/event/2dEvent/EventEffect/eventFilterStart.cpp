@@ -12,12 +12,6 @@ struct EventFilterWork {
     u32 kind;
     s32 duration;
 };
-struct EventFilterTexture {
-    u32 table;
-    u32 node;
-    u8 requested;
-    u8 unk09[3];
-};
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002990a0(void);
+int messageInitializeSavedBanner(void);
 int FUN_0029e648(int, int);
 int buttonHelpSetPreset(...);
 int FUN_0031e384(void);
@@ -15,7 +15,7 @@ extern unsigned int FUN_002228d4(void);
 extern int gameDataBlockTestFlag(unsigned int);
 extern int partyPanelIsActive(void);
 extern int saveGetIndexedMapValue(int);
-/* Supplied declaration required: FUN_002990a0. */
+/* Supplied declaration required: messageInitializeSavedBanner. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_0031e384. */
@@ -90,7 +90,7 @@ LAB_002e1920:
   if (*(char *)(param_1 + 0xd63) != '\0') {
     *(unsigned char *)(param_1 + 0xd63) = 0;
     FUN_0029e648(1,0);
-    FUN_002990a0();
+    messageInitializeSavedBanner();
   }
   temp_v1 = param_1 + 0xd44;
   FUN_0031e384();

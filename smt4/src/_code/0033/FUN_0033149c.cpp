@@ -49,7 +49,7 @@ extern unsigned int FUN_00295cec(void);
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_0029d644(int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b6b8c. */
@@ -182,7 +182,7 @@ void FUN_0033149c(int param_1)
     efctSetSpeed();
     FUN_002bf288(2,0x1d,0x429,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x7e);
     temp_v9 = FUN_0029efa8(param_1 + 0x10);
-    temp_v9 = FUN_0029d65c((int)*(short *)(param_1 + temp_v9 * 2 + 0x508));
+    temp_v9 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v9 * 2 + 0x508));
     temp_v4 = *(short *)(temp_v2 + 10) + temp_v1;
     temp_v8 = *(short *)(temp_v2 + 8) + temp_v0;
     if (!((temp_v9 == 1 || temp_v9 == 2) || temp_v9 == 6)) {

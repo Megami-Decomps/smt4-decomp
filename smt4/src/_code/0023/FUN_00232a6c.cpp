@@ -6,13 +6,13 @@ extern "C" {
 
 int asdOperatorNew(void);
 int FUN_00395558(void);
-int FUN_00395e74(unsigned int, unsigned int);
+int callbackOwnerCreateOrReuseAndAssociateCallback(unsigned int, unsigned int);
 int _ZN9Obj422338C1Ev(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00395558. */
-/* Supplied declaration required: FUN_00395e74. */
+/* Supplied declaration required: callbackOwnerCreateOrReuseAndAssociateCallback. */
 /* Supplied declaration required: _ZN9Obj422338C1Ev. */
 
 
@@ -58,7 +58,7 @@ unsigned int FUN_00232a6c(int param_1,int param_2,unsigned int param_3)
     *(int *)(param_1 + temp_v1 * 4 + 0x18) = temp_v0;
   }
   temp_v1 = param_1 + temp_v1 * 4;
-  FUN_00395e74(*(unsigned int *)(temp_v1 + 0x18),param_3);
+  callbackOwnerCreateOrReuseAndAssociateCallback(*(unsigned int *)(temp_v1 + 0x18),param_3);
   (**(romwright_code **)(**(int **)(temp_v1 + 0x18) + 8))();
   (**(romwright_code **)(**(int **)(*(int *)(temp_v1 + 0x18) + 0x68) + 8))();
   *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;

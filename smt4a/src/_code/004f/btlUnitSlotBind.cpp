@@ -24,7 +24,7 @@ typedef struct BtlUnitSlot {
     /* 0x33D0 */ u32 valueB;
 } BtlUnitSlot;
 
-extern void FUN_004f7f08(BtlUnitSlot *slot);
+extern void panelReset(BtlUnitSlot *slot);
 extern void *btlGetMainState(void);
 extern SlotEntry *FUN_003eae20(void *state, s32 arg0, s32 arg1);
 extern u32 FUN_003eda28(void *state, s32 id);
@@ -36,7 +36,7 @@ void btlUnitSlotBind(BtlUnitSlot *slot, s32 arg0, s32 arg1)
     void *state;
     SlotEntry *entry;
 
-    FUN_004f7f08(slot);
+    panelReset(slot);
     slot->arg0 = arg0;
     slot->arg1 = arg1;
     slot->flags |= 0x4000;

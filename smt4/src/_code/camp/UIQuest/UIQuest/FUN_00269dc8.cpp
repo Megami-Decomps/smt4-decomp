@@ -15,7 +15,7 @@ int pairSetHalves(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002beed0(...);
+int uiSpriteInitializeState(...);
 int paramsInit(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -66,7 +66,7 @@ extern int FUN_00298fa0(unsigned short, unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002beed0. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -150,7 +150,7 @@ void FUN_00269dc8(void)
   FUN_002bd954(puVar2 + 0xbc,0x29,0x5d,puVar2 + 5,0xa1);
   FUN_002bee58(puVar2 + 0xbc,2);
   FUN_00295eb0(puVar2 + 0xbc,0x29,0x53);
-  FUN_002beed0(puVar2 + 0xdf,0x29,0xffffffff,0x12,puVar2 + 5,0xc9);
+  uiSpriteInitializeState(puVar2 + 0xdf,0x29,0xffffffff,0x12,puVar2 + 5,0xc9);
   FUN_002bee58(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
   pairSetHalves(puVar2 + 0xdf,0,0x78);

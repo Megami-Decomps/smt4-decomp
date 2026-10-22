@@ -1,61 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e573c` (_code @ 0x3e573c, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps both `table + index * 0x5c` (r6) and the slot address (r4 = r6 + 0x1c) live and addresses some fields from each; branch layout differs accordingly. */
+#include "common.h"
+
+struct NamedResourceObject {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 flags;
+};
+
+struct NamedResourceHandle {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ NamedResourceObject *object;
+};
+
+/* A named resource slot. */
+struct NamedResourceSlot {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ u16 kind;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ NamedResourceHandle *handle;
+    /* 0x0C */ u8 unk0c[0x10];
+    /* 0x1C */ char name[0x40];
+};
+
+struct NamedResourceTable {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 busy;
+    /* 0x08 */ NamedResourceHandle *handle;
+    /* 0x0C */ u8 unk0c[0x10];
+    /* 0x1C */ NamedResourceSlot slots[1];
+};
 
 extern "C" {
+extern void *g_handleRegistry;
+s32 FUN_0040ab8c(NamedResourceHandle *handle);
+s32 libc_strcmp(const char *a, const char *b);
+char *strncpy(char *destination, const char *source, u32 count);
+void ptrListRemoveClearOwner(void *list, NamedResourceObject *object);
+void FUN_001cd3ec(NamedResourceHandle *handle, const char *name);
 
-int ptrListRemoveClearOwner(unsigned int);
-int FUN_001cd3ec(unsigned int, unsigned int);
-int libc_strcmp(int, unsigned int);
-int strncpy(int, unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: libc_strcmp. */
-extern int FUN_0040ab8c(unsigned int);
-
-
-void FUN_003e573c(int param_1,int param_2,unsigned int param_3,unsigned short param_4)
-
+/* Points slot `index` at the resource `name` of kind `kind`: an open slot showing another name
+ * releases its object, an idle table opens it directly (state 4), otherwise it is queued (state 5). */
+void FUN_003e573c(NamedResourceTable *table, s32 index, const char *name, u16 kind)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = param_1 + param_2 * 0x5c;
-  *(unsigned short *)(temp_v1 + 0x20) = param_4;
-  temp_v0 = FUN_0040ab8c(*(unsigned int *)(temp_v1 + 0x24));
-  if (temp_v0 != 0) {
-    temp_v0 = temp_v1 + 0x38;
-    libc_strcmp(temp_v0,param_3);
-    if (temp_v0 == 0) {
-      return;
+    NamedResourceSlot *slot = &table->slots[index];
+
+    slot->kind = kind;
+    if (FUN_0040ab8c(slot->handle) != 0) {
+        NamedResourceObject *object;
+
+        if (libc_strcmp(slot->name, name) == 0) {
+            return;
+        }
+        object = slot->handle->object;
+        if (object != NULL) {
+            slot->state = 2;
+            object->flags |= 3;
+            ptrListRemoveClearOwner(g_handleRegistry, object);
+        }
+    } else if (table->busy == 0 && FUN_0040ab8c(table->handle) != 0) {
+        FUN_001cd3ec(slot->handle, name);
+        slot->state = 4;
+        return;
+    } else {
+        slot->state = 5;
     }
-    temp_v0 = *(int *)(*(int *)(temp_v1 + 0x24) + 4);
-    if (temp_v0 != 0) {
-      *(unsigned int *)(temp_v1 + 0x1c) = 2;
-      *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-      ptrListRemoveClearOwner(g_handleRegistry);
-    }
-  }
-  else {
-    if ((*(int *)(param_1 + 4) == 0) &&
-       (temp_v0 = FUN_0040ab8c(*(unsigned int *)(param_1 + 8)), temp_v0 != 0)) {
-      FUN_001cd3ec(*(unsigned int *)(temp_v1 + 0x24),param_3);
-      *(unsigned int *)(temp_v1 + 0x1c) = 4;
-      return;
-    }
-    *(unsigned int *)(temp_v1 + 0x1c) = 5;
-  }
-  strncpy(temp_v1 + 0x38,param_3,0x40);
-  return;
+    strncpy(slot->name, name, sizeof(slot->name));
 }
 
 } /* extern "C" */

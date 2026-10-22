@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00153630(unsigned int, unsigned int, int, int, unsigned int);
+int bustupCutStartSlotTransition(unsigned int, unsigned int, int, int, unsigned int);
 int FUN_0038791c(unsigned int, unsigned int, int, unsigned int, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-/* Supplied declaration required: FUN_00153630. */
+/* Supplied declaration required: bustupCutStartSlotTransition. */
 extern unsigned int *jobGetWork(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_0038791c. */
@@ -35,7 +35,7 @@ unsigned int FUN_003bb114(void)
   puVar4 = (unsigned int *)jobGetWork(temp_v0);
   temp_v3 = *puVar4;
   FUN_0038791c(temp_v0,temp_v1,2,temp_v2,1,1);
-  FUN_00153630(temp_v3,temp_v2,1,1,0xffffffff);
+  bustupCutStartSlotTransition(temp_v3,temp_v2,1,1,0xffffffff);
   return 1;
 }
 

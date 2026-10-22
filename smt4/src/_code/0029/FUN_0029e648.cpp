@@ -1,58 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029e648` (_code @ 0x29e648, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The default-value branch remains before widget initialization instead of being outlined after retail's return. */
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
+u32 FUN_002d8c28(void);
+const u32 *gameGetSlotTable(void);
+void FUN_002bd954(void *widget, u32 kind, s32 id, void *context, u32 style, f32 scale);
+void pairSetFirstResetSecond(void *widget, s32 value);
+void FUN_002bee58(void *widget, s32 animation);
 
-int pairSetFirstResetSecond(int, int);
-int FUN_002bd954(int, int, unsigned int, int, int);
-int FUN_002bee58(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned char g_messageMain; /* 0x43e188 */
-
-extern unsigned int *gameGetSlotTable(void);
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-extern unsigned int FUN_002d8c28(void);
-
-
-unsigned int FUN_0029e648(unsigned char param_1,int param_2)
-
+/* Initializes the banner's selected value and default widget settings. */
+u32 FUN_0029e648(u8 mode, s32 useCurrentValue)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x7d) = 1;
-  *(unsigned char *)(temp_v0 + 0x7c) = 1;
-  if (param_2 != 0) {
-    temp_v1 = FUN_002d8c28();
-    *(unsigned int *)(temp_v0 + 0x6c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x78) = temp_v1;
-  }
-  else {
-    puVar4 = (unsigned int *)gameGetSlotTable();
-    temp_v1 = *puVar4;
-    *(unsigned int *)(temp_v0 + 0x6c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x78) = temp_v1;
-  }
-  *(unsigned char *)(temp_v0 + 0x80) = 0;
-  *(unsigned char *)(temp_v0 + 0x7f) = param_1;
-  *(unsigned char *)(temp_v0 + 0xa1) = 0;
-  temp_v2 = temp_v0 + 0x754;
-  FUN_002bd954(temp_v2,0xe,0xffffffff,temp_v0 + 0xa4,0xb);
-  pairSetFirstResetSecond(temp_v2,0);
-  FUN_002bee58(temp_v2,6);
-  return 1;
+    MessagePanel *panel = g_messageMain.banner;
+    panel->unk7D = 1;
+    panel->unk7C = 1;
+    if (useCurrentValue != 0) {
+        u32 value = FUN_002d8c28();
+        panel->unk6C = value;
+        panel->unk78 = value;
+    } else {
+        u32 value = *gameGetSlotTable();
+        panel->unk6C = value;
+        panel->unk78 = value;
+    }
+    panel->unk80 = 0;
+    panel->unk7F = mode;
+    panel->unkA1 = 0;
+    FUN_002bd954(panel->widget754, 14, -1, panel->textBuffer, 11, 1.0f);
+    pairSetFirstResetSecond(panel->widget754, 0);
+    FUN_002bee58(panel->widget754, 6);
+    return 1;
 }
-
-} /* extern "C" */
+}

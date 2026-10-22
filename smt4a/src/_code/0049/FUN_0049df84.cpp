@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, short);
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -71,7 +71,7 @@ void FUN_0049df84(int param_1)
   *(unsigned int *)(param_1 + 0x1f8) = temp_v3;
   *(unsigned int *)(param_1 + 0x84) = *(int *)(param_1 + 0x10) + temp_v3 * 0x44;
   temp_v5[0] = 0;
-  temp_v2 = FUN_001643a0();
+  temp_v2 = ifTouchGetSelectionMode();
   temp_v1 = FUN_001834a4(0x33,0x57);
   temp_v4 = param_1 + 0x18c;
   FUN_003450d4(temp_v4,temp_v1,param_1 + 0x1fc,(int)*(short *)(param_1 + 0x216),

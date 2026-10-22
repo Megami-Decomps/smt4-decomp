@@ -55,7 +55,7 @@ extern int entrySortComparePrimaryKeyDesc(...); /* 0x375aa8 */
 extern int contentIdCompareRankAndOrderDescending(...); /* 0x375afc */
 extern int FUN_00375b54(...); /* 0x375b54 */
 extern int FUN_003811ec(...); /* 0x3811ec */
-extern int FUN_003812e0(...); /* 0x3812e0 */
+extern int itemCompareCategoryDescendingValueAscending(...); /* 0x3812e0 */
 extern int recordCompareByRank(...); /* 0x39ec5c */
 extern int FUN_0039ecc4(...); /* 0x39ecc4 */
 extern int dataTable08Sub2CompareSecondaryKeysDescending(...); /* 0x3aa0b4 */
@@ -127,7 +127,7 @@ void FUN_003d0bc0(int param_1)
         if ((*pbVar5 & 0x7f) == 0xf) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = objectApplyIfUnblocked(temp_v3);
-            qsort(temp_v1,temp_v2,8,FUN_003812e0);
+            qsort(temp_v1,temp_v2,8,itemCompareCategoryDescendingValueAscending);
           }
           else {
             temp_v2 = objectApplyIfUnblocked(temp_v3);

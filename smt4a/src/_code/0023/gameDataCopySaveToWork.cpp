@@ -5,7 +5,7 @@ extern "C" {
 void rt_memcpy_w(void *destination, const void *source, u32 size);
 void gameDataCopySaveToWork(void)
 {
-    GameSaveImage *save = static_cast<GameSaveImage *>(g_gameDataBlocks.saveBlock);
+    GameSaveImage *save = reinterpret_cast<GameSaveImage  *>(g_gameDataBlocks.saveBlock);
     rt_memcpy_w(g_gameDataBlocks.workBlock, &save->work, sizeof(save->work));
 }
 

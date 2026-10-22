@@ -1,53 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0294` (_code @ 0x3c0294, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Unlinking keeps the list owner in r0 and moves the entry into the free argument only after updating the links. */
+#include "common.h"
 
+struct BtlHelpEntry {
+    /* 0x000 */ u16 unk000;
+    /* 0x002 */ u16 kind;
+    /* 0x004 */ u8 unk004[0x29E];
+    /* 0x2A2 */ s16 unk2A2;
+    /* 0x2A4 */ BtlHelpEntry *prev;
+    /* 0x2A8 */ BtlHelpEntry *next;
+};
+struct BtlHelpEntryList {
+    /* 0x00 */ BtlHelpEntry *tail;
+    /* 0x04 */ BtlHelpEntry *head;
+    /* 0x08 */ u32 count;
+};
 extern "C" {
+extern BtlHelpEntryList *DAT_00435d78;
+s32 dialogIsActive(void);
+void infoWinStartTimer(u32 value);
+void asdMemFree(void *allocation);
 
-int infoWinStartTimer(int);
-int asdMemFree(void);
-
-extern int *DAT_00435d78; /* 0x435d78 */
-
-/* Supplied declaration required: infoWinStartTimer. */
-extern int dialogIsActive(void);
-/* Supplied declaration required: asdMemFree. */
-
-
+/* Clears the help entry list, notifying the active information window when required. */
 void FUN_003c0294(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = *DAT_00435d78;
-  while (temp_v0 != 0) {
-    temp_v2 = *(int *)(temp_v0 + 0x2a4);
-    if (((-1 < *(short *)(temp_v0 + 0x2a2)) && (*(short *)(temp_v0 + 2) == 1)) &&
-       (temp_v1 = dialogIsActive(), temp_v1 != 0)) {
-      infoWinStartTimer(1);
+    BtlHelpEntry *entry = DAT_00435d78->tail;
+    while (entry != NULL) {
+        BtlHelpEntry *previous = entry->prev;
+        if (entry->unk2A2 >= 0 && entry->kind == 1 && dialogIsActive() != 0) {
+            infoWinStartTimer(1);
+        }
+        BtlHelpEntryList *list = DAT_00435d78;
+        if (entry->next == NULL) {
+            list->tail = entry->prev;
+        } else {
+            entry->next->prev = entry->prev;
+        }
+        if (entry->prev == NULL) {
+            list->head = entry->next;
+        } else {
+            entry->prev->next = entry->next;
+        }
+        --list->count;
+        asdMemFree(entry);
+        entry = previous;
     }
-    piVar2 = DAT_00435d78;
-    if (*(int *)(temp_v0 + 0x2a8) == 0) {
-      *DAT_00435d78 = *(int *)(temp_v0 + 0x2a4);
-    }
-    else {
-      *(unsigned int *)(*(int *)(temp_v0 + 0x2a8) + 0x2a4) = *(unsigned int *)(temp_v0 + 0x2a4);
-    }
-    if (*(int *)(temp_v0 + 0x2a4) == 0) {
-      piVar2[1] = *(int *)(temp_v0 + 0x2a8);
-    }
-    else {
-      *(unsigned int *)(*(int *)(temp_v0 + 0x2a4) + 0x2a8) = *(unsigned int *)(temp_v0 + 0x2a8);
-    }
-    piVar2[2] = piVar2[2] - 1;
-    asdMemFree();
-    temp_v0 = temp_v2;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -24,7 +24,7 @@ s32 FUN_002c1658(s32 value, s32 mode);
 s32 scrRunOpcodesStub(u32 handle);
 s32 FUN_0026b564(void);
 s32 screenFadeIsBusy(void);
-s32 FUN_0029ee2c(void);
+s32 messageMainIsWindowActive(void);
 
 /* "qc_end" scene step: step 0 starts it, step 1 waits for the handle to report 2 then fades, step 2 returns to state 0x10 once idle. */
 void qcEndSceneStep(Scene003849d0 *scene)
@@ -51,7 +51,7 @@ void qcEndSceneStep(Scene003849d0 *scene)
             scene->step = scene->step + 1;
             return;
         }
-        if (FUN_002c1658(1, 1) != 0 && FUN_0029ee2c() != 0) {
+        if (FUN_002c1658(1, 1) != 0 && messageMainIsWindowActive() != 0) {
             msgWindowReset();
         }
     }

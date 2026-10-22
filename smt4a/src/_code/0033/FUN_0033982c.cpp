@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int mapIfStart(...);
 int FUN_0030250c(void);
 int FUN_0033abb4(void);
@@ -44,7 +44,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 extern unsigned int FUN_0029202c(void);
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: FUN_0030250c. */
 extern int lmapSceneGetUnk0(void);
@@ -198,7 +198,7 @@ void FUN_0033982c(void)
       *(unsigned int *)(temp_v2 + 0xc0) = *(unsigned int *)(g_lmapScene + 0x50);
       *(float *)(temp_v2 + 0x210) = temp_v20;
       *(float *)(temp_v2 + 0x214) = temp_v20;
-      FUN_002b5cd4();
+      mathAngleDeltaDegrees();
       temp_v2 = g_lmapView;
       temp_v14 = temp_v13;
       if (temp_v13 < temp_v20) {
@@ -393,7 +393,7 @@ LAB_00339bb4:
   }
   if ((*(char *)(g_lmapView + 0xb4) == '\0') && (*(char *)(g_lmapScene + 0x6c) != '\0')) {
     temp_v16 = *(float *)(g_lmapView + 0x18);
-    FUN_002b5cd4();
+    mathAngleDeltaDegrees();
     if (temp_v16 < temp_v20) {
       temp_v16 = -temp_v16;
     }
@@ -414,7 +414,7 @@ LAB_00339bb4:
   }
   DAT_005806ac = *(float *)(g_lmapScene + 0x50);
   temp_v15 = *(float *)(g_lmapView + 0x18);
-  FUN_002b5cd4();
+  mathAngleDeltaDegrees();
   temp_v22 = *(float *)(g_lmapScene + 0x1c);
   temp_v23 = *(float *)(g_lmapScene + 0x20);
   temp_v24 = *(float *)(g_lmapScene + 0x24);

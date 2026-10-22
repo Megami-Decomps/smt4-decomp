@@ -5,7 +5,7 @@ extern "C" {
 int asdMemFree(...);
 int gameDataFlagsClear(int a);
 int gameDataFlagsClearAndRefresh(int a);
-int FUN_002c5758(int a);
+int gameDataRemoveHomeButtonHold(int a);
 
 typedef struct JobWork {
     /* 0x0 */ u8 unk0[8];
@@ -18,7 +18,7 @@ void jobTeardownFlagsAndWork(u32 job)
 {
     JobWork *work;
 
-    FUN_002c5758(1);
+    gameDataRemoveHomeButtonHold(1);
     gameDataFlagsClearAndRefresh(1);
     gameDataFlagsClear(1);
     work = jobGetWork(job);

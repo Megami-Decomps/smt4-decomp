@@ -6,7 +6,7 @@ extern "C" {
 
 int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
@@ -37,7 +37,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -162,12 +162,12 @@ void FUN_00485e74(unsigned char *param_1)
   param_1[0x12d1] = 0;
   param_1[0x12d2] = 0;
   *(unsigned int *)(param_1 + 0x12d4) = 0;
-  FUN_0014e220(param_1 + 0x12dc,0x13,0x1121,0x1d,param_1 + 0xc20,0x15);
+  uiSpriteInitializeState(param_1 + 0x12dc,0x13,0x1121,0x1d,param_1 + 0xc20,0x15);
   uiSpriteSetKeyframe(param_1 + 0x12dc,0);
   param_1[0x1368] = 0;
   param_1[0x1369] = 0;
   param_1[0x136a] = 0;
-  FUN_0014e220(param_1 + 0x136c,0x13,0x111a,0x1c,param_1 + 0xc20,0x15);
+  uiSpriteInitializeState(param_1 + 0x136c,0x13,0x111a,0x1c,param_1 + 0xc20,0x15);
   uiSpriteSetKeyframe(param_1 + 0x136c,5,0);
   sysMemClear(&DAT_00616ee4,0x400);
   DAT_00587f24 = 0;

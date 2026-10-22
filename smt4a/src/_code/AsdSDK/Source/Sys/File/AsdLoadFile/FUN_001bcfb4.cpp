@@ -16,12 +16,12 @@ typedef struct {
     unsigned int sp130; /* 0x130: local_130 */
 } param_6_stack;
 
-extern int FUN_001bcd8c(...); /* 0x1bcd8c */
+extern int asdFileFinalizeCompletion(...); /* 0x1bcd8c */
 extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0019dbb8(unsigned int);
+extern int asdLoadFileHasDevice(unsigned int);
 /* Supplied declaration required: asdFileEnqueueRead. */
 /* Supplied declaration required: asdFileRequestSetHeapKind. */
 /* Supplied declaration required: FUN_001bceb8. */
@@ -39,7 +39,7 @@ void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int par
   unsigned char temp_v1 [268];
   
   sysMemClear(temp_v1,0x100);
-  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = FUN_0019dbb8(param_1), temp_v0 != 0)) {
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_1), temp_v0 != 0)) {
     textFormatBuffer(temp_v1,param_1);
   }
   else {
@@ -57,7 +57,7 @@ void FUN_001bcfb4(unsigned int param_1,unsigned int *param_2,int param_3,int par
     *param_2 = 0;
   }
   puVar3 = (unsigned char*)asdFileEnqueueRead((const char*)puVar3,0,
-      reinterpret_cast<void (*)(void*)>(FUN_001bcd8c),piVar2);
+      reinterpret_cast<void (*)(void*)>(asdFileFinalizeCompletion),piVar2);
   *piVar2 = (int)puVar3;
   asdFileRequestSetHeapKind();
   FUN_001bceb8(*piVar2,param_6);

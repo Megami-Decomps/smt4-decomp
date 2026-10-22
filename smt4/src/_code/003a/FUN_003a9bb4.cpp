@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0022c9f4(int, int);
+int motionPlayForMode(int, int);
 int FUN_0022e17c(unsigned char [8], int, int);
 int FUN_00233730(int, int, int, int, int);
 int dataTable00FindById(void);
 int devilGetRecord(void);
-int FUN_003ad608(int, unsigned char [8]);
+int recordListAppendUniqueKey(int, unsigned char [8]);
 
 /* stack frame of param_1: 10 slot(s), 37 byte(s) */
 typedef struct {
@@ -27,14 +27,14 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_0022c9f4. */
+/* Supplied declaration required: motionPlayForMode. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: FUN_00233730. */
 extern int dataTable02GetEntryByIndex(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_003ad608. */
+/* Supplied declaration required: recordListAppendUniqueKey. */
 extern int FUN_003bc0ac(unsigned int, int, int);
 extern int dataTableGetRecord02(void);
 
@@ -107,7 +107,7 @@ LAB_003a9d60:
                     }
                     temp_v13 = 1;
                     temp_v12 = temp_v7;
-                    FUN_003ad608(temp_v16,temp_v11);
+                    recordListAppendUniqueKey(temp_v16,temp_v11);
                   }
                 }
                 temp_v5 = temp_v5 + 1;
@@ -127,7 +127,7 @@ LAB_003a9d60:
     }
     temp_v8 = temp_v8 + 1;
     if (temp_v8 >= 0x10) {
-      FUN_0022c9f4(temp_v17,1);
+      motionPlayForMode(temp_v17,1);
       FUN_00233730(temp_v17 + 0x20,10,(int)*(short *)(temp_v17 + 0x5a8),0,1);
       *(unsigned char *)(temp_v17 + 0x2d) = 1;
       *(unsigned char *)(temp_v17 + 0x94) = 0;

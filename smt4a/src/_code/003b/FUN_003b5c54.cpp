@@ -1,54 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b5c54` (_code @ 0x3b5c54, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps a separate pointer to slot->shown (add #0x85) and computes &models before the branch; ours addresses both fields off one slot base. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0040619c(int, int);
+/* A model node: its low two flag bits hide it. */
+typedef struct LmapModelNode {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 flags;
+} LmapModelNode;
 
-extern int g_lmapMainState; /* 0x580238 */
+#define LMAP_MODEL_NODE_HIDDEN 3
 
-/* Supplied declaration required: FUN_0040619c. */
+typedef struct LmapModelSet {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *group;
+} LmapModelSet;
 
+/* A per-model slot of the map main state (0x88 bytes). */
+typedef struct LmapModelSlot {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ u8 loaded;
+    /* 0x85 */ u8 shown;
+    /* 0x86 */ u8 unk86[2];
+} LmapModelSlot;
 
-void FUN_003b5c54(int param_1,int param_2)
+/* The map main state: only the model set and slots are named here. */
+typedef struct LmapModelState {
+    /* 0x0000 */ u8 unk0000[0x4EF8];
+    /* 0x4EF8 */ LmapModelSet *models;
+    /* 0x4EFC */ u8 unk4EFC[4];
+    /* 0x4F00 */ LmapModelSlot slots[1];
+} LmapModelState;
 
+extern LmapModelState *g_lmapMainState;
+
+LmapModelNode *FUN_0040619c(void *group, s32 index);
+
+/* Shows or hides map model `index`, updating its node once the model is loaded. */
+void FUN_003b5c54(s32 index, s32 show)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  if (g_lmapMainState != 0) {
-    temp_v1 = g_lmapMainState + param_1 * 0x88;
-    piVar3 = (int *)(g_lmapMainState + 0x4ef8);
-    if (param_2 != 0) {
-      if (*(char *)(temp_v1 + 0x4f85) != '\0') {
+    LmapModelSlot *slot;
+
+    if (g_lmapMainState == NULL) {
         return;
-      }
-      *(unsigned char *)(temp_v1 + 0x4f85) = 1;
-      if (*(char *)(temp_v1 + 0x4f84) == '\0') {
-        return;
-      }
-      temp_v1 = *(int *)(*piVar3 + 8);
-      FUN_0040619c(temp_v1,param_1);
-      temp_v0 = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
     }
-    else {
-      if (*(char *)(temp_v1 + 0x4f85) == '\0') {
-        return;
-      }
-      *(unsigned char *)(temp_v1 + 0x4f85) = 0;
-      if (*(char *)(temp_v1 + 0x4f84) == '\0') {
-        return;
-      }
-      temp_v1 = *(int *)(*piVar3 + 8);
-      FUN_0040619c(temp_v1,param_1);
-      temp_v0 = *(unsigned int *)(temp_v1 + 4) | 3;
+    slot = &g_lmapMainState->slots[index];
+    if (show) {
+        if (slot->shown) {
+            return;
+        }
+        slot->shown = 1;
+        if (!slot->loaded) {
+            return;
+        }
+        FUN_0040619c(g_lmapMainState->models->group, index)->flags &= ~LMAP_MODEL_NODE_HIDDEN;
+    } else {
+        if (!slot->shown) {
+            return;
+        }
+        slot->shown = 0;
+        if (!slot->loaded) {
+            return;
+        }
+        FUN_0040619c(g_lmapMainState->models->group, index)->flags |= LMAP_MODEL_NODE_HIDDEN;
     }
-    *(unsigned int *)(temp_v1 + 4) = temp_v0;
-  }
-  return;
 }
 
 } /* extern "C" */

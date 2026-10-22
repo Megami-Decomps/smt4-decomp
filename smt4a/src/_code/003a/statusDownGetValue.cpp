@@ -1,6 +1,7 @@
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
 
 extern "C" {
+extern StatusDownStateA *g_statusDown;
 
 /* The status-down object's value word, or 0 while there is none. */
 u32 statusDownGetValue(void)

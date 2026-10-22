@@ -15,7 +15,7 @@ int FUN_004930e4(int);
 int rectangleInitializeSelection(...);
 int FUN_004a4848(...);
 int partyIdsReset(...);
-int FUN_004a6c50(...);
+int partyIdsActivateEntry(...);
 int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
 int FUN_004d05c4(...);
@@ -54,7 +54,7 @@ extern int FUN_004082f8(int);
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a4848. */
 /* Supplied declaration required: partyIdsReset. */
-/* Supplied declaration required: FUN_004a6c50. */
+/* Supplied declaration required: partyIdsActivateEntry. */
 /* Supplied declaration required: slotPoolResetTrackedState. */
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int rangeGetMinimumLimit(int *);
@@ -147,13 +147,13 @@ void FUN_004a4e9c(int *param_1)
   }
   FUN_004a4848(param_1);
   partyIdsReset((int)param_1 + 0x96);
-  FUN_004a6c50((int)param_1 + 0x96,0);
+  partyIdsActivateEntry((int)param_1 + 0x96,0);
   temp_v0 = rangeGetMinimumLimit(param_1 + 8);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {
       if ((short)param_1[temp_v1 * 8 + 0x21a] != 0) {
-        FUN_004a6c50((int)param_1 + 0x96,(short)param_1[temp_v1 * 8 + 0x21a]);
+        partyIdsActivateEntry((int)param_1 + 0x96,(short)param_1[temp_v1 * 8 + 0x21a]);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);

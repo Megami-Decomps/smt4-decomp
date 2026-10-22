@@ -15,7 +15,7 @@ typedef struct {
     u8 widget[1];       /* 0x12dc */
 } ListScreen;
 
-void FUN_0014e220(void *widget, s32 a, s32 b, s32 c, void *data, s32 d, f32 scale);
+void uiSpriteInitializeState(void *widget, s32 a, s32 b, s32 c, void *data, s32 d, f32 scale);
 void uiSpriteSetKeyframe(void *widget, s32 a, s32 b);
 
 void listScreenOpen(ListScreen *screen)
@@ -25,7 +25,7 @@ void listScreenOpen(ListScreen *screen)
     screen->active = 1;
     screen->flag12d1 = 0;
     screen->flag12d2 = 0;
-    FUN_0014e220(screen->widget, 0x13, 0x1121, 0x1d, screen->listData, 0x15, 1.0f);
+    uiSpriteInitializeState(screen->widget, 0x13, 0x1121, 0x1d, screen->listData, 0x15, 1.0f);
     uiSpriteSetKeyframe(screen->widget, 5, 0);
 }
 

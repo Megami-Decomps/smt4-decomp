@@ -1,62 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b96c` (_code @ 0x24b96c, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block order only: retail falls through from the 70% test into the shared `return 5` and places the 3/4 choice after it. */
+#include "common.h"
+
+struct BtlRatioUnit {
+    /* 0x000 */ u8 unk000[0x50];
+    /* 0x050 */ u32 flags;
+    /* 0x054 */ u8 unk054[0xa4];
+    /* 0x0F8 */ u32 statusFlags;
+    /* 0x0FC */ u8 unk0fc[0x18];
+};
+
+struct BtlRatioMainState {
+    /* 0x0000 */ u8 unk0000[0x1e84];
+    /* 0x1E84 */ s16 unitTotal;
+    /* 0x1E86 */ u8 unk1e86[0x12];
+    /* 0x1E98 */ BtlRatioUnit *units;
+    /* 0x1E9C */ u8 unk1e9c[0x3be];
+    /* 0x225A */ s16 checkId;
+};
 
 extern "C" {
+BtlRatioMainState *btlGetMainState(void);
+s32 FUN_0027da30(BtlRatioMainState *state, s32 id);
 
-int FUN_0027da30(int, int);
-
-/* Supplied declaration required: FUN_0027da30. */
-extern int btlGetMainState(void);
-extern int __aeabi_idivmod(int, int);
-
-
-unsigned int FUN_0024b96c(void)
-
+/* Rates the share of active units (flags 0, 1 and 4 set, status flag 1 clear) among the unit
+ * total: 5 at 70% or more (or when the check fails), 4 from 40%, else 3. */
+u32 FUN_0024b96c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v1 = btlGetMainState();
-  if (temp_v1 != 0) {
-    temp_v1 = btlGetMainState();
-    temp_v0 = *(short *)(temp_v1 + 0x225a);
-    temp_v1 = btlGetMainState();
-    FUN_0027da30(temp_v1,(int)temp_v0);
-    if (temp_v1 != 0) {
-      temp_v5 = 0;
-      temp_v1 = btlGetMainState();
-      temp_v6 = 0;
-      temp_v4 = 0;
-      temp_v0 = *(short *)(temp_v1 + 0x1e84);
-      do {
-        temp_v1 = btlGetMainState();
-        temp_v1 = *(int *)(temp_v1 + 0x1e98) + temp_v4 * 0x114;
-        temp_v3 = *(unsigned int *)(temp_v1 + 0x50);
-        if ((((temp_v3 & 1) != 0 && (temp_v3 & 2) != 0) && (temp_v3 & 0x10) != 0) &&
-           ((*(unsigned int *)(temp_v1 + 0xf8) & 2) == 0)) {
-          temp_v6 = temp_v6 + 1;
+    if (btlGetMainState() != NULL) {
+        s32 id = btlGetMainState()->checkId;
+        if (FUN_0027da30(btlGetMainState(), id) != 0) {
+            s32 percent = 0;
+            s32 total = btlGetMainState()->unitTotal;
+            s32 active = 0;
+            s32 i;
+
+            for (i = 0; i < 109; i++) {
+                BtlRatioUnit *unit = &btlGetMainState()->units[i];
+                if ((unit->flags & 1) && (unit->flags & 2) && (unit->flags & 0x10) &&
+                    !(unit->statusFlags & 2)) {
+                    active++;
+                }
+            }
+            if (total != 0) {
+                percent = active * 100 / total;
+            }
+            if (percent < 70) {
+                return (percent < 40) ? 3 : 4;
+            }
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x6d);
-      if ((temp_v0 == 0) || (temp_v5 = __aeabi_idivmod(temp_v6 * 100,(int)temp_v0), temp_v5 < 0x46)) {
-        if (temp_v5 < 0x28) {
-          temp_v2 = 3;
-        }
-        else {
-          temp_v2 = 4;
-        }
-        return temp_v2;
-      }
     }
-  }
-  return 5;
+    return 5;
 }
 
 } /* extern "C" */

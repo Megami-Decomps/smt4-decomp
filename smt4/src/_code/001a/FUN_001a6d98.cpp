@@ -43,7 +43,7 @@ extern int questIsCompleted(unsigned int);
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: drawSkillCategoryLabel. */
 extern int FUN_0029d644(int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
@@ -159,7 +159,7 @@ void FUN_001a6d98(void)
     FUN_002bf380(2,0x29,0x11,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0x97);
     efctSetSpeed();
     FUN_002bf288(2,0x29,0xab,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0x9c);
-    temp_v12 = FUN_0029d65c((int)*(short *)(temp_v0 + temp_v4 * 2 + 0x9dc));
+    temp_v12 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v0 + temp_v4 * 2 + 0x9dc));
     temp_v4 = *(short *)(temp_v10 + 10) + temp_v2;
     temp_v5 = *(short *)(temp_v10 + 8) + temp_v1;
     if (!((temp_v12 == 1 || temp_v12 == 2) || temp_v12 == 6)) {

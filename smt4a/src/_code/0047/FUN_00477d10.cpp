@@ -11,7 +11,7 @@ int FUN_00183f58(...);
 int ifTouchDecrementTimer(void);
 int FUN_0019de98(...);
 int FUN_002bf4f4(int);
-int FUN_003423cc(int);
+int buttonHelpSetSelectedId(int);
 int flaggedValueHolderGetTotal(unsigned int *);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -28,7 +28,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002bf4f4. */
-/* Supplied declaration required: FUN_003423cc. */
+/* Supplied declaration required: buttonHelpSetSelectedId. */
 extern int countOwnerIsValidIndex(int, unsigned int);
 extern int FUN_0047d7f0(int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
@@ -42,7 +42,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   int temp_v1;
   int temp_v2;
   
-  FUN_003423cc(0);
+  buttonHelpSetSelectedId(0);
   switch(param_2) {
   case 0:
     *param_1 = *param_1 | 0x100000;

@@ -55,7 +55,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_00298d64. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern unsigned int flaggedEntryGetValueA(int);
@@ -355,7 +355,7 @@ unsigned int FUN_003291e0(int *param_1)
   case 4:
     temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v7 + 0x530));
     if ((temp_v6 == 2) && (temp_v6 = sys43e188GetState(), temp_v6 != 0)) {
-      temp_v6 = FUN_002973d8();
+      temp_v6 = messageMainGetChoiceResult();
       if (temp_v6 != 0) {
         FUN_00248738(temp_v7,3);
       }

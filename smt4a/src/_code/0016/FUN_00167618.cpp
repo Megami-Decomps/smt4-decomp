@@ -1,49 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00167618` (_code @ 0x167618, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the fourth core argument is saved one instruction group before retail. */
+#include "common.h"
 
 extern "C" {
+extern u32 DAT_005b3ce8;
+void FUN_0019ea00();
+void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth,
+                  f32 value0, f32 value1, f32 value2, f32 value3,
+                  f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
+void effectSubmitDefaultParameters();
 
-int FUN_00186244(int, int, int, int);
-int FUN_0019ea00(void);
-int FUN_001b4120(unsigned long long *, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern int DAT_005b3ce8; /* 0x5b3ce8 */
-
-/* Supplied declaration required: FUN_00186244. */
-/* Supplied declaration required: FUN_0019ea00. */
-/* Supplied declaration required: FUN_001b4120. */
-
-
-void FUN_00167618(int param_1,int param_2,int param_3,int param_4)
-
+void FUN_00167618(u32 first, u32 second, u32 third, u32 fourth,
+                  f32 firstValue, f32 secondValue, f32 thirdValue, f32 fourthValue,
+                  f32 lastValue)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned long long uStack_20;
-  
-  if (param_1 == 0) {
-    param_1 = DAT_005b3ce8;
-  }
-  if (param_2 == 0) {
-    param_2 = DAT_005b3ce8;
-  }
-  if (param_3 == 0) {
-    param_3 = DAT_005b3ce8;
-  }
-  if (param_4 == 0) {
-    param_4 = DAT_005b3ce8;
-  }
-  FUN_0019ea00();
-  FUN_00186244(param_1,param_2,param_3,param_4);
-  uStack_20 = 0x1024500000001;
-  FUN_001b4120(&uStack_20,0x18);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    if (first == 0) {
+        first = DAT_005b3ce8;
+    }
+    if (second == 0) {
+        second = DAT_005b3ce8;
+    }
+    if (third == 0) {
+        third = DAT_005b3ce8;
+    }
+    if (fourth == 0) {
+        fourth = DAT_005b3ce8;
+    }
+    FUN_0019ea00();
+    FUN_00186244(first, second, third, fourth, firstValue, secondValue,
+                  thirdValue, fourthValue, 0.0f, 0.0f, 0.0f, 0.0f, lastValue);
+    effectSubmitDefaultParameters();
 }
-
-} /* extern "C" */
+}

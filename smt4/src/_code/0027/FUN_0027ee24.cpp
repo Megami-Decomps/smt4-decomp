@@ -1,4 +1,4 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
@@ -6,7 +6,6 @@ typedef struct Entry {
     u8 data[0x28];
 } Entry;
 
-typedef struct AocSystem AocSystem;
 
 extern AocSystem *g_aocSystem;
 

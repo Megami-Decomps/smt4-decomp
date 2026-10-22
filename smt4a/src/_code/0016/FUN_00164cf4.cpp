@@ -1,10 +1,11 @@
 /* NON_MATCHING: four branch pairs have reversed condition polarity and target order; the remaining compatibility-query instructions agree. */
-#include "shard/Obj43da28.h"
+#include "ui/ButtonHelp.h"
+extern "C" ButtonHelpGlobalsA g_buttonHelp;
 
 /* Check active button-help entries, including the components of combined kinds. */
 extern "C" s32 FUN_00164cf4(u32 kind)
 {
-    ButtonHelpCompatibility *work = (ButtonHelpCompatibility *)g_buttonHelp.obj;
+    ButtonHelpCompatibility *work = (ButtonHelpCompatibility *)g_buttonHelp.work;
     if (work == NULL) {
         return 0;
     }

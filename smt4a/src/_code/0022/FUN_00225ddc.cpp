@@ -108,7 +108,7 @@ extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
-extern int FUN_0046e08c(int, unsigned int, unsigned int);
+extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
@@ -163,7 +163,7 @@ unsigned int FUN_00225ddc(void)
       puVar2[6] = DAT_005e1f74;
       textFormatBuffer(temp_v6,&LAB_00226234,temp_v2,temp_v2);
       textFormatBuffer(temp_v7,&LAB_0022624c,puVar2[5],puVar2[5]);
-      temp_v3 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
+      temp_v3 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;
         aocDrawText7(g_aocSystem,puVar2[5],0);

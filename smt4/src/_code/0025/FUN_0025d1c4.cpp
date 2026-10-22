@@ -83,7 +83,7 @@ extern int FUN_00297ca4(int, unsigned int);
 extern unsigned int FUN_0029a924(int);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
 extern int FUN_0029d644(unsigned int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(unsigned int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
@@ -487,7 +487,7 @@ void FUN_0025d1c4(int param_1)
   FUN_002bf288(2,0x15,0x99,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x5b);
   if (temp_v23 == 0) {
     temp_v4 = FUN_0029efa8(*temp_v20);
-    temp_v4 = FUN_0029d65c((int)*(short *)(param_1 + temp_v4 * 2 + 0x572c));
+    temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v4 * 2 + 0x572c));
     if ((temp_v4 != 1) && (temp_v4 != 2 && temp_v4 != 6)) {
       FUN_002bf288(2,0x15,0x9a,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x65);
     }

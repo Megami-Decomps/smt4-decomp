@@ -1,4 +1,4 @@
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
 
 struct IndexedTimerGroup {
     u8 unk00[0x20];
@@ -6,6 +6,7 @@ struct IndexedTimerGroup {
 };
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
 s32 FUN_002b8ee0(TimerSlot *timer, s32 reverse);
 s32 FUN_002bf818(TimerSlot *timer);
 

@@ -12,7 +12,7 @@ int FUN_001a0d08(void);
 int gameDataBlocksAddFlags(int);
 int FUN_00275bc8(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002c76d8(int);
+int gameDataAddHomeButtonHold(int);
 int FUN_002e3140(void);
 int asdOperatorDelete(int);
 int rt_aeabi_memclr(int, int);
@@ -27,7 +27,7 @@ int software_interrupt(int);
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002c76d8. */
+/* Supplied declaration required: gameDataAddHomeButtonHold. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -76,7 +76,7 @@ unsigned int FUN_0035a840(int param_1)
       *(unsigned int *)(param_1 + 0xa0) = 0;
       rt_aeabi_memclr(param_1 + 0x3ec,1000);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x360),0x28);
-      FUN_002c76d8(2);
+      gameDataAddHomeButtonHold(2);
       gameDataBlocksAddFlags(2);
     }
     temp_v0 = 3;

@@ -10,7 +10,7 @@ int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0048bdec(int);
 int sub68OwnerGetBlock60(int);
 int lmapSceneGetObj(void);
-int FUN_00492c18(int, int *);
+int naviMainSetValuePair(int, int *);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0048bdec. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: lmapSceneGetObj. */
-/* Supplied declaration required: FUN_00492c18. */
+/* Supplied declaration required: naviMainSetValuePair. */
 
 
 void FUN_0048a4c0(int param_1)
@@ -58,7 +58,7 @@ void FUN_0048a4c0(int param_1)
     sub68OwnerGetBlock60(param_1 + 0x4cc);
     temp_v2 = 0;
     temp_v3 = 0;
-    FUN_00492c18(param_1 + 0x4cc,&temp_v2);
+    naviMainSetValuePair(param_1 + 0x4cc,&temp_v2);
     uiSpriteBankApplyPreset(param_1 + 0x4e4,0);
     uiSpriteBankApplyPreset(param_1 + 0x4e4,1);
     uiSpriteSetImageKeyframe(param_1 + 0xf88,1,0);

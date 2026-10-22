@@ -2,20 +2,20 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
-extern void FUN_00165088(Obj04 *obj, u32 value);
+extern MessageGlobalsA g_messageMain;
+extern void FUN_00165088(MessageWorkA *obj, u32 value);
 
 void obj04Finish(void)
 {
-    Obj04 *obj = g_messageMain.unk04;
+    MessageWorkA *obj = g_messageMain.state;
 
-    if (g_messageMain.unk04 != NULL && g_messageMain.unk04->state != 0) {
-        g_messageMain.unk04->unk35 = 1;
+    if (g_messageMain.state != NULL && g_messageMain.state->state != 0) {
+        g_messageMain.state->closeRequested = 1;
         obj->unk19C4 = 1;
-        FUN_00165088(obj, obj->unk09);
+        FUN_00165088(obj, obj->mode);
         obj->state = 3;
         obj->unk34 = 0;
-        obj->unk35 = 0;
+        obj->closeRequested = 0;
     }
 }
 

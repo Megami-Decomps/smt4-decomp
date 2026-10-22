@@ -1,53 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027de98` (_code @ 0x27de98, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The action kind loads inside each mode branch instead of before it, changing saved registers and list addressing. */
+#include "shard/W4_W4Match2_BtlUnits.h"
 
-extern "C" {
-
-typedef struct fn_0027de98_arg0 fn_0027de98_arg0;
-struct fn_0027de98_arg0 {
-    unsigned char pad_0x0[0x88];
-    int field_0x88; /* +0x88 */
-    unsigned char pad_0x8c[0x1f34];
-    int field_0x1fc0; /* +0x1fc0 */
-    unsigned char pad_0x1fc4[0x34c];
-    int field_0x2310; /* +0x2310 */
-    int field_0x2314; /* +0x2314 */
+namespace {
+struct BattleListedAction {
+    /* 0x00 */ s32 kind;
+    /* 0x04 */ s32 unitIndex;
+    /* 0x08 */ u8 unk08[8];
 };
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_1_stack;
-
-
-unsigned int FUN_0027de98(fn_0027de98_arg0 *param_1)
-
-{
-  int temp_v0;
-  int temp_v1;
-  
-  if (0 < param_1->field_0x2314) {
-    temp_v0 = 0;
-    do {
-      temp_v1 = *(int *)(param_1->field_0x2310 + temp_v0 * 0x10);
-      if (param_1->field_0x88 == 0) {
-        if (temp_v1 != 4) {
-          return 1;
-        }
-        if ((*(unsigned short *)
-              (param_1->field_0x1fc0 +
-              *(int *)(param_1->field_0x2310 + temp_v0 * 0x10 + 4) * 0x288 + 0x1c6) & 0x1c0) == 0) {
-          return 1;
-        }
-      }
-      else if (temp_v1 == 5) {
-        return 1;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < param_1->field_0x2314);
-  }
-  return 0;
+struct BattleActionListState {
+    /* 0x0000 */ u8 unk0000[0x88];
+    /* 0x0088 */ s32 mode;
+    /* 0x008C */ u8 unk008C[0x1F34];
+    /* 0x1FC0 */ BtlUnitEntry *units;
+    /* 0x1FC4 */ u8 unk1FC4[0x34C];
+    /* 0x2310 */ BattleListedAction *actions;
+    /* 0x2314 */ s32 count;
+};
 }
-
-} /* extern "C" */
+extern "C" {
+/* Tests queued action kinds and, in the first mode, their units' required flag group. */
+u32 FUN_0027de98(BattleActionListState *state)
+{
+    if (state->count > 0) {
+        s32 index = 0;
+        do {
+            BattleListedAction *action = &state->actions[index];
+            if (state->mode == 0) {
+                if (action->kind != 4) {
+                    return 1;
+                }
+                if ((state->units[action->unitIndex].flagMask & 0x1C0) == 0) {
+                    return 1;
+                }
+            } else if (action->kind == 5) {
+                return 1;
+            }
+            ++index;
+        } while (index < state->count);
+    }
+    return 0;
+}
+}

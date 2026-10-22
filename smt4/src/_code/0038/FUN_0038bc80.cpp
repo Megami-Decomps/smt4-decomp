@@ -1,70 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038bc80` (_code @ 0x38bc80, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail strb r1, [r0], #4 differs from recovered mov r4, r0. */
+#include "classes/WindowStatus.h"
+#include <new>
 
-extern "C" {
+// Private layout views; these declarations do not define a shared API.
 
-int FUN_00123934(void);
-int legacyResourceIdRemap(unsigned int *);
-int _ZN18WindowStatusResultC1Ej(int *, int);
-int FUN_0035398c(int *, int);
+namespace {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+struct AocStatusView {
+    u8 status;                  // 0x00
+    u8 unk01[3];                // 0x01
+    WindowStatusResult result;  // 0x04
+    u32 unk0C;                  // 0x0C
+    u32 unk10;                  // 0x10
+};
 
-extern int g_aocMain; /* 0x432fc8 */
+struct AocMainView {
+    u8 unk00[0x7C]; // 0x00
+    u8 unk7C;      // 0x7C; start of an opaque subobject
+};
 
-/* Supplied declaration required: FUN_00123934. */
-/* Supplied declaration required: legacyResourceIdRemap. */
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
-/* Supplied declaration required: FUN_0035398c. */
-
-
-void FUN_0038bc80(unsigned char *param_1)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_14;
-  
-  puVar3 = (unsigned int *)&temp_v3;
-  *param_1 = 1;
-  puVar2 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
-  puVar2[2] = 0;
-  puVar2[3] = 0;
-  _ZN18WindowStatusResultC1Ej(&temp_v3,0);
-  temp_v2 = puVar3[1];
-  *puVar2 = *puVar3;
-  puVar2[1] = temp_v2;
-  temp_v1 = g_aocMain;
-  FUN_00123934();
-  FUN_0035398c(&temp_v3,temp_v1 + 0x7c);
-  *puVar2 = temp_v3;
-  puVar2[1] = uStack_14;
-  temp_v1 = legacyResourceIdRemap(puVar2);
-  if (temp_v1 >= 0) {
-    *(unsigned char *)(puVar2 + -1) = 0;
-  }
-  else {
-    temp_v1 = legacyResourceIdRemap(puVar2);
-    if (temp_v1 == -0x36dec7ff) {
-      temp_v0 = 0x67;
-    }
-    else {
-      legacyResourceIdRemap(puVar2);
-      temp_v0 = 100;
-    }
-    *(unsigned char *)(puVar2 + -1) = temp_v0;
-  }
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern AocMainView* g_aocMain;
+void FUN_00123934(void);
+void FUN_0035398c(WindowStatusResult* result, void* context);
+s32 legacyResourceIdRemap(WindowStatusResult* result);
+}
+
+// Construct the stored result, query the AOC context, and classify its status.
+extern "C" void FUN_0038bc80(AocStatusView* state)
+{
+    state->status = 1;
+    new (&state->result) WindowStatusResult;
+    state->unk0C = 0;
+    state->unk10 = 0;
+
+    WindowStatusResult temporary(0);
+    state->result = temporary;
+
+    AocMainView* main = g_aocMain;
+    FUN_00123934();
+    FUN_0035398c(&temporary, &main->unk7C);
+    state->result = temporary;
+
+    if ((legacyResourceIdRemap(&state->result) & 0x80000000u) == 0) {
+        state->status = 0;
+    } else if (legacyResourceIdRemap(&state->result) == -0x36DEC7FF) {
+        state->status = 103;
+    } else {
+        legacyResourceIdRemap(&state->result);
+        state->status = 100;
+    }
+}

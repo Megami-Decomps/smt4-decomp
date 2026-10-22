@@ -2,8 +2,7 @@
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/W4_Match6_BtlScript.h"
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 namespace {
 union PartyPhaseState {
     BtlMainState main;

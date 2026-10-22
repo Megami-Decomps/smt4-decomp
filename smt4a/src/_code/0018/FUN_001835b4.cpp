@@ -1,73 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001835b4` (_code @ 0x1835b4, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: flags and id trade r4/r5, so retail builds the position address in lr (register allocation only). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184efc(int, int, unsigned int *, int);
+/* Where a texture's image is anchored. */
+typedef struct TexOrigin {
+    /* 0x00 */ s16 x;
+    /* 0x02 */ s16 y;
+    /* 0x04 */ u16 mode; // 0: anchored only when flags bit 0 is set, 1: always anchored
+    /* 0x06 */ u8 unk06[6];
+    /* 0x0C */ u16 flags;
+} TexOrigin;
 
-/* stack frame of param_5: 7 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned short sp2A; /* 0x2a: local_2a */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_5_stack;
+typedef struct TexTableEntry {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ TexOrigin *origin;
+    /* 0x10 */ u8 unk10[4];
+} TexTableEntry;
 
-/* Supplied declaration required: FUN_00184efc. */
-extern int asdTMTexTableCallFileC(unsigned int, int);
+typedef struct TexTable {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ TexTableEntry **entries;
+} TexTable;
 
+typedef struct SpriteDrawParam {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u32 color;
+    /* 0x08 */ f32 x;
+    /* 0x0C */ f32 y;
+    /* 0x10 */ s32 unk10;
+    /* 0x14 */ s32 offsetX;
+    /* 0x18 */ s32 offsetY;
+    /* 0x1C */ u8 unk1C[0x10];
+    /* 0x2C */ u16 scaleX;
+    /* 0x2E */ u16 scaleY;
+    /* 0x30 */ u8 unk30[0x10];
+} SpriteDrawParam;
 
-void FUN_001835b4(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned long long param_5)
+TexTable *asdTMTexTableCallFileC(u32 file, s32 id);
+void FUN_00184efc(TexTable *table, TexTableEntry *entry, SpriteDrawParam *param, s32 arg);
 
+/* Draws texture `id` of the file at (x, y), offset by the texture's anchor when it has one. */
+__softfp void FUN_001835b4(u32 flags, u32 file, s32 id, u32 color, f32 x, f32 y)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int uStack_54;
-  unsigned int temp_v3;
-  unsigned int uStack_4c;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned short temp_v7;
-  unsigned short temp_v8;
-  
-  temp_v0 = asdTMTexTableCallFileC(param_2,param_3);
-  temp_v1 = **(int **)(temp_v0 + 4) + (param_3 % 1000) * 0x14;
-  psVar2 = *(short **)(temp_v1 + 0xc);
-  temp_v3 = (unsigned int)param_5;
-  uStack_4c = (unsigned int)((unsigned long long)param_5 >> 0x20);
-  temp_v6 = 0;
-  temp_v7 = 1;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  temp_v8 = 1;
-  temp_v2 = param_1;
-  if (psVar2 != (short *)0x0) {
-    if (psVar2[2] == 0) {
-      if ((psVar2[6] & 1U) == 0) {
-        uStack_54 = param_4;
-        FUN_00184efc(temp_v0,temp_v1,&temp_v2,0);
-        return;
-      }
-      temp_v2 = param_1 | 0x8000;
-      temp_v5 = (int)*psVar2;
-      temp_v6 = (int)psVar2[1];
+    TexTable *table = asdTMTexTableCallFileC(file, id);
+    TexTableEntry *entry = &(*table->entries)[id % 1000];
+    TexOrigin *origin = entry->origin;
+    SpriteDrawParam param;
+
+    param.flags = flags;
+    param.color = color;
+    param.x = x;
+    param.y = y;
+    param.offsetY = 0;
+    param.scaleX = 1;
+    param.unk10 = 0;
+    param.offsetX = 0;
+    param.scaleY = 1;
+    if (origin != NULL) {
+        if (origin->mode == 0 && (origin->flags & 1)) {
+            param.flags = flags | 0x8000;
+            param.offsetX = origin->x;
+            param.offsetY = origin->y;
+        }
+        if (origin->mode == 1) {
+            param.offsetX = origin->x;
+            param.offsetY = origin->y;
+        }
     }
-    if (psVar2[2] == 1) {
-      temp_v5 = (int)*psVar2;
-      temp_v6 = (int)psVar2[1];
-    }
-  }
-  uStack_54 = param_4;
-  FUN_00184efc(temp_v0,temp_v1,&temp_v2,0);
-  return;
+    FUN_00184efc(table, entry, &param, 0);
 }
 
 } /* extern "C" */

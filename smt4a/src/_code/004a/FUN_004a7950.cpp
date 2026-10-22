@@ -1,51 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7950` (_code @ 0x4a7950, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the part's x/y before setting up the stacked arguments; this build
+ * stores the stacked arguments first (same instructions, different order). */
+#include "common.h"
+
+/* A layout part FUN_0018349c finds by id. */
+struct LayoutPart {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0a */ s16 y;
+};
+
+/* The window that shows a percentage. */
+struct PercentWindow {
+    /* 0x00 */ u8 unk00[0x94];
+    /* 0x94 */ u8 style; /* 'd': draw the text in the highlight color */
+    /* 0x95 */ u8 unk95[0x33];
+    /* 0xc8 */ u8 layout[1];
+};
 
 extern "C" {
+s32 textFormatBuffer(char *output, const char *format, ...);
+LayoutPart *FUN_0018349c(void *layout, u32 partId);
+void drawTextAtRelativePosition(void *layout, u32 drawContext, s32 x, s32 y, u32 option0, u32 option1,
+                  u32 color, u32 alpha, const char *text);
+void FUN_004934ac(void *layout, u32 partId, u32 option0, u32 option1, u32 alpha);
 
-int textFormatBuffer(unsigned char [36], unsigned char *, unsigned int);
-int FUN_00493408(...);
-int FUN_004934ac(int, int, int, int, unsigned int);
-
-/* stack frame of param_3: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_3_stack;
-
-extern unsigned char LAB_004a7a1c; /* 0x4a7a1c */
-extern unsigned char LAB_004a7a2c; /* 0x4a7a2c */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_0018349c(int, unsigned int);
-/* Supplied declaration required: FUN_00493408. */
-/* Supplied declaration required: FUN_004934ac. */
-
-
-void FUN_004a7950(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Draws the window's frame and the value as a three-digit percentage. */
+void FUN_004a7950(PercentWindow *window, s32 value, u32 alpha)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [36];
-  
-  temp_v1 = 0xffffffff;
-  FUN_004934ac(param_1 + 200,0x407,0,0,param_3);
-  textFormatBuffer(temp_v2,&LAB_004a7a1c,param_2);
-  if (*(char *)(param_1 + 0x94) == 'd') {
-    temp_v1 = 0x72e027ff;
-  }
-  temp_v0 = FUN_0018349c(param_1 + 200,0x40b);
-  FUN_00493408(param_1 + 200,0,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0,7,temp_v1,
-               param_3,temp_v2);
-  temp_v0 = FUN_0018349c(param_1 + 200,0x408);
-  FUN_00493408(param_1 + 200,0,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0,0,temp_v1,
-               param_3,&LAB_004a7a2c);
-  return;
-}
+    char text[32];
+    u32 color = 0xffffffff;
+    LayoutPart *part;
 
-} /* extern "C" */
+    FUN_004934ac(window->layout, 0x407, 0, 0, alpha);
+    textFormatBuffer(text, "%3d", value);
+    if (window->style == 'd') {
+        color = 0x72e027ff;
+    }
+    part = FUN_0018349c(window->layout, 0x40b);
+    drawTextAtRelativePosition(window->layout, 0, part->x, part->y, 0, 7, color, alpha, text);
+    part = FUN_0018349c(window->layout, 0x408);
+    drawTextAtRelativePosition(window->layout, 0, part->x, part->y, 0, 0, color, alpha, "%");
+}
+}

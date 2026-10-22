@@ -1,60 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00138114` (_code @ 0x138114, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the adjacent effect object is loaded separately instead of derived from the parameter address. */
+#include "sound/SoundEffectDelay.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern SoundEffectDelay DAT_006195dc;
+extern SoundEffectDelayParameters DAT_0061963c;
+extern void *g_soundEffectBuffers;
+extern const char DAT_00536228[];
+u32 jyoucyuGetTableEntry(u32 index);
+void FUN_00147f08(SoundEffectDelay *effect, const SoundEffectDelayParameters *parameters);
+u32 nw_snd_FxDelay_GetRequiredMemSize(SoundEffectDelay *effect);
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
+void nw_snd_FxDelay_AssignWorkBuffer(SoundEffectDelay *effect, void *buffer, u32 size);
+void queueRequesterNode(u32 bus, SoundEffectDelay *effect);
+void FUN_0013ddf0();
 
-int FUN_0013ddf0(void);
-int FUN_00147f08(unsigned char *);
-int queueRequesterNode(int, unsigned char *);
-int asdMemoryAlloc(int, int, int, unsigned int);
-int nw_snd_FxDelay_AssignWorkBuffer(unsigned char *, unsigned int, unsigned int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned int g_soundEffectBuffers; /* 0x588fb8 */
-extern unsigned char DAT_006195dc; /* 0x6195dc */
-extern unsigned int DAT_0061963c; /* 0x61963c */
-extern unsigned int DAT_00619640; /* 0x619640 */
-extern unsigned int DAT_00619644; /* 0x619644 */
-extern unsigned char DAT_00619648; /* 0x619648 */
-
-/* Supplied declaration required: FUN_0013ddf0. */
-/* Supplied declaration required: FUN_00147f08. */
-/* Supplied declaration required: queueRequesterNode. */
-/* Supplied declaration required: asdMemoryAlloc. */
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: nw_snd_FxDelay_AssignWorkBuffer. */
-extern unsigned int nw_snd_FxDelay_GetRequiredMemSize(unsigned char *);
-
-
-void FUN_00138114(void)
-
+void FUN_00138114()
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    DAT_0061963c = 0x96;
-    DAT_00619640 = 0x3dcccccd;
-    DAT_00619644 = 0x3f333333;
-    DAT_00619648 = 1;
-    FUN_00147f08(&DAT_006195dc);
-    temp_v1 = nw_snd_FxDelay_GetRequiredMemSize(&DAT_006195dc);
-    temp_v2 = 0x10000;
-    asdMemoryAlloc(0x10000,0x100,0,temp_v1);
-    g_soundEffectBuffers = temp_v2;
-    nw_snd_FxDelay_AssignWorkBuffer(&DAT_006195dc,temp_v2,temp_v1);
-    queueRequesterNode(0,&DAT_006195dc);
-  }
-  FUN_0013ddf0();
-  return;
+    if (jyoucyuGetTableEntry(1) == 0) {
+        DAT_0061963c.unk00 = 150;
+        DAT_0061963c.unk04 = 0.1f;
+        DAT_0061963c.unk08 = 0.7f;
+        DAT_0061963c.unk0c = 1;
+        FUN_00147f08(&DAT_006195dc, &DAT_0061963c);
+        u32 size = nw_snd_FxDelay_GetRequiredMemSize(&DAT_006195dc);
+        asdDebugTrace(DAT_00536228, 71);
+        g_soundEffectBuffers = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
+        nw_snd_FxDelay_AssignWorkBuffer(&DAT_006195dc, g_soundEffectBuffers, size);
+        queueRequesterNode(0, &DAT_006195dc);
+    }
+    FUN_0013ddf0();
 }
-
-} /* extern "C" */
+}

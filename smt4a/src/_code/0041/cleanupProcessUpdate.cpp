@@ -28,7 +28,7 @@ s32 FUN_0023b3d0(void);
 void FUN_0034a968(void);
 void sysPlaySe(u32 sound);
 void FUN_0022e774(void);
-void FUN_002a7288(void);
+void statusDownRestartTransition(void);
 s32 FUN_0026c3a0(void);
 s32 FUN_002effbc(void);
 s32 aocDataBlockHasEntries(void);
@@ -72,7 +72,7 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
         switch (process->stage) {
         case 0:
             FUN_0022e774();
-            FUN_002a7288();
+            statusDownRestartTransition();
             process->stage = 1;
         case 1:
             if (!FUN_0026c3a0() || !FUN_002effbc())

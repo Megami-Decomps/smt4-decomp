@@ -4,6 +4,6 @@ extern "C" {
 /* Reads a signed quest panel flag. */
 s32 FUN_002cf738(void)
 {
-    return (s8)g_uiQuest->panel.unkF2[2];
+    return (s8)g_uiQuest->panel.unkF4;
 }
 }

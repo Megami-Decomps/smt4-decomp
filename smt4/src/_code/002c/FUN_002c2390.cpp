@@ -1,60 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2390` (_code @ 0x2c2390, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: upload-entry indexing and the double-buffer selection use different address registers. */
+#include "common.h"
+
+struct GpuUploadEntry {
+    /* 0x00 */ u8 componentCount;
+    /* 0x01 */ u8 active;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u32 buffers[2];
+    /* 0x0c */ u8 unk0c[0x10];
+};
+struct GpuUploadState {
+    /* 0x000 */ u8 unk000[0x2c];
+    /* 0x02c */ u32 vertexCount;
+    /* 0x030 */ u8 bufferIndex;
+    /* 0x031 */ u8 unk031[3];
+    /* 0x034 */ s32 entryCount;
+    /* 0x038 */ u8 unk038[8];
+    /* 0x040 */ GpuUploadEntry entries[1];
+    /* 0x05c */ u8 unk05c[0x19c];
+    /* 0x1f8 */ u32 buffers[2];
+};
 
 extern "C" {
+u32 FUN_002c2424(u32 buffer, u32 size);
 
-int FUN_002c2424(unsigned int, unsigned int);
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-extern unsigned int *nn_gxlow_CTR_GetGpu(void);
-/* Supplied declaration required: FUN_002c2424. */
-
-
-unsigned int FUN_002c2390(int param_1)
-
+u32 FUN_002c2390(GpuUploadState *state)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  if (temp_v3 < *(int *)(param_1 + 0x34)) {
-    do {
-      temp_v1 = param_1 + temp_v3 * 0x1c;
-      if (*(char *)(temp_v1 + 0x41) != '\0') {
-        FUN_002c2424(*(unsigned int *)(temp_v1 + (unsigned int)(*(char *)(param_1 + 0x30) != '\0') * 4 + 0x44),
-                     *(int *)(param_1 + 0x2c) * (unsigned int)*(unsigned char *)(temp_v1 + 0x40) * 4);
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < *(int *)(param_1 + 0x34));
-  }
-  temp_v3 = *(int *)(param_1 + 0x2c);
-  temp_v2 = *(unsigned int *)(param_1 + (unsigned int)(*(char *)(param_1 + 0x30) != '\0') * 4 + 0x1f8);
-  puVar1 = (unsigned int *)nn_gxlow_CTR_GetGpu();
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x80082;
-  *(unsigned int *)(temp_v1 + 0x90) = 0xffff8001;
-  *(unsigned int *)(temp_v1 + 0x84) = temp_v2;
-  *(int *)(temp_v1 + 0x88) = temp_v3 << 1;
-  *(unsigned int *)(temp_v1 + 0x8c) = 0;
-  temp_v0 = *puVar1;
-  software_interrupt(0x32);
-  if ((temp_v0 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    for (s32 index = 0; index < state->entryCount; ++index) {
+        GpuUploadEntry *entry = &state->entries[index];
+        if (entry->active) {
+            FUN_002c2424(entry->buffers[state->bufferIndex != 0],
+                         state->vertexCount * entry->componentCount * 4);
+        }
+    }
+    return FUN_002c2424(state->buffers[state->bufferIndex != 0], state->vertexCount << 1);
 }
-
-} /* extern "C" */
+}

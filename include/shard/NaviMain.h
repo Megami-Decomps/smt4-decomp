@@ -16,11 +16,13 @@ typedef struct NaviMain {
     /* 0x0010 */ u32 posY;
     /* 0x0014 */ u8 unk0014[0x14];
     /* 0x0028 */ u32 currentMap;
-    /* 0x002C */ u8 unk002C[0xC];
+    /* 0x002C */ u32 unk2C;
+    /* 0x0030 */ s32 busy;
+    /* 0x0034 */ f32 value;
     /* 0x0038 */ u8 cursorPos[1];
     /* 0x0039 */ u8 unk0039[0x3];
     /* 0x003C */ u32 alternateMap;
-    /* 0x0040 */ u32 unk00040[1];
+    /* 0x0040 */ u32 state[1];
     union {
         /* 0x0044 */ u8 unk0044[0x122F0];
         struct {
@@ -28,9 +30,52 @@ typedef struct NaviMain {
             /* 0x0068 */ NaviTransitionState transition;
         } stateView;
     };
-    /* 0x12334 */ u8 unk12334[1];
+    /* 0x12334 */ u8 settings[1];
 } NaviMain;
 
-extern NaviMain *g_naviMain;
+
+
+typedef struct NaviValuePair {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+} NaviValuePair;
+
+typedef struct NaviMapRequest {
+    /* 0x00 */ s32 mapId;
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ s32 unk08;
+} NaviMapRequest;
+
+typedef struct NaviMainA {
+    /* 0x00000 */ u32 job;
+    /* 0x00004 */ u8 unk00004[4];
+    /* 0x00008 */ u8 closeRequested;
+    /* 0x00009 */ u8 unk00009;
+    /* 0x0000A */ u8 active;
+    /* 0x0000B */ u8 unk0000B;
+    /* 0x0000C */ u32 posX;
+    /* 0x00010 */ u32 posY;
+    /* 0x00014 */ u32 thirdValue;
+    /* 0x00018 */ u8 unk00018[0x10];
+    /* 0x00028 */ u32 currentMap;
+    /* 0x0002C */ u32 unk2C;
+    /* 0x00030 */ NaviMapRequest mapRequest;
+    /* 0x0003C */ u32 alternateMap;
+    /* 0x00040 */ u8 unk00040[0x18];
+    /* 0x00058 */ s32 busy;
+    /* 0x0005C */ u8 unk0005C[4];
+    /* 0x00060 */ NaviValuePair value;
+    /* 0x00068 */ union {
+        u8 panel[0x20654];
+        u32 request[1];
+        NaviTransitionState transition;
+    };
+    /* 0x206BC */ u8 slider[1];
+} NaviMainA;
+
+
+/* Retail 32-bit layout invariants. */
+typedef char NaviMainSizeCheck[sizeof(NaviMain) == 0x12338 ? 1 : -1];
+typedef char NaviMainASizeCheck[sizeof(NaviMainA) == 0x206C0 ? 1 : -1];
 
 #endif

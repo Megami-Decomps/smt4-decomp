@@ -26,7 +26,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_002b8d54(void);
+extern int ifTouchGetSelectionMode(void);
 extern int padIsButtonPressed(unsigned int);
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
@@ -74,7 +74,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
   }
   temp_v1 = FUN_002c2a04(0);
   if ((temp_v1 == 0) &&
-     ((temp_v1 = FUN_002b8d54(), temp_v1 == 6 || (temp_v1 = padIsButtonPressed(0), temp_v1 != 0)))) {
+     ((temp_v1 = ifTouchGetSelectionMode(), temp_v1 == 6 || (temp_v1 = padIsButtonPressed(0), temp_v1 != 0)))) {
     param_1[7] = 2;
     param_1[0xe] = 0;
   }

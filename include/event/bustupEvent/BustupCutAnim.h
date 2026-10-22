@@ -3,9 +3,14 @@
 #define EVENT_BUSTUPEVENT_BUSTUPCUTANIM_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define BUSTUP_CUT_SLOTS 4
 #define BUSTUP_CUT_ENTRIES 0x1C
+
+struct ShakeAmplitudes {
+    /* 0x00 */ f32 values[3];
+};
 
 /* The animation's state block (Shin Megami Tensei IV layout), kept by a module global. */
 typedef struct BustupCutAnim {
@@ -16,12 +21,20 @@ typedef struct BustupCutAnim {
     /* 0x5EC */ s32 unk5EC;
     /* 0x5F0 */ u8 unk5F0[2];
     /* 0x5F2 */ u8 unk5F2;
-    /* 0x5F3 */ u8 unk5F3[0x3D];
+    /* 0x5F3 */ u8 unk5F3[0x11];
+    /* 0x604 */ u32 unk604;
+    /* 0x608 */ u8 unk608[0x28];
     /* 0x630 */ u32 slots[BUSTUP_CUT_SLOTS];      /* job handles */
     /* 0x640 */ u8 unk640[0x18];
     /* 0x658 */ u32 unk658[BUSTUP_CUT_ENTRIES];
     /* 0x6C8 */ u32 unk6C8[BUSTUP_CUT_ENTRIES];
+    /* 0x738 */ f32 shakeX;
+    /* 0x73C */ f32 shakeY;
 } BustupCutAnim;
+
+typedef char BustupCutAnimLayoutCheck[sizeof(BustupCutAnim) == 0x740 &&
+    offsetof(BustupCutAnim, unk604) == 0x604 &&
+    offsetof(BustupCutAnim, slots) == 0x630 ? 1 : -1];
 
 /* The same block in Apocalypse: everything from unk5E8 on sits four bytes later. */
 typedef struct BustupCutAnimA {
@@ -32,11 +45,19 @@ typedef struct BustupCutAnimA {
     /* 0x5F0 */ s32 unk5F0;
     /* 0x5F4 */ u8 unk5F4[2];
     /* 0x5F6 */ u8 unk5F6;
-    /* 0x5F7 */ u8 unk5F7[0x3D];
+    /* 0x5F7 */ u8 unk5F7[0x11];
+    /* 0x608 */ u32 unk608;
+    /* 0x60C */ u8 unk60C[0x28];
     /* 0x634 */ u32 slots[BUSTUP_CUT_SLOTS];
     /* 0x644 */ u8 unk644[0x18];
     /* 0x65C */ u32 unk65C[BUSTUP_CUT_ENTRIES];
     /* 0x6CC */ u32 unk6CC[BUSTUP_CUT_ENTRIES];
+    /* 0x73C */ f32 shakeX;
+    /* 0x740 */ f32 shakeY;
 } BustupCutAnimA;
+
+typedef char BustupCutAnimALayoutCheck[sizeof(BustupCutAnimA) == 0x744 &&
+    offsetof(BustupCutAnimA, unk608) == 0x608 &&
+    offsetof(BustupCutAnimA, slots) == 0x634 ? 1 : -1];
 
 #endif

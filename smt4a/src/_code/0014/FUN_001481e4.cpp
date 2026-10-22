@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014a930(...);
 int asdProcessCreateSimple(...);
-int FUN_0015f378(...);
+int aocThreadAllocateStorage(...);
 int FUN_002e3140(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
@@ -22,7 +22,7 @@ extern int FUN_001a6c40(...); /* 0x1a6c40 */
 
 /* Supplied declaration required: FUN_0014a930. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_0015f378. */
+/* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_0015f434(int);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -45,7 +45,7 @@ int FUN_001481e4(int param_1)
   *(unsigned char *)(param_1 + 0x4500) = 0;
   temp_v0 = FUN_0015f434(param_1 + 0x4504);
   *(unsigned int *)(temp_v0 + 0x10) = 0;
-  FUN_0015f378(temp_v0,0x4000);
+  aocThreadAllocateStorage(temp_v0,0x4000);
   temp_v1 = FUN_0015f0f4;
   uStack_1c = 0;
   pcVar2 = "Aoc fileload Calc";

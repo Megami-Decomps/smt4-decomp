@@ -1,0 +1,56 @@
+#include "shard/ItemStackLimit.h"
+
+extern "C" {
+
+ItemCategoryEntry *FUN_0019c06c(u32 id);
+ItemRecordA *dataTable8FindRecord(u32 id);
+ItemRecordB *FUN_00192608(u32 id);
+
+/* Returns how many of the item can be held: 1 for unlimited storage, the record's limit for limited
+ * types (999 when the record leaves it 0), 0 for unknown items. */
+s32 itemGetStackLimit(u32 id)
+{
+    ItemCategoryEntry *entry = FUN_0019c06c(id);
+
+    if (entry == NULL) {
+        return 0;
+    }
+    if (entry->storage == 0) {
+        return 1;
+    }
+    if (entry->storage != 1) {
+        return 0;
+    }
+    switch (entry->type) {
+    case 1:
+    case 12: {
+        ItemRecordA *record = dataTable8FindRecord(id);
+        if (record == NULL) {
+            return 0;
+        }
+        if (record->limit != 0) {
+            return record->limit;
+        }
+        break;
+    }
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8: {
+        ItemRecordB *record = FUN_00192608(id);
+        if (record == NULL) {
+            return 0;
+        }
+        if (record->limit != 0) {
+            return record->limit;
+        }
+        break;
+    }
+    }
+    return 999;
+}
+
+} /* extern "C" */

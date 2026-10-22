@@ -77,7 +77,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: slotRecordFindById. */
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020caec. */
-extern int FUN_0022e9b8(void);
+extern int uniteGetWork(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -128,7 +128,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   temp_v23 = param_1;
   temp_v24 = param_2;
   temp_v25 = param_3;
-  temp_v2 = FUN_0022e9b8();
+  temp_v2 = uniteGetWork();
   temp_v8 = temp_v24;
   temp_v9 = temp_v23;
   if (temp_v2 == 0) {

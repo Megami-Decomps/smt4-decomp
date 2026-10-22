@@ -1,6 +1,7 @@
-#include "shard/Sys43e188.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
 u8 sys43e188GetStateB(void)
 {

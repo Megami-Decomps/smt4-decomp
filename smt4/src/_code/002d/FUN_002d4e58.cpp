@@ -1,50 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d4e58` (_code @ 0x2d4e58, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Position snapshots reload their first two components through integer registers instead of retaining the retail mixed integer/VFP pair. */
+#include "map/SceneSpawn.h"
+#include "map/lmapMain.h"
 
 extern "C" {
+extern LmapScene *g_lmapScene;
+extern SceneViewHeading *DAT_004474f4;
+u32 FUN_0027d7b0(void);
+SceneSpawnRecord *dataTableGetRecord23(u32 index);
 
-int FUN_0027d7b0(void);
-int VectorSignedToFloat(int, int);
-
-extern int DAT_004474f4; /* 0x4474f4 */
-extern int g_lmapScene; /* 0x447e88 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int dataTableGetRecord23(void);
-/* Supplied declaration required: FUN_0027d7b0. */
-
-
+/* Restores the spawn position, both position snapshots, and the scene and view headings. */
 void FUN_002d4e58(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  
-  FUN_0027d7b0();
-  temp_v1 = dataTableGetRecord23();
-  temp_v0 = g_lmapScene;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x20) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x24) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x28) = *(unsigned int *)(temp_v0 + 0x1c);
-  *(unsigned int *)(temp_v0 + 0x2c) = *(unsigned int *)(temp_v0 + 0x20);
-  *(unsigned int *)(temp_v0 + 0x30) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x34) = *(unsigned int *)(temp_v0 + 0x1c);
-  *(unsigned int *)(temp_v0 + 0x38) = *(unsigned int *)(temp_v0 + 0x20);
-  *(unsigned int *)(temp_v0 + 0x3c) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x4c) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x50) = temp_v2;
-  temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(DAT_004474f4 + 0x18) = temp_v2;
-  return;
+    SceneSpawnRecord *record = dataTableGetRecord23(FUN_0027d7b0());
+    LmapScene *scene = g_lmapScene;
+    scene->transform.position[0] = static_cast<f32>(record->x);
+    scene->transform.position[1] = static_cast<f32>(record->y);
+    scene->transform.position[2] = static_cast<f32>(record->z);
+    scene->transform.positionSnapshotA[0] = scene->transform.position[0];
+    scene->transform.positionSnapshotA[1] = scene->transform.position[1];
+    scene->transform.positionSnapshotA[2] = scene->transform.position[2];
+    scene->transform.positionSnapshotB[0] = scene->transform.position[0];
+    scene->transform.positionSnapshotB[1] = scene->transform.position[1];
+    scene->transform.positionSnapshotB[2] = scene->transform.position[2];
+    scene->transform.headingDegrees = static_cast<f32>(record->heading);
+    scene->transform.headingCopy = scene->transform.headingDegrees;
+    DAT_004474f4->heading = static_cast<f32>(record->heading);
 }
-
-} /* extern "C" */
+}

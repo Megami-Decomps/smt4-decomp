@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: statusCameraHandleControls. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -55,7 +55,7 @@ unsigned int FUN_00220d58(int param_1)
     *(unsigned int *)(param_1 + 0x118) = 0;
   }
   temp_v1 = padIsButtonPressed(0);
-  if ((temp_v1 != 0) || (temp_v1 = FUN_0026ee68(1), temp_v1 != 0)) {
+  if ((temp_v1 != 0) || (temp_v1 = buttonHelpHasEnabledEntryForId(1), temp_v1 != 0)) {
     *(unsigned int *)(param_1 + 0x110) = 2;
     FUN_002bf810(0x100016d);
     buttonHelpSetPreset(0xe2);
@@ -63,14 +63,14 @@ unsigned int FUN_00220d58(int param_1)
   }
   else {
     temp_v1 = padIsButtonPressed(1);
-    if ((temp_v1 != 0) || (temp_v1 = FUN_0026ee68(2), temp_v1 != 0)) {
+    if ((temp_v1 != 0) || (temp_v1 = buttonHelpHasEnabledEntryForId(2), temp_v1 != 0)) {
       *(unsigned int *)(param_1 + 0x110) = 8;
       FUN_002bf810(0x100016e);
       temp_v3 = 2;
     }
     else {
       temp_v1 = padIsButtonRepeat(10);
-      if ((temp_v1 != 0) || (temp_v1 = FUN_0026ee68(4), temp_v1 != 0)) {
+      if ((temp_v1 != 0) || (temp_v1 = buttonHelpHasEnabledEntryForId(4), temp_v1 != 0)) {
         if (*(char *)(param_1 + 0x127) != '\0') {
           *(unsigned char *)(param_1 + 0x127) = 0;
         }

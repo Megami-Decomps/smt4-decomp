@@ -1,47 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e8244` (_code @ 0x3e8244, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail add r2, r4, r4, lsl #1 differs from recovered add r0, r4, r4, lsl #1. */
+#include "common.h"
+
+struct RandomEntryRowView {
+    s16 values[12]; // 0x00
+};
 
 extern "C" {
+s32 dataTableGet(s32 tableId, s32 index);
+RandomEntryRowView* dataTableGetEntries(void);
+s32 dataTableGetCount(void);
+s32 randRange(u32 inclusiveMaximum);
 
-int dataTableGet(int, int);
-
-extern int randRange(unsigned int);
-/* Supplied declaration required: dataTableGet. */
-extern short dataTableGetCount(void);
-extern int dataTableGetEntries(void);
-
-
-int FUN_003e8244(unsigned int param_1,int param_2)
-
+// Select a random entry from the nonzero prefix of the requested table row.
+s32 FUN_003e8244(u32, s32 rowIndex)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  dataTableGet(0x4d,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v4 = 0;
-  dataTableGet(0x4d,0);
-  temp_v0 = dataTableGetCount();
-  if (param_2 < temp_v0) {
-    temp_v3 = 0;
-    temp_v2 = 0;
-    temp_v1 = temp_v1 + param_2 * 0x18;
-    do {
-      if (*(short *)(temp_v1 + temp_v2 * 2) == 0) break;
-      temp_v2 = temp_v2 + 1;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v2 < 0xc);
-    if (0 < temp_v3) {
-      temp_v4 = randRange((temp_v3 - 1U) & 0xffff);
-      temp_v4 = (int)*(short *)(temp_v1 + temp_v4 * 2);
-    }
-  }
-  return temp_v4;
-}
+    dataTableGet(0x4d, 0);
+    RandomEntryRowView* rows = dataTableGetEntries();
+    s32 result = 0;
 
-} /* extern "C" */
+    dataTableGet(0x4d, 0);
+    if ((s16)dataTableGetCount() > rowIndex) {
+        RandomEntryRowView* row = rows + rowIndex;
+        s32 entryCount = 0;
+        for (s32 index = 0; index < 12; ++index) {
+            if (row->values[index] == 0) {
+                break;
+            }
+            ++entryCount;
+        }
+
+        if (entryCount > 0) {
+            s32 selectedIndex = randRange((u16)(entryCount - 1));
+            result = row->values[selectedIndex];
+        }
+    }
+    return result;
+}
+}

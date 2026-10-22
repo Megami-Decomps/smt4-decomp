@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00249a54(void);
+int btlScriptResolveGroupArg(void);
 int scrSetResult(int result);
 int scrGetArg(...);
 extern int *gameGetSlotTable(void);
@@ -13,7 +13,7 @@ u32 FUN_002f73e0(void)
     int *party;
 
     scrGetArg(1);
-    FUN_00249a54();
+    btlScriptResolveGroupArg();
     party = gameGetSlotTable();
     scrSetResult(*party <= arg);
     return 1;

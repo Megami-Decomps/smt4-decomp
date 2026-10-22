@@ -1,6 +1,7 @@
 #include "shard/NaviMain.h"
 
 extern "C" {
+extern NaviMain *g_naviMain;
 
 int FUN_00291730(u32 *block);
 int buttonHelpRelease(void);
@@ -18,7 +19,7 @@ void naviReleaseMain(void)
     buttonHelpRelease();
     if (g_naviMain != NULL) {
         jobStop(g_naviMain->job, 0);
-        FUN_00291730(g_naviMain->unk00040);
+        FUN_00291730(g_naviMain->state);
         asdMemFree(g_naviMain);
         g_naviMain = NULL;
     }

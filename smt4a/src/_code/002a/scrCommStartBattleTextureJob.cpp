@@ -2,7 +2,7 @@
 
 extern "C" {
 u32 scrGetArg(u32);
-f32 FUN_00275b10(u32);
+f32 scriptReadStackValueAsFloat(u32);
 s32 eventTexHasMissingValue();
 u32 FUN_0039b0f8(u32, f32, f32);
 void eventTexSetJobParam(u32);
@@ -13,7 +13,7 @@ void scrSetResult(u32);
 u32 scrCommStartBattleTextureJob()
 {
     u32 texture = scrGetArg(0);
-    f32 parameter = FUN_00275b10(1);
+    f32 parameter = scriptReadStackValueAsFloat(1);
     if (eventTexHasMissingValue() != 0) {
         u32 job = FUN_0039b0f8(texture, parameter, 0.0f);
         eventTexSetJobParam(job);

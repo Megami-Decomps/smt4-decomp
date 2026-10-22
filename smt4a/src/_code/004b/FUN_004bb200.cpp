@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00316750(char [46], unsigned int, int, unsigned int, int);
 int asdCecCopySettings(int);
-int FUN_00359008(unsigned int, unsigned int, char [34], unsigned int, int);
+int cecWriteMessageBoxNameAndData(unsigned int, unsigned int, char [34], unsigned int, int);
 int cecSettingsSet(int, int, int, int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern char s_Shin_Megami_Tensei_I_0057f34a[34]; /* 0x57f34a */
 
 /* Supplied declaration required: FUN_00316750. */
 /* Supplied declaration required: asdCecCopySettings. */
-/* Supplied declaration required: FUN_00359008. */
+/* Supplied declaration required: cecWriteMessageBoxNameAndData. */
 /* Supplied declaration required: cecSettingsSet. */
 extern unsigned int FUN_0042d694(unsigned int);
 
@@ -37,7 +37,7 @@ unsigned int FUN_004bb200(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v1 = 0;
   cecSettingsSet(2,3,0xff,0,param_4);
   temp_v0 = FUN_0042d694(0x19a2);
-  FUN_00359008(temp_v0,g_resourceDispatchContext,s_Shin_Megami_Tensei_I_0057f34a,*(unsigned int *)(param_1 + 4),
+  cecWriteMessageBoxNameAndData(temp_v0,g_resourceDispatchContext,s_Shin_Megami_Tensei_I_0057f34a,*(unsigned int *)(param_1 + 4),
                0x1200);
   pcVar2 = s_You_have_received_ca_0057f2ee;
   FUN_00316750(s_You_have_received_ca_0057f2ee,*(unsigned int *)(param_1 + 8),0xc80,param_2,100);

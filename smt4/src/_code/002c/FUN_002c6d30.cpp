@@ -1,60 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c6d30` (_code @ 0x2c6d30, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail movne r1, #0 differs from recovered movne r0, #0. */
+#include "common.h"
+
+struct EntryRecordView {
+    u8 unk00[0x2c]; // 0x00
+    u16 unk2C;      // 0x2c
+};
 
 extern "C" {
+s32 idIsAbove400(s32 id);
+s32 FUN_0024c52c(s32 id);
+EntryRecordView *FUN_002ae164(s32 id);
+s32 FUN_00257568(s32 *left, s32 *right);
 
-int FUN_00257568(int *, int *);
-int FUN_002ae164(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int FUN_0024c52c(int);
-/* Supplied declaration required: FUN_00257568. */
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(int);
-
-
-void FUN_002c6d30(int *param_1,int *param_2)
-
+// Compare classification and descending record fields, delegating ties.
+s32 FUN_002c6d30(s32 *left, s32 *right)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  short temp_v3;
-  short temp_v4;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v0 = FUN_0024c52c(*param_1);
-    temp_v1 = *param_1;
-    FUN_002ae164();
-    temp_v4 = *(short *)(temp_v1 + 0x2c);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v1 = 99;
-    temp_v3 = 0;
-  }
-  else {
-    temp_v1 = FUN_0024c52c(*param_2);
-    temp_v2 = *param_2;
-    FUN_002ae164();
-    temp_v3 = *(short *)(temp_v2 + 0x2c);
-  }
-  if (temp_v0 != temp_v1 || temp_v3 != temp_v4) {
-    return;
-  }
-  FUN_00257568(param_1,param_2);
-  return;
-}
+    s32 leftClass;
+    u16 leftField;
+    if (idIsAbove400(*left) != 0) {
+        leftClass = 99;
+        leftField = 0;
+    } else {
+        leftClass = FUN_0024c52c(*left);
+        leftField = FUN_002ae164(*left)->unk2C;
+    }
 
-} /* extern "C" */
+    s32 rightClass;
+    u16 rightField;
+    if (idIsAbove400(*right) != 0) {
+        rightClass = 99;
+        rightField = 0;
+    } else {
+        rightClass = FUN_0024c52c(*right);
+        rightField = FUN_002ae164(*right)->unk2C;
+    }
+
+    s32 difference = leftClass - rightClass;
+    if (difference != 0)
+        return difference;
+
+    difference = rightField - leftField;
+    if (difference != 0)
+        return difference;
+
+    return FUN_00257568(left, right);
+}
+}

@@ -33,7 +33,7 @@ extern unsigned int DAT_005f176c; /* 0x5f176c */
 extern int gameDataBlocksGetSaveData(void);
 extern int randRange(unsigned int);
 extern int gameFlagsGetBlock(void);
-extern int FUN_001774d8(void);
+extern int itemGetStackLimit(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(void);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -167,7 +167,7 @@ LAB_00314950:
             }
 LAB_00314960:
             if (temp_v10[temp_v9] != 0) {
-              temp_v5 = FUN_001774d8();
+              temp_v5 = itemGetStackLimit();
               temp_v6 = FUN_001ba3d4(temp_v10[temp_v9]);
               temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
               if (temp_v5 < temp_v6 + temp_v8) {

@@ -1,51 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c8800` (_code @ 0x4c8800, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The battle-state masks and suppression masks load into different register pairs and combine in a different order. */
+#include "battle/btlMain.h"
 
-extern "C" {
-
-int FUN_004c9160(unsigned int, unsigned int, int, unsigned int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern unsigned int DAT_00573908; /* 0x573908 */
-extern unsigned int DAT_0057390c; /* 0x57390c */
-extern unsigned int DAT_00573910; /* 0x573910 */
-extern unsigned int DAT_00573914; /* 0x573914 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_004c9160. */
-
-
-unsigned int FUN_004c8800(unsigned int param_1,int param_2,unsigned int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  if (((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_0057390c) == 0 &&
-       (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573908) == 0) &&
-     ((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573914) == 0 &&
-      (DAT_00573910 & *(unsigned int *)(temp_v0 + 0x45a0)) == 0)) {
-    temp_v1 = 0;
-    if (param_2 == 1) {
-      temp_v1 = 0x1a;
-    }
-    else if (param_2 == 2) {
-      temp_v1 = 0x1b;
-    }
-    else if (param_2 == 3) {
-      temp_v1 = 0x36;
-    }
-    FUN_004c9160(temp_v1,param_1,0,param_3);
-    return temp_v1;
-  }
-  return 0;
+namespace {
+struct BattleHelpMasks {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u64 first;
+    /* 0x28 */ u64 second;
+};
 }
+extern "C" {
+extern BattleHelpMasks g_btlHelp;
+BtlMainStateA *btlGetMainState(void);
+u32 FUN_004c9160(u32 kind, u32 subject, s32 unused, u32 parameter);
 
-} /* extern "C" */
+/* Dispatches the help action selected by mode unless the battle state intersects a suppression mask. */
+u32 FUN_004c8800(u32 subject, s32 mode, u32 parameter)
+{
+    BtlMainStateA *state = btlGetMainState();
+    u64 flags = static_cast<u64>(state->stateFlags.words[0]) | (static_cast<u64>(state->stateFlags.words[1]) << 32);
+    if ((flags & g_btlHelp.first) != 0 || (flags & g_btlHelp.second) != 0) {
+        return 0;
+    }
+    u32 kind = 0;
+    if (mode == 1) {
+        kind = 0x1A;
+    } else if (mode == 2) {
+        kind = 0x1B;
+    } else if (mode == 3) {
+        kind = 0x36;
+    }
+    return FUN_004c9160(kind, subject, 0, parameter);
+}
+}

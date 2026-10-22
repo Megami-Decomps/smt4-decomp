@@ -1,47 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026264c` (_code @ 0x26264c, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The caller extends the narrow identifier and forms inventory-member addresses differently. */
+#include "gamedata/Table00.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 extern "C" {
+Table00Record* dataTable00FindById(u16);
 
-int dataTable00FindById(void);
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-/* Supplied declaration required: dataTable00FindById. */
-
-
-unsigned short FUN_0026264c(unsigned int param_1)
-
+// Tests the collection flag for this identifier and its related identifiers.
+u32 FUN_0026264c(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  if (param_1 >= 0x501) {
-    return 0;
-  }
-  temp_v2 = param_1;
-  dataTable00FindById();
-  temp_v1 = *(unsigned short *)(temp_v2 + 0x16) & 1;
-  if ((*(unsigned short *)(temp_v2 + 0x16) & 1) != 0) {
-    temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50 + 0x5f22);
-    temp_v3 = temp_v0 & 2;
-    if ((temp_v0 & 2) == 0) {
-      while ((temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + temp_v3 * 2 + 0x80), temp_v4 == 0 ||
-             ((*(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v4 * 0x50 + 0x5f22) & 2) == 0))) {
-        temp_v3 = temp_v3 + 1;
-        if (temp_v3 >= 3) {
-          return 0;
-        }
-      }
+    if (id > 0x500) {
+        return 0;
     }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    Table00Record* record = dataTable00FindById((u16)id);
+    if ((record->flags & 1) == 0) {
+        return 0;
+    }
+    GameDataBlock* save = g_gameDataBlocks.saveBlock;
+    if ((save->inventory.items[id].flags & 2) != 0) {
+        return 1;
+    }
+    for (u32 index = 0; index < 3; ++index) {
+        u16 related = record->relatedIds[index];
+        if (related != 0 && (save->inventory.items[related].flags & 2) != 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

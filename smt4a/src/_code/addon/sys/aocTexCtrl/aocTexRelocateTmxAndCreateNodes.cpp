@@ -33,7 +33,7 @@ struct TmxLoadResult {
 
 extern "C" {
 extern const char DAT_005271bc[];
-void *FUN_0014e3bc(u32 size, u32 flags);
+void *asdMemoryAllocWithFlags(u32 size, u32 flags);
 
 // Relocate TMX group/set offsets, then build runtime texture nodes for every set.
 u32 aocTexRelocateTmxAndCreateNodes(TmxLoadResult *load)
@@ -58,12 +58,12 @@ u32 aocTexRelocateTmxAndCreateNodes(TmxLoadResult *load)
         set->data = data + set->dataOffset;
     }
     asdDebugTrace(DAT_005271bc, 62);
-    TexFile *file = static_cast<TexFile *>(FUN_0014e3bc(sizeof(TexFile), 0));
+    TexFile *file = static_cast<TexFile *>(asdMemoryAllocWithFlags(sizeof(TexFile), 0));
     if (header->setCount < 1) {
         file->nodes = NULL;
     } else {
         asdDebugTrace(DAT_005271bc, 65);
-        file->nodes = static_cast<TexNode *>(FUN_0014e3bc(header->setCount * sizeof(TexNode), 0));
+        file->nodes = static_cast<TexNode *>(asdMemoryAllocWithFlags(header->setCount * sizeof(TexNode), 0));
     }
     TexNode *node = file->nodes;
     for (s32 index = 0; index < header->setCount; ++index, ++node, ++sets) {

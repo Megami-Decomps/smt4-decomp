@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int asdLoadFileSyncDefault(...);
-int FUN_003d209c(...);
+int bustupViewerResetState(...);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_003d209c. */
+/* Supplied declaration required: bustupViewerResetState. */
 
 
 void FUN_002e14a4(void)
@@ -52,7 +52,7 @@ void FUN_002e14a4(void)
   puVar1[0x27] = 0;
   puVar1[0x26] = 0;
   *(unsigned char *)(puVar1 + 0x11) = 0;
-  FUN_003d209c();
+  bustupViewerResetState();
   puVar1[0x12] = 0x1a;
   puVar1[0x13] = 0x1e;
   puVar2 = &LAB_002e15c8;

@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(...);
 int FUN_001568f8(...);
 int recordGetScaledMaximum(void);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
@@ -58,7 +58,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Supplied declaration required: FUN_001568f8. */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: recordGetScaledMaximum. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: dataTable04FindById. */
@@ -69,7 +69,7 @@ extern int bitsAt60Test(unsigned int, unsigned int);
 extern unsigned int FUN_004c2aec(unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_004c4178. */
 /* Supplied declaration required: FUN_004c58e0. */
-extern int FUN_004c8754(unsigned short);
+extern int flagsCountSelectedBits(unsigned short);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -120,7 +120,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
   puVar4 = (unsigned int *)btlGetMainState();
   temp_v6 = temp_v26;
   dataTable04FindById();
-  FUN_00192550();
+  dataTable8FindRecord();
   puVar5 = puVar4;
   FUN_003f0e20(puVar4,param_5);
   puVar6 = puVar4;
@@ -142,7 +142,7 @@ unsigned int FUN_004c2ca8(int param_1,unsigned int param_2,int param_3,int param
     FUN_003f0e20(temp_v3,param_5);
     if ((((temp_v3 != 0) && (temp_v13 = temp_v4, FUN_003f0e20(temp_v4,param_6), temp_v4 != 0)) &&
         (FUN_003e8bb0(temp_v23,temp_v13,temp_v3), temp_v24 != 0)) &&
-       ((temp_v4 = FUN_004c8754(*(unsigned short *)(temp_v4 + 0x274)), temp_v4 != 0 &&
+       ((temp_v4 = flagsCountSelectedBits(*(unsigned short *)(temp_v4 + 0x274)), temp_v4 != 0 &&
         (temp_v0 = (unsigned int)temp_v24 * temp_v4, temp_v0 != 0)))) {
       VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
     }

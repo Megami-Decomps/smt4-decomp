@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00253d60(unsigned char *, unsigned short *);
 int FUN_00253f94(void);
-int FUN_0026242c(void);
+int btlSourceGetMaxHp(void);
 int dataTable08Sub2GetRecord(void);
 int libc_strcpy(unsigned short *, unsigned int);
 int memClear(unsigned short *, int);
@@ -26,7 +26,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00253d60. */
 /* Supplied declaration required: FUN_00253f94. */
-/* Supplied declaration required: FUN_0026242c. */
+/* Supplied declaration required: btlSourceGetMaxHp. */
 extern int dataTable9EntryOrZero(unsigned char);
 extern int FUN_0029aafc(void);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
@@ -76,7 +76,7 @@ void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
   param_1[4] = temp_v1;
   param_1[5] = temp_v0;
   puVar6 = param_2;
-  FUN_0026242c();
+  btlSourceGetMaxHp();
   temp_v1 = param_2[0xf];
   temp_v0 = param_2[0x39];
   param_1[6] = (short)(int)puVar6;

@@ -1,44 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004801ac` (_code @ 0x4801ac, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register rotation only in the heal sum: retail uses r2 for healPercent, r3 for the /100 constant and r1 for hp (ours r3/r1/r2). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00192550(void);
-int FUN_004ccbf0(int);
+#define ITEM_FLAG_HEALS_HP 0x20
 
-/* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_004ccbf0. */
+/* A party member: only its HP and id are read here. */
+typedef struct HealTarget {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u32 hp;
+    /* 0x34 */ u8 unk34[0x30];
+    /* 0x64 */ u16 id;
+} HealTarget;
 
+/* An item record: only its HP-heal fields are read here. */
+typedef struct HealItem {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u16 healPercent;
+    /* 0x4A */ u8 unk4A[0x1E];
+    /* 0x68 */ u32 flags;
+} HealItem;
 
-unsigned int FUN_004801ac(int param_1,int param_2,int param_3)
+HealItem *dataTable8FindRecord(u32 itemId);
+s32 FUN_004ccbf0(u16 id);
 
+/* Applies item `itemId`'s percentage HP heal to `target` (only checks when `checkOnly`); returns 0
+ * when the item would heal, 1 when it has no effect. */
+u32 FUN_004801ac(HealTarget *target, u32 itemId, s32 checkOnly)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (((param_1 != 0) && (FUN_00192550(), param_2 != 0)) &&
-     ((*(unsigned int *)(param_2 + 0x68) & 0x20) != 0)) {
-    temp_v2 = 1;
-    if ((*(short *)(param_2 + 0x48) != 0) &&
-       (temp_v0 = FUN_004ccbf0(*(unsigned short *)(param_1 + 100)), temp_v0 != *(int *)(param_1 + 0x30))) {
-      if (param_3 == 0) {
-        temp_v0 = FUN_004ccbf0(*(unsigned short *)(param_1 + 100));
-        *(int *)(param_1 + 0x30) =
-             (int)((unsigned int)*(unsigned short *)(param_2 + 0x48) * temp_v0) / 100 + *(int *)(param_1 + 0x30);
-        temp_v1 = FUN_004ccbf0(*(unsigned short *)(param_1 + 100));
-        if (temp_v1 < *(unsigned int *)(param_1 + 0x30)) {
-          temp_v2 = FUN_004ccbf0(*(unsigned short *)(param_1 + 100));
-          *(unsigned int *)(param_1 + 0x30) = temp_v2;
-        }
-      }
-      temp_v2 = 0;
+    HealItem *item;
+    u32 noEffect;
+
+    if (target == NULL) {
+        return 1;
     }
-    return temp_v2;
-  }
-  return 1;
+    item = dataTable8FindRecord(itemId);
+    if (item == NULL || !(item->flags & ITEM_FLAG_HEALS_HP)) {
+        return 1;
+    }
+    noEffect = 1;
+    if (item->healPercent != 0 && FUN_004ccbf0(target->id) != target->hp) {
+        if (!checkOnly) {
+            target->hp += FUN_004ccbf0(target->id) * item->healPercent / 100;
+            if (FUN_004ccbf0(target->id) < target->hp) {
+                target->hp = FUN_004ccbf0(target->id);
+            }
+        }
+        noEffect = 0;
+    }
+    return noEffect;
 }
 
 } /* extern "C" */

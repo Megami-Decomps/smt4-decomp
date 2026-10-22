@@ -1,62 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8240` (_code @ 0x3a8240, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail widens the item id with ldrh, sxth and uxth; this build uses ldrsh and uxth
+ * (one instruction shorter). */
+#include "common.h"
+
+/* One item on sale (0x20 bytes). */
+struct ShopListItem {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 itemId;
+    /* 0x06 */ u8 unk06[0x1a];
+};
+
+/* The shop's purchase confirmation work. */
+struct ShopConfirm {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s32 state;
+    /* 0x018 */ s32 step;
+    /* 0x01c */ u8 unk01c[4];
+    /* 0x020 */ u8 cursor[0x74];
+    /* 0x094 */ s8 rank; /* 100 and above: discounted */
+    /* 0x095 */ u8 unk095[0x50b];
+    /* 0x5a0 */ u32 script;
+    /* 0x5a4 */ u8 unk5a4;
+    /* 0x5a5 */ u8 quantity;
+    /* 0x5a6 */ u8 unk5a6[2];
+    /* 0x5a8 */ ShopListItem items[1];
+};
 
 extern "C" {
+s32 scrRunOpcodesStub(u32 script);
+s32 messageMainGetChoiceResult(void);
+void messageMainSetTargetFlags(u32 flags);
+void FUN_002a0cc8(s32 mode);
+void buttonHelpSetPreset(s32 preset);
+s32 flaggedValueHolderGetTotal(u8 *cursor);
+s32 FUN_0029ce60(u16 itemId, u8 quantity, s32 mode, s32 discounted, s32 extra);
+void FUN_0029c43c(s32 amount, s32 mode);
+void FUN_002e3150(void);
 
-int messageMainSetTargetFlags(int);
-int FUN_0029c43c(unsigned int, int);
-int FUN_0029ce60(unsigned int, int, int);
-int FUN_002a0cc8(int);
-int buttonHelpSetPreset(int);
-int FUN_002e3150(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int scrRunOpcodesStub(unsigned int);
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: messageMainSetTargetFlags. */
-extern int FUN_002973d8(void);
-/* Supplied declaration required: FUN_0029c43c. */
-/* Supplied declaration required: FUN_0029ce60. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002e3150. */
-
-
-void FUN_003a8240(int param_1)
-
+/* Waits for the confirmation script; on "yes" pays for the selected item and moves to state 4,
+ * otherwise returns to state 2. */
+void FUN_003a8240(ShopConfirm *shop)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x5a0));
-  if (temp_v0 != 2) {
-    return;
-  }
-  temp_v0 = FUN_002973d8();
-  if (temp_v0 == 0) {
-    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x5ac);
-    FUN_0029ce60(temp_v1,*(unsigned char *)(param_1 + 0x5a5),0);
-    FUN_0029c43c(-temp_v1,0);
+    if (scrRunOpcodesStub(shop->script) != 2) {
+        return;
+    }
+    if (messageMainGetChoiceResult() != 0) {
+        messageMainSetTargetFlags(0);
+        FUN_002a0cc8(0);
+        shop->state = 2;
+        shop->step = 0;
+        buttonHelpSetPreset(45);
+        return;
+    }
+    ShopListItem *items = shop->items;
+    ShopListItem *item = &items[flaggedValueHolderGetTotal(shop->cursor)];
+    s16 itemId = item->itemId;
+    s32 price = FUN_0029ce60(itemId, shop->quantity, 0, shop->rank >= 100, 0);
+    FUN_0029c43c(-price, 0);
     FUN_002a0cc8(1);
-    *(unsigned int *)(param_1 + 0x14) = 4;
-    *(unsigned int *)(param_1 + 0x18) = 0;
+    shop->state = 4;
+    shop->step = 0;
     FUN_002e3150();
-    buttonHelpSetPreset(0x2d);
-    return;
-  }
-  messageMainSetTargetFlags(0);
-  FUN_002a0cc8(0);
-  *(unsigned int *)(param_1 + 0x14) = 2;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  buttonHelpSetPreset(0x2d);
-  return;
+    buttonHelpSetPreset(45);
 }
-
-} /* extern "C" */
+}

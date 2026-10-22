@@ -59,9 +59,18 @@ struct DisplayModeContext {
             u32 active; // 0x124
             GraphicsTarget *targets[3]; // 0x128
         } query;
+        struct {
+            /* 0x00C */ u8 unk00c[0x148];
+            /* 0x154 */ u32 firstCount;
+            /* 0x158 */ u32 secondCount;
+        } completion;
     };
     u32 topScreenMode; // 0x164
 };
+
+typedef char DisplayModeContextSizeCheck[sizeof(DisplayModeContext) == 0x168 ? 1 : -1];
+typedef char DisplayModeContextCompletionOffsetCheck[offsetof(DisplayModeContext, completion) == 0xC ? 1 : -1];
+typedef char DisplayModeContextCompletionSizeCheck[sizeof(((DisplayModeContext *)0)->completion) == 0x150 ? 1 : -1];
 
 extern "C" DisplayModeContext g_asdGfxContext;
 

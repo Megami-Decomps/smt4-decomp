@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002946a0(unsigned int, int);
+int messageShowForKindVariant(unsigned int, int);
 int distSpatial(void);
 int controllerSetDestination(unsigned int, float *);
 int controllerSetPosition(unsigned int);
@@ -23,7 +23,7 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 extern int DAT_005f189c; /* 0x5f189c */
 
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_002946a0. */
+/* Supplied declaration required: messageShowForKindVariant. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetPosition. */
@@ -101,7 +101,7 @@ LAB_004818dc:
     *(float *)(param_1 + 0x9c) = temp_v5;
     if (temp_v6 < temp_v5) {
       if (*(char *)(param_1 + 0x8b) == '\0' || *(char *)(param_1 + 0x8b) == '\x03') {
-        FUN_002946a0(*(unsigned int *)(param_1 + 100),0);
+        messageShowForKindVariant(*(unsigned int *)(param_1 + 100),0);
       }
       *(float *)(param_1 + 0x9c) = temp_v6;
       *(unsigned int *)(param_1 + 0x7c) = *(unsigned int *)(param_1 + 0x7c) & 0xfffffffe;

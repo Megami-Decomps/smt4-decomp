@@ -1,3 +1,4 @@
-#include "shard/W5_W5Match6_UiState.h"
+#include "ui/ButtonHelp.h"
+extern "C" ButtonHelpGlobalsA g_buttonHelp;
 /* Reads the button-help panel state. */
-extern "C" s32 buttonHelpGetPanelMode(void) { return g_buttonHelp.work->panel.mode; }
+extern "C" s32 buttonHelpGetPanelMode(void) { return g_buttonHelp.work->mode; }

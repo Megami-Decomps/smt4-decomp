@@ -1,70 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039ca70` (_code @ 0x39ca70, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares the "step = 0/1" store between cases 0 and 2, reloads g_gameState
+ * for the flag write and places the FUN_00289880 arm last; armcc here keeps case 2 separate */
+#include "map/mapDepart.h"
+
+#define UNK39CA70_FLAG_BUSY 0x1000000
+
+/* The phase record this step function drives. */
+struct Unk39ca70Phase {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 result;
+    /* 0x08 */ s32 step;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 flags;
+};
 
 extern "C" {
 
-int commonBgReset(void);
-int FUN_00275f00(void);
-int FUN_00289880(void);
+extern GameState g_gameState;
 
-typedef struct fn_0039ca70_arg0 fn_0039ca70_arg0;
-struct fn_0039ca70_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    uint field_0x10; /* +0x10 */
-};
+s32 gameFlagIsSet(u32 flag);
+void commonBgReset(void);
+void FUN_00289880(void);
+void FUN_00275f00(void);
+s32 buttonHelpIsNotActive(void);
 
-extern unsigned char g_gameState; /* 0x49f91c */
-
-extern int buttonHelpIsNotActive(void);
-/* Supplied declaration required: commonBgReset. */
-/* Supplied declaration required: FUN_00275f00. */
-/* Supplied declaration required: FUN_00289880. */
-extern int gameFlagIsSet(unsigned int);
-
-
-void FUN_0039ca70(fn_0039ca70_arg0 *param_1)
-
+/* Steps the phase: rebuilds the background if requested, waits for the button help to close,
+ * then clears the busy flag and reports result 2. */
+void FUN_0039ca70(Unk39ca70Phase *phase)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = param_1->field_0x8;
-  temp_v0 = 0;
-  if (temp_v1 != 0) {
-    if (temp_v1 == 1) {
-      temp_v0 = buttonHelpIsNotActive();
-      if (temp_v0 != 0) {
-        param_1->field_0x8 = 2;
-      }
-      return;
+    switch (phase->step) {
+    case 0:
+        if (g_gameState.bgResetPending != 0) {
+            g_gameState.bgResetPending = 0;
+            if (gameFlagIsSet(22)) {
+                commonBgReset();
+            } else {
+                FUN_00289880();
+            }
+        }
+        FUN_00275f00();
+        phase->step = 1;
+        break;
+    case 1:
+        if (buttonHelpIsNotActive()) {
+            phase->step = 2;
+        }
+        break;
+    case 2:
+        phase->flags &= ~UNK39CA70_FLAG_BUSY;
+        phase->result = 2;
+        phase->step = 0;
+        break;
     }
-    if (temp_v1 != 2) {
-      return;
-    }
-    param_1->field_0x10 = param_1->field_0x10 & 0xfeffffff;
-    param_1->field_0x4 = 2;
-  }
-  else {
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
-      (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
-      temp_v0 = gameFlagIsSet(0x16);
-      if (temp_v0 != 0) {
-        commonBgReset();
-      }
-      else {
-        FUN_00289880();
-      }
-    }
-    FUN_00275f00();
-    temp_v0 = 1;
-  }
-  param_1->field_0x8 = temp_v0;
-  return;
 }
 
 } /* extern "C" */

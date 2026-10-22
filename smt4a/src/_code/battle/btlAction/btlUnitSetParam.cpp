@@ -5,7 +5,7 @@ struct BtlMainStateA;
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_003e8bb0(unsigned int [112], int);
 int FUN_004dffe4(int *);
 int FUN_004e5a90(...);
@@ -43,7 +43,7 @@ extern int DAT_00571194; /* 0x571194 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int lcgRandomRange(short);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004dffe4. */
 /* Supplied declaration required: FUN_004e5a90. */
@@ -121,7 +121,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     break;
   case 8:
     temp_v3 = (int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x1c0);
-    FUN_00192550();
+    dataTable8FindRecord();
     if (*(short *)(temp_v3 + 0x32) == 0) {
       temp_v11[0] = (unsigned int)((**(unsigned int **)(temp_v2 + 0x20) & DAT_00571168) != 0 ||
                            (DAT_0057116c & (*(unsigned int **)(temp_v2 + 0x20))[1]) != 0);

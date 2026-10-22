@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_001a2638(u32 arg0);
+int osConvertToPhysicalAddress(u32 arg0);
 
-/* Forwards to FUN_001a2638, the function that follows it. */
+/* Forwards to osConvertToPhysicalAddress, the function that follows it. */
 int FUN_001a2634(u32 arg0)
 {
-    return FUN_001a2638(arg0);
+    return osConvertToPhysicalAddress(arg0);
 }
 
 } /* extern "C" */

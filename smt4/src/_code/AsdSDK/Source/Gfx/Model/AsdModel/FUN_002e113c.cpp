@@ -1,65 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e113c` (_code @ 0x2e113c, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists both group-table loads before the attach, emits two nop hints after the attach call and saves r8; branch layout differs. */
+#include "common.h"
+
+/* A scene group root: the scene node header, then its child list. */
+struct AsdSceneGroup {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 children[0x10];
+};
+
+/* A model node attached to one of the two scene groups. */
+struct AsdModelGroupLink {
+    /* 0x00 */ s32 group; /* 0 or 1; -1 when detached */
+    /* 0x04 */ void *node;
+};
 
 extern "C" {
 
-int sceneTraverserVisit(unsigned int, unsigned int);
-int FUN_002abbe8(unsigned int, unsigned int);
-int nw_gfx_SceneNode_AttachChild(unsigned int, unsigned int);
+extern AsdSceneGroup *g_asdModelSlotArray1[];
+extern void *DAT_00464b7c[2];                  /* scene traverser per group */
+extern void *g_asdModelTransformBuilder[2];    /* transform builder per group */
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+void nw_gfx_SceneNode_AttachChild(AsdSceneGroup *parent, void *child);
+u8 FUN_002abbe8(u8 *children, void *child);
+void sceneTraverserVisit(void *traverser, void *builder);
 
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b80; /* 0x464b80 */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern unsigned int DAT_00464b88; /* 0x464b88 */
-extern unsigned int g_asdModelSlotArray1; /* 0x464ba4 */
-
-/* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: FUN_002abbe8. */
-/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
-
-
-void FUN_002e113c(unsigned int *param_1,unsigned int param_2)
-
+/* Moves a model node into scene group 0 or 1 (or detaches it with -1) and re-traverses every group
+ * it left or joined. */
+void FUN_002e113c(AsdModelGroupLink *link, s32 group)
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = *param_1;
-  if (temp_v0 == param_2) {
-    return;
-  }
-  *param_1 = param_2;
-  if (param_2 >= 2) {
-    if (param_2 == 0xffffffff) {
-      FUN_002abbe8((&g_asdModelSlotArray1)[temp_v0] + 0x10,param_1[1]);
-      goto LAB_002e11a0;
-    }
-LAB_002e11ac:
-    if (temp_v0 != 0) {
-      if (*param_1 != 1 && temp_v0 != 1) {
+    s32 previous = link->group;
+
+    if (previous == group) {
         return;
-      }
-      sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
-      return;
     }
-  }
-  else {
-    nw_gfx_SceneNode_AttachChild((&g_asdModelSlotArray1)[param_2],param_1[1]);
-LAB_002e11a0:
-    if (*param_1 != 0) goto LAB_002e11ac;
-  }
-  sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
-  if (*param_1 != 1 && temp_v0 != 1) {
-    return;
-  }
-  sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
-  return;
+    link->group = group;
+    if (group == 0 || group == 1) {
+        nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray1[group], link->node);
+    } else if (group == -1) {
+        FUN_002abbe8(g_asdModelSlotArray1[previous]->children, link->node);
+    }
+    if (link->group == 0 || previous == 0) {
+        sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+    }
+    if (link->group == 1 || previous == 1) {
+        sceneTraverserVisit(DAT_00464b7c[1], g_asdModelTransformBuilder[1]);
+    }
 }
 
 } /* extern "C" */

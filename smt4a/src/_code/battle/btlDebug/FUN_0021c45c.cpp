@@ -6,7 +6,7 @@ extern "C" {
 
 int qsort(...);
 int FUN_0014e188(...);
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int FUN_00184310(void);
 int uiSpriteSelectAnim(...);
@@ -51,7 +51,7 @@ extern unsigned int DAT_005e1560; /* 0x5e1560 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -202,7 +202,7 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x8c + 0x35b8;
-    FUN_0014e220(temp_v5,0xd,0xffffffff,0xf,param_1,0xf1);
+    uiSpriteInitializeState(temp_v5,0xd,0xffffffff,0xf,param_1,0xf1);
     uiSpriteSelectAnim(temp_v5,7);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);

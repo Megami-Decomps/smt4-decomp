@@ -17,7 +17,7 @@ int asdMemFree(void);
 int dialogClose(...);
 int messageForwardDefaultMode(...);
 int FUN_002854d8(...);
-int FUN_002b53e0(...);
+int btlResultTaskStart(...);
 int mapDepartPrepare(void);
 int libc_strcpy(...);
 int FUN_003180c4(...);
@@ -31,7 +31,7 @@ int FUN_003f135c(...);
 int FUN_0041817c(...);
 int FUN_004aa854(...);
 int FUN_004bcb54(void);
-int FUN_004c8b10(void);
+int btlHelpFreeEntries(void);
 int FUN_004f5e6c(...);
 int state339CFinish(void);
 int FUN_004fbeac(...);
@@ -75,7 +75,7 @@ int FUN_0027249c(...);
 int FUN_002726b8(...);
 int FUN_002919b4(...);
 int FUN_00291ce8(...);
-int FUN_002b5000(...);
+int btlCameraCreate(...);
 int FUN_002b52a4(...);
 int btlTalkBustUpCreate(void);
 int sysMemClear(...);
@@ -200,10 +200,10 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00291bd4. */
 /* Supplied declaration required: FUN_00291ce8. */
 /* Supplied declaration required: FUN_002b4f28. */
-/* Supplied declaration required: FUN_002b5000. */
+/* Supplied declaration required: btlCameraCreate. */
 /* Supplied declaration required: FUN_002b50e4. */
 /* Supplied declaration required: FUN_002b52a4. */
-/* Supplied declaration required: FUN_002b53e0. */
+/* Supplied declaration required: btlResultTaskStart. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: FUN_002cf698. */
 /* Supplied declaration required: mapDepartPrepare. */
@@ -250,7 +250,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004bcb54. */
 /* Supplied declaration required: slotStreakUpdate. */
 /* Supplied declaration required: btlSelectFirstPartyAssistParticipant. */
-/* Supplied declaration required: FUN_004c8b10. */
+/* Supplied declaration required: btlHelpFreeEntries. */
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: FUN_004d7a70. */
@@ -408,7 +408,7 @@ void FUN_002ba998(unsigned int param_1)
       }
     }
     FUN_0037693c(temp_v7);
-    FUN_002b5000(temp_v7);
+    btlCameraCreate(temp_v7);
     btlAutoStartCalculation(temp_v7);
     temp_v6 = jobIsValid(*(unsigned int *)(temp_v7 + 0x78));
     if (temp_v6 == 0) {
@@ -1048,7 +1048,7 @@ LAB_002bbdec:
     temp_v10 = ~DAT_00573a18;
     *(unsigned int *)(temp_v7 + 0x45a4) = *(unsigned int *)(temp_v7 + 0x45a4) & ~DAT_00573a0c & ~DAT_00573a1c;
     *(unsigned int *)(temp_v7 + 0x45a0) = *(unsigned int *)(temp_v7 + 0x45a0) & temp_v9 & temp_v10;
-    FUN_004c8b10();
+    btlHelpFreeEntries();
     temp_v6 = dialogIsActive();
     if (temp_v6 != 0) {
       dialogClose(1);
@@ -1154,7 +1154,7 @@ LAB_002bbdec:
     temp_v10 = ~DAT_00573a18;
     *(unsigned int *)(temp_v7 + 0x45a4) = *(unsigned int *)(temp_v7 + 0x45a4) & ~DAT_00573a0c & ~DAT_00573a1c;
     *puVar20 = *puVar20 & temp_v9 & temp_v10;
-    FUN_004c8b10();
+    btlHelpFreeEntries();
     if ((*(unsigned int *)(temp_v7 + 0x45a4) & DAT_00573a54) == 0 && (*puVar20 & DAT_00573a50) == 0) {
       switch(*(unsigned int *)(temp_v7 + 0xa8)) {
       case 1:
@@ -1164,8 +1164,8 @@ LAB_002bbdec:
       case 10:
       case 0xb:
         if ((*(unsigned int *)(temp_v7 + 0x10c) & 0x800000) == 0) {
-          FUN_004c8b10();
-          FUN_002b53e0(temp_v7);
+          btlHelpFreeEntries();
+          btlResultTaskStart(temp_v7);
           mapDepartPrepare();
         }
       }

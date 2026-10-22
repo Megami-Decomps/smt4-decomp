@@ -1,98 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e63a8` (_code @ 0x2e63a8, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail movs r4, r1 differs from recovered mov r0, r2. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_00102e7c(...);
-int FUN_002e61e8(...);
-
-typedef struct fn_002e63a8_arg2 fn_002e63a8_arg2;
-struct fn_002e63a8_arg2 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x4];
-    uint field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x4];
-    undefined4 field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x2c];
-    uint field_0x4c; /* +0x4c */
+struct StreamLocalView {
+    u8 unk00[0x04];       // 0x00
+    u32 unk04;            // 0x04
+    u8 unk08[0x04];       // 0x08
+    u32 unk0C;            // 0x0C
+    u32 unk10;            // 0x10
+    s32 unk14;            // 0x14
+    u8 unk18[0x04];       // 0x18
+    u32 unk1C;            // 0x1C
+    u8 unk20[0x2C];       // 0x20
+    u32 unk4C;            // 0x4C
 };
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
+extern "C" {
+void FUN_002e61e8(StreamLocalView* stream);
+s32 returnMinusOne2(u32 openArgument, u32 flags);
+s32 FUN_00102e7c(StreamLocalView* stream, s32 offset, s32 origin);
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_00102e7c. */
-/* Supplied declaration required: FUN_002e61e8. */
-extern int returnMinusOne2(unsigned int, unsigned int);
-
-
-long long FUN_002e63a8(unsigned int param_1,char *param_2,fn_002e63a8_arg2 *param_3)
-
+// Parse the open mode and initialize the stream after opening successfully.
+StreamLocalView* FUN_002e63a8(u32 openArgument, const char* mode,
+                            StreamLocalView* stream)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  FUN_002e61e8(param_3);
-  temp_v0 = *param_2;
-  param_2 = param_2 + 1;
-  if (temp_v0 != 'a') {
-    if (temp_v0 != 'r') {
-      if (temp_v0 != 'w') {
-        return (unsigned long long)param_1 << 0x20;
-      }
-      temp_v3 = 2;
-      temp_v2 = 4;
-    }
-    else {
-      temp_v3 = 1;
-      temp_v2 = 0;
-    }
-  }
-  else {
-    temp_v3 = 0x8002;
-    temp_v2 = 8;
-  }
-  while( 1 ) {
-    while( 1 ) {
-      if (*param_2 != '+') break;
-      temp_v3 = temp_v3 | 3;
-      temp_v2 = temp_v2 | 2;
-      param_2 = param_2 + 1;
-    }
-    if (*param_2 != 'b') break;
-    temp_v3 = temp_v3 | 4;
-    temp_v2 = temp_v2 | 1;
-    param_2 = param_2 + 1;
-  }
-  if (*param_2 == 't') {
-    temp_v2 = temp_v2 | 0x10;
-  }
-  temp_v1 = returnMinusOne2(param_1,temp_v2);
-  if (temp_v1 != -1) {
-    param_3->field_0x10 = 0;
-    param_3->field_0x4 = 0;
-    param_3->field_0xc = temp_v3;
-    param_3->field_0x1c = 0x200;
-    param_3->field_0x14 = temp_v1;
-    if ((int)(temp_v2 << 0x1c) < 0) {
-      FUN_00102e7c(param_3,0,2);
-    }
-    param_3->field_0x4c = param_3->field_0x4c | 1;
-    return romwright_piece_4_4(param_1,param_3);
-  }
-  return (unsigned long long)param_1 << 0x20;
-}
+    FUN_002e61e8(stream);
 
-} /* extern "C" */
+    u32 streamFlags;
+    u32 openFlags;
+    switch (*mode++) {
+    case 'r':
+        streamFlags = 1;
+        openFlags = 0;
+        break;
+    case 'w':
+        streamFlags = 2;
+        openFlags = 4;
+        break;
+    case 'a':
+        streamFlags = 0x8002;
+        openFlags = 8;
+        break;
+    default:
+        return 0;
+    }
+
+    for (;;) {
+        switch (*mode++) {
+        case '+':
+            streamFlags |= 3;
+            openFlags |= 2;
+            continue;
+        case 'b':
+            streamFlags |= 4;
+            openFlags |= 1;
+            continue;
+        }
+        break;
+    }
+    if (mode[-1] == 't') {
+        openFlags |= 0x10;
+    }
+
+    s32 handle = returnMinusOne2(openArgument, openFlags);
+    if (handle == -1) {
+        return 0;
+    }
+
+    stream->unk10 = 0;
+    stream->unk04 = 0;
+    stream->unk0C = streamFlags;
+    stream->unk1C = 0x200;
+    stream->unk14 = handle;
+    if (openFlags & 8) {
+        FUN_00102e7c(stream, 0, 2);
+    }
+    stream->unk4C |= 1;
+    return stream;
+}
+}

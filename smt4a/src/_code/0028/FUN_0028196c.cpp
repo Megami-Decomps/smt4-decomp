@@ -1,50 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028196c` (_code @ 0x28196c, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: lock/batch/count registers rotate and batch/message counters are stored in a different order. */
+#include "AsdSDK/Source/Net/Cec/AsdCecProcess.h"
 
 extern "C" {
+void nn_os_CriticalSection_Enter(void *lock);
+void nn_os_CriticalSection_Leave(void *lock);
+s32 asdCecInboxGetMessageCount();
+void asdCecReadInboxMessages(u32 box, s32 count, AsdCecInboxBatch *batch, u32 flags);
 
-int asdCecReadInboxMessages(int, int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int asdCecInboxGetMessageCount(void);
-/* Supplied declaration required: asdCecReadInboxMessages. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-void FUN_0028196c(int param_1)
-
+void FUN_0028196c(AsdCecProcessWork *work)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0xd28;
-  do {
-    nn_os_CriticalSection_Enter(temp_v2);
-    temp_v0 = *(unsigned int *)(param_1 + 0x90);
-    if (temp_v0 - *(int *)(param_1 + 0x94) < 0x20) {
-      temp_v1 = asdCecInboxGetMessageCount();
-      if (temp_v1 >= 0x21) {
-        temp_v1 = 0x20;
-      }
-      asdCecReadInboxMessages(0,temp_v1,param_1 + (temp_v0 & 0x1f) * 100 + 0x98);
-      *(int *)(param_1 + 0x90) = *(int *)(param_1 + 0x90) + 1;
-      temp_v1 = *(int *)(param_1 + 0x84) + temp_v1;
-      *(int *)(param_1 + 0x84) = temp_v1;
-      if (*(int *)(param_1 + 0x88) <= temp_v1) {
-        nn_os_CriticalSection_Leave(temp_v2);
-        return;
-      }
+    for (;;) {
+        nn_os_CriticalSection_Enter(work->inbox.lock);
+        if (work->inbox.producedBatches - work->inbox.consumedBatches < 32) {
+            AsdCecInboxBatch *batch = &work->inbox.batches[work->inbox.producedBatches & 31];
+            s32 count = asdCecInboxGetMessageCount();
+            if (count > 32) {
+                count = 32;
+            }
+            asdCecReadInboxMessages(0, count, batch, 0);
+            ++work->inbox.producedBatches;
+            work->inbox.receivedCount += count;
+            if (work->inbox.receivedCount >= work->inbox.requestedCount) {
+                nn_os_CriticalSection_Leave(work->inbox.lock);
+                return;
+            }
+        }
+        nn_os_CriticalSection_Leave(work->inbox.lock);
     }
-    nn_os_CriticalSection_Leave(temp_v2);
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

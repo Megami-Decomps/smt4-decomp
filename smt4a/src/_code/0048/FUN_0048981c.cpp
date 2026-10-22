@@ -9,11 +9,11 @@ int FUN_00183e58(void);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
-int FUN_0048816c(...);
+int listGetAdjacentEntryId(...);
 int FUN_0048d248(...);
 int rectRecRead(...);
 int sub68OwnerGetBlock60(...);
-int FUN_00492c18(...);
+int naviMainSetValuePair(...);
 int setFullScreenRect(void);
 int FUN_004d040c(...);
 
@@ -57,13 +57,13 @@ extern int FUN_00325064(void);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_0048816c. */
+/* Supplied declaration required: listGetAdjacentEntryId. */
 /* Supplied declaration required: FUN_0048d248. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 extern int naviGetActiveStateValue(int);
-/* Supplied declaration required: FUN_00492c18. */
-extern int FUN_00492c5c(int);
+/* Supplied declaration required: naviMainSetValuePair. */
+extern int naviMainGetRequestedMap(int);
 extern unsigned int FUN_00492c84(int);
 /* Supplied declaration required: setFullScreenRect. */
 /* Supplied declaration required: FUN_004d040c. */
@@ -165,12 +165,12 @@ LAB_004899f8:
       case 0:
         if (*(char *)(param_1 + 0xc) != '\0') {
           temp_v0 = param_1;
-          FUN_0048816c(param_1,1);
+          listGetAdjacentEntryId(param_1,1);
           if (temp_v0 != 0) {
             sysPlayVoice(0x100020d);
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
             temp_v0 = param_1;
-            FUN_0048816c(param_1,1);
+            listGetAdjacentEntryId(param_1,1);
             if (temp_v0 != 0) {
               *(char *)(param_1 + 100) = (char)temp_v0;
             }
@@ -198,7 +198,7 @@ LAB_004899f8:
             pfVar3 = (float *)sub68OwnerGetBlock60(temp_v7);
             temp_v4 = (unsigned int *)romwright_f2u((float)((*pfVar3 * 2.0f)));
             temp_v5 = (unsigned int *)romwright_f2u((float)((pfVar3[1] * 2.0f)));
-            FUN_00492c18(temp_v7,&temp_v4);
+            naviMainSetValuePair(temp_v7,&temp_v4);
             *(unsigned char *)((int)temp_v10 + 0xd8e) = 0xc;
             *(unsigned char *)(param_1 + 0x57) = 5;
             *(unsigned char *)(param_1 + 0x59) = 0;
@@ -253,14 +253,14 @@ LAB_004899f8:
           if (temp_v9[0] != 0) {
             sysPlayVoice(0x1000229);
             if (DAT_005f1a5e != '\0') {
-              temp_v0 = FUN_00492c5c(temp_v7);
+              temp_v0 = naviMainGetRequestedMap(temp_v7);
               temp_v1 = naviGetActiveStateValue(temp_v7);
               if (temp_v0 == temp_v1) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
                 sub68OwnerGetBlock60(temp_v7);
                 temp_v10 = puVar9;
                 temp_v11 = puVar9;
-                FUN_00492c18(temp_v7,&temp_v10);
+                naviMainSetValuePair(temp_v7,&temp_v10);
                 *(unsigned char *)(param_1 + 0x58) = 5;
                 *(char *)(param_1 + 100) = (char)*puVar6;
                 *puVar7 = 1;
@@ -274,7 +274,7 @@ LAB_004899f8:
               sub68OwnerGetBlock60(temp_v7);
               temp_v10 = puVar9;
               temp_v11 = puVar9;
-              FUN_00492c18(temp_v7,&temp_v10);
+              naviMainSetValuePair(temp_v7,&temp_v10);
               *(unsigned char *)(param_1 + 0x58) = 5;
               *(char *)(param_1 + 100) = (char)*puVar6;
               *puVar7 = 1;
@@ -289,14 +289,14 @@ LAB_004899f8:
           if (temp_v9[0] != 0) {
             sysPlayVoice(0x1000229);
             if (DAT_005f1a5e != '\0') {
-              temp_v0 = FUN_00492c5c(temp_v7);
+              temp_v0 = naviMainGetRequestedMap(temp_v7);
               temp_v1 = naviGetActiveStateValue(temp_v7);
               if (temp_v0 == temp_v1) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
                 sub68OwnerGetBlock60(temp_v7);
                 temp_v10 = puVar9;
                 temp_v11 = puVar9;
-                FUN_00492c18(temp_v7,&temp_v10);
+                naviMainSetValuePair(temp_v7,&temp_v10);
                 *(char *)(param_1 + 100) = (char)*puVar6;
                 *puVar7 = 1;
                 *puVar8 = 1;
@@ -309,7 +309,7 @@ LAB_004899f8:
               sub68OwnerGetBlock60(temp_v7);
               temp_v10 = puVar9;
               temp_v11 = puVar9;
-              FUN_00492c18(temp_v7,&temp_v10);
+              naviMainSetValuePair(temp_v7,&temp_v10);
               *(unsigned char *)(param_1 + 0x58) = 5;
               *(char *)(param_1 + 100) = (char)*puVar6;
               *puVar7 = 1;
@@ -333,7 +333,7 @@ LAB_004899f8:
         pfVar3 = (float *)sub68OwnerGetBlock60(temp_v7);
         temp_v4 = (unsigned int *)romwright_f2u((float)((*pfVar3 * 0.5f)));
         temp_v5 = (unsigned int *)romwright_f2u((float)((pfVar3[1] * 0.5f)));
-        FUN_00492c18(temp_v7,&temp_v4);
+        naviMainSetValuePair(temp_v7,&temp_v4);
         *(unsigned char *)((int)temp_v10 + 0xd8e) = 6;
         *(unsigned char *)(param_1 + 0x59) = 5;
         *(unsigned char *)(param_1 + 0x57) = 0;
@@ -341,12 +341,12 @@ LAB_004899f8:
       case 4:
         if (*(char *)(param_1 + 0xc) != '\0') {
           temp_v0 = param_1;
-          FUN_0048816c(param_1,0xffffffff);
+          listGetAdjacentEntryId(param_1,0xffffffff);
           if (temp_v0 != 0) {
             sysPlayVoice(0x100020d);
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
             temp_v0 = param_1;
-            FUN_0048816c(param_1,0xffffffff);
+            listGetAdjacentEntryId(param_1,0xffffffff);
             if (temp_v0 != 0) {
               *(char *)(param_1 + 100) = (char)temp_v0;
             }
@@ -367,7 +367,7 @@ LAB_004899f8:
               sub68OwnerGetBlock60(temp_v7);
               temp_v4 = puVar9;
               temp_v5 = puVar9;
-              FUN_00492c18(temp_v7,&temp_v4);
+              naviMainSetValuePair(temp_v7,&temp_v4);
               *puVar7 = 1;
               *puVar8 = 1;
             }
@@ -395,7 +395,7 @@ LAB_004899f8:
             sub68OwnerGetBlock60(temp_v7);
             temp_v4 = puVar9;
             temp_v5 = puVar9;
-            FUN_00492c18(temp_v7,&temp_v4);
+            naviMainSetValuePair(temp_v7,&temp_v4);
             *puVar7 = 1;
             *puVar8 = 1;
           }
@@ -406,7 +406,7 @@ LAB_004899f8:
             sub68OwnerGetBlock60(temp_v7);
             temp_v4 = puVar9;
             temp_v5 = puVar9;
-            FUN_00492c18(temp_v7,&temp_v4);
+            naviMainSetValuePair(temp_v7,&temp_v4);
             *(unsigned int **)(param_1 + 0x34) = temp_v4;
             *(unsigned int **)(param_1 + 0x38) = temp_v5;
             FUN_003a35a4();

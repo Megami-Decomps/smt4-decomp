@@ -1,54 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037f2d4` (_code @ 0x37f2d4, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+u32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+BtlMainStateA *btlGetMainState(void);
 
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0037f2d4(void)
-
+// Script command: sets 1 when a candidate entry that is not excluded has encoded stat `stat` (below 21) free of its top six bits.
+u32 FUN_0037f2d4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  if (temp_v0 < 0x15) {
-    temp_v4 = 0;
-    do {
-      temp_v1 = btlGetMainState();
-      puVar5 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v4 * 0x408);
-      temp_v2 = *puVar5;
-      temp_v3 = puVar5[1];
-      if (((((DAT_005702a0 & temp_v2) != 0 || (DAT_005702a4 & temp_v3) != 0) &&
-           ((DAT_0057028c & temp_v3) != 0 || (g_btlCandidateMasks & temp_v2) != 0)) &&
-          ((temp_v2 & DAT_005702b0) == 0 && (temp_v3 & DAT_005702b4) == 0)) &&
-         ((*(unsigned short *)((int)puVar5 + temp_v0 * 2 + 0x2b6) & 0xfc00) == 0)) {
-        scrSetResult(1);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x6d);
-  }
-  scrSetResult(0);
-  return 1;
-}
+    u32 stat = scrGetArg(0);
+    s32 i;
 
-} /* extern "C" */
+    if (stat < 21) {
+        for (i = 0; i < 0x6d; i++) {
+            BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+            u64 flags = entry->flags;
+            if ((flags & g_btlCandidateMasks.unavailable) && (flags & g_btlCandidateMasks.required) &&
+                !(flags & g_btlCandidateMasks.excluded) && !(entry->encodedStats.values[stat] & 0xfc00)) {
+                scrSetResult(1);
+                return 1;
+            }
+        }
+    }
+    scrSetResult(0);
+    return 1;
+}
+}

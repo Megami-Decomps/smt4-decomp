@@ -16,7 +16,7 @@ typedef struct {
 
 extern int FUN_001b5498(...); /* 0x1b5498 */
 extern unsigned char LAB_001d26c8; /* 0x1d26c8 */
-extern int FUN_0020ef98(...); /* 0x20ef98 */
+extern int btlHelpFreeNodeListAndStopJob(...); /* 0x20ef98 */
 extern unsigned int *DAT_00435d78; /* 0x435d78 */
 
 extern int jobIsValid(unsigned int);
@@ -35,7 +35,7 @@ void FUN_001d2628(unsigned int *param_1)
   temp_v0 = jobIsValid(param_1[0x13]);
   if (temp_v0 == 0) {
     puVar2 = &LAB_001d26c8;
-    taskCreateDraw(&LAB_001d26c8,2,0,0,FUN_001b5498,FUN_0020ef98,param_1,*param_1);
+    taskCreateDraw(&LAB_001d26c8,2,0,0,FUN_001b5498,btlHelpFreeNodeListAndStopJob,param_1,*param_1);
     param_1[0x13] = (unsigned int)puVar2;
     puVar3 = (unsigned int *)0x100;
     asdMemAlloc(0x100,0x100,0,0xc,1);

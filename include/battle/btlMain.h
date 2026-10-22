@@ -4,6 +4,7 @@
 #define BATTLE_BTLMAIN_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define BTL_FLAG_NO_ENCOUNT 0x80000 /* BtlMain.flags: random encounters are suppressed */
 
@@ -51,7 +52,11 @@ typedef struct BtlMainStateA {
     /* 0x004C */ u32 jobB;        /* second job */
     /* 0x0050 */ u8 unk0050[0x34];
     /* 0x0084 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
-    /* 0x0085 */ u8 unk0085[0x1E4F];
+    /* 0x0085 */ u8 unk0085[3];
+    /* 0x0088 */ s32 unk0088;
+    /* 0x008C */ u8 unk008C[0x1E34];
+    /* 0x1EC0 */ s16 unk1EC0;
+    /* 0x1EC2 */ u8 unk1EC2[0x12];
     union {
         /* 0x1ED4 */ u32 unk1ED4;
         /* 0x1ED4 */ BattleRosterRecordA *roster;
@@ -69,9 +74,17 @@ typedef struct BtlMainStateA {
         /* 0x2000 */ u32 commandWords[4]; /* pending command is low/high words [2]/[3] */
         /* 0x2000 */ BtlCommandMessageStateA commandMessage;
         struct {
+            /* 0x2000 */ u8 unk2000BeforeGroup[0x356];
+            /* 0x2356 */ s16 group;
+        } motionGroup;
+        struct {
             u8 unk2000[0x25a0];
             /* 0x45A0 */ u32 words[2];
         } stateFlags;
+        struct {
+            u8 unk2000[0x25a0];
+            /* 0x45A0 */ u64 bits;
+        } stateFlags64;
         struct {
             u8 unk2000[0x25a8];
             /* 0x45A8 */ u32 words[2];
@@ -79,17 +92,48 @@ typedef struct BtlMainStateA {
         struct {
             /* 0x2000 */ u8 unk2000BeforeSort[0x1006];
             /* 0x3006 */ s16 indices[12];
+            /* 0x301E */ s16 position;   /* the slot of `indices` acting now */
         } turnOrder;
     };
     /* 0x4CD0 */ u8 unk4cd0;
     /* 0x4CD1 */ u8 unk4cd1;
+    /* 0x4CD2 */ u8 unk4cd2[0x1A];
+    /* 0x4CEC */ s32 specialEffect; /* effect handle for the special combatant, 0 = none */
 } BtlMainStateA;
 
-/* The module global (Apocalypse): the state block's pointer and two words beside it. */
+typedef char BtlMainStateASpecialEffectOffsetCheck[
+    offsetof(BtlMainStateA, specialEffect) == 0x4CEC && offsetof(BtlMainStateA, unk0088) == 0x88 &&
+    offsetof(BtlMainStateA, entries) == 0x1FFC && offsetof(BtlMainStateA, turnOrder.position) == 0x301E &&
+    offsetof(BtlMainStateA, unk1EC0) == 0x1EC0 && offsetof(BtlMainStateA, motionGroup.group) == 0x2356 &&
+    offsetof(BtlMainStateA, stateFlags64.bits) == 0x45A0 ? 1 : -1];
+
+/* Party entries share a 300-byte stride; the checked sub-object begins at 0x68. */
+typedef struct BtlPartySubA {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 unk62;
+} BtlPartySubA;
+
+typedef struct BtlPartyEntryA {
+    /* 0x000 */ u8 unk000[0x68];
+    /* 0x068 */ BtlPartySubA sub;
+    /* 0x0CC */ u8 unk0CC[0x60];
+} BtlPartyEntryA;
+
+typedef struct BtlPartyBlockA {
+    /* 0x0000 */ u8 unk0000[0x1CA3];
+    /* 0x1CA3 */ u8 count;
+} BtlPartyBlockA;
+
+/* Known prefix of the Apocalypse module global, including combatant and survival masks. */
 typedef struct BtlMainGlobalsA {
     /* 0x00 */ BtlMainStateA *state;
-    /* 0x04 */ u8 unk04[0x10];
-    /* 0x14 */ u32 unk14;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ BtlPartyBlockA *party;
+    /* 0x10 */ void *shared1;
+    union {
+        /* 0x14 */ u32 unk14;
+        /* 0x14 */ void *partySubject;
+    };
     /* 0x18 */ u8 unk18[0x0C];
     /* 0x24 */ u32 unk24;
     union {
@@ -100,7 +144,17 @@ typedef struct BtlMainGlobalsA {
         } combatantMasks;
     };
     /* 0x60 */ u64 actorCategories[4];
+    /* 0x80 */ u64 exclusionMask;
+    /* 0x88 */ u64 selectionMask;
+    /* 0x090 */ u8 unk090[0xA8];
+    /* 0x138 */ u64 suppressionMask;
+    /* 0x140 */ u8 unk140[0x88];
+    /* 0x1C8 */ u64 suppressDefeat;
 } BtlMainGlobalsA;
+typedef char BtlMainGlobalsASizeCheck[sizeof(BtlMainGlobalsA) == 0x1D0 ? 1 : -1];
+typedef char BtlMainSelectionMaskOffsetCheck[offsetof(BtlMainGlobalsA, selectionMask) == 0x88 ? 1 : -1];
+typedef char BtlMainSuppressionMaskOffsetCheck[offsetof(BtlMainGlobalsA, suppressionMask) == 0x138 ? 1 : -1];
+typedef char BtlMainSuppressDefeatOffsetCheck[offsetof(BtlMainGlobalsA, suppressDefeat) == 0x1C8 ? 1 : -1];
 
 /* The same state in Apocalypse: active combatant mask and encounter flags. */
 typedef struct BtlMainA {

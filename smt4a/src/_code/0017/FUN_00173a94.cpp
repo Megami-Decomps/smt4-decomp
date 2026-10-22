@@ -1,42 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00173a94` (_code @ 0x173a94, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail beq 88 differs from recovered beq 84. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_001915c4(int, unsigned int, unsigned int);
-int FUN_001b6668(int, unsigned int);
-
-extern unsigned char DAT_00646e74; /* 0x646e74 */
-
-/* Supplied declaration required: FUN_001915c4. */
-/* Supplied declaration required: FUN_001b6668. */
-
-
-unsigned char FUN_00173a94(int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  
-  temp_v0 = 0;
-  if (*(char *)(param_1 + 0x38) != '\0') {
-    *(unsigned int *)(param_1 + 0x1c) = 0x20;
-    *(unsigned int *)(param_1 + 0x20) = 0x3f666666;
-    *(unsigned int *)(param_1 + 0x24) = 0;
-    *(unsigned int *)(param_1 + 0x28) = 0xffffffff;
-    *(unsigned char **)(param_1 + 0x18) = &DAT_00646e74;
-    while (*(int *)(param_1 + 0xc) != 0) {
-      FUN_001b6668(param_1 + 0xc,*(unsigned int *)(param_1 + 0x14));
-    }
-    FUN_001915c4(param_1 + 8,*(unsigned int *)(param_1 + 0x2c),*(unsigned int *)(param_1 + 0x30));
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    *(unsigned int *)(param_1 + 0x30) = 0;
-    *(unsigned int *)(param_1 + 0x34) = 0;
-    *(unsigned char *)(param_1 + 0x38) = 0;
-    temp_v0 = 1;
-  }
-  return temp_v0;
+namespace {
+struct CleanupStateView {
+    u8 unk00[0x08];       // 0x00
+    u32 unk08;            // 0x08
+    u32 unk0C;            // 0x0C
+    u32 unk10;            // 0x10
+    u32 unk14;            // 0x14
+    const u8* unk18;      // 0x18
+    u32 unk1C;            // 0x1C
+    f32 unk20;            // 0x20
+    f32 unk24;            // 0x24
+    u32 unk28;            // 0x28
+    u32 unk2C;            // 0x2C
+    u32 unk30;            // 0x30
+    u32 unk34;            // 0x34
+    u8 unk38;             // 0x38
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern u8 DAT_00646e74;
+void FUN_001b6668(void* entries, u32 context);
+void FUN_001915c4(void* storage, u32 first, u32 second);
+}
+
+// Reset an active state, drain its entries, and release its remaining storage.
+extern "C" u8 FUN_00173a94(CleanupStateView* state)
+{
+    if (state->unk38 == 0) {
+        return 0;
+    }
+
+    state->unk1C = 0x20;
+    state->unk20 = 0.9f;
+    state->unk24 = 0.0f;
+    state->unk28 = 0xFFFFFFFFu;
+    state->unk18 = &DAT_00646e74;
+
+    while (state->unk0C != 0) {
+        FUN_001b6668(&state->unk0C, state->unk14);
+    }
+
+    FUN_001915c4(&state->unk08, state->unk2C, state->unk30);
+    state->unk2C = 0;
+    state->unk30 = 0;
+    state->unk34 = 0;
+    state->unk38 = 0;
+    return 1;
+}

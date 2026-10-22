@@ -1,25 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `hardfp_floorf` (_code @ 0x1bc088, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The compiler merges integral-return exits and fuses the variable-shift rounding add. */
+#include "common.h"
 
-extern "C" {
-
-
-void hardfp_floorf(void)
-
+extern "C" f32 hardfp_floorf(f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int in_s0;
-  
-  temp_v0 = ((in_s0 & 0x7fffffff) >> 0x17) - 0x7f;
-  if ((int)temp_v0 >= 0x17) {
-    return;
-  }
-  if ((-1 < (int)temp_v0) && ((in_s0 & (0x7fffffU >> (temp_v0 & 0xff))) == 0)) {
-    return;
-  }
-  return;
+    union { f32 value; s32 bits; } number;
+    number.value = value;
+    s32 exponent = ((number.bits >> 23) & 0xFF) - 127;
+    if (exponent >= 23) {
+        return value;
+    }
+    if (exponent < 0) {
+        // Adding a large finite value raises inexact for a fractional input.
+        if (1.0e30f + value > 0.0f) {
+            if (number.bits >= 0) {
+                number.bits = 0;
+            } else if (number.bits != (s32)0x80000000) {
+                number.bits = (s32)0xBF800000;
+            }
+        }
+    } else {
+        u32 fractionalMask = 0x007FFFFF >> exponent;
+        if ((number.bits & fractionalMask) == 0) {
+            return value;
+        }
+        if (1.0e30f + value > 0.0f) {
+            if (number.bits < 0) {
+                number.bits += 0x00800000 >> exponent;
+            }
+            number.bits &= ~fractionalMask;
+        }
+    }
+    return number.value;
 }
-
-} /* extern "C" */

@@ -13,7 +13,7 @@ struct CampCecEditController {
 };
 
 extern "C" {
-s32 FUN_002bf508();
+s32 campCecEditIsOpen();
 s32 FUN_002e2014();
 void stateAtF4Destroy();
 void sysPlaySe(u32);
@@ -24,7 +24,7 @@ void FUN_0034280c(s32);
 u32 campCecEditPollConfirmation(CampCecEditController* controller)
 {
     u32 result = 0;
-    switch (FUN_002bf508()) {
+    switch (campCecEditIsOpen()) {
     case 0:
         FUN_0034280c(0);
         break;

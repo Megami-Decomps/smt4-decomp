@@ -11,7 +11,7 @@ int asdTMTexTableReleaseNode(int, int);
 int asdMemFreeSlot(unsigned int);
 int asdTMTexTableFreeEntry(...);
 int asdOperatorDelete(void);
-int FUN_00471340(unsigned int);
+int loadedRecordTableClear(unsigned int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int *DAT_0057f244; /* 0x57f244 */
@@ -23,7 +23,7 @@ extern unsigned int *DAT_0057f244; /* 0x57f244 */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00471340. */
+/* Supplied declaration required: loadedRecordTableClear. */
 
 
 void FUN_003b01e8(void)
@@ -82,7 +82,7 @@ void FUN_003b01e8(void)
     asdMemFree();
     puVar1[3] = 0;
   }
-  FUN_00471340(g_aocSystem);
+  loadedRecordTableClear(g_aocSystem);
   jobStop(*puVar1,0);
   if (DAT_0057f244 != (unsigned int *)0x0) {
     asdOperatorDelete();

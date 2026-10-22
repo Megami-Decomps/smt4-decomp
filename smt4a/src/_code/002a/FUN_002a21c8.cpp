@@ -1,11 +1,12 @@
-#include "shard/Block57f0c4.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
 
 /* Returns whether the state word at 0x10 of the record at 0x57F0C4 is 2. */
 u8 FUN_002a21c8(void)
 {
-    return g_buttonHelp.record->unk010 == 2;
+    return g_buttonHelp.work->state == 2;
 }
 
 } /* extern "C" */

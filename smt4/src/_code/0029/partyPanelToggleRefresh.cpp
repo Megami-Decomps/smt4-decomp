@@ -1,13 +1,14 @@
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
 
 int FUN_0029378c(u32 a, u32 b);
 int timerStart(void *timer, int a, int b);
 
 void partyPanelToggleRefresh(void)
 {
-    Scene43dcf0 *scene = g_partyPanel;
+    PartyPanelState *scene = g_partyPanel;
     int i;
 
     g_partyPanel->unk2C = g_partyPanel->unk2C ^ 1;

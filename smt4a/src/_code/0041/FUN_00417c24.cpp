@@ -1,69 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00417c24` (_code @ 0x417c24, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the flag-clear loop folds ~(1 << bit) into bic with a scaled byte address; retail builds the mask with mvn/and and a separate flag >> 3 index */
+#include "shard/Shard0041.h"
 
 extern "C" {
 
-int FUN_004bb6d8(unsigned int, int);
+extern PartyBlockB *gameFlagBlockGet(void);
+void FUN_004bb6d8(u32 flag, s32 value);
 
-extern int gameFlagBlockGet(void);
-/* Supplied declaration required: FUN_004bb6d8. */
-
-
-unsigned int FUN_00417c24(unsigned int param_1)
-
+/* Reports a game flag change to FUN_004bb6d8, then sets or clears the flag's bit. */
+static __inline void gameFlagWrite(u32 flag, s32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char *pbVar7;
-  unsigned int temp_v6;
-  unsigned char *pbVar9;
-  
-  temp_v2 = gameFlagBlockGet();
-  temp_v2 = temp_v2 + param_1 * 4;
-  pbVar9 = (unsigned char *)(temp_v2 + 0x2a0);
-  temp_v1 = *pbVar9;
-  if ((temp_v1 & 1) == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    if ((temp_v1 & 4) == 0) {
-      if ((temp_v1 & 2) != 0) {
-        temp_v4 = gameFlagBlockGet();
-        pbVar7 = (unsigned char *)(temp_v4 + param_1 * 4 + 0x2a0);
-        if ((*pbVar7 & 2) != 0) {
-          temp_v4 = gameFlagBlockGet();
-          if (*(unsigned short *)(temp_v4 + 0x8e0) != param_1) {
-            *pbVar7 = *pbVar7 & 0xf9;
-          }
-          else {
-            *pbVar7 = *pbVar7 & 0xb9;
-            temp_v4 = gameFlagBlockGet();
-            temp_v6 = 0x500;
-            *(unsigned short *)(temp_v4 + 0x8e0) = 0;
-            do {
-              temp_v4 = gameFlagBlockGet();
-              FUN_004bb6d8(temp_v6,0);
-              temp_v5 = temp_v6 & 7;
-              temp_v0 = temp_v6 >> 3;
-              temp_v6 = temp_v6 + 1;
-              *(unsigned char *)(temp_v4 + temp_v0) = ~(unsigned char)(1 << temp_v5) & *(unsigned char *)(temp_v4 + temp_v0);
-            } while (temp_v6 < 0x520);
-          }
-        }
-      }
-      *(unsigned char *)(temp_v2 + 0x2a1) = 0;
-      *pbVar9 = *pbVar9 & 0x1c;
-      *(unsigned char *)(temp_v2 + 0x2a2) = *(unsigned char *)(temp_v2 + 0x2a2) & 0xc2;
+    PartyBlockB *block = gameFlagBlockGet();
+
+    FUN_004bb6d8(flag, value);
+    if (value) {
+        block->unk00[flag >> 3] |= 1 << (flag & 7);
+    } else {
+        block->unk00[flag >> 3] &= ~(1 << (flag & 7));
     }
-    temp_v3 = 1;
-  }
-  return temp_v3;
+}
+
+/* Clears entry bits 1-2 (and bit 6 plus flags 0x500-0x51f when it is the block's current entry). */
+static __inline void partyEntryReleaseCurrent(u32 index)
+{
+    PartyEntryB *entry = &gameFlagBlockGet()->e[index];
+    u32 flag;
+
+    if (!(entry->flags & 2)) {
+        return;
+    }
+    if (gameFlagBlockGet()->unk8E0 != index) {
+        entry->flags &= ~6;
+        return;
+    }
+    entry->flags &= ~6;
+    entry->flags &= ~0x40;
+    gameFlagBlockGet()->unk8E0 = 0;
+    for (flag = 0x500; flag < 0x520; flag++) {
+        gameFlagWrite(flag, 0);
+    }
+}
+
+/* Resets an active, unlocked entry (keeping flag bits 2-4); returns whether the entry was active. */
+s32 FUN_00417c24(u32 index)
+{
+    PartyEntryB *entry = &gameFlagBlockGet()->e[index];
+
+    if (!(entry->flags & 1)) {
+        return 0;
+    }
+    if (!(entry->flags & 4)) {
+        if (entry->flags & 2) {
+            partyEntryReleaseCurrent(index);
+        }
+        entry->flags &= ~0xe3;
+        entry->byte1 = 0;
+        entry->bits &= ~0x3d;
+    }
+    return 1;
 }
 
 } /* extern "C" */

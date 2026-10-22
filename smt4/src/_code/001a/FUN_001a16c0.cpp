@@ -21,7 +21,7 @@ typedef struct {
 extern int g_result; /* 0x44dc20 */
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_00296a18(int);
+extern int modelPairTryBind(int);
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
@@ -48,7 +48,7 @@ unsigned int FUN_001a16c0(void)
   int *piVar8;
   
   temp_v0 = g_result;
-  if ((g_result != 0) && (temp_v1 = FUN_00296a18(g_result), temp_v1 != 0)) {
+  if ((g_result != 0) && (temp_v1 = modelPairTryBind(g_result), temp_v1 != 0)) {
     FUN_002c39a4(g_titleScene);
     temp_v1 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);

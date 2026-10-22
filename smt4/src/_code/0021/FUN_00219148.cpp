@@ -1,75 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00219148` (_code @ 0x219148, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: in the unit-key compare retail copies `a` to r6 and computes a's unit key in r4; built keeps `a` in r4 and the key in r6. */
+#include "shard/PassiveSkill.h"
+
+/* The unit record field the skill list sorts by. */
+struct SkillSortUnitRecord {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 sortKey;
+};
 
 extern "C" {
 
-int FUN_00257568(int *, int *);
-int passiveSkillLookupRecord(void);
-int FUN_002ae164(void);
+bool idIsAbove400(u32 id);
+const ActiveSkillRecord *FUN_002ae164(u32 id);
+const SkillSortUnitRecord *gameGetUnitRecord(s32 unit);
+s32 FUN_00257568(const SkillListEntry *a, const SkillListEntry *b);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00257568. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-extern int gameGetUnitRecord(void);
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(int);
-
-
-void FUN_00219148(int *param_1,int *param_2)
-
+/* The skill's sort key: passive skills (ids above 400) and active skills keep it in their records. */
+static u16 skillSortKey(const SkillListEntry *entry)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  short temp_v3;
-  
-  temp_v1 = idIsAbove400(*param_1);
-  temp_v2 = *param_1;
-  if (temp_v1 != 0) {
-    passiveSkillLookupRecord();
-    temp_v3 = *(short *)(temp_v2 + 0x22);
-  }
-  else {
-    FUN_002ae164();
-    temp_v3 = *(short *)(temp_v2 + 0x24);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  temp_v2 = *param_2;
-  if (temp_v1 != 0) {
-    passiveSkillLookupRecord();
-    temp_v0 = *(short *)(temp_v2 + 0x22);
-  }
-  else {
-    FUN_002ae164();
-    temp_v0 = *(short *)(temp_v2 + 0x24);
-  }
-  if (temp_v3 == temp_v0) {
-    if (param_1[1] < 0) {
-      temp_v3 = 0;
+    if (idIsAbove400(entry->skillId)) {
+        return passiveSkillLookupRecord(entry->skillId)->sortKey;
     }
-    else {
-      temp_v1 = gameGetUnitRecord();
-      temp_v3 = *(short *)(temp_v1 + 0x46);
+    return FUN_002ae164(entry->skillId)->sortKey;
+}
+
+/* The holding unit's sort key, 0 without a unit. */
+static u16 skillUnitSortKey(const SkillListEntry *entry)
+{
+    if (entry->unit < 0) {
+        return 0;
     }
-    if (param_2[1] < 0) {
-      temp_v0 = 0;
+    return gameGetUnitRecord(entry->unit)->sortKey;
+}
+
+/* Skill list sort comparator: by skill sort key, then by unit sort key, then FUN_00257568. */
+s32 FUN_00219148(const SkillListEntry *a, const SkillListEntry *b)
+{
+    s32 diff = skillSortKey(a) - skillSortKey(b);
+    if (diff != 0) {
+        return diff;
     }
-    else {
-      temp_v1 = gameGetUnitRecord();
-      temp_v0 = *(short *)(temp_v1 + 0x46);
+    diff = skillUnitSortKey(a) - skillUnitSortKey(b);
+    if (diff != 0) {
+        return diff;
     }
-    if (temp_v3 == temp_v0) {
-      FUN_00257568(param_1,param_2);
-      return;
-    }
-  }
-  return;
+    return FUN_00257568(a, b);
 }
 
 } /* extern "C" */

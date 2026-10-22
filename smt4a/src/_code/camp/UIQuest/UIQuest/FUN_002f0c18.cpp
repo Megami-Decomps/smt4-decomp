@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableLoadSprites(...);
 int FUN_0014afd0(...);
 int FUN_0014e188(...);
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
 int taskCreateDraw(...);
@@ -57,7 +57,7 @@ extern unsigned int *g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -175,7 +175,7 @@ void FUN_002f0c18(void)
   FUN_0014e188(puVar2 + 0xbc,0x1e,0x5d,puVar2 + 5,0xa1);
   uiSpriteSelectAnim(puVar2 + 0xbc,2);
   FUN_00387240(puVar2 + 0xbc,0x1e,0x53);
-  FUN_0014e220(puVar2 + 0xdf,0x1e,0xffffffff,0x12,puVar2 + 5,0xc9);
+  uiSpriteInitializeState(puVar2 + 0xdf,0x1e,0xffffffff,0x12,puVar2 + 5,0xc9);
   uiSpriteSelectAnim(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
   pairSetHalves(puVar2 + 0xdf,0,0x78);

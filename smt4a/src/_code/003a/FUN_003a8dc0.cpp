@@ -1,3 +1,4 @@
+#include "battle/btlScript.h"
 #include "common.h"
 
 extern "C" {
@@ -14,8 +15,6 @@ typedef struct Record {
     /* 0x00 */ u8 unk00[0x28];
     /* 0x28 */ u8 *table;
 } Record;
-
-extern u32 g_btlScriptUnit;
 
 int dataTable04FindById(u32 id);
 int scrSetResult(int value);

@@ -6,7 +6,7 @@ extern "C" {
 
 int dialogClose(int);
 int FUN_00272584(int, int, int, int);
-int FUN_004c8b10(void);
+int btlHelpFreeEntries(void);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern unsigned int DAT_00571234; /* 0x571234 */
 /* Supplied declaration required: dialogClose. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00272584. */
-/* Supplied declaration required: FUN_004c8b10. */
+/* Supplied declaration required: btlHelpFreeEntries. */
 
 
 void FUN_004ecd7c(int *param_1,int param_2)
@@ -75,7 +75,7 @@ void FUN_004ecd7c(int *param_1,int param_2)
   if (temp_v0 != 0) {
     dialogClose(1);
   }
-  FUN_004c8b10();
+  btlHelpFreeEntries();
   FUN_00272584(*param_1,param_2,0,temp_v5);
   return;
 }

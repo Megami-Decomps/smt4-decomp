@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
+extern MessageGlobalsA g_messageMain;
 
 /* True when the panel's flag at +0x8E is set and its state is 2. */
 u32 panelIsActiveState2(void)

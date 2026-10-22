@@ -16,7 +16,7 @@ s32 FUN_002e57e0(void)
     u32 b = scrGetArg(1);
 
     sequenceRequestDefer(b, c);
-    g_gameState.unk454 = -1;
+    g_gameState.mapFlags.unk454 = -1;
     FUN_00270c58(a);
     return 3;
 }

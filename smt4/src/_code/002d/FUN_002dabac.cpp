@@ -8,7 +8,7 @@ int FUN_00257a50(int, int, int);
 int FUN_0029c4ac(int);
 int FUN_0029c4c8(int);
 int FUN_0029c4e4(int, int);
-int FUN_0029d684(int);
+int statusPanelSetOpen(int);
 int menuSetModeAndResetTransitions(int);
 int FUN_0029defc(int, int);
 int messageTargetSetValue(int, int);
@@ -29,7 +29,7 @@ extern int g_unite; /* 0x43dd68 */
 /* Supplied declaration required: FUN_0029c4ac. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: menuSetModeAndResetTransitions. */
 /* Supplied declaration required: FUN_0029defc. */
 /* Supplied declaration required: messageTargetSetValue. */
@@ -78,7 +78,7 @@ void FUN_002dabac(int param_1,int *param_2)
   menuSetModeAndResetTransitions(8);
   FUN_0029e890(0);
   temp_v0 = FUN_002d96a4();
-  FUN_0029d684(temp_v0 != *(unsigned short *)(temp_v2 + 0x66ba));
+  statusPanelSetOpen(temp_v0 != *(unsigned short *)(temp_v2 + 0x66ba));
   if (0 < *(int *)(temp_v2 + 0x418)) {
     FUN_0029e648(1,0);
     messageTargetSetValue(-*(int *)(temp_v2 + 0x418),0);

@@ -38,7 +38,7 @@ int btlEventTaskStart(...);
 int FUN_001f8158(...);
 int FUN_00207f68(...);
 int FUN_0021ae40(...);
-int FUN_00254e4c(...);
+int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
 int FUN_00254f58(...);
 int FUN_002550d8(...);
@@ -64,7 +64,7 @@ int FUN_001a84d8(...);
 int btlAutoCalcTaskCreate(...);
 int btlUnitInitializeDrawJobs(...);
 int FUN_001e2350(...);
-int FUN_001f7ecc(...);
+int btlCameraCreateDrawTaskAndInitializeStorage(...);
 int FUN_00255e38(...);
 int FUN_002560a4(int);
 int FUN_00256124(void);
@@ -123,7 +123,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: btlEventTaskStart. */
 /* Supplied declaration required: FUN_001e2350. */
 /* Supplied declaration required: FUN_001f7d50. */
-/* Supplied declaration required: FUN_001f7ecc. */
+/* Supplied declaration required: btlCameraCreateDrawTaskAndInitializeStorage. */
 /* Supplied declaration required: FUN_001f7fac. */
 /* Supplied declaration required: FUN_001f8158. */
 /* Supplied declaration required: FUN_001f8290. */
@@ -133,7 +133,7 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 extern int gameDataEntryGetLevel(short);
 /* Supplied declaration required: gameDataEntrySetLevel. */
 /* Supplied declaration required: messageForwardDefaultMode. */
-/* Supplied declaration required: FUN_00254e4c. */
+/* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: pickerAdvance. */
 /* Supplied declaration required: FUN_00254f58. */
 /* Supplied declaration required: FUN_002550d8. */
@@ -336,7 +336,7 @@ void FUN_001fc6e8(unsigned int param_1)
       }
     }
     FUN_002f34cc(temp_v4);
-    FUN_001f7ecc(temp_v4);
+    btlCameraCreateDrawTaskAndInitializeStorage(temp_v4);
     btlAutoCalcTaskCreate(temp_v4);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x54));
     if (temp_v3 == 0) {
@@ -603,7 +603,7 @@ void FUN_001fc6e8(unsigned int param_1)
           temp_v3 = temp_v3 + 1;
         } while (temp_v12 != 0);
         pickerAdvance(temp_v4);
-        FUN_00254e4c(g_btlUiBlock);
+        btlUiRefreshSlotRanks(g_btlUiBlock);
       }
       temp_v7 = *(short *)(temp_v4 + *(short *)(temp_v4 + 0x2f1e) * 2 + 0x2f06);
       *(unsigned int *)(*(int *)(temp_v4 + 0x2310) + *(int *)(temp_v4 + 0x2314) * 0x10) = 0;

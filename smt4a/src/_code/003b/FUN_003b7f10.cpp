@@ -1,3 +1,4 @@
+#include "battle/btlScript.h"
 #include "common.h"
 
 extern "C" {
@@ -21,8 +22,6 @@ typedef struct BtlState003b7f10 {
     /* 0x0000 */ u8 unk0000[0x2008];
     /* 0x2008 */ s64 flags;
 } BtlState003b7f10;
-
-extern u32 g_btlScriptUnit;
 
 u32 scrGetArg(u32 index);
 BtlUnit003b7f10 *btlUnitGet(u32 id);

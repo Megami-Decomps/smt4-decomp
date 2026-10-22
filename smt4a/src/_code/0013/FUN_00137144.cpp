@@ -28,7 +28,7 @@ extern unsigned char LAB_00137338; /* 0x137338 */
 extern int FUN_0013f7c4(...); /* 0x13f7c4 */
 extern int FUN_00145534(...); /* 0x145534 */
 extern int FUN_001456fc(...); /* 0x1456fc */
-extern int FUN_001457b0(...); /* 0x1457b0 */
+extern int msgIsSkipInputActive(...); /* 0x1457b0 */
 extern unsigned int *DAT_0057f58c; /* 0x57f58c */
 extern unsigned int *DAT_0057f590; /* 0x57f590 */
 extern unsigned int *DAT_0057f594; /* 0x57f594 */
@@ -115,7 +115,7 @@ void FUN_00137144(void)
   } while (temp_v2 < 0xc);
   FUN_00144efc(FUN_001456fc);
   FUN_001445a0(FUN_00145534);
-  pcRam005b3d84 = FUN_001457b0;
+  pcRam005b3d84 = msgIsSkipInputActive;
   return;
 }
 

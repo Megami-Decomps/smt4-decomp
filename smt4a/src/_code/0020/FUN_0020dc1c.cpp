@@ -28,7 +28,7 @@ int FUN_00215bd0(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int resourceRunOperationIfUnblocked(...);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
 int sysMemClear(int, int);
@@ -71,7 +71,7 @@ extern unsigned int DAT_0057f10c; /* 0x57f10c */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -89,7 +89,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int widgetSubCallIfVisible(int);
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c8538. */
@@ -250,13 +250,13 @@ LAB_0020de28:
       objBSetRecord2000(&temp_v13);
       FUN_003343c0(1);
       FUN_0033449c(1);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       *(unsigned int *)(temp_v4 + 0x20) = 2;
     }
     break;
   case 2:
     temp_v17[0] = 0;
-    temp_v5 = FUN_001643a0();
+    temp_v5 = ifTouchGetSelectionMode();
     temp_v2 = FUN_001834a4(0x12,0x461);
     temp_v11 = 1;
     temp_v9 = temp_v17;

@@ -52,7 +52,7 @@ int scrScriptProcessGetEntry(...);
 int FUN_00291e50(...);
 int FUN_002941c8(...);
 int FUN_002b79d8(void);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 int lmapInitializeArea(...);
 int FUN_0033f9f4(void);
 int FUN_00398024(void);
@@ -78,7 +78,7 @@ int FUN_002c3398(...);
 int popupStart(void);
 int FUN_003254a0(void);
 int objectE0ResetFlags1040(void);
-int FUN_0033a988(void);
+int mapRecordResumePoint(void);
 int FUN_00341fa4(...);
 int sub68OwnerCall3(void);
 int sub68OwnerCall4(void);
@@ -145,10 +145,10 @@ int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int FUN_0020f12c(...);
 int mapIfSetMode1(void);
-int FUN_00249ce4(...);
+int mapLoadSkyTable(...);
 int FUN_00249dec(void);
 int FUN_002747dc(void);
-int FUN_002758b0(...);
+int naviMainUpdateSlider(...);
 int FUN_00297c3c(void);
 int FUN_002a2e98(...);
 int FUN_002ddea0(void);
@@ -180,7 +180,7 @@ void mapIfInitializeSceneControllers(void);
 int navigationSetArguments(...);
 int FUN_002df914(void);
 int FUN_00314bf8(...);
-int FUN_00328794(void);
+int lmapInitializeActorHandles(void);
 int FUN_0033e014(...);
 int FUN_00356674(void);
 int FUN_00376fb8(...);
@@ -212,7 +212,7 @@ int dataTableGetRecord23(void);
 int FUN_003a2f54(void);
 int sysClearCachedFlag(void);
 int FUN_003b5714(...);
-int FUN_003de898(int);
+int gameFlagSetEligibleEntryFlagsAtThreshold(int);
 int gameFlagSetValue(...);
 int countersAddSaturating(int, int);
 int FUN_0040ae70(...);
@@ -445,7 +445,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00246344. */
 /* Supplied declaration required: resourceSlotsRelease. */
 /* Supplied declaration required: mapReleaseTableTexture. */
-/* Supplied declaration required: FUN_00249ce4. */
+/* Supplied declaration required: mapLoadSkyTable. */
 /* Supplied declaration required: FUN_00249dec. */
 /* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: bgmReleaseStopped. */
@@ -455,7 +455,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: popupStateSetAndShow. */
 /* Supplied declaration required: popupTryStartTimedPrompt. */
 /* Supplied declaration required: resourceRemoveSlotOwners. */
-/* Supplied declaration required: FUN_002758b0. */
+/* Supplied declaration required: naviMainUpdateSlider. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern char *campGetState(void);
@@ -494,17 +494,17 @@ extern int FUN_002e1a18(unsigned int);
 extern unsigned int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_00311b74. */
 /* Supplied declaration required: popupStart. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00314bf8. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003180c4. */
 extern int FUN_0031d230(void);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003254a0. */
-/* Supplied declaration required: FUN_00328794. */
+/* Supplied declaration required: lmapInitializeActorHandles. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: lmapInitializeArea. */
-/* Supplied declaration required: FUN_0033a988. */
+/* Supplied declaration required: mapRecordResumePoint. */
 extern int gameFlagsGet(unsigned int);
 extern int FUN_0033bfac(void);
 extern int mapIfGetState(void);
@@ -565,7 +565,7 @@ extern int FUN_003cd4b4(unsigned int);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d502c. */
 /* Supplied declaration required: FUN_003de188. */
-/* Supplied declaration required: FUN_003de898. */
+/* Supplied declaration required: gameFlagSetEligibleEntryFlagsAtThreshold. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fd7c0. */
@@ -621,7 +621,7 @@ extern int battleValuesSet(unsigned int, unsigned int);
 extern unsigned int regionFindRecord(int);
 /* Supplied declaration required: naviMainRequestProcessing. */
 /* Supplied declaration required: mapGimicInitializeProcessing. */
-extern int FUN_002de9b8(void);
+extern int naviMainUpdateWidget(void);
 extern int FUN_002dfa18(void);
 /* Supplied declaration required: popupRequest. */
 /* Supplied declaration required: FUN_00314b7c. */
@@ -836,7 +836,7 @@ unsigned int FUN_00276264(void)
       puVar2[3] = 2;
       FUN_003a2f54();
       temp_v8 = gameGetPlayerData();
-      FUN_003de898((int)*(short *)(temp_v8 + 0x62));
+      gameFlagSetEligibleEntryFlagsAtThreshold((int)*(short *)(temp_v8 + 0x62));
       if (*(char *)(puVar2 + 0x276) != '\0') {
         return 0;
       }
@@ -912,7 +912,7 @@ unsigned int FUN_00276264(void)
       puVar2[3] = 2;
       FUN_003a2f54();
       temp_v8 = gameGetPlayerData();
-      FUN_003de898((int)*(short *)(temp_v8 + 0x62));
+      gameFlagSetEligibleEntryFlagsAtThreshold((int)*(short *)(temp_v8 + 0x62));
       return 0;
     }
     *(unsigned short *)((int)puVar2 + 0x4e) = 1;
@@ -1030,7 +1030,7 @@ unsigned int FUN_00276264(void)
       }
       FUN_00379d58();
       FUN_003a3b88();
-      FUN_00328794();
+      lmapInitializeActorHandles();
       puVar2[3] = puVar2[3] + 1;
     }
   case 5:
@@ -1189,13 +1189,13 @@ LAB_00276f5c:
           FUN_002ddea0();
           FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
           FUN_0020f12c(puVar2[0x10],puVar2[0x12]);
-          FUN_00249ce4(puVar2[0x10]);
+          mapLoadSkyTable(puVar2[0x10]);
           mapEnvironmentSelectPreset(1);
           if (g_mapSelection != -1) {
             mapPlaceSet(0xffffffff,0xffffffff);
             mapIfSetMode1();
           }
-          FUN_002758b0(1,8);
+          naviMainUpdateSlider(1,8);
           if (g_gameState == 0x65) {
             applyIfIdValid(0x10101003);
           }
@@ -2257,7 +2257,7 @@ LAB_00278774:
       return 0;
     }
     FUN_002c2358();
-    FUN_0033a988();
+    mapRecordResumePoint();
     FUN_002c3398(0);
     temp_v8 = 0xf;
     puVar2[3] = temp_v8;
@@ -2520,7 +2520,7 @@ LAB_00279834:
     FUN_00387014();
     if (puVar2[4] == 0) {
       scriptHolderReset(g_aocMain + 0xa8);
-      FUN_00313648(2);
+      mapSetSceneState(2);
       FUN_001681c4();
       FUN_001695a0();
       temp_v5 = puVar2[4] + 1;
@@ -3288,7 +3288,7 @@ LAB_0027a030:
     break;
   case 0x3e:
     temp_v8 = FUN_002e07f4();
-    if ((temp_v8 != 0) && (temp_v8 = FUN_002de9b8(), temp_v8 == 0)) {
+    if ((temp_v8 != 0) && (temp_v8 = naviMainUpdateWidget(), temp_v8 == 0)) {
       DAT_005f1aca = 1;
       FUN_00387014();
       mapPlaceSet(0xffffffff,0xffffffff);
@@ -3810,7 +3810,7 @@ LAB_0027a030:
     }
     FUN_00379d58();
     FUN_003a3b88();
-    FUN_00328794();
+    lmapInitializeActorHandles();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
     break;
@@ -3840,7 +3840,7 @@ LAB_0027a030:
     FUN_002747dc();
     FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
     FUN_0020f12c(puVar2[0x10],puVar2[0x12]);
-    FUN_00249ce4(puVar2[0x10]);
+    mapLoadSkyTable(puVar2[0x10]);
     mapEnvironmentSelectPreset(1);
     puVar2[3] = puVar2[3] + 1;
     puVar2[4] = 0;
@@ -4115,7 +4115,7 @@ LAB_0027a030:
     }
     FUN_00379d58();
     FUN_003a3b88();
-    FUN_00328794();
+    lmapInitializeActorHandles();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
     break;
@@ -4152,7 +4152,7 @@ LAB_0027a030:
     FUN_002ddea0();
     FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
     FUN_0020f12c(puVar2[0x10],puVar2[0x12]);
-    FUN_00249ce4(puVar2[0x10]);
+    mapLoadSkyTable(puVar2[0x10]);
     mapEnvironmentSelectPreset(1);
     navigationSetArguments(puVar2[0x10],puVar2[0x12],DAT_005f1604);
     puVar2[4] = 0;
@@ -4330,7 +4330,7 @@ LAB_0027ca0c:
       FUN_0013cab8(1,10,0xff);
     }
     mapIfSetMode1();
-    FUN_002758b0(0,8);
+    naviMainUpdateSlider(0,8);
     puVar19 = g_lmapMainState;
     if (g_lmapMainState[0x33] != 3) {
       g_lmapMainState[0x34] = 0;

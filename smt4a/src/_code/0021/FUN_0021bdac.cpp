@@ -43,7 +43,7 @@ extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned short screenGetSlotValue(unsigned int);
 extern unsigned char screenGetSlotFlag(unsigned int);
-extern int FUN_003aeaf0(unsigned int);
+extern int buttonHelpGetEntryValue(unsigned int);
 
 
 unsigned int
@@ -191,7 +191,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
       } while ((int)temp_v3 < 6);
       temp_v6 = *(char *)(temp_v5 + 9);
       if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
-         (temp_v2 = FUN_003aeaf0(0), temp_v2 == 5)) {
+         (temp_v2 = buttonHelpGetEntryValue(0), temp_v2 == 5)) {
         *(unsigned char *)(temp_v5 + 0x19da) = 1;
         temp_v1 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x19c6) = temp_v1;

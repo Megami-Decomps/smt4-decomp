@@ -254,7 +254,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
         }
         FUN_002b90f8(DAT_0044ea00,auStack_f8);
         if ((int)param_4[2] < 0) {
-          iVar1 = FUN_002a6d50(param_1,0x15,param_3);
+          iVar1 = packageFindFileRefByName(param_1,0x15,param_3);
           if (iVar1 != 0) {
             puVar4 = *(unsigned int **)(iVar1 + 4);
           }

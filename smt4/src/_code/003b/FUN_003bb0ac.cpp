@@ -19,12 +19,12 @@ extern int FUN_003b9238(...); /* 0x3b9238 */
 extern int FUN_003b92b4(...); /* 0x3b92b4 */
 extern int FUN_003b95a4(...); /* 0x3b95a4 */
 extern int FUN_003b992c(...); /* 0x3b992c */
-extern int FUN_003b9a84(...); /* 0x3b9a84 */
+extern int sceneLoadAocScriptStep(...); /* 0x3b9a84 */
 extern int aocBootStep(...); /* 0x3b9b48 */
 extern int aocTransitionUpdate(...); /* 0x3b9fd8 */
 extern int FUN_003ba1d8(...); /* 0x3ba1d8 */
 extern int FUN_003ba2bc(...); /* 0x3ba2bc */
-extern int FUN_003ba38c(...); /* 0x3ba38c */
+extern int aocBootStepLoadQuestScript(...); /* 0x3ba38c */
 extern int loaderStartScriptEntry(...); /* 0x3ba460 */
 extern void contentTransitionProcessDeparture(ContentTransition *);
 extern int FUN_003ba998(...); /* 0x3ba998 */
@@ -70,7 +70,7 @@ void FUN_003bb0ac(int param_1)
   *(unsigned int *)(param_1 + 0xe04) = 0;
   *(romwright_code **)(param_1 + 0xe08) = FUN_003b9238;
   *(unsigned int *)(param_1 + 0xe0c) = 0;
-  *(romwright_code **)(param_1 + 0xe10) = FUN_003b9a84;
+  *(romwright_code **)(param_1 + 0xe10) = sceneLoadAocScriptStep;
   *(unsigned int *)(param_1 + 0xe14) = 0;
   *(romwright_code **)(param_1 + 0xe18) = sceneFinishScriptRun;
   *(unsigned int *)(param_1 + 0xe1c) = 0;
@@ -80,7 +80,7 @@ void FUN_003bb0ac(int param_1)
   *(unsigned int *)(param_1 + 0xe2c) = 0;
   *(romwright_code **)(param_1 + 0xe30) = aocBootStep;
   *(unsigned int *)(param_1 + 0xe34) = 0;
-  *(romwright_code **)(param_1 + 0xe38) = FUN_003ba38c;
+  *(romwright_code **)(param_1 + 0xe38) = aocBootStepLoadQuestScript;
   *(unsigned int *)(param_1 + 0xe3c) = 0;
   *(romwright_code **)(param_1 + 0xe40) = (romwright_code *)contentTransitionProcessDeparture;
   *(unsigned int *)(param_1 + 0xe44) = 0;

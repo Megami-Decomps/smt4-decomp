@@ -1,44 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `eventCommand_31BEBC` (_code @ 0x31bebc, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the scale literal is loaded before the two integer arguments rather than after them; the remaining instructions match retail. */
+#include "event/EventTaskBuffer.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+u32 scrGetArg(u32 index);
+s32 FUN_002c1d5c(void);
+void *asdMemAlloc(u32 bytes, u32 alignment, u32 heap, u32 flags, u32 clear);
+void *FUN_00244e1c(u32 kind, EventTaskBuffer *buffer, u8 mode, u8 enabled,
+                   f32 x, f32 y, f32 z, f32 scale);
+void scrSetResult(const void *result);
 
-int FUN_00244e1c(int, int, int, int);
-int scrSetResult(int);
-int asdMemAlloc(int, int, int, int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00244e1c. */
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: asdMemAlloc. */
-
-
-unsigned int eventCommand_31BEBC(void)
-
+// Allocate state and start an event task when the event subsystem is available.
+u32 eventCommand_31BEBC(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v2 = 0;
-  temp_v1 = FUN_002c1d5c();
-  if (temp_v1 == 0) {
-    temp_v2 = 0x100;
-    asdMemAlloc(0x100,0x100,0,8,1);
-    FUN_00244e1c(temp_v0,temp_v2,0,1);
-    *(unsigned int *)(temp_v2 + 4) = temp_v0;
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    u8 kind = scrGetArg(0);
+    EventTaskBuffer *buffer = NULL;
+    if (!FUN_002c1d5c()) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\event\\eventCommand.cpp", 1052);
+        buffer = static_cast<EventTaskBuffer *>(asdMemAlloc(0x100, 0x100, 0, 8, 1));
+        buffer->task = FUN_00244e1c(kind, buffer, 0, 1, 0.0f, 0.0f, 0.0f, 1.0f);
+    }
+    scrSetResult(buffer);
+    return 1;
 }
-
-} /* extern "C" */
+}

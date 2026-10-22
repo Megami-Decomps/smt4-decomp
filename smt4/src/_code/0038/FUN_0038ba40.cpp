@@ -1,69 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038ba40` (_code @ 0x38ba40, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc unrolls the entry scan by two and merges the first file guard into the entries test; retail keeps one rolled loop. */
+#include "common.h"
 
 extern "C" {
 
-int dataTableFileGetTable(int, int);
-int dataTableGetEntries(void);
+typedef struct TableEntry {
+    /* 0x00 */ void *data;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u8 used;
+    /* 0x0D */ u8 unk0D[3];
+} TableEntry;
 
-typedef struct fn_0038ba40_arg0 fn_0038ba40_arg0;
-struct fn_0038ba40_arg0 {
-    unsigned char pad_0x0[0x45];
-    byte field_0x45; /* +0x45 */
-    unsigned char pad_0x46[0x2];
-    int field_0x48; /* +0x48 */
-    int field_0x4c; /* +0x4c */
-};
+typedef struct TableOwner {
+    /* 0x00 */ u8 unk00[0x45];
+    /* 0x45 */ u8 loaded;
+    /* 0x46 */ u8 unk46[2];
+    /* 0x48 */ void *file;
+    /* 0x4C */ TableEntry *entries;
+} TableOwner;
 
-/* Supplied declaration required: dataTableFileGetTable. */
-extern unsigned int dataTableGetCount(void);
-/* Supplied declaration required: dataTableGetEntries. */
+void dataTableFileGetTable(void *file, s32 index);
+TableEntry *dataTableGetEntries(void);
+u32 dataTableGetCount(void);
 
-
-unsigned int FUN_0038ba40(fn_0038ba40_arg0 *param_1,unsigned int param_2,int param_3)
-
+static void *tableOwnerFile(TableOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  if (param_1->field_0x4c != 0) {
-    temp_v3 = param_1->field_0x45 != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = param_1->field_0x48;
+    return owner->loaded ? owner->file : NULL;
+}
+
+/* Return 0 when any used entry of the owner's table has no data yet, else 1. */
+s32 FUN_0038ba40(TableOwner *owner)
+{
+    void *file;
+    TableEntry *entries;
+    u32 count;
+    u32 i;
+
+    if (owner->entries == NULL) {
+        return 1;
     }
-    if (temp_v3 && temp_v0 != 0) {
-      dataTableFileGetTable(temp_v0,0);
-      dataTableGetEntries();
+    file = tableOwnerFile(owner);
+    if (file != NULL) {
+        dataTableFileGetTable(file, 0);
+        dataTableGetEntries();
     }
-    temp_v3 = param_1->field_0x45 != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = param_1->field_0x48;
+    file = tableOwnerFile(owner);
+    if (file == NULL) {
+        return 1;
     }
-    if (temp_v3 && temp_v0 != 0) {
-      dataTableFileGetTable(temp_v0,0);
-      temp_v1 = dataTableGetCount();
-      if (temp_v1 != 0) {
-        param_3 = param_1->field_0x4c;
-      }
-      temp_v2 = 0;
-      if (temp_v2 < temp_v1) {
-        do {
-          if ((*(char *)(param_3 + temp_v2 * 0x10 + 0xc) != '\0') &&
-             (*(int *)(param_3 + temp_v2 * 0x10) == 0)) {
+    dataTableFileGetTable(file, 0);
+    count = dataTableGetCount();
+    entries = count != 0 ? owner->entries : NULL;
+    for (i = 0; i < count; i++) {
+        if (entries[i].used && entries[i].data == NULL) {
             return 0;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < temp_v1);
-      }
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

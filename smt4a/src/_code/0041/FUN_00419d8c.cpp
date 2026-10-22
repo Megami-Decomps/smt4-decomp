@@ -1,51 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00419d8c` (_code @ 0x419d8c, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Header stores do not combine into STRD; resource/output bases and the cached word-count result use different registers. */
+#include "common.h"
 
+struct TaggedResourceOwner {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 **entries;
+};
+struct TaggedBlockHeader {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u32 tag;
+};
+struct TaggedBlock {
+    /* 0x00 */ TaggedBlockHeader header;
+    /* 0x08 */ u8 unk08[0x38];
+    /* 0x40 */ u32 payload[1]; /* trailing word storage */
+};
+struct ResourceWordSegment {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ u32 words[1]; /* trailing serialized words */
+};
 extern "C" {
+extern u8 DAT_005dee3e;
+void FUN_0019a270(void *state, u32 parameter, u32 flags);
+u32 *FUN_00501084(ResourceWordSegment *segment, u32 *payload);
+void FUN_00500fe4(ResourceWordSegment *segment, u32 *destinationEnd, u8 *trailer);
+void rt_memcpy_w(void *destination, const void *source, u32 bytes);
 
-int FUN_0019a270(unsigned int *, unsigned int, int);
-int FUN_00500fe4(int *, unsigned int *, int);
-int FUN_00501084(int *, int);
-int rt_memcpy_w(unsigned int *, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern unsigned char DAT_005dee3e; /* 0x5dee3e */
-
-/* Supplied declaration required: FUN_0019a270. */
-/* Supplied declaration required: FUN_00500fe4. */
-/* Supplied declaration required: FUN_00501084. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00419d8c(int param_1,unsigned int *param_2,int param_3,unsigned int param_4)
-
+/* Initializes the tagged output, caches its leading word count, and copies that segment. */
+void FUN_00419d8c(TaggedResourceOwner *owner, TaggedBlock *output, u32 index, u32 parameter)
 {
-/* irregular: 4 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  
-  temp_v0 = *(int *)(*(int *)(param_1 + 0xc) + param_3 * 4);
-  if (temp_v0 != 0) {
-    *param_2 = DAT_005dee3e | 0x80000000;
-    param_2[1] = 0xf02c0;
-    FUN_0019a270(param_2 + 2,param_4,0xbf02c1);
-    piVar3 = (int *)(temp_v0 + 0x10);
-    if (*piVar3 == 0) {
-      piVar1 = piVar3;
-      FUN_00501084(piVar3,temp_v0 + 0x14);
-      *piVar3 = ((int)piVar1 + (-4 - (int)piVar3)) >> 2;
+    u8 *resource = owner->entries[index];
+    if (resource == NULL) {
+        return;
     }
-    rt_memcpy_w(param_2 + 0x10,temp_v0 + 0x14,*piVar3 << 2);
-    FUN_00500fe4(piVar3,param_2 + 0x10 + *piVar3,temp_v0 + 0x7a0);
-    return;
-  }
-  return;
+    output->header.flags = static_cast<u32>(DAT_005dee3e) | 0x80000000u;
+    output->header.tag = 0xF02C0;
+    FUN_0019a270(output->unk08, parameter, 0xBF02C1);
+    ResourceWordSegment *segment = reinterpret_cast<ResourceWordSegment *>(resource + 0x10);
+    if (segment->count == 0) {
+        u32 *end = FUN_00501084(segment, segment->words);
+        segment->count = static_cast<u32>(end - segment->words);
+    }
+    rt_memcpy_w(output->payload, segment->words, segment->count * sizeof(u32));
+    FUN_00500fe4(segment, output->payload + segment->count, resource + 0x7A0);
 }
-
-} /* extern "C" */
+}

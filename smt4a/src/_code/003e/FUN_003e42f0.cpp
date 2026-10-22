@@ -1,64 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e42f0` (_code @ 0x3e42f0, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail caches id >> 3 in r5 across the bitset tests and updates both bitsets through writeback pointers; control flow matches */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00186f58(void);
+/* The area block's two 0x12-byte bitsets, indexed by area id. */
+typedef struct AreaBits {
+    /* 0x00 */ u8 known[0x12];
+    /* 0x12 */ u8 marked[0x12];
+} AreaBits;
 
-/* Supplied declaration required: FUN_00186f58. */
-extern int gameFlagIsSet(unsigned int);
-extern int gameDataBlockGetArea28350(void);
-extern int gameDataBlockGetArea2D68(void);
-extern int FUN_003e4230(unsigned int);
+s32 gameFlagIsSet(u32 flag);
+AreaBits *gameDataBlockGetArea28350(void);
+u8 *gameDataBlockGetArea2D68(void);
+s32 dataFindKeyedRecordWithOverrides(u32 id);
+s32 FUN_003e4230(u32 id);
 
-
-unsigned int FUN_003e42f0(void)
-
+/* Whether bit `id` of a bitset is set. */
+static u32 bitsetTest(const u8 *bits, u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char *pbVar5;
-  unsigned int temp_v4;
-  
-  temp_v2 = gameFlagIsSet(0x408);
-  if (temp_v2 == 0) {
+    return bits[id >> 3] & (1 << (id & 7));
+}
+
+/* Sets bit `id` of a bitset. */
+static void bitsetSet(u8 *bits, u32 id)
+{
+    bits[id >> 3] |= 1 << (id & 7);
+}
+
+/* Once flag 0x408 is set, finds an area that is marked or newly becomes known; a new one is marked too. Returns 1 when one is found. */
+u32 FUN_003e42f0(void)
+{
+    u32 id;
+
+    if (!gameFlagIsSet(0x408)) {
+        return 0;
+    }
+    for (id = 1; id < 0x8d; id++) {
+        if (bitsetTest(gameDataBlockGetArea28350()->known, id)) {
+            if (bitsetTest(gameDataBlockGetArea28350()->marked, id)) {
+                return 1;
+            }
+        } else if (dataFindKeyedRecordWithOverrides(id) != 0 &&
+                   (bitsetTest(gameDataBlockGetArea2D68(), id) || FUN_003e4230(id) != 2)) {
+            bitsetSet(gameDataBlockGetArea28350()->known, id);
+            bitsetSet(gameDataBlockGetArea28350()->marked, id);
+            return 1;
+        }
+    }
     return 0;
-  }
-  temp_v4 = 1;
-  do {
-    temp_v2 = gameDataBlockGetArea28350();
-    temp_v0 = temp_v4 >> 3;
-    temp_v1 = 1 << (temp_v4 & 7);
-    if ((*(unsigned char *)(temp_v2 + temp_v0) & temp_v1) != 0) {
-      temp_v2 = gameDataBlockGetArea28350();
-      if ((*(unsigned char *)(temp_v2 + temp_v0 + 0x12) & temp_v1) != 0) {
-        return 1;
-      }
-    }
-    else {
-      temp_v3 = temp_v4;
-      FUN_00186f58();
-      if ((temp_v3 != 0) &&
-         ((temp_v2 = gameDataBlockGetArea2D68(), (*(unsigned char *)(temp_v2 + temp_v0) & temp_v1) != 0 ||
-          (temp_v2 = FUN_003e4230(temp_v4), temp_v2 != 2)))) {
-        temp_v2 = gameDataBlockGetArea28350();
-        pbVar5 = (unsigned char *)(temp_v2 + (temp_v4 >> 3));
-        *pbVar5 = *pbVar5 | (unsigned char)(1 << (temp_v4 & 7));
-        temp_v2 = gameDataBlockGetArea28350();
-        pbVar5 = (unsigned char *)(temp_v2 + temp_v0 + 0x12);
-        *pbVar5 = *pbVar5 | (unsigned char)temp_v1;
-        return 1;
-      }
-    }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x8d) {
-      return 0;
-    }
-  } while( 1 );
 }
 
 } /* extern "C" */

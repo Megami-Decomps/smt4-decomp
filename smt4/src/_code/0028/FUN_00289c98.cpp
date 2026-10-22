@@ -1,58 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00289c98` (_code @ 0x289c98, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r7/r8 swap: retail keeps &g_buttonHelp in r8 and the stored 0 in r7. */
+#include "common.h"
+#include <stddef.h>
+
+/* One 0x8C-byte animated element of the button help panel. */
+struct ButtonHelpPart {
+    /* 0x00 */ u8 unk00[0x8c];
+};
+
+struct ButtonHelpTouch {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+};
+
+/* The button help panel. */
+struct ButtonHelpPanel {
+    /* 0x000 */ u8 unk000[0xc];
+    /* 0x00C */ s32 frame;
+    /* 0x010 */ s32 state;
+    /* 0x014 */ u8 unk014[0x20];
+    /* 0x034 */ ButtonHelpPart buttons[6];
+    /* 0x37C */ ButtonHelpPart arrows[2];
+    /* 0x494 */ ButtonHelpTouch touches[6];
+    /* 0x4AC */ u8 unk4ac[0x1c];
+    /* 0x4C8 */ u8 mode;
+};
+
+typedef char ButtonHelpPanelLayoutCheck[sizeof(ButtonHelpPart) == 0x8c && offsetof(ButtonHelpPanel, touches) == 0x494 &&
+    offsetof(ButtonHelpPanel, mode) == 0x4c8 ? 1 : -1];
+
+struct ButtonHelpRef {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ButtonHelpPanel *panel;
+};
 
 extern "C" {
 
-int ifTouchDecrementTimer(void);
-int FUN_002a9fdc(int, int, int);
-int timerStart(int, int, int);
-int FUN_002bee58(int, int);
+extern ButtonHelpRef g_buttonHelp;
 
-extern unsigned char g_buttonHelp; /* 0x43da28 */
+void FUN_002bee58(ButtonHelpPart *part, s32 hidden);
+void ifTouchDecrementTimer(void);
+void timerStart(ButtonHelpPart *part, s32 kind, s32 arg);
+void FUN_002a9fdc(ButtonHelpPart *part, s32 arg1, s32 arg2);
 
-/* Supplied declaration required: ifTouchDecrementTimer. */
-/* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
-
-
-void FUN_00289c98(int param_1)
-
+/* Hide the button help panel: hide its buttons, drop (or just count down) its touch regions, close its arrows. */
+void FUN_00289c98(s32 clearTouches)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  temp_v2 = 0;
-  do {
-    FUN_002bee58(temp_v0 + temp_v2 * 0x8c + 0x34,1);
-    temp_v1 = temp_v0 + temp_v2 * 4;
-    if (*(char *)(temp_v1 + 0x494) != '\0') {
-      if (param_1 != 0) {
-        *(unsigned char *)(temp_v1 + 0x494) = 0;
-      }
-      ifTouchDecrementTimer();
+    ButtonHelpPanel *panel = g_buttonHelp.panel;
+    for (s32 i = 0; i < 6; ++i) {
+        FUN_002bee58(&panel->buttons[i], 1);
+        if (panel->touches[i].active) {
+            if (clearTouches) {
+                panel->touches[i].active = 0;
+            }
+            ifTouchDecrementTimer();
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 6);
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v0 + temp_v2 * 0x8c + 0x37c;
-    if (*(char *)(temp_v0 + 0x4c8) != '\x01') {
-      FUN_002a9fdc(temp_v1,0,1);
+    for (s32 i = 0; i < 2; ++i) {
+        if (panel->mode == 1) {
+            timerStart(&panel->arrows[i], 3, 0);
+        } else {
+            FUN_002a9fdc(&panel->arrows[i], 0, 1);
+        }
     }
-    else {
-      timerStart(temp_v1,3,0);
-    }
-    temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
-  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
-  *(unsigned int *)(temp_v1 + 0x10) = 3;
-  return;
+    g_buttonHelp.panel->frame = 0;
+    g_buttonHelp.panel->state = 3;
 }
 
 } /* extern "C" */

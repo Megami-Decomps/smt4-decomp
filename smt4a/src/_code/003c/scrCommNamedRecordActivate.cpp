@@ -12,7 +12,7 @@ s32 scrCommNamedRecordActivate(void)
     s16 id = scrGetArg();
     u32 string = scrGetArgString(1);
 
-    namedRecordActivate(&g_aocMain->objC, id, string);
+    namedRecordActivate(&g_aocMain->scriptHolder, id, string);
     return 1;
 }
 

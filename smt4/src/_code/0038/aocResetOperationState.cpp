@@ -41,7 +41,7 @@ void aocResetOperationState(AocOperationState* state)
     state->count = 0;
     state->lastFirst = 0;
     state->lastSecond = 0;
-    g_aocDisplay->unk450C = 1;
+    g_aocDisplay->operationActive = 1;
     OperationStatusState* status = &state->status;
     status->enabled = 1;
     status->mode = 0;

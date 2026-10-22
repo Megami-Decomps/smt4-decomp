@@ -50,7 +50,7 @@ extern unsigned int FUN_002950e8(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(void);
 extern int slotGroupFindFree(unsigned int, unsigned char);
-extern int FUN_00381ae0(int);
+extern int questResetEligibleEntriesMatchingValue(int);
 /* Supplied declaration required: FUN_00382878. */
 
 
@@ -196,7 +196,7 @@ void FUN_00385448(unsigned int *param_1)
     }
     break;
   case 4:
-    temp_v4 = FUN_00381ae0((int)(char)param_1[4]);
+    temp_v4 = questResetEligibleEntriesMatchingValue((int)(char)param_1[4]);
     if (temp_v4 != 0) {
       scrScriptProcessStartMappedEntry(param_1,&LAB_00385a90);
     }

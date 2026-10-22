@@ -1,23 +1,8 @@
 /* NON_MATCHING: retail uses ldrne r4, [pc, #224] where the compiled block uses ldr r4, [pc, #204]. */
-#include "common.h"
-
-struct ResourceObject {
-    u8 unknown_00[0x20]; // 0x00
-};
-
-struct ResourceState {
-    u8 unknown_00[0x0C];       // 0x00
-    ResourceObject* first;     // 0x0C
-    ResourceObject* second;    // 0x10
-    ResourceObject* third;     // 0x14
-    u8 unknown_18[0xB0];       // 0x18
-    ResourceObject* fourth;    // 0xC8
-    ResourceObject* fifth;     // 0xCC
-    ResourceObject* sixth;     // 0xD0
-};
+#include "battle/btlView.h"
 
 extern "C" {
-extern ResourceState g_battleViewState;
+extern BattleViewState g_battleViewState;
 extern const char DAT_00531448[];
 extern const char DAT_00531478[];
 extern const char DAT_0053148c[];
@@ -27,53 +12,53 @@ extern const char DAT_005314d4[];
 extern const char DAT_005314ec[];
 
 s32 gameFlagIsSet(u32 flag);
-ResourceObject* FUN_00178b04(u32 size, const char* sourceFile, u32 sourceLine);
-ResourceObject* modelListInit(ResourceObject* storage);
-void FUN_001cd3ec(ResourceObject* object, const char* name);
+BattleViewOwner* FUN_00178b04(u32 size, const char* sourceFile, u32 sourceLine);
+BattleViewOwner* modelListInit(BattleViewOwner* storage);
+void FUN_001cd3ec(BattleViewOwner* object, const char* name);
 
 void FUN_002440f4(void)
 {
     if (gameFlagIsSet(0x4D0)) {
-        ResourceObject* object = FUN_00178b04(0x20, DAT_00531448, 0x233);
+        BattleViewOwner* object = FUN_00178b04(0x20, DAT_00531448, 0x233);
         if (object) {
             object = modelListInit(object);
         }
-        g_battleViewState.first = object;
+        g_battleViewState.attachments.primary[0] = object;
         FUN_001cd3ec(object, DAT_00531478);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x236);
         if (object) {
             object = modelListInit(object);
         }
-        g_battleViewState.second = object;
+        g_battleViewState.attachments.primary[1] = object;
         FUN_001cd3ec(object, DAT_0053148c);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x239);
         if (object) {
             object = modelListInit(object);
         }
-        g_battleViewState.third = object;
+        g_battleViewState.attachments.primary[2] = object;
         FUN_001cd3ec(object, DAT_005314a4);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x23C);
         if (object) {
             object = modelListInit(object);
         }
-        g_battleViewState.fourth = object;
+        g_battleViewState.children[0] = object;
         FUN_001cd3ec(object, DAT_005314bc);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x23F);
         if (object) {
             object = modelListInit(object);
         }
-        g_battleViewState.fifth = object;
+        g_battleViewState.children[1] = object;
         FUN_001cd3ec(object, DAT_005314d4);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x242);
         if (object) {
             object = modelListInit(object);
         }
-        g_battleViewState.sixth = object;
+        g_battleViewState.children[2] = object;
         FUN_001cd3ec(object, DAT_005314ec);
     }
 }

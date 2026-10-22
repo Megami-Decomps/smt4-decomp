@@ -1,49 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c0854` (_code @ 0x2c0854, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "shard/W5_W5Match7_SelectedRecord.h"
 extern "C" {
+u32 loadSlotIsLoaded(u32);
+CallbackLoadedObject* FUN_00275bc8(void*, void*);
 
-int FUN_00275bc8(int, unsigned int);
-
-extern int g_callbackWork; /* 0x57f134 */
-
-/* Supplied declaration required: FUN_00275bc8. */
-extern int loadSlotIsLoaded(unsigned int);
-
-
-unsigned int FUN_002c0854(void)
-
+u32 FUN_002c0854(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = g_callbackWork;
-  if (g_callbackWork != 0) {
-    temp_v2 = *(int *)(g_callbackWork + 0x10) == 0;
-    temp_v1 = 0;
-    if (!temp_v2) {
-      temp_v1 = *(int *)(g_callbackWork + 0x18);
+    SelectionOwner* work = g_callbackWork;
+    if (work == NULL) {
+        return 1;
     }
-    temp_v3 = temp_v1 == 0;
-    if (!temp_v2 && !temp_v3) {
-      temp_v1 = *(int *)(g_callbackWork + 0x1c);
+    if (work->unk10 != NULL && work->unk18 != NULL && work->unk1C != NULL &&
+        loadSlotIsLoaded(0x14) != 0 && loadSlotIsLoaded(0x25) != 0 && loadSlotIsLoaded(0x3E) != 0) {
+        if (work->createdObject == NULL) {
+            work->createdObject = FUN_00275bc8(work->unk10, work->unk18);
+            work->createdObject->unk108 = 0;
+        }
+        return 1;
     }
-    if (((((temp_v2 || temp_v3) || temp_v1 == 0) || (temp_v1 = loadSlotIsLoaded(0x14), temp_v1 == 0)) ||
-        (temp_v1 = loadSlotIsLoaded(0x25), temp_v1 == 0)) || (temp_v1 = loadSlotIsLoaded(0x3e), temp_v1 == 0)) {
-      return 0;
-    }
-    if (*(int *)(temp_v0 + 0x14) == 0) {
-      temp_v1 = *(int *)(temp_v0 + 0x10);
-      FUN_00275bc8(temp_v1,*(unsigned int *)(temp_v0 + 0x18));
-      *(int *)(temp_v0 + 0x14) = temp_v1;
-      *(unsigned int *)(temp_v1 + 0x108) = 0;
-    }
-  }
-  return 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

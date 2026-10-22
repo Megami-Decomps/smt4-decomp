@@ -1,43 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029a924` (_code @ 0x29a924, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail predicates the capacity load and the zeroed total on the owner check (ldrbne/movne); this build branches first. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae164(void);
-int FUN_002ae584(void);
+typedef struct AppSlotOwner {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ u8 capacity;
+} AppSlotOwner;
 
-extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: FUN_002ae164. */
-/* Supplied declaration required: FUN_002ae584. */
+typedef struct AppCostRecord {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ s32 cost;
+} AppCostRecord;
 
+AppSlotOwner *FUN_002ae164(u32 id);
+AppCostRecord *FUN_002ae584(u32 id);
+s32 flagBitIsSet(u32 bit);
 
-void FUN_0029a924(int param_1)
-
+/* Returns the capacity of `id` left after the costs of the installed apps 12-15 (at least 1), or 0
+ * when `id` has no record. */
+s32 FUN_0029a924(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_002ae164();
-  if (param_1 != 0) {
-    temp_v0 = flagBitIsSet(0xc);
-    if (temp_v0 != 0) {
-      FUN_002ae584();
+    AppSlotOwner *owner = FUN_002ae164(id);
+    if (owner != NULL) {
+        s32 capacity = owner->capacity;
+        s32 used = 0;
+        if (flagBitIsSet(12)) {
+            used += FUN_002ae584(12)->cost;
+        }
+        if (flagBitIsSet(13)) {
+            used += FUN_002ae584(13)->cost;
+        }
+        if (flagBitIsSet(14)) {
+            used += FUN_002ae584(14)->cost;
+        }
+        if (flagBitIsSet(15)) {
+            used += FUN_002ae584(15)->cost;
+        }
+        s32 remaining = capacity - used;
+        if (remaining <= 0) {
+            remaining = 1;
+        }
+        return remaining;
     }
-    temp_v0 = flagBitIsSet(0xd);
-    if (temp_v0 != 0) {
-      FUN_002ae584();
-    }
-    temp_v0 = flagBitIsSet(0xe);
-    if (temp_v0 != 0) {
-      FUN_002ae584();
-    }
-    temp_v0 = flagBitIsSet(0xf);
-    if (temp_v0 != 0) {
-      FUN_002ae584();
-    }
-  }
-  return;
+    return 0;
 }
 
 } /* extern "C" */

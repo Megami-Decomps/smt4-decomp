@@ -1,64 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ebe10` (_code @ 0x1ebe10, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0026b9bc(void);
-int FUN_0028a368(int);
-int FUN_0028a924(int, int, unsigned int);
-int scrScriptProcessStartEntry(...);
+typedef struct ScriptStepper {
+    u8 unk000[0xD04];
+    u32 script;     /* 0xD04 */
+    u8 unkD08[0x20];
+    s32 mode;       /* 0xD28: 10 starts entry 16 */
+    s32 nextState;  /* 0xD2C */
+    u8 unkD30[4];
+    u32 unkD34;     /* 0xD34 */
+    s32 step;       /* 0xD38 */
+    u8 unkD3C[0x24];
+    u8 altEntry;    /* 0xD60: start entry 18 instead of 17 */
+} ScriptStepper;
 
-typedef struct fn_001ebe10_arg0 fn_001ebe10_arg0;
-struct fn_001ebe10_arg0 {
-    unsigned char pad_0x0[0xd04];
-    undefined4 field_0xd04; /* +0xd04 */
-    unsigned char pad_0xd08[0x20];
-    int field_0xd28; /* +0xd28 */
-    undefined4 field_0xd2c; /* +0xd2c */
-    unsigned char pad_0xd30[0x4];
-    undefined4 field_0xd34; /* +0xd34 */
-    int field_0xd38; /* +0xd38 */
-    unsigned char pad_0xd3c[0x24];
-    byte field_0xd60; /* +0xd60 */
-};
+void scrScriptProcessStartEntry(u32 script, s32 entry);
+s32 scrRunOpcodesStub(u32 script);
+void FUN_0026b9bc(void);
+void FUN_0028a924(s32 a0, s32 a1, s32 a2);
+void FUN_0028a368(s32 a0);
 
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0026b9bc. */
-/* Supplied declaration required: FUN_0028a368. */
-/* Supplied declaration required: FUN_0028a924. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-
-
-unsigned int FUN_001ebe10(fn_001ebe10_arg0 *param_1)
-
+/* Starts the stepper's script entry, then runs it; returns 2 once it has finished (and switches to state 6). */
+s32 FUN_001ebe10(ScriptStepper *stepper)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if (param_1->field_0xd38 != 0) {
-    if ((param_1->field_0xd38 == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xd04), temp_v0 == 2)) {
-      param_1->field_0xd34 = 0;
-      param_1->field_0xd2c = 6;
-      param_1->field_0xd38 = 0;
-      FUN_0026b9bc();
-      FUN_0028a924(1,0,0xffffffff);
-      FUN_0028a368(1);
-      temp_v1 = 2;
+    s32 result = 0;
+
+    switch (stepper->step) {
+    case 0:
+        if (stepper->mode == 10) {
+            scrScriptProcessStartEntry(stepper->script, 16);
+        } else if (stepper->altEntry) {
+            scrScriptProcessStartEntry(stepper->script, 18);
+        } else {
+            scrScriptProcessStartEntry(stepper->script, 17);
+        }
+        stepper->step++;
+        break;
+    case 1:
+        if (scrRunOpcodesStub(stepper->script) == 2) {
+            stepper->unkD34 = 0;
+            stepper->nextState = 6;
+            stepper->step = 0;
+            FUN_0026b9bc();
+            FUN_0028a924(1, 0, -1);
+            FUN_0028a368(1);
+            result = 2;
+        }
+        break;
     }
-  }
-  else {
-    if (param_1->field_0xd28 != 10) {
-      scrScriptProcessStartEntry(param_1->field_0xd04);
-    }
-    else {
-      scrScriptProcessStartEntry(param_1->field_0xd04,0x10);
-    }
-    param_1->field_0xd38 = param_1->field_0xd38 + 1;
-  }
-  return temp_v1;
+    return result;
 }
 
 } /* extern "C" */

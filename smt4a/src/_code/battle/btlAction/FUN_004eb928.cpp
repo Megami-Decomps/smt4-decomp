@@ -10,7 +10,7 @@ int obj4FSlots28Reset(...);
 
 int FUN_00178b04(...);
 int dialogOpen(...);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int infoWinSetTimer(...);
 int halfRecClear(...);
 int FUN_003f20f0(void);
@@ -54,7 +54,7 @@ int btlReflectSetValuePair(...);
 int FUN_004fbd30(...);
 int FUN_004fee24(...);
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_002c7bf4(...);
 int FUN_0047eccc(...);
 int FUN_0047f138(...);
@@ -162,14 +162,14 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00222488. */
 extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: FUN_0023acdc. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: FUN_002c7bf4. */
 /* Supplied declaration required: sysMemClear. */
@@ -231,7 +231,7 @@ extern int FUN_004ea0c0(int *, unsigned int *);
 /* Supplied declaration required: FUN_004ecd7c. */
 /* Supplied declaration required: FUN_004ecee8. */
 /* Supplied declaration required: FUN_004ee5b4. */
-extern int FUN_004f5710(int, int);
+extern int btlEffectNameHasPrefix(int, int);
 extern int FUN_004f59b0(int);
 extern int FUN_004f5a40(int);
 extern int btlUnitGetSkillValue(int);
@@ -933,7 +933,7 @@ code_r0x004ef7f0:
         if (iStack_68 != 1) {
           if ((iStack_68 == 8) && (iStack_54 == 0)) {
             temp_v18 = uStack_64;
-            FUN_00192550();
+            dataTable8FindRecord();
             temp_v2 = *(short *)(temp_v18 + 0x32);
             if (temp_v2 != 0) {
               temp_v3 = FUN_002c7bf4(temp_v2);
@@ -1020,7 +1020,7 @@ code_r0x004ef7f0:
         temp_v22 = FUN_004f9d44(g_btlAux);
         if (-1 < temp_v22) {
           temp_v7 = temp_v21 + temp_v3 * 0x16;
-          temp_v22 = FUN_004f5710(g_btlAux,temp_v7 + 0x108);
+          temp_v22 = btlEffectNameHasPrefix(g_btlAux,temp_v7 + 0x108);
           if (temp_v22 != 0) {
             temp_v22 = FUN_004f9d44(g_btlAux);
             FUN_004fbd30(temp_v22 + temp_v5,puVar29);
@@ -1185,7 +1185,7 @@ code_r0x004f054c:
           if (temp_v2 == 8) {
             temp_v2 = *(short *)(temp_v5 + 0x1c0);
             temp_v3 = (int)temp_v2;
-            FUN_00192550();
+            dataTable8FindRecord();
             if ((*(unsigned char *)(temp_v3 + 0x42) & 1) == 0) {
               flagValueSub((int)temp_v2,1);
             }
@@ -1300,7 +1300,7 @@ code_r0x004f054c:
       if (temp_v3 != 0) {
         temp_v2 = partyCountActiveSlots();
         if (temp_v2 < 3) {
-          FUN_002a49e4(*(unsigned int *)(*piStack_30 + 0x2268),0x3b);
+          infoWinSetText(*(unsigned int *)(*piStack_30 + 0x2268),0x3b);
         }
         else {
           if (temp_v2 < 6) {
@@ -1309,7 +1309,7 @@ code_r0x004f054c:
           else {
             temp_v4 = 0x3c;
           }
-          FUN_002a49e4(*(unsigned int *)(*piStack_30 + 0x2268),temp_v4);
+          infoWinSetText(*(unsigned int *)(*piStack_30 + 0x2268),temp_v4);
         }
         dialogOpen(1);
         infoWinSetTimer(0xffffffff);

@@ -1,43 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c87b4` (_code @ 0x3c87b4, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the final unk19FA read builds the address with two adds instead of reusing the 0x19FA pool literal. */
+#include "common.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
 
-int uiSpriteSelectAnim(int, int);
+void uiSpriteSelectAnim(u8 *sprite, s32 animation);
+s32 scrGetCommandFrame(void);
 
-extern unsigned char g_messageMain; /* 0x57f588 */
+extern MessageGlobalsA g_messageMain;
 
-/* Supplied declaration required: uiSpriteSelectAnim. */
-extern int scrGetCommandFrame(void);
-
-
-unsigned char FUN_003c87b4(void)
-
+/* Switches the panel's sprites to their closing animations and picks the next state. */
+static __inline void messagePanelStartClose(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  temp_v3 = scrGetCommandFrame();
-  temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  if ((temp_v3 == 0) && (*(char *)(temp_v0 + 0x19fb) != '\0')) {
-    uiSpriteSelectAnim((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x15f0,0xf);
-    uiSpriteSelectAnim(temp_v1 + 0x167c,0x10);
-    uiSpriteSelectAnim(temp_v1 + 0x1794,0x12);
-    *(unsigned char *)(temp_v1 + 0x19fa) = 1;
-    if (*(int *)(temp_v1 + 0x19fc) == 0) {
-      temp_v2 = 6;
+    MessagePanelA *panel = g_messageMain.panel;
+
+    uiSpriteSelectAnim(panel->spritesCA4[17], 15);
+    uiSpriteSelectAnim(panel->spritesCA4[18], 16);
+    uiSpriteSelectAnim(panel->spritesCA4[20], 18);
+    panel->unk19FA = 1;
+    panel->unk19F9 = panel->unk19FC == 0 ? 6 : 4;
+}
+
+/* Starts closing the message panel once the script command is done and a close is pending;
+ * returns whether the panel is still open. */
+bool FUN_003c87b4(void)
+{
+    MessagePanelA *panel = g_messageMain.panel;
+
+    if (scrGetCommandFrame() == 0 && panel->unk19FB != 0) {
+        messagePanelStartClose();
     }
-    else {
-      temp_v2 = 4;
-    }
-    *(unsigned char *)(temp_v1 + 0x19f9) = temp_v2;
-  }
-  return *(char *)(temp_v0 + 0x19fa) == '\0';
+    return panel->unk19FA == 0;
 }
 
 } /* extern "C" */

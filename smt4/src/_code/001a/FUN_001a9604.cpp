@@ -1,67 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a9604` (_code @ 0x1a9604, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The two vector groups use different saved VFP registers and relative-pointer address formation. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+
+struct ModelParameterControl {
+    /* 0x00 */ s32 mode;
+    /* 0x04 */ f32 parameters[3];
+};
+struct ModelParameterState {
+    /* 0x00 */ u8 unk00[0xB4];
+    /* 0xB4 */ f32 unkB4[3];
+    /* 0xC0 */ f32 unkC0;
+    /* 0xC4 */ u8 unkC4[4];
+    /* 0xC8 */ s32 controlOffset;
+};
 
 extern "C" {
+u32 asdModelIdListGet(s32 index, s32 list);
 
-extern int asdModelIdListGet(unsigned int);
-
-
-void FUN_001a9604(int param_1)
-
+/* Updates the default model's vector and relative mode/parameter block. */
+void FUN_001a9604(s32 mode, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4, in_s5 */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned int in_s4;
-  unsigned int in_s5;
-  
-  temp_v0 = asdModelIdListGet(0);
-  temp_v0 = *(int *)(temp_v0 + 8);
-  *(unsigned int *)(temp_v0 + 0xbc) = in_s2;
-  *(unsigned int *)(temp_v0 + 0xc0) = 0x3f800000;
-  *(unsigned int *)(temp_v0 + 0xb4) = in_s0;
-  *(unsigned int *)(temp_v0 + 0xb8) = in_s1;
-  temp_v1 = 0;
-  temp_v2 = *(int *)(temp_v0 + 200);
-  if (temp_v2 != 0) {
-    puVar2 = (unsigned int *)(temp_v0 + 200 + temp_v2);
-  }
-  else {
-    puVar2 = (unsigned int *)0x0;
-  }
-  if (param_1 != -1) {
-    if (param_1 == 0) {
-      *puVar2 = 1;
-      puVar2[1] = in_s3;
-      puVar2[2] = in_s4;
-      puVar2[3] = in_s5;
-      return;
+    AsdModelEntry *entry = reinterpret_cast<AsdModelEntry *>(asdModelIdListGet(0, 0));
+    ModelParameterState *state = reinterpret_cast<ModelParameterState *>(entry->unk08);
+    state->unkB4[0] = a;
+    state->unkB4[1] = b;
+    state->unkB4[2] = c;
+    state->unkC0 = 1.0f;
+    ModelParameterControl *control = state->controlOffset != 0
+        ? reinterpret_cast<ModelParameterControl *>(reinterpret_cast<u8 *>(&state->controlOffset) + state->controlOffset)
+        : NULL;
+    if (mode == -1) {
+        control->mode = 0;
+    } else if (mode == 0) {
+        control->mode = 1;
+    } else if (mode == 1) {
+        control->mode = 2;
+    } else if (mode == 2) {
+        control->mode = 3;
     }
-    if (param_1 == 1) {
-      temp_v1 = 2;
-    }
-    else {
-      if (param_1 != 2) {
-        puVar2[1] = in_s3;
-        puVar2[2] = in_s4;
-        puVar2[3] = in_s5;
-        return;
-      }
-      temp_v1 = 3;
-    }
-  }
-  *puVar2 = temp_v1;
-  puVar2[1] = in_s3;
-  puVar2[2] = in_s4;
-  puVar2[3] = in_s5;
-  return;
+    control->parameters[0] = d;
+    control->parameters[1] = e;
+    control->parameters[2] = f;
 }
-
-} /* extern "C" */
+}

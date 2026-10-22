@@ -8,7 +8,7 @@ extern AocDisplay *g_aocDisplay;
 void *dataTableFileGetTable(void *file, u32 index);
 void memClear(void *buffer, u32 size);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_0038a154(AocDisplay *display, const char *path, DataFileRef *file,
+void aocQueueFileLoad(AocDisplay *display, const char *path, DataFileRef *file,
                   u32 mode, u32 size, DataFileRef *context);
 }
 
@@ -83,7 +83,7 @@ extern "C" void dataEntryQueueSupportedFiles(DataEntry *entry)
                 memClear(path, sizeof(path));
                 textFormatBuffer(path, "%s/%s", entry->source.directory, rows[index].name);
                 DataFileRef *file = &entry->files[index];
-                FUN_0038a154(g_aocDisplay, path, file, 1, sizeof(path), file);
+                aocQueueFileLoad(g_aocDisplay, path, file, 1, sizeof(path), file);
                 entry->files[index].status.requested = 1;
                 break;
             }

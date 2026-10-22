@@ -1,48 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037a8bc` (_code @ 0x37a8bc, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the render buffer sets as ctx + 0x140/0x160 with a 0x11F8 pool offset and fewer saved registers; the build folds the constant indices. */
+#include "common.h"
 
 extern "C" {
 
-int asdModelCommandBlockRelease(void);
-int cursorResetFromParam(void);
+typedef struct RenderBufferSet {
+    /* 0x00 */ s32 current;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ u32 addresses[6];
+} RenderBufferSet;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct RenderCtx {
+    /* 0x0000 */ u8 unk0000[0x11F8];
+    /* 0x11F8 */ RenderBufferSet buffers[12]; /* 10: color, 11: depth */
+} RenderCtx;
 
-extern int g_renderCtx; /* 0x59dbb4 */
-extern int DAT_005b3fe4; /* 0x5b3fe4 */
-extern int DAT_005b3fe8; /* 0x5b3fe8 */
+extern RenderCtx *g_renderCtx;
+extern u32 *DAT_005b3fe4; /* model command buffer */
+extern int DAT_005b3fe8;  /* words used in the buffer */
 
-/* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: cursorResetFromParam. */
+void cursorResetFromParam(void);
+void asdModelCommandBlockRelease(void);
 
-
-void FUN_0037a8bc(int param_1)
-
+/* Queue command 0xF0065 with `enable`; when enabled, also queue the current color and depth buffers. */
+void FUN_0037a8bc(u32 enable)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  cursorResetFromParam();
-  temp_v0 = DAT_005b3fe4;
-  *(int *)(DAT_005b3fe4 + DAT_005b3fe8 * 4) = param_1;
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0065;
-  DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  if (param_1 != 0) {
-    *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) =
-         *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1338) * 4 + 0x1340);
-    *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0066;
-    DAT_005b3fe8 = DAT_005b3fe8 + 2;
-    *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) =
-         *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1358) * 4 + 0x1360);
-    *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0067;
-    DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  }
-  asdModelCommandBlockRelease();
-  return;
+    cursorResetFromParam();
+    DAT_005b3fe4[DAT_005b3fe8] = enable;
+    DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF0065;
+    DAT_005b3fe8 += 2;
+    if (enable) {
+        DAT_005b3fe4[DAT_005b3fe8] = g_renderCtx->buffers[10].addresses[g_renderCtx->buffers[10].current];
+        DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF0066;
+        DAT_005b3fe8 += 2;
+        DAT_005b3fe4[DAT_005b3fe8] = g_renderCtx->buffers[11].addresses[g_renderCtx->buffers[11].current];
+        DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xF0067;
+        DAT_005b3fe8 += 2;
+    }
+    asdModelCommandBlockRelease();
 }
 
 } /* extern "C" */

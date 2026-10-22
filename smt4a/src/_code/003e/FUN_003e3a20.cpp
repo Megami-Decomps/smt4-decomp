@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int statusReplaceSkills(int *, int);
 int unitRecordBuild(int, unsigned char [4]);
 int statusDisplayBindUnitRecord(unsigned char [4], int, int);
@@ -49,7 +49,7 @@ typedef struct {
     unsigned short sp2BC; /* 0x2bc: local_2bc */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: statusReplaceSkills. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
@@ -158,7 +158,7 @@ void FUN_003e3a20(int param_1,fn_003e3a20_arg1 *param_2)
   FUN_0033449c(1);
   statusDisplayBindUnitRecord(temp_v4,0,0);
   objBInitBlock19D0(temp_v14,1,0);
-  FUN_002a7324(1);
+  statusPanelSetOpen(1);
   statusReplaceSkills(&temp_v15,8);
   statusMarkNewSkills(temp_v18,8);
   return;

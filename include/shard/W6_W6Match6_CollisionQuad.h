@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH6_COLLISION_QUAD_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct CollisionVector { f32 x, y, z; };
 struct CollisionQuad {
@@ -30,6 +31,16 @@ struct CollisionQueueState {
     s32 secondCount; // 0x14
     union { u32 unk18; CollisionQuad *triangles; };
     union { CollisionQuad *first; CollisionQuad *quads; }; // 0x1c
+    CollisionQuad *second; // 0x20
+    CollisionQuad *unk24; // 0x24
+};
+typedef char CollisionQueueStateBuffersCheck[
+    offsetof(CollisionQueueState, second) == 0x20 &&
+    offsetof(CollisionQueueState, unk24) == 0x24 ? 1 : -1];
+
+struct CollisionVectorState {
+    u8 unk000[0x320]; // 0x000
+    CollisionVector vectors[4]; // 0x320
 };
 
 extern "C" CollisionQueueState g_mapCollision;

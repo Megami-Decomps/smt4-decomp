@@ -1,52 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00370ecc` (_code @ 0x370ecc, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+typedef struct Table10Entry {
+    u16 id;       /* 0x00 */
+    u8 unk02[6];
+} Table10Entry;
 
-
-int FUN_00370ecc(unsigned int param_1)
-
+/* Returns the entry of data table 10 (section 0) with the given id, or NULL. */
+Table10Entry *FUN_00370ecc(u16 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned short *puVar6;
-  
-  temp_v0 = dataTableGet(10,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v1 + temp_v4 * 8) == param_1) {
-          return temp_v1 + temp_v4 * 8;
+    void *resource = dataTableGet(10, 0);
+    Table10Entry *entries = (Table10Entry *)dataTableGetEntries(resource);
+    u32 count = dataTableGetCount(resource);
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        if (entries[i].id == id) {
+            return &entries[i];
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < (int)temp_v3);
     }
-  }
-  while( 1 ) {
-    if (temp_v2 <= temp_v3) {
-      return 0;
-    }
-    puVar6 = (unsigned short *)(temp_v1 + temp_v3 * 8);
-    if (*puVar6 == param_1) break;
-    if (puVar6[4] == param_1) {
-      return temp_v1 + temp_v3 * 8 + 8;
-    }
-    temp_v3 = temp_v3 + 2;
-  }
-  return temp_v1 + temp_v3 * 8;
+    return NULL;
 }
 
 } /* extern "C" */

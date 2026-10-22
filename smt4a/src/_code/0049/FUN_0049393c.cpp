@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int contentEntryFindById2(void);
 
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: contentEntryFindById2. */
 extern unsigned int FUN_00192718(unsigned int);
@@ -36,7 +36,7 @@ int FUN_0049393c(unsigned short *param_1,unsigned short *param_2)
     break;
   case 1:
   case 0xc:
-    FUN_00192550();
+    dataTable8FindRecord();
     temp_v3 = *(unsigned int *)(temp_v4 + 0x44) & 0xff;
     break;
   case 2:
@@ -59,7 +59,7 @@ int FUN_0049393c(unsigned short *param_1,unsigned short *param_2)
     break;
   case 1:
   case 0xc:
-    FUN_00192550();
+    dataTable8FindRecord();
     temp_v5 = *(unsigned int *)(temp_v4 + 0x44) & 0xff;
     break;
   case 2:

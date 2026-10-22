@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00183da0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0019e1fc(int);
+int dataSubmitSelectedPresetBlock(int);
 
 typedef struct fn_0016c4b8_arg0 fn_0016c4b8_arg0;
 struct fn_0016c4b8_arg0 {
@@ -21,7 +21,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00183da0. */
-/* Supplied declaration required: FUN_0019e1fc. */
+/* Supplied declaration required: dataSubmitSelectedPresetBlock. */
 
 
 void FUN_0016c4b8(fn_0016c4b8_arg0 *param_1,int param_2)
@@ -57,7 +57,7 @@ LAB_0016c518:
       if (param_1->field_0x11f5 == 1) {
         return;
       }
-      FUN_0019e1fc(temp_v0);
+      dataSubmitSelectedPresetBlock(temp_v0);
       param_1->field_0x11f5 = temp_v0;
       return;
     }
@@ -66,7 +66,7 @@ LAB_0016c518:
   if (param_1->field_0x11f5 == 0) {
     return;
   }
-  FUN_0019e1fc(temp_v0);
+  dataSubmitSelectedPresetBlock(temp_v0);
   param_1->field_0x11f5 = temp_v0;
   return;
 }

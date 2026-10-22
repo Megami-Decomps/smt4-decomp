@@ -1,48 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003128d8` (_code @ 0x3128d8, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The nearest-entry loop allocates its distance and entry registers differently. */
+#include "map/mapGimic.h"
+#include "map/lmapMain.h"
 
 extern "C" {
+extern MapGimic *g_mapGimic;
+extern LmapSceneA *g_lmapScene;
+f32 distSpatial(f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1);
 
-int distSpatial(void);
-
-extern int g_mapGimic; /* 0x580ca0 */
-extern int g_lmapScene; /* 0x581288 */
-
-/* Supplied declaration required: distSpatial. */
-
-
+/* Requests the nearest active gimmick of the selected interaction kind. */
 void FUN_003128d8(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float temp_v4;
-  
-  temp_v2 = -1;
-  temp_v1 = 0;
-  temp_v3 = 99999;
-  do {
-    temp_v0 = g_mapGimic + temp_v1 * 0x3c;
-    if ((*(char *)(temp_v0 + 0x90) != '\0') && (*(short *)(temp_v0 + 0xa6) == 0xf)) {
-      temp_v4 = *(float *)(g_lmapScene + 0x1c);
-      distSpatial();
-      if ((int)temp_v4 < temp_v3) {
-        temp_v2 = temp_v1;
-        temp_v3 = (int)temp_v4;
-      }
+    s32 bestIndex = -1;
+    s32 bestDistance = 99999;
+    for (s32 i = 0; i < MAP_GIMIC_ENTRIES; ++i) {
+        MapGimicEntry *entry = &g_mapGimic->entries[i];
+        if (entry->active != 0 && entry->id == 0xF) {
+            s32 distance = static_cast<s32>(distSpatial(
+                g_lmapScene->transform.position[0], g_lmapScene->transform.position[1], g_lmapScene->transform.position[2],
+                entry->position[0], entry->position[1], entry->position[2]));
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestIndex = i;
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x23);
-  if (temp_v2 != -1) {
-    temp_v2 = g_mapGimic + temp_v2 * 0x3c;
-    *(unsigned short *)(temp_v2 + 0xa4) = 1;
-    *(unsigned char *)(temp_v2 + 0x91) = 1;
-  }
-  return;
+    if (bestIndex != -1) {
+        g_mapGimic->entries[bestIndex].requestState = 1;
+        g_mapGimic->entries[bestIndex].requested = 1;
+    }
 }
-
-} /* extern "C" */
+}

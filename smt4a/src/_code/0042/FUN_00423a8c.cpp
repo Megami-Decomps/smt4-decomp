@@ -1,63 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00423a8c` (_code @ 0x423a8c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail zeroes the three trailing words with a write-back str and an stm of two zero registers; this build emits three plain stores. */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00423a8c_arg0 fn_00423a8c_arg0;
-struct fn_00423a8c_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x4];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
+typedef struct FrameAllocator FrameAllocator;
+
+typedef struct FrameAllocatorVtbl {
+    void *(*alloc)(FrameAllocator *self, u32 size, u32 align);
+    void (*free)(FrameAllocator *self, void *block);
+} FrameAllocatorVtbl;
+
+struct FrameAllocator {
+    const FrameAllocatorVtbl *vtbl;
 };
 
-typedef int romwright_code(...);
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_5_stack;
+typedef struct FrameDesc {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 width;
+    /* 0x0C */ s32 height;
+} FrameDesc;
 
-extern int FUN_00422814(unsigned int, unsigned int, unsigned int);
-extern int FUN_00423ce0(fn_00423a8c_arg0 *, unsigned int, int, unsigned int, unsigned int);
+typedef struct FrameBuffer {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ FrameAllocator *allocator;
+    /* 0x08 */ FrameDesc *desc;
+    /* 0x0C */ s32 handle;
+    /* 0x10 */ void *pixels;
+    /* 0x14 */ u32 size;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u32 unk20;
+} FrameBuffer;
 
+s32 FUN_00422814(s32 width, s32 height, u32 mode);
+bool FUN_00423ce0(FrameBuffer *frame, FrameAllocator *allocator, FrameDesc *desc, s32 a, s32 b);
 
-unsigned int
-FUN_00423a8c(fn_00423a8c_arg0 *param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5
-            )
-
+/* Sets up a frame buffer: allocates width * height * depth * 2 bytes and opens a handle for it.
+ * Returns 0 on failure, freeing the pixels again when the handle cannot be opened. */
+s32 FUN_00423a8c(FrameBuffer *frame, FrameAllocator *allocator, FrameDesc *desc, s32 depth, u32 mode)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_00423ce0(param_1,param_2,param_3,1,0x10);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v0 = *(int *)(param_3 + 8) * *(int *)(param_3 + 0xc) * param_4 * 2;
-    param_1->field_0x14 = temp_v0;
-    temp_v0 = (*(romwright_code *)**(unsigned int **)param_1->field_0x4)(param_1->field_0x4,temp_v0,0x20);
-    param_1->field_0x10 = temp_v0;
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v0 = FUN_00422814(*(unsigned int *)(param_3 + 8),*(unsigned int *)(param_3 + 0xc),param_5);
-      param_1->field_0xc = temp_v0;
-      if (temp_v0 == -1) {
-        (**(romwright_code **)(*(int *)param_1->field_0x4 + 4))(param_1->field_0x4,param_1->field_0x10);
-        param_1->field_0x10 = 0;
+    if (!FUN_00423ce0(frame, allocator, desc, 1, 16)) {
         return 0;
-      }
-      param_1->field_0x18 = 0;
-      param_1->field_0x1c = 0;
-      param_1->field_0x20 = 0;
-      temp_v1 = 1;
     }
-  }
-  return temp_v1;
+    frame->size = desc->width * desc->height * depth * 2;
+    frame->pixels = frame->allocator->vtbl->alloc(frame->allocator, frame->size, 32);
+    if (frame->pixels == NULL) {
+        return 0;
+    }
+    frame->handle = FUN_00422814(desc->width, desc->height, mode);
+    if (frame->handle == -1) {
+        frame->allocator->vtbl->free(frame->allocator, frame->pixels);
+        frame->pixels = NULL;
+        return 0;
+    }
+    frame->unk18 = 0;
+    frame->unk1C = 0;
+    frame->unk20 = 0;
+    return 1;
 }
 
 } /* extern "C" */

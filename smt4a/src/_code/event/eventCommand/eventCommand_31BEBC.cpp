@@ -1,44 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `eventCommand_31BEBC` (_code @ 0x3b6a7c, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the scale literal is loaded before the two final integer-argument moves. */
+#include "event/EventTaskRequest.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 kind, u32 bytes, u32 flags);
+void *FUN_0031ba34(u32 kind, EventTaskRequest *request, u8 mode, u8 enabled,
+                  f32 x, f32 y, f32 z, f32 scale);
+s32 FUN_00162ea4(void);
+u32 scrGetArg(u32 index);
+void scrSetResult(EventTaskRequest *request);
 
-int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_0031ba34(int, int, int, int);
-int scrSetResult(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_0031ba34. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int eventCommand_31BEBC(void)
-
+// Create a tracked request for the selected event task when task creation is permitted.
+u32 eventCommand_31BEBC(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v2 = 0;
-  temp_v1 = FUN_00162ea4();
-  if (temp_v1 == 0) {
-    temp_v2 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,8,1);
-    FUN_0031ba34(temp_v0,temp_v2,0,1);
-    *(unsigned int *)(temp_v2 + 4) = temp_v0;
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    u8 kind = static_cast<u8>(scrGetArg(0));
+    EventTaskRequest *request = NULL;
+    if (FUN_00162ea4() == 0) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\eventCommand.cpp", 1592);
+        request = static_cast<EventTaskRequest *>(
+            asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventTaskRequest), 1));
+        request->task = FUN_0031ba34(kind, request, 0, 1, 0.0f, 0.0f, 0.0f, 1.0f);
+    }
+    scrSetResult(request);
+    return 1;
 }
-
-} /* extern "C" */
+}

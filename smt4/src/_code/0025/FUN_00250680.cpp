@@ -1,42 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00250680` (_code @ 0x250680, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r5, #1 differs from recovered mov r2, #0. */
+#include "common.h"
+
+// Private views of the battle records used by this function.
+struct BattleMainState;
+struct BattleEvent;
+struct ActionReflectState;
+
+struct ListedBattleEntryView {
+    u32 flags; // 0x00
+};
+
+struct ReflectSourceView {
+    u8 unk00[0x50]; // 0x00
+    u32 flags;     // 0x50
+    u8 unk54[0x0E]; // 0x54
+    s16 listedId;  // 0x62
+};
+
+struct ReflectActionView {
+    u8 unk00[4];                  // 0x00
+    u8 unk04;                     // 0x04
+    u8 unk05[0x13];               // 0x05
+    ListedBattleEntryView* entry; // 0x18
+    u8 unk1C[0x0C];               // 0x1C
+    u32 unk28;                    // 0x28
+};
 
 extern "C" {
+BattleMainState* btlGetMainState(void);
+ListedBattleEntryView* btlMainFindEntryByListedId(BattleMainState* state, s32 listedId);
+s32 FUN_0027e3e8(BattleEvent* event, ReflectSourceView* source, u32 mode);
+ReflectActionView* FUN_0022699c(ActionReflectState* state, s32 actionId, s32 mode, u32 argument);
 
-int FUN_0022699c(int, int, int, unsigned int);
-int btlMainFindEntryByListedId(unsigned int *, int);
+extern BattleEvent* g_btlEvent;
+extern ActionReflectState* g_btlActionReflect;
 
-extern int g_btlActionReflect; /* 0x434290 */
-extern unsigned int g_btlEvent; /* 0x435d48 */
-
-/* Supplied declaration required: FUN_0022699c. */
-extern int FUN_0027e3e8(unsigned int, int, unsigned int);
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern unsigned int *btlGetMainState(void);
-
-
-unsigned int FUN_00250680(short param_1,unsigned int param_2,int param_3)
-
+// Mark the listed entry and enqueue a reflection action when the event permits it.
+u32 FUN_00250680(s32 actionId, u32 argument, ReflectSourceView* source)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0 && (*(unsigned int *)(param_3 + 0x50) & 0x80) != 0) {
-    puVar1 = (unsigned int *)btlGetMainState();
-    btlMainFindEntryByListedId(puVar1,(int)*(short *)(param_3 + 0x62));
-    *puVar1 = *puVar1 | 0x240;
-    temp_v0 = FUN_0027e3e8(g_btlEvent,param_3,1);
-    if ((temp_v0 == 0) || ((*puVar1 & 0x10) == 0)) {
-      temp_v0 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-      *(unsigned char *)(temp_v0 + 4) = 0x24;
-      *(unsigned int **)(temp_v0 + 0x18) = puVar1;
-      *(unsigned int *)(temp_v0 + 0x28) = 1;
-    }
-  }
-  return 1;
-}
+    if ((source->flags & 1) != 0 && (source->flags & 0x80) != 0) {
+        ListedBattleEntryView* entry =
+            btlMainFindEntryByListedId(btlGetMainState(), source->listedId);
+        entry->flags |= 0x240;
 
-} /* extern "C" */
+        if (FUN_0027e3e8(g_btlEvent, source, 1) == 0 ||
+            (entry->flags & 0x10) == 0) {
+            ReflectActionView* action =
+                FUN_0022699c(g_btlActionReflect, (s16)actionId, 0, argument);
+            action->unk04 = 0x24;
+            action->entry = entry;
+            action->unk28 = 1;
+        }
+    }
+    return 1;
+}
+}

@@ -1,17 +1,13 @@
-#include "common.h"
+#include "shard/Shard0032.h"
 
 extern "C" {
 
-typedef struct Screen {
-    /* 0x000 */ u8 unk000[0x10F];
-    /* 0x10F */ u8 flag;
-} Screen;
-extern Screen *g_campCecEdit;
+extern StateAtF4 *g_campCecEdit;
 
 /* Returns whether the flag byte at 0x10F of the screen at 0x57F118 is set. */
 u8 FUN_002e2014(void)
 {
-    return g_campCecEdit->flag != 0;
+    return g_campCecEdit->unk10F != 0;
 }
 
 } /* extern "C" */

@@ -1,45 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00206d9c` (_code @ 0x206d9c, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DevilPairSortEntry.h"
 
 extern "C" {
-
-int devilGetRecord(void);
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-unsigned int FUN_00206d9c(unsigned short *param_1,unsigned short *param_2)
-
+// Place empty entries last; sort populated entries by count, race, level and id.
+s32 FUN_00206d9c(const DevilPairSortEntry *left, const DevilPairSortEntry *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short *puVar2;
-  unsigned short *puVar3;
-  
-  temp_v0 = (unsigned int)param_2[1];
-  if (param_1[1] == 0) {
-    return (unsigned int)(temp_v0 != 0);
-  }
-  if (temp_v0 == 0) {
-    temp_v0 = 0xffffffff;
-  }
-  else {
-    temp_v0 = param_1[1] - temp_v0;
-    if (temp_v0 == 0) {
-      puVar2 = (unsigned short *)(unsigned int)*param_1;
-      devilGetRecord();
-      puVar3 = (unsigned short *)(unsigned int)*param_2;
-      devilGetRecord();
-      temp_v0 = (unsigned int)(unsigned char)puVar2[1] - (unsigned int)(unsigned char)puVar3[1];
-      if ((temp_v0 == 0) &&
-         (temp_v0 = (unsigned int)*(unsigned char *)((int)puVar3 + 3) - (unsigned int)*(unsigned char *)((int)puVar2 + 3), temp_v0 == 0))
-      {
-        temp_v0 = (unsigned int)*puVar2 - (unsigned int)*puVar3;
-      }
+    s32 result = right->count;
+    if (left->count == 0)
+        return result != 0;
+    if (result == 0) {
+        result = -1;
+    } else {
+        result = left->count - result;
+        if (result == 0) {
+            DevilSortRecord *leftDevil = devilGetRecord(left->id);
+            DevilSortRecord *rightDevil = devilGetRecord(right->id);
+            result = leftDevil->race - rightDevil->race;
+            if (result == 0) {
+                result = rightDevil->level - leftDevil->level;
+                if (result == 0)
+                    result = leftDevil->id - rightDevil->id;
+            }
+        }
     }
-  }
-  return temp_v0;
+    return result;
 }
-
-} /* extern "C" */
+}

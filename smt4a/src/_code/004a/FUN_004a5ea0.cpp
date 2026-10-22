@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0018349c(...);
 int dataTable00FindById(void);
-int FUN_00493408(...);
+int drawTextAtRelativePosition(...);
 int FUN_004a7814(...);
 int FUN_004a7a50(int, int, unsigned int, int, int, int);
 int FUN_004a7cb0(int, unsigned int, int, int, int);
@@ -33,7 +33,7 @@ extern unsigned char LAB_004a612c; /* 0x4a612c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_00493408. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_004a7814. */
 /* Supplied declaration required: FUN_004a7a50. */
 /* Supplied declaration required: FUN_004a7cb0. */
@@ -109,7 +109,7 @@ void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v2 = *(short *)(temp_v4 + 8);
   temp_v3 = *(short *)(temp_v4 + 10);
   textFormatBuffer(temp_v10,&LAB_004a612c,temp_v8);
-  FUN_00493408(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,
+  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,
                temp_v5 | (temp_v9 & 0xff),temp_v6,temp_v10);
   param_4 = param_4 & 0xffff;
   temp_v8 = 0;
@@ -126,7 +126,7 @@ void FUN_004a5ea0(int param_1,int param_2,int param_3,unsigned int param_4)
   temp_v2 = *(short *)(temp_v4 + 8);
   temp_v3 = *(short *)(temp_v4 + 10);
   textFormatBuffer(temp_v10,&LAB_004a612c,temp_v8);
-  FUN_00493408(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,0x4abae1ff,temp_v6,
+  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,0x4abae1ff,temp_v6,
                temp_v10);
   return;
 }

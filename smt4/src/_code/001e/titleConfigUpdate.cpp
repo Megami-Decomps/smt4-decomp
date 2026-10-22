@@ -15,7 +15,7 @@ const TitleConfigHelpEntry *dataTableGetEntries(const void *table);
 void FUN_0029ee6c(const char *text, u32 color);
 void FUN_00259e98(void);
 void *FUN_00297060(void *dataA, void *dataB);
-s32 FUN_0029d65c(s32 button);
+s32 ifTouchGetSelectionModeForRegion(s32 button);
 s32 FUN_002c1658(u32 action, u32 repeat);
 s32 bgmVolumeToStep(u32 value);
 s32 classifyValueByThreshold(u32 value);
@@ -25,7 +25,7 @@ void eventQueueAddUniqueIfValid(u32 event);
 s32 ifTouchGetActiveCounter(void);
 const MessageDrawItem *FUN_002bf4f8(u32 group, u32 item);
 s32 FUN_001c3688(void);
-s32 FUN_001dd260(s32 widget);
+s32 ifTouchGetRegionX(s32 widget);
 u8 indexedByteLookup(u32 step);
 u8 thresholdGetPrimary(u32 step);
 u8 thresholdGetSecondary(u32 step);
@@ -42,7 +42,7 @@ void scrScriptProcessStartEntry(void *process, u32 entry);
 void timerStart(void *window, s32 period, s32 value);
 void FUN_002ad8b4(TitleConfigValues *values, const void *saved);
 s32 scrRunOpcodesStub(void *process);
-s32 FUN_002973d8(void);
+s32 messageMainGetChoiceResult(void);
 
 /* Update the title configuration controls, previews, confirmation, and cancellation. */
 u32 titleConfigUpdate(void)
@@ -76,7 +76,7 @@ u32 titleConfigUpdate(void)
         s32 &value = work->settings[selected];
         s32 previous = value;
         if (work->resetButton >= 0 &&
-            (FUN_0029d65c(work->resetButton) == 6 || FUN_002c1658(9, 1))) {
+            (ifTouchGetSelectionModeForRegion(work->resetButton) == 6 || FUN_002c1658(9, 1))) {
             switch (selected) {
             case 0:
                 g_titleConfigValues.music = 50;
@@ -94,9 +94,9 @@ u32 titleConfigUpdate(void)
             }
             eventQueueAddUnique(0x100016D);
         }
-        s32 button = FUN_0029d65c(work->leftButton);
+        s32 button = ifTouchGetSelectionModeForRegion(work->leftButton);
         bool left = button == 2 || (button == 1 && ifTouchGetActiveCounter() < 1);
-        button = FUN_0029d65c(work->rightButton);
+        button = ifTouchGetSelectionModeForRegion(work->rightButton);
         bool right = button == 2 || (button == 1 && ifTouchGetActiveCounter() < 1);
         if (left || FUN_002c1658(4, 0)) {
             --value;
@@ -111,10 +111,10 @@ u32 titleConfigUpdate(void)
             }
             FUN_002c1658(3, 0);
         } else {
-            button = FUN_0029d65c(work->slider);
+            button = ifTouchGetSelectionModeForRegion(work->slider);
             if (button == 1 || button == 2) {
                 const MessageDrawItem *slider = FUN_002bf4f8(0x2F, 0x33);
-                s32 position = FUN_001c3688() - FUN_001dd260(work->slider);
+                s32 position = FUN_001c3688() - ifTouchGetRegionX(work->slider);
                 value = position * 10 / slider->size->width;
             }
         }
@@ -145,7 +145,7 @@ u32 titleConfigUpdate(void)
         }
         s32 current = FUN_0029efa8(g_titleConfig->cursor);
         for (s32 index = 0; index < 3; ++index) {
-            if (index != current && FUN_0029d65c(work->buttons[index]) == 6) {
+            if (index != current && ifTouchGetSelectionModeForRegion(work->buttons[index]) == 6) {
                 eventQueueAddUnique(0x100016C);
                 FUN_0029eb5c(work->cursor, index);
                 selected = FUN_0029efc0(g_titleConfig->cursor);
@@ -175,7 +175,7 @@ u32 titleConfigUpdate(void)
         if (scrRunOpcodesStub(work->process) != 2) {
             return 0;
         }
-        switch (FUN_002973d8()) {
+        switch (messageMainGetChoiceResult()) {
         case 1:
             work->state = 1;
             return 0;

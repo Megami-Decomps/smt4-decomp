@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameGetPlayerData(void);
-int FUN_001fef70(unsigned short [11], int, int);
+int affinityResolveUnitSlot(unsigned short [11], int, int);
 int FUN_003dfad4(unsigned short [11], unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -25,7 +25,7 @@ extern unsigned int randRange(unsigned int);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_001fef70. */
+/* Supplied declaration required: affinityResolveUnitSlot. */
 /* Supplied declaration required: FUN_003dfad4. */
 
 
@@ -107,7 +107,7 @@ void FUN_0049fc88(unsigned int param_1,unsigned int param_2)
               *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | (unsigned short)temp_v0;
             }
             else {
-              FUN_001fef70(temp_v11,temp_v5,0xb);
+              affinityResolveUnitSlot(temp_v11,temp_v5,0xb);
               temp_v1 = temp_v11[0] >> 10;
               if (!((temp_v1 == 1 || temp_v1 == 3) || temp_v1 == 4)) {
                 *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | (unsigned short)temp_v0;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: -O2 candidate; population loops become dual output pointers instead of indexed entries, and selector-base/final-state clear grouping differ. */
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
 
 struct StatusSkillSource {
     u8 unk00[0x34];
@@ -46,6 +46,7 @@ static inline void copyStatusSkillSlots(StatusSkillEntry *entries,
 }
 
 extern "C" {
+extern StatusDownStateA *g_statusDown;
 StatusSkillSource *gameGetPlayerData();
 StatusSkillSource *slotRecordFindById(u16 id);
 s32 countUnlockedSlots();

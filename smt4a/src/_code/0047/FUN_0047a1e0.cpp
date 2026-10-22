@@ -1,55 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047a1e0` (_code @ 0x47a1e0, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail places case 3's flag clear after the return and shares case 0's final store; the loader call's argument setup is scheduled differently. */
+#include "shard/CampMenuJobWork.h"
 
 extern "C" {
 
-extern unsigned int *jobGetWork(void);
-extern int FUN_00167458(unsigned int *, unsigned int);
-extern unsigned int FUN_0019d890(unsigned int, unsigned int);
-extern int FUN_004cf8dc(unsigned int *, unsigned int);
+StagedOpenWork *jobGetWork(void);
+s32 FUN_00167458(void *loader, s32 arg);
+u32 FUN_0019d890(u32 group, u32 item);
+s32 FUN_004cf8dc(void *fade, s32 arg);
 
-
-unsigned int FUN_0047a1e0(void)
-
+/* Steps the job's open sequence: wait for the loader, then for the fade, then clear the busy flags. */
+s32 FUN_0047a1e0(void)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  
-  puVar1 = (unsigned int *)jobGetWork();
-  puVar4 = puVar1 + 0x5e9;
-  temp_v0 = *puVar4;
-  if (temp_v0 != 0) {
-    if (temp_v0 == 1) {
-      return 0;
+    StagedOpenWork *work = jobGetWork();
+
+    switch (work->state) {
+    case 0:
+        if (FUN_00167458(work->loader, 0)) {
+            work->state = 1;
+            work->flags |= 0x2000;
+            work->message = FUN_0019d890(0x2f, 0x45);
+        }
+        break;
+    case 1:
+        break;
+    case 2:
+        if (FUN_004cf8dc(work->fade, 1)) {
+            work->state = 3;
+        }
+        break;
+    case 3:
+        work->flags &= ~0x3000;
+        break;
     }
-    if (temp_v0 == 2) {
-      temp_v1 = FUN_004cf8dc(puVar1 + 0x5ec,1);
-      if (temp_v1 == 0) {
-        return 0;
-      }
-      *puVar4 = 3;
-      return 0;
-    }
-    if (temp_v0 != 3) {
-      return 0;
-    }
-    temp_v0 = *puVar1 & 0xffffcfff;
-  }
-  else {
-    temp_v1 = FUN_00167458(puVar1 + 0x5f4,0);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    *puVar4 = 1;
-    *puVar1 = *puVar1 | 0x2000;
-    temp_v0 = FUN_0019d890(0x2f,0x45);
-    puVar1 = puVar1 + 0x5eb;
-  }
-  *puVar1 = temp_v0;
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

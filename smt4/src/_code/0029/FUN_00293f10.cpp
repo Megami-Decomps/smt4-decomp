@@ -1,51 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00293f10` (_code @ 0x293f10, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "gamedata/DevilModel.h"
 extern "C" {
+DevilModelOverride* dataTable00FindById(u16);
+s32 asdTMTexTableNodeIsLoaded(u32, s32);
 
-int asdTMTexTableNodeIsLoaded(unsigned int);
-int dataTable00FindById(void);
-int devilGetRecord(int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-void FUN_00293f10(unsigned int param_1,int param_2)
-
+// Resolves a demon's model texture and checks that its table node is loaded.
+s32 FUN_00293f10(s32 id, s32 mapped)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0x17;
-  if ((param_2 != 0) && (-1 < (int)param_1)) {
-    temp_v0 = param_1;
-    devilGetRecord(temp_v0,param_1);
-    if (temp_v0 == 0) {
-      return;
+    u32 table = 0x17;
+    s32 node = id;
+    if (mapped != 0) {
+        if (id < 0) {
+            node = 0;
+        } else {
+            DevilRecord* record = reinterpret_cast<DevilRecord*>(devilGetRecord((u16)id));
+            if (record == NULL) {
+                return 0;
+            }
+            DevilModelOverride* overrideRecord = dataTable00FindById((u16)id);
+            if (overrideRecord->flags & 1) {
+                table = 0x23;
+                node = overrideRecord->model;
+                if (node >= 0x81) {
+                    return 0;
+                }
+            } else {
+                node = record->model + 1;
+                if (node >= 0x266) {
+                    return 0;
+                }
+            }
+        }
     }
-    param_1 = param_1 & 0xffff;
-    dataTable00FindById();
-    if ((*(unsigned char *)(param_1 + 3) & 1) != 0) {
-      temp_v1 = 0x23;
-      if (*(short *)(param_1 + 0x88) >= 0x81) {
-        return;
-      }
-    }
-    else if (*(unsigned short *)(temp_v0 + 0x90) + 1 >= 0x266) {
-      return;
-    }
-  }
-  asdTMTexTableNodeIsLoaded(temp_v1);
-  return;
+    return asdTMTexTableNodeIsLoaded(table, node);
 }
-
-} /* extern "C" */
+}

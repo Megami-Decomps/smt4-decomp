@@ -1,47 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e5354` (_code @ 0x3e5354, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains inlined slot-index and null checks that the direct canonical access eliminates. */
+#include "shard/W6_W6Match1_PartySlot.h"
+
+struct PartyCounterView {
+    /* 0x0000 */ u8 unk0000[0x2c4e];
+    /* 0x2c4e */ s16 unk2c4e;
+};
 
 extern "C" {
+bool gameFlagIsSet(u32 flag);
+PartySlotTableA *gameGetSlotTable();
 
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetSlotTable(void);
-
-
-void FUN_003e5354(int param_1)
-
+void FUN_003e5354(s32 delta)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = gameFlagIsSet(0x533);
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-    temp_v2 = temp_v1;
-    do {
-      if ((temp_v1 & 0xffff) < 0xc) {
-        temp_v0 = gameGetSlotTable();
-        temp_v0 = temp_v0 + (temp_v1 & 0xffff) * 0x134;
-        if ((temp_v0 != -0x1ddc) && ((*(unsigned int *)(temp_v0 + 0x1f0c) & 1) != 0)) {
-          temp_v2 = temp_v2 + 1;
-        }
-      }
-      temp_v1 = temp_v1 + 1;
-    } while ((int)temp_v1 < 0xc);
-    if ((int)temp_v2 >= 2) {
-      temp_v0 = gameGetSlotTable();
-      param_1 = *(short *)(temp_v0 + 0x2c4e) + param_1;
-      if (param_1 < 0) {
-        param_1 = 0;
-      }
-      else if (param_1 >= 9) {
-        param_1 = 8;
-      }
-      *(short *)(temp_v0 + 0x2c4e) = (short)param_1;
+    if (!gameFlagIsSet(0x533)) {
+        return;
     }
-  }
-  return;
+    s32 active = 0;
+    for (s32 index = 0; index < 12; ++index) {
+        if (gameGetSlotTable()->slots[index].flags & 1) {
+            ++active;
+        }
+    }
+    if (active >= 2) {
+        PartyCounterView *table = (PartyCounterView *)gameGetSlotTable();
+        s32 value = table->unk2c4e + delta;
+        if (value < 0) {
+            value = 0;
+        } else if (value > 8) {
+            value = 8;
+        }
+        table->unk2c4e = (s16)value;
+    }
 }
-
-} /* extern "C" */
+}

@@ -1,50 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00312730` (_code @ 0x312730, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail zeroes the loop index before calling btlGetMainState (only an index declared ahead of the call reproduces it). */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
 
 extern "C" {
 
-int FUN_002451c4(int, int, int, int, int, int);
+void FUN_002451c4(s32 a, s32 b, BtlActionRecord *action, s32 alpha, s32 frames, s32 c);
+BtlMainState *btlGetMainState(void);
+s32 scrGetArg(u32 index);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-/* Supplied declaration required: FUN_002451c4. */
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-
-
-unsigned int FUN_00312730(void)
-
+/* Script command: fades (alpha 0xff when argument 0 is set, else 0, over 20 frames) every active
+ * action record with status bits 0x1/0x80/0x400 that is not held by status 0x10 with state 2. */
+u32 FUN_00312730(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v4 = 0;
-  temp_v1 = btlGetMainState();
-  do {
-    temp_v3 = *(int *)(temp_v1 + 0x1e98) + temp_v4 * 0x114;
-    temp_v2 = *(unsigned int *)(temp_v3 + 0x50);
-    if ((((temp_v2 & 1) != 0 && (temp_v2 & 0x80) != 0) && (temp_v2 & 0x400) != 0) &&
-       (((temp_v2 & 0x10) == 0 || ((*(unsigned int *)(temp_v3 + 0xf8) & 2) == 0)))) {
-      if (temp_v0 != 0) {
-        FUN_002451c4(0,0,temp_v3,0xff,0x14,0);
-      }
-      else {
-        FUN_002451c4(0,0,temp_v3,0,0x14,0);
-      }
+    s32 show = scrGetArg(0);
+    BtlMainState *state = btlGetMainState();
+
+    for (s32 i = 0; i < 109; i++) {
+        BtlActionRecord *action = &state->actions[i];
+        if ((action->status & 0x1) && (action->status & 0x80) && (action->status & 0x400) &&
+            (!(action->status & 0x10) || !(action->stateFlags & 2))) {
+            if (!show) {
+                FUN_002451c4(0, 0, action, 0, 20, 0);
+            } else {
+                FUN_002451c4(0, 0, action, 0xff, 20, 0);
+            }
+        }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x6d);
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

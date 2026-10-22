@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
+extern MessageGlobalsA g_messageMain;
 
 void FUN_0035d03c(u8 value)
 {
-    g_messageMain.unk04->unk19E8 = value;
+    g_messageMain.state->unk19E8 = value;
 }
 
 } /* extern "C" */

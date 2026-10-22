@@ -8,7 +8,7 @@ int FUN_00163aa4(int);
 int uiSpriteBankApplyPreset(int, int);
 int FUN_0048821c(int, unsigned int);
 int FUN_0048a378(int);
-int FUN_00492aa0(int, unsigned int);
+int naviMainSetCurrentMap(int, unsigned int);
 int FUN_00492ac8(int, int);
 int naviGetActiveStateValue(int);
 int pointConvertToFloat(...);
@@ -24,7 +24,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: FUN_0048821c. */
 /* Supplied declaration required: FUN_0048a378. */
-/* Supplied declaration required: FUN_00492aa0. */
+/* Supplied declaration required: naviMainSetCurrentMap. */
 /* Supplied declaration required: FUN_00492ac8. */
 /* Supplied declaration required: naviGetActiveStateValue. */
 /* Supplied declaration required: pointConvertToFloat. */
@@ -80,7 +80,7 @@ void FUN_0048b8a4(int param_1)
     temp_v1 = naviGetActiveStateValue(temp_v0);
     if (temp_v4 != temp_v1) {
       temp_v2 = naviGetActiveStateValue(temp_v0);
-      FUN_00492aa0(temp_v0,temp_v2);
+      naviMainSetCurrentMap(temp_v0,temp_v2);
       FUN_00492ac8(temp_v0,0);
       FUN_0048821c(param_1,temp_v2);
       return;

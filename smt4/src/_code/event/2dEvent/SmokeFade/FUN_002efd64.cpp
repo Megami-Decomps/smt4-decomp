@@ -1,62 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002efd64` (_code @ 0x2efd64, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps the module base in r8, computes the texture base after the first free and indexes it from r9. */
+#include "common.h"
+
+struct SmokeFadeWork {
+    /* 0x00 */ u32 job;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ void *buffer;
+};
+
+struct SmokeFadeTexture {
+    /* 0x00 */ u32 table;
+    /* 0x04 */ u32 node;
+    /* 0x08 */ u8 nodeHeld;
+    /* 0x09 */ u8 entryHeld;
+    /* 0x0a */ u8 unk0a[2];
+};
+
+struct SmokeFadeModule {
+    /* 0x00 */ SmokeFadeWork *work;
+    /* 0x04 */ u8 unk04[0x14];
+    /* 0x18 */ SmokeFadeTexture textures[2];
+};
 
 extern "C" {
+extern SmokeFadeModule DAT_0043df28;
 
-int asdTMTexTableFreeEntry(unsigned int);
-int asdTMTexTableReleaseNode(unsigned int, unsigned int);
-int asdMemFree(...);
-int jobStop(unsigned int, int);
+void asdMemFree(void *memory);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+s32 textureGetIndexedResource(u32 table);
+void asdTMTexTableFreeEntry(u32 table);
+void jobStop(u32 job, s32 arg);
 
-extern unsigned int *DAT_0043df28; /* 0x43df28 */
-extern unsigned int DAT_0043df40; /* 0x43df40 */
-extern unsigned int DAT_0043df44; /* 0x43df44 */
-
-extern int textureGetIndexedResource(unsigned int);
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-
-
+/* Frees the smoke fade's buffer, releases its texture nodes and entries, stops its job and frees the work. */
 void FUN_002efd64(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = DAT_0043df28;
-  asdMemFree(DAT_0043df28[2]);
-  temp_v1 = 0;
-  do {
-    if (*(char *)(temp_v1 * 0xc + 0x43df48) != '\0') {
-      temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);
-      if (temp_v0 != 0) {
-        asdTMTexTableReleaseNode((&DAT_0043df40)[temp_v1 * 3],(&DAT_0043df44)[temp_v1 * 3]);
-      }
-      *(unsigned char *)(temp_v1 * 0xc + 0x43df48) = 0;
+    SmokeFadeWork *work = DAT_0043df28.work;
+    SmokeFadeTexture *textures = DAT_0043df28.textures;
+    s32 i;
+
+    asdMemFree(work->buffer);
+    for (i = 0; i < 2; i++) {
+        if (textures[i].nodeHeld) {
+            if (asdTMTexTableNodeIsLoaded(textures[i].table, textures[i].node)) {
+                asdTMTexTableReleaseNode(textures[i].table, textures[i].node);
+            }
+            textures[i].nodeHeld = 0;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 2);
-  temp_v1 = 0;
-  do {
-    if (*(char *)(temp_v1 * 0xc + 0x43df49) != '\0') {
-      temp_v0 = textureGetIndexedResource((&DAT_0043df40)[temp_v1 * 3]);
-      if (temp_v0 != 0) {
-        asdTMTexTableFreeEntry((&DAT_0043df40)[temp_v1 * 3]);
-      }
-      *(unsigned char *)(temp_v1 * 0xc + 0x43df49) = 0;
+    for (i = 0; i < 2; i++) {
+        if (textures[i].entryHeld) {
+            if (textureGetIndexedResource(textures[i].table)) {
+                asdTMTexTableFreeEntry(textures[i].table);
+            }
+            textures[i].entryHeld = 0;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 2);
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_0043df28 = (unsigned int *)0x0;
-  return;
+    jobStop(work->job, 0);
+    asdMemFree(work);
+    DAT_0043df28.work = NULL;
 }
 
 } /* extern "C" */

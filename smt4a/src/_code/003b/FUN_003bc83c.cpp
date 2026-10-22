@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int scrGetArg(int);
 int sysMemClear(int [21], int);
@@ -17,7 +17,7 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: sysMemClear. */
@@ -81,7 +81,7 @@ unsigned int FUN_003bc83c(void)
       if ((unsigned short *)*piVar16 != puVar14) {
         do {
           temp_v2 = (unsigned int)*puVar14;
-          FUN_00192550();
+          dataTable8FindRecord();
           temp_v2 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32);
           dataTable04FindById();
           if ((temp_v2 != 0) &&

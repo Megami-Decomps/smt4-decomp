@@ -1,10 +1,11 @@
-#include "shard/Obj43da28.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobals g_buttonHelp;
 
 u8 FUN_0026b564(void)
 {
-    return g_buttonHelp.obj->state != 3;
+    return g_buttonHelp.work->state != 3;
 }
 
 } /* extern "C" */

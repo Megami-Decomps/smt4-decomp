@@ -39,7 +39,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_0022e9b8(void);
+extern int uniteGetWork(void);
 extern int recordGetModeForId(int);
 extern int FUN_002861fc(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -65,7 +65,7 @@ void FUN_002c8940(int param_1,int param_2)
   unsigned int in_fpscr;
   unsigned char temp_v9 [84];
   
-  temp_v1 = FUN_0022e9b8();
+  temp_v1 = uniteGetWork();
   if (temp_v1 == 0) {
     return;
   }

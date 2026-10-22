@@ -57,12 +57,12 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
-extern int FUN_0026280c(void);
+extern int uniteGetWork(void);
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029d644(int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
 extern int FUN_0029efa8(int);
@@ -123,7 +123,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
   temp_v20 = param_1;
   temp_v21 = param_2;
   temp_v22 = param_3;
-  temp_v2 = FUN_0026280c();
+  temp_v2 = uniteGetWork();
   temp_v8 = temp_v21;
   temp_v9 = temp_v20;
   if (temp_v2 != 0) {
@@ -340,7 +340,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_002bf288(2,0x24,0x12d,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,0x7e)
       ;
       temp_v6 = FUN_0029efa8(temp_v18);
-      temp_v6 = FUN_0029d65c((int)*(short *)(temp_v2 + temp_v6 * 2 + 0x438));
+      temp_v6 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + temp_v6 * 2 + 0x438));
       temp_v13 = *(short *)(temp_v4 + 10) + temp_v8;
       temp_v10 = *(short *)(temp_v4 + 8) + temp_v9;
       if (!((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6)) {

@@ -1,59 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041f020` (_code @ 0x41f020, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads itemCount after the three byte clears and stores the final three region ids with one stm; the build interleaves them. */
+#include "common.h"
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-int fillThreeWordsWithByte(int, unsigned int);
+typedef struct TouchRegionMenu {
+    /* 0x000 */ u8 unk000[0x18];
+    /* 0x018 */ s32 itemCount;
+    /* 0x01C */ u8 unk01C[0x420];
+    /* 0x43C */ s16 regions[6];
+    /* 0x448 */ s32 regionCount;
+    /* 0x44C */ u8 unk44C;
+    /* 0x44D */ u8 unk44D;
+    /* 0x44E */ u8 unk44E;
+    /* 0x44F */ u8 unk44F[0x2CD];
+    /* 0x71C */ s32 unk71C;
+    /* 0x720 */ s32 unk720;
+    /* 0x724 */ s32 unk724;
+} TouchRegionMenu;
 
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned short FUN_001643b4(unsigned int, int);
-/* Supplied declaration required: fillThreeWordsWithByte. */
+void ifTouchRegionRemove(void);
+void fillThreeWordsWithByte(void *words, s32 value);
+s16 FUN_001643b4(s32 group, s32 index);
 
-
-void FUN_0041f020(int param_1)
-
+/* Rebuild the menu's touch regions: one per item, then the three fixed buttons. */
+void FUN_0041f020(TouchRegionMenu *menu)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(param_1 + 0x448)) {
-    do {
-      ifTouchRegionRemove();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x448));
-  }
-  temp_v2 = 0;
-  *(unsigned int *)(param_1 + 0x448) = 0;
-  fillThreeWordsWithByte(param_1 + 0x43c,0xffffffff);
-  *(unsigned char *)(param_1 + 0x44c) = 0;
-  *(unsigned char *)(param_1 + 0x44d) = 0;
-  *(unsigned char *)(param_1 + 0x44e) = 0;
-  if (0 < *(int *)(param_1 + 0x18)) {
-    do {
-      temp_v1 = FUN_001643b4(0x2b,temp_v2 + 0x51);
-      temp_v0 = temp_v2 * 2;
-      temp_v2 = temp_v2 + 1;
-      *(unsigned short *)(param_1 + temp_v0 + 0x43c) = temp_v1;
-      *(int *)(param_1 + 0x448) = *(int *)(param_1 + 0x448) + 1;
-    } while (temp_v2 < *(int *)(param_1 + 0x18));
-  }
-  temp_v2 = 0;
-  do {
-    temp_v1 = FUN_001643b4(0x2b,temp_v2 + 0xb);
-    temp_v0 = temp_v2 * 2;
-    temp_v2 = temp_v2 + 1;
-    *(unsigned short *)(param_1 + temp_v0 + 0x440) = temp_v1;
-    *(int *)(param_1 + 0x448) = *(int *)(param_1 + 0x448) + 1;
-  } while (temp_v2 < 3);
-  *(int *)(param_1 + 0x71c) = (int)*(short *)(param_1 + 0x444);
-  *(int *)(param_1 + 0x720) = (int)*(short *)(param_1 + 0x440);
-  *(int *)(param_1 + 0x724) = (int)*(short *)(param_1 + 0x442);
-  return;
+    s32 i;
+
+    for (i = 0; i < menu->regionCount; i++) {
+        ifTouchRegionRemove();
+    }
+    menu->regionCount = 0;
+    fillThreeWordsWithByte(menu->regions, -1);
+    menu->unk44C = 0;
+    menu->unk44D = 0;
+    menu->unk44E = 0;
+    for (i = 0; i < menu->itemCount; i++) {
+        menu->regions[i] = FUN_001643b4(0x2b, i + 0x51);
+        menu->regionCount++;
+    }
+    for (i = 0; i < 3; i++) {
+        menu->regions[2 + i] = FUN_001643b4(0x2b, i + 0xb);
+        menu->regionCount++;
+    }
+    menu->unk71C = menu->regions[4];
+    menu->unk720 = menu->regions[2];
+    menu->unk724 = menu->regions[3];
 }
 
 } /* extern "C" */

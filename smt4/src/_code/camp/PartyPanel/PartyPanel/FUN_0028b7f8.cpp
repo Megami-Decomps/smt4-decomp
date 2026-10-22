@@ -6,7 +6,7 @@ extern "C" {
 
 int slotPlacementSetSlot(...);
 int FUN_0026b9bc(...);
-int FUN_0026bc6c(...);
+int partyPanelSortEntries(...);
 int FUN_0028c040(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_0029e788(...);
@@ -51,7 +51,7 @@ extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: FUN_0026b9bc. */
-/* Supplied declaration required: FUN_0026bc6c. */
+/* Supplied declaration required: partyPanelSortEntries. */
 /* Supplied declaration required: FUN_0028c040. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029e788. */
@@ -142,7 +142,7 @@ void FUN_0028b7f8(int param_1)
     puVar2[temp_v1 + 0x1b6] = temp_v3;
     temp_v1 = temp_v2;
   } while (temp_v2 < 0x18);
-  FUN_0026bc6c();
+  partyPanelSortEntries();
   puVar2 = g_partyPanel;
   puVar8 = g_partyPanel + 0x12;
   *(unsigned short *)((int)g_partyPanel + 0x36) = 0;

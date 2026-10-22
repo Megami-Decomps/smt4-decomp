@@ -1,22 +1,12 @@
-#include "common.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 
-typedef struct Table {
-    /* 0x00000 */ u8 unk00000[0x21E18];
-    /* 0x21E18 */ u32 value;
-} Table;
-
-typedef struct GameDataBlocksView {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ Table *table;
-} GameDataBlocksView;
-extern GameDataBlocksView g_gameDataBlocks;
 
 /* Returns the word at 0x21E18 of the game-data table. */
 u32 FUN_002e50d4(void)
 {
-    return g_gameDataBlocks.table->value;
+    return g_gameDataBlocks.saveBlock->save.sub.runtime.unk21D90;
 }
 
 } /* extern "C" */

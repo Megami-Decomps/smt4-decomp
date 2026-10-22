@@ -1,9 +1,7 @@
-#include "common.h"
-
+#include "battle/btlReflect.h"
 extern "C" {
 void *jobGetWork(u32 job);
-u32 FUN_00344f5c(s32 *reflection);
-extern s32 *g_btlActionReflect;
+u32 FUN_00344f5c(ReflectContext *reflection);
 
 /* Processes the battle reflection state when present. */
 void FUN_002eb5b4(u32 job)

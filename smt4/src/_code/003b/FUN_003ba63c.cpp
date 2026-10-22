@@ -1,72 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba63c` (_code @ 0x3ba63c, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: in the push, retail reuses r3 for the new top's address after loading the old top; armcc computes it into ip beforehand. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_002bed3c(void);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-int FUN_002c39a4(int);
-int FUN_003bb77c(int);
+typedef struct StateDrawWork {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ s32 state;
+    /* 0x2C */ u8 unk2C[0x70];
+    /* 0x9C */ u8 view[4];
+} StateDrawWork;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+extern RenderCtx *g_titleScene;
+void FUN_002c39a4(RenderCtx *context);
+void FUN_002bed3c(void);
+u32 FUN_002c5d80(u32 slot, u32 flags);
+void FUN_003bb77c(void *view);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003bb77c. */
-
-
-void FUN_003ba63c(int param_1)
-
+/* Draws the view at 0x9C under render state FUN_002c5d80(1, 0) once the work reaches state 3 (nothing in state 0x11). */
+void FUN_003ba63c(StateDrawWork *work)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  if (*(int *)(param_1 + 0x28) == 0x11) {
-    return;
-  }
-  FUN_002c39a4(g_titleScene);
-  FUN_002bed3c();
-  temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1,0);
-  piVar5 = (int *)(temp_v0 + 0x124c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  if (*(int *)(param_1 + 0x28) >= 3) {
-    FUN_003bb77c(param_1 + 0x9c);
-  }
-  temp_v0 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x124c);
-  temp_v1 = *piVar5;
-  temp_v2 = piVar5[temp_v1 + 2];
-  *piVar5 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return;
+    if (work->state == 0x11) {
+        return;
+    }
+    FUN_002c39a4(g_titleScene);
+    FUN_002bed3c();
+    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    if (work->state >= 3) {
+        FUN_003bb77c(work->view);
+    }
+    renderStackPop(&g_titleScene->stackA);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
 }
 
 } /* extern "C" */

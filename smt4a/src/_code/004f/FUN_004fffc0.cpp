@@ -1,51 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fffc0` (_code @ 0x4fffc0, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: status normalization folds and signed division calls __aeabi_ldivmod instead of ll_sdiv. */
+#include "classes/WindowStatus.h"
+#include "shard/S3IpcRequest.h"
+
+struct SizeQueryHeader {
+    u32 first;
+    u32 second;
+};
+
+struct SizeQueryParameterFields {
+    /* 0x00 */ SizeQueryHeader header;
+    /* 0x08 */ u8 unk08[9];
+    /* 0x11 */ u8 unk11;
+    /* 0x12 */ u8 unk12[6];
+};
+
+union SizeQueryParameters {
+    IpcParams6 raw;
+    SizeQueryParameterFields fields;
+};
+
+struct SizeQueryRecord {
+    /* 0x00 */ SizeQueryHeader header;
+    /* 0x08 */ u8 unk08[0x1c];
+    /* 0x24 */ u32 buffer;
+    /* 0x28 */ u32 size;
+};
+
+struct SizeQueryOwner {
+    /* 0x00 */ SizeQueryRecord *record;
+};
 
 extern "C" {
+s32 FUN_00439be4(u64 *size, const IpcParams6 *params, u32 buffer, u32 length);
 
-int _ZN18WindowStatusResultC1Ej(unsigned int, int);
-
-/* stack frame of param_3: 4 slot(s), 13 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned char sp17; /* 0x17: local_17 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern int FUN_00439be4(int *, unsigned int *, unsigned int, unsigned int);
-extern unsigned int ll_sdiv(unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_004fffc0(unsigned int param_1,int *param_2,unsigned int *param_3)
-
+WindowStatusResult FUN_004fffc0(SizeQueryOwner *owner, u32 *blocks)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2 [2];
-  int temp_v3;
-  unsigned int uStack_24;
-  unsigned char temp_v4;
-  
-  puVar1 = (unsigned int *)*param_2;
-  temp_v4 = 1;
-  temp_v3 = *puVar1;
-  uStack_24 = puVar1[1];
-  temp_v0 = FUN_00439be4(temp_v2,(unsigned int *)&temp_v3,puVar1[9],puVar1[10]);
-  if (-1 < temp_v0) {
-    temp_v0 = 0;
-  }
-  if (-1 < temp_v0) {
-    temp_v1 = ll_sdiv((temp_v2[0] + 0x1ffffU) & 0xfffe0000,0,0x20000,0);
-    temp_v0 = 0;
-    *param_3 = temp_v1;
-  }
-  _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-  return;
+    SizeQueryParameters params;
+    params.fields.unk11 = 1;
+    params.fields.header = owner->record->header;
+    u64 size;
+    s32 status = FUN_00439be4(&size, &params.raw,
+                             owner->record->buffer, owner->record->size);
+    if (status >= 0) {
+        u64 rounded = (size + 0x1ffff) & 0xfffe0000ULL;
+        *blocks = (u32)((s64)rounded / 0x20000);
+        status = 0;
+    }
+    return WindowStatusResult(status);
 }
-
-} /* extern "C" */
+}

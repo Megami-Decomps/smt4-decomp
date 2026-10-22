@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_002b5540(void);
+int gameStatePickAvoidingRecent(void);
 int FUN_002c263c(void);
 int gameDataResetFloat(void);
 int FUN_00359974(int, int, unsigned int, int);
@@ -44,7 +44,7 @@ extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
 extern int FUN_00272d44(void);
-/* Supplied declaration required: FUN_002b5540. */
+/* Supplied declaration required: gameStatePickAvoidingRecent. */
 /* Supplied declaration required: FUN_002c263c. */
 /* Supplied declaration required: gameDataResetFloat. */
 /* Supplied declaration required: FUN_00359974. */
@@ -185,7 +185,7 @@ LAB_00339020:
     }
     DAT_005f0cf4 = 0;
     temp_v0 = 0;
-    FUN_002b5540();
+    gameStatePickAvoidingRecent();
     textFormatBuffer(0x5f0cc1,&LAB_00339258,temp_v0 + 1);
   }
 LAB_003391f8:

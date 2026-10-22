@@ -9,7 +9,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int gameDataBlocksAddFlags(...);
 int asdProcessClearSelectedFlags(...);
-int FUN_002c76d8(...);
+int gameDataAddHomeButtonHold(...);
 int FUN_00333574(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -40,7 +40,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: asdProcessClearSelectedFlags. */
-/* Supplied declaration required: FUN_002c76d8. */
+/* Supplied declaration required: gameDataAddHomeButtonHold. */
 /* Supplied declaration required: FUN_00333574. */
 
 
@@ -55,7 +55,7 @@ unsigned int FUN_003c113c(void)
   
   puVar2 = (unsigned int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x1c,1);
-  FUN_002c76d8(1);
+  gameDataAddHomeButtonHold(1);
   gameDataBlocksAddFlags(1);
   FUN_00333574(1);
   puVar2[2] = 0;

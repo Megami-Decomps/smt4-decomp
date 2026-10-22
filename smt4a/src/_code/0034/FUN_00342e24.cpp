@@ -81,7 +81,7 @@ unsigned int FUN_00342e24(int param_1)
     *(unsigned int *)(param_1 + 0xfc) = 4;
     *(unsigned char *)(param_1 + 0x48) = 0;
     FUN_001681cc(0xbf);
-    FUN_00387ac4(0);
+    buttonHelpSetMode(0);
     break;
   case 1:
     iVar4 = FUN_00224880(*(unsigned int *)(param_1 + 0x4c));
@@ -208,7 +208,7 @@ code_r0x00343274:
     *(unsigned int *)(param_1 + 0xfc) = 4;
     *(unsigned char *)(param_1 + 0x48) = 0;
     FUN_001681cc(0xbf);
-    FUN_00387ac4(0);
+    buttonHelpSetMode(0);
     break;
   case 6:
     iVar4 = FUN_00224880(*(unsigned int *)(param_1 + 0x4c));
@@ -273,7 +273,7 @@ code_r0x00343274:
       *(unsigned int *)(param_1 + 0xf8) = 7;
       *(unsigned int *)(param_1 + 0xfc) = 2;
       *(unsigned char *)(param_1 + 0x48) = 0;
-      FUN_00387ac4();
+      buttonHelpSetMode();
     }
     break;
   case 0xb:
@@ -559,7 +559,7 @@ code_r0x0034364c:
     *(unsigned int *)(param_1 + 0xfc) = 2;
     *(unsigned char *)(param_1 + 0x48) = 0;
     FUN_001681cc(0xbf);
-    FUN_00387ac4(0);
+    buttonHelpSetMode(0);
     break;
   case 0xffffffff:
     if (*(int *)(param_1 + 0xec) == -1) {

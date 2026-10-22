@@ -1,6 +1,7 @@
 #include "shard/NaviMain.h"
 
 extern "C" {
+extern NaviMain *g_naviMain;
 
 void dialogActivateAndOpen(u32 *state);
 
@@ -8,7 +9,7 @@ void dialogActivateAndOpen(u32 *state);
 void naviUpdateIfAllocated()
 {
     if (g_naviMain != NULL)
-        dialogActivateAndOpen(g_naviMain->unk00040);
+        dialogActivateAndOpen(g_naviMain->state);
 }
 
 }

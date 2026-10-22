@@ -8,7 +8,7 @@ int gameSynchronizeMapState(int);
 int FUN_0026f960(int);
 int bgmReleaseStopped(void);
 int gameCopyPersistentSave(void);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int soundChannelStopAll(int);
 int FUN_002a03d8(int, int);
 int dataTable1bOr1cGetRecord(void);
@@ -39,7 +39,7 @@ extern unsigned int FUN_0022b8c0(int);
 /* Supplied declaration required: gameCopyPersistentSave. */
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -154,7 +154,7 @@ void FUN_003b92b4(int param_1)
       }
       if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
         *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-        FUN_00296e90();
+        messageMainFinishWindow();
       }
       *(unsigned char *)(param_1 + 0x24) = 1;
       *(unsigned int *)(param_1 + 0x28) = 0x12;
@@ -178,7 +178,7 @@ void FUN_003b92b4(int param_1)
 LAB_003b9564:
   if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
     *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-    FUN_00296e90();
+    messageMainFinishWindow();
   }
   *(unsigned char *)(param_1 + 0x24) = 1;
   *(unsigned int *)(param_1 + 0x28) = 0x12;

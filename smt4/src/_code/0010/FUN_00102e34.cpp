@@ -1,59 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00102e34` (_code @ 0x102e34, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the zero arguments in a callee-saved register (r5/r6 split, 5-register frame) and orders the stack-argument stores differently. */
+#include "shard/W6_W6Match2_MemoryDebug.h"
 
 extern "C" {
 
-int jobSetParent(...);
-int jobStop(...);
-int asdProcessCreateSimple(...);
+extern MemoryDebugState DAT_00465120;
+extern const char DAT_00409c58[]; /* "asdMemMap" */
+extern u32 DAT_0046515c;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+u32 memoryDebugRefresh();
+s32 jobClearWorkSlot(u32 job);
+void *asdProcessCreateSimple(const char *name, s32 id, s32 a, s32 b, u32 (*update)(),
+                             s32 (*finish)(u32), void *work);
+void jobSetParent(void *parent, void *job);
+void jobStop(void *job, s32 mode);
 
-extern int memoryDebugRefresh(...); /* 0x1082b0 */
-extern unsigned char LAB_0010a510; /* 0x10a510 */
-extern int DAT_00465128; /* 0x465128 */
-extern char *DAT_00465130; /* 0x465130 */
-extern char *DAT_00465134; /* 0x465134 */
-extern unsigned int DAT_0046515c; /* 0x46515c */
-
-/* Supplied declaration required: jobSetParent. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_00102e34(void)
-
+/* Starts a debug process parented to the root and remembers it as the latest one. */
+static __inline void *memoryDebugStartProcess(const char *name, s32 id, u32 (*update)(),
+                                              s32 (*finish)(u32), void *work)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  
-  temp_v0 = DAT_00465128;
-  if (DAT_00465134 == (char *)0x0) {
-    *(unsigned int *)(DAT_00465128 + 0x24) = 0x8800000;
-    *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 1;
+    void *process = asdProcessCreateSimple(name, id, 0, 0, update, finish, work);
+    if (process == NULL) {
+        return NULL;
+    }
+    jobSetParent(NULL, process);
+    DAT_00465120.lastMapProcess = process;
+    return process;
+}
+
+/* Toggles the asdMemMap debug process: stops it when running, otherwise lifts the memory limit
+ * and starts it. */
+void FUN_00102e34(void)
+{
+    if (DAT_00465120.mapProcess != NULL) {
+        jobStop(DAT_00465120.mapProcess, 0);
+        DAT_00465120.mapProcess = NULL;
+        return;
+    }
+    DAT_00465120.settings->limit = 0x08800000;
+    DAT_00465120.settings->flags |= 1;
     DAT_0046515c = 0;
-    pcVar2 = "asdMemMap";
-    asdProcessCreateSimple("asdMemMap",0x15e,0,0,memoryDebugRefresh,&LAB_0010a510,&DAT_0046515c);
-    if (pcVar2 == (char *)0x0) {
-      pcVar2 = (char *)0x0;
-    }
-    else {
-      jobSetParent(0,pcVar2);
-      DAT_00465130 = pcVar2;
-    }
-    DAT_00465134 = pcVar2;
-    return;
-  }
-  jobStop(DAT_00465134,0);
-  DAT_00465134 = (char *)0x0;
-  return;
+    DAT_00465120.mapProcess = memoryDebugStartProcess(DAT_00409c58, 0x15e, memoryDebugRefresh,
+                                                      jobClearWorkSlot, &DAT_0046515c);
 }
 
 } /* extern "C" */

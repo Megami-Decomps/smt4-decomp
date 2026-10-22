@@ -10,7 +10,7 @@ void FUN_00229c5c(u32 unused, u32 first, u32 second)
 {
     BtlUi *ui = g_btlUi.ui;
 
-    ui->state = 7;
+    ui->panelState.state = 7;
     FUN_00297f1c(&ui->objC, first, -1, second);
 }
 

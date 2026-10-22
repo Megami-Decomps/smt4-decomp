@@ -1,45 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001dc684` (_code @ 0x1dc684, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r6, [pc, #136] differs from recovered ldr r6, [pc, #140]. */
+#include "common.h"
+
+struct InboxMessageSlotView {
+    u8 unk00[0x4c]; // 0x00
+};
+
+struct InboxReadStateView {
+    u32 unk00;                         // 0x00
+    u32 inboxHandle;                   // 0x04
+    u8 unk08[0x64];                    // 0x08
+    s32 nextMessageIndex;              // 0x6c
+    s32 messageCount;                  // 0x70
+    u32 unk74;                         // 0x74
+    u32 writeCount;                    // 0x78
+    u32 readCount;                     // 0x7c
+    InboxMessageSlotView messages[12]; // 0x80
+    u8 unk410[0x10];                   // 0x410
+    u8 unk420;                         // 0x420: start of critical section storage
+};
 
 extern "C" {
-
-int cecInboxReadMessages(unsigned int, unsigned int, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: cecInboxReadMessages. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-void FUN_001dc684(int param_1)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  do {
-    temp_v1 = param_1 + 0x420;
-    nn_os_CriticalSection_Enter(temp_v1);
-    if (*(unsigned int *)(param_1 + 0x78) - *(int *)(param_1 + 0x7c) < 0xc) {
-      cecInboxReadMessages(*(unsigned int *)(param_1 + 4),
-                   param_1 + (*(unsigned int *)(param_1 + 0x78) % 0xc) * 0x4c + 0x80,
-                   *(unsigned int *)(param_1 + 0x6c),1);
-      *(int *)(param_1 + 0x78) = *(int *)(param_1 + 0x78) + 1;
-      temp_v0 = *(int *)(param_1 + 0x6c) + 1;
-      *(int *)(param_1 + 0x6c) = temp_v0;
-      if (*(int *)(param_1 + 0x70) <= temp_v0) {
-        nn_os_CriticalSection_Leave(temp_v1);
-        return;
-      }
-    }
-    nn_os_CriticalSection_Leave(temp_v1);
-  } while( 1 );
+s32 cecInboxReadMessages(u32 inboxHandle, void* destination,
+                         s32 messageIndex, u32 count);
+void nn_os_CriticalSection_Enter(void* criticalSection);
+void nn_os_CriticalSection_Leave(void* criticalSection);
 }
 
-} /* extern "C" */
+// Read messages into the locked ring, waiting for space until the final index is reached.
+extern "C" void FUN_001dc684(InboxReadStateView* state)
+{
+    void* criticalSection = &state->unk420;
+
+    for (;;) {
+        nn_os_CriticalSection_Enter(criticalSection);
+        if (state->writeCount - state->readCount < 12u) {
+            cecInboxReadMessages(state->inboxHandle,
+                                &state->messages[state->writeCount % 12u],
+                                state->nextMessageIndex, 1);
+            ++state->writeCount;
+            if (++state->nextMessageIndex >= state->messageCount) {
+                nn_os_CriticalSection_Leave(criticalSection);
+                return;
+            }
+        }
+        nn_os_CriticalSection_Leave(criticalSection);
+    }
+}

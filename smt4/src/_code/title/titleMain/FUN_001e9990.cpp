@@ -102,7 +102,7 @@ extern int frameTexPollTransitionComplete(void);
 /* Supplied declaration required: commonBgReset. */
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_0026e324. */
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_0026f824. */
 /* Supplied declaration required: FUN_0026faa4. */
 /* Supplied declaration required: FUN_0026fe0c. */
@@ -123,7 +123,7 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
@@ -371,9 +371,9 @@ unsigned int FUN_001e9990(void)
     puVar2 = g_titleMain;
     temp_v4 = 0;
     do {
-      temp_v2 = FUN_0029d65c((int)*(short *)((int)puVar2 + temp_v4 * 2 + 0x74));
+      temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)((int)puVar2 + temp_v4 * 2 + 0x74));
       if ((temp_v2 == 1) ||
-         (temp_v2 = FUN_0029d65c((int)*(short *)((int)puVar2 + temp_v4 * 2 + 0x74)), temp_v2 == 2)) {
+         (temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)((int)puVar2 + temp_v4 * 2 + 0x74)), temp_v2 == 2)) {
         puVar2[2] = temp_v4;
         break;
       }
@@ -381,7 +381,7 @@ unsigned int FUN_001e9990(void)
     } while (temp_v4 < 4);
     temp_v4 = 0;
     do {
-      temp_v2 = FUN_0029d65c((int)*(short *)((int)puVar2 + temp_v4 * 2 + 0x74));
+      temp_v2 = ifTouchGetSelectionModeForRegion((int)*(short *)((int)puVar2 + temp_v4 * 2 + 0x74));
       if (temp_v2 == 6) {
         puVar2[2] = temp_v4;
         *(unsigned char *)((int)puVar2 + 99) = 1;
@@ -452,7 +452,7 @@ unsigned int FUN_001e9990(void)
     dataTableGet(0x3a,0);
     temp_v4 = dataTableGetEntries();
     FUN_0029ee6c(temp_v4 + temp_v2 * 0x56 + 0x16,0x323232ff);
-    if (((*(char *)((int)puVar13 + 99) == '\0') && (temp_v4 = FUN_0026ee68(1), temp_v4 == 0)) &&
+    if (((*(char *)((int)puVar13 + 99) == '\0') && (temp_v4 = buttonHelpHasEnabledEntryForId(1), temp_v4 == 0)) &&
        (temp_v4 = padIsButtonPressed(0), temp_v4 == 0)) goto LAB_001ea720;
     puVar13 = g_titleMain;
     temp_v3 = g_titleMain[2];

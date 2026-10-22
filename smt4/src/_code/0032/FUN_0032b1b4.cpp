@@ -1,77 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032b1b4` (_code @ 0x32b1b4, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: tail merging of the 0x200 bit runs the other way: retail keeps the code in the kind-12 branch and kind 21 jumps to it. */
+#include "common.h"
+
+struct KindRecord {
+    /* 0x00 */ u8 unk00[0x6A];
+    /* 0x6A */ u8 kind;   /* low 7 bits: kind; bit 7: flag */
+};
 
 extern "C" {
 
-
-unsigned int FUN_0032b1b4(int param_1,unsigned int param_2)
-
+/* The bits of `mask` that the record's kind accepts: grouped kinds accept several bits, kind 14 all of
+ * them, any other kind only its own bit. */
+u32 FUN_0032b1b4(const KindRecord *record, u32 mask)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = 0;
-  temp_v1 = temp_v0;
-  if ((*(unsigned char *)(param_1 + 0x6a) & 0x7f) != 0 && param_2 != 0) {
-    temp_v2 = *(unsigned char *)(param_1 + 0x6a) & 0x7f;
-    if (temp_v2 != 0xc) {
-      if (temp_v2 == 0xd) {
-        if ((param_2 & 0x80) != 0) {
-          temp_v0 = 0x80;
+    u32 result = 0;
+
+    if ((record->kind & 0x7F) != 0 && mask != 0) {
+        u32 kind = record->kind & 0x7F;
+
+        if (kind == 12) {
+            if (mask & 0x20) {
+                result = 0x20;
+            }
+            if (mask & 0x40) {
+                result |= 0x40;
+            }
+            if (mask & 0x80) {
+                result |= 0x80;
+            }
+            if (mask & 0x100) {
+                result |= 0x100;
+            }
+            if (mask & 0x200) {
+                result |= 0x200;
+            }
+        } else if (kind == 13) {
+            if (mask & 0x80) {
+                result = 0x80;
+            }
+        } else if (kind == 18) {
+            if (mask & 0x40) {
+                result = 0x40;
+            }
+            if (mask & 0x80) {
+                result |= 0x80;
+            }
+            if (mask & 0x100) {
+                result |= 0x100;
+            }
+        } else if (kind == 14) {
+            result = mask;
+        } else if (kind == 21) {
+            if (mask & 0x20) {
+                result = 0x20;
+            }
+            if (mask & 0x200) {
+                result |= 0x200;
+            }
+        } else if (mask & (1 << kind)) {
+            result = (u16)(1 << kind);
         }
-        return temp_v0;
-      }
-      if (temp_v2 == 0x12) {
-        if ((param_2 & 0x40) != 0) {
-          temp_v0 = 0x40;
-        }
-        if ((param_2 & 0x80) != 0) {
-          temp_v0 = temp_v0 | 0x80;
-        }
-        if ((param_2 & 0x100) != 0) {
-          temp_v0 = temp_v0 | 0x100;
-        }
-        return temp_v0;
-      }
-      temp_v1 = param_2;
-      if (temp_v2 != 0xe) {
-        if (temp_v2 == 0x15) {
-          if ((param_2 & 0x20) != 0) {
-            temp_v0 = 0x20;
-          }
-          if ((param_2 & 0x200) == 0) {
-            return temp_v0;
-          }
-          return temp_v0 | 0x200;
-        }
-        temp_v1 = temp_v0;
-        if ((param_2 & (1 << temp_v2)) != 0) {
-          temp_v1 = (1 << temp_v2) & 0xffff;
-        }
-      }
     }
-    else {
-      if ((param_2 & 0x20) != 0) {
-        temp_v0 = 0x20;
-      }
-      if ((param_2 & 0x40) != 0) {
-        temp_v0 = temp_v0 | 0x40;
-      }
-      if ((param_2 & 0x80) != 0) {
-        temp_v0 = temp_v0 | 0x80;
-      }
-      if ((param_2 & 0x100) != 0) {
-        temp_v0 = temp_v0 | 0x100;
-      }
-      temp_v1 = temp_v0;
-      if ((param_2 & 0x200) != 0) {
-        return temp_v0 | 0x200;
-      }
-    }
-  }
-  return temp_v1;
+    return result;
 }
 
 } /* extern "C" */

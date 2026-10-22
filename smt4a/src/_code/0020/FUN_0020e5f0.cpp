@@ -1,62 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020e5f0` (_code @ 0x20e5f0, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, lr}. */
+#include "common.h"
+
+struct HolderView;
+
+struct HolderVtableView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+    void (*unk08)(HolderView* self, s32 mode, s32 enabled); // 0x08
+};
+
+struct HolderView {
+    HolderVtableView* vtable; // 0x00
+    u8 unk04[8]; // 0x04
+};
+
+struct BootStateView {
+    void* process; // 0x00
+    u8 unk04; // 0x04
+    u8 unk05[3]; // 0x05
+    HolderView* holder; // 0x08
+    u8 unk0C; // 0x0C
+    u8 unk0D[3]; // 0x0D
+};
 
 extern "C" {
+void* asdOperatorNew(u32 size);
+void* asdProcessCreateSimple(const char* name, s32 priority, u32 unk08,
+                             u32 unk0C, void (*shutdown)(),
+                             void (*entry)(), void* context);
+void runnerShutdown();
+void FUN_002ef9ec();
+HolderView* vtblHolderInit557bbc(HolderView* self);
+extern BootStateView* DAT_00588e2c;
 
-int asdProcessCreateSimple(...);
-int asdOperatorNew(...);
-
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char LAB_0020e698; /* 0x20e698 */
-extern int runnerShutdown(...); /* 0x2681b0 */
-extern unsigned char LAB_002ef9ec; /* 0x2ef9ec */
-extern unsigned int *DAT_00588e2c; /* 0x588e2c */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: asdOperatorNew. */
-extern int *vtblHolderInit557bbc(void);
-
-
+// Create the boot process and its holder, then initialize the holder's mode.
 void FUN_0020e5f0(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  int temp_v0;
-  int *piVar4;
-  
-  puVar1 = (unsigned int *)0x10;
-  asdOperatorNew();
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[2] = 0;
-    *(unsigned char *)(puVar1 + 1) = 0;
-  }
-  else {
-    puVar1 = (unsigned int *)0x0;
-  }
-  puVar2 = &LAB_0020e698;
-  DAT_00588e2c = puVar1;
-  asdProcessCreateSimple(&LAB_0020e698,4,0,0,runnerShutdown,&LAB_002ef9ec,0);
-  *puVar1 = (unsigned int)puVar2;
-  temp_v0 = 0xc;
-  asdOperatorNew();
-  piVar4 = (int *)0x0;
-  if (temp_v0 != 0) {
-    piVar4 = (int *)vtblHolderInit557bbc();
-  }
-  puVar1[2] = (unsigned int)piVar4;
-  (**(romwright_code **)(*piVar4 + 8))();
-  *(unsigned char *)(puVar1 + 1) = 0;
-  *(unsigned char *)(puVar1 + 3) = 0;
-  return;
-}
+    BootStateView* state = static_cast<BootStateView*>(asdOperatorNew(16));
+    if (state != 0) {
+        state->holder = 0;
+        state->unk04 = 0;
+    }
 
-} /* extern "C" */
+    DAT_00588e2c = state;
+    state->process = asdProcessCreateSimple("BOOT C", 4, 0, 0,
+                                            runnerShutdown, FUN_002ef9ec, 0);
+
+    HolderView* holder = static_cast<HolderView*>(asdOperatorNew(12));
+    if (holder != 0) {
+        holder = vtblHolderInit557bbc(holder);
+    }
+    state->holder = holder;
+    holder->vtable->unk08(holder, 2, 1);
+    state->unk04 = 0;
+    state->unk0C = 0;
+}
+}

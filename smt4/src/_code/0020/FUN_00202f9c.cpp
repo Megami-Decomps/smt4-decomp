@@ -31,8 +31,8 @@ extern SceneGlobals g_saveLoadUIFlags;
 
 int FUN_002108c0(int arg0, u32 arg1);
 int msgWindowReset(void);
-int FUN_00292c0c(void);
-int FUN_00297050(int arg);
+int gameReleaseDataReference(void);
+int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
 int FUN_0029ee6c(int arg0, int color);
 int fileSlotFree(int arg);
@@ -77,8 +77,8 @@ void FUN_00202f9c(void)
         state2->buffer244 = NULL;
     }
     gameGlobalsSetSelected(0);
-    FUN_00292c0c();
-    FUN_00297050(1);
+    gameReleaseDataReference();
+    messageMainSetEnabled(1);
     state->released = 1;
     if (state->buffer350 != NULL) {
         asdMemFree(state->buffer350);

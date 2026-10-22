@@ -5,7 +5,7 @@
 extern "C" {
 
 int npcRoomDestroy(void);
-int FUN_003423cc(...);
+int buttonHelpSetSelectedId(...);
 int gameFlagSetValue(...);
 
 int textFormatBuffer(...);
@@ -83,7 +83,7 @@ extern int messageMainGetValue(void);
 extern int messageGetChoiceResult(void);
 extern int messageWindowIsState1(void);
 extern int panelIsMissingOrFlagClear(void);
-/* Supplied declaration required: FUN_003423cc. */
+/* Supplied declaration required: buttonHelpSetSelectedId. */
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: campCommonBgRelease. */
@@ -402,7 +402,7 @@ joined_r0x00214af8:
     g_npcRoom[0x3b] = 0;
     puVar4[0x3c] = 1;
     FUN_00168980(0xa2);
-    FUN_003423cc(0xa2);
+    buttonHelpSetSelectedId(0xa2);
     break;
   case 5:
     temp_v7 = scrRunOpcodesStub(g_npcRoom[0x14]);

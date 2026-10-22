@@ -1,41 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cf8dc` (_code @ 0x4cf8dc, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The special-entry address and argument setup are reordered. */
+#include "shard/W8Match1_EntryDispatch.h"
 extern "C" {
+u32 FUN_00163aa4(DispatchEntry*, f32);
+u32 FUN_00167458(DispatchEntry*, u32);
 
-extern unsigned int FUN_00163aa4(int);
-extern unsigned int FUN_00167458(int, unsigned int);
-
-
-unsigned int FUN_004cf8dc(int param_1,int param_2)
-
+// Uses the entry kind's appropriate update routine and default factor.
+u32 FUN_004cf8dc(DispatchEntrySet* entries, s32 kind)
 {
-  unsigned int temp_v0;
-  
-  switch(param_2) {
-  case 0:
-  case 6:
-    temp_v0 = FUN_00167458(param_1 + param_2 * 0x8c + 0x20,0);
-    return temp_v0;
-  case 1:
-  case 2:
-  case 3:
-  case 5:
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xc:
-    temp_v0 = FUN_00163aa4(param_1 + param_2 * 0x8c + 0x20);
-    return temp_v0;
-  case 4:
-    temp_v0 = FUN_00167458(param_1 + 0x250,1);
-    return temp_v0;
-  default:
-    return 0;
-  }
+    u32 result = 0;
+    switch (kind) {
+    case 0:
+    case 6:
+        result = FUN_00167458(&entries->entries[kind], 0);
+        break;
+    case 4:
+        result = FUN_00167458(&entries->entries[4], 1);
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+        result = FUN_00163aa4(&entries->entries[kind], 1.0f);
+        break;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

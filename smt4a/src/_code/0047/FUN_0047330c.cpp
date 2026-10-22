@@ -1,58 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047330c` (_code @ 0x47330c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the three colors as `mov r0, r4; ldrsh r0, [r0, #N]` (calls to one-instruction getters that armlink inlined), which plain field reads don't reproduce; argument stores are scheduled differently. */
+#include "common.h"
+
+/* A window whose frame is drawn from the nine-slice sprite set. */
+struct FramedWindow {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 target;
+    /* 0x54 */ s16 colorA;
+    /* 0x56 */ s16 colorB;
+    /* 0x58 */ s16 colorC;
+    /* 0x5A */ u8 unk5A[0xA];
+    /* 0x64 */ u8 tinted;
+};
 
 extern "C" {
 
-int FUN_00344cd0(unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, unsigned int, int);
+void FUN_00344cd0(u32 target, s32 x, s32 y, s32 center, s32 topLeft, s32 top, s32 topRight,
+                  s32 left, s32 right, s32 bottomLeft, s32 bottom, s32 colorC, s32 colorA,
+                  s32 colorB, u32 alpha, s32 flags);
 
-typedef struct fn_0047330c_arg0 fn_0047330c_arg0;
-struct fn_0047330c_arg0 {
-    unsigned char pad_0x0[0x50];
-    unsigned char field_0x50; /* +0x50 */
-    unsigned char pad_0x51[0x3];
-    short field_0x54; /* +0x54 */
-    short field_0x56; /* +0x56 */
-    short field_0x58; /* +0x58 */
-    unsigned char pad_0x5a[0xa];
-    byte field_0x64; /* +0x64 */
-};
-
-/* stack frame of param_2: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00344cd0. */
-
-
-void FUN_0047330c(fn_0047330c_arg0 *param_1,unsigned int param_2)
-
+/* Draws the window frame, tinted with the window's colors when tinting is enabled. */
+void FUN_0047330c(FramedWindow *window, u32 alpha)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (int)param_1->field_0x58;
-  temp_v1 = (int)param_1->field_0x54;
-  temp_v2 = (int)param_1->field_0x56;
-  if (param_1->field_0x64 == 0) {
-    temp_v0 = -1;
-    temp_v1 = -1;
-    temp_v2 = -1;
-  }
-  FUN_00344cd0(*(unsigned int *)&param_1->field_0x50,0,0,0x2f,0x4b,0x4c,0x4d,0x47,0x49,0x48,0x4a,temp_v0
-               ,temp_v1,temp_v2,param_2,0);
-  return;
+    s32 colorC = window->colorC;
+    s32 colorA = window->colorA;
+    s32 colorB = window->colorB;
+
+    if (!window->tinted) {
+        colorC = -1;
+        colorA = -1;
+        colorB = -1;
+    }
+    FUN_00344cd0(window->target, 0, 0, 0x2f, 0x4b, 0x4c, 0x4d, 0x47, 0x49, 0x48, 0x4a, colorC,
+                 colorA, colorB, alpha, 0);
 }
 
 } /* extern "C" */

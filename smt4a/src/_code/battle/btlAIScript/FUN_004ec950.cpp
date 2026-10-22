@@ -7,7 +7,7 @@ extern "C" {
 int sysMemClear(int, int);
 int FUN_003e8bb0(unsigned char [2], int, unsigned int);
 int gameFlagSetValue(int, int, int);
-int FUN_004abdfc(unsigned int, int, int);
+int btlUiQueueMenuAction(unsigned int, int, int);
 int btlUnitSetParam(...);
 int FUN_004e5b5c(int *);
 int FUN_004e7c04(int *, int);
@@ -47,7 +47,7 @@ extern unsigned short FUN_003f217c(int);
 extern int FUN_003f23fc(int);
 extern int FUN_003f25e8(int);
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_004abdfc. */
+/* Supplied declaration required: btlUiQueueMenuAction. */
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: btlUnitSetParam. */
 /* Supplied declaration required: FUN_004e5b5c. */
@@ -162,7 +162,7 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
         (temp_v4 = FUN_003f25e8(*param_1), temp_v4 != 0)) &&
        (((temp_v4 = btlScriptUnitHasFlags(*param_1), temp_v4 == 0 && (temp_v4 = FUN_003eb1cc(*param_1), temp_v4 == 0)
          ) && (temp_v2 != 0)))) {
-      FUN_004abdfc(g_btlUiBlock,(int)(short)temp_v2,1);
+      btlUiQueueMenuAction(g_btlUiBlock,(int)(short)temp_v2,1);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 4;
     }
     else {

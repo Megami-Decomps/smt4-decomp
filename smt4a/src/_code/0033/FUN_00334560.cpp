@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSetKeyframe(int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_00202400(void);
-int FUN_002ae320(void);
+int questMarkSelectedSpecialDetail(void);
 int FUN_003d498c(unsigned int, int);
 int uiQuestSpritesCreate(void);
 unsigned int questHasSpecialDetailPage(unsigned int);
@@ -20,7 +20,7 @@ extern int campIsState85(void);
 /* Supplied declaration required: FUN_00202400. */
 extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002ae320. */
+/* Supplied declaration required: questMarkSelectedSpecialDetail. */
 extern int FUN_002f7730(int, unsigned int);
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: uiQuestSpritesCreate. */
@@ -66,7 +66,7 @@ void FUN_00334560(void)
     *(int *)(temp_v1 + 0x914) = temp_v2;
   }
   if (*(short *)(temp_v5 + 0xcd0) >= 3) {
-    FUN_002ae320();
+    questMarkSelectedSpecialDetail();
   }
   uiSpriteSetKeyframe(temp_v5 + 0x34,0);
   uiSpriteSetImageKeyframe(temp_v5 + 0x34,8,0);

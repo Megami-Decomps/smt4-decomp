@@ -1,8 +1,8 @@
+#include "status/StatusDown.h"
 #include "shard/Shard0038.h"
 
 extern "C" {
-
-extern StateHolder518 *g_statusDown;
+extern StatusDownStateA *g_statusDown;
 
 void FUN_0038b548(u8 value)
 {

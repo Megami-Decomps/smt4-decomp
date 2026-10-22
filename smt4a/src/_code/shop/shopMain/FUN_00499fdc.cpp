@@ -13,7 +13,7 @@ int panelSetTarget(int);
 int FUN_0038b010(int);
 int messageMainSetFlag(int);
 int FUN_00496a0c(int, int);
-int FUN_0049706c(int);
+int menuOpenCommandList(int);
 int FUN_00498494(int, int);
 int messageChoiceShowCurrent(int);
 int sendEvent100020F(void);
@@ -40,7 +40,7 @@ extern int recordGetModeForId(int);
 extern int FUN_0047fe44(unsigned short);
 extern int FUN_004954e8(int);
 /* Supplied declaration required: FUN_00496a0c. */
-/* Supplied declaration required: FUN_0049706c. */
+/* Supplied declaration required: menuOpenCommandList. */
 extern int FUN_00498408(int, unsigned short);
 /* Supplied declaration required: FUN_00498494. */
 /* Supplied declaration required: messageChoiceShowCurrent. */
@@ -139,7 +139,7 @@ void FUN_00499fdc(int param_1)
       temp_v1 = inputIsQuestCancelPressed();
       if (temp_v1 != 0) {
         sendEvent100020E();
-        FUN_0049706c(param_1);
+        menuOpenCommandList(param_1);
         return;
       }
       temp_v1 = FUN_004d0584();

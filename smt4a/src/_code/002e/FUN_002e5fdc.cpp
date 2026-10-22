@@ -1,45 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e5fdc` (_code @ 0x2e5fdc, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail beq 60 differs from recovered beq 40. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int asdSequenceRequest(int, int, int);
-int scrGetArg(int);
-int mapPlaceSet(...);
-int FUN_00376fb8(unsigned int);
+struct GameStateLocalView {
+    u8 unk00[0x28];
+    u8 unk28;                 // 0x028
+    u8 unk29[0x574 - 0x29];
+    u8 unk574;                // 0x574
+};
 
-extern unsigned char DAT_005f1624; /* 0x5f1624 */
-extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
-
-/* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: FUN_00376fb8. */
-
-
-unsigned int FUN_002e5fdc(void)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  if (temp_v0 != 0x18) {
-    mapPlaceSet(temp_v0,temp_v1,temp_v2);
-  }
-  else {
-    mapPlaceSet(0x18,1,temp_v2);
-    FUN_00376fb8(temp_v1);
-    DAT_005f1624 = 1;
-  }
-  DAT_005f1b70 = 0;
-  asdSequenceRequest(6,0,0);
-  return 1;
 }
 
-} /* extern "C" */
+extern "C" {
+s32 scrGetArg(s32 index);
+s32 mapPlaceSet(s32 place, s32 entrance, s32 option);
+s32 FUN_00376fb8(u32 value);
+s32 asdSequenceRequest(s32 sequence, s32 argument, s32 flags);
+extern GameStateLocalView g_gameState;
+
+// Set the destination, apply the place-24 override, and request sequence 6.
+u32 FUN_002e5fdc(void)
+{
+    s32 place = scrGetArg(0);
+    s32 entrance = scrGetArg(1);
+    s32 option = scrGetArg(2);
+
+    switch (place) {
+    default:
+        mapPlaceSet(place, entrance, option);
+        break;
+
+    case 0x18:
+        mapPlaceSet(place, 1, option);
+        FUN_00376fb8(static_cast<u32>(entrance));
+        g_gameState.unk28 = 1;
+        break;
+    }
+
+    g_gameState.unk574 = 0;
+    asdSequenceRequest(6, 0, 0);
+    return 1;
+}
+}

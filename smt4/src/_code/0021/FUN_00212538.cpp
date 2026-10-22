@@ -59,7 +59,7 @@ extern int FUN_001c36b8(void);
 /* Supplied declaration required: FUN_00251d98. */
 extern int FUN_00252180(unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029efa8(int);
 extern int gameGetSlotTable(void);
@@ -594,7 +594,7 @@ unsigned int FUN_00212538(void)
     FUN_002bed3c();
     if (*(int *)(temp_v1 + 0x30) >= 2) {
       temp_v4 = 0x24;
-      temp_v10 = FUN_0029d65c((int)*(short *)(temp_v1 + 0x6b4));
+      temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + 0x6b4));
       if (temp_v10 == 1 || temp_v10 == 2) {
         temp_v4 = 0x26;
       }
@@ -602,7 +602,7 @@ unsigned int FUN_00212538(void)
       temp_v8 = vec2GetYInt(temp_v1 + 0x68);
       FUN_002bf288(2,0x19,temp_v4,temp_v6 + temp_v10,temp_v8 + temp_v7,0xa6);
       temp_v4 = 0x25;
-      temp_v10 = FUN_0029d65c((int)*(short *)(temp_v1 + 0x6b6));
+      temp_v10 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + 0x6b6));
       if (temp_v10 == 1 || temp_v10 == 2) {
         temp_v4 = 0x27;
       }

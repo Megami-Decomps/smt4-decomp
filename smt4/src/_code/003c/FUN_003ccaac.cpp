@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00227c60(...);
+int btlShowListedActionMessage(...);
 int FUN_00227d18(void);
 int FUN_00227d70(...);
 int btlEffectFindSlotId(...);
@@ -16,7 +16,7 @@ int FUN_0023c638(...);
 int FUN_002551ac(...);
 int FUN_0027df30(...);
 int FUN_0027e3e8(...);
-int FUN_003bd124(void);
+int btlRollPassiveSkill(void);
 int btlEntryGetNormalizedPercent(...);
 int btlEntryGetSummaryRatio(...);
 int FUN_003d0ac8(...);
@@ -124,7 +124,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00227c30(int, int);
-/* Supplied declaration required: FUN_00227c60. */
+/* Supplied declaration required: btlShowListedActionMessage. */
 /* Supplied declaration required: FUN_00227d18. */
 /* Supplied declaration required: FUN_00227d70. */
 extern int FUN_00227dbc(int);
@@ -168,7 +168,7 @@ extern int FUN_00293230(int);
 /* Supplied declaration required: FUN_002ae164. */
 extern int FUN_003bcc70(unsigned int, unsigned int, int, int, unsigned int);
 /* Supplied declaration required: FUN_003bcda0. */
-/* Supplied declaration required: FUN_003bd124. */
+/* Supplied declaration required: btlRollPassiveSkill. */
 /* Supplied declaration required: FUN_003bd1d8. */
 /* Supplied declaration required: FUN_003bd2e0. */
 /* Supplied declaration required: FUN_003bdab0. */
@@ -1207,7 +1207,7 @@ LAB_003ce96c:
       btlMainFindEntryByListedId(puVar11,param_8);
       if ((((*(unsigned short *)((int)puVar11 + 0x1c6) & 0x1c0) == 0) &&
           (((*puVar11 & 2) == 0 || (temp_v5 = questCurrentIsFlagged(), temp_v5 == 0)))) &&
-         (temp_v5 = param_8, FUN_003bd124(), temp_v5 != 0)) {
+         (temp_v5 = param_8, btlRollPassiveSkill(), temp_v5 != 0)) {
         temp_v7 = *(int *)(*param_1 + 0x1e98);
         FUN_0023c154(*param_1,4,(int)*(short *)(temp_v7 + param_8 * 0x114 + 0x60),
                      (int)*(short *)(temp_v7 + temp_v8),temp_v5);
@@ -1221,7 +1221,7 @@ LAB_003ce96c:
   if (temp_v18 == 1) {
     temp_v5 = DAT_00435d18;
     FUN_00227d70(DAT_00435d18,0);
-    FUN_00227c60(param_1,param_2,param_8,temp_v5,0);
+    btlShowListedActionMessage(param_1,param_2,param_8,temp_v5,0);
     temp_v5 = *param_1;
     temp_v7 = (int)*(short *)(*(int *)(temp_v5 + 0x1e98) + param_8 * 0x114 + 0x60);
     if ((*(unsigned int *)(*(int *)(temp_v5 + 0x1fc0) + temp_v7 * 0x288) & 0x10) != 0) {

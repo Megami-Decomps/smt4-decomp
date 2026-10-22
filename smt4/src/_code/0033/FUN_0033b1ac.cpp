@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00254e4c(unsigned int, int, int, int *);
+int btlUiRefreshSlotRanks(unsigned int, int, int, int *);
 int btlMainFindEntryByListedId(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00254e4c. */
+/* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 
 
@@ -48,7 +48,7 @@ void FUN_0033b1ac(int param_1,int param_2,unsigned int param_3,int *param_4)
   do {
     temp_v13 = param_4;
     if (temp_v7 >= 0xc) {
-      FUN_00254e4c(g_btlUiBlock,temp_v7,temp_v5,temp_v13);
+      btlUiRefreshSlotRanks(g_btlUiBlock,temp_v7,temp_v5,temp_v13);
       return;
     }
     if (*(short *)(param_1 + temp_v7 * 2 + 0x2f06) < 0) {
@@ -86,7 +86,7 @@ void FUN_0033b1ac(int param_1,int param_2,unsigned int param_3,int *param_4)
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 0xb);
       }
-      FUN_00254e4c(g_btlUiBlock,temp_v7,temp_v5,temp_v13);
+      btlUiRefreshSlotRanks(g_btlUiBlock,temp_v7,temp_v5,temp_v13);
       return;
     }
     temp_v7 = temp_v7 + 1;

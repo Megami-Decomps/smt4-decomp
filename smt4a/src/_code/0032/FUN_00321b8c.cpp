@@ -1,60 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321b8c` (_code @ 0x321b8c, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail movne r1, #0 differs from recovered movne r0, #0. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int dataTable04FindById(void);
-int FUN_00321a98(int *, int *);
+struct EntryRecordView {
+    u8 unk00[0x2c]; // 0x00
+    u16 unk2C;      // 0x2c
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int idIsAbove400(int);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_00321a98. */
-extern int FUN_003a6868(int);
-
-
-void FUN_00321b8c(int *param_1,int *param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  short temp_v3;
-  short temp_v4;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v0 = FUN_003a6868(*param_1);
-    temp_v1 = *param_1;
-    dataTable04FindById();
-    temp_v4 = *(short *)(temp_v1 + 0x2c);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v1 = 99;
-    temp_v3 = 0;
-  }
-  else {
-    temp_v1 = FUN_003a6868(*param_2);
-    temp_v2 = *param_2;
-    dataTable04FindById();
-    temp_v3 = *(short *)(temp_v2 + 0x2c);
-  }
-  if (temp_v0 != temp_v1 || temp_v3 != temp_v4) {
-    return;
-  }
-  FUN_00321a98(param_1,param_2);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+s32 idIsAbove400(s32 id);
+s32 FUN_003a6868(s32 id);
+EntryRecordView *dataTable04FindById(s32 id);
+s32 FUN_00321a98(s32 *left, s32 *right);
+
+// Compare classification and record fields before delegating tied entries.
+s32 FUN_00321b8c(s32 *left, s32 *right)
+{
+    s32 leftClass;
+    u16 leftField;
+    if (idIsAbove400(*left) != 0) {
+        leftClass = 99;
+        leftField = 0;
+    } else {
+        leftClass = FUN_003a6868(*left);
+        leftField = dataTable04FindById(*left)->unk2C;
+    }
+
+    s32 rightClass;
+    u16 rightField;
+    if (idIsAbove400(*right) != 0) {
+        rightClass = 99;
+        rightField = 0;
+    } else {
+        rightClass = FUN_003a6868(*right);
+        rightField = dataTable04FindById(*right)->unk2C;
+    }
+
+    s32 difference = leftClass - rightClass;
+    if (difference != 0)
+        return difference;
+
+    difference = rightField - leftField;
+    if (difference != 0)
+        return difference;
+
+    return FUN_00321a98(left, right);
+}
+}

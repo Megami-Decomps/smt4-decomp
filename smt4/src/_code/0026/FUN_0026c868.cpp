@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029212c(...);
 
 int FUN_001f4568(int, int, int, unsigned char [136]);
-int FUN_0024bc98(unsigned char [136], int);
+int skillFormatTargetLabel(unsigned char [136], int);
 int FUN_0024bda8(unsigned char [136], unsigned int);
 int FUN_002907c4(...);
 int FUN_00295660(int, unsigned char [136]);
@@ -42,7 +42,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001f4568. */
-/* Supplied declaration required: FUN_0024bc98. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_0024bda8. */
 extern unsigned int FUN_00282ccc(void);
 extern int FUN_00282e70(void);
@@ -132,7 +132,7 @@ void FUN_0026c868(void)
         }
         FUN_0024bda8(temp_v12,*(unsigned int *)(temp_v4 + 0x54) >> 0x14);
         FUN_00295660(0x26,temp_v12);
-        FUN_0024bc98(temp_v12,*(unsigned char *)(temp_v4 + 0x59));
+        skillFormatTargetLabel(temp_v12,*(unsigned char *)(temp_v4 + 0x59));
         FUN_00295660(0x27,temp_v12);
         if (*(char *)(temp_v4 + 0x5b) == '\0') {
           textFormatBuffer(temp_v12,&LAB_0031728c);

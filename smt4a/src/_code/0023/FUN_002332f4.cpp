@@ -18,9 +18,9 @@ int VectorSignedToFloat(unsigned int, int);
 
 int gameFlagsGetBlock(void);
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_002b63d0(void);
-int FUN_00313648(int);
+int mapSetSceneState(int);
 int FUN_0032714c(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00352e54(...);
@@ -78,12 +78,12 @@ extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 /* Supplied declaration required: FUN_00274a30. */
 /* Supplied declaration required: FUN_002941c8. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002b63d0. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002d8a48. */
 /* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00319f64. */
 extern int mapHasFacingBreakableInReach(void);
 /* Supplied declaration required: FUN_0032714c. */
@@ -169,7 +169,7 @@ unsigned int FUN_002332f4(void)
            (temp_v1 != 3 && temp_v1 != 6)) {
           mathPositionHeadingDegrees();
           temp_v3 = *(unsigned int *)(temp_v5 + 0x74);
-          FUN_002b5cd4();
+          mathAngleDeltaDegrees();
           if ((temp_v3 < 0xc2b40000) && ((int)temp_v3 < 0x42b40000)) {
             temp_v16 = 1;
           }
@@ -205,7 +205,7 @@ unsigned int FUN_002332f4(void)
            ((DAT_005f19e8 != 0 && ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)))) {
           mathPositionHeadingDegrees();
           temp_v3 = *(unsigned int *)(temp_v5 + 0x74);
-          FUN_002b5cd4();
+          mathAngleDeltaDegrees();
           temp_v1 = *(short *)(temp_v5 + 0xac);
           if (((temp_v1 != 1 && temp_v1 != 6) && temp_v1 != 2) ||
              ((temp_v3 < 0xc2b40000 && ((int)temp_v3 < 0x42b40000)))) {
@@ -279,7 +279,7 @@ unsigned int FUN_002332f4(void)
                 FUN_00368374(5);
                 if ((*(short *)(temp_v5 + 0xac) == 2) &&
                    (DAT_005f1614 = 1, *(char *)(temp_v25 + 0x36) == '\0')) {
-                  FUN_00313648(2);
+                  mapSetSceneState(2);
                 }
                 *(unsigned int *)(temp_v5 + 0x60) = 6;
                 *(unsigned short *)(temp_v5 + 0xae) = 0;

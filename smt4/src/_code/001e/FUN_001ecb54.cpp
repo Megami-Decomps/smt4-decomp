@@ -1,21 +1,13 @@
-#include "common.h"
+#include "ui/CommandWindow.h"
 
 extern "C" {
 
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u16 unk18;
-} Obj;
-
-extern Obj *g_comWin;
-
 void FUN_001ecb54(u16 value)
 {
-    Obj *obj = g_comWin;
+    CommandWindow *obj = g_comWin;
 
-    g_comWin->unk14 = 5;
-    obj->unk18 = value;
+    g_comWin->state = 5;
+    obj->value = value;
 }
 
 } /* extern "C" */

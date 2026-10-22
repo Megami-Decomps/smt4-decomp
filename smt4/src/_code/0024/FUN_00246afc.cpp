@@ -1,68 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246afc` (_code @ 0x246afc, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack layout differs (retail: vector at sp+4, matrices at sp+16/+80/+144 in a 220-byte frame, &matrix cached in r7); member-wise vector copies match. */
+#include "status/StatusCamera.h"
 
 extern "C" {
 
-int FUN_0024fcdc(int, unsigned char [64], int);
-int FUN_0024fd70(unsigned char [64], int *, int);
-int mathMatrixApplyScale(unsigned char [64], int *, int);
-int FUN_0025009c(unsigned char [76], int);
-int matrix44SetIdentity(unsigned char [64]);
-int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
-int matrixCopyFull(unsigned char [64], unsigned char [64]);
+typedef struct Mtx44 {
+    /* 0x00 */ f32 m[4][4];
+} Mtx44;
 
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spE4; /* 0xe4: local_e4 */
-    unsigned int spE8; /* 0xe8: local_e8 */
-    unsigned int spEC; /* 0xec: local_ec */
-} param_4_stack;
+/* The 0x4C-byte rotation matrix FUN_0025009c builds. */
+typedef struct RotationMtx {
+    /* 0x00 */ Mtx44 matrix;
+    /* 0x40 */ u8 unk40[0xC];
+} RotationMtx;
+void mathMatrixApplyScale(Mtx44 *out, Vec3 *scale, s32 mode);
+void matrix44SetIdentity(Mtx44 *out);
+void FUN_0025009c(RotationMtx *out, void *rotation);
+void matrix43Multiply(Mtx44 *out, Mtx44 *a, RotationMtx *b);
+void matrixCopyFull(Mtx44 *out, Mtx44 *in);
+void FUN_0024fd70(Mtx44 *out, Vec3 *translation, s32 mode);
+void FUN_0024fcdc(void *transform, Mtx44 *matrix, s32 mode);
 
-/* Supplied declaration required: FUN_0024fcdc. */
-/* Supplied declaration required: FUN_0024fd70. */
-/* Supplied declaration required: mathMatrixApplyScale. */
-/* Supplied declaration required: FUN_0025009c. */
-/* Supplied declaration required: matrix44SetIdentity. */
-/* Supplied declaration required: matrix43Multiply. */
-/* Supplied declaration required: matrixCopyFull. */
-
-
-void FUN_00246afc(int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
-
+/* Builds a scale * rotation * translation matrix (each part optional) and stores it in the transform at 0x10. */
+void FUN_00246afc(u8 *object, Vec3 *translation, void *rotation, Vec3 *scale)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [64];
-  unsigned char temp_v4 [64];
-  unsigned char temp_v5 [76];
-  
-  if (param_4 != (unsigned int *)0x0) {
-    temp_v0 = *param_4;
-    temp_v1 = param_4[1];
-    temp_v2 = param_4[2];
-    mathMatrixApplyScale(temp_v3,&temp_v0,0);
-  }
-  else {
-    matrix44SetIdentity(temp_v3);
-  }
-  if (param_3 != 0) {
-    FUN_0025009c(temp_v5,param_3);
-    matrix43Multiply(temp_v4,temp_v3,temp_v5);
-  }
-  else {
-    matrixCopyFull(temp_v4,temp_v3);
-  }
-  if (param_2 != (unsigned int *)0x0) {
-    temp_v0 = *param_2;
-    temp_v1 = param_2[1];
-    temp_v2 = param_2[2];
-    FUN_0024fd70(temp_v4,&temp_v0,2);
-  }
-  FUN_0024fcdc(param_1 + 0x10,temp_v4,0);
-  return;
+    Vec3 vector;
+    Mtx44 scaled;
+    Mtx44 matrix;
+    RotationMtx rotated;
+
+    if (scale != NULL) {
+        vector.x = scale->x;
+        vector.y = scale->y;
+        vector.z = scale->z;
+        mathMatrixApplyScale(&scaled, &vector, 0);
+    } else {
+        matrix44SetIdentity(&scaled);
+    }
+    if (rotation != NULL) {
+        FUN_0025009c(&rotated, rotation);
+        matrix43Multiply(&matrix, &scaled, &rotated);
+    } else {
+        matrixCopyFull(&matrix, &scaled);
+    }
+    if (translation != NULL) {
+        vector.x = translation->x;
+        vector.y = translation->y;
+        vector.z = translation->z;
+        FUN_0024fd70(&matrix, &vector, 2);
+    }
+    FUN_0024fcdc(object + 0x10, &matrix, 0);
 }
 
 } /* extern "C" */

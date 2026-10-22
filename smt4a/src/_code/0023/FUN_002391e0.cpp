@@ -5,7 +5,7 @@ extern "C" {
 
 u8 FUN_002391e0(void)
 {
-    GameSaveImage *save = static_cast<GameSaveImage *>(g_gameDataBlocks.saveBlock);
+    GameSaveImage *save = reinterpret_cast<GameSaveImage  *>(g_gameDataBlocks.saveBlock);
     return save->work.state;
 }
 

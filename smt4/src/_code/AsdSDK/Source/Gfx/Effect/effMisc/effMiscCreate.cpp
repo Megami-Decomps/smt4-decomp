@@ -1,54 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `effMiscCreate` (_code @ 0x1d2158, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: after the clear, -1/0 land in r2/r1 instead of r1/r0 and the work pointer is built in r3 before the copy (retail builds it in r0). */
+#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00410204[]; /* __FILE__ */
 
-int memAlloc(int, int, int, int, int, int);
-int rt_memclr(void);
-int rt_memcpy(unsigned int *, unsigned int, int);
+void *memAlloc(int, int, int, int size, int align, int);
+void rt_memclr(void *block, s32 size);
+void rt_memcpy(void *dest, const void *src, u32 size);
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
+extern EffMiscKind g_effMiscKinds[];
 
-extern unsigned char g_effMiscKinds; /* 0x472480 */
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int * effMiscCreate(int param_1,unsigned int param_2)
-
+/* Allocates an effect object of the given kind, copies the kind's work area from `params` and lets
+ * the kind build its state. */
+EffMiscObject *effMiscCreate(u32 kind, void *params)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_1 * 0x18 + 0x472494);
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,temp_v1 + 0x30,0x10,1);
-  rt_memclr();
-  puVar1[4] = 0xffffffff;
-  puVar1[6] = param_1;
-  puVar1[5] = 0x3f800000;
-  puVar1[10] = 0;
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[3] = 0x3f800000;
-  puVar1[9] = (unsigned int)(puVar1 + 0xc);
-  rt_memcpy(puVar1 + 0xc,param_2,temp_v1);
-  if (*(romwright_code **)(&g_effMiscKinds + param_1 * 0x18) != (romwright_code *)0x0) {
-    temp_v0 = (**(romwright_code **)(&g_effMiscKinds + param_1 * 0x18))(param_2);
-    puVar1[8] = temp_v0;
-  }
-  return puVar1;
+    s32 workSize = g_effMiscKinds[kind].workSize;
+    s32 objectSize = workSize + 0x30;
+    asdDebugTrace(DAT_00410204, 450);
+    EffMiscObject *obj = (EffMiscObject *)memAlloc(0x10000, 0x100, 0, objectSize, 0x10, 1);
+    rt_memclr(obj, objectSize);
+    obj->unk10 = -1;
+    obj->kind = kind;
+    obj->scale = 1.0f;
+    obj->shared = NULL;
+    EffMiscVec4 identity = {0.0f, 0.0f, 0.0f, 0.0f};
+    obj->rotation = identity;
+    obj->rotation.w = 1.0f;
+    obj->work = obj->workData;
+    rt_memcpy(obj->work, params, workSize);
+    if (g_effMiscKinds[kind].create != NULL) {
+        obj->state = g_effMiscKinds[kind].create(params);
+    }
+    return obj;
 }
 
 } /* extern "C" */

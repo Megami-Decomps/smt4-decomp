@@ -8,7 +8,7 @@ int FUN_0027e974(void);
 int buttonHelpTexturesUnref(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_00296fec(void);
@@ -33,7 +33,7 @@ typedef struct {
 /* Supplied declaration required: buttonHelpTexturesUnref. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028d9b0. */
+/* Supplied declaration required: buttonHelpAcquireResources. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00296fec. */
@@ -98,7 +98,7 @@ unsigned int FUN_001b4fe8(int *param_1,unsigned int param_2,unsigned int param_3
   }
   else {
     FUN_002898e4();
-    FUN_0028d9b0();
+    buttonHelpAcquireResources();
     buttonHelpCreate();
     temp_v1 = 0x2434;
     asdOperatorNew();

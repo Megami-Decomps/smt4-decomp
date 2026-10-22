@@ -20,7 +20,7 @@ int mapTrapGetUnk3C(...);
 int FUN_002de104(...);
 int FUN_00303460(...);
 int FUN_00303bd4(...);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 int naviMainSetFlagsAndActivate(...);
 int FUN_003180c4(...);
 int mapTrapEnable(...);
@@ -116,7 +116,7 @@ extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_00303bd4. */
 extern int mapJobIsDone(void);
 /* Supplied declaration required: mapMainStartEntry. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: mapTrapGetUnk38. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -475,7 +475,7 @@ LAB_002da3cc:
           mapTrapGetUnk3C();
           FUN_003adc58();
           FUN_00303460(0);
-          FUN_00313648(1);
+          mapSetSceneState(1);
           DAT_005f161c = 0;
           DAT_005f1614 = 0;
           DAT_005f1859 = 1;
@@ -502,7 +502,7 @@ LAB_002da3cc:
             mapMainStartEntry(&LAB_002dab1c);
           }
           else {
-            FUN_00313648(1);
+            mapSetSceneState(1);
             DAT_005f161c = 0;
             DAT_005f1859 = 1;
             DAT_005f185a = 1;
@@ -702,7 +702,7 @@ LAB_002dad8c:
             DAT_005f1adc = 0;
             FUN_003adc58();
             FUN_00303460(0);
-            FUN_00313648(1);
+            mapSetSceneState(1);
             DAT_005f161c = 0;
             DAT_005f1614 = 0;
             DAT_005f1859 = 1;

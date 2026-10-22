@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002342b8(void);
-int FUN_00313648(unsigned int);
+int mapSetSceneState(unsigned int);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
@@ -59,7 +59,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00325ba4. */
 /* Supplied declaration required: FUN_00327ee8. */
@@ -275,7 +275,7 @@ void FUN_00366e24(void)
         }
         temp_v0 = 1;
       }
-      FUN_00313648(temp_v0);
+      mapSetSceneState(temp_v0);
     }
   }
   else {

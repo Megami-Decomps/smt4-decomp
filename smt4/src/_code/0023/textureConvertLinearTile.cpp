@@ -2,13 +2,13 @@
 #include "shard/W6_W6Match7_TextureTile.h"
 
 extern "C" {
-u32 FUN_0023b3dc(u32 format, u32 type);
+u32 gfxTexFormatGetBitsPerPixel(u32 format, u32 type);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 
 // Convert an eight-pixel-stride linear tile into recursively ordered quadrants.
 u32 textureConvertLinearTile(const u8 *source, u8 *destination, s32 size, const TextureTileFormat *format)
 {
-    u32 bits = FUN_0023b3dc(format->format, format->type);
+    u32 bits = gfxTexFormatGetBitsPerPixel(format->format, format->type);
     if (size != 1) {
         if (bits == 4 && size == 2) {
             if (!format->flipVertical) {

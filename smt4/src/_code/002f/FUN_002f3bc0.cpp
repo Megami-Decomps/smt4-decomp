@@ -10,7 +10,7 @@ void FUN_002f3bc0(void)
 {
     MapIfState *state = g_mapIf.state;
     for (s32 index = 0; index < 128; ++index) {
-        Rec194 &record = mapIfGetRecords(state)[index];
+        MapIfRecord &record = state->records[index];
         if (record.active != 0) {
             s32 category = record.display.category;
             if ((category == 0x1d || category == 0x26 ||

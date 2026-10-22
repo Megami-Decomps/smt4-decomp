@@ -17,8 +17,8 @@ int FUN_002f78a0(...);
 int menuItemPlaySe(...);
 int flaggedEntrySetValueB(...);
 int FUN_0037c8e4(...);
-int FUN_0037e0b8(...);
-int FUN_0038843c(void);
+int gameSetStatusCameraHeightMode(...);
+int messageRestoreBanner(void);
 
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
@@ -38,7 +38,7 @@ int FUN_003df7c4(...);
 
 int FUN_00178b04(...);
 int gameGetPlayerData(void);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int FUN_002c85b0(...);
 int FUN_002f0384(...);
 int FUN_00320940(...);
@@ -95,7 +95,7 @@ extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
 extern unsigned int FUN_002bf520(void);
 extern int widgetSubCallIfVisible(int);
@@ -120,8 +120,8 @@ extern int FUN_0036cf78(void);
 /* Supplied declaration required: gameGlobalsQueueValues. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_0037e0b8. */
-/* Supplied declaration required: FUN_0038843c. */
+/* Supplied declaration required: gameSetStatusCameraHeightMode. */
+/* Supplied declaration required: messageRestoreBanner. */
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: FUN_0039a41c. */
@@ -228,7 +228,7 @@ void FUN_001fdde8(int param_1)
       FUN_0033449c(1);
       gameGlobalsQueueValues(psVar4,0);
       FUN_00372100(psVar4,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v13 = FUN_002a4894(temp_v13);
       temp_v7 = *(short *)(temp_v9 + (temp_v13 + temp_v4) * 2);
@@ -658,7 +658,7 @@ void FUN_001fdde8(int param_1)
       }
       campTouchRegionsRemoveGroup(temp_v13,0);
       FUN_0037c8e4(1,0);
-      FUN_0038843c();
+      messageRestoreBanner();
       FUN_002f78a0(temp_v5);
       return;
     }
@@ -679,7 +679,7 @@ LAB_001fea60:
 LAB_001fe16c:
   if (param_1 == 0x48) {
     FUN_0026f148(0x48);
-    FUN_0037e0b8(0);
+    gameSetStatusCameraHeightMode(0);
     temp_v2 = 0;
     goto LAB_001fe40c;
   }
@@ -688,72 +688,72 @@ LAB_001fe16c:
     case 0x13:
       FUN_0026f148(0x13);
       temp_v3 = 0;
-      FUN_0037e0b8(temp_v3);
+      gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x14:
       FUN_0026f148(0x14);
       temp_v3 = 0;
-      FUN_0037e0b8(temp_v3);
+      gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x15:
       FUN_0026f148(0x15);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
       break;
     case 0x16:
       FUN_0026f148(0x16);
       temp_v3 = 1;
-      FUN_0037e0b8(temp_v3);
+      gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x17:
       FUN_0026f148(0x17);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
       break;
     case 0x18:
       FUN_0026f148(0x18);
       temp_v3 = 2;
-      FUN_0037e0b8(temp_v3);
+      gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x19:
       FUN_0026f148(0x19);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
     }
   }
   else {
     switch(param_1) {
     case 0x49:
       FUN_0026f148(0x49);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
       temp_v2 = 0;
       break;
     case 0x4a:
       FUN_0026f148(0x4a);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
       temp_v2 = 0;
       break;
     case 0x4b:
       FUN_0026f148(0x4b);
-      FUN_0037e0b8(1);
+      gameSetStatusCameraHeightMode(1);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4c:
       FUN_0026f148(0x4c);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4d:
       FUN_0026f148(0x4d);
-      FUN_0037e0b8(2);
+      gameSetStatusCameraHeightMode(2);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4e:
       FUN_0026f148(0x4e);
-      FUN_0037e0b8(0);
+      gameSetStatusCameraHeightMode(0);
       FUN_0039a41c(0);
     default:
       goto LAB_001fe410;

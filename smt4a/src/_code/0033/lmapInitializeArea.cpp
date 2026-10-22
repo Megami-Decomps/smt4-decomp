@@ -54,7 +54,7 @@ void FUN_003699e4();
 void lmapApplyAreaHandleVisibility();
 void FUN_003ca5a4();
 void ptrListRemoveClearOwner(void *, AreaHandleOwner *);
-void FUN_00328794();
+void lmapInitializeActorHandles();
 void FUN_0036aa04(AreaMainState *);
 void FUN_00483834(LmapObj *);
 void FUN_00297c3c();
@@ -94,7 +94,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
         if (handle && handle->owner)
             ptrListRemoveClearOwner(g_handleRegistry, handle->owner);
     }
-    FUN_00328794();
+    lmapInitializeActorHandles();
     state = g_lmapMainState;
     if (state->map != 100)
         FUN_003699e4();

@@ -1,59 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026a9cc` (_code @ 0x26a9cc, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loop index, skill id and known-list pointer rotate through r3/r1/r2 where retail uses r1/r2/r3. */
+#include "common.h"
 
 extern "C" {
 
-int devilGetRecord(void);
+typedef struct DevilSkill {
+    /* 0x00 */ u16 level;
+    /* 0x02 */ u16 skill;
+} DevilSkill;
 
-/* Supplied declaration required: devilGetRecord. */
+typedef struct DevilRecord {
+    /* 0x00 */ u8 unk00[0x4c];
+    /* 0x4c */ DevilSkill skills[8];
+} DevilRecord;
 
+DevilRecord *devilGetRecord(u16 id);
 
-int FUN_0026a9cc(int param_1,unsigned int param_2,int param_3,int param_4,int param_5)
-
+/* Collects into `out` the skills of devil `id` learned above `level` that are not already in
+ * `known` (8 entries); returns how many were added, none when `skip` is set. */
+s32 FUN_0026a9cc(u16 id, u32 level, const u16 *known, u16 *out, s32 skip)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  short *psVar6;
-  
-  if (param_5 != 0) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 0;
-    devilGetRecord();
-    temp_v4 = 0;
-    do {
-      temp_v2 = param_1 + temp_v4 * 4;
-      temp_v0 = *(short *)(temp_v2 + 0x4e);
-      if (temp_v0 != 0) {
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v2 + 0x4c);
-      }
-      if (temp_v0 != 0 && param_2 < temp_v2) {
-        temp_v3 = 0;
-        do {
-          psVar6 = (short *)(param_3 + temp_v3 * 2);
-          if (*psVar6 == temp_v0) break;
-          if (psVar6[1] == temp_v0) {
-            temp_v3 = temp_v3 + 1;
-            break;
-          }
-          temp_v3 = temp_v3 + 2;
-        } while (temp_v3 < 8);
-        if (temp_v3 >= 8) {
-          temp_v3 = temp_v1 * 2;
-          temp_v1 = temp_v1 + 1;
-          *(short *)(param_4 + temp_v3) = temp_v0;
+    if (skip != 0) {
+        return 0;
+    }
+    s32 count = 0;
+    DevilRecord *devil = devilGetRecord(id);
+    for (s32 i = 0; i < 8; i++) {
+        u16 skill = devil->skills[i].skill;
+        if (skill != 0 && devil->skills[i].level > level) {
+            s32 j;
+            for (j = 0; j < 8; j++) {
+                if (known[j] == skill) {
+                    break;
+                }
+            }
+            if (j >= 8) {
+                out[count++] = skill;
+            }
         }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 8);
-  }
-  return temp_v1;
+    }
+    return count;
 }
 
 } /* extern "C" */

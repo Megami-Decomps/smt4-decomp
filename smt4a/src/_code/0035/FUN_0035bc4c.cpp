@@ -1,57 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035bc4c` (_code @ 0x35bc4c, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Integer layout attributes use a different address base from the retail parameter subobject. */
+#include "gfx/ScaledLayout.h"
 
-extern "C" {
-
-int VectorSignedToFloat(int, int);
-
-typedef struct fn_0035bc4c_arg0 fn_0035bc4c_arg0;
-struct fn_0035bc4c_arg0 {
-    unsigned char pad_0x0[0x58];
-    float field_0x58; /* +0x58 */
-    unsigned char pad_0x5c[0x40];
-    float field_0x9c; /* +0x9c */
-    unsigned char pad_0xa0[0x40];
-    float field_0xe0; /* +0xe0 */
-    unsigned char pad_0xe4[0x40];
-    float field_0x124; /* +0x124 */
-    unsigned char pad_0x128[0x18];
-    float field_0x140; /* +0x140 */
-    float field_0x144; /* +0x144 */
-    float field_0x148; /* +0x148 */
-    unsigned char pad_0x14c[0x1c];
-    int field_0x168; /* +0x168 */
-    unsigned char pad_0x16c[0x20];
-    short field_0x18c; /* +0x18c */
-};
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-
-
-void FUN_0035bc4c(fn_0035bc4c_arg0 *param_1)
-
+extern "C" void FUN_0035bc4c(ScaledLayout* layout, QuadVector3 translation, f32 scale)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0, in_s1, in_s2, in_s3; 6 native warning(s); review required */
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v0;
-  float in_s1;
-  float in_s2;
-  float in_s3;
-  
-  param_1->field_0x140 = param_1->field_0x140 * in_s3 + in_s0;
-  param_1->field_0x144 = param_1->field_0x144 * in_s3 + in_s1;
-  param_1->field_0x148 = param_1->field_0x148 * in_s3 + in_s2;
-  param_1->field_0x58 = param_1->field_0x58 * in_s3;
-  param_1->field_0x9c = param_1->field_0x9c * in_s3;
-  param_1->field_0xe0 = param_1->field_0xe0 * in_s3;
-  param_1->field_0x124 = param_1->field_0x124 * in_s3;
-  temp_v0 = (float)VectorSignedToFloat(param_1->field_0x168,(unsigned char)(in_fpscr >> 0x16) & 3);
-  param_1->field_0x168 = (int)(temp_v0 * in_s3);
-  temp_v0 = (float)VectorSignedToFloat((int)param_1->field_0x18c,(unsigned char)(in_fpscr >> 0x16) & 3);
-  param_1->field_0x18c = (short)(int)(temp_v0 * in_s3);
-  return;
+    QuadVector3 position = layout->position;
+    position.x *= scale;
+    position.y *= scale;
+    position.z *= scale;
+    position.x += translation.x;
+    position.y += translation.y;
+    position.z += translation.z;
+    layout->position = position;
+    layout->unk58 *= scale;
+    layout->unk9C *= scale;
+    layout->unkE0 *= scale;
+    layout->unk124 *= scale;
+    layout->parameters.unk14 = (s32)((f32)layout->parameters.unk14 * scale);
+    layout->parameters.unk38 = (s16)((f32)layout->parameters.unk38 * scale);
 }
-
-} /* extern "C" */

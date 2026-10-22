@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00192550(...);
+int dataTable8FindRecord(...);
 int dataTable04FindById(void);
 int FUN_0020ad6c(int, int, int);
 int FUN_0028c620(...);
@@ -32,7 +32,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0020ad6c. */
@@ -156,7 +156,7 @@ void FUN_002fa7a8(int param_1)
     *(unsigned int *)(temp_v17 + 0xa0) = 0;
     *(unsigned int *)(temp_v17 + 0xa4) = 0;
     temp_v2 = (int)temp_v8[0];
-    FUN_00192550();
+    dataTable8FindRecord();
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0x32);
     if (temp_v4 != 0) {
       dataTable04FindById();
@@ -219,7 +219,7 @@ void FUN_002fa7a8(int param_1)
     }
     else {
       temp_v2 = (int)temp_v8[0];
-      FUN_00192550();
+      dataTable8FindRecord();
       temp_v6 = param_1 + 0x3c98;
       if ((*(unsigned char *)(temp_v2 + 0x3a) & 0x80) != 0) {
         *puVar10 = 0x23;
@@ -263,7 +263,7 @@ void FUN_002fa7a8(int param_1)
                        temp_v6 + 0x3c98);
           temp_v5 = gameGetSlotTable();
           if (*(char *)(temp_v5 + temp_v3 + 0x1c9f) < '\0') {
-            FUN_00192550((int)temp_v10[0]);
+            dataTable8FindRecord((int)temp_v10[0]);
           }
         }
         else {

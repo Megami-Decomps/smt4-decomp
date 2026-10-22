@@ -1,71 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f74a8` (_code @ 0x3f74a8, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the kind in r0 and the message group in r1 (swapped here). */
+#include "common.h"
+
+namespace {
+struct ElementInfo {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 attribute; /* high byte: element kind */
+};
+}
 
 extern "C" {
 
-int FUN_00180114(void);
-int FUN_0019e52c(unsigned int);
+extern const char DAT_0052d3e8[];
+u16 FUN_0019e52c(u16 id);
+const char *FUN_00180114(u16 messageId);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00180114. */
-/* Supplied declaration required: FUN_0019e52c. */
-
-
-void FUN_003f74a8(unsigned int param_1,int param_2)
-
+// Message group id for an element kind, -1 when it has none.
+static inline s32 elementMessageGroup(u32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  
-  if (*(unsigned short *)(param_2 + 2) >> 8 == 10) {
-    return;
-  }
-  temp_v0 = *(unsigned short *)(param_2 + 2) >> 8;
-  switch(temp_v0) {
-  case 0:
-    temp_v1 = 0xae;
-    break;
-  case 1:
-    temp_v1 = 0xb2;
-    break;
-  case 2:
-    temp_v1 = 0xb0;
-    break;
-  case 3:
-    temp_v1 = 0xb1;
-    break;
-  case 4:
-    temp_v1 = 0xb3;
-    break;
-  case 5:
-    temp_v1 = 5;
-    break;
-  case 6:
-    temp_v1 = 0xba;
-    break;
-  case 7:
-    temp_v1 = 0xb9;
-    break;
-  case 8:
-    temp_v1 = 0xaf;
-    break;
-  case 9:
-    temp_v1 = 0xbb;
-    break;
-  default:
-    temp_v1 = 0xffffffff;
-  }
-  if ((-1 < (int)temp_v1) && (temp_v0 != 9)) {
-    FUN_0019e52c(temp_v1 & 0xffff);
-  }
-  FUN_00180114();
-  return;
+    s32 id;
+
+    switch (kind) {
+    case 0:
+        id = 0xae;
+        break;
+    case 1:
+        id = 0xb2;
+        break;
+    case 2:
+        id = 0xb0;
+        break;
+    case 3:
+        id = 0xb1;
+        break;
+    case 4:
+        id = 0xb3;
+        break;
+    case 5:
+        id = 5;
+        break;
+    case 6:
+        id = 0xba;
+        break;
+    case 7:
+        id = 0xb9;
+        break;
+    case 8:
+        id = 0xaf;
+        break;
+    case 9:
+        id = 0xbb;
+        break;
+    default:
+        id = -1;
+        break;
+    }
+    return id;
+}
+
+/* Text naming the element kind of an entry (empty for kind 10). */
+const char *FUN_003f74a8(void *owner, const ElementInfo *info)
+{
+    u32 kind;
+    s32 id;
+    u16 message;
+
+    if ((info->attribute >> 8) == 10) {
+        return DAT_0052d3e8;
+    }
+    kind = info->attribute >> 8;
+    id = elementMessageGroup(kind);
+    if (id < 0) {
+        message = 0;
+    } else if (kind == 9) {
+        message = 0x29d;
+    } else {
+        message = FUN_0019e52c(id);
+    }
+    return FUN_00180114(message);
 }
 
 } /* extern "C" */

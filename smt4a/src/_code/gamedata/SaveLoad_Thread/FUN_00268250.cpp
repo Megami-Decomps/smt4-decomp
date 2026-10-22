@@ -1,51 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00268250` (_code @ 0x268250, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: r2/r3 swap between the thread base and the -1 constant, and retail builds the arg0/arg1 stm base in ip. */
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdMemoryAlloc(int, int, int, int, int);
+typedef struct SaveLoadJob {
+    /* 0x00 */ u8 mode;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 arg0;
+    /* 0x08 */ u32 arg1;
+    /* 0x0C */ s32 state;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u32 arg2;
+    /* 0x18 */ u32 arg3;
+    /* 0x1C */ u8 unk1C[4];
+    /* 0x20 */ s32 unk20;
+    /* 0x24 */ s32 unk24;
+    /* 0x28 */ u8 unk28[0x2C];
+    /* 0x54 */ s8 active;
+    /* 0x55 */ u8 unk55[3];
+    /* 0x58 */ s32 unk58;
+    /* 0x5C */ u8 unk5C[4];
+    /* 0x60 */ u32 unk60;
+    /* 0x64 */ u32 unk64;
+    /* 0x68 */ u32 unk68;
+} SaveLoadJob;
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
+typedef struct SaveLoadThread {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ SaveLoadJob *job;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s32 unk10;
+} SaveLoadThread;
 
-extern unsigned char DAT_0057f6cb; /* 0x57f6cb */
-extern unsigned char DAT_0057f6cc; /* 0x57f6cc */
-extern unsigned char *DAT_0057f6d0; /* 0x57f6d0 */
-extern unsigned int DAT_0057f6d8; /* 0x57f6d8 */
+extern SaveLoadThread g_saveLoadThread;
 
-/* Supplied declaration required: asdMemoryAlloc. */
+void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
-
-void FUN_00268250(unsigned char param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Allocate and initialize the save/load thread's job record. */
+void FUN_00268250(u8 mode, u32 arg0, u32 arg1, u32 arg2, u32 arg3)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  puVar1 = (unsigned char *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x6c,1);
-  DAT_0057f6d0 = puVar1;
-  *puVar1 = param_1;
-  *(unsigned int *)(puVar1 + 0x20) = 0xffffffff;
-  *(unsigned int *)(puVar1 + 0x24) = 0xffffffff;
-  *(unsigned int *)(puVar1 + 0x14) = param_4;
-  *(unsigned int *)(puVar1 + 4) = param_2;
-  *(unsigned int *)(puVar1 + 8) = param_3;
-  *(unsigned int *)(puVar1 + 0x18) = param_5;
-  *(unsigned int *)(puVar1 + 0xc) = 0;
-  *(unsigned int *)(puVar1 + 0x68) = 0;
-  *(unsigned int *)(puVar1 + 0x60) = 0;
-  *(unsigned int *)(puVar1 + 100) = 0;
-  puVar1[0x54] = 0;
-  *(unsigned int *)(puVar1 + 0x58) = 0xffffffff;
-  DAT_0057f6d8 = 0xffffffff;
-  DAT_0057f6cb = 0;
-  DAT_0057f6cc = 0;
-  return;
+    SaveLoadJob *job;
+
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoad_Thread.cpp", 352);
+    job = (SaveLoadJob *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(SaveLoadJob), 1);
+    g_saveLoadThread.job = job;
+    job->mode = mode;
+    job->unk20 = -1;
+    job->unk24 = -1;
+    job->arg0 = arg0;
+    job->arg1 = arg1;
+    job->arg2 = arg2;
+    job->arg3 = arg3;
+    job->state = 0;
+    job->unk68 = 0;
+    job->unk60 = 0;
+    job->unk64 = 0;
+    job->active = 0;
+    job->unk58 = -1;
+    g_saveLoadThread.unk10 = -1;
+    g_saveLoadThread.unk03 = 0;
+    g_saveLoadThread.unk04 = 0;
 }
 
 } /* extern "C" */

@@ -1,51 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00351878` (_code @ 0x351878, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the stores in source order with the loop unrolled by two; this build hoists the constants and runs a count-down loop (possible flag difference). */
+#include "shard/W8_X20_Obj351878.h"
 
 extern "C" {
 
-
-void FUN_00351878(unsigned int *param_1)
-
+// Reset the state block to its defaults.
+void FUN_00351878(Obj351878 *obj)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0xffffffff;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  *(unsigned char *)(param_1 + 0xb) = 1;
-  param_1[0x56] = 0;
-  *(unsigned char *)(param_1 + 0x57) = 2;
-  *(unsigned char *)((int)param_1 + 0x15d) = 1;
-  param_1[0x6e] = 0;
-  param_1[0x6f] = 0;
-  param_1[0x70] = 0;
-  param_1[0xba] = 0;
-  param_1[0x121] = 0;
-  temp_v0 = 0;
-  do {
-    temp_v1 = temp_v0 + 2;
-    param_1[temp_v0 + 0xbb] = 0;
-    param_1[temp_v0 * 6 + 0x76] = 0;
-    param_1[temp_v0 + 0xbc] = 0;
-    param_1[temp_v0 * 6 + 0x7c] = 0;
-    temp_v0 = temp_v1;
-  } while (temp_v1 < 8);
-  param_1[0x122] = 0;
-  param_1[0x123] = 0;
-  param_1[0x124] = 0;
-  param_1[0x125] = 0;
-  param_1[0x126] = 0;
-  param_1[0x127] = 0;
-  param_1[0x128] = 0;
-  param_1[0x129] = 0;
-  return;
+    obj->unk000 = 0;
+    obj->unk004 = 0;
+    obj->unk008 = -1;
+    obj->unk014 = 0;
+    obj->unk018 = 0;
+    obj->unk020 = 0;
+    obj->unk024 = 0;
+    obj->unk028 = 0;
+    obj->unk02C = 1;
+    obj->unk158 = 0;
+    obj->unk15C = 2;
+    obj->unk15D = 1;
+    obj->unk1B8 = 0;
+    obj->unk1BC = 0;
+    obj->unk1C0 = 0;
+    obj->unk2E8 = 0;
+    obj->unk484 = 0;
+    for (s32 i = 0; i < 8; i++) {
+        obj->unk2EC[i] = 0;
+        obj->slots[i].unk00 = 0;
+    }
+    obj->unk488 = 0;
+    obj->unk48C = 0;
+    obj->unk490 = 0;
+    obj->unk494 = 0;
+    obj->unk498 = 0;
+    obj->unk49C = 0;
+    obj->unk4A0 = 0;
+    obj->unk4A4 = 0;
 }
 
 } /* extern "C" */

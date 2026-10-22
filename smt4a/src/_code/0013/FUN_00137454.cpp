@@ -18,7 +18,7 @@ int FUN_001418ec(...);
 int FUN_0014190c(...);
 int FUN_00142d70(...);
 int FUN_00144554(...);
-int FUN_001445b0(...);
+int asdTextSetDefaultColor(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -56,7 +56,7 @@ extern unsigned int uRam005c1474; /* 0x5c1474 */
 /* Supplied declaration required: FUN_0014190c. */
 /* Supplied declaration required: FUN_00142d70. */
 /* Supplied declaration required: FUN_00144554. */
-/* Supplied declaration required: FUN_001445b0. */
+/* Supplied declaration required: asdTextSetDefaultColor. */
 
 
 void FUN_00137454(void)
@@ -90,7 +90,7 @@ void FUN_00137454(void)
   FUN_00140708(5);
   FUN_001409d4(&DAT_0057f598);
   FUN_00144554(&DAT_0057f5d8);
-  FUN_001445b0(0xffffff00);
+  asdTextSetDefaultColor(0xffffff00);
   FUN_00142d70(&LAB_0013ed28,FUN_00141f8c);
   FUN_0013f444(0xf87a,1,0);
   FUN_0013f444(0xf87b,4,0);

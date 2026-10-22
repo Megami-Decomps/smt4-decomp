@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
@@ -61,7 +61,7 @@ extern unsigned int DAT_00571504; /* 0x571504 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
@@ -73,7 +73,7 @@ extern int FUN_0028cb6c(void);
 /* Supplied declaration required: kindIdStore. */
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
-extern int FUN_004c8754(short);
+extern int flagsCountSelectedBits(short);
 extern unsigned int btlUnitGet(unsigned int);
 
 
@@ -241,7 +241,7 @@ LAB_004c4810:
             return 0;
           }
           temp_v4 = (int)(short)puVar4[0xc9];
-          FUN_00192550();
+          dataTable8FindRecord();
           if (temp_v4 == 0) {
             return 0;
           }
@@ -438,7 +438,7 @@ LAB_004c4810:
             return 0;
           }
         }
-        if ((temp_v35 != 0) && (temp_v7 = FUN_004c8754((short)puVar5[0x9d]), temp_v7 == 0)) {
+        if ((temp_v35 != 0) && (temp_v7 = flagsCountSelectedBits((short)puVar5[0x9d]), temp_v7 == 0)) {
           return 5;
         }
         temp_v2 = puVar5[0x9d];

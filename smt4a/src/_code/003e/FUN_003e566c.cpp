@@ -1,44 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e566c` (_code @ 0x3e566c, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The saved-angle VSTM base is allocated to r0 instead of r1. */
+#include "shard/W8Match1_ControllerRotation.h"
+extern "C" void controllerSetRotationEulerDegrees(void*, f32, f32, f32);
 
-extern "C" {
-
-int controllerSetRotationEulerDegrees(void);
-
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-
-
-void FUN_003e566c(int param_1)
-
+// Applies Euler angles to the primary controller and all attached child controllers.
+extern "C" void FUN_003e566c(ControllerRotationOwner* owner, f32 x, f32 y, f32 z)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  
-  if (*(int *)(*(int *)(param_1 + 8) + 4) != 0) {
-    controllerSetRotationEulerDegrees();
-    *(unsigned int *)(param_1 + 0xc) = in_s0;
-    *(unsigned int *)(param_1 + 0x10) = in_s1;
-    *(unsigned int *)(param_1 + 0x14) = in_s2;
-  }
-  temp_v2 = 0;
-  do {
-    temp_v0 = *(int *)(param_1 + temp_v2 * 0x5c + 0x24);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = *(int *)(temp_v0 + 4);
+    if (owner->primary->controller != NULL) {
+        controllerSetRotationEulerDegrees(owner->primary->controller, x, y, z);
+        owner->rotation.x = x;
+        owner->rotation.y = y;
+        owner->rotation.z = z;
     }
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      controllerSetRotationEulerDegrees();
+    for (s32 index = 0; index < 3; ++index) {
+        ControllerLink* link = owner->children[index].link;
+        if (link != NULL && link->controller != NULL) {
+            controllerSetRotationEulerDegrees(link->controller, x, y, z);
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 3);
-  return;
 }
-
-} /* extern "C" */

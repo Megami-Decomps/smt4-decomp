@@ -50,12 +50,12 @@ extern int statsAreAllCapped(int);
 extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_00296774. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029a0cc. */
 /* Supplied declaration required: FUN_0029c424. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
@@ -219,7 +219,7 @@ void FUN_00204358(int param_1)
     temp_v12 = 0;
     do {
       temp_v5 = param_1 + temp_v12 * 4;
-      temp_v4 = FUN_0029d65c((int)*(short *)(temp_v5 + 0x359e));
+      temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v5 + 0x359e));
       if (temp_v4 == 1 || temp_v4 == 2) {
         flaggedEntrySetValueA(temp_v10,temp_v12);
         break;
@@ -229,7 +229,7 @@ void FUN_00204358(int param_1)
         temp_v0 = 1;
         break;
       }
-      temp_v5 = FUN_0029d65c((int)*(short *)(temp_v5 + 0x35a0));
+      temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v5 + 0x35a0));
       if (temp_v5 == 1 || temp_v5 == 2) {
         flaggedEntrySetValueA(temp_v10,temp_v12);
         break;
@@ -466,7 +466,7 @@ LAB_002049f0:
     }
     messageStatesSetFirst(1);
     FUN_0029c424(0);
-    temp_v5 = FUN_002973d8();
+    temp_v5 = messageMainGetChoiceResult();
     if (temp_v5 == 0) {
       timerStart(temp_v12,1,0);
       *piVar16 = *piVar16 + 1;

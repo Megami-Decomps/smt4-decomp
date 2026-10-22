@@ -21,7 +21,7 @@ int FUN_002bee58(...);
 int FUN_002bf810(...);
 int FUN_002c1658(...);
 int uiQuestSortListByEntryKind(...);
-int FUN_003944d4(...);
+int gameStateResetRecord(...);
 int gameOptionsHasEnabledParameters(void);
 int SBORROW4(...);
 int VectorUnsignedToFloat(...);
@@ -64,7 +64,7 @@ extern int gameJumpRequestIsPending(void);
 /* Supplied declaration required: FUN_002905d0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
@@ -89,7 +89,7 @@ extern int randNextInRange(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
-/* Supplied declaration required: FUN_003944d4. */
+/* Supplied declaration required: gameStateResetRecord. */
 /* Supplied declaration required: gameOptionsHasEnabledParameters. */
 
 
@@ -394,7 +394,7 @@ unsigned int FUN_001956c4(void)
     temp_v11 = FUN_0029efc0(temp_v1 + 0x660);
     temp_v5 = FUN_0029efa8(temp_v1 + 0x660);
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + (temp_v5 + temp_v11) * 2 + 0x78a);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
       FUN_002905d0();
@@ -437,7 +437,7 @@ unsigned int FUN_001956c4(void)
     }
     FUN_0029efc0(temp_v1 + 0x660);
     FUN_0029efa8(temp_v1 + 0x660);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
       FUN_002905d0();
@@ -472,7 +472,7 @@ unsigned int FUN_001956c4(void)
     }
     FUN_0029efc0(temp_v1 + 0x660);
     FUN_0029efa8(temp_v1 + 0x660);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
       FUN_002905d0();
@@ -508,7 +508,7 @@ unsigned int FUN_001956c4(void)
     }
     FUN_0029efc0(temp_v1 + 0x660);
     FUN_0029efa8(temp_v1 + 0x660);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
       temp_v3 = FUN_002903f0();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;
@@ -540,7 +540,7 @@ unsigned int FUN_001956c4(void)
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 != 0) {
       FUN_00290404();
       FUN_002905d0();
@@ -592,7 +592,7 @@ unsigned int FUN_001956c4(void)
       }
       else {
         *(unsigned char *)(temp_v1 + 0x5c6) = 1;
-        FUN_003944d4(g_aocMain + 0xa8);
+        gameStateResetRecord(g_aocMain + 0xa8);
       }
       timerStart(temp_v1 + 0x34,2,0);
       temp_v7 = 3;
@@ -613,7 +613,7 @@ unsigned int FUN_001956c4(void)
     }
     FUN_0029efc0(temp_v1 + 0x660);
     FUN_0029efa8(temp_v1 + 0x660);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
       uiQuestStartSelected();
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -640,7 +640,7 @@ joined_r0x0019627c:
     }
     FUN_0029efc0(temp_v1 + 0x660);
     FUN_0029efa8(temp_v1 + 0x660);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
       uiQuestStartSelected();
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -661,7 +661,7 @@ joined_r0x0019627c:
     }
     FUN_0029efc0(temp_v1 + 0x660);
     FUN_0029efa8(temp_v1 + 0x660);
-    temp_v11 = FUN_002973d8();
+    temp_v11 = messageMainGetChoiceResult();
     if (temp_v11 == 0) {
       temp_v3 = FUN_002903f0();
       *(unsigned short *)(temp_v1 + 0x980) = temp_v3;

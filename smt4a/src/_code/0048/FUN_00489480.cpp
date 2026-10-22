@@ -15,7 +15,7 @@ int lmapEnableSceneState(void);
 int sysPlayVoice(int);
 int rectRecRead(int, int, int *, int *);
 int sub68OwnerGetBlock60(int);
-int FUN_00492c18(int, unsigned int **);
+int naviMainSetValuePair(int, unsigned int **);
 int setFullScreenRect(void);
 int FUN_004d0420(int, int, int, int);
 int NaviMain_GetCurrentMap(...);
@@ -53,7 +53,7 @@ extern int gameFlagsClassify(void);
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 extern int naviGetActiveStateValue(int);
-/* Supplied declaration required: FUN_00492c18. */
+/* Supplied declaration required: naviMainSetValuePair. */
 /* Supplied declaration required: setFullScreenRect. */
 /* Supplied declaration required: FUN_004d0420. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
@@ -127,7 +127,7 @@ unsigned int FUN_00489480(int param_1)
       sub68OwnerGetBlock60(temp_v7);
       temp_v4 = (unsigned int *)0x0;
       temp_v5 = (unsigned int *)0x0;
-      FUN_00492c18(temp_v7,&temp_v4);
+      naviMainSetValuePair(temp_v7,&temp_v4);
       temp_v1 = 0;
       *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
       *(unsigned char *)(param_1 + 0x7b90) = 1;

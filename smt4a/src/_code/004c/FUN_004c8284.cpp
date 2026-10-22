@@ -1,45 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c8284` (_code @ 0x4c8284, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004c571c(...);
+s32 FUN_004c571c(u32 target, s32 command, u32 a, u32 b);
 
-/* Supplied declaration required: FUN_004c571c. */
-
-
-int FUN_004c8284(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+static __inline s32 absValue(s32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  if (param_2 == 0 || param_2 == 3) {
-    temp_v1 = FUN_004c571c(param_1,7);
-    if (temp_v1 < 0) {
-      temp_v1 = -temp_v1;
+    return value < 0 ? -value : value;
+}
+
+/* Runs the channel commands for `channel` (0, 1, 2, or 3 for all) and returns the sum of the
+ * magnitudes the query commands 7, 10 and 11 report. */
+s32 FUN_004c8284(u32 target, s32 channel, u32 a, u32 b)
+{
+    s32 total = 0;
+
+    if (channel == 0 || channel == 3) {
+        total += absValue(FUN_004c571c(target, 7, a, b));
+        FUN_004c571c(target, 8, a, b);
     }
-    FUN_004c571c(param_1,8,param_3,param_4);
-  }
-  if (param_2 == 1 || param_2 == 3) {
-    temp_v0 = FUN_004c571c(param_1,10,param_3,param_4);
-    if (temp_v0 < 0) {
-      temp_v0 = -temp_v0;
+    if (channel == 1 || channel == 3) {
+        total += absValue(FUN_004c571c(target, 10, a, b));
     }
-    temp_v1 = temp_v1 + temp_v0;
-  }
-  if (param_2 == 2 || param_2 == 3) {
-    temp_v0 = FUN_004c571c(param_1,0xb,param_3,param_4);
-    if (temp_v0 < 0) {
-      temp_v0 = -temp_v0;
+    if (channel == 2 || channel == 3) {
+        total += absValue(FUN_004c571c(target, 11, a, b));
+        FUN_004c571c(target, 9, a, b);
     }
-    temp_v1 = temp_v1 + temp_v0;
-    FUN_004c571c(param_1,9,param_3,param_4);
-  }
-  return temp_v1;
+    return total;
 }
 
 } /* extern "C" */

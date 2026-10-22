@@ -1,5 +1,5 @@
 /* When idle, queues the two pending ids on the active object and kicks it off (returns 0); otherwise reports whether the global state is 4. */
-#include "common.h"
+#include "battle/btlStage.h"
 
 extern "C" {
 
@@ -13,19 +13,14 @@ typedef struct {
     IdPair ids;        /* 0x178 */
 } ActiveObject;
 
-typedef struct {
-    u8 unk00[0xa0];    /* 0x00 */
-    s32 state;         /* 0xa0 */
-} StateMachine;
-
-extern StateMachine *g_btlStageModel;
+extern BtlStage *g_btlStageModel;
 
 ActiveObject *btlGetMainState(void);
 u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
-void FUN_004d88fc(StateMachine *machine, ActiveObject *object);
-void state4DStop(StateMachine *machine, ActiveObject *object);
-void state4DStart(StateMachine *machine);
+void FUN_004d88fc(BtlStage *machine, ActiveObject *object);
+void state4DStop(BtlStage *machine, ActiveObject *object);
+void state4DStart(BtlStage *machine);
 
 u8 FUN_00373c84(void)
 {

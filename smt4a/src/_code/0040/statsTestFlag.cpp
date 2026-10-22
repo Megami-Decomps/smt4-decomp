@@ -1,5 +1,5 @@
 /* NON_MATCHING: compiler combines the stats base and byte index before the 0x264 member offset. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" StatsFlagView *gameDataBlocksGetStats(void);
 

@@ -1,49 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00180118` (_code @ 0x180118, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Search-setup register scheduling differs; retail also lacks a symbol for the comparison callback at 0x165390. */
+#include "addon/aocMain.h"
+#include "addon/LookupRecord.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
+extern AocSystemA *g_aocSystem;
+extern u8 LAB_00165390;
+typedef s32 (*LookupComparator)(const void *, const void *);
+void *libc_bsearch(const void *key, u32 count, const void *entries, u32 stride,
+                   s32 (*compare)(const void *, const void *));
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-int dataTableGetCount(unsigned int);
-int dataTableGetEntries(void);
-
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern unsigned char LAB_00165390; /* 0x165390 */
-extern int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-
-
-void FUN_00180118(unsigned short param_1)
-
+// Prefer add-on table data, falling back to the base table's first entry for invalid IDs.
+Table01Record *FUN_00180118(u16 id)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  unsigned short temp_v1 [20];
-  
-  if (*(int *)(g_aocSystem + 0x368) != 0) {
-    puVar1 = temp_v1;
-    temp_v1[0] = param_1;
-    libc_bsearch(puVar1,*(unsigned int *)(g_aocSystem + 0x378),*(unsigned int *)(g_aocSystem + 0x374),
-                 0x28,&LAB_00165390);
-    if (puVar1 != (unsigned short *)0x0) {
-      return;
+    if (g_aocSystem->lookup.enabled) {
+        AocLookupRecord key;
+        key.id = id;
+        AocLookupRecord *entry = static_cast<AocLookupRecord *>(
+            libc_bsearch(&key, g_aocSystem->lookup.count, g_aocSystem->lookup.entries,
+                         sizeof(AocLookupRecord), reinterpret_cast<LookupComparator>(&LAB_00165390)));
+        if (entry != NULL)
+            return &entry->record;
     }
-  }
-  temp_v0 = dataTableGet(1);
-  dataTableGetEntries();
-  dataTableGetCount(temp_v0);
-  return;
+    void *table = dataTableGet(1, 1);
+    Table01Record *entries = static_cast<Table01Record *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    if (count > id)
+        return &entries[id];
+    return entries;
 }
-
-} /* extern "C" */
+}

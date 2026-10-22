@@ -18,7 +18,7 @@ extern s32 FUN_0034904c(void);
 extern s32 gameFlagIsSet(u32 id);
 extern void scrScriptProcessStartMappedEntry(StateObject *obj, const char *name);
 extern void FUN_002355ac(s32 arg);
-extern void FUN_00259258(void);
+extern void messageMainRequestBanner(void);
 extern void placeWinStartText(void);
 extern void buttonHelpSetPreset(s32 arg);
 extern void dataTable28Sub0GetRecord(void *display, s32 slot);
@@ -35,7 +35,7 @@ void FUN_00384800(StateObject *obj)
     if (gameFlagIsSet(0x24) != 0) {
         FUN_002355ac(1);
     }
-    FUN_00259258();
+    messageMainRequestBanner();
     scrScriptProcessStartMappedEntry(obj, "qc_start");
     dataTable28Sub0GetRecord(obj->display, obj->slot);
     placeWinStartText();

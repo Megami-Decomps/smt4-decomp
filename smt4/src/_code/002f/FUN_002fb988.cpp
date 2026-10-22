@@ -48,7 +48,7 @@ extern signed char DAT_0049fce8; /* 0x49fce8 */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern unsigned int FUN_00256540(void);
-extern int FUN_0025a140(unsigned int, unsigned int);
+extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0026413c. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f958. */
@@ -228,7 +228,7 @@ void FUN_002fb988(int param_1)
     *(float *)(temp_v2 + 0x34) = temp_v7;
     *(int *)(temp_v2 + 0x38) = (int)((unsigned long long)temp_v9 >> 0x20);
     *(int *)(temp_v2 + 0x3c) = (int)temp_v9;
-    temp_v2 = FUN_0025a140(2,5);
+    temp_v2 = unitGroupHasFlag(2,5);
     if ((temp_v2 != 0) && (!temp_v5)) {
       temp_v8 = temp_v7;
       mathDistanceBetweenPoints();

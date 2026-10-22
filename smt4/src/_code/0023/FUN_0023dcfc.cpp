@@ -1,53 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023dcfc` (_code @ 0x23dcfc, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0023dcfc(unsigned int param_1)
-
+/* Returns the limit for parameter kind `kind` (0 for unknown kinds). */
+u32 FUN_0023dcfc(u32 kind)
 {
-  switch(param_1) {
-  case 0:
-  case 1:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-    return 0x7f;
-  case 2:
-    return 0xffff;
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xd:
-    return 3;
-  case 0xc:
-  case 0x15:
-  case 0x1a:
-    return 2;
-  case 0xe:
-  case 0xf:
-  case 0x10:
-  case 0x11:
-  case 0x12:
-  case 0x13:
-  case 0x14:
-    return 1;
-  case 0x16:
-  case 0x17:
-  case 0x18:
-  case 0x19:
-  case 0x1b:
-  case 0x1c:
-  case 0x1d:
-    return 99;
-  default:
-    return 0;
-  }
+    u32 limit = 0;
+
+    switch (kind) {
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+        limit = 0x7f;
+        break;
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 13:
+        limit = 3;
+        break;
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+        limit = 1;
+        break;
+    case 12:
+    case 21:
+    case 26:
+        limit = 2;
+        break;
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 27:
+    case 28:
+    case 29:
+        limit = 99;
+        break;
+    case 2:
+        limit = 0xffff;
+        break;
+    }
+    return limit;
 }
 
 } /* extern "C" */

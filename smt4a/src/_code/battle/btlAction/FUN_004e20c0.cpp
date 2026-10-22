@@ -9,7 +9,7 @@ int FUN_003e77cc(...);
 int FUN_003f0254(...);
 int FUN_003f06b4(...);
 int FUN_004c14c8(void);
-int FUN_004c579c(void);
+int battleRecordUnitMaskHistoryEvents(void);
 int FUN_004c5848(void);
 int FUN_004c5ec0(void);
 int FUN_004d7a60(...);
@@ -268,7 +268,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 extern int FUN_004c52ec(void);
 /* Supplied declaration required: FUN_004c53fc. */
 /* Supplied declaration required: FUN_004c571c. */
-/* Supplied declaration required: FUN_004c579c. */
+/* Supplied declaration required: battleRecordUnitMaskHistoryEvents. */
 /* Supplied declaration required: FUN_004c5848. */
 /* Supplied declaration required: FUN_004c5ec0. */
 /* Supplied declaration required: btlSelectActionTier. */
@@ -289,7 +289,7 @@ extern int btlUnitGetSkillValue(int);
 extern int FUN_004f6478(int);
 /* Supplied declaration required: resolveBattleValue. */
 extern int FUN_004f7aa4(int, unsigned int);
-extern int FUN_004f8054(int);
+extern int btlFindEffectValueByNamePrefix(int);
 /* Supplied declaration required: btlSelectionGetUsableUnit. */
 extern int FUN_004f9a20(int);
 extern int FUN_004f9ae4(int, unsigned int);
@@ -1045,7 +1045,7 @@ LAB_004e34b8:
     temp_v26 = btlEffectFindSlotId(g_btlAux);
     temp_v5 = FUN_004f9ae4(g_btlAux,1);
     temp_v25 = (unsigned int *)(temp_v5 + temp_v85 + temp_v12);
-    temp_v5 = FUN_004f8054(g_btlAux);
+    temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
     temp_v8 = temp_v5 + temp_v85 + temp_v12;
     temp_v5 = btlSelectionGetUsableUnit(g_btlAux);
     temp_v21 = (unsigned int *)(temp_v5 + temp_v85 + temp_v12);
@@ -1505,7 +1505,7 @@ LAB_004e45bc:
       temp_v5 = temp_v5 * param_11;
       temp_v8 = btlEffectFindSlotId(g_btlAux);
       temp_v9 = FUN_004f9ae4(g_btlAux,1);
-      temp_v10 = FUN_004f8054(g_btlAux);
+      temp_v10 = btlFindEffectValueByNamePrefix(g_btlAux);
       temp_v27 = 0;
       temp_v28 = 0;
       temp_v29 = 1;
@@ -1558,9 +1558,9 @@ LAB_004e45bc:
         }
         else {
           temp_v18 = btlEffectFindSlotId(g_btlAux);
-          temp_v5 = FUN_004f8054(g_btlAux);
+          temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
           temp_v5 = temp_v5 + temp_v48;
-          temp_v8 = FUN_004f8054(g_btlAux);
+          temp_v8 = btlFindEffectValueByNamePrefix(g_btlAux);
           FUN_004fb5dc(temp_v8 + temp_v48 + temp_v12,param_2,temp_v108,
                        *(int *)(*param_1 + 0x1ed4) + param_8 * 0x1d0,temp_v5 + temp_v12,temp_v18);
         btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,param_8,temp_v48,10,0xf);
@@ -1684,7 +1684,7 @@ LAB_004e4b94:
           if ((*temp_v21 & DAT_00571170) != 0 || (temp_v21[1] & DAT_00571174) != 0) {
             btlReflectCreateKind41(0,param_2,1);
           }
-          temp_v5 = FUN_004f8054(g_btlAux);
+          temp_v5 = btlFindEffectValueByNamePrefix(g_btlAux);
           temp_v13 = temp_v5 + temp_v48 + temp_v12;
           if ((int)temp_v13 <= (int)param_2[7]) {
             temp_v13 = param_2[7];
@@ -1727,7 +1727,7 @@ LAB_004e4cac:
     temp_v8 = btlEffectFindSlotId(g_btlAux);
     temp_v10 = temp_v8 + temp_v5 + temp_v12;
     temp_v8 = FUN_004f9ae4(g_btlAux,1);
-    temp_v9 = FUN_004f8054(g_btlAux);
+    temp_v9 = btlFindEffectValueByNamePrefix(g_btlAux);
     temp_v24 = temp_v9 + temp_v5 + temp_v12;
     temp_v27 = 0;
     temp_v22 = (unsigned int *)0xffffffff;
@@ -1824,7 +1824,7 @@ LAB_004e4cac:
     }
   }
   if (param_8 < 0x6d) {
-    FUN_004c579c();
+    battleRecordUnitMaskHistoryEvents();
   }
   if (temp_v6 == 1) {
     temp_v12 = g_btlAux;

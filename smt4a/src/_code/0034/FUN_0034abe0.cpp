@@ -93,7 +93,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_0020caec. */
-extern unsigned int *FUN_0022e9b8(void);
+extern unsigned int *uniteGetWork(void);
 extern int FUN_0026140c(void);
 extern int recordGetModeForId(int);
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
@@ -149,7 +149,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   temp_v18 = param_3;
   temp_v19 = param_4;
-  puVar2 = (unsigned int *)FUN_0022e9b8();
+  puVar2 = (unsigned int *)uniteGetWork();
   if (puVar2 == (unsigned int *)0x0) {
     return;
   }

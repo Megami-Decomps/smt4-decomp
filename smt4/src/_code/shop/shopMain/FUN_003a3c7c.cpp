@@ -16,8 +16,8 @@ int FUN_002328b4(void);
 int FUN_00233240(int, int);
 int FUN_00233818(int);
 int ifTouchRegionClearAll(unsigned int);
-int FUN_00296e90(void);
-int FUN_00297050(int);
+int messageMainFinishWindow(void);
+int messageMainSetEnabled(int);
 int messageTargetSetValue(int);
 int FUN_0029ee6c(int, int);
 int ifTouchRegionRemove(void);
@@ -48,9 +48,9 @@ extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 extern int FUN_0028fb3c(unsigned short);
-/* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_00297050. */
-extern int FUN_0029d65c(int);
+/* Supplied declaration required: messageMainFinishWindow. */
+/* Supplied declaration required: messageMainSetEnabled. */
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -71,12 +71,12 @@ void FUN_003a3c7c(int param_1)
       *(unsigned int *)(param_1 + 4) = 3;
       *(unsigned int *)(param_1 + 8) = 0;
       FUN_0029ee6c(0,0x323232ff);
-      FUN_00297050(1);
+      messageMainSetEnabled(1);
       return;
     }
   }
   else {
-    FUN_00297050(0);
+    messageMainSetEnabled(0);
     scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
     messageTargetSetValue(0);
     temp_v1 = FUN_0022fbc0(param_1);
@@ -95,14 +95,14 @@ void FUN_003a3c7c(int param_1)
       return;
     }
     temp_v1 = inputIsQuestRepeatRight();
-    if ((temp_v1 != 0) || (temp_v1 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4c)), temp_v1 == 6)) {
+    if ((temp_v1 != 0) || (temp_v1 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4c)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0x864) = *(unsigned int *)(*(int *)(param_1 + 0x864) * 8 + 0x44e020);
       FUN_0022fcb8(param_1,1);
       FUN_0022faf8();
       return;
     }
     temp_v1 = inputIsQuestRepeatLeft();
-    if ((temp_v1 != 0) || (temp_v1 = FUN_0029d65c((int)*(short *)(param_1 + 0x15d4e)), temp_v1 == 6)) {
+    if ((temp_v1 != 0) || (temp_v1 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x15d4e)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0x864) = *(unsigned int *)(*(int *)(param_1 + 0x864) * 8 + 0x44e024);
       FUN_0022fcb8(param_1,1);
       FUN_0022faf8();
@@ -113,7 +113,7 @@ void FUN_003a3c7c(int param_1)
       FUN_00230df0(0);
       FUN_00232848();
       FUN_00233240(param_1 + 0x3a8,1);
-      FUN_00296e90();
+      messageMainFinishWindow();
       if (*(char *)(param_1 + 0x14) == '\x01') {
         *(unsigned int *)(param_1 + 0x15d60) = 1;
       }

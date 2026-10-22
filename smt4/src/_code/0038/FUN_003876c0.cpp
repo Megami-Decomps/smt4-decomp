@@ -1,69 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003876c0` (_code @ 0x3876c0, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W8X15_PackageList.h"
 
 extern "C" {
-
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-extern int FUN_002ac12c(unsigned int);
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(unsigned int);
-
-
-int FUN_003876c0(int param_1,int param_2)
-
+/* Returns the index-th record (8 bytes each) across every '#' data table file of the loaded
+ * packages, or NULL past the end. */
+u8 *FUN_003876c0(PackageList *list, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  
-  temp_v5 = 0;
-  temp_v7 = 0;
-  if (temp_v7 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v6 = *(int *)(param_1 + 0x318) + temp_v7 * 0x50;
-      temp_v0 = FUN_002ac12c(temp_v6);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v6;
-        FUN_002ac0f8();
-        temp_v2 = temp_v6;
-        FUN_002ac0c4();
-        temp_v4 = 0;
-        if (temp_v4 < temp_v2) {
-          do {
-            if (*(char *)(temp_v1 + temp_v4 * 0x40) == '#') {
-              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10),0);
-              temp_v0 = dataTableGetCount();
-              if (param_2 <= temp_v0 + temp_v5) {
-                temp_v7 = dataTableGetEntries(temp_v3);
-                return temp_v7 + (param_2 - temp_v5) * 8;
-              }
-              temp_v5 = temp_v5 + temp_v0 + temp_v5;
+    s32 total = 0;
+    for (s32 i = 0; i < list->count; i++) {
+        PackageEntry *entry = &list->entries[i];
+        if (FUN_002ac12c(entry) != 0) {
+            char (*names)[0x40] = FUN_002ac0f8(entry);
+            u32 fileCount = FUN_002ac0c4(entry);
+            for (u32 j = 0; j < fileCount; j++) {
+                if (names[j][0] == '#') {
+                    void *table = dataTableFileGetTable(entry->files[j].fileId, 0);
+                    s32 end = dataTableGetCount(table) + total;
+                    if (end >= index) {
+                        return dataTableGetEntries(table) + (index - total) * 8;
+                    }
+                    total += end;
+                }
             }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < temp_v2);
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < *(int *)(param_1 + 0x310));
-  }
-  return 0;
+    }
+    return NULL;
 }
-
-} /* extern "C" */
+}

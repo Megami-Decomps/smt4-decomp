@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_001849bc(int, unsigned int, int, int, int, unsigned int, int *);
 int dataTable00FindById(void);
-int FUN_003a7a88(unsigned int, int);
+int devilIsTextureLoaded(unsigned int, int);
 int FUN_00471a04(unsigned int, unsigned int, int, unsigned int, int, int, unsigned int, int);
 
 /* stack frame of param_9: 9 slot(s), 36 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned short *FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001849bc. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 extern int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00471a04. */
 
@@ -94,7 +94,7 @@ void FUN_003bb50c(unsigned int param_1,int param_2,int param_3,unsigned int para
     }
   }
   temp_v1 = param_1;
-  FUN_003a7a88(param_1,param_5);
+  devilIsTextureLoaded(param_1,param_5);
   if (temp_v1 != 0) {
     temp_v0 = recordPrepareLinkedOwner(g_aocSystem,temp_v3,temp_v2);
     if (temp_v0 == 0) {

@@ -14,7 +14,7 @@ extern MapMainState *g_mapMain;
 extern AocSystemA *g_aocSystem;
 void FUN_001695a0();
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-s32 FUN_0046e08c(AocSystemA *system, u32 id, s32 flags);
+s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
 void *aocDrawText7(AocSystemA *system, u32 id, s32 flags);
 void *aocDrawText8(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
@@ -33,7 +33,7 @@ u32 mapStartEventScript()
     FUN_001695a0();
     textFormatBuffer(scriptPath, "event/e%03d/e%03d.bf", map->eventId, map->eventId);
     textFormatBuffer(messagePath, "event/e%03d/e%03d.mbm", map->eventId, map->eventId);
-    if (FUN_0046e08c(g_aocSystem, map->eventId, 0)) {
+    if (aocPackageGrantsItem(g_aocSystem, map->eventId, 0)) {
         map->script = aocDrawText7(g_aocSystem, map->eventId, 0);
         map->messages = aocDrawText8(g_aocSystem, map->eventId, 0);
         if (map->script == NULL || map->messages == NULL) {

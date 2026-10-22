@@ -1,63 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b4ddc` (_code @ 0x1b4ddc, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail vldr s0, [pc, #116] differs from recovered vldr s0, [pc, #120]. */
+#include "common.h"
+#include <string.h>
+
+struct Float4LocalView {
+    f32 unk00; // 0x00
+    f32 unk04; // 0x04
+    f32 unk08; // 0x08
+    f32 unk0C; // 0x0C
+};
+
+struct PolyDefaultsLocalView {
+    Float4LocalView unk00; // 0x00
+    Float4LocalView unk10; // 0x10
+    Float4LocalView unk20; // 0x20
+    u8 unk30[0x10];        // 0x30
+    Float4LocalView unk40; // 0x40
+    Float4LocalView unk50; // 0x50
+    f32 unk60;            // 0x60
+    s32 unk64;            // 0x64
+    u32 unk68;            // 0x68
+    u8 unk6C[8];          // 0x6C
+    f32 unk74;            // 0x74
+    u8 unk78[8];          // 0x78
+};
 
 extern "C" {
+void sysMemClear(void *destination, u32 size);
+extern Float4LocalView g_polyDefaultColor;
 
-int sysMemClear(unsigned int *, int);
-
-extern unsigned int g_polyDefaultColor; /* 0x5c1100 */
-extern unsigned int DAT_005c1104; /* 0x5c1104 */
-extern unsigned int DAT_005c1108; /* 0x5c1108 */
-extern unsigned int DAT_005c110c; /* 0x5c110c */
-
-/* Supplied declaration required: sysMemClear. */
-
-
-void FUN_001b4ddc(unsigned int *param_1)
-
+// Clear the record and initialize its default vectors, color, and scalars.
+void FUN_001b4ddc(PolyDefaultsLocalView *record)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  sysMemClear(param_1,0x80);
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[3] = 0x3f800000;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[7] = 0x3f800000;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x13] = 0x3f800000;
-  param_1[0x11] = 0x40a00000;
-  param_1[0x14] = 0;
-  param_1[0x15] = 0;
-  param_1[0x16] = 0;
-  param_1[0x17] = 0;
-  param_1[0x17] = 0x3f800000;
-  temp_v3 = DAT_005c110c;
-  temp_v2 = DAT_005c1108;
-  temp_v1 = DAT_005c1104;
-  temp_v0 = g_polyDefaultColor;
-  param_1[0x18] = 0x3f800000;
-  param_1[0x1d] = 0x3f800000;
-  param_1[8] = temp_v0;
-  param_1[9] = temp_v1;
-  param_1[10] = temp_v2;
-  param_1[0xb] = temp_v3;
-  param_1[0x19] = 0xffffffff;
-  param_1[0x1a] = 0x80;
-  return;
-}
+    sysMemClear(record, 0x80);
 
-} /* extern "C" */
+    memset(&record->unk00, 0, sizeof(record->unk00));
+    record->unk00.unk0C = 1.0f;
+
+    memset(&record->unk10, 0, sizeof(record->unk10));
+    record->unk10.unk0C = 1.0f;
+
+    memset(&record->unk40, 0, sizeof(record->unk40));
+    record->unk40.unk0C = 1.0f;
+    record->unk40.unk04 = 5.0f;
+
+    memset(&record->unk50, 0, sizeof(record->unk50));
+    record->unk50.unk0C = 1.0f;
+
+    record->unk60 = 1.0f;
+    record->unk74 = 1.0f;
+    record->unk20 = g_polyDefaultColor;
+    record->unk64 = -1;
+    record->unk68 = 0x80;
+}
+}

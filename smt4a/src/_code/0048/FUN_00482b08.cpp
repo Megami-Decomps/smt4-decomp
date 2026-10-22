@@ -6,13 +6,13 @@ extern "C" {
 
 int asdOperatorNew(void);
 int FUN_00481b3c(void);
-int FUN_00482610(unsigned int, unsigned int);
+int callbackCreateControllerForKind(unsigned int, unsigned int);
 int FUN_00482a5c(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00481b3c. */
-/* Supplied declaration required: FUN_00482610. */
+/* Supplied declaration required: callbackCreateControllerForKind. */
 /* Supplied declaration required: FUN_00482a5c. */
 
 
@@ -58,7 +58,7 @@ unsigned int FUN_00482b08(int param_1,int param_2,unsigned int param_3)
     *(int *)(param_1 + temp_v1 * 4 + 0x18) = temp_v0;
   }
   temp_v1 = param_1 + temp_v1 * 4;
-  FUN_00482610(*(unsigned int *)(temp_v1 + 0x18),param_3);
+  callbackCreateControllerForKind(*(unsigned int *)(temp_v1 + 0x18),param_3);
   (**(romwright_code **)(**(int **)(temp_v1 + 0x18) + 8))();
   (**(romwright_code **)(**(int **)(*(int *)(temp_v1 + 0x18) + 0x74) + 8))();
   *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;

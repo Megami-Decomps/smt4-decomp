@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int FUN_004b726c(...);
 
 int textFormatBuffer(unsigned char [32], unsigned char *, int);
@@ -40,7 +40,7 @@ extern int DAT_0058800c; /* 0x58800c */
 /* Supplied declaration required: dialogClose. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: moveCameraCtrlCreateEntry. */
@@ -199,7 +199,7 @@ void FUN_004b7e20(int param_1)
       DAT_0058800c = 0;
       FUN_002bf4f4(1);
       dialogOpen(0);
-      FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),
+      infoWinSetText(*(unsigned int *)(param_1 + 0x113c),
                    *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       return;
     }
@@ -230,7 +230,7 @@ void FUN_004b7e20(int param_1)
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0x28) = 5;
   dialogOpen(0);
-  FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),*(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
+  infoWinSetText(*(unsigned int *)(param_1 + 0x113c),*(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
   ;
   DAT_0058800c = 0;
   *(unsigned char *)(param_1 + 0xa8a) = 0;

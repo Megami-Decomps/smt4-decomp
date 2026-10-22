@@ -1,66 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a640` (_code @ 0x40a640, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps one gameDataBlocksGetStats call and selects the record out of line after it; this build duplicates the call into the kind branches. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable18Sub0GetCount(void);
-int dataTable18Sub0GetEntries(void);
+typedef struct StatResetEntry {
+    /* 0x00 */ u8 group;      /* 1-based */
+    /* 0x01 */ u8 kind;       /* 0 = normal record, 1 = special record */
+    /* 0x02 */ u16 index;
+    /* 0x04 */ u8 unk04[0x90];
+} StatResetEntry;
 
-extern int gameDataBlocksGetStats(void);
-/* Supplied declaration required: dataTable18Sub0GetCount. */
-/* Supplied declaration required: dataTable18Sub0GetEntries. */
+typedef struct StatRecord {
+    /* 0x00 */ u16 count;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 level : 5;
+    u8 unk03_5 : 3;
+} StatRecord;
 
+typedef struct StatBlock {
+    /* 0x000 */ u8 unk000[0x1c];
+    /* 0x01C */ StatRecord normal[12][7];
+    /* 0x16C */ StatRecord special[1][2];
+} StatBlock;
 
-void FUN_0040a640(int param_1)
+StatResetEntry *dataTable18Sub0GetEntries(void);
+s32 dataTable18Sub0GetCount(void);
+StatBlock *gameDataBlocksGetStats(void);
 
+/* Clears the count and level of the stat record each table-18 entry names. */
+void FUN_0040a640(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned short *puVar3;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  dataTable18Sub0GetEntries();
-  temp_v1 = param_1;
-  dataTable18Sub0GetCount();
-  temp_v3 = 0;
-  if (temp_v3 < temp_v1) {
-    do {
-      temp_v2 = param_1 + temp_v3 * 0x94;
-      temp_v4 = (unsigned int)*(unsigned char *)(param_1 + temp_v3 * 0x94);
-      temp_v0 = *(char *)(temp_v2 + 1);
-      temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 2);
-      if (temp_v0 != '\0') {
-        if (temp_v5 == 6) {
-          temp_v5 = 0;
+    StatResetEntry *entries = dataTable18Sub0GetEntries();
+    s32 count = dataTable18Sub0GetCount();
+
+    for (s32 i = 0; i < count; i++) {
+        u8 group = entries[i].group;
+        u8 kind = entries[i].kind;
+        u32 index = entries[i].index;
+        if (kind != 0) {
+            if (index == 6) {
+                index = 0;
+            } else if (index == 7) {
+                index = 1;
+            }
+        } else if (index == 7) {
+            index = 6;
         }
-        else if (temp_v5 == 7) {
-          temp_v5 = 1;
+
+        StatBlock *stats = gameDataBlocksGetStats();
+        StatRecord *record;
+        if (kind == 0) {
+            record = &stats->normal[group - 1][index];
+        } else if (kind == 1) {
+            record = &stats->special[group - 1][index];
+        } else {
+            record = NULL;
         }
-      }
-      else if (temp_v5 == 7) {
-        temp_v5 = 6;
-      }
-      temp_v2 = gameDataBlocksGetStats();
-      if (temp_v0 != '\0') {
-        puVar3 = (unsigned short *)0x0;
-        if (temp_v0 == '\x01') {
-          puVar3 = (unsigned short *)(temp_v2 + ((temp_v4 * 2 - 2) + temp_v5) * 4 + 0x16c);
-        }
-      }
-      else {
-        puVar3 = (unsigned short *)(temp_v2 + ((temp_v4 - 1) * 7 + temp_v5) * 4 + 0x1c);
-      }
-      temp_v3 = temp_v3 + 1;
-      *puVar3 = 0;
-      *(unsigned char *)((int)puVar3 + 3) = *(unsigned char *)((int)puVar3 + 3) & 0xe0;
-    } while (temp_v3 < temp_v1);
-  }
-  return;
+        record->count = 0;
+        record->level = 0;
+    }
 }
 
 } /* extern "C" */

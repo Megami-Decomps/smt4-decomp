@@ -32,7 +32,7 @@ int messageDismissNumericBanner(...);
 int scrCommResetPanel(void);
 int FUN_003d2158(...);
 int FUN_00408184(...);
-int FUN_004808c0(...);
+int gameScaleCategoryAmount(...);
 int flagValueAdd(...);
 
 int FUN_0014afd0(int);
@@ -50,12 +50,12 @@ int messageSlotSet(int);
 int FUN_00295108(...);
 int FUN_002b5e08(int, int *, unsigned char *, unsigned int *);
 int blockResetAxis(...);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 int FUN_0033ab1c(int, int);
 int FUN_003774e8(int, unsigned char *, unsigned char *, unsigned int *);
 int FUN_003799d0(void);
 int FUN_0037c8e4(...);
-int FUN_00398258(...);
+int mapIfStartNavigation(...);
 int FUN_003a6b10(...);
 int FUN_003ca244(void);
 int sysPlayVoice(...);
@@ -150,7 +150,7 @@ extern int FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00312714. */
 /* Supplied declaration required: mapJobIsDone. */
 /* Supplied declaration required: mapMainStartEntry. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_0033ab1c. */
@@ -168,7 +168,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: messageDismissNumericBanner. */
-/* Supplied declaration required: FUN_00398258. */
+/* Supplied declaration required: mapIfStartNavigation. */
 extern int dataTable20FindAddonRecord(unsigned short);
 extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: FUN_003a6b10. */
@@ -179,7 +179,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_004808c0. */
+/* Supplied declaration required: gameScaleCategoryAmount. */
 /* Supplied declaration required: FUN_00480a54. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: partyAddMoneyClamped. */
@@ -239,7 +239,7 @@ unsigned int FUN_002991d4(void)
       if (*(int *)(temp_v4 + 0xc) != 3) {
         return 0;
       }
-      FUN_00313648(0x28);
+      mapSetSceneState(0x28);
       return 0;
     }
     loadSlotEnsureLoaded(0x21);
@@ -557,7 +557,7 @@ LAB_00299e1c:
                 if (temp_v11 != 0) {
                   temp_v17[0] = 1;
                   temp_v17[1] = 0;
-                  FUN_00398258(0xaf,&LAB_0029a23c,0);
+                  mapIfStartNavigation(0xaf,&LAB_0029a23c,0);
                   temp_v12 = FUN_00152f44();
                   temp_v11 = randRange(99);
                   if (temp_v11 < 0x21) {
@@ -578,7 +578,7 @@ LAB_00299e1c:
               else {
                 temp_v17[0] = 1;
                 temp_v17[1] = 0;
-                FUN_00398258(0xaf,&LAB_0029a23c,0);
+                mapIfStartNavigation(0xaf,&LAB_0029a23c,0);
                 temp_v12 = FUN_00152f44();
                 temp_v11 = randRange(99);
                 if (temp_v11 < 0x21) {
@@ -616,7 +616,7 @@ LAB_0029a094:
             temp_v11 = (int)*(short *)(temp_v11 + 0x5f1df8);
             FUN_00480a54();
             if (temp_v6 != 0) {
-              FUN_004808c0(temp_v6 & 0xff,temp_v11);
+              gameScaleCategoryAmount(temp_v6 & 0xff,temp_v11);
               temp_v8 = temp_v4 + temp_v6 * 4;
               *(unsigned int *)(temp_v8 + 0xd0) = 1;
               *(int *)(temp_v8 + 0xe4) = *(int *)(temp_v8 + 0xe4) + temp_v11;
@@ -1064,7 +1064,7 @@ LAB_002993c0:
     if (*(int *)(g_mapDepart + 0xc) == 3) {
       DAT_005f1614 = 0;
       DAT_005f19eb = 0;
-      FUN_00313648(1);
+      mapSetSceneState(1);
     }
     dataTableFree(0x21);
     asdTMTexTableReleaseNode(4);

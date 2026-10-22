@@ -28,7 +28,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00232698. */
-extern fn_00296ee0_arg0 *FUN_00296e90(void);
+extern fn_00296ee0_arg0 *messageMainFinishWindow(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: memClear. */
 
@@ -50,7 +50,7 @@ int FUN_00296ee0(fn_00296ee0_arg0 *param_1,int param_2,unsigned int param_3,unsi
   if (param_2 != 2) {
     pfVar3 = param_1;
     if (param_2 == 4 || param_2 == 5) {
-      pfVar3 = (fn_00296ee0_arg0 *)FUN_00296e90();
+      pfVar3 = (fn_00296ee0_arg0 *)messageMainFinishWindow();
       param_1->field_0x658 = 0;
     }
     return (int)pfVar3;

@@ -7,7 +7,7 @@ typedef struct Record {
     /* 0x23 */ u8 kind;
 } Record;
 
-extern Record *FUN_00186f58(s32 id);
+extern Record *dataFindKeyedRecordWithOverrides(s32 id);
 extern int FUN_0017ffa8(int a, int b, u32 message, u32 arg0, u32 arg1, u32 arg2);
 
 /* Shows the message (0x411-0x416) for the record's kind, passing the three arguments on. */
@@ -15,7 +15,7 @@ void FUN_00168470(s32 id, u32 arg0, u32 arg1, u32 arg2)
 {
     u32 message = 0;
 
-    switch (FUN_00186f58(id)->kind) {
+    switch (dataFindKeyedRecordWithOverrides(id)->kind) {
     case 0:
         message = 0x411;
         break;

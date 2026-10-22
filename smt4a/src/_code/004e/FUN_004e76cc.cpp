@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_004c579c(...);
+int battleRecordUnitMaskHistoryEvents(...);
 int btlSelectActionTier(void);
 int FUN_004e5f2c(...);
 int FUN_004e62b4(...);
@@ -45,7 +45,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 
 extern int gameFlagIsSet(unsigned int);
 extern int btlScriptUnitHasFlags(int);
-/* Supplied declaration required: FUN_004c579c. */
+/* Supplied declaration required: battleRecordUnitMaskHistoryEvents. */
 /* Supplied declaration required: btlSelectActionTier. */
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: FUN_004e62b4. */
@@ -117,7 +117,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
       temp_v2 = 1;
     }
     FUN_004fbd5c(0x1e,param_2,(int)*(short *)(param_2[8] + 0x6e));
-    FUN_004c579c((int)*(short *)(param_2[9] + 0x6a));
+    battleRecordUnitMaskHistoryEvents((int)*(short *)(param_2[9] + 0x6a));
   }
   FUN_004e5f2c(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),-param_3);
   temp_v0 = FUN_004e83ac(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a));

@@ -1,5 +1,6 @@
 /* NON_MATCHING: timed-close state constants use r1/r0 instead of retail's r2/r1. */
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
+extern "C" PartyPanelState *g_partyPanel;
 
 struct InfoWindowUpdateState {
     /* 0x00 */ u8 unk00[8];

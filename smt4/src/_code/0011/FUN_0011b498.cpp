@@ -1,51 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011b498` (_code @ 0x11b498, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the command cursor to r5 and passes r5 (mov r1, r5); built passes r0 directly */
+#include "shard/W6_W6Match5_ShaderBinding.h"
 
 extern "C" {
 
-int FUN_00126d14(int);
-int FUN_002af390(int, int);
-int FUN_002b5cf0(int, int);
-int FUN_002b7148(void);
-int nn_gr_CTR_Shader_SearchBindSymbol(...);
-int nn_gr_CTR_Shader_SetupBinary(int, unsigned int, unsigned int, unsigned int);
+typedef struct {
+    u8 unk0[0x128];
+    const void *binary;            /* 0x00128 */
+    u8 ready;                      /* 0x0012c */
+    u8 unk12d[0x138 - 0x12d];
+    NativeShaderPrefix shader;     /* 0x00138 */
+    u8 unk139[0x12a20 - 0x139];
+    ShaderBindSymbol aPosition;    /* 0x12a20 */
+    ShaderBindSymbol aTexCoord;    /* 0x12a28 */
+    ShaderBindSymbol aColor;       /* 0x12a30 */
+    ShaderBindSymbol uMatrix;      /* 0x12a38 */
+    ShaderBindSymbol uMaterialColor; /* 0x12a40 */
+} ModelShader;
 
-extern unsigned char LAB_0011b560; /* 0x11b560 */
-extern unsigned char LAB_0011b56c; /* 0x11b56c */
-extern unsigned char LAB_0011b574; /* 0x11b574 */
+void *FUN_002b7148(void);
+void nn_gr_CTR_Shader_SetupBinary(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
+void *FUN_002b5cf0(NativeShaderPrefix *shader, void *cursor);
+void FUN_002af390(void *begin, void *end);
+void FUN_00126d14(ModelShader *owner);
 
-/* Supplied declaration required: FUN_00126d14. */
-/* Supplied declaration required: FUN_002af390. */
-/* Supplied declaration required: FUN_002b5cf0. */
-/* Supplied declaration required: FUN_002b7148. */
-/* Supplied declaration required: nn_gr_CTR_Shader_SearchBindSymbol. */
-/* Supplied declaration required: nn_gr_CTR_Shader_SetupBinary. */
+extern const char DAT_00410688[]; /* "uMatrix" */
+extern const char DAT_00410678[]; /* "uMaterialColor" */
 
-
-unsigned int FUN_0011b498(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Loads the shader binary, binds its attribute and uniform symbols and commits the shader setup commands. */
+s32 FUN_0011b498(ModelShader *owner, const void *binary, u32 unused, s32 size)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  FUN_002b7148();
-  nn_gr_CTR_Shader_SetupBinary(param_1 + 0x138,param_2,param_4,0xffffffff);
-  *(unsigned int *)(param_1 + 0x128) = param_2;
-  *(unsigned char *)(param_1 + 300) = 0;
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a20,&LAB_0011b560);
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a30,&LAB_0011b56c);
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a28,&LAB_0011b574);
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a38,"uMatrix");
-  temp_v0 = param_1 + 0x138;
-  nn_gr_CTR_Shader_SearchBindSymbol(temp_v0,param_1 + 0x12a40,"uMaterialColor");
-  FUN_002b7148();
-  temp_v1 = param_1 + 0x138;
-  FUN_002b5cf0(temp_v1,temp_v0);
-  FUN_002af390(temp_v0,temp_v1);
-  FUN_00126d14(param_1);
-  return 1;
+
+    void *begin;
+    void *end;
+
+    FUN_002b7148();
+    nn_gr_CTR_Shader_SetupBinary(&owner->shader, binary, size, -1);
+    owner->binary = binary;
+    owner->ready = 0;
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aPosition, "aPosition");
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aColor, "aColor");
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aTexCoord, "aTexCoord");
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMatrix, DAT_00410688);
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMaterialColor, DAT_00410678);
+    begin = FUN_002b7148();
+    end = FUN_002b5cf0(&owner->shader, begin);
+    FUN_002af390(begin, end);
+    FUN_00126d14(owner);
+    return 1;
 }
 
 } /* extern "C" */

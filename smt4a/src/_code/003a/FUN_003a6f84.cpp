@@ -1,46 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6f84` (_code @ 0x3a6f84, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_003a6f84(unsigned int param_1)
-
+/* Maps a kind (0-17) to its display index; unknown kinds and kind 4 map to 0. */
+u32 FUN_003a6f84(u32 kind)
 {
-  switch(param_1) {
-  case 0:
-    return 0xe;
-  case 1:
-  case 2:
-    return 7;
-  case 3:
-    return 8;
-  default:
-    return 0;
-  case 5:
-    return 1;
-  case 6:
-    return 2;
-  case 7:
-    return 3;
-  case 8:
-    return 5;
-  case 9:
-    return 6;
-  case 10:
-  case 0xb:
-    return 4;
-  case 0xc:
-  case 0xd:
-    return 9;
-  case 0xe:
-  case 0xf:
-    return 10;
-  case 0x10:
-  case 0x11:
-    return 0xb;
-  }
+    u32 index = 0;
+
+    switch (kind) {
+    case 0:
+        index = 14;
+        break;
+    case 1:
+    case 2:
+        index = 7;
+        break;
+    case 3:
+        index = 8;
+        break;
+    case 5:
+        index = 1;
+        break;
+    case 6:
+        index = 2;
+        break;
+    case 7:
+        index = 3;
+        break;
+    case 8:
+        index = 5;
+        break;
+    case 9:
+        index = 6;
+        break;
+    case 10:
+    case 11:
+        index = 4;
+        break;
+    case 12:
+    case 13:
+        index = 9;
+        break;
+    case 14:
+    case 15:
+        index = 10;
+        break;
+    case 16:
+    case 17:
+        index = 11;
+        break;
+    }
+    return index;
 }
 
 } /* extern "C" */

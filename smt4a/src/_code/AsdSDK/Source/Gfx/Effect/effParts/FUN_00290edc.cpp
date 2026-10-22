@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
-int FUN_00272204(unsigned int *, int, unsigned int, int);
+int effBlockCopyDataB(unsigned int *, int, unsigned int, int);
 int rt_memcpy(unsigned int, int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00272204. */
+/* Supplied declaration required: effBlockCopyDataB. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -82,7 +82,7 @@ unsigned int * FUN_00290edc(unsigned int *param_1)
     else {
       temp_v3 = 0;
     }
-    FUN_00272204(puVar3,temp_v3,param_1[9],*(unsigned short *)(param_1 + 7));
+    effBlockCopyDataB(puVar3,temp_v3,param_1[9],*(unsigned short *)(param_1 + 7));
   }
   return puVar3;
 }

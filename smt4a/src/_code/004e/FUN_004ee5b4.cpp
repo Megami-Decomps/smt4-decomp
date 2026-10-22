@@ -7,7 +7,7 @@ struct BattleUiContext;
 extern "C" {
 
 int FUN_0015f490(...);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
@@ -42,7 +42,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0015f490. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_003e7adc(int);
@@ -170,7 +170,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   }
   else if (*(short *)(temp_v4 + 0x1be) == 8) {
     temp_v3 = (int)*(short *)(temp_v4 + 0x1c0);
-    FUN_00192550();
+    dataTable8FindRecord();
     if (temp_v3 != 0) {
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32);
       if (((0 < (int)temp_v7) && (temp_v4 = temp_v7, dataTable04FindById(), temp_v4 != 0)) &&

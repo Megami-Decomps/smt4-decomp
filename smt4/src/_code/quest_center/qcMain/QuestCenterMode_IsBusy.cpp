@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_002a6fb8(void);
-int asdMemFreeNonNull(u32 entry);
+int asdMemFreeNonNull(void *entry);
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdMemFree(void *ptr);               /* heap free */
 

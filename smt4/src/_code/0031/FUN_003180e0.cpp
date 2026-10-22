@@ -1,52 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003180e0` (_code @ 0x3180e0, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [r0, r1, lsl #3]! differs from recovered add r1, r0, r1, lsl #3. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int scrSetResult(int);
+struct BattleEntryView {
+    u32 flags;                         // 0x00
+    u8 unk04[0x6E];                    // 0x04
+    s16 unk72[12];                     // 0x72
+    u8 unk8A[0x1FE];                   // 0x8A
+};
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
+struct BattleMainStateView {
+    u8 unk00[0x1FC0];                  // 0x0000
+    BattleEntryView* unk1FC0;          // 0x1FC0
+};
 
-
-unsigned int FUN_003180e0(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v3 = 0;
-  if (temp_v0 == 0) {
-    temp_v3 = 7;
-  }
-  else if (temp_v0 == 1) {
-    temp_v3 = 10;
-  }
-  else if (temp_v0 == 2) {
-    temp_v3 = 0xb;
-  }
-  temp_v0 = 0;
-  while( 1 ) {
-    temp_v1 = btlGetMainState();
-    puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v0 * 0x288);
-    temp_v2 = *puVar3;
-    if ((((temp_v2 & 0x10) != 0 && (temp_v2 & 1) != 0) && ((temp_v2 & 0x40) == 0)) &&
-       (0x7fffffff < (unsigned int)(int)*(short *)((int)puVar3 + temp_v3 * 2 + 0x72))) break;
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  }
-  scrSetResult(1);
-  return 1;
 }
 
-} /* extern "C" */
+extern "C" {
+s32 scrGetArg(u32 index);
+s32 scrSetResult(s32 result);
+BattleMainStateView* btlGetMainState(void);
+
+// Report whether an eligible battle entry has a selected value of -1 or less.
+u32 FUN_003180e0(void)
+{
+    s32 selector = scrGetArg(0);
+    s32 fieldIndex = 0;
+    if (selector == 0) {
+        fieldIndex = 7;
+    } else if (selector == 1) {
+        fieldIndex = 10;
+    } else if (selector == 2) {
+        fieldIndex = 11;
+    }
+
+    for (s32 entryIndex = 0; entryIndex < 109; ++entryIndex) {
+        BattleEntryView* entry = &btlGetMainState()->unk1FC0[entryIndex];
+        u32 flags = entry->flags;
+        if ((flags & 0x10) != 0 && (flags & 1) != 0 &&
+            (flags & 0x40) == 0 && entry->unk72[fieldIndex] <= -1) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+
+    scrSetResult(0);
+    return 1;
+}
+}

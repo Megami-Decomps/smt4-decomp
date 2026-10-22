@@ -1,53 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d1b8c` (_code @ 0x1d1b8c, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The readiness store is scheduled after the resource load/compare, whose temporary uses r1 instead of r0. */
+#include "addon/SceneResource.h"
 
 extern "C" {
+SceneResource *FUN_0027e974(SceneResource *resource);
+void asdMemFreeNonNull(void *allocation);
+void asdMemFree(void *allocation);
+void FUN_002c5700(void);
+void *jobFind(u32 job);
+extern SceneResourceWork *g_sceneResourceWork;
 
-int FUN_0027e974(void);
-int asdMemFreeNonNull(void);
-int asdMemFree(unsigned int *);
-int FUN_002c5700(void);
-
-extern unsigned int *g_sceneResourceWork; /* 0x433048 */
-
-/* Supplied declaration required: FUN_0027e974. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-extern int jobFind(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c5700. */
-
-
-unsigned int FUN_001d1b8c(void)
-
+/* Waits for the scene-resource job, then releases its resource and work allocation. */
+u32 FUN_001d1b8c(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  
-  puVar1 = g_sceneResourceWork;
-  if (g_sceneResourceWork != (unsigned int *)0x0) {
-    temp_v0 = jobFind(*g_sceneResourceWork);
-    puVar2 = g_sceneResourceWork;
-    if ((temp_v0 != 0) || (*(char *)(puVar1 + 6) == '\0')) {
-      return 1;
-    }
-    if (g_sceneResourceWork != (unsigned int *)0x0) {
-      *(unsigned char *)(g_sceneResourceWork + 6) = 1;
-      if (puVar2[7] != 0) {
-        FUN_002c5700();
-        if (puVar2[7] != 0) {
-          FUN_0027e974();
-          asdMemFreeNonNull();
-          puVar2[7] = 0;
+    SceneResourceWork *work = g_sceneResourceWork;
+    if (work != NULL) {
+        if (jobFind(work->job) != NULL || !work->readyToRelease) {
+            return 1;
         }
-      }
-      asdMemFree(g_sceneResourceWork);
-      g_sceneResourceWork = (unsigned int *)0x0;
+        work = g_sceneResourceWork;
+        if (work != NULL) {
+            work->readyToRelease = 1;
+            if (work->resource != NULL) {
+                FUN_002c5700();
+                if (work->resource != NULL) {
+                    asdMemFreeNonNull(FUN_0027e974(work->resource));
+                    work->resource = NULL;
+                }
+            }
+            asdMemFree(g_sceneResourceWork);
+            g_sceneResourceWork = NULL;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

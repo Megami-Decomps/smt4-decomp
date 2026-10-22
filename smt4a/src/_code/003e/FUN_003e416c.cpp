@@ -1,42 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e416c` (_code @ 0x3e416c, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail add r0, r4, r0, lsr #29 differs from recovered add r1, r4, r0, lsr #29. */
+#include "common.h"
+
+struct Entry416cView {
+    u8 unk00[0x26]; // 0x00
+    u16 unk26;     // 0x26
+};
+
+struct Area2D68View {
+    u8 unk00[0x12]; // 0x00
+    u8 unk12[0x12]; // 0x12
+};
 
 extern "C" {
+Area2D68View* gameDataBlockGetArea2D68(void);
+Entry416cView* dataFindKeyedRecordWithOverrides(s32 entryIndex);
+s32 FUN_003e4230(s32 entryIndex);
 
-int FUN_00186f58(void);
-
-/* Supplied declaration required: FUN_00186f58. */
-extern int gameDataBlockGetArea2D68(void);
-extern int FUN_003e4230(unsigned int);
-
-
+// Set both area bit arrays for present entries with a zero field and status other than 2.
 void FUN_003e416c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char *pbVar5;
-  unsigned int temp_v4;
-  
-  temp_v1 = gameDataBlockGetArea2D68();
-  temp_v4 = 1;
-  do {
-    temp_v2 = temp_v4;
-    FUN_00186f58();
-    if (((temp_v2 != 0) && (*(short *)(temp_v2 + 0x26) == 0)) &&
-       (temp_v3 = FUN_003e4230(temp_v4), temp_v3 != 2)) {
-      pbVar5 = (unsigned char *)(temp_v1 + ((int)(temp_v4 + ((unsigned int)((int)temp_v4 >> 0x1f) >> 0x1d)) >> 3));
-      temp_v0 = (unsigned char)(1 << (((int)temp_v4 % 8) & 0xffU));
-      *pbVar5 = *pbVar5 | temp_v0;
-      pbVar5[0x12] = temp_v0 | pbVar5[0x12];
-    }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x8d);
-  return;
-}
+    Area2D68View* area = gameDataBlockGetArea2D68();
+    for (s32 entryIndex = 1; entryIndex < 0x8du; ++entryIndex) {
+        Entry416cView* entry = dataFindKeyedRecordWithOverrides(entryIndex);
+        if (entry == 0) {
+            continue;
+        }
+        if (entry->unk26 != 0) {
+            continue;
+        }
+        if (FUN_003e4230(entryIndex) == 2) {
+            continue;
+        }
 
-} /* extern "C" */
+        const s32 byteIndex = entryIndex / 8;
+        const u32 mask = 1u << (entryIndex % 8);
+        area->unk00[byteIndex] |= mask;
+        area->unk12[byteIndex] |= mask;
+    }
+}
+}

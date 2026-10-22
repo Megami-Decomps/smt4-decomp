@@ -1,75 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e44e0` (_code @ 0x2e44e0, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the comparator's tail differs: retail keeps the second key's order in r1 and the difference in r0 (built swaps them) */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002498ec(void);
-int FUN_00257568(unsigned int [3], unsigned int *);
-int FUN_002ae164(void);
+typedef struct UnitData {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 id;
+} UnitData;
 
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
+typedef struct ItemData {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2C */ u16 order;
+} ItemData;
 
-/* Supplied declaration required: FUN_002498ec. */
-extern int FUN_0024c52c(unsigned int);
-/* Supplied declaration required: FUN_00257568. */
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(unsigned int);
+/* An id and a scratch word, as the swap routine takes them. */
+typedef struct SortKey {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u32 unk04;
+} SortKey;
 
+UnitData *FUN_002498ec(u16 index);
+s32 idIsAbove400(u32 id);
+s32 FUN_0024c52c(u32 id);
+ItemData *FUN_002ae164(u32 id);
+void FUN_00257568(SortKey *a, SortKey *b);
 
-void FUN_002e44e0(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders two keys by rank, then by descending item order (ids above 400 rank 99 with order 0). */
+static s32 sortKeyCompare(const SortKey *a, const SortKey *b)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short temp_v4;
-  short temp_v5;
-  unsigned int temp_v6 [3];
-  unsigned int temp_v7;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_002498ec();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_002498ec();
-  temp_v6[0] = (unsigned int)*(unsigned short *)(temp_v0 + 0x26);
-  temp_v6[1] = 0;
-  temp_v6[2] = (unsigned int)*(unsigned short *)(temp_v1 + 0x26);
-  temp_v7 = 0;
-  temp_v2 = idIsAbove400(temp_v6[0]);
-  if (temp_v2 != 0) {
-    temp_v2 = 99;
-    temp_v5 = 0;
-  }
-  else {
-    temp_v2 = FUN_0024c52c(temp_v6[0]);
-    temp_v0 = temp_v6[0];
-    FUN_002ae164();
-    temp_v5 = *(short *)(temp_v0 + 0x2c);
-  }
-  temp_v3 = idIsAbove400(temp_v6[2]);
-  if (temp_v3 != 0) {
-    temp_v3 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v3 = FUN_0024c52c(temp_v6[2]);
-    temp_v0 = temp_v6[2];
-    FUN_002ae164();
-    temp_v4 = *(short *)(temp_v0 + 0x2c);
-  }
-  if (temp_v2 == temp_v3 && temp_v4 == temp_v5) {
-    FUN_00257568(temp_v6,temp_v6 + 2);
-  }
-  return;
+    s32 rankA;
+    s32 rankB;
+    u16 orderA;
+    u16 orderB;
+
+    if (idIsAbove400(a->id)) {
+        rankA = 99;
+        orderA = 0;
+    } else {
+        rankA = FUN_0024c52c(a->id);
+        orderA = FUN_002ae164(a->id)->order;
+    }
+    if (idIsAbove400(b->id)) {
+        rankB = 99;
+        orderB = 0;
+    } else {
+        rankB = FUN_0024c52c(b->id);
+        orderB = FUN_002ae164(b->id)->order;
+    }
+    s32 diff = rankA - rankB;
+
+    if (diff == 0) {
+        diff = orderB - orderA;
+    }
+    return diff;
+}
+
+/* Hands two keys to FUN_00257568 when they compare equal. */
+static void sortKeyResolveTie(SortKey *a, SortKey *b)
+{
+    if (sortKeyCompare(a, b) == 0) {
+        FUN_00257568(a, b);
+    }
+}
+
+/* Builds the two units' sort keys and resolves a tie between them. */
+void FUN_002e44e0(u16 *indexA, u16 *indexB)
+{
+    UnitData *unitA = FUN_002498ec(*indexA);
+    UnitData *unitB = FUN_002498ec(*indexB);
+    SortKey a;
+    SortKey b;
+
+    a.id = unitA->id;
+    a.unk04 = 0;
+    b.id = unitB->id;
+    b.unk04 = 0;
+    sortKeyResolveTie(&a, &b);
 }
 
 } /* extern "C" */

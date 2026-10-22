@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001e18d4(float *);
+int placedModelApplyLook(float *);
 int FUN_00269508(float *, double, double);
 int FUN_00269694(float *, float *, double, double);
 int VectorSignedToFloat(double, int);
@@ -36,7 +36,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_001e18d4. */
+/* Supplied declaration required: placedModelApplyLook. */
 /* Supplied declaration required: FUN_00269508. */
 /* Supplied declaration required: FUN_00269694. */
 extern int effGetFrameCounter(void);
@@ -129,7 +129,7 @@ void FUN_001d1df4(float *param_1)
        ((temp_v1 + temp_v4 * temp_v7 * temp_v8) * temp_v9 - param_1[0x38] * temp_v9 * temp_v9 * 0.5f);
   param_1[0x3b] = param_1[2] + (temp_v6 + temp_v5 * temp_v7 * temp_v8) * temp_v9;
   param_1[0x3c] = 1.0f;
-  FUN_001e18d4(param_1);
+  placedModelApplyLook(param_1);
   return;
 }
 

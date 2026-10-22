@@ -9,14 +9,14 @@ int FUN_00317af8(float *, float [3], int);
 int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int sysPlayVoice(...);
-int FUN_0048816c(...);
+int listGetAdjacentEntryId(...);
 int FUN_0048d248(int, unsigned int);
 int rectRecRead(...);
 int naviMainGetValue(...);
 int sub68OwnerGetBlock60(...);
 int naviGetActiveStateValue(...);
-int FUN_00492c18(...);
-int FUN_00492c5c(...);
+int naviMainSetValuePair(...);
+int naviMainGetRequestedMap(...);
 int FUN_004d03c8(...);
 int FUN_004d040c(...);
 int NaviMain_GetCurrentMap(...);
@@ -81,14 +81,14 @@ extern int FUN_00167c0c(unsigned int *, unsigned int *);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_0048816c. */
+/* Supplied declaration required: listGetAdjacentEntryId. */
 /* Supplied declaration required: FUN_0048d248. */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: naviMainGetValue. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: naviGetActiveStateValue. */
-/* Supplied declaration required: FUN_00492c18. */
-/* Supplied declaration required: FUN_00492c5c. */
+/* Supplied declaration required: naviMainSetValuePair. */
+/* Supplied declaration required: naviMainGetRequestedMap. */
 extern unsigned int FUN_00492c84(int);
 /* Supplied declaration required: FUN_004d03c8. */
 /* Supplied declaration required: FUN_004d040c. */
@@ -145,7 +145,7 @@ void FUN_0048c394(int param_1)
     temp_v14 = (unsigned int ****)romwright_f2u((float)((temp_v13 / romwright_u2f((unsigned int)(in_s0)) + *pfVar2)));
     in_s0 = (unsigned int ******)romwright_f2u((float)((pfVar2[1] - temp_v19[0] / romwright_u2f((unsigned int)(in_s0)))));
     temp_v15 = (unsigned int *****)in_s0;
-    FUN_00492c18(temp_v11,&temp_v14);
+    naviMainSetValuePair(temp_v11,&temp_v14);
     *puVar6 = 1;
     temp_v1 = inputIsQuestConfirmPressed();
     puVar7 = (unsigned int *)(param_1 + 0x20510);
@@ -153,13 +153,13 @@ void FUN_0048c394(int param_1)
     if (temp_v1 != 0) {
       sysPlayVoice(0x1000229);
       if (DAT_005f1a5e != '\0') {
-        temp_v0 = FUN_00492c5c();
+        temp_v0 = naviMainGetRequestedMap();
         temp_v1 = naviGetActiveStateValue(temp_v11);
         if (temp_v0 == temp_v1) {
           sub68OwnerGetBlock60(temp_v11);
           temp_v8 = (unsigned int *****)ppppppuVar14;
           temp_v9 = (unsigned int *****)ppppppuVar14;
-          FUN_00492c18(temp_v11,&temp_v8);
+          naviMainSetValuePair(temp_v11,&temp_v8);
           *(char *)(param_1 + 100) = (char)*puVar7;
           *puVar5 = 1;
           *puVar6 = 1;
@@ -170,7 +170,7 @@ void FUN_0048c394(int param_1)
         sub68OwnerGetBlock60(temp_v11);
         temp_v8 = (unsigned int *****)ppppppuVar14;
         temp_v9 = (unsigned int *****)ppppppuVar14;
-        FUN_00492c18(temp_v11,&temp_v8);
+        naviMainSetValuePair(temp_v11,&temp_v8);
         *(char *)(param_1 + 100) = (char)*puVar7;
         *puVar5 = 1;
         *puVar6 = 1;
@@ -189,7 +189,7 @@ void FUN_0048c394(int param_1)
           sub68OwnerGetBlock60(temp_v11);
           temp_v8 = (unsigned int *****)ppppppuVar14;
           temp_v9 = (unsigned int *****)ppppppuVar14;
-          FUN_00492c18(temp_v11,&temp_v8);
+          naviMainSetValuePair(temp_v11,&temp_v8);
         }
         else {
           if (*(int *)(temp_v0 + 0x15b8) != 0) {
@@ -198,7 +198,7 @@ void FUN_0048c394(int param_1)
           sub68OwnerGetBlock60(temp_v11);
           temp_v8 = (unsigned int *****)ppppppuVar14;
           temp_v9 = (unsigned int *****)ppppppuVar14;
-          FUN_00492c18(temp_v11,&temp_v8);
+          naviMainSetValuePair(temp_v11,&temp_v8);
           *(unsigned int ******)(param_1 + 0x34) = temp_v8;
           *(unsigned int ******)(param_1 + 0x38) = temp_v9;
           FUN_003a35a4();
@@ -224,7 +224,7 @@ void FUN_0048c394(int param_1)
               temp_v8 = (unsigned int *****)romwright_f2u((float)((*pfVar2 * 0.5f)));
               in_s0 = (unsigned int ******)romwright_f2u((float)((pfVar2[1] * 0.5f)));
               temp_v9 = (unsigned int *****)in_s0;
-              FUN_00492c18(temp_v11,&temp_v8);
+              naviMainSetValuePair(temp_v11,&temp_v8);
               *(unsigned char *)(temp_v0 + 0xd8e) = 6;
               *(unsigned char *)(param_1 + 0x57) = 0;
               *(unsigned char *)(param_1 + 0x59) = 5;
@@ -238,7 +238,7 @@ void FUN_0048c394(int param_1)
             temp_v8 = (unsigned int *****)romwright_f2u((float)((*pfVar2 * 2.0f)));
             in_s0 = (unsigned int ******)romwright_f2u((float)((pfVar2[1] * 2.0f)));
             temp_v9 = (unsigned int *****)in_s0;
-            FUN_00492c18(temp_v11,&temp_v8);
+            naviMainSetValuePair(temp_v11,&temp_v8);
             *(unsigned char *)(temp_v0 + 0xd8e) = 0xc;
             *(unsigned char *)(param_1 + 0x57) = 5;
             *(unsigned char *)(param_1 + 0x59) = 0;
@@ -251,12 +251,12 @@ void FUN_0048c394(int param_1)
               return;
             }
             temp_v0 = param_1;
-            FUN_0048816c(param_1,1);
+            listGetAdjacentEntryId(param_1,1);
             if (temp_v0 != 0) {
               sysPlayVoice(0x100020d);
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
               temp_v0 = param_1;
-              FUN_0048816c(param_1,1);
+              listGetAdjacentEntryId(param_1,1);
               if (temp_v0 != 0) {
                 *(char *)(param_1 + 100) = (char)temp_v0;
               }
@@ -272,12 +272,12 @@ void FUN_0048c394(int param_1)
                 return;
               }
               temp_v0 = param_1;
-              FUN_0048816c(param_1,0xffffffff);
+              listGetAdjacentEntryId(param_1,0xffffffff);
               if (temp_v0 != 0) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x2000000;
                 sysPlayVoice(0x100020d);
                 temp_v0 = param_1;
-                FUN_0048816c(param_1,0xffffffff);
+                listGetAdjacentEntryId(param_1,0xffffffff);
                 if (temp_v0 != 0) {
                   *(char *)(param_1 + 100) = (char)temp_v0;
                 }
@@ -304,13 +304,13 @@ void FUN_0048c394(int param_1)
                     goto LAB_0048c990;
                   }
                 }
-                temp_v0 = FUN_00492c5c(temp_v11);
+                temp_v0 = naviMainGetRequestedMap(temp_v11);
                 temp_v1 = naviGetActiveStateValue(temp_v11);
                 if (temp_v0 == temp_v1) {
                   sub68OwnerGetBlock60(temp_v11);
                   temp_v8 = (unsigned int *****)ppppppuVar14;
                   temp_v9 = (unsigned int *****)ppppppuVar14;
-                  FUN_00492c18(temp_v11,&temp_v8);
+                  naviMainSetValuePair(temp_v11,&temp_v8);
                   *(char *)(param_1 + 100) = (char)*puVar7;
                   *puVar5 = 1;
                   *puVar6 = 1;
@@ -393,7 +393,7 @@ LAB_0048c990:
       temp_v9 = (unsigned int *****)
                  romwright_f2u((float)(((temp_v4 - *(float *)(param_1 + 0x30)) / romwright_u2f((unsigned int)(in_s0)) + *(float *)(param_1 + 0x38))))
       ;
-      FUN_00492c18(temp_v11,&temp_v8);
+      naviMainSetValuePair(temp_v11,&temp_v8);
       temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 0x44) == temp_v4) << 0x1e);
       if (romwright_subpiece_4_1_0(temp_v3 >> 0x1e,0)) {
@@ -435,7 +435,7 @@ LAB_0048cc98:
   pfVar2 = (float *)sub68OwnerGetBlock60(temp_v11);
   temp_v14 = (unsigned int ****)romwright_f2u((float)((*(float *)(param_1 + 0x3c) / temp_v4 + *pfVar2)));
   temp_v15 = (unsigned int *****)romwright_f2u((float)((*(float *)(param_1 + 0x40) / temp_v4 + pfVar2[1])));
-  FUN_00492c18(temp_v11,&temp_v14);
+  naviMainSetValuePair(temp_v11,&temp_v14);
   *puVar6 = 1;
   return;
 }

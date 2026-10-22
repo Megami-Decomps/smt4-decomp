@@ -1,45 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013dc70` (_code @ 0x13dc70, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads fadeActive/fadeEnabled off one work+0x1400 base and recomputes &fadeActive for the store; ours CSEs &fadeActive and loads fadeEnabled from a pool offset. */
+#include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-int FUN_0014a960(int);
+void FUN_0014a960(s32 enable);
 
-/* Supplied declaration required: FUN_0014a960. */
-extern int jobGetWork(void);
-extern int __aeabi_idivmod(int);
-
-
-unsigned char FUN_0013dc70(void)
-
+/* Advances the job's white fade-in by one frame, ending it after fadeFrames frames. */
+s32 FUN_0013dc70(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  if ((*(char *)(temp_v0 + 0x144e) != '\0') && (*(char *)(temp_v0 + 0x1450) != '\0')) {
-    temp_v1 = *(int *)(temp_v0 + 0x1484) + 1;
-    *(int *)(temp_v0 + 0x1484) = temp_v1;
-    if (*(int *)(temp_v0 + 0x1488) < temp_v1) {
-      *(unsigned char *)(temp_v0 + 0x144e) = 0;
+    JobWork *work = jobGetWork();
+    s32 alpha;
+
+    if (!work->fadeActive || !work->fadeEnabled) {
+        return 0;
     }
-    else {
-      temp_v1 = __aeabi_idivmod(temp_v1 * 0xff);
-      temp_v2 = 0xff - temp_v1;
-      if ((int)temp_v2 >= 0x100) {
-        temp_v2 = 0xff;
-      }
-      else if ((int)temp_v2 < 0) {
-        temp_v2 = 0;
-      }
-      *(unsigned int *)(temp_v0 + 0x147c) = temp_v2 | 0xffffff00;
-      FUN_0014a960(1);
+    work->fadeFrame++;
+    if (work->fadeFrame > work->fadeFrames) {
+        work->fadeActive = 0;
+        return 0;
     }
-  }
-  return 0;
+    alpha = 255 - work->fadeFrame * 255 / work->fadeFrames;
+    if (alpha > 255) {
+        alpha = 255;
+    } else if (alpha < 0) {
+        alpha = 0;
+    }
+    work->fadeColor = 0xFFFFFF00 | alpha;
+    FUN_0014a960(1);
+    return 0;
 }
 
 } /* extern "C" */

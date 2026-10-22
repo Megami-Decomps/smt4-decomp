@@ -54,7 +54,7 @@ int bgmFadeOut(...);
 int FUN_0022e774(void);
 int campReleaseSlotTouchRegions(void);
 int msgWindowReset(void);
-int FUN_00287598(void);
+int uniteResetPreview(void);
 int processQueryChain(void);
 int FUN_002a7b74(void);
 int FUN_002ab804(void);
@@ -71,7 +71,7 @@ int soundChannelStopAll(...);
 int FUN_003d54f8(...);
 
 int eventQueueAddUniqueIfValid(...);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_001ffe84(void);
 int FUN_0020dc1c(void);
 int FUN_0021b274(...);
@@ -80,7 +80,7 @@ int FUN_0023b45c(...);
 int uniteStartOrQueueRequest(...);
 int campRebuildEnabledFlagList(...);
 int FUN_0026f7f0(void);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int uniteSetMode(...);
 int FUN_002e738c(...);
 int FUN_0031d890(void);
@@ -132,7 +132,7 @@ int FUN_003343f0(...);
 int screenSetColor670(int, int, int, int);
 int FUN_0035a094(...);
 int FUN_0037c8e4(...);
-int FUN_0038843c(void);
+int messageRestoreBanner(void);
 int FUN_003da8f4(...);
 
 /* stack frame of void: 3 slot(s), 10 byte(s) */
@@ -165,7 +165,7 @@ extern int jobIsValid(unsigned int);
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: workCommandRefreshActiveSlots. */
-extern unsigned char FUN_001643a0(void);
+extern unsigned char ifTouchGetSelectionMode(void);
 /* Supplied declaration required: FUN_001643b4. */
 extern int lmapMainIsRunning(void);
 extern unsigned int ifTouchGetButtonHelpValue(void);
@@ -173,7 +173,7 @@ extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotTable(void);
@@ -200,8 +200,8 @@ extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: campReleaseRegisteredTouchRegions. */
 extern int campCecHasObject(void);
-extern int FUN_00237620(void);
-extern int FUN_00239480(void);
+extern int campCecIsScriptRunning(void);
+extern int messageMainIsWindowActive(void);
 /* Supplied declaration required: playLogDestroy. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
@@ -217,7 +217,7 @@ extern int gameDataBlocksGetTable(void);
 /* Supplied declaration required: msgWindowReset. */
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
-/* Supplied declaration required: FUN_00287598. */
+/* Supplied declaration required: uniteResetPreview. */
 /* Supplied declaration required: FUN_0028b088. */
 /* Supplied declaration required: processQueryChain. */
 extern int FUN_002a21e8(void);
@@ -226,7 +226,7 @@ extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern unsigned int FUN_002a4878(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a73f8(void);
 extern int FUN_002a7410(void);
 extern int FUN_002a746c(void);
@@ -237,7 +237,7 @@ extern int uniteGetState(void);
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: FUN_002add8c. */
 /* Supplied declaration required: FUN_002bf4f4. */
-extern int FUN_002bf508(void);
+extern int campCecEditIsOpen(void);
 /* Supplied declaration required: FUN_002bf534. */
 extern int FUN_002bfd04(void);
 /* Supplied declaration required: frameTexSetValue. */
@@ -328,7 +328,7 @@ extern int partyPanelHasMembers(void);
 extern int titleConfigIsClosed(void);
 extern int campCecGet(void);
 /* Supplied declaration required: campCecSetValue. */
-/* Supplied declaration required: FUN_0038843c. */
+/* Supplied declaration required: messageRestoreBanner. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: gauntletAppMenuKillTask. */
 extern int saveLoadUIHasResult(void);
@@ -435,7 +435,7 @@ unsigned int FUN_003d56dc(void)
       }
     }
   }
-  temp_v2 = FUN_001643a0();
+  temp_v2 = ifTouchGetSelectionMode();
   temp_v4 = puVar2[7];
   *(unsigned char *)(puVar2 + 0xe) = temp_v2;
   puVar12 = g_camp;
@@ -488,7 +488,7 @@ unsigned int FUN_003d56dc(void)
     puVar2[9] = 6;
     puVar2[7] = 1;
     FUN_0037c8e4(1,0);
-    FUN_0038843c();
+    messageRestoreBanner();
     FUN_002f78a0(puVar2);
     break;
   case 1:
@@ -593,7 +593,7 @@ unsigned int FUN_003d56dc(void)
         else {
           temp_v4 = campCecHasObject();
           if (temp_v4 != 0) {
-            temp_v4 = FUN_002bf508();
+            temp_v4 = campCecEditIsOpen();
             if (temp_v4 != 0) {
               temp_v6 = 0xb3;
             }
@@ -681,7 +681,7 @@ unsigned int FUN_003d56dc(void)
         temp_v4 = FUN_002e26c4();
         if ((*(unsigned char *)(temp_v4 + 3) & 0xf0) != 0) {
           FUN_0037c8e4(1,0);
-          FUN_0038843c();
+          messageRestoreBanner();
           puVar12 = puVar2;
           FUN_002f78a0(puVar12);
         }
@@ -794,7 +794,7 @@ unsigned int FUN_003d56dc(void)
             }
             if (((*(unsigned char *)(temp_v10 + 3) & 0xf0) == 0) && (temp_v4 = FUN_0034919c(), temp_v4 == 0)) {
               FUN_0037c8e4(1,0);
-              FUN_0038843c();
+              messageRestoreBanner();
               FUN_002f78a0(puVar2);
             }
           }
@@ -876,7 +876,7 @@ unsigned int FUN_003d56dc(void)
           objBInitBlock19D0(&temp_v15,1,0);
           FUN_003343c0(0);
         }
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         FUN_0037e1b0((int)*(char *)(puVar2 + 0x2e),1);
       }
     }
@@ -944,7 +944,7 @@ unsigned int FUN_003d56dc(void)
       }
       campChangeState(temp_v6);
       FUN_0037c8e4(1,0);
-      FUN_0038843c();
+      messageRestoreBanner();
       FUN_002f78a0(puVar12);
       temp_v4 = FUN_0039c608();
       if (temp_v4 == 0) {
@@ -956,7 +956,7 @@ unsigned int FUN_003d56dc(void)
     temp_v4 = g_camp[8];
     if (temp_v4 == 0) {
       temp_v4 = 0x7b6;
-      FUN_00192550();
+      dataTable8FindRecord();
       arousalSkillOpen(*(unsigned short *)(temp_v4 + 0x54));
       puVar12[8] = puVar12[8] + 1;
       goto LAB_003d6870;
@@ -1099,7 +1099,7 @@ LAB_003d6870:
         temp_v4 = FUN_0034919c();
         if (temp_v4 == 0) {
           FUN_0037c8e4(1,0);
-          FUN_0038843c();
+          messageRestoreBanner();
           FUN_002f78a0(puVar12);
         }
       }
@@ -1257,12 +1257,12 @@ LAB_003d6870:
       temp_v4 = FUN_0034919c();
       if (temp_v4 == 0) {
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(puVar12);
       }
       FUN_002add8c();
       FUN_0037c8e4(1,0);
-      FUN_0038843c();
+      messageRestoreBanner();
       FUN_002f78a0(puVar12);
     }
     break;
@@ -1323,12 +1323,12 @@ LAB_003d6870:
       slotSetRequest(0,0x14,0xff);
       campChangeState(0x22);
       soundChannelStopAll(10);
-      FUN_00287598();
+      uniteResetPreview();
     }
     else {
       temp_v4 = 1;
       FUN_001517b4();
-      if ((temp_v4 != 0) && (temp_v4 = FUN_00239480(), temp_v4 != 0)) {
+      if ((temp_v4 != 0) && (temp_v4 = messageMainIsWindowActive(), temp_v4 != 0)) {
         msgWindowReset();
         eventQueueAddUniqueIfValid(0x100020e);
       }
@@ -1397,7 +1397,7 @@ LAB_003d6870:
           }
           FUN_0037e1b0((int)*(char *)(puVar2 + 0x2e),1);
           temp_v7 = FUN_0034a9ac();
-          FUN_002a7324(temp_v7 != temp_v17);
+          statusPanelSetOpen(temp_v7 != temp_v17);
         }
         else {
           FUN_0037e1b0((int)*(char *)(puVar2 + 0x2e),1);
@@ -1441,7 +1441,7 @@ LAB_003d6870:
                            (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x29) + 0xa7));
       if (temp_v4 == 0x1b) {
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         if ((g_camp != (unsigned int *)0x0) &&
            (pcVar21 = (char *)(g_camp + 0x6c8), temp_v0 = *pcVar21,
            temp_v0 != '\x04' && temp_v0 != '\x03')) {
@@ -1479,7 +1479,7 @@ LAB_003d6870:
       temp_v4 = FUN_0034919c();
       if (temp_v4 == 0) {
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(puVar2);
       }
       FUN_002add8c();
@@ -1498,7 +1498,7 @@ LAB_003d6870:
       puVar2[9] = 6;
       campChangeState(5);
       FUN_0037c8e4(1,0);
-      FUN_0038843c();
+      messageRestoreBanner();
       FUN_002f78a0(puVar2);
       puVar12 = g_camp;
       puVar19 = g_camp + 0xcac;
@@ -1546,7 +1546,7 @@ LAB_003d6870:
         puVar2[9] = 6;
         campChangeState(5);
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(puVar2);
         puVar12 = g_camp;
         puVar19 = g_camp + 0xcac;
@@ -1656,7 +1656,7 @@ joined_r0x003d7c38:
       if (puVar2[7] != 0x37) {
         puVar2[9] = 6;
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(puVar2);
       }
       else {
@@ -1690,7 +1690,7 @@ joined_r0x003d7c38:
       puVar2[9] = 6;
       campChangeState(5);
       FUN_0037c8e4(1,0);
-      FUN_0038843c();
+      messageRestoreBanner();
       FUN_002f78a0(puVar2);
     }
     break;
@@ -1721,7 +1721,7 @@ LAB_003d801c:
         FUN_0020d700();
         puVar2[9] = 6;
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(puVar2);
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         temp_v4 = 1;
@@ -1736,14 +1736,14 @@ LAB_003d801c:
     break;
   case 0x35:
     if (puVar2[0xb] != 0) {
-      if ((puVar2[0xb] == 1) && (temp_v4 = FUN_00237620(), temp_v4 == 0)) {
+      if ((puVar2[0xb] == 1) && (temp_v4 = campCecIsScriptRunning(), temp_v4 == 0)) {
         FUN_0020d700();
         puVar2[0xb] = 0;
         puVar2[9] = 6;
         temp_v4 = FUN_0034919c();
         if (temp_v4 == 0) {
           FUN_0037c8e4(1,0);
-          FUN_0038843c();
+          messageRestoreBanner();
         }
         FUN_002f78a0(puVar2);
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
@@ -1752,7 +1752,7 @@ LAB_003d801c:
       }
     }
     else {
-      temp_v4 = FUN_00237620();
+      temp_v4 = campCecIsScriptRunning();
       if (temp_v4 == 0) {
         temp_v4 = messageGetChoiceResult();
         if (temp_v4 != 0) {
@@ -1848,7 +1848,7 @@ LAB_003d801c:
       if (temp_v4 != 0) {
         campCecSetObjectValue(0);
         FUN_0037c8e4(1,0);
-        FUN_0038843c();
+        messageRestoreBanner();
         FUN_002f78a0(puVar2);
         temp_v4 = puVar2[0xb] + 1;
         puVar2[0xb] = temp_v4;
@@ -1856,7 +1856,7 @@ LAB_003d801c:
     }
     break;
   case 0x3a:
-    temp_v4 = FUN_00237620();
+    temp_v4 = campCecIsScriptRunning();
     if (temp_v4 == 0) goto LAB_003d801c;
     break;
   case 0x3d:
@@ -2070,7 +2070,7 @@ LAB_003d801c:
         temp_v4 = FUN_0034919c();
         if (temp_v4 == 0) {
           FUN_0037c8e4(1,0);
-          FUN_0038843c();
+          messageRestoreBanner();
           FUN_002f78a0(puVar12);
         }
       }

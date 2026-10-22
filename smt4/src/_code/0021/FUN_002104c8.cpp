@@ -1,49 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002104c8` (_code @ 0x2104c8, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: failure test allocates r0 (retail ands r1 with the arg move hoisted above bpl); success path materializes 0 in r4 before r0 */
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_00254824(int);
-int FUN_002c3510(void);
-int asdFatalError(void);
+struct FileReader;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+typedef struct FileReaderVtbl {
+    void *unk00[6];
+    s32 (*seek)(struct FileReader *self, s64 position);                              /* 0x18 */
+    void *unk1C[6];
+    s32 (*read)(struct FileReader *self, s32 *readSize, void *buffer, u32 size, bool flush); /* 0x34 */
+} FileReaderVtbl;
 
-/* Supplied declaration required: FUN_00254824. */
-/* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: asdFatalError. */
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
+typedef struct FileReader {
+    FileReaderVtbl *vtbl; /* 0x00 */
+    u32 unk04;
+    u32 handle;           /* 0x08: file handle, bit 0 set when the handle is invalid */
+} FileReader;
 
+void FUN_00254824(s32 result);
+void FUN_002c3510(s32 result);
+void asdFatalError(void);
+void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
-int FUN_002104c8(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Reads size bytes at offset into buffer; on failure reports the result and closes the file. */
+s32 FUN_002104c8(FileReader *reader, u32 offset, void *buffer, u32 size)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [4];
-  
-  (**(romwright_code **)(*param_1 + 0x18))(param_1,*(romwright_code **)(*param_1 + 0x18),param_2,0);
-  FUN_002c3510();
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,param_3,param_4,1);
-  FUN_002c3510();
-  if (temp_v0 < 0) {
-    FUN_00254824(temp_v0);
-    if ((param_1[2] & 0xfffffffeU) != 0) {
-      if ((param_1[2] & 1U) != 0) {
-        asdFatalError();
-      }
-      nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
-      param_1[2] = 0;
+    s32 readSize;
+    s32 result;
+
+    FUN_002c3510(reader->vtbl->seek(reader, offset));
+    result = reader->vtbl->read(reader, &readSize, buffer, size, true);
+    FUN_002c3510(result);
+    if (!nnResultIsSuccess(result)) {
+        FUN_00254824(result);
+        if ((reader->handle & ~1u) != 0) {
+            if (reader->handle & 1) {
+                asdFatalError();
+            }
+            nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(reader->handle & ~1u);
+            reader->handle = 0;
+        }
+        return result;
     }
-    return temp_v0;
-  }
-  FUN_002c3510();
-  return 0;
+    result = 0;
+    FUN_002c3510(result);
+    return result;
 }
 
 } /* extern "C" */

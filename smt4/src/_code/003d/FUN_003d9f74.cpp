@@ -1,51 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d9f74` (_code @ 0x3d9f74, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include <stddef.h>
+
+struct PrimaryInstanceEntry {
+    /* 0x00 */ u32 data;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ s32 id;
+    /* 0x20 */ void *instance;
+    /* 0x24 */ u8 unk24[4];
+};
+struct SecondaryInstanceEntry {
+    /* 0x00 */ u32 data;
+    /* 0x04 */ s32 id;
+    /* 0x08 */ void *instance;
+    /* 0x0C */ u8 unk0C[4];
+};
+struct InstanceCache {
+    /* 0x0000 */ u8 unk0000[0x190];
+    /* 0x0190 */ PrimaryInstanceEntry primary[50];
+    /* 0x0960 */ SecondaryInstanceEntry secondary[109];
+    /* 0x1030 */ u8 unk1030[0xCC8];
+    /* 0x1CF8 */ void *parameters;
+};
+typedef char InstanceCachePrimaryCheck[offsetof(InstanceCache, primary) == 0x190 ? 1 : -1];
+typedef char InstanceCacheSecondaryCheck[offsetof(InstanceCache, secondary) == 0x960 ? 1 : -1];
+typedef char InstanceCacheParametersCheck[offsetof(InstanceCache, parameters) == 0x1CF8 ? 1 : -1];
 
 extern "C" {
+void *FUN_00349fc0(void *parameters, u32 data);
 
-int FUN_00349fc0(unsigned int, unsigned int);
-
-/* Supplied declaration required: FUN_00349fc0. */
-
-
-void FUN_003d9f74(int param_1,int param_2)
-
+/* Creates a missing cached instance for the first matching id in either bank. */
+void FUN_003d9f74(InstanceCache *cache, s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = 0;
-  do {
-    temp_v2 = param_1 + temp_v1 * 0x28;
-    if (*(int *)(temp_v2 + 0x1ac) == param_2) {
-      if (*(int *)(temp_v2 + 0x1b0) != 0) {
-        return;
-      }
-      temp_v0 = *(unsigned int *)(param_1 + 0x1cf8);
-      FUN_00349fc0(temp_v0,*(unsigned int *)(temp_v2 + 400));
-      *(unsigned int *)(temp_v2 + 0x1b0) = temp_v0;
-      return;
+    for (s32 i = 0; i < 50; ++i) {
+        PrimaryInstanceEntry *entry = &cache->primary[i];
+        if (entry->id == id) {
+            if (entry->instance == NULL) {
+                entry->instance = FUN_00349fc0(cache->parameters, entry->data);
+            }
+            return;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x32);
-  temp_v1 = 0;
-  do {
-    temp_v2 = param_1 + temp_v1 * 0x10;
-    if (*(int *)(temp_v2 + 0x964) == param_2) {
-      if (*(int *)(temp_v2 + 0x968) != 0) {
-        return;
-      }
-      temp_v0 = *(unsigned int *)(param_1 + 0x1cf8);
-      FUN_00349fc0(temp_v0,*(unsigned int *)(temp_v2 + 0x960));
-      *(unsigned int *)(temp_v2 + 0x968) = temp_v0;
-      return;
+    for (s32 i = 0; i < 109; ++i) {
+        SecondaryInstanceEntry *entry = &cache->secondary[i];
+        if (entry->id == id) {
+            if (entry->instance == NULL) {
+                entry->instance = FUN_00349fc0(cache->parameters, entry->data);
+            }
+            return;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x6d);
-  return;
 }
-
-} /* extern "C" */
+}

@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_0033e8a8(...);
-int FUN_0033f22c(...);
+int resourceReleaseAllocationAndDispatchUpdate(...);
 extern int resourceIsReady(void);
 extern int asdTMTexTableCallFileB(void *file, u32 id);
 
@@ -28,7 +28,7 @@ typedef struct Obj {
     /* 0x3D */ u8 loaded;
 } Obj;
 
-extern int FUN_0033f178(Obj *obj);
+extern int aocTextureRequestHasNewContent(Obj *obj);
 
 u32 FUN_00294fe0(Obj *obj)
 {
@@ -43,8 +43,8 @@ u32 FUN_00294fe0(Obj *obj)
         return 0;
     }
     if (obj->loaded == 0) {
-        if (FUN_0033f178(obj) != 0) {
-            FUN_0033f22c(obj);
+        if (aocTextureRequestHasNewContent(obj) != 0) {
+            resourceReleaseAllocationAndDispatchUpdate(obj);
         }
         value = *(u32 *)(resource + 8);
         id = obj->id;

@@ -30,7 +30,7 @@ struct SaveHeader {
 typedef void (*ProcessCallback)(void *);
 extern "C" {
 void *asdMemoryAllocTracked(u32 size, u32 alignment, s32 heap, s32 category, s32 clear);
-void FUN_002c76d8(s32 enabled);
+void gameDataAddHomeButtonHold(s32 enabled);
 void gameDataBlocksAddFlags(u32 flags);
 void FUN_00333574(s32 enabled);
 SaveHeader *gameDataBlocksGetSaveData(void);
@@ -47,7 +47,7 @@ void *saveLoadProcessCreate(s32 selection, u8 option)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 633);
     SaveLoadWork *work = static_cast<SaveLoadWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1c, 1));
-    FUN_002c76d8(1);
+    gameDataAddHomeButtonHold(1);
     gameDataBlocksAddFlags(1);
     FUN_00333574(1);
     work->unk08 = 0;

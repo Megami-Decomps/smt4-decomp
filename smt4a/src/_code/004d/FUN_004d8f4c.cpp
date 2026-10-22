@@ -1,61 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d8f4c` (_code @ 0x4d8f4c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves {r4-r7, lr} (odd count, likely a different build) and keeps the tree in r4, the parent in r6; armcc adds r8 and swaps them. */
+#include "shard/W6_W6Match3_AATreeNode.h"
+
+/* An AA tree: its root, the nil sentinel every leaf links to, and the extreme nodes. */
+struct AATree {
+    /* 0x00 */ AATreeNode *root;
+    /* 0x04 */ AATreeNode nil;   /* nil.parent mirrors the root */
+    /* 0x14 */ AATreeNode *first;
+    /* 0x18 */ AATreeNode *last;
+    /* 0x1C */ u32 count;
+};
 
 extern "C" {
+void treeSkew(AATreeNode **root);
+void treeSplit(AATreeNode **root);
 
-int treeSkew(...);
-int treeSplit(...);
-
-/* Supplied declaration required: treeSkew. */
-/* Supplied declaration required: treeSplit. */
-
-
-void FUN_004d8f4c(unsigned int *param_1,int *param_2)
-
+/* Finishes inserting `node` (already linked under its parent) as a level-1 leaf: updates the extremes and count, then rebalances up to the root. */
+void FUN_004d8f4c(AATree *tree, AATreeNode *node)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int *piVar3;
-  unsigned char temp_v0;
-  
-  piVar3 = (int *)(param_1 + 1);
-  *param_2 = (int)piVar3;
-  param_2[1] = (int)piVar3;
-  *(unsigned char *)(param_2 + 3) = 1;
-  piVar2 = (int *)param_1[5];
-  temp_v0 = piVar2 != piVar3;
-  if (temp_v0) {
-    piVar2 = (int *)*piVar2;
-  }
-  if (!temp_v0 || piVar2 == param_2) {
-    param_1[5] = (unsigned int)param_2;
-  }
-  piVar2 = (int *)param_1[6];
-  temp_v0 = piVar2 != piVar3;
-  if (temp_v0) {
-    piVar2 = (int *)piVar2[1];
-  }
-  if (!temp_v0 || piVar2 == param_2) {
-    param_1[6] = (unsigned int)param_2;
-  }
-  param_1[7] = param_1[7] + 1;
-  piVar2 = (int *)param_2[2];
-  while (piVar1 = piVar2, piVar1 != piVar3) {
-    piVar2 = piVar1;
-    if ((int *)*piVar1 != param_2) {
-      piVar2 = piVar1 + 1;
+    AATreeNode *nil = &tree->nil;
+    AATreeNode *parent;
+
+    node->left = nil;
+    node->right = nil;
+    node->level = 1;
+    if (tree->first == nil || tree->first->left == node) {
+        tree->first = node;
     }
-    treeSkew(piVar2);
-    treeSplit(piVar2);
-    param_2 = piVar1;
-    piVar2 = (int *)piVar1[2];
-  }
-  treeSkew(param_1);
-  treeSplit(param_1);
-  param_1[3] = *param_1;
-  return;
+    if (tree->last == nil || tree->last->right == node) {
+        tree->last = node;
+    }
+    tree->count++;
+    for (parent = node->parent; parent != nil; parent = parent->parent) {
+        AATreeNode **link = parent->left == node ? &parent->left : &parent->right;
+        treeSkew(link);
+        treeSplit(link);
+        node = parent;
+    }
+    treeSkew(&tree->root);
+    treeSplit(&tree->root);
+    tree->nil.parent = tree->root;
 }
 
 } /* extern "C" */

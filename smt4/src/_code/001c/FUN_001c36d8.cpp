@@ -61,7 +61,7 @@ typedef struct {
 
 extern unsigned int g_aocSystem; /* 0x433158 */
 
-extern int FUN_001ed60c(void);
+extern int gameDataGetWorkBlock(void);
 /* Supplied declaration required: FUN_0026e324. */
 /* Supplied declaration required: appTryPurchase. */
 /* Supplied declaration required: saveGetMapFlag. */
@@ -250,7 +250,7 @@ void FUN_001c36d8(int param_1)
               FUN_0026f824(0);
               FUN_00287c34(0);
               temp_v2 = gameDataBlocksGetSaveData();
-              temp_v3 = FUN_001ed60c();
+              temp_v3 = gameDataGetWorkBlock();
               *(unsigned int *)(temp_v2 + 0x1f458) = *(unsigned int *)(temp_v3 + 0x1f458);
               rt_memcpy_w(temp_v2 + 0x1f45c,temp_v3 + 0x1f45c,0x400);
               temp_v9 = *(unsigned int *)(temp_v3 + 0x1ec14);

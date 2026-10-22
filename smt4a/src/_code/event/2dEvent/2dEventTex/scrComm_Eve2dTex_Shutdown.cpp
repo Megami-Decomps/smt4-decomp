@@ -1,42 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Eve2dTex_Shutdown` (_code @ 0x2611c8, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+extern u32 *g_eventTex;
+extern u32 g_eventTexHandles[4];
+s32 jobIsValid(u32 handle);
+void jobSetWork31(u32 handle, s32 work);
+void FUN_00281178(u32 handle);
+void jobStop(u32 handle, s32 mode);
 
-int jobStop(unsigned int, int);
-int FUN_00281178(unsigned int);
-int jobSetWork31(unsigned int, int);
-
-extern unsigned int *g_eventTex; /* 0x57f3b0 */
-
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00281178. */
-/* Supplied declaration required: jobSetWork31. */
-
-
-unsigned int scrComm_Eve2dTex_Shutdown(void)
-
+// Release the four event textures and stop their owning job.
+u32 scrComm_Eve2dTex_Shutdown(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if ((g_eventTex != (unsigned int *)0x0) && (temp_v0 = jobIsValid(*g_eventTex), temp_v0 != 0)) {
-    temp_v0 = 0;
-    do {
-      temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c));
-      if (temp_v1 != 0) {
-        jobSetWork31(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c),0);
-        FUN_00281178(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c));
-      }
-      *(unsigned int *)(temp_v0 * 4 + 0x5e1f3c) = 0;
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-    jobStop(*g_eventTex,0);
-  }
-  return 1;
+    if (g_eventTex != NULL && jobIsValid(*g_eventTex)) {
+        for (s32 index = 0; index < 4; ++index) {
+            if (jobIsValid(g_eventTexHandles[index])) {
+                jobSetWork31(g_eventTexHandles[index], 0);
+                FUN_00281178(g_eventTexHandles[index]);
+            }
+            g_eventTexHandles[index] = 0;
+        }
+        jobStop(*g_eventTex, 0);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

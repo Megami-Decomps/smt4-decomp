@@ -1,68 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00381758` (_code @ 0x381758, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps &matrix in r7 (saving r7) and lays the frame out as vec, scaled,
+ * matrix, rotation from sp+4; the build rematerializes the address and orders the slots differently. */
+#include "shard/X14_ModelTransform.h"
 
 extern "C" {
 
-int matrixCopyFull(unsigned char [64], unsigned char [64]);
-int mathMatrixApplyScale(unsigned char [64], int *, int);
-int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
-int FUN_002a1fb4(int, unsigned char [64], int);
-int FUN_002a2048(unsigned char [64], int *, int);
-int FUN_002b4c30(unsigned char [76], int);
-int matrix44SetIdentity(unsigned char [64]);
+void FUN_002a1fb4(void *transform, const TransformMtx44 *matrix, s32 mode);
+void FUN_002a2048(TransformMtx44 *matrix, const TransformVec3 *translation, s32 mode);
+void mathMatrixApplyScale(TransformMtx44 *matrix, const TransformVec3 *scale, s32 mode);
+void FUN_002b4c30(TransformRotation *rotation, const void *source);
+void matrix44SetIdentity(TransformMtx44 *matrix);
+void matrix43Multiply(TransformMtx44 *dst, const TransformMtx44 *a, const TransformRotation *b);
+void matrixCopyFull(TransformMtx44 *dst, const TransformMtx44 *src);
 
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spE4; /* 0xe4: local_e4 */
-    unsigned int spE8; /* 0xe8: local_e8 */
-    unsigned int spEC; /* 0xec: local_ec */
-} param_4_stack;
-
-/* Supplied declaration required: matrixCopyFull. */
-/* Supplied declaration required: mathMatrixApplyScale. */
-/* Supplied declaration required: matrix43Multiply. */
-/* Supplied declaration required: FUN_002a1fb4. */
-/* Supplied declaration required: FUN_002a2048. */
-/* Supplied declaration required: FUN_002b4c30. */
-/* Supplied declaration required: matrix44SetIdentity. */
-
-
-void FUN_00381758(int param_1,unsigned int *param_2,int param_3,unsigned int *param_4)
-
+/* Builds scale, rotation and translation (each optional) into one matrix and sets it as the
+ * owner's transform. */
+void FUN_00381758(TransformOwner *owner, const TransformVec3 *translation, const void *rotation,
+    const TransformVec3 *scale)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [64];
-  unsigned char temp_v4 [64];
-  unsigned char temp_v5 [76];
-  
-  if (param_4 != (unsigned int *)0x0) {
-    temp_v0 = *param_4;
-    temp_v1 = param_4[1];
-    temp_v2 = param_4[2];
-    mathMatrixApplyScale(temp_v3,&temp_v0,0);
-  }
-  else {
-    matrix44SetIdentity(temp_v3);
-  }
-  if (param_3 != 0) {
-    FUN_002b4c30(temp_v5,param_3);
-    matrix43Multiply(temp_v4,temp_v3,temp_v5);
-  }
-  else {
-    matrixCopyFull(temp_v4,temp_v3);
-  }
-  if (param_2 != (unsigned int *)0x0) {
-    temp_v0 = *param_2;
-    temp_v1 = param_2[1];
-    temp_v2 = param_2[2];
-    FUN_002a2048(temp_v4,&temp_v0,2);
-  }
-  FUN_002a1fb4(param_1 + 0x18,temp_v4,0);
-  return;
+    TransformMtx44 scaled;
+    TransformMtx44 matrix;
+    TransformRotation rotated;
+
+    if (scale != NULL) {
+        TransformVec3 factors = { scale->x, scale->y, scale->z };
+        mathMatrixApplyScale(&scaled, &factors, 0);
+    } else {
+        matrix44SetIdentity(&scaled);
+    }
+    if (rotation != NULL) {
+        FUN_002b4c30(&rotated, rotation);
+        matrix43Multiply(&matrix, &scaled, &rotated);
+    } else {
+        matrixCopyFull(&matrix, &scaled);
+    }
+    if (translation != NULL) {
+        TransformVec3 offset = { translation->x, translation->y, translation->z };
+        FUN_002a2048(&matrix, &offset, 2);
+    }
+    FUN_002a1fb4(owner->transform, &matrix, 0);
 }
 
 } /* extern "C" */

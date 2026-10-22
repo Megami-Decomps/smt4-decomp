@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00270028(...);
+int frameTexApplyMode(...);
 int gameCounterAddSaturating(...);
 int asdMemFree(...);
 int asdMemAlloc(...);
@@ -22,7 +22,7 @@ extern unsigned char LAB_00208098; /* 0x208098 */
 extern int btlEncountDestroy(...); /* 0x2d5034 */
 extern unsigned int *g_btlEncount; /* 0x435d30 */
 
-/* Supplied declaration required: FUN_00270028. */
+/* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -64,7 +64,7 @@ void FUN_00207f68(unsigned int *param_1)
   if ((((*(char *)((int)param_1 + 0x44b7) == '\0') && (-1 < (int)param_1[0x30])) &&
       ((param_1[0x38] & 0x2000000) == 0)) &&
      (puVar5 = param_1 + 0x1128, (*puVar5 & 2) == 0 && (*puVar5 & 0x40000000) == 0)) {
-    FUN_00270028(2);
+    frameTexApplyMode(2);
     *puVar5 = *puVar5 | 0x40000000;
   }
   return;

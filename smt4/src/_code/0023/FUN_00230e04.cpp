@@ -1,59 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230e04` (_code @ 0x230e04, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: r5/r6 swap between the slot pointer and its id; layout and logic match. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable08Sub2GetRecord(void);
-int dataTable08Sub1GetRecord(void);
+typedef struct ItemSlot {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 unk2_0 : 1;
+    /* 0x2 */ u16 discounted : 1;
+    /* 0x2 */ u16 discountPercent : 8;
+    /* 0x2 */ u16 unk2_10 : 6;
+} ItemSlot;
 
-extern int FUN_002973ec(void);
-extern unsigned int aocEntryGetKind(unsigned int);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
+typedef struct ItemRecord {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ s32 price;
+} ItemRecord;
 
+typedef struct EquipRecord {
+    /* 0x00 */ u8 unk00[0x9C];
+    /* 0x9C */ s32 price;
+} EquipRecord;
 
-int FUN_00230e04(unsigned short *param_1)
+u32 aocEntryGetKind(u32 id);
+ItemRecord *dataTable08Sub1GetRecord(u32 id);
+EquipRecord *dataTable08Sub2GetRecord(u32 id);
+s32 FUN_002973ec(void);
 
+static s32 itemGetPrice(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = (unsigned int)*param_1;
-  temp_v0 = aocEntryGetKind(temp_v3);
-  temp_v2 = 0;
-  switch(temp_v0) {
-  case 1:
-    dataTable08Sub1GetRecord();
-    temp_v2 = 99999999;
-    if (temp_v3 != 0) {
-      temp_v2 = *(int *)(temp_v3 + 0x78);
+    ItemRecord *item = dataTable08Sub1GetRecord(id);
+
+    if (item == NULL) {
+        return 99999999;
     }
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    dataTable08Sub2GetRecord();
-    temp_v2 = 99999999;
-    if (temp_v3 != 0) {
-      temp_v2 = *(int *)(temp_v3 + 0x9c);
+    return item->price;
+}
+
+static s32 equipGetPrice(u32 id)
+{
+    EquipRecord *equip = dataTable08Sub2GetRecord(id);
+
+    if (equip == NULL) {
+        return 99999999;
     }
-  }
-  if ((param_1[1] & 2) != 0) {
-    temp_v2 = (int)(((param_1[1] & 0x3ff) >> 2) * temp_v2) / 100;
-  }
-  temp_v1 = FUN_002973ec();
-  if (temp_v1 == 2) {
-    temp_v2 = temp_v2 * 3;
-  }
-  return temp_v2;
+    return equip->price;
+}
+
+/* Return the slot's item price, scaled by its discount and tripled in mode 2. */
+s32 FUN_00230e04(ItemSlot *slot)
+{
+    s32 price = 0;
+    u16 id = slot->id;
+
+    switch (aocEntryGetKind(id)) {
+    case 1:
+        price = itemGetPrice(id);
+        break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        price = equipGetPrice(id);
+        break;
+    }
+    if (slot->discounted) {
+        price = (s32)(slot->discountPercent * price) / 100;
+    }
+    if (FUN_002973ec() == 2) {
+        price *= 3;
+    }
+    return price;
 }
 
 } /* extern "C" */

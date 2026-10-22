@@ -1,9 +1,9 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 
 extern "C" {
 /* Reads or updates the requested state. */
-extern void *g_aocSystem;
+extern AocSystemA *g_aocSystem;
 extern u32 DAT_0057f7d4[];
 s32 FUN_0017628c(void *system, u32 index);
 u32 FUN_0014bd84(u32 index)

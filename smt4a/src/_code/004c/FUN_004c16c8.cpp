@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int btlGetMainState(void);
 int FUN_00184310(void);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int sysMemClear(...);
 int FUN_002efc44(...);
@@ -114,7 +114,7 @@ extern unsigned int uRam005714dc; /* 0x5714dc */
 extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern unsigned int padGetMappedValue(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
@@ -210,7 +210,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   temp_v45 = (unsigned int *)btlGetMainState();
   temp_v1 = temp_v52;
   dataTable04FindById();
-  FUN_00192550();
+  dataTable8FindRecord();
   temp_v2 = 0;
   if (param_2 != 0) {
     temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 0x32);

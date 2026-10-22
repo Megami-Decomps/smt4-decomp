@@ -1,3 +1,4 @@
+/* NON_MATCHING: explicit vtable store loads its address after the push instead of into r1 before it. */
 #include "shard/Shard004B.h"
 
 extern "C" {
@@ -11,10 +12,11 @@ typedef struct OwnerBuf {
 extern void asdMemFree(u32 ptr);
 extern void asdCecShutdown(void);
 extern void asdOperatorDelete(OwnerBuf *obj);
+extern const u32 DAT_00557ec8[];
 
-void ownerBufDestroy(OwnerBuf *obj, const void *vtbl)
+void ownerBufDestroy(OwnerBuf *obj)
 {
-    obj->vtbl = vtbl;
+    obj->vtbl = DAT_00557ec8;
     asdMemFree(obj->buf1);
     asdMemFree(obj->buf2);
     asdCecShutdown();

@@ -1,4 +1,4 @@
-#include "shard/Block57f248.h"
+#include "ui/IfTouch.h"
 
 extern "C" {
 
@@ -7,8 +7,8 @@ u8 recordGetModeForId(s32 id)
 {
     u8 mode;
 
-    if (g_ifTouch.record->unk64E == id) {
-        mode = g_ifTouch.record->unk008;
+    if (g_ifTouch.state->selectedRegion == id) {
+        mode = g_ifTouch.state->selectionMode;
     } else {
         mode = 0;
     }

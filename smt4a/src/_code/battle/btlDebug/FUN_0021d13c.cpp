@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015f490(...);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int uiNavigatorStart(...);
 int FUN_00370ecc(...);
 int FUN_003f1b3c(...);
@@ -19,7 +19,7 @@ int FUN_0023f328(...);
 int FUN_00333f6c(void);
 int FUN_00371c3c(...);
 int messageDismissNumericBanner(...);
-int FUN_0038e4cc(...);
+int statusIconSetKind(...);
 int statusDownGetValue(void);
 int sysPlayVoice(...);
 int FUN_003ec6d8(...);
@@ -33,7 +33,7 @@ int __aeabi_idivmod(...);
 int FUN_00167458(...);
 int sysPlaySe(...);
 int FUN_001834a4(...);
-int FUN_00192550(...);
+int dataTable8FindRecord(...);
 int FUN_0019de98(...);
 int gameGetSlotRecord(...);
 int FUN_0020acd8(...);
@@ -41,7 +41,7 @@ int FUN_0021a6c8(...);
 int FUN_0028c620(...);
 int FUN_002ccde8(...);
 int FUN_0038b3f8(...);
-int FUN_003a7a88(...);
+int devilIsTextureLoaded(...);
 int FUN_003df57c(...);
 int FUN_003eb200(void);
 int FUN_003eed44(...);
@@ -141,8 +141,8 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_001643a0(void);
-extern int FUN_00165070(void);
+extern int ifTouchGetSelectionMode(void);
+extern int ifTouchGetSelectedRegion(void);
 extern short vec2GetXInt(void);
 extern short vec2GetYInt(int *);
 /* Supplied declaration required: FUN_00167458. */
@@ -152,7 +152,7 @@ extern short vec2GetYInt(int *);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019e330. */
@@ -184,7 +184,7 @@ extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 extern int FUN_002a6a24(unsigned short);
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: uiNavigatorStart. */
@@ -206,8 +206,8 @@ extern int uiSearchPrimary(int *);
 extern int panelStateIs0(void);
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: FUN_0038e4cc. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: statusIconSetKind. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: statusDownGetValue. */
 extern int stateHolderIsMissingOrState0(void);
 /* Supplied declaration required: sysPlayVoice. */
@@ -548,7 +548,7 @@ LAB_0021d628:
   temp_v35[2] = gameGetSlotTable();
   temp_v4 = 0;
   do {
-    temp_v7 = FUN_00165070();
+    temp_v7 = ifTouchGetSelectedRegion();
     if (temp_v7 == *(short *)(param_1 + temp_v4 * 2 + 0x480e)) goto LAB_0021d8d0;
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 0x20);
@@ -1278,7 +1278,7 @@ LAB_0021ed20:
       temp_v5 = temp_v6;
       FUN_0040082c();
       if (temp_v5 == 0) {
-        FUN_00192550();
+        dataTable8FindRecord();
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
         if (temp_v5 == 0) {
           FUN_0020ad6c(param_1,0x15,1);
@@ -1538,9 +1538,9 @@ LAB_0021f338:
     *(unsigned char *)(param_1 + 0x4855) = 0;
     if (*(char *)(param_1 + 0x38b0) != '\0') goto LAB_00220474;
     if (temp_v4 >= 0) {
-      temp_v7 = FUN_001643a0();
-      if ((temp_v7 != 1) && (temp_v7 = FUN_001643a0(), temp_v7 != 2)) {
-        temp_v7 = FUN_001643a0();
+      temp_v7 = ifTouchGetSelectionMode();
+      if ((temp_v7 != 1) && (temp_v7 = ifTouchGetSelectionMode(), temp_v7 != 2)) {
+        temp_v7 = ifTouchGetSelectionMode();
         if (temp_v7 != 6) goto LAB_0021f708;
         if (temp_v4 != 0x11) {
           *puVar20 = temp_v2;
@@ -1665,7 +1665,7 @@ LAB_0021fa24:
                   break;
                   temp_v4 = (int)*(short *)(param_1 + 0x4b14);
                   if ((((temp_v4 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) &&
-                      (FUN_003a7a88(temp_v4,1), temp_v4 != 0)) && (*piVar19 == 0)) {
+                      (devilIsTextureLoaded(temp_v4,1), temp_v4 != 0)) && (*piVar19 == 0)) {
                     FUN_0038b3f8((int)*(short *)(param_1 + 0x4b14),1);
                   }
                   uiSpriteSelectAnim(param_1 + 0x1344,0x1c);
@@ -1695,7 +1695,7 @@ LAB_0021fbdc:
                   FUN_0020ad6c(param_1,0x20,1);
                   temp_v4 = (int)*(short *)(param_1 + 0x4b14);
                   if (((temp_v4 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) &&
-                     ((FUN_003a7a88(temp_v4,1), temp_v4 != 0 && (*(int *)(param_1 + 0x4b28) == 1)))) {
+                     ((devilIsTextureLoaded(temp_v4,1), temp_v4 != 0 && (*(int *)(param_1 + 0x4b28) == 1)))) {
                     FUN_0038b3f8((int)*(short *)(param_1 + 0x4b14),1);
                   }
                   temp_v2 = 0;
@@ -1802,7 +1802,7 @@ LAB_0021fbdc:
                          ,temp_v9 + 0x3c98);
             temp_v7 = gameGetSlotTable();
             if (*(char *)(temp_v7 + temp_v4 + 0x1c9f) < '\0') {
-              FUN_00192550((int)(short)(int)temp_v27);
+              dataTable8FindRecord((int)(short)(int)temp_v27);
             }
           }
           else {
@@ -1885,7 +1885,7 @@ LAB_0021fbdc:
               temp_v10 = (unsigned int)temp_v23;
               if (-1 < *(char *)(temp_v9 + temp_v4 + 0x1c9f)) break;
               temp_v4 = (int)(short)(int)temp_v25;
-              FUN_00192550();
+              dataTable8FindRecord();
               temp_v10 = (unsigned int)temp_v23;
               if ((((temp_v4 == 0) || ((*(unsigned char *)(temp_v4 + 0x3a) & 0x80) != 0)) ||
                   (*(short *)(temp_v4 + 0x32) != 0)) || ((*(unsigned char *)(temp_v4 + 0x3a) & 0x7f) == 1))
@@ -2033,7 +2033,7 @@ joined_r0x0022027c:
     temp_v4 = FUN_0026c3a0();
     if (temp_v4 != 0) {
       FUN_00333f6c();
-      FUN_0038e4cc(param_1,0);
+      statusIconSetKind(param_1,0);
       FUN_0020ad6c(param_1,1);
     }
     break;
@@ -2112,13 +2112,13 @@ joined_r0x0022027c:
         temp_v7 = *(int *)(param_1 + temp_v4 * 4 + 0x4bb0);
         if (temp_v7 != 0) {
           temp_v7 = (int)(short)temp_v7;
-          FUN_003a7a88(temp_v7,1);
+          devilIsTextureLoaded(temp_v7,1);
           temp_v10 = (unsigned int)temp_v23;
           if (temp_v7 == 0) goto LAB_002209c0;
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
-      FUN_0038e4cc(param_1,0xc);
+      statusIconSetKind(param_1,0xc);
       FUN_0023f328(param_1,0,1);
       FUN_0023f328(param_1,1);
       FUN_0023f328(param_1,2,1);
@@ -2533,7 +2533,7 @@ LAB_0022129c:
                 else {
                   temp_v4 = (int)*(short *)(param_1 + 0x4b16);
                   if (((temp_v4 != 0) && (*(char *)(param_1 + 0x4b18) == '\0')) &&
-                     (FUN_003a7a88(temp_v4,1), temp_v4 != 0)) {
+                     (devilIsTextureLoaded(temp_v4,1), temp_v4 != 0)) {
                     temp_v4 = *temp_v37;
                     FUN_003ec6d8(temp_v4,(int)*(short *)(param_1 + 0x4b16));
                     if (temp_v4 == 0) {
@@ -2541,7 +2541,7 @@ LAB_0022129c:
                     }
                   }
                   temp_v4 = (int)*(short *)(param_1 + 0x4b14);
-                  FUN_003a7a88(temp_v4,1);
+                  devilIsTextureLoaded(temp_v4,1);
                   if (temp_v4 != 0) {
                     puVar20 = (unsigned char *)(param_1 + 0x4b18);
                     temp_v2 = 1;
@@ -2580,7 +2580,7 @@ LAB_0022129c:
               temp_v25 = &temp_v32;
               FUN_003f1b3c(*temp_v37,temp_v10,9,&temp_v29);
               FUN_0047f4cc(temp_v32);
-              FUN_002a49e4(*(unsigned int *)(*temp_v37 + 0x4d64),temp_v29 & 0xffff);
+              infoWinSetText(*(unsigned int *)(*temp_v37 + 0x4d64),temp_v29 & 0xffff);
               temp_v25 = (short **)0x0;
               uiNavigatorStart(temp_v1,1,1,0);
             }

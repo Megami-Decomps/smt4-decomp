@@ -19,18 +19,18 @@ struct FileReadParameters {
 
 extern "C" {
 void FUN_001c5b68(FileReadParameters* parameters);
-void FUN_001add78(FileReadParameters* parameters, const char* path);
-void* FUN_001abae0(const FileReadParameters* parameters);
+void pathSetWithRomPrefix(FileReadParameters* parameters, const char* path);
+void* asdFileAddEntry(const FileReadParameters* parameters);
 
 // Enqueue a file read with its completion callback and callback argument.
 void* asdFileEnqueueRead(const char* path, u8 flag, void (*onDone)(void*), void* onDoneArg)
 {
     FileReadParameters parameters;
     FUN_001c5b68(&parameters);
-    FUN_001add78(&parameters, path);
+    pathSetWithRomPrefix(&parameters, path);
     parameters.flag = flag;
     parameters.onDone = onDone;
     parameters.onDoneArg = onDoneArg;
-    return FUN_001abae0(&parameters);
+    return asdFileAddEntry(&parameters);
 }
 }

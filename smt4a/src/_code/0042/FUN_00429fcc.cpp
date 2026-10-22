@@ -1,43 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00429fcc` (_code @ 0x429fcc, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: result module/description extraction and signed status tests lower differently. */
+#include "common.h"
+
+struct SaveDataArchivePath {
+    /* 0x00 */ u8 mediaType;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u16 unk02;
+    /* 0x04 */ u32 titleIdLow;
+    /* 0x08 */ u32 titleIdHigh;
+};
+struct SaveDataArchive;
+struct SaveDataArchiveVtable {
+    /* 0x00 */ void *unk00[12];
+    /* 0x30 */ void (*close)(SaveDataArchive *archive);
+};
+struct SaveDataArchive {
+    /* 0x00 */ SaveDataArchiveVtable *vtable;
+};
 
 extern "C" {
+void FUN_0016cdc0(SaveDataArchivePath *path, u8 mediaType, u64 titleId);
+s32 FUN_0042b3b8(SaveDataArchive **archive, const SaveDataArchivePath *path, u32 flags);
+s32 FUN_001aeefc(const char *name, SaveDataArchive *archive, u32 first, u32 second);
 
-int FUN_0016cdc0(unsigned char [12], int);
-int FUN_0042b3b8(int **, unsigned char [12], int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0016cdc0. */
-extern int **FUN_001aeefc(unsigned int, int *, unsigned int);
-/* Supplied declaration required: FUN_0042b3b8. */
-
-
-int ** FUN_00429fcc(unsigned int param_1)
-
+s32 FUN_00429fcc(const char *name, u64 titleId)
 {
-/* irregular: 2 native warning(s); review required */
-  int **ppiVar1;
-  unsigned char temp_v0 [12];
-  int *temp_v1 [2];
-  
-  FUN_0016cdc0(temp_v0,1);
-  ppiVar1 = temp_v1;
-  FUN_0042b3b8(ppiVar1,temp_v0,0);
-  if (((((unsigned int)ppiVar1 & 0x3fc00) == 0x4400) && (((unsigned int)ppiVar1 & 0x3ff) >= 0xdc)) &&
-     (((unsigned int)ppiVar1 & 0x3ff) < 0xe6)) {
-    ppiVar1 = (int **)0xc8804482;
-  }
-  if ((-1 < (int)ppiVar1) &&
-     (ppiVar1 = (int **)FUN_001aeefc(param_1,temp_v1[0],0), (int)ppiVar1 < 0)) {
-    (**(romwright_code **)(*temp_v1[0] + 0x30))();
-  }
-  return ppiVar1;
+    SaveDataArchivePath path;
+    FUN_0016cdc0(&path, 1, titleId);
+    SaveDataArchive *archive;
+    s32 status = FUN_0042b3b8(&archive, &path, 0);
+    u32 module = ((u32)status >> 10) & 0xff;
+    s32 description = (u32)status & 0x3ff;
+    if (module == 17 && description >= 220 && description <= 229) {
+        status = (s32)0xc8804482;
+    }
+    if (status >= 0) {
+        status = FUN_001aeefc(name, archive, 0, 0);
+        if (status < 0) {
+            archive->vtable->close(archive);
+        }
+    }
+    return status;
 }
-
-} /* extern "C" */
+}

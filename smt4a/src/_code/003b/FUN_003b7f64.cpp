@@ -1,58 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b7f64` (_code @ 0x3b7f64, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the constant 1 in r8 (shift base and return value) and loads the required mask with ldm; this build rematerializes 1 and loads the mask with two ldr. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+BtlMainStateA *btlGetMainState(void);
 
-int scrSetResult(int);
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003b7f64(void)
-
+/* Script check: 0 when the eligible battle entry with id argument 0 has status flag bit argument 1
+ * clear, else 1. */
+u32 FUN_003b7f64(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v5 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar6 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408);
-    temp_v3 = *puVar6;
-    temp_v4 = puVar6[1];
-    if (((DAT_005702a0 & temp_v3) != 0 || (DAT_005702a4 & temp_v4) != 0) &&
-       ((g_btlCandidateMasks & temp_v3) != 0 || (DAT_0057028c & temp_v4) != 0)) {
-      if (((temp_v4 & DAT_005702b4) == 0 && (DAT_005702b0 & temp_v3) == 0) &&
-         ((*(unsigned short *)((int)puVar6 + 0x166) == temp_v0 &&
-          (((unsigned int)(unsigned short)puVar6[0x9d] & (1 << (temp_v1 & 0xff))) == 0)))) {
-        scrSetResult(0);
-        return 1;
-      }
+    u32 id = scrGetArg(0);
+    u32 bit = scrGetArg(1);
+    for (s32 i = 0; i < 0x6d; i++) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            entry->id == id && !(entry->statusFlags & (1 << bit))) {
+            scrSetResult(0);
+            return 1;
+        }
     }
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x6d) {
-      scrSetResult(1);
-      return 1;
-    }
-  } while( 1 );
+    scrSetResult(1);
+    return 1;
 }
-
-} /* extern "C" */
+}

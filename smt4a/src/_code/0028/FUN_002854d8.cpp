@@ -1,21 +1,16 @@
-#include "romwright_types.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
+#include <stddef.h>
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-unsigned char FUN_002854d8(unsigned int param_1,char param_2)
-
+u8 FUN_002854d8(u32 index, char value)
 {
-  int temp_v0;
-  
-  if (param_1 < 0x501) {
-    temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + param_1 * 0x50;
-    unsigned char *pb = (unsigned char *)(temp_v0 + 0x5f0c);
-    pb[0x16] = (pb[0x16] & ~2) | (param_2 << 1);
-  }
-  return param_1 < 0x501;
+    if (index < 0x501) {
+        u8 *row = (u8 *)g_gameDataBlocks.saveBlock + index * sizeof(GameSavedItemA);
+        GameSavedItemA *item = (GameSavedItemA *)(row + offsetof(GameSavedItemTableA, items));
+        item->flags = (item->flags & ~2) | (value << 1);
+    }
+    return index < 0x501;
 }
 
 } /* extern "C" */

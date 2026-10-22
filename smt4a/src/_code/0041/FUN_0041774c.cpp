@@ -26,7 +26,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: obj04Finish. */
 extern int FUN_003df4a4(unsigned short);
-extern int FUN_003e4cb4(void);
+extern int partySlotMatchesSelected(void);
 /* Supplied declaration required: FUN_003e4e4c. */
 extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bd068(unsigned int);
@@ -79,7 +79,7 @@ unsigned int FUN_0041774c(int param_1)
     break;
   case 2:
     temp_v3 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
-    temp_v1 = FUN_003e4cb4();
+    temp_v1 = partySlotMatchesSelected();
     if (temp_v1 != 0) {
       *(unsigned int *)(param_1 + 0xc) = 5;
       break;

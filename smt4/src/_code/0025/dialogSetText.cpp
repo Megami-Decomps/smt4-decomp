@@ -24,7 +24,7 @@ typedef struct Dialog {
 
 extern Dialog *g_infoWin;
 
-int FUN_00296b3c(u32 handle, int arg1, u32 arg2, int arg3, int arg4, void *text);
+int asdTextDrawFormatted(u32 handle, int arg1, u32 arg2, int arg3, int arg4, void *text);
 int timerStart(void *window, int arg1, int arg2);
 int vec2GetXInt(void *window);
 int memClear(void *buffer, int size);
@@ -62,7 +62,7 @@ void dialogSetText(const char *text)
         }
         length++;
     } while (length < TEXT_CAPACITY);
-    FUN_00296b3c(dialog->handle, 3, 0xffffffff, 0, 3, dialog->text);
+    asdTextDrawFormatted(dialog->handle, 3, 0xffffffff, 0, 3, dialog->text);
     dialog->timer = 30;
 }
 

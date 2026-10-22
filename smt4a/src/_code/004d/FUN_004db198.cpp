@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00184310(void);
 int dataTable5GetEntries(void);
-int FUN_0039c64c(unsigned char *, int);
+int dataFindSymmetricPair(unsigned char *, int);
 int FUN_004dc154(unsigned int, int, unsigned int);
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: dataTable5GetEntries. */
-/* Supplied declaration required: FUN_0039c64c. */
+/* Supplied declaration required: dataFindSymmetricPair. */
 /* Supplied declaration required: FUN_004dc154. */
 
 
@@ -30,7 +30,7 @@ unsigned int FUN_004db198(unsigned int param_1,unsigned short *param_2,unsigned 
   puVar2 = param_3;
   FUN_00184310();
   pbVar3 = (unsigned char *)(unsigned int)(unsigned char)puVar1[1];
-  FUN_0039c64c(pbVar3,(char)puVar2[1]);
+  dataFindSymmetricPair(pbVar3,(char)puVar2[1]);
   pbVar4 = pbVar3;
   dataTable5GetEntries();
   if (*puVar1 != *puVar2 && pbVar3 != (unsigned char *)0x0) {

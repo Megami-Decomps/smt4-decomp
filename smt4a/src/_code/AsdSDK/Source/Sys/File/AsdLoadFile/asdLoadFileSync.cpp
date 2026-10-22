@@ -8,8 +8,8 @@ int textFormatBuffer(...);
 int asdFileWait(void);
 int asdLoadConfigureModeFlags(int *, unsigned int);
 int asdFileRequestRelease(unsigned int *);
-int FUN_001abae0(void);
-int FUN_001add78(int *, unsigned char [268]);
+int asdFileAddEntry(void);
+int pathSetWithRomPrefix(int *, unsigned char [268]);
 int sysMemClear(unsigned char [256], int);
 int rt_aeabi_memclr(unsigned char [268], int);
 
@@ -40,11 +40,11 @@ extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdFileWait. */
 /* Supplied declaration required: asdLoadConfigureModeFlags. */
-extern int FUN_0019dbb8(unsigned int);
+extern int asdLoadFileHasDevice(unsigned int);
 /* Supplied declaration required: asdFileRequestRelease. */
 extern int asdFileRequestHasFailed(unsigned int *);
-/* Supplied declaration required: FUN_001abae0. */
-/* Supplied declaration required: FUN_001add78. */
+/* Supplied declaration required: asdFileAddEntry. */
+/* Supplied declaration required: pathSetWithRomPrefix. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
@@ -83,7 +83,7 @@ asdLoadFileSync(unsigned int *param_1,unsigned int param_2,unsigned int param_3,
   
   puVar2 = (unsigned int *)&temp_v3;
   rt_aeabi_memclr(temp_v22,0x100);
-  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = FUN_0019dbb8(param_3), temp_v0 != 0)) {
+  if ((g_asdLoadFileUseRawPaths != '\0') || (temp_v0 = asdLoadFileHasDevice(param_3), temp_v0 != 0)) {
     textFormatBuffer(temp_v22,param_3);
   }
   else {
@@ -110,11 +110,11 @@ asdLoadFileSync(unsigned int *param_1,unsigned int param_2,unsigned int param_3,
   temp_v19 = 0;
   temp_v20 = 0;
   temp_v21 = 0;
-  FUN_001add78(&temp_v3,temp_v22);
+  pathSetWithRomPrefix(&temp_v3,temp_v22);
   asdLoadConfigureModeFlags(&temp_v3,param_5);
   temp_v12 = param_6;
   temp_v18 = param_2;
-  FUN_001abae0();
+  asdFileAddEntry();
   asdFileWait();
   if (param_1 != (unsigned int *)0x0) {
     *param_1 = *(unsigned int *)((int)puVar2 + 0x140);

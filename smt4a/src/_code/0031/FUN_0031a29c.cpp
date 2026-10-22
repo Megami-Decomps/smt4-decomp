@@ -1,56 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031a29c` (_code @ 0x31a29c, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: shared flag constants are kept across calls differently and the stack frame is smaller. */
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobalsA g_messageMain;
+void scrCommMessageSetMode(u32 mode);
+u32 scrGetCommandFrame();
+s32 scrGetArg(u32 index);
+void *FUN_002ba85c();
+u32 FUN_0021bdac(void *context, s32 message, u32 frame, u32 mode, u32 first, u32 second);
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int scrCommMessageSetMode(int);
-int scrGetCommandFrame(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int DAT_0057f58c; /* 0x57f58c */
-extern int DAT_0057f590; /* 0x57f590 */
-
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: scrCommMessageSetMode. */
-/* Supplied declaration required: scrGetCommandFrame. */
-
-
-void FUN_0031a29c(void)
-
+u32 FUN_0031a29c()
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  scrCommMessageSetMode(0);
-  temp_v1 = scrGetCommandFrame();
-  temp_v0 = DAT_0057f590;
-  if (temp_v1 == 0) {
-    if (DAT_0057f590 != 0) {
-      *(unsigned char *)(DAT_0057f590 + 0x30) = 1;
+    scrCommMessageSetMode(0);
+    if (scrGetCommandFrame() == 0) {
+        if (g_messageMain.panel) {
+            g_messageMain.panel->unk30 = 1;
+        }
+        g_messageMain.panel->unk31 = 1;
     }
-    *(unsigned char *)(temp_v0 + 0x31) = 1;
-  }
-  if (DAT_0057f58c != 0) {
-    *(unsigned char *)(DAT_0057f58c + 0x19c5) = 0x15;
-  }
-  temp_v2 = FUN_002ba85c();
-  temp_v3 = scrGetArg(0);
-  temp_v4 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v2,temp_v3,temp_v4,6,1,0);
-  return;
+    if (g_messageMain.state) {
+        g_messageMain.state->displayMode = 21;
+    }
+    void *context = FUN_002ba85c();
+    s32 message = scrGetArg(0);
+    u32 frame = scrGetCommandFrame();
+    return FUN_0021bdac(context, message, frame, 6, 1, 0);
 }
-
-} /* extern "C" */
+}

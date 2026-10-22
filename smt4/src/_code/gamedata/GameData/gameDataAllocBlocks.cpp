@@ -12,9 +12,9 @@ extern GameDataBlocks g_gameDataBlocks;
 void gameDataAllocBlocks(void)
 {
     if (g_gameDataBlocks.saveBlock == NULL) {
-        g_gameDataBlocks.saveBlock = asdMemoryAlloc(0x100, 0x100, 0, 0x24db0, 1);
-        g_gameDataBlocks.workBlock = asdMemoryAlloc(0x100, 0x100, 0, 0x24d28, 1);
-        g_gameDataBlocks.smallBlock = asdMemoryAlloc(0x100, 0x100, 0, 0xc, 1);
+        g_gameDataBlocks.saveBlock = (GameSaveData *)asdMemoryAlloc(0x100, 0x100, 0, 0x24db0, 1);
+        g_gameDataBlocks.workBlock = (GameDataAux *)asdMemoryAlloc(0x100, 0x100, 0, 0x24d28, 1);
+        g_gameDataBlocks.smallBlock = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0xc, 1);
     }
 }
 

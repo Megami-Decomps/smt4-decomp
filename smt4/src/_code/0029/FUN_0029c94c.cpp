@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024bc98(int *, unsigned int);
+int skillFormatTargetLabel(int *, unsigned int);
 int FUN_0024bda8(int *, unsigned int);
 int passiveSkillLookupRecord(void);
 int FUN_00295660(int, int *);
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_0029ca4c; /* 0x29ca4c */
 extern int DAT_0043da2c; /* 0x43da2c */
 
-/* Supplied declaration required: FUN_0024bc98. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00295660. */
@@ -65,7 +65,7 @@ void FUN_0029c94c(int param_1)
       FUN_002ae164();
       FUN_0024bda8(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ffff) >> 0xc);
       FUN_00295660(0x24,&temp_v3);
-      FUN_0024bc98(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);
+      skillFormatTargetLabel(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);
       FUN_00295660(0x25,&temp_v3);
     }
     temp_v3 = 3;

@@ -60,7 +60,7 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
-extern int FUN_0025a140(unsigned int, unsigned int);
+extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f958. */
@@ -365,7 +365,7 @@ void FUN_001fa8e4(void)
       }
     }
     temp_v6 = (unsigned int)((unsigned long long)temp_v22 >> 0x20);
-    if (((g_gameState != 0x24) && (temp_v8 = FUN_0025a140(2,5), temp_v8 != 0)) && (!temp_v0)) {
+    if (((g_gameState != 0x24) && (temp_v8 = unitGroupHasFlag(2,5), temp_v8 != 0)) && (!temp_v0)) {
       temp_v13 = (float)temp_v15;
       mathDistanceBetweenPoints();
       temp_v13 = *(float *)(g_lmapScene + 0x160) - temp_v13;

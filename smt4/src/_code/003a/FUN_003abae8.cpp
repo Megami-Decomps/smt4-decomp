@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022d800(int, int, int, int);
-int FUN_00230aec(...);
+int drawTextAtRelativePosition(...);
 int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int, int, int, int);
 int FUN_00288e68(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_003abd7c; /* 0x3abd7c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0022d800. */
-/* Supplied declaration required: FUN_00230aec. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int FUN_00262cb0(unsigned short);
@@ -111,7 +111,7 @@ void FUN_003abae8(int param_1,int param_2,int param_3,int param_4,int param_5)
   else {
     temp_v5 = FUN_002bf4f0(param_1 + 200,0x4de);
   }
-  FUN_00230aec(param_1 + 200,0,*(short *)(temp_v5 + 8) + temp_v3,*(short *)(temp_v5 + 10) + temp_v1,0,7,
+  drawTextAtRelativePosition(param_1 + 200,0,*(short *)(temp_v5 + 8) + temp_v3,*(short *)(temp_v5 + 10) + temp_v1,0,7,
                0xffffffff,param_5,temp_v12);
   return;
 }

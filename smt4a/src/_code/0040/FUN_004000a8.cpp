@@ -1,58 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004000a8` (_code @ 0x4000a8, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the two marker mask words with one `ldm r2, {r0, r2}` (an 8-byte copy?) where armcc emits two ldr; registers shift accordingly. */
+#include "battle/btlMain.h"
+#include "gamedata/Table8Record.h"
+
+/* Battle-wide marker masks; a set blocked bit stops the action. */
+struct BtlMarkerMaskTable {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u64 blocked;
+};
 
 extern "C" {
 
-int FUN_00192550(void);
-int FUN_00400284(int, int, int);
+extern BtlMarkerMaskTable DAT_00573c90;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+BtlMainStateA *btlGetMainState(void);
+u32 FUN_00400164(void *actor, u16 value);
+Table8Record *dataTable8FindRecord(u32 id);
+s32 FUN_00400284(void *actor, s32 arg1, Table8Record *record, s32 arg3);
 
-extern unsigned int DAT_00573cb8; /* 0x573cb8 */
-extern unsigned int DAT_00573cbc; /* 0x573cbc */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00192550. */
-extern unsigned int FUN_00400164(int);
-/* Supplied declaration required: FUN_00400284. */
-
-
-unsigned int FUN_004000a8(int param_1,int param_2)
-
+/* Classify the table-8 record id for actor: 1 none, 2 not usable here, 3 started, 0 blocked or refused. */
+u32 FUN_004000a8(void *actor, u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if ((param_2 == 0) || (FUN_00192550(), param_2 == 0)) {
-    return 1;
-  }
-  if ((!(*(char *)(param_2 + 0x41) == '\x02' || *(char *)(param_2 + 0x41) == '\x03')) ||
-     (!(*(char *)(param_2 + 0x3b) == '\x01' || *(char *)(param_2 + 0x3b) == '\f'))) {
-    temp_v0 = 2;
-  }
-  else {
-    if (*(short *)(param_2 + 0x32) != 0) {
-      temp_v0 = FUN_00400164(param_1);
-      return temp_v0;
+    if (id == 0) {
+        return 1;
     }
-    temp_v1 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573cbc) == 0 &&
-        (DAT_00573cb8 & *(unsigned int *)(temp_v1 + 0x45a8)) == 0) {
-      FUN_00400284(param_1,1,param_2);
-      temp_v0 = 0;
-      if (param_1 != 0) {
-        temp_v0 = 3;
-      }
-      return temp_v0;
+    Table8Record *record = dataTable8FindRecord(id);
+    if (record == NULL) {
+        return 1;
     }
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if ((record->type != 2 && record->type != 3) || (record->kind != 1 && record->kind != 12)) {
+        return 2;
+    }
+    if (record->unk32 != 0) {
+        return FUN_00400164(actor, record->unk32);
+    }
+    BtlMainStateA *state = btlGetMainState();
+    u64 markers = static_cast<u64>(state->markerMasks.words[0]) |
+                  (static_cast<u64>(state->markerMasks.words[1]) << 32);
+    if ((markers & DAT_00573c90.blocked) != 0) {
+        return 0;
+    }
+    return FUN_00400284(actor, 1, record, 1) ? 3 : 0;
 }
 
 } /* extern "C" */

@@ -1,42 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1a9c` (_code @ 0x3f1a9c, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r7, [pc, #136] differs from recovered ldr r7, [pc, #140]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int dataTable04FindById(void);
-int FUN_003eaf20(void);
-int FUN_004c6cb0(int, int);
+struct BattleMaskView {
+    u8 unk00[0x1c0];
+    unsigned long long unk1C0; // 0x1c0
+};
 
-extern unsigned int DAT_00573ae0; /* 0x573ae0 */
-extern unsigned int DAT_00573ae4; /* 0x573ae4 */
+struct BattleObjectView {
+    u8 unk00[0x45a0];
+    unsigned long long unk45A0; // 0x45a0
+};
 
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_004c6cb0. */
+struct BattleEntryView {
+    u8 unk00[8];
+    s16 unk08; // 0x08
+};
 
-
-void FUN_003f1a9c(int param_1,int param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  puVar3 = (unsigned int *)(param_1 + 0x45a0);
-  if (((param_2 == 0) ||
-      ((*puVar3 & DAT_00573ae0) == 0 && (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573ae4) == 0)) &&
-     (temp_v0 = param_1, FUN_003eaf20(), temp_v0 != 0)) {
-    temp_v0 = (int)*(short *)(temp_v0 + 8);
-    FUN_004c6cb0(temp_v0,param_2);
-    if (((temp_v0 != 0) && (dataTable04FindById(), temp_v0 != 0)) && (param_2 != 0)) {
-      temp_v1 = DAT_00573ae4 | *(unsigned int *)(param_1 + 0x45a4);
-      *puVar3 = DAT_00573ae0 | *puVar3;
-      *(unsigned int *)(param_1 + 0x45a4) = temp_v1;
-    }
-  }
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern BattleMaskView g_btlMain;
+BattleEntryView* FUN_003eaf20(BattleObjectView* object);
+s32 FUN_004c6cb0(s32 entryId, s32 mode);
+void* dataTable04FindById(s32 id);
+
+// Resolve a valid table ID and optionally test and set the object's battle mask.
+s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)
+{
+    if (mode != 0 && (object->unk45A0 & g_btlMain.unk1C0) != 0) {
+        return 0;
+    }
+
+    BattleEntryView* entry = FUN_003eaf20(object);
+    if (entry == 0) {
+        return 0;
+    }
+
+    s32 id = FUN_004c6cb0(entry->unk08, mode);
+    if (id == 0) {
+        return 0;
+    }
+    if (dataTable04FindById(id) == 0) {
+        return 0;
+    }
+
+    if (mode != 0) {
+        object->unk45A0 |= g_btlMain.unk1C0;
+    }
+    return id;
+}
+}

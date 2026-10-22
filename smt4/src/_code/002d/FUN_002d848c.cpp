@@ -1,50 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d848c` (_code @ 0x2d848c, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial result retention and VER signature-test predication differ. */
+#include "common.h"
 
 extern "C" {
+s32 FUN_00249e54(s32 index, const char *data);
+s32 keyedRecordRegisterName(const char *name);
+s32 keyedRecordFindByName(const char *name);
+const char *FUN_002522e0(const char *text, s32 character);
+void asdMemFree(void *allocation);
+char *asdLoadFileSyncDefault(const char *path);
 
-int FUN_00249e54(int, char *);
-int asdMemFree(char *);
-
-/* Supplied declaration required: FUN_00249e54. */
-extern int keyedRecordRegisterName(int);
-extern int keyedRecordFindByName(int);
-extern int FUN_002522e0(unsigned int, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-extern char *asdLoadFileSyncDefault(unsigned int);
-
-
-int FUN_002d848c(unsigned int param_1)
-
+// Reuse a registered resource or load and register a VER-format file by its basename.
+s32 FUN_002d848c(const char *path)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  unsigned char temp_v3;
-  
-  temp_v1 = FUN_002522e0(param_1,0x2f);
-  temp_v2 = keyedRecordFindByName(temp_v1 + 1);
-  if (temp_v2 != 0xff) {
-    return temp_v2;
-  }
-  pcVar4 = (char *)asdLoadFileSyncDefault(param_1);
-  if ((pcVar4 != (char *)0x0) && (*pcVar4 == 'V')) {
-    temp_v0 = pcVar4[1];
-    temp_v3 = temp_v0 == 'E';
-    if (temp_v3) {
-      temp_v0 = pcVar4[2];
+    const char *name = FUN_002522e0(path, '/') + 1;
+    s32 index = keyedRecordFindByName(name);
+    if (index != 0xff)
+        return index;
+    char *data = asdLoadFileSyncDefault(path);
+    if (data != NULL && data[0] == 'V') {
+        if (data[1] == 'E' && data[2] == 'R') {
+            index = keyedRecordRegisterName(name);
+            index = FUN_00249e54(index, data);
+            asdMemFree(data);
+            return index;
+        }
     }
-    if (temp_v3 && temp_v0 == 'R') {
-      temp_v1 = keyedRecordRegisterName(temp_v1 + 1);
-      FUN_00249e54(temp_v1,pcVar4);
-      asdMemFree(pcVar4);
-      return temp_v1;
-    }
-  }
-  return 0xff;
+    return 0xff;
 }
-
-} /* extern "C" */
+}

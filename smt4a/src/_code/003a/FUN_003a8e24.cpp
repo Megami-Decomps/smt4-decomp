@@ -1,3 +1,4 @@
+#include "battle/btlScript.h"
 #include "common.h"
 
 extern "C" {
@@ -16,8 +17,6 @@ typedef struct SkillRecord {
     /* 0x00 */ u8 unk00[0x23];
     /* 0x23 */ u8 value;
 } SkillRecord;
-
-extern u32 g_btlScriptUnit;
 
 extern s32 scrGetArg(void);
 extern void scrSetResult(s32 value);

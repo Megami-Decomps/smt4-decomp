@@ -9,7 +9,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int calcHeadingRoundedToCardinalDirection(void);
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_00330108(float *, float *, unsigned char [56]);
 int mathPositionHeadingDegrees(void);
 
@@ -37,7 +37,7 @@ extern float DAT_005f1720; /* 0x5f1720 */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_00330108. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 
@@ -105,7 +105,7 @@ void FUN_002d0480(int param_1)
       temp_v7 = 90.0f;
       mathPositionHeadingDegrees();
       temp_v3 = temp_v4;
-      FUN_002b5cd4();
+      mathAngleDeltaDegrees();
       temp_v1 = 0;
       if (temp_v4 < temp_v5) {
         temp_v7 = -90.0f;

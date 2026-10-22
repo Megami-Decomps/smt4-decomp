@@ -1,47 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc0ac` (_code @ 0x3bc0ac, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/Table02Record.h"
 
-extern "C" {
-
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-int FUN_003bc0ac(unsigned int param_1,unsigned char *param_2,int param_3)
-
+// Returns the requested occurrence of a table record matching both byte keys.
+extern "C" Table02Record* FUN_003bc0ac(u32 keyA, u32 keyB, s32 occurrence)
 {
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char *pbVar6;
-  int temp_v5;
-  
-  temp_v1 = dataTableGet(2,0);
-  temp_v2 = dataTableGetEntries();
-  temp_v3 = dataTableGetCount(temp_v1);
-  temp_v5 = 0;
-  temp_v4 = 0;
-  if (temp_v4 < temp_v3) {
-    do {
-      pbVar6 = (unsigned char *)(temp_v2 + temp_v4 * 0xa0);
-      temp_v0 = *pbVar6;
-      if (temp_v0 == param_1) {
-        pbVar6 = (unsigned char *)(unsigned int)pbVar6[1];
-      }
-      if (temp_v0 == param_1 && pbVar6 == param_2) {
-        if (temp_v5 == param_3) {
-          return temp_v2 + temp_v4 * 0xa0;
+    void* section = dataTableGet(2, 0);
+    Table02Record* records = (Table02Record*)dataTableGetEntries(section);
+    s32 count = dataTableGetCount(section);
+    s32 match = 0;
+    for (s32 index = 0; index < count; ++index) {
+        if (records[index].keyA == keyA && records[index].keyB == keyB) {
+            if (match == occurrence) {
+                return &records[index];
+            }
+            ++match;
         }
-        temp_v5 = temp_v5 + 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v3);
-  }
-  return 0;
+    }
+    return NULL;
 }
-
-} /* extern "C" */

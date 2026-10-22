@@ -4,6 +4,12 @@
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "shard/W6_W6Match8_EffectSelection.h"
 
+struct EffectTextRequest {
+    u32 type;   // 0x00
+    u32 size;   // 0x04
+    s32 state;  // 0x08: 1 once finished
+};
+
 struct EffectEditorMenuState {
     struct Text {
         u8 unk00[0x44];
@@ -34,6 +40,11 @@ struct EffectEditorMenuState {
             u8 unk14[0x18];
             u32 cachedEvent; // 0x2c
         } dispatch;
+        struct {
+            u8 unk00[0x3c];
+            void *owner; // 0x3c: node list owner of the request
+            EffectTextRequest *request; // 0x40: pending text request
+        } textRequest;
     };
     EffMenuNode* label; // 0x48
     u32 unk4c;

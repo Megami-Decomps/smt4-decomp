@@ -1,43 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00341824` (_code @ 0x341824, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r6, r3 differs from recovered mov r6, r3. */
+#include "common.h"
+
+struct FileView;
+
+struct FileVtableView {
+    u8 unk00[0x18]; // 0x00
+    s32 (*unk18)(FileView* file, unsigned long long offset); // 0x18
+    u8 unk1C[0x18]; // 0x1C
+    s32 (*unk34)(FileView* file, u32* transferred, void* buffer,
+                 u32 size, u32 mode); // 0x34
+};
+
+struct FileView {
+    const FileVtableView* vtable; // 0x00
+    u32 unk04; // 0x04
+    u32 unk08; // 0x08: tagged file handle
+};
 
 extern "C" {
+void FUN_0013ebd8(s32 result);
+void sysFatalBreak(void);
+void vcallSlot12IfValid(u32 handle);
 
-int FUN_0013ebd8(void);
-int vcallSlot12IfValid(unsigned int);
-int sysFatalBreak(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: sysFatalBreak. */
-
-
-int FUN_00341824(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Positions the file, transfers data, and releases a valid handle on failure.
+s32 FUN_00341824(FileView* file, u32 offset, void* buffer, u32 size)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [4];
-  
-  (**(romwright_code **)(*param_1 + 0x18))(param_1,*(romwright_code **)(*param_1 + 0x18),param_2,0);
-  FUN_0013ebd8();
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,param_3,param_4,1);
-  FUN_0013ebd8();
-  if ((temp_v0 < 0) && ((param_1[2] & 0xfffffffeU) != 0)) {
-    if ((param_1[2] & 1U) != 0) {
-      sysFatalBreak();
-    }
-    vcallSlot12IfValid(param_1[2] & 0xfffffffe);
-    param_1[2] = 0;
-  }
-  return temp_v0;
-}
+    FUN_0013ebd8(file->vtable->unk18(file, offset));
 
-} /* extern "C" */
+    u32 transferred;
+    s32 result = file->vtable->unk34(file, &transferred, buffer, size, 1);
+    FUN_0013ebd8(result);
+
+    if ((result & 0x80000000U) == 0) {
+        return result;
+    }
+
+    if ((file->unk08 & ~1U) != 0) {
+        if ((file->unk08 & 1U) != 0) {
+            sysFatalBreak();
+        }
+        vcallSlot12IfValid(file->unk08 & ~1U);
+        file->unk08 = 0;
+    }
+
+    return result;
+}
+}

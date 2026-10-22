@@ -32,7 +32,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int flaggedValueHolderGetTotal(int);
 extern int FUN_00240d5c(int);
 /* Supplied declaration required: FUN_0026c57c. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
 extern int FUN_0029e924(int);
@@ -52,7 +52,7 @@ void FUN_003a80f4(int param_1)
   
   temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x5a0));
   if (temp_v0 == 2) {
-    temp_v0 = FUN_002973d8();
+    temp_v0 = messageMainGetChoiceResult();
     if (temp_v0 == 0) {
       temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_003a7fec(param_1,*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x5ac));

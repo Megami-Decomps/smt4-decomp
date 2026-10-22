@@ -16,11 +16,12 @@ typedef struct BtlUnitObj {
 
 extern BtlUnitObj *btlUnitGet(u32 id);
 extern void scrSetResult(s32 value);
+extern u32 g_btlScriptUnit;
 
 /* Script command: result is 1 when either counter of the unit's object (+0xAC, +0xB4) is positive. */
-u32 scrCommUnitHasCounters(u32 *unitId)
+u32 scrCommUnitHasCounters(void)
 {
-    BtlUnitObj *unit = btlUnitGet(*unitId);
+    BtlUnitObj *unit = btlUnitGet(g_btlScriptUnit);
 
     if (unit->obj->unkAC > 0) {
         scrSetResult(1);

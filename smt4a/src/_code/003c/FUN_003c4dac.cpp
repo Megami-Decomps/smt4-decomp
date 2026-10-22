@@ -1,62 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4dac` (_code @ 0x3c4dac, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout: retail shares the `return 1` tail and the record->id load across
+ * paths (branching back to them); the build duplicates them. Logic and registers match. */
+#include "shard/X14_EngineUnits.h"
 
 extern "C" {
 
-int scrSetResult(...);
-int FUN_003e503c(void);
+s32 scrGetArg(void);
+void scrSetResult(u32 result);
+EngineUnitRecord *gameGetSlotRecord(void);
+EngineUnitRecord *FUN_003e503c(u16 index);
+s32 flagAt4IsClearOrMissing(void);
+u32 uiSelectedRecordGetFirst(void);
 
-extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
+extern EngineUnitsRef g_engineCleanupOwner;
 
-extern unsigned int gameGetSlotRecord(void);
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int uiSelectedRecordGetFirst(void);
-extern int flagAt4IsClearOrMissing(void);
-/* Supplied declaration required: FUN_003e503c. */
-
-
-unsigned int FUN_003c4dac(void)
-
+/* Script command: returns the active unit's id (argument set) or its record's id; without a unit
+ * table, the selected record's id, or 0 when the flag is clear. */
+u32 FUN_003c4dac(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg();
-  if ((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) != 0) {
-    temp_v1 = (*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + *(int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x74c0) * 0x150;
-    if (temp_v0 != 0) {
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x4492);
-    }
-    else {
-      temp_v0 = (int)*(char *)(temp_v1 + 0x442c);
-      if (temp_v0 >= 0x19) {
-        temp_v2 = temp_v0 - 0x19;
-        if ((int)temp_v2 < 0) {
-          temp_v2 = 0;
+    s32 arg = scrGetArg();
+    EngineUnits *table = g_engineCleanupOwner.instance;
+    u32 result;
+
+    if (table != NULL) {
+        EngineUnit *unit = &table->units[table->current];
+
+        if (arg != 0) {
+            result = unit->id;
+        } else {
+            EngineUnitRecord *record;
+            if (unit->rank >= 25) {
+                s32 index = unit->rank - 25;
+                if (index < 0) {
+                    index = 0;
+                }
+                record = FUN_003e503c(index);
+            } else {
+                record = gameGetSlotRecord();
+            }
+            result = record->id;
         }
-        temp_v2 = temp_v2 & 0xffff;
-        FUN_003e503c();
-      }
-      else {
-        temp_v2 = gameGetSlotRecord();
-      }
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v2 + 0x62);
+    } else {
+        if (flagAt4IsClearOrMissing() != 0) {
+            scrSetResult(0);
+            return 1;
+        }
+        result = uiSelectedRecordGetFirst();
     }
-  }
-  else {
-    temp_v0 = flagAt4IsClearOrMissing();
-    if (temp_v0 != 0) {
-      scrSetResult(0);
-      return 1;
-    }
-    temp_v2 = uiSelectedRecordGetFirst();
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

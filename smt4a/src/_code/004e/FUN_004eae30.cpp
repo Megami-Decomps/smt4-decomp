@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_00368cac(...);
+int btlTargetSelectSetMode(...);
 int FUN_00368d74(...);
 int FUN_00368e10(...);
 int FUN_003e7fa4(...);
@@ -39,7 +39,7 @@ extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00368cac. */
+/* Supplied declaration required: btlTargetSelectSetMode. */
 /* Supplied declaration required: FUN_00368d74. */
 /* Supplied declaration required: FUN_00368e10. */
 /* Supplied declaration required: FUN_003e7fa4. */
@@ -84,7 +84,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
   unsigned int temp_v17 [13];
   
   if (param_2 == 0) {
-    FUN_00368cac(0);
+    btlTargetSelectSetMode(0);
     return;
   }
   if (param_3 != -1) {
@@ -286,7 +286,7 @@ LAB_004eafdc:
     } while (temp_v0 < 5);
     temp_v2 = 2;
   }
-  FUN_00368cac(temp_v2);
+  btlTargetSelectSetMode(temp_v2);
   return;
 }
 

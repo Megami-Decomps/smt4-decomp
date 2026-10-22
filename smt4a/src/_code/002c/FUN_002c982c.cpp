@@ -6,7 +6,7 @@ extern "C" {
 
 int markerKindGetColor(int);
 int FUN_0024101c(int, short *);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int statusDisplayBindUnitRecord(unsigned char [42], int, int, int);
 int FUN_0036d318(...);
 int FUN_0037e09c(int);
@@ -23,7 +23,7 @@ typedef struct {
 
 /* Supplied declaration required: markerKindGetColor. */
 /* Supplied declaration required: FUN_0024101c. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern short *FUN_002c7e24(void);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_0036d318. */
@@ -76,7 +76,7 @@ void FUN_002c982c(int param_1)
                     temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
                     statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
                     FUN_0037e09c(1);
-                    FUN_002a7324(1);
+                    statusPanelSetOpen(1);
                   }
                 }
                 temp_v3 = temp_v3 + 1;
@@ -102,7 +102,7 @@ LAB_002c998c:
             temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
             statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
             FUN_0037e09c(1);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
           }
         }
         temp_v3 = temp_v0 + 0x4871;
@@ -113,7 +113,7 @@ LAB_002c998c:
           temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
           temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
           statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
-          FUN_002a7324(1);
+          statusPanelSetOpen(1);
         }
       }
       temp_v4 = temp_v4 + 1;

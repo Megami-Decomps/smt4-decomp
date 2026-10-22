@@ -4,7 +4,7 @@
 extern "C" void gameSavedFlagSet(u32 id)
 {
     if (id != 0 && id <= 500) {
-        SaveFlagWork* work = &((SaveFlagImage*)g_gameDataBlocks.unk04)->work;
+        SaveFlagWork* work = &((SaveFlagImage*)g_gameDataBlocks.saveBlock)->work;
         work->flags[(s32)id / 8] |= 1u << ((s32)id % 8);
     }
 }

@@ -22,7 +22,7 @@ extern ContentTransitionRequests DAT_0049fa1c;
 extern AocSystem *g_aocSystem;
 u32 FUN_002764a8(AocSystem *);
 void slotSetRequest(s32, s32, u32);
-void FUN_00296e90();
+void messageMainFinishWindow();
 u32 FUN_0022b8c0(void *);
 void FUN_003b875c(ContentTransition *);
 void FUN_0022b778(ContentTransition *);
@@ -67,7 +67,7 @@ void updateContentTransitionDispatch(ContentTransition *scene)
         } else if (flags & 0x2000) {
             if (flags & 0x40) {
                 scene->flags = flags & ~0x40U;
-                FUN_00296e90();
+                messageMainFinishWindow();
             }
             scene->state = 6;
             scene->phase = 0;

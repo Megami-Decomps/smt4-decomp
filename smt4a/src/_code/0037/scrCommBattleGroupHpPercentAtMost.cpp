@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-s32 FUN_00232388(s32 kind);
+s32 btlResolveEntryChoice(s32 kind);
 void FUN_00301a08(s32 kind, u32 *first, u32 *count);
 BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
@@ -14,7 +14,7 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 u32 scrCommBattleGroupHpPercentAtMost()
 {
     s32 threshold = scrGetArg(0);
-    s32 kind = FUN_00232388(scrGetArg(1));
+    s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 totalHp = 0;
     s32 totalMaxHp = 0;
     s32 first, count;

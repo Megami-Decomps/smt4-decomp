@@ -13,7 +13,7 @@ s32 scrCommOpenDialog(void)
     scrGetArgString();
     FUN_002392b8();
     dialogOpen(0, 1);
-    g_gameState.unk484 = 0;
+    g_gameState.mapFlags.unk484 = 0;
     return 1;
 }
 

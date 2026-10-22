@@ -39,11 +39,18 @@ typedef struct AsdFileRequest {
     /* 0x140 */ struct AsdFileRequest *prev;
 } AsdFileRequest;
 
+/* A registered entry: a caller-supplied 0x14c-byte record kept in a doubly linked list. */
+typedef struct AsdFileEntry {
+    /* 0x000 */ u8 data[0x14C];
+    /* 0x14c */ struct AsdFileEntry *next;
+    /* 0x150 */ struct AsdFileEntry *prev;
+} AsdFileEntry;
+
 /* The loader's globals; the nn::os mutex guarding the list and the worker thread follow separately. */
 typedef struct AsdFileGlobals {
     /* 0x00 */ u8 stopRequested;       /* the worker thread should exit */
     /* 0x04 */ u32 reading;            /* set while a read is in flight */
-    /* 0x08 */ void *bufferA;
+    /* 0x08 */ AsdFileEntry *entries;  /* registered entries, oldest first */
     /* 0x0c */ void *bufferB;
     /* 0x10 */ AsdFileRequest *head;   /* request list */
 } AsdFileGlobals;

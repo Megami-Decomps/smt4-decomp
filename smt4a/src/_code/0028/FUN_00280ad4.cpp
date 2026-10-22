@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0013c174(int, unsigned int [2], int);
 int FUN_0013ebd8(...);
 int asdMemFree(int);
-int FUN_00429fcc(int, int, int, unsigned int);
+int FUN_00429fcc(const char *name, unsigned long long titleId);
 int FUN_0042a068(int, unsigned int, int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
@@ -41,7 +41,8 @@ int FUN_00280ad4(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   if (-1 < temp_v0) {
     temp_v1 = FUN_00142b04();
     temp_v0 = (int)temp_v1;
-    FUN_00429fcc(temp_v0,(int)((unsigned long long)temp_v1 >> 0x20),param_1,param_2);
+    temp_v0 = FUN_00429fcc((const char *)temp_v0,
+        ((unsigned long long)param_2 << 32) | (unsigned int)param_1);
     FUN_0013ebd8();
     if (-1 < temp_v0) {
       DAT_005b40c9 = 1;

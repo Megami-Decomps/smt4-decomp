@@ -1,37 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029e6f0` (_code @ 0x29e6f0, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/PackedIdentifiers.h"
 
-extern "C" {
+extern "C" u32 FUN_0029ce60(u32 identifier, s32 mode, s32 first, s32 second, s32 third);
 
-int FUN_0029ce60(unsigned int, int, int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0029ce60. */
-
-
-unsigned int FUN_0029e6f0(unsigned int *param_1)
-
+// Sum the query results for identifiers whose packed state is active.
+extern "C" u32 FUN_0029e6f0(const PackedIdentifiers *identifiers)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if (*param_1 >> 0x1e == 3) {
-    temp_v1 = *param_1 & 0x7fff;
-    FUN_0029ce60(temp_v1,1,0,0,0);
-  }
-  if ((param_1[1] & 3) == 3) {
-    temp_v0 = (*param_1 & 0x3fffffff) >> 0xf;
-    FUN_0029ce60(temp_v0,1,0,0,0);
-    temp_v1 = temp_v1 + temp_v0;
-  }
-  return temp_v1;
+    u32 result = 0;
+    if (identifiers->firstState == 3)
+        result = FUN_0029ce60(identifiers->firstIdentifier, 1, 0, 0, 0);
+    if (identifiers->secondState == 3)
+        result += FUN_0029ce60(identifiers->secondIdentifier, 1, 0, 0, 0);
+    return result;
 }
-
-} /* extern "C" */

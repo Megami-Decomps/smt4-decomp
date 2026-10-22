@@ -1,10 +1,11 @@
 #include "shard/NaviMain.h"
 
 extern "C" {
+extern NaviMain *g_naviMain;
 
 void FUN_0039f860(u32 unused, u32 value)
 {
-    *(u32 *)((u8 *)g_naviMain + 0x2c) = value;
+    g_naviMain->unk2C = value;
 }
 
 } /* extern "C" */

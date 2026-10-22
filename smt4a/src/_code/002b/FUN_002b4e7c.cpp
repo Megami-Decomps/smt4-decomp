@@ -1,50 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b4e7c` (_code @ 0x2b4e7c, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc hoists the exclusion and category masks out of the loop (extra saved registers); retail hoists only the required mask and reloads the others each pass. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+struct BtlUnitRecordA {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s16 maxHp;
+};
 
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_3_stack;
-
-extern int g_btlMain; /* 0x573920 */
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573980; /* 0x573980 */
-extern unsigned int DAT_00573984; /* 0x573984 */
-extern unsigned int DAT_005739a0; /* 0x5739a0 */
-extern unsigned int DAT_005739a4; /* 0x5739a4 */
-
-
-unsigned int FUN_002b4e7c(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* The unit's maximum HP: its battle combatant's while a battle (not in phase 29) holds it, else the record's own. */
+s32 FUN_002b4e7c(BtlUnitRecordA *record)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  
-  if (g_btlMain != 0) {
-    param_3 = *(int *)(g_btlMain + 0x88);
-  }
-  if (g_btlMain != 0 && param_3 != 0x1d) {
-    temp_v2 = 0;
-    do {
-      puVar4 = (unsigned int *)(*(int *)(g_btlMain + 0x1ffc) + temp_v2 * 0x408);
-      temp_v0 = *puVar4;
-      temp_v1 = puVar4[1];
-      if (((((temp_v1 & DAT_0057397c) != 0 || (temp_v0 & DAT_00573978) != 0) &&
-           ((DAT_005739a0 & temp_v0) == 0 && (DAT_005739a4 & temp_v1) == 0)) &&
-          ((temp_v0 & DAT_00573980) != 0 || (temp_v1 & DAT_00573984) != 0)) && (puVar4[0xfe] == param_1)
-         ) {
-        return puVar4[0x97];
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x6d);
-  }
-  return (int)*(short *)(param_1 + 0x1c);
+    BtlMainStateA *state = g_btlMain.state;
+    s32 maxHp = record->maxHp;
+
+    if (state != NULL && state->unk0088 != 29) {
+        for (s32 i = 0; i < 109; i++) {
+            BtlCombatantEntryA *entry = &state->entries[i];
+
+            if ((entry->flags & g_btlMain.combatantMasks.required) != 0 &&
+                (entry->flags & g_btlMain.exclusionMask) == 0 &&
+                (entry->flags & g_btlMain.actorCategories[0]) != 0 && entry->record == record) {
+                maxHp = entry->maxHp;
+                break;
+            }
+        }
+    }
+    return maxHp;
 }
 
 } /* extern "C" */

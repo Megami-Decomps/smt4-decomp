@@ -1,58 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399290` (_code @ 0x399290, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the enabled byte through a second base (marker + 0xB00, offset 0x78) and swaps r3/ip for the state pointer; the rest matches. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0040619c(int, int);
+typedef struct LmapMarkerNode {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags; /* bits 0-1 set: hidden */
+} LmapMarkerNode;
 
-extern int g_lmapMainState; /* 0x580238 */
+typedef struct LmapMarkerModel {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *nodes;
+} LmapMarkerModel;
 
-/* Supplied declaration required: FUN_0040619c. */
+typedef struct LmapMarker {
+    /* 0x00 */ u8 enabled;
+    /* 0x01 */ u8 shown;
+    /* 0x02 */ u8 unk02[0x86];
+} LmapMarker;
 
+/* The parts of the Apocalypse map state block this function uses. */
+typedef struct LmapMarkerState {
+    /* 0x000 */ u8 unk000[0xAE4];
+    /* 0xAE4 */ LmapMarkerModel *model;
+    /* 0xAE8 */ u8 unkAE8[0x90];
+    /* 0xB78 */ LmapMarker markers[1];
+} LmapMarkerState;
 
-void FUN_00399290(int param_1,int param_2)
+extern LmapMarkerState *g_lmapMainState;
 
+LmapMarkerNode *FUN_0040619c(void *nodes, s32 index);
+
+/* Shows or hides map marker `index` (when it is enabled), updating its model node's visibility bits. */
+void FUN_00399290(s32 index, s32 show)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = g_lmapMainState;
-  if (g_lmapMainState != 0) {
-    temp_v3 = g_lmapMainState + param_1 * 0x88;
-    temp_v0 = *(char *)(temp_v3 + 0xb79);
-    if (param_2 != 0) {
-      if (temp_v0 != '\0') {
-        return;
-      }
-      if (*(char *)(temp_v3 + 0xb78) == '\0') {
-        return;
-      }
-      *(unsigned char *)(temp_v3 + 0xb79) = 1;
-      temp_v4 = *(int *)(*(int *)(temp_v4 + 0xae4) + 8);
-      FUN_0040619c(temp_v4,param_1);
-      temp_v2 = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
+    LmapMarkerState *state = g_lmapMainState;
+
+    if (state != NULL) {
+        if (show) {
+            if (!state->markers[index].shown && state->markers[index].enabled) {
+                state->markers[index].shown = 1;
+                LmapMarkerNode *node = FUN_0040619c(state->model->nodes, index);
+                node->flags &= ~3;
+            }
+        } else if (state->markers[index].shown && state->markers[index].enabled) {
+            state->markers[index].shown = 0;
+            LmapMarkerNode *node = FUN_0040619c(state->model->nodes, index);
+            node->flags |= 3;
+        }
     }
-    else {
-      temp_v1 = '\0';
-      if (temp_v0 != '\0') {
-        temp_v1 = *(char *)(temp_v3 + 0xb78);
-      }
-      if (temp_v0 == '\0' || temp_v1 == '\0') {
-        return;
-      }
-      *(unsigned char *)(temp_v3 + 0xb79) = 0;
-      temp_v4 = *(int *)(*(int *)(temp_v4 + 0xae4) + 8);
-      FUN_0040619c(temp_v4,param_1);
-      temp_v2 = *(unsigned int *)(temp_v4 + 4) | 3;
-    }
-    *(unsigned int *)(temp_v4 + 4) = temp_v2;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -31,8 +31,8 @@ extern int idListAnyValid(unsigned int);
 extern int uniteFlagIsClear(void);
 extern int FUN_0028f670(void);
 extern unsigned int FUN_00292844(unsigned int);
-extern unsigned int FUN_00299218(int, unsigned int);
-extern int FUN_0029d65c(int);
+extern unsigned int dataTable15GetUnlockedEntryId(int, unsigned int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern unsigned int FUN_0029e958(int);
 /* Supplied declaration required: vec2GetYInt. */
@@ -113,7 +113,7 @@ void FUN_001978b4(void)
         }
         if ((((!temp_v14) || (temp_v11 = vec2GetXInt(temp_v11), temp_v11 != 0)) ||
             (temp_v11 = *(int *)(temp_v0 + 0x18), temp_v11 == 3)) || (temp_v11 == 0x1e || temp_v11 == 0x1f)) {
-          temp_v3 = FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v10);
+          temp_v3 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v0 + 0x98),temp_v10);
           temp_v11 = temp_v20;
           if ((temp_v4 & 1) != 0) {
             temp_v11 = temp_v21;
@@ -151,7 +151,7 @@ void FUN_001978b4(void)
          (temp_v11 != 0x1e && temp_v11 != 0x1f)) {
         temp_v11 = vec2GetXInt(temp_v2);
         temp_v2 = vec2GetYInt(temp_v2);
-        temp_v1 = FUN_0029d65c((int)*(short *)(temp_v0 + temp_v1 * 2 + 0xdf0));
+        temp_v1 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v0 + temp_v1 * 2 + 0xdf0));
         if (temp_v1 == 2) {
           temp_v12 = 0;
           temp_v1 = temp_v12;
@@ -161,7 +161,7 @@ void FUN_001978b4(void)
           temp_v12 = vec2GetYInt(temp_v0 + 0xd64);
         }
         temp_v3 = objectPartRunUnlessLocked(temp_v0 + 0x34);
-        temp_v3 = FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v3);
+        temp_v3 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v0 + 0x98),temp_v3);
         if ((temp_v4 & 1) == 0) {
           temp_v7 = 8 - temp_v4;
           temp_v9 = 0xc;

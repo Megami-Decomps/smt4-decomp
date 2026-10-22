@@ -1,6 +1,7 @@
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
 
 int FUN_0026d654(int arg);
 int partyPanelSetState(int a, int b);
@@ -10,14 +11,14 @@ int timerStart(void *timer, int a, int b);
 
 void FUN_0026d5a4(void)
 {
-    Scene43dcf0 *scene = g_partyPanel;
+    PartyPanelState *scene = g_partyPanel;
     u8 state;
     int i;
 
     if (g_partyPanel == NULL) {
         return;
     }
-    state = g_partyPanel->state;
+    state = g_partyPanel->panelState;
     if ((state != 12 && state != 4) && (state != 15)) {
         i = 0;
         do {
@@ -27,7 +28,7 @@ void FUN_0026d5a4(void)
         timerStart(scene->timerB.data, 7, 0);
     }
     FUN_00298d28(0, 0);
-    state = scene->state;
+    state = scene->panelState;
     if ((state != 1 && state != 6) && (state != 7)) {
         beginStatusPanelClose();
     }

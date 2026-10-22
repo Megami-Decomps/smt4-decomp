@@ -1,59 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00295d7c` (_code @ 0x295d7c, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materializes the -1 "not found" index in r6 before the search, and loads the two ids in the other order. */
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00295d7c_arg0 fn_00295d7c_arg0;
-struct fn_00295d7c_arg0 {
-    unsigned char pad_0x0[0x4a];
-    byte field_0x4a; /* +0x4a */
-    unsigned char pad_0x4b[0x8f];
-    byte field_0xda; /* +0xda */
-    unsigned char pad_0xdb[0x529];
-    unsigned char field_0x604; /* +0x604 */
-    unsigned char pad_0x605[0x9197];
-    char field_0x979c; /* +0x979c */
-    char field_0x979d; /* +0x979d */
-    char field_0x979e; /* +0x979e */
-};
+typedef struct SlotUnit {
+    /* 0x000 */ u8 unk000[0x4A];
+    /* 0x04A */ u8 id;
+    /* 0x04B */ u8 unk04B[0x5B9];
+} SlotUnit;
 
-extern int gameGetSlotTable(void);
+typedef struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x90];
+    /* 0x0090 */ SlotUnit units[24];
+    /* 0x90F0 */ u8 unk90F0[0x18];
+    /* 0x9108 */ s8 party[3]; // unit indices, negative when empty
+} SlotTable;
 
+SlotTable *gameGetSlotTable(void);
 
-unsigned int FUN_00295d7c(fn_00295d7c_arg0 *param_1)
-
+/* The unit's index in the slot table, or -1. */
+static __inline s32 slotTableIndexOf(SlotUnit *unit)
 {
-  int temp_v0;
-  fn_00295d7c_arg0 *pfVar2;
-  int temp_v1;
-  
-  if (param_1 != (fn_00295d7c_arg0 *)0x0) {
-    temp_v0 = gameGetSlotTable();
-    pfVar2 = (fn_00295d7c_arg0 *)(temp_v0 + 0x90);
-    temp_v0 = 0;
-    do {
-      if ((pfVar2 == param_1) || (pfVar2->field_0x4a == param_1->field_0x4a)) {
-        temp_v1 = gameGetSlotTable();
-        if ((((*(char *)(temp_v1 + 0x9108) < 0) || (*(char *)(temp_v1 + 0x9108) != temp_v0)) &&
-            ((*(char *)(temp_v1 + 0x9109) < 0 || (*(char *)(temp_v1 + 0x9109) != temp_v0)))) &&
-           ((*(char *)(temp_v1 + 0x910a) < 0 || (*(char *)(temp_v1 + 0x910a) != temp_v0)))) {
-          return 0;
+    if (unit != NULL) {
+        SlotUnit *slot = gameGetSlotTable()->units;
+        s32 i;
+
+        for (i = 0; i < 24; i++, slot++) {
+            if (slot == unit || slot->id == unit->id) {
+                return i;
+            }
         }
-        return 1;
-      }
-      temp_v0 = temp_v0 + 1;
-      pfVar2 = (fn_00295d7c_arg0 *)&pfVar2->field_0x604;
-    } while (temp_v0 < 0x18);
-  }
-  temp_v0 = -1;
-  temp_v1 = gameGetSlotTable();
-  if ((((*(char *)(temp_v1 + 0x9108) < 0) || (*(char *)(temp_v1 + 0x9108) != temp_v0)) &&
-      ((*(char *)(temp_v1 + 0x9109) < 0 || (*(char *)(temp_v1 + 0x9109) != temp_v0)))) &&
-     ((*(char *)(temp_v1 + 0x910a) < 0 || (*(char *)(temp_v1 + 0x910a) != temp_v0)))) {
-    return 0;
-  }
-  return 1;
+    }
+    return -1;
+}
+
+/* Whether the unit is in one of the three party slots. */
+bool FUN_00295d7c(SlotUnit *unit)
+{
+    s32 index = slotTableIndexOf(unit);
+    s8 *party = gameGetSlotTable()->party;
+
+    if (party[0] >= 0 && party[0] == index) {
+        return true;
+    }
+    if (party[1] >= 0 && party[1] == index) {
+        return true;
+    }
+    if (party[2] >= 0 && party[2] == index) {
+        return true;
+    }
+    return false;
 }
 
 } /* extern "C" */

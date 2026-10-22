@@ -1,13 +1,6 @@
-#include "common.h"
+#include "shard/W4_W4Match2_UiQuest.h"
 
 extern "C" {
-
-typedef struct Obj {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ int state;
-} Obj;
-
-extern Obj *g_uiQuest;
 
 u8 FUN_002e31b0(void)
 {

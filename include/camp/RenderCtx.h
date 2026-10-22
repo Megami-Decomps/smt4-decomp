@@ -35,7 +35,11 @@ typedef struct RenderCtx {
 typedef struct RenderCtxA {
     /* 0x0000 */ u8 unk0000[0x52C];
     /* 0x052C */ u32 unk052C;
-    /* 0x0530 */ u8 unk0530[0xD28];
+    /* 0x0530 */ u8 unk0530[0xC8];
+    /* 0x05F8 */ u8 unk5F8;
+    /* 0x05F9 */ u8 unk05F9[0x103];
+    /* 0x06FC */ u32 unk6FC;
+    /* 0x0700 */ u8 unk0700[0xB58];
     /* 0x1258 */ RenderStateStack stackA;
     union {
         /* 0x1278 */ u8 unk1278[0x40];
@@ -46,6 +50,9 @@ typedef struct RenderCtxA {
     };
     /* 0x12B8 */ RenderStateStack stackB;
 } RenderCtxA;
+
+typedef char RenderCtxSizeCheck[sizeof(RenderCtx) == 0x12CC ? 1 : -1];
+typedef char RenderCtxASizeCheck[sizeof(RenderCtxA) == 0x12D8 ? 1 : -1];
 
 /* Pushes `state`; the state is re-applied if it differs from the previous top. */
 static __inline void renderStackPush(RenderStateStack *st, int state)
@@ -83,6 +90,12 @@ static __inline void renderStackSet(RenderStateStack *st, int state)
         st->apply(state);
         st->dirty = 0;
     }
+}
+
+/* Pushes `state` on the context's first stack; the stack is located after `state` is evaluated. */
+static __inline void renderCtxPushA(RenderCtx *context, int state)
+{
+    renderStackPush(&context->stackA, state);
 }
 
 #endif

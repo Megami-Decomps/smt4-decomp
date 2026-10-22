@@ -1,47 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001dd140` (_code @ 0x1dd140, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Quad bounds and clamp constants use different VFP scheduling. */
+#include "ui/FrameTex.h"
 
-extern "C" {
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_4_stack;
-
-extern int g_frameTex; /* 0x43e278 */
-
-
-void FUN_001dd140(unsigned int param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
-
+// Padding uses the engine's signed IEEE-754 bit comparison, including its NaN behavior.
+static __inline f32 frameQuadClampPadding(f32 padding)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */
-  int temp_v0;
-  float in_s0;
-  float in_s1;
-  
-  temp_v0 = g_frameTex;
-  if ((int)in_s0 < 0x3f800000) {
-    in_s0 = 1.0f;
-  }
-  if ((int)in_s1 < 0x3f800000) {
-    in_s1 = 1.0f;
-  }
-  *(float *)(g_frameTex + 0xe98) = -in_s0;
-  *(float *)(temp_v0 + 0xe9c) = in_s0 + 400.0f;
-  *(float *)(temp_v0 + 0xea0) = -in_s0;
-  *(float *)(temp_v0 + 0xea4) = in_s0 + 400.0f;
-  *(float *)(temp_v0 + 0xea8) = -in_s1;
-  *(float *)(temp_v0 + 0xeac) = -in_s1;
-  *(float *)(temp_v0 + 0xeb0) = in_s1 + 240.0f;
-  *(float *)(temp_v0 + 0xeb4) = in_s1 + 240.0f;
-  *(unsigned int *)(temp_v0 + 0xec0) = param_2;
-  *(unsigned int *)(temp_v0 + 0xec4) = 0;
-  *(unsigned char *)(temp_v0 + 0xecc) = param_3;
-  *(unsigned int *)(temp_v0 + 0xec8) = param_1;
-  *(unsigned int *)(temp_v0 + 0xe90) = param_4;
-  *(unsigned char *)(temp_v0 + 0xe8d) = 1;
-  return;
+    union FloatRepresentation { f32 value; s32 bits; } representation;
+    representation.value = padding;
+    return representation.bits < 0x3F800000 ? 1.0f : padding;
 }
 
-} /* extern "C" */
+extern "C" {
+extern FrameWork* g_frameTex;
+
+// Builds the padded 400-by-240 frame quad and publishes its rendering parameters.
+void FUN_001dd140(u32 first, u32 second, u8 option, u32 resource, f32 horizontalPadding, f32 verticalPadding)
+{
+    horizontalPadding = frameQuadClampPadding(horizontalPadding);
+    verticalPadding = frameQuadClampPadding(verticalPadding);
+    FrameWork* work = g_frameTex;
+    work->quadX[0] = -horizontalPadding;
+    work->quadX[1] = horizontalPadding + 400.0f;
+    work->quadX[2] = -horizontalPadding;
+    work->quadX[3] = horizontalPadding + 400.0f;
+    work->quadY[0] = -verticalPadding;
+    work->quadY[1] = -verticalPadding;
+    work->quadY[2] = verticalPadding + 240.0f;
+    work->quadY[3] = verticalPadding + 240.0f;
+    work->unkEC0 = second;
+    work->unkEC4 = 0.0f;
+    work->unkECC = option;
+    work->unkEC8 = first;
+    work->unkE90 = resource;
+    work->quadActive = 1;
+}
+}

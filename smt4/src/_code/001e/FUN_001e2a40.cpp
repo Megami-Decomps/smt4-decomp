@@ -1,53 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e2a40` (_code @ 0x1e2a40, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the input vector uses a paired VFP move and the entry address uses different core registers. */
+#include "shard/W6_W6Match6_CollisionQuad.h"
+
+struct MapCircleGimic {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ CollisionVector position;
+    /* 0x10 */ u8 unk10[6];
+    /* 0x16 */ s16 id;
+    /* 0x18 */ u8 unk18[0x10];
+};
+struct MapCircleGimicState {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ MapCircleGimic entries[24];
+};
 
 extern "C" {
+extern MapCircleGimicState *g_mapGimic;
+bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first,
+                               f32 firstRadius, CollisionVector second, f32 secondRadius);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int g_mapGimic; /* 0x447a48 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern int mapResolveCircleOverlapXZ(unsigned long long *);
-
-
-void FUN_001e2a40(unsigned int *param_1)
-
+void FUN_001e2a40(CollisionVector *result, CollisionVector point)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned long long temp_v2;
-  unsigned long long temp_v3;
-  unsigned long long temp_v4;
-  unsigned int uStack_28;
-  
-  temp_v1 = 0;
-  temp_v2 = romwright_piece_4_4(in_s1,in_s0);
-  temp_v3 = (unsigned long long)in_s2;
-  do {
-    temp_v0 = g_mapGimic + temp_v1 * 0x28;
-    if (((*(char *)(temp_v0 + 0x1c) != '\0') && (*(short *)(temp_v0 + 0x32) == 0xd)) &&
-       (temp_v0 = mapResolveCircleOverlapXZ(&temp_v4), temp_v0 != 0)) {
-      temp_v3 = (unsigned long long)uStack_28;
-      temp_v2 = temp_v4;
+    for (s32 index = 0; index < 24; ++index) {
+        MapCircleGimic *entry = &g_mapGimic->entries[index];
+        if (entry->active && entry->id == 13) {
+            CollisionVector resolved;
+            if (mapResolveCircleOverlapXZ(&resolved, point, 50.0f,
+                                          entry->position, 50.0f)) {
+                point = resolved;
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  *param_1 = (int)temp_v2;
-  param_1[1] = (int)((unsigned long long)temp_v2 >> 0x20);
-  param_1[2] = (int)temp_v3;
-  return;
+    *result = point;
 }
-
-} /* extern "C" */
+}

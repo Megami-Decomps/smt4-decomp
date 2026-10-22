@@ -1,65 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00159d60` (_code @ 0x159d60, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The hardware-mode byte copy uses LDRB rather than retail's signed inline-getter load and changes the adjacent store scheduling. */
+#include "nn/snd/Initialization.h"
+#include "nn/Result.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
+extern NnSndInitialization DAT_005894e4;
+extern NnSndMasterManager g_nnSndMasterManager;
+extern NnSndVoiceManager g_nnSndVoiceManager;
+extern DspsndState g_dspsndState;
+s32 FUN_0016f864(void);
+s32 FUN_0016f574(DspsndState *state, u32 mode);
+void FUN_001a167c(NnSndMasterManager *manager);
+void FUN_0016f25c(NnSndMasterManager *manager);
+void nn_snd_CTR_VoiceManager_Initialize(NnSndVoiceManager *manager);
+u32 FUN_001bd5f8(void);
+void nn_snd_CTR_DspFxManager_Initialize(u32 work);
+void FUN_0016e700(void (*first)(void), void (*second)(void), void (*third)(void));
+void FUN_0016f3e4(void);
+void FUN_0016f7ec(void);
+void FUN_0016f3a8(void);
 
-int FUN_0016e700(...);
-int FUN_0016f25c(...);
-int FUN_0016f574(...);
-int FUN_001a167c(...);
-
-extern unsigned char LAB_0016f3a8; /* 0x16f3a8 */
-extern int FUN_0016f3e4(...); /* 0x16f3e4 */
-extern int FUN_0016f7ec(...); /* 0x16f7ec */
-extern signed char DAT_005894e4; /* 0x5894e4 */
-extern unsigned char DAT_005894e5; /* 0x5894e5 */
-extern unsigned char DAT_005894e6; /* 0x5894e6 */
-extern unsigned char DAT_005894e7; /* 0x5894e7 */
-extern unsigned char DAT_005894e8; /* 0x5894e8 */
-extern unsigned char DAT_005894e9; /* 0x5894e9 */
-extern unsigned char g_nnSndMasterManager; /* 0x643380 */
-extern unsigned char g_dspsndState; /* 0x6433d0 */
-extern unsigned char g_nnSndVoiceManager; /* 0x6449d0 */
-extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
-
-/* Supplied declaration required: FUN_0016e700. */
-/* Supplied declaration required: FUN_0016f25c. */
-/* Supplied declaration required: FUN_0016f574. */
-extern int FUN_0016f864(unsigned int);
-/* Supplied declaration required: FUN_001a167c. */
-extern unsigned int FUN_001bd5f8(void);
-extern void nn_snd_CTR_DspFxManager_Initialize(unsigned int);
-extern void nn_snd_CTR_VoiceManager_Initialize(unsigned int);
-
-
-void FUN_00159d60(void)
-
+/* Initializes the DSP, master, voice and effect managers once and installs their callbacks. */
+s32 FUN_00159d60(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1;
-  
-  if ((DAT_005894e4 == '\0') && (temp_v0 = FUN_0016f864(0), -1 < temp_v0)) {
-    puVar2 = &g_dspsndState;
-    FUN_0016f574(&g_dspsndState,0);
-    if (-1 < (int)puVar2) {
-      DAT_005894e8 = uRam1ff810c0;
-      FUN_001a167c(&g_nnSndMasterManager);
-      nn_snd_CTR_VoiceManager_Initialize((unsigned int)&g_nnSndVoiceManager);
-      FUN_0016f25c(&g_nnSndMasterManager);
-      temp_v1 = FUN_001bd5f8();
-      nn_snd_CTR_DspFxManager_Initialize(temp_v1);
-      FUN_0016e700(FUN_0016f3e4,FUN_0016f7ec,&LAB_0016f3a8);
-      DAT_005894e5 = 0;
-      DAT_005894e6 = 0;
-      DAT_005894e7 = 0;
-      DAT_005894e9 = 1;
-      DAT_005894e4 = '\x01';
+    if (DAT_005894e4.initialized != 0) {
+        return 0x0820ABF9;
     }
-  }
-  return;
+    s32 result = FUN_0016f864();
+    if (nnResultIsFailure(result)) {
+        return result;
+    }
+    result = FUN_0016f574(&g_dspsndState, 0);
+    if (nnResultIsFailure(result)) {
+        return result;
+    }
+    DAT_005894e4.hardwareMode = reinterpret_cast<const SystemSoundInfo *>(0x1FF81000)->mode;
+    FUN_001a167c(&g_nnSndMasterManager);
+    nn_snd_CTR_VoiceManager_Initialize(&g_nnSndVoiceManager);
+    FUN_0016f25c(&g_nnSndMasterManager);
+    nn_snd_CTR_DspFxManager_Initialize(FUN_001bd5f8());
+    FUN_0016e700(FUN_0016f3e4, FUN_0016f7ec, FUN_0016f3a8);
+    DAT_005894e4.unk01 = 0;
+    DAT_005894e4.unk02 = 0;
+    DAT_005894e4.unk03 = 0;
+    DAT_005894e4.ready = 1;
+    DAT_005894e4.initialized = 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -14,7 +14,7 @@ int FUN_00233410(int);
 int FUN_00233818(...);
 int ifTouchRegionClearAll(...);
 int FUN_0029212c(int);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_0029c43c(unsigned int, int);
 int messageTargetSetValue(unsigned int, int);
@@ -45,7 +45,7 @@ extern int flaggedValueHolderGetTotal(int);
 extern int FUN_0027ee9c(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0029212c. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: FUN_0029c43c. */
@@ -89,7 +89,7 @@ void FUN_003a2c48(int param_1)
        ((temp_v2 = FUN_0027ee9c(), temp_v2 != 0 ||
         (temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168)), temp_v2 == 2)))) {
       FUN_002328b4();
-      FUN_00296e90();
+      messageMainFinishWindow();
       *(unsigned int *)(param_1 + 8) = 2;
       *(unsigned int *)(param_1 + 0xc) = 0;
       return;
@@ -133,7 +133,7 @@ void FUN_003a2c48(int param_1)
     temp_v2 = FUN_0027ee9c();
     if (temp_v2 != 0) {
       FUN_002328b4();
-      FUN_00296e90();
+      messageMainFinishWindow();
       *(unsigned int *)(param_1 + 8) = 5;
       *(unsigned int *)(param_1 + 0xc) = 0;
       FUN_0029c43c(*(unsigned int *)(param_1 + 0x15d20),0);

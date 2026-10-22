@@ -23,7 +23,7 @@ int clearWordHalfByte(unsigned int *);
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
@@ -97,7 +97,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
   }
   temp_v0 = FUN_0013def0(0);
   if ((temp_v0 == 0) &&
-     ((temp_v0 = FUN_001643a0(), temp_v0 == 6 || (temp_v0 = padButtonIsPressed(0), temp_v0 != 0)))) {
+     ((temp_v0 = ifTouchGetSelectionMode(), temp_v0 == 6 || (temp_v0 = padButtonIsPressed(0), temp_v0 != 0)))) {
     param_1[8] = 2;
     param_1[0xf] = 0;
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0039f84c(int);
+int naviMainGetParameter(int);
 int NaviMain_SetCursorPos(int, float *);
 int VectorSignedToFloat(double, int);
 
@@ -32,7 +32,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 extern int FUN_002bffd8(float *, float *);
-/* Supplied declaration required: FUN_0039f84c. */
+/* Supplied declaration required: naviMainGetParameter. */
 extern float *NaviMain_GetCursorPos(int);
 /* Supplied declaration required: NaviMain_SetCursorPos. */
 
@@ -71,7 +71,7 @@ void FUN_0039c728(int param_1)
       }
     }
     else {
-      FUN_0039f84c(temp_v1);
+      naviMainGetParameter(temp_v1);
       temp_v3 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = (temp_v3 - *(float *)(param_1 + 0x2c)) / in_s0 + *(float *)(param_1 + 0x34);
       temp_v3 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -114,7 +114,7 @@ LAB_0039c918:
   *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) * DAT_0044cdc8;
   temp_v3 = *(float *)(param_1 + 0x40) * temp_v3;
   *(float *)(param_1 + 0x40) = temp_v3;
-  FUN_0039f84c(temp_v1);
+  naviMainGetParameter(temp_v1);
   pfVar2 = (float *)NaviMain_GetCursorPos(temp_v1);
   temp_v6 = *(float *)(param_1 + 0x3c) / temp_v3 + *pfVar2;
   temp_v7 = *(float *)(param_1 + 0x40) / temp_v3 + pfVar2[1];

@@ -18,7 +18,7 @@ extern const u32 DAT_0052f210[];
 u8 *FUN_0026140c();
 void sysMemClear(void *, u32);
 void rt_memclr(void *, u32);
-u32 FUN_004daf18(void *, u16);
+u32 entryDefIsAvailable(void *, u16);
 u32 FUN_002a4b28(u32);
 u16 FUN_0026264c(u32);
 u32 FUN_004da77c(void *, s32, u32);
@@ -35,7 +35,7 @@ void rebuildFusionCatalogLists()
     sysMemClear(work->catalogA.skills, sizeof(work->catalogA.skills));
     s32 demonCount = 0, raceCount = 0;
     for (u16 id = 0; id <= 1200; ++id) {
-        if (FUN_004daf18(work->context, id)) {
+        if (entryDefIsAvailable(work->context, id)) {
             const DevilRecordA *demon = FUN_00184310(id);
             if ((FUN_002a4b28(demon->id) || FUN_0026264c(demon->id)) &&
                 (!filter->race || filter->race == demon->race) &&

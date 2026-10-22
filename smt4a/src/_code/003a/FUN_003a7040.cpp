@@ -1,11 +1,11 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
 void loadSlotEnsureLoaded(s32 arg);
-void FUN_004715a8(u32 value);
+void FUN_004715a8(AocSystemA *system);
 
-extern u32 g_aocSystem;
+extern AocSystemA *g_aocSystem;
 
 void FUN_003a7040(void)
 {

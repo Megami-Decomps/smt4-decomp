@@ -1,60 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dcad0` (_code @ 0x3dcad0, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int libc_strcmp(int, unsigned int);
+s32 btlGetMainState(void);
+s32 libc_strcmp(const char *a, const char *b);
+s32 FUN_00227668(void *unit);
+s32 FUN_00293230(void);
 
-extern unsigned int DAT_00435d10; /* 0x435d10 */
+typedef struct {
+    u8 unk0[0x10];
+    const char *name;  /* 0x10 */
+} BtlEffectState;
 
-extern int FUN_00227668(int);
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: libc_strcmp. */
+extern BtlEffectState g_btlEffect;
 
+typedef struct {
+    char name[0x10];   /* 0x00 */
+    s16 bonus;         /* 0x10 */
+    u8 unk12[4];
+} BtlNameBonus; /* size 0x16 */
 
-int FUN_003dcad0(int param_1)
+typedef struct {
+    u8 unk0[0xb0];
+    BtlNameBonus entries[4]; /* 0xb0 */
+} BtlNameBonusTable;
 
+typedef struct {
+    u8 unk0[0x1cfc];
+    BtlNameBonusTable *bonusTable; /* 0x1cfc */
+} BtlBonusUnit;
+
+static BtlNameBonus *btlFindNameBonus(BtlBonusUnit *unit)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  btlGetMainState();
-  temp_v0 = FUN_00293230();
-  if (temp_v0 != 0) {
-    temp_v0 = -1;
-  }
-  else {
-    piVar4 = (int *)(param_1 + 0x1cfc);
-    temp_v0 = 0;
-    if (*piVar4 != 0) {
-      temp_v2 = 0;
-      do {
-        temp_v1 = *piVar4 + temp_v2 * 0x16 + 0xb0;
-        if ((temp_v1 != 0) && (libc_strcmp(temp_v1,DAT_00435d10), temp_v1 == 0)) {
-          temp_v2 = *piVar4 + temp_v2 * 0x16 + 0xb0;
-          if (temp_v2 == 0) {
-            temp_v0 = FUN_00227668(param_1);
-            return temp_v0;
-          }
-          temp_v0 = FUN_00227668(param_1);
-          temp_v0 = temp_v0 + *(short *)(temp_v2 + 0x10);
-          break;
+    s32 i;
+
+    if (unit->bonusTable != NULL) {
+        for (i = 0; i < 4; i++) {
+            char *name = unit->bonusTable->entries[i].name;
+            if (name != NULL && libc_strcmp(name, g_btlEffect.name) == 0) {
+                return &unit->bonusTable->entries[i];
+            }
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 4);
-      if (temp_v0 != 0) {
-        return temp_v0;
-      }
     }
-    temp_v0 = FUN_00227668(param_1);
-  }
-  return temp_v0;
+    return NULL;
+}
+
+/* Returns the unit's base value plus the bonus listed for the current effect's name, or -1 when unavailable. */
+s32 FUN_003dcad0(BtlBonusUnit *unit)
+{
+    BtlNameBonus *entry;
+    s32 value;
+
+    btlGetMainState();
+    if (FUN_00293230() != 0) {
+        return -1;
+    }
+    value = 0;
+    entry = btlFindNameBonus(unit);
+    if (entry != NULL) {
+        value = FUN_00227668(unit) + entry->bonus;
+    }
+    if (value == 0) {
+        value = FUN_00227668(unit);
+    }
+    return value;
 }
 
 } /* extern "C" */

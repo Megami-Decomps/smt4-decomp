@@ -1,19 +1,15 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-typedef struct Job {
-    /* 0x00 */ u32 id;
-    /* 0x04 */ u8 started;
-} Job;
 
 s32 jobFind(u32 id);
-extern Job *g_aocJob;
+extern AocJobStateA *g_aocJob;
 
 /* Returns 1 when the job record at 0x57F568 exists and its job is found or it has not started. */
 u32 FUN_002b4cb0(void)
 {
-    Job *job;
+    AocJobStateA *job;
     s32 found;
 
     job = g_aocJob;

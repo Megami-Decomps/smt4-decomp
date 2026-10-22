@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern s32 FUN_0049cc10(u32 id);
+extern s32 aocItemGetPrice(u32 id);
 extern s32 FUN_0049c9a0(u32 id);
 
 s32 FUN_00494530(u32 a, u32 b)
 {
-    s32 keyA = FUN_0049cc10(a);
-    s32 keyB = FUN_0049cc10(b);
+    s32 keyA = aocItemGetPrice(a);
+    s32 keyB = aocItemGetPrice(b);
     s32 diff = keyB - keyA;
 
     if (diff == 0) {

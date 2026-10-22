@@ -12,7 +12,7 @@ int FUN_00203b40(...);
 int FUN_0020b490(...);
 int FUN_00228b04(...);
 int FUN_002685cc(void);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int FUN_00336de4(...);
 int FUN_003450d4(...);
 int obj04Finish(void);
@@ -42,7 +42,7 @@ int FUN_0022e774(void);
 int FUN_00267d74(int, int, int, int);
 int scrScriptProcessStartEntry(...);
 int FUN_002a4894(...);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int flaggedEntrySetValueA(...);
 int FUN_0032fea0(...);
 int whisperEffectFinish(void);
@@ -107,9 +107,9 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002a4894. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a7288. */
+/* Supplied declaration required: statusDownRestartTransition. */
 extern int objectApplyIfUnblocked(unsigned int);
 extern int FUN_002effbc(void);
 extern int whisperEffectIsIdle(void);
@@ -629,7 +629,7 @@ LAB_0026e1e4:
     if (temp_v9 == 0) {
       FUN_0022e774();
     }
-    FUN_002a7288();
+    statusDownRestartTransition();
     temp_v9 = gameFlagIsSet(0x406);
     if (temp_v9 == 0) {
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),3);
@@ -762,7 +762,7 @@ LAB_0026e1e4:
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < (int)*puVar27);
     *(unsigned int *)(param_1 + 0x436c) = 10;
-    FUN_002a49e4(*(unsigned int *)(param_1 + 0x43a4),0xca);
+    infoWinSetText(*(unsigned int *)(param_1 + 0x43a4),0xca);
     dialogOpen(1);
   default:
 LAB_0026e038:

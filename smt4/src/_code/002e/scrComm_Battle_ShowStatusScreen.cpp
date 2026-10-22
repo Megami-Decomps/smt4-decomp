@@ -10,7 +10,7 @@ int scrWorkSetValue(...);
 int FUN_0028c040(void);
 int playerSkillInsertFirstFree(unsigned int);
 int gameClearUnlockedSavedId(unsigned int);
-int FUN_00292c0c(void);
+int gameReleaseDataReference(void);
 int FUN_00295a18(unsigned int, int);
 int beginStatusPanelClose(void);
 int FUN_0029e874(int);
@@ -30,7 +30,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: gameClearUnlockedSavedId. */
 extern unsigned int statusDownGetValue(void);
 extern int statusScreenIsClosed(void);
-/* Supplied declaration required: FUN_00292c0c. */
+/* Supplied declaration required: gameReleaseDataReference. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295a18. */
 extern unsigned int scrGetArg(unsigned int);
@@ -60,7 +60,7 @@ unsigned int scrComm_Battle_ShowStatusScreen(void)
     if (temp_v1 != 1) {
       if (temp_v1 != 2) {
         if ((temp_v1 == 3) && (temp_v1 = FUN_00295618(), temp_v1 != 0)) {
-          FUN_00292c0c();
+          gameReleaseDataReference();
           FUN_002bd8d4(g_btlUiBlock + 0x2460);
           scrWorkSetValue(0,4);
           return 1;

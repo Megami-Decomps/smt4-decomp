@@ -1,47 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032c518` (_code @ 0x32c518, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Canonical model fields fold the retail separate-array bases and writeback stores. */
+#include "shard/S1GfxModel.h"
 extern "C" {
+extern ModelSlotList* g_asdModelSlotArray0[2];
+u8 FUN_00197eb0(ModelSlotVector*, u32);
 
-int FUN_00197eb0(int, unsigned int);
-
-extern unsigned int DAT_005b3c14; /* 0x5b3c14 */
-extern unsigned int DAT_005b3c20; /* 0x5b3c20 */
-extern unsigned int DAT_005b3c24; /* 0x5b3c24 */
-extern unsigned int DAT_005b3c28; /* 0x5b3c28 */
-extern int g_asdModelSlotArray0; /* 0x5b3ca0 */
-extern int DAT_005b3ca4; /* 0x5b3ca4 */
-extern unsigned int g_asdModelSlotArray3; /* 0x5b3cb8 */
-extern unsigned int DAT_005b3cc0; /* 0x5b3cc0 */
-extern unsigned int DAT_005b3cc4; /* 0x5b3cc4 */
-
-/* Supplied declaration required: FUN_00197eb0. */
-
-
-void FUN_0032c518(unsigned int param_1,int param_2)
-
+// Temporarily replaces the selected scene slot, retaining its old node for restoration.
+void FUN_0032c518(u32 node, s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)((&g_asdModelSlotArray3)[param_2] + 4);
-  if (param_2 != 0) {
-    if (param_2 == 1) {
-      FUN_00197eb0(DAT_005b3ca4 + 0x10,DAT_005b3c20);
-      DAT_005b3c28 = DAT_005b3c20;
-      DAT_005b3c20 = param_1;
-      *(unsigned int *)(*(int *)(temp_v0 + 0xac) + 4) = param_1;
-      DAT_005b3cc4 = 1;
+    GfxModelState* state = reinterpret_cast<GfxModelState*>(
+        (u8*)g_asdModelSlotArray0 - offsetof(GfxModelState, sceneNode));
+    ModelSlotNodes* nodes = &state->owner[mode]->slot->nodes;
+    if (mode != 0) {
+        if (mode == 1) {
+            FUN_00197eb0(&g_asdModelSlotArray0[1]->slots, state->node1);
+            u32 previous = state->node1;
+            state->node1 = node;
+            state->pendingNode[1] = previous;
+            nodes->target[1] = node;
+            state->unkCC[1] = 1;
+        }
+        return;
     }
-    return;
-  }
-  FUN_00197eb0(g_asdModelSlotArray0 + 0x10,DAT_005b3c14);
-  DAT_005b3c24 = DAT_005b3c14;
-  DAT_005b3c14 = param_1;
-  *(unsigned int *)(*(int *)(temp_v0 + 0xac) + 4) = param_1;
-  DAT_005b3cc0 = 1;
-  return;
+    FUN_00197eb0(&g_asdModelSlotArray0[0]->slots, state->node0);
+    u32 previous = state->node0;
+    state->node0 = node;
+    state->pendingNode[0] = previous;
+    nodes->target[1] = node;
+    state->unkCC[0] = 1;
 }
-
-} /* extern "C" */
+}

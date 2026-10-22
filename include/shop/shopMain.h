@@ -8,7 +8,8 @@
 typedef struct ShopWork {
     /* 0x00 */ u32 task;   /* the screen's task handle */
     /* 0x04 */ u8 done;    /* the task has finished; the work area may be freed */
-    /* 0x05 */ u8 unk05[0x13];
+    /* 0x05 */ u8 screenMode;
+    /* 0x06 */ u8 unk06[0x12];
     /* 0x18 */ u32 result; /* what shopGetResult reads */
 } ShopWork;
 
@@ -30,5 +31,9 @@ typedef struct ShopCreateWork {
 typedef char ShopCreateWorkSizeCheck[sizeof(ShopCreateWork) == sizeof(ShopWork) ? 1 : -1];
 typedef char ShopCreateWorkModeOffsetCheck[offsetof(ShopCreateWork, mode) == 8 ? 1 : -1];
 typedef char ShopCreateWorkResultOffsetCheck[offsetof(ShopCreateWork, result) == 0x18 ? 1 : -1];
+
+typedef struct ShopGlobals {
+    /* 0x00 */ ShopWork *work;
+} ShopGlobals;
 
 #endif

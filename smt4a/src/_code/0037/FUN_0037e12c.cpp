@@ -1,5 +1,5 @@
 /* Copies the packed 2D vector from the state block into the slot and, when `copy` is set, also latches it as the previous vector. */
-#include "common.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
@@ -19,23 +19,23 @@ typedef struct State {
 
 typedef struct StateHolder {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ State *state;
+    /* 0x04 */ ObjB *state;
 } StateHolder;
 
-extern StateHolder g_gameGlobals;
+extern ObjBRef g_gameGlobals;
 
 extern s32 FUN_00187168(Item *item);
 extern void FUN_0026fd50(void *slot, Item *item, u32 count, u32 arg);
 
 void FUN_0037e12c(Item *item, s32 latch, u32 arg)
 {
-    State *state = g_gameGlobals.state;
+    ObjB *state = g_gameGlobals.instance;
 
     if (FUN_00187168(item) != 0) {
-        FUN_0026fd50(state->slot, item, item->count, arg);
+        FUN_0026fd50(state->snapshotSlot, item, item->count, arg);
         if (latch != 0) {
-            state->prevX = state->curX;
-            state->prevY = state->curY;
+            state->previousPositionX = state->positionX;
+            state->previousPositionY = state->positionY;
         }
     }
 }

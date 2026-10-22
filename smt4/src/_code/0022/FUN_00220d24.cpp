@@ -1,10 +1,11 @@
-#include "shard/Obj43da28.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobals g_buttonHelp;
 
 void FUN_00220d24(u8 value)
 {
-    g_buttonHelp.obj->unk55C = value;
+    g_buttonHelp.work->unk55C = value;
 }
 
 } /* extern "C" */

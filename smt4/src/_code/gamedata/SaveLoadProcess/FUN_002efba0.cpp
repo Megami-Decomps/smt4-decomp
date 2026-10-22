@@ -11,7 +11,7 @@ int FUN_002ad8b4(int, unsigned int);
 int gameDataBlocksGetSaveData(void);
 int asdMemFree(unsigned int);
 int asdMemAlloc(int, int, int, unsigned int, int);
-void FUN_002e0cc8(void);
+void titleConfigStoreOptions(void);
 int rt_memcpy(unsigned int, unsigned int, int);
 int rt_memcpy_w(unsigned short *, unsigned int, int);
 
@@ -84,7 +84,7 @@ unsigned int FUN_002efba0(void)
     temp_v1 = 0x100;
     asdMemAlloc(0x100,0x100,0,*(unsigned int *)(temp_v0 + 0xc),1);
     *(unsigned int *)(temp_v0 + 8) = temp_v1;
-    FUN_002e0cc8();
+    titleConfigStoreOptions();
     temp_v2 = gameDataBlocksGetSaveData();
     *(char *)(temp_v2 + 3) = (char)*(unsigned int *)(temp_v0 + 0x10);
     temp_v1 = gameDataBlocksGetTable();

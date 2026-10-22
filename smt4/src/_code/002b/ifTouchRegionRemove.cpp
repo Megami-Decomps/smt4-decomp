@@ -1,12 +1,12 @@
-#include "shard/Counters43dcb0.h"
+#include "ui/IfTouch.h"
 
 extern "C" {
 
-/* Counts unk64A down towards 10. */
+/* Counts regionCount down towards 10. */
 void ifTouchRegionRemove(void)
 {
-    if (g_ifTouch.counters->unk64A > 10) {
-        g_ifTouch.counters->unk64A = g_ifTouch.counters->unk64A - 1;
+    if (g_ifTouch.state->regionCount > 10) {
+        g_ifTouch.state->regionCount = g_ifTouch.state->regionCount - 1;
     }
 }
 

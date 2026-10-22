@@ -11,7 +11,7 @@ int FUN_00178b04(...);
 int asdLoadFileSyncDefault(void);
 int mapFilterLoad(void);
 int FUN_00244220(void);
-int FUN_002d7f08(void);
+int mapIfLoadWidgets(void);
 int FUN_00363c58(int);
 int FUN_0037b150(void);
 int FUN_0040aa6c(...);
@@ -59,7 +59,7 @@ extern unsigned int DAT_005f1b6c; /* 0x5f1b6c */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: mapFilterLoad. */
 /* Supplied declaration required: FUN_00244220. */
-/* Supplied declaration required: FUN_002d7f08. */
+/* Supplied declaration required: mapIfLoadWidgets. */
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: FUN_0037b150. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -79,7 +79,7 @@ void FUN_002326b4(void)
   
   FUN_00363c58(0);
   mapFilterLoad();
-  FUN_002d7f08();
+  mapIfLoadWidgets();
   FUN_0037b150();
   asdTMTexTableLoadSprites(0x13);
   FUN_0014afd0(0x13,3);

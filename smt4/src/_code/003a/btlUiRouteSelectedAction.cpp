@@ -29,7 +29,7 @@ void playSceneTimerSubStartReverse(BtlUiObjB *);
 void btlUiRouteSelectedAction(void)
 {
     BtlUi *ui = g_btlUi.ui;
-    ui->requiresTargetSelection = 0;
+    ui->panelState.requiresTargetSelection = 0;
     s16 kind = 0;
     s16 id = 0;
     BtlUiObjC *selection = &ui->objC;
@@ -37,22 +37,22 @@ void btlUiRouteSelectedAction(void)
     if (kind == 2 || kind == 3) {
         u32 target = (FUN_002ae164(id)->flags & 0x1ff) >> 5;
         if (target == 2 || target == 3 || target == 4)
-            ui->requiresTargetSelection = 1;
+            ui->panelState.requiresTargetSelection = 1;
     } else if (kind == 8) {
         u16 action = dataTable08Sub1GetRecord(id)->action;
         if (action) {
             u32 target = (FUN_002ae164(action)->flags & 0x1ff) >> 5;
             if (target == 2 || target == 3 || target == 4)
-                ui->requiresTargetSelection = 1;
+                ui->panelState.requiresTargetSelection = 1;
         } else if ((dataTable08Sub1GetRecord(id)->target & 0x7f) != 1) {
-            ui->requiresTargetSelection = 1;
+            ui->panelState.requiresTargetSelection = 1;
         }
     }
-    if (ui->requiresTargetSelection) {
-        ui->state = 12;
+    if (ui->panelState.requiresTargetSelection) {
+        ui->panelState.state = 12;
         FUN_00218480(selection);
     } else {
-        ui->state = 8;
+        ui->panelState.state = 8;
         FUN_0028bfe4(selection);
         ui = g_btlUi.ui;
         if (playSceneIsFadeInDone(&ui->objA) && recordQueryStateThree(&ui->objB)) {

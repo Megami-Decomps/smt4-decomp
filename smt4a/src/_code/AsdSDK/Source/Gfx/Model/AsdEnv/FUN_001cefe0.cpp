@@ -1,47 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cefe0` (_code @ 0x1cefe0, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Cache-store timing, command-header constant loading and relative-payload argument scheduling differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 extern "C" {
+void nnnstdMemCpy(void *destination, const void *source, u32 size);
+extern u32 *g_commandBufferCursor;
+extern const AsdEnvironmentCommands *DAT_00646598[];
 
-int nnnstdMemCpy(int *, int);
-
-extern int *g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned char DAT_00646598; /* 0x646598 */
-
-/* Supplied declaration required: nnnstdMemCpy. */
-
-
-void FUN_001cefe0(int param_1,unsigned int param_2)
-
+/* Emits an environment command block only when its cached binding changes. */
+void FUN_001cefe0(const AsdEnvironmentCommands *commands, u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  if (*(int *)(&DAT_00646598 + param_2 * 4) != param_1) {
-    *(int *)(&DAT_00646598 + param_2 * 4) = param_1;
-    temp_v1 = 0;
-    piVar3 = g_commandBufferCursor + 2;
-    if (param_2 == 0x17) {
-      *g_commandBufferCursor = 0;
-      g_commandBufferCursor[1] = 0xf00e6;
+    if (DAT_00646598[index] != commands) {
+        DAT_00646598[index] = commands;
+        u32 *payload = g_commandBufferCursor + 2;
+        if (index == 23) {
+            g_commandBufferCursor[0] = 0;
+            g_commandBufferCursor[1] = 0xf00e6;
+        } else {
+            if (index >= 7) {
+                ++index;
+            }
+            g_commandBufferCursor[0] = index * 0x100;
+            g_commandBufferCursor[1] = 0xf01c5;
+        }
+        const void *data = NULL;
+        if (commands->dataOffset != 0) {
+            data = (const u8 *)&commands->dataOffset + commands->dataOffset;
+        }
+        u32 size = commands->size;
+        g_commandBufferCursor = payload;
+        nnnstdMemCpy(payload, data, size);
+        g_commandBufferCursor = (u32 *)((u8 *)g_commandBufferCursor + (size & ~3U));
     }
-    else {
-      *g_commandBufferCursor = (param_2 + (param_2 >= 7)) * 0x100;
-      g_commandBufferCursor[1] = 0xf01c5;
-    }
-    if (*(int *)(param_1 + 0x10) != 0) {
-      temp_v1 = *(int *)(param_1 + 0x10) + param_1 + 0x10;
-    }
-    temp_v0 = *(unsigned int *)(param_1 + 0xc);
-    g_commandBufferCursor = piVar3;
-    nnnstdMemCpy(piVar3,temp_v1);
-    g_commandBufferCursor = (int *)((int)g_commandBufferCursor + (temp_v0 & 0xfffffffc));
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

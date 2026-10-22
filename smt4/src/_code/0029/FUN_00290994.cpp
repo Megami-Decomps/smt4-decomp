@@ -31,7 +31,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0028cfbc. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_0029d644. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029e93c. */
 /* Supplied declaration required: FUN_0029e958. */
 /* Supplied declaration required: FUN_0029ee54. */
@@ -68,10 +68,10 @@ void FUN_00290994(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v6 = param_10;
   temp_v8 = 0;
   if (-1 < param_13) {
-    temp_v8 = FUN_0029d65c((int)(short)param_13);
+    temp_v8 = ifTouchGetSelectionModeForRegion((int)(short)param_13);
   }
-  temp_v2 = FUN_0029d65c((int)(short)param_14);
-  temp_v3 = FUN_0029d65c((int)(short)temp_v1);
+  temp_v2 = ifTouchGetSelectionModeForRegion((int)(short)param_14);
+  temp_v3 = ifTouchGetSelectionModeForRegion((int)(short)temp_v1);
   FUN_002bf288(2,param_4,param_5,param_2,param_3,temp_v0);
   puVar1 = (unsigned int *)&param_8;
   if (temp_v8 != 0) {

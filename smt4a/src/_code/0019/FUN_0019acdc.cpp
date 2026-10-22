@@ -1,61 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019acdc` (_code @ 0x19acdc, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0019acdc(int param_1,int param_2)
-
+/* Maps an id to its category number; id 0xba picks between two by the flag. */
+s32 FUN_0019acdc(s32 id, s32 flag)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 == 0xb2) {
-    return 4;
-  }
-  if (param_1 < 0xb3) {
-    if (param_1 == 0xaf) {
-      temp_v0 = 2;
-    }
-    else if (param_1 < 0xb0) {
-      if (param_1 == 5) {
-        temp_v0 = 7;
-      }
-      else if (param_1 == 0xae) {
-        temp_v0 = 1;
-      }
-    }
-    else {
-      if (param_1 != 0xb0) {
-        if (param_1 == 0xb1) {
-          return 5;
+    s32 category = 0;
+
+    switch (id) {
+    case 5:
+        category = 7;
+        break;
+    case 0xae:
+        category = 1;
+        break;
+    case 0xaf:
+        category = 2;
+        break;
+    case 0xb0:
+        category = 3;
+        break;
+    case 0xb1:
+        category = 5;
+        break;
+    case 0xb2:
+        category = 4;
+        break;
+    case 0xb3:
+        category = 6;
+        break;
+    case 0xb9:
+        category = 4;
+        break;
+    case 0xba:
+        if (flag != 0) {
+            category = 8;
+        } else {
+            category = 6;
         }
-        return 0;
-      }
-      temp_v0 = 3;
+        break;
+    case 0xbf:
+    case 0xc0:
+        category = 5;
+        break;
     }
-  }
-  else {
-    if (param_1 == 0xba) {
-      if (param_2 == 0) {
-        return 6;
-      }
-      return 8;
-    }
-    if (param_1 < 0xba) {
-      if (param_1 == 0xb3) {
-        return 6;
-      }
-      if (param_1 == 0xb9) {
-        return 4;
-      }
-    }
-    else if (param_1 == 0xbf || param_1 == 0xc0) {
-      return 5;
-    }
-  }
-  return temp_v0;
+    return category;
 }
 
 } /* extern "C" */

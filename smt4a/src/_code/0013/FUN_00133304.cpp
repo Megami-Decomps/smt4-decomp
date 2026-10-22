@@ -1,75 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133304` (_code @ 0x133304, 0x86 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Vector growth, diagnostic address generation and pointer updates differ. */
+#include "shard/ElementVector.h"
 extern "C" {
+void FUN_002e32a4(s32, ...);
+void asdOperatorDeleteArray(void*);
+ElementRecord* FUN_00307c74(ElementRecord*, ElementRecord*, ElementRecord*, ElementVector*);
+s32 vecCount24(ElementVector*);
+void FUN_0030fdf0(ElementVector*, ElementRecord*, ElementRecord*);
+u32 vectorGrowCapacity_0030c61a(u32);
+const u32* wordRefMax(const u32*, const u32*);
+ElementRecord* allocArrayElem24(ElementVector*, u32, ElementRecord*);
+extern const char LAB_00133390[];
 
-void FUN_002e32a4(int kind, ...);
-int asdOperatorDeleteArray(int);
-int FUN_00307c74(int, int, int, int *);
-int vecCount24(int *);
-int FUN_0030fdf0(int *, int, int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_00133390; /* 0x133390 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_002e32a4. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_00307c74. */
-/* Supplied declaration required: vecCount24. */
-extern int allocArrayElem24(int *, int, int);
-extern unsigned int vectorGrowCapacity_0030c61a(unsigned int, int *);
-/* Supplied declaration required: FUN_0030fdf0. */
-extern unsigned int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned long long FUN_00133304(int *param_1,unsigned int param_2)
-
+// Grows storage for 24-byte elements without changing the vector's used size.
+void FUN_00133304(ElementVector* vector, u32 requestedCapacity)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int uStack_1c;
-  int *piStack_18;
-  unsigned int temp_v6;
-  
-  piStack_18 = param_1;
-  temp_v6 = param_2;
-  if (param_2 >= 0xaaaaaab) {
-    temp_v5 = 0xaaaaaaa;
-    FUN_002e32a4(8,&LAB_00133390,&LAB_00133390);
-  }
-  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0x18);
-  if (temp_v0 < temp_v6) {
-    temp_v1 = vecCount24(param_1);
-    temp_v5 = vectorGrowCapacity_0030c61a(temp_v1,param_1);
-    piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
-    temp_v4 = *piVar3;
-    temp_v2 = allocArrayElem24(param_1,temp_v4,*param_1);
-    FUN_00307c74(*param_1,param_1[1],temp_v2,param_1);
-    FUN_0030fdf0(param_1,*param_1,param_1[1]);
-    asdOperatorDeleteArray(*param_1);
-    temp_v3 = vecCount24(param_1);
-    *param_1 = temp_v2;
-    param_1[2] = temp_v2 + temp_v4 * 0x18;
-    param_1[1] = temp_v3 * 0x18 + temp_v2;
-  }
-  return romwright_piece_4_4(uStack_1c,temp_v5);
+    if (requestedCapacity > 0xAAAAAAA) {
+        FUN_002e32a4(8, LAB_00133390, LAB_00133390);
+    }
+    u32 capacity = vector->capacityEnd - vector->begin;
+    if (capacity < requestedCapacity) {
+        u32 growth = vectorGrowCapacity_0030c61a(vecCount24(vector));
+        u32 newCapacity = *wordRefMax(&requestedCapacity, &growth);
+        ElementRecord* storage = allocArrayElem24(vector, newCapacity, vector->begin);
+        FUN_00307c74(vector->begin, vector->end, storage, vector);
+        FUN_0030fdf0(vector, vector->begin, vector->end);
+        asdOperatorDeleteArray(vector->begin);
+        s32 size = vecCount24(vector);
+        vector->begin = storage;
+        vector->capacityEnd = storage + newCapacity;
+        vector->end = storage + size;
+    }
 }
-
-} /* extern "C" */
+}

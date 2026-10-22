@@ -1,13 +1,7 @@
-#include "common.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
-
-typedef struct PartyPanel {
-    /* 0x000 */ u8 unk000[0x9B4];
-    /* 0x9B4 */ u8 state;
-} PartyPanel;
-
-extern PartyPanel *g_partyPanel;
+extern PartyPanelStateA *g_partyPanel;
 
 extern void FUN_0020b718(s32 a, s32 b);
 extern void FUN_0022e774(void);
@@ -17,14 +11,14 @@ extern void FUN_0038b548(s32 a);
 
 void FUN_002a5cf4(void)
 {
-    PartyPanel *panel = g_partyPanel;
+    PartyPanelStateA *panel = g_partyPanel;
 
     if (panel != NULL) {
-        if (panel->state != 12 && panel->state != 4 && panel->state != 15 && panel->state != 17 && panel->state != 19) {
+        if (panel->animation.mode != 12 && panel->animation.mode != 4 && panel->animation.mode != 15 && panel->animation.mode != 17 && panel->animation.mode != 19) {
             FUN_00230ac0(7, -1, 0, 0);
         }
         FUN_003344b4(0, 0);
-        if (panel->state != 1 && panel->state != 6 && panel->state != 7 && panel->state != 18) {
+        if (panel->animation.mode != 1 && panel->animation.mode != 6 && panel->animation.mode != 7 && panel->animation.mode != 18) {
             FUN_0022e774();
         }
         FUN_0038b548(1);

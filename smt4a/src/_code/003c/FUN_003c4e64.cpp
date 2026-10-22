@@ -1,53 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4e64` (_code @ 0x3c4e64, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares the final return after the value branch and keeps the candidate slot address unfolded (add #44; ldrsb [r0]). */
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(unsigned int);
+/* One candidate row of the selection screen. */
+typedef struct SelectionEntry {
+    /* 0x000 */ s8 slot;   /* party slot of the candidate */
+    /* 0x001 */ u8 unk001[0x14F];
+} SelectionEntry;
 
-extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
+typedef struct SelectionScreen {
+    /* 0x0000 */ u8 unk0000[0x442C];
+    /* 0x442C */ SelectionEntry entries[37];
+    /* 0x74BC */ u8 unk74BC[4];
+    /* 0x74C0 */ s32 selected;
+    /* 0x74C4 */ u8 unk74C4[0x104];
+    /* 0x75C8 */ s32 statIndex;
+    /* 0x75CC */ u32 value;
+} SelectionScreen;
 
-extern int gameGetSlotRecord(int);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern int flagAt4IsClearOrMissing(void);
-extern unsigned int uiSelectedRecordGetSecond(unsigned int);
-extern unsigned int uiSelectedRecordGetThird(void);
+typedef struct SelectionScreenHolder {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ SelectionScreen *screen;
+} SelectionScreenHolder;
 
+typedef struct SlotRecordStats {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u16 stats[1];
+} SlotRecordStats;
 
-unsigned int FUN_003c4e64(void)
+extern SelectionScreenHolder g_engineCleanupOwner;
 
+s32 scrGetArg(u32 index);
+void scrSetResult(u32 value);
+SlotRecordStats *gameGetSlotRecord(s32 slot);
+s32 flagAt4IsClearOrMissing(void);
+u32 uiSelectedRecordGetSecond(void);
+u32 uiSelectedRecordGetThird(void);
+
+/* Script command: with argument 0 set, returns the open screen's value (or the selected record's third value);
+ * otherwise the selected candidate's chosen stat (or the selected record's second value). */
+u32 FUN_003c4e64(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  if ((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) != 0) {
-    if (temp_v0 != 0) {
-      scrSetResult(*(unsigned int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x75cc));
-      return 1;
+    s32 useValue = scrGetArg(0);
+    SelectionScreen *screen = g_engineCleanupOwner.screen;
+
+    u32 result;
+
+    if (screen != NULL) {
+        if (useValue != 0) {
+            scrSetResult(screen->value);
+            return 1;
+        }
+        result = gameGetSlotRecord(screen->entries[screen->selected].slot)->stats[g_engineCleanupOwner.screen->statIndex];
+    } else if (flagAt4IsClearOrMissing() != 0) {
+        result = 0;
+    } else if (useValue != 0) {
+        result = uiSelectedRecordGetThird();
+    } else {
+        result = uiSelectedRecordGetSecond();
     }
-    temp_v0 = gameGetSlotRecord((int)*(char *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + *(int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x74c0) * 0x150 +
-                                       0x442c));
-    temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)((*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4)) + 0x75c8) * 2 + 0x34);
-  }
-  else {
-    temp_v2 = flagAt4IsClearOrMissing();
-    if (temp_v2 != 0) {
-      temp_v1 = 0;
-    }
-    else if (temp_v0 != 0) {
-      temp_v1 = uiSelectedRecordGetThird();
-    }
-    else {
-      temp_v1 = uiSelectedRecordGetSecond(0);
-    }
-  }
-  scrSetResult(temp_v1);
-  return 1;
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

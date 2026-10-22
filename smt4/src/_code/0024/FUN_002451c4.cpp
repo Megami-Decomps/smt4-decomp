@@ -1,5 +1,4 @@
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 extern "C" {
 ReflectAction *FUN_0022699c(ReflectContext *context, s32 actor, s32 mode, u32 flags);
 

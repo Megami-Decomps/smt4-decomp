@@ -15,13 +15,13 @@ int FUN_0019de98(...);
 int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetTarget(int);
-int FUN_0037e0b8(...);
+int gameSetStatusCameraHeightMode(...);
 int FUN_0038b010(int);
 int FUN_003fd7b4(unsigned int);
 int FUN_0040aad4(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
-int FUN_0049706c(...);
+int menuOpenCommandList(...);
 int FUN_00498494(int, int);
 int messageChoiceShowCurrent(int);
 int shopStartSelectionScript(...);
@@ -51,7 +51,7 @@ extern int recordGetModeForId(int);
 extern int objBStateAllowsAction(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037e0b8. */
+/* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: FUN_0038b010. */
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -60,7 +60,7 @@ extern int FUN_0040ab8c(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_004964e0. */
-/* Supplied declaration required: FUN_0049706c. */
+/* Supplied declaration required: menuOpenCommandList. */
 /* Supplied declaration required: FUN_00498494. */
 /* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: shopStartSelectionScript. */
@@ -119,10 +119,10 @@ void FUN_0049bd20(int param_1)
     else {
       temp_v2 = 0;
     }
-    FUN_0037e0b8(temp_v2);
+    gameSetStatusCameraHeightMode(temp_v2);
   }
   else {
-    FUN_0037e0b8(1);
+    gameSetStatusCameraHeightMode(1);
   }
   temp_v1 = FUN_004954e8(param_1);
   messageChoiceShowCurrent(param_1);
@@ -231,7 +231,7 @@ LAB_0049be70:
         temp_v1 = inputIsQuestCancelPressed();
         if (temp_v1 != 0) {
           sendEvent100020E();
-          FUN_0049706c(param_1);
+          menuOpenCommandList(param_1);
         }
       }
       FUN_00498de0(param_1);
@@ -302,13 +302,13 @@ LAB_0049be70:
     FUN_004964e0(param_1,1);
     if (*piVar6 == 3) {
       temp_v2 = 1;
-      FUN_0037e0b8(temp_v2);
+      gameSetStatusCameraHeightMode(temp_v2);
       FUN_00498de0(param_1);
       return;
     }
     if (*piVar6 == 5) {
       temp_v2 = 2;
-      FUN_0037e0b8(temp_v2);
+      gameSetStatusCameraHeightMode(temp_v2);
       FUN_00498de0(param_1);
       return;
     }
@@ -385,7 +385,7 @@ LAB_0049be70:
     if (*piVar6 != 3) {
       if (*piVar6 != 5) {
         temp_v2 = 0;
-        FUN_0037e0b8(temp_v2);
+        gameSetStatusCameraHeightMode(temp_v2);
         FUN_00498de0(param_1);
         return;
       }
@@ -395,7 +395,7 @@ LAB_0049be70:
       temp_v2 = 1;
     }
   }
-  FUN_0037e0b8(temp_v2);
+  gameSetStatusCameraHeightMode(temp_v2);
   FUN_00498de0(param_1);
   return;
 }

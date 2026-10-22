@@ -9,7 +9,7 @@ int uiInitializeEightTimerSet(unsigned char *);
 int memFill8(unsigned char *, int);
 int timerStart(...);
 int FUN_002bd954(unsigned char *, int, int, unsigned char *, int);
-int FUN_002beed0(...);
+int uiSpriteInitializeState(...);
 int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int rt_memclr(unsigned char *, int);
 int asdTMTexTableLoadTmx(int, int);
@@ -37,7 +37,7 @@ extern unsigned char DAT_00404a9c; /* 0x404a9c */
 /* Supplied declaration required: memFill8. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002beed0. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: rt_memclr. */
@@ -120,12 +120,12 @@ void NaviMain_InitInstance(unsigned char *param_1)
   param_1[0x9ed] = 0;
   param_1[0x9ee] = 0;
   *(unsigned int *)(param_1 + 0x9f0) = 0;
-  FUN_002beed0(param_1 + 0x9f8,0x1c,0x1121,0x1d,puVar2,0x15);
+  uiSpriteInitializeState(param_1 + 0x9f8,0x1c,0x1121,0x1d,puVar2,0x15);
   timerStart(param_1 + 0x9f8,0);
   param_1[0xa84] = 0;
   param_1[0xa85] = 0;
   param_1[0xa86] = 0;
-  FUN_002beed0(param_1 + 0xa88,0x1c,0x111a,0x1c,puVar2,0x15);
+  uiSpriteInitializeState(param_1 + 0xa88,0x1c,0x111a,0x1c,puVar2,0x15);
   timerStart(param_1 + 0xa88,5,0);
   return;
 }

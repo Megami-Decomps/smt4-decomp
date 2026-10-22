@@ -1,89 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c6864` (_code @ 0x2c6864, 0x9e bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The composite hex loop is pair-unrolled; the default locale name uses a literal relocation instead of retail's ADR. */
+#include "common.h"
 
 extern "C" {
+u8 *libcLocaleGetTables(void);
+extern u8 LAB_002c69fc;
 
-int libcLocaleGetTables(void);
-
-extern unsigned char LAB_002c69fc; /* 0x2c69fc */
-
-/* Supplied declaration required: libcLocaleGetTables. */
-
-
-unsigned char * FUN_002c6864(unsigned char *param_1,unsigned int param_2)
-
+/* Returns a category name, or formats all five encoded references for a composite request. */
+u8 *FUN_002c6864(u8 *buffer, u32 categories)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  char temp_v4;
-  char *pcVar7;
-  int temp_v5;
-  
-  if ((param_2 & ~-param_2) != 0) {
-    pcVar7 = (char *)(param_1 + 1);
-    temp_v5 = 0;
-    *param_1 = 0x2a;
-    temp_v1 = libcLocaleGetTables();
-    do {
-      temp_v2 = 0;
-      temp_v3 = *(unsigned int *)(temp_v1 + temp_v5 * 4);
-      do {
-        temp_v0 = (unsigned char)(temp_v3 >> 0x18);
-        if (temp_v3 >> 0x1c >= 10) {
-          temp_v4 = (temp_v0 >> 4) + 0x57;
+    if ((categories & ~(0u - categories)) != 0) {
+        u8 *cursor = buffer + 1;
+        *buffer = '*';
+        const u32 *references = reinterpret_cast<const u32 *>(libcLocaleGetTables());
+        for (s32 category = 0; category < 5; ++category) {
+            u32 reference = references[category];
+            for (s32 digitIndex = 0; digitIndex < 8; ++digitIndex) {
+                u32 digit = reference >> 28;
+                reference <<= 4;
+                *cursor++ = static_cast<u8>(digit > 9 ? digit + ('a' - 10) : digit + '0');
+            }
         }
-        else {
-          temp_v4 = (temp_v0 >> 4) + 0x30;
-        }
-        *pcVar7 = temp_v4;
-        pcVar7 = pcVar7 + 1;
-        temp_v2 = temp_v2 + 1;
-        temp_v3 = temp_v3 << 4;
-      } while (temp_v2 < 8);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 5);
-    *pcVar7 = '\0';
-    return param_1;
-  }
-  if (param_2 != 4) {
-    if ((int)param_2 < 5) {
-      if (param_2 != 1) {
-        if (param_2 != 2) {
-          return (unsigned char *)0x0;
-        }
-        temp_v1 = libcLocaleGetTables();
-        temp_v3 = *(unsigned int *)(temp_v1 + 4);
-      }
-      else {
-        puVar4 = (unsigned int *)libcLocaleGetTables();
-        temp_v3 = *puVar4;
-      }
+        *cursor = 0;
+        return buffer;
     }
-    else if (param_2 != 8) {
-      if (param_2 != 0x10) {
-        return (unsigned char *)0x0;
-      }
-      temp_v1 = libcLocaleGetTables();
-      temp_v3 = *(unsigned int *)(temp_v1 + 0x10);
+    u32 reference;
+    switch (categories) {
+    case 1: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[0]; break;
+    case 2: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[1]; break;
+    case 4: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[2]; break;
+    case 8: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[3]; break;
+    case 16: reference = reinterpret_cast<const u32 *>(libcLocaleGetTables())[4]; break;
+    default: return NULL;
     }
-    else {
-      temp_v1 = libcLocaleGetTables();
-      temp_v3 = *(unsigned int *)(temp_v1 + 0xc);
+    if (reference == 0) {
+        return &LAB_002c69fc;
     }
-  }
-  else {
-    temp_v1 = libcLocaleGetTables();
-    temp_v3 = *(unsigned int *)(temp_v1 + 8);
-  }
-  if (temp_v3 == 0) {
-    return &LAB_002c69fc;
-  }
-  return (unsigned char *)(*(int *)((temp_v3 & 0xfffffffc) - 4) + (temp_v3 & 0xfffffffc));
+    u32 address = reference & ~3u;
+    return reinterpret_cast<u8 *>(address + *reinterpret_cast<const s32 *>(address - 4));
 }
-
-} /* extern "C" */
+}

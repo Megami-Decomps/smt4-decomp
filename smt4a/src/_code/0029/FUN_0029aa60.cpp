@@ -11,7 +11,7 @@ int CONCAT44(double, double);
 int FUN_0018a924(...);
 int FUN_001bc124(void);
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int gameFlagIsSetByBlock(...);
 int FUN_002d23f0(...);
 int FUN_00329dd4(...);
@@ -74,7 +74,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0025cb1c. */
 extern int FUN_0029d6f0(void);
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: gameFlagIsSetByBlock. */
 /* Supplied declaration required: FUN_002d23f0. */
 /* Supplied declaration required: FUN_00329dd4. */
@@ -289,7 +289,7 @@ LAB_0029ad50:
               temp_v17 = temp_v19 * temp_v17 * temp_v22 +
                        (float)((unsigned long long)temp_v23 >> 0x20) * temp_v21 * temp_v22 +
                        (float)temp_v23 * temp_v20 * temp_v22;
-              FUN_002b5cd4();
+              mathAngleDeltaDegrees();
               if ((temp_v10 < 0xc2200000) && ((int)temp_v10 < 0x42200000)) {
                 *(unsigned char *)(temp_v14 + 0x21e) = 1;
               }

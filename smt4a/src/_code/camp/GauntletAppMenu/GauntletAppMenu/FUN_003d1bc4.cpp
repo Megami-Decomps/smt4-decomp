@@ -15,7 +15,7 @@ typedef struct {
 extern int FUN_00221a08(...); /* 0x221a08 */
 extern int FUN_00231f50(...); /* 0x231f50 */
 extern int gauntletAppCompareBySortKeys(...); /* 0x2320b0 */
-extern int FUN_002418f8(...); /* 0x2418f8 */
+extern int appComparePurchaseOrder(...); /* 0x2418f8 */
 extern int FUN_002b2c44(...); /* 0x2b2c44 */
 extern int FUN_002ce57c(...); /* 0x2ce57c */
 extern int gauntletAppCompareBySortKeysDescending(...); /* 0x2ce6dc */
@@ -55,7 +55,7 @@ void FUN_003d1bc4(void)
   if ((*pbVar5 & 0x7f) == 0x15) {
     if (temp_v3 != 0) {
       temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
-      qsort(temp_v0 + 0x74,temp_v2,4,FUN_002418f8);
+      qsort(temp_v0 + 0x74,temp_v2,4,appComparePurchaseOrder);
     }
     else {
       temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);

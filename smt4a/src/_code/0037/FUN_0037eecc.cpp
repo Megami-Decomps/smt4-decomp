@@ -7,14 +7,14 @@ struct NamedTableEntry {
 };
 
 extern "C" {
-NamedTableEntry *FUN_00192550(u16);
+NamedTableEntry *dataTable8FindRecord(u16);
 s32 libc_strcmp(const char *, const char *);
 u32 FUN_00335660(u32, const char *, s32);
 
 // Resolve a table entry by its name, excluding the string used for no entry.
 u32 FUN_0037eecc(u32 selection, u16 id, s32 alternate)
 {
-    NamedTableEntry *entry = FUN_00192550(id);
+    NamedTableEntry *entry = dataTable8FindRecord(id);
     if (entry != NULL && libc_strcmp(entry->name, "0") != 0)
         return FUN_00335660(selection, entry->name, alternate);
     return 0;

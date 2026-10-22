@@ -8,7 +8,7 @@ int qsort(int, unsigned int, int, unsigned char *);
 int FUN_00184310(void);
 int dataTable1fFindPairedKey(...);
 int findSkillMetadataById(void);
-int FUN_004daf18(int, unsigned int);
+int entryDefIsAvailable(int, unsigned int);
 int battleCandidateMatchesSkillFilters(int, unsigned int, unsigned int, unsigned int);
 
 extern unsigned char LAB_00321d38; /* 0x321d38 */
@@ -18,7 +18,7 @@ extern unsigned char LAB_00321d38; /* 0x321d38 */
 /* Supplied declaration required: dataTable1fFindPairedKey. */
 /* Supplied declaration required: findSkillMetadataById. */
 extern int FUN_004dab08(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004daf18. */
+/* Supplied declaration required: entryDefIsAvailable. */
 /* Supplied declaration required: battleCandidateMatchesSkillFilters. */
 
 
@@ -48,7 +48,7 @@ int FUN_004db65c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     param_4[1] = temp_v1;
     param_4[1] = (temp_v1 & 0xfffe0003) | ((*(unsigned int *)(temp_v3 + 4) & 0x7fff) << 2);
     if (((*(unsigned int *)(temp_v3 + 4) & 0xffff) != 0) &&
-       (temp_v2 = param_1, FUN_004daf18(param_1,*(unsigned int *)(temp_v3 + 4) & 0xffff), temp_v2 != 0)) {
+       (temp_v2 = param_1, entryDefIsAvailable(param_1,*(unsigned int *)(temp_v3 + 4) & 0xffff), temp_v2 != 0)) {
       temp_v2 = FUN_004dab08(param_1,param_2,param_3,*(unsigned int *)(temp_v3 + 4) & 0xffff);
       temp_v4 = 0;
       if (temp_v2 != 0) {

@@ -3,7 +3,7 @@
 extern "C" {
 
 extern QcGlobals g_qcMain;
-extern void FUN_003844a0(u32 entry);
+extern void FUN_003844a0(QuestEntry *entry);
 
 /* Updates the quest center's active entry and reports success. */
 s32 qcMainJobUpdateEntry(void)

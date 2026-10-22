@@ -79,8 +79,8 @@ void slotSetRequest(u32 slot, u32 duration, u32 color);
 s32 FUN_002e07f4();
 void mobiclipCtrlShutdown();
 void FUN_001f51ac();
-void FUN_0013a894();
-void FUN_0013a700();
+void soundSetupArchiveAndSlots();
+void soundInitializePersistentSlots();
 void FUN_00138114();
 void FUN_0013ae58();
 void titleConfigApply();
@@ -117,8 +117,8 @@ static __forceinline void openMovieDirectory(MovieDirectory *directory)
 static inline void resetMoviePlayback()
 {
     FUN_001f51ac();
-    FUN_0013a894();
-    FUN_0013a700();
+    soundSetupArchiveAndSlots();
+    soundInitializePersistentSlots();
     FUN_00138114();
     FUN_0013ae58();
     titleConfigApply();

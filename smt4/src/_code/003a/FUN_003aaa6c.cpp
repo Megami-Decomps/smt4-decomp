@@ -1,55 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aaa6c` (_code @ 0x3aaa6c, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the three s16 fields through r0 copies into r6/r7 before the call setup and derives the frame ids from 0x569 at run time; armcc stores the constants directly. */
+#include "common.h"
 
-extern "C" {
-
-int pairCopy(unsigned int, float *);
-int FUN_00290994(int, int, int, int, int, int, int, int, int, int, int, int, int, int, unsigned int, int);
-
-typedef struct fn_003aaa6c_arg0 fn_003aaa6c_arg0;
-struct fn_003aaa6c_arg0 {
-    unsigned char pad_0x0[0x8];
-    unsigned char field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x47];
-    int field_0x50; /* +0x50 */
-    short field_0x54; /* +0x54 */
-    short field_0x56; /* +0x56 */
-    short field_0x58; /* +0x58 */
+struct ScreenPoint {
+    f32 x;
+    f32 y;
 };
 
-/* stack frame of param_2: 10 slot(s), 40 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_2_stack;
+struct MessageWindowOwner {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 window;
+    /* 0x54 */ s16 unk54;
+    /* 0x56 */ s16 unk56;
+    /* 0x58 */ s16 unk58;
+    /* 0x5A */ u8 unk5A[0xA];
+    /* 0x64 */ u32 position;
+};
 
-/* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: FUN_00290994. */
+extern "C" {
+void pairCopy(u32 source, ScreenPoint *point);
+void FUN_00290994(u32 window, s32 x, s32 y, s32 style, s32 frame0, s32 frame1, s32 frame2, s32 frame3,
+                  s32 frame4, s32 frame5, s32 frame6, s32 arg11, s32 arg12, s32 arg13, u32 arg14, s32 arg15);
 
-
-void FUN_003aaa6c(fn_003aaa6c_arg0 *param_1,unsigned int param_2)
-
+/* Lays out the owner's window at its stored position with the 0x566-0x56C frame set. */
+void FUN_003aaa6c(MessageWindowOwner *owner, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  float temp_v0;
-  float fStack_1c;
-  
-  if (param_1->field_0x50 != 0) {
-    pairCopy(*(unsigned int *)&param_1[1].field_0x8,&temp_v0);
-    FUN_00290994(param_1->field_0x50,(int)temp_v0,(int)fStack_1c,0x1d,0x56a,0x56b,0x56c,0x566,0x568
-                 ,0x567,0x569,(int)param_1->field_0x58,(int)param_1->field_0x54,
-                 (int)param_1->field_0x56,param_2,0);
-  }
-  return;
+    if (owner->window != 0) {
+        ScreenPoint point;
+
+        pairCopy(owner->position, &point);
+        FUN_00290994(owner->window, (s32)point.x, (s32)point.y, 0x1D, 0x56A, 0x56B, 0x56C, 0x566, 0x568, 0x567,
+                     0x569, owner->unk58, owner->unk54, owner->unk56, arg, 0);
+    }
 }
 
 } /* extern "C" */

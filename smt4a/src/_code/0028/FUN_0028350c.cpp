@@ -13,7 +13,7 @@ extern "C" {
 u32 scrGetArg(u32 index);
 s32 jobIsValid(u32 job);
 JobWork* jobGetWork(u32 job);
-void FUN_003bb088(u32 job);
+void eventTexRemoveHandle(u32 job);
 void jobStop(u32 job, s32 mode);
 
 u32 FUN_0028350c(void)
@@ -21,7 +21,7 @@ u32 FUN_0028350c(void)
     u32 job = scrGetArg(0);
     if (jobIsValid(job) != 0) {
         JobWork* work = jobGetWork(job);
-        FUN_003bb088(job);
+        eventTexRemoveHandle(job);
         if (work->state == 1) {
             jobStop(job, 0);
             return 1;

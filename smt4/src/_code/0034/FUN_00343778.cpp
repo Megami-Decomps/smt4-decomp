@@ -1,48 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00343778` (_code @ 0x343778, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r2, [pc, #140] differs from recovered ldrb r2, [r4, #476]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int FUN_002b634c(undefined4, float *);
-
-typedef struct fn_00343778_arg0 fn_00343778_arg0;
-struct fn_00343778_arg0 {
-    unsigned char pad_0x0[0x52c];
-    undefined4 field_0x52c; /* +0x52c */
-    unsigned char pad_0x530[0xc9c];
-    float field_0x11cc; /* +0x11cc */
-    float field_0x11d0; /* +0x11d0 */
-    float field_0x11d4; /* +0x11d4 */
-    float field_0x11d8; /* +0x11d8 */
-    char field_0x11dc; /* +0x11dc */
+struct Float4View {
+    f32 components[4];
 };
 
-/* Supplied declaration required: FUN_002b634c. */
+struct UpdateStateView {
+    u8 unk00[0x52C];             // +0x0000
+    u32 unk52C;                 // +0x052C
+    u8 unk530[0xC9C];           // +0x0530
+    Float4View unk11CC;         // +0x11CC
+    u8 unk11DC;                 // +0x11DC
+};
 
-
-void FUN_00343778(fn_00343778_arg0 *param_1,float *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  
-  if ((((param_1->field_0x11dc != '\0') || (*param_2 != param_1->field_0x11cc)) ||
-      (param_2[1] != param_1->field_0x11d0)) ||
-     ((param_2[2] != param_1->field_0x11d4 || (param_2[3] != param_1->field_0x11d8)))) {
-    temp_v0 = param_2[1];
-    temp_v1 = param_2[2];
-    temp_v2 = param_2[3];
-    param_1->field_0x11cc = *param_2;
-    param_1->field_0x11d0 = temp_v0;
-    param_1->field_0x11d4 = temp_v1;
-    param_1->field_0x11d8 = temp_v2;
-    FUN_002b634c(param_1->field_0x52c,&param_1->field_0x11cc);
-  }
-  param_1->field_0x11dc = '\0';
-  return;
 }
 
-} /* extern "C" */
+extern "C" s32 FUN_002b634c(u32 handle, f32* values);
+
+// Forward changed or forced four-float values, then clear the force-update flag.
+extern "C" void FUN_00343778(UpdateStateView* state, const Float4View* values)
+{
+    if (state->unk11DC != 0 ||
+        values->components[0] != state->unk11CC.components[0] ||
+        values->components[1] != state->unk11CC.components[1] ||
+        values->components[2] != state->unk11CC.components[2] ||
+        values->components[3] != state->unk11CC.components[3]) {
+        state->unk11CC = *values;
+        FUN_002b634c(state->unk52C, state->unk11CC.components);
+    }
+    state->unk11DC = 0;
+}

@@ -36,7 +36,7 @@ extern unsigned char LAB_0010d0ec; /* 0x10d0ec */
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
 extern int eventTexSelectJobsById(short);
-extern int FUN_0011921c(short);
+extern int bustupCutAnimSelectSlotsById(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
 /* Supplied declaration required: FUN_0011a0d4. */
 extern unsigned int dataTableGetNamePayload(void);
@@ -211,7 +211,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         FUN_002bff50();
         return 1;
       }
-      temp_v9 = FUN_0011921c(temp_v1);
+      temp_v9 = bustupCutAnimSelectSlotsById(temp_v1);
       if (temp_v9 != 0) {
         return 1;
       }

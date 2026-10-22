@@ -1,15 +1,15 @@
+#include "ui/ButtonHelp.h"
 #include "shard/Shard0037.h"
 
 extern "C" {
-
-extern ScreenRef g_buttonHelp;
+extern ButtonHelpGlobalsA g_buttonHelp;
 
 u8 screenGetSlotFlag(u32 index)
 {
-    ScreenObj *screen = g_buttonHelp.instance;
+    ButtonHelpWorkA *screen = g_buttonHelp.work;
 
     if (screen != NULL && index < 6) {
-        return screen->slots[index].flag;
+        return screen->kinds[index].kind;
     }
     return 0;
 }

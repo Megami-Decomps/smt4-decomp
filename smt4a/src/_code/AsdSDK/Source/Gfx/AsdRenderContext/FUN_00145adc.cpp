@@ -12,7 +12,7 @@ int FUN_001579dc(...);
 int FUN_0015a050(...);
 int FUN_001642e4(...);
 int FUN_00178b04(...);
-int FUN_0018a9bc(...);
+int mathCopyIdentityMatrix(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX44PivotC_FAST(...);
 
@@ -41,7 +41,7 @@ extern unsigned int FUN_00157acc(void);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
-/* Supplied declaration required: FUN_0018a9bc. */
+/* Supplied declaration required: mathCopyIdentityMatrix. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
 
 
@@ -126,7 +126,7 @@ void FUN_00145adc(int param_1)
   FUN_0013c884(temp_v1,1);
   FUN_0014f0dc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
   FUN_001523b8(temp_v1,1);
-  FUN_0018a9bc(param_1 + 0x5b8);
+  mathCopyIdentityMatrix(param_1 + 0x5b8);
   temp_v4 = 0;
   do {
     FUN_00156fd8(param_1 + temp_v4 * 0x20 + 0x11f8,temp_v4 & 0xff);

@@ -27,7 +27,7 @@ extern int FUN_00187168(void);
 extern unsigned int FUN_0019acdc(short, unsigned int);
 extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
-extern int FUN_003e4cb4(int);
+extern int partySlotMatchesSelected(int);
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003f1b3c. */
 /* Supplied declaration required: FUN_0047f7ac. */
@@ -74,7 +74,7 @@ void FUN_003f0070(unsigned int param_1)
   do {
     temp_v1 = FUN_003e4d68(temp_v5 & 0xffff);
     temp_v2 = FUN_00187168();
-    if ((temp_v2 != 0) && (temp_v2 = FUN_003e4cb4(temp_v1), temp_v2 == 0)) {
+    if ((temp_v2 != 0) && (temp_v2 = partySlotMatchesSelected(temp_v1), temp_v2 == 0)) {
       psVar4 = temp_v7 + temp_v0;
       temp_v0 = temp_v0 + 1;
       *psVar4 = *(short *)(temp_v1 + 300);

@@ -1,35 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00500cac` (_code @ 0x500cac, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: boolean and packet stores use extra registers and STM/STRD rather than retail scalar stores. */
+#include "AsdSDK/Source/Sys/Gx/GxStencilState.h"
 
 extern "C" {
+u32 *gxEmitFramebufferAccessMasks(u32 *settingsWord, u32 *commands, s32 flush);
 
-int gxEmitFramebufferAccessMasks(int, unsigned int *, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_3_stack;
-
-/* Supplied declaration required: gxEmitFramebufferAccessMasks. */
-
-
-void FUN_00500cac(char *param_1,unsigned int *param_2,int param_3)
-
+// Append stencil-test and stencil-operation registers, optionally refreshing access masks.
+u32 *FUN_00500cac(const GxStencilState *state, u32 *commands, s32 refreshAccess)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_2 = (unsigned int)(*param_1 != '\0') | ((unsigned int)(unsigned char)param_1[4] << 4) |
-             ((unsigned int)(unsigned char)param_1[1] << 8) | (*(int *)(param_1 + 8) << 0x10) |
-             (*(int *)(param_1 + 0xc) << 0x18);
-  param_2[1] = 0xf0105;
-  param_2[2] = (unsigned int)(unsigned char)param_1[0x10] | ((unsigned int)(unsigned char)param_1[0x11] << 4) |
-               ((unsigned int)(unsigned char)param_1[0x12] << 8);
-  param_2[3] = 0xf0106;
-  if (param_3 != 0) {
-    gxEmitFramebufferAccessMasks(*(int *)(param_1 + 0x14) + 0x7c,param_2 + 4,1);
-    return;
-  }
-  return;
+    *commands++ = static_cast<u32>(state->enabled != 0) |
+                  (state->function << 4) | (state->writeMask << 8) |
+                  (state->reference << 16) | (state->readMask << 24);
+    *commands++ = 0xf0105;
+    *commands++ = state->failOperation | (state->depthFailOperation << 4) |
+                  (state->passOperation << 8);
+    *commands++ = 0xf0106;
+    if (refreshAccess)
+        return gxEmitFramebufferAccessMasks(
+            reinterpret_cast<u32 *>(&state->owner->settings), commands, 1);
+    return commands;
 }
-
-} /* extern "C" */
+}

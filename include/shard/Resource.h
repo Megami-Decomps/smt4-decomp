@@ -22,8 +22,13 @@ typedef struct Handler {
             s32 (*isActive)(void *data);
             u8 unk3C[8];
         } status;
+        struct {
+            /* 0x34 */ u8 unk34BeforeDuration[0xC];
+            /* 0x40 */ s32 (*duration)(void *data);
+        } timeline;
     };
 } Handler;                      /* 0x44 */
+typedef char HandlerSizeCheck[sizeof(Handler) == 0x44 ? 1 : -1];
 
 typedef struct Resource {
     /* 0x00 */ u8 unk00[4];

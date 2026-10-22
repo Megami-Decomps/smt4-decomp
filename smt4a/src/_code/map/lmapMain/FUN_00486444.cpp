@@ -65,7 +65,7 @@ extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_004884d8. */
 /* Supplied declaration required: FUN_004888e4. */
 /* Supplied declaration required: FUN_0048a5e4. */
-extern unsigned char FUN_0048b1bc(int context, float angle);
+extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_0048b420. */
 /* Supplied declaration required: FUN_0048d67c. */
 /* Supplied declaration required: FUN_0048d98c. */
@@ -76,7 +76,7 @@ extern unsigned long long *sub68OwnerGetBlock60(int);
 extern int naviGetActiveStateValue(int);
 /* Supplied declaration required: lmapSceneGetObj. */
 extern int naviMainSelectPair(int);
-extern unsigned int FUN_00492c5c(int);
+extern unsigned int naviMainGetRequestedMap(int);
 extern int FUN_00492c70(int);
 /* Supplied declaration required: FUN_0049368c. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
@@ -126,7 +126,7 @@ void FUN_00486444(int param_1)
       FUN_00487d6c(param_1);
       return;
     }
-    temp_v5 = FUN_00492c5c(temp_v3);
+    temp_v5 = naviMainGetRequestedMap(temp_v3);
     temp_v4 = FUN_00492c70(temp_v3);
   }
   else {
@@ -326,14 +326,14 @@ LAB_004866c8:
       temp_v15 = (float)VectorSignedToFloat(*piVar10,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v14 = (float)VectorSignedToFloat(*piVar11,(unsigned char)(in_fpscr >> 0x16) & 3);
     }
-    temp_v4 = FUN_0048b1bc(param_1,*(float*)(param_1 + 0x20518));
+    temp_v4 = mathHeadingToDirectionCode(param_1,*(float*)(param_1 + 0x20518));
     if (*(char *)(temp_v2 + 0xd8e) != '\f') {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbd5,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     else {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbc1,(int)temp_v15,(int)temp_v14,0xb,1);
     }
-    temp_v4 = FUN_0048b1bc(param_1,*(float*)(param_1 + 0x20514));
+    temp_v4 = mathHeadingToDirectionCode(param_1,*(float*)(param_1 + 0x20514));
     if (*(char *)(temp_v2 + 0xd8e) != '\f') {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbcd,(int)temp_v15,(int)temp_v14,0xb,1);
     }

@@ -24,7 +24,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 extern int FUN_0026f024(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -438,7 +438,7 @@ LAB_003179a8:
     FUN_002bf810(0x100016c);
   }
   temp_v6 = padIsButtonPressed(0);
-  if ((temp_v6 != 0) || (temp_v6 = FUN_0026ee68(1), temp_v6 != 0 || temp_v0)) {
+  if ((temp_v6 != 0) || (temp_v6 = buttonHelpHasEnabledEntryForId(1), temp_v6 != 0 || temp_v0)) {
     *(unsigned int *)(param_1 + 0x104) = 8;
     temp_v7 = 2;
     *(unsigned int *)(param_1 + 0x110) = 2;

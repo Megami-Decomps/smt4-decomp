@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00250798(void);
+int uiQuestLoadResources(void);
 int FUN_0028fe0c(unsigned int, int);
 int FUN_0029eb5c(int, int);
 int buttonHelpSetPreset(int);
@@ -18,7 +18,7 @@ typedef struct {
 
 extern int g_uiQuest; /* 0x43dd50 */
 
-/* Supplied declaration required: FUN_00250798. */
+/* Supplied declaration required: uiQuestLoadResources. */
 /* Supplied declaration required: FUN_0028fe0c. */
 extern int FUN_00298f88(unsigned int);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -63,7 +63,7 @@ void FUN_003115b4(unsigned int param_1)
       temp_v1 = FUN_0029ee54(unaff_r8);
     } while (temp_v2 < temp_v1);
   }
-  FUN_00250798();
+  uiQuestLoadResources();
   FUN_0028fe0c(param_1,0);
   timerStart(temp_v0 + 0x34,0);
   timerStart(temp_v0 + 0x494,2,0);

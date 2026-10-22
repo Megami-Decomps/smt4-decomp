@@ -1,62 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010a03c` (_code @ 0x10a03c, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the three flags with separate branches (reaching 0xf60/0xf63 through a base+0xf00 register) and keeps the fade-in test unconditional; armcc chains them with conditional loads. */
+#include "common.h"
+
+/* Frame texture fade state (Shin Megami Tensei IV layout). */
+struct FrameTexFade {
+    /* 0x000 */ u8 unk000[0xc];
+    /* 0x00c */ u8 enabled;
+    /* 0x00d */ u8 unk00d[3];
+    /* 0x010 */ s32 fadeInFrames;
+    /* 0x014 */ s32 fadeOutFrames;
+    /* 0x018 */ s32 frame;
+    /* 0x01c */ u8 unk01c[0xf44];
+    /* 0xf60 */ u8 captured;
+    /* 0xf61 */ u8 unkf61[2];
+    /* 0xf63 */ u8 shown;
+    /* 0xf64 */ u8 unkf64;
+    /* 0xf65 */ u8 unkf65;
+    /* 0xf66 */ u8 unkf66[0x32];
+    /* 0xf98 */ u8 unkf98;
+};
+
+/* Frames a fade-out lasts before the frame texture is released. */
+#define FRAME_TEX_FADE_OUT_FRAMES 30
 
 extern "C" {
+extern FrameTexFade *g_frameTex;
+extern u32 g_titleScene;
 
-int FUN_001137fc(int);
-int FUN_002c39a4(unsigned int);
+FrameTexFade *jobGetWork(void);
+void FUN_002c39a4(u32 scene);
+void FUN_001137fc(s32 mode);
 
-extern int g_frameTex; /* 0x43e278 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_001137fc. */
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c39a4. */
-
-
-unsigned char FUN_0010a03c(void)
-
+/* Job update of the frame texture fade: advances the fade-in or fade-out counter, and clears the state once a fade-out ends. */
+u8 FUN_0010a03c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  if (((*(char *)(temp_v0 + 0xf60) != '\0') && (*(char *)(temp_v0 + 0xf63) != '\0')) &&
-     (*(char *)(temp_v0 + 0xc) != '\0')) {
-    FUN_002c39a4(g_titleScene);
-    temp_v1 = *(int *)(temp_v0 + 0x10);
-    if ((0 < temp_v1) || (0 < *(int *)(temp_v0 + 0x14))) {
-      temp_v2 = *(int *)(temp_v0 + 0x14);
-      if (temp_v2 < 1) {
-        temp_v1 = temp_v1 + 1;
-      }
-      *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
-      if (temp_v2 < 1) {
-        *(int *)(temp_v0 + 0x10) = temp_v1;
-      }
-      else {
-        *(int *)(temp_v0 + 0x14) = temp_v2 + 1;
-        temp_v0 = g_frameTex;
-        if (temp_v2 + 1 >= 0x1f) {
-          *(unsigned char *)(g_frameTex + 0xc) = 0;
-          *(unsigned int *)(temp_v0 + 0x10) = 0;
-          *(unsigned int *)(temp_v0 + 0x14) = 0;
-          *(unsigned int *)(temp_v0 + 0x18) = 0;
-          *(unsigned char *)(temp_v0 + 0xf60) = 0;
-          *(unsigned char *)(temp_v0 + 0xf63) = 0;
-          *(unsigned char *)(temp_v0 + 0xf64) = 0;
-          *(unsigned char *)(temp_v0 + 0xf65) = 0;
-          *(unsigned char *)(temp_v0 + 0xf98) = 0;
-          return 0;
+    FrameTexFade *tex = jobGetWork();
+
+    if (tex->captured != 0 && tex->shown != 0 && tex->enabled != 0) {
+        FUN_002c39a4(g_titleScene);
+        if (tex->fadeInFrames > 0 || tex->fadeOutFrames > 0) {
+            tex->frame++;
+            if (tex->fadeOutFrames <= 0) {
+                tex->fadeInFrames++;
+            } else if (++tex->fadeOutFrames > FRAME_TEX_FADE_OUT_FRAMES) {
+                FrameTexFade *global = g_frameTex;
+                global->enabled = 0;
+                global->fadeInFrames = 0;
+                global->fadeOutFrames = 0;
+                global->frame = 0;
+                global->captured = 0;
+                global->shown = 0;
+                global->unkf64 = 0;
+                global->unkf65 = 0;
+                global->unkf98 = 0;
+                return 0;
+            }
+            FUN_001137fc(1);
         }
-      }
-      FUN_001137fc(1);
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

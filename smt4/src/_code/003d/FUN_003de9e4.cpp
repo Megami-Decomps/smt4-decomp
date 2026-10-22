@@ -1,41 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de9e4` (_code @ 0x3de9e4, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-register allocation and the parameter-sentinel constant lifetime differ. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "battle/btlReflect.h"
 
 extern "C" {
+BtlMainState *btlGetMainState();
+ReflectAction *FUN_0022699c(ReflectContext *context, s32 actor, s32 kind, u32 options);
 
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_003de9e4(short param_1,unsigned int param_2,unsigned int param_3)
-
+u32 FUN_003de9e4(s32 actor, u32 options, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0x43;
-  do {
-    temp_v0 = btlGetMainState();
-    temp_v0 = *(int *)(temp_v0 + 0x1e98) + temp_v2 * 0x114;
-    if ((*(unsigned int *)(temp_v0 + 0x50) & 0x8000) != 0) {
-      temp_v1 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-      *(unsigned char *)(temp_v1 + 5) = *(unsigned char *)(temp_v1 + 5) | 4;
-      *(int *)(temp_v1 + 0x14) = temp_v0;
-      *(unsigned char *)(temp_v1 + 4) = 0x22;
-      *(unsigned int *)(temp_v1 + 0x28) = param_3;
-      *(unsigned int *)(temp_v1 + 0x4c) = 0xff;
+    for (s32 index = 67; index < 109; ++index) {
+        BtlActionRecord *record = &btlGetMainState()->actions[index];
+        if (record->status & 0x8000) {
+            ReflectAction *action = FUN_0022699c(g_btlActionReflect, (s16)actor, 0, options);
+            action->flagView.flags |= 4;
+            action->target = reinterpret_cast<u32>(record);
+            action->kind = 0x22;
+            action->value = value;
+            action->parameter = 0xff;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x6d);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

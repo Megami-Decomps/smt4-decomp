@@ -20,7 +20,7 @@ typedef struct MenuTask {
 
 extern u32 FUN_00292bf0(void);
 extern u32 *gameGetSlotTable(void);
-extern int FUN_00292c0c(void);
+extern int gameReleaseDataReference(void);
 extern int statusDownSwitchTab(int);
 extern int FUN_00295214(int);
 extern int scrScriptProcessStartEntry(u32 script, int entry);
@@ -91,7 +91,7 @@ done:
     FUN_0029dfc0(0);
     FUN_0029e874(0);
     FUN_0029c4c8(0);
-    FUN_00292c0c();
+    gameReleaseDataReference();
     value = FUN_00292bf0();
     if (value != 0 && value <= *gameGetSlotTable()) {
         task->state = 0x13;

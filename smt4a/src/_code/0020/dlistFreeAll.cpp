@@ -1,63 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dlistFreeAll` (_code @ 0x20209c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
+typedef struct DListNode {
+    /* 0x00 */ s32 index;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ void *data;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ void (*destroy)(void *data);
+    /* 0x14 */ struct DListNode *prev;
+    /* 0x18 */ struct DListNode *next;
+} DListNode;
 
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMemFree. */
+typedef struct DList {
+    /* 0x00 */ DListNode *head;
+    /* 0x04 */ DListNode *tail;
+    /* 0x08 */ s32 count;
+} DList;
 
+void asdMemFree(void *memory);
 
-void dlistFreeAll(int *param_1)
-
+/* Unlink a node and renumber the remaining nodes. */
+static void dlistUnlink(DList *list, DListNode *node)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  
-  temp_v0 = *param_1;
-  while (temp_v0 != 0) {
-    temp_v1 = *(int *)(temp_v0 + 0x18);
-    if (param_1 != (int *)0x0 && temp_v0 != 0) {
-      temp_v2 = *(int *)(temp_v0 + 0x14);
-      if (temp_v2 == 0 && temp_v1 == 0) {
-        *param_1 = 0;
-        param_1[1] = 0;
-      }
-      else {
-        if (temp_v2 != 0) {
-          *(int *)(temp_v2 + 0x18) = temp_v1;
-        }
-        else {
-          *(unsigned int *)(temp_v1 + 0x14) = 0;
-          *param_1 = temp_v1;
-        }
-        if (temp_v1 != 0) {
-          *(int *)(temp_v1 + 0x14) = temp_v2;
-        }
-        else {
-          *(unsigned int *)(temp_v2 + 0x18) = 0;
-          param_1[1] = temp_v2;
-        }
-      }
-      temp_v2 = 0;
-      for (piVar3 = (int *)*param_1; piVar3 != (int *)0x0; piVar3 = (int *)piVar3[6]) {
-        *piVar3 = temp_v2;
-        temp_v2 = temp_v2 + 1;
-      }
-      param_1[2] = temp_v2;
+    DListNode *prev;
+    DListNode *next;
+    DListNode *it;
+    s32 count;
+
+    if (list == NULL || node == NULL) {
+        return;
     }
-    if (*(romwright_code **)(temp_v0 + 0x10) != (romwright_code *)0x0) {
-      (**(romwright_code **)(temp_v0 + 0x10))(*(unsigned int *)(temp_v0 + 8));
+    prev = node->prev;
+    next = node->next;
+    if (prev == NULL && next == NULL) {
+        list->head = NULL;
+        list->tail = NULL;
+    } else {
+        if (prev != NULL) {
+            prev->next = next;
+        } else {
+            next->prev = NULL;
+            list->head = next;
+        }
+        if (next != NULL) {
+            next->prev = prev;
+        } else {
+            prev->next = NULL;
+            list->tail = prev;
+        }
     }
-    asdMemFree(temp_v0);
-    temp_v0 = temp_v1;
-  }
-  return;
+    count = 0;
+    for (it = list->head; it != NULL; it = it->next) {
+        it->index = count++;
+    }
+    list->count = count;
+}
+
+/* Unlink and free every node of the list, calling each node's destroy callback on its data. */
+void dlistFreeAll(DList *list)
+{
+    DListNode *node = list->head;
+
+    while (node != NULL) {
+        DListNode *next = node->next;
+
+        dlistUnlink(list, node);
+        if (node->destroy != NULL) {
+            node->destroy(node->data);
+        }
+        asdMemFree(node);
+        node = next;
+    }
 }
 
 } /* extern "C" */

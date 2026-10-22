@@ -1,59 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024f7d4` (_code @ 0x24f7d4, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack layout: retail reserves 88 bytes with the vector at sp+8 and the matrix at sp+24 (kept in r6); ours packs the matrix at sp+0 in 76 bytes. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0024fcdc(int, unsigned char [72], int);
-int FUN_0024fd70(unsigned char [72], int *, int);
-int mathMatrixApplyScale(unsigned char [72], int *, int);
-int FUN_0025009c(void);
-int matrix44SetIdentity(unsigned char [72]);
+typedef struct XformVec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+} XformVec3;
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_3_stack;
+typedef struct XformMtx44 {
+    f32 m[4][4];
+} XformMtx44;
 
-/* Supplied declaration required: FUN_0024fcdc. */
-/* Supplied declaration required: FUN_0024fd70. */
-/* Supplied declaration required: mathMatrixApplyScale. */
-/* Supplied declaration required: FUN_0025009c. */
-/* Supplied declaration required: matrix44SetIdentity. */
+/* An object with a transform at 0x18. */
+typedef struct XformObject {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u8 transform[1];
+} XformObject;
 
+void FUN_0025009c(XformMtx44 *dst, const XformMtx44 *src);
+void matrix44SetIdentity(XformMtx44 *mtx);
+void mathMatrixApplyScale(XformMtx44 *mtx, const XformVec3 *scale, s32 order);
+void FUN_0024fd70(XformMtx44 *mtx, const XformVec3 *translation, s32 order);
+void FUN_0024fcdc(void *transform, const XformMtx44 *mtx, s32 arg);
 
-void FUN_0024f7d4(int param_1,int *param_2,int param_3)
-
+/* Sets the object's transform from `base` (identity when NULL), a uniform scale and a translation. */
+void FUN_0024f7d4(XformObject *object, const XformVec3 *translation, const XformMtx44 *base,
+                  f32 scale)
 {
-/* irregular: irregular input(s): in_s0; 5 native warning(s); review required */
-  int in_s0;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [72];
-  
-  if (param_3 != 0) {
-    FUN_0025009c();
-  }
-  else {
-    matrix44SetIdentity(temp_v3);
-  }
-  if (in_s0 != 0x3f800000) {
-    temp_v0 = in_s0;
-    temp_v1 = in_s0;
-    temp_v2 = in_s0;
-    mathMatrixApplyScale(temp_v3,&temp_v0,2);
-  }
-  if (param_2 != (int *)0x0) {
-    temp_v0 = *param_2;
-    temp_v1 = param_2[1];
-    temp_v2 = param_2[2];
-    FUN_0024fd70(temp_v3,&temp_v0,2);
-  }
-  FUN_0024fcdc(param_1 + 0x18,temp_v3,0);
-  return;
+    XformMtx44 mtx;
+
+    if (base != NULL) {
+        FUN_0025009c(&mtx, base);
+    } else {
+        matrix44SetIdentity(&mtx);
+    }
+    if (scale != 1.0f) {
+        XformVec3 scaleVec;
+
+        scaleVec.x = scaleVec.y = scaleVec.z = scale;
+        mathMatrixApplyScale(&mtx, &scaleVec, 2);
+    }
+    if (translation != NULL) {
+        XformVec3 position;
+
+        position.x = translation->x;
+        position.y = translation->y;
+        position.z = translation->z;
+        FUN_0024fd70(&mtx, &position, 2);
+    }
+    FUN_0024fcdc(object->transform, &mtx, 0);
 }
 
 } /* extern "C" */

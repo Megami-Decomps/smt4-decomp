@@ -1,86 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc120` (_code @ 0x2bc120, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 0x401 preset choice compiles to addeq + branch (retail addne/addeq), and argument staging/scheduling for the 11-argument call differs (retail saves r5, 28-byte frame). */
+#include "common.h"
+
+namespace {
+struct GxScreenPreset {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u8 unk0c[0x24];
+    /* 0x30 */ u32 unk30;
+    /* 0x34 */ u32 unk34;
+    /* 0x38 */ u32 clearValue;
+};
+
+struct GxScreenPresetTable {
+    /* 0x000 */ u8 unk000[0x84];
+    /* 0x084 */ s32 useFirstForSecondScreen;
+    /* 0x088 */ GxScreenPreset presets[3];
+    /* 0x13C */ u8 unk13c[0xc0];
+    /* 0x1FC */ u32 unk1fc;
+    /* 0x200 */ u8 clearEnabled[2]; /* per screen; 0 forces the 0x500 clear value */
+};
+
+struct GxScreenRequest {
+    /* 0x00 */ s32 kind;
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ s32 bufferIndex;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1c;
+    /* 0x20 */ u32 buffers[1];
+};
+}
 
 extern "C" {
 
-int FUN_0013727c(...);
+extern GxScreenPresetTable g_asdGxPresets;
+void FUN_0013727c(u32 a, u32 b, u32 c, u32 d, u32 buffer, u32 e, u32 f, u32 g, u32 clearValue, s32 h, s32 i);
 
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int DAT_004e3a64; /* 0x4e3a64 */
-extern unsigned char DAT_004e3a68; /* 0x4e3a68 */
-extern unsigned char DAT_004e3aa4; /* 0x4e3aa4 */
-extern unsigned char DAT_004e3ae0; /* 0x4e3ae0 */
-extern unsigned int DAT_004e3bdc; /* 0x4e3bdc */
-extern unsigned char DAT_004e3be0; /* 0x4e3be0 */
-
-/* Supplied declaration required: FUN_0013727c. */
-
-
-void FUN_002bc120(int *param_1,int param_2)
-
+/* Apply the screen preset that matches the request's screen kind. */
+void FUN_002bc120(GxScreenRequest *request, s32 alternate)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  
-  puVar4 = (unsigned int *)0x0;
-  temp_v2 = *param_1;
-  temp_v1 = 0;
-  if (temp_v2 != 0x400) {
-    if (temp_v2 == 0x401) {
-      temp_v1 = 1;
-      if (DAT_004e3a64 != 0) {
-        puVar4 = (unsigned int *)&DAT_004e3a68;
-      }
-      else {
-        puVar4 = (unsigned int *)&DAT_004e3ae0;
-      }
-      temp_v0 = puVar4[0xe];
-      if ((&DAT_004e3be0)[temp_v1] == '\0') {
-        temp_v0 = 0x500;
-      }
-      FUN_0013727c(puVar4[2],puVar4[0xc],puVar4[0xd],*puVar4,param_1[param_1[5] + 8],param_1[6],
-                   param_1[7],DAT_004e3bdc,temp_v0,0,8);
-      return;
+    GxScreenPreset *preset = NULL;
+    s32 screen = 0;
+    u32 clearValue;
+
+    switch (request->kind) {
+    case 0x400:
+        preset = &g_asdGxPresets.presets[0];
+        break;
+    case 0x401:
+        screen = 1;
+        if (g_asdGxPresets.useFirstForSecondScreen) {
+            preset = &g_asdGxPresets.presets[0];
+        } else {
+            preset = &g_asdGxPresets.presets[2];
+        }
+        break;
+    case 0x410:
+        if (alternate) {
+            preset = &g_asdGxPresets.presets[1];
+        } else {
+            preset = &g_asdGxPresets.presets[0];
+        }
+        break;
     }
-    if (temp_v2 != 0x410) {
-      temp_v0 = puVar4[0xe];
-      if ((&DAT_004e3be0)[temp_v1] == '\0') {
-        temp_v0 = 0x500;
-      }
-      FUN_0013727c(puVar4[2],puVar4[0xc],puVar4[0xd],*puVar4,param_1[param_1[5] + 8],param_1[6],
-                   param_1[7],DAT_004e3bdc,temp_v0,0,8);
-      return;
+    clearValue = preset->clearValue;
+    if (!g_asdGxPresets.clearEnabled[screen]) {
+        clearValue = 0x500;
     }
-    if (param_2 != 0) {
-      puVar4 = (unsigned int *)&DAT_004e3aa4;
-      temp_v0 = puVar4[0xe];
-      if ((&DAT_004e3be0)[temp_v1] == '\0') {
-        temp_v0 = 0x500;
-      }
-      FUN_0013727c(puVar4[2],puVar4[0xc],puVar4[0xd],*puVar4,param_1[param_1[5] + 8],param_1[6],
-                   param_1[7],DAT_004e3bdc,temp_v0,0,8);
-      return;
-    }
-  }
-  puVar4 = (unsigned int *)&DAT_004e3a68;
-  temp_v0 = puVar4[0xe];
-  if ((&DAT_004e3be0)[temp_v1] == '\0') {
-    temp_v0 = 0x500;
-  }
-  FUN_0013727c(puVar4[2],puVar4[0xc],puVar4[0xd],*puVar4,param_1[param_1[5] + 8],param_1[6],
-               param_1[7],DAT_004e3bdc,temp_v0,0,8);
-  return;
+    FUN_0013727c(preset->unk08, preset->unk30, preset->unk34, preset->unk00,
+        request->buffers[request->bufferIndex], request->unk18, request->unk1c, g_asdGxPresets.unk1fc,
+        clearValue, 0, 8);
 }
 
 } /* extern "C" */

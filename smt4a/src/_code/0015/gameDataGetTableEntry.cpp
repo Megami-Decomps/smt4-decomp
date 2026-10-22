@@ -8,7 +8,7 @@ extern s32 gameDataFindEntryIndex(void);
 u32 *gameDataGetTableEntry(void)
 {
     s32 index = gameDataFindEntryIndex();
-    GameDataSub *sub = &g_gameDataBlocks.block->sub;
+    GameDataSub *sub = &g_gameDataBlocks.saveBlock->save.sub;
 
     return &sub->table[index];
 }

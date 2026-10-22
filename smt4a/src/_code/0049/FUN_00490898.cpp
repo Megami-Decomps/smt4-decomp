@@ -10,7 +10,7 @@ int FUN_002d22c0(int);
 int lmapEnableSceneState(void);
 int FUN_003adc58(void);
 int sub68OwnerGetBlock60(void);
-int FUN_00492c18(int, int *);
+int naviMainSetValuePair(int, int *);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 /* Supplied declaration required: lmapEnableSceneState. */
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
-/* Supplied declaration required: FUN_00492c18. */
+/* Supplied declaration required: naviMainSetValuePair. */
 
 
 void FUN_00490898(int param_1)
@@ -56,7 +56,7 @@ void FUN_00490898(int param_1)
         sub68OwnerGetBlock60();
         temp_v1 = 0;
         temp_v2 = 0;
-        FUN_00492c18(param_1 + 0x4cc,&temp_v1);
+        naviMainSetValuePair(param_1 + 0x4cc,&temp_v1);
         *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
         *(unsigned char *)(param_1 + 0x7b90) = 1;
         *(unsigned char *)(param_1 + 0x7b91) = 1;

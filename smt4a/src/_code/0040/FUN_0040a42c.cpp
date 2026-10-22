@@ -1,5 +1,5 @@
 /* NON_MATCHING: the bit update matches, but the bank offset and indexed byte load are combined in a different order. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" StatsLeadingFlagView *gameDataBlocksGetStats();
 

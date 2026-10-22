@@ -30,7 +30,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_004b0164. */
-extern int FUN_004b6b1c(int);
+extern int scriptProcessCreateWhenReady(int);
 
 
 unsigned int FUN_00229324(int param_1)
@@ -48,7 +48,7 @@ unsigned int FUN_00229324(int param_1)
   unsigned char temp_v7;
   
   temp_v6 = *(int *)(param_1 + 4);
-  if ((temp_v6 != 0) && (temp_v0 = FUN_004b6b1c(temp_v6), temp_v0 != 0)) {
+  if ((temp_v6 != 0) && (temp_v0 = scriptProcessCreateWhenReady(temp_v6), temp_v0 != 0)) {
     FUN_00157558(g_renderCtx);
     temp_v0 = g_renderCtx;
     temp_v1 = FUN_001692ac(1,0);

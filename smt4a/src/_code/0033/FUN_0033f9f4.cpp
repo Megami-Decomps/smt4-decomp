@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int mapIfStart(unsigned int);
 int FUN_0033abb4(void);
 
@@ -22,7 +22,7 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 extern int gameFlagsGetBlock(void);
 extern int FUN_00163fd4(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: FUN_0033abb4. */
 extern int inputIsQuestMenuPressed(void);
@@ -118,7 +118,7 @@ void FUN_0033f9f4(void)
     *(float *)(temp_v5 + 0x214) = temp_v11;
     *(float *)(temp_v5 + 0xbc) = temp_v10;
     *(unsigned int *)(temp_v5 + 0xc0) = temp_v14;
-    FUN_002b5cd4();
+    mathAngleDeltaDegrees();
     temp_v5 = g_lmapView;
     *(unsigned short *)(g_lmapView + 0xb8) = 0;
     if (temp_v10 < temp_v11) {

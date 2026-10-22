@@ -1,50 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00245f70` (_code @ 0x245f70, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reset constants use different registers and the literal-pool order differs. */
+#include "map/mapIf.h"
+#include "map/mapDepart.h"
+
+struct MapIfSoundView {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2c */ u16 unk2c;
+    /* 0x2e */ u8 unk2e[0x22];
+    /* 0x50 */ MapVector position;
+};
 
 extern "C" {
+extern MapIfStateA *g_mapIf;
+extern GameStateA g_gameState;
+s32 FUN_003d4ed8(u32 sound, MapVector position);
 
-int FUN_003d4ed8(int);
-
-extern int g_mapIf; /* 0x58103c */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: FUN_003d4ed8. */
-
-
-void FUN_00245f70(int param_1)
-
+void FUN_00245f70(s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = 0;
-  do {
-    temp_v2 = g_mapIf + temp_v0 * 0x194;
-    if ((*(char *)(temp_v2 + 0x1dc) != '\0') &&
-       (*(int *)(temp_v2 + 0x1f0) == 0x25 || *(int *)(temp_v2 + 0x1f0) == 0x28)) {
-      temp_v1 = *(int *)(temp_v2 + 0x1e0);
-      temp_v3 = temp_v1 == 6;
-      if (temp_v3) {
-        temp_v1 = *(int *)(temp_v2 + 500);
-      }
-      if (temp_v3 && temp_v1 == param_1) {
-        if ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) == '\0') {
-          FUN_003d4ed8(0x10002ab);
+    for (s32 index = 0; index < 128; ++index) {
+        MapIfRecord *record = &g_mapIf->records[index];
+        if (record->active &&
+            (record->display.category == 0x25 || record->display.category == 0x28) &&
+            record->state == 6 && record->groupView.id == id) {
+            MapIfSoundView *details = (MapIfSoundView *)record;
+            MapVector position = details->position;
+            position.y += 120.0f;
+            if (g_gameState.inputBlocked == 0) {
+                FUN_003d4ed8(0x010002ab, position);
+            }
+            record->state = 7;
+            details->unk2c = 0;
+            return;
         }
-        *(unsigned int *)(temp_v2 + 0x1e0) = 7;
-        *(unsigned short *)(temp_v2 + 0x208) = 0;
-        return;
-      }
     }
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x80) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

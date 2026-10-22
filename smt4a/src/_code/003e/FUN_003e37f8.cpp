@@ -12,7 +12,7 @@ int FUN_0022e774(void);
 int FUN_0023b45c(int);
 int scrScriptProcessStartEntry(unsigned int);
 int FUN_00285774(void);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
 int FUN_00333dc8(int);
@@ -32,7 +32,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00285774. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a7288. */
+/* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_00333dc8. */
@@ -124,7 +124,7 @@ void FUN_003e37f8(int param_1)
     else {
       FUN_0022e774();
       FUN_0023b45c(0);
-      FUN_002a7288();
+      statusDownRestartTransition();
       temp_v1 = 0xb;
     }
   }

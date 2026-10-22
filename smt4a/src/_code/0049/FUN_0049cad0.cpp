@@ -1,69 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049cad0` (_code @ 0x49cad0, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice in the rate scaling (retail multiplies and divides in r0, keeping the 1/100 constant in r1). */
+#include "common.h"
+
+struct ShopEntry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 unk02Bit0 : 1;
+    /* 0x02 */ u16 hasRate : 1;
+    /* 0x02 */ u16 rate : 8; /* percent of the base price */
+    /* 0x02 */ u16 unk02Bits10 : 6;
+};
+
+struct ItemPriceRecord {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ s32 price;
+};
+
+struct EquipPriceRecord {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ s32 price;
+};
 
 extern "C" {
 
-int FUN_00192550(void);
-int FUN_00192608(void);
+u32 aocEntryGetKind(u32 id);
+ItemPriceRecord *dataTable8FindRecord(u32 id);
+EquipPriceRecord *FUN_00192608(u32 id);
+s32 gameDataBlocksGetTableFlag(void);
 
-/* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_00192608. */
-extern unsigned int aocEntryGetKind(unsigned int);
-extern int gameDataBlocksGetTableFlag(void);
-
-
-int FUN_0049cad0(unsigned short *param_1)
-
+/* Returns a shop entry's price: the item or equipment base price (99999999 without a record,
+ * 1000000 for item 0x7b2), scaled by the entry's rate and tripled under table flag 4. */
+s32 FUN_0049cad0(const ShopEntry *entry)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v4 = (unsigned int)*param_1;
-  temp_v3 = 0;
-  temp_v0 = aocEntryGetKind(temp_v4);
-  switch(temp_v0) {
-  case 1:
-  case 0xc:
-    temp_v1 = temp_v4;
-    FUN_00192550();
-    if (temp_v1 != 0) {
-      temp_v3 = *(int *)(temp_v1 + 0x4c);
+    u32 id = entry->id;
+    s32 price = 0;
+
+    switch (aocEntryGetKind(id)) {
+    case 1:
+    case 12: {
+        ItemPriceRecord *item = dataTable8FindRecord(id);
+        price = item != NULL ? item->price : 99999999;
+        if (id == 0x7b2) {
+            price = 1000000;
+        }
+        break;
     }
-    else {
-      temp_v3 = 99999999;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8: {
+        EquipPriceRecord *equip = FUN_00192608(id);
+        price = equip == NULL ? 99999999 : equip->price;
+        break;
     }
-    if (temp_v4 == 0x7b2) {
-      temp_v3 = 1000000;
     }
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-    FUN_00192608();
-    if (temp_v4 == 0) {
-      temp_v3 = 99999999;
+    if (entry->hasRate) {
+        price = price * entry->rate / 100;
     }
-    else {
-      temp_v3 = *(int *)(temp_v4 + 0x74);
+    if (gameDataBlocksGetTableFlag() == 4) {
+        price *= 3;
     }
-  }
-  if ((param_1[1] & 2) != 0) {
-    temp_v3 = (int)(((param_1[1] & 0x3ff) >> 2) * temp_v3) / 100;
-  }
-  temp_v2 = gameDataBlocksGetTableFlag();
-  if (temp_v2 == 4) {
-    temp_v3 = temp_v3 * 3;
-  }
-  return temp_v3;
+    return price;
 }
 
 } /* extern "C" */

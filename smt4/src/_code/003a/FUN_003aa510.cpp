@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0022dde8(int, int);
+int devilListMarkOrInsertQualifiedEntry(int, int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
 int uiAnimationAdvanceChannel(int, int);
 int FUN_00233404(void);
-int FUN_0029d684(int);
+int statusPanelSetOpen(int);
 int FUN_0029defc(int, int);
 int FUN_0029dfc0(int);
 int FUN_003a98b8(int);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0022dde8. */
+/* Supplied declaration required: devilListMarkOrInsertQualifiedEntry. */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: uiAnimationAdvanceChannel. */
@@ -33,7 +33,7 @@ extern int FUN_00240d5c(int);
 extern int gameGetNavigationState(void);
 extern int FUN_00293aac(void);
 extern int FUN_00293b8c(void);
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029defc. */
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int gameGetFlagByte12e8(void);
@@ -123,7 +123,7 @@ void FUN_003aa510(int param_1)
       *(short *)(param_1 + 0xa5b0) = temp_v5;
       if (temp_v5 != 0) {
         FUN_0029defc((int)temp_v5,1);
-        FUN_0029d684(1);
+        statusPanelSetOpen(1);
       }
       else {
         FUN_0029dfc0(0);
@@ -139,7 +139,7 @@ void FUN_003aa510(int param_1)
   if (temp_v6 < temp_v1) {
     do {
       temp_v2 = FUN_0029e924(param_1 + 0x20);
-      FUN_0022dde8(param_1 + 0x96,*(unsigned short *)(temp_v7 + (temp_v2 + temp_v6) * 0x20 + 4));
+      devilListMarkOrInsertQualifiedEntry(param_1 + 0x96,*(unsigned short *)(temp_v7 + (temp_v2 + temp_v6) * 0x20 + 4));
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < temp_v1);
   }

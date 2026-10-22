@@ -49,7 +49,7 @@ void obj04Finish();
 void releaseEntriesB(u32);
 void releaseEntriesA(void *);
 void ifTouchRegionRemove();
-void FUN_0049706c(EquipmentMenu *);
+void menuOpenCommandList(EquipmentMenu *);
 
 void itemMenuHandleSelectionInput(EquipmentMenu *menu)
 {
@@ -96,7 +96,7 @@ void itemMenuHandleSelectionInput(EquipmentMenu *menu)
     }
     if (inputIsQuestCancelPressed()) {
         sendEvent100020E();
-        FUN_0049706c(menu);
+        menuOpenCommandList(menu);
     }
 }
 }

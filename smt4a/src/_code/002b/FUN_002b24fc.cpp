@@ -1,47 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b24fc` (_code @ 0x2b24fc, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail b 88 differs from recovered pop {r4, pc}. */
+#include "common.h"
+
+// Private view of the battle state fields used by this function.
+struct BattleMainView {
+    u8 unk00[0xAC]; // 0x00
+    s32 unkAC;     // 0xAC
+};
 
 extern "C" {
+extern BattleMainView* g_btlMain;
+extern s32 gameFlagIsSet(u32 flag);
+extern s32 flagSelectVariant(void);
+extern s32 FUN_002e2b38(void);
 
-extern int g_btlMain; /* 0x573920 */
-
-extern int gameFlagIsSet(unsigned int);
-extern int flagSelectVariant(void);
-extern int FUN_002e2b38(void);
-
-
-unsigned int FUN_002b24fc(void)
-
+// Tests the variant-specific flags and current battle state for eligibility.
+u32 FUN_002b24fc(void)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagIsSet(0x4f8);
-  if (temp_v0 == 0) {
-    temp_v0 = flagSelectVariant();
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
+    if (gameFlagIsSet(0x4F8) != 0) {
         return 0;
-      }
-      temp_v0 = gameFlagIsSet(0x4db);
-      if (temp_v0 != 0) {
-        return 1;
-      }
     }
-    else {
-      temp_v0 = FUN_002e2b38();
-      if (temp_v0 == 0) {
+
+    switch (flagSelectVariant()) {
+    case 1:
+        if (FUN_002e2b38() == 0) {
+            return 0;
+        }
+        break;
+    case 2:
+        if (gameFlagIsSet(0x4DB) != 0) {
+            return 1;
+        }
+        break;
+    default:
         return 0;
-      }
     }
-    temp_v0 = g_btlMain;
-    if ((g_btlMain != 0) &&
-       ((temp_v1 = gameFlagIsSet(0x1fd), temp_v1 != 0 || (*(int *)(temp_v0 + 0xac) == 1)))) {
-      return 1;
+
+    BattleMainView* battle = g_btlMain;
+    if (battle != 0) {
+        if (gameFlagIsSet(0x1FD) != 0 || battle->unkAC == 1) {
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+} // extern "C"

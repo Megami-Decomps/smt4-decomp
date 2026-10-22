@@ -5,14 +5,14 @@ extern "C" {
 
 int asdOperatorNew(void);
 int FUN_002c75c0(int);
-int FUN_0038b330(void);
+int saveLoadProcessUpdateSdCardDetection(void);
 
 typedef int romwright_code(...);
 extern int DAT_00588e2c; /* 0x588e2c */
 
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002c75c0. */
-/* Supplied declaration required: FUN_0038b330. */
+/* Supplied declaration required: saveLoadProcessUpdateSdCardDetection. */
 extern int *FUN_00420d08(void);
 
 
@@ -25,7 +25,7 @@ void FUN_0039c244(void)
   int *piVar3;
   
   FUN_002c75c0(0);
-  FUN_0038b330();
+  saveLoadProcessUpdateSdCardDetection();
   temp_v0 = DAT_00588e2c;
   temp_v1 = 0x730;
   asdOperatorNew();

@@ -11,7 +11,7 @@ int FUN_0022e774(void);
 int FUN_0023b45c(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002a5e7c(int);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int FUN_002c8538(...);
 int FUN_003180c4(int, unsigned int);
 int panelSetMode3(int, int);
@@ -23,7 +23,7 @@ int FUN_0037c8e4(int, int);
 int messageDismissNumericBanner(...);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
-int FUN_003c5fc4(...);
+int messageMainSetTargetFlags(...);
 int partyAddMoneyClamped(int);
 int FUN_004bcd90(int);
 int dispatchIfFound(unsigned int, int, int);
@@ -71,7 +71,7 @@ extern int FUN_0026c3a0(void);
 extern int FUN_002a4b28(void);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
-/* Supplied declaration required: FUN_002a7288. */
+/* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: panelSetMode3. */
@@ -85,7 +85,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: partyAddMoneyClamped. */
 /* Supplied declaration required: FUN_004bcd90. */
 extern int getUnlockedSlotCount(unsigned int);
@@ -182,7 +182,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
           param_1->field_0x8 = 10;
         }
         FUN_003c3e14();
-        FUN_003c5fc4(0);
+        messageMainSetTargetFlags(0);
         return;
       }
       if (temp_v0 == 2) {
@@ -233,7 +233,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     FUN_00359974(0x19,*(unsigned int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),
                  0xffffffff,0);
     FUN_003c1060();
-    FUN_003c5fc4(1);
+    messageMainSetTargetFlags(1);
     sysPlaySe(0xa4);
     temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)&param_1->field_0x14,&LAB_003e3fd0);
     if (-1 < temp_v0) {
@@ -266,7 +266,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     messageDismissNumericBanner(1);
     FUN_0022e774();
     FUN_0023b45c(0);
-    FUN_002a7288();
+    statusDownRestartTransition();
     temp_v0 = 0xb;
   }
   param_1->field_0x8 = temp_v0;

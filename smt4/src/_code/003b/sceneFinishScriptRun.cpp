@@ -5,7 +5,7 @@ extern "C" {
 int FUN_002305e8(int a);
 int placeWinStartText(void *text);
 int dialogOpen(int a, int b);
-int FUN_0027e7b4(u32 a, int b);
+int infoWinSetMessage(u32 a, int b);
 int scrScriptProcessDestroy(u32 process);
 int asdMemFree(u32 ptr);
 extern int scrRunOpcodesStub(u32 value);
@@ -42,7 +42,7 @@ void sceneFinishScriptRun(Scene *scene)
         asdMemFree(scene->bufferB);
         scene->bufferB = 0;
         dialogOpen(0, 0);
-        FUN_0027e7b4(scene->unkD80, scene->inner->unk3F);
+        infoWinSetMessage(scene->unkD80, scene->inner->unk3F);
         scene->unk28 = 5;
         scene->unk2C = 0;
         scene->unk6CC = 0;

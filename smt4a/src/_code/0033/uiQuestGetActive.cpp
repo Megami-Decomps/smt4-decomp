@@ -2,8 +2,6 @@
 
 extern "C" {
 
-
-
 s32 uiQuestGetActive(void)
 {
     return g_uiQuest->active;

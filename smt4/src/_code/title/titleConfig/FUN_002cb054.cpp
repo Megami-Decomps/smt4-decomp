@@ -45,7 +45,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0029d644(int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002be5a4. */
@@ -210,7 +210,7 @@ unsigned int FUN_002cb054(void)
       }
       if (temp_v0) {
         FUN_002bf288(2,0x2f,0x1c,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v3,0x1f);
-        temp_v6 = FUN_0029d65c((int)*(short *)(temp_v1 + 0x1c));
+        temp_v6 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v1 + 0x1c));
         temp_v4 = g_titleScene;
         if ((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6) {
           temp_v6 = packNibblesAndByte(6,1,0);
@@ -245,21 +245,21 @@ unsigned int FUN_002cb054(void)
       FUN_002bf380(2,0x2f,3,temp_v27,temp_v6,0x1f);
       temp_v5 = FUN_002bf4f8(0x2f,temp_v5 + 0x5b);
       if (temp_v0) {
-        temp_v7 = FUN_0029d65c((int)*(short *)(temp_v4 + 0x1e));
+        temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x1e));
         if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
           FUN_002bf380(2,0x2f,4,temp_v27,temp_v6,0x1f);
         }
         else {
           FUN_002bf380(2,0x2f,5,temp_v27,temp_v6,0x15);
         }
-        temp_v7 = FUN_0029d65c((int)*(short *)(temp_v4 + 0x20));
+        temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x20));
         if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
           FUN_002bf380(2,0x2f,6,temp_v27,temp_v6,0x1f);
         }
         else {
           FUN_002bf380(2,0x2f,7,temp_v27,temp_v6,0x15);
         }
-        temp_v4 = FUN_0029d65c((int)*(short *)(temp_v4 + 0x22));
+        temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v4 + 0x22));
         if (!((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6)) {
           FUN_002bf288(2,0x2f,0x31,*(short *)(temp_v5 + 8) + temp_v27,*(short *)(temp_v5 + 10) + temp_v6,
                        0x29);

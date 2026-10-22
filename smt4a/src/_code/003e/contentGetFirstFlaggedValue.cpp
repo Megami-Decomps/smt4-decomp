@@ -7,7 +7,7 @@ struct ContentFlagsView {
 };
 
 extern "C" {
-u8* FUN_00192550(s32 id);
+u8* dataTable8FindRecord(s32 id);
 u16 FUN_001ba3d4(s32 id);
 
 u32 contentGetFirstFlaggedValue(void)
@@ -15,7 +15,7 @@ u32 contentGetFirstFlaggedValue(void)
     u32 result = 0;
     u32 id = 0;
     const ContentFlagsView* record;
-    while ((record = (const ContentFlagsView*)FUN_00192550(id)) == NULL ||
+    while ((record = (const ContentFlagsView*)dataTable8FindRecord(id)) == NULL ||
            !(record->flags & 8)) {
         if (++id >= 0x7df) {
             return result;

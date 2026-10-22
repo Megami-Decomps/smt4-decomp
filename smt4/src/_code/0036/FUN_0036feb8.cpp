@@ -1,86 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036feb8` (_code @ 0x36feb8, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the null result in a register (r7) shared with the loop start; built rematerializes #0 */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0036efa8(int *);
-int FUN_0036f210(int *);
+void FUN_0036efa8(void **item);
+void FUN_0036f210(void **item);
 
-typedef struct fn_0036feb8_arg0 fn_0036feb8_arg0;
-struct fn_0036feb8_arg0 {
-    unsigned char pad_0x0[0x2c];
-    int field_0x2c; /* +0x2c */
-    int field_0x30; /* +0x30 */
-    unsigned char pad_0x34[0x4];
-    int field_0x38; /* +0x38 */
-    int field_0x3c; /* +0x3c */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0036efa8. */
-/* Supplied declaration required: FUN_0036f210. */
-
-
-void FUN_0036feb8(fn_0036feb8_arg0 *param_1)
-
+/* Offsets stored in the resource are relative to the field holding them; zero means none. */
+static void *resRelPtr(s32 *field)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v2 = param_1->field_0x38;
-  temp_v1 = 0;
-  if (temp_v1 < temp_v2) {
-    do {
-      if (param_1->field_0x3c != 0) {
-        temp_v0 = (int)&param_1->field_0x3c + param_1->field_0x3c;
-      }
-      else {
-        temp_v0 = 0;
-      }
-      piVar2 = (int *)(temp_v0 + temp_v1 * 4);
-      temp_v3 = *piVar2;
-      if (temp_v3 != 0) {
-        temp_v3 = (int)piVar2 + temp_v3;
-      }
-      else {
-        temp_v3 = 0;
-      }
-      FUN_0036f210(&temp_v3);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2);
-  }
-  temp_v2 = param_1->field_0x2c;
-  temp_v1 = 0;
-  if (temp_v1 < temp_v2) {
-    do {
-      if (param_1->field_0x30 != 0) {
-        temp_v0 = (int)&param_1->field_0x30 + param_1->field_0x30;
-      }
-      else {
-        temp_v0 = 0;
-      }
-      piVar2 = (int *)(temp_v0 + temp_v1 * 4);
-      temp_v3 = *piVar2;
-      if (temp_v3 != 0) {
-        temp_v3 = (int)piVar2 + temp_v3;
-      }
-      else {
-        temp_v3 = 0;
-      }
-      FUN_0036efa8(&temp_v3);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2);
-  }
-  return;
+    if (*field == 0) {
+        return NULL;
+    }
+    return (u8 *)field + *field;
+}
+
+typedef struct {
+    u8 unk0[0x2c];
+    s32 firstCount;   /* 0x2c */
+    s32 firstTable;   /* 0x30: relative offset to s32[firstCount] relative offsets */
+    u8 unk34[4];
+    s32 secondCount;  /* 0x38 */
+    s32 secondTable;  /* 0x3c: relative offset to s32[secondCount] relative offsets */
+} ResItemLists;
+
+/* Resolves each item of the second list, then of the first, passing it to its handler. */
+void FUN_0036feb8(ResItemLists *lists)
+{
+    s32 count;
+    s32 i;
+    void *item;
+
+    count = lists->secondCount;
+    for (i = 0; i < count; i++) {
+        item = resRelPtr(&((s32 *)resRelPtr(&lists->secondTable))[i]);
+        FUN_0036f210(&item);
+    }
+    count = lists->firstCount;
+    for (i = 0; i < count; i++) {
+        item = resRelPtr(&((s32 *)resRelPtr(&lists->firstTable))[i]);
+        FUN_0036efa8(&item);
+    }
 }
 
 } /* extern "C" */

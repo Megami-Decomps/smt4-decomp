@@ -32,7 +32,7 @@ extern unsigned int dataTable00GetCurrentValue(unsigned int);
 /* Supplied declaration required: FUN_00356308. */
 /* Supplied declaration required: FUN_00482414. */
 /* Supplied declaration required: FUN_00482428. */
-extern int FUN_0048243c(int, unsigned int);
+extern int table29ApplyEntry(int, unsigned int);
 /* Supplied declaration required: FUN_004824fc. */
 /* Supplied declaration required: FUN_0048269c. */
 extern int FUN_00482b08(int, unsigned int);
@@ -104,7 +104,7 @@ void FUN_00483304(int param_1,int param_2,unsigned int param_3)
       temp_v2 = dataTable00GetCurrentValue(temp_v2);
       *(unsigned int *)(temp_v1 + 0x68) = temp_v2;
       *(unsigned int *)(temp_v1 + 0x70) = (unsigned int)*(unsigned short *)(temp_v4 + 10);
-      temp_v4 = FUN_0048243c(temp_v1,temp_v6);
+      temp_v4 = table29ApplyEntry(temp_v1,temp_v6);
       if (temp_v4 != 0) {
         temp_v4 = 0;
         do {

@@ -1,76 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa15c` (_code @ 0x4fa15c, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "battle/btlMain.h"
+#include "common.h"
+
+/* An animation key: the frame it fires on and its parameter. */
+struct BtlAttackAnimKey {
+    /* 0x00 */ s16 frame;
+    /* 0x02 */ s16 param;
+};
+
+/* The key's color, as percentages. */
+struct BtlAttackAnimColor {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 red;
+    /* 0x0A */ u8 green;
+    /* 0x0B */ u8 blue;
+};
+
+/* The battle attack animation work as this step sees it. */
+struct BtlAttackAnim {
+    /* 0x0000 */ u8 unk0000[0x33B4];
+    /* 0x33B4 */ u8 state;
+    /* 0x33B5 */ u8 unk33B5[0xB];
+    /* 0x33C0 */ void *animation;
+    /* 0x33C4 */ BtlAttackAnimKey *key;
+    /* 0x33C8 */ BtlAttackAnimColor *color;
+};
 
 extern "C" {
 
-int animationGetModeChannelValue(...);
-int FUN_00420fc0(...);
-int FUN_004f6254(...);
-void btlUpdateAttackAnimation(BtlAuxA *);
-int FUN_004fbdd4(...);
-int VectorUnsignedToFloat(...);
+bool FUN_004212b8(void *animation);
+f32 animationGetModeChannelValue(void *animation);
+void FUN_004fbdd4(s32 a, s32 b, s32 param, f32 red, f32 green, f32 blue);
+void FUN_004f6254(BtlAttackAnim *anim, s16 frame, s32 mode);
+void FUN_00420fc0(void *animation);
+void btlUpdateAttackAnimation(BtlAttackAnim *anim);
 
-typedef struct fn_004fa15c_arg0 fn_004fa15c_arg0;
-struct fn_004fa15c_arg0 {
-    unsigned char pad_0x0[0x339c];
-    undefined4 field_0x339c; /* +0x339c */
-    unsigned char pad_0x33a0[0x14];
-    undefined1 field_0x33b4; /* +0x33b4 */
-    byte field_0x33b5; /* +0x33b5 */
-    short field_0x33b6; /* +0x33b6 */
-    ushort field_0x33b8; /* +0x33b8 */
-    unsigned char pad_0x33ba[0x2];
-    void *field_0x33bc; /* +0x33bc */
-    undefined4 field_0x33c0; /* +0x33c0 */
-    void *field_0x33c4; /* +0x33c4 */
-    void *field_0x33c8; /* +0x33c8 */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: animationGetModeChannelValue. */
-/* Supplied declaration required: FUN_00420fc0. */
-extern int FUN_004212b8(unsigned int);
-/* Supplied declaration required: FUN_004f6254. */
-/* Supplied declaration required: FUN_004fbdd4. */
-
-
-void FUN_004fa15c(fn_004fa15c_arg0 *param_1)
-
+/* Steps the attack animation: fires the key on its frame, and once the animation has finished
+ * moves to state 10 and updates the attack animation. */
+void FUN_004fa15c(BtlAttackAnim *anim)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 6 native warning(s); review required */
-  int temp_v0;
-  void *pvVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  
-  temp_v0 = FUN_004212b8(param_1->field_0x33c0);
-  if (temp_v0 == 0) {
-    animationGetModeChannelValue(param_1->field_0x33c0);
-    if ((int)*(short *)param_1->field_0x33c4 == (int)in_s0) {
-      pvVar2 = param_1->field_0x33c8;
-      VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 0xb),(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 9),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_004fbdd4(0,0,(int)*(short *)((int)param_1->field_0x33c4 + 2),
-                   (unsigned int)*(unsigned char *)((int)pvVar2 + 10));
+    if (!FUN_004212b8(anim->animation)) {
+        s32 frame = (s32)animationGetModeChannelValue(anim->animation);
+        if (anim->key->frame == frame) {
+            FUN_004fbdd4(0, 0, anim->key->param, anim->color->red * 0.01f,
+                         anim->color->green * 0.01f, anim->color->blue * 0.01f);
+        }
+        FUN_004f6254(anim, frame, 1);
     }
-    FUN_004f6254(param_1,(int)(short)(int)in_s0,1);
-  }
-  temp_v0 = FUN_004212b8(param_1->field_0x33c0);
-  if (temp_v0 != 0) {
-    FUN_00420fc0(param_1->field_0x33c0);
-    param_1->field_0x33b4 = 10;
-    btlUpdateAttackAnimation((BtlAuxA *)param_1);
-    return;
-  }
-  return;
+    if (FUN_004212b8(anim->animation)) {
+        FUN_00420fc0(anim->animation);
+        anim->state = 10;
+        btlUpdateAttackAnimation(anim);
+    }
 }
 
 } /* extern "C" */

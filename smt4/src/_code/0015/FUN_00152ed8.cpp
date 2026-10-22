@@ -13,11 +13,11 @@ void FUN_00152ed8(ModelSelector *selector)
 {
     ModelSlotList *list = asdModelGetSlotArray0(0);
     ModelSlot *slot = selector->slots[selector->index];
-    ModelSlot **newEnd = std::remove(list->begin, list->end, slot);
-    ModelSlot **oldEnd = list->end;
+    ModelSlot **newEnd = std::remove(list->slots.begin, list->slots.end, slot);
+    ModelSlot **oldEnd = list->slots.end;
     bool removed = oldEnd != newEnd;
 
-    list->end = newEnd;
+    list->slots.end = newEnd;
     if (removed) {
         slot->attached = 0;
     }

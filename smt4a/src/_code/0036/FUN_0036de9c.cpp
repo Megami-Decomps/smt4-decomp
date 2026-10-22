@@ -1,48 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036de9c` (_code @ 0x36de9c, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Retail retains an inlined constant type-normalization comparison and an unused pool address. */
+#include "ui/MessageMain.h"
 extern "C" {
+void* FUN_002ba85c(s32);
+s32 scrGetArg(u32);
+s32 scrGetCommandFrame(void);
+s32 FUN_0021bdac(void*, s32, s32, s32, s32, s32);
+void msgBoxFlagsSetBit7(u32);
 
-int msgBoxFlagsSetBit7(unsigned int);
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int scrGetCommandFrame(void);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: msgBoxFlagsSetBit7. */
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: scrGetCommandFrame. */
-
-
-unsigned int FUN_0036de9c(int param_1)
-
+s32 FUN_0036de9c(MessageGlobalsA* globals)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = *(int *)(param_1 + 4);
-  temp_v0 = FUN_002ba85c();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v0,temp_v1,temp_v2,5,0,0);
-  temp_v3 = scrGetCommandFrame();
-  if (temp_v3 == 0) {
-    msgBoxFlagsSetBit7(*(unsigned int *)(temp_v4 + 4));
-    *(unsigned char *)(temp_v4 + 0x19c4) = 0;
-    *(unsigned int *)(temp_v4 + 0xc) = *(unsigned int *)(temp_v4 + 0xc) | 0x20;
-  }
-  return temp_v0;
+    MessageWorkA* work = globals->state;
+    void* context = FUN_002ba85c(5);
+    s32 argument = scrGetArg(0);
+    s32 frame = scrGetCommandFrame();
+    s32 result = FUN_0021bdac(context, argument, frame, 5, 0, 0);
+    if (scrGetCommandFrame() == 0) {
+        msgBoxFlagsSetBit7(work->box);
+        work->unk19C4 = 0;
+        work->flags |= 0x20;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

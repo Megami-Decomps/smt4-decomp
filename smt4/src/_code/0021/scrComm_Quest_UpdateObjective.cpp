@@ -82,7 +82,7 @@ extern unsigned int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: scrResultStopJobAndReleaseUi. */
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: FUN_0029bbc8. */
@@ -310,7 +310,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     if (temp_v1 != 1) {
       return 0;
     }
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 != 0) {
       scrWorkSetValue(1,0);
       scrWorkSetValue(0,4);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001e296c(unsigned int, int);
+int eventSoundPlayByKind(unsigned int, int);
 int mathDistanceBetweenPoints(void);
 int FUN_0039560c(int);
 
@@ -14,7 +14,7 @@ extern unsigned int DAT_0049fb74; /* 0x49fb74 */
 extern int DAT_0049fb78; /* 0x49fb78 */
 extern signed char DAT_0049fc64; /* 0x49fc64 */
 
-/* Supplied declaration required: FUN_001e296c. */
+/* Supplied declaration required: eventSoundPlayByKind. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_0039560c. */
@@ -53,7 +53,7 @@ void FUN_0039568c(int param_1)
             temp_v2 = 0x3c;
           }
           *(int *)(temp_v0 + 0x58) = temp_v2;
-          FUN_001e296c(*(unsigned int *)(temp_v0 + 0x60),1);
+          eventSoundPlayByKind(*(unsigned int *)(temp_v0 + 0x60),1);
           *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
           return;
         }

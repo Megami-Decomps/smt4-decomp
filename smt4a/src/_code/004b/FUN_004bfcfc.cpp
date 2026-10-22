@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetMainState(...);
-int FUN_00192550(...);
+int dataTable8FindRecord(...);
 int dataTable04FindById(...);
 int sysMemClear(...);
 int FUN_0034a290(...);
@@ -71,7 +71,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
@@ -166,7 +166,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
       return 0;
     }
   }
-  FUN_00192550();
+  dataTable8FindRecord();
   if (param_3 != (fn_004bfcfc_arg2 *)0x0) {
     temp_v2 = param_3->field_0x34;
     temp_v11 = temp_v2 == 0;

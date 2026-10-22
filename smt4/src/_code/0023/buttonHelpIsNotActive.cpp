@@ -1,10 +1,11 @@
-#include "shard/Obj43da28.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobals g_buttonHelp;
 
 u8 buttonHelpIsNotActive(void)
 {
-    return g_buttonHelp.obj->state != 1;
+    return g_buttonHelp.work->state != 1;
 }
 
 } /* extern "C" */

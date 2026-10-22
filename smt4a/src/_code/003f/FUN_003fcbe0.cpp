@@ -1,59 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fcbe0` (_code @ 0x3fcbe0, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout: retail returns `(provided & ~owned) != 0` straight after the
+ * first branch (`bics; movne r0, #1; pop`) and the table-6 branch jumps back to it. */
+#include "shard/X14_AocTexRequest.h"
 
 extern "C" {
 
-int asdTMTexTableGetNode(unsigned int, unsigned int);
+void *asdTMTexTableGetNode(u32 table, u32 node);
+s32 resourceIsReady(void);
+u32 recordPrepareLinkedOwner(void *aoc, u32 table, u32 node);
+s32 FUN_004705ec(void *aoc, u32 contentId, s32 arg);
+u32 FUN_004706e8(void *aoc, u32 contentId);
+s32 FUN_00470b18(void *aoc, u32 contentId, s32 arg);
+u32 FUN_00470e48(void *aoc, u32 contentId);
 
-extern unsigned int g_aocSystem; /* 0x570280 */
+extern void *g_aocSystem;
 
-/* Supplied declaration required: asdTMTexTableGetNode. */
-extern int resourceIsReady(void);
-extern unsigned int recordPrepareLinkedOwner(unsigned int, unsigned int, unsigned int);
-extern int FUN_004705ec(void);
-extern unsigned int FUN_004706e8(unsigned int, unsigned int);
-extern int FUN_00470b18(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_00470e48(unsigned int, unsigned int);
-
-
-unsigned int FUN_003fcbe0(int param_1)
-
+/* Returns 1 when the requested content provides bits its texture node's owner record lacks. */
+u32 FUN_003fcbe0(AocTexRequest *request)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  asdTMTexTableGetNode(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
-  temp_v0 = resourceIsReady();
-  temp_v3 = 0;
-  if (temp_v0 != 0) {
-    if (*(int *)(param_1 + 8) != 6) {
-      temp_v0 = FUN_004705ec();
-      if (temp_v0 == 0) {
+    u32 provided;
+    u32 owned;
+
+    asdTMTexTableGetNode(request->table, request->node);
+    if (resourceIsReady() == 0) {
         return 0;
-      }
-      temp_v1 = FUN_004706e8(g_aocSystem,*(unsigned int *)(param_1 + 4));
-      temp_v2 = recordPrepareLinkedOwner(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
-      ;
     }
-    else {
-      temp_v0 = FUN_00470b18(g_aocSystem,*(unsigned int *)(param_1 + 4),0);
-      if (temp_v0 == 0) {
-        return 0;
-      }
-      temp_v1 = FUN_00470e48(g_aocSystem,*(unsigned int *)(param_1 + 4));
-      temp_v2 = recordPrepareLinkedOwner(g_aocSystem,*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc))
-      ;
+    if (request->table != 6) {
+        if (FUN_004705ec(g_aocSystem, request->contentId, 0) == 0) {
+            return 0;
+        }
+        provided = FUN_004706e8(g_aocSystem, request->contentId);
+        owned = recordPrepareLinkedOwner(g_aocSystem, request->table, request->node);
+    } else {
+        if (FUN_00470b18(g_aocSystem, request->contentId, 0) == 0) {
+            return 0;
+        }
+        provided = FUN_00470e48(g_aocSystem, request->contentId);
+        owned = recordPrepareLinkedOwner(g_aocSystem, request->table, request->node);
     }
-    temp_v3 = 0;
-    if ((temp_v1 & ~temp_v2) != 0) {
-      temp_v3 = 1;
-    }
-  }
-  return temp_v3;
+    return (provided & ~owned) != 0;
 }
 
 } /* extern "C" */

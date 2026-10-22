@@ -14,7 +14,7 @@ s32 FUN_0031c388(void)
     u32 value = scrGetArg();
 
     sysClearCachedFlag();
-    g_gameState.unk454 = -1;
+    g_gameState.mapFlags.unk454 = -1;
     FUN_00270c58(value);
     return 3;
 }

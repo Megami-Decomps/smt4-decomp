@@ -1,44 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b91ec` (_code @ 0x2b91ec, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: branch layout of the entry-mode choice and register allocation of the stored constants differ. */
+#include "shard/W5_W5Match7_SceneState.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 
-extern int g_lmapScene; /* 0x581288 */
+s32 gameFlagIsSet(u32 flag);
+s32 FUN_002e5db4(void);
 
-extern int gameFlagsGetBlock(void);
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_002e5db4(void);
-
-
+/* Resets the field scene's entry state; the entry mode depends on flag 0x4c9. */
 void FUN_002b91ec(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagsGetBlock();
-  temp_v1 = gameFlagIsSet(0x4c9);
-  if ((temp_v1 == 0) || (temp_v1 = FUN_002e5db4(), temp_v1 != 0)) {
-    *(unsigned int *)(g_lmapScene + 0x1d0) = 0xf;
-  }
-  else {
-    *(unsigned int *)(g_lmapScene + 0x1d0) = 0xb;
-  }
-  temp_v1 = g_lmapScene;
-  *(unsigned int *)(g_lmapScene + 0x228) = 6;
-  *(unsigned char *)(temp_v1 + 0x22c) = 1;
-  *(unsigned int *)(temp_v1 + 0x240) = 0x40a00000;
-  *(unsigned int *)(temp_v1 + 0x1d4) = 0;
-  *(unsigned int *)(temp_v0 + 0x10a0) = 0;
-  *(unsigned int *)(temp_v0 + 0x109c) = 0;
-  *(unsigned int *)(temp_v0 + 0x10a4) = 0;
-  temp_v0 = gameFlagIsSet(0x4c9);
-  if ((temp_v0 == 0) || (temp_v0 = FUN_002e5db4(), temp_v0 != 0)) {
-    *(unsigned int *)(g_lmapScene + 0x238) = 6;
-  }
-  *(unsigned char *)(g_lmapScene + 0x23c) = 1;
-  return;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+
+    if (!gameFlagIsSet(0x4c9) || FUN_002e5db4() != 0) {
+        g_lmapScene->entry.entryMode = 15;
+    } else {
+        g_lmapScene->entry.entryMode = 11;
+    }
+    g_lmapScene->entry.unk228 = 6;
+    g_lmapScene->entry.unk22c = 1;
+    g_lmapScene->entry.unk240 = 5.0f;
+    g_lmapScene->entry.unk1d4 = 0;
+    flags->sceneEntry.unk10a0 = 0.0f;
+    flags->sceneEntry.unk109c = 0;
+    flags->sceneEntry.unk10a4 = 0;
+    if (!gameFlagIsSet(0x4c9) || FUN_002e5db4() != 0) {
+        g_lmapScene->entry.unk238 = 6;
+    }
+    g_lmapScene->entry.unk23c = 1;
 }
 
 } /* extern "C" */

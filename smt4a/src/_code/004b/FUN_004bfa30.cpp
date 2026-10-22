@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001568f8(unsigned int *, int);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int FUN_003e8bb0(unsigned char [42], unsigned int *, unsigned int *);
 int FUN_003f0e20(unsigned int *, unsigned int);
@@ -20,7 +20,7 @@ extern unsigned int DAT_0057140c; /* 0x57140c */
 
 extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -44,7 +44,7 @@ unsigned int FUN_004bfa30(int param_1,int param_2,unsigned int param_3,int param
   
   temp_v3 = param_1;
   dataTable04FindById();
-  FUN_00192550();
+  dataTable8FindRecord();
   if (temp_v3 == 0 && param_2 == 0) {
     return 0;
   }

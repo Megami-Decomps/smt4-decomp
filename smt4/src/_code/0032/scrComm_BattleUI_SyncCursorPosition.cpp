@@ -16,7 +16,7 @@ extern u32 g_btlUiBlock; /* 0x439ca8 */
 extern BtlMainState *btlGetMainState(void);
 extern int FUN_00254f58(BtlMainState *state);
 extern int FUN_00338060(BtlMainState *state, int arg);
-extern int FUN_003af0b0(u32 block);
+extern int btlUiInvalidateIndexedEntries(u32 block);
 
 /* Copies the target cursor position to the current one and refreshes the battle UI. */
 u32 scrComm_BattleUI_SyncCursorPosition(void)
@@ -26,7 +26,7 @@ u32 scrComm_BattleUI_SyncCursorPosition(void)
 
     state->cursorX = state->targetX;
     state->cursorY = state->targetY;
-    FUN_003af0b0(g_btlUiBlock);
+    btlUiInvalidateIndexedEntries(g_btlUiBlock);
     flags = (u32 *)((u8 *)state + 0x44A0);
     if ((*flags & 0x1000) != 0) {
         *flags &= ~0x1000;

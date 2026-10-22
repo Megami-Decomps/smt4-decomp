@@ -1,8 +1,9 @@
-#include "shard/Shard0033.h"
+#include "ui/FrameTex.h"
+extern "C" FrameWorkA *g_frameTex;
 
 extern "C" {
 
-extern ObjectE0 *g_frameTex;
+
 
 void FUN_00348c28(u8 value)
 {

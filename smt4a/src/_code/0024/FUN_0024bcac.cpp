@@ -1,9 +1,9 @@
-#include "common.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 
 void *jobGetWork(void *job);
-extern void *g_btlHelp;
+extern BtlHelpA *g_btlHelp;
 void FUN_0023173c(void *object);
 void FUN_0024bcac(void *job)
 {

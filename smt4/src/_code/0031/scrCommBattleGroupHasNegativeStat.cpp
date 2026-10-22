@@ -3,7 +3,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-s32 FUN_00249a54(s32 kind);
+s32 btlScriptResolveGroupArg(s32 kind);
 void FUN_002499fc(s32 kind, u32 *first, u32 *count);
 BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
@@ -20,7 +20,7 @@ u32 scrCommBattleGroupHasNegativeStat()
     } else if (kind == 2) {
         stat = 11;
     }
-    s32 group = FUN_00249a54((s32)scrGetArg(2));
+    s32 group = btlScriptResolveGroupArg((s32)scrGetArg(2));
     s32 first, count;
     FUN_002499fc(group, (u32 *)&first, (u32 *)&count);
     for (s32 index = first; index < first + count; ++index) {

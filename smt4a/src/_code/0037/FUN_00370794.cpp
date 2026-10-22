@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
+extern MessageGlobalsA g_messageMain;
 
 u32 FUN_00370794(void)
 {

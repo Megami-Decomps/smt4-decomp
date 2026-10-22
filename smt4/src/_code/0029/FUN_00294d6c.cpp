@@ -1,45 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00294d6c` (_code @ 0x294d6c, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instructions match, but the global-pointer and float literal pools differ in order. */
+#include "shard/GameGlobals.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
+void statusCameraSetEye(f32 x, f32 y, f32 z);
 
-int statusCameraSetEye(void);
-int VectorSignedToFloat(int, int);
-
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: statusCameraSetEye. */
-
-
+// Position the status camera's eye using the selected height scaling mode.
 void FUN_00294d6c(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1ea0);
-  if (0 < temp_v1) {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1ea4);
-    if (temp_v0 != '\0') {
-      if (temp_v0 != '\x01') {
-        if (temp_v0 == '\x02') {
-          VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
+    Vec3 eye;
+    eye.x = 0.0f;
+    eye.y = 6.3f;
+    eye.z = 4.5f;
+    s32 height = g_gameGlobals.data->statusCameraHeightOffset;
+    if (height > 0) {
+        switch (g_gameGlobals.data->statusCameraHeightMode) {
+        case 0:
+            eye.y += static_cast<f32>(height) * 0.08f;
+            break;
+        case 1:
+            eye.y += static_cast<f32>(height) * 0.105f;
+            break;
+        case 2:
+            eye.y += static_cast<f32>(height) * 0.01f;
+            break;
         }
-      }
-      else {
-        VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      }
     }
-    else {
-      VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-  }
-  statusCameraSetEye();
-  return;
+    statusCameraSetEye(eye.x, eye.y, eye.z);
 }
-
-} /* extern "C" */
+}

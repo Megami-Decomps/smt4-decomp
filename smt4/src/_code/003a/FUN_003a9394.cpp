@@ -1,47 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a9394` (_code @ 0x3a9394, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail beq 8c differs from recovered ldrbne r0, [r5, #138]. */
+#include "common.h"
 
-extern "C" {
+// Private views of the fields accessed by this routine.
+namespace {
 
-int pointConvertToFloat(int, unsigned int, unsigned int);
-int FUN_0029e874(int);
-int FUN_002bf818(int);
+struct PositionStateView {
+    u8 unk00[0x8A]; // 0x00
+    s8 unk8A;       // 0x8A
+};
 
-extern int utilityReturnSuccess(int);
-/* Supplied declaration required: pointConvertToFloat. */
-extern int FUN_0026b564(void);
-extern int FUN_00295618(void);
-/* Supplied declaration required: FUN_0029e874. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf818. */
+struct UpdateStateView {
+    u8 unk00[0x14];               // 0x000
+    u32 unk14;                    // 0x014
+    u32 unk18;                    // 0x018
+    u8 unk1C[0x7A];               // 0x01C
+    u8 unk96[0x32];               // 0x096
+    u8 unkC8[0xC0];               // 0x0C8
+    PositionStateView unk188;     // 0x188
+};
 
-
-void FUN_003a9394(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_00295618();
-  if (temp_v0 != 0) {
-    FUN_0029e874(0);
-  }
-  temp_v0 = param_1 + 0x188;
-  FUN_002bf818(temp_v0);
-  temp_v1 = vec2GetYInt(temp_v0);
-  temp_v2 = vec2GetXInt(temp_v0);
-  pointConvertToFloat(param_1 + 200,temp_v2,temp_v1);
-  temp_v0 = FUN_00295618();
-  if ((((temp_v0 != 0) && (*(char *)(param_1 + 0x212) != '\0')) &&
-      (temp_v0 = FUN_0026b564(), temp_v0 != 0)) && (temp_v0 = utilityReturnSuccess(param_1 + 0x96), temp_v0 == 0)) {
-    *(unsigned int *)(param_1 + 0x14) = 7;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+void pointConvertToFloat(void* destination, s32 x, s32 y);
+s32 FUN_00295618(void);
+void FUN_0029e874(s32 value);
+void FUN_002bf818(PositionStateView* position);
+s32 vec2GetYInt(const PositionStateView* position);
+s32 vec2GetXInt(const PositionStateView* position);
+s32 FUN_0026b564(void);
+s32 utilityReturnSuccess(void* state);
+
+// Refresh the position and advance the state when all transition conditions hold.
+void FUN_003a9394(UpdateStateView* state)
+{
+    if (FUN_00295618() != 0) {
+        FUN_0029e874(0);
+    }
+
+    PositionStateView* position = &state->unk188;
+    FUN_002bf818(position);
+    s32 y = vec2GetYInt(position);
+    s32 x = vec2GetXInt(position);
+    pointConvertToFloat(state->unkC8, x, y);
+
+    if (FUN_00295618() == 0) {
+        return;
+    }
+    if (position->unk8A == 0) {
+        return;
+    }
+    if (FUN_0026b564() == 0) {
+        return;
+    }
+    if (utilityReturnSuccess(state->unk96) != 0) {
+        return;
+    }
+
+    state->unk14 = 7;
+    state->unk18 = 0;
+}
+}

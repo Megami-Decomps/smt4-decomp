@@ -51,7 +51,7 @@ extern unsigned char LAB_00382694; /* 0x382694 */
 extern char s_e022_02_0044db24[8]; /* 0x44db24 */
 
 extern int scrRunOpcodesStub(unsigned int);
-extern unsigned int FUN_00223ca0(void);
+extern unsigned int uiQuestGetCurrentEntryId(void);
 /* Supplied declaration required: FUN_0023547c. */
 /* Supplied declaration required: scrScriptProcessStartMappedEntry. */
 extern int FUN_00241990(void);
@@ -192,7 +192,7 @@ LAB_003822fc:
   case 3:
     temp_v2 = FUN_002e31b0();
     if (temp_v2 != 0) {
-      temp_v4 = FUN_00223ca0();
+      temp_v4 = uiQuestGetCurrentEntryId();
       param_1[0x343] = temp_v4;
       param_1[2] = 4;
       FUN_0023547c((int)(char)param_1[4]);

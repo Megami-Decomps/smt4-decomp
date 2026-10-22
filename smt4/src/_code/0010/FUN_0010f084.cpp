@@ -1,55 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010f084` (_code @ 0x10f084, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "ui/MessageMain.h"
+
+struct Unk49381c {
+    /* 0x00 */ u8 unk00[0x0D];
+    /* 0x0D */ u8 busy;
+};
 
 extern "C" {
 
-int FUN_002c1658(...);
+extern MessageGlobals g_messageMain;
+extern Unk49381c DAT_0049381c;
 
-extern unsigned int DAT_0043e18c; /* 0x43e18c */
-extern signed char DAT_00493829; /* 0x493829 */
+s32 FUN_002c1658(s32 id, s32 mode);
 
-/* Supplied declaration required: FUN_002c1658. */
-
-
-unsigned int FUN_0010f084(int param_1)
-
+/* Reports whether the given owner is still busy: any of the checked activities runs, or the
+ * message window belongs to it and is still waiting. */
+s32 FUN_0010f084(u32 owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = 0;
-  FUN_002c1658(0,1);
-  if (temp_v0 == 0) {
-    temp_v0 = 9;
-    FUN_002c1658(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = 6;
-      FUN_002c1658(6,2);
-      if (temp_v0 == 0) {
-        temp_v0 = 10;
-        FUN_002c1658(10,2);
-        if ((temp_v0 == 0) && (DAT_00493829 == '\0')) {
-          temp_v2 = *(int *)(DAT_0043e18c + 4) == param_1;
-          temp_v1 = DAT_0043e18c;
-          if (temp_v2) {
-            temp_v1 = (unsigned int)*(unsigned char *)(DAT_0043e18c + 0xa34);
-          }
-          if (temp_v2 && temp_v1 == 1) {
-            temp_v0 = 1;
-            FUN_002c1658();
-            if (temp_v0 != 0) {
-              return 1;
-            }
-          }
-          return 0;
-        }
-      }
+    MessageWork *window;
+
+    if (FUN_002c1658(0, 1) != 0 || FUN_002c1658(9, 2) != 0 || FUN_002c1658(6, 2) != 0 ||
+        FUN_002c1658(10, 2) != 0 || DAT_0049381c.busy != 0) {
+        return 1;
     }
-  }
-  return 1;
+    window = g_messageMain.state;
+    if (window->box == owner && window->unkA34 == 1 && FUN_002c1658(1, 1) != 0) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -17,10 +17,10 @@ typedef struct BtlMainState {
 
 extern BtlMainState *btlGetMainState(void);
 extern u32 scrGetArg(u32 index);
-extern s32 FUN_00247004(void);
+extern s32 btlSlotsHaveReadyUnit(void);
 extern void scrSetResult(s32 value);
 
-/* Script command: pushes whether an active, visible unit with the id given as argument 0 exists and FUN_00247004 holds; returns 1. */
+/* Script command: pushes whether an active, visible unit with the id given as argument 0 exists and btlSlotsHaveReadyUnit holds; returns 1. */
 u32 FUN_0030aee4(void)
 {
     u32 id = scrGetArg(0);
@@ -30,7 +30,7 @@ u32 FUN_0030aee4(void)
         Unit *unit = &btlGetMainState()->units[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id &&
-            FUN_00247004() != 0) {
+            btlSlotsHaveReadyUnit() != 0) {
             scrSetResult(1);
             return 1;
         }

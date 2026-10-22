@@ -29,7 +29,7 @@ int screenStartOrClear(...);
 int uiDrawExtendedRecordLabel(...);
 int FUN_0039bb48(...);
 int characterInfoPanelPopulate(...);
-int FUN_003a7a88(...);
+int devilIsTextureLoaded(...);
 int FUN_003b60c0(unsigned int, int);
 int sysPlayVoice(...);
 int resourceEntryMarkReleased(...);
@@ -71,7 +71,7 @@ extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: textureRequestCacheGet. */
 /* Supplied declaration required: FUN_0039bb48. */
 /* Supplied declaration required: characterInfoPanelPopulate. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: FUN_003aedc8. */
 /* Supplied declaration required: FUN_003b60c0. */
 /* Supplied declaration required: sysPlayVoice. */
@@ -139,7 +139,7 @@ unsigned int FUN_0025d6a0(void)
           FUN_002e2114();
           if (temp_v1 != 0) {
             temp_v1 = (int)*(short *)(*(int *)(temp_v0 + 0x110) + 0x90);
-            FUN_003a7a88(temp_v1,1);
+            devilIsTextureLoaded(temp_v1,1);
             if (temp_v1 != 0) {
               campCecSetObjectValue(0);
               *(unsigned char *)(temp_v0 + 0x134) = 1;
@@ -153,7 +153,7 @@ unsigned int FUN_0025d6a0(void)
   else {
     linkHolderApplyFlag(*(unsigned int *)(g_campCecView + 8),0);
     temp_v5 = (int)*(short *)(*(int *)(temp_v0 + 0x110) + 0x90);
-    FUN_003a7a88(temp_v5,1);
+    devilIsTextureLoaded(temp_v5,1);
     temp_v1 = g_campCecView;
     if (temp_v5 != 0) {
       if (*(int *)(temp_v0 + 0x144) == 1) {
@@ -182,7 +182,7 @@ unsigned int FUN_0025d6a0(void)
       }
       if (temp_v5 != 0 && temp_v1 != 0) {
         temp_v1 = (int)*(short *)(*(int *)(temp_v0 + 0x110) + 0x90);
-        FUN_003a7a88(temp_v1,1);
+        devilIsTextureLoaded(temp_v1,1);
         if (temp_v1 != 0) {
           *(unsigned int *)(temp_v0 + 0x144) = 0;
           if (*(char *)(temp_v0 + 0x13c) == '\0') {
@@ -670,7 +670,7 @@ LAB_0025e324:
       }
       if ((temp_v10 && temp_v5 != 2) && temp_v1 < 0 == temp_v11) {
         temp_v5 = (int)*(short *)(*(int *)(temp_v0 + 0x110) + 0x90);
-        FUN_003a7a88(temp_v5,1);
+        devilIsTextureLoaded(temp_v5,1);
         temp_v1 = g_campCecView;
         if ((temp_v5 != 0) && (*(int *)(temp_v0 + 0x144) == 1)) {
           FUN_0039bb48(*(unsigned int *)(g_campCecView + 0xc),temp_v17);

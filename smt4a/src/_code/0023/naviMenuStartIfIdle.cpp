@@ -1,15 +1,8 @@
+#include "shard/NaviMain.h"
 #include "common.h"
 
 extern "C" {
-
-typedef struct NaviMain {
-    /* 0x00 */ u8 unk00[0x58];
-    /* 0x58 */ s32 busy;
-    /* 0x5c */ u8 unk5c[0xc];
-    /* 0x68 */ u8 menu[1];
-} NaviMain;
-
-extern NaviMain *g_naviMain;
+extern NaviMainA *g_naviMain;
 
 void stateHandlerCallExtended(u8 *menu);
 s32 sceneTexturesAreLoaded(void);
@@ -23,7 +16,7 @@ u32 naviMenuStartIfIdle(void)
     if (g_naviMain->busy != 0) {
         return 0;
     }
-    stateHandlerCallExtended(g_naviMain->menu);
+    stateHandlerCallExtended(g_naviMain->panel);
     return 0;
 }
 

@@ -1,57 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001eb398` (_code @ 0x1eb398, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r6, [pc, #120] differs from recovered ldr r6, [pc, #116]. */
+#include "common.h"
+
+struct CommandEntryView {
+    u8 unk00;       // 0x00
+    u8 unk01[0x77]; // 0x01
+};
+
+struct CommandStateView {
+    CommandEntryView entries[4]; // 0x000
+    u8 unk1E0[4];                // 0x1E0
+    u8 unk1E4;                   // 0x1E4
+    u8 unk1E5;                   // 0x1E5
+};
 
 extern "C" {
+extern u32 DAT_0044e128;
+extern CommandStateView DAT_004c5634;
 
-int FUN_002bfc24(unsigned int, unsigned int, int, int);
+s32 scrGetCommandFrame(void);
+s32 FUN_002bfc24(u32 selection, u32 value, u32 option, u32 flags,
+                 f32 scaleX, f32 scaleY);
 
-extern unsigned int DAT_0044e128; /* 0x44e128 */
-extern unsigned char DAT_004c5634; /* 0x4c5634 */
-extern unsigned char DAT_004c5818; /* 0x4c5818 */
-extern unsigned char DAT_004c5819; /* 0x4c5819 */
-
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_002bfc24. */
-
-
-unsigned int FUN_001eb398(unsigned int param_1,unsigned int param_2)
-
+// Starts a command on its first frame and subsequently tests its completion state.
+u32 FUN_001eb398(u32 selection, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned char temp_v1;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 != 0) {
-    if (DAT_0044e128 >= 4) {
-      pcVar2 = (char *)0x0;
+    if (scrGetCommandFrame() != 0) {
+        u32 commandIndex = DAT_0044e128;
+        CommandEntryView* entry = commandIndex < 4
+            ? &DAT_004c5634.entries[commandIndex]
+            : 0;
+        return entry->unk00 == 2;
     }
-    else {
-      pcVar2 = (char *)(&DAT_004c5634 + DAT_0044e128 * 0x78);
-    }
-    if (*pcVar2 == '\x02') {
-      return 1;
-    }
-  }
-  else {
-    if (param_1 == 1) {
-      temp_v1 = DAT_004c5818 | 4;
-    }
-    else {
-      temp_v1 = DAT_004c5818;
-      if (param_1 == 2) {
-        temp_v1 = 5;
-      }
-    }
-    FUN_002bfc24(param_1,param_2,DAT_004c5819,temp_v1);
-    DAT_0044e128 = param_1;
-    if (param_1 == 0xffffffff) {
-      return 1;
-    }
-  }
-  return 0;
-}
 
-} /* extern "C" */
+    u32 flags = DAT_004c5634.unk1E4;
+    if (selection == 1) {
+        flags |= 4;
+    } else if (selection == 2) {
+        flags = 5;
+    }
+
+    s32 result = FUN_002bfc24(selection, value, DAT_004c5634.unk1E5,
+                             flags, 0.707f, 0.707f);
+    DAT_0044e128 = result;
+    return result == -1;
+}
+}

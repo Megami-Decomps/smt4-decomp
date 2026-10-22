@@ -1,64 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a6e7c` (_code @ 0x2a6e7c, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue scheduling only: retail saves `system` and loads the package count before saving the other arguments. */
+#include "addon/aocMain.h"
+
+struct AocPackageFile {
+    void *tableFile;
+    u8 unk04[8];
+    u8 enabled;
+    u8 unk0d[3];
+};
+struct AocPackage {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ char name[0x21];
+    /* 0x45 */ u8 enabled;
+    /* 0x46 */ u8 unk46[2];
+    /* 0x48 */ void *directoryTable;
+    /* 0x4C */ AocPackageFile *files;
+};
+struct AocDirectoryEntry {
+    /* 0x00 */ s8 type;
+    /* 0x01 */ char name[0x3b];
+    /* 0x3C */ s32 id;
+};
 
 extern "C" {
+s32 FUN_002ac12c(AocPackage *package);
+AocDirectoryEntry *FUN_002ac0f8(AocPackage *package);
+u32 FUN_002ac0c4(AocPackage *package);
+void textFormatBuffer(char *buffer, const char *format, ...);
 
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
-int textFormatBuffer(unsigned int, unsigned char *, unsigned int, unsigned int);
-
-extern unsigned char LAB_002a6f40; /* 0x2a6f40 */
-
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-extern int FUN_002ac12c(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-
-
-int FUN_002a6e7c(int param_1,int param_2,char *param_3,unsigned int param_4)
-
+/* Finds the file of type `type` and id `id` among the valid add-on packages, writes its path
+ * ("package/file") to `path` and returns it; NULL when absent. */
+AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 type, s32 id, char *path)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  char *pcVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v5 = 0;
-  if (temp_v5 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v6 = *(int *)(param_1 + 0x318) + temp_v5 * 0x50;
-      temp_v1 = FUN_002ac12c(temp_v6);
-      if (temp_v1 != 0) {
-        temp_v2 = temp_v6;
-        FUN_002ac0f8();
-        temp_v3 = temp_v6;
-        FUN_002ac0c4();
-        temp_v4 = 0;
-        if (temp_v4 < temp_v3) {
-          do {
-            pcVar5 = (char *)(temp_v2 + temp_v4 * 0x40);
-            temp_v0 = *pcVar5;
-            if (temp_v0 == param_2) {
-              pcVar5 = *(char **)(pcVar5 + 0x3c);
+    for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
+        AocPackage *package = &system->packages.entries[packageIndex];
+        if (FUN_002ac12c(package)) {
+            AocDirectoryEntry *directory = FUN_002ac0f8(package);
+            u32 fileCount = FUN_002ac0c4(package);
+            for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
+                if (directory[fileIndex].type == type && directory[fileIndex].id == id) {
+                    textFormatBuffer(path, "%s/%s", package->name, directory[fileIndex].name);
+                    return &package->files[fileIndex];
+                }
             }
-            if (temp_v0 == param_2 && pcVar5 == param_3) {
-              textFormatBuffer(param_4,&LAB_002a6f40,temp_v6 + 0x24,temp_v2 + temp_v4 * 0x40 + 1);
-              return *(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10;
-            }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < temp_v3);
         }
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(int *)(param_1 + 0x310));
-  }
-  return 0;
+    }
+    return NULL;
 }
 
 } /* extern "C" */

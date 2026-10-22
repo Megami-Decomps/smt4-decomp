@@ -1,58 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b7d88` (_code @ 0x4b7d88, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The native predicates merge the two default-cue state checks that retail duplicates. */
+#include "common.h"
+struct SoundCueContext {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ s16 kind;
+};
 extern "C" {
+bool gameFlagIsSet(u32);
+u8 gameDataFlagTestBit(u32);
+void sysPlaySe(u32);
 
-int sysPlaySe(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: sysPlaySe. */
-extern int gameFlagIsSet(unsigned int);
-extern int gameDataFlagTestBit(unsigned int);
-
-
-void FUN_004b7d88(int param_1)
-
+void FUN_004b7d88(const SoundCueContext* context)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = gameFlagIsSet(0x40c);
-  if (temp_v1 != 0) {
-    temp_v1 = gameDataFlagTestBit(0x76);
-    temp_v0 = *(short *)(param_1 + 0x3c);
-    if (temp_v1 != 0) {
-      if (temp_v0 == 4) {
-        sysPlaySe(0xea);
-        return;
-      }
-      if (temp_v0 != 3) {
-        sysPlaySe(0x45);
-        return;
-      }
-      sysPlaySe(0xeb);
-      return;
+    s16 kind;
+    if (gameFlagIsSet(0x40C) != 0) {
+        u8 alternate = gameDataFlagTestBit(0x76);
+        kind = context->kind;
+        if (alternate != 0) {
+            if (kind == 4) {
+                sysPlaySe(0xEA);
+                return;
+            }
+            if (kind != 3) {
+                sysPlaySe(0x45);
+                return;
+            }
+            sysPlaySe(0xEB);
+            return;
+        }
+    } else {
+        kind = context->kind;
     }
-  }
-  else {
-    temp_v0 = *(short *)(param_1 + 0x3c);
-  }
-  if (temp_v0 == 4) {
-    sysPlaySe(0xea);
-    return;
-  }
-  if (temp_v0 != 3) {
-    sysPlaySe(0x43);
-    return;
-  }
-  sysPlaySe(0xeb);
-  return;
+    if (kind == 4) {
+        sysPlaySe(0xEA);
+        return;
+    }
+    if (kind != 3) {
+        sysPlaySe(0x43);
+        return;
+    }
+    sysPlaySe(0xEB);
 }
-
-} /* extern "C" */
+}

@@ -1,60 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002311a4` (_code @ 0x2311a4, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ends the position path with a NOP after restoring LR; explicit float-position stores need additional VFP code. */
+#include "common.h"
 
+struct PositionedTransition {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s32 state;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u32 flags;
+    /* 0x014 */ u8 unk014[0x150];
+    /* 0x164 */ f32 position[2];
+    /* 0x16C */ u8 unk16C[0xC];
+    /* 0x178 */ u8 transition[0x20];
+    /* 0x198 */ u8 motion[0x14];
+};
 extern "C" {
+void FUN_00233240(void *transition, s32 value);
+s32 FUN_002bf818(void *motion);
+s32 vec2GetYInt(void *motion);
+s32 vec2GetXInt(void *motion);
 
-int FUN_00233240(int, int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00233240. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-extern int FUN_002bf818(int);
-
-
-void FUN_002311a4(int param_1)
-
+/* Starts a transition, follows its integer position, then clears the active flag. */
+void FUN_002311a4(PositionedTransition *work)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  unsigned int temp_v4;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 == 0) {
-    FUN_00233240(param_1 + 0x178,0);
-    *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;
-    *(unsigned int *)(param_1 + 8) = 1;
-    return;
-  }
-  if (temp_v0 == 1) {
-    temp_v3 = param_1 + 0x198;
-    temp_v0 = FUN_002bf818(temp_v3);
-    if (temp_v0 != 0) {
-      *(unsigned int *)(param_1 + 8) = 2;
+    switch (work->state) {
+    case 0:
+        FUN_00233240(work->transition, 0);
+        work->flags = (work->flags & ~2u) | 0x1000000;
+        work->state = 1;
+        break;
+    case 1: {
+        if (FUN_002bf818(work->motion) != 0) {
+            work->state = 2;
+        }
+        s32 y = vec2GetYInt(work->motion);
+        s32 x = vec2GetXInt(work->motion);
+        work->position[0] = static_cast<f32>(x);
+        work->position[1] = static_cast<f32>(y);
+        break;
     }
-    temp_v1 = vec2GetYInt(temp_v3);
-    temp_v2 = vec2GetXInt(temp_v3);
-    temp_v4 = VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v1 = VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(param_1 + 0x164) = temp_v1;
-    *(unsigned int *)(param_1 + 0x168) = temp_v4;
-    return;
-  }
-  if (temp_v0 == 2) {
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfeffffff;
-  }
-  return;
+    case 2:
+        work->flags &= ~0x1000000u;
+        break;
+    }
 }
-
-} /* extern "C" */
+}

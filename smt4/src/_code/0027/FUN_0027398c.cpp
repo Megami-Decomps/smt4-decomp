@@ -18,7 +18,7 @@ extern unsigned char LAB_00273b6c; /* 0x273b6c */
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_00289e54(unsigned int, unsigned short, unsigned int);
+extern int aocPackageGrantsItem(unsigned int, unsigned short, unsigned int);
 extern int FUN_002903f0(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -51,7 +51,7 @@ unsigned int FUN_0027398c(unsigned int *param_1)
     }
     textFormatBuffer(temp_v4,&LAB_00273b38,temp_v0,temp_v0);
     textFormatBuffer(temp_v5,&LAB_00273b50,temp_v0);
-    temp_v3 = FUN_00289e54(g_aocSystem,*(unsigned short *)(temp_v3 + 0x148),1);
+    temp_v3 = aocPackageGrantsItem(g_aocSystem,*(unsigned short *)(temp_v3 + 0x148),1);
     if (temp_v3 != 0) {
       aocQueueType07(g_aocSystem,temp_v0,param_1 + 3,0);
       aocQueueType08(g_aocSystem,temp_v0,param_1 + 4,0);

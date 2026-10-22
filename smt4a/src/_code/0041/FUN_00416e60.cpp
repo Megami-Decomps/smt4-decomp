@@ -34,7 +34,7 @@ struct fn_00416e60_arg0 {
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_003df4a4(unsigned short);
-extern int FUN_003df6f4(void);
+extern int playerStockHasFreeSlot(void);
 extern unsigned long long countUnlockedSlots(void);
 extern int loadSlotIsLoaded(unsigned int);
 /* Supplied declaration required: FUN_00416d30. */
@@ -126,7 +126,7 @@ LAB_00416f38:
       }
     }
     else {
-      temp_v0 = FUN_003df6f4();
+      temp_v0 = playerStockHasFreeSlot();
       if (temp_v0 == 0) {
         param_1->field_0x10 = 4;
         param_1->field_0x8 = 2;

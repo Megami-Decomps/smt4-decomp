@@ -1,42 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029c1fc` (_code @ 0x29c1fc, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the occupied-stock count shares its loop index instead of retail's separate counters. */
+#include "gamedata/UnitStats.h"
+
+struct UnitStockTable {
+    /* 0x0000 */ u8 unk0000[0x90];
+    /* 0x0090 */ StatBlock units[24];
+    /* 0x90f0 */ s8 stock[24];
+    /* 0x9108 */ s8 active[3];
+    /* 0x910b */ u8 capacity;
+};
 
 extern "C" {
+UnitStockTable *gameGetSlotTable();
+bool FUN_003bc9b8(const StatBlock *unit);
 
-extern int gameGetSlotTable(void);
-extern int FUN_003bc9b8(int);
-
-
-int FUN_0029c1fc(void)
-
+s32 FUN_0029c1fc()
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = gameGetSlotTable();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v1 + temp_v2 + 0x90f0) < '\0') break;
-    temp_v2 = temp_v2 + 1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v2 < 0x18);
-  if (temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x910b)) {
-    temp_v0 = gameGetSlotTable();
-    temp_v1 = 0;
-    do {
-      temp_v2 = FUN_003bc9b8(temp_v0 + temp_v1 * 0x604 + 0x90);
-      if (temp_v2 == 0) {
-        return temp_v1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-  }
-  return -1;
+    UnitStockTable *first = gameGetSlotTable();
+    UnitStockTable *table = gameGetSlotTable();
+    s32 occupied = 0;
+    while (occupied < 24 && table->stock[occupied] >= 0) {
+        ++occupied;
+    }
+    if (occupied < first->capacity) {
+        table = gameGetSlotTable();
+        for (s32 index = 0; index < 24; ++index) {
+            if (!FUN_003bc9b8(&table->units[index])) {
+                return index;
+            }
+        }
+    }
+    return -1;
 }
-
-} /* extern "C" */
+}

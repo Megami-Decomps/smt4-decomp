@@ -1,49 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00184310` (_code @ 0x184310, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The global address load moves before the prologue, and the add-on search stores its comparator argument early. */
+#include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DevilRecordA.h"
 
 extern "C" {
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
+                   s32 (*compare)(const void *, const void *));
+s32 FUN_0018449c(const void *left, const void *right);
+extern AocSystemA *g_aocSystem;
 
-int libc_bsearch(...);
-
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-} param_1_stack;
-
-extern unsigned char LAB_0018449c; /* 0x18449c */
-extern int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-
-
-void FUN_00184310(unsigned short param_1)
-
+/* Looks up a demon by ID, preferring add-on data over the base records. */
+DevilRecordA *FUN_00184310(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short temp_v2 [90];
-  
-  temp_v2[0] = param_1;
-  if (*(int *)(g_aocSystem + 0x360) != 0) {
-    puVar1 = temp_v2;
-    libc_bsearch(puVar1,*(int *)(g_aocSystem + 0x360),*(unsigned int *)(g_aocSystem + 0x35c),0xb4,
-                 &LAB_0018449c);
-    if (puVar1 != (unsigned short *)0x0) {
-      return;
+    DevilTableRecordA key;
+    key.header.id = (u16)id;
+    if (g_aocSystem->devils.records != NULL) {
+        DevilRecordA *record = (DevilRecordA *)libc_bsearch(&key, g_aocSystem->devils.records,
+            g_aocSystem->devils.count, sizeof(key), FUN_0018449c);
+        if (record != NULL) {
+            return record;
+        }
     }
-  }
-  temp_v0 = dataTableGet(0);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  libc_bsearch(temp_v2,temp_v1,temp_v0,0xb4,&LAB_0018449c);
-  return;
+    void *table = dataTableGet(0, 0);
+    void *records = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    return (DevilRecordA *)libc_bsearch(&key, records, count, sizeof(key), FUN_0018449c);
 }
-
-} /* extern "C" */
+}

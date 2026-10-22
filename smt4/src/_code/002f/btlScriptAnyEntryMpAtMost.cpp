@@ -4,7 +4,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 FUN_00249a54(void);
+u32 btlScriptResolveGroupArg(void);
 void FUN_002499fc(u32 group, s32 *first, s32 *count);
 BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
@@ -16,7 +16,7 @@ u32 btlScriptAnyEntryMpAtMost(void)
     s32 percent = scrGetArg(1);
     scrGetArg(2);
     s32 first, count;
-    FUN_002499fc(FUN_00249a54(), &first, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&

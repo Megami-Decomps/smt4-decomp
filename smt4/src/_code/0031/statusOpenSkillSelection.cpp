@@ -23,7 +23,7 @@ extern "C" {
 extern StatusSkillSelection *g_statusDown;
 s32 FUN_00262cb0(u16 id);
 s32 FUN_00288e68(u32 id);
-void FUN_002a0c08(s32 mode);
+void uniteRequestScriptEntry(s32 mode);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 running, s32 initial);
 s32 statusGetAvailableChoiceCount();
@@ -46,7 +46,7 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
             screen->skills.ids[count++] = id;
         }
     }
-    FUN_002a0c08(14);
+    uniteRequestScriptEntry(14);
     buttonHelpSetPreset(5);
     timerStart(screen->timer, 1, 0);
     if (count >= statusGetAvailableChoiceCount()) {

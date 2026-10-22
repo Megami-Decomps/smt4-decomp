@@ -1,69 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6660` (_code @ 0x2f6660, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: status and its list pointer swap callee-saved registers (r5/r4 instead of retail's r4/r5). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0026ae68(void);
-int FUN_0029eb5c(int, int);
-int FUN_0029ee54(...);
-int FUN_0029f848(int, int, int, int, int, int);
-int ifTouchRegionRemove(void);
-int __aeabi_memset4(int, int, unsigned int);
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x400];
+    /* 0x400 */ s32 state;
+    /* 0x404 */ s32 previousState;
+    /* 0x408 */ s32 icon;
+    /* 0x40C */ s32 unk40C;
+    /* 0x410 */ u8 unk410;
+    /* 0x411 */ u8 unk411[0x1B];
+    /* 0x42C */ u8 slots[0x29];      /* filled with 0xFF */
+    /* 0x455 */ u8 unk455[0x2B];
+    /* 0x480 */ u8 regionCount;
+    /* 0x481 */ u8 unk481[0x53];
+    /* 0x4D4 */ u8 list[0x6C];
+    /* 0x540 */ u32 unk540;
+    /* 0x544 */ u32 unk544;
+} StatusDown;
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+extern StatusDown *g_statusDown;
 
-extern int g_statusDown; /* 0x44e190 */
+s32 FUN_0029ee54(void *list);
+void FUN_0029f848(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
+void FUN_0029eb5c(void *list, s32 index);
+void ifTouchRegionRemove(void);
+void *__aeabi_memset4(void *dest, s32 size, s32 value);
+void FUN_0026ae68(void);
 
-/* Supplied declaration required: FUN_0026ae68. */
-/* Supplied declaration required: FUN_0029eb5c. */
-/* Supplied declaration required: FUN_0029ee54. */
-/* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: __aeabi_memset4. */
-
-
-void FUN_002f6660(unsigned int param_1,unsigned int param_2)
-
+/* Stores the two values, appends an entry to the status list and selects it, drops the touch regions and moves to state 11. */
+void FUN_002f6660(u32 first, u32 second)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x544) = param_1;
-  temp_v1 = temp_v0 + 0x4d4;
-  *(unsigned int *)(temp_v0 + 0x540) = param_2;
-  temp_v2 = FUN_0029ee54();
-  FUN_0029f848(temp_v1,temp_v2 + 1,9,1,0,1);
-  temp_v2 = FUN_0029ee54(temp_v1);
-  FUN_0029eb5c(temp_v1,temp_v2 - 1);
-  *(unsigned char *)(temp_v0 + 0x410) = 1;
-  temp_v0 = g_statusDown;
-  temp_v1 = 0;
-  if (*(char *)(g_statusDown + 0x480) != '\0') {
-    do {
-      ifTouchRegionRemove();
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x480));
-  }
-  *(unsigned char *)(temp_v0 + 0x480) = 0;
-  __aeabi_memset4(temp_v0 + 0x42c,0x29,0xffffffff);
-  temp_v0 = g_statusDown;
-  *(unsigned int *)(g_statusDown + 0x40c) = 0;
-  puVar4 = (unsigned int *)(temp_v0 + 0x400);
-  temp_v3 = *puVar4;
-  *puVar4 = 0xb;
-  *(unsigned int *)(temp_v0 + 0x404) = temp_v3;
-  FUN_0026ae68();
-  return;
+    StatusDown *status = g_statusDown;
+    void *list = status->list;
+    StatusDown *current;
+    s32 i;
+
+    status->unk544 = first;
+    status->unk540 = second;
+    FUN_0029f848(list, FUN_0029ee54(list) + 1, 9, 1, 0, 1);
+    FUN_0029eb5c(list, FUN_0029ee54(list) - 1);
+    status->unk410 = 1;
+    current = g_statusDown;
+    for (i = 0; i < current->regionCount; i++) {
+        ifTouchRegionRemove();
+    }
+    current->regionCount = 0;
+    __aeabi_memset4(current->slots, 0x29, -1);
+    current = g_statusDown;
+    current->unk40C = 0;
+    current->previousState = current->state;
+    current->state = 11;
+    FUN_0026ae68();
 }
 
 } /* extern "C" */

@@ -27,7 +27,7 @@ int FUN_0021b274(...);
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
 int FUN_0028b088(...);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int campTouchRegionsRemoveGroup(...);
 int FUN_002c7e24(void);
 int FUN_002cb278(int, int);
@@ -74,7 +74,7 @@ extern int FUN_002684d0(int, int);
 extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
 /* Supplied declaration required: FUN_002b5c88. */
@@ -208,12 +208,12 @@ void FUN_001ffe84(void)
       }
       if (*(int *)(temp_v8 + temp_v3 * 8 + 0x1b74) < 0) {
         FUN_0031f718(0xffffffff,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
       }
       else {
         temp_v7 = gameGetSlotRecord();
         statusDisplayBindUnitRecord(temp_v7,0,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
       }
     }
     temp_v4 = FUN_002a7410();
@@ -319,12 +319,12 @@ void FUN_001ffe84(void)
         }
         if (*piVar12 < 0) {
           FUN_0031f718(0xffffffff,0);
-          FUN_002a7324(0);
+          statusPanelSetOpen(0);
         }
         else {
           temp_v7 = gameGetSlotRecord();
           statusDisplayBindUnitRecord(temp_v7,0,0);
-          FUN_002a7324(0);
+          statusPanelSetOpen(0);
         }
         eventQueueAddUniqueIfValid(0x100021c);
         buttonHelpScriptStart(0);
@@ -352,12 +352,12 @@ void FUN_001ffe84(void)
         }
         if (*piVar12 < 0) {
           FUN_0031f718(0xffffffff,0);
-          FUN_002a7324(0);
+          statusPanelSetOpen(0);
         }
         else {
           temp_v7 = gameGetSlotRecord();
           statusDisplayBindUnitRecord(temp_v7,0,0);
-          FUN_002a7324(0);
+          statusPanelSetOpen(0);
         }
         eventQueueAddUniqueIfValid(0x100021c);
         buttonHelpScriptStart(4);

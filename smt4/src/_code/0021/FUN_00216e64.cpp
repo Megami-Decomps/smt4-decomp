@@ -72,7 +72,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00296774. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c424. */
@@ -352,7 +352,7 @@ LAB_002174ac:
     case 2:
       temp_v2 = scrRunOpcodesStub(*puVar16);
       if (temp_v2 == 2) {
-        temp_v2 = FUN_002973d8();
+        temp_v2 = messageMainGetChoiceResult();
         if (temp_v2 == 0) {
           *piVar13 = *piVar13 + 1;
           FUN_0029c424(1);

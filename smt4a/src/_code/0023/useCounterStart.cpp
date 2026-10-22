@@ -8,7 +8,7 @@ int textFormatBuffer(int, unsigned char *, unsigned int, unsigned int);
 int sysPlaySe(int);
 int uiSpriteSetImageKeyframe(int, int);
 int FUN_002a4964(int);
-int FUN_00387ac4(int);
+int buttonHelpSetMode(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern unsigned int FUN_0026140c(void);
 extern int buttonHelpGetPanelState(void);
 extern unsigned int screenGetEntry(unsigned int);
 extern int buttonHelpGetPanelMode(void);
-/* Supplied declaration required: FUN_00387ac4. */
+/* Supplied declaration required: buttonHelpSetMode. */
 
 
 void useCounterStart(void)
@@ -81,7 +81,7 @@ void useCounterStart(void)
       temp_v3 = screenGetEntry(1);
       textFormatBuffer(temp_v0 + 0x7f6,&LAB_0023b3b0,temp_v2,temp_v3);
     }
-    FUN_00387ac4(0);
+    buttonHelpSetMode(0);
   }
   sysPlaySe(5);
   return;

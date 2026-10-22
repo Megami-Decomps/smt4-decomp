@@ -1,89 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001bced4` (_code @ 0x1bced4, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads g_renderCtx after reading the eye and keeps the camera-kind cases out of line; this build loads it once and predicates the kind-3 case. */
+#include "common.h"
 
 extern "C" {
 
-extern int g_renderCtx; /* 0x59dbb4 */
+typedef struct ViewMtx34 {
+    f32 m[3][4];
+} ViewMtx34;
 
-extern int FUN_001696f4(void);
-extern int FUN_001c5b4c(int);
-extern int FUN_001c5bd8(int);
+typedef struct ViewMtx44 {
+    ViewMtx34 rows;    /* 0x00: rows 0-2 */
+    f32 last[4];       /* 0x30: row 3 */
+} ViewMtx44;
 
+typedef struct RenderCamera {
+    /* 0x000 */ u8 unk000[0x38];
+    /* 0x038 */ ViewMtx34 view;
+    /* 0x068 */ u8 unk068[0x170];
+    /* 0x1D8 */ ViewMtx34 viewLeft;
+    /* 0x208 */ u8 unk208[0x80];
+    /* 0x288 */ ViewMtx34 viewRight;
+} RenderCamera;
 
-void FUN_001bced4(unsigned int *param_1)
+typedef struct RenderContext {
+    /* 0x000 */ u8 unk000[0x52c];
+    /* 0x52C */ s32 eye;          /* 1 = right, 2 = center */
+    /* 0x530 */ u8 unk530[0xc8];
+    /* 0x5F8 */ u8 cameraKind;    /* 3 = built-in camera, 4 = override camera */
+    /* 0x5F9 */ u8 unk5F9[0x107];
+    /* 0x700 */ RenderCamera camera;
+} RenderContext;
 
+extern RenderContext *g_renderCtx;
+
+s32 FUN_001696f4(void);
+RenderCamera *FUN_001c5b4c(s32 eye);
+RenderCamera *FUN_001c5bd8(RenderContext *context);
+
+/* Copies the active camera's view matrix for the current eye into `out` as a 4x4 matrix. */
+void FUN_001bced4(ViewMtx44 *out)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  temp_v1 = *(int *)(g_renderCtx + 0x52c);
-  temp_v0 = 0;
-  if (*(char *)(g_renderCtx + 0x5f8) != '\x03') {
-    if (*(char *)(g_renderCtx + 0x5f8) != '\x04') {
-      temp_v2 = FUN_001c5b4c(temp_v1);
+    s32 eye = g_renderCtx->eye;
+    bool fixed = false;
+    RenderCamera *camera;
+
+    if (g_renderCtx->cameraKind == 3) {
+        camera = &g_renderCtx->camera;
+        fixed = true;
+    } else if (g_renderCtx->cameraKind == 4) {
+        camera = FUN_001c5bd8(g_renderCtx);
+        fixed = true;
+    } else {
+        camera = FUN_001c5b4c(eye);
     }
-    else {
-      temp_v2 = FUN_001c5bd8(g_renderCtx);
-      temp_v0 = 1;
+
+    const ViewMtx34 *view;
+    if (eye != 2 && FUN_001696f4() == 1 && !fixed) {
+        view = eye == 1 ? &camera->viewRight : &camera->viewLeft;
+    } else {
+        view = &camera->view;
     }
-  }
-  else {
-    temp_v2 = g_renderCtx + 0x700;
-    temp_v0 = 1;
-  }
-  if (temp_v1 == 2) {
-    puVar4 = (unsigned int *)(temp_v2 + 0x38);
-  }
-  else {
-    temp_v3 = FUN_001696f4();
-    if (temp_v3 != 1 || temp_v0) {
-      puVar4 = (unsigned int *)(temp_v2 + 0x38);
-    }
-    else if (temp_v1 == 1) {
-      puVar4 = (unsigned int *)(temp_v2 + 0x288);
-    }
-    else {
-      puVar4 = (unsigned int *)(temp_v2 + 0x1d8);
-    }
-  }
-  temp_v4 = puVar4[1];
-  temp_v5 = puVar4[2];
-  temp_v6 = puVar4[3];
-  temp_v7 = puVar4[4];
-  temp_v8 = puVar4[5];
-  temp_v9 = puVar4[6];
-  temp_v10 = puVar4[7];
-  *param_1 = *puVar4;
-  param_1[1] = temp_v4;
-  param_1[2] = temp_v5;
-  param_1[3] = temp_v6;
-  param_1[4] = temp_v7;
-  param_1[5] = temp_v8;
-  param_1[6] = temp_v9;
-  param_1[7] = temp_v10;
-  temp_v4 = puVar4[8];
-  temp_v5 = puVar4[9];
-  temp_v6 = puVar4[10];
-  param_1[0xb] = puVar4[0xb];
-  param_1[8] = temp_v4;
-  param_1[9] = temp_v5;
-  param_1[10] = temp_v6;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0x3f800000;
-  return;
+    out->rows = *view;
+    out->last[0] = 0.0f;
+    out->last[1] = 0.0f;
+    out->last[2] = 0.0f;
+    out->last[3] = 1.0f;
 }
 
 } /* extern "C" */

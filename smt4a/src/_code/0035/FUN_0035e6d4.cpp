@@ -1,56 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035e6d4` (_code @ 0x35e6d4, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the VFP schedule differs: retail converts the duration and subtracts the Z ends before converting the frame. */
+#include "common.h"
+
+/* A linear move from a start to an end point over a frame range. */
+struct LinearMove35e6d4 {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ f32 z;
+    /* 0x0C */ s32 startX;
+    /* 0x10 */ s32 startY;
+    /* 0x14 */ s32 endX;
+    /* 0x18 */ s32 endY;
+    /* 0x1C */ f32 startZ;
+    /* 0x20 */ f32 endZ;
+    /* 0x24 */ u8 unk24[0x8];
+    /* 0x2C */ s32 startFrame;
+    /* 0x30 */ s32 endFrame;
+    /* 0x34 */ s32 frame;
+};
 
 extern "C" {
 
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int __aeabi_idivmod(int, int);
-
-
-unsigned char FUN_0035e6d4(int *param_1)
-
+// Advance the move one frame and update the position; returns whether it is still running.
+u8 FUN_0035e6d4(LinearMove35e6d4 *move)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int in_fpscr;
-  float temp_v9;
-  float temp_v10;
-  
-  temp_v7 = param_1[0xc];
-  temp_v2 = param_1[0xd] + 1;
-  param_1[0xd] = temp_v2;
-  temp_v3 = param_1[3];
-  temp_v6 = param_1[5];
-  temp_v5 = temp_v7 - param_1[0xb];
-  temp_v0 = __aeabi_idivmod(temp_v6 - temp_v3,temp_v5);
-  temp_v4 = param_1[6];
-  temp_v8 = param_1[4];
-  temp_v1 = __aeabi_idivmod(temp_v4 - temp_v8,temp_v5);
-  temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = temp_v1 * temp_v2 + temp_v8;
-  temp_v0 = temp_v0 * temp_v2 + temp_v3;
-  temp_v9 = (float)param_1[7] + (((float)param_1[8] - (float)param_1[7]) / temp_v10) * temp_v9;
-  if (temp_v2 >= temp_v7) {
-    temp_v1 = temp_v4;
-    temp_v0 = temp_v6;
-    temp_v9 = (float)param_1[8];
-  }
-  param_1[1] = temp_v1;
-  *param_1 = temp_v0;
-  param_1[2] = (int)temp_v9;
-  return temp_v2 < temp_v7;
+    s32 frame = ++move->frame;
+    s32 duration = move->endFrame - move->startFrame;
+    s32 x = (move->endX - move->startX) / duration * frame + move->startX;
+    s32 y = (move->endY - move->startY) / duration * frame + move->startY;
+    f32 z = move->startZ + (move->endZ - move->startZ) / duration * frame;
+    u8 running = 1;
+    if (frame >= move->endFrame) {
+        x = move->endX;
+        y = move->endY;
+        z = move->endZ;
+        running = 0;
+    }
+    move->y = y;
+    move->x = x;
+    move->z = z;
+    return running;
 }
 
 } /* extern "C" */

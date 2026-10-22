@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern int FUN_0025c05c(void);
+extern int spriteTemplateGetPreferredDevilId(void);
 extern u8 DAT_00447620[];
 
 u8 FUN_001e2954(void)
 {
-    int index = FUN_0025c05c();
+    int index = spriteTemplateGetPreferredDevilId();
 
     return DAT_00447620[index];
 }

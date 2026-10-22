@@ -8,7 +8,7 @@ int FUN_0031879c(...);
 int FUN_00488ce8(...);
 int FUN_00489480(...);
 int FUN_0048981c(...);
-int FUN_00492c18(...);
+int naviMainSetValuePair(...);
 int setFullScreenRect(...);
 int VectorSignedToFloat(...);
 
@@ -41,7 +41,7 @@ extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 /* Supplied declaration required: FUN_00489480. */
 /* Supplied declaration required: FUN_0048981c. */
 extern int FUN_0048e40c(fn_00485d1c_arg0 *);
-/* Supplied declaration required: FUN_00492c18. */
+/* Supplied declaration required: naviMainSetValuePair. */
 /* Supplied declaration required: setFullScreenRect. */
 
 
@@ -79,7 +79,7 @@ int FUN_00485d1c(fn_00485d1c_arg0 *param_1)
                      param_1->field_0x1c;
           temp_v4 = (param_1->field_0x28 - param_1->field_0x20) * temp_v2 * 0.06666667f +
                      param_1->field_0x20;
-          FUN_00492c18(&param_1[0x1b].field_0x28,&temp_v3);
+          naviMainSetValuePair(&param_1[0x1b].field_0x28,&temp_v3);
         }
       }
       FUN_00489480(param_1);

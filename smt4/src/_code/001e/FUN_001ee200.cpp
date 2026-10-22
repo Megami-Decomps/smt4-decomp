@@ -1,55 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ee200` (_code @ 0x1ee200, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail holds &timing[cur] in r4 and the span in ip; built swaps them */
+#include "common.h"
 
 extern "C" {
 
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
+    u8 unk0[0x20];
+    s32 frame;       /* 0x20 */
+    u8 unk24[0x40 - 0x24];
+    f32 value;       /* 0x40 */
+} CurveKey; /* size 0x44 */
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+typedef struct {
+    CurveKey keys[4];          /* 0x000 */
+    u8 unk110[0x224 - 0x110];
+    f32 slope;                 /* 0x224 */
+    u8 unk228[0x250 - 0x228];
+    f32 target;                /* 0x250 */
+    u8 unk254[0x2e4 - 0x254];
+    s8 keyIndex;               /* 0x2e4 */
+    u8 unk2e5[0x320 - 0x2e5];
+    s32 span;                  /* 0x320 */
+} KeyCurve;
 
-
-void FUN_001ee200(int param_1,int param_2)
-
+/* Advances the curve to the next key whose timing frame lies after the current one and sets up its slope. */
+void FUN_001ee200(KeyCurve *curve, CurveKey *timing)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v0 = 1;
-  if ('\x02' < *(char *)(param_1 + 0x2e4)) {
-    *(unsigned char *)(param_1 + 0x2e4) = 4;
-  }
-  temp_v1 = (int)*(char *)(param_1 + 0x2e4);
-  if (temp_v1 + 1 < 4) {
-    do {
-      temp_v3 = *(int *)(param_2 + (temp_v1 + temp_v0) * 0x44 + 0x20) -
-              *(int *)(param_2 + temp_v1 * 0x44 + 0x20);
-      *(int *)(param_1 + 800) = temp_v3;
-      if (0 < temp_v3) {
-        temp_v2 = param_1 + temp_v1 * 0x44;
-        temp_v3 = param_1 + (temp_v1 + temp_v0) * 0x44;
-        temp_v4 = (float)VectorSignedToFloat(*(int *)(temp_v3 + 0x20) - *(int *)(temp_v2 + 0x20),
-                                           (unsigned char)(in_fpscr >> 0x16) & 3);
-        *(float *)(param_1 + 0x224) = (*(float *)(temp_v3 + 0x40) - *(float *)(temp_v2 + 0x40)) / temp_v4;
-        *(unsigned int *)(param_1 + 0x250) = *(unsigned int *)(temp_v3 + 0x40);
-        *(char *)(param_1 + 0x2e4) = (char)(temp_v1 + temp_v0);
-        return;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v1 + temp_v0 < 4);
-    return;
-  }
-  return;
+    s32 step = 1;
+    s32 cur;
+
+    if (curve->keyIndex >= 3) {
+        curve->keyIndex = 4;
+    }
+    cur = curve->keyIndex;
+    for (; cur + step < 4; step++) {
+        curve->span = timing[cur + step].frame - timing[cur].frame;
+        if (curve->span > 0) {
+            CurveKey *from = &curve->keys[cur];
+            CurveKey *to = &curve->keys[cur + step];
+
+            curve->slope = (to->value - from->value) / (f32)(to->frame - from->frame);
+            curve->target = to->value;
+            curve->keyIndex = cur + step;
+            return;
+        }
+    }
 }
 
 } /* extern "C" */

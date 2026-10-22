@@ -1,4 +1,4 @@
-#include "common.h"
+#include "shard/W4_Match3_AocMainA.h"
 
 extern "C" {
 
@@ -20,19 +20,14 @@ typedef struct Menu {
     /* 0x113C */ u32 owner;
 } Menu;
 
-typedef struct Registry {
-    /* 0x00 */ u8 unk00[0xA8];
-    /* 0xA8 */ u8 queue[4];
-} Registry;
 
-extern Registry *g_aocMain;
 
 int sysPlaySe(int arg);
 int dialogOpen(int arg0, int arg1);
 int placeWinStartText(u8 *name);
 int FUN_00215978(int arg);
 int placeWinSetValue(int arg);
-int FUN_002a49e4(u32 owner, int kind);
+int infoWinSetText(u32 owner, int kind);
 int scriptHolderReset(void *queue);
 int scriptHolderFree3(void *queue);
 int scriptHolderUpdateSimple(void *queue);
@@ -42,17 +37,17 @@ int FUN_004b7d88(Menu *menu);
 void FUN_004b8a28(Menu *menu)
 {
     if (menu->phase == 0) {
-        scriptHolderReset(g_aocMain->queue);
+        scriptHolderReset(&g_aocMain->scriptHolder);
         sysPlaySe(0xa0);
         menu->phase = 1;
         return;
     }
-    if (menu->phase == 1 && scriptHolderUpdateSimple(g_aocMain->queue) != 0) {
-        scriptHolderFree3(g_aocMain->queue);
+    if (menu->phase == 1 && scriptHolderUpdateSimple(&g_aocMain->scriptHolder) != 0) {
+        scriptHolderFree3(&g_aocMain->scriptHolder);
         FUN_004b7d88(menu);
         FUN_00215978(0);
         dialogOpen(0, 0);
-        FUN_002a49e4(menu->owner, menu->entry->kind);
+        infoWinSetText(menu->owner, menu->entry->kind);
         menu->phase = 0;
         menu->state = 5;
         menu->busy = 0;

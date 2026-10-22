@@ -3,7 +3,7 @@
 extern "C" {
 
 extern s32 scrRunOpcodesStub(u32 job);
-extern void FUN_003c5fc4(s32 a);
+extern void messageMainSetTargetFlags(s32 a);
 extern void FUN_003343f0(s32 a);
 extern u16 buttonHelpGetValue(void);
 extern void sysPlaySe(u32 id);
@@ -12,7 +12,7 @@ extern void sysPlaySe(u32 id);
 void screen4AFinish(Screen4A *obj)
 {
     if (scrRunOpcodesStub(obj->job) == 2) {
-        FUN_003c5fc4(0);
+        messageMainSetTargetFlags(0);
         FUN_003343f0(0);
         obj->unk18 = 0;
         obj->state = 2;

@@ -1,56 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001216cc` (_code @ 0x1216cc, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses unk124 through a hoisted `this + 0x100` base (r5), shifting the register allocation of size/infoSize. */
+#include "common.h"
+
+/* A sound archive read from a file: its stream and the archive file reader. */
+struct FsSoundArchiveLoader {
+    /* 0x000 */ u8 unk000[0x10c];
+    /* 0x10C */ u8 stream[0x18];
+    /* 0x124 */ u32 unk124;
+    /* 0x128 */ u8 unk128[4];
+    /* 0x12C */ u8 reader[0x44];
+    /* 0x170 */ u32 unk170; /* reset from unk124 when the stream fails */
+};
 
 extern "C" {
 
-int FUN_0013041c(int, unsigned int, int);
-int FUN_00130ea8(int, unsigned int);
-int FUN_002b4e00(int, unsigned int, unsigned int, unsigned int *);
+u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockOffset(void *reader);
+u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(void *reader);
+s32 FUN_0013041c(void *stream, u32 offset, s32 origin);
+s32 FUN_002b4e00(void *stream, void *buffer, u32 size, u32 *readSize);
+void FUN_00130ea8(void *reader, void *infoBlock);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0013041c. */
-/* Supplied declaration required: FUN_00130ea8. */
-/* Supplied declaration required: FUN_002b4e00. */
-extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockOffset(int);
-extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(int);
-
-
-unsigned int FUN_001216cc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Read the archive's info block into buffer and hand it to the reader. */
+s32 FUN_001216cc(FsSoundArchiveLoader *archive, void *buffer, u32 size)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = param_4;
-  temp_v0 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockOffset(param_1 + 300);
-  temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(param_1 + 300);
-  if (param_3 < temp_v1) {
-    return 0;
-  }
-  temp_v2 = param_1 + 0x10c;
-  FUN_0013041c(temp_v2,temp_v0,0);
-  if (temp_v2 != 0) {
-    temp_v3 = 0;
-    temp_v2 = param_1 + 0x10c;
-    FUN_002b4e00(temp_v2,param_2,temp_v1,&temp_v3);
-    if (temp_v2 != 0) {
-      if (temp_v3 != temp_v1) {
+    u32 offset = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockOffset(archive->reader);
+    u32 infoSize = nw_snd_internal_SoundArchiveFile_FileHeader_GetInfoBlockSize(archive->reader);
+    if (size < infoSize) {
         return 0;
-      }
-      FUN_00130ea8(param_1 + 300,param_2);
-      return 1;
     }
-  }
-  *(unsigned int *)(param_1 + 0x170) = *(unsigned int *)(param_1 + 0x124);
-  return 0;
+    if (!FUN_0013041c(archive->stream, offset, 0)) {
+        archive->unk170 = archive->unk124;
+        return 0;
+    }
+    u32 readSize = 0;
+    if (!FUN_002b4e00(archive->stream, buffer, infoSize, &readSize)) {
+        archive->unk170 = archive->unk124;
+        return 0;
+    }
+    if (readSize != infoSize) {
+        return 0;
+    }
+    FUN_00130ea8(archive->reader, buffer);
+    return 1;
 }
 
 } /* extern "C" */

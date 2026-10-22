@@ -11,7 +11,7 @@ int FUN_0016c4b8(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
-int FUN_0025cba0(...);
+int screenDrawShadedRect(...);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -54,7 +54,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_0025cba0. */
+/* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -236,7 +236,7 @@ unsigned int FUN_002835f4(void)
     }
     drawSetColorFromRGBA8(temp_v4);
     efctSetSpeed();
-    FUN_0025cba0(0,0,400,0xf0,0x2e);
+    screenDrawShadedRect(0,0,400,0xf0,0x2e);
   }
   FUN_00183bb0();
   efctSetSpeed();

@@ -1,69 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046ea50` (_code @ 0x46ea50, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* A table header inside a loaded data file. */
+struct DataFileTableHeader {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[0x3F];
+};
+
+struct DataFileTableRef {
+    /* 0x00 */ u32 table;
+    /* 0x04 */ u8 unk04[0xC];
+};
+
+struct DataFile {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ DataFileTableRef *tables;
+};
+
+struct DataFileSet {
+    /* 0x000 */ u8 unk000[0x310];
+    /* 0x310 */ s32 count;
+    /* 0x314 */ u8 unk314[4];
+    /* 0x318 */ DataFile *files;
+};
+
+/* One record of the kind-0x27 tables. */
+struct DataRecord27 {
+    /* 0x00 */ u8 unk00[0x28];
+};
 
 extern "C" {
 
-int FUN_001b31ac(void);
-int FUN_001b31e0(void);
+s32 FUN_001b315c(DataFile *file);
+DataFileTableHeader *FUN_001b31ac(DataFile *file);
+u32 FUN_001b31e0(DataFile *file);
+u32 dataTableFileGetTable(u32 table, s32 sub);
+u32 dataTableGetCount(u32 table);
+DataRecord27 *dataTableGetEntries(u32 table);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(unsigned int);
-extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-extern int FUN_001b315c(unsigned int);
-/* Supplied declaration required: FUN_001b31ac. */
-/* Supplied declaration required: FUN_001b31e0. */
-
-
-int FUN_0046ea50(int param_1,int param_2)
-
+/* Returns record `index` counted across every loaded kind-0x27 table of the file set, or NULL. */
+DataRecord27 *FUN_0046ea50(DataFileSet *set, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  
-  temp_v5 = 0;
-  temp_v7 = 0;
-  if (temp_v7 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v6 = *(int *)(param_1 + 0x318) + temp_v7 * 0x50;
-      temp_v0 = FUN_001b315c(temp_v6);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v6;
-        FUN_001b31ac();
-        temp_v2 = temp_v6;
-        FUN_001b31e0();
-        temp_v4 = 0;
-        if (temp_v4 < temp_v2) {
-          do {
-            if (*(char *)(temp_v1 + temp_v4 * 0x40) == '\'') {
-              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10),0);
-              temp_v0 = dataTableGetCount();
-              if (param_2 <= temp_v0 + temp_v5) {
-                temp_v7 = dataTableGetEntries(temp_v3);
-                return temp_v7 + (param_2 - temp_v5) * 0x28;
-              }
-              temp_v5 = temp_v5 + temp_v0 + temp_v5;
+    s32 base = 0;
+    s32 i;
+
+    for (i = 0; i < set->count; i++) {
+        DataFile *file = &set->files[i];
+        if (FUN_001b315c(file) != 0) {
+            DataFileTableHeader *headers = FUN_001b31ac(file);
+            u32 tableCount = FUN_001b31e0(file);
+            u32 j;
+            for (j = 0; j < tableCount; j++) {
+                if (headers[j].kind == 0x27) {
+                    u32 table = dataTableFileGetTable(file->tables[j].table, 0);
+                    s32 end = dataTableGetCount(table) + base;
+                    if (end >= index) {
+                        return &dataTableGetEntries(table)[index - base];
+                    }
+                    base += end;
+                }
             }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < temp_v2);
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < *(int *)(param_1 + 0x310));
-  }
-  return 0;
+    }
+    return NULL;
 }
 
 } /* extern "C" */

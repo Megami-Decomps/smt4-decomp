@@ -7,7 +7,7 @@ extern "C" {
 int gameGetSlotRecord(...);
 int FUN_002ade88(void);
 int partyPanelRefreshFilterMarks(void);
-int FUN_003f3a04(unsigned int, int);
+int slotPlacementStartTransition(unsigned int, int);
 int slotPlacementSetSlot(int, int);
 int FUN_003f5220(...);
 
@@ -22,7 +22,7 @@ extern int g_partyPanel; /* 0x57f268 */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ade88. */
 /* Supplied declaration required: partyPanelRefreshFilterMarks. */
-/* Supplied declaration required: FUN_003f3a04. */
+/* Supplied declaration required: slotPlacementStartTransition. */
 /* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: FUN_003f5220. */
 extern int FUN_004bd0d8(void);
@@ -43,7 +43,7 @@ void FUN_0026f3a0(void)
   temp_v1 = gameGetSlotTable();
   piVar4 = (int *)(temp_v0 + 0xa10);
   FUN_003f5220(*(unsigned int *)(temp_v0 + 0xa10),0);
-  FUN_003f3a04(*(unsigned int *)(temp_v0 + 0xa10),*(char *)(temp_v0 + 0x42) == '\x01');
+  slotPlacementStartTransition(*(unsigned int *)(temp_v0 + 0xa10),*(char *)(temp_v0 + 0x42) == '\x01');
   *(unsigned char *)(*piVar4 + 0x25) = 0;
   *(unsigned char *)(*piVar4 + 0x26) = 0;
   *(unsigned char *)(*piVar4 + 0x27) = 0;
@@ -52,7 +52,7 @@ void FUN_0026f3a0(void)
     temp_v4 = temp_v0 + temp_v3 * 4;
     piVar4 = (int *)(temp_v4 + 0xa14);
     FUN_003f5220(*(unsigned int *)(temp_v4 + 0xa14),*(unsigned int *)(temp_v0 + 0x2c));
-    FUN_003f3a04(*(unsigned int *)(temp_v4 + 0xa14),*(char *)(temp_v0 + 0x42) == '\x01');
+    slotPlacementStartTransition(*(unsigned int *)(temp_v4 + 0xa14),*(char *)(temp_v0 + 0x42) == '\x01');
     slotPlacementSetSlot(*piVar4,temp_v3 + 1);
     temp_v2 = temp_v1 + temp_v3;
     if (*(char *)(temp_v2 + 0x1ca0) < '\0') {
@@ -74,7 +74,7 @@ void FUN_0026f3a0(void)
     temp_v3 = temp_v0 + temp_v1 * 4;
     piVar4 = (int *)(temp_v3 + 0xa20);
     FUN_003f5220(*piVar4,*(unsigned int *)(temp_v0 + 0x2c));
-    FUN_003f3a04(*(unsigned int *)(temp_v3 + 0xa20),*(char *)(temp_v0 + 0x42) == '\x01');
+    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0xa20),*(char *)(temp_v0 + 0x42) == '\x01');
     slotPlacementSetSlot(*piVar4,temp_v1 + 4);
     *(unsigned char *)(*piVar4 + 0x25) = 0;
     *(unsigned char *)(*piVar4 + 0x26) = 0;

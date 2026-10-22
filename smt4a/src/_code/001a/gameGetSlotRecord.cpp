@@ -5,7 +5,7 @@ extern "C" {
 
 SlotRecord *gameGetSlotRecord(s32 slotIndex)
 {
-    GameSlotTable *table = static_cast<GameSlotTable *>(g_gameDataBlocks.saveBlock);
+    GameSlotTable *table = reinterpret_cast<GameSlotTable  *>(g_gameDataBlocks.saveBlock);
     return &table->slots[slotIndex].record;
 }
 

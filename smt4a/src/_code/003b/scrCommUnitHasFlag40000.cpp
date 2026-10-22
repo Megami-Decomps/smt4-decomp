@@ -10,11 +10,12 @@ typedef struct BtlUnit24 {
 extern BtlUnit24 *btlUnitGet(u32 id);
 extern s32 btlUnitCheckAgainstActivePeers(void *p, u32 mask);
 extern void scrSetResult(s32 value);
+extern u32 g_btlScriptUnit;
 
 /* Script command: result is whether btlUnitCheckAgainstActivePeers accepts the unit's +0x24 object with mask 0x40000. */
-u32 scrCommUnitHasFlag40000(u32 *unitId)
+u32 scrCommUnitHasFlag40000(void)
 {
-    BtlUnit24 *unit = btlUnitGet(*unitId);
+    BtlUnit24 *unit = btlUnitGet(g_btlScriptUnit);
 
     scrSetResult(btlUnitCheckAgainstActivePeers(unit->unk24, 0x40000) != 0);
     return 1;

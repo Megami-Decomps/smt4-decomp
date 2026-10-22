@@ -1,45 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00240170` (_code @ 0x240170, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Camera coordinate constants are loaded later and use different VFP registers. */
+#include "shard/Shard0033.h"
 extern "C" {
+extern ObjBRef g_gameGlobals;
+void statusCameraSetEye(f32, f32, f32);
 
-int statusCameraSetEye(void);
-int VectorSignedToFloat(int, int);
-
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: statusCameraSetEye. */
-
-
+// Raises the status camera according to the selected model's size category.
 void FUN_00240170(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2054);
-  if (0 < temp_v1) {
-    temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2058);
-    if (temp_v0 != '\0') {
-      if (temp_v0 != '\x01') {
-        if (temp_v0 == '\x02') {
-          VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
+    f32 eyeY = 6.3f;
+    s32 size = g_gameGlobals.instance->statusCameraHeightOffset;
+    if (size > 0) {
+        switch (g_gameGlobals.instance->statusCameraHeightMode) {
+        case 0:
+            eyeY += (f32)size * 0.068f;
+            break;
+        case 1:
+            eyeY += (f32)size * 0.091f;
+            break;
+        case 2:
+            eyeY += (f32)size * 0.01f;
+            break;
         }
-      }
-      else {
-        VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      }
     }
-    else {
-      VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-  }
-  statusCameraSetEye();
-  return;
+    statusCameraSetEye(0.0f, eyeY, 4.5f);
 }
-
-} /* extern "C" */
+}

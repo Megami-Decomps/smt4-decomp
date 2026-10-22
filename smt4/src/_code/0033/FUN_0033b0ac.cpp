@@ -1,13 +1,14 @@
+#include "battle/btlUI.h"
+#include "battle/btlScript.h"
 #include "common.h"
 
 extern "C" {
 
 void FUN_00282820(s32, u32, s32, s32, s32, s32, s32, s32);
-void FUN_003ae06c(u32 arg);
+void FUN_003ae06c(BtlUi *ui);
 u32 btlUnitGet(u32 unit);
 
-extern u32 g_btlScriptUnit;
-extern u32 g_btlUiBlock;
+extern BtlUi *g_btlUiBlock;
 
 void FUN_0033b0ac(void)
 {

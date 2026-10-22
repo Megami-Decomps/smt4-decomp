@@ -59,7 +59,8 @@ static __inline u32 gpuDepthEncodeUnorm24(f32 depth)
     return 0;
 }
 
-extern "C" const u32 g_gpuFloat24ExponentTable[256];
+/* Filled by the startup float24 lookup-table initializer. */
+extern "C" u32 g_gpuFloat24ExponentTable[256];
 
 /* Float24 has a sign bit, seven exponent bits, and sixteen fraction bits. */
 static __forceinline u32 gpuEncodeFloat24(f32 value)

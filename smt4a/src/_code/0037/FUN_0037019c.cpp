@@ -17,7 +17,7 @@ s32 FUN_0037019c(void)
     scrGetArg(1);
     FUN_00376fb8(value);
     mapPlaceSet(0x18, 1, 0);
-    g_gameState.unk574 = 0;
+    g_gameState.transitionActive = 0;
     asdSequenceRequest(6, 0, 0);
     return 1;
 }

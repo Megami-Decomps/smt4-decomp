@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_003ff73c(unsigned int *, int);
 int FUN_00400284(int, int, int);
 int FUN_004009d0(unsigned int, int);
@@ -24,7 +24,7 @@ extern unsigned int DAT_00573cbc; /* 0x573cbc */
 
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_003ff73c. */
 /* Supplied declaration required: FUN_00400284. */
@@ -42,7 +42,7 @@ unsigned int FUN_0040082c(int param_1)
   unsigned int *puVar5;
   int temp_v4;
   
-  if ((param_1 == 0) || (FUN_00192550(), param_1 == 0)) {
+  if ((param_1 == 0) || (dataTable8FindRecord(), param_1 == 0)) {
     return 1;
   }
   if ((*(char *)(param_1 + 0x41) == '\x02' || *(char *)(param_1 + 0x41) == '\x03') &&

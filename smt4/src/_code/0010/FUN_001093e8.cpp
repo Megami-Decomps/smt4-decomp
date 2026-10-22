@@ -1,3 +1,4 @@
+#include "title/titleMain.h"
 #include "common.h"
 
 extern "C" {
@@ -25,13 +26,13 @@ typedef struct Context {
     /* 0xF00 */ Overlay overlay;
 } Context;
 
-extern u32 g_titleScene;
+extern TitleScene *g_titleScene;
 
 int surfaceCopy(Unit *a, Unit *b);
 u8 FUN_002bfadc(int arg, Unit *unit);
 int FUN_002bff10(int arg);
 Context *jobGetWork(void);
-int FUN_002c39a4(u32 arg);
+int FUN_002c39a4(TitleScene *arg);
 
 /* Script command: if FUN_002bff10 reports work, marks the overlay pending; otherwise, when the overlay is shown, not applied and not pending, resizes the unit (halving it) and marks it applied. Returns 0. */
 u32 FUN_001093e8(void)

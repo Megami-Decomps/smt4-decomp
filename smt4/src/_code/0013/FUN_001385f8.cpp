@@ -1,66 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001385f8` (_code @ 0x1385f8, 0xfc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the halfword clear at 0x4BC differs: retail addresses it from work + 0x400 (shared with the 0x4BE argument), the build pools the 0x4BC offset. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002aa024(int, int);
-int FUN_002ae028(int);
-int FUN_002bee58(int, int);
+typedef struct ButtonHelpSprite {
+    /* 0x00 */ u8 data[0x8C];
+} ButtonHelpSprite;
 
-extern unsigned char g_buttonHelp; /* 0x43da28 */
+typedef struct ButtonHelpSlot {
+    /* 0x00 */ u8 kind; /* 0: none */
+    /* 0x01 */ u8 unk01[3];
+} ButtonHelpSlot;
 
-/* Supplied declaration required: FUN_002aa024. */
-/* Supplied declaration required: FUN_002ae028. */
-/* Supplied declaration required: FUN_002bee58. */
+typedef struct ButtonHelpWork {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ u32 unk0C;
+    /* 0x010 */ u32 unk10;
+    /* 0x014 */ u8 unk014[0x20];
+    /* 0x034 */ ButtonHelpSprite sprites[6];
+    /* 0x37C */ u8 unk37C[0x118];
+    /* 0x494 */ ButtonHelpSlot slots[6];
+    /* 0x4AC */ u16 labels[6];
+    /* 0x4B8 */ u32 unk4B8;
+    /* 0x4BC */ u16 unk4BC;
+    /* 0x4BE */ u8 unk4BE[8];
+    /* 0x4C6 */ u8 unk4C6;
+} ButtonHelpWork;
 
+typedef struct ButtonHelpGlobals {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ButtonHelpWork *work;
+} ButtonHelpGlobals;
 
+extern ButtonHelpGlobals g_buttonHelp;
+
+void FUN_002bee58(ButtonHelpSprite *sprite, s32 mode);
+u16 FUN_002aa024(s32 table, s32 id);
+void FUN_002ae028(void *value);
+
+/* Resets the button help: clears its six sprites and looks up the label text of each button kind. */
 void FUN_001385f8(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  temp_v3 = 0;
-  do {
-    FUN_002bee58(temp_v1 + temp_v3 * 0x8c + 0x34,0);
-    temp_v0 = *(char *)(temp_v1 + temp_v3 * 4 + 0x494);
-    if (temp_v0 != '\0') {
-      if (temp_v0 != '\a') {
-        if (temp_v0 != '\b') {
-          if (temp_v0 != '\t') {
-            temp_v2 = FUN_002aa024(0x12,temp_v3 + 0x1f);
-            *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x4ac) = temp_v2;
-          }
-          else {
-            temp_v2 = FUN_002aa024(0x12,0x85);
-            *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x4ac) = temp_v2;
-          }
+    ButtonHelpWork *work = g_buttonHelp.work;
+
+    for (s32 i = 0; i < 6; i++) {
+        FUN_002bee58(&work->sprites[i], 0);
+        switch (work->slots[i].kind) {
+        case 0:
+            break;
+        case 7:
+            work->labels[i] = FUN_002aa024(0x12, 0x73);
+            break;
+        case 8:
+            work->labels[i] = FUN_002aa024(0x12, 0x59);
+            break;
+        case 9:
+            work->labels[i] = FUN_002aa024(0x12, 0x85);
+            break;
+        default:
+            work->labels[i] = FUN_002aa024(0x12, i + 0x1F);
+            break;
         }
-        else {
-          temp_v2 = FUN_002aa024(0x12,0x59);
-          *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x4ac) = temp_v2;
-        }
-      }
-      else {
-        temp_v2 = FUN_002aa024(0x12,0x73);
-        *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x4ac) = temp_v2;
-      }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 6);
-  *(unsigned int *)(temp_v1 + 0x4b8) = 0;
-  *(unsigned short *)(temp_v1 + 0x4bc) = 0;
-  FUN_002ae028(temp_v1 + 0x4be);
-  *(unsigned char *)(temp_v1 + 0x4c6) = 0;
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
-  *(unsigned int *)(temp_v1 + 0x10) = 1;
-  return;
+    work->unk4B8 = 0;
+    work->unk4BC = 0;
+    FUN_002ae028(work->unk4BE);
+    work->unk4C6 = 0;
+    g_buttonHelp.work->unk0C = 0;
+    g_buttonHelp.work->unk10 = 1;
 }
 
 } /* extern "C" */

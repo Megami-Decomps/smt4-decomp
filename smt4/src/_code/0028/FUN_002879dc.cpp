@@ -1,58 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002879dc` (_code @ 0x2879dc, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r3, [pc, #136] differs from recovered ldr r3, [pc, #128]. */
+#include "common.h"
+
+struct StateView {
+    u8 unk00[0x2a0]; // 0x000
+    u32 unk2A0;      // 0x2a0
+    s32 unk2A4;      // 0x2a4
+    s16 unk2A8;      // 0x2a8
+    u16 unk2AA;      // 0x2aa
+    u16 unk2AC;      // 0x2ac
+    u16 unk2AE;      // 0x2ae
+};
+
+struct GlobalView {
+    u32 unk00;          // 0x00
+    StateView* unk04;   // 0x04
+};
 
 extern "C" {
+extern GlobalView DAT_004474f0;
 
-int SBORROW4(int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
-
-extern unsigned char DAT_004474f0; /* 0x4474f0 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-
-
-void FUN_002879dc(int param_1,int param_2,int param_3)
-
+// Clear the active request or replace it when the new priority is not lower.
+void FUN_002879dc(s32 identifier, s32 amount, s32 priority)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v2 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
-  if (param_2 == 0) {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2a0) = 0;
-    *(unsigned int *)(temp_v2 + 0x2a4) = 0;
-    return;
-  }
-  temp_v4 = *(int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2a0) != 0;
-  temp_v0 = 0;
-  temp_v3 = 0;
-  if (temp_v4) {
-    temp_v3 = *(int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2a4);
-    temp_v0 = temp_v3 - param_3;
-  }
-  if ((!temp_v4 || temp_v3 == param_3) || temp_v0 < 0 != (temp_v4 && SBORROW4(temp_v3,param_3))) {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2a0) = 1;
-    temp_v0 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
-    if (param_1 == 0) {
-      param_1 = -1;
+    StateView* state = DAT_004474f0.unk04;
+    if (amount == 0) {
+        state->unk2A0 = 0;
+        state->unk2A4 = 0;
+        return;
     }
-    *(short *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 0x2a8) = (short)param_1;
-    *(int *)(temp_v2 + 0x2a4) = param_3;
-    *(short *)(temp_v0 + 0x2ac) = (short)(param_2 * 10);
-    temp_v1 = (unsigned short)((((param_2 * 10) & 0xffffU) << 2) / 10);
-    *(unsigned short *)(temp_v0 + 0x2aa) = temp_v1;
-    *(unsigned short *)(temp_v0 + 0x2ae) = temp_v1;
-  }
-  return;
-}
 
-} /* extern "C" */
+    if (state->unk2A0 != 0 && state->unk2A4 > priority) {
+        return;
+    }
+
+    state->unk2A0 = 1;
+    StateView* output = DAT_004474f0.unk04;
+    if (identifier == 0) {
+        identifier = -1;
+    }
+    output->unk2A8 = (s16)identifier;
+    state->unk2A4 = priority;
+    u16 scaledAmount = (u16)((u32)amount * 10u);
+    output->unk2AC = scaledAmount;
+    u16 fraction = (u16)(((u32)scaledAmount * 4u) / 10u);
+    output->unk2AA = fraction;
+    output->unk2AE = fraction;
+}
+}

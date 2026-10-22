@@ -15,7 +15,7 @@ int gameValueBlockSet(...);
 int FUN_002c7ad8(void);
 int gameDataAddCappedPoints(...);
 int asdOperatorNewD(void);
-int FUN_002f4374(void);
+int gameApplyFlagTriggers(void);
 int gameDataBlocksSetFlagBits(...);
 int FUN_00363c58(int);
 int FUN_003df7c4(...);
@@ -89,7 +89,7 @@ extern int gameDataBlocksValueGet(void);
 /* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
-/* Supplied declaration required: FUN_002f4374. */
+/* Supplied declaration required: gameApplyFlagTriggers. */
 /* Supplied declaration required: gameDataBlocksSetFlagBits. */
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -637,7 +637,7 @@ void FUN_00261a28(int param_1)
   FUN_002c7ad8();
   *(unsigned int *)(temp_v0 + 0x53b8) = 1;
   *(unsigned int *)(temp_v0 + 0x53c0) = *(unsigned int *)(temp_v1 + 0x53c0);
-  FUN_002f4374();
+  gameApplyFlagTriggers();
   asdOperatorDeleteC(puVar2);
   return;
 }

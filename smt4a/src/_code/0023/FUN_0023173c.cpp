@@ -9,7 +9,7 @@ int FUN_00180118(...);
 int asdMemFree(void);
 int dialogOpen(...);
 int FUN_002392b8(...);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int uiNavigatorStart(...);
 int infoWinSetTimer(void);
 int libc_strcpy(...);
@@ -36,7 +36,7 @@ extern int infoWinHasValue(void);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_002392b8. */
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: uiNavigatorStart. */
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: libc_strcpy. */
@@ -105,7 +105,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
     sysMemClear(temp_v4,0x68);
     switch(*puVar1) {
     case 0:
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       goto joined_r0x002318b0;
@@ -124,7 +124,7 @@ unsigned int FUN_0023173c(unsigned int *param_1)
         }
         FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
       }
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
 joined_r0x002318b0:
@@ -173,7 +173,7 @@ joined_r0x002318b0:
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x414),temp_v4);
         }
       }
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
@@ -200,7 +200,7 @@ joined_r0x002318b0:
       FUN_0015f858(temp_v2,0);
       libc_strcpy(temp_v4,temp_v2);
       FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
@@ -208,7 +208,7 @@ joined_r0x002318b0:
       temp_v0 = FUN_0014bd84((int)(short)puVar1[2]);
       libc_strcpy(temp_v4,temp_v0);
       FUN_003180c4(*(unsigned int *)(puVar1 + 0x412),temp_v4);
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
@@ -239,12 +239,12 @@ joined_r0x002318b0:
           FUN_003180c4(*(unsigned int *)(puVar1 + 0x414),puVar1 + 0x416);
         }
       }
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       dialogOpen((int)*(char *)(puVar1 + 0x410),1);
       temp_v2 = *(int *)(puVar1 + 0x436);
       break;
     case 8:
-      FUN_002a49e4(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
+      infoWinSetText(*(unsigned int *)(puVar1 + 6),*(unsigned int *)(puVar1 + 4) & 0xffff);
       uiNavigatorStart((int)(short)puVar1[2],(int)*(char *)(puVar1 + 0x410),1,0,0);
       if (0 < *(int *)(puVar1 + 0x436)) {
         infoWinSetTimer();

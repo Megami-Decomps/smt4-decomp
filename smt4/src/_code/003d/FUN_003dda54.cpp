@@ -1,45 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dda54` (_code @ 0x3dda54, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The target, value, and optional follow-up arguments use different saved registers and stack-pair loads. */
+#include "battle/btlReflect.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 
-extern "C" {
-
-int FUN_0022699c(int, int, int, unsigned int);
-int btlMainFindEntryByListedId(int, int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-
-
-unsigned int
-FUN_003dda54(short param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5,int param_6
-            )
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x2b;
-  *(int *)(temp_v0 + 0x14) = param_4;
-  *(unsigned int *)(temp_v0 + 0x28) = param_3;
-  if (-1 < param_5) {
-    temp_v0 = btlGetMainState();
-    btlMainFindEntryByListedId(temp_v0,(int)*(short *)(param_4 + 0x62));
-    if ((temp_v0 != 0) && (-1 < param_6)) {
-      temp_v1 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)(short)param_5,0,param_2);
-      *(unsigned char *)(temp_v1 + 4) = 6;
-      *(int *)(temp_v1 + 0x18) = temp_v0;
-      *(int *)(temp_v1 + 0x28) = param_6;
-    }
-  }
-  return 1;
+namespace {
+struct ReflectTarget {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ s16 listedId;
+};
 }
+extern "C" {
+ReflectAction *FUN_0022699c(ReflectContext *context, s16 actorId, s32 secondaryId, u32 options);
+BtlState *btlGetMainState(void);
+BtlUnitEntry *btlMainFindEntryByListedId(BtlState *state, s32 listedId);
 
-} /* extern "C" */
+/* Queues the target action and, when requested, a follow-up action for its listed battle unit. */
+u32 FUN_003dda54(u32 actorId, u32 options, u32 value, ReflectTarget *target, s32 followupActor, s32 followupValue)
+{
+    ReflectAction *request = FUN_0022699c(g_btlActionReflect, static_cast<s16>(actorId), 0, options);
+    request->kind = 0x2B;
+    request->target = reinterpret_cast<u32>(target);
+    request->value = value;
+    if (followupActor >= 0) {
+        BtlUnitEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), target->listedId);
+        if (entry != NULL && followupValue >= 0) {
+            request = FUN_0022699c(g_btlActionReflect, static_cast<s16>(followupActor), 0, options);
+            request->kind = 6;
+            request->wordValues.unk18 = reinterpret_cast<u32>(entry);
+            request->value = followupValue;
+        }
+    }
+    return 1;
+}
+}

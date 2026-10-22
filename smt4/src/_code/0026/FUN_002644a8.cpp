@@ -1,34 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002644a8` (_code @ 0x2644a8, 0x98 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The count/table registers are reversed, with a later condition-field address calculation and reversed loop comparison operands. */
+#include "common.h"
 
-extern "C" {
-
-extern int DAT_00447a2c; /* 0x447a2c */
-
-extern int gameFlagIsSet(void);
-
-
-void FUN_002644a8(void)
-
-{
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  if (temp_v2 < DAT_00447a2c) {
-    do {
-      temp_v0 = temp_v2 * 0x178;
-      if (((*(char *)(temp_v0 + 0x4a13c8) == '\0') && (*(int *)(temp_v0 + 0x4a1390) != 0)) &&
-         (((*(short *)(temp_v0 + 0x4a13c4) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) ||
-          ((*(short *)(temp_v0 + 0x4a13c6) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) {
-        *(unsigned char *)(temp_v0 + 0x4a13c8) = 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < DAT_00447a2c);
-  }
-  return;
+namespace {
+struct ConditionalMapEntry {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ u32 unk12C;
+    /* 0x130 */ u8 unk130[0x30];
+    /* 0x160 */ s16 requiredFlag;
+    /* 0x162 */ s16 forbiddenFlag;
+    /* 0x164 */ u8 disabled;
+    /* 0x165 */ u8 unk165[0x13];
+};
+struct ConditionalMapEntryCount {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 count;
+};
 }
+extern "C" {
+extern ConditionalMapEntryCount DAT_00447a28;
+extern ConditionalMapEntry DAT_004a1264[];
+u32 gameFlagIsSet(s32 flag);
 
-} /* extern "C" */
+/* Disables populated entries whose required flag is absent or whose forbidden flag is set. */
+void FUN_002644a8(void)
+{
+    for (s32 i = 0; i < DAT_00447a28.count; ++i) {
+        ConditionalMapEntry *entry = &DAT_004a1264[i];
+        if (entry->disabled == 0 && entry->unk12C != 0 &&
+            ((entry->requiredFlag != 0 && !gameFlagIsSet(entry->requiredFlag)) ||
+             (entry->forbiddenFlag != 0 && gameFlagIsSet(entry->forbiddenFlag)))) {
+            entry->disabled = 1;
+        }
+    }
+}
+}

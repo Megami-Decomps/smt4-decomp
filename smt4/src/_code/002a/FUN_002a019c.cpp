@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029cde0(...);
 int dataTable06Sub1GetRecord(...);
-int FUN_0029eaa4(...);
+int devilIsAvailable(...);
 int FUN_002b7bca(...);
 int devilGetRecord(...);
 int rt_memclr(...);
@@ -20,7 +20,7 @@ extern int FUN_001a15f4(int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern unsigned long long FUN_0029e9cc(unsigned short);
 extern unsigned long long FUN_0029ea68(unsigned short);
-/* Supplied declaration required: FUN_0029eaa4. */
+/* Supplied declaration required: devilIsAvailable. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: devilGetRecord. */
@@ -55,7 +55,7 @@ void FUN_002a019c(void)
   puVar8 = (unsigned short *)0x0;
   do {
     temp_v2 = *piVar1;
-    FUN_0029eaa4(temp_v2,puVar8);
+    devilIsAvailable(temp_v2,puVar8);
     if (temp_v2 != 0) {
       puVar5 = puVar8;
       devilGetRecord();

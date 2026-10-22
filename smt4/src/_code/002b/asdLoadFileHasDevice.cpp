@@ -1,47 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdLoadFileHasDevice` (_code @ 0x2b045c, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+extern "C" s32 libc_strlen(const char *text);
 
-extern unsigned int libc_strlen(void);
-
-
-unsigned int asdLoadFileHasDevice(int param_1)
-
+// A device prefix ends with a colon within the first eight path characters.
+extern "C" u32 asdLoadFileHasDevice(const char *path)
 {
-/* irregular: 1 unstructured edge(s) */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = libc_strlen();
-  if ((int)temp_v0 >= 9) {
-    temp_v0 = 8;
-  }
-  if ((int)temp_v0 < 1) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = temp_v0 & 1;
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      do {
-        if (*(char *)(param_1 + temp_v2) == ':') {
-          return 1;
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < (int)temp_v1);
+    s32 length = libc_strlen(path);
+    if (length > 8)
+        length = 8;
+    for (s32 index = 0; index < length; ++index) {
+        if (path[index] == ':')
+            return 1;
     }
-  }
-  while( 1 ) {
-    if ((int)temp_v0 <= (int)temp_v1) {
-      return 0;
-    }
-    if ((*(char *)(param_1 + temp_v1) == ':') || (*(char *)(param_1 + temp_v1 + 1) == ':')) break;
-    temp_v1 = temp_v1 + 2;
-  }
-  return 1;
+    return 0;
 }
-
-} /* extern "C" */

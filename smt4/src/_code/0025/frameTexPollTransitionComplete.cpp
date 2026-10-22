@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler reuses the animation base, omits retail's second address construction and uses ldrb rather than its signed busy-byte load. */
-#include "shard/JobBlock43e278.h"
+#include "ui/FrameTex.h"
+extern "C" FrameWork *g_frameTex;
 
 struct FrameTextureAnimationWork {
     u8 data[0x88];
@@ -23,7 +24,7 @@ s32 FUN_002bf818(FrameTextureAnimationWork *work);
 // Poll active frame animation, rejecting a busy or incomplete transition.
 u32 frameTexPollTransitionComplete(void)
 {
-    JobBlock43e278 *texture = g_frameTex;
+    FrameWork *texture = g_frameTex;
     FrameTextureActivity *activity = (FrameTextureActivity *)texture;
     if (texture->unkF2B != 0 && activity->active != 0) {
         FrameTextureAnimation *animation = &activity->animation;

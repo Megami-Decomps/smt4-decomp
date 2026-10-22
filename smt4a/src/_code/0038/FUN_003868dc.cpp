@@ -64,7 +64,7 @@ extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004a01c8. */
 /* Supplied declaration required: FUN_004a0524. */
 /* Supplied declaration required: FUN_004a08f0. */
-extern int FUN_004a0e38(unsigned int, unsigned int);
+extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0050d8e4. */
 
 
@@ -233,7 +233,7 @@ void FUN_003868dc(int param_1)
       *(float *)(temp_v2 + 0x34) = temp_v7;
       *(int *)(temp_v2 + 0x38) = (int)temp_v9;
       *(int *)(temp_v2 + 0x3c) = (int)((unsigned long long)temp_v9 >> 0x20);
-      temp_v2 = FUN_004a0e38(2,5);
+      temp_v2 = partyAnyMemberHasFlagBit(2,5);
       if ((temp_v2 != 0) && (!temp_v5)) {
         temp_v8 = temp_v7;
         distSpatial();

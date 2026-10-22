@@ -1,44 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004954e8` (_code @ 0x4954e8, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The active-byte zero test uses a direct unsigned byte load instead of retail's owner-pointer copy and signed getter load. */
+#include "common.h"
 
+struct SubmenuRecord {
+    /* 0x00 */ u8 unk00[0x74];
+};
+struct SubmenuView;
+struct SubmenuViewTable {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ void (*setRecord)(SubmenuView *view, SubmenuRecord *record);
+};
+struct SubmenuView {
+    /* 0x00 */ SubmenuViewTable *table;
+};
+struct SubmenuSelectionOwner {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ s8 active;
+    /* 0x13 */ u8 unk13[0x21];
+};
+struct SubmenuWork {
+    /* 0x000 */ u8 unk000[0x3CC];
+    /* 0x3CC */ u8 unk3CC[0x73C];
+    /* 0xB08 */ SubmenuSelectionOwner selection;
+    /* 0xB3C */ SubmenuView *view;
+    /* 0xB40 */ s32 recordIndex;
+    /* 0xB44 */ u8 unkB44[0x1C];
+    /* 0xB60 */ SubmenuRecord records[1]; /* trailing record table */
+};
 extern "C" {
+void menuSynchronizeFlaggedSelection(SubmenuSelectionOwner *owner, SubmenuRecord *record);
+void sub10OwnerStart(SubmenuRecord *record);
+void FUN_004cf8dc(void *owner, s32 value);
+s32 selectOwnerGetSelected(SubmenuSelectionOwner *owner);
+s32 FUN_004d0058(SubmenuRecord *record, s32 selected);
 
-int FUN_004cf8dc(int, int);
-int sub10OwnerStart(int);
-int menuSynchronizeFlaggedSelection(int, int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_004cf8dc. */
-extern int FUN_004d0058(int, unsigned int);
-/* Supplied declaration required: sub10OwnerStart. */
-extern unsigned int selectOwnerGetSelected(int);
-/* Supplied declaration required: menuSynchronizeFlaggedSelection. */
-
-
-unsigned int FUN_004954e8(int param_1)
-
+/* Starts the current submenu record and applies an active flagged selection. */
+u32 FUN_004954e8(SubmenuWork *work)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb60;
-  menuSynchronizeFlaggedSelection(param_1 + 0xb08,temp_v2);
-  (**(romwright_code **)(**(int **)(param_1 + 0xb3c) + 0xc))(*(int **)(param_1 + 0xb3c),temp_v2);
-  sub10OwnerStart(temp_v2);
-  FUN_004cf8dc(param_1 + 0x3cc,2);
-  FUN_004cf8dc(param_1 + 0x3cc,0xc);
-  temp_v1 = 0;
-  if (*(char *)(param_1 + 0xb1a) != '\0') {
-    temp_v0 = selectOwnerGetSelected(param_1 + 0xb08);
-    temp_v2 = FUN_004d0058(temp_v2,temp_v0);
-    if (temp_v2 != 0) {
-      temp_v1 = 1;
+    SubmenuRecord *record = &work->records[work->recordIndex];
+    menuSynchronizeFlaggedSelection(&work->selection, record);
+    work->view->table->setRecord(work->view, record);
+    sub10OwnerStart(record);
+    FUN_004cf8dc(work->unk3CC, 2);
+    FUN_004cf8dc(work->unk3CC, 12);
+    u32 result = 0;
+    if (work->selection.active != 0) {
+        if (FUN_004d0058(record, selectOwnerGetSelected(&work->selection)) != 0) {
+            result = 1;
+        }
     }
-  }
-  return temp_v1;
+    return result;
 }
-
-} /* extern "C" */
+}

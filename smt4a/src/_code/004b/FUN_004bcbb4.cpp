@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00186f58(void);
+int dataFindKeyedRecordWithOverrides(void);
 int dataTable04FindById(void);
 int FUN_0034a304(unsigned int, int, int);
 
-/* Supplied declaration required: FUN_00186f58. */
+/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0034a304. */
 extern int gameDataFlagTestBit(unsigned int);
@@ -27,19 +27,19 @@ void FUN_004bcbb4(int param_1,unsigned int param_2)
   if (temp_v0 != 0) {
     temp_v1 = gameDataFlagTestBit(0xc);
     if (temp_v1 != 0) {
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
     }
     temp_v1 = gameDataFlagTestBit(0xd);
     if (temp_v1 != 0) {
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
     }
     temp_v1 = gameDataFlagTestBit(0xe);
     if (temp_v1 != 0) {
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
     }
     temp_v1 = gameDataFlagTestBit(0xf);
     if (temp_v1 != 0) {
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
     }
     temp_v1 = 0;
     if (param_1 != 0) {

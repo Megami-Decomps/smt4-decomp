@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029d644(int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
@@ -252,7 +252,7 @@ unsigned int FUN_001a26dc(void)
     FUN_002bf288(2,0x1e,0x13,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe2);
     if (*(int *)(temp_v2 + 0x744) != 3) {
       temp_v7 = FUN_0029efa8(temp_v12);
-      temp_v7 = FUN_0029d65c((int)*(short *)(temp_v2 + temp_v7 * 2 + 0x772));
+      temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + temp_v7 * 2 + 0x772));
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 6)) {
         FUN_002bf288(2,0x1e,0x14,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xe7);
       }

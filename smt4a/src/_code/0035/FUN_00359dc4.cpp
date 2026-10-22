@@ -17,7 +17,7 @@ int overlayIsNotBusy(void);
 int controllerApplyPreset(unsigned int, int);
 int screenStartOrClear(unsigned int, int);
 int characterInfoPanelPopulate(unsigned int, unsigned int, unsigned int);
-int FUN_003a7a88(int, int);
+int devilIsTextureLoaded(int, int);
 int resourceEntryMarkReleased(unsigned int, int);
 int FUN_003e5c68(unsigned int, int);
 
@@ -37,7 +37,7 @@ extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: characterInfoPanelPopulate. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: resourceEntryMarkReleased. */
 /* Supplied declaration required: FUN_003e5c68. */
 
@@ -55,7 +55,7 @@ void FUN_00359dc4(int param_1)
   
   if ((*(char *)(param_1 + 0x10e) == '\0') &&
      ((temp_v0 = (int)*(short *)(*(int *)(param_1 + 0xc) + 0x90), temp_v0 == 0 ||
-      (FUN_003a7a88(temp_v0,1), temp_v0 != 0)))) {
+      (devilIsTextureLoaded(temp_v0,1), temp_v0 != 0)))) {
     if (*(char *)(param_1 + 0x194) == '\0') {
       temp_v0 = overlayGetStatusScene();
       resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),0);
@@ -87,7 +87,7 @@ void FUN_00359dc4(int param_1)
         FUN_00182054();
         if ((temp_v4 != 0) &&
            ((temp_v0 = (int)*(short *)(*(int *)(param_1 + 0xc) + 0x90), temp_v0 == 0 ||
-            (FUN_003a7a88(temp_v0,1), temp_v0 != 0)))) {
+            (devilIsTextureLoaded(temp_v0,1), temp_v0 != 0)))) {
           temp_v0 = *(int *)(param_1 + 0x50);
           FUN_00275bc8(temp_v0,*(unsigned int *)(param_1 + 0x54));
           *(int *)(param_1 + 0x4c) = temp_v0;

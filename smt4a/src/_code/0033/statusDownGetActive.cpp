@@ -1,12 +1,11 @@
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
 
 extern "C" {
-
-
+extern StatusDownStateA *g_statusDown;
 
 s32 statusDownGetActive(void)
 {
-    StatusDown *status = g_statusDown;
+    StatusDownStateA *status = g_statusDown;
     return status != NULL ? status->active : 0;
 }
 

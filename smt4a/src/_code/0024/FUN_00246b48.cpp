@@ -1,42 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246b48` (_code @ 0x246b48, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Global/zero registers r6 and r7 are swapped, as are the unrolled active-clear loop counters r0 and r1. */
+#include "map/MapObjects.h"
 
 extern "C" {
+extern MapObjectWork *g_mapObj;
 
-typedef int romwright_code(...);
-extern int g_mapObj; /* 0x581284 */
-
-
+/* Releases all map objects and clears the active flag of every entry. */
 void FUN_00246b48(void)
-
 {
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  do {
-    piVar2 = *(int **)(g_mapObj + temp_v3 * 0x48 + 0x3c);
-    if (piVar2 != (int *)0x0) {
-      (**(romwright_code **)(*piVar2 + 4))();
-      *(unsigned int *)(g_mapObj + temp_v3 * 0x48 + 0x3c) = 0;
+    for (s32 i = 0; i < 24; ++i) {
+        MapObjectInstance *object = g_mapObj->entries[i].object;
+        if (object != NULL) {
+            object->vfunc04();
+            g_mapObj->entries[i].object = NULL;
+        }
     }
-    temp_v0 = g_mapObj;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x18);
-  temp_v1 = 0;
-  temp_v3 = 0;
-  do {
-    temp_v2 = temp_v1 + 1;
-    temp_v3 = temp_v3 + 2;
-    *(unsigned char *)(temp_v0 + temp_v1 * 0x48 + 0x14) = 0;
-    temp_v1 = temp_v1 + 2;
-    *(unsigned char *)(temp_v0 + temp_v2 * 0x48 + 0x14) = 0;
-  } while (temp_v3 < 0x18);
-  return;
+    MapObjectWork *work = g_mapObj;
+    for (s32 i = 0; i < 24; ++i) {
+        work->entries[i].active = 0;
+    }
 }
-
-} /* extern "C" */
+}

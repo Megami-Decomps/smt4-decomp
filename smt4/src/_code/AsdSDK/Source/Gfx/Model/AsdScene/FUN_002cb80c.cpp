@@ -1,61 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cb80c` (_code @ 0x2cb80c, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail initialises the handle with three separate stores (post-indexed) and the desc tail with stm {0, 1}; ours merges id/resource into one stm and swaps r5/r6. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdMemoryAlloc(int, int, int, int, int);
+extern const char DAT_00409488[];
 
-/* stack frame of void: 5 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned char sp1F; /* 0x1f: local_1f */
-    unsigned char sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+typedef struct AsdFloatColor {
+    f32 r;
+    f32 g;
+    f32 b;
+    f32 a;
+} AsdFloatColor;
 
-extern int FUN_0011d9c4(unsigned char *, unsigned int);
-extern unsigned int asdMemoryGetDefaultAllocator(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
+/* The light data of a scene ambient light: only its colour fields are known. */
+typedef struct AsdAmbientLightData {
+    /* 0x00 */ u8 unk00[0xB8];
+    /* 0xB8 */ AsdFloatColor color;
+    /* 0xC8 */ u32 picaColor;
+} AsdAmbientLightData;
 
+typedef struct AsdAmbientLightResource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ AsdAmbientLightData *data;
+} AsdAmbientLightResource;
 
-unsigned int * FUN_002cb80c(void)
+/* The build description FUN_0011d9c4 takes. */
+typedef struct AsdAmbientLightDesc {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 unk01;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+} AsdAmbientLightDesc;
 
+/* A scene ambient light handle. */
+typedef struct AsdAmbientLight {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ AsdAmbientLightResource *resource;
+    /* 0x08 */ AsdAmbientLightData *data;
+} AsdAmbientLight;
+
+void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
+void *asdMemoryGetDefaultAllocator(void);
+AsdAmbientLightResource *FUN_0011d9c4(const AsdAmbientLightDesc *desc, void *allocator);
+u32 nw_ut_FloatColor_ToPicaU32(const AsdFloatColor *color);
+
+/* Creates an ambient light with a dim grey (0.2) colour. */
+AsdAmbientLight *FUN_002cb80c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int uStack_14;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0xc,1);
-  puVar1[1] = 0;
-  *puVar1 = 0xffffffff;
-  puVar1[2] = 0;
-  temp_v0 = asdMemoryGetDefaultAllocator();
-  temp_v2 = 1;
-  temp_v3 = 1;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  uStack_14 = 1;
-  temp_v1 = FUN_0011d9c4(&temp_v2,temp_v0);
-  puVar1[1] = temp_v1;
-  temp_v1 = *(int *)(temp_v1 + 8);
-  puVar1[2] = temp_v1;
-  *(unsigned int *)(temp_v1 + 0xb8) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xbc) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xc0) = 0x3e4ccccd;
-  *(unsigned int *)(temp_v1 + 0xc4) = 0x3f800000;
-  temp_v0 = nw_ut_FloatColor_ToPicaU32(puVar1[2] + 0xb8);
-  *(unsigned int *)(puVar1[2] + 200) = temp_v0;
-  return puVar1;
+    AsdAmbientLight *light;
+    AsdAmbientLightDesc desc;
+    void *allocator;
+
+    asdDebugTrace(DAT_00409488, 688);
+    light = (AsdAmbientLight *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(AsdAmbientLight), 1);
+    light->resource = NULL;
+    light->id = -1;
+    light->data = NULL;
+    allocator = asdMemoryGetDefaultAllocator();
+    desc.unk00 = 1;
+    desc.unk01 = 1;
+    desc.unk04 = 0;
+    desc.unk08 = 0;
+    desc.unk0C = 1;
+    light->resource = FUN_0011d9c4(&desc, allocator);
+    light->data = light->resource->data;
+    light->data->color.r = 0.2f;
+    light->data->color.g = 0.2f;
+    light->data->color.b = 0.2f;
+    light->data->color.a = 1.0f;
+    light->data->picaColor = nw_ut_FloatColor_ToPicaU32(&light->data->color);
+    return light;
 }
 
 } /* extern "C" */

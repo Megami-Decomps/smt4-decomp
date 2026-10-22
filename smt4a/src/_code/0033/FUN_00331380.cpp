@@ -1,43 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331380` (_code @ 0x331380, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #128] differs from recovered ldr r1, [pc, #112]. */
+#include "common.h"
+
+struct PartyPanelLocalView {
+    u8 unk00[0x1210]; // 0x0000
+    u8 unk1210;       // 0x1210
+};
 
 extern "C" {
+extern PartyPanelLocalView* g_partyPanel;
+s32 FUN_00183f58(s32 group, s32 command, s32 value, s32 enabled);
+s32 buttonHelpGetEntryValue(u32 group);
 
-int FUN_00183f58(int, int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int g_partyPanel; /* 0x57f268 */
-
-/* Supplied declaration required: FUN_00183f58. */
-extern int FUN_003aeaf0(unsigned int);
-
-
-void FUN_00331380(int param_1)
-
+// Update the panel flag and issue the corresponding group-3 command.
+void FUN_00331380(s32 active)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_partyPanel;
-  if (g_partyPanel == 0) {
-    return;
-  }
-  *(unsigned char *)(g_partyPanel + 0x1210) = param_1 == 0;
-  if (*(char *)(temp_v0 + 0x1210) == '\0') {
-    temp_v0 = FUN_003aeaf0(3);
-    if (temp_v0 != 0) {
-      return;
+    PartyPanelLocalView* panel = g_partyPanel;
+    if (panel == 0) {
+        return;
     }
-    FUN_00183f58(3,3,0xb,1);
-    return;
-  }
-  FUN_00183f58(3,0x12,0,1);
-  return;
-}
 
-} /* extern "C" */
+    g_partyPanel->unk1210 = (active == 0);
+    if (panel->unk1210 != 0) {
+        FUN_00183f58(3, 0x12, 0, 1);
+    } else if (buttonHelpGetEntryValue(3) == 0) {
+        FUN_00183f58(3, 3, 0x0b, 1);
+    }
+}
+}

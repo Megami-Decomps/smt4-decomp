@@ -53,7 +53,7 @@ void FUN_001a90f0(char *destination, const char *source);
 const char *FUN_0014bd84(u32 skill);
 void textFormatBuffer(char *destination, const char *format, ...);
 f32 FUN_00168594(const char *text, u32 font, f32 spacing);
-s32 FUN_003a7a88(s32 id, u32 kind);
+s32 devilIsTextureLoaded(s32 id, u32 kind);
 void FUN_0038b3f8(s32 id, u32 kind);
 void FUN_00371c3c(s32 id, u32 kind);
 void *FUN_0019acdc(u32 item, u32 flags);
@@ -77,7 +77,7 @@ static __forceinline void setCharacterEquipmentLabelA(CharacterInfoPanelA *panel
 
 static inline void clearCharacterPreviewA(CharacterInfoPanelA *panel)
 {
-    if (panel->previewId && FUN_003a7a88(panel->previewId, 1))
+    if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1))
         FUN_0038b3f8(panel->previewId, 1);
     panel->previewId = 0;
 }
@@ -139,7 +139,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     if (panel->previewId != record->demon) {
         if (record->demon) {
             if (record->owner) {
-                if (panel->previewId && FUN_003a7a88(panel->previewId, 1))
+                if (panel->previewId && devilIsTextureLoaded(panel->previewId, 1))
                     FUN_0038b3f8(panel->previewId, 1);
                 panel->previewId = record->demon;
                 FUN_00371c3c(panel->previewId, 1);

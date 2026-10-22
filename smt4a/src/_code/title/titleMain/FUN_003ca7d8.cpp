@@ -1,46 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca7d8` (_code @ 0x3ca7d8, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail add r1, r4, #120 differs from recovered add r0, r4, #120. */
+#include "common.h"
+
+// Private layout views for the fields accessed by this function.
+struct TitleStateView {
+    u8 unk00[0x3D]; // 0x00
+    u8 unk3D;       // 0x3D
+    u8 unk3E[2];    // 0x3E
+    f32 unk40;      // 0x40
+    f32 unk44;      // 0x44
+    u8 unk48[8];    // 0x48
+    u16 unk50;      // 0x50
+    u16 unk52;      // 0x52
+    u16 unk54;      // 0x54
+    u16 unk56;      // 0x56
+    u16 unk58;      // 0x58
+    u8 unk5A[6];    // 0x5A
+    u8 unk60;       // 0x60
+    u8 unk61[0x17]; // 0x61
+    u32 unk78;      // 0x78
+    u32 unk7C;      // 0x7C
+    u32 unk80;      // 0x80
+};
+
+struct TitleMainView {
+    u32 unk00;             // 0x00
+    TitleStateView* unk04; // 0x04
+};
 
 extern "C" {
+extern TitleMainView g_titleMain;
+s32 sysPlaySe(s32 soundId);
+void frameTransitionSetMode(s32 mode);
+u16 FUN_001643b4(u32 group, u32 entry);
 
-int sysPlaySe(int);
-void frameTransitionSetMode(int);
-
-extern unsigned char g_titleMain; /* 0x58916c */
-
-extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-/* Supplied declaration required: sysPlaySe. */
-
-
+// Reset title state, load five entries, and begin transition mode 2.
 void FUN_003ca7d8(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_titleMain + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_titleMain + 0x4)) + 0x40) = 0;
-  *(unsigned int *)(temp_v0 + 0x44) = 0;
-  sysPlaySe(0xa1);
-  temp_v1 = FUN_001643b4(9,0x27);
-  *(unsigned short *)(temp_v0 + 0x50) = temp_v1;
-  temp_v1 = FUN_001643b4(9,0x28);
-  *(unsigned short *)(temp_v0 + 0x52) = temp_v1;
-  temp_v1 = FUN_001643b4(9,0x29);
-  *(unsigned short *)(temp_v0 + 0x54) = temp_v1;
-  temp_v1 = FUN_001643b4(9,0x2a);
-  *(unsigned short *)(temp_v0 + 0x56) = temp_v1;
-  temp_v1 = FUN_001643b4(9,0x2b);
-  *(unsigned short *)(temp_v0 + 0x58) = temp_v1;
-  *(unsigned char *)(temp_v0 + 0x3d) = 0;
-  frameTransitionSetMode(2);
-  *(unsigned char *)(temp_v0 + 0x60) = 1;
-  *(unsigned int *)(temp_v0 + 0x78) = 0xb;
-  *(unsigned int *)(temp_v0 + 0x7c) = 0;
-  *(unsigned int *)(temp_v0 + 0x80) = 0;
-  return;
+    TitleStateView* state = g_titleMain.unk04;
+    state->unk40 = 0.0f;
+    state->unk44 = 0.0f;
+    sysPlaySe(0xA1);
+    state->unk50 = FUN_001643b4(9, 0x27);
+    state->unk52 = FUN_001643b4(9, 0x28);
+    state->unk54 = FUN_001643b4(9, 0x29);
+    state->unk56 = FUN_001643b4(9, 0x2A);
+    state->unk58 = FUN_001643b4(9, 0x2B);
+    state->unk3D = 0;
+    frameTransitionSetMode(2);
+    state->unk60 = 1;
+    state->unk78 = 0xB;
+    state->unk7C = 0;
+    state->unk80 = 0;
 }
-
-} /* extern "C" */
+}

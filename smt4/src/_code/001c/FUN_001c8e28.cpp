@@ -158,7 +158,7 @@ unsigned int FUN_001c8e28(void)
       FUN_0029a084(0,*(unsigned short *)(puVar4[0xd4] + 6));
       uVar9 = FUN_002b63ac();
       FUN_002bcd68(uVar9,puVar2[0xd4],0xe);
-      FUN_0029d684(1);
+      statusPanelSetOpen(1);
       *(unsigned char *)((int)puVar2 + 0x355) = 1;
       iVar8 = puVar2[4] + 1;
       puVar2[4] = iVar8;
@@ -243,7 +243,7 @@ unsigned int FUN_001c8e28(void)
     }
     iVar8 = FUN_00299fc0();
     if ((iVar8 != 0) &&
-       ((iVar8 = FUN_002bfde4(1), iVar8 != 0 || (iVar8 = FUN_0026ee68(2), iVar8 != 0)))) {
+       ((iVar8 = FUN_002bfde4(1), iVar8 != 0 || (iVar8 = buttonHelpHasEnabledEntryForId(2), iVar8 != 0)))) {
       FUN_002b8e84(0x100016e);
       FUN_002a0cc8(0);
       FUN_0029c4c8(0);
@@ -271,22 +271,22 @@ unsigned int FUN_001c8e28(void)
     }
     iVar8 = DAT_0044de30;
     puVar4 = DAT_0044de2c;
-    iVar6 = FUN_0029d65c((int)(short)DAT_0044de2c[0x10]);
-    if (((iVar6 == 1) || (iVar6 = FUN_0029d65c((int)(short)puVar4[0x10]), iVar6 == 2)) &&
-       (iVar6 = FUN_0029d65c((int)(short)puVar4[0x11]), iVar6 != 1)) {
+    iVar6 = ifTouchGetSelectionModeForRegion((int)(short)DAT_0044de2c[0x10]);
+    if (((iVar6 == 1) || (iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x10]), iVar6 == 2)) &&
+       (iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x11]), iVar6 != 1)) {
       DAT_0044de30 = 0;
     }
-    iVar6 = FUN_0029d65c((int)(short)puVar4[0x11]);
-    if (((iVar6 == 1) || (iVar6 = FUN_0029d65c((int)(short)puVar4[0x11]), iVar6 == 2)) &&
-       (iVar6 = FUN_0029d65c((int)(short)puVar4[0x10]), iVar6 != 1)) {
+    iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x11]);
+    if (((iVar6 == 1) || (iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x11]), iVar6 == 2)) &&
+       (iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x10]), iVar6 != 1)) {
       DAT_0044de30 = 1;
     }
-    iVar6 = FUN_0029d65c((int)(short)puVar4[0x10]);
+    iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x10]);
     if (iVar6 == 6) {
       *(unsigned char *)(puVar4 + 0x17) = 1;
       DAT_0044de30 = 0;
     }
-    iVar6 = FUN_0029d65c((int)(short)puVar4[0x11]);
+    iVar6 = ifTouchGetSelectionModeForRegion((int)(short)puVar4[0x11]);
     if (iVar6 == 6) {
       *(unsigned char *)(puVar4 + 0x17) = 1;
       DAT_0044de30 = 1;
@@ -333,7 +333,7 @@ unsigned int FUN_001c8e28(void)
     }
     iVar8 = FUN_002bfde4(0);
     if (iVar8 == 0) {
-      uVar7 = FUN_0026ee68(1);
+      uVar7 = buttonHelpHasEnabledEntryForId(1);
       bVar13 = uVar7 == 0;
       if (bVar13) {
         uVar7 = (unsigned int)*(unsigned char *)(puVar4 + 0x17);
@@ -401,7 +401,7 @@ code_r0x001c9900:
         *(unsigned char *)((int)puVar2 + 0x73) = 0;
         puVar2[2] = 5;
         puVar2[3] = 0;
-        FUN_00297050(0);
+        messageMainSetEnabled(0);
       }
       FUN_002a0cc8(1);
     }
@@ -482,7 +482,7 @@ code_r0x001c9900:
           FUN_0026b584();
         }
         else {
-          FUN_002c5758(1);
+          gameDataRemoveHomeButtonHold(1);
         }
       }
       iVar8 = func_0x0026b5fc();
@@ -494,19 +494,19 @@ code_r0x001c9900:
         iVar8 = iVar6 - 0x1e;
       }
       if ((bVar13 && iVar6 != 0x1e) && iVar8 < 0 == (bVar13 && SBORROW4(iVar6,0x1e))) {
-        FUN_00297050(1);
+        messageMainSetEnabled(1);
         FUN_002b8838(0x9e);
         *(unsigned char *)((int)puVar4 + 0x72) = 1;
         iVar8 = func_0x0026b5ec();
         if (iVar8 != 0) {
-          FUN_002c5758(1);
+          gameDataRemoveHomeButtonHold(1);
           iVar8 = FUN_002c09bc();
           FUN_002bcd68(puVar4 + DAT_0044de30 * 0x20 + 0x93,iVar8 + 0x2470c,0x80);
           *(unsigned char *)((int)puVar4 + DAT_0044de30 + 0x34c) = 1;
           FUN_00296f4c(puVar4[0x92],4);
         }
         else {
-          FUN_002c5758(1);
+          gameDataRemoveHomeButtonHold(1);
           FUN_00296f4c(puVar4[0x92],4);
         }
       }
@@ -609,7 +609,7 @@ code_r0x001c9900:
         FUN_0029963c(1,*(unsigned short *)(puVar4[0xd4] + 8));
         FUN_0029963c(2,*(unsigned short *)(puVar4[0xd4] + 10));
         FUN_0029963c(0,*(unsigned short *)(puVar4[0xd4] + 6));
-        FUN_00297050(1);
+        messageMainSetEnabled(1);
         FUN_002b8838(0x9e);
       }
       if ((*(char *)((int)puVar4 + 0x355) != '\0') && (iVar8 = FUN_00299fc0(), iVar8 != 0)) {
@@ -632,9 +632,9 @@ code_r0x001c9900:
     else {
       iVar8 = FUN_0019e0c0(DAT_0044de2c[0x92]);
       if (iVar8 == 2) {
-        iVar8 = FUN_002973d8();
+        iVar8 = messageMainGetChoiceResult();
         if (iVar8 != 0) {
-          FUN_002c5758(1);
+          gameDataRemoveHomeButtonHold(1);
           *(unsigned char *)((int)puVar4 + 0x55) = 0;
           *(unsigned char *)(puVar4 + 0x15) = 0;
           *(unsigned char *)(puVar4 + 0x17) = 0;
@@ -643,7 +643,7 @@ code_r0x001c9900:
         }
         else {
           FUN_002123dc();
-          FUN_00297050(0);
+          messageMainSetEnabled(0);
           *(unsigned char *)((int)puVar4 + 0x55) = 1;
           uVar9 = FUN_0026b5dc();
           FUN_002bcd68(uVar9,puVar4[0xdf],0x80);

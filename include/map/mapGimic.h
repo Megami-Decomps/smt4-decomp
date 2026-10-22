@@ -3,18 +3,26 @@
 #define MAP_MAPGIMIC_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define MAP_GIMIC_ENTRIES 0x23
 #define MAP_GIMIC_SLOTS 10
 
 typedef struct MapGimicObj {
     /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 handle;
+    /* 0x04 */ union {
+        u32 handle;
+        void *controller;
+    };
 } MapGimicObj;
 
 typedef struct MapGimicEntry {
     /* 0x00 */ u8 active;
-    /* 0x01 */ u8 unk01[0x15];
+    /* 0x01 */ u8 requested;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ f32 position[3];
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u16 requestState;
     /* 0x16 */ s16 id;
     /* 0x18 */ MapGimicObj *obj;
     /* 0x1C */ u8 unk1C[0x20];
@@ -22,11 +30,16 @@ typedef struct MapGimicEntry {
 
 typedef struct MapGimicSlot {
     /* 0x00 */ u8 active;
-    /* 0x01 */ u8 unk01[3];
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ s16 animationId;
     /* 0x04 */ s16 id;
     /* 0x06 */ u8 unk06[2];
     /* 0x08 */ MapGimicObj *obj;
-    /* 0x0C */ u8 unk0C[0x0C];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u8 requested;
+    /* 0x11 */ u8 unk11;
+    /* 0x12 */ s16 delay;
+    /* 0x14 */ u8 unk14[4];
 } MapGimicSlot;
 
 typedef struct MapGimic {
@@ -42,5 +55,15 @@ typedef struct MapGimic {
     /* 0x090 */ MapGimicEntry entries[MAP_GIMIC_ENTRIES];
     /* 0x8C4 */ MapGimicSlot slots[MAP_GIMIC_SLOTS];
 } MapGimic;
+
+
+/* Retail 32-bit layout invariants. */
+typedef char MapGimicObjSizeCheck[sizeof(MapGimicObj) == 0x8 ? 1 : -1];
+typedef char MapGimicEntrySizeCheck[sizeof(MapGimicEntry) == 0x3C ? 1 : -1];
+typedef char MapGimicSlotSizeCheck[sizeof(MapGimicSlot) == 0x18 ? 1 : -1];
+typedef char MapGimicSlotOffsetsCheck[
+    offsetof(MapGimicSlot, animationId) == 2 && offsetof(MapGimicSlot, unk0C) == 0xc &&
+    offsetof(MapGimicSlot, requested) == 0x10 && offsetof(MapGimicSlot, delay) == 0x12 ? 1 : -1];
+typedef char MapGimicSizeCheck[sizeof(MapGimic) == 0x9B4 ? 1 : -1];
 
 #endif

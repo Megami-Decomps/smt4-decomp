@@ -1,55 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f4f24` (_code @ 0x2f4f24, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the module address before the frame check and again for the cue table, and orders its two literals module-first. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bfc24(int, unsigned int, int, int);
+typedef struct SoundCue {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u16 pan;       /* 0 = left, 1 = right, else centered */
+    /* 0x0A */ u16 volume;
+} SoundCue;
 
-extern unsigned int DAT_0044e128; /* 0x44e128 */
-extern unsigned char DAT_004c5634; /* 0x4c5634 */
-extern int DAT_004c5814; /* 0x4c5814 */
-extern unsigned char DAT_004c5818; /* 0x4c5818 */
+typedef struct SoundChannel {
+    /* 0x00 */ u8 state;      /* 2 = finished */
+    /* 0x01 */ u8 unk01[0x77];
+} SoundChannel;
 
-extern unsigned int FUN_00100bd4(int);
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_002bfc24. */
+typedef struct SoundCueModule {
+    /* 0x000 */ SoundChannel channels[4];
+    /* 0x1E0 */ SoundCue *cues;
+    /* 0x1E4 */ u8 flags;
+} SoundCueModule;
 
+s32 FUN_002bfc24(s32 mode, u32 sound, u8 volume, u8 flags, f32 left, f32 right);
+u32 FUN_00100bd4(SoundCue *cue);
+s32 scrGetCommandFrame(void);
 
-unsigned int FUN_002f4f24(unsigned int param_1)
+extern SoundCueModule DAT_004c5634;
+extern u32 DAT_0044e128; /* channel of the cue started last */
 
+/* Script command: on its first frame starts cue `index` panned by the cue (fails, returning 1, for
+ * a bad cue or channel); on later frames returns 1 once that channel has finished. */
+s32 FUN_002f4f24(u32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 != 0) {
-    if (DAT_0044e128 >= 4) {
-      pcVar2 = (char *)0x0;
+    if (scrGetCommandFrame() != 0) {
+        SoundChannel *channel = DAT_0044e128 < 4 ? &DAT_004c5634.channels[DAT_0044e128] : NULL;
+        if (channel->state == 2) {
+            return 1;
+        }
+        return 0;
+    } else if (index < 16 && DAT_004c5634.cues != NULL) {
+        SoundCue *cue = &DAT_004c5634.cues[index];
+        if (cue != NULL) {
+            u8 flags = DAT_004c5634.flags | 4;
+            u32 sound = FUN_00100bd4(cue);
+            u8 volume = cue->volume;
+            f32 left;
+            f32 right;
+            if (cue->pan == 0) {
+                left = 0.707f;
+                right = 0.1f;
+            } else if (cue->pan == 1) {
+                left = 0.1f;
+                right = 0.707f;
+            } else {
+                left = 0.707f;
+                right = 0.707f;
+            }
+            DAT_0044e128 = FUN_002bfc24(1, sound, volume, flags, left, right);
+            if (DAT_0044e128 != (u32)-1) {
+                return 0;
+            }
+        }
     }
-    else {
-      pcVar2 = (char *)(&DAT_004c5634 + DAT_0044e128 * 0x78);
-    }
-    if (*pcVar2 != '\x02') {
-      return 0;
-    }
-  }
-  else if (((param_1 < 0x10) && (DAT_004c5814 != 0)) &&
-          (temp_v0 = DAT_004c5814 + param_1 * 0xc, temp_v0 != 0)) {
-    temp_v3 = DAT_004c5818 | 4;
-    temp_v1 = FUN_00100bd4(temp_v0);
-    temp_v2 = 1;
-    FUN_002bfc24(1,temp_v1,*(unsigned short *)(temp_v0 + 10) & 0xff,temp_v3);
-    DAT_0044e128 = temp_v2;
-    if (temp_v2 != 0xffffffff) {
-      return 0;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

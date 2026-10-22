@@ -1,51 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023bb00` (_code @ 0x23bb00, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Address arithmetic and command-header constants use different registers and scheduling. */
+#include "gfx/TextureCommands.h"
 
 extern "C" {
+extern u32 DAT_0044e670;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
-
-extern int DAT_0044e670; /* 0x44e670 */
-
-
-unsigned int * FUN_0023bb00(unsigned int param_1,unsigned int *param_2,int *param_3)
-
+/* Builds the texture setup command packet and returns the next free command word. */
+u32 *FUN_0023bb00(u32 unused, u32 *commands, const TextureCommandSource *texture)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = DAT_0044e670;
-  if ((char)param_3[2] == '\0') {
-    temp_v2 = 0x80000000;
-  }
-  else {
-    temp_v2 = 0;
-  }
-  temp_v1 = *param_3;
-  *param_2 = 1;
-  param_2[1] = 0xf025f;
-  param_2[2] = temp_v2 | (temp_v1 + temp_v0 * -8);
-  param_2[3] = 0xf0227;
-  param_2[4] = param_3[1];
-  param_2[5] = 0xf0228;
-  param_2[6] = 0;
-  param_2[7] = 0x10245;
-  param_2[8] = 1;
-  param_2[9] = 0xf022f;
-  param_2[10] = 1;
-  param_2[0xb] = 0x10245;
-  param_2[0xc] = 1;
-  param_2[0xd] = 0xf0231;
-  param_2[0xe] = 0;
-  param_2[0xf] = 0x8025e;
-  param_2[0x10] = 0;
-  param_2[0x11] = 0x8025e;
-  return param_2 + 0x12;
+    u32 flags = texture->enabled ? 0 : 0x80000000;
+    u32 address = texture->address - DAT_0044e670 * 8;
+    *commands++ = 1;
+    *commands++ = 0xF025F;
+    *commands++ = flags | address;
+    *commands++ = 0xF0227;
+    *commands++ = texture->configuration;
+    *commands++ = 0xF0228;
+    *commands++ = 0;
+    *commands++ = 0x10245;
+    *commands++ = 1;
+    *commands++ = 0xF022F;
+    *commands++ = 1;
+    *commands++ = 0x10245;
+    *commands++ = 1;
+    *commands++ = 0xF0231;
+    *commands++ = 0;
+    *commands++ = 0x8025E;
+    *commands++ = 0;
+    *commands++ = 0x8025E;
+    return commands;
 }
-
-} /* extern "C" */
+}

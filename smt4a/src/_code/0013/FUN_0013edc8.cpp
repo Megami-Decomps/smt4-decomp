@@ -1,66 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013edc8` (_code @ 0x13edc8, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail sends D and I names back through a second `kind == 'F'` test before the table search; armcc threads them straight to `flags |= 4` here. */
+#include "common.h"
+
+/* The 28 effect names (7 characters and a terminator each) played without flag 4. */
+struct EffectNameTable {
+    char names[28][8];
+};
 
 extern "C" {
+extern const EffectNameTable DAT_00530b5c; /* "F003002", ... */
+u32 FUN_00152f44(void);
+u32 FUN_0014af98(void);
+s32 rt_memcmp(const void *a, const void *b, u32 size);
+void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_001628c0(const char *name, u32 handle, s32 a, s32 b, f32 x, f32 y);
 
-int FUN_001628c0(...);
-int rt_memcpy_w(...);
-
-extern unsigned int FUN_0014af98(void);
-extern unsigned long long FUN_00152f44(void);
-/* Supplied declaration required: FUN_001628c0. */
-extern int rt_memcmp(char *, unsigned char *, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_0013edc8(char *param_1)
-
+static __inline bool effectNameIsListed(const char *name, const EffectNameTable *table)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned long long temp_v7;
-  unsigned char temp_v8 [228];
-  
-  rt_memcpy_w(temp_v8,"F003002",0xe0);
-  temp_v7 = FUN_00152f44();
-  temp_v3 = (unsigned int)((unsigned long long)temp_v7 >> 0x20);
-  temp_v5 = (unsigned int)temp_v7;
-  temp_v0 = (unsigned int)*param_1;
-  if (temp_v0 != 0x44 && temp_v0 != 0x49) {
-    temp_v6 = temp_v0 >= 0x46;
-    if (temp_v0 != 0x46) {
-      temp_v3 = temp_v0 - 0x30;
-      temp_v6 = temp_v3 >= 9;
+    s32 i;
+
+    for (i = 0; i < 28; i++) {
+        if (rt_memcmp(name, table->names[i], 7) == 0) {
+            return true;
+        }
     }
-    if (temp_v6 && (temp_v0 != 0x46 && temp_v3 != 9)) {
-      temp_v2 = FUN_0014af98();
-      FUN_001628c0(param_1,temp_v2,temp_v5,1);
-      return 1;
+    return false;
+}
+
+static __inline bool effectNameHasPrefix(s8 kind)
+{
+    return kind == 'D' || kind == 'I' || kind == 'F' || (u32)(kind - '0') <= 9;
+}
+
+/* Plays the effect `name`; names starting with D, I, F or a digit get flag 4 unless they are an
+ * F name from the table. */
+u32 FUN_0013edc8(const char *name)
+{
+    EffectNameTable table;
+    u32 flags;
+    s8 kind;
+
+    rt_memcpy_w(&table, &DAT_00530b5c, sizeof(table));
+    flags = FUN_00152f44();
+    kind = name[0];
+
+    if (effectNameHasPrefix(kind)) {
+        if (kind != 'F' || !effectNameIsListed(name, &table)) {
+            flags |= 4;
+        }
     }
-  }
-  if (temp_v0 == 0x46) {
-    temp_v4 = 0;
-    do {
-      temp_v1 = rt_memcmp(param_1,temp_v8 + temp_v4 * 8,7);
-      if (temp_v1 == 0) {
-        temp_v2 = FUN_0014af98();
-        FUN_001628c0(param_1,temp_v2,temp_v5,1);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x1c);
-  }
-  temp_v5 = temp_v5 | 4;
-  temp_v2 = FUN_0014af98();
-  FUN_001628c0(param_1,temp_v2,temp_v5,1);
-  return 1;
+    FUN_001628c0(name, FUN_0014af98(), flags, 1, 0.707f, 0.707f);
+    return 1;
 }
 
 } /* extern "C" */

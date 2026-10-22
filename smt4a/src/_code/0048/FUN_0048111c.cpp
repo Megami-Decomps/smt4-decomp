@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_001774d8(int);
+extern int itemGetStackLimit(int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -44,7 +44,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 0x168) = *(short *)(temp_v0 + 0x168) + *(short *)(param_2 + temp_v3 * 2 + 0x168);
-    temp_v1 = FUN_001774d8(temp_v3 + 0x3d);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0x3d);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x168)) {
       *(short *)(temp_v0 + 0x168) = (short)temp_v1;
@@ -54,7 +54,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 600) = *(short *)(temp_v0 + 600) + *(short *)(param_2 + temp_v3 * 2 + 600);
-    temp_v1 = FUN_001774d8(temp_v3 + 0xb5);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0xb5);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 600)) {
       *(short *)(temp_v0 + 600) = (short)temp_v1;
@@ -64,7 +64,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 0x348) = *(short *)(temp_v0 + 0x348) + *(short *)(param_2 + temp_v3 * 2 + 0x348);
-    temp_v1 = FUN_001774d8(temp_v3 + 0x12d);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0x12d);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x348)) {
       *(short *)(temp_v0 + 0x348) = (short)temp_v1;
@@ -74,7 +74,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 0x438) = *(short *)(temp_v0 + 0x438) + *(short *)(param_2 + temp_v3 * 2 + 0x438);
-    temp_v1 = FUN_001774d8(temp_v3 + 0x1a5);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0x1a5);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x438)) {
       *(short *)(temp_v0 + 0x438) = (short)temp_v1;
@@ -84,7 +84,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 0x528) = *(short *)(temp_v0 + 0x528) + *(short *)(param_2 + temp_v3 * 2 + 0x528);
-    temp_v1 = FUN_001774d8(temp_v3 + 0x21d);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0x21d);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x528)) {
       *(short *)(temp_v0 + 0x528) = (short)temp_v1;
@@ -94,7 +94,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 0x618) = *(short *)(temp_v0 + 0x618) + *(short *)(param_2 + temp_v3 * 2 + 0x618);
-    temp_v1 = FUN_001774d8(temp_v3 + 0x295);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0x295);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x618)) {
       *(short *)(temp_v0 + 0x618) = (short)temp_v1;
@@ -104,7 +104,7 @@ void FUN_0048111c(int param_1,int param_2)
   do {
     temp_v0 = param_1 + temp_v3 * 2;
     *(short *)(temp_v0 + 0x708) = *(short *)(temp_v0 + 0x708) + *(short *)(param_2 + temp_v3 * 2 + 0x708);
-    temp_v1 = FUN_001774d8(temp_v3 + 0x30d);
+    temp_v1 = itemGetStackLimit(temp_v3 + 0x30d);
     temp_v3 = temp_v3 + 1;
     if (temp_v1 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x708)) {
       *(short *)(temp_v0 + 0x708) = (short)temp_v1;

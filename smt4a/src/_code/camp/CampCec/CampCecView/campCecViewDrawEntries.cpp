@@ -35,7 +35,7 @@ extern RenderCtxA *g_renderCtx;
 void FUN_00157558(RenderCtxA *);
 s32 FUN_001692ac(u32, u32);
 u32 gameDataBlocksGetWord27E90();
-void FUN_0036ca3c(u32 *, s32, s32, u32, u32);
+void uiDrawNumberFrame(u32 *, s32, s32, u32, u32);
 const CecViewMarkEntry *gameDataGetMarkEntry(s32);
 const CecViewPosition *FUN_001834a4(u32, s32);
 void saveSlotDrawSummary(u32, const CecViewMarkEntry *, CecViewRow *, s32, s32, u32);
@@ -52,7 +52,7 @@ u32 campCecViewDrawEntries()
     FUN_00157558(g_renderCtx);
     RenderCtxA *render = g_renderCtx;
     renderStackPush(&render->stackA, FUN_001692ac(1, 0));
-    FUN_0036ca3c(draw->header, 0, 0, gameDataBlocksGetWord27E90(), 0);
+    uiDrawNumberFrame(draw->header, 0, 0, gameDataBlocksGetWord27E90(), 0);
     for (s32 i = 0; i < 3; ++i) {
         const CecViewMarkEntry *entry = gameDataGetMarkEntry(draw->top + i);
         bool empty = entry->count == 0;

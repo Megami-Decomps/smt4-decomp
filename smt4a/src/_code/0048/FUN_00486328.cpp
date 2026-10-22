@@ -1,51 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00486328` (_code @ 0x486328, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves fp/ip too (stack args at sp+48), keeps owner + slot*16 as the marker base and a zero in fp */
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0048b140(int, unsigned int, unsigned char);
-extern int FUN_00491abc(int, unsigned int, unsigned int);
+typedef struct {
+    u8 unk0[4];
+    u8 kind;  /* 0x4 */
+} MarkerTarget;
 
+typedef struct {
+    u8 unk0[3];
+    u8 icon;  /* 0x3 */
+} MarkerStyle;
 
-void FUN_00486328(int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5,
-                 int param_6)
+typedef struct {
+    u16 id;       /* 0x0 */
+    u8 sub;       /* 0x2 */
+    u8 unk3;      /* 0x3 */
+    u16 kind;     /* 0x4 */
+    u8 icon;      /* 0x6 */
+    u8 flagged;   /* 0x7 */
+    s16 x;        /* 0x8 */
+    s16 z;        /* 0xa */
+    u8 unkC[4];
+} MapMarker; /* size 0x10 */
 
+typedef struct {
+    u8 unk0[0x166];
+    MapMarker markers[1]; /* 0x166 */
+} MapMarkerOwner;
+
+MarkerTarget *FUN_00491abc(MapMarkerOwner *owner, u32 id, u32 sub, f32 x, f32 y, f32 z);
+MarkerStyle *FUN_0048b140(MapMarkerOwner *owner, u32 id, u8 kind);
+
+/* Fills marker `slot` from target `id`/`sub` at (x, y, z), or clears it when `enable` is 0. */
+void FUN_00486328(MapMarkerOwner *owner, s32 slot, s32 enable, u32 id, f32 x, f32 y, f32 z, u32 sub, s32 flagged)
 {
-/* irregular: irregular input(s): in_s0, in_s2 */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float in_s0;
-  float in_s2;
-  
-  temp_v2 = param_1 + param_2 * 0x10;
-  if (param_3 == 0) {
-    *(unsigned short *)(temp_v2 + 0x166) = 0;
-    *(unsigned char *)(temp_v2 + 0x168) = 0;
-    *(unsigned short *)(temp_v2 + 0x16a) = 0;
-    *(unsigned char *)(temp_v2 + 0x16c) = 0;
-    *(unsigned char *)(temp_v2 + 0x16d) = 0;
-    *(unsigned short *)(temp_v2 + 0x16e) = 0;
-    *(unsigned short *)(temp_v2 + 0x170) = 0;
-    *(unsigned char *)(temp_v2 + 0x169) = 0;
-    return;
-  }
-  temp_v0 = FUN_00491abc(param_1,param_4,param_5);
-  temp_v1 = FUN_0048b140(param_1,param_4,*(unsigned char *)(temp_v0 + 4));
-  *(short *)(temp_v2 + 0x166) = (short)param_4;
-  *(char *)(temp_v2 + 0x168) = (char)param_5;
-  *(unsigned short *)(temp_v2 + 0x16a) = (unsigned short)*(unsigned char *)(temp_v0 + 4);
-  *(unsigned char *)(temp_v2 + 0x16c) = *(unsigned char *)(temp_v1 + 3);
-  if (param_6 != 0) {
-    *(unsigned char *)(temp_v2 + 0x16d) = 1;
-  }
-  else {
-    *(unsigned char *)(temp_v2 + 0x16d) = 0;
-  }
-  *(short *)(temp_v2 + 0x16e) = (short)(int)in_s0;
-  *(short *)(temp_v2 + 0x170) = (short)(int)in_s2;
-  return;
+    MapMarker *marker = &owner->markers[slot];
+    MarkerTarget *target;
+    MarkerStyle *style;
+
+    if (enable == 0) {
+        marker->id = 0;
+        marker->sub = 0;
+        marker->kind = 0;
+        marker->icon = 0;
+        marker->flagged = 0;
+        marker->x = 0;
+        marker->z = 0;
+        marker->unk3 = 0;
+        return;
+    }
+    target = FUN_00491abc(owner, id, sub, x, y, z);
+    style = FUN_0048b140(owner, id, target->kind);
+    marker->id = id;
+    marker->sub = sub;
+    marker->kind = target->kind;
+    marker->icon = style->icon;
+    if (flagged != 0) {
+        marker->flagged = 1;
+    } else {
+        marker->flagged = 0;
+    }
+    marker->x = (s16)x;
+    marker->z = (s16)z;
 }
 
 } /* extern "C" */

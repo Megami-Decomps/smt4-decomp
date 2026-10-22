@@ -27,7 +27,7 @@ typedef struct Obj296fec {
 
 void gameDataBlocksAddFlags(int a);
 void gameDataFlagsSetBits(int a);
-void FUN_00297050(int a);
+void messageMainSetEnabled(int a);
 
 /* Resets the object: drops its child, clears the counters and re-initialises the two subsystems. */
 void FUN_00296fec(Obj296fec *obj)
@@ -43,7 +43,7 @@ void FUN_00296fec(Obj296fec *obj)
     obj->unk238 = 50;
     gameDataBlocksAddFlags(4);
     gameDataFlagsSetBits(4);
-    FUN_00297050(0);
+    messageMainSetEnabled(0);
 }
 
 } /* extern "C" */

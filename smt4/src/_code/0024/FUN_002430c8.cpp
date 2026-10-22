@@ -1,58 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002430c8` (_code @ 0x2430c8, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores the zero owner again before creating the request and reloads the request after storing its state; this build drops the store and keeps the pointer. */
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
 
-int nodeListOwnerFree(int);
-int FUN_00247240(unsigned int *);
-int FUN_002f82ac(unsigned int *);
-int FUN_0030ed8c(int, unsigned int);
-int FUN_003241c4(unsigned int *, int);
+typedef struct EffectTextResult {
+    /* 0x000 */ u8 unk000[0xc8];
+    /* 0x0C8 */ u8 body[0x34];
+    /* 0x0FC */ u32 label;
+    /* 0x100 */ s32 state;
+    /* 0x104 */ u32 extra;
+} EffectTextResult;
 
-extern int DAT_0044eabc; /* 0x44eabc */
-extern unsigned int *DAT_0044eac0; /* 0x44eac0 */
+void nodeListOwnerFree(void *owner);
+void FUN_00247240(EffectTextRequest *request);
+void FUN_002f82ac(EffectTextRequest *request);
+EffectTextRequest *FUN_0030ed8c(void *owner, u32 size);
+u32 FUN_00318cac(EffectTextRequest *request);
+u32 formattedTextCopyLabel(EffectTextRequest *request, EffectTextResult *result);
+void FUN_003241c4(EffectTextRequest *request, void *body);
 
-/* Supplied declaration required: nodeListOwnerFree. */
-/* Supplied declaration required: FUN_00247240. */
-/* Supplied declaration required: FUN_002f82ac. */
-/* Supplied declaration required: FUN_0030ed8c. */
-extern unsigned int FUN_00318cac(unsigned int *);
-extern unsigned int formattedTextCopyLabel(unsigned int *, int);
-/* Supplied declaration required: FUN_003241c4. */
-
-
-void FUN_002430c8(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Polls the effect editor's text request into `result`, starting one when none is pending and
+ * releasing it once it reports state 1. */
+void FUN_002430c8(u32 unused, u32 size, EffectTextResult *result)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  
-  if (DAT_0044eabc != 0) {
-    FUN_002f82ac(DAT_0044eac0);
-    *(unsigned int *)(param_3 + 0x100) = *(unsigned int *)((int)DAT_0044eac0 + 8);
-    temp_v0 = formattedTextCopyLabel(DAT_0044eac0,param_3);
-    *(unsigned int *)(param_3 + 0xfc) = temp_v0;
-    temp_v0 = FUN_00318cac(DAT_0044eac0);
-    *(unsigned int *)(param_3 + 0x104) = temp_v0;
-    FUN_003241c4(DAT_0044eac0,param_3 + 200);
-    if (*(int *)(param_3 + 0x100) == 1) {
-      FUN_00247240(DAT_0044eac0);
-      DAT_0044eac0 = (unsigned int *)0x0;
-      nodeListOwnerFree(DAT_0044eabc);
-      DAT_0044eabc = 0;
+    if (g_effectEditor.textRequest.owner != NULL) {
+        FUN_002f82ac(g_effectEditor.textRequest.request);
+        result->state = g_effectEditor.textRequest.request->state;
+        result->label = formattedTextCopyLabel(g_effectEditor.textRequest.request, result);
+        result->extra = FUN_00318cac(g_effectEditor.textRequest.request);
+        FUN_003241c4(g_effectEditor.textRequest.request, result->body);
+        if (result->state == 1) {
+            FUN_00247240(g_effectEditor.textRequest.request);
+            g_effectEditor.textRequest.request = NULL;
+            nodeListOwnerFree(g_effectEditor.textRequest.owner);
+            g_effectEditor.textRequest.owner = NULL;
+        }
+        return;
     }
-    return;
-  }
-  puVar2 = (unsigned int *)0x0;
-  DAT_0044eabc = 0;
-  FUN_0030ed8c(0,param_2);
-  DAT_0044eac0 = puVar2;
-  *puVar2 = 0xba;
-  puVar2[1] = 0x1c;
-  *(unsigned int *)(param_3 + 0x100) = 0;
-  return;
+    g_effectEditor.textRequest.owner = NULL;
+    EffectTextRequest *request = FUN_0030ed8c(NULL, size);
+    g_effectEditor.textRequest.request = request;
+    request->type = 0xba;
+    request->size = 0x1c;
+    result->state = 0;
 }
 
 } /* extern "C" */

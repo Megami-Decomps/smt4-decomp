@@ -14,7 +14,7 @@ int FUN_002c198c(...);
 int FUN_002c39a4(int);
 int FUN_002d670c(...);
 int FUN_002e15f8(int, int, int);
-int FUN_002ec210(int, int, int, unsigned int, int);
+int uiDrawPanelWithValue(int, int, int, unsigned int, int);
 int FUN_002ec2e0(...);
 int FUN_00309ec8(...);
 
@@ -42,7 +42,7 @@ extern unsigned int FUN_0025981c(void);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002d670c. */
 /* Supplied declaration required: FUN_002e15f8. */
-/* Supplied declaration required: FUN_002ec210. */
+/* Supplied declaration required: uiDrawPanelWithValue. */
 /* Supplied declaration required: FUN_002ec2e0. */
 /* Supplied declaration required: FUN_00309ec8. */
 
@@ -68,7 +68,7 @@ unsigned int FUN_00210e38(void)
   temp_v1 = FUN_002bf4f8(0x39,0x97);
   if (*(char *)(temp_v0 + 0x128) != '\0') {
     temp_v2 = FUN_0025981c();
-    FUN_002ec210(temp_v0 + 0x3c,0,0,temp_v2,1);
+    uiDrawPanelWithValue(temp_v0 + 0x3c,0,0,temp_v2,1);
     uiDrawCenteredResourceText(*(unsigned int *)(temp_v0 + 0x10),temp_v0 + 0x50,0);
     FUN_001eb874(*(unsigned int *)(temp_v0 + 0xc),*(unsigned int *)(temp_v0 + 8),temp_v0 + 100,
                  (int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0);

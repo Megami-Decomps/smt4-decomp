@@ -1,53 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003423e8` (_code @ 0x3423e8, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #152] differs from recovered ldr r1, [pc, #124]. */
+#include "common.h"
+
+// Private views of the button-help records used by this function.
+struct ButtonHelpEntryView {
+    u8 unk00[0x0C];             // 0x00
+    u32 unk0C;                  // 0x0C
+    u32 unk10;                  // 0x10
+    u32 unk14;                  // 0x14
+    u8 unk18[0x22];             // 0x18
+    u16 unk3A;                  // 0x3A
+    u8 unk3C;                   // 0x3C
+    u8 unk3D[0x4F];             // 0x3D
+};
+
+struct ButtonHelpStateView {
+    u8 unk00[0x37C];                // 0x000
+    ButtonHelpEntryView entries[4]; // 0x37C
+    u8 unk5AC[0x38];                // 0x5AC
+    u8 unk5E4;                      // 0x5E4
+};
+
+struct ButtonHelpGlobalView {
+    u8 unk00[4];                    // 0x00
+    ButtonHelpStateView* state;     // 0x04
+};
 
 extern "C" {
+extern ButtonHelpGlobalView g_buttonHelp;
+void FUN_00387240(ButtonHelpEntryView* entry, s32 value, s32 flags);
 
-int FUN_00387240(int, int, int);
-
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-
-/* Supplied declaration required: FUN_00387240. */
-
-
-void FUN_003423e8(int param_1)
-
+// Store the help mode, disabling entries or resetting all four for modes 0 and 2.
+void FUN_003423e8(s32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int unaff_r4;
-  int temp_v1;
-  int unaff_r5;
-  int unaff_r7;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  if (param_1 == 0 || param_1 == 2) {
-    unaff_r7 = 0;
-    unaff_r5 = unaff_r7;
-  }
-  else {
-    unaff_r4 = 0;
-  }
-  *(char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5e4) = (char)param_1;
-  if (param_1 == 0 || param_1 == 2) {
-    do {
-      temp_v1 = temp_v0 + unaff_r5 * 0x8c;
-      *(unsigned short *)(temp_v1 + 0x3b6) = 2;
-      FUN_00387240(temp_v1 + 0x37c,10,0);
-      *(unsigned char *)(temp_v1 + 0x3b8) = 1;
-      *(int *)(temp_v1 + 0x388) = unaff_r7;
-      unaff_r5 = unaff_r5 + 1;
-      *(int *)(temp_v1 + 0x38c) = unaff_r7;
-      *(int *)(temp_v1 + 0x390) = unaff_r7;
-    } while (unaff_r5 < 4);
-    return;
-  }
-  do {
-    *(unsigned char *)(temp_v0 + unaff_r4 * 0x8c + 0x3b8) = 0;
-    unaff_r4 = unaff_r4 + 1;
-  } while (unaff_r4 < 4);
-  return;
-}
+    ButtonHelpStateView* state = g_buttonHelp.state;
+    state->unk5E4 = static_cast<u8>(mode);
 
-} /* extern "C" */
+    if (mode != 0 && mode != 2) {
+        for (s32 index = 0; index < 4; ++index) {
+            state->entries[index].unk3C = 0;
+        }
+        return;
+    }
+
+    for (s32 index = 0; index < 4; ++index) {
+        state->entries[index].unk3A = 2;
+        FUN_00387240(&state->entries[index], 10, 0);
+        state->entries[index].unk3C = 1;
+        state->entries[index].unk0C = 0;
+        state->entries[index].unk10 = 0;
+        state->entries[index].unk14 = 0;
+    }
+}
+}

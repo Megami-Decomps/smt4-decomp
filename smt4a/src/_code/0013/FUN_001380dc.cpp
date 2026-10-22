@@ -1,10 +1,9 @@
-#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-struct Panel;
-extern Panel *g_renderCtx;
-void FUN_00157558(Panel *panel);
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *panel);
 s32 FUN_001380dc(void)
 {
     FUN_00157558(g_renderCtx);

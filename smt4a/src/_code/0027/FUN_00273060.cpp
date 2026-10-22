@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_002d2834(void);
 int FUN_003281c4(int, unsigned int, unsigned int, int);
 int naviMainQueueRequest(int);
@@ -57,7 +57,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002d2834. */
 /* Supplied declaration required: FUN_003281c4. */
 /* Supplied declaration required: naviMainQueueRequest. */
@@ -195,7 +195,7 @@ void FUN_00273060(void)
           temp_v14 = (float)temp_v15 * temp_v12 * temp_v13 +
                    (float)((unsigned long long)temp_v15 >> 0x20) * temp_v14 * temp_v13 + temp_v9 * temp_v11 * temp_v13;
           temp_v10 = (unsigned int)temp_v18;
-          FUN_002b5cd4();
+          mathAngleDeltaDegrees();
           *(unsigned int *)(temp_v6 + 0xb4) = temp_v10;
           if ((temp_v10 < 0xc2200000) && ((int)temp_v10 < 0x42200000)) {
             *(unsigned char *)(temp_v6 + 0xb2) = 1;

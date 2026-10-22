@@ -72,7 +72,7 @@ extern int dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: dataTable29Sub0GetEntryWithAoc. */
 /* Supplied declaration required: FUN_002533f4. */
 extern int FUN_00256550(unsigned int);
-extern int FUN_0025c05c(void);
+extern int spriteTemplateGetPreferredDevilId(void);
 extern int *dataTable2fSub0GetRecord(int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
@@ -253,7 +253,7 @@ LAB_0021c1e4:
           temp_v1 = temp_v15;
           FUN_002533f4(temp_v15,temp_v0,0);
           *(int *)(temp_v2 + 0xa4) = temp_v1;
-          temp_v1 = FUN_0025c05c();
+          temp_v1 = spriteTemplateGetPreferredDevilId();
           *(int *)(temp_v2 + 0xa8) = temp_v1;
           dataTable00FindById();
           *(unsigned int *)(temp_v2 + 0x1a4) = (unsigned int)*(unsigned char *)(temp_v1 + 2);

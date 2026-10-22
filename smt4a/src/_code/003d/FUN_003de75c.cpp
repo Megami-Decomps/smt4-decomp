@@ -1,62 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de75c` (_code @ 0x3de75c, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register swap only: retail keeps id in r4 and the record in r5 (reusing r4 for record+0x100 later); ours swaps them. */
+#include "shard/W5_W5Match7_DataRecord.h"
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
 
-int gameFlagIsSet(...);
-int FUN_001ad9b4(void);
+#define ITEM_GROUP_KEY 9
+#define ITEM_FIRST_LATE_ID 0x15E
+#define GAME_MODE_KEY_ITEMS_LOCKED 24
+#define GAME_FLAG_ITEMS_LOCKED 0x560
 
-typedef struct fn_003de75c_arg0 fn_003de75c_arg0;
-struct fn_003de75c_arg0 {
-    unsigned char pad_0x0[0x6];
-    byte field_0x6; /* +0x6 */
-    unsigned char pad_0x7[0x129];
-    ushort field_0x130; /* +0x130 */
-    ushort field_0x132; /* +0x132 */
-};
+s32 FUN_003df390(void);
+s32 gameFlagEntryGetBit(u32 id, u32 bit);
+s32 gameFlagIsSet(u32 flag);
 
-extern int g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: gameFlagIsSet. */
-extern int gameFlagEntryGetBit(fn_003de75c_arg0 *, unsigned int);
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_003df390(void);
-
-
-unsigned int FUN_003de75c(fn_003de75c_arg0 *param_1)
-
+/* Returns whether item `id` is currently usable. */
+u32 FUN_003de75c(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  fn_003de75c_arg0 *pfVar3;
-  unsigned int temp_v2;
-  
-  temp_v1 = FUN_003df390();
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    pfVar3 = param_1;
-    FUN_001ad9b4();
-    temp_v1 = gameFlagEntryGetBit(param_1,3);
-    temp_v0 = 0;
-    if (temp_v1 != 0) {
-      temp_v0 = pfVar3->field_0x6;
+    ItemDataRecord *record;
+    ItemDataRecord *late;
+
+    if (!FUN_003df390()) {
+        return 0;
     }
-    if (((temp_v1 != 0 && temp_v0 != 9) ||
-        (((((fn_003de75c_arg0 *)0x15d < param_1 &&
-           (FUN_001ad9b4(), param_1 != (fn_003de75c_arg0 *)0x0)) && (param_1->field_0x6 == 9)) &&
-         (g_gameState == 0x18)))) ||
-       ((((pfVar3->field_0x130 != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) &&
-         ((pfVar3->field_0x132 == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) ||
-        (temp_v1 = gameFlagIsSet(0x560), temp_v1 != 0)))) {
-      temp_v2 = 0;
+    record = FUN_001ad9b4(id);
+    if (gameFlagEntryGetBit(id, 3) && record->ordering.sortGroup != ITEM_GROUP_KEY) {
+        return 0;
     }
-    else {
-      temp_v2 = 1;
+    if (id >= ITEM_FIRST_LATE_ID && (late = FUN_001ad9b4(id)) != NULL
+        && late->ordering.sortGroup == ITEM_GROUP_KEY && g_gameState.mode == GAME_MODE_KEY_ITEMS_LOCKED) {
+        return 0;
     }
-  }
-  return temp_v2;
+    if (record->lockFlag != 0 && gameFlagIsSet(record->lockFlag)
+        && (record->unlockFlag == 0 || !gameFlagIsSet(record->unlockFlag))) {
+        return 0;
+    }
+    if (gameFlagIsSet(GAME_FLAG_ITEMS_LOCKED)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

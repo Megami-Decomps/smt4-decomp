@@ -1,46 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f0250` (_code @ 0x2f0250, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "shard/BtlScriptTargets.h"
 
 extern "C" {
 
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
+extern u32 g_btlScriptUnit;
 
-extern int btlUnitGet(unsigned int);
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
+u32 scrGetArg(u32 index);
+BtlScriptActor *btlUnitGet(u32 id);
+BtlMainState *btlGetMainState(void);
 
-
-unsigned int FUN_002f0250(void)
-
+/* Script command: queues action kind 12 with the argument and targets the first usable enemy entry. */
+s32 FUN_002f0250(void)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  char temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = btlUnitGet(g_btlScriptUnit);
-  *(unsigned short *)(*(int *)(temp_v1 + 0x28) + 0x14c) = 0xc;
-  temp_v1 = btlGetMainState();
-  *(int *)(temp_v1 + 0x1fd4) = (int)(temp_v0 | 0x10000) >> 0x1f;
-  temp_v3 = '\0';
-  temp_v2 = 4;
-  *(unsigned int *)(temp_v1 + 0x1fd0) = temp_v0 | 0x10000;
-  do {
-    temp_v1 = btlGetMainState();
-    temp_v0 = *(unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v2 * 0x288);
-    if ((temp_v0 & 1) == 0 && (temp_v0 & 0x40) == 0) {
-      temp_v1 = btlUnitGet(g_btlScriptUnit);
-      temp_v3 = temp_v3 + '\x01';
-      *(char *)(temp_v1 + temp_v2 + 0x38) = (char)temp_v2;
-      if ('\0' < temp_v3) {
-        return 1;
-      }
+    s32 action = scrGetArg(0);
+    s32 i;
+
+    BtlScriptActorData *data = btlUnitGet(g_btlScriptUnit)->data;
+    data->actionKind = 12;
+    btlGetMainState()->pendingAction = (s32)(action | 0x10000);
+
+    s8 maxTargets = 1;
+    s8 targetCount = 0;
+    for (i = 4; i < 0x36; i++) {
+        u32 flags = btlGetMainState()->entries[i].flags;
+        if (flags & BTL_ENTRY_FLAG_ACTIVE) {
+            continue;
+        }
+        if (flags & BTL_ENTRY_FLAG_BLOCKED) {
+            continue;
+        }
+        btlUnitGet(g_btlScriptUnit)->targets[i] = i;
+        targetCount++;
+        if (targetCount >= maxTargets) {
+            break;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x36);
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,54 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010a23c` (_code @ 0x10a23c, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r5, [pc, #148] differs from recovered ldr r5, [pc, #112]. */
+#include "common.h"
 
-extern "C" {
+namespace {
+struct PadReaderView {
+    u8 unk00[0x18]; // 0x00
+    u8 unk18;       // 0x18
+};
 
-int nn_hid_CTR_AnalogStickClamper_SetClampParam(unsigned char *, int, int);
-int memClear(unsigned char *, int);
-int nn_hid_CTR_PadReader_PadReader_sub_object(unsigned char *, unsigned int);
+struct PadGlobalsView {
+    PadReaderView* reader; // 0x00
+    u32 unk04;             // 0x04
+    u32 unk08;             // 0x08
+    u8 unk0C[0x0C];        // 0x0C
+    u32 unk18;             // 0x18: static initialization guard
+};
 
-extern unsigned char *DAT_004650a0; /* 0x4650a0 */
-extern unsigned int DAT_004650a8; /* 0x4650a8 */
-extern unsigned int DAT_004650b8; /* 0x4650b8 */
-extern unsigned char DAT_004e3be8; /* 0x4e3be8 */
-extern unsigned char DAT_004e3c00; /* 0x4e3c00 */
-extern unsigned int DAT_004e3c48; /* 0x4e3c48 */
-extern unsigned int DAT_004e3c4c; /* 0x4e3c4c */
-extern unsigned int DAT_004e3c50; /* 0x4e3c50 */
-extern unsigned short DAT_004e3c54; /* 0x4e3c54 */
-extern unsigned short DAT_004e3c56; /* 0x4e3c56 */
-extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
-
-extern unsigned int FUN_0011c6c0(void);
-/* Supplied declaration required: nn_hid_CTR_AnalogStickClamper_SetClampParam. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: nn_hid_CTR_PadReader_PadReader_sub_object. */
-
-
-void FUN_0010a23c(void)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (((DAT_004650b8 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_004650b8), temp_v0 != 0)) {
-    temp_v1 = FUN_0011c6c0();
-    nn_hid_CTR_PadReader_PadReader_sub_object(&DAT_004e3be8,temp_v1);
-  }
-  DAT_004650a0 = &DAT_004e3be8;
-  DAT_004e3c00 = 0;
-  nn_hid_CTR_AnalogStickClamper_SetClampParam(&DAT_004e3be8,0x28,0x91);
-  memClear(&DAT_004e3c58,0x7c);
-  DAT_004e3c48 = 0;
-  DAT_004e3c4c = 0;
-  DAT_004e3c50 = 0;
-  DAT_004e3c54 = 0;
-  DAT_004e3c56 = 0;
-  DAT_004650a8 = 0;
-  return;
+struct PadStateView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+    u32 unk08; // 0x08
+    u16 unk0C; // 0x0C
+    u16 unk0E; // 0x0E
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern PadGlobalsView DAT_004650a0;
+extern PadReaderView DAT_004e3be8;
+extern PadStateView DAT_004e3c48;
+extern u8 DAT_004e3c58[0x7C];
+
+// Data-address literals retained beside linker-removed registration calls.
+extern u8 entry[];
+extern u8 FUN_0011c830[];
+
+int __cxa_guard_acquire(u32* guard);
+u32 FUN_0011c6c0(void);
+void nn_hid_CTR_PadReader_PadReader_sub_object(PadReaderView* reader, u32 argument);
+void nn_hid_CTR_AnalogStickClamper_SetClampParam(PadReaderView* reader, int minimum, int maximum);
+void memClear(void* destination, u32 size);
+
+// Initialize the shared pad reader and reset its clamp parameters and input state.
+void FUN_0010a23c(void)
+{
+    if ((DAT_004650a0.unk18 & 1) == 0 &&
+        __cxa_guard_acquire(&DAT_004650a0.unk18) != 0) {
+        nn_hid_CTR_PadReader_PadReader_sub_object(
+            &DAT_004e3be8, FUN_0011c6c0());
+    }
+
+    DAT_004650a0.reader = &DAT_004e3be8;
+    DAT_004e3be8.unk18 = 0;
+    nn_hid_CTR_AnalogStickClamper_SetClampParam(
+        DAT_004650a0.reader, 0x28, 0x91);
+    memClear(DAT_004e3c58, 0x7C);
+    DAT_004e3c48.unk00 = 0;
+    DAT_004e3c48.unk04 = 0;
+    DAT_004e3c48.unk08 = 0;
+    DAT_004e3c48.unk0C = 0;
+    DAT_004e3c48.unk0E = 0;
+    DAT_004650a0.unk08 = 0;
+}
+}

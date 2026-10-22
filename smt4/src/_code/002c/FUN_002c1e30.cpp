@@ -1,60 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c1e30` (_code @ 0x2c1e30, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the perspective as two vstmia pairs and shuffles the call's float args through s4 from s1; ours stores all four at once. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b72dc(char *);
-int nn_math_ARMv6_MTX44PivotC_FAST(...);
-int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
-int nn_ulcd_CTR_StereoCamera_SetBaseFrustum(char *, char *);
+#define DEG_TO_RAD 0.017453292f
 
-typedef struct fn_002c1e30_arg1 fn_002c1e30_arg1;
-struct fn_002c1e30_arg1 {
-    unsigned char pad_0x0[0x8];
-    float field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x8];
-    float field_0x14; /* +0x14 */
-    float field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0xc];
-    float field_0x28; /* +0x28 */
-    float field_0x2c; /* +0x2c */
-};
+/* A perspective projection: vertical field of view in degrees, clip planes and aspect ratio. */
+typedef struct CameraPerspective {
+    f32 fovy;
+    f32 nearZ;
+    f32 farZ;
+    f32 aspect;
+} CameraPerspective;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+/* A stereo-capable camera: only the fields this unit touches are named. */
+typedef struct StereoCameraView {
+    /* 0x000 */ u8 stereoEnabled;
+    /* 0x001 */ u8 unk001[0x27];
+    /* 0x028 */ CameraPerspective perspective;
+    /* 0x038 */ u8 unk038[0x70];
+    /* 0x0A8 */ f32 projection[4][4];
+    /* 0x0E8 */ f32 baseProjection[4][4];
+    /* 0x128 */ u8 unk128[0x30];
+    /* 0x158 */ f32 projectionTransposed[4][4];
+    /* 0x198 */ u8 unk198[0x308];
+    /* 0x4A0 */ u8 stereoCamera[1];
+} StereoCameraView;
 
-/* Supplied declaration required: FUN_002b72dc. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
-/* Supplied declaration required: nn_ulcd_CTR_StereoCamera_SetBaseFrustum. */
+void FUN_002b72dc(f32 (*mtx)[4], f32 fovy, f32 aspect, f32 nearZ, f32 farZ);
+void nn_math_ARMv6_MTX44PivotC_FAST(f32 (*mtx)[4], u32 pivot);
+void nn_math_ARMv6_MTX44TransposeAsm(f32 (*dst)[4], f32 (*src)[4]);
+void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void *stereoCamera, f32 (*projection)[4]);
 
-
-void FUN_002c1e30(char *param_1,fn_002c1e30_arg1 *param_2)
-
+void FUN_002c1e30(StereoCameraView *view, u32 pivot, CameraPerspective perspective)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3; 8 native warning(s); review required */
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  
-  *(unsigned int *)(param_1 + 0x28) = in_s0;
-  *(unsigned int *)(param_1 + 0x2c) = in_s1;
-  *(unsigned int *)(param_1 + 0x30) = in_s2;
-  *(unsigned int *)(param_1 + 0x34) = in_s3;
-  FUN_002b72dc(param_1 + 0xa8);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0xa8,param_2);
-  nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x158,param_1 + 0xa8);
-  FUN_002b72dc(param_1 + 0xe8);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0xe8,0);
-  if (*param_1 != '\0') {
-    nn_ulcd_CTR_StereoCamera_SetBaseFrustum(param_1 + 0x4a0,param_1 + 0xe8);
-    return;
-  }
-  return;
+    view->perspective = perspective;
+    FUN_002b72dc(view->projection, perspective.fovy * DEG_TO_RAD, perspective.aspect,
+                 perspective.nearZ, perspective.farZ);
+    nn_math_ARMv6_MTX44PivotC_FAST(view->projection, pivot);
+    nn_math_ARMv6_MTX44TransposeAsm(view->projectionTransposed, view->projection);
+    FUN_002b72dc(view->baseProjection, view->perspective.fovy * DEG_TO_RAD, view->perspective.aspect,
+                 view->perspective.nearZ, view->perspective.farZ);
+    nn_math_ARMv6_MTX44PivotC_FAST(view->baseProjection, 0);
+    if (view->stereoEnabled) {
+        nn_ulcd_CTR_StereoCamera_SetBaseFrustum(view->stereoCamera, view->baseProjection);
+    }
 }
 
 } /* extern "C" */

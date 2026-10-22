@@ -1,41 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c1e50` (_code @ 0x3c1e50, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same byte-insert shape, but the zeroed local is merged differently (extra bic of the zero word, ldm/stm stores instead of four str) */
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-int dataTableGetCount(void);
+/* Table 9 record: byte data, so the id bytes sit unaligned at offset 5. */
+typedef struct Table09Record {
+    u8 unk00[5];
+    u8 id[4];    /* 0x05 */
+    u8 valueA;   /* 0x09 */
+    u8 valueB;   /* 0x0A */
+    u8 valueC;   /* 0x0B */
+    u8 valueD;   /* 0x0C */
+    u8 valueE;   /* 0x0D */
+} Table09Record;
 
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(unsigned int);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+typedef struct Table09Info {
+    u8 id[4];    /* 0x00 */
+    u8 valueA;   /* 0x04 */
+    u8 unk05;
+    u8 valueB;   /* 0x06 */
+    u8 unk07;
+    u8 valueC;   /* 0x08 */
+    u8 unk09;
+    u8 valueD;   /* 0x0A */
+    u8 valueE;   /* 0x0B */
+    u32 unk0C;   /* 0x0C */
+} Table09Info;
 
-
-void FUN_003c1e50(unsigned int *param_1)
-
+/* Copies the first record of data table 9 into info. */
+void FUN_003c1e50(Table09Info *info)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  
-  temp_v5 = dataTableGet(9,0);
-  dataTableGetCount();
-  temp_v6 = dataTableGetEntries(temp_v5);
-  temp_v0 = *(unsigned char *)(temp_v6 + 0xc);
-  temp_v1 = *(unsigned char *)(temp_v6 + 0xb);
-  temp_v2 = *(unsigned char *)(temp_v6 + 10);
-  temp_v3 = *(unsigned char *)(temp_v6 + 9);
-  temp_v4 = *(unsigned char *)(temp_v6 + 0xd);
-  *param_1 = *(unsigned int *)(temp_v6 + 5);
-  param_1[1] = ((unsigned int)temp_v2 << 0x10) | (unsigned int)temp_v3;
-  param_1[2] = (unsigned int)temp_v1 | ((unsigned int)temp_v0 << 0x10) | ((unsigned int)temp_v4 << 0x18);
-  param_1[3] = 0;
-  return;
+    void *resource = dataTableGet(9, 0);
+    Table09Record *record;
+    Table09Info result = {0};
+
+    dataTableGetCount(resource);
+    record = (Table09Record *)dataTableGetEntries(resource);
+    result.id[0] = record->id[0];
+    result.id[1] = record->id[1];
+    result.id[2] = record->id[2];
+    result.id[3] = record->id[3];
+    result.valueA = record->valueA;
+    result.valueB = record->valueB;
+    result.valueC = record->valueC;
+    result.valueD = record->valueD;
+    result.valueE = record->valueE;
+    *info = result;
 }
 
 } /* extern "C" */

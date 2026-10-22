@@ -1,6 +1,7 @@
-#include "shard/Block57f0c4.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
 
 s32 scrRunOpcodesStub(u32 handle);
 
@@ -9,7 +10,7 @@ u8 FUN_002a21e8(void)
 {
     s32 state;
 
-    state = scrRunOpcodesStub(g_buttonHelp.record->unk680);
+    state = scrRunOpcodesStub(g_buttonHelp.work->process);
     return state == 2;
 }
 

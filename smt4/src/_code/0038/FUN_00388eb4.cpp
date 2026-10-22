@@ -1,42 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00388eb4` (_code @ 0x388eb4, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The saved file ID and coordinate arguments occupy different registers, with an LDM pair instead of LDRD. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_002a6d1c(unsigned char [68], unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002a8ac4(int, unsigned char [68], unsigned int);
-
-/* stack frame of param_7: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-} param_7_stack;
-
-/* Supplied declaration required: FUN_002a6d1c. */
-extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a8ac4. */
-extern unsigned int asdTMTexTableCallFileB(unsigned int, unsigned int);
-
-
-void FUN_00388eb4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned char temp_v2 [68];
-  
-  temp_v0 = FUN_002a6d50(param_1,0x17,param_4);
-  puVar3 = (unsigned int *)0x0;
-  if (temp_v0 != 0) {
-    puVar3 = *(unsigned int **)(temp_v0 + 4);
-  }
-  temp_v1 = asdTMTexTableCallFileB(0x17,param_4);
-  FUN_002a6d1c(temp_v2,param_3,param_5,param_6,param_7);
-  FUN_002a8ac4(**(int **)(*(int *)*puVar3 + 4) + 0x14,temp_v2,temp_v1);
-  return;
+namespace {
+struct ResourceParameters {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u8 unk10[0x2C];
+};
+struct ResourceObject {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u8 parameters[1];
+};
+struct ResourceHandle { /* 0x00 */ ResourceObject *object; };
+struct ResourceEntry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ResourceHandle *handle;
+};
+struct ResourceTable { /* 0x00 */ ResourceEntry *entry; };
+struct ResourceFile { /* 0x00 */ ResourceTable *table; };
+struct FileEntry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ResourceFile *resource;
+};
 }
+extern "C" {
+FileEntry *packageFindFileRefByName(void *owner, u32 type, u32 fileId);
+u32 asdTMTexTableCallFileB(u32 type, u32 fileId);
+void FUN_002a6d1c(ResourceParameters *parameters, u32 value, u32 x, u32 y, u32 scalar);
+void FUN_002a8ac4(void *destination, ResourceParameters *parameters, u32 file);
 
-} /* extern "C" */
+/* Applies the requested file and parameter block to the selected text resource. */
+void FUN_00388eb4(void *owner, u32 unused, u32 value, u32 fileId, u32 x, u32 y, u32 scalar)
+{
+    FileEntry *entry = packageFindFileRefByName(owner, 0x17, fileId);
+    ResourceFile *resource = NULL;
+    if (entry != NULL) {
+        resource = entry->resource;
+    }
+    u32 file = asdTMTexTableCallFileB(0x17, fileId);
+    ResourceParameters parameters;
+    FUN_002a6d1c(&parameters, value, x, y, scalar);
+    FUN_002a8ac4(resource->table->entry->handle->object->parameters, &parameters, file);
+}
+}

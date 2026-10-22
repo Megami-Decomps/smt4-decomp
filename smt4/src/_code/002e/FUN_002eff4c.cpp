@@ -4,6 +4,6 @@ extern "C" {
 /* Reads the quest panel's signed status byte. */
 s32 FUN_002eff4c(void)
 {
-    return (s8)g_uiQuest->panel.unkF2[3];
+    return (s8)g_uiQuest->panel.unkF5;
 }
 }

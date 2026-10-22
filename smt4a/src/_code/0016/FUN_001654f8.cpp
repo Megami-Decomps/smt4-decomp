@@ -1,64 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001654f8` (_code @ 0x1654f8, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc peels the first loop pass (nine saved registers); retail keeps one plain do-while body (seven). */
+#include "common.h"
 
 extern "C" {
+extern char DAT_0063d008[];              /* default 0x100-byte output buffer */
+extern const char DAT_0053d2e8[][2];     /* two-byte code of each single-byte character */
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_3_stack;
-
-extern unsigned char DAT_0063d008; /* 0x63d008 */
-
-
-unsigned char * FUN_001654f8(int param_1,unsigned char *param_2,int param_3)
-
+/* Converts `text` to two-byte character codes in `out` (default buffer and 0x100 bytes when not given):
+ * double-byte characters are copied, a newline becomes F8 01, others go through the code table. */
+char *FUN_001654f8(const char *text, char *out, s32 size)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = 0;
-  temp_v4 = 0;
-  if (param_2 == (unsigned char *)0x0) {
-    param_2 = &DAT_0063d008;
-  }
-  if (param_3 == 0) {
-    param_3 = 0x100;
-  }
-  do {
-    temp_v0 = *(unsigned char *)(param_1 + temp_v4);
-    temp_v3 = (unsigned int)temp_v0;
-    temp_v5 = temp_v4 + 1;
-    if (temp_v3 == 0) {
-      param_2[temp_v1] = 0;
-      param_2[temp_v1 + 1] = 0;
-      return &DAT_0063d008;
+    s32 written = 0;
+    s32 read = 0;
+
+    if (out == NULL) {
+        out = DAT_0063d008;
     }
-    if ((temp_v0 & 0x80) != 0) {
-      param_2[temp_v1] = temp_v0;
-      temp_v2 = *(unsigned char *)(param_1 + temp_v5);
-      temp_v5 = temp_v4 + 2;
-      param_2[temp_v1 + 1] = temp_v2;
+    if (size == 0) {
+        size = 0x100;
     }
-    else if (temp_v3 != 10) {
-      param_2[temp_v1] = *(unsigned char *)(temp_v3 * 2 + 0x53d2e8);
-      temp_v2 = *(unsigned char *)(temp_v3 * 2 + 0x53d2e9);
-      param_2[temp_v1 + 1] = temp_v2;
-    }
-    else {
-      param_2[temp_v1] = 0xf8;
-      param_2[temp_v1 + 1] = 1;
-    }
-    temp_v1 = temp_v1 + 2;
-    temp_v4 = temp_v5;
-  } while (temp_v1 < param_3);
-  param_2[param_3 - 1] = 0;
-  return &DAT_0063d008;
+    do {
+        u8 c = text[read++];
+
+        if (c == 0) {
+            out[written] = 0;
+            out[written + 1] = 0;
+            return DAT_0063d008;
+        }
+        if (c & 0x80) {
+            out[written] = c;
+            out[written + 1] = text[read++];
+        } else if (c == '\n') {
+            out[written] = (char)0xF8;
+            out[written + 1] = 1;
+        } else {
+            out[written] = DAT_0053d2e8[c][0];
+            out[written + 1] = DAT_0053d2e8[c][1];
+        }
+        written += 2;
+    } while (written < size);
+    out[size - 1] = 0;
+    return DAT_0063d008;
 }
 
 } /* extern "C" */

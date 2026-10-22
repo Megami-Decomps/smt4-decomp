@@ -1,51 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011ce28` (_code @ 0x11ce28, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r5, r0 differs from recovered mov r4, r0. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001383a8(unsigned int *, unsigned int);
-int threadSleepDuration(int, int);
+extern u32 DAT_00471ba4;
+extern u32 DAT_00471b90;
 
-extern int DAT_00471b90; /* 0x471b90 */
-extern unsigned int DAT_00471ba4; /* 0x471ba4 */
+s32 FUN_001383a8(u32* state, u32 request);
+s32 FUN_001295ec(void);
+void threadSleepDuration(s64 nanoseconds);
 
-extern unsigned int *FUN_001295ec(void);
-/* Supplied declaration required: FUN_001383a8. */
-/* Supplied declaration required: threadSleepDuration. */
-
-
-unsigned int * FUN_0011ce28(unsigned int param_1)
-
+// Retry the transient status, then finalize non-failing requests and count them.
+s32 FUN_0011ce28(u32 request)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  
-  while( 1 ) {
-    puVar1 = &DAT_00471ba4;
-    FUN_001383a8(&DAT_00471ba4,param_1);
-    if (((unsigned int)puVar1 & 0x80000000) != 0) {
-      temp_v0 = ((unsigned int)puVar1 >> 0x1b) - 0x20;
+    for (;;) {
+        s32 result = FUN_001383a8(&DAT_00471ba4, request);
+        const u32 status = static_cast<u32>(result);
+        const s32 level = (status & 0x80000000u)
+            ? static_cast<s32>(status >> 27) - 32
+            : static_cast<s32>(status >> 27);
+
+        if (level == -5 &&
+            ((status & 0x07e00000u) >> 21) == 4 &&
+            (status & 0x3ffu) == 0x3fa) {
+            threadSleepDuration(500000LL);
+        } else {
+            if ((status & 0x80000000u) == 0) {
+                result = FUN_001295ec();
+                ++DAT_00471b90;
+            }
+            return result;
+        }
     }
-    else {
-      temp_v0 = (unsigned int)puVar1 >> 0x1b;
-    }
-    if (temp_v0 != 0xfffffffb) break;
-    temp_v0 = (unsigned int)puVar1 & 0x7e00000;
-    temp_v1 = temp_v0 == 0x800000;
-    if (temp_v1) {
-      temp_v0 = (unsigned int)puVar1 & 0x3ff;
-    }
-    if (!temp_v1 || temp_v0 != 0x3fa) break;
-    threadSleepDuration(500000,0);
-  }
-  if (-1 < (int)puVar1) {
-    puVar1 = (unsigned int *)FUN_001295ec();
-    DAT_00471b90 = DAT_00471b90 + 1;
-  }
-  return puVar1;
 }
 
-} /* extern "C" */
+} // extern "C"

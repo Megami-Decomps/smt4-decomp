@@ -1,71 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039e89c` (_code @ 0x39e89c, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the preset words in different groups (ldm of words 1-3, 6-7, 8-9) and allocates registers differently; the loop body is the same. */
+#include "common.h"
+
+/* Battle unit, as this command sees it: its status flags and id. */
+struct BtlMaskUnit {
+    /* 0x000 */ u64 flags;
+    /* 0x008 */ u8 unk008[0x15e];
+    /* 0x166 */ u16 id;
+    /* 0x168 */ u8 unk168[0x2a0];
+};
+
+struct BtlMaskMainState {
+    /* 0x0000 */ u8 unk0000[0x1ffc];
+    /* 0x1FFC */ BtlMaskUnit *units;
+};
+
+/* Flag masks: required (0, 1), excluded (3) and the flags to add (4). */
+struct BtlMaskPresets {
+    /* 0x00 */ u64 required;
+    /* 0x08 */ u64 requiredToo;
+    /* 0x10 */ u64 unk10;
+    /* 0x18 */ u64 excluded;
+    /* 0x20 */ u64 added;
+};
 
 extern "C" {
+extern BtlMaskPresets g_battleMaskPresets;
+u32 scrGetArg(u32 index);
+BtlMaskMainState *btlGetMainState(void);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned int g_battleMaskPresets; /* 0x570d78 */
-extern unsigned int DAT_00570d7c; /* 0x570d7c */
-extern unsigned int DAT_00570d80; /* 0x570d80 */
-extern unsigned int DAT_00570d84; /* 0x570d84 */
-extern unsigned int DAT_00570d90; /* 0x570d90 */
-extern unsigned int DAT_00570d94; /* 0x570d94 */
-extern unsigned int DAT_00570d98; /* 0x570d98 */
-extern unsigned int DAT_00570d9c; /* 0x570d9c */
-
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_0039e89c(void)
-
+/* Script command: adds the preset flags to every battle unit 4..53 with id argument 0 that has the
+ * required flags and none of the excluded ones. */
+u32 FUN_0039e89c(void)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  int temp_v12;
-  unsigned int *puVar14;
-  
-  temp_v8 = scrGetArg(0);
-  temp_v9 = btlGetMainState();
-  temp_v7 = DAT_00570d9c;
-  temp_v6 = DAT_00570d98;
-  temp_v5 = DAT_00570d94;
-  temp_v4 = DAT_00570d90;
-  temp_v3 = DAT_00570d84;
-  temp_v2 = DAT_00570d80;
-  temp_v1 = DAT_00570d7c;
-  temp_v0 = g_battleMaskPresets;
-  temp_v12 = 4;
-  do {
-    puVar14 = (unsigned int *)(*(int *)(temp_v9 + 0x1ffc) + temp_v12 * 0x408);
-    temp_v10 = *puVar14;
-    temp_v11 = puVar14[1];
-    if (((((temp_v10 & temp_v0) != 0 || (temp_v11 & temp_v1) != 0) &&
-         ((temp_v10 & temp_v4) == 0 && (temp_v11 & temp_v5) == 0)) &&
-        ((temp_v10 & temp_v2) != 0 || (temp_v11 & temp_v3) != 0)) &&
-       (*(unsigned short *)((int)puVar14 + 0x166) == temp_v8)) {
-      puVar14[1] = temp_v11 | temp_v7;
-      *puVar14 = temp_v10 | temp_v6;
+    u32 id = scrGetArg(0);
+    BtlMaskMainState *state = btlGetMainState();
+    BtlMaskPresets presets = g_battleMaskPresets;
+    s32 i;
+
+    for (i = 4; i < 54; i++) {
+        BtlMaskUnit *unit = &state->units[i];
+        if ((unit->flags & presets.required) && !(unit->flags & presets.excluded) &&
+            (unit->flags & presets.requiredToo) && unit->id == id) {
+            unit->flags |= presets.added;
+        }
     }
-    temp_v12 = temp_v12 + 1;
-  } while (temp_v12 < 0x36);
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

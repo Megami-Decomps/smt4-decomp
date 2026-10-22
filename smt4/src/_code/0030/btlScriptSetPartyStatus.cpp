@@ -1,12 +1,8 @@
 /* NON_MATCHING: only the apply-path target calculation uses r1/r0/r5 instead of retail r0/r1/ip (112/112 rows). */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlAction.h"
 
 struct BtlUnit;
-struct BtlActionRecord {
-    /* 0x000 */ u8 unk000[0x62];
-    /* 0x062 */ s16 entryId;
-    /* 0x064 */ u8 unk064[0xb0];
-};
 
 // The legacy entry-state header does not expose the action table's earlier slot.
 struct BattleActionTableView {

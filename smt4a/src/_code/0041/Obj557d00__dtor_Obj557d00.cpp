@@ -1,53 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj557d00D1Ev` (_code @ 0x4162a4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue scheduling only: retail stores the vtable pointer before loading unk44; armcc here hoists the load above the store. */
+#include "classes/Obj557d00.h"
 
-extern "C" {
+/* The object unk88 points at: deleted through its virtual destructor. */
+class Obj557d00Child {
+public:
+    virtual ~Obj557d00Child();
+};
 
-int asdMemFree(void);
+extern "C" void asdMemFree(void *block);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMemFree. */
-
-
-unsigned int * _ZN9Obj557d00D1Ev(unsigned int *param_1)
-
+/* Frees the six owned buffers and the child object, and the 0x40 block unless flag bit 0 marks it borrowed. */
+Obj557d00::~Obj557d00()
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)"护A抔A";
-  if (param_1[0x11] != 0) {
-    asdMemFree();
-    param_1[0x11] = 0;
-  }
-  if (param_1[0x12] != 0) {
-    asdMemFree();
-    param_1[0x12] = 0;
-  }
-  if (param_1[0x13] != 0) {
-    asdMemFree();
-    param_1[0x13] = 0;
-  }
-  if (param_1[0x14] != 0) {
-    asdMemFree();
-    param_1[0x14] = 0;
-  }
-  if (param_1[0x15] != 0) {
-    asdMemFree();
-    param_1[0x15] = 0;
-  }
-  if (param_1[0x16] != 0) {
-    asdMemFree();
-    param_1[0x16] = 0;
-  }
-  if ((int *)param_1[0x22] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x22] + 4))();
-    param_1[0x22] = 0;
-  }
-  if (((param_1[2] & 1) == 0) && (param_1[0x10] != 0)) {
-    asdMemFree();
-    param_1[0x10] = 0;
-  }
-  return param_1;
+    if (unk44 != NULL) {
+        asdMemFree(unk44);
+        unk44 = NULL;
+    }
+    if (unk48 != NULL) {
+        asdMemFree(unk48);
+        unk48 = NULL;
+    }
+    if (unk4C != NULL) {
+        asdMemFree(unk4C);
+        unk4C = NULL;
+    }
+    if (unk50 != NULL) {
+        asdMemFree(unk50);
+        unk50 = NULL;
+    }
+    if (unk54 != NULL) {
+        asdMemFree(unk54);
+        unk54 = NULL;
+    }
+    if (unk58 != NULL) {
+        asdMemFree(unk58);
+        unk58 = NULL;
+    }
+    if (unk88 != NULL) {
+        delete static_cast<Obj557d00Child *>(unk88);
+        unk88 = NULL;
+    }
+    if (!(flags & 1) && unk40 != 0) {
+        asdMemFree((void *)unk40);
+        unk40 = 0;
+    }
 }
-
-} /* extern "C" */

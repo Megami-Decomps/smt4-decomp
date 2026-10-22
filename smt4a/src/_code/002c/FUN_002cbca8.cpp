@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int statusDisplayBindUnitRecord(unsigned int, int, int);
 int objBInitBlock19D0(int, int);
 int FUN_0033449c(int);
@@ -104,7 +104,7 @@ typedef struct {
 extern int g_partyPanel; /* 0x57f268 */
 
 extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern unsigned int gameGetSlotRecord(fn_002cbca8_arg0 *);
 /* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: objBInitBlock19D0. */
@@ -134,7 +134,7 @@ void FUN_002cbca8(fn_002cbca8_arg0 *param_1,fn_002cbca8_arg1 *param_2,fn_002cbca
       (param_2 != (fn_002cbca8_arg1 *)0x0 || param_3 != (fn_002cbca8_arg2 *)0x0)))) {
     return;
   }
-  FUN_00192550();
+  dataTable8FindRecord();
   if ((*(unsigned char *)(temp_v4 + 0x42) & 2) == 0) {
     FUN_0033449c(0);
     return;

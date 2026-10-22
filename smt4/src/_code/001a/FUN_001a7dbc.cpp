@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameDataSlotSetFlag(int, int);
-int FUN_0020341c(int, int);
+int gameDataSetItemFlag(int, int);
 int gameRecordCopy(int, unsigned char [2]);
 int FUN_0029bde4(unsigned short *);
 int unitRecalculateEffectiveStats(unsigned short *);
@@ -41,7 +41,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: gameDataSlotSetFlag. */
-/* Supplied declaration required: FUN_0020341c. */
+/* Supplied declaration required: gameDataSetItemFlag. */
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
@@ -95,7 +95,7 @@ void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short p
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x18);
-    FUN_0020341c(param_3,1);
+    gameDataSetItemFlag(param_3,1);
     gameDataSlotSetFlag(param_3,1);
   }
   temp_v3 = (unsigned int)param_3;

@@ -12,7 +12,7 @@ int FUN_0014afd0(...);
 int FUN_00212774(void);
 int configSettingsResetDefaults(void);
 int FUN_002326b4(void);
-int FUN_0023b410(void);
+int gameSessionAcquireSpriteTable(void);
 int asdMTeXLoadTableEntries(void);
 int commonBgLoadSpritesOnFirstUse(void);
 int FUN_00283d74(int);
@@ -27,7 +27,7 @@ int FUN_00387454(void);
 int engineClearStateTriple(void);
 int saveLoadEnsureResources(void);
 int FUN_003c5c88(void);
-int FUN_003f8898(void);
+int dataTableReloadLocked(void);
 int FUN_003f8940(void);
 int resetFlagGroupsCD(void);
 
@@ -44,7 +44,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: FUN_00212774. */
 /* Supplied declaration required: configSettingsResetDefaults. */
 /* Supplied declaration required: FUN_002326b4. */
-/* Supplied declaration required: FUN_0023b410. */
+/* Supplied declaration required: gameSessionAcquireSpriteTable. */
 /* Supplied declaration required: asdMTeXLoadTableEntries. */
 /* Supplied declaration required: commonBgLoadSpritesOnFirstUse. */
 /* Supplied declaration required: FUN_00283d74. */
@@ -59,7 +59,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: engineClearStateTriple. */
 /* Supplied declaration required: saveLoadEnsureResources. */
 /* Supplied declaration required: FUN_003c5c88. */
-/* Supplied declaration required: FUN_003f8898. */
+/* Supplied declaration required: dataTableReloadLocked. */
 /* Supplied declaration required: FUN_003f8940. */
 /* Supplied declaration required: resetFlagGroupsCD. */
 
@@ -82,7 +82,7 @@ void FUN_0022258c(unsigned int param_1)
           texTableRefAcquire();
           FUN_00212774();
           FUN_002c3364();
-          FUN_0023b410();
+          gameSessionAcquireSpriteTable();
           FUN_0031f4fc();
           dataTableRefAcquire();
           resetFlagGroupsCD();
@@ -92,7 +92,7 @@ void FUN_0022258c(unsigned int param_1)
       }
       else if (DAT_0057ffb9 == '\0') {
         FUN_00387454();
-        FUN_003f8898();
+        dataTableReloadLocked();
         dataTableResolveEntryVariants();
         asdTMTexTableLoadTmx(6,0);
         asdTMTexTableLoadTmx(0x10,0);

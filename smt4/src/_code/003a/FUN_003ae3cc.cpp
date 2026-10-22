@@ -10,7 +10,7 @@ void FUN_003ae3cc(void)
 {
     BtlUi *ui = g_btlUi.ui;
 
-    ui->state = 4;
+    ui->panelState.state = 4;
     FUN_00218be0(&ui->objA);
 }
 

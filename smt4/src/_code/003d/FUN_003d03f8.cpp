@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00227c60(...);
+int btlShowListedActionMessage(...);
 int FUN_00227d18(int);
 int FUN_00227fac(void);
 int FUN_002296f4(...);
@@ -35,7 +35,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_00227c60. */
+/* Supplied declaration required: btlShowListedActionMessage. */
 /* Supplied declaration required: FUN_00227d18. */
 /* Supplied declaration required: FUN_00227fac. */
 /* Supplied declaration required: FUN_002296f4. */
@@ -111,12 +111,12 @@ int FUN_003d03f8(int *param_1,int param_2,int param_3,int param_4,int param_5,un
     if ((*(unsigned int *)(*(int *)(param_2 + 0x24) + 0x50) & 0x400) != 0) {
       FUN_002296f4(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),param_4,0x3c,
                    0x3c);
-      FUN_00227c60(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),param_4 + 0x3c,0
+      btlShowListedActionMessage(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),param_4 + 0x3c,0
                   );
     }
     else {
       FUN_002296f4(param_1,param_2,(int)*(short *)(param_5 + 0x62),param_4,0x1e,0x1e);
-      FUN_00227c60(param_1,param_2,(int)*(short *)(param_5 + 0x62),param_4 + 0x1e,param_4);
+      btlShowListedActionMessage(param_1,param_2,(int)*(short *)(param_5 + 0x62),param_4 + 0x1e,param_4);
     }
   }
   else {

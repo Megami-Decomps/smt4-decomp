@@ -1,5 +1,5 @@
 /* NON_MATCHING: byte-flag address formation and mask allocation differ from retail. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" StatsFlagView *gameDataBlocksGetStats(void);
 

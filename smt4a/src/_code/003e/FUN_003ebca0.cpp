@@ -1,45 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ebca0` (_code @ 0x3ebca0, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: condition-array and combatant-status indexing use different base registers. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+struct BattleCondition {
+    /* 0x00 */ s32 kind;
+    /* 0x04 */ s32 unitIndex;
+    /* 0x08 */ u8 unk08[8];
+};
+struct BattleConditionView {
+    /* 0x0000 */ u8 unk0000[0xa8];
+    /* 0x00a8 */ s32 unkA8;
+    /* 0x00ac */ u8 unk00ac[0x2364];
+    /* 0x2410 */ BattleCondition *conditions;
+    /* 0x2414 */ s32 count;
+};
 
 extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_1_stack;
-
-
-unsigned int FUN_003ebca0(int param_1)
-
+bool FUN_003ebca0(const BtlMainStateA *state)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  if (0 < *(int *)(param_1 + 0x2414)) {
-    temp_v0 = 0;
-    do {
-      temp_v1 = *(int *)(*(int *)(param_1 + 0x2410) + temp_v0 * 0x10);
-      if (*(int *)(param_1 + 0xa8) != 0) {
-        if (temp_v1 == 6) {
-          return 1;
+    const BattleConditionView *work = (const BattleConditionView *)state;
+    for (s32 index = 0; index < work->count; ++index) {
+        const BattleCondition *condition = &work->conditions[index];
+        if (work->unkA8) {
+            if (condition->kind == 6) {
+                return true;
+            }
+        } else {
+            if (condition->kind != 4 ||
+                !(state->entries[condition->unitIndex].statusFlags & 0x11c0)) {
+                return true;
+            }
         }
-      }
-      else {
-        if (temp_v1 != 4) {
-          return 1;
-        }
-        if ((*(unsigned short *)
-              (*(int *)(param_1 + 0x1ffc) +
-              *(int *)(*(int *)(param_1 + 0x2410) + temp_v0 * 0x10 + 4) * 0x408 + 0x274) & 0x11c0) ==
-            0) {
-          return 1;
-        }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x2414));
-  }
-  return 0;
+    }
+    return false;
 }
-
-} /* extern "C" */
+}

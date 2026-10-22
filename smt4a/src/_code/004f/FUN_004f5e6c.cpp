@@ -12,7 +12,7 @@ int workOwnerRelease(int);
 int btlCameraFinishTransition(int);
 int FUN_004f6e68(int);
 int obj4FSlots28Reset(int);
-int FUN_004f7f08(void);
+int panelReset(void);
 int FUN_004f8fa0(int);
 
 typedef int romwright_code(...);
@@ -26,7 +26,7 @@ extern int g_btlCamera; /* 0x571508 */
 /* Supplied declaration required: btlCameraFinishTransition. */
 /* Supplied declaration required: FUN_004f6e68. */
 /* Supplied declaration required: obj4FSlots28Reset. */
-/* Supplied declaration required: FUN_004f7f08. */
+/* Supplied declaration required: panelReset. */
 /* Supplied declaration required: FUN_004f8fa0. */
 
 
@@ -39,7 +39,7 @@ void FUN_004f5e6c(int param_1)
   int temp_v1;
   
   *(unsigned int *)(param_1 + 0x33bc) = 0;
-  FUN_004f7f08();
+  panelReset();
   FUN_004f6e68(param_1);
   temp_v1 = 0;
   do {

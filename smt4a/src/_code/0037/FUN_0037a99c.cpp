@@ -1,60 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037a99c` (_code @ 0x37a99c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail parks the tint in d8-d9 and the extra value in s20 from entry, and reloads g_renderCtx around the slot store; armcc keeps them in argument registers. */
+#include "common.h"
+
+/* An RGBA color; a new one starts out opaque white. */
+struct RenderColor {
+    f32 r, g, b, a;
+
+    RenderColor() : r(1.0f), g(1.0f), b(1.0f), a(1.0f) {}
+};
+
+struct RenderContext {
+    /* 0x000 */ u8 unk000[0x52C];
+    /* 0x52C */ s32 presetSlot;   /* 0 = primary preset, 1 = secondary, 2 = other */
+};
+
+/* The graphics presets block, as far as its active-preset pointer. */
+struct GxPresetCurrent {
+    /* 0x000 */ u8 unk000[0x16C];
+    /* 0x16C */ const void *current;
+};
 
 extern "C" {
+extern RenderContext *g_renderCtx;
+extern GxPresetCurrent g_asdGxPresets;
+extern u8 g_asdGxSecondaryPreset;
 
-int FUN_00157558(int);
-int FUN_001575cc(int);
-int FUN_004097b4(int, unsigned char [8], unsigned int, unsigned int);
+void FUN_001575cc(RenderContext *context);
+void FUN_00157558(RenderContext *context);
+void FUN_004097b4(RenderContext *context, RenderColor *color, u32 arg0, u32 arg1, f32 value);
 
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_2_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-extern unsigned int g_asdGxPresets; /* 0x63fd88 */
-extern unsigned int g_asdGxSecondaryPreset; /* 0x63fdb4 */
-extern unsigned int *DAT_0063fef4; /* 0x63fef4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_001575cc. */
-/* Supplied declaration required: FUN_004097b4. */
-
-
-void FUN_0037a99c(unsigned int param_1,unsigned int param_2)
-
+/* Draws with `color` under the render context's slot for the active graphics preset, then restores the slot. */
+void FUN_0037a99c(u32 arg0, u32 arg1, RenderColor tint, f32 value)
 {
-/* irregular: irregular input(s): in_d1; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned long long in_d1;
-  unsigned char temp_v2 [8];
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = *(unsigned int *)(g_renderCtx + 0x52c);
-  temp_v3 = (unsigned int)in_d1;
-  temp_v4 = (unsigned int)((unsigned long long)in_d1 >> 0x20);
-  if (DAT_0063fef4 == &g_asdGxPresets) {
-    temp_v1 = 0;
-  }
-  else if (DAT_0063fef4 == &g_asdGxSecondaryPreset) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 2;
-  }
-  *(unsigned int *)(g_renderCtx + 0x52c) = temp_v1;
-  FUN_001575cc(g_renderCtx);
-  FUN_00157558(g_renderCtx);
-  FUN_004097b4(g_renderCtx,temp_v2,param_1,param_2);
-  *(unsigned int *)(g_renderCtx + 0x52c) = temp_v0;
-  return;
+    RenderColor color;
+    s32 savedSlot = g_renderCtx->presetSlot;
+    s32 slot;
+
+    color = tint;
+    if (g_asdGxPresets.current == &g_asdGxPresets) {
+        slot = 0;
+    } else if (g_asdGxPresets.current == &g_asdGxSecondaryPreset) {
+        slot = 1;
+    } else {
+        slot = 2;
+    }
+    g_renderCtx->presetSlot = slot;
+    FUN_001575cc(g_renderCtx);
+    FUN_00157558(g_renderCtx);
+    FUN_004097b4(g_renderCtx, &color, arg0, arg1, value);
+    g_renderCtx->presetSlot = savedSlot;
 }
 
 } /* extern "C" */

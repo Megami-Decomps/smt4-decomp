@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002302d8(...);
-int FUN_00230434(...);
+int listCursorSetPage(...);
 int cellListAppend(...);
 int FUN_00233730(...);
 int FUN_0029212c(...);
@@ -19,7 +19,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002302d8. */
-/* Supplied declaration required: FUN_00230434. */
+/* Supplied declaration required: listCursorSetPage. */
 /* Supplied declaration required: cellListAppend. */
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233730. */
@@ -184,7 +184,7 @@ void FUN_0022fcb8(int param_1,unsigned int param_2)
   }
   FUN_00233730(param_1 + 0xc20,10,*(unsigned short *)(param_1 + 0x9ca4),0,1,1);
   *(unsigned char *)(param_1 + 0xc2d) = 1;
-  FUN_00230434(param_1 + 0xc20,0);
+  listCursorSetPage(param_1 + 0xc20,0);
   FUN_002302d8(param_1,param_2);
   temp_v0 = *(int *)(param_1 + 0x860);
   temp_v1 = flaggedValueHolderGetTotal(param_1 + temp_v0 * 0x74 + 0x880);

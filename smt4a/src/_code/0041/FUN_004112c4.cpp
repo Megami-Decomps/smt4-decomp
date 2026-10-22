@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int slotSetRequest(int, int, int);
 int dialogClose(int);
-int FUN_003eb26c(void);
+int partyModelSlotsLoad(void);
 int btlStageGetModeIndex(int);
 int FUN_004a9d1c(unsigned int);
 int FUN_004f5238(unsigned int, int, int, int, int, int, int, int, int);
@@ -29,7 +29,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: dialogClose. */
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_003eb26c. */
+/* Supplied declaration required: partyModelSlotsLoad. */
 extern int btlStartEntries(void);
 /* Supplied declaration required: btlStageGetModeIndex. */
 /* Supplied declaration required: FUN_004a9d1c. */
@@ -61,7 +61,7 @@ void FUN_004112c4(int param_1)
         if (temp_v0 != 0) {
           FUN_004f8f08(g_btlAux);
           btlGetMainState();
-          FUN_003eb26c();
+          partyModelSlotsLoad();
           *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
           return;
         }

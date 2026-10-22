@@ -10,7 +10,7 @@ int FUN_00287528(int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_002a03d8(...);
@@ -50,7 +50,7 @@ extern unsigned int FUN_00287704(unsigned int);
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028d9b0. */
+/* Supplied declaration required: buttonHelpAcquireResources. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 extern int questIsCompleted(unsigned int);
@@ -170,7 +170,7 @@ LAB_001a9c38:
         FUN_00287328(temp_v3);
       }
       FUN_002898e4();
-      FUN_0028d9b0();
+      buttonHelpAcquireResources();
       buttonHelpCreate();
       FUN_00289880();
     }

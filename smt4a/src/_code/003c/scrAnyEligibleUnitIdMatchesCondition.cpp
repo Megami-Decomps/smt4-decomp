@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
-s32 FUN_00232388(s32 selector);
+s32 btlResolveEntryChoice(s32 selector);
 void FUN_00301a08(s32 kind, u32* first, u32* count);
 BtlMainStateA* btlGetMainState();
 BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
@@ -16,7 +16,7 @@ u32 scrAnyEligibleUnitIdMatchesCondition()
 {
     const u32 id = scrGetArg(0);
     const u32 condition = scrGetArg(1);
-    const s32 kind = FUN_00232388(scrGetArg(2));
+    const s32 kind = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
     FUN_00301a08(kind, reinterpret_cast<u32*>(&first), reinterpret_cast<u32*>(&count));
     for (s32 index = first; index < first + count; ++index) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_0014e188(...);
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int paramsInit(...);
 int sysPlaySe(...);
 int uiSpriteSelectAnim(...);
@@ -59,7 +59,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -263,7 +263,7 @@ void FUN_002a74ac(void)
   temp_v5 = temp_v0 + 0x340;
   temp_v6 = (unsigned char *)0x65;
   temp_v3 = temp_v0 + 0x8d8;
-  FUN_0014e220(temp_v3,0x1a,0xffffffff,0x18);
+  uiSpriteInitializeState(temp_v3,0x1a,0xffffffff,0x18);
   FUN_0019e330(temp_v3,0);
   *(unsigned short *)(temp_v0 + 0x912) = 2;
   FUN_00387240(temp_v3,0x1a,0x21c);

@@ -1,42 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016b824` (_code @ 0x16b824, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the compiler hoists the zero and six preset constants into ip/r3 instead of assigning them in each branch. */
+#include "common.h"
 
-extern "C" {
+struct PresetValues {
+    /* 0x00 */ u8 enabled;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 unk05;
+};
+struct PresetState {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ PresetValues values;
+};
 
-
-void FUN_0016b824(int param_1,int param_2)
-
+// Select one of the three enabled presets, or disable the current preset.
+extern "C" void FUN_0016b824(PresetState *state, s32 preset)
 {
-  unsigned char *puVar1;
-  
-  puVar1 = (unsigned char *)(param_1 + 0x20);
-  if (param_2 == 0) {
-    *puVar1 = 0;
-  }
-  else {
-    if (param_2 == 1) {
-      *puVar1 = 1;
-      *(unsigned char *)(param_1 + 0x21) = 0;
-      *(unsigned char *)(param_1 + 0x23) = 6;
-      *(unsigned char *)(param_1 + 0x25) = 7;
-      return;
+    PresetValues *values = &state->values;
+    if (preset == 0) {
+        values->enabled = 0;
+    } else if (preset == 1) {
+        values->enabled = 1;
+        values->unk01 = 0;
+        values->unk03 = 6;
+        values->unk05 = 7;
+    } else if (preset == 2) {
+        values->enabled = 1;
+        values->unk01 = 2;
+        values->unk03 = 6;
+        values->unk05 = 1;
+    } else if (preset == 3) {
+        values->enabled = 1;
+        values->unk01 = 0;
+        values->unk03 = 6;
+        values->unk05 = 1;
     }
-    if (param_2 == 2) {
-      *puVar1 = 1;
-      *(unsigned char *)(param_1 + 0x21) = 2;
-      *(unsigned char *)(param_1 + 0x23) = 6;
-      *(unsigned char *)(param_1 + 0x25) = 1;
-      return;
-    }
-    if (param_2 == 3) {
-      *puVar1 = 1;
-      *(unsigned char *)(param_1 + 0x21) = 0;
-      *(unsigned char *)(param_1 + 0x23) = 6;
-      *(unsigned char *)(param_1 + 0x25) = 1;
-    }
-  }
-  return;
 }
-
-} /* extern "C" */

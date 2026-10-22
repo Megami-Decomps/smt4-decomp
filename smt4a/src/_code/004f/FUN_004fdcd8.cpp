@@ -14,7 +14,7 @@ extern unsigned int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_004102d8. */
-extern int FUN_004f5710(unsigned int, int);
+extern int btlEffectNameHasPrefix(unsigned int, int);
 
 
 int FUN_004fdcd8(short param_1,unsigned int param_2,unsigned short param_3,int param_4,unsigned short param_5,
@@ -25,7 +25,7 @@ int FUN_004fdcd8(short param_1,unsigned int param_2,unsigned short param_3,int p
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = FUN_004f5710(g_btlAux,param_8);
+  temp_v0 = btlEffectNameHasPrefix(g_btlAux,param_8);
   if (temp_v0 != 0) {
     temp_v0 = g_btlActionReflect;
     FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);

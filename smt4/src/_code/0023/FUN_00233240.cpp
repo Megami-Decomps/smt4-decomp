@@ -1,48 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233240` (_code @ 0x233240, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes each sprite address before the key/mode constants in every case; armcc schedules the add after them. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
 
-int timerStart(...);
-int FUN_002bee58(int, int);
+/* An owner of eight animated sprites at 0x20. */
+typedef struct SpriteSetOwner {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ SpritePlaybackView sprites[8];
+} SpriteSetOwner;
 
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bee58. */
+void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
+void FUN_002bee58(SpritePlaybackView *sprite, s32 key);
 
-
-void FUN_00233240(int param_1,unsigned int param_2)
-
+static __inline void spriteSetStart(SpritePlaybackView *sprite, s32 key)
 {
-/* irregular: 2 native warning(s); review required */
-  switch(param_2) {
-  case 0:
-    timerStart(param_1 + 0x20,0);
-    return;
-  case 1:
-    timerStart(param_1 + 0xac,1,0);
-    return;
-  case 2:
-    FUN_002bee58(param_1 + 0x138,0);
-    return;
-  case 3:
-    timerStart(param_1 + 0x1c4,2,0);
-    return;
-  case 4:
-    timerStart(param_1 + 0x250,3,0);
-    return;
-  case 5:
-    timerStart(param_1 + 0x2dc,4,0);
-    return;
-  case 6:
-    timerStart(param_1 + 0x368,5,0);
-    return;
-  case 7:
-    timerStart(param_1 + 0x3f4,6,0);
-    return;
-  default:
-    return;
-  }
+    timerStart(sprite, key, 0);
+}
+
+/* Starts the animation of sprite `index`; sprite 2 starts through its own sequence. */
+void FUN_00233240(SpriteSetOwner *owner, u32 index)
+{
+    switch (index) {
+    case 0:
+        spriteSetStart(&owner->sprites[0], 0);
+        break;
+    case 4:
+        spriteSetStart(&owner->sprites[4], 3);
+        break;
+    case 1:
+        spriteSetStart(&owner->sprites[1], 1);
+        break;
+    case 5:
+        spriteSetStart(&owner->sprites[5], 4);
+        break;
+    case 2:
+        FUN_002bee58(&owner->sprites[2], 0);
+        break;
+    case 3:
+        spriteSetStart(&owner->sprites[3], 2);
+        break;
+    case 6:
+        spriteSetStart(&owner->sprites[6], 5);
+        break;
+    case 7:
+        spriteSetStart(&owner->sprites[7], 6);
+        break;
+    }
 }
 
 } /* extern "C" */

@@ -1,51 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00394bbc` (_code @ 0x394bbc, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* An entry of the 14-entry table: an id and two optional resources with their parameters. */
+struct ResourcePairEntry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0xa];
+    /* 0x0C */ void *first;
+    /* 0x10 */ u16 firstParam;
+    /* 0x12 */ u8 unk12[2];
+    /* 0x14 */ void *second;
+    /* 0x18 */ u16 secondParam;
+    /* 0x1A */ u8 unk1a[2];
+};
 
 extern "C" {
+extern ResourcePairEntry DAT_00435ea0[14];
+s32 jyoucyuGetTableEntry(u32 index);
+void FUN_002505c0(u32 param, u32 target, void *resource, s32 slot, s32 arg4, s32 arg5, s32 arg6);
 
-int FUN_002505c0(int, unsigned int, int, int, int, int, int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002505c0. */
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-unsigned int FUN_00394bbc(unsigned int param_1,unsigned int param_2)
-
+static __inline ResourcePairEntry *findResourcePair(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = jyoucyuGetTableEntry(1);
-  if (temp_v1 == 0) {
-    temp_v1 = 0;
-    do {
-      temp_v0 = temp_v1 * 0x1c;
-      if (*(unsigned short *)(temp_v0 + 0x435ea0) == param_1) {
-        if ((unsigned short *)(temp_v0 + 0x435ea0) == (unsigned short *)0x0) {
-          return 0;
+    s32 i;
+
+    for (i = 0; i < 14; i++) {
+        ResourcePairEntry *entry = &DAT_00435ea0[i];
+        if (entry->id == id) {
+            return entry;
         }
-        if (*(int *)(temp_v0 + 0x435eac) != 0) {
-          FUN_002505c0(*(unsigned short *)(temp_v0 + 0x435eb0),param_2,*(int *)(temp_v0 + 0x435eac),0,1,0,0)
-          ;
+    }
+    return NULL;
+}
+
+/* Applies both resources of the table entry `id` (slots 0 and 1) to `target`. */
+u32 FUN_00394bbc(u32 id, u32 target)
+{
+    if (jyoucyuGetTableEntry(1) == 0) {
+        ResourcePairEntry *entry = findResourcePair(id);
+        if (entry != NULL) {
+            if (entry->first != NULL) {
+                FUN_002505c0(entry->firstParam, target, entry->first, 0, 1, 0, 0);
+            }
+            if (entry->second != NULL) {
+                FUN_002505c0(entry->secondParam, target, entry->second, 1, 1, 0, 0);
+            }
         }
-        if (*(int *)(temp_v0 + 0x435eb4) == 0) {
-          return 0;
-        }
-        FUN_002505c0(*(unsigned short *)(temp_v0 + 0x435eb8),param_2,*(int *)(temp_v0 + 0x435eb4),1,1,0,0);
-        return 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0xe);
-  }
-  return 0;
+    }
+    return 0;
 }
 
 } /* extern "C" */

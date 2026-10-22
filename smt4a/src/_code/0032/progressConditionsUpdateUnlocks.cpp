@@ -10,7 +10,7 @@ struct ProgressUnlockCondition {
 };
 
 extern "C" {
-void FUN_00409d00();
+void countersRecordPlayerMaxima();
 GameBlock2830C *gameDataBlocksGetSaveData();
 u32 gameFlagIsSet(u32);
 u32 countersGetA(s32);
@@ -20,7 +20,7 @@ s32 FUN_003dfd44();
 
 void progressConditionsUpdateUnlocks()
 {
-    FUN_00409d00();
+    countersRecordPlayerMaxima();
     s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
     for (s32 index = 0; index < count; ++index) {
         s32 byte = index / 8;

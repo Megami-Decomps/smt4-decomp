@@ -38,7 +38,7 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: gameFlagSetValue. */
 extern unsigned int messageTargetGetValue(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a03d8. */
@@ -164,7 +164,7 @@ unsigned int FUN_001b10e4(void)
     if (temp_v5 != 2) {
       return 0;
     }
-    temp_v5 = FUN_002973d8();
+    temp_v5 = messageMainGetChoiceResult();
     if (temp_v5 == 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 0xb;
       slotSetRequest(0,10,0xff);
@@ -201,7 +201,7 @@ unsigned int FUN_001b10e4(void)
     if (temp_v5 == 2) {
       *(unsigned int *)(temp_v0 + 0x10) = 0;
       *(unsigned int *)(temp_v0 + 0x14) = 0;
-      temp_v5 = FUN_002973d8();
+      temp_v5 = messageMainGetChoiceResult();
       if (temp_v5 != 0) {
         if (temp_v5 == 1) {
           *(unsigned char *)(temp_v0 + 0x17) = 1;
@@ -261,7 +261,7 @@ unsigned int FUN_001b10e4(void)
     if (temp_v5 != 2) {
       return 0;
     }
-    temp_v5 = FUN_002973d8();
+    temp_v5 = messageMainGetChoiceResult();
     if (temp_v5 == 0) {
       slotSetRequest(0,0x14,0xff);
       slotSetRequest(1,0x14,0xff);

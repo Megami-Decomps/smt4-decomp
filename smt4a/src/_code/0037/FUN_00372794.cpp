@@ -1,57 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00372794` (_code @ 0x372794, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: registers and logic match, but armcc places the playerHasFlagBit and btlMainGetUnk14 calls inline; retail moves both to out-of-line blocks after the return. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
+typedef struct SkillUser SkillUser;
 
-extern int gameGetSlotRecord(void);
-/* Supplied declaration required: dataTable04FindById. */
-extern int btlMainGetUnk14(void);
-extern int playerHasFlagBit(unsigned int);
-extern int FUN_004bd098(int, int);
-extern int bitsAt60Test(int, unsigned int);
+typedef struct SkillTableEntry {
+    /* 0x00 */ u8 unk00[0x86];
+    /* 0x86 */ u16 unk86;
+} SkillTableEntry;
 
+typedef struct SkillMenuWork {
+    /* 0x0000 */ u8 unk0000[0x3890];
+    /* 0x3890 */ s32 cursor;
+    /* 0x3894 */ u8 unk3894[0x97C];
+    /* 0x4210 */ s16 userSlots[1]; /* per cursor: -1 the player, -2 the battle's current unit, else a slot */
+} SkillMenuWork;
 
-unsigned int FUN_00372794(int param_1,int param_2,int param_3)
+SkillUser *gameGetSlotRecord(s32 slot);
+SkillUser *btlMainGetUnk14(void);
+s32 playerHasFlagBit(u32 bit);
+s32 bitsAt60Test(SkillUser *user, u32 bit);
+SkillTableEntry *dataTable04FindById(s32 id);
+s32 FUN_004bd098(SkillUser *user, s32 id);
 
+/* Returns whether the user under the menu cursor (flag bit 4 set) can use skill `id`; with no `user` only the player is accepted. */
+u32 FUN_00372794(SkillMenuWork *work, s32 id, SkillUser *user)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = *(short *)(param_1 + *(int *)(param_1 + 0x3890) * 2 + 0x4210);
-  if (temp_v0 != -1) {
-    if (param_3 == 0) {
-      return 0;
+    s16 slot = work->userSlots[work->cursor];
+    s32 enabled;
+
+    if (slot == -1) {
+        enabled = playerHasFlagBit(4);
+    } else if (user != NULL) {
+        if (slot == -2) {
+            user = btlMainGetUnk14();
+        } else {
+            user = gameGetSlotRecord(slot);
+        }
+        enabled = bitsAt60Test(user, 4);
+    } else {
+        enabled = 0;
     }
-    if (temp_v0 != -2) {
-      param_3 = gameGetSlotRecord();
+    u32 usable = 0;
+    if (enabled) {
+        SkillTableEntry *entry = dataTable04FindById(id);
+        if (entry != NULL && entry->unk86 != 0 && (user == NULL || FUN_004bd098(user, id) >= 0)) {
+            usable = 1;
+        }
     }
-    else {
-      param_3 = btlMainGetUnk14();
-    }
-    temp_v1 = bitsAt60Test(param_3,4);
-  }
-  else {
-    temp_v1 = playerHasFlagBit(4);
-  }
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    temp_v1 = param_2;
-    dataTable04FindById();
-    temp_v0 = 0;
-    if (temp_v1 != 0) {
-      temp_v0 = *(short *)(temp_v1 + 0x86);
-    }
-    if ((temp_v1 != 0 && temp_v0 != 0) &&
-       ((param_3 == 0 || (temp_v1 = FUN_004bd098(param_3,param_2), -1 < temp_v1)))) {
-      temp_v2 = 1;
-    }
-  }
-  return temp_v2;
+    return usable;
 }
 
 } /* extern "C" */

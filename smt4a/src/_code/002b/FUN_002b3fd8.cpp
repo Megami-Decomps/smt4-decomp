@@ -1,47 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b3fd8` (_code @ 0x2b3fd8, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: fixed payload constants are rematerialized after allocation and adjacent stores are merged. */
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00544a98[];
+extern EffMenuLists g_effMenuHandles;
+void *memAlloc(u32 pool, u32 allocatorFlags, u32 flags, u32 bytes, u32 alignment, u32 clear);
 
-int memAlloc(int, int, int, int, int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int *DAT_006471a0; /* 0x6471a0 */
-extern unsigned int *DAT_006471b4; /* 0x6471b4 */
-
-/* Supplied declaration required: memAlloc. */
-
-
-void FUN_002b3fd8(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_002b3fd8(u32 first, u32 second, u32 third, u32 fourth)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  puVar2 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x68,0x10,1);
-  puVar2[7] = 0xc0000000;
-  puVar2[1] = 5;
-  puVar2[2] = param_1;
-  puVar2[3] = param_2;
-  puVar2[4] = param_3;
-  puVar2[5] = param_4;
-  puVar2[6] = 0xffffc040;
-  puVar1 = puVar2;
-  if (DAT_006471a0 != (unsigned int *)0x0) {
-    *DAT_006471b4 = (unsigned int)puVar2;
-    puVar1 = DAT_006471a0;
-  }
-  DAT_006471a0 = puVar1;
-  DAT_006471b4 = puVar2;
-  *puVar2 = 0;
-  return;
+    asdDebugTrace(DAT_00544a98, 0x283);
+    EffMenuRenderNode *node = static_cast<EffMenuRenderNode *>(
+        memAlloc(0x10000, 0x100, 0, sizeof(EffMenuRenderNode), 0x10, 1));
+    node->render.flags = 0xc0000000;
+    node->unk04 = 5;
+    node->unk08 = first;
+    node->unk0c = second;
+    node->unk10 = third;
+    node->unk14 = fourth;
+    node->unk18 = 0xffffc040;
+    if (g_effMenuHandles.head[3] == 0) {
+        g_effMenuHandles.head[3] = node;
+    } else {
+        g_effMenuHandles.tail[3]->next = node;
+    }
+    g_effMenuHandles.tail[3] = node;
+    node->next = 0;
 }
-
-} /* extern "C" */
+}

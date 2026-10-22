@@ -1,47 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aada8` (_code @ 0x3aada8, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #100] differs from recovered add r1, r0, #42496. */
+#include "common.h"
+
+struct TitleSceneLocalView {
+    u8 unk00[0x14];                 // 0x0000
+    s32 unk14;                      // 0x0014
+    u8 unk18[0x594 - 0x18];         // 0x0018
+    u32 unk594;                     // 0x0594
+    u8 unk598[0xA688 - 0x598];      // 0x0598
+    void (TitleSceneLocalView::*unkA688[1])(); // 0xA688: variable-length member callback table
+};
 
 extern "C" {
+extern u32 g_titleScene;
+void FUN_002bed3c(TitleSceneLocalView* scene);
+void FUN_002c198c(u32 scene);
+void FUN_002c18e4(u32 scene);
 
-int FUN_002bed3c(void);
-int FUN_002c18e4(unsigned int);
-int FUN_002c198c(unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-
-
-void FUN_003aada8(int param_1)
-
+// Set the scene state, invoke its selected member callback, and update the title scene.
+void FUN_003aada8(TitleSceneLocalView* scene)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  romwright_code *pcVar2;
-  
-  FUN_002bed3c();
-  *(unsigned int *)(param_1 + 0x594) = 0x1f;
-  temp_v0 = param_1 + *(int *)(param_1 + 0x14) * 8;
-  pcVar2 = *(romwright_code **)(temp_v0 + 0xa688);
-  if ((pcVar2 != (romwright_code *)0x0) ||
-     (((*(unsigned int *)(temp_v0 + 0xa68c) & 1) != 0 && (*(unsigned int *)(temp_v0 + 0xa68c) != 0)))) {
-    if ((*(unsigned int *)(temp_v0 + 0xa68c) & 1) != 0) {
-      pcVar2 = *(romwright_code **)((unsigned char *)pcVar2 + *(int *)(param_1 + ((int)*(unsigned int *)(temp_v0 + 0xa68c) >> 1)));
-    }
-    (*pcVar2)();
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return;
-}
+    FUN_002bed3c(scene);
+    scene->unk594 = 31;
 
-} /* extern "C" */
+    void (TitleSceneLocalView::*callback)() = scene->unkA688[scene->unk14];
+    if (callback != 0) {
+        (scene->*callback)();
+    }
+
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
+}
+}

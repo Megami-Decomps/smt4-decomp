@@ -6,10 +6,10 @@ extern "C" {
 
 int contentEntryFlagTest(void);
 int dialogOpen(...);
-int FUN_0027e7b4(...);
+int infoWinSetMessage(...);
 int FUN_0029541c(...);
 int FUN_00296774(...);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int FUN_0029aafc(void);
 int soundChannelStopAll(...);
 int FUN_0029c94c(...);
@@ -72,7 +72,7 @@ extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: FUN_0026b738. */
 /* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
@@ -80,9 +80,9 @@ extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00296774. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029aafc. */
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -370,7 +370,7 @@ void FUN_001cea8c(int param_1)
         if (temp_v4 != 2) {
           return;
         }
-        temp_v4 = FUN_002973d8();
+        temp_v4 = messageMainGetChoiceResult();
         if (temp_v4 != 0) {
           scrScriptProcessStartEntry(*puVar28,0xe);
           if (*(int *)(param_1 + 0xd2c4) - *(int *)(param_1 + 0xd2c8) < 1) {
@@ -540,7 +540,7 @@ void FUN_001cea8c(int param_1)
       temp_v15 = temp_v15 + 1;
     } while (temp_v15 < *(int *)(param_1 + 0xd2c4));
     *piVar9 = 10;
-    FUN_0027e7b4(*(unsigned int *)(param_1 + 0x356c),0xca);
+    infoWinSetMessage(*(unsigned int *)(param_1 + 0x356c),0xca);
     dialogOpen(1);
   default:
     temp_v5 = temp_v26;
@@ -753,7 +753,7 @@ LAB_001cfdfc:
         if (temp_v4 != 0) {
 LAB_001cf28c:
           eventQueueAddUniqueIfValid(0x100016e);
-          FUN_00296e90();
+          messageMainFinishWindow();
           buttonHelpSetPreset(0x9a);
           *piVar25 = *piVar9;
           *piVar9 = 99;

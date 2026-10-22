@@ -1,54 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233730` (_code @ 0x233730, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the two zero arguments in saved registers (r5/r6) and stores
+ * visible/total with one strd; armcc here rematerializes 0 and stores them separately */
+#include "common.h"
+
+#define UNK233730_HORIZONTAL 0
+#define UNK233730_VERTICAL 1
+
+/* A scroller: its direction, size and the list object it drives at 0x10. */
+struct Unk233730Scroller {
+    /* 0x00 */ u8 direction;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 visible;
+    /* 0x08 */ s32 total;
+    /* 0x0C */ u8 dirty;
+    /* 0x0D */ u8 unk0D[3];
+    /* 0x10 */ u8 list[1];
+};
 
 extern "C" {
 
-int recordTrackDirtyValue(char *, int);
-int FUN_00298d64(char *, int);
-int flaggedEntrySetValueB(char *, int);
-int flaggedEntrySetValueA(char *, int);
-int FUN_0029f848(...);
+void FUN_0029f848(void *list, s32 total, s32 columns, s32 rows, s32 a, s32 b);
+void FUN_00298d64(void *list, s32 value);
+void flaggedEntrySetValueA(void *list, s32 value);
+void recordTrackDirtyValue(void *list, s32 value);
+void flaggedEntrySetValueB(void *list, s32 value);
 
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_6_stack;
-
-/* Supplied declaration required: recordTrackDirtyValue. */
-/* Supplied declaration required: FUN_00298d64. */
-/* Supplied declaration required: flaggedEntrySetValueB. */
-/* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: FUN_0029f848. */
-
-
-void FUN_00233730(char *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+/* Sets the scroller up for `total` items, `visible` of them on screen along `direction`, and
+ * rewinds it. */
+void FUN_00233730(Unk233730Scroller *scroller, s32 visible, s32 total, s32 direction, s32 unused,
+                  s32 option)
 {
-/* irregular: 5 native warning(s); review required */
-  if (param_4 != 0) {
-    if (param_4 == 1) {
-      FUN_0029f848(param_1 + 0x10,param_3,1,param_2,1,param_6);
+    if (direction == UNK233730_HORIZONTAL) {
+        FUN_0029f848(scroller->list, total, visible, 1, 1, option);
+    } else if (direction == UNK233730_VERTICAL) {
+        FUN_0029f848(scroller->list, total, 1, visible, 1, option);
     }
-  }
-  else {
-    FUN_0029f848(param_1 + 0x10,param_3,param_2,1,1,param_6);
-  }
-  *(unsigned int *)(param_1 + 4) = param_2;
-  *(unsigned int *)(param_1 + 8) = param_3;
-  *param_1 = (char)param_4;
-  if ((param_4 & 0xff) == 0) {
-    FUN_00298d64(param_1 + 0x10,0);
-    flaggedEntrySetValueA(param_1 + 0x10,0);
-  }
-  if (*param_1 == '\x01') {
-    recordTrackDirtyValue(param_1 + 0x10,0);
-    flaggedEntrySetValueB(param_1 + 0x10,0);
-  }
-  param_1[0xc] = '\0';
-  return;
+    scroller->visible = visible;
+    scroller->total = total;
+    scroller->direction = direction;
+    if (scroller->direction == UNK233730_HORIZONTAL) {
+        FUN_00298d64(scroller->list, 0);
+        flaggedEntrySetValueA(scroller->list, 0);
+    }
+    if (scroller->direction == UNK233730_VERTICAL) {
+        recordTrackDirtyValue(scroller->list, 0);
+        flaggedEntrySetValueB(scroller->list, 0);
+    }
+    scroller->dirty = 0;
 }
 
 } /* extern "C" */

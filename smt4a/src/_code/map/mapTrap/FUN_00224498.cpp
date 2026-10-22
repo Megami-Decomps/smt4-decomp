@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_00224404(void);
+int mapTrapClearState(void);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
 int handleRegistryRegisterObject(unsigned int, int);
@@ -16,7 +16,7 @@ extern unsigned int *g_mapTrap; /* 0x587f0c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_00224404. */
+/* Supplied declaration required: mapTrapClearState. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern unsigned int modelListInit(void);
@@ -31,7 +31,7 @@ void FUN_00224498(int param_1,int param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  FUN_00224404();
+  mapTrapClearState();
   temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x210));
   puVar1 = g_mapTrap;
   g_mapTrap[2] = (*(int *)((unsigned char *)&g_gameState + 0x210));

@@ -1,6 +1,5 @@
-#include "common.h"
+#include "gamedata/PartySlots.h"
 
-struct PartySlots { s16 ids[16]; u8 active[16]; };
 /* Invalidates slots outside the requested active range. */
 extern "C" void partyIdsReset(PartySlots *party)
 {

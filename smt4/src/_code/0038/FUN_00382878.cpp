@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00287528(unsigned char **);
 int FUN_00287704(int);
 int gameFlagSetValue(int, int);
-int FUN_00296b3c(...);
+int asdTextDrawFormatted(...);
 int libc_strcat(...);
 int FUN_002bcf4c(void);
 int FUN_002bcfc0(...);
@@ -31,7 +31,7 @@ extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 extern int objectFlagBitIsSet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287704. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_00296b3c. */
+/* Supplied declaration required: asdTextDrawFormatted. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */
 /* Supplied declaration required: FUN_002bcfc0. */
@@ -173,7 +173,7 @@ void FUN_00382878(int param_1)
   }
   FUN_002bcfc0(puVar10,0);
   temp_v9 = puVar10;
-  FUN_00296b3c(*(unsigned int *)(param_1 + 0x28c),3,0xffffffff,0,0);
+  asdTextDrawFormatted(*(unsigned int *)(param_1 + 0x28c),3,0xffffffff,0,0);
   temp_v0 = *(unsigned char *)(temp_v1 + 10);
   temp_v3 = 0;
   do {
@@ -203,7 +203,7 @@ void FUN_00382878(int param_1)
       if (temp_v3 != 1) {
         if (temp_v3 == 2) {
           temp_v9 = temp_v10;
-          FUN_00296b3c(*(unsigned int *)(param_1 + 0x298),2,0xffffffff,0,0);
+          asdTextDrawFormatted(*(unsigned int *)(param_1 + 0x298),2,0xffffffff,0,0);
           return;
         }
       }
@@ -211,14 +211,14 @@ void FUN_00382878(int param_1)
         temp_v2 = *(unsigned int *)(param_1 + 0x294);
         temp_v6 = 3;
         temp_v9 = temp_v10;
-        FUN_00296b3c(temp_v2,temp_v6,0xffffffff,0,0);
+        asdTextDrawFormatted(temp_v2,temp_v6,0xffffffff,0,0);
       }
     }
     else {
       temp_v2 = *(unsigned int *)(param_1 + 0x290);
       temp_v6 = 4;
       temp_v9 = temp_v10;
-      FUN_00296b3c(temp_v2,temp_v6,0xffffffff,0,0);
+      asdTextDrawFormatted(temp_v2,temp_v6,0xffffffff,0,0);
     }
     temp_v3 = temp_v3 + 1;
     if (temp_v3 >= 3) {

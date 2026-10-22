@@ -4,9 +4,8 @@ extern "C" {
 
 int FUN_00262f78(void)
 {
-    u8 *base = g_gameDataBlocks.unk04 + 0x24b88;
-
-    return *(s16 *)(base + 0x24);
+    GameSaveSelection *selection = &g_gameDataBlocks.saveBlock->selection;
+    return selection->unk24;
 }
 
 } /* extern "C" */

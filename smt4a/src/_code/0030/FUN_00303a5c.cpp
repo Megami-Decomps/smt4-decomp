@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail keeps values in caller-saved VFP registers across the angle-difference call; separate compilation saves d8-d9. */
 #include "common.h"
 
-extern "C" f32 FUN_002b5cd4(f32, f32);
+extern "C" f32 mathAngleDeltaDegrees(f32, f32);
 
 // Move an angle toward its target by at most the requested step.
 extern "C" f32 FUN_00303a5c(f32 current, f32 target, f32 step)
 {
-    f32 difference = FUN_002b5cd4(current, target);
+    f32 difference = mathAngleDeltaDegrees(current, target);
     f32 distance = difference < 0.0f ? -difference : difference;
     if (distance <= step)
         return target;

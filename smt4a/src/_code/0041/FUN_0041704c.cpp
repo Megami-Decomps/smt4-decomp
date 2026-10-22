@@ -8,7 +8,7 @@ extern "C" {
 int sysPlaySe(unsigned int);
 int FUN_00215bd0(void);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int FUN_002c8538(int);
 int FUN_002c85b0(int);
 int FUN_0031f718(unsigned int, int);
@@ -30,7 +30,7 @@ extern unsigned int saveSlotFindById(unsigned int);
 extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
@@ -65,7 +65,7 @@ LAB_004170bc:
     if (*(char *)(param_1 + 0x40) != '\0') {
       FUN_002c85b0(0xc);
       FUN_0031f718(0xffffffff,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       temp_v2[1] = 0;
       temp_v2[2] = 0;
       temp_v2[3] = 0;
@@ -76,7 +76,7 @@ LAB_004170bc:
       temp_v1 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
       FUN_002c85b0(0xc);
       statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       temp_v2[1] = 0;
       temp_v2[2] = 0;
       temp_v2[3] = 0;

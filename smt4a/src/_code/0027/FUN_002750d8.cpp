@@ -9,7 +9,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int calcHeadingRoundedToCardinalDirection(void);
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_00330108(float *, float *, unsigned char [52]);
 int mathPositionHeadingDegrees(void);
 int FUN_00384830(void);
@@ -41,7 +41,7 @@ extern float DAT_005f1720; /* 0x5f1720 */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_00330108. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00384830. */
@@ -152,7 +152,7 @@ void FUN_002750d8(int param_1,int param_2)
       temp_v9 = 90.0f;
       mathPositionHeadingDegrees();
       temp_v6 = (float)temp_v8;
-      FUN_002b5cd4();
+      mathAngleDeltaDegrees();
       temp_v1 = 0;
       temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v4 <= temp_v6) << 0x1d);
       if (!romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) {

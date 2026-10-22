@@ -1,54 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb88c` (_code @ 0x3cb88c, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the NULL of the bounds-checked lookup hoisted in r9 (movcs r0, r9, pushing r9/sl); armcc emits movcs r0, #0. */
+#include "gamedata/DataTable.h"
+
+/* A table 0x2E section 3 entry, keyed by two signed bytes. */
+struct Table2eSub3Entry {
+    /* 0x00 */ s8 first;
+    /* 0x01 */ s8 second;
+    /* 0x02 */ u8 unk02[0x12];
+};
 
 extern "C" {
 
-int dataTableGet(int, int);
-int dataTableGetCount(...);
-
-/* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-
-
-char * FUN_003cb88c(int param_1,int param_2)
-
+/* Finds the table 0x2E section 3 entry with the given key pair, or NULL. */
+Table2eSub3Entry *FUN_003cb88c(s32 first, s32 second)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  char *pcVar4;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v3 = 0;
-  dataTableGet(0x2e,3);
-  temp_v0 = dataTableGetCount();
-  if (0 < temp_v0) {
-    do {
-      temp_v1 = dataTableGet(0x2e,3);
-      temp_v0 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v1);
-      pcVar4 = (char *)0x0;
-      if (temp_v3 < temp_v2) {
-        pcVar4 = (char *)(temp_v0 + temp_v3 * 0x14);
-      }
-      temp_v0 = (int)*pcVar4;
-      temp_v4 = temp_v0 == param_1;
-      if (temp_v4) {
-        temp_v0 = (int)pcVar4[1];
-      }
-      if (temp_v4 && temp_v0 == param_2) {
-        return pcVar4;
-      }
-      temp_v3 = temp_v3 + 1;
-      dataTableGet(0x2e,3);
-      temp_v0 = dataTableGetCount();
-    } while ((int)temp_v3 < temp_v0);
-  }
-  return (char *)0x0;
+    for (s32 index = 0; index < (s32)dataTableGetCount(dataTableGet(0x2e, 3)); index++) {
+        void *section = dataTableGet(0x2e, 3);
+        Table2eSub3Entry *entries = static_cast<Table2eSub3Entry *>(dataTableGetEntries(section));
+        u32 count = dataTableGetCount(section);
+        Table2eSub3Entry *entry = (u32)index < count ? &entries[index] : NULL;
+        if (entry->first == first && entry->second == second) {
+            return entry;
+        }
+    }
+    return NULL;
 }
 
 } /* extern "C" */

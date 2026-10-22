@@ -1,38 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296dc4` (_code @ 0x296dc4, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register allocation of the saved corner positions differs (retail saves d8-d13, copying p3.y/z as d13 = d5, and reuses s23 for 0.0f). */
+#include "status/StatusCamera.h"
 
 extern "C" {
 
-int FUN_002adba8(unsigned long long *, int, int);
-int FUN_002aff74(unsigned int);
-int FUN_002b0124(int);
+void FUN_002b0124(u32 value);
+void FUN_002aff74(u32 color, f32 x, f32 y, f32 z, f32 u, f32 v);
+void submitDefaultFloatParameters(void);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_002adba8. */
-/* Supplied declaration required: FUN_002aff74. */
-/* Supplied declaration required: FUN_002b0124. */
-
-
-void FUN_00296dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Emits a four-vertex primitive (one color and position per corner) and submits the default parameters. */
+void FUN_00296dc4(u32 color0, u32 color1, u32 color2, u32 color3, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned long long uStack_20;
-  
-  FUN_002b0124(1);
-  FUN_002aff74(param_1);
-  FUN_002aff74(param_2);
-  FUN_002aff74(param_3);
-  FUN_002aff74(param_4);
-  uStack_20 = 0x1024500000001;
-  FUN_002adba8(&uStack_20,0x18,1);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    FUN_002b0124(1);
+    FUN_002aff74(color0, p0.x, p0.y, p0.z, 0.0f, 0.0f);
+    FUN_002aff74(color1, p1.x, p1.y, p1.z, 0.0f, 0.0f);
+    FUN_002aff74(color2, p2.x, p2.y, p2.z, 0.0f, 0.0f);
+    FUN_002aff74(color3, p3.x, p3.y, p3.z, 0.0f, 0.0f);
+    submitDefaultFloatParameters();
 }
 
 } /* extern "C" */

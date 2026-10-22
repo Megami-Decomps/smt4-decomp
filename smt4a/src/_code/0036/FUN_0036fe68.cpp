@@ -22,7 +22,7 @@ int FUN_002c3398(int);
 int debugOverlaySetShown(int);
 int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
 int objectE0ResetFlags1040(void);
-int FUN_0033a988(void);
+int mapRecordResumePoint(void);
 int sub68OwnerCall3(void);
 int mapEnvironmentSelectPreset(unsigned int);
 int FUN_00379be8(void);
@@ -71,7 +71,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: debugOverlaySetShown. */
 /* Supplied declaration required: FUN_0031416c. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
-/* Supplied declaration required: FUN_0033a988. */
+/* Supplied declaration required: mapRecordResumePoint. */
 /* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: mapEnvironmentSelectPreset. */
 /* Supplied declaration required: FUN_00379be8. */
@@ -154,7 +154,7 @@ unsigned int FUN_0036fe68(void)
   if (DAT_005806b8 < 100) {
     if ((DAT_005806b8 >= 0xd) && (temp_v0 = naviMainIsActive(), temp_v0 != 0)) {
       FUN_002c2358();
-      FUN_0033a988();
+      mapRecordResumePoint();
       FUN_00249a08();
       FUN_002c3398(0);
       FUN_0031416c(200,200,200,0x82,0x82,0x82,0x1e,0x1e,0x1e,0x96,0x96,0x96);

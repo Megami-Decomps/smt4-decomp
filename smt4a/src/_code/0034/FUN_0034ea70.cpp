@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_0035ae58(int, int, int, int, int);
 int FUN_0035d8f0(int, int, int, int, int);
-int FUN_003a7a88(int, int);
+int devilIsTextureLoaded(int, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -36,7 +36,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: FUN_0035d8f0. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 
 
 void FUN_0034ea70(int param_1)
@@ -83,7 +83,7 @@ void FUN_0034ea70(int param_1)
     }
     else {
       temp_v2 = (int)*(short *)(param_1 + 0x4b14);
-      FUN_003a7a88(temp_v2,1);
+      devilIsTextureLoaded(temp_v2,1);
       if (temp_v2 == 0) {
         return;
       }

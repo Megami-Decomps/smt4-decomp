@@ -6,14 +6,14 @@ extern "C" {
 
 int uiSpriteBankApplyPreset(int, int);
 int FUN_002f0384(int);
-int FUN_0037e0b8(...);
+int gameSetStatusCameraHeightMode(...);
 int FUN_0038b57c(int);
 int FUN_003fd7b4(unsigned int);
 int FUN_0040aad4(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
 int FUN_004964e0(int, int);
-int FUN_0049706c(int);
+int menuOpenCommandList(int);
 int messageChoiceShowCurrent(int);
 int FUN_00498de0(...);
 int FUN_0049af90(int);
@@ -37,7 +37,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_002f0384. */
 extern int objBStateAllowsAction(void);
-/* Supplied declaration required: FUN_0037e0b8. */
+/* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_0040aad4. */
@@ -45,7 +45,7 @@ extern int FUN_0040ab8c(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_004964e0. */
-/* Supplied declaration required: FUN_0049706c. */
+/* Supplied declaration required: menuOpenCommandList. */
 /* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_0049af90. */
@@ -89,10 +89,10 @@ void FUN_00497290(int param_1)
       else {
         temp_v1 = 0;
       }
-      FUN_0037e0b8(temp_v1);
+      gameSetStatusCameraHeightMode(temp_v1);
     }
     else {
-      FUN_0037e0b8(1);
+      gameSetStatusCameraHeightMode(1);
     }
   }
   FUN_004954e8(param_1);
@@ -138,7 +138,7 @@ void FUN_00497290(int param_1)
       else {
         temp_v1 = 1;
       }
-      FUN_0037e0b8(temp_v1);
+      gameSetStatusCameraHeightMode(temp_v1);
     }
   }
   else if (*(int *)(param_1 + 0xb40) != 7) {
@@ -177,7 +177,7 @@ void FUN_00497290(int param_1)
     else {
       temp_v1 = 1;
     }
-    FUN_0037e0b8(temp_v1);
+    gameSetStatusCameraHeightMode(temp_v1);
   }
   temp_v0 = inputIsQuestMenuPressed();
   if (temp_v0 != 0) {
@@ -204,7 +204,7 @@ void FUN_00497290(int param_1)
     temp_v0 = inputIsQuestCancelPressed();
     if (temp_v0 != 0) {
       sendEvent100020E();
-      FUN_0049706c(param_1);
+      menuOpenCommandList(param_1);
     }
   }
   if (*(int *)(param_1 + 0xb40) == 7) {

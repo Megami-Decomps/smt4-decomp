@@ -1,70 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bf384` (_code @ 0x2bf384, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation differs: retail keeps the magic in r4 and loads the size pairs with LDM into r5/r6; the build uses r5 and LDRD into r6/r7 (one more saved register). */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
+#define FBIN_MAGIC 0x4E494246 /* "FBIN" */
 
+/* A packed file archive: a header, then `count` files stored back to back. */
+typedef struct FBinHeader {
+    /* 0x00 */ u32 magic;
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u32 headerSize; /* offset of the first file */
+    /* 0x0C */ u32 sizes[1];   /* size of each file */
+} FBinHeader;
 
-int FUN_002bf384(int *param_1,unsigned int param_2)
-
+static __inline u32 *fbinGetSizes(FBinHeader *bin)
 {
-/* irregular: irregular input(s): in_r12 */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  unsigned int in_r12;
-  int temp_v1;
-  int *piVar5;
-  
-  if (param_1 == (int *)0x0) {
-    return 0;
-  }
-  if (*param_1 != 0x4e494246) {
-    temp_v0 = 0;
-  }
-  else {
-    piVar2 = param_1 + 3;
-    if (piVar2 != (int *)0x0) {
-      in_r12 = param_1[1];
+    return bin->sizes;
+}
+
+static __inline u32 fbinGetHeaderSize(FBinHeader *bin)
+{
+    if (bin == NULL) {
+        return 0;
     }
-    temp_v0 = 0;
-    if (piVar2 != (int *)0x0 && param_2 < in_r12) {
-      temp_v0 = 0;
-      if (param_2 != 0) {
-        piVar3 = param_1 + 2;
-        if ((param_2 & 1) != 0) {
-          temp_v0 = *piVar2;
-          piVar3 = piVar2;
-        }
-        temp_v1 = 0;
-        for (param_2 = param_2 >> 1; param_2 != 0; param_2 = param_2 - 1) {
-          piVar2 = piVar3 + 1;
-          piVar5 = piVar3 + 2;
-          piVar3 = piVar3 + 2;
-          temp_v0 = temp_v0 + *piVar2;
-          temp_v1 = temp_v1 + *piVar5;
-        }
-        temp_v0 = temp_v0 + temp_v1;
-      }
-      temp_v1 = 0;
-      if (param_1 != (int *)0x0) {
-        if (*param_1 == 0x4e494246) {
-          temp_v1 = param_1[2];
-        }
-        else {
-          temp_v1 = 0;
-        }
-      }
-      temp_v0 = temp_v0 + temp_v1;
+    return bin->magic == FBIN_MAGIC ? bin->headerSize : 0;
+}
+
+/* Returns file `index` of an FBIN archive; NULL when it isn't one, the archive itself for an index out of range. */
+void *FUN_002bf384(FBinHeader *bin, u32 index)
+{
+    if (bin == NULL) {
+        return NULL;
     }
-    temp_v0 = (int)param_1 + temp_v0;
-  }
-  return temp_v0;
+    if (bin->magic != FBIN_MAGIC) {
+        return NULL;
+    }
+    u32 *sizes = fbinGetSizes(bin);
+    u32 offset = 0;
+    if (sizes != NULL && index < bin->count) {
+        u32 total = 0;
+        for (u32 i = 0; i < index; i++) {
+            total += sizes[i];
+        }
+        offset = total + fbinGetHeaderSize(bin);
+    }
+    return (u8 *)bin + offset;
 }
 
 } /* extern "C" */

@@ -1,48 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038971c` (_code @ 0x38971c, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the compiler places the shared successful return after the model query instead of before it and schedules the model-query arguments differently. */
+#include "gamedata/DevilModel.h"
+#include "addon/aocMain.h"
+
+struct AocModelStatus {
+    /* 0x00 */ u8 unk00[0x0D];
+    /* 0x0D */ u8 ready;
+};
 
 extern "C" {
+extern AocMain *g_aocMain;
+DevilModelOverride *dataTable00FindById(u16 id);
+s32 btlTalkBustUpGetValue(void);
+s32 objGetFlagBit16(AocMain *main);
+s32 aocJobIsValid(void);
+AocModelStatus *packageFindFileRefByName(void *owner, s32 category, s32 model);
 
-int dataTable00FindById(void);
-
-extern unsigned int g_aocMain; /* 0x432fc8 */
-
-extern int btlTalkBustUpGetValue(void);
-extern int objGetFlagBit16(unsigned int);
-extern int FUN_002a6d50(unsigned int, unsigned int, int);
-/* Supplied declaration required: dataTable00FindById. */
-extern int aocJobIsValid(void);
-
-
-unsigned int FUN_0038971c(unsigned int param_1,unsigned int param_2)
-
+// Report whether the portrait mode or requested add-on model is ready.
+u32 FUN_0038971c(void *owner, u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  
-  param_2 = param_2 & 0xffff;
-  dataTable00FindById();
-  temp_v0 = *(short *)(param_2 + 0x88);
-  temp_v1 = btlTalkBustUpGetValue();
-  if (temp_v1 != 0) {
-    temp_v1 = objGetFlagBit16(g_aocMain);
-    if (temp_v1 != 0) {
-      return 1;
+    s16 model = dataTable00FindById((u16)id)->model;
+    if (btlTalkBustUpGetValue()) {
+        if (objGetFlagBit16(g_aocMain))
+            return 1;
+    } else {
+        if (aocJobIsValid())
+            return 1;
+        AocModelStatus *status = packageFindFileRefByName(owner, 22, model + 1);
+        if (status != NULL && status->ready != 0)
+            return 1;
     }
-  }
-  else {
-    temp_v1 = aocJobIsValid();
-    if (temp_v1 != 0) {
-      return 1;
-    }
-    temp_v1 = FUN_002a6d50(param_1,0x16,temp_v0 + 1);
-    if ((temp_v1 != 0) && (*(char *)(temp_v1 + 0xd) != '\0')) {
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

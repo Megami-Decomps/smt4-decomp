@@ -1,80 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f012e` (_code @ 0x2f012e, 0x96 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail sub sp, #28 differs from recovered sub sp, #36. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int sharedRefRelease(int *);
-int FUN_002eb108(int *, int, int, int, int, int);
-int FUN_002eb7e0(int *, int, int, int, int, int);
-int FUN_002ef34c(unsigned char [12], int, int *);
+struct OwnerView {
+    u8 unk00[0x14C];
+    u8 unk14C; // 0x14C
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_4_stack;
+struct CreationInfoView {
+    u8 unk00[0x1C];
+    u8 unk1C; // 0x1C
+};
 
-/* Supplied declaration required: sharedRefRelease. */
-extern int *operatorNew(unsigned int);
-/* Supplied declaration required: FUN_002eb108. */
-extern int *FUN_002eb7d0(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002eb7e0. */
-extern int FUN_002eb83c(void);
-/* Supplied declaration required: FUN_002ef34c. */
-extern int _ZN9Obj55933cC1Et(unsigned char *, unsigned int);
+struct CreatedObjectView;
+struct CreatedObjectVTableView {
+    void* unk00; // 0x00
+    void (*unk04)(CreatedObjectView*); // 0x04
+};
 
+struct CreatedObjectView {
+    CreatedObjectVTableView* unk00; // 0x00
+    u8 unk04[0x20];
+    u8 unk24; // 0x24
+    u8 unk25[0x1F];
+    u16 unk44; // 0x44
+    u8 unk46[0x3E];
+    u8 unk84; // 0x84
+    u8 unk85[0xCB];
+};
 
-void FUN_002f012e(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+struct Obj55933cView {
+    u32 unk00; // 0x00
+    u16 unk04; // 0x04
+    u8 unk06[2]; // 0x06
+};
 
-{
-/* irregular: 4 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned char temp_v1 [12];
-  unsigned char temp_v2 [8];
-  int iStack_24;
-  int iStack_20;
-  unsigned int temp_v3;
-  unsigned int uStack_18;
-  
-  iStack_24 = param_1;
-  iStack_20 = param_2;
-  temp_v3 = param_3;
-  uStack_18 = param_4;
-  if ((int)((unsigned int)*(unsigned char *)(param_2 + 0x1c) * 0x20000000) < 0) {
-    piVar1 = (int *)FUN_002eb7d0(0x150,0);
-    if (piVar1 == (int *)0x0) {
-      return;
-    }
-    FUN_002eb7e0(piVar1,param_1,2,0x2000,param_2,0);
-    if (piVar1 == (int *)0x0) {
-      return;
-    }
-    temp_v0 = FUN_002eb83c();
-    if (temp_v0 == 0) {
-      (**(romwright_code **)(*piVar1 + 4))(piVar1);
-      return;
-    }
-  }
-  else {
-    piVar1 = (int *)operatorNew(0x150);
-    if (piVar1 != (int *)0x0) {
-      FUN_002eb108(piVar1,param_1,2,0x2000,param_2,0);
-    }
-    else {
-      piVar1 = (int *)0x0;
-    }
-  }
-  *(unsigned char *)(piVar1 + 9) = *(unsigned char *)(param_1 + 0x14c);
-  temp_v0 = _ZN9Obj55933cC1Et(temp_v2,temp_v3);
-  *(unsigned short *)(piVar1 + 0x11) = *(unsigned short *)(temp_v0 + 4);
-  *(char *)(piVar1 + 0x21) = (char)param_4;
-  FUN_002ef34c(temp_v1,param_1,piVar1);
-  sharedRefRelease(piVar1);
-  return;
+struct RegistrationResultView {
+    u32 unk00[3]; // 0x00
+};
+
 }
 
-} /* extern "C" */
+extern "C" {
+void* operatorNew(u32 size);
+void* FUN_002eb7d0(u32 size, u32 flags);
+CreatedObjectView* FUN_002eb108(void* storage, OwnerView* owner,
+                              u32 kind, u32 flags,
+                              CreationInfoView* info, u32 extra);
+CreatedObjectView* FUN_002eb7e0(void* storage, OwnerView* owner,
+                              u32 kind, u32 flags,
+                              CreationInfoView* info, u32 extra);
+s32 FUN_002eb83c(CreatedObjectView* object);
+Obj55933cView* _ZN9Obj55933cC1Et(Obj55933cView* storage, u16 value);
+void FUN_002ef34c(RegistrationResultView* result, OwnerView* owner,
+                 CreatedObjectView* object);
+void sharedRefRelease(CreatedObjectView* object);
+}
+
+// Create and register an object, using the alternate allocation path when requested.
+extern "C" void FUN_002f012e(OwnerView* owner, CreationInfoView* info,
+                             u16 identifier, u32 attribute)
+{
+    CreatedObjectView* object;
+    if (info->unk1C & 4) {
+        void* storage = FUN_002eb7d0(0x150, 0);
+        if (!storage)
+            return;
+
+        object = FUN_002eb7e0(storage, owner, 2, 0x2000, info, 0);
+        if (!object)
+            return;
+
+        if (!FUN_002eb83c(object)) {
+            object->unk00->unk04(object);
+            return;
+        }
+    } else {
+        void* storage = operatorNew(0x150);
+        if (storage)
+            object = FUN_002eb108(storage, owner, 2, 0x2000, info, 0);
+        else
+            object = 0;
+    }
+
+    object->unk24 = owner->unk14C;
+    Obj55933cView identifierObject;
+    object->unk44 = _ZN9Obj55933cC1Et(&identifierObject, identifier)->unk04;
+    object->unk84 = static_cast<u8>(attribute);
+
+    RegistrationResultView result;
+    FUN_002ef34c(&result, owner, object);
+    sharedRefRelease(object);
+}

@@ -1,56 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f9c48` (_code @ 0x3f9c48, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes the last-key address before the time compare and merges both tests (vcmp; cmpne; bne), and schedules the Hermite arguments differently. */
+#include "common.h"
 
 extern "C" {
 
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+/* A Hermite key: 12-bit frame and 20-bit value packed in one word, then the two tangents (8.8 fixed point). */
+typedef struct PackedHermiteKey {
+    /* 0x00 */ u32 packed;
+    /* 0x04 */ s16 inSlope;
+    /* 0x06 */ s16 outSlope;
+} PackedHermiteKey;
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned int *FUN_003f89f8(void);
-extern unsigned int nn_math_ARMv6_HermiteC_FAST(int, int, unsigned int);
+typedef struct PackedHermiteCurve {
+    /* 0x00 */ u16 keyCount;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ f32 valueScale;
+    /* 0x0C */ f32 valueOffset;
+    /* 0x10 */ f32 frameScale;
+    /* 0x14 */ PackedHermiteKey keys[1];
+} PackedHermiteCurve;
 
+PackedHermiteKey *FUN_003f89f8(PackedHermiteCurve *curve, f32 time);
+f32 nn_math_ARMv6_HermiteC_FAST(f32 v0, f32 t0, f32 v1, f32 t1, f32 s, f32 d);
 
-unsigned int FUN_003f9c48(unsigned short *param_1)
-
+/* Evaluates the curve at `time`, interpolating between the key at or before it and the next one. */
+f32 FUN_003f9c48(PackedHermiteCurve *curve, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v4;
-  
-  puVar2 = (unsigned int *)FUN_003f89f8();
-  temp_v2 = *puVar2;
-  temp_v4 = (float)VectorUnsignedToFloat(temp_v2 & 0xfff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 8) * temp_v4 == in_s0) << 0x1e);
-  temp_v3 = romwright_subpiece_4_1_0(temp_v1 >> 0x1e,0);
-  if (!temp_v3) {
-    temp_v3 = puVar2 == (unsigned int *)(param_1 + (unsigned int)*param_1 * 4 + 6);
-  }
-  if (temp_v3) {
-    VectorUnsignedToFloat(temp_v2 >> 0xc,(unsigned char)(temp_v1 >> 0x16) & 3);
-    return temp_v2 >> 0xc;
-  }
-  VectorUnsignedToFloat(puVar2[2] & 0xfff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  VectorSignedToFloat((int)(short)*(unsigned short *)((int)puVar2 + 6),(unsigned char)(temp_v1 >> 0x16) & 3);
-  VectorSignedToFloat((int)(short)(unsigned short)puVar2[3],(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v0 = puVar2[2] >> 0xc;
-  VectorUnsignedToFloat(temp_v2 >> 0xc,(unsigned char)(temp_v1 >> 0x16) & 3);
-  VectorUnsignedToFloat(temp_v0,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v1 = nn_math_ARMv6_HermiteC_FAST
-                    ((int)(short)*(unsigned short *)((int)puVar2 + 6),(int)(short)(unsigned short)puVar2[3],temp_v0);
-  return temp_v1;
+    PackedHermiteKey *key = FUN_003f89f8(curve, time);
+    f32 keyTime = curve->frameScale * (f32)(key->packed & 0xfff);
+    if (keyTime != time && key != &curve->keys[curve->keyCount - 1]) {
+        PackedHermiteKey *next = key + 1;
+        f32 interval = curve->frameScale * (f32)(next->packed & 0xfff) - keyTime;
+        return nn_math_ARMv6_HermiteC_FAST(curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale,
+                                           (f32)key->outSlope * (1.0f / 256.0f),
+                                           curve->valueOffset + (f32)(next->packed >> 12) * curve->valueScale,
+                                           (f32)next->inSlope * (1.0f / 256.0f), time - keyTime, interval);
+    }
+    return curve->valueOffset + (f32)(key->packed >> 12) * curve->valueScale;
 }
 
 } /* extern "C" */

@@ -20,7 +20,7 @@ void saveSetNavigationPosition(const NavigationPosition *);
 void gameCopyPersistentSave();
 void gameSynchronizeMapState(ContentTransition *);
 void gameJumpRequestClear();
-void FUN_0022b064(ContentTransition *);
+void buttonHelpSelectByProgress(ContentTransition *);
 void FUN_002bd808(ShortJumpDestination *, const ShortJumpDestination *);
 }
 
@@ -38,15 +38,15 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
 {
     if (scene->phase == 0) {
         FUN_0022af9c(0);
-        FUN_0028d664(&g_aocMain->objC, 1);
+        FUN_0028d664(&g_aocMain->scriptHolder, 1);
         scene->phase = 1;
         return;
     }
     if (scene->phase != 1)
         return;
-    s32 status = FUN_0027398c(&g_aocMain->objC);
+    s32 status = FUN_0027398c(&g_aocMain->scriptHolder);
     if (status) {
-        helpResourcesRelease(&g_aocMain->objC);
+        helpResourcesRelease(&g_aocMain->scriptHolder);
         if (DAT_0049fd14.map >= 0) {
             saveSourcePosition(scene);
             ShortJumpDestination destination = {(u16)DAT_0049fd14.map, (u16)DAT_0049fd14.area,
@@ -66,7 +66,7 @@ extern "C" void aocTransitionUpdate(ContentTransition *scene)
         } else {
             gameJumpRequestClear();
             FUN_0022af9c(1);
-            FUN_0022b064(scene);
+            buttonHelpSelectByProgress(scene);
             scene->phase = 0;
             scene->state = 5;
         }

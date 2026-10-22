@@ -1,48 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035c0c8` (_code @ 0x35c0c8, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Skip-path VFP load grouping and register allocation differ; this build duplicates the zero-return epilogue. */
+#include "sys/LinearFade.h"
 
 extern "C" {
+LinearFadeWork *jobGetWork(u32 job);
+s32 FUN_00162ea4(void);
 
-int VectorSignedToFloat(int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00162ea4(void);
-extern int jobGetWork(void);
-
-
-unsigned int FUN_0035c0c8(void)
-
+/* Advances a normalized fade, allowing the pending steps to be skipped at once. */
+u32 FUN_0035c0c8(u32 job)
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  
-  temp_v0 = jobGetWork();
-  if (*(int *)(temp_v0 + 0x10) == *(int *)(temp_v0 + 0x14)) {
-    temp_v3 = 0.0f;
-    if (0.0f <= *(float *)(temp_v0 + 0xc)) {
-      temp_v3 = 1.0f;
+    LinearFadeWork *work = jobGetWork(job);
+    f32 value;
+    if (work->elapsed == work->duration) {
+        value = work->step < 0.0f ? 0.0f : 1.0f;
+    } else {
+        s32 skip = FUN_00162ea4();
+        s32 elapsed = work->elapsed;
+        if (skip) {
+            work->elapsed = work->duration;
+            work->value += work->step * (f32)(work->duration - elapsed);
+            return 0;
+        }
+        work->elapsed = elapsed + 1;
+        value = work->value + work->step;
     }
-  }
-  else {
-    temp_v1 = FUN_00162ea4();
-    temp_v2 = *(int *)(temp_v0 + 0x10);
-    if (temp_v1 != 0) {
-      *(int *)(temp_v0 + 0x10) = *(int *)(temp_v0 + 0x14);
-      temp_v3 = (float)VectorSignedToFloat(*(int *)(temp_v0 + 0x14) - temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3
-                                        );
-      *(float *)(temp_v0 + 8) = *(float *)(temp_v0 + 8) + *(float *)(temp_v0 + 0xc) * temp_v3;
-      return 0;
-    }
-    *(int *)(temp_v0 + 0x10) = temp_v2 + 1;
-    temp_v3 = *(float *)(temp_v0 + 8) + *(float *)(temp_v0 + 0xc);
-  }
-  *(float *)(temp_v0 + 8) = temp_v3;
-  return 0;
+    work->value = value;
+    return 0;
 }
-
-} /* extern "C" */
+}

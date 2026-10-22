@@ -1,37 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032a9fc` (_code @ 0x32aa00, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
+s32 FUN_002b8ee0(void *animation, u32 mode);
+s32 FUN_002bf818(void *animation);
+extern PlaceWindow *g_placeWin;
 
-extern int FUN_002b8ee0(int, unsigned int);
-extern int FUN_002bf818(int);
-
-
-unsigned int FUN_0032a9fc(int *param_1)
-
+/* Advances opening and closing animations and the window's frame counter. */
+u32 FUN_0032a9fc(void)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *param_1;
-  temp_v0 = *(int *)(temp_v1 + 8);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (((temp_v0 != 2) && (temp_v0 == 3)) && (temp_v0 = FUN_002bf818(temp_v1 + 0x34), temp_v0 != 0)) {
-        *(unsigned int *)(temp_v1 + 8) = 0;
-      }
+    PlaceWindow *window = g_placeWin;
+    switch (window->state) {
+    case 0:
+        break;
+    case 1:
+        if (FUN_002b8ee0(window->animation, 1)) {
+            window->state = 2;
+            window->frame = 0;
+        }
+        break;
+    case 2:
+        break;
+    case 3:
+        if (FUN_002bf818(window->animation)) {
+            window->state = 0;
+        }
+        break;
     }
-    else {
-      temp_v0 = FUN_002b8ee0(temp_v1 + 0x34,1);
-      if (temp_v0 != 0) {
-        *(unsigned int *)(temp_v1 + 8) = 2;
-        *(unsigned int *)(temp_v1 + 0xc) = 0;
-      }
-    }
-  }
-  *(int *)(temp_v1 + 0xc) = *(int *)(temp_v1 + 0xc) + 1;
-  return 0;
+    ++window->frame;
+    return 0;
 }
-
-} /* extern "C" */
+}

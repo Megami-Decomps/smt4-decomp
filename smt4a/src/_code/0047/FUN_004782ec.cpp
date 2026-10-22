@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00169548(int);
 int FUN_0016ccb4(int);
-int FUN_001760cc(unsigned int);
+int aocReleasePackageOwner(unsigned int);
 int FUN_001d0fcc(int *, unsigned int);
 int aocClearDisplayFlag(unsigned int);
 void aocResetOperationState(AocSystemA*);
@@ -30,7 +30,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: FUN_001760cc. */
+/* Supplied declaration required: aocReleasePackageOwner. */
 extern int sysLightEventTryWait(int);
 /* Supplied declaration required: FUN_001d0fcc. */
 extern int byteIsAtLeast100(unsigned int *);
@@ -79,7 +79,7 @@ void FUN_004782ec(unsigned int *param_1)
     }
     FUN_0016ccb4(g_aocMain + 0x80);
     aocClearDisplayFlag(g_aocSystem);
-    FUN_001760cc(g_aocSystem);
+    aocReleasePackageOwner(g_aocSystem);
     temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
     if (temp_v1 != 0) {
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
@@ -112,7 +112,7 @@ void FUN_004782ec(unsigned int *param_1)
       if (temp_v2 != 3) {
         if ((temp_v2 == 9999 && (temp_v0 & 4) == 0) && ((temp_v0 & 8) == 0)) {
           aocClearDisplayFlag(g_aocSystem);
-          FUN_001760cc(g_aocSystem);
+          aocReleasePackageOwner(g_aocSystem);
           temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;

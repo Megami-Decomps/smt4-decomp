@@ -1,68 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fc5c0` (_code @ 0x1fc5c0, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the debug-state base in r1 and the state in r0, moves the work pointer after the NULL test, and ends the dispatch with bne/b; case layout matches. */
+#include "common.h"
 
 extern "C" {
 
-int textDrawDefaultString(void);
-int aocIndexValueOrDefault(unsigned int);
-int FUN_003c2fe8(int *, unsigned int);
-int FUN_003c3238(int *, unsigned int);
+typedef struct BtlDebugMenu {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ u8 unk04[0xC];
+    /* 0x10 */ u32 listBox;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u32 unit;
+} BtlDebugMenu;
 
-extern unsigned int DAT_0043438c; /* 0x43438c */
-extern int *DAT_00434390; /* 0x434390 */
+typedef struct BtlDebugState {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 value;
+    /* 0x08 */ BtlDebugMenu *menu;
+} BtlDebugState;
 
-extern unsigned int FUN_002561d8(int, int, unsigned int);
-/* Supplied declaration required: textDrawDefaultString. */
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-/* Supplied declaration required: aocIndexValueOrDefault. */
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_003c2fe8. */
-/* Supplied declaration required: FUN_003c3238. */
+typedef struct BtlDebugWork {
+    /* 0x0000 */ u8 unk0000[0x49C8];
+    /* 0x49C8 */ u32 aocIndex;
+} BtlDebugWork;
 
+extern BtlDebugState g_btlDebugState;
 
-unsigned int FUN_001fc5c0(void)
+BtlDebugWork *jobGetWork(void);
+u32 asdListBoxGetSelectedItemId(u32 listBox);
+const char *aocIndexValueOrDefault(u32 index);
+void textDrawDefaultString(const char *text, f32 x, f32 y);
+u32 FUN_002561d8(BtlDebugWork *work, u32 unit, s32 flags);
+void FUN_003c2fe8(BtlDebugMenu *menu, u32 value);
+void FUN_003c3238(BtlDebugMenu *menu, u32 value);
 
+/* Battle debug menu update: act on the selected list item for the menu's current state. */
+u32 FUN_001fc5c0(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = jobGetWork();
-  piVar1 = DAT_00434390;
-  if (DAT_00434390 != (int *)0x0) {
-    temp_v1 = *DAT_00434390;
-    if (temp_v1 != 1) {
-      if (temp_v1 != 10) {
-        if (temp_v1 != 0xc) {
-          if (temp_v1 != 0xe) {
-            return 0;
-          }
-          temp_v1 = asdListBoxGetSelectedItemId(DAT_00434390[4]);
-        }
-        else {
-          temp_v1 = asdListBoxGetSelectedItemId(DAT_00434390[4]);
-        }
-        if (temp_v1 == 0) {
-          temp_v2 = FUN_002561d8(temp_v0,piVar1[7],1);
-          FUN_003c3238(piVar1,temp_v2);
-        }
-      }
-      else {
-        temp_v1 = asdListBoxGetSelectedItemId(DAT_00434390[4]);
-        if (temp_v1 == 0xb) {
-          aocIndexValueOrDefault(*(unsigned int *)(temp_v0 + 0x49c8));
-          textDrawDefaultString();
-        }
-      }
+    BtlDebugWork *work = jobGetWork();
+    BtlDebugMenu *menu = g_btlDebugState.menu;
+
+    if (menu == NULL) {
+        return 0;
     }
-    else {
-      FUN_003c2fe8(DAT_00434390,DAT_0043438c);
+    switch (menu->state) {
+    case 1:
+        FUN_003c2fe8(menu, g_btlDebugState.value);
+        break;
+    case 10:
+        if (asdListBoxGetSelectedItemId(menu->listBox) == 11) {
+            textDrawDefaultString(aocIndexValueOrDefault(work->aocIndex), 256.0f, 42.0f);
+        }
+        break;
+    case 14:
+        if (asdListBoxGetSelectedItemId(menu->listBox) == 0) {
+            FUN_003c3238(menu, FUN_002561d8(work, menu->unit, 1));
+        }
+        break;
+    case 12:
+        if (asdListBoxGetSelectedItemId(menu->listBox) == 0) {
+            FUN_003c3238(menu, FUN_002561d8(work, menu->unit, 1));
+        }
+        break;
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

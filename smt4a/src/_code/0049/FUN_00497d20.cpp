@@ -9,7 +9,7 @@ int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int FUN_0018349c(...);
-int FUN_00493408(...);
+int drawTextAtRelativePosition(...);
 int FUN_004934ac(...);
 int FUN_0049368c(...);
 int VectorSignedToFloat(...);
@@ -41,12 +41,12 @@ extern unsigned char LAB_004983a0; /* 0x4983a0 */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018349c. */
-/* Supplied declaration required: FUN_00493408. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
 extern unsigned int itemGetNameOrFallback(short, unsigned int);
 extern int FUN_0049cab8(short);
-extern unsigned int FUN_0049cc10(unsigned int *);
+extern unsigned int aocItemGetPrice(unsigned int *);
 
 
 void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
@@ -155,7 +155,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     temp_v4 = FUN_0049cab8(temp_v1);
     if (temp_v4 != 0) {
       temp_v11 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v11 + 2)),temp_v1) & 0xfc00ffff;
-      temp_v6 = FUN_0049cc10(&temp_v11);
+      temp_v6 = aocItemGetPrice(&temp_v11);
       if (param_3 == 0) {
         temp_v9 = 0xd1;
       }
@@ -174,7 +174,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v8 = *(short *)(temp_v4 + 10);
       textFormatBuffer(temp_v12,&LAB_00498394,temp_v6);
-      FUN_00493408(param_1 + 0x3a4,0,temp_v0 + temp_v7,temp_v8 + temp_v3,0,7,temp_v9,temp_v2,temp_v12);
+      drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v0 + temp_v7,temp_v8 + temp_v3,0,7,temp_v9,temp_v2,temp_v12);
     }
     else {
       if (param_3 != 0) {
@@ -214,7 +214,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     temp_v0 = *(short *)(temp_v4 + 8);
     temp_v8 = *(short *)(temp_v4 + 10);
     textFormatBuffer(temp_v12,&LAB_0049839c,temp_v13);
-    FUN_00493408(param_1 + 0x3a4,0,temp_v0 + temp_v7,temp_v8 + temp_v3,0,7,temp_v6,temp_v2,temp_v12);
+    drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v0 + temp_v7,temp_v8 + temp_v3,0,7,temp_v6,temp_v2,temp_v12);
     if (param_3 == 0) {
       temp_v9 = 0x100;
     }
@@ -222,7 +222,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       temp_v9 = 0x101;
     }
     temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v9);
-    FUN_00493408(param_1 + 0x3a4,0,*(short *)(temp_v4 + 8) + temp_v7,*(short *)(temp_v4 + 10) + temp_v3,0,7,
+    drawTextAtRelativePosition(param_1 + 0x3a4,0,*(short *)(temp_v4 + 8) + temp_v7,*(short *)(temp_v4 + 10) + temp_v3,0,7,
                  temp_v6,temp_v2,&LAB_004983a0);
     if ((*(char *)(param_1 + 0x20) != '\0') && (temp_v4 = FUN_0049cab8(temp_v1), temp_v4 != 0)) {
       if (param_3 == 0) {

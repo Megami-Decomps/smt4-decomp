@@ -22,7 +22,7 @@ int asdMemFree(void);
 int FUN_00228b04(int, int);
 int FUN_0023ff10(void);
 int resourceRunOperationIfUnblocked(...);
-int FUN_002ae320(void);
+int questMarkSelectedSpecialDetail(void);
 int FUN_003450d4(int, unsigned int, int, int, int, int, char [8], int, int);
 int FUN_003d474c(void);
 int FUN_003d498c(...);
@@ -59,7 +59,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002ae320. */
+/* Supplied declaration required: questMarkSelectedSpecialDetail. */
 extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: slotBlockSetPair. */
 extern int FUN_002f7730(int, unsigned int);
@@ -169,7 +169,7 @@ void FUN_0023eaf8(void)
           *(int *)(temp_v8 + 0x914) = temp_v3;
         }
         if (*(short *)(temp_v2 + 0xcd0) >= 3) {
-          FUN_002ae320();
+          questMarkSelectedSpecialDetail();
         }
         temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0xcce);
         temp_v14 = SBORROW4(temp_v6,temp_v10);
@@ -222,7 +222,7 @@ void FUN_0023eaf8(void)
           *(int *)(temp_v8 + 0x914) = temp_v3;
         }
         if (*(short *)(temp_v2 + 0xcd0) >= 3) {
-          FUN_002ae320();
+          questMarkSelectedSpecialDetail();
         }
         temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0xcce);
         temp_v14 = SBORROW4(temp_v6,temp_v10);
@@ -418,7 +418,7 @@ LAB_0023f21c:
               if (temp_v8 != 0) {
                 FUN_00212724();
               }
-              FUN_002ae320();
+              questMarkSelectedSpecialDetail();
               if (*(short *)(temp_v2 + 0xcce) != 0) {
                 FUN_00417d08(temp_v2);
                 *(unsigned short *)(temp_v2 + 0xcce) = 0;

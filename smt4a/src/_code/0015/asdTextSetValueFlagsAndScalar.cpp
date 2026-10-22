@@ -1,9 +1,5 @@
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Text/TextDefaults.h"
 
-struct TextFlagDefaults {
-    /* 0x00 */ u8 unk00[0x0C];
-    /* 0x0C */ u32 flags;
-};
 struct TextScalarWork {
     /* 0x00 */ u8 unk00[0x50];
     /* 0x50 */ u32 value;
@@ -12,8 +8,7 @@ struct TextScalarWork {
 };
 
 extern "C" {
-
-extern TextFlagDefaults g_asdTextDefaults;
+extern AsdTextDefaultsA g_asdTextDefaults;
 
 /* Updates the text work value, masked default flags and scalar. */
 void asdTextSetValueFlagsAndScalar(TextScalarWork *work, u32 value, u32 flags, f32 scalar)

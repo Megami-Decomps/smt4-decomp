@@ -1,28 +1,18 @@
 /* Returns the signed flag byte at +0x20F0 of the global session object, or 1 when there is no session. */
-#include "common.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-typedef struct Session {
-    /* 0x0000 */ u8 unk0000[0x20F0];
-    /* 0x20F0 */ s8 value;
-} Session;
-
-typedef struct SessionHolder {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ Session *session;
-} SessionHolder;
-
-extern SessionHolder g_gameGlobals;
+extern ObjBRef g_gameGlobals;
 
 s32 FUN_0039c608(void)
 {
-    Session *session = g_gameGlobals.session;
+    ObjB *session = g_gameGlobals.instance;
 
     if (session == NULL) {
         return 1;
     }
-    return session->value;
+    return session->unk20F0;
 }
 
 }

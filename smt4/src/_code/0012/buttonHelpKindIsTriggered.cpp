@@ -21,9 +21,9 @@ typedef struct ButtonHelpGlobal {
 
 extern ButtonHelpGlobal g_buttonHelp;
 
-s32 FUN_002af600(s32 button);
+s32 ifTouchIsInitialSelection(s32 button);
 
-/* Returns 1 if a slot of the given kind (or a combo slot, kinds 8 and 9, that covers it) has a button for which FUN_002af600 holds. */
+/* Returns 1 if a slot of the given kind (or a combo slot, kinds 8 and 9, that covers it) has a button for which ifTouchIsInitialSelection holds. */
 u32 buttonHelpKindIsTriggered(u32 kind)
 {
     ButtonRecord *record = g_buttonHelp.record;
@@ -31,18 +31,18 @@ u32 buttonHelpKindIsTriggered(u32 kind)
 
     if (record != NULL) {
         for (i = 0; i < 6; i++) {
-            if (record->slots[i].kind == kind && record->enabled[i] != 0 && FUN_002af600(record->buttons[i]) != 0) {
+            if (record->slots[i].kind == kind && record->enabled[i] != 0 && ifTouchIsInitialSelection(record->buttons[i]) != 0) {
                 return 1;
             }
             if (record->slots[i].kind == 8 && kind == 4 && record->enabled[i] != 0) {
-                if (FUN_002af600(record->buttons[i]) != 0 || FUN_002af600(record->buttons[i + 1]) != 0 ||
-                    FUN_002af600(record->buttons[i + 2]) != 0) {
+                if (ifTouchIsInitialSelection(record->buttons[i]) != 0 || ifTouchIsInitialSelection(record->buttons[i + 1]) != 0 ||
+                    ifTouchIsInitialSelection(record->buttons[i + 2]) != 0) {
                     return 1;
                 }
             }
             if (record->slots[i].kind == 9 && kind == 3 && record->enabled[i] != 0) {
-                if (FUN_002af600(record->buttons[i]) != 0 || FUN_002af600(record->buttons[i + 1]) != 0 ||
-                    FUN_002af600(record->buttons[i + 2]) != 0) {
+                if (ifTouchIsInitialSelection(record->buttons[i]) != 0 || ifTouchIsInitialSelection(record->buttons[i + 1]) != 0 ||
+                    ifTouchIsInitialSelection(record->buttons[i + 2]) != 0) {
                     return 1;
                 }
             }

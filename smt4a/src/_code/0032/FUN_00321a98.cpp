@@ -1,82 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321a98` (_code @ 0x321a98, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the callee-saved register assignment of the per-entry sort values differs (retail: a in r8/sl/r6, b in r7/r9/r1). */
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
+/* A demon list entry: its demon id and its party slot (negative when it has none). */
+typedef struct DevilListEntry {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ s32 slot;
+} DevilListEntry;
 
-extern int idIsAbove400(int);
-extern int gameGetSlotRecord(void);
-/* Supplied declaration required: dataTable04FindById. */
-extern int FUN_0039a598(int);
-extern int FUN_003a679c(int);
+typedef struct Table04Record {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u16 sortKey;
+} Table04Record;
 
+s32 idIsAbove400(s32 id);
+s32 FUN_003a679c(s32 id);
+s32 dataTable04GetCategoryOrder(s32 id);
+Table04Record *dataTable04FindById(s32 id);
 
-int FUN_00321a98(int *param_1,int *param_2)
-
+/* Sort comparator for demon list entries: by FUN_003a679c, then dataTable04GetCategoryOrder, then descending table 0x04 key,
+ * then id, then the party slot's entry id (ids above 400 sort last). */
+s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v5 = 99;
-    temp_v0 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v5 = FUN_003a679c(*param_1);
-    temp_v0 = FUN_0039a598(*param_1);
-    temp_v1 = *param_1;
-    dataTable04FindById();
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x2c);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v1 = 99;
-    temp_v6 = 99;
-    temp_v3 = 0;
-  }
-  else {
-    temp_v1 = FUN_003a679c(*param_2);
-    temp_v6 = FUN_0039a598(*param_2);
-    temp_v2 = *param_2;
-    dataTable04FindById();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x2c);
-  }
-  temp_v5 = temp_v5 - temp_v1;
-  temp_v7 = 0;
-  if (temp_v5 == 0) {
-    temp_v5 = temp_v0 - temp_v6;
-    temp_v7 = temp_v5 == 0;
-  }
-  if (((temp_v7) && (temp_v5 = temp_v3 - temp_v4, temp_v5 == 0)) && (temp_v5 = *param_1 - *param_2, temp_v5 == 0))
-  {
-    if (param_1[1] < 0) {
-      temp_v4 = 0;
+    s32 aFirst;
+    s32 aSecond;
+    u32 aKey;
+    s32 bFirst;
+    s32 bSecond;
+    u32 bKey;
+    s32 diff;
+
+    if (idIsAbove400(a->id)) {
+        aFirst = 99;
+        aSecond = 99;
+        aKey = 0;
+    } else {
+        aFirst = FUN_003a679c(a->id);
+        aSecond = dataTable04GetCategoryOrder(a->id);
+        aKey = dataTable04FindById(a->id)->sortKey;
     }
-    else {
-      temp_v0 = gameGetSlotRecord();
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
+    if (idIsAbove400(b->id)) {
+        bFirst = 99;
+        bSecond = 99;
+        bKey = 0;
+    } else {
+        bFirst = FUN_003a679c(b->id);
+        bSecond = dataTable04GetCategoryOrder(b->id);
+        bKey = dataTable04FindById(b->id)->sortKey;
     }
-    if (param_2[1] < 0) {
-      temp_v3 = 0;
+    diff = aFirst - bFirst;
+    if (diff != 0) {
+        return diff;
     }
-    else {
-      temp_v0 = gameGetSlotRecord();
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x62);
+    diff = aSecond - bSecond;
+    if (diff != 0) {
+        return diff;
     }
-    temp_v5 = temp_v4 - temp_v3;
-  }
-  return temp_v5;
+    diff = bKey - aKey;
+    if (diff != 0) {
+        return diff;
+    }
+    diff = a->id - b->id;
+    if (diff != 0) {
+        return diff;
+    }
+    u32 aEntry = a->slot < 0 ? 0 : gameGetSlotRecord(a->slot)->entryId;
+    u32 bEntry = b->slot < 0 ? 0 : gameGetSlotRecord(b->slot)->entryId;
+    return aEntry - bEntry;
 }
 
 } /* extern "C" */

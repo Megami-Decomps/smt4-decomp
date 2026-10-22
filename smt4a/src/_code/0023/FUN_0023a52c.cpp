@@ -12,7 +12,7 @@ extern struct {
 
 void FUN_0023a52c(void)
 {
-    if (g_mapRndMaze.unk394 != 0 && g_gameState.unk27 != 0) {
+    if (g_mapRndMaze.unk394 != 0 && g_gameState.progressEnabled != 0) {
         FUN_002c5df4();
     }
 }

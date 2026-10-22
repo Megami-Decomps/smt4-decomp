@@ -72,8 +72,8 @@ extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: titleOverlaySetModeAnimation. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int padIsButtonRepeat(unsigned int);
-extern int FUN_002b8d54(void);
-extern int FUN_002b8d68(void);
+extern int ifTouchGetSelectionMode(void);
+extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: msgBoxFlagsClearBit7. */
 extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: pairSetFirstResetSecond. */
@@ -350,10 +350,10 @@ LAB_001149c8:
           *(int *)(temp_v3 + 0x60) = *(int *)(temp_v3 + 0x60) - 1;
         }
         temp_v9 = *(int *)(temp_v3 + 0x20);
-        temp_v8 = FUN_002b8d68();
-        temp_v4 = FUN_002b8d54();
-        if ((temp_v4 != 1) && (temp_v4 = FUN_002b8d54(), temp_v4 != 2)) {
-          temp_v4 = FUN_002b8d54();
+        temp_v8 = ifTouchGetSelectedRegion();
+        temp_v4 = ifTouchGetSelectionMode();
+        if ((temp_v4 != 1) && (temp_v4 = ifTouchGetSelectionMode(), temp_v4 != 2)) {
+          temp_v4 = ifTouchGetSelectionMode();
           if (((temp_v4 == 6) && (*(short *)(temp_v3 + 0x56) <= temp_v8)) &&
              (temp_v8 <= *(short *)(temp_v3 + temp_v9 * 2 + 0x54))) {
             temp_v10 = 1;
@@ -478,10 +478,10 @@ LAB_00114d48:
       }
       if (*(char *)(temp_v3 + 9) == '\x13') {
         temp_v9 = *(int *)(temp_v3 + 0x20);
-        temp_v4 = FUN_002b8d68();
-        temp_v8 = FUN_002b8d54();
-        if ((temp_v8 != 1) && (temp_v8 = FUN_002b8d54(), temp_v8 != 2)) {
-          temp_v8 = FUN_002b8d54();
+        temp_v4 = ifTouchGetSelectedRegion();
+        temp_v8 = ifTouchGetSelectionMode();
+        if ((temp_v8 != 1) && (temp_v8 = ifTouchGetSelectionMode(), temp_v8 != 2)) {
+          temp_v8 = ifTouchGetSelectionMode();
           if (((temp_v8 != 6) || (temp_v4 < *(short *)(temp_v3 + 0x56))) ||
              (*(short *)(temp_v3 + temp_v9 * 2 + 0x54) < temp_v4)) goto LAB_00114ea4;
           *(int *)(temp_v3 + 0x18) = temp_v4 - *(short *)(temp_v3 + 0x56);

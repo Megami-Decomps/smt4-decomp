@@ -13,7 +13,7 @@ typedef struct {
 } param_5_stack;
 
 /* Supplied declaration required: FUN_002a6d1c. */
-extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
+extern int packageFindFileRefByName(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8ac4. */
 
 
@@ -26,7 +26,7 @@ void FUN_001413d0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned int *puVar2;
   unsigned char temp_v1 [68];
   
-  temp_v0 = FUN_002a6d50(param_1,0x1a,param_2);
+  temp_v0 = packageFindFileRefByName(param_1,0x1a,param_2);
   puVar2 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
     puVar2 = *(unsigned int **)(temp_v0 + 4);

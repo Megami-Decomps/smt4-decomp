@@ -28,7 +28,7 @@ extern "C" {
 MarkPresenceRecord *gameDataGetMarkEntry(s32 index);
 void sysPlaySe(u32 sound);
 void FUN_0037c8e4(s32 enabled, s32 mode);
-void FUN_0038843c();
+void messageRestoreBanner();
 u32 FUN_003ba65c(void *controls);
 u32 gameDataBlocksGetFlagByte();
 extern CampCecFlagGlobals g_campCec;
@@ -72,7 +72,7 @@ extern "C" s32 FUN_0035a2a4(CampCecMenuState *work)
     if (work->refreshRequested != 0) {
         work->refreshRequested = 0;
         FUN_0037c8e4(1, 0);
-        FUN_0038843c();
+        messageRestoreBanner();
     }
     if (FUN_003ba65c(work->controls) & 2) {
         u32 enabled = gameDataBlocksGetFlagByte() & 2;

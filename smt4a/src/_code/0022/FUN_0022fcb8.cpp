@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/SupportUnitRecord.h"
 
 extern "C" {
 
@@ -8,13 +8,9 @@ struct GameOptions {
     /* 0x12E */ u16 selection;
 };
 
-struct OptionResult {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 flags;
-};
 
 GameOptions *gameGetOptions(void);
-OptionResult *dataTableGetCategoryEntry(s32 value, u32 selection);
+SupportUnitRecordA *dataTableGetCategoryEntry(s32 value, u32 selection);
 u32 gameOptionResourceId(u32 value);
 
 u32 FUN_0022fcb8(void)

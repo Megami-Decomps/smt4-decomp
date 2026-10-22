@@ -1,47 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024fcdc` (_code @ 0x24fcdc, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: separate-unit calls spill the destination instead of retaining it in retail's unmodified r3. */
+#include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
+void matrix43Multiply(Matrix44 *destination, const Matrix44 *first, const Matrix44 *second);
+void matrixCopyFull(Matrix44 *destination, const Matrix44 *source);
 
-int matrix43Multiply(unsigned char [72], unsigned int, unsigned int);
-int matrixCopyFull(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
-
-/* Supplied declaration required: matrix43Multiply. */
-/* Supplied declaration required: matrixCopyFull. */
-
-
-unsigned int FUN_0024fcdc(unsigned int param_1,unsigned int param_2,int param_3)
-
+Matrix44 *FUN_0024fcdc(Matrix44 *destination, const Matrix44 *source, s32 mode)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [72];
-  
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 != 2) {
-        param_1 = 0;
-      }
-      else {
-        matrix43Multiply(temp_v0,param_1,param_2);
-        matrixCopyFull(param_1,temp_v0);
-      }
+    Matrix44 product;
+    switch (mode) {
+    case 0:
+        matrixCopyFull(destination, source);
+        break;
+    case 1:
+        matrix43Multiply(&product, source, destination);
+        matrixCopyFull(destination, &product);
+        break;
+    case 2:
+        matrix43Multiply(&product, destination, source);
+        matrixCopyFull(destination, &product);
+        break;
+    default:
+        return NULL;
     }
-    else {
-      matrix43Multiply(temp_v0,param_2,param_1);
-      matrixCopyFull(param_1,temp_v0);
-    }
-  }
-  else {
-    matrixCopyFull();
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return param_1;
+    return destination;
 }
-
-} /* extern "C" */
+}

@@ -20,7 +20,7 @@ struct WindowOwner {
 extern "C" {
 extern WindowOwner *DAT_00588e2c;
 void FUN_002c75c0(u32, u32);
-void FUN_0038b330(void);
+void saveLoadProcessUpdateSdCardDetection(void);
 void *asdOperatorNew(u32);
 Obj557e3c *FUN_00420d08(Obj557e3c *);
 
@@ -28,7 +28,7 @@ Obj557e3c *FUN_00420d08(Obj557e3c *);
 void FUN_0039c2a4(u32 argument)
 {
     FUN_002c75c0(0, 0);
-    FUN_0038b330();
+    saveLoadProcessUpdateSdCardDetection();
     WindowOwner *owner = DAT_00588e2c;
     Obj557e3c *window = (Obj557e3c *)asdOperatorNew(sizeof(Obj557e3c));
     if (window != NULL)

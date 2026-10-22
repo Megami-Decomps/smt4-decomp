@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_00186f58(void);
+int dataFindKeyedRecordWithOverrides(void);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_003e41f8(unsigned int, int);
 int gameDataSetAreaBit(unsigned int, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_00221a08(...); /* 0x221a08 */
 extern int FUN_00231f50(...); /* 0x231f50 */
 extern int gauntletAppCompareBySortKeys(...); /* 0x2320b0 */
-extern int FUN_002418f8(...); /* 0x2418f8 */
+extern int appComparePurchaseOrder(...); /* 0x2418f8 */
 extern int FUN_002b2c44(...); /* 0x2b2c44 */
 extern int FUN_002ce57c(...); /* 0x2ce57c */
 extern int gauntletAppCompareBySortKeysDescending(...); /* 0x2ce6dc */
@@ -29,7 +29,7 @@ extern int entryRefCompareByKindLevelOrder(...); /* 0x2fdfc0 */
 extern int g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_00186f58. */
+/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_0026140c(void);
 extern unsigned int objectApplyIfUnblocked(int);
@@ -74,7 +74,7 @@ void FUN_003d1aa0(int param_1)
     temp_v4 = 1;
     do {
       temp_v0 = temp_v4;
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
       if ((temp_v0 != 0) &&
          ((temp_v1 = gameDataFlagTestBit(temp_v4), temp_v1 != 0 || (temp_v1 = FUN_003e4230(temp_v4), temp_v1 != 2)))) {
         temp_v1 = FUN_003e44ec(temp_v4);
@@ -106,7 +106,7 @@ void FUN_003d1aa0(int param_1)
   if ((*pbVar8 & 0x7f) == 0x15) {
     if (temp_v5 != 0) {
       temp_v3 = objectApplyIfUnblocked(temp_v1 + 0x10);
-      qsort(temp_v1 + 0x74,temp_v3,4,FUN_002418f8,unaff_r4,unaff_r5,unaff_r6,in_lr);
+      qsort(temp_v1 + 0x74,temp_v3,4,appComparePurchaseOrder,unaff_r4,unaff_r5,unaff_r6,in_lr);
     }
     else {
       temp_v3 = objectApplyIfUnblocked(temp_v1 + 0x10);

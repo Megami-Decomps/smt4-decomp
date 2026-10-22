@@ -1,8 +1,9 @@
+#include "shard/NaviMain.h"
 #include "shard/Shard003D.h"
 
 extern "C" {
+extern NaviMainA *g_naviMain;
 
-extern Sub68Owner *g_naviMain;
 extern void FUN_00168980(u32 arg);
 extern void texSetRelease(void);
 extern void campCommonBgRelease(void);
@@ -20,7 +21,7 @@ void sub68OwnerDestroyAll(void)
     campButtonHelpRelease();
     if (g_naviMain != NULL) {
         jobStop(g_naviMain->job, 0);
-        texOwner1480Free(g_naviMain->sub);
+        texOwner1480Free(g_naviMain->panel);
         asdMemFree(g_naviMain);
         g_naviMain = NULL;
     }

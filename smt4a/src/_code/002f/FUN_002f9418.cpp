@@ -11,7 +11,7 @@ int sysPlaySe(...);
 int FUN_00184310(void);
 int dataTable00FindById(void);
 int FUN_0021a6c8(int);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_002c7e24(void);
 int FUN_002c982c(...);
 int FUN_002f0420(...);
@@ -21,7 +21,7 @@ int FUN_003343f0(...);
 int FUN_0036d318(...);
 int FUN_00371edc(...);
 int FUN_0037e09c(int);
-int FUN_0038e4cc(...);
+int statusIconSetKind(...);
 
 /* stack frame of param_1: 11 slot(s), 38 byte(s) */
 typedef struct {
@@ -41,16 +41,16 @@ typedef struct {
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-extern int FUN_00165070(void);
+extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_0021a6c8. */
 extern int FUN_0023b3d0(void);
 extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_002c7e24. */
 /* Supplied declaration required: FUN_002c982c. */
@@ -63,7 +63,7 @@ extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0036d318. */
 /* Supplied declaration required: FUN_00371edc. */
 /* Supplied declaration required: FUN_0037e09c. */
-/* Supplied declaration required: FUN_0038e4cc. */
+/* Supplied declaration required: statusIconSetKind. */
 
 
 void FUN_002f9418(int param_1)
@@ -102,7 +102,7 @@ void FUN_002f9418(int param_1)
   
   temp_v8 = 0;
   do {
-    temp_v2 = FUN_00165070();
+    temp_v2 = ifTouchGetSelectedRegion();
     if (temp_v2 == *(short *)(param_1 + temp_v8 * 2 + 0x480e)) goto LAB_002f9458;
     temp_v8 = temp_v8 + 1;
   } while (temp_v8 < 0x20);
@@ -116,7 +116,7 @@ LAB_002f9458:
   switch(*puVar15) {
   case 1:
     FUN_0021a6c8(param_1);
-    FUN_0038e4cc(param_1,0);
+    statusIconSetKind(param_1,0);
     temp_v8 = FUN_00163aa4(param_1 + 0x11a0);
     if (temp_v8 != 0) {
       *puVar15 = 2;
@@ -185,7 +185,7 @@ LAB_002f9458:
   case 2:
     temp_v2 = FUN_00163aa4(param_1 + 0x12b8);
     if (temp_v2 == 0) break;
-    FUN_0038e4cc(param_1,0);
+    statusIconSetKind(param_1,0);
     temp_v2 = FUN_0023b3d0();
     if (temp_v2 == 0) break;
     psVar8 = (short *)FUN_002c7e24();
@@ -223,7 +223,7 @@ LAB_002f9458:
             temp_v18 = *(unsigned short *)(temp_v2 + 0x485e);
             statusDisplayBindUnitRecord(temp_v11,1,0,temp_v22 + 0x4871);
             FUN_0037e09c(1);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
             *temp_v21 = 0;
             temp_v4 = FUN_0026264c(*(unsigned short *)(temp_v2 + 0x4858));
             if (temp_v4 != 0) {
@@ -247,12 +247,12 @@ LAB_002f9458:
       *temp_v20 = 0;
       temp_v8 = FUN_0035db94();
       if (temp_v8 < 0) {
-        FUN_0038e4cc(param_1,10);
+        statusIconSetKind(param_1,10);
       }
       else {
         temp_v8 = FUN_0035db94();
         if (0 < temp_v8) {
-          FUN_0038e4cc(param_1,9);
+          statusIconSetKind(param_1,9);
         }
       }
       break;
@@ -260,9 +260,9 @@ LAB_002f9458:
     if (*(char *)(param_1 + 0x38b0) != '\0') break;
     puVar14 = (unsigned char *)(param_1 + 0x3894);
     if (temp_v8 >= 0) {
-      temp_v2 = FUN_001643a0();
-      if ((temp_v2 != 1) && (temp_v2 = FUN_001643a0(), temp_v2 != 2)) {
-        temp_v2 = FUN_001643a0();
+      temp_v2 = ifTouchGetSelectionMode();
+      if ((temp_v2 != 1) && (temp_v2 = ifTouchGetSelectionMode(), temp_v2 != 2)) {
+        temp_v2 = ifTouchGetSelectionMode();
         if (temp_v2 != 6) goto LAB_002f9924;
         if (temp_v8 != 0x11) {
           *puVar14 = 0;
@@ -298,7 +298,7 @@ LAB_002f9458:
         *puVar15 = 4;
         FUN_003343f0();
       }
-      temp_v2 = FUN_001643a0();
+      temp_v2 = ifTouchGetSelectionMode();
       if (((temp_v2 == 1) && (temp_v2 = ifTouchGetActiveCounter(), temp_v2 < 1)) && (temp_v8 != 0x11)) {
         eventQueueAddUniqueIfValid(0x100020d);
       }
@@ -354,7 +354,7 @@ LAB_002f9924:
         temp_v18 = *(unsigned short *)(param_1 + 0x485e);
         statusDisplayBindUnitRecord(temp_v11,1,0,param_1 + 0x4871);
         FUN_002f0420(0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         *temp_v21 = 0;
         *temp_v20 = 0;
       }
@@ -364,12 +364,12 @@ LAB_002f9924:
       *puVar15 = 2;
       temp_v8 = FUN_0035db94();
       if (temp_v8 < 0) {
-        FUN_0038e4cc(param_1,0xb);
+        statusIconSetKind(param_1,0xb);
       }
       else {
         temp_v8 = FUN_0035db94();
         if (0 < temp_v8) {
-          FUN_0038e4cc(param_1,0xc);
+          statusIconSetKind(param_1,0xc);
         }
       }
       puVar7 = (unsigned short *)FUN_002c7e24();

@@ -1,57 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021e16c` (_code @ 0x21e16c, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies origin through VFP (vldmia/vstmia s1-s3) and direction as ldm/ldr pairs, keeps source in r4, and stores length/progress with separate vstr; ours copies both with core ldm/stm. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
+typedef struct VqVec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+} VqVec3;
 
-extern int g_vectorQueueWork; /* 0x447e40 */
+/* A vector source (0x284 bytes): its start point and direction. */
+typedef struct VqSource {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ VqVec3 origin;
+    /* 0x10 */ u8 unk10[0x1C];
+    /* 0x2C */ VqVec3 direction;
+    /* 0x38 */ u8 unk38[0x24C];
+} VqSource;
 
+/* A queued vector request. */
+typedef struct VqRequest {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 done;
+    /* 0x04 */ s32 source;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ VqVec3 origin;
+    /* 0x18 */ VqVec3 direction;
+    /* 0x24 */ f32 length;
+    /* 0x28 */ f32 progress;
+    /* 0x2C */ s32 index;
+} VqRequest;
 
-char * FUN_0021e16c(int param_1)
+typedef struct VectorQueueWork {
+    /* 0x0000 */ VqSource sources[16];
+    /* 0x2840 */ u32 unk2840;
+    /* 0x2844 */ VqRequest requests[32];
+} VectorQueueWork;
 
+extern VectorQueueWork *g_vectorQueueWork;
+
+/* Queues a request for vector `source` of length `length` in the first free slot (NULL when full). */
+VqRequest *FUN_0021e16c(s32 source, f32 length)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_s0;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v1 = 0;
-  temp_v2 = g_vectorQueueWork + param_1 * 0x284;
-  do {
-    temp_v0 = g_vectorQueueWork + temp_v1 * 0x30;
-    pcVar2 = (char *)(temp_v0 + 0x2844);
-    if (*pcVar2 == '\0') {
-      *pcVar2 = '\x01';
-      *(unsigned char *)(temp_v0 + 0x2845) = 0;
-      *(unsigned int *)(temp_v0 + 0x284c) = 0;
-      *(int *)(temp_v0 + 0x2848) = param_1;
-      temp_v3 = *(unsigned int *)(temp_v2 + 8);
-      temp_v4 = *(unsigned int *)(temp_v2 + 0xc);
-      *(unsigned int *)(temp_v0 + 0x2850) = *(unsigned int *)(temp_v2 + 4);
-      *(unsigned int *)(temp_v0 + 0x2854) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x2858) = temp_v4;
-      temp_v3 = *(unsigned int *)(temp_v2 + 0x2c);
-      temp_v4 = *(unsigned int *)(temp_v2 + 0x30);
-      *(unsigned int *)(temp_v0 + 0x2864) = *(unsigned int *)(temp_v2 + 0x34);
-      *(unsigned int *)(temp_v0 + 0x285c) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x2860) = temp_v4;
-      *(unsigned int *)(temp_v0 + 0x2868) = in_s0;
-      *(unsigned int *)(temp_v0 + 0x286c) = 0;
-      *(int *)(temp_v0 + 0x2870) = temp_v1;
-      return pcVar2;
+    VqSource *src = &g_vectorQueueWork->sources[source];
+    s32 i;
+
+    for (i = 0; i < 32; i++) {
+        VqRequest *request = &g_vectorQueueWork->requests[i];
+
+        if (!request->active) {
+            request->active = 1;
+            request->done = 0;
+            request->unk08 = 0;
+            request->source = source;
+            request->origin = src->origin;
+            request->direction = src->direction;
+            request->length = length;
+            request->progress = 0.0f;
+            request->index = i;
+            return request;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x20);
-  return (char *)0x0;
+    return NULL;
 }
 
 } /* extern "C" */

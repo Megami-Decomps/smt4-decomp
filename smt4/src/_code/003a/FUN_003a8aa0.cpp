@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022c9f4(int, int);
+int motionPlayForMode(int, int);
 int recordAppendFloatEntry(int, unsigned char [24]);
 int FUN_0022e17c(unsigned char [24], int, int);
 int FUN_0022e2fc(void);
@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0022c9f4. */
+/* Supplied declaration required: motionPlayForMode. */
 extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: recordAppendFloatEntry. */
 /* Supplied declaration required: FUN_0022e17c. */
@@ -79,7 +79,7 @@ void FUN_003a8aa0(int param_1)
       temp_v3 = temp_v3 + 1;
     } while ((int)temp_v3 < 0x500);
     *(short *)(param_1 + 0xa5ae) = temp_v4;
-    FUN_0022c9f4(param_1,1);
+    motionPlayForMode(param_1,1);
     FUN_00233730(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x5a8),0,1,1);
     *(unsigned char *)(param_1 + 0x2d) = 1;
     temp_v0 = gaugePercent(param_1 + 0x5a8,1);

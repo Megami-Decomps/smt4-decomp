@@ -46,7 +46,7 @@ extern int g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -194,7 +194,7 @@ void FUN_00202ea4(void)
     temp_v12[0] = 0;
     FUN_001834a4(0x24,0x59);
     scrRunOpcodesStub(*(unsigned int *)(temp_v7 + 0x84));
-    temp_v3 = FUN_001643a0();
+    temp_v3 = ifTouchGetSelectionMode();
     temp_v6 = temp_v7;
     FUN_00228b04(temp_v7,1);
     if ((temp_v6 != 0) ||

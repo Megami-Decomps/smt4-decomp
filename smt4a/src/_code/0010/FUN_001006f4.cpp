@@ -1,62 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001006f4` (_code @ 0x1006f4, 0x82 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail includes exception cleanup for the temporary formatted text. */
+#include "AsdSDK/DiagnosticMessage.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
 
 extern "C" {
+char* FUN_0010095c(char*, s32, s32, va_list);
+s32 wstrlen(const char*);
+char* asdOperatorNewC(s32);
+char* libc_strcpy(char*, const char*);
+char* libc_strcat(char*, const char*);
+void asdOperatorDeleteB(void*);
+extern const char* DAT_0054efb0[];
 
-int FUN_0010095c(int, int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-int wstrlen(...);
-int asdOperatorNewC(int);
-int libc_strcpy(void);
-int asdOperatorDeleteB(...);
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern int libc_strcat(void);
-/* Supplied declaration required: FUN_0010095c. */
-/* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: asdOperatorNewC. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: asdOperatorDeleteB. */
-
-
-unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int param_3)
-
+// Formats a diagnostic and appends it to the message's accumulated text.
+DiagnosticMessage* FUN_001006f4(DiagnosticMessage* message, s32 kind, va_list arguments)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = 0;
-  temp_v3 = param_1;
-  FUN_0010095c(0,0,param_2,param_3,param_1,param_2,param_3);
-  if (temp_v0 == 0) {
-    if (((int)param_2 < 0) || (param_2 >= 0x17)) {
-      param_2 = 0;
+    char* text = FUN_0010095c(NULL, 0, kind, arguments);
+    if (text == NULL) {
+        if (kind < 0 || kind >= 23) {
+            kind = 0;
+        }
+        text = asdStringFormatGrow(NULL, 0, DAT_0054efb0[kind], arguments);
     }
-    temp_v0 = 0;
-    temp_v0 = (int)asdStringFormatGrow(0,0,(const char*)*(unsigned int *)
-                      (
-                      "壐V墂V墐V姖V妯V壀V姳V妯V妼V執V壦V埏V夌V壸V妈V夼V奢V够V堸V垵V塞V堢V墩V"
-                      + param_2 * 4),*(va_list*)&param_3);
-  }
-  temp_v1 = temp_v0;
-  if (*(int *)(param_1 + 4) != 0) {
-    temp_v1 = wstrlen();
-    temp_v2 = wstrlen(temp_v0);
-    asdOperatorNewC(temp_v1 + temp_v2 + 1);
-    libc_strcpy();
-    temp_v1 = libc_strcat();
-    asdOperatorDeleteB(*(unsigned int *)(param_1 + 4));
-    asdOperatorDeleteB(temp_v0);
-  }
-  *(int *)(param_1 + 4) = temp_v1;
-  return romwright_piece_4_4(temp_v3,param_1);
+    if (message->text != NULL) {
+        s32 length = wstrlen(message->text);
+        char* combined = asdOperatorNewC(length + wstrlen(text) + 1);
+        combined = libc_strcat(libc_strcpy(combined, message->text), text);
+        asdOperatorDeleteB(message->text);
+        asdOperatorDeleteB(text);
+        text = combined;
+    }
+    message->text = text;
+    return message;
 }
-
-} /* extern "C" */
+}

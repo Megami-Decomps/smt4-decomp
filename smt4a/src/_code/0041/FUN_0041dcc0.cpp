@@ -8,7 +8,7 @@ int gameDataBlocksReleaseHold(int);
 int sysPlaySe(int);
 int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002c76d8(void);
+int gameDataAddHomeButtonHold(void);
 int messageMainSetFlag(int);
 int saveLoadProcessCreate(int, int);
 int SBORROW4(int, int);
@@ -27,7 +27,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002c76d8. */
+/* Supplied declaration required: gameDataAddHomeButtonHold. */
 extern int saveLoadThreadHasResult(void);
 extern int byteTripleGetV0(void);
 /* Supplied declaration required: messageMainSetFlag. */
@@ -70,7 +70,7 @@ void FUN_0041dcc0(int param_1)
     temp_v0 = byteTripleGetV0();
     if (temp_v0 != 0) {
       if (*(int *)(param_1 + 0x450) < 0x1f) {
-        FUN_002c76d8();
+        gameDataAddHomeButtonHold();
       }
       else {
         gameDataBlocksReleaseHold(1);

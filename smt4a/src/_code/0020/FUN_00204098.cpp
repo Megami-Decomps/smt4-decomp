@@ -15,14 +15,14 @@ int FUN_002a5e7c(...);
 int statusReplaceSkills(...);
 int FUN_0037dfb0(...);
 int FUN_0037e078(void);
-int FUN_00387ac4(...);
+int buttonHelpSetMode(...);
 int stateHolderEnterState7(void);
 int statusDownEnterState11(...);
 int FUN_003b0744(void);
 int statusDownSelectListIndex(...);
 int engineGetFloatTableValue(...);
 int FUN_003f36a4(...);
-int FUN_003f391c(void);
+int skillChooseRandomFlaggedSlot(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
@@ -31,7 +31,7 @@ int FUN_0019de98(...);
 int FUN_0022e774(void);
 int scrScriptProcessStartEntry(...);
 int FUN_002a6894(...);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int FUN_002f5064(...);
 int FUN_00336de4(...);
 int FUN_0034a968(void);
@@ -53,7 +53,7 @@ int asdLoadFileSyncDefault(void);
 int FUN_00203b40(...);
 int FUN_00215bd0(void);
 int FUN_00275bc8(...);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
 int FUN_002c9a8c(...);
@@ -76,7 +76,7 @@ int uiSpriteSetKeyframe(...);
 int dialogClose(...);
 int FUN_0021b968(...);
 int scrRunOpcodesStub(...);
-int FUN_002818a0(...);
+int entrySlotStoreRecordValue(...);
 int obj04Finish(void);
 int FUN_0035ac58(...);
 int FUN_0037c6ac(...);
@@ -226,13 +226,13 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026cbb8. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002818a0. */
+/* Supplied declaration required: entrySlotStoreRecordValue. */
 /* Supplied declaration required: mapDepartAdvanceState. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
-/* Supplied declaration required: FUN_002a7288. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusDownRestartTransition. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 extern int FUN_002c8748(void);
@@ -281,7 +281,7 @@ extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037e078. */
 /* Supplied declaration required: FUN_0037e12c. */
 /* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: FUN_00387ac4. */
+/* Supplied declaration required: buttonHelpSetMode. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0038b3f8. */
 extern int aocDataBlockHasEntries(void);
@@ -305,18 +305,18 @@ extern int statusDownGetCursorPosition(void);
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: engineGetFloatTableValue. */
 /* Supplied declaration required: actorIsActive. */
-extern int FUN_003e4cb4(unsigned int);
+extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_003f2fb0. */
 /* Supplied declaration required: FUN_003f3048. */
 extern unsigned int FUN_003f3104(int);
 extern unsigned int btlGetDemonEvolutionStatus(int);
 /* Supplied declaration required: FUN_003f36a4. */
-/* Supplied declaration required: FUN_003f391c. */
+/* Supplied declaration required: skillChooseRandomFlaggedSlot. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: partyAddMoneyClamped. */
-extern int FUN_004b6b1c(int);
+extern int scriptProcessCreateWhenReady(int);
 /* Supplied declaration required: itemResetOverLimitStates. */
 extern int recordContainsPairedId(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
@@ -407,7 +407,7 @@ unsigned int FUN_00204098(void)
   if (DAT_00588c44 == 0) {
     return 0;
   }
-  temp_v7 = FUN_004b6b1c(DAT_00588c44);
+  temp_v7 = scriptProcessCreateWhenReady(DAT_00588c44);
   if (temp_v7 == 0) {
     return 0;
   }
@@ -889,7 +889,7 @@ LAB_00204688:
                   *temp_v50 = 1;
                 }
                 *temp_v47 = 1;
-                temp_v16 = FUN_003e4cb4(temp_v51);
+                temp_v16 = partySlotMatchesSelected(temp_v51);
                 temp_v27 = temp_v6 + temp_v7 * 0x8c;
                 if (temp_v16 != 0) {
                   temp_v27 = temp_v27 + 0x24c4;
@@ -1074,7 +1074,7 @@ LAB_00205528:
                   FUN_0021b968(temp_v6,temp_v7,*(unsigned short *)(temp_v8 + 0x62),(unsigned int)temp_v45 ^ 1);
                 }
                 temp_v16 = FUN_003f2fb0(temp_v8,temp_v10,0);
-                if ((temp_v16 != 0) && (temp_v16 = FUN_002818a0(temp_v8), temp_v16 != 0)) {
+                if ((temp_v16 != 0) && (temp_v16 = entrySlotStoreRecordValue(temp_v8), temp_v16 != 0)) {
                   FUN_0021b968(temp_v6,temp_v7,*(unsigned short *)(temp_v8 + 0x62),(unsigned int)temp_v45 ^ 1);
                 }
                 temp_v37 = bitsAt60Test(temp_v27 + 0x4580,2);
@@ -1095,7 +1095,7 @@ LAB_00205528:
               if ((*(short *)((int)temp_v47 + 0x2e) != 0) &&
                  (temp_v16 = FUN_003f2fb0(temp_v8,1), temp_v16 != 0)) {
                 FUN_0021b968(temp_v6,temp_v7,*(unsigned short *)(temp_v8 + 0x62),(unsigned int)temp_v45 ^ 1);
-                FUN_002818a0(temp_v8);
+                entrySlotStoreRecordValue(temp_v8);
               }
               temp_v13 = gameGetUnlockedCountLimit();
               if (temp_v13 <= *(unsigned short *)(temp_v8 + 100)) {
@@ -1345,7 +1345,7 @@ LAB_00205528:
           FUN_0033449c(1);
           statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *piVar25 * 0x150 + 0x4430),0,0);
           FUN_0037e12c(temp_v13,0);
-          FUN_002a7324(1);
+          statusPanelSetOpen(1);
           FUN_0020b490(temp_v6,0x14);
         }
         else {
@@ -1354,7 +1354,7 @@ LAB_00205528:
           statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
           temp_v11 = gameGetSlotRecord(temp_v7);
           objBInitBlock19D0(temp_v11,0);
-          FUN_002a7324(1);
+          statusPanelSetOpen(1);
           FUN_0020b490(temp_v6,0xc);
         }
       }
@@ -1364,7 +1364,7 @@ LAB_00205528:
         gameGlobalsQueueValues(temp_v6 + *piVar25 * 0x150 + 0x4430,0);
         temp_v11 = gameGetPlayerData();
         FUN_00372100(temp_v11,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         FUN_0020b490(temp_v6,0xb);
         FUN_00203b40(temp_v6 + 0x7560,5,5,1,0,1);
       }
@@ -1598,7 +1598,7 @@ joined_r0x002075ac:
               FUN_0020b490(temp_v6,0x11);
             }
             else {
-              FUN_002a7288();
+              statusDownRestartTransition();
               roundObjFinish(temp_v6);
             }
           }
@@ -1759,7 +1759,7 @@ joined_r0x002075ac:
         FUN_0020b490(temp_v6,0x11);
       }
       else {
-        FUN_002a7288();
+        statusDownRestartTransition();
         temp_v7 = roundObjFinish(temp_v6);
         if (temp_v7 != 0) {
           *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
@@ -1774,7 +1774,7 @@ joined_r0x002075ac:
         statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
         temp_v11 = gameGetSlotRecord((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
         objBInitBlock19D0(temp_v11,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         FUN_0020b490(temp_v6,0xc);
       }
     }
@@ -1892,11 +1892,11 @@ joined_r0x002075ac:
             FUN_0020b490(temp_v6,0x11);
             break;
           }
-          FUN_002a7288();
+          statusDownRestartTransition();
           temp_v7 = roundObjFinish(temp_v6);
         }
         else {
-          FUN_002a7288();
+          statusDownRestartTransition();
           temp_v7 = roundObjFinish(temp_v6);
         }
         if (temp_v7 != 0) {
@@ -1912,7 +1912,7 @@ joined_r0x002075ac:
         statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
         temp_v11 = gameGetSlotRecord((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
         objBInitBlock19D0(temp_v11,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         FUN_003a62e8(temp_v13);
         FUN_0020b490(temp_v6,0xc);
       }
@@ -1975,7 +1975,7 @@ joined_r0x002075ac:
       switch(temp_v16) {
       case 0:
         temp_v16 = temp_v7 + 0x34;
-        FUN_003f391c();
+        skillChooseRandomFlaggedSlot();
         *(int *)(temp_v6 + 0x75c8) = temp_v16;
         temp_v27 = temp_v7 + 0x34;
         FUN_003f36a4(temp_v27,temp_v16,*(unsigned short *)(temp_v7 + 0x62));
@@ -2136,7 +2136,7 @@ joined_r0x002073c8:
             temp_v0 = *(char *)(temp_v27 + 0x457a);
             goto joined_r0x002075ac;
           }
-          FUN_00387ac4(0);
+          buttonHelpSetMode(0);
           FUN_0020b490(temp_v6,0xd);
         }
       }
@@ -2166,14 +2166,14 @@ joined_r0x002073c8:
       temp_v11 = FUN_003f3104(temp_v7);
       *(unsigned int *)(temp_v6 + 0x75d0) = temp_v11;
       FUN_0022e774();
-      FUN_002a7288();
+      statusDownRestartTransition();
       temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
       *(int *)(temp_v6 + 0x436c) = temp_v7;
       break;
     }
     if (temp_v16 != 1) {
       if ((temp_v16 == 2) && (temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac)), temp_v7 == 2)) {
-        FUN_002a7288();
+        statusDownRestartTransition();
         roundObjFinish(temp_v6);
       }
     }
@@ -2308,7 +2308,7 @@ joined_r0x002073c8:
           statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
           temp_v11 = gameGetSlotRecord((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
           objBInitBlock19D0(temp_v11,0);
-          FUN_002a7324(1);
+          statusPanelSetOpen(1);
           FUN_0020b490(temp_v6,0xc);
         }
         else {
@@ -2322,7 +2322,7 @@ joined_r0x002073c8:
           FUN_0033449c(1);
           statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *piVar25 * 0x150 + 0x4430),0,0);
           FUN_0037e12c(temp_v13,0);
-          FUN_002a7324(1);
+          statusPanelSetOpen(1);
           FUN_0020b490(temp_v6,0x14);
         }
       }
@@ -2546,7 +2546,7 @@ LAB_00207d0c:
       goto joined_r0x002080f4;
     case 10:
       FUN_00333dc8(0);
-      FUN_002a7288();
+      statusDownRestartTransition();
       roundObjFinish(temp_v6);
     }
     break;
@@ -2729,7 +2729,7 @@ LAB_00207d0c:
       }
       obj04Finish();
       FUN_0019de98(0,0xf4f4f4ff);
-      FUN_002a7288();
+      statusDownRestartTransition();
       temp_v7 = roundObjFinish(temp_v6);
       if (temp_v7 != 0) {
         *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
@@ -2743,7 +2743,7 @@ LAB_00207d0c:
         FUN_0033449c(1);
         statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *(int *)(temp_v6 + 0x74c0) * 0x150 + 0x4430),0,0);
         FUN_0037e12c(temp_v13,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         FUN_0020b490(temp_v6,0x14);
       }
     }
@@ -2751,7 +2751,7 @@ LAB_00207d0c:
   case 0x16:
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
     if (temp_v7 == 2) {
-      FUN_00387ac4(0);
+      buttonHelpSetMode(0);
       FUN_00168980(3);
       *(unsigned int *)(temp_v6 + 0x4364) = 0x17;
     }

@@ -1,65 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fd968` (_code @ 0x4fd968, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps `actor` in r0 through the queue scan and holds the context in r5; built moves actor to r5 and tests the flag with ands. */
+#include "battle/btlReflect.h"
+
+/* The combatant fields the kind-47 reflect action reads. */
+struct ReflectSubject {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[0x16];
+    /* 0x6A */ s16 group;
+};
+
+/* A subject group's id table. */
+struct ReflectSubjectGroup {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0C */ u32 ids[1];
+};
 
 extern "C" {
 
-int btlGetMainState(void);
-int FUN_001568f8(int, int);
-int FUN_004102d8(int, int, int, unsigned int);
+ReflectAction *FUN_004102d8(ReflectContext *context, s16 actor, s32 secondary, u32 options);
+void *btlGetMainState(void);
+ReflectSubjectGroup *FUN_001568f8(void *state, s16 group);
+s32 idSetFindSubjectIndex(void *state, ReflectSubject *subject);
 
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_001568f8. */
-extern int idSetFindSubjectIndex(unsigned int, int);
-/* Supplied declaration required: FUN_004102d8. */
-
-
-int FUN_004fd968(short param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
+/* Queues a kind-47 reflect action on an active subject unless one with the same options is queued. */
+ReflectAction *FUN_004fd968(s32 actor, u32 options, ReflectSubject *subject, u32 value)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  
-  if ((*(unsigned int *)(param_3 + 0x50) & 1) != 0) {
-    temp_v0 = *(int *)(g_btlActionReflect + 8);
-    do {
-      if (temp_v0 == 0) {
-        temp_v0 = g_btlActionReflect;
-        FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-        temp_v1 = btlGetMainState();
-        FUN_001568f8(temp_v1,(int)*(short *)(param_3 + 0x6a));
-        temp_v2 = btlGetMainState();
-        temp_v3 = idSetFindSubjectIndex(temp_v2,param_3);
-        if (temp_v3 < 0) {
-          temp_v3 = 0;
+    if (!(subject->flags & 1)) {
+        return NULL;
+    }
+    ReflectContext *context = g_btlActionReflect;
+    ReflectAction *queued = context->head;
+    while (queued != NULL) {
+        ReflectAction *next = queued->next;
+        if (queued->kind == 47 && queued->options == options &&
+            queued->target == reinterpret_cast<u32>(subject)) {
+            return NULL;
         }
-        *(unsigned char *)(temp_v0 + 4) = 0x2f;
-        *(int *)(temp_v0 + 0x14) = param_3;
-        *(unsigned int *)(temp_v0 + 0x28) = param_4;
-        *(short *)(temp_v0 + 0x24) = (short)*(unsigned int *)(temp_v1 + temp_v3 * 4 + 0xc);
-        return temp_v0;
-      }
-      temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 4);
-      temp_v5 = temp_v4 == 0x2f;
-      if (temp_v5) {
-        temp_v4 = *(unsigned int *)(temp_v0 + 8);
-      }
-      temp_v6 = temp_v5 && temp_v4 == param_2;
-      if (temp_v5 && temp_v4 == param_2) {
-        temp_v6 = *(int *)(temp_v0 + 0x14) == param_3;
-      }
-      temp_v0 = *(int *)(temp_v0 + 0xc);
-    } while (!temp_v6);
-  }
-  return 0;
+        queued = next;
+    }
+    ReflectAction *action = FUN_004102d8(context, actor, 0, options);
+    ReflectSubjectGroup *group = FUN_001568f8(btlGetMainState(), subject->group);
+    s32 index = idSetFindSubjectIndex(btlGetMainState(), subject);
+    if (index < 0) {
+        index = 0;
+    }
+    action->kind = 47;
+    action->target = reinterpret_cast<u32>(subject);
+    action->value = value;
+    action->first = group->ids[index];
+    return action;
 }
 
 } /* extern "C" */

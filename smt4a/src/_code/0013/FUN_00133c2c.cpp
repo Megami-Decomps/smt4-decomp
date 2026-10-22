@@ -1,75 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133c2c` (_code @ 0x133c2c, 0x86 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: overflow-report setup and final capacity/end pointer-update register allocation differ. */
+#include "shard/ElementVector.h"
 
 extern "C" {
+void FUN_002e32a4(s32 kind, ...);
+void asdOperatorDeleteArray(void *allocation);
+void FUN_00307a98(ElementRecord40 *begin, ElementRecord40 *end,
+                  ElementRecord40 *destination, ElementVector40 *owner);
+void destroyRangeElem40(ElementVector40 *vector, ElementRecord40 *begin, ElementRecord40 *end);
+s32 vectorCountx28_0030fd70(ElementVector40 *vector);
+const u32 *wordRefMax(const u32 *left, const u32 *right);
+ElementRecord40 *vectorAllocx28(ElementVector40 *vector, u32 count, ElementRecord40 *hint);
+u32 vectorGrowCapacity_0030fd7e(u32 count, ElementVector40 *vector);
 
-void FUN_002e32a4(int kind, ...);
-int asdOperatorDeleteArray(int);
-int FUN_00307a98(int, int, int, int *);
-int destroyRangeElem40(int *, int, int);
-int vectorCountx28_0030fd70(int *);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_00133cb8; /* 0x133cb8 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_002e32a4. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_00307a98. */
-/* Supplied declaration required: destroyRangeElem40. */
-extern int vectorAllocx28(int *, int, int);
-/* Supplied declaration required: vectorCountx28_0030fd70. */
-extern unsigned int vectorGrowCapacity_0030fd7e(unsigned int, int *);
-extern unsigned int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned long long FUN_00133c2c(int *param_1,unsigned int param_2)
-
+// Reserve space for the requested number of records while retaining the current contents.
+void FUN_00133c2c(ElementVector40 *vector, u32 required)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int uStack_1c;
-  int *piStack_18;
-  unsigned int temp_v6;
-  
-  piStack_18 = param_1;
-  temp_v6 = param_2;
-  if (param_2 >= 0x6666667) {
-    temp_v5 = 0x6666666;
-    FUN_002e32a4(8,&LAB_00133cb8,&LAB_00133cb8);
-  }
-  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0x28);
-  if (temp_v0 < temp_v6) {
-    temp_v1 = vectorCountx28_0030fd70(param_1);
-    temp_v5 = vectorGrowCapacity_0030fd7e(temp_v1,param_1);
-    piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
-    temp_v4 = *piVar3;
-    temp_v2 = vectorAllocx28(param_1,temp_v4,*param_1);
-    FUN_00307a98(*param_1,param_1[1],temp_v2,param_1);
-    destroyRangeElem40(param_1,*param_1,param_1[1]);
-    asdOperatorDeleteArray(*param_1);
-    temp_v3 = vectorCountx28_0030fd70(param_1);
-    *param_1 = temp_v2;
-    param_1[2] = temp_v2 + temp_v4 * 0x28;
-    param_1[1] = temp_v3 * 0x28 + temp_v2;
-  }
-  return romwright_piece_4_4(uStack_1c,temp_v5);
+    if (required > 0x06666666)
+        FUN_002e32a4(8, "", "", required, 0x06666666);
+    u32 capacity = vector->capacityEnd - vector->begin;
+    if (capacity < required) {
+        u32 grown = vectorGrowCapacity_0030fd7e(vectorCountx28_0030fd70(vector), vector);
+        u32 count = *wordRefMax(&required, &grown);
+        ElementRecord40 *allocation = vectorAllocx28(vector, count, vector->begin);
+        FUN_00307a98(vector->begin, vector->end, allocation, vector);
+        destroyRangeElem40(vector, vector->begin, vector->end);
+        asdOperatorDeleteArray(vector->begin);
+        s32 size = vectorCountx28_0030fd70(vector);
+        vector->begin = allocation;
+        vector->capacityEnd = allocation + count;
+        vector->end = allocation + size;
+    }
 }
-
-} /* extern "C" */
+}

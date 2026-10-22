@@ -7,17 +7,17 @@ struct MaskedSortRecord {
 };
 
 extern "C" {
-MaskedSortRecord *FUN_00192550(u32 id);
+MaskedSortRecord *dataTable8FindRecord(u32 id);
 
 // Compare ascending low-byte primary keys, then ascending secondary bytes.
 s32 FUN_002ce520(const u16 *left, const u16 *right)
 {
-    MaskedSortRecord *leftRecord = FUN_00192550(*left);
-    MaskedSortRecord *rightRecord = FUN_00192550(*right);
+    MaskedSortRecord *leftRecord = dataTable8FindRecord(*left);
+    MaskedSortRecord *rightRecord = dataTable8FindRecord(*right);
     s32 difference = (leftRecord->flags & 0xff) - (rightRecord->flags & 0xff);
     if (difference == 0) {
-        leftRecord = FUN_00192550(*left);
-        rightRecord = FUN_00192550(*right);
+        leftRecord = dataTable8FindRecord(*left);
+        rightRecord = dataTable8FindRecord(*right);
         difference = leftRecord->secondary - rightRecord->secondary;
     }
     return difference;

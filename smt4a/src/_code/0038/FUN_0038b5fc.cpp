@@ -1,48 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b5fc` (_code @ 0x38b5fc, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r2, [pc, #124] differs from recovered ldr r3, [pc, #112]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int gameStateChange(int);
-int FUN_0040b27c(...);
+struct GameStateLocalView {
+    u8 unk00[0x2034]; // 0x0000
+    u32 unk2034;      // 0x2034
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
+struct GameGlobalsLocalView {
+    u32 unk00;                   // 0x00
+    GameStateLocalView* unk04;   // 0x04
+};
 
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-/* Supplied declaration required: gameStateChange. */
-/* Supplied declaration required: FUN_0040b27c. */
-
-
-void FUN_0038b5fc(int param_1,unsigned int param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 == 2) {
-        FUN_0040b27c(*(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034),2,param_2,7);
-      }
-      gameStateChange(7);
-      return;
-    }
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034);
-    temp_v1 = 1;
-  }
-  else {
-    temp_v0 = *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2034);
-    temp_v1 = 0;
-  }
-  FUN_0040b27c(temp_v0,temp_v1,param_2,7);
-  gameStateChange(7);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern GameGlobalsLocalView g_gameGlobals;
+int gameStateChange(int state);
+void FUN_0040b27c(u32 object, s32 mode, u32 value, s32 state);
+
+// Dispatch recognized modes using the global object, then change to state 7.
+int FUN_0038b5fc(s32 mode, u32 value)
+{
+    switch (mode) {
+    case 0:
+        FUN_0040b27c(g_gameGlobals.unk04->unk2034, 0, value, 7);
+        break;
+    case 1:
+        FUN_0040b27c(g_gameGlobals.unk04->unk2034, 1, value, 7);
+        break;
+    case 2:
+        FUN_0040b27c(g_gameGlobals.unk04->unk2034, 2, value, 7);
+        break;
+    }
+
+    return gameStateChange(7);
+}
+}

@@ -10,7 +10,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int calcHeadingRoundedToCardinalDirection(void);
 int FUN_002b56e0(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_002d1780(void);
 int FUN_002d1e44(float *);
 int FUN_0030250c(void);
@@ -119,7 +119,7 @@ void FUN_00395904(void)
     break;
   case 1:
     temp_v21 = (float)g_lmapView[6];
-    FUN_002b5cd4();
+    mathAngleDeltaDegrees();
     temp_v0 = in_fpscr & 0xfffffff;
     temp_v24 = temp_v21;
     if (temp_v21 < 0.0f) {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023e908(void);
-int FUN_003f3a04(...);
+int slotPlacementStartTransition(...);
 int FUN_003f5220(...);
 
 int FUN_001517b4(int, int);
@@ -43,7 +43,7 @@ extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_003f3a04. */
+/* Supplied declaration required: slotPlacementStartTransition. */
 /* Supplied declaration required: FUN_003f5220. */
 
 
@@ -207,14 +207,14 @@ unsigned int FUN_0020a760(int param_1)
   do {
     temp_v3 = temp_v5 + temp_v1 * 4;
     FUN_003f5220(*(unsigned int *)(temp_v3 + 0xa10),*(unsigned int *)(temp_v5 + 0x2c));
-    FUN_003f3a04(*(unsigned int *)(temp_v3 + 0xa10),*(char *)(temp_v5 + 0x42) == '\x01');
+    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0xa10),*(char *)(temp_v5 + 0x42) == '\x01');
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   temp_v1 = 0;
   do {
     temp_v3 = temp_v5 + temp_v1 * 4;
     FUN_003f5220(*(unsigned int *)(temp_v3 + 0xa20),*(unsigned int *)(temp_v5 + 0x2c));
-    FUN_003f3a04(*(unsigned int *)(temp_v3 + 0xa20),*(char *)(temp_v5 + 0x42) == '\x01');
+    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0xa20),*(char *)(temp_v5 + 0x42) == '\x01');
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);
   if (*(int *)(temp_v5 + 0x1c) != 1) {

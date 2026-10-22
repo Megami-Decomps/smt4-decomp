@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0046bf40(int, unsigned int);
+int dataFileSetGetTableEntry(int, unsigned int);
 int FUN_0046c35c(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern int g_aocSystem; /* 0x570280 */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0046bf40. */
+/* Supplied declaration required: dataFileSetGetTableEntry. */
 /* Supplied declaration required: FUN_0046c35c. */
 
 
@@ -40,7 +40,7 @@ int FUN_00314638(unsigned int param_1)
     FUN_0046c35c(g_aocSystem,0x25,4);
     if (param_1 < temp_v1 + temp_v2) {
       temp_v1 = g_aocSystem;
-      FUN_0046bf40(g_aocSystem,param_1 - temp_v2);
+      dataFileSetGetTableEntry(g_aocSystem,param_1 - temp_v2);
       return temp_v1;
     }
     temp_v1 = 0;

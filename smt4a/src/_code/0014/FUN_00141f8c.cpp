@@ -43,7 +43,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0014f2a8. */
 /* Supplied declaration required: uiGetTableEntry. */
 extern int eventTexSelectJobsById(short);
-extern int FUN_00153588(short);
+extern int bustupCutAnimSelectSlotsByWorkId(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
 /* Supplied declaration required: FUN_00154bbc. */
 extern unsigned int FUN_00156850(unsigned short, unsigned int);
@@ -207,7 +207,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           FUN_001695a0();
           return 1;
         }
-        temp_v7 = FUN_00153588(temp_v0);
+        temp_v7 = bustupCutAnimSelectSlotsByWorkId(temp_v0);
         if (temp_v7 != 0) {
           return 1;
         }

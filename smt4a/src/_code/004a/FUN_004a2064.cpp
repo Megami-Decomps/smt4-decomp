@@ -10,7 +10,7 @@ int FUN_004a16bc(void);
 int FUN_004a1db4(int);
 int FUN_004a3b48(int);
 int FUN_004a41d8(int);
-int FUN_004a6c50(int, int);
+int partyIdsActivateEntry(int, int);
 int words4At20Clear(int);
 int uiOpenStartAnimations(int);
 
@@ -28,7 +28,7 @@ extern int FUN_002a4b28(short);
 /* Supplied declaration required: FUN_004a1db4. */
 /* Supplied declaration required: FUN_004a3b48. */
 /* Supplied declaration required: FUN_004a41d8. */
-/* Supplied declaration required: FUN_004a6c50. */
+/* Supplied declaration required: partyIdsActivateEntry. */
 /* Supplied declaration required: words4At20Clear. */
 /* Supplied declaration required: uiOpenStartAnimations. */
 extern int flaggedValueHolderGetTotal(int);
@@ -102,7 +102,7 @@ void FUN_004a2064(int param_1)
   if (temp_v6 < temp_v3) {
     do {
       temp_v4 = FUN_002a482c(param_1 + 0x20);
-      FUN_004a6c50(param_1 + 0x96,*(unsigned short *)(temp_v7 + (temp_v4 + temp_v6) * 0x20 + 4));
+      partyIdsActivateEntry(param_1 + 0x96,*(unsigned short *)(temp_v7 + (temp_v4 + temp_v6) * 0x20 + 4));
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < temp_v3);
   }

@@ -1,41 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042a068` (_code @ 0x42a068, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r3, r1 differs from recovered mov r3, r1. */
+#include "common.h"
+
+struct ExtSaveDataInfoView {
+    u32 unk00; // 0x00
+    u32 unk04; // 0x04
+    u32 unk08; // 0x08
+};
+
+struct FileSystemHandleView {
+    u32 unk00; // 0x00
+};
+
+struct FileSystemStateView {
+    u8 unk00[0x10]; // 0x00
+    u32 unk10;     // 0x10
+};
 
 extern "C" {
+extern FileSystemStateView DAT_00589398;
 
-int FUN_0016cdc0(unsigned char [12], int, unsigned int, unsigned int);
+s32 FUN_0016cdc0(ExtSaveDataInfoView* info, s32 kind,
+                 u32 identifierLow, u32 identifierHigh);
+u32 nn_fs_ipc_FileSystem_CreateExtSaveData(
+    const FileSystemHandleView* handle, const ExtSaveDataInfoView* info,
+    u32 creationOption0, u32 creationOption1,
+    unsigned long long sizeLimit, u32 extraOption0, u32 extraOption1);
 
-/* stack frame of param_6: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_6_stack;
-
-extern unsigned char DAT_00589398; /* 0x589398 */
-
-/* Supplied declaration required: FUN_0016cdc0. */
-extern unsigned int nn_fs_ipc_FileSystem_CreateExtSaveData(unsigned int, int, unsigned long long, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_0042a068(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5
-                 ,unsigned int param_6)
-
+// Creates extended save data and normalizes module-17 errors 220 through 229.
+u32 FUN_0042a068(u32 identifierLow, u32 identifierHigh,
+                 u32 extraOption0, u32 extraOption1,
+                 u32 creationOption0, u32 creationOption1)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1 [12];
-  unsigned int temp_v2 [2];
-  
-  FUN_0016cdc0(temp_v1,1,param_1,param_2);
-  temp_v2[0] = (*(unsigned int *)((unsigned char *)&DAT_00589398 + 0x10));
-  temp_v0 = nn_fs_ipc_FileSystem_CreateExtSaveData
-                    ((unsigned int)temp_v2,(int)temp_v1,0xffffffffffffffff,param_5,param_6,param_3,param_4);
-  if ((((temp_v0 & 0x3fc00) == 0x4400) && ((temp_v0 & 0x3ff) >= 0xdc)) && ((temp_v0 & 0x3ff) < 0xe6)) {
-    temp_v0 = 0xc8804482;
-  }
-  return temp_v0;
-}
+    ExtSaveDataInfoView info;
+    FUN_0016cdc0(&info, 1, identifierLow, identifierHigh);
 
-} /* extern "C" */
+    FileSystemHandleView handle;
+    handle.unk00 = DAT_00589398.unk10;
+    u32 result = nn_fs_ipc_FileSystem_CreateExtSaveData(
+        &handle, &info, creationOption0, creationOption1,
+        ~0ULL, extraOption0, extraOption1);
+
+    s32 module = static_cast<s32>(result & 0x3fc00) >> 10;
+    if (module == 17) {
+        s32 description = result & 0x3ff;
+        if (description >= 220 && description <= 229) {
+            result = 0xc8804482;
+        }
+    }
+    return result;
+}
+}

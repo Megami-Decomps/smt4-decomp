@@ -1,46 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f2638` (_code @ 0x3f2638, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Mask reads use a relocated member address and LDM, with separate state-word addresses instead of retail's shared base. */
+#include "battle/btlMain.h"
 
+struct ReflectionTargetValue {
+    /* 0x000 */ u8 unk000[0x1CC];
+    /* 0x1CC */ u16 unk1CC;
+};
 extern "C" {
+extern BtlMainGlobalsA g_btlMain;
+extern u32 g_btlScriptUnit;
+u32 btlUnitGet(u32 id);
+u32 hasFlag80Or1000(u32 id);
+void FUN_004fefac(s32 id, u32 options, u32 argument);
 
-int FUN_004102d8(int, int, int, int, unsigned int, unsigned int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int DAT_00573a58; /* 0x573a58 */
-extern unsigned int DAT_00573a5c; /* 0x573a5c */
-
-/* Supplied declaration required: FUN_004102d8. */
-extern int hasFlag80Or1000(unsigned int);
-extern int btlUnitGet(unsigned int);
-
-
-void FUN_003f2638(int param_1,int param_2,int param_3,int param_4)
-
+/* Writes the target value and queues its reflection action when the battle mask permits it. */
+void FUN_003f2638(const BtlMainStateA *state, s32 value, ReflectionTargetValue *target, s32 force)
 {
-/* irregular: irregular input(s): in_lr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int unaff_r4;
-  unsigned int in_lr;
-  
-  if (((((param_4 != 0) || (temp_v0 = btlUnitGet(g_btlScriptUnit), temp_v0 == 0)) ||
-       (temp_v0 = hasFlag80Or1000(g_btlScriptUnit), temp_v0 == 0)) ||
-      ((*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a5c) != 0 ||
-       (*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a58) != 0)) && (param_2 != 0 && param_3 != 0)) {
-    *(short *)(param_3 + 0x1cc) = (short)param_2;
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,10,0,0,unaff_r4,in_lr);
-    *(unsigned char *)(temp_v0 + 4) = 0x45;
-    *(int *)(temp_v0 + 0x14) = param_3;
-    return;
-  }
-  return;
+    if (force == 0 && btlUnitGet(g_btlScriptUnit) != 0 && hasFlag80Or1000(g_btlScriptUnit) != 0) {
+        u64 flags = static_cast<u64>(state->stateFlags.words[0]) |
+                    (static_cast<u64>(state->stateFlags.words[1]) << 32);
+        if ((flags & g_btlMain.suppressionMask) == 0) {
+            return;
+        }
+    }
+    if (value != 0 && target != NULL) {
+        target->unk1CC = static_cast<u16>(value);
+        FUN_004fefac(10, 0, reinterpret_cast<u32>(target));
+    }
 }
-
-} /* extern "C" */
+}

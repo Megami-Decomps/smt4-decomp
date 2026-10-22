@@ -1,63 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039b7fc` (_code @ 0x39b7fc, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only (the global base, kind * 3 and the entry pointer land in r7/r5/r4 in retail, r8/r7/r5 here). */
+#include "event/2dEvent/EventEffect.h"
+
+struct EventFilterWork {
+    u32 job;
+    u32 unk04;
+    s32 state;
+    s32 timer;
+    f32 scale;
+    f32 offset;
+    u32 kind;
+    s32 duration;
+};
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(unsigned int *);
-int asdTMTexTableReleaseNode(unsigned int, unsigned int);
-int asdTMTexTableFreeEntry(int);
+extern EventEffectGlobalsA g_eventEffect;
+void jobStop(u32 job, s32 arg);
+void asdMemFree(void *block);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+void *textureGetIndexedResource(u32 index);
+void asdTMTexTableFreeEntry(u32 index);
 
-extern unsigned int *DAT_0057f3b8; /* 0x57f3b8 */
-extern int DAT_0057f3c4; /* 0x57f3c4 */
-extern unsigned char DAT_0057f3e8; /* 0x57f3e8 */
-
-/* Supplied declaration required: jobStop. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-extern int textureGetIndexedResource(unsigned int);
-
-
+/* Stop the event filter: release its texture, drop the shared filter texture when unused, and free the work. */
 void FUN_0039b7fc(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = DAT_0057f3b8;
-  temp_v0 = DAT_0057f3b8[6];
-  if (temp_v0 < 6) {
-    temp_v2 = temp_v0 * 0xc;
-    if (*(char *)(temp_v2 + 0x57f3f0) != '\0') {
-      temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(&DAT_0057f3e8 + temp_v0 * 0xc),
-                           *(unsigned int *)(temp_v2 + 0x57f3ec));
-      if (temp_v1 != 0) {
-        asdTMTexTableReleaseNode(*(unsigned int *)(&DAT_0057f3e8 + temp_v0 * 0xc),*(unsigned int *)(temp_v2 + 0x57f3ec))
-        ;
-      }
-      *(unsigned char *)(temp_v2 + 0x57f3f0) = 0;
+    EventFilterWork *work = g_eventEffect.filterState.work;
+    u32 kind = work->kind;
+
+    if (kind < 6) {
+        EventFilterTexture *textures = g_eventEffect.filterTextures;
+        if (textures[kind].requested) {
+            if (asdTMTexTableNodeIsLoaded(textures[kind].table, textures[kind].node)) {
+                asdTMTexTableReleaseNode(textures[kind].table, textures[kind].node);
+            }
+            textures[kind].requested = 0;
+        }
+        if (g_eventEffect.textureUsers > 0) {
+            g_eventEffect.textureUsers--;
+        } else if (textureGetIndexedResource(0x35) != NULL) {
+            asdTMTexTableFreeEntry(0x35);
+            g_eventEffect.textureUsers = 0;
+        }
     }
-    if (DAT_0057f3c4 >= 1) {
-      DAT_0057f3c4 = DAT_0057f3c4 - 1;
-    }
-    else {
-      temp_v2 = textureGetIndexedResource(0x35);
-      if (temp_v2 != 0) {
-        asdTMTexTableFreeEntry(0x35);
-        DAT_0057f3c4 = 0;
-      }
-    }
-  }
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_0057f3b8 = (unsigned int *)0x0;
-  return;
+    jobStop(work->job, 0);
+    asdMemFree(work);
+    g_eventEffect.filterState.work = NULL;
 }
 
 } /* extern "C" */

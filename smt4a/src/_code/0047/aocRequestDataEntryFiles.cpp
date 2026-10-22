@@ -7,7 +7,7 @@ extern void *g_aocDisplay;
 void *dataTableFileGetTable(void *, s32);
 void sysMemClear(void *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
-void FUN_00471fec(void *, const char *, DataFileRef *, u32, u32, DataFileRef *);
+void aocQueueFileLoad(void *, const char *, DataFileRef *, u32, u32, DataFileRef *);
 
 void aocRequestDataEntryFiles(DataEntry *entry)
 {
@@ -61,7 +61,7 @@ void aocRequestDataEntryFiles(DataEntry *entry)
                 sysMemClear(path, sizeof(path));
                 textFormatBuffer(path, "%s/%s", entry->source.directory, rows[index].name);
                 DataFileRef *file = &entry->files[index];
-                FUN_00471fec(g_aocDisplay, path, file, 1, 0x80, file);
+                aocQueueFileLoad(g_aocDisplay, path, file, 1, 0x80, file);
                 entry->files[index].status.requested = 1;
                 break;
             }

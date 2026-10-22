@@ -1,45 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338060` (_code @ 0x338060, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global loads move later and signed halfword loads fold to unsigned before narrowing. */
+#include "battle/btlUI.h"
+
+struct BattleUiChangeOwner {
+    /* 0x0000 */ u8 unk0000[0x4968];
+    /* 0x4968 */ s16 unk4968;
+    /* 0x496a */ u16 unk496a;
+    /* 0x496c */ u16 unk496c;
+    /* 0x496e */ u16 unk496e;
+};
+struct BattleUiChangeView {
+    /* 0x0000 */ u8 unk0000[0x2194];
+    /* 0x2194 */ s16 unk2194;
+    /* 0x2196 */ s16 unk2196;
+};
 
 extern "C" {
+extern BtlUi *g_btlUiBlock;
+void FUN_003ae120(BtlUi *ui, s8 first, s8 second);
+void FUN_003aea90(BtlUi *ui, s8 first, s8 second);
 
-int FUN_003ae120(int, int, int);
-int FUN_003aea90(int, int, int);
-
-extern int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_003ae120. */
-/* Supplied declaration required: FUN_003aea90. */
-
-
-void FUN_00338060(int param_1,int param_2)
-
+void FUN_00338060(BattleUiChangeOwner *owner, s32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  short temp_v2;
-  short temp_v3;
-  
-  temp_v3 = *(short *)(param_1 + 0x4968);
-  temp_v2 = *(short *)(param_1 + 0x496a) - temp_v3;
-  if (0 < temp_v2) {
-    temp_v3 = temp_v3 + temp_v2;
-  }
-  temp_v0 = (char)temp_v3 - (char)*(unsigned short *)(g_btlUiBlock + 0x2194);
-  temp_v1 = (char)temp_v2 - (char)*(unsigned short *)(g_btlUiBlock + 0x2196);
-  if (param_2 != 0) {
-    if (param_2 == 1) {
-      FUN_003aea90(g_btlUiBlock,(int)temp_v0,(int)temp_v1);
+    s16 difference = (s16)(owner->unk496a - owner->unk4968);
+    s16 end = owner->unk4968;
+    if (difference > 0) {
+        end = (s16)(end + difference);
     }
-  }
-  else {
-    FUN_003ae120(g_btlUiBlock,(int)temp_v0,(int)temp_v1);
-  }
-  *(unsigned short *)(param_1 + 0x496c) = *(unsigned short *)(param_1 + 0x4968);
-  *(unsigned short *)(param_1 + 0x496e) = *(unsigned short *)(param_1 + 0x496a);
-  return;
+    BattleUiChangeView *ui = (BattleUiChangeView *)g_btlUiBlock;
+    s16 first = (s16)(end - ui->unk2194);
+    s16 second = (s16)(difference - ui->unk2196);
+    switch (mode) {
+    case 0:
+        FUN_003ae120(g_btlUiBlock, (s8)first, (s8)second);
+        break;
+    case 1:
+        FUN_003aea90(g_btlUiBlock, (s8)first, (s8)second);
+        break;
+    }
+    owner->unk496c = owner->unk4968;
+    owner->unk496e = owner->unk496a;
 }
-
-} /* extern "C" */
+}

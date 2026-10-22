@@ -1,11 +1,11 @@
-#include "common.h"
+#include "shard/W4_Match3_AocMainA.h"
 
 extern "C" {
 
-extern u32 g_aocMain; /* 0x570260 */
+extern AocMainA *g_aocMain; /* 0x570260 */
 
 extern int FUN_001b2d88(u32 slot, u32 kind, u32 arg);
-extern int FUN_001b3148(u32 context);
+extern int FUN_001b3148(AocMainA * context);
 
 /* Whether FUN_001b2d88 accepts kind 12 for the arguments (after the context check, when `checkContext` is set). */
 u32 FUN_004705ec(u32 slot, u32 arg, s32 checkContext)

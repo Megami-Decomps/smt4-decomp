@@ -1,75 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001345a0` (_code @ 0x1345a0, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r1, r0 differs from recovered bls.n 1a. */
+#include "common.h"
+
+// Private view of the three-pointer container of 12-byte elements.
+struct Vector12View {
+    u8* begin;        // 0x00
+    u8* end;          // 0x04
+    u8* capacityEnd;  // 0x08
+};
 
 extern "C" {
-
-void FUN_002e32a4(int kind, ...);
-int asdOperatorDeleteArray(int);
-int FUN_00301bd4(int *);
-int FUN_003078bc(int, int, int, int *);
-int destroyRangeElem12(int *, int, int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_00134628; /* 0x134628 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_002e32a4. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
-extern int rt_malloc(void);
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_00301bd4. */
-/* Supplied declaration required: FUN_003078bc. */
-extern unsigned int vectorGrowCapacity_003078de(unsigned int, int *);
-/* Supplied declaration required: destroyRangeElem12. */
-extern unsigned int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned long long FUN_001345a0(int *param_1,unsigned int param_2)
-
-{
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int uStack_1c;
-  int *piStack_18;
-  unsigned int temp_v6;
-  
-  piStack_18 = param_1;
-  temp_v6 = param_2;
-  if (param_2 >= 0x15555556) {
-    temp_v5 = 0x15555555;
-    FUN_002e32a4(8,&LAB_00134628,&LAB_00134628);
-  }
-  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0xc);
-  if (temp_v0 < temp_v6) {
-    temp_v1 = FUN_00301bd4(param_1);
-    temp_v5 = vectorGrowCapacity_003078de(temp_v1,param_1);
-    piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
-    temp_v2 = *piVar3;
-    temp_v3 = rt_malloc();
-    FUN_003078bc(*param_1,param_1[1],temp_v3,param_1);
-    destroyRangeElem12(param_1,*param_1,param_1[1]);
-    asdOperatorDeleteArray(*param_1);
-    temp_v4 = FUN_00301bd4(param_1);
-    *param_1 = temp_v3;
-    param_1[2] = temp_v3 + temp_v2 * 0xc;
-    param_1[1] = temp_v4 * 0xc + temp_v3;
-  }
-  return romwright_piece_4_4(uStack_1c,temp_v5);
+void FUN_002e32a4(s32 kind, ...);
+u32 FUN_00301bd4(Vector12View* container);
+u32 vectorGrowCapacity_003078de(u32 size, Vector12View* container);
+const u32* wordRefMax(const u32* first, const u32* second);
+void* rt_malloc(u32 bytes);
+void FUN_003078bc(u8* first, u8* last, u8* destination,
+                  Vector12View* container);
+void destroyRangeElem12(Vector12View* container, u8* first, u8* last);
+void asdOperatorDeleteArray(void* allocation);
 }
 
-} /* extern "C" */
+// Grow the container's storage when its capacity is below the requested count.
+extern "C" void FUN_001345a0(Vector12View* container, u32 requestedCount)
+{
+    if (requestedCount > 0x15555555u) {
+        FUN_002e32a4(8, "", "",
+                     requestedCount, 0x15555555u);
+    }
+
+    u32 capacity = static_cast<u32>(
+        static_cast<s32>(container->capacityEnd - container->begin) / 12);
+    if (capacity < requestedCount) {
+        u32 growthCount = vectorGrowCapacity_003078de(
+            FUN_00301bd4(container), container);
+        u32 allocationBytes = *wordRefMax(&requestedCount, &growthCount) * 12;
+        u8* newStorage = static_cast<u8*>(rt_malloc(allocationBytes));
+
+        FUN_003078bc(container->begin, container->end, newStorage, container);
+        destroyRangeElem12(container, container->begin, container->end);
+        asdOperatorDeleteArray(container->begin);
+
+        u32 size = FUN_00301bd4(container);
+        container->begin = newStorage;
+        container->capacityEnd = newStorage + allocationBytes;
+        container->end = newStorage + size * 12;
+    }
+}

@@ -4,7 +4,7 @@ extern "C" {
 
 u8 *gameGetQuestCenterBlock(void)
 {
-    return g_gameDataBlocks.unk04 + 0x1e9ac;
+    return (u8 *)g_gameDataBlocks.saveBlock + 0x1e9ac;
 }
 
 } /* extern "C" */

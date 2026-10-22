@@ -1,4 +1,5 @@
-#include "shard/W4_W4Match5b_MessageMain.h"
+#include "ui/MessageMain.h"
+extern "C" MessageGlobals g_messageMain;
 
 extern "C" {
 
@@ -6,10 +7,10 @@ extern "C" {
 void messageClearObjectFlags(void)
 {
     if (g_messageMain.state != NULL) {
-        g_messageMain.state->unk5f = 0;
+        reinterpret_cast<MessageObject *>(g_messageMain.state)->unk5f = 0;
     }
     if (g_messageMain.banner != NULL) {
-        g_messageMain.banner->unk5f = 0;
+        reinterpret_cast<MessageObject *>(g_messageMain.banner)->unk5f = 0;
     }
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int campRebuildEnabledFlagList(...);
 int flagBanksResetPendingState(...);
 int FUN_003a7c00(...);
-int FUN_003c5fc4(...);
+int messageMainSetTargetFlags(...);
 int flagValueSub(...);
 
 int FUN_001517b4(...);
@@ -65,7 +65,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003a7c00. */
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: FUN_003da8f4. */
 /* Supplied declaration required: flagValueSub. */
 extern int flagValueIsPositive(unsigned int);
@@ -213,7 +213,7 @@ void FUN_003daf0c(int param_1)
     *(int *)(temp_v5 + 0x20) = temp_v7;
     return;
   case 2:
-    FUN_003c5fc4(1);
+    messageMainSetTargetFlags(1);
     temp_v7 = FUN_002a21e8();
     if (temp_v7 == 0) {
       return;
@@ -234,7 +234,7 @@ void FUN_003daf0c(int param_1)
   case 3:
     temp_v7 = messageMainIsIdle();
     if (temp_v7 != 0) {
-      FUN_003c5fc4(0);
+      messageMainSetTargetFlags(0);
       *(unsigned int *)(temp_v5 + 0x20) = 1;
       return;
     }

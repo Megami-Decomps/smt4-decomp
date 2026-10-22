@@ -1,62 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00151340` (_code @ 0x151340, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reaches the heap pointer as base + 0x1000 then #0x318 (this loads 0x1318 from the pool) and gives the zero constant and the result swapped registers. */
+#include "shard/S2SoundLoader.h"
+
+namespace {
+/* nw::snd::SoundArchive::SoundInfo */
+struct SoundInfo {
+    /* 0x00 */ u32 fileId;
+    /* 0x04 */ u32 playerId;
+    /* 0x08 */ u8 unk08[0x10];
+};
+
+/* nw::snd::SoundArchive::PlayerInfo */
+struct PlayerInfo {
+    /* 0x00 */ u32 playableSoundMax;
+    /* 0x04 */ u32 playerHeapSize;
+};
+
+struct AsdSoundSystemHeapView {
+    /* 0x000 */ u8 unk000[0x318];
+    /* 0x318 */ void *loadHeap;
+};
+
+struct AsdSoundSystemLoadView {
+    /* 0x0000 */ u8 archive[0x2b8];
+    /* 0x02B8 */ SoundLoader loader;
+    /* 0x02C0 */ u8 unk2c0[0xd40];
+    /* 0x1000 */ AsdSoundSystemHeapView heaps;
+};
+}
 
 extern "C" {
 
-int FUN_001753d4(unsigned char *, unsigned int, int, unsigned int, int);
-int FUN_00178400(unsigned char *, unsigned int, unsigned char [4]);
-int FUN_00178458(unsigned char *, unsigned int, int *);
-int FUN_001787a8(unsigned char *, unsigned int, unsigned int);
+extern AsdSoundSystemLoadView g_asdSoundSystem;
+s32 FUN_00178400(void *archive, u32 soundId, SoundInfo *info);
+s32 FUN_00178458(void *archive, u32 playerId, PlayerInfo *info);
+s32 FUN_001787a8(SoundLoader *loader, u32 id, u32 flags);
+s32 FUN_001753d4(SoundLoader *loader, u32 id, void *heap, u32 flags, u32 blockSize);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
-extern unsigned char DAT_0063e4a0; /* 0x63e4a0 */
-extern int DAT_0063f500; /* 0x63f500 */
-
-/* Supplied declaration required: FUN_001753d4. */
-/* Supplied declaration required: FUN_00178400. */
-/* Supplied declaration required: FUN_00178458. */
-/* Supplied declaration required: FUN_001787a8. */
-
-
-unsigned char * FUN_00151340(unsigned int param_1)
-
+/* Make sure a sound's data is loaded: sounds whose player has its own heap need nothing, others load into the shared heap. */
+s32 FUN_00151340(u32 soundId)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [4];
-  unsigned int temp_v4;
-  
-  temp_v0 = DAT_0063f500;
-  puVar2 = (unsigned char *)0x0;
-  temp_v1 = 0;
-  temp_v2 = 0;
-  FUN_00178400(&g_asdSoundSystem,param_1,temp_v3);
-  FUN_00178458(&g_asdSoundSystem,temp_v4,&temp_v1);
-  if (temp_v2 != 0) {
-    return (unsigned char *)0x1;
-  }
-  if (temp_v0 != 0) {
-    puVar2 = &DAT_0063e4a0;
-    FUN_001787a8(&DAT_0063e4a0,param_1,0xffffffff);
-    if (puVar2 != (unsigned char *)0x0) {
-      return (unsigned char *)0x1;
+    AsdSoundSystemLoadView *system = &g_asdSoundSystem;
+    void *heap = system->heaps.loadHeap;
+    s32 result = 0;
+    SoundInfo sound;
+    PlayerInfo player = {0, 0};
+
+    FUN_00178400(system->archive, soundId, &sound);
+    FUN_00178458(system->archive, sound.playerId, &player);
+    if (player.playerHeapSize != 0) {
+        return 1;
     }
-    puVar2 = &DAT_0063e4a0;
-    FUN_001753d4(&DAT_0063e4a0,param_1,temp_v0,0xffffffff,0);
-  }
-  return puVar2;
+    if (heap != NULL) {
+        if (FUN_001787a8(&system->loader, soundId, 0xffffffff)) {
+            return 1;
+        }
+        result = FUN_001753d4(&system->loader, soundId, heap, 0xffffffff, 0);
+    }
+    return result;
 }
 
 } /* extern "C" */

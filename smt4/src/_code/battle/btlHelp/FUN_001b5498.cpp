@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00212120(int);
 int dialogOpen(int, int);
-int FUN_0027e7b4(unsigned int, unsigned int);
+int infoWinSetMessage(unsigned int, unsigned int);
 int FUN_00295660(unsigned int, unsigned char [100]);
 int FUN_002bd06c(unsigned int);
 int libc_strcpy(unsigned char [100], unsigned int);
@@ -18,7 +18,7 @@ extern unsigned int *DAT_00435d78; /* 0x435d78 */
 
 /* Supplied declaration required: FUN_00212120. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 /* Supplied declaration required: FUN_00295660. */
 extern int dialogIsActive(void);
 extern int FUN_002b6b04(void);
@@ -98,7 +98,7 @@ unsigned int FUN_001b5498(void)
             }
             FUN_00295660(*(unsigned int *)(psVar2 + 0x14e),temp_v4);
           }
-          FUN_0027e7b4(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
+          infoWinSetMessage(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
           dialogOpen((int)(char)psVar2[0x14c],1);
           psVar2[0x151] = 1;
           psVar2[1] = 1;
@@ -124,7 +124,7 @@ unsigned int FUN_001b5498(void)
         }
       }
       else {
-        FUN_0027e7b4(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
+        infoWinSetMessage(*(unsigned int *)(psVar2 + 6),*(unsigned int *)(psVar2 + 4) & 0xffff);
         dialogOpen((int)(char)psVar2[0x14c],1);
       }
       psVar2[0x151] = 1;

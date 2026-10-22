@@ -6,7 +6,7 @@ extern GameStateA g_gameState;
 
 bool gameStateIsFlagSetAndLarge(void)
 {
-    if (g_gameState.unk574 == 0 || g_gameState.unk578 < 200) {
+    if (g_gameState.transitionActive == 0 || (s32)g_gameState.sourceMap < 200) {
         return false;
     }
     return true;

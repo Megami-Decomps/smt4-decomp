@@ -1,61 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e4230` (_code @ 0x3e4230, 0xc0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: record and requiredBits trade r5/r6 (register allocation only). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00186f58(void);
+typedef struct ShopRecord {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 price;
+    /* 0x28 */ u8 unk28[2];
+    /* 0x2A */ u16 levelBits; // bits 6-15: level the player needs
+    /* 0x2C */ u16 requiredFlags[3];
+    /* 0x32 */ u16 requiredBits[3]; // bits in the area data block
+} ShopRecord;
 
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00186f58. */
-extern int gameFlagIsSet(void);
-extern unsigned int FUN_002e5c2c(void);
-extern int gameDataBlockGetArea2D68(void);
+typedef struct PlayerLevelData {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 level;
+} PlayerLevelData;
 
+ShopRecord *dataFindKeyedRecordWithOverrides(u32 id);
+PlayerLevelData *gameGetPlayerData(void);
+s32 gameFlagIsSet(u16 flag);
+u8 *gameDataBlockGetArea2D68(void);
+u32 FUN_002e5c2c(void);
 
-unsigned char FUN_003e4230(int param_1)
-
+static __inline u32 shopRecordGetPrice(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v1 = param_1;
-  FUN_00186f58();
-  if ((temp_v1 != 0) &&
-     (temp_v2 = gameGetPlayerData(), *(unsigned short *)(temp_v1 + 0x2a) >> 6 <= *(unsigned short *)(temp_v2 + 0x62))) {
-    temp_v2 = 0;
-    do {
-      if ((*(short *)(temp_v1 + temp_v2 * 2 + 0x2c) != 0) && (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) {
-        return (unsigned char)2;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 3);
-    temp_v2 = 0;
-    while( 1 ) {
-      temp_v0 = *(unsigned short *)(temp_v1 + temp_v2 * 2 + 0x32);
-      if ((temp_v0 != 0) &&
-         (temp_v3 = gameDataBlockGetArea2D68(),
-         ((unsigned int)*(unsigned char *)(temp_v3 + (unsigned int)(temp_v0 >> 3)) & (1 << (temp_v0 & 7))) == 0)) break;
-      temp_v2 = temp_v2 + 1;
-      if (temp_v2 >= 3) {
-        FUN_00186f58();
-        if (param_1 != 0) {
-          temp_v5 = (unsigned int)*(unsigned short *)(param_1 + 0x26);
-        }
-        else {
-          temp_v5 = 0;
-        }
-        temp_v4 = FUN_002e5c2c();
-        return temp_v4 < temp_v5;
-      }
+    ShopRecord *record = dataFindKeyedRecordWithOverrides(id);
+
+    return record != NULL ? record->price : 0;
+}
+
+/* Shop availability: 2 when the entry is locked, 1 when it costs more than the player has, 0 otherwise. */
+u8 FUN_003e4230(u32 id)
+{
+    ShopRecord *record = dataFindKeyedRecordWithOverrides(id);
+    s32 i;
+    u32 price;
+    u32 money;
+
+    if (record == NULL) {
+        return 2;
     }
-  }
-  return (unsigned char)2;
+    if (gameGetPlayerData()->level < (record->levelBits >> 6)) {
+        return 2;
+    }
+    for (i = 0; i < 3; i++) {
+        if (record->requiredFlags[i] != 0 && !gameFlagIsSet(record->requiredFlags[i])) {
+            return 2;
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        u16 bit = record->requiredBits[i];
+
+        if (bit != 0 && !(gameDataBlockGetArea2D68()[bit >> 3] & (1 << (bit & 7)))) {
+            return 2;
+        }
+    }
+    price = shopRecordGetPrice(id);
+    money = FUN_002e5c2c();
+    return price > money;
 }
 
 } /* extern "C" */

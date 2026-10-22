@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00186f58(void);
+int dataFindKeyedRecordWithOverrides(void);
 int dataTable04FindById(void);
 int FUN_002efc44(unsigned int, int, int);
 
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00186f58. */
+/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_002efc44. */
 extern int gameDataFlagTestBit(unsigned int);
@@ -50,19 +50,19 @@ void FUN_003df57c(unsigned int param_1,int param_2)
     else {
       temp_v1 = gameDataFlagTestBit(0xc);
       if (temp_v1 != 0) {
-        FUN_00186f58();
+        dataFindKeyedRecordWithOverrides();
       }
       temp_v1 = gameDataFlagTestBit(0xd);
       if (temp_v1 != 0) {
-        FUN_00186f58();
+        dataFindKeyedRecordWithOverrides();
       }
       temp_v1 = gameDataFlagTestBit(0xe);
       if (temp_v1 != 0) {
-        FUN_00186f58();
+        dataFindKeyedRecordWithOverrides();
       }
       temp_v1 = gameDataFlagTestBit(0xf);
       if (temp_v1 != 0) {
-        FUN_00186f58();
+        dataFindKeyedRecordWithOverrides();
       }
     }
   }

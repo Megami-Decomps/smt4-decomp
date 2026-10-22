@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match5_BattleViewState.h"
+#include "battle/btlView.h"
 
 extern "C" {
 

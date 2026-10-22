@@ -11,7 +11,7 @@ int FUN_0029c4ac(...);
 int FUN_0029c4c8(...);
 int FUN_0029c4e4(void);
 int beginStatusPanelClose(void);
-int FUN_0029d684(...);
+int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029dfc0(...);
 int FUN_002a0cc8(...);
@@ -51,7 +51,7 @@ extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00262f94. */
 /* Supplied declaration required: FUN_0026d654. */
 /* Supplied declaration required: FUN_0026d670. */
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
 /* Supplied declaration required: statusDownSwitchTab. */
@@ -74,7 +74,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_0029c4e4. */
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 /* Supplied declaration required: beginStatusPanelClose. */
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: FUN_0029dfc0. */
 extern int FUN_0029e0f8(void);
@@ -327,7 +327,7 @@ unsigned int FUN_001dbf34(int param_1)
     FUN_00262f94();
     FUN_0029c4e4();
     FUN_0029c4ac(0);
-    FUN_0029d684(1);
+    statusPanelSetOpen(1);
     FUN_0026d654(0);
     temp_v3 = *(int *)(param_1 + 0xd38) + 1;
     *piVar7 = temp_v3;
@@ -337,7 +337,7 @@ unsigned int FUN_001dbf34(int param_1)
     if ((((temp_v3 != 0) && (temp_v3 = FUN_00223c78(), temp_v3 == 0)) &&
         (temp_v3 = FUN_001ddc00(), temp_v3 == 0)) &&
        ((temp_v3 = FUN_00293aac(), temp_v3 == 0 &&
-        ((temp_v3 = padIsButtonPressed(0), temp_v3 != 0 || (temp_v3 = FUN_0026ee68(1), temp_v3 != 0)))))) {
+        ((temp_v3 = padIsButtonPressed(0), temp_v3 != 0 || (temp_v3 = buttonHelpHasEnabledEntryForId(1), temp_v3 != 0)))))) {
       FUN_002a0cc8(1);
       FUN_002bf810(0x100016d);
       *piVar7 = *(int *)(param_1 + 0xd38) + 1;

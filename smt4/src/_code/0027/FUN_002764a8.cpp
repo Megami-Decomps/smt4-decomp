@@ -1,47 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002764a8` (_code @ 0x2764a8, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Binary-search argument scheduling and literal-pool order differ; control flow and record size match retail. */
+#include "addon/aocMain.h"
+#include "addon/AocLookup.h"
 
 extern "C" {
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
+                   s32 (*compare)(const void *, const void *));
+s32 FUN_0038e29c(const void *left, const void *right);
+s32 FUN_0029022c(void);
+u32 FUN_002903f0(void);
+s32 objGetFlagBit16(AocMain *main);
+extern AocMain *g_aocMain;
+extern AocSystem *g_aocSystem;
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
-
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp1BC; /* 0x1bc: local_1bc */
-    unsigned int sp1C0; /* 0x1c0: local_1c0 */
-} param_1_stack;
-
-extern unsigned char LAB_0038e29c; /* 0x38e29c */
-extern unsigned int g_aocMain; /* 0x432fc8 */
-extern int g_aocSystem; /* 0x433158 */
-
-extern int FUN_0029022c(void);
-extern unsigned int FUN_002903f0(void);
-extern int objGetFlagBit16(unsigned int);
-/* Supplied declaration required: libc_bsearch. */
-
-
-unsigned int FUN_002764a8(int param_1)
-
+/* Reports a missing or disabled add-on record for the current selection. */
+u32 FUN_002764a8(AocSystem *system)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned short temp_v2 [218];
-  
-  temp_v0 = FUN_0029022c();
-  if ((temp_v0 != 0) && (temp_v1 = FUN_002903f0(), temp_v1 >= 0x15e)) {
-    temp_v2[0] = (unsigned short)temp_v1;
-    puVar3 = temp_v2;
-    libc_bsearch(puVar3,*(unsigned int *)(param_1 + 0x388),*(unsigned int *)(g_aocSystem + 900),0x1b4,
-                 &LAB_0038e29c);
-    if ((puVar3 == (unsigned short *)0x0) || (temp_v0 = objGetFlagBit16(g_aocMain), temp_v0 == 0)) {
-      return 1;
+    AocTableSearchRecord key;
+    if (!FUN_0029022c()) {
+        return 0;
     }
-  }
-  return 0;
+    u32 id = FUN_002903f0();
+    if (id < 0x15e) {
+        return 0;
+    }
+    key.id = (u16)id;
+    if (libc_bsearch(&key, system->table.records, g_aocSystem->table.count,
+                     sizeof(key), FUN_0038e29c) == NULL || !objGetFlagBit16(g_aocMain)) {
+        return 1;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

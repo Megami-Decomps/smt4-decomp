@@ -1,42 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00269bf0` (_code @ 0x269bf0, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: battle-state base registers and the table-load scheduling differ. */
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
+extern BtlState *g_btlMainState;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int g_btlMainState; /* 0x435d90 */
-
-
-int FUN_00269bf0(unsigned int param_1)
-
+// Use the active battle unit's maximum HP, or the persistent record's value outside battle.
+s32 FUN_00269bf0(BtlUnitLink *record)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  
-  puVar1 = (unsigned int *)&g_btlMainState;
-  if (g_btlMainState != 0) {
-    puVar1 = *(unsigned int **)(g_btlMainState + 100);
-  }
-  if (g_btlMainState != 0 && puVar1 != (unsigned int *)0x15) {
-    temp_v0 = 0;
-    do {
-      puVar3 = (unsigned int *)(*(int *)(g_btlMainState + 0x1fc0) + temp_v0 * 0x288);
-      temp_v1 = *puVar3;
-      if (((((temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0)) && ((temp_v1 & 8) != 0)) &&
-         (puVar3[0x9f] == param_1)) {
-        return (int)*(short *)((int)puVar3 + 0x1b6);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x6d);
-  }
-  return (int)*(short *)(param_1 + 0xe);
+    s32 maxHp = record->maxHp;
+    if (g_btlMainState != NULL && g_btlMainState->mode != 0x15) {
+        BtlUnitEntry *units = g_btlMainState->units;
+        for (s32 index = 0; index < 0x6d; ++index) {
+            BtlUnitEntry *unit = &units[index];
+            if ((unit->flags & 1) && !(unit->flags & 0x40) &&
+                (unit->flags & 8) && unit->link == record) {
+                maxHp = unit->hpMax;
+                break;
+            }
+        }
+    }
+    return maxHp;
 }
-
-} /* extern "C" */
+}

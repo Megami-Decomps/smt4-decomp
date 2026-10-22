@@ -25,7 +25,7 @@ int FUN_002dae68(void);
 int FUN_002e364c(...);
 int FUN_00303460(...);
 int mapIfReleaseSlot3(void);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 int FUN_00327ee8(void);
 int FUN_0033abd4(void);
 int FUN_003d4ed8(...);
@@ -69,7 +69,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
@@ -246,7 +246,7 @@ void FUN_003661c8(void)
         if (temp_v2 == 0x37) {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
           mapIfOverlayRelease();
-          FUN_00313648(0xc);
+          mapSetSceneState(0xc);
           FUN_002e364c(g_lmapScene + 0x28);
           FUN_00327ee8();
           return;
@@ -261,7 +261,7 @@ void FUN_003661c8(void)
               return;
             }
             temp_v0 = 1;
-            FUN_00313648(temp_v0);
+            mapSetSceneState(temp_v0);
             FUN_002e364c(g_lmapScene + 0x28);
             FUN_00327ee8();
             return;
@@ -573,7 +573,7 @@ LAB_00366a74:
     }
     *(unsigned int *)(g_lmapScene + 0x58) = 0x40a00000;
     temp_v0 = 0xc;
-    FUN_00313648(temp_v0);
+    mapSetSceneState(temp_v0);
   }
   FUN_002e364c(g_lmapScene + 0x28);
   FUN_00327ee8();

@@ -1,10 +1,11 @@
-#include "shard/Sys43e188.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
 u32 messageTargetGetValue(void)
 {
-    return g_messageMain.target->unk18;
+    return g_messageMain.banner->value;
 }
 
 } /* extern "C" */

@@ -10,7 +10,7 @@ int uiInitializeEightTimerSet(int);
 int FUN_002637c8(void);
 int FUN_00282bfc(int, int);
 int buttonHelpCreate(void);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 int gameCounterAddSaturating(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_002a03d8(...);
@@ -38,7 +38,7 @@ extern unsigned int *_ZN9Obj422594C1Ev(void);
 extern int _ZN14SelectionFlagsC1Ev(int);
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_0028d9b0. */
+/* Supplied declaration required: buttonHelpAcquireResources. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
@@ -116,7 +116,7 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   if (*(int *)(temp_v1 - 0x9c98) == 1) {
     *(unsigned int *)(temp_v1 - 0x9ca4) = 0xd;
     *(unsigned int *)(temp_v1 - 0x9ca0) = 0;
-    FUN_0028d9b0();
+    buttonHelpAcquireResources();
     buttonHelpCreate();
     asdTMTexTableLoadSprites(0x2b);
     FUN_002c58c8(0x2b,0);

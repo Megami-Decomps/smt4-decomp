@@ -10,7 +10,7 @@ int textFormatBuffer(...);
 int FUN_0019de98(...);
 int FUN_00275bc8(void);
 int FUN_002a4878(...);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int FUN_002e2848(...);
 int FUN_002f7cd4(...);
 int FUN_002f7f6c(...);
@@ -118,7 +118,7 @@ extern short resourceRunEmbeddedOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a4964. */
 extern int messageMainGetValue(void);
-/* Supplied declaration required: FUN_002a7288. */
+/* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_002c7ce8. */
@@ -1247,7 +1247,7 @@ LAB_00269f7c:
       obj04Finish();
     }
     FUN_0019de98(0,0xf4f4f4ff);
-    FUN_002a7288();
+    statusDownRestartTransition();
     *(unsigned int *)(temp_v2 + 0x249c) = 0;
     break;
   case 0x1c:
@@ -1271,7 +1271,7 @@ LAB_00269f7c:
             obj04Finish();
           }
           FUN_0019de98(0,0xf4f4f4ff);
-          FUN_002a7288();
+          statusDownRestartTransition();
           break;
         }
       }
@@ -1296,7 +1296,7 @@ LAB_00269f7c:
           obj04Finish();
         }
         FUN_0019de98(0,0xf4f4f4ff);
-        FUN_002a7288();
+        statusDownRestartTransition();
       }
     }
     break;
@@ -1359,7 +1359,7 @@ LAB_00269f7c:
       obj04Finish();
     }
     FUN_0019de98(0,0xf4f4f4ff);
-    FUN_002a7288();
+    statusDownRestartTransition();
     break;
   case 0x1f:
     FUN_00163aa4(temp_v2 + 0xb4);

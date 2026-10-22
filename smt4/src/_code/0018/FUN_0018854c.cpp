@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002990a0(void);
+int messageInitializeSavedBanner(void);
 int guestWinRequestOpen(void);
 int FUN_00299bc4(...);
-int FUN_00299d84(...);
+int gameSetStatusCameraHeightMode(...);
 int campRefreshEquipmentCategory(...);
 int beginStatusPanelClose(void);
 int FUN_0029e648(...);
@@ -35,7 +35,7 @@ int FUN_0029a0e8(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029a164(...);
 int FUN_0029c4c8(...);
-int FUN_0029d684(int);
+int statusPanelSetOpen(int);
 int FUN_0029efd8(...);
 int uiScrollHandleActionsOrTouch(...);
 int FUN_002a0428(...);
@@ -53,10 +53,10 @@ typedef struct {
 extern unsigned char LAB_00188a40; /* 0x188a40 */
 extern int g_camp; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_002990a0. */
+/* Supplied declaration required: messageInitializeSavedBanner. */
 /* Supplied declaration required: guestWinRequestOpen. */
 /* Supplied declaration required: campReleaseScreenTouchRegions. */
-extern unsigned int FUN_00299218(int, unsigned int);
+extern unsigned int dataTable15GetUnlockedEntryId(int, unsigned int);
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_002992e0. */
 /* Supplied declaration required: FUN_00299370. */
@@ -66,7 +66,7 @@ extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029974c. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
-/* Supplied declaration required: FUN_00299d84. */
+/* Supplied declaration required: gameSetStatusCameraHeightMode. */
 /* Supplied declaration required: campRefreshEquipmentCategory. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
@@ -78,8 +78,8 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_0029a164. */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: beginStatusPanelClose. */
-extern int FUN_0029d65c(int);
-/* Supplied declaration required: FUN_0029d684. */
+extern int ifTouchGetSelectionModeForRegion(int);
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_0029dfa8(void);
 extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029e328. */
@@ -209,7 +209,7 @@ void FUN_0018854c(unsigned int param_1)
     FUN_0029c4c8(1);
     FUN_0029a0e8(psVar3);
     FUN_0029a0cc(psVar3);
-    FUN_0029d684(1);
+    statusPanelSetOpen(1);
     temp_v4 = FUN_0029efc0(temp_v11);
     temp_v11 = FUN_0029efa8(temp_v11);
     temp_v8 = *(short *)(temp_v9 + (temp_v11 + temp_v4) * 2);
@@ -413,10 +413,10 @@ void FUN_0018854c(unsigned int param_1)
     else {
       temp_v4 = 8;
       FUN_002c1658(8,0);
-      if ((temp_v4 == 0) && (temp_v4 = FUN_0029d65c((int)*(short *)(temp_v5 + 0xe08)), temp_v4 != 6)) {
+      if ((temp_v4 == 0) && (temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v5 + 0xe08)), temp_v4 != 6)) {
         temp_v4 = 7;
         FUN_002c1658(7,0);
-        if ((temp_v4 == 0) && (temp_v4 = FUN_0029d65c((int)*(short *)(temp_v5 + 0xe0a)), temp_v4 != 6)) {
+        if ((temp_v4 == 0) && (temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v5 + 0xe0a)), temp_v4 != 6)) {
           temp_v9 = 9;
           FUN_002c1658(9,1);
           if (temp_v9 == 0) {
@@ -528,7 +528,7 @@ void FUN_0018854c(unsigned int param_1)
             if (0 < temp_v4) {
               flaggedEntrySetValueB(temp_v5 + 0x34,temp_v9);
               temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x34);
-              param_1 = FUN_00299218((int)*(char *)(temp_v5 + 0x98),temp_v2);
+              param_1 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v5 + 0x98),temp_v2);
               FUN_00299900();
               break;
             }
@@ -644,7 +644,7 @@ joined_r0x00188f3c:
             if (0 < temp_v4) {
               flaggedEntrySetValueB(temp_v5 + 0x34,temp_v9);
               temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x34);
-              param_1 = FUN_00299218((int)*(char *)(temp_v5 + 0x98),temp_v2);
+              param_1 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v5 + 0x98),temp_v2);
               FUN_00299900();
               break;
             }
@@ -724,7 +724,7 @@ joined_r0x00188f3c:
       campReleaseScreenTouchRegions(temp_v11,0);
       guestWinRequestOpen();
       FUN_0029e648(1,0);
-      FUN_002990a0();
+      messageInitializeSavedBanner();
       return;
     }
   default:
@@ -734,34 +734,34 @@ joined_r0x00188f3c:
   case 0x11:
     campRefreshEquipmentCategory(0x11);
     temp_v2 = 0;
-    FUN_00299d84(temp_v2);
+    gameSetStatusCameraHeightMode(temp_v2);
     break;
   case 0x12:
     campRefreshEquipmentCategory(0x12);
     temp_v2 = 0;
-    FUN_00299d84(temp_v2);
+    gameSetStatusCameraHeightMode(temp_v2);
     break;
   case 0x13:
     campRefreshEquipmentCategory(0x13);
-    FUN_00299d84(0);
+    gameSetStatusCameraHeightMode(0);
     break;
   case 0x14:
     campRefreshEquipmentCategory(0x14);
     temp_v2 = 1;
-    FUN_00299d84(temp_v2);
+    gameSetStatusCameraHeightMode(temp_v2);
     break;
   case 0x15:
     campRefreshEquipmentCategory(0x15);
-    FUN_00299d84(0);
+    gameSetStatusCameraHeightMode(0);
     break;
   case 0x16:
     campRefreshEquipmentCategory(0x16);
     temp_v2 = 2;
-    FUN_00299d84(temp_v2);
+    gameSetStatusCameraHeightMode(temp_v2);
     break;
   case 0x17:
     campRefreshEquipmentCategory(0x17);
-    FUN_00299d84(0);
+    gameSetStatusCameraHeightMode(0);
   }
   *(unsigned char *)(temp_v5 + 0x33) = 0;
   FUN_00299bc4(temp_v11,0);

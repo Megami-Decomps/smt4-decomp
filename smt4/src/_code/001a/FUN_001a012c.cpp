@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019715c(...);
 int FUN_001978b4(void);
 int FUN_001f20b4(...);
-int FUN_00299218(...);
+int dataTable15GetUnlockedEntryId(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
 int FUN_002be650(...);
@@ -38,7 +38,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001978b4. */
 /* Supplied declaration required: FUN_001f20b4. */
 extern int uniteGetState(void);
-/* Supplied declaration required: FUN_00299218. */
+/* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 extern unsigned int objectPartRunUnlessLocked(int);
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002be370. */
@@ -107,7 +107,7 @@ unsigned int FUN_001a012c(void)
   case 0x30:
   case 0x34:
     temp_v4 = objectPartRunUnlessLocked(temp_v1 + 0x34);
-    temp_v2 = FUN_00299218((int)*(char *)(temp_v1 + 0x98),temp_v4);
+    temp_v2 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v1 + 0x98),temp_v4);
     temp_v3 = g_camp;
     if (((temp_v2 == 0x11 || temp_v2 == 0x12) || (temp_v2 == 0x13 || temp_v2 == 0x14)) ||
        ((temp_v2 == 0x15 || temp_v2 == 0x16) || temp_v2 == 0x17)) {
@@ -215,7 +215,7 @@ LAB_001a03b8:
   case 0x28:
   case 0x29:
     temp_v4 = objectPartRunUnlessLocked(temp_v1 + 0x34);
-    temp_v4 = FUN_00299218((int)*(char *)(temp_v1 + 0x98),temp_v4);
+    temp_v4 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v1 + 0x98),temp_v4);
     temp_v6 = 0;
     FUN_0019715c(temp_v4,temp_v6);
     break;
@@ -228,7 +228,7 @@ LAB_001a03b8:
   case 0x2b:
   case 0x2c:
     temp_v4 = objectPartRunUnlessLocked(temp_v1 + 0x34);
-    temp_v4 = FUN_00299218((int)*(char *)(temp_v1 + 0x98),temp_v4);
+    temp_v4 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v1 + 0x98),temp_v4);
     temp_v6 = 1;
     FUN_0019715c(temp_v4,temp_v6);
     break;

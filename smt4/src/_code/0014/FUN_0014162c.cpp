@@ -1,55 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014162c` (_code @ 0x14162c, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only ip/r5 swap between the count and the 0x50 field offset in the unrolled search. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
+typedef struct IdRecord {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u16 id;
+    /* 0x52 */ u8 unk52[6];
+} IdRecord;
 
+typedef struct IdRecordTable {
+    /* 0x000 */ u8 unk000[0x39C];
+    /* 0x39C */ s32 count;
+    /* 0x3A0 */ IdRecord *records;
+} IdRecordTable;
 
-int FUN_0014162c(int param_1,unsigned int param_2)
-
+/* Return the record with the given id, or NULL. */
+IdRecord *FUN_0014162c(IdRecordTable *table, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int unaff_r4;
-  unsigned int temp_v2;
-  
-  temp_v2 = *(unsigned int *)(param_1 + 0x39c);
-  if ((int)temp_v2 < 1) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = temp_v2 & 1;
-    if (temp_v0 != 0) {
-      unaff_r4 = *(int *)(param_1 + 0x3a0);
-    }
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      do {
-        if (*(unsigned short *)(unaff_r4 + temp_v1 * 0x58 + 0x50) == param_2) {
-          return unaff_r4 + temp_v1 * 0x58;
+    for (s32 i = 0; i < table->count; i++) {
+        if (table->records[i].id == id) {
+            return &table->records[i];
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)temp_v0);
     }
-  }
-  if ((int)temp_v0 < (int)temp_v2) {
-    temp_v1 = *(int *)(param_1 + 0x3a0);
-    do {
-      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x58 + 0x50) == param_2) {
-        return temp_v1 + temp_v0 * 0x58;
-      }
-      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x58 + 0xa8) == param_2) {
-        return temp_v1 + temp_v0 * 0x58 + 0x58;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while ((int)temp_v0 < (int)temp_v2);
-  }
-  return 0;
+    return NULL;
 }
 
 } /* extern "C" */

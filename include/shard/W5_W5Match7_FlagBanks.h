@@ -1,12 +1,57 @@
 #ifndef SHARD_W5_W5MATCH7_FLAGBANKS_H
 #define SHARD_W5_W5MATCH7_FLAGBANKS_H
 #include "common.h"
+#include "map/MapCellGrid.h"
+#include "map/mapDepart.h"
+#include <stddef.h>
 struct FlagWorkBanks {
-    /* 0x0000 */ u8 unk0000[0x744];
+    union {
+        /* 0x0000 */ u8 unk0000[0x744];
+        struct {
+            /* 0x0000 */ u8 unk0000BeforeContext[0x1D];
+            /* 0x001D */ u8 unk001D;
+        } context;
+        struct {
+            /* 0x0000 */ u8 unk0000[0x3c];
+            /* 0x003c */ MapCellGrid grid;
+        } mapCells;
+        struct {
+            /* 0x0000 */ u8 unk0000BeforeTable4c[0x3a];
+            /* 0x003a */ u8 unk3a;
+            /* 0x003b */ u8 unk3b;
+        } table4cHead;
+        struct {
+            /* 0x0000 */ u8 unk0000BeforePoint[0x2c];
+            /* 0x002c */ s16 scale;
+            /* 0x002e */ s16 mapId;
+            /* 0x0030 */ s16 areaId;
+            /* 0x0032 */ s16 x;
+            /* 0x0034 */ s16 y;
+            /* 0x0036 */ s16 z;
+            /* 0x0038 */ s16 heading;
+        } savePoint;
+        struct {
+            /* 0x0000 */ u8 mode;
+            /* 0x0001 */ u8 mapId;
+            /* 0x0002 */ u8 areaId;
+            /* 0x0003 */ u8 unk0003;
+            /* 0x0004 */ MapVector position;
+            /* 0x0010 */ f32 heading;
+            /* 0x0014 */ u32 viewValue;
+        } resumePoint;
+    };
     /* 0x0744 */ u32 first[16];
     /* 0x0784 */ u32 second[16];
     union {
         /* 0x07c4 */ u8 unk07c4[0xeb8];
+        struct {
+            /* 0x07c4 */ u8 unk07c4BeforeSavePoint[0x64c];
+            /* 0x0e10 */ u32 objectId;
+        } savePointObject;
+        struct {
+            /* 0x07c4 */ u8 unk07c4BeforeResumePoint[0x648];
+            /* 0x0e0c */ s32 objectId; /* -1 = none */
+        } resumePointObject;
         struct {
             /* 0x07c4 */ u8 unk07c4BeforeReset[0xd24];
             /* 0x14e8 */ u32 active;
@@ -14,14 +59,70 @@ struct FlagWorkBanks {
             /* 0x14f0 */ u32 value;
             /* 0x14f4 */ u8 unk14f4[0x18];
             /* 0x150c */ u32 overrideEnabled;
+            /* 0x1510 */ u8 unk1510[8];
+            /* 0x1518 */ u32 unk1518[2];
         } reset;
         struct {
             /* 0x07c4 */ u8 unk07c4BeforeBits[0xeac];
             /* 0x1670 */ u32 words[3];
         } bitFlags;
+        struct {
+            /* 0x07C4 */ u8 unk07C4BeforeRestore[0x653];
+            /* 0x0E17 */ s8 count;
+            /* 0x0E18 */ u8 unk0E18[0x7DC];
+            /* 0x15F4 */ u8 active[16];
+            /* 0x1604 */ u16 values[16];
+            /* 0x1624 */ s16 completionFlags[16];
+            /* 0x1644 */ s16 keys[16];
+        } restoration;
+        struct {
+            /* 0x07c4 */ u8 unk07c4BeforeTable4c[1];
+            /* 0x07c5 */ s8 level;
+            /* 0x07c6 */ u8 rate;
+            /* 0x07c7 */ u8 unk07c7[0xd59];
+            /* 0x1520 */ u32 unk1520;
+            /* 0x1524 */ u8 unk1524[0xa0];
+            /* 0x15c4 */ f32 id;
+            /* 0x15c8 */ u8 unk15c8[0xa0];
+            /* 0x1668 */ u16 random4;
+            /* 0x166a */ u16 random100;
+        } table4c;
+        struct {
+            /* 0x07c4 */ u8 unk07c4BeforeScene[0x8d8];
+            /* 0x109c */ u32 unk109c;
+            /* 0x10a0 */ f32 unk10a0;
+            /* 0x10a4 */ u32 unk10a4;
+        } sceneEntry;
     };
     /* 0x167c */ u32 third[1];
 };
+typedef char FlagWorkBanksSizeCheck[sizeof(FlagWorkBanks) == 0x1680 ? 1 : -1];
+typedef char FlagWorkBanksTable4cOffsetsCheck[
+    offsetof(FlagWorkBanks, table4cHead.unk3a) == 0x3a &&
+    offsetof(FlagWorkBanks, table4c.level) == 0x7c5 &&
+    offsetof(FlagWorkBanks, table4c.unk1520) == 0x1520 &&
+    offsetof(FlagWorkBanks, table4c.id) == 0x15c4 &&
+    offsetof(FlagWorkBanks, table4c.random100) == 0x166a ? 1 : -1];
+typedef char FlagWorkBanksContextOffsetCheck[
+    offsetof(FlagWorkBanks, context.unk001D) == 0x1D ? 1 : -1];
+typedef char FlagWorkBanksFirstBankOffsetCheck[
+    offsetof(FlagWorkBanks, first) == 0x744 ? 1 : -1];
+typedef char FlagWorkBanksMapGridOffsetCheck[
+    offsetof(FlagWorkBanks, mapCells.grid) == 0x3c &&
+    offsetof(FlagWorkBanks, reset.unk1518) == 0x1518 ? 1 : -1];
+typedef char FlagWorkBanksRestoreOffsetsCheck[
+    offsetof(FlagWorkBanks, restoration.count) == 0xE17 &&
+    offsetof(FlagWorkBanks, restoration.active) == 0x15F4 &&
+    offsetof(FlagWorkBanks, restoration.values) == 0x1604 &&
+    offsetof(FlagWorkBanks, restoration.completionFlags) == 0x1624 &&
+    offsetof(FlagWorkBanks, restoration.keys) == 0x1644 ? 1 : -1];
+typedef char FlagWorkBanksSceneEntryOffsetsCheck[
+    offsetof(FlagWorkBanks, sceneEntry.unk109c) == 0x109c &&
+    offsetof(FlagWorkBanks, sceneEntry.unk10a4) == 0x10a4 ? 1 : -1];
+typedef char FlagWorkBanksSavePointOffsetsCheck[
+    offsetof(FlagWorkBanks, savePoint.scale) == 0x2c &&
+    offsetof(FlagWorkBanks, savePoint.heading) == 0x38 &&
+    offsetof(FlagWorkBanks, savePointObject.objectId) == 0xe10 ? 1 : -1];
 extern "C" FlagWorkBanks *gameFlagsGetBlock(void);
 
 struct FlagValueRange {

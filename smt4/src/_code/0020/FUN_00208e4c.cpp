@@ -99,7 +99,7 @@ extern int FUN_00253ba0(char *);
 extern int FUN_00256550(unsigned int);
 /* Supplied declaration required: FUN_0025b4b0. */
 /* Supplied declaration required: vec4Forward. */
-extern int FUN_0025c05c(void);
+extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: FUN_0027eee0. */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00282390. */
@@ -1469,7 +1469,7 @@ joined_r0x0020ae6c:
               temp_v8 = temp_v29;
               FUN_002533f4(temp_v29,temp_v6,0);
               *(int *)(temp_v3 + 0xa4) = temp_v8;
-              temp_v8 = FUN_0025c05c();
+              temp_v8 = spriteTemplateGetPreferredDevilId();
               *(int *)(temp_v3 + 0xa8) = temp_v8;
               dataTable00FindById();
               *(unsigned int *)(temp_v3 + 0x1a4) = (unsigned int)*(unsigned char *)(temp_v8 + 2);

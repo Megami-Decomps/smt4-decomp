@@ -35,7 +35,7 @@ void FUN_00317e58(u32 color);
 void FUN_0026a958(s32 enabled);
 void FUN_0026a858(u32 id, CategoryPreviewRecord *record);
 void FUN_0029d8f4(const CategoryPreviewRecord *record, s32 enabled, u8 mode);
-void FUN_0029d684(s32 enabled);
+void statusPanelSetOpen(s32 enabled);
 }
 
 static inline void categoryPreviewUpdate(const CategoryPreviewEntry *entry)
@@ -47,7 +47,7 @@ static inline void categoryPreviewUpdate(const CategoryPreviewEntry *entry)
     record.categories = entry->categories;
     FUN_0029d8f4(&record, 1, 0);
     FUN_0026a958(1);
-    FUN_0029d684(1);
+    statusPanelSetOpen(1);
 }
 
 extern "C" void categoryPreviewCycleTint(CategoryPreviewWork *work)

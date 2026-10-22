@@ -12,7 +12,7 @@ struct BattleCountActions {
 };
 extern "C" {
 s32 scrGetArg(u32);
-s32 FUN_00232388(s32);
+s32 btlResolveEntryChoice(s32);
 void FUN_00301a08(s32, s32 *, s32 *);
 BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
@@ -38,7 +38,7 @@ static __inline s32 countMatchingActions(const BtlCombatantEntryA *entry, s32 sk
 extern "C" u32 scrCountBattleSkillActions()
 {
     s32 skill = scrGetArg(0);
-    s32 group = FUN_00232388(scrGetArg(1));
+    s32 group = btlResolveEntryChoice(scrGetArg(1));
     s32 starts[12], counts[3];
     s32 total = 0;
     FUN_00301a08(group, starts, counts);

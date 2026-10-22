@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023fbdc(unsigned int *, int);
 int FUN_002505c0(int, int, int, int, int, int, int);
-int FUN_00270028(int);
+int frameTexApplyMode(int);
 int FUN_0027da30(int, int);
 int FUN_002c29d8(int, int, int);
 int FUN_00339e38(int);
@@ -27,7 +27,7 @@ extern unsigned int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_0023fbdc. */
 extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_00270028. */
+/* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_002c29d8. */
@@ -104,7 +104,7 @@ void FUN_0023fffc(unsigned int *param_1,int param_2)
     }
     *param_1 = 0xd;
     if ((*puVar9 & 0x40000000) == 0) {
-      FUN_00270028(2);
+      frameTexApplyMode(2);
       *puVar9 = *puVar9 | 0x40000000;
     }
     temp_v4 = FUN_002c2a04(0);

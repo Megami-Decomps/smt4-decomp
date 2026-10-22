@@ -6,7 +6,7 @@
 extern "C" {
 
 void FUN_00264444(LmapObj *);
-int FUN_002664d8(int);
+int entryListCollectMatches(int);
 int objSetBaseAndValue(int, int, unsigned int);
 int FUN_00266a2c(void);
 int FUN_002702dc(void);
@@ -26,7 +26,7 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00264444. */
-/* Supplied declaration required: FUN_002664d8. */
+/* Supplied declaration required: entryListCollectMatches. */
 /* Supplied declaration required: objSetBaseAndValue. */
 /* Supplied declaration required: FUN_00266a2c. */
 /* Supplied declaration required: FUN_002702dc. */
@@ -72,7 +72,7 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
   FUN_00266a2c();
   FUN_00264444((LmapObj *)(temp_v0 + 0xec));
   objSetBaseAndValue(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
-  FUN_002664d8(temp_v0 + 0xec);
+  entryListCollectMatches(temp_v0 + 0xec);
   temp_v0 = g_lmapMainState;
   if (*(int *)(g_lmapMainState + 0xcc) != 3) {
     *(unsigned int *)(g_lmapMainState + 0xcc) = 3;

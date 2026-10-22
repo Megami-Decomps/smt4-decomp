@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024579c(...);
+int btlCommandOwnerHasSlotId(...);
 int FUN_002499fc(unsigned int, int *, int *);
 int scrSetResult(int);
 int btlGetMainState(void);
@@ -16,10 +16,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-/* Supplied declaration required: FUN_0024579c. */
+/* Supplied declaration required: btlCommandOwnerHasSlotId. */
 extern int btlMainFindActiveEntry(void);
 /* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
+extern unsigned int btlScriptResolveGroupArg(void);
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: scrGetArg. */
@@ -43,7 +43,7 @@ unsigned int FUN_00325048(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
   scrGetArg(2);
-  temp_v2 = FUN_00249a54();
+  temp_v2 = btlScriptResolveGroupArg();
   FUN_002499fc(temp_v2,&temp_v7,&temp_v8);
   temp_v5 = temp_v7;
   if (temp_v7 < temp_v8 + temp_v7) {
@@ -56,7 +56,7 @@ unsigned int FUN_00325048(void)
         if (temp_v6) {
           temp_v4 = (unsigned int)*(unsigned short *)((int)puVar5 + 0xce);
         }
-        if ((temp_v6 && temp_v4 == temp_v0) && (temp_v3 = FUN_0024579c(puVar5,temp_v1), temp_v3 != 0)) {
+        if ((temp_v6 && temp_v4 == temp_v0) && (temp_v3 = btlCommandOwnerHasSlotId(puVar5,temp_v1), temp_v3 != 0)) {
           scrSetResult(1);
           return 1;
         }
@@ -69,7 +69,7 @@ unsigned int FUN_00325048(void)
     btlGetMainState();
     temp_v5 = btlMainFindActiveEntry();
     if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0xce) == temp_v0)) &&
-       (temp_v5 = FUN_0024579c(temp_v5,temp_v1), temp_v5 != 0)) {
+       (temp_v5 = btlCommandOwnerHasSlotId(temp_v5,temp_v1), temp_v5 != 0)) {
       scrSetResult(1);
       return 1;
     }

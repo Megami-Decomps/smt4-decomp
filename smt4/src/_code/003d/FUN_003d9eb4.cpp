@@ -1,72 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d9eb4` (_code @ 0x3d9eb4, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: controller setup, kind stores and track/sequence stores use different registers and scheduling. */
+#include "shard/W6_W6Match6_ActionController.h"
+#include "battle/btlMain.h"
 
-extern "C" {
-
-int FUN_0022708c(void);
-int shakeEffectAlloc(void);
-
-typedef struct fn_003d9eb4_arg0 fn_003d9eb4_arg0;
-struct fn_003d9eb4_arg0 {
-    unsigned char pad_0x0[0x3028];
-    uint field_0x3028; /* +0x3028 */
-    unsigned char pad_0x302c[0xe];
-    undefined2 field_0x303a; /* +0x303a */
-    short field_0x303c; /* +0x303c */
-    short field_0x303e; /* +0x303e */
-    undefined1 field_0x3040; /* +0x3040 */
-    unsigned char pad_0x3041[0xf];
-    undefined4 field_0x3050; /* +0x3050 */
-    void *field_0x3054; /* +0x3054 */
-    uint field_0x3058; /* +0x3058 */
-    uint field_0x305c; /* +0x305c */
+struct ActionControllerRequestedIds {
+    /* 0x0000 */ u8 unk0000[0x303a];
+    /* 0x303a */ s16 kind;
+    /* 0x303c */ s16 firstId;
+    /* 0x303e */ s16 secondId;
+};
+struct ActionControllerEffects {
+    union {
+        /* 0x0000 */ ActionController controller;
+        /* 0x0000 */ ActionControllerRequestedIds ids;
+    };
+    /* 0x3058 */ u32 firstShake;
+    /* 0x305c */ u32 secondShake;
 };
 
-/* Supplied declaration required: FUN_0022708c. */
-/* Supplied declaration required: shakeEffectAlloc. */
-extern unsigned int btlGetMainState(void);
-extern void *FUN_00337ba0(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_003383a4(unsigned int);
+extern "C" {
+void FUN_0022708c();
+BtlMainState *btlGetMainState();
+ActionSequence *FUN_00337ba0(BtlMainState *battle, u32 firstId, u32 secondId);
+ActionTrack *FUN_003383a4(BtlMainState *battle, s16 kind);
+u32 shakeEffectAlloc();
 
-
-void FUN_003d9eb4(fn_003d9eb4_arg0 *param_1,unsigned int param_2,unsigned int param_3)
-
+void FUN_003d9eb4(ActionControllerEffects *work, u32 firstId, u32 secondId)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  void *pvVar3;
-  unsigned int temp_v2;
-  
-  FUN_0022708c();
-  param_1->field_0x303c = (short)param_2;
-  param_1->field_0x303e = (short)param_3;
-  param_1->field_0x3028 = param_1->field_0x3028 | 0x4000;
-  temp_v1 = btlGetMainState();
-  pvVar3 = (void *)FUN_00337ba0(temp_v1,param_2,param_3);
-  if (pvVar3 == (void *)0x0) {
-    param_1->field_0x3040 = 0xd;
-  }
-  else {
-    param_1->field_0x3040 = 1;
-    param_1->field_0x303a = *(unsigned short *)((int)pvVar3 + 4);
-    temp_v1 = FUN_003383a4(temp_v1);
-    param_1->field_0x3050 = temp_v1;
-    param_1->field_0x3054 = pvVar3;
-    temp_v2 = (unsigned int)*(unsigned char *)((int)pvVar3 + 8);
-    if ((*(unsigned char *)((int)pvVar3 + 8) & 2) != 0) {
-      shakeEffectAlloc();
-      param_1->field_0x3058 = temp_v2;
+    FUN_0022708c();
+    work->ids.firstId = firstId;
+    work->ids.secondId = secondId;
+    work->controller.flags |= 0x4000;
+    BtlMainState *battle = btlGetMainState();
+    ActionSequence *sequence = FUN_00337ba0(battle, firstId, secondId);
+    if (!sequence) {
+        work->controller.state = 13;
+        return;
     }
-    temp_v0 = *(unsigned char *)((int)param_1->field_0x3054 + 8);
-    temp_v2 = (unsigned int)temp_v0;
-    if ((temp_v0 & 4) != 0) {
-      shakeEffectAlloc();
-      param_1->field_0x305c = temp_v2;
+    work->controller.state = 1;
+    work->ids.kind = sequence->kind;
+    work->controller.tracks = FUN_003383a4(battle, sequence->kind);
+    work->controller.sequence = sequence;
+    if (sequence->flags & 2) {
+        work->firstShake = shakeEffectAlloc();
     }
-  }
-  return;
+    if (work->controller.sequence->flags & 4) {
+        work->secondShake = shakeEffectAlloc();
+    }
 }
-
-} /* extern "C" */
+}

@@ -13,7 +13,7 @@ void *jyoucyuGetTableEntry(u32 index);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 tracked);
 void FUN_0027dda4(void *work);
 void shopProcessMarkFinished(void *work);
-void FUN_002bd4bc(void *work);
+void shopMainUpdateChild(void *work);
 void ownerChildNotifyEarlyState(void *work);
 u32 asdProcessCreateSimple(const char *name, u32 kind, u32 flags, u32 delay, TaskFunc update, TaskFunc destroy, void *work);
 u32 taskCreateDraw(const char *name, u32 priority, u32 kind, u32 flags, TaskFunc draw, TaskFunc destroy, void *work, u32 parent);
@@ -41,7 +41,7 @@ extern "C" void shopCreateProcessAndDrawTasks(const u32 *arguments, s32 bytes)
         work->mode = 1;
     }
     work->task = asdProcessCreateSimple(DAT_005361d4, 4, 0, 0, FUN_0027dda4, shopProcessMarkFinished, work);
-    taskCreateDraw(DAT_005361c4, 101, 1, 0, FUN_002bd4bc, NULL, g_shop, work->task);
-    taskCreateDraw(DAT_005361c4, 204, 1, 0, FUN_002bd4bc, NULL, g_shop, work->task);
+    taskCreateDraw(DAT_005361c4, 101, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
+    taskCreateDraw(DAT_005361c4, 204, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361b0, 235, 1, 0, ownerChildNotifyEarlyState, NULL, g_shop, work->task);
 }

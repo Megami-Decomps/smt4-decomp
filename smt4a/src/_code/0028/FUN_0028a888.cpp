@@ -5,11 +5,11 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int dataTable04FindById(void);
 int battleAttributeFormatName(...);
-int FUN_00230c1c(...);
+int skillFormatTargetLabel(...);
 int FUN_002c0940(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
@@ -57,13 +57,13 @@ extern unsigned char LAB_0028b084; /* 0x28b084 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(void);
-extern unsigned int FUN_001774d8(int);
-/* Supplied declaration required: FUN_00192550. */
+extern unsigned int itemGetStackLimit(int);
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: FUN_00230c1c. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: FUN_002c0940. */
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: sysMemClear. */
@@ -113,7 +113,7 @@ void FUN_0028a888(int param_1)
   case 1:
   case 0xc:
     temp_v6 = param_1;
-    FUN_00192550();
+    dataTable8FindRecord();
     if (*(short *)(temp_v6 + 0x4a) != 0) {
       temp_v4 = FUN_002e5c2c();
       FUN_00359974(0x24,temp_v4,0xffffffff,0);
@@ -127,7 +127,7 @@ void FUN_0028a888(int param_1)
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v6 + 0x32);
     if (temp_v5 != 0) {
       dataTable04FindById();
-      FUN_00230c1c(temp_v12,(*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5);
+      skillFormatTargetLabel(temp_v12,(*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5);
     }
     else if ((*(unsigned int *)(temp_v6 + 0x68) & 0x20) != 0) {
       textFormatBuffer(temp_v12,&LAB_0028ac98);
@@ -139,7 +139,7 @@ void FUN_0028a888(int param_1)
       textFormatBuffer(temp_v12,&LAB_0028acc0);
     }
     FUN_003180c4(0x24,temp_v12);
-    temp_v3 = FUN_001774d8(param_1);
+    temp_v3 = itemGetStackLimit(param_1);
     FUN_00359974(0x25,temp_v3,0xffffffff,0);
     return;
   case 2:
@@ -159,7 +159,7 @@ void FUN_0028a888(int param_1)
     }
     battleAttributeFormatName(temp_v12,*(unsigned int *)(param_1 + 0x24) >> 0x14);
     FUN_003180c4(0x26,temp_v12);
-    FUN_00230c1c(temp_v12,*(unsigned char *)(param_1 + 0x29));
+    skillFormatTargetLabel(temp_v12,*(unsigned char *)(param_1 + 0x29));
     FUN_003180c4(0x27,temp_v12);
     if (*(char *)(param_1 + 0x2b) == '\0') {
       textFormatBuffer(temp_v12,&LAB_0028acd8);

@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern int FUN_00397470(...); /* 0x397470 */
+extern int scriptMenuTaskRunScript(...); /* 0x397470 */
 extern int FUN_00397514(...); /* 0x397514 */
 extern int FUN_00397580(...); /* 0x397580 */
 extern int FUN_00397b40(...); /* 0x397b40 */
@@ -79,7 +79,7 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0xf0) = 0;
   *(romwright_code **)(param_1 + 0xf4) = FUN_00397b40;
   *(unsigned int *)(param_1 + 0xf8) = 0;
-  *(romwright_code **)(param_1 + 0xfc) = FUN_00397470;
+  *(romwright_code **)(param_1 + 0xfc) = scriptMenuTaskRunScript;
   *(unsigned int *)(param_1 + 0x100) = 0;
   *(romwright_code **)(param_1 + 0x104) = FUN_00397514;
   *(unsigned int *)(param_1 + 0x108) = 0;

@@ -24,7 +24,7 @@ extern int campCecHasObject(void);
 extern int partyPanelGetSelectedDemonId(void);
 extern int FUN_002cad18(void);
 extern int FUN_002f1964(void);
-extern int FUN_003aeaf0(unsigned int);
+extern int buttonHelpGetEntryValue(unsigned int);
 
 
 void FUN_0023fc38(void)
@@ -184,7 +184,7 @@ LAB_0023fea8:
     FUN_00183f58(3,0x12,0,1);
     return;
   }
-  temp_v5 = FUN_003aeaf0(3);
+  temp_v5 = buttonHelpGetEntryValue(3);
   if (temp_v5 != 0) {
     return;
   }

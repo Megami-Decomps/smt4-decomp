@@ -1,55 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011a258` (_code @ 0x11a258, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail fills the command words at fixed offsets from one base and derives the register ids arithmetically in another order; the build walks the pointer with writeback. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002af390(unsigned int *, unsigned int *);
-int FUN_002b7148(void);
+typedef struct GxBufferDesc {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 width;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u32 address;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u32 height;
+} GxBufferDesc;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+u32 *FUN_002b7148(void);
+void FUN_002af390(u32 *start, u32 *end);
 
-/* Supplied declaration required: FUN_002af390. */
-/* Supplied declaration required: FUN_002b7148. */
-
-
-void FUN_0011a258(unsigned int *param_1,int param_2,unsigned int param_3,int param_4)
-
+/* Queue the GPU register writes that bind `color` and `depth` as render buffers. */
+void FUN_0011a258(GxBufferDesc *color, GxBufferDesc *depth, u32 format, s32 levels)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = param_1;
-  FUN_002b7148();
-  *puVar1 = 1;
-  puVar1[1] = 0xf0111;
-  puVar1[2] = 1;
-  puVar1[3] = 0xf0110;
-  puVar1[4] = param_1[5] | (param_1[1] << 0x10);
-  puVar1[5] = 0xf0117;
-  temp_v0 = param_1[3];
-  temp_v1 = (param_4 * 0x1000 - 0x1000U) | param_3 | 0x1000000;
-  puVar1[7] = 0xf011d;
-  puVar1[9] = 0xf011e;
-  puVar1[8] = temp_v1;
-  puVar1[6] = temp_v0 >> 3;
-  puVar1[10] = *(unsigned int *)(param_2 + 4);
-  puVar1[0xb] = 0xf0116;
-  puVar1[0xc] = *(unsigned int *)(param_2 + 0xc) >> 3;
-  puVar1[0xd] = 0xf011c;
-  puVar1[0xe] = temp_v1;
-  puVar1[0xf] = 0xf006e;
-  puVar1[0x10] = 1;
-  puVar1[0x11] = 0xf0111;
-  puVar1[0x12] = 1;
-  puVar1[0x13] = 0xf0110;
-  FUN_002af390(puVar1,puVar1 + 0x14);
-  return;
+    u32 *start = FUN_002b7148();
+    u32 *cmd = start;
+    u32 mode;
+
+    *cmd++ = 1;
+    *cmd++ = 0xF0111;
+    *cmd++ = 1;
+    *cmd++ = 0xF0110;
+    *cmd++ = color->height | (color->width << 16);
+    *cmd++ = 0xF0117;
+    mode = ((levels - 1) << 12) | format | 0x1000000;
+    *cmd++ = color->address >> 3;
+    *cmd++ = 0xF011D;
+    *cmd++ = mode;
+    *cmd++ = 0xF011E;
+    *cmd++ = depth->width;
+    *cmd++ = 0xF0116;
+    *cmd++ = depth->address >> 3;
+    *cmd++ = 0xF011C;
+    *cmd++ = mode;
+    *cmd++ = 0xF006E;
+    *cmd++ = 1;
+    *cmd++ = 0xF0111;
+    *cmd++ = 1;
+    *cmd++ = 0xF0110;
+    FUN_002af390(start, cmd);
 }
 
 } /* extern "C" */

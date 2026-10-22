@@ -1,54 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c05e8` (_code @ 0x3c05e8, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int infoWinStartTimer(int);
-int asdMemFree(void);
+typedef struct BtlNode {
+    /* 0x000 */ u8 unk000[2];
+    /* 0x002 */ u16 kind;
+    /* 0x004 */ u8 unk004[2];
+    /* 0x006 */ u16 flags;
+    /* 0x008 */ s32 owner;
+    /* 0x00C */ u8 unk00C[0x294];
+    /* 0x2A0 */ u8 unk2A0[2];
+    /* 0x2A2 */ s16 index;
+    /* 0x2A4 */ struct BtlNode *next;
+    /* 0x2A8 */ struct BtlNode *prev;
+} BtlNode;
 
-extern int *DAT_00435d78; /* 0x435d78 */
+typedef struct BtlList {
+    /* 0x0 */ BtlNode *first;
+    /* 0x4 */ BtlNode *last;
+    /* 0x8 */ s32 count;
+} BtlList;
 
-/* Supplied declaration required: infoWinStartTimer. */
-extern int FUN_002b6b04(void);
-/* Supplied declaration required: asdMemFree. */
+extern BtlList *DAT_00435d78;
+s32 FUN_002b6b04(void);
+void infoWinStartTimer(s32 mode);
+void asdMemFree(void *memory);
 
-
-void FUN_003c05e8(int param_1)
-
+/* Removes a node from its list and returns it. */
+static __inline BtlNode *btlListRemove(BtlList *list, BtlNode *node)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = *DAT_00435d78;
-  while (temp_v0 != 0) {
-    temp_v2 = *(int *)(temp_v0 + 0x2a4);
-    if ((((*(int *)(temp_v0 + 8) == param_1) && (-1 < *(short *)(temp_v0 + 0x2a2))) &&
-        (*(short *)(temp_v0 + 2) == 1)) &&
-       (((*(unsigned short *)(temp_v0 + 6) & 1) == 0 && (temp_v1 = FUN_002b6b04(), temp_v1 != 0)))) {
-      infoWinStartTimer(1);
+    if (node->prev == NULL) {
+        list->first = node->next;
+    } else {
+        node->prev->next = node->next;
     }
-    piVar2 = DAT_00435d78;
-    if (*(int *)(temp_v0 + 0x2a8) == 0) {
-      *DAT_00435d78 = *(int *)(temp_v0 + 0x2a4);
+    if (node->next == NULL) {
+        list->last = node->prev;
+    } else {
+        node->next->prev = node->prev;
     }
-    else {
-      *(unsigned int *)(*(int *)(temp_v0 + 0x2a8) + 0x2a4) = *(unsigned int *)(temp_v0 + 0x2a4);
+    list->count--;
+    return node;
+}
+
+/* Frees every node of the list, starting the info window timer for each ready one that belongs to
+ * `owner` (valid index, kind 1, flag 0 clear, FUN_002b6b04 passing). */
+void FUN_003c05e8(s32 owner)
+{
+    BtlNode *node = DAT_00435d78->first;
+
+    while (node != NULL) {
+        BtlNode *next = node->next;
+
+        if (node->owner == owner && node->index >= 0 && node->kind == 1 && (node->flags & 1) == 0 &&
+            FUN_002b6b04() != 0) {
+            infoWinStartTimer(1);
+        }
+        asdMemFree(btlListRemove(DAT_00435d78, node));
+        node = next;
     }
-    if (*(int *)(temp_v0 + 0x2a4) == 0) {
-      piVar2[1] = *(int *)(temp_v0 + 0x2a8);
-    }
-    else {
-      *(unsigned int *)(*(int *)(temp_v0 + 0x2a4) + 0x2a8) = *(unsigned int *)(temp_v0 + 0x2a8);
-    }
-    piVar2[2] = piVar2[2] - 1;
-    asdMemFree();
-    temp_v0 = temp_v2;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ typedef struct Record {
 } Record;
 
 extern s32 scrGetCommandFrame(void);
-extern Record *FUN_00192550(u32 id);
+extern Record *dataTable8FindRecord(u32 id);
 extern s32 arousalSkillOpen(void);
 extern s32 sceneHolderUpdate(void);
 
@@ -16,7 +16,7 @@ extern s32 sceneHolderUpdate(void);
 u32 scrCommRecordProgressWait(void)
 {
     if (scrGetCommandFrame() == 0) {
-        Record *record = FUN_00192550(0x7B6);
+        Record *record = dataTable8FindRecord(0x7B6);
 
         if (record == NULL || record->count == 0) {
             return 1;

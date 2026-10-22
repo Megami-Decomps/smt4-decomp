@@ -1,5 +1,5 @@
 /* NON_MATCHING: enabled is compared after the byte load rather than before retail's mask-shift sequence. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" StatsAdditionalFlagView *gameDataBlocksGetStats(void);
 

@@ -6,8 +6,8 @@ int appletSetHomeButtonHeld(int arg);
 
 void gameDataBlocksAddFlags(u32 flags)
 {
-    g_gameDataBlocks.unk00 = 0;
-    g_gameDataBlocks.unk10 = flags | g_gameDataBlocks.unk10;
+    g_gameDataBlocks.homeButtonIdle = 0;
+    g_gameDataBlocks.homeButtonHolds = flags | g_gameDataBlocks.homeButtonHolds;
     appletSetHomeButtonHeld(0);
 }
 

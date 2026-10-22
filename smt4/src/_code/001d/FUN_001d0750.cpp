@@ -8,7 +8,7 @@ int configOpen(void);
 int FUN_00194ec8(void);
 int bibleOpenMode0(...);
 int bibleOpenMode1(...);
-int FUN_00269cb8(...);
+int campCecSetSubstate(...);
 int campUiResetSlots(void);
 int uniteSetMode(...);
 int FUN_0028a368(...);
@@ -60,7 +60,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: bibleOpenMode1. */
 /* Supplied declaration required: bibleOpenMode2. */
 /* Supplied declaration required: FUN_00223cf0. */
-/* Supplied declaration required: FUN_00269cb8. */
+/* Supplied declaration required: campCecSetSubstate. */
 /* Supplied declaration required: campUiResetSlots. */
 extern int FUN_00269d4c(void);
 /* Supplied declaration required: uniteSetMode. */
@@ -75,7 +75,7 @@ extern int FUN_00269d4c(void);
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: campUpdateCategoryHighlightColors. */
 /* Supplied declaration required: FUN_00298d0c. */
-extern int FUN_00299218(int, unsigned int);
+extern int dataTable15GetUnlockedEntryId(int, unsigned int);
 /* Supplied declaration required: campRefreshEquipmentCategory. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -116,7 +116,7 @@ void FUN_001d0750(int *param_1)
   temp_v4 = 0;
   temp_v2 = *param_1;
   temp_v0 = objectPartRunUnlessLocked(temp_v2 + 0x34);
-  temp_v1 = FUN_00299218((int)*(char *)(temp_v2 + 0x98),temp_v0);
+  temp_v1 = dataTable15GetUnlockedEntryId((int)*(char *)(temp_v2 + 0x98),temp_v0);
   switch(temp_v1) {
   case 7:
     *(unsigned char *)(temp_v2 + 0x25bd) = 1;
@@ -537,21 +537,21 @@ void FUN_001d0750(int *param_1)
     return;
   case 0x32:
     *(unsigned int *)(temp_v2 + 0x18) = 0x31;
-    FUN_00269cb8(2);
+    campCecSetSubstate(2);
     FUN_0026d5a4();
     FUN_0029cc44(1);
     scrEffectRunIfActive();
     return;
   case 0x33:
     *(unsigned int *)(temp_v2 + 0x18) = 0x32;
-    FUN_00269cb8(1);
+    campCecSetSubstate(1);
     FUN_0026d5a4();
     FUN_0029cc44(1);
     scrEffectRunIfActive();
     return;
   case 0x34:
     *(unsigned int *)(temp_v2 + 0x18) = 0x33;
-    FUN_00269cb8(3);
+    campCecSetSubstate(3);
     FUN_0026d5a4();
     FUN_0029cc44(1);
     scrEffectRunIfActive();

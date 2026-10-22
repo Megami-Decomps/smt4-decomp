@@ -1,46 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b4f28` (_code @ 0x2b4f28, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail receives and forwards the float argument on the stack (vldr/vstr, not s0) and builds the task arguments through ip; ABI of the float parameter unknown */
+#include "common.h"
 
 extern "C" {
 
-int taskCreateDraw(...);
-int jobIsValid(...);
-int FUN_004dcb40(...);
+/* A ring of twelve action jobs. */
+typedef struct BtlActionRing {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 jobs[12];
+    /* 0x3C */ u8 unk3c[0xa4 - 0x3c];
+    /* 0xA4 */ s32 current;
+} BtlActionRing;
 
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
+typedef struct BtlActionGlobalsA {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ void *data;
+} BtlActionGlobalsA;
 
-extern int FUN_00298354(...); /* 0x298354 */
-extern unsigned char LAB_002b4ff0; /* 0x2b4ff0 */
-extern int jobPoolStopCurrent(...); /* 0x3284cc */
-extern unsigned char g_btlAction; /* 0x571138 */
+extern BtlActionGlobalsA g_btlAction;
 
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: jobIsValid. */
-/* Supplied declaration required: FUN_004dcb40. */
+s32 jobIsValid(u32 job);
+void FUN_004dcb40(void *data, BtlActionRing *ring, u32 a, u32 b, u32 c, f32 d);
+u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(u32), void (*draw)(u32), void *owner, u32 id);
+void FUN_00298354(u32 job);
+void jobPoolStopCurrent(u32 job);
 
-
-void FUN_002b4f28(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Advances the ring to its next slot, sets up the action and starts its job in that slot. */
+void FUN_002b4f28(BtlActionRing *ring, u32 a, u32 b, u32 c, f32 d)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = (param_1[0x29] + 1) % 0xc;
-  param_1[0x29] = temp_v0;
-  jobIsValid(param_1[temp_v0 + 3]);
-  FUN_004dcb40((*(unsigned int *)((unsigned char *)&g_btlAction + 0x4)),param_1,param_2,param_3,param_4,param_5);
-  puVar2 = &LAB_002b4ff0;
-  taskCreateDraw(&LAB_002b4ff0,3,0,0,FUN_00298354,jobPoolStopCurrent,param_1,*param_1);
-  param_1[param_1[0x29] + 3] = (unsigned int)puVar2;
-  return;
+    ring->current = (ring->current + 1) % 12;
+    jobIsValid(ring->jobs[ring->current]);
+    FUN_004dcb40(g_btlAction.data, ring, a, b, c, d);
+    ring->jobs[ring->current] = taskCreateDraw("btlAction Calc", 3, 0, 0, FUN_00298354, jobPoolStopCurrent, ring, ring->id);
 }
 
 } /* extern "C" */

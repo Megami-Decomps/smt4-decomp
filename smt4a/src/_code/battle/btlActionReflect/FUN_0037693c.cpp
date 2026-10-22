@@ -1,46 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037693c` (_code @ 0x37693c, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #124] differs from recovered ldr r2, [pc, #124]. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+// Private layout views for this translation unit.
+struct ReflectOwnerView {
+    u32 unk00;             // 0x00
+    u8 unk04[0x44];        // 0x04
+    void* drawTask;        // 0x48
+};
+
+struct ReflectStateView {
+    ReflectOwnerView* owner; // 0x00
+    u32 unk04;               // 0x04
+    u32 unk08;               // 0x08
+    u32 unk0C;               // 0x0C
+    u8 unk10[0xF0];          // 0x10
+};
 
 extern "C" {
-
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int FUN_00369258(...); /* 0x369258 */
-extern unsigned char LAB_003769d0; /* 0x3769d0 */
-extern int FUN_003a3a48(...); /* 0x3a3a48 */
-extern int *g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-
-
-void FUN_0037693c(unsigned int *param_1)
-
-{
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  int *piVar2;
-  
-  puVar1 = &LAB_003769d0;
-  taskCreateDraw(&LAB_003769d0,4,0,0,FUN_00369258,FUN_003a3a48,param_1,*param_1);
-  param_1[0x12] = (unsigned int)puVar1;
-  piVar2 = (int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x10,1);
-  g_btlActionReflect = piVar2;
-  piVar2[1] = 0;
-  *piVar2 = (int)param_1;
-  piVar2[2] = 0;
-  piVar2[3] = 0;
-  return;
+void FUN_00369258();
+void btlReflectReleaseContextAndStop();
+void* taskCreateDraw(const char* name, u32 priority, u32 flags, u32 reserved,
+                     void (*callback)(), void (*cleanup)(),
+                     void* context, u32 ownerHandle);
+void* asdMemoryAllocTracked(u32 size, u32 alignment, u32 flags,
+                            u32 category, u32 tracked);
+extern ReflectStateView* g_btlActionReflect;
 }
 
-} /* extern "C" */
+// Create the reflection calculation task and initialize its shared state.
+extern "C" void FUN_0037693c(ReflectOwnerView* owner)
+{
+    owner->drawTask = taskCreateDraw("btlActionReflect Calc", 4, 0, 0,
+                                    FUN_00369258, btlReflectReleaseContextAndStop,
+                                    owner, owner->unk00);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlActionReflect.cpp", 3965);
+
+    ReflectStateView* state = static_cast<ReflectStateView*>(
+        asdMemoryAllocTracked(0x100, 0x100, 0, 0x10, 1));
+    g_btlActionReflect = state;
+    state->unk04 = 0;
+    state->owner = owner;
+    state->unk08 = 0;
+    state->unk0C = 0;
+}

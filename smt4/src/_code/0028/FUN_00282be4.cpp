@@ -4,7 +4,7 @@ extern "C" {
 
 u8 *FUN_00282be4(void)
 {
-    return g_gameDataBlocks.unk04 + 0x9874;
+    return g_gameDataBlocks.saveBlock->block09874;
 }
 
 } /* extern "C" */

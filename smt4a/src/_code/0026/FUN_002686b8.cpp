@@ -1,58 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002686b8` (_code @ 0x2686b8, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads unk7F4/unk7F5 through the hoisted `object + 0x700` base (r6) used for touchRegionCount; armcc here addresses them off object directly. */
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-int FUN_0019de98(int, unsigned int);
-int FUN_00318df4(int);
-int FUN_00387ac4(int);
+extern Obj7ECRef g_useCounter;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+void ifTouchRegionRemove(void);
+void FUN_0019de98(void *target, u32 color);
+void buttonHelpSetHelpState(s32 mode);
+void buttonHelpSetMode(s32 mode);
 
-extern unsigned char g_useCounter; /* 0x57f27c */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_00318df4. */
-/* Supplied declaration required: FUN_00387ac4. */
-
-
+/* Release every touch region, then close the overlay unless the screen is in mode 1 or 2. */
 void FUN_002686b8(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
-  temp_v1 = 0;
-  *(unsigned int *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x744) = 4;
-  if (0 < *(short *)(temp_v0 + 0x786)) {
-    do {
-      *(unsigned short *)(temp_v0 + temp_v1 * 2 + 0x76c) = 0xffff;
-      ifTouchRegionRemove();
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(short *)(temp_v0 + 0x786));
-  }
-  if (*(char *)(temp_v0 + 0x74e) != '\x02' && *(char *)(temp_v0 + 0x74e) != '\x01') {
-    if (*(char *)(temp_v0 + 0x7f4) == '\0') {
-      FUN_00387ac4(0);
-      return;
+    Obj7EC *object = g_useCounter.instance;
+    object->unk744 = 4;
+    for (s32 i = 0; i < object->touchRegionCount; ++i) {
+        object->touchRegions[i] = -1;
+        ifTouchRegionRemove();
     }
-    if (*(char *)(temp_v0 + 0x7f5) != '\0') {
-      FUN_00318df4(1);
+    if (object->unk74E == 2 || object->unk74E == 1) {
+        return;
     }
-    else {
-      FUN_0019de98(temp_v0 + 0x7f6,0xf4f4f4ff);
+    if (object->unk7F4 != 0) {
+        if (object->unk7F5 != 0) {
+            buttonHelpSetHelpState(1);
+        } else {
+            FUN_0019de98(object->unk7F6, 0xF4F4F4FF);
+        }
+        object->unk7F4 = 0;
+    } else {
+        buttonHelpSetMode(0);
     }
-    *(unsigned char *)(temp_v0 + 0x7f4) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

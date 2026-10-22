@@ -17,8 +17,8 @@ u32 mapRequestLargeIndexSequence(void)
     jyoucyuGetTableEntry(0);
     if (gameStateIsFlagSetAndLarge()) {
         SequenceFourteenArgument argument;
-        argument.index = g_gameState.unk578 - 200;
-        argument.parameter = g_gameState.unk57c;
+        argument.index = g_gameState.sourceMap - 200;
+        argument.parameter = g_gameState.sourceArea;
         asdSequenceRequest(14, &argument, sizeof(argument));
     }
     return 1;

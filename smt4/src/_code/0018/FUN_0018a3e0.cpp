@@ -6,7 +6,7 @@ extern "C" {
 
 int mapEnableAndClearState(void);
 int buttonHelpStartScript(...);
-int FUN_002990a0(void);
+int messageInitializeSavedBanner(void);
 int guestWinRequestOpen(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
@@ -21,14 +21,14 @@ int FUN_00298ad8(void);
 int FUN_00298d0c(...);
 int FUN_00298d28(...);
 int campReleaseScreenTouchRegions(...);
-int FUN_00299218(...);
+int dataTable15GetUnlockedEntryId(...);
 int FUN_00299900(...);
 int FUN_00299bc4(int, int);
 int FUN_0029a924(...);
 int FUN_0029a9d4(...);
 int FUN_0029acb0(void);
 int beginStatusPanelClose(void);
-int FUN_0029d684(...);
+int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029defc(...);
 int FUN_0029dfc0(...);
@@ -57,10 +57,10 @@ extern int FUN_00298848(unsigned int, int);
 /* Supplied declaration required: FUN_00298ad8. */
 /* Supplied declaration required: FUN_00298d0c. */
 /* Supplied declaration required: FUN_00298d28. */
-/* Supplied declaration required: FUN_002990a0. */
+/* Supplied declaration required: messageInitializeSavedBanner. */
 /* Supplied declaration required: guestWinRequestOpen. */
 /* Supplied declaration required: campReleaseScreenTouchRegions. */
-/* Supplied declaration required: FUN_00299218. */
+/* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
 /* Supplied declaration required: FUN_0029a924. */
@@ -68,7 +68,7 @@ extern int FUN_00298848(unsigned int, int);
 /* Supplied declaration required: FUN_0029acb0. */
 /* Supplied declaration required: beginStatusPanelClose. */
 extern int FUN_0029d644(int);
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029dfa8(void);
@@ -185,12 +185,12 @@ void FUN_0018a3e0(void)
     if (temp_v4 == 0) {
       if (*(int *)(temp_v6 + temp_v3 * 8 + 0xe40) < 0) {
         FUN_0029defc(0xffffffff,0);
-        FUN_0029d684(1);
+        statusPanelSetOpen(1);
       }
       else {
         temp_v5 = gameGetUnitRecord();
         FUN_0029d8f4(temp_v5,0);
-        FUN_0029d684(1);
+        statusPanelSetOpen(1);
       }
     }
     temp_v4 = FUN_0029e02c();
@@ -235,7 +235,7 @@ void FUN_0018a3e0(void)
                (int)*(short *)(temp_v6 + 0xe04),(int)*(short *)(temp_v6 + 0xe06),temp_v8,0,1);
   if (temp_v4 != 0) {
     temp_v5 = objectPartRunUnlessLocked(temp_v6 + 0x34);
-    FUN_00299218((int)*(char *)(temp_v6 + 0x98),temp_v5);
+    dataTable15GetUnlockedEntryId((int)*(char *)(temp_v6 + 0x98),temp_v5);
     FUN_00299900();
     temp_v6 = g_camp;
     temp_v3 = FUN_0029efc0(g_camp + 0x1dc);
@@ -255,7 +255,7 @@ void FUN_0018a3e0(void)
   FUN_0029efd8(temp_v4,1);
   if (temp_v4 != 0) {
     temp_v5 = objectPartRunUnlessLocked(temp_v6 + 0x34);
-    FUN_00299218((int)*(char *)(temp_v6 + 0x98),temp_v5);
+    dataTable15GetUnlockedEntryId((int)*(char *)(temp_v6 + 0x98),temp_v5);
     FUN_00299900();
     temp_v6 = g_camp;
     temp_v3 = FUN_0029efc0(g_camp + 0x1dc);
@@ -303,12 +303,12 @@ LAB_0018a948:
             }
             if (*(int *)(temp_v4 + 0xe40) < 0) {
               FUN_0029defc(0xffffffff,0);
-              FUN_0029d684(0);
+              statusPanelSetOpen(0);
             }
             else {
               temp_v5 = gameGetUnitRecord();
               FUN_0029d8f4(temp_v5,0);
-              FUN_0029d684(0);
+              statusPanelSetOpen(0);
             }
             eventQueueAddUniqueIfValid(0x100017c);
             buttonHelpStartScript(0);
@@ -395,7 +395,7 @@ LAB_0018a948:
     *(unsigned int *)(temp_v6 + 0x14) = 0;
     guestWinRequestOpen();
     FUN_0029e648(1,0);
-    FUN_002990a0();
+    messageInitializeSavedBanner();
     temp_v5 = 0x100016e;
   }
   eventQueueAddUniqueIfValid(temp_v5);

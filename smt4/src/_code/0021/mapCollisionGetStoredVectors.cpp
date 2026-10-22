@@ -1,10 +1,6 @@
 /* NON_MATCHING: second/third vector copies form temporary base addresses and use vldmia instead of retail's individual vldr loads (O2 also differs). */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 
-struct CollisionVectorState {
-    u8 unk000[0x320];
-    CollisionVector vectors[4]; // 0x320
-};
 
 extern "C" {
 extern CollisionVectorState DAT_0049e85c;

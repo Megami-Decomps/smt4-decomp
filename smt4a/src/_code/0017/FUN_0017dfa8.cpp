@@ -1,42 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017dfa8` (_code @ 0x17dfa8, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r7, #0 differs from recovered mov r8, #0. */
+#include "common.h"
+
+struct CommandBufferStateView {
+    u8 unk00[0x04];
+    u32 unk04; // 0x04
+    u8 unk08[0x04];
+    u32 unk0C; // 0x0C
+    u8 unk10[0x10];
+    u32 unk20; // 0x20
+};
+
+struct GfxContextView {
+    u8 unk00[0x13];
+    u8 unk13; // 0x13
+    u8 unk14[0x88];
+    CommandBufferStateView* unk9C; // 0x9C
+    u8 unkA0[0xC8];
+    u32 unk168; // 0x168
+    u32 unk16C; // 0x16C
+};
 
 extern "C" {
+extern GfxContextView g_asdGfxContext;
+extern u32* g_commandBufferCursor;
+extern u32 g_commandBufferEnd;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-extern unsigned char DAT_0061a483; /* 0x61a483 */
-extern int DAT_0061a50c; /* 0x61a50c */
-extern int DAT_0061a5d8; /* 0x61a5d8 */
-extern int DAT_0061a5dc; /* 0x61a5dc */
-
-
-void FUN_0017dfa8(int *param_1,int *param_2,int *param_3,int *param_4)
-
+// Finish the current command range, append padding if needed, and report both ranges.
+void FUN_0017dfa8(u32* commandOffset, u32* commandSize,
+                  u32* secondaryOffset, u32* secondarySize)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = g_commandBufferCursor;
-  DAT_0061a483 = 0;
-  temp_v0 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
-  *(unsigned int *)(DAT_0061a50c + 0xc) = temp_v0;
-  if (((temp_v0 & 8) != 0) && ((unsigned int)puVar1 < g_commandBufferEnd)) {
-    g_commandBufferCursor = puVar1 + 2;
-    *puVar1 = 0;
-    puVar1[1] = 0x8025e;
-  }
-  *param_1 = DAT_0061a5d8;
-  *param_2 = (int)g_commandBufferCursor + (-DAT_0061a5d8 - *(int *)(DAT_0061a50c + 4));
-  *param_3 = DAT_0061a5dc;
-  *param_4 = *(int *)(DAT_0061a50c + 0x20) - DAT_0061a5dc;
-  return;
-}
+    g_asdGfxContext.unk13 = 0;
 
-} /* extern "C" */
+    CommandBufferStateView* state = g_asdGfxContext.unk9C;
+    u32* cursor = g_commandBufferCursor;
+    u32 usedBytes = reinterpret_cast<u32>(cursor) - state->unk04;
+    state->unk0C = usedBytes;
+
+    if ((usedBytes & 8) != 0 &&
+        reinterpret_cast<u32>(cursor) < g_commandBufferEnd) {
+        cursor[0] = 0;
+        cursor[1] = 0x0008025E;
+        g_commandBufferCursor = cursor + 2;
+    }
+
+    *commandOffset = g_asdGfxContext.unk168;
+    *commandSize = reinterpret_cast<u32>(g_commandBufferCursor)
+                 - g_asdGfxContext.unk9C->unk04
+                 - g_asdGfxContext.unk168;
+    *secondaryOffset = g_asdGfxContext.unk16C;
+    *secondarySize = g_asdGfxContext.unk9C->unk20
+                   - g_asdGfxContext.unk16C;
+}
+}

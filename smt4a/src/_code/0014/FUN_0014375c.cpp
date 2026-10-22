@@ -1,41 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014375c` (_code @ 0x14375c, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Floating range guards use different condition codes and schedule the IEEE bit transfers before the comparisons. */
+#include "common.h"
 
+struct SoundStereoMix {
+    /* 0x00 */ f32 left;
+    /* 0x04 */ f32 right;
+    /* 0x08 */ u8 unk08[0x28];
+};
+struct SoundVoiceMixWork {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ void *voices[2];
+    /* 0x70 */ SoundStereoMix mix[2];
+    /* 0xD0 */ u8 unkD0[0x1C];
+    /* 0xEC */ u32 mixMode;
+};
+union SoundMixFloatWord {
+    f32 value;
+    s32 bits;
+};
 extern "C" {
+void nn_snd_CTR_Voice_SetMixParam(void *voice, const SoundStereoMix *parameters);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern void nn_snd_CTR_Voice_SetMixParam(unsigned int, unsigned int);
-
-
-void FUN_0014375c(int param_1)
-
+/* Sets normalized stereo levels for the single-voice or split-voice mix. */
+void FUN_0014375c(SoundVoiceMixWork *work, f32 left, f32 right)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */
-  float in_s0;
-  float in_s1;
-  
-  if (param_1 == 0) {
-    return;
-  }
-  if ((((0.0f <= in_s1) && ((int)in_s1 < 0x3f800001)) && (0.0f <= in_s0)) && ((int)in_s0 < 0x3f800001)
-     ) {
-    *(float *)(param_1 + 0x70) = in_s0;
-    if (*(int *)(param_1 + 0xec) != 1) {
-      nn_snd_CTR_Voice_SetMixParam(*(unsigned int *)(param_1 + 0x68),param_1 + 0x70);
-      *(float *)(param_1 + 0xa4) = in_s1;
-      nn_snd_CTR_Voice_SetMixParam(*(unsigned int *)(param_1 + 0x6c),param_1 + 0xa0);
-      return;
+    if (work == NULL) {
+        return;
     }
-    *(float *)(param_1 + 0x74) = in_s1;
-    nn_snd_CTR_Voice_SetMixParam(*(unsigned int *)(param_1 + 0x68),param_1 + 0x70);
-    return;
-  }
-  return;
+    SoundMixFloatWord rightWord;
+    rightWord.value = right;
+    if (!(0.0f <= right) || rightWord.bits > 0x3F800000) {
+        return;
+    }
+    SoundMixFloatWord leftWord;
+    leftWord.value = left;
+    if (!(0.0f <= left) || leftWord.bits > 0x3F800000) {
+        return;
+    }
+    work->mix[0].left = left;
+    if (work->mixMode != 1) {
+        nn_snd_CTR_Voice_SetMixParam(work->voices[0], &work->mix[0]);
+        work->mix[1].right = right;
+        nn_snd_CTR_Voice_SetMixParam(work->voices[1], &work->mix[1]);
+    } else {
+        work->mix[0].right = right;
+        nn_snd_CTR_Voice_SetMixParam(work->voices[0], &work->mix[0]);
+    }
 }
-
-} /* extern "C" */
+}

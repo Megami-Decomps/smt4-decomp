@@ -3421,7 +3421,7 @@
 0x002e4e92 rt_vec_delete name
 0x002e4ea4 __aeabi_idivmod name
 0x002e5700 rt_vec_dtor name
-0x002e5728 FUN_002e5728 between
+0x002e5724 FUN_002e5724 between
 0x002e5780 FUN_002e5780 between
 0x002e57c8 FUN_002e57c8 between
 0x002e57e0 FUN_002e57e0 between
@@ -3483,7 +3483,7 @@
 0x002e7690 strHolderAssignWide between
 0x002e76a0 strHolderAssignBuffer between
 0x002e76b6 onlineBufferGetData name
-0x002e76c8 FUN_002e76c8 between
+0x002e76c0 FUN_002e76c0 between
 0x002e77ec copyU64 between
 0x002e783c wstrlenU16 name
 0x002e784e FUN_002e784e between
@@ -5312,7 +5312,7 @@
 0x0043b494 FUN_0043b494 between
 0x0043b4d4 FUN_0043b4d4 between
 0x0043b518 FUN_0043b518 between
-0x0043b560 FUN_0043b560 between
+0x0043b55c FUN_0043b55c between
 0x0043b5b4 FUN_0043b5b4 between
 0x0043b658 nn_math_VEC3SafeNormalize name
 0x0043b800 nn_math_ARMv6_HermiteC_FAST name
@@ -5360,7 +5360,7 @@
 0x0043d588 FUN_0043d588 between
 0x0043d624 FUN_0043d624 callers
 0x0043d7d8 FUN_0043d7d8 between
-0x0043d84c FUN_0043d84c between
+0x0043d844 FUN_0043d844 between
 0x0043d8a0 FUN_0043d8a0 between
 0x0043dd40 FUN_0043dd40 between
 0x0043dd54 FUN_0043dd54 between
@@ -5439,11 +5439,11 @@
 0x00442bf0 FUN_00442bf0 between
 0x00442c24 FUN_00442c24 between
 0x00442c68 FUN_00442c68 between
-0x00443254 FUN_00443254 between
+0x00443250 FUN_00443250 between
 0x004432bc nw_gfx_AnimBlender_UpdateCache name
 0x00443314 nw_gfx_AnimBlender_UpdateFrame name
 0x0044336c FUN_0044336c between
-0x0044337c FUN_0044337c between
+0x00443378 FUN_00443378 between
 0x004433bc nw_gfx_ParticleEmitter_Accept name
 0x00443410 FUN_00443410 between
 0x00443810 nw_gfx_SceneHelper_CalculateDepth name
@@ -5473,7 +5473,7 @@
 0x00445da4 FUN_00445da4 between
 0x00445df8 FUN_00445df8 between
 0x004464dc ifaceHolderDestroy between
-0x00446554 FUN_00446554 between
+0x00446550 FUN_00446550 between
 0x004466b8 nw_gfx_SkeletalModel_Initialize name
 0x0044670c FUN_0044670c between
 0x00446ab8 nw_gfx_SkeletalModel_Accept name
@@ -5536,12 +5536,12 @@
 0x0044c764 FUN_0044c764 between
 0x0044c7f0 FUN_0044c7f0 callers
 0x0044ca04 nw_gfx_TransformAnimEvaluator_TryBind name
-0x0044ca48 FUN_0044ca48 between
+0x0044ca44 FUN_0044ca44 between
 0x0044cb48 nw_gfx_LookAtTargetViewUpdater_Update name
 0x0044cd0c FUN_0044cd0c between
 0x0044cd4c FUN_0044cd4c between
 0x0044d750 FUN_0044d750 between
-0x0044d854 FUN_0044d854 between
+0x0044d850 FUN_0044d850 between
 0x0044d9bc FUN_0044d9bc callers
 0x0044fde8 nw_gfx_Fog_CreateAnimGroup name
 0x0044ff84 nw_gfx_Fog_CreateOriginalValue name
@@ -5620,7 +5620,7 @@
 0x00455414 nw_gfx_Camera_CreateAnimGroup name
 0x0045585c nw_gfx_Camera_Accept name
 0x004558b0 FUN_004558b0 between
-0x00455c68 FUN_00455c68 between
+0x00455c64 FUN_00455c64 between
 0x00455cd0 nw_gfx_Material_CreateBuffers name
 0x00455e7c FUN_00455e7c callers
 0x004563d0 nw_gfx_Material_DestroyResMaterial name
@@ -5730,7 +5730,7 @@
 0x0045fee8 FUN_0045fee8 between
 0x0045ff50 FUN_0045ff50 between
 0x0045ffb4 FUN_0045ffb4 between
-0x00460028 FUN_00460028 between
+0x00460024 FUN_00460024 between
 0x00460064 FUN_00460064 between
 0x00460068 FUN_00460068 between
 0x004600f4 FUN_004600f4 between
@@ -5821,7 +5821,7 @@
 0x00462dc4 FUN_00462dc4 between
 0x00462e54 FUN_00462e54 between
 0x004630d0 FUN_004630d0 between
-0x004631f4 FUN_004631f4 between
+0x004631f0 FUN_004631f0 between
 0x00463230 FUN_00463230 between
 0x00463298 constructTrackBase callers
 0x004632b0 playerInitReset between
@@ -5861,7 +5861,7 @@
 0x00465cc4 FUN_00465cc4 between
 0x0046605c FUN_0046605c between
 0x00466140 FUN_00466140 between
-0x00466334 FUN_00466334 between
+0x00466330 FUN_00466330 between
 0x00466370 _ZN2nw3snd8internal6driver25MmlSequenceTrackAllocator10AllocTrackEPv name
 0x004663a8 FUN_004663a8 between
 0x004663e4 FUN_004663e4 callers
@@ -5944,7 +5944,7 @@
 0x004d9800 FUN_004d9800 between
 0x004d99a8 FUN_004d99a8 between
 0x004d99f8 FUN_004d99f8 between
-0x004d9ab4 FUN_004d9ab4 between
+0x004d9ab0 FUN_004d9ab0 between
 0x004d9af8 FUN_004d9af8 between
 0x004d9b9c FUN_004d9b9c callers
 0x004d9bc8 FUN_004d9bc8 between

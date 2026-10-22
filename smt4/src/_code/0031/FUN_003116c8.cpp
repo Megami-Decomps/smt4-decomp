@@ -17,7 +17,7 @@ int libc_strcpy(...);
 int __aeabi_memset4(...);
 int FUN_002d91b8(int);
 int dataTable05Sub9GetCount(void);
-int FUN_003c8b10(...);
+int devilIsUnlocked(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -43,7 +43,7 @@ extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 extern int gameDataBlocksGetFlagBit2(unsigned short);
 /* Supplied declaration required: FUN_002d91b8. */
 /* Supplied declaration required: dataTable05Sub9GetCount. */
-/* Supplied declaration required: FUN_003c8b10. */
+/* Supplied declaration required: devilIsUnlocked. */
 
 
 unsigned int FUN_003116c8(void)
@@ -230,7 +230,7 @@ unsigned int FUN_003116c8(void)
       puVar5 = (unsigned short *)FUN_00248620(temp_v7 & 0xffff);
       if (puVar5 != (unsigned short *)0x0) {
         temp_v5 = *piVar3;
-        FUN_003c8b10(temp_v5,*puVar5);
+        devilIsUnlocked(temp_v5,*puVar5);
         if (temp_v5 != 0) {
           temp_v5 = FUN_002a0d0c();
           pbVar6 = (unsigned char *)(temp_v5 + ((int)(temp_v7 + ((unsigned int)((int)temp_v7 >> 0x1f) >> 0x1d)) >> 3) +

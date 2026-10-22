@@ -58,21 +58,6 @@ typedef struct CallbackState {
     /* 0x14 */ u32 value;
 } CallbackState;
 
-typedef struct TouchRegionValue {
-    /* 0x00 */ u16 unk00;
-    /* 0x02 */ s16 value;
-    /* 0x04 */ u8 unk04[4];
-} TouchRegionValue;
-
-typedef struct TouchRegionValues {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ TouchRegionValue regions[200];
-} TouchRegionValues;
-
-typedef struct TouchRegionValuesOwner {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ TouchRegionValues *values;
-} TouchRegionValuesOwner;
 
 /* A callback-owning polymorphic object exposed through jobGetWork(). */
 class JobPendingOwner {

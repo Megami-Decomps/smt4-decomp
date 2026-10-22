@@ -1,9 +1,9 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 
 extern "C" {
-/* Reads or updates the requested state. */
-extern void *g_aocSystem;
+/* Uses the indexed add-on value, falling back to the built-in table. */
+extern AocSystem *g_aocSystem;
 extern u32 DAT_00446548[];
 s32 dataTableFindKeyedPayload(void *system, u32 index);
 u32 aocIndexValueOrDefault(u32 index)

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022dde8(...);
+int devilListMarkOrInsertQualifiedEntry(...);
 int FUN_0022e2fc(void);
 int rectangleInitializeSelection(...);
 int _ZN9Obj422594C1Ev(void);
@@ -40,7 +40,7 @@ extern unsigned char DAT_00422394; /* 0x422394 */
 extern unsigned char DAT_00422434; /* 0x422434 */
 extern int *DAT_0043d990; /* 0x43d990 */
 
-/* Supplied declaration required: FUN_0022dde8. */
+/* Supplied declaration required: devilListMarkOrInsertQualifiedEntry. */
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: _ZN9Obj422594C1Ev. */
@@ -142,13 +142,13 @@ void FUN_003a8fe0(int *param_1)
   }
   FUN_003a8aa0(param_1);
   partyIdsReset((int)param_1 + 0x96);
-  FUN_0022dde8((int)param_1 + 0x96,0);
+  devilListMarkOrInsertQualifiedEntry((int)param_1 + 0x96,0);
   temp_v0 = rangeLimitMin(param_1 + 8);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {
       if ((short)param_1[temp_v1 * 8 + 0x16b] != 0) {
-        FUN_0022dde8((int)param_1 + 0x96,(short)param_1[temp_v1 * 8 + 0x16b]);
+        devilListMarkOrInsertQualifiedEntry((int)param_1 + 0x96,(short)param_1[temp_v1 * 8 + 0x16b]);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);

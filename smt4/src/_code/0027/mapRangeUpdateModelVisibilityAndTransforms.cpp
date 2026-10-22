@@ -1,6 +1,6 @@
 /* NON_MATCHING: R7/R8 zero/global allocation differs; motion comparison keeps the model pointer live rather than retail's R0 result, hint NOP and reload. */
 #include "shard/W4_Match1b_Node.h"
-#include "shard/W5_W5Match7_SceneState.h"
+#include "map/mapDepart.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
 namespace {
@@ -73,7 +73,7 @@ void mapRangeUpdateModelVisibilityAndTransforms()
         }
         RangeModelBinding* binding = entry->hasOwnBinding
             ? entry->binding : work->slots[entry->slot].binding;
-        if (g_gameState.controllerFlags.unk022) {
+        if (g_gameState.controllerFlags.mapRangeModelsHidden) {
             FUN_0029bb14(binding->model, 0.0f);
             nodeSetPropertyScale(binding->model, 0.0f);
             if (!(binding->flags & 2)) {

@@ -32,7 +32,7 @@ extern "C" {
 extern SaveLoadState g_saveLoadProcess;
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u8* gameDataBlocksGetSaveData(void);
-void FUN_002c76d8(u32 bits);
+void gameDataAddHomeButtonHold(u32 bits);
 void gameDataBlocksAddFlags(u32 bits);
 void FUN_00333574(u32 bits);
 u32 asdProcessCreateSimple(const s8* name, s32 group, u16 startDelay, u16 endDelay,
@@ -51,7 +51,7 @@ extern "C" u32 saveLoadStartSave(s32 slot, u8 option)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 0x14c);
     SaveLoadWork* work = static_cast<SaveLoadWork*>(
         asdMemoryAllocTracked(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(SaveLoadWork), 1));
-    FUN_002c76d8(1);
+    gameDataAddHomeButtonHold(1);
     gameDataBlocksAddFlags(1);
     FUN_00333574(1);
     work->buffer = NULL;

@@ -1,12 +1,12 @@
+#include "shard/NaviMain.h"
 #include "shard/Shard0049.h"
 
 extern "C" {
-
-extern Sub68Owner *g_naviMain;
+extern NaviMainA *g_naviMain;
 
 u8 *sub68OwnerGetBlock60(void)
 {
-    return g_naviMain->block60;
+    return (u8 *)&g_naviMain->value;
 }
 
 } /* extern "C" */

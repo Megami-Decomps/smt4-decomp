@@ -10,7 +10,7 @@ void FUN_003ae03c(void)
 {
     BtlUi *ui = g_btlUi.ui;
 
-    ui->unk7E4B = 1;
+    ui->panelState.spriteActive = 1;
     uiSpriteSetImageKeyframe(&ui->objD, 0xD, 0);
 }
 

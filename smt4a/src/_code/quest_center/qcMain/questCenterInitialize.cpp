@@ -1,14 +1,10 @@
 /* NON_MATCHING: private opening-tail view adds a zero-offset base copy; global/zero and draw-work registers and scheduling differ. 5TE candidate. */
-#include "shard/W5_W5Match5_QuestCenter.h"
+#include "quest_center/qcMain.h"
+extern "C" QcGlobalsA g_qcMain;
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-struct QuestCenterOpenState {
-    /* 0x00 */ QuestCenterState prefix;
-    /* 0x08 */ s32 entryId;
-    /* 0x0c */ s32 option0;
-    /* 0x10 */ s32 option1;
-};
+
 
 extern "C" {
 void *jyoucyuGetTableEntry(s32 index);
@@ -17,7 +13,7 @@ void statsSetAdditionalFlag(s32 entryId, s32 enabled);
 s32 FUN_00236110(u32 handle);
 void effectQcFinish(u32 handle);
 s32 qcMainEndPass(u32 handle);
-s32 FUN_0027db84(u32 handle);
+s32 qcMainRunEntryIfLoaded(u32 handle);
 s32 FUN_002bd3a4(u32 handle);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                            AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
@@ -28,12 +24,12 @@ void questCenterInitialize(const s32 *arguments, u32 argumentBytes)
 {
     jyoucyuGetTableEntry(0);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\quest_center\\qcMain.cpp", 0xa0);
-    QuestWork *work = static_cast<QuestWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(QuestWork), 1));
+    QcWork *work = static_cast<QcWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(QcWork), 1));
     g_qcMain.work = work;
-    work->closing = 0;
+    work->done = 0;
     work->entry = NULL;
-    work->unk19[0] = 0;
-    QuestCenterOpenState &opening = *reinterpret_cast<QuestCenterOpenState *>(&g_qcMain);
+    work->mode = 0;
+    QcGlobalsA &opening = g_qcMain;
     if (arguments == NULL) {
         opening.option0 = 0;
         opening.option1 = 0;
@@ -51,15 +47,15 @@ void questCenterInitialize(const s32 *arguments, u32 argumentBytes)
         }
         statsSetAdditionalFlag(opening.entryId, 1);
     }
-    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"),
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"),
         4, 0, 0, FUN_00236110, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));
     work->draws.upper = taskCreateDraw(reinterpret_cast<const s8 *>("QuestCenterDrawUp L"),
-        0x71, 1, 0, qcMainEndPass, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->job));
+        0x71, 1, 0, qcMainEndPass, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->task));
     taskCreateDraw(reinterpret_cast<const s8 *>("QuestCenterDrawUp L"),
-        0x81, 1, 0, FUN_0027db84, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->job));
+        0x81, 1, 0, qcMainRunEntryIfLoaded, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->task));
     taskCreateDraw(reinterpret_cast<const s8 *>("QuestCenterDrawUp L"),
-        0xdd, 1, 0, FUN_0027db84, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->job));
+        0xdd, 1, 0, qcMainRunEntryIfLoaded, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->task));
     work->draws.lower = taskCreateDraw(reinterpret_cast<const s8 *>("QuestCenterDrawDown"),
-        0xeb, 1, 0, FUN_002bd3a4, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->job));
+        0xeb, 1, 0, FUN_002bd3a4, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->task));
 }
 }

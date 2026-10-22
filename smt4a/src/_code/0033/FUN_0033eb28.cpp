@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_002342b8(void);
-int FUN_00313648(unsigned int);
+int mapSetSceneState(unsigned int);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_0022368c(void);
+int mapIfShowActionMarker(void);
 int FUN_00233e10(int, unsigned int);
 int mapIfReleaseResource(void);
 int mapIfReleaseSlot4(void);
@@ -51,7 +51,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_0022368c. */
+/* Supplied declaration required: mapIfShowActionMarker. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
 extern int mapIfHasSelection(void);
@@ -60,7 +60,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00325ba4. */
 /* Supplied declaration required: FUN_00327ee8. */
@@ -239,7 +239,7 @@ void FUN_0033eb28(void)
         *(unsigned int *)(g_lmapView + 0xb0) = 1;
         sysPlaySe(0xdc);
         FUN_00233e10(1,DAT_005f16ac);
-        FUN_0022368c();
+        mapIfShowActionMarker();
         temp_v2 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v2 + 8) = 0;
@@ -275,7 +275,7 @@ void FUN_0033eb28(void)
         }
         temp_v0 = 1;
       }
-      FUN_00313648(temp_v0);
+      mapSetSceneState(temp_v0);
     }
   }
   else {

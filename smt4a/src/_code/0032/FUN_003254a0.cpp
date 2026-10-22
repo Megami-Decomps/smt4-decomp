@@ -6,7 +6,7 @@ extern "C" {
 
 int dialogClose(int);
 int FUN_002392b8(...);
-int FUN_00244bb4(int, int);
+int nameTableFind(int, int);
 int infoWindowShow(int, int, int);
 int infoWinSetTimer(unsigned int);
 int mapIfControllerApply(...);
@@ -46,7 +46,7 @@ extern int infoWinHasValue(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002392b8. */
-/* Supplied declaration required: FUN_00244bb4. */
+/* Supplied declaration required: nameTableFind. */
 /* Supplied declaration required: infoWindowShow. */
 extern int dataTableEntryNameById(void);
 extern int popupIsActive(void);
@@ -109,11 +109,11 @@ void FUN_003254a0(void)
               temp_v4 = dataTableEntryNameById();
             }
             else {
-              FUN_00244bb4(DAT_005f1860,DAT_005f1864);
+              nameTableFind(DAT_005f1860,DAT_005f1864);
             }
           }
           else {
-            FUN_00244bb4(DAT_005f1860,DAT_005f1864);
+            nameTableFind(DAT_005f1860,DAT_005f1864);
           }
           if (!(DAT_005f1638 == 0x21 || DAT_005f1638 == 0x1f)) {
             temp_v9 = DAT_005f1638 == 5 || DAT_005f1638 == 0x201;

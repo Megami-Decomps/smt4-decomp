@@ -1,61 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019aee4` (_code @ 0x19aee4, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Sprite argument loads use different VFP registers; the retail adjacent-tail NOP also differs. */
+#include "gfx/SpriteTextureRect.h"
 extern "C" {
+void FUN_0019af70(u32, u32, u32, u32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 
-int FUN_0019e5e0(unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_0019ea00(void);
-int FUN_001b4120(unsigned long long *, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-typedef struct fn_0019aee4_arg1 fn_0019aee4_arg1;
-struct fn_0019aee4_arg1 {
-    unsigned char pad_0x0[0x4];
-    char field_0x4; /* +0x4 */
-    byte field_0x5; /* +0x5 */
-    unsigned char pad_0x6[0x1];
-    byte field_0x7; /* +0x7 */
-    ushort field_0x8; /* +0x8 */
-    ushort field_0xa; /* +0xa */
-    ushort field_0xc; /* +0xc */
-    ushort field_0xe; /* +0xe */
-};
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0019e5e0. */
-/* Supplied declaration required: FUN_0019ea00. */
-/* Supplied declaration required: FUN_001b4120. */
-
-
-void FUN_0019aee4(unsigned int param_1,fn_0019aee4_arg1 *param_2,unsigned int param_3,unsigned int param_4
-                 ,unsigned int param_5,unsigned int param_6)
-
+// Converts atlas coordinates to normalized UVs and applies the sprite's horizontal bearing.
+void FUN_0019aee4(u32, const SpriteTextureRect* rectangle, u32 first, u32 second, u32 third, u32 fourth,
+          f32 x, f32 y, f32 width, f32 height, f32 depth)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  unsigned int in_fpscr;
-  unsigned long long uStack_20;
-  
-  VectorUnsignedToFloat((unsigned int)param_2->field_0x8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_2->field_0xc,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_2->field_0xe,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_2->field_0xa,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_2->field_0x5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)param_2->field_0x4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)param_2->field_0x7,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0019ea00();
-  FUN_0019e5e0(param_3,param_4,param_5,param_6);
-  uStack_20 = 0x1024500000001;
-  FUN_001b4120(&uStack_20,0x18);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    f32 textureWidth = (f32)rectangle->textureWidth;
+    f32 textureHeight = (f32)rectangle->textureHeight;
+    FUN_0019af70(first, second, third, fourth,
+         x + (f32)rectangle->offsetX, y, width, height,
+         (f32)rectangle->width / textureWidth, (f32)rectangle->height / textureHeight,
+         (f32)rectangle->textureX / textureWidth, (f32)rectangle->textureY / textureHeight, depth);
 }
-
-} /* extern "C" */
+}

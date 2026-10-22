@@ -28,7 +28,7 @@ static inline bool commandRequiresTargetSelection(const CommandSkillRecord *skil
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-CommandItemRecord *FUN_00192550(s32 id);
+CommandItemRecord *dataTable8FindRecord(s32 id);
 CommandSkillRecord *dataTable04FindById(u32 id);
 void FUN_002ccde8(Menu32 *menu, s16 *kind, s16 *id);
 void FUN_002fa7a8(Menu32 *menu);
@@ -56,14 +56,14 @@ void btlUiSelectCommandTargetState()
         break;
     }
     case 8: {
-        const CommandItemRecord *item = FUN_00192550(id);
+        const CommandItemRecord *item = dataTable8FindRecord(id);
         if (item->skill != 0) {
             const CommandSkillRecord *skill = dataTable04FindById(item->skill);
             if (commandRequiresTargetSelection(skill)) {
                 target->requiresTargetSelection = 1;
             }
         } else if (!(item->flags & 4)) {
-            item = FUN_00192550(id);
+            item = dataTable8FindRecord(id);
             if ((item->category & 0x7f) != 1) {
                 target->requiresTargetSelection = 1;
             }

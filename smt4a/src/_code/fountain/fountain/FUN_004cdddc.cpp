@@ -12,7 +12,7 @@ int FUN_001523b8(int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_00186e2c(unsigned char [12], unsigned int);
 int FUN_001cd3ec(void);
-int FUN_00249ce4(int);
+int mapLoadSkyTable(int);
 int asdLoadFileAsyncSimple(...);
 int mapEnvironmentApplyPreset(int, int);
 int campCommonBgAcquire(void);
@@ -44,7 +44,7 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00186e2c. */
 /* Supplied declaration required: FUN_001cd3ec. */
-/* Supplied declaration required: FUN_00249ce4. */
+/* Supplied declaration required: mapLoadSkyTable. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: mapEnvironmentApplyPreset. */
 /* Supplied declaration required: campCommonBgAcquire. */
@@ -106,7 +106,7 @@ void FUN_004cdddc(int param_1)
   if (temp_v0 != 0) {
     FUN_0040ae70(*(unsigned int *)(param_1 + 0x558),1);
   }
-  FUN_00249ce4(200);
+  mapLoadSkyTable(200);
   mapEnvironmentApplyPreset(4,0);
   temp_v1 = FUN_00387350(&LAB_004ce05c);
   *(unsigned int *)(param_1 + 0x34) = 0;

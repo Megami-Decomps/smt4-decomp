@@ -1,49 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038b810` (_code @ 0x38b810, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same operations; retail loads y, z and x separately (x last) and stores z, w before x/y, where this loads x..z with one vldmia and stores all four at once. */
+#include "common.h"
+
+namespace {
+struct Vec4 {
+    f32 x, y, z, w;
+};
+
+// Shared effect state: a working point and the matrix that transforms it.
+struct EffectTransformState {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ Vec4 point;
+    /* 0x110 */ u8 unk110[0x30];
+    /* 0x140 */ Vec4 matrix[4];
+};
+}
 
 extern "C" {
 
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-extern float DAT_0064731c; /* 0x64731c */
-extern float DAT_00647320; /* 0x647320 */
-extern float DAT_00647324; /* 0x647324 */
-extern float DAT_00647328; /* 0x647328 */
-extern float DAT_0064732c; /* 0x64732c */
-extern float DAT_00647330; /* 0x647330 */
-extern float DAT_00647334; /* 0x647334 */
-extern float DAT_00647338; /* 0x647338 */
-extern float DAT_0064733c; /* 0x64733c */
-extern float DAT_00647340; /* 0x647340 */
-extern float DAT_00647344; /* 0x647344 */
-extern float DAT_00647348; /* 0x647348 */
-extern float DAT_0064734c; /* 0x64734c */
-extern float DAT_00647350; /* 0x647350 */
-extern float DAT_00647354; /* 0x647354 */
-extern float DAT_00647358; /* 0x647358 */
+extern EffectTransformState DAT_006471dc;
 
-
-void FUN_0038b810(void)
-
+// point = (point.x, point.y, point.z, 1) * matrix
+static inline void transformPoint(Vec4 *point, const Vec4 *matrix)
 {
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v0 = DAT_006472e4 * DAT_00647340;
-  temp_v1 = DAT_006472e4 * DAT_00647348;
-  temp_v2 = DAT_006472dc * DAT_00647320;
-  temp_v3 = DAT_006472e4 * DAT_0064733c;
-  DAT_006472e4 = DAT_006472e0 * DAT_00647334 + DAT_006472e4 * DAT_00647344 +
-                 DAT_00647354 + DAT_006472dc * DAT_00647324;
-  DAT_006472e8 = DAT_006472e0 * DAT_00647338 + temp_v1 + DAT_00647358 + DAT_006472dc * DAT_00647328;
-  DAT_006472dc = DAT_006472e0 * DAT_0064732c + temp_v3 + DAT_0064734c + DAT_006472dc * DAT_0064731c;
-  DAT_006472e0 = DAT_006472e0 * DAT_00647330 + temp_v0 + DAT_00647350 + temp_v2;
-  return;
+    f32 x = point->x;
+    f32 y = point->y;
+    f32 z = point->z;
+    Vec4 result;
+
+    result.x = x * matrix[0].x + y * matrix[1].x + z * matrix[2].x + matrix[3].x;
+    result.y = x * matrix[0].y + y * matrix[1].y + z * matrix[2].y + matrix[3].y;
+    result.z = x * matrix[0].z + y * matrix[1].z + z * matrix[2].z + matrix[3].z;
+    result.w = x * matrix[0].w + y * matrix[1].w + z * matrix[2].w + matrix[3].w;
+    *point = result;
 }
 
+/* Transform the working point by the shared matrix. */
+void FUN_0038b810(void)
+{
+    transformPoint(&DAT_006471dc.point, DAT_006471dc.matrix);
+}
 } /* extern "C" */

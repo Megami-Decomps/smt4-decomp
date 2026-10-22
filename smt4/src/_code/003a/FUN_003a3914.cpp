@@ -5,7 +5,7 @@ extern "C" {
 int buttonHelpTexturesUnref(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
-int FUN_00292c0c(void);
+int gameReleaseDataReference(void);
 int gameGlobalsSetSelected(int a);
 int messageStatesSetFirst(int a);
 int scrScriptProcessDestroy(void);
@@ -95,7 +95,7 @@ void FUN_003a3914(Scene *scene)
     }
     if (scene->unk15D24 != 0) {
         gameGlobalsSetSelected(0);
-        FUN_00292c0c();
+        gameReleaseDataReference();
     }
     if (scene->mode != 1) {
         uiFadeRelease();

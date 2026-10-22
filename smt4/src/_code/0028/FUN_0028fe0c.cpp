@@ -7,7 +7,7 @@ extern "C" {
 int uiBindRecordRewardText(...);
 int FUN_0028ffb8(int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-int FUN_00296b3c(unsigned int, int, unsigned int, int);
+int asdTextDrawFormatted(unsigned int, int, unsigned int, int);
 int dataTable1bOr1cGetRecord(void);
 int FUN_002bcfc0(int, int);
 int textFormatBuffer(int *, unsigned char *, int);
@@ -29,7 +29,7 @@ extern int FUN_00241c40(int);
 /* Supplied declaration required: uiBindRecordRewardText. */
 /* Supplied declaration required: FUN_0028ffb8. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_00296b3c. */
+/* Supplied declaration required: asdTextDrawFormatted. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -82,7 +82,7 @@ void FUN_0028fe0c(int param_1,unsigned int param_2)
       temp_v3 = &LAB_0028ffb4;
       temp_v2 = 3;
       temp_v4 = temp_v1;
-      FUN_00296b3c(*(unsigned int *)(temp_v0 + 0x5d8),3,0xffffffff,0);
+      asdTextDrawFormatted(*(unsigned int *)(temp_v0 + 0x5d8),3,0xffffffff,0);
     }
     else {
       temp_v3 = *(unsigned char **)(temp_v0 + 0x5e4);

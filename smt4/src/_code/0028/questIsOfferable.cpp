@@ -1,5 +1,5 @@
 /* NON_MATCHING: O3 folds completion normalization to TST instead of AND/LSRS; ID/record saved registers and conditional move placement differ (107/106). */
-#include "shard/W5_W5Match7_SceneState.h"
+#include "map/mapDepart.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 
 struct QuestAvailabilityRecord {
@@ -51,7 +51,7 @@ bool questIsOfferable(u16 questId)
     }
     if (questId >= 0x15e) {
         const QuestAvailabilityRecord *current = reinterpret_cast<const QuestAvailabilityRecord *>(dataTable1bOr1cGetRecord(questId));
-        if (current != NULL && current->metadata.kind == 9 && g_gameState.mode == 0x18) {
+        if (current != NULL && current->metadata.kind == 9 && g_gameState.unk000 == 0x18) {
             return false;
         }
     } else {

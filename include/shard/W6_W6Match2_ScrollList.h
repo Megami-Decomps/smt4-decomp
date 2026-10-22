@@ -13,9 +13,10 @@ struct ScrollList {
 };
 
 struct ScrollSelectionOwner {
-    u8 unk00[0x28]; // 0x00
+    ScrollList primary; // 0x00
     ScrollList list; // 0x28
-    u8 unk50[0x11]; // 0x50
+    s32 entryCount; // 0x50
+    u8 unk54[0x0D]; // 0x54
     u8 changed;     // 0x61
     u8 locked;      // 0x62
 };

@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler places the shared return after the direct-delta path instead of before it; in-memory O2 also differs. */
-#include "shard/W4_W4Match5b_MessageMain.h"
+#include "ui/MessageMain.h"
+extern "C" MessageGlobalsA g_messageMain;
 
 struct MessageCounterTransition {
     u8 unk000[0x170];
@@ -17,7 +18,7 @@ s32 FUN_00480c28(void);
 // Animate the banner counter toward the current total or by a supplied delta.
 u32 messageCounterBeginTransition(u32 value, s32 useTotal)
 {
-    MessageCounterTransition *transition = (MessageCounterTransition *)g_messageMain.banner;
+    MessageCounterTransition *transition = (MessageCounterTransition *)g_messageMain.panel;
     if (useTotal != 0) {
         s32 total = FUN_00480c28();
         transition->duration = value;

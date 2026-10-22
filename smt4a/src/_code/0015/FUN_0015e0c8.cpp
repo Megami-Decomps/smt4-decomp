@@ -1,67 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015e0c8` (_code @ 0x15e0c8, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [r4, #20] differs from recovered ldr r2, [r4, #20]. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_0015e0c8_arg0 fn_0015e0c8_arg0;
-struct fn_0015e0c8_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    int field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x4];
-    int field_0x14; /* +0x14 */
-    int field_0x18; /* +0x18 */
-    byte field_0x1c; /* +0x1c */
-    byte field_0x1d; /* +0x1d */
-    byte field_0x1e; /* +0x1e */
-    unsigned char pad_0x1f[0x1];
-    int field_0x20; /* +0x20 */
+// Private views of the layouts accessed by this function.
+struct CostStateView {
+    u8 unk00[0x04]; // +0x00
+    s32 unk04;      // +0x04
+    s32 unk08;      // +0x08
+    s32 unk0C;      // +0x0C
+    u8 unk10[0x04]; // +0x10
+    s32 unk14;      // +0x14
+    s32 unk18;      // +0x18
+    u8 unk1C;       // +0x1C
+    u8 unk1D;       // +0x1D
+    u8 unk1E;       // +0x1E
+    u8 unk1F;       // +0x1F
+    s32 unk20;      // +0x20
 };
 
-extern unsigned char DAT_0059dba4; /* 0x59dba4 */
+struct CostGlobalView {
+    u8 unk00[0x04]; // +0x00
+    u32 unk04;     // +0x04
+};
 
-extern int FUN_00175a78(unsigned int, unsigned int);
-extern int FUN_00175c30(unsigned int, unsigned int);
-extern unsigned int FUN_00191548(void);
-extern unsigned int nw_snd_internal_driver_VoiceManager_GetInstance(void);
+extern "C" {
+extern CostGlobalView DAT_0059dba4;
+extern u32 nw_snd_internal_driver_VoiceManager_GetInstance(void);
+extern u32 FUN_00191548(void);
+extern s32 FUN_00175c30(u32 manager, u32 selector);
+extern s32 FUN_00175a78(u32 manager, u32 selector);
 
-
-int FUN_0015e0c8(fn_0015e0c8_arg0 *param_1)
-
+// Sum the base contributions, external contributions, and enabled adjustments.
+s32 FUN_0015e0c8(CostStateView *state)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v0 = param_1->field_0xc;
-  temp_v4 = param_1->field_0x18;
-  temp_v5 = param_1->field_0x14;
-  temp_v1 = nw_snd_internal_driver_VoiceManager_GetInstance();
-  temp_v2 = FUN_00175c30(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_0059dba4 + 0x4)));
-  temp_v1 = FUN_00191548();
-  temp_v3 = FUN_00175a78(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_0059dba4 + 0x4)));
-  temp_v0 = temp_v3 + temp_v2 + temp_v0 + temp_v4 + temp_v5;
-  if (param_1->field_0x1c == 1) {
-    temp_v0 = temp_v0 + param_1->field_0x8;
-  }
-  if ((param_1->field_0x4 == 1) && (param_1->field_0x1e != 0)) {
-    temp_v0 = temp_v0 + param_1->field_0x8;
-  }
-  temp_v6 = param_1->field_0x1d != 0;
-  temp_v2 = 0;
-  if (temp_v6) {
-    temp_v2 = param_1->field_0x20;
-  }
-  if (temp_v6 && 0 < temp_v2) {
-    temp_v0 = temp_v0 + temp_v2 * 8;
-  }
-  return temp_v0;
-}
+    s32 base = state->unk0C + state->unk18 + state->unk14;
+    s32 voiceContribution = FUN_00175c30(
+        nw_snd_internal_driver_VoiceManager_GetInstance(),
+        DAT_0059dba4.unk04);
+    s32 otherContribution = FUN_00175a78(
+        FUN_00191548(), DAT_0059dba4.unk04);
+    s32 total = otherContribution + voiceContribution + base;
 
-} /* extern "C" */
+    if (state->unk1C == 1) {
+        total += state->unk08;
+    }
+    if (state->unk04 == 1 && state->unk1E != 0) {
+        total += state->unk08;
+    }
+    if (state->unk1D != 0 && state->unk20 > 0) {
+        total += state->unk20 * 8;
+    }
+    return total;
+}
+}

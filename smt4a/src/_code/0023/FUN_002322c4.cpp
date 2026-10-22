@@ -1,52 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002322c4` (_code @ 0x2322c4, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: callback-table address registers and the mode-tail block order differ. */
+#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+extern EffMiscKind g_effMiscKinds[];
+void FUN_00145e24(RenderCtxA *context, u32 state);
+void FUN_00157558(RenderCtxA *context);
+void uiSpriteRefreshMode(RenderCtxA *context);
 
-int FUN_00145e24(int, unsigned int);
-int FUN_00157558(void);
-int uiSpriteRefreshMode(int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00145e24. */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: uiSpriteRefreshMode. */
-
-
-void FUN_002322c4(int param_1)
-
+void FUN_002322c4(EffMiscObject *object)
 {
-/* irregular: 5 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(char *)(g_renderCtx + 0x5f8);
-  if (temp_v0 == '\x01') {
-                    /* WARNING: Could not recover jumptable at 0x0023234c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*(int *)(param_1 + 0x18) * 0x18 + 0x5c1084))(param_1);
-    return;
-  }
-  temp_v1 = *(unsigned int *)(g_renderCtx + 0x6fc);
-  FUN_00157558();
-  (**(romwright_code **)(*(int *)(param_1 + 0x18) * 0x18 + 0x5c1084))(param_1);
-  if (temp_v0 != '\x03' && temp_v0 != '\x04') {
-    if (temp_v0 == '\x05') {
-      FUN_00145e24(g_renderCtx,temp_v1);
-      return;
+    u8 mode = g_renderCtx->unk5F8;
+    if (mode == 1) {
+        g_effMiscKinds[object->kind].lateUpdate(object);
+        return;
     }
-    return;
-  }
-  uiSpriteRefreshMode(g_renderCtx);
-  return;
+    u32 state = g_renderCtx->unk6FC;
+    FUN_00157558(g_renderCtx);
+    g_effMiscKinds[object->kind].lateUpdate(object);
+    if (mode == 3 || mode == 4) {
+        uiSpriteRefreshMode(g_renderCtx);
+    } else if (mode == 5) {
+        FUN_00145e24(g_renderCtx, state);
+    }
 }
-
-} /* extern "C" */
+}

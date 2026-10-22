@@ -6,7 +6,7 @@ extern LmapSceneA *g_lmapScene;
 
 u32 lmapSceneGetUnk0(void)
 {
-    return g_lmapScene->unk000;
+    return g_lmapScene->mainState;
 }
 
 } /* extern "C" */

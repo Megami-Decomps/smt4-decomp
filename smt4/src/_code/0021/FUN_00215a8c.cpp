@@ -1,51 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215a8c` (_code @ 0x215a8c, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps entry in r6 and reuses the status+0x400 base register for the constant 1, so it saves one register fewer (8-byte frame vs our 12). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0029f848(int, int, int, int, int, int);
-int buttonHelpSetPreset(unsigned int);
+/* The entry the status-down screen was opened on. */
+typedef struct StatusDownEntry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u16 unk0C;
+} StatusDownEntry;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+/* The status-down screen's work: only the fields this unit touches are named. */
+typedef struct StatusDown {
+    /* 0x000 */ u8 unk000[0x3FC];
+    /* 0x3FC */ u8 mode;
+    /* 0x3FD */ u8 unk3FD[0x13];
+    /* 0x410 */ u8 refresh;
+    /* 0x411 */ u8 unk411[0x6D];
+    /* 0x47E */ s16 selection;      /* negative when nothing is selected */
+    /* 0x480 */ u8 unk480[0xD4];
+    /* 0x554 */ u32 entryUnk00;
+    /* 0x558 */ u32 entryUnk04;
+    /* 0x55C */ u32 entryUnk08;
+    /* 0x560 */ u16 entryUnk0C;
+    /* 0x562 */ u8 unk562[2];
+    /* 0x564 */ u8 window[1];
+} StatusDown;
 
-extern int g_statusDown; /* 0x44e190 */
+extern StatusDown *g_statusDown;
 
-extern int FUN_0029ac94(void);
-/* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: buttonHelpSetPreset. */
+s32 FUN_0029ac94(void);
+void buttonHelpSetPreset(u32 preset);
+void FUN_0029f848(void *window, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
-
-void FUN_00215a8c(unsigned int *param_1)
-
+/* Opens the status-down screen on `entry`, restoring the button help when a selection was showing. */
+void FUN_00215a8c(const StatusDownEntry *entry)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_statusDown;
-  if ((-1 < *(short *)(g_statusDown + 0x47e)) && (*(char *)(g_statusDown + 0x3fc) == '\x01')) {
-    temp_v1 = FUN_0029ac94();
-    if ((temp_v1 == 0xd) || (temp_v1 == 6)) {
-      temp_v2 = 0x2f;
+    StatusDown *status = g_statusDown;
+
+    if (status->selection >= 0 && status->mode == 1) {
+        s32 scene = FUN_0029ac94();
+        u32 preset;
+
+        if (scene == 13 || scene == 6) {
+            preset = 0x2F;
+        } else {
+            preset = 0x1F;
+        }
+        buttonHelpSetPreset(preset);
     }
-    else {
-      temp_v2 = 0x1f;
-    }
-    buttonHelpSetPreset(temp_v2);
-  }
-  *(unsigned short *)(temp_v0 + 0x47e) = 0xffff;
-  *(unsigned int *)(temp_v0 + 0x554) = *param_1;
-  *(unsigned int *)(temp_v0 + 0x558) = param_1[1];
-  *(unsigned int *)(temp_v0 + 0x55c) = param_1[2];
-  *(unsigned short *)(temp_v0 + 0x560) = *(unsigned short *)(param_1 + 3);
-  FUN_0029f848(temp_v0 + 0x564,7,7,1,0,1);
-  *(unsigned char *)(temp_v0 + 0x410) = 1;
-  return;
+    status->selection = -1;
+    status->entryUnk00 = entry->unk00;
+    status->entryUnk04 = entry->unk04;
+    status->entryUnk08 = entry->unk08;
+    status->entryUnk0C = entry->unk0C;
+    FUN_0029f848(status->window, 7, 7, 1, 0, 1);
+    status->refresh = 1;
 }
 
 } /* extern "C" */

@@ -11,7 +11,7 @@ int scrScriptProcessDestroy(void);
 int dataTableResolveEntryVariants(void);
 int libc_strcpy(unsigned char *, unsigned int *);
 int rt_aeabi_memclr(unsigned int *, int);
-int FUN_003f876c(int);
+int dataTableReload(int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: dataTableResolveEntryVariants. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_003f876c. */
+/* Supplied declaration required: dataTableReload. */
 
 
 void FUN_00291728(unsigned int *param_1)
@@ -90,9 +90,9 @@ void FUN_00291728(unsigned int *param_1)
   if (param_1 == (unsigned int *)0x0) {
     temp_v0 = jyoucyuGetTableEntry(0);
     if (temp_v0 != 0) {
-      FUN_003f876c(0x19);
-      FUN_003f876c(0x1b);
-      FUN_003f876c(0x1c);
+      dataTableReload(0x19);
+      dataTableReload(0x1b);
+      dataTableReload(0x1c);
       dataTableResolveEntryVariants();
     }
     puVar2 = &LAB_00291920;

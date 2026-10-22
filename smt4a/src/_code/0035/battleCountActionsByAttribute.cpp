@@ -40,7 +40,7 @@ struct EquipmentAttributeView {
 
 extern "C" {
 BattleActionSkill *dataTable04FindById(u32 id);
-BattleActionItem *FUN_00192550(s32 id);
+BattleActionItem *dataTable8FindRecord(s32 id);
 
 // Count candidate actions of one attribute, or only the selected action when restricted.
 s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute)
@@ -56,7 +56,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
             }
         }
         if (actions->selected.kind == 8) {
-            const BattleActionItem *item = FUN_00192550(actions->selected.id);
+            const BattleActionItem *item = dataTable8FindRecord(actions->selected.id);
             if (item != NULL && item->skillId != 0) {
                 const BattleActionSkill *skill = dataTable04FindById(item->skillId);
                 if (skill != NULL && attribute == skill->attribute) {
@@ -73,7 +73,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
                 }
             }
             if (actions->candidates[index].kind == 8) {
-                const BattleActionItem *item = FUN_00192550(actions->candidates[index].id);
+                const BattleActionItem *item = dataTable8FindRecord(actions->candidates[index].id);
                 if (item != NULL && item->skillId != 0) {
                     const BattleActionSkill *skill = dataTable04FindById(item->skillId);
                     if (skill != NULL && attribute == skill->attribute) {

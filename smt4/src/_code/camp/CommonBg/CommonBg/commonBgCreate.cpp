@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296b3c(unsigned int, int, unsigned int, int, int, unsigned char *);
+int asdTextDrawFormatted(unsigned int, int, unsigned int, int, int, unsigned char *);
 int taskCreateDraw(...);
 int asdTMTexTableLoadSprites(int);
 int asdMemoryAlloc(int, int, int, int, int);
@@ -28,7 +28,7 @@ extern int FUN_002ed628(...); /* 0x2ed628 */
 extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 extern unsigned int *DAT_0043dc28; /* 0x43dc28 */
 
-/* Supplied declaration required: FUN_00296b3c. */
+/* Supplied declaration required: asdTextDrawFormatted. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
@@ -58,10 +58,10 @@ void commonBgCreate(void)
   DAT_0043dc28 = puVar1;
   temp_v0 = asdTextCreate(0);
   puVar1[3] = temp_v0;
-  FUN_00296b3c(temp_v0,3,0xffffffff,0,0,&LAB_002d7d1c);
+  asdTextDrawFormatted(temp_v0,3,0xffffffff,0,0,&LAB_002d7d1c);
   temp_v0 = asdTextCreate(0);
   puVar1[4] = temp_v0;
-  FUN_00296b3c(temp_v0,3,0xffffffff,0,0,&LAB_002d7d2c);
+  asdTextDrawFormatted(temp_v0,3,0xffffffff,0,0,&LAB_002d7d2c);
   asdTMTexTableLoadSprites(0x2d);
   FUN_002c58c8(0x2d,0);
   puVar3 = &LAB_002d7d64;

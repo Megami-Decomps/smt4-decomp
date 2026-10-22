@@ -33,7 +33,7 @@ s32 asdTMTexTableNodeIsLoaded(u32, s32);
 void *dataTableGet(u32, u32);
 void *dataTableGetEntries(void *);
 s32 dataTableGetCount(void *);
-s32 FUN_004717e0(AocSystemA *);
+s32 aocCountTableRecords(AocSystemA *);
 void FUN_00403b84(ContentListScreen *);
 void FUN_00203b40(ContentListScroller *, void *, s32, s32, s32, s32);
 u16 FUN_001643b4(u32, s32);
@@ -68,7 +68,7 @@ void contentListWaitAndInitialize(ContentListScreen *screen)
     void *table = dataTableGet(0x45, 0);
     dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);
-    screen->totalCount = count + FUN_004717e0(g_aocSystem);
+    screen->totalCount = count + aocCountTableRecords(g_aocSystem);
     FUN_00403b84(screen);
     FUN_00203b40(&screen->scroller, screen->rows, screen->visibleCount, 1, 1, 1);
     for (s32 i = 0; i < 10; ++i) {

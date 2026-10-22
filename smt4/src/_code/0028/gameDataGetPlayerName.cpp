@@ -4,7 +4,7 @@ extern "C" {
 
 u8 *gameDataGetPlayerName(void)
 {
-    return g_gameDataBlocks.unk04 + 0x1f8e8;
+    return (u8 *)g_gameDataBlocks.saveBlock + 0x1f8e8;
 }
 
 } /* extern "C" */

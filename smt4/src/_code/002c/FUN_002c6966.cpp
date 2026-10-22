@@ -1,58 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c6966` (_code @ 0x2c6966, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail movs r6, r0 differs from recovered mov r4, r1. */
+#include "common.h"
+
+// Private view of the five locale-table slots used here.
+struct LocaleTablesView {
+    u8* unk00; // 0x00
+    u8* unk04; // 0x04
+    u8* unk08; // 0x08
+    u8* unk0C; // 0x0C
+    u8* unk10; // 0x10
+};
 
 extern "C" {
+extern u8 DAT_0042a53c;
+u8* FUN_001382e4(u8* data, u32 selector);
+u8* FUN_0014d9f0(u8* data, u32 selector);
+LocaleTablesView* libcLocaleGetTables(void);
+int FUN_002c6864(u32 locale, u32 flags);
 
-int FUN_002c6864(unsigned int, unsigned int);
-int libcLocaleGetTables(...);
-
-extern unsigned char DAT_0042a53c; /* 0x42a53c */
-
-extern int FUN_001382e4(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_0014d9f0(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002c6864. */
-/* Supplied declaration required: libcLocaleGetTables. */
-
-
-void FUN_002c6966(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Updates the selected locale-table slots before applying the locale flags.
+void FUN_002c6966(u32 locale, u32 flags, u32 selector)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  
-  if ((int)(param_2 << 0x1e) < 0) {
-    temp_v0 = FUN_001382e4(&DAT_0042a53c,param_3,param_3,param_4,param_4);
-    if (temp_v0 == 0) {
-      return;
+    if (flags & 2) {
+        u8* table = FUN_001382e4(&DAT_0042a53c, selector);
+        if (!table)
+            return;
+        libcLocaleGetTables()->unk04 = table + 1;
     }
-    temp_v1 = libcLocaleGetTables();
-    *(int *)(temp_v1 + 4) = temp_v0 + 1;
-  }
-  if ((param_2 & 1) != 0) {
-    puVar3 = (unsigned int *)libcLocaleGetTables(&DAT_0042a53c,param_3);
-    *puVar3 = (unsigned int)&DAT_0042a53c;
-  }
-  if ((int)(param_2 << 0x1d) < 0) {
-    temp_v0 = libcLocaleGetTables(&DAT_0042a53c,param_3);
-    *(unsigned char **)(temp_v0 + 8) = &DAT_0042a53c;
-  }
-  if ((int)(param_2 << 0x1c) < 0) {
-    temp_v0 = FUN_0014d9f0(&DAT_0042a53c,param_3);
-    if (temp_v0 == 0) {
-      return;
-    }
-    temp_v1 = libcLocaleGetTables();
-    *(int *)(temp_v1 + 0xc) = temp_v0;
-  }
-  if ((int)(param_2 << 0x1b) < 0) {
-    temp_v0 = libcLocaleGetTables(&DAT_0042a53c,param_3);
-    *(unsigned char **)(temp_v0 + 0x10) = &DAT_0042a53c;
-  }
-  FUN_002c6864(param_1,param_2);
-  return;
-}
 
-} /* extern "C" */
+    if (flags & 1) {
+        u8* table = &DAT_0042a53c;
+        if (!table)
+            return;
+        libcLocaleGetTables()->unk00 = table;
+    }
+
+    if (flags & 4) {
+        u8* table = &DAT_0042a53c;
+        if (!table)
+            return;
+        libcLocaleGetTables()->unk08 = table;
+    }
+
+    if (flags & 8) {
+        u8* table = FUN_0014d9f0(&DAT_0042a53c, selector);
+        if (!table)
+            return;
+        libcLocaleGetTables()->unk0C = table;
+    }
+
+    if (flags & 16) {
+        u8* table = &DAT_0042a53c;
+        if (!table)
+            return;
+        libcLocaleGetTables()->unk10 = table;
+    }
+
+    FUN_002c6864(locale, flags);
+}
+}

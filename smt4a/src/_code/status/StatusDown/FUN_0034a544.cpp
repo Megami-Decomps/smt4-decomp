@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
 int positionStateSet(...);
@@ -47,7 +47,7 @@ extern unsigned int *g_statusDown; /* 0x588fe8 */
 
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: positionStateSet. */
@@ -104,7 +104,7 @@ void FUN_0034a544(void)
   uiSpriteSelectAnim(puVar1 + 0x96,3);
   FUN_0014e188(puVar1 + 0xb9,0x12,1000,puVar1 + 2,1);
   uiSpriteSetKeyframe(puVar1 + 0xb9,1,0);
-  FUN_0014e220(puVar1 + 0xdc,0x12,0xffffffff,0x1c,puVar1 + 2,0xc9);
+  uiSpriteInitializeState(puVar1 + 0xdc,0x12,0xffffffff,0x1c,puVar1 + 2,0xc9);
   uiSpriteSelectAnim(puVar1 + 0xdc,2);
   *(unsigned short *)((int)puVar1 + 0x3aa) = 2;
   FUN_0014e188(puVar1 + 0xff,0x12,0x556,puVar1 + 2,1);

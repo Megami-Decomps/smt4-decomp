@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 extern int scrGetArg(unsigned int);
 
@@ -35,7 +35,7 @@ unsigned int FUN_0037398c(void)
     if (*(unsigned short **)(temp_v2 + 0x4e5c) != puVar9) {
       do {
         temp_v3 = (unsigned int)*puVar9;
-        FUN_00192550();
+        dataTable8FindRecord();
         temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x32);
         dataTable04FindById();
         if (temp_v4 != 0) {

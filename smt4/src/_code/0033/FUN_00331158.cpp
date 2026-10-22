@@ -7,7 +7,7 @@ extern "C" {
 int guestWinRequestClose(void);
 int FUN_0028fc60(void);
 int campReleaseScreenTouchRegions(...);
-int FUN_00299218(int, unsigned int);
+int dataTable15GetUnlockedEntryId(int, unsigned int);
 int FUN_00299900(...);
 int FUN_00299bc4(...);
 int FUN_0029cc44(...);
@@ -34,7 +34,7 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: guestWinRequestClose. */
 /* Supplied declaration required: FUN_0028fc60. */
 /* Supplied declaration required: campReleaseScreenTouchRegions. */
-/* Supplied declaration required: FUN_00299218. */
+/* Supplied declaration required: dataTable15GetUnlockedEntryId. */
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
 /* Supplied declaration required: FUN_0029cc44. */
@@ -87,7 +87,7 @@ void FUN_00331158(int param_1)
                    (int)*(short *)(temp_v0 + 0xe04),(int)*(short *)(temp_v0 + 0xe06),temp_v7,0,1);
       if ((temp_v3 != 0) || (temp_v3 = temp_v6, FUN_0029efd8(temp_v6,1), temp_v3 != 0)) {
         temp_v2 = objectPartRunUnlessLocked(temp_v0 + 0x34);
-        FUN_00299218((int)*(char *)(temp_v0 + 0x98),temp_v2);
+        dataTable15GetUnlockedEntryId((int)*(char *)(temp_v0 + 0x98),temp_v2);
         FUN_00299900();
         return;
       }

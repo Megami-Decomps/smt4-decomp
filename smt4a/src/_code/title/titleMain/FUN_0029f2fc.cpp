@@ -13,14 +13,14 @@ int stateModeDispatch(...);
 int configDestroy(void);
 int FUN_00283d74(...);
 int FUN_002c7150(void);
-int FUN_002f4374(void);
+int gameApplyFlagTriggers(void);
 int FUN_00324c94(...);
 int FUN_00363c58(...);
 int FUN_003b5064(void);
 int FUN_003b61ec(void);
 int FUN_003c91e8(void);
 int FUN_0046bd44(...);
-int FUN_0046e238(...);
+int gameFlagsSetFlagsFromTaggedGroupEntries(...);
 
 int textFormatBuffer(...);
 int jobStop(...);
@@ -120,7 +120,7 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: commonBgBeginExit. */
 extern int configGetValueBC(void);
 extern int FUN_002ef9f0(void);
-/* Supplied declaration required: FUN_002f4374. */
+/* Supplied declaration required: gameApplyFlagTriggers. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_00324c94. */
 /* Supplied declaration required: objectE0ResetFlags1040. */
@@ -151,7 +151,7 @@ extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0046bd44. */
 extern int aocHasType36(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0046e238. */
+/* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
 
 
 unsigned int FUN_0029f2fc(void)
@@ -888,9 +888,9 @@ LAB_0029fb00:
           FUN_00283d74(0);
           FUN_0046bd44(g_aocSystem);
           FUN_00363c58(0);
-          FUN_0046e238(g_aocSystem);
+          gameFlagsSetFlagsFromTaggedGroupEntries(g_aocSystem);
           stateModeDispatch(puVar4[0x25]);
-          FUN_002f4374();
+          gameApplyFlagTriggers();
           FUN_00324c94(0x25,3);
           FUN_00324c94(0x26,3);
           DAT_005f1bd4 = 0;

@@ -559,7 +559,7 @@ LAB_004ef7f0:
       if (iStack_68 != 1) {
         if ((iStack_68 == 8) && (iStack_54 == 0)) {
           uVar20 = uStack_64;
-          FUN_00192550();
+          dataTable8FindRecord();
           sVar3 = *(short *)(uVar20 + 0x32);
           if (sVar3 != 0) {
             iVar29 = FUN_002c7bf4(sVar3);
@@ -645,7 +645,7 @@ LAB_004ef7f0:
       iVar23 = FUN_004f9d44(DAT_00573808);
       if (-1 < iVar23) {
         iVar6 = iVar22 + iVar29 * 0x16;
-        iVar23 = FUN_004f5710(DAT_00573808,iVar6 + 0x108);
+        iVar23 = btlEffectNameHasPrefix(DAT_00573808,iVar6 + 0x108);
         if (iVar23 != 0) {
           iVar23 = FUN_004f9d44(DAT_00573808);
           func_0x004fbd30(iVar23 + iVar4,puVar25);
@@ -808,7 +808,7 @@ LAB_004f054c:
         if (sVar3 == 8) {
           sVar3 = *(short *)(uVar20 + 0x1c0);
           iVar29 = (int)sVar3;
-          FUN_00192550();
+          dataTable8FindRecord();
           if ((*(unsigned char *)(iVar29 + 0x42) & 1) == 0) {
             FUN_00480fc0((int)sVar3,1);
           }
@@ -919,7 +919,7 @@ LAB_004f054c:
     if (iVar29 != 0) {
       sVar3 = FUN_003e4a00();
       if (sVar3 < 3) {
-        FUN_002a49e4(*(unsigned int *)(*piStack_30 + 0x2268),0x3b);
+        infoWinSetText(*(unsigned int *)(*piStack_30 + 0x2268),0x3b);
       }
       else {
         if (sVar3 < 6) {
@@ -928,7 +928,7 @@ LAB_004f054c:
         else {
           uVar19 = 0x3c;
         }
-        FUN_002a49e4(*(unsigned int *)(*piStack_30 + 0x2268),uVar19);
+        infoWinSetText(*(unsigned int *)(*piStack_30 + 0x2268),uVar19);
       }
       FUN_001f4e20(1);
       FUN_002c2d5c(0xffffffff);

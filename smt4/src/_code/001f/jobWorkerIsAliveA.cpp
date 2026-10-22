@@ -10,9 +10,10 @@ typedef struct Worker {
 } Worker;
 
 /* 1 when the worker exists and its job is still alive (or it was never asked to stop). */
-u32 jobWorkerIsAliveA(Worker **owner)
+extern Worker *g_aocJob;
+u32 jobWorkerIsAliveA(void)
 {
-    Worker *worker = *owner;
+    Worker *worker = g_aocJob;
 
     if (worker != NULL && (jobFind(worker->job) != 0 || worker->stopRequested == 0)) {
         return 1;

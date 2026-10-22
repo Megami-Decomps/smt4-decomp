@@ -1,42 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00521120` (_code @ 0x521120, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r6, r0 differs from recovered mov r5, r0. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
+struct PayloadView;
+struct AllocatorView;
 
+struct PayloadVTableView {
+    void (*destroy)(PayloadView*);
+};
 
-void FUN_00521120(int param_1,int param_2)
+struct PayloadView {
+    PayloadVTableView* vtable; // 0x00
+};
 
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  
-  puVar1 = *(unsigned int **)(param_2 + 0x1c);
-  if (puVar1 == (unsigned int *)0x0 || puVar1 == (unsigned int *)(param_2 + 0x14)) {
-    if (*(unsigned int **)(param_2 + 0x18) != (unsigned int *)0x0) {
-      (**(romwright_code **)**(unsigned int **)(param_2 + 0x18))();
-      piVar2 = *(int **)(param_2 + 0x14);
-      (**(romwright_code **)(*piVar2 + 4))(piVar2,*(unsigned int *)(param_2 + 0x18));
-    }
-  }
-  else {
-    puVar1[3] = *(unsigned int *)(param_2 + 0x20);
-    *(unsigned int *)(*(int *)(param_2 + 0x20) + 8) = *(unsigned int *)(param_2 + 0x1c);
-    *(unsigned int *)(param_2 + 0x1c) = 0;
-    *(unsigned int *)(param_2 + 0x20) = 0;
-  }
-  *(unsigned int *)(param_2 + 0x18) = 0;
-                    /* WARNING: Could not recover jumptable at 0x005211a0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(**(int **)(param_1 + 0x24) + 4))(*(int **)(param_1 + 0x24),param_2);
-  return;
+struct AllocatorVTableView {
+    u32 unk00; // 0x00
+    void (*release)(AllocatorView*, void*); // 0x04
+};
+
+struct AllocatorView {
+    AllocatorVTableView* vtable; // 0x00
+};
+
+struct LinkView {
+    AllocatorView* allocator; // 0x00 (entry + 0x14)
+    PayloadView* payload; // 0x04 (entry + 0x18)
+    LinkView* previous; // 0x08 (entry + 0x1c)
+    LinkView* next; // 0x0c (entry + 0x20)
+};
+
+struct EntryView {
+    u8 unk00[0x14]; // 0x00
+    LinkView link; // 0x14
+};
+
+struct OwnerView {
+    u8 unk00[0x24]; // 0x00
+    AllocatorView* allocator; // 0x24
+};
+
+// Unlink an entry or destroy its standalone payload, then release the entry.
 }
 
-} /* extern "C" */
+extern "C" void FUN_00521120(OwnerView* owner, EntryView* entry)
+{
+    LinkView* link = &entry->link;
+    LinkView* previous = link->previous;
+
+    if (previous == 0 || previous == link) {
+        if (link->payload != 0) {
+            link->payload->vtable->destroy(link->payload);
+            link->allocator->vtable->release(link->allocator, link->payload);
+        }
+    } else {
+        previous->next = link->next;
+        link->next->previous = link->previous;
+        link->previous = 0;
+        link->next = 0;
+    }
+
+    link->payload = 0;
+    owner->allocator->vtable->release(owner->allocator, entry);
+}

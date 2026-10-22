@@ -1,4 +1,5 @@
-#include "shard/W4_W4Match5b_MessageMain.h"
+#include "ui/MessageMain.h"
+extern "C" MessageGlobalsA g_messageMain;
 
 struct MessageBannerStateA {
     u32 unk00;        // 0x00
@@ -18,7 +19,7 @@ void FUN_00165088(MessageBannerStateA* banner, u32 mode);
 // Clear a finished banner, or restart its active message operation.
 void messageBannerRestartOrClear()
 {
-    MessageBannerStateA* banner = (MessageBannerStateA*)g_messageMain.banner;
+    MessageBannerStateA* banner = (MessageBannerStateA*)g_messageMain.panel;
     if (banner->state != 0) {
         if (banner->immediate != 0) {
             banner->state = 0;

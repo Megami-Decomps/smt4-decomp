@@ -1,68 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00300064` (_code @ 0x300064, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r2, r3, r4, r5, r6, lr} differs from recovered push {r4, r5, lr}. */
+#include "classes/Obj55aff4.h"
+
+// Private views of the layouts accessed by this function.
+
+struct ConnectionOptionsView {
+    u8 unk00[0x88]; // 0x00
+    Obj55aff4 unk88; // 0x88
+    u16 unk90; // 0x90
+    u8 unk92[2]; // 0x92
+    u32 unk94; // 0x94
+};
+
+struct ConnectionStateView {
+    u8 unk00[0x110]; // 0x00
+    Obj55aff4 unk110; // 0x110
+    u16 unk118; // 0x118
+};
+
+struct ConnectionManagerView {
+    u8 unk00[0xD0]; // 0x00
+    ConnectionStateView* unkD0; // 0xD0
+};
+
+struct OnlineStateView {
+    u8 unk00[0x120]; // 0x00
+    u8 unk120[1]; // 0x120, opaque address data
+};
 
 extern "C" {
-
-int _ZN9Obj55aff4D1Ev(int *);
-int _ZN9Obj55aff4aSERKS_(...);
-int onlineSockAddrToString(int *, int);
-int watcherRefreshEnabledState(void);
-
-/* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
-/* Supplied declaration required: _ZN9Obj55aff4aSERKS_. */
-extern int FUN_002ea704(void);
-extern int FUN_002eb5f4(void);
-/* Supplied declaration required: onlineSockAddrToString. */
-/* Supplied declaration required: watcherRefreshEnabledState. */
-
-
-unsigned int FUN_00300064(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int uStack_18;
-  unsigned int uStack_14;
-  
-  uStack_18 = param_3;
-  uStack_14 = param_4;
-  temp_v0 = FUN_002eb5f4();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), temp_v0 != 0)) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x94);
-    if (temp_v1 != 0) {
-      if (temp_v1 != 1) {
-        watcherRefreshEnabledState();
-        return 0;
-      }
-      temp_v0 = FUN_002eb5f4();
-      temp_v3 = *(int *)(temp_v0 + 0xd0);
-      temp_v0 = FUN_002ea704();
-      onlineSockAddrToString(&uStack_18,temp_v0 + 0x120);
-      _ZN9Obj55aff4aSERKS_(temp_v3 + 0x110,&uStack_18);
-      _ZN9Obj55aff4D1Ev(&uStack_18);
-    }
-    else {
-      temp_v0 = FUN_002eb5f4();
-      _ZN9Obj55aff4aSERKS_(*(int *)(temp_v0 + 0xd0) + 0x110,param_1 + 0x88);
-    }
-    if (*(short *)(param_1 + 0x90) != 0) {
-      temp_v0 = FUN_002eb5f4();
-      temp_v2 = *(unsigned short *)(param_1 + 0x90);
-      temp_v0 = *(int *)(temp_v0 + 0xd0);
-    }
-    else {
-      temp_v0 = FUN_002eb5f4();
-      temp_v0 = *(int *)(temp_v0 + 0xd0);
-      temp_v2 = 0x30ed;
-    }
-    *(unsigned short *)(temp_v0 + 0x118) = temp_v2;
-    return 1;
-  }
-  return 0;
+ConnectionManagerView* FUN_002eb5f4(void);
+OnlineStateView* FUN_002ea704(void);
+Obj55aff4 onlineSockAddrToString(const void* address);
+void watcherRefreshEnabledState(void);
+extern const u16 DAT_00538900;
 }
 
-} /* extern "C" */
+// Apply the selected address and the explicit or default port to the active connection.
+extern "C" u32 FUN_00300064(const ConnectionOptionsView* options)
+{
+    if (FUN_002eb5f4() == 0 || FUN_002ea704() == 0)
+        return 0;
+
+    switch (static_cast<u8>(options->unk94)) {
+    case 0:
+        FUN_002eb5f4()->unkD0->unk110 = options->unk88;
+        break;
+    case 1: {
+        ConnectionStateView* connection = FUN_002eb5f4()->unkD0;
+        connection->unk110 = onlineSockAddrToString(FUN_002ea704()->unk120);
+        break;
+    }
+    default:
+        watcherRefreshEnabledState();
+        return 0;
+    }
+
+    if (options->unk90 != 0) {
+        ConnectionManagerView* manager = FUN_002eb5f4();
+        const u16 port = options->unk90;
+        manager->unkD0->unk118 = port;
+    } else {
+        ConnectionManagerView* manager = FUN_002eb5f4();
+        manager->unkD0->unk118 = DAT_00538900;
+    }
+    return 1;
+}

@@ -1,45 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00376498` (_code @ 0x376498, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldrne r7, [pc, #116] differs from recovered ldrne r7, [pc, #112]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-typedef int romwright_code(...);
+struct HandlerDataView {
+    u8 unk00[4];               // 0x00
+    u16 handlerIndex;          // 0x04
+    u8 unk06[2];               // 0x06
+    u32 handlerArgument;       // 0x08
+};
 
-unsigned int FUN_00376498(int param_1)
+struct HandlerNodeView {
+    u8 unk00[0x80];            // 0x00
+    s32 unk80;                 // 0x80
+    u8 unk84[0x0c];            // 0x84
+    HandlerDataView* data;     // 0x90
+    u8 unk94[0x18];            // 0x94
+    HandlerNodeView* next;     // 0xac
+};
 
-{
-  int *piVar1;
-  int temp_v0;
-  romwright_code *pcVar3;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = -1;
-  temp_v1 = *(int *)(param_1 + 0x8c);
-  if (temp_v1 != 0) {
-    do {
-      pcVar3 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x90) + 4) * 0x44 + 0x5b32b4);
-      temp_v0 = -1;
-      if ((pcVar3 != (romwright_code *)0x0) &&
-         (temp_v0 = (*pcVar3)(*(unsigned int *)(*(int *)(temp_v1 + 0x90) + 8)), temp_v0 == 0)) {
-        return 0;
-      }
-      piVar1 = (int *)(temp_v1 + 0x80);
-      temp_v1 = *(int *)(temp_v1 + 0xac);
-      temp_v0 = temp_v0 + *piVar1;
-      if (temp_v2 < temp_v0) {
-        temp_v2 = temp_v0;
-      }
-    } while (temp_v1 != 0);
-    if (temp_v2 == 0) {
-      return 0;
-    }
-  }
-  if (*(int *)(param_1 + 0x84) < temp_v2 + 2) {
-    return 0;
-  }
-  return 1;
+struct HandlerOwnerView {
+    u8 unk00[0x84];            // 0x00
+    s32 unk84;                 // 0x84
+    u8 unk88[4];               // 0x88
+    HandlerNodeView* head;     // 0x8c
+};
+
+typedef s32 (*HandlerCallback)(u32 argument);
+
+struct HandlerEntryView {
+    u8 unk00[0x40];            // 0x00
+    HandlerCallback callback;  // 0x40
+};
+
 }
 
-} /* extern "C" */
+extern "C" {
+extern HandlerEntryView g_handlerTable[];
+
+// Check the owner's bound against the maximum adjusted result of its handlers.
+u32 FUN_00376498(HandlerOwnerView* owner)
+{
+    s32 maximumResult = -1;
+    HandlerNodeView* node = owner->head;
+
+    if (node != 0) {
+        do {
+            HandlerDataView* data = node->data;
+            HandlerCallback callback = g_handlerTable[data->handlerIndex].callback;
+            s32 result;
+            if (callback != 0) {
+                result = callback(data->handlerArgument);
+                if (result == 0) {
+                    return 0;
+                }
+            } else {
+                result = -1;
+            }
+
+            result += node->unk80;
+            node = node->next;
+            if (maximumResult < result) {
+                maximumResult = result;
+            }
+        } while (node != 0);
+
+        if (maximumResult == 0) {
+            return 0;
+        }
+    }
+
+    return owner->unk84 >= maximumResult + 2 ? 1 : 0;
+}
+
+}

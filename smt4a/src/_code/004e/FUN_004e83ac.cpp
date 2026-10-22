@@ -1,44 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e83ac` (_code @ 0x4e83ac, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads unk158 as entries + index*0x408 + 0x158 (not off the entry pointer) and schedules the index copy after the r1 argument move; register allocation differs. */
+#include "battle/btlAction.h"
+
+/* The 0x408-byte combatant entry as the action target check sees it. */
+struct ActionTargetEntry {
+    /* 0x000 */ u64 flags;
+    /* 0x008 */ u8 unk008[0x66];
+    /* 0x06E */ s16 selectionIndex;
+    /* 0x070 */ u8 unk070[0xe8];
+    /* 0x158 */ s32 unk158; /* positive: not selectable yet */
+    /* 0x15C */ u8 unk15c[0x2ac];
+};
+
+typedef char ActionTargetEntrySizeCheck[sizeof(ActionTargetEntry) == 0x408 ? 1 : -1];
+
+struct ActionTargetBattle {
+    /* 0x0000 */ u8 unk0000[0x1ffc];
+    /* 0x1FFC */ ActionTargetEntry *entries;
+};
+
+struct ActionTargetOwner {
+    /* 0x00 */ ActionTargetBattle *battle;
+};
+
+struct ActionTargetSlot {
+    /* 0x00 */ s32 taken;
+    /* 0x04 */ u8 unk04[0xc];
+};
+
+struct ActionTargetSlots {
+    /* 0x000 */ u8 unk000[0x9e4];
+    /* 0x9E4 */ ActionTargetSlot slots[1];
+};
 
 extern "C" {
 
-int FUN_003f0e20(int, int);
+extern BtlActionGlobals g_btlAction;
 
-extern unsigned int DAT_00571148; /* 0x571148 */
-extern unsigned int DAT_0057114c; /* 0x57114c */
-extern unsigned int DAT_005711b0; /* 0x5711b0 */
-extern unsigned int DAT_005711b4; /* 0x5711b4 */
+ActionTargetEntry *FUN_003f0e20(ActionTargetBattle *battle, s32 index);
 
-/* Supplied declaration required: FUN_003f0e20. */
-
-
-unsigned int FUN_004e83ac(int *param_1,int param_2,int param_3)
-
+/* Whether the combatant at index (or the one it redirects to) is free and targetable. */
+u32 FUN_004e83ac(ActionTargetOwner *owner, ActionTargetSlots *table, s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  
-  temp_v0 = *param_1;
-  FUN_003f0e20(temp_v0,param_3);
-  if (temp_v0 != 0) {
-    param_3 = (int)*(short *)(temp_v0 + 0x6e);
-  }
-  if (*(int *)(param_2 + param_3 * 0x10 + 0x9e4) == 0) {
-    puVar3 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + param_3 * 0x408);
-    temp_v1 = *puVar3;
-    temp_v2 = puVar3[1];
-    if ((((DAT_0057114c & temp_v2) != 0 || (DAT_00571148 & temp_v1) != 0) &&
-        ((temp_v1 & DAT_005711b0) == 0 && (temp_v2 & DAT_005711b4) == 0)) &&
-       (*(int *)(*(int *)(*param_1 + 0x1ffc) + param_3 * 0x408 + 0x158) < 1)) {
-      return 1;
+    ActionTargetEntry *target = FUN_003f0e20(owner->battle, index);
+    if (target != NULL) {
+        index = target->selectionIndex;
     }
-  }
-  return 0;
+    if (table->slots[index].taken == 0) {
+        ActionTargetEntry *entry = &owner->battle->entries[index];
+        u64 flags = entry->flags;
+        if ((flags & g_btlAction.targetableMask) != 0 && (flags & g_btlAction.untargetableMask) == 0 &&
+            entry->unk158 <= 0) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

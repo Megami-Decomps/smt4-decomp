@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003ae03c(unsigned int);
 int FUN_003ae2b0(unsigned int);
-int FUN_003ae6fc(...);
+int btlUiIsSpriteInactive(...);
 
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
@@ -14,7 +14,7 @@ extern int scrGetArg(void);
 /* Supplied declaration required: FUN_003ae03c. */
 /* Supplied declaration required: FUN_003ae2b0. */
 extern int FUN_003ae3f0(unsigned int);
-/* Supplied declaration required: FUN_003ae6fc. */
+/* Supplied declaration required: btlUiIsSpriteInactive. */
 
 
 unsigned int FUN_002f1214(void)
@@ -25,7 +25,7 @@ unsigned int FUN_002f1214(void)
   
   temp_v0 = scrGetArg();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_003ae6fc();
+    temp_v0 = btlUiIsSpriteInactive();
     if (temp_v0 != 0) {
       FUN_003ae03c(g_btlUiBlock);
     }
@@ -39,7 +39,7 @@ unsigned int FUN_002f1214(void)
     if (temp_v0 != 0) {
       FUN_003ae2b0(g_btlUiBlock);
     }
-    temp_v0 = FUN_003ae6fc(g_btlUiBlock);
+    temp_v0 = btlUiIsSpriteInactive(g_btlUiBlock);
     if (temp_v0 == 0) {
       return 0;
     }

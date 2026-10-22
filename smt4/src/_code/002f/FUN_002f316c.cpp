@@ -1,64 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f316c` (_code @ 0x2f316c, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r5, r0 differs from recovered mov r5, r1. */
+#include "common.h"
 
-extern "C" {
+// Private views of the pool owner and its 0xc0-byte records.
+struct RecordView;
 
-int FUN_0025c870(...);
-int FUN_002a3d58(...);
-int memClear(...);
-int rt_memcpy_w(...);
-
-typedef struct fn_002f316c_arg0 fn_002f316c_arg0;
-struct fn_002f316c_arg0 {
-    unsigned char pad_0x0[0x80];
-    int field_0x80; /* +0x80 */
-    undefined4 field_0x84; /* +0x84 */
-    int field_0x88; /* +0x88 */
-    unsigned char pad_0x8c[0x4];
-    undefined4 field_0x90; /* +0x90 */
-    unsigned char pad_0x94[0x4];
-    undefined4 field_0x98; /* +0x98 */
-    unsigned char pad_0x9c[0x10];
-    undefined4 field_0xac; /* +0xac */
-    undefined4 field_0xb0; /* +0xb0 */
+struct RecordOwnerView {
+    u8 unk00[0x80];       // +0x00
+    u32 unk80;           // +0x80
+    u8 unk84[4];         // +0x84
+    RecordView* unk88;   // +0x88
 };
 
-/* Supplied declaration required: FUN_0025c870. */
-/* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: rt_memcpy_w. */
+struct RecordView {
+    u8 unk00[0x84];      // +0x00
+    u32 unk84;           // +0x84
+    u8 unk88;            // +0x88
+    u8 unk89;            // +0x89
+    u8 unk8A;            // +0x8a
+    u8 unk8B[5];         // +0x8b
+    u32 unk90;           // +0x90
+    u8 unk94[4];         // +0x94
+    u32 unk98;           // +0x98
+    u8 unk9C[0x10];      // +0x9c
+    RecordView* unkAC;   // +0xac
+    RecordView* unkB0;   // +0xb0
+    u8 unkB4[0x0c];      // +0xb4
+};
 
+extern "C" {
+RecordView* FUN_0025c870(RecordOwnerView* owner);
+void rt_memcpy_w(void* destination, const void* source, u32 size);
+void memClear(void* destination, u32 size);
+void FUN_002a3d58(RecordView* record);
 
-int FUN_002f316c(fn_002f316c_arg0 *param_1,int param_2)
-
+// Allocate and initialize a copy, insert it before the source, and update the owner's count.
+RecordView* FUN_002f316c(RecordOwnerView* owner, RecordView* source)
 {
-/* irregular: 4 native warning(s); review required */
-  fn_002f316c_arg0 *pfVar1;
-  
-  pfVar1 = param_1;
-  FUN_0025c870();
-  rt_memcpy_w();
-  memClear(pfVar1,0x90);
-  pfVar1->field_0x84 = 1;
-  *(unsigned char *)&pfVar1->field_0x88 = 8;
-  *(unsigned char *)((int)&pfVar1->field_0x88 + 1) = 0;
-  *(unsigned char *)((int)&pfVar1->field_0x88 + 2) = 0;
-  FUN_002a3d58(pfVar1);
-  pfVar1->field_0x98 = pfVar1->field_0x98 | 1;
-  pfVar1->field_0x90 = *(unsigned int *)(param_2 + 0x90);
-  if (*(int *)(param_2 + 0xac) != 0) {
-    *(fn_002f316c_arg0 **)(*(int *)(param_2 + 0xac) + 0xb0) = pfVar1;
-    pfVar1->field_0xac = *(unsigned int *)(param_2 + 0xac);
-  }
-  else {
-    pfVar1->field_0xac = 0;
-    param_1->field_0x88 = (int)pfVar1;
-  }
-  *(fn_002f316c_arg0 **)(param_2 + 0xac) = pfVar1;
-  pfVar1->field_0xb0 = param_2;
-  param_1->field_0x80 = param_1->field_0x80 + 1;
-  return (int)pfVar1;
-}
+    RecordView* record = FUN_0025c870(owner);
+    rt_memcpy_w(record, source, 0xc0);
+    memClear(record, 0x90);
+    record->unk84 = 1;
+    record->unk88 = 8;
+    record->unk89 = 0;
+    record->unk8A = 0;
+    FUN_002a3d58(record);
+    record->unk98 |= 1;
+    record->unk90 = source->unk90;
 
-} /* extern "C" */
+    if (source->unkAC != 0) {
+        source->unkAC->unkB0 = record;
+        record->unkAC = source->unkAC;
+    } else {
+        record->unkAC = 0;
+        owner->unk88 = record;
+    }
+    source->unkAC = record;
+    record->unkB0 = source;
+    owner->unk80 += 1;
+    return record;
+}
+}

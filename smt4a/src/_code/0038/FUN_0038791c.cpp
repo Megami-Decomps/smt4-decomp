@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00153630(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int bustupCutStartSlotTransition(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int jobGetWork(int);
 int FUN_0019d96c(...);
 int FUN_001ad0fc(void);
@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_00153630. */
+/* Supplied declaration required: bustupCutStartSlotTransition. */
 /* Supplied declaration required: jobGetWork. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019d96c. */
@@ -74,7 +74,7 @@ void FUN_0038791c(int param_1,unsigned int param_2,int param_3,unsigned int para
   if (param_3 != 0) {
     if (param_3 != 1) {
       if (param_3 == 2) {
-        FUN_00153630(*puVar2,param_4,param_5,param_6,0xffffffff);
+        bustupCutStartSlotTransition(*puVar2,param_4,param_5,param_6,0xffffffff);
         FUN_0019d96c(puVar2,7,0);
         puVar2[0x1e] = 2;
         return;
@@ -83,7 +83,7 @@ void FUN_0038791c(int param_1,unsigned int param_2,int param_3,unsigned int para
         puVar2[0x1e] = 2;
         return;
       }
-      FUN_00153630(*puVar2,param_4,param_5,param_6,0xffffffff);
+      bustupCutStartSlotTransition(*puVar2,param_4,param_5,param_6,0xffffffff);
     }
     FUN_0019d96c(puVar2,6,0);
   }

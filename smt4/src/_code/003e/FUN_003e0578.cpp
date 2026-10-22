@@ -1,64 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e0578` (_code @ 0x3e0578, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the id pointer with cmn and keeps the id slot in r8, copies the id with
+ * ldm/stm and places the placeholder-id arm last; armcc here uses adds, ldrd/strd and inline arms */
+#include "AsdSDK/Source/Net/Cec/AsdCec.h"
+
+/* The leading part of a CEC message header: the message id at 0x20. */
+struct CecMessageIdHeader {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 messageId[8];
+};
+
+/* An 8-byte CEC message id. */
+struct CecMessageId {
+    /* 0x00 */ u8 bytes[8];
+};
 
 extern "C" {
 
-int FUN_00238c80(int *, int);
-int FUN_002393a4(int *, char [9]);
+extern const char DAT_004656f1[]; /* placeholder id text used when a message has no header */
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
+const CecMessageIdHeader *nn_cec_CTR_MessageBox_GetMessHeader(AsdCecMessageBox *box, s32 kind,
+                                                              u32 index);
+void FUN_00238c80(CecMessageId *id, const u8 *bytes);
+void FUN_002393a4(CecMessageId *id, const char *text);
+s32 rt_memcmp(const void *a, const void *b, u32 size);
 
-extern char s_ERROR____004656f1[9]; /* 0x4656f1 */
-
-/* Supplied declaration required: FUN_00238c80. */
-/* Supplied declaration required: FUN_002393a4. */
-extern int rt_memcmp(unsigned int, unsigned int *, unsigned int);
-extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
-
-
-unsigned int FUN_003e0578(int param_1,int param_2,unsigned int param_3)
-
+/* Reports whether the id equals the expected bytes. */
+static bool cecMessageIdEquals(const u8 *expected, CecMessageId id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_2c;
-  int temp_v4;
-  unsigned int uStack_24;
-  
-  if (param_2 == 0) {
-    temp_v2 = *(unsigned int *)(param_1 + 0x210);
-  }
-  else {
-    temp_v2 = *(unsigned int *)(param_1 + 0x3c0);
-  }
-  temp_v1 = 0;
-  if (temp_v1 < temp_v2) {
-    do {
-      temp_v0 = nn_cec_CTR_MessageBox_GetMessHeader(param_1,param_2,temp_v1);
-      if (!(temp_v0 == 0 || temp_v0 == -0x20)) {
-        FUN_00238c80(&temp_v4,temp_v0 + 0x20);
-      }
-      else {
-        FUN_002393a4(&temp_v4,s_ERROR____004656f1);
-      }
-      temp_v3 = temp_v4;
-      uStack_2c = uStack_24;
-      temp_v0 = rt_memcmp(param_3,(unsigned int *)&temp_v3,8);
-      if (temp_v0 == 0) {
-        return temp_v1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2);
-  }
-  return 0xffffffff;
+    return rt_memcmp(expected, &id, sizeof(id)) == 0;
+}
+
+/* Returns the index of the message with the given id in the inbox or outbox, or -1. */
+s32 FUN_003e0578(AsdCecMessageBox *box, s32 kind, const u8 *messageId)
+{
+    u32 count = kind == ASD_CEC_INBOX ? box->inboxCount : box->outboxCount;
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        const CecMessageIdHeader *header = nn_cec_CTR_MessageBox_GetMessHeader(box, kind, i);
+        const u8 *idBytes = header != NULL ? header->messageId : NULL;
+        CecMessageId id;
+
+        if (idBytes != NULL) {
+            FUN_00238c80(&id, idBytes);
+        } else {
+            FUN_002393a4(&id, DAT_004656f1);
+        }
+        if (cecMessageIdEquals(messageId, id)) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 } /* extern "C" */

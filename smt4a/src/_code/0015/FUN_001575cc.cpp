@@ -13,7 +13,7 @@ int FUN_00169d8c(...);
 int FUN_0016c744(unsigned int);
 int FUN_00187a84(int, int, int, unsigned int *);
 int FUN_00187d90(unsigned int, int);
-int FUN_0018a9bc(...);
+int mathCopyIdentityMatrix(...);
 int asdModelCommitCommandRange(unsigned char *, unsigned char *);
 int asdGxGetCommandCursor(void);
 int FUN_0019f828(unsigned int, int);
@@ -38,7 +38,7 @@ extern int FUN_00169db4(unsigned int);
 extern int asdGxPresetsGetEnable(unsigned int);
 /* Supplied declaration required: FUN_00187a84. */
 /* Supplied declaration required: FUN_00187d90. */
-/* Supplied declaration required: FUN_0018a9bc. */
+/* Supplied declaration required: mathCopyIdentityMatrix. */
 /* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: asdGxGetCommandCursor. */
 /* Supplied declaration required: FUN_0019f828. */
@@ -171,8 +171,8 @@ unsigned int FUN_001575cc(int param_1)
       }
     }
   }
-  FUN_0018a9bc();
-  FUN_0018a9bc(param_1 + 0x574);
+  mathCopyIdentityMatrix();
+  mathCopyIdentityMatrix(param_1 + 0x574);
   FUN_00187a84(param_1,param_1 + 0x1158,param_1 + 0x1118,(unsigned int *)(param_1 + 0x534));
   FUN_00187d90(*(unsigned int *)(param_1 + 0x530),param_1 + 0x1198);
   *(unsigned char *)(param_1 + 0x5b4) = 0;

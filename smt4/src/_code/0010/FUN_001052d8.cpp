@@ -1,71 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001052d8` (_code @ 0x1052d8, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads both queue words with ldm and keeps the +1/-1 in the flush count, and reloads the preset base before the force-black test. */
+#include "shard/W6_W6Match3_GxPresetResumeState.h"
 
 extern "C" {
+extern GxPresetResumeState g_asdGxPresets;
+void asdFileWakeWorker(void);
+void asdGxSetTopScreenMode(u32 mode);
+void gxLcdClearForceBlack(void);
+void FUN_00113244(u32 command);
 
-int asdFileWakeWorker(void);
-int asdGxSetTopScreenMode(unsigned int);
-int FUN_00113244(int);
-int gxLcdClearForceBlack(void);
-
-extern int DAT_004e3b9c; /* 0x4e3b9c */
-extern int DAT_004e3ba0; /* 0x4e3ba0 */
-extern int DAT_004e3ba8; /* 0x4e3ba8 */
-extern int DAT_004e3bac; /* 0x4e3bac */
-extern signed char DAT_004e3bb0; /* 0x4e3bb0 */
-
-/* Supplied declaration required: asdFileWakeWorker. */
-/* Supplied declaration required: asdGxSetTopScreenMode. */
-/* Supplied declaration required: FUN_00113244. */
-/* Supplied declaration required: gxLcdClearForceBlack. */
-
-
+/* Flush the queued GX commands, wake the file worker, then apply a pending top-screen preset. */
 void FUN_001052d8(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = 0;
-  temp_v0 = DAT_004e3ba0 - DAT_004e3b9c;
-  if (0 < temp_v0) {
-    do {
-      FUN_00113244(0x402);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v0);
-  }
-  asdFileWakeWorker();
-  FUN_00113244(0x402);
-  temp_v0 = DAT_004e3bac;
-  DAT_004e3b9c = 0;
-  if (-1 < DAT_004e3bac) {
-    temp_v3 = DAT_004e3bac == 0;
-    DAT_004e3ba8 = DAT_004e3bac;
-    DAT_004e3bac = -1;
-    if (temp_v3) {
-      temp_v1 = 0x700;
+    s32 count = g_asdGxPresets.unk1c0 + 1 - g_asdGxPresets.unk1bc;
+    s32 i;
+
+    for (i = 0; i < count - 1; i++) {
+        FUN_00113244(0x402);
     }
-    else {
-      if (temp_v0 != 1) {
-        if (DAT_004e3bb0 == '\0') {
-          gxLcdClearForceBlack();
-          DAT_004e3bb0 = '\x01';
+    asdFileWakeWorker();
+    FUN_00113244(0x402);
+    g_asdGxPresets.unk1bc = 0;
+    if (g_asdGxPresets.pending >= 0) {
+        g_asdGxPresets.current = g_asdGxPresets.pending;
+        g_asdGxPresets.pending = -1;
+        switch (g_asdGxPresets.current) {
+        case 0:
+            asdGxSetTopScreenMode(0x700);
+            break;
+        case 1:
+            asdGxSetTopScreenMode(0x702);
+            break;
         }
-        return;
-      }
-      temp_v1 = 0x702;
     }
-    asdGxSetTopScreenMode(temp_v1);
-  }
-  if (DAT_004e3bb0 == '\0') {
-    gxLcdClearForceBlack();
-    DAT_004e3bb0 = '\x01';
-  }
-  return;
+    if (!g_asdGxPresets.forceBlackCleared) {
+        gxLcdClearForceBlack();
+        g_asdGxPresets.forceBlackCleared = 1;
+    }
 }
 
 } /* extern "C" */

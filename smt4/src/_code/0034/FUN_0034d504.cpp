@@ -1,27 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034d504` (_code @ 0x34d504, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Visual-part enable stores use different Boolean and register scheduling. */
+#include "shard/W6_W6Match2_AnimationVisualState.h"
 
-extern "C" {
-
-
-void FUN_0034d504(int param_1)
-
+// Selects one of three visual parts according to the animation state.
+extern "C" void FUN_0034d504(AnimationVisualState* visual)
 {
-  char temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x2c) == 4;
-  if ((!(unsigned char)temp_v0) && (*(int *)(param_1 + 0x2c) == 5)) {
-    temp_v0 = '\x02';
-  }
-  if (*(int *)(param_1 + 8) != 0) {
-    *(unsigned char *)(**(int **)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + 0x1f6) = temp_v0 == '\0';
-    *(unsigned char *)(*(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + 4) + 0x1f6) =
-         temp_v0 == '\x01';
-    *(unsigned char *)(*(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + 8) + 0x1f6) =
-         temp_v0 == '\x02';
-  }
-  return;
+    u32 selected = 0;
+    if (visual->state == 4) {
+        selected = 1;
+    } else if (visual->state == 5) {
+        selected = 2;
+    }
+    if (visual->binding != NULL) {
+        visual->binding->model->parts[0]->enabled = selected == 0;
+        visual->binding->model->parts[1]->enabled = selected == 1;
+        visual->binding->model->parts[2]->enabled = selected == 2;
+    }
 }
-
-} /* extern "C" */

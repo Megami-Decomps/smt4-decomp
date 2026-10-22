@@ -34,7 +34,7 @@ extern void *DAT_00435d18;
 extern BattleEncounterMain *g_btlMain;
 s32 FUN_0027e3b8(void *event);
 s32 btlEventSelectTrigger(void *event, u32 kind, s32 index, u32 flags);
-void FUN_00270028(u32 mode);
+void frameTexApplyMode(u32 mode);
 s32 FUN_002c2a04(u32 channel);
 void FUN_002c29d8(u32 channel, u32 frames, u32 volume);
 void FUN_0027e38c(void *event);
@@ -71,7 +71,7 @@ extern "C" u32 FUN_003349c0(BattleEncounterQuery *query, BattleEncounterContext 
             return 0;
         if (btlEventSelectTrigger(g_btlEvent, 9, -1, 0)) {
             if (!(context->flags & 0x40000000)) {
-                FUN_00270028(2);
+                frameTexApplyMode(2);
                 context->flags |= 0x40000000;
                 if (FUN_002c2a04(1) == 3)
                     FUN_002c29d8(1, 10, 255);

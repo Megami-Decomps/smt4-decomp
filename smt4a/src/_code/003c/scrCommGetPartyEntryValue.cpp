@@ -23,11 +23,12 @@ extern s32 FUN_002a4894(u8 *block);
 extern Rec12C *FUN_003e4d68(u32 index);
 extern s32 FUN_0019e52c(u32 value);
 extern void scrSetResult(s32 value);
+extern PartyOwner g_callbackOwnerSlots;
 
 /* Script command: result is FUN_0019e52c of the +0x12C halfword of the currently selected party entry. */
-u32 scrCommGetPartyEntryValue(PartyOwner *owner)
+u32 scrCommGetPartyEntryValue(void)
 {
-    PartyObj *obj = owner->obj;
+    PartyObj *obj = g_callbackOwnerSlots.obj;
     s32 index;
     Rec12C *entry;
 

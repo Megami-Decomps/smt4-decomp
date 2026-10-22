@@ -29,7 +29,7 @@ typedef struct {
 extern unsigned char LAB_00235cc4; /* 0x235cc4 */
 extern int naviMenuStartIfIdle(...); /* 0x235ce0 */
 extern unsigned char LAB_002ba728; /* 0x2ba728 */
-extern int FUN_002ba754(...); /* 0x2ba754 */
+extern int naviMainPollResourcesAndUpdatePanel(...); /* 0x2ba754 */
 extern unsigned char LAB_003de3f4; /* 0x3de3f4 */
 extern unsigned char LAB_003de404; /* 0x3de404 */
 extern unsigned char LAB_003de414; /* 0x3de414 */
@@ -98,7 +98,7 @@ void FUN_003de188(unsigned int param_1,unsigned int param_2)
   asdProcessCreateSimple(&LAB_003de3f4,4,0,0,naviMenuStartIfIdle,&LAB_00235cc4,puVar1);
   *puVar1 = (unsigned int)puVar4;
   puVar5 = &LAB_003de404;
-  taskCreateDraw(&LAB_003de404,0xe8,1,0,FUN_002ba754,0,puVar1,puVar4);
+  taskCreateDraw(&LAB_003de404,0xe8,1,0,naviMainPollResourcesAndUpdatePanel,0,puVar1,puVar4);
   puVar1[1] = (unsigned int)puVar5;
   puVar4 = &LAB_003de414;
   taskCreateDraw(&LAB_003de414,0xea,0,0,&LAB_002ba728,0,0,*puVar1);

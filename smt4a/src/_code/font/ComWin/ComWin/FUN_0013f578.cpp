@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
 int taskCreateDraw(...);
@@ -35,7 +35,7 @@ extern unsigned char DAT_0052f804; /* 0x52f804 */
 extern unsigned char DAT_0052f84c; /* 0x52f84c */
 extern unsigned int *g_menuState; /* 0x57f56c */
 
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -70,12 +70,12 @@ void FUN_0013f578(void)
   paramsInit(puVar1 + 7,&DAT_0052f7bc,0x18,&DAT_0052f7d4,0x30,&DAT_0052f804,0x48,0,0,&DAT_0052f84c
                ,0x1dc);
   puVar3 = puVar1 + 7;
-  FUN_0014e220(puVar1 + 0xf,8,0xffffffff,2,puVar3,1);
+  uiSpriteInitializeState(puVar1 + 0xf,8,0xffffffff,2,puVar3,1);
   uiSpriteSelectAnim(puVar1 + 0xf,0);
-  FUN_0014e220(puVar1 + 0x32,8,0xffffffff,3,puVar3,1);
+  uiSpriteInitializeState(puVar1 + 0x32,8,0xffffffff,3,puVar3,1);
   uiSpriteSelectAnim(puVar1 + 0x32,2);
-  FUN_0014e220(puVar1 + 0x55,8,0x1a8,0xffffffff,puVar3,1);
-  FUN_0014e220(puVar1 + 0x78,8,0x1a9,0xffffffff,puVar3,1);
+  uiSpriteInitializeState(puVar1 + 0x55,8,0x1a8,0xffffffff,puVar3,1);
+  uiSpriteInitializeState(puVar1 + 0x78,8,0x1a9,0xffffffff,puVar3,1);
   return;
 }
 

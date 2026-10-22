@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00230aec(...);
+int drawTextAtRelativePosition(...);
 int FUN_00230cc0(...);
 void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int FUN_00230d84(int, int, int, int, int);
@@ -40,7 +40,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00230aec. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00230cc0. */
@@ -290,7 +290,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v0 = *(short *)(temp_v11 + 8);
   temp_v21 = *(short *)(temp_v11 + 10) + temp_v4;
   textFormatBuffer(temp_v20,&LAB_0022f1a0,temp_v5);
-  FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v21,0,7,temp_v6,temp_v12,temp_v20);
+  drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v21,0,7,temp_v6,temp_v12,temp_v20);
   if (param_2 != 0) {
     temp_v8 = FUN_00230e04(param_4);
     if (param_3 != 0) {
@@ -304,7 +304,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
     temp_v0 = *(short *)(temp_v5 + 8);
     temp_v1 = *(short *)(temp_v5 + 10);
     textFormatBuffer(temp_v20,&LAB_0022f1a4,temp_v8);
-    FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
+    drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   }
   temp_v8 = FUN_0028fb3c(temp_v22);
   if (param_3 != 0) {
@@ -318,7 +318,7 @@ void FUN_0022ea70(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v0 = *(short *)(temp_v5 + 8);
   temp_v1 = *(short *)(temp_v5 + 10);
   textFormatBuffer(temp_v20,&LAB_0022f1ac,temp_v8);
-  FUN_00230aec(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
+  drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v13,temp_v1 + temp_v4,0,7,temp_v9,temp_v12,temp_v20);
   return;
 }
 

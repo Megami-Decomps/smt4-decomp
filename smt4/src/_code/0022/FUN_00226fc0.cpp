@@ -1,78 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00226fc0` (_code @ 0x226fc0, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
-struct AnimationPairState;
+/* NON_MATCHING: the three color channel conversions land in different VFP/core registers (retail converts blue into s2 first). */
+#include "shard/W6_W6Match6_ActionController.h"
 
 extern "C" {
+bool FUN_0034c9a0(void *animation);
+f32 FUN_00226bc0(void *animation);
+void FUN_003ddb50(s32 a, s32 b, s16 frame, f32 red, f32 green, f32 blue);
+void FUN_00226a90(ActionController *controller, s16 frame, s32 phase);
+void animationSelectSecondPart(void *animation);
+void actionSequenceUpdateLoopTransition(ActionController *controller);
 
-int FUN_00226a90(...);
-int FUN_00226bc0(...);
-int actionSequenceUpdateLoopTransition(...);
-int animationSelectSecondPart(...);
-int FUN_003ddb50(...);
-int VectorUnsignedToFloat(...);
-
-typedef struct fn_00226fc0_arg0 fn_00226fc0_arg0;
-struct fn_00226fc0_arg0 {
-    unsigned char pad_0x0[0x3028];
-    undefined4 field_0x3028; /* +0x3028 */
-    unsigned char pad_0x302c[0x14];
-    undefined1 field_0x3040; /* +0x3040 */
-    byte field_0x3041; /* +0x3041 */
-    short field_0x3042; /* +0x3042 */
-    ushort field_0x3044; /* +0x3044 */
-    unsigned char pad_0x3046[0x2];
-    void *field_0x3048; /* +0x3048 */
-    undefined4 field_0x304c; /* +0x304c */
-    void *field_0x3050; /* +0x3050 */
-    void *field_0x3054; /* +0x3054 */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00226a90. */
-/* Supplied declaration required: FUN_00226bc0. */
-/* Supplied declaration required: actionSequenceUpdateLoopTransition. */
-/* Supplied declaration required: animationSelectSecondPart. */
-extern bool FUN_0034c9a0(AnimationPairState* animation);
-/* Supplied declaration required: FUN_003ddb50. */
-
-
-void FUN_00226fc0(fn_00226fc0_arg0 *param_1)
-
+// Play the first action phase: flash the sequence's color on its start frame, then move on to the
+// loop phase once the animation part finishes.
+void FUN_00226fc0(ActionController *controller)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 6 native warning(s); review required */
-  int temp_v0;
-  void *pvVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  
-  temp_v0 = FUN_0034c9a0(reinterpret_cast<AnimationPairState*>(param_1->field_0x304c));
-  if (temp_v0 == 0) {
-    FUN_00226bc0(param_1->field_0x304c);
-    if ((int)*(short *)param_1->field_0x3050 == (int)in_s0) {
-      pvVar2 = param_1->field_0x3054;
-      VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 0xb),(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 9),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_003ddb50(0,0,(int)*(short *)((int)param_1->field_0x3050 + 2),
-                   (unsigned int)*(unsigned char *)((int)pvVar2 + 10));
+    if (!FUN_0034c9a0(controller->animation)) {
+        s32 frame = (s32)FUN_00226bc0(controller->animation);
+        if (controller->tracks[0].unk00 == frame) {
+            ActionSequence *sequence = controller->sequence;
+            FUN_003ddb50(0, 0, controller->tracks[0].startFrame, sequence->color[0] * 0.01f,
+                         sequence->color[1] * 0.01f, sequence->color[2] * 0.01f);
+        }
+        FUN_00226a90(controller, frame, 1);
     }
-    FUN_00226a90(param_1,(int)(short)(int)in_s0,1);
-  }
-  temp_v0 = FUN_0034c9a0(reinterpret_cast<AnimationPairState*>(param_1->field_0x304c));
-  if (temp_v0 != 0) {
-    animationSelectSecondPart(param_1->field_0x304c);
-    param_1->field_0x3040 = 10;
-    actionSequenceUpdateLoopTransition(param_1);
-    return;
-  }
-  return;
+    if (FUN_0034c9a0(controller->animation)) {
+        animationSelectSecondPart(controller->animation);
+        controller->state = 10;
+        actionSequenceUpdateLoopTransition(controller);
+    }
 }
-
-} /* extern "C" */
+}

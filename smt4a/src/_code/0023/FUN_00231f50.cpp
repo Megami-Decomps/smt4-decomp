@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00186f58(void);
+int dataFindKeyedRecordWithOverrides(void);
 
-/* Supplied declaration required: FUN_00186f58. */
+/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
 
 
 int FUN_00231f50(int *param_1,int *param_2)
@@ -17,9 +17,9 @@ int FUN_00231f50(int *param_1,int *param_2)
   int temp_v1;
   
   temp_v0 = *param_1;
-  FUN_00186f58();
+  dataFindKeyedRecordWithOverrides();
   temp_v1 = *param_2;
-  FUN_00186f58();
+  dataFindKeyedRecordWithOverrides();
   switch(*(unsigned char *)(temp_v0 + 0x23)) {
   case 0:
     temp_v0 = 2;
@@ -61,9 +61,9 @@ int FUN_00231f50(int *param_1,int *param_2)
   temp_v0 = temp_v0 - temp_v1;
   if (temp_v0 == 0) {
     temp_v0 = *param_1;
-    FUN_00186f58();
+    dataFindKeyedRecordWithOverrides();
     temp_v1 = *param_2;
-    FUN_00186f58();
+    dataFindKeyedRecordWithOverrides();
     temp_v0 = (unsigned int)*(unsigned short *)(temp_v0 + 0x24) - (unsigned int)*(unsigned short *)(temp_v1 + 0x24);
   }
   return temp_v0;

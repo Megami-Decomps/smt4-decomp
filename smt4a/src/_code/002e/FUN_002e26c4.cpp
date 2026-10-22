@@ -1,51 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e26c4` (_code @ 0x2e26c4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/X14_Table21.h"
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-int FUN_002e26c4(unsigned int param_1)
-
+/* Returns the table 21 record with the given id, or NULL. */
+Table21Entry *FUN_002e26c4(u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = dataTableGet(0x15,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned char *)(temp_v1 + temp_v4 * 100) == param_1) {
-          return temp_v1 + temp_v4 * 100;
+    void *section = dataTableGet(0x15, 0);
+    Table21Entry *entries = (Table21Entry *)dataTableGetEntries(section);
+    u32 count = dataTableGetCount(section);
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        if (entries[i].id == id) {
+            return &entries[i];
         }
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < (int)temp_v3);
     }
-  }
-  while( 1 ) {
-    temp_v4 = temp_v3;
-    if (temp_v2 <= temp_v4) {
-      return 0;
-    }
-    if (*(unsigned char *)(temp_v1 + temp_v4 * 100) == param_1) break;
-    if (*(unsigned char *)(temp_v1 + temp_v4 * 100 + 100) == param_1) {
-      return temp_v1 + temp_v4 * 100 + 100;
-    }
-    temp_v3 = temp_v4 + 2;
-  }
-  return temp_v1 + temp_v4 * 100;
+    return NULL;
 }
 
 } /* extern "C" */

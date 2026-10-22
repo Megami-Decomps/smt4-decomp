@@ -9,7 +9,7 @@ int screenShowMessage(...);
 int cellListAppend(...);
 int FUN_004964e0(...);
 int FUN_004cfeb0(...);
-int FUN_004cff88(...);
+int listCursorSetPage(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int FUN_00481100(unsigned int);
 /* Supplied declaration required: FUN_004964e0. */
 extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_004cfeb0. */
-/* Supplied declaration required: FUN_004cff88. */
+/* Supplied declaration required: listCursorSetPage. */
 
 
 void FUN_00496a0c(int param_1,unsigned int param_2)
@@ -205,7 +205,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
   qsort(param_1 + 0x8f84,*(unsigned short *)(param_1 + 0x9f84),4,&LAB_0049cf3c);
   FUN_004cfeb0(param_1 + 0xf00,10,*(unsigned short *)(param_1 + 0x9f84),0,1,1);
   *(unsigned char *)(param_1 + 0xf0d) = 1;
-  FUN_004cff88(param_1 + 0xf00,0);
+  listCursorSetPage(param_1 + 0xf00,0);
   FUN_004964e0(param_1,param_2);
   temp_v0 = *(int *)(param_1 + 0xb40);
   temp_v1 = flaggedValueHolderGetTotal(param_1 + temp_v0 * 0x74 + 0xb60);

@@ -1,44 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011b588` (_code @ 0x11b588, 0xb0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only r1/r3 swap between the stage pointer and the zero constant. */
+#include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
-extern int nn_gr_CTR_Shader_Shader_sub_object(int);
+typedef struct ShaderStageState {
+    /* 0x0 */ u8 enabled;
+    /* 0x1 */ u8 mode;
+    /* 0x2 */ u8 mask0;
+    /* 0x3 */ u8 mask1;
+    /* 0x4 */ u32 value;
+} ShaderStageState;
 
+typedef struct ShaderOwner {
+    /* 0x00000 */ u8 unk00000[0x138];
+    /* 0x00138 */ u8 shader[0x128E8];
+    /* 0x12A20 */ ShaderStageState stages[5];
+} ShaderOwner;
 
-void FUN_0011b588(int param_1)
+void *nn_gr_CTR_Shader_Shader_sub_object(void *shader);
 
+static void shaderStageReset(ShaderStageState *stage, s32 mode)
 {
-  int temp_v0;
-  
-  temp_v0 = nn_gr_CTR_Shader_Shader_sub_object(param_1 + 0x138);
-  *(unsigned char *)(temp_v0 + 0x128e8) = 0;
-  *(unsigned char *)(temp_v0 + 0x128e9) = 1;
-  *(unsigned char *)(temp_v0 + 0x128ea) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x128eb) = 0xff;
-  *(unsigned int *)(temp_v0 + 0x128ec) = 0;
-  *(unsigned char *)(temp_v0 + 0x128f0) = 0;
-  *(unsigned char *)(temp_v0 + 0x128f1) = 1;
-  *(unsigned char *)(temp_v0 + 0x128f2) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x128f3) = 0xff;
-  *(unsigned int *)(temp_v0 + 0x128f4) = 0;
-  *(unsigned char *)(temp_v0 + 0x128f8) = 0;
-  *(unsigned char *)(temp_v0 + 0x128f9) = 1;
-  *(unsigned char *)(temp_v0 + 0x128fa) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x128fb) = 0xff;
-  *(unsigned int *)(temp_v0 + 0x128fc) = 0;
-  *(unsigned char *)(temp_v0 + 0x12900) = 0;
-  *(unsigned char *)(temp_v0 + 0x12901) = 2;
-  *(unsigned char *)(temp_v0 + 0x12902) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x12903) = 0xff;
-  *(unsigned int *)(temp_v0 + 0x12904) = 0;
-  *(unsigned char *)(temp_v0 + 0x12908) = 0;
-  *(unsigned char *)(temp_v0 + 0x12909) = 2;
-  *(unsigned char *)(temp_v0 + 0x1290a) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x1290b) = 0xff;
-  *(unsigned int *)(temp_v0 + 0x1290c) = 0;
-  return;
+    stage->enabled = 0;
+    stage->mode = mode;
+    stage->mask0 = 0xff;
+    stage->mask1 = 0xff;
+    stage->value = 0;
+}
+
+/* Reset the five shader stage states of the owner of the given shader. */
+void FUN_0011b588(ShaderOwner *owner)
+{
+    ShaderOwner *base = (ShaderOwner *)((u8 *)nn_gr_CTR_Shader_Shader_sub_object(owner->shader) - offsetof(ShaderOwner, shader));
+
+    shaderStageReset(&base->stages[0], 1);
+    shaderStageReset(&base->stages[1], 1);
+    shaderStageReset(&base->stages[2], 1);
+    shaderStageReset(&base->stages[3], 2);
+    shaderStageReset(&base->stages[4], 2);
 }
 
 } /* extern "C" */

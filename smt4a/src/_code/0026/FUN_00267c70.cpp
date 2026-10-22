@@ -1,60 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00267c70` (_code @ 0x267c74, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: when scriptProcessCreateWhenReady fails retail branches straight to the pop (r0 is already 0); this build branches to the shared mov r0, #0. */
+#include "common.h"
+
+/* The engine object's cursor positions and mode, as this refresh reads them. */
+struct EngineCursorView {
+    /* 0x0000 */ u8 unk0000[0xAC];
+    /* 0x00AC */ u8 listCursor[0x578];
+    /* 0x0624 */ u8 gridCursor[0x8C];
+    /* 0x06B0 */ u8 pageCursor[0x3CB4];
+    /* 0x4364 */ s32 mode;
+};
+
+struct EngineCursorRef {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ EngineCursorView *instance;
+};
 
 extern "C" {
 
-int vec2GetXInt(...);
-int FUN_004b1a00(int, unsigned int, unsigned int);
-int FUN_004b2e50(int, int);
-int FUN_004b40f4(int, unsigned int, unsigned int);
-int FUN_004b4f9c(int, unsigned int, unsigned int);
+extern EngineCursorRef g_engineCleanupOwner;
+s32 scriptProcessCreateWhenReady(EngineCursorView *view);
+void FUN_004b2e50(EngineCursorView *view, s32 a, s32 b);
+s32 vec2GetXInt(void *vec);
+s32 vec2GetYInt(void *vec);
+void FUN_004b4f9c(EngineCursorView *view, s32 x, s32 y);
+void FUN_004b40f4(EngineCursorView *view, s32 x, s32 y);
+void FUN_004b1a00(EngineCursorView *view, s32 x, s32 y);
 
-/* Supplied declaration required: vec2GetXInt. */
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_004b1a00. */
-/* Supplied declaration required: FUN_004b2e50. */
-/* Supplied declaration required: FUN_004b40f4. */
-/* Supplied declaration required: FUN_004b4f9c. */
-extern int FUN_004b6b1c(int);
-
-
-unsigned int FUN_00267c70(int param_1)
-
+// Re-apply the cursor position of the engine object's current mode (11, 18 or 19).
+u32 FUN_00267c70(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = *(int *)(param_1 + 4);
-  if ((temp_v3 != 0) && (temp_v0 = FUN_004b6b1c(temp_v3), temp_v0 != 0)) {
-    if ((*(int *)(temp_v3 + 0x4364) < 9) && (*(int *)(temp_v3 + 0x4364) != 0)) {
-      FUN_004b2e50(temp_v3,0);
-    }
-    temp_v0 = *(int *)(temp_v3 + 0x4364);
-    if (temp_v0 != 0xb) {
-      if (temp_v0 != 0x12) {
-        if (temp_v0 == 0x13) {
-          temp_v1 = vec2GetXInt(temp_v3 + 0x6b0);
-          temp_v2 = vec2GetYInt(temp_v3 + 0x6b0);
-          FUN_004b40f4(temp_v3,temp_v1,temp_v2);
+    EngineCursorView *view = g_engineCleanupOwner.instance;
+    if (view != NULL && scriptProcessCreateWhenReady(view)) {
+        if (view->mode <= 8 && view->mode != 0) {
+            FUN_004b2e50(view, 0, 0);
         }
-      }
-      else {
-        temp_v1 = vec2GetXInt(temp_v3 + 0xac);
-        temp_v2 = vec2GetYInt(temp_v3 + 0xac);
-        FUN_004b1a00(temp_v3,temp_v1,temp_v2);
-      }
+        switch (view->mode) {
+        case 11: {
+            s32 x = vec2GetXInt(view->gridCursor);
+            s32 y = vec2GetYInt(view->gridCursor);
+            FUN_004b4f9c(view, x, y);
+            break;
+        }
+        case 19: {
+            s32 x = vec2GetXInt(view->pageCursor);
+            s32 y = vec2GetYInt(view->pageCursor);
+            FUN_004b40f4(view, x, y);
+            break;
+        }
+        case 18: {
+            s32 x = vec2GetXInt(view->listCursor);
+            s32 y = vec2GetYInt(view->listCursor);
+            FUN_004b1a00(view, x, y);
+            break;
+        }
+        }
     }
-    else {
-      temp_v1 = vec2GetXInt();
-      temp_v2 = vec2GetYInt(temp_v3 + 0x624);
-      FUN_004b4f9c(temp_v3,temp_v1,temp_v2);
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

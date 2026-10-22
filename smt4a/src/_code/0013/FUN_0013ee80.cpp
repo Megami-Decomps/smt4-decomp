@@ -1,44 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013ee80` (_code @ 0x13ee80, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct CaptureSurface {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+};
+
+struct CaptureState {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u8 active;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 result;
+    /* 0x17 */ u8 captured;
+    /* 0x18 */ u8 unk18[0x35];
+    /* 0x4D */ u8 variant;          /* which of the two capture jobs handles this capture */
+};
+
+/* The work block of the screen capture job. */
+struct CaptureJobWork {
+    /* 0x0000 */ u8 unk0000[4];
+    /* 0x0004 */ CaptureSurface *surface;
+    /* 0x0008 */ u8 unk0008[0x13f8];
+    /* 0x1400 */ CaptureState capture;
+};
 
 extern "C" {
+extern void *g_renderCtx;
+CaptureJobWork *jobGetWork(u32 job);
+void FUN_00157558(void *context);
+u8 FUN_00154edc(u32 mode, CaptureSurface *surface);
+void surfaceCopy(CaptureSurface *destination, CaptureSurface *source);
 
-int FUN_00154edc(int, unsigned int);
-int surfaceCopy(unsigned int, unsigned int);
-int FUN_00157558(unsigned int);
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: surfaceCopy. */
-/* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
-
-
-unsigned int FUN_0013ee80(void)
-
+static __inline bool captureIsPending(const CaptureState *capture)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  temp_v1 = jobGetWork();
-  if (((*(char *)(temp_v1 + 0x1414) != '\0') && (*(char *)(temp_v1 + 0x1417) == '\0')) &&
-     (*(char *)(temp_v1 + 0x144d) == '\0')) {
+    return capture->active && !capture->captured && !capture->variant;
+}
+
+/* Job step for the first capture variant: once active, captures the screen into the job's 512x512
+ * surface and then halves the surface's recorded size; runs only once. */
+u32 FUN_0013ee80(u32 job)
+{
+    CaptureJobWork *work = jobGetWork(job);
+
+    if (!captureIsPending(&work->capture)) {
+        return 0;
+    }
     FUN_00157558(g_renderCtx);
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x14) = 0x200;
-    *(unsigned int *)(*(int *)(temp_v1 + 4) + 0x18) = 0x200;
-    temp_v0 = 0;
-    FUN_00154edc(0,*(unsigned int *)(temp_v1 + 4));
-    *(unsigned char *)(temp_v1 + 0x1416) = temp_v0;
-    surfaceCopy(*(unsigned int *)(temp_v1 + 4),*(unsigned int *)(temp_v1 + 4));
-    *(int *)(*(int *)(temp_v1 + 4) + 0x14) = *(int *)(*(int *)(temp_v1 + 4) + 0x14) >> 1;
-    *(int *)(*(int *)(temp_v1 + 4) + 0x18) = *(int *)(*(int *)(temp_v1 + 4) + 0x18) >> 1;
-    *(unsigned char *)(temp_v1 + 0x1417) = 1;
+    work->surface->width = 0x200;
+    work->surface->height = 0x200;
+    work->capture.result = FUN_00154edc(0, work->surface);
+    surfaceCopy(work->surface, work->surface);
+    work->surface->width >>= 1;
+    work->surface->height >>= 1;
+    work->capture.captured = 1;
     return 0;
-  }
-  return 0;
 }
 
 } /* extern "C" */

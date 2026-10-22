@@ -1,44 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00473270` (_code @ 0x473270, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r3, [r0, #12] differs from recovered ldr r1, [r0, #12]. */
+#include "common.h"
+
+struct TouchRegionRecordView {
+    u8 unk00[0x08]; // 0x00
+    s16 unk08;      // 0x08
+    s16 unk0A;      // 0x0A
+    const s16* unk0C; // 0x0C: two signed coordinate/extent values
+};
+
+struct TouchContextView {
+    u8 unk00[0x64]; // 0x00
+    u8 unk64;       // 0x64
+};
 
 extern "C" {
-
-int FUN_001b3f7c(void);
-int FUN_004d091c(int, int, int, int, int);
-int touchRegisterFirstRegion(int, int, int, int, int);
-int touchRegisterSecondRegion(int, int, int, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001b3f7c. */
-/* Supplied declaration required: FUN_004d091c. */
-/* Supplied declaration required: touchRegisterFirstRegion. */
-/* Supplied declaration required: touchRegisterSecondRegion. */
-
-
-void FUN_00473270(int param_1)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_001b3f7c();
-  temp_v0 = FUN_001834a4(0x2f,0x4f);
-  touchRegisterFirstRegion(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),
-               (int)**(short **)(temp_v0 + 0xc),(int)(*(short **)(temp_v0 + 0xc))[1]);
-  temp_v0 = FUN_001834a4(0x2f,0x50);
-  touchRegisterSecondRegion(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),
-               (int)**(short **)(temp_v0 + 0xc),(int)(*(short **)(temp_v0 + 0xc))[1]);
-  temp_v0 = FUN_001834a4(0x2f,0x4e);
-  FUN_004d091c(param_1,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),
-               (int)**(short **)(temp_v0 + 0xc),(int)(*(short **)(temp_v0 + 0xc))[1]);
-  *(unsigned char *)(param_1 + 100) = 1;
-  return;
+void FUN_001b3f7c(void);
+const TouchRegionRecordView* FUN_001834a4(u32 group, u32 entry);
+void touchRegisterFirstRegion(TouchContextView* context, s32 x, s32 y,
+                              s32 width, s32 height);
+void touchRegisterSecondRegion(TouchContextView* context, s32 x, s32 y,
+                               s32 width, s32 height);
+void FUN_004d091c(TouchContextView* context, s32 x, s32 y,
+                  s32 width, s32 height);
 }
 
-} /* extern "C" */
+// Load and register three touch regions, then mark the context initialized.
+extern "C" void FUN_00473270(TouchContextView* context)
+{
+    FUN_001b3f7c();
+
+    const TouchRegionRecordView* region = FUN_001834a4(0x2F, 0x4F);
+    touchRegisterFirstRegion(context, region->unk08, region->unk0A,
+                             region->unk0C[0], region->unk0C[1]);
+
+    region = FUN_001834a4(0x2F, 0x50);
+    touchRegisterSecondRegion(context, region->unk08, region->unk0A,
+                              region->unk0C[0], region->unk0C[1]);
+
+    region = FUN_001834a4(0x2F, 0x4E);
+    FUN_004d091c(context, region->unk08, region->unk0A,
+                  region->unk0C[0], region->unk0C[1]);
+
+    context->unk64 = 1;
+}

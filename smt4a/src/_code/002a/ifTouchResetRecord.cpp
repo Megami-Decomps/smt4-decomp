@@ -1,17 +1,17 @@
-#include "shard/Block57f248.h"
+#include "ui/IfTouch.h"
 
 extern "C" {
 
 /* Resets the record at 0x57F248 (if there is one): id 0xFFFF, mode 0, counter 0. */
 void ifTouchResetRecord(void)
 {
-    Record57f248 *record;
+    IfTouchState *record;
 
-    record = g_ifTouch.record;
-    if (g_ifTouch.record != NULL) {
-        record->unk64E = 0xFFFF;
-        record->unk008 = 0;
-        record->unk650 = 0;
+    record = g_ifTouch.state;
+    if (g_ifTouch.state != NULL) {
+        record->selectedRegion = 0xFFFF;
+        record->selectionMode = 0;
+        record->repeatCounter = 0;
     }
 }
 

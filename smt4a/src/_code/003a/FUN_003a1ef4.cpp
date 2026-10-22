@@ -1,54 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a1ef4` (_code @ 0x3a1ef4, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: fallback multiplication is merged and allocation size is rematerialized instead of retained. */
+#include "shard/WeightedValueState.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00544ca0[];
+void *memAlloc(u32 heap, u32 alignment, u32 kind, u32 bytes, u32 category, u32 flags);
+void rt_memclr(void *allocation, u32 bytes);
 
-int memAlloc(int, int, int, int, int, int);
-int rt_memclr(void);
-
-typedef struct fn_003a1ef4_arg0 fn_003a1ef4_arg0;
-struct fn_003a1ef4_arg0 {
-    unsigned char pad_0x0[0x20];
-    int field_0x20; /* +0x20 */
-    int field_0x24; /* +0x24 */
-    unsigned char pad_0x28[0x90];
-    int field_0xb8; /* +0xb8 */
-};
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: rt_memclr. */
-
-
-unsigned int * FUN_003a1ef4(fn_003a1ef4_arg0 *param_1)
-
+// Allocate an active value controller using the configured product, capped at one hundred.
+WeightedValueState *FUN_003a1ef4(const WeightedValueConfig *config)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = param_1->field_0x20;
-  if (temp_v0 == 0) {
-    temp_v0 = param_1->field_0xb8;
-  }
-  temp_v1 = temp_v0 * param_1->field_0x24;
-  if (temp_v1 >= 101) {
-    temp_v1 = 100;
-  }
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x38,0x10,1);
-  rt_memclr();
-  puVar1[1] = 0xffffffff;
-  *puVar1 = temp_v1;
-  puVar1[2] = 0x3f800000;
-  *(unsigned short *)(puVar1 + 0xd) = 1;
-  return puVar1;
+    s32 base = config->value;
+    if (base == 0)
+        base = config->fallbackValue;
+    u32 value = static_cast<u32>(base * config->multiplier);
+    if (value > 100)
+        value = 100;
+    asdDebugTrace(DAT_00544ca0, 450);
+    WeightedValueState *state = static_cast<WeightedValueState *>(
+        memAlloc(0x10000, 0x100, 0, sizeof(WeightedValueState), 0x10, 1));
+    rt_memclr(state, sizeof(WeightedValueState));
+    state->target = -1;
+    state->value = value;
+    state->scale = 1.0f;
+    state->active = 1;
+    return state;
 }
-
-} /* extern "C" */
+}

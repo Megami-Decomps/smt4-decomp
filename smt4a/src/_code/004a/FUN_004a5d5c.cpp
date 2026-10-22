@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(...);
 int FUN_00184310(void);
 int FUN_0023b45c(int);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int FUN_0031f718(int, int, int);
 int FUN_00372048(int);
 
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_0023b3b8(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int statusDownGetFlag(void);
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: FUN_00372048. */
@@ -53,7 +53,7 @@ void FUN_004a5d5c(int param_1)
     *(short *)(param_1 + 0xa870) = (short)temp_v2;
     if (temp_v2 != 0) {
       FUN_0031f718((int)(short)temp_v2,1,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       temp_v1 = statusDownGetFlag();
       temp_v0 = FUN_0023b3b8();
       FUN_00184310();

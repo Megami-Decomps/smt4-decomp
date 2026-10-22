@@ -1,45 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gfxTexture2DCreate` (_code @ 0x17e6c4, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "gfx/Texture2D.h"
 extern "C" {
+void sysMemClear(void*, u32);
+extern void* (*g_gfxAllocateCallback)(u32, u32, u32, u32);
 
-int sysMemClear(unsigned int *, int);
-
-typedef int romwright_code(...);
-extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
-
-/* Supplied declaration required: sysMemClear. */
-
-
-unsigned int * gfxTexture2DCreate(unsigned int param_1)
-
+// Allocates a texture with nearest filtering, repeated coordinates, and cleared resource state.
+GfxTexture2D* gfxTexture2DCreate(u32 parameter)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  else {
-    puVar1 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x78);
-    if (puVar1 != (unsigned int *)0x0) {
-      sysMemClear(puVar1,0x78);
-      puVar1[1] = 0x2600;
-      *puVar1 = 0x2600;
-      puVar1[2] = 0x2901;
-      puVar1[3] = 0x2901;
-      puVar1[9] = 0;
-      puVar1[10] = 0;
-      puVar1[0xb] = 0;
-      puVar1[5] = 0xfffffc18;
-      puVar1[8] = 0;
-      puVar1[7] = 0;
-      puVar1[6] = 0;
-      puVar1[0x1d] = param_1;
+    GfxTexture2D* texture;
+    if (g_gfxAllocateCallback == NULL) {
+        texture = NULL;
+    } else {
+        texture = (GfxTexture2D*)g_gfxAllocateCallback(0x10000, 0x100, 0, sizeof(GfxTexture2D));
+        if (texture != NULL) {
+            sysMemClear(texture, sizeof(GfxTexture2D));
+            texture->filters[1] = 0x2600;
+            texture->filters[0] = 0x2600;
+            texture->wrapModes[0] = 0x2901;
+            texture->wrapModes[1] = 0x2901;
+            texture->unk24[0] = 0.0f;
+            texture->unk24[1] = 0.0f;
+            texture->unk2C = 0;
+            texture->unk14 = -1000;
+            texture->unk18[2] = 0.0f;
+            texture->unk18[1] = 0.0f;
+            texture->unk18[0] = 0.0f;
+            texture->parameter = parameter;
+        }
     }
-  }
-  return puVar1;
+    return texture;
 }
-
-} /* extern "C" */
+}

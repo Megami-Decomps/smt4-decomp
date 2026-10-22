@@ -1,11 +1,12 @@
+#include "title/titleMain.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_00117da4(int);
-int FUN_002c39a4(unsigned int);
+int FUN_002c39a4(TitleScene *);
 
-extern unsigned int g_titleScene; /* 0x44ea00 */
+extern TitleScene *g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00117da4. */
 extern int FUN_002bff10(unsigned int);

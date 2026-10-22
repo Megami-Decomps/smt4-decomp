@@ -1,38 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303564` (_code @ 0x303564, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #124] differs from recovered ldr r0, [pc, #120]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int uiSetFloatPair(unsigned char *);
-int distSpatial(void);
+struct LmapSceneView {
+    u8 unk00[0x1c]; // 0x00
+    f32 positionX;  // 0x1c
+    u8 unk20[4];    // 0x20
+    f32 positionZ;  // 0x24
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+struct CameraTargetView {
+    u8 unk00[0x50]; // 0x00
+    f32 positionX;  // 0x50
+    u8 unk54[4];    // 0x54
+    f32 positionZ;  // 0x58
+    u8 unk5C[0x40]; // 0x5c
+    f32 unk9C;      // 0x9c
+};
 
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned char g_localCamera; /* 0x5f10cc */
+struct CameraTargetStateView {
+    u8 unk00[4];             // 0x00
+    CameraTargetView* target; // 0x04
+};
 
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: distSpatial. */
-
-
-void FUN_00303564(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(g_lmapScene + 0x1c);
-  distSpatial();
-  if (temp_v0 < 0x43340000) {
-    uiSetFloatPair(&g_localCamera);
-    return;
-  }
-  uiSetFloatPair(&g_localCamera);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern CameraTargetStateView DAT_005806a0;
+extern LmapSceneView* g_lmapScene;
+extern u8 g_localCamera;
+
+f32 distSpatial(f32 firstX, f32 firstY, f32 firstZ,
+                f32 secondX, f32 secondY, f32 secondZ);
+void uiSetFloatPair(u8* camera, f32 first, f32 second);
+
+// Set the camera float pair from the horizontal target distance and target state.
+void FUN_00303564(void)
+{
+    union {
+        f32 value;
+        s32 bits;
+    } distance;
+
+    distance.value = distSpatial(g_lmapScene->positionX, 0.0f,
+                                 g_lmapScene->positionZ,
+                                 DAT_005806a0.target->positionX, 0.0f,
+                                 DAT_005806a0.target->positionZ);
+
+    if (distance.bits < 0x43340000) {
+        distance.value -= 40.0f;
+        if (distance.bits < 0x41a00000) {
+            distance.value = 20.0f;
+        }
+        uiSetFloatPair(&g_localCamera, distance.value,
+                       DAT_005806a0.target->unk9C);
+    } else {
+        uiSetFloatPair(&g_localCamera, 140.0f,
+                       DAT_005806a0.target->unk9C);
+    }
+}
+}

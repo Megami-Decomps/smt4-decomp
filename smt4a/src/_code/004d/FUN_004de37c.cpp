@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int FUN_003e8bb0(unsigned char [4], int, unsigned int);
 int FUN_003f0e94(int, unsigned int);
@@ -33,7 +33,7 @@ extern unsigned int DAT_00571228; /* 0x571228 */
 extern unsigned int DAT_0057122c; /* 0x57122c */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -113,7 +113,7 @@ unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
     if (temp_v2 != 2 && temp_v2 != 3) {
       if (temp_v2 == 8) {
         temp_v4 = (int)*(short *)(temp_v3 + 0x1c0);
-        FUN_00192550();
+        dataTable8FindRecord();
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x32);
         if ((temp_v3 != 0) && (dataTable04FindById(), temp_v3 != 0)) {
           temp_v0 = *(char *)(temp_v3 + 0x23);
@@ -143,7 +143,7 @@ LAB_004de6b4:
               if (temp_v11 == 3) {
                 if (!((temp_v12 == '\x18' || temp_v12 == '\x1b') || temp_v12 == '\x01')) {
                   temp_v4 = (int)temp_v13;
-                  FUN_00192550();
+                  dataTable8FindRecord();
                   if ((temp_v4 != 0) && ((*(unsigned int *)(temp_v4 + 0x68) & 4) != 0)) {
                     temp_v3 = 1;
                     goto LAB_004de6b4;

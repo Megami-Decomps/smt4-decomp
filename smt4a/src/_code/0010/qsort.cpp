@@ -1,70 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `qsort` (_code @ 0x10063a, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail movs r7, r0 differs from recovered sub sp, #4. */
+#include "common.h"
 
-extern "C" {
+typedef s32 (*ElementCompare)(const void *, const void *);
 
-int FUN_0010043c(void);
+extern "C" void FUN_0010043c(void *elements, u32 count, u32 elementSize,
+                            ElementCompare compare);
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0010043c. */
-
-
-void qsort(unsigned int param_1,unsigned int param_2,unsigned int param_3,romwright_code *param_4)
-
+// Finishes sorting fixed-size elements by insertion after a preliminary pass on larger arrays.
+extern "C" void qsort(void *elements, u32 count, u32 elementSize,
+                      ElementCompare compare)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  if ((param_3 != 0) && (param_2 != 0)) {
-    if (param_2 >= 11) {
-      FUN_0010043c();
+    if (elementSize == 0 || count == 0) {
+        return;
     }
-    temp_v5 = param_1;
-    while (temp_v5 < param_3 * (param_2 - 1) + param_1) {
-      temp_v4 = temp_v5 + param_3;
-      while ((param_1 <= temp_v5 && (temp_v1 = (*param_4)(temp_v5,temp_v4), 0 < temp_v1))) {
-        temp_v5 = temp_v5 - param_3;
-      }
-      puVar4 = (unsigned int *)(temp_v5 + param_3);
-      temp_v2 = 0;
-      temp_v5 = temp_v4;
-      if (((param_3 | temp_v4) & 3) != 0) {
-        for (temp_v2 = 0; temp_v2 < param_3; temp_v2 = temp_v2 + 1) {
-          puVar5 = (unsigned int *)(temp_v4 + temp_v2);
-          temp_v0 = *(unsigned char *)puVar5;
-          while (puVar5 = (unsigned int *)((int)puVar5 - param_3), puVar4 <= puVar5) {
-            *(unsigned char *)((int)puVar5 + param_3) = *(unsigned char *)puVar5;
-          }
-          *(unsigned char *)((int)puVar5 + param_3) = temp_v0;
-        }
-      }
-      else {
-        for (; temp_v2 < param_3; temp_v2 = temp_v2 + 4) {
-          puVar5 = (unsigned int *)(temp_v4 + temp_v2);
-          temp_v3 = *puVar5;
-          while (puVar5 = (unsigned int *)((int)puVar5 - param_3), puVar4 <= puVar5) {
-            *(unsigned int *)((int)puVar5 + param_3) = *puVar5;
-          }
-          *(unsigned int *)((int)puVar5 + param_3) = temp_v3;
-        }
-      }
-    }
-  }
-  return;
-}
 
-} /* extern "C" */
+    if (count > 10) {
+        FUN_0010043c(elements, count, elementSize, compare);
+    }
+
+    const u32 baseAddress = reinterpret_cast<u32>(elements);
+    const u32 lastAddress = baseAddress + (count - 1) * elementSize;
+    u32 currentAddress = baseAddress;
+
+    while (currentAddress < lastAddress) {
+        u32 previousAddress = currentAddress;
+        currentAddress += elementSize;
+
+        while (previousAddress >= baseAddress &&
+               compare(reinterpret_cast<const void *>(previousAddress),
+                       reinterpret_cast<const void *>(currentAddress)) > 0) {
+            previousAddress -= elementSize;
+        }
+
+        const u32 insertionAddress = previousAddress + elementSize;
+        u32 offset = 0;
+        if (((elementSize | currentAddress) & 3) != 0) {
+            for (; offset < elementSize; ++offset) {
+                u32 sourceAddress = currentAddress + offset;
+                const u8 saved = *reinterpret_cast<const u8 *>(sourceAddress);
+                while ((sourceAddress -= elementSize) >= insertionAddress) {
+                    *reinterpret_cast<u8 *>(sourceAddress + elementSize) =
+                        *reinterpret_cast<const u8 *>(sourceAddress);
+                }
+                *reinterpret_cast<u8 *>(sourceAddress + elementSize) = saved;
+            }
+        } else {
+            for (; offset < elementSize; offset += 4) {
+                u32 sourceAddress = currentAddress + offset;
+                const u32 saved = *reinterpret_cast<const u32 *>(sourceAddress);
+                while ((sourceAddress -= elementSize) >= insertionAddress) {
+                    *reinterpret_cast<u32 *>(sourceAddress + elementSize) =
+                        *reinterpret_cast<const u32 *>(sourceAddress);
+                }
+                *reinterpret_cast<u32 *>(sourceAddress + elementSize) = saved;
+            }
+        }
+    }
+}

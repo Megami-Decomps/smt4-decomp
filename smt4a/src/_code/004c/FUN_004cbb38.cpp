@@ -12,7 +12,7 @@ int asdLoadFileSyncDefault(...);
 int FUN_0022e774(...);
 int FUN_002613f0(...);
 int FUN_00275bc8(...);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_002c85b0(...);
 int btlTalkBustUpCreate(...);
 int statusDisplayBindUnitRecord(...);
@@ -58,7 +58,7 @@ extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002613f0. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern int FUN_003316b4(int);
@@ -149,7 +149,7 @@ LAB_004cbbbc:
       btlTalkBustUpCreate();
       FUN_002c85b0(6);
       statusDisplayBindUnitRecord(temp_v1,0,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       soundChannelRequestIfEnabled(0x100002d,0,0x3c);
       FUN_0022e774();
       FUN_0019de98(0,0xf4f4f4ff);

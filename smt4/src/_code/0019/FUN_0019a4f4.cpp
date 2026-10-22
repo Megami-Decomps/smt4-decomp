@@ -23,7 +23,7 @@ int FUN_0028cb40(...);
 int FUN_0028cdec(...);
 int FUN_0028cf30(...);
 int FUN_0028cfd8(void);
-int FUN_00292c0c(void);
+int gameReleaseDataReference(void);
 int beginStatusPanelClose(void);
 int FUN_0029cc44(...);
 int FUN_0029ee6c(...);
@@ -120,7 +120,7 @@ extern int btlActorIsDown(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
-/* Supplied declaration required: FUN_00292c0c. */
+/* Supplied declaration required: gameReleaseDataReference. */
 /* Supplied declaration required: flagBitIsSet. */
 /* Supplied declaration required: FUN_00292f4c. */
 /* Supplied declaration required: btlGetMainState. */
@@ -137,7 +137,7 @@ extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
 extern int FUN_0029d644(char *);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
@@ -163,8 +163,8 @@ extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: gameGetPlayerData. */
 extern int FUN_002b6ad0(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b8d54(void);
-extern int FUN_002b8d68(void);
+extern int ifTouchGetSelectionMode(void);
+extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
@@ -374,7 +374,7 @@ LAB_0019a5e0:
   temp_v39 = gameGetSlotTable();
   temp_v5 = 0;
   do {
-    temp_v7 = FUN_002b8d68();
+    temp_v7 = ifTouchGetSelectedRegion();
     if (temp_v7 == *(short *)(param_1 + temp_v5 * 2 + 0x5716)) goto LAB_0019a82c;
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x20);
@@ -563,7 +563,7 @@ LAB_0019ade4:
       FUN_00292f4c(param_1);
       break;
     }
-    temp_v17 = FUN_0029d65c((int)*(short *)(param_1 + 0x572c));
+    temp_v17 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x572c));
     if (temp_v17 == 6) {
       temp_v36[0] = '\x01';
     }
@@ -1253,8 +1253,8 @@ LAB_0019be74:
     *(unsigned char *)(param_1 + 0x575d) = 0;
     if (*(char *)(param_1 + 0x307c) != '\0') break;
     if (-1 < temp_v5) {
-      temp_v17 = FUN_002b8d54();
-      if ((temp_v17 == 1) || (temp_v17 = FUN_002b8d54(), temp_v17 == 2)) {
+      temp_v17 = ifTouchGetSelectionMode();
+      if ((temp_v17 == 1) || (temp_v17 = ifTouchGetSelectionMode(), temp_v17 == 2)) {
         if (temp_v5 == 0x11) {
           *(unsigned char *)(param_1 + 0x3060) = 1;
         }
@@ -1284,7 +1284,7 @@ LAB_0019be74:
         }
         break;
       }
-      temp_v17 = FUN_002b8d54();
+      temp_v17 = ifTouchGetSelectionMode();
       if (temp_v17 == 6) {
         if (temp_v5 != 0x11) {
           *(unsigned char *)(param_1 + 0x3060) = 0;
@@ -1497,7 +1497,7 @@ LAB_0019c714:
     temp_v5 = FUN_0029e958(param_1 + 0x33a8);
     if (0 < temp_v5) {
       do {
-        temp_v5 = FUN_0029d65c((int)*(short *)(param_1 + temp_v17 * 2 + 0x574e));
+        temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v17 * 2 + 0x574e));
         if (temp_v5 == 6) {
           temp_v36[0] = '\x01';
           break;
@@ -1540,7 +1540,7 @@ LAB_0019c9b8:
     eventQueueAddUniqueIfValid(temp_v9);
     break;
   case 0x24:
-    temp_v5 = FUN_0029d65c((int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 2 + 0x574e));
+    temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 2 + 0x574e));
     temp_v17 = 0;
     if (temp_v5 == 6) {
       temp_v36[0] = '\x01';
@@ -1617,7 +1617,7 @@ LAB_0019c9b8:
   case 0x2c:
     temp_v5 = FUN_00295618();
     if (temp_v5 != 0) {
-      FUN_00292c0c();
+      gameReleaseDataReference();
       timerStart(param_1 + 0x12b8,0);
       playSceneSetState(param_1,1);
     }

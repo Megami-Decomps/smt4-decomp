@@ -8,7 +8,7 @@ int FUN_0048b140(...);
 int MapNaviTable_GetCategoryCount(void);
 
 /* Supplied declaration required: FUN_0048b140. */
-extern int FUN_00492c5c(void);
+extern int naviMainGetRequestedMap(void);
 extern int FUN_00492c70(int);
 /* Supplied declaration required: MapNaviTable_GetCategoryCount. */
 extern int MapNaviTable_GetCategoryRecord(unsigned int *, unsigned int);
@@ -29,7 +29,7 @@ void FUN_0048d248(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   int uStack_28;
   
   uStack_28 = param_4;
-  temp_v1 = FUN_00492c5c();
+  temp_v1 = naviMainGetRequestedMap();
   temp_v2 = FUN_00492c70(param_1 + 0x4cc);
   temp_v3 = FUN_0048b140(param_1,temp_v1,param_2);
   if (temp_v3 != 0) {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022afc4(unsigned int, int, unsigned int);
 int FUN_0022b29c(int, int, int);
 int listScrollToId(int, int);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bd808(int, unsigned short *);
 int textFormatBuffer(...);
@@ -32,7 +32,7 @@ extern int FUN_0022b238(int, int);
 /* Supplied declaration required: FUN_0022b29c. */
 /* Supplied declaration required: listScrollToId. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002bd808. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -139,7 +139,7 @@ LAB_003b9cf0:
       *(unsigned int *)(param_1 + 0x20) = temp_v6 | 0x10;
       if ((temp_v6 & 0x40) != 0) {
         *(unsigned int *)(param_1 + 0x20) = (temp_v6 & 0xffffffbf) | 0x10;
-        FUN_00296e90();
+        messageMainFinishWindow();
         return;
       }
     }

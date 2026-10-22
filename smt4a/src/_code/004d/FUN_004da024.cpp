@@ -1,49 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004da024` (_code @ 0x4da024, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the packed skill is copied as a whole instead of retail's two bit-field read/modify/writes. */
+#include "gamedata/SupportUnitRecord.h"
+#include "shard/W6_W6Match1_PartySlot.h"
 
 extern "C" {
+PartySlotA *gameGetOptions();
+SupportUnitRecordA *dataTableGetCategoryEntry(s32 category, u32 index);
+void affinityResolveUnitSlot(PackedSkillSlot *skill, PartySlotA *unit, u32 slot);
 
-int FUN_001fef70(...);
-
-typedef struct fn_004da024_arg0 fn_004da024_arg0;
-struct fn_004da024_arg0 {
-    unsigned char pad_0x0[0x62];
-    ushort field_0x62; /* +0x62 */
-    unsigned char pad_0x64[0xc8];
-    undefined2 field_0x12c; /* +0x12c */
-    ushort field_0x12e; /* +0x12e */
-};
-
-/* stack frame of param_4: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern int dataTableGetCategoryEntry(int, unsigned short);
-extern int gameGetOptions(void);
-/* Supplied declaration required: FUN_001fef70. */
-
-
-unsigned int FUN_004da024(fn_004da024_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+u32 FUN_004da024(u32 slot)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v2 = param_4;
-  temp_v0 = gameGetOptions();
-  temp_v1 = gameGetOptions();
-  if ((*(short *)(temp_v1 + 0x62) != 0) && (*(short *)(temp_v1 + 300) != 0)) {
-    temp_v0 = dataTableGetCategoryEntry((int)*(short *)(temp_v0 + 300),*(unsigned short *)(temp_v0 + 0x12e));
-    temp_v2 = (unsigned int)(*(unsigned short *)(temp_v0 + (int)param_1 * 2 + 0x28) & 0x3ff);
-  }
-  else {
-    FUN_001fef70(&temp_v2,temp_v0,param_1);
-  }
-  return temp_v2 & 0x3ff;
+    PackedSkillSlot skill;
+    PartySlotA *unit = gameGetOptions();
+    PartySlotA *current = gameGetOptions();
+    if (current->unk62 && current->id) {
+        const SupportUnitRecordA *record =
+            dataTableGetCategoryEntry((s16)unit->id, unit->unk12e);
+        skill = record->packedSkills[slot];
+    } else {
+        affinityResolveUnitSlot(&skill, unit, slot);
+    }
+    return skill.id;
 }
-
-} /* extern "C" */
+}

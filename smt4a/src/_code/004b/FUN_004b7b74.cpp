@@ -9,7 +9,7 @@ int dialogOpen(int);
 int asdLoadFileSyncDefault(void);
 int FUN_00275bc8(int, unsigned char *);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_002a49e4(unsigned int, int);
+int infoWinSetText(unsigned int, int);
 int FUN_004b7d88(int);
 
 extern unsigned char LAB_004b7d34; /* 0x4b7d34 */
@@ -24,7 +24,7 @@ extern int g_aocMain; /* 0x570260 */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004b7d88. */
 extern int FUN_004ba698(int);
@@ -79,14 +79,14 @@ void FUN_004b7b74(int param_1)
         }
         if (temp_v1 != 4) {
           dialogOpen(0);
-          FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),
+          infoWinSetText(*(unsigned int *)(param_1 + 0x113c),
                        *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
           *(unsigned int *)(param_1 + 0x28) = 5;
           *(unsigned int *)(param_1 + 0x2c) = 0;
           return;
         }
         dialogOpen(0);
-        FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),
+        infoWinSetText(*(unsigned int *)(param_1 + 0x113c),
                      *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
         *(unsigned int *)(param_1 + 0x28) = 5;
         *(unsigned int *)(param_1 + 0x2c) = 0;

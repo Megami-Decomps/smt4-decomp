@@ -34,13 +34,13 @@ typedef struct EventEntry {
     /* 0x04 */ EventSource *source;
 } EventEntry;
 
-extern EventEntry *FUN_002a6d50(u32 a, s32 kind, u32 b);
+extern EventEntry *packageFindFileRefByName(u32 a, s32 kind, u32 b);
 extern void FUN_003933d4(u32 owner, u32 a, s32 kind, u32 b, s32 seconds, s32 x, s32 y, s32 z);
 
 /* Replays the records of event `id` from the entry's list, offset by x/y/z; returns 1 when the event exists. */
 u32 FUN_00389ddc(u32 a, u32 b, u32 c, u32 d, s32 id, s32 x, s32 y, s32 z)
 {
-    EventEntry *entry = FUN_002a6d50(a, 0x17, d);
+    EventEntry *entry = packageFindFileRefByName(a, 0x17, d);
     EventSource *source;
     EventNode *node;
     s32 i;

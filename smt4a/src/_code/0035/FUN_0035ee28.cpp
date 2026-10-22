@@ -17,7 +17,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_00232388(void);
+extern unsigned int btlResolveEntryChoice(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: scrSetResult. */
@@ -35,7 +35,7 @@ unsigned int FUN_0035ee28(void)
   
   scrGetArg(0);
   scrGetArg(1);
-  temp_v0 = FUN_00232388();
+  temp_v0 = btlResolveEntryChoice();
   FUN_00301a08(temp_v0,temp_v3,temp_v2);
   temp_v1 = temp_v3[0];
   if (temp_v3[0] < temp_v2[0] + temp_v3[0]) {

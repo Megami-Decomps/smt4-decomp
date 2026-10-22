@@ -1,58 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003807b0` (_code @ 0x3807b0, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads the state byte through a 0x400 base for each compare and builds the message in r0 not r1 */
+#include "common.h"
 
 extern "C" {
 
-int listAppendNode(int, int);
-int FUN_002b4f64(int, int);
-int FUN_002bda30(int, int);
+typedef struct {
+    u32 lo, hi;
+} CursorPair;
 
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_002b4f64. */
-extern int FUN_002baed8(void);
-/* Supplied declaration required: FUN_002bda30. */
+typedef struct {
+    u32 kind;    /* 0x0 */
+    u8 flag;     /* 0x4 */
+    u8 unk5[3];
+    u32 value;   /* 0x8 */
+} CursorParam;
 
+typedef struct {
+    u8 unk0[4];
+    u8 type;          /* 0x04 */
+    u8 unk5[0xc - 0x5];
+    u32 sender;       /* 0x0c */
+    void *target;     /* 0x10 */
+    CursorPair pair;  /* 0x14 */
+    u32 kind;         /* 0x1c */
+    u32 flag;         /* 0x20 */
+    u32 value;        /* 0x24 */
+} CursorMsg;
 
-void FUN_003807b0(int param_1)
+typedef struct {
+    u8 unk0[0x184];
+    u32 id;           /* 0x184 */
+} MsgQueue;
 
+typedef struct {
+    u8 unk0[0xf4];
+    u8 target[0x43c - 0xf4]; /* 0x0f4 */
+    CursorParam param;       /* 0x43c */
+    u8 unk448[0x450 - 0x448];
+    CursorPair pair;         /* 0x450 */
+    u8 unk458[0x45c - 0x458];
+    u8 state;                /* 0x45c */
+    u8 unk45d;
+    u8 sent;                 /* 0x45e */
+} CursorTask;
+
+MsgQueue *FUN_002baed8(void);
+void *FUN_002b4f64(MsgQueue *queue, s32 size);
+void listAppendNode(MsgQueue *queue, CursorMsg *msg);
+void FUN_002bda30(CursorTask *task, s32 arg);
+
+/* Posts a cursor message carrying `pair` and `param` to the queue and remembers the pair. */
+static void cursorTaskPost(CursorTask *task, CursorPair pair, CursorParam *param)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  if (*(char *)(param_1 + 0x45c) != '\x02') {
-    if (*(char *)(param_1 + 0x45c) != '\x04') {
-      return;
+    MsgQueue *queue = FUN_002baed8();
+    CursorMsg *msg = (CursorMsg *)FUN_002b4f64(queue, 10);
+
+    msg->sender = queue->id;
+    msg->type = 0x25;
+    msg->target = task->target;
+    msg->pair = pair;
+    msg->kind = param->kind;
+    msg->flag = param->flag;
+    msg->value = param->value;
+    listAppendNode(queue, msg);
+    task->pair = pair;
+    task->sent = 1;
+}
+
+/* Advances the cursor task: in state 2 posts its current pair as a message, in state 4 resets. */
+void FUN_003807b0(CursorTask *task)
+{
+    switch (task->state) {
+    case 2:
+        cursorTaskPost(task, task->pair, &task->param);
+        task->state = 3;
+        break;
+    case 4:
+        FUN_002bda30(task, 0);
+        task->state = 0;
+        break;
     }
-    FUN_002bda30(param_1,0);
-    temp_v0 = 0;
-  }
-  else {
-    temp_v3 = *(unsigned int *)(param_1 + 0x450);
-    temp_v4 = *(unsigned int *)(param_1 + 0x454);
-    temp_v1 = FUN_002baed8();
-    temp_v2 = temp_v1;
-    FUN_002b4f64(temp_v1,10);
-    *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);
-    *(unsigned char *)(temp_v2 + 4) = 0x25;
-    *(int *)(temp_v2 + 0x10) = param_1 + 0xf4;
-    *(unsigned int *)(temp_v2 + 0x14) = temp_v3;
-    *(unsigned int *)(temp_v2 + 0x18) = temp_v4;
-    *(unsigned int *)(temp_v2 + 0x1c) = *(unsigned int *)(param_1 + 0x43c);
-    *(unsigned int *)(temp_v2 + 0x20) = (unsigned int)*(unsigned char *)(param_1 + 0x440);
-    *(unsigned int *)(temp_v2 + 0x24) = *(unsigned int *)(param_1 + 0x444);
-    listAppendNode(temp_v1,temp_v2);
-    *(unsigned int *)(param_1 + 0x450) = temp_v3;
-    *(unsigned int *)(param_1 + 0x454) = temp_v4;
-    *(unsigned char *)(param_1 + 0x45e) = 1;
-    temp_v0 = 3;
-  }
-  *(unsigned char *)(param_1 + 0x45c) = temp_v0;
-  return;
 }
 
 } /* extern "C" */

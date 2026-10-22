@@ -1,6 +1,7 @@
-#include "shard/Sys44e190.h"
+#include "status/StatusDown.h"
 
 extern "C" {
+extern StatusDownState *g_statusDown;
 
 void FUN_00317e34(void)
 {

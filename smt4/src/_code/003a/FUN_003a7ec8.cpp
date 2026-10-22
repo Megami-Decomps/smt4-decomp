@@ -1,65 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7ec8` (_code @ 0x3a7ec8, 0xd0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the entry id as menu + index * 32 + 0x5ac (this: + 0x5a8, #4) and branches to the shared "return 0" instead of movne for a pending error. */
+#include "common.h"
+
+namespace {
+struct PurchaseEntry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 id;
+    /* 0x06 */ u8 unk06[0x1a];
+};
+
+struct PurchaseMenu {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u8 selection[0x74];
+    /* 0x0094 */ s8 level;
+    /* 0x0095 */ u8 unk0095[0x510];
+    /* 0x05A5 */ u8 discounted;
+    /* 0x05A6 */ u8 unk05a6[2];
+    /* 0x05A8 */ PurchaseEntry entries[1280];
+    /* 0xA5A8 */ u8 unka5a8[8];
+    /* 0xA5B0 */ u8 error;
+};
+}
 
 extern "C" {
 
-int FUN_0029ce60(unsigned int, int, int, int, int);
-int devilGetRecord(int);
+s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
+s32 flaggedValueHolderGetTotal(void *holder);
+void *devilGetRecord(u16 id);
+u32 gameSlotTableGetHeader(void);
+s32 partyHasStoredDemon(u16 id);
+s32 FUN_0029c1fc(void);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern unsigned int gameSlotTableGetHeader(void);
-extern int flaggedValueHolderGetTotal(int);
-extern int partyHasStoredDemon(unsigned int);
-extern int FUN_0029c1fc(void);
-/* Supplied declaration required: FUN_0029ce60. */
-/* Supplied declaration required: devilGetRecord. */
-
-
-unsigned int FUN_003a7ec8(int param_1,unsigned int param_2)
-
+/* Check whether the demon can be bought; on failure record why (1 money, 2 already stored, 3 not allowed, 5 no room) and return 0. */
+s32 FUN_003a7ec8(PurchaseMenu *menu, u16 id)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v1 = param_2;
-  FUN_0029ce60(param_2,*(unsigned char *)(param_1 + 0x5a5),0,'c' < *(char *)(param_1 + 0x94),0);
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  if (*(char *)(param_1 + 0x5a5) == '\0') {
-    devilGetRecord(*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
-  }
-  temp_v3 = gameSlotTableGetHeader();
-  if (temp_v3 < temp_v1) {
-    temp_v0 = '\x01';
-  }
-  else {
-    temp_v2 = partyHasStoredDemon(param_2);
-    if (temp_v2 != 0) {
-      temp_v0 = '\x02';
+    u32 price = FUN_0029ce60(id, menu->discounted, 0, menu->level >= 100, 0);
+    PurchaseEntry *entry = &menu->entries[flaggedValueHolderGetTotal(menu->selection)];
+    u8 error;
+
+    if (!menu->discounted) {
+        devilGetRecord(entry->id);
     }
-    else if (*(char *)(param_1 + 0x5a5) == '\x02') {
-      temp_v0 = '\x03';
+    if (price > gameSlotTableGetHeader()) {
+        error = 1;
+    } else if (partyHasStoredDemon(id)) {
+        error = 2;
+    } else if (menu->discounted == 2) {
+        error = 3;
+    } else if (FUN_0029c1fc() == -1) {
+        error = 5;
+    } else {
+        return menu->error == 0;
     }
-    else {
-      temp_v2 = FUN_0029c1fc();
-      if (temp_v2 != -1) {
-        if (*(char *)(param_1 + 0xa5b0) != '\0') {
-          return 0;
-        }
-        return 1;
-      }
-      temp_v0 = '\x05';
-    }
-  }
-  *(char *)(param_1 + 0xa5b0) = temp_v0;
-  return 0;
+    menu->error = error;
+    return 0;
 }
 
 } /* extern "C" */

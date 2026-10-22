@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
+extern MessageGlobalsA g_messageMain;
 
 u32 panelSetMode3(u32 value, u8 flag)
 {
-    Panel85 *panel = g_messageMain.panel;
+    MessagePanelA *panel = g_messageMain.panel;
 
     panel->state = 3;
     panel->unk80 = value;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00246570(int *);
+int aocItemGetPrice(int *);
 int scrSetResult(void);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-/* Supplied declaration required: FUN_00246570. */
+/* Supplied declaration required: aocItemGetPrice. */
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int scrGetArg(unsigned int);
 extern int aocEntryGetKind(void);
@@ -40,7 +40,7 @@ unsigned int FUN_002febf0(void)
     temp_v0 = resolveWeightedItemChoice(temp_v0,0xffff,0xffff,0);
   }
   temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),(short)temp_v0);
-  FUN_00246570(&temp_v2);
+  aocItemGetPrice(&temp_v2);
   scrSetResult();
   return 1;
 }

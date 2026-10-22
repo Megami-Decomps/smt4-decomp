@@ -1,10 +1,8 @@
 /* NON_MATCHING: retail loads the action-table pointer through a pooled 0x1e98 offset; typed member access emits two ADDs and changes index-setup scheduling. */
 #include "battle/btlMain.h"
+#include "battle/btlAction.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 
-struct BtlActionRecord {
-    u32 words[0x114 / 4];
-};
 
 extern "C" {
 BtlMainState* btlGetMainState(void);

@@ -36,14 +36,14 @@ u32 mapIfActivateRecord(u8 enabled, s32 index)
     MapIfState *state = g_mapIf;
     MapIfActivation *activation = reinterpret_cast<MapIfActivation *>(state);
     activation->enabled = enabled;
-    Rec194 *record = index == -1 ? NULL : &mapIfGetRecords(g_mapIf)[index];
+    MapIfRecord *record = index == -1 ? NULL : &g_mapIf->records[index];
     MapActivationRecord *details = reinterpret_cast<MapActivationRecord *>(record);
     if (index != -1 && record->active && DAT_004474f4->destination != details->destination)
         activation->enabled = 0;
     if (activation->enabled == 0) {
-        Rec194 *records = mapIfGetRecords(state);
+        MapIfRecord *records = state->records;
         for (s32 slot = 0; slot < 128; ++slot) {
-            Rec194 *entry = &records[slot];
+            MapIfRecord *entry = &records[slot];
             if (!entry->active)
                 continue;
             s32 category = entry->display.category;

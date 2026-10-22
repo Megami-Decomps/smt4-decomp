@@ -1,69 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013f048` (_code @ 0x13f048, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Exponent writes merge into STM; the shared encoder uses masked indexing and the normalized loop uses an indexed store. */
+#include "shard/W6_W6Match8_GpuDepth.h"
 
-extern "C" {
+extern "C" u32 DAT_0063f948[256];
 
-int VectorSignedToFloat(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Initializes exponent conversion and normalized-byte float24 lookup tables. */
+extern "C" void FUN_0013f048(void)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-
-
-void FUN_0013f048(void)
-
-{
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  unsigned int *puVar4;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  temp_v0 = 0;
-  temp_v2 = 0x80;
-  piVar3 = (int *)0x63f544;
-  do {
-    temp_v3 = temp_v0 - 0x3f;
-    piVar3[1] = (temp_v0 - 0x40) * 0x10000;
-    temp_v2 = temp_v2 - 1;
-    temp_v0 = temp_v0 + 2;
-    piVar3 = piVar3 + 2;
-    *piVar3 = temp_v3 * 0x10000;
-  } while (temp_v2 != 0);
-  temp_v0 = 0;
-  temp_v2 = 0x100;
-  puVar4 = (unsigned int *)0x63f948;
-  do {
-    temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = temp_v4 * 0.003921569f;
-    if (romwright_fabs_4(temp_v4) == 0.0f) {
-      temp_v1 = ((unsigned int)temp_v4 >> 0x1f) << 0x17;
+    for (s32 i = 0; i < 256; ++i) {
+        g_gpuFloat24ExponentTable[i] = (i - 64) * 65536;
     }
-    else {
-      temp_v1 = (((unsigned int)temp_v4 & 0x7fffff) >> 7) | (((unsigned int)temp_v4 >> 0x1f) << 0x17) |
-              *(unsigned int *)(((unsigned int)romwright_fabs_4(temp_v4) >> 0x17) * 4 + 0x63f548);
+    for (s32 i = 0; i < 256; ++i) {
+        DAT_0063f948[i] = gpuEncodeFloat24(static_cast<f32>(i) * (1.0f / 255.0f));
     }
-    temp_v2 = temp_v2 - 1;
-    temp_v0 = temp_v0 + 1;
-    *puVar4 = temp_v1;
-    puVar4 = puVar4 + 1;
-  } while (temp_v2 != 0);
-  return;
 }
-
-} /* extern "C" */

@@ -1,58 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00310730` (_code @ 0x310730, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps a separate zero register for unk7F and loads 11/the text buffer address in a different order; logic matches. */
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
-int pairSetFirstResetSecond(int, int);
-int FUN_002bd954(int, int, unsigned int, int, int);
-int FUN_002bee58(int, int);
+u32 scrGetArg(u32 index);
+u32 *gameGetSlotTable(void);
+void FUN_002bd954(void *record, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
+void pairSetFirstResetSecond(void *pair, s32 first);
+void FUN_002bee58(void *widget, s32 mode);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char g_messageMain; /* 0x43e188 */
-
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int *gameGetSlotTable(void);
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-
-
-unsigned int FUN_00310730(void)
-
+/* Script command: open the banner message window with the text id from argument 0. */
+u32 FUN_00310730(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x7d) = 1;
-  *(unsigned char *)(temp_v0 + 0x7c) = 1;
-  puVar3 = (unsigned int *)gameGetSlotTable();
-  temp_v2 = *puVar3;
-  *(unsigned int *)(temp_v0 + 0x6c) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x78) = temp_v2;
-  *(unsigned char *)(temp_v0 + 0x7f) = 0;
-  *(unsigned char *)(temp_v0 + 0x80) = 0;
-  *(unsigned char *)(temp_v0 + 0xa1) = 0;
-  temp_v3 = temp_v0 + 0x754;
-  FUN_002bd954(temp_v3,0xe,0xffffffff,temp_v0 + 0xa4,0xb);
-  pairSetFirstResetSecond(temp_v3,0);
-  FUN_002bee58(temp_v3,6);
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x81) = 0;
-  *(unsigned int *)(temp_v0 + 0x70) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x74) = temp_v1;
-  *(unsigned char *)(temp_v0 + 0x80) = 1;
-  return 1;
+    u32 textId = scrGetArg(0);
+    MessagePanel *panel = g_messageMain.banner;
+    u32 slot;
+
+    panel->unk7D = 1;
+    panel->unk7C = 1;
+    slot = *gameGetSlotTable();
+    panel->unk6C = slot;
+    panel->unk78 = slot;
+    panel->unk7F = 0;
+    panel->unk80 = 0;
+    panel->unkA1 = 0;
+    FUN_002bd954(panel->widget754, 14, -1, panel->textBuffer, 11, 1.0f);
+    pairSetFirstResetSecond(panel->widget754, 0);
+    FUN_002bee58(panel->widget754, 6);
+
+    panel = g_messageMain.banner;
+    panel->unk81 = 0;
+    panel->unk70 = textId;
+    panel->unk74 = textId;
+    panel->unk80 = 1;
+    return 1;
 }
 
 } /* extern "C" */

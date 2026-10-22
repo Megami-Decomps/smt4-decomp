@@ -1,46 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00245420` (_code @ 0x245420, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: payload stack loads and saved registers differ. */
+#include "battle/btlReflect.h"
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
 
+struct BtlUnitEntry;
 extern "C" {
+ReflectAction *FUN_0022699c(ReflectContext *context, s16 actorId, u32 flags, u32 secondaryId);
+BtlMainState *btlGetMainState();
+BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 
-int FUN_0022699c(int, int, int, unsigned int);
-int btlMainFindEntryByListedId(int, int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-
-
-unsigned int
-FUN_00245420(short param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5,
-            int param_6,int param_7)
-
+u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 value,
+                 u32 parameter, s32 lookupId, s32 extraTarget)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x2c;
-  *(int *)(temp_v0 + 0x14) = param_3;
-  *(unsigned int *)(temp_v0 + 0x28) = param_4;
-  *(unsigned int *)(temp_v0 + 0x4c) = param_5;
-  if (-1 < param_6) {
-    temp_v0 = btlGetMainState();
-    btlMainFindEntryByListedId(temp_v0,(int)*(short *)(param_3 + 0x62));
-    if ((temp_v0 != 0) && (-1 < param_7)) {
-      temp_v1 = g_btlActionReflect;
-      FUN_0022699c(g_btlActionReflect,(int)(short)param_6,0,param_2);
-      *(unsigned char *)(temp_v1 + 4) = 6;
-      *(int *)(temp_v1 + 0x18) = temp_v0;
-      *(int *)(temp_v1 + 0x28) = param_7;
+    ReflectAction *action = FUN_0022699c(g_btlActionReflect, actorId, 0, secondaryId);
+    action->kind = 44;
+    action->target = (u32)target;
+    action->value = value;
+    action->parameter = parameter;
+    if (lookupId >= 0) {
+        BtlUnitEntry *unit = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
+        if (unit && extraTarget >= 0) {
+            action = FUN_0022699c(g_btlActionReflect, lookupId, 0, secondaryId);
+            action->kind = 6;
+            action->wordValues.unk18 = (u32)unit;
+            action->value = extraTarget;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

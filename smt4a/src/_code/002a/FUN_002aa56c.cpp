@@ -56,7 +56,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0020caec. */
-extern int FUN_0022e9b8(void);
+extern int uniteGetWork(void);
 extern int recordGetModeForId(unsigned int);
 extern int FUN_002a4b28(unsigned short);
 extern unsigned int computeCountLimit(void);
@@ -89,7 +89,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   iStack_30 = param_2;
   uStack_2c = param_3;
   temp_v10 = param_4;
-  temp_v1 = FUN_0022e9b8();
+  temp_v1 = uniteGetWork();
   if (temp_v1 == 0) {
     return;
   }

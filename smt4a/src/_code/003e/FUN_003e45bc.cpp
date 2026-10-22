@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00186f58(void);
+int dataFindKeyedRecordWithOverrides(void);
 int FUN_002f0bd8(void);
 int updateUnlockedEntryCount(void);
 int gameFlagSetValue(...);
 
-/* Supplied declaration required: FUN_00186f58. */
+/* Supplied declaration required: dataFindKeyedRecordWithOverrides. */
 /* Supplied declaration required: FUN_002f0bd8. */
 extern int gameDataBlockGetArea2D68(void);
 extern int FUN_003e4230(unsigned int);
@@ -38,10 +38,10 @@ unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
       *pbVar4 = *pbVar4 | temp_v0;
       pbVar4[0x12] = temp_v0 | pbVar4[0x12];
       updateUnlockedEntryCount();
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
       FUN_002f0bd8();
       temp_v3 = param_1;
-      FUN_00186f58();
+      dataFindKeyedRecordWithOverrides();
       if (*(char *)(temp_v3 + 0x22) == '\0') {
         temp_v1 = temp_v1 + (*(unsigned short *)(temp_v3 + 0x2a) & 0x3f) * 2;
         *(short *)(temp_v1 + 0x24) = *(short *)(temp_v1 + 0x24) + 1;

@@ -1,29 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c18e4` (_code @ 0x2c18e4, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r2, [pc, #156] differs from recovered ldrb r1, [r4, #476]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int FUN_002b634c(unsigned int, int);
+struct ResetStateView {
+    u8 unk0000[0x52c]; // 0x0000
+    u32 unk052C;       // 0x052c
+    u8 unk0530[0xc9c]; // 0x0530
+    f32 unk11CC[4];    // 0x11cc
+    u8 unk11DC;        // 0x11dc
+};
 
-/* Supplied declaration required: FUN_002b634c. */
+} // namespace
 
+extern "C" s32 FUN_002b634c(u32 target, const f32* values);
 
-void FUN_002c18e4(int param_1)
-
+// Restore the four values to unity when needed, notify the target, and clear the flag.
+extern "C" void FUN_002c18e4(ResetStateView* state)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((((*(char *)(param_1 + 0x11dc) != '\0') || (*(float *)(param_1 + 0x11cc) != 1.0f)) ||
-      (*(float *)(param_1 + 0x11d0) != 1.0f)) ||
-     ((*(float *)(param_1 + 0x11d4) != 1.0f || (*(float *)(param_1 + 0x11d8) != 1.0f)))) {
-    *(unsigned int *)(param_1 + 0x11cc) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x11d0) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x11d4) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x11d8) = 0x3f800000;
-    FUN_002b634c(*(unsigned int *)(param_1 + 0x52c),param_1 + 0x11cc);
-  }
-  *(unsigned char *)(param_1 + 0x11dc) = 0;
-  return;
+    if (state->unk11DC != 0 ||
+        state->unk11CC[0] != 1.0f ||
+        state->unk11CC[1] != 1.0f ||
+        state->unk11CC[2] != 1.0f ||
+        state->unk11CC[3] != 1.0f) {
+        state->unk11CC[0] = 1.0f;
+        state->unk11CC[1] = 1.0f;
+        state->unk11CC[2] = 1.0f;
+        state->unk11CC[3] = 1.0f;
+        FUN_002b634c(state->unk052C, state->unk11CC);
+    }
+    state->unk11DC = 0;
 }
-
-} /* extern "C" */

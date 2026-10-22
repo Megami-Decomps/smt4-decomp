@@ -1,59 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff7ac` (_code @ 0x2ff7ac, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has an 88-byte frame with the matrix at sp+24 and the vector at sp+8 (8 more bytes, keeps the matrix address in r6); this build packs a 76-byte frame. */
+#include "common.h"
+
+struct XformVec21a1a4 {
+    /* 0x0 */ f32 x;
+    /* 0x4 */ f32 y;
+    /* 0x8 */ f32 z;
+};
+
+struct XformMtx21a1a4 {
+    /* 0x00 */ f32 m[4][4];
+};
+
+struct XformOwner21a1a4 {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 transform[1];
+};
 
 extern "C" {
 
-int mathMatrixApplyScale(unsigned char [72], int *, int);
-int FUN_002a1fb4(int, unsigned char [72], int);
-int FUN_002a2048(unsigned char [72], int *, int);
-int FUN_002b4c30(void);
-int matrix44SetIdentity(unsigned char [72]);
+void FUN_002b4c30(XformMtx21a1a4 *dest, const XformMtx21a1a4 *src);
+void matrix44SetIdentity(XformMtx21a1a4 *mtx);
+void mathMatrixApplyScale(XformMtx21a1a4 *mtx, const XformVec21a1a4 *scale, s32 order);
+void FUN_002a2048(XformMtx21a1a4 *mtx, const XformVec21a1a4 *translation, s32 order);
+void FUN_002a1fb4(void *dest, const XformMtx21a1a4 *mtx, s32 arg);
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_3_stack;
-
-/* Supplied declaration required: mathMatrixApplyScale. */
-/* Supplied declaration required: FUN_002a1fb4. */
-/* Supplied declaration required: FUN_002a2048. */
-/* Supplied declaration required: FUN_002b4c30. */
-/* Supplied declaration required: matrix44SetIdentity. */
-
-
-void FUN_002ff7ac(int param_1,int *param_2,int param_3)
-
+// Build base (or identity) x uniform scale x translation and store it into the owner's transform.
+void FUN_002ff7ac(XformOwner21a1a4 *owner, const XformVec21a1a4 *translation, const XformMtx21a1a4 *base,
+                  f32 scale)
 {
-/* irregular: irregular input(s): in_s0; 5 native warning(s); review required */
-  int in_s0;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [72];
-  
-  if (param_3 != 0) {
-    FUN_002b4c30();
-  }
-  else {
-    matrix44SetIdentity(temp_v3);
-  }
-  if (in_s0 != 0x3f800000) {
-    temp_v0 = in_s0;
-    temp_v1 = in_s0;
-    temp_v2 = in_s0;
-    mathMatrixApplyScale(temp_v3,&temp_v0,2);
-  }
-  if (param_2 != (int *)0x0) {
-    temp_v0 = *param_2;
-    temp_v1 = param_2[1];
-    temp_v2 = param_2[2];
-    FUN_002a2048(temp_v3,&temp_v0,2);
-  }
-  FUN_002a1fb4(param_1 + 0x10,temp_v3,0);
-  return;
+    XformMtx21a1a4 mtx;
+    XformVec21a1a4 vec;
+    if (base != NULL) {
+        FUN_002b4c30(&mtx, base);
+    } else {
+        matrix44SetIdentity(&mtx);
+    }
+    if (scale != 1.0f) {
+        vec.x = vec.y = vec.z = scale;
+        mathMatrixApplyScale(&mtx, &vec, 2);
+    }
+    if (translation != NULL) {
+        vec = *translation;
+        FUN_002a2048(&mtx, &vec, 2);
+    }
+    FUN_002a1fb4(owner->transform, &mtx, 0);
 }
 
 } /* extern "C" */

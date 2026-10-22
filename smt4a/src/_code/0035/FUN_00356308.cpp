@@ -1,4 +1,4 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
@@ -6,15 +6,14 @@ typedef struct TableEntry {
     /* 0x00 */ u8 data[0xC];
 } TableEntry;
 
-typedef struct AocSystem AocSystem;
 
-extern AocSystem *g_aocSystem;
+extern AocSystemA *g_aocSystem;
 
 u32 dataTableGet(u32 id, u32 section);
 u32 dataTableGetCount(u32 table);
 TableEntry *dataTableGetEntries(void);
-u32 FUN_0046c35c(AocSystem *aoc, s32 id, s32 section);
-TableEntry *FUN_0046dd38(AocSystem *aoc, u32 index);
+u32 FUN_0046c35c(AocSystemA *aoc, s32 id, s32 section);
+TableEntry *FUN_0046dd38(AocSystemA *aoc, u32 index);
 
 /* Returns entry `index` of data table 0x29, continuing into the add-on content table past its end (NULL when out of range). */
 TableEntry *FUN_00356308(u32 index)

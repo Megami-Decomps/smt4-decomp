@@ -1,53 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cc754` (_code @ 0x3cc754, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adjacent option arrays lose merged-global address arithmetic and copy-buffer registers differ. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "AsdSDK/EffectEditorSelectionTransfer.h"
 
 extern "C" {
+extern EffectSelectionContext DAT_0059e9a8;
+extern EffectEditorSelectionTransfer DAT_00634bc0;
+extern EffectEditorOptions DAT_0059e858;
+extern const u8 DAT_0059e738[];
+extern const u8 DAT_0059e780[];
+void *linkedFindItemByIndex(void *list, s32 index);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-int rt_memcpy_w(...);
-
-extern unsigned char DAT_0059dbe6; /* 0x59dbe6 */
-extern int DAT_0059dbec; /* 0x59dbec */
-extern unsigned int DAT_0059dbf4; /* 0x59dbf4 */
-extern unsigned char DAT_0059e738; /* 0x59e738 */
-extern unsigned char DAT_0059e780; /* 0x59e780 */
-extern int DAT_0059e864; /* 0x59e864 */
-extern unsigned char *DAT_0059e86c; /* 0x59e86c */
-extern unsigned int DAT_0059e870; /* 0x59e870 */
-extern int DAT_0059e9b4; /* 0x59e9b4 */
-extern unsigned char DAT_00634bc0; /* 0x634bc0 */
-extern unsigned int DAT_00634c28; /* 0x634c28 */
-extern unsigned char DAT_00634d20; /* 0x634d20 */
-
-extern unsigned int linkedFindItemByIndex(unsigned int, int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_003cc754(unsigned int param_1)
-
+u32 FUN_003cc754(u32 result)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
-  rt_memcpy_w(temp_v0,&DAT_00634bc0,0x90);
-  rt_memcpy_w(&DAT_00634d20,&DAT_00634bc0,0x80);
-  DAT_0059dbe6 = 1;
-  if ((DAT_00634c28 & 2) != 0) {
-    DAT_0059e86c = &DAT_0059e738;
-    DAT_0059e870 = 3;
-    if (DAT_0059e864 >= 4) {
-      DAT_0059e864 = 0;
+    void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
+        g_effectEditor.selection.index + DAT_0059e9a8.index);
+    rt_memcpy_w(item, &DAT_00634bc0.working, sizeof(DAT_00634bc0.working));
+    rt_memcpy_w(DAT_00634bc0.saved, &DAT_00634bc0.working, sizeof(DAT_00634bc0.saved));
+    g_effectEditor.unk00[6] = 1;
+    if (DAT_00634bc0.working.flags & 2) {
+        DAT_0059e858.options = DAT_0059e738;
+        DAT_0059e858.limit = 3;
+        if (DAT_0059e858.index > 3) {
+            DAT_0059e858.index = 0;
+        }
+    } else {
+        DAT_0059e858.options = DAT_0059e780;
+        DAT_0059e858.limit = 9;
+        if (DAT_0059e858.index == 0) {
+            DAT_0059e858.index = 1;
+        }
     }
-  }
-  else {
-    DAT_0059e86c = &DAT_0059e780;
-    DAT_0059e870 = 9;
-    if (DAT_0059e864 == 0) {
-      DAT_0059e864 = 1;
-    }
-  }
-  return param_1;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -17,7 +17,7 @@ extern u32 eventTexGetCurrent(void);
 extern s32 jobIsValid(void);
 extern JobWork *jobGetWork(u32 job);
 extern s32 scrGetCommandFrame(void);
-extern void FUN_003bb088(u32 job);
+extern void eventTexRemoveHandle(u32 job);
 extern void jobStop(u32 job, s32 arg);
 
 /* Script step: while the job is valid, stops it once its state is 1; otherwise starts it moving
@@ -30,7 +30,7 @@ s32 scrCommEventTextureMoveBackward(void)
         JobWork *work = jobGetWork(job);
 
         if (work->state == 1) {
-            FUN_003bb088(job);
+            eventTexRemoveHandle(job);
             jobStop(job, 0);
             return 1;
         }

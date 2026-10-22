@@ -8,7 +8,7 @@ int dialogOpen(...);
 int placeWinStartText(...);
 int FUN_00215978(...);
 int placeWinSetValue(...);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int FUN_004b7d88(...);
 
 typedef struct fn_004b8228_arg0 fn_004b8228_arg0;
@@ -36,7 +36,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00215978. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: placeWinSetValue. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: FUN_004b7d88. */
 
 
@@ -51,7 +51,7 @@ void FUN_004b8228(fn_004b8228_arg0 *param_1)
     FUN_004b7d88(param_1);
     FUN_00215978(0);
     dialogOpen(0);
-    FUN_002a49e4(*(unsigned int *)&param_1->field_0x113c,
+    infoWinSetText(*(unsigned int *)&param_1->field_0x113c,
                  *(unsigned char *)((int)param_1->field_0x1118 + 0x3f));
     param_1->field_0x2c = 0;
     param_1->field_0x28 = 5;

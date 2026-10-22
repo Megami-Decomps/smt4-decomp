@@ -4,7 +4,7 @@ extern "C" {
 
 u32 FUN_00295cec(void)
 {
-    return *(u32 *)(g_gameDataBlocks.unk04 + 0x9870);
+    return g_gameDataBlocks.saveBlock->unk09870;
 }
 
 } /* extern "C" */

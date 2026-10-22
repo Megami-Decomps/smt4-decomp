@@ -1,56 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019c920` (_code @ 0x19c920, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail mov r4, #0 differs from recovered mov ip, #0. */
+#include "common.h"
 
-extern "C" {
+struct SortedNodeView {
+    u32 key;                         // 0x00
+    u8 unk04[8];                     // 0x04
+    SortedNodeView* previous;        // 0x0C
+    SortedNodeView* next;            // 0x10
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
+struct SortedListView {
+    SortedNodeView* head;            // 0x00
+    SortedNodeView* tail;            // 0x04
+    u32 count;                       // 0x08
+};
 
-
-void FUN_0019c920(unsigned int *param_1,unsigned int *param_2)
-
+// Insert in ascending unsigned-key order, ahead of existing equal-key nodes.
+extern "C" void FUN_0019c920(SortedListView* list, SortedNodeView* node)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)param_1[1];
-  if (puVar1 == (unsigned int *)0x0) {
-    *param_1 = (unsigned int)param_2;
-    param_1[1] = (unsigned int)param_2;
-    param_2[3] = 0;
-    param_2[4] = 0;
-  }
-  else {
-    do {
-      if (*puVar1 < *param_2) {
-        if (puVar1 != (unsigned int *)0x0) {
-          temp_v0 = puVar1[4];
-          puVar1[4] = (unsigned int)param_2;
-          param_2[3] = (unsigned int)puVar1;
-          param_2[4] = temp_v0;
-          if (temp_v0 == 0) {
-            param_1[1] = (unsigned int)param_2;
-          }
-          else {
-            *(unsigned int **)(temp_v0 + 0xc) = param_2;
-          }
-          param_1[2] = param_1[2] + 1;
-          return;
-        }
-        break;
-      }
-      puVar1 = (unsigned int *)puVar1[3];
-    } while (puVar1 != (unsigned int *)0x0);
-    param_2[3] = 0;
-    param_2[4] = *param_1;
-    *param_1 = (unsigned int)param_2;
-    *(unsigned int **)(param_2[4] + 0xc) = param_2;
-  }
-  param_1[2] = param_1[2] + 1;
-  return;
-}
+    SortedNodeView* cursor = list->tail;
+    if (cursor == 0) {
+        list->head = node;
+        list->tail = node;
+        node->previous = 0;
+        node->next = 0;
+    } else {
+        do {
+            if (node->key > cursor->key) {
+                break;
+            }
+            cursor = cursor->previous;
+        } while (cursor != 0);
 
-} /* extern "C" */
+        if (cursor != 0) {
+            SortedNodeView* successor = cursor->next;
+            cursor->next = node;
+            node->previous = cursor;
+            node->next = successor;
+            if (successor == 0) {
+                list->tail = node;
+            } else {
+                successor->previous = node;
+            }
+        } else {
+            node->previous = 0;
+            node->next = list->head;
+            list->head = node;
+            node->next->previous = node;
+        }
+    }
+    ++list->count;
+}

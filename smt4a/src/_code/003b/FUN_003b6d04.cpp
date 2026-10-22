@@ -1,61 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6d04` (_code @ 0x3b6d04, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only (r5-r9 rotated). Retail addresses the texture array as g_eventEffect+0x1c, likely a separate global of the original unit placed after it. */
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(unsigned int *);
-int asdTMTexTableReleaseNode(unsigned int, unsigned int);
-int asdTMTexTableFreeEntry(unsigned int);
+/* A texture an event effect holds: its table node and indexed entry. */
+typedef struct EventEffectTexture {
+    /* 0x00 */ u32 table;
+    /* 0x04 */ u32 node;
+    /* 0x08 */ u8 nodeLoaded;
+    /* 0x09 */ u8 entryLoaded;
+    /* 0x0A */ u8 unk0A[2];
+} EventEffectTexture;
 
-extern unsigned int *g_eventEffect; /* 0x57f3b4 */
-extern unsigned int DAT_0057f3d0; /* 0x57f3d0 */
-extern unsigned int DAT_0057f3d4; /* 0x57f3d4 */
+typedef struct EventEffectWork {
+    /* 0x00 */ u32 job;
+} EventEffectWork;
 
-/* Supplied declaration required: jobStop. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-extern int textureGetIndexedResource(unsigned int);
+/* The event effect state: the running work and its two textures. */
+typedef struct EventEffectState {
+    /* 0x00 */ EventEffectWork *work;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ EventEffectTexture textures[2];
+} EventEffectState;
 
+extern EventEffectState g_eventEffect;
 
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+void *textureGetIndexedResource(u32 table);
+void asdTMTexTableFreeEntry(u32 table);
+void jobStop(u32 job, s32 arg);
+void asdMemFree(void *ptr);
+
+/* Releases the event effect's textures, stops its job and frees its work. */
 void FUN_003b6d04(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = g_eventEffect;
-  temp_v1 = 0;
-  do {
-    if (*(char *)(temp_v1 * 0xc + 0x57f3d8) != '\0') {
-      temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0057f3d0)[temp_v1 * 3],(&DAT_0057f3d4)[temp_v1 * 3]);
-      if (temp_v0 != 0) {
-        asdTMTexTableReleaseNode((&DAT_0057f3d0)[temp_v1 * 3],(&DAT_0057f3d4)[temp_v1 * 3]);
-      }
-      *(unsigned char *)(temp_v1 * 0xc + 0x57f3d8) = 0;
+    EventEffectWork *work = g_eventEffect.work;
+    EventEffectTexture *textures = g_eventEffect.textures;
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        if (textures[i].nodeLoaded) {
+            if (asdTMTexTableNodeIsLoaded(textures[i].table, textures[i].node)) {
+                asdTMTexTableReleaseNode(textures[i].table, textures[i].node);
+            }
+            textures[i].nodeLoaded = 0;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 2);
-  temp_v1 = 0;
-  do {
-    if (*(char *)(temp_v1 * 0xc + 0x57f3d9) != '\0') {
-      temp_v0 = textureGetIndexedResource((&DAT_0057f3d0)[temp_v1 * 3]);
-      if (temp_v0 != 0) {
-        asdTMTexTableFreeEntry((&DAT_0057f3d0)[temp_v1 * 3]);
-      }
-      *(unsigned char *)(temp_v1 * 0xc + 0x57f3d9) = 0;
+    for (i = 0; i < 2; i++) {
+        if (textures[i].entryLoaded) {
+            if (textureGetIndexedResource(textures[i].table) != NULL) {
+                asdTMTexTableFreeEntry(textures[i].table);
+            }
+            textures[i].entryLoaded = 0;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 2);
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  g_eventEffect = (unsigned int *)0x0;
-  return;
+    jobStop(work->job, 0);
+    asdMemFree(work);
+    g_eventEffect.work = NULL;
 }
 
 } /* extern "C" */

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00250798(void);
+int uiQuestLoadResources(void);
 int FUN_0028fe0c(int, int);
 int timerStart(int, int);
 
 extern int g_uiQuest; /* 0x43dd50 */
 
-/* Supplied declaration required: FUN_00250798. */
+/* Supplied declaration required: uiQuestLoadResources. */
 /* Supplied declaration required: FUN_0028fe0c. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(void);
@@ -27,7 +27,7 @@ void FUN_002cf780(void)
   
   temp_v0 = g_uiQuest;
   *(unsigned char *)(g_uiQuest + 0x5c4) = 1;
-  FUN_00250798();
+  uiQuestLoadResources();
   temp_v1 = FUN_0029efc0();
   temp_v2 = FUN_0029efa8(temp_v0 + 0x5fc);
   FUN_0028fe0c(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x6c4),1);

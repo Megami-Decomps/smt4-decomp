@@ -1,6 +1,7 @@
-#include "shard/Sys43e188.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
 extern u32 scrGetArg(u32 index);
 extern u32 scrGetCommandFrame(void);
@@ -13,7 +14,7 @@ void scrShowChoiceInWindow(u32 messageWindow)
     u32 frame = scrGetCommandFrame();
 
     if (g_messageMain.state != NULL) {
-        g_messageMain.state->unkA11 = 0x14;
+        g_messageMain.state->displayMode = 0x14;
     }
     FUN_002866b4(messageWindow, arg, frame, 11, 0, 0);
 }

@@ -22,8 +22,8 @@ void FUN_003bc248(DebugHelpText *help, s32 index, s32 first, s32 second);
 void *dataTable02GetEntryByIndex(s32 index);
 void FUN_003bbfdc(DebugHelpText *help, void *entry);
 u32 entryTableCallSlot3(s32 slot);
-u32 FUN_003bc198(s32 index);
-u16 FUN_0025c05c(s32 index);
+u32 dataTable02HasFlaggedItem(s32 index);
+u16 spriteTemplateGetPreferredDevilId(s32 index);
 void textFormatBuffer(char *destination, const char *format, ...);
 }
 
@@ -58,8 +58,8 @@ extern "C" void FUN_003c2fe8(void *, s32 index)
     }
     if (g_btlDebugState.category == 0) {
         DebugHelpLabels labels = DAT_004004a8;
-        textDrawDefaultString(labels.names[FUN_003bc198(index)], 256.0f, 128.0f);
-        const char *leader = FUN_002bd06c(FUN_0025c05c(index));
+        textDrawDefaultString(labels.names[dataTable02HasFlaggedItem(index)], 256.0f, 128.0f);
+        const char *leader = FUN_002bd06c(spriteTemplateGetPreferredDevilId(index));
         char text[32] = {};
         textFormatBuffer(text, "\x83\x8a\x81\x5b\x83\x5f\x81\x5b\x81\x46%s", leader);
         textDrawDefaultString(text, 256.0f, static_cast<f32>(spacing) + 128.0f);

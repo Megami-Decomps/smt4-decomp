@@ -1,77 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003edbd0` (_code @ 0x3edbd0, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail keeps state in r6, &units in r8 and the info pointer in r0 through the slot loop; ours uses r8/r6 and copies info to r3 (one more saved register). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003f0e20(...);
+#define BTL_UNIT_FLAG_ACTIVE 0x01
+#define BTL_UNIT_FLAG_TRACKED 0x80
 
-typedef struct fn_003edbd0_arg0 fn_003edbd0_arg0;
-struct fn_003edbd0_arg0 {
-    unsigned char pad_0x0[0x6e];
-    ushort field_0x6e; /* +0x6e */
-    unsigned char pad_0x70[0xf6];
-    ushort field_0x166; /* +0x166 */
-    unsigned char pad_0x168[0x8];
-    undefined4 field_0x170; /* +0x170 */
-    unsigned char pad_0x174[0x1d60];
-    int field_0x1ed4; /* +0x1ed4 */
-    unsigned char pad_0x1ed8[0x120];
-    int field_0x1ff8; /* +0x1ff8 */
-};
+/* A tracking slot (0x18 bytes); free while owner and unitId are -1, kind 0 and value -1. */
+typedef struct BtlTrackSlot {
+    /* 0x00 */ s16 owner;
+    /* 0x02 */ s16 unitId;
+    /* 0x04 */ u16 kind;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ s32 value;
+    /* 0x0C */ u8 unk0C[0xC];
+} BtlTrackSlot;
 
-/* Supplied declaration required: FUN_003f0e20. */
+/* A battle unit (0x1D0 bytes): only the fields this unit reads are named. */
+typedef struct BtlTrackUnit {
+    /* 0x000 */ u8 unk000[0x50];
+    /* 0x050 */ u32 flags;
+    /* 0x054 */ u8 unk054[0x16];
+    /* 0x06A */ s16 id;
+    /* 0x06C */ u8 unk06C[0x164];
+} BtlTrackUnit;
 
+typedef struct BtlTrackSource {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 kind;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 value;
+} BtlTrackSource;
 
-void FUN_003edbd0(fn_003edbd0_arg0 *param_1)
+/* What FUN_003f0e20 returns for a unit id. */
+typedef struct BtlTrackInfo {
+    /* 0x000 */ u8 unk000[0x6E];
+    /* 0x06E */ s16 owner;
+    /* 0x070 */ u8 unk070[0xF4];
+    /* 0x164 */ BtlTrackSource source;
+} BtlTrackInfo;
 
+typedef struct BtlTrackState {
+    /* 0x0000 */ u8 unk0000[0x1ED4];
+    /* 0x1ED4 */ BtlTrackUnit *units;
+    /* 0x1ED8 */ u8 unk1ED8[0x120];
+    /* 0x1FF8 */ BtlTrackSlot *slots;
+} BtlTrackState;
+
+BtlTrackInfo *FUN_003f0e20(BtlTrackState *state, s32 unitId);
+
+/* Gives every active tracked unit (4..53) a free tracking slot filled from its info. */
+void FUN_003edbd0(BtlTrackState *state)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  fn_003edbd0_arg0 *pfVar2;
-  unsigned short *puVar3;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  if (param_1->field_0x1ff8 != 0) {
-    temp_v2 = 4;
-    do {
-      temp_v3 = param_1->field_0x1ed4 + temp_v2 * 0x1d0;
-      if ((*(unsigned int *)(temp_v3 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v3 + 0x50) & 0x80) != 0) {
-        pfVar2 = param_1;
-        FUN_003f0e20(param_1,(int)*(short *)(temp_v3 + 0x6a));
-        temp_v1 = 0;
-        do {
-          puVar3 = (unsigned short *)(param_1->field_0x1ff8 + temp_v1 * 0x18);
-          temp_v0 = *puVar3;
-          temp_v5 = temp_v0 == 0xffff;
-          if (temp_v5) {
-            temp_v0 = puVar3[1];
-          }
-          if (temp_v5 && temp_v0 == 0xffff) {
-            temp_v4 = (unsigned int)puVar3[2];
-            temp_v5 = temp_v4 == 0;
-            if (temp_v5) {
-              temp_v4 = *(unsigned int *)(puVar3 + 4);
+    s32 i;
+    s32 j;
+
+    if (state->slots == NULL) {
+        return;
+    }
+    for (i = 4; i < 54; i++) {
+        BtlTrackUnit *unit = &state->units[i];
+
+        if ((unit->flags & BTL_UNIT_FLAG_ACTIVE) && (unit->flags & BTL_UNIT_FLAG_TRACKED)) {
+            BtlTrackInfo *info = FUN_003f0e20(state, unit->id);
+            BtlTrackSource *source = &info->source;
+
+            for (j = 0; j < 50; j++) {
+                BtlTrackSlot *slot = &state->slots[j];
+
+                if (slot->owner == -1 && slot->unitId == -1 && slot->kind == 0 && slot->value == -1) {
+                    slot->owner = info->owner;
+                    slot->unitId = unit->id;
+                    slot->kind = source->kind;
+                    slot->value = source->value;
+                    break;
+                }
             }
-            if (temp_v5 && temp_v4 == 0xffffffff) {
-              *puVar3 = pfVar2->field_0x6e;
-              puVar3[1] = *(unsigned short *)(temp_v3 + 0x6a);
-              puVar3[2] = pfVar2->field_0x166;
-              *(unsigned int *)(puVar3 + 4) = pfVar2->field_0x170;
-              break;
-            }
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 0x32);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x36);
-  }
-  return;
+        }
+    }
 }
 
 } /* extern "C" */

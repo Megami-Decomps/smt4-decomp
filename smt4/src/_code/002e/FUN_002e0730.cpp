@@ -1,53 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e0730` (_code @ 0x2e0730, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two visibility flags are materialized in r0 (movne first) where retail uses r1
+ * (moveq first) after reloading the model pointer into r0; the rest matches. */
+#include "common.h"
+
+struct TitleLogoModel {
+    /* 0x000 */ u8 unk000[0x120];
+    /* 0x120 */ s32 visible;
+};
+
+struct TitleLogoEffect {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ s32 visible;
+    /* 0x58 */ f32 frame;    /* wraps at 30 */
+    /* 0x5c */ f32 rotation; /* degrees, wraps at 360 */
+};
+
+struct TitleLogoWork {
+    /* 0x00 */ TitleLogoModel *model;
+    /* 0x04 */ TitleLogoEffect *effect;
+    /* 0x08 */ u8 mode;
+    /* 0x09 */ u8 unk09[0x23];
+    /* 0x2c */ u8 fade[4];
+    /* 0x30 */ s32 fadeState; /* 113: hidden */
+};
 
 extern "C" {
+TitleLogoWork *jobGetWork(u32 job);
+void FUN_002bf818(void *fade);
+void FUN_0034266c(TitleLogoModel *model);
 
-int FUN_002bf818(int *);
-int FUN_0034266c(int);
-
-/* Supplied declaration required: FUN_002bf818. */
-extern int *jobGetWork(void);
-/* Supplied declaration required: FUN_0034266c. */
-
-
-unsigned int FUN_002e0730(void)
-
+/* Job update: steps the fade, shows the logo unless faded out, and animates it by mode. */
+s32 FUN_002e0730(u32 job)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int *piVar2;
-  int temp_v1;
-  float temp_v2;
-  
-  piVar2 = (int *)jobGetWork();
-  FUN_002bf818(piVar2 + 0xb);
-  temp_v1 = piVar2[0xc];
-  *(unsigned int *)(*piVar2 + 0x120) = (unsigned int)(temp_v1 != 0x71);
-  *(unsigned int *)(piVar2[1] + 0x54) = (unsigned int)(temp_v1 != 0x71);
-  temp_v0 = (char)piVar2[2];
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 == '\x02') {
-        temp_v1 = piVar2[1];
-        temp_v2 = *(float *)(temp_v1 + 0x58) + 1.0f;
-        *(float *)(temp_v1 + 0x58) = temp_v2;
-        if ((int)temp_v2 >= 0x41f00000) {
-          *(float *)(temp_v1 + 0x58) = temp_v2 - 30.0f;
+    TitleLogoWork *work = jobGetWork(job);
+    FUN_002bf818(work->fade);
+    s32 fadeState = work->fadeState;
+    work->model->visible = fadeState != 113;
+    work->effect->visible = fadeState != 113;
+    switch (work->mode) {
+    case 0:
+        break;
+    case 1:
+        FUN_0034266c(work->model);
+        break;
+    case 2: {
+        TitleLogoEffect *effect = work->effect;
+        effect->frame += 1.0f;
+        if (effect->frame >= 30.0f) {
+            effect->frame -= 30.0f;
         }
-        temp_v2 = *(float *)(temp_v1 + 0x5c) + 12.0f;
-        *(float *)(temp_v1 + 0x5c) = temp_v2;
-        if ((int)temp_v2 >= 0x43b40001) {
-          *(float *)(temp_v1 + 0x5c) = temp_v2 - 360.0f;
+        effect->rotation += 12.0f;
+        if (effect->rotation > 360.0f) {
+            effect->rotation -= 360.0f;
         }
-      }
+        break;
     }
-    else {
-      FUN_0034266c(*piVar2);
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

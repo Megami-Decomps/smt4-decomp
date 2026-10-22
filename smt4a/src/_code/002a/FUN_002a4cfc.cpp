@@ -30,7 +30,7 @@ int FUN_00370d84(void);
 int texEntrySpritesLoad(void);
 int FUN_0038800c(...);
 int FUN_0038a694(void);
-int FUN_0039a638(void);
+int messageMainStartMenuAnimationIfEnabled(void);
 int loadSlotEnsureLoaded(...);
 
 int uiSpriteSetImageKeyframe(...);
@@ -128,7 +128,7 @@ extern int campCecEditIsStateSixteen(void);
 /* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0038a694. */
 /* Supplied declaration required: FUN_0038b548. */
-/* Supplied declaration required: FUN_0039a638. */
+/* Supplied declaration required: messageMainStartMenuAnimationIfEnabled. */
 /* Supplied declaration required: partyPanelSetHidden. */
 /* Supplied declaration required: FUN_003d386c. */
 extern int FUN_003da8f4(int, unsigned int);
@@ -468,7 +468,7 @@ void FUN_002a4cfc(void)
     *(unsigned int *)(temp_v3 + 0x1c) = 0x34;
     FUN_002e2404(2);
     messageDismissNumericBanner(1);
-    FUN_0039a638();
+    messageMainStartMenuAnimationIfEnabled();
     return;
   case 0x35:
     temp_v2 = gameDataBlocksGetSelectedValue();
@@ -478,7 +478,7 @@ void FUN_002a4cfc(void)
       campCecScriptStart(0x26);
       sysPlaySe(0x92);
       messageDismissNumericBanner(1);
-      FUN_0039a638();
+      messageMainStartMenuAnimationIfEnabled();
       uiSpriteSetImageKeyframe(temp_v3 + 0x1634,7,0);
       return;
     }
@@ -496,26 +496,26 @@ void FUN_002a4cfc(void)
     *(unsigned int *)(temp_v3 + 0x24) = 0x3d;
     FUN_002e2404(1);
     messageDismissNumericBanner(1);
-    FUN_0039a638();
+    messageMainStartMenuAnimationIfEnabled();
     uiSpriteSetImageKeyframe(temp_v3 + 0x1634,7,0);
     return;
   case 0x37:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x3b;
     FUN_002e2404(4);
     messageDismissNumericBanner(1);
-    FUN_0039a638();
+    messageMainStartMenuAnimationIfEnabled();
     return;
   case 0x38:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x3b;
     FUN_002e2404(5);
     messageDismissNumericBanner(1);
-    FUN_0039a638();
+    messageMainStartMenuAnimationIfEnabled();
     return;
   case 0x39:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x45;
     FUN_002e2404(6);
     messageDismissNumericBanner(1);
-    FUN_0039a638();
+    messageMainStartMenuAnimationIfEnabled();
     return;
   case 0x3a:
     temp_v2 = stateAtF4IsActive();

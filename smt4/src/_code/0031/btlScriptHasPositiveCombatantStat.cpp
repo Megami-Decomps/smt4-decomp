@@ -5,7 +5,7 @@
 extern "C" {
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 FUN_00249a54();
+u32 btlScriptResolveGroupArg();
 void FUN_002499fc(u32 group, s32 *first, s32 *count);
 BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
@@ -26,7 +26,7 @@ u32 btlScriptHasPositiveCombatantStat()
     scrGetArg(2);
     s32 first;
     s32 count;
-    FUN_002499fc(FUN_00249a54(), &first, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00230434(int, int);
+int listCursorSetPage(int, int);
 int cellListAppend(int, int, unsigned int, int, int);
 int dataTable17Sub1GetCount(void);
 int FUN_00233730(int, unsigned int, int, int, int);
@@ -26,7 +26,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00230434. */
+/* Supplied declaration required: listCursorSetPage. */
 /* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: dataTable17Sub1GetCount. */
 extern int dataTable17Sub1GetRecord(unsigned int *, unsigned int);
@@ -34,7 +34,7 @@ extern int dataTable17Sub1GetRecord(unsigned int *, unsigned int);
 extern unsigned int FUN_002ae3c0(short);
 extern unsigned long long FUN_002c0a2c(unsigned char, unsigned int, unsigned int);
 extern int gameTestIndexedAuxiliaryFlag(short);
-extern int FUN_003a0284(void);
+extern int questEvaluateUnlockConditions(void);
 /* Supplied declaration required: dataTable17Sub1ChildGetCount. */
 /* Supplied declaration required: dataTable17Sub1ChildGetEntries. */
 
@@ -118,7 +118,7 @@ unsigned int FUN_003a45fc(int param_1)
     do {
       temp_v1 = *(short *)(puVar7 + temp_v8 * 8);
       if (temp_v1 == 0) break;
-      temp_v3 = FUN_003a0284();
+      temp_v3 = questEvaluateUnlockConditions();
       if (temp_v3 != 0) {
         temp_v10 = 0;
         if ((temp_v3 == 2) && (temp_v3 = gameTestIndexedAuxiliaryFlag(temp_v1), temp_v3 == 0)) {
@@ -257,7 +257,7 @@ LAB_003a49e0:
       temp_v3 = param_1 + temp_v8 * 0x74;
       FUN_00233730(temp_v3 + 0x880,temp_v10,*(unsigned short *)(param_1 + temp_v8 * 0x1002 + 0x1c94),0,1);
       *(unsigned char *)(temp_v3 + 0x88d) = 1;
-      FUN_00230434(temp_v3 + 0x880,0);
+      listCursorSetPage(temp_v3 + 0x880,0);
       temp_v8 = temp_v8 + 1;
       if (temp_v8 >= 9) {
         return temp_v22;

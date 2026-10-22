@@ -22,7 +22,7 @@ int FUN_002bf380(...);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
-int FUN_0026242c(void);
+int btlSourceGetMaxHp(void);
 int FUN_00269bf0(void);
 int FUN_002888a8(...);
 int FUN_00288ddc(...);
@@ -89,7 +89,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0025765c. */
-/* Supplied declaration required: FUN_0026242c. */
+/* Supplied declaration required: btlSourceGetMaxHp. */
 /* Supplied declaration required: FUN_00269bf0. */
 /* Supplied declaration required: FUN_0026e6a0. */
 /* Supplied declaration required: messageKindForward. */
@@ -520,7 +520,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
       else {
         temp_v13 = gameGetPlayerData();
         temp_v12 = temp_v13;
-        FUN_0026242c();
+        btlSourceGetMaxHp();
         temp_v27 = (int)(short)temp_v12;
         temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
         temp_v18 = gameGetPlayerName();

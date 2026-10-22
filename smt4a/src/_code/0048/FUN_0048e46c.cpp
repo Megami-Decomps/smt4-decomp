@@ -79,7 +79,7 @@ extern int mapEntryGetKind(unsigned int);
 extern unsigned short mapEntryGetStatus(unsigned int);
 /* Supplied declaration required: mapEntryGetOrigin. */
 extern unsigned int FUN_003cd5f4(unsigned int);
-extern unsigned char FUN_0048b1bc(int context, float angle);
+extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 extern short *dataTable2BType3GetEntry(unsigned char *, int);
 extern char *dataTable2BType1GetEntry(unsigned char *, int);
 /* Supplied declaration required: dataTable2BType3Count. */
@@ -303,7 +303,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
           if (temp_v9 == 0) {
             temp_v9 = (int)psVar9[5];
           }
-          temp_v4 = FUN_0048b1bc(param_1,(float)temp_v9);
+          temp_v4 = mathHeadingToDirectionCode(param_1,(float)temp_v9);
           *(short *)(temp_v7 + 0x1794) = temp_v4 + (short)temp_v49;
           FUN_002e1208(temp_v42,*(unsigned short *)(temp_v7 + 0x1794),&temp_v53,&temp_v54);
           temp_v18 = (float)VectorSignedToFloat(temp_v43,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -322,7 +322,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
           if (temp_v9 == 0) {
             temp_v9 = (int)psVar9[5];
           }
-          temp_v4 = FUN_0048b1bc(param_1,(float)temp_v9);
+          temp_v4 = mathHeadingToDirectionCode(param_1,(float)temp_v9);
           *(short *)(temp_v7 + 0x1796) = temp_v4 + temp_v3;
           FUN_002e1208(temp_v42,temp_v3,temp_v59,&temp_v44);
           temp_v13 = temp_v13 + 1;

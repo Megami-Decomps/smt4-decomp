@@ -1,38 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d7894` (_code @ 0x2d7894, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Process lookup condition merging and recursive-call scheduling differ. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 extern "C" {
+extern AsdProcessState g_asdProcess;
 
-extern int g_asdProcess; /* 0x4e3cf4 */
-
-/* Supplied declaration required: FUN_002d7894. */
-
-
-void FUN_002d7894(int param_1,unsigned int param_2,unsigned int param_3)
-
+// Applies mutable flags to a process and recursively to every descendant.
+void FUN_002d7894(s32 enabled, u32 handle, u32 flags)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  for (temp_v0 = *(int *)(g_asdProcess + (param_2 >> 0x14) * 8); temp_v0 != 0;
-      temp_v0 = *(int *)(temp_v0 + 0x4c)) {
-    if (*(unsigned int *)(temp_v0 + 0x24) == (param_2 & 0xfffff)) goto LAB_002d78dc;
-  }
-  temp_v0 = 0;
-LAB_002d78dc:
-  if (param_1 != 0) {
-    temp_v1 = (param_3 & 0xffffff0) | *(unsigned int *)(temp_v0 + 0x1c);
-  }
-  else {
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x1c) & ~(param_3 & 0xffffff0);
-  }
-  *(unsigned int *)(temp_v0 + 0x1c) = temp_v1;
-  for (temp_v0 = *(int *)(temp_v0 + 0x58); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x5c)) {
-    FUN_002d7894(param_1,*(unsigned int *)(temp_v0 + 0x28),param_3);
-  }
-  return;
+    AsdProcess* process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
+    u32 id = handle & ASD_PROC_ID_MASK;
+    while (process != NULL) {
+        if (process->id == id) {
+            break;
+        }
+        process = process->next;
+    }
+    if (enabled != 0) {
+        process->flags |= flags & 0x0FFFFFF0;
+    } else {
+        process->flags &= ~(flags & 0x0FFFFFF0);
+    }
+    for (AsdProcess* child = process->firstChild; child != NULL; child = child->nextSibling) {
+        FUN_002d7894(enabled, child->handle, flags);
+    }
 }
-
-} /* extern "C" */
+}

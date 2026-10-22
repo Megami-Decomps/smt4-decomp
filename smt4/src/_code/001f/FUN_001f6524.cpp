@@ -1,45 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f6524` (_code @ 0x1f6524, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail bne 84 differs from recovered bne 78. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int devilGetRecord(void);
+struct DevilRecordView {
+    u16 unk00; // 0x00
+    u8 unk02;  // 0x02
+    u8 unk03;  // 0x03
+};
 
-extern int dataTableGetEntry0102Value(unsigned short);
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_001f6524(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  int temp_v0;
-  int temp_v1;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  puVar1 = (unsigned short *)(unsigned int)*param_1;
-  devilGetRecord();
-  puVar2 = (unsigned short *)(unsigned int)*param_2;
-  devilGetRecord();
-  temp_v0 = dataTableGetEntry0102Value(*puVar1);
-  temp_v1 = dataTableGetEntry0102Value(*puVar2);
-  temp_v0 = temp_v0 - temp_v1;
-  if (temp_v0 == 0) {
-    puVar5 = (unsigned short *)(unsigned int)*param_1;
-    devilGetRecord();
-    puVar6 = (unsigned short *)(unsigned int)*param_2;
-    devilGetRecord();
-    temp_v0 = (unsigned int)(unsigned char)puVar5[1] - (unsigned int)(unsigned char)puVar6[1];
-    if ((temp_v0 == 0) &&
-       (temp_v0 = (unsigned int)*(unsigned char *)((int)puVar6 + 3) - (unsigned int)*(unsigned char *)((int)puVar5 + 3), temp_v0 == 0)) {
-      temp_v0 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
-    }
-  }
-  return temp_v0;
 }
 
-} /* extern "C" */
+extern "C" {
+DevilRecordView* devilGetRecord(u16 recordId);
+s32 dataTableGetEntry0102Value(u16 entryId);
+
+// Compare table values, then record bytes in opposing orders, then record IDs.
+s32 FUN_001f6524(const u16* leftId, const u16* rightId)
+{
+    const DevilRecordView* leftRecord = devilGetRecord(*leftId);
+    const DevilRecordView* rightRecord = devilGetRecord(*rightId);
+
+    s32 leftValue = dataTableGetEntry0102Value(leftRecord->unk00);
+    s32 rightValue = dataTableGetEntry0102Value(rightRecord->unk00);
+    s32 difference = leftValue - rightValue;
+    if (difference != 0) {
+        return difference;
+    }
+
+    leftRecord = devilGetRecord(*leftId);
+    rightRecord = devilGetRecord(*rightId);
+
+    difference = (s32)leftRecord->unk02 - (s32)rightRecord->unk02;
+    if (difference != 0) {
+        return difference;
+    }
+
+    difference = (s32)rightRecord->unk03 - (s32)leftRecord->unk03;
+    if (difference != 0) {
+        return difference;
+    }
+
+    return (s32)leftRecord->unk00 - (s32)rightRecord->unk00;
+}
+}

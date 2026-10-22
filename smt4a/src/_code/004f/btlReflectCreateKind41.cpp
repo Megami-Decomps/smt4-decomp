@@ -1,4 +1,4 @@
-#include "shard/W6_W6Match2_ReflectAction.h"
+#include "battle/btlReflect.h"
 struct BattleUnit;
 
 extern "C" {

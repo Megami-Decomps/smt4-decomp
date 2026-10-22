@@ -8,7 +8,7 @@ extern s32 scrGetCommandFrame(void);
 extern void resultCreate(s32 value);
 extern void addStepCostTotal(u32 scene);
 extern s32 engineCleanupIsDone(void);
-extern void FUN_003315c4(void);
+extern void uniteReleaseExit(void);
 
 /* Script command: starts the scene on the first call, then reports whether it is still running. */
 u8 scrCommRunScene2(s32 argIndex)
@@ -23,7 +23,7 @@ u8 scrCommRunScene2(s32 argIndex)
     }
     running = engineCleanupIsDone();
     if (running != 0) {
-        FUN_003315c4();
+        uniteReleaseExit();
     }
     return running != 0;
 }

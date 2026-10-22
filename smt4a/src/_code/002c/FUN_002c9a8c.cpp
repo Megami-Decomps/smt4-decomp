@@ -22,7 +22,7 @@ int FUN_00228b04(...);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_002a4894(...);
-int FUN_002a49e4(...);
+int infoWinSetText(...);
 int infoWinSetTimer(...);
 int flaggedEntrySetValueA(...);
 int FUN_003450d4(...);
@@ -72,7 +72,7 @@ extern int dialogIsActive(void);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_002a4894. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
@@ -165,7 +165,7 @@ void FUN_002c9a8c(int param_1)
     if (temp_v20 != 0) {
       temp_v20 = FUN_0022e750();
       if ((temp_v20 != 0) && (*(char *)(temp_v19 + 0x8a) != '\0')) {
-        FUN_002a49e4(*(unsigned int *)(param_1 + 0x43a4),0xcc);
+        infoWinSetText(*(unsigned int *)(param_1 + 0x43a4),0xcc);
         dialogOpen(1);
         infoWinSetTimer(0x3c);
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
@@ -486,7 +486,7 @@ LAB_002ca524:
   case 6:
     temp_v19 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43a0));
     if (temp_v19 != 2) break;
-    FUN_002a49e4(*(unsigned int *)(param_1 + 0x43a4),0xcc);
+    infoWinSetText(*(unsigned int *)(param_1 + 0x43a4),0xcc);
     dialogOpen(1);
     infoWinSetTimer(0x3c);
     temp_v19 = 2;

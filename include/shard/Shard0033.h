@@ -3,6 +3,7 @@
 #define SHARD_SHARD0033_H
 
 #include "common.h"
+#include <stddef.h>
 
 #include "shard/Shard0031.h"
 
@@ -18,14 +19,7 @@ typedef struct MenuState {
     /* 0x2B1 */ u8 unk2B1;
 } MenuState;
 
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
-/* Object at g_gameGlobals+4. */
+/* Apocalypse live game-session data, held by the singleton reference below. */
 typedef struct ObjB {
     /* 0x00 */ u8 unk00[0x274];
     /* 0x274 */ u8 block274[4];
@@ -34,43 +28,54 @@ typedef struct ObjB {
     /* 0x304 */ u8 unk304[0xFD8];
     /* 0x12DC */ u8 block12DC[4];
     /* 0x12E0 */ u8 unk12E0[0x88];
-    /* 0x1368 */ s32 state;
-    /* 0x136C */ u8 unk136C[0x12];
+    /* 0x1368 */ s32 activeState;
+    /* 0x136C */ u32 unk136C;
+    /* 0x1370 */ u8 unk1370[4];
+    /* 0x1374 */ u32 unk1374;
+    /* 0x1378 */ u32 unk1378;
+    /* 0x1379 */ u8 unk137C[2];
     /* 0x137E */ u8 unk137E;
-    /* 0x137F */ u8 unk137F;
+    /* 0x137F */ s8 unk137F;
     /* 0x1380 */ u8 unk1380[0x1];
     /* 0x1381 */ u8 unk1381;
     /* 0x1382 */ u8 unk1382[0x2];
     /* 0x1384 */ u8 unk1384;
     /* 0x1385 */ u8 unk1385[0x7];
     /* 0x138C */ s16 unk138C;
-    /* 0x138E */ u8 unk138E[0x5A2];
+    /* 0x138E */ u8 unk138E[2];
+    /* 0x1390 */ u8 block1390[1];
+    /* 0x1391 */ u8 unk1391[0x59F];
     /* 0x1930 */ u32 unk1930;
     /* 0x1934 */ u8 unk1934[0x9C];
-    /* 0x19D0 */ u8 block19D0[8];
-    /* 0x19D8 */ u32 unk19D8;
-    /* 0x19DC */ u32 unk19DC;
-    /* 0x19E0 */ u32 unk19E0;
-    /* 0x19E4 */ u32 unk19E4;
+    /* 0x19D0 */ u8 snapshotSlot[8];
+    /* 0x19D8 */ u32 previousPositionX;
+    /* 0x19DC */ u32 previousPositionY;
+    /* 0x19E0 */ u32 positionX;
+    /* 0x19E4 */ u32 positionY;
     /* 0x19E8 */ u8 unk19E8[0x618];
     /* 0x2000 */ u32 unk2000;
     /* 0x2004 */ u32 unk2004;
     /* 0x2008 */ u32 unk2008;
     /* 0x200C */ u16 unk200C;
-    /* 0x200E */ u8 unk200E[0x5];
+    /* 0x200E */ u8 unk200E[3];
+    /* 0x2011 */ s8 unk2011;
+    /* 0x2012 */ s8 unk2012;
     /* 0x2013 */ u8 unk2013;
-    /* 0x2014 */ u8 unk2014[0x1];
-    /* 0x2015 */ u8 unk2015;
+    /* 0x2014 */ u8 unk2014;
+    /* 0x2015 */ s8 unk2015;
     /* 0x2016 */ u8 unk2016;
-    /* 0x2017 */ u8 unk2017[0x5];
+    /* 0x2017 */ u8 unk2017;
+    /* 0x2018 */ u8 unk2018;
+    /* 0x2019 */ u8 unk2019[3];
     /* 0x201C */ u32 unk201C;
     /* 0x2020 */ u32 unk2020;
     /* 0x2024 */ u8 unk2024[0x1];
     /* 0x2025 */ u8 unk2025;
     /* 0x2026 */ u8 unk2026[0xE];
     /* 0x2034 */ u32 unk2034;
-    /* 0x2038 */ u8 unk2038[0x20];
-    /* 0x2058 */ u8 unk2058;
+    /* 0x2038 */ u8 unk2038[0x1C];
+    /* 0x2054 */ s32 statusCameraHeightOffset;
+    /* 0x2058 */ u8 statusCameraHeightMode;
     /* 0x2059 */ u8 unk2059[0x3];
     /* 0x205C */ u32 unk205C;
     /* 0x2060 */ u32 unk2060;
@@ -87,20 +92,36 @@ typedef struct ObjB {
     /* 0x20D2 */ u8 unk20D2[0x2];
     /* 0x20D4 */ u8 block20D4[4];
     /* 0x20D8 */ u8 unk20D8[0x18];
-    /* 0x20F0 */ u8 unk20F0;
+    /* 0x20F0 */ s8 unk20F0;
 } ObjB;
 
 typedef struct ObjBRef {
-    /* 0x00 */ u32 unk00;
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ s8 spriteTableUsers;
+    /* 0x02 */ u8 unk02[2];
     /* 0x04 */ ObjB *instance;
 } ObjBRef;
 
 /* Object at g_useCounter+4. */
 typedef struct Obj7EC {
-    /* 0x00 */ u8 unk00[0x7EC];
+    /* 0x000 */ u8 unk000[0x744];
+    /* 0x744 */ s32 unk744;
+    /* 0x748 */ u8 unk748[6];
+    /* 0x74E */ u8 unk74E;
+    /* 0x74F */ u8 unk74F[0x1D];
+    /* 0x76C */ s16 touchRegions[13]; /* -1 = free */
+    /* 0x786 */ s16 touchRegionCount;
+    /* 0x788 */ u8 unk788[0x64];
     /* 0x7EC */ u32 unk7EC;
     /* 0x7F0 */ u32 unk7F0;
+    /* 0x7F4 */ u8 unk7F4;
+    /* 0x7F5 */ u8 unk7F5;
+    /* 0x7F6 */ u8 unk7F6[2];
 } Obj7EC;
+
+typedef char Obj7ECLayoutCheck[offsetof(Obj7EC, unk744) == 0x744 && offsetof(Obj7EC, touchRegions) == 0x76C &&
+    offsetof(Obj7EC, touchRegionCount) == 0x786 && offsetof(Obj7EC, unk7EC) == 0x7EC &&
+    offsetof(Obj7EC, unk7F6) == 0x7F6 ? 1 : -1];
 
 typedef struct Obj7ECRef {
     /* 0x00 */ u32 unk00;
@@ -205,5 +226,9 @@ typedef struct InfoHolder {
     /* 0x9C */ InfoTable *info;
     /* 0xA0 */ Item1C *items;
 } InfoHolder;
+
+typedef char GameSessionLayoutCheck[sizeof(ObjB) == 0x20F4 && sizeof(ObjBRef) == 8 ? 1 : -1];
+
+typedef char GameSessionOffsets[offsetof(ObjB, activeState) == 0x1368 && offsetof(ObjB, snapshotSlot) == 0x19D0 && offsetof(ObjB, statusCameraHeightOffset) == 0x2054 && offsetof(ObjB, statusCameraHeightMode) == 0x2058 && offsetof(ObjBRef, spriteTableUsers) == 1 && offsetof(ObjBRef, instance) == 4 ? 1 : -1];
 
 #endif

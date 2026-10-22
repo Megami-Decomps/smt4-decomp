@@ -1,40 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f1edc` (_code @ 0x4f1edc, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The final vector copy uses r1-r3 rather than retail's r0-r2; all other instructions match. */
+#include "common.h"
+#include <stddef.h>
+
+struct InterpolationPosition {
+    f32 x, y, z;
+};
+struct PositionInterpolation {
+    /* 0x000 */ InterpolationPosition position;
+    /* 0x00C */ u8 unk00C[0x10];
+    /* 0x01C */ InterpolationPosition start;
+    /* 0x028 */ InterpolationPosition end;
+    /* 0x034 */ u8 unk034[0x618];
+    /* 0x64C */ u32 flags;
+    /* 0x650 */ u8 unk650[0x144];
+    /* 0x794 */ s32 frame;
+    /* 0x798 */ s32 duration;
+};
+typedef char PositionInterpolationFrameCheck[offsetof(PositionInterpolation, frame) == 0x794 ? 1 : -1];
 
 extern "C" {
+f32 FUN_003d4dd4(s32 mode, s32 duration, u32 frame);
 
-int FUN_003d4dd4(int, double, double);
-
-/* Supplied declaration required: FUN_003d4dd4. */
-
-
-void FUN_004f1edc(float *param_1)
-
+/* Interpolates the position for this frame, then snaps to the endpoint on completion. */
+void FUN_004f1edc(PositionInterpolation *work)
 {
-/* irregular: 1 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v0 = param_1[7];
-  temp_v3 = param_1[10] - temp_v0;
-  temp_v2 = param_1[0xb] - param_1[8];
-  temp_v1 = param_1[0xc] - param_1[9];
-  FUN_003d4dd4(0,param_1[0x1e6],param_1[0x1e5]);
-  *param_1 = param_1[7] + temp_v3 * temp_v0;
-  param_1[1] = param_1[8] + temp_v2 * temp_v0;
-  param_1[2] = param_1[9] + temp_v1 * temp_v0;
-  temp_v0 = (float)((int)param_1[0x1e5] + 1);
-  param_1[0x1e5] = temp_v0;
-  if ((int)param_1[0x1e6] < (int)temp_v0) {
-    *param_1 = param_1[10];
-    param_1[1] = param_1[0xb];
-    param_1[2] = param_1[0xc];
-    param_1[0x193] = (float)((unsigned int)param_1[0x193] & 0xfff7ffff);
-  }
-  return;
+    f32 dx = work->end.x - work->start.x;
+    f32 dy = work->end.y - work->start.y;
+    f32 dz = work->end.z - work->start.z;
+    f32 factor = FUN_003d4dd4(0, work->duration, work->frame);
+    work->position.x = work->start.x + dx * factor;
+    work->position.y = work->start.y + dy * factor;
+    work->position.z = work->start.z + dz * factor;
+    ++work->frame;
+    if (work->frame > work->duration) {
+        work->position = work->end;
+        work->flags &= ~0x80000u;
+    }
 }
-
-} /* extern "C" */
+}

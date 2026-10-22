@@ -1,65 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00272d44` (_code @ 0x272d44, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses g_gameState through `add r0, r5, #0`, keeps the flag in r4/record in r5, and shares one `return 0` tail; register allocation and block order differ. */
+#include "map/mapDepart.h"
+
+struct AreaEventRecord {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u16 threshold;
+};
 
 extern "C" {
 
-int gameFlagsWriteBit(int, int);
-int FUN_004a00f4(int);
+extern GameStateA g_gameState;
 
-extern int g_gameState; /* 0x5f15fc */
+s32 gameFlagsTestThirdBank(void);
+s32 flagsBit7Get(s32 mode, s32 submode);
+AreaEventRecord *FUN_0015fa74(s32 mode, s32 submode);
+f32 partyGetAverageLevel(s32 kind);
+void gameFlagsWriteBit(s32 flag, s32 value);
+s32 randRange(u32 max);
 
-extern int randRange(unsigned int);
-extern int FUN_0015fa74(int, int);
-extern int gameFlagsTestThirdBank(void);
-/* Supplied declaration required: gameFlagsWriteBit. */
-/* Supplied declaration required: FUN_004a00f4. */
-extern int flagsBit7Get(int, int);
-
-
-int FUN_00272d44(void)
-
+/* Returns the one-time event flag of the current area in modes 28-31, or 0. */
+static __inline s32 areaEventFlag(void)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float in_s0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x4));
-  if (g_gameState != 0x1c) {
-    if (g_gameState == 0x1d) {
-      temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x4)) + 0x14;
+    s32 flag = g_gameState.submode;
+
+    switch (g_gameState.mode) {
+    case 28:
+        return flag;
+    case 29:
+        return flag + 20;
+    case 30:
+        return flag + 40;
+    case 31:
+        return flag + 60;
     }
-    else if (g_gameState == 0x1e) {
-      temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x4)) + 0x28;
-    }
-    else {
-      if (g_gameState != 0x1f) {
+    return 0;
+}
+
+/* In modes 28-31, fires the current area's one-time event when its threshold exceeds the current
+ * value: sets its flag and returns 1 or 2; returns 0 otherwise. */
+s32 FUN_00272d44(void)
+{
+    s32 id = areaEventFlag();
+    s16 flag;
+    AreaEventRecord *record;
+
+    if (id == 0) {
         return 0;
-      }
-      temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x4)) + 0x3c;
     }
-  }
-  if (temp_v0 != 0) {
-    temp_v1 = gameFlagsTestThirdBank();
-    if (temp_v1 == 0) {
-      temp_v2 = flagsBit7Get(g_gameState,(*(int *)((unsigned char *)&g_gameState + 0x4)));
-      temp_v1 = 0;
-      if (temp_v2 != 0) {
-        temp_v1 = FUN_0015fa74(g_gameState,(*(int *)((unsigned char *)&g_gameState + 0x4)));
-        FUN_004a00f4(2);
-        if ((int)(unsigned int)*(unsigned short *)(temp_v1 + 8) <= (int)in_s0) {
-          return 0;
-        }
-        gameFlagsWriteBit((int)(short)temp_v0,1);
-        temp_v1 = randRange(1);
-        temp_v1 = temp_v1 + 1;
-      }
-      return temp_v1;
+    flag = id;
+    if (gameFlagsTestThirdBank() != 0) {
+        return 0;
     }
-  }
-  return 0;
+    if (flagsBit7Get(g_gameState.mode, g_gameState.submode) == 0) {
+        return 0;
+    }
+    record = FUN_0015fa74(g_gameState.mode, g_gameState.submode);
+    if ((s32)partyGetAverageLevel(2) >= record->threshold) {
+        return 0;
+    }
+    gameFlagsWriteBit(flag, 1);
+    return randRange(1) + 1;
 }
 
 } /* extern "C" */

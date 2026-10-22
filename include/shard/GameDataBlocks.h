@@ -2,59 +2,73 @@
 #ifndef SHARD_GAMEDATABLOCKS_H
 #define SHARD_GAMEDATABLOCKS_H
 
-#include "common.h"
+#include "gamedata/GameData.h"
+#include "gamedata/SaveFlagViews.h"
+#include "gamedata/StatusChoices.h"
+#include <stddef.h>
 
-typedef struct GameDataBlocks {
-    /* 0x00 */ u8 unk00;
-    /* 0x01 */ u8 unk01;
-    /* 0x02 */ s8 unk02;
-    /* 0x03 */ u8 unk03;
-    /* 0x04 */ u8 *unk04;
-    /* 0x08 */ u32 unk08;
-    /* 0x0C */ u16 *unk0C;
-    /* 0x10 */ u32 unk10;
-} GameDataBlocks;
+typedef struct GameSavedItem {
+    /* 0x00000 */ u8 unk00000[0x2E];
+    /* 0x0002E */ u16 flags;
+    /* 0x00030 */ u8 unk00030[0x4];
+} GameSavedItem;
 
-/* Apocalypse's persistent 32-bit stats flag set, stored bytewise. */
-struct StatsFlagView {
-    /* 0x000 */ u8 unk000[0x264];
-    /* 0x264 */ u8 flags[4];
-};
+typedef struct GameSaveSelection {
+    /* 0x00000 */ u8 unk00000[0x1C];
+    /* 0x0001C */ u32 unk1C;
+    /* 0x00020 */ u32 unk20;
+    /* 0x00024 */ s16 unk24;
+    /* 0x00026 */ u8 unk26[2];
+} GameSaveSelection;
 
-typedef char StatsFlagViewSizeCheck[sizeof(StatsFlagView) == 0x268 ? 1 : -1];
-
-struct StatsLeadingFlagView {
-    /* 0x00 */ u8 first[4];
-    /* 0x04 */ u8 second[4];
-};
-
-typedef char StatsLeadingFlagViewSizeCheck[sizeof(StatsLeadingFlagView) == 8 ? 1 : -1];
-
-struct StatsAdditionalFlagView {
-    /* 0x00 */ u8 unk00[0x0C];
-    /* 0x0C */ u8 flags[4];
-};
-struct QuestCenterFlagView {
+typedef struct GameSaveLinkSlot {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ u8 flags[4];
-};
-struct ProgressFlagView {
-    /* 0x0000 */ u8 unk0000[0x22F0];
-    /* 0x22F0 */ u8 flags[14];
-};
-typedef char StatsAdditionalFlagViewSizeCheck[sizeof(StatsAdditionalFlagView) == 0x10 ? 1 : -1];
-typedef char QuestCenterFlagViewSizeCheck[sizeof(QuestCenterFlagView) == 8 ? 1 : -1];
-typedef char ProgressFlagViewSizeCheck[sizeof(ProgressFlagView) == 0x22FE ? 1 : -1];
+    /* 0x04 */ u32 unk04;
+} GameSaveLinkSlot;
 
-/* Thirty-two 100-byte saved records; removing one shifts the remaining entries. */
-struct SavedRecord100 {
-    u8 bytes[100];
-};
-struct SavedRecordTable {
-    /* 0x00000 */ u8 unk00000[0x2720C];
-    /* 0x2720C */ SavedRecord100 records[32];
-};
+typedef struct GameSaveData {
+    /* 0x00000 */ u8 unk00000[0x88];
+    /* 0x00088 */ u8 linkTable[1];
+    /* 0x00089 */ u8 unk00089[7];
+    /* 0x00090 */ StatusChoiceData statusChoices;
+    /* 0x00118 */ u8 unk00118[0x9758];
+    /* 0x09870 */ u32 unk09870;
+    /* 0x09874 */ u8 block09874[1];
+    /* 0x09875 */ u8 unk09875[0x2983];
+    /* 0x0C1F8 */ GameSavedItem items[0x501];
+    /* 0x1C62C */ u8 unk1C62C[0x2554];
+    /* 0x1EB80 */ u8 block1EB80[1];
+    /* 0x1EB81 */ u8 unk1EB81[0x97];
+    /* 0x1EC18 */ u8 block1EC18[1];
+    /* 0x1EC19 */ u8 unk1EC19[0xBF];
+    /* 0x1ECD8 */ u8 unk1ECD8;
+    /* 0x1ECD9 */ u8 unk1ECD9[0x77B];
+    /* 0x1F454 */ u32 unk1F454;
+    /* 0x1F458 */ u8 unk1F458[0x84];
+    /* 0x1F4DC */ u32 unk1F4DC;
+    /* 0x1F4E0 */ u32 unk1F4E0;
+    /* 0x1F4E4 */ u8 unk1F4E4[0x4FCC];
+    /* 0x244B0 */ u32 unk244B0;
+    /* 0x244B4 */ u8 unk244B4[0x6C8];
+    /* 0x24B7C */ u8 configOptions[4];
+    /* 0x24B80 */ u8 hasConfig;
+    /* 0x24B81 */ u8 unk24B81[7];
+    /* 0x24B88 */ GameSaveSelection selection;
+    /* 0x24BB0 */ u8 unk24BB0;
+    /* 0x24BB1 */ u8 unk24BB1[3];
+    /* 0x24BB4 */ GameSaveLinkSlot linkSlots[2];
+} GameSaveData;
+
+typedef struct GameDataAux {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+} GameDataAux;
+
 
 extern GameDataBlocks g_gameDataBlocks;
+
+typedef char GameDataBlocksLayoutCheck[sizeof(GameDataBlocks) == 0x1C && sizeof(GameSavedItem) == 0x34 ? 1 : -1];
+
+typedef char GameSaveDataOffsets[offsetof(GameSaveData, items) == 0xC1F8 && offsetof(GameSaveData, statusChoices) == 0x90 && offsetof(GameSaveData, configOptions) == 0x24B7C && offsetof(GameSaveData, hasConfig) == 0x24B80 && offsetof(GameSaveData, selection) == 0x24B88 && offsetof(GameSaveData, unk24BB0) == 0x24BB0 ? 1 : -1];
 
 #endif

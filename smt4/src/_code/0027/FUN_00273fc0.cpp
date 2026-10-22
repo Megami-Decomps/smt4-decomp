@@ -22,7 +22,7 @@ int FUN_0028c618(...);
 int nodeSetTranslation(...);
 int FUN_00293e08(int);
 int nodeOwnerSetTranslations(int, int *);
-int FUN_00294450(...);
+int playerModelLoadPart(...);
 int FUN_00297684(int);
 int FUN_002a55ec(...);
 int modelSelectPrimaryMotion(...);
@@ -59,7 +59,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00293e08. */
 /* Supplied declaration required: nodeOwnerSetTranslations. */
-/* Supplied declaration required: FUN_00294450. */
+/* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a55ec. */
@@ -115,19 +115,19 @@ void FUN_00273fc0(void)
     piVar3 = g_lmapScene;
     if ((short)g_lmapScene[0x6d] != *(short *)(temp_v2 + 6)) {
       *(short *)(g_lmapScene + 0x6d) = *(short *)(temp_v2 + 6);
-      FUN_00294450(piVar3[0x65],0,0x1c0);
+      playerModelLoadPart(piVar3[0x65],0,0x1c0);
     }
     piVar3 = g_lmapScene;
     if (*(short *)((int)g_lmapScene + 0x1b6) != *(short *)(temp_v2 + 8)) {
       *(short *)((int)g_lmapScene + 0x1b6) = *(short *)(temp_v2 + 8);
-      FUN_00294450(piVar3[0x65],1,0x1c0);
+      playerModelLoadPart(piVar3[0x65],1,0x1c0);
     }
     piVar7 = g_lmapScene;
     piVar3 = g_lmapScene + 0x40;
     if ((short)g_lmapScene[0x6e] != *(short *)(temp_v2 + 10)) {
       *(short *)(g_lmapScene + 0x6e) = *(short *)(temp_v2 + 10);
       piVar3 = (int *)0x1c0;
-      FUN_00294450(piVar7[0x65],2);
+      playerModelLoadPart(piVar7[0x65],2);
     }
   }
   FUN_00297684(g_lmapScene[0x65]);

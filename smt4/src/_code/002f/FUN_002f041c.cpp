@@ -1,55 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f041c` (_code @ 0x2f041c, 0xa8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the HP pair from entry+0xCC (a sub-record holding id, value and maxHp), so the add/multiply schedule differs. */
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+BtlMainState *btlGetMainState(void);
 
-int scrSetResult(int);
-int scrGetArg(int);
-
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-extern int __aeabi_idivmod(int, int);
-
-
-unsigned int FUN_002f041c(void)
-
+// Script result: 1 when an active, unblocked entry with the given id is at or below the HP percentage.
+u32 FUN_002f041c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v4 = 0;
-  do {
-    temp_v2 = btlGetMainState();
-    puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-    temp_v3 = *puVar4;
-    if ((temp_v3 & 0x10) != 0 && (temp_v3 & 1) != 0) {
-      temp_v5 = (temp_v3 & 0x40) == 0;
-      if (temp_v5) {
-        temp_v3 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-      }
-      if ((temp_v5 && temp_v3 == temp_v0) &&
-         (temp_v2 = __aeabi_idivmod((short)puVar4[0x6d] * 100,(int)*(short *)((int)puVar4 + 0x1b6)),
-         temp_v2 <= temp_v1)) {
-        scrSetResult(1);
-        return 1;
-      }
-    }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
-    }
-  } while( 1 );
-}
+    u32 id = scrGetArg(0);
+    s32 percent = scrGetArg(1);
 
-} /* extern "C" */
+    for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
+        BtlEntry *entry = &btlGetMainState()->entries[i];
+        if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->id == id &&
+            entry->value * 100 / entry->maxHp <= percent) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
+}
+}

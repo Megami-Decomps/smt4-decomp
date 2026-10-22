@@ -1,45 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0390` (_code @ 0x3c0390, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #104] differs from recovered ldr r1, [pc, #100]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int FUN_0022a4ac(int, int, unsigned int, unsigned int, unsigned int, unsigned int, int);
+struct BattleMainStateView {
+    u8 unk00[0x2240];   // 0x0000
+    u32 unk2240;        // 0x2240
+    u8 unk2244[0x225C]; // 0x2244
+    u32 unk44A0;        // 0x44A0
+};
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_0022a4ac. */
-extern unsigned int btlMainFindActiveEntry(void);
-extern int btlGetMainState(void);
-
-
-void FUN_003c0390(unsigned int param_1,int param_2,unsigned int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) == 0 && (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) == 0) {
-    temp_v3 = param_2 < 0;
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x2240);
-    if (!temp_v3) {
-      temp_v1 = btlMainFindActiveEntry();
-    }
-    else {
-      param_2 = -1;
-      temp_v1 = 0;
-    }
-    FUN_0022a4ac(!temp_v3,0,param_1,temp_v2,temp_v1,param_3,param_2);
-  }
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+BattleMainStateView* btlGetMainState(void);
+u32 btlMainFindActiveEntry(void);
+s32 FUN_0022a4ac(s32 hasEntry, s32 mode, u32 request, u32 stateValue,
+                 u32 activeEntry, u32 argument, s32 entryIndex);
+
+// Forward an uninhibited request, resolving the active entry for nonnegative indices.
+s32 FUN_003c0390(u32 request, s32 entryIndex, u32 argument)
+{
+    BattleMainStateView* state = btlGetMainState();
+    if ((state->unk44A0 & 0x40) || (state->unk44A0 & 0x100)) {
+        return 0;
+    }
+
+    u32 stateValue = state->unk2240;
+    if (entryIndex >= 0) {
+        u32 activeEntry = btlMainFindActiveEntry();
+        return FUN_0022a4ac(1, 0, request, stateValue,
+                            activeEntry, argument, entryIndex);
+    } else {
+        return FUN_0022a4ac(0, 0, request, stateValue,
+                            0, argument, -1);
+    }
+}
+}

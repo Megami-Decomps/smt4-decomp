@@ -3,6 +3,12 @@
 #define SHARD_PLAYSCENE_H
 
 #include "common.h"
+#include <stddef.h>
+
+/* A 100-byte part of the scene (see objectPartRunUnlessLocked). */
+typedef struct PlayScenePart {
+    /* 0x00 */ u8 unk00[0x64];
+} PlayScenePart;
 
 typedef struct PlayScene {
     /* 0x0000 */ u8 unk0000[0x1C4];
@@ -27,15 +33,23 @@ typedef struct PlayScene {
     /* 0x3058 */ u8 unk3058[0x4];
     /* 0x305C */ u32 unk305C;
     /* 0x3060 */ u8 unk3060;
-    /* 0x3061 */ u8 unk3061[0x1E];
+    /* 0x3061 */ u8 unk3061[0x11];
+    /* 0x3072 */ s16 slotCount;        /* number of slots[] that are in use (>= 0) */
+    /* 0x3074 */ s16 slots[4];
+    /* 0x307C */ u8 unk307C[0x3];
     /* 0x307F */ u8 unk307F;
     /* 0x3080 */ u8 unk3080;
     /* 0x3081 */ u8 unk3081;
     /* 0x3082 */ u8 unk3082;
     /* 0x3083 */ u8 unk3083[0x1];
     /* 0x3084 */ u8 unk3084;
-    /* 0x3085 */ u8 unk3085[0x2893];
+    /* 0x3085 */ u8 unk3085[0x3];
+    /* 0x3088 */ PlayScenePart parts[1]; /* indexed by unk305C */
+    /* 0x30EC */ u8 unk30EC[0x282C];
     /* 0x5918 */ u32 unk5918;
 } PlayScene;
+
+typedef char PlaySceneOffsets[offsetof(PlayScene, slotCount) == 0x3072 && offsetof(PlayScene, unk307F) == 0x307F &&
+    offsetof(PlayScene, parts) == 0x3088 && offsetof(PlayScene, unk5918) == 0x5918 ? 1 : -1];
 
 #endif

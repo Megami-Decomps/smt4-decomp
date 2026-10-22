@@ -1,69 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00389af4` (_code @ 0x389af4, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W8_X20_DataSet.h"
+
+/* A 0x3C-byte entry of the '(' data tables. */
+struct DataEntry389af4 {
+    /* 0x00 */ u8 unk00[0x3C];
+};
 
 extern "C" {
 
-int FUN_002ac0c4(void);
-int FUN_002ac0f8(void);
+s32 FUN_002ac12c(DataArchive *archive);
+DataArchiveRecord *FUN_002ac0f8(DataArchive *archive);
+u32 FUN_002ac0c4(DataArchive *archive);
+void *dataTableFileGetTable(u32 fileId, s32 type);
+s32 dataTableGetCount(void *table);
+DataEntry389af4 *dataTableGetEntries(void *table);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002ac0c4. */
-/* Supplied declaration required: FUN_002ac0f8. */
-extern int FUN_002ac12c(unsigned int);
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(unsigned int);
-
-
-int FUN_00389af4(int param_1,int param_2)
-
+// Find entry `index` across the '(' table files of every loaded archive, or NULL.
+DataEntry389af4 *FUN_00389af4(DataArchiveSet *set, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  
-  temp_v5 = 0;
-  temp_v7 = 0;
-  if (temp_v7 < *(int *)(param_1 + 0x310)) {
-    do {
-      temp_v6 = *(int *)(param_1 + 0x318) + temp_v7 * 0x50;
-      temp_v0 = FUN_002ac12c(temp_v6);
-      if (temp_v0 != 0) {
-        temp_v1 = temp_v6;
-        FUN_002ac0f8();
-        temp_v2 = temp_v6;
-        FUN_002ac0c4();
-        temp_v4 = 0;
-        if (temp_v4 < temp_v2) {
-          do {
-            if (*(char *)(temp_v1 + temp_v4 * 0x40) == '(') {
-              temp_v3 = dataTableFileGetTable(*(unsigned int *)(*(int *)(temp_v6 + 0x4c) + temp_v4 * 0x10),1);
-              temp_v0 = dataTableGetCount();
-              if (param_2 <= temp_v0 + temp_v5) {
-                temp_v7 = dataTableGetEntries(temp_v3);
-                return temp_v7 + (param_2 - temp_v5) * 0x3c;
-              }
-              temp_v5 = temp_v5 + temp_v0 + temp_v5;
+    s32 total = 0;
+    for (s32 i = 0; i < set->archiveCount; i++) {
+        DataArchive *archive = &set->archives[i];
+        if (FUN_002ac12c(archive) != 0) {
+            DataArchiveRecord *records = FUN_002ac0f8(archive);
+            u32 count = FUN_002ac0c4(archive);
+            for (u32 j = 0; j < count; j++) {
+                if (records[j].kind == '(') {
+                    void *table = dataTableFileGetTable(archive->files[j].fileId, 1);
+                    s32 end = dataTableGetCount(table) + total;
+                    if (end >= index) {
+                        return &dataTableGetEntries(table)[index - total];
+                    }
+                    total += end;
+                }
             }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < temp_v2);
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < *(int *)(param_1 + 0x310));
-  }
-  return 0;
+    }
+    return NULL;
 }
 
 } /* extern "C" */

@@ -62,7 +62,7 @@ extern s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 extern s32 FUN_0040ab8c(u32 request);
 extern void saveLoadProcessCreate(s32 step, s32 arg);
 extern void FUN_00275bc8(void);
-extern void FUN_002a7324(s32 arg);
+extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
 extern void FUN_002c8538(s32 arg);
 extern void FUN_002f0384(s32 arg);
@@ -160,7 +160,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
                 }
                 FUN_0041eb94(task);
                 rt_memcpy_w(gameGetPlayerData(), task->snapshotPlayer, 0xE);
-                FUN_002a7324(1);
+                statusPanelSetOpen(1);
                 task->applied = 1;
                 if (task->slotValid[task->selectedSlot] == 0) {
                     FUN_0023b45c(0);

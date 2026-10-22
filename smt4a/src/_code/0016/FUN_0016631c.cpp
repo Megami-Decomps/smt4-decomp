@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00162790(int, unsigned int, int);
 int effectDispatchSelector(int, int, int, int);
 int FUN_0018408c(int, int);
-int FUN_00184ae0(int, unsigned char *, unsigned int);
+int fontMeasureFormattedText(int, unsigned char *, unsigned int);
 int FUN_00185e84(int, int, int, int, int, int);
 int FUN_00186008(int, int, int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -26,7 +26,7 @@ extern unsigned char DAT_0052fa28; /* 0x52fa28 */
 /* Supplied declaration required: effectDispatchSelector. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00184ae0. */
+/* Supplied declaration required: fontMeasureFormattedText. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: FUN_00186008. */
 
@@ -57,7 +57,7 @@ void FUN_0016631c(int param_1,int param_2)
     temp_v3 = FUN_001834a4(8,0x19c);
     temp_v0 = temp_v0 + **(short **)(temp_v3 + 0xc);
     temp_v3 = 7;
-    FUN_00184ae0(7,&DAT_0052fa28,*(unsigned int *)(param_1 + 0x2b4));
+    fontMeasureFormattedText(7,&DAT_0052fa28,*(unsigned int *)(param_1 + 0x2b4));
   }
   else {
 LAB_0016637c:
@@ -65,7 +65,7 @@ LAB_0016637c:
       temp_v3 = FUN_001834a4(8,0x19c);
       temp_v0 = temp_v0 + **(short **)(temp_v3 + 0xc);
       temp_v3 = 7;
-      FUN_00184ae0(7,&DAT_0052fa28,*(unsigned int *)(param_1 + 0x2b4));
+      fontMeasureFormattedText(7,&DAT_0052fa28,*(unsigned int *)(param_1 + 0x2b4));
     }
   }
   temp_v3 = ((int)**(short **)(param_2 + 0xc) - (temp_v0 + temp_v3 + 0xd + temp_v2)) / 2;

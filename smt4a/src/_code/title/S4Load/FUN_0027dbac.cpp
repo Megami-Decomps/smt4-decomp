@@ -9,7 +9,7 @@ int efctSetSpeed(void);
 int FUN_0016c4b8(unsigned int, int);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(int);
-int FUN_0025cba0(int, int, int, int, int);
+int screenDrawShadedRect(int, int, int, int, int);
 int rt_aeabi_memclr(unsigned char [72], int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_0025cba0. */
+/* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
 
@@ -50,7 +50,7 @@ unsigned int FUN_0027dbac(void)
     drawSetColorFromRGBA8(0xff);
     efctSetSpeed();
     FUN_0016c4b8(g_renderCtx,0);
-    FUN_0025cba0(0,0,400,0xf0,0x65);
+    screenDrawShadedRect(0,0,400,0xf0,0x65);
     FUN_00183bb0();
     efctSetSpeed();
     break;
@@ -84,7 +84,7 @@ unsigned int FUN_0027dbac(void)
   case 0x1e:
     drawSetColorFromRGBA8(0xff);
     FUN_0016c4b8(g_renderCtx,0);
-    FUN_0025cba0(0,0,400,0xf0,0x65);
+    screenDrawShadedRect(0,0,400,0xf0,0x65);
     FUN_00183bb0();
   }
   temp_v1 = *(int *)(temp_v0 + 8);

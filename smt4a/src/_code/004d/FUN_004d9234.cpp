@@ -1,47 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d9234` (_code @ 0x4d9234, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: left-subtree register reuse and sentinel branch placement differ. */
+#include "shard/W6_W6Match3_AATreeNode.h"
 
-extern "C" {
-
-
-int * FUN_004d9234(int *param_1)
-
+// Find the preceding node, including traversal from the tree's sentinel.
+extern "C" AATreeNode *FUN_004d9234(AATreeNode *node)
 {
-  int *piVar1;
-  int temp_v0;
-  int *piVar3;
-  unsigned char temp_v1;
-  
-  piVar1 = (int *)*param_1;
-  temp_v0 = piVar1[1];
-  if (piVar1 != (int *)temp_v0) {
-    if (temp_v0 != *(int *)(temp_v0 + 4)) {
-      do {
-        piVar1 = (int *)piVar1[1];
-      } while (piVar1[1] != *(int *)(piVar1[1] + 4));
+    AATreeNode *previous = node->left;
+    AATreeNode *right = previous->right;
+    if (previous != right) {
+        if (right != right->right) {
+            do {
+                previous = previous->right;
+            } while (previous->right != previous->right->right);
+        }
+    } else {
+        if (previous != node) {
+            AATreeNode *child;
+            do {
+                child = node;
+                node = node->parent;
+            } while (node->right != node && node->right != child);
+            return node;
+        }
+        previous = node->parent;
+        AATreeNode *next = previous->right;
+        if (next != node) {
+            do {
+                previous = next;
+                next = previous->right;
+            } while (next != node);
+            return previous;
+        }
     }
-  }
-  else {
-    if (piVar1 != param_1) {
-      do {
-        piVar1 = (int *)param_1[2];
-        temp_v1 = (int *)piVar1[1] != param_1;
-        param_1 = piVar1;
-      } while ((int *)piVar1[1] != piVar1 && temp_v1);
-      return piVar1;
-    }
-    piVar1 = (int *)param_1[2];
-    piVar3 = (int *)piVar1[1];
-    if ((int *)piVar1[1] != param_1) {
-      do {
-        piVar1 = piVar3;
-        piVar3 = (int *)piVar1[1];
-      } while (piVar3 != param_1);
-      return piVar1;
-    }
-  }
-  return piVar1;
+    return previous;
 }
-
-} /* extern "C" */

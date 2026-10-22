@@ -13,7 +13,7 @@ int rt_aeabi_memclr(int, int);
 int FUN_0031654c(unsigned int, int);
 int FUN_0034543c(int);
 int FUN_0036fcd0(unsigned int, int);
-int FUN_003e52bc(void);
+int partyRefreshSlotValues(void);
 int gameFlagSetValue(int, int);
 int recordSetClampedCurrent(int, unsigned int);
 
@@ -42,7 +42,7 @@ extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0031654c. */
 /* Supplied declaration required: FUN_0034543c. */
 /* Supplied declaration required: FUN_0036fcd0. */
-/* Supplied declaration required: FUN_003e52bc. */
+/* Supplied declaration required: partyRefreshSlotValues. */
 /* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: recordSetClampedCurrent. */
@@ -256,7 +256,7 @@ LAB_0037c2b0:
 LAB_0037c3fc:
     temp_v13 = temp_v13 + 1;
     if (9 < temp_v13) {
-      FUN_003e52bc();
+      partyRefreshSlotValues();
       return;
     }
   } while( 1 );

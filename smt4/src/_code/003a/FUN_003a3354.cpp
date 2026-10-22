@@ -15,7 +15,7 @@ int FUN_00230234(...);
 int FUN_002302d8(...);
 int pointConvertToFloat(...);
 int FUN_00233240(unsigned int *, int);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_0029ee6c(...);
 int FUN_002bf818(...);
@@ -42,9 +42,9 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
 extern int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern unsigned int vec2GetYInt(unsigned int *);
@@ -104,15 +104,15 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
         }
         temp_v3 = FUN_00290e78();
         if (temp_v3 != 0) {
-          FUN_00296e90();
+          messageMainFinishWindow();
           FUN_0029ee6c(0,0x323232ff);
-          temp_v3 = FUN_002973d8();
+          temp_v3 = messageMainGetChoiceResult();
           if (temp_v3 != -1) {
             param_1[0x218] = param_1[temp_v3 + 0x574b];
             FUN_002302d8(param_1,1);
             param_1[2] = 0;
             param_1[1] = 4;
-            FUN_00296e90();
+            messageMainFinishWindow();
             FUN_00230234(param_1);
             return;
           }
@@ -147,9 +147,9 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       }
       temp_v3 = FUN_00290e78();
       if (temp_v3 != 0) {
-        FUN_00296e90();
+        messageMainFinishWindow();
         FUN_0029ee6c(0,0x323232ff);
-        temp_v3 = FUN_002973d8();
+        temp_v3 = messageMainGetChoiceResult();
         if (temp_v3 != -1) {
           temp_v0 = param_1[temp_v3 + 0x574b];
           if (temp_v0 != 0) {
@@ -159,7 +159,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
                 FUN_002302d8(param_1,1);
                 param_1[1] = 4;
                 param_1[2] = 0;
-                FUN_00296e90();
+                messageMainFinishWindow();
                 return;
               }
               if (temp_v0 != 3) {
@@ -169,7 +169,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
               FUN_0022fcb8(param_1,1);
               param_1[1] = 4;
               param_1[2] = 0;
-              FUN_00296e90();
+              messageMainFinishWindow();
               return;
             }
             FUN_0022e818(param_1,2);
@@ -197,7 +197,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
           FUN_002302d8(param_1,1);
           param_1[2] = 0;
           param_1[1] = 4;
-          FUN_00296e90();
+          messageMainFinishWindow();
           FUN_00230234(param_1);
           return;
         }

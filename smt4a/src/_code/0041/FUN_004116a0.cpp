@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_002a49e4(unsigned int, unsigned int);
+int infoWinSetText(unsigned int, unsigned int);
 int uiNavigatorStart(int, int, int, int);
 int infoWinSetTimer(int);
 int FUN_003f1b3c(int, unsigned int, int, unsigned int *);
@@ -43,7 +43,7 @@ extern int FUN_00187168(void);
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002a49e4. */
+/* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: uiNavigatorStart. */
 /* Supplied declaration required: infoWinSetTimer. */
 extern int FUN_003e4d68(unsigned int);
@@ -125,7 +125,7 @@ void FUN_004116a0(int param_1)
   temp_v6 = (unsigned int *)&temp_v13;
   FUN_003f1b3c(temp_v5,temp_v2,2,&temp_v12);
   FUN_0047f4cc(temp_v13);
-  FUN_002a49e4(*(unsigned int *)(temp_v5 + 0x4d64),temp_v12 & 0xffff);
+  infoWinSetText(*(unsigned int *)(temp_v5 + 0x4d64),temp_v12 & 0xffff);
   temp_v6 = (unsigned int *)0x0;
   uiNavigatorStart(temp_v3,1,1,0);
   infoWinSetTimer(0x708);

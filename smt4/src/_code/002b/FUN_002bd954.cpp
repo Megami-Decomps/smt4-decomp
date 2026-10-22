@@ -1,42 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bd954` (_code @ 0x2bd954, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r4, r5, r6, r7, r8, r9, sl, lr} differs from recovered push {r4, r5, r6, r7, r8, lr}. */
+#include "common.h"
 
-extern "C" {
+// Private views of the records accessed by this initializer.
+struct InitSourceView {
+    u8 unk00[0x0c];             // 0x00
+    u32 unk0C;                 // 0x0c
+    u32 unk10;                 // 0x10
+    u32 unk14;                 // 0x14
+    u32 unk18;                 // 0x18
+    u32 unk1C;                 // 0x1c
+};
 
-int memClear(unsigned int *, int);
+struct InitRecordView {
+    u32 unk00;                 // 0x00
+    u32 unk04;                 // 0x04
+    s32 unk08;                 // 0x08
+    u8 unk0C[0x14];            // 0x0c
+    f32 unk20;                 // 0x20
+    f32 unk24;                 // 0x24
+    f32 unk28;                 // 0x28
+    f32 unk2C;                 // 0x2c
+    u8 unk30[8];               // 0x30
+    u16 unk38;                 // 0x38
+    u8 unk3A[0x0e];            // 0x3a
+    const InitSourceView* unk48; // 0x48
+    u32 unk4C;                 // 0x4c
+    u8 unk50[8];               // 0x50
+    u32 unk58;                 // 0x58
+    u8 unk5C[8];               // 0x5c
+    u32 unk64;                 // 0x64
+    u8 unk68[8];               // 0x68
+    u32 unk70;                 // 0x70
+    u8 unk74[4];               // 0x74
+    u32 unk78;                 // 0x78
+    u8 unk7C[0x0a];            // 0x7c
+    u8 unk86;                  // 0x86
+    u8 unk87;                  // 0x87
+    u8 unk88;                  // 0x88
+    u8 unk89;                  // 0x89
+    u8 unk8A;                  // 0x8a
+    u8 unk8B;                  // 0x8b
+};
 
-/* Supplied declaration required: memClear. */
+extern "C" int memClear(u32* destination, int byteCount);
 
-
-void FUN_002bd954(unsigned int *param_1,unsigned int param_2,unsigned int param_3,int param_4,
-                 unsigned short param_5)
-
+// Clear the record, install its initial values, and copy fields from the source.
+extern "C" void FUN_002bd954(InitRecordView* record, u32 value0,
+                              u32 value4, const InitSourceView* source,
+                              u16 value38, f32 value20)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int in_s0;
-  
-  memClear(param_1,0x8c);
-  *param_1 = param_2;
-  param_1[1] = param_3;
-  param_1[2] = 0xffffffff;
-  param_1[8] = in_s0;
-  *(unsigned short *)(param_1 + 0xe) = param_5;
-  param_1[9] = 0x3f800000;
-  param_1[10] = 0x3f800000;
-  param_1[0xb] = 0x3f800000;
-  param_1[0x12] = param_4;
-  param_1[0x13] = *(unsigned int *)(param_4 + 0xc);
-  param_1[0x16] = *(unsigned int *)(param_4 + 0x10);
-  param_1[0x19] = *(unsigned int *)(param_4 + 0x14);
-  param_1[0x1c] = *(unsigned int *)(param_4 + 0x18);
-  param_1[0x1e] = *(unsigned int *)(param_4 + 0x1c);
-  *(unsigned char *)((int)param_1 + 0x86) = 1;
-  *(unsigned char *)((int)param_1 + 0x87) = 1;
-  *(unsigned char *)(param_1 + 0x22) = 1;
-  *(unsigned char *)((int)param_1 + 0x89) = 1;
-  *(unsigned char *)((int)param_1 + 0x8a) = 1;
-  return;
+    memClear(reinterpret_cast<u32*>(record), 0x8c);
+    record->unk00 = value0;
+    record->unk04 = value4;
+    record->unk08 = -1;
+    record->unk20 = value20;
+    record->unk38 = value38;
+    record->unk24 = 1.0f;
+    record->unk28 = 1.0f;
+    record->unk2C = 1.0f;
+    record->unk48 = source;
+    record->unk4C = source->unk0C;
+    record->unk58 = source->unk10;
+    record->unk64 = source->unk14;
+    record->unk70 = source->unk18;
+    record->unk78 = source->unk1C;
+    record->unk86 = 1;
+    record->unk87 = 1;
+    record->unk88 = 1;
+    record->unk89 = 1;
+    record->unk8A = 1;
 }
-
-} /* extern "C" */

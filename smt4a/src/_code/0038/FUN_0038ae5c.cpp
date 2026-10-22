@@ -1,53 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038ae5c` (_code @ 0x38ae5c, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Enable/disable blocks are laid out differently and retail retains additional NOPs around its notifications. */
+#include "map/mapDepart.h"
 
 extern "C" {
+extern GameStateA g_gameState;
+s32 scrGetArg(s32 index);
+u32 gameFlagIsSet(u32 flag);
+void FUN_00379be8(void);
+void FUN_003b61ec(void);
+void commonBgReset(void);
+void sub68OwnerCall3(void);
+void sysPlaySe(u32 id);
 
-int sysPlaySe(int);
-int sub68OwnerCall3(void);
-int FUN_00379be8(void);
-int FUN_003b61ec(void);
-int commonBgReset(void);
-
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: sysPlaySe. */
-extern int gameFlagIsSet(unsigned int);
-extern int scrGetArg(void);
-/* Supplied declaration required: sub68OwnerCall3. */
-/* Supplied declaration required: FUN_00379be8. */
-/* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: commonBgReset. */
-
-
-unsigned int FUN_0038ae5c(void)
-
+/* Changes the navi/background display mode only when the requested flag differs. */
+u32 FUN_0038ae5c(s32 argumentIndex)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrGetArg();
-  if (temp_v0 != 0) {
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) == '\0') {
-      (*(signed char *)((unsigned char *)&g_gameState + 0x295)) = '\x01';
-      FUN_00379be8();
-      FUN_003b61ec();
-      sysPlaySe(0x92);
+    s32 enabled = scrGetArg(argumentIndex);
+    if (enabled != 0) {
+        if (g_gameState.mapFlags.unk295 == 0) {
+            g_gameState.mapFlags.unk295 = 1;
+            FUN_00379be8();
+            FUN_003b61ec();
+            sysPlaySe(0x92);
+        }
+    } else if (g_gameState.mapFlags.unk295 != 0) {
+        g_gameState.mapFlags.unk295 = 0;
+        if (gameFlagIsSet(0x49A) != 0) {
+            commonBgReset();
+        } else {
+            FUN_003b61ec();
+        }
+        sub68OwnerCall3();
     }
-  }
-  else if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) != '\0') {
-    (*(signed char *)((unsigned char *)&g_gameState + 0x295)) = '\0';
-    temp_v0 = gameFlagIsSet(0x49a);
-    if (temp_v0 != 0) {
-      commonBgReset();
-    }
-    else {
-      FUN_003b61ec();
-    }
-    sub68OwnerCall3();
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

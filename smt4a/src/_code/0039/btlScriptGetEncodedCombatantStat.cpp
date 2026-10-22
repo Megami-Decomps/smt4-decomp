@@ -14,7 +14,7 @@ struct CombatantStatMasks {
 extern "C" {
 extern CombatantStatMasks g_btlCandidateMasks;
 u32 scrGetArg(s32 index);
-u32 FUN_00232388();
+u32 btlResolveEntryChoice();
 void FUN_00301a08(u32 group, s32 *first, s32 *count);
 void scrSetResult(s32 result);
 BtlCombatantEntryA *FUN_003eaf20(BattleMaskState *battle);
@@ -27,7 +27,7 @@ u32 btlScriptGetEncodedCombatantStat()
     scrGetArg(2);
     s32 first;
     s32 count;
-    FUN_00301a08(FUN_00232388(), &first, &count);
+    FUN_00301a08(btlResolveEntryChoice(), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BattleMaskState *battle = btlGetMainState();
         BtlCombatantEntryA *entry = &reinterpret_cast<BtlCombatantEntryA *>(battle->entryMaskView.mask)[index];

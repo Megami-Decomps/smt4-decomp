@@ -4,11 +4,12 @@
 #define ADDON_AOCMAIN_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* Objects embedded in AocMain; known only through the functions that take them. */
-typedef struct AocObjA { u8 unk[0x10]; } AocObjA;
-typedef struct AocObjB { u8 unk[0x10]; } AocObjB;
-typedef struct AocObjC { u8 unk[1]; } AocObjC;
+typedef struct AocObjA { /* 0x00 */ u8 unk[0x10]; } AocObjA;
+typedef struct AocObjB { /* 0x00 */ u8 unk[0x10]; } AocObjB;
+typedef struct AocObjC { /* 0x00 */ u8 unk[1]; } AocObjC;
 
 /* The AOC system's main block (Shin Megami Tensei IV layout). */
 typedef struct AocMain {
@@ -21,7 +22,7 @@ typedef struct AocMain {
     };
     /* 0x088 */ AocObjA objA;
     /* 0x098 */ AocObjB objB;
-    /* 0x0A8 */ AocObjC objC;
+    /* 0x0A8 */ AocObjC scriptHolder;
     /* 0x0A9 */ u8 unk0A9[0x6AB];
     /* 0x754 */ u32 flags;
 } AocMain;
@@ -29,7 +30,7 @@ typedef struct AocMain {
 /* The display block that AOC drives (Shin Megami Tensei IV layout). */
 typedef struct AocDisplay {
     /* 0x0000 */ u8 unk0000[0x450C];
-    /* 0x450C */ u8 unk450C;
+    /* 0x450C */ u8 operationActive;
 } AocDisplay;
 
 /* One entry of the content table: an id and 0x50 bytes of data. */
@@ -41,14 +42,40 @@ typedef struct AocEntry {
 /* The content system's block (Shin Megami Tensei IV layout). */
 typedef struct AocSystem {
     /* 0x000 */ union {
-        u8 unk000[0x38C];
+        /* 0x000 */ u8 unk000[0x38C];
         struct {
-            u8 unk000[0x310];
+            /* 0x000 */ u8 unk000[0x310];
             s32 count; /* 0x310 */
-            u32 unk314;
+            /* 0x314 */ u32 unk314;
             struct AocPackage *entries; /* 0x318 */
-            u8 unk31c[0x70];
+            /* 0x31C */ u8 unk31c[0x70];
         } packages;
+        struct {
+            /* 0x000 */ u8 unk000[0x35C];
+            /* 0x35C */ u32 count;
+            /* 0x360 */ struct DevilRecord *records;
+            /* 0x364 */ u8 unk364[0x28];
+        } devils;
+        struct {
+            /* 0x000 */ u8 unk000[0x364];
+            /* 0x364 */ u32 count;
+            /* 0x368 */ struct Table00Record *records;
+            /* 0x36C */ u8 unk36C[0x20];
+        } table00;
+        struct {
+            /* 0x000 */ u8 unk000[0x368];
+            /* 0x368 */ u32 enabled;
+            /* 0x36C */ u8 unk36C[8];
+            /* 0x374 */ struct AocLookupRecord *entries;
+            /* 0x378 */ u32 count;
+            /* 0x37C */ u8 unk37C[0x10];
+        } lookup;
+
+        struct {
+            /* 0x000 */ u8 unk000[0x384];
+            /* 0x384 */ u32 count;
+            /* 0x388 */ struct AocTableSearchRecord *records;
+        } table;
     };
     /* 0x38C */ u32 entryCount;
     /* 0x390 */ AocEntry *entries;
@@ -79,9 +106,81 @@ typedef struct AocEntryA {
 
 /* The content system's block (Apocalypse layout). */
 typedef struct AocSystemA {
-    /* 0x000 */ u8 unk000[0x38C];
+    union {
+        struct {
+            /* 0x000 */ u8 unk000[0x310];
+            /* 0x310 */ s32 count;
+            /* 0x314 */ u32 unk314;
+            /* 0x318 */ struct AocPackage *entries;
+        } packages;
+        struct {
+            /* 0x000 */ u8 unk000[0x35C];
+            /* 0x35C */ u32 count;
+            /* 0x360 */ struct DevilRecord *records;
+            /* 0x364 */ u8 unk364[0x28];
+        } devils;
+        /* 0x000 */ u8 unk000[0x38C];
+        struct {
+            /* 0x000 */ u8 unk000[0x384];
+            /* 0x384 */ u32 count;
+            /* 0x388 */ struct AocTableSearchRecordA *records;
+        } table;
+        struct {
+            /* 0x000 */ u8 unk000[0x364];
+            /* 0x364 */ u32 count;
+            /* 0x368 */ struct Table00Record *records;
+            /* 0x36C */ u8 unk36C[0x20];
+        } table00;
+        struct {
+            /* 0x000 */ u8 unk000[0x368];
+            /* 0x368 */ u32 enabled;
+            /* 0x36C */ u8 unk36C[8];
+            /* 0x374 */ struct AocLookupRecord *entries;
+            /* 0x378 */ u32 count;
+            /* 0x37C */ u8 unk37C[0x10];
+        } lookup;
+
+    };
     /* 0x38C */ u32 entryCount;
     /* 0x390 */ AocEntryA *entries;
 } AocSystemA;
+
+typedef struct AocPackageOwner {
+    /* 0x00000 */ u8 unk00000[0x310];
+    /* 0x00310 */ u32 unk310;
+    /* 0x00314 */ u32 unk314;
+    /* 0x00318 */ void * handle;
+    /* 0x0031C */ u8 unk0031C[0x34];
+    /* 0x00350 */ u32 unk350;
+} AocPackageOwner;
+
+struct AocTrackId {
+    /* 0x00 */ u32 group;
+    /* 0x04 */ u32 track;
+};
+struct AocMusicJob {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 muted;
+    /* 0x10 */ u8 unk10[0x1C];
+    /* 0x2C */ f32 volume;
+    /* 0x30 */ u8 unk30[4];
+    /* 0x34 */ s32 pending;
+    /* 0x38 */ u8 unk38[4];
+    /* 0x3C */ AocTrackId current;
+    /* 0x44 */ s32 previous;
+    /* 0x48 */ s32 locked;
+    /* 0x4C */ u8 unk4C[8];
+    /* 0x54 */ void *table;
+};
+
+struct AocJobStateA {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 started;
+};
+
+typedef char AocSystemLayoutCheck[sizeof(AocSystem) == 0x39C && sizeof(AocSystemA) == 0x394 && sizeof(AocMain) == 0x758 ? 1 : -1];
+
+typedef char AocSystemOffsets[offsetof(AocSystem, devils.count) == 0x35C && offsetof(AocSystem, table00.count) == 0x364 && offsetof(AocSystem, lookup.entries) == 0x374 && offsetof(AocSystem, table.count) == 0x384 && offsetof(AocSystemA, table00.records) == 0x368 && offsetof(AocSystemA, table.count) == 0x384 && offsetof(AocMusicJob, current) == 0x3C ? 1 : -1];
+typedef char AocSystemAPackagesOffsets[offsetof(AocSystemA, packages.count) == 0x310 && offsetof(AocSystemA, packages.entries) == 0x318 ? 1 : -1];
 
 #endif

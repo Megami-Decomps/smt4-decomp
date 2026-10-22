@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int FUN_00275bc8(void);
 int asdLoadFileAsyncSimple(...);
 int messageDismissNumericBanner(void);
-int FUN_0039a638(void);
+int messageMainStartMenuAnimationIfEnabled(void);
 
 int FUN_00184310(void);
 int FUN_00184964(...);
@@ -45,7 +45,7 @@ int runWinClose(void);
 int scrRunOpcodesStub(...);
 int gameDataBlocksAddFlags(int);
 int scrScriptProcessStartEntry(...);
-int FUN_002c76d8(...);
+int gameDataAddHomeButtonHold(...);
 int dataStoreGetValue50(void);
 int FUN_0031d5e8(int);
 int dataStoreGetProgress(void);
@@ -74,7 +74,7 @@ extern int g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: gameDataFlagsClearBits. */
 /* Supplied declaration required: gameDataBlocksReleaseHold. */
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_001774d8(short);
+extern int itemGetStackLimit(short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00184964. */
 extern int gameFlagIsSet(unsigned int);
@@ -94,7 +94,7 @@ extern unsigned int dataStoreGetEntry(int);
 /* Supplied declaration required: gameDataGetRecordValue. */
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf520. */
-/* Supplied declaration required: FUN_002c76d8. */
+/* Supplied declaration required: gameDataAddHomeButtonHold. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e59f8. */
 extern int asdCecInboxGetMessageCount(void);
@@ -129,7 +129,7 @@ extern short *dataTable4AGetEntry8(int);
 /* Supplied declaration required: campCecSetValue. */
 /* Supplied declaration required: messageDismissNumericBanner. */
 extern short *dataTable4AType1GetEntry8(short *);
-/* Supplied declaration required: FUN_0039a638. */
+/* Supplied declaration required: messageMainStartMenuAnimationIfEnabled. */
 extern int dataStoreIsFinished(void);
 extern int dataStoreIsIdle(void);
 /* Supplied declaration required: dataTable4AType2Count. */
@@ -289,7 +289,7 @@ joined_r0x003a52e4:
         *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
         return temp_v18;
       }
-      FUN_002c76d8();
+      gameDataAddHomeButtonHold();
       gameDataBlocksAddFlags(2);
       return temp_v18;
     }
@@ -306,7 +306,7 @@ joined_r0x003a52e4:
     *(unsigned int *)(param_1 + 0xa0) = temp_v9;
     break;
   case 9:
-    FUN_002c76d8(2);
+    gameDataAddHomeButtonHold(2);
     gameDataBlocksAddFlags(2);
     FUN_00280250();
     temp_v8 = asdCecInboxGetMessageCount();
@@ -638,7 +638,7 @@ LAB_003a5cfc:
               temp_v3 = 0;
               do {
                 psVar5 = (short *)(temp_v11 + temp_v13 * 10 + temp_v3 * 2);
-                temp_v6 = FUN_001774d8(*psVar5);
+                temp_v6 = itemGetStackLimit(*psVar5);
                 temp_v7 = FUN_001ba3d4(*psVar5);
                 if (temp_v7 < temp_v6) {
                   psVar7 = asStack_194 + temp_v12;
@@ -684,7 +684,7 @@ LAB_003a5cfc:
       asdLoadFileAsyncSimple(temp_v15,param_1 + 0x35c,0);
       *(unsigned char *)(param_1 + 999) = 1;
       messageDismissNumericBanner();
-      FUN_0039a638();
+      messageMainStartMenuAnimationIfEnabled();
       sysPlaySe(0x3e);
       temp_v9 = 0xe;
       *(unsigned int *)(param_1 + 0xa0) = temp_v9;

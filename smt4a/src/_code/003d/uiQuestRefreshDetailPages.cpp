@@ -13,7 +13,7 @@ s32 idIsAtLeast350(s32 id);
 u32 partyEntryFlagsBit1(s32 id);
 s32 partyEntryGetByte1(s32 id);
 u32 questHasSpecialDetailPage(u32 id);
-void FUN_002ae320(void);
+void questMarkSelectedSpecialDetail(void);
 s32 FUN_002f7730(s32 page, u32 id);
 }
 
@@ -56,7 +56,7 @@ extern "C" void uiQuestRefreshDetailPages(s32 id)
             ++quest->listState.count;
             hasSpecialPage = 1;
             if (quest->detailMode > 2) {
-                FUN_002ae320();
+                questMarkSelectedSpecialDetail();
             }
         }
     }

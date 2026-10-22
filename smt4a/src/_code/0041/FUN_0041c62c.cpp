@@ -1,9 +1,4 @@
-#include "common.h"
-
-class Obj557dcc {
-public:
-    virtual ~Obj557dcc();
-};
+#include "classes/Obj557dcc.h"
 extern "C" Obj557dcc *_ZN9Obj557dccD1Ev(Obj557dcc *object);
 extern "C" void asdOperatorDelete(void *object);
 

@@ -7,7 +7,7 @@ extern "C" {
 int libc_bsearch(unsigned char *, unsigned int, unsigned int, int, unsigned char *);
 int FUN_001762d4(unsigned char *, unsigned char *);
 int FUN_001763a4(unsigned char *, unsigned char *);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int FUN_001a6858(unsigned char *, unsigned char *);
 
@@ -31,7 +31,7 @@ extern unsigned char *g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_001762d4. */
 /* Supplied declaration required: FUN_001763a4. */
 extern int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int dataTableGetCount(int);
 extern unsigned int dataTableGetEntries(void);
@@ -80,7 +80,7 @@ void FUN_0015f858(unsigned char *param_1)
       break;
     case 1:
     case 0xc:
-      FUN_00192550();
+      dataTable8FindRecord();
       puVar3 = param_1;
       break;
     case 2:

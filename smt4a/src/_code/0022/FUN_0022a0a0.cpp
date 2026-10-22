@@ -12,9 +12,9 @@ int FUN_001643b4(int, int);
 int FUN_0019de98(...);
 int FUN_00228b04(int, int);
 int objectApplyIfUnblocked(...);
-int FUN_00318df4(int);
+int buttonHelpSetHelpState(int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, char [16], int, int);
-int FUN_00387ac4(...);
+int buttonHelpSetMode(...);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -39,10 +39,10 @@ extern unsigned int mapGetDisplayName(unsigned char);
 extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: objectApplyIfUnblocked. */
-/* Supplied declaration required: FUN_00318df4. */
+/* Supplied declaration required: buttonHelpSetHelpState. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
-/* Supplied declaration required: FUN_00387ac4. */
+/* Supplied declaration required: buttonHelpSetMode. */
 
 
 unsigned int FUN_0022a0a0(void)
@@ -196,7 +196,7 @@ unsigned int FUN_0022a0a0(void)
           if (*(char *)(temp_v8 + 0x74e) != '\x02' && *(char *)(temp_v8 + 0x74e) != '\x01') {
             if (*(char *)(temp_v8 + 0x7f4) != '\0') {
               if (*(char *)(temp_v8 + 0x7f5) != '\0') {
-                FUN_00318df4(1);
+                buttonHelpSetHelpState(1);
               }
               else {
                 FUN_0019de98(temp_v8 + 0x7f6,0xf4f4f4ff);
@@ -204,7 +204,7 @@ unsigned int FUN_0022a0a0(void)
               *(unsigned char *)(temp_v8 + 0x7f4) = 0;
             }
             else {
-              FUN_00387ac4(0);
+              buttonHelpSetMode(0);
             }
           }
           temp_v7 = 0x100020f;

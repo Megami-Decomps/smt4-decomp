@@ -1,72 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f6208` (_code @ 0x2f6208, 0xcc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads the touch region count after the two byte stores; this source hoists it above them. */
+#include "common.h"
+
+/* A message window as closed here. */
+struct MessageWindow2f {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s8 state;
+    /* 0x09 */ u8 mode;
+    /* 0x0A */ u8 unk0A[0xe];
+    /* 0x18 */ u32 value;
+    /* 0x1C */ u32 choiceResult;
+    /* 0x20 */ s32 touchRegionCount;
+    /* 0x24 */ u8 unk24[0xb];
+    /* 0x2F */ u8 unk2F;
+    /* 0x30 */ u8 unk30;
+    /* 0x31 */ u8 unk31;
+    /* 0x32 */ u8 unk32[3];
+    /* 0x35 */ u8 closeRequested;
+};
+
+struct MessageGlobals2f {
+    /* 0x00 */ u8 enabled;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ MessageWindow2f *state;
+    /* 0x08 */ MessageWindow2f *banner;
+};
 
 extern "C" {
+extern MessageGlobals2f g_messageMain;
+void ifTouchRegionRemove(void);
+s32 querySlotHasHandle(void);
+void workCommandRefreshActiveSlots(void);
+void titleOverlaySetModeAnimation(MessageWindow2f *window, u32 mode);
 
-int titleOverlaySetModeAnimation(...);
-int ifTouchRegionRemove(void);
-
-extern int DAT_0043e18c; /* 0x43e18c */
-extern unsigned int DAT_0043e190; /* 0x43e190 */
-
-/* Supplied declaration required: titleOverlaySetModeAnimation. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned int workCommandRefreshActiveSlots(void);
-extern int querySlotHasHandle(void);
-
-
-void FUN_002f6208(unsigned int param_1,unsigned int param_2)
-
+/* Starts closing a shown message window. */
+static __inline void messageWindowClose(MessageWindow2f *window)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = DAT_0043e190;
-  if (DAT_0043e190 != 0) {
-    param_2 = (unsigned int)*(unsigned char *)(DAT_0043e190 + 8);
-  }
-  if (DAT_0043e190 != 0 && param_2 != 0) {
-    *(unsigned char *)(DAT_0043e190 + 0x30) = 0;
-    *(unsigned char *)(temp_v1 + 0x31) = 0;
-    temp_v2 = 0;
-    if (0 < *(int *)(temp_v1 + 0x20)) {
-      do {
+    if (window != NULL && window->state != 0) {
+        titleOverlaySetModeAnimation(window, window->mode);
+        window->state = 3;
+        window->closeRequested = 0;
+    }
+}
+
+/* Dismisses the shown banner: removes its touch regions, takes its value as the choice and closes
+ * the banner and message windows. */
+void FUN_002f6208(void)
+{
+    s32 i;
+
+    if (g_messageMain.banner == NULL || g_messageMain.banner->state == 0) {
+        return;
+    }
+    g_messageMain.banner->unk30 = 0;
+    g_messageMain.banner->unk31 = 0;
+    for (i = 0; i < g_messageMain.banner->touchRegionCount; i++) {
         ifTouchRegionRemove();
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < *(int *)(DAT_0043e190 + 0x20));
     }
-    temp_v1 = DAT_0043e190;
-    *(unsigned char *)(DAT_0043e190 + 0x2f) = 0;
-    *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-    temp_v2 = querySlotHasHandle();
-    temp_v1 = 0;
-    if (temp_v2 != 0) {
-      temp_v1 = workCommandRefreshActiveSlots();
+    g_messageMain.banner->unk2F = 0;
+    g_messageMain.banner->choiceResult = g_messageMain.banner->value;
+    if (querySlotHasHandle() != 0) {
+        workCommandRefreshActiveSlots();
     }
-    temp_v0 = DAT_0043e190;
-    if (DAT_0043e190 != 0) {
-      temp_v1 = (unsigned int)*(unsigned char *)(DAT_0043e190 + 8);
-    }
-    if (DAT_0043e190 != 0 && temp_v1 != 0) {
-      temp_v1 = DAT_0043e190;
-      titleOverlaySetModeAnimation(DAT_0043e190,*(unsigned char *)(DAT_0043e190 + 9));
-      *(unsigned char *)(temp_v0 + 8) = 3;
-      *(unsigned char *)(temp_v0 + 0x35) = 0;
-    }
-    temp_v2 = DAT_0043e18c;
-    if (DAT_0043e18c != 0) {
-      temp_v1 = (unsigned int)*(unsigned char *)(DAT_0043e18c + 8);
-    }
-    if (DAT_0043e18c != 0 && temp_v1 != 0) {
-      titleOverlaySetModeAnimation(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
-      *(unsigned char *)(temp_v2 + 8) = 3;
-      *(unsigned char *)(temp_v2 + 0x35) = 0;
-    }
-  }
-  return;
+    messageWindowClose(g_messageMain.banner);
+    messageWindowClose(g_messageMain.state);
 }
 
 } /* extern "C" */

@@ -16,7 +16,7 @@ typedef struct AocEntry {
 
 extern int textFormatBuffer(char *out, const char *format, const char *dir, const char *name);
 extern int sysMemClear(void *buffer, int size);
-extern int FUN_00471fec(u32 context, char *path, void *arg0, int arg1, int size, void *arg2);
+extern int aocQueueFileLoad(u32 context, char *path, void *arg0, int arg1, int size, void *arg2);
 
 extern u32 g_aocDisplay; /* 0x57027c */
 
@@ -32,7 +32,7 @@ void aocEntryBeginBaseLoad(AocEntry *entry)
     entry->unk44 = 0;
     entry->unk45 = 0;
     textFormatBuffer(path, "%s/%s", entry->dir, "aoc_base.bin");
-    FUN_00471fec(g_aocDisplay, path, entry->unk48, 1, 0x80, &entry->unk38);
+    aocQueueFileLoad(g_aocDisplay, path, entry->unk48, 1, 0x80, &entry->unk38);
 }
 
 }

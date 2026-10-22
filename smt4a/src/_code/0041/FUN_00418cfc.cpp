@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00418c3c(int, int);
+int gfxTexFormatGetBitsPerPixel(int, int);
 int FUN_004191f0(unsigned char [256], int, int, int *);
 int textureConvertLinearTile(unsigned char [256], unsigned int, int, int *);
 int rt_memcpy(...);
@@ -36,7 +36,7 @@ typedef char romwright_storage_s__A_A_A_A_A_A_A_A_A_005c143c_37_1_s1_width_check
 #endif
 extern union romwright_storage_s__A_A_A_A_A_A_A_A_A_005c143c_37_1 s__A_A_A_A_A_A_A_A_A_005c143c; /* 0x5c143c */
 
-/* Supplied declaration required: FUN_00418c3c. */
+/* Supplied declaration required: gfxTexFormatGetBitsPerPixel. */
 /* Supplied declaration required: FUN_004191f0. */
 /* Supplied declaration required: textureConvertLinearTile. */
 extern unsigned long long __aeabi_uidivmod(int, unsigned int);
@@ -101,7 +101,7 @@ FUN_00418cfc(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
           do {
             temp_v4 = temp_v7 * temp_v11 + temp_v6;
             temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
-            temp_v1 = FUN_00418c3c(temp_v10,iStack_4c);
+            temp_v1 = gfxTexFormatGetBitsPerPixel(temp_v10,iStack_4c);
             if (temp_v17 != 1) {
               temp_v4 = 0;
               temp_v5 = (temp_v11 * (int)temp_v8 * 0x40 * temp_v1 >> 3) +
@@ -122,7 +122,7 @@ FUN_00418cfc(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
             temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
             temp_v3 = (int)((unsigned long long)temp_v8 >> 0x20);
             temp_v5 = (int)temp_v8;
-            temp_v2 = FUN_00418c3c(temp_v10,iStack_4c);
+            temp_v2 = gfxTexFormatGetBitsPerPixel(temp_v10,iStack_4c);
             if (temp_v17 != 1) {
               if (temp_v16 != 0) {
                 temp_v4 = ((temp_v12 - temp_v5) - 1) * temp_v11 + temp_v3;

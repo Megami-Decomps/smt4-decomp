@@ -1,44 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001655fc` (_code @ 0x1655fc, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: format-pointer retention and the zero/result VFP register allocation differ. */
+#include "font/FormattedText.h"
+#include <stdarg.h>
 
 extern "C" {
+extern FormattedTextContext DAT_005b3bc0;
+extern char DAT_00635800[256];
+s32 FUN_00100348(char *buffer, u32 bytes, const char *format, va_list arguments);
+f32 FUN_00181ae0(u32 color, u32 font, const char *text, s32 length,
+                 f32 x, f32 y, f32 z, f32 rotation, f32 width, f32 height, f32 spacing, f32 scale);
+void rt_memclr(void *buffer, u32 bytes);
 
-int FUN_00100348(unsigned char *, int, unsigned int, int *);
-int FUN_00181ae0(unsigned int, unsigned int, unsigned char *);
-int rt_memclr(unsigned char *, int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern unsigned int DAT_005b3bcc; /* 0x5b3bcc */
-extern unsigned int DAT_005b3bd0; /* 0x5b3bd0 */
-extern unsigned char DAT_00635800; /* 0x635800 */
-
-/* Supplied declaration required: FUN_00100348. */
-/* Supplied declaration required: FUN_00181ae0. */
-/* Supplied declaration required: rt_memclr. */
-
-
-void FUN_001655fc(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Format and draw text with the current font and color at the supplied position.
+f32 FUN_001655fc(f32 x, f32 y, const char *format, ...)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  int uStack_4;
-  
-  uStack_4 = param_4;
-  rt_memclr(&DAT_00635800,0x100);
-  puVar1 = &DAT_00635800;
-  FUN_00100348(&DAT_00635800,0x100,param_3,&uStack_4);
-  if (puVar1 != (unsigned char *)0x0) {
-    FUN_00181ae0(DAT_005b3bd0,DAT_005b3bcc,&DAT_00635800);
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    va_list arguments;
+    va_start(arguments, format);
+    f32 result = 0.0f;
+    rt_memclr(DAT_00635800, sizeof(DAT_00635800));
+    s32 length = FUN_00100348(DAT_00635800, sizeof(DAT_00635800), format, arguments);
+    if (length != 0)
+        result = FUN_00181ae0(DAT_005b3bc0.color, DAT_005b3bc0.font, DAT_00635800, length,
+                              x, y, 0.0f, 0.0f, 10.0f, 13.0f, 0.0f, 1.0f);
+    va_end(arguments);
+    return result;
 }
-
-} /* extern "C" */
+}

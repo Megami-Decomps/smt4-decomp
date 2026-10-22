@@ -8,7 +8,7 @@ typedef struct Record {
 } Record;
 
 extern u32 gameDataFlagTestBit(s32 id);
-extern Record *FUN_00186f58(s32 id);
+extern Record *dataFindKeyedRecordWithOverrides(s32 id);
 
 /* Comparison of two ids: an id with flag bits the other lacks sorts first (-1) or last (1); otherwise by the records' sort key. */
 s32 FUN_00221a08(s32 *a, s32 *b)
@@ -24,8 +24,8 @@ s32 FUN_00221a08(s32 *a, s32 *b)
         result = 1;
     }
     if (result == 0) {
-        Record *recordA = FUN_00186f58(*a);
-        Record *recordB = FUN_00186f58(*b);
+        Record *recordA = dataFindKeyedRecordWithOverrides(*a);
+        Record *recordB = dataFindKeyedRecordWithOverrides(*b);
 
         result = recordA->sortKey - recordB->sortKey;
     }

@@ -3,6 +3,38 @@
 #define MAP_MAPIF_H
 
 #include "common.h"
+#include <stddef.h>
+
+typedef struct MapIfRecord {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[0x3];
+    /* 0x04 */ union {
+        s32 type;
+        s32 state;
+    };
+    /* 0x08 */ union {
+        u8 unk08[0x1C];
+        struct {
+            u8 unk08[0x0C];
+            s32 category; // 0x14
+        } display;
+        struct {
+            u8 unk08[0x10];
+            s32 id; // 0x18
+        } groupView;
+        struct {
+            s32 restart; // 0x08
+        } transition;
+    };
+    /* 0x24 */ u32 handle;
+    /* 0x28 */ union {
+        u8 unk28[0x16C];
+        struct {
+            u8 unk28[0x19];
+            u8 pending; // 0x41
+        } request;
+    };
+} MapIfRecord;
 
 #define MAP_IF_WIDGETS 0x23
 #define MAP_IF_SLOTS 4
@@ -34,14 +66,9 @@ typedef struct MapIfState {
     /* 0x0030 */ s32 unk30;
     /* 0x0034 */ s32 unk34;
     /* 0x0038 */ s32 unk38;
-    /* 0x003C */ union {
-        u8 unk3C[0xCBB0];
-        struct {
-            u8 unk3C[0x194];
-            u8 records[0x80][0x194]; // 0x01d0
-            u8 unkCBD0[0x1c];
-        } recordPool;
-    };
+    /* 0x003C */ u8 unk3C[0x194];
+    /* 0x01D0 */ MapIfRecord records[128];
+    /* 0xCBD0 */ u8 unkCBD0[0x1C];
     /* 0xCBEC */ u32 unkCBEC;
     /* 0xCBF0 */ MapIfSlot slots[MAP_IF_SLOTS];
     /* 0xCC70 */ u8 unkCC70[0x48];
@@ -52,14 +79,6 @@ typedef struct MapIfState {
     /* 0xCCD9 */ u8 unkCCD9[3];
     /* 0xCCDC */ u32 unkCCDC;
 } MapIfState;
-
-struct Rec194;
-
-/* Typed view without importing the generic shard headers into the map interface. */
-static __inline Rec194 *mapIfGetRecords(MapIfState *state)
-{
-    return (Rec194 *)state->recordPool.records;
-}
 
 /* The module global: the state block and the widget table's pointers, side by side. */
 typedef struct MapIfGlobals {
@@ -90,7 +109,13 @@ typedef struct MapIfSlotA {
 
 /* The interface's state block (Apocalypse layout); only the fields read so far are named. */
 typedef struct MapIfStateA {
-    /* 0x0000 */ u8 unk0000[0x1D];
+    /* 0x0000 */ union {
+        u8 unk0000[0x1D];
+        struct {
+            u8 unk0000[0x1C];
+            u8 unk1C;
+        } head;
+    };
     /* 0x001D */ u8 unk1D;
     /* 0x001E */ u8 unk1E[2];
     /* 0x0020 */ s32 unk20;
@@ -98,7 +123,8 @@ typedef struct MapIfStateA {
     /* 0x003C */ s32 unk3C;
     /* 0x0040 */ s32 unk40;
     /* 0x0044 */ s32 unk44;
-    /* 0x0048 */ u8 unk48[0xCB94];
+    /* 0x0048 */ u8 unk48[0x194];
+    /* 0x01DC */ MapIfRecord records[128];
     /* 0xCBDC */ MapIfSlotA slots[MAP_IF_SLOTS_A];
     /* 0xCC7C */ u8 unkCC7C[0x6C];
     /* 0xCCE8 */ s16 unkCCE8;
@@ -107,11 +133,27 @@ typedef struct MapIfStateA {
     /* 0xCD08 */ u8 unkCD08;
     /* 0xCD09 */ u8 unkCD09[3];
     /* 0xCD0C */ u32 unkCD0C;
+    /* 0xCD10 */ u8 unkCD10[0x10];
+    /* 0xCD20 */ f32 unkCD20;
+    /* 0xCD24 */ f32 unkCD24;
 } MapIfStateA;
+
+typedef struct MapIfWidgetsA {
+    /* 0x00 */ MapIfWidget *widget[0x2B];
+} MapIfWidgetsA;
 
 typedef struct MapIfGlobalsA {
     /* 0x00 */ MapIfStateA *state;
-    /* 0x04 */ MapIfWidgets *widgets;
+    /* 0x04 */ MapIfWidgetsA *widgets;
 } MapIfGlobalsA;
+
+
+/* Retail 32-bit layout invariants. */
+typedef char MapIfRecordSizeCheck[sizeof(MapIfRecord) == 0x194 ? 1 : -1];
+typedef char MapIfStateSizeCheck[sizeof(MapIfState) == 0xCCE0 ? 1 : -1];
+typedef char MapIfStateASizeCheck[sizeof(MapIfStateA) == 0xCD28 ? 1 : -1];
+typedef char MapIfGlobalsSizeCheck[sizeof(MapIfGlobals) == 0x8 ? 1 : -1];
+typedef char MapIfGlobalsASizeCheck[sizeof(MapIfGlobalsA) == 0x8 ? 1 : -1];
+typedef char MapIfStateAHeadCheck[offsetof(MapIfStateA, head.unk1C) == 0x1C ? 1 : -1];
 
 #endif

@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int FUN_001b31ac(...);
 int FUN_001b31e0(...);
 int sysMemClear(...);
-int FUN_00471fec(...);
+int aocQueueFileLoad(...);
 int rt_memcpy_w(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
@@ -28,7 +28,7 @@ extern int FUN_001b315c(void);
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00471fec. */
+/* Supplied declaration required: aocQueueFileLoad. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -83,7 +83,7 @@ void FUN_00471468(int param_1,int param_2,int param_3,int param_4)
               temp_v8 = temp_v11 + temp_v4 * 0x10;
               rt_memcpy_w(temp_v8,*(int *)(temp_v7 + 0x4c) + temp_v3 * 0x10,0xe);
               textFormatBuffer(temp_v6,"%s/%s",temp_v9,pcVar5 + 1);
-              FUN_00471fec(g_aocDisplay,temp_v6,temp_v8,1,0x80,temp_v8);
+              aocQueueFileLoad(g_aocDisplay,temp_v6,temp_v8,1,0x80,temp_v8);
               temp_v4 = temp_v4 + 1;
               *(unsigned char *)(temp_v8 + 0xc) = 1;
             }

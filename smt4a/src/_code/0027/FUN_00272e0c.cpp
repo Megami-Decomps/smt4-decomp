@@ -1,15 +1,8 @@
-#include "common.h"
+#include "battle/btlView.h"
 
 extern "C" {
 
-typedef struct SceneState {
-    /* 0x00 */ u8 unk00[0x2C];
-    /* 0x2C */ u32 value;
-    /* 0x30 */ u8 unk30[0x38];
-    /* 0x68 */ u32 pending;
-} SceneState;
-
-extern SceneState g_battleViewState;
+extern BattleViewState g_battleViewState;
 
 s32 gameFlagIsSet(u32 flag);
 
@@ -17,7 +10,7 @@ s32 gameFlagIsSet(u32 flag);
 void FUN_00272e0c(u32 value)
 {
     if (gameFlagIsSet(0x4D0)) {
-        g_battleViewState.value = value;
+        g_battleViewState.unk2c = value;
         g_battleViewState.pending = 0;
     }
 }

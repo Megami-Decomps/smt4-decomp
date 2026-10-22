@@ -2127,11 +2127,11 @@
 0x00361a14 FUN_00361a14 between
 0x00361a50 FUN_00361a50 between
 0x00361a54 FUN_00361a54 between
-0x00362040 FUN_00362040 between
+0x0036203c FUN_0036203c between
 0x003620a8 nw_gfx_AnimBlender_UpdateCache name
 0x00362100 nw_gfx_AnimBlender_UpdateFrame name
 0x00362158 holderSetAuxiliaryValue between
-0x00362168 FUN_00362168 between
+0x00362164 FUN_00362164 between
 0x003621a8 nw_gfx_ParticleEmitter_Accept name
 0x003621fc FUN_003621fc between
 0x003625fc FUN_003625fc between
@@ -2144,7 +2144,7 @@
 0x00362d10 nw_gfx_HemiSphereLight_Accept name
 0x00362d64 FUN_00362d64 between
 0x003630b0 FUN_003630b0 between
-0x003630b8 FUN_003630b8 between
+0x003630b4 FUN_003630b4 between
 0x0036333c FUN_0036333c between
 0x00363390 FUN_00363390 between
 0x003635a0 FUN_003635a0 between
@@ -2215,11 +2215,11 @@
 0x0036adbc FUN_0036adbc between
 0x0036ae48 FUN_0036ae48 callers
 0x0036b060 nw_gfx_TransformAnimEvaluator_TryBind name
-0x0036b0a4 FUN_0036b0a4 between
+0x0036b0a0 FUN_0036b0a0 between
 0x0036b19c nw_gfx_LookAtTargetViewUpdater_Update name
 0x0036b360 FUN_0036b360 between
 0x0036b3a0 FUN_0036b3a0 between
-0x0036bcfc FUN_0036bcfc between
+0x0036bcf8 FUN_0036bcf8 between
 0x0036be60 FUN_0036be60 callers
 0x0036e1f4 nw_gfx_Fog_CreateAnimGroup name
 0x0036e390 nw_gfx_Fog_CreateOriginalValue name
@@ -2254,7 +2254,7 @@
 0x00372728 nw_gfx_Camera_DestroyResCamera name
 0x00372864 nw_gfx_Camera_Accept name
 0x003728b8 FUN_003728b8 between
-0x00372c70 FUN_00372c70 between
+0x00372c6c FUN_00372c6c between
 0x00372cd8 nw_gfx_Material_CreateBuffers name
 0x00372e84 FUN_00372e84 callers
 0x003733e4 nw_gfx_Material_DestroyResMaterial name
@@ -2267,7 +2267,7 @@
 0x00373ee0 _ZN9Obj421874D1Ev between
 0x00374030 FUN_00374030 between
 0x00374050 textureCalcSrtMatrix between
-0x00375980 FUN_00375980 between
+0x0037597c FUN_0037597c between
 0x00375a60 nw_gfx_SceneNode_Initialize name
 0x00375ab8 nw_gfx_SceneNode_UpdateFrame name
 0x00375b18 nw_gfx_SceneNode_CreateChildren name
@@ -2362,7 +2362,7 @@
 0x0037a05c FUN_0037a05c callers
 0x0037a0e4 FUN_0037a0e4 callers
 0x0037a144 FUN_0037a144 between
-0x0037a1c0 FUN_0037a1c0 between
+0x0037a1bc FUN_0037a1bc between
 0x0037a1ec nw_snd_internal_TaskManager_CancelTask name
 0x0037a210 nw_snd_internal_TaskManager_RemoveTask name
 0x0037a2a8 nw_snd_internal_TaskManager_CancelTasksByKey name
@@ -2486,7 +2486,7 @@
 0x0037f6d0 nw_snd_internal_driver_SequenceSoundPlayer_NoteOn name
 0x0037f700 FUN_0037f700 between
 0x0037f770 FUN_0037f770 between
-0x0037f9ac FUN_0037f9ac between
+0x0037f9a8 FUN_0037f9a8 between
 0x0037fa44 _ZN2nw3snd8internal6driver25MmlSequenceTrackAllocator10AllocTrackEPv name
 0x0037fa7c nw_snd_internal_driver_MmlSequenceTrackAllocator_FreeTrack name
 0x0037fab8 nw_snd_internal_driver_Channel_UpdateSweep name

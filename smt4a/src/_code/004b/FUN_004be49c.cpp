@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_002a4914(int, int);
 int FUN_002a4964(int, int);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int flagValueSub(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern unsigned int FUN_003e4d68(unsigned int);
 extern int FUN_004801ac(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: flagValueSub. */
@@ -54,7 +54,7 @@ void FUN_004be49c(int param_1)
         FUN_002a4964(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
         temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x2c4) & 0xffff);
         statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
         return;
       }
     }
@@ -73,12 +73,12 @@ void FUN_004be49c(int param_1)
       FUN_002a4964(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
       temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x2c4) & 0xffff);
       statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-      FUN_002a7324(1);
+      statusPanelSetOpen(1);
       return;
     }
   }
   statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
-  FUN_002a7324(1);
+  statusPanelSetOpen(1);
   return;
 }
 

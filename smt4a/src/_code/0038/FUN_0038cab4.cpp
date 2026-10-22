@@ -22,7 +22,7 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-extern unsigned int FUN_00232388(void);
+extern unsigned int btlResolveEntryChoice(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: scrSetResult. */
@@ -47,7 +47,7 @@ unsigned int FUN_0038cab4(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
   scrGetArg(2);
-  temp_v2 = FUN_00232388();
+  temp_v2 = btlResolveEntryChoice();
   FUN_00301a08(temp_v2,aiStack_34,&temp_v7);
   temp_v6 = aiStack_34[0];
   if (aiStack_34[0] < temp_v7 + aiStack_34[0]) {

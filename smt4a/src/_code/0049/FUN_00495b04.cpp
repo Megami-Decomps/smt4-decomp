@@ -12,7 +12,7 @@ int gameGetPlayerData(...);
 int FUN_0018349c(...);
 int FUN_0047fc38(void);
 int FUN_0049339c(...);
-int FUN_00493408(...);
+int drawTextAtRelativePosition(...);
 int FUN_004934ac(...);
 int FUN_0049368c(...);
 int contentGetUpgradedKindValue(...);
@@ -46,7 +46,7 @@ extern unsigned int FUN_001ba3d0(unsigned int);
 /* Supplied declaration required: FUN_0047fc38. */
 extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_0049339c. */
-/* Supplied declaration required: FUN_00493408. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
@@ -303,7 +303,7 @@ LAB_00495f20:
   temp_v2 = *(short *)(temp_v13 + 8);
   temp_v3 = *(short *)(temp_v13 + 10);
   textFormatBuffer(temp_v22,&LAB_00496270,temp_v8);
-  FUN_00493408(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v15,temp_v14,temp_v22);
+  drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v15,temp_v14,temp_v22);
   if (param_2 != 0) {
     temp_v9 = FUN_0049cad0(param_4);
     if (param_3 != 0) {
@@ -317,7 +317,7 @@ LAB_00495f20:
     temp_v2 = *(short *)(temp_v8 + 8);
     temp_v3 = *(short *)(temp_v8 + 10);
     textFormatBuffer(temp_v22,&LAB_00496274,temp_v9);
-    FUN_00493408(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
+    drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
   }
   temp_v9 = FUN_001ba3d0(temp_v6);
   if (param_3 != 0) {
@@ -336,7 +336,7 @@ LAB_00495f20:
   temp_v2 = *(short *)(temp_v8 + 8);
   temp_v3 = *(short *)(temp_v8 + 10);
   textFormatBuffer(temp_v22,&LAB_0049627c,temp_v9);
-  FUN_00493408(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
+  drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
   return;
 }
 

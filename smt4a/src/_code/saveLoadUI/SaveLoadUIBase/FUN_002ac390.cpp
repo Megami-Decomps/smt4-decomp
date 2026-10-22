@@ -1,58 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ac390` (_code @ 0x2ac390, 0xd4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: each copy's destination is staged through r3/r2 instead of loaded straight into r0 after the source call */
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdMemoryAlloc(...);
-int wordPairCopy(unsigned int, unsigned int);
-int rt_memcpy_w(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+    u8 unk0[8];
+    void *gameDataBackup;   /* 0x08: 0x80 bytes */
+    void *configBackup;     /* 0x0c: 8 bytes */
+    void *saveDataBackup;   /* 0x10: 0x2a71c bytes */
+} SaveLoadUIBase;
 
-extern int DAT_00588e1c; /* 0x588e1c */
-extern unsigned int DAT_00588e20; /* 0x588e20 */
-extern unsigned int DAT_00588e24; /* 0x588e24 */
+extern SaveLoadUIBase g_saveLoadUIBase;
+extern const char DAT_00533ec0[];
 
-extern unsigned int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: wordPairCopy. */
-extern unsigned int configGetSettings(void);
-extern unsigned int gameDataBlocksGetTable(void);
-/* Supplied declaration required: rt_memcpy_w. */
+void *asdMemoryAlloc(u32 heap, u32 align, s32 flags, u32 size, s32 fromTop);
+void *gameDataBlocksGetTable(void);
+void *configGetSettings(void);
+void *gameDataBlocksGetSaveData(void);
+void rt_memcpy_w(void *dst, const void *src, u32 size);
+void wordPairCopy(void *dst, const void *src);
 
-
+/* Snapshots the game data table, the config settings and the save data before the save/load UI edits them. */
 void FUN_002ac390(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (DAT_00588e1c == 0) {
-    temp_v0 = 0x100;
-    asdMemoryAlloc(0x100,0x100,0,0x80,1);
-    temp_v1 = 0x100;
-    DAT_00588e1c = temp_v0;
-    asdMemoryAlloc(0x100,0x100,0,8,1);
-    temp_v0 = 0x100;
-    temp_v2 = 1;
-    DAT_00588e20 = temp_v1;
-    asdMemoryAlloc(0x100,0x100,0,0x2a71c);
-    DAT_00588e24 = temp_v0;
-    temp_v0 = gameDataBlocksGetTable();
-    rt_memcpy_w(DAT_00588e1c,temp_v0,0x80);
-    temp_v0 = configGetSettings();
-    wordPairCopy(DAT_00588e20,temp_v0);
-    temp_v0 = gameDataBlocksGetSaveData();
-    rt_memcpy_w(DAT_00588e24,temp_v0,0x2a71c,temp_v2);
-    return;
-  }
-  return;
+    void *gameData;
+    void *config;
+    void *saveData;
+
+    if (g_saveLoadUIBase.gameDataBackup != NULL) {
+        return;
+    }
+    asdDebugTrace(DAT_00533ec0, 172);
+    g_saveLoadUIBase.gameDataBackup = asdMemoryAlloc(0x100, 0x100, 0, 0x80, 1);
+    asdDebugTrace(DAT_00533ec0, 173);
+    g_saveLoadUIBase.configBackup = asdMemoryAlloc(0x100, 0x100, 0, 8, 1);
+    asdDebugTrace(DAT_00533ec0, 174);
+    g_saveLoadUIBase.saveDataBackup = asdMemoryAlloc(0x100, 0x100, 0, 0x2a71c, 1);
+    gameData = gameDataBlocksGetTable();
+    rt_memcpy_w(g_saveLoadUIBase.gameDataBackup, gameData, 0x80);
+    config = configGetSettings();
+    wordPairCopy(g_saveLoadUIBase.configBackup, config);
+    saveData = gameDataBlocksGetSaveData();
+    rt_memcpy_w(g_saveLoadUIBase.saveDataBackup, saveData, 0x2a71c);
 }
 
 } /* extern "C" */

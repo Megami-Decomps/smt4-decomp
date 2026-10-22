@@ -1,66 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df3b4` (_code @ 0x3df3b4, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the key search loop allocates differently (retail keeps the table in sl and tests the result sign with lsrs); logic matches. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
+typedef struct ResourceKey {
+    /* 0x0 */ u32 id;
+    /* 0x4 */ u8 type;
+    /* 0x5 */ u8 variant;
+    /* 0x6 */ u8 unk6[2];
+} ResourceKey;
 
-extern int tokenResolveAddress(unsigned int, int **, unsigned int);
-extern unsigned int FUN_002b5c44(void);
+typedef struct ResourceKeyTable {
+    /* 0x0 */ ResourceKey *entries;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 count;
+} ResourceKeyTable;
 
+u32 FUN_002b5c44(void);
+s32 tokenResolveAddress(u32 context, ResourceKeyTable **table, u32 token);
 
-int FUN_003df3b4(unsigned int *param_1,int param_2,int param_3,int *param_4)
-
+/* Look up each of `count` keys in the token's table and copy the matching entries to `out`;
+ * returns 0, the resolve error, or 0xC8813890 when a key is missing. */
+s32 FUN_003df3b4(u32 *token, ResourceKey *out, const ResourceKey *keys, u32 count)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  int *piVar6;
-  int *piVar7;
-  int *unaff_r10;
-  int *piVar8;
-  int *temp_v3;
-  
-  temp_v3 = param_4;
-  temp_v0 = FUN_002b5c44();
-  temp_v1 = tokenResolveAddress(temp_v0,&temp_v3,*param_1);
-  if (-1 < temp_v1) {
-    if (param_4 != (int *)0x0) {
-      unaff_r10 = temp_v3;
+    ResourceKeyTable *table;
+    s32 result = tokenResolveAddress(FUN_002b5c44(), &table, *token);
+    u32 i;
+    u32 j;
+
+    if (result < 0) {
+        return result;
     }
-    piVar6 = (int *)0x0;
-    if (param_4 != (int *)0x0) {
-      do {
-        temp_v2 = 0;
-        if (unaff_r10[2] == 0) {
-          return -0x377ec770;
+    for (i = 0; i < count; i++) {
+        for (j = 0;; j++) {
+            if (j >= table->count) {
+                return 0xC8813890;
+            }
+            if (keys[i].type == table->entries[j].type && keys[i].id == table->entries[j].id &&
+                keys[i].variant == table->entries[j].variant) {
+                break;
+            }
         }
-        piVar7 = (int *)(param_3 + (int)piVar6 * 8);
-        while (((piVar8 = (int *)(*unaff_r10 + temp_v2 * 8), (char)piVar7[1] != (char)piVar8[1] ||
-                (*piVar7 != *piVar8)) || (*(char *)((int)piVar7 + 5) != *(char *)((int)piVar8 + 5)))
-              ) {
-          temp_v2 = temp_v2 + 1;
-          if ((unsigned int)unaff_r10[2] <= temp_v2) {
-            return -0x377ec770;
-          }
-        }
-        puVar4 = (unsigned int *)(*unaff_r10 + temp_v2 * 8);
-        puVar5 = (unsigned int *)(param_2 + (int)piVar6 * 8);
-        temp_v0 = puVar4[1];
-        piVar6 = (int *)((int)piVar6 + 1);
-        *puVar5 = *puVar4;
-        puVar5[1] = temp_v0;
-      } while (piVar6 < param_4);
+        out[i] = table->entries[j];
     }
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    return 0;
 }
 
 } /* extern "C" */

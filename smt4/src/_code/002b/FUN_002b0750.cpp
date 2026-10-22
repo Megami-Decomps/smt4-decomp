@@ -1,56 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b0750` (_code @ 0x2b0750, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: x and y get s16/s17 swapped (retail: x in s17, y in s16) so armcc merges their stores into one VSTMIA. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002af63c(int, int, unsigned int *);
+typedef struct TexDrawItem {
+    /* 0x00 */ u8 data[0x14];
+} TexDrawItem;
 
-/* stack frame of param_8: 7 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned short sp32; /* 0x32: local_32 */
-    unsigned short sp34; /* 0x34: local_34 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_8_stack;
+typedef struct TexDrawItemList {
+    /* 0x00 */ TexDrawItem *items;
+} TexDrawItemList;
 
-/* Supplied declaration required: FUN_002af63c. */
-extern int asdTMTexTableCallFileA(unsigned int, int);
+typedef struct TexDrawFile {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ TexDrawItemList *list;
+} TexDrawFile;
 
+typedef struct TexDrawParams {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u32 value;
+    /* 0x08 */ f32 x;
+    /* 0x0C */ f32 y;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+    /* 0x1C */ u8 unk1C[0x10];
+    /* 0x2C */ u16 scaleX;
+    /* 0x2E */ u16 scaleY;
+    /* 0x30 */ u8 unk30[0x10];
+} TexDrawParams;
 
-void FUN_002b0750(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5,
-                 int param_6,int param_7,unsigned int param_8)
+TexDrawFile *asdTMTexTableCallFileA(u32 table, s32 texture);
+u32 FUN_002af63c(TexDrawFile *file, TexDrawItem *item, TexDrawParams *params);
 
+/* Draws texture `texture` of `table` at (x, y) with the given size; does nothing for an empty size. */
+__softfp u32 FUN_002b0750(u32 id, u32 table, s32 texture, u32 value, f32 x, s32 width, s32 height, f32 y)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int iStack_4c;
-  int iStack_48;
-  unsigned short temp_v6;
-  unsigned short temp_v7;
-  
-  if (param_6 != 0 && param_7 != 0) {
-    temp_v0 = asdTMTexTableCallFileA(param_2,param_3);
-    temp_v1 = param_1 | 0x8000;
-    temp_v5 = 0;
-    iStack_4c = param_6;
-    iStack_48 = param_7;
-    temp_v6 = 1;
-    temp_v7 = 1;
-    temp_v2 = param_4;
-    temp_v3 = param_5;
-    temp_v4 = param_8;
-    FUN_002af63c(temp_v0,**(int **)(temp_v0 + 4) + (param_3 % 1000) * 0x14,&temp_v1);
-  }
-  return;
+    TexDrawParams params;
+
+    if (width == 0 || height == 0) {
+        return 0;
+    }
+    TexDrawFile *file = asdTMTexTableCallFileA(table, texture);
+    TexDrawItem *item = &file->list->items[texture % 1000];
+    params.id = id | 0x8000;
+    params.value = value;
+    params.x = x;
+    params.y = y;
+    params.unk10 = 0;
+    params.width = width;
+    params.height = height;
+    params.scaleX = 1;
+    params.scaleY = 1;
+    return FUN_002af63c(file, item, &params);
 }
 
 } /* extern "C" */

@@ -3,6 +3,7 @@
 #define SHARD_SHARD0032_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* A menu object; only the fields the helpers touch are named. */
 /* A menu object; only the fields the helpers touch are named. */
@@ -168,7 +169,9 @@ typedef struct StateAtF4 {
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u16 *unk08;
     /* 0x0C */ u32 *unk0C;
-    /* 0x10 */ u8 unk10[0x3C];
+    /* 0x10 */ u8 unk10[0x14];
+    /* 0x24 */ u8 image[1];
+    /* 0x25 */ u8 unk25[0x27];
     /* 0x4C */ u32 scriptProcess;
     /* 0x50 */ void *buf50;
     /* 0x54 */ void *buf54;
@@ -177,7 +180,10 @@ typedef struct StateAtF4 {
     /* 0x60 */ u8 unk60[0x94];
     /* 0xF4 */ s32 mode;
     /* 0xF8 */ s32 phase;
-    /* 0xFC */ u8 unkFC[0x50];
+    /* 0x0FC */ u8 unk0FC[0x12];
+    /* 0x10E */ u8 imageActive;
+    /* 0x10F */ u8 unk10F;
+    /* 0x110 */ u8 unk110[0x3C];
     /* 0x14C */ u32 unk14C;
     /* 0x150 */ u8 unk150[0x1C];
     /* 0x16C */ u8 unk16C[0xE];
@@ -201,5 +207,9 @@ typedef struct ScriptRef {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ ScriptState *state;
 } ScriptRef;
+
+typedef char CampCecEditALayoutCheck[sizeof(StateAtF4) == 0x18C ? 1 : -1];
+
+typedef char CampCecEditAOffsets[offsetof(StateAtF4, image) == 0x24 && offsetof(StateAtF4, imageActive) == 0x10E && offsetof(StateAtF4, unk10F) == 0x10F && offsetof(StateAtF4, unk14C) == 0x14C ? 1 : -1];
 
 #endif

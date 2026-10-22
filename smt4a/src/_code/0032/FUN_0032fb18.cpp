@@ -1,50 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032fb18` (_code @ 0x32fb18, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps a zero in r7 for the null-guard return and timer store; built folds the guards differently (4 vs 6 saved regs) */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002613f0(int);
+typedef struct {
+    u16 id;        /* 0x0 */
+    u16 counts[3]; /* 0x2 */
+} CallbackSlot;
 
-extern int g_callbackWork; /* 0x57f134 */
+CallbackSlot *FUN_002613f0(s32 index);
 
-/* Supplied declaration required: FUN_002613f0. */
+typedef struct {
+    u8 unk0[4];
+    u8 state;      /* 0x04 */
+    u8 unk5[3];
+    s32 timer;     /* 0x08 */
+    u8 unkC[0x2c - 0xc];
+    s32 slot;      /* 0x2c */
+} CallbackWork;
+
+extern CallbackWork *g_callbackWork;
 
 
-int FUN_0032fb18(int param_1)
+typedef struct {
+    u8 unk0[0x62];
+    u16 id;        /* 0x62 */
+} CallbackDemon;
 
+/* Index of the slot holding `demon` when it has any count left, else -1. */
+static s32 callbackFindSlot(CallbackDemon *demon)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_callbackWork;
-  if (g_callbackWork == 0) {
-    param_1 = 0;
-  }
-  if (g_callbackWork != 0 && param_1 != 0) {
-    temp_v2 = 0;
-    do {
-      psVar2 = (short *)FUN_002613f0(temp_v2);
-      if (*psVar2 == *(short *)(param_1 + 0x62)) {
-        temp_v1 = FUN_002613f0(temp_v2);
-        if ((((*(short *)(temp_v1 + 2) != 0) ||
-             (temp_v1 = FUN_002613f0(temp_v2), *(short *)(temp_v1 + 4) != 0)) ||
-            (temp_v1 = FUN_002613f0(temp_v2), *(short *)(temp_v1 + 6) != 0)) && (-1 < temp_v2)) {
-          *(int *)(temp_v0 + 0x2c) = temp_v2;
-          *(unsigned int *)(temp_v0 + 8) = 0;
-          *(unsigned char *)(temp_v0 + 4) = 3;
-          return 1;
+    s32 i;
+
+    for (i = 0; i < 24; i++) {
+        if (FUN_002613f0(i)->id == demon->id) {
+            if (FUN_002613f0(i)->counts[0] != 0 || FUN_002613f0(i)->counts[1] != 0 ||
+                FUN_002613f0(i)->counts[2] != 0) {
+                return i;
+            }
+            return -1;
         }
-        break;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x18);
-    param_1 = 0;
-  }
-  return param_1;
+    }
+    return -1;
+}
+
+/* Starts the callback for `demon`'s slot; returns 1 when started. */
+s32 FUN_0032fb18(CallbackDemon *demon)
+{
+    CallbackWork *work = g_callbackWork;
+    s32 slot;
+
+    if (work == NULL) {
+        return 0;
+    }
+    if (demon == NULL) {
+        return 0;
+    }
+    slot = callbackFindSlot(demon);
+    if (slot < 0) {
+        return 0;
+    }
+    work->slot = slot;
+    work->timer = 0;
+    work->state = 3;
+    return 1;
 }
 
 } /* extern "C" */

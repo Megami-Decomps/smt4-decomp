@@ -1,52 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00428334` (_code @ 0x428334, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail lsrs r1, r0, #31 differs from recovered tst r0, #-2147483648. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int FUN_00500254(int, unsigned int [2]);
-int FUN_0050028c(int, unsigned char [6], unsigned int, int);
+struct EntryCountView {
+    u32 count;       // 0x00
+    u32 unk04;       // 0x04
+};
 
-/* stack frame of param_3: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned short sp1A; /* 0x1a: local_1a */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
+struct EntryRecordView {
+    u8 unk00[6];     // 0x00
+    u16 unk06;       // 0x06
+};
 
-/* Supplied declaration required: FUN_00500254. */
-/* Supplied declaration required: FUN_0050028c. */
-
-
-int FUN_00428334(int param_1,unsigned int param_2,unsigned int param_3)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2 [2];
-  unsigned char temp_v3 [6];
-  unsigned short temp_v4;
-  
-  temp_v0 = param_1;
-  FUN_00500254(param_1,temp_v2);
-  if (temp_v0 < 0) {
-    return temp_v0;
-  }
-  temp_v1 = 0;
-  if (temp_v1 < temp_v2[0]) {
-    do {
-      temp_v0 = param_1;
-      FUN_0050028c(param_1,temp_v3,param_2,1);
-      if (temp_v0 < 0) {
-        return temp_v0;
-      }
-      if (temp_v4 != param_3) {
-        return -0x36bec740;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2[0]);
-  }
-  return 0;
 }
 
-} /* extern "C" */
+extern "C" s32 FUN_00500254(s32 handle, EntryCountView* countInfo);
+extern "C" s32 FUN_0050028c(s32 handle, EntryRecordView* record, u32 selector, u32 mode);
+
+// Checks each reported record's 16-bit value, propagating error statuses.
+extern "C" s32 FUN_00428334(s32 handle, u32 selector, u32 expectedValue)
+{
+    EntryCountView countInfo;
+    EntryRecordView record;
+
+    s32 result = FUN_00500254(handle, &countInfo);
+    if ((result & 0x80000000u) != 0) {
+        return result;
+    }
+
+    u32 index = 0;
+    if (countInfo.count != 0) {
+        do {
+            result = FUN_0050028c(handle, &record, selector, 1);
+            if ((result & 0x80000000u) != 0) {
+                return result;
+            }
+            if (record.unk06 != expectedValue) {
+                return -0x36bec740;
+            }
+            ++index;
+        } while (index < countInfo.count);
+    }
+
+    return 0;
+}

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void *FUN_0014e3bc(s32 size, u32 flags);
+void *asdMemoryAllocWithFlags(s32 size, u32 flags);
 void *FUN_0013c174(char *path, u8 *size, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
@@ -71,11 +71,11 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
                 set[2] += dataOffset + (s32)tmx;
                 set += 4;
             }
-            texFile = (TexFile *)FUN_0014e3bc(0x2c, flags);
+            texFile = (TexFile *)asdMemoryAllocWithFlags(0x2c, flags);
             if (tmx->setCount < 1) {
                 texFile->nodes = NULL;
             } else {
-                texFile->nodes = (TexNode *)FUN_0014e3bc(tmx->setCount << 5, flags);
+                texFile->nodes = (TexNode *)asdMemoryAllocWithFlags(tmx->setCount << 5, flags);
             }
             node = texFile->nodes;
             sets = (u32 *)((u8 *)tmx + tmx->setOffset);

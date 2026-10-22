@@ -14,7 +14,7 @@ int FUN_002328b4(void);
 int FUN_00233240(int, int);
 int FUN_00233818(int);
 int ifTouchRegionClearAll(unsigned int);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int messageTargetSetValue(int);
 int FUN_0029ee6c(int, int);
 int ifTouchRegionRemove(void);
@@ -41,7 +41,7 @@ extern int flaggedValueHolderGetTotal(int);
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -103,7 +103,7 @@ void FUN_003a3a9c(int param_1)
     FUN_00230df0(0);
     FUN_00232848();
     FUN_00233240(param_1 + 0x3a8,1);
-    FUN_00296e90();
+    messageMainFinishWindow();
     ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x85c));
     FUN_00233818(param_1 + 0x828);
     temp_v0 = 0;

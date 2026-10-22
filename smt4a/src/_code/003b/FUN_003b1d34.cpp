@@ -1,50 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b1d34` (_code @ 0x3b1d34, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "battle/btlCamera.h"
 extern "C" {
+extern BtlCameraA* g_btlCamera;
+s32 scrGetArg(u32);
+void mathVectorClear(f32*);
+void FUN_004f1c5c(BtlCameraA*, s32);
+void FUN_004f1edc(BtlCameraA*);
 
-int mathVectorClear(int);
-int FUN_004f1c5c(int, int);
-int FUN_004f1edc(int);
-
-extern int g_btlCamera; /* 0x571508 */
-
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: mathVectorClear. */
-/* Supplied declaration required: FUN_004f1c5c. */
-/* Supplied declaration required: FUN_004f1edc. */
-
-
-unsigned int FUN_003b1d34(void)
-
+// Resets the battle camera to its stored coordinates or clears its current coordinates.
+u32 FUN_003b1d34(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v0 = g_btlCamera;
-  if (g_btlCamera != 0) {
-    if (temp_v1 != 0) {
-      if (temp_v1 == 1) {
-        mathVectorClear(g_btlCamera);
-        *(unsigned int *)(temp_v0 + 0x3c) = 0;
-        *(unsigned int *)(temp_v0 + 0x38) = 1;
-        *(unsigned int *)(temp_v0 + 0xc) = 0;
-        *(unsigned int *)(temp_v0 + 0x10) = 0;
-      }
+    s32 mode = scrGetArg(0);
+    BtlCameraA* camera = g_btlCamera;
+    if (camera != NULL) {
+        if (mode == 0) {
+            FUN_004f1c5c(camera, 0);
+            FUN_004f1edc(camera);
+            camera->unk3C = 0;
+            camera->unk38 = 1;
+            camera->unk0C = camera->unk14;
+            camera->unk10 = camera->unk18;
+        } else if (mode == 1) {
+            mathVectorClear(camera->vector);
+            camera->unk3C = 0;
+            camera->unk38 = 1;
+            camera->unk0C = 0.0f;
+            camera->unk10 = 0.0f;
+        }
     }
-    else {
-      FUN_004f1c5c(g_btlCamera,0);
-      FUN_004f1edc(temp_v0);
-      *(unsigned int *)(temp_v0 + 0x3c) = 0;
-      *(unsigned int *)(temp_v0 + 0x38) = 1;
-      *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0x14);
-      *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x18);
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

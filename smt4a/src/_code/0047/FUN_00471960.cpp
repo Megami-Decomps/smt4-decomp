@@ -1,47 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00471960` (_code @ 0x471960, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail indexes the slot bytes as register offsets (`#12 + i*16`) without unrolling; indexing owner->slots[i] directly unrolls the loop by two. */
+#include "addon/aocMain.h"
 
 extern "C" {
 
-int asdFsIsSdCardDetected(void);
+s32 asdFsIsSdCardDetected(void);
+u32 objGetFlagBit16(void *object);
 
-extern int g_aocMain; /* 0x570260 */
+extern AocMain *g_aocMain;
 
-extern int objGetFlagBit16(void);
-/* Supplied declaration required: asdFsIsSdCardDetected. */
+/* One add-on content slot of the SD card list. */
+typedef struct AocSdSlot {
+    /* 0x00 */ s32 handle;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u8 present;
+    /* 0x0D */ u8 opened;
+    /* 0x0E */ u8 unk0E[2];
+} AocSdSlot;
 
+typedef struct AocSdOwner {
+    /* 0x000 */ u8 unk000[0x448];
+    /* 0x448 */ s32 slotCount;
+    /* 0x44C */ u32 unk44C;
+    /* 0x450 */ AocSdSlot *slots;
+} AocSdOwner;
 
-unsigned int FUN_00471960(int param_1)
-
+/* Returns 0 while a present add-on slot still waits to be opened; with no SD card, clears the
+ * add-on availability flag. */
+u32 FUN_00471960(AocSdOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = param_1;
-  asdFsIsSdCardDetected();
-  if (temp_v0 != 0) {
-    temp_v0 = objGetFlagBit16();
-    if (temp_v0 != 0) {
-      temp_v0 = 0;
-      if (0 < *(int *)(param_1 + 0x448)) {
-        temp_v1 = *(int *)(param_1 + 0x450);
-        do {
-          if (((*(char *)(temp_v1 + temp_v0 * 0x10 + 0xc) != '\0') &&
-              (*(char *)(temp_v1 + temp_v0 * 0x10 + 0xd) == '\0')) &&
-             (*(int *)(temp_v1 + temp_v0 * 0x10) == 0)) {
-            return 0;
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < *(int *)(param_1 + 0x448));
-      }
+    s32 i;
+
+    if (asdFsIsSdCardDetected() == 0) {
+        g_aocMain->flags &= ~0x10000;
+    } else if (objGetFlagBit16(g_aocMain) != 0) {
+        for (i = 0; i < owner->slotCount; i++) {
+            AocSdSlot *slot = &owner->slots[i];
+            if (slot->present && !slot->opened && slot->handle == 0) {
+                return 0;
+            }
+        }
     }
-  }
-  else {
-    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

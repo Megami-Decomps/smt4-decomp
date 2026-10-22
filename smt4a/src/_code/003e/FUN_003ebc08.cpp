@@ -1,45 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ebc08` (_code @ 0x3ebc08, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r3, [pc, #140] differs from recovered ldr r0, [pc, #132]. */
+#include "common.h"
+
+struct BattleStateLocalView {
+    u8 unk00[0x4C70];
+    s16 unk4C70; // 0x4C70
+    u16 unk4C72; // 0x4C72
+    s16 unk4C74; // 0x4C74
+    u16 unk4C76; // 0x4C76
+};
+
+struct BattleUiLocalView {
+    u8 unk00[0x2450];
+    s16 unk2450; // 0x2450
+    s16 unk2452; // 0x2452
+};
 
 extern "C" {
+extern BattleUiLocalView* g_btlUiBlock;
+void FUN_004a9a50(BattleUiLocalView* ui, s8 firstDelta, s8 secondDelta);
+void FUN_004aaa80(BattleUiLocalView* ui, s8 firstDelta, s8 secondDelta);
 
-int FUN_004a9a50(int, int, int);
-int FUN_004aaa80(int, int, int);
-
-extern int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: FUN_004a9a50. */
-/* Supplied declaration required: FUN_004aaa80. */
-
-
-void FUN_003ebc08(int param_1,int param_2)
-
+// Dispatch wrapped UI deltas by mode, then snapshot the current state pair.
+void FUN_003ebc08(BattleStateLocalView* state, s32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  short temp_v2;
-  short temp_v3;
-  
-  temp_v3 = *(short *)(param_1 + 0x4c70);
-  temp_v2 = *(short *)(param_1 + 0x4c72) - temp_v3;
-  if (0 < temp_v2) {
-    temp_v3 = temp_v3 + temp_v2;
-  }
-  temp_v0 = (char)temp_v3 - (char)*(unsigned short *)(g_btlUiBlock + 0x2450);
-  temp_v1 = (char)temp_v2 - (char)*(unsigned short *)(g_btlUiBlock + 0x2452);
-  if (param_2 != 0) {
-    if (param_2 == 1) {
-      FUN_004aaa80(g_btlUiBlock,(int)temp_v0,(int)temp_v1);
-    }
-  }
-  else {
-    FUN_004a9a50(g_btlUiBlock,(int)temp_v0,(int)temp_v1);
-  }
-  *(unsigned short *)(param_1 + 0x4c74) = *(unsigned short *)(param_1 + 0x4c70);
-  *(unsigned short *)(param_1 + 0x4c76) = *(unsigned short *)(param_1 + 0x4c72);
-  return;
-}
+    s16 first = state->unk4C70;
+    s16 difference = static_cast<s16>(state->unk4C72 - first);
+    BattleUiLocalView* ui = g_btlUiBlock;
 
-} /* extern "C" */
+    if (difference > 0) {
+        first = static_cast<s16>(first + difference);
+    }
+
+    s16 firstDelta = static_cast<s16>(first - ui->unk2450);
+    s16 secondDelta = static_cast<s16>(difference - ui->unk2452);
+
+    switch (mode) {
+    case 0:
+        FUN_004a9a50(ui, static_cast<s8>(firstDelta),
+                    static_cast<s8>(secondDelta));
+        break;
+    case 1:
+        FUN_004aaa80(ui, static_cast<s8>(firstDelta),
+                    static_cast<s8>(secondDelta));
+        break;
+    }
+
+    state->unk4C74 = state->unk4C70;
+    state->unk4C76 = state->unk4C72;
+}
+}

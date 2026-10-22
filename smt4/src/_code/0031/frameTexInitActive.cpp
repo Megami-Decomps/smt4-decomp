@@ -1,10 +1,11 @@
-#include "shard/JobBlock43e278.h"
+#include "ui/FrameTex.h"
+extern "C" FrameWork *g_frameTex;
 
 extern "C" {
 
 void frameTexInitActive(void)
 {
-    JobBlock43e278 *block = g_frameTex;
+    FrameWork *block = g_frameTex;
 
     g_frameTex->unkF60 = 1;
     block->unkF63 = 0;

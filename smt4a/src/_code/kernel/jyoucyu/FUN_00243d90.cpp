@@ -1,50 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00243d90` (_code @ 0x243d90, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail add r0, pc, #140 differs from recovered add r0, pc, #144. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+// Private views of the portions accessed by this function.
+struct JyoucyuAllocationView {
+    void* process;       // 0x00
+    u8 unk04;            // 0x04
+    u8 unk05[3];         // 0x05
+    u32 unk08;           // 0x08
+};
+
+struct JyoucyuGlobalView {
+    u32 unk00;                       // 0x00
+    JyoucyuAllocationView* unk04;     // 0x04
+};
 
 extern "C" {
+extern JyoucyuGlobalView g_jyoucyu;
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAlloc(...);
+void* asdMemoryAlloc(u32 category, u32 size, u32 flags, u32 alignment,
+                     u32 option);
+void FUN_0025c7e4(void);
+void jyoucyuRequest(void);
+u32 jyoucyuDrawLoadingOverlay(void);
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+void* asdProcessCreateSimple(const char* name, u32 priority, u32 option,
+                             u32 flags, void (*entry)(void),
+                             void (*request)(void), void* argument);
+void taskCreateDraw(const char* name, u32 priority, u32 option, u32 flags,
+                    u32 (*draw)(void), u32 option2, u32 option3,
+                    void* process);
 
-extern unsigned char LAB_00243e6c; /* 0x243e6c */
-extern unsigned char LAB_00243e7c; /* 0x243e7c */
-extern unsigned char LAB_0025c7e4; /* 0x25c7e4 */
-extern unsigned int jyoucyuDrawLoadingOverlay(void);
-extern unsigned char LAB_002e0548; /* 0x2e0548 */
-extern unsigned int *DAT_0057ffbc; /* 0x57ffbc */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
+// Allocate resident state, create its process, and attach the loading-overlay draw task.
 void FUN_00243d90(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x10000;
-  asdMemoryAlloc(0x10000,0x100,0,0x18,1);
-  DAT_0057ffbc = puVar1;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  puVar1[2] = 0;
-  puVar2 = &LAB_00243e6c;
-  asdProcessCreateSimple(&LAB_00243e6c,4,0,0,&LAB_0025c7e4,&LAB_002e0548,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_00243e7c,0x89,0,0,jyoucyuDrawLoadingOverlay,0,0,puVar2);
-  return;
-}
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\kernel\\jyoucyu.cpp", 80);
 
-} /* extern "C" */
+    JyoucyuAllocationView* state = static_cast<JyoucyuAllocationView*>(
+        asdMemoryAlloc(0x10000, 0x100, 0, 0x18, 1));
+    g_jyoucyu.unk04 = state;
+    state->unk04 = 0;
+    state->unk08 = 0;
+
+    void* process = asdProcessCreateSimple(
+        "JYOUCYU C", 4, 0, 0, FUN_0025c7e4, jyoucyuRequest, 0);
+    state->process = process;
+
+    taskCreateDraw("JYOUCYU D", 0x89, 0, 0,
+                   jyoucyuDrawLoadingOverlay, 0, 0, process);
+}
+}

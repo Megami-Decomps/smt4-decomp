@@ -17,8 +17,8 @@ u32 btlEffectFindSlotId(BtlEffectOwner *owner)
 
     if (owner->slots != NULL) {
         for (i = 0; i < BTL_EFFECT_SLOTS; i++) {
-            offset = i * BTL_EFFECT_SLOT_SIZE + BTL_EFFECT_SLOT_TABLE;
-            slot = (BtlEffectSlot *)(owner->slots + offset);
+            offset = i * sizeof(BtlEffectSlot) + offsetof(BtlEffectSlotBlock, entries);
+            slot = (BtlEffectSlot *)((u8 *)owner->slots + offset);
             if (slot != NULL) {
                 value = libc_strlen(g_btlEffect.unk0C);
                 if (libc_strncmp(slot, g_btlEffect.unk0C, value) == 0) {

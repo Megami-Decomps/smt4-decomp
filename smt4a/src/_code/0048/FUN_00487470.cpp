@@ -62,7 +62,7 @@ extern int gameFlagsClassify(int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00487d6c. */
 /* Supplied declaration required: FUN_0048a5e4. */
-extern unsigned char FUN_0048b1bc(int context, float angle);
+extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_0048b420. */
 /* Supplied declaration required: FUN_00490a10. */
 /* Supplied declaration required: FUN_0049177c. */
@@ -70,7 +70,7 @@ extern unsigned long long *sub68OwnerGetBlock60(int);
 /* Supplied declaration required: naviGetActiveStateValue. */
 extern float *lmapSceneGetObj(int);
 /* Supplied declaration required: naviMainSelectPair. */
-extern int FUN_00492c5c(int);
+extern int naviMainGetRequestedMap(int);
 /* Supplied declaration required: FUN_00492c70. */
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_0049368c. */
@@ -156,7 +156,7 @@ void FUN_00487470(int param_1)
       FUN_00487d6c(temp_v42);
       return;
     }
-    temp_v31 = FUN_00492c5c(temp_v37);
+    temp_v31 = naviMainGetRequestedMap(temp_v37);
     temp_v23 = temp_v18;
     temp_v24 = temp_v20;
     FUN_00492c70(temp_v37);
@@ -435,11 +435,11 @@ LAB_00487744:
   temp_v5 = NaviMain_GetCurrentMap(temp_v37);
   if (temp_v2 == temp_v5) {
     if (temp_v38 == 0) {
-      temp_v2 = FUN_0048b1bc(temp_v42,FUN_00492adc(temp_v37));
+      temp_v2 = mathHeadingToDirectionCode(temp_v42,FUN_00492adc(temp_v37));
       temp_v14 = (int)temp_v29;
       temp_v5 = (int)temp_v28;
       FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbc1,temp_v5,temp_v14,0xb,1);
-      temp_v2 = FUN_0048b1bc(temp_v42,FUN_00492b98());
+      temp_v2 = mathHeadingToDirectionCode(temp_v42,FUN_00492b98());
       FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbb9,temp_v5,temp_v14,0xb,1);
     }
     FUN_00492adc(temp_v37);

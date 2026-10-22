@@ -1,61 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048d358` (_code @ 0x48d358, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the source order of the state and flags stores in both cases; armcc swaps them (str r1, [r4, #8]! before the flags store). */
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
 
-int FUN_00168980(int);
-int uiSpriteBankApplyPreset(int, int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
+typedef struct PresetCursorView {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s32 state;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ u32 flags;
+    /* 0x014 */ u8 unk014[0x4BC];
+    /* 0x4D0 */ u8 position[0x14];
+    /* 0x4E4 */ u8 sprites[0xAC];
+    /* 0x590 */ u8 cursor[0x8C];
+} PresetCursorView;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+s32 FUN_00163aa4(void *sprite, f32 rate);
+s32 vec2GetXInt(void *sprite);
+s32 vec2GetYInt(void *sprite);
+void pointConvertToFloat(void *point, s32 x, s32 y);
+s32 FUN_002e19f8(void);
+void uiSpriteBankApplyPreset(void *bank, s32 preset);
+void FUN_00168980(s32 sound);
 
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-extern int FUN_00163aa4(int);
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_0048d358(int param_1)
-
+/* Shows the view (state 0 -> 1), then follows its cursor until it settles (state 1 -> 2). */
+void FUN_0048d358(PresetCursorView *view)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if (*(int *)(param_1 + 8) == 1) {
-      temp_v3 = param_1 + 0x590;
-      temp_v0 = FUN_00163aa4(temp_v3);
-      if ((temp_v0 != 0) && (temp_v0 = FUN_002e19f8(), temp_v0 != 0)) {
-        *(unsigned int *)(param_1 + 8) = 2;
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 2;
-      }
-      temp_v1 = vec2GetYInt(temp_v3);
-      temp_v2 = vec2GetXInt(temp_v3);
-      pointConvertToFloat(param_1 + 0x4d0,temp_v2,temp_v1);
-      return;
+    switch (view->state) {
+    case 0:
+        uiSpriteBankApplyPreset(view->sprites, 1);
+        if (g_gameState.mapFlags.unk295 == 0) {
+            FUN_00168980(0x1b);
+        }
+        view->flags |= 0x1000000;
+        view->state = 1;
+        break;
+    case 1: {
+        void *cursor = view->cursor;
+        if (FUN_00163aa4(cursor, 1.0f) && FUN_002e19f8()) {
+            view->state = 2;
+            view->flags |= 2;
+        }
+        pointConvertToFloat(view->position, vec2GetXInt(cursor), vec2GetYInt(cursor));
+        break;
     }
-  }
-  else {
-    uiSpriteBankApplyPreset(param_1 + 0x4e4,1);
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x295)) == '\0') {
-      FUN_00168980(0x1b);
     }
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x1000000;
-    *(unsigned int *)(param_1 + 8) = 1;
-  }
-  return;
 }
 
 } /* extern "C" */

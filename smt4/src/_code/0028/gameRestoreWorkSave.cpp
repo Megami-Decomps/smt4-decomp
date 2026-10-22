@@ -33,7 +33,7 @@ void rt_memcpy_w(void *, const void *, u32 bytes);
 // Restore the work save while preserving the requested mode's flags and selected state.
 void gameRestoreWorkSave(s32 mode)
 {
-    RestoreSaveImage *image = static_cast<RestoreSaveImage *>(g_gameDataBlocks.saveBlock);
+    RestoreSaveImage *image = reinterpret_cast<RestoreSaveImage  *>(g_gameDataBlocks.saveBlock);
     RestoreSavePayload *data = &image->data;
     u8 preservedByte = data->preservedByte;
     f32 primaryValue = data->primaryValue;
@@ -51,7 +51,7 @@ void gameRestoreWorkSave(s32 mode)
     data->preservedValue = preservedValue;
     flagBlockCopyRecord(snapshot);
     if (mode == 1) {
-        static_cast<RestoreSaveImage *>(g_gameDataBlocks.saveBlock)->data.primaryValue = primaryValue;
+        reinterpret_cast<RestoreSaveImage  *>(g_gameDataBlocks.saveBlock)->data.primaryValue = primaryValue;
         data->preservedByte = preservedByte;
         if (flag556) {
             gameFlagSetValue(0x556, 1, 1);

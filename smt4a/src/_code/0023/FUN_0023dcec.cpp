@@ -25,7 +25,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 extern unsigned int dataTableGetEntry24Byte0(unsigned int);
 extern unsigned int dataTableGetEntry24Member(unsigned int);
-extern int FUN_0031fe14(unsigned int);
+extern int saveOptionIsEnabled(unsigned int);
 
 
 void FUN_0023dcec(int param_1,int param_2,int param_3,int param_4,int param_5)
@@ -43,7 +43,7 @@ void FUN_0023dcec(int param_1,int param_2,int param_3,int param_4,int param_5)
   if (param_5 != 0) {
     FUN_00164b5c(2,0x1a,0x10,param_3,param_4,0x65);
     FUN_001835b4(2,0x1a,0x95,param_3,param_4,0x6a);
-    temp_v1 = FUN_0031fe14(temp_v0);
+    temp_v1 = saveOptionIsEnabled(temp_v0);
     if (temp_v1 != 0) {
       efctSetSpeed();
       FUN_001835b4(2,0x1a,0x97,param_3,param_4,0x6d);
@@ -60,7 +60,7 @@ void FUN_0023dcec(int param_1,int param_2,int param_3,int param_4,int param_5)
   else {
     FUN_00164b5c(2,0x1a,0xf,param_3,param_4,0x65);
     FUN_001835b4(2,0x1a,0x90,param_3,param_4,0x6a);
-    temp_v1 = FUN_0031fe14(temp_v0);
+    temp_v1 = saveOptionIsEnabled(temp_v0);
     if (temp_v1 != 0) {
       FUN_001835b4(2,0x1a,0x91,param_3,param_4,0x6f);
     }

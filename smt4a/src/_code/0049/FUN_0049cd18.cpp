@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int FUN_00408184(int, int);
 int aocRecordLookup84(void);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 extern unsigned int aocEntryGetKind(unsigned int);
 extern int gameDataBlocksGetTableFlag(void);
@@ -52,7 +52,7 @@ void FUN_0049cd18(unsigned short *param_1,int param_2,int param_3)
     switch(temp_v0) {
     case 1:
     case 0xc:
-      FUN_00192550();
+      dataTable8FindRecord();
       if (temp_v4 != 0) {
         temp_v3 = *(int *)(temp_v4 + 0x50);
       }
@@ -99,7 +99,7 @@ void FUN_0049cd18(unsigned short *param_1,int param_2,int param_3)
     case 1:
     case 0xc:
       temp_v1 = temp_v4;
-      FUN_00192550();
+      dataTable8FindRecord();
       if (temp_v1 != 0) {
         temp_v3 = *(int *)(temp_v1 + 0x4c);
       }

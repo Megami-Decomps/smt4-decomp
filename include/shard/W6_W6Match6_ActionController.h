@@ -27,7 +27,7 @@ struct ActionSequence {
     s16 kind; // 0x04
     u16 unk06;
     u8 flags; // 0x08
-    u8 unk09[3];
+    u8 color[3]; // 0x09: percent per channel
     ActionEvents events; // 0x0c
     u8 unk1c[0x64];
     s16 startX; // 0x80

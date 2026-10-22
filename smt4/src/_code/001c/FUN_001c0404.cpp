@@ -16,9 +16,9 @@ int battleLoadCommonResources(void);
 int dataTable19ResolveVariants(void);
 int FUN_00201ac8(void);
 int FUN_00211d00(void);
-int FUN_00223b84(void);
+int statusBustUpAcquire(void);
 int FUN_0026f824(int);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c5620(void);
 int asdSequenceRequest(int, int);
@@ -27,7 +27,7 @@ int asdTMTexTableLoadTmx(int, int);
 int FUN_002fc1a8(void);
 int FUN_00317e78(void);
 int FUN_00324a20(void);
-int FUN_0033c618(void);
+int fileSlotsPreloadShuffled(void);
 int FUN_0033f784(void);
 int spriteTables14And15Load(unsigned int);
 
@@ -46,9 +46,9 @@ extern unsigned char DAT_00446db4; /* 0x446db4 */
 /* Supplied declaration required: dataTable19ResolveVariants. */
 /* Supplied declaration required: FUN_00201ac8. */
 /* Supplied declaration required: FUN_00211d00. */
-/* Supplied declaration required: FUN_00223b84. */
+/* Supplied declaration required: statusBustUpAcquire. */
 /* Supplied declaration required: FUN_0026f824. */
-/* Supplied declaration required: FUN_0028d9b0. */
+/* Supplied declaration required: buttonHelpAcquireResources. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c5620. */
 /* Supplied declaration required: asdSequenceRequest. */
@@ -57,7 +57,7 @@ extern unsigned char DAT_00446db4; /* 0x446db4 */
 /* Supplied declaration required: FUN_002fc1a8. */
 /* Supplied declaration required: FUN_00317e78. */
 /* Supplied declaration required: FUN_00324a20. */
-/* Supplied declaration required: FUN_0033c618. */
+/* Supplied declaration required: fileSlotsPreloadShuffled. */
 /* Supplied declaration required: FUN_0033f784. */
 /* Supplied declaration required: spriteTables14And15Load. */
 
@@ -88,11 +88,11 @@ unsigned int FUN_001c0404(int *param_1)
     }
     if (temp_v0 < 0xc) {
       if (temp_v0 == 8) {
-        FUN_0028d9b0();
+        buttonHelpAcquireResources();
         FUN_00192884();
         FUN_00201ac8();
         spriteTableRefAcquire();
-        FUN_00223b84();
+        statusBustUpAcquire();
         FUN_001ddb40();
         spriteTables14And15Load(g_btlUiBlock);
         FUN_00317e78();
@@ -141,7 +141,7 @@ unsigned int FUN_001c0404(int *param_1)
     *(int *)(temp_v1 + 8) = temp_v0;
     break;
   case 3:
-    FUN_0033c618();
+    fileSlotsPreloadShuffled();
     temp_v0 = *(int *)(temp_v1 + 8) + 1;
     *(int *)(temp_v1 + 8) = temp_v0;
     break;

@@ -1,54 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047fd9c` (_code @ 0x47fd9c, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-int FUN_00192550(void);
-int FUN_0034a290(void);
+typedef struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u16 skills[8];
+    /* 0x44 */ u8 unk44[0x1e];
+    /* 0x62 */ u16 equipment;
+} UnitRecord;
 
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00192550. */
-/* Supplied declaration required: FUN_0034a290. */
+typedef struct EquipmentData {
+    /* 0x00 */ u8 unk00[0xb3];
+    /* 0xb3 */ u8 flags;
+} EquipmentData;
 
+typedef struct EntryData {
+    /* 0x00 */ u8 unk00[0x42];
+    /* 0x42 */ u8 attributes; /* high nibble: matching skill category, 0 = none */
+} EntryData;
 
-unsigned int FUN_0047fd9c(int param_1,int param_2)
+typedef struct SkillData {
+    /* 0x00 */ u8 unk00[0x33];
+    /* 0x33 */ u8 category;
+} SkillData;
 
+EquipmentData *FUN_00184310(u16 id);
+EntryData *dataTable8FindRecord(s32 id);
+SkillData *FUN_0034a290(u16 id);
+
+/* For ids 1-60 and 0x79f-0x7de: true when the unit's equipment has flag 4 or one of its skills
+ * has the entry's category. */
+s32 FUN_0047fd9c(s32 id, UnitRecord *unit)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = param_1 - 1;
-  temp_v3 = temp_v0 >= 0x3b;
-  temp_v2 = temp_v0 == 0x3b;
-  if (temp_v0 >= 0x3c) {
-    temp_v3 = param_1 - 0x79fU >= 0x3f;
-    temp_v2 = param_1 - 0x79fU == 0x3f;
-  }
-  if (!temp_v3 || temp_v2) {
-    temp_v0 = (unsigned int)*(unsigned short *)(param_2 + 0x62);
-    FUN_00184310();
-    if ((temp_v0 != 0) && ((*(unsigned char *)(temp_v0 + 0xb3) & 4) != 0)) {
-      return 1;
-    }
-    FUN_00192550();
-    if ((*(unsigned char *)(param_1 + 0x42) & 0xf0) != 0) {
-      temp_v1 = 0;
-      do {
-        temp_v0 = (unsigned int)*(unsigned short *)(param_2 + temp_v1 * 2 + 0x34);
-        if (((temp_v0 != 0) && (FUN_0034a290(), temp_v0 != 0)) &&
-           (*(unsigned char *)(temp_v0 + 0x33) == *(unsigned char *)(param_1 + 0x42) >> 4)) {
-          return 1;
+    if ((u32)(id - 1) <= 59 || (u32)(id - 0x79f) <= 63) {
+        EquipmentData *equipment = FUN_00184310(unit->equipment);
+        if (equipment != NULL && (equipment->flags & 4)) {
+            return 1;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 8);
+        EntryData *entry = dataTable8FindRecord(id);
+        if (entry->attributes & 0xf0) {
+            for (s32 i = 0; i < 8; i++) {
+                if (unit->skills[i] != 0) {
+                    SkillData *skill = FUN_0034a290(unit->skills[i]);
+                    if (skill != NULL && skill->category == entry->attributes >> 4) {
+                        return 1;
+                    }
+                }
+            }
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

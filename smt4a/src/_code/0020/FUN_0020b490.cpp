@@ -16,7 +16,7 @@ int FUN_002c85b0(int);
 int FUN_00333f6c(void);
 int FUN_0033449c(int);
 int FUN_00371f18(void);
-int FUN_00387ac4(int);
+int buttonHelpSetMode(int);
 int FUN_003a7b2c(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -38,7 +38,7 @@ extern unsigned int gameDataBlocksGetWord(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00371f18. */
-/* Supplied declaration required: FUN_00387ac4. */
+/* Supplied declaration required: buttonHelpSetMode. */
 extern int aocDataBlockHasEntries(void);
 /* Supplied declaration required: FUN_003a7b2c. */
 
@@ -127,7 +127,7 @@ LAB_0020b584:
         scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),5);
         return;
       }
-      FUN_00387ac4(0);
+      buttonHelpSetMode(0);
       FUN_00168980(3);
       return;
     }

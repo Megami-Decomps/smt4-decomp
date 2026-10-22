@@ -1,6 +1,7 @@
 #include "shard/NaviMain.h"
 
 extern "C" {
+extern NaviMainA *g_naviMain;
 
 void naviRequestClose(void)
 {

@@ -26,7 +26,7 @@ int FUN_00336aec(...);
 int campCommonBgRelease(void);
 int partyPanelDestroy(void);
 int FUN_0038b3f8(...);
-int FUN_003a7a88(...);
+int devilIsTextureLoaded(...);
 int pairQueueAppend(...);
 int controllerStartInterpolation(...);
 int FUN_0047f66c(...);
@@ -170,7 +170,7 @@ extern int menu32ModeIsNot5(int);
 /* Supplied declaration required: FUN_0038b3f8. */
 extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: uiMenuRequestStateNine. */
 extern int menu32IsMissingOrState6(int);
@@ -803,7 +803,7 @@ LAB_002255d4:
       do {
         if (*(char *)(puVar14 + temp_v4 * 7 + 6) != '\0') {
           temp_v10 = (int)(short)puVar14[temp_v4 * 7 + 5];
-          FUN_003a7a88(temp_v10,1);
+          devilIsTextureLoaded(temp_v10,1);
           temp_v15 = (float)(temp_v14 >> 0x20);
           if (temp_v10 == 0) goto LAB_00225ce8;
         }

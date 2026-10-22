@@ -29,7 +29,7 @@ void *FUN_00178b04(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *word);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
 BtlUnitDataA *FUN_001568f8(BtlMainStateA *state, s32 group);
-void FUN_004ac0d4(void *ui, u16 id);
+void btlUiAddRequest(void *ui, u16 id);
 void FUN_004cb9d0(BattleEffectSetup *render);
 void FUN_004d854c(s32 *owner);
 bool FUN_004d87e4(void **holder);
@@ -68,7 +68,7 @@ void battleUnitUpdateModelLoad(BtlMainStateA *state, BattleModelRecord *record)
             render.flags |= 0x200002;
             FUN_004d854c((s32 *)record->model.owner);
             BtlUnitDataA *data = FUN_001568f8(state, render.group);
-            FUN_004ac0d4(g_btlUiBlock, data->unk02);
+            btlUiAddRequest(g_btlUiBlock, data->unk02);
             render.variant = 0;
             render.position[0] = 0.0f;
             render.position[1] = 0.0f;

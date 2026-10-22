@@ -1,47 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00344bc8` (_code @ 0x344bc8, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail adds the byte index to the save pointer before the 0x282ec offset and loads with no immediate; branch offsets follow. */
+#include "gamedata/DataTable.h"
+#include "shard/Shard003D.h"
+#include "shard/ProgressUnlock.h"
 
 extern "C" {
 
-int dataTableGet(int, int);
+GameBlock2830C *gameDataBlocksGetSaveData(void);
 
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(void);
-
-
-int FUN_00344bc8(int param_1)
-
+/* Returns the table index of the nth earned progress unlock, or the table count if fewer are earned. */
+s32 FUN_00344bc8(s32 nth)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  dataTableGet(0x4a,0);
-  temp_v0 = dataTableGetCount();
-  temp_v2 = 0;
-  temp_v3 = 0;
-  if (temp_v2 < temp_v0) {
-    do {
-      dataTableGet(0x4a,0);
-      temp_v1 = dataTableGetEntries();
-      if ((temp_v1 + temp_v2 * 0x2c != 0) &&
-         (temp_v1 = gameDataBlocksGetSaveData(),
-         ((unsigned int)*(unsigned char *)(temp_v1 + ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1d)) >> 3) + 0x282ec) &
-         (1 << ((temp_v2 % 8) & 0xffU))) != 0)) {
-        if (temp_v3 == param_1) {
-          return temp_v2;
+    s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
+    s32 index = 0;
+    s32 earned = 0;
+
+    for (; index < count; index++) {
+        ProgressUnlockCondition *entries =
+            static_cast<ProgressUnlockCondition *>(dataTableGetEntries(dataTableGet(0x4a, 0)));
+        if (&entries[index] == NULL) {
+            continue;
         }
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v0);
-  }
-  return temp_v2;
+        s32 byte = index / 8;
+        s32 bit = index % 8;
+        u8 *earnedBits = gameDataBlocksGetSaveData()->unlocks.earned;
+        if (earnedBits[byte] & (1 << bit)) {
+            if (earned == nth) {
+                return index;
+            }
+            earned++;
+        }
+    }
+    return index;
 }
 
 } /* extern "C" */

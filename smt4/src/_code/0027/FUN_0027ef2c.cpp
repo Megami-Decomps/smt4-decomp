@@ -1,51 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027ef2c` (_code @ 0x27ef2c, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The queue counter update and zero-kind state setup are scheduled differently. */
+#include "shard/W8Match1_PositionRequests.h"
 extern "C" {
+extern PositionRequestPool* DAT_00448c20;
+u32 FUN_00291e40(void);
 
-extern int DAT_00448c20; /* 0x448c20 */
-
-extern unsigned int FUN_00291e40(void);
-
-
-void FUN_0027ef2c(unsigned int param_1,int param_2)
-
+// Initializes the first free positional request and increments the live request count.
+void FUN_0027ef2c(u32 id, s32 kind, f32 x, f32 y, f32 z)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  
-  temp_v1 = 0;
-  do {
-    temp_v2 = DAT_00448c20 + temp_v1 * 0x20;
-    if (*(char *)(temp_v2 + 0xc) == '\0') {
-      *(char *)(temp_v2 + 0xc) = '\x01';
-      *(short *)(temp_v2 + 0x1c) = (short)param_2;
-      *(unsigned short *)(temp_v2 + 0x1e) = 0;
-      *(unsigned int *)(temp_v2 + 0x20) = in_s0;
-      *(unsigned int *)(temp_v2 + 0x24) = in_s1;
-      *(unsigned int *)(temp_v2 + 0x28) = in_s2;
-      *(unsigned int *)(temp_v2 + 0x10) = param_1;
-      if (param_2 != 0) {
-        *(unsigned int *)(temp_v2 + 0x14) = 0;
-        *(unsigned int *)(temp_v2 + 0x18) = 0;
-      }
-      else {
-        temp_v0 = FUN_00291e40();
-        *(unsigned int *)(temp_v2 + 0x14) = temp_v0;
-        *(unsigned int *)(temp_v2 + 0x18) = 1;
-      }
-      *(int *)(DAT_00448c20 + 4) = *(int *)(DAT_00448c20 + 4) + 1;
-      return;
+    for (s32 index = 0; index < 32; ++index) {
+        PositionRequest* request = &DAT_00448c20->entries[index];
+        if (request->active == 0) {
+            request->active = 1;
+            request->kind = kind;
+            request->unk12 = 0;
+            request->position[0] = x;
+            request->position[1] = y;
+            request->position[2] = z;
+            request->id = id;
+            if (kind != 0) {
+                request->timer = 0;
+                request->state = 0;
+            } else {
+                request->timer = FUN_00291e40();
+                request->state = 1;
+            }
+            ++DAT_00448c20->count;
+            return;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x20);
-  return;
 }
-
-} /* extern "C" */
+}

@@ -1,3 +1,4 @@
+#include "battle/btlScript.h"
 #include "battle/btlUnit.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ void FUN_003dc924(void *object, u32 value, s32 flag);
 s32 FUN_003db1f4(void *object, u32 value);
 BtlUnit *btlUnitGet(u32 unit);
 
-extern u32 g_btlScriptUnit;
 extern void *DAT_00435d18;
 
 bool FUN_00339e90(void)

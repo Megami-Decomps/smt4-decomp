@@ -1,21 +1,13 @@
-/* NON_MATCHING: retail uses different bitwise float comparison or dispatch-store scheduling. */
-#include "common.h"
-
-struct CallbackState {
-    /* 0x00 */ const void *vtable;
-    /* 0x04 */ u8 flags;
-    /* 0x05 */ u8 unk05[3];
-    /* 0x08 */ s32 kind;
-    /* 0x0c */ u32 state;
-};
+/* NON_MATCHING: Kind and owner stores are grouped before the dispatch-table store. */
+#include "sys/CallbackController.h"
 extern "C" {
 extern const u8 DAT_0055c7dc[];
-/* Initializes the callback state and its dispatch type. */
-void FUN_00481b80(CallbackState *state)
+CallbackController* FUN_00481b80(CallbackController* controller)
 {
-    state->flags = 0;
-    state->vtable = DAT_0055c7dc;
-    state->state = 0;
-    state->kind = 2;
+    controller->flags = 0;
+    controller->vtable = DAT_0055c7dc;
+    controller->owner = NULL;
+    controller->kind = 2;
+    return controller;
 }
 }

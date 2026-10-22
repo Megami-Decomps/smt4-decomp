@@ -1,5 +1,5 @@
 /* NON_MATCHING: inline help-table lookup keeps NULL and text-color constants in different registers and shortens two tail-call setup sequences. */
-#include "shard/Scene43dcf0.h"
+#include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
 
 struct PartyHelpRecord {
@@ -8,6 +8,7 @@ struct PartyHelpRecord {
 };
 
 extern "C" {
+extern PartyPanelState *g_partyPanel;
 s32 FUN_00282e70(void);
 s32 FUN_00282ccc(void);
 void updateEquippedWeaponHelp(u32 mode);
@@ -30,7 +31,7 @@ static __inline const char* partyHelpText(u32 index)
 // Refresh context help for the current party-menu mode or selected member.
 extern "C" void FUN_001b0558(void)
 {
-    Scene43dcf0* panel = g_partyPanel;
+    PartyPanelState* panel = g_partyPanel;
     s32 equippedWeapon = FUN_00282e70();
     s32 selection = FUN_00282ccc();
     if (equippedWeapon) {
@@ -38,22 +39,22 @@ extern "C" void FUN_001b0558(void)
         return;
     }
     if (selection < 0) {
-        if (panel->state == 12 || panel->state == 13) {
+        if (panel->panelState == 12 || panel->panelState == 13) {
             FUN_0029ee6c(partyHelpText(6), 0x323232FF);
         }
-        if (panel->state == 14) {
+        if (panel->panelState == 14) {
             FUN_0029ee6c(partyHelpText(7), 0x323232FF);
         }
-        if (panel->state == 4) {
+        if (panel->panelState == 4) {
             FUN_0029ee6c(partyHelpText(2), 0x323232FF);
         }
-        if (panel->state == 15) {
+        if (panel->panelState == 15) {
             FUN_0029ee6c(partyHelpText(8), 0x323232FF);
         }
-        if (panel->state == 2) {
+        if (panel->panelState == 2) {
             FUN_0029ee6c(partyHelpText(0), 0x323232FF);
         }
-        if (panel->state == 3) {
+        if (panel->panelState == 3) {
             FUN_0029ee6c(partyHelpText(1), 0x323232FF);
         }
     } else {

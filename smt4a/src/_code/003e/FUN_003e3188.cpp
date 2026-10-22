@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003e025c(...);
 int FUN_003ed238(...);
 int FUN_004caca0(...);
-int FUN_004cb2a4(...);
+int btlRosterGroupAllInactive(...);
 
 typedef struct fn_003e3188_arg1 fn_003e3188_arg1;
 struct fn_003e3188_arg1 {
@@ -40,7 +40,7 @@ extern unsigned int DAT_0057386c; /* 0x57386c */
 /* Supplied declaration required: FUN_003e025c. */
 /* Supplied declaration required: FUN_003ed238. */
 /* Supplied declaration required: FUN_004caca0. */
-/* Supplied declaration required: FUN_004cb2a4. */
+/* Supplied declaration required: btlRosterGroupAllInactive. */
 
 
 void FUN_003e3188(unsigned int *param_1,fn_003e3188_arg1 *param_2)
@@ -62,7 +62,7 @@ void FUN_003e3188(unsigned int *param_1,fn_003e3188_arg1 *param_2)
   param_1[4] = 0;
   param_1[3] = 0;
   pfVar1 = param_2;
-  FUN_004cb2a4(param_2,1);
+  btlRosterGroupAllInactive(param_2,1);
   if (pfVar1 != (fn_003e3188_arg1 *)0x0) {
     FUN_003ed238(param_2,0x400);
     temp_v0 = 4;

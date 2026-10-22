@@ -59,7 +59,7 @@ extern int objGetFlagBit16(void);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
-extern int FUN_0046bc7c(fn_00470e64_arg0 *, unsigned int);
+extern int aocCountPackageItemsOfType(fn_00470e64_arg0 *, unsigned int);
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -106,7 +106,7 @@ void FUN_00470e64(fn_00470e64_arg0 *param_1)
   temp_v0 = objGetFlagBit16();
   if (temp_v0 != 0) {
     sysMemClear(temp_v11,0x80);
-    temp_v0 = FUN_0046bc7c(param_1,0x37);
+    temp_v0 = aocCountPackageItemsOfType(param_1,0x37);
     if (0 < temp_v0) {
       temp_v7 = temp_v0 * 0x10;
       asdOperatorNewE();

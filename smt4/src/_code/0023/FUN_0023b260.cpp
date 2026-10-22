@@ -7,7 +7,7 @@ extern "C" {
 int rt_memcpy(unsigned char *, unsigned char *, unsigned int);
 
 /* Supplied declaration required: FUN_0023b260. */
-extern unsigned int FUN_0023b3dc(unsigned int, unsigned int);
+extern unsigned int gfxTexFormatGetBitsPerPixel(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -18,7 +18,7 @@ unsigned int FUN_0023b260(unsigned char *param_1,unsigned char *param_2,int para
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0023b3dc(*param_4,param_4[1]);
+  temp_v0 = gfxTexFormatGetBitsPerPixel(*param_4,param_4[1]);
   if (param_3 != 1) {
     if (!(temp_v0 == 4 && param_3 == 2)) {
       param_3 = param_3 >> 1;

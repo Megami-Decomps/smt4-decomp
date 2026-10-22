@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int panelSetMode3(unsigned int, int);
 int FUN_003343f0(int);
 int objBInitBlocks274300(void);
-int FUN_003c5fc4(int);
+int messageMainSetTargetFlags(int);
 int flagValueSub(int, int);
 int FUN_004a8750(unsigned int, int, int);
 
@@ -26,7 +26,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlocks274300. */
 extern int FUN_00370794(void);
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a8750. */
 extern int flaggedValueHolderGetTotal(int);
@@ -63,7 +63,7 @@ void FUN_004a39bc(int param_1)
     temp_v0 = temp_v2[temp_v0];
     if (temp_v0 != 1) {
       if (temp_v0 == 2) {
-        FUN_003c5fc4(0);
+        messageMainSetTargetFlags(0);
         FUN_003343f0(0);
         *(unsigned int *)(param_1 + 0x14) = 2;
         *(unsigned int *)(param_1 + 0x18) = 0;

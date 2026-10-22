@@ -8,7 +8,7 @@ struct MapEnvironmentTableA {
 };
 
 extern "C" {
-extern GameState g_gameState;
+extern GameStateA g_gameState;
 extern MapEnvironmentTableA *g_mapTable;
 s32 gameFlagIsSet(u32 flag);
 void mapEnvironmentApplyPreset(u32 preset, s32 transition);

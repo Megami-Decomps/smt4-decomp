@@ -6,7 +6,7 @@ void FUN_0022e774(void);
 void FUN_00270104(void *object);
 void FUN_002cb438(void *object, u32 a, u32 b);
 void FUN_003343f0(s32 value);
-void FUN_0038e4cc(void *object, s32 value);
+void statusIconSetKind(void *object, s32 value);
 u32 FUN_002cc9e0(void *object, u32 value);
 
 typedef struct Object {
@@ -18,12 +18,12 @@ typedef struct Object {
     /* 0x4AD8 */ u32 unk4AD8;
 } Object;
 
-/* Resets the object after FUN_0038e4cc: sets the word at 0x4AD8 to 4 and then, for states 8..0xD, runs FUN_00270104; otherwise FUN_002cb438 with FUN_002cc9e0's result. */
+/* Resets the object after statusIconSetKind: sets the word at 0x4AD8 to 4 and then, for states 8..0xD, runs FUN_00270104; otherwise FUN_002cb438 with FUN_002cc9e0's result. */
 void FUN_002cc96c(Object *object)
 {
     u32 value;
 
-    FUN_0038e4cc(object, 0);
+    statusIconSetKind(object, 0);
     FUN_0022e774();
     object->unk4AD8 = 4;
     FUN_003343f0(0);

@@ -1,55 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00237354` (_code @ 0x237354, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the axis is read as x then {y,z} with vldmia in retail, and the length and sine land in other VFP registers. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
-int FUN_003bfb50(unsigned int, float *, unsigned int);
+typedef struct Vec3f {
+    f32 x;
+    f32 y;
+    f32 z;
+} Vec3f;
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
+f32 sqrtf(f32 value);
+f32 FUN_001a1ee0(f32 angle);
+f32 FUN_001b63b0(f32 angle);
+void FUN_003bfb50(void *out, const Vec3f *axis, u32 arg, f32 oneMinusCos, f32 sine);
 
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+static __inline void vec3Normalize(Vec3f *out, const Vec3f *v)
 {
-    return (float)sqrt((double)value);
+    f32 lengthSq = v->x * v->x + v->y * v->y + v->z * v->z;
+    f32 scale;
+
+    if (lengthSq == 0.0f) {
+        lengthSq = 1.0f;
+    }
+    scale = 1.0f / sqrtf(lengthSq);
+    out->x = v->x * scale;
+    out->y = v->y * scale;
+    out->z = v->z * scale;
 }
-#endif
-/* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_003bfb50. */
 
-
-unsigned int FUN_00237354(unsigned int param_1,float *param_2,unsigned int param_3)
-
+/* Builds the rotation of `degrees` around `axis` (normalized here) into `out`. */
+void *FUN_00237354(void *out, const Vec3f *axis, u32 arg, f32 degrees)
 {
-/* irregular: 3 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  
-  temp_v1 = *param_2;
-  temp_v0 = temp_v1 * temp_v1 + param_2[1] * param_2[1] + param_2[2] * param_2[2];
-  if (temp_v0 == 0.0f) {
-    temp_v0 = 1.0f;
-  }
-  temp_v3 = 1.0f / romwright_sqrt_4(temp_v0);
-  temp_v1 = temp_v1 * temp_v3;
-  temp_v2 = param_2[1] * temp_v3;
-  temp_v3 = param_2[2] * temp_v3;
-  FUN_001a1ee0();
-  FUN_001b63b0();
-  FUN_003bfb50(param_1,&temp_v1,param_3);
-  return param_1;
+    f32 radians = degrees * 0.017453292f;
+    Vec3f unit;
+    f32 angle;
+    f32 sine;
+
+    vec3Normalize(&unit, axis);
+    angle = radians * 40.743664f;
+    sine = FUN_001a1ee0(angle);
+    FUN_003bfb50(out, &unit, arg, 1.0f - FUN_001b63b0(angle), sine);
+    return out;
 }
 
 } /* extern "C" */

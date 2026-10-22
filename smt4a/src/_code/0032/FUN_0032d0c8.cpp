@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00184310(...);
 int battleAttributeFormatName(...);
-int FUN_00230c1c(...);
+int skillFormatTargetLabel(...);
 int asdTextDrawDirectoryEntry(...);
 int FUN_002ad414(...);
 int FUN_002c0940(...);
@@ -45,7 +45,7 @@ extern int DAT_0057f0cc; /* 0x57f0cc */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: FUN_00230c1c. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002ad414. */
 /* Supplied declaration required: FUN_002c0940. */
@@ -86,7 +86,7 @@ void FUN_0032d0c8(int param_1,unsigned int param_2,fn_0032d0c8_arg2 *param_3,uns
     }
     battleAttributeFormatName(temp_v4,pfVar3->field_0xc);
     FUN_003180c4(0x26,temp_v4);
-    FUN_00230c1c(temp_v4,(pfVar3->field_0xa & 0x1f) >> 1);
+    skillFormatTargetLabel(temp_v4,(pfVar3->field_0xa & 0x1f) >> 1);
     FUN_003180c4(0x27,temp_v4);
     if (pfVar3->field_0xe == 0) {
       textFormatBuffer(temp_v4,&LAB_0032d2fc);

@@ -21,7 +21,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int textFormatBuffer(...);
 int FUN_002bee58(...);
-int FUN_002beed0(...);
+int uiSpriteInitializeState(...);
 int paramsInit(...);
 int FUN_0033dcec(unsigned int, int, int);
 int FUN_00343e5c(int, int, int, int, int);
@@ -73,7 +73,7 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002beed0. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 extern int FUN_002cdecc(int);
@@ -195,7 +195,7 @@ void FUN_001eea88(void)
     FUN_002bee58(temp_v5 + 0x2c8,0);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 10);
-  FUN_002beed0(temp_v0 + 0x840,0x24,0xffffffff,0x18,temp_v0 + 0x2a8,0x65);
+  uiSpriteInitializeState(temp_v0 + 0x840,0x24,0xffffffff,0x18,temp_v0 + 0x2a8,0x65);
   FUN_002a9fdc(temp_v0 + 0x840,0);
   *(unsigned short *)(temp_v0 + 0x87a) = 2;
   FUN_00295eb0(temp_v0 + 0x840,0x24,0x21c);

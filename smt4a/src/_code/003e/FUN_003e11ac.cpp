@@ -1,88 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e11ac` (_code @ 0x3e11ac, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads pendingSlots through a copy in r0 (an inlined accessor call) and stores state before unk10 in steps 4 and 5; logic and registers otherwise match. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003e1114(...);
-int FUN_003e2470(...);
-int FUN_003f1334(...);
-int loadSlotRequestAsync(...);
+typedef struct LoadStepMachine {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+} LoadStepMachine;
 
-typedef struct fn_003e11ac_arg1 fn_003e11ac_arg1;
-struct fn_003e11ac_arg1 {
-    unsigned char pad_0x0[0x3];
-    byte field_0x3; /* +0x3 */
-    unsigned char pad_0x4[0x30];
-    undefined4 field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x32];
-    short field_0x6a; /* +0x6a */
-    unsigned char pad_0x6c[0xc0];
-    unsigned char field_0x12c; /* +0x12c */
-    unsigned char pad_0x12d[0x2d7];
-    void *field_0x404; /* +0x404 */
-};
+typedef struct LoadStepOwner {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ s32 pendingSlots;
+} LoadStepOwner;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+extern u32 g_btlEvent;
 
-extern unsigned int g_btlEvent; /* 0x573898 */
+s32 isEntryUsable(u32 event);
+s32 valueAtF0IsReady(LoadStepOwner *owner);
+void FUN_003f1334(LoadStepOwner *owner);
+s32 loadSlotMainIsLoaded(LoadStepOwner *owner);
+s32 loadSlotIsLoaded(u32 slot);
+void loadSlotRequestAsync(u32 slot, s32 priority);
+u32 FUN_003e1114(LoadStepMachine *machine, LoadStepOwner *owner);
+u32 FUN_003e2470(LoadStepMachine *machine, LoadStepOwner *owner);
 
-/* Supplied declaration required: FUN_003e1114. */
-/* Supplied declaration required: FUN_003e2470. */
-extern int valueAtF0IsReady(fn_003e11ac_arg1 *);
-extern int loadSlotMainIsLoaded(fn_003e11ac_arg1 *);
-/* Supplied declaration required: FUN_003f1334. */
-extern int loadSlotIsLoaded(unsigned int);
-/* Supplied declaration required: loadSlotRequestAsync. */
-extern int isEntryUsable(unsigned int);
-
-
-unsigned int * FUN_003e11ac(unsigned int *param_1,fn_003e11ac_arg1 *param_2)
-
+static __inline void loadStepEnter(LoadStepMachine *machine, s32 state)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = isEntryUsable(g_btlEvent);
-  if (temp_v0 != 0) {
-    return (unsigned int *)0x0;
-  }
-  if (*(int *)&param_2->field_0x12c < 1) {
-    temp_v0 = valueAtF0IsReady(param_2);
-    if (temp_v0 != 0) {
-      *param_1 = 4;
-      param_1[4] = 0;
-      param_1[3] = 0;
-      FUN_003f1334(param_2);
-      *param_1 = 5;
-      param_1[4] = 0;
-      param_1[3] = 0;
-      temp_v0 = loadSlotMainIsLoaded(param_2);
-      if (temp_v0 == 0) {
-        return (unsigned int *)0x0;
-      }
+    machine->state = state;
+    machine->unk10 = 0;
+    machine->unk0C = 0;
+}
+
+/* Starts the load steps: requests slot 0x4E and enters step 3 while slots are pending, otherwise runs steps 4-6. */
+u32 FUN_003e11ac(LoadStepMachine *machine, LoadStepOwner *owner)
+{
+    if (isEntryUsable(g_btlEvent)) {
+        return 0;
     }
-    param_1[4] = 0;
-    *param_1 = 6;
-    param_1[3] = 0;
-    FUN_003e1114(param_1,param_2);
-    return param_1;
-  }
-  *param_1 = 2;
-  param_1[4] = 0;
-  param_1[3] = 0;
-  temp_v0 = loadSlotIsLoaded(0x4e);
-  if (temp_v0 == 0) {
-    loadSlotRequestAsync(0x4e,0);
-  }
-  param_1[4] = 0;
-  *param_1 = 3;
-  param_1[3] = 0;
-  FUN_003e2470(param_1,param_2);
-  return param_1;
+    if (owner->pendingSlots > 0) {
+        loadStepEnter(machine, 2);
+        if (!loadSlotIsLoaded(0x4E)) {
+            loadSlotRequestAsync(0x4E, 0);
+        }
+        loadStepEnter(machine, 3);
+        return FUN_003e2470(machine, owner);
+    }
+    if (valueAtF0IsReady(owner)) {
+        loadStepEnter(machine, 4);
+        FUN_003f1334(owner);
+        loadStepEnter(machine, 5);
+        if (!loadSlotMainIsLoaded(owner)) {
+            return 0;
+        }
+    }
+    loadStepEnter(machine, 6);
+    return FUN_003e1114(machine, owner);
 }
 
 } /* extern "C" */

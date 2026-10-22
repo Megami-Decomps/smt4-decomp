@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameFlagSetValue(...);
-int FUN_0029d684(...);
+int statusPanelSetOpen(...);
 int FUN_0029defc(...);
 int FUN_0029f848(...);
 int FUN_002b7bca(...);
@@ -81,7 +81,7 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: FUN_00269bc4. */
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029ea68(unsigned short);
@@ -702,7 +702,7 @@ LAB_001df3cc:
           FUN_0029f848(temp_v27,*temp_v28,1,4);
           if (param_1[0x100] != 2) {
             FUN_0029defc((int)(short)temp_v34[0x1e],0);
-            FUN_0029d684(1);
+            statusPanelSetOpen(1);
           }
           piVar9 = g_unite;
           if ((char)g_unite[0x108] != '\x01') {

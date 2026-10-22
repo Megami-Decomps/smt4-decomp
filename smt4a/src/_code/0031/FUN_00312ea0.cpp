@@ -5,7 +5,7 @@
 extern "C" {
 
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_0050d8e4(void);
 
 #ifndef ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
@@ -23,7 +23,7 @@ typedef char romwright_storage_s__________0058127c_17_1_s1_width_check[(sizeof((
 extern union romwright_storage_s__________0058127c_17_1 s__________0058127c; /* 0x58127c */
 
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_0050d8e4. */
 
 
@@ -63,7 +63,7 @@ void FUN_00312ea0(char *param_1)
         FUN_0050d8e4();
         temp_v12 = temp_v5 * 57.32484f;
         temp_v6 = *(float *)(param_1 + 0x28);
-        FUN_002b5cd4();
+        mathAngleDeltaDegrees();
         temp_v5 = temp_v6;
         if (temp_v6 < temp_v14) {
           temp_v5 = -temp_v6;

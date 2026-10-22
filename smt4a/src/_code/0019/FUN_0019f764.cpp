@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019e1fc(unsigned int);
+int dataSubmitSelectedPresetBlock(unsigned int);
 int FUN_001ac64c(unsigned int, unsigned int, unsigned int, unsigned int);
 
 typedef struct fn_0019f764_arg0 fn_0019f764_arg0;
@@ -15,7 +15,7 @@ struct fn_0019f764_arg0 {
     byte field_0x11f5; /* +0x11f5 */
 };
 
-/* Supplied declaration required: FUN_0019e1fc. */
+/* Supplied declaration required: dataSubmitSelectedPresetBlock. */
 /* Supplied declaration required: FUN_001ac64c. */
 
 
@@ -38,7 +38,7 @@ void FUN_0019f764(fn_0019f764_arg0 *param_1,unsigned int param_2,unsigned int pa
   }
   param_1->field_0x11f4 = 0;
   if (param_1->field_0x11f5 != param_3) {
-    FUN_0019e1fc(param_3);
+    dataSubmitSelectedPresetBlock(param_3);
     param_1->field_0x11f5 = (unsigned char)param_3;
   }
   return;

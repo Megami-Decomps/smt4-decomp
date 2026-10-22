@@ -1,59 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013778c` (_code @ 0x13778c, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the zero arguments in a callee-saved register (r5/r6 split, 5-register frame) and orders the stack-argument stores differently. */
+#include "shard/W6_W6Match2_MemoryDebug.h"
 
 extern "C" {
 
-int jobSetParent(...);
-int asdProcessCreateSimple(...);
-int jobStop(...);
+extern MemoryDebugState g_allocationAddressRanges;
+extern const char DAT_0053d898[]; /* "asdMemMap" */
+extern u32 DAT_005b4068;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+u32 memoryDebugRefresh();
+s32 jobClearCachedWork(u32 job);
+void *asdProcessCreateSimple(const char *name, s32 id, s32 a, s32 b, u32 (*update)(),
+                             s32 (*finish)(u32), void *work);
+void jobSetParent(void *parent, void *job);
+void jobStop(void *job, s32 mode);
 
-extern int memoryDebugRefresh(...); /* 0x13ca58 */
-extern unsigned char LAB_0013f014; /* 0x13f014 */
-extern int DAT_005b4030; /* 0x5b4030 */
-extern char *DAT_005b4038; /* 0x5b4038 */
-extern char *DAT_005b403c; /* 0x5b403c */
-extern unsigned int DAT_005b4068; /* 0x5b4068 */
-
-/* Supplied declaration required: jobSetParent. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: jobStop. */
-
-
-void FUN_0013778c(void)
-
+/* Starts a debug process parented to the root and remembers it as the latest one. */
+static __inline void *memoryDebugStartProcess(const char *name, s32 id, u32 (*update)(),
+                                              s32 (*finish)(u32), void *work)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  
-  temp_v0 = DAT_005b4030;
-  if (DAT_005b403c == (char *)0x0) {
-    *(unsigned int *)(DAT_005b4030 + 0x24) = 0x8800000;
-    *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 1;
+    void *process = asdProcessCreateSimple(name, id, 0, 0, update, finish, work);
+    if (process == NULL) {
+        return NULL;
+    }
+    jobSetParent(NULL, process);
+    g_allocationAddressRanges.lastMapProcess = process;
+    return process;
+}
+
+/* Toggles the asdMemMap debug process: stops it when running, otherwise lifts the memory limit
+ * and starts it. */
+void FUN_0013778c(void)
+{
+    if (g_allocationAddressRanges.mapProcess != NULL) {
+        jobStop(g_allocationAddressRanges.mapProcess, 0);
+        g_allocationAddressRanges.mapProcess = NULL;
+        return;
+    }
+    g_allocationAddressRanges.settings->limit = 0x08800000;
+    g_allocationAddressRanges.settings->flags |= 1;
     DAT_005b4068 = 0;
-    pcVar2 = "asdMemMap";
-    asdProcessCreateSimple("asdMemMap",0x15e,0,0,memoryDebugRefresh,&LAB_0013f014,&DAT_005b4068);
-    if (pcVar2 == (char *)0x0) {
-      pcVar2 = (char *)0x0;
-    }
-    else {
-      jobSetParent(0,pcVar2);
-      DAT_005b4038 = pcVar2;
-    }
-    DAT_005b403c = pcVar2;
-    return;
-  }
-  jobStop(DAT_005b403c,0);
-  DAT_005b403c = (char *)0x0;
-  return;
+    g_allocationAddressRanges.mapProcess = memoryDebugStartProcess(
+        DAT_0053d898, 0x15e, memoryDebugRefresh, jobClearCachedWork, &DAT_005b4068);
 }
 
 } /* extern "C" */

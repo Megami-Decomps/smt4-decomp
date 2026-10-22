@@ -20,7 +20,7 @@ void textFormatBuffer(char *dst, const char *format, char *src, u32 entry);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
 void scrScriptProcessStartEntry(u32 process, u32 index);
 void scrRunOpcodesStub(u32 process);
-void FUN_003c5fc4(s32 arg);
+void messageMainSetTargetFlags(s32 arg);
 
 /* Builds the shop's text (one line per item) and starts the "shop_select" script entry. With `second` set each listed item is replaced by the item 4 further on. */
 void shopStartSelectionScript(Shop004989f0 *shop, s32 second)
@@ -38,7 +38,7 @@ void shopStartSelectionScript(Shop004989f0 *shop, s32 second)
     }
     scrScriptProcessStartEntry(shop->process, tableGroupFindEntryIndex(shop->table, entryName));
     scrRunOpcodesStub(shop->process);
-    FUN_003c5fc4(1);
+    messageMainSetTargetFlags(1);
 }
 
 } /* extern "C" */

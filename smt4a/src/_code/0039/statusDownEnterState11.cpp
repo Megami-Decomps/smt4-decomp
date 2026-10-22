@@ -1,10 +1,11 @@
 /* NON_MATCHING: scheduling only: retail materialises the constants -1, 0 and 0x11 before loading g_statusDown */
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
 
 extern "C" {
+extern StatusDownStateA *g_statusDown;
 
 /* Changes the state, remembering the previous one. */
-static void stateTrackSet(StateTrack *track, u32 state)
+static void stateTrackSet(StatusDownTrack *track, u32 state)
 {
     u32 previous = track->state;
 
@@ -15,7 +16,7 @@ static void stateTrackSet(StateTrack *track, u32 state)
 /* Enters state 0x11 and restarts the timer; keeps the selection only when keepSelection is set. */
 void statusDownEnterState11(s32 keepSelection)
 {
-    StatusDown *status = g_statusDown;
+    StatusDownStateA *status = g_statusDown;
 
     if (keepSelection == 0) {
         status->selection = -1;

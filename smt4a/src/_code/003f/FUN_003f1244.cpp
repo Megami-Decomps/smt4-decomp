@@ -1,36 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1244` (_code @ 0x3f1244, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldrd r4, [r1] differs from recovered ldm r1, {r5, ip}. */
+#include "common.h"
+
+typedef unsigned long long MaskBits;
+
+struct BattleMainMaskView {
+    u8 unk00[0x78];       // 0x000
+    MaskBits unk78;       // 0x078
+    u8 unk80[0x50];       // 0x080
+    MaskBits unkD0;       // 0x0D0
+    u8 unkD8[0x30];       // 0x0D8
+    MaskBits unk108;      // 0x108
+};
+
+struct BattleStateView {
+    u8 unk00[0x45A0];     // 0x0000
+    MaskBits unk45A0;     // 0x45A0
+    u8 unk45A8[0x7C4];    // 0x45A8
+    s32 unk4D6C;          // 0x4D6C
+};
 
 extern "C" {
+extern BattleMainMaskView g_btlMain;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-extern unsigned int DAT_00573998; /* 0x573998 */
-extern unsigned int DAT_0057399c; /* 0x57399c */
-extern unsigned int DAT_005739f0; /* 0x5739f0 */
-extern unsigned int DAT_005739f4; /* 0x5739f4 */
-extern unsigned int DAT_00573a28; /* 0x573a28 */
-extern unsigned int DAT_00573a2c; /* 0x573a2c */
-
-
-unsigned int FUN_003f1244(int param_1,unsigned int *param_2)
-
+// Require a matching input mask and positive state value, with neither excluded state mask set.
+u32 FUN_003f1244(const BattleStateView* state, const MaskBits* mask)
 {
-  if (((param_2 != (unsigned int *)0x0) &&
-      ((*param_2 & DAT_00573998) != 0 || (param_2[1] & DAT_0057399c) != 0)) &&
-     (0 < *(int *)(param_1 + 0x4d6c))) {
-    if (((*(unsigned int *)(param_1 + 0x45a4) & DAT_005739f4) == 0 &&
-         (*(unsigned int *)(param_1 + 0x45a0) & DAT_005739f0) == 0) &&
-       ((*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a28) == 0 &&
-        (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a2c) == 0)) {
-      return 1;
+    if (mask == 0) {
+        return 0;
     }
-  }
-  return 0;
-}
 
-} /* extern "C" */
+    if ((*mask & g_btlMain.unk78) == 0) {
+        return 0;
+    }
+
+    if (state->unk4D6C <= 0) {
+        return 0;
+    }
+
+    const MaskBits stateMask = state->unk45A0;
+    if ((stateMask & g_btlMain.unkD0) != 0) {
+        return 0;
+    }
+
+    return (stateMask & g_btlMain.unk108) == 0;
+}
+}

@@ -1,8 +1,8 @@
-#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-extern void *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 void *FUN_001575cc(void *context);
 void FUN_0035b76c(void *context);
 

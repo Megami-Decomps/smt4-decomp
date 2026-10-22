@@ -1,54 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039ce3c` (_code @ 0x39ce3c, 0xbc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads mask 0 with one ldm into r3/r7 (saving r7-r8); this build loads it with two ldr and saves only r4-r6. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern u64 g_btlCandidateMasks[6];
+BtlMainStateA *btlGetMainState(void);
+s32 scrGetArg(u32 index);
+void scrSetResult(s32 result);
 
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0039ce3c(void)
-
+// Script command: result 1 when a combatant with flags of masks 3 and 0 and none of mask 5 is missing
+// at least the argument's amount of HP.
+u32 FUN_0039ce3c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v4 = 0;
-  do {
-    temp_v1 = btlGetMainState();
-    puVar5 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v4 * 0x408);
-    temp_v2 = *puVar5;
-    temp_v3 = puVar5[1];
-    if (((DAT_005702a0 & temp_v2) != 0 || (DAT_005702a4 & temp_v3) != 0) &&
-       ((temp_v3 & DAT_0057028c) != 0 || (temp_v2 & g_btlCandidateMasks) != 0)) {
-      if ((temp_v2 & DAT_005702b0) == 0 && (temp_v3 & DAT_005702b4) == 0) {
-        if (temp_v0 <= (int)(puVar5[0x97] - puVar5[0x96])) {
-          scrSetResult(1);
-          return 1;
+    s32 amount = scrGetArg(0);
+    for (s32 i = 0; i < 109; i++) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        u64 flags = entry->flags;
+        if ((g_btlCandidateMasks[3] & flags) != 0 && (flags & g_btlCandidateMasks[0]) != 0 &&
+            (flags & g_btlCandidateMasks[5]) == 0 && entry->maxHp - entry->hp >= amount) {
+            scrSetResult(1);
+            return 1;
         }
-      }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x6d);
-  scrSetResult(0);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

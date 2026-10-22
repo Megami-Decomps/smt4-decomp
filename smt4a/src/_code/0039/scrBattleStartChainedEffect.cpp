@@ -1,6 +1,5 @@
 /* NON_MATCHING: shared effect setup adds preserved-register copies and changes branch placement; -O2 candidate. */
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 struct ScriptEffectUnit {
     u8 unk0000[0x1250];
     s32 pending; // 0x1250

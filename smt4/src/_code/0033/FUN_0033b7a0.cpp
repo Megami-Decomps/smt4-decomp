@@ -1,48 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033b7a0` (_code @ 0x33b7a0, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Signed constant division omits the retail input move and swaps the multiply operands. */
+#include "gamedata/DevilRecord.h"
 extern "C" {
+s32 saveIsRecordValueBounded(u16);
+s32 flagBitIsSet(u32);
+s32 randNextInRange(u32);
 
-int devilGetRecord(void);
-
-extern int saveIsRecordValueBounded(unsigned short);
-extern int flagBitIsSet(unsigned int);
-/* Supplied declaration required: devilGetRecord. */
-extern int randNextInRange(unsigned int);
-
-
-unsigned int FUN_0033b7a0(int param_1,int param_2,int param_3)
-
+u32 FUN_0033b7a0(const GameUnitSortRecord* unit, s32 trials, u32 forceLowRoll)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x46);
-  devilGetRecord();
-  temp_v1 = saveIsRecordValueBounded(*(unsigned short *)(param_1 + 0x46));
-  temp_v3 = temp_v1 / 400 + ((*(unsigned int *)(temp_v0 + 0x2c) & 0x3fff) >> 7);
-  temp_v1 = flagBitIsSet(6);
-  if (temp_v1 != 0) {
-    temp_v3 = temp_v3 + 0x28;
-  }
-  temp_v1 = 0;
-  if (temp_v1 < param_2) {
-    do {
-      temp_v2 = randNextInRange(99);
-      if (param_3 != 0) {
-        temp_v2 = -1;
-      }
-      if (temp_v2 < temp_v3) {
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < param_2);
-  }
-  return 0;
+    const DevilRecord* record = (const DevilRecord*)devilGetRecord(unit->id);
+    s32 chance = record->chance.baseChance + saveIsRecordValueBounded(unit->id) / 400;
+    if (flagBitIsSet(6) != 0) {
+        chance += 40;
+    }
+    for (s32 trial = 0; trial < trials; ++trial) {
+        s32 roll = randNextInRange(99);
+        if (forceLowRoll != 0) {
+            roll = -1;
+        }
+        if (roll < chance) {
+            return 1;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

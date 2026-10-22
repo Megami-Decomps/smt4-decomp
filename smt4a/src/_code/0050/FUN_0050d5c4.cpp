@@ -1,56 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050d5c4` (_code @ 0x50d5c4, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: first loop lacks retail's top-of-loop i<=15 test and early pop; range test compares operands swapped (cs vs ls); owner/index registers r4/r5 swapped */
+#include "common.h"
 
 extern "C" {
 
-int wordsFlag8Reset(int *);
+typedef struct WordsFlag8 {
+    u32 id;      /* 0x00 */
+    u32 unk04;   /* 0x04 */
+    u32 unk08;   /* 0x08 */
+} WordsFlag8;
 
-typedef int romwright_code(...);
-/* Supplied declaration required: wordsFlag8Reset. */
+typedef struct IdEntry {
+    u8 unk00[0x1c];
+    u32 id;      /* 0x1c */
+} IdEntry;
 
+struct RangeOwner;
 
-void FUN_0050d5c4(int param_1,unsigned int param_2,unsigned int param_3)
+typedef struct RangeOwnerVtbl {
+    void *unk00[3];
+    void (*reset)(struct RangeOwner *self); /* 0x0c */
+} RangeOwnerVtbl;
 
+typedef struct RangeOwner {
+    RangeOwnerVtbl *vtbl;     /* 0x000 */
+    u8 unk04[0x08];
+    u8 active;                /* 0x00c */
+    u8 unk0D[0x83];
+    IdEntry *entries[16];     /* 0x090 */
+    u8 unkD0[0x64];
+    WordsFlag8 flags[4];      /* 0x134 */
+} RangeOwner;
+
+int wordsFlag8Reset(WordsFlag8 *flags);
+
+/* Resets the owner (seen through its base at 0x44) when any entry or flag id lies in [lo, hi]. */
+void FUN_0050d5c4(u8 *base, u32 lo, u32 hi)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int *piVar4;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  piVar4 = (int *)(param_1 - 0x44);
-  if (*(char *)(param_1 - 0x38) == '\0') {
-    return;
-  }
-  temp_v0 = 0;
-  while (((piVar4[temp_v0 + 0x24] == 0 ||
-          (temp_v2 = *(unsigned int *)(piVar4[temp_v0 + 0x24] + 0x1c), temp_v2 < param_2)) || (param_3 < temp_v2)))
-  {
-    do {
-      temp_v0 = temp_v0 + 1;
-      if (temp_v0 >= 0x10) goto LAB_0050d634;
-    } while (temp_v0 >= 0x10);
-  }
-  (**(romwright_code **)(*piVar4 + 0xc))(piVar4);
-LAB_0050d634:
-  temp_v2 = 0;
-  do {
-    temp_v1 = piVar4[temp_v2 * 3 + 0x4d];
-    temp_v4 = temp_v1 <= param_2;
-    temp_v3 = param_2 == temp_v1;
-    if (!temp_v4 || temp_v3) {
-      temp_v4 = param_3 <= temp_v1;
-      temp_v3 = temp_v1 == param_3;
+    RangeOwner *owner = (RangeOwner *)(base - 0x44);
+    s32 i;
+    u32 j;
+
+    if (!owner->active) {
+        return;
     }
-    if (!temp_v4 || temp_v3) {
-      wordsFlag8Reset(piVar4 + temp_v2 * 3 + 0x4d);
+    for (i = 0; i < 16; i++) {
+        IdEntry *entry = owner->entries[i];
+        if (entry != NULL && lo <= entry->id && entry->id <= hi) {
+            owner->vtbl->reset(owner);
+            break;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 4);
-  return;
+    for (j = 0; j < 4; j++) {
+        if (lo <= owner->flags[j].id && owner->flags[j].id <= hi) {
+            wordsFlag8Reset(&owner->flags[j]);
+        }
+    }
 }
 
 } /* extern "C" */

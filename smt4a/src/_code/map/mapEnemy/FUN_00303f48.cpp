@@ -115,7 +115,7 @@ extern int lookupConditionalSixBitValue(unsigned int);
 extern int FUN_004bb870(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
 extern int FUN_004bc5a4(unsigned int);
-extern int FUN_004bc850(int index);
+extern int dataSelectPrioritizedCandidate(int index);
 extern unsigned int __aeabi_idivmod(void);
 
 
@@ -549,7 +549,7 @@ LAB_0030444c:
 LAB_00304874:
     temp_v0 = FUN_004bc420(temp_v16,temp_v1,0);
     *(int *)(temp_v2 + 0xa4) = temp_v0;
-    temp_v0 = FUN_004bc850(temp_v0);
+    temp_v0 = dataSelectPrioritizedCandidate(temp_v0);
     *(int *)(temp_v2 + 0xa8) = temp_v0;
     dataTable00FindById();
     *(unsigned short *)(temp_v2 + 0x1a8) = *(unsigned short *)(temp_v0 + 2) & 0x7fff;

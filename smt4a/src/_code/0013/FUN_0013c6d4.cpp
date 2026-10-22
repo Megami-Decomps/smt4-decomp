@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013c6d4` (_code @ 0x13c6d4, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Readiness tests are if-converted and large byte-field offsets use separate literals instead of shared subobject bases. */
+#include "gfx/FrameTextureWork.h"
 
 extern "C" {
+void FUN_001509fc(u32 value);
+void FUN_001537b0(u32 value);
+s32 stateValuesGetBySelector(u32 selector);
+FrameTextureWork *jobGetWork(u32 job);
 
-int FUN_001509fc(int);
-int FUN_001537b0(void);
-
-/* Supplied declaration required: FUN_001509fc. */
-/* Supplied declaration required: FUN_001537b0. */
-extern int stateValuesGetBySelector(unsigned int);
-extern int jobGetWork(void);
-
-
-unsigned int FUN_0013c6d4(void)
-
+/* Runs the selected frame-texture action only when all readiness gates permit it. */
+u32 FUN_0013c6d4(u32 job)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = stateValuesGetBySelector(0);
-  if ((((temp_v1 == 0) && (*(char *)(temp_v0 + 0xfa4) != '\0')) && (*(char *)(temp_v0 + 0xfa5) != '\0'))
-     && (((*(char *)(temp_v0 + 0xfae) != '\0' && (*(int *)(temp_v0 + 0x1490) != 0)) &&
-         (*(char *)(temp_v0 + 0x148c) == '\0')))) {
-    if (*(char *)(temp_v0 + 0x1494) != '\0') {
-      FUN_001537b0();
+    FrameTextureWork *work = jobGetWork(job);
+    if (stateValuesGetBySelector(0) == 0 && work->unkFA4 && work->unkFA5 &&
+        work->unkFAE && work->unk1490 && !work->unk148C) {
+        if (work->unk1494) {
+            FUN_001537b0(0);
+        } else {
+            FUN_001509fc(0);
+        }
     }
-    else {
-      FUN_001509fc(0);
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

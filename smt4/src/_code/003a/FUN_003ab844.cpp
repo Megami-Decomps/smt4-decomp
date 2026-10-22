@@ -14,7 +14,7 @@ typedef struct BibleScreen {
 
 int FUN_002898e4(void);
 s32 campButtonHelpIsActive(void);
-int FUN_0028d9b0(void);
+int buttonHelpAcquireResources(void);
 int buttonHelpCreate(void);
 s32 *asdTMTexTableGetEntry(u32 id);
 int asdTMTexTableLoadSprites(u32 id);
@@ -35,7 +35,7 @@ void FUN_003ab844(BibleScreen *screen)
     screen->buttonHelpOwned = 0;
     if (campButtonHelpIsActive() == 0) {
         screen->buttonHelpOwned = 1;
-        FUN_0028d9b0();
+        buttonHelpAcquireResources();
         buttonHelpCreate();
     }
     if (*asdTMTexTableGetEntry(13) == 0) {

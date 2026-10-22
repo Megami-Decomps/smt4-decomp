@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ba8f4(unsigned int *);
 int FUN_002ba968(int, int *, int, int);
-int FUN_002ba9ac(unsigned int);
+int aocReleasePackageOwner(unsigned int);
 int _ZN18WindowStatusResultC1Ej(unsigned int *, int);
 int FUN_002c40f8(unsigned int *, unsigned int *, int, int, int);
 int FUN_002c526c(void);
@@ -31,7 +31,7 @@ extern int FUN_00121e50(unsigned int);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba8f4. */
 /* Supplied declaration required: FUN_002ba968. */
-/* Supplied declaration required: FUN_002ba9ac. */
+/* Supplied declaration required: aocReleasePackageOwner. */
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned int *);
 extern unsigned long long jobGetWork(void);
@@ -77,7 +77,7 @@ unsigned int FUN_00111004(void)
   if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00121e50(g_aocSystem), temp_v1 != 0)) &&
      (temp_v1 = FUN_002ad1e0(g_aocMain + 0x98), temp_v1 != 0)) {
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-    FUN_002ba9ac(g_aocSystem);
+    aocReleasePackageOwner(g_aocSystem);
     temp_v6 = ((unsigned int)((unsigned int)in_stack_ffffffb8 >> 8) & 0xffffffU);
     puVar4 = (unsigned int *)_ZN18WindowStatusResultC1Ev((unsigned int *)&temp_v7);
     puVar4[2] = 0;

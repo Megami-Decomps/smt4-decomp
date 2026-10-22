@@ -1,78 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033e7c4` (_code @ 0x33e7c4, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice only: retail holds the "loaded" 1 in r2, this build in r1. */
+#include "common.h"
 
-extern "C" {
+#define WORLD_DATA_MAGIC 0x57444b4e /* "NKDW" */
 
-int textFormatBuffer(...);
-int FUN_00389528(...);
-
-typedef struct fn_0033e7c4_arg0 fn_0033e7c4_arg0;
-struct fn_0033e7c4_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x3];
-    void *field_0x10; /* +0x10 */
-    void *field_0x14; /* +0x14 */
-    void *field_0x18; /* +0x18 */
-    void *field_0x1c; /* +0x1c */
-    void *field_0x20; /* +0x20 */
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x10];
-    undefined1 field_0x3c; /* +0x3c */
+/* Header of a world data file; five record arrays follow it. */
+struct WorldDataHeader {
+    /* 0x00 */ u32 magic;
+    /* 0x04 */ u16 nodeCount;
+    /* 0x06 */ u16 indexCount;
+    /* 0x08 */ u32 linkCount;
+    /* 0x0c */ u16 areaCount;
+    /* 0x0e */ u8 unk0e[0x1a];
 };
 
-extern int *g_aocSystem; /* 0x433158 */
+struct WorldNode { u8 unk00[0x20]; };
+struct WorldLink { u8 unk00[0x28]; };
+struct WorldArea { u8 unk00[0x18]; };
 
-extern int FUN_0023e3a4(int *, int, unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-extern int *asdLoadFileSyncDefault(unsigned char *);
-/* Supplied declaration required: FUN_00389528. */
+struct WorldData {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 id;
+    /* 0x08 */ s32 kind;
+    /* 0x0c */ s32 index;
+    /* 0x10 */ WorldDataHeader *header;
+    /* 0x14 */ WorldNode *nodes;
+    /* 0x18 */ WorldLink *links;
+    /* 0x1c */ u32 *indices;
+    /* 0x20 */ WorldArea *areas;
+    /* 0x24 */ u8 *extra;
+    /* 0x28 */ void *file;
+    /* 0x2c */ u8 unk2c[0x10];
+    /* 0x3c */ u8 loaded;
+};
 
+extern "C" {
+extern const char DAT_003ff7e4[];
+extern void *g_aocSystem;
+s32 textFormatBuffer(char *output, const char *format, ...);
+s32 FUN_0023e3a4(void *aoc, s32 id, s32 kind);
+void *FUN_00389528(void *aoc, s32 id, const char *path);
+void *asdLoadFileSyncDefault(const char *path);
 
-void FUN_0033e7c4(fn_0033e7c4_arg0 *param_1,int param_2)
-
+/* Loads world data file `id` (from downloadable content when it provides one) and locates its
+ * record arrays; the header is NULL when the file is not world data. */
+void FUN_0033e7c4(WorldData *world, s32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  unsigned char temp_v2 [64];
-  
-  textFormatBuffer(temp_v2,"battle/devil/en%03d.bin",param_2);
-  param_1->field_0x8 = 0xc;
-  *(int *)&param_1->field_0xc = param_2 - 1;
-  temp_v1 = FUN_0023e3a4(g_aocSystem,param_2,1);
-  if (temp_v1 != 0) {
-    piVar3 = g_aocSystem;
-    FUN_00389528(g_aocSystem,param_2,temp_v2);
-  }
-  else {
-    piVar3 = (int *)asdLoadFileSyncDefault(temp_v2);
-  }
-  param_1->field_0x28 = piVar3;
-  param_1->field_0x4 = param_2;
-  param_1->field_0x3c = 1;
-  param_1->field_0x10 = piVar3;
-  if (*piVar3 != 0x57444b4e) {
-    param_1->field_0x10 = (void *)0x0;
-  }
-  else {
-    piVar4 = piVar3 + 10;
-    param_1->field_0x14 = piVar4;
-    piVar4 = piVar4 + (unsigned int)*(unsigned short *)(piVar3 + 1) * 8;
-    param_1->field_0x18 = piVar4;
-    piVar4 = piVar4 + piVar3[2] * 10;
-    param_1->field_0x1c = piVar4;
-    temp_v0 = *(unsigned short *)((int)piVar3 + 6);
-    param_1->field_0x20 = piVar4 + temp_v0;
-    param_1->field_0x24 = piVar4 + temp_v0 + (unsigned int)*(unsigned short *)(piVar3 + 3) * 6;
-  }
-  return;
+    char path[64];
+    textFormatBuffer(path, DAT_003ff7e4, id);
+    world->kind = 12;
+    world->index = id - 1;
+    void *file;
+    if (FUN_0023e3a4(g_aocSystem, id, 1) != 0) {
+        file = FUN_00389528(g_aocSystem, id, path);
+    } else {
+        file = asdLoadFileSyncDefault(path);
+    }
+    world->file = file;
+    world->id = id;
+    world->loaded = 1;
+    WorldDataHeader *header = (WorldDataHeader *)file;
+    world->header = header;
+    if (header->magic != WORLD_DATA_MAGIC) {
+        world->header = NULL;
+        return;
+    }
+    world->nodes = (WorldNode *)(header + 1);
+    world->links = (WorldLink *)(world->nodes + header->nodeCount);
+    world->indices = (u32 *)(world->links + header->linkCount);
+    world->areas = (WorldArea *)(world->indices + header->indexCount);
+    world->extra = (u8 *)(world->areas + header->areaCount);
 }
-
-} /* extern "C" */
+}

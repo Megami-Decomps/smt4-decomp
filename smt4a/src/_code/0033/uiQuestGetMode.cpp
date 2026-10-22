@@ -2,8 +2,6 @@
 
 extern "C" {
 
-
-
 s32 uiQuestGetMode(void)
 {
     return g_uiQuest->mode;

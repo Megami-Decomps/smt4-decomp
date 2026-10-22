@@ -61,7 +61,7 @@ extern int gameGetMapBlock(void);
 extern int FUN_002cf738(void);
 extern unsigned char FUN_002cf750(void);
 extern unsigned short FUN_002eff34(void);
-extern unsigned short FUN_0030aba4(void);
+extern unsigned short uiQuestProcessPendingUpdate(void);
 
 
 void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
@@ -80,7 +80,7 @@ void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
   }
   temp_v0 = FUN_002cf750();
   param_1->field_0xd4c = temp_v0;
-  temp_v1 = FUN_0030aba4();
+  temp_v1 = uiQuestProcessPendingUpdate();
   param_1->field_0xd4e = temp_v1;
   temp_v1 = FUN_002eff34();
   param_1->field_0xd50 = temp_v1;

@@ -36,7 +36,7 @@ void FUN_003a6f80(DevilListWork *work);
 void FUN_003a8450(DevilListWork *work);
 void FUN_0022de74(DevilListWork *work);
 void objectWordsClear(DevilListVisibility *visibility);
-void FUN_0022dde8(DevilListVisibility *visibility, u16 id);
+void devilListMarkOrInsertQualifiedEntry(DevilListVisibility *visibility, u16 id);
 void FUN_003aab90(DevilListVisibility *visibility);
 
 void devilListUpdatePreviewAndVisibility(DevilListWork *work)
@@ -74,7 +74,7 @@ void devilListUpdatePreviewAndVisibility(DevilListWork *work)
     s32 count = rangeLimitMin(work->cursor);
     for (s32 index = 0; index < count; ++index) {
         s32 first = FUN_0029e924(work->cursor);
-        FUN_0022dde8(&work->visibility, entries[first + index].id);
+        devilListMarkOrInsertQualifiedEntry(&work->visibility, entries[first + index].id);
     }
     FUN_003aab90(&work->visibility);
 }

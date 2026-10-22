@@ -1,11 +1,6 @@
-#include "common.h"
+#include "shard/W6_W6Match2_TitleCommand.h"
 
 extern "C" {
-
-extern struct {
-    u8 unk00[0x18];
-    u32 unk18;
-} g_titleFlags;
 
 u32 FUN_00256540(void)
 {

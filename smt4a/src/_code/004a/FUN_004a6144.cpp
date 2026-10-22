@@ -11,7 +11,7 @@ int FUN_00180118(void);
 int FUN_0018349c(...);
 int dataTable00FindById(void);
 int devilDrawIconRelative(...);
-int FUN_00493408(...);
+int drawTextAtRelativePosition(...);
 int FUN_004934ac(int, int, int, int, int);
 int FUN_0049368c(...);
 void renderSetClippedScissor(int, int, int, int);
@@ -43,7 +43,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilDrawIconRelative. */
-/* Supplied declaration required: FUN_00493408. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
@@ -173,7 +173,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v13 = 0xffffffff;
     temp_v15 = *(short *)(temp_v3 + 10) + temp_v2;
     textFormatBuffer(temp_v14,&LAB_004a657c,temp_v12);
-    FUN_00493408(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
+    drawTextAtRelativePosition(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
     param_4 = param_4 & 0xffff;
     temp_v6 = 0;
     dataTable00FindById();
@@ -190,7 +190,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v1 = *(short *)(temp_v3 + 10);
     textFormatBuffer(temp_v14,&LAB_004a6584,temp_v6);
-    FUN_00493408(param_1 + 200,0,temp_v10 + temp_v0,temp_v1 + temp_v2,0,7,temp_v13,temp_v9,temp_v14);
+    drawTextAtRelativePosition(param_1 + 200,0,temp_v10 + temp_v0,temp_v1 + temp_v2,0,7,temp_v13,temp_v9,temp_v14);
   }
   return;
 }

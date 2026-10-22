@@ -9,7 +9,7 @@ int FUN_0023fffc(unsigned int *, int);
 int FUN_002402c4(int, unsigned char [128]);
 int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00254f58(...);
-int FUN_00270028(int);
+int frameTexApplyMode(int);
 int FUN_0027da30(int, int);
 int asdLoadFileAsyncSimple(unsigned char [128], unsigned int *, int);
 int libc_strcpy(unsigned char [128], unsigned int);
@@ -39,7 +39,7 @@ extern unsigned int btlPosArrangeGetFilePath(int);
 extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00254f58. */
-/* Supplied declaration required: FUN_00270028. */
+/* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
@@ -89,7 +89,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
     puVar5 = (unsigned int *)(param_2 + 0x44a0);
     *param_1 = 0xd;
     if ((*puVar5 & 0x40000000) == 0) {
-      FUN_00270028(2);
+      frameTexApplyMode(2);
       *puVar5 = *puVar5 | 0x40000000;
     }
     FUN_00338458(param_2);

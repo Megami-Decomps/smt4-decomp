@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern PanelRef g_messageMain;
+extern MessageGlobalsA g_messageMain;
 
 /* True when there is no panel or its flag at +8 is clear. */
 u8 panelIsMissingOrFlagClear(void)

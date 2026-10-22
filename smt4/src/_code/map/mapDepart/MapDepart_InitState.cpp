@@ -1,92 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `MapDepart_InitState` (_code @ 0x25c13c, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "map/mapDepart.h"
+
+/* The departure state machine's block. */
+struct MapDepartState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u8 unk20;
+    /* 0x21 */ u8 unk21[0x3];
+    /* 0x24 */ u32 unk24;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ u8 unk2C;
+    /* 0x2D */ u8 unk2D;
+    /* 0x2E */ u8 unk2E[0x2];
+    /* 0x30 */ u32 unk30;
+    /* 0x34 */ u8 unk34;
+    /* 0x35 */ u8 unk35[0x3];
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u8 unk3C;
+    /* 0x3D */ u8 unk3D[0x3];
+    /* 0x40 */ u32 unk40;
+    /* 0x44 */ u32 unk44;
+};
+
+/* Where the map block keeps the departure point (Shin Megami Tensei IV). */
+struct MapDepartSavePoint {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ s16 unk28;
+    /* 0x02A */ s16 unk2A;
+    /* 0x02C */ s16 scale;
+    /* 0x02E */ s16 mapId;
+    /* 0x030 */ s16 areaId;
+    /* 0x032 */ s16 x;
+    /* 0x034 */ s16 y;
+    /* 0x036 */ s16 z;
+    /* 0x038 */ s16 unk38;
+    /* 0x03A */ u8 unk03A[0xDA2];
+    /* 0xDDC */ u32 objectId;
+};
+
+struct MapDepartGlobals {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 unk50;
+    /* 0x54 */ u8 unk54[0x50];
+    /* 0xA4 */ u16 unkA4;
+    /* 0xA6 */ u16 unkA6;
+};
 
 extern "C" {
 
-int FUN_00270f70(float *);
-int FUN_002df86c(void);
+extern GameState g_gameState;
+extern MapDepartGlobals DAT_0049fd38;
+MapDepartSavePoint *gameGetMapBlock(void);
+void FUN_00270f70(MapVector *position);
+void mapBlockLoadTableRecord(void);
 
-typedef struct fn_0025c13c_arg0 fn_0025c13c_arg0;
-struct fn_0025c13c_arg0 {
-    unsigned char pad_0x0[0x18];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined1 field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x3];
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    undefined2 field_0x2c; /* +0x2c */
-    undefined2 field_0x2e; /* +0x2e */
-    undefined4 field_0x30; /* +0x30 */
-    undefined2 field_0x34; /* +0x34 */
-    undefined2 field_0x36; /* +0x36 */
-    undefined4 field_0x38; /* +0x38 */
-    undefined1 field_0x3c; /* +0x3c */
-    unsigned char pad_0x3d[0x3];
-    undefined4 field_0x40; /* +0x40 */
-    undefined4 field_0x44; /* +0x44 */
-    unsigned char pad_0x48[0xd94];
-    undefined4 field_0xddc; /* +0xddc */
-};
-
-extern unsigned int g_gameState; /* 0x49f91c */
-extern unsigned int DAT_0049f920; /* 0x49f920 */
-extern unsigned int DAT_0049f924; /* 0x49f924 */
-extern float DAT_0049f9ac; /* 0x49f9ac */
-extern float DAT_0049f9b0; /* 0x49f9b0 */
-extern float DAT_0049f9b4; /* 0x49f9b4 */
-extern float DAT_0049f9b8; /* 0x49f9b8 */
-extern float DAT_0049f9bc; /* 0x49f9bc */
-extern unsigned int DAT_0049f9c0; /* 0x49f9c0 */
-extern unsigned int DAT_0049f9c4; /* 0x49f9c4 */
-extern unsigned int DAT_0049fd88; /* 0x49fd88 */
-extern unsigned short DAT_0049fddc; /* 0x49fddc */
-extern unsigned short DAT_0049fdde; /* 0x49fdde */
-
-/* Supplied declaration required: FUN_00270f70. */
-extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_002df86c. */
-
-
-void MapDepart_InitState(fn_0025c13c_arg0 *param_1,int param_2)
-
+// Reset the departure state; when `save` is set, record the current position in the map block.
+void MapDepart_InitState(MapDepartState *state, s32 save)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = gameGetMapBlock();
-  param_1->field_0x18 = 0;
-  param_1->field_0x1c = 0;
-  param_1->field_0x20 = 0;
-  param_1->field_0x24 = 0;
-  param_1->field_0x28 = 0;
-  *(unsigned char *)&param_1->field_0x2c = 0;
-  *(unsigned char *)((int)&param_1->field_0x2c + 1) = 0;
-  param_1->field_0x30 = 0;
-  *(unsigned char *)&param_1->field_0x34 = 0;
-  param_1->field_0x38 = 0;
-  param_1->field_0x3c = 0;
-  param_1->field_0x40 = 0;
-  param_1->field_0x44 = 0;
-  FUN_00270f70(&DAT_0049f9b0);
-  if (param_2 != 0) {
-    *(short *)(temp_v0 + 0x2c) = (short)(int)DAT_0049f9ac;
-    *(short *)(temp_v0 + 0x2e) = (short)g_gameState;
-    *(short *)(temp_v0 + 0x30) = (short)DAT_0049f920;
-    *(unsigned int *)(temp_v0 + 0xddc) = DAT_0049f924;
-    *(short *)(temp_v0 + 0x32) = (short)(int)DAT_0049f9b0;
-    *(short *)(temp_v0 + 0x34) = (short)(int)DAT_0049f9b4;
-    *(short *)(temp_v0 + 0x36) = (short)(int)DAT_0049f9b8;
-    *(short *)(temp_v0 + 0x38) = (short)(int)DAT_0049f9bc;
-    *(short *)(temp_v0 + 0x28) = (short)DAT_0049f9c0;
-    *(short *)(temp_v0 + 0x2a) = (short)DAT_0049f9c4;
-  }
-  FUN_002df86c();
-  DAT_0049fd88 = 0;
-  DAT_0049fddc = 0;
-  DAT_0049fdde = 0;
-  return;
+    MapDepartSavePoint *point = gameGetMapBlock();
+    state->unk18 = 0;
+    state->unk1C = 0;
+    state->unk20 = 0;
+    state->unk24 = 0;
+    state->unk28 = 0;
+    state->unk2C = 0;
+    state->unk2D = 0;
+    state->unk30 = 0;
+    state->unk34 = 0;
+    state->unk38 = 0;
+    state->unk3C = 0;
+    state->unk40 = 0;
+    state->unk44 = 0;
+    FUN_00270f70(&g_gameState.position);
+    if (save) {
+        point->scale = (s16)g_gameState.unk90Scalar;
+        point->mapId = g_gameState.unk000;
+        point->areaId = g_gameState.unk004Value;
+        point->objectId = g_gameState.currentObjectId;
+        point->x = (s16)g_gameState.position.x;
+        point->y = (s16)g_gameState.position.y;
+        point->z = (s16)g_gameState.position.z;
+        point->unk38 = (s16)g_gameState.unkA0;
+        point->unk28 = g_gameState.unkA4;
+        point->unk2A = g_gameState.unkA8;
+    }
+    mapBlockLoadTableRecord();
+    DAT_0049fd38.unk50 = 0;
+    DAT_0049fd38.unkA4 = 0;
+    DAT_0049fd38.unkA6 = 0;
 }
 
 } /* extern "C" */

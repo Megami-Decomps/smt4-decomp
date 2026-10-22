@@ -8,7 +8,7 @@ int CONCAT44(double, double);
 int FUN_0014e314(...);
 int FUN_0016c4b8(...);
 int FUN_0019af70(unsigned int);
-int FUN_002b95b4(void);
+int mapTableStepWave(void);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -68,7 +68,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0019af70. */
-/* Supplied declaration required: FUN_002b95b4. */
+/* Supplied declaration required: mapTableStepWave. */
 
 
 void FUN_002b968c(void)
@@ -126,7 +126,7 @@ void FUN_002b968c(void)
   if (DAT_005821dc == 0) {
     return;
   }
-  FUN_002b95b4();
+  mapTableStepWave();
   temp_v3 = g_renderCtx;
   if (((int)DAT_005821e4 < 0x3f800000) &&
      (DAT_005821e4 = 1.0f / DAT_005821e8 + DAT_005821e4, (int)DAT_005821e4 >= 0x3f800001)) {

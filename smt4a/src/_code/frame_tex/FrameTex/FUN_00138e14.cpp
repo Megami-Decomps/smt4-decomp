@@ -43,7 +43,7 @@ extern unsigned char LAB_001393f8; /* 0x1393f8 */
 extern unsigned char LAB_00139404; /* 0x139404 */
 extern unsigned char LAB_00139410; /* 0x139410 */
 extern unsigned char LAB_0013941c; /* 0x13941c */
-extern int FUN_0013c1a0(...); /* 0x13c1a0 */
+extern int frameTexReleaseWork(...); /* 0x13c1a0 */
 extern int FUN_0013c660(...); /* 0x13c660 */
 extern int FUN_0013c6d4(...); /* 0x13c6d4 */
 extern int FUN_0013c764(...); /* 0x13c764 */
@@ -128,7 +128,7 @@ void FUN_00138e14(void)
   *(unsigned char *)((int)puVar2 + 0x144d) = 0;
   *(unsigned char *)(puVar2 + 0x525) = 0;
   puVar4 = &LAB_00139228;
-  asdProcessCreateSimple(&LAB_00139228,0x6c,0,0,renderSurfaceDownsampleJob,FUN_0013c1a0,puVar1);
+  asdProcessCreateSimple(&LAB_00139228,0x6c,0,0,renderSurfaceDownsampleJob,frameTexReleaseWork,puVar1);
   *puVar2 = (unsigned int)puVar4;
   taskCreateDraw(&LAB_00139234,0xce,0,0,FUN_0013cd7c,0,g_frameTex,puVar4);
   taskCreateDraw(&LAB_00139240,0x6d,0,0,FUN_0013c660,0,g_frameTex,*puVar2);

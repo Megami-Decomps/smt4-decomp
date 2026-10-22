@@ -54,7 +54,7 @@ extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
-extern int FUN_00289e54(int, unsigned int, unsigned int);
+extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: buttonHelpRelease. */
@@ -186,7 +186,7 @@ unsigned int FUN_001e4d70(void)
     }
     textFormatBuffer(temp_v5,&LAB_001e54bc,puVar1[5],puVar1[5]);
     textFormatBuffer(temp_v6,&LAB_001e54d4,puVar1[5],puVar1[5]);
-    temp_v0 = FUN_00289e54(g_aocSystem,puVar1[5],0);
+    temp_v0 = aocPackageGrantsItem(g_aocSystem,puVar1[5],0);
     if (temp_v0 != 0) {
       temp_v0 = g_aocSystem;
       FUN_00289de4(g_aocSystem,puVar1[5],0);

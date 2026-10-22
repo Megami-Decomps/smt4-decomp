@@ -1,70 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bc560` (_code @ 0x2bc560, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store scheduling and literal-pool order differ (retail keeps one more callee-saved register and groups the stores with stm). */
+#include "common.h"
+
+/* One framebuffer attachment: its size, kind, format and antialiasing mode. */
+struct GxAttachmentDesc {
+    /* 0x00 */ s32 width;
+    /* 0x04 */ s32 height;
+    /* 0x08 */ u32 kind;
+    /* 0x0C */ u32 attachment;
+    /* 0x10 */ u32 antialias;
+};
+
+struct GxFramebufferDesc {
+    /* 0x00 */ f32 scale;
+    /* 0x04 */ GxAttachmentDesc color;
+    /* 0x18 */ u32 depthFormat;
+    /* 0x1C */ s32 depthWidth;
+    /* 0x20 */ s32 depthHeight;
+    /* 0x24 */ u32 depthKind;
+    /* 0x28 */ u32 depthAttachment;
+    /* 0x2C */ u32 depthAntialias;
+};
+
+struct GxPresets {
+    /* 0x000 */ u8 unk000[0x1F8];
+    /* 0x1F8 */ f32 scale;
+};
 
 extern "C" {
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_3_stack;
+extern GxPresets g_asdGxPresets;
 
-extern unsigned char g_asdGxPresets; /* 0x4e39e0 */
-
-
-void FUN_002bc560(unsigned int *param_1,int param_2,int param_3)
-
+/* Size of a screen buffer: the upper screen (1) is twice as wide, and the antialias modes 0x501
+ * (2x1) and 0x502 (2x2) scale it further. */
+static __inline void gxScreenBufferSize(s32 screen, u32 antialias, s32 *width, s32 *height)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  if (param_2 == 1) {
-    temp_v2 = 2;
-  }
-  else {
-    temp_v2 = 1;
-  }
-  temp_v1 = 1;
-  temp_v5 = 1;
-  if (param_3 == 0x501) {
-    temp_v1 = 2;
-  }
-  else if (param_3 == 0x502) {
-    temp_v1 = 2;
-    temp_v5 = temp_v1;
-  }
-  if (param_2 == 1) {
-    temp_v4 = 2;
-  }
-  else {
-    temp_v4 = 1;
-  }
-  temp_v0 = 1;
-  temp_v3 = 1;
-  if (param_3 == 0x501) {
-    temp_v0 = 2;
-  }
-  else if (param_3 == 0x502) {
-    temp_v0 = 2;
-    temp_v3 = temp_v0;
-  }
-  *param_1 = (*(unsigned int *)((unsigned char *)&g_asdGxPresets + 0x1f8));
-  param_1[1] = temp_v2 * temp_v1 * 0xf0;
-  param_1[5] = param_3;
-  param_1[6] = 0x88f0;
-  param_1[0xb] = param_3;
-  param_1[7] = temp_v4 * temp_v0 * 0xf0;
-  param_1[8] = temp_v3 * 400;
-  param_1[9] = 0x30000;
-  param_1[10] = 0x821a;
-  param_1[2] = temp_v5 * 400;
-  param_1[3] = 0x20000;
-  param_1[4] = 0x8ce0;
-  return;
+    s32 screenScale = screen == 1 ? 2 : 1;
+    s32 xScale = 1;
+    s32 yScale = 1;
+
+    switch (antialias) {
+    case 0x501:
+        xScale = 2;
+        break;
+    case 0x502:
+        xScale = 2;
+        yScale = 2;
+        break;
+    }
+    *width = screenScale * xScale * 240;
+    *height = yScale * 400;
+}
+
+/* Fills the framebuffer description (color and depth-stencil attachments) for a screen. */
+void FUN_002bc560(GxFramebufferDesc *desc, s32 screen, u32 antialias)
+{
+    s32 colorWidth;
+    s32 colorHeight;
+    s32 depthWidth;
+    s32 depthHeight;
+
+    gxScreenBufferSize(screen, antialias, &colorWidth, &colorHeight);
+    gxScreenBufferSize(screen, antialias, &depthWidth, &depthHeight);
+    desc->scale = g_asdGxPresets.scale;
+    desc->color.width = colorWidth;
+    desc->color.antialias = antialias;
+    desc->depthFormat = 0x88F0; /* GL_DEPTH24_STENCIL8 */
+    desc->depthAntialias = antialias;
+    desc->depthWidth = depthWidth;
+    desc->depthHeight = depthHeight;
+    desc->depthKind = 0x30000;
+    desc->depthAttachment = 0x821A; /* GL_DEPTH_STENCIL_ATTACHMENT */
+    desc->color.height = colorHeight;
+    desc->color.kind = 0x20000;
+    desc->color.attachment = 0x8CE0; /* GL_COLOR_ATTACHMENT0 */
 }
 
 } /* extern "C" */

@@ -1,53 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c654` (_code @ 0x26c654, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the unit with subs r0 (feeding gameGetUnitRecord) and shares one MP clamp store between the branches; this duplicates the clamp */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00258de0(int, unsigned int, int, int, int);
-int FUN_002ae164(void);
+typedef struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2C */ s16 mp;
+} UnitRecord;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+typedef struct SkillItem {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 skill;
+} SkillItem;
 
-/* Supplied declaration required: FUN_00258de0. */
-extern short FUN_0029a924(unsigned short);
-extern short FUN_0029a9d4(unsigned short, unsigned int);
-extern int gameGetUnitRecord(void);
-/* Supplied declaration required: FUN_002ae164. */
-extern int gameGetPlayerData(void);
+SkillItem *FUN_002ae164(u32 id);
+s32 FUN_00258de0(s32 unit, u32 a, SkillItem *item, s32 noCost, s32 e);
+UnitRecord *gameGetPlayerData(void);
+UnitRecord *gameGetUnitRecord(s32 unit);
+s16 FUN_0029a9d4(u16 skill, s32 player);
+s16 FUN_0029a924(u16 skill);
 
-
-void FUN_0026c654(int param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Uses a skill item for a unit (negative: the player) and, unless it failed or is free, pays its MP cost. */
+s32 FUN_0026c654(s32 unit, u32 a, u32 id, s32 noCost)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  
-  FUN_002ae164();
-  if ((param_3 != 0) &&
-     (temp_v1 = param_1, FUN_00258de0(param_1,param_2,param_3,param_4,0), temp_v1 == 0 && param_4 == 0))
-  {
-    if (param_1 < 0) {
-      temp_v1 = gameGetPlayerData();
-      temp_v0 = FUN_0029a9d4(*(unsigned short *)(param_3 + 0x20),1);
-      temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
-      *(short *)(temp_v1 + 0x2c) = temp_v0;
+    SkillItem *item = FUN_002ae164(id);
+    UnitRecord *record;
+    s32 result;
+    s16 mp;
+
+    if (item == NULL) {
+        return 1;
     }
-    else {
-      temp_v1 = gameGetUnitRecord();
-      temp_v0 = FUN_0029a924(*(unsigned short *)(param_3 + 0x20));
-      temp_v0 = *(short *)(temp_v1 + 0x2c) - temp_v0;
-      *(short *)(temp_v1 + 0x2c) = temp_v0;
+    result = FUN_00258de0(unit, a, item, noCost, 0);
+    if (result == 0 && noCost == 0) {
+        if (unit < 0) {
+            record = gameGetPlayerData();
+            mp = record->mp - FUN_0029a9d4(item->skill, 1);
+            record->mp = mp;
+            if (mp < 0) {
+                record->mp = 0;
+            }
+        } else {
+            record = gameGetUnitRecord(unit);
+            mp = record->mp - FUN_0029a924(item->skill);
+            record->mp = mp;
+            if (mp < 0) {
+                record->mp = 0;
+            }
+        }
     }
-    if (temp_v0 < 0) {
-      *(unsigned short *)(temp_v1 + 0x2c) = 0;
-    }
-  }
-  return;
+    return result;
 }
 
 } /* extern "C" */

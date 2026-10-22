@@ -15,7 +15,7 @@ int textFormatBuffer(...);
 
 int FUN_0026ab64(...);
 int devilCreateRaceEffect(...);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int flaggedEntrySetValueB(...);
 int useCounterRelease(void);
 int useCounterStart(void);
@@ -33,7 +33,7 @@ int FUN_0026adb4(void);
 int FUN_0026ae68(void);
 int FUN_00295eb0(...);
 int flaggedEntrySetValueA(...);
-int FUN_0029d65c(...);
+int ifTouchGetSelectionModeForRegion(...);
 int flaggedEntryGetValueA(...);
 int FUN_0029eb5c(...);
 int FUN_0029ee54(...);
@@ -83,14 +83,14 @@ extern int FUN_00293ac0(void);
 /* Supplied declaration required: devilCreateRaceEffect. */
 extern int asdSoundSlotBIsPlaying(unsigned int);
 /* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 extern int FUN_0029ac94(void);
 extern unsigned short *FUN_0029acb0(void);
 /* Supplied declaration required: FUN_0029bd4c. */
 /* Supplied declaration required: FUN_0029c94c. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: FUN_0029d65c. */
+/* Supplied declaration required: ifTouchGetSelectionModeForRegion. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
@@ -163,21 +163,21 @@ unsigned int FUN_001ca748(void)
   *(unsigned char *)(g_statusDown + 0x2388) = 0;
   temp_v6 = flaggedEntryGetValueA(temp_v2 + 0x4d4);
   *(unsigned char *)(temp_v2 + 0x481) = 0;
-  temp_v7 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x476));
+  temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x476));
   *(unsigned int *)(temp_v2 + 0x418) = temp_v7;
-  temp_v7 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x478));
+  temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x478));
   *(unsigned int *)(temp_v2 + 0x41c) = temp_v7;
-  temp_v7 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x474));
+  temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x474));
   *(unsigned int *)(temp_v2 + 0x420) = temp_v7;
-  temp_v7 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x47a));
+  temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x47a));
   *(unsigned int *)(temp_v2 + 0x424) = temp_v7;
-  temp_v7 = FUN_0029d65c((int)*(short *)(temp_v2 + 0x47c));
+  temp_v7 = ifTouchGetSelectionModeForRegion((int)*(short *)(temp_v2 + 0x47c));
   *(unsigned int *)(temp_v2 + 0x428) = temp_v7;
   temp_v15 = 0;
   *(unsigned int *)(temp_v2 + 0x414) = 0xffffffff;
   do {
     if ((-1 < *(short *)(temp_v2 + temp_v15 * 2 + 0x42c)) &&
-       (temp_v8 = FUN_0029d65c(), temp_v8 == 1 || temp_v8 == 2)) {
+       (temp_v8 = ifTouchGetSelectionModeForRegion(), temp_v8 == 1 || temp_v8 == 2)) {
       *(int *)(temp_v2 + 0x414) = temp_v15;
       break;
     }
@@ -1097,7 +1097,7 @@ LAB_001cbbac:
     }
     temp_v6 = uniteNotBusy();
     if (temp_v6 == 0) {
-      FUN_00296e90();
+      messageMainFinishWindow();
     }
     FUN_0029ee6c(0,0x323232ff);
     FUN_0029bd4c();
@@ -1121,7 +1121,7 @@ LAB_001cbbac:
         if (*(char *)(temp_v2 + 0x413) != '\0') {
           temp_v6 = uniteNotBusy();
           if (temp_v6 == 0) {
-            FUN_00296e90();
+            messageMainFinishWindow();
           }
           FUN_0029ee6c(0,0x323232ff);
           FUN_0029bd4c();
@@ -1146,7 +1146,7 @@ LAB_001cbbac:
         *(unsigned int *)(temp_v2 + 0x2384) = 0;
         temp_v6 = uniteNotBusy();
         if (temp_v6 == 0) {
-          FUN_00296e90();
+          messageMainFinishWindow();
         }
         FUN_0029ee6c(0,0x323232ff);
         FUN_0029bd4c();
@@ -1209,7 +1209,7 @@ LAB_001cbbac:
     }
     temp_v6 = uniteNotBusy();
     if (temp_v6 == 0) {
-      FUN_00296e90();
+      messageMainFinishWindow();
     }
     FUN_0029ee6c(0,0x323232ff);
     FUN_0029bd4c();

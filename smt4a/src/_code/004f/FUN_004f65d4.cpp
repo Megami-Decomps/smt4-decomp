@@ -18,7 +18,7 @@ int FUN_003d8f24(unsigned int);
 int FUN_003fd924(...);
 int FUN_0040619c(...);
 int FUN_0040a884(void);
-int FUN_00420e4c(unsigned int, float *);
+int attachmentsSetOffset(unsigned int, float *);
 int FUN_00420f08(...);
 int FUN_00420fc0(...);
 int FUN_00421078(unsigned int);
@@ -61,7 +61,7 @@ extern unsigned int FUN_003fdadc(void);
 /* Supplied declaration required: FUN_0040a884. */
 extern unsigned int modelListInit(void);
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_00420e4c. */
+/* Supplied declaration required: attachmentsSetOffset. */
 /* Supplied declaration required: FUN_00420f08. */
 /* Supplied declaration required: FUN_00420fc0. */
 /* Supplied declaration required: FUN_00421078. */
@@ -116,7 +116,7 @@ void FUN_004f65d4(int param_1)
       temp_v12 = *(unsigned int *)(temp_v4 + 0x14);
       temp_v10 = *(float *)(temp_v4 + 0xc) + *(float *)(param_1 + 0x33d4);
       temp_v11 = *(float *)(temp_v4 + 0x10) + *(float *)(param_1 + 0x33d8);
-      FUN_00420e4c(*(unsigned int *)(param_1 + 0x33c0),&temp_v10);
+      attachmentsSetOffset(*(unsigned int *)(param_1 + 0x33c0),&temp_v10);
     }
   }
   if (*(int *)(param_1 + 0x33d0) != 0) {

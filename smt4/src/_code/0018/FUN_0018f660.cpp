@@ -23,7 +23,7 @@ int nodeOwnerSetTranslations(...);
 int FUN_00293f10(...);
 int aocHandleButtons(...);
 int FUN_002942c4(int, int);
-int FUN_00294450(...);
+int playerModelLoadPart(...);
 int FUN_002945a4(...);
 int playerModelListCreate(void);
 int FUN_00294834(int, int, int, int);
@@ -92,7 +92,7 @@ extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 /* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: FUN_00294450. */
+/* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: FUN_002945a4. */
 /* Supplied declaration required: playerModelListCreate. */
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
@@ -380,19 +380,19 @@ unsigned int FUN_0018f660(void)
         FUN_002945a4(*piVar14,0,*(unsigned int *)(pcVar4 + 0x1ea8) & 0xffff,7);
       }
       else {
-        FUN_00294450(*piVar14,0,7);
+        playerModelLoadPart(*piVar14,0,7);
       }
       if (*(unsigned int *)(pcVar4 + 0x1eac) != 0) {
         FUN_002945a4(*piVar14,1,*(unsigned int *)(pcVar4 + 0x1eac) & 0xffff,7);
       }
       else {
-        FUN_00294450(*piVar14,1,7);
+        playerModelLoadPart(*piVar14,1,7);
       }
       if (*(unsigned int *)(pcVar4 + 0x1eb0) != 0) {
         FUN_002945a4(*piVar14,2,*(unsigned int *)(pcVar4 + 0x1eb0) & 0xffff,7);
       }
       else {
-        FUN_00294450(*piVar14,2,7);
+        playerModelLoadPart(*piVar14,2,7);
       }
     }
 LAB_0018fbe4:

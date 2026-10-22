@@ -24,7 +24,7 @@ int FUN_00338358(int);
 int FUN_00338404(int);
 int objectScriptDestroy(...);
 int FUN_00338fb0(...);
-int FUN_0033911c(int);
+int armySummonSetCommandTransform(int);
 int FUN_00339254(...);
 int armySummonResetRootTransform(int);
 int FUN_00339dc0(...);
@@ -35,7 +35,7 @@ int modelSlotDetachChild(unsigned int);
 int objectDestroyGfx(...);
 int FUN_003dc02c(...);
 int FUN_003ddb50(int, int, int);
-int FUN_003de8c4(unsigned int, int, int);
+int btlActionQueueSourceReflect(unsigned int, int, int);
 int FUN_003de9e4(...);
 int btlActionReflectRun(...);
 
@@ -72,7 +72,7 @@ extern int FUN_00293ed0(int);
 /* Supplied declaration required: FUN_00338404. */
 /* Supplied declaration required: objectScriptDestroy. */
 /* Supplied declaration required: FUN_00338fb0. */
-/* Supplied declaration required: FUN_0033911c. */
+/* Supplied declaration required: armySummonSetCommandTransform. */
 /* Supplied declaration required: FUN_00339254. */
 /* Supplied declaration required: armySummonResetRootTransform. */
 /* Supplied declaration required: objResourceRelease. */
@@ -84,7 +84,7 @@ extern int FUN_00293ed0(int);
 /* Supplied declaration required: objectDestroyGfx. */
 /* Supplied declaration required: FUN_003dc02c. */
 /* Supplied declaration required: FUN_003ddb50. */
-/* Supplied declaration required: FUN_003de8c4. */
+/* Supplied declaration required: btlActionQueueSourceReflect. */
 /* Supplied declaration required: FUN_003de9e4. */
 /* Supplied declaration required: btlActionReflectRun. */
 
@@ -146,7 +146,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           if ((temp_v3 & 1) != 0 && (temp_v3 & 0x8000) != 0) {
             *(unsigned int *)(temp_v2 + 0x50) = temp_v3 | 0x80000;
             *(unsigned short *)(temp_v2 + 0x58) = *(unsigned short *)(temp_v2 + 0x58) & 0xefff;
-            FUN_003de8c4(*(unsigned int *)(temp_v2 + 0x5c),param_2,temp_v2);
+            btlActionQueueSourceReflect(*(unsigned int *)(temp_v2 + 0x5c),param_2,temp_v2);
             FUN_002505c0(*(unsigned int *)(temp_v2 + 0x5c),param_2,0x10001e9,0,0,0,0);
           }
           temp_v0 = temp_v0 + 1;
@@ -164,7 +164,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           }
         }
         else {
-          FUN_0033911c(*param_1);
+          armySummonSetCommandTransform(*param_1);
           modelClearPendingAnimation(*param_1);
           modelSlotDetachChild(g_btlMain);
           mathVectorClear(g_btlMain);

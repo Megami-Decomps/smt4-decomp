@@ -31,7 +31,7 @@ int eventQueueAddUniqueIfValid(...);
 int msgBoxFlagsClear(...);
 int FUN_00167458(...);
 int eventQueueAddUnique(...);
-int FUN_001774d8(unsigned int);
+int itemGetStackLimit(unsigned int);
 int asdTMTexTableReleaseNode(int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -82,13 +82,13 @@ extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: workCommandRefreshActiveSlots. */
 extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 extern int lmapMainIsRunning(void);
 extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: msgBoxFlagsClear. */
-extern int FUN_00165070(void);
+extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: FUN_00165088. */
 /* Supplied declaration required: msgBoxFlagsClearBit7. */
 /* Supplied declaration required: FUN_00167400. */
@@ -101,7 +101,7 @@ extern int msgBoxIsState2(unsigned int);
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_00169704. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_001774d8. */
+/* Supplied declaration required: itemGetStackLimit. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
@@ -302,9 +302,9 @@ unsigned int FUN_0014c01c(void)
               }
               *(unsigned int *)(temp_v2 + 0x84) = 0;
               *(int *)(temp_v2 + 0x7c) = temp_v8;
-              temp_v8 = FUN_001774d8(*(unsigned int *)(temp_v2 + 0x78));
+              temp_v8 = itemGetStackLimit(*(unsigned int *)(temp_v2 + 0x78));
               if (temp_v8 < *(int *)(temp_v2 + 0x7c)) {
-                temp_v3 = FUN_001774d8(*(unsigned int *)(temp_v2 + 0x78));
+                temp_v3 = itemGetStackLimit(*(unsigned int *)(temp_v2 + 0x78));
                 *(unsigned int *)(temp_v2 + 0x7c) = temp_v3;
               }
             }
@@ -570,10 +570,10 @@ LAB_0014c9fc:
             }
             if (*(char *)(temp_v2 + 0x95) == '\0') {
               temp_v10 = *(int *)(temp_v2 + 0x20);
-              temp_v9 = FUN_00165070();
-              temp_v8 = FUN_001643a0();
-              if ((temp_v8 != 1) && (temp_v8 = FUN_001643a0(), temp_v8 != 2)) {
-                temp_v8 = FUN_001643a0();
+              temp_v9 = ifTouchGetSelectedRegion();
+              temp_v8 = ifTouchGetSelectionMode();
+              if ((temp_v8 != 1) && (temp_v8 = ifTouchGetSelectionMode(), temp_v8 != 2)) {
+                temp_v8 = ifTouchGetSelectionMode();
                 if (((temp_v8 == 6) && (*(short *)(temp_v2 + 100) <= temp_v9)) &&
                    (temp_v9 <= *(short *)(temp_v2 + temp_v10 * 2 + 0x62))) {
                   temp_v11 = 1;
@@ -710,10 +710,10 @@ LAB_0014d034:
           }
           if (*(char *)(temp_v2 + 9) == '\x14') {
             temp_v10 = *(int *)(temp_v2 + 0x20);
-            temp_v8 = FUN_00165070();
-            temp_v9 = FUN_001643a0();
-            if ((temp_v9 != 1) && (temp_v9 = FUN_001643a0(), temp_v9 != 2)) {
-              temp_v9 = FUN_001643a0();
+            temp_v8 = ifTouchGetSelectedRegion();
+            temp_v9 = ifTouchGetSelectionMode();
+            if ((temp_v9 != 1) && (temp_v9 = ifTouchGetSelectionMode(), temp_v9 != 2)) {
+              temp_v9 = ifTouchGetSelectionMode();
               if (((temp_v9 != 6) || (temp_v8 < *(short *)(temp_v2 + 100))) ||
                  (*(short *)(temp_v2 + temp_v10 * 2 + 0x62) < temp_v8)) goto LAB_0014d1a4;
               *(int *)(temp_v2 + 0x18) = temp_v8 - *(short *)(temp_v2 + 100);

@@ -1,50 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e0c80` (_code @ 0x2e0c80, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: failure test allocates r0 (retail ands r1 with the arg move hoisted above bpl); success path materializes 0 in r4 before r0 */
+#include "nn/Result.h"
 
 extern "C" {
 
-int FUN_0013ebd8(void);
-int vcallSlot12IfValid(unsigned int);
-int sysFatalBreak(void);
-int FUN_0032ca54(int);
+struct FileReader;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+typedef struct FileReaderVtbl {
+    void *unk00[6];
+    s32 (*seek)(struct FileReader *self, s64 position);                              /* 0x18 */
+    void *unk1C[6];
+    s32 (*read)(struct FileReader *self, s32 *readSize, void *buffer, u32 size, bool flush); /* 0x34 */
+} FileReaderVtbl;
 
-/* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_0032ca54. */
+typedef struct FileReader {
+    FileReaderVtbl *vtbl; /* 0x00 */
+    u32 unk04;
+    u32 handle;           /* 0x08: file handle, bit 0 set when the handle is invalid */
+} FileReader;
 
+void FUN_0032ca54(s32 result);
+void FUN_0013ebd8(s32 result);
+void sysFatalBreak(void);
+void vcallSlot12IfValid(u32 handle);
 
-int FUN_002e0c80(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Reads size bytes at offset into buffer; on failure reports the result and closes the file. */
+s32 FUN_002e0c80(FileReader *reader, u32 offset, void *buffer, u32 size)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [4];
-  
-  (**(romwright_code **)(*param_1 + 0x18))(param_1,*(romwright_code **)(*param_1 + 0x18),param_2,0);
-  FUN_0013ebd8();
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,temp_v1,param_3,param_4,1);
-  FUN_0013ebd8();
-  if (temp_v0 < 0) {
-    FUN_0032ca54(temp_v0);
-    if ((param_1[2] & 0xfffffffeU) != 0) {
-      if ((param_1[2] & 1U) != 0) {
-        sysFatalBreak();
-      }
-      vcallSlot12IfValid(param_1[2] & 0xfffffffe);
-      param_1[2] = 0;
+    s32 readSize;
+    s32 result;
+
+    FUN_0013ebd8(reader->vtbl->seek(reader, offset));
+    result = reader->vtbl->read(reader, &readSize, buffer, size, true);
+    FUN_0013ebd8(result);
+    if (!nnResultIsSuccess(result)) {
+        FUN_0032ca54(result);
+        if ((reader->handle & ~1u) != 0) {
+            if (reader->handle & 1) {
+                sysFatalBreak();
+            }
+            vcallSlot12IfValid(reader->handle & ~1u);
+            reader->handle = 0;
+        }
+        return result;
     }
-    return temp_v0;
-  }
-  FUN_0013ebd8();
-  return 0;
+    result = 0;
+    FUN_0013ebd8(result);
+    return result;
 }
 
 } /* extern "C" */

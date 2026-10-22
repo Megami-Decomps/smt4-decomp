@@ -1,52 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038097c` (_code @ 0x38097c, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout only; retail places the shared "1"/"0" result blocks after the slot branch and keeps the null case's scrSetResult(0) separate. */
+#include "shard/W5_W5Match5_GameSaveViews.h"
+
+namespace {
+struct BattleScriptDemon {
+    /* 0x000 */ u8 unk000[0x274];
+    /* 0x274 */ u16 flags;
+};
+}
 
 extern "C" {
 
-int scrGetArg(int);
-int scrSetResult(int);
-int FUN_003f0e20(int, int);
-int btlUnitGet(unsigned int);
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+void *btlGetMainState(void);
+BattleScriptDemon *FUN_003f0e20(void *state, s32 id);
+void *btlUnitGet(u32 unit);
+s32 bitsAt60Test(void *slot, u32 flag);
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
+extern u32 g_btlScriptUnit;
 
-extern int btlGetMainState(void);
-extern unsigned int gameGetSlotRecord(int);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int bitsAt60Test(unsigned int, unsigned int);
-/* Supplied declaration required: btlUnitGet. */
-
-
-unsigned int FUN_0038097c(void)
-
+/* Script command: test a flag bit of a battle demon (ids below 109) or of a save slot record. */
+s32 FUN_0038097c(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  btlUnitGet(g_btlScriptUnit);
-  if (temp_v0 < 0x6d) {
-    temp_v2 = btlGetMainState();
-    FUN_003f0e20(temp_v2,temp_v0);
-    if (temp_v2 == 0) {
-      scrSetResult(0);
-      return 1;
+    s32 id = scrGetArg(0);
+    u16 bit = scrGetArg(1);
+
+    btlUnitGet(g_btlScriptUnit);
+    if (id < 109) {
+        BattleScriptDemon *demon = FUN_003f0e20(btlGetMainState(), id);
+        if (demon == NULL) {
+            scrSetResult(0);
+            return 1;
+        }
+        if (demon->flags & (1 << bit)) {
+            scrSetResult(1);
+        } else {
+            scrSetResult(0);
+        }
+    } else if (bitsAt60Test(gameGetSlotRecord(id - 109), bit)) {
+        scrSetResult(1);
+    } else {
+        scrSetResult(0);
     }
-    temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x274) & (1 << (temp_v1 & 0xff));
-  }
-  else {
-    temp_v3 = gameGetSlotRecord(temp_v0 - 0x6d);
-    temp_v1 = bitsAt60Test(temp_v3,temp_v1 & 0xffff);
-  }
-  scrSetResult(temp_v1 != 0);
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

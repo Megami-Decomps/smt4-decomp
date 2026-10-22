@@ -1,75 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e358c` (_code @ 0x2e358c, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: ARM runtime code built with --cpu=5TE (retail writes movs rd, rm); needs that unit flag before it can match */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e31ea(unsigned int *);
-int FUN_002e3216(unsigned int *);
+typedef struct PrintfState {
+    u32 flags;                          /* 0x00 */
+    s32 (*putc)(s32 c, void *stream);   /* 0x04 */
+    void *stream;                       /* 0x08 */
+    u8 unkC[0x18 - 0xc];
+    s32 width;                          /* 0x18: padding still owed */
+    s32 precision;                      /* 0x1c */
+    s32 count;                          /* 0x20: characters written */
+    char digits[1];                     /* 0x24: least significant first */
+} PrintfState;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
+void FUN_002e31ea(PrintfState *state);
+void FUN_002e3216(PrintfState *state);
 
-/* Supplied declaration required: FUN_002e31ea. */
-/* Supplied declaration required: FUN_002e3216. */
-
-
-unsigned int FUN_002e358c(unsigned int *param_1,int param_2,int param_3,int param_4)
-
+/* Writes a formatted integer: padding, the prefix, precision zeros, then the digits most significant first. */
+s32 FUN_002e358c(PrintfState *state, s32 numDigits, const char *prefix, s32 prefixLen)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if ((int)(*param_1 << 0x1a) < 0) {
-    temp_v0 = param_1[7];
-    *param_1 = *param_1 & 0xffffffef;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  if (param_2 < (int)temp_v0) {
-    temp_v3 = temp_v0 - param_2;
-  }
-  else {
-    temp_v3 = 0;
-  }
-  param_1[6] = param_1[6] - (temp_v3 + param_2 + param_4);
-  if (-1 < (int)(*param_1 << 0x1b)) {
-    FUN_002e31ea(param_1);
-  }
-  for (temp_v2 = 0; temp_v2 < param_4; temp_v2 = temp_v2 + 1) {
-    (*(romwright_code *)param_1[1])(*(unsigned char *)(param_3 + temp_v2),param_1[2]);
-    param_1[8] = param_1[8] + 1;
-  }
-  if ((int)(*param_1 << 0x1b) < 0) {
-    FUN_002e31ea(param_1);
-  }
-  while (0 < temp_v3) {
-    (*(romwright_code *)param_1[1])(0x30,param_1[2]);
-    param_1[8] = param_1[8] + 1;
-    temp_v3 = temp_v3 - 1;
-  }
-  while (0 < param_2) {
-    (*(romwright_code *)param_1[1])(*(unsigned char *)((int)param_1 + param_2 + 0x23),param_1[2]);
-    param_1[8] = param_1[8] + 1;
-    param_2 = param_2 - 1;
-  }
-  FUN_002e3216(param_1);
-  if ((int)(*param_1 << 0x18) < 0) {
-    temp_v1 = 2;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    s32 minDigits;
+    s32 zeros;
+    s32 i;
+
+    if (state->flags & 0x20) {
+        minDigits = state->precision;
+        state->flags &= ~0x10;
+    } else {
+        minDigits = 1;
+    }
+    zeros = numDigits < minDigits ? minDigits - numDigits : 0;
+    state->width -= zeros + numDigits + prefixLen;
+    if (!(state->flags & 0x10)) {
+        FUN_002e31ea(state);
+    }
+    for (i = 0; i < prefixLen; i++) {
+        state->putc(prefix[i], state->stream);
+        state->count++;
+    }
+    if (state->flags & 0x10) {
+        FUN_002e31ea(state);
+    }
+    while (zeros > 0) {
+        state->putc('0', state->stream);
+        state->count++;
+        zeros--;
+    }
+    while (numDigits > 0) {
+        state->putc(state->digits[numDigits - 1], state->stream);
+        state->count++;
+        numDigits--;
+    }
+    FUN_002e3216(state);
+    return (state->flags & 0x80) ? 2 : 1;
 }
 
 } /* extern "C" */

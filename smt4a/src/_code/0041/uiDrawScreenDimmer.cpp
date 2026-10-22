@@ -8,7 +8,7 @@ s32 FUN_001692ac(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void FUN_001834e4(const EffectColor *color);
 void FUN_00183bb0();
-void FUN_0025cba0(s32 x, s32 y, s32 width, s32 height, s32 alpha);
+void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 alpha);
 
 void uiDrawScreenDimmer(u32 unused, s32 topScreen)
 {
@@ -22,9 +22,9 @@ void uiDrawScreenDimmer(u32 unused, s32 topScreen)
     black.alpha = 1.0f;
     FUN_001834e4(&black);
     if (topScreen) {
-        FUN_0025cba0(0, 0, 400, 240, 245);
+        screenDrawShadedRect(0, 0, 400, 240, 245);
     } else {
-        FUN_0025cba0(0, 0, 320, 240, 211);
+        screenDrawShadedRect(0, 0, 320, 240, 211);
     }
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);

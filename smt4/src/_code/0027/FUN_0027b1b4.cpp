@@ -1,41 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027b1b4` (_code @ 0x27b1b4, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the slot pointer in r1 (category in r0) and assigns the size constants to s18/s16/s19/s17. */
+#include "common.h"
+
+namespace {
+struct MapStateEffectSlot {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 state;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ f32 transform[4];
+    /* 0x1C */ u8 unk1C[6];
+    /* 0x22 */ s16 tag;
+    /* 0x24 */ s16 category;
+    /* 0x26 */ u8 unk26[2];
+    /* 0x28 */ u32 flagIndex;
+    /* 0x2C */ u8 unk2C[0x20];
+};
+struct MapStateEffectTable {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ MapStateEffectSlot slots[32];
+};
+}
 
 extern "C" {
 
-int FUN_002671f4(int);
+extern MapStateEffectTable *g_mapStateSlots;
+void FUN_002671f4(s32 layer, f32 first, f32 second, f32 third, f32 fourth, f32 width, f32 height, f32 depth);
 
-extern int g_mapStateSlots; /* 0x44cd88 */
-
-/* Supplied declaration required: FUN_002671f4. */
-
-
+/* Place a marker at every active map slot of categories 3, 4, 5 (larger) and 7 (smaller). */
 void FUN_0027b1b4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  do {
-    temp_v1 = g_mapStateSlots + temp_v2 * 0x4c;
-    if (*(char *)(temp_v1 + 0x58) != '\0') {
-      temp_v0 = *(short *)(temp_v1 + 0x7c);
-      if (!((temp_v0 == 3 || temp_v0 == 4) || temp_v0 == 5)) {
-        if (temp_v0 == 7) {
-          FUN_002671f4(0);
+    for (s32 i = 0; i < 32; ++i) {
+        MapStateEffectSlot *slot = &g_mapStateSlots->slots[i];
+        if (slot->active) {
+            switch (slot->category) {
+            case 3:
+            case 4:
+            case 5:
+                FUN_002671f4(0, slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3],
+                    80.0f, 70.0f, 36.0f);
+                break;
+            case 7:
+                FUN_002671f4(0, slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3],
+                    60.0f, 70.0f, 36.0f);
+                break;
+            }
         }
-      }
-      else {
-        FUN_002671f4(0);
-      }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x20);
-  return;
 }
 
 } /* extern "C" */

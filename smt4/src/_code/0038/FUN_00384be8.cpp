@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00210194(unsigned int);
 int scrScriptProcessStartMappedEntry(unsigned int *, unsigned char *);
-int FUN_00259258(void);
+int messageMainRequestBanner(void);
 int FUN_00290d5c(int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(unsigned int, unsigned int);
-int FUN_002973d8(void);
+int messageMainGetChoiceResult(void);
 int asdLoadFileAsyncSimple(unsigned char [64], unsigned int *, int);
 int scrScriptProcessDestroy(void);
 int libc_strcat(...);
@@ -38,7 +38,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00210194. */
 extern int dataTable27Sub0GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: scrScriptProcessStartMappedEntry. */
-/* Supplied declaration required: FUN_00259258. */
+/* Supplied declaration required: messageMainRequestBanner. */
 extern int effIsFinished(unsigned int);
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
@@ -46,7 +46,7 @@ extern unsigned int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_002973d8. */
+/* Supplied declaration required: messageMainGetChoiceResult. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: libc_strcat. */
@@ -114,7 +114,7 @@ void FUN_00384be8(unsigned int *param_1)
       if ((int)param_1[0x368] >= 2) {
         FUN_00290d5c(0xa0);
         scrScriptProcessStartMappedEntry(param_1,&LAB_00384f78);
-        FUN_00259258();
+        messageMainRequestBanner();
         return;
       }
     }
@@ -150,9 +150,9 @@ void FUN_00384be8(unsigned int *param_1)
       }
     }
     else {
-      temp_v4 = FUN_002973d8();
+      temp_v4 = messageMainGetChoiceResult();
       if (temp_v4 != -1) {
-        temp_v2 = FUN_002973d8();
+        temp_v2 = messageMainGetChoiceResult();
         param_1[0x369] = temp_v2;
         temp_v2 = param_1[temp_v2 + 0x364];
         param_1[0x36a] = (unsigned int)(param_1 + temp_v2 * 2 + 0x357);

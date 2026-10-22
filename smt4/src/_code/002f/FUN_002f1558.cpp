@@ -61,7 +61,7 @@ extern int flagBitIsSet(int);
 extern int FUN_00297ca4(int, unsigned int);
 extern unsigned int FUN_0029a924(int);
 extern unsigned int FUN_0029a9d4(int, unsigned int);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
 extern int gameGetUnitRecord(int);
@@ -137,7 +137,7 @@ void FUN_002f1558(int param_1)
   FUN_002bf288(2,0x15,0x11b,temp_v4,temp_v2,0xb7);
   FUN_002bf288(2,0x15,0x11c,temp_v4,temp_v2,0xb5);
   FUN_002bf288(2,0x15,0x11d,temp_v4,temp_v2,0xbb);
-  temp_v3 = FUN_0029d65c((int)*(short *)(param_1 + 0x5738));
+  temp_v3 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + 0x5738));
   if (!(temp_v3 == 1 || temp_v3 == 2)) {
     FUN_002bf288(2,0x15,0x121,temp_v4,temp_v2,0xc3);
   }

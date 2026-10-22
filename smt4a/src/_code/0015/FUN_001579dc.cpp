@@ -1,51 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001579dc` (_code @ 0x1579dc, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the command cursor to r5 and passes r5 (mov r1, r5); built passes r0 directly */
+#include "shard/W6_W6Match5_ShaderBinding.h"
 
 extern "C" {
 
-int FUN_00158a40(int, unsigned int, unsigned int, unsigned int);
-int FUN_0016c744(int);
-int FUN_00177e6c(int, int);
-int asdModelCommitCommandRange(int, int);
-int asdGxGetCommandCursor(void);
-int nn_gr_CTR_Shader_SearchBindSymbol(...);
+typedef struct {
+    u8 unk0[0x128];
+    const void *binary;            /* 0x00128 */
+    u8 ready;                      /* 0x0012c */
+    u8 unk12d[0x138 - 0x12d];
+    NativeShaderPrefix shader;     /* 0x00138 */
+    u8 unk139[0x12a20 - 0x139];
+    ShaderBindSymbol aPosition;    /* 0x12a20 */
+    ShaderBindSymbol aTexCoord;    /* 0x12a28 */
+    ShaderBindSymbol aColor;       /* 0x12a30 */
+    ShaderBindSymbol uMatrix;      /* 0x12a38 */
+    ShaderBindSymbol uMaterialColor; /* 0x12a40 */
+} ModelShader;
 
-extern unsigned char LAB_00157aa4; /* 0x157aa4 */
-extern unsigned char LAB_00157ab0; /* 0x157ab0 */
-extern unsigned char LAB_00157ab8; /* 0x157ab8 */
+void *asdGxGetCommandCursor(void);
+void FUN_00158a40(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
+void *FUN_00177e6c(NativeShaderPrefix *shader, void *cursor);
+void asdModelCommitCommandRange(void *begin, void *end);
+void FUN_0016c744(ModelShader *owner);
 
-/* Supplied declaration required: FUN_00158a40. */
-/* Supplied declaration required: FUN_0016c744. */
-/* Supplied declaration required: FUN_00177e6c. */
-/* Supplied declaration required: asdModelCommitCommandRange. */
-/* Supplied declaration required: asdGxGetCommandCursor. */
-/* Supplied declaration required: nn_gr_CTR_Shader_SearchBindSymbol. */
+extern const char DAT_00544d50[]; /* "uMatrix" */
+extern const char DAT_00544d40[]; /* "uMaterialColor" */
 
-
-unsigned int FUN_001579dc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Loads the shader binary, binds its attribute and uniform symbols and commits the shader setup commands. */
+s32 FUN_001579dc(ModelShader *owner, const void *binary, u32 unused, s32 size)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  asdGxGetCommandCursor();
-  FUN_00158a40(param_1 + 0x138,param_2,param_4,0xffffffff);
-  *(unsigned int *)(param_1 + 0x128) = param_2;
-  *(unsigned char *)(param_1 + 300) = 0;
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a20,&LAB_00157aa4);
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a30,&LAB_00157ab0);
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a28,&LAB_00157ab8);
-  nn_gr_CTR_Shader_SearchBindSymbol(param_1 + 0x138,param_1 + 0x12a38,"uMatrix");
-  temp_v0 = param_1 + 0x138;
-  nn_gr_CTR_Shader_SearchBindSymbol(temp_v0,param_1 + 0x12a40,"uMaterialColor");
-  asdGxGetCommandCursor();
-  temp_v1 = param_1 + 0x138;
-  FUN_00177e6c(temp_v1,temp_v0);
-  asdModelCommitCommandRange(temp_v0,temp_v1);
-  FUN_0016c744(param_1);
-  return 1;
+
+    void *begin;
+    void *end;
+
+    asdGxGetCommandCursor();
+    FUN_00158a40(&owner->shader, binary, size, -1);
+    owner->binary = binary;
+    owner->ready = 0;
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aPosition, "aPosition");
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aColor, "aColor");
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aTexCoord, "aTexCoord");
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMatrix, DAT_00544d50);
+    nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMaterialColor, DAT_00544d40);
+    begin = asdGxGetCommandCursor();
+    end = FUN_00177e6c(&owner->shader, begin);
+    asdModelCommitCommandRange(begin, end);
+    FUN_0016c744(owner);
+    return 1;
 }
 
 } /* extern "C" */

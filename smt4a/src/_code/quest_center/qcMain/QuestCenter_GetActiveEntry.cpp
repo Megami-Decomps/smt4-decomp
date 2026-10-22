@@ -11,7 +11,7 @@ s32 QuestCenter_GetActiveEntry(void)
     QcWork *work = g_qcMain.work;
 
     if (work != NULL && work->entry != 0) {
-        return work->entry;
+        return reinterpret_cast<s32>(work->entry);
     }
     return 0;
 }

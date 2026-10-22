@@ -10,7 +10,7 @@ int FUN_002227e8(void);
 int FUN_0025ef68(float *, float *, int);
 int FUN_002826dc(float *, float *, int, int);
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int mathPositionHeadingDegrees(void);
 int FUN_0036d984(...);
 int controllerSetDestination(...);
@@ -74,7 +74,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 extern int mapCollisionExists(void);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0036d984. */
@@ -290,7 +290,7 @@ void FUN_00292268(void)
       temp_v13 = temp_v15 / romwright_sqrt_4(temp_v12 * temp_v12 + temp_v10 * temp_v10 + temp_v11 * temp_v11);
       temp_v11 = temp_v9 * temp_v12 * temp_v13 + temp_v8 * temp_v10 * temp_v13 + temp_v6 * temp_v11 * temp_v13;
       temp_v6 = temp_v7;
-      FUN_002b5cd4();
+      mathAngleDeltaDegrees();
       if ((temp_v7 <= temp_v18) || (temp_v16 <= temp_v7)) {
         DAT_005f0cb8 = '\0';
       }
@@ -353,7 +353,7 @@ LAB_002928a4:
     temp_v11 = DAT_005f0c9c - *(float *)(g_lmapView + 0x58);
     temp_v13 = temp_v15 / romwright_sqrt_4(temp_v12 * temp_v12 + temp_v10 * temp_v10 + temp_v11 * temp_v11);
     temp_v6 = temp_v9 * temp_v12 * temp_v13 + temp_v8 * temp_v10 * temp_v13 + temp_v6 * temp_v11 * temp_v13;
-    FUN_002b5cd4();
+    mathAngleDeltaDegrees();
     if ((temp_v7 <= temp_v18) || (temp_v16 <= temp_v7)) {
       DAT_005f0d34 = 0;
     }

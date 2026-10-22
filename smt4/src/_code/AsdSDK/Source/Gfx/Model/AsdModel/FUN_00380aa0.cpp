@@ -1,49 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00380aa0` (_code @ 0x380aa0, 0x88 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail bne 5c differs from recovered bne 58. */
+#include "common.h"
+
+struct RangeDispatchView {
+    f32 unk00;       // 0x00
+    f32 unk04;       // 0x04
+    u32 unk08;       // 0x08
+    u32 flags;       // 0x0C
+    u8 payload[1];   // 0x10, variable-length data
+};
+
+typedef s32 (*RangeDispatchCallback)(u8 *payload, f32 value);
 
 extern "C" {
-
-int thresholdDispatchOutsideRange(void);
-int VectorFloatToUnsigned(double, int);
-int mathlib_ceilf(void);
-
-typedef int romwright_code(...);
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: thresholdDispatchOutsideRange. */
-/* Supplied declaration required: mathlib_ceilf. */
-
-
-unsigned int FUN_00380aa0(float *param_1)
-
-{
-/* irregular: irregular input(s): in_s0; 3 native warning(s); review required */
-  float temp_v0;
-  int temp_v1;
-  float in_s0;
-  unsigned int temp_v2;
-  
-  thresholdDispatchOutsideRange();
-  temp_v0 = param_1[3];
-  if (((unsigned int)temp_v0 & 1) != 0) {
-    temp_v2 = ((unsigned int)temp_v0 & 2) >> 1;
-  }
-  else if (((unsigned int)temp_v0 & 4) != 0) {
-    temp_v0 = in_s0 - *param_1;
-    if (param_1[1] == in_s0) {
-      mathlib_ceilf();
-    }
-    temp_v2 = VectorFloatToUnsigned(temp_v0,3);
-    temp_v2 = *(unsigned char *)((int)param_1 + (temp_v2 >> 3) + 0x10) >> (temp_v2 & 7) & 1;
-  }
-  else {
-    temp_v1 = (**(romwright_code **)((((unsigned int)temp_v0 & 0x38) >> 3) * 4 + 0x471c20))(param_1 + 4);
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      return 1;
-    }
-  }
-  return temp_v2;
+f32 thresholdDispatchOutsideRange(RangeDispatchView *record, f32 value);
+f32 mathlib_ceilf(f32 value);
+extern RangeDispatchCallback DAT_00471c20[];
 }
 
-} /* extern "C" */
+// Resolve a constant, packed-bit, or callback result after adjusting the input.
+extern "C" u32 FUN_00380aa0(RangeDispatchView *record, f32 value)
+{
+    value = thresholdDispatchOutsideRange(record, value);
+
+    const u32 flags = record->flags;
+    if (flags & 1) {
+        return (flags & 2) >> 1;
+    }
+
+    if (flags & 4) {
+        f32 offset = value - record->unk00;
+        if (record->unk04 == value) {
+            offset = mathlib_ceilf(offset);
+        }
+        const u32 bitIndex = (u32)offset;
+        return (record->payload[bitIndex >> 3] >> (bitIndex & 7)) & 1;
+    }
+
+    return DAT_00471c20[(flags & 0x38) >> 3](record->payload, value) != 0;
+}

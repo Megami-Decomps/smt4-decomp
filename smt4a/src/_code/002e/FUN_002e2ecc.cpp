@@ -1,89 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e2ecc` (_code @ 0x2e2ecc, 0x9e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The composite hex loop is pair-unrolled; the default locale name uses a literal relocation instead of retail's ADR. */
+#include "common.h"
 
 extern "C" {
+u8 *FUN_002e2ec0(void);
+extern u8 LAB_002e3064;
 
-int FUN_002e2ec0(void);
-
-extern unsigned char LAB_002e3064; /* 0x2e3064 */
-
-/* Supplied declaration required: FUN_002e2ec0. */
-
-
-unsigned char * FUN_002e2ecc(unsigned char *param_1,unsigned int param_2)
-
+/* Returns a category name, or formats all five encoded references for a composite request. */
+u8 *FUN_002e2ecc(u8 *buffer, u32 categories)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  char temp_v4;
-  char *pcVar7;
-  int temp_v5;
-  
-  if ((param_2 & ~-param_2) != 0) {
-    pcVar7 = (char *)(param_1 + 1);
-    temp_v5 = 0;
-    *param_1 = 0x2a;
-    temp_v1 = FUN_002e2ec0();
-    do {
-      temp_v2 = 0;
-      temp_v3 = *(unsigned int *)(temp_v1 + temp_v5 * 4);
-      do {
-        temp_v0 = (unsigned char)(temp_v3 >> 0x18);
-        if (temp_v3 >> 0x1c >= 10) {
-          temp_v4 = (temp_v0 >> 4) + 0x57;
+    if ((categories & ~(0u - categories)) != 0) {
+        u8 *cursor = buffer + 1;
+        *buffer = '*';
+        const u32 *references = reinterpret_cast<const u32 *>(FUN_002e2ec0());
+        for (s32 category = 0; category < 5; ++category) {
+            u32 reference = references[category];
+            for (s32 digitIndex = 0; digitIndex < 8; ++digitIndex) {
+                u32 digit = reference >> 28;
+                reference <<= 4;
+                *cursor++ = static_cast<u8>(digit > 9 ? digit + ('a' - 10) : digit + '0');
+            }
         }
-        else {
-          temp_v4 = (temp_v0 >> 4) + 0x30;
-        }
-        *pcVar7 = temp_v4;
-        pcVar7 = pcVar7 + 1;
-        temp_v2 = temp_v2 + 1;
-        temp_v3 = temp_v3 << 4;
-      } while (temp_v2 < 8);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 5);
-    *pcVar7 = '\0';
-    return param_1;
-  }
-  if (param_2 != 4) {
-    if ((int)param_2 < 5) {
-      if (param_2 != 1) {
-        if (param_2 != 2) {
-          return (unsigned char *)0x0;
-        }
-        temp_v1 = FUN_002e2ec0();
-        temp_v3 = *(unsigned int *)(temp_v1 + 4);
-      }
-      else {
-        puVar4 = (unsigned int *)FUN_002e2ec0();
-        temp_v3 = *puVar4;
-      }
+        *cursor = 0;
+        return buffer;
     }
-    else if (param_2 != 8) {
-      if (param_2 != 0x10) {
-        return (unsigned char *)0x0;
-      }
-      temp_v1 = FUN_002e2ec0();
-      temp_v3 = *(unsigned int *)(temp_v1 + 0x10);
+    u32 reference;
+    switch (categories) {
+    case 1: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[0]; break;
+    case 2: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[1]; break;
+    case 4: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[2]; break;
+    case 8: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[3]; break;
+    case 16: reference = reinterpret_cast<const u32 *>(FUN_002e2ec0())[4]; break;
+    default: return NULL;
     }
-    else {
-      temp_v1 = FUN_002e2ec0();
-      temp_v3 = *(unsigned int *)(temp_v1 + 0xc);
+    if (reference == 0) {
+        return &LAB_002e3064;
     }
-  }
-  else {
-    temp_v1 = FUN_002e2ec0();
-    temp_v3 = *(unsigned int *)(temp_v1 + 8);
-  }
-  if (temp_v3 == 0) {
-    return &LAB_002e3064;
-  }
-  return (unsigned char *)(*(int *)((temp_v3 & 0xfffffffc) - 4) + (temp_v3 & 0xfffffffc));
+    u32 address = reference & ~3u;
+    return reinterpret_cast<u8 *>(address + *reinterpret_cast<const s32 *>(address - 4));
 }
-
-} /* extern "C" */
+}

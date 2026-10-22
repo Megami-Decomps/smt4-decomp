@@ -75,13 +75,13 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
-extern unsigned int *FUN_0026280c(void);
+extern unsigned int *uniteGetWork(void);
 extern int FUN_0028cfbc(unsigned int *);
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029b7b8(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0029d644(unsigned int *);
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 extern int objectPartRunUnlessLocked(unsigned int *);
 extern int FUN_0029e93c(unsigned int *);
@@ -154,7 +154,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   temp_v26 = param_3;
   temp_v27 = param_4;
-  puVar4 = (unsigned int *)FUN_0026280c();
+  puVar4 = (unsigned int *)uniteGetWork();
   if (puVar4 != (unsigned int *)0x0) {
     temp_v3 = FUN_002a0d0c();
     temp_v22 = puVar4 + 0x1885;
@@ -330,7 +330,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         FUN_002bf288(2,0x24,0x3b,(int)&param_1->field_0x0 + (int)*(short *)(temp_v3 + 8),
                      *(short *)(temp_v3 + 10) + param_2,0x7e);
         temp_v4 = FUN_0029efa8(temp_v21);
-        temp_v4 = FUN_0029d65c((int)*(short *)((int)puVar4 + temp_v4 * 2 + 0x438));
+        temp_v4 = ifTouchGetSelectionModeForRegion((int)*(short *)((int)puVar4 + temp_v4 * 2 + 0x438));
         temp_v13 = *(short *)(temp_v3 + 10) + param_2;
         temp_v10 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v3 + 8);
         if (!((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6)) {

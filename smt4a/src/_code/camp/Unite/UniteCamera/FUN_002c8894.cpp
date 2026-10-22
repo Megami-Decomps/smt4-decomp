@@ -1,61 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c8894` (_code @ 0x2c8894, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "status/StatusCamera.h"
+
+/* The point the unite camera orbits: its position, look-at point, up vector and angles. */
+struct UniteCameraTarget {
+    /* 0x00 */ Vec3 position;
+    /* 0x0C */ u8 unk0c[0xc];
+    /* 0x18 */ Vec3 lookAt;
+    /* 0x24 */ Vec3 up;
+    /* 0x30 */ u8 unk30[8];
+    /* 0x38 */ f32 pitch;
+    /* 0x3C */ f32 yaw;
+};
+
+struct UniteCamera {
+    /* 0x000 */ u8 unk000[0x50c];
+    /* 0x50C */ UniteCameraTarget *target;
+};
 
 extern "C" {
+extern UniteCamera *g_uniteCamera;
+f32 FUN_001bc124(f32 angle);
+f32 FUN_001bbf0c(f32 angle);
+void FUN_0014f0dc(UniteCamera *camera, UniteCameraTarget *target, const Vec3 *eye, const Vec3 *lookAt);
+void FUN_00280070(UniteCamera *camera, s32 mode, Vec3 up);
 
-int FUN_0014f0dc(int, int, float *, int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int FUN_00280070(int, int);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_uniteCamera; /* 0x57f294 */
-
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00280070. */
-
-
+/* Places the unite camera one unit from its target along the target's pitch and yaw and looks at
+ * the target's look-at point. */
 void FUN_002c8894(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  float *pfVar2;
-  int *piVar3;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  
-  temp_v0 = g_uniteCamera;
-  if (g_uniteCamera != 0) {
-    pfVar2 = *(float **)(g_uniteCamera + 0x50c);
-    piVar3 = (int *)(g_uniteCamera + 0x50c);
-    temp_v2 = *pfVar2;
-    temp_v3 = pfVar2[1];
-    temp_v4 = pfVar2[2];
-    temp_v1 = *(float *)(*(int *)(g_uniteCamera + 0x50c) + 0x3c);
-    FUN_001bc124();
-    temp_v2 = temp_v2 - temp_v1;
-    temp_v1 = *(float *)(*piVar3 + 0x38);
-    FUN_001bc124();
-    temp_v3 = temp_v1 + temp_v3;
-    temp_v1 = *(float *)(*piVar3 + 0x3c);
-    FUN_001bbf0c();
-    temp_v4 = temp_v4 - temp_v1;
-    FUN_0014f0dc(temp_v0,*piVar3,&temp_v2,*piVar3 + 0x18);
-    FUN_00280070(temp_v0,0);
-  }
-  return;
+    UniteCamera *camera = g_uniteCamera;
+
+    if (camera != NULL) {
+        Vec3 eye = camera->target->position;
+        eye.x -= FUN_001bc124(camera->target->yaw);
+        eye.y += FUN_001bc124(camera->target->pitch);
+        eye.z -= FUN_001bbf0c(camera->target->yaw);
+        FUN_0014f0dc(camera, camera->target, &eye, &camera->target->lookAt);
+        FUN_00280070(camera, 0, camera->target->up);
+    }
 }
 
 } /* extern "C" */

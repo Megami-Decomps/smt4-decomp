@@ -12,7 +12,7 @@ void bgmRequestSelectedChannelFade(unsigned int frames);
 int bgmFadeOut(int);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int soundChannelStopAll(int);
@@ -29,7 +29,7 @@ int textFormatBuffer(...);
 int asdMemFree(...);
 int jobStop(unsigned int, int);
 int asdSequenceRequest(...);
-int FUN_00323f40(void);
+int messageMainClearBannerRequest(void);
 int eventTexAddHandle(...);
 
 /* stack frame of void: 6 slot(s), 22 byte(s) */
@@ -65,10 +65,10 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -89,7 +89,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern unsigned int asdLoadFileSyncDefault(unsigned int *);
-/* Supplied declaration required: FUN_00323f40. */
+/* Supplied declaration required: messageMainClearBannerRequest. */
 /* Supplied declaration required: eventTexAddHandle. */
 
 
@@ -142,7 +142,7 @@ unsigned int FUN_00194278(void)
           asdSequenceRequest(4,&temp_v9,0x20);
           puVar3 = g_npcRoom;
           if (g_npcRoom != (unsigned int *)0x0) {
-            FUN_00323f40();
+            messageMainClearBannerRequest();
             if (*(short *)(puVar3 + 0x40) == 0x22) {
               soundChannelStopAll(0xf);
               bgmFadeOut(0x3c);
@@ -251,10 +251,10 @@ LAB_001945e8:
     scrRunOpcodesStub(puVar3[0x15]);
     temp_v5 = FUN_00290e78();
     if (temp_v5 == 0) break;
-    FUN_00296e90();
-    temp_v5 = FUN_002973d8();
+    messageMainFinishWindow();
+    temp_v5 = messageMainGetChoiceResult();
     if (-1 < temp_v5) {
-      temp_v5 = FUN_002973d8();
+      temp_v5 = messageMainGetChoiceResult();
       puVar3[0x3f] = temp_v5;
       puVar3[0x3e] = (int)*(short *)(puVar3 + temp_v5 * 4 + 0x19);
       puVar2 = g_npcRoom;

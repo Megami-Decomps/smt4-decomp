@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00262260(int, int, unsigned int);
 int padClearBits(...);
-int FUN_0026242c(void);
+int btlSourceGetMaxHp(void);
 int objectFlagsClear(...);
 int FUN_00269bf0(void);
 
@@ -29,7 +29,7 @@ typedef struct {
 extern int FUN_001ad4c0(int);
 /* Supplied declaration required: FUN_00262260. */
 /* Supplied declaration required: padClearBits. */
-/* Supplied declaration required: FUN_0026242c. */
+/* Supplied declaration required: btlSourceGetMaxHp. */
 /* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: FUN_00269bf0. */
 extern int btlGetMainState(void);
@@ -84,7 +84,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
     }
     else {
       temp_v6 = temp_v4;
-      FUN_0026242c();
+      btlSourceGetMaxHp();
     }
   }
   if (temp_v5 != 0) {

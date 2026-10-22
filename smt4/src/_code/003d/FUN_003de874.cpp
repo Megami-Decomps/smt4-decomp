@@ -1,5 +1,4 @@
-#include "shard/W6_W6Match2_ReflectAction.h"
-
+#include "battle/btlReflect.h"
 extern "C" ReflectAction *FUN_0022699c(ReflectContext *, s16, s16, u32);
 
 // Set up a kind-two reflection action from its three integer payload words.

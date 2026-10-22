@@ -16,11 +16,11 @@ void uiQuestSpritesCreate(void);
 s32 resourceRunOperationIfUnblocked(void);
 s32 FUN_002a4894(void *cursor);
 void FUN_003d498c(u32 id, s32 enabled);
-void FUN_003423cc(s32 sound);
+void buttonHelpSetSelectedId(s32 sound);
 s32 partyEntryBitsBit4(u32 id);
 u32 questHasSpecialDetailPage(u32 id);
 s32 FUN_002f7730(s32 index, u32 id);
-void FUN_002ae320(void);
+void questMarkSelectedSpecialDetail(void);
 s32 campIsState85(void);
 void FUN_00202400(void);
 
@@ -33,7 +33,7 @@ void uiQuestReturnToList(void)
         uiSpriteSetKeyframe(quest->mainSprite, 2, 0);
         uiSpriteSetImageKeyframe(quest->mainSprite, 9, 0);
         setQuestMenuState(g_uiQuest, 3);
-        FUN_003423cc(0xa2);
+        buttonHelpSetSelectedId(0xa2);
         return;
     }
     uiQuestSpritesCreate();
@@ -59,7 +59,7 @@ void uiQuestReturnToList(void)
         current->listState.previousSelection = index;
     }
     if (quest->detailMode > 2) {
-        FUN_002ae320();
+        questMarkSelectedSpecialDetail();
     }
     if (campIsState85()) {
         FUN_00202400();

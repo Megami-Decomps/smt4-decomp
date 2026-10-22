@@ -232,7 +232,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
-extern int FUN_0025a140(unsigned int, unsigned int);
+extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
@@ -676,7 +676,7 @@ void FUN_002712dc(void)
         }
       }
       temp_v13 = (int)((unsigned long long)temp_v39 >> 0x20);
-      if (((g_gameState != (unsigned int *)0x24) && (temp_v4 = FUN_0025a140(2,5), temp_v4 != 0)) &&
+      if (((g_gameState != (unsigned int *)0x24) && (temp_v4 = unitGroupHasFlag(2,5), temp_v4 != 0)) &&
          (!temp_v15)) {
         temp_v17 = (float)temp_v30;
         mathDistanceBetweenPoints();
@@ -844,7 +844,7 @@ void FUN_002712dc(void)
       if (temp_v13 != 1) {
         if (temp_v13 == 2) {
           g_lmapScene[2] = g_lmapScene[2] + 1;
-          if (((g_gameState != (unsigned int *)0x24) && (temp_v13 = FUN_0025a140(2,5), temp_v13 != 0)) &&
+          if (((g_gameState != (unsigned int *)0x24) && (temp_v13 = unitGroupHasFlag(2,5), temp_v13 != 0)) &&
              ((float)g_lmapScene[0x58] < temp_v19)) {
             partyApplyNonlethalAilmentDamage(2,5);
             g_lmapScene[0x58] = 0x447a0000;
@@ -1041,7 +1041,7 @@ joined_r0x002c99a8:
           }
           temp_v34 = temp_v18;
           if ((g_gameState != (unsigned int *)0x24) &&
-             (temp_v13 = FUN_0025a140(2,5), temp_v34 = temp_v18, temp_v13 != 0)) {
+             (temp_v13 = unitGroupHasFlag(2,5), temp_v34 = temp_v18, temp_v13 != 0)) {
             mathDistanceBetweenPoints();
             g_lmapScene[0x58] = (int)((float)g_lmapScene[0x58] - temp_v18);
           }

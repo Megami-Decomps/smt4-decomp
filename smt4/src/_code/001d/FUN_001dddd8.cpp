@@ -40,7 +40,7 @@ extern unsigned char LAB_001de11c; /* 0x1de11c */
 /* Supplied declaration required: FUN_001a7810. */
 /* Supplied declaration required: FUN_001af670. */
 /* Supplied declaration required: dataTable24Sub0GetRecord. */
-extern int FUN_0026280c(void);
+extern int uniteGetWork(void);
 extern int FUN_0029d644(int);
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029efa8(int);
@@ -81,7 +81,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
   iStack_30 = param_1;
   iStack_2c = param_2;
   temp_v14 = param_3;
-  temp_v0 = FUN_0026280c();
+  temp_v0 = uniteGetWork();
   temp_v1 = FUN_002a0d0c();
   if (temp_v0 != 0) {
     temp_v11 = 0;

@@ -20,7 +20,7 @@ extern int g_camp; /* 0x43da90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029d65c(unsigned int);
+extern int ifTouchGetSelectionModeForRegion(unsigned int);
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
@@ -45,7 +45,7 @@ void FUN_0028f694(int param_1,int param_2,unsigned int param_3)
   FUN_002bf380(2,0x1d,6,param_1,param_2,0x79);
   efctSetSpeed();
   FUN_002bf288(2,0x1d,0x429,param_1,param_2,0x7e);
-  temp_v1 = FUN_0029d65c(param_3);
+  temp_v1 = ifTouchGetSelectionModeForRegion(param_3);
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
     FUN_002bf288(2,0x1d,0x42a,param_1,param_2,0x83);
   }

@@ -6,7 +6,7 @@ extern GameStateA g_gameState;
 
 void gameStateClearFlag(void)
 {
-    g_gameState.unk574 = 0;
+    g_gameState.transitionActive = 0;
 }
 
 } /* extern "C" */

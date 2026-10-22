@@ -1,51 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c1bc` (_code @ 0x23c1bc, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Zero stack arguments are materialized at the call rather than shared across the lookup loop; return-block placement differs. */
+#include "battle/btlAction.h"
 
 extern "C" {
-
-int FUN_002505c0(unsigned int, unsigned int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_002505c0. */
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-unsigned int FUN_0023c1bc(unsigned int param_1,unsigned int param_2,int param_3)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  
-  temp_v1 = jyoucyuGetTableEntry(1);
-  if (temp_v1 == 0) {
-    temp_v1 = 0x435ea0;
-    temp_v2 = 0;
-    do {
-      temp_v0 = temp_v2 * 0x1c;
-      puVar4 = (unsigned short *)(temp_v0 + 0x435ea0);
-      if (*puVar4 == param_1) {
-        if (puVar4 != (unsigned short *)0x0) {
-          temp_v1 = *(int *)(temp_v0 + 0x435ea4);
-        }
-        if (puVar4 == (unsigned short *)0x0 || temp_v1 == 0) {
-          return 0;
-        }
-        FUN_002505c0((unsigned int)*(unsigned short *)(temp_v0 + 0x435ea8) + param_3,param_2);
-        return 0;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0xe);
-  }
-  return 0;
+void FUN_002505c0(s32 index, u32 value, void *resource, u32 mode, u32 unique, u32 options, u32 target);
+void *jyoucyuGetTableEntry(u32 index);
+extern BtlActionResourceEntry DAT_00435ea0[14];
 }
 
-} /* extern "C" */
+/* Queues an action from a keyed resource with an offset into its index range. */
+extern "C" u32 FUN_0023c1bc(u32 id, u32 value, s32 offset)
+{
+    if (jyoucyuGetTableEntry(1) == NULL) {
+        for (s32 i = 0; i < 14; ++i) {
+            BtlActionResourceEntry *entry = &DAT_00435ea0[i];
+            if (entry->id == id) {
+                if (entry != NULL && entry->resource != NULL) {
+                    FUN_002505c0(entry->baseIndex + offset, value, entry->resource, 0, 1, 0, 0);
+                }
+                return 0;
+            }
+        }
+    }
+    return 0;
+}

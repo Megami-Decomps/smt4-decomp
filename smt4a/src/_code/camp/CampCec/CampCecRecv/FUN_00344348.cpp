@@ -13,7 +13,7 @@ int sysPlaySe(...);
 int resultReportIfFailed(void);
 int asdLoadFileAsyncSimple(...);
 int runWinOpen(void);
-int FUN_002c76d8(...);
+int gameDataAddHomeButtonHold(...);
 int FUN_002e3140(void);
 int sysMemClear(void);
 int FUN_002fb0d4(...);
@@ -70,7 +70,7 @@ extern unsigned int gameDataBlocksAddFlags(unsigned int);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int cecQueryOptionalProcess(void);
 /* Supplied declaration required: runWinOpen. */
-/* Supplied declaration required: FUN_002c76d8. */
+/* Supplied declaration required: gameDataAddHomeButtonHold. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -177,7 +177,7 @@ void FUN_00344348(unsigned char param_1)
     sysPlaySe(0xbb);
     runWinOpen();
     runWinOpenState();
-    FUN_002c76d8(2);
+    gameDataAddHomeButtonHold(2);
     temp_v0 = gameDataBlocksAddFlags(2);
     campCecDrawListCreate();
     puVar1[0x1f6] = temp_v0;

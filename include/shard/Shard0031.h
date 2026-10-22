@@ -3,6 +3,12 @@
 #define SHARD_SHARD0031_H
 
 #include "common.h"
+#include <stddef.h>
+#include "ui/MessageMain.h"
+#include "status/StatusDown.h"
+#include "ui/PartyPanelState.h"
+#include "ui/ButtonHelp.h"
+#include "shard/NaviMain.h"
 #include "shard/W6_W6Match3_ChunkPool.h"
 
 /* Doubly linked list node; the list keeps a sentinel node whose `prev` is the last element. */
@@ -151,19 +157,7 @@ typedef struct ObjectThreadRoot {
 } ObjectThreadRoot;
 
 /* An object holding a sub-object at +0x68. */
-typedef struct Sub68Owner {
-    /* 0x00 */ u32 job;
-    /* 0x04 */ u8 unk04[0x24];
-    /* 0x28 */ u32 unk28;
-    /* 0x2C */ u32 unk2C;
-    /* 0x30 */ u32 unk30;
-    /* 0x34 */ u32 unk34;
-    /* 0x38 */ u32 unk38;
-    /* 0x3C */ u8 unk3C[0x24];
-    /* 0x60 */ u8 block60[4];
-    /* 0x64 */ u8 unk64[0x4];
-    /* 0x68 */ u8 sub[4];
-} Sub68Owner;
+
 
 /* The work area of a list box process; overlays AsdListBox. */
 typedef struct ListBoxWork {
@@ -180,15 +174,9 @@ typedef struct TaggedOwner {
 } TaggedOwner;
 
 /* Globals holding a pointer to an object at +4. */
-typedef struct ShortSlot {
-    /* 0x00 */ u8 flag;
-    /* 0x01 */ u8 pad01;
-    /* 0x02 */ u16 value;
-} ShortSlot;
 
-typedef struct ScreenEntry {
-    /* 0x00 */ u8 data[0x40];
-} ScreenEntry;
+
+
 
 /* Object at g_buttonHelp+4. */
 /* Object at g_buttonHelp+4. */
@@ -196,32 +184,9 @@ typedef struct ScreenEntry {
 /* Object at g_buttonHelp+4. */
 /* Object at g_buttonHelp+4. */
 /* Object at g_buttonHelp+4. */
-typedef struct ScreenObj {
-    /* 0x00 */ u8 unk00[0x5AC];
-    /* 0x5AC */ ShortSlot slots[6];
-    /* 0x5C4 */ u8 unk5C4[0x1C];
-    /* 0x5E0 */ u8 unk5E0;
-    /* 0x5E1 */ u8 unk5E1[0x3];
-    /* 0x5E4 */ u8 unk5E4;
-    /* 0x5E5 */ u8 unk5E5[0x1];
-    /* 0x5E6 */ u16 unk5E6;
-    /* 0x5E8 */ u8 unk5E8[0x2];
-    /* 0x5EA */ u8 unk5EA;
-    /* 0x5EB */ u8 unk5EB[0x5];
-    /* 0x5F0 */ ScreenEntry entries[2];  /* stride 0x40 */
-    /* 0x670 */ u32 unk670;
-    /* 0x674 */ u8 unk674;
-    /* 0x675 */ u8 unk675;
-    /* 0x676 */ u8 unk676;
-    /* 0x677 */ u8 unk677[0x1];
-    /* 0x678 */ u32 unk678;
-    /* 0x67C */ u8 unk67C;
-} ScreenObj;
 
-typedef struct ScreenRef {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ ScreenObj *instance;
-} ScreenRef;
+
+
 
 
 
@@ -281,63 +246,11 @@ typedef struct JobWorkC {
     /* 0x0C */ s32 unk0C;
 } JobWorkC;
 
-typedef struct Panel85 {
-    /* 0x00 */ u8 unk00[0x8];
-    /* 0x08 */ u8 flag08;
-    /* 0x09 */ u8 unk09[0x17];
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 unk24[0xB];
-    /* 0x2F */ u8 unk2F;
-    /* 0x30 */ u8 unk30;
-    /* 0x31 */ u8 unk31[0x1];
-    /* 0x32 */ u8 unk32;
-    /* 0x33 */ u8 unk33;
-    /* 0x34 */ u8 unk34[0x40];
-    /* 0x74 */ u32 unk74;
-    /* 0x78 */ u8 unk78[0x8];
-    /* 0x80 */ u32 unk80;
-    /* 0x84 */ u32 unk84;
-    /* 0x88 */ u8 unk88[0x4];
-    /* 0x8C */ u8 unk8C;
-    /* 0x8D */ u8 state;
-    /* 0x8E */ u8 unk8E;
-    /* 0x8F */ u8 unk8F;
-    /* 0x90 */ u8 unk90[0x2];
-    /* 0x92 */ u8 unk92;
-    /* 0x93 */ u8 unk93;
-    /* 0x94 */ u8 unk94[0xE8];
-    /* 0x17C */ u8 unk17C;
-    /* 0x17D */ u8 unk17D[0xF];
-    /* 0x18C */ u32 unk18C;
-    /* 0x190 */ u8 unk190;
-    /* 0x191 */ u8 unk191;
-    /* 0x192 */ u8 unk192;
-    /* 0x193 */ u8 unk193[0x96D];
-    /* 0xB00 */ u8 blockB00[4];
-    /* 0xB04 */ u8 unkB04[0xD1C];
-    /* 0x1820 */ u8 block1820[4];
-    /* 0x1824 */ u8 unk1824[0x1EC];
-    /* 0x1A10 */ u8 unk1A10;
-} Panel85;
 
-typedef struct Obj04 {
-    /* 0x00 */ u8 unk00[0x8];
-    /* 0x08 */ u8 state;
-    /* 0x09 */ u8 unk09;
-    /* 0x0A */ u8 unk0A[0x2A];
-    /* 0x34 */ u8 unk34;
-    /* 0x35 */ u8 unk35;
-    /* 0x36 */ u8 unk36[0x198E];
-    /* 0x19C4 */ u8 unk19C4;
-    /* 0x19C5 */ u8 unk19C5[0x23];
-    /* 0x19E8 */ u8 unk19E8;
-} Obj04;
 
-typedef struct PanelRef {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ Obj04 *unk04;
-    /* 0x08 */ Panel85 *panel;
-} PanelRef;
+
+
+
 
 typedef struct ObjectE0 {
     /* 0x00 */ u8 unk00[0xFA4];
@@ -406,10 +319,20 @@ typedef struct Player1C {
     /* 0x1C */ s16 value;
 } Player1C;
 
+/* One demon record in the slot table. */
+typedef struct SlotTableEntry {
+    /* 0x000 */ u8 unk000[0x66];
+    /* 0x066 */ u8 slotId;
+    /* 0x067 */ u8 unk067[0xC5];
+} SlotTableEntry;
+typedef char SlotTableEntrySizeCheck[sizeof(SlotTableEntry) == 0x12C ? 1 : -1];
+
 typedef struct SlotTable {
-    /* 0x0000 */ u8 unk0000[0x1C88];
+    /* 0x0000 */ u8 unk0000[0x68];
+    /* 0x0068 */ SlotTableEntry entries[0x18];
     /* 0x1C88 */ s8 slots[0x18];      /* -1 = empty */
 } SlotTable;
+typedef char SlotTableSlotsOffsetCheck[sizeof(SlotTable) == 0x1CA0 ? 1 : -1];
 
 struct PartyStatusSlots {
     /* 0x0000 */ SlotTable active;
@@ -429,37 +352,9 @@ typedef struct ByteTableA {
     /* 0x03 */ s8 value3;
 } ByteTableA;
 
-typedef struct StateHolder1C {
-    /* 0x00 */ u8 unk00[0x1C];
-    /* 0x1C */ s32 state;
-    /* 0x20 */ u32 unk20;
-    /* 0x24 */ u8 unk24[0x18];
-    /* 0x3C */ s16 unk3C;
-    /* 0x3E */ u8 unk3E[0x9C6];
-    /* 0xA04 */ u16 unkA04;
-} StateHolder1C;
 
-typedef struct StateHolder518 {
-    /* 0x00 */ u8 unk00[0x518];
-    /* 0x518 */ s32 state;
-    /* 0x51C */ u8 unk51C[0xD];
-    /* 0x529 */ u8 unk529;
-    /* 0x52A */ u8 unk52A;
-    /* 0x52B */ u8 unk52B[0x71];
-    /* 0x59C */ u16 table59C[0x28];
-    /* 0x5EC */ u8 unk5EC[4];
-    /* 0x5F0 */ u8 unk5F0[0x64];
-    /* 0x654 */ s32 unk654;
-    /* 0x658 */ u8 unk658[0x1E51];
-    /* 0x24A9 */ u8 unk24A9;
-    /* 0x24AA */ u8 unk24AA;
-    /* 0x24AB */ u8 unk24AB[0xD9];
-    /* 0x2584 */ u8 unk2584;
-    /* 0x2585 */ u8 unk2585[0x3];
-    /* 0x2588 */ u8 block2588[4];
-    /* 0x258C */ u8 unk258C[0xC];
-    /* 0x2598 */ u8 unk2598;
-} StateHolder518;
+
+
 
 /* Appends pairs of halfwords (up to 4) to two parallel arrays. */
 typedef struct PairLog {
@@ -494,7 +389,9 @@ typedef struct OverlayObj {
     /* 0xE8 */ void *buffer1;
     /* 0xEC */ u8 unkEC[0x8];
     /* 0xF4 */ u32 scriptProcess;
-    /* 0xF8 */ u8 unkF8[0x70];
+    /* 0x0F8 */ u8 unk0F8[0x54];
+    /* 0x14C */ u32 unk14C;
+    /* 0x150 */ u8 unk150[0x18];
     /* 0x168 */ u32 unk168;
     /* 0x16C */ u8 unk16C;
     /* 0x16D */ u8 unk16D[0x7];
@@ -508,5 +405,9 @@ typedef struct OverlayRef {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ OverlayObj *instance;
 } OverlayRef;
+
+typedef char CampCecOverlayLayoutCheck[sizeof(OverlayObj) == 0x1A8 ? 1 : -1];
+
+typedef char CampCecOverlayOffsets[offsetof(OverlayObj, scriptProcess) == 0xF4 && offsetof(OverlayObj, unk14C) == 0x14C ? 1 : -1];
 
 #endif

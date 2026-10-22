@@ -1,51 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035aa90` (_code @ 0x35aa90, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the earned byte address unfolded (add #748, ldrb [r0]) and swaps the
+ * callee-saved registers holding index and the bit constant. */
+#include "gamedata/DataTable.h"
+#include "shard/Shard003D.h"
 
 extern "C" {
+GameBlock2830C *gameDataBlocksGetSaveData(void);
 
-int dataTableGet(int, int);
-
-extern unsigned char LAB_0035ab3c; /* 0x35ab3c */
-
-extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(void);
-
-
-unsigned char * FUN_0035aa90(int param_1)
-
+/* Tests entry `id`'s bit in the save's earned set. */
+static inline bool unlockIsEarned(s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  int temp_v3;
-  
-  dataTableGet(0x4a,0);
-  temp_v0 = dataTableGetCount();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  if (temp_v2 < temp_v0) {
-    do {
-      dataTableGet(0x4a,0);
-      temp_v1 = dataTableGetEntries();
-      puVar4 = (unsigned char *)(temp_v1 + temp_v2 * 0x2c);
-      if ((puVar4 != (unsigned char *)0x0) &&
-         (temp_v1 = gameDataBlocksGetSaveData(),
-         ((unsigned int)*(unsigned char *)(temp_v1 + ((int)(temp_v2 + ((unsigned int)(temp_v2 >> 0x1f) >> 0x1d)) >> 3) + 0x282ec) &
-         (1 << ((temp_v2 % 8) & 0xffU))) != 0)) {
-        if (temp_v3 == param_1) {
-          return puVar4;
-        }
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v0);
-  }
-  return &LAB_0035ab3c;
+    s32 byte = id / 8;
+    s32 bit = id % 8;
+    return (gameDataBlocksGetSaveData()->unlocks.earned[byte] & (1 << bit)) != 0;
 }
 
-} /* extern "C" */
+/* Returns the name of the index-th earned entry of data table 0x4a (0x2c-byte records), or "" when
+ * fewer are earned. */
+const char *FUN_0035aa90(s32 index)
+{
+    s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
+    s32 found = 0;
+    for (s32 i = 0; i < count; i++) {
+        u8 *record = (u8 *)dataTableGetEntries(dataTableGet(0x4a, 0)) + i * 0x2c;
+        if (record != NULL && unlockIsEarned(i)) {
+            if (found == index) {
+                return (const char *)record;
+            }
+            found++;
+        }
+    }
+    return "";
+}
+}

@@ -1,50 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016fba0` (_code @ 0x16fba0, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP scheduling: retail loads the 40.743664f constant after the first multiply and allocates s2-s6 differently around the divides. */
+#include "common.h"
+
+/* A 4x4 matrix, row by row. */
+struct ProjectionMtx {
+    f32 m[4][4];
+};
 
 extern "C" {
+void FUN_0018a924(f32 *sine, f32 *cosine, f32 angle);
 
-int FUN_0018a924(float *, float [5]);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0018a924. */
-
-
-float * FUN_0016fba0(float *param_1)
-
+/* Builds a perspective projection: `fovy` in degrees, `aspect` width over height, clip planes
+ * `nearZ` and `farZ` (depth mapped to 0..1 scaled by farZ). */
+ProjectionMtx *FUN_0016fba0(ProjectionMtx *mtx, f32 fovy, f32 aspect, f32 nearZ, f32 farZ)
 {
-/* irregular: irregular input(s): in_s1, in_s2, in_s3; 1 native warning(s); review required */
-  float in_s1;
-  float in_s2;
-  float temp_v0;
-  float in_s3;
-  float temp_v1;
-  float temp_v2 [5];
-  
-  FUN_0018a924(&temp_v1,temp_v2);
-  param_1[0xe] = -1.0f;
-  param_1[1] = 0.0f;
-  param_1[2] = 0.0f;
-  param_1[3] = 0.0f;
-  param_1[4] = 0.0f;
-  param_1[6] = 0.0f;
-  param_1[7] = 0.0f;
-  param_1[8] = 0.0f;
-  param_1[9] = 0.0f;
-  param_1[0xc] = 0.0f;
-  param_1[0xd] = 0.0f;
-  temp_v0 = 1.0f / (in_s3 - in_s2);
-  param_1[0xf] = 0.0f;
-  param_1[5] = temp_v2[0] / temp_v1;
-  *param_1 = (temp_v2[0] / temp_v1) / in_s1;
-  param_1[10] = in_s3 * temp_v0;
-  param_1[0xb] = in_s3 * in_s2 * temp_v0;
-  return param_1;
+    f32 sine;
+    f32 cosine;
+    f32 cotangent;
+    f32 depthScale;
+
+    /* The sine table angle unit: 256 per turn. */
+    FUN_0018a924(&sine, &cosine, fovy * 0.5f * 40.743664f);
+    cotangent = cosine / sine;
+    depthScale = 1.0f / (farZ - nearZ);
+    mtx->m[3][2] = -1.0f;
+    mtx->m[0][1] = 0.0f;
+    mtx->m[0][2] = 0.0f;
+    mtx->m[0][3] = 0.0f;
+    mtx->m[1][0] = 0.0f;
+    mtx->m[1][2] = 0.0f;
+    mtx->m[1][3] = 0.0f;
+    mtx->m[2][0] = 0.0f;
+    mtx->m[2][1] = 0.0f;
+    mtx->m[3][0] = 0.0f;
+    mtx->m[3][1] = 0.0f;
+    mtx->m[3][3] = 0.0f;
+    mtx->m[1][1] = cotangent;
+    mtx->m[0][0] = cotangent / aspect;
+    mtx->m[2][2] = farZ * depthScale;
+    mtx->m[2][3] = farZ * nearZ * depthScale;
+    return mtx;
 }
 
 } /* extern "C" */

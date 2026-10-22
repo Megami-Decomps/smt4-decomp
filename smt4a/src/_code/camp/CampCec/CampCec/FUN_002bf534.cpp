@@ -54,7 +54,7 @@ extern int FUN_0025cf44(...); /* 0x25cf44 */
 extern int campCecEditPollConfirmation(...); /* 0x281744 */
 extern u32 campCecRecvWaitAndResume(CampCecResumeState*); /* 0x2817ac */
 extern int campCecWaitForView(...); /* 0x281814 */
-extern int FUN_002a283c(...); /* 0x2a283c */
+extern int campRunScriptEntry(...); /* 0x2a283c */
 extern unsigned char LAB_002bf948; /* 0x2bf948 */
 extern unsigned char LAB_002bf95c; /* 0x2bf95c */
 extern unsigned char LAB_002bf970; /* 0x2bf970 */
@@ -196,7 +196,7 @@ void FUN_002bf534(int param_1)
   puVar4[6] = (unsigned int)FUN_002bfd2c;
   puVar4[7] = (unsigned int)campCecWaitForView;
   puVar4[8] = (unsigned int)campCecRankingWaitAndResume;
-  puVar4[10] = (unsigned int)FUN_002a283c;
+  puVar4[10] = (unsigned int)campRunScriptEntry;
   puVar4[0xc] = (unsigned int)FUN_0036cfb0;
   puVar4[0xe] = (unsigned int)&LAB_003193a0;
   puVar4[0xf] = (unsigned int)jobSceneWaitStep;

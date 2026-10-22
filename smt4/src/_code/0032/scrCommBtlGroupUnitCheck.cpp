@@ -6,7 +6,7 @@ extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
 extern s32 FUN_00245854(BtlUnitEntry *unit, u32 arg);
 
@@ -20,7 +20,7 @@ u32 scrCommBtlGroupUnitCheck(void)
     s32 index;
 
     scrGetArg(1);
-    FUN_002499fc(FUN_00249a54(), &start, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < start + count; index++) {
         BtlUnitEntry *unit = &btlGetMainState()->units[index];
 

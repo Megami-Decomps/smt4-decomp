@@ -2,8 +2,8 @@
 #include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
-s32 FUN_0029d65c(s32 key);
-s32 FUN_002af600(s32 key);
+s32 ifTouchGetSelectionModeForRegion(s32 key);
+s32 ifTouchIsInitialSelection(s32 key);
 s32 FUN_003c2a84(u32 mode);
 s32 FUN_003c2b44(u32 mode);
 s32 FUN_003c2b14(u32 mode);
@@ -18,8 +18,8 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
     stepper->incrementActive = 0;
     stepper->decrementActive = 0;
     const s32 previous = stepper->value;
-    const s32 incrementState = FUN_0029d65c(stepper->incrementKey);
-    const s32 decrementState = FUN_0029d65c(stepper->decrementKey);
+    const s32 incrementState = ifTouchGetSelectionModeForRegion(stepper->incrementKey);
+    const s32 decrementState = ifTouchGetSelectionModeForRegion(stepper->decrementKey);
     if (incrementState != 0) {
         stepper->incrementActive = 1;
     }
@@ -27,7 +27,7 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
         stepper->decrementActive = 1;
     }
 
-    if (FUN_002af600(stepper->incrementKey) != 0) {
+    if (ifTouchIsInitialSelection(stepper->incrementKey) != 0) {
         if (stepper->value != stepper->maximum) {
             ++stepper->value;
         } else {
@@ -35,7 +35,7 @@ extern "C" void numericStepperHandleInput(NumericStepper* stepper)
         }
     } else if (incrementState == 2 && stepper->value < stepper->maximum) {
         ++stepper->value;
-    } else if (FUN_002af600(stepper->decrementKey) != 0) {
+    } else if (ifTouchIsInitialSelection(stepper->decrementKey) != 0) {
         if (stepper->value == stepper->minimum) {
             stepper->value = stepper->maximum;
         } else {

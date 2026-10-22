@@ -25,7 +25,7 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
 extern int randRange(unsigned int);
-extern unsigned int FUN_00232388(void);
+extern unsigned int btlResolveEntryChoice(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: FUN_003020fc. */
@@ -51,7 +51,7 @@ unsigned int FUN_0039d87c(void)
   
   temp_v0 = scrGetArg(0);
   scrGetArg(1);
-  temp_v1 = FUN_00232388();
+  temp_v1 = btlResolveEntryChoice();
   temp_v6 = 0;
   FUN_00301a08(temp_v1,&temp_v8,&temp_v9);
   temp_v5 = temp_v8;

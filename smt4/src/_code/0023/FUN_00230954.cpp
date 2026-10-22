@@ -22,7 +22,7 @@ extern int flaggedEntryGetValueB(char *);
 /* Supplied declaration required: FUN_00298d64. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int flaggedEntryGetValueA(void);
 /* Supplied declaration required: FUN_0029e93c. */
 /* Supplied declaration required: FUN_0029efc0. */
@@ -55,7 +55,7 @@ void FUN_00230954(int param_1,char *param_2)
     temp_v0 = 0;
     if (temp_v0 < *(int *)(param_1 + 0xc)) {
       do {
-        temp_v1 = FUN_0029d65c((int)*(short *)(param_1 + temp_v0 * 2 + 0x18));
+        temp_v1 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v0 * 2 + 0x18));
         if (temp_v1 == 1 || temp_v1 == 2) {
           *(unsigned char *)(param_1 + 0x11) = 1;
           *(short *)(param_1 + 0x14) = (short)temp_v0;

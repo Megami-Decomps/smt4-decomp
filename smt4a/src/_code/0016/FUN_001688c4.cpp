@@ -1,60 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001688c4` (_code @ 0x1688c4, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+/* A text glyph cell: control codes 0xf8xx carry parameters in the following cells. */
+struct TextCell {
+    /* 0x00 */ u16 code;
+    /* 0x02 */ u8 unk02[0x1e];
+};
+
+struct TextLine {
+    /* 0x00 */ TextCell *cells;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0c */ s32 start;
+    /* 0x10 */ s32 count;
+    /* 0x14 */ s32 active;
+};
+
+#define TEXT_CODE_END 0xffff
+#define TEXT_CODE_COUNT 0xf801
+#define TEXT_CODE_STOP 0xf802
+#define TEXT_CODE_SET 0xf81a
 
 extern "C" {
+s32 FUN_0019be8c(u32 code);
+s32 sentinelLookupGetValue(u32 code);
 
-int sentinelLookupGetValue(void);
-
-extern int FUN_0019be8c(unsigned int);
-/* Supplied declaration required: sentinelLookupGetValue. */
-
-
-unsigned int FUN_001688c4(int *param_1)
-
+/* Scans the line's control codes up to a stop: counts 0xf801 codes, or takes the parameter of the last 0xf81a code. */
+s32 FUN_001688c4(TextLine *line)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v3 = 0;
-  if (param_1[5] == 0) {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v1 = param_1[3];
-    if (temp_v1 < param_1[4] + temp_v1) {
-      do {
-        temp_v2 = (unsigned int)*(unsigned short *)(*param_1 + temp_v1 * 0x20);
-        if (temp_v2 == 0xffff) {
-          return temp_v3;
-        }
-        temp_v0 = FUN_0019be8c(temp_v2);
-        if (temp_v0 != 0) {
-          if (temp_v2 == 0xf801) {
-            temp_v3 = temp_v3 + 1;
-          }
-          else {
-            if (temp_v2 == 0xf802) {
-              return temp_v3;
-            }
-            if (temp_v2 != 0xf81a) {
-              sentinelLookupGetValue();
-              temp_v1 = temp_v1 + temp_v2;
-            }
-            else {
-              temp_v1 = temp_v1 + 1;
-              temp_v3 = (unsigned int)*(unsigned short *)(*param_1 + temp_v1 * 0x20);
-            }
-          }
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < param_1[3] + param_1[4]);
+    s32 result = 0;
+    s32 i;
+
+    if (line->active == 0) {
+        return 0;
     }
-  }
-  return temp_v3;
+    for (i = line->start; i < line->start + line->count; i++) {
+        u32 code = line->cells[i].code;
+        if (code == TEXT_CODE_END) {
+            break;
+        }
+        if (FUN_0019be8c(code) != 0) {
+            switch (code) {
+            case TEXT_CODE_COUNT:
+                result++;
+                break;
+            case TEXT_CODE_STOP:
+                return result;
+            case TEXT_CODE_SET:
+                i++;
+                result = line->cells[i].code;
+                break;
+            default:
+                i += sentinelLookupGetValue(code);
+                break;
+            }
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

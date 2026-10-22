@@ -1,75 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031d088` (_code @ 0x31d088, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps a second copy of the work pointer (`mov r7, r6`, read for jobStop)
+ * and so saves r9/sl; everything else matches. */
+#include "shard/W5_W5Match6_CallbackController.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int ifTouchRegionRemove(void);
-int asdMemFree(void);
-int asdTMTexTableReleaseNode(int, int);
-int asdMemFreeSlot(unsigned int);
-int asdTMTexTableFreeEntry(int);
-int asdOperatorDelete(void);
+void jobStop(u32 job, s32 arg);
+void ifTouchRegionRemove(void);
+void asdMemFree(void *block);
+void asdMemFreeSlot(void *slot);
+s32 asdTMTexTableNodeIsLoaded(s32 table, s32 node);
+void asdTMTexTableReleaseNode(s32 table, s32 node);
+void asdTMTexTableFreeEntry(s32 table);
+void asdOperatorDelete(void *block);
 
-extern unsigned char g_callbackController; /* 0x57f23c */
-
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdOperatorDelete. */
-
-
+/* Tears down the controller's work: touch regions, memory slots, buffers and texture table 51,
+ * then stops its job and deletes the work area. */
 void FUN_0031d088(void)
-
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4));
-  temp_v0 = 0;
-  if (*(short *)((*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4)) + 0x86) != 0) {
-    do {
-      ifTouchRegionRemove();
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (int)(unsigned int)*(unsigned short *)(puVar1 + 0x86));
-  }
-  temp_v0 = 0;
-  do {
-    asdMemFreeSlot(puVar1[temp_v0 + 0x22]);
-    temp_v1 = temp_v0 + 1;
-    puVar1[temp_v0 + 0x22] = 0;
-    temp_v0 = temp_v1;
-  } while (temp_v1 < 3);
-  if (puVar1[2] != 0) {
-    asdMemFree();
-    puVar1[2] = 0;
-  }
-  if (puVar1[3] != 0) {
-    asdMemFree();
-    puVar1[3] = 0;
-  }
-  temp_v0 = 0;
-  do {
-    temp_v1 = asdTMTexTableNodeIsLoaded(0x33,temp_v0);
-    if (temp_v1 != 0) {
-      asdTMTexTableReleaseNode(0x33,temp_v0);
+    CallbackControllerWork *work = (CallbackControllerWork *)g_callbackController.work;
+    s32 i;
+
+    for (i = 0; i < work->touchRegionCount; i++) {
+        ifTouchRegionRemove();
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x13);
-  asdTMTexTableFreeEntry(0x33);
-  jobStop(*puVar1,0);
-  if ((*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4)) != (unsigned int *)0x0) {
-    asdOperatorDelete();
-    (*(unsigned int * *)((unsigned char *)&g_callbackController + 0x4)) = (unsigned int *)0x0;
-  }
-  return;
+    for (i = 0; i < 3; i++) {
+        asdMemFreeSlot(work->slots[i]);
+        work->slots[i] = NULL;
+    }
+    if (work->bufferA != NULL) {
+        asdMemFree(work->bufferA);
+        work->bufferA = NULL;
+    }
+    if (work->bufferB != NULL) {
+        asdMemFree(work->bufferB);
+        work->bufferB = NULL;
+    }
+    for (i = 0; i < 19; i++) {
+        if (asdTMTexTableNodeIsLoaded(51, i) != 0) {
+            asdTMTexTableReleaseNode(51, i);
+        }
+    }
+    asdTMTexTableFreeEntry(51);
+    jobStop(work->job, 0);
+    if (g_callbackController.work != NULL) {
+        asdOperatorDelete(g_callbackController.work);
+        g_callbackController.work = NULL;
+    }
 }
 
 } /* extern "C" */

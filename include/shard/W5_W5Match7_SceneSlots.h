@@ -2,6 +2,7 @@
 #define SHARD_W5_W5MATCH7_SCENESLOTS_H
 
 #include "shard/W5_W5Match7_SceneState.h"
+#include <stddef.h>
 
 struct SceneSlot {
     /* 0x000 */ u8 active;
@@ -27,11 +28,15 @@ struct SceneSlot {
 };
 
 struct SceneSlotList {
-    /* 0x0000 */ u8 unk0000[0x34];
+    /* 0x0000 */ u8 unk0000[0xC];
+    /* 0x000C */ u32 unk0C;
+    /* 0x0010 */ u32 unk10;
+    /* 0x0014 */ u8 unk0014[0x20];
     /* 0x0034 */ SceneSlot slots[40];
     /* 0x3d74 */ u8 unk3d74[8];
     /* 0x3d7c */ s32 activeCount;
 };
+typedef char SceneSlotListOffsets[offsetof(SceneSlotList, unk10) == 0x10 && offsetof(SceneSlotList, slots) == 0x34 ? 1 : -1];
 
 class SceneResourceObject {
 public:

@@ -24,7 +24,7 @@ struct BreakablePlayerPosition {
 
 extern "C" {
 extern MapBreakableWork* g_mapHakai;
-f32 FUN_002b5cd4(f32 current, f32 target);
+f32 mathAngleDeltaDegrees(f32 current, f32 target);
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 f32 FUN_00384830(MapVector from, f32 heading, MapVector to);
 }
@@ -46,7 +46,7 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
         if (entry.state == 2 || entry.state == 3 || entry.state == 0) {
             continue;
         }
-        const f32 difference = FUN_002b5cd4(
+        const f32 difference = mathAngleDeltaDegrees(
             entry.heading, mathPositionHeadingDegrees(entry.position, g_lmapScene->position));
         if (entry.kind != 1 && entry.kind != 6) {
             continue;

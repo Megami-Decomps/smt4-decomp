@@ -1,53 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00428060` (_code @ 0x428060, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: output/text land in r6/r7 swapped against retail (r7/r6), and the owner status is
+ * copied to r1 before its sign test instead of after */
+#include "shard/W5_W5Match2_ValidationPair.h"
+#include "nn/Result.h"
 
 extern "C" {
+s32 FUN_004283cc(void *owner);
+u32 FUN_0016ccfc(void);
+s32 tokenResolveAddress(u32 context, u8 **address, u32 token);
+s32 FUN_004285d4(void *output, const char *text, u8 *source);
+ValidationPair *_ZN18WindowStatusResultC1Ej(ValidationPair *result, s32 status);
+void recordValidatePair(void *owner, ValidationPair result);
 
-int _ZN18WindowStatusResultC1Ej(...);
-int recordValidatePair(unsigned int *, int, unsigned int);
-int FUN_004285d4(int, unsigned int, int);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int FUN_0016ccfc(void);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern int FUN_004283cc(unsigned int *);
-/* Supplied declaration required: recordValidatePair. */
-/* Supplied declaration required: FUN_004285d4. */
-extern int tokenResolveAddress(unsigned int, int *, unsigned int);
-
-
-void FUN_00428060(unsigned int *param_1,unsigned int *param_2,int param_3,unsigned int param_4)
-
+// Resolve the owner's token and parse text into output from the resolved block, then validate the outcome.
+void FUN_00428060(ValidationPair *result, u32 *owner, void *output, const char *text)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2 [2];
-  int temp_v3;
-  unsigned int uStack_1c;
-  
-  temp_v0 = FUN_004283cc(param_2);
-  if (temp_v0 < 0) {
-    _ZN18WindowStatusResultC1Ej(param_1,temp_v0);
-    return;
-  }
-  temp_v1 = FUN_0016ccfc();
-  temp_v0 = tokenResolveAddress(temp_v1,temp_v2,*param_2);
-  if ((-1 < temp_v0) &&
-     (FUN_004285d4(param_3,param_4,temp_v2[0] + 0x54), temp_v0 = param_3, -1 < param_3)) {
-    temp_v0 = 0;
-  }
-  _ZN18WindowStatusResultC1Ej(&temp_v3,temp_v0);
-  recordValidatePair(param_2,temp_v3,uStack_1c);
-  *param_1 = temp_v3;
-  param_1[1] = uStack_1c;
-  return;
-}
+    s32 ownerStatus = FUN_004283cc(owner);
+    if (nnResultIsFailure(ownerStatus)) {
+        _ZN18WindowStatusResultC1Ej(result, ownerStatus);
+        return;
+    }
 
-} /* extern "C" */
+    u8 *address;
+    s32 status = tokenResolveAddress(FUN_0016ccfc(), &address, *owner);
+    if (!nnResultIsFailure(status)) {
+        status = FUN_004285d4(output, text, address + 0x54);
+        if (!nnResultIsFailure(status)) {
+            status = 0;
+        }
+    }
+
+    ValidationPair outcome;
+    _ZN18WindowStatusResultC1Ej(&outcome, status);
+    recordValidatePair(owner, outcome);
+    *result = outcome;
+}
+}

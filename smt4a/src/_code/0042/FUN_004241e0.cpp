@@ -1,49 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004241e0` (_code @ 0x4241e0, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail repeatedly reloads the shared state and includes two post-sleep NOP hints. */
+#include "shard/ThreadControl.h"
 
 extern "C" {
+void svcSleepThread(s64 nanoseconds);
+void nn_os_LightEvent_Signal(void *event);
+void nn_os_CriticalSection_Enter(void *criticalSection);
+void nn_os_CriticalSection_Leave(void *criticalSection);
 
-int nn_os_LightEvent_Signal(int);
-int svcSleepThread(int, int);
-
-/* Supplied declaration required: nn_os_LightEvent_Signal. */
-/* Supplied declaration required: svcSleepThread. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned int FUN_004241e0(int param_1)
-
+// Request the worker's next active state and wait for success or a terminal state.
+u32 FUN_004241e0(ThreadControl *control)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v1 = *(int *)(param_1 + 0xc) != 1;
-  temp_v0 = 1;
-  if (temp_v1) {
-    temp_v0 = *(int *)(param_1 + 0xc);
-  }
-  if (!temp_v1 || temp_v0 == 8) {
-    nn_os_CriticalSection_Enter(param_1);
-    *(unsigned int *)(param_1 + 0xc) = 5;
-    nn_os_CriticalSection_Leave(param_1);
-    nn_os_LightEvent_Signal(param_1 + 0x20);
-    while( 1 ) {
-      if (*(int *)(param_1 + 0xc) == 3) {
+    if (control->state == 1 || control->state == 8) {
+        nn_os_CriticalSection_Enter(control->criticalSection);
+        control->state = 5;
+        nn_os_CriticalSection_Leave(control->criticalSection);
+        nn_os_LightEvent_Signal(control->wakeEvent);
+        while (control->state != 3) {
+            if (control->state == 7 || control->state == 1)
+                return 0;
+            svcSleepThread(500000);
+        }
         return 1;
-      }
-      temp_v0 = *(int *)(param_1 + 0xc);
-      temp_v1 = temp_v0 == 7;
-      if (!temp_v1) {
-        temp_v0 = *(int *)(param_1 + 0xc);
-      }
-      if (temp_v1 || temp_v0 == 1) break;
-      svcSleepThread(500000,0);
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

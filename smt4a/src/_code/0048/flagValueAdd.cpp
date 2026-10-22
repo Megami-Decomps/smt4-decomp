@@ -26,7 +26,7 @@ struct FlagValueStorage {
 extern "C" void FUN_0041849c(u16 id);
 extern "C" FlagValueDescription *FUN_0019c06c(s32 id);
 extern "C" FlagValueStorage *flagValueGetStorage(void);
-extern "C" u32 FUN_001774d8(s32 id);
+extern "C" u32 itemGetStackLimit(s32 id);
 
 /* Add to a capped numeric flag, or set a boolean flag, and record the changed id. */
 extern "C" void flagValueAdd(s32 id, u32 amount)
@@ -61,7 +61,7 @@ extern "C" void flagValueAdd(s32 id, u32 amount)
         bank[index / 8] |= 1u << (index % 8);
         break;
     case 1: {
-        u32 maximum = FUN_001774d8(id);
+        u32 maximum = itemGetStackLimit(id);
         u16 *value = &((u16 *)bank)[index];
         u32 sum = *value + amount;
         if (sum >= maximum)

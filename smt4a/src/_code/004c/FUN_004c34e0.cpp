@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(...);
 int FUN_001568f8(...);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
 int FUN_003e8bb0(...);
@@ -48,7 +48,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
 extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -56,7 +56,7 @@ extern int lcgRandomRange(unsigned int);
 extern int FUN_004bd098(unsigned int, int);
 extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004c4178. */
-extern int FUN_004c8754(unsigned short);
+extern int flagsCountSelectedBits(unsigned short);
 
 
 unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned int param_5,
@@ -100,7 +100,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
   puVar2 = (unsigned int *)btlGetMainState();
   temp_v4 = temp_v21;
   dataTable04FindById();
-  FUN_00192550();
+  dataTable8FindRecord();
   puVar3 = puVar2;
   FUN_003f0e20(puVar2,param_5);
   puVar4 = puVar2;
@@ -121,7 +121,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
     FUN_003f0e20(temp_v1,param_5);
     if ((((temp_v3 != 0) && (temp_v2 = temp_v1, FUN_003f0e20(temp_v1,param_6), temp_v2 != 0)) &&
         (FUN_003e8bb0(temp_v17,temp_v1,temp_v3), temp_v18 != 0)) &&
-       ((temp_v3 = FUN_004c8754(*(unsigned short *)(temp_v2 + 0x274)), temp_v3 != 0 &&
+       ((temp_v3 = flagsCountSelectedBits(*(unsigned short *)(temp_v2 + 0x274)), temp_v3 != 0 &&
         (temp_v0 = (unsigned int)temp_v18 * temp_v3, temp_v0 != 0)))) {
       VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
     }

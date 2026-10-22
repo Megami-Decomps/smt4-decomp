@@ -1,39 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001df6d8` (_code @ 0x1df6d8, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scalar-channel registers and the large timer-field address decomposition differ. */
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/Shard0034.h"
+
+struct UniteScalarAnimationRef {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ScalarAnimationChannel *channel;
+};
+struct UniteAnimationView {
+    /* 0x0000 */ u8 unk0000[0x95c8];
+    /* 0x95c8 */ void *objectA;
+    /* 0x95cc */ void *objectB;
+    /* 0x95d0 */ UniteScalarAnimationRef *animation;
+    /* 0x95d4 */ u8 unk95d4[8];
+    /* 0x95dc */ u32 timer;
+};
 
 extern "C" {
+extern UniteWorkIV *g_unite;
+void FUN_00210194(void *object, f32 value);
 
-int FUN_00210194(unsigned int);
-
-typedef int romwright_code(...);
-extern int g_unite; /* 0x43dd68 */
-
-/* Supplied declaration required: FUN_00210194. */
-
-
-void FUN_001df6d8(void)
-
+void FUN_001df6d8()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_unite;
-  if (g_unite != 0) {
-    FUN_00210194(*(unsigned int *)(g_unite + 0x95c8));
-    FUN_00210194(*(unsigned int *)(temp_v0 + 0x95cc));
-    temp_v1 = *(int *)(*(int *)(temp_v0 + 0x95d0) + 4);
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x44);
-    (**(romwright_code **)(temp_v1 + 0x4c))(*(unsigned int *)(temp_v1 + 0x50));
-    *(unsigned int *)(temp_v1 + 0x3c) = *(unsigned int *)(temp_v1 + 0x38);
-    *(unsigned int *)(temp_v1 + 0x38) = temp_v2;
-    *(unsigned char *)(temp_v1 + 0x58) = 1;
-    *(unsigned int *)(temp_v0 + 0x95dc) = 0x1e0;
-    *(int *)(temp_v0 + 0x95d8) = *(int *)(temp_v0 + 0x95d8) + 1;
-  }
-  return;
+    UniteWorkIV *work = g_unite;
+    if (!work) {
+        return;
+    }
+    UniteAnimationView *view = (UniteAnimationView *)work;
+    FUN_00210194(view->objectA, 480.0f);
+    FUN_00210194(view->objectB, 480.0f);
+    ScalarAnimationChannel *channel = view->animation->channel;
+    f32 value = channel->interpolate(channel->start, channel->end, 480.0f, channel->work);
+    channel->previous = channel->current;
+    channel->current = value;
+    channel->dirty = 1;
+    view->timer = 480;
+    ++work->unk95D8;
 }
-
-} /* extern "C" */
+}

@@ -1,48 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b29fc` (_code @ 0x2b29fc, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
 
-extern "C" {
-
-int FUN_00184310(...);
-int FUN_00282b9c(void);
-
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_0023e60c(int);
-/* Supplied declaration required: FUN_00282b9c. */
-
-
-int FUN_002b29fc(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  unsigned short *puVar6;
-  
-  temp_v0 = (unsigned int)param_1[1];
-  FUN_00282b9c();
-  temp_v1 = (unsigned int)param_2[1];
-  FUN_00282b9c();
-  FUN_00184310(*param_1);
-  FUN_00184310(*param_2);
-  temp_v2 = FUN_0023e60c((int)*(short *)(temp_v0 + 0x22));
-  temp_v3 = FUN_0023e60c((int)*(short *)(temp_v1 + 0x22));
-  temp_v2 = temp_v2 - temp_v3;
-  if (temp_v2 == 0) {
-    puVar5 = (unsigned short *)(unsigned int)*param_1;
-    FUN_00184310();
-    puVar6 = (unsigned short *)(unsigned int)*param_2;
-    FUN_00184310();
-    temp_v2 = (unsigned int)(unsigned char)puVar5[1] - (unsigned int)(unsigned char)puVar6[1];
-    if ((temp_v2 == 0) && (temp_v2 = (unsigned int)puVar6[3] - (unsigned int)puVar5[3], temp_v2 == 0)) {
-      temp_v2 = (unsigned int)*puVar5 - (unsigned int)*puVar6;
-    }
-  }
-  return temp_v2;
+namespace {
+struct DevilSecondarySortEntry {
+    /* 0x00 */ u16 devilId;
+    /* 0x02 */ u16 tableKey;
+};
+struct SecondarySortRecord {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ s16 sortKey;
+};
 }
+extern "C" {
+SecondarySortRecord *FUN_00282b9c(u16 key);
+s32 FUN_0023e60c(s32 key);
 
-} /* extern "C" */
+/* Sorts by the mapped secondary key, then race, descending level, and devil ID. */
+s32 FUN_002b29fc(const DevilSecondarySortEntry *left, const DevilSecondarySortEntry *right)
+{
+    SecondarySortRecord *leftSecondary = FUN_00282b9c(left->tableKey);
+    SecondarySortRecord *rightSecondary = FUN_00282b9c(right->tableKey);
+    FUN_00184310(left->devilId);
+    FUN_00184310(right->devilId);
+    s32 order = FUN_0023e60c(leftSecondary->sortKey) - FUN_0023e60c(rightSecondary->sortKey);
+    if (order == 0) {
+        DevilRecordA *leftRecord = FUN_00184310(left->devilId);
+        DevilRecordA *rightRecord = FUN_00184310(right->devilId);
+        order = leftRecord->race - rightRecord->race;
+        if (order == 0) {
+            order = rightRecord->level - leftRecord->level;
+            if (order == 0) {
+                order = leftRecord->id - rightRecord->id;
+            }
+        }
+    }
+    return order;
+}
+}

@@ -1,57 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a1738` (_code @ 0x2a1738, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The shared slot-table address is kept in r0 instead of r1 across the initial-frame branch. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_001628c0(unsigned int, int, int, int);
-
-extern unsigned int DAT_00588fcc; /* 0x588fcc */
-extern unsigned char DAT_0061978c; /* 0x61978c */
-extern unsigned char DAT_00619970; /* 0x619970 */
-extern unsigned char DAT_00619971; /* 0x619971 */
-
-/* Supplied declaration required: FUN_001628c0. */
-extern int scrGetCommandFrame(void);
-
-
-unsigned int FUN_002a1738(int param_1,unsigned int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned char temp_v1;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 != 0) {
-    if (DAT_00588fcc >= 4) {
-      pcVar2 = (char *)0x0;
-    }
-    else {
-      pcVar2 = (char *)(&DAT_0061978c + DAT_00588fcc * 0x78);
-    }
-    if (*pcVar2 == '\x02') {
-      return 1;
-    }
-  }
-  else {
-    if (param_1 == 1) {
-      temp_v1 = DAT_00619970 | 4;
-    }
-    else {
-      temp_v1 = DAT_00619970;
-      if (param_1 == 2) {
-        temp_v1 = 5;
-      }
-    }
-    FUN_001628c0(param_2,DAT_00619971,temp_v1,1);
-    DAT_00588fcc = param_2;
-    if (param_2 == 0xffffffff) {
-      return 1;
-    }
-  }
-  return 0;
+namespace {
+struct ScriptWaitSlot {
+    /* 0x00 */ u8 state;
+    /* 0x01 */ u8 unk01[0x77];
+};
+struct ScriptWaitSlots {
+    /* 0x000 */ ScriptWaitSlot slots[4];
+    /* 0x1E0 */ u8 unk1E0[4];
+    /* 0x1E4 */ u8 flags;
+    /* 0x1E5 */ u8 mode;
+};
 }
+extern "C" {
+extern u32 DAT_00588fcc;
+extern ScriptWaitSlots DAT_0061978c;
+u32 scrGetCommandFrame(void);
+u32 FUN_001628c0(u32 slot, u32 mode, u32 flags, s32 enabled, f32 first, f32 second);
 
-} /* extern "C" */
+/* Starts the selected asynchronous slot on the first script frame, then waits for completion. */
+u32 FUN_002a1738(s32 mode, u32 slot)
+{
+    if (scrGetCommandFrame() != 0) {
+        ScriptWaitSlot *work = DAT_00588fcc < 4 ? &DAT_0061978c.slots[DAT_00588fcc] : NULL;
+        if (work->state == 2) {
+            return 1;
+        }
+    } else {
+        u8 flags = DAT_0061978c.flags;
+        if (mode == 1) {
+            flags |= 4;
+        } else if (mode == 2) {
+            flags = 5;
+        }
+        u32 index = FUN_001628c0(slot, DAT_0061978c.mode, flags, 1, 0.707f, 0.707f);
+        DAT_00588fcc = index;
+        if (index == 0xFFFFFFFF) {
+            return 1;
+        }
+    }
+    return 0;
+}
+}

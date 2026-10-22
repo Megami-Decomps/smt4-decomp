@@ -1,33 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00186118` (_code @ 0x186118, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Container payload and signature validation use different saved registers. */
+#include "AsdSDK/ModelContainer.h"
 extern "C" {
+s32 rt_memcmp(const void*, const void*, u32);
+extern const char g_asdModelContainerAtbcMagic[];
+extern const char g_asdModelContainerAbchMagic[];
+extern const char g_asdModelPayloadSignature[];
 
-extern int rt_memcmp(int, char *, unsigned int);
-
-
-int FUN_00186118(int param_1,unsigned int *param_2)
-
+// Unwraps a signed model payload, leaving unrecognized container formats untouched.
+const void* FUN_00186118(const void* data, u32* size)
 {
-  int temp_v0;
-  
-  temp_v0 = rt_memcmp(param_1,"ATBC",4);
-  if ((temp_v0 == 0) || (temp_v0 = rt_memcmp(param_1,"ABCH",4), temp_v0 == 0)) {
-    temp_v0 = *(int *)(param_1 + 0x14);
-    if (temp_v0 == 0) {
-      temp_v0 = *(int *)(param_1 + 0x10);
+    const void* result = data;
+    if (rt_memcmp(data, g_asdModelContainerAtbcMagic, 4) == 0 ||
+        rt_memcmp(data, g_asdModelContainerAbchMagic, 4) == 0) {
+        const AsdModelContainerHeader* container = (const AsdModelContainerHeader*)data;
+        u32 offset = container->payloadOffset;
+        if (offset == 0) {
+            offset = container->fallbackOffset;
+        }
+        const AsdModelPayloadHeader* payload = (const AsdModelPayloadHeader*)((const u8*)data + offset);
+        if (rt_memcmp(payload, g_asdModelPayloadSignature, 7) == 0) {
+            *size = payload->payloadSize;
+            return payload + 1;
+        }
+        result = NULL;
     }
-    param_1 = param_1 + temp_v0;
-    temp_v0 = rt_memcmp(param_1,"MDLSIGN",7);
-    if (temp_v0 == 0) {
-      *param_2 = *(unsigned int *)(param_1 + 8);
-      return param_1 + 0x80;
-    }
-    param_1 = 0;
-  }
-  *param_2 = 0;
-  return param_1;
+    *size = 0;
+    return result;
 }
-
-} /* extern "C" */
+}

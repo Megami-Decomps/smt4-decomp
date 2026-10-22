@@ -1,5 +1,5 @@
 /* NON_MATCHING: the bounded record accessor and nested persistent-data address form use different registers and one fewer address-add instruction. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 void FUN_002e59f8(const void *source, void *destination, u32 bytes);
@@ -11,7 +11,7 @@ static __inline SavedRecord100 *getSavedRecord(u32 index)
     if (index >= 32) {
         return NULL;
     }
-    SavedRecordTable *table = (SavedRecordTable *)g_gameDataBlocks.unk04;
+    SavedRecordTable *table = (SavedRecordTable *)g_gameDataBlocks.saveBlock;
     return &table->records[index];
 }
 

@@ -1,80 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041f4c0` (_code @ 0x41f4c0, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: argument setup order before FUN_0041f020 and the previous-state temp (r2 vs r0) in the state change */
+#include "common.h"
 
 extern "C" {
 
-int dataTableGet(...);
-int FUN_0019de98(...);
-int FUN_002f0384(...);
-int FUN_0041e58c(...);
-int FUN_0041f020(...);
+typedef struct {
+    u8 unk0[5];
+    s8 entryIndex;     /* 0x005 */
+    u8 unk6;
+    u8 state;          /* 0x007 */
+    s32 timer;         /* 0x008 */
+    u8 subState;       /* 0x00c */
+    u8 prevState;      /* 0x00d */
+    u8 unkE[0x68 - 0xe];
+    u8 unk68;          /* 0x068 */
+    u8 unk69[0x30c - 0x69];
+    u8 unk30c;         /* 0x30c */
+    u8 unk30d[0x44c - 0x30d];
+    u8 unk44c;         /* 0x44c */
+    u8 unk44d;         /* 0x44d */
+    u8 unk44e;         /* 0x44e */
+} ModeScreen;
 
-typedef struct fn_0041f4c0_arg0 fn_0041f4c0_arg0;
-struct fn_0041f4c0_arg0 {
-    unsigned char pad_0x0[0x5];
-    signed char field_0x5; /* +0x5 */
-    unsigned char pad_0x6[0x1];
-    byte field_0x7; /* +0x7 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined1 field_0xc; /* +0xc */
-    undefined1 field_0xd; /* +0xd */
-    unsigned char pad_0xe[0x5a];
-    undefined1 field_0x68; /* +0x68 */
-    unsigned char pad_0x69[0x2a3];
-    undefined1 field_0x30c; /* +0x30c */
-    unsigned char pad_0x30d[0x13f];
-    undefined1 field_0x44c; /* +0x44c */
-    undefined1 field_0x44d; /* +0x44d */
-    undefined1 field_0x44e; /* +0x44e */
-};
+typedef struct {
+    u8 unk00[0x14];
+    u8 colorTarget[0x54 - 0x14]; /* 0x14 */
+} ModeScreenEntry; /* size 0x54 */
 
-extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
-extern int FUN_0023b3d0(void);
-extern int FUN_002857dc(void);
-/* Supplied declaration required: FUN_002f0384. */
-extern int byteTripleGetV0(void);
-/* Supplied declaration required: FUN_0041e58c. */
-/* Supplied declaration required: FUN_0041f020. */
+s32 FUN_0023b3d0(void);
+s32 FUN_002857dc(void);
+s32 byteTripleGetV0(void);
+void FUN_0041e58c(ModeScreen *screen);
+void FUN_0041f020(ModeScreen *screen, s32 arg);
+s32 FUN_00163fd4(s32 id);
+void FUN_002f0384(s32 arg);
+void *dataTableGet(u32 tableId, u32 flags);
+ModeScreenEntry *dataTableGetEntries(void);
+void FUN_0019de98(void *target, u32 color);
 
-
-void FUN_0041f4c0(fn_0041f4c0_arg0 *param_1)
-
+/* Switches to `state`/`subState`, remembering the state left and restarting the timer. */
+static void modeScreenSetState(ModeScreen *screen, u8 state, u8 subState)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0;
-  signed char temp_v1;
-  int temp_v2;
-  
-  temp_v2 = FUN_0023b3d0();
-  if (((temp_v2 != 0) && (temp_v2 = FUN_002857dc(), temp_v2 != 0)) && (temp_v2 = byteTripleGetV0(), temp_v2 != 0)
-     ) {
-    FUN_0041e58c(param_1);
-    param_1->field_0x44c = 0;
-    param_1->field_0x44d = 0;
-    param_1->field_0x44e = 0;
-    FUN_0041f020(param_1,1);
-    temp_v2 = FUN_00163fd4(6);
-    if (((temp_v2 != 0) || (temp_v2 = FUN_00163fd4(3), temp_v2 != 0)) ||
-       ((temp_v2 = FUN_00163fd4(0xc), temp_v2 != 0 || (temp_v2 = FUN_00163fd4(0xf), temp_v2 != 0)))) {
-      param_1->field_0x30c = 1;
-      FUN_002f0384(0);
-      param_1->field_0x68 = 0;
+    u8 prevState = screen->state;
+
+    screen->timer = 0;
+    screen->state = state;
+    screen->prevState = prevState;
+    screen->subState = subState;
+}
+
+/* Resets the screen into state 13 when the game is ready, fading the current entry's target. */
+void FUN_0041f4c0(ModeScreen *screen)
+{
+    s32 index;
+
+    if (FUN_0023b3d0() == 0 || FUN_002857dc() == 0 || byteTripleGetV0() == 0) {
+        return;
     }
-    temp_v1 = param_1->field_0x5;
-    dataTableGet(0x3d,0);
-    temp_v2 = dataTableGetEntries();
-    FUN_0019de98(temp_v2 + temp_v1 * 0x54 + 0x14,0xf4f4f4ff);
-    temp_v0 = param_1->field_0x7;
-    param_1->field_0x8 = 0;
-    param_1->field_0x7 = 0xd;
-    param_1->field_0xd = temp_v0;
-    param_1->field_0xc = 4;
-  }
-  return;
+    FUN_0041e58c(screen);
+    screen->unk44c = 0;
+    screen->unk44d = 0;
+    screen->unk44e = 0;
+    FUN_0041f020(screen, 1);
+    if (FUN_00163fd4(6) != 0 || FUN_00163fd4(3) != 0 || FUN_00163fd4(12) != 0 || FUN_00163fd4(15) != 0) {
+        screen->unk30c = 1;
+        FUN_002f0384(0);
+        screen->unk68 = 0;
+    }
+    index = screen->entryIndex;
+    dataTableGet(0x3d, 0);
+    FUN_0019de98(dataTableGetEntries()[index].colorTarget, 0xf4f4f4ff);
+    modeScreenSetState(screen, 13, 4);
 }
 
 } /* extern "C" */

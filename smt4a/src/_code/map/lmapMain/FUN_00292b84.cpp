@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int distSpatial(void);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_00330108(...);
 int mathPositionHeadingDegrees(void);
 
@@ -78,7 +78,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0025cb1c. */
 /* Supplied declaration required: residentApplyFallbackValues. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_003033d4. */
 /* Supplied declaration required: FUN_00303564. */
 /* Supplied declaration required: FUN_00324b68. */
@@ -461,7 +461,7 @@ void FUN_00292b84(void)
     temp_v8 = 70.0f;
     mathPositionHeadingDegrees();
     temp_v15 = (float)g_lmapView[6];
-    FUN_002b5cd4();
+    mathAngleDeltaDegrees();
     temp_v19 = *(float *)(g_lmapScene + 0x20);
     if (temp_v15 < temp_v27) {
       temp_v15 = -temp_v15;

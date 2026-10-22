@@ -3,6 +3,7 @@
 #define BATTLE_BTLUNIT_H
 
 #include "common.h"
+#include <stddef.h>
 #include "battle/btlMain.h"
 
 /* Halfword index of the per-slot table in a unit's data block (BtlUnitDataA.unk152). */
@@ -29,9 +30,14 @@ typedef struct BtlUnit {
     /* 0x20 */ s16 *params;       /* parameter table, 0x39 entries in */
     /* 0x24 */ u8 unk24[4];
     /* 0x28 */ BtlUnitData *data;
-    /* 0x2C */ u8 unk2C[0x568];
+    /* 0x2C */ u8 unk2C[0xC];
+    /* 0x38 */ s8 targets[0x6D];  /* indexed by battle entry */
+    /* 0xA5 */ u8 unkA5[0x4EF];
     /* 0x594 */ u32 unk594;
 } BtlUnit;
+
+typedef char BtlUnitTargetsOffsetCheck[offsetof(BtlUnit, targets) == 0x38 ? 1 : -1];
+typedef char BtlUnitUnk594OffsetCheck[offsetof(BtlUnit, unk594) == 0x594 ? 1 : -1];
 
 /* A skill entry the battle looks up by the main state (Shin Megami Tensei IV). */
 typedef struct BtlSkill {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the constant 6 in a callee-saved register across the calls (the built code loads it just before the last call) */
-#include "shard/S1MessageMain.h"
+#include "ui/MessageMain.h"
+extern "C" MessageGlobalsA g_messageMain;
 
 extern "C" {
 
@@ -16,8 +17,8 @@ void FUN_002a3518(s32 command, s32 target)
 {
     bustupCutAnimRequestStopSlots(command);
     eventTexRequestStopAll();
-    if (g_messageMain.window != NULL) {
-        g_messageMain.window->mode = 21;
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->displayMode = 21;
     }
     u32 a = FUN_002ba85c();
     u32 b = scrGetArg(0);

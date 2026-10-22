@@ -1,37 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029118c` (_code @ 0x29118c, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail converts into s2 and divides into s0 (no in-place VFP reuse) and keeps separate tails for both signs in mode 2; armcc here reuses s0 and folds the sign into vnegeq. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002911e0(void);
-int VectorUnsignedToFloat(unsigned int, int);
+s32 randBetween(u32 low, u32 high);
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002911e0. */
-
-
-void FUN_0029118c(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* The ratio numerator/denominator, negated for mode 1 and randomly for mode 2; 0 for other modes. */
+f32 FUN_0029118c(s32 mode, u32 numerator, u32 denominator)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int in_fpscr;
-  
-  if (param_1 == 0) {
-    VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    return;
-  }
-  if (param_1 != 1) {
-    if (param_1 != 2) {
-      return;
+    f32 ratio = 0.0f;
+    switch (mode) {
+    case 0:
+        ratio = (f32)numerator / (f32)denominator;
+        break;
+    case 1:
+        ratio = -((f32)numerator / (f32)denominator);
+        break;
+    case 2: {
+        s8 positive = randBetween(0, 1);
+        if (positive) {
+            ratio = (f32)numerator / (f32)denominator;
+        } else {
+            ratio = -((f32)numerator / (f32)denominator);
+        }
+        break;
     }
-    FUN_002911e0();
-    return;
-  }
-  VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return;
+    }
+    return ratio;
 }
 
 } /* extern "C" */

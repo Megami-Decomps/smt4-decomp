@@ -1,61 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010b864` (_code @ 0x10b864, 0xa0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: list traversal and the volume clamp retain different registers and branch layouts. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+
+struct WaveVoiceListLinks {
+    /* 0x00 */ AsdSndWaveVoice *next;
+    /* 0x04 */ AsdSndWaveVoice *previous;
+};
 
 extern "C" {
+extern AsdSndStatus g_asdSoundStatus;
+void asdWaveVoicePrepareFade(AsdSndWaveVoice *voice, s32 frames, f32 volume, f32 secondaryVolume);
 
-int asdWaveVoicePrepareFade(int, unsigned int);
-int VectorUnsignedToFloat(int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern int g_asdSoundStatus; /* 0x4e3154 */
-extern int DAT_004e3158; /* 0x4e3158 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: asdWaveVoicePrepareFade. */
-
-
-void FUN_0010b864(int param_1,int param_2,unsigned int param_3)
-
+void FUN_0010b864(AsdSndWaveVoice *voice, u32 level, s32 frames)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  
-  if (param_1 == 0) {
-    return;
-  }
-  temp_v0 = g_asdSoundStatus;
-  if (g_asdSoundStatus != 0) {
-    do {
-      temp_v1 = temp_v0;
-      if (temp_v1 == param_1) {
-        if (param_2 != 0) {
-          VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        }
-        asdWaveVoicePrepareFade(param_1,param_3);
+    if (!voice) {
         return;
-      }
-      temp_v0 = *(int *)(temp_v1 + 0x70);
-    } while (*(int *)(temp_v1 + 0x70) != 0);
-    *(int *)(param_1 + 0x74) = temp_v1;
-    *(int *)(temp_v1 + 0x70) = param_1;
-    DAT_004e3158 = DAT_004e3158 + 1;
-  }
-  else {
-    DAT_004e3158 = DAT_004e3158 + 1;
-    g_asdSoundStatus = param_1;
-  }
-  if (param_2 != 0) {
-    VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  asdWaveVoicePrepareFade(param_1,param_3);
-  return;
+    }
+    AsdSndWaveVoice *node = (AsdSndWaveVoice *)g_asdSoundStatus.objects;
+    if (node) {
+        while (node != voice) {
+            WaveVoiceListLinks *links = (WaveVoiceListLinks *)node->unk70;
+            if (!links->next) {
+                ((WaveVoiceListLinks *)voice->unk70)->previous = node;
+                links->next = voice;
+                break;
+            }
+            node = links->next;
+        }
+    } else {
+        g_asdSoundStatus.objects = voice;
+        ++g_asdSoundStatus.objectCount;
+    }
+    f32 volume = 0.0f;
+    if (level) {
+        volume = 1.0f + ((f32)level - 64.0f) * (2.0f / 127.0f);
+        if (volume > 2.0f) {
+            volume = 2.0f;
+        }
+    }
+    asdWaveVoicePrepareFade(voice, frames, volume, 1.0f);
 }
-
-} /* extern "C" */
+}

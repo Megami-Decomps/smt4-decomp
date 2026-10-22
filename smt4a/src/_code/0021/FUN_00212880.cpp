@@ -1,51 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00212880` (_code @ 0x212880, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail dispatches the four type cases through a jump table; this builds a compare
+ * chain (same as smt4 FUN_00192990). */
+#include "common.h"
 
 extern "C" {
 
-int scrPopFloat(int);
+typedef struct ScriptProcess {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 pc;         /* index of the current instruction */
+    /* 0x1C */ s32 sp;         /* number of values on the stack */
+    /* 0x20 */ u8 types[0x1c]; /* type of each stack value: 0/2 integer, 1/3 float */
+    /* 0x3C */ s32 values[1];
+} ScriptProcess;
 
-extern int FUN_003d2004(int);
-/* Supplied declaration required: scrPopFloat. */
+s32 FUN_003d2004(ScriptProcess *process);
+f32 scrPopFloat(ScriptProcess *process);
 
-
-unsigned int FUN_00212880(int param_1)
-
+/* Script command: logical not; pops a number and pushes 1 when it is zero, else 0. */
+u32 FUN_00212880(ScriptProcess *process)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  float in_s0;
-  
-  switch(*(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x1f)) {
-  case 0:
-  case 2:
-    temp_v0 = FUN_003d2004(param_1);
-    if (temp_v0 == 0) {
-      temp_v1 = 1;
-      break;
-    }
-    temp_v1 = 0;
-    break;
-  case 1:
-  case 3:
-    scrPopFloat(param_1);
-    if (in_s0 != 0.0f) {
-      temp_v1 = 0;
-      break;
-    }
-    temp_v1 = 1;
-    break;
-  default:
-    *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 1;
-    return 1;
-  }
-  *(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x20) = 0;
-  *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v1;
-  *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-  *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 1;
-  return 1;
-}
+    s32 result;
 
-} /* extern "C" */
+    switch (process->types[process->sp - 1]) {
+    case 0:
+    case 2:
+        result = FUN_003d2004(process) == 0;
+        process->types[process->sp] = 0;
+        process->values[process->sp] = result;
+        process->sp++;
+        break;
+    case 1:
+    case 3:
+        result = scrPopFloat(process) == 0.0f;
+        process->types[process->sp] = 0;
+        process->values[process->sp] = result;
+        process->sp++;
+        break;
+    }
+    process->pc++;
+    return 1;
+}
+}

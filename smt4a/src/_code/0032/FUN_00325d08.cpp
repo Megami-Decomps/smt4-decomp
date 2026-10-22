@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(int, double);
 float mathSnapHeading16(float angle);
 float calcHeadingRoundedTo32Directions(float angle);
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int FUN_00327ee8(void);
 void lmapSceneStartMovement(unsigned char);
 int FUN_0050d8e4(void);
@@ -29,7 +29,7 @@ int soundVolumeSettingGet(void);
 int FUN_001bc124(void);
 int FUN_002dae68(void);
 int FUN_003135bc(...);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 int FUN_00317af8(...);
 int mapSpawnRandomEventKindEffect(void);
 int FUN_00324e38(...);
@@ -91,13 +91,13 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003135bc. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
@@ -111,7 +111,7 @@ extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004a01c8. */
-extern int FUN_004a0e38(unsigned int, unsigned int);
+extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -177,7 +177,7 @@ void FUN_00325d08(void)
     if (temp_v5 != 1) {
       if (temp_v5 != 2) goto LAB_003270b0;
       *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-      if (((g_gameState != 0x24) && (temp_v3 = FUN_004a0e38(2,5), temp_v3 != 0)) &&
+      if (((g_gameState != 0x24) && (temp_v3 = partyAnyMemberHasFlagBit(2,5), temp_v3 != 0)) &&
          (*(float *)(g_lmapScene + 0x160) < temp_v13)) {
         FUN_004a01c8(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
@@ -280,7 +280,7 @@ LAB_00326fcc:
             *(unsigned short *)(g_lmapScene + 0x19a) = 2;
           }
           temp_v4 = 1;
-          FUN_00313648(temp_v4);
+          mapSetSceneState(temp_v4);
         }
       }
       else {
@@ -296,7 +296,7 @@ LAB_00326fcc:
         }
         *(unsigned int *)(g_lmapScene + 0x15c) = temp_v4;
         temp_v4 = 0x20;
-        FUN_00313648(temp_v4);
+        mapSetSceneState(temp_v4);
       }
       goto LAB_003270a0;
     }
@@ -376,7 +376,7 @@ LAB_00326fcc:
         }
       }
       temp_v16 = temp_v11;
-      if ((g_gameState != 0x24) && (temp_v3 = FUN_004a0e38(2,5), temp_v16 = temp_v11, temp_v3 != 0)) {
+      if ((g_gameState != 0x24) && (temp_v3 = partyAnyMemberHasFlagBit(2,5), temp_v16 = temp_v11, temp_v3 != 0)) {
         distSpatial();
         *(float *)(g_lmapScene + 0x160) = *(float *)(g_lmapScene + 0x160) - temp_v11;
       }
@@ -472,7 +472,7 @@ LAB_00326fcc:
       }
       if (((temp_v2 & 4) != 0) && (DAT_005f17d0 == '\0')) {
         *(unsigned char *)(temp_v0 + 0xe09) = 0;
-        FUN_00313648(0x1f);
+        mapSetSceneState(0x1f);
         FUN_00408184(0x16,1);
       }
       temp_v3 = g_lmapScene;
@@ -768,7 +768,7 @@ LAB_00326cc4:
       }
       temp_v16 = -temp_v16;
       temp_v15 = *(float *)(g_lmapScene + 0x50);
-      FUN_002b5cd4();
+      mathAngleDeltaDegrees();
       temp_v9 = (float)temp_v14;
       temp_v13 = temp_v15;
       if (temp_v15 < temp_v9) {

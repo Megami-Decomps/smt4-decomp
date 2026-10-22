@@ -1,64 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004029f4` (_code @ 0x4029f4, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int sysPlaySe(unsigned int);
-int FUN_0019de98(int, unsigned int);
-int screenStartOrClear(unsigned int, unsigned int);
+void sysPlaySe(u32 seId);
+void FUN_0019de98(s32 screen, u32 color);
+s32 FUN_002ebce4(void);
+void screenStartOrClear(u32 screen, s32 clear);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+    u8 unk0[4];
+    u8 mode;        /* 0x004 */
+    u8 subMode;     /* 0x005 */
+    u8 unk6[0xc - 0x6];
+    u32 screen;     /* 0x00c */
+    u8 unk10[0x104 - 0x10];
+    u8 altSe;       /* 0x104 */
+    u8 unk105[0x108 - 0x105];
+    s32 muted;      /* 0x108 */
+} ModeSwitcher;
 
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0019de98. */
-extern int FUN_002ebce4(void);
-/* Supplied declaration required: screenStartOrClear. */
-
-
-void FUN_004029f4(int param_1,unsigned int param_2,unsigned char param_3)
-
+/* Enters `mode`: plays the matching sound effect and restarts the screen, or fades it for modes 0, 1 and 8. */
+void FUN_004029f4(ModeSwitcher *self, u32 mode, u8 subMode)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  *(char *)(param_1 + 4) = (char)param_2;
-  *(unsigned char *)(param_1 + 5) = param_3;
-  temp_v2 = 0;
-  temp_v0 = 0x100;
-  switch(param_2) {
-  case 0:
-  case 1:
-  case 8:
-    FUN_0019de98(0,0xf4f4f4ff);
-    return;
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-    if (*(int *)(param_1 + 0x108) != 0) {
-      temp_v0 = 0xff;
+    u32 fadeColor = 0xf4f4f4ff;
+    u32 se;
+    s32 clear;
+
+    self->mode = mode;
+    self->subMode = subMode;
+    se = 0x100;
+    clear = 0;
+    switch (mode) {
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        if (self->muted != 0) {
+            se = 0xff;
+        } else {
+            se = self->altSe != 0 ? 0x102 : 0x101;
+        }
+        clear = 1;
+        break;
+    case 0:
+    case 1:
+    case 8:
+        FUN_0019de98(0, fadeColor);
+        return;
     }
-    else if (*(char *)(param_1 + 0x104) == '\0') {
-      temp_v0 = 0x101;
+    sysPlaySe(se);
+    if (FUN_002ebce4() != 0) {
+        screenStartOrClear(self->screen, clear);
     }
-    else {
-      temp_v0 = 0x102;
-    }
-    temp_v2 = 1;
-  }
-  sysPlaySe(temp_v0);
-  temp_v1 = FUN_002ebce4();
-  if (temp_v1 == 0) {
-    return;
-  }
-  screenStartOrClear(*(unsigned int *)(param_1 + 0xc),temp_v2);
-  return;
 }
 
 } /* extern "C" */

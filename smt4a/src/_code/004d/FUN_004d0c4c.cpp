@@ -1,39 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0c4c` (_code @ 0x4d0c4c, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the bounded search loop is peeled and allocates its cursor/empty-slot registers differently from retail. */
+#include "shard/Shard0031.h"
 
-extern "C" {
+extern "C" SlotTable *gameGetSlotTable(void);
 
-extern int gameGetSlotTable(void);
-
-
-void FUN_004d0c4c(void)
-
+// Keep occupied party slots contiguous while preserving their relative order.
+extern "C" void FUN_004d0c4c(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v0 + temp_v2 + 0x1c88) < '\0') {
-      temp_v1 = temp_v2 + 1;
-      if (temp_v1 >= 0x18) {
-        return;
-      }
-      while (*(char *)(temp_v0 + temp_v1 + 0x1c88) < '\0') {
-        temp_v1 = temp_v1 + 1;
-        if (temp_v1 >= 0x18) {
-          return;
+    SlotTable *table = gameGetSlotTable();
+    for (s32 index = 0; index < 24; ++index) {
+        if (table->slots[index] < 0) {
+            s32 next = index + 1;
+            if (next >= 24)
+                return;
+            while (table->slots[next] < 0) {
+                ++next;
+                if (next >= 24)
+                    return;
+            }
+            table->slots[index] = table->slots[next];
+            table->slots[next] = -1;
         }
-      }
-      *(unsigned char *)(temp_v0 + temp_v2 + 0x1c88) = *(unsigned char *)(temp_v1 + temp_v0 + 0x1c88);
-      *(unsigned char *)(temp_v1 + temp_v0 + 0x1c88) = 0xff;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x18);
-  return;
 }
-
-} /* extern "C" */

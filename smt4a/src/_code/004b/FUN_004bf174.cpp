@@ -28,7 +28,7 @@ extern s32 FUN_00187168(void);
 extern s32 FUN_0023b3b8(void);
 extern s32 FUN_0035db94(void);
 extern u32 FUN_003e4d68(u32 item);
-extern void FUN_002a7324(s32 arg);
+extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
 extern void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
 extern void FUN_004be990(PickMenu *menu, s32 a, s32 b, s32 c);
@@ -62,7 +62,7 @@ void FUN_004bf174(PickMenu *menu)
         FUN_003e4d68(menu->items[menu->selected] & 0xFFFF);
         if (FUN_00187168() != 0) {
             statusRequestUnitDetails((const UnitCategoryRecord*)FUN_003e4d68(menu->items[menu->selected] & 0xFFFF), 0, 0);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
         }
     }
     if (FUN_0023b3b8() == 0) {

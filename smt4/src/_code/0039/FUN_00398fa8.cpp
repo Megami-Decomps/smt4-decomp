@@ -25,9 +25,9 @@ extern short FUN_001c36a0(void);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
-extern int FUN_002af600(int);
-extern int FUN_002b8d54(void);
-extern int FUN_002b8d68(void);
+extern int ifTouchIsInitialSelection(int);
+extern int ifTouchGetSelectionMode(void);
+extern int ifTouchGetSelectedRegion(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern short __aeabi_idivmod(int);
@@ -48,16 +48,16 @@ void FUN_00398fa8(int param_1)
   int temp_v8;
   unsigned char temp_v9;
   
-  temp_v1 = FUN_002b8d54();
+  temp_v1 = ifTouchGetSelectionMode();
   if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
-    temp_v2 = FUN_002b8d68();
+    temp_v2 = ifTouchGetSelectedRegion();
     temp_v5 = param_1 + 0x51c;
     temp_v3 = 3;
     do {
       if ((*(short *)(param_1 + temp_v3 * 2 + 0x820) == temp_v2) && (0 < temp_v2)) {
         temp_v6 = temp_v3 - 3;
         if (*(char *)(param_1 + 0x29) != '\0') {
-          temp_v3 = FUN_002af600(temp_v2);
+          temp_v3 = ifTouchIsInitialSelection(temp_v2);
           if (temp_v3 != 0) {
             *(unsigned int *)(param_1 + 0x18) = *(unsigned int *)(param_1 + 0x10);
             *(unsigned int *)(param_1 + 0x1c) = *(unsigned int *)(param_1 + 0x14);
@@ -110,7 +110,7 @@ void FUN_00398fa8(int param_1)
           *(unsigned int *)(param_1 + 0x14) = temp_v4;
         }
         if (temp_v1 != 2) {
-          if ((temp_v1 == 6) || (temp_v1 = FUN_002af600(temp_v2), temp_v1 == 0)) break;
+          if ((temp_v1 == 6) || (temp_v1 = ifTouchIsInitialSelection(temp_v2), temp_v1 == 0)) break;
         }
         else {
           temp_v1 = flaggedEntryGetValueB(temp_v7);

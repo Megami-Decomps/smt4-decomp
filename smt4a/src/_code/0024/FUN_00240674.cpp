@@ -19,7 +19,7 @@ extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
 extern float FUN_001b4874(unsigned int, unsigned int);
 extern int actorIsActive(void);
-extern int FUN_003e4cb4(unsigned int);
+extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 extern unsigned int FUN_004ccbf0(int);
 extern unsigned int FUN_004ccdb8(unsigned short, int, int);
@@ -127,7 +127,7 @@ void FUN_00240674(int param_1)
       }
       temp_v2 = param_1 + temp_v1 * 0x28;
       temp_v4 = FUN_004ccbf0((int)*(short *)(temp_v2 + 0x788a) + (unsigned int)*(unsigned short *)(temp_v8 + 100));
-      temp_v1 = FUN_003e4cb4(temp_v8);
+      temp_v1 = partySlotMatchesSelected(temp_v8);
       if (temp_v1 != 0) {
         temp_v1 = FUN_001834a4(0x1d,0x13b);
       }

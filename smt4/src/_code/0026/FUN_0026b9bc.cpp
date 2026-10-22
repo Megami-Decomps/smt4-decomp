@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026bc6c(void);
+int partyPanelSortEntries(void);
 int FUN_0029e8b8(...);
 int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(...);
@@ -20,7 +20,7 @@ typedef struct {
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_0026bc6c. */
+/* Supplied declaration required: partyPanelSortEntries. */
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -75,7 +75,7 @@ void FUN_0026b9bc(void)
     *(int *)(temp_v6 + temp_v0 + 0x738) = (int)*pcVar4;
     pcVar4 = pcVar4 + 1;
   } while (temp_v8 != 0);
-  FUN_0026bc6c();
+  partyPanelSortEntries();
   temp_v10 = *(unsigned char *)(temp_v9 + 0x910b) >> 2;
   if ((*(unsigned char *)(temp_v9 + 0x910b) & 3) != 0) {
     temp_v10 = temp_v10 + 1;

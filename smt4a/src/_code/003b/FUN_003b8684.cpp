@@ -1,46 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8684` (_code @ 0x3b8684, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [r7, #32] differs from recovered add r1, r7, #32. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int scrSetResult(int);
+struct BattleEntryView {
+    u32 unk00;                 // 0x000
+    u32 unk04;                 // 0x004
+    s16 unk08;                 // 0x008
+    u8 unk0A[0x15C];           // 0x00A
+    u16 unk166;                // 0x166
+    u8 unk168[0x2A0];          // 0x168
+};
 
-extern unsigned int DAT_00571100; /* 0x571100 */
-extern unsigned int DAT_00571104; /* 0x571104 */
+struct BattleMainStateView {
+    u8 unk00[0x1FFC];          // 0x0000
+    BattleEntryView* unk1FFC;  // 0x1FFC
+};
 
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
+struct BattleMessageFlagMasksView {
+    u8 unk00[0x20];            // 0x00
+    u32 unk20;                 // 0x20
+    u32 unk24;                 // 0x24
+};
 
-
-unsigned int FUN_003b8684(void)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v3 = -1;
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v1 = btlGetMainState();
-    puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v2 * 0x408);
-    if (((DAT_00571100 & *puVar3) != 0 || (puVar3[1] & DAT_00571104) != 0) &&
-       (*(unsigned short *)((int)puVar3 + 0x166) == temp_v0)) break;
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      scrSetResult(temp_v3);
-      return 1;
-    }
-  }
-  temp_v3 = (int)(short)puVar3[2];
-  scrSetResult(temp_v3);
-  return 1;
 }
 
-} /* extern "C" */
+extern "C" {
+extern BattleMessageFlagMasksView g_btlMessageFlagMasks;
+u32 scrGetArg(u32 index);
+BattleMainStateView* btlGetMainState(void);
+s32 scrSetResult(s32 result);
+
+// Report the signed value of the first eligible entry with the requested ID, or -1.
+u32 FUN_003b8684(void)
+{
+    const u32 requestedId = scrGetArg(0);
+    s32 result = -1;
+
+    for (s32 index = 0; index < 109; ++index) {
+        const BattleEntryView* entry = &btlGetMainState()->unk1FFC[index];
+        const u32 maskedFlags =
+            (entry->unk00 & g_btlMessageFlagMasks.unk20) |
+            (entry->unk04 & g_btlMessageFlagMasks.unk24);
+
+        if (maskedFlags == 0)
+            continue;
+        if (entry->unk166 != requestedId)
+            continue;
+
+        result = entry->unk08;
+        break;
+    }
+
+    scrSetResult(result);
+    return 1;
+}
+}

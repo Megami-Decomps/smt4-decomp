@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0022b064(int);
+int buttonHelpSelectByProgress(int);
 int dialogOpen(int);
-int FUN_0027e7b4(unsigned int, int);
+int infoWinSetMessage(unsigned int, int);
 int tableGroupFindEntryIndex(...);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, unsigned int);
@@ -19,11 +19,11 @@ extern unsigned char LAB_003b8e40; /* 0x3b8e40 */
 extern int g_aocMain; /* 0x432fc8 */
 
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022b064. */
+/* Supplied declaration required: buttonHelpSelectByProgress. */
 extern int FUN_0022b14c(int);
 extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 /* Supplied declaration required: tableGroupFindEntryIndex. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -43,7 +43,7 @@ void FUN_003b8c40(int param_1)
   temp_v1 = FUN_0022b14c(param_1 + 0x9c);
   temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd74));
   if ((temp_v2 == 2) && (temp_v1 != 0)) {
-    FUN_0022b064(param_1);
+    buttonHelpSelectByProgress(param_1);
     temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v0;
     if (*(char *)(g_aocMain + 0xc1) == '\0') {
@@ -76,14 +76,14 @@ void FUN_003b8c40(int param_1)
         }
         if (temp_v1 != 4) {
           dialogOpen(0);
-          FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
+          infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
                        *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
           *(unsigned int *)(param_1 + 0x28) = 5;
           *(unsigned int *)(param_1 + 0x2c) = 0;
           return;
         }
         dialogOpen(0);
-        FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
+        infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
                      *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
         *(unsigned int *)(param_1 + 0x28) = 5;
         *(unsigned int *)(param_1 + 0x2c) = 0;

@@ -1,52 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a0a38` (_code @ 0x2a0a38, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail initializes the work through the allocation result in r0 (copied to r4 for
+ * later) and passes the new job straight from r0; armcc here works through r4 and r1 */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
+/* The sound test's work block (g_requestWork). */
+struct SoundTestWork {
+    /* 0x00 */ u32 job;
+    /* 0x04 */ u8 requested;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ s32 state;
+    /* 0x0C */ u32 frame;
+    /* 0x10 */ s32 selection;
+};
 
 extern "C" {
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
+extern SoundTestWork *g_requestWork;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+void *asdMemoryAllocTracked(s32 heap, s32 alignmentClass, s32 flags, u32 size, s32 fromFront);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc update, AsdProcFunc end, u32 work, u32 owner);
+s32 soundTestActionMenuUpdate(u32 handle);
+void workRequest(u32 handle);
+s32 FUN_0032affc(u32 handle);
+void FUN_0037a114(u32 handle);
 
-extern int soundTestActionMenuUpdate(...); /* 0x29ef78 */
-extern unsigned char LAB_002a0b28; /* 0x2a0b28 */
-extern unsigned char LAB_002a0b38; /* 0x2a0b38 */
-extern unsigned char LAB_0032afe4; /* 0x32afe4 */
-extern unsigned char LAB_0032affc; /* 0x32affc */
-extern unsigned char LAB_0037a114; /* 0x37a114 */
-extern unsigned int *g_requestWork; /* 0x588fc8 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-
-
+/* Creates the sound test: its work block, the control process and the draw task under it. */
 void FUN_002a0a38(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x14,1);
-  g_requestWork = puVar1;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  *(unsigned char *)(puVar1 + 1) = 0;
-  puVar2 = &LAB_002a0b28;
-  asdProcessCreateSimple(&LAB_002a0b28,4,0,0,soundTestActionMenuUpdate,&LAB_0032afe4,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002a0b38,0xea,0,0,&LAB_0032affc,&LAB_0037a114,0,puVar2);
-  return;
+    SoundTestWork *work;
+
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\sound\\soundTest.cpp", 49);
+    work = (SoundTestWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(SoundTestWork), 1);
+    g_requestWork = work;
+    work->state = 0;
+    work->frame = 0;
+    work->selection = 0;
+    work->requested = 0;
+    work->job = asdProcessCreateSimple((const s8 *)"ST C", 4, 0, 0, soundTestActionMenuUpdate,
+                                       workRequest, 0);
+    taskCreateDraw((const s8 *)"ST D", 0xEA, 0, 0, FUN_0032affc, FUN_0037a114, 0, work->job);
 }
 
 } /* extern "C" */

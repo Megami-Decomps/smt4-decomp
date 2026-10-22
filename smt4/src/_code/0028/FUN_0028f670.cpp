@@ -1,20 +1,16 @@
-#include "common.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
 
-typedef struct Obj {
-    /* 0x000 */ u8 unk000[0x400];
-    /* 0x400 */ s32 unk400;
-} Obj;
 
-extern Obj *g_unite;
+extern UniteWorkIV *g_unite;
 
 u8 FUN_0028f670(void)
 {
     int value = 0;
 
     if (g_unite != NULL) {
-        value = g_unite->unk400;
+        value = g_unite->common.state;
     }
     return g_unite == NULL || value == 0x24;
 }

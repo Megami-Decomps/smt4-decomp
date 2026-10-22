@@ -1,3 +1,4 @@
+#include "title/titleMain.h"
 #include "common.h"
 
 extern "C" {
@@ -14,11 +15,11 @@ typedef struct Context {
     /* 0xF00 */ Panel panel;
 } Context;
 
-extern u32 g_titleScene;
+extern TitleScene *g_titleScene;
 
 int FUN_001132fc(int arg);
 int FUN_002bff10(int arg);
-int FUN_002c39a4(u32 arg);
+int FUN_002c39a4(TitleScene *arg);
 Context *jobGetWork(void);
 
 /* Script command: if the panel is shown and enabled and FUN_002bff10 reports nothing pending, runs FUN_002c39a4/FUN_001132fc. Always returns 0. */

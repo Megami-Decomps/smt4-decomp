@@ -14,7 +14,7 @@ int FUN_00359974(...);
 int gameGlobalsQueueValues(...);
 int FUN_003720e4(...);
 int FUN_00372100(...);
-int FUN_003c5fc4(...);
+int messageMainSetTargetFlags(...);
 int sysPlayVoice(...);
 int FUN_003df7c4(...);
 int FUN_00496a0c(...);
@@ -79,7 +79,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: messageMainSetFlag. */
-/* Supplied declaration required: FUN_003c5fc4. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df7c4. */
 extern int FUN_00481100(unsigned short);
@@ -93,7 +93,7 @@ extern int FUN_00498408(unsigned int *, unsigned short);
 extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0049cad0. */
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
-extern int FUN_0049cc10(int);
+extern int aocItemGetPrice(int);
 /* Supplied declaration required: FUN_0049cd18. */
 /* Supplied declaration required: FUN_004cf8dc. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
@@ -151,7 +151,7 @@ void FUN_0049b00c(unsigned int *param_1)
         temp_v5 = temp_v5 * param_1[0x2d2];
       }
       else {
-        temp_v5 = FUN_0049cc10((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
+        temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
         temp_v5 = temp_v5 * param_1[0x2d2];
       }
       if (param_1[0x2d0] != 8) {
@@ -183,7 +183,7 @@ void FUN_0049b00c(unsigned int *param_1)
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     else {
-      temp_v5 = FUN_0049cc10((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
+      temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     if (param_1[0x2d0] != 8) {
@@ -315,7 +315,7 @@ void FUN_0049b00c(unsigned int *param_1)
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     else {
-      temp_v5 = FUN_0049cc10((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
+      temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     temp_v4 = itemGetNameOrFallback(temp_v0,1);
@@ -330,7 +330,7 @@ void FUN_0049b00c(unsigned int *param_1)
       temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049ba88);
       scrScriptProcessStartEntry(param_1[99],temp_v4);
     }
-    FUN_003c5fc4(1);
+    messageMainSetTargetFlags(1);
     temp_v5 = gameRecordExists();
     if (temp_v5 != 0) {
       FUN_003720e4(1);
@@ -376,7 +376,7 @@ joined_r0x0049bb38:
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     else {
-      temp_v5 = FUN_0049cc10((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
+      temp_v5 = aocItemGetPrice((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     temp_v3 = -temp_v5;
@@ -440,7 +440,7 @@ joined_r0x0049bb38:
       if (temp_v5 == 0) {
         temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049bcfc);
         scrScriptProcessStartEntry(param_1[99],temp_v4);
-        FUN_003c5fc4(1);
+        messageMainSetTargetFlags(1);
         temp_v6 = 10;
         param_1[2] = temp_v6;
         break;

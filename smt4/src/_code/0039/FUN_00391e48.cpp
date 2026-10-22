@@ -42,7 +42,7 @@ extern int FUN_0026b564(void);
 /* Supplied declaration required: msgWindowReset. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a126c. */
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -102,7 +102,7 @@ void FUN_00391e48(unsigned int *param_1)
   else {
     temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v1 == 2) {
-      temp_v1 = FUN_002973d8();
+      temp_v1 = messageMainGetChoiceResult();
       if (temp_v1 == 0) {
         param_1[2] = 2;
         FUN_00126fb8(g_aocMain + 0x80);

@@ -1,56 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00238f08` (_code @ 0x238f08, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: owner and kind swap callee-saved registers (r8/r6 instead of retail's r6/r8), which also moves two prologue moves. */
+#include "common.h"
 
 extern "C" {
 
-int taskCreate(...);
-int sysMemClear(...);
-int FUN_0034a16c(...);
-int rt_memcpy_w(...);
+typedef struct TaskWork TaskWork;
 
-typedef int romwright_code(...);
-/* stack frame of param_8: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_8_stack;
+/* Work block of the task FUN_00238f08 starts (0x304 bytes). */
+typedef struct LayoutTaskWork {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ f32 unk00C[3];
+    /* 0x018 */ f32 unk018[3];
+    /* 0x024 */ u8 unk024[4];
+    /* 0x028 */ f32 unk028[2];
+    /* 0x030 */ f32 unk030[2];
+    /* 0x038 */ u8 params[0x134];
+    /* 0x16C */ u8 layout[0xB0];
+    /* 0x21C */ u32 value;
+    /* 0x220 */ f32 speed;
+    /* 0x224 */ u32 owner;
+    /* 0x228 */ f32 scale;
+    /* 0x22C */ u8 kind;
+    /* 0x22D */ u8 unk22D[3];
+    /* 0x230 */ s32 unk230;
+    /* 0x234 */ s32 unk234;
+    /* 0x238 */ u8 unk238[0xC8];
+    /* 0x300 */ u16 frame;
+    /* 0x302 */ u16 startFrame;
+} LayoutTaskWork;
 
-extern int FUN_00213330(...); /* 0x213330 */
+void FUN_00213330(void *work);
+LayoutTaskWork *taskCreate(void (*update)(void *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
+void sysMemClear(void *memory, u32 size);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_0034a16c(void *layout, f32 *a, f32 *b, f32 *c, f32 *d);
 
-/* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0034a16c. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-romwright_code * FUN_00238f08(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                   unsigned int param_5,unsigned char param_6,unsigned short param_7,unsigned int param_8)
-
+/* Starts the layout task with copies of its parameter and layout blocks. */
+__softfp LayoutTaskWork *FUN_00238f08(u32 owner, const void *params, const void *layout, u32 value, f32 scale,
+                                      u8 kind, u16 frame, f32 speed)
 {
-/* irregular: 5 native warning(s); review required */
-  romwright_code *pcVar1;
-  
-  pcVar1 = FUN_00213330;
-  taskCreate(FUN_00213330,0,0,0,0,0x304,3,0,0);
-  if (pcVar1 != (romwright_code *)0x0) {
-    sysMemClear();
-    rt_memcpy_w((unsigned char *)pcVar1 + 0x38,param_2,0x134);
-    rt_memcpy_w((unsigned char *)pcVar1 + 0x16c,param_3,0xb0);
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x21c) = param_4;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x220) = param_8;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x224) = param_1;
-    ((unsigned char *)pcVar1)[0x22c] = (unsigned char)param_6;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x234) = 0xffffffff;
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x230) = 0xffffffff;
-    FUN_0034a16c((unsigned char *)pcVar1 + 0x16c,(unsigned char *)pcVar1 + 0x28,(unsigned char *)pcVar1 + 0x30,(unsigned char *)pcVar1 + 0xc,(unsigned char *)pcVar1 + 0x18);
-    *(unsigned int *)((unsigned char *)pcVar1 + 0x228) = param_5;
-    *(unsigned short *)((unsigned char *)pcVar1 + 0x302) = param_7;
-    *(unsigned short *)((unsigned char *)pcVar1 + 0x300) = param_7;
-  }
-  return pcVar1;
+    LayoutTaskWork *work = taskCreate(FUN_00213330, 0, 0, 0, 0, sizeof(LayoutTaskWork), 3, 0, 0);
+    if (work != NULL) {
+        sysMemClear(work, sizeof(LayoutTaskWork));
+        rt_memcpy_w(work->params, params, sizeof(work->params));
+        rt_memcpy_w(work->layout, layout, sizeof(work->layout));
+        work->value = value;
+        work->speed = speed;
+        work->owner = owner;
+        work->kind = kind;
+        work->unk234 = -1;
+        work->unk230 = -1;
+        FUN_0034a16c(work->layout, work->unk028, work->unk030, work->unk00C, work->unk018);
+        work->scale = scale;
+        work->startFrame = frame;
+        work->frame = frame;
+    }
+    return work;
 }
 
 } /* extern "C" */

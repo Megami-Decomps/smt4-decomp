@@ -1,65 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f59b0` (_code @ 0x4f59b0, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Retail unrolls all four metric comparisons and retains an unused limit literal. */
+#include "battle/btlEffect.h"
 extern "C" {
+void* btlGetMainState(void);
+s32 btlScriptUnitHasFlags(void*);
 
-int btlGetMainState(void);
-
-/* Supplied declaration required: btlGetMainState. */
-extern int btlScriptUnitHasFlags(void);
-
-
-int FUN_004f59b0(int param_1)
-
+// Returns the largest nonnegative selection metric, or its fallback when none is positive.
+s32 FUN_004f59b0(BtlEffectOwnerA* owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  if (*(int *)(param_1 + 0x1f54) != 0) {
-    btlGetMainState();
-    temp_v0 = btlScriptUnitHasFlags();
-    if (temp_v0 == 0) {
-      temp_v3 = *(int *)(param_1 + 0x1f54);
-      temp_v1 = (int)*(short *)(temp_v3 + 0xaa);
-      temp_v0 = 0;
-      if (0 < *(short *)(temp_v3 + 0x68)) {
-        temp_v0 = (int)*(short *)(temp_v3 + 0x68);
-      }
-      temp_v2 = (int)*(short *)(temp_v3 + 0x7e);
-      temp_v4 = temp_v2 == 0;
-      if (-1 < temp_v2) {
-        temp_v4 = temp_v2 == temp_v0;
-      }
-      if (!temp_v4 && (-1 < temp_v2 && temp_v0 <= temp_v2)) {
-        temp_v0 = temp_v2;
-      }
-      temp_v2 = (int)*(short *)(temp_v3 + 0x94);
-      temp_v4 = temp_v2 == 0;
-      if (-1 < temp_v2) {
-        temp_v4 = temp_v2 == temp_v0;
-      }
-      if (!temp_v4 && (-1 < temp_v2 && temp_v0 <= temp_v2)) {
-        temp_v0 = temp_v2;
-      }
-      temp_v4 = temp_v1 == 0;
-      if (-1 < temp_v1) {
-        temp_v4 = temp_v1 == temp_v0;
-      }
-      if (!temp_v4 && (-1 < temp_v1 && temp_v0 <= temp_v1)) {
-        temp_v0 = temp_v1;
-      }
-      if (temp_v0 < 1) {
-        temp_v0 = (int)*(short *)(temp_v3 + 400);
-      }
-      return temp_v0;
+    if (owner->slots == NULL || btlScriptUnitHasFlags(btlGetMainState()) != 0) {
+        return -1;
     }
-  }
-  return -1;
+    BtlEffectSlotBlock* metrics = owner->slots;
+    s32 maximum = 0;
+    for (u32 index = 0; index < 4; ++index) {
+        s32 value = metrics->entries[index].unk10;
+        if (value >= 0 && value > maximum) {
+            maximum = value;
+        }
+    }
+    if (maximum <= 0) {
+        maximum = metrics->unk190;
+    }
+    return maximum;
 }
-
-} /* extern "C" */
+}

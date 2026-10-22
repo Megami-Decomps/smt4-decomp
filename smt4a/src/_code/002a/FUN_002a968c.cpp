@@ -62,7 +62,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: FUN_0020caec. */
-extern int FUN_0022e9b8(void);
+extern int uniteGetWork(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
@@ -97,7 +97,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   iStack_30 = param_2;
   temp_v9 = param_3;
   temp_v10 = param_4;
-  temp_v0 = FUN_0022e9b8();
+  temp_v0 = uniteGetWork();
   if (temp_v0 != 0) {
     efctSetSpeed();
     FUN_00164b5c(2,0x1a,1,param_1,param_2,0x65);

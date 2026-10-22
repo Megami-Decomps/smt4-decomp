@@ -798,7 +798,7 @@ joined_r0x0029e2d8:
         fStack_4fc = fVar23;
         FUN_0019e3d0(0xffffffff,0xffffffff,0xffffffff);
       }
-      iVar17 = FUN_004a0e38(2,5);
+      iVar17 = partyAnyMemberHasFlagBit(2,5);
       if (iVar17 != 0) {
         FUN_002dfba0();
       }

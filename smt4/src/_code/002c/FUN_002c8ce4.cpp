@@ -58,7 +58,7 @@ extern signed char DAT_0049fce8; /* 0x49fce8 */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: partyApplyNonlethalAilmentDamage. */
 extern int inputIsQuestCancelPressed(void);
-extern int FUN_0025a140(unsigned int, unsigned int);
+extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
@@ -127,7 +127,7 @@ void FUN_002c8ce4(void)
     if (temp_v4 != 1) {
       if (temp_v4 == 2) {
         *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-        if (((g_gameState != 0x24) && (temp_v2 = FUN_0025a140(2,5), temp_v2 != 0)) &&
+        if (((g_gameState != 0x24) && (temp_v2 = unitGroupHasFlag(2,5), temp_v2 != 0)) &&
            (*(float *)(g_lmapScene + 0x160) < temp_v12)) {
           partyApplyNonlethalAilmentDamage(2,5);
           *(unsigned int *)(g_lmapScene + 0x160) = 0x447a0000;
@@ -323,7 +323,7 @@ joined_r0x002c99a8:
           }
         }
         temp_v13 = temp_v9;
-        if ((g_gameState != 0x24) && (temp_v2 = FUN_0025a140(2,5), temp_v13 = temp_v9, temp_v2 != 0)) {
+        if ((g_gameState != 0x24) && (temp_v2 = unitGroupHasFlag(2,5), temp_v13 = temp_v9, temp_v2 != 0)) {
           mathDistanceBetweenPoints();
           *(float *)(g_lmapScene + 0x160) = *(float *)(g_lmapScene + 0x160) - temp_v9;
         }

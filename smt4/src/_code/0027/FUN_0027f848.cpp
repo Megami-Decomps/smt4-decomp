@@ -1,55 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027f848` (_code @ 0x27f848, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail indexes the 0x38-byte models from the block start (active at +0xC with writeback, flag at +0x38); with the 4-byte header armcc adds #4 first, and the constant/VFP setup order differs. */
+#include "shard/W6_W6Match6_CollisionQuad.h"
 
 extern "C" {
 
-int FUN_001e2a40(int *);
+/* One deferred map model; the position is its collision circle's center. */
+typedef struct DeferredMapModel {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 active;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ CollisionVector position;
+    /* 0x18 */ u8 unk18[0x1C];
+    /* 0x34 */ s32 pointLike;
+} DeferredMapModel;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+typedef struct DeferredMapModels {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ DeferredMapModel models[64];
+} DeferredMapModels;
 
-extern int g_deferredMapModels; /* 0x447e58 */
+extern DeferredMapModels *g_deferredMapModels;
+bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first, f32 firstRadius,
+                               CollisionVector second, f32 secondRadius);
+void FUN_001e2a40(CollisionVector *result, CollisionVector position);
 
-/* Supplied declaration required: FUN_001e2a40. */
-extern int mapResolveCircleOverlapXZ(unsigned int *);
-
-
-unsigned int FUN_0027f848(unsigned int *param_1)
-
+/* Pushes `position` (radius 50) out of every active deferred model's circle (radius 20, or 0 for point-like ones);
+ * returns whether any overlap moved it. */
+bool FUN_0027f848(CollisionVector *out, CollisionVector position)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  
-  temp_v2 = 0;
-  temp_v1 = 0;
-  do {
-    temp_v0 = g_deferredMapModels + temp_v1 * 0x38;
-    if (*(char *)(temp_v0 + 0xc) != '\0') {
-      if (*(int *)(temp_v0 + 0x38) != 0) {
-        temp_v0 = mapResolveCircleOverlapXZ((unsigned int *)&temp_v3);
-      }
-      else {
-        temp_v0 = mapResolveCircleOverlapXZ((unsigned int *)&temp_v3);
-      }
-      if (temp_v0 != 0) {
-        temp_v2 = 1;
-      }
+    CollisionVector result;
+    bool moved = false;
+
+    for (s32 i = 0; i < 64; i++) {
+        DeferredMapModel *model = &g_deferredMapModels->models[i];
+        if (model->active) {
+            bool hit;
+            if (model->pointLike != 0) {
+                hit = mapResolveCircleOverlapXZ(&result, position, 50.0f, model->position, 0.0f);
+            } else {
+                hit = mapResolveCircleOverlapXZ(&result, position, 50.0f, model->position, 20.0f);
+            }
+            if (hit) {
+                position = result;
+                moved = true;
+            }
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x40);
-  FUN_001e2a40(&temp_v3);
-  *param_1 = temp_v3;
-  param_1[1] = uStack_34;
-  param_1[2] = uStack_30;
-  return temp_v2;
+    FUN_001e2a40(&result, position);
+    *out = result;
+    return moved;
 }
 
 } /* extern "C" */

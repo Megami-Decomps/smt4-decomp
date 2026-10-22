@@ -1,9 +1,9 @@
 /* NON_MATCHING: quantity/count increment registers, controller address scheduling and final cursor-clamp arithmetic differ from retail. */
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
-
 extern "C" {
+extern StatusDownStateA *g_statusDown;
 void sysMemClear(void *memory, u32 size);
 void FUN_00203b40(void *controller, s32 count, s32 rows, s32 columns, s32 arg4, s32 arg5);
 void FUN_002a4964(void *controller, s32 row);
@@ -12,7 +12,7 @@ void FUN_003d4104(void);
 
 void statusDownRebuildOwnedDemonList(const u8 *quantities)
 {
-    StatusDown *state = g_statusDown;
+    StatusDownStateA *state = g_statusDown;
     state->inventory.count = 0;
     state->inventory.ownedCount = 0;
     sysMemClear(state->inventory.entryData, sizeof(state->inventory.entryData));

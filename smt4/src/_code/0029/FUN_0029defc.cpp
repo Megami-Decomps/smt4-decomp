@@ -1,53 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029defc` (_code @ 0x29defc, 0xa4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: r5/r6 swapped: retail keeps the constant 1 in r5 and the record address in r6. */
+#include "shard/GameGlobals.h"
 
 extern "C" {
 
-int btlBuildUnitSnapshot(int, unsigned char [1552]);
-int FUN_0024d94c(int, unsigned int);
-int FUN_0026a858(void);
-int FUN_0029dc74(unsigned int, unsigned char [1552]);
+u32 gameGetPlayerData(void);
+void FUN_0024d94c(u16 *destination, u32 player);
+void FUN_0026a858(u16 id, u8 *record);
+void FUN_0029dc74(u16 id, u8 *record);
+void btlBuildUnitSnapshot(u16 *destination, const u8 *record);
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-/* Supplied declaration required: btlBuildUnitSnapshot. */
-/* Supplied declaration required: FUN_0024d94c. */
-/* Supplied declaration required: FUN_0026a858. */
-/* Supplied declaration required: FUN_0029dc74. */
-extern unsigned int gameGetPlayerData(void);
-
-
-void FUN_0029defc(unsigned int param_1,int param_2)
-
+/* Loads the game data's unit snapshot: the player for a negative id, otherwise unit `id` from one of two record sources; then flags the update. */
+void FUN_0029defc(s32 id, s32 useAltSource)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3 [1552];
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  if ((int)param_1 < 0) {
-    temp_v1 = gameGetPlayerData();
-    FUN_0024d94c(temp_v0 + 0x1300,temp_v1);
-    temp_v2 = 0;
-  }
-  else {
-    if (param_2 == 0) {
-      FUN_0029dc74(param_1 & 0xffff,temp_v3);
-      btlBuildUnitSnapshot(temp_v0 + 0x1300,temp_v3);
-      *(unsigned char *)(temp_v0 + 0x1e66) = 1;
-      *(unsigned char *)(temp_v0 + 0x1eb8) = 1;
-      return;
+    GameData *data = g_gameGlobals.data;
+    u8 record[0x610];
+
+    if (id < 0) {
+        FUN_0024d94c(&data->unk1300, gameGetPlayerData());
+        data->unk1E66 = 0;
+    } else if (useAltSource != 0) {
+        FUN_0026a858((u16)id, record);
+        btlBuildUnitSnapshot(&data->unk1300, record);
+        data->unk1E66 = 6;
+    } else {
+        FUN_0029dc74((u16)id, record);
+        btlBuildUnitSnapshot(&data->unk1300, record);
+        data->unk1E66 = 1;
     }
-    FUN_0026a858();
-    btlBuildUnitSnapshot(temp_v0 + 0x1300,temp_v3);
-    temp_v2 = 6;
-  }
-  *(unsigned char *)(temp_v0 + 0x1e66) = temp_v2;
-  *(unsigned char *)(temp_v0 + 0x1eb8) = 1;
-  return;
+    data->unk1EB8 = 1;
 }
 
 } /* extern "C" */

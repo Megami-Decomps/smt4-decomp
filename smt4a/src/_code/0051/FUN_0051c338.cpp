@@ -1,55 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0051c338` (_code @ 0x51c338, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail forms the last-key address as keys + (count * 6 - 6) and divides into s2; built folds the -6 into the load */
+#include "common.h"
 
 extern "C" {
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
+    u8 frame;    /* 0x0 */
+    u8 data[5];  /* 0x1 */
+} TrackKey; /* size 0x6 */
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
+typedef struct {
+    u8 unk0[0xe];
+    u16 keyCount;    /* 0x0e */
+    u8 unk10[0x18 - 0x10];
+    f32 frameStep;   /* 0x18: time per frame unit */
+    f32 indexScale;  /* 0x1c: estimated key index per (keyCount - 1) * time */
+    TrackKey *keys;  /* 0x20 */
+} KeyTrack;
 
-
-unsigned char * FUN_0051c338(int param_1)
-
+/* Finds the last key at or before `time`, starting from an estimated index and walking from there. */
+TrackKey *FUN_0051c338(KeyTrack *track, f32 time)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned char *pbVar1;
-  unsigned char *pbVar2;
-  unsigned int in_fpscr;
-  float in_s0;
-  int temp_v0;
-  unsigned int temp_v1;
-  float temp_v2;
-  
-  pbVar1 = *(unsigned char **)(param_1 + 0x20);
-  temp_v1 = VectorFloatToUnsigned(in_s0 / *(float *)(param_1 + 0x18),3);
-  if (temp_v1 < *pbVar1) {
-    return pbVar1;
-  }
-  pbVar2 = pbVar1 + ((unsigned int)*(unsigned short *)(param_1 + 0xe) * 6 - 6);
-  if (temp_v1 < *pbVar2) {
-    temp_v2 = (float)VectorSignedToFloat(*(unsigned short *)(param_1 + 0xe) - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v0 = VectorFloatToUnsigned(*(float *)(param_1 + 0x1c) * temp_v2 * in_s0,3);
-    pbVar2 = pbVar1 + temp_v0 * 6;
-    if (*pbVar2 <= temp_v1) {
-      do {
-        pbVar1 = pbVar2;
-        pbVar2 = pbVar1 + 6;
-      } while (*pbVar2 <= temp_v1);
-      return pbVar1;
+    TrackKey *keys = track->keys;
+    u32 frame = (u32)(time / track->frameStep);
+    TrackKey *key;
+    s32 last;
+
+    if (frame < keys[0].frame) {
+        return keys;
     }
-    do {
-      pbVar2 = pbVar2 + -6;
-    } while (temp_v1 < *pbVar2);
-  }
-  return pbVar2;
+    last = track->keyCount - 1;
+    key = &keys[last];
+    if (frame >= key->frame) {
+        return key;
+    }
+    key = &keys[(u32)(track->indexScale * ((f32)last * time))];
+    if (frame < key->frame) {
+        while ((--key)->frame > frame) {
+        }
+        return key;
+    }
+    while ((++key)->frame <= frame) {
+    }
+    return key - 1;
 }
 
 } /* extern "C" */

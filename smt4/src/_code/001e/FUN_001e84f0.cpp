@@ -548,7 +548,7 @@ LAB_001e8a6c:
         fStack_4dc = fVar9;
         FUN_002ba1e0(0xffffffff,0xffffffff,0xffffffff,0xffffffff,fVar9,(int)uVar37);
       }
-      iVar18 = FUN_0025a140(2,5);
+      iVar18 = unitGroupHasFlag(2,5);
       if (iVar18 != 0) {
         FUN_0020f6c8();
       }

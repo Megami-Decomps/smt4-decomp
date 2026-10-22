@@ -1,56 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00398874` (_code @ 0x398874, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the restored cursor's store address goes to r0 instead of r3 (register allocation only). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00232698(int);
-int FUN_00232848(void);
-int FUN_00296ee0(int, int);
-int buttonHelpSetPreset(unsigned int);
-int timerStart(int, int);
+typedef struct CursorMenu {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 cursorX;
+    /* 0x14 */ s32 cursorY;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ u8 page;
+    /* 0x21 */ u8 savedPage;
+    /* 0x22 */ u8 unk22[7];
+    /* 0x29 */ u8 zoomed; // set while the zoomed view is shown
+    /* 0x2A */ s8 savedCursorX;
+    /* 0x2B */ s8 savedCursorY;
+    /* 0x2C */ u8 unk2C[0x78];
+    /* 0xA4 */ s32 timerValue;
+    /* 0xA8 */ u8 unkA8[0x660];
+    /* 0x708 */ u8 timer[1];
+} CursorMenu;
 
-/* Supplied declaration required: FUN_00232698. */
-/* Supplied declaration required: FUN_00232848. */
-/* Supplied declaration required: FUN_00296ee0. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: timerStart. */
-extern unsigned int vec2GetXInt(int);
-extern int FUN_002bf818(void);
+s32 FUN_002bf818(void *timer);
+void FUN_00232848(void);
+void FUN_00232698(CursorMenu *menu);
+void buttonHelpSetPreset(s32 preset);
+void FUN_00296ee0(CursorMenu *menu, s32 state);
+void timerStart(void *timer, s32 a, s32 b);
+s32 vec2GetXInt(void *timer);
 
-
-void FUN_00398874(int param_1)
-
+/* Toggles the menu's zoomed view on input, restoring the saved cursor when leaving it,
+ * and samples the transition timer. */
+void FUN_00398874(CursorMenu *menu)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002bf818();
-  if (temp_v0 != 0) {
-    if (*(char *)(param_1 + 0x29) != '\0') {
-      *(unsigned char *)(param_1 + 0x20) = *(unsigned char *)(param_1 + 0x21);
-      *(unsigned char *)(param_1 + 0x29) = 0;
-      *(int *)(param_1 + 0x10) = (int)*(char *)(param_1 + 0x2a);
-      *(int *)(param_1 + 0x14) = (int)*(char *)(param_1 + 0x2b);
-      FUN_00232848();
-      FUN_00232698(param_1);
-      temp_v1 = 0x96;
+    if (FUN_002bf818(menu->timer) != 0) {
+        if (menu->zoomed) {
+            menu->page = menu->savedPage;
+            menu->zoomed = 0;
+            menu->cursorX = menu->savedCursorX;
+            menu->cursorY = menu->savedCursorY;
+            FUN_00232848();
+            FUN_00232698(menu);
+            buttonHelpSetPreset(150);
+        } else {
+            menu->cursorX = 0;
+            menu->zoomed = 1;
+            menu->cursorY = 0;
+            FUN_00232698(menu);
+            buttonHelpSetPreset(151);
+        }
+        FUN_00296ee0(menu, 11);
+        timerStart(menu->timer, 0, 0);
     }
-    else {
-      *(unsigned int *)(param_1 + 0x10) = 0;
-      *(unsigned char *)(param_1 + 0x29) = 1;
-      *(unsigned int *)(param_1 + 0x14) = 0;
-      FUN_00232698(param_1);
-      temp_v1 = 0x97;
-    }
-    buttonHelpSetPreset(temp_v1);
-    FUN_00296ee0(param_1,0xb);
-    timerStart(param_1 + 0x708,0);
-  }
-  temp_v1 = vec2GetXInt(param_1 + 0x708);
-  *(unsigned int *)(param_1 + 0xa4) = temp_v1;
-  return;
+    menu->timerValue = vec2GetXInt(menu->timer);
 }
 
 } /* extern "C" */

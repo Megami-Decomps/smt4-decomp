@@ -25,8 +25,21 @@ typedef struct EffMenuNode {
     /* 0x10 */ u32 unk10;
     /* 0x14 */ u32 unk14;
     /* 0x18 */ u32 unk18;
-    /* 0x1C */ char name[0x1C];
+    union {
+        /* 0x1C */ char name[0x1C];
+        struct {
+            /* 0x1C */ u32 flags;
+            /* 0x20 */ u8 unk20[0x18];
+        } render;
+    };
 } EffMenuNode;
+
+struct EffMenuRenderNode : EffMenuNode {
+    /* 0x38 */ u8 unk38[0x30];
+};
+
+typedef char EffMenuNodeSizeCheck[sizeof(EffMenuNode) == 0x38 ? 1 : -1];
+typedef char EffMenuRenderNodeSizeCheck[sizeof(EffMenuRenderNode) == 0x68 ? 1 : -1];
 
 /* Per-kind lists of menu nodes: first and last node of each. */
 typedef struct EffMenuLists {

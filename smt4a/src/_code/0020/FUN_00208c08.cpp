@@ -16,7 +16,7 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_0021af2c(void);
 int statusCameraApply(void);
-int FUN_003a7a88(...);
+int devilIsTextureLoaded(...);
 int linkHolderRunAll(...);
 int FUN_003e5558(...);
 int FUN_003e5858(...);
@@ -109,7 +109,7 @@ extern int statusDownGetMode(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_0038b3f8. */
 extern int FUN_0039c1f4(void);
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: FUN_003e40d0. */
 /* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: linkHolderRunAll. */
@@ -382,7 +382,7 @@ unsigned int FUN_00208c08(void)
     if (!(*(char *)(temp_v2 + 0x2018) == '\x03' || *(char *)(temp_v2 + 0x2018) == '\n')) {
       temp_v3 = (int)*(short *)(temp_v2 + 0x138c);
       if (temp_v3 != 0) {
-        FUN_003a7a88(temp_v3,1);
+        devilIsTextureLoaded(temp_v3,1);
         if (temp_v3 != 0) goto LAB_002093e4;
       }
       else {

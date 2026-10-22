@@ -71,7 +71,7 @@ int FUN_00281bb0(unsigned int);
 int gameDataGetPlayerName(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
-int FUN_00294450(unsigned int, unsigned int, int);
+int playerModelLoadPart(unsigned int, unsigned int, int);
 int playerModelListCreate(void);
 int FUN_00295660(...);
 int FUN_00298d50(...);
@@ -157,7 +157,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 extern int objSlotsAllEmpty(unsigned int);
-/* Supplied declaration required: FUN_00294450. */
+/* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: playerModelListCreate. */
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00295660. */
@@ -306,7 +306,7 @@ unsigned int FUN_001d99c0(void)
         playerModelListCreate();
         temp_v4 = 0;
         do {
-          FUN_00294450(puVar7[0xc],temp_v4 & 0xff,0x1c0);
+          playerModelLoadPart(puVar7[0xc],temp_v4 & 0xff,0x1c0);
           temp_v4 = temp_v4 + 1;
         } while ((int)temp_v4 < 3);
         temp_v6 = (int)*(char *)((unsigned int)*(unsigned char *)((int)puVar7 + 9) * 0x24 + 0x432cfd);

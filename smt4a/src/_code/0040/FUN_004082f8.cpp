@@ -1,5 +1,5 @@
 /* NON_MATCHING: the compiler folds the packed-byte index into the large field address; retail forms the flag-array base first and uses indexed ldrb. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" ProgressFlagView *FUN_002c2710(void);
 

@@ -48,7 +48,7 @@ s32 FUN_003e21a8(EncounterTask *task, EncounterTaskContext *context);
 s32 aocLoaderUpdateRecords(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e0510(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_003e3188(EncounterTask *task, EncounterTaskContext *context);
-s32 FUN_004cb2a4(EncounterTaskContext *context, u32 enabled);
+s32 btlRosterGroupAllInactive(EncounterTaskContext *context, u32 enabled);
 void FUN_003ed238(EncounterTaskContext *context, u32 flags);
 s32 FUN_003e025c(EncounterTask *task, EncounterTaskContext *context);
 s32 FUN_004f2294(BtlMainA *camera);
@@ -165,7 +165,7 @@ extern "C" s32 battleEncounterTaskUpdate(EncounterTask *task, EncounterTaskConte
     case 17:
         return FUN_003e3188(task, context);
     case 18:
-        if (!FUN_004cb2a4(context, 1))
+        if (!btlRosterGroupAllInactive(context, 1))
             return 0;
         FUN_003ed238(context, 0x400);
         for (s32 index = 4; index < 54; ++index) {

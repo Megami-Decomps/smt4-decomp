@@ -33,7 +33,7 @@ extern int asdOperatorDeleteB(void);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
-extern int FUN_0046bc7c(fn_004715a8_arg0 *, unsigned int);
+extern int aocCountPackageItemsOfType(fn_004715a8_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_004701d8. */
 
 
@@ -53,7 +53,7 @@ void FUN_004715a8(fn_004715a8_arg0 *param_1)
   if (temp_v0 != 0) {
     temp_v0 = objGetFlagBit16();
     if (temp_v0 != 0) {
-      temp_v0 = FUN_0046bc7c(param_1,0x33);
+      temp_v0 = aocCountPackageItemsOfType(param_1,0x33);
       *(int *)&param_1->field_0x444 = temp_v0;
       if (0 < *(int *)&param_1->field_0x444) {
         temp_v0 = temp_v0 << 4;

@@ -9,7 +9,7 @@ int uiInsertIdInFirstFreeSlot(...);
 int valueSlotsInsert(...);
 int aocHandleButtons(...);
 int FUN_003fce8c(...);
-int FUN_004ac0d4(...);
+int btlUiAddRequest(...);
 int battleEffectInitializeVariant(...);
 int FUN_004f7924(...);
 int FUN_004f7fe8(...);
@@ -39,7 +39,7 @@ extern int FUN_003fce08(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003fce8c. */
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004ac0d4. */
+/* Supplied declaration required: btlUiAddRequest. */
 /* Supplied declaration required: battleEffectInitializeVariant. */
 /* Supplied declaration required: FUN_004f7924. */
 /* Supplied declaration required: FUN_004f7fe8. */
@@ -115,14 +115,14 @@ void FUN_004cb64c(int param_1,fn_004cb64c_arg1 *param_2)
         FUN_003fce8c(temp_v1,1);
         param_2->field_0x5c = param_2->field_0x5c;
         param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x200);
-        FUN_004ac0d4(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
+        btlUiAddRequest(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
         FUN_004f7fe8(g_btlAux,param_2,*(unsigned int *)(temp_v0 + 0xc));
         FUN_004f7924(g_btlAux,param_2);
         battleEffectInitializeVariant(param_1,param_2);
       }
     }
     else {
-      FUN_004ac0d4(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
+      btlUiAddRequest(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
       FUN_004f7fe8(g_btlAux,param_2,*(unsigned int *)(temp_v0 + 0xc));
       FUN_004f7924(g_btlAux,param_2);
       battleEffectInitializeVariant(param_1,param_2);

@@ -48,7 +48,7 @@ extern int FUN_001bd100(unsigned short);
 extern int FUN_003ddfd8(void);
 extern int playerHasFlagBit(unsigned int);
 extern int actorIsActive(void);
-extern int FUN_003e4cb4(unsigned int);
+extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_00408184. */
 extern int bitsAt60Test(int, unsigned int);
@@ -251,7 +251,7 @@ void FUN_00331714(int param_1)
         FUN_003e503c(temp_v8);
         temp_v4 = actorIsActive();
         if (temp_v4 != 0) {
-          temp_v5 = FUN_003e4cb4(temp_v8);
+          temp_v5 = partySlotMatchesSelected(temp_v8);
           temp_v18 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v4 = temp_v12;
           if (((temp_v5 == 0) && (temp_v4 = (int)(temp_v18 * (float)temp_v19), temp_v12 != 0)) && (temp_v4 < 1))

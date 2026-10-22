@@ -1,79 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00469d38` (_code @ 0x469d38, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int eventQueueAddUnique(int);
-int FUN_001ad9b4(void);
-int qcMainSetMode(int);
-int FUN_00270c58(int);
-int FUN_002e5924(int);
-int frameTexInitActive(void);
-int campButtonHelpRelease(void);
+typedef struct StepWork {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 step;
+    /* 0x0C */ s32 counter;
+} StepWork;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct QuestRecord {
+    /* 0x00 */ u8 unk00[0xd4];
+    /* 0xD4 */ u16 id;
+} QuestRecord;
 
-/* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001bd118(void);
-/* Supplied declaration required: qcMainSetMode. */
-/* Supplied declaration required: FUN_00270c58. */
-/* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: frameTexInitActive. */
-/* Supplied declaration required: campButtonHelpRelease. */
-extern int FUN_004186e0(void);
+void eventQueueAddUnique(u32 event);
+void frameTexInitActive(void);
+void FUN_002e5924(s32 a);
+void *FUN_004186e0(void);
+s32 FUN_001bd118(void);
+void qcMainSetMode(s32 mode);
+QuestRecord *FUN_001ad9b4(void *source);
+void FUN_00270c58(u16 id);
+void campButtonHelpRelease(void);
 
-
-void FUN_00469d38(int param_1)
-
+/* Steps a timed sequence: queues event 0x1000222 at frame 7, waits out a short delay, then hands over to the quest record once mode 6 is reached. */
+void FUN_00469d38(StepWork *work)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (((temp_v0 == 2) && (temp_v0 = FUN_004186e0(), temp_v0 != 0)) &&
-         (temp_v1 = FUN_001bd118(), temp_v1 == 6)) {
-        qcMainSetMode(1);
-        FUN_001ad9b4();
-        FUN_00270c58(*(unsigned short *)(temp_v0 + 0xd4));
-        campButtonHelpRelease();
-        return;
-      }
+    void *source;
+
+    switch (work->step) {
+    case 0:
+        work->counter++;
+        if (work->counter == 7) {
+            eventQueueAddUnique(0x1000222);
+            frameTexInitActive();
+        }
+        if (work->counter == 8) {
+            work->step++;
+            work->counter = 0;
+        }
+        break;
+    case 1:
+        if (work->counter == 0) {
+            FUN_002e5924(1);
+        }
+        if (++work->counter > 3) {
+            work->counter++;
+            work->step++;
+        }
+        break;
+    case 2:
+        source = FUN_004186e0();
+        if (source != NULL && FUN_001bd118() == 6) {
+            qcMainSetMode(1);
+            FUN_00270c58(FUN_001ad9b4(source)->id);
+            campButtonHelpRelease();
+        }
+        break;
     }
-    else {
-      if (*(int *)(param_1 + 0xc) == 0) {
-        FUN_002e5924(1);
-      }
-      temp_v0 = *(int *)(param_1 + 0xc);
-      temp_v1 = temp_v0 + 1;
-      *(int *)(param_1 + 0xc) = temp_v1;
-      if (temp_v1 >= 4) {
-        *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-        *(int *)(param_1 + 0xc) = temp_v0 + 2;
-        return;
-      }
-    }
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0xc) + 1;
-    *(int *)(param_1 + 0xc) = temp_v0;
-    if (temp_v0 == 7) {
-      eventQueueAddUnique(0x1000222);
-      frameTexInitActive();
-    }
-    if (*(int *)(param_1 + 0xc) == 8) {
-      *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

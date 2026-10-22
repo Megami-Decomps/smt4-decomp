@@ -23,7 +23,7 @@ struct DemonEligibilityRecord {
 };
 
 extern "C" {
-s32 FUN_0029eaa4(DemonLevelTable *, u16 id);
+s32 devilIsAvailable(DemonLevelTable *, u16 id);
 s32 gameFlagIsSet(u32 flag);
 bool gameRecordCopy(u32 recordIndex, RecordValue *);
 
@@ -67,7 +67,7 @@ u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 leve
                 if (!(record->flags & 1)) {
                     continue;
                 }
-            } else if (!FUN_0029eaa4(table, entry->id)) {
+            } else if (!devilIsAvailable(table, entry->id)) {
                 continue;
             }
             result = table->entries[category][index].id;

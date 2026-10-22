@@ -1,73 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gfxTextureStorageRelease` (_code @ 0x2ba520, 0xdc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail holds the callback in ip and loads the data words into r3; built uses r3 and r0 */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
+typedef void (*GfxReleaseCallback)(u32 kind, u32 op, u32 addr);
 
+extern GfxReleaseCallback g_gfxReleaseCallback;
 
-void gfxTextureStorageRelease(int param_1,int *param_2)
+typedef struct {
+    u32 mainData;    /* 0x00 */
+    u32 subData;     /* 0x04 */
+    u32 unk8;        /* 0x08 */
+    u8 unkC[0x3c - 0xc];
+    u32 mainKind;    /* 0x3c */
+    u32 addr;        /* 0x40 */
+} GfxTextureStorage;
 
+/* Hands the texture's storage back through the release callback for its location, then forgets it. */
+void gfxTextureStorageRelease(s32 location, GfxTextureStorage *storage)
 {
-  int temp_v0;
-  int temp_v1;
-  romwright_code *pcVar3;
-  
-  if (param_1 == 0x2010000) {
-    *param_2 = 0;
-    param_2[1] = 0;
-    param_2[2] = 0;
-    return;
-  }
-  pcVar3 = g_gfxReleaseCallback;
-  if (param_1 < 0x2010000) {
-    if (param_1 != 0x1010000) {
-      if (param_1 != 0x1020000 && param_1 != 0x1030000) {
-        *param_2 = 0;
-        param_2[1] = 0;
-        param_2[2] = 0;
-        return;
-      }
-      if (*param_2 != 0 && g_gfxReleaseCallback != (romwright_code *)0x0) {
-        (*g_gfxReleaseCallback)(param_2[0xf],0x101,param_2[0x10]);
-      }
-      if (param_2[1] != 0) {
-        pcVar3 = g_gfxReleaseCallback;
-      }
-      if (param_2[1] == 0 || pcVar3 == (romwright_code *)0x0) {
-        *param_2 = 0;
-        param_2[1] = 0;
-        param_2[2] = 0;
-        return;
-      }
+    switch (location) {
+    case 0x2010000:
+        break;
+    case 0x2020000:
+    case 0x2030000:
+        if (storage->mainData != 0 && g_gfxReleaseCallback != NULL) {
+            g_gfxReleaseCallback(storage->mainKind, 0x101, storage->addr);
+        }
+        break;
+    case 0x1010000:
+        if (storage->subData != 0 && g_gfxReleaseCallback != NULL) {
+            g_gfxReleaseCallback(0x10000, 0x101, storage->addr);
+        }
+        break;
+    case 0x1020000:
+    case 0x1030000:
+        if (storage->mainData != 0 && g_gfxReleaseCallback != NULL) {
+            g_gfxReleaseCallback(storage->mainKind, 0x101, storage->addr);
+        }
+        if (storage->subData != 0 && g_gfxReleaseCallback != NULL) {
+            g_gfxReleaseCallback(0x10000, 0x101, storage->addr);
+        }
+        break;
     }
-    else if ((param_2[1] == 0) || (g_gfxReleaseCallback == (romwright_code *)0x0)) {
-      *param_2 = 0;
-      param_2[1] = 0;
-      param_2[2] = 0;
-      return;
-    }
-    temp_v1 = param_2[0x10];
-    temp_v0 = 0x10000;
-  }
-  else {
-    if ((param_1 != 0x2020000 && param_1 != 0x2030000) ||
-       (*param_2 == 0 || g_gfxReleaseCallback == (romwright_code *)0x0)) {
-      *param_2 = 0;
-      param_2[1] = 0;
-      param_2[2] = 0;
-      return;
-    }
-    temp_v0 = param_2[0xf];
-    temp_v1 = param_2[0x10];
-  }
-  (*pcVar3)(temp_v0,0x101,temp_v1);
-  *param_2 = 0;
-  param_2[1] = 0;
-  param_2[2] = 0;
-  return;
+    storage->mainData = 0;
+    storage->subData = 0;
+    storage->unk8 = 0;
 }
 
 } /* extern "C" */

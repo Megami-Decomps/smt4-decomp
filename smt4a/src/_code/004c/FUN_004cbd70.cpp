@@ -17,7 +17,7 @@ int FUN_0019de98(int, unsigned int);
 int scrRunOpcodesStub(...);
 int FUN_0023acdc(int);
 int scrScriptProcessStartEntry(...);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int FUN_00333dc8(...);
 int FUN_00336de4(int, int);
 int obj04Finish(void);
@@ -48,7 +48,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026c3c4. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002a7288. */
+/* Supplied declaration required: statusDownRestartTransition. */
 extern int FUN_002c7cb4(void);
 extern int FUN_002effbc(void);
 extern int btlTalkBustUpGetValue(void);
@@ -124,7 +124,7 @@ LAB_004cbdc8:
           *(unsigned char *)(param_1 + 4) = 6;
           return;
         }
-        FUN_002a7288();
+        statusDownRestartTransition();
         *(unsigned int *)(param_1 + 8) = 0;
         *(unsigned char *)(param_1 + 4) = 7;
         return;

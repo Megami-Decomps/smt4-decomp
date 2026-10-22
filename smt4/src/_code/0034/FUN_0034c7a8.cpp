@@ -1,60 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034c7a8` (_code @ 0x34c7a8, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/W6_W6Match8_BattleSpritePlacement.h"
+/* NON_MATCHING: retail reloads translation.y/z together (`vldmia`) at the top of each node iteration; armcc reloads each just before its store. */
+#include "common.h"
 
-struct EnemySpriteAnchorObject {
-    u8 unk00[4];
-    const BattleSpritePlacement *placement;
-    u8 unk08[0x28];
-    f32 scale;
+struct SpriteAnchorVec3 {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+};
+
+/* A model node's local transform: a 3x4 matrix and its dirty flags. */
+struct SpriteNodeTransform {
+    /* 0x00 */ f32 matrix[3][4];
+    /* 0x30 */ u8 unk30[0xc];
+    /* 0x3C */ u32 flags;      /* 0x800: matrix changed */
+};
+
+struct SpriteModelNode {
+    /* 0x00 */ u8 unk00[0x4c];
+    /* 0x4C */ SpriteNodeTransform transform;
+};
+
+struct SpriteModelSkeleton {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ SpriteModelNode **nodes;
+};
+
+struct SpriteModel {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ SpriteModelSkeleton *skeleton;
+};
+
+struct AnchoredSprite {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ void *placement;
+    /* 0x08 */ SpriteModel *model;
+    /* 0x0C */ u8 unk0c[0x24];
+    /* 0x30 */ f32 scale;
+    /* 0x34 */ SpriteAnchorVec3 position;
 };
 
 extern "C" {
 
+void enemyDrawComputeSpriteAnchorOffset(void *placement, SpriteAnchorVec3 *offset, f32 scale);
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-
-
-void FUN_0034c7a8(int param_1,unsigned int *param_2)
-
+/* Move the sprite to position, placing its first three model nodes at position plus the anchor offset. */
+void FUN_0034c7a8(AnchoredSprite *sprite, const SpriteAnchorVec3 *position)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  BattleVector3 translation;
-  const EnemySpriteAnchorObject *owner = reinterpret_cast<const EnemySpriteAnchorObject *>(param_1);
-  
-  *(unsigned int *)(param_1 + 0x34) = *param_2;
-  *(unsigned int *)(param_1 + 0x38) = param_2[1];
-  *(unsigned int *)(param_1 + 0x3c) = param_2[2];
-  if (owner->placement != NULL) {
-    enemyDrawComputeSpriteAnchorOffset(owner->placement,&translation,owner->scale);
-    temp_v2 = *(float *)(param_1 + 0x34);
-    temp_v3 = *(float *)(param_1 + 0x38);
-    temp_v4 = *(float *)(param_1 + 0x3c);
-    if (*(int *)(param_1 + 8) != 0) {
-      temp_v1 = 0;
-      do {
-        temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + temp_v1 * 4);
-        temp_v1 = temp_v1 + 1;
-        *(float *)(temp_v0 + 0x58) = translation.x + temp_v2;
-        *(float *)(temp_v0 + 0x68) = translation.y + temp_v3;
-        *(float *)(temp_v0 + 0x78) = translation.z + temp_v4;
-        *(unsigned int *)(temp_v0 + 0x88) = *(unsigned int *)(temp_v0 + 0x88) | 0x800;
-      } while (temp_v1 < 3);
+    sprite->position.x = position->x;
+    sprite->position.y = position->y;
+    sprite->position.z = position->z;
+    if (sprite->placement == NULL) {
+        return;
     }
-  }
-  return;
+    SpriteAnchorVec3 translation;
+    enemyDrawComputeSpriteAnchorOffset(sprite->placement, &translation, sprite->scale);
+    translation.x += sprite->position.x;
+    translation.y += sprite->position.y;
+    translation.z += sprite->position.z;
+    if (sprite->model == NULL) {
+        return;
+    }
+    for (s32 i = 0; i < 3; ++i) {
+        SpriteNodeTransform *transform = &sprite->model->skeleton->nodes[i]->transform;
+        transform->matrix[0][3] = translation.x;
+        transform->matrix[1][3] = translation.y;
+        transform->matrix[2][3] = translation.z;
+        transform->flags |= 0x800;
+    }
 }
 
 } /* extern "C" */

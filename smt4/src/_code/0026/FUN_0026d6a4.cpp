@@ -5,7 +5,7 @@
 extern "C" {
 
 int partyPanelRebuildTouchRegions(void);
-int FUN_00293700(...);
+int slotPlacementStartTransition(...);
 int FUN_0029378c(...);
 
 int partyPanelSetState(int, int);
@@ -29,7 +29,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: partyPanelRebuildTouchRegions. */
-/* Supplied declaration required: FUN_00293700. */
+/* Supplied declaration required: slotPlacementStartTransition. */
 /* Supplied declaration required: FUN_0029378c. */
 /* Supplied declaration required: objClearFlagPair. */
 /* Supplied declaration required: FUN_002937e0. */
@@ -207,14 +207,14 @@ unsigned int FUN_0026d6a4(int param_1)
   do {
     temp_v3 = temp_v5 + temp_v1 * 4;
     FUN_0029378c(*(unsigned int *)(temp_v3 + 0x6c8),*(unsigned int *)(temp_v5 + 0x2c));
-    FUN_00293700(*(unsigned int *)(temp_v3 + 0x6c8),*(char *)(temp_v5 + 0x42) == '\x01');
+    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0x6c8),*(char *)(temp_v5 + 0x42) == '\x01');
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 4);
   temp_v1 = 0;
   do {
     temp_v3 = temp_v5 + temp_v1 * 4;
     FUN_0029378c(*(unsigned int *)(temp_v3 + 0x6d8),*(unsigned int *)(temp_v5 + 0x2c));
-    FUN_00293700(*(unsigned int *)(temp_v3 + 0x6d8),*(char *)(temp_v5 + 0x42) == '\x01');
+    slotPlacementStartTransition(*(unsigned int *)(temp_v3 + 0x6d8),*(char *)(temp_v5 + 0x42) == '\x01');
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);
   if (*(int *)(temp_v5 + 0x1c) != 1) {

@@ -1,52 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215cd4` (_code @ 0x215cd4, 0x8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The inlined state change reuses the saved enabled constant and schedules its stores differently. */
+#include "shard/W4_W4Match2_UiQuest.h"
 
-extern "C" {
-
-int FUN_00250798(void);
-int FUN_0028fe0c(int, int);
-int dataTable1bOr1cGetRecord(void);
-int timerStart(int, int);
-
-extern int g_uiQuest; /* 0x43dd50 */
-
-/* Supplied declaration required: FUN_00250798. */
-/* Supplied declaration required: FUN_0028fe0c. */
-extern unsigned char FUN_00298f88(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: timerStart. */
-
-
-void FUN_00215cd4(int param_1)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = g_uiQuest;
-  *(unsigned char *)(g_uiQuest + 0x5f2) = 1;
-  temp_v2 = FUN_00298f88();
-  *(unsigned char *)(temp_v0 + 0x5c4) = temp_v2;
-  *(short *)(temp_v0 + 0x97e) = (short)param_1;
-  FUN_00250798();
-  FUN_0028fe0c(param_1,1);
-  timerStart(temp_v0 + 0x34,0);
-  temp_v1 = g_uiQuest;
-  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(temp_v1 + 4) = 1;
-  *(unsigned int *)(temp_v1 + 0x10) = 0;
-  *(unsigned int *)(temp_v0 + 0xc) = 0x1d;
-  dataTable1bOr1cGetRecord();
-  if ((*(unsigned char *)(param_1 + 7) & 0x40) != 0) {
-    *(unsigned int *)(temp_v0 + 0x5c8) = 2;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0x5c8) = 1;
-  }
-  return;
+namespace {
+struct QuestFlagsRecord {
+    /* 0x00 */ u8 unk00[7];
+    /* 0x07 */ u8 flags;
+};
 }
+extern "C" {
+void uiQuestLoadResources(void);
+void FUN_0028fe0c(u32 questId, s32 enabled);
+u8 FUN_00298f88(u32 questId);
+QuestFlagsRecord *dataTable1bOr1cGetRecord(u32 questId);
+void timerStart(void *sprite, s32 animation, s32 frame);
 
-} /* extern "C" */
+/* Opens quest details and selects the detail layout indicated by the quest flags. */
+void FUN_00215cd4(u32 questId)
+{
+    UiQuest *work = g_uiQuest;
+    work->panel.unkF2 = 1;
+    work->panel.detailMode = FUN_00298f88(questId);
+    work->questId = questId;
+    uiQuestLoadResources();
+    FUN_0028fe0c(questId, 1);
+    timerStart(work->mainSprite, 0, 0);
+    g_uiQuest->previousState = g_uiQuest->state;
+    g_uiQuest->state = 1;
+    g_uiQuest->timer = 0;
+    work->nextState = 0x1D;
+    QuestFlagsRecord *record = dataTable1bOr1cGetRecord(questId);
+    if (record->flags & 0x40) {
+        work->panel.selection = 2;
+    } else {
+        work->panel.selection = 1;
+    }
+}
+}

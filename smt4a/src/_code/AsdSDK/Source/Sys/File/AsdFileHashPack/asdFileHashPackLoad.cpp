@@ -7,7 +7,7 @@ void sysFatalBreak(void);
 void vcallSlot12IfValid(u32 handle);
 AsdHashPackHeader *asdLoadFileSync(s32 *result, u32 zero, const char *path, u32 *size, u32 arg, u32 priority);
 void *FUN_00178b04(u32 size, const char *file, int line);
-s32 FUN_0019dbb8(const char *path);
+s32 asdLoadFileHasDevice(const char *path);
 void rt_aeabi_memclr(char *buf, u32 size);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00158900(void *stream, const char *path, s32 mode);
@@ -57,7 +57,7 @@ s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *str
     stream = (AsdFileStream *)FUN_00178b04(sizeof(AsdFileStream), "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFileHashPack.cpp", 159);
     pack->stream = stream;
 
-    if (FUN_0019dbb8(streamPath) != 0) {
+    if (asdLoadFileHasDevice(streamPath) != 0) {
         result = FUN_00158900((u8 *)pack->stream + 4, streamPath, 1);
         return result;
     }

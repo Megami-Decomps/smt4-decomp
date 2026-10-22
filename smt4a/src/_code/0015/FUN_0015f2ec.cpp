@@ -1,46 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015f2ec` (_code @ 0x15f2ec, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Request-bit branches merge the final flags stores through a hoisted address. */
+#include "shard/JobAppletMessage.h"
 extern "C" {
+const u16* fileSectionGetData(void*, u32, s32);
+void appletShowTextMessage(const u16*);
+void FUN_001764f4(u32);
+void* dataTableValueOrZero(u32);
 
-int fileSectionGetData(unsigned int, unsigned int, int);
-void appletShowTextMessage(const unsigned short* text);
-int FUN_001764f4(unsigned int);
-
-extern int jobGetWork(void);
-/* Supplied declaration required: fileSectionGetData. */
-extern unsigned int dataTableValueOrZero(unsigned int);
-/* Supplied declaration required: appletShowTextMessage. */
-/* Supplied declaration required: FUN_001764f4. */
-
-
-unsigned int FUN_0015f2ec(void)
-
+u32 FUN_0015f2ec(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x754);
-  if ((temp_v1 & 1) != 0) {
-    if (((temp_v1 & 8) == 0) || ((temp_v1 & 2) != 0)) {
-      if (((temp_v1 & 4) != 0) && ((temp_v1 & 2) == 0)) {
-        temp_v3 = *(unsigned int *)(temp_v0 + 0xd54);
-        temp_v2 = dataTableValueOrZero(0x41);
-        appletShowTextMessage((const unsigned short*)fileSectionGetData(temp_v2,temp_v3,0));
-        *(unsigned int *)(temp_v0 + 0x754) = *(unsigned int *)(temp_v0 + 0x754) & 0xfffffff8;
-      }
+    JobAppletMessage* work = reinterpret_cast<JobAppletMessage*>(jobGetWork());
+    u32 flags = work->flags;
+    if ((flags & 1) != 0) {
+        if ((flags & 8) != 0 && (flags & 2) == 0) {
+            FUN_001764f4(work->operation);
+            work->flags &= ~15u;
+        } else if ((flags & 4) != 0 && (flags & 2) == 0) {
+            u32 section = work->sectionIndex;
+            void* file = dataTableValueOrZero(0x41);
+            appletShowTextMessage(fileSectionGetData(file, section, 0));
+            work->flags &= ~7u;
+        }
     }
-    else {
-      FUN_001764f4(*(unsigned int *)(temp_v0 + 0xd60));
-      *(unsigned int *)(temp_v0 + 0x754) = *(unsigned int *)(temp_v0 + 0x754) & 0xfffffff0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

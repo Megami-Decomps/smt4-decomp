@@ -1,46 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013b3d0` (_code @ 0x13b3d0, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModelProcess.h"
+
+struct AsdModelProcessOwner {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ AsdModelProcessSet processes;
+};
+
+typedef u32 (*ModelProcessCallback)();
 
 extern "C" {
+u32 FUN_00145f94();
+u32 FUN_00146048();
+u32 FUN_00146314();
+u32 FUN_00146040();
+u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, u32 parent,
+                           ModelProcessCallback step, ModelProcessCallback destroy, void *work);
+void asdProcessSetAuxiliaryCallback(u32 process, ModelProcessCallback callback);
 
-int asdProcessSetAuxiliaryCallback(void);
-int asdProcessCreateSimple(...);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern unsigned char LAB_0013b464; /* 0x13b464 */
-extern unsigned char LAB_0013b47c; /* 0x13b47c */
-extern unsigned char LAB_0013b498; /* 0x13b498 */
-extern unsigned char LAB_00145f94; /* 0x145f94 */
-extern unsigned char LAB_00146040; /* 0x146040 */
-extern int FUN_00146048(...); /* 0x146048 */
-
-/* Supplied declaration required: asdProcessSetAuxiliaryCallback. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-void FUN_0013b3d0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_0013b3d0(AsdModelProcessOwner *owner, u32 calculatePriority,
+                  u32 upperDrawPriority, u32 lowerDrawPriority)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char *puVar1;
-  
-  puVar1 = &LAB_0013b464;
-  asdProcessCreateSimple(&LAB_0013b464,param_2,0,0,&LAB_00145f94,0,param_1);
-  *(unsigned char **)(param_1 + 0x40) = puVar1;
-  puVar1 = &LAB_0013b47c;
-  asdProcessCreateSimple(&LAB_0013b47c,param_3,0,0,FUN_00146048,0,param_1);
-  *(unsigned char **)(param_1 + 0x44) = puVar1;
-  asdProcessSetAuxiliaryCallback();
-  puVar1 = &LAB_0013b498;
-  asdProcessCreateSimple(&LAB_0013b498,param_4,0,0,&LAB_00146040,0,param_1);
-  *(unsigned char **)(param_1 + 0x48) = puVar1;
-  return;
+    owner->processes.handle[0] = asdProcessCreateSimple(
+        "h3dModelCalcProc", calculatePriority, 0, 0, FUN_00145f94, 0, owner);
+    owner->processes.handle[1] = asdProcessCreateSimple(
+        "h3dModelDrawUpProc", upperDrawPriority, 0, 0, FUN_00146048, 0, owner);
+    asdProcessSetAuxiliaryCallback(owner->processes.handle[1], FUN_00146314);
+    owner->processes.handle[2] = asdProcessCreateSimple(
+        "h3dModelDrawDwProc", lowerDrawPriority, 0, 0, FUN_00146040, 0, owner);
 }
-
-} /* extern "C" */
+}

@@ -1,38 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042ea6c` (_code @ 0x42ea6c, 0x88 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Request arguments spill into saved VFP registers rather than retail's r4-r10 set; the error-code copy to r2 is omitted. */
+#include "nn/cec/ModuleState.h"
+#include "nn/Result.h"
 
 extern "C" {
+void FUN_0042d3d8(u32 enabled, u32 options);
+s32 FUN_0042fcc0(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
+extern CecModuleFlags g_asdCecModuleFlags;
 
-int FUN_0042d3d8(int, int);
-int FUN_0042fcc0(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_8: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_8_stack;
-
-extern unsigned char g_asdCecModuleFlags; /* 0x5b448b */
-
-/* Supplied declaration required: FUN_0042d3d8. */
-/* Supplied declaration required: FUN_0042fcc0. */
-
-
-void FUN_0042ea6c(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7,unsigned int param_8)
-
+/* Enables the CEC fallback and repeats the request on its specific initialization error. */
+s32 FUN_0042ea6c(u32 unused, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_2;
-  FUN_0042fcc0(param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  if ((temp_v0 < 0) && (temp_v0 == -0x375ef410)) {
-    FUN_0042d3d8(1,0);
-    (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-    FUN_0042fcc0(param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  }
-  return;
+    s32 result = FUN_0042fcc0(a, b, c, d, e, f, g);
+    if (!nnResultIsSuccess(result) && result == (s32)0xc8a10bf0) {
+        FUN_0042d3d8(1, 0);
+        g_asdCecModuleFlags.fallbackEnabled = 1;
+        result = FUN_0042fcc0(a, b, c, d, e, f, g);
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

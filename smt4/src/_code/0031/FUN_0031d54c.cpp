@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_00271010(...);
 
-int FUN_00270474(void);
+int mapInitializeSavedAndTargetState(void);
 int FUN_00273358(unsigned int);
 int FUN_00273840(...);
-int FUN_00273b78(void);
+int mapMainEnterScene(void);
 int battlePrepareEncounter(void);
 int FUN_00275e4c(void);
 int navigationApplyOptionalValue(...);
@@ -68,11 +68,11 @@ extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0026f950(void);
-/* Supplied declaration required: FUN_00270474. */
+/* Supplied declaration required: mapInitializeSavedAndTargetState. */
 /* Supplied declaration required: FUN_00271010. */
 /* Supplied declaration required: FUN_00273358. */
 /* Supplied declaration required: FUN_00273840. */
-/* Supplied declaration required: FUN_00273b78. */
+/* Supplied declaration required: mapMainEnterScene. */
 /* Supplied declaration required: battlePrepareEncounter. */
 /* Supplied declaration required: FUN_00275e4c. */
 /* Supplied declaration required: navigationApplyOptionalValue. */
@@ -87,7 +87,7 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 extern int FUN_00285574(void);
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
@@ -109,7 +109,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   temp_v2 = g_mapMain;
   if (DAT_0049fb6c != '\0') {
     DAT_0049fb6c = '\0';
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 == 0) {
       lmapSetSceneId(0x26);
       *(unsigned int *)(temp_v2 + 0x24) = 0x52;
@@ -124,7 +124,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   }
   else if (DAT_0049fb69 != '\0') {
     DAT_0049fb69 = '\0';
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 == 0) {
       naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17,DAT_0049fa18,DAT_0049fa19);
       *(unsigned int *)(temp_v2 + 0x24) = 0x2c;
@@ -137,7 +137,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
   }
   else if (DAT_0049fb6a != '\0') {
     DAT_0049fb6a = '\0';
-    temp_v1 = FUN_002973d8();
+    temp_v1 = messageMainGetChoiceResult();
     if (temp_v1 == 0) {
       naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17,DAT_0049fa18,DAT_0049fa19);
       *(unsigned char *)(temp_v2 + 0x14) = 1;
@@ -188,7 +188,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     if (DAT_0049f9d0 < 99) {
       FUN_002bf810(DAT_0049f9d0 + 0x10000af);
     }
-    FUN_00270474();
+    mapInitializeSavedAndTargetState();
     *(unsigned int *)(temp_v2 + 0x38) = DAT_0049f990;
     *(unsigned char *)(temp_v2 + 0xe) = 1;
     *(unsigned int *)(temp_v2 + 0x24) = 0x6f;
@@ -251,7 +251,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     DAT_0049f93c = 0;
     *(unsigned int *)(temp_v2 + 0x24) = 0x15;
     *(unsigned int *)(temp_v2 + 0x28) = 0;
-    FUN_00273b78();
+    mapMainEnterScene();
     FUN_0027d0ec();
     temp_v2 = FUN_002c2a04(0);
     if (temp_v2 == 3) {
@@ -277,7 +277,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     DAT_0049fb45 = 1;
     DAT_0049fb46 = 1;
     DAT_0049fb47 = 0;
-    FUN_00273b78();
+    mapMainEnterScene();
     DAT_0049f934 = 0;
     DAT_0049f93c = 0;
     FUN_00271010(0);

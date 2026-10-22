@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 
 extern float g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 
 
 void FUN_002dae68(void)
@@ -21,7 +21,7 @@ void FUN_002dae68(void)
   float temp_v3;
   
   temp_v0 = *(float *)((int)g_lmapScene + 0x4c);
-  FUN_002b5cd4();
+  mathAngleDeltaDegrees();
   temp_v1 = temp_v0;
   if (temp_v0 < 0.0f) {
     temp_v1 = -temp_v0;

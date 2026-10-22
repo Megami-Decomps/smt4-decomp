@@ -13,7 +13,7 @@ int FUN_002bcafc(void);
 int navigationSetArguments(...);
 int FUN_00303460(...);
 int blockResetAxis(unsigned int);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 int naviMainSetFlagsAndActivate(...);
 int mapPlaceSet(...);
 int naviMainApplyRequestValue(...);
@@ -84,7 +84,7 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: blockResetAxis. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
@@ -122,7 +122,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     DAT_005f1890 = '\0';
     temp_v1 = messageGetChoiceResult();
     if (temp_v1 == 0) {
-      FUN_00313648(0x26);
+      mapSetSceneState(0x26);
       *(unsigned int *)(temp_v2 + 0x28) = 0x88;
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
@@ -152,7 +152,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     if (temp_v1 == 0) {
       naviMainSetFlagsAndActivate(DAT_005f1725,DAT_005f1726,DAT_005f1727,DAT_005f1728,DAT_005f1729,DAT_005f172a);
       *(unsigned char *)(temp_v2 + 0x16) = 1;
-      FUN_00313648(0x26);
+      mapSetSceneState(0x26);
       *(unsigned int *)(temp_v2 + 0x28) = 0x65;
       return;
     }
@@ -261,7 +261,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_00272f54();
       FUN_00303460(0);
       FUN_003a2278(0);
-      FUN_00313648(1);
+      mapSetSceneState(1);
       *(unsigned char *)(temp_v2 + 0x4e) = 1;
       *(unsigned char *)(g_lmapView + 0xa8) = 1;
       DAT_005f1859 = 1;
@@ -290,7 +290,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       }
       FUN_00303460(0);
       FUN_003a2278(0);
-      FUN_00313648(1);
+      mapSetSceneState(1);
       *(unsigned char *)(temp_v2 + 0x4e) = 1;
       *(unsigned char *)(g_lmapView + 0xa8) = 1;
       DAT_005f1859 = 1;

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/W4_W4Match3b_GameDataFlags.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
 

@@ -1,14 +1,7 @@
+#include "shard/NaviMain.h"
 #include "common.h"
 
 extern "C" {
-
-typedef struct NaviMain {
-    /* 0x00 */ u8 unk00[0x30];
-    /* 0x30 */ s32 busy;
-    /* 0x34 */ u8 unk34[0xC];
-    /* 0x40 */ u8 discovery[1];
-} NaviMain;
-
 extern NaviMain *g_naviMain;
 
 s32 stageAssetsLoaded(void);
@@ -23,7 +16,7 @@ u32 NAVI_DOWN(void)
     if (g_naviMain->busy != 0) {
         return 0;
     }
-    NaviMain_UpdateDiscovery(g_naviMain->discovery);
+    NaviMain_UpdateDiscovery(g_naviMain->state);
     return 0;
 }
 

@@ -47,7 +47,7 @@ struct PartyRefresh {
 };
 extern "C" {
 s32 scrRunOpcodesStub(u32);
-s32 FUN_002973d8();
+s32 messageMainGetChoiceResult();
 const RefreshDemon *FUN_003ad6e0(u16);
 s32 gameRecordCopy(u16, RefreshSummary *);
 void gameDataStoreRecord(u16, const RefreshSummary *);
@@ -66,7 +66,7 @@ void partyRefreshCompleteAndUpdateSummaries(PartyRefresh *work)
 {
     if (scrRunOpcodesStub(work->request) != 2)
         return;
-    if (!FUN_002973d8()) {
+    if (!messageMainGetChoiceResult()) {
         for (s32 i = 0; i < work->count; ++i) {
             u16 id = work->entries[i].id;
             const RefreshDemon *unit = FUN_003ad6e0(id);

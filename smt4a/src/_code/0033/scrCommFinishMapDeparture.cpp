@@ -1,3 +1,4 @@
+#include "map/MapSelection.h"
 #include "map/mapDepart.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ void gameFlagSetValue(s32 a, s32 b, s32 c);
 s32 gameFlagIsSet(u32 id);
 
 extern GameStateA g_gameState;
-extern s32 g_mapSelection;
 
 s32 scrCommFinishMapDeparture(void)
 {
@@ -23,7 +23,7 @@ s32 scrCommFinishMapDeparture(void)
         FUN_00312d6c();
         gameFlagSetValue(0x11F9, 0, 1);
     }
-    if (g_gameState.unk574 != 0 || g_mapSelection != -1) {
+    if (g_gameState.transitionActive != 0 || g_mapSelection.id != -1) {
         asdSequenceRequest(6, 0, 0);
     }
     return 1;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00292c0c(void);
+int gameReleaseDataReference(void);
 int scrScriptProcessDestroy(void);
 int asdMemFreeNonNull(...);
 int asdMemFree(...);
@@ -13,7 +13,7 @@ int bufferArrayFree(void);
 
 extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_00292c0c. */
+/* Supplied declaration required: gameReleaseDataReference. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMemFreeNonNull. */
@@ -60,7 +60,7 @@ void FUN_0028a22c(void)
     asdMemFreeNonNull();
   }
   puVar1[0x457] = 0;
-  FUN_00292c0c();
+  gameReleaseDataReference();
   jobStop(*puVar1,0);
   asdMemFree(puVar1);
   g_partyPanel = (unsigned int *)0x0;

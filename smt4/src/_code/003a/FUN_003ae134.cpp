@@ -8,7 +8,7 @@ int FUN_001e1104(unsigned int *, int, int, int);
 int FUN_00206368(unsigned int *, unsigned int, int, int);
 int communicationBeginTransition(int);
 int communicationSetResultPointer(void);
-void FUN_0026c7b8(const unsigned char* text);
+void comWinSetText(const unsigned char* text);
 int memFill8(unsigned int *, unsigned int);
 int FUN_002ad8a8(unsigned int *, unsigned int *);
 int FUN_002dc464(void);
@@ -85,7 +85,7 @@ void FUN_003ae134(fn_003ae134_arg0 *param_1,int param_2,unsigned char param_3,un
     *(unsigned char *)(puVar1 + 0x3276) = 1;
     puVar1[0x3277] = 0x28;
     puVar1[0x3278] = 0;
-    FUN_0026c7b8(&LAB_003ae294);
+    comWinSetText(&LAB_003ae294);
     communicationSetResultPointer();
     communicationBeginTransition(0);
   }

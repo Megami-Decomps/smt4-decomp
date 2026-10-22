@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014e188(...);
-int FUN_0014e220(...);
+int uiSpriteInitializeState(...);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
@@ -31,7 +31,7 @@ extern unsigned char DAT_0052aa94; /* 0x52aa94 */
 extern unsigned char DAT_0052aac4; /* 0x52aac4 */
 
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_0014e220. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -54,17 +54,17 @@ void FUN_002cdad4(int param_1)
   FUN_00387240(param_1 + 0x20,0xc,0x29);
   *(unsigned char *)(param_1 + 0x5c) = 1;
   uiSpriteSelectAnim(param_1 + 0x20,0);
-  FUN_0014e220(param_1 + 0x1c4,0xc,0xffffffff,7,param_1,0x38);
+  uiSpriteInitializeState(param_1 + 0x1c4,0xc,0xffffffff,7,param_1,0x38);
   *(unsigned short *)(param_1 + 0x1fe) = 2;
   FUN_00387240(param_1 + 0x1c4,0xc,0x29);
   *(unsigned char *)(param_1 + 0x200) = 1;
   uiSpriteSelectAnim(param_1 + 0x1c4,0);
-  FUN_0014e220(param_1 + 0x138,0xc,0xffffffff,2,param_1,0x3d);
+  uiSpriteInitializeState(param_1 + 0x138,0xc,0xffffffff,2,param_1,0x3d);
   *(unsigned short *)(param_1 + 0x172) = 1;
   *(unsigned char *)(param_1 + 0x174) = 1;
   pairSetHalves(param_1 + 0x138,200,0x78);
   uiSpriteSelectAnim(param_1 + 0x138,2);
-  FUN_0014e220(param_1 + 0xac,0xc,0xffffffff,0,param_1,0x47);
+  uiSpriteInitializeState(param_1 + 0xac,0xc,0xffffffff,0,param_1,0x47);
   *(unsigned short *)(param_1 + 0xe6) = 2;
   FUN_00387240(param_1 + 0xac,0xc,0x2b);
   *(unsigned char *)(param_1 + 0xe8) = 1;

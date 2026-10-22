@@ -1,46 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e7b7c` (_code @ 0x4e7b7c, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Candidate filling becomes a pointer/countdown loop instead of retail's indexed loop, increasing the saved-register set. */
+#include "gamedata/RankedSelection.h"
 
 extern "C" {
+void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 callbackCompareDescendingState(const void *left, const void *right);
 
-int qsort(int *, int, int, unsigned char *);
-
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp378; /* 0x378: local_378 */
-} param_5_stack;
-
-extern unsigned char LAB_003d213c; /* 0x3d213c */
-
-/* Supplied declaration required: qsort. */
-
-
-int FUN_004e7b7c(unsigned int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Chooses a requested score rank and counts selections of the corresponding result. */
+s32 FUN_004e7b7c(void *owner, const SelectionScoreWork *work, SelectionResult *results,
+                 s32 count, s32 rank)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  short *psVar3;
-  int aiStack_380 [220];
-  
-  temp_v0 = 0;
-  if (0 < param_4) {
-    do {
-      aiStack_380[temp_v0 * 2 + 2] = temp_v0;
-      temp_v1 = temp_v0 + 1;
-      aiStack_380[temp_v0 * 2 + 3] = *(int *)(param_2 + temp_v0 * 0x10 + 0x9e4);
-      temp_v0 = temp_v1;
-    } while (temp_v1 < param_4);
-  }
-  if (param_5 <= param_4) {
-    qsort(aiStack_380 + 2,param_4,8,&LAB_003d213c);
-    aiStack_380[2] = aiStack_380[param_5 * 2];
-  }
-  psVar3 = (short *)(param_3 + aiStack_380[2] * 4);
-  psVar3[1] = psVar3[1] + 1;
-  return (int)*psVar3;
+    RankedSelection candidates[109];
+    for (s32 i = 0; i < count; ++i) {
+        candidates[i].index = i;
+        candidates[i].score = work->scores[i].score;
+    }
+    s32 index;
+    if (rank <= count) {
+        qsort(candidates, count, sizeof(RankedSelection), callbackCompareDescendingState);
+        index = candidates[rank - 1].index;
+    } else {
+        index = candidates[0].index;
+    }
+    SelectionResult *result = &results[index];
+    ++result->count;
+    return result->id;
 }
-
-} /* extern "C" */
+}

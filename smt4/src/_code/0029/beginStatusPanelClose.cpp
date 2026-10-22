@@ -21,7 +21,7 @@ void FUN_002bee58(UiAnimatedSprite *, s32);
 void beginStatusPanelClose()
 {
     GameData *state = g_gameGlobals.data;
-    if (state->unk12DC == 3)
+    if (state->activeState == 3)
         return;
     if (state->unk1E67 == 3 || state->unk1E67 == 9) {
         void *script = lmapSceneGetScript();
@@ -35,7 +35,7 @@ void beginStatusPanelClose()
                 mdlPartsRelease((StatusScreenModel *)state->unk1E80);
                 if (!lmapMainIsRunning())
                     asdModelSlotRelease(0);
-                if (g_gameGlobals.unk0[2])
+                if (g_gameGlobals.ownsStatusModel)
                     delete (StatusScreenModel *)state->unk1E80;
             }
             if (state->unk1E80)
@@ -56,7 +56,7 @@ void beginStatusPanelClose()
         timerStart(&sprites[18 + i], 5, 0);
     }
     GameData *current = g_gameGlobals.data;
-    *(u32 *)(current->unk0000 + 0x10) = 0;
-    current->unk12DC = 2;
+    current->unk10 = 0;
+    current->activeState = 2;
 }
 }

@@ -1,72 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00107934` (_code @ 0x107934, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the input-rule walk uses indexed addressing and a different disabled-rule branch layout. */
+#include "common.h"
+
+struct PadReader;
+struct PadPollingState {
+    /* 0x00 */ PadReader *reader;
+    /* 0x04 */ s32 pollSucceeded;
+};
+struct PadInputState {
+    /* 0x00 */ u32 held;
+    /* 0x04 */ u32 pressed;
+    /* 0x08 */ u32 released;
+    /* 0x0c */ s16 stickX;
+    /* 0x0e */ s16 stickY;
+};
+struct InputRule {
+    /* 0x00 */ u32 disabled;
+    /* 0x04 */ u32 mask;
+};
 
 extern "C" {
+extern PadPollingState DAT_004650a0;
+extern PadInputState DAT_004e3c28;
+extern u32 DAT_004e3c58[31];
+extern InputRule DAT_00409ab0[31];
+u32 FUN_0011c6cc(PadReader *reader, PadInputState *input);
 
-int FUN_0011c6cc(int, unsigned int *);
-
-extern int DAT_004650a0; /* 0x4650a0 */
-extern int DAT_004650a4; /* 0x4650a4 */
-extern unsigned int DAT_004e3c28; /* 0x4e3c28 */
-extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
-
-/* Supplied declaration required: FUN_0011c6cc. */
-
-
-void FUN_00107934(void)
-
+void FUN_00107934()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  unsigned int *puVar4;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = DAT_004650a0;
-  FUN_0011c6cc(DAT_004650a0,&DAT_004e3c28);
-  if (temp_v0 != 0) {
-    DAT_004650a4 = 1;
-  }
-  piVar2 = (int *)&DAT_004e3c58;
-  piVar3 = (int *)0x409ab0;
-  if (temp_v0 == 0) {
-    DAT_004650a4 = 0;
-  }
-  temp_v0 = DAT_004650a4;
-  temp_v1 = 0x1f;
-  puVar4 = (unsigned int *)0x409ab4;
-  do {
-    if (*piVar3 != 0) {
-      temp_v2 = 0;
-      if ((temp_v2 & *puVar4) == 0) {
-        *piVar2 = 0;
-      }
-      else {
-        *piVar2 = *piVar2 + 1;
-      }
-    }
-    else {
-      temp_v2 = DAT_004e3c28;
-      if (0 < temp_v0) {
-        if ((temp_v2 & *puVar4) == 0) {
-          *piVar2 = 0;
+    DAT_004650a0.pollSucceeded =
+        FUN_0011c6cc(DAT_004650a0.reader, &DAT_004e3c28) != 0;
+    for (u32 index = 0; index < 31; ++index) {
+        u32 buttons = 0;
+        if (DAT_00409ab0[index].disabled == 0) {
+            if (DAT_004650a0.pollSucceeded <= 0) {
+                continue;
+            }
+            buttons = DAT_004e3c28.held;
         }
-        else {
-          *piVar2 = *piVar2 + 1;
+        if ((buttons & DAT_00409ab0[index].mask) == 0) {
+            DAT_004e3c58[index] = 0;
+        } else {
+            ++DAT_004e3c58[index];
         }
-      }
     }
-    temp_v1 = temp_v1 - 1;
-    piVar2 = piVar2 + 1;
-    piVar3 = piVar3 + 2;
-    puVar4 = puVar4 + 2;
-    if (temp_v1 == 0) {
-      return;
-    }
-  } while( 1 );
 }
-
-} /* extern "C" */
+}

@@ -1,50 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003edfd4` (_code @ 0x3edfd4, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the stored 0 into r6 (`mov r6, #0` after btlUnitGet, push {r4-r6}); armcc materializes it at the store. */
+#include "common.h"
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 
-int FUN_003eaf20(void);
-int FUN_003f1b3c(int, unsigned int, int, unsigned char [8], int *);
+s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
+UnitCategoryState *FUN_003eaf20(BtlMainStateA *state);
+void FUN_003f1b3c(BtlMainStateA *state, s32 category, s32 kind, u8 info[8], s32 *effectId);
+s32 FUN_0047f4cc(s32 effectId, f32 scale, f32 alphaA, f32 alphaB);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_003f1b3c. */
-extern unsigned int FUN_0047f4cc(unsigned int);
-extern int hasFlag80Or1000(unsigned int);
-extern int btlUnitGet(unsigned int);
-
-
-void FUN_003edfd4(int param_1)
-
+/* Unless the script unit is flagged 0x80/0x1000, recreate the special combatant's effect. */
+void FUN_003edfd4(BtlMainStateA *state)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [8];
-  
-  temp_v0 = btlUnitGet(g_btlScriptUnit);
-  if ((temp_v0 == 0) || (temp_v0 = hasFlag80Or1000(g_btlScriptUnit), temp_v0 == 0)) {
-    temp_v0 = param_1;
-    FUN_003eaf20();
-    *(unsigned int *)(param_1 + 0x4cec) = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = FUN_0019acdc(*(unsigned short *)(*(int *)(temp_v0 + 0x400) + 300),1);
-      FUN_003f1b3c(param_1,temp_v1,10,temp_v3,&temp_v2);
-      temp_v1 = FUN_0047f4cc(temp_v2);
-      *(unsigned int *)(param_1 + 0x4cec) = temp_v1;
+    ScriptCategoryUnit *unit = btlUnitGet(g_btlScriptUnit);
+    UnitCategoryState *entry;
+    if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
+        return;
     }
-  }
-  return;
+    entry = FUN_003eaf20(state);
+    state->specialEffect = 0;
+    if (entry != NULL) {
+        u8 info[8];
+        s32 effectId;
+        s32 category = FUN_0019acdc(entry->record->id, 1);
+        FUN_003f1b3c(state, category, 10, info, &effectId);
+        state->specialEffect = FUN_0047f4cc(effectId, 1.0f, 0.707f, 0.707f);
+    }
 }
 
 } /* extern "C" */

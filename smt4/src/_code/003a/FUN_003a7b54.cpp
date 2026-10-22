@@ -1,47 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7b54` (_code @ 0x3a7b54, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The cursor flag test is merged with the preceding predicate and its unused sign extension is removed. */
+#include "ui/MenuTransition.h"
 extern "C" {
+s32 FUN_002bf818(MenuCursorMotion*);
+s32 vec2GetYInt(const MenuCursorMotion*);
+s32 vec2GetXInt(const MenuCursorMotion*);
+void pointConvertToFloat(FloatPoint*, s32, s32);
+s32 FUN_00295618(void);
+s32 FUN_0026b564(void);
+s32 utilityReturnSuccess(const void*);
+void FUN_0029e874(s32);
+void FUN_0029c4c8(s32);
 
-int pointConvertToFloat(int, unsigned int, unsigned int);
-int FUN_0029c4c8(int);
-int FUN_0029e874(int);
-int FUN_002bf818(int);
-
-extern int utilityReturnSuccess(int);
-/* Supplied declaration required: pointConvertToFloat. */
-extern int FUN_0026b564(void);
-extern int FUN_00295618(void);
-/* Supplied declaration required: FUN_0029c4c8. */
-/* Supplied declaration required: FUN_0029e874. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf818. */
-
-
-void FUN_003a7b54(int param_1)
-
+void FUN_003a7b54(MenuTransitionWork* work)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0x188;
-  FUN_002bf818(temp_v2);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
-  temp_v2 = FUN_00295618();
-  if ((((temp_v2 != 0) && (*(char *)(param_1 + 0x212) != '\0')) &&
-      (temp_v2 = FUN_0026b564(), temp_v2 != 0)) && (temp_v2 = utilityReturnSuccess(param_1 + 0x96), temp_v2 == 0)) {
-    FUN_0029e874(0);
-    FUN_0029c4c8(0);
-    *(unsigned int *)(param_1 + 0x14) = 0xc;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
+    MenuCursorMotion* cursor = &work->cursor;
+    FUN_002bf818(cursor);
+    s32 y = vec2GetYInt(cursor);
+    s32 x = vec2GetXInt(cursor);
+    pointConvertToFloat(&work->position, x, y);
+    if (FUN_00295618() != 0 && cursor->unk8A != 0 && FUN_0026b564() != 0 &&
+        utilityReturnSuccess(work->unk96) == 0) {
+        FUN_0029e874(0);
+        FUN_0029c4c8(0);
+        work->state = 12;
+        work->step = 0;
+    }
 }
-
-} /* extern "C" */
+}

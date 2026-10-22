@@ -9,7 +9,7 @@ int sysMemClear(int, int);
 int workOwnerRelease(int);
 int btlCameraFinishTransition(int);
 int obj4FSlots28Reset(int);
-int FUN_004f7f08(void);
+int panelReset(void);
 int FUN_004f8fa0(int);
 
 /* Supplied declaration required: asdMemFree. */
@@ -17,7 +17,7 @@ int FUN_004f8fa0(int);
 /* Supplied declaration required: workOwnerRelease. */
 /* Supplied declaration required: btlCameraFinishTransition. */
 /* Supplied declaration required: obj4FSlots28Reset. */
-/* Supplied declaration required: FUN_004f7f08. */
+/* Supplied declaration required: panelReset. */
 /* Supplied declaration required: FUN_004f8fa0. */
 
 
@@ -29,7 +29,7 @@ void FUN_004f55c8(int param_1)
   int temp_v1;
   
   *(unsigned int *)(param_1 + 0x33bc) = 0;
-  FUN_004f7f08();
+  panelReset();
   btlCameraFinishTransition(param_1);
   FUN_004f8fa0(param_1);
   obj4FSlots28Reset(param_1);

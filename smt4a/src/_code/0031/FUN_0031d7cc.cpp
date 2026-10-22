@@ -1,40 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031d7cc` (_code @ 0x31d7cc, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: The cached position scalar is loaded directly instead of through the retail inline getter's argument/result registers. */
+#include "sys/CallbackOwner.h"
 
 extern "C" {
+void FUN_004bdce0(CallbackOwner *owner, s32 x, s32 y, f32 value);
+void FUN_004bee88(CallbackOwner *owner, s32 x, s32 y, f32 value);
+s32 vec2GetXInt(const void *position);
+s32 vec2GetYInt(const void *position);
+extern CallbackOwnerSlots g_callbackOwnerSlots;
 
-int FUN_004bdce0(int, unsigned int, unsigned int);
-int FUN_004bee88(int, unsigned int, unsigned int);
-
-extern unsigned char g_callbackOwnerSlots; /* 0x57f25c */
-
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_004bdce0. */
-/* Supplied declaration required: FUN_004bee88. */
-
-
-unsigned int FUN_0031d7cc(void)
-
+/* Updates the active owner's position-dependent state in its interactive modes. */
+u32 FUN_0031d7cc(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_callbackOwnerSlots + 0x4));
-  if ((*(int *)((unsigned char *)&g_callbackOwnerSlots + 0x4)) != 0) {
-    temp_v1 = vec2GetXInt((*(int *)((unsigned char *)&g_callbackOwnerSlots + 0x4)) + 0x30);
-    temp_v2 = vec2GetYInt(temp_v0 + 0x30);
-    temp_v3 = *(int *)(temp_v0 + 0x344);
-    if ((temp_v3 == 1) || ((temp_v3 != 2 && (temp_v3 == 3)))) {
-      FUN_004bee88(temp_v0,temp_v1,temp_v2);
-      FUN_004bdce0(temp_v0,temp_v1,temp_v2);
+    CallbackOwner *owner = g_callbackOwnerSlots.owner;
+    if (owner != NULL) {
+        s32 x = vec2GetXInt(&owner->position);
+        s32 y = vec2GetYInt(&owner->position);
+        f32 value = owner->position.unk20;
+        switch (owner->state) {
+        case 1:
+        case 3:
+            FUN_004bee88(owner, x, y, value);
+            FUN_004bdce0(owner, x, y, value);
+            break;
+        case 2:
+            break;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -6,14 +6,14 @@ extern "C" {
 
 int slotSetRequest(...);
 int mapIfReleaseResource(void);
-int FUN_00313648(...);
+int mapSetSceneState(...);
 
 int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_0022368c(void);
+int mapIfShowActionMarker(void);
 int FUN_00233e10(...);
 int FUN_002342b8(void);
 int mapIfReleaseSlot4(void);
@@ -50,7 +50,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_0022368c. */
+/* Supplied declaration required: mapIfShowActionMarker. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
 extern int mapIfHasSelection(void);
@@ -60,7 +60,7 @@ extern int mapIfHasSelection(void);
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
@@ -171,7 +171,7 @@ void FUN_0033e590(void)
           *(unsigned int *)(g_lmapView + 0xb0) = 1;
           sysPlaySe(0xdc);
           FUN_00233e10(1,DAT_005f16ac);
-          FUN_0022368c();
+          mapIfShowActionMarker();
           temp_v1 = g_lmapScene;
           temp_v2 = *(int *)(temp_v1 + 4);
           *(int *)(temp_v1 + 4) = temp_v2 + 1;
@@ -258,7 +258,7 @@ LAB_0033e908:
             if ((temp_v2 == 0x5c) &&
                (temp_v1 = *(int *)(g_lmapScene + 8) + 1, *(int *)(g_lmapScene + 8) = temp_v1,
                temp_v1 >= 4)) {
-              FUN_00313648(1);
+              mapSetSceneState(1);
             }
             FUN_002e364c(g_lmapScene + 0x28);
             FUN_00327ee8();
@@ -276,7 +276,7 @@ LAB_0033e908:
           return;
         }
         mapIfReleaseResource();
-        FUN_00313648(0x14);
+        mapSetSceneState(0x14);
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;
       }
@@ -308,7 +308,7 @@ LAB_0033e908:
   }
   else {
     mapIfReleaseResource();
-    FUN_00313648(0x14);
+    mapSetSceneState(0x14);
     temp_v2 = *(int *)(g_lmapScene + 4);
     temp_v1 = g_lmapScene;
   }

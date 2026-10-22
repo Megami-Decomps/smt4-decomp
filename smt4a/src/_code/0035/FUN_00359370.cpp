@@ -20,11 +20,11 @@ s32 FUN_00359370(ModelSlotHolder *holder, s32 mode)
 {
     ModelSlotList *list = asdModelGetSlotArray0(mode);
     ModelSlot *slot = holder->slot;
-    ModelSlot **newEnd = std::remove(list->begin, list->end, slot);
-    ModelSlot **oldEnd = list->end;
+    ModelSlot **newEnd = std::remove(list->slots.begin, list->slots.end, slot);
+    ModelSlot **oldEnd = list->slots.end;
     bool removed = oldEnd != newEnd;
 
-    list->end = newEnd;
+    list->slots.end = newEnd;
     if (removed) {
         slot->attached = 0;
     }

@@ -1,12 +1,12 @@
+#include "ui/ButtonHelp.h"
 #include "shard/Shard0035.h"
 
 extern "C" {
-
-extern ScreenRef g_buttonHelp;
+extern ButtonHelpGlobalsA g_buttonHelp;
 
 void screenSetColor670(u32 a, u8 b, u8 c, u8 d)
 {
-    ScreenObj *screen = g_buttonHelp.instance;
+    ButtonHelpWorkA *screen = g_buttonHelp.work;
 
     screen->unk670 = a;
     screen->unk674 = b;

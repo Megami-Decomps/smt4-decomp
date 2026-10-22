@@ -10,7 +10,7 @@ int FUN_003b5f30(int, int);
 int FUN_003b6a5c(int, unsigned int, unsigned int);
 int FUN_003b7084(int, unsigned int, unsigned int);
 
-extern int FUN_00296a18(int);
+extern int modelPairTryBind(int);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_003b49a0. */
@@ -29,7 +29,7 @@ unsigned int FUN_001c8974(int *param_1)
   int temp_v3;
   
   temp_v3 = *param_1;
-  if ((temp_v3 != 0) && (temp_v0 = FUN_00296a18(temp_v3), temp_v0 != 0)) {
+  if ((temp_v3 != 0) && (temp_v0 = modelPairTryBind(temp_v3), temp_v0 != 0)) {
     if (*(int *)(temp_v3 + 0x352c) < 8) {
       FUN_003b5f30(temp_v3,0);
     }

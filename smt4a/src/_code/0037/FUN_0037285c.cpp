@@ -1,3 +1,4 @@
+#include "battle/btlScript.h"
 #include "battle/btlMain.h"
 #include "shard/W4_W4Match6b_BtlUnitWork.h"
 
@@ -13,7 +14,7 @@ struct BtlUnitParametersView {
 };
 
 extern "C" {
-extern u32 g_btlScriptUnit;
+
 BtlUnit *btlUnitGet(u32 id);
 BtlMainStateA *btlGetMainState(void);
 BattleActionInfo FUN_003e8bb0(BtlMainStateA *state, BtlCombatantEntryA *parameters);

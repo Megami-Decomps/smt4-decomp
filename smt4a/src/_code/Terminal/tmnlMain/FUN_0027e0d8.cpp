@@ -202,7 +202,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0021b6ec. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_0022677c. */
-extern int FUN_00239480(void);
+extern int messageMainIsWindowActive(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern unsigned int gameDataGetPlayerName(void);
@@ -617,7 +617,7 @@ unsigned int FUN_0027e0d8(void)
   case 4:
     if (puVar3[5] != 0) {
       if (puVar3[5] == 1) {
-        temp_v7 = FUN_00239480();
+        temp_v7 = messageMainIsWindowActive();
         if (temp_v7 != 0) {
           msgWindowReset();
         }
@@ -990,7 +990,7 @@ LAB_0027edcc:
     puVar3[4] = temp_v4;
     break;
   case 0x12:
-    temp_v7 = FUN_00239480();
+    temp_v7 = messageMainIsWindowActive();
     if (temp_v7 != 0) {
       msgWindowReset();
     }

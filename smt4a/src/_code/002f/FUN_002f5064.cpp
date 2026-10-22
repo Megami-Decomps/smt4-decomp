@@ -25,7 +25,7 @@ int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00285774(void);
 int FUN_002a5e7c(...);
-int FUN_002a7288(void);
+int statusDownRestartTransition(void);
 int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002f01c4(int);
 int FUN_003180c4(...);
@@ -88,7 +88,7 @@ extern int FUN_0026c3a0(void);
 extern int FUN_002a4b28(void);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_002a5e7c. */
-/* Supplied declaration required: FUN_002a7288. */
+/* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002f01c4. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -316,7 +316,7 @@ LAB_002f56d4:
     case 0:
       if (*(int *)(temp_v11 + 0x4574) != 2) {
         FUN_0022e774();
-        FUN_002a7288();
+        statusDownRestartTransition();
         temp_v2 = *(int *)(param_1 + 0x436c) + 1;
         *(int *)(param_1 + 0x436c) = temp_v2;
         return;
@@ -328,7 +328,7 @@ LAB_002f56d4:
       if (((int)(*(unsigned short *)(temp_v5 + 0x30) - 2) <= (int)(unsigned int)*(unsigned short *)(temp_v2 + 100)) &&
          ((unsigned int)*(unsigned short *)(temp_v2 + 100) < (unsigned int)*(unsigned short *)(temp_v5 + 0x30))) {
         FUN_0022e774();
-        FUN_002a7288();
+        statusDownRestartTransition();
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
         return;
       }
@@ -398,7 +398,7 @@ LAB_002f56d4:
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
         *(unsigned int *)(param_1 + 0x437c) = 0;
         uiSpriteSelectAnim(temp_v13,8);
-        FUN_002a7288();
+        statusDownRestartTransition();
         eventQueueAddUnique(0x100013f);
         return;
       }
@@ -437,7 +437,7 @@ LAB_002f56d4:
           FUN_0020b490(param_1,0x11);
           return;
         }
-        FUN_002a7288();
+        statusDownRestartTransition();
         roundObjFinish(param_1);
         return;
       }

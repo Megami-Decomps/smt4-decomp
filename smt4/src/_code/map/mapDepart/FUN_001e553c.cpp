@@ -79,7 +79,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: fileSlotLoad. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: fileSlotFree. */
@@ -448,7 +448,7 @@ LAB_001e5a1c:
       *(unsigned int *)(temp_v2 + 0x60) = 0;
       *(unsigned int *)(temp_v2 + 0x58) = 0;
       *(unsigned int *)(temp_v2 + 0x5c) = 0;
-      temp_v4 = FUN_002973d8();
+      temp_v4 = messageMainGetChoiceResult();
       if (temp_v4 != 0) {
         FUN_00273358(0xffffffff);
       }

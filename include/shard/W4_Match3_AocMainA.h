@@ -3,16 +3,23 @@
 #define SHARD_W4_MATCH3_AOCMAINA_H
 
 #include "common.h"
+#include <stddef.h>
 
-typedef struct AocMainAObjC { u8 unk[1]; } AocMainAObjC;
+typedef struct AocMainAObjC { /* 0x00 */ u8 unk[1]; } AocMainAObjC;
 
 typedef struct AocMainA {
     /* 0x00 */ u8 unk00[0xA8];
-    /* 0xA8 */ AocMainAObjC objC;
-    /* 0x0A9 */ u8 unk0a9[0xad8];
+    /* 0xA8 */ AocMainAObjC scriptHolder;
+    /* 0x0A9 */ u8 unk0A9[0x6AB];
+    /* 0x754 */ u32 flags;
+    /* 0x758 */ u8 unk758[0x429];
     /* 0xB81 */ u8 unkB81;
 } AocMainA;
 
 extern "C" AocMainA *g_aocMain;
+
+typedef char AocMainALayoutCheck[sizeof(AocMainA) == 0xB84 ? 1 : -1];
+
+typedef char AocMainAOffsets[offsetof(AocMainA, scriptHolder) == 0xA8 && offsetof(AocMainA, flags) == 0x754 ? 1 : -1];
 
 #endif

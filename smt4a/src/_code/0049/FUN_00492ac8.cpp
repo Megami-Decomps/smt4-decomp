@@ -1,8 +1,8 @@
+#include "shard/NaviMain.h"
 #include "shard/Shard0049.h"
 
 extern "C" {
-
-extern Sub68Owner *g_naviMain;
+extern NaviMainA *g_naviMain;
 
 void FUN_00492ac8(u32 unused, u32 value)
 {

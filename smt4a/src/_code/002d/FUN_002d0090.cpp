@@ -1,4 +1,5 @@
-#include "shard/W5_W5Match5_BattleViewState.h"
+/* NON_MATCHING: existing baseline uses an unconditional global load and duplicated return epilogue instead of retail's conditional load/shared return. */
+#include "battle/btlView.h"
 #include <stddef.h>
 
 typedef char CheckViewStateSize[sizeof(BattleViewState) == 0xd4 ? 1 : -1];
@@ -54,6 +55,6 @@ extern "C" s32 FUN_002d0090()
     attachBattleView(&state->children[0]);
     attachBattleView(&state->children[1]);
     attachBattleView(&state->children[2]);
-    state->attachments.attached = 1;
+    state->attachments.state = 1;
     return 1;
 }

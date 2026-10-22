@@ -12,7 +12,7 @@ int scrRunOpcodesStub(...);
 int gameDataBlocksAddFlags(int);
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(...);
-int FUN_002c76d8(int);
+int gameDataAddHomeButtonHold(int);
 int campCommonBgAcquire(void);
 int FUN_0031ed60(int, int);
 int FUN_00333574(int);
@@ -34,11 +34,11 @@ extern int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: gameDataBlocksMaskClearBits. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: scrRunOpcodesStub. */
-extern int FUN_00239480(void);
+extern int messageMainIsWindowActive(void);
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002c76d8. */
+/* Supplied declaration required: gameDataAddHomeButtonHold. */
 extern int FUN_002e0b5c(unsigned int, unsigned int);
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031ed60. */
@@ -113,7 +113,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     if (temp_v0 != 2) {
       return 0;
     }
-    FUN_002c76d8(1);
+    gameDataAddHomeButtonHold(1);
     gameDataBlocksAddFlags(1);
     FUN_00333574(1);
     scrScriptProcessStartEntry(DAT_005e2110,1);
@@ -127,7 +127,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     break;
   case 6:
     scrRunOpcodesStub(DAT_005e2110);
-    temp_v0 = FUN_00239480();
+    temp_v0 = messageMainIsWindowActive();
     if (temp_v0 != 0) {
       DAT_0057f6cb = 1;
     }

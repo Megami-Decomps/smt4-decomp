@@ -135,12 +135,12 @@ void FUN_00331ecc(void)
   }
   bVar19 = 0;
   bVar20 = 0;
-  iVar7 = FUN_002b8d54();
-  iVar8 = FUN_002b8d68();
+  iVar7 = ifTouchGetSelectionMode();
+  iVar8 = ifTouchGetSelectedRegion();
   psStack_630 = (short *)(iVar12 + 0xe00);
-  FUN_0029d65c((int)*(short *)(iVar12 + 0xe04));
-  FUN_0029d65c((int)*(short *)(iVar12 + 0xe06));
-  FUN_0029d65c((int)*(short *)(iVar12 + 0xe02));
+  ifTouchGetSelectionModeForRegion((int)*(short *)(iVar12 + 0xe04));
+  ifTouchGetSelectionModeForRegion((int)*(short *)(iVar12 + 0xe06));
+  ifTouchGetSelectionModeForRegion((int)*(short *)(iVar12 + 0xe02));
   iStack_638 = 0;
   cVar1 = *(char *)(iVar12 + 0xad);
   cVar5 = *(char *)(iVar12 + 0xac);
@@ -227,7 +227,7 @@ void FUN_00331ecc(void)
          (iVar7 = FUN_002c09d0(0x521), iVar7 == 0)) &&
         ((iVar7 = FUN_002c09d0(0x526), iVar7 == 0 && (iVar7 = FUN_002c09d0(0x527), iVar7 == 0)))) &&
        (iVar7 = FUN_002c09d0(0x215), iVar7 == 0)) {
-      iVar7 = FUN_00299218((int)*(char *)(iVar12 + 0x98),
+      iVar7 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),
                            (int)*(char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b));
       if ((iVar7 == 0x32) || (iVar7 == 0x33 || iVar7 == 0x34)) {
         campCecDestroyOverlay();
@@ -235,7 +235,7 @@ void FUN_00331ecc(void)
         iVar7 = FUN_002485b8();
         if (iVar7 == 0) {
           FUN_0029e648(1,0);
-          FUN_002990a0();
+          messageInitializeSavedBanner();
         }
         iVar7 = FUN_00241a14();
         if (iVar7 == 0) {
@@ -252,7 +252,7 @@ void FUN_00331ecc(void)
       do {
         psVar14 = (short *)0x0;
         do {
-          iVar10 = FUN_00299218(iVar7,psVar14);
+          iVar10 = dataTable15GetUnlockedEntryId(iVar7,psVar14);
           iVar8 = iVar7;
           if (iVar10 == 5) goto LAB_0033239c;
           psVar14 = (short *)((int)psVar14 + 1);
@@ -269,7 +269,7 @@ LAB_0033239c:
       do {
         psVar14 = (short *)0x0;
         do {
-          iVar10 = FUN_00299218(iVar7,psVar14);
+          iVar10 = dataTable15GetUnlockedEntryId(iVar7,psVar14);
           iVar8 = iVar7;
           if (iVar10 == 0x18) goto LAB_003323f0;
           psVar14 = (short *)((int)psVar14 + 1);
@@ -344,7 +344,7 @@ LAB_003323f0:
     if (*(char *)(iVar12 + 0xab) != '\0') {
       iVar7 = 0;
       do {
-        iVar8 = FUN_0029d65c((int)*(short *)(iVar12 + iVar7 * 2 + 0xe22));
+        iVar8 = ifTouchGetSelectionModeForRegion((int)*(short *)(iVar12 + iVar7 * 2 + 0xe22));
         uVar3 = (unsigned char)iVar7;
         if (iVar8 != 6) {
           if (iVar8 == 1 || iVar8 == 2) {
@@ -358,17 +358,17 @@ LAB_003323f0:
           *(unsigned char *)(iVar12 + 0xad) = uVar3;
         }
         iVar8 = iVar12 + iVar7 * 6;
-        iVar10 = FUN_0029d65c((int)*(short *)(iVar8 + 0xe28));
+        iVar10 = ifTouchGetSelectionModeForRegion((int)*(short *)(iVar8 + 0xe28));
         if ((iVar10 == 6 || iVar10 == 1) || iVar10 == 2) {
           *(unsigned char *)(iVar12 + 0xac) = 1;
           *(unsigned char *)(iVar12 + 0xad) = uVar3;
         }
-        iVar10 = FUN_0029d65c((int)*(short *)(iVar8 + 0xe2a));
+        iVar10 = ifTouchGetSelectionModeForRegion((int)*(short *)(iVar8 + 0xe2a));
         if ((iVar10 == 6 || iVar10 == 1) || iVar10 == 2) {
           *(unsigned char *)(iVar12 + 0xac) = 2;
           *(unsigned char *)(iVar12 + 0xad) = uVar3;
         }
-        iVar8 = FUN_0029d65c((int)*(short *)(iVar8 + 0xe2c));
+        iVar8 = ifTouchGetSelectionModeForRegion((int)*(short *)(iVar8 + 0xe2c));
         if ((iVar8 == 6 || iVar8 == 1) || iVar8 == 2) {
           *(unsigned char *)(iVar12 + 0xac) = 0;
           *(unsigned char *)(iVar12 + 0xad) = uVar3;
@@ -398,7 +398,7 @@ LAB_003323f0:
     FUN_002c1658(0,1);
     if (!(iVar7 == 0 && !bVar19)) {
       uVar9 = FUN_0029e908(iVar12 + 0x34);
-      iStack_634 = FUN_00299218((int)*(char *)(iVar12 + 0x98),uVar9);
+      iStack_634 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),uVar9);
       iVar7 = FUN_00292844();
       iVar8 = FUN_00198f84();
       if (iVar8 == 0) {
@@ -466,14 +466,14 @@ LAB_003323f0:
             uVar3 = FUN_0029e908(iVar12 + 0x34);
             *(unsigned char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b) = uVar3;
             if ((*(unsigned char *)(iVar7 + 3) & 0xf) == 0) {
-              FUN_00299218((int)*(char *)(iVar12 + 0x9a),0);
+              dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x9a),0);
               iVar8 = FUN_00292844();
               if ((*(unsigned char *)(iVar8 + 3) & 0xf) != 0) {
                 FUN_0026d5a4();
               }
             }
             if (*(unsigned char *)(iVar7 + 3) >> 4 == 0) {
-              FUN_00299218((int)*(char *)(iVar12 + 0x9a),0);
+              dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x9a),0);
               iVar7 = FUN_00292844();
               if ((*(unsigned char *)(iVar7 + 3) & 0xf0) != 0) {
                 FUN_0026a55c();
@@ -538,7 +538,7 @@ LAB_003323f0:
                   uVar18 = uVar18 + 1;
                 } while ((int)uVar18 < 0x35);
                 if ((*(unsigned char *)(iVar7 + 3) & 0xf) != 0) {
-                  FUN_00299218((int)*(char *)(iVar12 + 0x98),
+                  dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),
                                (int)*(char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b));
                   iVar8 = FUN_00292844();
                   if ((*(unsigned char *)(iVar8 + 3) & 0xf) == 0) {
@@ -546,7 +546,7 @@ LAB_003323f0:
                   }
                 }
                 if ((*(unsigned char *)(iVar7 + 3) & 0xf0) != 0) {
-                  FUN_00299218((int)*(char *)(iVar12 + 0x98),
+                  dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),
                                (int)*(char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b));
                   iVar7 = FUN_00292844();
                   if (*(unsigned char *)(iVar7 + 3) >> 4 == 0) {
@@ -560,9 +560,9 @@ LAB_003323f0:
                 *puVar13 = 3;
                 *(unsigned int *)(iVar7 + 0x1c) = 0;
                 *(unsigned int *)(iVar7 + 0x14) = 0;
-                iVar7 = FUN_00299218((int)*(char *)(iVar12 + 0x98),
+                iVar7 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),
                                      (int)*(char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b));
-                iVar8 = FUN_00299218((int)*(char *)(iVar12 + 0x9a),
+                iVar8 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x9a),
                                      (int)*(char *)((int)*(char *)(iVar12 + 0x9a) + iVar12 + 0x9b));
                 if ((iVar7 == 0x32 || iVar7 == 0x33) || iVar7 == 0x34) {
                   campCecDestroyOverlay();
@@ -570,7 +570,7 @@ LAB_003323f0:
                   iVar10 = FUN_002485b8();
                   if (iVar10 == 0) {
                     FUN_0029e648(1,0);
-                    FUN_002990a0();
+                    messageInitializeSavedBanner();
                   }
                   iVar10 = FUN_00241a14();
                   if (iVar10 == 0) {
@@ -581,7 +581,7 @@ LAB_003323f0:
                    (((iVar7 == 0x21 || iVar7 == 0x22 || (iVar7 == 0x2e || iVar7 == 0x2f)) ||
                     (iVar7 == 0x24 || iVar7 == 0x30)))) {
                   FUN_002a035c();
-                  FUN_002a0c08(0xf);
+                  uniteRequestScriptEntry(0xf);
                   iVar8 = DAT_0043da90;
                   puVar13 = (unsigned int *)(DAT_0043da90 + 0x18);
                   *(unsigned int *)(DAT_0043da90 + 0x24) = *(unsigned int *)(DAT_0043da90 + 0x18);
@@ -594,7 +594,7 @@ LAB_003323f0:
                 if (((iVar7 == 0x2a || iVar7 == 0x2b) || (iVar7 == 0x2c || iVar7 == 0x2d)) &&
                    (iVar7 = func_0x002419f8(), iVar7 != 0)) {
                   FUN_002a035c();
-                  FUN_002a0c08(0);
+                  uniteRequestScriptEntry(0);
                 }
                 FUN_002bc01c(0x100016e);
               }
@@ -771,7 +771,7 @@ joined_r0x00333130:
             uVar3 = FUN_0029e908(iVar12 + 0x34);
             *(unsigned char *)((int)*(char *)(iVar12 + 0x98) + iVar12 + 0x9b) = uVar3;
             uVar9 = FUN_0029e908(iVar12 + 0x34);
-            iVar7 = FUN_00299218((int)*(char *)(iVar12 + 0x98),uVar9);
+            iVar7 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),uVar9);
             uVar9 = FUN_00241a64();
             FUN_0029ee6c(uVar9,0x323232ff);
             if (iVar7 == 0x2d) {
@@ -814,7 +814,7 @@ LAB_003333b4:
           }
           FUN_0029da34(0,1,sStack_5f2,&iStack_638);
           FUN_0029e890((int)*(char *)(iVar12 + 0xac),1);
-          FUN_0029d684(1);
+          statusPanelSetOpen(1);
           return;
         }
         return;
@@ -823,10 +823,10 @@ LAB_003333b4:
         return;
       }
       FUN_002a035c();
-      FUN_002a0c08(0);
+      uniteRequestScriptEntry(0);
       FUN_002b8838(0x4f);
       uVar9 = FUN_0029e908(iVar12 + 0x34);
-      iVar12 = FUN_00299218((int)*(char *)(iVar12 + 0x98),uVar9);
+      iVar12 = dataTable15GetUnlockedEntryId((int)*(char *)(iVar12 + 0x98),uVar9);
       uVar9 = FUN_00241a64();
       FUN_0029ee6c(uVar9,0x323232ff);
       if (iVar12 == 0x2d) {
@@ -892,7 +892,7 @@ LAB_003333b4:
     iVar12 = func_0x002419f8();
     if (iVar12 != 0xf) {
       FUN_002a035c();
-      FUN_002a0c08(0);
+      uniteRequestScriptEntry(0);
     }
     FUN_0029c4c8(0);
     FUN_0029e890(0xffffffff,1);

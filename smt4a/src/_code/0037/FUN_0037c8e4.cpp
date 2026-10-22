@@ -1,57 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037c8e4` (_code @ 0x37c8e4, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r1, [pc, #144] differs from recovered ldr r1, [pc, #136]. */
+#include "common.h"
+
+struct MessageStateView {
+    u8 unk00[0x7C];             // 0x000
+    u32 unk7C;                  // 0x07C
+    u8 unk80[0x08];             // 0x080
+    u32 unk88;                  // 0x088
+    u8 unk8C;                   // 0x08C
+    u8 unk8D;                   // 0x08D
+    u8 unk8E;                   // 0x08E
+    u8 unk8F[0x02];             // 0x08F
+    u8 unk91;                   // 0x091
+    u8 unk92;                   // 0x092
+    u8 unk93[0xDA];             // 0x093
+    u8 unk16D;                  // 0x16D
+    u8 unk16E[0x0F];            // 0x16E
+    u8 unk17D;                  // 0x17D
+    u8 unk17E[0x16];            // 0x17E
+    u8 unk194[0x96C];           // 0x194
+    u8 unkB00[1];               // 0xB00: start of embedded sprite object
+};
+
+struct MessageMainView {
+    u8 unk00[0x08];             // 0x00
+    MessageStateView* unk08;    // 0x08
+};
 
 extern "C" {
-
-int FUN_0014e188(int, int, unsigned int, int, int);
-int uiSpriteSelectAnim(int, int);
-int pairSetFirstResetSecond(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-extern unsigned int *gameGetSlotTable(void);
-extern unsigned int gameDataBlocks2GetWord4(void);
-
-
-unsigned int FUN_0037c8e4(unsigned char param_1,int param_2)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8e) = 1;
-  *(unsigned char *)(temp_v0 + 0x8d) = 1;
-  if (param_2 != 0) {
-    temp_v1 = gameDataBlocks2GetWord4();
-    *(unsigned int *)(temp_v0 + 0x7c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x88) = temp_v1;
-  }
-  else {
-    puVar3 = (unsigned int *)gameGetSlotTable();
-    temp_v1 = *puVar3;
-    *(unsigned int *)(temp_v0 + 0x7c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x88) = temp_v1;
-  }
-  *(unsigned char *)(temp_v0 + 0x92) = 0;
-  *(unsigned char *)(temp_v0 + 0x17d) = 0;
-  *(unsigned char *)(temp_v0 + 0x16d) = 0;
-  *(unsigned char *)(temp_v0 + 0x91) = param_1;
-  FUN_0014e188(temp_v0 + 0xb00,8,0xffffffff,temp_v0 + 0x194,0xb);
-  pairSetFirstResetSecond(temp_v0 + 0xb00,0);
-  uiSpriteSelectAnim(temp_v0 + 0xb00,6);
-  return 1;
+extern MessageMainView g_messageMain;
+u32 gameDataBlocks2GetWord4(void);
+u32* gameGetSlotTable(void);
+void FUN_0014e188(void* sprite, s32 kind, u32 flags, void* data,
+                  s32 count, f32 scale);
+void pairSetFirstResetSecond(void* pair, s32 first);
+void uiSpriteSelectAnim(void* sprite, s32 animation);
 }
 
-} /* extern "C" */
+// Initialize the message state from the selected data source and prepare its sprite.
+extern "C" u32 FUN_0037c8e4(u8 messageId, s32 useDataBlock)
+{
+    MessageStateView* state = g_messageMain.unk08;
+    state->unk8E = 1;
+    state->unk8D = 1;
+
+    u32 value;
+    if (useDataBlock != 0) {
+        value = gameDataBlocks2GetWord4();
+    } else {
+        value = *gameGetSlotTable();
+    }
+    state->unk7C = value;
+    state->unk88 = value;
+
+    state->unk92 = 0;
+    state->unk17D = 0;
+    state->unk16D = 0;
+    state->unk91 = messageId;
+    FUN_0014e188(state->unkB00, 8, 0xFFFFFFFFu, state->unk194, 11, 1.0f);
+    pairSetFirstResetSecond(state->unkB00, 0);
+    uiSpriteSelectAnim(state->unkB00, 6);
+    return 1;
+}

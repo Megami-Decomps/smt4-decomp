@@ -63,7 +63,7 @@ extern unsigned char LAB_002fdd8c; /* 0x2fdd8c */
 extern unsigned char LAB_002fdd94; /* 0x2fdd94 */
 extern int FUN_00313704(...); /* 0x313704 */
 extern int FUN_003238d0(...); /* 0x3238d0 */
-extern int FUN_0032465c(...); /* 0x32465c */
+extern int effectPollResourceFileDialog(...); /* 0x32465c */
 extern signed char g_effectEditor; /* 0x44ea80 */
 extern unsigned char DAT_0044ea81; /* 0x44ea81 */
 extern signed char DAT_0044ea86; /* 0x44ea86 */
@@ -420,7 +420,7 @@ LAB_002fd1c8:
   *(unsigned char *)(puVar6 + 1) = 0x1e;
   puVar6[4] = 0;
   puVar6[5] = temp_v15;
-  puVar6[2] = (unsigned int)FUN_0032465c;
+  puVar6[2] = (unsigned int)effectPollResourceFileDialog;
   puVar6[3] = (unsigned int)effectEditorReleaseObjects;
   if (temp_v13) {
     puVar6 = (unsigned int *)(temp_v4 + DAT_0044f870 * 0x18);

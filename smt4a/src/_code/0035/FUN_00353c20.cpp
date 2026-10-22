@@ -1,42 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00353c20` (_code @ 0x353c20, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match7_SceneSlots.h"
 
 extern "C" {
 
-void FUN_00357b18(unsigned int, int, int, int, int, int, int);
+typedef struct MapEnemyMarker {
+    u8 unk00[0x20];
+    f32 position[3]; /* 0x20 */
+    u8 unk2C[0x24];
+    u8 visible;      /* 0x50 */
+    u8 unk51[7];
+    u32 model;       /* 0x58 */
+    u8 unk5C[0x28];
+    s32 state;       /* 0x84 */
+} MapEnemyMarker;
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+void FUN_00357b18(u32 model, u32 a1, u32 a2, s32 x, s32 y, s32 z, s32 active);
 
-extern int g_mapEnemy; /* 0x5806d4 */
-
-/* Supplied declaration required: FUN_00357b18. */
-
-
-void FUN_00353c20(int param_1)
-
+/* Places a visible map enemy's marker at its position; states 2 and 3 show it inactive. */
+void FUN_00353c20(MapEnemyMarker *enemy)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*(char *)(param_1 + 0x50) != '\0') {
-    if (*(int *)(param_1 + 0x84) == 3 || *(int *)(param_1 + 0x84) == 2) {
-      FUN_00357b18(*(unsigned int *)(param_1 + 0x58),*(unsigned int *)(g_mapEnemy + 0xc),
-                   *(unsigned int *)(g_mapEnemy + 0x10),(int)*(float *)(param_1 + 0x20),
-                   (int)*(float *)(param_1 + 0x24),(int)*(float *)(param_1 + 0x28),0);
-                    /* WARNING: Treating indirect jump as return */
-      return;
+    SceneSlotList *list = g_mapEnemy;
+
+    if (!enemy->visible) {
+        return;
     }
-    FUN_00357b18(*(unsigned int *)(param_1 + 0x58),*(unsigned int *)(g_mapEnemy + 0xc),
-                 *(unsigned int *)(g_mapEnemy + 0x10),(int)*(float *)(param_1 + 0x20),
-                 (int)*(float *)(param_1 + 0x24),(int)*(float *)(param_1 + 0x28),1);
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    if (enemy->state == 3 || enemy->state == 2) {
+        FUN_00357b18(enemy->model, list->unk0C, list->unk10, (s32)enemy->position[0], (s32)enemy->position[1],
+                     (s32)enemy->position[2], 0);
+    } else {
+        FUN_00357b18(enemy->model, list->unk0C, list->unk10, (s32)enemy->position[0], (s32)enemy->position[1],
+                     (s32)enemy->position[2], 1);
+    }
 }
 
 } /* extern "C" */

@@ -14,9 +14,9 @@ struct LargeTouchGrid {
     s16 touches[145]; // 0x438
 };
 extern "C" {
-s32 FUN_001643a0();
-s32 FUN_00165070();
-s32 FUN_001802d4(s32);
+s32 ifTouchGetSelectionMode();
+s32 ifTouchGetSelectedRegion();
+s32 ifTouchIsInitialSelection(s32);
 s32 flaggedEntryGetValueB(FlaggedEntry *);
 s32 flaggedEntryGetValueA(FlaggedEntry *);
 void flaggedEntrySetValueB(FlaggedEntry *, s32);
@@ -26,10 +26,10 @@ void eventQueueAddUniqueIfValid(u32);
 s32 largeGridHandleTouchSelection(LargeTouchGrid *work)
 {
     bool handled = false;
-    s32 type = FUN_001643a0();
+    s32 type = ifTouchGetSelectionMode();
     if (type != 1 && type != 2 && type != 6)
         return 0;
-    s32 touch = FUN_00165070();
+    s32 touch = ifTouchGetSelectedRegion();
     for (s32 i = 3; i < 138; ++i) {
         if (work->touches[i] == touch && touch > 0) {
             s32 cell = i - 3;
@@ -65,7 +65,7 @@ s32 largeGridHandleTouchSelection(LargeTouchGrid *work)
                     return type;
             } else if (type == 6) {
                 return type;
-            } else if (!FUN_001802d4(touch)) {
+            } else if (!ifTouchIsInitialSelection(touch)) {
                 return type;
             }
             eventQueueAddUniqueIfValid(0x100020d);

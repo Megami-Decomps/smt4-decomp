@@ -6,7 +6,7 @@ extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
 extern s32 scrGetArg(s32 index);
 extern void scrSetResult(s32 value);
-extern u32 FUN_00249a54(void);
+extern u32 btlScriptResolveGroupArg(void);
 extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
 
 /* Script command: pushes whether the number of live units of the current group (plus the active entry) is within argument 0; returns 1. */
@@ -20,7 +20,7 @@ s32 scrCommBtlLiveUnitCountWithin(void)
     s32 i;
 
     scrGetArg(1);
-    group = FUN_00249a54();
+    group = btlScriptResolveGroupArg();
     live = 0;
     FUN_002499fc(group, &first, &count);
     for (i = first; i < first + count; i++) {

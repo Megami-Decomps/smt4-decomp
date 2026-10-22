@@ -43,7 +43,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: FUN_00295660. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_0029cc3c. */
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
@@ -265,7 +265,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       if (temp_v3 != 1) {
         return 0;
       }
-      temp_v3 = FUN_002973d8();
+      temp_v3 = messageMainGetChoiceResult();
       if (temp_v3 != 0) {
         scrWorkSetValue(0,0x14);
         temp_v8 = 2;

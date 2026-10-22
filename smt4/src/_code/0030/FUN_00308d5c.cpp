@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00245a7c(...);
 int FUN_00245d0c(int, int);
 int FUN_00246d38(int, int, int, unsigned int);
-int FUN_00254e4c(...);
+int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
 int FUN_002550d8(...);
 int FUN_00255180(...);
@@ -35,7 +35,7 @@ extern int FUN_00245c78(void);
 extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00245d0c. */
 /* Supplied declaration required: FUN_00246d38. */
-/* Supplied declaration required: FUN_00254e4c. */
+/* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: pickerAdvance. */
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: FUN_00255180. */
@@ -274,7 +274,7 @@ LAB_003092e8:
        ((*puVar8 & 0x80) == 0 && (*puVar8 & 0x1000000) == 0)) {
       pickerAdvance(param_1);
     }
-    FUN_00254e4c(g_btlUiBlock);
+    btlUiRefreshSlotRanks(g_btlUiBlock);
     *puVar8 = *puVar8 & 0xfeffff7f;
     temp_v3 = 0xc;
 joined_r0x003092c8:

@@ -14,7 +14,7 @@ int asdMemFree(...);
 int asdFatalError(...);
 int FUN_002c618c(...);
 int FUN_0033e8a8(...);
-int FUN_0033f22c(...);
+int resourceReleaseAllocationAndDispatchUpdate(...);
 int builtin_strncpy(...);
 
 typedef struct fn_0033dcec_arg0 fn_0033dcec_arg0;
@@ -63,8 +63,8 @@ extern int FUN_002c58c8(void *, unsigned int);
 extern int FUN_002e151c(void *, unsigned int);
 extern int FUN_002e1574(void *, unsigned int);
 /* Supplied declaration required: FUN_0033e8a8. */
-extern int FUN_0033f178(fn_0033dcec_arg0 *);
-/* Supplied declaration required: FUN_0033f22c. */
+extern int aocTextureRequestHasNewContent(fn_0033dcec_arg0 *);
+/* Supplied declaration required: resourceReleaseAllocationAndDispatchUpdate. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -128,9 +128,9 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         temp_v4 = FUN_002c58c8(param_1->field_0x8,param_1->field_0xc);
       }
     }
-    temp_v0 = FUN_0033f178(param_1);
+    temp_v0 = aocTextureRequestHasNewContent(param_1);
     if (temp_v0 != 0) {
-      FUN_0033f22c(param_1);
+      resourceReleaseAllocationAndDispatchUpdate(param_1);
     }
     temp_v1 = *(unsigned int *)(temp_v4 + 8);
     temp_v3 = param_1->field_0xc;

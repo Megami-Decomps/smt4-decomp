@@ -1,9 +1,9 @@
-#include "common.h"
+#include "battle/btlPartnerAttack.h"
 
 extern "C" {
 
 void *jobGetWork(void *job);
-extern void *g_btlPartnerAttack;
+extern BtlPartnerAttackA *g_btlPartnerAttack;
 void FUN_0041210c(void *attack);
 
 void btlPartnerAttackJobCallback(void *job)

@@ -45,13 +45,13 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
-extern int FUN_0026ee68(unsigned int);
+extern int buttonHelpHasEnabledEntryForId(unsigned int);
 extern int strIsEmpty(unsigned int *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
-extern int FUN_0029d65c(int);
+extern int messageMainGetChoiceResult(void);
+extern int ifTouchGetSelectionModeForRegion(int);
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
@@ -196,7 +196,7 @@ void FUN_003923b0(unsigned int *param_1)
       else {
         temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
         if (temp_v1 == 2) {
-          temp_v1 = FUN_002973d8();
+          temp_v1 = messageMainGetChoiceResult();
           if (temp_v1 != 0) {
             if (temp_v1 == 1) {
               param_1[2] = 2;
@@ -244,10 +244,10 @@ void FUN_003923b0(unsigned int *param_1)
     }
   }
   else if ((*param_1 & 0x2000) != 0) {
-    temp_v1 = FUN_0026ee68(0x10);
+    temp_v1 = buttonHelpHasEnabledEntryForId(0x10);
     if ((temp_v1 != 0) ||
        ((((*param_1 & 0x2000) != 0 && (*puVar2 != 0xffffffff)) &&
-        (temp_v1 = FUN_0029d65c((int)(short)*puVar2), temp_v1 == 6)))) {
+        (temp_v1 = ifTouchGetSelectionModeForRegion((int)(short)*puVar2), temp_v1 == 6)))) {
       eventQueueAddUniqueIfValid(0x100016d);
       if ((*param_1 & 0x1000) != 0) {
         *puVar7 = 2;
@@ -260,7 +260,7 @@ void FUN_003923b0(unsigned int *param_1)
       param_1[2] = 4;
       return;
     }
-    temp_v1 = FUN_0026ee68(0xb);
+    temp_v1 = buttonHelpHasEnabledEntryForId(0xb);
     if (temp_v1 != 0) {
       eventQueueAddUniqueIfValid(0x100016d);
       if ((*param_1 & 0x1000) != 0) {

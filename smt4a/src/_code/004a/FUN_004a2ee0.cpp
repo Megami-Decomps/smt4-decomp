@@ -1,48 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a2ee0` (_code @ 0x4a2ee0, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads the cursor through r0 and tests `visible` with its own ldrsb/beq; armcc folds it into the previous test as ldrbne/cmpne. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00163aa4(int);
-int FUN_002c8538(int);
-int FUN_0033449c(int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
+/* The cursor sprite embedded at 0x5E8 of the owner. */
+typedef struct CursorSprite {
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 visible;
+    /* 0x8B */ u8 unk8B;
+} CursorSprite;
 
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_002c8538. */
-extern int FUN_002e19f8(void);
-/* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: pointConvertToFloat. */
-extern int utilityReturnSuccess(int);
+typedef struct CursorOwner {
+    /* 0x0000 */ u8 unk0000[0x14];
+    /* 0x0014 */ u32 nextState;
+    /* 0x0018 */ u32 nextStep;
+    /* 0x001C */ u8 unk001C[0x7A];
+    /* 0x0096 */ u8 unk0096[0x32];
+    /* 0x00C8 */ u8 position[0x520];
+    /* 0x05E8 */ CursorSprite cursor;
+    /* 0x0674 */ u8 unk0674[0xA200];
+    /* 0xA874 */ u16 mode;
+} CursorOwner;
 
+void FUN_00163aa4(CursorSprite *sprite, f32 rate);
+s32 vec2GetXInt(CursorSprite *sprite);
+s32 vec2GetYInt(CursorSprite *sprite);
+void pointConvertToFloat(void *point, s32 x, s32 y);
+s32 FUN_0026c3a0(void);
+s32 FUN_002e19f8(void);
+s32 utilityReturnSuccess(void *object);
+void FUN_002c8538(s32 value);
+void FUN_0033449c(s32 value);
 
-void FUN_004a2ee0(int param_1)
-
+/* Enters mode 9: updates the cursor sprite, copies its position, and switches to state 14 when the cursor is up. */
+void FUN_004a2ee0(CursorOwner *owner)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_1 + 0x5e8;
-  *(unsigned short *)(param_1 + 0xa874) = 9;
-  FUN_00163aa4(temp_v2);
-  temp_v0 = vec2GetYInt(temp_v2);
-  temp_v1 = vec2GetXInt(temp_v2);
-  pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
-  temp_v2 = FUN_0026c3a0();
-  if ((((temp_v2 != 0) && (*(char *)(param_1 + 0x672) != '\0')) &&
-      (temp_v2 = FUN_002e19f8(), temp_v2 != 0)) && (temp_v2 = utilityReturnSuccess(param_1 + 0x96), temp_v2 == 0)) {
+    CursorSprite *cursor = &owner->cursor;
+    owner->mode = 9;
+    FUN_00163aa4(cursor, 1.0f);
+    pointConvertToFloat(owner->position, vec2GetXInt(cursor), vec2GetYInt(cursor));
+    if (FUN_0026c3a0() == 0) {
+        return;
+    }
+    if (cursor->visible == 0) {
+        return;
+    }
+    if (FUN_002e19f8() == 0) {
+        return;
+    }
+    if (utilityReturnSuccess(owner->unk0096) != 0) {
+        return;
+    }
     FUN_002c8538(0);
     FUN_0033449c(0);
-    *(unsigned int *)(param_1 + 0x14) = 0xe;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
+    owner->nextState = 14;
+    owner->nextStep = 0;
 }
 
 } /* extern "C" */

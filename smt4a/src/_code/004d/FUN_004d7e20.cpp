@@ -1,49 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d7e20` (_code @ 0x4d7e20, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r0, [pc, #140] differs from recovered ldr r0, [pc, #136]. */
+#include "common.h"
 
-extern "C" {
+namespace {
 
-int asdMemFree(void);
-int FUN_00275bc8(int, unsigned int);
+struct AocMainView {
+    u8 unk00[0x754]; // 0x000
+    u32 unk754;     // 0x754
+};
 
-extern int g_aocMain; /* 0x570260 */
+struct AocResultView {
+    u8 unk00[0x108]; // 0x000
+    u32 unk108;     // 0x108
+};
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00275bc8. */
+struct AocRequestView {
+    u32 status;            // 0x00
+    u32 unk04;             // 0x04
+    void* unk08;           // 0x08
+    void* unk0C;           // 0x0C
+    void* unk10;           // 0x10
+    AocResultView* result; // 0x14
+};
 
-
-unsigned int FUN_004d7e20(unsigned int *param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = *(unsigned int *)(g_aocMain + 0x754);
-  *(unsigned int *)(g_aocMain + 0x754) = temp_v1 & 0xffffff8f;
-  if ((temp_v1 & 0x10) != 0) {
-    *param_1 = 1;
-    if (param_1[2] != 0) {
-      asdMemFree();
-      param_1[2] = 0;
-    }
-    if (param_1[3] != 0) {
-      asdMemFree();
-      param_1[3] = 0;
-    }
-    if (param_1[4] != 0) {
-      asdMemFree();
-      param_1[4] = 0;
-    }
-    return 0;
-  }
-  temp_v0 = param_1[4];
-  FUN_00275bc8(temp_v0,param_1[3]);
-  param_1[5] = temp_v0;
-  *(unsigned int *)(temp_v0 + 0x108) = 2;
-  *param_1 = 0;
-  return 0;
 }
 
-} /* extern "C" */
+extern "C" {
+extern AocMainView* g_aocMain;
+void asdMemFree(void* allocation);
+AocResultView* FUN_00275bc8(void* storage, void* source);
+
+// Consume completion flags, releasing failed requests or recording the constructed result.
+u32 FUN_004d7e20(AocRequestView* request)
+{
+    const u32 flags = g_aocMain->unk754;
+    g_aocMain->unk754 = flags & ~0x70u;
+
+    if ((flags & 0x10u) >> 4) {
+        request->status = 1;
+        if (request->unk08) {
+            asdMemFree(request->unk08);
+            request->unk08 = 0;
+        }
+        if (request->unk0C) {
+            asdMemFree(request->unk0C);
+            request->unk0C = 0;
+        }
+        if (request->unk10) {
+            asdMemFree(request->unk10);
+            request->unk10 = 0;
+        }
+        return 0;
+    }
+
+    AocResultView* result = FUN_00275bc8(request->unk10, request->unk0C);
+    request->result = result;
+    result->unk108 = 2;
+    request->status = 0;
+    return 0;
+}
+}

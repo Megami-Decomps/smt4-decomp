@@ -1,41 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ccf7c` (_code @ 0x1ccf7c, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Packet cursor increments use different registers and the tail count encoding uses an immediate subtraction. */
+#include "common.h"
 
 extern "C" {
+void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-int rt_memcpy_w(...);
-
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int *
-FUN_001ccf7c(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int *param_4,unsigned int param_5)
-
+/* Appends command packets of at most 128 values, padding each packet to an even word count. */
+u32 *FUN_001ccf7c(u32 unused, u32 *commands, u32 header, const u32 *values, u32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  for (; param_5 >= 0x81; param_5 = param_5 - 0x80) {
-    *param_2 = *param_4;
-    param_2[1] = param_3 | 0x7ff0000;
-    rt_memcpy_w(param_2 + 2,param_4 + 1,0x1fc);
-    param_2[0x81] = 0xead0fead;
-    param_4 = param_4 + 0x80;
-    param_2 = param_2 + 0x82;
-  }
-  *param_2 = *param_4;
-  puVar2 = param_2 + 2;
-  param_2[1] = (param_5 * 0x100000 - 0x100000) | param_3 | 0xf0000;
-  rt_memcpy_w(puVar2,param_4 + 1,param_5 * 4 - 4);
-  puVar2 = puVar2 + param_5;
-  puVar1 = puVar2 + -1;
-  if ((param_5 & 1) == 0) {
-    puVar2[-1] = 0xead0fead;
-    puVar1 = puVar2;
-  }
-  return puVar1;
+    for (;;) {
+        *commands++ = *values++;
+        if (count <= 128) {
+            *commands++ = ((count - 1) << 20) | header | 0xF0000;
+            rt_memcpy_w(commands, values, count * sizeof(u32) - sizeof(u32));
+            commands += count - 1;
+            if ((count & 1) == 0) {
+                *commands++ = 0xEAD0FEAD;
+            }
+            return commands;
+        }
+        *commands++ = header | 0x07FF0000;
+        rt_memcpy_w(commands, values, 127 * sizeof(u32));
+        commands += 127;
+        *commands++ = 0xEAD0FEAD;
+        values += 127;
+        count -= 128;
+    }
 }
-
-} /* extern "C" */
+}

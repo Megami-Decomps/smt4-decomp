@@ -37,7 +37,7 @@ extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
@@ -133,7 +133,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
           *(unsigned char *)(temp_v4 + 0x40) = 1;
         }
         else {
-          temp_v3 = FUN_002973d8();
+          temp_v3 = messageMainGetChoiceResult();
           if (temp_v3 != 0) {
             if (temp_v3 == 1) {
               *(unsigned char *)(temp_v4 + 0x40) = 1;
@@ -169,7 +169,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
         }
         return 0;
       }
-      temp_v3 = FUN_002973d8();
+      temp_v3 = messageMainGetChoiceResult();
       if (temp_v3 == 0) {
         buttonHelpSetPreset(0x3c);
         temp_v3 = FUN_002e1afc();

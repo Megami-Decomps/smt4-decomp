@@ -5,7 +5,7 @@
 struct FlaggedEntry;
 
 extern "C" {
-u8 FUN_0029d65c(s32);
+u8 ifTouchGetSelectionModeForRegion(s32);
 u32 FUN_0029d644(const FlaggedEntry *);
 s32 FUN_0028cfbc(FlaggedEntry *);
 s32 FUN_0029e93c(FlaggedEntry *);
@@ -21,9 +21,9 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
                   s32 alternateAxis, s32 notify)
 {
     u32 result = 0;
-    FUN_0029d65c((s16)secondAction);
-    FUN_0029d65c((s16)thirdAction);
-    FUN_0029d65c((s16)firstAction);
+    ifTouchGetSelectionModeForRegion((s16)secondAction);
+    ifTouchGetSelectionModeForRegion((s16)thirdAction);
+    ifTouchGetSelectionModeForRegion((s16)firstAction);
     bool special = false;
     s32 selected = -1;
     s32 count = FUN_0029d644(owner);
@@ -31,7 +31,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
         if (alternateAxis)
             count = FUN_0028cfbc(owner);
         for (s32 index = 0; index < count; ++index) {
-            u8 state = FUN_0029d65c(actions[index]);
+            u8 state = ifTouchGetSelectionModeForRegion(actions[index]);
             if (state == 6) {
                 special = true;
                 break;

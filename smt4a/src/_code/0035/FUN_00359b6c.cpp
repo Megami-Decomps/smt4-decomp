@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(int *, unsigned char *);
 int dataTable04FindById(void);
 int battleAttributeFormatName(int *, unsigned int);
-int FUN_00230c1c(int *, unsigned int);
+int skillFormatTargetLabel(int *, unsigned int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_003180c4(int, int *);
 int FUN_0034a290(void);
@@ -26,7 +26,7 @@ extern unsigned int FUN_0016a0e8(void);
 extern int idIsAbove400(int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: FUN_00230c1c. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0034a290. */
@@ -65,7 +65,7 @@ void FUN_00359b6c(int param_1)
       dataTable04FindById();
       battleAttributeFormatName(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&temp_v3);
-      FUN_00230c1c(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);
+      skillFormatTargetLabel(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);
       FUN_003180c4(0x25,&temp_v3);
     }
     temp_v3 = 3;

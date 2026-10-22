@@ -7,16 +7,14 @@ typedef struct State568 {
     /* 0x568 */ s32 state;
 } State568;
 
-typedef struct StateRef568 {
-    /* 0x00 */ State568 *obj;
-} StateRef568;
 
 extern void event3dOpeningCreate(void);
+extern State568 *g_event3dOpening;
 
-u32 stateRef568IsState2(StateRef568 *ref)
+u32 stateRef568IsState2(void)
 {
-    if (ref->obj != NULL) {
-        if (ref->obj->state == 2) {
+    if (g_event3dOpening != NULL) {
+        if (g_event3dOpening->state == 2) {
             return 1;
         }
     } else {

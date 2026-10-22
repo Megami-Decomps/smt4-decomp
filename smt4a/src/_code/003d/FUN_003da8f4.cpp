@@ -1,46 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003da8f4` (_code @ 0x3da8f4, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e26ac(void);
+/* Data table 15 entry: only the fields this unit reads are known. */
+typedef struct DataTable15Entry {
+    u8 id;           /* 0x00 */
+    u8 group;        /* 0x01 */
+    u8 unk02[0x54];
+    u16 gameFlag;    /* 0x56: required game flag, 0 for none */
+    u16 flagBit;     /* 0x58: required flag bit, 0 for none */
+} DataTable15Entry;
 
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_002e26ac. */
-extern unsigned char *dataTable15GetEntry(unsigned int);
-extern int gameDataFlagTestBit(void);
+u32 FUN_002e26ac(void);
+DataTable15Entry *dataTable15GetEntry(u32 index);
+s32 gameFlagIsSet(u32 flag);
+s32 gameDataFlagTestBit(u32 bit);
 
-
-unsigned char FUN_003da8f4(unsigned int param_1,int param_2)
-
+/* Returns the id of the `index`-th unlocked entry of `group` (0 when there are fewer). */
+u8 FUN_003da8f4(u32 group, s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  temp_v0 = param_1;
-  FUN_002e26ac();
-  temp_v2 = 0;
-  if (temp_v2 < temp_v0) {
-    do {
-      puVar2 = (unsigned char *)dataTable15GetEntry(temp_v2);
-      if ((((puVar2 != (unsigned char *)0x0) && ((unsigned char)puVar2[1] == param_1)) &&
-          ((*(short *)(puVar2 + 0x56) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
-         ((*(short *)(puVar2 + 0x58) == 0 || (temp_v1 = gameDataFlagTestBit(), temp_v1 != 0)))) {
-        if (temp_v3 == param_2) {
-          return *puVar2;
+    u8 result = 0;
+    s32 found = 0;
+    u32 count = FUN_002e26ac();
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        DataTable15Entry *entry = dataTable15GetEntry(i);
+
+        if (entry != NULL && entry->group == group
+            && (entry->gameFlag == 0 || gameFlagIsSet(entry->gameFlag))
+            && (entry->flagBit == 0 || gameDataFlagTestBit(entry->flagBit))) {
+            if (found == index) {
+                result = entry->id;
+                break;
+            }
+            found++;
         }
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < temp_v0);
-  }
-  return 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -21,7 +21,7 @@ int FUN_002bf810(int);
 int FUN_002bff50(void);
 int FUN_002dfea4(void);
 int mapIfResetCounter(void);
-int FUN_002eb184(void);
+int naviMainStartStateTimer(void);
 int naviRefreshMainBlock(void);
 int FUN_002fb988(int);
 int VectorSignedToFloat(int, int);
@@ -73,7 +73,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 extern int FUN_002c8684(unsigned int);
 /* Supplied declaration required: FUN_002dfea4. */
 /* Supplied declaration required: mapIfResetCounter. */
-/* Supplied declaration required: FUN_002eb184. */
+/* Supplied declaration required: naviMainStartStateTimer. */
 /* Supplied declaration required: naviRefreshMainBlock. */
 /* Supplied declaration required: FUN_002fb988. */
 extern short __aeabi_idivmod(int, int);
@@ -382,7 +382,7 @@ LAB_00264b84:
       return;
     case 5:
       FUN_002dfea4();
-      FUN_002eb184();
+      naviMainStartStateTimer();
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;

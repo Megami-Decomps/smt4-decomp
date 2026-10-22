@@ -28,7 +28,7 @@ extern int FUN_0022fd80(int, int);
 /* Supplied declaration required: FUN_0034a290. */
 extern int playerHasFlagBit(unsigned int);
 extern int actorIsActive(void);
-extern int FUN_003e4cb4(unsigned int);
+extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 extern int bitsAt60Test(int, unsigned int);
 extern int dataTable9Type3GetClamped(unsigned short, int);
@@ -114,7 +114,7 @@ void FUN_00331c60(int *param_1)
     FUN_003e503c();
     temp_v1 = actorIsActive();
     if (temp_v1 != 0) {
-      temp_v1 = FUN_003e4cb4(temp_v6);
+      temp_v1 = partySlotMatchesSelected(temp_v6);
       temp_v2 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v6 + 100),temp_v9);
       temp_v6 = (unsigned int)(temp_v8 * temp_v2) / 100;
       if ((temp_v6 == 0) && (temp_v8 != 0)) {

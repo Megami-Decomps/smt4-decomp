@@ -1,10 +1,10 @@
-#include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-int FUN_002a4584(u32 a, u8 *buffer, u32 b, int c, int d, int e, int f);
+int FUN_002a4584(AocDisplay *display, u8 *buffer, u32 b, int c, int d, int e, int f);
 int memClear(u8 *ptr, int size);
-extern u32 g_aocDisplay; /* 0x433130 */
+extern AocDisplay *g_aocDisplay; /* 0x433130 */
 extern int FUN_002a6e7c(u32 a, u32 b, u32 c, u8 *buffer);
 
 void FUN_00289de4(u32 a, u32 b, u32 c)

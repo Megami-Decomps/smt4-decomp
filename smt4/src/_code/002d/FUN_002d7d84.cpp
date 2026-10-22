@@ -1,53 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d7d84` (_code @ 0x2d7d84, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: in the push, retail reuses r3 for the new top's address after loading the old top; armcc computes it into ip beforehand. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int effMenuCallHandler(int, int);
-int FUN_002c1b64(int, int);
+extern RenderCtx *g_titleScene;
+u32 FUN_002c5d80(u32 slot, u32 flags);
+void FUN_002c1b64(RenderCtx *context, s32 value);
+void effMenuCallHandler(s32 handler, s32 value);
 
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: effMenuCallHandler. */
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int);
-
-
+/* Runs effect-menu handler 3 under render state FUN_002c5d80(1, 1) pushed on the title scene's first stack. */
 void FUN_002d7d84(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1);
-  piVar5 = (int *)(temp_v0 + 0x124c);
-  temp_v2 = *piVar5;
-  temp_v3 = piVar5[temp_v2 + 2];
-  *piVar5 = temp_v2 + 1;
-  piVar5[temp_v2 + 3] = temp_v1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v3 != temp_v1) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  FUN_002c1b64(g_titleScene,0);
-  effMenuCallHandler(3,1);
-  temp_v0 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x124c);
-  temp_v1 = *piVar5;
-  temp_v2 = piVar5[temp_v1 + 2];
-  *piVar5 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  return;
+    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 1));
+    FUN_002c1b64(g_titleScene, 0);
+    effMenuCallHandler(3, 1);
+    renderStackPop(&g_titleScene->stackA);
 }
 
 } /* extern "C" */

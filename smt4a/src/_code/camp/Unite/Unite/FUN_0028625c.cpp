@@ -8,7 +8,7 @@ int qsort(...);
 int FUN_00184310(void);
 int asdMemFree(...);
 int FUN_00203b40(...);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_0031f718(...);
 int gameFlagSetValue(...);
 
@@ -90,7 +90,7 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: gameDataCopySaveEntry. */
 extern int FUN_0026140c(void);
 extern int FUN_002a4b28(unsigned short);
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int computeCountLimit(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f718. */
@@ -689,7 +689,7 @@ LAB_0028727c:
           FUN_00203b40(temp_v29,*temp_v30,1,4);
           if (param_1[0x100] != 2) {
             FUN_0031f718((int)(short)temp_v34[0x28],0);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
           }
           piVar9 = g_unite;
           if ((char)g_unite[0x108] != '\x02') {

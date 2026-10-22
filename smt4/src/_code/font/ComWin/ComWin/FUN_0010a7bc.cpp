@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002bee58(...);
-int FUN_002beed0(...);
+int uiSpriteInitializeState(...);
 int paramsInit(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
@@ -36,7 +36,7 @@ extern unsigned char DAT_0040384c; /* 0x40384c */
 extern unsigned int *g_comWin; /* 0x43e0f8 */
 
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002beed0. */
+/* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -67,9 +67,9 @@ void FUN_0010a7bc(void)
   puVar1 = g_comWin;
   drawParameterBlockClear(g_comWin + 7);
   paramsInit(puVar1 + 7,0,0,&DAT_004037ec,0x30,&DAT_0040381c,0x30,0,0,&DAT_0040384c,0x118);
-  FUN_002beed0(puVar1 + 0xf,0xe,0xffffffff,2,puVar1 + 7,1);
+  uiSpriteInitializeState(puVar1 + 0xf,0xe,0xffffffff,2,puVar1 + 7,1);
   FUN_002bee58(puVar1 + 0xf,0);
-  FUN_002beed0(puVar1 + 0x32,0xe,0xffffffff,3,puVar1 + 7,1);
+  uiSpriteInitializeState(puVar1 + 0x32,0xe,0xffffffff,3,puVar1 + 7,1);
   FUN_002bee58(puVar1 + 0x32,2);
   return;
 }

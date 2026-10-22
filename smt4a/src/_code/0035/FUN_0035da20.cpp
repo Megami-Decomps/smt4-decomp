@@ -1,5 +1,7 @@
 /* NON_MATCHING: compiler caches the filter-array address early and preserves the source in a different register. */
-#include "shard/W4_W4Match5_StatusDown.h"
+#include "status/StatusDown.h"
+extern "C" StatusDownStateA *g_statusDown;
+
 
 struct StatusDownFilterView {
     u8 unk000[0x5bc]; // 0x000

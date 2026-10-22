@@ -20,7 +20,7 @@ typedef struct SkinObject {
 
 extern int FUN_00187a84(SkinObject *obj, void *a, void *b, Mtx44 *bind);
 extern int FUN_00187d90(u32 handle, void *b);
-extern void FUN_0018a9bc(Mtx44 *mtx);
+extern void mathCopyIdentityMatrix(Mtx44 *mtx);
 
 /* Whether `mtx` is the identity matrix. */
 static __inline int mtxIsIdentity(const Mtx44 *mtx)
@@ -37,8 +37,8 @@ void skinObjectUpdateMatrices(SkinObject *obj)
     if (obj->dirty == 0 && mtxIsIdentity(&obj->bind)) {
         return;
     }
-    FUN_0018a9bc(&obj->bind);
-    FUN_0018a9bc(&obj->inverse);
+    mathCopyIdentityMatrix(&obj->bind);
+    mathCopyIdentityMatrix(&obj->inverse);
     FUN_00187a84(obj, obj->skinB, obj->skinA, &obj->bind);
     FUN_00187d90(obj->handle, obj->skinC);
     obj->dirty = 0;

@@ -1,77 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003da010` (_code @ 0x3da010, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: slot address i * 0x8c is built in r0 throughout; retail puts the i * 35 step in r1 */
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
 
-int FUN_0024679c(void);
-int FUN_00249e54(unsigned int, char *);
-int btlGetMainState(void);
-int btlEffectLoadVersionedResources(int);
-int FUN_003dbc1c(int);
-int btlEffectLoadSecondaryResources(int);
-int battleLoadVersionEffectResources(int);
+void *btlGetMainState(void);
+s32 FUN_00293230(void);
+u8 keyedRecordRegisterName(u8 *work);
+u8 FUN_00249e54(u8 state, u8 *name);
+void FUN_003dbc1c(BattleVersionResources *resources);
+void btlEffectLoadVersionedResources(BattleVersionResources *resources);
+void btlEffectLoadSecondaryResources(BattleVersionResources *resources);
+void battleLoadVersionEffectResources(BattleVersionResources *resources);
+void FUN_0024679c(void);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0024679c. */
-/* Supplied declaration required: FUN_00249e54. */
-extern unsigned int keyedRecordRegisterName(int);
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: btlEffectLoadVersionedResources. */
-/* Supplied declaration required: FUN_003dbc1c. */
-/* Supplied declaration required: btlEffectLoadSecondaryResources. */
-/* Supplied declaration required: battleLoadVersionEffectResources. */
-
-
-void FUN_003da010(int param_1)
-
+/* Registers every "VER"-named resource slot, then loads the battle's versioned effect resources. */
+void FUN_003da010(BattleVersionResources *resources)
 {
-/* irregular: 7 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  char *pcVar5;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  
-  btlGetMainState();
-  temp_v1 = FUN_00293230();
-  if (temp_v1 != 0) {
-    return;
-  }
-  temp_v1 = 0;
-  do {
-    temp_v2 = param_1 + temp_v1 * 0x8c;
-    pcVar5 = *(char **)(temp_v2 + 0x25c4);
-    temp_v0 = *pcVar5;
-    temp_v4 = temp_v0 == 'V';
-    if (temp_v4) {
-      temp_v0 = pcVar5[1];
+    s32 i;
+
+    btlGetMainState();
+    if (FUN_00293230() != 0) {
+        return;
     }
-    temp_v5 = temp_v4 && temp_v0 == 'E';
-    if (temp_v4 && temp_v0 == 'E') {
-      temp_v5 = pcVar5[2] == 'R';
+    for (i = 0; i < 11; i++) {
+        BattleVersionResourceSlot *slot = &resources->slots[i];
+        u8 *name = slot->data;
+
+        if (name[0] == 'V' && name[1] == 'E' && name[2] == 'R') {
+            slot->state = keyedRecordRegisterName(slot->work);
+            slot->state = FUN_00249e54(slot->state, name);
+        }
     }
-    if (temp_v5) {
-      temp_v3 = keyedRecordRegisterName(temp_v2 + 0x25c8);
-      *(char *)(temp_v2 + 0x25c0) = (char)temp_v3;
-      FUN_00249e54(temp_v3,pcVar5);
-      *(char *)(temp_v2 + 0x25c0) = (char)temp_v3;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0xb);
-  FUN_003dbc1c(param_1);
-  btlEffectLoadVersionedResources(param_1);
-  btlEffectLoadSecondaryResources(param_1);
-  battleLoadVersionEffectResources(param_1);
-  FUN_0024679c();
-  return;
+    FUN_003dbc1c(resources);
+    btlEffectLoadVersionedResources(resources);
+    btlEffectLoadSecondaryResources(resources);
+    battleLoadVersionEffectResources(resources);
+    FUN_0024679c();
 }
 
 } /* extern "C" */

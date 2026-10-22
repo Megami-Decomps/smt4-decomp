@@ -1,52 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e6fb0` (_code @ 0x4e6fb0, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one register: retail keeps the picked index in r3 across the btlUnitGet call (as if the callee were known to preserve r3); armcc here uses r5. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+namespace {
+struct BattleActionMasks {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ u64 targetable;
+};
+
+struct BattleAiContext {
+    /* 0x00 */ BtlMainStateA *state;
+};
+
+struct BattleAiUnit {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u8 targeted[1]; /* by selection index */
+};
+}
 
 extern "C" {
 
-extern unsigned int DAT_00571190; /* 0x571190 */
-extern unsigned int DAT_00571194; /* 0x571194 */
+extern BattleActionMasks g_btlAction;
+s32 FUN_004e9ae8(BattleAiContext *context, s32 *candidates, s32 count, u32 mode);
+BattleAiUnit *btlUnitGet(BattleAiContext *context);
 
-extern int FUN_004e9ae8(int *, int *, int, unsigned int);
-extern int btlUnitGet(int *);
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-void FUN_004e6fb0(int *param_1)
-
+/* Mark as targeted one of the targetable entries with the lowest HP seen so far in entry order. */
+void FUN_004e6fb0(BattleAiContext *context)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  short *psVar4;
-  int temp_v1;
-  unsigned int temp_v2;
-  int aiStack_1dc [111];
-  
-  temp_v0 = 0;
-  temp_v2 = 100000000;
-  puVar1 = *(unsigned int **)(*param_1 + 0x1ffc);
-  temp_v1 = 0x6d;
-  puVar2 = puVar1 + 0x96;
-  psVar4 = (short *)((int)puVar1 + 0x6e);
-  do {
-    if (((*puVar1 & DAT_00571190) != 0 || (puVar1[1] & DAT_00571194) != 0) &&
-       ((int)*puVar2 <= (int)temp_v2)) {
-      aiStack_1dc[temp_v0 + 1] = (int)*psVar4;
-      temp_v2 = *puVar2;
-      temp_v0 = temp_v0 + 1;
+    s32 candidates[110];
+    s32 count = 0;
+    s32 lowestHp = 100000000;
+    BtlCombatantEntryA *entry = context->state->entries;
+
+    for (s32 i = 0; i < 109; ++i, ++entry) {
+        if ((entry->flags & g_btlAction.targetable) && entry->hp <= lowestHp) {
+            candidates[count++] = entry->indexView.selectionIndex;
+            lowestHp = entry->hp;
+        }
     }
-    temp_v1 = temp_v1 - 1;
-    puVar1 = puVar1 + 0x102;
-    puVar2 = puVar2 + 0x102;
-    psVar4 = psVar4 + 0x204;
-  } while (temp_v1 != 0);
-  temp_v0 = FUN_004e9ae8(param_1,aiStack_1dc + 1,temp_v0,1);
-  temp_v1 = btlUnitGet(param_1);
-  *(unsigned char *)(aiStack_1dc[temp_v0] + temp_v1 + 0x38) = 1;
-  return;
+    s32 pick = FUN_004e9ae8(context, candidates, count, 1);
+    btlUnitGet(context)->targeted[candidates[pick - 1]] = 1;
 }
 
 } /* extern "C" */

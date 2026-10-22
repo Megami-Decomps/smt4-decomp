@@ -12,9 +12,9 @@ int FUN_002d22c0(int);
 int FUN_0048821c(int, unsigned int);
 int FUN_0048a378(int);
 int FUN_0048d248(int, unsigned int);
-int FUN_00492aa0(int, unsigned int);
+int naviMainSetCurrentMap(int, unsigned int);
 int FUN_00492ac8(int, int);
-int FUN_00492c5c(int);
+int naviMainGetRequestedMap(int);
 int pointConvertToFloat(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -35,9 +35,9 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_0048821c. */
 /* Supplied declaration required: FUN_0048a378. */
 /* Supplied declaration required: FUN_0048d248. */
-/* Supplied declaration required: FUN_00492aa0. */
+/* Supplied declaration required: naviMainSetCurrentMap. */
 /* Supplied declaration required: FUN_00492ac8. */
-/* Supplied declaration required: FUN_00492c5c. */
+/* Supplied declaration required: naviMainGetRequestedMap. */
 extern unsigned int FUN_00492c84(int);
 /* Supplied declaration required: pointConvertToFloat. */
 extern int NaviMain_GetCurrentMap(void);
@@ -95,10 +95,10 @@ void FUN_0048bad0(int param_1)
     *(unsigned int *)(param_1 + 0x14) = 0;
     temp_v0 = param_1 + 0x4cc;
     temp_v4 = NaviMain_GetCurrentMap();
-    temp_v1 = FUN_00492c5c(temp_v0);
+    temp_v1 = naviMainGetRequestedMap(temp_v0);
     if ((temp_v4 != temp_v1) || (DAT_005f1a5c != '\0')) {
-      temp_v2 = FUN_00492c5c(temp_v0);
-      FUN_00492aa0(temp_v0,temp_v2);
+      temp_v2 = naviMainGetRequestedMap(temp_v0);
+      naviMainSetCurrentMap(temp_v0,temp_v2);
       FUN_00492ac8(temp_v0,0);
       FUN_0048821c(param_1,temp_v2);
     }

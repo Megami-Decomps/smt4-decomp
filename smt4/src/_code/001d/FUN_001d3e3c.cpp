@@ -15,9 +15,9 @@ int FUN_0026fa30(...);
 int FUN_0026faa4(void);
 int FUN_0026fe0c(void);
 int FUN_0026ff54(void);
-int FUN_00270028(...);
+int frameTexApplyMode(...);
 int navigationRequestFieldMode(...);
-int FUN_00276968(...);
+int naviMainApplySetting(...);
 int mapCompleteGroup(...);
 int FUN_00287c34(...);
 int FUN_00298d50(...);
@@ -108,7 +108,7 @@ int FUN_003966a4(...);
 int FUN_00396a98(...);
 
 int FUN_001d34a8(...);
-int FUN_001fa800(void);
+int mapSelectNearbyDeferredModel(void);
 int FUN_00264794(void);
 int mapTriggerMarkTable23Matches(...);
 int FUN_00275dec(void);
@@ -131,7 +131,7 @@ int FUN_00265180(void);
 int FUN_00265b78(...);
 int FUN_00265bf8(...);
 int FUN_00265f50(...);
-int FUN_002664d8(...);
+int entryListCollectMatches(...);
 int FUN_002666b0(void);
 int FUN_00266a2c(void);
 int FUN_0027052c(void);
@@ -349,7 +349,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001a9104. */
 /* Supplied declaration required: FUN_001d34a8. */
 /* Supplied declaration required: regionFindRecord. */
-/* Supplied declaration required: FUN_001fa800. */
+/* Supplied declaration required: mapSelectNearbyDeferredModel. */
 /* Supplied declaration required: FUN_001fb3a0. */
 /* Supplied declaration required: FUN_0021bc04. */
 /* Supplied declaration required: cameraRegistryRemove. */
@@ -370,7 +370,7 @@ extern int FUN_00264548(void);
 /* Supplied declaration required: FUN_00265b78. */
 /* Supplied declaration required: FUN_00265bf8. */
 /* Supplied declaration required: FUN_00265f50. */
-/* Supplied declaration required: FUN_002664d8. */
+/* Supplied declaration required: entryListCollectMatches. */
 /* Supplied declaration required: FUN_00266584. */
 /* Supplied declaration required: objSetBaseAndValue. */
 /* Supplied declaration required: FUN_002666b0. */
@@ -383,7 +383,7 @@ extern int FUN_00264548(void);
 /* Supplied declaration required: FUN_0026fe0c. */
 /* Supplied declaration required: FUN_0026ff54. */
 /* Supplied declaration required: mapTableRelease. */
-/* Supplied declaration required: FUN_00270028. */
+/* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_002700d0. */
 /* Supplied declaration required: slotPoolReleaseResources. */
 /* Supplied declaration required: mapStatesReleaseMarks. */
@@ -427,7 +427,7 @@ extern int FUN_00276348(unsigned int);
 /* Supplied declaration required: FUN_002764a8. */
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfSetMode1. */
-/* Supplied declaration required: FUN_00276968. */
+/* Supplied declaration required: naviMainApplySetting. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_00277b5c. */
 /* Supplied declaration required: FUN_00277d2c. */
@@ -484,7 +484,7 @@ extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_00297a00. */
 /* Supplied declaration required: FUN_00298d50. */
@@ -854,7 +854,7 @@ unsigned int FUN_001d3e3c(void)
   case 9:
     goto LAB_001d4774;
   case 10:
-    FUN_002664d8(puVar7 + 0x3b);
+    entryListCollectMatches(puVar7 + 0x3b);
     puVar7[4] = puVar7[4] + 1;
     FUN_002a04f0(0);
     puVar7[3] = puVar7[3] + 1;
@@ -1170,7 +1170,7 @@ unsigned int FUN_001d3e3c(void)
                         }
                       }
 LAB_001d58a0:
-                      FUN_001fa800();
+                      mapSelectNearbyDeferredModel();
                       if ((*(char *)(g_deferredMapModels + 0xe0c) != '\0') &&
                          ((temp_v6 = FUN_0027ee9c(), temp_v6 != 0 &&
                           (*(char *)(DAT_004474f4 + 0xb0) == '\0')))) {
@@ -2048,7 +2048,7 @@ LAB_001d6bd0:
       FUN_00273c54();
       FUN_00264444((LmapObj *)(puVar17 + 0x3b));
       objSetBaseAndValue(puVar17 + 0x3b,puVar17[0x10] - 100,puVar17[0x12]);
-      FUN_002664d8(puVar17 + 0x3b);
+      entryListCollectMatches(puVar17 + 0x3b);
     }
     FUN_002757a8();
     FUN_00266a2c();
@@ -2421,7 +2421,7 @@ LAB_001d6bd0:
     if (temp_v6 != 2) {
       return 0;
     }
-    temp_v6 = FUN_002973d8();
+    temp_v6 = messageMainGetChoiceResult();
     if (temp_v6 == 0) {
       DAT_0049f934 = 1;
       DAT_0049fb46 = 0;
@@ -2991,7 +2991,7 @@ LAB_001d6bd0:
     puVar7[3] = puVar7[3] + 1;
     break;
   case 0x54:
-    FUN_002664d8(puVar7 + 0x3b);
+    entryListCollectMatches(puVar7 + 0x3b);
     FUN_002a04f0(0);
     if (puVar7[0x2a7] != 0) {
       temp_v6 = 0;
@@ -3126,7 +3126,7 @@ LAB_001d884c:
     FUN_00266a2c();
     FUN_00264444((LmapObj *)(puVar7 + 0x3b));
     objSetBaseAndValue(puVar7 + 0x3b,puVar7[0x10] - 100,puVar7[0x12]);
-    FUN_002664d8(puVar7 + 0x3b);
+    entryListCollectMatches(puVar7 + 0x3b);
     puVar7[3] = puVar7[3] + 1;
     break;
   case 0x5b:
@@ -3146,7 +3146,7 @@ LAB_001d884c:
       FUN_002c29d8(1,10,0xff);
     }
     mapIfSetMode1();
-    FUN_00276968(0,8);
+    naviMainApplySetting(0,8);
     puVar17 = g_lmapMainState;
     if (g_lmapMainState[0x33] != 3) {
       g_lmapMainState[0x34] = 0;
@@ -3196,7 +3196,7 @@ joined_r0x001d8c24:
     break;
   case 0x5f:
     if (puVar7[4] == 0) {
-      FUN_00270028(4);
+      frameTexApplyMode(4);
     }
     temp_v6 = puVar7[4];
     puVar7[4] = temp_v6 + 1;
@@ -3564,7 +3564,7 @@ LAB_001d4774:
     mapDepartSetTarget(0xffffffff,0xffffffff);
     mapIfSetMode1();
   }
-  FUN_00276968(1,8);
+  naviMainApplySetting(1,8);
   if (g_gameState == 0x65) {
     mapCompleteGroup(0x10101003);
   }

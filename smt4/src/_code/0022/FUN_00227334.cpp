@@ -11,7 +11,7 @@ int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int communicationBeginTransition(int);
 int communicationSetResultPointer(void);
-void FUN_0026c7b8(const unsigned char* text);
+void comWinSetText(const unsigned char* text);
 int devilGetRecord(void);
 int textFormatBuffer(...);
 int FUN_002be650(unsigned int, int);
@@ -147,7 +147,7 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
     textFormatBuffer(temp_v6,&LAB_0022762c);
     communicationSetResultPointer();
   }
-  FUN_0026c7b8(temp_v6);
+  comWinSetText(temp_v6);
   communicationBeginTransition(0);
   return;
 }

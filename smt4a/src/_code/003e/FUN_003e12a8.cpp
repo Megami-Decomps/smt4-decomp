@@ -1,63 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e12a8` (_code @ 0x3e12a8, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail fills the id buffer with __aeabi_memset4 (built: __aeabi_memset), swaps r0/r1 for the added-id store and stores the request fields in source order */
+#include <string.h>
+#include "common.h"
 
 extern "C" {
 
-int __aeabi_memset4(unsigned int [43], int, unsigned int);
-int FUN_0039ba24(unsigned int [43], int, unsigned int);
-int aocLoaderUpdateRecords(unsigned int *, int);
-int uiEntriesReset(int);
-int uiInsertIdInFirstFreeSlot(int, int);
-int valueSlotsInsert(int, unsigned int);
+typedef struct AddedEntry {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 unk04[4];
+} AddedEntry;
 
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_0039ba24. */
-/* Supplied declaration required: aocLoaderUpdateRecords. */
-/* Supplied declaration required: uiEntriesReset. */
-/* Supplied declaration required: uiInsertIdInFirstFreeSlot. */
-extern int uiHasEntryId(int, unsigned int);
-/* Supplied declaration required: valueSlotsInsert. */
-extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
+typedef struct AocUiList {
+    /* 0x0000 */ u8 unk0000[0x1ec4];
+    /* 0x1EC4 */ u32 source;
+    /* 0x1EC8 */ u8 unk1ec8[0x2020 - 0x1ec8];
+    /* 0x2020 */ AddedEntry added[42];
+} AocUiList;
 
+typedef struct AocLoadRequest {
+    /* 0x00 */ u32 kind;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 count;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+} AocLoadRequest;
 
-void FUN_003e12a8(unsigned int *param_1,int param_2)
+void uiEntriesReset(AocUiList *list);
+s32 FUN_0039ba24(u32 *ids, s32 capacity, u32 source);
+s32 uiHasEntryId(AocUiList *list, u32 id);
+u32 FUN_00409fe8(u32 id, s32 a, s32 b);
+void valueSlotsInsert(AocUiList *list, u32 value);
+void uiInsertIdInFirstFreeSlot(AocUiList *list, s16 id);
+void aocLoaderUpdateRecords(AocLoadRequest *request, AocUiList *list);
 
+/* Rebuilds the list from its source's ids, adding each id it lacks, then requests a kind-11 record update for the added count. */
+void FUN_003e12a8(AocLoadRequest *request, AocUiList *list)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4 [43];
-  
-  puVar1 = temp_v4;
-  uiEntriesReset(param_2);
-  temp_v1 = *(unsigned int *)(param_2 + 0x1ec4);
-  __aeabi_memset4(temp_v4,0xa8,0xffffffff);
-  FUN_0039ba24(temp_v4,0x2a,temp_v1);
-  temp_v3 = 0;
-  temp_v2 = 0;
-  if (temp_v2 < (int)puVar1) {
-    do {
-      temp_v0 = uiHasEntryId(param_2,temp_v4[temp_v2]);
-      if (temp_v0 == 0) {
-        temp_v1 = FUN_00409fe8(temp_v4[temp_v2],1);
-        valueSlotsInsert(param_2,temp_v1);
-        *(unsigned int *)(param_2 + temp_v3 * 8 + 0x2020) = temp_v4[temp_v2];
-        uiInsertIdInFirstFreeSlot(param_2,(int)(short)temp_v4[temp_v2]);
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < (int)puVar1);
-  }
-  *param_1 = 0xb;
-  param_1[4] = 0;
-  param_1[2] = temp_v3;
-  param_1[3] = 0;
-  aocLoaderUpdateRecords(param_1,param_2);
-  return;
+    u32 ids[42];
+    u32 source;
+    s32 count;
+    s32 added;
+    s32 i;
+
+    uiEntriesReset(list);
+    source = list->source;
+    memset(ids, -1, sizeof(ids));
+    count = FUN_0039ba24(ids, 42, source);
+    added = 0;
+    for (i = 0; i < count; i++) {
+        if (!uiHasEntryId(list, ids[i])) {
+            valueSlotsInsert(list, FUN_00409fe8(ids[i], 1, 1));
+            list->added[added].id = ids[i];
+            uiInsertIdInFirstFreeSlot(list, (s16)ids[i]);
+            added++;
+        }
+    }
+    request->kind = 11;
+    request->unk10 = 0;
+    request->count = added;
+    request->unk0C = 0;
+    aocLoaderUpdateRecords(request, list);
 }
 
 } /* extern "C" */

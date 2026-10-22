@@ -1,49 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c3be8` (_code @ 0x3c3be8, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 0.0f z literal is loaded after the two integer-argument moves in retail (same scheduling miss as eventCommand_31BEBC). */
+#include "event/EventTaskRequest.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 kind, u32 bytes, u32 flags);
+void *FUN_0031ba34(u32 kind, EventTaskRequest *request, u8 mode, u8 enabled,
+                  f32 x, f32 y, f32 z, f32 scale);
+f32 scriptReadStackValueAsFloat(u32 index);
+s32 FUN_00162ea4(void);
+u32 scrGetArg(u32 index);
+void scrSetResult(EventTaskRequest *request);
 
-int asdMemoryAllocTracked(int, int, int, int, int);
-int FUN_00275b10(int);
-int FUN_0031ba34(int, int, int, int);
-int scrSetResult(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00275b10. */
-/* Supplied declaration required: FUN_0031ba34. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003c3be8(void)
-
+// Create a tracked request for the selected event task at the script's float arguments 1-2 with
+// scale argument 3, when task creation is permitted.
+u32 FUN_003c3be8(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  FUN_00275b10(1);
-  FUN_00275b10(2);
-  FUN_00275b10(3);
-  temp_v2 = 0;
-  temp_v1 = FUN_00162ea4();
-  if (temp_v1 == 0) {
-    temp_v2 = 0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,8,1);
-    FUN_0031ba34(temp_v0,temp_v2,0,1);
-    *(unsigned int *)(temp_v2 + 4) = temp_v0;
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    u8 kind = static_cast<u8>(scrGetArg(0));
+    f32 x = scriptReadStackValueAsFloat(1);
+    f32 y = scriptReadStackValueAsFloat(2);
+    f32 scale = scriptReadStackValueAsFloat(3);
+    EventTaskRequest *request = NULL;
+    if (FUN_00162ea4() == 0) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\eventCommand.cpp", 1612);
+        request = static_cast<EventTaskRequest *>(
+            asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventTaskRequest), 1));
+        request->task = FUN_0031ba34(kind, request, 0, 1, x, y, 0.0f, scale);
+    }
+    scrSetResult(request);
+    return 1;
 }
-
-} /* extern "C" */
+}

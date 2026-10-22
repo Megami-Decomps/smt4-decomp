@@ -1,55 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048d11c` (_code @ 0x48d11c, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc cross-jumps the state-0 flags store into the state-2 store; retail keeps
+ * both paths separate. */
+#include "common.h"
+
+/* An icon that slides into place along a tween. */
+struct SlideIcon {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ s32 state;
+    /* 0x00c */ u8 unk00c[4];
+    /* 0x010 */ u32 unk10_0 : 1;
+    /* 0x010 */ u32 hidden : 1;
+    /* 0x010 */ u32 unk10_2 : 22;
+    /* 0x010 */ u32 animating : 1;
+    /* 0x010 */ u32 unk10_25 : 7;
+    /* 0x014 */ u8 unk014[0x4bc];
+    /* 0x4d0 */ u8 position[0x14];
+    /* 0x4e4 */ u8 sprites[0x20];
+    /* 0x504 */ u8 tween[1];
+};
 
 extern "C" {
+void uiSpriteBankApplyPreset(void *sprites, s32 preset);
+s32 FUN_00163aa4(void *tween, f32 step);
+s32 vec2GetXInt(void *tween);
+s32 vec2GetYInt(void *tween);
+void pointConvertToFloat(void *point, s32 x, s32 y);
 
-int uiSpriteBankApplyPreset(int, int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_00163aa4(int);
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: pointConvertToFloat. */
-
-
-void FUN_0048d11c(int param_1)
-
+/* Steps the icon's slide-in: show it, follow the tween until it finishes, then stop animating. */
+void FUN_0048d11c(SlideIcon *icon)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 == 0) {
-    uiSpriteBankApplyPreset(param_1 + 0x4e4,0);
-    *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;
-    *(unsigned int *)(param_1 + 8) = 1;
-    return;
-  }
-  if (temp_v0 == 1) {
-    temp_v3 = param_1 + 0x504;
-    temp_v0 = FUN_00163aa4(temp_v3);
-    if (temp_v0 != 0) {
-      *(unsigned int *)(param_1 + 8) = 2;
+    if (icon->state == 0) {
+        uiSpriteBankApplyPreset(icon->sprites, 0);
+        icon->hidden = 0;
+        icon->animating = 1;
+        icon->state = 1;
+    } else if (icon->state == 1) {
+        void *tween = icon->tween;
+        if (FUN_00163aa4(tween, 1.0f) != 0) {
+            icon->state = 2;
+        }
+        s32 y = vec2GetYInt(tween);
+        pointConvertToFloat(icon->position, vec2GetXInt(tween), y);
+    } else if (icon->state == 2) {
+        icon->animating = 0;
     }
-    temp_v1 = vec2GetYInt(temp_v3);
-    temp_v2 = vec2GetXInt(temp_v3);
-    pointConvertToFloat(param_1 + 0x4d0,temp_v2,temp_v1);
-    return;
-  }
-  if (temp_v0 == 2) {
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfeffffff;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

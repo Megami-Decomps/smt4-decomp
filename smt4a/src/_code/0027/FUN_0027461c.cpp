@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cd4(void);
+int mathAngleDeltaDegrees(void);
 int mathPositionHeadingDegrees(void);
 int controllerSetDestination(int, int);
 int controllerSetRotationEulerDegrees(int);
@@ -14,7 +14,7 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapHakai; /* 0x581038 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
-/* Supplied declaration required: FUN_002b5cd4. */
+/* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
@@ -77,7 +77,7 @@ void FUN_0027461c(void)
             temp_v9 = (float)((unsigned long long)temp_v8 >> 0x20);
           }
           temp_v6 = temp_v7;
-          FUN_002b5cd4();
+          mathAngleDeltaDegrees();
           if ((temp_v7 <= -temp_v9) || (temp_v9 <= temp_v7)) {
             *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
           }

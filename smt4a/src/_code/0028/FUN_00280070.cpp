@@ -1,66 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00280070` (_code @ 0x280070, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the second perspective call addresses nearClip through r0 where retail uses r1. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "shard/S3GfxAnim.h"
+
+namespace {
+struct ScreenCamera {
+    u8 enabled;
+    u8 unk001[3];
+    BattleVector3 eye;
+    BattleVector3 target;
+    BattleVector3 up;
+    f32 fieldOfView;
+    f32 nearClip;
+    f32 farClip;
+    f32 aspect;
+    u8 unk038[0x70];
+    GfxTransform projection; // 0xa8
+    GfxTransform stereoProjection; // 0xe8
+    u8 unk128[0x30];
+    GfxTransform transposedProjection; // 0x158
+    u8 unk198[0x308];
+    u8 stereo[0x6c]; // 0x4a0
+}; // 0x50c
+}
 
 extern "C" {
+GfxTransform* FUN_0016fba0(GfxTransform*, f32 fieldOfView, f32 aspect, f32 nearClip, f32 farClip);
+void nn_math_ARMv6_MTX44PivotC_FAST(GfxTransform*, s32 mode);
+void nn_math_ARMv6_MTX44TransposeAsm(GfxTransform* output, const GfxTransform* input);
+void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void* stereo, const GfxTransform* frustum);
 
-int FUN_0016fba0(char *);
-int nn_math_ARMv6_MTX44PivotC_FAST(char *, int);
-int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
-int nn_ulcd_CTR_StereoCamera_SetBaseFrustum(char *, char *);
-
-typedef struct fn_00280070_arg1 fn_00280070_arg1;
-struct fn_00280070_arg1 {
-    unsigned char pad_0x0[0x8];
-    float field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x8];
-    float field_0x14; /* +0x14 */
-    float field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0xc];
-    float field_0x28; /* +0x28 */
-    float field_0x2c; /* +0x2c */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0016fba0. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
-/* Supplied declaration required: nn_ulcd_CTR_StereoCamera_SetBaseFrustum. */
-
-
-void FUN_00280070(char *param_1,fn_00280070_arg1 *param_2)
-
+/* Sets the camera's perspective (field of view in degrees, the screen's aspect ratio) and rebuilds its projection matrices. */
+void FUN_00280070(ScreenCamera* camera, s32 lowerScreen, f32 fieldOfView, f32 nearClip, f32 farClip)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 7 native warning(s); review required */
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int temp_v0;
-  unsigned int in_s2;
-  
-  *(unsigned int *)(param_1 + 0x28) = in_s0;
-  *(unsigned int *)(param_1 + 0x2c) = in_s1;
-  if (param_2 == (fn_00280070_arg1 *)0x0) {
-    temp_v0 = 0x3fd55555;
-  }
-  else {
-    temp_v0 = 0x3faaaaab;
-  }
-  *(unsigned int *)(param_1 + 0x30) = in_s2;
-  *(unsigned int *)(param_1 + 0x34) = temp_v0;
-  FUN_0016fba0(param_1 + 0xa8);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0xa8,1);
-  nn_math_ARMv6_MTX44TransposeAsm(param_1 + 0x158,param_1 + 0xa8);
-  FUN_0016fba0(param_1 + 0xe8);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0xe8,0);
-  if (*param_1 == '\0') {
-    return;
-  }
-  nn_ulcd_CTR_StereoCamera_SetBaseFrustum(param_1 + 0x4a0,param_1 + 0xe8);
-  return;
+    camera->fieldOfView = fieldOfView;
+    camera->nearClip = nearClip;
+    camera->farClip = farClip;
+    camera->aspect = lowerScreen == 0 ? 400.0f / 240.0f : 320.0f / 240.0f;
+    FUN_0016fba0(&camera->projection, camera->fieldOfView * 0.017453292f, camera->aspect, camera->nearClip, camera->farClip);
+    nn_math_ARMv6_MTX44PivotC_FAST(&camera->projection, 1);
+    nn_math_ARMv6_MTX44TransposeAsm(&camera->transposedProjection, &camera->projection);
+    FUN_0016fba0(&camera->stereoProjection, camera->fieldOfView * 0.017453292f, camera->aspect, camera->nearClip, camera->farClip);
+    nn_math_ARMv6_MTX44PivotC_FAST(&camera->stereoProjection, 0);
+    if (camera->enabled) {
+        nn_ulcd_CTR_StereoCamera_SetBaseFrustum(camera->stereo, &camera->stereoProjection);
+    }
 }
 
 } /* extern "C" */

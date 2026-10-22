@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable06Sub1GetRecord(void);
-int FUN_0029eaa4(int, unsigned int);
+int devilIsAvailable(int, unsigned int);
 int FUN_002b7bca(int, unsigned int, int, unsigned char *);
 int devilGetRecord(void);
 int dataTable1fFindPairedKey(...);
@@ -14,7 +14,7 @@ int FUN_003c9754(int, unsigned int, unsigned int, unsigned int);
 extern unsigned char LAB_002c6f08; /* 0x2c6f08 */
 
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: FUN_0029eaa4. */
+/* Supplied declaration required: devilIsAvailable. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: dataTable1fFindPairedKey. */
@@ -42,7 +42,7 @@ int FUN_002624c4(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     dataTable1fFindPairedKey();
   }
   if (((temp_v2 != 0) && ((*(unsigned int *)(temp_v2 + 4) & 0xffff) != 0)) &&
-     (temp_v1 = param_1, FUN_0029eaa4(param_1,*(unsigned int *)(temp_v2 + 4) & 0xffff), temp_v1 != 0)) {
+     (temp_v1 = param_1, devilIsAvailable(param_1,*(unsigned int *)(temp_v2 + 4) & 0xffff), temp_v1 != 0)) {
     temp_v1 = FUN_003c8db4(param_1,param_2,param_3,*(unsigned int *)(temp_v2 + 4) & 0xffff);
     temp_v4 = 0;
     if (temp_v1 != 0) {

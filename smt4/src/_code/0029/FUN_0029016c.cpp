@@ -1,50 +1,55 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029016c` (_code @ 0x29016c, 0xc0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the inlined flag clear folds the byte index into scaled ldrb/strb and keeps 0 as an immediate; retail computes id>>3 and ~(1<<bit) in registers (same issue as gameFlagSetValue). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023ddbc(unsigned int, int);
+typedef struct GameFlagEntry29016c {
+    /* 0x00 */ u8 flags;
+    /* 0x01 */ u8 unk01[3];
+} GameFlagEntry29016c;
 
-/* Supplied declaration required: FUN_0023ddbc. */
-extern int gameGetFlagBlock(void);
+typedef struct GameFlagBlock29016c {
+    /* 0x000 */ u8 bits[0x200];
+    /* 0x200 */ GameFlagEntry29016c entries[0x190];
+    /* 0x840 */ u16 activeEntry;
+} GameFlagBlock29016c;
 
+GameFlagBlock29016c *gameGetFlagBlock(void);
+void FUN_0023ddbc(u32 id, s32 value);
 
-unsigned int FUN_0029016c(unsigned int param_1,int param_2)
-
+static inline void gameFlagWrite(u32 id, s32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *pbVar4;
-  unsigned int temp_v3;
-  
-  temp_v1 = gameGetFlagBlock();
-  pbVar4 = (unsigned char *)(temp_v1 + param_1 * 4 + 0x200);
-  if ((*pbVar4 & 2) != 0) {
-    temp_v1 = gameGetFlagBlock();
-    if (*(unsigned short *)(temp_v1 + 0x840) == param_1) {
-      *pbVar4 = *pbVar4 & 0xb9;
-      temp_v1 = gameGetFlagBlock();
-      temp_v3 = 0x500;
-      *(unsigned short *)(temp_v1 + 0x840) = 0;
-      do {
-        temp_v1 = gameGetFlagBlock();
-        FUN_0023ddbc(temp_v3,0);
-        temp_v2 = temp_v3 & 7;
-        temp_v0 = temp_v3 >> 3;
-        temp_v3 = temp_v3 + 1;
-        *(unsigned char *)(temp_v1 + temp_v0) = ~(unsigned char)(1 << temp_v2) & *(unsigned char *)(temp_v1 + temp_v0);
-      } while (temp_v3 < 0x520);
-      return 1;
+    u8 *bits = gameGetFlagBlock()->bits;
+    FUN_0023ddbc(id, value);
+    u32 byte = id >> 3;
+    u32 bit = id & 7;
+    if (value) {
+        bits[byte] |= 1 << bit;
+    } else {
+        bits[byte] &= ~(1 << bit);
     }
-    if (param_2 != 0) {
-      *pbVar4 = *pbVar4 & 0xf9;
-      return 1;
+}
+
+// Clear entry `index`'s bits 1-2 (and 6 plus flags 0x500-0x51f when it is the active entry);
+// returns 1 when something was cleared.
+u32 FUN_0029016c(u32 index, s32 force)
+{
+    GameFlagEntry29016c *entry = &gameGetFlagBlock()->entries[index];
+    if (entry->flags & 2) {
+        if (gameGetFlagBlock()->activeEntry == index) {
+            entry->flags &= ~0x46;
+            gameGetFlagBlock()->activeEntry = 0;
+            for (u32 id = 0x500; id < 0x520; id++) {
+                gameFlagWrite(id, 0);
+            }
+            return 1;
+        }
+        if (force) {
+            entry->flags &= ~6;
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,46 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001456fc` (_code @ 0x1456fc, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reaches work->window.state as `add #0x1900; ldrb [#0xe8]`, the build as
+ * `add #0x1800; add #0x1e8; ldrb [r0]` (one extra instruction); logic identical. */
+#include "shard/X14_MessageMain.h"
 
 extern "C" {
 
-int FUN_001517b4(...);
+s32 FUN_001517b4(s32 kind, s32 mode);
+s32 FUN_00163fd4(s32 kind);
 
-extern int DAT_0057f58c; /* 0x57f58c */
-extern signed char DAT_005e204d; /* 0x5e204d */
+/* A state block whose byte at 0x0D marks it busy. */
+typedef struct State5e2040 {
+    /* 0x00 */ u8 unk00[0xD];
+    /* 0x0D */ u8 busy;
+} State5e2040;
 
-/* Supplied declaration required: FUN_001517b4. */
-extern int FUN_00163fd4(unsigned int);
+extern State5e2040 DAT_005e2040;
 
-
-unsigned int FUN_001456fc(int param_1)
-
+/* Returns 1 while anything blocks: one of the pending checks, the busy flag, or message
+ * `messageId` still being shown in state 1 with check (1, 1) pending. */
+s32 FUN_001456fc(s32 messageId)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  FUN_001517b4(0,1);
-  if (temp_v0 == 0) {
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if ((temp_v0 == 0) && (temp_v0 = FUN_00163fd4(6), temp_v0 == 0)) {
-      temp_v0 = 10;
-      FUN_001517b4(10,2);
-      if ((temp_v0 == 0) && (DAT_005e204d == '\0')) {
-        if ((*(int *)(DAT_0057f58c + 4) == param_1) && (*(char *)(DAT_0057f58c + 0x19e8) == '\x01'))
-        {
-          temp_v0 = 1;
-          FUN_001517b4();
-          if (temp_v0 != 0) {
-            return 1;
-          }
-        }
-        return 0;
-      }
+    MessageMainWork *work;
+
+    if (FUN_001517b4(0, 1) != 0 || FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0 ||
+        FUN_001517b4(10, 2) != 0 || DAT_005e2040.busy != 0) {
+        return 1;
     }
-  }
-  return 1;
+    work = g_messageMain.work;
+    if (work->messageId == messageId && work->window.state == 1 && FUN_001517b4(1, 1) != 0) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

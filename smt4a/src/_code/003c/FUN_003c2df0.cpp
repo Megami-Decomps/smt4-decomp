@@ -5,10 +5,10 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_00272204(unsigned int, unsigned int, unsigned int, int);
+int effBlockCopyDataB(unsigned int, unsigned int, unsigned int, int);
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00272204. */
+/* Supplied declaration required: effBlockCopyDataB. */
 /* Supplied declaration required: FUN_003c2df0. */
 
 
@@ -45,7 +45,7 @@ LAB_003c2df4:
         *(unsigned int *)(temp_v3 + 0x28) = 0;
       }
       temp_v3 = *(int *)(temp_v1 + 0x90);
-      FUN_00272204(*(unsigned int *)(param_2 + 0x90),*(unsigned int *)(temp_v3 + 0x20),
+      effBlockCopyDataB(*(unsigned int *)(param_2 + 0x90),*(unsigned int *)(temp_v3 + 0x20),
                    *(unsigned int *)(temp_v3 + 0x24),*(unsigned short *)(temp_v3 + 0x1c));
     }
     temp_v2 = 0;

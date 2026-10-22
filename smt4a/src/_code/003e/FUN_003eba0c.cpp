@@ -1,68 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eba0c` (_code @ 0x3eba0c, 0xc8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc strength-reduces the candidate loop to a post-incremented pointer with a down counter; retail indexes candidates->ids[i] and counts up. */
+#include "common.h"
+
+#define BTL_PICK_SLOTS 5
+#define BTL_PICK_CANDIDATES 50
+
+struct BtlPickState {
+    /* 0x0000 */ u8 unk0000[0x1ec8];
+    /* 0x1ec8 */ u16 picks[BTL_PICK_SLOTS];
+};
+
+struct BtlPickCandidates {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ u32 ids[BTL_PICK_CANDIDATES];
+};
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-void FUN_003eba0c(int param_1,int param_2)
-
+/* Copies the distinct nonzero candidate ids into the five pick slots, repeating the picks to fill the rest. */
+void FUN_003eba0c(BtlPickState *state, const BtlPickCandidates *candidates)
 {
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int unaff_r5;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v3 = 0;
-  temp_v0 = 0;
-  do {
-    temp_v1 = *(unsigned int *)(param_2 + temp_v3 * 4 + 0xc);
-    if (temp_v1 != 0) {
-      unaff_r5 = (unsigned int)*(unsigned short *)(param_1 + 0x1ec8);
-    }
-    if (temp_v1 != 0 && unaff_r5 != temp_v1) {
-      unaff_r5 = (unsigned int)*(unsigned short *)(param_1 + 0x1eca);
-      temp_v5 = unaff_r5 != temp_v1;
-      if (temp_v5) {
-        unaff_r5 = (unsigned int)*(unsigned short *)(param_1 + 0x1ecc);
-      }
-      if (temp_v5 && unaff_r5 != temp_v1) {
-        unaff_r5 = (unsigned int)*(unsigned short *)(param_1 + 0x1ece);
-        temp_v5 = unaff_r5 != temp_v1;
-        if (temp_v5) {
-          unaff_r5 = (unsigned int)*(unsigned short *)(param_1 + 0x1ed0);
+    u8 count = 0;
+    u8 source = 0;
+    s32 i;
+
+    for (i = 0; i < BTL_PICK_CANDIDATES; i++) {
+        u32 id = candidates->ids[i];
+        if (id != 0 && state->picks[0] != id && state->picks[1] != id && state->picks[2] != id &&
+            state->picks[3] != id && state->picks[4] != id) {
+            state->picks[count] = id;
+            count++;
         }
-        if (temp_v5 && unaff_r5 != temp_v1) {
-          temp_v4 = param_1 + temp_v0 * 2;
-          unaff_r5 = temp_v4 + 0x1e00;
-          temp_v0 = temp_v0 + 1;
-          *(short *)(temp_v4 + 0x1ec8) = (short)temp_v1;
-        }
-      }
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x32);
-  if (((temp_v0 != 0) && (temp_v1 = 0, temp_v0 < 5)) && (temp_v2 = temp_v0, temp_v0 < 5)) {
-    do {
-      temp_v3 = temp_v1 * 2;
-      temp_v4 = temp_v2 * 2;
-      temp_v1 = (temp_v1 + 1) & 0xff;
-      if (temp_v0 < temp_v1) {
-        temp_v1 = 0;
-      }
-      temp_v2 = temp_v2 + 1;
-      *(unsigned short *)(param_1 + temp_v4 + 0x1ec8) = *(unsigned short *)(param_1 + temp_v3 + 0x1ec8);
-    } while ((int)temp_v2 < 5);
-  }
-  return;
+    if (count != 0 && count < BTL_PICK_SLOTS) {
+        for (i = count; i < BTL_PICK_SLOTS; i++) {
+            state->picks[i] = state->picks[source];
+            source++;
+            if (source > count) {
+                source = 0;
+            }
+        }
+    }
 }
 
 } /* extern "C" */

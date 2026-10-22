@@ -6,14 +6,14 @@ extern "C" {
 
 int sysMemClear(unsigned int *, int);
 int FUN_00371c3c(int, int);
-int FUN_003a7a88(int, int);
+int devilIsTextureLoaded(int, int);
 
 extern unsigned char g_btlUi; /* 0x57a9b8 */
 
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00371c3c. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 
 
 void FUN_004ab8e4(void)
@@ -41,7 +41,7 @@ void FUN_004ab8e4(void)
       *(unsigned int *)(temp_v1 + 0x13000) = 0x29d;
       if (puVar5[temp_v3 * 7 + 5] != 0) {
         temp_v2 = (int)(short)puVar5[temp_v3 * 7 + 5];
-        FUN_003a7a88(temp_v2,1);
+        devilIsTextureLoaded(temp_v2,1);
         if (temp_v2 == 0) {
           FUN_00371c3c((int)(short)puVar5[temp_v3 * 7 + 5],1);
           *(unsigned char *)(puVar5 + temp_v3 * 7 + 6) = 1;
@@ -52,7 +52,7 @@ void FUN_004ab8e4(void)
       *(unsigned int *)(temp_v1 + 0x12fe4) = 0xffffffff;
       if (puVar5[temp_v3 * 7 + 5] != 0) {
         temp_v2 = (int)(short)puVar5[temp_v3 * 7 + 5];
-        FUN_003a7a88(temp_v2,1);
+        devilIsTextureLoaded(temp_v2,1);
         if (temp_v2 == 0) {
           FUN_00371c3c((int)(short)puVar5[temp_v3 * 7 + 5],1);
           *(unsigned char *)(puVar5 + temp_v3 * 7 + 6) = 1;

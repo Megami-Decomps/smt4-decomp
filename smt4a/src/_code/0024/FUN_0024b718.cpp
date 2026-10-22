@@ -8,8 +8,8 @@ int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(int);
 int dialogClose(int);
 int FUN_003ea20c(void);
-int FUN_004c89e8(void);
-int FUN_004c8b10(void);
+int btlHelpFreeAll(void);
+int btlHelpFreeEntries(void);
 void FUN_004c8bb8(int alternate, unsigned int argument);
 
 extern int g_btlScriptUnit; /* 0x57113c */
@@ -42,8 +42,8 @@ extern int FUN_003eb1cc(int);
 extern int btlScriptUnitIsNotKind6(int);
 extern int FUN_0040ddec(unsigned int, unsigned int);
 extern int btlUiCanStartMenu(void);
-/* Supplied declaration required: FUN_004c89e8. */
-/* Supplied declaration required: FUN_004c8b10. */
+/* Supplied declaration required: btlHelpFreeAll. */
+/* Supplied declaration required: btlHelpFreeEntries. */
 /* Supplied declaration required: FUN_004c8bb8. */
 extern int FUN_004c8ecc(void);
 extern int btlUnitGet(void);
@@ -84,7 +84,7 @@ unsigned int FUN_0024b718(void)
       if ((temp_v4 & DAT_005713d8) != 0 || (temp_v6 & DAT_005713dc) != 0) {
         return 0;
       }
-      FUN_004c8b10();
+      btlHelpFreeEntries();
       temp_v3 = dialogIsActive();
     }
     else {
@@ -189,7 +189,7 @@ unsigned int FUN_0024b718(void)
           if (temp_v5 == 0) {
             return 0;
           }
-          FUN_004c89e8();
+          btlHelpFreeAll();
           dialogClose(1);
           temp_v4 = ~DAT_005713bc;
           *puVar8 = *puVar8 & ~DAT_005713b8;
@@ -203,7 +203,7 @@ unsigned int FUN_0024b718(void)
           if (temp_v5 == 0) {
             return 0;
           }
-          FUN_004c89e8();
+          btlHelpFreeAll();
           dialogClose(1);
           temp_v4 = ~DAT_005713c4;
           *puVar8 = *puVar8 & ~DAT_005713c0;
@@ -214,7 +214,7 @@ unsigned int FUN_0024b718(void)
         temp_v5 = 7;
         FUN_001517b4(7,1);
         if (temp_v5 != 0) {
-          FUN_004c89e8();
+          btlHelpFreeAll();
           FUN_004c8bb8(0,0);
           temp_v4 = DAT_005713bc | *(unsigned int *)(temp_v3 + 0x45a4);
           *puVar8 = DAT_005713b8 | *puVar8;
@@ -232,7 +232,7 @@ unsigned int FUN_0024b718(void)
         if (temp_v5 == 0) {
           return 0;
         }
-        FUN_004c89e8();
+        btlHelpFreeAll();
         FUN_004c8bb8(1,0);
         temp_v4 = DAT_005713c4 | *(unsigned int *)(temp_v3 + 0x45a4);
         *puVar8 = *puVar8 | DAT_005713c0;

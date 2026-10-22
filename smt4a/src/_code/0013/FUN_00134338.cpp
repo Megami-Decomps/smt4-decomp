@@ -1,74 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00134338` (_code @ 0x134338, 0x86 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: Vector diagnostics, trivial-destructor traversal and pointer updates differ. */
+#include "shard/ElementVector12.h"
 extern "C" {
+void FUN_002e32a4(s32, ...);
+void asdOperatorDeleteArray(void*);
+ElementRecord12* FUN_00307940(ElementRecord12*, ElementRecord12*, ElementRecord12*, ElementVector12*);
+s32 vectorSize12A(ElementVector12*);
+u32 vectorGrowCapacity_00307962(u32);
+const u32* wordRefMax(const u32*, const u32*);
+void* rt_malloc(u32);
+extern const char LAB_001343c4[];
 
-void FUN_002e32a4(int kind, ...);
-int asdOperatorDeleteArray(void);
-int vectorSize12A(int *);
-int FUN_00307940(int, int, int, int *);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_001343c4; /* 0x1343c4 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_002e32a4. */
-extern int *wordRefMax(unsigned int *, unsigned int *);
-extern int rt_malloc(void);
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: vectorSize12A. */
-/* Supplied declaration required: FUN_00307940. */
-extern unsigned int vectorGrowCapacity_00307962(unsigned int, int *);
-extern unsigned int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned long long FUN_00134338(int *param_1,unsigned int param_2)
-
+// Grows storage for 12-byte elements without changing the vector's used size.
+void FUN_00134338(ElementVector12* vector, u32 requestedCapacity)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int uStack_1c;
-  int *piStack_18;
-  unsigned int temp_v6;
-  
-  piStack_18 = param_1;
-  temp_v6 = param_2;
-  if (param_2 >= 0x15555556) {
-    temp_v5 = 0x15555555;
-    FUN_002e32a4(8,&LAB_001343c4,&LAB_001343c4);
-  }
-  temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0xc);
-  if (temp_v0 < temp_v6) {
-    temp_v1 = vectorSize12A(param_1);
-    temp_v5 = vectorGrowCapacity_00307962(temp_v1,param_1);
-    piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
-    temp_v2 = *piVar3;
-    temp_v3 = rt_malloc();
-    FUN_00307940(*param_1,param_1[1],temp_v3,param_1);
-    for (temp_v4 = *param_1; temp_v4 != param_1[1]; temp_v4 = temp_v4 + 0xc) {
+    if (requestedCapacity > 0x15555555) {
+        FUN_002e32a4(8, LAB_001343c4, LAB_001343c4);
     }
-    asdOperatorDeleteArray();
-    temp_v4 = vectorSize12A(param_1);
-    *param_1 = temp_v3;
-    param_1[2] = temp_v3 + temp_v2 * 0xc;
-    param_1[1] = temp_v4 * 0xc + temp_v3;
-  }
-  return romwright_piece_4_4(uStack_1c,temp_v5);
+    u32 capacity = vector->capacityEnd - vector->begin;
+    if (capacity < requestedCapacity) {
+        u32 growth = vectorGrowCapacity_00307962(vectorSize12A(vector));
+        u32 newCapacity = *wordRefMax(&requestedCapacity, &growth);
+        ElementRecord12* storage = (ElementRecord12*)rt_malloc(newCapacity * sizeof(ElementRecord12));
+        FUN_00307940(vector->begin, vector->end, storage, vector);
+        for (ElementRecord12* entry = vector->begin; entry != vector->end; ++entry) {
+            entry->~ElementRecord12();
+        }
+        asdOperatorDeleteArray(vector->begin);
+        s32 size = vectorSize12A(vector);
+        vector->begin = storage;
+        vector->capacityEnd = storage + newCapacity;
+        vector->end = storage + size;
+    }
 }
-
-} /* extern "C" */
+}

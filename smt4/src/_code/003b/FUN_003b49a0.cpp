@@ -60,7 +60,7 @@ extern unsigned int FUN_0029a924(unsigned short);
 extern int FUN_0029aafc(void);
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: FUN_0029cde0. */
-extern int FUN_0029d65c(int);
+extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_0029efa8. */
 extern int gameGetUnitRecord(int);
 extern int playerGetSkillRank(unsigned short);
@@ -287,7 +287,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     FUN_002bf288(2,temp_v11,0xf7,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,
                  0xc4);
     temp_v3 = FUN_0029efa8(temp_v24);
-    temp_v3 = FUN_0029d65c((int)*(short *)(param_1 + temp_v3 * 2 + 0x357e));
+    temp_v3 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v3 * 2 + 0x357e));
     temp_v5 = *(short *)(temp_v1 + 10) + param_3;
     temp_v6 = *(short *)(temp_v1 + 8) + param_2;
     if (!((temp_v3 == 1 || temp_v3 == 2) || temp_v3 == 6)) {
@@ -471,7 +471,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     FUN_002bf288(2,temp_v11,0xf7,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                  0xc4);
     temp_v5 = FUN_0029efa8(temp_v21);
-    temp_v5 = FUN_0029d65c((int)*(short *)(param_1 + temp_v5 * 2 + 0x358e));
+    temp_v5 = ifTouchGetSelectionModeForRegion((int)*(short *)(param_1 + temp_v5 * 2 + 0x358e));
     temp_v6 = *(short *)(temp_v3 + 10) + param_3;
     temp_v7 = *(short *)(temp_v3 + 8) + param_2;
     if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {

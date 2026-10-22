@@ -29,7 +29,7 @@ PopupEntry *FUN_0015fa74(u32 a, u32 b);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataBlocksGetTableFlag(void);
 s32 FUN_002d8b58(u32 kind, u16 id);
-f32 FUN_004a00f4(s32 index);
+f32 partyGetAverageLevel(s32 index);
 
 void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
 {
@@ -59,7 +59,7 @@ void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
     }
 
     entry = FUN_0015fa74(arg1, arg2);
-    scrollY = (s32)FUN_004a00f4(2);
+    scrollY = (s32)partyGetAverageLevel(2);
     if (scrollY < entry->height + adjust) {
         candidate = saveSlotFindSelected();
         if (candidate != NULL) {

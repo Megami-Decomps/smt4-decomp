@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 
-extern int FUN_001802d4(int);
+extern int ifTouchIsInitialSelection(int);
 
 
 unsigned int FUN_00164e18(unsigned int param_1)
@@ -25,21 +25,21 @@ unsigned int FUN_00164e18(unsigned int param_1)
     do {
       temp_v4 = temp_v0 + temp_v3 * 4;
       if (((*(unsigned char *)(temp_v4 + 0x5ac) == param_1) && (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0')) &&
-         (temp_v1 = FUN_001802d4((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4)), temp_v1 != 0)) {
+         (temp_v1 = ifTouchIsInitialSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4)), temp_v1 != 0)) {
         return 1;
       }
       if (*(char *)(temp_v4 + 0x5ac) == '\b') {
         if ((param_1 == 4) && (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0')) {
           temp_v1 = temp_v0 + temp_v3 * 2;
-          temp_v2 = FUN_001802d4((int)*(short *)(temp_v1 + 0x5c4));
+          temp_v2 = ifTouchIsInitialSelection((int)*(short *)(temp_v1 + 0x5c4));
           if (temp_v2 != 0) {
             return 1;
           }
-          temp_v2 = FUN_001802d4((int)*(short *)(temp_v1 + 0x5c6));
+          temp_v2 = ifTouchIsInitialSelection((int)*(short *)(temp_v1 + 0x5c6));
           if (temp_v2 != 0) {
             return 1;
           }
-          temp_v1 = FUN_001802d4((int)*(short *)(temp_v1 + 0x5c8));
+          temp_v1 = ifTouchIsInitialSelection((int)*(short *)(temp_v1 + 0x5c8));
           if (temp_v1 != 0) {
             return 1;
           }
@@ -51,15 +51,15 @@ LAB_00164ed8:
         if (*(char *)(temp_v4 + 0x5ac) == '\t') {
           if ((param_1 != 3) || (*(char *)(temp_v0 + temp_v3 + 0x5d4) == '\0')) goto LAB_00165040;
           temp_v1 = temp_v0 + temp_v3 * 2;
-          temp_v2 = FUN_001802d4((int)*(short *)(temp_v1 + 0x5c4));
+          temp_v2 = ifTouchIsInitialSelection((int)*(short *)(temp_v1 + 0x5c4));
           if (temp_v2 != 0) {
             return 1;
           }
-          temp_v2 = FUN_001802d4((int)*(short *)(temp_v1 + 0x5c6));
+          temp_v2 = ifTouchIsInitialSelection((int)*(short *)(temp_v1 + 0x5c6));
           if (temp_v2 != 0) {
             return 1;
           }
-          temp_v1 = FUN_001802d4((int)*(short *)(temp_v1 + 0x5c8));
+          temp_v1 = ifTouchIsInitialSelection((int)*(short *)(temp_v1 + 0x5c8));
           if (temp_v1 != 0) {
             return 1;
           }
@@ -67,7 +67,7 @@ LAB_00164ed8:
         if (*(char *)(temp_v4 + 0x5ac) == '\x14') {
           if (param_1 != 1) {
             if ((param_1 == 2) && (*(char *)(temp_v0 + temp_v3 + 0x5d5) != '\0')) {
-              temp_v1 = FUN_001802d4((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c6));
+              temp_v1 = ifTouchIsInitialSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c6));
 joined_r0x00164f88:
               if (temp_v1 != 0) {
                 return 1;
@@ -76,7 +76,7 @@ joined_r0x00164f88:
             }
           }
           else if (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0') {
-            temp_v1 = FUN_001802d4((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4));
+            temp_v1 = ifTouchIsInitialSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4));
             goto joined_r0x00164f88;
           }
         }
@@ -85,14 +85,14 @@ LAB_00164fbc:
           if (*(char *)(temp_v4 + 0x5ac) == '\x15') {
             if (param_1 != 5) {
               if ((param_1 == 6) && (*(char *)(temp_v0 + temp_v3 + 0x5d5) != '\0')) {
-                temp_v4 = FUN_001802d4((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c6));
+                temp_v4 = ifTouchIsInitialSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c6));
                 if (temp_v4 != 0) {
                   return 1;
                 }
               }
             }
             else if (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0') {
-              temp_v4 = FUN_001802d4((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4));
+              temp_v4 = ifTouchIsInitialSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4));
               if (temp_v4 != 0) {
                 return 1;
               }

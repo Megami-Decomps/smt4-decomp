@@ -1,56 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ab92c` (_code @ 0x2ab92c, 0xc8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the command headers are stored with post-indexed str/strd here; retail stores [cmd + 4] and [cmd] then adds 8, deriving the second header from the first. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a1828(unsigned int *, int, int);
-int FUN_002a18ac(unsigned int *, int, int);
+typedef struct ShaderMatrixOwner {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ void *source; // last source uploaded
+} ShaderMatrixOwner;
 
-extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
+typedef struct ShaderMatrixSource {
+    /* 0x000 */ u8 unk000[0x148];
+    /* 0x148 */ u8 matrix34[0x60];
+    /* 0x1A8 */ u8 matrix44[0x40];
+} ShaderMatrixSource;
 
-/* Supplied declaration required: FUN_002a1828. */
-/* Supplied declaration required: FUN_002a18ac. */
+extern u32 *g_commandBufferCursor;
 
+void FUN_002a1828(u32 *command, const void *matrix, u32 header);
+void FUN_002a18ac(u32 *command, const void *matrix, u32 header);
 
-void FUN_002ab92c(int param_1,int param_2,int param_3)
-
+/* Writes a 3x4 matrix upload starting at uniform register `reg`. */
+static __inline void cmdPutMatrix34(u32 reg, const void *matrix)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  
-  if (*(int *)(param_1 + 0x28) != param_2 || param_3 != 0) {
-    *(int *)(param_1 + 0x28) = param_2;
-    puVar1 = g_commandBufferCursor;
-    g_commandBufferCursor[1] = 0xf02c0;
-    *puVar1 = 0x8000005a;
-    FUN_002a1828(puVar1 + 2,param_2 + 0x148,0xbf02c1);
-    puVar2 = g_commandBufferCursor;
-    puVar3 = g_commandBufferCursor + 0x10;
-    puVar1 = g_commandBufferCursor + 0x11;
-    g_commandBufferCursor = puVar3;
-    *puVar1 = 0xf02c0;
-    *puVar3 = 0x80000056;
-    FUN_002a18ac(puVar2 + 0x12,param_2 + 0x1a8,0xff02c1);
-    puVar2 = g_commandBufferCursor;
-    puVar3 = g_commandBufferCursor + 0x14;
-    puVar1 = g_commandBufferCursor + 0x15;
-    g_commandBufferCursor = puVar3;
-    *puVar1 = 0xf0290;
-    *puVar3 = 0x8000005a;
-    FUN_002a1828(puVar2 + 0x16,param_2 + 0x148,0xbf0291);
-    puVar2 = g_commandBufferCursor;
-    puVar3 = g_commandBufferCursor + 0x10;
-    puVar1 = g_commandBufferCursor + 0x11;
-    g_commandBufferCursor = puVar3;
-    *puVar1 = 0xf0290;
-    *puVar3 = 0x80000056;
-    FUN_002a18ac(puVar2 + 0x12,param_2 + 0x1a8,0xff0291);
-    g_commandBufferCursor = g_commandBufferCursor + 0x14;
-  }
-  return;
+    g_commandBufferCursor[1] = 0x000F0000 | reg;
+    g_commandBufferCursor[0] = 0x8000005A;
+    FUN_002a1828(g_commandBufferCursor + 2, matrix, 0x00BF0000 | (reg + 1));
+    g_commandBufferCursor += 16;
+}
+
+/* Writes a 4x4 matrix upload starting at uniform register `reg`. */
+static __inline void cmdPutMatrix44(u32 reg, const void *matrix)
+{
+    g_commandBufferCursor[1] = 0x000F0000 | reg;
+    g_commandBufferCursor[0] = 0x80000056;
+    FUN_002a18ac(g_commandBufferCursor + 2, matrix, 0x00FF0000 | (reg + 1));
+    g_commandBufferCursor += 20;
+}
+
+/* Uploads the source's matrices to both shader stages when it changed (or when forced). */
+void FUN_002ab92c(ShaderMatrixOwner *owner, ShaderMatrixSource *source, s32 force)
+{
+    if (owner->source == source && force == 0) {
+        return;
+    }
+    owner->source = source;
+    cmdPutMatrix34(0x2C0, source->matrix34);
+    cmdPutMatrix44(0x2C0, source->matrix44);
+    cmdPutMatrix34(0x290, source->matrix34);
+    cmdPutMatrix44(0x290, source->matrix44);
 }
 
 } /* extern "C" */

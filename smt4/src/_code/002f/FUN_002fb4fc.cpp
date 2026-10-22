@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00270028(int a);
+int frameTexApplyMode(int a);
 int FUN_00275dec(void);
 int messageSlotSet(int a);
 int scrCommMessageSetMode(...);
@@ -17,7 +17,7 @@ u8 FUN_002fb4fc(void)
     if (step == 0) {
         scrCommMessageSetMode(1);
         FUN_00275dec();
-        FUN_00270028(3);
+        frameTexApplyMode(3);
         return 0;
     }
     step = scrGetCommandFrame();
@@ -30,7 +30,7 @@ u8 FUN_002fb4fc(void)
         return step >= 3;
     }
     eventQueueAddUnique(0x1000184);
-    FUN_00270028(1);
+    frameTexApplyMode(1);
     return 0;
 }
 

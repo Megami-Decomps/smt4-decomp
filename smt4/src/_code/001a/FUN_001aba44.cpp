@@ -1,63 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001aba44` (_code @ 0x1aba48, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc folds (s32)0.33f - 56 to a constant; retail loads 0.33f and converts it with VCVT at run time. */
+#include "npc_room/NpcRoom.h"
 
 extern "C" {
 
-int FUN_00285584(unsigned int, int);
-int FUN_002ae9ec(int, int, unsigned int, int, unsigned int, int);
-int FUN_002ba12c(unsigned int);
+void FUN_00285584(u32 job, s32 a, s32 b);
+void FUN_002ae9ec(s32 a, s32 b, u32 c, s32 d, s32 e, s32 f);
+void FUN_002ba12c(u32 scene);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+extern NpcRoom *g_npcRoom;
+extern u32 g_titleScene;
 
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_00285584. */
-/* Supplied declaration required: FUN_002ae9ec. */
-/* Supplied declaration required: FUN_002ba12c. */
-
-
-unsigned int FUN_001aba44(int *param_1)
-
+/* Draws the NPC room: sets up its view, then refreshes the job of every occupied display cell, skipping row unkFC in state 4 once unkEC exceeds 2. */
+u32 FUN_001aba44(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  float temp_v6;
-  
-  temp_v3 = *param_1;
-  temp_v6 = 0.33f;
-  FUN_002ba12c(g_titleScene);
-  FUN_002ae9ec(2,2,(unsigned int)*(unsigned short *)(temp_v3 + 0x102) * 1000,(int)temp_v6 - 0x38,0xfffffff8,1);
-  temp_v4 = 0;
-  if (temp_v4 < *(int *)(temp_v3 + 0xe4)) {
-    do {
-      temp_v2 = 0;
-      do {
-        temp_v0 = (int)*(short *)(temp_v3 + temp_v4 * 0x10 + temp_v2 * 2 + 100);
-        if (-1 < temp_v0) {
-          temp_v1 = *(int *)(temp_v3 + 0xf0);
-          temp_v5 = temp_v1 != 4;
-          if (!temp_v5) {
-            temp_v1 = *(int *)(temp_v3 + 0xfc);
-          }
-          if ((temp_v5 || temp_v1 != temp_v4) || (*(int *)(temp_v3 + 0xec) < 3)) {
-            FUN_00285584(*(unsigned int *)(temp_v3 + temp_v0 * 4 + 4),0);
-          }
+    NpcRoom *room = g_npcRoom;
+
+    FUN_002ba12c(g_titleScene);
+    FUN_002ae9ec(2, 2, room->unk102 * 1000, (s32)0.33f - 56, -8, 1);
+    for (s32 row = 0; row < room->displayCount; row++) {
+        for (s32 column = 0; column < NPC_ROOM_JOBS; column++) {
+            s32 model = room->displayModels[row][column];
+            if (model >= 0 && (room->state != 4 || room->unkFC != row || room->unkEC <= 2)) {
+                FUN_00285584(room->jobs[model], 0, 0);
+            }
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 8);
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < *(int *)(temp_v3 + 0xe4));
-  }
-  return 0;
+    }
+    return 0;
 }
 
 } /* extern "C" */

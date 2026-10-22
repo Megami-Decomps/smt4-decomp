@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00371c3c(int, int);
 int FUN_0038b3f8(int, int);
-int FUN_003a7a88(int, int);
+int devilIsTextureLoaded(int, int);
 
 extern int g_unite; /* 0x57f290 */
 
 extern unsigned long long resourceRunEmbeddedOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_0038b3f8. */
-/* Supplied declaration required: FUN_003a7a88. */
+/* Supplied declaration required: devilIsTextureLoaded. */
 
 
 void FUN_00231574(void)
@@ -59,7 +59,7 @@ void FUN_00231574(void)
       }
       if ((temp_v9 && temp_v10) && temp_v3 != temp_v5) {
         temp_v4 = (int)*(short *)(temp_v2 + 0x6688);
-        FUN_003a7a88(temp_v4,1);
+        devilIsTextureLoaded(temp_v4,1);
         temp_v5 = temp_v6;
         if (temp_v4 != 0) {
           FUN_0038b3f8((int)*(short *)(temp_v2 + 0x6688),1);

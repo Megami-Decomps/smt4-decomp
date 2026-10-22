@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelSlotSetTranslation(unsigned int, int);
-int FUN_002f46a4(void);
+int mapEnvironmentApplySelectedEntry(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern short DAT_0049fb42; /* 0x49fb42 */
 
 extern unsigned int FUN_0025bb34(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: asdModelSlotSetTranslation. */
-/* Supplied declaration required: FUN_002f46a4. */
+/* Supplied declaration required: mapEnvironmentApplySelectedEntry. */
 
 
 void FUN_002d5374(void)
@@ -31,7 +31,7 @@ void FUN_002d5374(void)
   if (DAT_0049fb40 != DAT_0049fb42) {
     DAT_0049fb42 = DAT_0049fb40;
   }
-  FUN_002f46a4();
+  mapEnvironmentApplySelectedEntry();
   temp_v0 = FUN_0025bb34(1,&LAB_002d54ac,0);
   asdModelSlotSetTranslation(temp_v0,0);
   temp_v0 = FUN_0025bb34(1,&LAB_002d54cc,0);

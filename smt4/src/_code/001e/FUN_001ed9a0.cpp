@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001c0b88(...);
+int screenDrawShadedRect(...);
 int FUN_002996d8(int);
 int FUN_0029dfc0(int);
 int FUN_002ae038(int *);
@@ -33,7 +33,7 @@ extern int DAT_0044de30; /* 0x44de30 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001c0b88. */
+/* Supplied declaration required: screenDrawShadedRect. */
 /* Supplied declaration required: FUN_002996d8. */
 /* Supplied declaration required: FUN_0029dfc0. */
 /* Supplied declaration required: FUN_002ae038. */
@@ -148,7 +148,7 @@ unsigned char FUN_001ed9a0(void)
         temp_v14 = temp_v13;
         temp_v15 = temp_v13;
         FUN_002ae038(&temp_v13);
-        FUN_001c0b88(0,0,400,0xf0,0xf5);
+        screenDrawShadedRect(0,0,400,0xf0,0xf5);
         temp_v6 = g_titleScene;
         piVar10 = (int *)(g_titleScene + 0x124c);
         temp_v5 = *piVar10;

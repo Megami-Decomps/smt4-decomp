@@ -1,33 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00408274` (_code @ 0x40828c, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Mask scheduling and conditional-store lowering differ; the owner-enabled byte uses add/load instead of indexed writeback. */
+#include "gamedata/IndexedFlags.h"
 
 extern "C" {
+IndexedFlags *FUN_002c2710(void);
 
-extern int FUN_002c2710(void);
-
-
-void FUN_00408274(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Changes an indexed flag and marks its owner enabled whenever a flag is set. */
+void FUN_00408274(u32 owner, u32 flag, s32 enabled)
 {
-  int temp_v0;
-  unsigned char *pbVar2;
-  unsigned char temp_v1;
-  
-  temp_v0 = FUN_002c2710();
-  pbVar2 = (unsigned char *)(temp_v0 + param_1 * 4 + 0x800 + (param_2 >> 3));
-  temp_v1 = (unsigned char)(1 << (param_2 & 7));
-  if (param_3 != 0) {
-    *pbVar2 = temp_v1 | *pbVar2;
-    temp_v0 = FUN_002c2710();
-    pbVar2 = (unsigned char *)(temp_v0 + 0x22f0 + (param_1 >> 3));
-    temp_v1 = (unsigned char)(1 << (param_1 & 7)) | *pbVar2;
-  }
-  else {
-    temp_v1 = *pbVar2 & ~temp_v1;
-  }
-  *pbVar2 = temp_v1;
-  return;
+    if (owner >= 110) {
+        return;
+    }
+    if ((s32)owner >= 100 || (s32)flag > 100) {
+        return;
+    }
+    IndexedFlags *storage = FUN_002c2710();
+    u8 *bits = storage->flags + owner * 4;
+    bits += flag >> 3;
+    u8 mask = (u8)(1 << (flag & 7));
+    if (enabled) {
+        *bits |= mask;
+        storage = FUN_002c2710();
+        bits = storage->enabled;
+        bits += owner >> 3;
+        mask = (u8)(1 << (owner & 7)) | *bits;
+    } else {
+        mask = *bits & ~mask;
+    }
+    *bits = mask;
 }
-
-} /* extern "C" */
+}

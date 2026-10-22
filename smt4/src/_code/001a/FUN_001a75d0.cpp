@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0028850c. */
 extern unsigned int dataTable24Sub0GetRecordS90(unsigned int);
 extern unsigned int dataTable24Sub0GetRecordS90X(unsigned int);
-extern int FUN_0029ebc0(void);
+extern int sceneSelectionGetSlotId(void);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -44,7 +44,7 @@ void FUN_001a75d0(unsigned int param_1,unsigned int param_2,int param_3,int para
   unsigned int temp_v6;
   
   temp_v6 = dataTable24Sub0GetRecordS90X(param_2);
-  temp_v0 = FUN_0029ebc0();
+  temp_v0 = sceneSelectionGetSlotId();
   if (param_5 != 0) {
     FUN_002bf380(2,0x24,0x12,param_3,param_4,0x65);
     FUN_002bf288(2,0x24,0x95,param_3,param_4,0x6a);

@@ -3,22 +3,33 @@
 #define BATTLE_BTLEFFECT_H
 
 #include "common.h"
+#include <stddef.h>
 
 #define BTL_EFFECT_SLOTS 4
-#define BTL_EFFECT_SLOT_SIZE 0x16   /* sizeof(BtlEffectSlot) */
-#define BTL_EFFECT_SLOT_TABLE 0x58  /* where the slot table starts in the owner's block */
 
 /* One effect slot's record (Shin Megami Tensei IV layout). */
 typedef struct BtlEffectSlot {
-    /* 0x00 */ u8 unk00[0x12];
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s16 unk10;
     /* 0x12 */ u16 id;
     /* 0x14 */ u8 unk14[2];
 } BtlEffectSlot;
 
+typedef struct BtlEffectSlotBlock {
+    /* 0x000 */ u8 unk000[0x58];
+    /* 0x058 */ BtlEffectSlot entries[BTL_EFFECT_SLOTS];
+    /* 0x0B0 */ u8 unk0B0[0xE0];
+    /* 0x190 */ s16 unk190;
+} BtlEffectSlotBlock;
+
+typedef char BtlEffectSlotSizeCheck[sizeof(BtlEffectSlot) == 0x16 ? 1 : -1];
+typedef char BtlEffectSlotBlockTableCheck[offsetof(BtlEffectSlotBlock, entries) == 0x58 ? 1 : -1];
+typedef char BtlEffectSlotBlockFallbackCheck[offsetof(BtlEffectSlotBlock, unk190) == 0x190 ? 1 : -1];
+
 /* The block that owns the slot table. */
 typedef struct BtlEffectOwner {
     /* 0x0000 */ u8 unk0000[0x1CFC];
-    /* 0x1CFC */ u8 *slots;
+    /* 0x1CFC */ BtlEffectSlotBlock *slots;
 } BtlEffectOwner;
 
 /* The module global (Shin Megami Tensei IV). */
@@ -52,7 +63,7 @@ typedef struct BtlEffectJobA {
 /* The block that owns the slot table (Apocalypse). */
 typedef struct BtlEffectOwnerA {
     /* 0x0000 */ u8 unk0000[0x1F54];
-    /* 0x1F54 */ u8 *slots;
+    /* 0x1F54 */ BtlEffectSlotBlock *slots;
 } BtlEffectOwnerA;
 
 #endif

@@ -20,7 +20,7 @@ typedef struct {
 } param_11_stack;
 
 /* Supplied declaration required: FUN_002a6d1c. */
-extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
+extern int packageFindFileRefByName(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8ac4. */
 extern unsigned int asdTMTexTableCallFileB(unsigned int, unsigned int);
 
@@ -51,7 +51,7 @@ void FUN_00389f74(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_30 = param_2;
   temp_v8 = param_3;
   uStack_28 = param_4;
-  temp_v0 = FUN_002a6d50(param_1,0x17,param_4);
+  temp_v0 = packageFindFileRefByName(param_1,0x17,param_4);
   puVar4 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
     puVar4 = *(unsigned int **)(temp_v0 + 4);

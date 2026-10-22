@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00184310(void);
 int battleAttributeFormatName(unsigned char [140], int);
-int FUN_00230c1c(unsigned char [140], int);
+int skillFormatTargetLabel(unsigned char [140], int);
 int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_002ad414(int, unsigned int, unsigned int, unsigned char [140]);
 int FUN_002c0940(...);
@@ -39,7 +39,7 @@ extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned int slotRecordFindById(unsigned short);
 /* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: FUN_00230c1c. */
+/* Supplied declaration required: skillFormatTargetLabel. */
 /* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_002ad414. */
@@ -94,7 +94,7 @@ void FUN_0032cfe0(int param_1)
         }
         battleAttributeFormatName(temp_v7,*(unsigned char *)(temp_v4 + 0xc));
         FUN_003180c4(0x26,temp_v7);
-        FUN_00230c1c(temp_v7,(*(unsigned short *)(temp_v4 + 10) & 0x1f) >> 1);
+        skillFormatTargetLabel(temp_v7,(*(unsigned short *)(temp_v4 + 10) & 0x1f) >> 1);
         FUN_003180c4(0x27,temp_v7);
         if (*(char *)(temp_v4 + 0xe) == '\0') {
           textFormatBuffer(temp_v7,&LAB_0032d2fc);

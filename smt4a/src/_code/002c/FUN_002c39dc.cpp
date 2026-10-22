@@ -13,7 +13,7 @@ int FUN_002cb84c(void);
 int FUN_003f5220(...);
 
 int sysPlaySe(...);
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int gameGetSlotRecord(...);
 int dataTable04FindById(void);
 int __aeabi_memset4(int, int, int);
@@ -45,7 +45,7 @@ extern unsigned int DAT_0057f274; /* 0x57f274 */
 extern int btlGetMainState(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
@@ -260,7 +260,7 @@ LAB_002c4008:
     }
     else {
       temp_v12 = param_2;
-      FUN_00192550();
+      dataTable8FindRecord();
       temp_v5 = 0;
       if (temp_v12 != 0) {
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v12 + 0x32);
@@ -290,7 +290,7 @@ LAB_002c4018:
             *(unsigned char *)(temp_v0 + 0x9c3) = 0;
           }
           temp_v6 = param_2;
-          FUN_00192550();
+          dataTable8FindRecord();
           if ((*(unsigned char *)(temp_v6 + 0x3a) & 0x80) != 0) {
             *(unsigned int *)(temp_v0 + 0x20) = 10;
             temp_v9 = -1;

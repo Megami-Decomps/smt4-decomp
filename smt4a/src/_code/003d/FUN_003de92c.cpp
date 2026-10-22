@@ -1,53 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de92c` (_code @ 0x3de92c, 0xc0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
+
+/* A 12-byte record of data table 28, section 3. */
+struct Table28Record {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[10];
+};
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-int FUN_003de92c(unsigned int param_1)
-
+/* The table-28 section-3 record with the given id, or NULL. */
+Table28Record *FUN_003de92c(u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned short *puVar6;
-  
-  temp_v0 = dataTableGet(0x1c,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v2 != 0) {
-    temp_v3 = temp_v2 & 1;
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v1 + temp_v4 * 0xc) == param_1) {
-          return temp_v1 + temp_v4 * 0xc;
+    void *table = dataTableGet(28, 3);
+    Table28Record *records = static_cast<Table28Record *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    for (s32 i = 0; i < count; ++i) {
+        if (records[i].id == id) {
+            return &records[i];
         }
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < (int)temp_v3);
     }
-  }
-  while( 1 ) {
-    temp_v4 = temp_v3;
-    if (temp_v2 <= temp_v4) {
-      return 0;
-    }
-    puVar6 = (unsigned short *)(temp_v1 + temp_v4 * 0xc);
-    if (*puVar6 == param_1) break;
-    if (puVar6[6] == param_1) {
-      return temp_v1 + temp_v4 * 0xc + 0xc;
-    }
-    temp_v3 = temp_v4 + 2;
-  }
-  return temp_v1 + temp_v4 * 0xc;
+    return NULL;
 }
 
 } /* extern "C" */

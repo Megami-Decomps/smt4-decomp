@@ -1,54 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1380` (_code @ 0x2e1380, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests results with ands into r1 and keeps a zero in r5 across the calls, and lays the error path after the success path; nn::Result-style IsFailure check not reproduced. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00254884(int, unsigned char [496], int);
-int FUN_002ad80c(unsigned char [496], unsigned int, unsigned int, int);
-int FUN_002ad888(void);
-int FUN_002bb5a4(unsigned char *, unsigned char [496], int);
-int FUN_002c3510(...);
+typedef struct SaveStream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+} SaveStream;
 
-/* Supplied declaration required: FUN_00254884. */
-/* Supplied declaration required: FUN_002ad80c. */
-/* Supplied declaration required: FUN_002ad888. */
-/* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002c3510. */
+typedef struct SaveStreamOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ SaveStream stream;
+} SaveStreamOwner;
 
+void *FUN_00254884(u32 id, u8 *buffer, s32 flags);
+u32 FUN_002ad888(void);
+s32 FUN_002ad80c(u8 *buffer, u32 context, u32 size, s32 flags);
+s32 FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
+void FUN_002c3510(void);
 
-unsigned char * FUN_002e1380(int param_1,int param_2,unsigned int param_3)
-
+static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar1;
-  unsigned char temp_v1 [496];
-  
-  puVar1 = temp_v1;
-  FUN_00254884(param_2,temp_v1,2);
-  if (param_2 == 0) {
+    stream->unk0C = 0;
+    stream->unk10 = 0;
+    stream->unk04 = 0;
+    stream->unk08 = 0;
+    return FUN_002bb5a4(stream, buffer, mode);
+}
+
+/* Create the record `id` with `size` bytes and open the owner's stream on it; returns an nn::Result. */
+s32 FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
+{
+    u8 buffer[496];
+    s32 result;
+
+    if (FUN_00254884(id, buffer, 2) == NULL) {
+        result = 0xE0E046BC;
+        FUN_002c3510();
+        return result;
+    }
+    result = FUN_002ad80c(buffer, FUN_002ad888(), size, 0);
+    if (result & 0x80000000) {
+        FUN_002c3510();
+        return result;
+    }
+    result = saveStreamOpen(&owner->stream, buffer, 2);
+    if (result & 0x80000000) {
+        FUN_002c3510();
+        return result;
+    }
     FUN_002c3510();
-    return (unsigned char *)0xe0e046bc;
-  }
-  FUN_002ad888();
-  FUN_002ad80c(temp_v1,temp_v0,param_3,0);
-  if ((int)puVar1 < 0) {
-    FUN_002c3510();
-    return puVar1;
-  }
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  puVar1 = (unsigned char *)(param_1 + 8);
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  FUN_002bb5a4(puVar1,temp_v1,2);
-  if ((int)puVar1 < 0) {
-    FUN_002c3510(puVar1);
-    return puVar1;
-  }
-  FUN_002c3510();
-  return (unsigned char *)0x0;
+    return 0;
 }
 
 } /* extern "C" */

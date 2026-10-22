@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [104], unsigned char *, unsigned int);
-int FUN_00272204(unsigned int, int *, int);
+int effBlockCopyDataB(unsigned int, int *, int);
 int nodeListFree(unsigned int *);
 int FUN_00350ee0(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_00381874(unsigned int *);
@@ -31,7 +31,7 @@ extern unsigned int *DAT_0059dc1c; /* 0x59dc1c */
 extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00272204. */
+/* Supplied declaration required: effBlockCopyDataB. */
 extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: nodeListFree. */
 /* Supplied declaration required: FUN_00350ee0. */
@@ -103,7 +103,7 @@ unsigned char * FUN_003c8878(unsigned int param_1)
     }
     else {
       FUN_003ca0ec(DAT_0059dbf4,DAT_0059dc04);
-      FUN_00272204(DAT_0059dbfc,&temp_v6,4);
+      effBlockCopyDataB(DAT_0059dbfc,&temp_v6,4);
     }
     puVar4 = &LAB_00400002;
   }

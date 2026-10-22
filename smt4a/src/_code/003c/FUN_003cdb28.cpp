@@ -1,59 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cdb28` (_code @ 0x3cdb28, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r6, [pc, #144] differs from recovered ldr r6, [pc, #136]. */
+#include "common.h"
+
+struct AsdTexture;
+
+// Private view of one 0x4c-byte entry in DAT_005702fc.
+struct EffectTextureEntryView {
+    AsdTexture* texture;    // 0x00
+    char name[0x40];         // 0x04
+    void* fileData;          // 0x44
+    u8 unk48[2];            // 0x48
+    u8 unk4A;               // 0x4a
+    u8 unk4B;               // 0x4b
+};
 
 extern "C" {
+extern EffectTextureEntryView DAT_005702fc[26];
 
-int FUN_001028b8(unsigned char [128], int, unsigned char *, unsigned char *, char *);
-int FUN_0013c174(unsigned char *, int *, int);
-int asdTextureCreate(void);
-int asdTexTgaLoadNw4c(int, unsigned char *, int, int);
+AsdTexture* asdTextureCreate(u32 flags);
+s32 FUN_001028b8(char* destination, u32 capacity, const char* format, ...);
+void* FUN_0013c174(const char* path, u32* size, u32 flags);
+s32 asdTexTgaLoadNw4c(AsdTexture* texture, const void* data, u32 size, u32 flags);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp98; /* 0x98: local_98 */
-} void_stack;
-
-extern unsigned char LAB_003cdbc8; /* 0x3cdbc8 */
-extern unsigned char LAB_003cdbdc; /* 0x3cdbdc */
-extern char s_flar02_02_00570300[10]; /* 0x570300 */
-
-/* Supplied declaration required: FUN_001028b8. */
-/* Supplied declaration required: FUN_0013c174. */
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdTexTgaLoadNw4c. */
-
-
+// Load TGA data for each eligible effect entry whose texture has not been created.
 void FUN_003cdb28(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  unsigned int temp_v2;
-  int *piVar5;
-  int temp_v3;
-  unsigned char temp_v4 [128];
-  
-  temp_v2 = 0;
-  do {
-    temp_v0 = temp_v2 * 0x4c;
-    piVar5 = (int *)(temp_v0 + 0x5702fc);
-    if ((*(char *)(temp_v0 + 0x570346) != '\x01') && (*piVar5 == 0)) {
-      temp_v1 = 0;
-      asdTextureCreate();
-      *piVar5 = temp_v1;
-      FUN_001028b8(temp_v4,0x80,&LAB_003cdbdc,&LAB_003cdbc8,s_flar02_02_00570300 + temp_v0);
-      puVar3 = temp_v4;
-      FUN_0013c174(puVar3,&temp_v3,0);
-      *(unsigned char **)(temp_v0 + 0x570340) = puVar3;
-      asdTexTgaLoadNw4c(*piVar5,puVar3,temp_v3,0x10000);
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x1a);
-  return;
-}
+    char path[128];
+    u32 fileSize;
 
-} /* extern "C" */
+    for (u32 index = 0; index < 26; ++index) {
+        EffectTextureEntryView* entry = &DAT_005702fc[index];
+        if (entry->unk4A != 1 && entry->texture == 0) {
+            entry->texture = asdTextureCreate(0);
+            FUN_001028b8(path, sizeof(path), "%s%s.tga",
+                         "battle/effect/tex/", entry->name);
+            void* fileData = FUN_0013c174(path, &fileSize, 0);
+            entry->fileData = fileData;
+            asdTexTgaLoadNw4c(entry->texture, fileData, fileSize, 0x10000);
+        }
+    }
+}
+}

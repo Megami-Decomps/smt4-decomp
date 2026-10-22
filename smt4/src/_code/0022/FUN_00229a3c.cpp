@@ -1,56 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229a3c` (_code @ 0x229a3c, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail caches the next queue link before matching; native traversal reloads it after the condition. */
+#include "battle/btlReflect.h"
+extern "C" ReflectAction* FUN_0022699c(ReflectContext*, s16, u16, u32);
 
-extern "C" {
-
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-void FUN_00229a3c(short param_1,unsigned int param_2,unsigned int param_3,int param_4,int param_5)
-
+extern "C" void FUN_00229a3c(s32 actorId, u32 options, u32 value, u32 parameter, u32 checkDuplicates)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v1 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  if (param_5 != 0) {
-    temp_v0 = *(int *)(g_btlActionReflect + 8);
-    do {
-      if (temp_v0 == 0) {
-        *(unsigned int *)(temp_v1 + 0x28) = param_3;
-        *(unsigned char *)(temp_v1 + 4) = 0xe;
-        *(int *)(temp_v1 + 0x4c) = param_4;
-        return;
-      }
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 4);
-      piVar1 = (int *)(temp_v0 + 0xc);
-      temp_v3 = temp_v2 == 0xe;
-      if (temp_v3) {
-        temp_v2 = *(unsigned int *)(temp_v0 + 0x28);
-      }
-      temp_v4 = temp_v3 && temp_v2 == 0;
-      if (temp_v3 && temp_v2 == 0) {
-        temp_v4 = *(int *)(temp_v0 + 0x4c) == param_4;
-      }
-      temp_v0 = *piVar1;
-    } while ((!temp_v4) || (*(short *)(temp_v1 + 2) < 0));
-    *(unsigned short *)(temp_v1 + 2) = 0xffff;
-  }
-  *(unsigned int *)(temp_v1 + 0x28) = param_3;
-  *(unsigned char *)(temp_v1 + 4) = 0xe;
-  *(int *)(temp_v1 + 0x4c) = param_4;
-  return;
+    ReflectAction* action = FUN_0022699c(g_btlActionReflect, (s16)actorId, 0, options);
+    if (checkDuplicates != 0) {
+        for (ReflectAction* previous = g_btlActionReflect->head; previous != NULL; previous = previous->next) {
+            if (previous->kind == 14 && previous->value == 0 && previous->parameter == parameter &&
+                (s16)action->secondaryId >= 0) {
+                action->secondaryId = (u16)-1;
+                break;
+            }
+        }
+    }
+    action->value = value;
+    action->kind = 14;
+    action->parameter = parameter;
 }
-
-} /* extern "C" */

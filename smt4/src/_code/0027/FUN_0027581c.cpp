@@ -1,54 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027581c` (_code @ 0x27581c, 0xb8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the slot count before storing the released flag; this build stores first. */
+#include "common.h"
+
+struct ResourceSlot27581c {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[0x7];
+    /* 0x08 */ u32 handle;
+    /* 0x0C */ u32 data;
+    /* 0x10 */ s16 kind; /* 0: handle only; 1: handle with data */
+    /* 0x12 */ s16 unk12;
+    /* 0x14 */ u8 unk14[0xC];
+};
+
+struct ResourceTable27581c {
+    /* 0x00 */ u8 unk00[0x4];
+    /* 0x04 */ s32 count;
+    /* 0x08 */ u8 released;
+    /* 0x09 */ u8 loaded;
+    /* 0x0A */ u8 unk0A[0x2];
+    /* 0x0C */ ResourceSlot27581c slots[1];
+};
 
 extern "C" {
 
-int FUN_002877d4(unsigned int);
+extern ResourceTable27581c *DAT_00448c20;
+void FUN_002877d4(u32 handle);
 
-extern int DAT_00448c20; /* 0x448c20 */
-
-/* Supplied declaration required: FUN_002877d4. */
-
-
+// Release the handles of every active slot once, after the table has been loaded.
 void FUN_0027581c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int unaff_r7;
-  
-  if ((*(char *)(DAT_00448c20 + 9) != '\0') && (*(char *)(DAT_00448c20 + 8) == '\0')) {
-    piVar1 = (int *)(DAT_00448c20 + 4);
-    temp_v0 = 0;
-    if (0 < *piVar1) {
-      unaff_r7 = 0;
-    }
-    *(unsigned char *)(DAT_00448c20 + 8) = 1;
-    if (0 < *piVar1) {
-      do {
-        temp_v1 = DAT_00448c20 + temp_v0 * 0x20;
-        if (*(char *)(temp_v1 + 0xc) != '\0') {
-          if (*(short *)(temp_v1 + 0x1c) != 0) {
-            if ((*(short *)(temp_v1 + 0x1c) == 1) && (*(int *)(temp_v1 + 0x18) != 0)) {
-              FUN_002877d4(*(unsigned int *)(temp_v1 + 0x14));
-              *(unsigned int *)(temp_v1 + 0x18) = unaff_r7;
-              *(short *)(temp_v1 + 0x1e) = (short)unaff_r7;
-              *(unsigned int *)(temp_v1 + 0x14) = unaff_r7;
+    if (DAT_00448c20->loaded && !DAT_00448c20->released) {
+        DAT_00448c20->released = 1;
+        for (s32 i = 0; i < DAT_00448c20->count; i++) {
+            ResourceSlot27581c *slot = &DAT_00448c20->slots[i];
+            if (slot->active) {
+                if (slot->kind == 0) {
+                    FUN_002877d4(slot->handle);
+                    slot->handle = 0;
+                } else if (slot->kind == 1 && slot->data != 0) {
+                    FUN_002877d4(slot->handle);
+                    slot->data = 0;
+                    slot->unk12 = 0;
+                    slot->handle = 0;
+                }
             }
-          }
-          else {
-            FUN_002877d4(*(unsigned int *)(temp_v1 + 0x14));
-            *(unsigned int *)(temp_v1 + 0x14) = unaff_r7;
-          }
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < *(int *)(DAT_00448c20 + 4));
     }
-  }
-  return;
 }
 
 } /* extern "C" */

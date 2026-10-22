@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00192608(void);
 int dataTable04FindById(void);
 int scrGetArg(int);
@@ -29,10 +29,10 @@ extern unsigned int DAT_005702b0; /* 0x5702b0 */
 extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: dataTable04FindById. */
-extern unsigned int FUN_00232388(void);
+extern unsigned int btlResolveEntryChoice(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: scrSetResult. */
@@ -60,7 +60,7 @@ unsigned int FUN_003bc59c(void)
   
   temp_v1 = scrGetArg(0);
   scrGetArg(1);
-  temp_v2 = FUN_00232388();
+  temp_v2 = btlResolveEntryChoice();
   temp_v9 = 0;
   FUN_00301a08(temp_v2,temp_v12,temp_v11);
   temp_v8 = temp_v12[0];
@@ -88,7 +88,7 @@ unsigned int FUN_003bc59c(void)
             }
             if (*(short *)((int)puVar9 + temp_v7 * 8 + 0x33a) == 8) {
               temp_v5 = (int)(short)puVar9[temp_v7 * 2 + 0xcf];
-              FUN_00192550();
+              dataTable8FindRecord();
               if (((temp_v5 != 0) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v5 + 0x32), temp_v4 != 0)) &&
                  ((dataTable04FindById(), temp_v4 != 0 &&
                   (temp_v1 == (*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb)))) {
@@ -120,7 +120,7 @@ unsigned int FUN_003bc59c(void)
           }
           if (*(short *)((int)puVar9 + 0x32a) == 8) {
             temp_v7 = (int)(short)puVar9[0xcb];
-            FUN_00192550();
+            dataTable8FindRecord();
             if ((((temp_v7 != 0) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + 0x32), temp_v4 != 0)) &&
                 (dataTable04FindById(), temp_v4 != 0)) &&
                (temp_v1 == (*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb)) {

@@ -1,10 +1,11 @@
-#include "shard/Sys43e188.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
+extern MessageGlobals g_messageMain;
 
 u32 messageTargetSetValue(u32 value, u8 flag)
 {
-    Target43e188 *target = g_messageMain.target;
+    MessagePanel *target = g_messageMain.banner;
 
     target->unk81 = flag;
     target->unk70 = value;

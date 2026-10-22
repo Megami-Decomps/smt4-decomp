@@ -1,46 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d91b0` (_code @ 0x4d91b0, 0x84 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Right-subtree and sentinel walks keep their cursor in r1/r2 rather than retail's r0, moving the return copies. */
+#include "shard/W6_W6Match3_AATreeNode.h"
 
-extern "C" {
-
-
-int * FUN_004d91b0(int *param_1)
-
+/* Finds the next node in an AA tree whose sentinel links to itself. */
+extern "C" AATreeNode *FUN_004d91b0(AATreeNode *node)
 {
-  int *piVar1;
-  int *piVar2;
-  unsigned char temp_v0;
-  
-  piVar1 = (int *)param_1[1];
-  piVar2 = (int *)*piVar1;
-  if (piVar1 != piVar2) {
-    if (piVar2 != (int *)*piVar2) {
-      do {
-        piVar1 = (int *)*piVar1;
-      } while ((int *)*piVar1 != *(int **)*piVar1);
+    AATreeNode *next = node->right;
+    AATreeNode *left = next->left;
+    if (next != left) {
+        node = next;
+        if (left != left->left) {
+            do {
+                node = node->left;
+            } while (node->left != node->left->left);
+        }
+        return node;
     }
-  }
-  else {
-    if (piVar1 != param_1) {
-      do {
-        piVar1 = (int *)param_1[2];
-        temp_v0 = (int *)*piVar1 != param_1;
-        param_1 = piVar1;
-      } while ((int *)*piVar1 != piVar1 && temp_v0);
-      return piVar1;
+    if (next == node) {
+        AATreeNode *sentinel = node;
+        node = node->parent;
+        left = node->left;
+        if (left != sentinel) {
+            do {
+                node = left;
+                left = node->left;
+            } while (left != sentinel);
+        }
+        return node;
     }
-    piVar1 = (int *)param_1[2];
-    piVar2 = (int *)*piVar1;
-    if ((int *)*piVar1 != param_1) {
-      do {
-        piVar1 = piVar2;
-        piVar2 = (int *)*piVar1;
-      } while (piVar2 != param_1);
-      return piVar1;
-    }
-  }
-  return piVar1;
+    AATreeNode *child;
+    do {
+        child = node;
+        node = node->parent;
+    } while (node->left != node && node->left != child);
+    return node;
 }
-
-} /* extern "C" */

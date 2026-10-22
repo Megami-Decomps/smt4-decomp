@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00203460(...);
+int gameDataSetLinkSlot(...);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(...);
 
@@ -38,7 +38,7 @@ typedef struct {
 extern int g_uiQuest; /* 0x43dd50 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00203460. */
+/* Supplied declaration required: gameDataSetLinkSlot. */
 /* Supplied declaration required: FUN_002540b8. */
 /* Supplied declaration required: uiBindRecordRewardText. */
 extern bool questIsOfferable(unsigned short);
@@ -447,7 +447,7 @@ LAB_001b0368:
       temp_v6 = FUN_0029efc0(temp_v11);
       temp_v5 = flaggedEntryGetValueA(temp_v11);
     }
-    FUN_00203460(temp_v13,temp_v5,temp_v6);
+    gameDataSetLinkSlot(temp_v13,temp_v5,temp_v6);
   }
   *(short *)(temp_v1 + 0x984) = *(short *)(temp_v1 + 0x984) + 1;
   return;

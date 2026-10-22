@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023c154(int, int, int, int, int);
 int btlMainFindEntryByListedId(...);
-int FUN_003bee64(void);
+int btlEntryRollPassiveSkill(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int FUN_00229914(int *, unsigned int, int, int, int);
 /* Supplied declaration required: FUN_0023c154. */
 extern int questCurrentIsFlagged(void);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_003bee64. */
+/* Supplied declaration required: btlEntryRollPassiveSkill. */
 
 
 unsigned int FUN_003d0ac8(int *param_1,unsigned int param_2,int param_3,int param_4)
@@ -46,7 +46,7 @@ unsigned int FUN_003d0ac8(int *param_1,unsigned int param_2,int param_3,int para
           temp_v2 = *param_1;
           btlMainFindEntryByListedId(temp_v2,temp_v0);
           if (((*(unsigned short *)(temp_v2 + 0x1c6) & 0x1c0) == 0) &&
-             (temp_v2 = temp_v0, FUN_003bee64(), temp_v2 != 0)) {
+             (temp_v2 = temp_v0, btlEntryRollPassiveSkill(), temp_v2 != 0)) {
             temp_v3 = *(int *)(*param_1 + 0x1e98);
             FUN_0023c154(*param_1,4,(int)*(short *)(temp_v3 + temp_v0 * 0x114 + 0x60),
                          (int)*(short *)(temp_v3 + param_4 * 0x114 + 0x60),temp_v2);

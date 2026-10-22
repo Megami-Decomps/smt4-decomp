@@ -34,7 +34,7 @@ typedef char CharacterInfoRecordSizeCheck[sizeof(CharacterInfoRecord) == 0x4c ? 
 extern "C" {
 char *libc_strcpy(char *destination, const char *source);
 void *rt_memcpy_w(void *destination, const void *source, u32 size);
-void FUN_00296b3c(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
+void asdTextDrawFormatted(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_002be650(u32 id, u32 flags);
 void FUN_002bcfc0(const char *source, char *destination);
@@ -55,7 +55,7 @@ static __forceinline void setCharacterEquipmentLabel(CharacterInfoPanel *panel, 
 {
     if (record->equipment[slot]) {
         FUN_002bcfc0(FUN_002be650(record->equipment[slot], 0), buffer);
-        FUN_00296b3c(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
+        asdTextDrawFormatted(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
         panel->equipmentIds[slot] = record->equipment[slot];
     } else {
         panel->equipmentIds[slot] = 0;
@@ -75,19 +75,19 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
         return;
     char buffer[128];
     libc_strcpy(buffer, record->name);
-    FUN_00296b3c(panel->name, 4, -1u, 0, 0, buffer);
+    asdTextDrawFormatted(panel->name, 4, -1u, 0, 0, buffer);
     if (record->flags & 2)
         rt_memcpy_w(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
     else
         rt_memcpy_w(buffer, "\x82\x72\x82\x81\x82\x8d\x82\x95\x82\x92\x82\x81\x82\x89", 15);
-    FUN_00296b3c(panel->title, 4, -1u, 0, 0, buffer);
+    asdTextDrawFormatted(panel->title, 4, -1u, 0, 0, buffer);
     if (messages)
-        FUN_00296b3c(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, record->message, 0));
+        asdTextDrawFormatted(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, record->message, 0));
     else {
         buffer[0] = '\x81';
         buffer[1] = '\x40';
         buffer[2] = '\0';
-        FUN_00296b3c(panel->description, 2, -1u, 0, 0, buffer);
+        asdTextDrawFormatted(panel->description, 2, -1u, 0, 0, buffer);
     }
 
     setCharacterEquipmentLabel(panel, record, 0, buffer);
@@ -102,23 +102,23 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
         FUN_002bcfc0(FUN_002bd06c(record->demon), buffer);
     else
         FUN_0024ee4c(buffer, "\x81\x7c\x81\x7c\x81\x7c");
-    FUN_00296b3c(panel->demonName, 1, -1u, 0, 0, buffer);
+    asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
     if (record->demon)
         FUN_002bcfc0(FUN_002bce30(record->demon, 0), buffer);
     else
         FUN_002a7c80(buffer, "\x81\x7c\x81\x7c");
-    FUN_00296b3c(panel->race, 2, -1u, 0, 0, buffer);
+    asdTextDrawFormatted(panel->race, 2, -1u, 0, 0, buffer);
     panel->raceWidth = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
 
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot]) {
             FUN_002bcfc0(aocIndexValueOrDefault(record->skills[slot]), buffer);
-            FUN_00296b3c(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
+            asdTextDrawFormatted(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
         } else {
             textFormatBuffer(buffer, "\x81\x7c\x81\x7c\x81\x7c");
-            FUN_00296b3c(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
+            asdTextDrawFormatted(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
         }
     }
@@ -135,6 +135,6 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
         clearCharacterPreview(panel);
     }
     textFormatBuffer(buffer, DAT_00402898);
-    FUN_00296b3c(panel->previewDescription, 2, -1u, 0, 0, buffer);
+    asdTextDrawFormatted(panel->previewDescription, 2, -1u, 0, 0, buffer);
     panel->previewDescriptionWidth = (s32)FUN_0028f4b4(buffer, 2, 0.0f);
 }

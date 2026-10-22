@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int FUN_00287790(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00287790. */
 extern int FUN_003e4d68(unsigned int);
@@ -41,14 +41,14 @@ unsigned int FUN_0048144c(unsigned int param_1)
     temp_v6 = param_1 - 0x79f == 0x3f;
   }
   if ((!temp_v7 || temp_v6) &&
-     (temp_v0 = param_1, FUN_00192550(),
+     (temp_v0 = param_1, dataTable8FindRecord(),
      *(char *)(temp_v0 + 0x41) == '\x01' || *(char *)(temp_v0 + 0x41) == '\x03')) {
     if ((*(unsigned int *)(temp_v0 + 0x68) & 0x20) != 0) {
       temp_v0 = 0;
       do {
         temp_v1 = FUN_003e4d68(temp_v0 & 0xffff);
         if (((temp_v1 != 0) && (temp_v2 = FUN_00187168(), temp_v2 != 0)) &&
-           (temp_v3 = param_1, FUN_00192550(), temp_v3 != 0)) {
+           (temp_v3 = param_1, dataTable8FindRecord(), temp_v3 != 0)) {
           temp_v6 = (*(unsigned int *)(temp_v3 + 0x68) & 0x20) != 0;
           if (temp_v6) {
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v3 + 0x48);
@@ -68,7 +68,7 @@ unsigned int FUN_0048144c(unsigned int param_1)
         temp_v1 = -1;
 LAB_004815d0:
         temp_v0 = param_1;
-        FUN_00192550();
+        dataTable8FindRecord();
         if (temp_v0 == 0) goto LAB_00481668;
         temp_v4 = -1;
         FUN_00287790(0xffffffff,temp_v0,1,0,0);
@@ -90,7 +90,7 @@ LAB_004815d0:
               }
             }
             temp_v0 = param_1;
-            FUN_00192550();
+            dataTable8FindRecord();
             if (temp_v0 != 0) break;
 LAB_00481668:
             temp_v4 = 1;
@@ -99,7 +99,7 @@ LAB_00481668:
           temp_v4 = temp_v5;
         } while( 1 );
       }
-      FUN_00192550();
+      dataTable8FindRecord();
       if (param_1 != 0) {
         temp_v1 = -1;
         FUN_00287790(0xffffffff,param_1,1,0,0);

@@ -16,7 +16,7 @@ int FUN_003d54f8(int, int);
 
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_001643a0(void);
+extern int ifTouchGetSelectionMode(void);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
@@ -60,7 +60,7 @@ unsigned int FUN_004cf140(int param_1)
   }
   temp_v1 = FUN_0013def0(0);
   if ((temp_v1 == 0) &&
-     ((temp_v1 = FUN_001643a0(), temp_v1 == 6 || (temp_v1 = padButtonIsPressed(0), temp_v1 != 0)))) {
+     ((temp_v1 = ifTouchGetSelectionMode(), temp_v1 == 6 || (temp_v1 = padButtonIsPressed(0), temp_v1 != 0)))) {
     *(unsigned int *)(param_1 + 0x28) = 2;
     *(unsigned int *)(param_1 + 0x34) = 0;
   }

@@ -6,7 +6,9 @@
 
 /* Shin Megami Tensei IV layout. */
 typedef struct BtlGameOver {
-    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 frameCounter;
     /* 0x0C */ void *dataA;     /* heap block */
     /* 0x10 */ void *process;   /* script process object */
     /* 0x14 */ void *dataB;     /* heap block */
@@ -30,5 +32,30 @@ typedef struct BtlGameOverOwnerA {
     /* 0x00 */ u8 unk00[0x4C];
     /* 0x4C */ u32 job;
 } BtlGameOverOwnerA;
+
+struct BtlGameOverJobWork {
+    /* 0x0000 */ u8 unk0000[0x2C];
+    /* 0x002C */ u32 job;
+    /* 0x0030 */ u8 unk0030[0x58];
+    /* 0x0088 */ s32 mode;
+    /* 0x008C */ u8 unk008C[0x4414];
+    /* 0x44A0 */ u64 flags;
+};
+
+struct BtlGameOverSequence {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 job;
+    /* 0x08 */ u8 mode;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ u32 state;
+    /* 0x10 */ s32 phase;
+    /* 0x14 */ s32 frame;
+};
+
+typedef char BtlGameOverSizeCheck[sizeof(BtlGameOver) == 0x18 ? 1 : -1];
+typedef char BtlGameOverASizeCheck[sizeof(BtlGameOverA) == 0x1C ? 1 : -1];
+typedef char BtlGameOverOwnerSizeCheck[sizeof(BtlGameOverOwner) == 0x30 ? 1 : -1];
+typedef char BtlGameOverOwnerASizeCheck[sizeof(BtlGameOverOwnerA) == 0x50 ? 1 : -1];
+typedef char BtlGameOverSequenceSizeCheck[sizeof(BtlGameOverSequence) == 0x18 ? 1 : -1];
 
 #endif

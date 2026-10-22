@@ -73,7 +73,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     FUN_0043d394(iVar2 + 0xa6,0x100);
     auStack_108[0] = 0x100;
     FUN_00268250(2,0,99,iVar2 + 0xa6);
-    FUN_002c76d8(8);
+    gameDataAddHomeButtonHold(8);
     FUN_002684ac(1);
     FUN_00333574(1);
     uVar5 = 5;
@@ -91,7 +91,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
     else {
       FUN_0014374c();
       FUN_001a0380();
-      FUN_002c76d8(8);
+      gameDataAddHomeButtonHold(8);
       FUN_0043ca60(1);
       FUN_00275f44(*(unsigned int *)(iVar2 + 0x2b0),2);
       uVar5 = 8;

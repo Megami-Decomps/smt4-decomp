@@ -68,7 +68,7 @@ unsigned long long FUN_002def6c(void)
   if (DAT_0057a9c8 != 0) {
     FUN_00290ba4(puVar1);
   }
-  FUN_003315c4();
+  uniteReleaseExit();
   FUN_003f19dc(puVar1);
   piVar6 = puVar1 + 0x1125;
   if (*piVar6 != 0) {

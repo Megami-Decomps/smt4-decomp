@@ -1,21 +1,8 @@
 /* NON_MATCHING: optimization may recover native constant hoisting, first-record register reuse and final coordinate STM; typed repeated resolution is otherwise faithful. */
 #include "addon/aocMain.h"
-#include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/DevilModel.h"
 
 namespace {
-struct DevilModelRecord {
-    DevilSortRecord common;
-    u8 unk04[0x8c];
-    u16 model; // 0x90
-    u8 unk92[2];
-};
-struct DevilModelOverride {
-    u8 unk00[3];
-    u8 flags;
-    u8 unk04[0x84];
-    s16 model; // 0x88
-    u8 unk8a[0x1e];
-};
 struct TextureKey {
     u32 table;
     s32 node;
@@ -40,7 +27,7 @@ inline bool resolveTextureKey(s32 id, s32 mapped, TextureKey& key)
         if (id < 0) {
             key.node = 0;
         } else {
-            const DevilModelRecord* record = reinterpret_cast<const DevilModelRecord*>(devilGetRecord(static_cast<u16>(id)));
+            const DevilRecord* record = reinterpret_cast<const DevilRecord*>(devilGetRecord(static_cast<u16>(id)));
             if (!record) {
                 return false;
             }

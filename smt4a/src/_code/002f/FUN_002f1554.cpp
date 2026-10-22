@@ -1,55 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f1554` (_code @ 0x2f1554, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r7, [pc, #136] differs from recovered ldr r7, [pc, #132]. */
+#include "common.h"
+
+struct QuestStateView {
+    u8 unk00[4];       // 0x000
+    u32 unk04;         // 0x004
+    u32 unk08;         // 0x008
+    u32 unk0C;         // 0x00c
+    u32 unk10;         // 0x010
+    u8 unk14[0x20];    // 0x014
+    u8 unk34[0x8D8];   // 0x034
+    u8 unk90C;         // 0x90c
+    u8 unk90D[3];      // 0x90d
+    u32 unk910;        // 0x910
+    u8 unk914[0x2A];   // 0x914
+    u8 unk93E;         // 0x93e
+    u8 unk93F[0x38B];  // 0x93f
+    s16 unkCCA;        // 0xcca
+};
+
+struct QuestEntryView {
+    u8 unk00[7];       // 0x00
+    u8 unk07;          // 0x07
+};
 
 extern "C" {
+extern QuestStateView* g_uiQuest;
+u8 FUN_001bd100(void);
+void uiQuestSpritesCreate(void);
+void FUN_003d498c(s32 questId, s32 mode);
+void uiSpriteSetKeyframe(void* sprite, s32 keyframe, s32 option);
+void uiSpriteSetImageKeyframe(void* sprite, s32 keyframe, s32 option);
+QuestEntryView* FUN_001ad9b4(s32 questId);
 
-int uiSpriteSetKeyframe(int, int);
-int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_001ad9b4(void);
-int FUN_003d498c(int, int);
-int uiQuestSpritesCreate(void);
-
-extern int g_uiQuest; /* 0x57f28c */
-
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern unsigned char FUN_001bd100(void);
-/* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: uiQuestSpritesCreate. */
-
-
-void FUN_002f1554(int param_1)
-
+// Initialize the quest UI and select its mode from the quest entry's flag.
+void FUN_002f1554(s32 questId)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = g_uiQuest;
-  *(unsigned char *)(g_uiQuest + 0x93e) = 1;
-  temp_v2 = FUN_001bd100();
-  *(unsigned char *)(temp_v0 + 0x90c) = temp_v2;
-  *(short *)(temp_v0 + 0xcca) = (short)param_1;
-  uiQuestSpritesCreate();
-  FUN_003d498c(param_1,1);
-  uiSpriteSetKeyframe(temp_v0 + 0x34,0);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x34,8,0);
-  temp_v1 = g_uiQuest;
-  *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
-  *(unsigned int *)(temp_v1 + 4) = 1;
-  *(unsigned int *)(temp_v1 + 0x10) = 0;
-  *(unsigned int *)(temp_v0 + 0xc) = 0x1d;
-  FUN_001ad9b4();
-  if ((*(unsigned char *)(param_1 + 7) & 0x20) != 0) {
-    *(unsigned int *)(temp_v0 + 0x910) = 2;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0x910) = 1;
-  }
-  return;
-}
+    QuestStateView* questState = g_uiQuest;
+    questState->unk93E = 1;
+    questState->unk90C = FUN_001bd100();
+    questState->unkCCA = (s16)questId;
 
-} /* extern "C" */
+    uiQuestSpritesCreate();
+    FUN_003d498c(questId, 1);
+    uiSpriteSetKeyframe(questState->unk34, 0, 0);
+    uiSpriteSetImageKeyframe(questState->unk34, 8, 0);
+
+    QuestStateView* currentState = g_uiQuest;
+    currentState->unk08 = currentState->unk04;
+    currentState->unk04 = 1;
+    currentState->unk10 = 0;
+    questState->unk0C = 29;
+
+    QuestEntryView* questEntry = FUN_001ad9b4(questId);
+    if (questEntry->unk07 & 0x20) {
+        questState->unk910 = 2;
+    } else {
+        questState->unk910 = 1;
+    }
+}
+}

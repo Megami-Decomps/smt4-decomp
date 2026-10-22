@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019de98(int, unsigned int);
 int FUN_0020b908(int, int);
-int FUN_002a7324(int);
+int statusPanelSetOpen(int);
 int FUN_002c8550(int);
 int FUN_002f3bc4(int, int, int);
 int FUN_0031f718(int, int);
@@ -26,7 +26,7 @@ extern int g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b908. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_002f3bc4. */
 /* Supplied declaration required: FUN_0031f718. */
@@ -72,7 +72,7 @@ void FUN_0034c940(int param_1)
   FUN_002c8550(9);
   FUN_0037e1b0(0);
   temp_v1 = FUN_0034a9ac();
-  FUN_002a7324(temp_v1 != *(unsigned short *)(temp_v0 + 0x66fe));
+  statusPanelSetOpen(temp_v1 != *(unsigned short *)(temp_v0 + 0x66fe));
   if (0 < *(int *)(temp_v0 + 0x418)) {
     FUN_0037c8e4(1,0);
     panelSetTarget(-*(int *)(temp_v0 + 0x418),0);

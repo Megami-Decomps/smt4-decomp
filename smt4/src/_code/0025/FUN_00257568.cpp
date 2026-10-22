@@ -1,82 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00257568` (_code @ 0x257568, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the inlined key fill keeps the 99/0 constants in fp/r7 and saves r11/r12; retail sets each key register in its branch. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae164(void);
+typedef struct UnitSortEntry {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ s32 unit; // negative when the entry has no unit
+} UnitSortEntry;
 
-extern int FUN_0024c5a0(int);
-extern int recordKindRank(int);
-extern int gameGetUnitRecord(void);
-/* Supplied declaration required: FUN_002ae164. */
-extern int idIsAbove400(int);
+typedef struct UnitSortRecord {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u16 order;
+} UnitSortRecord;
 
+typedef struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 level;
+} UnitRecord;
 
-int FUN_00257568(int *param_1,int *param_2)
+s32 idIsAbove400(s32 id);
+s32 FUN_0024c5a0(s32 id);
+s32 recordKindRank(s32 id);
+UnitSortRecord *FUN_002ae164(s32 id);
+UnitRecord *gameGetUnitRecord(s32 unit);
 
+static __inline s32 unitSortLevel(const UnitSortEntry *entry)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = idIsAbove400(*param_1);
-  if (temp_v0 != 0) {
-    temp_v5 = 99;
-    temp_v0 = 99;
-    temp_v4 = 0;
-  }
-  else {
-    temp_v5 = FUN_0024c5a0(*param_1);
-    temp_v0 = recordKindRank(*param_1);
-    temp_v1 = *param_1;
-    FUN_002ae164();
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x2c);
-  }
-  temp_v1 = idIsAbove400(*param_2);
-  if (temp_v1 != 0) {
-    temp_v1 = 99;
-    temp_v6 = 99;
-    temp_v3 = 0;
-  }
-  else {
-    temp_v1 = FUN_0024c5a0(*param_2);
-    temp_v6 = recordKindRank(*param_2);
-    temp_v2 = *param_2;
-    FUN_002ae164();
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x2c);
-  }
-  temp_v5 = temp_v5 - temp_v1;
-  temp_v7 = 0;
-  if (temp_v5 == 0) {
-    temp_v5 = temp_v0 - temp_v6;
-    temp_v7 = temp_v5 == 0;
-  }
-  if (((temp_v7) && (temp_v5 = temp_v3 - temp_v4, temp_v5 == 0)) && (temp_v5 = *param_1 - *param_2, temp_v5 == 0))
-  {
-    if (param_1[1] < 0) {
-      temp_v4 = 0;
+    if (entry->unit < 0) {
+        return 0;
     }
-    else {
-      temp_v0 = gameGetUnitRecord();
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
+    return gameGetUnitRecord(entry->unit)->level;
+}
+
+typedef struct UnitSortKey {
+    s32 kind;
+    s32 rank;
+    s32 order;
+} UnitSortKey;
+
+static __inline void unitSortGetKey(const UnitSortEntry *entry, UnitSortKey *key)
+{
+    if (idIsAbove400(entry->id)) {
+        key->kind = 99;
+        key->rank = 99;
+        key->order = 0;
+    } else {
+        key->kind = FUN_0024c5a0(entry->id);
+        key->rank = recordKindRank(entry->id);
+        key->order = FUN_002ae164(entry->id)->order;
     }
-    if (param_2[1] < 0) {
-      temp_v3 = 0;
+}
+
+/* Sort comparator: by kind and rank (ids above 400 last), then descending order, then id, then unit level. */
+s32 FUN_00257568(const UnitSortEntry *a, const UnitSortEntry *b)
+{
+    UnitSortKey keyA;
+    UnitSortKey keyB;
+    s32 diff;
+
+    unitSortGetKey(a, &keyA);
+    unitSortGetKey(b, &keyB);
+    if ((diff = keyA.kind - keyB.kind) != 0) {
+        return diff;
     }
-    else {
-      temp_v0 = gameGetUnitRecord();
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + 0x46);
+    if ((diff = keyA.rank - keyB.rank) != 0) {
+        return diff;
     }
-    temp_v5 = temp_v4 - temp_v3;
-  }
-  return temp_v5;
+    if ((diff = keyB.order - keyA.order) != 0) {
+        return diff;
+    }
+    if ((diff = a->id - b->id) != 0) {
+        return diff;
+    }
+    return unitSortLevel(a) - unitSortLevel(b);
 }
 
 } /* extern "C" */

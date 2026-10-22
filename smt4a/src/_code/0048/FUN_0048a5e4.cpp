@@ -15,10 +15,10 @@ int libc_strcpy(...);
 int FUN_00328078(...);
 int FUN_003849cc(unsigned int, unsigned int, int, unsigned char [132], unsigned int);
 int FUN_00384cf4(...);
-int FUN_0048816c(...);
+int listGetAdjacentEntryId(...);
 int uiDrawSpriteWithOptionalVertexColors(...);
 int lmapSceneGetObj(unsigned char *);
-int FUN_00492c5c(...);
+int naviMainGetRequestedMap(...);
 int FUN_0049325c(...);
 int words2Copy(int, float *);
 int FUN_0049368c(...);
@@ -61,16 +61,16 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 extern int FUN_00325064(void);
 /* Supplied declaration required: FUN_00328078. */
-extern unsigned int FUN_003577dc(int);
+extern unsigned int mapRegionLookupValue(int);
 extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_003849cc. */
 /* Supplied declaration required: FUN_00384cf4. */
-/* Supplied declaration required: FUN_0048816c. */
+/* Supplied declaration required: listGetAdjacentEntryId. */
 /* Supplied declaration required: uiDrawSpriteWithOptionalVertexColors. */
 extern unsigned int naviGetActiveStateValue(void);
 /* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int naviMainSelectPair(unsigned char *);
-/* Supplied declaration required: FUN_00492c5c. */
+/* Supplied declaration required: naviMainGetRequestedMap. */
 extern unsigned int FUN_00492c70(unsigned char *);
 /* Supplied declaration required: FUN_0049325c. */
 /* Supplied declaration required: words2Copy. */
@@ -119,7 +119,7 @@ void FUN_0048a5e4(int param_1)
   temp_v16 = 0.0f;
   temp_v15 = 0.0f;
   if (DAT_005f1a5e != '\0') {
-    temp_v3 = FUN_00492c5c(temp_v19);
+    temp_v3 = naviMainGetRequestedMap(temp_v19);
     temp_v2 = FUN_00492c70(temp_v19);
   }
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
@@ -132,7 +132,7 @@ void FUN_0048a5e4(int param_1)
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0xc) != '\0') {
       if (DAT_005f1a5e != '\0') {
-        temp_v2 = FUN_00492c5c();
+        temp_v2 = naviMainGetRequestedMap();
         temp_v3 = FUN_00492c70(temp_v19);
       }
       else {
@@ -149,7 +149,7 @@ void FUN_0048a5e4(int param_1)
       }
     }
     else {
-      temp_v4 = FUN_003577dc((int)(short)temp_v2);
+      temp_v4 = mapRegionLookupValue((int)(short)temp_v2);
       temp_v5 = (int)DAT_005f1a5e;
       if (temp_v5 != 0) {
         VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20638),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -288,7 +288,7 @@ LAB_0048ae60:
             }
             else {
               temp_v7 = param_1;
-              FUN_0048816c(param_1,0xffffffff);
+              listGetAdjacentEntryId(param_1,0xffffffff);
               temp_v0 = 0;
               puVar9 = temp_v19;
               if (temp_v7 != 0) {
@@ -304,7 +304,7 @@ LAB_0048ae60:
           }
           else {
             temp_v7 = param_1;
-            FUN_0048816c(param_1,1);
+            listGetAdjacentEntryId(param_1,1);
             if (temp_v7 != 0) {
               temp_v0 = 1;
               puVar9 = temp_v20;

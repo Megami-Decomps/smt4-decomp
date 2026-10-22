@@ -1,85 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f194` (_code @ 0x23f194, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail builds 0x817 as 23 + 0x800 (mov/add) where this loads a literal; state 6 is hoisted into r6 and the outer guard returns through its own pop */
+#include "battle/btlMain.h"
 
 extern "C" {
 
-int FUN_001e1874(unsigned int);
-int jobStopIfValidA(unsigned int);
-int jobStopIfValidB(unsigned int);
-int eventCommandDispatchPendingCleanup(void);
-int btlTalkBustUpDestroy(void);
-int gameFlagSetValue(int, int);
-int FUN_002ef6b8(int, unsigned int);
-int FUN_0033a780(void);
+typedef struct BtlEndTask {
+    s32 state;      /* 0x00 */
+    u32 flags;      /* 0x04: bit 0 skips the follow-up job */
+    u8 unk08[4];
+    u32 unk0C;      /* 0x0C */
+    u8 unk10[4];
+    u32 unk14;      /* 0x14 */
+    u32 job;        /* 0x18 */
+} BtlEndTask;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern BtlMain *g_btlMain;
 
-extern int g_btlMain; /* 0x4342c8 */
+s32 FUN_002c2a04(s32 index);
+BtlMainState *btlGetMainState(void);
+void FUN_0033a780(void);
+void btlTalkBustUpDestroy(void);
+void jobStopIfValidB(BtlMainState *state);
+void jobStopIfValidA(BtlMainState *state);
+void FUN_001e1874(BtlMainState *state);
+void eventCommandDispatchPendingCleanup(void);
+u32 gameFlagIsSet(u32 flag);
+u32 FUN_002ef6b8(s32 kind, u32 arg);
+void gameFlagSetValue(u32 flag, s32 value);
+s32 jobIsValid(u32 job);
+s32 FUN_0023f074(BtlEndTask *task);
 
-/* Supplied declaration required: FUN_001e1874. */
-/* Supplied declaration required: jobStopIfValidA. */
-/* Supplied declaration required: jobStopIfValidB. */
-/* Supplied declaration required: eventCommandDispatchPendingCleanup. */
-extern int FUN_0023f074(unsigned int *);
-/* Supplied declaration required: btlTalkBustUpDestroy. */
-/* Supplied declaration required: gameFlagSetValue. */
-extern unsigned int btlGetMainState(void);
-extern int jobIsValid(unsigned int);
-extern unsigned int gameFlagIsSet(void);
-extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: FUN_002ef6b8. */
-/* Supplied declaration required: FUN_0033a780. */
-
-
-int FUN_0023f194(unsigned int *param_1)
-
+/* Once both FUN_002c2a04 slots report 3, stops the battle's jobs and starts the follow-up job (flag 0x817). */
+s32 FUN_0023f194(BtlEndTask *task)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = 0;
-  if (param_1[3] != 0) {
-    temp_v0 = param_1[5];
-  }
-  if (param_1[3] != 0 && temp_v0 != 0) {
-    temp_v0 = FUN_002c2a04(0);
-    if ((temp_v0 == 3) && (temp_v0 = FUN_002c2a04(1), temp_v0 == 3)) {
-      temp_v1 = btlGetMainState();
-      FUN_0033a780();
-      btlTalkBustUpDestroy();
-      jobStopIfValidB(temp_v1);
-      jobStopIfValidA(temp_v1);
-      FUN_001e1874(temp_v1);
-      if (g_btlMain != 0) {
-        eventCommandDispatchPendingCleanup();
-      }
-      if ((param_1[1] & 1) != 0) {
-        *param_1 = 6;
-        temp_v0 = FUN_0023f074(param_1);
-        return temp_v0;
-      }
-      temp_v1 = gameFlagIsSet();
-      temp_v2 = 0x17;
-      FUN_002ef6b8(0x17,temp_v1);
-      param_1[6] = temp_v2;
-      gameFlagSetValue(0x817,1);
-      *param_1 = 5;
-      temp_v0 = jobIsValid(param_1[6]);
-      if (temp_v0 == 0) {
-        *param_1 = 6;
-        temp_v0 = FUN_0023f074(param_1);
-        return temp_v0;
-      }
+    if (task->unk0C != 0 && task->unk14 != 0) {
+        if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
+            BtlMainState *state = btlGetMainState();
+
+            FUN_0033a780();
+            btlTalkBustUpDestroy();
+            jobStopIfValidB(state);
+            jobStopIfValidA(state);
+            FUN_001e1874(state);
+            if (g_btlMain != NULL) {
+                eventCommandDispatchPendingCleanup();
+            }
+            if (!(task->flags & 1)) {
+                task->job = FUN_002ef6b8(23, gameFlagIsSet(0x817));
+                gameFlagSetValue(0x817, 1);
+                task->state = 5;
+                if (jobIsValid(task->job)) {
+                    return 0;
+                }
+            }
+            task->state = 6;
+            return FUN_0023f074(task);
+        }
     }
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    return 0;
 }
 
 } /* extern "C" */

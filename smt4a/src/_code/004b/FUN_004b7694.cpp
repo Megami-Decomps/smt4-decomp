@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0033a988(void);
+int mapRecordResumePoint(void);
 int linkSlotSetFlag1C(unsigned int, unsigned int);
 int linkSlotSetFlag20(unsigned int, int);
 int listSelectItem(void);
@@ -24,7 +24,7 @@ extern unsigned char DAT_005f16fc; /* 0x5f16fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0033a988. */
+/* Supplied declaration required: mapRecordResumePoint. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: listSelectItem. */
@@ -130,7 +130,7 @@ void FUN_004b7694(int param_1)
     if (((temp_v6 & 0x80) != 0) ||
        ((temp_v2 = gameFlagIsSet(0x404), temp_v2 != 0 && (temp_v2 = inputIsQuestConfirmPressed(), temp_v2 != 0)))) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffff7f;
-      FUN_0033a988();
+      mapRecordResumePoint();
       *(unsigned int *)(param_1 + 0x28) = 7;
       *(unsigned int *)(param_1 + 0x2c) = 0;
       return;

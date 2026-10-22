@@ -13,7 +13,7 @@ inline s32 hpPercent(const BtlCombatantEntryA& entry)
 extern "C" {
 s32 scrGetArg(s32);
 void scrSetResult(s32);
-s32 FUN_00232388(s32);
+s32 btlResolveEntryChoice(s32);
 void FUN_00301a08(s32, u32*, u32*);
 BtlMainStateA* btlGetMainState(void);
 BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
@@ -22,7 +22,7 @@ BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
 u32 scrAnyEligibleHpPercentThreshold(void)
 {
     const s32 threshold = scrGetArg(0);
-    const s32 kind = FUN_00232388(scrGetArg(1));
+    const s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 first, count;
     FUN_00301a08(kind, reinterpret_cast<u32*>(&first), reinterpret_cast<u32*>(&count));
     for (s32 index = first; index < first + count; ++index) {

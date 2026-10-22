@@ -1,41 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011a324` (_code @ 0x11a324, 0x94 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r5, [pc, #136] differs from recovered cmp r0, #64. */
+#include "common.h"
+
+struct SoundVolumeStateView {
+    u8 unk00[0x87C];                 // 0x000
+    void* sounds[4];                 // 0x87C
+    u8 unk88C[0x1BD];                // 0x88C
+    u8 volume;                      // 0xA49
+};
 
 extern "C" {
-
-int VectorUnsignedToFloat(unsigned int, int);
-int nw_snd_internal_BasicSound_SetVolume(int, int);
-
-extern unsigned char DAT_004e2f68; /* 0x4e2f68 */
-extern unsigned char DAT_004e3135; /* 0x4e3135 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: nw_snd_internal_BasicSound_SetVolume. */
-
-
-void FUN_0011a324(unsigned int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int in_fpscr;
-  
-  DAT_004e3135 = (unsigned char)param_1;
-  if (param_1 >= 0x41) {
-    DAT_004e3135 = 0x40;
-  }
-  if (param_1 != 0) {
-    VectorUnsignedToFloat((unsigned int)DAT_004e3135,(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  temp_v0 = 0;
-  do {
-    if (*(int *)(&DAT_004e2f68 + temp_v0 * 4) != 0) {
-      nw_snd_internal_BasicSound_SetVolume(*(int *)(&DAT_004e2f68 + temp_v0 * 4),0);
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 4);
-  return;
+extern SoundVolumeStateView DAT_004e26ec;
+void nw_snd_internal_BasicSound_SetVolume(void* sound, f32 volume, s32 frames);
 }
 
-} /* extern "C" */
+// Store the capped volume and apply its normalized gain to each occupied sound slot.
+extern "C" void FUN_0011a324(u32 volume)
+{
+    SoundVolumeStateView* state = &DAT_004e26ec;
+    if (state == 0) {
+        return;
+    }
+
+    state->volume = (u8)volume;
+    if (volume > 64) {
+        state->volume = 64;
+    }
+
+    f32 gain;
+    if (volume == 0) {
+        gain = 0.0f;
+    } else {
+        gain = 1.0f + ((f32)(u32)state->volume - 64.0f) * (1.0f / 63.5f);
+        if (gain > 1.0f) {
+            gain = 1.0f;
+        }
+    }
+
+    for (u8 index = 0; index < 4; ++index) {
+        if (state->sounds[index] != 0) {
+            nw_snd_internal_BasicSound_SetVolume(state->sounds[index], gain, 0);
+        }
+    }
+}

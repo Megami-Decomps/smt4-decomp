@@ -1,8 +1,8 @@
+#include "battle/btlScript.h"
 #include "shard/W4_W4Match6b_BtlUnitWork.h"
 
 extern "C" {
 
-extern s32 g_btlScriptUnit;
 extern s32 scrGetArg(void);
 extern BtlUnit *btlUnitGet(s32 id);
 extern void scrSetResult(s32 value);

@@ -1,48 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00357d2c` (_code @ 0x357d2c, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r4, r5, r6, lr} differs from recovered push {r4, r5, r6, r7, r8, lr}. */
+#include "common.h"
+
+struct SaveSlotView {
+    u8 unk00[0x12c];
+    u16 unk12C; // 0x12c
+};
 
 extern "C" {
+u32 scrGetArg(u32 index);
+SaveSlotView* saveSlotFindSelected(void);
+SaveSlotView* FUN_003e4d68(u16 index);
+s32 FUN_00187168(SaveSlotView* slot);
+s32 FUN_003e4e4c(s32 value);
+void FUN_003e48dc(u16 value);
 
-void FUN_003e48dc(unsigned int);
-int FUN_003e4e4c(int);
-
-extern int saveSlotFindSelected(void);
-extern int FUN_00187168(int);
-extern unsigned int scrGetArg(unsigned int);
-extern int FUN_003e4d68(unsigned int);
-/* Supplied declaration required: FUN_003e4e4c. */
-
-
-unsigned int FUN_00357d2c(void)
-
+// Select an eligible alternate before processing the currently selected value.
+u32 FUN_00357d2c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = saveSlotFindSelected();
-  if ((temp_v2 != 0) && (*(unsigned short *)(temp_v2 + 300) == temp_v1)) {
-    temp_v4 = 0;
-    do {
-      temp_v2 = FUN_003e4d68(temp_v4 & 0xffff);
-      if ((*(unsigned short *)(temp_v2 + 300) != temp_v1) && (temp_v3 = FUN_00187168(temp_v2), temp_v3 != 0)) {
-        temp_v0 = *(unsigned short *)(temp_v2 + 300);
-        FUN_003e4e4c(temp_v0);
-        FUN_003e48dc(temp_v1 & 0xffff);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while ((int)temp_v4 < 0xc);
-    temp_v0 = 0;
-    FUN_003e4e4c(temp_v0);
-  }
-  FUN_003e48dc(temp_v1 & 0xffff);
-  return 1;
-}
+    const u32 requestedValue = scrGetArg(0);
+    SaveSlotView* selectedSlot = saveSlotFindSelected();
 
-} /* extern "C" */
+    if (selectedSlot != 0 && selectedSlot->unk12C == requestedValue) {
+        u16 replacementValue;
+        s32 index;
+        for (index = 0; index < 12; ++index) {
+            SaveSlotView* candidate = FUN_003e4d68((u16)index);
+            if (candidate->unk12C != requestedValue && FUN_00187168(candidate) != 0) {
+                replacementValue = candidate->unk12C;
+                break;
+            }
+        }
+        if (index == 12) {
+            replacementValue = 0;
+        }
+        FUN_003e4e4c(replacementValue);
+    }
+
+    FUN_003e48dc((u16)requestedValue);
+    return 1;
+}
+}

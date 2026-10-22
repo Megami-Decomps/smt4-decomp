@@ -3,7 +3,7 @@
 extern "C" {
 
 extern u32 scrGetArg(void);
-extern f32 FUN_00266b44(int kind);
+extern f32 scriptReadStackValueAsFloat(int kind);
 extern u32 FUN_0030a0f0(u32 arg, f32 a, f32 b);
 extern void eventTexSetJobParam(void);
 extern void eventTexAddJob(u32 handle);
@@ -15,7 +15,7 @@ u32 FUN_001ed3d4(void)
     u32 arg = scrGetArg();
     u32 handle;
 
-    handle = FUN_0030a0f0(arg, FUN_00266b44(1), 0.0f);
+    handle = FUN_0030a0f0(arg, scriptReadStackValueAsFloat(1), 0.0f);
     eventTexSetJobParam();
     eventTexAddJob(handle);
     scrSetResult(handle);

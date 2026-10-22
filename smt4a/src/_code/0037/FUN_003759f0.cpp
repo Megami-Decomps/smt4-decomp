@@ -1,55 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003759f0` (_code @ 0x3759f0, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materialises the null-record `return 0` as moveq r0,#0 in the first block and keeps 0 in r7 for the later ones; ours branches to one shared `return 0`. */
+#include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
 
-int FUN_001ad9b4(void);
+s32 FUN_002f744c(u8 group);
 
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_002f744c(unsigned char);
-
-
-unsigned int FUN_003759f0(unsigned short *param_1,unsigned short *param_2)
-
+/* Sort comparator over item ids: higher rank first, then higher group order, then higher sort key
+ * (0 when either id has no record). */
+s32 FUN_003759f0(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_001ad9b4();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_001ad9b4();
-  if (temp_v0 == 0) {
-    temp_v1 = 0;
-  }
-  if ((temp_v0 != 0 && temp_v1 != 0) &&
-     (temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 0xdc) - (unsigned int)*(unsigned short *)(temp_v0 + 0xdc), temp_v1 == 0)) {
-    temp_v1 = (unsigned int)*param_1;
-    FUN_001ad9b4();
-    temp_v0 = (unsigned int)*param_2;
-    FUN_001ad9b4();
-    if (temp_v1 == 0 || temp_v0 == 0) {
-      return 0;
-    }
-    temp_v2 = FUN_002f744c(*(unsigned char *)(temp_v0 + 6));
-    temp_v3 = FUN_002f744c(*(unsigned char *)(temp_v1 + 6));
-    temp_v1 = temp_v2 - temp_v3;
-    if (temp_v1 == 0) {
-      temp_v1 = (unsigned int)*param_1;
-      FUN_001ad9b4();
-      temp_v0 = (unsigned int)*param_2;
-      FUN_001ad9b4();
-      if (temp_v1 == 0 || temp_v0 == 0) {
+    ItemDataRecord *leftRecord;
+    ItemDataRecord *rightRecord;
+    s32 diff;
+
+    leftRecord = FUN_001ad9b4(*left);
+    rightRecord = FUN_001ad9b4(*right);
+    if (leftRecord == NULL || rightRecord == NULL) {
         return 0;
-      }
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 4) - (unsigned int)*(unsigned short *)(temp_v1 + 4);
     }
-  }
-  return temp_v1;
+    diff = rightRecord->ranking.rank - leftRecord->ranking.rank;
+    if (diff != 0) {
+        return diff;
+    }
+
+    leftRecord = FUN_001ad9b4(*left);
+    rightRecord = FUN_001ad9b4(*right);
+    if (leftRecord == NULL || rightRecord == NULL) {
+        return 0;
+    }
+    diff = FUN_002f744c(rightRecord->ordering.sortGroup) - FUN_002f744c(leftRecord->ordering.sortGroup);
+    if (diff != 0) {
+        return diff;
+    }
+
+    leftRecord = FUN_001ad9b4(*left);
+    rightRecord = FUN_001ad9b4(*right);
+    if (leftRecord == NULL || rightRecord == NULL) {
+        return 0;
+    }
+    return rightRecord->ordering.sortKey - leftRecord->ordering.sortKey;
 }
 
 } /* extern "C" */

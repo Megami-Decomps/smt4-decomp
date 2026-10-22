@@ -9,14 +9,14 @@ typedef struct ItemRecord {
 
 extern ItemRecord *FUN_00480ba0(u16 id);
 extern int FUN_003a6868(u16 category);
-extern int FUN_0039a598(u16 category);
+extern int dataTable04GetCategoryOrder(u16 category);
 
 /* Orders two item ids by the first, then the second key of their category, then by id. */
 int itemCompareByCategory(u16 *a, u16 *b)
 {
     ItemRecord *recordA = FUN_00480ba0(*a);
     ItemRecord *recordB = FUN_00480ba0(*b);
-    int diff = FUN_0039a598(recordA->category) - FUN_0039a598(recordB->category);
+    int diff = dataTable04GetCategoryOrder(recordA->category) - dataTable04GetCategoryOrder(recordB->category);
 
     if (diff == 0) {
         diff = FUN_003a6868(recordA->category) - FUN_003a6868(recordB->category);

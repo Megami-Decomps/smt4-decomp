@@ -1,54 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017e844` (_code @ 0x17e844, 0xa0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r0, [pc, #152] differs from recovered ldr r0, [pc, #156]. */
+#include "common.h"
+
+struct GfxAttributeFormatLocalView {
+    u32 unk00;                    // 0x00
+    u32 unk04;                    // 0x04
+};
+
+struct GfxAttributeLocalView {
+    u32 unk00;                    // 0x00
+    GfxAttributeFormatLocalView unk04; // 0x04
+    u8 unk0C[0x0C];               // 0x0C
+};
+
+struct GfxVector4LocalView {
+    f32 unk00;                    // 0x00
+    f32 unk04;                    // 0x04
+    f32 unk08;                    // 0x08
+    f32 unk0C;                    // 0x0C
+};
+
+struct GfxEntryDefaultsLocalView {
+    u32 unk00;                    // 0x00
+    u32 unk04;                    // 0x04
+    u32 unk08;                    // 0x08
+};
+
+struct GfxStateLocalView {
+    GfxAttributeLocalView unk000[16]; // 0x000
+    u8 unk180[8];                    // 0x180
+    GfxVector4LocalView unk188[16];   // 0x188
+    GfxEntryDefaultsLocalView unk288[16]; // 0x288
+};
 
 extern "C" {
+extern void* (*g_gfxAllocateCallback)(u32, u32, u32, u32);
+void sysMemClear(void* destination, u32 size);
 
-int sysMemClear(int, int);
-
-typedef int romwright_code(...);
-extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
-
-/* Supplied declaration required: sysMemClear. */
-
-
-int FUN_0017e844(void)
-
+// Allocate and clear the graphics state, then initialize its sixteen entry defaults.
+GfxStateLocalView* FUN_0017e844(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
-    temp_v3 = 0;
-  }
-  else {
-    temp_v3 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x348);
-    if (temp_v3 != 0) {
-      sysMemClear(temp_v3,0x348);
-      temp_v2 = 0;
-      do {
-        temp_v1 = temp_v3 + temp_v2 * 0x10;
-        temp_v4 = temp_v3 + temp_v2 * 0x18;
-        temp_v0 = temp_v2 + 1;
-        *(unsigned int *)(temp_v4 + 4) = 4;
-        *(unsigned int *)(temp_v4 + 8) = 0x1406;
-        *(unsigned int *)(temp_v1 + 400) = 0;
-        *(unsigned int *)(temp_v1 + 0x18c) = 0;
-        *(unsigned int *)(temp_v1 + 0x188) = 0;
-        *(unsigned int *)(temp_v1 + 0x194) = 0x3f800000;
-        temp_v2 = temp_v3 + temp_v2 * 0xc;
-        *(unsigned int *)(temp_v2 + 0x28c) = 0;
-        *(unsigned int *)(temp_v2 + 0x288) = 0x3f000000;
-        *(unsigned int *)(temp_v2 + 0x290) = 0;
-        temp_v2 = temp_v0;
-      } while (temp_v0 < 0x10);
+    GfxStateLocalView* state = 0;
+    if (g_gfxAllocateCallback) {
+        state = static_cast<GfxStateLocalView*>(
+            g_gfxAllocateCallback(0x10000, 0x100, 0, 0x348));
+        if (state) {
+            sysMemClear(state, 0x348);
+            const GfxAttributeFormatLocalView defaultFormat = {4, 0x1406};
+            for (s32 index = 0; index < 16; ++index) {
+                state->unk000[index].unk04 = defaultFormat;
+                state->unk188[index].unk08 = 0.0f;
+                state->unk188[index].unk04 = 0.0f;
+                state->unk188[index].unk00 = 0.0f;
+                state->unk188[index].unk0C = 1.0f;
+                state->unk288[index].unk04 = 0;
+                state->unk288[index].unk00 = 0x3F000000;
+                state->unk288[index].unk08 = 0;
+            }
+        }
     }
-  }
-  return temp_v3;
+    return state;
 }
-
-} /* extern "C" */
+}

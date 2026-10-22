@@ -1,72 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022708c` (_code @ 0x22708c, 0xac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail builds each vector address (owner + 0x3060/0x3068) in its own register; the vector stores fold into r0 offsets here. */
+#include "common.h"
+
+class ScreenEffect {
+public:
+    virtual ~ScreenEffect();
+};
+
+typedef struct Vec2f {
+    f32 x;
+    f32 y;
+} Vec2f;
+
+typedef struct ScreenFadeWork {
+    /* 0x3000 */ u8 unk3000[0x28];
+    /* 0x3028 */ u32 flags; // bits 12-14: active fade layers
+    /* 0x302C */ u8 unk302C[0xE];
+    /* 0x303A */ u16 unk303A;
+    /* 0x303C */ u16 unk303C;
+    /* 0x303E */ u16 unk303E;
+    /* 0x3040 */ u8 unk3040;
+    /* 0x3041 */ u8 unk3041;
+    /* 0x3042 */ u16 unk3042;
+    /* 0x3044 */ u16 unk3044;
+    /* 0x3046 */ u16 unk3046;
+    /* 0x3048 */ u8 unk3048[4];
+    /* 0x304C */ ScreenEffect *effect;
+    /* 0x3050 */ u32 unk3050;
+    /* 0x3054 */ u32 unk3054;
+    /* 0x3058 */ void *buffer58;
+    /* 0x305C */ void *buffer5C;
+    /* 0x3060 */ Vec2f offset;
+    /* 0x3068 */ Vec2f scroll;
+} ScreenFadeWork;
+
+typedef struct ScreenOwner {
+    /* 0x0000 */ u8 unk0000[0x3000];
+    /* 0x3000 */ ScreenFadeWork fade;
+} ScreenOwner;
 
 extern "C" {
 
-int asdMemoryFreeLockedAlt(void);
+void asdMemoryFreeLockedAlt(void *block);
 
-typedef struct fn_0022708c_arg0 fn_0022708c_arg0;
-struct fn_0022708c_arg0 {
-    unsigned char pad_0x0[0x3028];
-    uint field_0x3028; /* +0x3028 */
-    unsigned char pad_0x302c[0xe];
-    undefined2 field_0x303a; /* +0x303a */
-    undefined2 field_0x303c; /* +0x303c */
-    undefined2 field_0x303e; /* +0x303e */
-    undefined1 field_0x3040; /* +0x3040 */
-    undefined1 field_0x3041; /* +0x3041 */
-    undefined2 field_0x3042; /* +0x3042 */
-    undefined2 field_0x3044; /* +0x3044 */
-    undefined2 field_0x3046; /* +0x3046 */
-    unsigned char pad_0x3048[0x4];
-    void *field_0x304c; /* +0x304c */
-    undefined4 field_0x3050; /* +0x3050 */
-    undefined4 field_0x3054; /* +0x3054 */
-    int field_0x3058; /* +0x3058 */
-    int field_0x305c; /* +0x305c */
-    undefined4 field_0x3060; /* +0x3060 */
-    undefined4 field_0x3064; /* +0x3064 */
-    undefined4 field_0x3068; /* +0x3068 */
-    undefined4 field_0x306c; /* +0x306c */
-};
-
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMemoryFreeLockedAlt. */
-
-
-void FUN_0022708c(fn_0022708c_arg0 *param_1)
-
+static __inline void vec2Set(Vec2f *v, f32 x, f32 y)
 {
-/* irregular: 1 native warning(s); review required */
-  param_1->field_0x303a = 0;
-  param_1->field_0x303c = 0;
-  param_1->field_0x303e = 0;
-  param_1->field_0x3040 = 0;
-  param_1->field_0x3041 = 0;
-  param_1->field_0x3046 = 0;
-  param_1->field_0x3042 = 0;
-  param_1->field_0x3044 = 0;
-  param_1->field_0x3050 = 0;
-  param_1->field_0x3054 = 0;
-  param_1->field_0x3064 = 0;
-  param_1->field_0x3060 = 0;
-  param_1->field_0x306c = 0;
-  param_1->field_0x3068 = 0;
-  param_1->field_0x3028 = param_1->field_0x3028 & 0xffff8fff;
-  if (param_1->field_0x304c != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1->field_0x304c + 4))();
-    param_1->field_0x304c = (void *)0x0;
-  }
-  if (param_1->field_0x3058 != 0) {
-    asdMemoryFreeLockedAlt();
-    param_1->field_0x3058 = 0;
-  }
-  if (param_1->field_0x305c != 0) {
-    asdMemoryFreeLockedAlt();
-    param_1->field_0x305c = 0;
-  }
-  return;
+    v->y = y;
+    v->x = x;
+}
+
+/* Resets the screen fade state and releases its effect and buffers. */
+void FUN_0022708c(ScreenOwner *owner)
+{
+    ScreenFadeWork *fade = &owner->fade;
+
+    fade->unk303A = 0;
+    fade->unk303C = 0;
+    fade->unk303E = 0;
+    fade->unk3040 = 0;
+    fade->unk3041 = 0;
+    fade->unk3046 = 0;
+    fade->unk3042 = 0;
+    fade->unk3044 = 0;
+    fade->unk3050 = 0;
+    fade->unk3054 = 0;
+    vec2Set(&owner->fade.offset, 0.0f, 0.0f);
+    vec2Set(&owner->fade.scroll, 0.0f, 0.0f);
+    fade->flags &= ~0x7000;
+    if (fade->effect != NULL) {
+        delete fade->effect;
+        fade->effect = NULL;
+    }
+    if (fade->buffer58 != NULL) {
+        asdMemoryFreeLockedAlt(fade->buffer58);
+        fade->buffer58 = NULL;
+    }
+    if (fade->buffer5C != NULL) {
+        asdMemoryFreeLockedAlt(fade->buffer5C);
+        fade->buffer5C = NULL;
+    }
 }
 
 } /* extern "C" */

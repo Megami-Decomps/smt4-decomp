@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00192550(void);
+int dataTable8FindRecord(void);
 int dataTable04FindById(void);
 int __aeabi_memset4(unsigned int *, int, unsigned int);
 int sysMemClear(unsigned int *, int);
@@ -50,7 +50,7 @@ extern unsigned int DAT_00571228; /* 0x571228 */
 extern unsigned int DAT_0057122c; /* 0x57122c */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00192550. */
+/* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: sysMemClear. */
@@ -105,7 +105,7 @@ void FUN_004dd0c4(int *param_1,unsigned int *param_2)
   temp_v11 = *(unsigned int *)(*(int *)(*param_1 + 0x1ffc) + (unsigned int)(unsigned short)param_2[0xb] * 0x408);
   temp_v12 = temp_v21;
   dataTable04FindById();
-  FUN_00192550();
+  dataTable8FindRecord();
   if (temp_v2 != 2) {
     if (temp_v2 == 8) {
       temp_v16 = 0;

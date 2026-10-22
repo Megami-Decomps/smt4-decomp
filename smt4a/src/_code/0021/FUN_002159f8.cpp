@@ -5,7 +5,7 @@ extern "C" {
 
 void FUN_002159f8(s32 flagIndex, u8 mask)
 {
-    GameSaveImage *save = static_cast<GameSaveImage *>(g_gameDataBlocks.saveBlock);
+    GameSaveImage *save = reinterpret_cast<GameSaveImage  *>(g_gameDataBlocks.saveBlock);
     save->work.flags[flagIndex] &= ~mask;
 }
 

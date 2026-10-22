@@ -27,7 +27,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002973d8(void);
+extern int messageMainGetChoiceResult(void);
 extern int sys43e188GetState(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -49,7 +49,7 @@ void FUN_00397b40(int param_1)
   if (*(char *)(param_1 + 0x658) != '\0') {
     temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x654));
     if (temp_v1 == 2) {
-      temp_v1 = FUN_002973d8();
+      temp_v1 = messageMainGetChoiceResult();
       if (temp_v1 != 0) {
         FUN_00296ee0(param_1,2);
         if (*(char *)(param_1 + 0x29) != '\0') {

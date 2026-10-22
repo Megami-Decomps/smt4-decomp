@@ -1,48 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00409bc8` (_code @ 0x409bc8, 0x94 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail ldr r2, [pc, #140] differs from recovered ldrb r2, [r4, #488]. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_0019f828(undefined4, float *);
-
-typedef struct fn_00409bc8_arg0 fn_00409bc8_arg0;
-struct fn_00409bc8_arg0 {
-    unsigned char pad_0x0[0x530];
-    undefined4 field_0x530; /* +0x530 */
-    unsigned char pad_0x534[0xca4];
-    float field_0x11d8; /* +0x11d8 */
-    float field_0x11dc; /* +0x11dc */
-    float field_0x11e0; /* +0x11e0 */
-    float field_0x11e4; /* +0x11e4 */
-    char field_0x11e8; /* +0x11e8 */
+struct Float4View {
+    f32 values[4];
 };
 
-/* Supplied declaration required: FUN_0019f828. */
+struct FUN_00409bc8_ObjectView {
+    u8 unk0[0x530];             // +0x0000
+    u32 unk530;                // +0x0530
+    u8 unk534[0xCA4];          // +0x0534
+    Float4View unk11D8;        // +0x11D8
+    u8 unk11E8;                // +0x11E8
+};
 
+extern "C" s32 FUN_0019f828(u32 handle, f32* values);
 
-void FUN_00409bc8(fn_00409bc8_arg0 *param_1,float *param_2)
-
+// Copy and submit changed four-float data, then clear the forced-update flag.
+extern "C" void FUN_00409bc8(FUN_00409bc8_ObjectView* object,
+                              const Float4View* values)
 {
-/* irregular: 1 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  
-  if ((((param_1->field_0x11e8 != '\0') || (*param_2 != param_1->field_0x11d8)) ||
-      (param_2[1] != param_1->field_0x11dc)) ||
-     ((param_2[2] != param_1->field_0x11e0 || (param_2[3] != param_1->field_0x11e4)))) {
-    temp_v0 = param_2[1];
-    temp_v1 = param_2[2];
-    temp_v2 = param_2[3];
-    param_1->field_0x11d8 = *param_2;
-    param_1->field_0x11dc = temp_v0;
-    param_1->field_0x11e0 = temp_v1;
-    param_1->field_0x11e4 = temp_v2;
-    FUN_0019f828(param_1->field_0x530,&param_1->field_0x11d8);
-  }
-  param_1->field_0x11e8 = '\0';
-  return;
+    if (object->unk11E8 != 0 ||
+        values->values[0] != object->unk11D8.values[0] ||
+        values->values[1] != object->unk11D8.values[1] ||
+        values->values[2] != object->unk11D8.values[2] ||
+        values->values[3] != object->unk11D8.values[3]) {
+        object->unk11D8 = *values;
+        FUN_0019f828(object->unk530, object->unk11D8.values);
+    }
+    object->unk11E8 = 0;
 }
-
-} /* extern "C" */

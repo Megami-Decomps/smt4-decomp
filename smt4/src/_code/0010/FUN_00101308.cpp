@@ -33,7 +33,7 @@ int FUN_00105970(...);
 int asdGxResumeAndApplyPreset(...);
 int asdGxPresetsGetDepth(...);
 int asdGxSetChannelFlags(...);
-int FUN_00105f98(...);
+int soundFlushEventQueue(...);
 int FUN_0010633c(...);
 int dataTable02Sub3GetRecord(...);
 int FUN_00107264(...);
@@ -62,8 +62,8 @@ int FUN_00105948(...);
 int titleConfigResetDefaults(...);
 int FUN_00105cac(...);
 int FUN_00105e50(...);
-int FUN_00105ef8(...);
-int FUN_00106080(...);
+int soundInitializePersistentSlots(...);
+int soundSetupArchiveAndSlots(...);
 int FUN_00106650(...);
 int FUN_00106a18(...);
 int asdGxLoadMaterialShader(...);
@@ -71,7 +71,7 @@ int FUN_0010707c(...);
 int FUN_001070ac(...);
 int FUN_001071a0(...);
 int gameDataFlagsClearAndRefresh(...);
-int FUN_002c5758(...);
+int gameDataRemoveHomeButtonHold(...);
 int asdProcessCreateSimple(...);
 int asdSequenceRequest(...);
 int titleConfigApplyAudio(...);
@@ -166,7 +166,7 @@ extern int titlePrepareDrawFrame(...); /* 0x102738 */
 extern int titleBeginCommandList(...); /* 0x102798 */
 extern int titleSceneStep(...); /* 0x1027d4 */
 extern int titleSubmitCommandAndUpdateMode(...); /* 0x102834 */
-extern int FUN_00102884(...); /* 0x102884 */
+extern int titleRunActiveCommand(...); /* 0x102884 */
 extern unsigned char LAB_00102d38; /* 0x102d38 */
 extern unsigned char LAB_00102d4c; /* 0x102d4c */
 extern int FUN_00103650(...); /* 0x103650 */
@@ -293,7 +293,7 @@ extern unsigned int asdModelGetStatic3C(void);
 /* Supplied declaration required: FUN_00103cec. */
 extern unsigned long long FUN_00103d38(unsigned int);
 /* Supplied declaration required: FUN_00103d48. */
-extern int FUN_00103e50(void);
+extern int gameDataHasNoFlags(void);
 /* Supplied declaration required: randSetSeed. */
 extern unsigned long long appletProcessSleepQuery(void);
 extern int FUN_00103ec8(void);
@@ -343,9 +343,9 @@ extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_00105e50. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
 /* Supplied declaration required: asdGxSetChannelFlags. */
-/* Supplied declaration required: FUN_00105ef8. */
-/* Supplied declaration required: FUN_00105f98. */
-/* Supplied declaration required: FUN_00106080. */
+/* Supplied declaration required: soundInitializePersistentSlots. */
+/* Supplied declaration required: soundFlushEventQueue. */
+/* Supplied declaration required: soundSetupArchiveAndSlots. */
 /* Supplied declaration required: FUN_0010633c. */
 /* Supplied declaration required: FUN_00106650. */
 extern unsigned int FUN_00106708(void);
@@ -380,7 +380,7 @@ extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_002c567c. */
 /* Supplied declaration required: gameDataFlagsClear. */
 /* Supplied declaration required: gameDataFlagsClearAndRefresh. */
-/* Supplied declaration required: FUN_002c5758. */
+/* Supplied declaration required: gameDataRemoveHomeButtonHold. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: titleConfigApplyAudio. */
@@ -590,8 +590,8 @@ void FUN_00101308(void)
   gameDataAllocBlocks();
   FUN_00104e44(0);
   FUN_00105e50(1);
-  FUN_00106080();
-  FUN_00105ef8();
+  soundSetupArchiveAndSlots();
+  soundInitializePersistentSlots();
   FUN_00106650();
   FUN_001036fc();
   titleConfigResetDefaults();
@@ -638,7 +638,7 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c6c,0xcc,0);
-  temp_v26 = FUN_00102884;
+  temp_v26 = titleRunActiveCommand;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c80,0xcd,0);
@@ -696,7 +696,7 @@ void FUN_00101308(void)
   FUN_00102e34(0);
   temp_v22 = 0.25f;
   FUN_00106a18(g_titleScene);
-  FUN_002c5758(7);
+  gameDataRemoveHomeButtonHold(7);
   gameDataFlagsClearAndRefresh(7);
   gameDataFlagsClear(1);
   DAT_00446db3 = 0;
@@ -761,7 +761,7 @@ LAB_00101b80:
           temp_v4 = (unsigned int)g_mobiclipProcess;
           if (temp_v4 == 0) {
             FUN_0010633c();
-            FUN_00105f98();
+            soundFlushEventQueue();
             temp_v4 = FUN_00106708();
           }
           asdPrimSwapBuffers(temp_v4);
@@ -820,7 +820,7 @@ LAB_00101b80:
           }
         }
         if (DAT_00446db3 != 0) {
-          temp_v2 = FUN_00103e50();
+          temp_v2 = gameDataHasNoFlags();
           if (temp_v2 != 0) {
             FUN_00123934();
             if (g_mobiclipProcess != 0) {

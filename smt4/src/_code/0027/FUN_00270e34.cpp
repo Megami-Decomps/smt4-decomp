@@ -20,7 +20,7 @@ extern int g_mapMain; /* 0x447e28 */
 /* Supplied declaration required: FUN_002897f0. */
 /* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
-extern int FUN_00289e54(int, unsigned int, unsigned int);
+extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -47,7 +47,7 @@ unsigned int FUN_00270e34(void)
                *(unsigned int *)(temp_v0 + 100));
   textFormatBuffer(temp_v5,"event/e%03d/e%03d.mbm",*(unsigned int *)(temp_v0 + 100),
                *(unsigned int *)(temp_v0 + 100));
-  temp_v1 = FUN_00289e54(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);
+  temp_v1 = aocPackageGrantsItem(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);
   if (temp_v1 != 0) {
     temp_v1 = g_aocSystem;
     FUN_00289de4(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);

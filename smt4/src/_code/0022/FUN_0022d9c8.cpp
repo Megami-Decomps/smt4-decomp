@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00230aec(int, int, int, int, int, int, int, int, unsigned char [44]);
+int drawTextAtRelativePosition(int, int, int, int, int, int, int, int, unsigned char [44]);
 int textFormatBuffer(unsigned char [44], unsigned char *, unsigned int);
 int FUN_002bf4f0(int, int);
 
@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_0022daa4; /* 0x22daa4 */
 
-/* Supplied declaration required: FUN_00230aec. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf4f0. */
 
@@ -49,7 +49,7 @@ void FUN_0022d9c8(int param_1,unsigned int param_2,int param_3,int param_4,unsig
   temp_v2 = *(short *)(temp_v5 + 10);
   temp_v3 = *(short *)(temp_v4 + 8);
   textFormatBuffer(temp_v6,&LAB_0022daa4,param_2);
-  FUN_00230aec(param_1 + 200,0,(int)temp_v3 + (int)temp_v0,(int)temp_v1 + (int)temp_v2,0,7,
+  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v3 + (int)temp_v0,(int)temp_v1 + (int)temp_v2,0,7,
                (int)((unsigned long long)param_5 >> 0x20),(int)param_5,temp_v6);
   return;
 }

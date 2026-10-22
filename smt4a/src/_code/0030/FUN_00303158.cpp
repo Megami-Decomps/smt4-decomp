@@ -1,58 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303158` (_code @ 0x303158, 0x8c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Raw storage for the still-unnamed native parser initializer has different stack placement and cleanup joins. */
+#include "classes/Obj558c00.h"
 
+struct ResourceReadWork { u32 unk00[0x2C]; };
+struct ResourceDataBuffer { u32 unk00[8]; };
 extern "C" {
+void FUN_002f7a28(ResourceReadWork*);
+s32 FUN_002f7ac4(ResourceReadWork*, const void*);
+void FUN_002ec70c(ResourceReadWork*);
+void FUN_002ece14(ResourceDataBuffer*, const ResourceDataBuffer*);
+s32 FUN_002fdef8(ResourceReadWork*, ResourceDataBuffer*);
+void strDestroy(ResourceDataBuffer*);
+Obj558c00* FUN_002ecd54(Obj558c00*);
+s32 FUN_002ecb04(Obj558c00*, const void*);
 
-int FUN_002ec70c(unsigned char [176]);
-int strDestroy(unsigned char [32]);
-int FUN_002ecd54(unsigned char [560]);
-int FUN_002ece14(unsigned char [32], unsigned int);
-int _ZN9Obj558c00D1Ev(unsigned char [560]);
-int FUN_002f7a28(unsigned char [176]);
-
-/* Supplied declaration required: FUN_002ec70c. */
-/* Supplied declaration required: strDestroy. */
-extern int FUN_002ecb04(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002ecd54. */
-/* Supplied declaration required: FUN_002ece14. */
-/* Supplied declaration required: _ZN9Obj558c00D1Ev. */
-/* Supplied declaration required: FUN_002f7a28. */
-extern int FUN_002f7ac4(unsigned char *, unsigned int);
-extern int FUN_002fdef8(unsigned char *, unsigned char *);
-extern int _ZN9Obj558c007vfunc10EiP14Obj558c00Range(unsigned char *, unsigned char *, unsigned int);
-
-
-unsigned char FUN_00303158(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Initializes a resource reader, copies its input, and decodes the requested range.
+u32 FUN_00303158(void* unused, const ResourceDataBuffer* input,
+    Obj558c00Range* range, const void* configuration)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [560];
-  unsigned char temp_v2 [176];
-  unsigned char temp_v3 [32];
-  
-  FUN_002f7a28(temp_v2);
-  temp_v0 = FUN_002f7ac4(temp_v2,param_4);
-  if (temp_v0 != 0) {
-    FUN_002ece14(temp_v3,param_2);
-    temp_v0 = FUN_002fdef8(temp_v2,temp_v3);
-    if (temp_v0 != 0) {
-      FUN_002ecd54(temp_v1);
-      temp_v0 = FUN_002ecb04(temp_v1,param_4);
-      if (temp_v0 != 0) {
-        temp_v0 = _ZN9Obj558c007vfunc10EiP14Obj558c00Range(temp_v1,temp_v3,param_3);
-        _ZN9Obj558c00D1Ev(temp_v1);
-        strDestroy(temp_v3);
-        FUN_002ec70c(temp_v2);
-        return temp_v0 == 0;
-      }
-      _ZN9Obj558c00D1Ev(temp_v1);
+    ResourceReadWork reader;
+    FUN_002f7a28(&reader);
+    if (FUN_002f7ac4(&reader, configuration) == 0) {
+        FUN_002ec70c(&reader);
+        return 0;
     }
-    strDestroy(temp_v3);
-  }
-  FUN_002ec70c(temp_v2);
-  return 0;
+    ResourceDataBuffer buffer;
+    FUN_002ece14(&buffer, input);
+    if (FUN_002fdef8(&reader, &buffer) == 0) {
+        strDestroy(&buffer);
+        FUN_002ec70c(&reader);
+        return 0;
+    }
+    // The still-unnamed native initializer starts the parser's lifetime in this storage.
+    u32 parserStorage[sizeof(Obj558c00) / sizeof(u32)];
+    Obj558c00* parser = reinterpret_cast<Obj558c00*>(parserStorage);
+    FUN_002ecd54(parser);
+    if (FUN_002ecb04(parser, configuration) == 0) {
+        parser->Obj558c00::~Obj558c00();
+        strDestroy(&buffer);
+        FUN_002ec70c(&reader);
+        return 0;
+    }
+    u32 result = parser->Obj558c00::vfunc10((s32)&buffer, range) == 0;
+    parser->Obj558c00::~Obj558c00();
+    strDestroy(&buffer);
+    FUN_002ec70c(&reader);
+    return result;
 }
-
-} /* extern "C" */
+}

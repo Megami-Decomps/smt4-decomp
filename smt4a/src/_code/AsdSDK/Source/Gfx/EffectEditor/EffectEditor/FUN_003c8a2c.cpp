@@ -1,60 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c8a2c` (_code @ 0x3c8a2c, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail defines the record, its saved header and the page tables in this unit and addresses DAT_00634bc0 and DAT_0059e738 relative to their neighbours (`sub r0, r1, #0x160`, `sub r1, r0, #0x120`); extern globals need their own literals. */
+#include "shard/W6_W6Match2_EffectEditor.h"
 
-extern "C" {
-
-int rt_memcpy_w(...);
-
-typedef struct fn_003c8a2c_arg0 fn_003c8a2c_arg0;
-struct fn_003c8a2c_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x4];
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
+/* The effect record being edited. */
+struct EffectEditorRecord {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ u32 flags;
+    /* 0x6C */ u8 unk6c[0x24];
 };
 
-extern int DAT_0059dbec; /* 0x59dbec */
-extern unsigned int DAT_0059dbf4; /* 0x59dbf4 */
-extern unsigned char DAT_0059e738; /* 0x59e738 */
-extern unsigned char DAT_0059e780; /* 0x59e780 */
-extern int DAT_0059e864; /* 0x59e864 */
-extern unsigned char *DAT_0059e86c; /* 0x59e86c */
-extern unsigned int DAT_0059e870; /* 0x59e870 */
-extern int DAT_0059e9b4; /* 0x59e9b4 */
-extern unsigned char DAT_00634bc0; /* 0x634bc0 */
-extern unsigned int DAT_00634c28; /* 0x634c28 */
-extern unsigned char DAT_00634d20; /* 0x634d20 */
+/* One line of an editor parameter page. */
+struct EffectEditorPageItem {
+    /* 0x00 */ u8 unk00[0x18];
+};
 
-extern unsigned int linkedFindItemByIndex(unsigned int, int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* The parameter page cursor: the shown items and the selected one. */
+struct EffectEditorPageCursor {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0C */ s32 index;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ EffectEditorPageItem *items;
+    /* 0x18 */ s32 itemCount;
+};
 
+extern "C" {
+extern EffectSelectionContext DAT_0059e9a8;
+extern EffectEditorRecord DAT_00634bc0;
+extern u8 DAT_00634d20[0x80];
+extern EffectEditorPageCursor DAT_0059e858;
+extern EffectEditorPageItem DAT_0059e738[3];
+extern EffectEditorPageItem DAT_0059e780[9];
+void *linkedFindItemByIndex(void *list, s32 index);
+void *rt_memcpy_w(void *destination, const void *source, u32 size);
 
-fn_003c8a2c_arg0 * FUN_003c8a2c(fn_003c8a2c_arg0 *param_1)
-
+/* Reloads the selected effect record over its saved header and picks the parameter page for its
+ * kind (flag 2: the three-line page, else the nine-line page), keeping the cursor in range. */
+void *FUN_003c8a2c(void *arg)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059e9b4 + DAT_0059dbec);
-  rt_memcpy_w(&DAT_00634bc0,temp_v0,0x90);
-  rt_memcpy_w(&DAT_00634bc0,&DAT_00634d20,0x80);
-  if ((DAT_00634c28 & 2) != 0) {
-    DAT_0059e86c = &DAT_0059e738;
-    DAT_0059e870 = 3;
-    if (DAT_0059e864 >= 4) {
-      DAT_0059e864 = 0;
+    void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
+                                       DAT_0059e9a8.index + g_effectEditor.selection.index);
+    rt_memcpy_w(&DAT_00634bc0, item, sizeof(EffectEditorRecord));
+    rt_memcpy_w(&DAT_00634bc0, DAT_00634d20, sizeof(DAT_00634d20));
+    if (DAT_00634bc0.flags & 2) {
+        DAT_0059e858.items = DAT_0059e738;
+        DAT_0059e858.itemCount = 3;
+        if (DAT_0059e858.index > 3) {
+            DAT_0059e858.index = 0;
+        }
+    } else {
+        DAT_0059e858.items = DAT_0059e780;
+        DAT_0059e858.itemCount = 9;
+        if (DAT_0059e858.index == 0) {
+            DAT_0059e858.index = 1;
+        }
     }
-  }
-  else {
-    DAT_0059e86c = &DAT_0059e780;
-    DAT_0059e870 = 9;
-    if (DAT_0059e864 == 0) {
-      DAT_0059e864 = 1;
-    }
-  }
-  return param_1;
+    return arg;
 }
 
 } /* extern "C" */

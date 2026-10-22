@@ -10,7 +10,7 @@ int FUN_001bc124(void);
 int FUN_0025ef68(int, int, int);
 int FUN_002e364c(int);
 int FUN_00303460(...);
-int FUN_00313648(int);
+int mapSetSceneState(int);
 int naviMainSetFlagsAndActivate(int, int, int, int, int, int);
 int mathPositionHeadingDegrees(void);
 int linkHolderSetFlag(unsigned int);
@@ -37,7 +37,7 @@ extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: FUN_00313648. */
+/* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int linkHolderCheckFirst(unsigned int);
@@ -261,7 +261,7 @@ void FUN_002d91cc(void)
     if (temp_v0 != 0) {
       *(unsigned char *)(g_lmapScene + 0x6c) = 0;
       DAT_005f1a4e = 0;
-      FUN_00313648(1);
+      mapSetSceneState(1);
       FUN_00303460(0);
       return;
     }

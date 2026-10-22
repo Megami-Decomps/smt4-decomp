@@ -1,8 +1,8 @@
+#include "ui/PartyPanelState.h"
 #include "shard/Shard003C.h"
 
 extern "C" {
-
-extern StateHolder1C *g_partyPanel;
+extern PartyPanelStateA *g_partyPanel;
 
 void FUN_003c1094(s32 flag)
 {

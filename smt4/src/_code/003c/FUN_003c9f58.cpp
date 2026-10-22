@@ -28,7 +28,7 @@ extern int nodeListCountActiveById(unsigned int, unsigned int);
 extern int FUN_002cf124(void);
 /* Supplied declaration required: FUN_003adc20. */
 /* Supplied declaration required: btlUiGetAcceptedSelection. */
-extern int FUN_003ae58c(unsigned int);
+extern int btlUiAcceptSelection(unsigned int);
 /* Supplied declaration required: btlUiAdvanceFadeInTransition. */
 
 
@@ -63,7 +63,7 @@ unsigned int FUN_003c9f58(int *param_1,unsigned int *param_2)
       FUN_00229c5c(g_btlUiBlock,(short)param_2[0xb],1);
     }
   }
-  temp_v1 = FUN_003ae58c(g_btlUiBlock);
+  temp_v1 = btlUiAcceptSelection(g_btlUiBlock);
   if (temp_v1 == 0) {
     return 0;
   }

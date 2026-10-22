@@ -13,7 +13,7 @@ int FUN_00228b04(int, int);
 int scrScriptProcessStartEntry(unsigned int);
 int FUN_002a4914(int, int);
 int FUN_002a4964(int, int);
-int FUN_002a7324(...);
+int statusPanelSetOpen(...);
 int FUN_0032d0c8(...);
 int FUN_003343f0(int);
 int screenShowMessage(...);
@@ -48,7 +48,7 @@ extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002a7324. */
+/* Supplied declaration required: statusPanelSetOpen. */
 extern int gameGetMode(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -113,7 +113,7 @@ void FUN_004bea0c(int param_1)
       if (temp_v4 != 0) {
         temp_v2 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff);
         statusRequestUnitDetails((const UnitCategoryRecord*)temp_v2,0,0);
-        FUN_002a7324(1);
+        statusPanelSetOpen(1);
       }
       if (*(int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) ==
           *(int *)(param_1 + *(int *)(param_1 + 0x328) * 4 + 0x2c4)) {
@@ -179,7 +179,7 @@ void FUN_004bea0c(int param_1)
             temp_v2 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff
                                 );
             statusRequestUnitDetails((const UnitCategoryRecord*)temp_v2,0,0);
-            FUN_002a7324(1);
+            statusPanelSetOpen(1);
           }
         }
       }

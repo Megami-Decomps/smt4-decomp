@@ -6,7 +6,7 @@ extern int objSlotsAllEmpty(u32 value);
 
 u32 FUN_00299fc0(void)
 {
-    int mode = g_gameGlobals.data->unk12DC;
+    int mode = g_gameGlobals.data->activeState;
     u32 result;
 
     if (((mode == 4 || mode == 5) || (mode == 6 || mode == 8)) &&

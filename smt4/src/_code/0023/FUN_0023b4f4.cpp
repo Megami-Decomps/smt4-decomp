@@ -1,57 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023b4f4` (_code @ 0x23b4f4, 0xe8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail evaluates each row as (m1*y + m2*z) + (m3 + m0*x) with vmla and keeps two values in d8-d9; the float expression order is not yet reproduced */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_4_stack;
+typedef struct Vec3f {
+    /* 0x0 */ f32 x;
+    /* 0x4 */ f32 y;
+    /* 0x8 */ f32 z;
+} Vec3f;
 
+/* A row-major 4x4 matrix. */
+typedef struct Mtx44 {
+    /* 0x00 */ f32 m[4][4];
+} Mtx44;
 
-void FUN_0023b4f4(float *param_1,float *param_2,float *param_3,unsigned int param_4)
-
+/* Transforms `count` points by a projective matrix, dividing each by its w. */
+void FUN_0023b4f4(Vec3f *out, const Mtx44 *mtx, const Vec3f *in, u32 count)
 {
-  unsigned int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  
-  temp_v0 = 0;
-  if (temp_v0 < param_4) {
-    do {
-      temp_v1 = param_3[1];
-      temp_v4 = *param_3;
-      temp_v7 = param_2[5];
-      temp_v10 = param_2[9];
-      temp_v3 = param_3[2];
-      temp_v8 = param_2[6];
-      temp_v5 = param_2[7];
-      temp_v9 = param_2[4];
-      temp_v11 = param_2[10];
-      temp_v6 = param_2[0xb];
-      temp_v12 = param_2[8];
-      temp_v0 = temp_v0 + 1;
-      param_3 = param_3 + 3;
-      temp_v2 = 1.0f / (param_2[0xd] * temp_v1 + param_2[0xe] * temp_v3 +
-                    param_2[0xf] + param_2[0xc] * temp_v4);
-      *param_1 = (param_2[1] * temp_v1 + param_2[2] * temp_v3 + param_2[3] + *param_2 * temp_v4) * temp_v2;
-      param_1[1] = (temp_v7 * temp_v1 + temp_v8 * temp_v3 + temp_v5 + temp_v9 * temp_v4) * temp_v2;
-      param_1[2] = (temp_v10 * temp_v1 + temp_v11 * temp_v3 + temp_v6 + temp_v12 * temp_v4) * temp_v2;
-      param_1 = param_1 + 3;
-    } while (temp_v0 < param_4);
-  }
-  return;
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        f32 x = in->x;
+        f32 y = in->y;
+        f32 z = in->z;
+        f32 invW = 1.0f / (mtx->m[3][0] * x + mtx->m[3][1] * y + mtx->m[3][2] * z + mtx->m[3][3]);
+
+        out->x = (mtx->m[0][0] * x + mtx->m[0][1] * y + mtx->m[0][2] * z + mtx->m[0][3]) * invW;
+        out->y = (mtx->m[1][0] * x + mtx->m[1][1] * y + mtx->m[1][2] * z + mtx->m[1][3]) * invW;
+        out->z = (mtx->m[2][0] * x + mtx->m[2][1] * y + mtx->m[2][2] * z + mtx->m[2][3]) * invW;
+        in++;
+        out++;
+    }
 }
 
 } /* extern "C" */

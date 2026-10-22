@@ -1,12 +1,12 @@
 #include "common.h"
 
 extern "C" {
-u32 FUN_002c2658();
+u32 clockGetSecondsSinceStart();
 void scrSetResult(u32 value);
 /* Converts the command timer to a bounded script result. */
 s32 scrCommandTimerReached()
 {
-    u32 timer = FUN_002c2658();
+    u32 timer = clockGetSecondsSinceStart();
     scrSetResult(timer >= 3600 ? 1 : 0);
     return 1;
 }

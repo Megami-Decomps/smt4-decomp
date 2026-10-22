@@ -1,42 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010421c` (_code @ 0x10421c, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: The model-data test uses direct-offset addressing; settings and resource-list bases exchange registers. */
+#include "shard/S1GfxModel.h"
+#include "Model/ModelResource.h"
 extern "C" {
-
-int FUN_001108e4(int *);
-int FUN_002c3364(int *);
-
-typedef int romwright_code(...);
-extern signed char DAT_00464af1; /* 0x464af1 */
-extern unsigned char DAT_00464af2; /* 0x464af2 */
-extern int DAT_00464b30; /* 0x464b30 */
-extern int DAT_00464b70; /* 0x464b70 */
-extern unsigned int *DAT_004dae64; /* 0x4dae64 */
-extern unsigned int *DAT_004dae68; /* 0x4dae68 */
-
-/* Supplied declaration required: FUN_001108e4. */
-/* Supplied declaration required: FUN_002c3364. */
-
+extern GfxModelState g_gfxSettings;
+extern ModelResourceList DAT_004dae60;
+extern void* DAT_00464b70;
+void FUN_002c3364(void**);
+void FUN_001108e4(void**);
 
 void FUN_0010421c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  if (((DAT_00464af1 != '\0') && (DAT_00464b30 < 1)) && (DAT_00464b70 != 0)) {
-    puVar1 = (unsigned int *)*DAT_004dae64;
-    (**(romwright_code **)*puVar1)(puVar1);
-    (**(romwright_code **)(*(int *)puVar1[1] + 0xc))((int *)puVar1[1],puVar1);
-    if (DAT_004dae64 != DAT_004dae68) {
-      DAT_004dae68 = DAT_004dae68 + -1;
+    if (g_gfxSettings.unk01 != 0 && g_gfxSettings.unk40 <= 0 && g_gfxSettings.modelData != NULL) {
+        ModelResource* resource = *DAT_004dae60.begin;
+        resource->vtable->destroy(resource);
+        resource->allocator->release(resource);
+        if (DAT_004dae60.begin != DAT_004dae60.end) {
+            --DAT_004dae60.end;
+        }
+        FUN_002c3364(&DAT_00464b70);
+        FUN_001108e4(&DAT_00464b70);
+        g_gfxSettings.unk02 = 0;
     }
-    FUN_002c3364(&DAT_00464b70);
-    FUN_001108e4(&DAT_00464b70);
-    DAT_00464af2 = 0;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

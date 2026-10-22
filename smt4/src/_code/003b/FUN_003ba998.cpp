@@ -8,7 +8,7 @@ extern "C" {
 int FUN_0022afb0(...);
 int FUN_0022afc4(...);
 int objBlockInitAndMark(int);
-int FUN_0022b064(int);
+int buttonHelpSelectByProgress(int);
 int modelSetVisible(...);
 int FUN_0022b6c4(int);
 int FUN_00234cd8(...);
@@ -16,10 +16,10 @@ void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_00234f5c(...);
 int FUN_00235250(void);
 int placeWinStartText(...);
-int FUN_00270028(...);
+int frameTexApplyMode(...);
 int FUN_00275dec(void);
 int dialogOpen(...);
-int FUN_0027e7b4(...);
+int infoWinSetMessage(...);
 int FUN_002a03d8(int, int);
 int objModelCreateFromSource(...);
 int eventQueueAddUnique(...);
@@ -49,7 +49,7 @@ int FUN_00287c34(int);
 int FUN_00289880(void);
 int FUN_0028a420(int);
 int infoWinStartTimer(int);
-int FUN_00296e90(void);
+int messageMainFinishWindow(void);
 int slotSetRequest(int, int, int);
 int FUN_002a4bac(unsigned int);
 int asdMemFreeNonNull(int);
@@ -78,7 +78,7 @@ extern int FUN_0017fb54(void);
 /* Supplied declaration required: FUN_0022afb0. */
 /* Supplied declaration required: FUN_0022afc4. */
 /* Supplied declaration required: objBlockInitAndMark. */
-/* Supplied declaration required: FUN_0022b064. */
+/* Supplied declaration required: buttonHelpSelectByProgress. */
 extern int FUN_0022b14c(int);
 /* Supplied declaration required: modelSetVisible. */
 /* Supplied declaration required: FUN_0022b29c. */
@@ -98,7 +98,7 @@ extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_0026faa4. */
 /* Supplied declaration required: FUN_0026fe0c. */
 /* Supplied declaration required: FUN_0026ff54. */
-/* Supplied declaration required: FUN_00270028. */
+/* Supplied declaration required: frameTexApplyMode. */
 /* Supplied declaration required: FUN_00273c54. */
 /* Supplied declaration required: FUN_00273d34. */
 /* Supplied declaration required: FUN_00273f5c. */
@@ -109,13 +109,13 @@ extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: mapClearPendingEntries. */
 /* Supplied declaration required: naviClearObjectBlock. */
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0027e7b4. */
+/* Supplied declaration required: infoWinSetMessage. */
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: infoWinStartTimer. */
-/* Supplied declaration required: FUN_00296e90. */
+/* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: objModelCreateFromSource. */
@@ -168,7 +168,7 @@ void FUN_003ba998(int param_1)
     FUN_00275be8(1);
     if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-      FUN_00296e90();
+      messageMainFinishWindow();
     }
     *(unsigned char *)(param_1 + 0xdac) = 0;
     temp_v6 = *(int *)(param_1 + 0x2c) + 1;
@@ -301,7 +301,7 @@ void FUN_003ba998(int param_1)
     objBlockInitAndMark(param_1 + 0x9c);
     FUN_0022b6c4(param_1 + 0x9c);
     *(unsigned char *)(param_1 + 0x6cc) = 0;
-    FUN_0022b064(param_1);
+    buttonHelpSelectByProgress(param_1);
     temp_v6 = campGetState();
     temp_v1 = *(char *)(temp_v6 + 10);
     temp_v8 = temp_v1 == '\0';
@@ -375,7 +375,7 @@ void FUN_003ba998(int param_1)
     }
     if (*(char *)(param_1 + 0xdac) == '\0') {
       dialogOpen(0);
-      FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
+      infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
                    *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
       placeWinStartText(*(int *)(param_1 + 0xd5c) + 2);
       FUN_002305e8(1);
@@ -405,7 +405,7 @@ void FUN_003ba998(int param_1)
     temp_v6 = *(int *)(param_1 + 0x30) + 1;
     *(int *)(param_1 + 0x30) = temp_v6;
     if (temp_v6 == 1) {
-      FUN_00270028(4);
+      frameTexApplyMode(4);
     }
     if (*(int *)(param_1 + 0x30) >= 4) {
       *(unsigned int *)(param_1 + 0x28) = 0x11;

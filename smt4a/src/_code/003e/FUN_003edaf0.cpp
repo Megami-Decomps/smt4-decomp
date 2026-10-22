@@ -1,47 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003edaf0` (_code @ 0x3edaf0, 0xa4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00470714(void);
+typedef struct Vec3f {
+    /* 0x0 */ f32 x;
+    /* 0x4 */ f32 y;
+    /* 0x8 */ f32 z;
+} Vec3f;
 
-extern int g_aocSystem; /* 0x570280 */
+/* One 12-byte entry of data table 0x48: an id and its 2D position. */
+typedef struct PositionEntry {
+    /* 0x0 */ s32 id;
+    /* 0x4 */ f32 x;
+    /* 0x8 */ f32 y;
+} PositionEntry;
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int *dataTableGetEntries(void);
-/* Supplied declaration required: FUN_00470714. */
+void *dataTableGet(s32 table, s32 section);
+void *dataTableGetEntries(void *section);
+s32 dataTableGetCount(void *section);
+PositionEntry *FUN_00470714(s32 system);
 
+extern s32 g_aocSystem; /* 0x570280 */
 
-void FUN_003edaf0(unsigned int param_1,int param_2)
-
+/* Returns the position for an id: the add-on content's when present, else data table 0x48's (z is 0). */
+Vec3f FUN_003edaf0(void *self, s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = g_aocSystem;
-  FUN_00470714();
-  if (temp_v1 != 0) {
-    return;
-  }
-  temp_v0 = dataTableGet(0x48,0);
-  piVar2 = (int *)dataTableGetEntries();
-  temp_v1 = dataTableGetCount(temp_v0);
-  temp_v2 = 0;
-  if (temp_v2 < temp_v1) {
-    do {
-      if (*piVar2 == param_2) {
-        return;
-      }
-      temp_v2 = temp_v2 + 1;
-      piVar2 = piVar2 + 3;
-    } while (temp_v2 < temp_v1);
-  }
-  return;
+    Vec3f pos;
+    PositionEntry *entry;
+    PositionEntry *entries;
+    void *section;
+    s32 count;
+    s32 i;
+
+    pos.z = 0.0f;
+    entry = FUN_00470714(g_aocSystem);
+    if (entry != NULL) {
+        pos.x = entry->x;
+        pos.y = entry->y;
+        return pos;
+    }
+    section = dataTableGet(0x48, 0);
+    entries = (PositionEntry *)dataTableGetEntries(section);
+    count = dataTableGetCount(section);
+    for (i = 0; i < count; i++) {
+        if (entries->id == id) {
+            pos.x = entries->x;
+            pos.y = entries->y;
+            return pos;
+        }
+        entries++;
+    }
+    pos.x = pos.z;
+    pos.y = pos.z;
+    return pos;
 }
 
 } /* extern "C" */

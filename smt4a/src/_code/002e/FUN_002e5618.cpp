@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00275b10(int);
+int scriptReadStackValueAsFloat(int);
 int eventTexSetJobParam(void);
 int scrSetResult(unsigned int);
 int eventTexStoreHandle(unsigned int);
 int FUN_0039b0f8(unsigned int);
 
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00275b10. */
+/* Supplied declaration required: scriptReadStackValueAsFloat. */
 /* Supplied declaration required: eventTexSetJobParam. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: eventTexStoreHandle. */
@@ -28,8 +28,8 @@ unsigned int FUN_002e5618(void)
   unsigned int temp_v2;
   
   temp_v0 = scrGetArg(0);
-  FUN_00275b10(1);
-  FUN_00275b10(2);
+  scriptReadStackValueAsFloat(1);
+  scriptReadStackValueAsFloat(2);
   temp_v1 = eventTexHasMissingValue();
   temp_v2 = 0;
   if (temp_v1 != 0) {

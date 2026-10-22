@@ -9,7 +9,7 @@ int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(unsigned int);
 int FUN_002a4b28(unsigned int);
 int FUN_002e7284(...);
-int FUN_00493408(...);
+int drawTextAtRelativePosition(...);
 int FUN_004a7814(int, unsigned int, int, int, int, unsigned int);
 int FUN_004a7a50(int, int, unsigned int, int, int, int);
 int FUN_004a7ba0(int, unsigned int, int, int, int);
@@ -32,7 +32,7 @@ extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002a4b28. */
 /* Supplied declaration required: FUN_002e7284. */
-/* Supplied declaration required: FUN_00493408. */
+/* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_004a7814. */
 /* Supplied declaration required: FUN_004a7a50. */
 /* Supplied declaration required: FUN_004a7ba0. */
@@ -71,7 +71,7 @@ void FUN_004a2a30(int param_1,int param_2,int param_3,unsigned int param_4)
                  *(unsigned int *)(param_2 * 4 + 0x5e1d20),temp_v2,param_2 * 0x20 + 0x5e1d48);
   }
   else {
-    FUN_00493408(param_1 + 200,0,*(unsigned int *)(param_2 * 4 + 0x5e1cf8),
+    drawTextAtRelativePosition(param_1 + 200,0,*(unsigned int *)(param_2 * 4 + 0x5e1cf8),
                  *(unsigned int *)(param_2 * 4 + 0x5e1d20),0,0,0xffffffff,temp_v2,"     ???");
   }
   FUN_00183bb0();

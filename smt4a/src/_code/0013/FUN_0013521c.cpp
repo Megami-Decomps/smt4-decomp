@@ -1,65 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013521c` (_code @ 0x13521c, 0x92 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Retail push {r0, r1, r2, r4, r5, r6, r7, lr} differs from recovered push {r3, r4, r5, r6, r7, lr}. */
+#include "common.h"
+
+// Private view of the three-pointer byte container.
+struct ByteBufferView {
+    u8* begin;       // 0x00
+    u8* end;         // 0x04
+    u8* storageEnd;  // 0x08
+};
 
 extern "C" {
+u32 bufGrowCapacity(u32 size, ByteBufferView* buffer);
+void* rt_malloc(u32 size);
+void asdOperatorDeleteArray(void* allocation);
+u8* FUN_00307604(const u8* first, const u8* last, u8* destination,
+                 ByteBufferView* buffer);
+u8* FUN_0030761e(const u8* first, const u8* last, u8* destinationEnd);
 
-int asdOperatorDeleteArray(void);
-int FUN_00307604(...);
-int FUN_0030761e(unsigned char *, unsigned char *, unsigned char *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern int rt_malloc(void);
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_00307604. */
-/* Supplied declaration required: FUN_0030761e. */
-extern int bufGrowCapacity(unsigned int, int *, unsigned int, unsigned int, int *, unsigned char *);
-
-
-void FUN_0013521c(int *param_1,unsigned char *param_2,unsigned char *param_3,unsigned int param_4)
-
+// Insert one byte, shifting in place when spare capacity is available.
+void FUN_0013521c(ByteBufferView* buffer, u8* position, const u8* value)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char *puVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v4 = param_1[2] - *param_1;
-  puVar5 = (unsigned char *)param_1[1];
-  temp_v0 = (int)puVar5 - *param_1;
-  if (temp_v0 < temp_v4) {
-    param_1[1] = (int)(puVar5 + 1);
-    if (puVar5 != (unsigned char *)0x0) {
-      *puVar5 = puVar5[-1];
-    }
-    FUN_0030761e(param_2,puVar5 + -1,puVar5);
-    *param_2 = *param_3;
-    return;
-  }
-  temp_v1 = bufGrowCapacity(temp_v0,param_1,temp_v4,param_4,param_1,param_2);
-  temp_v2 = rt_malloc();
-  FUN_00307604(*param_1,param_2,temp_v2,param_1);
-  if (param_2 + (temp_v2 - *param_1) != (unsigned char *)0x0) {
-    param_2[temp_v2 - *param_1] = *param_3;
-  }
-  FUN_00307604(param_2,param_1[1],param_2 + (temp_v2 - *param_1) + 1,param_1);
-  temp_v3 = *param_1;
-  temp_v5 = param_1[1] - temp_v3;
-  for (; temp_v3 != param_1[1]; temp_v3 = temp_v3 + 1) {
-  }
-  asdOperatorDeleteArray();
-  *param_1 = temp_v2;
-  param_1[2] = temp_v2 + temp_v1;
-  param_1[1] = temp_v2 + temp_v5 + 1;
-  return;
-}
+    const u32 capacity = buffer->storageEnd - buffer->begin;
+    const u32 size = buffer->end - buffer->begin;
 
-} /* extern "C" */
+    if (capacity > size) {
+        u8* oldEnd = buffer->end;
+        buffer->end = oldEnd + 1;
+        u8* lastElement = oldEnd - 1;
+        if (oldEnd != 0) {
+            *oldEnd = *lastElement;
+        }
+        FUN_0030761e(position, lastElement, oldEnd);
+        *position = *value;
+        return;
+    }
+
+    const u32 newCapacity = bufGrowCapacity(size, buffer);
+    u8* newBegin = static_cast<u8*>(rt_malloc(newCapacity));
+    FUN_00307604(buffer->begin, position, newBegin, buffer);
+
+    u8* insertion = newBegin + (position - buffer->begin);
+    if (insertion != 0) {
+        *insertion = *value;
+    }
+
+    FUN_00307604(position, buffer->end,
+                 newBegin + (position - buffer->begin) + 1, buffer);
+
+    u8* oldBegin = buffer->begin;
+    const u32 oldSize = buffer->end - oldBegin;
+    typedef u8 Element;
+    for (Element* element = oldBegin; element != buffer->end; ++element) {
+        element->~Element();
+    }
+    asdOperatorDeleteArray(oldBegin);
+
+    buffer->begin = newBegin;
+    buffer->storageEnd = newBegin + newCapacity;
+    buffer->end = newBegin + oldSize + 1;
+}
+}

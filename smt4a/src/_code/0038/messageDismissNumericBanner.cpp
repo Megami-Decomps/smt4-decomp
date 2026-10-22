@@ -1,4 +1,5 @@
-#include "shard/W4_W4Match5b_MessageMain.h"
+#include "ui/MessageMain.h"
+extern "C" MessageGlobalsA g_messageMain;
 
 struct MessageNumericBanner {
     MessageObject object;
@@ -43,7 +44,7 @@ static __inline void messageRequestClose(MessageObject *object)
 
 extern "C" u32 messageDismissNumericBanner(s32 close)
 {
-    MessageNumericBanner *banner = reinterpret_cast<MessageNumericBanner *>(g_messageMain.banner);
+    MessageNumericBanner *banner = reinterpret_cast<MessageNumericBanner *>(g_messageMain.panel);
     if (banner->state == 3) {
         if (banner->wideValue != 0) {
             messageNumericReset(banner, banner->base + banner->delta);
@@ -74,7 +75,7 @@ extern "C" u32 messageDismissNumericBanner(s32 close)
             } else {
                 uiSpriteSelectAnim(&banner->sprite, 7);
             }
-            messageRequestClose(g_messageMain.state);
+            messageRequestClose(reinterpret_cast<MessageObject *>(g_messageMain.state));
             messageRequestClose(&banner->object);
         }
         return 0;

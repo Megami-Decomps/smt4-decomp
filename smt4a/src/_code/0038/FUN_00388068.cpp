@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003e52bc(void);
+int partyRefreshSlotValues(void);
 int gameFlagSetValue(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int gameDataBlocksGetSaveData(void);
 extern int recordGetScaledMaximum(int);
 extern int gameFlagIsSet(unsigned int);
 extern int slotRecordFindById(void);
-/* Supplied declaration required: FUN_003e52bc. */
+/* Supplied declaration required: partyRefreshSlotValues. */
 /* Supplied declaration required: gameFlagSetValue. */
 extern int aocHasType36(unsigned int, unsigned int);
 extern int bitsAt60Test(int, unsigned int);
@@ -58,7 +58,7 @@ void FUN_00388068(void)
   if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x4f7), temp_v1 == 0)) {
     gameFlagSetValue(0x45b,1);
     gameFlagSetValue(0x4f7,1);
-    FUN_003e52bc();
+    partyRefreshSlotValues();
     return;
   }
   return;

@@ -1,51 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004da858` (_code @ 0x4da858, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the failed unlock-flag test returns through the r0 = 0 the call left (retail branches to its own "return 0" block), so "mov r0, #1" lands before "add sp". */
+#include "shard/W6_W6Match8_DevilRecordA.h"
+
+namespace {
+// Saved demon entry as gameDataCopySaveEntry writes it.
+struct SaveEntryCopy {
+    /* 0x00 */ u8 unk00[0x36];
+    /* 0x36 */ u16 state;
+    /* 0x38 */ u8 unk38[0x18];
+};
+}
 
 extern "C" {
 
-int FUN_00184310(void);
+s32 gameFlagIsSet(u32 flag);
+s32 gameDataCopySaveEntry(u16 id, SaveEntryCopy *out);
 
-/* stack frame of param_2: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp22; /* 0x22: local_22 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(void);
-extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
-
-
-unsigned int FUN_004da858(unsigned int param_1,unsigned short *param_2)
-
+/* Whether a demon is available: its unlock flag is set and, when it requires a saved entry, that entry exists and is active. */
+s32 FUN_004da858(void *owner, u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [54];
-  unsigned short temp_v3;
-  
-  FUN_00184310();
-  if ((param_2 == (unsigned short *)0x0) ||
-     ((param_2[0x1f] != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) {
-    return 0;
-  }
-  temp_v0 = param_2[0x1e];
-  if ((temp_v0 & 1) != 0) {
-    if ((temp_v0 & 0xfffe) != 0) {
-      temp_v1 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v2);
+    const DevilRecordA *record = FUN_00184310(id);
+    SaveEntryCopy entry;
+    u16 requirement;
+    s32 found;
+
+    if (record == NULL) {
+        return 0;
     }
-    else {
-      temp_v1 = gameDataCopySaveEntry(*param_2,temp_v2);
+    if (record->unlockFlag != 0 && !gameFlagIsSet(record->unlockFlag)) {
+        return 0;
     }
-    if (temp_v1 == 0) {
-      return 0;
+    requirement = record->saveRequirement;
+    if (requirement & 1) {
+        if (requirement & ~1) {
+            if (!gameDataCopySaveEntry(requirement >> 1, &entry) || (entry.state & 0xfc) == 0) {
+                return 0;
+            }
+        } else {
+            if (!gameDataCopySaveEntry(record->id, &entry) || (entry.state & 0xfc) == 0) {
+                return 0;
+            }
+        }
     }
-    if ((temp_v3 & 0xfc) == 0) {
-      return 0;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

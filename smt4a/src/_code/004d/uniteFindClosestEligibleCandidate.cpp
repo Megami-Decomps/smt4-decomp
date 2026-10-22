@@ -11,7 +11,7 @@ struct FusionSavedDemon {
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 u32 gameDataCopySaveEntry(u32 id, void *out);
-s32 FUN_004daf18(FusionRaceSelection *selection, u16 id);
+s32 entryDefIsAvailable(FusionRaceSelection *selection, u16 id);
 
 u32 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, u32 level, s32 checkRecord)
 {
@@ -51,7 +51,7 @@ u32 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, 
                 if (!(record->flags & 1)) {
                     continue;
                 }
-            } else if (!FUN_004daf18(selection, id)) {
+            } else if (!entryDefIsAvailable(selection, id)) {
                 continue;
             }
             bestId = selection->levels[race][index].id;

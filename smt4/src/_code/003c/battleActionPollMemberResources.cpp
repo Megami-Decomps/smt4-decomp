@@ -1,17 +1,8 @@
 /* NON_MATCHING: resource-request cold block is laid out inline and compiler saves two fewer registers; -O2 candidate. */
 #include "battle/btlMain.h"
+#include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
-struct BtlActionRecord {
-    u8 unk00[0x48];
-    u32 task;
-    u32 unk4c;
-    u32 status;
-    u32 flags;
-    u8 unk58[0x0a];
-    s16 memberId;
-    u8 unk64[0xb0];
-};
 struct BattleMemberResources {
     u16 unk00;
     u16 id;
@@ -33,7 +24,7 @@ s32 nkdwHeaderParse(u32 handle);
 void aocHandleButtons(u32 handle, u32 mode);
 s32 FUN_00294fe0(u32 handle);
 void modelAnimationEnsureData(u32 handle);
-void FUN_003af1dc(void *ui, u32 id);
+void btlUiAddListedId(void *ui, u32 id);
 void FUN_003db5e8(BattleVersionResources *resources, BtlActionRecord *action, u32 id);
 u32 FUN_003db0c0(BattleVersionResources *resources, BtlActionRecord *action);
 void FUN_003c0ae0(BtlMainState *state, BtlActionRecord *action);
@@ -89,7 +80,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
             }
         }
         if (ready) {
-            FUN_003af1dc(g_btlUiBlock, resources->id);
+            btlUiAddListedId(g_btlUiBlock, resources->id);
             FUN_003db5e8(DAT_00435d18, action, resources->identifiers[index]);
             FUN_003db0c0(DAT_00435d18, action);
             FUN_003c0ae0(state, action);

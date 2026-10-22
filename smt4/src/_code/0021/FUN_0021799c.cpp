@@ -10,7 +10,7 @@ int FUN_00258a24(...);
 int FUN_0026a858(...);
 int FUN_0026a958(int);
 int FUN_0029acb0(void);
-int FUN_0029d684(...);
+int statusPanelSetOpen(...);
 int FUN_0029d8f4(unsigned char [8], int, int);
 int FUN_0029da34(...);
 int FUN_002a0cc8(...);
@@ -45,7 +45,7 @@ extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: FUN_0026a858. */
 /* Supplied declaration required: FUN_0026a958. */
 /* Supplied declaration required: FUN_0029acb0. */
-/* Supplied declaration required: FUN_0029d684. */
+/* Supplied declaration required: statusPanelSetOpen. */
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: FUN_0029da34. */
 extern int gameGetFlagByte12e8(void);
@@ -56,8 +56,8 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b8d54(void);
-extern int FUN_002b8d68(void);
+extern int ifTouchGetSelectionMode(void);
+extern int ifTouchGetSelectedRegion(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
@@ -101,7 +101,7 @@ void FUN_0021799c(int param_1)
   
   temp_v6 = 0;
   do {
-    temp_v1 = FUN_002b8d68();
+    temp_v1 = ifTouchGetSelectedRegion();
     if (temp_v1 == *(short *)(param_1 + temp_v6 * 2 + 0x5716)) goto LAB_002179dc;
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x20);
@@ -214,7 +214,7 @@ joined_r0x00217be4:
             temp_v17 = *(unsigned short *)(temp_v1 + 0x5766);
             FUN_0029d8f4(temp_v9,1,0);
             FUN_0026a958(1);
-            FUN_0029d684(1);
+            statusPanelSetOpen(1);
             *temp_v20 = 0;
             temp_v2 = FUN_0029e9cc(*(unsigned short *)(temp_v1 + 0x5760));
             if (temp_v2 != 0) {
@@ -251,9 +251,9 @@ joined_r0x00217be4:
     }
     if (*(char *)(param_1 + 0x307c) != '\0') break;
     if (temp_v6 >= 0) {
-      temp_v1 = FUN_002b8d54();
-      if ((temp_v1 != 1) && (temp_v1 = FUN_002b8d54(), temp_v1 != 2)) {
-        temp_v1 = FUN_002b8d54();
+      temp_v1 = ifTouchGetSelectionMode();
+      if ((temp_v1 != 1) && (temp_v1 = ifTouchGetSelectionMode(), temp_v1 != 2)) {
+        temp_v1 = ifTouchGetSelectionMode();
         if (temp_v1 != 6) goto LAB_00217e94;
         if (temp_v6 != 0x11) {
           *(unsigned char *)(param_1 + 0x3060) = 0;
@@ -290,7 +290,7 @@ joined_r0x00217be4:
         *puVar12 = 4;
         FUN_002a0cc8();
       }
-      temp_v1 = FUN_002b8d54();
+      temp_v1 = ifTouchGetSelectionMode();
       if (((temp_v1 == 1) && (temp_v1 = ifTouchGetActiveCounter(), temp_v1 < 1)) && (temp_v6 != 0x11)) {
         eventQueueAddUniqueIfValid(0x100016c);
       }
@@ -346,7 +346,7 @@ LAB_00217e94:
         temp_v17 = *(unsigned short *)(param_1 + 0x5766);
         FUN_0029d8f4(temp_v9,1,0);
         FUN_00258a24(0);
-        FUN_0029d684(1);
+        statusPanelSetOpen(1);
         *temp_v20 = 0;
         *temp_v19 = 0;
       }

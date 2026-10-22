@@ -1,79 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038358c` (_code @ 0x38358c, 0xe4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the frame != 7 branch skips the frame reload (bne 8c) where retail branches to it (bne 88). */
+#include "common.h"
 
 extern "C" {
 
-int qcMainSetMode(int);
-int FUN_0026f960(int);
-int FUN_00270028(int);
-int FUN_00275dec(void);
-int buttonHelpRelease(void);
-int dataTable1bOr1cGetRecord(void);
-int eventQueueAddUnique(int);
+typedef struct QuestClearScene {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 step;
+    /* 0x0C */ s32 frame;
+} QuestClearScene;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct QuestRecord1b {
+    /* 0x000 */ u8 unk000[0x148];
+    /* 0x148 */ u16 rewardId;
+} QuestRecord1b;
 
-/* Supplied declaration required: qcMainSetMode. */
-/* Supplied declaration required: FUN_0026f960. */
-/* Supplied declaration required: FUN_00270028. */
-/* Supplied declaration required: FUN_00275dec. */
-extern int FUN_00287894(void);
-extern int FUN_002903f0(void);
-/* Supplied declaration required: buttonHelpRelease. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: eventQueueAddUnique. */
+void eventQueueAddUnique(u32 event);
+void FUN_00275dec(void);
+void frameTexApplyMode(s32 arg);
+u32 FUN_002903f0(void);
+s32 FUN_00287894(void);
+void qcMainSetMode(s32 mode);
+QuestRecord1b *dataTable1bOr1cGetRecord(u32 id);
+void FUN_0026f960(u16 rewardId);
+void buttonHelpRelease(void);
 
-
-void FUN_0038358c(int param_1)
-
+/* Steps the quest clear scene: queue its event on frame 7, start the effect, then hand out the reward. */
+void FUN_0038358c(QuestClearScene *scene)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (((temp_v0 == 2) && (temp_v0 = FUN_002903f0(), temp_v0 != 0)) &&
-         (temp_v1 = FUN_00287894(), temp_v1 == 6)) {
-        qcMainSetMode(1);
-        dataTable1bOr1cGetRecord();
-        FUN_0026f960(*(unsigned short *)(temp_v0 + 0x148));
-        buttonHelpRelease();
-        return;
-      }
+    switch (scene->step) {
+    case 0:
+        if (++scene->frame == 7) {
+            eventQueueAddUnique(0x1000184);
+            FUN_00275dec();
+        }
+        if (scene->frame == 8) {
+            scene->step++;
+            scene->frame = 0;
+        }
+        break;
+    case 1:
+        if (scene->frame == 0) {
+            frameTexApplyMode(1);
+        }
+        if (++scene->frame > 3) {
+            scene->frame++;
+            scene->step++;
+        }
+        break;
+    case 2: {
+        u32 quest = FUN_002903f0();
+
+        if (quest != 0 && FUN_00287894() == 6) {
+            qcMainSetMode(1);
+            FUN_0026f960(dataTable1bOr1cGetRecord(quest)->rewardId);
+            buttonHelpRelease();
+        }
+        break;
     }
-    else {
-      if (*(int *)(param_1 + 0xc) == 0) {
-        FUN_00270028(1);
-      }
-      temp_v0 = *(int *)(param_1 + 0xc);
-      temp_v1 = temp_v0 + 1;
-      *(int *)(param_1 + 0xc) = temp_v1;
-      if (temp_v1 >= 4) {
-        *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-        *(int *)(param_1 + 0xc) = temp_v0 + 2;
-        return;
-      }
     }
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0xc) + 1;
-    *(int *)(param_1 + 0xc) = temp_v0;
-    if (temp_v0 == 7) {
-      eventQueueAddUnique(0x1000184);
-      FUN_00275dec();
-    }
-    if (*(int *)(param_1 + 0xc) == 8) {
-      *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

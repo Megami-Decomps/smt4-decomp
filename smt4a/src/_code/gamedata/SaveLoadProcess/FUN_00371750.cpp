@@ -8,7 +8,7 @@ int gameDataBlocksGetSaveData(void);
 int asdMemoryAlloc(int, int, int, unsigned int, int);
 int asdMemFree(...);
 int wordPairCopy(...);
-int FUN_00239294(void);
+int gameDataGetExtraBlock(void);
 int FUN_00268250(...);
 int FUN_002c9104(void);
 int gameDataBlocksSetIndexedValue(...);
@@ -34,7 +34,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: wordPairCopy. */
 extern unsigned int configGetSettings(void);
 extern int FUN_00229c9c(void);
-/* Supplied declaration required: FUN_00239294. */
+/* Supplied declaration required: gameDataGetExtraBlock. */
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
@@ -82,7 +82,7 @@ unsigned int FUN_00371750(void)
       temp_v6 = 0;
       if (temp_v2 == 0) {
         do {
-          temp_v2 = FUN_00239294();
+          temp_v2 = gameDataGetExtraBlock();
           *(unsigned int *)(temp_v6 * 4 + 0x5e20f4) = *(unsigned int *)(temp_v2 + temp_v6 * 4);
           gameDataBlocksSetIndexedValue(temp_v6,temp_v4);
           temp_v6 = temp_v6 + 1;
@@ -100,7 +100,7 @@ unsigned int FUN_00371750(void)
         } while (temp_v6 < 5);
       }
     }
-    temp_v3 = FUN_00239294();
+    temp_v3 = gameDataGetExtraBlock();
     rt_memcpy(*(unsigned int *)(temp_v1 + 8),temp_v3,0x20);
     FUN_00268250(2,0,0x62,*(unsigned int *)(temp_v1 + 8),*(unsigned int *)(temp_v1 + 0xc));
     *(unsigned int *)(temp_v1 + 4) = 1;
